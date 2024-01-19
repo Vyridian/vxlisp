@@ -232,7 +232,7 @@
    :cpp
     "// :header
      vx_core::vx_Type_listany vx_p_list;
-		 vx_core::vx_Type_listany vx_list() const;
+     vx_core::vx_Type_listany vx_list() const;
      vx_core::Type_any vx_get_any(vx_core::Type_int index) const;
      vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const;")
  :doc "A simple untyped list.")
@@ -2704,9 +2704,7 @@
     output = vx_core::vx_new_string(soutput);"
   :js
    "output = vx_core.vx_string_from_any_indent(value, indent, linefeed)"
-  :java
-   "String soutput = Core.vx_string_from_any_indent(value, indent.vx_int(), linefeed.vx_boolean());
-    output = Core.vx_new_string(soutput);")
+  :java :auto)
  :doc "Return a string representation of a value")
 
 (func string<-func : string
@@ -2810,7 +2808,8 @@
         (switch : int
          "d"
          (case (list "b" "c" "d") 1)
-         (else 2))))
+         (else 2)))
+ :doc "Returns a value based on a logical switch")
 
 (func then : thenelse
  [fn-cond : boolean<-func
@@ -2818,7 +2817,8 @@
  (thenelse
   :code    :then
   :fn-cond fn-cond
-  :fn-any  fn-any))
+  :fn-any  fn-any)
+ :doc "Returns a thenelse struct from a given condition function and value function")
 
 (func traits<-typedef : typelist
  [vtypedef : typedef]
@@ -2886,7 +2886,8 @@
 
 (func typedef<-any : typedef
  [val : any]
- (typedef<-type (type<-any val)))
+ (typedef<-type (type<-any val))
+ :doc  "Gets the typedef of a given value")
 
 (func typedef<-type : typedef
  [val : any]
@@ -2896,7 +2897,8 @@
   :js
    "output = val"
   :java
-   "val.vx_typedef();"))
+   "val.vx_typedef();")
+ :doc  "Gets the typedef of a given type")
 
 (func typename<-any : string
  [value : any-2]
@@ -2904,7 +2906,7 @@
  :test (test "vx/core/boolean" (typename<-any false))
        (test "vx/core/int"     (typename<-any 5))
        (test "vx/core/string"  (typename<-any "a"))
- :doc  "Gets the type of a given value")
+ :doc  "Gets the typename of a given value")
 
 (func typename<-type : string
  [type : any]

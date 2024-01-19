@@ -20,7 +20,7 @@ public final class File {
       Core.Type_string valcontent = Core.vx_new_string(scontent);
       output = valcontent;
     } else {
-      Core.Type_msg msg = Core.vx_msg_error("File Not Found: " + sfullpath);
+      Core.Type_msg msg = Core.vx_msg_from_error("string-read<-file", ":filenotfound", file);
       output = Core.t_string.vx_copy(output, msg);
     }
     return output;
@@ -163,7 +163,7 @@ public final class File {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new file) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new file) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -171,7 +171,7 @@ public final class File {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new file) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new file) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -186,7 +186,7 @@ public final class File {
               ischanged = true;
               vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new file :name " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new file :name " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -196,7 +196,7 @@ public final class File {
               ischanged = true;
               vx_p_format = (File.Type_fileformat)valsub;
             } else {
-              msg = Core.vx_msg_error("(new file :format " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new file :format " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -209,7 +209,7 @@ public final class File {
               ischanged = true;
               vx_p_path = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new file :path " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new file :path " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -219,7 +219,7 @@ public final class File {
               ischanged = true;
               vx_p_permission = (Core.Type_permission)valsub;
             } else {
-              msg = Core.vx_msg_error("(new file :permission " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new file :permission " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -232,12 +232,12 @@ public final class File {
               ischanged = true;
               vx_p_text = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new file :text " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new file :text " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new file) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new file) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -620,7 +620,7 @@ public final class File {
         output = output.vx_copy(msg);
       }
     } else {
-      Core.Type_msg msg = Core.vx_msg_error("vx/core/func", "permissiondenied", Core.vx_new_string("boolean-write<-file-string"));
+      Core.Type_msg msg = Core.vx_msg_from_error("vx/core/func", "permissiondenied", Core.vx_new_string("boolean-write<-file-string"));
       output = output.vx_copy(msg);
     }
     return output;
@@ -723,7 +723,7 @@ public final class File {
         )
       );
     } else {
-      Core.Type_msg msg = Core.vx_msg_error("vx/core/func", "permissiondenied", Core.vx_new_string("file-read<-file"));
+      Core.Type_msg msg = Core.vx_msg_from_error("vx/core/func", "permissiondenied", Core.vx_new_string("file-read<-file"));
       output = output.vx_copy(msg);
     }
     return output;
@@ -1192,7 +1192,7 @@ public final class File {
         output = output.vx_copy(msg);
       }
     } else {
-      Core.Type_msg msg = Core.vx_msg_error("vx/core/func", "permissiondenied", Core.vx_new_string("string-read<-file"));
+      Core.Type_msg msg = Core.vx_msg_from_error("vx/core/func", "permissiondenied", Core.vx_new_string("string-read<-file"));
       output = output.vx_copy(msg);
     }
     return output;

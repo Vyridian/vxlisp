@@ -14,6 +14,11 @@ public final class Collection {
     int imax = max.vx_int();
     while (iscontinue) {
       if (icount >= imax) {
+        String path = "vx/collection/any<-for-until-loop-max";
+        String code = ":loopmaximumexceeded";
+        Core.Type_int details = Core.vx_new_int(icount);
+        Core.Type_msg msg = Core.vx_msg_from_error(path, code, details);
+        output = Core.vx_copy(output, msg);
         iscontinue = false;
       } else {
         icount += 1;
@@ -32,6 +37,11 @@ public final class Collection {
     int imax = max.vx_int();
     while (iscontinue) {
       if (icount >= imax) {
+        String path = "vx/collection/any<-for-while-loop-max";
+        String code = ":loopmaximumexceeded";
+        Core.Type_int details = Core.vx_new_int(icount);
+        Core.Type_msg msg = Core.vx_msg_from_error(path, code, details);
+        output = Core.vx_copy(output, msg);
         iscontinue = false;
       } else {
         icount += 1;
@@ -43,7 +53,7 @@ public final class Collection {
       }
     }
     return output;
- 	}
+  }
 
   public static <T extends Core.Type_list> T vx_list_from_for_end_loop(T generic_list_1, Core.Type_int start, Core.Type_int end, Core.Func_any_from_int fn_loop) {
     T output = Core.f_empty(generic_list_1);
@@ -66,10 +76,10 @@ public final class Collection {
       output = Core.f_new(generic_list_1, anylist);
     }
     return output;
-	 }
+  }
 
   public static <T extends Core.Type_list> T vx_list_from_for_while_loop_max(T generic_list_1, Core.Type_any start, Core.Func_boolean_from_any fn_while, Core.Func_any_from_any fn_loop, Core.Type_int max) {
-		  T output = Core.f_empty(generic_list_1);
+    T output = Core.f_empty(generic_list_1);
     List<Core.Type_any> listvals = new ArrayList<>();
     boolean iscontinue = true;
     int icount = 0;
@@ -77,6 +87,11 @@ public final class Collection {
     Core.Type_any work = start;
     while (iscontinue) {
       if (icount >= imax) {
+        String path = "vx/collection/list<-for-until-loop-max";
+        String code = ":loopmaximumexceeded";
+        Core.Type_int details = Core.vx_new_int(icount);
+        Core.Type_msg msg = Core.vx_msg_from_error(path, code, details);
+        output = Core.vx_copy(output, msg);
         iscontinue = false;
       } else {
         Core.Type_boolean valwhile = fn_while.vx_boolean_from_any(work);
@@ -93,10 +108,10 @@ public final class Collection {
       output = Core.f_new(generic_list_1, anylist);
     }
     return output;
-	 }
+  }
 
   public static <T extends Core.Type_list> T vx_list_from_list_filter(T generic_list_1, Core.Type_list vallist, Core.Func_any_from_any fn_filter) {
-		  T output = Core.f_empty(generic_list_1);
+    T output = Core.f_empty(generic_list_1);
     List<Core.Type_any> listval = vallist.vx_list();
     List<Core.Type_any> items = new ArrayList<>();
     for (Core.Type_any val : listval) {
@@ -131,8 +146,8 @@ public final class Collection {
       Core.Type_any work = generic_list_1.vx_new(listsub);
       output = Core.f_any_from_any(generic_list_1, work);
     }
-		  return output;
-	 }
+    return output;
+  }
     /**
    * @function any_from_for_until_loop
    * Returns a value using an until loop. Maximum 1000 times.

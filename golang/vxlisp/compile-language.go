@@ -701,7 +701,7 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 		permissiontop = lineindent + "if (Core.f_boolean_permission_from_func(context, " + LangNameTFromFunc(lang, fnc) + ").vx_boolean()) {"
 		permissionbottom = "" +
 			lineindent + "} else {" +
-			LangVar(lang, "msg", msgtype, "Core.vx_msg_error(\"vx/core/func\", \"permissiondenied\", Core.vx_new_string(\""+fnc.name+"\"))", 3, true, false) +
+			LangVar(lang, "msg", msgtype, "Core.vx_msg_from_error(\"vx/core/func\", \"permissiondenied\", Core.vx_new_string(\""+fnc.name+"\"))", 3, true, false) +
 			lineindent + "  output = output.vx_copy(msg);" +
 			lineindent + "}"
 		subindent += "  "
@@ -1233,10 +1233,10 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			"\n          sb.append((Float)valsub);" +
 			"\n        } else if (valsub instanceof Core.Type_any) {" +
 			"\n          Core.Type_any anysub = (Core.Type_any)valsub;" +
-			"\n          msg = Core.vx_msg_error(\"" + NameFromType(typ) + "\", \"invalidtype\", anysub);" +
+			"\n          msg = Core.vx_msg_from_error(\"" + NameFromType(typ) + "\", \"invalidtype\", anysub);" +
 			"\n          msgblock = msgblock.vx_copy(msg);" +
 			"\n        } else {" +
-			"\n          msg = Core.vx_msg_error(\"" + NameFromType(typ) + "\", \"invalidtype\", Core.vx_new_string(valsub.toString()));" +
+			"\n          msg = Core.vx_msg_from_error(\"" + NameFromType(typ) + "\", \"invalidtype\", Core.vx_new_string(valsub.toString()));" +
 			"\n          msgblock = msgblock.vx_copy(msg);" +
 			"\n        }" +
 			"\n      }" +
@@ -1364,10 +1364,10 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			"\n          }" +
 			"\n        } else if (valsub instanceof Core.Type_any) {" +
 			"\n          Core.Type_any anysub = (Core.Type_any)valsub;" +
-			"\n          msg = Core.vx_msg_error(\"" + NameFromType(typ) + "\", \"invalidtype\", anysub);" +
+			"\n          msg = Core.vx_msg_from_error(\"" + NameFromType(typ) + "\", \"invalidtype\", anysub);" +
 			"\n          msgblock = msgblock.vx_copy(msg);" +
 			"\n        } else {" +
-			"\n          msg = Core.vx_msg_error(\"" + NameFromType(typ) + "\", \"invalidtype\", Core.vx_new_string(valsub.toString()));" +
+			"\n          msg = Core.vx_msg_from_error(\"" + NameFromType(typ) + "\", \"invalidtype\", Core.vx_new_string(valsub.toString()));" +
 			"\n          msgblock = msgblock.vx_copy(msg);" +
 			"\n        }" +
 			"\n      }" +
@@ -1439,7 +1439,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			"\n          " + allowclass + " castval = (" + allowclass + ")val;" +
 			"\n          map.put(key, castval);" +
 			"\n        } else {" +
-			"\n          Core.Type_msg msg = Core.vx_msg_error(\"(" + typename + ") Invalid Value: \" + val.toString() + \"\");" +
+			"\n          Core.Type_msg msg = Core.vx_msg_from_error(\"(" + typename + ") Invalid Value: \" + val.toString() + \"\");" +
 			"\n          msgblock = Core.t_msgblock.vx_copy(msgblock, msg);" +
 			"\n        }" +
 			"\n      }" +
@@ -1467,7 +1467,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			"\n          } else if (valsub instanceof String) {" +
 			"\n            key = (String)valsub;" +
 			"\n          } else {" +
-			"\n            msg = Core.vx_msg_error(\"Key Expected: \" + valsub.toString() + \"\");" +
+			"\n            msg = Core.vx_msg_from_error(\":keyexpected: \" + valsub.toString() + \"\");" +
 			"\n            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);" +
 			"\n          }" +
 			"\n        } else {" +
@@ -1501,7 +1501,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		}
 		valnew += "" +
 			"\n          } else {" +
-			"\n            msg = Core.vx_msg_error(\"Invalid Key/Value: \" + key + \" \"  + valsub.toString() + \"\");" +
+			"\n            msg = Core.vx_msg_from_error(\":invalidkeyvalue: \" + key + \" \"  + valsub.toString() + \"\");" +
 			"\n            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);" +
 			"\n          }" +
 			"\n          if (valany != null) {" +
@@ -1606,7 +1606,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 				default:
 					valnewswitcherr = "" +
 						"\n            } else {" +
-						"\n              msg = Core.vx_msg_error(\"(new " + typ.name + " :" + arg.name + " \" + valsub.toString() + \") - Invalid Value\");" +
+						"\n              msg = Core.vx_msg_from_error(\":invalidvalue (new " + typ.name + " :" + arg.name + " \" + valsub.toString() + \")\");" +
 						"\n              msgblock = msgblock.vx_copy(msg);"
 				}
 				valnewswitch += "" +
@@ -1738,7 +1738,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 					"\n          } else if (valsub instanceof String) {" +
 					"\n            key = (String)valsub;" +
 					"\n          } else {" +
-					"\n            //Core.Type_msg msg = Core.vx_msg_error(\"(new " + typ.name + ") - Invalid Key Type: \" + valsub.toString());" +
+					"\n            //Core.Type_msg msg = Core.vx_msg_from_error(\":invalidkeytype (new " + typ.name + ") \" + valsub.toString());" +
 					"\n            //msgblock = msgblock.vx_copy(msg);" +
 					"\n          }" +
 					"\n        } else {" +
@@ -1787,7 +1787,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 					"\n            } else {" +
 					"\n              svalsub = valsub.toString();" +
 					"\n            }" +
-					"\n            msg = Core.vx_msg_error(\"(new " + typ.name + ") - Invalid Key Type: \" + svalsub);" +
+					"\n            msg = Core.vx_msg_from_error(\":invalidkeytype (new " + typ.name + ") \" + svalsub);" +
 					"\n            msgblock = msgblock.vx_copy(msg);" +
 					"\n          }" +
 					"\n          if (istestkey) {" +
@@ -1796,7 +1796,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 					"\n              key = testkey;" +
 					defaultstring +
 					"\n            } else {" +
-					"\n              msg = Core.vx_msg_error(\"(new " + typ.name + ") - Invalid Key: \" + testkey);" +
+					"\n              msg = Core.vx_msg_from_error(\":invalidkey (new " + typ.name + ") \" + testkey);" +
 					"\n              msgblock = msgblock.vx_copy(msg);" +
 					"\n            }" +
 					"\n          }" +
@@ -1804,7 +1804,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 					"\n          switch (key) {" +
 					valnewswitch +
 					"\n          default:" +
-					"\n            msg = Core.vx_msg_error(\"(new " + typ.name + ") - Invalid Key: \" + key);" +
+					"\n            msg = Core.vx_msg_from_error(\":invalidkey (new " + typ.name + ") \" + key);" +
 					"\n            msgblock = msgblock.vx_copy(msg);" +
 					"\n          }" +
 					"\n          key = \"\";" +
@@ -2375,6 +2375,21 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 		//msgblock = MsgBlockAddError(msgblock, msg)
 	}
 	return output, msgblock
+}
+
+func LangFuncHeader(lang *vxlang, fnc *vxfunc, ispackage bool) string {
+	output := ""
+	return output
+}
+
+func LangFuncHeaderCall(lang *vxlang, fnc *vxfunc, ispackage bool) string {
+	output := ""
+	return output
+}
+
+func LangFuncHeaderInterface(lang *vxlang, fnc *vxfunc, ispackage bool) string {
+	output := ""
+	return output
 }
 
 func LangGenericDefinitionFromFunc(lang *vxlang, fnc *vxfunc) string {

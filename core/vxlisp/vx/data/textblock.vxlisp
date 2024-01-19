@@ -1404,27 +1404,45 @@
 (func textblock-delimnotfound : textblock
  [textblockarg : textblock]
  (let : textblock
-  [text    : string    := (:text   textblockarg)
-   delima  : delim     := (:delim  textblockarg)
-   close   : delim     := (:close  textblockarg)
-   parent  : textblock := (:parent textblockarg)
-   delimp  : delim     := (:delim parent)
-   delims  : delimlist := (:delimlist delimp)]
+  [text   : string        := (:text   textblockarg)
+   delima : delim         := (:delim  textblockarg)
+   close  : delim         := (:close  textblockarg)
+   parent : textblock     := (:parent textblockarg)
+   childp : textblocklist := (:children parent)
+   delimp : delim         := (:delim parent)
+   delims : delimlist     := (:delimlist delimp)]
   (if : textblock
    (then // if delim not closed then error
     (! (is-empty close))
-    (copy parent
-     (copy delimp
-      :delimlist
-       (copy delims
-        (copy textblockarg
-         :parent
-          (empty textblock)
-         :msg
-          (msg<-error
-           (string
-            "Close delim not found: "
-            (:name delima))))))))
+    (let : textblock
+     [msgerr   : msg            := (msg<-error
+                                    "closedelimmissing"
+                                    close)
+      child    : textblock      := (copy textblockarg
+                                    :delim  (empty delim)
+                                    :close  (empty delim)
+                                    :parent (empty textblock))
+      find     : textblock      := (textblock-findparent<-textblock
+                                    parent)
+      childrenf : textblocklist := (:children find)
+      childrenr : textblocklist := (copy childrenf
+                                    child)
+      replace   : textblock     := (copy find
+                                    msgerr
+                                    :children childrenr)
+      parent2   : textblock     := (textblock-replace<-textblock-find-replace
+                                    parent
+                                    find
+                                    replace)
+      gparent   : textblock     := (:parent parent2)
+      parent3   : textblock     := (copy parent2
+                                    :parent (empty textblock))
+      childreng : textblocklist := (:children gparent)
+      childrenc : textblocklist := (copy childreng
+                                    parent3)]
+     (copy gparent
+      :children childrenc
+      msgerr)))
    (then // if empty parent then textblockarg
     (is-empty parent)
     textblockarg)
@@ -1495,6 +1513,58 @@
         find
         child)))))))
  :test (test
+        (textblock
+         :text "<a"
+         :startpos 1
+         :endpos 2
+         :children
+          (textblocklist
+           (textblock
+            :text "<a"
+            :startpos 1
+            :endpos 2
+            :delim
+             (copy delimbracketangle
+              :delimlist vx/data/textblock/delimlisttest1)
+            :children
+             (textblocklist
+              (textblock
+               :text "a"
+               :startpos 2
+               :endpos 2))
+            (msgblock
+             (msg
+              :code "closedelimmissing"
+              :severity 2))))
+         (msgblock
+          (msg
+           :code "closedelimmissing"
+           :severity 2)))
+        (textblock-delimnotfound
+         (textblock
+          :text "a"
+          :startpos 2
+          :endpos 2
+          :delim
+           (delim
+            :delimlist vx/data/textblock/delimlisttest2)
+          :close
+           (copy delimclose
+            :starttext ">")
+          :parent
+           (textblock
+            :text "<a"
+            :startpos 1
+            :endpos 2
+            :delim
+             (copy delimbracketangle
+              :delimlist vx/data/textblock/delimlisttest1)
+            :parent
+             (textblock
+              :text "<a"
+              :startpos 1
+              :endpos 2)))))
+       (test
         (textblock
          :text ","
          :startpos 4
@@ -2010,7 +2080,7 @@
 
 (func textblock-parse : textblock
  [textblock : textblock]
- (collection/any<-for-until-loop : textblock
+ (collection/any<-for-until-loop-max : textblock
   textblock
   (fn : boolean
    [current : textblock]
@@ -2019,7 +2089,8 @@
   (fn : textblock
    [current : textblock]
    (textblock-parse-one
-    current)))
+    current))
+  50000)
  :bigospace :n^n
  :bigotime  :n^n
  :test (test
@@ -2166,6 +2237,58 @@
      delimfirst
      textblockarg))))
  :test (test
+        (textblock
+         :text "<a"
+         :startpos 1
+         :endpos 2
+         :children
+          (textblocklist
+           (textblock
+            :text "<a"
+            :startpos 1
+            :endpos 2
+            :delim
+             (copy delimbracketangle
+              :delimlist vx/data/textblock/delimlisttest1)
+            :children
+             (textblocklist
+              (textblock
+               :text "a"
+               :startpos 2
+               :endpos 2))
+            (msgblock
+             (msg
+              :code "closedelimmissing"
+              :severity 2))))
+         (msgblock
+          (msg
+           :code "closedelimmissing"
+           :severity 2)))
+        (textblock-parse-one
+         (textblock
+          :text "a"
+          :startpos 2
+          :endpos 2
+          :delim
+           (delim
+            :delimlist vx/data/textblock/delimlisttest2)
+          :close
+           (copy delimclose
+            :starttext ">")
+          :parent
+           (textblock
+            :text "<a"
+            :startpos 1
+            :endpos 2
+            :delim
+             (copy delimbracketangle
+              :delimlist vx/data/textblock/delimlisttest1)
+            :parent
+             (textblock
+              :text "<a"
+              :startpos 1
+              :endpos 2)))))
+       (test
         (textblock
          :text "<{a,b},{c d}>"
          :startpos 1

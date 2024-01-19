@@ -128,10 +128,10 @@ public final class Repl {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_error("vx/repl/liblist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/repl/liblist", "invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_error("vx/repl/liblist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/repl/liblist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -324,7 +324,7 @@ public final class Repl {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new repl) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new repl) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -332,7 +332,7 @@ public final class Repl {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new repl) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new repl) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -347,7 +347,7 @@ public final class Repl {
               ischanged = true;
               vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new repl :name " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new repl :name " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -357,7 +357,7 @@ public final class Repl {
               ischanged = true;
               vx_p_type = (Core.Type_any)valsub;
             } else {
-              msg = Core.vx_msg_error("(new repl :type " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new repl :type " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -367,7 +367,7 @@ public final class Repl {
               ischanged = true;
               vx_p_repllist = (Repl.Type_repllist)valsub;
             } else {
-              msg = Core.vx_msg_error("(new repl :repllist " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new repl :repllist " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -380,7 +380,7 @@ public final class Repl {
               ischanged = true;
               vx_p_async = Core.t_boolean.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new repl :async " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new repl :async " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -390,7 +390,7 @@ public final class Repl {
               ischanged = true;
               vx_p_val = (Core.Type_any)valsub;
             } else {
-              msg = Core.vx_msg_error("(new repl :val " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new repl :val " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -403,12 +403,12 @@ public final class Repl {
               ischanged = true;
               vx_p_doc = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new repl :doc " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new repl :doc " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new repl) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new repl) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -566,7 +566,7 @@ public final class Repl {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new replarglist) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new replarglist) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -574,7 +574,7 @@ public final class Repl {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new replarglist) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new replarglist) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -589,7 +589,7 @@ public final class Repl {
               ischanged = true;
               vx_p_key = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new replarglist :key " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new replarglist :key " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -599,7 +599,7 @@ public final class Repl {
               ischanged = true;
               vx_p_current = (Repl.Type_repl)valsub;
             } else {
-              msg = Core.vx_msg_error("(new replarglist :current " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new replarglist :current " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -609,12 +609,12 @@ public final class Repl {
               ischanged = true;
               vx_p_repllist = (Repl.Type_repllist)valsub;
             } else {
-              msg = Core.vx_msg_error("(new replarglist :repllist " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new replarglist :repllist " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new replarglist) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new replarglist) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -741,10 +741,10 @@ public final class Repl {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_error("vx/repl/repllist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/repl/repllist", "invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_error("vx/repl/repllist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/repl/repllist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }

@@ -160,7 +160,7 @@ public final class Xml {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new xml) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new xml) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -168,7 +168,7 @@ public final class Xml {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new xml) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new xml) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -183,7 +183,7 @@ public final class Xml {
               ischanged = true;
               vx_p_tag = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new xml :tag " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new xml :tag " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -196,7 +196,7 @@ public final class Xml {
               ischanged = true;
               vx_p_text = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new xml :text " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new xml :text " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -209,7 +209,7 @@ public final class Xml {
               ischanged = true;
               vx_p_prop = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new xml :prop " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new xml :prop " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -219,7 +219,7 @@ public final class Xml {
               ischanged = true;
               vx_p_propmap = (Core.Type_stringmap)valsub;
             } else {
-              msg = Core.vx_msg_error("(new xml :propmap " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new xml :propmap " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -229,7 +229,7 @@ public final class Xml {
               ischanged = true;
               vx_p_children = (Xml.Type_xmllist)valsub;
             } else {
-              msg = Core.vx_msg_error("(new xml :children " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new xml :children " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -239,12 +239,12 @@ public final class Xml {
               ischanged = true;
               vx_p_parent = (Xml.Type_xml)valsub;
             } else {
-              msg = Core.vx_msg_error("(new xml :parent " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new xml :parent " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new xml) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new xml) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -373,10 +373,10 @@ public final class Xml {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_error("vx/data/xml/xmllist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/data/xml/xmllist", "invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_error("vx/data/xml/xmllist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/data/xml/xmllist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -468,7 +468,7 @@ public final class Xml {
           Core.Type_string castval = (Core.Type_string)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(xmlpropmap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_from_error("(xmlpropmap) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -506,7 +506,7 @@ public final class Xml {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_from_error(":keyexpected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -516,7 +516,7 @@ public final class Xml {
           } else if (valsub instanceof String) {
             valany = Core.t_string.vx_new(valsub);;
           } else {
-            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_from_error(":invalidkeyvalue: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -787,6 +787,107 @@ public final class Xml {
   }
 
   public static final Const_delimxmlequal c_delimxmlequal = new Const_delimxmlequal();
+
+  /**
+   * @function string_first_from_xml
+   * Returns string from first child's text.
+   * @param  {xml} xml
+   * @return {string}
+   * (func string-first<-xml)
+   */
+  public static interface Func_string_first_from_xml extends Core.Func_any_from_any {
+    public Core.Type_string vx_string_first_from_xml(final Xml.Type_xml xml);
+  }
+
+  public static class Class_string_first_from_xml extends Core.Class_base implements Func_string_first_from_xml {
+
+    @Override
+    public Func_string_first_from_xml vx_new(Object... vals) {
+      Class_string_first_from_xml output = new Class_string_first_from_xml();
+      return output;
+    }
+
+    @Override
+    public Func_string_first_from_xml vx_copy(Object... vals) {
+      Class_string_first_from_xml output = new Class_string_first_from_xml();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/data/xml", // pkgname
+        "string-first<-xml", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_string_first_from_xml vx_empty() {return e_string_first_from_xml;}
+    @Override
+    public Func_string_first_from_xml vx_type() {return t_string_first_from_xml;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Xml.Type_xml inputval = (Xml.Type_xml)value;
+      Core.Type_any outputval = Xml.f_string_first_from_xml(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Xml.Type_xml xml = Core.f_any_from_any(Xml.t_xml, arglist.vx_any(Core.vx_new_int(0)));
+      output = Xml.f_string_first_from_xml(xml);
+      return output;
+    }
+
+    @Override
+    public Core.Type_string vx_string_first_from_xml(final Xml.Type_xml xml) {
+      return Xml.f_string_first_from_xml(xml);
+    }
+
+  }
+
+  public static final Func_string_first_from_xml e_string_first_from_xml = new Xml.Class_string_first_from_xml();
+  public static final Func_string_first_from_xml t_string_first_from_xml = new Xml.Class_string_first_from_xml();
+
+  public static Core.Type_string f_string_first_from_xml(final Xml.Type_xml xml) {
+    Core.Type_string output = Core.e_string;
+    output = Core.f_let(
+      Core.t_string,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Xml.Type_xmllist children = xml.children();
+        final Xml.Type_xml first = Core.f_any_from_list(Xml.t_xml, children, Core.vx_new_int(1));
+        final Core.Type_string text = first.text();
+        final Core.Type_string outdent = Type.f_string_outdent(text);
+        final Core.Type_string trim = Type.f_string_trim(outdent);
+        return trim;
+      })
+    );
+    return output;
+  }
 
   /**
    * @function textblock_xml_from_string
@@ -2192,6 +2293,7 @@ public final class Xml {
     mapconst.put("delimxmlcdata", Xml.c_delimxmlcdata);
     mapconst.put("delimxmlcomment", Xml.c_delimxmlcomment);
     mapconst.put("delimxmlequal", Xml.c_delimxmlequal);
+    mapfunc.put("string-first<-xml", Xml.t_string_first_from_xml);
     mapfunc.put("textblock-xml<-string", Xml.t_textblock_xml_from_string);
     mapfunc.put("xml-angle<-xml-textblock", Xml.t_xml_angle_from_xml_textblock);
     mapfunc.put("xml-close<-xml-textblock", Xml.t_xml_close_from_xml_textblock);

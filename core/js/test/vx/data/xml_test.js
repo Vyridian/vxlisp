@@ -27,11 +27,11 @@ export default class vx_data_xml_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/data/xml", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 4), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 63, ":tests", 12, ":total", 19), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 75, ":tests", 9, ":total", 12), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 65, ":tests", 13, ":total", 20), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 76, ":tests", 10, ":total", 13), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 47, ":tests", 9, ":total", 19), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 50, ":tests", 10, ":total", 20), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3)
     )
   }
@@ -58,6 +58,7 @@ export default class vx_data_xml_test {
       "funcmap",
         vx_core.f_new(
           vx_core.t_intmap,
+          "string-first<-xml", 1,
           "textblock-xml<-string", 1,
           "xml-angle<-xml-textblock", 3,
           "xml-close<-xml-textblock", 4,
@@ -72,6 +73,43 @@ export default class vx_data_xml_test {
           "xml<-textblock", 1
         )
     )
+  }
+
+  static f_string_first_from_xml(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/data/xml",
+      ":casename", "string-first<-xml",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n \"text\"\n (string-first<-xml\n  (xml\n   :children\n    (xmllist\n     (xml\n      :text \"text\")))))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              "text",
+              vx_data_xml.f_string_first_from_xml(
+                vx_core.f_new(
+                  vx_data_xml.t_xml,
+                  ":children",
+                  vx_core.f_new(
+                    vx_data_xml.t_xmllist,
+                    vx_core.f_new(
+                      vx_data_xml.t_xml,
+                      ":text",
+                      "text"
+                    )
+                  )
+                )
+              )
+            )
+          )
+        )
+    )
+    return output
   }
 
   static f_textblock_xml_from_string(context) {
@@ -2491,6 +2529,7 @@ export default class vx_data_xml_test {
   static test_cases(context) {
     const output = vx_core.f_new(
       vx_test.t_testcaselist,
+      vx_data_xml_test.f_string_first_from_xml(context),
       vx_data_xml_test.f_textblock_xml_from_string(context),
       vx_data_xml_test.f_xml_angle_from_xml_textblock(context),
       vx_data_xml_test.f_xml_close_from_xml_textblock(context),

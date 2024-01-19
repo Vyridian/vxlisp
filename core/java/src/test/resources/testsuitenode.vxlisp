@@ -1164,7 +1164,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "87% 215/247")
+                  :text "88% 219/247")
                  (p
                   :style
                    (style
@@ -13995,6 +13995,201 @@
                                 :text
                                  "(test
  (textblock
+  :text "<a"
+  :startpos 1
+  :endpos 2
+  :children
+   (textblocklist
+    (textblock
+     :text "<a"
+     :startpos 1
+     :endpos 2
+     :delim
+      (copy delimbracketangle
+       :delimlist vx/data/textblock/delimlisttest1)
+     :children
+      (textblocklist
+       (textblock
+        :text "a"
+        :startpos 2
+        :endpos 2))
+     (msgblock
+      (msg
+       :code "closedelimmissing"
+       :severity 2))))
+  (msgblock
+   (msg
+    :code "closedelimmissing"
+    :severity 2)))
+ (textblock-delimnotfound
+  (textblock
+   :text "a"
+   :startpos 2
+   :endpos 2
+   :delim
+    (delim
+     :delimlist vx/data/textblock/delimlisttest2)
+   :close
+    (copy delimclose
+     :starttext ">")
+   :parent
+    (textblock
+     :text "<a"
+     :startpos 1
+     :endpos 2
+     :delim
+      (copy delimbracketangle
+       :delimlist vx/data/textblock/delimlisttest1)
+     :parent
+      (textblock
+       :text "<a"
+       :startpos 1
+       :endpos 2)))))")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 "(textblock
+ :text "<a"
+ :startpos 1
+ :endpos 2
+ :children
+  (textblocklist
+   (textblock
+    :text "<a"
+    :startpos 1
+    :endpos 2
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "<"
+      :endtext ">"
+      :delimlist vx/data/textblock/delimlisttest1)
+    :children
+     (textblocklist
+      (textblock
+       :text "a"
+       :startpos 2
+       :endpos 2))
+    (msgblock
+     :msgs
+      (msglist
+       (msg
+        :code "closedelimmissing"
+        :severity 2)))))
+ (msgblock
+  :msgs
+   (msglist
+    (msg
+     :code "closedelimmissing"
+     :severity 2))))")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 "(textblock
+ :text "<a"
+ :startpos 1
+ :endpos 2
+ :children
+  (textblocklist
+   (textblock
+    :text "<a"
+    :startpos 1
+    :endpos 2
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "<"
+      :endtext ">"
+      :delimlist vx/data/textblock/delimlisttest1)
+    :children
+     (textblocklist
+      (textblock
+       :text "a"
+       :startpos 2
+       :endpos 2))
+    (msgblock
+     :msgs
+      (msglist
+       (msg
+        :code "closedelimmissing"
+        :severity 2)))))
+ (msgblock
+  :msgs
+   (msglist
+    (msg
+     :code "closedelimmissing"
+     :severity 2))))")))))
+                         (tr
+                          :nodes
+                           (tdlist
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".passflag"
+                                  :props
+                                   (propmap
+                                    :background-color "green"
+                                    :color "white"
+                                    :padding-left "4px"
+                                    :padding-right "4px"
+                                    :padding-top "1px"
+                                    :padding-bottom "1px"))
+                                :text "Pass")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text "textblock-delimnotfound")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 "(test
+ (textblock
   :text ","
   :startpos 4
   :endpos 4
@@ -15597,6 +15792,201 @@
           :text "d"
           :startpos 11
           :endpos 11)))))))")))))
+                         (tr
+                          :nodes
+                           (tdlist
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".passflag"
+                                  :props
+                                   (propmap
+                                    :background-color "green"
+                                    :color "white"
+                                    :padding-left "4px"
+                                    :padding-right "4px"
+                                    :padding-top "1px"
+                                    :padding-bottom "1px"))
+                                :text "Pass")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text "textblock-parse-one")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 "(test
+ (textblock
+  :text "<a"
+  :startpos 1
+  :endpos 2
+  :children
+   (textblocklist
+    (textblock
+     :text "<a"
+     :startpos 1
+     :endpos 2
+     :delim
+      (copy delimbracketangle
+       :delimlist vx/data/textblock/delimlisttest1)
+     :children
+      (textblocklist
+       (textblock
+        :text "a"
+        :startpos 2
+        :endpos 2))
+     (msgblock
+      (msg
+       :code "closedelimmissing"
+       :severity 2))))
+  (msgblock
+   (msg
+    :code "closedelimmissing"
+    :severity 2)))
+ (textblock-parse-one
+  (textblock
+   :text "a"
+   :startpos 2
+   :endpos 2
+   :delim
+    (delim
+     :delimlist vx/data/textblock/delimlisttest2)
+   :close
+    (copy delimclose
+     :starttext ">")
+   :parent
+    (textblock
+     :text "<a"
+     :startpos 1
+     :endpos 2
+     :delim
+      (copy delimbracketangle
+       :delimlist vx/data/textblock/delimlisttest1)
+     :parent
+      (textblock
+       :text "<a"
+       :startpos 1
+       :endpos 2)))))")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 "(textblock
+ :text "<a"
+ :startpos 1
+ :endpos 2
+ :children
+  (textblocklist
+   (textblock
+    :text "<a"
+    :startpos 1
+    :endpos 2
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "<"
+      :endtext ">"
+      :delimlist vx/data/textblock/delimlisttest1)
+    :children
+     (textblocklist
+      (textblock
+       :text "a"
+       :startpos 2
+       :endpos 2))
+    (msgblock
+     :msgs
+      (msglist
+       (msg
+        :code "closedelimmissing"
+        :severity 2)))))
+ (msgblock
+  :msgs
+   (msglist
+    (msg
+     :code "closedelimmissing"
+     :severity 2))))")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 "(textblock
+ :text "<a"
+ :startpos 1
+ :endpos 2
+ :children
+  (textblocklist
+   (textblock
+    :text "<a"
+    :startpos 1
+    :endpos 2
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "<"
+      :endtext ">"
+      :delimlist vx/data/textblock/delimlisttest1)
+    :children
+     (textblocklist
+      (textblock
+       :text "a"
+       :startpos 2
+       :endpos 2))
+    (msgblock
+     :msgs
+      (msglist
+       (msg
+        :code "closedelimmissing"
+        :severity 2)))))
+ (msgblock
+  :msgs
+   (msglist
+    (msg
+     :code "closedelimmissing"
+     :severity 2))))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -25525,7 +25915,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "47% 9/19")
+                  :text "50% 10/20")
                  (p
                   :style
                    (style
@@ -25549,7 +25939,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "75% 9/12")
+                  :text "76% 10/13")
                  (p
                   :style
                    (style
@@ -25557,7 +25947,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "63% 12/19")
+                  :text "65% 13/20")
                  (p
                   :style
                    (style
@@ -25565,7 +25955,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/12")
+                  :text "0% 0/13")
                  (p
                   :style
                    (style
@@ -25573,7 +25963,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/12"))
+                  :text "0% 0/13"))
                :nodes
                 (divchildlist
                  (div
@@ -25584,6 +25974,89 @@
                       (tbody
                        :nodes
                         (trlist
+                         (tr
+                          :nodes
+                           (tdlist
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".passflag"
+                                  :props
+                                   (propmap
+                                    :background-color "green"
+                                    :color "white"
+                                    :padding-left "4px"
+                                    :padding-right "4px"
+                                    :padding-top "1px"
+                                    :padding-bottom "1px"))
+                                :text "Pass")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text "string-first<-xml")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 "(test
+ "text"
+ (string-first<-xml
+  (xml
+   :children
+    (xmllist
+     (xml
+      :text "text")))))")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text ""text"")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text ""text"")))))
                          (tr
                           :nodes
                            (tdlist
@@ -26843,7 +27316,13 @@
                                     :white-space "pre"))
                                 :text
                                  "(xml
- :tag "doc")")))
+ :tag "doc"
+ (msgblock
+  :msgs
+   (msglist
+    (msg
+     :severity 2
+     :text "Invalid Xml Close tag: /wrong"))))")))
                             (td
                              :nodes
                               (divchildlist
@@ -26859,7 +27338,13 @@
                                     :white-space "pre"))
                                 :text
                                  "(xml
- :tag "doc")")))))
+ :tag "doc"
+ (msgblock
+  :msgs
+   (msglist
+    (msg
+     :severity 2
+     :text "Invalid Xml Close tag: /wrong"))))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -29859,7 +30344,14 @@
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
                                     :white-space "pre"))
-                                :text "(repl)")))
+                                :text
+                                 "(repl
+ (msgblock
+  :msgs
+   (msglist
+    (msg
+     :severity 2
+     :text "Empty delim cannot have more than one child."))))")))
                             (td
                              :nodes
                               (divchildlist
@@ -29873,7 +30365,14 @@
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
                                     :white-space "pre"))
-                                :text "(repl)")))))
+                                :text
+                                 "(repl
+ (msgblock
+  :msgs
+   (msglist
+    (msg
+     :severity 2
+     :text "Empty delim cannot have more than one child."))))")))))
                          (tr
                           :nodes
                            (tdlist

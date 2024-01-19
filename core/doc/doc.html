@@ -1363,6 +1363,9 @@
           <li class="nconst" onclick="docjs.navigate('const_vx/data/xml/delimxml')">
             (c) delimxml
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/data/xml/string-first&lt;-xml')">
+            (f) string-first&lt;-xml
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/data/xml/textblock-xml&lt;-string')">
             (f) textblock-xml&lt;-string
           </li>
@@ -2618,8 +2621,7 @@
     output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
   :js
    &quot;vx_collection.vx_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, max)&quot;
-  :java
-   &quot;Collection.vx_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, max);&quot;)
+  :java :auto)
  :doc `Returns a value using a until loop.
 output : any-1 := start
 count : int := 0
@@ -2662,8 +2664,7 @@ count : int := 0
     output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
   :js
    &quot;vx_collection.vx_any_from_for_while_loop_max(generic_any_1, start, fn_while, fn_loop, max)&quot;
-  :java
-   &quot;Collection.vx_any_from_for_while_loop_max(generic_any_1, start, fn_while, fn_loop, max);&quot;)
+  :java :auto)
  :doc &quot;Returns a value using a while loop.
        output : any-1 := start
        count : int := 0
@@ -2699,8 +2700,7 @@ count : int := 0
     output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
   :js
    &quot;vx_collection.vx_list_from_for_end_loop(generic_list_1, start, end, fn_loop)&quot;
-  :java
-   &quot;Collection.vx_list_from_for_end_loop(generic_list_1, start, end, fn_loop);&quot;)
+  :java :auto)
  :test (test
         (intlist 4 9)
         (list&lt;-for-end-loop : intlist
@@ -2752,8 +2752,7 @@ output : list-1 := (empty list-1)
     output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
   :js
    &quot;vx_collection.vx_list_from_for_while_loop_max(generic_list_1, start, fn_while, fn_loop, max)&quot;
-  :java
-   &quot;Collection.vx_list_from_for_while_loop_max(generic_list_1, start, fn_while, fn_loop, max);&quot;)
+  :java :auto)
  :doc `Returns a list of any-1 using a while loop.
 1. output : list-1 := (empty list-1)
 2. value : any-1 := start.
@@ -2785,8 +2784,7 @@ output : list-1 := (empty list-1)
     output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
   :js
    &quot;vx_collection.vx_list_from_list_filter(generic_list_1, vallist, fn_filter)&quot;
-  :java
-   &quot;Collection.vx_list_from_list_filter(generic_list_1, vallist, fn_filter);&quot;)
+  :java :auto)
  :test (test
         (stringlist
          &quot;a1&quot; &quot;b1&quot; &quot;c1&quot; &quot;d1&quot;)
@@ -2843,8 +2841,7 @@ output : list-1 := (empty list-1)
     output = vx_core::vx_any_from_any(generic_list_1, any);&quot;
   :js
    &quot;vx_collection.vx_list_from_list_start_end(generic_list_1, values, start, end)&quot;
-  :java
-   &quot;Collection.vx_list_from_list_start_end(generic_list_1, values, start, end);&quot;)
+  :java :auto)
  :test (test
         (stringlist
          &quot;b&quot; &quot;c&quot;)
@@ -3046,8 +3043,7 @@ count : int := 0
     output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
   :js
    &quot;vx_collection.vx_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, max)&quot;
-  :java
-   &quot;Collection.vx_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, max);&quot;)
+  :java :auto)
  :doc `Returns a value using a until loop.
 output : any-1 := start
 count : int := 0
@@ -3250,8 +3246,7 @@ count : int := 0
     output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
   :js
    &quot;vx_collection.vx_any_from_for_while_loop_max(generic_any_1, start, fn_while, fn_loop, max)&quot;
-  :java
-   &quot;Collection.vx_any_from_for_while_loop_max(generic_any_1, start, fn_while, fn_loop, max);&quot;)
+  :java :auto)
  :doc &quot;Returns a value using a while loop.
        output : any-1 := start
        count : int := 0
@@ -3494,8 +3489,7 @@ output : list-1 := (empty list-1)
     output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
   :js
    &quot;vx_collection.vx_list_from_for_end_loop(generic_list_1, start, end, fn_loop)&quot;
-  :java
-   &quot;Collection.vx_list_from_for_end_loop(generic_list_1, start, end, fn_loop);&quot;)
+  :java :auto)
  :test (test
         (intlist 4 9)
         (list&lt;-for-end-loop : intlist
@@ -3694,8 +3688,7 @@ output : list-1 := (empty list-1)
     output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
   :js
    &quot;vx_collection.vx_list_from_for_while_loop_max(generic_list_1, start, fn_while, fn_loop, max)&quot;
-  :java
-   &quot;Collection.vx_list_from_for_while_loop_max(generic_list_1, start, fn_while, fn_loop, max);&quot;)
+  :java :auto)
  :doc `Returns a list of any-1 using a while loop.
 1. output : list-1 := (empty list-1)
 2. value : any-1 := start.
@@ -3872,8 +3865,7 @@ output : list-1 := (empty list-1)
     output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
   :js
    &quot;vx_collection.vx_list_from_list_filter(generic_list_1, vallist, fn_filter)&quot;
-  :java
-   &quot;Collection.vx_list_from_list_filter(generic_list_1, vallist, fn_filter);&quot;)
+  :java :auto)
  :test (test
         (stringlist
          &quot;a1&quot; &quot;b1&quot; &quot;c1&quot; &quot;d1&quot;)
@@ -4145,8 +4137,7 @@ output : list-1 := (empty list-1)
     output = vx_core::vx_any_from_any(generic_list_1, any);&quot;
   :js
    &quot;vx_collection.vx_list_from_list_start_end(generic_list_1, values, start, end)&quot;
-  :java
-   &quot;Collection.vx_list_from_list_start_end(generic_list_1, values, start, end);&quot;)
+  :java :auto)
  :test (test
         (stringlist
          &quot;b&quot; &quot;c&quot;)
@@ -4474,7 +4465,7 @@ output : list-1 := (empty list-1)
    :cpp
     &quot;// :header
      vx_core::vx_Type_listany vx_p_list;
-		 vx_core::vx_Type_listany vx_list() const;
+     vx_core::vx_Type_listany vx_list() const;
      vx_core::Type_any vx_get_any(vx_core::Type_int index) const;
      vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const;&quot;)
  :doc &quot;A simple untyped list.&quot;)
@@ -6946,9 +6937,7 @@ output : list-1 := (empty list-1)
     output = vx_core::vx_new_string(soutput);&quot;
   :js
    &quot;output = vx_core.vx_string_from_any_indent(value, indent, linefeed)&quot;
-  :java
-   &quot;String soutput = Core.vx_string_from_any_indent(value, indent.vx_int(), linefeed.vx_boolean());
-    output = Core.vx_new_string(soutput);&quot;)
+  :java :auto)
  :doc &quot;Return a string representation of a value&quot;)
 
 (func string&lt;-func : string
@@ -7052,7 +7041,8 @@ output : list-1 := (empty list-1)
         (switch : int
          &quot;d&quot;
          (case (list &quot;b&quot; &quot;c&quot; &quot;d&quot;) 1)
-         (else 2))))
+         (else 2)))
+ :doc &quot;Returns a value based on a logical switch&quot;)
 
 (func then : thenelse
  [fn-cond : boolean&lt;-func
@@ -7060,7 +7050,8 @@ output : list-1 := (empty list-1)
  (thenelse
   :code    :then
   :fn-cond fn-cond
-  :fn-any  fn-any))
+  :fn-any  fn-any)
+ :doc &quot;Returns a thenelse struct from a given condition function and value function&quot;)
 
 (func traits&lt;-typedef : typelist
  [vtypedef : typedef]
@@ -7128,7 +7119,8 @@ output : list-1 := (empty list-1)
 
 (func typedef&lt;-any : typedef
  [val : any]
- (typedef&lt;-type (type&lt;-any val)))
+ (typedef&lt;-type (type&lt;-any val))
+ :doc  &quot;Gets the typedef of a given value&quot;)
 
 (func typedef&lt;-type : typedef
  [val : any]
@@ -7138,7 +7130,8 @@ output : list-1 := (empty list-1)
   :js
    &quot;output = val&quot;
   :java
-   &quot;val.vx_typedef();&quot;))
+   &quot;val.vx_typedef();&quot;)
+ :doc  &quot;Gets the typedef of a given type&quot;)
 
 (func typename&lt;-any : string
  [value : any-2]
@@ -7146,7 +7139,7 @@ output : list-1 := (empty list-1)
  :test (test &quot;vx/core/boolean&quot; (typename&lt;-any false))
        (test &quot;vx/core/int&quot;     (typename&lt;-any 5))
        (test &quot;vx/core/string&quot;  (typename&lt;-any &quot;a&quot;))
- :doc  &quot;Gets the type of a given value&quot;)
+ :doc  &quot;Gets the typename of a given value&quot;)
 
 (func typename&lt;-type : string
  [type : any]
@@ -9043,7 +9036,7 @@ output : list-1 := (empty list-1)
    :cpp
     &quot;// :header
      vx_core::vx_Type_listany vx_p_list;
-		 vx_core::vx_Type_listany vx_list() const;
+     vx_core::vx_Type_listany vx_list() const;
      vx_core::Type_any vx_get_any(vx_core::Type_int index) const;
      vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const;&quot;)
  :doc &quot;A simple untyped list.&quot;)</div>
@@ -23597,9 +23590,7 @@ improves readability.</div>
     output = vx_core::vx_new_string(soutput);&quot;
   :js
    &quot;output = vx_core.vx_string_from_any_indent(value, indent, linefeed)&quot;
-  :java
-   &quot;String soutput = Core.vx_string_from_any_indent(value, indent.vx_int(), linefeed.vx_boolean());
-    output = Core.vx_new_string(soutput);&quot;)
+  :java :auto)
  :doc &quot;Return a string representation of a value&quot;)</div>
                 </li>
               </ul>
@@ -23757,7 +23748,7 @@ improves readability.</div>
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt"></div>
+                <div class="txt">Returns a value based on a logical switch</div>
               </li>
             </ul>
             <div class="lbl">Function Name:</div>
@@ -23898,7 +23889,8 @@ improves readability.</div>
         (switch : int
          &quot;d&quot;
          (case (list &quot;b&quot; &quot;c&quot; &quot;d&quot;) 1)
-         (else 2))))</div>
+         (else 2)))
+ :doc &quot;Returns a value based on a logical switch&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -23908,7 +23900,7 @@ improves readability.</div>
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt"></div>
+                <div class="txt">Returns a thenelse struct from a given condition function and value function</div>
               </li>
             </ul>
             <div class="lbl">Function Name:</div>
@@ -23969,7 +23961,8 @@ improves readability.</div>
  (thenelse
   :code    :then
   :fn-cond fn-cond
-  :fn-any  fn-any))</div>
+  :fn-any  fn-any)
+ :doc &quot;Returns a thenelse struct from a given condition function and value function&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -24168,7 +24161,7 @@ improves readability.</div>
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt"></div>
+                <div class="txt">Gets the typedef of a given value</div>
               </li>
             </ul>
             <div class="lbl">Function Name:</div>
@@ -24220,7 +24213,8 @@ improves readability.</div>
                 <li>
                   <div class="source">(func typedef&lt;-any : typedef
  [val : any]
- (typedef&lt;-type (type&lt;-any val)))</div>
+ (typedef&lt;-type (type&lt;-any val))
+ :doc  &quot;Gets the typedef of a given value&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -24230,7 +24224,7 @@ improves readability.</div>
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt"></div>
+                <div class="txt">Gets the typedef of a given type</div>
               </li>
             </ul>
             <div class="lbl">Function Name:</div>
@@ -24288,7 +24282,8 @@ improves readability.</div>
   :js
    &quot;output = val&quot;
   :java
-   &quot;val.vx_typedef();&quot;))</div>
+   &quot;val.vx_typedef();&quot;)
+ :doc  &quot;Gets the typedef of a given type&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -24298,7 +24293,7 @@ improves readability.</div>
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt">Gets the type of a given value</div>
+                <div class="txt">Gets the typename of a given value</div>
               </li>
             </ul>
             <div class="lbl">Function Name:</div>
@@ -24357,7 +24352,7 @@ improves readability.</div>
  :test (test &quot;vx/core/boolean&quot; (typename&lt;-any false))
        (test &quot;vx/core/int&quot;     (typename&lt;-any 5))
        (test &quot;vx/core/string&quot;  (typename&lt;-any &quot;a&quot;))
- :doc  &quot;Gets the type of a given value&quot;)</div>
+ :doc  &quot;Gets the typename of a given value&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -30329,27 +30324,45 @@ improves readability.</div>
 (func textblock-delimnotfound : textblock
  [textblockarg : textblock]
  (let : textblock
-  [text    : string    := (:text   textblockarg)
-   delima  : delim     := (:delim  textblockarg)
-   close   : delim     := (:close  textblockarg)
-   parent  : textblock := (:parent textblockarg)
-   delimp  : delim     := (:delim parent)
-   delims  : delimlist := (:delimlist delimp)]
+  [text   : string        := (:text   textblockarg)
+   delima : delim         := (:delim  textblockarg)
+   close  : delim         := (:close  textblockarg)
+   parent : textblock     := (:parent textblockarg)
+   childp : textblocklist := (:children parent)
+   delimp : delim         := (:delim parent)
+   delims : delimlist     := (:delimlist delimp)]
   (if : textblock
    (then // if delim not closed then error
     (! (is-empty close))
-    (copy parent
-     (copy delimp
-      :delimlist
-       (copy delims
-        (copy textblockarg
-         :parent
-          (empty textblock)
-         :msg
-          (msg&lt;-error
-           (string
-            &quot;Close delim not found: &quot;
-            (:name delima))))))))
+    (let : textblock
+     [msgerr   : msg            := (msg&lt;-error
+                                    &quot;closedelimmissing&quot;
+                                    close)
+      child    : textblock      := (copy textblockarg
+                                    :delim  (empty delim)
+                                    :close  (empty delim)
+                                    :parent (empty textblock))
+      find     : textblock      := (textblock-findparent&lt;-textblock
+                                    parent)
+      childrenf : textblocklist := (:children find)
+      childrenr : textblocklist := (copy childrenf
+                                    child)
+      replace   : textblock     := (copy find
+                                    msgerr
+                                    :children childrenr)
+      parent2   : textblock     := (textblock-replace&lt;-textblock-find-replace
+                                    parent
+                                    find
+                                    replace)
+      gparent   : textblock     := (:parent parent2)
+      parent3   : textblock     := (copy parent2
+                                    :parent (empty textblock))
+      childreng : textblocklist := (:children gparent)
+      childrenc : textblocklist := (copy childreng
+                                    parent3)]
+     (copy gparent
+      :children childrenc
+      msgerr)))
    (then // if empty parent then textblockarg
     (is-empty parent)
     textblockarg)
@@ -30420,6 +30433,58 @@ improves readability.</div>
         find
         child)))))))
  :test (test
+        (textblock
+         :text &quot;&lt;a&quot;
+         :startpos 1
+         :endpos 2
+         :children
+          (textblocklist
+           (textblock
+            :text &quot;&lt;a&quot;
+            :startpos 1
+            :endpos 2
+            :delim
+             (copy delimbracketangle
+              :delimlist vx/data/textblock/delimlisttest1)
+            :children
+             (textblocklist
+              (textblock
+               :text &quot;a&quot;
+               :startpos 2
+               :endpos 2))
+            (msgblock
+             (msg
+              :code &quot;closedelimmissing&quot;
+              :severity 2))))
+         (msgblock
+          (msg
+           :code &quot;closedelimmissing&quot;
+           :severity 2)))
+        (textblock-delimnotfound
+         (textblock
+          :text &quot;a&quot;
+          :startpos 2
+          :endpos 2
+          :delim
+           (delim
+            :delimlist vx/data/textblock/delimlisttest2)
+          :close
+           (copy delimclose
+            :starttext &quot;&gt;&quot;)
+          :parent
+           (textblock
+            :text &quot;&lt;a&quot;
+            :startpos 1
+            :endpos 2
+            :delim
+             (copy delimbracketangle
+              :delimlist vx/data/textblock/delimlisttest1)
+            :parent
+             (textblock
+              :text &quot;&lt;a&quot;
+              :startpos 1
+              :endpos 2)))))
+       (test
         (textblock
          :text &quot;,&quot;
          :startpos 4
@@ -30935,7 +31000,7 @@ improves readability.</div>
 
 (func textblock-parse : textblock
  [textblock : textblock]
- (collection/any&lt;-for-until-loop : textblock
+ (collection/any&lt;-for-until-loop-max : textblock
   textblock
   (fn : boolean
    [current : textblock]
@@ -30944,7 +31009,8 @@ improves readability.</div>
   (fn : textblock
    [current : textblock]
    (textblock-parse-one
-    current)))
+    current))
+  50000)
  :bigospace :n^n
  :bigotime  :n^n
  :test (test
@@ -31091,6 +31157,58 @@ improves readability.</div>
      delimfirst
      textblockarg))))
  :test (test
+        (textblock
+         :text &quot;&lt;a&quot;
+         :startpos 1
+         :endpos 2
+         :children
+          (textblocklist
+           (textblock
+            :text &quot;&lt;a&quot;
+            :startpos 1
+            :endpos 2
+            :delim
+             (copy delimbracketangle
+              :delimlist vx/data/textblock/delimlisttest1)
+            :children
+             (textblocklist
+              (textblock
+               :text &quot;a&quot;
+               :startpos 2
+               :endpos 2))
+            (msgblock
+             (msg
+              :code &quot;closedelimmissing&quot;
+              :severity 2))))
+         (msgblock
+          (msg
+           :code &quot;closedelimmissing&quot;
+           :severity 2)))
+        (textblock-parse-one
+         (textblock
+          :text &quot;a&quot;
+          :startpos 2
+          :endpos 2
+          :delim
+           (delim
+            :delimlist vx/data/textblock/delimlisttest2)
+          :close
+           (copy delimclose
+            :starttext &quot;&gt;&quot;)
+          :parent
+           (textblock
+            :text &quot;&lt;a&quot;
+            :startpos 1
+            :endpos 2
+            :delim
+             (copy delimbracketangle
+              :delimlist vx/data/textblock/delimlisttest1)
+            :parent
+             (textblock
+              :text &quot;&lt;a&quot;
+              :startpos 1
+              :endpos 2)))))
+       (test
         (textblock
          :text &quot;&lt;{a,b},{c d}&gt;&quot;
          :startpos 1
@@ -38123,6 +38241,58 @@ improves readability.</div>
               <ul>
                 <li><div class="test">(test
  (textblock
+  :text &quot;&lt;a&quot;
+  :startpos 1
+  :endpos 2
+  :children
+   (textblocklist
+    (textblock
+     :text &quot;&lt;a&quot;
+     :startpos 1
+     :endpos 2
+     :delim
+      (copy delimbracketangle
+       :delimlist vx/data/textblock/delimlisttest1)
+     :children
+      (textblocklist
+       (textblock
+        :text &quot;a&quot;
+        :startpos 2
+        :endpos 2))
+     (msgblock
+      (msg
+       :code &quot;closedelimmissing&quot;
+       :severity 2))))
+  (msgblock
+   (msg
+    :code &quot;closedelimmissing&quot;
+    :severity 2)))
+ (textblock-delimnotfound
+  (textblock
+   :text &quot;a&quot;
+   :startpos 2
+   :endpos 2
+   :delim
+    (delim
+     :delimlist vx/data/textblock/delimlisttest2)
+   :close
+    (copy delimclose
+     :starttext &quot;&gt;&quot;)
+   :parent
+    (textblock
+     :text &quot;&lt;a&quot;
+     :startpos 1
+     :endpos 2
+     :delim
+      (copy delimbracketangle
+       :delimlist vx/data/textblock/delimlisttest1)
+     :parent
+      (textblock
+       :text &quot;&lt;a&quot;
+       :startpos 1
+       :endpos 2)))))</div></li>
+                <li><div class="test">(test
+ (textblock
   :text &quot;,&quot;
   :startpos 4
   :endpos 4
@@ -38583,27 +38753,45 @@ improves readability.</div>
                   <div class="source">(func textblock-delimnotfound : textblock
  [textblockarg : textblock]
  (let : textblock
-  [text    : string    := (:text   textblockarg)
-   delima  : delim     := (:delim  textblockarg)
-   close   : delim     := (:close  textblockarg)
-   parent  : textblock := (:parent textblockarg)
-   delimp  : delim     := (:delim parent)
-   delims  : delimlist := (:delimlist delimp)]
+  [text   : string        := (:text   textblockarg)
+   delima : delim         := (:delim  textblockarg)
+   close  : delim         := (:close  textblockarg)
+   parent : textblock     := (:parent textblockarg)
+   childp : textblocklist := (:children parent)
+   delimp : delim         := (:delim parent)
+   delims : delimlist     := (:delimlist delimp)]
   (if : textblock
    (then // if delim not closed then error
     (! (is-empty close))
-    (copy parent
-     (copy delimp
-      :delimlist
-       (copy delims
-        (copy textblockarg
-         :parent
-          (empty textblock)
-         :msg
-          (msg&lt;-error
-           (string
-            &quot;Close delim not found: &quot;
-            (:name delima))))))))
+    (let : textblock
+     [msgerr   : msg            := (msg&lt;-error
+                                    &quot;closedelimmissing&quot;
+                                    close)
+      child    : textblock      := (copy textblockarg
+                                    :delim  (empty delim)
+                                    :close  (empty delim)
+                                    :parent (empty textblock))
+      find     : textblock      := (textblock-findparent&lt;-textblock
+                                    parent)
+      childrenf : textblocklist := (:children find)
+      childrenr : textblocklist := (copy childrenf
+                                    child)
+      replace   : textblock     := (copy find
+                                    msgerr
+                                    :children childrenr)
+      parent2   : textblock     := (textblock-replace&lt;-textblock-find-replace
+                                    parent
+                                    find
+                                    replace)
+      gparent   : textblock     := (:parent parent2)
+      parent3   : textblock     := (copy parent2
+                                    :parent (empty textblock))
+      childreng : textblocklist := (:children gparent)
+      childrenc : textblocklist := (copy childreng
+                                    parent3)]
+     (copy gparent
+      :children childrenc
+      msgerr)))
    (then // if empty parent then textblockarg
     (is-empty parent)
     textblockarg)
@@ -38674,6 +38862,58 @@ improves readability.</div>
         find
         child)))))))
  :test (test
+        (textblock
+         :text &quot;&lt;a&quot;
+         :startpos 1
+         :endpos 2
+         :children
+          (textblocklist
+           (textblock
+            :text &quot;&lt;a&quot;
+            :startpos 1
+            :endpos 2
+            :delim
+             (copy delimbracketangle
+              :delimlist vx/data/textblock/delimlisttest1)
+            :children
+             (textblocklist
+              (textblock
+               :text &quot;a&quot;
+               :startpos 2
+               :endpos 2))
+            (msgblock
+             (msg
+              :code &quot;closedelimmissing&quot;
+              :severity 2))))
+         (msgblock
+          (msg
+           :code &quot;closedelimmissing&quot;
+           :severity 2)))
+        (textblock-delimnotfound
+         (textblock
+          :text &quot;a&quot;
+          :startpos 2
+          :endpos 2
+          :delim
+           (delim
+            :delimlist vx/data/textblock/delimlisttest2)
+          :close
+           (copy delimclose
+            :starttext &quot;&gt;&quot;)
+          :parent
+           (textblock
+            :text &quot;&lt;a&quot;
+            :startpos 1
+            :endpos 2
+            :delim
+             (copy delimbracketangle
+              :delimlist vx/data/textblock/delimlisttest1)
+            :parent
+             (textblock
+              :text &quot;&lt;a&quot;
+              :startpos 1
+              :endpos 2)))))
+       (test
         (textblock
          :text &quot;,&quot;
          :startpos 4
@@ -39453,7 +39693,7 @@ improves readability.</div>
                 <li>
                   <div class="source">(func textblock-parse : textblock
  [textblock : textblock]
- (collection/any&lt;-for-until-loop : textblock
+ (collection/any&lt;-for-until-loop-max : textblock
   textblock
   (fn : boolean
    [current : textblock]
@@ -39462,7 +39702,8 @@ improves readability.</div>
   (fn : textblock
    [current : textblock]
    (textblock-parse-one
-    current)))
+    current))
+  50000)
  :bigospace :n^n
  :bigotime  :n^n
  :test (test
@@ -39664,6 +39905,58 @@ improves readability.</div>
                 <span class="lbl">Usage/Test Cases:</span>
               </summary>
               <ul>
+                <li><div class="test">(test
+ (textblock
+  :text &quot;&lt;a&quot;
+  :startpos 1
+  :endpos 2
+  :children
+   (textblocklist
+    (textblock
+     :text &quot;&lt;a&quot;
+     :startpos 1
+     :endpos 2
+     :delim
+      (copy delimbracketangle
+       :delimlist vx/data/textblock/delimlisttest1)
+     :children
+      (textblocklist
+       (textblock
+        :text &quot;a&quot;
+        :startpos 2
+        :endpos 2))
+     (msgblock
+      (msg
+       :code &quot;closedelimmissing&quot;
+       :severity 2))))
+  (msgblock
+   (msg
+    :code &quot;closedelimmissing&quot;
+    :severity 2)))
+ (textblock-parse-one
+  (textblock
+   :text &quot;a&quot;
+   :startpos 2
+   :endpos 2
+   :delim
+    (delim
+     :delimlist vx/data/textblock/delimlisttest2)
+   :close
+    (copy delimclose
+     :starttext &quot;&gt;&quot;)
+   :parent
+    (textblock
+     :text &quot;&lt;a&quot;
+     :startpos 1
+     :endpos 2
+     :delim
+      (copy delimbracketangle
+       :delimlist vx/data/textblock/delimlisttest1)
+     :parent
+      (textblock
+       :text &quot;&lt;a&quot;
+       :startpos 1
+       :endpos 2)))))</div></li>
                 <li><div class="test">(test
  (textblock
   :text &quot;&lt;{a,b},{c d}&gt;&quot;
@@ -42213,6 +42506,58 @@ improves readability.</div>
      delimfirst
      textblockarg))))
  :test (test
+        (textblock
+         :text &quot;&lt;a&quot;
+         :startpos 1
+         :endpos 2
+         :children
+          (textblocklist
+           (textblock
+            :text &quot;&lt;a&quot;
+            :startpos 1
+            :endpos 2
+            :delim
+             (copy delimbracketangle
+              :delimlist vx/data/textblock/delimlisttest1)
+            :children
+             (textblocklist
+              (textblock
+               :text &quot;a&quot;
+               :startpos 2
+               :endpos 2))
+            (msgblock
+             (msg
+              :code &quot;closedelimmissing&quot;
+              :severity 2))))
+         (msgblock
+          (msg
+           :code &quot;closedelimmissing&quot;
+           :severity 2)))
+        (textblock-parse-one
+         (textblock
+          :text &quot;a&quot;
+          :startpos 2
+          :endpos 2
+          :delim
+           (delim
+            :delimlist vx/data/textblock/delimlisttest2)
+          :close
+           (copy delimclose
+            :starttext &quot;&gt;&quot;)
+          :parent
+           (textblock
+            :text &quot;&lt;a&quot;
+            :startpos 1
+            :endpos 2
+            :delim
+             (copy delimbracketangle
+              :delimlist vx/data/textblock/delimlisttest1)
+            :parent
+             (textblock
+              :text &quot;&lt;a&quot;
+              :startpos 1
+              :endpos 2)))))
+       (test
         (textblock
          :text &quot;&lt;{a,b},{c d}&gt;&quot;
          :startpos 1
@@ -45937,7 +46282,7 @@ improves readability.</div>
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/textblock-xml&lt;-string')">textblock-xml&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml&lt;-file')">xml&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml&lt;-string')">xml&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml&lt;-textblock')">xml&lt;-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml-angle&lt;-xml-textblock')">xml-angle&lt;-xml-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml-close&lt;-xml-textblock')">xml-close&lt;-xml-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml-parse&lt;-xml-textblock')">xml-parse&lt;-xml-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml-parse&lt;-xml-textblocklist')">xml-parse&lt;-xml-textblocklist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml-property&lt;-xml-textblock')">xml-property&lt;-xml-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml-properties&lt;-xml-textblocklist')">xml-properties&lt;-xml-textblocklist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml-read&lt;-file')">xml-read&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml-text&lt;-xml-textblock')">xml-text&lt;-xml-textblock</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/string-first&lt;-xml')">string-first&lt;-xml</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/textblock-xml&lt;-string')">textblock-xml&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml&lt;-file')">xml&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml&lt;-string')">xml&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml&lt;-textblock')">xml&lt;-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml-angle&lt;-xml-textblock')">xml-angle&lt;-xml-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml-close&lt;-xml-textblock')">xml-close&lt;-xml-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml-parse&lt;-xml-textblock')">xml-parse&lt;-xml-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml-parse&lt;-xml-textblocklist')">xml-parse&lt;-xml-textblocklist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml-property&lt;-xml-textblock')">xml-property&lt;-xml-textblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml-properties&lt;-xml-textblocklist')">xml-properties&lt;-xml-textblocklist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml-read&lt;-file')">xml-read&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/xml-text&lt;-xml-textblock')">xml-text&lt;-xml-textblock</span>
             </li>
           </ul>
         </details>
@@ -45987,16 +46332,36 @@ improves readability.</div>
 (const delimxml : tb/delim
  (tb/delim
   :delimlist
-	  (tb/delimlist
-//    tb/delimwhitespace
+   (tb/delimlist
     delimxmlcomment
     delimxmlcdata
-	   (copy tb/delimbracketangle
-		   :delimlist
-		    (tb/delimlist
+    (copy tb/delimbracketangle
+     :delimlist
+      (tb/delimlist
        delimxmlequal
        tb/delimwhitespace
        tb/delimquote)))))
+
+(func string-first&lt;-xml : string
+ [xml : xml]
+ (let : string
+  [children : xmllist := (:children xml)
+   first    : xml     := (:1 children)
+   text     : string  := (:text first)
+   outdent  : string  := (type/string-outdent
+                          text)
+   trim     : string  := (type/string-trim
+                          outdent)]
+  trim)
+ :test (test
+        &quot;text&quot;
+        (string-first&lt;-xml
+         (xml
+          :children
+           (xmllist
+            (xml
+             :text &quot;text&quot;)))))
+ :doc &quot;Returns string from first child's text.&quot;)
 
 (func textblock-xml&lt;-string : tb/textblock
  [text : string]
@@ -47618,16 +47983,102 @@ improves readability.</div>
                   <div class="source">(const delimxml : tb/delim
  (tb/delim
   :delimlist
-	  (tb/delimlist
-//    tb/delimwhitespace
+   (tb/delimlist
     delimxmlcomment
     delimxmlcdata
-	   (copy tb/delimbracketangle
-		   :delimlist
-		    (tb/delimlist
+    (copy tb/delimbracketangle
+     :delimlist
+      (tb/delimlist
        delimxmlequal
        tb/delimwhitespace
        tb/delimquote)))))</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/data/xml/string-first&lt;-xml">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/data/xml')">vx/data/xml</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/data/xml/string-first&lt;-xml')">string-first&lt;-xml</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns string from first child's text.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">string-first&lt;-xml</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">xml</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/data/xml/xml')">vx/data/xml/xml</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+                <li><div class="test">(test
+ &quot;text&quot;
+ (string-first&lt;-xml
+  (xml
+   :children
+    (xmllist
+     (xml
+      :text &quot;text&quot;)))))</div></li>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func string-first&lt;-xml : string
+ [xml : xml]
+ (let : string
+  [children : xmllist := (:children xml)
+   first    : xml     := (:1 children)
+   text     : string  := (:text first)
+   outdent  : string  := (type/string-outdent
+                          text)
+   trim     : string  := (type/string-trim
+                          outdent)]
+  trim)
+ :test (test
+        &quot;text&quot;
+        (string-first&lt;-xml
+         (xml
+          :children
+           (xmllist
+            (xml
+             :text &quot;text&quot;)))))
+ :doc &quot;Returns string from first child's text.&quot;)</div>
                 </li>
               </ul>
             </details>

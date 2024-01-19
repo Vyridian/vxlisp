@@ -146,7 +146,7 @@ public final class Textblock {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new delim) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new delim) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -154,7 +154,7 @@ public final class Textblock {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new delim) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new delim) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -169,7 +169,7 @@ public final class Textblock {
               ischanged = true;
               vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new delim :name " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new delim :name " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -182,7 +182,7 @@ public final class Textblock {
               ischanged = true;
               vx_p_starttext = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new delim :starttext " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new delim :starttext " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -195,7 +195,7 @@ public final class Textblock {
               ischanged = true;
               vx_p_endtext = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new delim :endtext " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new delim :endtext " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -208,7 +208,7 @@ public final class Textblock {
               ischanged = true;
               vx_p_pos = Core.t_int.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new delim :pos " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new delim :pos " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -218,12 +218,12 @@ public final class Textblock {
               ischanged = true;
               vx_p_delimlist = (Textblock.Type_delimlist)valsub;
             } else {
-              msg = Core.vx_msg_error("(new delim :delimlist " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new delim :delimlist " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new delim) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new delim) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -352,10 +352,10 @@ public final class Textblock {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_error("vx/data/textblock/delimlist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/data/textblock/delimlist", "invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_error("vx/data/textblock/delimlist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/data/textblock/delimlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -618,7 +618,7 @@ public final class Textblock {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new textblock) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new textblock) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -626,7 +626,7 @@ public final class Textblock {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new textblock) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new textblock) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -641,7 +641,7 @@ public final class Textblock {
               ischanged = true;
               vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new textblock :name " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new textblock :name " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -654,7 +654,7 @@ public final class Textblock {
               ischanged = true;
               vx_p_text = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new textblock :text " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new textblock :text " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -667,7 +667,7 @@ public final class Textblock {
               ischanged = true;
               vx_p_startpos = Core.t_int.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new textblock :startpos " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new textblock :startpos " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -680,7 +680,7 @@ public final class Textblock {
               ischanged = true;
               vx_p_endpos = Core.t_int.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new textblock :endpos " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new textblock :endpos " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -693,7 +693,7 @@ public final class Textblock {
               ischanged = true;
               vx_p_curpos = Core.t_int.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new textblock :curpos " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new textblock :curpos " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -706,7 +706,7 @@ public final class Textblock {
               ischanged = true;
               vx_p_line = Core.t_int.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new textblock :line " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new textblock :line " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -719,7 +719,7 @@ public final class Textblock {
               ischanged = true;
               vx_p_column = Core.t_int.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new textblock :column " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new textblock :column " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -729,7 +729,7 @@ public final class Textblock {
               ischanged = true;
               vx_p_delim = (Textblock.Type_delim)valsub;
             } else {
-              msg = Core.vx_msg_error("(new textblock :delim " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new textblock :delim " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -739,7 +739,7 @@ public final class Textblock {
               ischanged = true;
               vx_p_close = (Textblock.Type_delim)valsub;
             } else {
-              msg = Core.vx_msg_error("(new textblock :close " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new textblock :close " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -749,7 +749,7 @@ public final class Textblock {
               ischanged = true;
               vx_p_parent = (Textblock.Type_textblock)valsub;
             } else {
-              msg = Core.vx_msg_error("(new textblock :parent " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new textblock :parent " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -759,12 +759,12 @@ public final class Textblock {
               ischanged = true;
               vx_p_children = (Textblock.Type_textblocklist)valsub;
             } else {
-              msg = Core.vx_msg_error("(new textblock :children " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new textblock :children " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new textblock) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new textblock) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -899,10 +899,10 @@ public final class Textblock {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_error("vx/data/textblock/textblocklist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/data/textblock/textblocklist", "invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_error("vx/data/textblock/textblocklist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/data/textblock/textblocklist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -3209,6 +3209,7 @@ public final class Textblock {
         final Textblock.Type_delim delima = textblockarg.delim();
         final Textblock.Type_delim close = textblockarg.close();
         final Textblock.Type_textblock parent = textblockarg.parent();
+        final Textblock.Type_textblocklist childp = parent.children();
         final Textblock.Type_delim delimp = parent.delim();
         final Textblock.Type_delimlist delims = delimp.delimlist();
         return Core.f_if_2(
@@ -3221,40 +3222,62 @@ public final class Textblock {
                 );
               }),
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Core.f_copy(
-                  parent,
-                  Core.t_anylist.vx_new(
-                      Core.f_copy(
-                        delimp,
-                        Core.t_anylist.vx_new(
-                          Core.vx_new_string(":delimlist"),
-                          Core.f_copy(
-                            delims,
-                            Core.t_anylist.vx_new(
-                              Core.f_copy(
-                                textblockarg,
-                                Core.t_anylist.vx_new(
-                                  Core.vx_new_string(":parent"),
-                                  Core.f_empty(
-                                    Textblock.t_textblock
-                                  ),
-                                  Core.vx_new_string(":msg"),
-                                  Core.f_msg_from_error(
-                                    Core.f_new(
-                                      Core.t_string,
-                                      Core.t_anylist.vx_new(
-                                        Core.vx_new_string("Close delim not found: "),
-                                        delima.name()
-                                      )
-                                    )
-                                  )
-                                )
-                              )
-                            )
+                return Core.f_let(
+                  Textblock.t_textblock,
+                  Core.t_any_from_func.vx_fn_new(() -> {
+                    final Core.Type_msg msgerr = Core.f_msg_from_error_1(Core.vx_new_string("closedelimmissing"), close);
+                    final Textblock.Type_textblock child = Core.f_copy(
+                      textblockarg,
+                      Core.t_anylist.vx_new(
+                          Core.vx_new_string(":delim"),
+                          Core.f_empty(
+                            Textblock.t_delim
+                          ),
+                          Core.vx_new_string(":close"),
+                          Core.f_empty(
+                            Textblock.t_delim
+                          ),
+                          Core.vx_new_string(":parent"),
+                          Core.f_empty(
+                            Textblock.t_textblock
                           )
-                        )
                       )
-                  )
+                    );
+                    final Textblock.Type_textblock find = Textblock.f_textblock_findparent_from_textblock(parent);
+                    final Textblock.Type_textblocklist childrenf = find.children();
+                    final Textblock.Type_textblocklist childrenr = Core.f_copy(childrenf, Core.t_anylist.vx_new(
+                      child));
+                    final Textblock.Type_textblock replace = Core.f_copy(
+                      find,
+                      Core.t_anylist.vx_new(
+                          msgerr,
+                          Core.vx_new_string(":children"),
+                          childrenr
+                      )
+                    );
+                    final Textblock.Type_textblock parent2 = Textblock.f_textblock_replace_from_textblock_find_replace(parent, find, replace);
+                    final Textblock.Type_textblock gparent = parent2.parent();
+                    final Textblock.Type_textblock parent3 = Core.f_copy(
+                      parent2,
+                      Core.t_anylist.vx_new(
+                          Core.vx_new_string(":parent"),
+                          Core.f_empty(
+                            Textblock.t_textblock
+                          )
+                      )
+                    );
+                    final Textblock.Type_textblocklist childreng = gparent.children();
+                    final Textblock.Type_textblocklist childrenc = Core.f_copy(childreng, Core.t_anylist.vx_new(
+                      parent3));
+                    return Core.f_copy(
+                      gparent,
+                      Core.t_anylist.vx_new(
+                        Core.vx_new_string(":children"),
+                        childrenc,
+                        msgerr
+                      )
+                    );
+                  })
                 );
               })
             ),
@@ -3794,7 +3817,7 @@ public final class Textblock {
 
   public static Textblock.Type_textblock f_textblock_parse(final Textblock.Type_textblock textblock) {
     Textblock.Type_textblock output = Textblock.e_textblock;
-    output = Collection.f_any_from_for_until_loop(
+    output = Collection.f_any_from_for_until_loop_max(
       Textblock.t_textblock,
       textblock,
       Core.t_boolean_from_any.vx_fn_new((current_any) -> {
@@ -3808,7 +3831,8 @@ public final class Textblock {
         Textblock.Type_textblock current = Core.f_any_from_any(Textblock.t_textblock, current_any);
         return 
           Textblock.f_textblock_parse_one(current);
-      })
+      }),
+      Core.vx_new_int(50000)
     );
     return output;
   }

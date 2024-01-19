@@ -48,6 +48,33 @@ export default class vx_data_xml {
   static c_delimxmlequal = {vx_type: vx_data_textblock.t_delim, vx_constdef: {pkgname: 'vx/data/xml', name: 'delimxmlequal'}}
 
   /**
+   * @function string_first_from_xml
+   * Returns string from first child's text.
+   * @param  {xml} xml
+   * @return {string}
+   */
+  static t_string_first_from_xml = {}
+  static e_string_first_from_xml = {vx_type: vx_data_xml.t_string_first_from_xml}
+
+  // (func string-first<-xml)
+  static f_string_first_from_xml(xml) {
+    let output = vx_core.e_string
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_string},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const children = vx_core.f_any_from_struct({"any-1": vx_data_xml.t_xmllist, "struct-2": vx_data_xml.t_xml}, xml, ":children")
+        const first = vx_core.f_any_from_list({"any-1": vx_data_xml.t_xml, "list-1": vx_data_xml.t_xmllist}, children, 1)
+        const text = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_xml.t_xml}, first, ":text")
+        const outdent = vx_type.f_string_outdent(text)
+        const trim = vx_type.f_string_trim(outdent)
+        return trim
+      })
+    )
+    return output
+  }
+
+  /**
    * @function textblock_xml_from_string
    * Returns a parsed textblock from a string.
    * @param  {string} text
@@ -537,6 +564,7 @@ export default class vx_data_xml {
       "xml": vx_data_xml.e_xml,
       "xmllist": vx_data_xml.e_xmllist,
       "xmlpropmap": vx_data_xml.e_xmlpropmap,
+      "string-first<-xml": vx_data_xml.e_string_first_from_xml,
       "textblock-xml<-string": vx_data_xml.e_textblock_xml_from_string,
       "xml-angle<-xml-textblock": vx_data_xml.e_xml_angle_from_xml_textblock,
       "xml-close<-xml-textblock": vx_data_xml.e_xml_close_from_xml_textblock,
@@ -551,6 +579,7 @@ export default class vx_data_xml {
       "xml<-textblock": vx_data_xml.e_xml_from_textblock
     })
     const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      "string-first<-xml": vx_data_xml.t_string_first_from_xml,
       "textblock-xml<-string": vx_data_xml.t_textblock_xml_from_string,
       "xml-angle<-xml-textblock": vx_data_xml.t_xml_angle_from_xml_textblock,
       "xml-close<-xml-textblock": vx_data_xml.t_xml_close_from_xml_textblock,
@@ -720,6 +749,25 @@ export default class vx_data_xml {
       ":starttext",
       "="
     ))
+
+    // (func string-first<-xml)
+    vx_data_xml.t_string_first_from_xml['vx_type'] = vx_core.t_type
+    vx_data_xml.t_string_first_from_xml['vx_value'] = {
+      name          : "string-first<-xml",
+      pkgname       : "vx/data/xml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_xml.f_string_first_from_xml
+    }
 
     // (func textblock-xml<-string)
     vx_data_xml.t_textblock_xml_from_string['vx_type'] = vx_core.t_type

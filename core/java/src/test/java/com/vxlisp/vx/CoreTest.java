@@ -2773,7 +2773,7 @@ public final class CoreTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/core", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 14, ":tests", 2, ":total", 14), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 87, ":tests", 215, ":total", 247), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 88, ":tests", 219, ":total", 247), 
       ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 48, ":tests", 65, ":total", 135), 
       ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 161), 
       ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 161), 

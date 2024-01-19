@@ -424,7 +424,7 @@
               <p class="coveragenums">5% 4/72</p>
               <p class="coveragenums">14% 2/14</p>
               <p class="coveragenums">48% 65/135</p>
-              <p class="coveragenums">87% 215/247</p>
+              <p class="coveragenums">88% 219/247</p>
               <p class="coveragenums">0% 1/161</p>
               <p class="coveragenums">0% 1/161</p>
             </summary>
@@ -3826,6 +3826,140 @@
                     <td>
                       <p class="preformatted">(test
  (textblock
+  :text "&lt;a"
+  :startpos 1
+  :endpos 2
+  :children
+   (textblocklist
+    (textblock
+     :text "&lt;a"
+     :startpos 1
+     :endpos 2
+     :delim
+      (copy delimbracketangle
+       :delimlist vx/data/textblock/delimlisttest1)
+     :children
+      (textblocklist
+       (textblock
+        :text "a"
+        :startpos 2
+        :endpos 2))
+     (msgblock
+      (msg
+       :code "closedelimmissing"
+       :severity 2))))
+  (msgblock
+   (msg
+    :code "closedelimmissing"
+    :severity 2)))
+ (textblock-delimnotfound
+  (textblock
+   :text "a"
+   :startpos 2
+   :endpos 2
+   :delim
+    (delim
+     :delimlist vx/data/textblock/delimlisttest2)
+   :close
+    (copy delimclose
+     :starttext "&gt;")
+   :parent
+    (textblock
+     :text "&lt;a"
+     :startpos 1
+     :endpos 2
+     :delim
+      (copy delimbracketangle
+       :delimlist vx/data/textblock/delimlisttest1)
+     :parent
+      (textblock
+       :text "&lt;a"
+       :startpos 1
+       :endpos 2)))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(textblock
+ :text "&lt;a"
+ :startpos 1
+ :endpos 2
+ :children
+  (textblocklist
+   (textblock
+    :text "&lt;a"
+    :startpos 1
+    :endpos 2
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "&lt;"
+      :endtext "&gt;"
+      :delimlist vx/data/textblock/delimlisttest1)
+    :children
+     (textblocklist
+      (textblock
+       :text "a"
+       :startpos 2
+       :endpos 2))
+    (msgblock
+     :msgs
+      (msglist
+       (msg
+        :code "closedelimmissing"
+        :severity 2)))))
+ (msgblock
+  :msgs
+   (msglist
+    (msg
+     :code "closedelimmissing"
+     :severity 2))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(textblock
+ :text "&lt;a"
+ :startpos 1
+ :endpos 2
+ :children
+  (textblocklist
+   (textblock
+    :text "&lt;a"
+    :startpos 1
+    :endpos 2
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "&lt;"
+      :endtext "&gt;"
+      :delimlist vx/data/textblock/delimlisttest1)
+    :children
+     (textblocklist
+      (textblock
+       :text "a"
+       :startpos 2
+       :endpos 2))
+    (msgblock
+     :msgs
+      (msglist
+       (msg
+        :code "closedelimmissing"
+        :severity 2)))))
+ (msgblock
+  :msgs
+   (msglist
+    (msg
+     :code "closedelimmissing"
+     :severity 2))))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">textblock-delimnotfound</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (textblock
   :text ","
   :startpos 4
   :endpos 4
@@ -5099,6 +5233,140 @@
           :text "d"
           :startpos 11
           :endpos 11)))))))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">textblock-parse-one</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (textblock
+  :text "&lt;a"
+  :startpos 1
+  :endpos 2
+  :children
+   (textblocklist
+    (textblock
+     :text "&lt;a"
+     :startpos 1
+     :endpos 2
+     :delim
+      (copy delimbracketangle
+       :delimlist vx/data/textblock/delimlisttest1)
+     :children
+      (textblocklist
+       (textblock
+        :text "a"
+        :startpos 2
+        :endpos 2))
+     (msgblock
+      (msg
+       :code "closedelimmissing"
+       :severity 2))))
+  (msgblock
+   (msg
+    :code "closedelimmissing"
+    :severity 2)))
+ (textblock-parse-one
+  (textblock
+   :text "a"
+   :startpos 2
+   :endpos 2
+   :delim
+    (delim
+     :delimlist vx/data/textblock/delimlisttest2)
+   :close
+    (copy delimclose
+     :starttext "&gt;")
+   :parent
+    (textblock
+     :text "&lt;a"
+     :startpos 1
+     :endpos 2
+     :delim
+      (copy delimbracketangle
+       :delimlist vx/data/textblock/delimlisttest1)
+     :parent
+      (textblock
+       :text "&lt;a"
+       :startpos 1
+       :endpos 2)))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(textblock
+ :text "&lt;a"
+ :startpos 1
+ :endpos 2
+ :children
+  (textblocklist
+   (textblock
+    :text "&lt;a"
+    :startpos 1
+    :endpos 2
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "&lt;"
+      :endtext "&gt;"
+      :delimlist vx/data/textblock/delimlisttest1)
+    :children
+     (textblocklist
+      (textblock
+       :text "a"
+       :startpos 2
+       :endpos 2))
+    (msgblock
+     :msgs
+      (msglist
+       (msg
+        :code "closedelimmissing"
+        :severity 2)))))
+ (msgblock
+  :msgs
+   (msglist
+    (msg
+     :code "closedelimmissing"
+     :severity 2))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(textblock
+ :text "&lt;a"
+ :startpos 1
+ :endpos 2
+ :children
+  (textblocklist
+   (textblock
+    :text "&lt;a"
+    :startpos 1
+    :endpos 2
+    :delim
+     (delim
+      :name "delimbracketangle"
+      :starttext "&lt;"
+      :endtext "&gt;"
+      :delimlist vx/data/textblock/delimlisttest1)
+    :children
+     (textblocklist
+      (textblock
+       :text "a"
+       :startpos 2
+       :endpos 2))
+    (msgblock
+     :msgs
+      (msglist
+       (msg
+        :code "closedelimmissing"
+        :severity 2)))))
+ (msgblock
+  :msgs
+   (msglist
+    (msg
+     :code "closedelimmissing"
+     :severity 2))))</p>
                     </td>
                   </tr>
                   <tr>
@@ -12814,13 +13082,13 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/data/xml</p>
-              <p class="coveragenums">47% 9/19</p>
+              <p class="coveragenums">50% 10/20</p>
               <p class="coveragenums">0% 0/3</p>
               <p class="coveragenums">0% 0/4</p>
-              <p class="coveragenums">75% 9/12</p>
-              <p class="coveragenums">63% 12/19</p>
-              <p class="coveragenums">0% 0/12</p>
-              <p class="coveragenums">0% 0/12</p>
+              <p class="coveragenums">76% 10/13</p>
+              <p class="coveragenums">65% 13/20</p>
+              <p class="coveragenums">0% 0/13</p>
+              <p class="coveragenums">0% 0/13</p>
             </summary>
             <div>
               <table>
@@ -12844,6 +13112,30 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">string-first&lt;-xml</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ "text"
+ (string-first&lt;-xml
+  (xml
+   :children
+    (xmllist
+     (xml
+      :text "text")))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"text"</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"text"</p>
+                    </td>
+                  </tr>
                   <tr>
                     <td>
                       <p class="passflag">Pass</p>
@@ -13686,11 +13978,23 @@
                     </td>
                     <td>
                       <p class="preformatted">(xml
- :tag "doc")</p>
+ :tag "doc"
+ (msgblock
+  :msgs
+   (msglist
+    (msg
+     :severity 2
+     :text "Invalid Xml Close tag: /wrong"))))</p>
                     </td>
                     <td>
                       <p class="preformatted">(xml
- :tag "doc")</p>
+ :tag "doc"
+ (msgblock
+  :msgs
+   (msglist
+    (msg
+     :severity 2
+     :text "Invalid Xml Close tag: /wrong"))))</p>
                     </td>
                   </tr>
                   <tr>
@@ -15081,10 +15385,22 @@
   (empty argmap)))</p>
                     </td>
                     <td>
-                      <p class="preformatted">(repl)</p>
+                      <p class="preformatted">(repl
+ (msgblock
+  :msgs
+   (msglist
+    (msg
+     :severity 2
+     :text "Empty delim cannot have more than one child."))))</p>
                     </td>
                     <td>
-                      <p class="preformatted">(repl)</p>
+                      <p class="preformatted">(repl
+ (msgblock
+  :msgs
+   (msglist
+    (msg
+     :severity 2
+     :text "Empty delim cannot have more than one child."))))</p>
                     </td>
                   </tr>
                   <tr>

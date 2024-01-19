@@ -38,16 +38,36 @@
 (const delimxml : tb/delim
  (tb/delim
   :delimlist
-	  (tb/delimlist
-//    tb/delimwhitespace
+   (tb/delimlist
     delimxmlcomment
     delimxmlcdata
-	   (copy tb/delimbracketangle
-		   :delimlist
-		    (tb/delimlist
+    (copy tb/delimbracketangle
+     :delimlist
+      (tb/delimlist
        delimxmlequal
        tb/delimwhitespace
        tb/delimquote)))))
+
+(func string-first<-xml : string
+ [xml : xml]
+ (let : string
+  [children : xmllist := (:children xml)
+   first    : xml     := (:1 children)
+   text     : string  := (:text first)
+   outdent  : string  := (type/string-outdent
+                          text)
+   trim     : string  := (type/string-trim
+                          outdent)]
+  trim)
+ :test (test
+        "text"
+        (string-first<-xml
+         (xml
+          :children
+           (xmllist
+            (xml
+             :text "text")))))
+ :doc "Returns string from first child's text.")
 
 (func textblock-xml<-string : tb/textblock
  [text : string]

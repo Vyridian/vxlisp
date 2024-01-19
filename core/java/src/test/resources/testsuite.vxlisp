@@ -2396,8 +2396,8 @@
       :total 14)
     :docnums
      (testcoveragenums
-      :pct 87
-      :tests 215
+      :pct 88
+      :tests 219
       :total 247)
     :funcnums
      (testcoveragenums
@@ -3237,6 +3237,134 @@
      :casename "textblock-delimnotfound"
      :describelist
       (testdescribelist
+       (testdescribe
+        :describename
+         "(test
+ (textblock
+  :text "<a"
+  :startpos 1
+  :endpos 2
+  :children
+   (textblocklist
+    (textblock
+     :text "<a"
+     :startpos 1
+     :endpos 2
+     :delim
+      (copy delimbracketangle
+       :delimlist vx/data/textblock/delimlisttest1)
+     :children
+      (textblocklist
+       (textblock
+        :text "a"
+        :startpos 2
+        :endpos 2))
+     (msgblock
+      (msg
+       :code "closedelimmissing"
+       :severity 2))))
+  (msgblock
+   (msg
+    :code "closedelimmissing"
+    :severity 2)))
+ (textblock-delimnotfound
+  (textblock
+   :text "a"
+   :startpos 2
+   :endpos 2
+   :delim
+    (delim
+     :delimlist vx/data/textblock/delimlisttest2)
+   :close
+    (copy delimclose
+     :starttext ">")
+   :parent
+    (textblock
+     :text "<a"
+     :startpos 1
+     :endpos 2
+     :delim
+      (copy delimbracketangle
+       :delimlist vx/data/textblock/delimlisttest1)
+     :parent
+      (textblock
+       :text "<a"
+       :startpos 1
+       :endpos 2)))))"
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (textblock
+            :text "<a"
+            :startpos 1
+            :endpos 2
+            :children
+             (textblocklist
+              (textblock
+               :text "<a"
+               :startpos 1
+               :endpos 2
+               :delim
+                (delim
+                 :name "delimbracketangle"
+                 :starttext "<"
+                 :endtext ">"
+                 :delimlist vx/data/textblock/delimlisttest1)
+               :children
+                (textblocklist
+                 (textblock
+                  :text "a"
+                  :startpos 2
+                  :endpos 2))
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :code "closedelimmissing"
+                   :severity 2)))))
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code "closedelimmissing"
+                :severity 2))))
+          :actual
+           (textblock
+            :text "<a"
+            :startpos 1
+            :endpos 2
+            :children
+             (textblocklist
+              (textblock
+               :text "<a"
+               :startpos 1
+               :endpos 2
+               :delim
+                (delim
+                 :name "delimbracketangle"
+                 :starttext "<"
+                 :endtext ">"
+                 :delimlist vx/data/textblock/delimlisttest1)
+               :children
+                (textblocklist
+                 (textblock
+                  :text "a"
+                  :startpos 2
+                  :endpos 2))
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :code "closedelimmissing"
+                   :severity 2)))))
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code "closedelimmissing"
+                :severity 2))))))
        (testdescribe
         :describename
          "(test
@@ -4504,6 +4632,134 @@
      :casename "textblock-parse-one"
      :describelist
       (testdescribelist
+       (testdescribe
+        :describename
+         "(test
+ (textblock
+  :text "<a"
+  :startpos 1
+  :endpos 2
+  :children
+   (textblocklist
+    (textblock
+     :text "<a"
+     :startpos 1
+     :endpos 2
+     :delim
+      (copy delimbracketangle
+       :delimlist vx/data/textblock/delimlisttest1)
+     :children
+      (textblocklist
+       (textblock
+        :text "a"
+        :startpos 2
+        :endpos 2))
+     (msgblock
+      (msg
+       :code "closedelimmissing"
+       :severity 2))))
+  (msgblock
+   (msg
+    :code "closedelimmissing"
+    :severity 2)))
+ (textblock-parse-one
+  (textblock
+   :text "a"
+   :startpos 2
+   :endpos 2
+   :delim
+    (delim
+     :delimlist vx/data/textblock/delimlisttest2)
+   :close
+    (copy delimclose
+     :starttext ">")
+   :parent
+    (textblock
+     :text "<a"
+     :startpos 1
+     :endpos 2
+     :delim
+      (copy delimbracketangle
+       :delimlist vx/data/textblock/delimlisttest1)
+     :parent
+      (textblock
+       :text "<a"
+       :startpos 1
+       :endpos 2)))))"
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (textblock
+            :text "<a"
+            :startpos 1
+            :endpos 2
+            :children
+             (textblocklist
+              (textblock
+               :text "<a"
+               :startpos 1
+               :endpos 2
+               :delim
+                (delim
+                 :name "delimbracketangle"
+                 :starttext "<"
+                 :endtext ">"
+                 :delimlist vx/data/textblock/delimlisttest1)
+               :children
+                (textblocklist
+                 (textblock
+                  :text "a"
+                  :startpos 2
+                  :endpos 2))
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :code "closedelimmissing"
+                   :severity 2)))))
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code "closedelimmissing"
+                :severity 2))))
+          :actual
+           (textblock
+            :text "<a"
+            :startpos 1
+            :endpos 2
+            :children
+             (textblocklist
+              (textblock
+               :text "<a"
+               :startpos 1
+               :endpos 2
+               :delim
+                (delim
+                 :name "delimbracketangle"
+                 :starttext "<"
+                 :endtext ">"
+                 :delimlist vx/data/textblock/delimlisttest1)
+               :children
+                (textblocklist
+                 (textblock
+                  :text "a"
+                  :startpos 2
+                  :endpos 2))
+               (msgblock
+                :msgs
+                 (msglist
+                  (msg
+                   :code "closedelimmissing"
+                   :severity 2)))))
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :code "closedelimmissing"
+                :severity 2))))))
        (testdescribe
         :describename
          "(test
@@ -12044,11 +12300,11 @@
       :stringlist<-textblocklist 1
       :text<-textblock 1
       :textblock-addchild<-textblock-find-child 0
-      :textblock-delimnotfound 4
+      :textblock-delimnotfound 5
       :textblock-findparent<-textblock 0
       :textblock-init 1
       :textblock-parse 1
-      :textblock-parse-one 21
+      :textblock-parse-one 22
       :textblock-parse<-string-delim 0
       :textblock-replace<-textblock-find-replace 0
       :textblock-startleft<-string-delim-offset 1
@@ -12167,6 +12423,28 @@
  (testpackage
   :caselist
    (testcaselist
+    (testcase
+     :passfail true
+     :testpkg "vx/data/xml"
+     :casename "string-first<-xml"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         "(test
+ "text"
+ (string-first<-xml
+  (xml
+   :children
+    (xmllist
+     (xml
+      :text "text")))))"
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "text"
+          :actual "text"))))
     (testcase
      :passfail true
      :testpkg "vx/data/xml"
@@ -12988,10 +13266,22 @@
           :passfail true
           :expected
            (xml
-            :tag "doc")
+            :tag "doc"
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :severity 2
+                :text "Invalid Xml Close tag: /wrong"))))
           :actual
            (xml
-            :tag "doc")))
+            :tag "doc"
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :severity 2
+                :text "Invalid Xml Close tag: /wrong"))))))
        (testdescribe
         :describename
          "(test
@@ -14031,6 +14321,7 @@
       :delimxmlequal 0)
     :funcmap
      (intmap
+      :string-first<-xml 1
       :textblock-xml<-string 1
       :xml-angle<-xml-textblock 3
       :xml-close<-xml-textblock 4
@@ -14055,12 +14346,12 @@
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 12)
+      :total 13)
     :bigotimenums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 12)
+      :total 13)
     :constnums
      (testcoveragenums
       :pct 0
@@ -14068,20 +14359,20 @@
       :total 4)
     :docnums
      (testcoveragenums
-      :pct 63
-      :tests 12
-      :total 19)
+      :pct 65
+      :tests 13
+      :total 20)
     :funcnums
      (testcoveragenums
-      :pct 75
-      :tests 9
-      :total 12)
+      :pct 76
+      :tests 10
+      :total 13)
     :testpkg "vx/data/xml"
     :totalnums
      (testcoveragenums
-      :pct 47
-      :tests 9
-      :total 19)
+      :pct 50
+      :tests 10
+      :total 20)
     :typenums
      (testcoveragenums
       :pct 0
@@ -14337,7 +14628,23 @@
         :testresult
          (testresult
           :code ":eq"
-          :passfail true))))
+          :passfail true
+          :expected
+           (repl
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :severity 2
+                :text "Empty delim cannot have more than one child."))))
+          :actual
+           (repl
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :severity 2
+                :text "Empty delim cannot have more than one child."))))))))
     (testcase
      :passfail true
      :testpkg "vx/repl"

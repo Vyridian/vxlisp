@@ -144,7 +144,7 @@ public final class Event {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new event) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new event) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -152,7 +152,7 @@ public final class Event {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new event) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new event) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -167,7 +167,7 @@ public final class Event {
               ischanged = true;
               vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new event :name " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new event :name " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -177,7 +177,7 @@ public final class Event {
               ischanged = true;
               vx_p_from = (Core.Type_any)valsub;
             } else {
-              msg = Core.vx_msg_error("(new event :from " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new event :from " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -187,7 +187,7 @@ public final class Event {
               ischanged = true;
               vx_p_to = (Core.Type_any)valsub;
             } else {
-              msg = Core.vx_msg_error("(new event :to " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new event :to " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -197,7 +197,7 @@ public final class Event {
               ischanged = true;
               vx_p_fn_any_from_any = (Core.Func_any_from_any)valsub;
             } else {
-              msg = Core.vx_msg_error("(new event :fn-any<-any " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new event :fn-any<-any " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -207,12 +207,12 @@ public final class Event {
               ischanged = true;
               vx_p_fn_any_from_from_to = (Event.Func_any_from_from_to)valsub;
             } else {
-              msg = Core.vx_msg_error("(new event :fn-any<-from-to " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new event :fn-any<-from-to " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new event) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new event) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";

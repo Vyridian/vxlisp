@@ -4,6 +4,8 @@
 
 * vxlisp (Variable Platform, Cross Language Lisp) is a proposal for a new programming language and data structure that might fullfill the dream of 'write once, run anywhere' by writing in one language and publishing to any other one. It also tries to address a large number of complaints I have with other languages. It liberally takes concepts from many other languages like Lisp, Clojure, Scala and JavaScript.
 
+* vxlisp is easy to learn with simple, concise, consistent, readable syntax. It seeks to make programming more feature-rich, modular, and reliable by standardizing like Lego pieces and plugging holes in other languages. If focuses on making the most common programming cases easier and more robust.
+
 ## Sample
 
     (type person : struct
@@ -52,9 +54,9 @@
 
 1. vxlisp is easy to learn with simple, concise, consistent, readable syntax. It seeks to make programming more modular and reliable by standardizing like Lego pieces. If focuses on making the most common programming cases easier.
 
-2. vxlisp is easy to setup. Unzip the folder, write some code, run the executable file, and you are up and running with JavaScript. The built-in webserver even serves up your code and testscripts.
+2. vxlisp is easy to setup. Unzip the folder, write some code, run the executable file, and you are up and running with JavaScript. The built-in webserver even serves up your code and testscripts. Other languages require their respective compilers an projects to be installed as well.
 
-3. vxlisp is a full featured language including documentation, test cases, meta tags, type-safety, data structures, generic types, multiple-inheritance, asynchronous/futures, memory management, state management, and a read-execute-print-loop. All of these should be noticably easier to code in vxlisp than their original languages.
+3. vxlisp is a full featured language including documentation, test cases, meta tags, type-safety, data structures, generic types, multiple-inheritance, asynchronous/futures, memory management, state management, debugging tools, and a read-execute-print-loop. All of these should be noticably easier to code in vxlisp than their original languages.
 
 4. vxlisp is a simple data structure similar to JSON, but it is simpler and more consistent while also being able to describe complex objects and functions.
 
@@ -74,51 +76,71 @@
 
 2. vxlisp compliments other languages instead of replacing them. Instead it is meant to interact with existing platforms and languages. vxlisp generates plain old native objects that are written into your existing native project. Write as much native code as you like inside or outside vxlisp (though native code is not cross-platform).
 
-* Write once, run anywhere is a pipedream. How can it possibly work? - Most new languages try to write a platform along with the language. Instead I want to write a language that can compile to any other language or platform with identical results.
+* Write once, run anywhere is a pipedream. How can it possibly work?
 
-* New languages rarely work. Why write one? - To improve the art. I find most languages to have ugly, confusing syntax and poor manageability. I hope to point out that this need not be true. vxlisp represents my wishlist of things that I have liked and disliked about other languages. Frankly, though its only in its infancy, I'm very pleased with the result.
+Most new languages try to write a platform along with the language. Instead I want to write a language that can compile to any other language or platform with identical results.
+
+* New languages rarely work. Why write one?
+
+To improve the art. I find most languages to have ugly, confusing syntax, and poor manageability. I hope to point out that this need not be true. vxlisp represents my wishlist of things that I have liked and disliked about other languages. Frankly, though its only in its infancy, I'm very pleased with the result.
 
 * What are its best use cases?
 
-1. Collaboration - It should be suited for collaborative work where support, test team, management AND developers need transparency into a cross platform application.
+1. Collaboration - It should be suited for collaborative work where outsourcers, support, test team, management AND developers need transparency into a cross platform application. In my mind, this is every project worth a damn.
 
-2. Cross-platform - Obviously, write-once, run-anywhere is good for crossplatform work.
+2. Cross-platform - Obviously, write-once, run-anywhere is good for crossplatform work. Why is anyone writing applications that are not cross-platform?
 
-3. Learning Language - I learned programming using BASIC on an Apple II. In college I learned PASCAL. These are considered learning languages but they are still fairly complex. vxlisp is consistent and readable. It promotes small code snippets, documentation and test cases.
+3. Learning Language - I learned programming using BASIC on an Apple II. In college I learned PASCAL. These are considered learning languages but they are still fairly complex. vxlisp is consistent and readable. It promotes small code snippets, documentation and test cases. It is well suited to the classroom.
 
-4. Difficult Languages - It could be helpful for developers who wants to work on platforms that require languages they are uncomfortable with, e.g. WebAssembly, Unreal Engine, or IOS.
+4. Difficult Languages - It could be helpful for developers who wants to work on platforms that require languages they are uncomfortable with, e.g. WebAssembly, Unreal Engine, Unity, or IOS.
 
-* Everyone has a bias. What is yours? - I admit it. I love Functional Programming and Test driven development. I dislike Imperitive programming, and Object-Oriented programming. I also dislike vendor lockin, large corporations, and I am horrified by the probable impact of AI.
+* Everyone has a bias. What is yours?
 
-* Why Functional Programming instead of Object-Oriented? - The best example is the development of SOAP and REST web services. SOAP was the original, Object-Oriented, web service solution similar to .dll linking. It had sophiticated type binding and state management. REST on the other hand was a very simplistic system similar to web page calls. Soon the practical complexities overwhelmed SOAP and REST grew to replace it. Simplicity makes a better product in the end.
+I admit it. I love Functional Programming and Test driven development. I dislike Imperitive programming, and Object-Oriented programming. I also dislike vendor lockin, large corporations, and I am horrified by the probable impact of AI.
 
-* What are your inspirations? - Obviously, Lisp. I was introduced to it in 1987 (in AI programming of all things) and it stuck with me. More recently: JavaScript, Typescript, Scala, Clojure, Clojurescript, Elm, and an obscure XML programming language called NuXML.
+* Why Functional Programming instead of Object-Oriented?
 
-* What are your first principles? - Simplify, Simplify, Simplify. Manageability > Readability > Functionality > Performance. Simplicity requires the removal of dependencies wherever possible. Mass production and reliability can only be maintained through simpilfication.
+The best example is the development of SOAP and REST web services. SOAP was the original, Object-Oriented, web service solution similar to .dll linking. It had sophiticated type binding and state management. REST on the other hand was a very simplistic system similar to web page calls. Soon the practical complexities overwhelmed SOAP and REST grew to replace it. Simplicity makes a better product in the end.
 
-* What are the key features of the language? - Open Source. Language is a data structure. Compact consistent syntax. Interoperable with native code. All-in-one: code, test, documentation. Everything is the same data structure. Test cases in documentation. Simplified handling of many of the most ugly coding patterns including generics, exceptions, null, inheritence, asynchronous code, constructors, immutability, thread-safety, overloading, and context. Few dependencies and Plain old native objects.
+* What are your inspirations?
 
-* Are there any unusual features of the language? - Built in Webserver, Documentation builder, Test suite, Test coverage. BigO coverage. Simplified generic handling. Simplified context management. Functions are first class objects. Simple access to type data. Universal serialization/deserialization. Memory Pooling. State Management. File parsing. Repl. Programmatic Html/Xml generation. Function level permissions. Few restricted characters. Free use of whitespace. Option to write code from documentation. Potential to easily write code to unusual platforms like Html Canvas or WebAssembly. Potential to simultaneously write native android and IOS without middleware like react native.
+Obviously, Lisp. I was introduced to it in 1987 (in AI programming of all things) and it stuck with me. More recently: JavaScript, Typescript, Scala, Clojure, Clojurescript, Elm, and an obscure XML programming language called NuXML.
+
+* What are your first principles?
+
+1. Simplify, Simplify, Simplify. Simplicity requires the removal of dependencies wherever possible. The best part is no part. Mass production and reliability can only be maintained through simpilfication.
+
+2. Manageability > Readability > Functionality > Performance. 
+
+* What are the key features of the language?
+
+Open Source. Language is a data structure. Compact consistent syntax. Interoperable with native code. All-in-one: code, test, documentation. Everything is the same data structure. Test cases in documentation. Simplified handling of many of the most ugly coding patterns including generics, exceptions, null, inheritence, asynchronous code, constructors, immutability, thread-safety, overloading, and context. Few dependencies and Plain old native objects.
+
+* Are there any unusual features of the language?
+
+Built in Webserver, Documentation builder, Test suite, Test coverage. BigO coverage. Simplified generic handling. Simplified context management. Functions are first class objects. Simple access to type data. Universal serialization/deserialization. Memory Pooling (in development). State Management (in development). File parsing. Repl. Macros. Programmatic Html/Xml generation. Built in debugging tools. Function level permissions. Few restricted characters. Free use of whitespace. Option to write code from documentation. Potential to easily write code to unusual platforms like Html Canvas or WebAssembly. Potential to simultaneously write native android and IOS without middleware like react native.
 
 * Alright, that was a lot of Pros. What are the Cons?
 
 1. Tooling - Since vxlisp compiles to other languages, it relies on thoses languages for runtime debugging besides basic logging. You may find that indirection overwhelms the benefits.
 
-2. Optimal Performance - Though vxlisp compiles to native code, everything (including primitives) is treated as an object, so a certain amount of extra processing and heap usage is added to even low-level operations. Memory pooling may mitigate this cost, but I recommend using optimized native code for operations that require maximum performance.
+2. Optimal Performance - Though vxlisp compiles to native code, everything (including primitives) is treated as an object, so a certain amount of extra processing and heap usage is added to even low-level operations. Memory pooling may mitigate this cost, but I recommend using optimized native libraries for operations that require maximum performance.
 
 3. Overkill - vxlisp is focused on making complex cases easier. Conversely, it is possible that simple cases may seem overbuilt with features you don't need, e.g. Helloworld programs.
 
-* What does a function that returns Hello World look like? -
+* What does a function that returns Hello World look like?
      (func foo : string
       "Hello World")
 
-* What does a function that adds 2 integers look like? -
+* What does a function that adds 2 integers look like?
+
      (func foo : int
       [arg1 : int
        arg2 : int]
       (+ arg1 arg2))
 
-* What does type declaration look like? -
+* What does type declaration look like?
+
     (type personlist : list
      :allowtypes [person]
      :doc "This is a list of person")
@@ -134,7 +156,8 @@
                   kidmap  : personmap  :doc "Map of kids"]
      :doc "This is a person structure")
 
-* How do I make new people? -
+* How do I make new people?
+
     (const jack : person
      (person :name "Jack" :age 10))
 
@@ -158,16 +181,21 @@
 
  Alternatively, you can use the longhand (new person) instead of (person)
 
-* How do I access properties from types? -
-    (:0 kidlist)   // Get the first value of kidlist aka jack
+* How do I access properties from types?
+
+    (:1 kidlist)   // Get the first value of kidlist aka jack
     (:Jack kidmap) // Get jack from kidmap
     (:name mary)   // Get Mary's name
 
  Alternatively, you can use the longhand versions:
-    (any<-list   kidlist 0)
+    (any<-list   kidlist 1)
     (any<-map    kidmap "Jack")
     (any<-struct person "name")
 
-* Why did you choose unusual naming conventions? - My goal was to write a language targetting beginner programmers with no particular bias toward an existing language. Generally, when searching for a function you already know the return type, so I place return type first to make it easy for type ahead or other sorting to find the return type I seek.
+* Why did you choose unusual naming conventions?
 
-* Overall, how do you feel about vxlisp? - I've been writing code since 1980 and have seen a lot of languages come and go. vxlisp brings together so many concepts that I have struggled with in the past, so it is a pleasure to work with. It feels like my Magnum Opus, and I feel it's muse calling to me. It feels damn good.
+My goal was to write a language targetting beginner programmers with no particular bias toward an existing language. Generally, when searching for a function you already know the return type, so I place return type first to make it easy for type ahead or other sorting to find the return type I seek.
+
+* Overall, how do you feel about vxlisp?
+
+I've been writing code since 1980 and have seen a lot of languages come and go. vxlisp brings together so many concepts that I have struggled with in the past, so it is a pleasure to work with. It feels like my Magnum Opus, and I feel it's muse calling to me. It feels damn good.

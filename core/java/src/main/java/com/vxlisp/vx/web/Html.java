@@ -104,7 +104,7 @@ public final class Html {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new body) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new body) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -112,7 +112,7 @@ public final class Html {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new body) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new body) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -124,12 +124,12 @@ public final class Html {
               ischanged = true;
               vx_p_nodes = (Html.Type_divchildlist)valsub;
             } else {
-              msg = Core.vx_msg_error("(new body :nodes " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new body :nodes " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new body) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new body) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -296,7 +296,7 @@ public final class Html {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new details) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new details) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -304,7 +304,7 @@ public final class Html {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new details) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new details) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -319,7 +319,7 @@ public final class Html {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new details :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new details :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -329,7 +329,7 @@ public final class Html {
               ischanged = true;
               vx_p_style = (Html.Type_style)valsub;
             } else {
-              msg = Core.vx_msg_error("(new details :style " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new details :style " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -339,7 +339,7 @@ public final class Html {
               ischanged = true;
               vx_p_summary = (Html.Type_divchildlist)valsub;
             } else {
-              msg = Core.vx_msg_error("(new details :summary " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new details :summary " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -349,12 +349,12 @@ public final class Html {
               ischanged = true;
               vx_p_nodes = (Html.Type_divchildlist)valsub;
             } else {
-              msg = Core.vx_msg_error("(new details :nodes " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new details :nodes " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new details) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new details) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -523,7 +523,7 @@ public final class Html {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new div) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new div) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -531,7 +531,7 @@ public final class Html {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new div) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new div) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -546,7 +546,7 @@ public final class Html {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new div :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new div :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -556,7 +556,7 @@ public final class Html {
               ischanged = true;
               vx_p_style = (Html.Type_style)valsub;
             } else {
-              msg = Core.vx_msg_error("(new div :style " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new div :style " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -566,12 +566,12 @@ public final class Html {
               ischanged = true;
               vx_p_nodes = (Html.Type_divchildlist)valsub;
             } else {
-              msg = Core.vx_msg_error("(new div :nodes " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new div :nodes " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new div) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new div) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -776,10 +776,10 @@ public final class Html {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_error("vx/web/html/divchildlist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/web/html/divchildlist", "invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_error("vx/web/html/divchildlist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/web/html/divchildlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -902,10 +902,10 @@ public final class Html {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_error("vx/web/html/divlist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/web/html/divlist", "invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_error("vx/web/html/divlist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/web/html/divlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -1041,7 +1041,7 @@ public final class Html {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new footer) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new footer) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -1049,7 +1049,7 @@ public final class Html {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new footer) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new footer) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -1061,12 +1061,12 @@ public final class Html {
               ischanged = true;
               vx_p_nodes = (Html.Type_divchildlist)valsub;
             } else {
-              msg = Core.vx_msg_error("(new footer :nodes " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new footer :nodes " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new footer) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new footer) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1222,7 +1222,7 @@ public final class Html {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new h1) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new h1) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -1236,7 +1236,7 @@ public final class Html {
               ischanged = true;
               vx_p_text = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new h1) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new h1) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -1251,7 +1251,7 @@ public final class Html {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new h1 :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new h1 :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1261,7 +1261,7 @@ public final class Html {
               ischanged = true;
               vx_p_style = (Html.Type_style)valsub;
             } else {
-              msg = Core.vx_msg_error("(new h1 :style " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new h1 :style " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1274,12 +1274,12 @@ public final class Html {
               ischanged = true;
               vx_p_text = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new h1 :text " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new h1 :text " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new h1) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new h1) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1437,7 +1437,7 @@ public final class Html {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new h2) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new h2) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -1451,7 +1451,7 @@ public final class Html {
               ischanged = true;
               vx_p_text = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new h2) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new h2) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -1466,7 +1466,7 @@ public final class Html {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new h2 :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new h2 :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1476,7 +1476,7 @@ public final class Html {
               ischanged = true;
               vx_p_style = (Html.Type_style)valsub;
             } else {
-              msg = Core.vx_msg_error("(new h2 :style " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new h2 :style " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1489,12 +1489,12 @@ public final class Html {
               ischanged = true;
               vx_p_text = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new h2 :text " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new h2 :text " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new h2) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new h2) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1652,7 +1652,7 @@ public final class Html {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new h3) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new h3) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -1666,7 +1666,7 @@ public final class Html {
               ischanged = true;
               vx_p_text = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new h3) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new h3) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -1681,7 +1681,7 @@ public final class Html {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new h3 :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new h3 :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1691,7 +1691,7 @@ public final class Html {
               ischanged = true;
               vx_p_style = (Html.Type_style)valsub;
             } else {
-              msg = Core.vx_msg_error("(new h3 :style " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new h3 :style " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1704,12 +1704,12 @@ public final class Html {
               ischanged = true;
               vx_p_text = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new h3 :text " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new h3 :text " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new h3) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new h3) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1849,7 +1849,7 @@ public final class Html {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new head) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new head) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -1857,7 +1857,7 @@ public final class Html {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new head) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new head) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -1869,12 +1869,12 @@ public final class Html {
               ischanged = true;
               vx_p_nodes = (Html.Type_headchildlist)valsub;
             } else {
-              msg = Core.vx_msg_error("(new head :nodes " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new head :nodes " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new head) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new head) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -2077,10 +2077,10 @@ public final class Html {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_error("vx/web/html/headchildlist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/web/html/headchildlist", "invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_error("vx/web/html/headchildlist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/web/html/headchildlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -2245,7 +2245,7 @@ public final class Html {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new html) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new html) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -2253,7 +2253,7 @@ public final class Html {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new html) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new html) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -2268,7 +2268,7 @@ public final class Html {
               ischanged = true;
               vx_p_lang = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new html :lang " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new html :lang " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2278,7 +2278,7 @@ public final class Html {
               ischanged = true;
               vx_p_head = (Html.Type_head)valsub;
             } else {
-              msg = Core.vx_msg_error("(new html :head " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new html :head " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2288,7 +2288,7 @@ public final class Html {
               ischanged = true;
               vx_p_body = (Html.Type_body)valsub;
             } else {
-              msg = Core.vx_msg_error("(new html :body " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new html :body " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2298,12 +2298,12 @@ public final class Html {
               ischanged = true;
               vx_p_footer = (Html.Type_footer)valsub;
             } else {
-              msg = Core.vx_msg_error("(new html :footer " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new html :footer " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new html) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new html) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -2459,7 +2459,7 @@ public final class Html {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new meta) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new meta) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -2467,7 +2467,7 @@ public final class Html {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new meta) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new meta) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -2482,7 +2482,7 @@ public final class Html {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new meta :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new meta :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2492,7 +2492,7 @@ public final class Html {
               ischanged = true;
               vx_p_style = (Html.Type_style)valsub;
             } else {
-              msg = Core.vx_msg_error("(new meta :style " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new meta :style " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2505,12 +2505,12 @@ public final class Html {
               ischanged = true;
               vx_p_charset = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new meta :charset " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new meta :charset " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new meta) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new meta) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -2651,7 +2651,7 @@ public final class Html {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new node) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new node) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -2659,7 +2659,7 @@ public final class Html {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new node) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new node) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -2674,7 +2674,7 @@ public final class Html {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new node :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new node :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2684,12 +2684,12 @@ public final class Html {
               ischanged = true;
               vx_p_style = (Html.Type_style)valsub;
             } else {
-              msg = Core.vx_msg_error("(new node :style " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new node :style " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new node) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new node) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -2815,10 +2815,10 @@ public final class Html {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_error("vx/web/html/nodelist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/web/html/nodelist", "invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_error("vx/web/html/nodelist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/web/html/nodelist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -2972,7 +2972,7 @@ public final class Html {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new p) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new p) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -2986,7 +2986,7 @@ public final class Html {
               ischanged = true;
               vx_p_text = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new p) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new p) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -3001,7 +3001,7 @@ public final class Html {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new p :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new p :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -3011,7 +3011,7 @@ public final class Html {
               ischanged = true;
               vx_p_style = (Html.Type_style)valsub;
             } else {
-              msg = Core.vx_msg_error("(new p :style " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new p :style " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -3024,12 +3024,12 @@ public final class Html {
               ischanged = true;
               vx_p_text = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new p :text " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new p :text " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new p) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new p) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -3126,7 +3126,7 @@ public final class Html {
           Core.Type_string castval = (Core.Type_string)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(propmap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_from_error("(propmap) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -3164,7 +3164,7 @@ public final class Html {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_from_error(":keyexpected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -3174,7 +3174,7 @@ public final class Html {
           } else if (valsub instanceof String) {
             valany = Core.t_string.vx_new(valsub);;
           } else {
-            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_from_error(":invalidkeyvalue: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -3320,7 +3320,7 @@ public final class Html {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new style) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new style) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -3328,7 +3328,7 @@ public final class Html {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new style) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new style) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -3343,7 +3343,7 @@ public final class Html {
               ischanged = true;
               vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new style :name " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new style :name " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -3353,12 +3353,12 @@ public final class Html {
               ischanged = true;
               vx_p_props = (Html.Type_propmap)valsub;
             } else {
-              msg = Core.vx_msg_error("(new style :props " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new style :props " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new style) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new style) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -3484,10 +3484,10 @@ public final class Html {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_error("vx/web/html/stylelist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/web/html/stylelist", "invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_error("vx/web/html/stylelist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/web/html/stylelist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -3580,7 +3580,7 @@ public final class Html {
           Html.Type_style castval = (Html.Type_style)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(stylemap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_from_error("(stylemap) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -3618,7 +3618,7 @@ public final class Html {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_from_error(":keyexpected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -3628,7 +3628,7 @@ public final class Html {
           } else if (valsub instanceof Html.Type_style) {
             valany = (Html.Type_style)valsub;
           } else {
-            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_from_error(":invalidkeyvalue: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -3816,7 +3816,7 @@ public final class Html {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new stylesheet) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new stylesheet) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -3824,7 +3824,7 @@ public final class Html {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new stylesheet) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new stylesheet) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -3839,7 +3839,7 @@ public final class Html {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new stylesheet :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new stylesheet :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -3849,7 +3849,7 @@ public final class Html {
               ischanged = true;
               vx_p_style = (Html.Type_style)valsub;
             } else {
-              msg = Core.vx_msg_error("(new stylesheet :style " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new stylesheet :style " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -3862,7 +3862,7 @@ public final class Html {
               ischanged = true;
               vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new stylesheet :name " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new stylesheet :name " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -3872,7 +3872,7 @@ public final class Html {
               ischanged = true;
               vx_p_styles = (Html.Type_stylelist)valsub;
             } else {
-              msg = Core.vx_msg_error("(new stylesheet :styles " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new stylesheet :styles " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -3882,12 +3882,12 @@ public final class Html {
               ischanged = true;
               vx_p_stylemap = (Html.Type_stylemap)valsub;
             } else {
-              msg = Core.vx_msg_error("(new stylesheet :stylemap " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new stylesheet :stylemap " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new stylesheet) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new stylesheet) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -4058,7 +4058,7 @@ public final class Html {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new table) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new table) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -4066,7 +4066,7 @@ public final class Html {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new table) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new table) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -4081,7 +4081,7 @@ public final class Html {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new table :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new table :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -4091,7 +4091,7 @@ public final class Html {
               ischanged = true;
               vx_p_style = (Html.Type_style)valsub;
             } else {
-              msg = Core.vx_msg_error("(new table :style " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new table :style " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -4101,7 +4101,7 @@ public final class Html {
               ischanged = true;
               vx_p_tbody = (Html.Type_tbody)valsub;
             } else {
-              msg = Core.vx_msg_error("(new table :tbody " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new table :tbody " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -4111,12 +4111,12 @@ public final class Html {
               ischanged = true;
               vx_p_thead = (Html.Type_thead)valsub;
             } else {
-              msg = Core.vx_msg_error("(new table :thead " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new table :thead " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new table) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new table) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -4285,7 +4285,7 @@ public final class Html {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new tbody) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new tbody) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -4293,7 +4293,7 @@ public final class Html {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new tbody) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new tbody) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -4308,7 +4308,7 @@ public final class Html {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new tbody :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new tbody :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -4318,7 +4318,7 @@ public final class Html {
               ischanged = true;
               vx_p_style = (Html.Type_style)valsub;
             } else {
-              msg = Core.vx_msg_error("(new tbody :style " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new tbody :style " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -4328,12 +4328,12 @@ public final class Html {
               ischanged = true;
               vx_p_nodes = (Html.Type_trlist)valsub;
             } else {
-              msg = Core.vx_msg_error("(new tbody :nodes " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new tbody :nodes " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new tbody) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new tbody) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -4501,7 +4501,7 @@ public final class Html {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new td) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new td) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -4509,7 +4509,7 @@ public final class Html {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new td) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new td) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -4524,7 +4524,7 @@ public final class Html {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new td :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new td :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -4534,7 +4534,7 @@ public final class Html {
               ischanged = true;
               vx_p_style = (Html.Type_style)valsub;
             } else {
-              msg = Core.vx_msg_error("(new td :style " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new td :style " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -4544,12 +4544,12 @@ public final class Html {
               ischanged = true;
               vx_p_nodes = (Html.Type_divchildlist)valsub;
             } else {
-              msg = Core.vx_msg_error("(new td :nodes " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new td :nodes " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new td) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new td) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -4676,10 +4676,10 @@ public final class Html {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_error("vx/web/html/tdlist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/web/html/tdlist", "invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_error("vx/web/html/tdlist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/web/html/tdlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -4843,7 +4843,7 @@ public final class Html {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new thead) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new thead) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -4851,7 +4851,7 @@ public final class Html {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new thead) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new thead) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -4866,7 +4866,7 @@ public final class Html {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new thead :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new thead :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -4876,7 +4876,7 @@ public final class Html {
               ischanged = true;
               vx_p_style = (Html.Type_style)valsub;
             } else {
-              msg = Core.vx_msg_error("(new thead :style " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new thead :style " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -4886,12 +4886,12 @@ public final class Html {
               ischanged = true;
               vx_p_nodes = (Html.Type_trlist)valsub;
             } else {
-              msg = Core.vx_msg_error("(new thead :nodes " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new thead :nodes " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new thead) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new thead) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -5046,7 +5046,7 @@ public final class Html {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new title) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new title) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -5054,7 +5054,7 @@ public final class Html {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new title) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new title) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -5069,7 +5069,7 @@ public final class Html {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new title :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new title :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -5079,7 +5079,7 @@ public final class Html {
               ischanged = true;
               vx_p_style = (Html.Type_style)valsub;
             } else {
-              msg = Core.vx_msg_error("(new title :style " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new title :style " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -5092,12 +5092,12 @@ public final class Html {
               ischanged = true;
               vx_p_text = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new title :text " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new title :text " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new title) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new title) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -5265,7 +5265,7 @@ public final class Html {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new tr) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new tr) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -5273,7 +5273,7 @@ public final class Html {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new tr) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new tr) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -5288,7 +5288,7 @@ public final class Html {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new tr :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new tr :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -5298,7 +5298,7 @@ public final class Html {
               ischanged = true;
               vx_p_style = (Html.Type_style)valsub;
             } else {
-              msg = Core.vx_msg_error("(new tr :style " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new tr :style " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -5308,12 +5308,12 @@ public final class Html {
               ischanged = true;
               vx_p_nodes = (Html.Type_tdlist)valsub;
             } else {
-              msg = Core.vx_msg_error("(new tr :nodes " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new tr :nodes " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new tr) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new tr) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -5440,10 +5440,10 @@ public final class Html {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_error("vx/web/html/trlist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/web/html/trlist", "invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_error("vx/web/html/trlist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/web/html/trlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }

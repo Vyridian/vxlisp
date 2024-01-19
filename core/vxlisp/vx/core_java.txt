@@ -80,7 +80,15 @@
   }
 
   public static Core.Type_any[] arrayany_from_anylist(final Core.Type_anylist list) {
-    return list.vx_list().toArray(new Core.Type_any[0]);
+    List<Core.Type_any> listany = list.vx_list();
+    Core.Type_msgblock msgblock = list.vx_msgblock();
+    if (msgblock == null) {
+    } else if (msgblock != Core.e_msgblock) {
+     listany = new ArrayList<>(listany);
+     listany.add(msgblock);
+    }
+    Core.Type_any[] output = listany.toArray(new Core.Type_any[0]);
+    return output;
   }
 
   @SafeVarargs
@@ -236,6 +244,13 @@
   // vx_boolean_from_string_starts(string, string)
   public static boolean vx_boolean_from_string_starts(String text, String starts) {
     return text.startsWith(starts);
+  }
+
+  @SuppressWarnings("unchecked")
+  public static <T extends Core.Type_any> T vx_copy(T value, Core.Type_any arg) {
+   Core.Type_any anyvalue = value.vx_copy(arg);
+   T output = (T)anyvalue;
+   return output;
   }
 
   // vx_eqeq(any, any)
@@ -448,24 +463,6 @@
     return output;
   }
 
-  // vx_msg_error
-  public static Type_msg vx_msg_error(final String text) {
-    Class_msg output = new Class_msg();
-    output.vx_p_text = Core.vx_new_string(text);
-    output.vx_p_severity = Core.c_msg_severe;
-    return output;
-  }
-
-  // vx_msg_error
-  public static Type_msg vx_msg_error(final String path, final String code, final Core.Type_any detail) {
-    Class_msg output = new Class_msg();
-    output.vx_p_path = Core.vx_new_string(path);
-    output.vx_p_code = Core.vx_new_string(code);
-    output.vx_p_detail = detail;
-    output.vx_p_severity = Core.c_msg_severe;
-    return output;
-  }
-
   // vx_msg_from_exception
   public static Type_msg vx_msg_from_exception(final String path, final Exception err) {
     Class_msg output = new Class_msg();
@@ -474,6 +471,25 @@
     output.vx_p_severity = Core.c_msg_severe;
     output.err = err;
     Core.vx_log(output);
+    return output;
+  }
+
+
+  // vx_msg_from_error
+  public static Type_msg vx_msg_from_error(final String text) {
+    Class_msg output = new Class_msg();
+    output.vx_p_text = Core.vx_new_string(text);
+    output.vx_p_severity = Core.c_msg_severe;
+    return output;
+  }
+
+  // vx_msg_from_error
+  public static Type_msg vx_msg_from_error(final String path, final String code, final Core.Type_any detail) {
+    Class_msg output = new Class_msg();
+    output.vx_p_path = Core.vx_new_string(path);
+    output.vx_p_code = Core.vx_new_string(code);
+    output.vx_p_detail = detail;
+    output.vx_p_severity = Core.c_msg_severe;
     return output;
   }
 
@@ -565,7 +581,15 @@
       }
     } else if (value instanceof Core.Type_string) {
       Core.Type_string valstring = Core.f_any_from_any(Core.t_string, value);
-      output = "\"" + valstring.vx_string() + "\"";
+      String sval = "\"" + valstring.vx_string() + "\"";
+      if (valstring.vx_msgblock() != null) {
+        String msgtext = Core.vx_string_from_any_indent(valstring.vx_msgblock(), indent, linefeed);
+        output  = "\n" + indenttext + "(string";
+        output += "\n" + indenttext + " " + sval;
+        output += "\n" + indenttext + " " + msgtext + ")";
+      } else {
+        output = sval;
+      }
     } else if (value instanceof Core.vx_Type_const) {
       Core.vx_Type_const constvalue = (Core.vx_Type_const)value;
       Core.Type_constdef constdef = constvalue.vx_constdef();
@@ -581,16 +605,15 @@
       Core.Type_typedef typedef = vallist.vx_typedef();
       Core.Type_string typedefname = typedef.name();
       String stypedefname = typedefname.vx_string();
-      int indentint = indent;
-      indentint += 1;
+      int indentint = indent + 1;
       List<Core.Type_any> listval = vallist.vx_list();
       for (Core.Type_any valsub : listval) {
         String valtext = Core.vx_string_from_any_indent(valsub, indentint, linefeed);
         output += "\n " + indenttext + valtext;
       }
       if (vallist.vx_msgblock() != null) {
-        String msgtext = Core.vx_string_from_any_indent(vallist.vx_msgblock(), indentint, linefeed);
-        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+        String msgtext = Core.vx_string_from_any_indent(vallist.vx_msgblock(), indent, linefeed);
+        output += "\n" + indenttext + msgtext;
       }
       output = "(" + stypedefname + output + ")";
     } else if (value instanceof Core.Type_map) {
@@ -598,13 +621,14 @@
       Core.Type_typedef typedef = valmap.vx_typedef();
       Core.Type_string typedefname = typedef.name();
       String stypedefname = typedefname.vx_string();
-      int indentint = indent;
-      indentint += 2;
+      int indentint = indent + 2;
       Map<String, Core.Type_any> mapval = valmap.vx_map();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         Core.Type_any valsub = mapval.get(key);
-        if (!key.startsWith(":")) {
+		if (key.indexOf(" ") >= 0) {
+		  key = "\"" + key + "\"";
+        } else if (!key.startsWith(":")) {
           key = ":" + key;
         }
         String strval = Core.vx_string_from_any_indent(valsub, indentint, linefeed);
@@ -616,8 +640,8 @@
         output += "\n" + indenttext + " " + key + strval;
       }
       if (valmap.vx_msgblock() != null) {
-        String msgtext = Core.vx_string_from_any_indent(valmap.vx_msgblock(), indentint, linefeed);
-        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+        String msgtext = Core.vx_string_from_any_indent(valmap.vx_msgblock(), indent, linefeed);
+        output += "\n" + indenttext + msgtext;
       }
       output = "(" + stypedefname + output + ")";
     } else if (value instanceof Core.Type_struct) {
@@ -647,8 +671,8 @@
       if (stypedefname == "msg") {
       } else if (stypedefname == "msgblock") {
       } else if (valstruct.vx_msgblock() != null) {
-        String msgtext2 = Core.vx_string_from_any_indent(valstruct.vx_msgblock(), indentint2, linefeed);
-        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext2;
+        String msgtext2 = Core.vx_string_from_any_indent(valstruct.vx_msgblock(), indent+1, linefeed);
+        output += "\n " + indenttext + msgtext2;
       }
       output = "(" + stypedefname + output + ")";
     } else if (value instanceof Core.Type_func) {
@@ -658,10 +682,16 @@
       output = funcdefname.vx_string();
       if (valfunc.vx_msgblock() != null) {
         String msgtext = Core.vx_string_from_any_indent(valfunc.vx_msgblock(), indent, linefeed);
-        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+        output += "\n" + indenttext + msgtext;
       }
       output = "(" + output + ")";
     }
+    return output;
+  }
+
+  public static Core.Type_string vx_string_from_any_indent(Core.Type_any value, Core.Type_int indent, Core.Type_boolean linefeed) {
+    String soutput = Core.vx_string_from_any_indent(value, indent.vx_int(), linefeed.vx_boolean());
+    Core.Type_string output = Core.vx_new_string(soutput);
     return output;
   }
 

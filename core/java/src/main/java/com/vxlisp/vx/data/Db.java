@@ -91,7 +91,7 @@ public final class Db {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new db) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new db) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -99,7 +99,7 @@ public final class Db {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new db) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new db) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -114,12 +114,12 @@ public final class Db {
               ischanged = true;
               vx_p_dbid = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new db :dbid " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new db :dbid " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new db) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new db) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -300,7 +300,7 @@ public final class Db {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new dbcell) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new dbcell) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -308,7 +308,7 @@ public final class Db {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new dbcell) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new dbcell) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -323,7 +323,7 @@ public final class Db {
               ischanged = true;
               vx_p_dbcellid = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new dbcell :dbcellid " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbcell :dbcellid " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -333,7 +333,7 @@ public final class Db {
               ischanged = true;
               vx_p_dbcellmap = (Db.Type_dbcellmap)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dbcell :dbcellmap " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbcell :dbcellmap " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -343,7 +343,7 @@ public final class Db {
               ischanged = true;
               vx_p_dbfieldmap = (Db.Type_dbfieldmap)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dbcell :dbfieldmap " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbcell :dbfieldmap " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -353,7 +353,7 @@ public final class Db {
               ischanged = true;
               vx_p_dbparent = (Db.Type_dbcell)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dbcell :dbparent " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbcell :dbparent " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -363,12 +363,12 @@ public final class Db {
               ischanged = true;
               vx_p_dbtable = (Db.Type_dbtable)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dbcell :dbtable " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbcell :dbtable " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new dbcell) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new dbcell) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -467,7 +467,7 @@ public final class Db {
           Db.Type_dbcell castval = (Db.Type_dbcell)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(dbcellmap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_from_error("(dbcellmap) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -505,7 +505,7 @@ public final class Db {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_from_error(":keyexpected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -515,7 +515,7 @@ public final class Db {
           } else if (valsub instanceof Db.Type_dbcell) {
             valany = (Db.Type_dbcell)valsub;
           } else {
-            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_from_error(":invalidkeyvalue: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -675,7 +675,7 @@ public final class Db {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new dbfield) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new dbfield) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -683,7 +683,7 @@ public final class Db {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new dbfield) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new dbfield) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -698,7 +698,7 @@ public final class Db {
               ischanged = true;
               vx_p_dbfieldid = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new dbfield :dbfieldid " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbfield :dbfieldid " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -708,7 +708,7 @@ public final class Db {
               ischanged = true;
               vx_p_type = (Core.Type_any)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dbfield :type " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbfield :type " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -718,12 +718,12 @@ public final class Db {
               ischanged = true;
               vx_p_value = (Core.Type_any)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dbfield :value " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbfield :value " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new dbfield) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new dbfield) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -820,7 +820,7 @@ public final class Db {
           Db.Type_dbfield castval = (Db.Type_dbfield)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(dbfieldmap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_from_error("(dbfieldmap) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -858,7 +858,7 @@ public final class Db {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_from_error(":keyexpected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -868,7 +868,7 @@ public final class Db {
           } else if (valsub instanceof Db.Type_dbfield) {
             valany = (Db.Type_dbfield)valsub;
           } else {
-            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_from_error(":invalidkeyvalue: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -1077,7 +1077,7 @@ public final class Db {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new dblink) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new dblink) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -1085,7 +1085,7 @@ public final class Db {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new dblink) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new dblink) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -1097,7 +1097,7 @@ public final class Db {
               ischanged = true;
               vx_p_fromid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dblink :fromid " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dblink :fromid " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1107,12 +1107,12 @@ public final class Db {
               ischanged = true;
               vx_p_toid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dblink :toid " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dblink :toid " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new dblink) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new dblink) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1238,10 +1238,10 @@ public final class Db {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_error("vx/data/db/dblinklist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/data/db/dblinklist", "invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_error("vx/data/db/dblinklist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/data/db/dblinklist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -1378,7 +1378,7 @@ public final class Db {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new dbnode) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new dbnode) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -1386,7 +1386,7 @@ public final class Db {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new dbnode) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new dbnode) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -1398,7 +1398,7 @@ public final class Db {
               ischanged = true;
               vx_p_dbid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dbnode :dbid " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbnode :dbid " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1408,12 +1408,12 @@ public final class Db {
               ischanged = true;
               vx_p_links = (Db.Type_dblinklist)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dbnode :links " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbnode :links " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new dbnode) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new dbnode) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1595,7 +1595,7 @@ public final class Db {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new dbnote) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new dbnote) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -1603,7 +1603,7 @@ public final class Db {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new dbnote) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new dbnote) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -1615,7 +1615,7 @@ public final class Db {
               ischanged = true;
               vx_p_dbid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dbnote :dbid " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbnote :dbid " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1625,7 +1625,7 @@ public final class Db {
               ischanged = true;
               vx_p_valid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dbnote :valid " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbnote :valid " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1635,7 +1635,7 @@ public final class Db {
               ischanged = true;
               vx_p_noteid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dbnote :noteid " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbnote :noteid " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1645,7 +1645,7 @@ public final class Db {
               ischanged = true;
               vx_p_valueid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dbnote :valueid " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbnote :valueid " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1658,12 +1658,12 @@ public final class Db {
               ischanged = true;
               vx_p_value = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new dbnote :value " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbnote :value " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new dbnote) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new dbnote) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1834,7 +1834,7 @@ public final class Db {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new dbtable) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new dbtable) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -1842,7 +1842,7 @@ public final class Db {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new dbtable) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new dbtable) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -1857,7 +1857,7 @@ public final class Db {
               ischanged = true;
               vx_p_dbtableid = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new dbtable :dbtableid " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbtable :dbtableid " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1867,7 +1867,7 @@ public final class Db {
               ischanged = true;
               vx_p_db = (Db.Type_db)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dbtable :db " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbtable :db " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1877,7 +1877,7 @@ public final class Db {
               ischanged = true;
               vx_p_dbcellmap = (Db.Type_dbcellmap)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dbtable :dbcellmap " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbtable :dbcellmap " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1887,12 +1887,12 @@ public final class Db {
               ischanged = true;
               vx_p_dbfieldmap = (Db.Type_dbfieldmap)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dbtable :dbfieldmap " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbtable :dbfieldmap " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new dbtable) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new dbtable) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -2090,7 +2090,7 @@ public final class Db {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new dbvalue) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new dbvalue) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -2098,7 +2098,7 @@ public final class Db {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new dbvalue) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new dbvalue) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -2110,7 +2110,7 @@ public final class Db {
               ischanged = true;
               vx_p_dbid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dbvalue :dbid " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbvalue :dbid " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2120,7 +2120,7 @@ public final class Db {
               ischanged = true;
               vx_p_fromid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dbvalue :fromid " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbvalue :fromid " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2130,7 +2130,7 @@ public final class Db {
               ischanged = true;
               vx_p_toid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dbvalue :toid " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbvalue :toid " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2140,7 +2140,7 @@ public final class Db {
               ischanged = true;
               vx_p_noteid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dbvalue :noteid " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbvalue :noteid " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2150,7 +2150,7 @@ public final class Db {
               ischanged = true;
               vx_p_valid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_error("(new dbvalue :valid " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbvalue :valid " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2163,12 +2163,12 @@ public final class Db {
               ischanged = true;
               vx_p_valtext = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new dbvalue :valtext " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new dbvalue :valtext " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new dbvalue) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new dbvalue) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";

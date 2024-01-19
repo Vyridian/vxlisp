@@ -2505,8 +2505,8 @@
       :total 14)
     :docnums
      (vx/test/testcoveragenums
-      :pct 87
-      :tests 215
+      :pct 88
+      :tests 219
       :total 247)
     :funcnums
      (vx/test/testcoveragenums
@@ -3317,6 +3317,111 @@
      :casename "textblock-delimnotfound"
      :describelist
       (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (textblock
+  :text \"<a\"
+  :startpos 1
+  :endpos 2
+  :children
+   (textblocklist
+    (textblock
+     :text \"<a\"
+     :startpos 1
+     :endpos 2
+     :delim
+      (copy delimbracketangle
+       :delimlist vx/data/textblock/delimlisttest1)
+     :children
+      (textblocklist
+       (textblock
+        :text \"a\"
+        :startpos 2
+        :endpos 2))
+     (msgblock
+      (msg
+       :code \"closedelimmissing\"
+       :severity 2))))
+  (msgblock
+   (msg
+    :code \"closedelimmissing\"
+    :severity 2)))
+ (textblock-delimnotfound
+  (textblock
+   :text \"a\"
+   :startpos 2
+   :endpos 2
+   :delim
+    (delim
+     :delimlist vx/data/textblock/delimlisttest2)
+   :close
+    (copy delimclose
+     :starttext \">\")
+   :parent
+    (textblock
+     :text \"<a\"
+     :startpos 1
+     :endpos 2
+     :delim
+      (copy delimbracketangle
+       :delimlist vx/data/textblock/delimlisttest1)
+     :parent
+      (textblock
+       :text \"<a\"
+       :startpos 1
+       :endpos 2)))))"
+        :testpkg "vx/data/textblock"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/textblock/textblock
+            :text "<a"
+            :startpos 1
+            :endpos 2
+            :children
+             (vx/data/textblock/textblocklist
+              (vx/data/textblock/textblock
+               :text "<a"
+               :startpos 1
+               :endpos 2
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimbracketangle"
+                 :starttext "<"
+                 :endtext ">"
+                 :delimlist vx/data/textblock/delimlisttest1)
+               :children
+                (vx/data/textblock/textblocklist
+                 (vx/data/textblock/textblock
+                  :text "a"
+                  :startpos 2
+                  :endpos 2)))))
+          :actual
+           (vx/data/textblock/textblock
+            :text "<a"
+            :startpos 1
+            :endpos 2
+            :children
+             (vx/data/textblock/textblocklist
+              (vx/data/textblock/textblock
+               :text "<a"
+               :startpos 1
+               :endpos 2
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimbracketangle"
+                 :starttext "<"
+                 :endtext ">"
+                 :delimlist vx/data/textblock/delimlisttest1)
+               :children
+                (vx/data/textblock/textblocklist
+                 (vx/data/textblock/textblock
+                  :text "a"
+                  :startpos 2
+                  :endpos 2)))))))
        (vx/test/testdescribe
         :describename
          "(test
@@ -4590,6 +4695,111 @@
      :casename "textblock-parse-one"
      :describelist
       (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (textblock
+  :text \"<a\"
+  :startpos 1
+  :endpos 2
+  :children
+   (textblocklist
+    (textblock
+     :text \"<a\"
+     :startpos 1
+     :endpos 2
+     :delim
+      (copy delimbracketangle
+       :delimlist vx/data/textblock/delimlisttest1)
+     :children
+      (textblocklist
+       (textblock
+        :text \"a\"
+        :startpos 2
+        :endpos 2))
+     (msgblock
+      (msg
+       :code \"closedelimmissing\"
+       :severity 2))))
+  (msgblock
+   (msg
+    :code \"closedelimmissing\"
+    :severity 2)))
+ (textblock-parse-one
+  (textblock
+   :text \"a\"
+   :startpos 2
+   :endpos 2
+   :delim
+    (delim
+     :delimlist vx/data/textblock/delimlisttest2)
+   :close
+    (copy delimclose
+     :starttext \">\")
+   :parent
+    (textblock
+     :text \"<a\"
+     :startpos 1
+     :endpos 2
+     :delim
+      (copy delimbracketangle
+       :delimlist vx/data/textblock/delimlisttest1)
+     :parent
+      (textblock
+       :text \"<a\"
+       :startpos 1
+       :endpos 2)))))"
+        :testpkg "vx/data/textblock"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/data/textblock/textblock
+            :text "<a"
+            :startpos 1
+            :endpos 2
+            :children
+             (vx/data/textblock/textblocklist
+              (vx/data/textblock/textblock
+               :text "<a"
+               :startpos 1
+               :endpos 2
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimbracketangle"
+                 :starttext "<"
+                 :endtext ">"
+                 :delimlist vx/data/textblock/delimlisttest1)
+               :children
+                (vx/data/textblock/textblocklist
+                 (vx/data/textblock/textblock
+                  :text "a"
+                  :startpos 2
+                  :endpos 2)))))
+          :actual
+           (vx/data/textblock/textblock
+            :text "<a"
+            :startpos 1
+            :endpos 2
+            :children
+             (vx/data/textblock/textblocklist
+              (vx/data/textblock/textblock
+               :text "<a"
+               :startpos 1
+               :endpos 2
+               :delim
+                (vx/data/textblock/delim
+                 :name "delimbracketangle"
+                 :starttext "<"
+                 :endtext ">"
+                 :delimlist vx/data/textblock/delimlisttest1)
+               :children
+                (vx/data/textblock/textblocklist
+                 (vx/data/textblock/textblock
+                  :text "a"
+                  :startpos 2
+                  :endpos 2)))))))
        (vx/test/testdescribe
         :describename
          "(test
@@ -12164,11 +12374,11 @@
       :stringlist<-textblocklist 1
       :text<-textblock 1
       :textblock-addchild<-textblock-find-child 0
-      :textblock-delimnotfound 4
+      :textblock-delimnotfound 5
       :textblock-findparent<-textblock 0
       :textblock-init 1
       :textblock-parse 1
-      :textblock-parse-one 21
+      :textblock-parse-one 22
       :textblock-parse<-string-delim 0
       :textblock-replace<-textblock-find-replace 0
       :textblock-startleft<-string-delim-offset 1
@@ -12271,6 +12481,29 @@
  (vx/test/testpackage
   :caselist
    (vx/test/testcaselist
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/data/xml"
+     :casename "string-first<-xml"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"text\"
+ (string-first<-xml
+  (xml
+   :children
+    (xmllist
+     (xml
+      :text \"text\")))))"
+        :testpkg "vx/data/xml"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected "text"
+          :actual "text"))))
     (vx/test/testcase
      :passfail true
      :testpkg "vx/data/xml"
@@ -14156,6 +14389,7 @@
       :delimxmlequal 0)
     :funcmap
      (intmap
+      :string-first<-xml 1
       :textblock-xml<-string 1
       :xml-angle<-xml-textblock 3
       :xml-close<-xml-textblock 4
@@ -14178,29 +14412,29 @@
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 12)
+      :total 13)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 12)
+      :total 13)
     :constnums
      (vx/test/testcoveragenums
       :total 4)
     :docnums
      (vx/test/testcoveragenums
-      :pct 63
-      :tests 12
-      :total 19)
+      :pct 65
+      :tests 13
+      :total 20)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 75
-      :tests 9
-      :total 12)
+      :pct 76
+      :tests 10
+      :total 13)
     :testpkg "vx/data/xml"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 47
-      :tests 9
-      :total 19)
+      :pct 50
+      :tests 10
+      :total 20)
     :typenums
      (vx/test/testcoveragenums
       :total 3))

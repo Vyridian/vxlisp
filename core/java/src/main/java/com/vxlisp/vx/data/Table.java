@@ -104,7 +104,7 @@ public final class Table {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new cell) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new cell) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -112,7 +112,7 @@ public final class Table {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new cell) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new cell) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -127,7 +127,7 @@ public final class Table {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new cell :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new cell :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -137,12 +137,12 @@ public final class Table {
               ischanged = true;
               vx_p_value = (Core.Type_any)valsub;
             } else {
-              msg = Core.vx_msg_error("(new cell :value " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new cell :value " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new cell) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new cell) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -267,10 +267,10 @@ public final class Table {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_error("vx/data/table/celllist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/data/table/celllist", "invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_error("vx/data/table/celllist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/data/table/celllist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -362,7 +362,7 @@ public final class Table {
           Table.Type_cell castval = (Table.Type_cell)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(cellmap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_from_error("(cellmap) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -400,7 +400,7 @@ public final class Table {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_from_error(":keyexpected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -410,7 +410,7 @@ public final class Table {
           } else if (valsub instanceof Table.Type_cell) {
             valany = (Table.Type_cell)valsub;
           } else {
-            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_from_error(":invalidkeyvalue: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -569,7 +569,7 @@ public final class Table {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new field) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new field) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -577,7 +577,7 @@ public final class Table {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new field) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new field) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -592,7 +592,7 @@ public final class Table {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new field :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new field :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -605,7 +605,7 @@ public final class Table {
               ischanged = true;
               vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new field :name " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new field :name " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -615,12 +615,12 @@ public final class Table {
               ischanged = true;
               vx_p_fldtype = (Core.Type_any)valsub;
             } else {
-              msg = Core.vx_msg_error("(new field :fldtype " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new field :fldtype " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new field) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new field) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -746,10 +746,10 @@ public final class Table {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_error("vx/data/table/fieldlist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/data/table/fieldlist", "invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_error("vx/data/table/fieldlist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/data/table/fieldlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -871,10 +871,10 @@ public final class Table {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_error("vx/data/table/fieldmap", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/data/table/fieldmap", "invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_error("vx/data/table/fieldmap", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/data/table/fieldmap", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -1024,7 +1024,7 @@ public final class Table {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new filter) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new filter) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -1032,7 +1032,7 @@ public final class Table {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new filter) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new filter) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -1047,7 +1047,7 @@ public final class Table {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new filter :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new filter :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1060,7 +1060,7 @@ public final class Table {
               ischanged = true;
               vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new filter :name " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new filter :name " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1070,12 +1070,12 @@ public final class Table {
               ischanged = true;
               vx_p_idlist = (Core.Type_stringlist)valsub;
             } else {
-              msg = Core.vx_msg_error("(new filter :idlist " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new filter :idlist " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new filter) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new filter) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1229,7 +1229,7 @@ public final class Table {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new row) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new row) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -1237,7 +1237,7 @@ public final class Table {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new row) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new row) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -1252,7 +1252,7 @@ public final class Table {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new row :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new row :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1262,7 +1262,7 @@ public final class Table {
               ischanged = true;
               vx_p_cellmap = (Table.Type_cellmap)valsub;
             } else {
-              msg = Core.vx_msg_error("(new row :cellmap " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new row :cellmap " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1272,12 +1272,12 @@ public final class Table {
               ischanged = true;
               vx_p_cellsort = (Table.Type_sort)valsub;
             } else {
-              msg = Core.vx_msg_error("(new row :cellsort " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new row :cellsort " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new row) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new row) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1403,10 +1403,10 @@ public final class Table {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_error("vx/data/table/rowlist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/data/table/rowlist", "invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_error("vx/data/table/rowlist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/data/table/rowlist", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -1498,7 +1498,7 @@ public final class Table {
           Table.Type_row castval = (Table.Type_row)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(rowmap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_from_error("(rowmap) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -1536,7 +1536,7 @@ public final class Table {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_from_error(":keyexpected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -1546,7 +1546,7 @@ public final class Table {
           } else if (valsub instanceof Table.Type_row) {
             valany = (Table.Type_row)valsub;
           } else {
-            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_from_error(":invalidkeyvalue: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -1705,7 +1705,7 @@ public final class Table {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new sort) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new sort) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -1713,7 +1713,7 @@ public final class Table {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new sort) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new sort) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -1728,7 +1728,7 @@ public final class Table {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new sort :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new sort :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1741,7 +1741,7 @@ public final class Table {
               ischanged = true;
               vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new sort :name " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new sort :name " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1751,12 +1751,12 @@ public final class Table {
               ischanged = true;
               vx_p_idlist = (Core.Type_stringlist)valsub;
             } else {
-              msg = Core.vx_msg_error("(new sort :idlist " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new sort :idlist " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new sort) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new sort) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1966,7 +1966,7 @@ public final class Table {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new table) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new table) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -1974,7 +1974,7 @@ public final class Table {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new table) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new table) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -1989,7 +1989,7 @@ public final class Table {
               ischanged = true;
               vx_p_id = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new table :id " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new table :id " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2002,7 +2002,7 @@ public final class Table {
               ischanged = true;
               vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_error("(new table :name " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new table :name " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2012,7 +2012,7 @@ public final class Table {
               ischanged = true;
               vx_p_fieldmap = (Table.Type_fieldmap)valsub;
             } else {
-              msg = Core.vx_msg_error("(new table :fieldmap " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new table :fieldmap " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2022,7 +2022,7 @@ public final class Table {
               ischanged = true;
               vx_p_fieldsort = (Table.Type_sort)valsub;
             } else {
-              msg = Core.vx_msg_error("(new table :fieldsort " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new table :fieldsort " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2032,7 +2032,7 @@ public final class Table {
               ischanged = true;
               vx_p_rowmap = (Table.Type_rowmap)valsub;
             } else {
-              msg = Core.vx_msg_error("(new table :rowmap " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new table :rowmap " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2042,7 +2042,7 @@ public final class Table {
               ischanged = true;
               vx_p_rowfilter = (Table.Type_filter)valsub;
             } else {
-              msg = Core.vx_msg_error("(new table :rowfilter " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new table :rowfilter " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2052,12 +2052,12 @@ public final class Table {
               ischanged = true;
               vx_p_rowsort = (Table.Type_sort)valsub;
             } else {
-              msg = Core.vx_msg_error("(new table :rowsort " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new table :rowsort " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new table) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new table) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";

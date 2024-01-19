@@ -501,6 +501,7 @@ export default class vx_data_textblock {
         const delima = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_delim, "struct-2": vx_data_textblock.t_textblock}, textblockarg, ":delim")
         const close = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_delim, "struct-2": vx_data_textblock.t_textblock}, textblockarg, ":close")
         const parent = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_textblock, "struct-2": vx_data_textblock.t_textblock}, textblockarg, ":parent")
+        const childp = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_textblocklist, "struct-2": vx_data_textblock.t_textblock}, parent, ":children")
         const delimp = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_delim, "struct-2": vx_data_textblock.t_textblock}, parent, ":delim")
         const delims = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_delimlist, "struct-2": vx_data_textblock.t_delim}, delimp, ":delimlist")
         return vx_core.f_if_2(
@@ -509,30 +510,43 @@ export default class vx_data_textblock {
             vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_not(
               vx_core.f_is_empty_1(close)
             )}),
-            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(
-              parent,
-              vx_core.f_copy(
-                delimp,
-                ":delimlist",
-                vx_core.f_copy(
-                  delims,
-                  vx_core.f_copy(
-                    textblockarg,
-                    ":parent",
-                    vx_core.f_empty(
-                      vx_data_textblock.t_textblock
-                    ),
-                    ":msg",
-                    vx_core.f_msg_from_error(
-                      vx_core.f_new(
-                        vx_core.t_string,
-                        "Close delim not found: ",
-                        vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, delima, ":name")
-                      )
-                    )
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_let(
+              {"any-1": vx_data_textblock.t_textblock},
+              [],
+              vx_core.f_new(vx_core.t_any_from_func, () => {
+                const msgerr = vx_core.f_msg_from_error_1("closedelimmissing", close)
+                const child = vx_core.f_copy(
+                  textblockarg,
+                  ":delim",
+                  vx_core.f_empty(
+                    vx_data_textblock.t_delim
+                  ),
+                  ":close",
+                  vx_core.f_empty(
+                    vx_data_textblock.t_delim
+                  ),
+                  ":parent",
+                  vx_core.f_empty(
+                    vx_data_textblock.t_textblock
                   )
                 )
-              )
+                const find = vx_data_textblock.f_textblock_findparent_from_textblock(parent)
+                const childrenf = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_textblocklist, "struct-2": vx_data_textblock.t_textblock}, find, ":children")
+                const childrenr = vx_core.f_copy(childrenf, child)
+                const replace = vx_core.f_copy(find, msgerr, ":children", childrenr)
+                const parent2 = vx_data_textblock.f_textblock_replace_from_textblock_find_replace(parent, find, replace)
+                const gparent = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_textblock, "struct-2": vx_data_textblock.t_textblock}, parent2, ":parent")
+                const parent3 = vx_core.f_copy(
+                  parent2,
+                  ":parent",
+                  vx_core.f_empty(
+                    vx_data_textblock.t_textblock
+                  )
+                )
+                const childreng = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_textblocklist, "struct-2": vx_data_textblock.t_textblock}, gparent, ":children")
+                const childrenc = vx_core.f_copy(childreng, parent3)
+                return vx_core.f_copy(gparent, ":children", childrenc, msgerr)
+              })
             )})
           ),
           vx_core.f_then(
@@ -790,7 +804,7 @@ export default class vx_data_textblock {
   // (func textblock-parse)
   static f_textblock_parse(textblock) {
     let output = vx_data_textblock.e_textblock
-    output = vx_collection.f_any_from_for_until_loop(
+    output = vx_collection.f_any_from_for_until_loop_max(
       {"any-1": vx_data_textblock.t_textblock},
       textblock,
       vx_core.f_new(vx_core.t_boolean_from_any, (current) => 
@@ -798,7 +812,8 @@ export default class vx_data_textblock {
           vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_textblock, "struct-2": vx_data_textblock.t_textblock}, current, ":parent")
         )),
       vx_core.f_new(vx_core.t_any_from_any, (current) => 
-        vx_data_textblock.f_textblock_parse_one(current))
+        vx_data_textblock.f_textblock_parse_one(current)),
+      50000
     )
     return output
   }

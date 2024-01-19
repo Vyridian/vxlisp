@@ -104,7 +104,7 @@ public final class Csv {
             } else {
               svalsub = valsub.toString();
             }
-            msg = Core.vx_msg_error("(new csv) - Invalid Key Type: " + svalsub);
+            msg = Core.vx_msg_from_error(":invalidkeytype (new csv) " + svalsub);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
@@ -112,7 +112,7 @@ public final class Csv {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_error("(new csv) - Invalid Key: " + testkey);
+              msg = Core.vx_msg_from_error(":invalidkey (new csv) " + testkey);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -124,7 +124,7 @@ public final class Csv {
               ischanged = true;
               vx_p_headers = (Core.Type_stringlist)valsub;
             } else {
-              msg = Core.vx_msg_error("(new csv :headers " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new csv :headers " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -134,12 +134,12 @@ public final class Csv {
               ischanged = true;
               vx_p_rows = (Csv.Type_csvrows)valsub;
             } else {
-              msg = Core.vx_msg_error("(new csv :rows " + valsub.toString() + ") - Invalid Value");
+              msg = Core.vx_msg_from_error(":invalidvalue (new csv :rows " + valsub.toString() + ")");
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_error("(new csv) - Invalid Key: " + key);
+            msg = Core.vx_msg_from_error(":invalidkey (new csv) " + key);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -234,7 +234,7 @@ public final class Csv {
           Core.Type_stringlist castval = (Core.Type_stringlist)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_error("(csvrowmap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_from_error("(csvrowmap) Invalid Value: " + val.toString() + "");
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -272,7 +272,7 @@ public final class Csv {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            msg = Core.vx_msg_error("Key Expected: " + valsub.toString() + "");
+            msg = Core.vx_msg_from_error(":keyexpected: " + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -282,7 +282,7 @@ public final class Csv {
           } else if (valsub instanceof Core.Type_stringlist) {
             valany = (Core.Type_stringlist)valsub;
           } else {
-            msg = Core.vx_msg_error("Invalid Key/Value: " + key + " "  + valsub.toString() + "");
+            msg = Core.vx_msg_from_error(":invalidkeyvalue: " + key + " "  + valsub.toString() + "");
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -413,10 +413,10 @@ public final class Csv {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_error("vx/data/csv/csvrows", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/data/csv/csvrows", "invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_error("vx/data/csv/csvrows", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/data/csv/csvrows", "invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }

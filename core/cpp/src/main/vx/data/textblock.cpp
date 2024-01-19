@@ -2952,6 +2952,8 @@ namespace vx_data_textblock {
         vx_core::vx_ref_plus(close);
         vx_data_textblock::Type_textblock parent = textblockarg->parent();
         vx_core::vx_ref_plus(parent);
+        vx_data_textblock::Type_textblocklist childp = parent->children();
+        vx_core::vx_ref_plus(childp);
         vx_data_textblock::Type_delim delimp = parent->delim();
         vx_core::vx_ref_plus(delimp);
         vx_data_textblock::Type_delimlist delims = delimp->delimlist();
@@ -2966,44 +2968,79 @@ namespace vx_data_textblock {
                 );
                 return output_1;
               }),
-              vx_core::t_any_from_func->vx_fn_new({parent, delimp, delims, textblockarg, delima}, [parent, delimp, delims, textblockarg, delima]() {
-                vx_core::Type_any output_1 = vx_core::f_copy(
+              vx_core::t_any_from_func->vx_fn_new({close, textblockarg, parent}, [close, textblockarg, parent]() {
+                vx_data_textblock::Type_textblock output_1 = vx_core::f_let(
                   vx_data_textblock::t_textblock,
-                  parent,
-                  vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::f_copy(
-                      vx_data_textblock::t_delim,
-                      delimp,
+                  vx_core::t_any_from_func->vx_fn_new({close, textblockarg, parent}, [close, textblockarg, parent]() {
+                    vx_core::Type_msg msgerr = vx_core::f_msg_from_error_1(vx_core::vx_new_string("closedelimmissing"), close);
+                    vx_core::vx_ref_plus(msgerr);
+                    vx_data_textblock::Type_textblock child = vx_core::f_copy(
+                      vx_data_textblock::t_textblock,
+                      textblockarg,
                       vx_core::vx_new(vx_core::t_anylist, {
-                        vx_core::vx_new_string(":delimlist"),
-                        vx_core::f_copy(
-                          vx_data_textblock::t_delimlist,
-                          delims,
-                          vx_core::vx_new(vx_core::t_anylist, {
-                            vx_core::f_copy(
-                              vx_data_textblock::t_textblock,
-                              textblockarg,
-                              vx_core::vx_new(vx_core::t_anylist, {
-                                vx_core::vx_new_string(":parent"),
-                                vx_core::f_empty(
-                                  vx_data_textblock::t_textblock
-                                ),
-                                vx_core::vx_new_string(":msg"),
-                                vx_core::f_msg_from_error(
-                                  vx_core::f_new(
-                                    vx_core::t_string,
-                                    vx_core::vx_new(vx_core::t_anylist, {
-                                      vx_core::vx_new_string("Close delim not found: "),
-                                      delima->name()
-                                    })
-                                  )
-                                )
-                              })
-                            )
-                          })
+                        vx_core::vx_new_string(":delim"),
+                        vx_core::f_empty(
+                          vx_data_textblock::t_delim
+                        ),
+                        vx_core::vx_new_string(":close"),
+                        vx_core::f_empty(
+                          vx_data_textblock::t_delim
+                        ),
+                        vx_core::vx_new_string(":parent"),
+                        vx_core::f_empty(
+                          vx_data_textblock::t_textblock
                         )
                       })
-                    )
+                    );
+                    vx_core::vx_ref_plus(child);
+                    vx_data_textblock::Type_textblock find = vx_data_textblock::f_textblock_findparent_from_textblock(parent);
+                    vx_core::vx_ref_plus(find);
+                    vx_data_textblock::Type_textblocklist childrenf = find->children();
+                    vx_core::vx_ref_plus(childrenf);
+                    vx_data_textblock::Type_textblocklist childrenr = vx_core::f_copy(vx_data_textblock::t_textblocklist, childrenf, vx_core::vx_new(vx_core::t_anylist, {
+                    child}));
+                    vx_core::vx_ref_plus(childrenr);
+                    vx_data_textblock::Type_textblock replace = vx_core::f_copy(
+                      vx_data_textblock::t_textblock,
+                      find,
+                      vx_core::vx_new(vx_core::t_anylist, {
+                        msgerr,
+                        vx_core::vx_new_string(":children"),
+                        childrenr
+                      })
+                    );
+                    vx_core::vx_ref_plus(replace);
+                    vx_data_textblock::Type_textblock parent2 = vx_data_textblock::f_textblock_replace_from_textblock_find_replace(parent, find, replace);
+                    vx_core::vx_ref_plus(parent2);
+                    vx_data_textblock::Type_textblock gparent = parent2->parent();
+                    vx_core::vx_ref_plus(gparent);
+                    vx_data_textblock::Type_textblock parent3 = vx_core::f_copy(
+                      vx_data_textblock::t_textblock,
+                      parent2,
+                      vx_core::vx_new(vx_core::t_anylist, {
+                        vx_core::vx_new_string(":parent"),
+                        vx_core::f_empty(
+                          vx_data_textblock::t_textblock
+                        )
+                      })
+                    );
+                    vx_core::vx_ref_plus(parent3);
+                    vx_data_textblock::Type_textblocklist childreng = gparent->children();
+                    vx_core::vx_ref_plus(childreng);
+                    vx_data_textblock::Type_textblocklist childrenc = vx_core::f_copy(vx_data_textblock::t_textblocklist, childreng, vx_core::vx_new(vx_core::t_anylist, {
+                    parent3}));
+                    vx_core::vx_ref_plus(childrenc);
+                    vx_data_textblock::Type_textblock output_1 = vx_core::f_copy(
+                      vx_data_textblock::t_textblock,
+                      gparent,
+                      vx_core::vx_new(vx_core::t_anylist, {
+                        vx_core::vx_new_string(":children"),
+                        childrenc,
+                        msgerr
+                      })
+                    );
+                    vx_core::vx_release_one_except({msgerr, child, find, childrenf, childrenr, replace, parent2, gparent, parent3, childreng, childrenc}, output_1);
+                    return output_1;
                   })
                 );
                 return output_1;
@@ -3225,7 +3262,7 @@ namespace vx_data_textblock {
             )
           })
         );
-        vx_core::vx_release_one_except({text, delima, close, parent, delimp, delims}, output_1);
+        vx_core::vx_release_one_except({text, delima, close, parent, childp, delimp, delims}, output_1);
         return output_1;
       })
     );
@@ -3612,7 +3649,7 @@ namespace vx_data_textblock {
   vx_data_textblock::Type_textblock f_textblock_parse(vx_data_textblock::Type_textblock textblock) {
     vx_data_textblock::Type_textblock output = vx_data_textblock::e_textblock;
     vx_core::vx_reserve(textblock);
-    output = vx_collection::f_any_from_for_until_loop(
+    output = vx_collection::f_any_from_for_until_loop_max(
       vx_data_textblock::t_textblock,
       textblock,
       vx_core::t_boolean_from_any->vx_fn_new({}, [](vx_core::Type_any current_any) {
@@ -3628,7 +3665,8 @@ namespace vx_data_textblock {
         vx_core::Type_any output_1 = 
           vx_data_textblock::f_textblock_parse_one(current);
         return output_1;
-      })
+      }),
+      vx_core::vx_new_int(50000)
     );
     vx_core::vx_release_one_except(textblock, output);
     return output;

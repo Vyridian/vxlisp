@@ -8,6 +8,46 @@ import com.vxlisp.vx.*;
 
 public final class XmlTest {
 
+  static Test.Type_testcase f_string_first_from_xml(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/data/xml",
+      ":casename", "string-first<-xml",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n \"text\"\n (string-first<-xml\n  (xml\n   :children\n    (xmllist\n     (xml\n      :text \"text\")))))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.vx_new_string("text"),
+              Xml.f_string_first_from_xml(
+                Core.f_new(
+                  Xml.t_xml,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string(":children"),
+                    Core.f_new(
+                      Xml.t_xmllist,
+                      Core.t_anylist.vx_new(
+                        Core.f_new(
+                          Xml.t_xml,
+                          Core.t_anylist.vx_new(
+                            Core.vx_new_string(":text"),
+                            Core.vx_new_string("text")
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+              )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
   static Test.Type_testcase f_textblock_xml_from_string(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
@@ -3033,6 +3073,7 @@ public final class XmlTest {
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
+      XmlTest.f_string_first_from_xml(context),
       XmlTest.f_textblock_xml_from_string(context),
       XmlTest.f_xml_angle_from_xml_textblock(context),
       XmlTest.f_xml_close_from_xml_textblock(context),
@@ -3051,11 +3092,11 @@ public final class XmlTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/data/xml", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 4), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 63, ":tests", 12, ":total", 19), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 75, ":tests", 9, ":total", 12), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 12), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 12), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 47, ":tests", 9, ":total", 19), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 65, ":tests", 13, ":total", 20), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 76, ":tests", 10, ":total", 13), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 13), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 13), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 50, ":tests", 10, ":total", 20), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3)
     );
   }
@@ -3075,6 +3116,7 @@ public final class XmlTest {
         ":delimxmlequal", 0
       ),
       ":funcmap", Core.t_intmap.vx_new(
+        ":string-first<-xml", 1,
         ":textblock-xml<-string", 1,
         ":xml-angle<-xml-textblock", 3,
         ":xml-close<-xml-textblock", 4,

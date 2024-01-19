@@ -241,9 +241,9 @@ export default class vx_core {
         output = copy
       } else {
         output = copy['vx_value']
-        const testmsgblock = copy['vx_msgblock']
-        if (testmsgblock != undefined) {
-          msgblock = testmsgblock
+        const msgblockcopy = copy['vx_msgblock']
+        if (msgblockcopy != undefined) {
+          msgblock = msgblockcopy
         }
       }
       values.map(value => {
@@ -298,9 +298,9 @@ export default class vx_core {
         output = copy
       } else {
         output = copy['vx_value']
-        const testmsgblock = copy['vx_msgblock']
-        if (testmsgblock != undefined) {
-          msgblock = testmsgblock
+        const msgblockcopy = copy['vx_msgblock']
+        if (msgblockcopy != undefined) {
+          msgblock = msgblockcopy
         }
       }
       values.map(value => {
@@ -383,9 +383,9 @@ export default class vx_core {
         output = copy
       } else {
         output = copy['vx_value']
-        const testmsgblock = copy['vx_msgblock']
-        if (testmsgblock != undefined) {
-          msgblock = testmsgblock
+        const msgblockcopy = copy['vx_msgblock']
+        if (msgblockcopy != undefined) {
+          msgblock = msgblockcopy
         }
       }
       values.map(value => {
@@ -458,9 +458,9 @@ export default class vx_core {
         output = copy
       } else {
         output = copy['vx_value']
-        const testmsgblock = copy['vx_msgblock']
-        if (testmsgblock != undefined) {
-          msgblock = testmsgblock
+        const msgblockcopy = copy['vx_msgblock']
+        if (msgblockcopy != undefined) {
+          msgblock = msgblockcopy
         }
       }
       values.map(value => {
@@ -523,9 +523,9 @@ export default class vx_core {
         if (type == typedef) {
         } else {
           fn = copy['vx_value']
-          const testmsgblock = copy['vx_msgblock']
-          if (testmsgblock != undefined) {
-            msgblock = testmsgblock
+          const msgblockcopy = copy['vx_msgblock']
+          if (msgblockcopy != undefined) {
+            msgblock = msgblockcopy
           }
         }
         values.map(value => {
@@ -572,9 +572,9 @@ export default class vx_core {
         if (type == typedef) {
         } else {
           listvals = copy.slice()
-          const testmsgblock = copy['vx_msgblock']
-          if (testmsgblock != undefined) {
-            msgblock = testmsgblock
+          const msgblockcopy = copy['vx_msgblock']
+          if (msgblockcopy != undefined) {
+            msgblock = msgblockcopy
           }
         }
         allowtypes = vx_core.f_allowtypes_from_typedef(typedef)
@@ -634,9 +634,9 @@ export default class vx_core {
       case ':map':
         if (type != typedef) {
           propmap = Object.assign({}, copy['vx_value'])
-          const testmsgblock = copy['vx_msgblock']
-          if (testmsgblock != undefined) {
-            msgblock = testmsgblock
+          const msgblockcopy = copy['vx_msgblock']
+          if (msgblockcopy != undefined) {
+            msgblock = msgblockcopy
           }
         }
         allowtypes = vx_core.f_allowtypes_from_typedef(typedef)
@@ -712,9 +712,9 @@ export default class vx_core {
           break
         default:
           propmap = Object.assign({}, copy['vx_value'])
-          const testmsgblock = copy['vx_msgblock']
-          if (testmsgblock != undefined) {
-            msgblock = testmsgblock
+          const msgblockcopy = copy['vx_msgblock']
+          if (msgblockcopy != undefined) {
+            msgblock = msgblockcopy
           }
           break
         }
@@ -759,12 +759,15 @@ export default class vx_core {
                   // invalid msg cannot contain msgblock
                   break
                 case vx_core.t_msgblock:
-                  if (value == vx_core.t_msgblock) {
+                  if (value == vx_core.e_msgblock) {
+                  } else if (msgblock == vx_core.e_msgblock) {
+                    msgblock = value
+                    propmap = Object.assign({}, value['vx_value'])
                   } else {
                     let msgblocks = propmap['msgblocks']
                     if (msgblocks == undefined) {
                       msgblocks = [value]
-                      msgblock['vx_type'] = vx_core.t_msgblocklist
+                      msgblocks['vx_type'] = vx_core.t_msgblocklist
                     } else {
                       msgblocks.push(value)
                     }
@@ -859,7 +862,9 @@ export default class vx_core {
             vx_type: typedef,
             vx_value: propmap
           }
-          if (msgblock != vx_core.e_msgblock) {
+          if (msgblock == vx_core.e_msgblock) {
+          } else if (typedef == vx_core.t_msgblock) {
+          } else {
             output['vx_msgblock'] = msgblock
           }
         } else {
@@ -955,22 +960,22 @@ export default class vx_core {
       default:
         const typedefname = typedef['vx_value']['name']
         const extend = vx_core.f_extends_from_typedef(typedef)
+        const indent1 = indent + 1
+        const indent2 = indent + 2
         switch (extend) {
         case ':list':
-          indent += 1
           for (const valsub of value) {
-            const valtext = vx_core.vx_string_from_any_indent(valsub, indent, linefeed)
+            const valtext = vx_core.vx_string_from_any_indent(valsub, indent1, linefeed)
             text += '\n ' + indenttext + valtext
           }
           if (value['vx_msgblock'] != null) {
             const msgtext = vx_core.vx_string_from_any_indent(value['vx_msgblock'], indent, linefeed)
-            text += '\n' + indenttext + ' :msgblock\n  ' + indenttext + msgtext
+            text += '\n ' + indenttext + msgtext
           }
           text = '(' + typedefname + text + ')'
           break
         case ':map':
         case ':struct':
-          indent += 2
           const valmap = value['vx_value']
           let validkeys
           switch (extend) {
@@ -988,7 +993,7 @@ export default class vx_core {
               if (!key.startsWith(':')) {
                 key = ':' + key
               }
-              let valtext = vx_core.vx_string_from_any_indent(valsub, indent, linefeed)
+              let valtext = vx_core.vx_string_from_any_indent(valsub, indent2, linefeed)
               if (valtext.indexOf('\n') >= 0) {
                 valtext = '\n  ' + indenttext + valtext
               } else {
@@ -998,16 +1003,16 @@ export default class vx_core {
             }
           }
           if (value['vx_msgblock'] != null) {
-            const msgtext = vx_core.vx_string_from_any_indent(value['vx_msgblock'], indent, linefeed)
-            text += '\n' + indenttext + ' :msgblock\n  ' + indenttext + msgtext
+            const msgtext = vx_core.vx_string_from_any_indent(value['vx_msgblock'], indent1, linefeed)
+            text += '\n ' + indenttext + msgtext
           }
           text = '(' + typedefname + text + ')'
           break
         case ':func':
           text = typedefname
           if (value['vx_msgblock'] != null) {
-            const msgtext = vx_core.vx_string_from_any_indent(value['vx_msgblock'], indent, linefeed)
-            text += '\n' + indenttext + ' :msgblock\n  ' + indenttext + msgtext
+            const msgtext = vx_core.vx_string_from_any_indent(value['vx_msgblock'], indent1, linefeed)
+            text += '\n ' + indenttext + msgtext
           }
           text = '(' + text + ')'
           break
@@ -4629,6 +4634,7 @@ export default class vx_core {
 
   /**
    * @function switch
+   * Returns a value based on a logical switch
    * @param  {typemap} generic
    * @param  {any} val
    * @param  {thenelselist} ... thenelselist
@@ -4685,6 +4691,7 @@ export default class vx_core {
 
   /**
    * @function then
+   * Returns a thenelse struct from a given condition function and value function
    * @param  {boolean_from_func} fn_cond
    * @param  {any_from_func} fn_any
    * @return {thenelse}
@@ -4774,6 +4781,7 @@ export default class vx_core {
 
   /**
    * @function typedef_from_any
+   * Gets the typedef of a given value
    * @param  {any} val
    * @return {typedef}
    */
@@ -4791,6 +4799,7 @@ export default class vx_core {
 
   /**
    * @function typedef_from_type
+   * Gets the typedef of a given type
    * @param  {any} val
    * @return {typedef}
    */
@@ -4806,7 +4815,7 @@ export default class vx_core {
 
   /**
    * @function typename_from_any
-   * Gets the type of a given value
+   * Gets the typename of a given value
    * @param  {any} value
    * @return {string}
    */
