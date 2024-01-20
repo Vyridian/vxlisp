@@ -3,22 +3,54 @@
 // :headerfunc
 // :header
 
+  // vx_int_from_string_find(string, string)
+  int vx_int_from_string_find(std::string text, std::string find);
+
+  // vx_int_from_string_find(string, string)
+  vx_core::Type_int vx_int_from_string_find(vx_core::Type_string text, vx_core::Type_string find);
+
   // vx_int_from_string_findkeyword(string, string)
   int vx_int_from_string_findkeyword(std::string text, std::string find);
 
   // vx_int_from_string_findkeyword(string, string)
   vx_core::Type_int vx_int_from_string_findkeyword(vx_core::Type_string text, vx_core::Type_string find);
 
+  // vx_int_from_string_findlast(string, string)
+  int vx_int_from_string_findlast(std::string text, std::string find);
+
+  // vx_int_from_string_findlast(string, string)
+  vx_core::Type_int vx_int_from_string_findlast(vx_core::Type_string text, vx_core::Type_string findlast);
+
   // vx_string_from_stringlist_join(stringlist, string)
   vx_core::Type_string vx_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim);
 
+  // vx_string_lowercase(string)
+  vx_core::Type_string vx_string_lowercase(vx_core::Type_string text);
+
   // vx_string_trim(string)
   vx_core::Type_string vx_string_trim(vx_core::Type_string text);
+
+  // vx_string_uppercase(string)
+  vx_core::Type_string vx_string_uppercase(vx_core::Type_string text);
 
   // vx_stringlist_from_string_split(string, string)
   vx_core::Type_stringlist vx_stringlist_from_string_split(vx_core::Type_string text, vx_core::Type_string delim);
 
 // :body
+
+  // vx_int_from_string_find(string, string)
+  int vx_int_from_string_find(std::string text, std::string find) {
+    size_t pos = text.find(find);
+    int output = vx_core::vx_int_from_sizet(pos) + 1;
+    return output;
+  }
+
+  // vx_int_from_string_find(string, string)
+  vx_core::Type_int vx_int_from_string_find(vx_core::Type_string text, vx_core::Type_string find) {
+    int ipos = vx_type::vx_int_from_string_find(text->vx_string(), find->vx_string());
+    vx_core::Type_int output = vx_core::vx_new_int(ipos);
+    return output;
+  }
 
   // vx_int_from_string_findkeyword(string, string)
   int vx_int_from_string_findkeyword(std::string text, std::string find) {
@@ -60,6 +92,20 @@
     return output;
   }
 
+  // vx_int_from_string_findlast(string, string)
+  int vx_int_from_string_findlast(std::string text, std::string find) {
+    size_t pos = text.rfind(find);
+    int output = vx_core::vx_int_from_sizet(pos) + 1;
+    return output;
+  }
+
+  // vx_int_from_string_findlast(string, string)
+  vx_core::Type_int vx_int_from_string_findlast(vx_core::Type_string text, vx_core::Type_string findlast) {
+    int ipos = vx_type::vx_int_from_string_findlast(text->vx_string(), findlast->vx_string());
+    vx_core::Type_int output = vx_core::vx_new_int(ipos);
+    return output;
+  }
+
   // vx_string_from_stringlist_join(stringlist, string)
   vx_core::Type_string vx_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim) {
     bool isfirst = true;
@@ -78,12 +124,31 @@
     return output;
  	}
 
+  // vx_string_lowercase(string)
+  vx_core::Type_string vx_string_lowercase(vx_core::Type_string text) {
+    std::string stext = text->vx_string();
+    stext = stext.substr(0, sizeof stext);
+    std::transform(stext.begin(), stext.end(), stext.begin(), ::tolower);
+    vx_core::Type_string output = vx_core::vx_new_string(stext);
+    return output;
+  }
+
   // vx_string_trim(string)
   vx_core::Type_string vx_string_trim(vx_core::Type_string text) {
     std::string_view stext = text->vx_string();
+    stext = stext.substr(0, sizeof stext);
     stext.remove_prefix(std::min(stext.find_first_not_of(" \t\r\v\n"), stext.size()));
     stext.remove_suffix(std::min(stext.size() - stext.find_last_not_of(" \t\r\v\n") - 1, stext.size()));
     vx_core::Type_string output = vx_core::vx_new_string(static_cast<std::string>(stext));
+    return output;
+  }
+
+  // vx_string_uppercase(string)
+  vx_core::Type_string vx_string_uppercase(vx_core::Type_string text) {
+    std::string stext = text->vx_string();
+    stext = stext.substr(0, sizeof stext);
+    std::transform(stext.begin(), stext.end(), stext.begin(), ::toupper);
+    vx_core::Type_string output = vx_core::vx_new_string(stext);
     return output;
   }
 

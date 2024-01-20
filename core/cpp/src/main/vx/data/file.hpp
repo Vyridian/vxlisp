@@ -20,6 +20,10 @@ namespace vx_data_file {
   typedef Abstract_boolean_exists_from_file* Func_boolean_exists_from_file;
   extern Func_boolean_exists_from_file e_boolean_exists_from_file;
   extern Func_boolean_exists_from_file t_boolean_exists_from_file;
+  class Abstract_boolean_write_from_file;
+  typedef Abstract_boolean_write_from_file* Func_boolean_write_from_file;
+  extern Func_boolean_write_from_file e_boolean_write_from_file;
+  extern Func_boolean_write_from_file t_boolean_write_from_file;
   class Abstract_boolean_write_from_file_any;
   typedef Abstract_boolean_write_from_file_any* Func_boolean_write_from_file_any;
   extern Func_boolean_write_from_file_any e_boolean_write_from_file_any;
@@ -69,6 +73,9 @@ namespace vx_data_file {
 
   // (func boolean-exists<-file)
   vx_core::Type_boolean f_boolean_exists_from_file(vx_data_file::Type_file file);
+
+  // (func boolean-write<-file)
+  vx_core::Type_boolean f_boolean_write_from_file(vx_core::Type_context context, vx_data_file::Type_file file);
 
   // (func boolean-write<-file-any)
   vx_core::Type_boolean f_boolean_write_from_file_any(vx_core::Type_context context, vx_data_file::Type_file file, vx_core::Type_any val);
@@ -184,6 +191,33 @@ namespace vx_data_file {
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func boolean-write<-file)
+  class Abstract_boolean_write_from_file : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_boolean_write_from_file() {};
+    virtual ~Abstract_boolean_write_from_file() = 0;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_boolean_write_from_file : public virtual Abstract_boolean_write_from_file {
+  public:
+    Class_boolean_write_from_file();
+    virtual ~Class_boolean_write_from_file() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 

@@ -1074,6 +1074,9 @@
           <li class="nfunc" onclick="docjs.navigate('func_vx/data/file/boolean-write&lt;-file-any')">
             (f) boolean-write&lt;-file-any
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/data/file/boolean-write&lt;-file')">
+            (f) boolean-write&lt;-file
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/data/file/boolean-write&lt;-file-string')">
             (f) boolean-write&lt;-file-string
           </li>
@@ -1847,11 +1850,17 @@
           <li class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-stringlist-join')">
             (f) string&lt;-stringlist-join
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/type/string-lowercase')">
+            (f) string-lowercase
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/type/string-outdent')">
             (f) string-outdent
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/type/string-trim')">
             (f) string-trim
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/type/string-uppercase')">
+            (f) string-uppercase
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/type/stringlist&lt;-string-split')">
             (f) stringlist&lt;-string-split
@@ -26869,7 +26878,7 @@ improves readability.</div>
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/boolean-exists&lt;-file')">boolean-exists&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/boolean-write&lt;-file-any')">boolean-write&lt;-file-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/boolean-write&lt;-file-string')">boolean-write&lt;-file-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/file-read&lt;-file')">file-read&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/string-read&lt;-file')">string-read&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/name&lt;-file')">name&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/path&lt;-file')">path&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/pathcurrent&lt;-os')">pathcurrent&lt;-os</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/pathfull&lt;-file')">pathfull&lt;-file</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/boolean-exists&lt;-file')">boolean-exists&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/boolean-write&lt;-file-any')">boolean-write&lt;-file-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/boolean-write&lt;-file')">boolean-write&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/boolean-write&lt;-file-string')">boolean-write&lt;-file-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/file-read&lt;-file')">file-read&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/string-read&lt;-file')">string-read&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/name&lt;-file')">name&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/path&lt;-file')">path&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/pathcurrent&lt;-os')">pathcurrent&lt;-os</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/pathfull&lt;-file')">pathfull&lt;-file</span>
             </li>
           </ul>
         </details>
@@ -26923,6 +26932,16 @@ improves readability.</div>
  :sideeffects &quot;Writes to file io&quot;
  :clientserver :server
  :doc &quot;Write any data structure as a file.&quot;)
+
+(func boolean-write&lt;-file : boolean
+ [file : file]
+ (boolean-write&lt;-file-string
+  file
+  (:text file))
+ :context
+ :sideeffects &quot;Writes to file io&quot;
+ :clientserver :server
+ :doc &quot;Write a File to Disk&quot;)
 
 (func boolean-write&lt;-file-string : boolean
  [file : file
@@ -27322,6 +27341,74 @@ improves readability.</div>
  :sideeffects &quot;Writes to file io&quot;
  :clientserver :server
  :doc &quot;Write any data structure as a file.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/data/file/boolean-write&lt;-file">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/data/file')">vx/data/file</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/boolean-write&lt;-file')">boolean-write&lt;-file</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Write a File to Disk</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">boolean-write&lt;-file</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/boolean')">vx/core/boolean</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">file</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/data/file/file')">vx/data/file/file</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func boolean-write&lt;-file : boolean
+ [file : file]
+ (boolean-write&lt;-file-string
+  file
+  (:text file))
+ :context
+ :sideeffects &quot;Writes to file io&quot;
+ :clientserver :server
+ :doc &quot;Write a File to Disk&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -62496,7 +62583,7 @@ improves readability.</div>
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/type/allowtypenames&lt;-type')">allowtypenames&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/allowtypes&lt;-type')">allowtypes&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/any&lt;-int')">any&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/boolean&lt;-string-ends')">boolean&lt;-string-ends</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/boolean&lt;-string-starts')">boolean&lt;-string-starts</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/int&lt;-string-find')">int&lt;-string-find</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/int&lt;-string-findkeyword')">int&lt;-string-findkeyword</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/int&lt;-string-findlast')">int&lt;-string-findlast</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-boolean')">is-boolean</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-decimal')">is-decimal</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-none')">is-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-string')">is-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-type')">is-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-type&lt;-any-typelist')">is-type&lt;-any-typelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/length&lt;-string')">length&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-int')">string&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-string-end')">string&lt;-string-end</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-string-start')">string&lt;-string-start</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-string-start-end')">string&lt;-string-start-end</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-stringlist-join')">string&lt;-stringlist-join</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string-outdent')">string-outdent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string-trim')">string-trim</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/stringlist&lt;-string-split')">stringlist&lt;-string-split</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/traitnames&lt;-any')">traitnames&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/traits&lt;-any')">traits&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/traits&lt;-typedef')">traits&lt;-typedef</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/type/allowtypenames&lt;-type')">allowtypenames&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/allowtypes&lt;-type')">allowtypes&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/any&lt;-int')">any&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/boolean&lt;-string-ends')">boolean&lt;-string-ends</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/boolean&lt;-string-starts')">boolean&lt;-string-starts</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/int&lt;-string-find')">int&lt;-string-find</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/int&lt;-string-findkeyword')">int&lt;-string-findkeyword</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/int&lt;-string-findlast')">int&lt;-string-findlast</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-boolean')">is-boolean</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-decimal')">is-decimal</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-none')">is-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-string')">is-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-type')">is-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/is-type&lt;-any-typelist')">is-type&lt;-any-typelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/length&lt;-string')">length&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-int')">string&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-string-end')">string&lt;-string-end</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-string-start')">string&lt;-string-start</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-string-start-end')">string&lt;-string-start-end</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string&lt;-stringlist-join')">string&lt;-stringlist-join</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string-lowercase')">string-lowercase</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string-outdent')">string-outdent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string-trim')">string-trim</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/string-uppercase')">string-uppercase</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/stringlist&lt;-string-split')">stringlist&lt;-string-split</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/traitnames&lt;-any')">traitnames&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/traits&lt;-any')">traits&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/type/traits&lt;-typedef')">traits&lt;-typedef</span>
             </li>
           </ul>
         </details>
@@ -62565,9 +62652,8 @@ improves readability.</div>
   :cpp
    &quot;int ipos = vx_core::vx_int_from_string_find(text-&gt;vx_string(), find-&gt;vx_string()) + 1;
     output = vx_core::vx_new_int(ipos);&quot;
-  :js
-   &quot;vx_core.vx_int_from_string_find(text, find) + 1&quot;
-  :java :auto)
+  :java :auto
+  :js   :auto)
  :test (test
         3
         (int&lt;-string-find
@@ -62601,9 +62687,8 @@ improves readability.</div>
   :cpp
    &quot;int ipos = vx_core::vx_int_from_string_findlast(text-&gt;vx_string(), findlast-&gt;vx_string()) + 1;
     output = vx_core::vx_new_int(ipos);&quot;
-  :js
-   &quot;vx_core.vx_int_from_string_findlast(text, findlast) + 1&quot;
-  :java :auto)
+  :java :auto
+  :js   :auto)
  :test (test
         5
         (int&lt;-string-findlast
@@ -62807,15 +62892,26 @@ improves readability.</div>
  (native
   :cpp
    &quot;output = vx_type::vx_string_from_stringlist_join(vals, delim);&quot;
-  :js &quot;vals.join(delim)&quot;
-  :java
-   &quot;output = Type.vx_string_from_stringlist_join(vals, delim);&quot;)
+  :java :auto
+  :js &quot;vals.join(delim)&quot;)
  :test (test
         &quot;a$b$c&quot;
         (string&lt;-stringlist-join
          (stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot;)
          &quot;$&quot;))
  :doc &quot;Returns a string by joining a stringlist by the delimiter&quot;)
+
+(func string-lowercase : string
+ [text : string]
+ (native
+  :cpp  :auto
+  :java :auto
+  :js   :auto)
+ :test (test
+        &quot;abc&quot;
+        (string-lowercase
+         &quot;AbC&quot;))
+ :doc &quot;Returns lowercase version of string&quot;)
 
 (func string-outdent : string
  [text : string]
@@ -62868,15 +62964,26 @@ improves readability.</div>
          &quot; \t\nab\n\t &quot;))
  :doc &quot;Trims whitespace from the front and back of text&quot;)
 
+(func string-uppercase : string
+ [text : string]
+ (native
+  :cpp  :auto
+  :java :auto
+  :js   :auto)
+ :test (test
+        &quot;ABC&quot;
+        (string-uppercase
+         &quot;aBc&quot;))
+ :doc &quot;Returns uppercase version of string&quot;)
+
 (func stringlist&lt;-string-split : stringlist
  [text  : string
   delim : string]
  (native
   :cpp
    &quot;vx_type::vx_stringlist_from_string_split(text, delim);&quot;
-  :js &quot;vx_type.vx_stringlist_from_string_split(text, delim)&quot;
-  :java
-   &quot;Type.vx_stringlist_from_string_split(text, delim);&quot;)
+  :java :auto
+  :js &quot;vx_type.vx_stringlist_from_string_split(text, delim)&quot;)
  :test (test
         (stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot;)
         (stringlist&lt;-string-split
@@ -63334,9 +63441,8 @@ improves readability.</div>
   :cpp
    &quot;int ipos = vx_core::vx_int_from_string_find(text-&gt;vx_string(), find-&gt;vx_string()) + 1;
     output = vx_core::vx_new_int(ipos);&quot;
-  :js
-   &quot;vx_core.vx_int_from_string_find(text, find) + 1&quot;
-  :java :auto)
+  :java :auto
+  :js   :auto)
  :test (test
         3
         (int&lt;-string-find
@@ -63511,9 +63617,8 @@ improves readability.</div>
   :cpp
    &quot;int ipos = vx_core::vx_int_from_string_findlast(text-&gt;vx_string(), findlast-&gt;vx_string()) + 1;
     output = vx_core::vx_new_int(ipos);&quot;
-  :js
-   &quot;vx_core.vx_int_from_string_findlast(text, findlast) + 1&quot;
-  :java :auto)
+  :java :auto
+  :js   :auto)
  :test (test
         5
         (int&lt;-string-findlast
@@ -64556,15 +64661,88 @@ improves readability.</div>
  (native
   :cpp
    &quot;output = vx_type::vx_string_from_stringlist_join(vals, delim);&quot;
-  :js &quot;vals.join(delim)&quot;
-  :java
-   &quot;output = Type.vx_string_from_stringlist_join(vals, delim);&quot;)
+  :java :auto
+  :js &quot;vals.join(delim)&quot;)
  :test (test
         &quot;a$b$c&quot;
         (string&lt;-stringlist-join
          (stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot;)
          &quot;$&quot;))
  :doc &quot;Returns a string by joining a stringlist by the delimiter&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/type/string-lowercase">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/type')">vx/type</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/type/string-lowercase')">string-lowercase</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns lowercase version of string</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">string-lowercase</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">text</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+                <li><div class="test">(test
+ &quot;abc&quot;
+ (string-lowercase
+  &quot;AbC&quot;))</div></li>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func string-lowercase : string
+ [text : string]
+ (native
+  :cpp  :auto
+  :java :auto
+  :js   :auto)
+ :test (test
+        &quot;abc&quot;
+        (string-lowercase
+         &quot;AbC&quot;))
+ :doc &quot;Returns lowercase version of string&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -64748,6 +64926,80 @@ improves readability.</div>
               </ul>
             </details>
           </div>
+          <div class="d" id="d_func_vx/type/string-uppercase">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/type')">vx/type</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/type/string-uppercase')">string-uppercase</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns uppercase version of string</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">string-uppercase</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">text</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+                <li><div class="test">(test
+ &quot;ABC&quot;
+ (string-uppercase
+  &quot;aBc&quot;))</div></li>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func string-uppercase : string
+ [text : string]
+ (native
+  :cpp  :auto
+  :java :auto
+  :js   :auto)
+ :test (test
+        &quot;ABC&quot;
+        (string-uppercase
+         &quot;aBc&quot;))
+ :doc &quot;Returns uppercase version of string&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
           <div class="d" id="d_func_vx/type/stringlist&lt;-string-split">
             <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/type')">vx/type</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/type/stringlist&lt;-string-split')">stringlist&lt;-string-split</span></div>
             <div class="lbl">Description:</div>
@@ -64819,9 +65071,8 @@ improves readability.</div>
  (native
   :cpp
    &quot;vx_type::vx_stringlist_from_string_split(text, delim);&quot;
-  :js &quot;vx_type.vx_stringlist_from_string_split(text, delim)&quot;
-  :java
-   &quot;Type.vx_stringlist_from_string_split(text, delim);&quot;)
+  :java :auto
+  :js &quot;vx_type.vx_stringlist_from_string_split(text, delim)&quot;)
  :test (test
         (stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot;)
         (stringlist&lt;-string-split

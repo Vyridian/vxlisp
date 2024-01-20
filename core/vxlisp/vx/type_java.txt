@@ -71,13 +71,31 @@
     String stext = String.join(delim.vx_string(), listvalstring);  
     Core.Type_string output = Core.vx_new_string(stext);
     return output;
-	}
+  }
+
+  // vx_string_lowercase(string)
+  public static Core.Type_string vx_string_lowercase(Core.Type_string text) {
+    Core.Type_string output = Core.e_string;
+    String stext = text.vx_string();
+    stext = stext.toLowerCase();
+    output = Core.vx_new_string(stext);
+    return output;
+  }
 
   // vx_string_trim(string)
   public static Core.Type_string vx_string_trim(Core.Type_string text) {
     Core.Type_string output = Core.e_string;
     String stext = text.vx_string();
     stext = stext.trim();
+    output = Core.vx_new_string(stext);
+    return output;
+  }
+
+  // vx_string_uppercase(string)
+  public static Core.Type_string vx_string_uppercase(Core.Type_string text) {
+    Core.Type_string output = Core.e_string;
+    String stext = text.vx_string();
+    stext = stext.toUpperCase();
     output = Core.vx_new_string(stext);
     return output;
   }

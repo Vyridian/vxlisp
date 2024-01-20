@@ -6,6 +6,20 @@ namespace vx_type {
 
 // :body
 
+  // vx_int_from_string_find(string, string)
+  int vx_int_from_string_find(std::string text, std::string find) {
+    size_t pos = text.find(find);
+    int output = vx_core::vx_int_from_sizet(pos) + 1;
+    return output;
+  }
+
+  // vx_int_from_string_find(string, string)
+  vx_core::Type_int vx_int_from_string_find(vx_core::Type_string text, vx_core::Type_string find) {
+    int ipos = vx_type::vx_int_from_string_find(text->vx_string(), find->vx_string());
+    vx_core::Type_int output = vx_core::vx_new_int(ipos);
+    return output;
+  }
+
   // vx_int_from_string_findkeyword(string, string)
   int vx_int_from_string_findkeyword(std::string text, std::string find) {
     int output = -1;
@@ -46,6 +60,20 @@ namespace vx_type {
     return output;
   }
 
+  // vx_int_from_string_findlast(string, string)
+  int vx_int_from_string_findlast(std::string text, std::string find) {
+    size_t pos = text.rfind(find);
+    int output = vx_core::vx_int_from_sizet(pos) + 1;
+    return output;
+  }
+
+  // vx_int_from_string_findlast(string, string)
+  vx_core::Type_int vx_int_from_string_findlast(vx_core::Type_string text, vx_core::Type_string findlast) {
+    int ipos = vx_type::vx_int_from_string_findlast(text->vx_string(), findlast->vx_string());
+    vx_core::Type_int output = vx_core::vx_new_int(ipos);
+    return output;
+  }
+
   // vx_string_from_stringlist_join(stringlist, string)
   vx_core::Type_string vx_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim) {
     bool isfirst = true;
@@ -64,12 +92,31 @@ namespace vx_type {
     return output;
  	}
 
+  // vx_string_lowercase(string)
+  vx_core::Type_string vx_string_lowercase(vx_core::Type_string text) {
+    std::string stext = text->vx_string();
+    stext = stext.substr(0, sizeof stext);
+    std::transform(stext.begin(), stext.end(), stext.begin(), ::tolower);
+    vx_core::Type_string output = vx_core::vx_new_string(stext);
+    return output;
+  }
+
   // vx_string_trim(string)
   vx_core::Type_string vx_string_trim(vx_core::Type_string text) {
     std::string_view stext = text->vx_string();
+    stext = stext.substr(0, sizeof stext);
     stext.remove_prefix(std::min(stext.find_first_not_of(" \t\r\v\n"), stext.size()));
     stext.remove_suffix(std::min(stext.size() - stext.find_last_not_of(" \t\r\v\n") - 1, stext.size()));
     vx_core::Type_string output = vx_core::vx_new_string(static_cast<std::string>(stext));
+    return output;
+  }
+
+  // vx_string_uppercase(string)
+  vx_core::Type_string vx_string_uppercase(vx_core::Type_string text) {
+    std::string stext = text->vx_string();
+    stext = stext.substr(0, sizeof stext);
+    std::transform(stext.begin(), stext.end(), stext.begin(), ::toupper);
+    vx_core::Type_string output = vx_core::vx_new_string(stext);
     return output;
   }
 
@@ -546,8 +593,7 @@ namespace vx_type {
   vx_core::Type_int f_int_from_string_find(vx_core::Type_string text, vx_core::Type_string find) {
     vx_core::Type_int output = vx_core::e_int;
     vx_core::vx_reserve({text, find});
-    int ipos = vx_core::vx_int_from_string_find(text->vx_string(), find->vx_string()) + 1;
-    output = vx_core::vx_new_int(ipos);
+    output = vx_type::vx_int_from_string_find(text, find);
     vx_core::vx_release_one_except({text, find}, output);
     return output;
   }
@@ -713,8 +759,7 @@ namespace vx_type {
   vx_core::Type_int f_int_from_string_findlast(vx_core::Type_string text, vx_core::Type_string findlast) {
     vx_core::Type_int output = vx_core::e_int;
     vx_core::vx_reserve({text, findlast});
-    int ipos = vx_core::vx_int_from_string_findlast(text->vx_string(), findlast->vx_string()) + 1;
-    output = vx_core::vx_new_int(ipos);
+    output = vx_type::vx_int_from_string_findlast(text, findlast);
     vx_core::vx_release_one_except({text, findlast}, output);
     return output;
   }
@@ -1470,6 +1515,100 @@ namespace vx_type {
 
   //}
 
+  // (func string-lowercase)
+  vx_core::Type_string f_string_lowercase(vx_core::Type_string text) {
+    vx_core::Type_string output = vx_core::e_string;
+    vx_core::vx_reserve(text);
+    output = vx_type::vx_string_lowercase(text);
+    vx_core::vx_release_one_except(text, output);
+    return output;
+  }
+
+  // (func string-lowercase)
+  // class Class_string_lowercase {
+    Abstract_string_lowercase::~Abstract_string_lowercase() {}
+
+    Class_string_lowercase::Class_string_lowercase() : Abstract_string_lowercase::Abstract_string_lowercase() {
+      vx_core::refcount += 1;
+    }
+
+    Class_string_lowercase::~Class_string_lowercase() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_string_lowercase::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_string_lowercase output = vx_type::e_string_lowercase;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_string_lowercase::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_string_lowercase output = vx_type::e_string_lowercase;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_string_lowercase::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/type", // pkgname
+        "string-lowercase", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_string_lowercase::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_string_lowercase::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/type", // pkgname
+        "string-lowercase", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_string_lowercase::vx_empty() const {return vx_type::e_string_lowercase;}
+    vx_core::Type_any Class_string_lowercase::vx_type() const {return vx_type::t_string_lowercase;}
+    vx_core::Type_msgblock Class_string_lowercase::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_string_lowercase::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_string_lowercase::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_string_lowercase::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string, val);
+      output = vx_type::f_string_lowercase(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_string_lowercase::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_type::f_string_lowercase(text);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func string-outdent)
   vx_core::Type_string f_string_outdent(vx_core::Type_string text) {
     vx_core::Type_string output = vx_core::e_string;
@@ -1704,6 +1843,100 @@ namespace vx_type {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_type::f_string_trim(text);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func string-uppercase)
+  vx_core::Type_string f_string_uppercase(vx_core::Type_string text) {
+    vx_core::Type_string output = vx_core::e_string;
+    vx_core::vx_reserve(text);
+    output = vx_type::vx_string_uppercase(text);
+    vx_core::vx_release_one_except(text, output);
+    return output;
+  }
+
+  // (func string-uppercase)
+  // class Class_string_uppercase {
+    Abstract_string_uppercase::~Abstract_string_uppercase() {}
+
+    Class_string_uppercase::Class_string_uppercase() : Abstract_string_uppercase::Abstract_string_uppercase() {
+      vx_core::refcount += 1;
+    }
+
+    Class_string_uppercase::~Class_string_uppercase() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_string_uppercase::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_type::Func_string_uppercase output = vx_type::e_string_uppercase;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_string_uppercase::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_type::Func_string_uppercase output = vx_type::e_string_uppercase;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_string_uppercase::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/type", // pkgname
+        "string-uppercase", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_string_uppercase::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_string_uppercase::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/type", // pkgname
+        "string-uppercase", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_string_uppercase::vx_empty() const {return vx_type::e_string_uppercase;}
+    vx_core::Type_any Class_string_uppercase::vx_type() const {return vx_type::t_string_uppercase;}
+    vx_core::Type_msgblock Class_string_uppercase::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_string_uppercase::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_string_uppercase::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_string_uppercase::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string, val);
+      output = vx_type::f_string_uppercase(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_string_uppercase::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_type::f_string_uppercase(text);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -2578,10 +2811,14 @@ namespace vx_type {
   vx_type::Func_is_type_from_any_typelist t_is_type_from_any_typelist = NULL;
   vx_type::Func_length_from_string e_length_from_string = NULL;
   vx_type::Func_length_from_string t_length_from_string = NULL;
+  vx_type::Func_string_lowercase e_string_lowercase = NULL;
+  vx_type::Func_string_lowercase t_string_lowercase = NULL;
   vx_type::Func_string_outdent e_string_outdent = NULL;
   vx_type::Func_string_outdent t_string_outdent = NULL;
   vx_type::Func_string_trim e_string_trim = NULL;
   vx_type::Func_string_trim t_string_trim = NULL;
+  vx_type::Func_string_uppercase e_string_uppercase = NULL;
+  vx_type::Func_string_uppercase t_string_uppercase = NULL;
   vx_type::Func_string_from_int e_string_from_int = NULL;
   vx_type::Func_string_from_int t_string_from_int = NULL;
   vx_type::Func_string_from_string_end e_string_from_string_end = NULL;
@@ -2666,6 +2903,10 @@ namespace vx_type {
       vx_core::vx_reserve_empty(vx_type::e_length_from_string);
       vx_type::t_length_from_string = new vx_type::Class_length_from_string();
       vx_core::vx_reserve_type(vx_type::t_length_from_string);
+      vx_type::e_string_lowercase = new vx_type::Class_string_lowercase();
+      vx_core::vx_reserve_empty(vx_type::e_string_lowercase);
+      vx_type::t_string_lowercase = new vx_type::Class_string_lowercase();
+      vx_core::vx_reserve_type(vx_type::t_string_lowercase);
       vx_type::e_string_outdent = new vx_type::Class_string_outdent();
       vx_core::vx_reserve_empty(vx_type::e_string_outdent);
       vx_type::t_string_outdent = new vx_type::Class_string_outdent();
@@ -2674,6 +2915,10 @@ namespace vx_type {
       vx_core::vx_reserve_empty(vx_type::e_string_trim);
       vx_type::t_string_trim = new vx_type::Class_string_trim();
       vx_core::vx_reserve_type(vx_type::t_string_trim);
+      vx_type::e_string_uppercase = new vx_type::Class_string_uppercase();
+      vx_core::vx_reserve_empty(vx_type::e_string_uppercase);
+      vx_type::t_string_uppercase = new vx_type::Class_string_uppercase();
+      vx_core::vx_reserve_type(vx_type::t_string_uppercase);
       vx_type::e_string_from_int = new vx_type::Class_string_from_int();
       vx_core::vx_reserve_empty(vx_type::e_string_from_int);
       vx_type::t_string_from_int = new vx_type::Class_string_from_int();
@@ -2729,8 +2974,10 @@ namespace vx_type {
       mapfunc["is-type"] = vx_type::t_is_type;
       mapfunc["is-type<-any-typelist"] = vx_type::t_is_type_from_any_typelist;
       mapfunc["length<-string"] = vx_type::t_length_from_string;
+      mapfunc["string-lowercase"] = vx_type::t_string_lowercase;
       mapfunc["string-outdent"] = vx_type::t_string_outdent;
       mapfunc["string-trim"] = vx_type::t_string_trim;
+      mapfunc["string-uppercase"] = vx_type::t_string_uppercase;
       mapfunc["string<-int"] = vx_type::t_string_from_int;
       mapfunc["string<-string-end"] = vx_type::t_string_from_string_end;
       mapfunc["string<-string-start"] = vx_type::t_string_from_string_start;

@@ -1096,12 +1096,6 @@ namespace vx_core {
   // vx_int_from_string(string)
   int vx_int_from_string(std::string text);
 
-  // vx_int_from_string_find(string, string)
-  int vx_int_from_string_find(std::string text, std::string find);
-
-  // vx_int_from_string_findlast(string, string)
-  int vx_int_from_string_findlast(std::string text, std::string find);
-
   // vx_is_float(string)
   bool vx_is_float(std::string value);
 

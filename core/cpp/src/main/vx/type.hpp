@@ -67,6 +67,10 @@ namespace vx_type {
   typedef Abstract_length_from_string* Func_length_from_string;
   extern Func_length_from_string e_length_from_string;
   extern Func_length_from_string t_length_from_string;
+  class Abstract_string_lowercase;
+  typedef Abstract_string_lowercase* Func_string_lowercase;
+  extern Func_string_lowercase e_string_lowercase;
+  extern Func_string_lowercase t_string_lowercase;
   class Abstract_string_outdent;
   typedef Abstract_string_outdent* Func_string_outdent;
   extern Func_string_outdent e_string_outdent;
@@ -75,6 +79,10 @@ namespace vx_type {
   typedef Abstract_string_trim* Func_string_trim;
   extern Func_string_trim e_string_trim;
   extern Func_string_trim t_string_trim;
+  class Abstract_string_uppercase;
+  typedef Abstract_string_uppercase* Func_string_uppercase;
+  extern Func_string_uppercase e_string_uppercase;
+  extern Func_string_uppercase t_string_uppercase;
   class Abstract_string_from_int;
   typedef Abstract_string_from_int* Func_string_from_int;
   extern Func_string_from_int e_string_from_int;
@@ -113,17 +121,35 @@ namespace vx_type {
   extern Func_traits_from_typedef t_traits_from_typedef;// :headerfirst
 // :header
 
+  // vx_int_from_string_find(string, string)
+  int vx_int_from_string_find(std::string text, std::string find);
+
+  // vx_int_from_string_find(string, string)
+  vx_core::Type_int vx_int_from_string_find(vx_core::Type_string text, vx_core::Type_string find);
+
   // vx_int_from_string_findkeyword(string, string)
   int vx_int_from_string_findkeyword(std::string text, std::string find);
 
   // vx_int_from_string_findkeyword(string, string)
   vx_core::Type_int vx_int_from_string_findkeyword(vx_core::Type_string text, vx_core::Type_string find);
 
+  // vx_int_from_string_findlast(string, string)
+  int vx_int_from_string_findlast(std::string text, std::string find);
+
+  // vx_int_from_string_findlast(string, string)
+  vx_core::Type_int vx_int_from_string_findlast(vx_core::Type_string text, vx_core::Type_string findlast);
+
   // vx_string_from_stringlist_join(stringlist, string)
   vx_core::Type_string vx_string_from_stringlist_join(vx_core::Type_stringlist vals, vx_core::Type_string delim);
 
+  // vx_string_lowercase(string)
+  vx_core::Type_string vx_string_lowercase(vx_core::Type_string text);
+
   // vx_string_trim(string)
   vx_core::Type_string vx_string_trim(vx_core::Type_string text);
+
+  // vx_string_uppercase(string)
+  vx_core::Type_string vx_string_uppercase(vx_core::Type_string text);
 
   // vx_stringlist_from_string_split(string, string)
   vx_core::Type_stringlist vx_stringlist_from_string_split(vx_core::Type_string text, vx_core::Type_string delim);
@@ -171,11 +197,17 @@ namespace vx_type {
   // (func length<-string)
   vx_core::Type_int f_length_from_string(vx_core::Type_string text);
 
+  // (func string-lowercase)
+  vx_core::Type_string f_string_lowercase(vx_core::Type_string text);
+
   // (func string-outdent)
   vx_core::Type_string f_string_outdent(vx_core::Type_string text);
 
   // (func string-trim)
   vx_core::Type_string f_string_trim(vx_core::Type_string text);
+
+  // (func string-uppercase)
+  vx_core::Type_string f_string_uppercase(vx_core::Type_string text);
 
   // (func string<-int)
   vx_core::Type_string f_string_from_int(vx_core::Type_int val);
@@ -581,6 +613,33 @@ namespace vx_type {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
+  // (func string-lowercase)
+  class Abstract_string_lowercase : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_string_lowercase() {};
+    virtual ~Abstract_string_lowercase() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_string_lowercase : public virtual Abstract_string_lowercase {
+  public:
+    Class_string_lowercase();
+    virtual ~Class_string_lowercase() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
   // (func string-outdent)
   class Abstract_string_outdent : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
   public:
@@ -621,6 +680,33 @@ namespace vx_type {
   public:
     Class_string_trim();
     virtual ~Class_string_trim() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func string-uppercase)
+  class Abstract_string_uppercase : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_string_uppercase() {};
+    virtual ~Abstract_string_uppercase() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_string_uppercase : public virtual Abstract_string_uppercase {
+  public:
+    Class_string_uppercase();
+    virtual ~Class_string_uppercase() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;

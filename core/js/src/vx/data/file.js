@@ -33,6 +33,26 @@ export default class vx_data_file {
   }
 
   /**
+   * @function boolean_write_from_file
+   * Write a File to Disk
+   * @param  {file} file
+   * @return {boolean}
+   */
+  static t_boolean_write_from_file = {}
+  static e_boolean_write_from_file = {vx_type: vx_data_file.t_boolean_write_from_file}
+
+  // (func boolean-write<-file)
+  static f_boolean_write_from_file(context, file) {
+    let output = vx_core.e_boolean
+    output = vx_data_file.f_boolean_write_from_file_string(
+      context,
+      file,
+      vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_file.t_file}, file, ":text")
+    )
+    return output
+  }
+
+  /**
    * @function boolean_write_from_file_any
    * Write any data structure as a file.
    * @param  {file} file
@@ -200,6 +220,7 @@ export default class vx_data_file {
       "file": vx_data_file.e_file,
       "fileformat": vx_data_file.e_fileformat,
       "boolean-exists<-file": vx_data_file.e_boolean_exists_from_file,
+      "boolean-write<-file": vx_data_file.e_boolean_write_from_file,
       "boolean-write<-file-any": vx_data_file.e_boolean_write_from_file_any,
       "boolean-write<-file-string": vx_data_file.e_boolean_write_from_file_string,
       "file-read<-file": vx_data_file.e_file_read_from_file,
@@ -211,6 +232,7 @@ export default class vx_data_file {
     })
     const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
       "boolean-exists<-file": vx_data_file.t_boolean_exists_from_file,
+      "boolean-write<-file": vx_data_file.t_boolean_write_from_file,
       "boolean-write<-file-any": vx_data_file.t_boolean_write_from_file_any,
       "boolean-write<-file-string": vx_data_file.t_boolean_write_from_file_string,
       "file-read<-file": vx_data_file.t_file_read_from_file,
@@ -318,6 +340,25 @@ export default class vx_data_file {
       properties    : [],
       proplast      : {},
       fn            : vx_data_file.f_boolean_exists_from_file
+    }
+
+    // (func boolean-write<-file)
+    vx_data_file.t_boolean_write_from_file['vx_type'] = vx_core.t_type
+    vx_data_file.t_boolean_write_from_file['vx_value'] = {
+      name          : "boolean-write<-file",
+      pkgname       : "vx/data/file",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_file.f_boolean_write_from_file
     }
 
     // (func boolean-write<-file-any)

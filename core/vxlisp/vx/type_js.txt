@@ -1,4 +1,14 @@
+  // vx_int_from_string_find(string, string)
+  static vx_int_from_string_find(text, find) {
+    return text.indexOf(find) + 1
+  }
 
+  // vx_int_from_string_findlast(string, string)
+  static vx_int_from_string_findlast(text, findlast) {
+    return text.lastIndexOf(findlast) + 1
+  }
+
+  // vx_int_from_string_findkeyword(string, string)
   static vx_int_from_string_findkeyword(text, find) {
     let output = -1
     if (text != "") {
@@ -35,8 +45,18 @@
     return output
   }
 
+  static vx_string_lowercase(text) {
+    let output = text.toLowerCase()
+    return output
+  }
+
   static vx_string_trim(text) {
     let output = text.trim()
+    return output
+  }
+
+  static vx_string_uppercase(text) {
+    let output = text.toUpperCase()
     return output
   }
 

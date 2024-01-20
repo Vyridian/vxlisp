@@ -422,20 +422,6 @@ namespace vx_core {
     return output;
   }
 
-  // vx_int_from_string_find(string, string)
-  int vx_int_from_string_find(std::string text, std::string find) {
-    size_t pos = text.find(find);
-    int output = vx_core::vx_int_from_sizet(pos);
-    return output;
-  }
-
-  // vx_int_from_string_findlast(string, string)
-  int vx_int_from_string_findlast(std::string text, std::string find) {
-    size_t pos = text.rfind(find);
-    int output = vx_core::vx_int_from_sizet(pos);
-    return output;
-  }
-
   // vx_is_float(string)
   bool vx_is_float(std::string value) {
     bool output = true;

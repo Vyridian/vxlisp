@@ -5171,19 +5171,19 @@
                  (vx/web/html/p
                   :text "vx/data/file")
                  (vx/web/html/p
-                  :text "36% 4/11")
+                  :text "33% 4/12")
                  (vx/web/html/p
                   :text "0% 0/2")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "44% 4/9")
+                  :text "40% 4/10")
                  (vx/web/html/p
-                  :text "90% 10/11")
+                  :text "91% 11/12")
                  (vx/web/html/p
-                  :text "0% 0/9")
+                  :text "0% 0/10")
                  (vx/web/html/p
-                  :text "0% 0/9"))
+                  :text "0% 0/10"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -20667,19 +20667,19 @@
                  (vx/web/html/p
                   :text "vx/type")
                  (vx/web/html/p
-                  :text "65% 17/26")
+                  :text "67% 19/28")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "65% 17/26")
+                  :text "67% 19/28")
                  (vx/web/html/p
-                  :text "80% 21/26")
+                  :text "82% 23/28")
                  (vx/web/html/p
-                  :text "0% 0/26")
+                  :text "0% 0/28")
                  (vx/web/html/p
-                  :text "0% 0/26"))
+                  :text "0% 0/28"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -21329,6 +21329,38 @@
                              :nodes
                               (vx/web/html/divchildlist
                                (vx/web/html/p
+                                :text "string-lowercase")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ \"abc\"
+ (string-lowercase
+  \"AbC\"))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"abc\"")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"abc\"")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
                                 :text "string-outdent")))
                             (vx/web/html/td
                              :nodes
@@ -21422,6 +21454,38 @@ ab
                               (vx/web/html/divchildlist
                                (vx/web/html/p
                                 :text "\"ab\"")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "string-uppercase")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ \"ABC\"
+ (string-uppercase
+  \"aBc\"))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"ABC\"")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"ABC\"")))))
                          (vx/web/html/tr
                           :nodes
                            (vx/web/html/tdlist

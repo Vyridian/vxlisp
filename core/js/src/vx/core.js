@@ -116,16 +116,6 @@ export default class vx_core {
     }
   }
 
-  // vx_int_from_string_find(string, string)
-  static vx_int_from_string_find(text, find) {
-    return text.indexOf(find)
-  }
-
-  // vx_int_from_string_findlast(string, string)
-  static vx_int_from_string_findlast(text, findlast) {
-    return text.lastIndexOf(findlast)
-  }
-
   // vx_is_float(any)
   static vx_is_float(value) {
     let output = false

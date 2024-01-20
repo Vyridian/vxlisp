@@ -532,6 +532,105 @@ namespace vx_data_file {
 
   //}
 
+  // (func boolean-write<-file)
+  vx_core::Type_boolean f_boolean_write_from_file(vx_core::Type_context context, vx_data_file::Type_file file) {
+    vx_core::Type_boolean output = vx_core::e_boolean;
+    vx_core::vx_reserve(file);
+    output = vx_data_file::f_boolean_write_from_file_string(
+      context,
+      file,
+      file->text()
+    );
+    vx_core::vx_release_one_except(file, output);
+    return output;
+  }
+
+  // (func boolean-write<-file)
+  // class Class_boolean_write_from_file {
+    Abstract_boolean_write_from_file::~Abstract_boolean_write_from_file() {}
+
+    Class_boolean_write_from_file::Class_boolean_write_from_file() : Abstract_boolean_write_from_file::Abstract_boolean_write_from_file() {
+      vx_core::refcount += 1;
+    }
+
+    Class_boolean_write_from_file::~Class_boolean_write_from_file() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_boolean_write_from_file::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_data_file::Func_boolean_write_from_file output = vx_data_file::e_boolean_write_from_file;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_write_from_file::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_data_file::Func_boolean_write_from_file output = vx_data_file::e_boolean_write_from_file;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_boolean_write_from_file::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/data/file", // pkgname
+        "boolean-write<-file", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_boolean_write_from_file::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_boolean_write_from_file::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/data/file", // pkgname
+        "boolean-write<-file", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_write_from_file::vx_empty() const {return vx_data_file::e_boolean_write_from_file;}
+    vx_core::Type_any Class_boolean_write_from_file::vx_type() const {return vx_data_file::t_boolean_write_from_file;}
+    vx_core::Type_msgblock Class_boolean_write_from_file::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_boolean_write_from_file::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any_context Class_boolean_write_from_file::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const {
+      return vx_core::e_any_from_any_context;
+    }
+
+    vx_core::Type_any Class_boolean_write_from_file::vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_data_file::Type_file inputval = vx_core::vx_any_from_any(vx_data_file::t_file, val);
+      output = vx_data_file::f_boolean_write_from_file(context, inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_write_from_file::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_data_file::Type_file file = vx_core::vx_any_from_any(vx_data_file::t_file, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_data_file::f_boolean_write_from_file(context, file);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func boolean-write<-file-any)
   vx_core::Type_boolean f_boolean_write_from_file_any(vx_core::Type_context context, vx_data_file::Type_file file, vx_core::Type_any val) {
     vx_core::Type_boolean output = vx_core::e_boolean;
@@ -1311,6 +1410,8 @@ namespace vx_data_file {
   vx_data_file::Type_fileformat t_fileformat = NULL;
   vx_data_file::Func_boolean_exists_from_file e_boolean_exists_from_file = NULL;
   vx_data_file::Func_boolean_exists_from_file t_boolean_exists_from_file = NULL;
+  vx_data_file::Func_boolean_write_from_file e_boolean_write_from_file = NULL;
+  vx_data_file::Func_boolean_write_from_file t_boolean_write_from_file = NULL;
   vx_data_file::Func_boolean_write_from_file_any e_boolean_write_from_file_any = NULL;
   vx_data_file::Func_boolean_write_from_file_any t_boolean_write_from_file_any = NULL;
   vx_data_file::Func_boolean_write_from_file_string e_boolean_write_from_file_string = NULL;
@@ -1345,6 +1446,10 @@ namespace vx_data_file {
       vx_core::vx_reserve_empty(vx_data_file::e_boolean_exists_from_file);
       vx_data_file::t_boolean_exists_from_file = new vx_data_file::Class_boolean_exists_from_file();
       vx_core::vx_reserve_type(vx_data_file::t_boolean_exists_from_file);
+      vx_data_file::e_boolean_write_from_file = new vx_data_file::Class_boolean_write_from_file();
+      vx_core::vx_reserve_empty(vx_data_file::e_boolean_write_from_file);
+      vx_data_file::t_boolean_write_from_file = new vx_data_file::Class_boolean_write_from_file();
+      vx_core::vx_reserve_type(vx_data_file::t_boolean_write_from_file);
       vx_data_file::e_boolean_write_from_file_any = new vx_data_file::Class_boolean_write_from_file_any();
       vx_core::vx_reserve_empty(vx_data_file::e_boolean_write_from_file_any);
       vx_data_file::t_boolean_write_from_file_any = new vx_data_file::Class_boolean_write_from_file_any();
@@ -1384,6 +1489,7 @@ namespace vx_data_file {
       maptype["file"] = vx_data_file::t_file;
       maptype["fileformat"] = vx_data_file::t_fileformat;
       mapfunc["boolean-exists<-file"] = vx_data_file::t_boolean_exists_from_file;
+      mapfunc["boolean-write<-file"] = vx_data_file::t_boolean_write_from_file;
       mapfunc["boolean-write<-file-any"] = vx_data_file::t_boolean_write_from_file_any;
       mapfunc["boolean-write<-file-string"] = vx_data_file::t_boolean_write_from_file_string;
       mapfunc["file-read<-file"] = vx_data_file::t_file_read_from_file;

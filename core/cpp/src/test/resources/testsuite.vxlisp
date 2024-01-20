@@ -2991,6 +2991,7 @@
     :funcmap
      (intmap
       :boolean-exists<-file 1
+      :boolean-write<-file 0
       :boolean-write<-file-any 0
       :boolean-write<-file-string 1
       :file-read<-file 1
@@ -3008,29 +3009,29 @@
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 9)
+      :total 10)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 9)
+      :total 10)
     :constnums
      (vx/test/testcoveragenums
       :pct 100)
     :docnums
      (vx/test/testcoveragenums
-      :pct 90
-      :tests 10
-      :total 11)
+      :pct 91
+      :tests 11
+      :total 12)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 44
+      :pct 40
       :tests 4
-      :total 9)
+      :total 10)
     :testpkg "vx/data/file"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 36
+      :pct 33
       :tests 4
-      :total 11)
+      :total 12)
     :typenums
      (vx/test/testcoveragenums
       :total 2))
@@ -16548,6 +16549,25 @@
     (vx/test/testcase
      :passfail true
      :testpkg "vx/type"
+     :casename "string-lowercase"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"abc\"
+ (string-lowercase
+  \"AbC\"))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected "abc"
+          :actual "abc"))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/type"
      :casename "string-outdent"
      :describelist
       (vx/test/testdescribelist
@@ -16605,6 +16625,25 @@ ab
           :passfail true
           :expected "ab"
           :actual "ab"))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "string-uppercase"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"ABC\"
+ (string-uppercase
+  \"aBc\"))"
+        :testpkg "vx/type"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected "ABC"
+          :actual "ABC"))))
     (vx/test/testcase
      :passfail true
      :testpkg "vx/type"
@@ -16885,8 +16924,10 @@ ab
       :is-type 4
       :is-type<-any-typelist 4
       :length<-string 2
+      :string-lowercase 1
       :string-outdent 2
       :string-trim 1
+      :string-uppercase 1
       :string<-int 5
       :string<-string-end 2
       :string<-string-start 2
@@ -16901,29 +16942,29 @@ ab
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 26)
+      :total 28)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 26)
+      :total 28)
     :constnums
      (vx/test/testcoveragenums
       :pct 100)
     :docnums
      (vx/test/testcoveragenums
-      :pct 80
-      :tests 21
-      :total 26)
+      :pct 82
+      :tests 23
+      :total 28)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 65
-      :tests 17
-      :total 26)
+      :pct 67
+      :tests 19
+      :total 28)
     :testpkg "vx/type"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 65
-      :tests 17
-      :total 26)
+      :pct 67
+      :tests 19
+      :total 28)
     :typenums
      (vx/test/testcoveragenums
       :pct 100))
