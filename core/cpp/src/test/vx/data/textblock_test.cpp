@@ -429,6 +429,16 @@ namespace vx_data_textblock_test {
                         vx_core::vx_new(vx_core::t_anylist, {
                           vx_core::vx_new_string(":code"),
                           vx_core::vx_new_string("closedelimmissing"),
+                          vx_core::vx_new_string(":detail"),
+                          vx_core::f_new(
+                            vx_data_textblock::t_delim,
+                            vx_core::vx_new(vx_core::t_anylist, {
+                              vx_core::vx_new_string(":name"),
+                              vx_core::vx_new_string("delimclose"),
+                              vx_core::vx_new_string(":starttext"),
+                              vx_core::vx_new_string(">")
+                            })
+                          ),
                           vx_core::vx_new_string(":severity"),
                           vx_core::vx_new_int(2)
                         })
@@ -447,6 +457,16 @@ namespace vx_data_textblock_test {
                 vx_core::vx_new(vx_core::t_anylist, {
                   vx_core::vx_new_string(":code"),
                   vx_core::vx_new_string("closedelimmissing"),
+                  vx_core::vx_new_string(":detail"),
+                  vx_core::f_new(
+                    vx_data_textblock::t_delim,
+                    vx_core::vx_new(vx_core::t_anylist, {
+                      vx_core::vx_new_string(":name"),
+                      vx_core::vx_new_string("delimclose"),
+                      vx_core::vx_new_string(":starttext"),
+                      vx_core::vx_new_string(">")
+                    })
+                  ),
                   vx_core::vx_new_string(":severity"),
                   vx_core::vx_new_int(2)
                 })
@@ -520,7 +540,7 @@ namespace vx_data_textblock_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (textblock\n  :text \"<a\"\n  :startpos 1\n  :endpos 2\n  :children\n   (textblocklist\n    (textblock\n     :text \"<a\"\n     :startpos 1\n     :endpos 2\n     :delim\n      (copy delimbracketangle\n       :delimlist vx/data/textblock/delimlisttest1)\n     :children\n      (textblocklist\n       (textblock\n        :text \"a\"\n        :startpos 2\n        :endpos 2))\n     (msgblock\n      (msg\n       :code \"closedelimmissing\"\n       :severity 2))))\n  (msgblock\n   (msg\n    :code \"closedelimmissing\"\n    :severity 2)))\n (textblock-delimnotfound\n  (textblock\n   :text \"a\"\n   :startpos 2\n   :endpos 2\n   :delim\n    (delim\n     :delimlist vx/data/textblock/delimlisttest2)\n   :close\n    (copy delimclose\n     :starttext \">\")\n   :parent\n    (textblock\n     :text \"<a\"\n     :startpos 1\n     :endpos 2\n     :delim\n      (copy delimbracketangle\n       :delimlist vx/data/textblock/delimlisttest1)\n     :parent\n      (textblock\n       :text \"<a\"\n       :startpos 1\n       :endpos 2)))))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (textblock\n  :text \"<a\"\n  :startpos 1\n  :endpos 2\n  :children\n   (textblocklist\n    (textblock\n     :text \"<a\"\n     :startpos 1\n     :endpos 2\n     :delim\n      (copy delimbracketangle\n       :delimlist vx/data/textblock/delimlisttest1)\n     :children\n      (textblocklist\n       (textblock\n        :text \"a\"\n        :startpos 2\n        :endpos 2))\n     (msgblock\n      (msg\n       :code \"closedelimmissing\"\n       :detail\n        (delim\n         :name \"delimclose\"\n         :starttext \">\")\n       :severity 2))))\n  (msgblock\n   (msg\n    :code \"closedelimmissing\"\n    :detail\n     (delim\n      :name \"delimclose\"\n      :starttext \">\")\n    :severity 2)))\n (textblock-delimnotfound\n  (textblock\n   :text \"a\"\n   :startpos 2\n   :endpos 2\n   :delim\n    (delim\n     :delimlist vx/data/textblock/delimlisttest2)\n   :close\n    (copy delimclose\n     :starttext \">\")\n   :parent\n    (textblock\n     :text \"<a\"\n     :startpos 1\n     :endpos 2\n     :delim\n      (copy delimbracketangle\n       :delimlist vx/data/textblock/delimlisttest1)\n     :parent\n      (textblock\n       :text \"<a\"\n       :startpos 1\n       :endpos 2)))))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -2125,6 +2145,16 @@ namespace vx_data_textblock_test {
                         vx_core::vx_new(vx_core::t_anylist, {
                           vx_core::vx_new_string(":code"),
                           vx_core::vx_new_string("closedelimmissing"),
+                          vx_core::vx_new_string(":detail"),
+                          vx_core::f_new(
+                            vx_data_textblock::t_delim,
+                            vx_core::vx_new(vx_core::t_anylist, {
+                              vx_core::vx_new_string(":name"),
+                              vx_core::vx_new_string("delimclose"),
+                              vx_core::vx_new_string(":starttext"),
+                              vx_core::vx_new_string(">")
+                            })
+                          ),
                           vx_core::vx_new_string(":severity"),
                           vx_core::vx_new_int(2)
                         })
@@ -2143,6 +2173,16 @@ namespace vx_data_textblock_test {
                 vx_core::vx_new(vx_core::t_anylist, {
                   vx_core::vx_new_string(":code"),
                   vx_core::vx_new_string("closedelimmissing"),
+                  vx_core::vx_new_string(":detail"),
+                  vx_core::f_new(
+                    vx_data_textblock::t_delim,
+                    vx_core::vx_new(vx_core::t_anylist, {
+                      vx_core::vx_new_string(":name"),
+                      vx_core::vx_new_string("delimclose"),
+                      vx_core::vx_new_string(":starttext"),
+                      vx_core::vx_new_string(">")
+                    })
+                  ),
                   vx_core::vx_new_string(":severity"),
                   vx_core::vx_new_int(2)
                 })
@@ -2216,7 +2256,7 @@ namespace vx_data_textblock_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (textblock\n  :text \"<a\"\n  :startpos 1\n  :endpos 2\n  :children\n   (textblocklist\n    (textblock\n     :text \"<a\"\n     :startpos 1\n     :endpos 2\n     :delim\n      (copy delimbracketangle\n       :delimlist vx/data/textblock/delimlisttest1)\n     :children\n      (textblocklist\n       (textblock\n        :text \"a\"\n        :startpos 2\n        :endpos 2))\n     (msgblock\n      (msg\n       :code \"closedelimmissing\"\n       :severity 2))))\n  (msgblock\n   (msg\n    :code \"closedelimmissing\"\n    :severity 2)))\n (textblock-parse-one\n  (textblock\n   :text \"a\"\n   :startpos 2\n   :endpos 2\n   :delim\n    (delim\n     :delimlist vx/data/textblock/delimlisttest2)\n   :close\n    (copy delimclose\n     :starttext \">\")\n   :parent\n    (textblock\n     :text \"<a\"\n     :startpos 1\n     :endpos 2\n     :delim\n      (copy delimbracketangle\n       :delimlist vx/data/textblock/delimlisttest1)\n     :parent\n      (textblock\n       :text \"<a\"\n       :startpos 1\n       :endpos 2)))))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (textblock\n  :text \"<a\"\n  :startpos 1\n  :endpos 2\n  :children\n   (textblocklist\n    (textblock\n     :text \"<a\"\n     :startpos 1\n     :endpos 2\n     :delim\n      (copy delimbracketangle\n       :delimlist vx/data/textblock/delimlisttest1)\n     :children\n      (textblocklist\n       (textblock\n        :text \"a\"\n        :startpos 2\n        :endpos 2))\n     (msgblock\n      (msg\n       :code \"closedelimmissing\"\n       :detail\n        (delim\n         :name \"delimclose\"\n         :starttext \">\")\n       :severity 2))))\n  (msgblock\n   (msg\n    :code \"closedelimmissing\"\n    :detail\n     (delim\n      :name \"delimclose\"\n      :starttext \">\")\n    :severity 2)))\n (textblock-parse-one\n  (textblock\n   :text \"a\"\n   :startpos 2\n   :endpos 2\n   :delim\n    (delim\n     :delimlist vx/data/textblock/delimlisttest2)\n   :close\n    (copy delimclose\n     :starttext \">\")\n   :parent\n    (textblock\n     :text \"<a\"\n     :startpos 1\n     :endpos 2\n     :delim\n      (copy delimbracketangle\n       :delimlist vx/data/textblock/delimlisttest1)\n     :parent\n      (textblock\n       :text \"<a\"\n       :startpos 1\n       :endpos 2)))))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/textblock"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });

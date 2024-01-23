@@ -79,13 +79,31 @@ public final class Type {
     String stext = String.join(delim.vx_string(), listvalstring);  
     Core.Type_string output = Core.vx_new_string(stext);
     return output;
-	}
+  }
+
+  // vx_string_lowercase(string)
+  public static Core.Type_string vx_string_lowercase(Core.Type_string text) {
+    Core.Type_string output = Core.e_string;
+    String stext = text.vx_string();
+    stext = stext.toLowerCase();
+    output = Core.vx_new_string(stext);
+    return output;
+  }
 
   // vx_string_trim(string)
   public static Core.Type_string vx_string_trim(Core.Type_string text) {
     Core.Type_string output = Core.e_string;
     String stext = text.vx_string();
     stext = stext.trim();
+    output = Core.vx_new_string(stext);
+    return output;
+  }
+
+  // vx_string_uppercase(string)
+  public static Core.Type_string vx_string_uppercase(Core.Type_string text) {
+    Core.Type_string output = Core.e_string;
+    String stext = text.vx_string();
+    stext = stext.toUpperCase();
     output = Core.vx_new_string(stext);
     return output;
   }
@@ -1434,6 +1452,97 @@ public final class Type {
   }
 
   /**
+   * @function string_lowercase
+   * Returns lowercase version of string
+   * @param  {string} text
+   * @return {string}
+   * (func string-lowercase)
+   */
+  public static interface Func_string_lowercase extends Core.Func_any_from_any {
+    public Core.Type_string vx_string_lowercase(final Core.Type_string text);
+  }
+
+  public static class Class_string_lowercase extends Core.Class_base implements Func_string_lowercase {
+
+    @Override
+    public Func_string_lowercase vx_new(Object... vals) {
+      Class_string_lowercase output = new Class_string_lowercase();
+      return output;
+    }
+
+    @Override
+    public Func_string_lowercase vx_copy(Object... vals) {
+      Class_string_lowercase output = new Class_string_lowercase();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/type", // pkgname
+        "string-lowercase", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_string_lowercase vx_empty() {return e_string_lowercase;}
+    @Override
+    public Func_string_lowercase vx_type() {return t_string_lowercase;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_string inputval = (Core.Type_string)value;
+      Core.Type_any outputval = Type.f_string_lowercase(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      output = Type.f_string_lowercase(text);
+      return output;
+    }
+
+    @Override
+    public Core.Type_string vx_string_lowercase(final Core.Type_string text) {
+      return Type.f_string_lowercase(text);
+    }
+
+  }
+
+  public static final Func_string_lowercase e_string_lowercase = new Type.Class_string_lowercase();
+  public static final Func_string_lowercase t_string_lowercase = new Type.Class_string_lowercase();
+
+  public static Core.Type_string f_string_lowercase(final Core.Type_string text) {
+    Core.Type_string output = Core.e_string;
+    output = Type.vx_string_lowercase(text);
+    return output;
+  }
+
+  /**
    * @function string_outdent
    * Returns a string replacing leading whitespace on all lines based on first line.
    * @param  {string} text
@@ -1652,6 +1761,97 @@ public final class Type {
   public static Core.Type_string f_string_trim(final Core.Type_string text) {
     Core.Type_string output = Core.e_string;
     output = Type.vx_string_trim(text);
+    return output;
+  }
+
+  /**
+   * @function string_uppercase
+   * Returns uppercase version of string
+   * @param  {string} text
+   * @return {string}
+   * (func string-uppercase)
+   */
+  public static interface Func_string_uppercase extends Core.Func_any_from_any {
+    public Core.Type_string vx_string_uppercase(final Core.Type_string text);
+  }
+
+  public static class Class_string_uppercase extends Core.Class_base implements Func_string_uppercase {
+
+    @Override
+    public Func_string_uppercase vx_new(Object... vals) {
+      Class_string_uppercase output = new Class_string_uppercase();
+      return output;
+    }
+
+    @Override
+    public Func_string_uppercase vx_copy(Object... vals) {
+      Class_string_uppercase output = new Class_string_uppercase();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/type", // pkgname
+        "string-uppercase", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_string_uppercase vx_empty() {return e_string_uppercase;}
+    @Override
+    public Func_string_uppercase vx_type() {return t_string_uppercase;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_string inputval = (Core.Type_string)value;
+      Core.Type_any outputval = Type.f_string_uppercase(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      output = Type.f_string_uppercase(text);
+      return output;
+    }
+
+    @Override
+    public Core.Type_string vx_string_uppercase(final Core.Type_string text) {
+      return Type.f_string_uppercase(text);
+    }
+
+  }
+
+  public static final Func_string_uppercase e_string_uppercase = new Type.Class_string_uppercase();
+  public static final Func_string_uppercase t_string_uppercase = new Type.Class_string_uppercase();
+
+  public static Core.Type_string f_string_uppercase(final Core.Type_string text) {
+    Core.Type_string output = Core.e_string;
+    output = Type.vx_string_uppercase(text);
     return output;
   }
 
@@ -2488,8 +2688,10 @@ public final class Type {
     mapfunc.put("is-type", Type.t_is_type);
     mapfunc.put("is-type<-any-typelist", Type.t_is_type_from_any_typelist);
     mapfunc.put("length<-string", Type.t_length_from_string);
+    mapfunc.put("string-lowercase", Type.t_string_lowercase);
     mapfunc.put("string-outdent", Type.t_string_outdent);
     mapfunc.put("string-trim", Type.t_string_trim);
+    mapfunc.put("string-uppercase", Type.t_string_uppercase);
     mapfunc.put("string<-int", Type.t_string_from_int);
     mapfunc.put("string<-string-end", Type.t_string_from_string_end);
     mapfunc.put("string<-string-start", Type.t_string_from_string_start);

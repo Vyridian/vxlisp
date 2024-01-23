@@ -23,12 +23,12 @@ export default class vx_core_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/core", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 14, ":tests", 2, ":total", 14), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 88, ":tests", 219, ":total", 247), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 89, ":tests", 221, ":total", 248), 
       "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 48, ":tests", 65, ":total", 135), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 32, ":tests", 71, ":total", 221), 
-      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 5, ":tests", 4, ":total", 72)
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 31, ":tests", 71, ":total", 222), 
+      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 5, ":tests", 4, ":total", 73)
     )
   }
 
@@ -43,6 +43,7 @@ export default class vx_core_test {
           "any-async<-func", 0,
           "any<-anylist", 0,
           "anylist", 0,
+          "anymap", 0,
           "anytype", 0,
           "arg", 0,
           "arglist", 0,

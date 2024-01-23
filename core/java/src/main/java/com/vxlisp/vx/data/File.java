@@ -443,6 +443,102 @@ public final class File {
   }
 
   /**
+   * @function boolean_write_from_file
+   * Write a File to Disk
+   * @param  {file} file
+   * @return {boolean}
+   * (func boolean-write<-file)
+   */
+  public static interface Func_boolean_write_from_file extends Core.Func_any_from_any_context {
+    public Core.Type_boolean vx_boolean_write_from_file(final Core.Type_context context, final File.Type_file file);
+  }
+
+  public static class Class_boolean_write_from_file extends Core.Class_base implements Func_boolean_write_from_file {
+
+    @Override
+    public Func_boolean_write_from_file vx_new(Object... vals) {
+      Class_boolean_write_from_file output = new Class_boolean_write_from_file();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_write_from_file vx_copy(Object... vals) {
+      Class_boolean_write_from_file output = new Class_boolean_write_from_file();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/data/file", // pkgname
+        "boolean-write<-file", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_write_from_file vx_empty() {return e_boolean_write_from_file;}
+    @Override
+    public Func_boolean_write_from_file vx_type() {return t_boolean_write_from_file;}
+
+    @Override
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      File.Type_file inputval = (File.Type_file)value;
+      Core.Type_any outputval = File.f_boolean_write_from_file(context, inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
+      File.Type_file file = Core.f_any_from_any(File.t_file, arglist.vx_any(Core.vx_new_int(0)));
+      output = File.f_boolean_write_from_file(context, file);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean vx_boolean_write_from_file(final Core.Type_context context, final File.Type_file file) {
+      return File.f_boolean_write_from_file(context, file);
+    }
+
+  }
+
+  public static final Func_boolean_write_from_file e_boolean_write_from_file = new File.Class_boolean_write_from_file();
+  public static final Func_boolean_write_from_file t_boolean_write_from_file = new File.Class_boolean_write_from_file();
+
+  public static Core.Type_boolean f_boolean_write_from_file(final Core.Type_context context, final File.Type_file file) {
+    Core.Type_boolean output = Core.e_boolean;
+    output = File.f_boolean_write_from_file_string(
+      context,
+      file,
+      file.text()
+    );
+    return output;
+  }
+
+  /**
    * @function boolean_write_from_file_any
    * Write any data structure as a file.
    * @param  {file} file
@@ -1206,6 +1302,7 @@ public final class File {
     maptype.put("file", File.t_file);
     maptype.put("fileformat", File.t_fileformat);
     mapfunc.put("boolean-exists<-file", File.t_boolean_exists_from_file);
+    mapfunc.put("boolean-write<-file", File.t_boolean_write_from_file);
     mapfunc.put("boolean-write<-file-any", File.t_boolean_write_from_file_any);
     mapfunc.put("boolean-write<-file-string", File.t_boolean_write_from_file_string);
     mapfunc.put("file-read<-file", File.t_file_read_from_file);

@@ -2309,6 +2309,7 @@
       :any-async<-func 0
       :any<-anylist 0
       :anylist 0
+      :anymap 0
       :anytype 0
       :arg 0
       :arglist 0
@@ -2396,9 +2397,9 @@
       :total 14)
     :docnums
      (testcoveragenums
-      :pct 88
-      :tests 219
-      :total 247)
+      :pct 89
+      :tests 221
+      :total 248)
     :funcnums
      (testcoveragenums
       :pct 48
@@ -2407,14 +2408,14 @@
     :testpkg "vx/core"
     :totalnums
      (testcoveragenums
-      :pct 32
+      :pct 31
       :tests 71
-      :total 221)
+      :total 222)
     :typenums
      (testcoveragenums
       :pct 5
       :tests 4
-      :total 72))
+      :total 73))
   :passfail true
   :testpkg "vx/core")
  (testpackage
@@ -2897,6 +2898,7 @@
     :funcmap
      (intmap
       :boolean-exists<-file 1
+      :boolean-write<-file 0
       :boolean-write<-file-any 0
       :boolean-write<-file-string 1
       :file-read<-file 1
@@ -2916,12 +2918,12 @@
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 9)
+      :total 10)
     :bigotimenums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 9)
+      :total 10)
     :constnums
      (testcoveragenums
       :pct 100
@@ -2929,20 +2931,20 @@
       :total 0)
     :docnums
      (testcoveragenums
-      :pct 90
-      :tests 10
-      :total 11)
+      :pct 91
+      :tests 11
+      :total 12)
     :funcnums
      (testcoveragenums
-      :pct 44
+      :pct 40
       :tests 4
-      :total 9)
+      :total 10)
     :testpkg "vx/data/file"
     :totalnums
      (testcoveragenums
-      :pct 36
+      :pct 33
       :tests 4
-      :total 11)
+      :total 12)
     :typenums
      (testcoveragenums
       :pct 0
@@ -3262,10 +3264,18 @@
      (msgblock
       (msg
        :code "closedelimmissing"
+       :detail
+        (delim
+         :name "delimclose"
+         :starttext ">")
        :severity 2))))
   (msgblock
    (msg
     :code "closedelimmissing"
+    :detail
+     (delim
+      :name "delimclose"
+      :starttext ">")
     :severity 2)))
  (textblock-delimnotfound
   (textblock
@@ -3323,12 +3333,20 @@
                  (msglist
                   (msg
                    :code "closedelimmissing"
+                   :detail
+                    (delim
+                     :name "delimclose"
+                     :starttext ">")
                    :severity 2)))))
             (msgblock
              :msgs
               (msglist
                (msg
                 :code "closedelimmissing"
+                :detail
+                 (delim
+                  :name "delimclose"
+                  :starttext ">")
                 :severity 2))))
           :actual
            (textblock
@@ -3358,12 +3376,20 @@
                  (msglist
                   (msg
                    :code "closedelimmissing"
+                   :detail
+                    (delim
+                     :name "delimclose"
+                     :starttext ">")
                    :severity 2)))))
             (msgblock
              :msgs
               (msglist
                (msg
                 :code "closedelimmissing"
+                :detail
+                 (delim
+                  :name "delimclose"
+                  :starttext ">")
                 :severity 2))))))
        (testdescribe
         :describename
@@ -4657,10 +4683,18 @@
      (msgblock
       (msg
        :code "closedelimmissing"
+       :detail
+        (delim
+         :name "delimclose"
+         :starttext ">")
        :severity 2))))
   (msgblock
    (msg
     :code "closedelimmissing"
+    :detail
+     (delim
+      :name "delimclose"
+      :starttext ">")
     :severity 2)))
  (textblock-parse-one
   (textblock
@@ -4718,12 +4752,20 @@
                  (msglist
                   (msg
                    :code "closedelimmissing"
+                   :detail
+                    (delim
+                     :name "delimclose"
+                     :starttext ">")
                    :severity 2)))))
             (msgblock
              :msgs
               (msglist
                (msg
                 :code "closedelimmissing"
+                :detail
+                 (delim
+                  :name "delimclose"
+                  :starttext ">")
                 :severity 2))))
           :actual
            (textblock
@@ -4753,12 +4795,20 @@
                  (msglist
                   (msg
                    :code "closedelimmissing"
+                   :detail
+                    (delim
+                     :name "delimclose"
+                     :starttext ">")
                    :severity 2)))))
             (msgblock
              :msgs
               (msglist
                (msg
                 :code "closedelimmissing"
+                :detail
+                 (delim
+                  :name "delimclose"
+                  :starttext ">")
                 :severity 2))))))
        (testdescribe
         :describename
@@ -16519,6 +16569,24 @@
     (testcase
      :passfail true
      :testpkg "vx/type"
+     :casename "string-lowercase"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         "(test
+ "abc"
+ (string-lowercase
+  "AbC"))"
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "abc"
+          :actual "abc"))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
      :casename "string-outdent"
      :describelist
       (testdescribelist
@@ -16573,6 +16641,24 @@ ab
           :passfail true
           :expected "ab"
           :actual "ab"))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "string-uppercase"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         "(test
+ "ABC"
+ (string-uppercase
+  "aBc"))"
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "ABC"
+          :actual "ABC"))))
     (testcase
      :passfail true
      :testpkg "vx/type"
@@ -16837,8 +16923,10 @@ ab
       :is-type 4
       :is-type<-any-typelist 4
       :length<-string 2
+      :string-lowercase 1
       :string-outdent 2
       :string-trim 1
+      :string-uppercase 1
       :string<-int 5
       :string<-string-end 2
       :string<-string-start 2
@@ -16855,12 +16943,12 @@ ab
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 26)
+      :total 28)
     :bigotimenums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 26)
+      :total 28)
     :constnums
      (testcoveragenums
       :pct 100
@@ -16868,20 +16956,20 @@ ab
       :total 0)
     :docnums
      (testcoveragenums
-      :pct 80
-      :tests 21
-      :total 26)
+      :pct 82
+      :tests 23
+      :total 28)
     :funcnums
      (testcoveragenums
-      :pct 65
-      :tests 17
-      :total 26)
+      :pct 67
+      :tests 19
+      :total 28)
     :testpkg "vx/type"
     :totalnums
      (testcoveragenums
-      :pct 65
-      :tests 17
-      :total 26)
+      :pct 67
+      :tests 19
+      :total 28)
     :typenums
      (testcoveragenums
       :pct 100

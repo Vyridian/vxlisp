@@ -522,15 +522,15 @@
                  (vx/web/html/p
                   :text "vx/core")
                  (vx/web/html/p
-                  :text "32% 71/221")
+                  :text "31% 71/222")
                  (vx/web/html/p
-                  :text "5% 4/72")
+                  :text "5% 4/73")
                  (vx/web/html/p
                   :text "14% 2/14")
                  (vx/web/html/p
                   :text "48% 65/135")
                  (vx/web/html/p
-                  :text "88% 219/247")
+                  :text "89% 221/248")
                  (vx/web/html/p
                   :text "0% 1/161")
                  (vx/web/html/p
@@ -5850,10 +5850,18 @@
      (msgblock
       (msg
        :code \"closedelimmissing\"
+       :detail
+        (delim
+         :name \"delimclose\"
+         :starttext \">\")
        :severity 2))))
   (msgblock
    (msg
     :code \"closedelimmissing\"
+    :detail
+     (delim
+      :name \"delimclose\"
+      :starttext \">\")
     :severity 2)))
  (textblock-delimnotfound
   (textblock
@@ -7343,10 +7351,18 @@
      (msgblock
       (msg
        :code \"closedelimmissing\"
+       :detail
+        (delim
+         :name \"delimclose\"
+         :starttext \">\")
        :severity 2))))
   (msgblock
    (msg
     :code \"closedelimmissing\"
+    :detail
+     (delim
+      :name \"delimclose\"
+      :starttext \">\")
     :severity 2)))
  (textblock-parse-one
   (textblock

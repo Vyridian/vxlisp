@@ -2773,12 +2773,12 @@ public final class CoreTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/core", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 14, ":tests", 2, ":total", 14), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 88, ":tests", 219, ":total", 247), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 89, ":tests", 221, ":total", 248), 
       ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 48, ":tests", 65, ":total", 135), 
       ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 161), 
       ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 161), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 32, ":tests", 71, ":total", 221), 
-      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 5, ":tests", 4, ":total", 72)
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 31, ":tests", 71, ":total", 222), 
+      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 5, ":tests", 4, ":total", 73)
     );
   }
 
@@ -2790,6 +2790,7 @@ public final class CoreTest {
         ":any-async<-func", 0,
         ":any<-anylist", 0,
         ":anylist", 0,
+        ":anymap", 0,
         ":anytype", 0,
         ":arg", 0,
         ":arglist", 0,

@@ -492,7 +492,6 @@ public final class Core {
     return output;
   }
 
-
   // vx_msg_from_error
   public static Type_msg vx_msg_from_error(final String text) {
     Class_msg output = new Class_msg();
@@ -508,6 +507,36 @@ public final class Core {
     output.vx_p_code = Core.vx_new_string(code);
     output.vx_p_detail = detail;
     output.vx_p_severity = Core.c_msg_severe;
+    return output;
+  }
+
+  // vx_msgblock_from_copy_listval(msgblock, List<any>)
+  public static Type_msgblock vx_msgblock_from_copy_listval(final Type_msgblock msgblock, Type_any... vals) {
+    Type_msgblock output = Core.e_msgblock;
+    List<Type_msgblock> listmsgblock = new ArrayList<>();
+    if (msgblock != null) {
+      Type_msgblock origmsgblock = msgblock.vx_msgblock();
+      if (origmsgblock != Core.e_msgblock) {
+        List<Type_msgblock> origlistmsgblock = origmsgblock.msgblocks().vx_listmsgblock();
+        listmsgblock.addAll(origlistmsgblock);
+      }
+    }
+    for (Type_any subval : vals) {
+      Type_msgblock submsgblock = subval.vx_msgblock();
+      if (submsgblock != Core.e_msgblock) {
+        listmsgblock.add(submsgblock);
+      }
+    }
+    if (listmsgblock.size() > 0) {
+      Class_msgblocklist msgblocks;
+      msgblocks = new Class_msgblocklist();
+      msgblocks.vx_p_list = listmsgblock;
+      Class_msgblock outputclass = new Class_msgblock();
+      outputclass.vx_p_msgblocks = msgblocks;
+      output = outputclass;
+    } else if (msgblock != null) {
+      output = msgblock;
+    }
     return output;
   }
 
@@ -1059,6 +1088,7 @@ public final class Core {
 
   /**
    * type: anylist
+   * A list of any
    * (type anylist)
    */
   public interface Type_anylist extends Core.Type_list {
@@ -1171,6 +1201,146 @@ public final class Core {
 
   public static final Type_anylist e_anylist = new Class_anylist();
   public static final Type_anylist t_anylist = new Class_anylist();
+
+  /**
+   * type: anymap
+   * A map of any
+   * (type anymap)
+   */
+  public interface Type_anymap extends Core.Type_map {
+    public Core.Type_anymap vx_new(final Object... vals);
+    public Core.Type_anymap vx_copy(final Object... vals);
+    public Core.Type_anymap vx_empty();
+    public Core.Type_anymap vx_type();
+  }
+
+  public static class Class_anymap extends Core.Class_base implements Type_anymap {
+
+    protected Map<String, Core.Type_any> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
+
+    @Override
+    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+
+    @Override
+    public Core.Type_any vx_any(final Core.Type_string key) {
+      Core.Type_any output = Core.e_any;
+      Class_anymap map = this;
+      String skey = key.vx_string();
+      Map<String, Core.Type_any> mapval = map.vx_p_map;
+      output = mapval.getOrDefault(skey, Core.e_any);
+      return output;
+    }
+
+    @Override
+    public Type_anymap vx_new_from_map(final Map<String, Core.Type_any> mapval) {
+      Class_anymap output = new Class_anymap();
+      Core.Type_msgblock msgblock = Core.e_msgblock;
+      Map<String, Core.Type_any> map = new LinkedHashMap<>();
+      Set<String> keys = mapval.keySet();
+      for (String key : keys) {
+        Core.Type_any val = mapval.get(key);
+        if (val instanceof Core.Type_any) {
+          Core.Type_any castval = (Core.Type_any)val;
+          map.put(key, castval);
+        } else {
+          Core.Type_msg msg = Core.vx_msg_from_error("(anymap) Invalid Value: " + val.toString() + "");
+          msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+        }
+      }
+      output.vx_p_map = Core.immutablemap(map);
+      if (msgblock != Core.e_msgblock) {
+        output.vxmsgblock = msgblock;
+      }
+      return output;
+    }
+
+    @Override
+    public Type_anymap vx_new(final Object... vals) {return e_anymap.vx_copy(vals);}
+
+    @Override
+    public Type_anymap vx_copy(final Object... vals) {
+      Type_anymap output = this;
+      boolean ischanged = false;
+      Class_anymap val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
+      Map<String, Core.Type_any> mapval = new LinkedHashMap<>(val.vx_map());
+      Core.Type_msg msg;
+      String key = "";
+      for (Object valsub : vals) {
+        if (valsub instanceof Core.Type_msgblock) {
+          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Core.Type_msg) {
+          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+        } else if (key.equals("")) {
+          if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstring = (Core.Type_string)valsub;
+            key = valstring.vx_string();
+          } else if (valsub instanceof String) {
+            key = (String)valsub;
+          } else {
+            msg = Core.vx_msg_from_error(":keyexpected: " + valsub.toString() + "");
+            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+          }
+        } else {
+          Core.Type_any valany = null;
+          if (valsub instanceof Core.Type_any) {
+            valany = (Core.Type_any)valsub;
+          } else if (valsub instanceof Core.Type_any) {
+            valany = (Core.Type_any)valsub;
+          } else {
+            msg = Core.vx_msg_from_error(":invalidkeyvalue: " + key + " "  + valsub.toString() + "");
+            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+          }
+          if (valany != null) {
+            ischanged = true;
+            if (key.startsWith(":")) {
+              key = key.substring(1);
+            }
+            mapval.put(key, valany);
+            key = "";
+          }
+        }
+      }
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_anymap work = new Class_anymap();
+        work.vx_p_map = Core.immutablemap(mapval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
+      }
+      return output;
+    }
+
+    @Override
+    public Type_anymap vx_empty() {return e_anymap;}
+    @Override
+    public Type_anymap vx_type() {return t_anymap;}
+
+    @Override
+    public Core.Type_typedef vx_typedef() {
+      return Core.typedef_new(
+        "vx/core", // pkgname
+        "anymap", // name
+        ":map", // extends
+        Core.e_typelist, // traits
+        Core.t_typelist.vx_new(Core.t_any), // allowtypes
+        Core.e_typelist, // disallowtypes
+        Core.e_funclist, // allowfuncs
+        Core.e_funclist, // disallowfuncs
+        Core.e_anylist, // allowvalues
+        Core.e_anylist, // disallowvalues
+        Core.e_argmap // properties
+      );
+    }
+
+  }
+
+  public static final Type_anymap e_anymap = new Class_anymap();
+  public static final Type_anymap t_anymap = new Class_anymap();
 
   /**
    * type: anytype
@@ -22134,6 +22304,8 @@ public final class Core {
       Core.t_anylist.vx_new(
         Core.vx_new_string(":code"),
         code,
+        Core.vx_new_string(":detail"),
+        detail,
         Core.vx_new_string(":severity"),
         Core.c_msg_error
       )
@@ -26044,6 +26216,7 @@ public final class Core {
     maptype.put("any-async<-func", Core.t_any_async_from_func);
     maptype.put("any<-anylist", Core.t_any_from_anylist);
     maptype.put("anylist", Core.t_anylist);
+    maptype.put("anymap", Core.t_anymap);
     maptype.put("anytype", Core.t_anytype);
     maptype.put("arg", Core.t_arg);
     maptype.put("arglist", Core.t_arglist);

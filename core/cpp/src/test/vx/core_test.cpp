@@ -3644,9 +3644,9 @@ namespace vx_core_test {
         vx_core::vx_new_string(":total"), vx_core::vx_new_int(14)
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(88), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(219), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(247)
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(89), 
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(221), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(248)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(48), 
@@ -3664,14 +3664,14 @@ namespace vx_core_test {
         vx_core::vx_new_string(":total"), vx_core::vx_new_int(161)
       }),
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(32), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(31), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(71), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(221)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(222)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(5), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(4), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(72)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(73)
       })
     });
     return output;
@@ -3685,6 +3685,7 @@ namespace vx_core_test {
         vx_core::vx_new_string(":any-async<-func"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":any<-anylist"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":anylist"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":anymap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":anytype"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":arg"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":arglist"), vx_core::vx_new_int(0),

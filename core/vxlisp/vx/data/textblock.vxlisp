@@ -1535,10 +1535,18 @@
             (msgblock
              (msg
               :code "closedelimmissing"
+              :detail
+               (delim
+                :name "delimclose"
+                :starttext ">")
               :severity 2))))
          (msgblock
           (msg
            :code "closedelimmissing"
+           :detail
+            (delim
+             :name "delimclose"
+             :starttext ">")
            :severity 2)))
         (textblock-delimnotfound
          (textblock
@@ -2259,10 +2267,18 @@
             (msgblock
              (msg
               :code "closedelimmissing"
+              :detail
+               (delim
+                :name "delimclose"
+                :starttext ">")
               :severity 2))))
          (msgblock
           (msg
            :code "closedelimmissing"
+           :detail
+            (delim
+             :name "delimclose"
+             :starttext ">")
            :severity 2)))
         (textblock-parse-one
          (textblock

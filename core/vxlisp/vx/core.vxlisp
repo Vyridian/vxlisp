@@ -21,7 +21,12 @@
  :doc        "List of any<-any")
 
 (type anylist : list
- :allowtypes [any])
+ :allowtypes [any]
+ :doc        "A list of any")
+
+(type anymap : map
+ :allowtypes [any]
+ :doc        "A map of any")
 
 (type anytype : type
  :doc     "Any Type that allows any Type as a Value")
@@ -2389,6 +2394,7 @@
   detail : any]
  (msg
   :code code
+  :detail detail
   :severity msg-error)
  :doc "Returns a msg from error code and detail")
 

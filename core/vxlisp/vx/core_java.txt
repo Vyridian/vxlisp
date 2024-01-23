@@ -474,7 +474,6 @@
     return output;
   }
 
-
   // vx_msg_from_error
   public static Type_msg vx_msg_from_error(final String text) {
     Class_msg output = new Class_msg();
@@ -490,6 +489,36 @@
     output.vx_p_code = Core.vx_new_string(code);
     output.vx_p_detail = detail;
     output.vx_p_severity = Core.c_msg_severe;
+    return output;
+  }
+
+  // vx_msgblock_from_copy_listval(msgblock, List<any>)
+  public static Core.Type_msgblock vx_msgblock_from_copy_listval(final Core.Type_msgblock msgblock, Core.Type_any... vals) {
+    Core.Type_msgblock output = Core.e_msgblock;
+    List<Core.Type_msgblock> listmsgblock = new ArrayList<>();
+    if (msgblock != null) {
+      Core.Type_msgblock origmsgblock = msgblock.vx_msgblock();
+      if (origmsgblock != Core.e_msgblock) {
+        List<Core.Type_msgblock> origlistmsgblock = origmsgblock.msgblocks().vx_listmsgblock();
+        listmsgblock.addAll(origlistmsgblock);
+      }
+    }
+    for (Core.Type_any subval : vals) {
+      Core.Type_msgblock submsgblock = subval.vx_msgblock();
+      if (submsgblock != Core.e_msgblock) {
+        listmsgblock.add(submsgblock);
+      }
+    }
+    if (listmsgblock.size() > 0) {
+      Core.Class_msgblocklist msgblocks;
+      msgblocks = new Core.Class_msgblocklist();
+      msgblocks.vx_p_list = listmsgblock;
+      Core.Class_msgblock outputclass = new Core.Class_msgblock();
+      outputclass.vx_p_msgblocks = msgblocks;
+      output = outputclass;
+    } else if (msgblock != null) {
+      output = msgblock;
+    }
     return output;
   }
 

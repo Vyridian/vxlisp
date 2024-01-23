@@ -1058,8 +1058,15 @@ export default class vx_core {
 
   /**
    * type: anylist
+   * A list of any
    */
   static t_anylist = {}
+
+  /**
+   * type: anymap
+   * A map of any
+   */
+  static t_anymap = {}
 
   /**
    * type: anytype
@@ -3981,6 +3988,8 @@ export default class vx_core {
       vx_core.t_msg,
       ":code",
       code,
+      ":detail",
+      detail,
       ":severity",
       vx_core.c_msg_error
     )
@@ -4905,6 +4914,7 @@ export default class vx_core {
   static e_any_async_from_func = {}
   static e_any_from_anylist = []
   static e_anylist = []
+  static e_anymap = {}
   static e_anytype = {}
   static e_arg = {}
   static e_arglist = []
@@ -4997,6 +5007,7 @@ export default class vx_core {
       "any-async<-func": vx_core.e_any_async_from_func,
       "any<-anylist": vx_core.e_any_from_anylist,
       "anylist": vx_core.e_anylist,
+      "anymap": vx_core.e_anymap,
       "anytype": vx_core.e_anytype,
       "arg": vx_core.e_arg,
       "arglist": vx_core.e_arglist,
@@ -5395,6 +5406,7 @@ export default class vx_core {
       "any-async<-func": vx_core.t_any_async_from_func,
       "any<-anylist": vx_core.t_any_from_anylist,
       "anylist": vx_core.t_anylist,
+      "anymap": vx_core.t_anymap,
       "anytype": vx_core.t_anytype,
       "arg": vx_core.t_arg,
       "arglist": vx_core.t_arglist,
@@ -5546,6 +5558,25 @@ export default class vx_core {
       proplast      : {}
     }
     vx_core.e_anylist['vx_type'] = vx_core.t_anylist
+
+    // (type anymap)
+    vx_core.t_anymap['vx_type'] = vx_core.t_type
+    vx_core.t_anymap['vx_value'] = {
+      name          : "anymap",
+      pkgname       : "vx/core",
+      extends       : ":map",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [vx_core.t_any],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {},
+      proplast      : {}
+    }
+    vx_core.e_anymap['vx_type'] = vx_core.t_anymap
+    vx_core.e_anymap['vx_value'] = {}
 
     // (type anytype)
     vx_core.t_anytype['vx_type'] = vx_core.t_type

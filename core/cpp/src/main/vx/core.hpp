@@ -27,6 +27,10 @@ namespace vx_core {
   typedef Abstract_anylist* Type_anylist;
   extern Type_anylist e_anylist;
   extern Type_anylist t_anylist;
+  class Abstract_anymap;
+  typedef Abstract_anymap* Type_anymap;
+  extern Type_anymap e_anymap;
+  extern Type_anymap t_anymap;
   class Abstract_anytype;
   typedef Abstract_anytype* Type_anytype;
   extern Type_anytype e_anytype;
@@ -3726,6 +3730,35 @@ namespace vx_core {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) const override;
     virtual vx_core::vx_Type_listany vx_list() const override;
     virtual vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const override;
+  };
+
+  // (type anymap)
+  class Abstract_anymap : public virtual vx_core::Abstract_map {
+  public:
+    Abstract_anymap() {};
+    virtual ~Abstract_anymap() = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    // vx_map()
+    virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_new_from_map(T, Map<T>)
+    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
+  };
+  class Class_anymap : public virtual Abstract_anymap {
+  public:
+    Class_anymap();
+    virtual ~Class_anymap() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
   };
 
   // (type anytype)

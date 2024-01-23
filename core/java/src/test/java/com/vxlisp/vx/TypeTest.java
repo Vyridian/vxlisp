@@ -333,6 +333,27 @@ public final class TypeTest {
     return output;
   }
 
+  static Test.Type_testcase f_string_lowercase(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/type",
+      ":casename", "string-lowercase",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n \"abc\"\n (string-lowercase\n  \"AbC\"))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.vx_new_string("abc"),
+              Type.f_string_lowercase(Core.vx_new_string("AbC"))
+            )
+        )
+      )
+    );
+    return output;
+  }
+
   static Test.Type_testcase f_string_outdent(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
@@ -377,6 +398,27 @@ public final class TypeTest {
               context,
               Core.vx_new_string("ab"),
               Type.f_string_trim(Core.vx_new_string(" \t\nab\n\t "))
+            )
+        )
+      )
+    );
+    return output;
+  }
+
+  static Test.Type_testcase f_string_uppercase(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/type",
+      ":casename", "string-uppercase",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n \"ABC\"\n (string-uppercase\n  \"aBc\"))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.vx_new_string("ABC"),
+              Type.f_string_uppercase(Core.vx_new_string("aBc"))
             )
         )
       )
@@ -634,8 +676,10 @@ public final class TypeTest {
       TypeTest.f_is_type(context),
       TypeTest.f_is_type_from_any_typelist(context),
       TypeTest.f_length_from_string(context),
+      TypeTest.f_string_lowercase(context),
       TypeTest.f_string_outdent(context),
       TypeTest.f_string_trim(context),
+      TypeTest.f_string_uppercase(context),
       TypeTest.f_string_from_int(context),
       TypeTest.f_string_from_string_end(context),
       TypeTest.f_string_from_string_start(context),
@@ -651,11 +695,11 @@ public final class TypeTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/type", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 80, ":tests", 21, ":total", 26), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 65, ":tests", 17, ":total", 26), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 26), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 26), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 65, ":tests", 17, ":total", 26), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 82, ":tests", 23, ":total", 28), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 67, ":tests", 19, ":total", 28), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 28), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 28), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 67, ":tests", 19, ":total", 28), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
     );
   }
@@ -685,8 +729,10 @@ public final class TypeTest {
         ":is-type", 4,
         ":is-type<-any-typelist", 4,
         ":length<-string", 2,
+        ":string-lowercase", 1,
         ":string-outdent", 2,
         ":string-trim", 1,
+        ":string-uppercase", 1,
         ":string<-int", 5,
         ":string<-string-end", 2,
         ":string<-string-start", 2,
