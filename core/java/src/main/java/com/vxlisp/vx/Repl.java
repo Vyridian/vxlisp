@@ -128,10 +128,10 @@ public final class Repl {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/repl/liblist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/repl/liblist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_from_error("vx/repl/liblist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/repl/liblist", ":invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -317,22 +317,25 @@ public final class Repl {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            String svalsub;
+            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
-              Core.Type_any anyvalsub = (Core.Type_any)valsub;
-              svalsub = Core.vx_string_from_any(anyvalsub);
+              msgval = (Core.Type_any)valsub;
             } else {
-              svalsub = valsub.toString();
+              msgval = Core.vx_new_string(valsub.toString());
             }
-            msg = Core.vx_msg_from_error(":invalidkeytype (new repl) " + svalsub);
+            msg = Core.vx_msg_from_error("vx/repl/repl", ":invalidkeytype", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
             boolean isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_from_error(":invalidkey (new repl) " + testkey);
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/repl/repl", ":invalidkey", msgval);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -347,7 +350,17 @@ public final class Repl {
               ischanged = true;
               vx_p_name = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new repl :name " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("name"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/repl/repl", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -357,7 +370,17 @@ public final class Repl {
               ischanged = true;
               vx_p_type = (Core.Type_any)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new repl :type " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("type"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/repl/repl", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -367,7 +390,17 @@ public final class Repl {
               ischanged = true;
               vx_p_repllist = (Repl.Type_repllist)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new repl :repllist " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("repllist"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/repl/repl", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -380,7 +413,17 @@ public final class Repl {
               ischanged = true;
               vx_p_async = Core.t_boolean.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new repl :async " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("async"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/repl/repl", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -390,7 +433,17 @@ public final class Repl {
               ischanged = true;
               vx_p_val = (Core.Type_any)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new repl :val " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("val"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/repl/repl", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -403,12 +456,23 @@ public final class Repl {
               ischanged = true;
               vx_p_doc = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new repl :doc " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("doc"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/repl/repl", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_from_error(":invalidkey (new repl) " + key);
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/repl/repl", ":invalidkey", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -559,22 +623,25 @@ public final class Repl {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            String svalsub;
+            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
-              Core.Type_any anyvalsub = (Core.Type_any)valsub;
-              svalsub = Core.vx_string_from_any(anyvalsub);
+              msgval = (Core.Type_any)valsub;
             } else {
-              svalsub = valsub.toString();
+              msgval = Core.vx_new_string(valsub.toString());
             }
-            msg = Core.vx_msg_from_error(":invalidkeytype (new replarglist) " + svalsub);
+            msg = Core.vx_msg_from_error("vx/repl/replarglist", ":invalidkeytype", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
             boolean isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_from_error(":invalidkey (new replarglist) " + testkey);
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/repl/replarglist", ":invalidkey", msgval);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -589,7 +656,17 @@ public final class Repl {
               ischanged = true;
               vx_p_key = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new replarglist :key " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("key"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/repl/replarglist", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -599,7 +676,17 @@ public final class Repl {
               ischanged = true;
               vx_p_current = (Repl.Type_repl)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new replarglist :current " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("current"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/repl/replarglist", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -609,12 +696,23 @@ public final class Repl {
               ischanged = true;
               vx_p_repllist = (Repl.Type_repllist)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new replarglist :repllist " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("repllist"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/repl/replarglist", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_from_error(":invalidkey (new replarglist) " + key);
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/repl/replarglist", ":invalidkey", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -741,10 +839,10 @@ public final class Repl {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/repl/repllist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/repl/repllist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_from_error("vx/repl/repllist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/repl/repllist", ":invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }

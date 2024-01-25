@@ -84,22 +84,25 @@ public final class Db {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            String svalsub;
+            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
-              Core.Type_any anyvalsub = (Core.Type_any)valsub;
-              svalsub = Core.vx_string_from_any(anyvalsub);
+              msgval = (Core.Type_any)valsub;
             } else {
-              svalsub = valsub.toString();
+              msgval = Core.vx_new_string(valsub.toString());
             }
-            msg = Core.vx_msg_from_error(":invalidkeytype (new db) " + svalsub);
+            msg = Core.vx_msg_from_error("vx/data/db/db", ":invalidkeytype", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
             boolean isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_from_error(":invalidkey (new db) " + testkey);
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/data/db/db", ":invalidkey", msgval);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -114,12 +117,23 @@ public final class Db {
               ischanged = true;
               vx_p_dbid = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new db :dbid " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("dbid"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/db", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_from_error(":invalidkey (new db) " + key);
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/data/db/db", ":invalidkey", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -293,22 +307,25 @@ public final class Db {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            String svalsub;
+            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
-              Core.Type_any anyvalsub = (Core.Type_any)valsub;
-              svalsub = Core.vx_string_from_any(anyvalsub);
+              msgval = (Core.Type_any)valsub;
             } else {
-              svalsub = valsub.toString();
+              msgval = Core.vx_new_string(valsub.toString());
             }
-            msg = Core.vx_msg_from_error(":invalidkeytype (new dbcell) " + svalsub);
+            msg = Core.vx_msg_from_error("vx/data/db/dbcell", ":invalidkeytype", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
             boolean isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_from_error(":invalidkey (new dbcell) " + testkey);
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/data/db/dbcell", ":invalidkey", msgval);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -323,7 +340,17 @@ public final class Db {
               ischanged = true;
               vx_p_dbcellid = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbcell :dbcellid " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("dbcellid"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbcell", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -333,7 +360,17 @@ public final class Db {
               ischanged = true;
               vx_p_dbcellmap = (Db.Type_dbcellmap)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbcell :dbcellmap " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("dbcellmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbcell", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -343,7 +380,17 @@ public final class Db {
               ischanged = true;
               vx_p_dbfieldmap = (Db.Type_dbfieldmap)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbcell :dbfieldmap " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("dbfieldmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbcell", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -353,7 +400,17 @@ public final class Db {
               ischanged = true;
               vx_p_dbparent = (Db.Type_dbcell)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbcell :dbparent " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("dbparent"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbcell", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -363,12 +420,23 @@ public final class Db {
               ischanged = true;
               vx_p_dbtable = (Db.Type_dbtable)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbcell :dbtable " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("dbtable"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbcell", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_from_error(":invalidkey (new dbcell) " + key);
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/data/db/dbcell", ":invalidkey", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -467,7 +535,7 @@ public final class Db {
           Db.Type_dbcell castval = (Db.Type_dbcell)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("(dbcellmap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/data/db/dbcellmap", ":invalidvalue", val);
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -505,7 +573,13 @@ public final class Db {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            msg = Core.vx_msg_from_error(":keyexpected: " + valsub.toString() + "");
+            Core.Type_any msgval;
+            if (valsub instanceof Core.Type_any) {
+              msgval = (Core.Type_any)valsub;
+            } else {
+              msgval = Core.vx_new_string(valsub.toString());
+            }
+            msg = Core.vx_msg_from_error("vx/data/db/dbcellmap", ":keyexpected", msgval);
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -515,7 +589,17 @@ public final class Db {
           } else if (valsub instanceof Db.Type_dbcell) {
             valany = (Db.Type_dbcell)valsub;
           } else {
-            msg = Core.vx_msg_from_error(":invalidkeyvalue: " + key + " "  + valsub.toString() + "");
+            Core.Type_any msgval;
+            if (valsub instanceof Core.Type_any) {
+              msgval = (Core.Type_any)valsub;
+            } else {
+              msgval = Core.vx_new_string(valsub.toString());
+            }
+            Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+            mapany.put("key", Core.vx_new_string(key));
+            mapany.put("value", msgval);
+            Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+            msg = Core.vx_msg_from_error("vx/data/db/dbcellmap", ":invalidkeyvalue", msgmap);
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -668,22 +752,25 @@ public final class Db {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            String svalsub;
+            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
-              Core.Type_any anyvalsub = (Core.Type_any)valsub;
-              svalsub = Core.vx_string_from_any(anyvalsub);
+              msgval = (Core.Type_any)valsub;
             } else {
-              svalsub = valsub.toString();
+              msgval = Core.vx_new_string(valsub.toString());
             }
-            msg = Core.vx_msg_from_error(":invalidkeytype (new dbfield) " + svalsub);
+            msg = Core.vx_msg_from_error("vx/data/db/dbfield", ":invalidkeytype", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
             boolean isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_from_error(":invalidkey (new dbfield) " + testkey);
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/data/db/dbfield", ":invalidkey", msgval);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -698,7 +785,17 @@ public final class Db {
               ischanged = true;
               vx_p_dbfieldid = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbfield :dbfieldid " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("dbfieldid"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbfield", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -708,7 +805,17 @@ public final class Db {
               ischanged = true;
               vx_p_type = (Core.Type_any)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbfield :type " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("type"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbfield", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -718,12 +825,23 @@ public final class Db {
               ischanged = true;
               vx_p_value = (Core.Type_any)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbfield :value " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("value"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbfield", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_from_error(":invalidkey (new dbfield) " + key);
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/data/db/dbfield", ":invalidkey", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -820,7 +938,7 @@ public final class Db {
           Db.Type_dbfield castval = (Db.Type_dbfield)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("(dbfieldmap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/data/db/dbfieldmap", ":invalidvalue", val);
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -858,7 +976,13 @@ public final class Db {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            msg = Core.vx_msg_from_error(":keyexpected: " + valsub.toString() + "");
+            Core.Type_any msgval;
+            if (valsub instanceof Core.Type_any) {
+              msgval = (Core.Type_any)valsub;
+            } else {
+              msgval = Core.vx_new_string(valsub.toString());
+            }
+            msg = Core.vx_msg_from_error("vx/data/db/dbfieldmap", ":keyexpected", msgval);
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -868,7 +992,17 @@ public final class Db {
           } else if (valsub instanceof Db.Type_dbfield) {
             valany = (Db.Type_dbfield)valsub;
           } else {
-            msg = Core.vx_msg_from_error(":invalidkeyvalue: " + key + " "  + valsub.toString() + "");
+            Core.Type_any msgval;
+            if (valsub instanceof Core.Type_any) {
+              msgval = (Core.Type_any)valsub;
+            } else {
+              msgval = Core.vx_new_string(valsub.toString());
+            }
+            Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+            mapany.put("key", Core.vx_new_string(key));
+            mapany.put("value", msgval);
+            Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+            msg = Core.vx_msg_from_error("vx/data/db/dbfieldmap", ":invalidkeyvalue", msgmap);
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {
@@ -1070,22 +1204,25 @@ public final class Db {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            String svalsub;
+            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
-              Core.Type_any anyvalsub = (Core.Type_any)valsub;
-              svalsub = Core.vx_string_from_any(anyvalsub);
+              msgval = (Core.Type_any)valsub;
             } else {
-              svalsub = valsub.toString();
+              msgval = Core.vx_new_string(valsub.toString());
             }
-            msg = Core.vx_msg_from_error(":invalidkeytype (new dblink) " + svalsub);
+            msg = Core.vx_msg_from_error("vx/data/db/dblink", ":invalidkeytype", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
             boolean isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_from_error(":invalidkey (new dblink) " + testkey);
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/data/db/dblink", ":invalidkey", msgval);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -1097,7 +1234,17 @@ public final class Db {
               ischanged = true;
               vx_p_fromid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dblink :fromid " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("fromid"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dblink", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1107,12 +1254,23 @@ public final class Db {
               ischanged = true;
               vx_p_toid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dblink :toid " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("toid"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dblink", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_from_error(":invalidkey (new dblink) " + key);
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/data/db/dblink", ":invalidkey", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1238,10 +1396,10 @@ public final class Db {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/data/db/dblinklist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/data/db/dblinklist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_from_error("vx/data/db/dblinklist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/data/db/dblinklist", ":invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -1371,22 +1529,25 @@ public final class Db {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            String svalsub;
+            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
-              Core.Type_any anyvalsub = (Core.Type_any)valsub;
-              svalsub = Core.vx_string_from_any(anyvalsub);
+              msgval = (Core.Type_any)valsub;
             } else {
-              svalsub = valsub.toString();
+              msgval = Core.vx_new_string(valsub.toString());
             }
-            msg = Core.vx_msg_from_error(":invalidkeytype (new dbnode) " + svalsub);
+            msg = Core.vx_msg_from_error("vx/data/db/dbnode", ":invalidkeytype", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
             boolean isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_from_error(":invalidkey (new dbnode) " + testkey);
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/data/db/dbnode", ":invalidkey", msgval);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -1398,7 +1559,17 @@ public final class Db {
               ischanged = true;
               vx_p_dbid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbnode :dbid " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("dbid"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbnode", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1408,12 +1579,23 @@ public final class Db {
               ischanged = true;
               vx_p_links = (Db.Type_dblinklist)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbnode :links " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("links"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbnode", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_from_error(":invalidkey (new dbnode) " + key);
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/data/db/dbnode", ":invalidkey", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1588,22 +1770,25 @@ public final class Db {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            String svalsub;
+            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
-              Core.Type_any anyvalsub = (Core.Type_any)valsub;
-              svalsub = Core.vx_string_from_any(anyvalsub);
+              msgval = (Core.Type_any)valsub;
             } else {
-              svalsub = valsub.toString();
+              msgval = Core.vx_new_string(valsub.toString());
             }
-            msg = Core.vx_msg_from_error(":invalidkeytype (new dbnote) " + svalsub);
+            msg = Core.vx_msg_from_error("vx/data/db/dbnote", ":invalidkeytype", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
             boolean isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_from_error(":invalidkey (new dbnote) " + testkey);
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/data/db/dbnote", ":invalidkey", msgval);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -1615,7 +1800,17 @@ public final class Db {
               ischanged = true;
               vx_p_dbid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbnote :dbid " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("dbid"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbnote", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1625,7 +1820,17 @@ public final class Db {
               ischanged = true;
               vx_p_valid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbnote :valid " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("valid"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbnote", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1635,7 +1840,17 @@ public final class Db {
               ischanged = true;
               vx_p_noteid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbnote :noteid " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("noteid"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbnote", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1645,7 +1860,17 @@ public final class Db {
               ischanged = true;
               vx_p_valueid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbnote :valueid " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("valueid"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbnote", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1658,12 +1883,23 @@ public final class Db {
               ischanged = true;
               vx_p_value = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbnote :value " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("value"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbnote", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_from_error(":invalidkey (new dbnote) " + key);
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/data/db/dbnote", ":invalidkey", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1827,22 +2063,25 @@ public final class Db {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            String svalsub;
+            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
-              Core.Type_any anyvalsub = (Core.Type_any)valsub;
-              svalsub = Core.vx_string_from_any(anyvalsub);
+              msgval = (Core.Type_any)valsub;
             } else {
-              svalsub = valsub.toString();
+              msgval = Core.vx_new_string(valsub.toString());
             }
-            msg = Core.vx_msg_from_error(":invalidkeytype (new dbtable) " + svalsub);
+            msg = Core.vx_msg_from_error("vx/data/db/dbtable", ":invalidkeytype", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
             boolean isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_from_error(":invalidkey (new dbtable) " + testkey);
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/data/db/dbtable", ":invalidkey", msgval);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -1857,7 +2096,17 @@ public final class Db {
               ischanged = true;
               vx_p_dbtableid = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbtable :dbtableid " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("dbtableid"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbtable", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1867,7 +2116,17 @@ public final class Db {
               ischanged = true;
               vx_p_db = (Db.Type_db)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbtable :db " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("db"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbtable", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1877,7 +2136,17 @@ public final class Db {
               ischanged = true;
               vx_p_dbcellmap = (Db.Type_dbcellmap)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbtable :dbcellmap " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("dbcellmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbtable", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1887,12 +2156,23 @@ public final class Db {
               ischanged = true;
               vx_p_dbfieldmap = (Db.Type_dbfieldmap)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbtable :dbfieldmap " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("dbfieldmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbtable", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_from_error(":invalidkey (new dbtable) " + key);
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/data/db/dbtable", ":invalidkey", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -2083,22 +2363,25 @@ public final class Db {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            String svalsub;
+            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
-              Core.Type_any anyvalsub = (Core.Type_any)valsub;
-              svalsub = Core.vx_string_from_any(anyvalsub);
+              msgval = (Core.Type_any)valsub;
             } else {
-              svalsub = valsub.toString();
+              msgval = Core.vx_new_string(valsub.toString());
             }
-            msg = Core.vx_msg_from_error(":invalidkeytype (new dbvalue) " + svalsub);
+            msg = Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidkeytype", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
             boolean isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_from_error(":invalidkey (new dbvalue) " + testkey);
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidkey", msgval);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -2110,7 +2393,17 @@ public final class Db {
               ischanged = true;
               vx_p_dbid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbvalue :dbid " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("dbid"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2120,7 +2413,17 @@ public final class Db {
               ischanged = true;
               vx_p_fromid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbvalue :fromid " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("fromid"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2130,7 +2433,17 @@ public final class Db {
               ischanged = true;
               vx_p_toid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbvalue :toid " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("toid"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2140,7 +2453,17 @@ public final class Db {
               ischanged = true;
               vx_p_noteid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbvalue :noteid " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("noteid"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2150,7 +2473,17 @@ public final class Db {
               ischanged = true;
               vx_p_valid = (Db.Type_dbid)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbvalue :valid " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("valid"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2163,12 +2496,23 @@ public final class Db {
               ischanged = true;
               vx_p_valtext = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new dbvalue :valtext " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("valtext"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_from_error(":invalidkey (new dbvalue) " + key);
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidkey", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";

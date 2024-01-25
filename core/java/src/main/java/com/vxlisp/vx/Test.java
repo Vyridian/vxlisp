@@ -127,22 +127,25 @@ public final class Test {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            String svalsub;
+            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
-              Core.Type_any anyvalsub = (Core.Type_any)valsub;
-              svalsub = Core.vx_string_from_any(anyvalsub);
+              msgval = (Core.Type_any)valsub;
             } else {
-              svalsub = valsub.toString();
+              msgval = Core.vx_new_string(valsub.toString());
             }
-            msg = Core.vx_msg_from_error(":invalidkeytype (new testcase) " + svalsub);
+            msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidkeytype", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
             boolean isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_from_error(":invalidkey (new testcase) " + testkey);
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidkey", msgval);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -157,7 +160,17 @@ public final class Test {
               ischanged = true;
               vx_p_passfail = Core.t_boolean.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testcase :passfail " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("passfail"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -170,7 +183,17 @@ public final class Test {
               ischanged = true;
               vx_p_testpkg = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testcase :testpkg " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("testpkg"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -183,7 +206,17 @@ public final class Test {
               ischanged = true;
               vx_p_casename = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testcase :casename " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("casename"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -193,12 +226,23 @@ public final class Test {
               ischanged = true;
               vx_p_describelist = (Test.Type_testdescribelist)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testcase :describelist " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("describelist"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_from_error(":invalidkey (new testcase) " + key);
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidkey", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -326,10 +370,10 @@ public final class Test {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/test/testcaselist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/test/testcaselist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_from_error("vx/test/testcaselist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/test/testcaselist", ":invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -487,22 +531,25 @@ public final class Test {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            String svalsub;
+            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
-              Core.Type_any anyvalsub = (Core.Type_any)valsub;
-              svalsub = Core.vx_string_from_any(anyvalsub);
+              msgval = (Core.Type_any)valsub;
             } else {
-              svalsub = valsub.toString();
+              msgval = Core.vx_new_string(valsub.toString());
             }
-            msg = Core.vx_msg_from_error(":invalidkeytype (new testcoveragedetail) " + svalsub);
+            msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidkeytype", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
             boolean isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_from_error(":invalidkey (new testcoveragedetail) " + testkey);
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidkey", msgval);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -514,7 +561,17 @@ public final class Test {
               ischanged = true;
               vx_p_constmap = (Core.Type_intmap)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testcoveragedetail :constmap " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("constmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -524,7 +581,17 @@ public final class Test {
               ischanged = true;
               vx_p_funcmap = (Core.Type_intmap)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testcoveragedetail :funcmap " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("funcmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -537,7 +604,17 @@ public final class Test {
               ischanged = true;
               vx_p_testpkg = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testcoveragedetail :testpkg " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("testpkg"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -547,12 +624,23 @@ public final class Test {
               ischanged = true;
               vx_p_typemap = (Core.Type_intmap)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testcoveragedetail :typemap " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("typemap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_from_error(":invalidkey (new testcoveragedetail) " + key);
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidkey", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -715,22 +803,25 @@ public final class Test {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            String svalsub;
+            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
-              Core.Type_any anyvalsub = (Core.Type_any)valsub;
-              svalsub = Core.vx_string_from_any(anyvalsub);
+              msgval = (Core.Type_any)valsub;
             } else {
-              svalsub = valsub.toString();
+              msgval = Core.vx_new_string(valsub.toString());
             }
-            msg = Core.vx_msg_from_error(":invalidkeytype (new testcoveragenums) " + svalsub);
+            msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidkeytype", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
             boolean isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_from_error(":invalidkey (new testcoveragenums) " + testkey);
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidkey", msgval);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -745,7 +836,17 @@ public final class Test {
               ischanged = true;
               vx_p_pct = Core.t_int.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testcoveragenums :pct " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("pct"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -758,7 +859,17 @@ public final class Test {
               ischanged = true;
               vx_p_testpkg = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testcoveragenums :testpkg " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("testpkg"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -771,7 +882,17 @@ public final class Test {
               ischanged = true;
               vx_p_tests = Core.t_int.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testcoveragenums :tests " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("tests"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -784,12 +905,23 @@ public final class Test {
               ischanged = true;
               vx_p_total = Core.t_int.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testcoveragenums :total " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("total"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_from_error(":invalidkey (new testcoveragenums) " + key);
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidkey", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1008,22 +1140,25 @@ public final class Test {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            String svalsub;
+            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
-              Core.Type_any anyvalsub = (Core.Type_any)valsub;
-              svalsub = Core.vx_string_from_any(anyvalsub);
+              msgval = (Core.Type_any)valsub;
             } else {
-              svalsub = valsub.toString();
+              msgval = Core.vx_new_string(valsub.toString());
             }
-            msg = Core.vx_msg_from_error(":invalidkeytype (new testcoveragesummary) " + svalsub);
+            msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidkeytype", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
             boolean isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_from_error(":invalidkey (new testcoveragesummary) " + testkey);
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidkey", msgval);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -1035,7 +1170,17 @@ public final class Test {
               ischanged = true;
               vx_p_bigospacenums = (Test.Type_testcoveragenums)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testcoveragesummary :bigospacenums " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("bigospacenums"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1045,7 +1190,17 @@ public final class Test {
               ischanged = true;
               vx_p_bigotimenums = (Test.Type_testcoveragenums)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testcoveragesummary :bigotimenums " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("bigotimenums"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1055,7 +1210,17 @@ public final class Test {
               ischanged = true;
               vx_p_constnums = (Test.Type_testcoveragenums)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testcoveragesummary :constnums " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("constnums"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1065,7 +1230,17 @@ public final class Test {
               ischanged = true;
               vx_p_docnums = (Test.Type_testcoveragenums)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testcoveragesummary :docnums " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("docnums"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1075,7 +1250,17 @@ public final class Test {
               ischanged = true;
               vx_p_funcnums = (Test.Type_testcoveragenums)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testcoveragesummary :funcnums " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("funcnums"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1088,7 +1273,17 @@ public final class Test {
               ischanged = true;
               vx_p_testpkg = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testcoveragesummary :testpkg " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("testpkg"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1098,7 +1293,17 @@ public final class Test {
               ischanged = true;
               vx_p_totalnums = (Test.Type_testcoveragenums)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testcoveragesummary :totalnums " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("totalnums"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1108,12 +1313,23 @@ public final class Test {
               ischanged = true;
               vx_p_typenums = (Test.Type_testcoveragenums)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testcoveragesummary :typenums " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("typenums"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_from_error(":invalidkey (new testcoveragesummary) " + key);
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidkey", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1266,22 +1482,25 @@ public final class Test {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            String svalsub;
+            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
-              Core.Type_any anyvalsub = (Core.Type_any)valsub;
-              svalsub = Core.vx_string_from_any(anyvalsub);
+              msgval = (Core.Type_any)valsub;
             } else {
-              svalsub = valsub.toString();
+              msgval = Core.vx_new_string(valsub.toString());
             }
-            msg = Core.vx_msg_from_error(":invalidkeytype (new testdescribe) " + svalsub);
+            msg = Core.vx_msg_from_error("vx/test/testdescribe", ":invalidkeytype", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
             boolean isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_from_error(":invalidkey (new testdescribe) " + testkey);
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/test/testdescribe", ":invalidkey", msgval);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -1296,7 +1515,17 @@ public final class Test {
               ischanged = true;
               vx_p_describename = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testdescribe :describename " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("describename"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testdescribe", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1309,7 +1538,17 @@ public final class Test {
               ischanged = true;
               vx_p_testpkg = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testdescribe :testpkg " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("testpkg"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testdescribe", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1319,12 +1558,23 @@ public final class Test {
               ischanged = true;
               vx_p_testresult = (Test.Type_testresult)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testdescribe :testresult " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("testresult"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testdescribe", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_from_error(":invalidkey (new testdescribe) " + key);
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/test/testdescribe", ":invalidkey", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1451,10 +1701,10 @@ public final class Test {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/test/testdescribelist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/test/testdescribelist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_from_error("vx/test/testdescribelist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/test/testdescribelist", ":invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -1626,22 +1876,25 @@ public final class Test {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            String svalsub;
+            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
-              Core.Type_any anyvalsub = (Core.Type_any)valsub;
-              svalsub = Core.vx_string_from_any(anyvalsub);
+              msgval = (Core.Type_any)valsub;
             } else {
-              svalsub = valsub.toString();
+              msgval = Core.vx_new_string(valsub.toString());
             }
-            msg = Core.vx_msg_from_error(":invalidkeytype (new testpackage) " + svalsub);
+            msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidkeytype", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
             boolean isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_from_error(":invalidkey (new testpackage) " + testkey);
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidkey", msgval);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -1653,7 +1906,17 @@ public final class Test {
               ischanged = true;
               vx_p_caselist = (Test.Type_testcaselist)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testpackage :caselist " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("caselist"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1663,7 +1926,17 @@ public final class Test {
               ischanged = true;
               vx_p_coveragedetail = (Test.Type_testcoveragedetail)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testpackage :coveragedetail " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("coveragedetail"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1673,7 +1946,17 @@ public final class Test {
               ischanged = true;
               vx_p_coveragesummary = (Test.Type_testcoveragesummary)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testpackage :coveragesummary " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("coveragesummary"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1686,7 +1969,17 @@ public final class Test {
               ischanged = true;
               vx_p_passfail = Core.t_boolean.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testpackage :passfail " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("passfail"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -1699,12 +1992,23 @@ public final class Test {
               ischanged = true;
               vx_p_testpkg = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testpackage :testpkg " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("testpkg"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_from_error(":invalidkey (new testpackage) " + key);
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidkey", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -1833,10 +2137,10 @@ public final class Test {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/test/testpackagelist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/test/testpackagelist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_from_error("vx/test/testpackagelist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/test/testpackagelist", ":invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -2008,22 +2312,25 @@ public final class Test {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            String svalsub;
+            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
-              Core.Type_any anyvalsub = (Core.Type_any)valsub;
-              svalsub = Core.vx_string_from_any(anyvalsub);
+              msgval = (Core.Type_any)valsub;
             } else {
-              svalsub = valsub.toString();
+              msgval = Core.vx_new_string(valsub.toString());
             }
-            msg = Core.vx_msg_from_error(":invalidkeytype (new testresult) " + svalsub);
+            msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidkeytype", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
             boolean isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_from_error(":invalidkey (new testresult) " + testkey);
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidkey", msgval);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -2038,7 +2345,17 @@ public final class Test {
               ischanged = true;
               vx_p_code = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testresult :code " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("code"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2051,7 +2368,17 @@ public final class Test {
               ischanged = true;
               vx_p_passfail = Core.t_boolean.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testresult :passfail " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("passfail"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2061,7 +2388,17 @@ public final class Test {
               ischanged = true;
               vx_p_expected = (Core.Type_any)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testresult :expected " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("expected"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2071,7 +2408,17 @@ public final class Test {
               ischanged = true;
               vx_p_actual = (Core.Type_any)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testresult :actual " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("actual"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -2081,12 +2428,23 @@ public final class Test {
               ischanged = true;
               vx_p_fn_actual = (Core.Func_any_from_func_async)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new testresult :fn-actual " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("fn-actual"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_from_error(":invalidkey (new testresult) " + key);
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidkey", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -2215,10 +2573,10 @@ public final class Test {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/test/testresultlist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/test/testresultlist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_from_error("vx/test/testresultlist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/test/testresultlist", ":invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }

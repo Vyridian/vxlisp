@@ -153,22 +153,25 @@ public final class Xml {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            String svalsub;
+            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
-              Core.Type_any anyvalsub = (Core.Type_any)valsub;
-              svalsub = Core.vx_string_from_any(anyvalsub);
+              msgval = (Core.Type_any)valsub;
             } else {
-              svalsub = valsub.toString();
+              msgval = Core.vx_new_string(valsub.toString());
             }
-            msg = Core.vx_msg_from_error(":invalidkeytype (new xml) " + svalsub);
+            msg = Core.vx_msg_from_error("vx/data/xml/xml", ":invalidkeytype", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
             boolean isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_from_error(":invalidkey (new xml) " + testkey);
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/data/xml/xml", ":invalidkey", msgval);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -183,7 +186,17 @@ public final class Xml {
               ischanged = true;
               vx_p_tag = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new xml :tag " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("tag"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/xml/xml", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -196,7 +209,17 @@ public final class Xml {
               ischanged = true;
               vx_p_text = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new xml :text " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("text"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/xml/xml", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -209,7 +232,17 @@ public final class Xml {
               ischanged = true;
               vx_p_prop = Core.t_string.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new xml :prop " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("prop"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/xml/xml", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -219,7 +252,17 @@ public final class Xml {
               ischanged = true;
               vx_p_propmap = (Core.Type_stringmap)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new xml :propmap " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("propmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/xml/xml", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -229,7 +272,17 @@ public final class Xml {
               ischanged = true;
               vx_p_children = (Xml.Type_xmllist)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new xml :children " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("children"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/xml/xml", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -239,12 +292,23 @@ public final class Xml {
               ischanged = true;
               vx_p_parent = (Xml.Type_xml)valsub;
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new xml :parent " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("parent"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/data/xml/xml", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_from_error(":invalidkey (new xml) " + key);
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/data/xml/xml", ":invalidkey", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
@@ -373,10 +437,10 @@ public final class Xml {
           }
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/data/xml/xmllist", "invalidtype", anysub);
+          msg = Core.vx_msg_from_error("vx/data/xml/xmllist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
-          msg = Core.vx_msg_from_error("vx/data/xml/xmllist", "invalidtype", Core.vx_new_string(valsub.toString()));
+          msg = Core.vx_msg_from_error("vx/data/xml/xmllist", ":invalidtype", Core.vx_new_string(valsub.toString()));
           msgblock = msgblock.vx_copy(msg);
         }
       }
@@ -468,7 +532,7 @@ public final class Xml {
           Core.Type_string castval = (Core.Type_string)val;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("(xmlpropmap) Invalid Value: " + val.toString() + "");
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/data/xml/xmlpropmap", ":invalidvalue", val);
           msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
         }
       }
@@ -506,7 +570,13 @@ public final class Xml {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            msg = Core.vx_msg_from_error(":keyexpected: " + valsub.toString() + "");
+            Core.Type_any msgval;
+            if (valsub instanceof Core.Type_any) {
+              msgval = (Core.Type_any)valsub;
+            } else {
+              msgval = Core.vx_new_string(valsub.toString());
+            }
+            msg = Core.vx_msg_from_error("vx/data/xml/xmlpropmap", ":keyexpected", msgval);
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
         } else {
@@ -516,7 +586,17 @@ public final class Xml {
           } else if (valsub instanceof String) {
             valany = Core.t_string.vx_new(valsub);;
           } else {
-            msg = Core.vx_msg_from_error(":invalidkeyvalue: " + key + " "  + valsub.toString() + "");
+            Core.Type_any msgval;
+            if (valsub instanceof Core.Type_any) {
+              msgval = (Core.Type_any)valsub;
+            } else {
+              msgval = Core.vx_new_string(valsub.toString());
+            }
+            Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+            mapany.put("key", Core.vx_new_string(key));
+            mapany.put("value", msgval);
+            Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+            msg = Core.vx_msg_from_error("vx/data/xml/xmlpropmap", ":invalidkeyvalue", msgmap);
             msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
           }
           if (valany != null) {

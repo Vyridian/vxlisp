@@ -655,8 +655,8 @@
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         Core.Type_any valsub = mapval.get(key);
-		if (key.indexOf(" ") >= 0) {
-		  key = "\"" + key + "\"";
+        if (key.indexOf(" ") >= 0) {
+          key = "\"" + key + "\"";
         } else if (!key.startsWith(":")) {
           key = ":" + key;
         }
@@ -669,8 +669,8 @@
         output += "\n" + indenttext + " " + key + strval;
       }
       if (valmap.vx_msgblock() != null) {
-        String msgtext = Core.vx_string_from_any_indent(valmap.vx_msgblock(), indent, linefeed);
-        output += "\n" + indenttext + msgtext;
+        String msgtext = Core.vx_string_from_any_indent(valmap.vx_msgblock(), indent+1, linefeed);
+        output += "\n " + indenttext + msgtext;
       }
       output = "(" + stypedefname + output + ")";
     } else if (value instanceof Core.Type_struct) {

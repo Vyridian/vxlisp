@@ -97,22 +97,25 @@ public final class Http {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            String svalsub;
+            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
-              Core.Type_any anyvalsub = (Core.Type_any)valsub;
-              svalsub = Core.vx_string_from_any(anyvalsub);
+              msgval = (Core.Type_any)valsub;
             } else {
-              svalsub = valsub.toString();
+              msgval = Core.vx_new_string(valsub.toString());
             }
-            msg = Core.vx_msg_from_error(":invalidkeytype (new response) " + svalsub);
+            msg = Core.vx_msg_from_error("vx/web/http/response", ":invalidkeytype", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
             boolean isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
-              msg = Core.vx_msg_from_error(":invalidkey (new response) " + testkey);
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/web/http/response", ":invalidkey", msgval);
               msgblock = msgblock.vx_copy(msg);
             }
           }
@@ -127,7 +130,17 @@ public final class Http {
               ischanged = true;
               vx_p_ok = Core.t_boolean.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new response :ok " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("ok"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/http/response", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
@@ -140,12 +153,23 @@ public final class Http {
               ischanged = true;
               vx_p_status = Core.t_int.vx_new(valsub);
             } else {
-              msg = Core.vx_msg_from_error(":invalidvalue (new response :status " + valsub.toString() + ")");
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("status"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/http/response", ":invalidvalue", msgmap);
               msgblock = msgblock.vx_copy(msg);
             }
             break;
           default:
-            msg = Core.vx_msg_from_error(":invalidkey (new response) " + key);
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/web/http/response", ":invalidkey", msgval);
             msgblock = msgblock.vx_copy(msg);
           }
           key = "";
