@@ -1247,17 +1247,26 @@ namespace vx_data_xml {
               })
             ),
             vx_core::f_else(
-              vx_core::t_any_from_func->vx_fn_new({xmlarg, text}, [xmlarg, text]() {
+              vx_core::t_any_from_func->vx_fn_new({xmlarg, text, tb}, [xmlarg, text, tb]() {
                 vx_core::Type_any output_1 = vx_core::f_copy(
                   vx_data_xml::t_xml,
                   xmlarg,
                   vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::f_msg_from_error(
+                    vx_core::f_msg_from_error_1(
+                      vx_core::vx_new_string(":invalidxmlclosetag"),
                       vx_core::f_new(
-                        vx_core::t_string,
+                        vx_core::t_anymap,
                         vx_core::vx_new(vx_core::t_anylist, {
-                          vx_core::vx_new_string("Invalid Xml Close tag: "),
-                          text
+                          vx_core::vx_new_string(":tag"),
+                          text,
+                          vx_core::vx_new_string(":startpos"),
+                          tb->startpos(),
+                          vx_core::vx_new_string(":endpos"),
+                          tb->endpos(),
+                          vx_core::vx_new_string(":line"),
+                          tb->line(),
+                          vx_core::vx_new_string(":column"),
+                          tb->column()
                         })
                       )
                     )
@@ -1510,11 +1519,10 @@ namespace vx_data_xml {
       vx_data_xml::t_xml,
       textblocklist,
       xmlarg,
-      vx_core::t_any_from_reduce->vx_fn_new({}, [](vx_core::Type_any reduce_any, vx_core::Type_any current_any) {
-        vx_data_xml::Type_xml reduce = vx_core::vx_any_from_any(vx_data_xml::t_xml, reduce_any);
-        vx_data_textblock::Type_textblock current = vx_core::vx_any_from_any(vx_data_textblock::t_textblock, current_any);
-        vx_core::Type_any output_1 = 
-          vx_data_xml::f_xml_parse_from_xml_textblock(reduce, current);
+      vx_core::t_any_from_reduce->vx_fn_new({}, [](vx_core::Type_any xmlarg_any, vx_core::Type_any tb_any) {
+        vx_data_xml::Type_xml xmlarg = vx_core::vx_any_from_any(vx_data_xml::t_xml, xmlarg_any);
+        vx_data_textblock::Type_textblock tb = vx_core::vx_any_from_any(vx_data_textblock::t_textblock, tb_any);
+        vx_core::Type_any output_1 = vx_data_xml::f_xml_parse_from_xml_textblock(xmlarg, tb);
         return output_1;
       })
     );
@@ -2253,8 +2261,15 @@ namespace vx_data_xml {
   vx_data_xml::Type_xml f_xml_from_string(vx_core::Type_string text) {
     vx_data_xml::Type_xml output = vx_data_xml::e_xml;
     vx_core::vx_reserve(text);
-    output = vx_data_xml::f_xml_from_textblock(
-      vx_data_xml::f_textblock_xml_from_string(text)
+    output = vx_core::f_let(
+      vx_data_xml::t_xml,
+      vx_core::t_any_from_func->vx_fn_new({text}, [text]() {
+        vx_data_textblock::Type_textblock tb = vx_core::f_log_1(vx_data_textblock::t_textblock, vx_core::vx_new_string("vx/data/xml/textblock-xml<-string"), vx_data_xml::f_textblock_xml_from_string(text));
+        vx_core::vx_ref_plus(tb);
+        vx_data_xml::Type_xml output_1 = vx_data_xml::f_xml_from_textblock(tb);
+        vx_core::vx_release_one_except(tb, output_1);
+        return output_1;
+      })
     );
     vx_core::vx_release_one_except(text, output);
     return output;

@@ -223,10 +223,19 @@ public final class Core {
     return output;
   }
 
+  // vx_any_from_list_start_reduce(any-1, list-2, any-1, any<-reduce)
+  public static <T extends Core.Type_any, N extends Core.Type_list> T vx_any_from_list_start_reduce(T generic_any_1, N list, T valstart, Core.Func_any_from_reduce fn_reduce) {
+    T output = valstart;
+    List<Core.Type_any> listval = list.vx_list();
+    for (Core.Type_any item : listval) {
+      output = fn_reduce.vx_any_from_reduce(generic_any_1, output, item);
+    }
+    return output;
+  }
+
   // vx_any_from_map_start_reduce(any-1, map-2, any-1, any<-any-key-value)
   public static <T extends Core.Type_any, N extends Core.Type_map> T vx_any_from_map_start_reduce(T generic_any_1, N map, T start, Core.Func_any_from_any_key_value fn_reduce) {
-    T output = Core.f_empty(generic_any_1);
-    output = start;
+    T output = start;
     Map<String, Core.Type_any> mapval = map.vx_map();
     Set<String> keys = mapval.keySet();
     for (String skey : keys) {
@@ -17106,11 +17115,7 @@ public final class Core {
 
   public static <T extends Core.Type_any, Y extends Core.Type_list> T f_any_from_list_start_reduce(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce fn_reduce) {
     T output = Core.f_empty(generic_any_1);
-    output = valstart;
-    List<Core.Type_any> listval = list.vx_list();
-    for (Core.Type_any item : listval) {
-      output = fn_reduce.vx_any_from_reduce(generic_any_1, output, item);
-    };
+    output = Core.vx_any_from_list_start_reduce(generic_any_1, list, valstart, fn_reduce);
     return output;
   }
 

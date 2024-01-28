@@ -1260,6 +1260,7 @@
       work = fn_reduce->vx_any_from_reduce(work, item);
     };
     output = vx_core::vx_any_from_any(generic_any_1, work);"
+  :java :auto
   :js
    "output = valstart
     const fn = fn_reduce['vx_value']
@@ -1267,12 +1268,6 @@
       for (const item of list) {
         output = fn(output, item)
       }
-    }"
-  :java
-   "output = valstart;
-    List<Core.Type_any> listval = list.vx_list();
-    for (Core.Type_any item : listval) {
-      output = fn_reduce.vx_any_from_reduce(generic_any_1, output, item);
     }")
  :test (test
         24

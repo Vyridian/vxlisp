@@ -6,6 +6,9 @@
     (vx/web/html/headchildlist
      (vx/web/html/meta
       :charset "utf-8")
+     (vx/web/html/meta
+      :name "viewport"
+      :content "width=device-width, initial-scale=1.0")
      (vx/web/html/title
       :text "Test Suite")
      vx/test/stylesheet-test))
@@ -16673,8 +16676,15 @@
  (xml
   :tag \"doc\"
   (msg
-   :severity 2
-   :text \"Invalid Xml Close tag: /wrong\"))
+   :code \":invalidxmlclosetag\"
+   :detail
+    (anymap
+     :tag \"/wrong\"
+     :startpos 0
+     :endpos 0
+     :line 0
+     :column 0)
+   :severity 2))
  (xml-close<-xml-textblock
   (xml
    :tag \"doc\")

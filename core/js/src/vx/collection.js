@@ -131,7 +131,7 @@ export default class vx_collection {
   }
   /**
    * @function any_from_for_until_loop
-   * Returns a value using an until loop. Maximum 1000 times.
+   * Returns a value using an until loop. Maximum 10000 times.
    * @param  {typemap} generic
    * @param  {any} start
    * @param  {boolean_from_any} fn_until

@@ -1012,10 +1012,26 @@ namespace vx_data_xml_test {
           vx_core::f_new(
             vx_core::t_msg,
             vx_core::vx_new(vx_core::t_anylist, {
+              vx_core::vx_new_string(":code"),
+              vx_core::vx_new_string(":invalidxmlclosetag"),
+              vx_core::vx_new_string(":detail"),
+              vx_core::f_new(
+                vx_core::t_anymap,
+                vx_core::vx_new(vx_core::t_anylist, {
+                  vx_core::vx_new_string(":tag"),
+                  vx_core::vx_new_string("/wrong"),
+                  vx_core::vx_new_string(":startpos"),
+                  vx_core::vx_new_int(0),
+                  vx_core::vx_new_string(":endpos"),
+                  vx_core::vx_new_int(0),
+                  vx_core::vx_new_string(":line"),
+                  vx_core::vx_new_int(0),
+                  vx_core::vx_new_string(":column"),
+                  vx_core::vx_new_int(0)
+                })
+              ),
               vx_core::vx_new_string(":severity"),
-              vx_core::vx_new_int(2),
-              vx_core::vx_new_string(":text"),
-              vx_core::vx_new_string("Invalid Xml Close tag: /wrong")
+              vx_core::vx_new_int(2)
             })
           )
         })
@@ -1038,7 +1054,7 @@ namespace vx_data_xml_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_3 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (xml\n  :tag \"doc\"\n  (msg\n   :severity 2\n   :text \"Invalid Xml Close tag: /wrong\"))\n (xml-close<-xml-textblock\n  (xml\n   :tag \"doc\")\n  (tb/textblock\n   :text \"/wrong\")))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (xml\n  :tag \"doc\"\n  (msg\n   :code \":invalidxmlclosetag\"\n   :detail\n    (anymap\n     :tag \"/wrong\"\n     :startpos 0\n     :endpos 0\n     :line 0\n     :column 0)\n   :severity 2))\n (xml-close<-xml-textblock\n  (xml\n   :tag \"doc\")\n  (tb/textblock\n   :text \"/wrong\")))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/xml"),
       vx_core::vx_new_string(":testresult"), testresult_3
     });

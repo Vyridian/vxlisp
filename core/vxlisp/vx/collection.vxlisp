@@ -21,7 +21,7 @@
          (fn : int
           [current : int]
           (+ current current))))
- :doc "Returns a value using an until loop. Maximum 1000 times.")
+ :doc "Returns a value using an until loop. Maximum 10000 times.")
 
 (func any<-for-until-loop-max : any-1
  [start    : any-1

@@ -150,7 +150,7 @@ public final class Collection {
   }
     /**
    * @function any_from_for_until_loop
-   * Returns a value using an until loop. Maximum 1000 times.
+   * Returns a value using an until loop. Maximum 10000 times.
    * @param  {any-1} start
    * @param  {boolean<-any} fn-until
    * @param  {any<-any} fn-loop

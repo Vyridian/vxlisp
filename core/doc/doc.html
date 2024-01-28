@@ -2620,7 +2620,7 @@
          (fn : int
           [current : int]
           (+ current current))))
- :doc &quot;Returns a value using an until loop. Maximum 1000 times.&quot;)
+ :doc &quot;Returns a value using an until loop. Maximum 10000 times.&quot;)
 
 (func any&lt;-for-until-loop-max : any-1
  [start    : any-1
@@ -2872,7 +2872,7 @@ output : list-1 := (empty list-1)
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt">Returns a value using an until loop. Maximum 1000 times.</div>
+                <div class="txt">Returns a value using an until loop. Maximum 10000 times.</div>
               </li>
             </ul>
             <div class="lbl">Function Name:</div>
@@ -2961,7 +2961,7 @@ output : list-1 := (empty list-1)
          (fn : int
           [current : int]
           (+ current current))))
- :doc &quot;Returns a value using an until loop. Maximum 1000 times.&quot;)</div>
+ :doc &quot;Returns a value using an until loop. Maximum 10000 times.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -5505,6 +5505,7 @@ output : list-1 := (empty list-1)
       work = fn_reduce-&gt;vx_any_from_reduce(work, item);
     };
     output = vx_core::vx_any_from_any(generic_any_1, work);&quot;
+  :java :auto
   :js
    &quot;output = valstart
     const fn = fn_reduce['vx_value']
@@ -5512,12 +5513,6 @@ output : list-1 := (empty list-1)
       for (const item of list) {
         output = fn(output, item)
       }
-    }&quot;
-  :java
-   &quot;output = valstart;
-    List&lt;Core.Type_any&gt; listval = list.vx_list();
-    for (Core.Type_any item : listval) {
-      output = fn_reduce.vx_any_from_reduce(generic_any_1, output, item);
     }&quot;)
  :test (test
         24
@@ -16241,6 +16236,7 @@ improves readability.</div>
       work = fn_reduce-&gt;vx_any_from_reduce(work, item);
     };
     output = vx_core::vx_any_from_any(generic_any_1, work);&quot;
+  :java :auto
   :js
    &quot;output = valstart
     const fn = fn_reduce['vx_value']
@@ -16248,12 +16244,6 @@ improves readability.</div>
       for (const item of list) {
         output = fn(output, item)
       }
-    }&quot;
-  :java
-   &quot;output = valstart;
-    List&lt;Core.Type_any&gt; listval = list.vx_list();
-    for (Core.Type_any item : listval) {
-      output = fn_reduce.vx_any_from_reduce(generic_any_1, output, item);
     }&quot;)
  :test (test
         24
@@ -46749,9 +46739,10 @@ improves readability.</div>
 
 (func xml&lt;-string : xml
  [text : string]
- (xml&lt;-textblock
-  (textblock-xml&lt;-string
-   text))
+ (let : xml
+  [tb : textblock := (textblock-xml&lt;-string :debug
+                      text)]
+  (xml&lt;-textblock tb))
  :doc &quot;Returns a parsed xml from a string.&quot;)
 
 (func xml&lt;-textblock : xml
@@ -47131,9 +47122,13 @@ improves readability.</div>
    (else
     (copy xmlarg
      (msg&lt;-error
-      (string
-       &quot;Invalid Xml Close tag: &quot;
-       text))))))
+      :invalidxmlclosetag
+      (anymap
+       :tag text
+       :startpos (:startpos tb)
+       :endpos (:endpos tb)
+       :line (:line tb)
+       :column (:column tb)))))))
  :test (test
         (xml
          :tag &quot;doc&quot;)
@@ -47154,8 +47149,15 @@ improves readability.</div>
         (xml
          :tag &quot;doc&quot;
          (msg
-          :severity 2
-          :text &quot;Invalid Xml Close tag: /wrong&quot;))
+          :code &quot;:invalidxmlclosetag&quot;
+          :detail
+           (anymap
+            :tag &quot;/wrong&quot;
+            :startpos 0
+            :endpos 0
+            :line 0
+            :column 0)
+          :severity 2))
         (xml-close&lt;-xml-textblock
          (xml
           :tag &quot;doc&quot;)
@@ -47360,37 +47362,6 @@ improves readability.</div>
            (tb/textblocklist
             (tb/textblock
              :text &quot;/tag1&quot;)))))
-
-/*
-          (tb/textblock
-           :text &quot;&lt;/doc&gt;&quot;
-           :startpos 65
-           :endpos 70
-           :delim
-            (copy tb/delimbracketangle
-             :pos 0)
-           :children
-            (tb/textblocklist
-             (tb/textblock
-              :text &quot;/doc&quot;
-              :startpos 66
-              :endpos 69)))))
-        (xml
-         :tag &quot;doc&quot;
-         :children
-          (xmllist
-           (xml
-            :tag &quot;tag1&quot;
-            :children
-             (xmllist
-              (xml
-               :tag &quot;tag2&quot;
-               :propmap
-                (stringmap
-                 :prop1 &quot;val1&quot;
-                 :prop2 &quot;val2&quot;))))))
-
-*/
  :doc &quot;Returns a modified xml from a single textblock.&quot;)
 
 (func xml-parse&lt;-xml-textblocklist : xml
@@ -47399,12 +47370,15 @@ improves readability.</div>
  (any&lt;-list-start-reduce : xml
   textblocklist
   xmlarg
+  xml-parse&lt;-xml-textblock)
+/*
   (fn : xml
    [reduce  : xml
     current : tb/textblock]
     (xml-parse&lt;-xml-textblock
      reduce
      current)))
+*/
  :test (test
         (xml
          :tag &quot;doc&quot;
@@ -48812,9 +48786,10 @@ improves readability.</div>
                 <li>
                   <div class="source">(func xml&lt;-string : xml
  [text : string]
- (xml&lt;-textblock
-  (textblock-xml&lt;-string
-   text))
+ (let : xml
+  [tb : textblock := (textblock-xml&lt;-string :debug
+                      text)]
+  (xml&lt;-textblock tb))
  :doc &quot;Returns a parsed xml from a string.&quot;)</div>
                 </li>
               </ul>
@@ -49679,8 +49654,15 @@ improves readability.</div>
  (xml
   :tag &quot;doc&quot;
   (msg
-   :severity 2
-   :text &quot;Invalid Xml Close tag: /wrong&quot;))
+   :code &quot;:invalidxmlclosetag&quot;
+   :detail
+    (anymap
+     :tag &quot;/wrong&quot;
+     :startpos 0
+     :endpos 0
+     :line 0
+     :column 0)
+   :severity 2))
  (xml-close&lt;-xml-textblock
   (xml
    :tag &quot;doc&quot;)
@@ -49737,9 +49719,13 @@ improves readability.</div>
    (else
     (copy xmlarg
      (msg&lt;-error
-      (string
-       &quot;Invalid Xml Close tag: &quot;
-       text))))))
+      :invalidxmlclosetag
+      (anymap
+       :tag text
+       :startpos (:startpos tb)
+       :endpos (:endpos tb)
+       :line (:line tb)
+       :column (:column tb)))))))
  :test (test
         (xml
          :tag &quot;doc&quot;)
@@ -49760,8 +49746,15 @@ improves readability.</div>
         (xml
          :tag &quot;doc&quot;
          (msg
-          :severity 2
-          :text &quot;Invalid Xml Close tag: /wrong&quot;))
+          :code &quot;:invalidxmlclosetag&quot;
+          :detail
+           (anymap
+            :tag &quot;/wrong&quot;
+            :startpos 0
+            :endpos 0
+            :line 0
+            :column 0)
+          :severity 2))
         (xml-close&lt;-xml-textblock
          (xml
           :tag &quot;doc&quot;)
@@ -50188,37 +50181,6 @@ improves readability.</div>
            (tb/textblocklist
             (tb/textblock
              :text &quot;/tag1&quot;)))))
-
-/*
-          (tb/textblock
-           :text &quot;&lt;/doc&gt;&quot;
-           :startpos 65
-           :endpos 70
-           :delim
-            (copy tb/delimbracketangle
-             :pos 0)
-           :children
-            (tb/textblocklist
-             (tb/textblock
-              :text &quot;/doc&quot;
-              :startpos 66
-              :endpos 69)))))
-        (xml
-         :tag &quot;doc&quot;
-         :children
-          (xmllist
-           (xml
-            :tag &quot;tag1&quot;
-            :children
-             (xmllist
-              (xml
-               :tag &quot;tag2&quot;
-               :propmap
-                (stringmap
-                 :prop1 &quot;val1&quot;
-                 :prop2 &quot;val2&quot;))))))
-
-*/
  :doc &quot;Returns a modified xml from a single textblock.&quot;)</div>
                 </li>
               </ul>
@@ -50474,12 +50436,15 @@ improves readability.</div>
  (any&lt;-list-start-reduce : xml
   textblocklist
   xmlarg
+  xml-parse&lt;-xml-textblock)
+/*
   (fn : xml
    [reduce  : xml
     current : tb/textblock]
     (xml-parse&lt;-xml-textblock
      reduce
      current)))
+*/
  :test (test
         (xml
          :tag &quot;doc&quot;
@@ -56834,13 +56799,17 @@ improves readability.</div>
  (html
   :lang &quot;en&quot;
   :head (head
-         (meta  :charset &quot;utf-8&quot;)
-         (title :text    &quot;Test Suite&quot;)
+         (meta
+          :charset &quot;utf-8&quot;)
+         (meta
+          :name    &quot;viewport&quot;
+          :content &quot;width=device-width, initial-scale=1.0&quot;)
+         (title
+          :text &quot;Test Suite&quot;)
          stylesheet-test)
   :body (body
          (div (h1 &quot;Test Suite&quot;))
-         divtest)
- )
+         divtest))
  :doc &quot;Returns html from test div&quot;)
 
 (func p&lt;-passfail : p
@@ -56851,16 +56820,14 @@ improves readability.</div>
    style     : style  := (style&lt;-stylesheet-name stylesheet-test stylename)]
   (p
    :style style
-   :text  text)
- )
+   :text  text))
  :doc &quot;Returns a &lt;p&gt; tag from a passfail boolean value&quot;)
 
 (func p&lt;-testcoveragenums : p
  [nums  : testcoveragenums]
  (p
   :style (style&lt;-stylesheet-name stylesheet-test &quot;.coveragenums&quot;)
-  :text  (string (:pct nums) &quot;% &quot; (:tests nums) &quot;/&quot; (:total nums))
- )
+  :text  (string (:pct nums) &quot;% &quot; (:tests nums) &quot;/&quot; (:total nums)))
  :doc &quot;Returns &lt;p&gt;tests / total (pct%)&lt;/p&gt; from testcoveragenums&quot;)
 
 (func resolve-testcase : testcase :async
@@ -58852,13 +58819,17 @@ improves readability.</div>
  (html
   :lang &quot;en&quot;
   :head (head
-         (meta  :charset &quot;utf-8&quot;)
-         (title :text    &quot;Test Suite&quot;)
+         (meta
+          :charset &quot;utf-8&quot;)
+         (meta
+          :name    &quot;viewport&quot;
+          :content &quot;width=device-width, initial-scale=1.0&quot;)
+         (title
+          :text &quot;Test Suite&quot;)
          stylesheet-test)
   :body (body
          (div (h1 &quot;Test Suite&quot;))
-         divtest)
- )
+         divtest))
  :doc &quot;Returns html from test div&quot;)</div>
                 </li>
               </ul>
@@ -58927,8 +58898,7 @@ improves readability.</div>
    style     : style  := (style&lt;-stylesheet-name stylesheet-test stylename)]
   (p
    :style style
-   :text  text)
- )
+   :text  text))
  :doc &quot;Returns a &lt;p&gt; tag from a passfail boolean value&quot;)</div>
                 </li>
               </ul>
@@ -58993,8 +58963,7 @@ improves readability.</div>
  [nums  : testcoveragenums]
  (p
   :style (style&lt;-stylesheet-name stylesheet-test &quot;.coveragenums&quot;)
-  :text  (string (:pct nums) &quot;% &quot; (:tests nums) &quot;/&quot; (:total nums))
- )
+  :text  (string (:pct nums) &quot;% &quot; (:tests nums) &quot;/&quot; (:total nums)))
  :doc &quot;Returns &lt;p&gt;tests / total (pct%)&lt;/p&gt; from testcoveragenums&quot;)</div>
                 </li>
               </ul>
@@ -65522,7 +65491,9 @@ improves readability.</div>
  :doc        &quot;Html Tag&quot;)
 
 (type meta : struct
- :properties [charset : string]
+ :properties [charset : string
+              name    : string
+              content : string]
  :traits     [node headchild]
  :doc        &quot;Meta Tag&quot;)
 
@@ -65642,8 +65613,7 @@ improves readability.</div>
    sid     : string       := (string&lt;-propname-val &quot;id&quot; (:id div))
    sstyle  : string       := (string&lt;-propstyle (:style div))]
   (string&lt;-nodelist-tag-prop-indent
-   nodes &quot;div&quot; (string sid sstyle) indent)
- )
+   nodes &quot;div&quot; (string sid sstyle) indent))
  :test (test
         &quot;&lt;div&gt;&lt;/div&gt;&quot;
         (string&lt;-div-indent (div) 0))
@@ -65659,8 +65629,7 @@ improves readability.</div>
  (let
   [nodes : divchildlist := (:nodes body)]
   (string&lt;-nodelist-tag-prop-indent
-   nodes &quot;body&quot; &quot;&quot; indent)
- )
+   nodes &quot;body&quot; &quot;&quot; indent))
  :test (test
         &quot;&lt;body&gt;&lt;/body&gt;&quot;
         (string&lt;-body-indent (body) 0))
@@ -65675,8 +65644,7 @@ improves readability.</div>
  (let
   [nodes : divchildlist := (:nodes footer)]
   (string&lt;-nodelist-tag-prop-indent
-   nodes &quot;footer&quot; &quot;&quot; indent)
- )
+   nodes &quot;footer&quot; &quot;&quot; indent))
  :doc &quot;Returns string from footer&quot;)
 
 (func string&lt;-details-indent : string
@@ -65694,8 +65662,7 @@ improves readability.</div>
    ssummary
    sindent &quot;  &lt;/summary&gt;&quot;
    snodes
-   sindent &quot;&lt;/details&gt;&quot;)
- )
+   sindent &quot;&lt;/details&gt;&quot;))
  :doc &quot;Returns string from details&quot;)
 
 (func string&lt;-h1-indent : string
@@ -65734,8 +65701,7 @@ improves readability.</div>
  (let
   [nodes : headchildlist := (:nodes head)]
   (string&lt;-nodelist-tag-prop-indent
-   nodes &quot;head&quot; &quot;&quot; indent)
- )
+   nodes &quot;head&quot; &quot;&quot; indent))
  :test (test
         &quot;&lt;head&gt;&lt;/head&gt;&quot;
         (string&lt;-head-indent (head) 0))
@@ -65776,10 +65742,29 @@ improves readability.</div>
  [meta   : meta
   indent : int]
  (let
-  [sindent : string := (string&lt;-indent indent)
-   charset : string := (string&lt;-propname-val &quot;charset&quot; (:charset meta))]
+  [sindent  : string := (string&lt;-indent indent)
+   charset  : string := (:charset meta)
+   name     : string := (:name meta)
+   content  : string := (:content meta)
+   scharset : string := (if : string
+                         (then
+                          (!= &quot;&quot; charset)
+                          (string&lt;-propname-val &quot;charset&quot; charset)))
+   sname    : string := (if : string
+                         (then
+                          (!= &quot;&quot; name)
+                          (string&lt;-propname-val &quot;name&quot; name)))
+   scontext : string := (if : string
+                         (then
+                          (!= &quot;&quot; content)
+                          (string&lt;-propname-val &quot;content&quot; content)))]
   (string
-   sindent &quot;&lt;meta&quot; charset &quot; /&gt;&quot;))
+   sindent
+   &quot;&lt;meta&quot;
+   scharset
+   sname
+   scontext
+   &quot; /&gt;&quot;))
  :test (test
         &quot;&lt;meta charset=\&quot;utf-8\&quot; /&gt;&quot;
         (string&lt;-meta-indent (meta :charset &quot;utf-8&quot;) 0))
@@ -67021,6 +67006,20 @@ improves readability.</div>
                       <div class="td">false</div>
                       <div class="td">false</div>
                     </div>
+                    <div class="tr">
+                      <div class="td">name</div>
+                      <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                      <div class="td"></div>
+                      <div class="td">false</div>
+                      <div class="td">false</div>
+                    </div>
+                    <div class="tr">
+                      <div class="td">content</div>
+                      <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                      <div class="td"></div>
+                      <div class="td">false</div>
+                      <div class="td">false</div>
+                    </div>
                   </div>
                 </li>
               </ul>
@@ -67039,7 +67038,9 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(type meta : struct
- :properties [charset : string]
+ :properties [charset : string
+              name    : string
+              content : string]
  :traits     [node headchild]
  :doc        &quot;Meta Tag&quot;)</div>
                 </li>
@@ -68338,8 +68339,7 @@ improves readability.</div>
    sid     : string       := (string&lt;-propname-val &quot;id&quot; (:id div))
    sstyle  : string       := (string&lt;-propstyle (:style div))]
   (string&lt;-nodelist-tag-prop-indent
-   nodes &quot;div&quot; (string sid sstyle) indent)
- )
+   nodes &quot;div&quot; (string sid sstyle) indent))
  :test (test
         &quot;&lt;div&gt;&lt;/div&gt;&quot;
         (string&lt;-div-indent (div) 0))
@@ -68424,8 +68424,7 @@ improves readability.</div>
  (let
   [nodes : divchildlist := (:nodes body)]
   (string&lt;-nodelist-tag-prop-indent
-   nodes &quot;body&quot; &quot;&quot; indent)
- )
+   nodes &quot;body&quot; &quot;&quot; indent))
  :test (test
         &quot;&lt;body&gt;&lt;/body&gt;&quot;
         (string&lt;-body-indent (body) 0))
@@ -68503,8 +68502,7 @@ improves readability.</div>
  (let
   [nodes : divchildlist := (:nodes footer)]
   (string&lt;-nodelist-tag-prop-indent
-   nodes &quot;footer&quot; &quot;&quot; indent)
- )
+   nodes &quot;footer&quot; &quot;&quot; indent))
  :doc &quot;Returns string from footer&quot;)</div>
                 </li>
               </ul>
@@ -68585,8 +68583,7 @@ improves readability.</div>
    ssummary
    sindent &quot;  &lt;/summary&gt;&quot;
    snodes
-   sindent &quot;&lt;/details&gt;&quot;)
- )
+   sindent &quot;&lt;/details&gt;&quot;))
  :doc &quot;Returns string from details&quot;)</div>
                 </li>
               </ul>
@@ -68880,8 +68877,7 @@ improves readability.</div>
  (let
   [nodes : headchildlist := (:nodes head)]
   (string&lt;-nodelist-tag-prop-indent
-   nodes &quot;head&quot; &quot;&quot; indent)
- )
+   nodes &quot;head&quot; &quot;&quot; indent))
  :test (test
         &quot;&lt;head&gt;&lt;/head&gt;&quot;
         (string&lt;-head-indent (head) 0))
@@ -69108,10 +69104,29 @@ improves readability.</div>
  [meta   : meta
   indent : int]
  (let
-  [sindent : string := (string&lt;-indent indent)
-   charset : string := (string&lt;-propname-val &quot;charset&quot; (:charset meta))]
+  [sindent  : string := (string&lt;-indent indent)
+   charset  : string := (:charset meta)
+   name     : string := (:name meta)
+   content  : string := (:content meta)
+   scharset : string := (if : string
+                         (then
+                          (!= &quot;&quot; charset)
+                          (string&lt;-propname-val &quot;charset&quot; charset)))
+   sname    : string := (if : string
+                         (then
+                          (!= &quot;&quot; name)
+                          (string&lt;-propname-val &quot;name&quot; name)))
+   scontext : string := (if : string
+                         (then
+                          (!= &quot;&quot; content)
+                          (string&lt;-propname-val &quot;content&quot; content)))]
   (string
-   sindent &quot;&lt;meta&quot; charset &quot; /&gt;&quot;))
+   sindent
+   &quot;&lt;meta&quot;
+   scharset
+   sname
+   scontext
+   &quot; /&gt;&quot;))
  :test (test
         &quot;&lt;meta charset=\&quot;utf-8\&quot; /&gt;&quot;
         (string&lt;-meta-indent (meta :charset &quot;utf-8&quot;) 0))

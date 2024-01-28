@@ -257,9 +257,10 @@
 
 (func xml<-string : xml
  [text : string]
- (xml<-textblock
-  (textblock-xml<-string
-   text))
+ (let : xml
+  [tb : textblock := (textblock-xml<-string :debug
+                      text)]
+  (xml<-textblock tb))
  :doc "Returns a parsed xml from a string.")
 
 (func xml<-textblock : xml
@@ -639,9 +640,13 @@
    (else
     (copy xmlarg
      (msg<-error
-      (string
-       "Invalid Xml Close tag: "
-       text))))))
+      :invalidxmlclosetag
+      (anymap
+       :tag text
+       :startpos (:startpos tb)
+       :endpos (:endpos tb)
+       :line (:line tb)
+       :column (:column tb)))))))
  :test (test
         (xml
          :tag "doc")
@@ -662,8 +667,15 @@
         (xml
          :tag "doc"
          (msg
-          :severity 2
-          :text "Invalid Xml Close tag: /wrong"))
+          :code ":invalidxmlclosetag"
+          :detail
+           (anymap
+            :tag "/wrong"
+            :startpos 0
+            :endpos 0
+            :line 0
+            :column 0)
+          :severity 2))
         (xml-close<-xml-textblock
          (xml
           :tag "doc")
@@ -868,37 +880,6 @@
            (tb/textblocklist
             (tb/textblock
              :text "/tag1")))))
-
-/*
-          (tb/textblock
-           :text "</doc>"
-           :startpos 65
-           :endpos 70
-           :delim
-            (copy tb/delimbracketangle
-             :pos 0)
-           :children
-            (tb/textblocklist
-             (tb/textblock
-              :text "/doc"
-              :startpos 66
-              :endpos 69)))))
-        (xml
-         :tag "doc"
-         :children
-          (xmllist
-           (xml
-            :tag "tag1"
-            :children
-             (xmllist
-              (xml
-               :tag "tag2"
-               :propmap
-                (stringmap
-                 :prop1 "val1"
-                 :prop2 "val2"))))))
-
-*/
  :doc "Returns a modified xml from a single textblock.")
 
 (func xml-parse<-xml-textblocklist : xml
@@ -907,12 +888,7 @@
  (any<-list-start-reduce : xml
   textblocklist
   xmlarg
-  (fn : xml
-   [reduce  : xml
-    current : tb/textblock]
-    (xml-parse<-xml-textblock
-     reduce
-     current)))
+  xml-parse<-xml-textblock)
  :test (test
         (xml
          :tag "doc"

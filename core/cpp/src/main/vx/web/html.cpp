@@ -2701,7 +2701,9 @@ namespace vx_web_html {
       vx_core::vx_release_one({
         this->vx_p_id,
         this->vx_p_style,
-        this->vx_p_charset
+        this->vx_p_charset,
+        this->vx_p_name,
+        this->vx_p_content
       });
     }
 
@@ -2732,6 +2734,24 @@ namespace vx_web_html {
       return output;
     }
 
+    // name()
+    vx_core::Type_string Class_meta::name() const {
+      vx_core::Type_string output = this->vx_p_name;
+      if (!output) {
+        output = vx_core::e_string;
+      }
+      return output;
+    }
+
+    // content()
+    vx_core::Type_string Class_meta::content() const {
+      vx_core::Type_string output = this->vx_p_content;
+      if (!output) {
+        output = vx_core::e_string;
+      }
+      return output;
+    }
+
     // vx_get_any(key)
     vx_core::Type_any Class_meta::vx_get_any(vx_core::Type_string key) const {
       vx_core::Type_any output = vx_core::e_any;
@@ -2743,6 +2763,10 @@ namespace vx_web_html {
         output = this->style();
       } else if (skey == ":charset") {
         output = this->charset();
+      } else if (skey == ":name") {
+        output = this->name();
+      } else if (skey == ":content") {
+        output = this->content();
       }
       vx_core::vx_release_except(key, output);
       return output;
@@ -2754,6 +2778,8 @@ namespace vx_web_html {
       output[":id"] = this->id();
       output[":style"] = this->style();
       output[":charset"] = this->charset();
+      output[":name"] = this->name();
+      output[":content"] = this->content();
       return output;
     }
 
@@ -2773,6 +2799,8 @@ namespace vx_web_html {
       vx_core::Type_string vx_p_id = val->id();
       vx_web_html::Type_style vx_p_style = val->style();
       vx_core::Type_string vx_p_charset = val->charset();
+      vx_core::Type_string vx_p_name = val->name();
+      vx_core::Type_string vx_p_content = val->content();
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -2792,6 +2820,10 @@ namespace vx_web_html {
           } else if (testkey == ":style") {
             key = testkey;
           } else if (testkey == ":charset") {
+            key = testkey;
+          } else if (testkey == ":name") {
+            key = testkey;
+          } else if (testkey == ":content") {
             key = testkey;
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new meta) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
@@ -2826,6 +2858,24 @@ namespace vx_web_html {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new meta :charset " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
+          } else if (key == ":name") {
+            if (vx_p_name == valsub) {
+            } else if (valsubtype == vx_core::t_string) {
+              ischanged = true;
+              vx_p_name = vx_core::vx_any_from_any(vx_core::t_string, valsub);
+            } else {
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new meta :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              msgblock = vx_core::vx_copy(msgblock, {msg});
+            }
+          } else if (key == ":content") {
+            if (vx_p_content == valsub) {
+            } else if (valsubtype == vx_core::t_string) {
+              ischanged = true;
+              vx_p_content = vx_core::vx_any_from_any(vx_core::t_string, valsub);
+            } else {
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new meta :content " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              msgblock = vx_core::vx_copy(msgblock, {msg});
+            }
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new meta) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -2855,6 +2905,20 @@ namespace vx_web_html {
           }
           output->vx_p_charset = vx_p_charset;
           vx_core::vx_reserve(vx_p_charset);
+        }
+        if (output->vx_p_name != vx_p_name) {
+          if (output->vx_p_name) {
+            vx_core::vx_release_one(output->vx_p_name);
+          }
+          output->vx_p_name = vx_p_name;
+          vx_core::vx_reserve(vx_p_name);
+        }
+        if (output->vx_p_content != vx_p_content) {
+          if (output->vx_p_content) {
+            vx_core::vx_release_one(output->vx_p_content);
+          }
+          output->vx_p_content = vx_p_content;
+          vx_core::vx_reserve(vx_p_content);
         }
       }
       if (msgblock != vx_core::e_msgblock) {
@@ -2886,6 +2950,14 @@ namespace vx_web_html {
         vx_core::vx_argmap_from_listarg({
           vx_core::vx_new_arg(
             "charset", // name
+            vx_core::t_string // type
+          ),
+          vx_core::vx_new_arg(
+            "name", // name
+            vx_core::t_string // type
+          ),
+          vx_core::vx_new_arg(
+            "content", // name
             vx_core::t_string // type
           )
         }) // properties
@@ -7181,21 +7253,72 @@ namespace vx_web_html {
       vx_core::t_any_from_func->vx_fn_new({indent, meta}, [indent, meta]() {
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
         vx_core::vx_ref_plus(sindent);
-        vx_core::Type_string charset = vx_web_html::f_string_from_propname_val(
-          vx_core::vx_new_string("charset"),
-          meta->charset()
-        );
+        vx_core::Type_string charset = meta->charset();
         vx_core::vx_ref_plus(charset);
+        vx_core::Type_string name = meta->name();
+        vx_core::vx_ref_plus(name);
+        vx_core::Type_string content = meta->content();
+        vx_core::vx_ref_plus(content);
+        vx_core::Type_string scharset = vx_core::f_if_2(
+          vx_core::t_string,
+          vx_core::vx_new(vx_core::t_thenelselist, {
+            vx_core::f_then(
+              vx_core::t_boolean_from_func->vx_fn_new({charset}, [charset]() {
+                vx_core::Type_boolean output_1 = vx_core::f_ne(vx_core::vx_new_string(""), charset);
+                return output_1;
+              }),
+              vx_core::t_any_from_func->vx_fn_new({charset}, [charset]() {
+                vx_core::Type_string output_1 = vx_web_html::f_string_from_propname_val(vx_core::vx_new_string("charset"), charset);
+                return output_1;
+              })
+            )
+          })
+        );
+        vx_core::vx_ref_plus(scharset);
+        vx_core::Type_string sname = vx_core::f_if_2(
+          vx_core::t_string,
+          vx_core::vx_new(vx_core::t_thenelselist, {
+            vx_core::f_then(
+              vx_core::t_boolean_from_func->vx_fn_new({name}, [name]() {
+                vx_core::Type_boolean output_1 = vx_core::f_ne(vx_core::vx_new_string(""), name);
+                return output_1;
+              }),
+              vx_core::t_any_from_func->vx_fn_new({name}, [name]() {
+                vx_core::Type_string output_1 = vx_web_html::f_string_from_propname_val(vx_core::vx_new_string("name"), name);
+                return output_1;
+              })
+            )
+          })
+        );
+        vx_core::vx_ref_plus(sname);
+        vx_core::Type_string scontext = vx_core::f_if_2(
+          vx_core::t_string,
+          vx_core::vx_new(vx_core::t_thenelselist, {
+            vx_core::f_then(
+              vx_core::t_boolean_from_func->vx_fn_new({content}, [content]() {
+                vx_core::Type_boolean output_1 = vx_core::f_ne(vx_core::vx_new_string(""), content);
+                return output_1;
+              }),
+              vx_core::t_any_from_func->vx_fn_new({content}, [content]() {
+                vx_core::Type_string output_1 = vx_web_html::f_string_from_propname_val(vx_core::vx_new_string("content"), content);
+                return output_1;
+              })
+            )
+          })
+        );
+        vx_core::vx_ref_plus(scontext);
         vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string,
           vx_core::vx_new(vx_core::t_anylist, {
             sindent,
             vx_core::vx_new_string("<meta"),
-            charset,
+            scharset,
+            sname,
+            scontext,
             vx_core::vx_new_string(" />")
           })
         );
-        vx_core::vx_release_one_except({sindent, charset}, output_1);
+        vx_core::vx_release_one_except({sindent, charset, name, content, scharset, sname, scontext}, output_1);
         return output_1;
       })
     );

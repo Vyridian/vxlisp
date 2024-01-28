@@ -486,6 +486,13 @@ export default class vx_test {
           "utf-8"
         ),
         vx_core.f_new(
+          vx_web_html.t_meta,
+          ":name",
+          "viewport",
+          ":content",
+          "width=device-width, initial-scale=1.0"
+        ),
+        vx_core.f_new(
           vx_web_html.t_title,
           ":text",
           "Test Suite"

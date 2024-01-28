@@ -4043,6 +4043,15 @@ namespace vx_test {
               })
             ),
             vx_core::f_new(
+              vx_web_html::t_meta,
+              vx_core::vx_new(vx_core::t_anylist, {
+                vx_core::vx_new_string(":name"),
+                vx_core::vx_new_string("viewport"),
+                vx_core::vx_new_string(":content"),
+                vx_core::vx_new_string("width=device-width, initial-scale=1.0")
+              })
+            ),
+            vx_core::f_new(
               vx_web_html::t_title,
               vx_core::vx_new(vx_core::t_anylist, {
                 vx_core::vx_new_string(":text"),

@@ -13336,8 +13336,15 @@
  (xml
   :tag \"doc\"
   (msg
-   :severity 2
-   :text \"Invalid Xml Close tag: /wrong\"))
+   :code \":invalidxmlclosetag\"
+   :detail
+    (anymap
+     :tag \"/wrong\"
+     :startpos 0
+     :endpos 0
+     :line 0
+     :column 0)
+   :severity 2))
  (xml-close<-xml-textblock
   (xml
    :tag \"doc\")

@@ -1336,12 +1336,21 @@ public final class Xml {
                 return Core.f_copy(
                   xmlarg,
                   Core.t_anylist.vx_new(
-                      Core.f_msg_from_error(
+                      Core.f_msg_from_error_1(
+                        Core.vx_new_string(":invalidxmlclosetag"),
                         Core.f_new(
-                          Core.t_string,
+                          Core.t_anymap,
                           Core.t_anylist.vx_new(
-                            Core.vx_new_string("Invalid Xml Close tag: "),
-                            text
+                            Core.vx_new_string(":tag"),
+                            text,
+                            Core.vx_new_string(":startpos"),
+                            tb.startpos(),
+                            Core.vx_new_string(":endpos"),
+                            tb.endpos(),
+                            Core.vx_new_string(":line"),
+                            tb.line(),
+                            Core.vx_new_string(":column"),
+                            tb.column()
                           )
                         )
                       )
@@ -1561,11 +1570,11 @@ public final class Xml {
       Xml.t_xml,
       textblocklist,
       xmlarg,
-      Core.t_any_from_reduce.vx_fn_new((reduce_any, current_any) -> {
-        Xml.Type_xml reduce = Core.f_any_from_any(Xml.t_xml, reduce_any);
-        Textblock.Type_textblock current = Core.f_any_from_any(Textblock.t_textblock, current_any);
-        return 
-          Xml.f_xml_parse_from_xml_textblock(reduce, current);
+      Core.t_any_from_reduce.vx_fn_new((Core.Type_any xmlarg_lmb_any, Core.Type_any tb_lmb_any) -> {
+        Xml.Type_xml xmlarg_lmb = Core.f_any_from_any(Xml.t_xml, xmlarg_lmb_any);
+        Textblock.Type_textblock tb_lmb = Core.f_any_from_any(Textblock.t_textblock, tb_lmb_any);
+        Core.Type_any output_1 = Xml.f_xml_parse_from_xml_textblock(xmlarg_lmb, tb_lmb);
+        return output_1;
       })
     );
     return output;
@@ -2255,8 +2264,12 @@ public final class Xml {
 
   public static Xml.Type_xml f_xml_from_string(final Core.Type_string text) {
     Xml.Type_xml output = Xml.e_xml;
-    output = Xml.f_xml_from_textblock(
-      Xml.f_textblock_xml_from_string(text)
+    output = Core.f_let(
+      Xml.t_xml,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Textblock.Type_textblock tb = Core.f_log_1(Textblock.t_textblock, Core.vx_new_string("vx/data/xml/textblock-xml<-string"), Xml.f_textblock_xml_from_string(text));
+        return Xml.f_xml_from_textblock(tb);
+      })
     );
     return output;
   }

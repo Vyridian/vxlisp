@@ -948,7 +948,7 @@ public final class XmlTest {
             )
         ),
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n (xml\n  :tag \"doc\"\n  (msg\n   :severity 2\n   :text \"Invalid Xml Close tag: /wrong\"))\n (xml-close<-xml-textblock\n  (xml\n   :tag \"doc\")\n  (tb/textblock\n   :text \"/wrong\")))",
+          ":describename", "(test\n (xml\n  :tag \"doc\"\n  (msg\n   :code \":invalidxmlclosetag\"\n   :detail\n    (anymap\n     :tag \"/wrong\"\n     :startpos 0\n     :endpos 0\n     :line 0\n     :column 0)\n   :severity 2))\n (xml-close<-xml-textblock\n  (xml\n   :tag \"doc\")\n  (tb/textblock\n   :text \"/wrong\")))",
           ":testresult",
             Test.f_test(
               context,
@@ -960,10 +960,26 @@ public final class XmlTest {
                   Core.f_new(
                     Core.t_msg,
                     Core.t_anylist.vx_new(
+                      Core.vx_new_string(":code"),
+                      Core.vx_new_string(":invalidxmlclosetag"),
+                      Core.vx_new_string(":detail"),
+                      Core.f_new(
+                        Core.t_anymap,
+                        Core.t_anylist.vx_new(
+                          Core.vx_new_string(":tag"),
+                          Core.vx_new_string("/wrong"),
+                          Core.vx_new_string(":startpos"),
+                          Core.vx_new_int(0),
+                          Core.vx_new_string(":endpos"),
+                          Core.vx_new_int(0),
+                          Core.vx_new_string(":line"),
+                          Core.vx_new_int(0),
+                          Core.vx_new_string(":column"),
+                          Core.vx_new_int(0)
+                        )
+                      ),
                       Core.vx_new_string(":severity"),
-                      Core.vx_new_int(2),
-                      Core.vx_new_string(":text"),
-                      Core.vx_new_string("Invalid Xml Close tag: /wrong")
+                      Core.vx_new_int(2)
                     )
                   )
                 )

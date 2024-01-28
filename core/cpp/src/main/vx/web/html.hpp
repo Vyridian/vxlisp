@@ -928,6 +928,12 @@ namespace vx_web_html {
     // charset()
     vx_core::Type_string vx_p_charset = NULL;
     virtual vx_core::Type_string charset() const = 0;
+    // name()
+    vx_core::Type_string vx_p_name = NULL;
+    virtual vx_core::Type_string name() const = 0;
+    // content()
+    vx_core::Type_string vx_p_content = NULL;
+    virtual vx_core::Type_string content() const = 0;
   };
   class Class_meta : public virtual Abstract_meta {
   public:
@@ -946,6 +952,8 @@ namespace vx_web_html {
     virtual vx_core::Type_string id() const override;
     virtual vx_web_html::Type_style style() const override;
     virtual vx_core::Type_string charset() const override;
+    virtual vx_core::Type_string name() const override;
+    virtual vx_core::Type_string content() const override;
   };
 
   // (type nodelist)

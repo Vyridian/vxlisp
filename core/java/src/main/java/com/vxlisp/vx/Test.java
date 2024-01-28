@@ -4123,6 +4123,15 @@ public final class Test {
               )
             ),
             Core.f_new(
+              Html.t_meta,
+              Core.t_anylist.vx_new(
+                Core.vx_new_string(":name"),
+                Core.vx_new_string("viewport"),
+                Core.vx_new_string(":content"),
+                Core.vx_new_string("width=device-width, initial-scale=1.0")
+              )
+            ),
+            Core.f_new(
               Html.t_title,
               Core.t_anylist.vx_new(
                 Core.vx_new_string(":text"),

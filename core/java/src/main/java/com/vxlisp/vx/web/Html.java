@@ -2629,6 +2629,8 @@ public final class Html {
     public Core.Type_string id();
     public Html.Type_style style();
     public Core.Type_string charset();
+    public Core.Type_string name();
+    public Core.Type_string content();
   }
 
   public static class Class_meta extends Core.Class_base implements Type_meta {
@@ -2654,6 +2656,20 @@ public final class Html {
       return this.vx_p_charset == null ? Core.e_string : this.vx_p_charset;
     }
 
+    protected Core.Type_string vx_p_name;
+
+    @Override
+    public Core.Type_string name() {
+      return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
+    }
+
+    protected Core.Type_string vx_p_content;
+
+    @Override
+    public Core.Type_string content() {
+      return this.vx_p_content == null ? Core.e_string : this.vx_p_content;
+    }
+
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
@@ -2668,6 +2684,12 @@ public final class Html {
       case ":charset":
         output = this.charset();
         break;
+      case ":name":
+        output = this.name();
+        break;
+      case ":content":
+        output = this.content();
+        break;
       }
       return output;
     }
@@ -2678,6 +2700,8 @@ public final class Html {
       output.put(":id", this.id());
       output.put(":style", this.style());
       output.put(":charset", this.charset());
+      output.put(":name", this.name());
+      output.put(":content", this.content());
       return Core.immutablemap(output);
     }
 
@@ -2696,10 +2720,14 @@ public final class Html {
       Core.Type_string vx_p_id = val.id();
       Html.Type_style vx_p_style = val.style();
       Core.Type_string vx_p_charset = val.charset();
+      Core.Type_string vx_p_name = val.name();
+      Core.Type_string vx_p_content = val.content();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
       validkeys.add(":style");
       validkeys.add(":charset");
+      validkeys.add(":name");
+      validkeys.add(":content");
       String key = "";
       Core.Type_msg msg;
       for (Object valsub : vals) {
@@ -2808,6 +2836,52 @@ public final class Html {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":name":
+            if (valsub == vx_p_name) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_name = (Core.Type_string)valsub;
+            } else if (valsub instanceof String) {
+              ischanged = true;
+              vx_p_name = Core.t_string.vx_new(valsub);
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("name"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/meta", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":content":
+            if (valsub == vx_p_content) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_content = (Core.Type_string)valsub;
+            } else if (valsub instanceof String) {
+              ischanged = true;
+              vx_p_content = Core.t_string.vx_new(valsub);
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("content"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/meta", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/web/html/meta", ":invalidkey", msgval);
@@ -2821,6 +2895,8 @@ public final class Html {
         work.vx_p_id = vx_p_id;
         work.vx_p_style = vx_p_style;
         work.vx_p_charset = vx_p_charset;
+        work.vx_p_name = vx_p_name;
+        work.vx_p_content = vx_p_content;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -7439,16 +7515,56 @@ public final class Html {
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
         final Core.Type_string sindent = Html.f_string_from_indent(indent);
-        final Core.Type_string charset = Html.f_string_from_propname_val(
-          Core.vx_new_string("charset"),
-          meta.charset()
+        final Core.Type_string charset = meta.charset();
+        final Core.Type_string name = meta.name();
+        final Core.Type_string content = meta.content();
+        final Core.Type_string scharset = Core.f_if_2(
+          Core.t_string,
+          Core.t_thenelselist.vx_new(
+              Core.f_then(
+                Core.t_boolean_from_func.vx_fn_new(() -> {
+                  return Core.f_ne(Core.vx_new_string(""), charset);
+                }),
+                Core.t_any_from_func.vx_fn_new(() -> {
+                  return Html.f_string_from_propname_val(Core.vx_new_string("charset"), charset);
+                })
+              )
+          )
+        );
+        final Core.Type_string sname = Core.f_if_2(
+          Core.t_string,
+          Core.t_thenelselist.vx_new(
+              Core.f_then(
+                Core.t_boolean_from_func.vx_fn_new(() -> {
+                  return Core.f_ne(Core.vx_new_string(""), name);
+                }),
+                Core.t_any_from_func.vx_fn_new(() -> {
+                  return Html.f_string_from_propname_val(Core.vx_new_string("name"), name);
+                })
+              )
+          )
+        );
+        final Core.Type_string scontext = Core.f_if_2(
+          Core.t_string,
+          Core.t_thenelselist.vx_new(
+              Core.f_then(
+                Core.t_boolean_from_func.vx_fn_new(() -> {
+                  return Core.f_ne(Core.vx_new_string(""), content);
+                }),
+                Core.t_any_from_func.vx_fn_new(() -> {
+                  return Html.f_string_from_propname_val(Core.vx_new_string("content"), content);
+                })
+              )
+          )
         );
         return Core.f_new(
           Core.t_string,
           Core.t_anylist.vx_new(
             sindent,
             Core.vx_new_string("<meta"),
-            charset,
+            scharset,
+            sname,
+            scontext,
             Core.vx_new_string(" />")
           )
         );

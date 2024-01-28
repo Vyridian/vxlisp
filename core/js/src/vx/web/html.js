@@ -584,15 +584,37 @@ export default class vx_web_html {
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const sindent = vx_web_html.f_string_from_indent(indent)
-        const charset = vx_web_html.f_string_from_propname_val(
-          "charset",
-          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_meta}, meta, ":charset")
+        const charset = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_meta}, meta, ":charset")
+        const name = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_meta}, meta, ":name")
+        const content = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_meta}, meta, ":content")
+        const scharset = vx_core.f_if_2(
+          {"any-1": vx_core.t_string},
+          vx_core.f_then(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_ne("", charset)}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_web_html.f_string_from_propname_val("charset", charset)})
+          )
+        )
+        const sname = vx_core.f_if_2(
+          {"any-1": vx_core.t_string},
+          vx_core.f_then(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_ne("", name)}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_web_html.f_string_from_propname_val("name", name)})
+          )
+        )
+        const scontext = vx_core.f_if_2(
+          {"any-1": vx_core.t_string},
+          vx_core.f_then(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_ne("", content)}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_web_html.f_string_from_propname_val("content", content)})
+          )
         )
         return vx_core.f_new(
           vx_core.t_string,
           sindent,
           "<meta",
-          charset,
+          scharset,
+          sname,
+          scontext,
           " />"
         )
       })
@@ -2008,10 +2030,20 @@ export default class vx_web_html {
           "name" : "charset",
           "type" : vx_core.t_string,
           "multi": false
+        },
+        "name": {
+          "name" : "name",
+          "type" : vx_core.t_string,
+          "multi": false
+        },
+        "content": {
+          "name" : "content",
+          "type" : vx_core.t_string,
+          "multi": false
         }
       },
       proplast      : {
-        "name" : "charset",
+        "name" : "content",
         "type" : vx_core.t_string,
         "multi": false
       }
