@@ -258,7 +258,7 @@
 (func xml<-string : xml
  [text : string]
  (let : xml
-  [tb : textblock := (textblock-xml<-string :debug
+  [tb : textblock := (textblock-xml<-string
                       text)]
   (xml<-textblock tb))
  :doc "Returns a parsed xml from a string.")

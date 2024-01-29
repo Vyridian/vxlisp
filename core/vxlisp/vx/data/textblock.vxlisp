@@ -2098,7 +2098,7 @@
    [current : textblock]
    (textblock-parse-one
     current))
-  50000)
+  100000)
  :bigospace :n^n
  :bigotime  :n^n
  :test (test
