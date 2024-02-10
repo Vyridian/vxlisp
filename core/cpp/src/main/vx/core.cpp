@@ -88,6 +88,13 @@ namespace vx_core {
     }
   // }
 
+  // vx_any_from_func_1(generic_any_1, func, args...)
+  vx_core::Type_any vx_any_from_func_1(vx_core::Type_any generic_any_1, vx_core::Type_replfunc func, vx_core::vx_Type_listany args) {
+    vx_core::Type_anylist anylist = vx_core::vx_new_anylist(args);
+    vx_core::Type_any output = func->vx_repl(anylist);
+    return output;
+  }
+
   // vx_any_from_list_result_next(generic_any_1, list, any<-reduce-next)
   vx_core::Type_any vx_any_from_list_result_next(vx_core::Type_any generic_any_1, vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce_next fn_reduce_next) {
     vx_core::Type_any output = valstart;
@@ -774,6 +781,11 @@ namespace vx_core {
       output = msgblock;
     }
     return output;
+  }
+
+  // vx_new_anylist(any...)
+  vx_core::Type_anylist vx_new_anylist(vx_core::vx_Type_listany listany) {
+    return vx_core::vx_new(vx_core::t_anylist, listany);
   }
 
   // vx_new_arg(string, type, bool, bool)
@@ -1467,14 +1479,20 @@ namespace vx_core {
 
   //class Class_boolean {
 
-    bool Class_boolean::vx_boolean() const {return this->vx_p_boolean;}
+    bool Class_boolean::vx_boolean() const {
+      return this->vx_p_boolean;
+    }
 
   //}
 
   //class Class_decimal {
-    float Class_decimal::vx_float() const {return vx_core::vx_float_from_string(vx_p_decimal);}
+    float Class_decimal::vx_float() const {
+      return vx_core::vx_float_from_string(vx_p_decimal);
+    }
 
-    std::string Class_decimal::vx_string() const {return vx_p_decimal;}
+    std::string Class_decimal::vx_string() const {
+      return vx_p_decimal;
+    }
   //}
 
   //class Class_float {

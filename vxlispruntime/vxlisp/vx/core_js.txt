@@ -1,3 +1,25 @@
+  // vx_any_from_func(generic_any_1, func, args...)
+  static vx_any_from_func(generic_any_1, func, ...args) {
+    const funcdef = func['vx_value']
+    const fn = funcdef['fn']
+    const output = fn.apply(null, args)
+    return output
+  }
+
+  // vx_any_from_map_start_reduce(any-1, map-2, any-1, any<-any-key-value)
+  static vx_any_from_map_start_reduce(generic_any_1, map, start, fn_reduce) {
+    let output = vx_core.f_empty(generic_any_1)
+    output = start
+    const fn = fn_reduce['vx_value']
+    if (fn) {
+      const mapval = map['vx_value']
+      for (let key in mapval) {
+        const value = mapval[key]
+        output = fn(output, key, value)
+      }
+    }
+    return output
+  }
 
   // vx_boolean_from_string_ends(string, string)
   static vx_boolean_from_string_ends(text, ends) {
@@ -94,16 +116,6 @@
       mappackage = packagemap['vx_value']
       mappackage[pkgname] = pkg
     }
-  }
-
-  // vx_int_from_string_find(string, string)
-  static vx_int_from_string_find(text, find) {
-    return text.indexOf(find)
-  }
-
-  // vx_int_from_string_findlast(string, string)
-  static vx_int_from_string_findlast(text, findlast) {
-    return text.lastIndexOf(findlast)
   }
 
   // vx_is_float(any)
@@ -221,9 +233,9 @@
         output = copy
       } else {
         output = copy['vx_value']
-        const testmsgblock = copy['vx_msgblock']
-        if (testmsgblock != undefined) {
-          msgblock = testmsgblock
+        const msgblockcopy = copy['vx_msgblock']
+        if (msgblockcopy != undefined) {
+          msgblock = msgblockcopy
         }
       }
       values.map(value => {
@@ -278,9 +290,9 @@
         output = copy
       } else {
         output = copy['vx_value']
-        const testmsgblock = copy['vx_msgblock']
-        if (testmsgblock != undefined) {
-          msgblock = testmsgblock
+        const msgblockcopy = copy['vx_msgblock']
+        if (msgblockcopy != undefined) {
+          msgblock = msgblockcopy
         }
       }
       values.map(value => {
@@ -363,9 +375,9 @@
         output = copy
       } else {
         output = copy['vx_value']
-        const testmsgblock = copy['vx_msgblock']
-        if (testmsgblock != undefined) {
-          msgblock = testmsgblock
+        const msgblockcopy = copy['vx_msgblock']
+        if (msgblockcopy != undefined) {
+          msgblock = msgblockcopy
         }
       }
       values.map(value => {
@@ -438,9 +450,9 @@
         output = copy
       } else {
         output = copy['vx_value']
-        const testmsgblock = copy['vx_msgblock']
-        if (testmsgblock != undefined) {
-          msgblock = testmsgblock
+        const msgblockcopy = copy['vx_msgblock']
+        if (msgblockcopy != undefined) {
+          msgblock = msgblockcopy
         }
       }
       values.map(value => {
@@ -503,9 +515,9 @@
         if (type == typedef) {
         } else {
           fn = copy['vx_value']
-          const testmsgblock = copy['vx_msgblock']
-          if (testmsgblock != undefined) {
-            msgblock = testmsgblock
+          const msgblockcopy = copy['vx_msgblock']
+          if (msgblockcopy != undefined) {
+            msgblock = msgblockcopy
           }
         }
         values.map(value => {
@@ -552,9 +564,9 @@
         if (type == typedef) {
         } else {
           listvals = copy.slice()
-          const testmsgblock = copy['vx_msgblock']
-          if (testmsgblock != undefined) {
-            msgblock = testmsgblock
+          const msgblockcopy = copy['vx_msgblock']
+          if (msgblockcopy != undefined) {
+            msgblock = msgblockcopy
           }
         }
         allowtypes = vx_core.f_allowtypes_from_typedef(typedef)
@@ -614,9 +626,9 @@
       case ':map':
         if (type != typedef) {
           propmap = Object.assign({}, copy['vx_value'])
-          const testmsgblock = copy['vx_msgblock']
-          if (testmsgblock != undefined) {
-            msgblock = testmsgblock
+          const msgblockcopy = copy['vx_msgblock']
+          if (msgblockcopy != undefined) {
+            msgblock = msgblockcopy
           }
         }
         allowtypes = vx_core.f_allowtypes_from_typedef(typedef)
@@ -692,9 +704,9 @@
           break
         default:
           propmap = Object.assign({}, copy['vx_value'])
-          const testmsgblock = copy['vx_msgblock']
-          if (testmsgblock != undefined) {
-            msgblock = testmsgblock
+          const msgblockcopy = copy['vx_msgblock']
+          if (msgblockcopy != undefined) {
+            msgblock = msgblockcopy
           }
           break
         }
@@ -739,12 +751,15 @@
                   // invalid msg cannot contain msgblock
                   break
                 case vx_core.t_msgblock:
-                  if (value == vx_core.t_msgblock) {
+                  if (value == vx_core.e_msgblock) {
+                  } else if (msgblock == vx_core.e_msgblock) {
+                    msgblock = value
+                    propmap = Object.assign({}, value['vx_value'])
                   } else {
                     let msgblocks = propmap['msgblocks']
                     if (msgblocks == undefined) {
                       msgblocks = [value]
-                      msgblock['vx_type'] = vx_core.t_msgblocklist
+                      msgblocks['vx_type'] = vx_core.t_msgblocklist
                     } else {
                       msgblocks.push(value)
                     }
@@ -839,7 +854,9 @@
             vx_type: typedef,
             vx_value: propmap
           }
-          if (msgblock != vx_core.e_msgblock) {
+          if (msgblock == vx_core.e_msgblock) {
+          } else if (typedef == vx_core.t_msgblock) {
+          } else {
             output['vx_msgblock'] = msgblock
           }
         } else {
@@ -935,22 +952,22 @@
       default:
         const typedefname = typedef['vx_value']['name']
         const extend = vx_core.f_extends_from_typedef(typedef)
+        const indent1 = indent + 1
+        const indent2 = indent + 2
         switch (extend) {
         case ':list':
-          indent += 1
           for (const valsub of value) {
-            const valtext = vx_core.vx_string_from_any_indent(valsub, indent, linefeed)
+            const valtext = vx_core.vx_string_from_any_indent(valsub, indent1, linefeed)
             text += '\n ' + indenttext + valtext
           }
           if (value['vx_msgblock'] != null) {
             const msgtext = vx_core.vx_string_from_any_indent(value['vx_msgblock'], indent, linefeed)
-            text += '\n' + indenttext + ' :msgblock\n  ' + indenttext + msgtext
+            text += '\n ' + indenttext + msgtext
           }
           text = '(' + typedefname + text + ')'
           break
         case ':map':
         case ':struct':
-          indent += 2
           const valmap = value['vx_value']
           let validkeys
           switch (extend) {
@@ -968,7 +985,7 @@
               if (!key.startsWith(':')) {
                 key = ':' + key
               }
-              let valtext = vx_core.vx_string_from_any_indent(valsub, indent, linefeed)
+              let valtext = vx_core.vx_string_from_any_indent(valsub, indent2, linefeed)
               if (valtext.indexOf('\n') >= 0) {
                 valtext = '\n  ' + indenttext + valtext
               } else {
@@ -978,16 +995,16 @@
             }
           }
           if (value['vx_msgblock'] != null) {
-            const msgtext = vx_core.vx_string_from_any_indent(value['vx_msgblock'], indent, linefeed)
-            text += '\n' + indenttext + ' :msgblock\n  ' + indenttext + msgtext
+            const msgtext = vx_core.vx_string_from_any_indent(value['vx_msgblock'], indent1, linefeed)
+            text += '\n ' + indenttext + msgtext
           }
           text = '(' + typedefname + text + ')'
           break
         case ':func':
           text = typedefname
           if (value['vx_msgblock'] != null) {
-            const msgtext = vx_core.vx_string_from_any_indent(value['vx_msgblock'], indent, linefeed)
-            text += '\n' + indenttext + ' :msgblock\n  ' + indenttext + msgtext
+            const msgtext = vx_core.vx_string_from_any_indent(value['vx_msgblock'], indent1, linefeed)
+            text += '\n ' + indenttext + msgtext
           }
           text = '(' + text + ')'
           break
@@ -997,6 +1014,12 @@
     }
     output = text
     return output
+  }
+
+  // vx_string_from_string_find_replace(string, string, string)
+  static vx_string_from_string_find_replace(text, find, replace) {
+    const output = text.replaceAll(find, replace);
+    return output;
   }
 
   static vx_string_from_string_start_end(text, start, end) {

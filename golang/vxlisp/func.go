@@ -5,6 +5,7 @@ type vxfunc struct {
 	pkgname       string
 	alias         string
 	listarg       []vxarg
+	argname       string
 	async         bool
 	bigospace     string
 	bigotime      string
@@ -23,6 +24,7 @@ type vxfunc struct {
 	permission    bool
 	protected     bool
 	private       bool
+	recurive      bool
 	sideeffects   string
 	listtestvalue []vxvalue
 	textblock     *vxtextblock

@@ -1034,6 +1034,21 @@ namespace vx_core {
   typedef std::map<std::string, vx_Type_async> vx_Type_mapasync;
   typedef std::function<vx_core::vx_Type_async(vx_core::Type_any)> vx_Type_fn_async_from_any;
 
+  class Abstract_replfunc {
+  public:
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
+  };
+  typedef Abstract_replfunc* Type_replfunc;
+  
+  class Abstract_replfunc_async {
+  public:
+    virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist);
+  };
+  typedef Abstract_replfunc_async* Type_replfunc_async;
+
+  // vx_any_from_func_1(generic_any_1, func, args...)
+  vx_core::Type_any vx_any_from_func_1(vx_core::Type_any generic_any_1, vx_core::Type_replfunc func, vx_core::vx_Type_listany args);
+
   // vx_any_from_list_result_next(generic_any_1, list, any<-reduce-next)
   vx_core::Type_any vx_any_from_list_result_next(vx_core::Type_any generic_any_1, vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce_next fn_reduce_next);
 
@@ -1180,6 +1195,9 @@ namespace vx_core {
 
   // vx_msgblock_from_copy_listval(msgblock, List<any>)
   vx_core::Type_msgblock vx_msgblock_from_copy_listval(vx_core::Type_msgblock msgblock, vx_core::vx_Type_listany vals);
+
+  // vx_new_anylist(any...)
+  vx_core::Type_anylist vx_new_anylist(vx_core::vx_Type_listany listany);
 
   // vx_new_arg(string, type)
   vx_core::Type_arg vx_new_arg(std::string name, vx_core::Type_any type);
@@ -1339,6 +1357,13 @@ namespace vx_core {
     return output;
   }
 
+  // vx_any_from_func(generic_any_1, func, args...)
+  template <class T> static T* vx_any_from_func(T* generic_any_1, vx_core::Type_replfunc func, vx_core::vx_Type_listany args) {
+    vx_core::Type_any val = vx_core::vx_any_from_func_1(generic_any_1, func, args);
+    T* output = vx_core::vx_any_from_any(generic_any_1, val);
+    return output;
+  }
+
   // vx_any_from_map(T, key, defaultval)
   template <class T> static T* vx_any_from_map(const std::map<std::string, T*> &map, const std::string key, T* defaultval) {
     T* output = defaultval;
@@ -1439,18 +1464,6 @@ namespace vx_core {
     output = vx_core::vx_any_from_any(generic_any_1, val);
     return output;
   }
-
-  class Abstract_replfunc {
-  public:
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-  };
-  typedef Abstract_replfunc* Type_replfunc;
-  
-  class Abstract_replfunc_async {
-  public:
-    virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist);
-  };
-  typedef Abstract_replfunc_async* Type_replfunc_async;
 
 
   // (type any)

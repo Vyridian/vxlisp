@@ -324,15 +324,21 @@
    scharset : string := (if : string
                          (then
                           (!= "" charset)
-                          (string<-propname-val "charset" charset)))
+                          (string<-propname-val
+                           "charset"
+                           charset)))
    sname    : string := (if : string
                          (then
                           (!= "" name)
-                          (string<-propname-val "name" name)))
+                          (string<-propname-val
+                           "name"
+                           name)))
    scontext : string := (if : string
                          (then
                           (!= "" content)
-                          (string<-propname-val "content" content)))]
+                          (string<-propname-val
+                           "content"
+                           content)))]
   (string
    sindent
    "<meta"

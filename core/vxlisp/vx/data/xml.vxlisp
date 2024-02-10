@@ -54,8 +54,10 @@
   [children : xmllist := (:children xml)
    first    : xml     := (:1 children)
    text     : string  := (:text first)
-   outdent  : string  := (type/string-outdent
+   decode   : string  := (string-decodexml<-string
                           text)
+   outdent  : string  := (type/string-outdent
+                          decode)
    trim     : string  := (type/string-trim
                           outdent)]
   trim)
@@ -68,6 +70,28 @@
             (xml
              :text "text")))))
  :doc "Returns string from first child's text.")
+
+(func string-decodexml<-string : string
+ [text : string]
+ (let : string
+  [lt     : string  := (string<-string-find-replace
+                        text
+                        "&lt;"
+                        "<")
+   gt     : string  := (string<-string-find-replace
+                        text
+                        "&gt;"
+                        ">")
+   amp    : string  := (string<-string-find-replace
+                        gt
+                        "&amp;"
+                        "&")
+   result : string  := (string<-string-find-replace
+                        text
+                        quote
+                        `\"`)]
+   result)
+  :doc "Returns string decoded from xml encoding")
 
 (func textblock-xml<-string : tb/textblock
  [text : string]

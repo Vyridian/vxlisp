@@ -3666,7 +3666,7 @@ namespace vx_data_textblock {
           vx_data_textblock::f_textblock_parse_one(current);
         return output_1;
       }),
-      vx_core::vx_new_int(50000)
+      vx_core::vx_new_int(100000)
     );
     vx_core::vx_release_one_except(textblock, output);
     return output;

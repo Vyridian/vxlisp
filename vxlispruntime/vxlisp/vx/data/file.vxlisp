@@ -43,6 +43,16 @@
  :clientserver :server
  :doc "Write any data structure as a file.")
 
+(func boolean-write<-file : boolean
+ [file : file]
+ (boolean-write<-file-string
+  file
+  (:text file))
+ :context
+ :sideeffects "Writes to file io"
+ :clientserver :server
+ :doc "Write a File to Disk")
+
 (func boolean-write<-file-string : boolean
  [file : file
   text : string]

@@ -80,7 +80,15 @@
   }
 
   public static Core.Type_any[] arrayany_from_anylist(final Core.Type_anylist list) {
-    return list.vx_list().toArray(new Core.Type_any[0]);
+    List<Core.Type_any> listany = list.vx_list();
+    Core.Type_msgblock msgblock = list.vx_msgblock();
+    if (msgblock == null) {
+    } else if (msgblock != Core.e_msgblock) {
+     listany = new ArrayList<>(listany);
+     listany.add(msgblock);
+    }
+    Core.Type_any[] output = listany.toArray(new Core.Type_any[0]);
+    return output;
   }
 
   @SafeVarargs
@@ -197,6 +205,37 @@
     return output;
   }
 
+  // vx_any_from_func(generic_any_1, func, args...)
+  public static <T extends Core.Type_any> T vx_any_from_func(final T generic_any_1, final Core.Type_replfunc func, final Core.Type_any... args) {
+    Core.Type_anylist anylist = Core.vx_new_anylist(args);
+    Core.Type_any val = func.vx_repl(anylist);
+    T output = Core.f_any_from_any(generic_any_1, val);
+    return output;
+  }
+
+  // vx_any_from_list_start_reduce(any-1, list-2, any-1, any<-reduce)
+  public static <T extends Core.Type_any, N extends Core.Type_list> T vx_any_from_list_start_reduce(T generic_any_1, N list, T valstart, Core.Func_any_from_reduce fn_reduce) {
+    T output = valstart;
+    List<Core.Type_any> listval = list.vx_list();
+    for (Core.Type_any item : listval) {
+      output = fn_reduce.vx_any_from_reduce(generic_any_1, output, item);
+    }
+    return output;
+  }
+
+  // vx_any_from_map_start_reduce(any-1, map-2, any-1, any<-any-key-value)
+  public static <T extends Core.Type_any, N extends Core.Type_map> T vx_any_from_map_start_reduce(T generic_any_1, N map, T start, Core.Func_any_from_any_key_value fn_reduce) {
+    T output = start;
+    Map<String, Core.Type_any> mapval = map.vx_map();
+    Set<String> keys = mapval.keySet();
+    for (String skey : keys) {
+      Core.Type_string key = Core.vx_new_string(skey);
+      Core.Type_any value = mapval.get(skey);
+      output = fn_reduce.vx_any_from_any_key_value(generic_any_1, output, key, value);
+    }
+    return output;
+  }
+
   // vx_any_from_map(generic_any_1, map, string)
   public static <T extends Core.Type_any> T vx_any_from_map(T generic_any_1, Core.Type_map valuemap, Core.Type_string key) {
     T output = Core.f_empty(generic_any_1);
@@ -222,6 +261,13 @@
   // vx_boolean_from_string_starts(string, string)
   public static boolean vx_boolean_from_string_starts(String text, String starts) {
     return text.startsWith(starts);
+  }
+
+  @SuppressWarnings("unchecked")
+  public static <T extends Core.Type_any> T vx_copy(T value, Core.Type_any arg) {
+   Core.Type_any anyvalue = value.vx_copy(arg);
+   T output = (T)anyvalue;
+   return output;
   }
 
   // vx_eqeq(any, any)
@@ -305,16 +351,6 @@
     } catch (Exception e) {
     }    
     return output;
-  }
-
-  // vx_int_from_string_find(string, string)
-  public static int vx_int_from_string_find(String text, String find) {
-    return text.indexOf(find);
-  }
-
-  // vx_int_from_string_findlast(string, string)
-  public static int vx_int_from_string_findlast(String text, String findlast) {
-    return text.lastIndexOf(findlast);
   }
 
   // vx_is_float(string)
@@ -444,24 +480,6 @@
     return output;
   }
 
-  // vx_msg_error
-  public static Type_msg vx_msg_error(final String text) {
-    Class_msg output = new Class_msg();
-    output.vx_p_text = Core.vx_new_string(text);
-    output.vx_p_severity = Core.c_msg_severe;
-    return output;
-  }
-
-  // vx_msg_error
-  public static Type_msg vx_msg_error(final String path, final String code, final Core.Type_any detail) {
-    Class_msg output = new Class_msg();
-    output.vx_p_path = Core.vx_new_string(path);
-    output.vx_p_code = Core.vx_new_string(code);
-    output.vx_p_detail = detail;
-    output.vx_p_severity = Core.c_msg_severe;
-    return output;
-  }
-
   // vx_msg_from_exception
   public static Type_msg vx_msg_from_exception(final String path, final Exception err) {
     Class_msg output = new Class_msg();
@@ -470,6 +488,65 @@
     output.vx_p_severity = Core.c_msg_severe;
     output.err = err;
     Core.vx_log(output);
+    return output;
+  }
+
+  // vx_msg_from_error
+  public static Type_msg vx_msg_from_error(final String text) {
+    Class_msg output = new Class_msg();
+    output.vx_p_text = Core.vx_new_string(text);
+    output.vx_p_severity = Core.c_msg_severe;
+    return output;
+  }
+
+  // vx_msg_from_error
+  public static Type_msg vx_msg_from_error(final String path, final String code, final Core.Type_any detail) {
+    Class_msg output = new Class_msg();
+    output.vx_p_path = Core.vx_new_string(path);
+    output.vx_p_code = Core.vx_new_string(code);
+    output.vx_p_detail = detail;
+    output.vx_p_severity = Core.c_msg_severe;
+    return output;
+  }
+
+  // vx_msgblock_from_copy_listval(msgblock, List<any>)
+  public static Core.Type_msgblock vx_msgblock_from_copy_listval(final Core.Type_msgblock msgblock, Core.Type_any... vals) {
+    Core.Type_msgblock output = Core.e_msgblock;
+    List<Core.Type_msgblock> listmsgblock = new ArrayList<>();
+    if (msgblock != null) {
+      Core.Type_msgblock origmsgblock = msgblock.vx_msgblock();
+      if (origmsgblock != Core.e_msgblock) {
+        List<Core.Type_msgblock> origlistmsgblock = origmsgblock.msgblocks().vx_listmsgblock();
+        listmsgblock.addAll(origlistmsgblock);
+      }
+    }
+    for (Core.Type_any subval : vals) {
+      Core.Type_msgblock submsgblock = subval.vx_msgblock();
+      if (submsgblock != Core.e_msgblock) {
+        listmsgblock.add(submsgblock);
+      }
+    }
+    if (listmsgblock.size() > 0) {
+      Core.Class_msgblocklist msgblocks;
+      msgblocks = new Core.Class_msgblocklist();
+      msgblocks.vx_p_list = listmsgblock;
+      Core.Class_msgblock outputclass = new Core.Class_msgblock();
+      outputclass.vx_p_msgblocks = msgblocks;
+      output = outputclass;
+    } else if (msgblock != null) {
+      output = msgblock;
+    }
+    return output;
+  }
+
+  public static Type_anylist vx_new_anylist(Core.Type_any... anys) {
+    List<Core.Type_any> listany = new ArrayList<>(Arrays.asList(anys));
+    return vx_new_anylist(listany);
+  }
+
+  public static Type_anylist vx_new_anylist(List<Type_any> listany) {
+    Class_anylist output = new Class_anylist();
+    output.vx_p_list = immutablelist(listany);
     return output;
   }
 
@@ -561,7 +638,20 @@
       }
     } else if (value instanceof Core.Type_string) {
       Core.Type_string valstring = Core.f_any_from_any(Core.t_string, value);
-      output = "\"" + valstring.vx_string() + "\"";
+      String sval = valstring.vx_string();
+      if (sval.indexOf("\"") < 0) {
+        sval = "\"" + sval + "\"";
+      } else {
+        sval = "`" + sval + "`";
+      }
+      if (valstring.vx_msgblock() != null) {
+        String msgtext = Core.vx_string_from_any_indent(valstring.vx_msgblock(), indent, linefeed);
+        output  = "\n" + indenttext + "(string";
+        output += "\n" + indenttext + " " + sval;
+        output += "\n" + indenttext + " " + msgtext + ")";
+      } else {
+        output = sval;
+      }
     } else if (value instanceof Core.vx_Type_const) {
       Core.vx_Type_const constvalue = (Core.vx_Type_const)value;
       Core.Type_constdef constdef = constvalue.vx_constdef();
@@ -576,29 +666,31 @@
       Core.Type_list vallist = Core.f_any_from_any(Core.t_list, value);
       Core.Type_typedef typedef = vallist.vx_typedef();
       Core.Type_string typedefname = typedef.name();
-      int indentint = indent;
-      indentint += 1;
+      String stypedefname = typedefname.vx_string();
+      int indentint = indent + 1;
       List<Core.Type_any> listval = vallist.vx_list();
       for (Core.Type_any valsub : listval) {
         String valtext = Core.vx_string_from_any_indent(valsub, indentint, linefeed);
         output += "\n " + indenttext + valtext;
       }
       if (vallist.vx_msgblock() != null) {
-        String msgtext = Core.vx_string_from_any_indent(vallist.vx_msgblock(), indentint, linefeed);
-        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+        String msgtext = Core.vx_string_from_any_indent(vallist.vx_msgblock(), indent, linefeed);
+        output += "\n" + indenttext + msgtext;
       }
-      output = "(" + typedefname.vx_string() + output + ")";
+      output = "(" + stypedefname + output + ")";
     } else if (value instanceof Core.Type_map) {
       Core.Type_map valmap = Core.f_any_from_any(Core.t_map, value);
       Core.Type_typedef typedef = valmap.vx_typedef();
       Core.Type_string typedefname = typedef.name();
-      int indentint = indent;
-      indentint += 2;
+      String stypedefname = typedefname.vx_string();
+      int indentint = indent + 2;
       Map<String, Core.Type_any> mapval = valmap.vx_map();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         Core.Type_any valsub = mapval.get(key);
-        if (!key.startsWith(":")) {
+        if (key.indexOf(" ") >= 0) {
+          key = "\"" + key + "\"";
+        } else if (!key.startsWith(":")) {
           key = ":" + key;
         }
         String strval = Core.vx_string_from_any_indent(valsub, indentint, linefeed);
@@ -610,14 +702,15 @@
         output += "\n" + indenttext + " " + key + strval;
       }
       if (valmap.vx_msgblock() != null) {
-        String msgtext = Core.vx_string_from_any_indent(valmap.vx_msgblock(), indentint, linefeed);
-        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+        String msgtext = Core.vx_string_from_any_indent(valmap.vx_msgblock(), indent+1, linefeed);
+        output += "\n " + indenttext + msgtext;
       }
-      output = "(" + typedefname.vx_string() + output + ")";
+      output = "(" + stypedefname + output + ")";
     } else if (value instanceof Core.Type_struct) {
       Core.Type_struct valstruct = Core.f_any_from_any(Core.t_struct, value);
       Core.Type_typedef typedef = valstruct.vx_typedef();
       Core.Type_string typedefname = typedef.name();
+      String stypedefname = typedefname.vx_string();
       int indentint2 = indent;
       indentint2 += 2;
       Map<String, Core.Type_any> mapval2 = valstruct.vx_map();
@@ -637,11 +730,13 @@
           output += "\n" + indenttext + " " + key + strval2;
         }
       }
-      if (valstruct.vx_msgblock() != null) {
-        String msgtext2 = Core.vx_string_from_any_indent(valstruct.vx_msgblock(), indentint2, linefeed);
-        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext2;
+      if (stypedefname == "msg") {
+      } else if (stypedefname == "msgblock") {
+      } else if (valstruct.vx_msgblock() != null) {
+        String msgtext2 = Core.vx_string_from_any_indent(valstruct.vx_msgblock(), indent+1, linefeed);
+        output += "\n " + indenttext + msgtext2;
       }
-      output = "(" + typedefname.vx_string() + output + ")";
+      output = "(" + stypedefname + output + ")";
     } else if (value instanceof Core.Type_func) {
       Core.Type_func valfunc = Core.f_any_from_any(Core.t_func, value);
       Core.Type_funcdef funcdef = valfunc.vx_funcdef();
@@ -649,10 +744,29 @@
       output = funcdefname.vx_string();
       if (valfunc.vx_msgblock() != null) {
         String msgtext = Core.vx_string_from_any_indent(valfunc.vx_msgblock(), indent, linefeed);
-        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+        output += "\n" + indenttext + msgtext;
       }
       output = "(" + output + ")";
     }
+    return output;
+  }
+
+  public static Core.Type_string vx_string_from_any_indent(Core.Type_any value, Core.Type_int indent, Core.Type_boolean linefeed) {
+    String soutput = Core.vx_string_from_any_indent(value, indent.vx_int(), linefeed.vx_boolean());
+    Core.Type_string output = Core.vx_new_string(soutput);
+    return output;
+  }
+
+  // vx_string_from_string_find_replace(string, string, string)
+  public static String vx_string_from_string_find_replace(String text, String find, String replace) {
+    String output = text.replaceAll(find, replace);
+    return output;
+  }
+
+  // vx_string_from_string_find_replace(string, string, string)
+  public static Core.Type_string vx_string_from_string_find_replace(Core.Type_string text, Core.Type_string find, Core.Type_string replace) {
+    String stext = Core.vx_string_from_string_find_replace(text.vx_string(), find.vx_string(), replace.vx_string());
+    Core.Type_string output = Core.vx_new_string(stext);
     return output;
   }
 

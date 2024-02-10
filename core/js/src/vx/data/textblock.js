@@ -813,7 +813,7 @@ export default class vx_data_textblock {
         )),
       vx_core.f_new(vx_core.t_any_from_any, (current) => 
         vx_data_textblock.f_textblock_parse_one(current)),
-      50000
+      100000
     )
     return output
   }

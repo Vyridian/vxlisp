@@ -54,14 +54,9 @@
  [text : string
   find : string]
  (native
-  :cpp
-   "int ipos = vx_core::vx_int_from_string_find(text->vx_string(), find->vx_string()) + 1;
-    output = vx_core::vx_new_int(ipos);"
-  :js
-   "vx_core.vx_int_from_string_find(text, find) + 1"
-  :java
-   "int ipos = Core.vx_int_from_string_find(text.vx_string(), find.vx_string()) + 1;
-    output = Core.vx_new_int(ipos);")
+  :cpp  :auto
+  :java :auto
+  :js   :auto)
  :test (test
         3
         (int<-string-find
@@ -73,14 +68,9 @@
  [text : string
   find : string]
  (native
-  :cpp
-   "int ipos = vx_type::vx_int_from_string_findkeyword(text->vx_string(), find->vx_string());
-    output = vx_core::vx_new_int(ipos);"
-  :js
-   "vx_type.vx_int_from_string_findkeyword(text, find)"
-  :java
-   "int ipos = vx_int_from_string_findkeyword(text.vx_string(), find.vx_string());
-    output = Core.vx_new_int(ipos);")
+  :cpp  :auto
+  :js   :auto
+  :java :auto)
  :test (test
         3
         (int<-string-findkeyword
@@ -97,14 +87,9 @@
  [text     : string
   findlast : string]
  (native
-  :cpp
-   "int ipos = vx_core::vx_int_from_string_findlast(text->vx_string(), findlast->vx_string()) + 1;
-    output = vx_core::vx_new_int(ipos);"
-  :js
-   "vx_core.vx_int_from_string_findlast(text, findlast) + 1"
-  :java
-   "int ipos = Core.vx_int_from_string_findlast(text.vx_string(), findlast.vx_string()) + 1;
-    output = Core.vx_new_int(ipos);")
+  :cpp  :auto
+  :java :auto
+  :js   :auto)
  :test (test
         5
         (int<-string-findlast
@@ -308,9 +293,8 @@
  (native
   :cpp
    "output = vx_type::vx_string_from_stringlist_join(vals, delim);"
-  :js "vals.join(delim)"
-  :java
-   "output = Type.vx_string_from_stringlist_join(vals, delim);")
+  :java :auto
+  :js "vals.join(delim)")
  :test (test
         "a$b$c"
         (string<-stringlist-join
@@ -318,15 +302,89 @@
          "$"))
  :doc "Returns a string by joining a stringlist by the delimiter")
 
+(func string-lowercase : string
+ [text : string]
+ (native
+  :cpp  :auto
+  :java :auto
+  :js   :auto)
+ :test (test
+        "abc"
+        (string-lowercase
+         "AbC"))
+ :doc "Returns lowercase version of string")
+
+(func string-outdent : string
+ [text : string]
+ (let : string
+  [pos    : int    := (int<-string-findkeyword
+                       text
+                       :nonwhitespace)]
+  (if : string
+   (then
+    (= 0 pos)
+    text)
+   (else
+    (let : string
+     [indent  : string := (string<-string-end
+                           text
+                           (-1 pos))
+      rest    : string := (string<-string-start
+                           text
+                           pos)
+      linepos : int    := (int<-string-find
+                           indent
+                           "\n")
+      outdent : string := (if : string
+                           (= 0 linepos)
+                           ""
+                           "\n")]
+     (string<-string-find-replace
+      rest
+      indent
+      outdent)))))
+ :test (test
+        "ab"
+        (string-outdent
+         "ab"))
+       (test
+        "a\nb"
+        (string-outdent
+         "\n a\n b"))
+ :doc "Returns a string replacing leading whitespace on all lines based on first line.")
+
+(func string-trim : string
+ [text  : string]
+ (native
+  :cpp  :auto
+  :js   :auto
+  :java :auto)
+ :test (test
+        "ab"
+        (string-trim
+         " \t\nab\n\t "))
+ :doc "Trims whitespace from the front and back of text")
+
+(func string-uppercase : string
+ [text : string]
+ (native
+  :cpp  :auto
+  :java :auto
+  :js   :auto)
+ :test (test
+        "ABC"
+        (string-uppercase
+         "aBc"))
+ :doc "Returns uppercase version of string")
+
 (func stringlist<-string-split : stringlist
  [text  : string
   delim : string]
  (native
   :cpp
    "vx_type::vx_stringlist_from_string_split(text, delim);"
-  :js "vx_type.vx_stringlist_from_string_split(text, delim)"
-  :java
-   "Type.vx_stringlist_from_string_split(text, delim);")
+  :java :auto
+  :js "vx_type.vx_stringlist_from_string_split(text, delim)")
  :test (test
         (stringlist "a" "b" "c")
         (stringlist<-string-split

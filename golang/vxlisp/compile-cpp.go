@@ -2501,12 +2501,19 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 			case "vx/core/fn":
 			case "vx/core/let":
 				if fnc.async {
-					output += LangNameFromPkgName(lang, fnc.pkgname) + "::f_let_async("
+					output += LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + "f_let_async("
 				} else {
-					output += LangNameFromPkgName(lang, fnc.pkgname) + "::f_" + CppNameFromFunc(fnc) + "("
+					output += LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangNameFromFunc(fnc) + "("
 				}
 			default:
-				output += LangNameFromPkgName(lang, fnc.pkgname) + "::f_" + CppNameFromFunc(fnc) + "("
+				if fnc.argname != "" {
+					output += "" +
+						LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "vx_any_from_func(" +
+						LangNameTFromType(lang, fnc.vxtype) + ", " +
+						LangFromName(fnc.argname) + ", {"
+				} else {
+					output += LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangNameFromFunc(fnc) + "("
+				}
 			}
 			if !isskip {
 				if fnc.isgeneric {
@@ -2853,6 +2860,9 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 				if multiflag {
 					output += "\n" + sindent + "  })"
 				}
+				if fnc.argname != "" {
+					output += "}"
+				}
 				switch fnc.name {
 				case "fn":
 				default:
@@ -2862,6 +2872,9 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 				output += StringFromListStringJoin(argtexts, ", ")
 				if multiflag {
 					output += "})"
+				}
+				if fnc.argname != "" {
+					output += "}"
 				}
 				switch funcname {
 				case "vx/core/fn":

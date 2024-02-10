@@ -10,7 +10,7 @@
       Core.Type_string valcontent = Core.vx_new_string(scontent);
       output = valcontent;
     } else {
-      Core.Type_msg msg = Core.vx_msg_error("File Not Found: " + sfullpath);
+      Core.Type_msg msg = Core.vx_msg_from_error("string-read<-file", ":filenotfound", file);
       output = Core.t_string.vx_copy(output, msg);
     }
     return output;

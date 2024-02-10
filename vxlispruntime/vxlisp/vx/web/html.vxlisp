@@ -66,7 +66,9 @@
  :doc        "Html Tag")
 
 (type meta : struct
- :properties [charset : string]
+ :properties [charset : string
+              name    : string
+              content : string]
  :traits     [node headchild]
  :doc        "Meta Tag")
 
@@ -186,8 +188,7 @@
    sid     : string       := (string<-propname-val "id" (:id div))
    sstyle  : string       := (string<-propstyle (:style div))]
   (string<-nodelist-tag-prop-indent
-   nodes "div" (string sid sstyle) indent)
- )
+   nodes "div" (string sid sstyle) indent))
  :test (test
         "<div></div>"
         (string<-div-indent (div) 0))
@@ -203,8 +204,7 @@
  (let
   [nodes : divchildlist := (:nodes body)]
   (string<-nodelist-tag-prop-indent
-   nodes "body" "" indent)
- )
+   nodes "body" "" indent))
  :test (test
         "<body></body>"
         (string<-body-indent (body) 0))
@@ -219,8 +219,7 @@
  (let
   [nodes : divchildlist := (:nodes footer)]
   (string<-nodelist-tag-prop-indent
-   nodes "footer" "" indent)
- )
+   nodes "footer" "" indent))
  :doc "Returns string from footer")
 
 (func string<-details-indent : string
@@ -238,8 +237,7 @@
    ssummary
    sindent "  </summary>"
    snodes
-   sindent "</details>")
- )
+   sindent "</details>"))
  :doc "Returns string from details")
 
 (func string<-h1-indent : string
@@ -278,8 +276,7 @@
  (let
   [nodes : headchildlist := (:nodes head)]
   (string<-nodelist-tag-prop-indent
-   nodes "head" "" indent)
- )
+   nodes "head" "" indent))
  :test (test
         "<head></head>"
         (string<-head-indent (head) 0))
@@ -320,10 +317,35 @@
  [meta   : meta
   indent : int]
  (let
-  [sindent : string := (string<-indent indent)
-   charset : string := (string<-propname-val "charset" (:charset meta))]
+  [sindent  : string := (string<-indent indent)
+   charset  : string := (:charset meta)
+   name     : string := (:name meta)
+   content  : string := (:content meta)
+   scharset : string := (if : string
+                         (then
+                          (!= "" charset)
+                          (string<-propname-val
+                           "charset"
+                           charset)))
+   sname    : string := (if : string
+                         (then
+                          (!= "" name)
+                          (string<-propname-val
+                           "name"
+                           name)))
+   scontext : string := (if : string
+                         (then
+                          (!= "" content)
+                          (string<-propname-val
+                           "content"
+                           content)))]
   (string
-   sindent "<meta" charset " />"))
+   sindent
+   "<meta"
+   scharset
+   sname
+   scontext
+   " />"))
  :test (test
         "<meta charset=\"utf-8\" />"
         (string<-meta-indent (meta :charset "utf-8") 0))

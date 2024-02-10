@@ -319,13 +319,17 @@
  (html
   :lang "en"
   :head (head
-         (meta  :charset "utf-8")
-         (title :text    "Test Suite")
+         (meta
+          :charset "utf-8")
+         (meta
+          :name    "viewport"
+          :content "width=device-width, initial-scale=1.0")
+         (title
+          :text "Test Suite")
          stylesheet-test)
   :body (body
          (div (h1 "Test Suite"))
-         divtest)
- )
+         divtest))
  :doc "Returns html from test div")
 
 (func p<-passfail : p
@@ -336,16 +340,14 @@
    style     : style  := (style<-stylesheet-name stylesheet-test stylename)]
   (p
    :style style
-   :text  text)
- )
+   :text  text))
  :doc "Returns a <p> tag from a passfail boolean value")
 
 (func p<-testcoveragenums : p
  [nums  : testcoveragenums]
  (p
   :style (style<-stylesheet-name stylesheet-test ".coveragenums")
-  :text  (string (:pct nums) "% " (:tests nums) "/" (:total nums))
- )
+  :text  (string (:pct nums) "% " (:tests nums) "/" (:total nums)))
  :doc "Returns <p>tests / total (pct%)</p> from testcoveragenums")
 
 (func resolve-testcase : testcase :async

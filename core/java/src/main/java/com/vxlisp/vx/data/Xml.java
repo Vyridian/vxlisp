@@ -869,6 +869,110 @@ public final class Xml {
   public static final Const_delimxmlequal c_delimxmlequal = new Const_delimxmlequal();
 
   /**
+   * @function string_decodexml_from_string
+   * Returns string decoded from xml encoding
+   * @param  {string} text
+   * @return {string}
+   * (func string-decodexml<-string)
+   */
+  public static interface Func_string_decodexml_from_string extends Core.Func_any_from_any {
+    public Core.Type_string vx_string_decodexml_from_string(final Core.Type_string text);
+  }
+
+  public static class Class_string_decodexml_from_string extends Core.Class_base implements Func_string_decodexml_from_string {
+
+    @Override
+    public Func_string_decodexml_from_string vx_new(Object... vals) {
+      Class_string_decodexml_from_string output = new Class_string_decodexml_from_string();
+      return output;
+    }
+
+    @Override
+    public Func_string_decodexml_from_string vx_copy(Object... vals) {
+      Class_string_decodexml_from_string output = new Class_string_decodexml_from_string();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/data/xml", // pkgname
+        "string-decodexml<-string", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_string_decodexml_from_string vx_empty() {return e_string_decodexml_from_string;}
+    @Override
+    public Func_string_decodexml_from_string vx_type() {return t_string_decodexml_from_string;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_string inputval = (Core.Type_string)value;
+      Core.Type_any outputval = Xml.f_string_decodexml_from_string(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      output = Xml.f_string_decodexml_from_string(text);
+      return output;
+    }
+
+    @Override
+    public Core.Type_string vx_string_decodexml_from_string(final Core.Type_string text) {
+      return Xml.f_string_decodexml_from_string(text);
+    }
+
+  }
+
+  public static final Func_string_decodexml_from_string e_string_decodexml_from_string = new Xml.Class_string_decodexml_from_string();
+  public static final Func_string_decodexml_from_string t_string_decodexml_from_string = new Xml.Class_string_decodexml_from_string();
+
+  public static Core.Type_string f_string_decodexml_from_string(final Core.Type_string text) {
+    Core.Type_string output = Core.e_string;
+    output = Core.f_let(
+      Core.t_string,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_string lt = Core.f_string_from_string_find_replace(text, Core.vx_new_string("&lt;"), Core.vx_new_string("<"));
+        final Core.Type_string gt = Core.f_string_from_string_find_replace(text, Core.vx_new_string("&gt;"), Core.vx_new_string(">"));
+        final Core.Type_string amp = Core.f_string_from_string_find_replace(gt, Core.vx_new_string("&amp;"), Core.vx_new_string("&"));
+        final Core.Type_string result = Core.f_string_from_string_find_replace(
+          text,
+          Core.c_quote,
+          Core.vx_new_string("\\\"")
+        );
+        return result;
+      })
+    );
+    return output;
+  }
+
+  /**
    * @function string_first_from_xml
    * Returns string from first child's text.
    * @param  {xml} xml
@@ -961,7 +1065,8 @@ public final class Xml {
         final Xml.Type_xmllist children = xml.children();
         final Xml.Type_xml first = Core.f_any_from_list(Xml.t_xml, children, Core.vx_new_int(1));
         final Core.Type_string text = first.text();
-        final Core.Type_string outdent = Type.f_string_outdent(text);
+        final Core.Type_string decode = Xml.f_string_decodexml_from_string(text);
+        final Core.Type_string outdent = Type.f_string_outdent(decode);
         final Core.Type_string trim = Type.f_string_trim(outdent);
         return trim;
       })
@@ -2267,7 +2372,7 @@ public final class Xml {
     output = Core.f_let(
       Xml.t_xml,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Textblock.Type_textblock tb = Core.f_log_1(Textblock.t_textblock, Core.vx_new_string("vx/data/xml/textblock-xml<-string"), Xml.f_textblock_xml_from_string(text));
+        final Textblock.Type_textblock tb = Xml.f_textblock_xml_from_string(text);
         return Xml.f_xml_from_textblock(tb);
       })
     );
@@ -2386,6 +2491,7 @@ public final class Xml {
     mapconst.put("delimxmlcdata", Xml.c_delimxmlcdata);
     mapconst.put("delimxmlcomment", Xml.c_delimxmlcomment);
     mapconst.put("delimxmlequal", Xml.c_delimxmlequal);
+    mapfunc.put("string-decodexml<-string", Xml.t_string_decodexml_from_string);
     mapfunc.put("string-first<-xml", Xml.t_string_first_from_xml);
     mapfunc.put("textblock-xml<-string", Xml.t_textblock_xml_from_string);
     mapfunc.put("xml-angle<-xml-textblock", Xml.t_xml_angle_from_xml_textblock);

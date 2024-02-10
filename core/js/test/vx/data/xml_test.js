@@ -27,11 +27,11 @@ export default class vx_data_xml_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/data/xml", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 4), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 65, ":tests", 13, ":total", 20), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 76, ":tests", 10, ":total", 13), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 66, ":tests", 14, ":total", 21), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 71, ":tests", 10, ":total", 14), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 50, ":tests", 10, ":total", 20), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 47, ":tests", 10, ":total", 21), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3)
     )
   }
@@ -58,6 +58,7 @@ export default class vx_data_xml_test {
       "funcmap",
         vx_core.f_new(
           vx_core.t_intmap,
+          "string-decodexml<-string", 0,
           "string-first<-xml", 1,
           "textblock-xml<-string", 1,
           "xml-angle<-xml-textblock", 3,

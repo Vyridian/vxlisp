@@ -3108,11 +3108,11 @@ public final class XmlTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/data/xml", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 4), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 65, ":tests", 13, ":total", 20), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 76, ":tests", 10, ":total", 13), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 13), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 13), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 50, ":tests", 10, ":total", 20), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 66, ":tests", 14, ":total", 21), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 71, ":tests", 10, ":total", 14), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 14), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 14), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 47, ":tests", 10, ":total", 21), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3)
     );
   }
@@ -3132,6 +3132,7 @@ public final class XmlTest {
         ":delimxmlequal", 0
       ),
       ":funcmap", Core.t_intmap.vx_new(
+        ":string-decodexml<-string", 0,
         ":string-first<-xml", 1,
         ":textblock-xml<-string", 1,
         ":xml-angle<-xml-textblock", 3,

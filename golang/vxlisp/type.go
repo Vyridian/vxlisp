@@ -822,12 +822,14 @@ func StringFromType(typ *vxtype) string {
 }
 
 func StringFromTypeIndent(typ *vxtype, indent int) string {
-	lineindent := ""
+	sindent := ""
+	lineindent := "\n"
 	if indent > 0 {
-		lineindent = "\n" + StringRepeat(" ", indent)
+		sindent = StringRepeat(" ", indent)
+		lineindent += sindent
 	}
 	output := "" +
-		lineindent + "(type" +
+		sindent + "(type" +
 		lineindent + " :name     " + typ.name +
 		lineindent + " :pkgname  " + typ.pkgname +
 		lineindent + " :extends  " + typ.extends

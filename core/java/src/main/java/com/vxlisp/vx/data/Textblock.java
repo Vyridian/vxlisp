@@ -4000,7 +4000,7 @@ public final class Textblock {
         return 
           Textblock.f_textblock_parse_one(current);
       }),
-      Core.vx_new_int(50000)
+      Core.vx_new_int(100000)
     );
     return output;
   }

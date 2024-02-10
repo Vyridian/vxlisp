@@ -21,7 +21,12 @@
  :doc        "List of any<-any")
 
 (type anylist : list
- :allowtypes [any])
+ :allowtypes [any]
+ :doc        "A list of any")
+
+(type anymap : map
+ :allowtypes [any]
+ :doc        "A map of any")
 
 (type anytype : type
  :doc     "Any Type that allows any Type as a Value")
@@ -155,8 +160,8 @@
 
      @Override
      public float vx_float() {return vxfloat;}")
- :test    (test 4.5 (float 4.5))
- :doc     "Standard Floating Point Number")
+ :test (test 4.5 (float 4.5))
+ :doc  "Standard Floating Point Number")
 
 (type func : func
  :create
@@ -164,6 +169,11 @@
    :cpp
     "// :header
      vx_core::Type_funcdef vx_funcdef() const;")
+ :test (test
+        5
+        (let
+         [funcvar : + := +]
+         (funcvar 2 3)))
  :doc "Original Function Class.")
 
 (type funcdef : struct
@@ -232,7 +242,7 @@
    :cpp
     "// :header
      vx_core::vx_Type_listany vx_p_list;
-		 vx_core::vx_Type_listany vx_list() const;
+     vx_core::vx_Type_listany vx_list() const;
      vx_core::Type_any vx_get_any(vx_core::Type_int index) const;
      vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const;")
  :doc "A simple untyped list.")
@@ -652,8 +662,7 @@
   (fn : int
    [total : int
     num   : int]
-   (+ total num))
- )
+   (+ total num)))
  :alias "plus"
  :doc   "Math int plus")
 
@@ -665,8 +674,7 @@
   (fn : number
    [total : number
     num   : number]
-   (+ total num))
- )
+   (+ total num)))
  :alias "plus"
  :doc   "Math number plus")
 
@@ -1181,6 +1189,12 @@
  :context
  :doc "Generic Function taking any value any-2 and returning generic any-1")
 
+(func any<-any-key-value : any-1
+ [current : any-1
+  key     : string
+  value   : any-2]
+ :doc "Generic Function returning Generic any-1 from a any-1, a key, and a value.")
+
 (func any<-int : any-1
  [value : int]
  :doc "Generic Function returning Generic any-1 from an int")
@@ -1251,6 +1265,7 @@
       work = fn_reduce->vx_any_from_reduce(work, item);
     };
     output = vx_core::vx_any_from_any(generic_any_1, work);"
+  :java :auto
   :js
    "output = valstart
     const fn = fn_reduce['vx_value']
@@ -1258,12 +1273,6 @@
       for (const item of list) {
         output = fn(output, item)
       }
-    }"
-  :java
-   "output = valstart;
-    List<Core.Type_any> listval = list.vx_list();
-    for (Core.Type_any item : listval) {
-      output = fn_reduce.vx_any_from_reduce(generic_any_1, output, item);
     }")
  :test (test
         24
@@ -1273,8 +1282,7 @@
          (fn : int
           [total : int
            num   : int]
-          (* total num))
-        ))
+          (* total num))))
  :doc "Returns a val from a list reduce operation")
 
 (func any<-list-start-reduce-next : any-1
@@ -1342,6 +1350,30 @@
           :c "v3")
          :b))
  :doc "Returns value from a map or empty if not found")
+
+(func any<-map-start-reduce : any-1
+ [map       : map-1
+  start     : any-1
+  fn-reduce : any<-any-key-value :: any-1 :: any-1]
+ (native
+  :cpp  :auto
+  :java :auto
+  :js   :auto)
+ :test (test
+        "xayb"
+        (any<-map-start-reduce
+         (stringmap
+          :a "x"
+          :b "y")
+         ""
+         (fn : string
+          [current : string
+           key     : string
+           value   : any]
+          (copy current
+           value
+           key))))
+ :doc "Returns a value by reducing each element of a map.")
 
 (func any<-none : any-1
  []
@@ -1556,7 +1588,8 @@
         (stringmap
          :a "1"
          :b "2")
-        (copy (stringmap :a "1")
+        (copy
+         (stringmap :a "1")
          :b "2"))
  :doc "Returns a copy of a given value with the given values added or updated.")
 
@@ -2362,6 +2395,7 @@
   detail : any]
  (msg
   :code code
+  :detail detail
   :severity msg-error)
  :doc "Returns a msg from error code and detail")
 
@@ -2677,14 +2711,28 @@
     output = vx_core::vx_new_string(soutput);"
   :js
    "output = vx_core.vx_string_from_any_indent(value, indent, linefeed)"
-  :java
-   "String soutput = Core.vx_string_from_any_indent(value, indent.vx_int(), linefeed.vx_boolean());
-    output = Core.vx_new_string(soutput);")
+  :java :auto)
  :doc "Return a string representation of a value")
 
 (func string<-func : string
  []
  :doc "Function Type returning string with any parameters")
+
+(func string<-string-find-replace : string
+ [text    : string
+  find    : string
+  replace : string]
+ (native
+  :cpp  :auto
+  :java :auto
+  :js   :auto)
+ :test (test
+        "a!b!c"
+        (string<-string-find-replace
+         "axybxyc"
+         "xy"
+         "!"))
+ :doc "Returns a string with all instances of find replaced by replace.")
 
 (func switch : any-1
  [val          : any-2
@@ -2767,7 +2815,8 @@
         (switch : int
          "d"
          (case (list "b" "c" "d") 1)
-         (else 2))))
+         (else 2)))
+ :doc "Returns a value based on a logical switch")
 
 (func then : thenelse
  [fn-cond : boolean<-func
@@ -2775,7 +2824,8 @@
  (thenelse
   :code    :then
   :fn-cond fn-cond
-  :fn-any  fn-any))
+  :fn-any  fn-any)
+ :doc "Returns a thenelse struct from a given condition function and value function")
 
 (func traits<-typedef : typelist
  [vtypedef : typedef]
@@ -2843,7 +2893,8 @@
 
 (func typedef<-any : typedef
  [val : any]
- (typedef<-type (type<-any val)))
+ (typedef<-type (type<-any val))
+ :doc  "Gets the typedef of a given value")
 
 (func typedef<-type : typedef
  [val : any]
@@ -2853,7 +2904,8 @@
   :js
    "output = val"
   :java
-   "val.vx_typedef();"))
+   "val.vx_typedef();")
+ :doc  "Gets the typedef of a given type")
 
 (func typename<-any : string
  [value : any-2]
@@ -2861,7 +2913,7 @@
  :test (test "vx/core/boolean" (typename<-any false))
        (test "vx/core/int"     (typename<-any 5))
        (test "vx/core/string"  (typename<-any "a"))
- :doc  "Gets the type of a given value")
+ :doc  "Gets the typename of a given value")
 
 (func typename<-type : string
  [type : any]

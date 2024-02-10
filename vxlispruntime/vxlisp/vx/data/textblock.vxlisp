@@ -244,12 +244,16 @@
   delim : delim]
  (let : delim
   [find : string := (:starttext delim)
-   pos  : int    := (int<-string-findkeyword text find)]
+   pos  : int    := (typ/int<-string-findkeyword
+                     text
+                     find)]
   (if : delim
-   (= pos 0)
-   delim
-   (copy delim
-    :pos pos)))
+   (then
+    (= pos 0)
+    delim)
+   (else
+    (copy delim
+     :pos pos))))
  :test (test
         (copy delimcomma
          :pos 2)
@@ -357,10 +361,10 @@
                                (< endpos startright)
                                startright
                                endpos)
-   textleft    : string    := (type/string<-string-end
+   textleft    : string    := (typ/string<-string-end
                                text
                                posminus)
-   textright   : string    := (type/string<-string-start
+   textright   : string    := (typ/string<-string-start
                                text
                                (+
                                 pos
@@ -694,85 +698,143 @@
    delimlistl : delimlist := (:delimlist open)
    lenopen    : int       := (length<-string textopen)
    posminus   : int       := (-1 pos)
-   startleft  : int       := (-1 startpos)
-   endleft    : int       := (+
-                              startleft
-                              posminus)
+   startleft  : int       := (if : int
+                              (= pos 1)
+                              (-1 startpos)
+                              startpos)
+   endleft    : int       := (if : int
+                              (= pos 1)
+                              (-1 startpos)
+                              (+
+                               (-1 startleft)
+                               posminus))
    startright : int       := (+
-                              startleft
-                              pos
+                              startpos
+                              posminus
                               lenopen)
    startopen  : int       := (+
                               startpos
                               posminus)
-   textleft   : string    := (type/string<-string-end
+   textleft   : string    := (typ/string<-string-end
                               text
                               posminus)
-   textpar   : string     := (type/string<-string-start
+   textpar   : string     := (typ/string<-string-start
                               text
                               pos)
-   textright : string     := (type/string<-string-start
+   textright : string     := (typ/string<-string-start
                               text
                               (+
                                pos
                                lenopen))
    close     : delim      := (copy delimclose
-                              :starttext textclose)]
+                              :starttext textclose)
+   tbleft    : textblock  := (if : textblock
+                              (then
+                               (= "" textleft)
+                               (empty textblock))
+                              (else
+                               (textblock
+                                :text textleft
+                                :startpos startleft
+                                :endpos endleft)))
+    tbpar1   : textblock := (copy textblockarg
+                             :text textpar
+                             :startpos startopen
+                             :delim
+                              (copy open
+                               :pos 0
+                               :delimlist
+                                (:delimlist delima))
+                             :parent parent)
+    tbfind   : textblock := (if : textblock
+                             (then
+                              (= "" textleft)
+                              (empty textblock))
+                             (else
+                              (textblock-findparent<-textblock
+                               parent)))
+    tbparent : textblock := (if : textblock
+                             (then
+                              (is-empty tbfind)
+                              tbpar1)
+                             (else
+                              (textblock-addchild<-textblock-find-child
+                               tbpar1
+                               tbfind
+                               tbleft)))]
   (textblock
-   :text textleft
-   :startpos startleft
-   :endpos endleft
+   :text textright
+   :startpos startright
+   :endpos endpos
    :delim
     (delim
      :delimlist delimlistl)
-   :parent
-    (textblock
-     :text textright
-     :startpos startright
-     :endpos endpos
-     :delim
-      (delim
-       :delimlist delimlistl)
-     :close close
-     :parent
-      (copy textblockarg
-       :startpos startopen
-       :delim
-        (copy open
-         :pos 0
-         :delimlist
-          (:delimlist delima))
-       :parent parent))))
+   :close close
+   :parent tbparent))
  :test (test
         (textblock
-         :text ""
+         :text "c}"
+         :startpos 4
+         :endpos 5
+         :close
+          (copy delimclose
+           :starttext "}")
+         :parent
+          (textblock
+           :text "{c}"
+           :startpos 3
+           :endpos 5
+           :delim
+            (copy delimbracketcurly
+             :pos 0)
+           :parent
+            (textblock
+             :text "ab{c}"
+             :startpos 1
+             :endpos 5
+             :children
+              (textblocklist
+               (textblock
+                :text "ab"
+                :startpos 1
+                :endpos 2)))))
+        (textblock<-open-textblock
+         (copy delimbracketcurly
+          :pos 3)
+         (textblock
+          :text "ab{c}"
+          :startpos 1
+          :endpos 5
+          :delim delimbracketcurly
+          :parent
+           (textblock
+            :text "ab{c}"
+            :startpos 1
+            :endpos 5))))
+       (test
+        (textblock
+         :text "{a,b},{c d}>"
+         :startpos 2
+         :endpos 13
          :delim
           (delim
            :delimlist delimlisttest2)
+         :close
+          (copy delimclose
+           :starttext ">")
          :parent
           (textblock
-           :text "{a,b},{c d}>"
-           :startpos 2
+           :text "<{a,b},{c d}>"
+           :startpos 1
            :endpos 13
            :delim
-            (delim
-             :delimlist delimlisttest2)
-           :close
-            (copy delimclose
-             :starttext ">")
+            (copy delimbracketangle
+             :delimlist delimlisttest1)
            :parent
             (textblock
              :text "<{a,b},{c d}>"
              :startpos 1
-             :endpos 13
-             :delim
-              (copy delimbracketangle
-               :delimlist delimlisttest1)
-             :parent
-              (textblock
-               :text "<{a,b},{c d}>"
-               :startpos 1
-               :endpos 13))))
+             :endpos 13)))
         (textblock<-open-textblock
          (copy delimtest2
           :pos 1)
@@ -788,46 +850,39 @@
             :endpos 13))))
        (test
         (textblock
-         :startpos 1
-         :endpos 1
+         :text "a,b},{c d}>"
+         :startpos 3
+         :endpos 13
          :delim
           (delim
            :delimlist delimlisttest3)
+         :close
+          (copy delimclose
+           :starttext "}")
          :parent
           (textblock
-           :text "a,b},{c d}>"
-           :startpos 3
+           :text "{a,b},{c d}>"
+           :startpos 2
            :endpos 13
            :delim
-            (delim
-             :delimlist delimlisttest3)
+            (copy delimbracketcurly
+             :delimlist delimlisttest2)
            :close
             (copy delimclose
-             :starttext "}")
+             :starttext ">")
            :parent
             (textblock
-             :text "{a,b},{c d}>"
-             :startpos 2
+             :text "<{a,b},{c d}>"
+             :startpos 1
              :endpos 13
              :delim
-              (copy delimbracketcurly
-               :delimlist delimlisttest2)
-             :close
-              (copy delimclose
-               :starttext ">")
+              (copy delimbracketangle
+               :pos 0)
              :parent
               (textblock
                :text "<{a,b},{c d}>"
                :startpos 1
-               :endpos 13
-               :delim
-                (copy delimbracketangle
-                 :pos 0)
-               :parent
-                (textblock
-                 :text "<{a,b},{c d}>"
-                 :startpos 1
-                 :endpos 13)))))
+               :endpos 13))))
         (textblock<-open-textblock
          (copy delimtest3
           :pos 1)
@@ -870,9 +925,9 @@
                                origsingle
                                (case :whitespace
                                 (let : string
-                                 [text2 : string  := (type/string<-string-start
+                                 [text2 : string  := (typ/string<-string-start
                                                       text pos)
-                                  pos2   : int    := (type/int<-string-findkeyword
+                                  pos2   : int    := (typ/int<-string-findkeyword
                                                       text2
                                                       :nonwhitespace)
                                   pos3   : int    := (if : int
@@ -885,7 +940,7 @@
                                                        pos2)
                                                       (else
                                                        (-1 pos2)))]
-                                 (type/string<-string-start-end
+                                 (typ/string<-string-start-end
                                   text
                                   pos
                                   pos3)))
@@ -913,13 +968,13 @@
                                startsingle
                                (-1 startsingle))
    startright  : int       := (+1 endsingle)
-   textleft    : string    := (type/string<-string-end
+   textleft    : string    := (typ/string<-string-end
                                text
                                posminus)
-   textpar     : string    := (type/string<-string-start
+   textpar     : string    := (typ/string<-string-start
                                text
                                pos)
-   textright   : string    := (type/string<-string-start
+   textright   : string    := (typ/string<-string-start
                                text
                                (+
                                 pos
@@ -1349,26 +1404,45 @@
 (func textblock-delimnotfound : textblock
  [textblockarg : textblock]
  (let : textblock
-  [text    : string    := (:text   textblockarg)
-   delima  : delim     := (:delim  textblockarg)
-   close   : delim     := (:close  textblockarg)
-   parent  : textblock := (:parent textblockarg)
-   delimp  : delim     := (:delim parent)
-   delims  : delimlist := (:delimlist delimp)]
+  [text   : string        := (:text   textblockarg)
+   delima : delim         := (:delim  textblockarg)
+   close  : delim         := (:close  textblockarg)
+   parent : textblock     := (:parent textblockarg)
+   childp : textblocklist := (:children parent)
+   delimp : delim         := (:delim parent)
+   delims : delimlist     := (:delimlist delimp)]
   (if : textblock
    (then // if delim not closed then error
     (! (is-empty close))
-    (copy parent
-     :delimlist
-      (copy delims
-       (copy textblockarg
-        :parent
-         (empty textblock)
-        :msg
-         (msg<-error
-          (string
-           "Close delim not found: "
-           (:name delima)))))))
+    (let : textblock
+     [msgerr   : msg            := (msg<-error
+                                    "closedelimmissing"
+                                    close)
+      child    : textblock      := (copy textblockarg
+                                    :delim  (empty delim)
+                                    :close  (empty delim)
+                                    :parent (empty textblock))
+      find     : textblock      := (textblock-findparent<-textblock
+                                    parent)
+      childrenf : textblocklist := (:children find)
+      childrenr : textblocklist := (copy childrenf
+                                    child)
+      replace   : textblock     := (copy find
+                                    msgerr
+                                    :children childrenr)
+      parent2   : textblock     := (textblock-replace<-textblock-find-replace
+                                    parent
+                                    find
+                                    replace)
+      gparent   : textblock     := (:parent parent2)
+      parent3   : textblock     := (copy parent2
+                                    :parent (empty textblock))
+      childreng : textblocklist := (:children gparent)
+      childrenc : textblocklist := (copy childreng
+                                    parent3)]
+     (copy gparent
+      :children childrenc
+      msgerr)))
    (then // if empty parent then textblockarg
     (is-empty parent)
     textblockarg)
@@ -1439,6 +1513,66 @@
         find
         child)))))))
  :test (test
+        (textblock
+         :text "<a"
+         :startpos 1
+         :endpos 2
+         :children
+          (textblocklist
+           (textblock
+            :text "<a"
+            :startpos 1
+            :endpos 2
+            :delim
+             (copy delimbracketangle
+              :delimlist vx/data/textblock/delimlisttest1)
+            :children
+             (textblocklist
+              (textblock
+               :text "a"
+               :startpos 2
+               :endpos 2))
+            (msgblock
+             (msg
+              :code "closedelimmissing"
+              :detail
+               (delim
+                :name "delimclose"
+                :starttext ">")
+              :severity 2))))
+         (msgblock
+          (msg
+           :code "closedelimmissing"
+           :detail
+            (delim
+             :name "delimclose"
+             :starttext ">")
+           :severity 2)))
+        (textblock-delimnotfound
+         (textblock
+          :text "a"
+          :startpos 2
+          :endpos 2
+          :delim
+           (delim
+            :delimlist vx/data/textblock/delimlisttest2)
+          :close
+           (copy delimclose
+            :starttext ">")
+          :parent
+           (textblock
+            :text "<a"
+            :startpos 1
+            :endpos 2
+            :delim
+             (copy delimbracketangle
+              :delimlist vx/data/textblock/delimlisttest1)
+            :parent
+             (textblock
+              :text "<a"
+              :startpos 1
+              :endpos 2)))))
+       (test
         (textblock
          :text ","
          :startpos 4
@@ -1914,22 +2048,6 @@
      parent))))
 :doc "Find a parent that accepts a child.")
 
-(func textblock-groupby<-textblock-delim : textblock
- [textblockarg : textblock
-  delimarg     : delim]
- (textblock
-  :delim delimarg)
- // until (is-empty list)
- //   find from list
- //   if (< find 0)
- //     addlist list
- //   else
- //     left pos
- //     right pos
- //     addlist left
- //     list = right
-:doc "Returns a textblock grouped by the given delim.")
-
 (func textblock-init : textblock
  [textblockarg : textblock]
  (let : textblock
@@ -1970,7 +2088,7 @@
 
 (func textblock-parse : textblock
  [textblock : textblock]
- (collection/any<-for-until-loop : textblock
+ (collection/any<-for-until-loop-max : textblock
   textblock
   (fn : boolean
    [current : textblock]
@@ -1979,7 +2097,8 @@
   (fn : textblock
    [current : textblock]
    (textblock-parse-one
-    current)))
+    current))
+  100000)
  :bigospace :n^n
  :bigotime  :n^n
  :test (test
@@ -2127,6 +2246,66 @@
      textblockarg))))
  :test (test
         (textblock
+         :text "<a"
+         :startpos 1
+         :endpos 2
+         :children
+          (textblocklist
+           (textblock
+            :text "<a"
+            :startpos 1
+            :endpos 2
+            :delim
+             (copy delimbracketangle
+              :delimlist vx/data/textblock/delimlisttest1)
+            :children
+             (textblocklist
+              (textblock
+               :text "a"
+               :startpos 2
+               :endpos 2))
+            (msgblock
+             (msg
+              :code "closedelimmissing"
+              :detail
+               (delim
+                :name "delimclose"
+                :starttext ">")
+              :severity 2))))
+         (msgblock
+          (msg
+           :code "closedelimmissing"
+           :detail
+            (delim
+             :name "delimclose"
+             :starttext ">")
+           :severity 2)))
+        (textblock-parse-one
+         (textblock
+          :text "a"
+          :startpos 2
+          :endpos 2
+          :delim
+           (delim
+            :delimlist vx/data/textblock/delimlisttest2)
+          :close
+           (copy delimclose
+            :starttext ">")
+          :parent
+           (textblock
+            :text "<a"
+            :startpos 1
+            :endpos 2
+            :delim
+             (copy delimbracketangle
+              :delimlist vx/data/textblock/delimlisttest1)
+            :parent
+             (textblock
+              :text "<a"
+              :startpos 1
+              :endpos 2)))))
+       (test
+        (textblock
          :text "<{a,b},{c d}>"
          :startpos 1
          :endpos 13
@@ -2140,47 +2319,6 @@
          (textblock
           :text "<{a,b},{c d}>"
           :delim delimtest1)))
-       (test
-        (textblock
-         :text ""
-         :delim
-          (delim
-           :delimlist delimlisttest2)
-         :parent
-          (textblock
-           :text "{a,b},{c d}>"
-           :startpos 2
-           :endpos 13
-           :delim
-            (delim
-             :delimlist delimlisttest2)
-           :close
-            (copy delimclose
-             :starttext ">")
-           :parent
-            (textblock
-             :text "<{a,b},{c d}>"
-             :startpos 1
-             :endpos 13
-             :delim
-              (copy delimbracketangle
-               :delimlist delimlisttest1)
-             :parent
-              (textblock
-               :text "<{a,b},{c d}>"
-               :startpos 1
-               :endpos 13))))
-        (textblock-parse-one
-         (textblock
-          :text "<{a,b},{c d}>"
-          :startpos 1
-          :endpos 13
-          :delim delimtest1
-          :parent
-           (textblock
-            :text "<{a,b},{c d}>"
-            :startpos 1
-            :endpos 13))))
        (test
         (textblock
          :text "{a,b},{c d}>"
@@ -2207,100 +2345,15 @@
              :endpos 13)))
         (textblock-parse-one
          (textblock
-          :text ""
-          :delim
-           (delim
-            :delimlist delimlisttest2)
-          :parent
-           (textblock
-            :text "{a,b},{c d}>"
-            :startpos 2
-            :endpos 13
-            :delim
-             (delim
-              :delimlist delimlisttest2)
-            :close
-             (copy delimclose
-              :starttext ">")
-            :parent
-             (textblock
-              :text "<{a,b},{c d}>"
-              :startpos 1
-              :endpos 13
-              :delim
-               (copy delimbracketangle
-                :delimlist delimlisttest1)
-              :parent
-               (textblock
-                :text "<{a,b},{c d}>"
-                :startpos 1
-                :endpos 13))))))
-       (test
-        (textblock
-         :startpos 1
-         :endpos 1
-         :delim
-          (delim
-           :delimlist delimlisttest3)
-         :parent
-          (textblock
-           :text "a,b},{c d}>"
-           :startpos 3
-           :endpos 13
-           :delim
-            (delim
-             :delimlist delimlisttest3)
-           :close
-            (copy delimclose
-             :starttext "}")
-           :parent
-            (textblock
-             :text "{a,b},{c d}>"
-             :startpos 2
-             :endpos 13
-             :delim
-              (copy delimbracketcurly
-               :delimlist delimlisttest2)
-             :close
-              (copy delimclose
-               :starttext ">")
-             :parent
-              (textblock
-               :text "<{a,b},{c d}>"
-               :startpos 1
-               :endpos 13
-               :delim
-                (copy delimbracketangle
-                 :delimlist delimlisttest1)
-               :parent
-                (textblock
-                 :text "<{a,b},{c d}>"
-                 :startpos 1
-                 :endpos 13)))))
-        (textblock-parse-one
-         (textblock
-          :text "{a,b},{c d}>"
-          :startpos 2
+          :text "<{a,b},{c d}>"
+          :startpos 1
           :endpos 13
-          :delim
-           (delim
-            :delimlist delimlisttest2)
-          :close
-           (copy delimclose
-            :starttext ">")
+          :delim delimtest1
           :parent
            (textblock
             :text "<{a,b},{c d}>"
             :startpos 1
-            :endpos 13
-            :delim
-             (copy delimbracketangle
-              :delimlist delimlisttest1)
-            :parent
-             (textblock
-              :text "<{a,b},{c d}>"
-              :startpos 1
-              :endpos 13)))))
+            :endpos 13))))
        (test
         (textblock
          :text "a,b},{c d}>"
@@ -2338,46 +2391,28 @@
                :endpos 13))))
         (textblock-parse-one
          (textblock
-          :startpos 1
-          :endpos 1
+          :text "{a,b},{c d}>"
+          :startpos 2
+          :endpos 13
           :delim
            (delim
-            :delimlist delimlisttest3)
+            :delimlist delimlisttest2)
+          :close
+           (copy delimclose
+            :starttext ">")
           :parent
            (textblock
-            :text "a,b},{c d}>"
-            :startpos 3
+            :text "<{a,b},{c d}>"
+            :startpos 1
             :endpos 13
             :delim
-             (delim
-              :delimlist delimlisttest3)
-            :close
-             (copy delimclose
-              :starttext "}")
+             (copy delimbracketangle
+              :delimlist delimlisttest1)
             :parent
              (textblock
-              :text "{a,b},{c d}>"
-              :startpos 2
-              :endpos 13
-              :delim
-               (copy delimbracketcurly
-                :delimlist delimlisttest2)
-              :close
-               (copy delimclose
-                :starttext ">")
-              :parent
-               (textblock
-                :text "<{a,b},{c d}>"
-                :startpos 1
-                :endpos 13
-                :delim
-                 (copy delimbracketangle
-                  :delimlist delimlisttest1)
-                :parent
-                 (textblock
-                  :text "<{a,b},{c d}>"
-                  :startpos 1
-                  :endpos 13)))))))
+              :text "<{a,b},{c d}>"
+              :startpos 1
+              :endpos 13)))))
        (test
         (textblock
          :text "a"
@@ -3204,138 +3239,6 @@
                     :endpos 5)))))))))
        (test
         (textblock
-         :startpos 7
-         :endpos 7
-         :delim
-          (delim
-           :delimlist delimlisttest3)
-         :parent
-          (textblock
-           :text "c d}>"
-           :startpos 9
-           :endpos 13
-           :delim
-            (delim
-             :delimlist delimlisttest3)
-         :close
-          (copy delimclose
-           :starttext "}")
-         :parent
-          (textblock
-           :text "{c d}>"
-           :startpos 8
-           :endpos 13
-           :delim
-            (copy delimbracketcurly
-             :delimlist delimlisttest2)
-           :close
-            (copy delimclose
-             :starttext ">")
-           :parent
-            (textblock
-             :text "<{a,b},{c d}>"
-             :startpos 1
-             :endpos 13
-             :delim
-              (copy delimbracketangle
-               :delimlist delimlisttest1)
-             :parent
-              (textblock
-               :text "<{a,b},{c d}>"
-               :startpos 1
-               :endpos 13)
-             :children
-              (textblocklist
-               (textblock
-                :text "{a,b}"
-                :startpos 2
-                :endpos 6
-                :delim
-                 (copy delimbracketcurly
-                  :pos 0)
-                :children
-                 (textblocklist
-                  (textblock
-                   :text "a"
-                   :startpos 3
-                   :endpos 3)
-                  (textblock
-                   :text ","
-                   :startpos 4
-                   :endpos 4
-                   :delim
-                    (copy delimcomma
-                     :pos 0))
-                  (textblock
-                   :text "b"
-                   :startpos 5
-                   :endpos 5)))
-               (textblock
-                :text ","
-                :startpos 7
-                :endpos 7
-                :delim
-                 (copy delimcomma
-                  :pos)))))))
-        (textblock-parse-one
-         (textblock
-          :text "{c d}>"
-          :startpos 8
-          :endpos 13
-          :delim
-           (delim
-            :delimlist delimlisttest2)
-          :close
-           (copy delimclose
-            :starttext ">")
-          :parent
-           (textblock
-            :text "<{a,b},{c d}>"
-            :startpos 1
-            :endpos 13
-            :delim
-             (copy delimbracketangle
-              :delimlist delimlisttest1)
-            :parent
-             (textblock
-              :text "<{a,b},{c d}>"
-              :startpos 1
-              :endpos 13)
-            :children
-             (textblocklist
-              (textblock
-               :text "{a,b}"
-               :startpos 2
-               :endpos 6
-               :delim
-                (copy delimbracketcurly
-                 :pos 0)
-               :children
-                (textblocklist
-                 (textblock
-                  :text "a"
-                  :startpos 3
-                  :endpos 3)
-                 (textblock
-                  :text ","
-                  :startpos 4
-                  :endpos 4
-                  :delim
-                   (copy delimcomma
-                    :pos 0))
-                 (textblock
-                  :text "b"
-                  :startpos 5
-                  :endpos 5)))
-              (textblock
-               :text ","
-               :startpos 7
-               :endpos 7
-               :delim
-                (copy delimcomma
-                 :pos 0)))))))
-       (test
-        (textblock
          :text "c d}>"
          :startpos 9
          :endpos 13
@@ -3404,79 +3307,61 @@
                     :pos 0))))))
         (textblock-parse-one
          (textblock
-          :startpos 7
-          :endpos 7
+          :text "{c d}>"
+          :startpos 8
+          :endpos 13
           :delim
            (delim
-            :delimlist delimlisttest3)
-          :parent
-           (textblock
-            :text "c d}>"
-            :startpos 9
-            :endpos 13
-            :delim
-             (delim
-              :delimlist delimlisttest3)
+            :delimlist delimlisttest2)
           :close
            (copy delimclose
-            :starttext "}")
+            :starttext ">")
           :parent
            (textblock
-            :text "{c d}>"
-            :startpos 8
+            :text "<{a,b},{c d}>"
+            :startpos 1
             :endpos 13
             :delim
-             (copy delimbracketcurly
-              :delimlist delimlisttest2)
-            :close
-             (copy delimclose
-              :starttext ">")
+             (copy delimbracketangle
+              :delimlist delimlisttest1)
             :parent
              (textblock
               :text "<{a,b},{c d}>"
               :startpos 1
-              :endpos 13
-              :delim
-               (copy delimbracketangle
-                :delimlist delimlisttest1)
-              :parent
-               (textblock
-                :text "<{a,b},{c d}>"
-                :startpos 1
-                :endpos 13)
-              :children
-               (textblocklist
-                (textblock
-                 :text "{a,b}"
-                 :startpos 2
-                 :endpos 6
-                 :delim
-                  (copy delimbracketcurly
-                   :pos 0)
-                 :children
-                  (textblocklist
-                   (textblock
-                    :text "a"
-                    :startpos 3
-                    :endpos 3)
-                   (textblock
-                    :text ","
-                    :startpos 4
-                    :endpos 4
-                    :delim
-                     (copy delimcomma
-                      :pos 0))
-                   (textblock
-                    :text "b"
-                    :startpos 5
-                    :endpos 5)))
-                (textblock
-                 :text ","
-                 :startpos 7
-                 :endpos 7
-                 :delim
-                  (copy delimcomma
-                   :pos)))))))))
+              :endpos 13)
+            :children
+             (textblocklist
+              (textblock
+               :text "{a,b}"
+               :startpos 2
+               :endpos 6
+               :delim
+                (copy delimbracketcurly
+                 :pos 0)
+               :children
+                (textblocklist
+                 (textblock
+                  :text "a"
+                  :startpos 3
+                  :endpos 3)
+                 (textblock
+                  :text ","
+                  :startpos 4
+                  :endpos 4
+                  :delim
+                   (copy delimcomma
+                    :pos 0))
+                 (textblock
+                  :text "b"
+                  :startpos 5
+                  :endpos 5)))
+              (textblock
+               :text ","
+               :startpos 7
+               :endpos 7
+               :delim
+                (copy delimcomma
+                 :pos 0)))))))
        (test
         (textblock
          :text "c"

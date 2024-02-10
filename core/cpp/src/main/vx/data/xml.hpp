@@ -36,6 +36,10 @@ namespace vx_data_xml {
   class Class_delimxmlequal;
   typedef Class_delimxmlequal* Const_delimxmlequal;
   extern Const_delimxmlequal c_delimxmlequal;
+  class Abstract_string_decodexml_from_string;
+  typedef Abstract_string_decodexml_from_string* Func_string_decodexml_from_string;
+  extern Func_string_decodexml_from_string e_string_decodexml_from_string;
+  extern Func_string_decodexml_from_string t_string_decodexml_from_string;
   class Abstract_string_first_from_xml;
   typedef Abstract_string_first_from_xml* Func_string_first_from_xml;
   extern Func_string_first_from_xml e_string_first_from_xml;
@@ -88,6 +92,9 @@ namespace vx_data_xml {
   typedef Abstract_xml_from_textblock* Func_xml_from_textblock;
   extern Func_xml_from_textblock e_xml_from_textblock;
   extern Func_xml_from_textblock t_xml_from_textblock;
+  // (func string-decodexml<-string)
+  vx_core::Type_string f_string_decodexml_from_string(vx_core::Type_string text);
+
   // (func string-first<-xml)
   vx_core::Type_string f_string_first_from_xml(vx_data_xml::Type_xml xml);
 
@@ -271,6 +278,33 @@ namespace vx_data_xml {
   class Class_delimxmlequal : public vx_data_textblock::Class_delim {
   public:
     static void vx_const_new(vx_data_xml::Const_delimxmlequal output);
+  };
+
+  // (func string-decodexml<-string)
+  class Abstract_string_decodexml_from_string : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_string_decodexml_from_string() {};
+    virtual ~Abstract_string_decodexml_from_string() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_string_decodexml_from_string : public virtual Abstract_string_decodexml_from_string {
+  public:
+    Class_string_decodexml_from_string();
+    virtual ~Class_string_decodexml_from_string() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
   // (func string-first<-xml)

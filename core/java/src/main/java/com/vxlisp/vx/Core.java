@@ -223,6 +223,14 @@ public final class Core {
     return output;
   }
 
+  // vx_any_from_func(generic_any_1, func, args...)
+  public static <T extends Core.Type_any> T vx_any_from_func(final T generic_any_1, final Core.Type_replfunc func, final Core.Type_any... args) {
+    Core.Type_anylist anylist = Core.vx_new_anylist(args);
+    Core.Type_any val = func.vx_repl(anylist);
+    T output = Core.f_any_from_any(generic_any_1, val);
+    return output;
+  }
+
   // vx_any_from_list_start_reduce(any-1, list-2, any-1, any<-reduce)
   public static <T extends Core.Type_any, N extends Core.Type_list> T vx_any_from_list_start_reduce(T generic_any_1, N list, T valstart, Core.Func_any_from_reduce fn_reduce) {
     T output = valstart;
@@ -549,6 +557,17 @@ public final class Core {
     return output;
   }
 
+  public static Type_anylist vx_new_anylist(Core.Type_any... anys) {
+    List<Core.Type_any> listany = new ArrayList<>(Arrays.asList(anys));
+    return vx_new_anylist(listany);
+  }
+
+  public static Type_anylist vx_new_anylist(List<Type_any> listany) {
+    Class_anylist output = new Class_anylist();
+    output.vx_p_list = immutablelist(listany);
+    return output;
+  }
+
   public static Type_boolean vx_new_boolean(final boolean isval) {
     Type_boolean output = Core.c_false;
     if (isval) {
@@ -637,7 +656,12 @@ public final class Core {
       }
     } else if (value instanceof Core.Type_string) {
       Core.Type_string valstring = Core.f_any_from_any(Core.t_string, value);
-      String sval = "\"" + valstring.vx_string() + "\"";
+      String sval = valstring.vx_string();
+      if (sval.indexOf("\"") < 0) {
+        sval = "\"" + sval + "\"";
+      } else {
+        sval = "`" + sval + "`";
+      }
       if (valstring.vx_msgblock() != null) {
         String msgtext = Core.vx_string_from_any_indent(valstring.vx_msgblock(), indent, linefeed);
         output  = "\n" + indenttext + "(string";

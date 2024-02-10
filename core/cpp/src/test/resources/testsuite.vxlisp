@@ -382,6 +382,26 @@
     (vx/test/testcase
      :passfail true
      :testpkg "vx/core"
+     :casename "func"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ 5
+ (let
+  [funcvar : + := +]
+  (funcvar 2 3)))"
+        :testpkg "vx/core"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected 5
+          :actual 5))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/core"
      :casename "int"
      :describelist
       (vx/test/testdescribelist
@@ -1335,7 +1355,8 @@
  (stringmap
   :a \"1\"
   :b \"2\")
- (copy (stringmap :a \"1\")
+ (copy
+  (stringmap :a \"1\")
   :b \"2\"))"
         :testpkg "vx/core"
         :testresult
@@ -2441,7 +2462,7 @@
       :decimal 0
       :error 0
       :float 1
-      :func 0
+      :func 1
       :funcdef 0
       :funclist 0
       :funcmap 0
@@ -2517,13 +2538,13 @@
     :testpkg "vx/core"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 31
-      :tests 71
+      :pct 32
+      :tests 72
       :total 222)
     :typenums
      (vx/test/testcoveragenums
-      :pct 5
-      :tests 4
+      :pct 6
+      :tests 5
       :total 73))
   :passfail true
   :testpkg "vx/core")
@@ -14414,6 +14435,7 @@
       :delimxmlequal 0)
     :funcmap
      (intmap
+      :string-decodexml<-string 0
       :string-first<-xml 1
       :textblock-xml<-string 1
       :xml-angle<-xml-textblock 3
@@ -14437,29 +14459,29 @@
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 13)
+      :total 14)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 13)
+      :total 14)
     :constnums
      (vx/test/testcoveragenums
       :total 4)
     :docnums
      (vx/test/testcoveragenums
-      :pct 65
-      :tests 13
-      :total 20)
+      :pct 66
+      :tests 14
+      :total 21)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 76
+      :pct 71
       :tests 10
-      :total 13)
+      :total 14)
     :testpkg "vx/data/xml"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 50
+      :pct 47
       :tests 10
-      :total 20)
+      :total 21)
     :typenums
      (vx/test/testcoveragenums
       :total 3))

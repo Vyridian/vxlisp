@@ -52,19 +52,6 @@
    :path    ../csharp/src/test
    :context vx/translation/en/context-test
    :doc     "Build C# Test Code")
-  (cmd srcjs
-   :code    :source
-   :lang    :js
-   :path    ../js/src
-   :main    vx/core/main
-   :context vx/translation/en/context-en
-   :doc     "Build JavaScript Source Code")
-  (cmd testjs
-   :code    :test
-   :lang    :js
-   :path    ../js/test
-   :context vx/translation/en/context-test
-   :doc     "Build JavaScript Test Code")
   (cmd srcjava
    :code    :source
    :lang    :java
@@ -78,6 +65,19 @@
    :path    ../java/src/test/java
    :context vx/translation/en/context-test
    :doc     "Build Java Test Code")
+  (cmd srcjs
+   :code    :source
+   :lang    :js
+   :path    ../js/src
+   :main    vx/core/main
+   :context vx/translation/en/context-en
+   :doc     "Build JavaScript Source Code")
+  (cmd testjs
+   :code    :test
+   :lang    :js
+   :path    ../js/test
+   :context vx/translation/en/context-test
+   :doc     "Build JavaScript Test Code")
   (cmd srckotlin
    :code    :source
    :lang    :kotlin

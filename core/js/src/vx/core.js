@@ -4,6 +4,14 @@
 
 export default class vx_core {
 
+  // vx_any_from_func(generic_any_1, func, args...)
+  static vx_any_from_func(generic_any_1, func, ...args) {
+    const funcdef = func['vx_value']
+    const fn = funcdef['fn']
+    const output = fn.apply(null, args)
+    return output
+  }
+
   // vx_any_from_map_start_reduce(any-1, map-2, any-1, any<-any-key-value)
   static vx_any_from_map_start_reduce(generic_any_1, map, start, fn_reduce) {
     let output = vx_core.f_empty(generic_any_1)

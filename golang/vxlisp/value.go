@@ -604,6 +604,16 @@ func ValueLink(value vxvalue, expectedtype *vxtype, listscope []vxscope, textblo
 		if fnc.idx > 0 {
 			subpath += "/" + StringFromInt(fnc.idx)
 		}
+		lookuparg, ok := ArgFromListScope(listscope, fnc.name)
+		if ok {
+			lookuptype := lookuparg.vxtype
+			if lookuptype.isfunc || NameFromType(lookuptype) == "vx/core/func" {
+				fnc.argname = fnc.name
+				fnc.pkgname = lookuptype.pkgname
+				fnc.name = lookuptype.name
+			}
+		}
+
 		functype := fnc.vxtype
 		if functype.name == "" {
 			functype = expectedtype
@@ -697,6 +707,7 @@ func ValueLink(value vxvalue, expectedtype *vxtype, listscope []vxscope, textblo
 				fnc = NewFuncCopy(lookupfunc)
 				fnc.textblock = origfunc.textblock
 				fnc.debug = origfunc.debug
+				fnc.argname = origfunc.argname
 				if origfunc.vxtype.name != "" {
 					fnc.vxtype = origfunc.vxtype
 				}

@@ -1957,7 +1957,7 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 	case ":const":
 		switch value.name {
 		case "false", "true":
-			valstr = "Core.vx_new_boolean(" + value.name + ")"
+			valstr = LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "vx_new_boolean(" + value.name + ")"
 		default:
 			if value.pkg == ":native" {
 				valstr = LangFromName(value.name)
@@ -1972,7 +1972,7 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 		subpath := path + "/" + fnc.name
 		funcname := NameFromFunc(fnc)
 		if fnc.debug {
-			output += "Core.f_log_1(" + LangNameTFromType(lang, fnc.vxtype) + ", Core.vx_new_string(\"" + funcname + "\"), "
+			output += LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "f_log_1(" + LangNameTFromType(lang, fnc.vxtype) + ", " + LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "vx_new_string(\"" + funcname + "\"), "
 		}
 		switch fnc.name {
 		case "native":
@@ -2051,12 +2051,21 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 			case "vx/core/fn":
 			case "vx/core/let":
 				if fnc.async {
-					output += LangNameFromPkgName(lang, fnc.pkgname) + ".f_let_async("
+					output += LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + "f_let_async("
 				} else {
-					output += LangNameFromPkgName(lang, fnc.pkgname) + ".f_" + LangNameFromFunc(fnc) + "("
+					output += LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangNameFromFunc(fnc) + "("
 				}
 			default:
-				output += LangNameFromPkgName(lang, fnc.pkgname) + ".f_" + LangNameFromFunc(fnc) + "("
+				if fnc.argname != "" {
+					output += LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "vx_any_from_func("
+					argtexts = append(argtexts, LangNameTFromType(lang, fnc.vxtype))
+					argtexts = append(argtexts, LangFromName(fnc.argname))
+					if lang == langcpp {
+						multiflag = true
+					}
+				} else {
+					output += LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangNameFromFunc(fnc) + "("
+				}
 			}
 			if !isskip {
 				if fnc.isgeneric {
@@ -2092,7 +2101,7 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 								argtype := lambdaarg.vxtype
 								argvaltype = LangNameTypeFullFromType(lang, argtype)
 								argvalinstance = LangNameTFromType(lang, argtype)
-								lambdavar := argvaltype + " " + lambdaarg.name + " = Core.f_any_from_any(" + argvalinstance + ", " + lambdaarg.name + "_any);"
+								lambdavar := argvaltype + " " + lambdaarg.name + " = " + LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "f_any_from_any(" + argvalinstance + ", " + lambdaarg.name + "_any);"
 								lambdavars = append(lambdavars, lambdavar)
 							}
 							lambdatext := StringFromListStringJoin(lambdaargs, ", ")
@@ -2105,20 +2114,20 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 								case "any<-any-key-value-async", "any<-key-value-async",
 									"any<-reduce-async", "any<-reduce-next-async":
 									argtext = "" +
-										LangNameTFromType(lang, funcarg.vxtype) + ".vx_fn_new((" + lambdatext + ") -> {" +
+										LangNameTFromType(lang, funcarg.vxtype) + lang.typeref + "vx_fn_new((" + lambdatext + ") -> {" +
 										lambdavartext +
 										work +
 										"\n})"
 								default:
 									if len(arglist) == 1 {
 										argtext = "" +
-											"Core.t_any_from_any_async.vx_fn_new((" + lambdatext + ") -> {" +
+											LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "t_any_from_any_async" + lang.typeref + "vx_fn_new((" + lambdatext + ") -> {" +
 											lambdavartext +
 											work +
 											"\n})"
 									} else {
 										argtext = "" +
-											"Core.t_any_from_func_async.vx_fn_new((" + lambdatext + ") -> {" +
+											LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "t_any_from_func_async" + lang.typeref + "vx_fn_new((" + lambdatext + ") -> {" +
 											lambdavartext +
 											work +
 											"\n})"
@@ -2134,20 +2143,20 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 									"any<-reduce", "any<-reduce-next",
 									"boolean<-any":
 									argtext = "" +
-										LangNameTFromType(lang, funcarg.vxtype) + ".vx_fn_new((" + lambdatext + ") -> {" +
+										LangNameTFromType(lang, funcarg.vxtype) + lang.typeref + "vx_fn_new((" + lambdatext + ") -> {" +
 										lambdavartext +
 										work +
 										"\n})"
 								default:
 									if len(arglist) == 1 {
 										argtext = "" +
-											"Core.t_any_from_any.vx_fn_new((" + lambdatext + ") -> {" +
+											LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "t_any_from_any" + lang.typeref + "vx_fn_new((" + lambdatext + ") -> {" +
 											lambdavartext +
 											work +
 											"\n})"
 									} else {
 										argtext = "" +
-											"Core.t_any_from_func.vx_fn_new((" + lambdatext + ") -> {" +
+											LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "t_any_from_func" + lang.typeref + "vx_fn_new((" + lambdatext + ") -> {" +
 											lambdavartext +
 											work +
 											"\n})"
@@ -2177,7 +2186,7 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 											msgblock = MsgblockAddBlock(msgblock, msgs)
 											lambdatext += "" +
 												arglineindent + "final CompletableFuture<" + LangNameTypeFromType(lang, lambdaarg.vxtype) + "> future_" + LangFromName(lambdaarg.name) + " = " + lambdavaluetext + ";" +
-												arglineindent + "return Core.async_from_async_fn(future_" + LangFromName(lambdaarg.name) + ", (" + LangFromName(lambdaarg.name) + ") -> {"
+												arglineindent + "return " + LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "async_from_async_fn(future_" + LangFromName(lambdaarg.name) + ", (" + LangFromName(lambdaarg.name) + ") -> {"
 											aftertext += "" +
 												arglineindent + "});"
 											argindent += 1
@@ -2190,7 +2199,7 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 									work, msgs := LangFromValue(lang, argvalue, pkgname, fnc, 2, true, test, argsubpath)
 									msgblock = MsgblockAddBlock(msgblock, msgs)
 									argtext = "" +
-										"Core.t_any_from_func_async.vx_fn_new(() -> {" +
+										LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "t_any_from_func_async" + lang.typeref + "vx_fn_new(() -> {" +
 										lambdatext +
 										"\n    return " + work + ";" +
 										aftertext +
@@ -2208,7 +2217,7 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 									msgblock = MsgblockAddBlock(msgblock, msgs)
 									work = StringFromStringIndent(work, "  ")
 									argtext = "" +
-										"Core.t_any_from_func.vx_fn_new(() -> {" +
+										LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "t_any_from_func" + lang.typeref + "vx_fn_new(() -> {" +
 										lambdatext +
 										arglineindent + "return " + work + ";" +
 										"\n})"
@@ -2228,7 +2237,7 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 										argvaluefuncname = "boolean_from_func"
 									}
 									argtext = "" +
-										"Core.t_" + argvaluefuncname + ".vx_fn_new(() -> {" +
+										LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "t_" + argvaluefuncname + lang.typeref + "vx_fn_new(() -> {" +
 										"\n  return " + work + ";" +
 										"\n})"
 								}
@@ -2247,7 +2256,7 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 										outputtype = "CompletableFuture<Core.Type_any>"
 									}
 									argtext = "" +
-										LangNameTFromType(lang, funcarg.vxtype) + ".vx_fn_new((" + lambdatext + ") -> {" +
+										LangNameTFromType(lang, funcarg.vxtype) + lang.typeref + "vx_fn_new((" + lambdatext + ") -> {" +
 										lambdavartext +
 										"\n  " + outputtype + " output_" + StringFromInt(subindent) + " = " + work + lang.lineend +
 										"\n  return output_" + StringFromInt(subindent) + lang.lineend +
@@ -2282,7 +2291,7 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 									work = "\n  return " + work + ";"
 								}
 								argtext = "" +
-									LangNameTFromType(lang, funcarg.vxtype) + ".vx_fn_new(() -> {" +
+									LangNameTFromType(lang, funcarg.vxtype) + lang.typeref + "vx_fn_new(() -> {" +
 									work +
 									"\n})"
 							}
@@ -2317,7 +2326,7 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 							} else {
 								multiflag = true
 								argtext = "" +
-									LangNameTFromType(lang, funcarg.vxtype) + ".vx_new(" +
+									LangNameTFromType(lang, funcarg.vxtype) + lang.typeref + "vx_new(" +
 									"\n" + ssubindent + StringFromStringIndent(argtext, ssubindent)
 							}
 						}
@@ -2357,11 +2366,11 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 	case ":funcref":
 		valfunc := FuncFromValue(value)
 		valstr = ""
-		valstr += LangNameFromPkgName(lang, valfunc.pkgname) + ".t_" + LangFromName(valfunc.alias)
+		valstr += LangNameFromPkgName(lang, valfunc.pkgname) + lang.typeref + "t_" + LangFromName(valfunc.alias)
 		output = sindent + valstr
 	case ":type":
 		valtype := TypeFromValue(value)
-		output = LangNameFromPkgName(lang, valtype.pkgname) + ".t_" + LangFromName(valtype.alias)
+		output = LangNameFromPkgName(lang, valtype.pkgname) + lang.typeref + "t_" + LangFromName(valtype.alias)
 	case "string":
 		valstr = StringValueFromValue(value)
 		if valstr == "" {
@@ -2385,22 +2394,22 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 	case "boolean":
 		if encode {
 			valstr = StringValueFromValue(value)
-			output = "Core.vx_new_boolean(" + valstr + ")"
+			output = LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "vx_new_boolean(" + valstr + ")"
 		}
 	case "decimal":
 		if encode {
 			valstr = StringValueFromValue(value)
-			output = "Core.t_decimal.vx_new_from_string(\"" + valstr + "\")"
+			output = LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "t_decimal" + lang.typeref + "vx_new_from_string(\"" + valstr + "\")"
 		}
 	case "float":
 		if encode {
 			valstr = StringValueFromValue(value)
-			output = "Core.vx_new_float(" + valstr + ")"
+			output = LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "vx_new_float(" + valstr + ")"
 		}
 	case "int":
 		if encode {
 			valstr = StringValueFromValue(value)
-			output = "Core.vx_new_int(" + valstr + ")"
+			output = LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "vx_new_int(" + valstr + ")"
 		}
 	case "number":
 		if encode {
@@ -3133,7 +3142,7 @@ func LangNameTFromFunc(lang *vxlang, fnc *vxfunc) string {
 func LangNameTFromType(lang *vxlang, typ *vxtype) string {
 	name := "t_" + LangNameFromType(lang, typ)
 	if typ.pkgname != "" {
-		name = LangNameFromPkgName(lang, typ.pkgname) + "." + name
+		name = LangNameFromPkgName(lang, typ.pkgname) + lang.pkgref + name
 	}
 	return name
 }

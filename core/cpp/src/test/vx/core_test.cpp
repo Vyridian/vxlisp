@@ -112,6 +112,45 @@ namespace vx_core_test {
     return output;
   }
 
+  vx_test::Type_testcase t_func(vx_core::Type_context context) {
+    vx_core::vx_log("Test Start: t_func");
+    // testdescribe_1
+    vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      context,
+      vx_core::vx_new_int(5),
+      vx_core::f_let(
+        vx_core::t_int,
+        vx_core::t_any_from_func->vx_fn_new({}, []() {
+          vx_core::Func_plus funcvar =   vx_core::t_plus;
+          vx_core::vx_ref_plus(funcvar);
+          vx_core::Type_int output_1 = vx_core::vx_any_from_func(vx_core::t_int, funcvar, {vx_core::vx_new_int(2), vx_core::vx_new_int(3)});
+          vx_core::vx_release_one_except(funcvar, output_1);
+          return output_1;
+        })
+      )
+    );
+    vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n 5\n (let\n  [funcvar : + := +]\n  (funcvar 2 3)))"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
+      vx_core::vx_new_string(":testresult"), testresult_1
+    });
+    vx_core::vx_Type_listany listdescribe = {
+      testdescribe_1
+    };
+    vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
+      vx_core::vx_new_string(":casename"), vx_core::vx_new_string("func"),
+      vx_core::vx_new_string(":describelist"),
+      vx_core::vx_any_from_any(
+        vx_test::t_testdescribelist,
+        vx_test::t_testdescribelist->vx_new_from_list(listdescribe)
+      )
+    });
+    vx_core::vx_log("Test End  : t_func");
+    return output;
+  }
+
   vx_test::Type_testcase t_int(vx_core::Type_context context) {
     vx_core::vx_log("Test Start: t_int");
     // testdescribe_1
@@ -1931,7 +1970,7 @@ namespace vx_core_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (stringmap\n  :a \"1\"\n  :b \"2\")\n (copy (stringmap :a \"1\")\n  :b \"2\"))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (stringmap\n  :a \"1\"\n  :b \"2\")\n (copy\n  (stringmap :a \"1\")\n  :b \"2\"))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -3559,6 +3598,7 @@ namespace vx_core_test {
     vx_core::vx_Type_listany listtestcase;
     listtestcase.push_back(vx_core_test::t_boolean(context));
     listtestcase.push_back(vx_core_test::t_float(context));
+    listtestcase.push_back(vx_core_test::t_func(context));
     listtestcase.push_back(vx_core_test::t_int(context));
     listtestcase.push_back(vx_core_test::t_string(context));
     listtestcase.push_back(vx_core_test::c_false(context));
@@ -3664,13 +3704,13 @@ namespace vx_core_test {
         vx_core::vx_new_string(":total"), vx_core::vx_new_int(161)
       }),
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(31), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(71), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(32), 
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(72), 
         vx_core::vx_new_string(":total"), vx_core::vx_new_int(222)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(5), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(4), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(6), 
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(5), 
         vx_core::vx_new_string(":total"), vx_core::vx_new_int(73)
       })
     });
@@ -3706,7 +3746,7 @@ namespace vx_core_test {
         vx_core::vx_new_string(":decimal"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":error"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":float"), vx_core::vx_new_int(1),
-        vx_core::vx_new_string(":func"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":func"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":funcdef"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":funclist"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":funcmap"), vx_core::vx_new_int(0),

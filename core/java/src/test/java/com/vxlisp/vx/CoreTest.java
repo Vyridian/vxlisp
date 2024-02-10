@@ -87,6 +87,33 @@ public final class CoreTest {
     return output;
   }
 
+  static Test.Type_testcase t_func(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "func",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n 5\n (let\n  [funcvar : + := +]\n  (funcvar 2 3)))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.vx_new_int(5),
+              Core.f_let(
+                Core.t_int,
+                Core.t_any_from_func.vx_fn_new(() -> {
+                  final Core.Func_plus funcvar =   Core.t_plus;
+                  return Core.vx_any_from_func(Core.t_int, funcvar, Core.vx_new_int(2), Core.vx_new_int(3));
+                })
+              )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
   static Test.Type_testcase t_int(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
@@ -1432,7 +1459,7 @@ public final class CoreTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n (stringmap\n  :a \"1\"\n  :b \"2\")\n (copy (stringmap :a \"1\")\n  :b \"2\"))",
+          ":describename", "(test\n (stringmap\n  :a \"1\"\n  :b \"2\")\n (copy\n  (stringmap :a \"1\")\n  :b \"2\"))",
           ":testresult",
             Test.f_test(
               context,
@@ -2695,6 +2722,7 @@ public final class CoreTest {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
       CoreTest.t_boolean(context),
       CoreTest.t_float(context),
+      CoreTest.t_func(context),
       CoreTest.t_int(context),
       CoreTest.t_string(context),
       CoreTest.c_false(context),
@@ -2777,8 +2805,8 @@ public final class CoreTest {
       ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 48, ":tests", 65, ":total", 135), 
       ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 161), 
       ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 161), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 31, ":tests", 71, ":total", 222), 
-      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 5, ":tests", 4, ":total", 73)
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 32, ":tests", 72, ":total", 222), 
+      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 6, ":tests", 5, ":total", 73)
     );
   }
 
@@ -2811,7 +2839,7 @@ public final class CoreTest {
         ":decimal", 0,
         ":error", 0,
         ":float", 1,
-        ":func", 0,
+        ":func", 1,
         ":funcdef", 0,
         ":funclist", 0,
         ":funcmap", 0,

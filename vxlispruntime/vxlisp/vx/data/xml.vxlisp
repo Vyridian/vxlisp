@@ -38,16 +38,60 @@
 (const delimxml : tb/delim
  (tb/delim
   :delimlist
-	  (tb/delimlist
-    tb/delimwhitespace
+   (tb/delimlist
     delimxmlcomment
     delimxmlcdata
-	   (copy tb/delimbracketangle
-		   :delimlist
-		    (tb/delimlist
+    (copy tb/delimbracketangle
+     :delimlist
+      (tb/delimlist
        delimxmlequal
        tb/delimwhitespace
        tb/delimquote)))))
+
+(func string-first<-xml : string
+ [xml : xml]
+ (let : string
+  [children : xmllist := (:children xml)
+   first    : xml     := (:1 children)
+   text     : string  := (:text first)
+   decode   : string  := (string-decodexml<-string
+                          text)
+   outdent  : string  := (type/string-outdent
+                          decode)
+   trim     : string  := (type/string-trim
+                          outdent)]
+  trim)
+ :test (test
+        "text"
+        (string-first<-xml
+         (xml
+          :children
+           (xmllist
+            (xml
+             :text "text")))))
+ :doc "Returns string from first child's text.")
+
+(func string-decodexml<-string : string
+ [text : string]
+ (let : string
+  [lt     : string  := (string<-string-find-replace
+                        text
+                        "&lt;"
+                        "<")
+   gt     : string  := (string<-string-find-replace
+                        text
+                        "&gt;"
+                        ">")
+   amp    : string  := (string<-string-find-replace
+                        gt
+                        "&amp;"
+                        "&")
+   result : string  := (string<-string-find-replace
+                        text
+                        quote
+                        `\"`)]
+   result)
+  :doc "Returns string decoded from xml encoding")
 
 (func textblock-xml<-string : tb/textblock
  [text : string]
@@ -82,10 +126,7 @@
            (tb/textblock
             :text "\n  "
             :startpos 6
-            :endpos 8
-            :delim
-             (copy tb/delimwhitespace
-              :pos 0))
+            :endpos 8)
            (tb/textblock
             :text "<tag1>"
             :startpos 9
@@ -102,10 +143,7 @@
            (tb/textblock
             :text "\n    "
             :startpos 15
-            :endpos 19
-            :delim
-             (copy tb/delimwhitespace
-              :pos 0))
+            :endpos 19)
            (tb/textblock
             :text "<tag2 prop1=\"val1\" prop2=\"val2\" />"
             :startpos 20
@@ -195,10 +233,7 @@
            (tb/textblock
             :text "\n  "
             :startpos 54
-            :endpos 56
-            :delim
-             (copy tb/delimwhitespace
-              :pos 0))
+            :endpos 56)
            (tb/textblock
             :text "</tag1>"
             :startpos 57
@@ -215,10 +250,7 @@
            (tb/textblock
             :text "\n"
             :startpos 64
-            :endpos 64
-            :delim
-             (copy tb/delimwhitespace
-              :pos 0))
+            :endpos 64)
            (tb/textblock
             :text "</doc>"
             :startpos 65
@@ -249,9 +281,10 @@
 
 (func xml<-string : xml
  [text : string]
- (xml<-textblock
-  (textblock-xml<-string
-   text))
+ (let : xml
+  [tb : textblock := (textblock-xml<-string
+                      text)]
+  (xml<-textblock tb))
  :doc "Returns a parsed xml from a string.")
 
 (func xml<-textblock : xml
@@ -631,9 +664,13 @@
    (else
     (copy xmlarg
      (msg<-error
-      (string
-       "Invalid Xml Close tag: "
-       text))))))
+      :invalidxmlclosetag
+      (anymap
+       :tag text
+       :startpos (:startpos tb)
+       :endpos (:endpos tb)
+       :line (:line tb)
+       :column (:column tb)))))))
  :test (test
         (xml
          :tag "doc")
@@ -654,8 +691,15 @@
         (xml
          :tag "doc"
          (msg
-          :severity 2
-          :text "Invalid Xml Close tag: /wrong"))
+          :code ":invalidxmlclosetag"
+          :detail
+           (anymap
+            :tag "/wrong"
+            :startpos 0
+            :endpos 0
+            :line 0
+            :column 0)
+          :severity 2))
         (xml-close<-xml-textblock
          (xml
           :tag "doc")
@@ -860,37 +904,6 @@
            (tb/textblocklist
             (tb/textblock
              :text "/tag1")))))
-
-/*
-          (tb/textblock
-           :text "</doc>"
-           :startpos 65
-           :endpos 70
-           :delim
-            (copy tb/delimbracketangle
-             :pos 0)
-           :children
-            (tb/textblocklist
-             (tb/textblock
-              :text "/doc"
-              :startpos 66
-              :endpos 69)))))
-        (xml
-         :tag "doc"
-         :children
-          (xmllist
-           (xml
-            :tag "tag1"
-            :children
-             (xmllist
-              (xml
-               :tag "tag2"
-               :propmap
-                (stringmap
-                 :prop1 "val1"
-                 :prop2 "val2"))))))
-
-*/
  :doc "Returns a modified xml from a single textblock.")
 
 (func xml-parse<-xml-textblocklist : xml
@@ -899,12 +912,7 @@
  (any<-list-start-reduce : xml
   textblocklist
   xmlarg
-  (fn : xml
-   [reduce  : xml
-    current : tb/textblock]
-    (xml-parse<-xml-textblock
-     reduce
-     current)))
+  xml-parse<-xml-textblock)
  :test (test
         (xml
          :tag "doc"

@@ -724,12 +724,18 @@ func JsFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc, 
 			case "vx/core/fn":
 			case "vx/core/let":
 				if fnc.async {
-					output += JsNameFromPkgName(fnc.pkgname) + ".f_let_async("
+					output += LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + "f_let_async("
 				} else {
-					output += JsNameFromPkgName(fnc.pkgname) + ".f_let("
+					output += LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + "f_let("
 				}
 			default:
-				output += JsFromName(fnc.pkgname) + ".f_" + JsFromName(fnc.alias) + JsIndexFromFunc(fnc) + "("
+				if fnc.argname != "" {
+					output += LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "vx_any_from_func("
+					argtexts = append(argtexts, LangNameTFromType(lang, fnc.vxtype))
+					argtexts = append(argtexts, LangFromName(fnc.argname))
+				} else {
+					output += LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangNameFromFunc(fnc) + "("
+				}
 			}
 			switch funcname {
 			case "vx/core/new", "vx/core/copy", "vx/core/empty", "vx/core/fn":

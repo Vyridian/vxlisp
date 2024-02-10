@@ -27,8 +27,8 @@ export default class vx_core_test {
       "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 48, ":tests", 65, ":total", 135), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 31, ":tests", 71, ":total", 222), 
-      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 5, ":tests", 4, ":total", 73)
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 32, ":tests", 72, ":total", 222), 
+      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 6, ":tests", 5, ":total", 73)
     )
   }
 
@@ -64,7 +64,7 @@ export default class vx_core_test {
           "decimal", 0,
           "error", 0,
           "float", 1,
-          "func", 0,
+          "func", 1,
           "funcdef", 0,
           "funclist", 0,
           "funcmap", 0,
@@ -369,6 +369,36 @@ export default class vx_core_test {
               vx_core.f_new(
                 vx_core.t_float,
                 4.5
+              )
+            )
+          )
+        )
+    )
+    return output
+  }
+
+  static t_func(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "func",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n 5\n (let\n  [funcvar : + := +]\n  (funcvar 2 3)))",
+            ":testresult", vx_test.f_test(
+              context,
+              5,
+              vx_core.f_let(
+                {"any-1": vx_core.t_int},
+                [],
+                vx_core.f_new(vx_core.t_any_from_func, () => {
+                  const funcvar =   vx_core.t_plus
+                  return vx_core.vx_any_from_func(vx_core.t_int, funcvar, 2, 3)
+                })
               )
             )
           )
@@ -1765,7 +1795,7 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (stringmap\n  :a \"1\"\n  :b \"2\")\n (copy (stringmap :a \"1\")\n  :b \"2\"))",
+            ":describename", "(test\n (stringmap\n  :a \"1\"\n  :b \"2\")\n (copy\n  (stringmap :a \"1\")\n  :b \"2\"))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -3053,6 +3083,7 @@ export default class vx_core_test {
       vx_test.t_testcaselist,
       vx_core_test.t_boolean(),
       vx_core_test.t_float(),
+      vx_core_test.t_func(),
       vx_core_test.t_int(),
       vx_core_test.t_string(),
       vx_core_test.c_false(),

@@ -29,8 +29,8 @@ any<-func-async
 any<-key-value
 any<-key-value-async
 any<-list
-any<-list-reduce
-any<-list-reduce-next
+any<-list-start-reduce
+any<-list-start-reduce-next
 any<-map
 any<-none
 any<-none-async
@@ -78,15 +78,6 @@ let-async
   typedef std::future<vx_core::Type_any>* vx_Type_future;
   typedef std::function<vx_core::Type_any(vx_core::Type_any)> vx_Type_fn_any_from_any;
 
-/*
-  // class vx_Abstract_const
-  class vx_Abstract_const {
-  public:
-    virtual vx_core::Type_constdef vx_constdef() const = 0;
-  };
-  typedef vx_core::vx_Abstract_const* vx_Type_const;
-*/
-
   // class vx_Class_async
   class vx_Class_async {
   public:
@@ -115,8 +106,26 @@ let-async
   typedef std::map<std::string, vx_Type_async> vx_Type_mapasync;
   typedef std::function<vx_core::vx_Type_async(vx_core::Type_any)> vx_Type_fn_async_from_any;
 
+  class Abstract_replfunc {
+  public:
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
+  };
+  typedef Abstract_replfunc* Type_replfunc;
+  
+  class Abstract_replfunc_async {
+  public:
+    virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist);
+  };
+  typedef Abstract_replfunc_async* Type_replfunc_async;
+
+  // vx_any_from_func_1(generic_any_1, func, args...)
+  vx_core::Type_any vx_any_from_func_1(vx_core::Type_any generic_any_1, vx_core::Type_replfunc func, vx_core::vx_Type_listany args);
+
   // vx_any_from_list_result_next(generic_any_1, list, any<-reduce-next)
   vx_core::Type_any vx_any_from_list_result_next(vx_core::Type_any generic_any_1, vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce_next fn_reduce_next);
+
+  // vx_any_from_map_start_reduce(generic_any_1, map, any<-any-key-value)
+  vx_core::Type_any vx_any_from_map_start_reduce(vx_core::Type_any generic_any_1, vx_core::Type_map map, vx_core::Type_any start, vx_core::Func_any_from_any_key_value fn_reduce);
 
   // vx_anylist_from_arraystring(long, array<string>)
   vx_core::Type_anylist vx_anylist_from_arraystring(long ilen, char* arraystring[], bool isskipfirst);
@@ -177,12 +186,6 @@ let-async
 
   // vx_int_from_string(string)
   int vx_int_from_string(std::string text);
-
-  // vx_int_from_string_find(string, string)
-  int vx_int_from_string_find(std::string text, std::string find);
-
-  // vx_int_from_string_findlast(string, string)
-  int vx_int_from_string_findlast(std::string text, std::string find);
 
   // vx_is_float(string)
   bool vx_is_float(std::string value);
@@ -264,6 +267,9 @@ let-async
 
   // vx_msgblock_from_copy_listval(msgblock, List<any>)
   vx_core::Type_msgblock vx_msgblock_from_copy_listval(vx_core::Type_msgblock msgblock, vx_core::vx_Type_listany vals);
+
+  // vx_new_anylist(any...)
+  vx_core::Type_anylist vx_new_anylist(vx_core::vx_Type_listany listany);
 
   // vx_new_arg(string, type)
   vx_core::Type_arg vx_new_arg(std::string name, vx_core::Type_any type);
@@ -388,6 +394,9 @@ let-async
   // vx_string_from_string_find_replace(string, string, string)
   std::string vx_string_from_string_find_replace(std::string text, std::string find, std::string replace);
 
+  // vx_string_from_string_find_replace(string, string, string)
+  vx_core::Type_string vx_string_from_string_find_replace(vx_core::Type_string text, vx_core::Type_string find, vx_core::Type_string replace);
+
   // vx_string_from_string_find_replacefirst(string, string, string)
   std::string vx_string_from_string_find_replacefirst(std::string text, std::string find, std::string replacefirst);
 
@@ -409,6 +418,21 @@ let-async
   // vx_any_from_any(T, val)
   template <class T> static T* vx_any_from_any(T* generic_any_1, vx_core::Type_any val) {
     T* output = dynamic_cast<T*>(val);
+    return output;
+  }
+
+  // vx_empty(T)
+  template <class T> static T* vx_empty(T* generic_any_1) {
+    T* output;
+    vx_core::Type_any val = generic_any_1->vx_empty();
+    output = vx_core::vx_any_from_any(generic_any_1, val);
+    return output;
+  }
+
+  // vx_any_from_func(generic_any_1, func, args...)
+  template <class T> static T* vx_any_from_func(T* generic_any_1, vx_core::Type_replfunc func, vx_core::vx_Type_listany args) {
+    vx_core::Type_any val = vx_core::vx_any_from_func_1(generic_any_1, func, args);
+    T* output = vx_core::vx_any_from_any(generic_any_1, val);
     return output;
   }
 
@@ -439,14 +463,6 @@ let-async
   template <class T, class U> static T* vx_copy(T* generic_any_1, U* copyval, vx_core::vx_Type_listany vals) {
     T* output;
     vx_core::Type_any val = copyval->vx_copy(copyval, vals);
-    output = vx_core::vx_any_from_any(generic_any_1, val);
-    return output;
-  }
-
-  // vx_empty(T)
-  template <class T> static T* vx_empty(T* generic_any_1) {
-    T* output;
-    vx_core::Type_any val = generic_any_1->vx_empty();
     output = vx_core::vx_any_from_any(generic_any_1, val);
     return output;
   }
@@ -520,18 +536,6 @@ let-async
     output = vx_core::vx_any_from_any(generic_any_1, val);
     return output;
   }
-
-  class Abstract_replfunc {
-  public:
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist);
-  };
-  typedef Abstract_replfunc* Type_replfunc;
-  
-  class Abstract_replfunc_async {
-  public:
-    virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist);
-  };
-  typedef Abstract_replfunc_async* Type_replfunc_async;
 
 // :body
 
@@ -613,6 +617,13 @@ let-async
     }
   // }
 
+  // vx_any_from_func_1(generic_any_1, func, args...)
+  vx_core::Type_any vx_any_from_func_1(vx_core::Type_any generic_any_1, vx_core::Type_replfunc func, vx_core::vx_Type_listany args) {
+    vx_core::Type_anylist anylist = vx_core::vx_new_anylist(args);
+    vx_core::Type_any output = func->vx_repl(anylist);
+    return output;
+  }
+
   // vx_any_from_list_result_next(generic_any_1, list, any<-reduce-next)
   vx_core::Type_any vx_any_from_list_result_next(vx_core::Type_any generic_any_1, vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce_next fn_reduce_next) {
     vx_core::Type_any output = valstart;
@@ -626,6 +637,17 @@ let-async
         output = fn_reduce_next->vx_any_from_reduce_next(output, current, next);
       }
       current = next;
+    }
+    return output;
+  }
+
+  // vx_any_from_map_start_reduce(generic_any_1, map, any<-any-key-value)
+  vx_core::Type_any vx_any_from_map_start_reduce(vx_core::Type_any generic_any_1, vx_core::Type_map map, vx_core::Type_any start, vx_core::Func_any_from_any_key_value fn_reduce) {
+    vx_core::Type_any output = start;
+    std::map<std::string, vx_core::Type_any> mapval = map->vx_map();
+    for (auto const& [skey, value] : mapval) {
+      vx_core::Type_string key = vx_core::vx_new_string(skey);
+      output = fn_reduce->vx_any_from_any_key_value(output, key, value);
     }
     return output;
   }
@@ -933,20 +955,6 @@ let-async
   // vx_int_from_string(string)
   int vx_int_from_string(std::string text) {
     int output = std::stoi(text);
-    return output;
-  }
-
-  // vx_int_from_string_find(string, string)
-  int vx_int_from_string_find(std::string text, std::string find) {
-    size_t pos = text.find(find);
-    int output = vx_core::vx_int_from_sizet(pos);
-    return output;
-  }
-
-  // vx_int_from_string_findlast(string, string)
-  int vx_int_from_string_findlast(std::string text, std::string find) {
-    size_t pos = text.rfind(find);
-    int output = vx_core::vx_int_from_sizet(pos);
     return output;
   }
 
@@ -1302,6 +1310,11 @@ let-async
       output = msgblock;
     }
     return output;
+  }
+
+  // vx_new_anylist(any...)
+  vx_core::Type_anylist vx_new_anylist(vx_core::vx_Type_listany listany) {
+    return vx_core::vx_new(vx_core::t_anylist, listany);
   }
 
   // vx_new_arg(string, type, bool, bool)
@@ -1891,6 +1904,13 @@ let-async
     return output;
   }
 
+  // vx_string_from_string_find_replace(string, string, string)
+  vx_core::Type_string vx_string_from_string_find_replace(vx_core::Type_string text, vx_core::Type_string find, vx_core::Type_string replace) {
+    std::string stext = vx_core::vx_string_from_string_find_replace(text->vx_string(), find->vx_string(), replace->vx_string());
+    vx_core::Type_string output = vx_core::vx_new_string(stext);
+    return output;
+  }
+
   // vx_string_from_string_find_replacefirst(string, string, string)
   std::string vx_string_from_string_find_replacefirst(std::string text, std::string find, std::string replacefirst) {
     std::string output = text;
@@ -1988,14 +2008,20 @@ let-async
 
   //class Class_boolean {
 
-    bool Class_boolean::vx_boolean() const {return this->vx_p_boolean;}
+    bool Class_boolean::vx_boolean() const {
+      return this->vx_p_boolean;
+    }
 
   //}
 
   //class Class_decimal {
-    float Class_decimal::vx_float() const {return vx_core::vx_float_from_string(vx_p_decimal);}
+    float Class_decimal::vx_float() const {
+      return vx_core::vx_float_from_string(vx_p_decimal);
+    }
 
-    std::string Class_decimal::vx_string() const {return vx_p_decimal;}
+    std::string Class_decimal::vx_string() const {
+      return vx_p_decimal;
+    }
   //}
 
   //class Class_float {

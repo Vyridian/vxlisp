@@ -525,9 +525,9 @@
                  (vx/web/html/p
                   :text "vx/core")
                  (vx/web/html/p
-                  :text "31% 71/222")
+                  :text "32% 72/222")
                  (vx/web/html/p
-                  :text "5% 4/73")
+                  :text "6% 5/73")
                  (vx/web/html/p
                   :text "14% 2/14")
                  (vx/web/html/p
@@ -688,6 +688,39 @@
                               (vx/web/html/divchildlist
                                (vx/web/html/p
                                 :text "4.5")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "func")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ 5
+ (let
+  [funcvar : + := +]
+  (funcvar 2 3)))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "5")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "5")))))
                          (vx/web/html/tr
                           :nodes
                            (vx/web/html/tdlist
@@ -2809,7 +2842,8 @@
  (stringmap
   :a \"1\"
   :b \"2\")
- (copy (stringmap :a \"1\")
+ (copy
+  (stringmap :a \"1\")
   :b \"2\"))")))
                             (vx/web/html/td
                              :nodes
@@ -15691,19 +15725,19 @@
                  (vx/web/html/p
                   :text "vx/data/xml")
                  (vx/web/html/p
-                  :text "50% 10/20")
+                  :text "47% 10/21")
                  (vx/web/html/p
                   :text "0% 0/3")
                  (vx/web/html/p
                   :text "0% 0/4")
                  (vx/web/html/p
-                  :text "76% 10/13")
+                  :text "71% 10/14")
                  (vx/web/html/p
-                  :text "65% 13/20")
+                  :text "66% 14/21")
                  (vx/web/html/p
-                  :text "0% 0/13")
+                  :text "0% 0/14")
                  (vx/web/html/p
-                  :text "0% 0/13"))
+                  :text "0% 0/14"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div

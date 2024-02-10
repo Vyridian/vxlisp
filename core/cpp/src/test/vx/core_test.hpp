@@ -8,6 +8,7 @@ namespace vx_core_test {
 
   vx_test::Type_testcase t_boolean(vx_core::Type_context context);
   vx_test::Type_testcase t_float(vx_core::Type_context context);
+  vx_test::Type_testcase t_func(vx_core::Type_context context);
   vx_test::Type_testcase t_int(vx_core::Type_context context);
   vx_test::Type_testcase t_string(vx_core::Type_context context);
   vx_test::Type_testcase c_false(vx_core::Type_context context);
