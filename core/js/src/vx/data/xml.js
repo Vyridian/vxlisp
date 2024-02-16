@@ -13,16 +13,19 @@ export default class vx_data_xml {
    * type: xml
    */
   static t_xml = {}
+  static e_xml = {vx_type: vx_data_xml.t_xml}
 
   /**
    * type: xmllist
    */
   static t_xmllist = {}
+  static e_xmllist = vx_core.vx_new_list(vx_data_xml.t_xmllist, [])
 
   /**
    * type: xmlpropmap
    */
   static t_xmlpropmap = {}
+  static e_xmlpropmap = {vx_type: vx_data_xml.t_xmlpropmap}
   /**
    * Constant: delimxml
    * {delim}
@@ -53,8 +56,12 @@ export default class vx_data_xml {
    * @param  {string} text
    * @return {string}
    */
-  static t_string_decodexml_from_string = {}
-  static e_string_decodexml_from_string = {vx_type: vx_data_xml.t_string_decodexml_from_string}
+  static t_string_decodexml_from_string = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_decodexml_from_string = {
+    vx_type: vx_data_xml.t_string_decodexml_from_string
+  }
 
   // (func string-decodexml<-string)
   static f_string_decodexml_from_string(text) {
@@ -83,8 +90,12 @@ export default class vx_data_xml {
    * @param  {xml} xml
    * @return {string}
    */
-  static t_string_first_from_xml = {}
-  static e_string_first_from_xml = {vx_type: vx_data_xml.t_string_first_from_xml}
+  static t_string_first_from_xml = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_first_from_xml = {
+    vx_type: vx_data_xml.t_string_first_from_xml
+  }
 
   // (func string-first<-xml)
   static f_string_first_from_xml(xml) {
@@ -111,8 +122,12 @@ export default class vx_data_xml {
    * @param  {string} text
    * @return {textblock}
    */
-  static t_textblock_xml_from_string = {}
-  static e_textblock_xml_from_string = {vx_type: vx_data_xml.t_textblock_xml_from_string}
+  static t_textblock_xml_from_string = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_xml_from_string = {
+    vx_type: vx_data_xml.t_textblock_xml_from_string
+  }
 
   // (func textblock-xml<-string)
   static f_textblock_xml_from_string(text) {
@@ -131,8 +146,12 @@ export default class vx_data_xml {
    * @param  {textblock} tb
    * @return {xml}
    */
-  static t_xml_angle_from_xml_textblock = {}
-  static e_xml_angle_from_xml_textblock = {vx_type: vx_data_xml.t_xml_angle_from_xml_textblock}
+  static t_xml_angle_from_xml_textblock = {
+    vx_type: vx_core.t_type
+  }
+  static e_xml_angle_from_xml_textblock = {
+    vx_type: vx_data_xml.t_xml_angle_from_xml_textblock
+  }
 
   // (func xml-angle<-xml-textblock)
   static f_xml_angle_from_xml_textblock(xmlarg, tb) {
@@ -179,8 +198,12 @@ export default class vx_data_xml {
    * @param  {textblock} tb
    * @return {xml}
    */
-  static t_xml_close_from_xml_textblock = {}
-  static e_xml_close_from_xml_textblock = {vx_type: vx_data_xml.t_xml_close_from_xml_textblock}
+  static t_xml_close_from_xml_textblock = {
+    vx_type: vx_core.t_type
+  }
+  static e_xml_close_from_xml_textblock = {
+    vx_type: vx_data_xml.t_xml_close_from_xml_textblock
+  }
 
   // (func xml-close<-xml-textblock)
   static f_xml_close_from_xml_textblock(xmlarg, tb) {
@@ -264,8 +287,12 @@ export default class vx_data_xml {
    * @param  {textblock} tb
    * @return {xml}
    */
-  static t_xml_parse_from_xml_textblock = {}
-  static e_xml_parse_from_xml_textblock = {vx_type: vx_data_xml.t_xml_parse_from_xml_textblock}
+  static t_xml_parse_from_xml_textblock = {
+    vx_type: vx_core.t_type
+  }
+  static e_xml_parse_from_xml_textblock = {
+    vx_type: vx_data_xml.t_xml_parse_from_xml_textblock
+  }
 
   // (func xml-parse<-xml-textblock)
   static f_xml_parse_from_xml_textblock(xmlarg, tb) {
@@ -329,8 +356,12 @@ export default class vx_data_xml {
    * @param  {textblocklist} textblocklist
    * @return {xml}
    */
-  static t_xml_parse_from_xml_textblocklist = {}
-  static e_xml_parse_from_xml_textblocklist = {vx_type: vx_data_xml.t_xml_parse_from_xml_textblocklist}
+  static t_xml_parse_from_xml_textblocklist = {
+    vx_type: vx_core.t_type
+  }
+  static e_xml_parse_from_xml_textblocklist = {
+    vx_type: vx_data_xml.t_xml_parse_from_xml_textblocklist
+  }
 
   // (func xml-parse<-xml-textblocklist)
   static f_xml_parse_from_xml_textblocklist(xmlarg, textblocklist) {
@@ -351,8 +382,12 @@ export default class vx_data_xml {
    * @param  {textblocklist} textblocklist
    * @return {xml}
    */
-  static t_xml_properties_from_xml_textblocklist = {}
-  static e_xml_properties_from_xml_textblocklist = {vx_type: vx_data_xml.t_xml_properties_from_xml_textblocklist}
+  static t_xml_properties_from_xml_textblocklist = {
+    vx_type: vx_core.t_type
+  }
+  static e_xml_properties_from_xml_textblocklist = {
+    vx_type: vx_data_xml.t_xml_properties_from_xml_textblocklist
+  }
 
   // (func xml-properties<-xml-textblocklist)
   static f_xml_properties_from_xml_textblocklist(xmlarg, textblocklist) {
@@ -381,8 +416,12 @@ export default class vx_data_xml {
    * @param  {textblock} tbarg
    * @return {xml}
    */
-  static t_xml_property_from_xml_textblock = {}
-  static e_xml_property_from_xml_textblock = {vx_type: vx_data_xml.t_xml_property_from_xml_textblock}
+  static t_xml_property_from_xml_textblock = {
+    vx_type: vx_core.t_type
+  }
+  static e_xml_property_from_xml_textblock = {
+    vx_type: vx_data_xml.t_xml_property_from_xml_textblock
+  }
 
   // (func xml-property<-xml-textblock)
   static f_xml_property_from_xml_textblock(xmlarg, tbarg) {
@@ -461,8 +500,12 @@ export default class vx_data_xml {
    * @param  {file} file
    * @return {xml}
    */
-  static t_xml_read_from_file = {}
-  static e_xml_read_from_file = {vx_type: vx_data_xml.t_xml_read_from_file}
+  static t_xml_read_from_file = {
+    vx_type: vx_core.t_type
+  }
+  static e_xml_read_from_file = {
+    vx_type: vx_data_xml.t_xml_read_from_file
+  }
 
   // (func xml-read<-file)
   static f_xml_read_from_file(context, file) {
@@ -485,8 +528,12 @@ export default class vx_data_xml {
    * @param  {textblock} tb
    * @return {xml}
    */
-  static t_xml_text_from_xml_textblock = {}
-  static e_xml_text_from_xml_textblock = {vx_type: vx_data_xml.t_xml_text_from_xml_textblock}
+  static t_xml_text_from_xml_textblock = {
+    vx_type: vx_core.t_type
+  }
+  static e_xml_text_from_xml_textblock = {
+    vx_type: vx_data_xml.t_xml_text_from_xml_textblock
+  }
 
   // (func xml-text<-xml-textblock)
   static f_xml_text_from_xml_textblock(xmlarg, tb) {
@@ -530,8 +577,12 @@ export default class vx_data_xml {
    * @param  {file} file
    * @return {xml}
    */
-  static t_xml_from_file = {}
-  static e_xml_from_file = {vx_type: vx_data_xml.t_xml_from_file}
+  static t_xml_from_file = {
+    vx_type: vx_core.t_type
+  }
+  static e_xml_from_file = {
+    vx_type: vx_data_xml.t_xml_from_file
+  }
 
   // (func xml<-file)
   static f_xml_from_file(file) {
@@ -553,8 +604,12 @@ export default class vx_data_xml {
    * @param  {string} text
    * @return {xml}
    */
-  static t_xml_from_string = {}
-  static e_xml_from_string = {vx_type: vx_data_xml.t_xml_from_string}
+  static t_xml_from_string = {
+    vx_type: vx_core.t_type
+  }
+  static e_xml_from_string = {
+    vx_type: vx_data_xml.t_xml_from_string
+  }
 
   // (func xml<-string)
   static f_xml_from_string(text) {
@@ -576,8 +631,12 @@ export default class vx_data_xml {
    * @param  {textblock} textblock
    * @return {xml}
    */
-  static t_xml_from_textblock = {}
-  static e_xml_from_textblock = {vx_type: vx_data_xml.t_xml_from_textblock}
+  static t_xml_from_textblock = {
+    vx_type: vx_core.t_type
+  }
+  static e_xml_from_textblock = {
+    vx_type: vx_data_xml.t_xml_from_textblock
+  }
 
   // (func xml<-textblock)
   static f_xml_from_textblock(textblock) {
@@ -591,10 +650,6 @@ export default class vx_data_xml {
     return output
   }
 
-  // empty types
-  static e_xml = {}
-  static e_xmllist = []
-  static e_xmlpropmap = {}
 
 
   static {
@@ -744,6 +799,258 @@ export default class vx_data_xml {
     vx_data_xml.e_xmlpropmap['vx_type'] = vx_data_xml.t_xmlpropmap
     vx_data_xml.e_xmlpropmap['vx_value'] = {}
 
+    // (func string-decodexml<-string)
+    vx_data_xml.t_string_decodexml_from_string['vx_value'] = {
+      name          : "string-decodexml<-string",
+      pkgname       : "vx/data/xml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_xml.f_string_decodexml_from_string
+    }
+
+    // (func string-first<-xml)
+    vx_data_xml.t_string_first_from_xml['vx_value'] = {
+      name          : "string-first<-xml",
+      pkgname       : "vx/data/xml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_xml.f_string_first_from_xml
+    }
+
+    // (func textblock-xml<-string)
+    vx_data_xml.t_textblock_xml_from_string['vx_value'] = {
+      name          : "textblock-xml<-string",
+      pkgname       : "vx/data/xml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_xml.f_textblock_xml_from_string
+    }
+
+    // (func xml-angle<-xml-textblock)
+    vx_data_xml.t_xml_angle_from_xml_textblock['vx_value'] = {
+      name          : "xml-angle<-xml-textblock",
+      pkgname       : "vx/data/xml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_xml.f_xml_angle_from_xml_textblock
+    }
+
+    // (func xml-close<-xml-textblock)
+    vx_data_xml.t_xml_close_from_xml_textblock['vx_value'] = {
+      name          : "xml-close<-xml-textblock",
+      pkgname       : "vx/data/xml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_xml.f_xml_close_from_xml_textblock
+    }
+
+    // (func xml-parse<-xml-textblock)
+    vx_data_xml.t_xml_parse_from_xml_textblock['vx_value'] = {
+      name          : "xml-parse<-xml-textblock",
+      pkgname       : "vx/data/xml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_xml.f_xml_parse_from_xml_textblock
+    }
+
+    // (func xml-parse<-xml-textblocklist)
+    vx_data_xml.t_xml_parse_from_xml_textblocklist['vx_value'] = {
+      name          : "xml-parse<-xml-textblocklist",
+      pkgname       : "vx/data/xml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_xml.f_xml_parse_from_xml_textblocklist
+    }
+
+    // (func xml-properties<-xml-textblocklist)
+    vx_data_xml.t_xml_properties_from_xml_textblocklist['vx_value'] = {
+      name          : "xml-properties<-xml-textblocklist",
+      pkgname       : "vx/data/xml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_xml.f_xml_properties_from_xml_textblocklist
+    }
+
+    // (func xml-property<-xml-textblock)
+    vx_data_xml.t_xml_property_from_xml_textblock['vx_value'] = {
+      name          : "xml-property<-xml-textblock",
+      pkgname       : "vx/data/xml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_xml.f_xml_property_from_xml_textblock
+    }
+
+    // (func xml-read<-file)
+    vx_data_xml.t_xml_read_from_file['vx_value'] = {
+      name          : "xml-read<-file",
+      pkgname       : "vx/data/xml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_xml.f_xml_read_from_file
+    }
+
+    // (func xml-text<-xml-textblock)
+    vx_data_xml.t_xml_text_from_xml_textblock['vx_value'] = {
+      name          : "xml-text<-xml-textblock",
+      pkgname       : "vx/data/xml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_xml.f_xml_text_from_xml_textblock
+    }
+
+    // (func xml<-file)
+    vx_data_xml.t_xml_from_file['vx_value'] = {
+      name          : "xml<-file",
+      pkgname       : "vx/data/xml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_xml.f_xml_from_file
+    }
+
+    // (func xml<-string)
+    vx_data_xml.t_xml_from_string['vx_value'] = {
+      name          : "xml<-string",
+      pkgname       : "vx/data/xml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_xml.f_xml_from_string
+    }
+
+    // (func xml<-textblock)
+    vx_data_xml.t_xml_from_textblock['vx_value'] = {
+      name          : "xml<-textblock",
+      pkgname       : "vx/data/xml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_xml.f_xml_from_textblock
+    }
+
     // (const delimxml)
     Object.assign(vx_data_xml.c_delimxml, vx_core.f_new(
       vx_data_textblock.t_delim,
@@ -795,272 +1102,6 @@ export default class vx_data_xml {
       ":starttext",
       "="
     ))
-
-    // (func string-decodexml<-string)
-    vx_data_xml.t_string_decodexml_from_string['vx_type'] = vx_core.t_type
-    vx_data_xml.t_string_decodexml_from_string['vx_value'] = {
-      name          : "string-decodexml<-string",
-      pkgname       : "vx/data/xml",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_xml.f_string_decodexml_from_string
-    }
-
-    // (func string-first<-xml)
-    vx_data_xml.t_string_first_from_xml['vx_type'] = vx_core.t_type
-    vx_data_xml.t_string_first_from_xml['vx_value'] = {
-      name          : "string-first<-xml",
-      pkgname       : "vx/data/xml",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_xml.f_string_first_from_xml
-    }
-
-    // (func textblock-xml<-string)
-    vx_data_xml.t_textblock_xml_from_string['vx_type'] = vx_core.t_type
-    vx_data_xml.t_textblock_xml_from_string['vx_value'] = {
-      name          : "textblock-xml<-string",
-      pkgname       : "vx/data/xml",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_xml.f_textblock_xml_from_string
-    }
-
-    // (func xml-angle<-xml-textblock)
-    vx_data_xml.t_xml_angle_from_xml_textblock['vx_type'] = vx_core.t_type
-    vx_data_xml.t_xml_angle_from_xml_textblock['vx_value'] = {
-      name          : "xml-angle<-xml-textblock",
-      pkgname       : "vx/data/xml",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_xml.f_xml_angle_from_xml_textblock
-    }
-
-    // (func xml-close<-xml-textblock)
-    vx_data_xml.t_xml_close_from_xml_textblock['vx_type'] = vx_core.t_type
-    vx_data_xml.t_xml_close_from_xml_textblock['vx_value'] = {
-      name          : "xml-close<-xml-textblock",
-      pkgname       : "vx/data/xml",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_xml.f_xml_close_from_xml_textblock
-    }
-
-    // (func xml-parse<-xml-textblock)
-    vx_data_xml.t_xml_parse_from_xml_textblock['vx_type'] = vx_core.t_type
-    vx_data_xml.t_xml_parse_from_xml_textblock['vx_value'] = {
-      name          : "xml-parse<-xml-textblock",
-      pkgname       : "vx/data/xml",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_xml.f_xml_parse_from_xml_textblock
-    }
-
-    // (func xml-parse<-xml-textblocklist)
-    vx_data_xml.t_xml_parse_from_xml_textblocklist['vx_type'] = vx_core.t_type
-    vx_data_xml.t_xml_parse_from_xml_textblocklist['vx_value'] = {
-      name          : "xml-parse<-xml-textblocklist",
-      pkgname       : "vx/data/xml",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_xml.f_xml_parse_from_xml_textblocklist
-    }
-
-    // (func xml-properties<-xml-textblocklist)
-    vx_data_xml.t_xml_properties_from_xml_textblocklist['vx_type'] = vx_core.t_type
-    vx_data_xml.t_xml_properties_from_xml_textblocklist['vx_value'] = {
-      name          : "xml-properties<-xml-textblocklist",
-      pkgname       : "vx/data/xml",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_xml.f_xml_properties_from_xml_textblocklist
-    }
-
-    // (func xml-property<-xml-textblock)
-    vx_data_xml.t_xml_property_from_xml_textblock['vx_type'] = vx_core.t_type
-    vx_data_xml.t_xml_property_from_xml_textblock['vx_value'] = {
-      name          : "xml-property<-xml-textblock",
-      pkgname       : "vx/data/xml",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_xml.f_xml_property_from_xml_textblock
-    }
-
-    // (func xml-read<-file)
-    vx_data_xml.t_xml_read_from_file['vx_type'] = vx_core.t_type
-    vx_data_xml.t_xml_read_from_file['vx_value'] = {
-      name          : "xml-read<-file",
-      pkgname       : "vx/data/xml",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_xml.f_xml_read_from_file
-    }
-
-    // (func xml-text<-xml-textblock)
-    vx_data_xml.t_xml_text_from_xml_textblock['vx_type'] = vx_core.t_type
-    vx_data_xml.t_xml_text_from_xml_textblock['vx_value'] = {
-      name          : "xml-text<-xml-textblock",
-      pkgname       : "vx/data/xml",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_xml.f_xml_text_from_xml_textblock
-    }
-
-    // (func xml<-file)
-    vx_data_xml.t_xml_from_file['vx_type'] = vx_core.t_type
-    vx_data_xml.t_xml_from_file['vx_value'] = {
-      name          : "xml<-file",
-      pkgname       : "vx/data/xml",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_xml.f_xml_from_file
-    }
-
-    // (func xml<-string)
-    vx_data_xml.t_xml_from_string['vx_type'] = vx_core.t_type
-    vx_data_xml.t_xml_from_string['vx_value'] = {
-      name          : "xml<-string",
-      pkgname       : "vx/data/xml",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_xml.f_xml_from_string
-    }
-
-    // (func xml<-textblock)
-    vx_data_xml.t_xml_from_textblock['vx_type'] = vx_core.t_type
-    vx_data_xml.t_xml_from_textblock['vx_value'] = {
-      name          : "xml<-textblock",
-      pkgname       : "vx/data/xml",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_xml.f_xml_from_textblock
-    }
 
   }
 }

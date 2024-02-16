@@ -11,85 +11,84 @@ export default class vx_data_db {
    * Database trait
    */
   static t_db = {}
+  static e_db = {vx_type: vx_data_db.t_db}
 
   /**
    * type: dbcell
    * Database Cell trait
    */
   static t_dbcell = {}
+  static e_dbcell = {vx_type: vx_data_db.t_dbcell}
 
   /**
    * type: dbcellmap
    * Database Cell Map
    */
   static t_dbcellmap = {}
+  static e_dbcellmap = {vx_type: vx_data_db.t_dbcellmap}
 
   /**
    * type: dbfield
    * Database Field trait
    */
   static t_dbfield = {}
+  static e_dbfield = {vx_type: vx_data_db.t_dbfield}
 
   /**
    * type: dbfieldmap
    * Database Field Map
    */
   static t_dbfieldmap = {}
+  static e_dbfieldmap = {vx_type: vx_data_db.t_dbfieldmap}
 
   /**
    * type: dbid
    * Database id
    */
   static t_dbid = {}
+  static e_dbid = {vx_type: vx_data_db.t_dbid}
 
   /**
    * type: dblink
    * Database link
    */
   static t_dblink = {}
+  static e_dblink = {vx_type: vx_data_db.t_dblink}
 
   /**
    * type: dblinklist
    * Database link
    */
   static t_dblinklist = {}
+  static e_dblinklist = vx_core.vx_new_list(vx_data_db.t_dblinklist, [])
 
   /**
    * type: dbnode
    * Database node
    */
   static t_dbnode = {}
+  static e_dbnode = {vx_type: vx_data_db.t_dbnode}
 
   /**
    * type: dbnote
    * Database Value
    */
   static t_dbnote = {}
+  static e_dbnote = {vx_type: vx_data_db.t_dbnote}
 
   /**
    * type: dbtable
    * Database Table trait
    */
   static t_dbtable = {}
+  static e_dbtable = {vx_type: vx_data_db.t_dbtable}
 
   /**
    * type: dbvalue
    * Database Value
    */
   static t_dbvalue = {}
-  // empty types
-  static e_db = {}
-  static e_dbcell = {}
-  static e_dbcellmap = {}
-  static e_dbfield = {}
-  static e_dbfieldmap = {}
-  static e_dbid = {}
-  static e_dblink = {}
-  static e_dblinklist = []
-  static e_dbnode = {}
-  static e_dbnote = {}
-  static e_dbtable = {}
-  static e_dbvalue = {}
+  static e_dbvalue = {vx_type: vx_data_db.t_dbvalue}
 
 
   static {

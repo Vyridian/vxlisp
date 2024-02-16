@@ -14,8 +14,12 @@ export default class vx_translate {
    * @param  {string} name
    * @return {session}
    */
-  static t_session_from_session_name = {}
-  static e_session_from_session_name = {vx_type: vx_translate.t_session_from_session_name}
+  static t_session_from_session_name = {
+    vx_type: vx_core.t_type
+  }
+  static e_session_from_session_name = {
+    vx_type: vx_translate.t_session_from_session_name
+  }
 
   // (func session<-session-name)
   static f_session_from_session_name(session, name) {
@@ -35,8 +39,12 @@ export default class vx_translate {
    * @param  {translation} translation
    * @return {session}
    */
-  static t_session_from_session_translation = {}
-  static e_session_from_session_translation = {vx_type: vx_translate.t_session_from_session_translation}
+  static t_session_from_session_translation = {
+    vx_type: vx_core.t_type
+  }
+  static e_session_from_session_translation = {
+    vx_type: vx_translate.t_session_from_session_translation
+  }
 
   // (func session<-session-translation)
   static f_session_from_session_translation(session, translation) {
@@ -53,8 +61,12 @@ export default class vx_translate {
    * @param  {string} name
    * @return {session}
    */
-  static t_session_from_session_translationmap_name = {}
-  static e_session_from_session_translationmap_name = {vx_type: vx_translate.t_session_from_session_translationmap_name}
+  static t_session_from_session_translationmap_name = {
+    vx_type: vx_core.t_type
+  }
+  static e_session_from_session_translationmap_name = {
+    vx_type: vx_translate.t_session_from_session_translationmap_name
+  }
 
   // (func session<-session-translationmap-name)
   static f_session_from_session_translationmap_name(session, translationmap, name) {
@@ -75,8 +87,12 @@ export default class vx_translate {
    * @param  {string} text
    * @return {string}
    */
-  static t_translate = {}
-  static e_translate = {vx_type: vx_translate.t_translate}
+  static t_translate = {
+    vx_type: vx_core.t_type
+  }
+  static e_translate = {
+    vx_type: vx_translate.t_translate
+  }
 
   // (func translate)
   static f_translate(context, text) {
@@ -94,8 +110,12 @@ export default class vx_translate {
    * @param  {msg} msg
    * @return {string}
    */
-  static t_translate_1 = {}
-  static e_translate_1 = {vx_type: vx_translate.t_translate_1}
+  static t_translate_1 = {
+    vx_type: vx_core.t_type
+  }
+  static e_translate_1 = {
+    vx_type: vx_translate.t_translate_1
+  }
 
   // (func translate)
   static f_translate_1(context, msg) {
@@ -126,8 +146,12 @@ export default class vx_translate {
    * @param  {string} text
    * @return {string}
    */
-  static t_translate_from_translation_string = {}
-  static e_translate_from_translation_string = {vx_type: vx_translate.t_translate_from_translation_string}
+  static t_translate_from_translation_string = {
+    vx_type: vx_core.t_type
+  }
+  static e_translate_from_translation_string = {
+    vx_type: vx_translate.t_translate_from_translation_string
+  }
 
   // (func translate<-translation-string)
   static f_translate_from_translation_string(translation, text) {
@@ -162,8 +186,12 @@ export default class vx_translate {
    * @param  {string} text
    * @return {string}
    */
-  static t_translate_from_translationmap_name_string = {}
-  static e_translate_from_translationmap_name_string = {vx_type: vx_translate.t_translate_from_translationmap_name_string}
+  static t_translate_from_translationmap_name_string = {
+    vx_type: vx_core.t_type
+  }
+  static e_translate_from_translationmap_name_string = {
+    vx_type: vx_translate.t_translate_from_translationmap_name_string
+  }
 
   // (func translate<-translationmap-name-string)
   static f_translate_from_translationmap_name_string(translationmap, name, text) {
@@ -185,8 +213,12 @@ export default class vx_translate {
    * @param  {translation} translation
    * @return {translation}
    */
-  static t_translation_load_session = {}
-  static e_translation_load_session = {vx_type: vx_translate.t_translation_load_session}
+  static t_translation_load_session = {
+    vx_type: vx_core.t_type
+  }
+  static e_translation_load_session = {
+    vx_type: vx_translate.t_translation_load_session
+  }
 
   // (func translation-load-session)
   static f_translation_load_session(context, translation) {
@@ -199,8 +231,12 @@ export default class vx_translate {
    * Returns a translated string from current context.
    * @return {translation}
    */
-  static t_translation_from_context = {}
-  static e_translation_from_context = {vx_type: vx_translate.t_translation_from_context}
+  static t_translation_from_context = {
+    vx_type: vx_core.t_type
+  }
+  static e_translation_from_context = {
+    vx_type: vx_translate.t_translation_from_context
+  }
 
   // (func translation<-context)
   static f_translation_from_context(context) {
@@ -220,8 +256,12 @@ export default class vx_translate {
    * @param  {string} name
    * @return {translation}
    */
-  static t_translation_from_session_name = {}
-  static e_translation_from_session_name = {vx_type: vx_translate.t_translation_from_session_name}
+  static t_translation_from_session_name = {
+    vx_type: vx_core.t_type
+  }
+  static e_translation_from_session_name = {
+    vx_type: vx_translate.t_translation_from_session_name
+  }
 
   // (func translation<-session-name)
   static f_translation_from_session_name(session, name) {
@@ -243,8 +283,12 @@ export default class vx_translate {
    * @param  {translationlist} ... translations
    * @return {translationmap}
    */
-  static t_translationmap_from_translations = {}
-  static e_translationmap_from_translations = {vx_type: vx_translate.t_translationmap_from_translations}
+  static t_translationmap_from_translations = {
+    vx_type: vx_core.t_type
+  }
+  static e_translationmap_from_translations = {
+    vx_type: vx_translate.t_translationmap_from_translations
+  }
 
   // (func translationmap<-translations)
   static f_translationmap_from_translations(...translations) {
@@ -259,7 +303,6 @@ export default class vx_translate {
     return output
   }
 
-  // empty types
 
 
   static {
@@ -305,7 +348,6 @@ export default class vx_translate {
     vx_core.vx_global_package_set(pkg)
 
     // (func session<-session-name)
-    vx_translate.t_session_from_session_name['vx_type'] = vx_core.t_type
     vx_translate.t_session_from_session_name['vx_value'] = {
       name          : "session<-session-name",
       pkgname       : "vx/translate",
@@ -324,7 +366,6 @@ export default class vx_translate {
     }
 
     // (func session<-session-translation)
-    vx_translate.t_session_from_session_translation['vx_type'] = vx_core.t_type
     vx_translate.t_session_from_session_translation['vx_value'] = {
       name          : "session<-session-translation",
       pkgname       : "vx/translate",
@@ -343,7 +384,6 @@ export default class vx_translate {
     }
 
     // (func session<-session-translationmap-name)
-    vx_translate.t_session_from_session_translationmap_name['vx_type'] = vx_core.t_type
     vx_translate.t_session_from_session_translationmap_name['vx_value'] = {
       name          : "session<-session-translationmap-name",
       pkgname       : "vx/translate",
@@ -362,7 +402,6 @@ export default class vx_translate {
     }
 
     // (func translate)
-    vx_translate.t_translate['vx_type'] = vx_core.t_type
     vx_translate.t_translate['vx_value'] = {
       name          : "translate",
       pkgname       : "vx/translate",
@@ -381,7 +420,6 @@ export default class vx_translate {
     }
 
     // (func translate)
-    vx_translate.t_translate_1['vx_type'] = vx_core.t_type
     vx_translate.t_translate_1['vx_value'] = {
       name          : "translate",
       pkgname       : "vx/translate",
@@ -400,7 +438,6 @@ export default class vx_translate {
     }
 
     // (func translate<-translation-string)
-    vx_translate.t_translate_from_translation_string['vx_type'] = vx_core.t_type
     vx_translate.t_translate_from_translation_string['vx_value'] = {
       name          : "translate<-translation-string",
       pkgname       : "vx/translate",
@@ -419,7 +456,6 @@ export default class vx_translate {
     }
 
     // (func translate<-translationmap-name-string)
-    vx_translate.t_translate_from_translationmap_name_string['vx_type'] = vx_core.t_type
     vx_translate.t_translate_from_translationmap_name_string['vx_value'] = {
       name          : "translate<-translationmap-name-string",
       pkgname       : "vx/translate",
@@ -438,7 +474,6 @@ export default class vx_translate {
     }
 
     // (func translation-load-session)
-    vx_translate.t_translation_load_session['vx_type'] = vx_core.t_type
     vx_translate.t_translation_load_session['vx_value'] = {
       name          : "translation-load-session",
       pkgname       : "vx/translate",
@@ -457,7 +492,6 @@ export default class vx_translate {
     }
 
     // (func translation<-context)
-    vx_translate.t_translation_from_context['vx_type'] = vx_core.t_type
     vx_translate.t_translation_from_context['vx_value'] = {
       name          : "translation<-context",
       pkgname       : "vx/translate",
@@ -476,7 +510,6 @@ export default class vx_translate {
     }
 
     // (func translation<-session-name)
-    vx_translate.t_translation_from_session_name['vx_type'] = vx_core.t_type
     vx_translate.t_translation_from_session_name['vx_value'] = {
       name          : "translation<-session-name",
       pkgname       : "vx/translate",
@@ -495,7 +528,6 @@ export default class vx_translate {
     }
 
     // (func translationmap<-translations)
-    vx_translate.t_translationmap_from_translations['vx_type'] = vx_core.t_type
     vx_translate.t_translationmap_from_translations['vx_value'] = {
       name          : "translationmap<-translations",
       pkgname       : "vx/translate",

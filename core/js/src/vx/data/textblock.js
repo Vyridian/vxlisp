@@ -13,24 +13,28 @@ export default class vx_data_textblock {
    * A delimiter type supporting start and end delimiters and positions.
    */
   static t_delim = {}
+  static e_delim = {vx_type: vx_data_textblock.t_delim}
 
   /**
    * type: delimlist
    * A list of delim.
    */
   static t_delimlist = {}
+  static e_delimlist = vx_core.vx_new_list(vx_data_textblock.t_delimlist, [])
 
   /**
    * type: textblock
    * A textblock is a tree of text used for parsing by delimter.
    */
   static t_textblock = {}
+  static e_textblock = {vx_type: vx_data_textblock.t_textblock}
 
   /**
    * type: textblocklist
    * A list of textblock.
    */
   static t_textblocklist = {}
+  static e_textblocklist = vx_core.vx_new_list(vx_data_textblock.t_textblocklist, [])
   /**
    * Constant: delimbracketangle
    * Angle Bracket Delimiter
@@ -191,8 +195,12 @@ export default class vx_data_textblock {
    * @param  {textblock} textblock
    * @return {textblocklist}
    */
-  static t_children_from_textblock = {}
-  static e_children_from_textblock = {vx_type: vx_data_textblock.t_children_from_textblock}
+  static t_children_from_textblock = {
+    vx_type: vx_core.t_type
+  }
+  static e_children_from_textblock = {
+    vx_type: vx_data_textblock.t_children_from_textblock
+  }
 
   // (func children<-textblock)
   static f_children_from_textblock(textblock) {
@@ -208,8 +216,12 @@ export default class vx_data_textblock {
    * @param  {delim} delim2
    * @return {delim}
    */
-  static t_delim_first_from_delim_delim = {}
-  static e_delim_first_from_delim_delim = {vx_type: vx_data_textblock.t_delim_first_from_delim_delim}
+  static t_delim_first_from_delim_delim = {
+    vx_type: vx_core.t_type
+  }
+  static e_delim_first_from_delim_delim = {
+    vx_type: vx_data_textblock.t_delim_first_from_delim_delim
+  }
 
   // (func delim-first<-delim-delim)
   static f_delim_first_from_delim_delim(delim1, delim2) {
@@ -256,8 +268,12 @@ export default class vx_data_textblock {
    * @param  {delimlist} delimlist
    * @return {delim}
    */
-  static t_delim_first_from_string_delimlist = {}
-  static e_delim_first_from_string_delimlist = {vx_type: vx_data_textblock.t_delim_first_from_string_delimlist}
+  static t_delim_first_from_string_delimlist = {
+    vx_type: vx_core.t_type
+  }
+  static e_delim_first_from_string_delimlist = {
+    vx_type: vx_data_textblock.t_delim_first_from_string_delimlist
+  }
 
   // (func delim-first<-string-delimlist)
   static f_delim_first_from_string_delimlist(text, delimlist) {
@@ -298,8 +314,12 @@ export default class vx_data_textblock {
    * @param  {delim} delim
    * @return {delim}
    */
-  static t_delim_pos_from_string_delim = {}
-  static e_delim_pos_from_string_delim = {vx_type: vx_data_textblock.t_delim_pos_from_string_delim}
+  static t_delim_pos_from_string_delim = {
+    vx_type: vx_core.t_type
+  }
+  static e_delim_pos_from_string_delim = {
+    vx_type: vx_data_textblock.t_delim_pos_from_string_delim
+  }
 
   // (func delim-pos<-string-delim)
   static f_delim_pos_from_string_delim(text, delim) {
@@ -332,8 +352,12 @@ export default class vx_data_textblock {
    * @param  {delimlist} delimlist
    * @return {delimlist}
    */
-  static t_delimlist_pos_from_string_delimlist = {}
-  static e_delimlist_pos_from_string_delimlist = {vx_type: vx_data_textblock.t_delimlist_pos_from_string_delimlist}
+  static t_delimlist_pos_from_string_delimlist = {
+    vx_type: vx_core.t_type
+  }
+  static e_delimlist_pos_from_string_delimlist = {
+    vx_type: vx_data_textblock.t_delimlist_pos_from_string_delimlist
+  }
 
   // (func delimlist-pos<-string-delimlist)
   static f_delimlist_pos_from_string_delimlist(text, delimlist) {
@@ -353,8 +377,12 @@ export default class vx_data_textblock {
    * @param  {delim} delimarg
    * @return {boolean}
    */
-  static t_is_close = {}
-  static e_is_close = {vx_type: vx_data_textblock.t_is_close}
+  static t_is_close = {
+    vx_type: vx_core.t_type
+  }
+  static e_is_close = {
+    vx_type: vx_data_textblock.t_is_close
+  }
 
   // (func is-close)
   static f_is_close(delimarg) {
@@ -376,8 +404,12 @@ export default class vx_data_textblock {
    * @param  {delim} delimarg
    * @return {boolean}
    */
-  static t_is_single = {}
-  static e_is_single = {vx_type: vx_data_textblock.t_is_single}
+  static t_is_single = {
+    vx_type: vx_core.t_type
+  }
+  static e_is_single = {
+    vx_type: vx_data_textblock.t_is_single
+  }
 
   // (func is-single)
   static f_is_single(delimarg) {
@@ -401,8 +433,12 @@ export default class vx_data_textblock {
    * @param  {textblocklist} textblocklist
    * @return {stringlist}
    */
-  static t_stringlist_from_textblocklist = {}
-  static e_stringlist_from_textblocklist = {vx_type: vx_data_textblock.t_stringlist_from_textblocklist}
+  static t_stringlist_from_textblocklist = {
+    vx_type: vx_core.t_type
+  }
+  static e_stringlist_from_textblocklist = {
+    vx_type: vx_data_textblock.t_stringlist_from_textblocklist
+  }
 
   // (func stringlist<-textblocklist)
   static f_stringlist_from_textblocklist(textblocklist) {
@@ -421,8 +457,12 @@ export default class vx_data_textblock {
    * @param  {textblock} block
    * @return {string}
    */
-  static t_text_from_textblock = {}
-  static e_text_from_textblock = {vx_type: vx_data_textblock.t_text_from_textblock}
+  static t_text_from_textblock = {
+    vx_type: vx_core.t_type
+  }
+  static e_text_from_textblock = {
+    vx_type: vx_data_textblock.t_text_from_textblock
+  }
 
   // (func text<-textblock)
   static f_text_from_textblock(block) {
@@ -439,8 +479,12 @@ export default class vx_data_textblock {
    * @param  {textblock} child
    * @return {textblock}
    */
-  static t_textblock_addchild_from_textblock_find_child = {}
-  static e_textblock_addchild_from_textblock_find_child = {vx_type: vx_data_textblock.t_textblock_addchild_from_textblock_find_child}
+  static t_textblock_addchild_from_textblock_find_child = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_addchild_from_textblock_find_child = {
+    vx_type: vx_data_textblock.t_textblock_addchild_from_textblock_find_child
+  }
 
   // (func textblock-addchild<-textblock-find-child)
   static f_textblock_addchild_from_textblock_find_child(textblockarg, find, child) {
@@ -487,8 +531,12 @@ export default class vx_data_textblock {
    * @param  {textblock} textblockarg
    * @return {textblock}
    */
-  static t_textblock_delimnotfound = {}
-  static e_textblock_delimnotfound = {vx_type: vx_data_textblock.t_textblock_delimnotfound}
+  static t_textblock_delimnotfound = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_delimnotfound = {
+    vx_type: vx_data_textblock.t_textblock_delimnotfound
+  }
 
   // (func textblock-delimnotfound)
   static f_textblock_delimnotfound(textblockarg) {
@@ -697,8 +745,12 @@ export default class vx_data_textblock {
    * @param  {textblock} textblockarg
    * @return {textblock}
    */
-  static t_textblock_findparent_from_textblock = {}
-  static e_textblock_findparent_from_textblock = {vx_type: vx_data_textblock.t_textblock_findparent_from_textblock}
+  static t_textblock_findparent_from_textblock = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_findparent_from_textblock = {
+    vx_type: vx_data_textblock.t_textblock_findparent_from_textblock
+  }
 
   // (func textblock-findparent<-textblock)
   static f_textblock_findparent_from_textblock(textblockarg) {
@@ -745,8 +797,12 @@ export default class vx_data_textblock {
    * @param  {textblock} textblockarg
    * @return {textblock}
    */
-  static t_textblock_init = {}
-  static e_textblock_init = {vx_type: vx_data_textblock.t_textblock_init}
+  static t_textblock_init = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_init = {
+    vx_type: vx_data_textblock.t_textblock_init
+  }
 
   // (func textblock-init)
   static f_textblock_init(textblockarg) {
@@ -798,8 +854,12 @@ export default class vx_data_textblock {
    * @param  {textblock} textblock
    * @return {textblock}
    */
-  static t_textblock_parse = {}
-  static e_textblock_parse = {vx_type: vx_data_textblock.t_textblock_parse}
+  static t_textblock_parse = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_parse = {
+    vx_type: vx_data_textblock.t_textblock_parse
+  }
 
   // (func textblock-parse)
   static f_textblock_parse(textblock) {
@@ -824,8 +884,12 @@ export default class vx_data_textblock {
    * @param  {textblock} textblockarg
    * @return {textblock}
    */
-  static t_textblock_parse_one = {}
-  static e_textblock_parse_one = {vx_type: vx_data_textblock.t_textblock_parse_one}
+  static t_textblock_parse_one = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_parse_one = {
+    vx_type: vx_data_textblock.t_textblock_parse_one
+  }
 
   // (func textblock-parse-one)
   static f_textblock_parse_one(textblockarg) {
@@ -903,8 +967,12 @@ export default class vx_data_textblock {
    * @param  {delim} delim
    * @return {textblock}
    */
-  static t_textblock_parse_from_string_delim = {}
-  static e_textblock_parse_from_string_delim = {vx_type: vx_data_textblock.t_textblock_parse_from_string_delim}
+  static t_textblock_parse_from_string_delim = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_parse_from_string_delim = {
+    vx_type: vx_data_textblock.t_textblock_parse_from_string_delim
+  }
 
   // (func textblock-parse<-string-delim)
   static f_textblock_parse_from_string_delim(text, delim) {
@@ -928,8 +996,12 @@ export default class vx_data_textblock {
    * @param  {textblock} replace
    * @return {textblock}
    */
-  static t_textblock_replace_from_textblock_find_replace = {}
-  static e_textblock_replace_from_textblock_find_replace = {vx_type: vx_data_textblock.t_textblock_replace_from_textblock_find_replace}
+  static t_textblock_replace_from_textblock_find_replace = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_replace_from_textblock_find_replace = {
+    vx_type: vx_data_textblock.t_textblock_replace_from_textblock_find_replace
+  }
 
   // (func textblock-replace<-textblock-find-replace)
   static f_textblock_replace_from_textblock_find_replace(textblockarg, find, replace) {
@@ -971,8 +1043,12 @@ export default class vx_data_textblock {
    * @param  {int} offset
    * @return {textblock}
    */
-  static t_textblock_startleft_from_string_delim_offset = {}
-  static e_textblock_startleft_from_string_delim_offset = {vx_type: vx_data_textblock.t_textblock_startleft_from_string_delim_offset}
+  static t_textblock_startleft_from_string_delim_offset = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_startleft_from_string_delim_offset = {
+    vx_type: vx_data_textblock.t_textblock_startleft_from_string_delim_offset
+  }
 
   // (func textblock-startleft<-string-delim-offset)
   static f_textblock_startleft_from_string_delim_offset(text, delim, offset) {
@@ -1025,8 +1101,12 @@ export default class vx_data_textblock {
    * @param  {int} offset
    * @return {textblock}
    */
-  static t_textblock_startright_from_string_delim_offset = {}
-  static e_textblock_startright_from_string_delim_offset = {vx_type: vx_data_textblock.t_textblock_startright_from_string_delim_offset}
+  static t_textblock_startright_from_string_delim_offset = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_startright_from_string_delim_offset = {
+    vx_type: vx_data_textblock.t_textblock_startright_from_string_delim_offset
+  }
 
   // (func textblock-startright<-string-delim-offset)
   static f_textblock_startright_from_string_delim_offset(text, delimin, offset) {
@@ -1107,8 +1187,12 @@ export default class vx_data_textblock {
    * @param  {textblock} textblockarg
    * @return {textblock}
    */
-  static t_textblock_from_close_textblock = {}
-  static e_textblock_from_close_textblock = {vx_type: vx_data_textblock.t_textblock_from_close_textblock}
+  static t_textblock_from_close_textblock = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_from_close_textblock = {
+    vx_type: vx_data_textblock.t_textblock_from_close_textblock
+  }
 
   // (func textblock<-close-textblock)
   static f_textblock_from_close_textblock(close, textblockarg) {
@@ -1215,8 +1299,12 @@ export default class vx_data_textblock {
    * @param  {textblock} textblockarg
    * @return {textblock}
    */
-  static t_textblock_from_empty_textblock = {}
-  static e_textblock_from_empty_textblock = {vx_type: vx_data_textblock.t_textblock_from_empty_textblock}
+  static t_textblock_from_empty_textblock = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_from_empty_textblock = {
+    vx_type: vx_data_textblock.t_textblock_from_empty_textblock
+  }
 
   // (func textblock<-empty-textblock)
   static f_textblock_from_empty_textblock(empty, textblockarg) {
@@ -1231,8 +1319,12 @@ export default class vx_data_textblock {
    * @param  {textblock} textblockarg
    * @return {textblock}
    */
-  static t_textblock_from_open_textblock = {}
-  static e_textblock_from_open_textblock = {vx_type: vx_data_textblock.t_textblock_from_open_textblock}
+  static t_textblock_from_open_textblock = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_from_open_textblock = {
+    vx_type: vx_data_textblock.t_textblock_from_open_textblock
+  }
 
   // (func textblock<-open-textblock)
   static f_textblock_from_open_textblock(open, textblockarg) {
@@ -1370,8 +1462,12 @@ export default class vx_data_textblock {
    * @param  {textblock} textblockarg
    * @return {textblock}
    */
-  static t_textblock_from_single_textblock = {}
-  static e_textblock_from_single_textblock = {vx_type: vx_data_textblock.t_textblock_from_single_textblock}
+  static t_textblock_from_single_textblock = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_from_single_textblock = {
+    vx_type: vx_data_textblock.t_textblock_from_single_textblock
+  }
 
   // (func textblock<-single-textblock)
   static f_textblock_from_single_textblock(single, textblockarg) {
@@ -1498,8 +1594,12 @@ export default class vx_data_textblock {
    * @param  {delim} delim
    * @return {textblock}
    */
-  static t_textblock_from_string_delim = {}
-  static e_textblock_from_string_delim = {vx_type: vx_data_textblock.t_textblock_from_string_delim}
+  static t_textblock_from_string_delim = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_from_string_delim = {
+    vx_type: vx_data_textblock.t_textblock_from_string_delim
+  }
 
   // (func textblock<-string-delim)
   static f_textblock_from_string_delim(text, delim) {
@@ -1525,8 +1625,12 @@ export default class vx_data_textblock {
    * @param  {delim} delim
    * @return {textblock}
    */
-  static t_textblock_from_textblock_delim = {}
-  static e_textblock_from_textblock_delim = {vx_type: vx_data_textblock.t_textblock_from_textblock_delim}
+  static t_textblock_from_textblock_delim = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_from_textblock_delim = {
+    vx_type: vx_data_textblock.t_textblock_from_textblock_delim
+  }
 
   // (func textblock<-textblock-delim)
   static f_textblock_from_textblock_delim(textblock, delim) {
@@ -1541,8 +1645,12 @@ export default class vx_data_textblock {
    * @param  {delim} remove
    * @return {textblocklist}
    */
-  static t_textblocklist_from_textblocklist_remove = {}
-  static e_textblocklist_from_textblocklist_remove = {vx_type: vx_data_textblock.t_textblocklist_from_textblocklist_remove}
+  static t_textblocklist_from_textblocklist_remove = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblocklist_from_textblocklist_remove = {
+    vx_type: vx_data_textblock.t_textblocklist_from_textblocklist_remove
+  }
 
   // (func textblocklist<-textblocklist-remove)
   static f_textblocklist_from_textblocklist_remove(tblist, remove) {
@@ -1569,11 +1677,6 @@ export default class vx_data_textblock {
     return output
   }
 
-  // empty types
-  static e_delim = {}
-  static e_delimlist = []
-  static e_textblock = {}
-  static e_textblocklist = []
 
 
   static {
@@ -1840,6 +1943,474 @@ export default class vx_data_textblock {
     }
     vx_data_textblock.e_textblocklist['vx_type'] = vx_data_textblock.t_textblocklist
 
+    // (func children<-textblock)
+    vx_data_textblock.t_children_from_textblock['vx_value'] = {
+      name          : "children<-textblock",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_children_from_textblock
+    }
+
+    // (func delim-first<-delim-delim)
+    vx_data_textblock.t_delim_first_from_delim_delim['vx_value'] = {
+      name          : "delim-first<-delim-delim",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_delim_first_from_delim_delim
+    }
+
+    // (func delim-first<-string-delimlist)
+    vx_data_textblock.t_delim_first_from_string_delimlist['vx_value'] = {
+      name          : "delim-first<-string-delimlist",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_delim_first_from_string_delimlist
+    }
+
+    // (func delim-pos<-string-delim)
+    vx_data_textblock.t_delim_pos_from_string_delim['vx_value'] = {
+      name          : "delim-pos<-string-delim",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_delim_pos_from_string_delim
+    }
+
+    // (func delimlist-pos<-string-delimlist)
+    vx_data_textblock.t_delimlist_pos_from_string_delimlist['vx_value'] = {
+      name          : "delimlist-pos<-string-delimlist",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_delimlist_pos_from_string_delimlist
+    }
+
+    // (func is-close)
+    vx_data_textblock.t_is_close['vx_value'] = {
+      name          : "is-close",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_is_close
+    }
+
+    // (func is-single)
+    vx_data_textblock.t_is_single['vx_value'] = {
+      name          : "is-single",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_is_single
+    }
+
+    // (func stringlist<-textblocklist)
+    vx_data_textblock.t_stringlist_from_textblocklist['vx_value'] = {
+      name          : "stringlist<-textblocklist",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_stringlist_from_textblocklist
+    }
+
+    // (func text<-textblock)
+    vx_data_textblock.t_text_from_textblock['vx_value'] = {
+      name          : "text<-textblock",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_text_from_textblock
+    }
+
+    // (func textblock-addchild<-textblock-find-child)
+    vx_data_textblock.t_textblock_addchild_from_textblock_find_child['vx_value'] = {
+      name          : "textblock-addchild<-textblock-find-child",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_textblock_addchild_from_textblock_find_child
+    }
+
+    // (func textblock-delimnotfound)
+    vx_data_textblock.t_textblock_delimnotfound['vx_value'] = {
+      name          : "textblock-delimnotfound",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_textblock_delimnotfound
+    }
+
+    // (func textblock-findparent<-textblock)
+    vx_data_textblock.t_textblock_findparent_from_textblock['vx_value'] = {
+      name          : "textblock-findparent<-textblock",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_textblock_findparent_from_textblock
+    }
+
+    // (func textblock-init)
+    vx_data_textblock.t_textblock_init['vx_value'] = {
+      name          : "textblock-init",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_textblock_init
+    }
+
+    // (func textblock-parse)
+    vx_data_textblock.t_textblock_parse['vx_value'] = {
+      name          : "textblock-parse",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_textblock_parse
+    }
+
+    // (func textblock-parse-one)
+    vx_data_textblock.t_textblock_parse_one['vx_value'] = {
+      name          : "textblock-parse-one",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_textblock_parse_one
+    }
+
+    // (func textblock-parse<-string-delim)
+    vx_data_textblock.t_textblock_parse_from_string_delim['vx_value'] = {
+      name          : "textblock-parse<-string-delim",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_textblock_parse_from_string_delim
+    }
+
+    // (func textblock-replace<-textblock-find-replace)
+    vx_data_textblock.t_textblock_replace_from_textblock_find_replace['vx_value'] = {
+      name          : "textblock-replace<-textblock-find-replace",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_textblock_replace_from_textblock_find_replace
+    }
+
+    // (func textblock-startleft<-string-delim-offset)
+    vx_data_textblock.t_textblock_startleft_from_string_delim_offset['vx_value'] = {
+      name          : "textblock-startleft<-string-delim-offset",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_textblock_startleft_from_string_delim_offset
+    }
+
+    // (func textblock-startright<-string-delim-offset)
+    vx_data_textblock.t_textblock_startright_from_string_delim_offset['vx_value'] = {
+      name          : "textblock-startright<-string-delim-offset",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_textblock_startright_from_string_delim_offset
+    }
+
+    // (func textblock<-close-textblock)
+    vx_data_textblock.t_textblock_from_close_textblock['vx_value'] = {
+      name          : "textblock<-close-textblock",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_textblock_from_close_textblock
+    }
+
+    // (func textblock<-empty-textblock)
+    vx_data_textblock.t_textblock_from_empty_textblock['vx_value'] = {
+      name          : "textblock<-empty-textblock",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_textblock_from_empty_textblock
+    }
+
+    // (func textblock<-open-textblock)
+    vx_data_textblock.t_textblock_from_open_textblock['vx_value'] = {
+      name          : "textblock<-open-textblock",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_textblock_from_open_textblock
+    }
+
+    // (func textblock<-single-textblock)
+    vx_data_textblock.t_textblock_from_single_textblock['vx_value'] = {
+      name          : "textblock<-single-textblock",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_textblock_from_single_textblock
+    }
+
+    // (func textblock<-string-delim)
+    vx_data_textblock.t_textblock_from_string_delim['vx_value'] = {
+      name          : "textblock<-string-delim",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_textblock_from_string_delim
+    }
+
+    // (func textblock<-textblock-delim)
+    vx_data_textblock.t_textblock_from_textblock_delim['vx_value'] = {
+      name          : "textblock<-textblock-delim",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_textblock_from_textblock_delim
+    }
+
+    // (func textblocklist<-textblocklist-remove)
+    vx_data_textblock.t_textblocklist_from_textblocklist_remove['vx_value'] = {
+      name          : "textblocklist<-textblocklist-remove",
+      pkgname       : "vx/data/textblock",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_textblock.f_textblocklist_from_textblocklist_remove
+    }
+
     // (const delimbracketangle)
     Object.assign(vx_data_textblock.c_delimbracketangle, vx_core.f_new(
       vx_data_textblock.t_delim,
@@ -2038,500 +2609,6 @@ export default class vx_data_textblock {
       ":starttext",
       ":whitespace"
     ))
-
-    // (func children<-textblock)
-    vx_data_textblock.t_children_from_textblock['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_children_from_textblock['vx_value'] = {
-      name          : "children<-textblock",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_children_from_textblock
-    }
-
-    // (func delim-first<-delim-delim)
-    vx_data_textblock.t_delim_first_from_delim_delim['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_delim_first_from_delim_delim['vx_value'] = {
-      name          : "delim-first<-delim-delim",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_delim_first_from_delim_delim
-    }
-
-    // (func delim-first<-string-delimlist)
-    vx_data_textblock.t_delim_first_from_string_delimlist['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_delim_first_from_string_delimlist['vx_value'] = {
-      name          : "delim-first<-string-delimlist",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_delim_first_from_string_delimlist
-    }
-
-    // (func delim-pos<-string-delim)
-    vx_data_textblock.t_delim_pos_from_string_delim['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_delim_pos_from_string_delim['vx_value'] = {
-      name          : "delim-pos<-string-delim",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_delim_pos_from_string_delim
-    }
-
-    // (func delimlist-pos<-string-delimlist)
-    vx_data_textblock.t_delimlist_pos_from_string_delimlist['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_delimlist_pos_from_string_delimlist['vx_value'] = {
-      name          : "delimlist-pos<-string-delimlist",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_delimlist_pos_from_string_delimlist
-    }
-
-    // (func is-close)
-    vx_data_textblock.t_is_close['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_is_close['vx_value'] = {
-      name          : "is-close",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_is_close
-    }
-
-    // (func is-single)
-    vx_data_textblock.t_is_single['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_is_single['vx_value'] = {
-      name          : "is-single",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_is_single
-    }
-
-    // (func stringlist<-textblocklist)
-    vx_data_textblock.t_stringlist_from_textblocklist['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_stringlist_from_textblocklist['vx_value'] = {
-      name          : "stringlist<-textblocklist",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_stringlist_from_textblocklist
-    }
-
-    // (func text<-textblock)
-    vx_data_textblock.t_text_from_textblock['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_text_from_textblock['vx_value'] = {
-      name          : "text<-textblock",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_text_from_textblock
-    }
-
-    // (func textblock-addchild<-textblock-find-child)
-    vx_data_textblock.t_textblock_addchild_from_textblock_find_child['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_textblock_addchild_from_textblock_find_child['vx_value'] = {
-      name          : "textblock-addchild<-textblock-find-child",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_textblock_addchild_from_textblock_find_child
-    }
-
-    // (func textblock-delimnotfound)
-    vx_data_textblock.t_textblock_delimnotfound['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_textblock_delimnotfound['vx_value'] = {
-      name          : "textblock-delimnotfound",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_textblock_delimnotfound
-    }
-
-    // (func textblock-findparent<-textblock)
-    vx_data_textblock.t_textblock_findparent_from_textblock['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_textblock_findparent_from_textblock['vx_value'] = {
-      name          : "textblock-findparent<-textblock",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_textblock_findparent_from_textblock
-    }
-
-    // (func textblock-init)
-    vx_data_textblock.t_textblock_init['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_textblock_init['vx_value'] = {
-      name          : "textblock-init",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_textblock_init
-    }
-
-    // (func textblock-parse)
-    vx_data_textblock.t_textblock_parse['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_textblock_parse['vx_value'] = {
-      name          : "textblock-parse",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_textblock_parse
-    }
-
-    // (func textblock-parse-one)
-    vx_data_textblock.t_textblock_parse_one['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_textblock_parse_one['vx_value'] = {
-      name          : "textblock-parse-one",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_textblock_parse_one
-    }
-
-    // (func textblock-parse<-string-delim)
-    vx_data_textblock.t_textblock_parse_from_string_delim['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_textblock_parse_from_string_delim['vx_value'] = {
-      name          : "textblock-parse<-string-delim",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_textblock_parse_from_string_delim
-    }
-
-    // (func textblock-replace<-textblock-find-replace)
-    vx_data_textblock.t_textblock_replace_from_textblock_find_replace['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_textblock_replace_from_textblock_find_replace['vx_value'] = {
-      name          : "textblock-replace<-textblock-find-replace",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_textblock_replace_from_textblock_find_replace
-    }
-
-    // (func textblock-startleft<-string-delim-offset)
-    vx_data_textblock.t_textblock_startleft_from_string_delim_offset['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_textblock_startleft_from_string_delim_offset['vx_value'] = {
-      name          : "textblock-startleft<-string-delim-offset",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_textblock_startleft_from_string_delim_offset
-    }
-
-    // (func textblock-startright<-string-delim-offset)
-    vx_data_textblock.t_textblock_startright_from_string_delim_offset['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_textblock_startright_from_string_delim_offset['vx_value'] = {
-      name          : "textblock-startright<-string-delim-offset",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_textblock_startright_from_string_delim_offset
-    }
-
-    // (func textblock<-close-textblock)
-    vx_data_textblock.t_textblock_from_close_textblock['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_textblock_from_close_textblock['vx_value'] = {
-      name          : "textblock<-close-textblock",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_textblock_from_close_textblock
-    }
-
-    // (func textblock<-empty-textblock)
-    vx_data_textblock.t_textblock_from_empty_textblock['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_textblock_from_empty_textblock['vx_value'] = {
-      name          : "textblock<-empty-textblock",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_textblock_from_empty_textblock
-    }
-
-    // (func textblock<-open-textblock)
-    vx_data_textblock.t_textblock_from_open_textblock['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_textblock_from_open_textblock['vx_value'] = {
-      name          : "textblock<-open-textblock",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_textblock_from_open_textblock
-    }
-
-    // (func textblock<-single-textblock)
-    vx_data_textblock.t_textblock_from_single_textblock['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_textblock_from_single_textblock['vx_value'] = {
-      name          : "textblock<-single-textblock",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_textblock_from_single_textblock
-    }
-
-    // (func textblock<-string-delim)
-    vx_data_textblock.t_textblock_from_string_delim['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_textblock_from_string_delim['vx_value'] = {
-      name          : "textblock<-string-delim",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_textblock_from_string_delim
-    }
-
-    // (func textblock<-textblock-delim)
-    vx_data_textblock.t_textblock_from_textblock_delim['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_textblock_from_textblock_delim['vx_value'] = {
-      name          : "textblock<-textblock-delim",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_textblock_from_textblock_delim
-    }
-
-    // (func textblocklist<-textblocklist-remove)
-    vx_data_textblock.t_textblocklist_from_textblocklist_remove['vx_type'] = vx_core.t_type
-    vx_data_textblock.t_textblocklist_from_textblocklist_remove['vx_value'] = {
-      name          : "textblocklist<-textblocklist-remove",
-      pkgname       : "vx/data/textblock",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_data_textblock.f_textblocklist_from_textblocklist_remove
-    }
 
   }
 }

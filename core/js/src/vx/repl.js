@@ -14,24 +14,28 @@ export default class vx_repl {
    * List of library names
    */
   static t_liblist = {}
+  static e_liblist = vx_core.vx_new_list(vx_repl.t_liblist, [])
 
   /**
    * type: repl
    * Repl structure
    */
   static t_repl = {}
+  static e_repl = {vx_type: vx_repl.t_repl}
 
   /**
    * type: replarglist
    * Builder for a repllist
    */
   static t_replarglist = {}
+  static e_replarglist = {vx_type: vx_repl.t_replarglist}
 
   /**
    * type: repllist
    * List of repl
    */
   static t_repllist = {}
+  static e_repllist = vx_core.vx_new_list(vx_repl.t_repllist, [])
   /**
    * Constant: delimvxlisp
    * vxlisp File Delimiters
@@ -60,8 +64,12 @@ export default class vx_repl {
    * @param  {anylist} args
    * @return {any}
    */
-  static t_any_repl_from_functype_args = {}
-  static e_any_repl_from_functype_args = {vx_type: vx_repl.t_any_repl_from_functype_args}
+  static t_any_repl_from_functype_args = {
+    vx_type: vx_core.t_type
+  }
+  static e_any_repl_from_functype_args = {
+    vx_type: vx_repl.t_any_repl_from_functype_args
+  }
 
   // (func any-repl<-functype-args)
   static f_any_repl_from_functype_args(type, args) {
@@ -83,8 +91,12 @@ export default class vx_repl {
    * @param  {string} text Program to run
    * @return {any}
    */
-  static t_any_from_liblist_string = {}
-  static e_any_from_liblist_string = {vx_type: vx_repl.t_any_from_liblist_string}
+  static t_any_from_liblist_string = {
+    vx_type: vx_core.t_type
+  }
+  static e_any_from_liblist_string = {
+    vx_type: vx_repl.t_any_from_liblist_string
+  }
 
   // (func any<-liblist-string)
   static f_any_from_liblist_string(context, liblist, text) {
@@ -107,8 +119,12 @@ export default class vx_repl {
    * @param  {anylist} ... anylist
    * @return {any-1}
    */
-  static t_any_from_macro = {}
-  static e_any_from_macro = {vx_type: vx_repl.t_any_from_macro}
+  static t_any_from_macro = {
+    vx_type: vx_core.t_type
+  }
+  static e_any_from_macro = {
+    vx_type: vx_repl.t_any_from_macro
+  }
 
   // (func any<-macro)
   static f_any_from_macro(generic, context, ...anylist) {
@@ -133,8 +149,12 @@ export default class vx_repl {
    * @param  {repl} repl
    * @return {any}
    */
-  static t_any_from_repl = {}
-  static e_any_from_repl = {vx_type: vx_repl.t_any_from_repl}
+  static t_any_from_repl = {
+    vx_type: vx_core.t_type
+  }
+  static e_any_from_repl = {
+    vx_type: vx_repl.t_any_from_repl
+  }
 
   // (func any<-repl)
   static f_any_from_repl(context, repl) {
@@ -172,8 +192,12 @@ export default class vx_repl {
    * @param  {string} script
    * @return {any}
    */
-  static t_any_from_script = {}
-  static e_any_from_script = {vx_type: vx_repl.t_any_from_script}
+  static t_any_from_script = {
+    vx_type: vx_core.t_type
+  }
+  static e_any_from_script = {
+    vx_type: vx_repl.t_any_from_script
+  }
 
   // (func any<-script)
   static f_any_from_script(context, script) {
@@ -196,8 +220,12 @@ export default class vx_repl {
    * @param  {repllist} repllist
    * @return {anylist}
    */
-  static t_anylist_from_repllist = {}
-  static e_anylist_from_repllist = {vx_type: vx_repl.t_anylist_from_repllist}
+  static t_anylist_from_repllist = {
+    vx_type: vx_core.t_type
+  }
+  static e_anylist_from_repllist = {
+    vx_type: vx_repl.t_anylist_from_repllist
+  }
 
   // (func anylist<-repllist)
   static f_anylist_from_repllist(context, repllist) {
@@ -218,8 +246,12 @@ export default class vx_repl {
    * @param  {argmap} argmap
    * @return {argmap}
    */
-  static t_argmap_from_textblock_argmap = {}
-  static e_argmap_from_textblock_argmap = {vx_type: vx_repl.t_argmap_from_textblock_argmap}
+  static t_argmap_from_textblock_argmap = {
+    vx_type: vx_core.t_type
+  }
+  static e_argmap_from_textblock_argmap = {
+    vx_type: vx_repl.t_argmap_from_textblock_argmap
+  }
 
   // (func argmap<-textblock-argmap)
   static f_argmap_from_textblock_argmap(textblock, argmap) {
@@ -246,8 +278,12 @@ export default class vx_repl {
    * @param  {string} text
    * @return {any}
    */
-  static t_const_from_string = {}
-  static e_const_from_string = {vx_type: vx_repl.t_const_from_string}
+  static t_const_from_string = {
+    vx_type: vx_core.t_type
+  }
+  static e_const_from_string = {
+    vx_type: vx_repl.t_const_from_string
+  }
 
   // (func const<-string)
   static f_const_from_string(text) {
@@ -298,8 +334,12 @@ export default class vx_repl {
    * @param  {argmap} argmap
    * @return {repl}
    */
-  static t_repl_bracket_from_textblock_argmap = {}
-  static e_repl_bracket_from_textblock_argmap = {vx_type: vx_repl.t_repl_bracket_from_textblock_argmap}
+  static t_repl_bracket_from_textblock_argmap = {
+    vx_type: vx_core.t_type
+  }
+  static e_repl_bracket_from_textblock_argmap = {
+    vx_type: vx_repl.t_repl_bracket_from_textblock_argmap
+  }
 
   // (func repl-bracket<-textblock-argmap)
   static f_repl_bracket_from_textblock_argmap(textblock, argmap) {
@@ -317,8 +357,12 @@ export default class vx_repl {
    * @param  {argmap} argmap
    * @return {repl}
    */
-  static t_repl_empty_from_textblock_argmap = {}
-  static e_repl_empty_from_textblock_argmap = {vx_type: vx_repl.t_repl_empty_from_textblock_argmap}
+  static t_repl_empty_from_textblock_argmap = {
+    vx_type: vx_core.t_type
+  }
+  static e_repl_empty_from_textblock_argmap = {
+    vx_type: vx_repl.t_repl_empty_from_textblock_argmap
+  }
 
   // (func repl-empty<-textblock-argmap)
   static f_repl_empty_from_textblock_argmap(textblock, argmap) {
@@ -365,8 +409,12 @@ export default class vx_repl {
    * @param  {argmap} argmap
    * @return {repl}
    */
-  static t_repl_paren_from_textblock_argmap = {}
-  static e_repl_paren_from_textblock_argmap = {vx_type: vx_repl.t_repl_paren_from_textblock_argmap}
+  static t_repl_paren_from_textblock_argmap = {
+    vx_type: vx_core.t_type
+  }
+  static e_repl_paren_from_textblock_argmap = {
+    vx_type: vx_repl.t_repl_paren_from_textblock_argmap
+  }
 
   // (func repl-paren<-textblock-argmap)
   static f_repl_paren_from_textblock_argmap(textblock, argmap) {
@@ -431,8 +479,12 @@ export default class vx_repl {
    * @param  {string} text Program to run
    * @return {repl}
    */
-  static t_repl_from_liblist_string = {}
-  static e_repl_from_liblist_string = {vx_type: vx_repl.t_repl_from_liblist_string}
+  static t_repl_from_liblist_string = {
+    vx_type: vx_core.t_type
+  }
+  static e_repl_from_liblist_string = {
+    vx_type: vx_repl.t_repl_from_liblist_string
+  }
 
   // (func repl<-liblist-string)
   static f_repl_from_liblist_string(liblist, text) {
@@ -446,8 +498,12 @@ export default class vx_repl {
    * @param  {anylist} ... anylist
    * @return {repl}
    */
-  static t_repl_from_macro = {}
-  static e_repl_from_macro = {vx_type: vx_repl.t_repl_from_macro}
+  static t_repl_from_macro = {
+    vx_type: vx_core.t_type
+  }
+  static e_repl_from_macro = {
+    vx_type: vx_repl.t_repl_from_macro
+  }
 
   // (func repl<-macro)
   static f_repl_from_macro(context, ...anylist) {
@@ -494,8 +550,12 @@ export default class vx_repl {
    * @param  {string} script
    * @return {repl}
    */
-  static t_repl_from_script = {}
-  static e_repl_from_script = {vx_type: vx_repl.t_repl_from_script}
+  static t_repl_from_script = {
+    vx_type: vx_core.t_type
+  }
+  static e_repl_from_script = {
+    vx_type: vx_repl.t_repl_from_script
+  }
 
   // (func repl<-script)
   static f_repl_from_script(script) {
@@ -518,8 +578,12 @@ export default class vx_repl {
    * @param  {argmap} argmap
    * @return {repl}
    */
-  static t_repl_from_string_argmap = {}
-  static e_repl_from_string_argmap = {vx_type: vx_repl.t_repl_from_string_argmap}
+  static t_repl_from_string_argmap = {
+    vx_type: vx_core.t_type
+  }
+  static e_repl_from_string_argmap = {
+    vx_type: vx_repl.t_repl_from_string_argmap
+  }
 
   // (func repl<-string-argmap)
   static f_repl_from_string_argmap(text, argmap) {
@@ -635,8 +699,12 @@ export default class vx_repl {
    * @param  {textblock} textblock
    * @return {repl}
    */
-  static t_repl_from_textblock = {}
-  static e_repl_from_textblock = {vx_type: vx_repl.t_repl_from_textblock}
+  static t_repl_from_textblock = {
+    vx_type: vx_core.t_type
+  }
+  static e_repl_from_textblock = {
+    vx_type: vx_repl.t_repl_from_textblock
+  }
 
   // (func repl<-textblock)
   static f_repl_from_textblock(textblock) {
@@ -657,8 +725,12 @@ export default class vx_repl {
    * @param  {argmap} argmap
    * @return {repl}
    */
-  static t_repl_from_textblock_argmap = {}
-  static e_repl_from_textblock_argmap = {vx_type: vx_repl.t_repl_from_textblock_argmap}
+  static t_repl_from_textblock_argmap = {
+    vx_type: vx_core.t_type
+  }
+  static e_repl_from_textblock_argmap = {
+    vx_type: vx_repl.t_repl_from_textblock_argmap
+  }
 
   // (func repl<-textblock-argmap)
   static f_repl_from_textblock_argmap(textblock, argmap) {
@@ -706,8 +778,12 @@ export default class vx_repl {
    * @param  {argmap} argmap
    * @return {replarglist}
    */
-  static t_replarglist_from_replarglist_textblock_argmap = {}
-  static e_replarglist_from_replarglist_textblock_argmap = {vx_type: vx_repl.t_replarglist_from_replarglist_textblock_argmap}
+  static t_replarglist_from_replarglist_textblock_argmap = {
+    vx_type: vx_core.t_type
+  }
+  static e_replarglist_from_replarglist_textblock_argmap = {
+    vx_type: vx_repl.t_replarglist_from_replarglist_textblock_argmap
+  }
 
   // (func replarglist<-replarglist-textblock-argmap)
   static f_replarglist_from_replarglist_textblock_argmap(replargs, tb, argmap) {
@@ -809,8 +885,12 @@ export default class vx_repl {
    * @param  {argmap} argmap
    * @return {repllist}
    */
-  static t_repllist_from_textblocklist_argmap = {}
-  static e_repllist_from_textblocklist_argmap = {vx_type: vx_repl.t_repllist_from_textblocklist_argmap}
+  static t_repllist_from_textblocklist_argmap = {
+    vx_type: vx_core.t_type
+  }
+  static e_repllist_from_textblocklist_argmap = {
+    vx_type: vx_repl.t_repllist_from_textblocklist_argmap
+  }
 
   // (func repllist<-textblocklist-argmap)
   static f_repllist_from_textblocklist_argmap(textblocklist, argmap) {
@@ -830,8 +910,12 @@ export default class vx_repl {
    * @param  {string} script
    * @return {textblock}
    */
-  static t_textblock_from_script = {}
-  static e_textblock_from_script = {vx_type: vx_repl.t_textblock_from_script}
+  static t_textblock_from_script = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_from_script = {
+    vx_type: vx_repl.t_textblock_from_script
+  }
 
   // (func textblock<-script)
   static f_textblock_from_script(script) {
@@ -849,8 +933,12 @@ export default class vx_repl {
    * @param  {string} text
    * @return {any}
    */
-  static t_typefunc_from_string = {}
-  static e_typefunc_from_string = {vx_type: vx_repl.t_typefunc_from_string}
+  static t_typefunc_from_string = {
+    vx_type: vx_core.t_type
+  }
+  static e_typefunc_from_string = {
+    vx_type: vx_repl.t_typefunc_from_string
+  }
 
   // (func typefunc<-string)
   static f_typefunc_from_string(text) {
@@ -907,11 +995,6 @@ export default class vx_repl {
     return output
   }
 
-  // empty types
-  static e_liblist = []
-  static e_repl = {}
-  static e_replarglist = {}
-  static e_repllist = []
 
 
   static {
@@ -1114,6 +1197,384 @@ export default class vx_repl {
     }
     vx_repl.e_repllist['vx_type'] = vx_repl.t_repllist
 
+    // (func any-repl<-functype-args)
+    vx_repl.t_any_repl_from_functype_args['vx_value'] = {
+      name          : "any-repl<-functype-args",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_any_repl_from_functype_args
+    }
+
+    // (func any<-liblist-string)
+    vx_repl.t_any_from_liblist_string['vx_value'] = {
+      name          : "any<-liblist-string",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_any_from_liblist_string
+    }
+
+    // (func any<-macro)
+    vx_repl.t_any_from_macro['vx_value'] = {
+      name          : "any<-macro",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_any_from_macro
+    }
+
+    // (func any<-repl)
+    vx_repl.t_any_from_repl['vx_value'] = {
+      name          : "any<-repl",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_any_from_repl
+    }
+
+    // (func any<-script)
+    vx_repl.t_any_from_script['vx_value'] = {
+      name          : "any<-script",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_any_from_script
+    }
+
+    // (func anylist<-repllist)
+    vx_repl.t_anylist_from_repllist['vx_value'] = {
+      name          : "anylist<-repllist",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_anylist_from_repllist
+    }
+
+    // (func argmap<-textblock-argmap)
+    vx_repl.t_argmap_from_textblock_argmap['vx_value'] = {
+      name          : "argmap<-textblock-argmap",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_argmap_from_textblock_argmap
+    }
+
+    // (func const<-string)
+    vx_repl.t_const_from_string['vx_value'] = {
+      name          : "const<-string",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_const_from_string
+    }
+
+    // (func repl-bracket<-textblock-argmap)
+    vx_repl.t_repl_bracket_from_textblock_argmap['vx_value'] = {
+      name          : "repl-bracket<-textblock-argmap",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_repl_bracket_from_textblock_argmap
+    }
+
+    // (func repl-empty<-textblock-argmap)
+    vx_repl.t_repl_empty_from_textblock_argmap['vx_value'] = {
+      name          : "repl-empty<-textblock-argmap",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_repl_empty_from_textblock_argmap
+    }
+
+    // (func repl-paren<-textblock-argmap)
+    vx_repl.t_repl_paren_from_textblock_argmap['vx_value'] = {
+      name          : "repl-paren<-textblock-argmap",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_repl_paren_from_textblock_argmap
+    }
+
+    // (func repl<-liblist-string)
+    vx_repl.t_repl_from_liblist_string['vx_value'] = {
+      name          : "repl<-liblist-string",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_repl_from_liblist_string
+    }
+
+    // (func repl<-macro)
+    vx_repl.t_repl_from_macro['vx_value'] = {
+      name          : "repl<-macro",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_repl_from_macro
+    }
+
+    // (func repl<-script)
+    vx_repl.t_repl_from_script['vx_value'] = {
+      name          : "repl<-script",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_repl_from_script
+    }
+
+    // (func repl<-string-argmap)
+    vx_repl.t_repl_from_string_argmap['vx_value'] = {
+      name          : "repl<-string-argmap",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_repl_from_string_argmap
+    }
+
+    // (func repl<-textblock)
+    vx_repl.t_repl_from_textblock['vx_value'] = {
+      name          : "repl<-textblock",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_repl_from_textblock
+    }
+
+    // (func repl<-textblock-argmap)
+    vx_repl.t_repl_from_textblock_argmap['vx_value'] = {
+      name          : "repl<-textblock-argmap",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_repl_from_textblock_argmap
+    }
+
+    // (func replarglist<-replarglist-textblock-argmap)
+    vx_repl.t_replarglist_from_replarglist_textblock_argmap['vx_value'] = {
+      name          : "replarglist<-replarglist-textblock-argmap",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_replarglist_from_replarglist_textblock_argmap
+    }
+
+    // (func repllist<-textblocklist-argmap)
+    vx_repl.t_repllist_from_textblocklist_argmap['vx_value'] = {
+      name          : "repllist<-textblocklist-argmap",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_repllist_from_textblocklist_argmap
+    }
+
+    // (func textblock<-script)
+    vx_repl.t_textblock_from_script['vx_value'] = {
+      name          : "textblock<-script",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_textblock_from_script
+    }
+
+    // (func typefunc<-string)
+    vx_repl.t_typefunc_from_string['vx_value'] = {
+      name          : "typefunc<-string",
+      pkgname       : "vx/repl",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_repl.f_typefunc_from_string
+    }
+
     // (const delimvxlisp)
     Object.assign(vx_repl.c_delimvxlisp, vx_core.f_new(
       vx_data_textblock.t_delim,
@@ -1162,405 +1623,6 @@ export default class vx_repl {
         vx_repl.c_delimvxlispparen
       )
     ))
-
-    // (func any-repl<-functype-args)
-    vx_repl.t_any_repl_from_functype_args['vx_type'] = vx_core.t_type
-    vx_repl.t_any_repl_from_functype_args['vx_value'] = {
-      name          : "any-repl<-functype-args",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_any_repl_from_functype_args
-    }
-
-    // (func any<-liblist-string)
-    vx_repl.t_any_from_liblist_string['vx_type'] = vx_core.t_type
-    vx_repl.t_any_from_liblist_string['vx_value'] = {
-      name          : "any<-liblist-string",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_any_from_liblist_string
-    }
-
-    // (func any<-macro)
-    vx_repl.t_any_from_macro['vx_type'] = vx_core.t_type
-    vx_repl.t_any_from_macro['vx_value'] = {
-      name          : "any<-macro",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_any_from_macro
-    }
-
-    // (func any<-repl)
-    vx_repl.t_any_from_repl['vx_type'] = vx_core.t_type
-    vx_repl.t_any_from_repl['vx_value'] = {
-      name          : "any<-repl",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_any_from_repl
-    }
-
-    // (func any<-script)
-    vx_repl.t_any_from_script['vx_type'] = vx_core.t_type
-    vx_repl.t_any_from_script['vx_value'] = {
-      name          : "any<-script",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_any_from_script
-    }
-
-    // (func anylist<-repllist)
-    vx_repl.t_anylist_from_repllist['vx_type'] = vx_core.t_type
-    vx_repl.t_anylist_from_repllist['vx_value'] = {
-      name          : "anylist<-repllist",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_anylist_from_repllist
-    }
-
-    // (func argmap<-textblock-argmap)
-    vx_repl.t_argmap_from_textblock_argmap['vx_type'] = vx_core.t_type
-    vx_repl.t_argmap_from_textblock_argmap['vx_value'] = {
-      name          : "argmap<-textblock-argmap",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_argmap_from_textblock_argmap
-    }
-
-    // (func const<-string)
-    vx_repl.t_const_from_string['vx_type'] = vx_core.t_type
-    vx_repl.t_const_from_string['vx_value'] = {
-      name          : "const<-string",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_const_from_string
-    }
-
-    // (func repl-bracket<-textblock-argmap)
-    vx_repl.t_repl_bracket_from_textblock_argmap['vx_type'] = vx_core.t_type
-    vx_repl.t_repl_bracket_from_textblock_argmap['vx_value'] = {
-      name          : "repl-bracket<-textblock-argmap",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_repl_bracket_from_textblock_argmap
-    }
-
-    // (func repl-empty<-textblock-argmap)
-    vx_repl.t_repl_empty_from_textblock_argmap['vx_type'] = vx_core.t_type
-    vx_repl.t_repl_empty_from_textblock_argmap['vx_value'] = {
-      name          : "repl-empty<-textblock-argmap",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_repl_empty_from_textblock_argmap
-    }
-
-    // (func repl-paren<-textblock-argmap)
-    vx_repl.t_repl_paren_from_textblock_argmap['vx_type'] = vx_core.t_type
-    vx_repl.t_repl_paren_from_textblock_argmap['vx_value'] = {
-      name          : "repl-paren<-textblock-argmap",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_repl_paren_from_textblock_argmap
-    }
-
-    // (func repl<-liblist-string)
-    vx_repl.t_repl_from_liblist_string['vx_type'] = vx_core.t_type
-    vx_repl.t_repl_from_liblist_string['vx_value'] = {
-      name          : "repl<-liblist-string",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_repl_from_liblist_string
-    }
-
-    // (func repl<-macro)
-    vx_repl.t_repl_from_macro['vx_type'] = vx_core.t_type
-    vx_repl.t_repl_from_macro['vx_value'] = {
-      name          : "repl<-macro",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_repl_from_macro
-    }
-
-    // (func repl<-script)
-    vx_repl.t_repl_from_script['vx_type'] = vx_core.t_type
-    vx_repl.t_repl_from_script['vx_value'] = {
-      name          : "repl<-script",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_repl_from_script
-    }
-
-    // (func repl<-string-argmap)
-    vx_repl.t_repl_from_string_argmap['vx_type'] = vx_core.t_type
-    vx_repl.t_repl_from_string_argmap['vx_value'] = {
-      name          : "repl<-string-argmap",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_repl_from_string_argmap
-    }
-
-    // (func repl<-textblock)
-    vx_repl.t_repl_from_textblock['vx_type'] = vx_core.t_type
-    vx_repl.t_repl_from_textblock['vx_value'] = {
-      name          : "repl<-textblock",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_repl_from_textblock
-    }
-
-    // (func repl<-textblock-argmap)
-    vx_repl.t_repl_from_textblock_argmap['vx_type'] = vx_core.t_type
-    vx_repl.t_repl_from_textblock_argmap['vx_value'] = {
-      name          : "repl<-textblock-argmap",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_repl_from_textblock_argmap
-    }
-
-    // (func replarglist<-replarglist-textblock-argmap)
-    vx_repl.t_replarglist_from_replarglist_textblock_argmap['vx_type'] = vx_core.t_type
-    vx_repl.t_replarglist_from_replarglist_textblock_argmap['vx_value'] = {
-      name          : "replarglist<-replarglist-textblock-argmap",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_replarglist_from_replarglist_textblock_argmap
-    }
-
-    // (func repllist<-textblocklist-argmap)
-    vx_repl.t_repllist_from_textblocklist_argmap['vx_type'] = vx_core.t_type
-    vx_repl.t_repllist_from_textblocklist_argmap['vx_value'] = {
-      name          : "repllist<-textblocklist-argmap",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_repllist_from_textblocklist_argmap
-    }
-
-    // (func textblock<-script)
-    vx_repl.t_textblock_from_script['vx_type'] = vx_core.t_type
-    vx_repl.t_textblock_from_script['vx_value'] = {
-      name          : "textblock<-script",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_textblock_from_script
-    }
-
-    // (func typefunc<-string)
-    vx_repl.t_typefunc_from_string['vx_type'] = vx_core.t_type
-    vx_repl.t_typefunc_from_string['vx_value'] = {
-      name          : "typefunc<-string",
-      pkgname       : "vx/repl",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_repl.f_typefunc_from_string
-    }
 
   }
 }

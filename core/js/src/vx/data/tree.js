@@ -10,31 +10,37 @@ export default class vx_data_tree {
    * type: branch
    */
   static t_branch = {}
+  static e_branch = {vx_type: vx_data_tree.t_branch}
 
   /**
    * type: brancharrow
    */
   static t_brancharrow = {}
+  static e_brancharrow = {vx_type: vx_data_tree.t_brancharrow}
 
   /**
    * type: branchlist
    */
   static t_branchlist = {}
+  static e_branchlist = vx_core.vx_new_list(vx_data_tree.t_branchlist, [])
 
   /**
    * type: leaf
    */
   static t_leaf = {}
+  static e_leaf = {vx_type: vx_data_tree.t_leaf}
 
   /**
    * type: leaflist
    */
   static t_leaflist = {}
+  static e_leaflist = vx_core.vx_new_list(vx_data_tree.t_leaflist, [])
 
   /**
    * type: tree
    */
   static t_tree = {}
+  static e_tree = {vx_type: vx_data_tree.t_tree}
   /**
    * Constant: brancharrow-down
    * {brancharrow}
@@ -53,13 +59,6 @@ export default class vx_data_tree {
    */
   static c_brancharrow_updown = {vx_type: vx_data_tree.t_brancharrow, vx_constdef: {pkgname: 'vx/data/tree', name: 'brancharrow-updown'}}
 
-  // empty types
-  static e_branch = {}
-  static e_brancharrow = {}
-  static e_branchlist = []
-  static e_leaf = {}
-  static e_leaflist = []
-  static e_tree = {}
 
 
   static {

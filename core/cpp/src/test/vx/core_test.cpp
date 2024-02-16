@@ -491,7 +491,7 @@ namespace vx_core_test {
     vx_test::Type_testresult testresult_1 = vx_test::f_test(
       context,
       vx_core::vx_new_decimal_from_string("6.4"),
-      vx_core::f_multiply_1((vx_core::Type_number)vx_core::vx_new_decimal_from_string("3.2"), (vx_core::Type_number)vx_core::vx_new_int(2))
+      vx_core::f_multiply_1(vx_core::vx_new_decimal_from_string("3.2"), vx_core::vx_new_int(2))
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test 6.4 (* 3.2 2))"),
@@ -502,7 +502,7 @@ namespace vx_core_test {
     vx_test::Type_testresult testresult_2 = vx_test::f_test(
       context,
       vx_core::vx_new_decimal_from_string("-10.2"),
-      vx_core::f_multiply_1((vx_core::Type_number)vx_core::vx_new_decimal_from_string("5.1"), (vx_core::Type_number)vx_core::vx_new_int(-2))
+      vx_core::f_multiply_1(vx_core::vx_new_decimal_from_string("5.1"), vx_core::vx_new_int(-2))
     );
     vx_test::Type_testdescribe testdescribe_2 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test -10.2 (* 5.1 -2))"),
@@ -893,7 +893,7 @@ namespace vx_core_test {
     vx_test::Type_testresult testresult_1 = vx_test::f_test(
       context,
       vx_core::vx_new_int(3),
-      vx_core::f_divide((vx_core::Type_number)vx_core::vx_new_int(6), (vx_core::Type_number)vx_core::vx_new_int(2))
+      vx_core::f_divide(vx_core::vx_new_int(6), vx_core::vx_new_int(2))
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test 3 (/ 6 2))"),
@@ -904,7 +904,7 @@ namespace vx_core_test {
     vx_test::Type_testresult testresult_2 = vx_test::f_test(
       context,
       vx_core::vx_new_int(-5),
-      vx_core::f_divide((vx_core::Type_number)vx_core::vx_new_int(10), (vx_core::Type_number)vx_core::vx_new_int(-2))
+      vx_core::f_divide(vx_core::vx_new_int(10), vx_core::vx_new_int(-2))
     );
     vx_test::Type_testdescribe testdescribe_2 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test -5 (/ 10 -2))"),

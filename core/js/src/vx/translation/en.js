@@ -13,8 +13,12 @@ export default class vx_translation_en {
    * @param  {anylist} ... args
    * @return {context}
    */
-  static t_context_en = {}
-  static e_context_en = {vx_type: vx_translation_en.t_context_en}
+  static t_context_en = {
+    vx_type: vx_core.t_type
+  }
+  static e_context_en = {
+    vx_type: vx_translation_en.t_context_en
+  }
 
   // (func context-en)
   static f_context_en(...args) {
@@ -38,8 +42,12 @@ export default class vx_translation_en {
    * @param  {anylist} ... args
    * @return {context}
    */
-  static t_context_test = {}
-  static e_context_test = {vx_type: vx_translation_en.t_context_test}
+  static t_context_test = {
+    vx_type: vx_core.t_type
+  }
+  static e_context_test = {
+    vx_type: vx_translation_en.t_context_test
+  }
 
   // (func context-test)
   static f_context_test(...args) {
@@ -68,8 +76,12 @@ export default class vx_translation_en {
    * Returns the default security for test case execution. Arguments come from the command line.
    * @return {security}
    */
-  static t_securitydata_test = {}
-  static e_securitydata_test = {vx_type: vx_translation_en.t_securitydata_test}
+  static t_securitydata_test = {
+    vx_type: vx_core.t_type
+  }
+  static e_securitydata_test = {
+    vx_type: vx_translation_en.t_securitydata_test
+  }
 
   // (func securitydata-test)
   static f_securitydata_test() {
@@ -93,8 +105,12 @@ export default class vx_translation_en {
    * Returns translation data
    * @return {translation}
    */
-  static t_translation_en = {}
-  static e_translation_en = {vx_type: vx_translation_en.t_translation_en}
+  static t_translation_en = {
+    vx_type: vx_core.t_type
+  }
+  static e_translation_en = {
+    vx_type: vx_translation_en.t_translation_en
+  }
 
   // (func translation-en)
   static f_translation_en() {
@@ -114,8 +130,12 @@ export default class vx_translation_en {
    * Word Translation
    * @return {stringmap}
    */
-  static t_words = {}
-  static e_words = {vx_type: vx_translation_en.t_words}
+  static t_words = {
+    vx_type: vx_core.t_type
+  }
+  static e_words = {
+    vx_type: vx_translation_en.t_words
+  }
 
   // (func words)
   static f_words() {
@@ -136,7 +156,6 @@ export default class vx_translation_en {
     return output
   }
 
-  // empty types
 
 
   static {
@@ -170,7 +189,6 @@ export default class vx_translation_en {
     vx_core.vx_global_package_set(pkg)
 
     // (func context-en)
-    vx_translation_en.t_context_en['vx_type'] = vx_core.t_type
     vx_translation_en.t_context_en['vx_value'] = {
       name          : "context-en",
       pkgname       : "vx/translation/en",
@@ -189,7 +207,6 @@ export default class vx_translation_en {
     }
 
     // (func context-test)
-    vx_translation_en.t_context_test['vx_type'] = vx_core.t_type
     vx_translation_en.t_context_test['vx_value'] = {
       name          : "context-test",
       pkgname       : "vx/translation/en",
@@ -208,7 +225,6 @@ export default class vx_translation_en {
     }
 
     // (func securitydata-test)
-    vx_translation_en.t_securitydata_test['vx_type'] = vx_core.t_type
     vx_translation_en.t_securitydata_test['vx_value'] = {
       name          : "securitydata-test",
       pkgname       : "vx/translation/en",
@@ -227,7 +243,6 @@ export default class vx_translation_en {
     }
 
     // (func translation-en)
-    vx_translation_en.t_translation_en['vx_type'] = vx_core.t_type
     vx_translation_en.t_translation_en['vx_value'] = {
       name          : "translation-en",
       pkgname       : "vx/translation/en",
@@ -246,7 +261,6 @@ export default class vx_translation_en {
     }
 
     // (func words)
-    vx_translation_en.t_words['vx_type'] = vx_core.t_type
     vx_translation_en.t_words['vx_value'] = {
       name          : "words",
       pkgname       : "vx/translation/en",

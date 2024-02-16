@@ -78,8 +78,12 @@ export default class vx_type {
    * @param  {any} type
    * @return {stringlist}
    */
-  static t_allowtypenames_from_type = {}
-  static e_allowtypenames_from_type = {vx_type: vx_type.t_allowtypenames_from_type}
+  static t_allowtypenames_from_type = {
+    vx_type: vx_core.t_type
+  }
+  static e_allowtypenames_from_type = {
+    vx_type: vx_type.t_allowtypenames_from_type
+  }
 
   // (func allowtypenames<-type)
   static f_allowtypenames_from_type(type) {
@@ -96,8 +100,12 @@ export default class vx_type {
    * @param  {any} type
    * @return {typelist}
    */
-  static t_allowtypes_from_type = {}
-  static e_allowtypes_from_type = {vx_type: vx_type.t_allowtypes_from_type}
+  static t_allowtypes_from_type = {
+    vx_type: vx_core.t_type
+  }
+  static e_allowtypes_from_type = {
+    vx_type: vx_type.t_allowtypes_from_type
+  }
 
   // (func allowtypes<-type)
   static f_allowtypes_from_type(type) {
@@ -117,8 +125,12 @@ export default class vx_type {
    * @param  {int} val
    * @return {any-1}
    */
-  static t_any_from_int = {}
-  static e_any_from_int = {vx_type: vx_type.t_any_from_int}
+  static t_any_from_int = {
+    vx_type: vx_core.t_type
+  }
+  static e_any_from_int = {
+    vx_type: vx_type.t_any_from_int
+  }
 
   // (func any<-int)
   static f_any_from_int(generic, val) {
@@ -134,8 +146,12 @@ export default class vx_type {
    * @param  {string} ends
    * @return {boolean}
    */
-  static t_boolean_from_string_ends = {}
-  static e_boolean_from_string_ends = {vx_type: vx_type.t_boolean_from_string_ends}
+  static t_boolean_from_string_ends = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_from_string_ends = {
+    vx_type: vx_type.t_boolean_from_string_ends
+  }
 
   // (func boolean<-string-ends)
   static f_boolean_from_string_ends(text, ends) {
@@ -151,8 +167,12 @@ export default class vx_type {
    * @param  {string} starts
    * @return {boolean}
    */
-  static t_boolean_from_string_starts = {}
-  static e_boolean_from_string_starts = {vx_type: vx_type.t_boolean_from_string_starts}
+  static t_boolean_from_string_starts = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_from_string_starts = {
+    vx_type: vx_type.t_boolean_from_string_starts
+  }
 
   // (func boolean<-string-starts)
   static f_boolean_from_string_starts(text, starts) {
@@ -168,8 +188,12 @@ export default class vx_type {
    * @param  {string} find
    * @return {int}
    */
-  static t_int_from_string_find = {}
-  static e_int_from_string_find = {vx_type: vx_type.t_int_from_string_find}
+  static t_int_from_string_find = {
+    vx_type: vx_core.t_type
+  }
+  static e_int_from_string_find = {
+    vx_type: vx_type.t_int_from_string_find
+  }
 
   // (func int<-string-find)
   static f_int_from_string_find(text, find) {
@@ -185,8 +209,12 @@ export default class vx_type {
    * @param  {string} find
    * @return {int}
    */
-  static t_int_from_string_findkeyword = {}
-  static e_int_from_string_findkeyword = {vx_type: vx_type.t_int_from_string_findkeyword}
+  static t_int_from_string_findkeyword = {
+    vx_type: vx_core.t_type
+  }
+  static e_int_from_string_findkeyword = {
+    vx_type: vx_type.t_int_from_string_findkeyword
+  }
 
   // (func int<-string-findkeyword)
   static f_int_from_string_findkeyword(text, find) {
@@ -202,8 +230,12 @@ export default class vx_type {
    * @param  {string} findlast
    * @return {int}
    */
-  static t_int_from_string_findlast = {}
-  static e_int_from_string_findlast = {vx_type: vx_type.t_int_from_string_findlast}
+  static t_int_from_string_findlast = {
+    vx_type: vx_core.t_type
+  }
+  static e_int_from_string_findlast = {
+    vx_type: vx_type.t_int_from_string_findlast
+  }
 
   // (func int<-string-findlast)
   static f_int_from_string_findlast(text, findlast) {
@@ -217,8 +249,12 @@ export default class vx_type {
    * @param  {any} value
    * @return {boolean}
    */
-  static t_is_boolean = {}
-  static e_is_boolean = {vx_type: vx_type.t_is_boolean}
+  static t_is_boolean = {
+    vx_type: vx_core.t_type
+  }
+  static e_is_boolean = {
+    vx_type: vx_type.t_is_boolean
+  }
 
   // (func is-boolean)
   static f_is_boolean(value) {
@@ -235,8 +271,12 @@ export default class vx_type {
    * @param  {any} value
    * @return {boolean}
    */
-  static t_is_decimal = {}
-  static e_is_decimal = {vx_type: vx_type.t_is_decimal}
+  static t_is_decimal = {
+    vx_type: vx_core.t_type
+  }
+  static e_is_decimal = {
+    vx_type: vx_type.t_is_decimal
+  }
 
   // (func is-decimal)
   static f_is_decimal(value) {
@@ -253,8 +293,12 @@ export default class vx_type {
    * @param  {any} value
    * @return {boolean}
    */
-  static t_is_none = {}
-  static e_is_none = {vx_type: vx_type.t_is_none}
+  static t_is_none = {
+    vx_type: vx_core.t_type
+  }
+  static e_is_none = {
+    vx_type: vx_type.t_is_none
+  }
 
   // (func is-none)
   static f_is_none(value) {
@@ -271,8 +315,12 @@ export default class vx_type {
    * @param  {any} value
    * @return {boolean}
    */
-  static t_is_string = {}
-  static e_is_string = {vx_type: vx_type.t_is_string}
+  static t_is_string = {
+    vx_type: vx_core.t_type
+  }
+  static e_is_string = {
+    vx_type: vx_type.t_is_string
+  }
 
   // (func is-string)
   static f_is_string(value) {
@@ -290,8 +338,12 @@ export default class vx_type {
    * @param  {any} type
    * @return {boolean}
    */
-  static t_is_type = {}
-  static e_is_type = {vx_type: vx_type.t_is_type}
+  static t_is_type = {
+    vx_type: vx_core.t_type
+  }
+  static e_is_type = {
+    vx_type: vx_type.t_is_type
+  }
 
   // (func is-type)
   static f_is_type(val, type) {
@@ -320,8 +372,12 @@ export default class vx_type {
    * @param  {typelist} typelist
    * @return {boolean}
    */
-  static t_is_type_from_any_typelist = {}
-  static e_is_type_from_any_typelist = {vx_type: vx_type.t_is_type_from_any_typelist}
+  static t_is_type_from_any_typelist = {
+    vx_type: vx_core.t_type
+  }
+  static e_is_type_from_any_typelist = {
+    vx_type: vx_type.t_is_type_from_any_typelist
+  }
 
   // (func is-type<-any-typelist)
   static f_is_type_from_any_typelist(val, typelist) {
@@ -345,8 +401,12 @@ export default class vx_type {
    * @param  {string} text
    * @return {int}
    */
-  static t_length_from_string = {}
-  static e_length_from_string = {vx_type: vx_type.t_length_from_string}
+  static t_length_from_string = {
+    vx_type: vx_core.t_type
+  }
+  static e_length_from_string = {
+    vx_type: vx_type.t_length_from_string
+  }
 
   // (func length<-string)
   static f_length_from_string(text) {
@@ -361,8 +421,12 @@ export default class vx_type {
    * @param  {string} text
    * @return {string}
    */
-  static t_string_lowercase = {}
-  static e_string_lowercase = {vx_type: vx_type.t_string_lowercase}
+  static t_string_lowercase = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_lowercase = {
+    vx_type: vx_type.t_string_lowercase
+  }
 
   // (func string-lowercase)
   static f_string_lowercase(text) {
@@ -377,8 +441,12 @@ export default class vx_type {
    * @param  {string} text
    * @return {string}
    */
-  static t_string_outdent = {}
-  static e_string_outdent = {vx_type: vx_type.t_string_outdent}
+  static t_string_outdent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_outdent = {
+    vx_type: vx_type.t_string_outdent
+  }
 
   // (func string-outdent)
   static f_string_outdent(text) {
@@ -427,8 +495,12 @@ export default class vx_type {
    * @param  {string} text
    * @return {string}
    */
-  static t_string_trim = {}
-  static e_string_trim = {vx_type: vx_type.t_string_trim}
+  static t_string_trim = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_trim = {
+    vx_type: vx_type.t_string_trim
+  }
 
   // (func string-trim)
   static f_string_trim(text) {
@@ -443,8 +515,12 @@ export default class vx_type {
    * @param  {string} text
    * @return {string}
    */
-  static t_string_uppercase = {}
-  static e_string_uppercase = {vx_type: vx_type.t_string_uppercase}
+  static t_string_uppercase = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_uppercase = {
+    vx_type: vx_type.t_string_uppercase
+  }
 
   // (func string-uppercase)
   static f_string_uppercase(text) {
@@ -459,8 +535,12 @@ export default class vx_type {
    * @param  {int} val
    * @return {string}
    */
-  static t_string_from_int = {}
-  static e_string_from_int = {vx_type: vx_type.t_string_from_int}
+  static t_string_from_int = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_int = {
+    vx_type: vx_type.t_string_from_int
+  }
 
   // (func string<-int)
   static f_string_from_int(val) {
@@ -497,8 +577,12 @@ export default class vx_type {
    * @param  {int} endpos
    * @return {string}
    */
-  static t_string_from_string_end = {}
-  static e_string_from_string_end = {vx_type: vx_type.t_string_from_string_end}
+  static t_string_from_string_end = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_string_end = {
+    vx_type: vx_type.t_string_from_string_end
+  }
 
   // (func string<-string-end)
   static f_string_from_string_end(text, endpos) {
@@ -514,8 +598,12 @@ export default class vx_type {
    * @param  {int} startpos
    * @return {string}
    */
-  static t_string_from_string_start = {}
-  static e_string_from_string_start = {vx_type: vx_type.t_string_from_string_start}
+  static t_string_from_string_start = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_string_start = {
+    vx_type: vx_type.t_string_from_string_start
+  }
 
   // (func string<-string-start)
   static f_string_from_string_start(text, startpos) {
@@ -536,8 +624,12 @@ export default class vx_type {
    * @param  {int} end
    * @return {string}
    */
-  static t_string_from_string_start_end = {}
-  static e_string_from_string_start_end = {vx_type: vx_type.t_string_from_string_start_end}
+  static t_string_from_string_start_end = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_string_start_end = {
+    vx_type: vx_type.t_string_from_string_start_end
+  }
 
   // (func string<-string-start-end)
   static f_string_from_string_start_end(text, start, end) {
@@ -553,8 +645,12 @@ export default class vx_type {
    * @param  {string} delim
    * @return {string}
    */
-  static t_string_from_stringlist_join = {}
-  static e_string_from_stringlist_join = {vx_type: vx_type.t_string_from_stringlist_join}
+  static t_string_from_stringlist_join = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_stringlist_join = {
+    vx_type: vx_type.t_string_from_stringlist_join
+  }
 
   // (func string<-stringlist-join)
   static f_string_from_stringlist_join(vals, delim) {
@@ -570,8 +666,12 @@ export default class vx_type {
    * @param  {string} delim
    * @return {stringlist}
    */
-  static t_stringlist_from_string_split = {}
-  static e_stringlist_from_string_split = {vx_type: vx_type.t_stringlist_from_string_split}
+  static t_stringlist_from_string_split = {
+    vx_type: vx_core.t_type
+  }
+  static e_stringlist_from_string_split = {
+    vx_type: vx_type.t_stringlist_from_string_split
+  }
 
   // (func stringlist<-string-split)
   static f_stringlist_from_string_split(text, delim) {
@@ -586,8 +686,12 @@ export default class vx_type {
    * @param  {any} val
    * @return {stringlist}
    */
-  static t_traitnames_from_any = {}
-  static e_traitnames_from_any = {vx_type: vx_type.t_traitnames_from_any}
+  static t_traitnames_from_any = {
+    vx_type: vx_core.t_type
+  }
+  static e_traitnames_from_any = {
+    vx_type: vx_type.t_traitnames_from_any
+  }
 
   // (func traitnames<-any)
   static f_traitnames_from_any(val) {
@@ -604,8 +708,12 @@ export default class vx_type {
    * @param  {any} val
    * @return {typelist}
    */
-  static t_traits_from_any = {}
-  static e_traits_from_any = {vx_type: vx_type.t_traits_from_any}
+  static t_traits_from_any = {
+    vx_type: vx_core.t_type
+  }
+  static e_traits_from_any = {
+    vx_type: vx_type.t_traits_from_any
+  }
 
   // (func traits<-any)
   static f_traits_from_any(val) {
@@ -622,8 +730,12 @@ export default class vx_type {
    * @param  {typedef} vtypedef
    * @return {typelist}
    */
-  static t_traits_from_typedef = {}
-  static e_traits_from_typedef = {vx_type: vx_type.t_traits_from_typedef}
+  static t_traits_from_typedef = {
+    vx_type: vx_core.t_type
+  }
+  static e_traits_from_typedef = {
+    vx_type: vx_type.t_traits_from_typedef
+  }
 
   // (func traits<-typedef)
   static f_traits_from_typedef(vtypedef) {
@@ -632,7 +744,6 @@ export default class vx_type {
     return output
   }
 
-  // empty types
 
 
   static {
@@ -712,7 +823,6 @@ export default class vx_type {
     vx_core.vx_global_package_set(pkg)
 
     // (func allowtypenames<-type)
-    vx_type.t_allowtypenames_from_type['vx_type'] = vx_core.t_type
     vx_type.t_allowtypenames_from_type['vx_value'] = {
       name          : "allowtypenames<-type",
       pkgname       : "vx/type",
@@ -731,7 +841,6 @@ export default class vx_type {
     }
 
     // (func allowtypes<-type)
-    vx_type.t_allowtypes_from_type['vx_type'] = vx_core.t_type
     vx_type.t_allowtypes_from_type['vx_value'] = {
       name          : "allowtypes<-type",
       pkgname       : "vx/type",
@@ -750,7 +859,6 @@ export default class vx_type {
     }
 
     // (func any<-int)
-    vx_type.t_any_from_int['vx_type'] = vx_core.t_type
     vx_type.t_any_from_int['vx_value'] = {
       name          : "any<-int",
       pkgname       : "vx/type",
@@ -769,7 +877,6 @@ export default class vx_type {
     }
 
     // (func boolean<-string-ends)
-    vx_type.t_boolean_from_string_ends['vx_type'] = vx_core.t_type
     vx_type.t_boolean_from_string_ends['vx_value'] = {
       name          : "boolean<-string-ends",
       pkgname       : "vx/type",
@@ -788,7 +895,6 @@ export default class vx_type {
     }
 
     // (func boolean<-string-starts)
-    vx_type.t_boolean_from_string_starts['vx_type'] = vx_core.t_type
     vx_type.t_boolean_from_string_starts['vx_value'] = {
       name          : "boolean<-string-starts",
       pkgname       : "vx/type",
@@ -807,7 +913,6 @@ export default class vx_type {
     }
 
     // (func int<-string-find)
-    vx_type.t_int_from_string_find['vx_type'] = vx_core.t_type
     vx_type.t_int_from_string_find['vx_value'] = {
       name          : "int<-string-find",
       pkgname       : "vx/type",
@@ -826,7 +931,6 @@ export default class vx_type {
     }
 
     // (func int<-string-findkeyword)
-    vx_type.t_int_from_string_findkeyword['vx_type'] = vx_core.t_type
     vx_type.t_int_from_string_findkeyword['vx_value'] = {
       name          : "int<-string-findkeyword",
       pkgname       : "vx/type",
@@ -845,7 +949,6 @@ export default class vx_type {
     }
 
     // (func int<-string-findlast)
-    vx_type.t_int_from_string_findlast['vx_type'] = vx_core.t_type
     vx_type.t_int_from_string_findlast['vx_value'] = {
       name          : "int<-string-findlast",
       pkgname       : "vx/type",
@@ -864,7 +967,6 @@ export default class vx_type {
     }
 
     // (func is-boolean)
-    vx_type.t_is_boolean['vx_type'] = vx_core.t_type
     vx_type.t_is_boolean['vx_value'] = {
       name          : "is-boolean",
       pkgname       : "vx/type",
@@ -883,7 +985,6 @@ export default class vx_type {
     }
 
     // (func is-decimal)
-    vx_type.t_is_decimal['vx_type'] = vx_core.t_type
     vx_type.t_is_decimal['vx_value'] = {
       name          : "is-decimal",
       pkgname       : "vx/type",
@@ -902,7 +1003,6 @@ export default class vx_type {
     }
 
     // (func is-none)
-    vx_type.t_is_none['vx_type'] = vx_core.t_type
     vx_type.t_is_none['vx_value'] = {
       name          : "is-none",
       pkgname       : "vx/type",
@@ -921,7 +1021,6 @@ export default class vx_type {
     }
 
     // (func is-string)
-    vx_type.t_is_string['vx_type'] = vx_core.t_type
     vx_type.t_is_string['vx_value'] = {
       name          : "is-string",
       pkgname       : "vx/type",
@@ -940,7 +1039,6 @@ export default class vx_type {
     }
 
     // (func is-type)
-    vx_type.t_is_type['vx_type'] = vx_core.t_type
     vx_type.t_is_type['vx_value'] = {
       name          : "is-type",
       pkgname       : "vx/type",
@@ -959,7 +1057,6 @@ export default class vx_type {
     }
 
     // (func is-type<-any-typelist)
-    vx_type.t_is_type_from_any_typelist['vx_type'] = vx_core.t_type
     vx_type.t_is_type_from_any_typelist['vx_value'] = {
       name          : "is-type<-any-typelist",
       pkgname       : "vx/type",
@@ -978,7 +1075,6 @@ export default class vx_type {
     }
 
     // (func length<-string)
-    vx_type.t_length_from_string['vx_type'] = vx_core.t_type
     vx_type.t_length_from_string['vx_value'] = {
       name          : "length<-string",
       pkgname       : "vx/type",
@@ -997,7 +1093,6 @@ export default class vx_type {
     }
 
     // (func string-lowercase)
-    vx_type.t_string_lowercase['vx_type'] = vx_core.t_type
     vx_type.t_string_lowercase['vx_value'] = {
       name          : "string-lowercase",
       pkgname       : "vx/type",
@@ -1016,7 +1111,6 @@ export default class vx_type {
     }
 
     // (func string-outdent)
-    vx_type.t_string_outdent['vx_type'] = vx_core.t_type
     vx_type.t_string_outdent['vx_value'] = {
       name          : "string-outdent",
       pkgname       : "vx/type",
@@ -1035,7 +1129,6 @@ export default class vx_type {
     }
 
     // (func string-trim)
-    vx_type.t_string_trim['vx_type'] = vx_core.t_type
     vx_type.t_string_trim['vx_value'] = {
       name          : "string-trim",
       pkgname       : "vx/type",
@@ -1054,7 +1147,6 @@ export default class vx_type {
     }
 
     // (func string-uppercase)
-    vx_type.t_string_uppercase['vx_type'] = vx_core.t_type
     vx_type.t_string_uppercase['vx_value'] = {
       name          : "string-uppercase",
       pkgname       : "vx/type",
@@ -1073,7 +1165,6 @@ export default class vx_type {
     }
 
     // (func string<-int)
-    vx_type.t_string_from_int['vx_type'] = vx_core.t_type
     vx_type.t_string_from_int['vx_value'] = {
       name          : "string<-int",
       pkgname       : "vx/type",
@@ -1092,7 +1183,6 @@ export default class vx_type {
     }
 
     // (func string<-string-end)
-    vx_type.t_string_from_string_end['vx_type'] = vx_core.t_type
     vx_type.t_string_from_string_end['vx_value'] = {
       name          : "string<-string-end",
       pkgname       : "vx/type",
@@ -1111,7 +1201,6 @@ export default class vx_type {
     }
 
     // (func string<-string-start)
-    vx_type.t_string_from_string_start['vx_type'] = vx_core.t_type
     vx_type.t_string_from_string_start['vx_value'] = {
       name          : "string<-string-start",
       pkgname       : "vx/type",
@@ -1130,7 +1219,6 @@ export default class vx_type {
     }
 
     // (func string<-string-start-end)
-    vx_type.t_string_from_string_start_end['vx_type'] = vx_core.t_type
     vx_type.t_string_from_string_start_end['vx_value'] = {
       name          : "string<-string-start-end",
       pkgname       : "vx/type",
@@ -1149,7 +1237,6 @@ export default class vx_type {
     }
 
     // (func string<-stringlist-join)
-    vx_type.t_string_from_stringlist_join['vx_type'] = vx_core.t_type
     vx_type.t_string_from_stringlist_join['vx_value'] = {
       name          : "string<-stringlist-join",
       pkgname       : "vx/type",
@@ -1168,7 +1255,6 @@ export default class vx_type {
     }
 
     // (func stringlist<-string-split)
-    vx_type.t_stringlist_from_string_split['vx_type'] = vx_core.t_type
     vx_type.t_stringlist_from_string_split['vx_value'] = {
       name          : "stringlist<-string-split",
       pkgname       : "vx/type",
@@ -1187,7 +1273,6 @@ export default class vx_type {
     }
 
     // (func traitnames<-any)
-    vx_type.t_traitnames_from_any['vx_type'] = vx_core.t_type
     vx_type.t_traitnames_from_any['vx_value'] = {
       name          : "traitnames<-any",
       pkgname       : "vx/type",
@@ -1206,7 +1291,6 @@ export default class vx_type {
     }
 
     // (func traits<-any)
-    vx_type.t_traits_from_any['vx_type'] = vx_core.t_type
     vx_type.t_traits_from_any['vx_value'] = {
       name          : "traits<-any",
       pkgname       : "vx/type",
@@ -1225,7 +1309,6 @@ export default class vx_type {
     }
 
     // (func traits<-typedef)
-    vx_type.t_traits_from_typedef['vx_type'] = vx_core.t_type
     vx_type.t_traits_from_typedef['vx_value'] = {
       name          : "traits<-typedef",
       pkgname       : "vx/type",

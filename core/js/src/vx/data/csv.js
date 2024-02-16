@@ -14,16 +14,19 @@ export default class vx_data_csv {
    * type: csv
    */
   static t_csv = {}
+  static e_csv = {vx_type: vx_data_csv.t_csv}
 
   /**
    * type: csvrowmap
    */
   static t_csvrowmap = {}
+  static e_csvrowmap = {vx_type: vx_data_csv.t_csvrowmap}
 
   /**
    * type: csvrows
    */
   static t_csvrows = {}
+  static e_csvrows = vx_core.vx_new_list(vx_data_csv.t_csvrows, [])
   /**
    * Constant: delimcsv
    * Csv File Delimiters
@@ -37,8 +40,12 @@ export default class vx_data_csv {
    * @param  {file} file
    * @return {csv}
    */
-  static t_csv_read_from_file = {}
-  static e_csv_read_from_file = {vx_type: vx_data_csv.t_csv_read_from_file}
+  static t_csv_read_from_file = {
+    vx_type: vx_core.t_type
+  }
+  static e_csv_read_from_file = {
+    vx_type: vx_data_csv.t_csv_read_from_file
+  }
 
   // (func csv-read<-file)
   static f_csv_read_from_file(context, file) {
@@ -60,8 +67,12 @@ export default class vx_data_csv {
    * @param  {file} file
    * @return {csv}
    */
-  static t_csv_from_file = {}
-  static e_csv_from_file = {vx_type: vx_data_csv.t_csv_from_file}
+  static t_csv_from_file = {
+    vx_type: vx_core.t_type
+  }
+  static e_csv_from_file = {
+    vx_type: vx_data_csv.t_csv_from_file
+  }
 
   // (func csv<-file)
   static f_csv_from_file(file) {
@@ -83,8 +94,12 @@ export default class vx_data_csv {
    * @param  {string} text
    * @return {csv}
    */
-  static t_csv_from_string = {}
-  static e_csv_from_string = {vx_type: vx_data_csv.t_csv_from_string}
+  static t_csv_from_string = {
+    vx_type: vx_core.t_type
+  }
+  static e_csv_from_string = {
+    vx_type: vx_data_csv.t_csv_from_string
+  }
 
   // (func csv<-string)
   static f_csv_from_string(text) {
@@ -104,8 +119,12 @@ export default class vx_data_csv {
    * @param  {textblock} textblock
    * @return {csv}
    */
-  static t_csv_from_textblock = {}
-  static e_csv_from_textblock = {vx_type: vx_data_csv.t_csv_from_textblock}
+  static t_csv_from_textblock = {
+    vx_type: vx_core.t_type
+  }
+  static e_csv_from_textblock = {
+    vx_type: vx_data_csv.t_csv_from_textblock
+  }
 
   // (func csv<-textblock)
   static f_csv_from_textblock(textblock) {
@@ -134,8 +153,12 @@ export default class vx_data_csv {
    * @param  {textblock} textblock
    * @return {csvrows}
    */
-  static t_csvrows_from_textblock = {}
-  static e_csvrows_from_textblock = {vx_type: vx_data_csv.t_csvrows_from_textblock}
+  static t_csvrows_from_textblock = {
+    vx_type: vx_core.t_type
+  }
+  static e_csvrows_from_textblock = {
+    vx_type: vx_data_csv.t_csvrows_from_textblock
+  }
 
   // (func csvrows<-textblock)
   static f_csvrows_from_textblock(textblock) {
@@ -165,14 +188,18 @@ export default class vx_data_csv {
    * @param  {csv} csv
    * @return {stringmap}
    */
-  static t_stringmap_from_csv = {}
-  static e_stringmap_from_csv = {vx_type: vx_data_csv.t_stringmap_from_csv}
+  static t_stringmap_from_csv = {
+    vx_type: vx_core.t_type
+  }
+  static e_stringmap_from_csv = {
+    vx_type: vx_data_csv.t_stringmap_from_csv
+  }
 
   // (func stringmap<-csv)
   static f_stringmap_from_csv(csv) {
     let output = vx_core.e_stringmap
     output = vx_core.f_let(
-      {"any-1": vx_core.t_string, "any-2": vx_core.t_stringlist, "list-1": vx_core.t_stringlist, "map-1": vx_core.t_stringmap, "map-2": vx_data_csv.t_csvrowmap},
+      {"any-1": vx_core.t_stringmap, "any-2": vx_core.t_stringlist, "list-1": vx_core.t_stringlist, "map-1": vx_core.t_stringmap, "map-2": vx_data_csv.t_csvrowmap},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const rows = vx_core.f_any_from_struct({"any-1": vx_data_csv.t_csvrows, "struct-2": vx_data_csv.t_csv}, csv, ":rows")
@@ -199,8 +226,12 @@ export default class vx_data_csv {
    * @param  {string} text
    * @return {textblock}
    */
-  static t_textblock_csv_from_string = {}
-  static e_textblock_csv_from_string = {vx_type: vx_data_csv.t_textblock_csv_from_string}
+  static t_textblock_csv_from_string = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_csv_from_string = {
+    vx_type: vx_data_csv.t_textblock_csv_from_string
+  }
 
   // (func textblock-csv<-string)
   static f_textblock_csv_from_string(text) {
@@ -212,10 +243,6 @@ export default class vx_data_csv {
     return output
   }
 
-  // empty types
-  static e_csv = {}
-  static e_csvrowmap = {}
-  static e_csvrows = []
 
 
   static {
@@ -328,22 +355,7 @@ export default class vx_data_csv {
     }
     vx_data_csv.e_csvrows['vx_type'] = vx_data_csv.t_csvrows
 
-    // (const delimcsv)
-    Object.assign(vx_data_csv.c_delimcsv, vx_core.f_new(
-      vx_data_textblock.t_delim,
-      ":name",
-      "delimcsv",
-      ":delimlist",
-      vx_core.f_new(
-        vx_data_textblock.t_delimlist,
-        vx_data_textblock.c_delimline,
-        vx_data_textblock.c_delimquote,
-        vx_data_textblock.c_delimcomma
-      )
-    ))
-
     // (func csv-read<-file)
-    vx_data_csv.t_csv_read_from_file['vx_type'] = vx_core.t_type
     vx_data_csv.t_csv_read_from_file['vx_value'] = {
       name          : "csv-read<-file",
       pkgname       : "vx/data/csv",
@@ -362,7 +374,6 @@ export default class vx_data_csv {
     }
 
     // (func csv<-file)
-    vx_data_csv.t_csv_from_file['vx_type'] = vx_core.t_type
     vx_data_csv.t_csv_from_file['vx_value'] = {
       name          : "csv<-file",
       pkgname       : "vx/data/csv",
@@ -381,7 +392,6 @@ export default class vx_data_csv {
     }
 
     // (func csv<-string)
-    vx_data_csv.t_csv_from_string['vx_type'] = vx_core.t_type
     vx_data_csv.t_csv_from_string['vx_value'] = {
       name          : "csv<-string",
       pkgname       : "vx/data/csv",
@@ -400,7 +410,6 @@ export default class vx_data_csv {
     }
 
     // (func csv<-textblock)
-    vx_data_csv.t_csv_from_textblock['vx_type'] = vx_core.t_type
     vx_data_csv.t_csv_from_textblock['vx_value'] = {
       name          : "csv<-textblock",
       pkgname       : "vx/data/csv",
@@ -419,7 +428,6 @@ export default class vx_data_csv {
     }
 
     // (func csvrows<-textblock)
-    vx_data_csv.t_csvrows_from_textblock['vx_type'] = vx_core.t_type
     vx_data_csv.t_csvrows_from_textblock['vx_value'] = {
       name          : "csvrows<-textblock",
       pkgname       : "vx/data/csv",
@@ -438,7 +446,6 @@ export default class vx_data_csv {
     }
 
     // (func stringmap<-csv)
-    vx_data_csv.t_stringmap_from_csv['vx_type'] = vx_core.t_type
     vx_data_csv.t_stringmap_from_csv['vx_value'] = {
       name          : "stringmap<-csv",
       pkgname       : "vx/data/csv",
@@ -457,7 +464,6 @@ export default class vx_data_csv {
     }
 
     // (func textblock-csv<-string)
-    vx_data_csv.t_textblock_csv_from_string['vx_type'] = vx_core.t_type
     vx_data_csv.t_textblock_csv_from_string['vx_value'] = {
       name          : "textblock-csv<-string",
       pkgname       : "vx/data/csv",
@@ -474,6 +480,20 @@ export default class vx_data_csv {
       proplast      : {},
       fn            : vx_data_csv.f_textblock_csv_from_string
     }
+
+    // (const delimcsv)
+    Object.assign(vx_data_csv.c_delimcsv, vx_core.f_new(
+      vx_data_textblock.t_delim,
+      ":name",
+      "delimcsv",
+      ":delimlist",
+      vx_core.f_new(
+        vx_data_textblock.t_delimlist,
+        vx_data_textblock.c_delimline,
+        vx_data_textblock.c_delimquote,
+        vx_data_textblock.c_delimcomma
+      )
+    ))
 
   }
 }

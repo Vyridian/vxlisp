@@ -210,12 +210,15 @@ func StringFromValue(value vxvalue) string {
 }
 
 func StringFromValueIndent(value vxvalue, indent int) string {
-	lineindent := ""
+	initindent := ""
+	lineindent := "\n"
 	if indent > 0 {
-		lineindent = "\n" + StringRepeat(" ", indent)
+		sindent := StringRepeat(" ", indent)
+		lineindent += sindent
+		initindent = lineindent
 	}
 	output := "" +
-		lineindent + "(value" +
+		initindent + "(value" +
 		lineindent + " :code  " + value.code
 	if value.name != "" {
 		output += lineindent + " :name  " + value.name
@@ -849,8 +852,16 @@ func ValueValidate(value vxvalue, expectedtype *vxtype, multi bool, mapgeneric m
 							}
 						}
 					default:
-						msg := NewMsgFromTextblock(textblock, "Value with Function Type can only be a lambda (fn) or refer to another function", NameFromFunc(expectedfuncref), NameFromFunc(actualfunc), "\n"+subpath+"\n", StringFromValue(value))
-						msgblock = MsgblockAddError(msgblock, msg)
+						if expectedtypename == NameFromType(actualfunc.vxtype) {
+							actualfunc, msgs = FuncValidate(actualfunc, textblock, subpath)
+							msgblock = MsgblockAddBlock(msgblock, msgs)
+							mapgeneric, msgs = MapTypeMerge(mapgeneric, actualfunc.mapgeneric, subpath)
+							msgblock = MsgblockAddBlock(msgblock, msgs)
+							pass = true
+						} else {
+							msg := NewMsgFromTextblock(textblock, "Value with Function Type can only be a lambda (fn) or refer to another function", NameFromFunc(expectedfuncref), NameFromFunc(actualfunc), "\n"+subpath+"\n", StringFromValue(value))
+							msgblock = MsgblockAddError(msgblock, msg)
+						}
 					}
 				}
 			case ":funcref":

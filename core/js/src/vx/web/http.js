@@ -13,6 +13,7 @@ export default class vx_web_http {
    * type: response
    */
   static t_response = {}
+  static e_response = {vx_type: vx_web_http.t_response}
   /**
    * 
    * @async @function csv_from_httpget
@@ -20,8 +21,12 @@ export default class vx_web_http {
    * @param  {string} url
    * @return {csv}
    */
-  static t_csv_from_httpget = {}
-  static e_csv_from_httpget = {vx_type: vx_web_http.t_csv_from_httpget}
+  static t_csv_from_httpget = {
+    vx_type: vx_core.t_type
+  }
+  static e_csv_from_httpget = {
+    vx_type: vx_web_http.t_csv_from_httpget
+  }
 
   // (func csv<-httpget)
   static async f_csv_from_httpget(url) {
@@ -44,8 +49,12 @@ export default class vx_web_http {
    * @param  {string} url
    * @return {response}
    */
-  static t_json_from_httpget = {}
-  static e_json_from_httpget = {vx_type: vx_web_http.t_json_from_httpget}
+  static t_json_from_httpget = {
+    vx_type: vx_core.t_type
+  }
+  static e_json_from_httpget = {
+    vx_type: vx_web_http.t_json_from_httpget
+  }
 
   // (func json<-httpget)
   static async f_json_from_httpget(url) {
@@ -69,8 +78,12 @@ export default class vx_web_http {
    * @param  {string} contenttype
    * @return {response}
    */
-  static t_response_from_httpget = {}
-  static e_response_from_httpget = {vx_type: vx_web_http.t_response_from_httpget}
+  static t_response_from_httpget = {
+    vx_type: vx_core.t_type
+  }
+  static e_response_from_httpget = {
+    vx_type: vx_web_http.t_response_from_httpget
+  }
 
   // (func response<-httpget)
   static async f_response_from_httpget(url, contenttype) {
@@ -91,8 +104,12 @@ export default class vx_web_http {
    * @param  {string} url
    * @return {string}
    */
-  static t_text_from_httpget = {}
-  static e_text_from_httpget = {vx_type: vx_web_http.t_text_from_httpget}
+  static t_text_from_httpget = {
+    vx_type: vx_core.t_type
+  }
+  static e_text_from_httpget = {
+    vx_type: vx_web_http.t_text_from_httpget
+  }
 
   // (func text<-httpget)
   static async f_text_from_httpget(url) {
@@ -114,8 +131,12 @@ export default class vx_web_http {
    * @param  {response} response
    * @return {string}
    */
-  static t_text_from_response = {}
-  static e_text_from_response = {vx_type: vx_web_http.t_text_from_response}
+  static t_text_from_response = {
+    vx_type: vx_core.t_type
+  }
+  static e_text_from_response = {
+    vx_type: vx_web_http.t_text_from_response
+  }
 
   // (func text<-response)
   static f_text_from_response(response) {
@@ -132,8 +153,12 @@ export default class vx_web_http {
    * @param  {string} contenttype
    * @return {textblock}
    */
-  static t_textblock_from_httpget = {}
-  static e_textblock_from_httpget = {vx_type: vx_web_http.t_textblock_from_httpget}
+  static t_textblock_from_httpget = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_from_httpget = {
+    vx_type: vx_web_http.t_textblock_from_httpget
+  }
 
   // (func textblock<-httpget)
   static async f_textblock_from_httpget(url, contenttype) {
@@ -155,8 +180,12 @@ export default class vx_web_http {
    * @param  {response} response
    * @return {textblock}
    */
-  static t_textblock_from_response = {}
-  static e_textblock_from_response = {vx_type: vx_web_http.t_textblock_from_response}
+  static t_textblock_from_response = {
+    vx_type: vx_core.t_type
+  }
+  static e_textblock_from_response = {
+    vx_type: vx_web_http.t_textblock_from_response
+  }
 
   // (func textblock<-response)
   static f_textblock_from_response(response) {
@@ -176,8 +205,12 @@ export default class vx_web_http {
    * @param  {string} url
    * @return {xml}
    */
-  static t_xml_from_httpget = {}
-  static e_xml_from_httpget = {vx_type: vx_web_http.t_xml_from_httpget}
+  static t_xml_from_httpget = {
+    vx_type: vx_core.t_type
+  }
+  static e_xml_from_httpget = {
+    vx_type: vx_web_http.t_xml_from_httpget
+  }
 
   // (func xml<-httpget)
   static async f_xml_from_httpget(url) {
@@ -193,8 +226,6 @@ export default class vx_web_http {
     return output
   }
 
-  // empty types
-  static e_response = {}
 
 
   static {
@@ -269,7 +300,6 @@ export default class vx_web_http {
     vx_web_http.e_response['vx_value'] = {}
 
     // (func csv<-httpget)
-    vx_web_http.t_csv_from_httpget['vx_type'] = vx_core.t_type
     vx_web_http.t_csv_from_httpget['vx_value'] = {
       name          : "csv<-httpget",
       pkgname       : "vx/web/http",
@@ -288,7 +318,6 @@ export default class vx_web_http {
     }
 
     // (func json<-httpget)
-    vx_web_http.t_json_from_httpget['vx_type'] = vx_core.t_type
     vx_web_http.t_json_from_httpget['vx_value'] = {
       name          : "json<-httpget",
       pkgname       : "vx/web/http",
@@ -307,7 +336,6 @@ export default class vx_web_http {
     }
 
     // (func response<-httpget)
-    vx_web_http.t_response_from_httpget['vx_type'] = vx_core.t_type
     vx_web_http.t_response_from_httpget['vx_value'] = {
       name          : "response<-httpget",
       pkgname       : "vx/web/http",
@@ -326,7 +354,6 @@ export default class vx_web_http {
     }
 
     // (func text<-httpget)
-    vx_web_http.t_text_from_httpget['vx_type'] = vx_core.t_type
     vx_web_http.t_text_from_httpget['vx_value'] = {
       name          : "text<-httpget",
       pkgname       : "vx/web/http",
@@ -345,7 +372,6 @@ export default class vx_web_http {
     }
 
     // (func text<-response)
-    vx_web_http.t_text_from_response['vx_type'] = vx_core.t_type
     vx_web_http.t_text_from_response['vx_value'] = {
       name          : "text<-response",
       pkgname       : "vx/web/http",
@@ -364,7 +390,6 @@ export default class vx_web_http {
     }
 
     // (func textblock<-httpget)
-    vx_web_http.t_textblock_from_httpget['vx_type'] = vx_core.t_type
     vx_web_http.t_textblock_from_httpget['vx_value'] = {
       name          : "textblock<-httpget",
       pkgname       : "vx/web/http",
@@ -383,7 +408,6 @@ export default class vx_web_http {
     }
 
     // (func textblock<-response)
-    vx_web_http.t_textblock_from_response['vx_type'] = vx_core.t_type
     vx_web_http.t_textblock_from_response['vx_value'] = {
       name          : "textblock<-response",
       pkgname       : "vx/web/http",
@@ -402,7 +426,6 @@ export default class vx_web_http {
     }
 
     // (func xml<-httpget)
-    vx_web_http.t_xml_from_httpget['vx_type'] = vx_core.t_type
     vx_web_http.t_xml_from_httpget['vx_value'] = {
       name          : "xml<-httpget",
       pkgname       : "vx/web/http",

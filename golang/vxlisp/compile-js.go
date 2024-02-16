@@ -285,7 +285,7 @@ func JsFromFunc(lang *vxlang, fnc *vxfunc) (string, string, *vxmsgblock) {
 	jstname := JsFromName(fnc.pkgname) + ".t_" + jsfuncname
 	statics := "" +
 		"\n    // (func " + fnc.name + ")" +
-		"\n    " + jstname + "['vx_type'] = vx_core.t_type" +
+		//"\n    " + jstname + "['vx_type'] = vx_core.t_type" +
 		"\n    " + jstname + "['vx_value'] = {" +
 		proptext +
 		"\n    }" +
@@ -364,8 +364,12 @@ func JsFromFunc(lang *vxlang, fnc *vxfunc) (string, string, *vxmsgblock) {
 		"  /**" +
 		"\n   * " + StringFromStringIndent(doc, "   * ") +
 		"\n   */" +
-		"\n  static t_" + jsfuncname + " = {}" +
-		"\n  static e_" + jsfuncname + " = {vx_type: " + JsFromName(fnc.pkgname) + ".t_" + jsfuncname + "}" +
+		"\n  static t_" + jsfuncname + " = {" +
+		"\n    vx_type: vx_core.t_type" +
+		"\n  }" +
+		"\n  static e_" + jsfuncname + " = {" +
+		"\n    vx_type: " + JsFromName(fnc.pkgname) + ".t_" + jsfuncname +
+		"\n  }" +
 		"\n" +
 		header +
 		logheader +
@@ -501,23 +505,16 @@ func JsFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, *vxmsg
 		"\n    })" +
 		"\n    vx_core.vx_global_package_set(pkg)" +
 		"\n"
-	allempty += "" +
-		"  // empty types" +
-		emptytypes +
-		//		"\n" +
-		//		"\n  static c_empty = {" +
-		//		"\n    " + StringFromListStringJoin(emptyvalues, ",\n    ") +
-		//		"\n  }" +
-		"\n"
-	allconsts := ""
-	cnstkeys := ListKeyFromMapConst(pkg.mapconst)
-	for _, cnstid := range cnstkeys {
-		cnst := pkg.mapconst[cnstid]
-		consttext, statictext, msgs := JsFromConst(lang, cnst, pkg)
-		msgblock = MsgblockAddBlock(msgblock, msgs)
-		allconsts += consttext
-		statics += statictext
-	}
+		/*
+			allempty += "" +
+				"  // empty types" +
+				emptytypes +
+				//		"\n" +
+				//		"\n  static c_empty = {" +
+				//		"\n    " + StringFromListStringJoin(emptyvalues, ",\n    ") +
+				//		"\n  }" +
+				"\n"
+		*/
 	allfuncs := ""
 	fnckeys := ListKeyFromMapFunc(pkg.mapfunc)
 	for _, fncid := range fnckeys {
@@ -528,6 +525,15 @@ func JsFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, *vxmsg
 			allfuncs += fnctext
 			statics += fncstatics
 		}
+	}
+	allconsts := ""
+	cnstkeys := ListKeyFromMapConst(pkg.mapconst)
+	for _, cnstid := range cnstkeys {
+		cnst := pkg.mapconst[cnstid]
+		consttext, statictext, msgs := JsFromConst(lang, cnst, pkg)
+		msgblock = MsgblockAddBlock(msgblock, msgs)
+		allconsts += consttext
+		statics += statictext
 	}
 	namespaceopen, namespaceclose := LangNamespaceFromPackage(lang, pkgname)
 	output := "" +
@@ -603,6 +609,21 @@ func JsFromType(typ *vxtype) (string, string, *vxmsgblock) {
 	pkgname := JsFromName(typ.pkgname)
 	typename := JsFromName(typ.alias)
 	proptext := ""
+	evalue := ""
+	switch NameFromType(typ) {
+	case "vx/core/boolean":
+		evalue = "false"
+	case "vx/core/float", "vx/core/int":
+		evalue = "0"
+	case "vx/core/string":
+		evalue = "''"
+	default:
+		if typ.extends == ":list" {
+			evalue = "vx_core.vx_new_list(" + pkgname + ".t_" + typename + ", [])"
+		} else {
+			evalue = "{vx_type: " + pkgname + ".t_" + typename + "}"
+		}
+	}
 	if len(properties) > 0 {
 		proptext = "\n      " + strings.Join(properties, ",\n      ")
 	}
@@ -617,6 +638,7 @@ func JsFromType(typ *vxtype) (string, string, *vxmsgblock) {
 		"\n   * " + StringFromStringIndent(doc, "   * ") +
 		"\n   */" +
 		"\n  static t_" + typename + " = {}" +
+		"\n  static e_" + typename + " = " + evalue +
 		"\n"
 	return output, statics, msgblock
 }

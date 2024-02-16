@@ -14,8 +14,12 @@ export default class vx_translation_all {
    * @param  {anylist} ... args
    * @return {context}
    */
-  static t_context_all = {}
-  static e_context_all = {vx_type: vx_translation_all.t_context_all}
+  static t_context_all = {
+    vx_type: vx_core.t_type
+  }
+  static e_context_all = {
+    vx_type: vx_translation_all.t_context_all
+  }
 
   // (func context-all)
   static f_context_all(...args) {
@@ -40,8 +44,12 @@ export default class vx_translation_all {
    * Returns a translationmap with all translations.
    * @return {translationmap}
    */
-  static t_translationmap_all = {}
-  static e_translationmap_all = {vx_type: vx_translation_all.t_translationmap_all}
+  static t_translationmap_all = {
+    vx_type: vx_core.t_type
+  }
+  static e_translationmap_all = {
+    vx_type: vx_translation_all.t_translationmap_all
+  }
 
   // (func translationmap-all)
   static f_translationmap_all() {
@@ -53,7 +61,6 @@ export default class vx_translation_all {
     return output
   }
 
-  // empty types
 
 
   static {
@@ -81,7 +88,6 @@ export default class vx_translation_all {
     vx_core.vx_global_package_set(pkg)
 
     // (func context-all)
-    vx_translation_all.t_context_all['vx_type'] = vx_core.t_type
     vx_translation_all.t_context_all['vx_value'] = {
       name          : "context-all",
       pkgname       : "vx/translation/all",
@@ -100,7 +106,6 @@ export default class vx_translation_all {
     }
 
     // (func translationmap-all)
-    vx_translation_all.t_translationmap_all['vx_type'] = vx_core.t_type
     vx_translation_all.t_translationmap_all['vx_value'] = {
       name          : "translationmap-all",
       pkgname       : "vx/translation/all",

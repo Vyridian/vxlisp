@@ -315,6 +315,11 @@ func BooleanAllowFromTypeType(typ *vxtype, checktype *vxtype) (bool, *vxmsgblock
 	checkname := NameFromType(checktype)
 	if checkname != "" {
 		typename := NameFromType(typ)
+		for _, trait := range checktype.traits {
+			if NameFromType(trait) == typename {
+				pass = true
+			}
+		}
 		for _, allowtype := range typ.allowtypes {
 			if checkname == NameFromType(allowtype) {
 				pass = true
@@ -425,6 +430,13 @@ func BooleanMatchFromTypeType(expectedtype *vxtype, actualtype *vxtype, multi bo
 		case "vx/core/none":
 			// It doesn't matter what type. It will be discarded.
 			pass = true
+		default:
+			ok, msgs := BooleanAllowFromTypeType(expectedtype, actualtype)
+			msgblock = MsgblockAddBlock(msgblock, msgs)
+			if ok {
+				pass = true
+				resulttype = expectedtype
+			}
 		}
 	}
 	switch actualtypename {
@@ -822,14 +834,15 @@ func StringFromType(typ *vxtype) string {
 }
 
 func StringFromTypeIndent(typ *vxtype, indent int) string {
-	sindent := ""
+	initindent := ""
 	lineindent := "\n"
 	if indent > 0 {
-		sindent = StringRepeat(" ", indent)
+		sindent := StringRepeat(" ", indent)
 		lineindent += sindent
+		initindent = lineindent
 	}
 	output := "" +
-		sindent + "(type" +
+		initindent + "(type" +
 		lineindent + " :name     " + typ.name +
 		lineindent + " :pkgname  " + typ.pkgname +
 		lineindent + " :extends  " + typ.extends
@@ -879,14 +892,17 @@ func StringFromMapType(maptype map[string]*vxtype) string {
 }
 
 func StringFromMapTypeIndent(maptype map[string]*vxtype, indent int) string {
-	lineindent := ""
+	initindent := ""
+	lineindent := "\n"
 	if indent > 0 {
-		lineindent = "\n" + StringRepeat(" ", indent)
+		sindent := StringRepeat(" ", indent)
+		lineindent += sindent
+		initindent = lineindent
 	}
-	output := lineindent + "(typemap"
+	output := initindent + "(typemap"
 	if len(maptype) > 0 {
 		for key, typ := range maptype {
-			output += lineindent + " " + key + " " + StringFromTypeIndent(typ, indent+2)
+			output += lineindent + " :" + key + " " + StringFromTypeIndent(typ, indent+2)
 		}
 	}
 	output += ")"

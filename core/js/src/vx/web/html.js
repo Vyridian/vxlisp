@@ -12,194 +12,229 @@ export default class vx_web_html {
    * Body Tag
    */
   static t_body = {}
+  static e_body = {vx_type: vx_web_html.t_body}
 
   /**
    * type: details
    * Details Tag
    */
   static t_details = {}
+  static e_details = {vx_type: vx_web_html.t_details}
 
   /**
    * type: div
    * Div Tag
    */
   static t_div = {}
+  static e_div = {vx_type: vx_web_html.t_div}
 
   /**
    * type: divchild
    * Div Child Trait
    */
   static t_divchild = {}
+  static e_divchild = {vx_type: vx_web_html.t_divchild}
 
   /**
    * type: divchildlist
    * List of divchild
    */
   static t_divchildlist = {}
+  static e_divchildlist = vx_core.vx_new_list(vx_web_html.t_divchildlist, [])
 
   /**
    * type: divlist
    * List of div
    */
   static t_divlist = {}
+  static e_divlist = vx_core.vx_new_list(vx_web_html.t_divlist, [])
 
   /**
    * type: footer
    * Body Tag
    */
   static t_footer = {}
+  static e_footer = {vx_type: vx_web_html.t_footer}
 
   /**
    * type: h1
    * Header 1 Tag
    */
   static t_h1 = {}
+  static e_h1 = {vx_type: vx_web_html.t_h1}
 
   /**
    * type: h2
    * Header 2 Tag
    */
   static t_h2 = {}
+  static e_h2 = {vx_type: vx_web_html.t_h2}
 
   /**
    * type: h3
    * Header 3 Tag
    */
   static t_h3 = {}
+  static e_h3 = {vx_type: vx_web_html.t_h3}
 
   /**
    * type: head
    * Head Tag
    */
   static t_head = {}
+  static e_head = {vx_type: vx_web_html.t_head}
 
   /**
    * type: headchild
    * Head Child Trait
    */
   static t_headchild = {}
+  static e_headchild = {vx_type: vx_web_html.t_headchild}
 
   /**
    * type: headchildlist
    * List of headchild
    */
   static t_headchildlist = {}
+  static e_headchildlist = vx_core.vx_new_list(vx_web_html.t_headchildlist, [])
 
   /**
    * type: html
    * Html Tag
    */
   static t_html = {}
+  static e_html = {vx_type: vx_web_html.t_html}
 
   /**
    * type: meta
    * Meta Tag
    */
   static t_meta = {}
+  static e_meta = {vx_type: vx_web_html.t_meta}
 
   /**
    * type: node
    * Common Html Node Trait
    */
   static t_node = {}
+  static e_node = {vx_type: vx_web_html.t_node}
 
   /**
    * type: nodelist
    * List of node
    */
   static t_nodelist = {}
+  static e_nodelist = vx_core.vx_new_list(vx_web_html.t_nodelist, [])
 
   /**
    * type: p
    * Paragraph Tag
    */
   static t_p = {}
+  static e_p = {vx_type: vx_web_html.t_p}
 
   /**
    * type: propmap
    * Map of props
    */
   static t_propmap = {}
+  static e_propmap = {vx_type: vx_web_html.t_propmap}
 
   /**
    * type: style
    * Programmable Cascading Style
    */
   static t_style = {}
+  static e_style = {vx_type: vx_web_html.t_style}
 
   /**
    * type: stylelist
    * List of style
    */
   static t_stylelist = {}
+  static e_stylelist = vx_core.vx_new_list(vx_web_html.t_stylelist, [])
 
   /**
    * type: stylemap
    * Map of style
    */
   static t_stylemap = {}
+  static e_stylemap = {vx_type: vx_web_html.t_stylemap}
 
   /**
    * type: stylesheet
    * Programmable Cascading Style Sheet CSS type
    */
   static t_stylesheet = {}
+  static e_stylesheet = {vx_type: vx_web_html.t_stylesheet}
 
   /**
    * type: table
    * <table> Tag
    */
   static t_table = {}
+  static e_table = {vx_type: vx_web_html.t_table}
 
   /**
    * type: tbody
    * <tbody> Tag
    */
   static t_tbody = {}
+  static e_tbody = {vx_type: vx_web_html.t_tbody}
 
   /**
    * type: td
    * <tr> Tag
    */
   static t_td = {}
+  static e_td = {vx_type: vx_web_html.t_td}
 
   /**
    * type: tdlist
    * List of td
    */
   static t_tdlist = {}
+  static e_tdlist = vx_core.vx_new_list(vx_web_html.t_tdlist, [])
 
   /**
    * type: thead
    * <thead> Tag
    */
   static t_thead = {}
+  static e_thead = {vx_type: vx_web_html.t_thead}
 
   /**
    * type: title
    * Title Tag
    */
   static t_title = {}
+  static e_title = {vx_type: vx_web_html.t_title}
 
   /**
    * type: tr
    * <tr> Tag
    */
   static t_tr = {}
+  static e_tr = {vx_type: vx_web_html.t_tr}
 
   /**
    * type: trlist
    * List of tr
    */
   static t_trlist = {}
+  static e_trlist = vx_core.vx_new_list(vx_web_html.t_trlist, [])
   /**
    * @function htmlstring_from_string
    * Convert text to HTML string
    * @param  {string} text
    * @return {string}
    */
-  static t_htmlstring_from_string = {}
-  static e_htmlstring_from_string = {vx_type: vx_web_html.t_htmlstring_from_string}
+  static t_htmlstring_from_string = {
+    vx_type: vx_core.t_type
+  }
+  static e_htmlstring_from_string = {
+    vx_type: vx_web_html.t_htmlstring_from_string
+  }
 
   // (func htmlstring<-string)
   static f_htmlstring_from_string(text) {
@@ -218,8 +253,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_indent = {}
-  static e_string_indent = {vx_type: vx_web_html.t_string_indent}
+  static t_string_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_indent = {
+    vx_type: vx_web_html.t_string_indent
+  }
 
   // (func string-indent)
   static f_string_indent(indent) {
@@ -235,8 +274,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_body_indent = {}
-  static e_string_from_body_indent = {vx_type: vx_web_html.t_string_from_body_indent}
+  static t_string_from_body_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_body_indent = {
+    vx_type: vx_web_html.t_string_from_body_indent
+  }
 
   // (func string<-body-indent)
   static f_string_from_body_indent(body, indent) {
@@ -259,8 +302,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_details_indent = {}
-  static e_string_from_details_indent = {vx_type: vx_web_html.t_string_from_details_indent}
+  static t_string_from_details_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_details_indent = {
+    vx_type: vx_web_html.t_string_from_details_indent
+  }
 
   // (func string<-details-indent)
   static f_string_from_details_indent(details, indent) {
@@ -305,8 +352,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_div_indent = {}
-  static e_string_from_div_indent = {vx_type: vx_web_html.t_string_from_div_indent}
+  static t_string_from_div_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_div_indent = {
+    vx_type: vx_web_html.t_string_from_div_indent
+  }
 
   // (func string<-div-indent)
   static f_string_from_div_indent(div, indent) {
@@ -345,8 +396,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_footer_indent = {}
-  static e_string_from_footer_indent = {vx_type: vx_web_html.t_string_from_footer_indent}
+  static t_string_from_footer_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_footer_indent = {
+    vx_type: vx_web_html.t_string_from_footer_indent
+  }
 
   // (func string<-footer-indent)
   static f_string_from_footer_indent(footer, indent) {
@@ -369,8 +424,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_h1_indent = {}
-  static e_string_from_h1_indent = {vx_type: vx_web_html.t_string_from_h1_indent}
+  static t_string_from_h1_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_h1_indent = {
+    vx_type: vx_web_html.t_string_from_h1_indent
+  }
 
   // (func string<-h1-indent)
   static f_string_from_h1_indent(h1, indent) {
@@ -406,8 +465,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_h2_indent = {}
-  static e_string_from_h2_indent = {vx_type: vx_web_html.t_string_from_h2_indent}
+  static t_string_from_h2_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_h2_indent = {
+    vx_type: vx_web_html.t_string_from_h2_indent
+  }
 
   // (func string<-h2-indent)
   static f_string_from_h2_indent(h2, indent) {
@@ -443,8 +506,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_h3_indent = {}
-  static e_string_from_h3_indent = {vx_type: vx_web_html.t_string_from_h3_indent}
+  static t_string_from_h3_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_h3_indent = {
+    vx_type: vx_web_html.t_string_from_h3_indent
+  }
 
   // (func string<-h3-indent)
   static f_string_from_h3_indent(h3, indent) {
@@ -480,8 +547,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_head_indent = {}
-  static e_string_from_head_indent = {vx_type: vx_web_html.t_string_from_head_indent}
+  static t_string_from_head_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_head_indent = {
+    vx_type: vx_web_html.t_string_from_head_indent
+  }
 
   // (func string<-head-indent)
   static f_string_from_head_indent(head, indent) {
@@ -503,8 +574,12 @@ export default class vx_web_html {
    * @param  {html} html
    * @return {string}
    */
-  static t_string_from_html = {}
-  static e_string_from_html = {vx_type: vx_web_html.t_string_from_html}
+  static t_string_from_html = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_html = {
+    vx_type: vx_web_html.t_string_from_html
+  }
 
   // (func string<-html)
   static f_string_from_html(html) {
@@ -547,8 +622,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_indent = {}
-  static e_string_from_indent = {vx_type: vx_web_html.t_string_from_indent}
+  static t_string_from_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_indent = {
+    vx_type: vx_web_html.t_string_from_indent
+  }
 
   // (func string<-indent)
   static f_string_from_indent(indent) {
@@ -573,8 +652,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_meta_indent = {}
-  static e_string_from_meta_indent = {vx_type: vx_web_html.t_string_from_meta_indent}
+  static t_string_from_meta_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_meta_indent = {
+    vx_type: vx_web_html.t_string_from_meta_indent
+  }
 
   // (func string<-meta-indent)
   static f_string_from_meta_indent(meta, indent) {
@@ -629,8 +712,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_node_indent = {}
-  static e_string_from_node_indent = {vx_type: vx_web_html.t_string_from_node_indent}
+  static t_string_from_node_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_node_indent = {
+    vx_type: vx_web_html.t_string_from_node_indent
+  }
 
   // (func string<-node-indent)
   static f_string_from_node_indent(node, indent) {
@@ -768,8 +855,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_nodelist_indent = {}
-  static e_string_from_nodelist_indent = {vx_type: vx_web_html.t_string_from_nodelist_indent}
+  static t_string_from_nodelist_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_nodelist_indent = {
+    vx_type: vx_web_html.t_string_from_nodelist_indent
+  }
 
   // (func string<-nodelist-indent)
   static f_string_from_nodelist_indent(nodelist, indent) {
@@ -799,8 +890,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_nodelist_tag_prop_indent = {}
-  static e_string_from_nodelist_tag_prop_indent = {vx_type: vx_web_html.t_string_from_nodelist_tag_prop_indent}
+  static t_string_from_nodelist_tag_prop_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_nodelist_tag_prop_indent = {
+    vx_type: vx_web_html.t_string_from_nodelist_tag_prop_indent
+  }
 
   // (func string<-nodelist-tag-prop-indent)
   static f_string_from_nodelist_tag_prop_indent(nodes, tag, prop, indent) {
@@ -851,8 +946,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_p_indent = {}
-  static e_string_from_p_indent = {vx_type: vx_web_html.t_string_from_p_indent}
+  static t_string_from_p_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_p_indent = {
+    vx_type: vx_web_html.t_string_from_p_indent
+  }
 
   // (func string<-p-indent)
   static f_string_from_p_indent(p, indent) {
@@ -894,8 +993,12 @@ export default class vx_web_html {
    * @param  {string} val
    * @return {string}
    */
-  static t_string_from_propname_val = {}
-  static e_string_from_propname_val = {vx_type: vx_web_html.t_string_from_propname_val}
+  static t_string_from_propname_val = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_propname_val = {
+    vx_type: vx_web_html.t_string_from_propname_val
+  }
 
   // (func string<-propname-val)
   static f_string_from_propname_val(key, val) {
@@ -922,8 +1025,12 @@ export default class vx_web_html {
    * @param  {style} style
    * @return {string}
    */
-  static t_string_from_propstyle = {}
-  static e_string_from_propstyle = {vx_type: vx_web_html.t_string_from_propstyle}
+  static t_string_from_propstyle = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_propstyle = {
+    vx_type: vx_web_html.t_string_from_propstyle
+  }
 
   // (func string<-propstyle)
   static f_string_from_propstyle(style) {
@@ -952,8 +1059,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_style_indent = {}
-  static e_string_from_style_indent = {vx_type: vx_web_html.t_string_from_style_indent}
+  static t_string_from_style_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_style_indent = {
+    vx_type: vx_web_html.t_string_from_style_indent
+  }
 
   // (func string<-style-indent)
   static f_string_from_style_indent(style, indent) {
@@ -990,8 +1101,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_stylelist_indent = {}
-  static e_string_from_stylelist_indent = {vx_type: vx_web_html.t_string_from_stylelist_indent}
+  static t_string_from_stylelist_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_stylelist_indent = {
+    vx_type: vx_web_html.t_string_from_stylelist_indent
+  }
 
   // (func string<-stylelist-indent)
   static f_string_from_stylelist_indent(stylelist, indent) {
@@ -1019,8 +1134,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_stylepropmap_indent = {}
-  static e_string_from_stylepropmap_indent = {vx_type: vx_web_html.t_string_from_stylepropmap_indent}
+  static t_string_from_stylepropmap_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_stylepropmap_indent = {
+    vx_type: vx_web_html.t_string_from_stylepropmap_indent
+  }
 
   // (func string<-stylepropmap-indent)
   static f_string_from_stylepropmap_indent(propmap, indent) {
@@ -1056,8 +1175,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_stylesheet_indent = {}
-  static e_string_from_stylesheet_indent = {vx_type: vx_web_html.t_string_from_stylesheet_indent}
+  static t_string_from_stylesheet_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_stylesheet_indent = {
+    vx_type: vx_web_html.t_string_from_stylesheet_indent
+  }
 
   // (func string<-stylesheet-indent)
   static f_string_from_stylesheet_indent(stylesheet, indent) {
@@ -1096,8 +1219,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_table_indent = {}
-  static e_string_from_table_indent = {vx_type: vx_web_html.t_string_from_table_indent}
+  static t_string_from_table_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_table_indent = {
+    vx_type: vx_web_html.t_string_from_table_indent
+  }
 
   // (func string<-table-indent)
   static f_string_from_table_indent(table, indent) {
@@ -1144,8 +1271,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_tbody_indent = {}
-  static e_string_from_tbody_indent = {vx_type: vx_web_html.t_string_from_tbody_indent}
+  static t_string_from_tbody_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_tbody_indent = {
+    vx_type: vx_web_html.t_string_from_tbody_indent
+  }
 
   // (func string<-tbody-indent)
   static f_string_from_tbody_indent(tbody, indent) {
@@ -1168,8 +1299,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_td_indent = {}
-  static e_string_from_td_indent = {vx_type: vx_web_html.t_string_from_td_indent}
+  static t_string_from_td_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_td_indent = {
+    vx_type: vx_web_html.t_string_from_td_indent
+  }
 
   // (func string<-td-indent)
   static f_string_from_td_indent(td, indent) {
@@ -1192,8 +1327,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_thead_indent = {}
-  static e_string_from_thead_indent = {vx_type: vx_web_html.t_string_from_thead_indent}
+  static t_string_from_thead_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_thead_indent = {
+    vx_type: vx_web_html.t_string_from_thead_indent
+  }
 
   // (func string<-thead-indent)
   static f_string_from_thead_indent(thead, indent) {
@@ -1216,8 +1355,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_title_indent = {}
-  static e_string_from_title_indent = {vx_type: vx_web_html.t_string_from_title_indent}
+  static t_string_from_title_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_title_indent = {
+    vx_type: vx_web_html.t_string_from_title_indent
+  }
 
   // (func string<-title-indent)
   static f_string_from_title_indent(title, indent) {
@@ -1247,8 +1390,12 @@ export default class vx_web_html {
    * @param  {int} indent
    * @return {string}
    */
-  static t_string_from_tr_indent = {}
-  static e_string_from_tr_indent = {vx_type: vx_web_html.t_string_from_tr_indent}
+  static t_string_from_tr_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_tr_indent = {
+    vx_type: vx_web_html.t_string_from_tr_indent
+  }
 
   // (func string<-tr-indent)
   static f_string_from_tr_indent(tr, indent) {
@@ -1270,8 +1417,12 @@ export default class vx_web_html {
    * @param  {string} uri
    * @return {string}
    */
-  static t_string_from_uri = {}
-  static e_string_from_uri = {vx_type: vx_web_html.t_string_from_uri}
+  static t_string_from_uri = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_uri = {
+    vx_type: vx_web_html.t_string_from_uri
+  }
 
   // (func string<-uri)
   static f_string_from_uri(uri) {
@@ -1287,8 +1438,12 @@ export default class vx_web_html {
    * @param  {string} name
    * @return {style}
    */
-  static t_style_from_stylesheet_name = {}
-  static e_style_from_stylesheet_name = {vx_type: vx_web_html.t_style_from_stylesheet_name}
+  static t_style_from_stylesheet_name = {
+    vx_type: vx_core.t_type
+  }
+  static e_style_from_stylesheet_name = {
+    vx_type: vx_web_html.t_style_from_stylesheet_name
+  }
 
   // (func style<-stylesheet-name)
   static f_style_from_stylesheet_name(stylesheet, name) {
@@ -1307,8 +1462,12 @@ export default class vx_web_html {
    * @param  {stylelist} stylelist
    * @return {stylemap}
    */
-  static t_stylemap_from_stylelist = {}
-  static e_stylemap_from_stylelist = {vx_type: vx_web_html.t_stylemap_from_stylelist}
+  static t_stylemap_from_stylelist = {
+    vx_type: vx_core.t_type
+  }
+  static e_stylemap_from_stylelist = {
+    vx_type: vx_web_html.t_stylemap_from_stylelist
+  }
 
   // (func stylemap<-stylelist)
   static f_stylemap_from_stylelist(stylelist) {
@@ -1328,8 +1487,12 @@ export default class vx_web_html {
    * @param  {stylesheet} stylesheet
    * @return {stylemap}
    */
-  static t_stylemap_from_stylesheet = {}
-  static e_stylemap_from_stylesheet = {vx_type: vx_web_html.t_stylemap_from_stylesheet}
+  static t_stylemap_from_stylesheet = {
+    vx_type: vx_core.t_type
+  }
+  static e_stylemap_from_stylesheet = {
+    vx_type: vx_web_html.t_stylemap_from_stylesheet
+  }
 
   // (func stylemap<-stylesheet)
   static f_stylemap_from_stylesheet(stylesheet) {
@@ -1344,8 +1507,12 @@ export default class vx_web_html {
    * @param  {stylesheet} stylesheet
    * @return {stylelist}
    */
-  static t_styles_from_stylesheet = {}
-  static e_styles_from_stylesheet = {vx_type: vx_web_html.t_styles_from_stylesheet}
+  static t_styles_from_stylesheet = {
+    vx_type: vx_core.t_type
+  }
+  static e_styles_from_stylesheet = {
+    vx_type: vx_web_html.t_styles_from_stylesheet
+  }
 
   // (func styles<-stylesheet)
   static f_styles_from_stylesheet(stylesheet) {
@@ -1360,8 +1527,12 @@ export default class vx_web_html {
    * @param  {stylesheet} stylesheet
    * @return {stylesheet}
    */
-  static t_stylesheet_loadmap = {}
-  static e_stylesheet_loadmap = {vx_type: vx_web_html.t_stylesheet_loadmap}
+  static t_stylesheet_loadmap = {
+    vx_type: vx_core.t_type
+  }
+  static e_stylesheet_loadmap = {
+    vx_type: vx_web_html.t_stylesheet_loadmap
+  }
 
   // (func stylesheet-loadmap)
   static f_stylesheet_loadmap(stylesheet) {
@@ -1382,8 +1553,12 @@ export default class vx_web_html {
    * @param  {string} text
    * @return {string}
    */
-  static t_uri_from_string = {}
-  static e_uri_from_string = {vx_type: vx_web_html.t_uri_from_string}
+  static t_uri_from_string = {
+    vx_type: vx_core.t_type
+  }
+  static e_uri_from_string = {
+    vx_type: vx_web_html.t_uri_from_string
+  }
 
   // (func uri<-string)
   static f_uri_from_string(text) {
@@ -1392,38 +1567,6 @@ export default class vx_web_html {
     return output
   }
 
-  // empty types
-  static e_body = {}
-  static e_details = {}
-  static e_div = {}
-  static e_divchild = {}
-  static e_divchildlist = []
-  static e_divlist = []
-  static e_footer = {}
-  static e_h1 = {}
-  static e_h2 = {}
-  static e_h3 = {}
-  static e_head = {}
-  static e_headchild = {}
-  static e_headchildlist = []
-  static e_html = {}
-  static e_meta = {}
-  static e_node = {}
-  static e_nodelist = []
-  static e_p = {}
-  static e_propmap = {}
-  static e_style = {}
-  static e_stylelist = []
-  static e_stylemap = {}
-  static e_stylesheet = {}
-  static e_table = {}
-  static e_tbody = {}
-  static e_td = {}
-  static e_tdlist = []
-  static e_thead = {}
-  static e_title = {}
-  static e_tr = {}
-  static e_trlist = []
 
 
   static {
@@ -2557,7 +2700,6 @@ export default class vx_web_html {
     vx_web_html.e_trlist['vx_type'] = vx_web_html.t_trlist
 
     // (func htmlstring<-string)
-    vx_web_html.t_htmlstring_from_string['vx_type'] = vx_core.t_type
     vx_web_html.t_htmlstring_from_string['vx_value'] = {
       name          : "htmlstring<-string",
       pkgname       : "vx/web/html",
@@ -2576,7 +2718,6 @@ export default class vx_web_html {
     }
 
     // (func string-indent)
-    vx_web_html.t_string_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_indent['vx_value'] = {
       name          : "string-indent",
       pkgname       : "vx/web/html",
@@ -2595,7 +2736,6 @@ export default class vx_web_html {
     }
 
     // (func string<-body-indent)
-    vx_web_html.t_string_from_body_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_body_indent['vx_value'] = {
       name          : "string<-body-indent",
       pkgname       : "vx/web/html",
@@ -2614,7 +2754,6 @@ export default class vx_web_html {
     }
 
     // (func string<-details-indent)
-    vx_web_html.t_string_from_details_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_details_indent['vx_value'] = {
       name          : "string<-details-indent",
       pkgname       : "vx/web/html",
@@ -2633,7 +2772,6 @@ export default class vx_web_html {
     }
 
     // (func string<-div-indent)
-    vx_web_html.t_string_from_div_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_div_indent['vx_value'] = {
       name          : "string<-div-indent",
       pkgname       : "vx/web/html",
@@ -2652,7 +2790,6 @@ export default class vx_web_html {
     }
 
     // (func string<-footer-indent)
-    vx_web_html.t_string_from_footer_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_footer_indent['vx_value'] = {
       name          : "string<-footer-indent",
       pkgname       : "vx/web/html",
@@ -2671,7 +2808,6 @@ export default class vx_web_html {
     }
 
     // (func string<-h1-indent)
-    vx_web_html.t_string_from_h1_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_h1_indent['vx_value'] = {
       name          : "string<-h1-indent",
       pkgname       : "vx/web/html",
@@ -2690,7 +2826,6 @@ export default class vx_web_html {
     }
 
     // (func string<-h2-indent)
-    vx_web_html.t_string_from_h2_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_h2_indent['vx_value'] = {
       name          : "string<-h2-indent",
       pkgname       : "vx/web/html",
@@ -2709,7 +2844,6 @@ export default class vx_web_html {
     }
 
     // (func string<-h3-indent)
-    vx_web_html.t_string_from_h3_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_h3_indent['vx_value'] = {
       name          : "string<-h3-indent",
       pkgname       : "vx/web/html",
@@ -2728,7 +2862,6 @@ export default class vx_web_html {
     }
 
     // (func string<-head-indent)
-    vx_web_html.t_string_from_head_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_head_indent['vx_value'] = {
       name          : "string<-head-indent",
       pkgname       : "vx/web/html",
@@ -2747,7 +2880,6 @@ export default class vx_web_html {
     }
 
     // (func string<-html)
-    vx_web_html.t_string_from_html['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_html['vx_value'] = {
       name          : "string<-html",
       pkgname       : "vx/web/html",
@@ -2766,7 +2898,6 @@ export default class vx_web_html {
     }
 
     // (func string<-indent)
-    vx_web_html.t_string_from_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_indent['vx_value'] = {
       name          : "string<-indent",
       pkgname       : "vx/web/html",
@@ -2785,7 +2916,6 @@ export default class vx_web_html {
     }
 
     // (func string<-meta-indent)
-    vx_web_html.t_string_from_meta_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_meta_indent['vx_value'] = {
       name          : "string<-meta-indent",
       pkgname       : "vx/web/html",
@@ -2804,7 +2934,6 @@ export default class vx_web_html {
     }
 
     // (func string<-node-indent)
-    vx_web_html.t_string_from_node_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_node_indent['vx_value'] = {
       name          : "string<-node-indent",
       pkgname       : "vx/web/html",
@@ -2823,7 +2952,6 @@ export default class vx_web_html {
     }
 
     // (func string<-nodelist-indent)
-    vx_web_html.t_string_from_nodelist_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_nodelist_indent['vx_value'] = {
       name          : "string<-nodelist-indent",
       pkgname       : "vx/web/html",
@@ -2842,7 +2970,6 @@ export default class vx_web_html {
     }
 
     // (func string<-nodelist-tag-prop-indent)
-    vx_web_html.t_string_from_nodelist_tag_prop_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_nodelist_tag_prop_indent['vx_value'] = {
       name          : "string<-nodelist-tag-prop-indent",
       pkgname       : "vx/web/html",
@@ -2861,7 +2988,6 @@ export default class vx_web_html {
     }
 
     // (func string<-p-indent)
-    vx_web_html.t_string_from_p_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_p_indent['vx_value'] = {
       name          : "string<-p-indent",
       pkgname       : "vx/web/html",
@@ -2880,7 +3006,6 @@ export default class vx_web_html {
     }
 
     // (func string<-propname-val)
-    vx_web_html.t_string_from_propname_val['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_propname_val['vx_value'] = {
       name          : "string<-propname-val",
       pkgname       : "vx/web/html",
@@ -2899,7 +3024,6 @@ export default class vx_web_html {
     }
 
     // (func string<-propstyle)
-    vx_web_html.t_string_from_propstyle['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_propstyle['vx_value'] = {
       name          : "string<-propstyle",
       pkgname       : "vx/web/html",
@@ -2918,7 +3042,6 @@ export default class vx_web_html {
     }
 
     // (func string<-style-indent)
-    vx_web_html.t_string_from_style_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_style_indent['vx_value'] = {
       name          : "string<-style-indent",
       pkgname       : "vx/web/html",
@@ -2937,7 +3060,6 @@ export default class vx_web_html {
     }
 
     // (func string<-stylelist-indent)
-    vx_web_html.t_string_from_stylelist_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_stylelist_indent['vx_value'] = {
       name          : "string<-stylelist-indent",
       pkgname       : "vx/web/html",
@@ -2956,7 +3078,6 @@ export default class vx_web_html {
     }
 
     // (func string<-stylepropmap-indent)
-    vx_web_html.t_string_from_stylepropmap_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_stylepropmap_indent['vx_value'] = {
       name          : "string<-stylepropmap-indent",
       pkgname       : "vx/web/html",
@@ -2975,7 +3096,6 @@ export default class vx_web_html {
     }
 
     // (func string<-stylesheet-indent)
-    vx_web_html.t_string_from_stylesheet_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_stylesheet_indent['vx_value'] = {
       name          : "string<-stylesheet-indent",
       pkgname       : "vx/web/html",
@@ -2994,7 +3114,6 @@ export default class vx_web_html {
     }
 
     // (func string<-table-indent)
-    vx_web_html.t_string_from_table_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_table_indent['vx_value'] = {
       name          : "string<-table-indent",
       pkgname       : "vx/web/html",
@@ -3013,7 +3132,6 @@ export default class vx_web_html {
     }
 
     // (func string<-tbody-indent)
-    vx_web_html.t_string_from_tbody_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_tbody_indent['vx_value'] = {
       name          : "string<-tbody-indent",
       pkgname       : "vx/web/html",
@@ -3032,7 +3150,6 @@ export default class vx_web_html {
     }
 
     // (func string<-td-indent)
-    vx_web_html.t_string_from_td_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_td_indent['vx_value'] = {
       name          : "string<-td-indent",
       pkgname       : "vx/web/html",
@@ -3051,7 +3168,6 @@ export default class vx_web_html {
     }
 
     // (func string<-thead-indent)
-    vx_web_html.t_string_from_thead_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_thead_indent['vx_value'] = {
       name          : "string<-thead-indent",
       pkgname       : "vx/web/html",
@@ -3070,7 +3186,6 @@ export default class vx_web_html {
     }
 
     // (func string<-title-indent)
-    vx_web_html.t_string_from_title_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_title_indent['vx_value'] = {
       name          : "string<-title-indent",
       pkgname       : "vx/web/html",
@@ -3089,7 +3204,6 @@ export default class vx_web_html {
     }
 
     // (func string<-tr-indent)
-    vx_web_html.t_string_from_tr_indent['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_tr_indent['vx_value'] = {
       name          : "string<-tr-indent",
       pkgname       : "vx/web/html",
@@ -3108,7 +3222,6 @@ export default class vx_web_html {
     }
 
     // (func string<-uri)
-    vx_web_html.t_string_from_uri['vx_type'] = vx_core.t_type
     vx_web_html.t_string_from_uri['vx_value'] = {
       name          : "string<-uri",
       pkgname       : "vx/web/html",
@@ -3127,7 +3240,6 @@ export default class vx_web_html {
     }
 
     // (func style<-stylesheet-name)
-    vx_web_html.t_style_from_stylesheet_name['vx_type'] = vx_core.t_type
     vx_web_html.t_style_from_stylesheet_name['vx_value'] = {
       name          : "style<-stylesheet-name",
       pkgname       : "vx/web/html",
@@ -3146,7 +3258,6 @@ export default class vx_web_html {
     }
 
     // (func stylemap<-stylelist)
-    vx_web_html.t_stylemap_from_stylelist['vx_type'] = vx_core.t_type
     vx_web_html.t_stylemap_from_stylelist['vx_value'] = {
       name          : "stylemap<-stylelist",
       pkgname       : "vx/web/html",
@@ -3165,7 +3276,6 @@ export default class vx_web_html {
     }
 
     // (func stylemap<-stylesheet)
-    vx_web_html.t_stylemap_from_stylesheet['vx_type'] = vx_core.t_type
     vx_web_html.t_stylemap_from_stylesheet['vx_value'] = {
       name          : "stylemap<-stylesheet",
       pkgname       : "vx/web/html",
@@ -3184,7 +3294,6 @@ export default class vx_web_html {
     }
 
     // (func styles<-stylesheet)
-    vx_web_html.t_styles_from_stylesheet['vx_type'] = vx_core.t_type
     vx_web_html.t_styles_from_stylesheet['vx_value'] = {
       name          : "styles<-stylesheet",
       pkgname       : "vx/web/html",
@@ -3203,7 +3312,6 @@ export default class vx_web_html {
     }
 
     // (func stylesheet-loadmap)
-    vx_web_html.t_stylesheet_loadmap['vx_type'] = vx_core.t_type
     vx_web_html.t_stylesheet_loadmap['vx_value'] = {
       name          : "stylesheet-loadmap",
       pkgname       : "vx/web/html",
@@ -3222,7 +3330,6 @@ export default class vx_web_html {
     }
 
     // (func uri<-string)
-    vx_web_html.t_uri_from_string['vx_type'] = vx_core.t_type
     vx_web_html.t_uri_from_string['vx_value'] = {
       name          : "uri<-string",
       pkgname       : "vx/web/html",

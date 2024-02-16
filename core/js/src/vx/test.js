@@ -13,66 +13,77 @@ export default class vx_test {
    * Structure to describe a test case
    */
   static t_testcase = {}
+  static e_testcase = {vx_type: vx_test.t_testcase}
 
   /**
    * type: testcaselist
    * List of test cases
    */
   static t_testcaselist = {}
+  static e_testcaselist = vx_core.vx_new_list(vx_test.t_testcaselist, [])
 
   /**
    * type: testcoveragedetail
    * Structure to describe a test coverage detail
    */
   static t_testcoveragedetail = {}
+  static e_testcoveragedetail = {vx_type: vx_test.t_testcoveragedetail}
 
   /**
    * type: testcoveragenums
    * Structure to describe a test coverage summary
    */
   static t_testcoveragenums = {}
+  static e_testcoveragenums = {vx_type: vx_test.t_testcoveragenums}
 
   /**
    * type: testcoveragesummary
    * Structure to describe a test coverage summary
    */
   static t_testcoveragesummary = {}
+  static e_testcoveragesummary = {vx_type: vx_test.t_testcoveragesummary}
 
   /**
    * type: testdescribe
    * Structure to describe test results
    */
   static t_testdescribe = {}
+  static e_testdescribe = {vx_type: vx_test.t_testdescribe}
 
   /**
    * type: testdescribelist
    * List of testdescribe
    */
   static t_testdescribelist = {}
+  static e_testdescribelist = vx_core.vx_new_list(vx_test.t_testdescribelist, [])
 
   /**
    * type: testpackage
    * Structure to hold all tests for a package
    */
   static t_testpackage = {}
+  static e_testpackage = {vx_type: vx_test.t_testpackage}
 
   /**
    * type: testpackagelist
    * List of testpackage
    */
   static t_testpackagelist = {}
+  static e_testpackagelist = vx_core.vx_new_list(vx_test.t_testpackagelist, [])
 
   /**
    * type: testresult
    * Structure to hold test results
    */
   static t_testresult = {}
+  static e_testresult = {vx_type: vx_test.t_testresult}
 
   /**
    * type: testresultlist
    * List of test results
    */
   static t_testresultlist = {}
+  static e_testresultlist = vx_core.vx_new_list(vx_test.t_testresultlist, [])
   /**
    * Constant: stylesheet-test
    * The default Test Stylesheet
@@ -86,8 +97,12 @@ export default class vx_test {
    * @param  {anylist} ... args
    * @return {context}
    */
-  static t_context_test = {}
-  static e_context_test = {vx_type: vx_test.t_context_test}
+  static t_context_test = {
+    vx_type: vx_core.t_type
+  }
+  static e_context_test = {
+    vx_type: vx_test.t_context_test
+  }
 
   // (func context-test)
   static f_context_test(...args) {
@@ -114,8 +129,12 @@ export default class vx_test {
    * @param  {testcaselist} testcaselist
    * @return {div}
    */
-  static t_div_from_testcaselist = {}
-  static e_div_from_testcaselist = {vx_type: vx_test.t_div_from_testcaselist}
+  static t_div_from_testcaselist = {
+    vx_type: vx_core.t_type
+  }
+  static e_div_from_testcaselist = {
+    vx_type: vx_test.t_div_from_testcaselist
+  }
 
   // (func div<-testcaselist)
   static f_div_from_testcaselist(testcaselist) {
@@ -187,8 +206,12 @@ export default class vx_test {
    * @param  {testpackage} testpackage
    * @return {div}
    */
-  static t_div_from_testpackage = {}
-  static e_div_from_testpackage = {vx_type: vx_test.t_div_from_testpackage}
+  static t_div_from_testpackage = {
+    vx_type: vx_core.t_type
+  }
+  static e_div_from_testpackage = {
+    vx_type: vx_test.t_div_from_testpackage
+  }
 
   // (func div<-testpackage)
   static f_div_from_testpackage(testpackage) {
@@ -272,8 +295,12 @@ export default class vx_test {
    * @param  {testpackagelist} testpackagelist
    * @return {div}
    */
-  static t_div_from_testpackagelist = {}
-  static e_div_from_testpackagelist = {vx_type: vx_test.t_div_from_testpackagelist}
+  static t_div_from_testpackagelist = {
+    vx_type: vx_core.t_type
+  }
+  static e_div_from_testpackagelist = {
+    vx_type: vx_test.t_div_from_testpackagelist
+  }
 
   // (func div<-testpackagelist)
   static f_div_from_testpackagelist(testpackagelist) {
@@ -384,8 +411,12 @@ export default class vx_test {
    * @param  {testpackagelist} testpackagelist
    * @return {divchildlist}
    */
-  static t_divchildlist_from_testpackagelist = {}
-  static e_divchildlist_from_testpackagelist = {vx_type: vx_test.t_divchildlist_from_testpackagelist}
+  static t_divchildlist_from_testpackagelist = {
+    vx_type: vx_core.t_type
+  }
+  static e_divchildlist_from_testpackagelist = {
+    vx_type: vx_test.t_divchildlist_from_testpackagelist
+  }
 
   // (func divchildlist<-testpackagelist)
   static f_divchildlist_from_testpackagelist(testpackagelist) {
@@ -403,8 +434,12 @@ export default class vx_test {
    * Default file location for testsuite.vxlisp
    * @return {file}
    */
-  static t_file_test = {}
-  static e_file_test = {vx_type: vx_test.t_file_test}
+  static t_file_test = {
+    vx_type: vx_core.t_type
+  }
+  static e_file_test = {
+    vx_type: vx_test.t_file_test
+  }
 
   // (func file-test)
   static f_file_test() {
@@ -424,8 +459,12 @@ export default class vx_test {
    * Default file location for testsuite.html
    * @return {file}
    */
-  static t_file_testhtml = {}
-  static e_file_testhtml = {vx_type: vx_test.t_file_testhtml}
+  static t_file_testhtml = {
+    vx_type: vx_core.t_type
+  }
+  static e_file_testhtml = {
+    vx_type: vx_test.t_file_testhtml
+  }
 
   // (func file-testhtml)
   static f_file_testhtml() {
@@ -445,8 +484,12 @@ export default class vx_test {
    * Default file location for testsuitenode.vxlisp
    * @return {file}
    */
-  static t_file_testnode = {}
-  static e_file_testnode = {vx_type: vx_test.t_file_testnode}
+  static t_file_testnode = {
+    vx_type: vx_core.t_type
+  }
+  static e_file_testnode = {
+    vx_type: vx_test.t_file_testnode
+  }
 
   // (func file-testnode)
   static f_file_testnode() {
@@ -467,8 +510,12 @@ export default class vx_test {
    * @param  {div} divtest
    * @return {html}
    */
-  static t_html_from_divtest = {}
-  static e_html_from_divtest = {vx_type: vx_test.t_html_from_divtest}
+  static t_html_from_divtest = {
+    vx_type: vx_core.t_type
+  }
+  static e_html_from_divtest = {
+    vx_type: vx_test.t_html_from_divtest
+  }
 
   // (func html<-divtest)
   static f_html_from_divtest(divtest) {
@@ -521,8 +568,12 @@ export default class vx_test {
    * @param  {boolean} passfail
    * @return {p}
    */
-  static t_p_from_passfail = {}
-  static e_p_from_passfail = {vx_type: vx_test.t_p_from_passfail}
+  static t_p_from_passfail = {
+    vx_type: vx_core.t_type
+  }
+  static e_p_from_passfail = {
+    vx_type: vx_test.t_p_from_passfail
+  }
 
   // (func p<-passfail)
   static f_p_from_passfail(passfail) {
@@ -555,8 +606,12 @@ export default class vx_test {
    * @param  {testcoveragenums} nums
    * @return {p}
    */
-  static t_p_from_testcoveragenums = {}
-  static e_p_from_testcoveragenums = {vx_type: vx_test.t_p_from_testcoveragenums}
+  static t_p_from_testcoveragenums = {
+    vx_type: vx_core.t_type
+  }
+  static e_p_from_testcoveragenums = {
+    vx_type: vx_test.t_p_from_testcoveragenums
+  }
 
   // (func p<-testcoveragenums)
   static f_p_from_testcoveragenums(nums) {
@@ -588,8 +643,12 @@ export default class vx_test {
    * @param  {testcase} testcase
    * @return {testcase}
    */
-  static t_resolve_testcase = {}
-  static e_resolve_testcase = {vx_type: vx_test.t_resolve_testcase}
+  static t_resolve_testcase = {
+    vx_type: vx_core.t_type
+  }
+  static e_resolve_testcase = {
+    vx_type: vx_test.t_resolve_testcase
+  }
 
   // (func resolve-testcase)
   static async f_resolve_testcase(testcase) {
@@ -627,8 +686,12 @@ export default class vx_test {
    * @param  {testcaselist} testcaselist
    * @return {testcaselist}
    */
-  static t_resolve_testcaselist = {}
-  static e_resolve_testcaselist = {vx_type: vx_test.t_resolve_testcaselist}
+  static t_resolve_testcaselist = {
+    vx_type: vx_core.t_type
+  }
+  static e_resolve_testcaselist = {
+    vx_type: vx_test.t_resolve_testcaselist
+  }
 
   // (func resolve-testcaselist)
   static async f_resolve_testcaselist(testcaselist) {
@@ -648,8 +711,12 @@ export default class vx_test {
    * @param  {testdescribe} testdescribe
    * @return {testdescribe}
    */
-  static t_resolve_testdescribe = {}
-  static e_resolve_testdescribe = {vx_type: vx_test.t_resolve_testdescribe}
+  static t_resolve_testdescribe = {
+    vx_type: vx_core.t_type
+  }
+  static e_resolve_testdescribe = {
+    vx_type: vx_test.t_resolve_testdescribe
+  }
 
   // (func resolve-testdescribe)
   static async f_resolve_testdescribe(testdescribe) {
@@ -673,8 +740,12 @@ export default class vx_test {
    * @param  {testdescribelist} testdescribelist
    * @return {testdescribelist}
    */
-  static t_resolve_testdescribelist = {}
-  static e_resolve_testdescribelist = {vx_type: vx_test.t_resolve_testdescribelist}
+  static t_resolve_testdescribelist = {
+    vx_type: vx_core.t_type
+  }
+  static e_resolve_testdescribelist = {
+    vx_type: vx_test.t_resolve_testdescribelist
+  }
 
   // (func resolve-testdescribelist)
   static async f_resolve_testdescribelist(testdescribelist) {
@@ -694,8 +765,12 @@ export default class vx_test {
    * @param  {testpackage} testpackage
    * @return {testpackage}
    */
-  static t_resolve_testpackage = {}
-  static e_resolve_testpackage = {vx_type: vx_test.t_resolve_testpackage}
+  static t_resolve_testpackage = {
+    vx_type: vx_core.t_type
+  }
+  static e_resolve_testpackage = {
+    vx_type: vx_test.t_resolve_testpackage
+  }
 
   // (func resolve-testpackage)
   static async f_resolve_testpackage(testpackage) {
@@ -726,8 +801,12 @@ export default class vx_test {
    * @param  {testpackagelist} testpackagelist
    * @return {testpackagelist}
    */
-  static t_resolve_testpackagelist = {}
-  static e_resolve_testpackagelist = {vx_type: vx_test.t_resolve_testpackagelist}
+  static t_resolve_testpackagelist = {
+    vx_type: vx_core.t_type
+  }
+  static e_resolve_testpackagelist = {
+    vx_type: vx_test.t_resolve_testpackagelist
+  }
 
   // (func resolve-testpackagelist)
   static async f_resolve_testpackagelist(testpackagelist) {
@@ -747,8 +826,12 @@ export default class vx_test {
    * @param  {testresult} testresult
    * @return {testresult}
    */
-  static t_resolve_testresult = {}
-  static e_resolve_testresult = {vx_type: vx_test.t_resolve_testresult}
+  static t_resolve_testresult = {
+    vx_type: vx_core.t_type
+  }
+  static e_resolve_testresult = {
+    vx_type: vx_test.t_resolve_testresult
+  }
 
   // (func resolve-testresult)
   static async f_resolve_testresult(testresult) {
@@ -787,8 +870,12 @@ export default class vx_test {
    * Returns the default security for test case execution. Arguments come from the command line.
    * @return {security}
    */
-  static t_security_test = {}
-  static e_security_test = {vx_type: vx_test.t_security_test}
+  static t_security_test = {
+    vx_type: vx_core.t_type
+  }
+  static e_security_test = {
+    vx_type: vx_test.t_security_test
+  }
 
   // (func security-test)
   static f_security_test() {
@@ -814,8 +901,12 @@ export default class vx_test {
    * @param  {any} actual
    * @return {testresult}
    */
-  static t_test = {}
-  static e_test = {vx_type: vx_test.t_test}
+  static t_test = {
+    vx_type: vx_core.t_type
+  }
+  static e_test = {
+    vx_type: vx_test.t_test
+  }
 
   // (func test)
   static f_test(context, expected, actual) {
@@ -845,8 +936,12 @@ export default class vx_test {
    * @param  {any_from_func_async} fn_actual
    * @return {testresult}
    */
-  static t_test_1 = {}
-  static e_test_1 = {vx_type: vx_test.t_test_1}
+  static t_test_1 = {
+    vx_type: vx_core.t_type
+  }
+  static e_test_1 = {
+    vx_type: vx_test.t_test_1
+  }
 
   // (func test)
   static f_test_1(context, expected, fn_actual) {
@@ -873,8 +968,12 @@ export default class vx_test {
    * @param  {any} actual
    * @return {testresult}
    */
-  static t_test_false = {}
-  static e_test_false = {vx_type: vx_test.t_test_false}
+  static t_test_false = {
+    vx_type: vx_core.t_type
+  }
+  static e_test_false = {
+    vx_type: vx_test.t_test_false
+  }
 
   // (func test-false)
   static f_test_false(context, actual) {
@@ -906,8 +1005,12 @@ export default class vx_test {
    * @param  {any_from_func_async} fn_actual
    * @return {testresult}
    */
-  static t_test_false_1 = {}
-  static e_test_false_1 = {vx_type: vx_test.t_test_false_1}
+  static t_test_false_1 = {
+    vx_type: vx_core.t_type
+  }
+  static e_test_false_1 = {
+    vx_type: vx_test.t_test_false_1
+  }
 
   // (func test-false)
   static f_test_false_1(context, fn_actual) {
@@ -935,8 +1038,12 @@ export default class vx_test {
    * @param  {any} actual
    * @return {testresult}
    */
-  static t_test_gt = {}
-  static e_test_gt = {vx_type: vx_test.t_test_gt}
+  static t_test_gt = {
+    vx_type: vx_core.t_type
+  }
+  static e_test_gt = {
+    vx_type: vx_test.t_test_gt
+  }
 
   // (func test-gt)
   static f_test_gt(context, expected, actual) {
@@ -966,8 +1073,12 @@ export default class vx_test {
    * @param  {any_from_func_async} fn_actual
    * @return {testresult}
    */
-  static t_test_gt_1 = {}
-  static e_test_gt_1 = {vx_type: vx_test.t_test_gt_1}
+  static t_test_gt_1 = {
+    vx_type: vx_core.t_type
+  }
+  static e_test_gt_1 = {
+    vx_type: vx_test.t_test_gt_1
+  }
 
   // (func test-gt)
   static f_test_gt_1(context, expected, fn_actual) {
@@ -995,8 +1106,12 @@ export default class vx_test {
    * @param  {any} actual
    * @return {testresult}
    */
-  static t_test_ne = {}
-  static e_test_ne = {vx_type: vx_test.t_test_ne}
+  static t_test_ne = {
+    vx_type: vx_core.t_type
+  }
+  static e_test_ne = {
+    vx_type: vx_test.t_test_ne
+  }
 
   // (func test-ne)
   static f_test_ne(context, expected, actual) {
@@ -1026,8 +1141,12 @@ export default class vx_test {
    * @param  {any_from_func_async} fn_actual
    * @return {testresult}
    */
-  static t_test_ne_1 = {}
-  static e_test_ne_1 = {vx_type: vx_test.t_test_ne_1}
+  static t_test_ne_1 = {
+    vx_type: vx_core.t_type
+  }
+  static e_test_ne_1 = {
+    vx_type: vx_test.t_test_ne_1
+  }
 
   // (func test-ne)
   static f_test_ne_1(context, expected, fn_actual) {
@@ -1055,8 +1174,12 @@ export default class vx_test {
    * @param  {any} actual
    * @return {testresult}
    */
-  static t_test_string = {}
-  static e_test_string = {vx_type: vx_test.t_test_string}
+  static t_test_string = {
+    vx_type: vx_core.t_type
+  }
+  static e_test_string = {
+    vx_type: vx_test.t_test_string
+  }
 
   // (func test-string)
   static f_test_string(context, expected, actual) {
@@ -1087,8 +1210,12 @@ export default class vx_test {
    * @param  {any_from_func_async} fn_actual
    * @return {testresult}
    */
-  static t_test_string_1 = {}
-  static e_test_string_1 = {vx_type: vx_test.t_test_string_1}
+  static t_test_string_1 = {
+    vx_type: vx_core.t_type
+  }
+  static e_test_string_1 = {
+    vx_type: vx_test.t_test_string_1
+  }
 
   // (func test-string)
   static f_test_string_1(context, expected, fn_actual) {
@@ -1115,8 +1242,12 @@ export default class vx_test {
    * @param  {any} actual
    * @return {testresult}
    */
-  static t_test_true = {}
-  static e_test_true = {vx_type: vx_test.t_test_true}
+  static t_test_true = {
+    vx_type: vx_core.t_type
+  }
+  static e_test_true = {
+    vx_type: vx_test.t_test_true
+  }
 
   // (func test-true)
   static f_test_true(context, actual) {
@@ -1148,8 +1279,12 @@ export default class vx_test {
    * @param  {any_from_func_async} fn_actual
    * @return {testresult}
    */
-  static t_test_true_1 = {}
-  static e_test_true_1 = {vx_type: vx_test.t_test_true_1}
+  static t_test_true_1 = {
+    vx_type: vx_core.t_type
+  }
+  static e_test_true_1 = {
+    vx_type: vx_test.t_test_true_1
+  }
 
   // (func test-true)
   static f_test_true_1(context, fn_actual) {
@@ -1177,8 +1312,12 @@ export default class vx_test {
    * @param  {string} casename
    * @return {tr}
    */
-  static t_tr_from_testdescribe_casename = {}
-  static e_tr_from_testdescribe_casename = {vx_type: vx_test.t_tr_from_testdescribe_casename}
+  static t_tr_from_testdescribe_casename = {
+    vx_type: vx_core.t_type
+  }
+  static e_tr_from_testdescribe_casename = {
+    vx_type: vx_test.t_tr_from_testdescribe_casename
+  }
 
   // (func tr<-testdescribe-casename)
   static f_tr_from_testdescribe_casename(testdescribe, casename) {
@@ -1257,8 +1396,12 @@ export default class vx_test {
    * @param  {testcase} testcase
    * @return {trlist}
    */
-  static t_trlist_from_testcase = {}
-  static e_trlist_from_testcase = {vx_type: vx_test.t_trlist_from_testcase}
+  static t_trlist_from_testcase = {
+    vx_type: vx_core.t_type
+  }
+  static e_trlist_from_testcase = {
+    vx_type: vx_test.t_trlist_from_testcase
+  }
 
   // (func trlist<-testcase)
   static f_trlist_from_testcase(testcase) {
@@ -1286,8 +1429,12 @@ export default class vx_test {
    * @param  {testcaselist} testcaselist
    * @return {trlist}
    */
-  static t_trlist_from_testcaselist = {}
-  static e_trlist_from_testcaselist = {vx_type: vx_test.t_trlist_from_testcaselist}
+  static t_trlist_from_testcaselist = {
+    vx_type: vx_core.t_type
+  }
+  static e_trlist_from_testcaselist = {
+    vx_type: vx_test.t_trlist_from_testcaselist
+  }
 
   // (func trlist<-testcaselist)
   static f_trlist_from_testcaselist(testcaselist) {
@@ -1300,18 +1447,6 @@ export default class vx_test {
     return output
   }
 
-  // empty types
-  static e_testcase = {}
-  static e_testcaselist = []
-  static e_testcoveragedetail = {}
-  static e_testcoveragenums = {}
-  static e_testcoveragesummary = {}
-  static e_testdescribe = {}
-  static e_testdescribelist = []
-  static e_testpackage = {}
-  static e_testpackagelist = []
-  static e_testresult = {}
-  static e_testresultlist = []
 
 
   static {
@@ -1828,6 +1963,618 @@ export default class vx_test {
     }
     vx_test.e_testresultlist['vx_type'] = vx_test.t_testresultlist
 
+    // (func context-test)
+    vx_test.t_context_test['vx_value'] = {
+      name          : "context-test",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_context_test
+    }
+
+    // (func div<-testcaselist)
+    vx_test.t_div_from_testcaselist['vx_value'] = {
+      name          : "div<-testcaselist",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_div_from_testcaselist
+    }
+
+    // (func div<-testpackage)
+    vx_test.t_div_from_testpackage['vx_value'] = {
+      name          : "div<-testpackage",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_div_from_testpackage
+    }
+
+    // (func div<-testpackagelist)
+    vx_test.t_div_from_testpackagelist['vx_value'] = {
+      name          : "div<-testpackagelist",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_div_from_testpackagelist
+    }
+
+    // (func divchildlist<-testpackagelist)
+    vx_test.t_divchildlist_from_testpackagelist['vx_value'] = {
+      name          : "divchildlist<-testpackagelist",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_divchildlist_from_testpackagelist
+    }
+
+    // (func file-test)
+    vx_test.t_file_test['vx_value'] = {
+      name          : "file-test",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_file_test
+    }
+
+    // (func file-testhtml)
+    vx_test.t_file_testhtml['vx_value'] = {
+      name          : "file-testhtml",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_file_testhtml
+    }
+
+    // (func file-testnode)
+    vx_test.t_file_testnode['vx_value'] = {
+      name          : "file-testnode",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_file_testnode
+    }
+
+    // (func html<-divtest)
+    vx_test.t_html_from_divtest['vx_value'] = {
+      name          : "html<-divtest",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_html_from_divtest
+    }
+
+    // (func p<-passfail)
+    vx_test.t_p_from_passfail['vx_value'] = {
+      name          : "p<-passfail",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_p_from_passfail
+    }
+
+    // (func p<-testcoveragenums)
+    vx_test.t_p_from_testcoveragenums['vx_value'] = {
+      name          : "p<-testcoveragenums",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_p_from_testcoveragenums
+    }
+
+    // (func resolve-testcase)
+    vx_test.t_resolve_testcase['vx_value'] = {
+      name          : "resolve-testcase",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_resolve_testcase
+    }
+
+    // (func resolve-testcaselist)
+    vx_test.t_resolve_testcaselist['vx_value'] = {
+      name          : "resolve-testcaselist",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_resolve_testcaselist
+    }
+
+    // (func resolve-testdescribe)
+    vx_test.t_resolve_testdescribe['vx_value'] = {
+      name          : "resolve-testdescribe",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_resolve_testdescribe
+    }
+
+    // (func resolve-testdescribelist)
+    vx_test.t_resolve_testdescribelist['vx_value'] = {
+      name          : "resolve-testdescribelist",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_resolve_testdescribelist
+    }
+
+    // (func resolve-testpackage)
+    vx_test.t_resolve_testpackage['vx_value'] = {
+      name          : "resolve-testpackage",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_resolve_testpackage
+    }
+
+    // (func resolve-testpackagelist)
+    vx_test.t_resolve_testpackagelist['vx_value'] = {
+      name          : "resolve-testpackagelist",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_resolve_testpackagelist
+    }
+
+    // (func resolve-testresult)
+    vx_test.t_resolve_testresult['vx_value'] = {
+      name          : "resolve-testresult",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_resolve_testresult
+    }
+
+    // (func security-test)
+    vx_test.t_security_test['vx_value'] = {
+      name          : "security-test",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_security_test
+    }
+
+    // (func test)
+    vx_test.t_test['vx_value'] = {
+      name          : "test",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_test
+    }
+
+    // (func test)
+    vx_test.t_test_1['vx_value'] = {
+      name          : "test",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 1,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_test_1
+    }
+
+    // (func test-false)
+    vx_test.t_test_false['vx_value'] = {
+      name          : "test-false",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_test_false
+    }
+
+    // (func test-false)
+    vx_test.t_test_false_1['vx_value'] = {
+      name          : "test-false",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 1,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_test_false_1
+    }
+
+    // (func test-gt)
+    vx_test.t_test_gt['vx_value'] = {
+      name          : "test-gt",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_test_gt
+    }
+
+    // (func test-gt)
+    vx_test.t_test_gt_1['vx_value'] = {
+      name          : "test-gt",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 1,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_test_gt_1
+    }
+
+    // (func test-ne)
+    vx_test.t_test_ne['vx_value'] = {
+      name          : "test-ne",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_test_ne
+    }
+
+    // (func test-ne)
+    vx_test.t_test_ne_1['vx_value'] = {
+      name          : "test-ne",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 1,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_test_ne_1
+    }
+
+    // (func test-string)
+    vx_test.t_test_string['vx_value'] = {
+      name          : "test-string",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_test_string
+    }
+
+    // (func test-string)
+    vx_test.t_test_string_1['vx_value'] = {
+      name          : "test-string",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 1,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_test_string_1
+    }
+
+    // (func test-true)
+    vx_test.t_test_true['vx_value'] = {
+      name          : "test-true",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_test_true
+    }
+
+    // (func test-true)
+    vx_test.t_test_true_1['vx_value'] = {
+      name          : "test-true",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 1,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_test_true_1
+    }
+
+    // (func tr<-testdescribe-casename)
+    vx_test.t_tr_from_testdescribe_casename['vx_value'] = {
+      name          : "tr<-testdescribe-casename",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_tr_from_testdescribe_casename
+    }
+
+    // (func trlist<-testcase)
+    vx_test.t_trlist_from_testcase['vx_value'] = {
+      name          : "trlist<-testcase",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_trlist_from_testcase
+    }
+
+    // (func trlist<-testcaselist)
+    vx_test.t_trlist_from_testcaselist['vx_value'] = {
+      name          : "trlist<-testcaselist",
+      pkgname       : "vx/test",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_test.f_trlist_from_testcaselist
+    }
+
     // (const stylesheet-test)
     Object.assign(vx_test.c_stylesheet_test, vx_web_html.f_stylesheet_loadmap(
       vx_core.f_new(
@@ -2098,652 +2845,6 @@ export default class vx_test {
         )
       )
     ))
-
-    // (func context-test)
-    vx_test.t_context_test['vx_type'] = vx_core.t_type
-    vx_test.t_context_test['vx_value'] = {
-      name          : "context-test",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_context_test
-    }
-
-    // (func div<-testcaselist)
-    vx_test.t_div_from_testcaselist['vx_type'] = vx_core.t_type
-    vx_test.t_div_from_testcaselist['vx_value'] = {
-      name          : "div<-testcaselist",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_div_from_testcaselist
-    }
-
-    // (func div<-testpackage)
-    vx_test.t_div_from_testpackage['vx_type'] = vx_core.t_type
-    vx_test.t_div_from_testpackage['vx_value'] = {
-      name          : "div<-testpackage",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_div_from_testpackage
-    }
-
-    // (func div<-testpackagelist)
-    vx_test.t_div_from_testpackagelist['vx_type'] = vx_core.t_type
-    vx_test.t_div_from_testpackagelist['vx_value'] = {
-      name          : "div<-testpackagelist",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_div_from_testpackagelist
-    }
-
-    // (func divchildlist<-testpackagelist)
-    vx_test.t_divchildlist_from_testpackagelist['vx_type'] = vx_core.t_type
-    vx_test.t_divchildlist_from_testpackagelist['vx_value'] = {
-      name          : "divchildlist<-testpackagelist",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_divchildlist_from_testpackagelist
-    }
-
-    // (func file-test)
-    vx_test.t_file_test['vx_type'] = vx_core.t_type
-    vx_test.t_file_test['vx_value'] = {
-      name          : "file-test",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_file_test
-    }
-
-    // (func file-testhtml)
-    vx_test.t_file_testhtml['vx_type'] = vx_core.t_type
-    vx_test.t_file_testhtml['vx_value'] = {
-      name          : "file-testhtml",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_file_testhtml
-    }
-
-    // (func file-testnode)
-    vx_test.t_file_testnode['vx_type'] = vx_core.t_type
-    vx_test.t_file_testnode['vx_value'] = {
-      name          : "file-testnode",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_file_testnode
-    }
-
-    // (func html<-divtest)
-    vx_test.t_html_from_divtest['vx_type'] = vx_core.t_type
-    vx_test.t_html_from_divtest['vx_value'] = {
-      name          : "html<-divtest",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_html_from_divtest
-    }
-
-    // (func p<-passfail)
-    vx_test.t_p_from_passfail['vx_type'] = vx_core.t_type
-    vx_test.t_p_from_passfail['vx_value'] = {
-      name          : "p<-passfail",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_p_from_passfail
-    }
-
-    // (func p<-testcoveragenums)
-    vx_test.t_p_from_testcoveragenums['vx_type'] = vx_core.t_type
-    vx_test.t_p_from_testcoveragenums['vx_value'] = {
-      name          : "p<-testcoveragenums",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_p_from_testcoveragenums
-    }
-
-    // (func resolve-testcase)
-    vx_test.t_resolve_testcase['vx_type'] = vx_core.t_type
-    vx_test.t_resolve_testcase['vx_value'] = {
-      name          : "resolve-testcase",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_resolve_testcase
-    }
-
-    // (func resolve-testcaselist)
-    vx_test.t_resolve_testcaselist['vx_type'] = vx_core.t_type
-    vx_test.t_resolve_testcaselist['vx_value'] = {
-      name          : "resolve-testcaselist",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_resolve_testcaselist
-    }
-
-    // (func resolve-testdescribe)
-    vx_test.t_resolve_testdescribe['vx_type'] = vx_core.t_type
-    vx_test.t_resolve_testdescribe['vx_value'] = {
-      name          : "resolve-testdescribe",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_resolve_testdescribe
-    }
-
-    // (func resolve-testdescribelist)
-    vx_test.t_resolve_testdescribelist['vx_type'] = vx_core.t_type
-    vx_test.t_resolve_testdescribelist['vx_value'] = {
-      name          : "resolve-testdescribelist",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_resolve_testdescribelist
-    }
-
-    // (func resolve-testpackage)
-    vx_test.t_resolve_testpackage['vx_type'] = vx_core.t_type
-    vx_test.t_resolve_testpackage['vx_value'] = {
-      name          : "resolve-testpackage",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_resolve_testpackage
-    }
-
-    // (func resolve-testpackagelist)
-    vx_test.t_resolve_testpackagelist['vx_type'] = vx_core.t_type
-    vx_test.t_resolve_testpackagelist['vx_value'] = {
-      name          : "resolve-testpackagelist",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_resolve_testpackagelist
-    }
-
-    // (func resolve-testresult)
-    vx_test.t_resolve_testresult['vx_type'] = vx_core.t_type
-    vx_test.t_resolve_testresult['vx_value'] = {
-      name          : "resolve-testresult",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_resolve_testresult
-    }
-
-    // (func security-test)
-    vx_test.t_security_test['vx_type'] = vx_core.t_type
-    vx_test.t_security_test['vx_value'] = {
-      name          : "security-test",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_security_test
-    }
-
-    // (func test)
-    vx_test.t_test['vx_type'] = vx_core.t_type
-    vx_test.t_test['vx_value'] = {
-      name          : "test",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_test
-    }
-
-    // (func test)
-    vx_test.t_test_1['vx_type'] = vx_core.t_type
-    vx_test.t_test_1['vx_value'] = {
-      name          : "test",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 1,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_test_1
-    }
-
-    // (func test-false)
-    vx_test.t_test_false['vx_type'] = vx_core.t_type
-    vx_test.t_test_false['vx_value'] = {
-      name          : "test-false",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_test_false
-    }
-
-    // (func test-false)
-    vx_test.t_test_false_1['vx_type'] = vx_core.t_type
-    vx_test.t_test_false_1['vx_value'] = {
-      name          : "test-false",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 1,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_test_false_1
-    }
-
-    // (func test-gt)
-    vx_test.t_test_gt['vx_type'] = vx_core.t_type
-    vx_test.t_test_gt['vx_value'] = {
-      name          : "test-gt",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_test_gt
-    }
-
-    // (func test-gt)
-    vx_test.t_test_gt_1['vx_type'] = vx_core.t_type
-    vx_test.t_test_gt_1['vx_value'] = {
-      name          : "test-gt",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 1,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_test_gt_1
-    }
-
-    // (func test-ne)
-    vx_test.t_test_ne['vx_type'] = vx_core.t_type
-    vx_test.t_test_ne['vx_value'] = {
-      name          : "test-ne",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_test_ne
-    }
-
-    // (func test-ne)
-    vx_test.t_test_ne_1['vx_type'] = vx_core.t_type
-    vx_test.t_test_ne_1['vx_value'] = {
-      name          : "test-ne",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 1,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_test_ne_1
-    }
-
-    // (func test-string)
-    vx_test.t_test_string['vx_type'] = vx_core.t_type
-    vx_test.t_test_string['vx_value'] = {
-      name          : "test-string",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_test_string
-    }
-
-    // (func test-string)
-    vx_test.t_test_string_1['vx_type'] = vx_core.t_type
-    vx_test.t_test_string_1['vx_value'] = {
-      name          : "test-string",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 1,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_test_string_1
-    }
-
-    // (func test-true)
-    vx_test.t_test_true['vx_type'] = vx_core.t_type
-    vx_test.t_test_true['vx_value'] = {
-      name          : "test-true",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_test_true
-    }
-
-    // (func test-true)
-    vx_test.t_test_true_1['vx_type'] = vx_core.t_type
-    vx_test.t_test_true_1['vx_value'] = {
-      name          : "test-true",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 1,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_test_true_1
-    }
-
-    // (func tr<-testdescribe-casename)
-    vx_test.t_tr_from_testdescribe_casename['vx_type'] = vx_core.t_type
-    vx_test.t_tr_from_testdescribe_casename['vx_value'] = {
-      name          : "tr<-testdescribe-casename",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_tr_from_testdescribe_casename
-    }
-
-    // (func trlist<-testcase)
-    vx_test.t_trlist_from_testcase['vx_type'] = vx_core.t_type
-    vx_test.t_trlist_from_testcase['vx_value'] = {
-      name          : "trlist<-testcase",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_trlist_from_testcase
-    }
-
-    // (func trlist<-testcaselist)
-    vx_test.t_trlist_from_testcaselist['vx_type'] = vx_core.t_type
-    vx_test.t_trlist_from_testcaselist['vx_value'] = {
-      name          : "trlist<-testcaselist",
-      pkgname       : "vx/test",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_test.f_trlist_from_testcaselist
-    }
 
   }
 }

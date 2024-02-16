@@ -508,12 +508,15 @@ func StringFromFuncIndent(fnc *vxfunc, indent int) string {
 	if indent > 30 {
 		output += "..."
 	} else {
-		lineindent := ""
+		initindent := ""
+		lineindent := "\n"
 		if indent > 0 {
-			lineindent = "\n" + StringRepeat(" ", indent)
+			sindent := StringRepeat(" ", indent)
+			lineindent += sindent
+			initindent = lineindent
 		}
 		output += "" +
-			lineindent + "(func" +
+			initindent + "(func" +
 			lineindent + " :name  " + fnc.name +
 			lineindent + " :alias " + fnc.alias +
 			lineindent + " :pkg   " + fnc.pkgname

@@ -10,14 +10,19 @@ export default class vx_state {
    * type: value-map
    */
   static t_value_map = {}
+  static e_value_map = {vx_type: vx_state.t_value_map}
   /**
    * @function change
    * Changes the current state
    * @param  {value_map} valuemap
    * @return {boolean}
    */
-  static t_change = {}
-  static e_change = {vx_type: vx_state.t_change}
+  static t_change = {
+    vx_type: vx_core.t_type
+  }
+  static e_change = {
+    vx_type: vx_state.t_change
+  }
 
   // (func change)
   static f_change(valuemap) {
@@ -30,8 +35,12 @@ export default class vx_state {
    * @param  {statelistener} listener
    * @return {boolean}
    */
-  static t_register = {}
-  static e_register = {vx_type: vx_state.t_register}
+  static t_register = {
+    vx_type: vx_core.t_type
+  }
+  static e_register = {
+    vx_type: vx_state.t_register
+  }
 
   // (func register)
   static f_register(listener) {
@@ -39,8 +48,6 @@ export default class vx_state {
     return output
   }
 
-  // empty types
-  static e_value_map = {}
 
 
   static {
@@ -88,7 +95,6 @@ export default class vx_state {
     vx_state.e_value_map['vx_value'] = {}
 
     // (func change)
-    vx_state.t_change['vx_type'] = vx_core.t_type
     vx_state.t_change['vx_value'] = {
       name          : "change",
       pkgname       : "vx/state",
@@ -107,7 +113,6 @@ export default class vx_state {
     }
 
     // (func register)
-    vx_state.t_register['vx_type'] = vx_core.t_type
     vx_state.t_register['vx_value'] = {
       name          : "register",
       pkgname       : "vx/state",

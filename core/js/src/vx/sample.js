@@ -10,6 +10,7 @@ export default class vx_sample {
    * type: mytype
    */
   static t_mytype = {}
+  static e_mytype = {vx_type: vx_sample.t_mytype}
   /**
    * Constant: myconst
    * My Constant
@@ -21,8 +22,12 @@ export default class vx_sample {
    * @function main
    * @return {none}
    */
-  static t_main = {}
-  static e_main = {vx_type: vx_sample.t_main}
+  static t_main = {
+    vx_type: vx_core.t_type
+  }
+  static e_main = {
+    vx_type: vx_sample.t_main
+  }
 
   // (func main)
   static f_main() {
@@ -35,8 +40,12 @@ export default class vx_sample {
    * @param  {int} myarg My Arg
    * @return {int}
    */
-  static t_myfunc = {}
-  static e_myfunc = {vx_type: vx_sample.t_myfunc}
+  static t_myfunc = {
+    vx_type: vx_core.t_type
+  }
+  static e_myfunc = {
+    vx_type: vx_sample.t_myfunc
+  }
 
   // (func myfunc)
   static f_myfunc(myarg) {
@@ -48,8 +57,6 @@ export default class vx_sample {
     return output
   }
 
-  // empty types
-  static e_mytype = {}
 
 
   static {
@@ -112,7 +119,6 @@ export default class vx_sample {
     vx_sample.e_mytype['vx_value'] = {}
 
     // (func main)
-    vx_sample.t_main['vx_type'] = vx_core.t_type
     vx_sample.t_main['vx_value'] = {
       name          : "main",
       pkgname       : "vx/sample",
@@ -131,7 +137,6 @@ export default class vx_sample {
     }
 
     // (func myfunc)
-    vx_sample.t_myfunc['vx_type'] = vx_core.t_type
     vx_sample.t_myfunc['vx_value'] = {
       name          : "myfunc",
       pkgname       : "vx/sample",

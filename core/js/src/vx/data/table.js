@@ -10,74 +10,73 @@ export default class vx_data_table {
    * type: cell
    */
   static t_cell = {}
+  static e_cell = {vx_type: vx_data_table.t_cell}
 
   /**
    * type: celllist
    */
   static t_celllist = {}
+  static e_celllist = vx_core.vx_new_list(vx_data_table.t_celllist, [])
 
   /**
    * type: cellmap
    */
   static t_cellmap = {}
+  static e_cellmap = {vx_type: vx_data_table.t_cellmap}
 
   /**
    * type: field
    */
   static t_field = {}
+  static e_field = {vx_type: vx_data_table.t_field}
 
   /**
    * type: fieldlist
    */
   static t_fieldlist = {}
+  static e_fieldlist = vx_core.vx_new_list(vx_data_table.t_fieldlist, [])
 
   /**
    * type: fieldmap
    */
   static t_fieldmap = {}
+  static e_fieldmap = vx_core.vx_new_list(vx_data_table.t_fieldmap, [])
 
   /**
    * type: filter
    */
   static t_filter = {}
+  static e_filter = {vx_type: vx_data_table.t_filter}
 
   /**
    * type: row
    */
   static t_row = {}
+  static e_row = {vx_type: vx_data_table.t_row}
 
   /**
    * type: rowlist
    */
   static t_rowlist = {}
+  static e_rowlist = vx_core.vx_new_list(vx_data_table.t_rowlist, [])
 
   /**
    * type: rowmap
    */
   static t_rowmap = {}
+  static e_rowmap = {vx_type: vx_data_table.t_rowmap}
 
   /**
    * type: sort
    */
   static t_sort = {}
+  static e_sort = {vx_type: vx_data_table.t_sort}
 
   /**
    * type: table
    */
   static t_table = {}
-  // empty types
-  static e_cell = {}
-  static e_celllist = []
-  static e_cellmap = {}
-  static e_field = {}
-  static e_fieldlist = []
-  static e_fieldmap = []
-  static e_filter = {}
-  static e_row = {}
-  static e_rowlist = []
-  static e_rowmap = {}
-  static e_sort = {}
-  static e_table = {}
+  static e_table = {vx_type: vx_data_table.t_table}
 
 
   static {
