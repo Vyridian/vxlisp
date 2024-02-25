@@ -18,13 +18,13 @@ public final class EventTest {
   public static Test.Type_testcoveragesummary test_coveragesummary() {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/event", 
-      ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 2), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 4, ":total", 4), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 1), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 1), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 1), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 4), 
-      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 1)
+      ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 4), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 9, ":total", 9), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 2), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 2), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 2), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 9), 
+      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3)
     );
   }
 
@@ -32,14 +32,19 @@ public final class EventTest {
     return Test.t_testcoveragedetail.vx_new(
       ":testpkg", "vx/event",
       ":typemap", Core.t_intmap.vx_new(
-        ":event", 0
+        ":event", 0,
+        ":eventlist", 0,
+        ":eventmap", 0
       ),
       ":constmap", Core.t_intmap.vx_new(
+        ":event-change", 0,
         ":event-click", 0,
-        ":event-move", 0
+        ":event-move", 0,
+        ":event-select", 0
       ),
       ":funcmap", Core.t_intmap.vx_new(
-        ":any<-from-to", 0
+        ":event<-event", 0,
+        ":eventmap<-eventlist", 0
       )
     );
   }

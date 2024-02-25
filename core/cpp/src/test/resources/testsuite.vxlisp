@@ -14492,41 +14492,46 @@
    (vx/test/testcoveragedetail
     :constmap
      (intmap
+      :event-change 0
       :event-click 0
-      :event-move 0)
+      :event-move 0
+      :event-select 0)
     :funcmap
      (intmap
-      :any<-from-to 0)
+      :event<-event 0
+      :eventmap<-eventlist 0)
     :testpkg "vx/event"
     :typemap
      (intmap
-      :event 0))
+      :event 0
+      :eventlist 0
+      :eventmap 0))
   :coveragesummary
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 1)
+      :total 2)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 1)
+      :total 2)
     :constnums
      (vx/test/testcoveragenums
-      :total 2)
+      :total 4)
     :docnums
      (vx/test/testcoveragenums
       :pct 100
-      :tests 4
-      :total 4)
+      :tests 9
+      :total 9)
     :funcnums
      (vx/test/testcoveragenums
-      :total 1)
+      :total 2)
     :testpkg "vx/event"
     :totalnums
      (vx/test/testcoveragenums
-      :total 4)
+      :total 9)
     :typenums
      (vx/test/testcoveragenums
-      :total 1))
+      :total 3))
   :passfail true
   :testpkg "vx/event")
  (vx/test/testpackage
@@ -17017,6 +17022,195 @@ ab
   :passfail true
   :testpkg "vx/type")
  (vx/test/testpackage
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :constmap
+     (intmap
+      :layout-app-html 0
+      :layout-else-html 0
+      :layout-label-html 0
+      :layoutenginehtml 0)
+    :funcmap
+     (intmap
+      :divchild<-ui 0
+      :divchildlist<-uimap 0
+      :node-app<-ui-orig-parent 0
+      :node-render<-node-ui 0
+      :string-stylename<-name-styletype 0
+      :style<-style 0
+      :stylelist<-stylelist 0
+      :stylelist<-stylemap 0
+      :stylemap<-stylemap 0
+      :stylesheet-render-html 0
+      :stylesheet<-stylesheet 0
+      :ui-render-app<-ui-orig-parent 0
+      :ui-render-default<-ui-orig-parent 0
+      :ui-render-label<-ui-orig-parent 0)
+    :testpkg "vx/ui/html/uihtml")
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :total 14)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :total 14)
+    :constnums
+     (vx/test/testcoveragenums
+      :total 4)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 55
+      :tests 10
+      :total 18)
+    :funcnums
+     (vx/test/testcoveragenums
+      :total 14)
+    :testpkg "vx/ui/html/uihtml"
+    :totalnums
+     (vx/test/testcoveragenums
+      :total 18)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 100))
+  :passfail true
+  :testpkg "vx/ui/html/uihtml")
+ (vx/test/testpackage
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :testpkg "vx/ui/svg/uisvg")
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :pct 100)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :pct 100)
+    :constnums
+     (vx/test/testcoveragenums
+      :pct 100)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 100)
+    :funcnums
+     (vx/test/testcoveragenums
+      :pct 100)
+    :testpkg "vx/ui/svg/uisvg"
+    :totalnums
+     (vx/test/testcoveragenums
+      :pct 100)
+    :typenums
+     (vx/test/testcoveragenums
+      :pct 100))
+  :passfail true
+  :testpkg "vx/ui/svg/uisvg")
+ (vx/test/testpackage
+  :coveragedetail
+   (vx/test/testcoveragedetail
+    :constmap
+     (intmap
+      :layout-app 0
+      :layout-background 0
+      :layout-combobox 0
+      :layout-else 0
+      :layout-flow-columns 0
+      :layout-flow-rows 0
+      :layout-image 0
+      :layout-label 0
+      :layout-main 0
+      :layout-maxpanel 0
+      :layout-menubar 0
+      :layout-menudrawer 0
+      :layout-msgbox 0
+      :layout-navbar 0
+      :layout-navdrawer 0
+      :layout-panel 0
+      :layout-parallax 0
+      :layout-statusbar 0
+      :layout-statusdrawer 0
+      :layout-text 0
+      :layout-textentry 0
+      :pin-bottom 0
+      :pin-center 0
+      :pin-center-h 0
+      :pin-center-v 0
+      :pin-expand 0
+      :pin-left 0
+      :pin-right 0
+      :pin-top 0
+      :styletype-custom 0
+      :styletype-shared 0
+      :styletype-system 0)
+    :funcmap
+     (intmap
+      :layout<-style 0
+      :layoutmap<-layoutlist 0
+      :stylemap<-stylelist 0
+      :stylesheet-render 0
+      :ui-layout<-ui-layoutmap-else 0
+      :ui-render 0
+      :ui-render<-fn-render-ui-orig-parent 0
+      :ui-render<-ui-orig-parent 0
+      :ui<-renderer-ui-orig-parent 0
+      :uiengine-render 0
+      :uimap-layout<-uimap-layoutmap-else 0
+      :uimap-render<-uimap-parent 0
+      :uimap<-uilist 0
+      :uimap<-uimap-data 0)
+    :testpkg "vx/ui/ui"
+    :typemap
+     (intmap
+      :bounds 0
+      :cursor 0
+      :cursor-pointer 0
+      :layout 0
+      :layoutengine 0
+      :layoutlist 0
+      :layoutmap 0
+      :pin 0
+      :point 0
+      :pointstyle 0
+      :render 0
+      :rendermap 0
+      :style 0
+      :stylelist 0
+      :stylemap 0
+      :stylesheet 0
+      :styletype 0
+      :ui 0
+      :uiengine 0
+      :uilist 0
+      :uimap 0))
+  :coveragesummary
+   (vx/test/testcoveragesummary
+    :bigospacenums
+     (vx/test/testcoveragenums
+      :total 14)
+    :bigotimenums
+     (vx/test/testcoveragenums
+      :total 14)
+    :constnums
+     (vx/test/testcoveragenums
+      :total 32)
+    :docnums
+     (vx/test/testcoveragenums
+      :pct 41
+      :tests 28
+      :total 67)
+    :funcnums
+     (vx/test/testcoveragenums
+      :total 14)
+    :testpkg "vx/ui/ui"
+    :totalnums
+     (vx/test/testcoveragenums
+      :total 67)
+    :typenums
+     (vx/test/testcoveragenums
+      :total 21))
+  :passfail true
+  :testpkg "vx/ui/ui")
+ (vx/test/testpackage
   :caselist
    (vx/test/testcaselist
     (vx/test/testcase
@@ -17170,7 +17364,9 @@ ab
         :describename
          "(test
  \"<p>data</p>\"
- (string<-p-indent (p :text \"data\") 0))"
+ (string<-p-indent
+  (p :text \"data\")
+  0))"
         :testpkg "vx/web/html"
         :testresult
          (vx/test/testresult
@@ -17183,7 +17379,8 @@ ab
          "(test
  \"<p id=\\"myid\\">data</p>\"
  (string<-p-indent
-  (p :id \"myid\" :text \"data\") 0))"
+  (p :id \"myid\" :text \"data\")
+  0))"
         :testpkg "vx/web/html"
         :testresult
          (vx/test/testresult
@@ -17214,6 +17411,9 @@ ab
       :string<-p-indent 2
       :string<-propname-val 0
       :string<-propstyle 0
+      :string<-propstyle-stylelist 0
+      :string<-propstylelist 0
+      :string<-propstyleunique 0
       :string<-style-indent 0
       :string<-stylelist-indent 0
       :string<-stylepropmap-indent 0
@@ -17257,6 +17457,7 @@ ab
       :stylelist 0
       :stylemap 0
       :stylesheet 0
+      :subpropmap 0
       :table 0
       :tbody 0
       :td 0
@@ -17269,32 +17470,32 @@ ab
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 36)
+      :total 39)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 36)
+      :total 39)
     :constnums
      (vx/test/testcoveragenums
       :pct 100)
     :docnums
      (vx/test/testcoveragenums
       :pct 98
-      :tests 66
-      :total 67)
+      :tests 70
+      :total 71)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 16
+      :pct 15
       :tests 6
-      :total 36)
+      :total 39)
     :testpkg "vx/web/html"
     :totalnums
      (vx/test/testcoveragenums
       :pct 8
       :tests 6
-      :total 67)
+      :total 71)
     :typenums
      (vx/test/testcoveragenums
-      :total 31))
+      :total 32))
   :passfail true
   :testpkg "vx/web/html")
  (vx/test/testpackage
@@ -17302,6 +17503,10 @@ ab
    (vx/test/testcoveragedetail
     :funcmap
      (intmap
+      :any-data<-id 0
+      :boolean-replace<-id-htmltext 0
+      :boolean-replace<-id-htmltext-data-eventmap 0
+      :boolean-write-stylesheet<-string 0
       :boolean-write<-id-htmltext 0
       :boolean-write<-stylesheet 0
       :string<-id 0)
@@ -17310,25 +17515,25 @@ ab
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 3)
+      :total 7)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 3)
+      :total 7)
     :constnums
      (vx/test/testcoveragenums
       :pct 100)
     :docnums
      (vx/test/testcoveragenums
       :pct 100
-      :tests 3
-      :total 3)
+      :tests 7
+      :total 7)
     :funcnums
      (vx/test/testcoveragenums
-      :total 3)
+      :total 7)
     :testpkg "vx/web/htmldoc"
     :totalnums
      (vx/test/testcoveragenums
-      :total 3)
+      :total 7)
     :typenums
      (vx/test/testcoveragenums
       :pct 100))

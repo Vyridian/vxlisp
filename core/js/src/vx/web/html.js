@@ -1,6 +1,7 @@
 'strict mode'
 
 import vx_core from "../../vx/core.js"
+import vx_event from "../../vx/event.js"
 import vx_type from "../../vx/type.js"
 
 
@@ -167,6 +168,13 @@ export default class vx_web_html {
    */
   static t_stylesheet = {}
   static e_stylesheet = {vx_type: vx_web_html.t_stylesheet}
+
+  /**
+   * type: subpropmap
+   * Map of propmap
+   */
+  static t_subpropmap = {}
+  static e_subpropmap = {vx_type: vx_web_html.t_subpropmap}
 
   /**
    * type: table
@@ -371,8 +379,12 @@ export default class vx_web_html {
           "id",
           vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_div}, div, ":id")
         )
-        const sstyle = vx_web_html.f_string_from_propstyle(
-          vx_core.f_any_from_struct({"any-1": vx_web_html.t_style, "struct-2": vx_web_html.t_div}, div, ":style")
+        const sclass = vx_web_html.f_string_from_propstyle_stylelist(
+          vx_core.f_any_from_struct({"any-1": vx_web_html.t_style, "struct-2": vx_web_html.t_div}, div, ":style"),
+          vx_core.f_any_from_struct({"any-1": vx_web_html.t_stylelist, "struct-2": vx_web_html.t_div}, div, ":stylelist")
+        )
+        const sstyle = vx_web_html.f_string_from_propstyleunique(
+          vx_core.f_any_from_struct({"any-1": vx_web_html.t_style, "struct-2": vx_web_html.t_div}, div, ":style-unique")
         )
         return vx_web_html.f_string_from_nodelist_tag_prop_indent(
           nodes,
@@ -380,6 +392,7 @@ export default class vx_web_html {
           vx_core.f_new(
             vx_core.t_string,
             sid,
+            sclass,
             sstyle
           ),
           indent
@@ -968,14 +981,18 @@ export default class vx_web_html {
           "id",
           vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_p}, p, ":id")
         )
-        const sstyle = vx_web_html.f_string_from_propstyle(
+        const sclass = vx_web_html.f_string_from_propstyle(
           vx_core.f_any_from_struct({"any-1": vx_web_html.t_style, "struct-2": vx_web_html.t_p}, p, ":style")
+        )
+        const sstyle = vx_web_html.f_string_from_propstyleunique(
+          vx_core.f_any_from_struct({"any-1": vx_web_html.t_style, "struct-2": vx_web_html.t_p}, p, ":style-unique")
         )
         return vx_core.f_new(
           vx_core.t_string,
           sindent,
           "<p",
           sid,
+          sclass,
           sstyle,
           ">",
           text,
@@ -1035,18 +1052,138 @@ export default class vx_web_html {
   // (func string<-propstyle)
   static f_string_from_propstyle(style) {
     let output = vx_core.e_string
-    output = vx_core.f_if(
+    output = vx_core.f_if_2(
       {"any-1": vx_core.t_string},
-      vx_core.f_notempty_1(style),
-      vx_core.f_new(
-        vx_core.t_string,
-        " class=",
-        vx_core.c_quote,
-        vx_type.f_string_from_string_start(
-          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_style}, style, ":name"),
-          2
-        ),
-        vx_core.c_quote
+      vx_core.f_then(
+        vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty_1(style)}),
+        vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
+          vx_core.t_string,
+          " class=",
+          vx_core.c_quote,
+          vx_type.f_string_from_string_start(
+            vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_style}, style, ":name"),
+            2
+          ),
+          vx_core.c_quote
+        )})
+      )
+    )
+    return output
+  }
+
+  /**
+   * @function string_from_propstyle_stylelist
+   * Returns ' class=\"style.name\"' if style is not empty.
+   * @param  {style} style
+   * @param  {stylelist} stylelist
+   * @return {string}
+   */
+  static t_string_from_propstyle_stylelist = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_propstyle_stylelist = {
+    vx_type: vx_web_html.t_string_from_propstyle_stylelist
+  }
+
+  // (func string<-propstyle-stylelist)
+  static f_string_from_propstyle_stylelist(style, stylelist) {
+    let output = vx_core.e_string
+    output = vx_core.f_if_2(
+      {"any-1": vx_core.t_string},
+      vx_core.f_then(
+        vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty_1(style)}),
+        vx_core.f_new(vx_core.t_any_from_func, () => {return vx_web_html.f_string_from_propstyle(style)})
+      ),
+      vx_core.f_then(
+        vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty_1(stylelist)}),
+        vx_core.f_new(vx_core.t_any_from_func, () => {return vx_web_html.f_string_from_propstylelist(stylelist)})
+      )
+    )
+    return output
+  }
+
+  /**
+   * @function string_from_propstylelist
+   * Returns ' class=\"style1.name style2.name\"' if stylelist is not empty.
+   * @param  {stylelist} stylelist
+   * @return {string}
+   */
+  static t_string_from_propstylelist = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_propstylelist = {
+    vx_type: vx_web_html.t_string_from_propstylelist
+  }
+
+  // (func string<-propstylelist)
+  static f_string_from_propstylelist(stylelist) {
+    let output = vx_core.e_string
+    output = vx_core.f_if_2(
+      {"any-1": vx_core.t_string},
+      vx_core.f_then(
+        vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty_1(stylelist)}),
+        vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_let(
+          {"any-1": vx_core.t_string},
+          [],
+          vx_core.f_new(vx_core.t_any_from_func, () => {
+            const namelist = vx_core.f_list_from_list(
+              {"any-1": vx_core.t_string, "any-2": vx_web_html.t_style, "list-1": vx_core.t_stringlist, "list-2": vx_web_html.t_stylelist},
+              stylelist,
+              vx_core.f_new(vx_core.t_any_from_any, (item) => 
+                vx_type.f_string_from_string_start(
+                  vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_style}, item, ":name"),
+                  2
+                ))
+            )
+            const joined = vx_type.f_string_from_stringlist_join(namelist, " ")
+            return vx_core.f_if(
+              {"any-1": vx_core.t_string},
+              vx_core.f_ne("", joined),
+              vx_core.f_new(
+                vx_core.t_string,
+                " class=",
+                vx_core.c_quote,
+                joined,
+                vx_core.c_quote
+              )
+            )
+          })
+        )})
+      )
+    )
+    return output
+  }
+
+  /**
+   * @function string_from_propstyleunique
+   * Returns ' style=\"{style.propmap}\"' if style is not empty.
+   * @param  {style} style
+   * @return {string}
+   */
+  static t_string_from_propstyleunique = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_propstyleunique = {
+    vx_type: vx_web_html.t_string_from_propstyleunique
+  }
+
+  // (func string<-propstyleunique)
+  static f_string_from_propstyleunique(style) {
+    let output = vx_core.e_string
+    output = vx_core.f_if_2(
+      {"any-1": vx_core.t_string},
+      vx_core.f_then(
+        vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty_1(style)}),
+        vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
+          vx_core.t_string,
+          " style=",
+          vx_core.c_quote,
+          vx_web_html.f_string_from_stylepropmap_indent(
+            vx_core.f_any_from_struct({"any-1": vx_web_html.t_propmap, "struct-2": vx_web_html.t_style}, style, ":props"),
+            0
+          ),
+          vx_core.c_quote
+        )})
       )
     )
     return output
@@ -1597,6 +1734,7 @@ export default class vx_web_html {
       "stylelist": vx_web_html.e_stylelist,
       "stylemap": vx_web_html.e_stylemap,
       "stylesheet": vx_web_html.e_stylesheet,
+      "subpropmap": vx_web_html.e_subpropmap,
       "table": vx_web_html.e_table,
       "tbody": vx_web_html.e_tbody,
       "td": vx_web_html.e_td,
@@ -1624,6 +1762,9 @@ export default class vx_web_html {
       "string<-p-indent": vx_web_html.e_string_from_p_indent,
       "string<-propname-val": vx_web_html.e_string_from_propname_val,
       "string<-propstyle": vx_web_html.e_string_from_propstyle,
+      "string<-propstyle-stylelist": vx_web_html.e_string_from_propstyle_stylelist,
+      "string<-propstylelist": vx_web_html.e_string_from_propstylelist,
+      "string<-propstyleunique": vx_web_html.e_string_from_propstyleunique,
       "string<-style-indent": vx_web_html.e_string_from_style_indent,
       "string<-stylelist-indent": vx_web_html.e_string_from_stylelist_indent,
       "string<-stylepropmap-indent": vx_web_html.e_string_from_stylepropmap_indent,
@@ -1662,6 +1803,9 @@ export default class vx_web_html {
       "string<-p-indent": vx_web_html.t_string_from_p_indent,
       "string<-propname-val": vx_web_html.t_string_from_propname_val,
       "string<-propstyle": vx_web_html.t_string_from_propstyle,
+      "string<-propstyle-stylelist": vx_web_html.t_string_from_propstyle_stylelist,
+      "string<-propstylelist": vx_web_html.t_string_from_propstylelist,
+      "string<-propstyleunique": vx_web_html.t_string_from_propstyleunique,
       "string<-style-indent": vx_web_html.t_string_from_style_indent,
       "string<-stylelist-indent": vx_web_html.t_string_from_stylelist_indent,
       "string<-stylepropmap-indent": vx_web_html.t_string_from_stylepropmap_indent,
@@ -1704,6 +1848,7 @@ export default class vx_web_html {
       "stylelist": vx_web_html.t_stylelist,
       "stylemap": vx_web_html.t_stylemap,
       "stylesheet": vx_web_html.t_stylesheet,
+      "subpropmap": vx_web_html.t_subpropmap,
       "table": vx_web_html.t_table,
       "tbody": vx_web_html.t_tbody,
       "td": vx_web_html.t_td,
@@ -1770,9 +1915,24 @@ export default class vx_web_html {
           "type" : vx_core.t_string,
           "multi": false
         },
+        "eventmap": {
+          "name" : "eventmap",
+          "type" : vx_event.t_eventmap,
+          "multi": false
+        },
         "style": {
           "name" : "style",
           "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "style-unique": {
+          "name" : "style-unique",
+          "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "stylelist": {
+          "name" : "stylelist",
+          "type" : vx_web_html.t_stylelist,
           "multi": false
         },
         "summary": {
@@ -1814,9 +1974,24 @@ export default class vx_web_html {
           "type" : vx_core.t_string,
           "multi": false
         },
+        "eventmap": {
+          "name" : "eventmap",
+          "type" : vx_event.t_eventmap,
+          "multi": false
+        },
         "style": {
           "name" : "style",
           "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "style-unique": {
+          "name" : "style-unique",
+          "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "stylelist": {
+          "name" : "stylelist",
+          "type" : vx_web_html.t_stylelist,
           "multi": false
         },
         "nodes": {
@@ -1937,9 +2112,24 @@ export default class vx_web_html {
           "type" : vx_core.t_string,
           "multi": false
         },
+        "eventmap": {
+          "name" : "eventmap",
+          "type" : vx_event.t_eventmap,
+          "multi": false
+        },
         "style": {
           "name" : "style",
           "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "style-unique": {
+          "name" : "style-unique",
+          "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "stylelist": {
+          "name" : "stylelist",
+          "type" : vx_web_html.t_stylelist,
           "multi": false
         },
         "text": {
@@ -1976,9 +2166,24 @@ export default class vx_web_html {
           "type" : vx_core.t_string,
           "multi": false
         },
+        "eventmap": {
+          "name" : "eventmap",
+          "type" : vx_event.t_eventmap,
+          "multi": false
+        },
         "style": {
           "name" : "style",
           "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "style-unique": {
+          "name" : "style-unique",
+          "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "stylelist": {
+          "name" : "stylelist",
+          "type" : vx_web_html.t_stylelist,
           "multi": false
         },
         "text": {
@@ -2015,9 +2220,24 @@ export default class vx_web_html {
           "type" : vx_core.t_string,
           "multi": false
         },
+        "eventmap": {
+          "name" : "eventmap",
+          "type" : vx_event.t_eventmap,
+          "multi": false
+        },
         "style": {
           "name" : "style",
           "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "style-unique": {
+          "name" : "style-unique",
+          "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "stylelist": {
+          "name" : "stylelist",
+          "type" : vx_web_html.t_stylelist,
           "multi": false
         },
         "text": {
@@ -2164,9 +2384,24 @@ export default class vx_web_html {
           "type" : vx_core.t_string,
           "multi": false
         },
+        "eventmap": {
+          "name" : "eventmap",
+          "type" : vx_event.t_eventmap,
+          "multi": false
+        },
         "style": {
           "name" : "style",
           "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "style-unique": {
+          "name" : "style-unique",
+          "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "stylelist": {
+          "name" : "stylelist",
+          "type" : vx_web_html.t_stylelist,
           "multi": false
         },
         "charset": {
@@ -2213,15 +2448,30 @@ export default class vx_web_html {
           "type" : vx_core.t_string,
           "multi": false
         },
+        "eventmap": {
+          "name" : "eventmap",
+          "type" : vx_event.t_eventmap,
+          "multi": false
+        },
         "style": {
           "name" : "style",
           "type" : vx_web_html.t_style,
           "multi": false
+        },
+        "style-unique": {
+          "name" : "style-unique",
+          "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "stylelist": {
+          "name" : "stylelist",
+          "type" : vx_web_html.t_stylelist,
+          "multi": false
         }
       },
       proplast      : {
-        "name" : "style",
-        "type" : vx_web_html.t_style,
+        "name" : "stylelist",
+        "type" : vx_web_html.t_stylelist,
         "multi": false
       }
     }
@@ -2265,9 +2515,24 @@ export default class vx_web_html {
           "type" : vx_core.t_string,
           "multi": false
         },
+        "eventmap": {
+          "name" : "eventmap",
+          "type" : vx_event.t_eventmap,
+          "multi": false
+        },
         "style": {
           "name" : "style",
           "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "style-unique": {
+          "name" : "style-unique",
+          "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "stylelist": {
+          "name" : "stylelist",
+          "type" : vx_web_html.t_stylelist,
           "multi": false
         },
         "text": {
@@ -2327,11 +2592,16 @@ export default class vx_web_html {
           "name" : "props",
           "type" : vx_web_html.t_propmap,
           "multi": false
+        },
+        "subprops": {
+          "name" : "subprops",
+          "type" : vx_web_html.t_subpropmap,
+          "multi": false
         }
       },
       proplast      : {
-        "name" : "props",
-        "type" : vx_web_html.t_propmap,
+        "name" : "subprops",
+        "type" : vx_web_html.t_subpropmap,
         "multi": false
       }
     }
@@ -2394,9 +2664,24 @@ export default class vx_web_html {
           "type" : vx_core.t_string,
           "multi": false
         },
+        "eventmap": {
+          "name" : "eventmap",
+          "type" : vx_event.t_eventmap,
+          "multi": false
+        },
         "style": {
           "name" : "style",
           "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "style-unique": {
+          "name" : "style-unique",
+          "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "stylelist": {
+          "name" : "stylelist",
+          "type" : vx_web_html.t_stylelist,
           "multi": false
         },
         "name": {
@@ -2424,6 +2709,25 @@ export default class vx_web_html {
     vx_web_html.e_stylesheet['vx_type'] = vx_web_html.t_stylesheet
     vx_web_html.e_stylesheet['vx_value'] = {}
 
+    // (type subpropmap)
+    vx_web_html.t_subpropmap['vx_type'] = vx_core.t_type
+    vx_web_html.t_subpropmap['vx_value'] = {
+      name          : "subpropmap",
+      pkgname       : "vx/web/html",
+      extends       : ":map",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [vx_web_html.t_propmap],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {},
+      proplast      : {}
+    }
+    vx_web_html.e_subpropmap['vx_type'] = vx_web_html.t_subpropmap
+    vx_web_html.e_subpropmap['vx_value'] = {}
+
     // (type table)
     vx_web_html.t_table['vx_type'] = vx_core.t_type
     vx_web_html.t_table['vx_value'] = {
@@ -2443,9 +2747,24 @@ export default class vx_web_html {
           "type" : vx_core.t_string,
           "multi": false
         },
+        "eventmap": {
+          "name" : "eventmap",
+          "type" : vx_event.t_eventmap,
+          "multi": false
+        },
         "style": {
           "name" : "style",
           "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "style-unique": {
+          "name" : "style-unique",
+          "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "stylelist": {
+          "name" : "stylelist",
+          "type" : vx_web_html.t_stylelist,
           "multi": false
         },
         "tbody": {
@@ -2487,9 +2806,24 @@ export default class vx_web_html {
           "type" : vx_core.t_string,
           "multi": false
         },
+        "eventmap": {
+          "name" : "eventmap",
+          "type" : vx_event.t_eventmap,
+          "multi": false
+        },
         "style": {
           "name" : "style",
           "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "style-unique": {
+          "name" : "style-unique",
+          "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "stylelist": {
+          "name" : "stylelist",
+          "type" : vx_web_html.t_stylelist,
           "multi": false
         },
         "nodes": {
@@ -2526,9 +2860,24 @@ export default class vx_web_html {
           "type" : vx_core.t_string,
           "multi": false
         },
+        "eventmap": {
+          "name" : "eventmap",
+          "type" : vx_event.t_eventmap,
+          "multi": false
+        },
         "style": {
           "name" : "style",
           "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "style-unique": {
+          "name" : "style-unique",
+          "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "stylelist": {
+          "name" : "stylelist",
+          "type" : vx_web_html.t_stylelist,
           "multi": false
         },
         "nodes": {
@@ -2583,9 +2932,24 @@ export default class vx_web_html {
           "type" : vx_core.t_string,
           "multi": false
         },
+        "eventmap": {
+          "name" : "eventmap",
+          "type" : vx_event.t_eventmap,
+          "multi": false
+        },
         "style": {
           "name" : "style",
           "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "style-unique": {
+          "name" : "style-unique",
+          "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "stylelist": {
+          "name" : "stylelist",
+          "type" : vx_web_html.t_stylelist,
           "multi": false
         },
         "nodes": {
@@ -2622,9 +2986,24 @@ export default class vx_web_html {
           "type" : vx_core.t_string,
           "multi": false
         },
+        "eventmap": {
+          "name" : "eventmap",
+          "type" : vx_event.t_eventmap,
+          "multi": false
+        },
         "style": {
           "name" : "style",
           "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "style-unique": {
+          "name" : "style-unique",
+          "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "stylelist": {
+          "name" : "stylelist",
+          "type" : vx_web_html.t_stylelist,
           "multi": false
         },
         "text": {
@@ -2661,9 +3040,24 @@ export default class vx_web_html {
           "type" : vx_core.t_string,
           "multi": false
         },
+        "eventmap": {
+          "name" : "eventmap",
+          "type" : vx_event.t_eventmap,
+          "multi": false
+        },
         "style": {
           "name" : "style",
           "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "style-unique": {
+          "name" : "style-unique",
+          "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "stylelist": {
+          "name" : "stylelist",
+          "type" : vx_web_html.t_stylelist,
           "multi": false
         },
         "nodes": {
@@ -3039,6 +3433,60 @@ export default class vx_web_html {
       properties    : [],
       proplast      : {},
       fn            : vx_web_html.f_string_from_propstyle
+    }
+
+    // (func string<-propstyle-stylelist)
+    vx_web_html.t_string_from_propstyle_stylelist['vx_value'] = {
+      name          : "string<-propstyle-stylelist",
+      pkgname       : "vx/web/html",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_web_html.f_string_from_propstyle_stylelist
+    }
+
+    // (func string<-propstylelist)
+    vx_web_html.t_string_from_propstylelist['vx_value'] = {
+      name          : "string<-propstylelist",
+      pkgname       : "vx/web/html",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_web_html.f_string_from_propstylelist
+    }
+
+    // (func string<-propstyleunique)
+    vx_web_html.t_string_from_propstyleunique['vx_value'] = {
+      name          : "string<-propstyleunique",
+      pkgname       : "vx/web/html",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_web_html.f_string_from_propstyleunique
     }
 
     // (func string<-style-indent)

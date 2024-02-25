@@ -20,11 +20,11 @@ public final class HtmldocTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/web/htmldoc", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 3, ":total", 3), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 7, ":total", 7), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 7), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 7), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 7), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 7), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
     );
   }
@@ -39,6 +39,10 @@ public final class HtmldocTest {
   
       ),
       ":funcmap", Core.t_intmap.vx_new(
+        ":any-data<-id", 0,
+        ":boolean-replace<-id-htmltext", 0,
+        ":boolean-replace<-id-htmltext-data-eventmap", 0,
+        ":boolean-write-stylesheet<-string", 0,
         ":boolean-write<-id-htmltext", 0,
         ":boolean-write<-stylesheet", 0,
         ":string<-id", 0

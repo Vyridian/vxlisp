@@ -2938,8 +2938,14 @@ namespace vx_test {
       );
       output->vx_p_id = val->id();
       vx_core::vx_reserve(output->vx_p_id);
+      output->vx_p_eventmap = val->eventmap();
+      vx_core::vx_reserve(output->vx_p_eventmap);
       output->vx_p_style = val->style();
       vx_core::vx_reserve(output->vx_p_style);
+      output->vx_p_style_unique = val->style_unique();
+      vx_core::vx_reserve(output->vx_p_style_unique);
+      output->vx_p_stylelist = val->stylelist();
+      vx_core::vx_reserve(output->vx_p_stylelist);
       output->vx_p_name = val->name();
       vx_core::vx_reserve(output->vx_p_name);
       output->vx_p_styles = val->styles();

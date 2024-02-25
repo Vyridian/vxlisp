@@ -2993,7 +2993,10 @@ public final class Test {
         )
       );
       output.vx_p_id = val.id();
+      output.vx_p_eventmap = val.eventmap();
       output.vx_p_style = val.style();
+      output.vx_p_style_unique = val.style_unique();
+      output.vx_p_stylelist = val.stylelist();
       output.vx_p_name = val.name();
       output.vx_p_styles = val.styles();
       output.vx_p_stylemap = val.stylemap();

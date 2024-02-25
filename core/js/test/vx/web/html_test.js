@@ -3,6 +3,7 @@
 import vx_web_html from "../../../src/vx/web/html.js"
 import vx_core from "../../../src/vx/core.js"
 import vx_test from "../../../src/vx/test.js"
+import vx_event from "../../../src/vx/event.js"
 import vx_type from "../../../src/vx/type.js"
 
 export default class vx_web_html_test {
@@ -25,12 +26,12 @@ export default class vx_web_html_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/web/html", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 98, ":tests", 66, ":total", 67), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 16, ":tests", 6, ":total", 36), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 98, ":tests", 70, ":total", 71), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 15, ":tests", 6, ":total", 39), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 8, ":tests", 6, ":total", 67), 
-      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 31)
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 8, ":tests", 6, ":total", 71), 
+      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 32)
     )
   }
 
@@ -64,6 +65,7 @@ export default class vx_web_html_test {
           "stylelist", 0,
           "stylemap", 0,
           "stylesheet", 0,
+          "subpropmap", 0,
           "table", 0,
           "tbody", 0,
           "td", 0,
@@ -99,6 +101,9 @@ export default class vx_web_html_test {
           "string<-p-indent", 2,
           "string<-propname-val", 0,
           "string<-propstyle", 0,
+          "string<-propstyle-stylelist", 0,
+          "string<-propstylelist", 0,
+          "string<-propstyleunique", 0,
           "string<-style-indent", 0,
           "string<-stylelist-indent", 0,
           "string<-stylepropmap-indent", 0,
@@ -320,7 +325,7 @@ export default class vx_web_html_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n \"<p>data</p>\"\n (string<-p-indent (p :text \"data\") 0))",
+            ":describename", "(test\n \"<p>data</p>\"\n (string<-p-indent\n  (p :text \"data\")\n  0))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -337,7 +342,7 @@ export default class vx_web_html_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n \"<p id=\\\"myid\\\">data</p>\"\n (string<-p-indent\n  (p :id \"myid\" :text \"data\") 0))",
+            ":describename", "(test\n \"<p id=\\\"myid\\\">data</p>\"\n (string<-p-indent\n  (p :id \"myid\" :text \"data\")\n  0))",
             ":testresult",
             vx_test.f_test(
               context,

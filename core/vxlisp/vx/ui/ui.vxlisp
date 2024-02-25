@@ -1,0 +1,417 @@
+(package vx/ui/ui
+ :libs (lib event :path vx/event)
+       (lib file  :path vx/data/file)
+ :doc "Universal Ui Element")
+
+(type bounds : struct
+ :properties [left   : int
+              right  : int
+              top    : int
+              bottom : int]
+ :doc "Universal Bounds")
+
+(type cursor : struct
+ :doc "Univeral Cursor Type")
+
+(type layout : struct
+ :properties [name      : string
+              fn-layout : ui-render<-ui-orig-parent]
+ :doc "Universal Layout")
+
+(type layoutengine : struct
+ :properties [name             : string
+              layoutmap        : layoutmap
+              layoutelse       : layout
+              stylesheetrender : stylesheet-render]
+ :doc "Pluggable layoutengine")
+
+(type layoutlist : list
+ :allowtypes [layout]
+ :doc "Map of layout")
+
+(type layoutmap : map
+ :allowtypes [layout]
+ :doc "Map of layout")
+
+(type pin : struct
+ :properties [name : string]
+ :doc "Pin an element")
+
+(type point : struct
+ :properties [x          : int
+              y          : int
+              z          : int
+              t          : int
+              i          : int
+              ispercent  : boolean
+              pointstyle : pointstyle]
+ :doc "Universal Point")
+
+(type pointstyle : struct
+ :doc "Universal Point Style")
+
+(type render : struct
+ :doc "Universal Rendered UI")
+
+(type rendermap : map
+ :allowtypes [render]
+ :doc "Map of render")
+
+/*
+(type renderer : struct
+ :properties [name      : string
+              layout    : layout
+              fn-render : ui-render<-ui-orig-parent]
+ :doc "Universal Renderer")
+
+(type rendererlist : list
+ :allowtypes [renderer]
+ :doc "Map of renderer")
+
+(type renderermap : map
+ :allowtypes [renderer]
+ :doc "Map of renderer")
+*/
+
+(type style : struct
+ :properties [name             : string
+              boundsmargin     : bounds
+              boundspadding    : bounds
+              color-background : string
+              color-hoverbkgrd : string
+              cursor           : cursor
+              image-background : file/file
+              layout           : layout
+              type             : styletype
+              pin              : pin
+              pointpos         : point
+              pointsize        : point]
+ :doc "Universal Style")
+
+(type stylelist : list
+ :allowtypes [style]
+ :doc "Universal Stylelist")
+
+(type stylemap : map
+ :allowtypes [style]
+ :doc "Universal Stylemap")
+
+(type stylesheet : struct
+ :properties [stylemap : stylemap]
+ :doc "Universal Stylesheet")
+
+(type styletype : struct
+ :doc "Universal Style Type")
+
+(type ui : struct
+ :properties [data            : any
+              eventmap        : event/eventmap
+              fn-uimap-data   : uimap<-uimap-data
+              path            : string
+              render          : render
+              renderer        : layout
+              style           : style
+              stylelist       : stylelist
+              stylesheet      : stylesheet
+              uid             : string
+              uimap           : uimap]
+ :doc "Universal UI Element")
+
+(type uilist : list
+ :allowtypes [ui]
+ :doc "List of ui")
+
+(type uimap : map
+ :allowtypes [ui]
+ :doc "Map of ui")
+
+(type uiengine : struct
+ :properties [parentmap    : uimap
+              layoutengine : layoutengine
+              stylesheet   : stylesheet
+              ui           : ui]
+ :doc "Template for uiengine")
+
+(type cursor-pointer : cursor)
+
+/*
+(const global-uiengine : uiengine)
+*/
+
+(const layout-app : layout
+ (layout
+  :name "layout-app"))
+
+(const layout-background : layout
+ (layout
+  :name "layout-background"))
+
+(const layout-combobox : layout
+ (layout
+  :name "layout-combobox"))
+
+(const layout-else : layout
+ (layout
+  :name "layout-else"))
+
+(const layout-flow-columns : layout
+ (layout
+  :name "layout-flow-columns"))
+
+(const layout-flow-rows : layout
+ (layout
+  :name "layout-flow-rows"))
+
+(const layout-image : layout
+ (layout
+  :name "layout-image"))
+
+(const layout-label : layout
+ (layout
+  :name "layout-label"))
+
+(const layout-main : layout
+ (layout
+  :name "layout-main"))
+
+(const layout-maxpanel : layout
+ (layout
+  :name "layout-maxpanel"))
+
+(const layout-menubar : layout
+ (layout
+  :name "layout-menubar"))
+
+(const layout-menudrawer : layout
+ (layout
+  :name "layout-menudrawer"))
+
+(const layout-msgbox : layout
+ (layout
+  :name "layout-msgbox"))
+
+(const layout-navbar : layout
+ (layout
+  :name "layout-navbar"))
+
+(const layout-navdrawer : layout
+ (layout
+  :name "layout-navdrawer"))
+
+(const layout-panel : layout
+ (layout
+  :name "layout-panel"))
+
+(const layout-parallax : layout
+ (layout
+  :name "layout-parallax"))
+
+(const layout-statusbar : layout
+ (layout
+  :name "layout-statusbar"))
+
+(const layout-statusdrawer : layout
+ (layout
+  :name "layout-statusdrawer"))
+
+(const layout-text : layout
+ (layout
+  :name "layout-text"))
+
+(const layout-textentry : layout
+ (layout
+  :name "layout-textentry"))
+
+(const pin-bottom : pin)
+
+(const pin-center : pin)
+
+(const pin-center-h : pin)
+
+(const pin-center-v : pin)
+
+(const pin-expand : pin)
+
+(const pin-left : pin)
+
+(const pin-right : pin)
+
+(const pin-top : pin)
+
+(const styletype-custom : styletype)
+
+(const styletype-shared : styletype)
+
+(const styletype-system : styletype)
+
+(func layout<-style : layout
+ [style : style]
+ (:layout style)
+ :doc "")
+
+(func layoutmap<-layoutlist : layoutmap
+ [layoutlist : layoutlist]
+ (map<-list : layoutmap
+  layoutlist
+  (fn : string
+   [layout : layout]
+   (:name layout)))
+ :doc "Returns an renderermap from an rendererlist")
+
+(func stylemap<-stylelist : stylemap
+ [stylelist : stylelist]
+ (map<-list
+  stylelist
+  (fn : string
+   [style : style]
+   (:name style)))
+ :doc "")
+
+(func stylesheet-render : stylesheet
+ [stylesheetui : stylesheet]
+ :sideeffects "Stylesheet will be rendered"
+ :doc "Template for rendering stylesheet")
+
+(func ui<-renderer-ui-orig-parent : ui
+ [renderer : layout
+  uiarg    : ui
+  uiorig   : ui
+  parent   : ui]
+ (let : ui
+  [fn-layout : ui-render<-ui-orig-parent := (:fn-layout renderer)
+   uichg     : ui                        := (fn-layout
+                                             uiarg
+                                             uiorig
+                                             parent)]
+  uichg)
+ :doc "")
+
+(func ui-layout<-ui-layoutmap-else : ui
+ [ui : ui
+  layoutmap  : layoutmap
+  layoutelse : layout]
+ (let : ui
+  [style     : style  := (:style ui)
+   uimap     : uimap  := (:uimap ui)
+   layout    : layout := (layout<-style
+                          style)
+   layname   : string := (:name layout)
+   renderer1 : layout := (any<-map : layout
+                          layoutmap
+                          layname)
+   renderer  : layout := (if
+                          (!-empty renderer1)
+                          renderer1
+                          layoutelse)
+   uimaprend : uimap  := (uimap-layout<-uimap-layoutmap-else
+                          uimap
+                          layoutmap
+                          layoutelse)]
+  (copy ui
+   :renderer renderer
+   :uimap  uimaprend))
+ :doc "Returns a ui with a renderer added to each ui.")
+
+(func uimap<-uimap-data : uimap
+ [uimap : uimap
+  data  : any]
+ :doc "Template for creating uimap dynamically")
+
+(func uimap-layout<-uimap-layoutmap-else : uimap
+ [uimap : uimap
+  layoutmap  : layoutmap
+  layoutelse : layout]
+ (map<-map : uimap
+  uimap
+  (fn : ui
+   [key : string
+    ui  : ui]
+   (ui-layout<-ui-layoutmap-else
+    ui
+    layoutmap
+    layoutelse)))
+ :doc "Returns a uimap with a renderer added to each ui.")
+
+(func ui-render<-fn-render-ui-orig-parent : render
+ [fn-render : ui-render<-ui-orig-parent
+  ui        : ui
+  orig      : ui
+  parent    : ui]
+ (fn-render
+  ui
+  orig
+  parent))
+
+(func ui-render : ui
+ [uiarg : ui]
+ (ui-render<-ui-orig-parent
+  uiarg
+  (empty ui)
+  (empty ui))
+ :doc "")
+
+(func ui-render<-ui-orig-parent : ui
+ [ui     : ui
+  orig   : ui
+  parent : ui]
+ (if : ui
+  (then
+   (== ui orig)
+   orig)
+  (else
+   (let : ui
+    [uimap    : uimap  := (:uimap    ui)
+     renderer : layout := (:renderer ui)
+     uiout    : ui     := (ui<-renderer-ui-orig-parent
+                           renderer
+                           ui
+                           orig
+                           parent)]
+    uiout)))
+ :sideeffects "Alters UI"
+ :doc "Returns a rendered object from a UI Element.")
+
+(func uiengine-render : uiengine
+ [uiengine : uiengine]
+ (let : uiengine
+  [stylesheet       : stylesheet        := (:stylesheet       uiengine)
+   ui               : ui                := (:ui               uiengine)
+   layoutengine     : layoutengine      := (:layoutengine     uiengine)
+   layoutmap        : layoutmap         := (:layoutmap        layoutengine)
+   layoutelse       : layout            := (:layoutelse       layoutengine)
+   stylesheetrender : stylesheet-render := (:stylesheetrender layoutengine)
+   stylesheetrend   : stylesheet        := (stylesheetrender
+                                            stylesheet)
+   uirenderer       : ui                := (ui-layout<-ui-layoutmap-else
+                                            ui
+                                            layoutmap
+                                            layoutelse)
+   uirendered       : ui                := (ui-render
+                                            uirenderer)]
+  (copy uiengine
+   :ui uirendered))
+ :doc "Returns a fully rendered ui for a given engine.")
+
+(func uimap<-uilist : uimap
+ [uilist : uilist]
+ (map<-list : uimap
+  uilist
+  (fn : string
+   [ui : ui]
+   (:uid ui)))
+ :doc "")
+
+(func uimap-render<-uimap-parent : uimap
+ [uimap  : uimap
+  parent : ui]
+ (map<-map : uimap
+  uimap
+  (fn : ui
+   [key : string
+    val : ui]
+   (ui-render<-ui-orig-parent
+    val
+    (empty ui)
+    parent)))
+ :sideeffects "Alters User Interface"
+ :doc "Renders a uimap and returns a rendered uimap.")

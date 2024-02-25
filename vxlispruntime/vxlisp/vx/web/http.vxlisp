@@ -18,15 +18,16 @@
  :clientserver :client
  :doc "Returns a csv file from an httpget")
 
-(func json<-httpget : response :async
+(func json<-httpget : response
  [url : string]
  (let
   [response : response := (response<-httpget url "application/json")]
   response)
+ :async
  :clientserver :client
  :doc "Returns a json response from an httpget")
 
-(func response<-httpget : response :async
+(func response<-httpget : response
  [url         : string
   contenttype : string]
  (native
@@ -37,14 +38,16 @@
       headers: {
        'Content-Type': contenttype
       }})")
+ :async
  :clientserver :client
  :doc "Returns a response from an httpget")
 
-(func text<-httpget : string :async
+(func text<-httpget : string
  [url : string]
  (let
   [response : response := (response<-httpget url "text/plain")]
   (text<-response response))
+ :async
  :clientserver :client
  :doc "Returns string from an httpget")
 

@@ -196,7 +196,7 @@ public final class HtmlTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n \"<p>data</p>\"\n (string<-p-indent (p :text \"data\") 0))",
+          ":describename", "(test\n \"<p>data</p>\"\n (string<-p-indent\n  (p :text \"data\")\n  0))",
           ":testresult",
             Test.f_test(
               context,
@@ -214,7 +214,7 @@ public final class HtmlTest {
             )
         ),
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n \"<p id=\\\"myid\\\">data</p>\"\n (string<-p-indent\n  (p :id \"myid\" :text \"data\") 0))",
+          ":describename", "(test\n \"<p id=\\\"myid\\\">data</p>\"\n (string<-p-indent\n  (p :id \"myid\" :text \"data\")\n  0))",
           ":testresult",
             Test.f_test(
               context,
@@ -255,12 +255,12 @@ public final class HtmlTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/web/html", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 98, ":tests", 66, ":total", 67), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 16, ":tests", 6, ":total", 36), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 36), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 36), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 8, ":tests", 6, ":total", 67), 
-      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 31)
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 98, ":tests", 70, ":total", 71), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 15, ":tests", 6, ":total", 39), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 39), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 39), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 8, ":tests", 6, ":total", 71), 
+      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 32)
     );
   }
 
@@ -291,6 +291,7 @@ public final class HtmlTest {
         ":stylelist", 0,
         ":stylemap", 0,
         ":stylesheet", 0,
+        ":subpropmap", 0,
         ":table", 0,
         ":tbody", 0,
         ":td", 0,
@@ -323,6 +324,9 @@ public final class HtmlTest {
         ":string<-p-indent", 2,
         ":string<-propname-val", 0,
         ":string<-propstyle", 0,
+        ":string<-propstyle-stylelist", 0,
+        ":string<-propstylelist", 0,
+        ":string<-propstyleunique", 0,
         ":string<-style-indent", 0,
         ":string<-stylelist-indent", 0,
         ":string<-stylepropmap-indent", 0,

@@ -14477,53 +14477,58 @@
    (testcoveragedetail
     :constmap
      (intmap
+      :event-change 0
       :event-click 0
-      :event-move 0)
+      :event-move 0
+      :event-select 0)
     :funcmap
      (intmap
-      :any<-from-to 0)
+      :event<-event 0
+      :eventmap<-eventlist 0)
     :testpkg "vx/event"
     :typemap
      (intmap
-      :event 0))
+      :event 0
+      :eventlist 0
+      :eventmap 0))
   :coveragesummary
    (testcoveragesummary
     :bigospacenums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 1)
+      :total 2)
     :bigotimenums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 1)
+      :total 2)
     :constnums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 2)
+      :total 4)
     :docnums
      (testcoveragenums
       :pct 100
-      :tests 4
-      :total 4)
+      :tests 9
+      :total 9)
     :funcnums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 1)
+      :total 2)
     :testpkg "vx/event"
     :totalnums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 4)
+      :total 9)
     :typenums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 1))
+      :total 3))
   :passfail true
   :testpkg "vx/event")
  (testpackage
@@ -17166,7 +17171,9 @@ ab
         :describename
          `(test
  "<p>data</p>"
- (string<-p-indent (p :text "data") 0))`
+ (string<-p-indent
+  (p :text "data")
+  0))`
         :testresult
          (testresult
           :code ":eq"
@@ -17178,7 +17185,8 @@ ab
          `(test
  "<p id=\"myid\">data</p>"
  (string<-p-indent
-  (p :id "myid" :text "data") 0))`
+  (p :id "myid" :text "data")
+  0))`
         :testresult
          (testresult
           :code ":eq"
@@ -17208,6 +17216,9 @@ ab
       :string<-p-indent 2
       :string<-propname-val 0
       :string<-propstyle 0
+      :string<-propstyle-stylelist 0
+      :string<-propstylelist 0
+      :string<-propstyleunique 0
       :string<-style-indent 0
       :string<-stylelist-indent 0
       :string<-stylepropmap-indent 0
@@ -17251,6 +17262,7 @@ ab
       :stylelist 0
       :stylemap 0
       :stylesheet 0
+      :subpropmap 0
       :table 0
       :tbody 0
       :td 0
@@ -17265,12 +17277,12 @@ ab
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 36)
+      :total 39)
     :bigotimenums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 36)
+      :total 39)
     :constnums
      (testcoveragenums
       :pct 100
@@ -17279,24 +17291,24 @@ ab
     :docnums
      (testcoveragenums
       :pct 98
-      :tests 66
-      :total 67)
+      :tests 70
+      :total 71)
     :funcnums
      (testcoveragenums
-      :pct 16
+      :pct 15
       :tests 6
-      :total 36)
+      :total 39)
     :testpkg "vx/web/html"
     :totalnums
      (testcoveragenums
       :pct 8
       :tests 6
-      :total 67)
+      :total 71)
     :typenums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 31))
+      :total 32))
   :passfail true
   :testpkg "vx/web/html")
  (testpackage
@@ -17304,6 +17316,10 @@ ab
    (testcoveragedetail
     :funcmap
      (intmap
+      :any-data<-id 0
+      :boolean-replace<-id-htmltext 0
+      :boolean-replace<-id-htmltext-data-eventmap 0
+      :boolean-write-stylesheet<-string 0
       :boolean-write<-id-htmltext 0
       :boolean-write<-stylesheet 0
       :string<-id 0)
@@ -17314,12 +17330,12 @@ ab
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 3)
+      :total 7)
     :bigotimenums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 3)
+      :total 7)
     :constnums
      (testcoveragenums
       :pct 100
@@ -17328,19 +17344,19 @@ ab
     :docnums
      (testcoveragenums
       :pct 100
-      :tests 3
-      :total 3)
+      :tests 7
+      :total 7)
     :funcnums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 3)
+      :total 7)
     :testpkg "vx/web/htmldoc"
     :totalnums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 3)
+      :total 7)
     :typenums
      (testcoveragenums
       :pct 100

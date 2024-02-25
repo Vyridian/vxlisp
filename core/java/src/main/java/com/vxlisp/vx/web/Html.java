@@ -198,7 +198,10 @@ public final class Html {
     public Html.Type_details vx_empty();
     public Html.Type_details vx_type();
     public Core.Type_string id();
+    public Event.Type_eventmap eventmap();
     public Html.Type_style style();
+    public Html.Type_style style_unique();
+    public Html.Type_stylelist stylelist();
     public Html.Type_divchildlist summary();
     public Html.Type_divchildlist nodes();
   }
@@ -212,11 +215,32 @@ public final class Html {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
+    protected Event.Type_eventmap vx_p_eventmap;
+
+    @Override
+    public Event.Type_eventmap eventmap() {
+      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+    }
+
     protected Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+    }
+
+    protected Html.Type_style vx_p_style_unique;
+
+    @Override
+    public Html.Type_style style_unique() {
+      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+    }
+
+    protected Html.Type_stylelist vx_p_stylelist;
+
+    @Override
+    public Html.Type_stylelist stylelist() {
+      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
     protected Html.Type_divchildlist vx_p_summary;
@@ -241,8 +265,17 @@ public final class Html {
       case ":id":
         output = this.id();
         break;
+      case ":eventmap":
+        output = this.eventmap();
+        break;
       case ":style":
         output = this.style();
+        break;
+      case ":style-unique":
+        output = this.style_unique();
+        break;
+      case ":stylelist":
+        output = this.stylelist();
         break;
       case ":summary":
         output = this.summary();
@@ -258,7 +291,10 @@ public final class Html {
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
       output.put(":id", this.id());
+      output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
+      output.put(":style-unique", this.style_unique());
+      output.put(":stylelist", this.stylelist());
       output.put(":summary", this.summary());
       output.put(":nodes", this.nodes());
       return Core.immutablemap(output);
@@ -277,12 +313,18 @@ public final class Html {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
+      Event.Type_eventmap vx_p_eventmap = val.eventmap();
       Html.Type_style vx_p_style = val.style();
+      Html.Type_style vx_p_style_unique = val.style_unique();
+      Html.Type_stylelist vx_p_stylelist = val.stylelist();
       Html.Type_divchildlist vx_p_summary = val.summary();
       Html.Type_divchildlist vx_p_nodes = val.nodes();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
+      validkeys.add(":eventmap");
       validkeys.add(":style");
+      validkeys.add(":style-unique");
+      validkeys.add(":stylelist");
       validkeys.add(":summary");
       validkeys.add(":nodes");
       String key = "";
@@ -350,6 +392,26 @@ public final class Html {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":eventmap":
+            if (valsub == vx_p_eventmap) {
+            } else if (valsub instanceof Event.Type_eventmap) {
+              ischanged = true;
+              vx_p_eventmap = (Event.Type_eventmap)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("eventmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/details", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           case ":style":
             if (valsub == vx_p_style) {
             } else if (valsub instanceof Html.Type_style) {
@@ -364,6 +426,46 @@ public final class Html {
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
               mapany.put("key", Core.vx_new_string("style"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/details", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":style-unique":
+            if (valsub == vx_p_style_unique) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style_unique = (Html.Type_style)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("style-unique"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/details", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":stylelist":
+            if (valsub == vx_p_stylelist) {
+            } else if (valsub instanceof Html.Type_stylelist) {
+              ischanged = true;
+              vx_p_stylelist = (Html.Type_stylelist)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/web/html/details", ":invalidvalue", msgmap);
@@ -421,7 +523,10 @@ public final class Html {
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_details work = new Class_details();
         work.vx_p_id = vx_p_id;
+        work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
+        work.vx_p_style_unique = vx_p_style_unique;
+        work.vx_p_stylelist = vx_p_stylelist;
         work.vx_p_summary = vx_p_summary;
         work.vx_p_nodes = vx_p_nodes;
         if (msgblock != Core.e_msgblock) {
@@ -470,7 +575,10 @@ public final class Html {
     public Html.Type_div vx_empty();
     public Html.Type_div vx_type();
     public Core.Type_string id();
+    public Event.Type_eventmap eventmap();
     public Html.Type_style style();
+    public Html.Type_style style_unique();
+    public Html.Type_stylelist stylelist();
     public Html.Type_divchildlist nodes();
   }
 
@@ -483,11 +591,32 @@ public final class Html {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
+    protected Event.Type_eventmap vx_p_eventmap;
+
+    @Override
+    public Event.Type_eventmap eventmap() {
+      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+    }
+
     protected Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+    }
+
+    protected Html.Type_style vx_p_style_unique;
+
+    @Override
+    public Html.Type_style style_unique() {
+      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+    }
+
+    protected Html.Type_stylelist vx_p_stylelist;
+
+    @Override
+    public Html.Type_stylelist stylelist() {
+      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
     protected Html.Type_divchildlist vx_p_nodes;
@@ -505,8 +634,17 @@ public final class Html {
       case ":id":
         output = this.id();
         break;
+      case ":eventmap":
+        output = this.eventmap();
+        break;
       case ":style":
         output = this.style();
+        break;
+      case ":style-unique":
+        output = this.style_unique();
+        break;
+      case ":stylelist":
+        output = this.stylelist();
         break;
       case ":nodes":
         output = this.nodes();
@@ -519,7 +657,10 @@ public final class Html {
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
       output.put(":id", this.id());
+      output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
+      output.put(":style-unique", this.style_unique());
+      output.put(":stylelist", this.stylelist());
       output.put(":nodes", this.nodes());
       return Core.immutablemap(output);
     }
@@ -537,11 +678,17 @@ public final class Html {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
+      Event.Type_eventmap vx_p_eventmap = val.eventmap();
       Html.Type_style vx_p_style = val.style();
+      Html.Type_style vx_p_style_unique = val.style_unique();
+      Html.Type_stylelist vx_p_stylelist = val.stylelist();
       Html.Type_divchildlist vx_p_nodes = val.nodes();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
+      validkeys.add(":eventmap");
       validkeys.add(":style");
+      validkeys.add(":style-unique");
+      validkeys.add(":stylelist");
       validkeys.add(":nodes");
       String key = "";
       Core.Type_msg msg;
@@ -621,6 +768,26 @@ public final class Html {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":eventmap":
+            if (valsub == vx_p_eventmap) {
+            } else if (valsub instanceof Event.Type_eventmap) {
+              ischanged = true;
+              vx_p_eventmap = (Event.Type_eventmap)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("eventmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/div", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           case ":style":
             if (valsub == vx_p_style) {
             } else if (valsub instanceof Html.Type_style) {
@@ -635,6 +802,46 @@ public final class Html {
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
               mapany.put("key", Core.vx_new_string("style"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/div", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":style-unique":
+            if (valsub == vx_p_style_unique) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style_unique = (Html.Type_style)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("style-unique"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/div", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":stylelist":
+            if (valsub == vx_p_stylelist) {
+            } else if (valsub instanceof Html.Type_stylelist) {
+              ischanged = true;
+              vx_p_stylelist = (Html.Type_stylelist)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/web/html/div", ":invalidvalue", msgmap);
@@ -672,7 +879,10 @@ public final class Html {
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_div work = new Class_div();
         work.vx_p_id = vx_p_id;
+        work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
+        work.vx_p_style_unique = vx_p_style_unique;
+        work.vx_p_stylelist = vx_p_stylelist;
         work.vx_p_nodes = vx_p_nodes;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -1227,7 +1437,10 @@ public final class Html {
     public Html.Type_h1 vx_empty();
     public Html.Type_h1 vx_type();
     public Core.Type_string id();
+    public Event.Type_eventmap eventmap();
     public Html.Type_style style();
+    public Html.Type_style style_unique();
+    public Html.Type_stylelist stylelist();
     public Core.Type_string text();
   }
 
@@ -1240,11 +1453,32 @@ public final class Html {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
+    protected Event.Type_eventmap vx_p_eventmap;
+
+    @Override
+    public Event.Type_eventmap eventmap() {
+      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+    }
+
     protected Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+    }
+
+    protected Html.Type_style vx_p_style_unique;
+
+    @Override
+    public Html.Type_style style_unique() {
+      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+    }
+
+    protected Html.Type_stylelist vx_p_stylelist;
+
+    @Override
+    public Html.Type_stylelist stylelist() {
+      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
     protected Core.Type_string vx_p_text;
@@ -1262,8 +1496,17 @@ public final class Html {
       case ":id":
         output = this.id();
         break;
+      case ":eventmap":
+        output = this.eventmap();
+        break;
       case ":style":
         output = this.style();
+        break;
+      case ":style-unique":
+        output = this.style_unique();
+        break;
+      case ":stylelist":
+        output = this.stylelist();
         break;
       case ":text":
         output = this.text();
@@ -1276,7 +1519,10 @@ public final class Html {
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
       output.put(":id", this.id());
+      output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
+      output.put(":style-unique", this.style_unique());
+      output.put(":stylelist", this.stylelist());
       output.put(":text", this.text());
       return Core.immutablemap(output);
     }
@@ -1294,11 +1540,17 @@ public final class Html {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
+      Event.Type_eventmap vx_p_eventmap = val.eventmap();
       Html.Type_style vx_p_style = val.style();
+      Html.Type_style vx_p_style_unique = val.style_unique();
+      Html.Type_stylelist vx_p_stylelist = val.stylelist();
       Core.Type_string vx_p_text = val.text();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
+      validkeys.add(":eventmap");
       validkeys.add(":style");
+      validkeys.add(":style-unique");
+      validkeys.add(":stylelist");
       validkeys.add(":text");
       String key = "";
       Core.Type_msg msg;
@@ -1374,6 +1626,26 @@ public final class Html {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":eventmap":
+            if (valsub == vx_p_eventmap) {
+            } else if (valsub instanceof Event.Type_eventmap) {
+              ischanged = true;
+              vx_p_eventmap = (Event.Type_eventmap)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("eventmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/h1", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           case ":style":
             if (valsub == vx_p_style) {
             } else if (valsub instanceof Html.Type_style) {
@@ -1388,6 +1660,46 @@ public final class Html {
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
               mapany.put("key", Core.vx_new_string("style"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/h1", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":style-unique":
+            if (valsub == vx_p_style_unique) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style_unique = (Html.Type_style)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("style-unique"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/h1", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":stylelist":
+            if (valsub == vx_p_stylelist) {
+            } else if (valsub instanceof Html.Type_stylelist) {
+              ischanged = true;
+              vx_p_stylelist = (Html.Type_stylelist)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/web/html/h1", ":invalidvalue", msgmap);
@@ -1428,7 +1740,10 @@ public final class Html {
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_h1 work = new Class_h1();
         work.vx_p_id = vx_p_id;
+        work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
+        work.vx_p_style_unique = vx_p_style_unique;
+        work.vx_p_stylelist = vx_p_stylelist;
         work.vx_p_text = vx_p_text;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -1476,7 +1791,10 @@ public final class Html {
     public Html.Type_h2 vx_empty();
     public Html.Type_h2 vx_type();
     public Core.Type_string id();
+    public Event.Type_eventmap eventmap();
     public Html.Type_style style();
+    public Html.Type_style style_unique();
+    public Html.Type_stylelist stylelist();
     public Core.Type_string text();
   }
 
@@ -1489,11 +1807,32 @@ public final class Html {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
+    protected Event.Type_eventmap vx_p_eventmap;
+
+    @Override
+    public Event.Type_eventmap eventmap() {
+      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+    }
+
     protected Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+    }
+
+    protected Html.Type_style vx_p_style_unique;
+
+    @Override
+    public Html.Type_style style_unique() {
+      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+    }
+
+    protected Html.Type_stylelist vx_p_stylelist;
+
+    @Override
+    public Html.Type_stylelist stylelist() {
+      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
     protected Core.Type_string vx_p_text;
@@ -1511,8 +1850,17 @@ public final class Html {
       case ":id":
         output = this.id();
         break;
+      case ":eventmap":
+        output = this.eventmap();
+        break;
       case ":style":
         output = this.style();
+        break;
+      case ":style-unique":
+        output = this.style_unique();
+        break;
+      case ":stylelist":
+        output = this.stylelist();
         break;
       case ":text":
         output = this.text();
@@ -1525,7 +1873,10 @@ public final class Html {
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
       output.put(":id", this.id());
+      output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
+      output.put(":style-unique", this.style_unique());
+      output.put(":stylelist", this.stylelist());
       output.put(":text", this.text());
       return Core.immutablemap(output);
     }
@@ -1543,11 +1894,17 @@ public final class Html {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
+      Event.Type_eventmap vx_p_eventmap = val.eventmap();
       Html.Type_style vx_p_style = val.style();
+      Html.Type_style vx_p_style_unique = val.style_unique();
+      Html.Type_stylelist vx_p_stylelist = val.stylelist();
       Core.Type_string vx_p_text = val.text();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
+      validkeys.add(":eventmap");
       validkeys.add(":style");
+      validkeys.add(":style-unique");
+      validkeys.add(":stylelist");
       validkeys.add(":text");
       String key = "";
       Core.Type_msg msg;
@@ -1623,6 +1980,26 @@ public final class Html {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":eventmap":
+            if (valsub == vx_p_eventmap) {
+            } else if (valsub instanceof Event.Type_eventmap) {
+              ischanged = true;
+              vx_p_eventmap = (Event.Type_eventmap)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("eventmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/h2", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           case ":style":
             if (valsub == vx_p_style) {
             } else if (valsub instanceof Html.Type_style) {
@@ -1637,6 +2014,46 @@ public final class Html {
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
               mapany.put("key", Core.vx_new_string("style"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/h2", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":style-unique":
+            if (valsub == vx_p_style_unique) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style_unique = (Html.Type_style)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("style-unique"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/h2", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":stylelist":
+            if (valsub == vx_p_stylelist) {
+            } else if (valsub instanceof Html.Type_stylelist) {
+              ischanged = true;
+              vx_p_stylelist = (Html.Type_stylelist)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/web/html/h2", ":invalidvalue", msgmap);
@@ -1677,7 +2094,10 @@ public final class Html {
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_h2 work = new Class_h2();
         work.vx_p_id = vx_p_id;
+        work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
+        work.vx_p_style_unique = vx_p_style_unique;
+        work.vx_p_stylelist = vx_p_stylelist;
         work.vx_p_text = vx_p_text;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -1725,7 +2145,10 @@ public final class Html {
     public Html.Type_h3 vx_empty();
     public Html.Type_h3 vx_type();
     public Core.Type_string id();
+    public Event.Type_eventmap eventmap();
     public Html.Type_style style();
+    public Html.Type_style style_unique();
+    public Html.Type_stylelist stylelist();
     public Core.Type_string text();
   }
 
@@ -1738,11 +2161,32 @@ public final class Html {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
+    protected Event.Type_eventmap vx_p_eventmap;
+
+    @Override
+    public Event.Type_eventmap eventmap() {
+      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+    }
+
     protected Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+    }
+
+    protected Html.Type_style vx_p_style_unique;
+
+    @Override
+    public Html.Type_style style_unique() {
+      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+    }
+
+    protected Html.Type_stylelist vx_p_stylelist;
+
+    @Override
+    public Html.Type_stylelist stylelist() {
+      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
     protected Core.Type_string vx_p_text;
@@ -1760,8 +2204,17 @@ public final class Html {
       case ":id":
         output = this.id();
         break;
+      case ":eventmap":
+        output = this.eventmap();
+        break;
       case ":style":
         output = this.style();
+        break;
+      case ":style-unique":
+        output = this.style_unique();
+        break;
+      case ":stylelist":
+        output = this.stylelist();
         break;
       case ":text":
         output = this.text();
@@ -1774,7 +2227,10 @@ public final class Html {
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
       output.put(":id", this.id());
+      output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
+      output.put(":style-unique", this.style_unique());
+      output.put(":stylelist", this.stylelist());
       output.put(":text", this.text());
       return Core.immutablemap(output);
     }
@@ -1792,11 +2248,17 @@ public final class Html {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
+      Event.Type_eventmap vx_p_eventmap = val.eventmap();
       Html.Type_style vx_p_style = val.style();
+      Html.Type_style vx_p_style_unique = val.style_unique();
+      Html.Type_stylelist vx_p_stylelist = val.stylelist();
       Core.Type_string vx_p_text = val.text();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
+      validkeys.add(":eventmap");
       validkeys.add(":style");
+      validkeys.add(":style-unique");
+      validkeys.add(":stylelist");
       validkeys.add(":text");
       String key = "";
       Core.Type_msg msg;
@@ -1872,6 +2334,26 @@ public final class Html {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":eventmap":
+            if (valsub == vx_p_eventmap) {
+            } else if (valsub instanceof Event.Type_eventmap) {
+              ischanged = true;
+              vx_p_eventmap = (Event.Type_eventmap)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("eventmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/h3", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           case ":style":
             if (valsub == vx_p_style) {
             } else if (valsub instanceof Html.Type_style) {
@@ -1886,6 +2368,46 @@ public final class Html {
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
               mapany.put("key", Core.vx_new_string("style"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/h3", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":style-unique":
+            if (valsub == vx_p_style_unique) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style_unique = (Html.Type_style)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("style-unique"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/h3", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":stylelist":
+            if (valsub == vx_p_stylelist) {
+            } else if (valsub instanceof Html.Type_stylelist) {
+              ischanged = true;
+              vx_p_stylelist = (Html.Type_stylelist)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/web/html/h3", ":invalidvalue", msgmap);
@@ -1926,7 +2448,10 @@ public final class Html {
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_h3 work = new Class_h3();
         work.vx_p_id = vx_p_id;
+        work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
+        work.vx_p_style_unique = vx_p_style_unique;
+        work.vx_p_stylelist = vx_p_stylelist;
         work.vx_p_text = vx_p_text;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -2627,7 +3152,10 @@ public final class Html {
     public Html.Type_meta vx_empty();
     public Html.Type_meta vx_type();
     public Core.Type_string id();
+    public Event.Type_eventmap eventmap();
     public Html.Type_style style();
+    public Html.Type_style style_unique();
+    public Html.Type_stylelist stylelist();
     public Core.Type_string charset();
     public Core.Type_string name();
     public Core.Type_string content();
@@ -2642,11 +3170,32 @@ public final class Html {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
+    protected Event.Type_eventmap vx_p_eventmap;
+
+    @Override
+    public Event.Type_eventmap eventmap() {
+      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+    }
+
     protected Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+    }
+
+    protected Html.Type_style vx_p_style_unique;
+
+    @Override
+    public Html.Type_style style_unique() {
+      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+    }
+
+    protected Html.Type_stylelist vx_p_stylelist;
+
+    @Override
+    public Html.Type_stylelist stylelist() {
+      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
     protected Core.Type_string vx_p_charset;
@@ -2678,8 +3227,17 @@ public final class Html {
       case ":id":
         output = this.id();
         break;
+      case ":eventmap":
+        output = this.eventmap();
+        break;
       case ":style":
         output = this.style();
+        break;
+      case ":style-unique":
+        output = this.style_unique();
+        break;
+      case ":stylelist":
+        output = this.stylelist();
         break;
       case ":charset":
         output = this.charset();
@@ -2698,7 +3256,10 @@ public final class Html {
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
       output.put(":id", this.id());
+      output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
+      output.put(":style-unique", this.style_unique());
+      output.put(":stylelist", this.stylelist());
       output.put(":charset", this.charset());
       output.put(":name", this.name());
       output.put(":content", this.content());
@@ -2718,13 +3279,19 @@ public final class Html {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
+      Event.Type_eventmap vx_p_eventmap = val.eventmap();
       Html.Type_style vx_p_style = val.style();
+      Html.Type_style vx_p_style_unique = val.style_unique();
+      Html.Type_stylelist vx_p_stylelist = val.stylelist();
       Core.Type_string vx_p_charset = val.charset();
       Core.Type_string vx_p_name = val.name();
       Core.Type_string vx_p_content = val.content();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
+      validkeys.add(":eventmap");
       validkeys.add(":style");
+      validkeys.add(":style-unique");
+      validkeys.add(":stylelist");
       validkeys.add(":charset");
       validkeys.add(":name");
       validkeys.add(":content");
@@ -2793,6 +3360,26 @@ public final class Html {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":eventmap":
+            if (valsub == vx_p_eventmap) {
+            } else if (valsub instanceof Event.Type_eventmap) {
+              ischanged = true;
+              vx_p_eventmap = (Event.Type_eventmap)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("eventmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/meta", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           case ":style":
             if (valsub == vx_p_style) {
             } else if (valsub instanceof Html.Type_style) {
@@ -2807,6 +3394,46 @@ public final class Html {
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
               mapany.put("key", Core.vx_new_string("style"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/meta", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":style-unique":
+            if (valsub == vx_p_style_unique) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style_unique = (Html.Type_style)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("style-unique"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/meta", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":stylelist":
+            if (valsub == vx_p_stylelist) {
+            } else if (valsub instanceof Html.Type_stylelist) {
+              ischanged = true;
+              vx_p_stylelist = (Html.Type_stylelist)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/web/html/meta", ":invalidvalue", msgmap);
@@ -2893,7 +3520,10 @@ public final class Html {
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_meta work = new Class_meta();
         work.vx_p_id = vx_p_id;
+        work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
+        work.vx_p_style_unique = vx_p_style_unique;
+        work.vx_p_stylelist = vx_p_stylelist;
         work.vx_p_charset = vx_p_charset;
         work.vx_p_name = vx_p_name;
         work.vx_p_content = vx_p_content;
@@ -2943,7 +3573,10 @@ public final class Html {
     public Html.Type_node vx_empty();
     public Html.Type_node vx_type();
     public Core.Type_string id();
+    public Event.Type_eventmap eventmap();
     public Html.Type_style style();
+    public Html.Type_style style_unique();
+    public Html.Type_stylelist stylelist();
   }
 
   public static class Class_node extends Core.Class_base implements Type_node {
@@ -2955,11 +3588,32 @@ public final class Html {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
+    protected Event.Type_eventmap vx_p_eventmap;
+
+    @Override
+    public Event.Type_eventmap eventmap() {
+      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+    }
+
     protected Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+    }
+
+    protected Html.Type_style vx_p_style_unique;
+
+    @Override
+    public Html.Type_style style_unique() {
+      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+    }
+
+    protected Html.Type_stylelist vx_p_stylelist;
+
+    @Override
+    public Html.Type_stylelist stylelist() {
+      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
     @Override
@@ -2970,8 +3624,17 @@ public final class Html {
       case ":id":
         output = this.id();
         break;
+      case ":eventmap":
+        output = this.eventmap();
+        break;
       case ":style":
         output = this.style();
+        break;
+      case ":style-unique":
+        output = this.style_unique();
+        break;
+      case ":stylelist":
+        output = this.stylelist();
         break;
       }
       return output;
@@ -2981,7 +3644,10 @@ public final class Html {
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
       output.put(":id", this.id());
+      output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
+      output.put(":style-unique", this.style_unique());
+      output.put(":stylelist", this.stylelist());
       return Core.immutablemap(output);
     }
 
@@ -2998,10 +3664,16 @@ public final class Html {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
+      Event.Type_eventmap vx_p_eventmap = val.eventmap();
       Html.Type_style vx_p_style = val.style();
+      Html.Type_style vx_p_style_unique = val.style_unique();
+      Html.Type_stylelist vx_p_stylelist = val.stylelist();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
+      validkeys.add(":eventmap");
       validkeys.add(":style");
+      validkeys.add(":style-unique");
+      validkeys.add(":stylelist");
       String key = "";
       Core.Type_msg msg;
       for (Object valsub : vals) {
@@ -3067,6 +3739,26 @@ public final class Html {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":eventmap":
+            if (valsub == vx_p_eventmap) {
+            } else if (valsub instanceof Event.Type_eventmap) {
+              ischanged = true;
+              vx_p_eventmap = (Event.Type_eventmap)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("eventmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/node", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           case ":style":
             if (valsub == vx_p_style) {
             } else if (valsub instanceof Html.Type_style) {
@@ -3087,6 +3779,46 @@ public final class Html {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":style-unique":
+            if (valsub == vx_p_style_unique) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style_unique = (Html.Type_style)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("style-unique"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/node", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":stylelist":
+            if (valsub == vx_p_stylelist) {
+            } else if (valsub instanceof Html.Type_stylelist) {
+              ischanged = true;
+              vx_p_stylelist = (Html.Type_stylelist)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("stylelist"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/node", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/web/html/node", ":invalidkey", msgval);
@@ -3098,7 +3830,10 @@ public final class Html {
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_node work = new Class_node();
         work.vx_p_id = vx_p_id;
+        work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
+        work.vx_p_style_unique = vx_p_style_unique;
+        work.vx_p_stylelist = vx_p_stylelist;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -3271,7 +4006,10 @@ public final class Html {
     public Html.Type_p vx_empty();
     public Html.Type_p vx_type();
     public Core.Type_string id();
+    public Event.Type_eventmap eventmap();
     public Html.Type_style style();
+    public Html.Type_style style_unique();
+    public Html.Type_stylelist stylelist();
     public Core.Type_string text();
   }
 
@@ -3284,11 +4022,32 @@ public final class Html {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
+    protected Event.Type_eventmap vx_p_eventmap;
+
+    @Override
+    public Event.Type_eventmap eventmap() {
+      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+    }
+
     protected Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+    }
+
+    protected Html.Type_style vx_p_style_unique;
+
+    @Override
+    public Html.Type_style style_unique() {
+      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+    }
+
+    protected Html.Type_stylelist vx_p_stylelist;
+
+    @Override
+    public Html.Type_stylelist stylelist() {
+      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
     protected Core.Type_string vx_p_text;
@@ -3306,8 +4065,17 @@ public final class Html {
       case ":id":
         output = this.id();
         break;
+      case ":eventmap":
+        output = this.eventmap();
+        break;
       case ":style":
         output = this.style();
+        break;
+      case ":style-unique":
+        output = this.style_unique();
+        break;
+      case ":stylelist":
+        output = this.stylelist();
         break;
       case ":text":
         output = this.text();
@@ -3320,7 +4088,10 @@ public final class Html {
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
       output.put(":id", this.id());
+      output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
+      output.put(":style-unique", this.style_unique());
+      output.put(":stylelist", this.stylelist());
       output.put(":text", this.text());
       return Core.immutablemap(output);
     }
@@ -3338,11 +4109,17 @@ public final class Html {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
+      Event.Type_eventmap vx_p_eventmap = val.eventmap();
       Html.Type_style vx_p_style = val.style();
+      Html.Type_style vx_p_style_unique = val.style_unique();
+      Html.Type_stylelist vx_p_stylelist = val.stylelist();
       Core.Type_string vx_p_text = val.text();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
+      validkeys.add(":eventmap");
       validkeys.add(":style");
+      validkeys.add(":style-unique");
+      validkeys.add(":stylelist");
       validkeys.add(":text");
       String key = "";
       Core.Type_msg msg;
@@ -3418,6 +4195,26 @@ public final class Html {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":eventmap":
+            if (valsub == vx_p_eventmap) {
+            } else if (valsub instanceof Event.Type_eventmap) {
+              ischanged = true;
+              vx_p_eventmap = (Event.Type_eventmap)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("eventmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/p", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           case ":style":
             if (valsub == vx_p_style) {
             } else if (valsub instanceof Html.Type_style) {
@@ -3432,6 +4229,46 @@ public final class Html {
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
               mapany.put("key", Core.vx_new_string("style"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/p", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":style-unique":
+            if (valsub == vx_p_style_unique) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style_unique = (Html.Type_style)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("style-unique"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/p", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":stylelist":
+            if (valsub == vx_p_stylelist) {
+            } else if (valsub instanceof Html.Type_stylelist) {
+              ischanged = true;
+              vx_p_stylelist = (Html.Type_stylelist)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/web/html/p", ":invalidvalue", msgmap);
@@ -3472,7 +4309,10 @@ public final class Html {
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_p work = new Class_p();
         work.vx_p_id = vx_p_id;
+        work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
+        work.vx_p_style_unique = vx_p_style_unique;
+        work.vx_p_stylelist = vx_p_stylelist;
         work.vx_p_text = vx_p_text;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -3687,6 +4527,7 @@ public final class Html {
     public Html.Type_style vx_type();
     public Core.Type_string name();
     public Html.Type_propmap props();
+    public Html.Type_subpropmap subprops();
   }
 
   public static class Class_style extends Core.Class_base implements Type_style {
@@ -3705,6 +4546,13 @@ public final class Html {
       return this.vx_p_props == null ? Html.e_propmap : this.vx_p_props;
     }
 
+    protected Html.Type_subpropmap vx_p_subprops;
+
+    @Override
+    public Html.Type_subpropmap subprops() {
+      return this.vx_p_subprops == null ? Html.e_subpropmap : this.vx_p_subprops;
+    }
+
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
@@ -3716,6 +4564,9 @@ public final class Html {
       case ":props":
         output = this.props();
         break;
+      case ":subprops":
+        output = this.subprops();
+        break;
       }
       return output;
     }
@@ -3725,6 +4576,7 @@ public final class Html {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
       output.put(":name", this.name());
       output.put(":props", this.props());
+      output.put(":subprops", this.subprops());
       return Core.immutablemap(output);
     }
 
@@ -3742,9 +4594,11 @@ public final class Html {
       }
       Core.Type_string vx_p_name = val.name();
       Html.Type_propmap vx_p_props = val.props();
+      Html.Type_subpropmap vx_p_subprops = val.subprops();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":name");
       validkeys.add(":props");
+      validkeys.add(":subprops");
       String key = "";
       Core.Type_msg msg;
       for (Object valsub : vals) {
@@ -3830,6 +4684,26 @@ public final class Html {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":subprops":
+            if (valsub == vx_p_subprops) {
+            } else if (valsub instanceof Html.Type_subpropmap) {
+              ischanged = true;
+              vx_p_subprops = (Html.Type_subpropmap)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("subprops"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/style", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/web/html/style", ":invalidkey", msgval);
@@ -3842,6 +4716,7 @@ public final class Html {
         Class_style work = new Class_style();
         work.vx_p_name = vx_p_name;
         work.vx_p_props = vx_p_props;
+        work.vx_p_subprops = vx_p_subprops;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -4180,7 +5055,10 @@ public final class Html {
     public Html.Type_stylesheet vx_empty();
     public Html.Type_stylesheet vx_type();
     public Core.Type_string id();
+    public Event.Type_eventmap eventmap();
     public Html.Type_style style();
+    public Html.Type_style style_unique();
+    public Html.Type_stylelist stylelist();
     public Core.Type_string name();
     public Html.Type_stylelist styles();
     public Html.Type_stylemap stylemap();
@@ -4195,11 +5073,32 @@ public final class Html {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
+    protected Event.Type_eventmap vx_p_eventmap;
+
+    @Override
+    public Event.Type_eventmap eventmap() {
+      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+    }
+
     protected Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+    }
+
+    protected Html.Type_style vx_p_style_unique;
+
+    @Override
+    public Html.Type_style style_unique() {
+      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+    }
+
+    protected Html.Type_stylelist vx_p_stylelist;
+
+    @Override
+    public Html.Type_stylelist stylelist() {
+      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
     protected Core.Type_string vx_p_name;
@@ -4231,8 +5130,17 @@ public final class Html {
       case ":id":
         output = this.id();
         break;
+      case ":eventmap":
+        output = this.eventmap();
+        break;
       case ":style":
         output = this.style();
+        break;
+      case ":style-unique":
+        output = this.style_unique();
+        break;
+      case ":stylelist":
+        output = this.stylelist();
         break;
       case ":name":
         output = this.name();
@@ -4251,7 +5159,10 @@ public final class Html {
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
       output.put(":id", this.id());
+      output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
+      output.put(":style-unique", this.style_unique());
+      output.put(":stylelist", this.stylelist());
       output.put(":name", this.name());
       output.put(":styles", this.styles());
       output.put(":stylemap", this.stylemap());
@@ -4271,13 +5182,19 @@ public final class Html {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
+      Event.Type_eventmap vx_p_eventmap = val.eventmap();
       Html.Type_style vx_p_style = val.style();
+      Html.Type_style vx_p_style_unique = val.style_unique();
+      Html.Type_stylelist vx_p_stylelist = val.stylelist();
       Core.Type_string vx_p_name = val.name();
       Html.Type_stylelist vx_p_styles = val.styles();
       Html.Type_stylemap vx_p_stylemap = val.stylemap();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
+      validkeys.add(":eventmap");
       validkeys.add(":style");
+      validkeys.add(":style-unique");
+      validkeys.add(":stylelist");
       validkeys.add(":name");
       validkeys.add(":styles");
       validkeys.add(":stylemap");
@@ -4346,6 +5263,26 @@ public final class Html {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":eventmap":
+            if (valsub == vx_p_eventmap) {
+            } else if (valsub instanceof Event.Type_eventmap) {
+              ischanged = true;
+              vx_p_eventmap = (Event.Type_eventmap)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("eventmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/stylesheet", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           case ":style":
             if (valsub == vx_p_style) {
             } else if (valsub instanceof Html.Type_style) {
@@ -4360,6 +5297,46 @@ public final class Html {
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
               mapany.put("key", Core.vx_new_string("style"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/stylesheet", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":style-unique":
+            if (valsub == vx_p_style_unique) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style_unique = (Html.Type_style)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("style-unique"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/stylesheet", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":stylelist":
+            if (valsub == vx_p_stylelist) {
+            } else if (valsub instanceof Html.Type_stylelist) {
+              ischanged = true;
+              vx_p_stylelist = (Html.Type_stylelist)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/web/html/stylesheet", ":invalidvalue", msgmap);
@@ -4440,7 +5417,10 @@ public final class Html {
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_stylesheet work = new Class_stylesheet();
         work.vx_p_id = vx_p_id;
+        work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
+        work.vx_p_style_unique = vx_p_style_unique;
+        work.vx_p_stylelist = vx_p_stylelist;
         work.vx_p_name = vx_p_name;
         work.vx_p_styles = vx_p_styles;
         work.vx_p_stylemap = vx_p_stylemap;
@@ -4480,6 +5460,172 @@ public final class Html {
   public static final Type_stylesheet t_stylesheet = new Class_stylesheet();
 
   /**
+   * type: subpropmap
+   * Map of propmap
+   * (type subpropmap)
+   */
+  public interface Type_subpropmap extends Core.Type_map {
+    public Html.Type_subpropmap vx_new(final Object... vals);
+    public Html.Type_subpropmap vx_copy(final Object... vals);
+    public Html.Type_subpropmap vx_empty();
+    public Html.Type_subpropmap vx_type();
+    public Map<String, Html.Type_propmap> vx_mappropmap();
+    public Html.Type_propmap vx_propmap(final Core.Type_string key);
+  }
+
+  public static class Class_subpropmap extends Core.Class_base implements Type_subpropmap {
+
+    protected Map<String, Html.Type_propmap> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Html.Type_propmap>());
+
+    @Override
+    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+
+    @Override
+    public Html.Type_propmap vx_propmap(final Core.Type_string key) {
+      Html.Type_propmap output = Html.e_propmap;
+      Class_subpropmap map = this;
+      String skey = key.vx_string();
+      Map<String, Html.Type_propmap> mapval = map.vx_p_map;
+      output = mapval.getOrDefault(skey, Html.e_propmap);
+      return output;
+    }
+
+    @Override
+    public Map<String, Html.Type_propmap> vx_mappropmap() {return vx_p_map;}
+
+    @Override
+    public Core.Type_any vx_any(final Core.Type_string key) {
+      return this.vx_propmap(key);
+    }
+
+    @Override
+    public Type_subpropmap vx_new_from_map(final Map<String, Core.Type_any> mapval) {
+      Class_subpropmap output = new Class_subpropmap();
+      Core.Type_msgblock msgblock = Core.e_msgblock;
+      Map<String, Html.Type_propmap> map = new LinkedHashMap<>();
+      Set<String> keys = mapval.keySet();
+      for (String key : keys) {
+        Core.Type_any val = mapval.get(key);
+        if (val instanceof Html.Type_propmap) {
+          Html.Type_propmap castval = (Html.Type_propmap)val;
+          map.put(key, castval);
+        } else {
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/web/html/subpropmap", ":invalidvalue", val);
+          msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+        }
+      }
+      output.vx_p_map = Core.immutablemap(map);
+      if (msgblock != Core.e_msgblock) {
+        output.vxmsgblock = msgblock;
+      }
+      return output;
+    }
+
+    @Override
+    public Type_subpropmap vx_new(final Object... vals) {return e_subpropmap.vx_copy(vals);}
+
+    @Override
+    public Type_subpropmap vx_copy(final Object... vals) {
+      Type_subpropmap output = this;
+      boolean ischanged = false;
+      Class_subpropmap val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
+      Map<String, Html.Type_propmap> mapval = new LinkedHashMap<>(val.vx_mappropmap());
+      Core.Type_msg msg;
+      String key = "";
+      for (Object valsub : vals) {
+        if (valsub instanceof Core.Type_msgblock) {
+          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Core.Type_msg) {
+          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+        } else if (key.equals("")) {
+          if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstring = (Core.Type_string)valsub;
+            key = valstring.vx_string();
+          } else if (valsub instanceof String) {
+            key = (String)valsub;
+          } else {
+            Core.Type_any msgval;
+            if (valsub instanceof Core.Type_any) {
+              msgval = (Core.Type_any)valsub;
+            } else {
+              msgval = Core.vx_new_string(valsub.toString());
+            }
+            msg = Core.vx_msg_from_error("vx/web/html/subpropmap", ":keyexpected", msgval);
+            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+          }
+        } else {
+          Html.Type_propmap valany = null;
+          if (valsub instanceof Html.Type_propmap) {
+            valany = (Html.Type_propmap)valsub;
+          } else if (valsub instanceof Html.Type_propmap) {
+            valany = (Html.Type_propmap)valsub;
+          } else {
+            Core.Type_any msgval;
+            if (valsub instanceof Core.Type_any) {
+              msgval = (Core.Type_any)valsub;
+            } else {
+              msgval = Core.vx_new_string(valsub.toString());
+            }
+            Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+            mapany.put("key", Core.vx_new_string(key));
+            mapany.put("value", msgval);
+            Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+            msg = Core.vx_msg_from_error("vx/web/html/subpropmap", ":invalidkeyvalue", msgmap);
+            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+          }
+          if (valany != null) {
+            ischanged = true;
+            if (key.startsWith(":")) {
+              key = key.substring(1);
+            }
+            mapval.put(key, valany);
+            key = "";
+          }
+        }
+      }
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_subpropmap work = new Class_subpropmap();
+        work.vx_p_map = Core.immutablemap(mapval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
+      }
+      return output;
+    }
+
+    @Override
+    public Type_subpropmap vx_empty() {return e_subpropmap;}
+    @Override
+    public Type_subpropmap vx_type() {return t_subpropmap;}
+
+    @Override
+    public Core.Type_typedef vx_typedef() {
+      return Core.typedef_new(
+        "vx/web/html", // pkgname
+        "subpropmap", // name
+        ":map", // extends
+        Core.e_typelist, // traits
+        Core.t_typelist.vx_new(Html.t_propmap), // allowtypes
+        Core.e_typelist, // disallowtypes
+        Core.e_funclist, // allowfuncs
+        Core.e_funclist, // disallowfuncs
+        Core.e_anylist, // allowvalues
+        Core.e_anylist, // disallowvalues
+        Core.e_argmap // properties
+      );
+    }
+
+  }
+
+  public static final Type_subpropmap e_subpropmap = new Class_subpropmap();
+  public static final Type_subpropmap t_subpropmap = new Class_subpropmap();
+
+  /**
    * type: table
    * <table> Tag
    * (type table)
@@ -4490,7 +5636,10 @@ public final class Html {
     public Html.Type_table vx_empty();
     public Html.Type_table vx_type();
     public Core.Type_string id();
+    public Event.Type_eventmap eventmap();
     public Html.Type_style style();
+    public Html.Type_style style_unique();
+    public Html.Type_stylelist stylelist();
     public Html.Type_tbody tbody();
     public Html.Type_thead thead();
   }
@@ -4504,11 +5653,32 @@ public final class Html {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
+    protected Event.Type_eventmap vx_p_eventmap;
+
+    @Override
+    public Event.Type_eventmap eventmap() {
+      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+    }
+
     protected Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+    }
+
+    protected Html.Type_style vx_p_style_unique;
+
+    @Override
+    public Html.Type_style style_unique() {
+      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+    }
+
+    protected Html.Type_stylelist vx_p_stylelist;
+
+    @Override
+    public Html.Type_stylelist stylelist() {
+      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
     protected Html.Type_tbody vx_p_tbody;
@@ -4533,8 +5703,17 @@ public final class Html {
       case ":id":
         output = this.id();
         break;
+      case ":eventmap":
+        output = this.eventmap();
+        break;
       case ":style":
         output = this.style();
+        break;
+      case ":style-unique":
+        output = this.style_unique();
+        break;
+      case ":stylelist":
+        output = this.stylelist();
         break;
       case ":tbody":
         output = this.tbody();
@@ -4550,7 +5729,10 @@ public final class Html {
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
       output.put(":id", this.id());
+      output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
+      output.put(":style-unique", this.style_unique());
+      output.put(":stylelist", this.stylelist());
       output.put(":tbody", this.tbody());
       output.put(":thead", this.thead());
       return Core.immutablemap(output);
@@ -4569,12 +5751,18 @@ public final class Html {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
+      Event.Type_eventmap vx_p_eventmap = val.eventmap();
       Html.Type_style vx_p_style = val.style();
+      Html.Type_style vx_p_style_unique = val.style_unique();
+      Html.Type_stylelist vx_p_stylelist = val.stylelist();
       Html.Type_tbody vx_p_tbody = val.tbody();
       Html.Type_thead vx_p_thead = val.thead();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
+      validkeys.add(":eventmap");
       validkeys.add(":style");
+      validkeys.add(":style-unique");
+      validkeys.add(":stylelist");
       validkeys.add(":tbody");
       validkeys.add(":thead");
       String key = "";
@@ -4642,6 +5830,26 @@ public final class Html {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":eventmap":
+            if (valsub == vx_p_eventmap) {
+            } else if (valsub instanceof Event.Type_eventmap) {
+              ischanged = true;
+              vx_p_eventmap = (Event.Type_eventmap)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("eventmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/table", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           case ":style":
             if (valsub == vx_p_style) {
             } else if (valsub instanceof Html.Type_style) {
@@ -4656,6 +5864,46 @@ public final class Html {
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
               mapany.put("key", Core.vx_new_string("style"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/table", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":style-unique":
+            if (valsub == vx_p_style_unique) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style_unique = (Html.Type_style)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("style-unique"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/table", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":stylelist":
+            if (valsub == vx_p_stylelist) {
+            } else if (valsub instanceof Html.Type_stylelist) {
+              ischanged = true;
+              vx_p_stylelist = (Html.Type_stylelist)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/web/html/table", ":invalidvalue", msgmap);
@@ -4713,7 +5961,10 @@ public final class Html {
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_table work = new Class_table();
         work.vx_p_id = vx_p_id;
+        work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
+        work.vx_p_style_unique = vx_p_style_unique;
+        work.vx_p_stylelist = vx_p_stylelist;
         work.vx_p_tbody = vx_p_tbody;
         work.vx_p_thead = vx_p_thead;
         if (msgblock != Core.e_msgblock) {
@@ -4762,7 +6013,10 @@ public final class Html {
     public Html.Type_tbody vx_empty();
     public Html.Type_tbody vx_type();
     public Core.Type_string id();
+    public Event.Type_eventmap eventmap();
     public Html.Type_style style();
+    public Html.Type_style style_unique();
+    public Html.Type_stylelist stylelist();
     public Html.Type_trlist nodes();
   }
 
@@ -4775,11 +6029,32 @@ public final class Html {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
+    protected Event.Type_eventmap vx_p_eventmap;
+
+    @Override
+    public Event.Type_eventmap eventmap() {
+      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+    }
+
     protected Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+    }
+
+    protected Html.Type_style vx_p_style_unique;
+
+    @Override
+    public Html.Type_style style_unique() {
+      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+    }
+
+    protected Html.Type_stylelist vx_p_stylelist;
+
+    @Override
+    public Html.Type_stylelist stylelist() {
+      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
     protected Html.Type_trlist vx_p_nodes;
@@ -4797,8 +6072,17 @@ public final class Html {
       case ":id":
         output = this.id();
         break;
+      case ":eventmap":
+        output = this.eventmap();
+        break;
       case ":style":
         output = this.style();
+        break;
+      case ":style-unique":
+        output = this.style_unique();
+        break;
+      case ":stylelist":
+        output = this.stylelist();
         break;
       case ":nodes":
         output = this.nodes();
@@ -4811,7 +6095,10 @@ public final class Html {
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
       output.put(":id", this.id());
+      output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
+      output.put(":style-unique", this.style_unique());
+      output.put(":stylelist", this.stylelist());
       output.put(":nodes", this.nodes());
       return Core.immutablemap(output);
     }
@@ -4829,11 +6116,17 @@ public final class Html {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
+      Event.Type_eventmap vx_p_eventmap = val.eventmap();
       Html.Type_style vx_p_style = val.style();
+      Html.Type_style vx_p_style_unique = val.style_unique();
+      Html.Type_stylelist vx_p_stylelist = val.stylelist();
       Html.Type_trlist vx_p_nodes = val.nodes();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
+      validkeys.add(":eventmap");
       validkeys.add(":style");
+      validkeys.add(":style-unique");
+      validkeys.add(":stylelist");
       validkeys.add(":nodes");
       String key = "";
       Core.Type_msg msg;
@@ -4913,6 +6206,26 @@ public final class Html {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":eventmap":
+            if (valsub == vx_p_eventmap) {
+            } else if (valsub instanceof Event.Type_eventmap) {
+              ischanged = true;
+              vx_p_eventmap = (Event.Type_eventmap)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("eventmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/tbody", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           case ":style":
             if (valsub == vx_p_style) {
             } else if (valsub instanceof Html.Type_style) {
@@ -4927,6 +6240,46 @@ public final class Html {
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
               mapany.put("key", Core.vx_new_string("style"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/tbody", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":style-unique":
+            if (valsub == vx_p_style_unique) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style_unique = (Html.Type_style)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("style-unique"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/tbody", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":stylelist":
+            if (valsub == vx_p_stylelist) {
+            } else if (valsub instanceof Html.Type_stylelist) {
+              ischanged = true;
+              vx_p_stylelist = (Html.Type_stylelist)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/web/html/tbody", ":invalidvalue", msgmap);
@@ -4964,7 +6317,10 @@ public final class Html {
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_tbody work = new Class_tbody();
         work.vx_p_id = vx_p_id;
+        work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
+        work.vx_p_style_unique = vx_p_style_unique;
+        work.vx_p_stylelist = vx_p_stylelist;
         work.vx_p_nodes = vx_p_nodes;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -5012,7 +6368,10 @@ public final class Html {
     public Html.Type_td vx_empty();
     public Html.Type_td vx_type();
     public Core.Type_string id();
+    public Event.Type_eventmap eventmap();
     public Html.Type_style style();
+    public Html.Type_style style_unique();
+    public Html.Type_stylelist stylelist();
     public Html.Type_divchildlist nodes();
   }
 
@@ -5025,11 +6384,32 @@ public final class Html {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
+    protected Event.Type_eventmap vx_p_eventmap;
+
+    @Override
+    public Event.Type_eventmap eventmap() {
+      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+    }
+
     protected Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+    }
+
+    protected Html.Type_style vx_p_style_unique;
+
+    @Override
+    public Html.Type_style style_unique() {
+      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+    }
+
+    protected Html.Type_stylelist vx_p_stylelist;
+
+    @Override
+    public Html.Type_stylelist stylelist() {
+      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
     protected Html.Type_divchildlist vx_p_nodes;
@@ -5047,8 +6427,17 @@ public final class Html {
       case ":id":
         output = this.id();
         break;
+      case ":eventmap":
+        output = this.eventmap();
+        break;
       case ":style":
         output = this.style();
+        break;
+      case ":style-unique":
+        output = this.style_unique();
+        break;
+      case ":stylelist":
+        output = this.stylelist();
         break;
       case ":nodes":
         output = this.nodes();
@@ -5061,7 +6450,10 @@ public final class Html {
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
       output.put(":id", this.id());
+      output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
+      output.put(":style-unique", this.style_unique());
+      output.put(":stylelist", this.stylelist());
       output.put(":nodes", this.nodes());
       return Core.immutablemap(output);
     }
@@ -5079,11 +6471,17 @@ public final class Html {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
+      Event.Type_eventmap vx_p_eventmap = val.eventmap();
       Html.Type_style vx_p_style = val.style();
+      Html.Type_style vx_p_style_unique = val.style_unique();
+      Html.Type_stylelist vx_p_stylelist = val.stylelist();
       Html.Type_divchildlist vx_p_nodes = val.nodes();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
+      validkeys.add(":eventmap");
       validkeys.add(":style");
+      validkeys.add(":style-unique");
+      validkeys.add(":stylelist");
       validkeys.add(":nodes");
       String key = "";
       Core.Type_msg msg;
@@ -5163,6 +6561,26 @@ public final class Html {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":eventmap":
+            if (valsub == vx_p_eventmap) {
+            } else if (valsub instanceof Event.Type_eventmap) {
+              ischanged = true;
+              vx_p_eventmap = (Event.Type_eventmap)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("eventmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/td", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           case ":style":
             if (valsub == vx_p_style) {
             } else if (valsub instanceof Html.Type_style) {
@@ -5177,6 +6595,46 @@ public final class Html {
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
               mapany.put("key", Core.vx_new_string("style"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/td", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":style-unique":
+            if (valsub == vx_p_style_unique) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style_unique = (Html.Type_style)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("style-unique"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/td", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":stylelist":
+            if (valsub == vx_p_stylelist) {
+            } else if (valsub instanceof Html.Type_stylelist) {
+              ischanged = true;
+              vx_p_stylelist = (Html.Type_stylelist)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/web/html/td", ":invalidvalue", msgmap);
@@ -5214,7 +6672,10 @@ public final class Html {
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_td work = new Class_td();
         work.vx_p_id = vx_p_id;
+        work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
+        work.vx_p_style_unique = vx_p_style_unique;
+        work.vx_p_stylelist = vx_p_stylelist;
         work.vx_p_nodes = vx_p_nodes;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -5388,7 +6849,10 @@ public final class Html {
     public Html.Type_thead vx_empty();
     public Html.Type_thead vx_type();
     public Core.Type_string id();
+    public Event.Type_eventmap eventmap();
     public Html.Type_style style();
+    public Html.Type_style style_unique();
+    public Html.Type_stylelist stylelist();
     public Html.Type_trlist nodes();
   }
 
@@ -5401,11 +6865,32 @@ public final class Html {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
+    protected Event.Type_eventmap vx_p_eventmap;
+
+    @Override
+    public Event.Type_eventmap eventmap() {
+      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+    }
+
     protected Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+    }
+
+    protected Html.Type_style vx_p_style_unique;
+
+    @Override
+    public Html.Type_style style_unique() {
+      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+    }
+
+    protected Html.Type_stylelist vx_p_stylelist;
+
+    @Override
+    public Html.Type_stylelist stylelist() {
+      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
     protected Html.Type_trlist vx_p_nodes;
@@ -5423,8 +6908,17 @@ public final class Html {
       case ":id":
         output = this.id();
         break;
+      case ":eventmap":
+        output = this.eventmap();
+        break;
       case ":style":
         output = this.style();
+        break;
+      case ":style-unique":
+        output = this.style_unique();
+        break;
+      case ":stylelist":
+        output = this.stylelist();
         break;
       case ":nodes":
         output = this.nodes();
@@ -5437,7 +6931,10 @@ public final class Html {
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
       output.put(":id", this.id());
+      output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
+      output.put(":style-unique", this.style_unique());
+      output.put(":stylelist", this.stylelist());
       output.put(":nodes", this.nodes());
       return Core.immutablemap(output);
     }
@@ -5455,11 +6952,17 @@ public final class Html {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
+      Event.Type_eventmap vx_p_eventmap = val.eventmap();
       Html.Type_style vx_p_style = val.style();
+      Html.Type_style vx_p_style_unique = val.style_unique();
+      Html.Type_stylelist vx_p_stylelist = val.stylelist();
       Html.Type_trlist vx_p_nodes = val.nodes();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
+      validkeys.add(":eventmap");
       validkeys.add(":style");
+      validkeys.add(":style-unique");
+      validkeys.add(":stylelist");
       validkeys.add(":nodes");
       String key = "";
       Core.Type_msg msg;
@@ -5539,6 +7042,26 @@ public final class Html {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":eventmap":
+            if (valsub == vx_p_eventmap) {
+            } else if (valsub instanceof Event.Type_eventmap) {
+              ischanged = true;
+              vx_p_eventmap = (Event.Type_eventmap)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("eventmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/thead", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           case ":style":
             if (valsub == vx_p_style) {
             } else if (valsub instanceof Html.Type_style) {
@@ -5553,6 +7076,46 @@ public final class Html {
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
               mapany.put("key", Core.vx_new_string("style"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/thead", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":style-unique":
+            if (valsub == vx_p_style_unique) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style_unique = (Html.Type_style)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("style-unique"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/thead", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":stylelist":
+            if (valsub == vx_p_stylelist) {
+            } else if (valsub instanceof Html.Type_stylelist) {
+              ischanged = true;
+              vx_p_stylelist = (Html.Type_stylelist)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/web/html/thead", ":invalidvalue", msgmap);
@@ -5590,7 +7153,10 @@ public final class Html {
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_thead work = new Class_thead();
         work.vx_p_id = vx_p_id;
+        work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
+        work.vx_p_style_unique = vx_p_style_unique;
+        work.vx_p_stylelist = vx_p_stylelist;
         work.vx_p_nodes = vx_p_nodes;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -5638,7 +7204,10 @@ public final class Html {
     public Html.Type_title vx_empty();
     public Html.Type_title vx_type();
     public Core.Type_string id();
+    public Event.Type_eventmap eventmap();
     public Html.Type_style style();
+    public Html.Type_style style_unique();
+    public Html.Type_stylelist stylelist();
     public Core.Type_string text();
   }
 
@@ -5651,11 +7220,32 @@ public final class Html {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
+    protected Event.Type_eventmap vx_p_eventmap;
+
+    @Override
+    public Event.Type_eventmap eventmap() {
+      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+    }
+
     protected Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+    }
+
+    protected Html.Type_style vx_p_style_unique;
+
+    @Override
+    public Html.Type_style style_unique() {
+      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+    }
+
+    protected Html.Type_stylelist vx_p_stylelist;
+
+    @Override
+    public Html.Type_stylelist stylelist() {
+      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
     protected Core.Type_string vx_p_text;
@@ -5673,8 +7263,17 @@ public final class Html {
       case ":id":
         output = this.id();
         break;
+      case ":eventmap":
+        output = this.eventmap();
+        break;
       case ":style":
         output = this.style();
+        break;
+      case ":style-unique":
+        output = this.style_unique();
+        break;
+      case ":stylelist":
+        output = this.stylelist();
         break;
       case ":text":
         output = this.text();
@@ -5687,7 +7286,10 @@ public final class Html {
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
       output.put(":id", this.id());
+      output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
+      output.put(":style-unique", this.style_unique());
+      output.put(":stylelist", this.stylelist());
       output.put(":text", this.text());
       return Core.immutablemap(output);
     }
@@ -5705,11 +7307,17 @@ public final class Html {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
+      Event.Type_eventmap vx_p_eventmap = val.eventmap();
       Html.Type_style vx_p_style = val.style();
+      Html.Type_style vx_p_style_unique = val.style_unique();
+      Html.Type_stylelist vx_p_stylelist = val.stylelist();
       Core.Type_string vx_p_text = val.text();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
+      validkeys.add(":eventmap");
       validkeys.add(":style");
+      validkeys.add(":style-unique");
+      validkeys.add(":stylelist");
       validkeys.add(":text");
       String key = "";
       Core.Type_msg msg;
@@ -5776,6 +7384,26 @@ public final class Html {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":eventmap":
+            if (valsub == vx_p_eventmap) {
+            } else if (valsub instanceof Event.Type_eventmap) {
+              ischanged = true;
+              vx_p_eventmap = (Event.Type_eventmap)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("eventmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/title", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           case ":style":
             if (valsub == vx_p_style) {
             } else if (valsub instanceof Html.Type_style) {
@@ -5790,6 +7418,46 @@ public final class Html {
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
               mapany.put("key", Core.vx_new_string("style"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/title", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":style-unique":
+            if (valsub == vx_p_style_unique) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style_unique = (Html.Type_style)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("style-unique"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/title", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":stylelist":
+            if (valsub == vx_p_stylelist) {
+            } else if (valsub instanceof Html.Type_stylelist) {
+              ischanged = true;
+              vx_p_stylelist = (Html.Type_stylelist)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/web/html/title", ":invalidvalue", msgmap);
@@ -5830,7 +7498,10 @@ public final class Html {
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_title work = new Class_title();
         work.vx_p_id = vx_p_id;
+        work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
+        work.vx_p_style_unique = vx_p_style_unique;
+        work.vx_p_stylelist = vx_p_stylelist;
         work.vx_p_text = vx_p_text;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -5878,7 +7549,10 @@ public final class Html {
     public Html.Type_tr vx_empty();
     public Html.Type_tr vx_type();
     public Core.Type_string id();
+    public Event.Type_eventmap eventmap();
     public Html.Type_style style();
+    public Html.Type_style style_unique();
+    public Html.Type_stylelist stylelist();
     public Html.Type_tdlist nodes();
   }
 
@@ -5891,11 +7565,32 @@ public final class Html {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
+    protected Event.Type_eventmap vx_p_eventmap;
+
+    @Override
+    public Event.Type_eventmap eventmap() {
+      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+    }
+
     protected Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+    }
+
+    protected Html.Type_style vx_p_style_unique;
+
+    @Override
+    public Html.Type_style style_unique() {
+      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+    }
+
+    protected Html.Type_stylelist vx_p_stylelist;
+
+    @Override
+    public Html.Type_stylelist stylelist() {
+      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
     protected Html.Type_tdlist vx_p_nodes;
@@ -5913,8 +7608,17 @@ public final class Html {
       case ":id":
         output = this.id();
         break;
+      case ":eventmap":
+        output = this.eventmap();
+        break;
       case ":style":
         output = this.style();
+        break;
+      case ":style-unique":
+        output = this.style_unique();
+        break;
+      case ":stylelist":
+        output = this.stylelist();
         break;
       case ":nodes":
         output = this.nodes();
@@ -5927,7 +7631,10 @@ public final class Html {
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
       output.put(":id", this.id());
+      output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
+      output.put(":style-unique", this.style_unique());
+      output.put(":stylelist", this.stylelist());
       output.put(":nodes", this.nodes());
       return Core.immutablemap(output);
     }
@@ -5945,11 +7652,17 @@ public final class Html {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
+      Event.Type_eventmap vx_p_eventmap = val.eventmap();
       Html.Type_style vx_p_style = val.style();
+      Html.Type_style vx_p_style_unique = val.style_unique();
+      Html.Type_stylelist vx_p_stylelist = val.stylelist();
       Html.Type_tdlist vx_p_nodes = val.nodes();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":id");
+      validkeys.add(":eventmap");
       validkeys.add(":style");
+      validkeys.add(":style-unique");
+      validkeys.add(":stylelist");
       validkeys.add(":nodes");
       String key = "";
       Core.Type_msg msg;
@@ -6029,6 +7742,26 @@ public final class Html {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":eventmap":
+            if (valsub == vx_p_eventmap) {
+            } else if (valsub instanceof Event.Type_eventmap) {
+              ischanged = true;
+              vx_p_eventmap = (Event.Type_eventmap)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("eventmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/tr", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           case ":style":
             if (valsub == vx_p_style) {
             } else if (valsub instanceof Html.Type_style) {
@@ -6043,6 +7776,46 @@ public final class Html {
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
               mapany.put("key", Core.vx_new_string("style"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/tr", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":style-unique":
+            if (valsub == vx_p_style_unique) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style_unique = (Html.Type_style)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("style-unique"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/tr", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":stylelist":
+            if (valsub == vx_p_stylelist) {
+            } else if (valsub instanceof Html.Type_stylelist) {
+              ischanged = true;
+              vx_p_stylelist = (Html.Type_stylelist)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/web/html/tr", ":invalidvalue", msgmap);
@@ -6080,7 +7853,10 @@ public final class Html {
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_tr work = new Class_tr();
         work.vx_p_id = vx_p_id;
+        work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
+        work.vx_p_style_unique = vx_p_style_unique;
+        work.vx_p_stylelist = vx_p_stylelist;
         work.vx_p_nodes = vx_p_nodes;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -6712,8 +8488,12 @@ public final class Html {
           Core.vx_new_string("id"),
           div.id()
         );
-        final Core.Type_string sstyle = Html.f_string_from_propstyle(
-          div.style()
+        final Core.Type_string sclass = Html.f_string_from_propstyle_stylelist(
+          div.style(),
+          div.stylelist()
+        );
+        final Core.Type_string sstyle = Html.f_string_from_propstyleunique(
+          div.style_unique()
         );
         return Html.f_string_from_nodelist_tag_prop_indent(
           nodes,
@@ -6722,6 +8502,7 @@ public final class Html {
             Core.t_string,
             Core.t_anylist.vx_new(
               sid,
+              sclass,
               sstyle
             )
           ),
@@ -8130,8 +9911,11 @@ public final class Html {
           Core.vx_new_string("id"),
           p.id()
         );
-        final Core.Type_string sstyle = Html.f_string_from_propstyle(
+        final Core.Type_string sclass = Html.f_string_from_propstyle(
           p.style()
+        );
+        final Core.Type_string sstyle = Html.f_string_from_propstyleunique(
+          p.style_unique()
         );
         return Core.f_new(
           Core.t_string,
@@ -8139,6 +9923,7 @@ public final class Html {
             sindent,
             Core.vx_new_string("<p"),
             sid,
+            sclass,
             sstyle,
             Core.vx_new_string(">"),
             text,
@@ -8332,19 +10117,375 @@ public final class Html {
 
   public static Core.Type_string f_string_from_propstyle(final Html.Type_style style) {
     Core.Type_string output = Core.e_string;
-    output = Core.f_if(
+    output = Core.f_if_2(
       Core.t_string,
-      Core.f_notempty_1(style),
-      Core.f_new(
-        Core.t_string,
-        Core.t_anylist.vx_new(
-          Core.vx_new_string(" class="),
-          Core.c_quote,
-          Type.f_string_from_string_start(
-            style.name(),
-            Core.vx_new_int(2)
-          ),
-          Core.c_quote
+      Core.t_thenelselist.vx_new(
+        Core.f_then(
+          Core.t_boolean_from_func.vx_fn_new(() -> {
+            return Core.f_notempty_1(style);
+          }),
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return Core.f_new(
+              Core.t_string,
+              Core.t_anylist.vx_new(
+                  Core.vx_new_string(" class="),
+                  Core.c_quote,
+                  Type.f_string_from_string_start(
+                    style.name(),
+                    Core.vx_new_int(2)
+                  ),
+                  Core.c_quote
+              )
+            );
+          })
+        )
+      )
+    );
+    return output;
+  }
+
+  /**
+   * @function string_from_propstyle_stylelist
+   * Returns ' class=\"style.name\"' if style is not empty.
+   * @param  {style} style
+   * @param  {stylelist} stylelist
+   * @return {string}
+   * (func string<-propstyle-stylelist)
+   */
+  public static interface Func_string_from_propstyle_stylelist extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_string vx_string_from_propstyle_stylelist(final Html.Type_style style, final Html.Type_stylelist stylelist);
+  }
+
+  public static class Class_string_from_propstyle_stylelist extends Core.Class_base implements Func_string_from_propstyle_stylelist {
+
+    @Override
+    public Func_string_from_propstyle_stylelist vx_new(Object... vals) {
+      Class_string_from_propstyle_stylelist output = new Class_string_from_propstyle_stylelist();
+      return output;
+    }
+
+    @Override
+    public Func_string_from_propstyle_stylelist vx_copy(Object... vals) {
+      Class_string_from_propstyle_stylelist output = new Class_string_from_propstyle_stylelist();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/web/html", // pkgname
+        "string<-propstyle-stylelist", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_string_from_propstyle_stylelist vx_empty() {return e_string_from_propstyle_stylelist;}
+    @Override
+    public Func_string_from_propstyle_stylelist vx_type() {return t_string_from_propstyle_stylelist;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Html.Type_style style = Core.f_any_from_any(Html.t_style, arglist.vx_any(Core.vx_new_int(0)));
+      Html.Type_stylelist stylelist = Core.f_any_from_any(Html.t_stylelist, arglist.vx_any(Core.vx_new_int(1)));
+      output = Html.f_string_from_propstyle_stylelist(style, stylelist);
+      return output;
+    }
+
+    @Override
+    public Core.Type_string vx_string_from_propstyle_stylelist(final Html.Type_style style, final Html.Type_stylelist stylelist) {
+      return Html.f_string_from_propstyle_stylelist(style, stylelist);
+    }
+
+  }
+
+  public static final Func_string_from_propstyle_stylelist e_string_from_propstyle_stylelist = new Html.Class_string_from_propstyle_stylelist();
+  public static final Func_string_from_propstyle_stylelist t_string_from_propstyle_stylelist = new Html.Class_string_from_propstyle_stylelist();
+
+  public static Core.Type_string f_string_from_propstyle_stylelist(final Html.Type_style style, final Html.Type_stylelist stylelist) {
+    Core.Type_string output = Core.e_string;
+    output = Core.f_if_2(
+      Core.t_string,
+      Core.t_thenelselist.vx_new(
+        Core.f_then(
+          Core.t_boolean_from_func.vx_fn_new(() -> {
+            return Core.f_notempty_1(style);
+          }),
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return Html.f_string_from_propstyle(style);
+          })
+        ),
+        Core.f_then(
+          Core.t_boolean_from_func.vx_fn_new(() -> {
+            return Core.f_notempty_1(stylelist);
+          }),
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return Html.f_string_from_propstylelist(stylelist);
+          })
+        )
+      )
+    );
+    return output;
+  }
+
+  /**
+   * @function string_from_propstylelist
+   * Returns ' class=\"style1.name style2.name\"' if stylelist is not empty.
+   * @param  {stylelist} stylelist
+   * @return {string}
+   * (func string<-propstylelist)
+   */
+  public static interface Func_string_from_propstylelist extends Core.Func_any_from_any {
+    public Core.Type_string vx_string_from_propstylelist(final Html.Type_stylelist stylelist);
+  }
+
+  public static class Class_string_from_propstylelist extends Core.Class_base implements Func_string_from_propstylelist {
+
+    @Override
+    public Func_string_from_propstylelist vx_new(Object... vals) {
+      Class_string_from_propstylelist output = new Class_string_from_propstylelist();
+      return output;
+    }
+
+    @Override
+    public Func_string_from_propstylelist vx_copy(Object... vals) {
+      Class_string_from_propstylelist output = new Class_string_from_propstylelist();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/web/html", // pkgname
+        "string<-propstylelist", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_string_from_propstylelist vx_empty() {return e_string_from_propstylelist;}
+    @Override
+    public Func_string_from_propstylelist vx_type() {return t_string_from_propstylelist;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Html.Type_stylelist inputval = (Html.Type_stylelist)value;
+      Core.Type_any outputval = Html.f_string_from_propstylelist(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Html.Type_stylelist stylelist = Core.f_any_from_any(Html.t_stylelist, arglist.vx_any(Core.vx_new_int(0)));
+      output = Html.f_string_from_propstylelist(stylelist);
+      return output;
+    }
+
+    @Override
+    public Core.Type_string vx_string_from_propstylelist(final Html.Type_stylelist stylelist) {
+      return Html.f_string_from_propstylelist(stylelist);
+    }
+
+  }
+
+  public static final Func_string_from_propstylelist e_string_from_propstylelist = new Html.Class_string_from_propstylelist();
+  public static final Func_string_from_propstylelist t_string_from_propstylelist = new Html.Class_string_from_propstylelist();
+
+  public static Core.Type_string f_string_from_propstylelist(final Html.Type_stylelist stylelist) {
+    Core.Type_string output = Core.e_string;
+    output = Core.f_if_2(
+      Core.t_string,
+      Core.t_thenelselist.vx_new(
+        Core.f_then(
+          Core.t_boolean_from_func.vx_fn_new(() -> {
+            return Core.f_notempty_1(stylelist);
+          }),
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return Core.f_let(
+              Core.t_string,
+              Core.t_any_from_func.vx_fn_new(() -> {
+                final Core.Type_stringlist namelist = Core.f_list_from_list(
+                  Core.t_stringlist,
+                  stylelist,
+                  Core.t_any_from_any.vx_fn_new((item_any) -> {
+                    Html.Type_style item = Core.f_any_from_any(Html.t_style, item_any);
+                    return 
+                        Type.f_string_from_string_start(
+                          item.name(),
+                          Core.vx_new_int(2)
+                        );
+                  })
+                );
+                final Core.Type_string joined = Type.f_string_from_stringlist_join(namelist, Core.vx_new_string(" "));
+                return Core.f_if(
+                  Core.t_string,
+                  Core.f_ne(Core.vx_new_string(""), joined),
+                  Core.f_new(
+                    Core.t_string,
+                    Core.t_anylist.vx_new(
+                      Core.vx_new_string(" class="),
+                      Core.c_quote,
+                      joined,
+                      Core.c_quote
+                    )
+                  )
+                );
+              })
+            );
+          })
+        )
+      )
+    );
+    return output;
+  }
+
+  /**
+   * @function string_from_propstyleunique
+   * Returns ' style=\"{style.propmap}\"' if style is not empty.
+   * @param  {style} style
+   * @return {string}
+   * (func string<-propstyleunique)
+   */
+  public static interface Func_string_from_propstyleunique extends Core.Func_any_from_any {
+    public Core.Type_string vx_string_from_propstyleunique(final Html.Type_style style);
+  }
+
+  public static class Class_string_from_propstyleunique extends Core.Class_base implements Func_string_from_propstyleunique {
+
+    @Override
+    public Func_string_from_propstyleunique vx_new(Object... vals) {
+      Class_string_from_propstyleunique output = new Class_string_from_propstyleunique();
+      return output;
+    }
+
+    @Override
+    public Func_string_from_propstyleunique vx_copy(Object... vals) {
+      Class_string_from_propstyleunique output = new Class_string_from_propstyleunique();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/web/html", // pkgname
+        "string<-propstyleunique", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_string_from_propstyleunique vx_empty() {return e_string_from_propstyleunique;}
+    @Override
+    public Func_string_from_propstyleunique vx_type() {return t_string_from_propstyleunique;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Html.Type_style inputval = (Html.Type_style)value;
+      Core.Type_any outputval = Html.f_string_from_propstyleunique(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Html.Type_style style = Core.f_any_from_any(Html.t_style, arglist.vx_any(Core.vx_new_int(0)));
+      output = Html.f_string_from_propstyleunique(style);
+      return output;
+    }
+
+    @Override
+    public Core.Type_string vx_string_from_propstyleunique(final Html.Type_style style) {
+      return Html.f_string_from_propstyleunique(style);
+    }
+
+  }
+
+  public static final Func_string_from_propstyleunique e_string_from_propstyleunique = new Html.Class_string_from_propstyleunique();
+  public static final Func_string_from_propstyleunique t_string_from_propstyleunique = new Html.Class_string_from_propstyleunique();
+
+  public static Core.Type_string f_string_from_propstyleunique(final Html.Type_style style) {
+    Core.Type_string output = Core.e_string;
+    output = Core.f_if_2(
+      Core.t_string,
+      Core.t_thenelselist.vx_new(
+        Core.f_then(
+          Core.t_boolean_from_func.vx_fn_new(() -> {
+            return Core.f_notempty_1(style);
+          }),
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return Core.f_new(
+              Core.t_string,
+              Core.t_anylist.vx_new(
+                  Core.vx_new_string(" style="),
+                  Core.c_quote,
+                  Html.f_string_from_stylepropmap_indent(
+                    style.props(),
+                    Core.vx_new_int(0)
+                  ),
+                  Core.c_quote
+              )
+            );
+          })
         )
       )
     );
@@ -9990,6 +12131,7 @@ public final class Html {
     maptype.put("stylelist", Html.t_stylelist);
     maptype.put("stylemap", Html.t_stylemap);
     maptype.put("stylesheet", Html.t_stylesheet);
+    maptype.put("subpropmap", Html.t_subpropmap);
     maptype.put("table", Html.t_table);
     maptype.put("tbody", Html.t_tbody);
     maptype.put("td", Html.t_td);
@@ -10017,6 +12159,9 @@ public final class Html {
     mapfunc.put("string<-p-indent", Html.t_string_from_p_indent);
     mapfunc.put("string<-propname-val", Html.t_string_from_propname_val);
     mapfunc.put("string<-propstyle", Html.t_string_from_propstyle);
+    mapfunc.put("string<-propstyle-stylelist", Html.t_string_from_propstyle_stylelist);
+    mapfunc.put("string<-propstylelist", Html.t_string_from_propstylelist);
+    mapfunc.put("string<-propstyleunique", Html.t_string_from_propstyleunique);
     mapfunc.put("string<-style-indent", Html.t_string_from_style_indent);
     mapfunc.put("string<-stylelist-indent", Html.t_string_from_stylelist_indent);
     mapfunc.put("string<-stylepropmap-indent", Html.t_string_from_stylepropmap_indent);

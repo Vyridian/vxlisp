@@ -268,7 +268,7 @@
             break
           default:
             const typename = vx_core.f_typename_from_typedef(typedef)
-            const msg = vx_core.f_msg_from_error(
+            const msg = vx_core.f_msg_from_error_2(
               'vx/core/new',
               'invalidvalue',
               vx_core.vx_new_map(vx_core.t_anymap, {
@@ -359,7 +359,7 @@
             break
           default:
             const typename = vx_core.f_typename_from_typedef(typedef)
-            const msg = vx_core.f_msg_from_error(
+            const msg = vx_core.f_msg_from_error_2(
               'vx/core/new',
               'invalidvalue',
               vx_core.vx_new_map(vx_core.t_anymap, {
@@ -443,7 +443,7 @@
             break
           default:
             const typename = vx_core.f_typename_from_typedef(typedef)
-            const msg = vx_core.f_msg_from_error(
+            const msg = vx_core.f_msg_from_error_2(
               'vx/core/new',
               'invalidvalue',
               vx_core.vx_new_map(vx_core.t_anymap, {
@@ -507,7 +507,7 @@
             break
           default:
             const typename = vx_core.f_typename_from_typedef(typedef)
-            const msg = vx_core.f_msg_from_error(
+            const msg = vx_core.f_msg_from_error_2(
               'vx/core/new',
               'invalidvalue',
               vx_core.vx_new_map(vx_core.t_anymap, {
@@ -566,7 +566,7 @@
                 break
               default:
                 const typename = vx_core.f_typename_from_typedef(typedef)
-                const msg = vx_core.f_msg_from_error(
+                const msg = vx_core.f_msg_from_error_2(
                   'vx/core/new',
                   'invalidvalue',
                   vx_core.vx_new_map(vx_core.t_anymap, {
@@ -644,7 +644,7 @@
           }
           if (!isfound) {
             const typename = vx_core.f_typename_from_typedef(typedef)
-            const msg = vx_core.f_msg_from_error(
+            const msg = vx_core.f_msg_from_error_2(
               'vx/core/new',
               'invalidvalue',
               vx_core.vx_new_map(vx_core.t_anymap, {
@@ -699,7 +699,7 @@
               break
             default:
               const typename = vx_core.f_typename_from_typedef(typedef)
-              const msg = vx_core.f_msg_from_error(
+              const msg = vx_core.f_msg_from_error_2(
                 'vx/core/new',
                 'invalidkey',
                 vx_core.vx_new_map(vx_core.t_anymap, {
@@ -726,7 +726,7 @@
                 propmap[key] = value
               } else {
                 const typename = vx_core.f_typename_from_typedef(typedef)
-                const msg = vx_core.f_msg_from_error(
+                const msg = vx_core.f_msg_from_error_2(
                   'vx/core/new',
                   'invalidkeyvalue',
                   vx_core.vx_new_map(vx_core.t_anymap, {
@@ -798,7 +798,7 @@
                   key = testkey
                 } else {
                   const typename = vx_core.f_typename_from_typedef(typedef)
-                  const msg = vx_core.f_msg_from_error(
+                  const msg = vx_core.f_msg_from_error_2(
                     'vx/core/new',
                     'invalidkey',
                     vx_core.vx_new_map(vx_core.t_anymap, {
@@ -889,7 +889,7 @@
                   }
                 } else {
                   const typename = vx_core.f_typename_from_typedef(typedef)
-                  const msg = vx_core.f_msg_from_error(
+                  const msg = vx_core.f_msg_from_error_2(
                     'vx/core/new',
                     'invalidkey',
                     vx_core.vx_new_map(vx_core.t_anymap, {
@@ -914,7 +914,7 @@
                 propmap[key] = value
               } else {
                 const typename = vx_core.f_typename_from_typedef(typedef)
-                const msg = vx_core.f_msg_from_error(
+                const msg = vx_core.f_msg_from_error_2(
                   'vx/core/new',
                   'invalidkeyvalue',
                   vx_core.vx_new_map(vx_core.t_anymap, {

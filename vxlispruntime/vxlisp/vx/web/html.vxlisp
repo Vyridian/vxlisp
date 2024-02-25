@@ -1,5 +1,6 @@
 (package vx/web/html
- :libs (lib type :path vx/type)
+ :libs (lib event :path vx/event)
+       (lib type  :path vx/type)
  :doc "Html handler")
 
 (type body : struct
@@ -73,8 +74,11 @@
  :doc        "Meta Tag")
 
 (type node : struct
- :properties [id    : string
-              style : style]
+ :properties [id           : string
+              eventmap     : event/eventmap
+              style        : style
+              style-unique : style
+              stylelist    : stylelist]
  :doc "Common Html Node Trait")
 
 (type nodelist : list
@@ -90,9 +94,14 @@
  :allowtypes [string]
  :doc        "Map of props")
 
+(type subpropmap : map
+ :allowtypes [propmap]
+ :doc        "Map of propmap")
+
 (type style : struct
- :properties [name  : string
-              props : propmap]
+ :properties [name     : string
+              props    : propmap
+              subprops : subpropmap]
  :doc        "Programmable Cascading Style")
 
 (type stylelist : list
@@ -184,11 +193,17 @@
  [div    : div
   indent : int]
  (let
-  [nodes   : divchildlist := (:nodes div)
-   sid     : string       := (string<-propname-val "id" (:id div))
-   sstyle  : string       := (string<-propstyle (:style div))]
+  [nodes   : divchildlist := (:nodes  div)
+   sid     : string       := (string<-propname-val
+                              "id"
+                              (:id div))
+   sclass  : string       := (string<-propstyle-stylelist
+                              (:style     div)
+                              (:stylelist div))
+   sstyle  : string       := (string<-propstyleunique
+                              (:style-unique div))]
   (string<-nodelist-tag-prop-indent
-   nodes "div" (string sid sstyle) indent))
+   nodes "div" (string sid sclass sstyle) indent))
  :test (test
         "<div></div>"
         (string<-div-indent (div) 0))
@@ -213,15 +228,6 @@
         (string<-body-indent (body (div)) 0))
  :doc "Returns string from body")
 
-(func string<-footer-indent : string
- [footer : footer
-  indent : int]
- (let
-  [nodes : divchildlist := (:nodes footer)]
-  (string<-nodelist-tag-prop-indent
-   nodes "footer" "" indent))
- :doc "Returns string from footer")
-
 (func string<-details-indent : string
  [details : details
   indent  : int]
@@ -239,6 +245,15 @@
    snodes
    sindent "</details>"))
  :doc "Returns string from details")
+
+(func string<-footer-indent : string
+ [footer : footer
+  indent : int]
+ (let
+  [nodes : divchildlist := (:nodes footer)]
+  (string<-nodelist-tag-prop-indent
+   nodes "footer" "" indent))
+ :doc "Returns string from footer")
 
 (func string<-h1-indent : string
  [h1     : h1
@@ -371,8 +386,7 @@
   (case tbody      (string<-tbody-indent      (any<-any node) indent))
   (case thead      (string<-thead-indent      (any<-any node) indent))
   (case td         (string<-td-indent         (any<-any node) indent))
-  (case tr         (string<-tr-indent         (any<-any node) indent))
- )
+  (case tr         (string<-tr-indent         (any<-any node) indent)))
  :doc "Returns a string from any node")
 
 (func string<-nodelist-tag-prop-indent : string
@@ -381,8 +395,11 @@
   prop   : string
   indent : int]
  (let
-  [text    : string        := (string<-nodelist-indent nodes (+1 indent))
-   sindent : string        := (string<-indent indent)
+  [text    : string        := (string<-nodelist-indent
+                               nodes
+                               (+1 indent))
+   sindent : string        := (string<-indent
+                               indent)
    eindent : string        := (if
                                (then (is-empty text) "")
                                (then (is-empty sindent) newline)
@@ -401,7 +418,9 @@
                              nodelist
                              (fn : string
                               [node : node]
-                              (string<-node-indent node indent)
+                              (string<-node-indent
+                               node
+                               indent)
                              ))]
   (string<-stringlist-join textlist ""))
  :doc "Returns a string from any node")
@@ -413,15 +432,19 @@
   [sindent : string := (string<-indent indent)
    text    : string := (htmlstring<-string (:text p))
    sid     : string := (string<-propname-val "id" (:id p))
-   sstyle  : string := (string<-propstyle (:style p))]
-  (string sindent "<p" sid sstyle ">" text "</p>"))
+   sclass  : string := (string<-propstyle (:style p))
+   sstyle  : string := (string<-propstyleunique (:style-unique p))]
+  (string sindent "<p" sid sclass sstyle ">" text "</p>"))
  :test (test
         "<p>data</p>"
-        (string<-p-indent (p :text "data") 0))
+        (string<-p-indent
+         (p :text "data")
+         0))
        (test
         "<p id=\"myid\">data</p>"
         (string<-p-indent
-         (p :id "myid" :text "data") 0))
+         (p :id "myid" :text "data")
+         0))
  :doc "Returns string from p")
 
 (func string<-propname-val : string
@@ -429,15 +452,81 @@
   val : string]
  (if
   (!-empty val)
-  (string " " key "=" quote val quote))
+  (string
+   " "
+   key
+   "="
+   quote
+   val
+   quote))
  :doc "Returns ' key=\"val\"' if val is not blank.")
 
 (func string<-propstyle : string
  [style : style]
- (if
-  (!-empty style)
-  (string " class=" quote (string<-string-start (:name style) 2) quote))
+ (if : string
+  (then
+   (!-empty style)
+   (string
+    " class="
+    quote
+    (string<-string-start
+     (:name style)
+     2)
+    quote)))
  :doc "Returns ' class=\"style.name\"' if style is not empty.")
+
+(func string<-propstyle-stylelist : string
+ [style     : style
+  stylelist : stylelist]
+ (if : string
+  (then
+   (!-empty style)
+   (string<-propstyle
+    style))
+  (then
+   (!-empty stylelist)
+   (string<-propstylelist
+    stylelist)))
+ :doc "Returns ' class=\"style.name\"' if style is not empty.")
+
+(func string<-propstylelist : string
+ [stylelist : stylelist]
+ (if : string
+  (then
+   (!-empty stylelist)
+   (let : string
+    [namelist : stringlist := (list<-list : stringlist
+                               stylelist
+                               (fn : style
+                                [item : style]
+                                (string<-string-start
+                                 (:name item)
+                                 2)))
+     joined   : string     := (string<-stringlist-join
+                               namelist
+                               " ")]
+    (if : string
+     (!= "" joined)
+     (string
+      " class="
+      quote
+      joined
+      quote)))))
+ :doc "Returns ' class=\"style1.name style2.name\"' if stylelist is not empty.")
+
+(func string<-propstyleunique : string
+ [style : style]
+ (if
+  (then
+   (!-empty style)
+   (string
+    " style="
+    quote
+    (string<-stylepropmap-indent
+     (:props style)
+     0)
+    quote)))
+ :doc "Returns ' style=\"{style.propmap}\"' if style is not empty.")
 
 (func string<-style-indent : string
  [style  : style
@@ -450,9 +539,7 @@
   (string
    sindent name " {"
    stext
-   sindent "}"
-  )
- )
+   sindent "}"))
  :doc "Returns indent'name {key: val;}' for each style.")
 
 (func string<-stylelist-indent : string
@@ -463,11 +550,10 @@
                             stylelist
                             (fn : string
                              [substyle : style]
-                             (string<-style-indent substyle indent)
-                            )
-                           )]
-  (string<-stringlist-join sstyles "")
- )
+                             (string<-style-indent
+                              substyle
+                              indent)))]
+  (string<-stringlist-join sstyles ""))
  :doc "Return a string from a stylelist")
 
 (func string<-stylepropmap-indent : string
@@ -480,25 +566,32 @@
                             (fn : string
                              [key : string
                               val : string]
-                             (string sindent key ": " val ";")
-                            )
-                           )]
-  (string<-stringlist-join sprops "")
- )
+                             (string
+                              sindent
+                              key
+                              ": "
+                              val ";")))]
+  (string<-stringlist-join
+   sprops
+   ""))
  :doc "Returns indent'key: val;' for each prop.")
 
 (func string<-stylesheet-indent : string
  [stylesheet : stylesheet
   indent     : int]
  (let
-  [text    : string := (string<-stylelist-indent (:styles stylesheet) (+1 indent))
-   sindent : string := (string<-indent indent)
-   eindent : string := (if (!-empty text) sindent)]
+  [text    : string := (string<-stylelist-indent
+                        (:styles stylesheet)
+                        (+1 indent))
+   sindent : string := (string<-indent
+                        indent)
+   eindent : string := (if
+                        (!-empty text)
+                        sindent)]
   (string
    sindent "<style>"
    text
-   eindent "</style>")
- )
+   eindent "</style>"))
  :doc "Returns string representation of given stylesheet.")
 
 (func string<-table-indent : string
@@ -506,11 +599,17 @@
   indent : int]
  (let
   [sindent : string := (string<-indent indent)
-   sid     : string := (string<-propname-val "id" (:id table))
+   sid     : string := (string<-propname-val
+                        "id"
+                        (:id table))
    thead   : thead  := (:thead table)
    tbody   : tbody  := (:tbody table)
-   shead   : string := (string<-thead-indent thead (+1 indent))
-   sbody   : string := (string<-tbody-indent tbody (+1 indent))]
+   shead   : string := (string<-thead-indent
+                        thead
+                        (+1 indent))
+   sbody   : string := (string<-tbody-indent
+                        tbody
+                        (+1 indent))]
   (string
    sindent "<table" sid ">"
    shead
@@ -525,8 +624,10 @@
  (let
   [nodes : trlist := (:nodes tbody)]
   (string<-nodelist-tag-prop-indent
-   nodes "tbody" "" indent)
- )
+   nodes
+   "tbody"
+   ""
+   indent))
  :doc "Returns string from tbody")
 
 (func string<-td-indent : string
@@ -535,8 +636,7 @@
  (let
   [nodes : divchildlist := (:nodes td)]
   (string<-nodelist-tag-prop-indent
-   nodes "td" "" indent)
- )
+   nodes "td" "" indent))
  :doc "Returns string from td")
 
 (func string<-thead-indent : string
@@ -545,17 +645,24 @@
  (let
   [nodes : trlist := (:nodes thead)]
   (string<-nodelist-tag-prop-indent
-   nodes "thead" "" indent)
- )
+   nodes
+   "thead"
+   ""
+   indent))
  :doc "Returns string from thead")
 
 (func string<-title-indent : string
  [title  : title
   indent : int]
  (let
-  [sindent : string := (string<-indent indent)
+  [sindent : string := (string<-indent
+                        indent)
    text    : string := (:text title)]
-  (string sindent "<title>" text "</title>"))
+  (string
+   sindent
+   "<title>"
+   text
+   "</title>"))
  :doc "Returns string from h2")
 
 (func string<-tr-indent : string
@@ -564,8 +671,10 @@
  (let
   [nodes : tdlist := (:nodes tr)]
   (string<-nodelist-tag-prop-indent
-   nodes "tr" "" indent)
- )
+   nodes
+   "tr"
+   ""
+   indent))
  :doc "Returns string from tr")
 
 (func string<-uri : string
@@ -582,7 +691,9 @@
 (func style<-stylesheet-name : style
  [stylesheet : stylesheet
   name       : string]
- (any<-map (stylemap<-stylesheet stylesheet) name)
+ (any<-map
+  (stylemap<-stylesheet stylesheet)
+  name)
  :doc "Return style from stylesheet.stylemap")
 
 (func stylemap<-stylelist : stylemap
@@ -591,9 +702,7 @@
   stylelist
   (fn : string
    [style : style]
-   (:name style)
-  )
- )
+   (:name style)))
  :doc "Returns a stylemap from a given stylelist")
 
 (func stylemap<-stylesheet : stylemap
@@ -605,7 +714,8 @@
  [stylesheet : stylesheet]
  (copy
   stylesheet
-  :stylemap (stylemap<-stylelist (:styles stylesheet)))
+  :stylemap (stylemap<-stylelist
+             (:styles stylesheet)))
  :doc "Decode a URI string")
 
 (func uri<-string : string

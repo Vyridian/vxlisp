@@ -24,6 +24,9 @@ import vx_translation_all_test from "./vx/translation/all_test.js"
 import vx_translation_en_test from "./vx/translation/en_test.js"
 import vx_translation_es_test from "./vx/translation/es_test.js"
 import vx_type_test from "./vx/type_test.js"
+import vx_ui_html_uihtml_test from "./vx/ui/html/uihtml_test.js"
+import vx_ui_svg_uisvg_test from "./vx/ui/svg/uisvg_test.js"
+import vx_ui_ui_test from "./vx/ui/ui_test.js"
 import vx_web_html_test from "./vx/web/html_test.js"
 import vx_web_htmldoc_test from "./vx/web/htmldoc_test.js"
 import vx_web_http_test from "./vx/web/http_test.js"
@@ -64,6 +67,9 @@ export default class app_test {
       vx_translation_en_test.test_package(context),
       vx_translation_es_test.test_package(context),
       vx_type_test.test_package(context),
+      vx_ui_html_uihtml_test.test_package(context),
+      vx_ui_svg_uisvg_test.test_package(context),
+      vx_ui_ui_test.test_package(context),
       vx_web_html_test.test_package(context),
       vx_web_htmldoc_test.test_package(context),
       vx_web_http_test.test_package(context)

@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "../../vx/core.hpp"
+#include "../../vx/event.hpp"
 #include "../../vx/type.hpp"
 
 namespace vx_web_html {
@@ -102,6 +103,10 @@ namespace vx_web_html {
   typedef Abstract_stylesheet* Type_stylesheet;
   extern Type_stylesheet e_stylesheet;
   extern Type_stylesheet t_stylesheet;
+  class Abstract_subpropmap;
+  typedef Abstract_subpropmap* Type_subpropmap;
+  extern Type_subpropmap e_subpropmap;
+  extern Type_subpropmap t_subpropmap;
   class Abstract_table;
   typedef Abstract_table* Type_table;
   extern Type_table e_table;
@@ -210,6 +215,18 @@ namespace vx_web_html {
   typedef Abstract_string_from_propstyle* Func_string_from_propstyle;
   extern Func_string_from_propstyle e_string_from_propstyle;
   extern Func_string_from_propstyle t_string_from_propstyle;
+  class Abstract_string_from_propstyle_stylelist;
+  typedef Abstract_string_from_propstyle_stylelist* Func_string_from_propstyle_stylelist;
+  extern Func_string_from_propstyle_stylelist e_string_from_propstyle_stylelist;
+  extern Func_string_from_propstyle_stylelist t_string_from_propstyle_stylelist;
+  class Abstract_string_from_propstylelist;
+  typedef Abstract_string_from_propstylelist* Func_string_from_propstylelist;
+  extern Func_string_from_propstylelist e_string_from_propstylelist;
+  extern Func_string_from_propstylelist t_string_from_propstylelist;
+  class Abstract_string_from_propstyleunique;
+  typedef Abstract_string_from_propstyleunique* Func_string_from_propstyleunique;
+  extern Func_string_from_propstyleunique e_string_from_propstyleunique;
+  extern Func_string_from_propstyleunique t_string_from_propstyleunique;
   class Abstract_string_from_style_indent;
   typedef Abstract_string_from_style_indent* Func_string_from_style_indent;
   extern Func_string_from_style_indent e_string_from_style_indent;
@@ -294,9 +311,18 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string vx_p_id = NULL;
     virtual vx_core::Type_string id() const = 0;
+    // eventmap()
+    vx_event::Type_eventmap vx_p_eventmap = NULL;
+    virtual vx_event::Type_eventmap eventmap() const = 0;
     // style()
     vx_web_html::Type_style vx_p_style = NULL;
     virtual vx_web_html::Type_style style() const = 0;
+    // style-unique()
+    vx_web_html::Type_style vx_p_style_unique = NULL;
+    virtual vx_web_html::Type_style style_unique() const = 0;
+    // stylelist()
+    vx_web_html::Type_stylelist vx_p_stylelist = NULL;
+    virtual vx_web_html::Type_stylelist stylelist() const = 0;
   };
   class Class_node : public virtual Abstract_node {
   public:
@@ -313,7 +339,10 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::Type_string id() const override;
+    virtual vx_event::Type_eventmap eventmap() const override;
     virtual vx_web_html::Type_style style() const override;
+    virtual vx_web_html::Type_style style_unique() const override;
+    virtual vx_web_html::Type_stylelist stylelist() const override;
   };
 
   // (type divchild)
@@ -398,6 +427,15 @@ namespace vx_web_html {
 
   // (func string<-propstyle)
   vx_core::Type_string f_string_from_propstyle(vx_web_html::Type_style style);
+
+  // (func string<-propstyle-stylelist)
+  vx_core::Type_string f_string_from_propstyle_stylelist(vx_web_html::Type_style style, vx_web_html::Type_stylelist stylelist);
+
+  // (func string<-propstylelist)
+  vx_core::Type_string f_string_from_propstylelist(vx_web_html::Type_stylelist stylelist);
+
+  // (func string<-propstyleunique)
+  vx_core::Type_string f_string_from_propstyleunique(vx_web_html::Type_style style);
 
   // (func string<-style-indent)
   vx_core::Type_string f_string_from_style_indent(vx_web_html::Type_style style, vx_core::Type_int indent);
@@ -492,9 +530,18 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string vx_p_id = NULL;
     virtual vx_core::Type_string id() const = 0;
+    // eventmap()
+    vx_event::Type_eventmap vx_p_eventmap = NULL;
+    virtual vx_event::Type_eventmap eventmap() const = 0;
     // style()
     vx_web_html::Type_style vx_p_style = NULL;
     virtual vx_web_html::Type_style style() const = 0;
+    // style-unique()
+    vx_web_html::Type_style vx_p_style_unique = NULL;
+    virtual vx_web_html::Type_style style_unique() const = 0;
+    // stylelist()
+    vx_web_html::Type_stylelist vx_p_stylelist = NULL;
+    virtual vx_web_html::Type_stylelist stylelist() const = 0;
     // summary()
     vx_web_html::Type_divchildlist vx_p_summary = NULL;
     virtual vx_web_html::Type_divchildlist summary() const = 0;
@@ -517,7 +564,10 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::Type_string id() const override;
+    virtual vx_event::Type_eventmap eventmap() const override;
     virtual vx_web_html::Type_style style() const override;
+    virtual vx_web_html::Type_style style_unique() const override;
+    virtual vx_web_html::Type_stylelist stylelist() const override;
     virtual vx_web_html::Type_divchildlist summary() const override;
     virtual vx_web_html::Type_divchildlist nodes() const override;
   };
@@ -534,9 +584,18 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string vx_p_id = NULL;
     virtual vx_core::Type_string id() const = 0;
+    // eventmap()
+    vx_event::Type_eventmap vx_p_eventmap = NULL;
+    virtual vx_event::Type_eventmap eventmap() const = 0;
     // style()
     vx_web_html::Type_style vx_p_style = NULL;
     virtual vx_web_html::Type_style style() const = 0;
+    // style-unique()
+    vx_web_html::Type_style vx_p_style_unique = NULL;
+    virtual vx_web_html::Type_style style_unique() const = 0;
+    // stylelist()
+    vx_web_html::Type_stylelist vx_p_stylelist = NULL;
+    virtual vx_web_html::Type_stylelist stylelist() const = 0;
     // nodes()
     vx_web_html::Type_divchildlist vx_p_nodes = NULL;
     virtual vx_web_html::Type_divchildlist nodes() const = 0;
@@ -556,7 +615,10 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::Type_string id() const override;
+    virtual vx_event::Type_eventmap eventmap() const override;
     virtual vx_web_html::Type_style style() const override;
+    virtual vx_web_html::Type_style style_unique() const override;
+    virtual vx_web_html::Type_stylelist stylelist() const override;
     virtual vx_web_html::Type_divchildlist nodes() const override;
   };
 
@@ -674,9 +736,18 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string vx_p_id = NULL;
     virtual vx_core::Type_string id() const = 0;
+    // eventmap()
+    vx_event::Type_eventmap vx_p_eventmap = NULL;
+    virtual vx_event::Type_eventmap eventmap() const = 0;
     // style()
     vx_web_html::Type_style vx_p_style = NULL;
     virtual vx_web_html::Type_style style() const = 0;
+    // style-unique()
+    vx_web_html::Type_style vx_p_style_unique = NULL;
+    virtual vx_web_html::Type_style style_unique() const = 0;
+    // stylelist()
+    vx_web_html::Type_stylelist vx_p_stylelist = NULL;
+    virtual vx_web_html::Type_stylelist stylelist() const = 0;
     // text()
     vx_core::Type_string vx_p_text = NULL;
     virtual vx_core::Type_string text() const = 0;
@@ -696,7 +767,10 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::Type_string id() const override;
+    virtual vx_event::Type_eventmap eventmap() const override;
     virtual vx_web_html::Type_style style() const override;
+    virtual vx_web_html::Type_style style_unique() const override;
+    virtual vx_web_html::Type_stylelist stylelist() const override;
     virtual vx_core::Type_string text() const override;
   };
 
@@ -712,9 +786,18 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string vx_p_id = NULL;
     virtual vx_core::Type_string id() const = 0;
+    // eventmap()
+    vx_event::Type_eventmap vx_p_eventmap = NULL;
+    virtual vx_event::Type_eventmap eventmap() const = 0;
     // style()
     vx_web_html::Type_style vx_p_style = NULL;
     virtual vx_web_html::Type_style style() const = 0;
+    // style-unique()
+    vx_web_html::Type_style vx_p_style_unique = NULL;
+    virtual vx_web_html::Type_style style_unique() const = 0;
+    // stylelist()
+    vx_web_html::Type_stylelist vx_p_stylelist = NULL;
+    virtual vx_web_html::Type_stylelist stylelist() const = 0;
     // text()
     vx_core::Type_string vx_p_text = NULL;
     virtual vx_core::Type_string text() const = 0;
@@ -734,7 +817,10 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::Type_string id() const override;
+    virtual vx_event::Type_eventmap eventmap() const override;
     virtual vx_web_html::Type_style style() const override;
+    virtual vx_web_html::Type_style style_unique() const override;
+    virtual vx_web_html::Type_stylelist stylelist() const override;
     virtual vx_core::Type_string text() const override;
   };
 
@@ -750,9 +836,18 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string vx_p_id = NULL;
     virtual vx_core::Type_string id() const = 0;
+    // eventmap()
+    vx_event::Type_eventmap vx_p_eventmap = NULL;
+    virtual vx_event::Type_eventmap eventmap() const = 0;
     // style()
     vx_web_html::Type_style vx_p_style = NULL;
     virtual vx_web_html::Type_style style() const = 0;
+    // style-unique()
+    vx_web_html::Type_style vx_p_style_unique = NULL;
+    virtual vx_web_html::Type_style style_unique() const = 0;
+    // stylelist()
+    vx_web_html::Type_stylelist vx_p_stylelist = NULL;
+    virtual vx_web_html::Type_stylelist stylelist() const = 0;
     // text()
     vx_core::Type_string vx_p_text = NULL;
     virtual vx_core::Type_string text() const = 0;
@@ -772,7 +867,10 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::Type_string id() const override;
+    virtual vx_event::Type_eventmap eventmap() const override;
     virtual vx_web_html::Type_style style() const override;
+    virtual vx_web_html::Type_style style_unique() const override;
+    virtual vx_web_html::Type_stylelist stylelist() const override;
     virtual vx_core::Type_string text() const override;
   };
 
@@ -922,9 +1020,18 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string vx_p_id = NULL;
     virtual vx_core::Type_string id() const = 0;
+    // eventmap()
+    vx_event::Type_eventmap vx_p_eventmap = NULL;
+    virtual vx_event::Type_eventmap eventmap() const = 0;
     // style()
     vx_web_html::Type_style vx_p_style = NULL;
     virtual vx_web_html::Type_style style() const = 0;
+    // style-unique()
+    vx_web_html::Type_style vx_p_style_unique = NULL;
+    virtual vx_web_html::Type_style style_unique() const = 0;
+    // stylelist()
+    vx_web_html::Type_stylelist vx_p_stylelist = NULL;
+    virtual vx_web_html::Type_stylelist stylelist() const = 0;
     // charset()
     vx_core::Type_string vx_p_charset = NULL;
     virtual vx_core::Type_string charset() const = 0;
@@ -950,7 +1057,10 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::Type_string id() const override;
+    virtual vx_event::Type_eventmap eventmap() const override;
     virtual vx_web_html::Type_style style() const override;
+    virtual vx_web_html::Type_style style_unique() const override;
+    virtual vx_web_html::Type_stylelist stylelist() const override;
     virtual vx_core::Type_string charset() const override;
     virtual vx_core::Type_string name() const override;
     virtual vx_core::Type_string content() const override;
@@ -1004,9 +1114,18 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string vx_p_id = NULL;
     virtual vx_core::Type_string id() const = 0;
+    // eventmap()
+    vx_event::Type_eventmap vx_p_eventmap = NULL;
+    virtual vx_event::Type_eventmap eventmap() const = 0;
     // style()
     vx_web_html::Type_style vx_p_style = NULL;
     virtual vx_web_html::Type_style style() const = 0;
+    // style-unique()
+    vx_web_html::Type_style vx_p_style_unique = NULL;
+    virtual vx_web_html::Type_style style_unique() const = 0;
+    // stylelist()
+    vx_web_html::Type_stylelist vx_p_stylelist = NULL;
+    virtual vx_web_html::Type_stylelist stylelist() const = 0;
     // text()
     vx_core::Type_string vx_p_text = NULL;
     virtual vx_core::Type_string text() const = 0;
@@ -1026,7 +1145,10 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::Type_string id() const override;
+    virtual vx_event::Type_eventmap eventmap() const override;
     virtual vx_web_html::Type_style style() const override;
+    virtual vx_web_html::Type_style style_unique() const override;
+    virtual vx_web_html::Type_stylelist stylelist() const override;
     virtual vx_core::Type_string text() const override;
   };
 
@@ -1081,6 +1203,9 @@ namespace vx_web_html {
     // props()
     vx_web_html::Type_propmap vx_p_props = NULL;
     virtual vx_web_html::Type_propmap props() const = 0;
+    // subprops()
+    vx_web_html::Type_subpropmap vx_p_subprops = NULL;
+    virtual vx_web_html::Type_subpropmap subprops() const = 0;
   };
   class Class_style : public virtual Abstract_style {
   public:
@@ -1098,6 +1223,7 @@ namespace vx_web_html {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::Type_string name() const override;
     virtual vx_web_html::Type_propmap props() const override;
+    virtual vx_web_html::Type_subpropmap subprops() const override;
   };
 
   // (type stylelist)
@@ -1184,9 +1310,18 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string vx_p_id = NULL;
     virtual vx_core::Type_string id() const = 0;
+    // eventmap()
+    vx_event::Type_eventmap vx_p_eventmap = NULL;
+    virtual vx_event::Type_eventmap eventmap() const = 0;
     // style()
     vx_web_html::Type_style vx_p_style = NULL;
     virtual vx_web_html::Type_style style() const = 0;
+    // style-unique()
+    vx_web_html::Type_style vx_p_style_unique = NULL;
+    virtual vx_web_html::Type_style style_unique() const = 0;
+    // stylelist()
+    vx_web_html::Type_stylelist vx_p_stylelist = NULL;
+    virtual vx_web_html::Type_stylelist stylelist() const = 0;
     // name()
     vx_core::Type_string vx_p_name = NULL;
     virtual vx_core::Type_string name() const = 0;
@@ -1212,10 +1347,49 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::Type_string id() const override;
+    virtual vx_event::Type_eventmap eventmap() const override;
     virtual vx_web_html::Type_style style() const override;
+    virtual vx_web_html::Type_style style_unique() const override;
+    virtual vx_web_html::Type_stylelist stylelist() const override;
     virtual vx_core::Type_string name() const override;
     virtual vx_web_html::Type_stylelist styles() const override;
     virtual vx_web_html::Type_stylemap stylemap() const override;
+  };
+
+  // (type subpropmap)
+  class Abstract_subpropmap : public virtual vx_core::Abstract_map {
+  public:
+    Abstract_subpropmap() {};
+    virtual ~Abstract_subpropmap() = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    // vx_map()
+    virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_new_from_map(T, Map<T>)
+    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
+    std::map<std::string, vx_web_html::Type_propmap> vx_p_map;
+    // vx_mappropmap()
+    virtual std::map<std::string, vx_web_html::Type_propmap> vx_mappropmap() const = 0;
+    // vx_get_propmap(key)
+    virtual vx_web_html::Type_propmap vx_get_propmap(vx_core::Type_string key) const = 0;
+  };
+  class Class_subpropmap : public virtual Abstract_subpropmap {
+  public:
+    Class_subpropmap();
+    virtual ~Class_subpropmap() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
+    virtual std::map<std::string, vx_web_html::Type_propmap> vx_mappropmap() const override;
+    virtual vx_web_html::Type_propmap vx_get_propmap(vx_core::Type_string key) const override;
   };
 
   // (type table)
@@ -1230,9 +1404,18 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string vx_p_id = NULL;
     virtual vx_core::Type_string id() const = 0;
+    // eventmap()
+    vx_event::Type_eventmap vx_p_eventmap = NULL;
+    virtual vx_event::Type_eventmap eventmap() const = 0;
     // style()
     vx_web_html::Type_style vx_p_style = NULL;
     virtual vx_web_html::Type_style style() const = 0;
+    // style-unique()
+    vx_web_html::Type_style vx_p_style_unique = NULL;
+    virtual vx_web_html::Type_style style_unique() const = 0;
+    // stylelist()
+    vx_web_html::Type_stylelist vx_p_stylelist = NULL;
+    virtual vx_web_html::Type_stylelist stylelist() const = 0;
     // tbody()
     vx_web_html::Type_tbody vx_p_tbody = NULL;
     virtual vx_web_html::Type_tbody tbody() const = 0;
@@ -1255,7 +1438,10 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::Type_string id() const override;
+    virtual vx_event::Type_eventmap eventmap() const override;
     virtual vx_web_html::Type_style style() const override;
+    virtual vx_web_html::Type_style style_unique() const override;
+    virtual vx_web_html::Type_stylelist stylelist() const override;
     virtual vx_web_html::Type_tbody tbody() const override;
     virtual vx_web_html::Type_thead thead() const override;
   };
@@ -1272,9 +1458,18 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string vx_p_id = NULL;
     virtual vx_core::Type_string id() const = 0;
+    // eventmap()
+    vx_event::Type_eventmap vx_p_eventmap = NULL;
+    virtual vx_event::Type_eventmap eventmap() const = 0;
     // style()
     vx_web_html::Type_style vx_p_style = NULL;
     virtual vx_web_html::Type_style style() const = 0;
+    // style-unique()
+    vx_web_html::Type_style vx_p_style_unique = NULL;
+    virtual vx_web_html::Type_style style_unique() const = 0;
+    // stylelist()
+    vx_web_html::Type_stylelist vx_p_stylelist = NULL;
+    virtual vx_web_html::Type_stylelist stylelist() const = 0;
     // nodes()
     vx_web_html::Type_trlist vx_p_nodes = NULL;
     virtual vx_web_html::Type_trlist nodes() const = 0;
@@ -1294,7 +1489,10 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::Type_string id() const override;
+    virtual vx_event::Type_eventmap eventmap() const override;
     virtual vx_web_html::Type_style style() const override;
+    virtual vx_web_html::Type_style style_unique() const override;
+    virtual vx_web_html::Type_stylelist stylelist() const override;
     virtual vx_web_html::Type_trlist nodes() const override;
   };
 
@@ -1310,9 +1508,18 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string vx_p_id = NULL;
     virtual vx_core::Type_string id() const = 0;
+    // eventmap()
+    vx_event::Type_eventmap vx_p_eventmap = NULL;
+    virtual vx_event::Type_eventmap eventmap() const = 0;
     // style()
     vx_web_html::Type_style vx_p_style = NULL;
     virtual vx_web_html::Type_style style() const = 0;
+    // style-unique()
+    vx_web_html::Type_style vx_p_style_unique = NULL;
+    virtual vx_web_html::Type_style style_unique() const = 0;
+    // stylelist()
+    vx_web_html::Type_stylelist vx_p_stylelist = NULL;
+    virtual vx_web_html::Type_stylelist stylelist() const = 0;
     // nodes()
     vx_web_html::Type_divchildlist vx_p_nodes = NULL;
     virtual vx_web_html::Type_divchildlist nodes() const = 0;
@@ -1332,7 +1539,10 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::Type_string id() const override;
+    virtual vx_event::Type_eventmap eventmap() const override;
     virtual vx_web_html::Type_style style() const override;
+    virtual vx_web_html::Type_style style_unique() const override;
+    virtual vx_web_html::Type_stylelist stylelist() const override;
     virtual vx_web_html::Type_divchildlist nodes() const override;
   };
 
@@ -1384,9 +1594,18 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string vx_p_id = NULL;
     virtual vx_core::Type_string id() const = 0;
+    // eventmap()
+    vx_event::Type_eventmap vx_p_eventmap = NULL;
+    virtual vx_event::Type_eventmap eventmap() const = 0;
     // style()
     vx_web_html::Type_style vx_p_style = NULL;
     virtual vx_web_html::Type_style style() const = 0;
+    // style-unique()
+    vx_web_html::Type_style vx_p_style_unique = NULL;
+    virtual vx_web_html::Type_style style_unique() const = 0;
+    // stylelist()
+    vx_web_html::Type_stylelist vx_p_stylelist = NULL;
+    virtual vx_web_html::Type_stylelist stylelist() const = 0;
     // nodes()
     vx_web_html::Type_trlist vx_p_nodes = NULL;
     virtual vx_web_html::Type_trlist nodes() const = 0;
@@ -1406,7 +1625,10 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::Type_string id() const override;
+    virtual vx_event::Type_eventmap eventmap() const override;
     virtual vx_web_html::Type_style style() const override;
+    virtual vx_web_html::Type_style style_unique() const override;
+    virtual vx_web_html::Type_stylelist stylelist() const override;
     virtual vx_web_html::Type_trlist nodes() const override;
   };
 
@@ -1422,9 +1644,18 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string vx_p_id = NULL;
     virtual vx_core::Type_string id() const = 0;
+    // eventmap()
+    vx_event::Type_eventmap vx_p_eventmap = NULL;
+    virtual vx_event::Type_eventmap eventmap() const = 0;
     // style()
     vx_web_html::Type_style vx_p_style = NULL;
     virtual vx_web_html::Type_style style() const = 0;
+    // style-unique()
+    vx_web_html::Type_style vx_p_style_unique = NULL;
+    virtual vx_web_html::Type_style style_unique() const = 0;
+    // stylelist()
+    vx_web_html::Type_stylelist vx_p_stylelist = NULL;
+    virtual vx_web_html::Type_stylelist stylelist() const = 0;
     // text()
     vx_core::Type_string vx_p_text = NULL;
     virtual vx_core::Type_string text() const = 0;
@@ -1444,7 +1675,10 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::Type_string id() const override;
+    virtual vx_event::Type_eventmap eventmap() const override;
     virtual vx_web_html::Type_style style() const override;
+    virtual vx_web_html::Type_style style_unique() const override;
+    virtual vx_web_html::Type_stylelist stylelist() const override;
     virtual vx_core::Type_string text() const override;
   };
 
@@ -1460,9 +1694,18 @@ namespace vx_web_html {
     // id()
     vx_core::Type_string vx_p_id = NULL;
     virtual vx_core::Type_string id() const = 0;
+    // eventmap()
+    vx_event::Type_eventmap vx_p_eventmap = NULL;
+    virtual vx_event::Type_eventmap eventmap() const = 0;
     // style()
     vx_web_html::Type_style vx_p_style = NULL;
     virtual vx_web_html::Type_style style() const = 0;
+    // style-unique()
+    vx_web_html::Type_style vx_p_style_unique = NULL;
+    virtual vx_web_html::Type_style style_unique() const = 0;
+    // stylelist()
+    vx_web_html::Type_stylelist vx_p_stylelist = NULL;
+    virtual vx_web_html::Type_stylelist stylelist() const = 0;
     // nodes()
     vx_web_html::Type_tdlist vx_p_nodes = NULL;
     virtual vx_web_html::Type_tdlist nodes() const = 0;
@@ -1482,7 +1725,10 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::Type_string id() const override;
+    virtual vx_event::Type_eventmap eventmap() const override;
     virtual vx_web_html::Type_style style() const override;
+    virtual vx_web_html::Type_style style_unique() const override;
+    virtual vx_web_html::Type_stylelist stylelist() const override;
     virtual vx_web_html::Type_tdlist nodes() const override;
   };
 
@@ -1965,6 +2211,83 @@ namespace vx_web_html {
   public:
     Class_string_from_propstyle();
     virtual ~Class_string_from_propstyle() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func string<-propstyle-stylelist)
+  class Abstract_string_from_propstyle_stylelist : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_string_from_propstyle_stylelist() {};
+    virtual ~Abstract_string_from_propstyle_stylelist() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_string_from_propstyle_stylelist : public virtual Abstract_string_from_propstyle_stylelist {
+  public:
+    Class_string_from_propstyle_stylelist();
+    virtual ~Class_string_from_propstyle_stylelist() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func string<-propstylelist)
+  class Abstract_string_from_propstylelist : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_string_from_propstylelist() {};
+    virtual ~Abstract_string_from_propstylelist() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_string_from_propstylelist : public virtual Abstract_string_from_propstylelist {
+  public:
+    Class_string_from_propstylelist();
+    virtual ~Class_string_from_propstylelist() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func string<-propstyleunique)
+  class Abstract_string_from_propstyleunique : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_string_from_propstyleunique() {};
+    virtual ~Abstract_string_from_propstyleunique() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_string_from_propstyleunique : public virtual Abstract_string_from_propstyleunique {
+  public:
+    Class_string_from_propstyleunique();
+    virtual ~Class_string_from_propstyleunique() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;

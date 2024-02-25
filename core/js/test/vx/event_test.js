@@ -23,13 +23,13 @@ export default class vx_event_test {
     return vx_core.f_new(
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/event", 
-      "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 2), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 4, ":total", 4), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 1), 
+      "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 4), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 9, ":total", 9), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 2), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 4), 
-      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 1)
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 9), 
+      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3)
     )
   }
 
@@ -40,18 +40,23 @@ export default class vx_event_test {
       "typemap",
         vx_core.f_new(
           vx_core.t_intmap,
-          "event", 0
+          "event", 0,
+          "eventlist", 0,
+          "eventmap", 0
         ),
       "constmap",
         vx_core.f_new(
           vx_core.t_intmap,
+          "event-change", 0,
           "event-click", 0,
-          "event-move", 0
+          "event-move", 0,
+          "event-select", 0
         ),
       "funcmap",
         vx_core.f_new(
           vx_core.t_intmap,
-          "any<-from-to", 0
+          "event<-event", 0,
+          "eventmap<-eventlist", 0
         )
     )
   }

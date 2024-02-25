@@ -20,6 +20,9 @@ import com.vxlisp.vx.translation.AllTest;
 import com.vxlisp.vx.translation.EnTest;
 import com.vxlisp.vx.translation.EsTest;
 import com.vxlisp.vx.TypeTest;
+import com.vxlisp.vx.ui.html.UihtmlTest;
+import com.vxlisp.vx.ui.svg.UisvgTest;
+import com.vxlisp.vx.ui.UiTest;
 import com.vxlisp.vx.web.HtmlTest;
 import com.vxlisp.vx.web.HtmldocTest;
 import com.vxlisp.vx.web.HttpTest;
@@ -189,6 +192,30 @@ public final class AppTest {
 
 
   @Test
+  @DisplayName("vx/ui/html/uihtml")
+  void test_vx_ui_html_uihtml() {
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = UihtmlTest.test_package(context);
+	  TestLib.run_testpackage_async(testpackage);
+  }
+
+
+  @Test
+  @DisplayName("vx/ui/svg/uisvg")
+  void test_vx_ui_svg_uisvg() {
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = UisvgTest.test_package(context);
+	  TestLib.run_testpackage_async(testpackage);
+  }
+
+
+  @Test
+  @DisplayName("vx/ui/ui")
+  void test_vx_ui_ui() {
+	  com.vxlisp.vx.Test.Type_testpackage testpackage = UiTest.test_package(context);
+	  TestLib.run_testpackage_async(testpackage);
+  }
+
+
+  @Test
   @DisplayName("vx/web/html")
   void test_vx_web_html() {
 	  com.vxlisp.vx.Test.Type_testpackage testpackage = HtmlTest.test_package(context);
@@ -235,6 +262,9 @@ public final class AppTest {
     EnTest.test_package(context),
     EsTest.test_package(context),
     TypeTest.test_package(context),
+    UihtmlTest.test_package(context),
+    UisvgTest.test_package(context),
+    UiTest.test_package(context),
     HtmlTest.test_package(context),
     HtmldocTest.test_package(context),
     HttpTest.test_package(context)

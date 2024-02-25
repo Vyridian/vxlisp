@@ -1351,6 +1351,30 @@
          :b))
  :doc "Returns value from a map or empty if not found")
 
+/*
+(func any<-map-else : any-1
+ [valuemap  : map-1
+  key       : string
+  valueelse : any-1]
+ (let : any-1
+  [value : any-1 := (any<-map valuemap key)]
+  (if : any-1
+   (then
+    (!-empty value)
+    value)
+   (else
+    valueelse)))
+ :test (test
+        "v2"
+        (any<-map-else : string
+         (stringmap
+          :a "v1"
+          :c "v3")
+         :b
+         "v2"))
+ :doc "Returns value from a map or valueelse if not found")
+*/
+
 (func any<-map-start-reduce : any-1
  [map       : map-1
   start     : any-1
@@ -2404,9 +2428,10 @@
   code   : string
   detail : any]
  (msg
-  :code code
-  :path path
-  :severity msg-error)
+  :code     code
+  :path     path
+  :severity msg-error
+  :detail   detail)
  :doc "Returns a msg from error path code and detail")
 
 (func msg<-warning : msg

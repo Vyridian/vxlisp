@@ -23760,7 +23760,9 @@ namespace vx_core {
         vx_core::vx_new_string(":path"),
         path,
         vx_core::vx_new_string(":severity"),
-        vx_core::c_msg_error
+        vx_core::c_msg_error,
+        vx_core::vx_new_string(":detail"),
+        detail
       })
     );
     vx_core::vx_release_one_except({path, code, detail}, output);

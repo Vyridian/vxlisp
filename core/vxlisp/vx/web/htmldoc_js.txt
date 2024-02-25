@@ -1,0 +1,100 @@
+  static vx_any_data_from_id(id) {
+    let output = vx_core.e_any
+    const elem = document.getElementById(id)
+    if (elem != null) {
+      const elemdata = elem.getAttribute('data-data')
+      if (elemdata) {
+        output = elemdata
+      }
+    }
+    return output
+  }
+
+  static vx_boolean_replace_from_id_htmltext_data_eventmap(id, htmltext, data, eventmap) {
+    let output = vx_core.c_false
+    const elem = document.getElementById(id)
+    if (elem != null) {
+      elem.outerHTML = htmltext
+      output = vx_core.c_true
+    }
+    return output
+  }
+
+  static vx_boolean_replace_from_id_htmltext_data_eventmap(id, htmltext, data, eventmap) {
+    let output = vx_core.c_false
+    let elem = document.getElementById(id)
+    if (elem != null) {
+      const eventmapold = elem.getAttribute('data-eventmap')
+      let issameevents = false
+      if (eventmapold == eventmap) {
+        issameevents = true
+      }
+      if (issameevents) {
+      } else if (eventmapold) {
+        for (const [key, event] of Object.entries(eventmap['vx_value'])) {
+          elem.removeEventListener(event)
+        }
+      }
+      elem.outerHTML = htmltext
+      elem = document.getElementById(id)
+      elem.setAttribute('data-data', data)
+      if (issameevents) {
+      } else if (eventmap == vx_event.e_eventmap) {
+      } else {
+        elem.setAttribute('data-eventmap', eventmap)
+        for (const [eventname, event] of Object.entries(eventmap['vx_value'])) {
+          const listener = (nativeevent) => {
+            const fn_event = event['vx_value']['event<-event']
+            const fn = fn_event['vx_value']['fn']
+            const eventchg = vx_web_htmldoc.vx_event_from_event_nativeevent(event, nativeevent)
+            const eventoutput = fn(eventchg)
+            return eventoutput
+          }
+          const nativeeventname = vx_web_htmldoc.vx_nativeeventname_from_eventname(eventname)
+          elem.addEventListener(nativeeventname, listener)
+        }
+      }
+      output = vx_core.c_true
+    }
+    return output
+  }
+
+  static vx_boolean_write_from_id_htmltext(id, htmltext) {
+   let output = vx_core.c_false
+   const elem = document.getElementById(id)
+    if (elem != null) {
+      elem.innerHTML = htmltext
+      output = vx_core.c_true
+    }
+    return output
+  }
+
+  static async vx_boolean_write_stylesheet_from_string(text) {
+    let output = vx_core.c_false
+    const cssstylesheet = new CSSStyleSheet()
+    document.adoptedStyleSheets = [cssstylesheet]
+    output = await cssstylesheet.replace(text)
+    return output
+  }
+
+  static vx_event_from_event_nativeevent(event, nativeevent) {
+    let output = event
+    return output
+  }
+
+  static vx_nativeeventname_from_eventname(eventname) {
+    let output = eventname
+    return output
+  }
+
+  static vx_string_from_id(id) {
+    let output = vx_core.e_string
+    const elem = document.getElementById(id)
+    if (!elem) {
+    } else if (elem.value) {
+      output = elem.value
+    } else if (elem.value) {
+      output = elem.innerHTML
+    }
+    return output
+  }

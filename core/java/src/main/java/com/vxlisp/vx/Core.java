@@ -23357,7 +23357,9 @@ public final class Core {
         Core.vx_new_string(":path"),
         path,
         Core.vx_new_string(":severity"),
-        Core.c_msg_error
+        Core.c_msg_error,
+        Core.vx_new_string(":detail"),
+        detail
       )
     );
     return output;
