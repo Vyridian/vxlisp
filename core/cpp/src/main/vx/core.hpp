@@ -243,6 +243,10 @@ namespace vx_core {
   typedef Abstract_statelistener* Type_statelistener;
   extern Type_statelistener e_statelistener;
   extern Type_statelistener t_statelistener;
+  class Abstract_statelistenermap;
+  typedef Abstract_statelistenermap* Type_statelistenermap;
+  extern Type_statelistenermap e_statelistenermap;
+  extern Type_statelistenermap t_statelistenermap;
   class Abstract_string;
   typedef Abstract_string* Type_string;
   extern Type_string e_string;
@@ -597,6 +601,10 @@ namespace vx_core {
   typedef Abstract_boolean_permission_from_func* Func_boolean_permission_from_func;
   extern Func_boolean_permission_from_func e_boolean_permission_from_func;
   extern Func_boolean_permission_from_func t_boolean_permission_from_func;
+  class Abstract_boolean_write_from_map_name_value;
+  typedef Abstract_boolean_write_from_map_name_value* Func_boolean_write_from_map_name_value;
+  extern Func_boolean_write_from_map_name_value e_boolean_write_from_map_name_value;
+  extern Func_boolean_write_from_map_name_value t_boolean_write_from_map_name_value;
   class Abstract_boolean_from_any;
   typedef Abstract_boolean_from_any* Func_boolean_from_any;
   extern Func_boolean_from_any e_boolean_from_any;
@@ -3482,6 +3490,9 @@ namespace vx_core {
   // (func boolean-permission<-func)
   vx_core::Type_boolean f_boolean_permission_from_func(vx_core::Type_context context, vx_core::Type_func func);
 
+  // (func boolean-write<-map-name-value)
+  vx_core::Type_boolean f_boolean_write_from_map_name_value(vx_core::Type_map valuemap, vx_core::Type_string name, vx_core::Type_any value);
+
   // (func compare)
   vx_core::Type_int f_compare(vx_core::Type_any val1, vx_core::Type_any val2);
 
@@ -4960,21 +4971,17 @@ namespace vx_core {
   };
 
   // (type state)
-  class Abstract_state : public virtual vx_core::Abstract_map {
+  class Abstract_state : public virtual vx_core::Abstract_struct {
   public:
     Abstract_state() {};
     virtual ~Abstract_state() = 0;
-    // vx_get_any(key)
-    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
-    // vx_new_from_map(T, Map<T>)
-    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
-    std::map<std::string, vx_core::Type_statelistener> vx_p_map;
-    // vx_mapstatelistener()
-    virtual std::map<std::string, vx_core::Type_statelistener> vx_mapstatelistener() const = 0;
-    // vx_get_statelistener(key)
-    virtual vx_core::Type_statelistener vx_get_statelistener(vx_core::Type_string key) const = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    // statelistenermap()
+    vx_core::Type_statelistenermap vx_p_statelistenermap = NULL;
+    virtual vx_core::Type_statelistenermap statelistenermap() const = 0;
   };
   class Class_state : public virtual Abstract_state {
   public:
@@ -4988,11 +4995,9 @@ namespace vx_core {
     virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
-    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
-    virtual std::map<std::string, vx_core::Type_statelistener> vx_mapstatelistener() const override;
-    virtual vx_core::Type_statelistener vx_get_statelistener(vx_core::Type_string key) const override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_core::Type_statelistenermap statelistenermap() const override;
   };
 
   // (type statelistener)
@@ -5004,9 +5009,9 @@ namespace vx_core {
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
     // vx_get_any(key)
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
-    // path()
-    vx_core::Type_string vx_p_path = NULL;
-    virtual vx_core::Type_string path() const = 0;
+    // name()
+    vx_core::Type_string vx_p_name = NULL;
+    virtual vx_core::Type_string name() const = 0;
     // value()
     vx_core::Type_any vx_p_value = NULL;
     virtual vx_core::Type_any value() const = 0;
@@ -5028,9 +5033,45 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
-    virtual vx_core::Type_string path() const override;
+    virtual vx_core::Type_string name() const override;
     virtual vx_core::Type_any value() const override;
     virtual vx_core::Func_boolean_from_none fn_boolean() const override;
+  };
+
+  // (type statelistenermap)
+  class Abstract_statelistenermap : public virtual vx_core::Abstract_map {
+  public:
+    Abstract_statelistenermap() {};
+    virtual ~Abstract_statelistenermap() = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    // vx_map()
+    virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_new_from_map(T, Map<T>)
+    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
+    std::map<std::string, vx_core::Type_statelistener> vx_p_map;
+    // vx_mapstatelistener()
+    virtual std::map<std::string, vx_core::Type_statelistener> vx_mapstatelistener() const = 0;
+    // vx_get_statelistener(key)
+    virtual vx_core::Type_statelistener vx_get_statelistener(vx_core::Type_string key) const = 0;
+  };
+  class Class_statelistenermap : public virtual Abstract_statelistenermap {
+  public:
+    Class_statelistenermap();
+    virtual ~Class_statelistenermap() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
+    virtual std::map<std::string, vx_core::Type_statelistener> vx_mapstatelistener() const override;
+    virtual vx_core::Type_statelistener vx_get_statelistener(vx_core::Type_string key) const override;
   };
 
   // (type stringlist)
@@ -6420,6 +6461,29 @@ namespace vx_core {
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func boolean-write<-map-name-value)
+  class Abstract_boolean_write_from_map_name_value : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_boolean_write_from_map_name_value() {};
+    virtual ~Abstract_boolean_write_from_map_name_value() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_boolean_write_from_map_name_value : public virtual Abstract_boolean_write_from_map_name_value {
+  public:
+    Class_boolean_write_from_map_name_value();
+    virtual ~Class_boolean_write_from_map_name_value() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 

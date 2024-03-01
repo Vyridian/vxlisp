@@ -1,104 +1,12 @@
 #include "../../vx/core.hpp"
 #include "../../vx/event.hpp"
 #include "../../vx/web/html.hpp"
+#include "../../vx/ui/ui.hpp"
 #include "htmldoc.hpp"
 
 namespace vx_web_htmldoc {
 
 
-
-  // (func any-data<-id)
-  vx_core::Type_any f_any_data_from_id(vx_core::Type_string id) {
-    vx_core::Type_any output = vx_core::e_any;
-    vx_core::vx_reserve(id);
-    vx_core::vx_release_one_except(id, output);
-    return output;
-  }
-
-  // (func any-data<-id)
-  // class Class_any_data_from_id {
-    Abstract_any_data_from_id::~Abstract_any_data_from_id() {}
-
-    Class_any_data_from_id::Class_any_data_from_id() : Abstract_any_data_from_id::Abstract_any_data_from_id() {
-      vx_core::refcount += 1;
-    }
-
-    Class_any_data_from_id::~Class_any_data_from_id() {
-      vx_core::refcount -= 1;
-      if (this->vx_p_msgblock) {
-        vx_core::vx_release_one(this->vx_p_msgblock);
-      }
-    }
-
-    vx_core::Type_any Class_any_data_from_id::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_web_htmldoc::Func_any_data_from_id output = vx_web_htmldoc::e_any_data_from_id;
-      vx_core::vx_release(vals);
-      return output;
-    }
-
-    vx_core::Type_any Class_any_data_from_id::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_web_htmldoc::Func_any_data_from_id output = vx_web_htmldoc::e_any_data_from_id;
-      vx_core::vx_release_except(copyval, output);
-      vx_core::vx_release_except(vals, output);
-      return output;
-    }
-
-    vx_core::Type_typedef Class_any_data_from_id::vx_typedef() const {
-      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/web/htmldoc", // pkgname
-        "any-data<-id", // name
-        ":func", // extends
-        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
-        vx_core::e_typelist, // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-      return output;
-    }
-
-    vx_core::Type_constdef Class_any_data_from_id::vx_constdef() const {return this->vx_p_constdef;}
-
-    vx_core::Type_funcdef Class_any_data_from_id::vx_funcdef() const {
-      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
-        "vx/web/htmldoc", // pkgname
-        "any-data<-id", // name
-        0, // idx
-        false, // async
-        this->vx_typedef() // typedef
-      );
-      return output;
-    }
-
-    vx_core::Type_any Class_any_data_from_id::vx_empty() const {return vx_web_htmldoc::e_any_data_from_id;}
-    vx_core::Type_any Class_any_data_from_id::vx_type() const {return vx_web_htmldoc::t_any_data_from_id;}
-    vx_core::Type_msgblock Class_any_data_from_id::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany Class_any_data_from_id::vx_dispose() {return vx_core::emptylistany;}
-
-    vx_core::Func_any_from_any Class_any_data_from_id::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
-      return vx_core::e_any_from_any;
-    }
-
-    vx_core::Type_any Class_any_data_from_id::vx_any_from_any(vx_core::Type_any val) const {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string, val);
-      output = vx_web_htmldoc::f_any_data_from_id(inputval);
-      vx_core::vx_release_except(val, output);
-      return output;
-    }
-
-    vx_core::Type_any Class_any_data_from_id::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string id = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_web_htmldoc::f_any_data_from_id(id);
-      vx_core::vx_release_except(arglist, output);
-      return output;
-    }
-
-  //}
 
   // (func boolean-replace<-id-htmltext)
   vx_core::Type_boolean f_boolean_replace_from_id_htmltext(vx_core::Type_string id, vx_core::Type_string htmltext) {
@@ -182,46 +90,46 @@ namespace vx_web_htmldoc {
 
   //}
 
-  // (func boolean-replace<-id-htmltext-data-eventmap)
-  vx_core::Type_boolean f_boolean_replace_from_id_htmltext_data_eventmap(vx_core::Type_string id, vx_core::Type_string htmltext, vx_core::Type_any data, vx_event::Type_eventmap eventmap) {
+  // (func boolean-replace<-ui-htmltext)
+  vx_core::Type_boolean f_boolean_replace_from_ui_htmltext(vx_ui_ui::Type_ui ui, vx_core::Type_string htmltext) {
     vx_core::Type_boolean output = vx_core::e_boolean;
-    vx_core::vx_reserve({id, htmltext, data, eventmap});
-    vx_core::vx_release_one_except({id, htmltext, data, eventmap}, output);
+    vx_core::vx_reserve({ui, htmltext});
+    vx_core::vx_release_one_except({ui, htmltext}, output);
     return output;
   }
 
-  // (func boolean-replace<-id-htmltext-data-eventmap)
-  // class Class_boolean_replace_from_id_htmltext_data_eventmap {
-    Abstract_boolean_replace_from_id_htmltext_data_eventmap::~Abstract_boolean_replace_from_id_htmltext_data_eventmap() {}
+  // (func boolean-replace<-ui-htmltext)
+  // class Class_boolean_replace_from_ui_htmltext {
+    Abstract_boolean_replace_from_ui_htmltext::~Abstract_boolean_replace_from_ui_htmltext() {}
 
-    Class_boolean_replace_from_id_htmltext_data_eventmap::Class_boolean_replace_from_id_htmltext_data_eventmap() : Abstract_boolean_replace_from_id_htmltext_data_eventmap::Abstract_boolean_replace_from_id_htmltext_data_eventmap() {
+    Class_boolean_replace_from_ui_htmltext::Class_boolean_replace_from_ui_htmltext() : Abstract_boolean_replace_from_ui_htmltext::Abstract_boolean_replace_from_ui_htmltext() {
       vx_core::refcount += 1;
     }
 
-    Class_boolean_replace_from_id_htmltext_data_eventmap::~Class_boolean_replace_from_id_htmltext_data_eventmap() {
+    Class_boolean_replace_from_ui_htmltext::~Class_boolean_replace_from_ui_htmltext() {
       vx_core::refcount -= 1;
       if (this->vx_p_msgblock) {
         vx_core::vx_release_one(this->vx_p_msgblock);
       }
     }
 
-    vx_core::Type_any Class_boolean_replace_from_id_htmltext_data_eventmap::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_web_htmldoc::Func_boolean_replace_from_id_htmltext_data_eventmap output = vx_web_htmldoc::e_boolean_replace_from_id_htmltext_data_eventmap;
+    vx_core::Type_any Class_boolean_replace_from_ui_htmltext::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_web_htmldoc::Func_boolean_replace_from_ui_htmltext output = vx_web_htmldoc::e_boolean_replace_from_ui_htmltext;
       vx_core::vx_release(vals);
       return output;
     }
 
-    vx_core::Type_any Class_boolean_replace_from_id_htmltext_data_eventmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_web_htmldoc::Func_boolean_replace_from_id_htmltext_data_eventmap output = vx_web_htmldoc::e_boolean_replace_from_id_htmltext_data_eventmap;
+    vx_core::Type_any Class_boolean_replace_from_ui_htmltext::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_web_htmldoc::Func_boolean_replace_from_ui_htmltext output = vx_web_htmldoc::e_boolean_replace_from_ui_htmltext;
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
       return output;
     }
 
-    vx_core::Type_typedef Class_boolean_replace_from_id_htmltext_data_eventmap::vx_typedef() const {
+    vx_core::Type_typedef Class_boolean_replace_from_ui_htmltext::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/web/htmldoc", // pkgname
-        "boolean-replace<-id-htmltext-data-eventmap", // name
+        "boolean-replace<-ui-htmltext", // name
         ":func", // extends
         vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
@@ -235,12 +143,12 @@ namespace vx_web_htmldoc {
       return output;
     }
 
-    vx_core::Type_constdef Class_boolean_replace_from_id_htmltext_data_eventmap::vx_constdef() const {return this->vx_p_constdef;}
+    vx_core::Type_constdef Class_boolean_replace_from_ui_htmltext::vx_constdef() const {return this->vx_p_constdef;}
 
-    vx_core::Type_funcdef Class_boolean_replace_from_id_htmltext_data_eventmap::vx_funcdef() const {
+    vx_core::Type_funcdef Class_boolean_replace_from_ui_htmltext::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/web/htmldoc", // pkgname
-        "boolean-replace<-id-htmltext-data-eventmap", // name
+        "boolean-replace<-ui-htmltext", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
@@ -248,18 +156,16 @@ namespace vx_web_htmldoc {
       return output;
     }
 
-    vx_core::Type_any Class_boolean_replace_from_id_htmltext_data_eventmap::vx_empty() const {return vx_web_htmldoc::e_boolean_replace_from_id_htmltext_data_eventmap;}
-    vx_core::Type_any Class_boolean_replace_from_id_htmltext_data_eventmap::vx_type() const {return vx_web_htmldoc::t_boolean_replace_from_id_htmltext_data_eventmap;}
-    vx_core::Type_msgblock Class_boolean_replace_from_id_htmltext_data_eventmap::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany Class_boolean_replace_from_id_htmltext_data_eventmap::vx_dispose() {return vx_core::emptylistany;}
+    vx_core::Type_any Class_boolean_replace_from_ui_htmltext::vx_empty() const {return vx_web_htmldoc::e_boolean_replace_from_ui_htmltext;}
+    vx_core::Type_any Class_boolean_replace_from_ui_htmltext::vx_type() const {return vx_web_htmldoc::t_boolean_replace_from_ui_htmltext;}
+    vx_core::Type_msgblock Class_boolean_replace_from_ui_htmltext::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_boolean_replace_from_ui_htmltext::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Type_any Class_boolean_replace_from_id_htmltext_data_eventmap::vx_repl(vx_core::Type_anylist arglist) {
+    vx_core::Type_any Class_boolean_replace_from_ui_htmltext::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string id = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_ui_ui::Type_ui ui = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_string htmltext = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(1)));
-      vx_core::Type_any data = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(2)));
-      vx_event::Type_eventmap eventmap = vx_core::vx_any_from_any(vx_event::t_eventmap, arglist->vx_get_any(vx_core::vx_new_int(3)));
-      output = vx_web_htmldoc::f_boolean_replace_from_id_htmltext_data_eventmap(id, htmltext, data, eventmap);
+      output = vx_web_htmldoc::f_boolean_replace_from_ui_htmltext(ui, htmltext);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -558,6 +464,163 @@ namespace vx_web_htmldoc {
 
   //}
 
+  // (func context-read)
+  vx_core::Type_context f_context_read() {
+    vx_core::Type_context output = vx_core::e_context;
+    return output;
+  }
+
+  // (func context-read)
+  // class Class_context_read {
+    Abstract_context_read::~Abstract_context_read() {}
+
+    Class_context_read::Class_context_read() : Abstract_context_read::Abstract_context_read() {
+      vx_core::refcount += 1;
+    }
+
+    Class_context_read::~Class_context_read() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_context_read::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_web_htmldoc::Func_context_read output = vx_web_htmldoc::e_context_read;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_context_read::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_web_htmldoc::Func_context_read output = vx_web_htmldoc::e_context_read;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_context_read::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/web/htmldoc", // pkgname
+        "context-read", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_context_read::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_context_read::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/web/htmldoc", // pkgname
+        "context-read", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_context_read::vx_empty() const {return vx_web_htmldoc::e_context_read;}
+    vx_core::Type_any Class_context_read::vx_type() const {return vx_web_htmldoc::t_context_read;}
+    vx_core::Type_msgblock Class_context_read::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_context_read::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_context_read::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      output = vx_web_htmldoc::f_context_read();
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func context-write)
+  vx_core::Type_context f_context_write(vx_core::Type_context context) {
+    vx_core::Type_context output = vx_core::e_context;
+    return output;
+  }
+
+  // (func context-write)
+  // class Class_context_write {
+    Abstract_context_write::~Abstract_context_write() {}
+
+    Class_context_write::Class_context_write() : Abstract_context_write::Abstract_context_write() {
+      vx_core::refcount += 1;
+    }
+
+    Class_context_write::~Class_context_write() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_context_write::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_web_htmldoc::Func_context_write output = vx_web_htmldoc::e_context_write;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_context_write::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_web_htmldoc::Func_context_write output = vx_web_htmldoc::e_context_write;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_context_write::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/web/htmldoc", // pkgname
+        "context-write", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_context_write::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_context_write::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/web/htmldoc", // pkgname
+        "context-write", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_context_write::vx_empty() const {return vx_web_htmldoc::e_context_write;}
+    vx_core::Type_any Class_context_write::vx_type() const {return vx_web_htmldoc::t_context_write;}
+    vx_core::Type_msgblock Class_context_write::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_context_write::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_context_write::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_web_htmldoc::f_context_write(context);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func string<-id)
   vx_core::Type_string f_string_from_id(vx_core::Type_string id) {
     vx_core::Type_string output = vx_core::e_string;
@@ -651,38 +714,131 @@ namespace vx_web_htmldoc {
 
   //}
 
-  vx_web_htmldoc::Func_any_data_from_id e_any_data_from_id = NULL;
-  vx_web_htmldoc::Func_any_data_from_id t_any_data_from_id = NULL;
+  // (func ui-readstate<-uid)
+  vx_core::Type_any f_ui_readstate_from_uid(vx_core::Type_string uid) {
+    vx_core::Type_any output = vx_core::e_any;
+    vx_core::vx_reserve(uid);
+    vx_core::vx_release_one_except(uid, output);
+    return output;
+  }
+
+  // (func ui-readstate<-uid)
+  // class Class_ui_readstate_from_uid {
+    Abstract_ui_readstate_from_uid::~Abstract_ui_readstate_from_uid() {}
+
+    Class_ui_readstate_from_uid::Class_ui_readstate_from_uid() : Abstract_ui_readstate_from_uid::Abstract_ui_readstate_from_uid() {
+      vx_core::refcount += 1;
+    }
+
+    Class_ui_readstate_from_uid::~Class_ui_readstate_from_uid() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_ui_readstate_from_uid::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_web_htmldoc::Func_ui_readstate_from_uid output = vx_web_htmldoc::e_ui_readstate_from_uid;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_ui_readstate_from_uid::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_web_htmldoc::Func_ui_readstate_from_uid output = vx_web_htmldoc::e_ui_readstate_from_uid;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_ui_readstate_from_uid::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/web/htmldoc", // pkgname
+        "ui-readstate<-uid", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_ui_readstate_from_uid::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_ui_readstate_from_uid::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/web/htmldoc", // pkgname
+        "ui-readstate<-uid", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_ui_readstate_from_uid::vx_empty() const {return vx_web_htmldoc::e_ui_readstate_from_uid;}
+    vx_core::Type_any Class_ui_readstate_from_uid::vx_type() const {return vx_web_htmldoc::t_ui_readstate_from_uid;}
+    vx_core::Type_msgblock Class_ui_readstate_from_uid::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_ui_readstate_from_uid::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_ui_readstate_from_uid::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_ui_readstate_from_uid::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string, val);
+      output = vx_web_htmldoc::f_ui_readstate_from_uid(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_ui_readstate_from_uid::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string uid = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_web_htmldoc::f_ui_readstate_from_uid(uid);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   vx_web_htmldoc::Func_boolean_replace_from_id_htmltext e_boolean_replace_from_id_htmltext = NULL;
   vx_web_htmldoc::Func_boolean_replace_from_id_htmltext t_boolean_replace_from_id_htmltext = NULL;
-  vx_web_htmldoc::Func_boolean_replace_from_id_htmltext_data_eventmap e_boolean_replace_from_id_htmltext_data_eventmap = NULL;
-  vx_web_htmldoc::Func_boolean_replace_from_id_htmltext_data_eventmap t_boolean_replace_from_id_htmltext_data_eventmap = NULL;
+  vx_web_htmldoc::Func_boolean_replace_from_ui_htmltext e_boolean_replace_from_ui_htmltext = NULL;
+  vx_web_htmldoc::Func_boolean_replace_from_ui_htmltext t_boolean_replace_from_ui_htmltext = NULL;
   vx_web_htmldoc::Func_boolean_write_stylesheet_from_string e_boolean_write_stylesheet_from_string = NULL;
   vx_web_htmldoc::Func_boolean_write_stylesheet_from_string t_boolean_write_stylesheet_from_string = NULL;
   vx_web_htmldoc::Func_boolean_write_from_id_htmltext e_boolean_write_from_id_htmltext = NULL;
   vx_web_htmldoc::Func_boolean_write_from_id_htmltext t_boolean_write_from_id_htmltext = NULL;
   vx_web_htmldoc::Func_boolean_write_from_stylesheet e_boolean_write_from_stylesheet = NULL;
   vx_web_htmldoc::Func_boolean_write_from_stylesheet t_boolean_write_from_stylesheet = NULL;
+  vx_web_htmldoc::Func_context_read e_context_read = NULL;
+  vx_web_htmldoc::Func_context_read t_context_read = NULL;
+  vx_web_htmldoc::Func_context_write e_context_write = NULL;
+  vx_web_htmldoc::Func_context_write t_context_write = NULL;
   vx_web_htmldoc::Func_string_from_id e_string_from_id = NULL;
   vx_web_htmldoc::Func_string_from_id t_string_from_id = NULL;
+  vx_web_htmldoc::Func_ui_readstate_from_uid e_ui_readstate_from_uid = NULL;
+  vx_web_htmldoc::Func_ui_readstate_from_uid t_ui_readstate_from_uid = NULL;
 
   // class vx_Class_package {
     vx_Class_package::vx_Class_package() {
       init();
     }
     void vx_Class_package::init() {
-      vx_web_htmldoc::e_any_data_from_id = new vx_web_htmldoc::Class_any_data_from_id();
-      vx_core::vx_reserve_empty(vx_web_htmldoc::e_any_data_from_id);
-      vx_web_htmldoc::t_any_data_from_id = new vx_web_htmldoc::Class_any_data_from_id();
-      vx_core::vx_reserve_type(vx_web_htmldoc::t_any_data_from_id);
       vx_web_htmldoc::e_boolean_replace_from_id_htmltext = new vx_web_htmldoc::Class_boolean_replace_from_id_htmltext();
       vx_core::vx_reserve_empty(vx_web_htmldoc::e_boolean_replace_from_id_htmltext);
       vx_web_htmldoc::t_boolean_replace_from_id_htmltext = new vx_web_htmldoc::Class_boolean_replace_from_id_htmltext();
       vx_core::vx_reserve_type(vx_web_htmldoc::t_boolean_replace_from_id_htmltext);
-      vx_web_htmldoc::e_boolean_replace_from_id_htmltext_data_eventmap = new vx_web_htmldoc::Class_boolean_replace_from_id_htmltext_data_eventmap();
-      vx_core::vx_reserve_empty(vx_web_htmldoc::e_boolean_replace_from_id_htmltext_data_eventmap);
-      vx_web_htmldoc::t_boolean_replace_from_id_htmltext_data_eventmap = new vx_web_htmldoc::Class_boolean_replace_from_id_htmltext_data_eventmap();
-      vx_core::vx_reserve_type(vx_web_htmldoc::t_boolean_replace_from_id_htmltext_data_eventmap);
+      vx_web_htmldoc::e_boolean_replace_from_ui_htmltext = new vx_web_htmldoc::Class_boolean_replace_from_ui_htmltext();
+      vx_core::vx_reserve_empty(vx_web_htmldoc::e_boolean_replace_from_ui_htmltext);
+      vx_web_htmldoc::t_boolean_replace_from_ui_htmltext = new vx_web_htmldoc::Class_boolean_replace_from_ui_htmltext();
+      vx_core::vx_reserve_type(vx_web_htmldoc::t_boolean_replace_from_ui_htmltext);
       vx_web_htmldoc::e_boolean_write_stylesheet_from_string = new vx_web_htmldoc::Class_boolean_write_stylesheet_from_string();
       vx_core::vx_reserve_empty(vx_web_htmldoc::e_boolean_write_stylesheet_from_string);
       vx_web_htmldoc::t_boolean_write_stylesheet_from_string = new vx_web_htmldoc::Class_boolean_write_stylesheet_from_string();
@@ -695,21 +851,35 @@ namespace vx_web_htmldoc {
       vx_core::vx_reserve_empty(vx_web_htmldoc::e_boolean_write_from_stylesheet);
       vx_web_htmldoc::t_boolean_write_from_stylesheet = new vx_web_htmldoc::Class_boolean_write_from_stylesheet();
       vx_core::vx_reserve_type(vx_web_htmldoc::t_boolean_write_from_stylesheet);
+      vx_web_htmldoc::e_context_read = new vx_web_htmldoc::Class_context_read();
+      vx_core::vx_reserve_empty(vx_web_htmldoc::e_context_read);
+      vx_web_htmldoc::t_context_read = new vx_web_htmldoc::Class_context_read();
+      vx_core::vx_reserve_type(vx_web_htmldoc::t_context_read);
+      vx_web_htmldoc::e_context_write = new vx_web_htmldoc::Class_context_write();
+      vx_core::vx_reserve_empty(vx_web_htmldoc::e_context_write);
+      vx_web_htmldoc::t_context_write = new vx_web_htmldoc::Class_context_write();
+      vx_core::vx_reserve_type(vx_web_htmldoc::t_context_write);
       vx_web_htmldoc::e_string_from_id = new vx_web_htmldoc::Class_string_from_id();
       vx_core::vx_reserve_empty(vx_web_htmldoc::e_string_from_id);
       vx_web_htmldoc::t_string_from_id = new vx_web_htmldoc::Class_string_from_id();
       vx_core::vx_reserve_type(vx_web_htmldoc::t_string_from_id);
+      vx_web_htmldoc::e_ui_readstate_from_uid = new vx_web_htmldoc::Class_ui_readstate_from_uid();
+      vx_core::vx_reserve_empty(vx_web_htmldoc::e_ui_readstate_from_uid);
+      vx_web_htmldoc::t_ui_readstate_from_uid = new vx_web_htmldoc::Class_ui_readstate_from_uid();
+      vx_core::vx_reserve_type(vx_web_htmldoc::t_ui_readstate_from_uid);
       vx_core::vx_Type_mapany maptype;
       vx_core::vx_Type_mapany mapconst;
       vx_core::vx_Type_mapfunc mapfunc;
       vx_core::vx_Type_mapany mapempty;
-      mapfunc["any-data<-id"] = vx_web_htmldoc::t_any_data_from_id;
       mapfunc["boolean-replace<-id-htmltext"] = vx_web_htmldoc::t_boolean_replace_from_id_htmltext;
-      mapfunc["boolean-replace<-id-htmltext-data-eventmap"] = vx_web_htmldoc::t_boolean_replace_from_id_htmltext_data_eventmap;
+      mapfunc["boolean-replace<-ui-htmltext"] = vx_web_htmldoc::t_boolean_replace_from_ui_htmltext;
       mapfunc["boolean-write-stylesheet<-string"] = vx_web_htmldoc::t_boolean_write_stylesheet_from_string;
       mapfunc["boolean-write<-id-htmltext"] = vx_web_htmldoc::t_boolean_write_from_id_htmltext;
       mapfunc["boolean-write<-stylesheet"] = vx_web_htmldoc::t_boolean_write_from_stylesheet;
+      mapfunc["context-read"] = vx_web_htmldoc::t_context_read;
+      mapfunc["context-write"] = vx_web_htmldoc::t_context_write;
       mapfunc["string<-id"] = vx_web_htmldoc::t_string_from_id;
+      mapfunc["ui-readstate<-uid"] = vx_web_htmldoc::t_ui_readstate_from_uid;
       vx_core::vx_global_package_set("vx/web/htmldoc", maptype, mapconst, mapfunc);
 	   }
   // }

@@ -22,11 +22,11 @@ public final class UihtmlTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/ui/html/uihtml", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 4), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 55, ":tests", 10, ":total", 18), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 14), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 14), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 14), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 18), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 52, ":tests", 10, ":total", 19), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 15), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 15), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 15), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 19), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
     );
   }
@@ -44,6 +44,7 @@ public final class UihtmlTest {
         ":layoutenginehtml", 0
       ),
       ":funcmap", Core.t_intmap.vx_new(
+        ":context-write", 0,
         ":divchild<-ui", 0,
         ":divchildlist<-uimap", 0,
         ":node-app<-ui-orig-parent", 0,

@@ -23,12 +23,12 @@ export default class vx_core_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/core", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 14, ":tests", 2, ":total", 14), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 89, ":tests", 221, ":total", 248), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 48, ":tests", 65, ":total", 135), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 89, ":tests", 224, ":total", 250), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 47, ":tests", 65, ":total", 136), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 32, ":tests", 72, ":total", 222), 
-      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 6, ":tests", 5, ":total", 73)
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 32, ":tests", 72, ":total", 224), 
+      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 6, ":tests", 5, ":total", 74)
     )
   }
 
@@ -97,6 +97,7 @@ export default class vx_core_test {
           "setting", 0,
           "state", 0,
           "statelistener", 0,
+          "statelistenermap", 0,
           "string", 2,
           "stringlist", 0,
           "stringmap", 0,
@@ -197,6 +198,7 @@ export default class vx_core_test {
           "any<-struct", 0,
           "async", 0,
           "boolean-permission<-func", 0,
+          "boolean-write<-map-name-value", 0,
           "boolean<-any", 0,
           "boolean<-func", 0,
           "boolean<-none", 0,
@@ -1592,15 +1594,15 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n \"v2\"\n (any<-map\n  (map\n   :a \"v1\"\n   :b \"v2\"\n   :c \"v3\")\n  :b))",
+            ":describename", "(test\n \"v2\"\n (any<-map\n  (stringmap\n   :a \"v1\"\n   :b \"v2\"\n   :c \"v3\")\n  :b))",
             ":testresult",
             vx_test.f_test(
               context,
               "v2",
               vx_core.f_any_from_map(
-                {"any-1": vx_core.t_any, "map-1": vx_core.t_map},
+                {"any-1": vx_core.t_string, "map-1": vx_core.t_stringmap},
                 vx_core.f_new(
-                  vx_core.t_map,
+                  vx_core.t_stringmap,
                   ":a",
                   "v1",
                   ":b",
@@ -1887,7 +1889,7 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n \"b\"\n (first<-list\n  (stringlist \"b\" \"c\")))",
+            ":describename", "(test\n \"b\"\n (first<-list\n  (stringlist\n   \"b\"\n   \"c\")))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -1918,13 +1920,13 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n \"b\"\n (first<-list-any<-any\n  (list nothing \"b\" \"c\")\n  resolve))",
+            ":describename", "(test\n \"b\"\n (first<-list-any<-any : string\n  (list nothing \"b\" \"c\")\n  resolve))",
             ":testresult",
             vx_test.f_test(
               context,
               "b",
               vx_core.f_first_from_list_any_from_any(
-                {"any-1": vx_core.t_any, "list-1": vx_core.t_list},
+                {"any-1": vx_core.t_string, "list-1": vx_core.t_list},
                 vx_core.f_new(
                   vx_core.t_list,
                   vx_core.c_nothing,
@@ -2318,15 +2320,15 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test \"c\" (last<-list (list \"b\" \"c\")))",
+            ":describename", "(test\n \"c\"\n (last<-list\n  (stringlist\n   \"b\"\n   \"c\")))",
             ":testresult",
             vx_test.f_test(
               context,
               "c",
               vx_core.f_last_from_list(
-                {"any-1": vx_core.t_any, "list-1": vx_core.t_list},
+                {"any-1": vx_core.t_string, "list-1": vx_core.t_stringlist},
                 vx_core.f_new(
-                  vx_core.t_list,
+                  vx_core.t_stringlist,
                   "b",
                   "c"
                 )

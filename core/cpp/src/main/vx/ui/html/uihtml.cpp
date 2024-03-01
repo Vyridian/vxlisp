@@ -128,6 +128,86 @@ namespace vx_ui_html_uihtml {
 
   //}
 
+  // (func context-write)
+  vx_core::Type_context f_context_write(vx_core::Type_context context) {
+    vx_core::Type_context output = vx_core::e_context;
+    output = vx_web_htmldoc::f_context_write(context);
+    return output;
+  }
+
+  // (func context-write)
+  // class Class_context_write {
+    Abstract_context_write::~Abstract_context_write() {}
+
+    Class_context_write::Class_context_write() : Abstract_context_write::Abstract_context_write() {
+      vx_core::refcount += 1;
+    }
+
+    Class_context_write::~Class_context_write() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_context_write::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_ui_html_uihtml::Func_context_write output = vx_ui_html_uihtml::e_context_write;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_context_write::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_ui_html_uihtml::Func_context_write output = vx_ui_html_uihtml::e_context_write;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_context_write::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "context-write", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_context_write::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_context_write::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "context-write", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_context_write::vx_empty() const {return vx_ui_html_uihtml::e_context_write;}
+    vx_core::Type_any Class_context_write::vx_type() const {return vx_ui_html_uihtml::t_context_write;}
+    vx_core::Type_msgblock Class_context_write::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_context_write::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_context_write::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_ui_html_uihtml::f_context_write(context);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func divchild<-ui)
   vx_web_html::Type_divchild f_divchild_from_ui(vx_ui_ui::Type_ui ui) {
     vx_web_html::Type_divchild output = vx_web_html::e_divchild;
@@ -453,17 +533,13 @@ namespace vx_ui_html_uihtml {
     vx_core::vx_reserve({node, ui});
     output = vx_core::f_let(
       vx_web_html::t_node,
-      vx_core::t_any_from_func->vx_fn_new({ui, node}, [ui, node]() {
-        vx_core::Type_string uid = ui->uid();
-        vx_core::vx_ref_plus(uid);
-        vx_event::Type_eventmap eventmap = ui->eventmap();
-        vx_core::vx_ref_plus(eventmap);
+      vx_core::t_any_from_func->vx_fn_new({node, ui}, [node, ui]() {
         vx_core::Type_string htmltext = vx_web_html::f_string_from_node_indent(node, vx_core::vx_new_int(2));
         vx_core::vx_ref_plus(htmltext);
-        vx_core::Type_boolean htmldone = vx_web_htmldoc::f_boolean_replace_from_id_htmltext_data_eventmap(uid, htmltext, ui, eventmap);
+        vx_core::Type_boolean htmldone = vx_web_htmldoc::f_boolean_replace_from_ui_htmltext(ui, htmltext);
         vx_core::vx_ref_plus(htmldone);
         vx_web_html::Type_node output_1 = node;
-        vx_core::vx_release_one_except({uid, eventmap, htmltext, htmldone}, output_1);
+        vx_core::vx_release_one_except({htmltext, htmldone}, output_1);
         return output_1;
       })
     );
@@ -2417,6 +2493,8 @@ namespace vx_ui_html_uihtml {
   vx_ui_html_uihtml::Const_layout_else_html c_layout_else_html = NULL;
   vx_ui_html_uihtml::Const_layout_label_html c_layout_label_html = NULL;
   vx_ui_html_uihtml::Const_layoutenginehtml c_layoutenginehtml = NULL;
+  vx_ui_html_uihtml::Func_context_write e_context_write = NULL;
+  vx_ui_html_uihtml::Func_context_write t_context_write = NULL;
   vx_ui_html_uihtml::Func_divchild_from_ui e_divchild_from_ui = NULL;
   vx_ui_html_uihtml::Func_divchild_from_ui t_divchild_from_ui = NULL;
   vx_ui_html_uihtml::Func_divchildlist_from_uimap e_divchildlist_from_uimap = NULL;
@@ -2455,6 +2533,10 @@ namespace vx_ui_html_uihtml {
       vx_ui_html_uihtml::c_layout_else_html = new vx_ui_html_uihtml::Class_layout_else_html();
       vx_ui_html_uihtml::c_layout_label_html = new vx_ui_html_uihtml::Class_layout_label_html();
       vx_ui_html_uihtml::c_layoutenginehtml = new vx_ui_html_uihtml::Class_layoutenginehtml();
+      vx_ui_html_uihtml::e_context_write = new vx_ui_html_uihtml::Class_context_write();
+      vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_context_write);
+      vx_ui_html_uihtml::t_context_write = new vx_ui_html_uihtml::Class_context_write();
+      vx_core::vx_reserve_type(vx_ui_html_uihtml::t_context_write);
       vx_ui_html_uihtml::e_divchild_from_ui = new vx_ui_html_uihtml::Class_divchild_from_ui();
       vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_divchild_from_ui);
       vx_ui_html_uihtml::t_divchild_from_ui = new vx_ui_html_uihtml::Class_divchild_from_ui();
@@ -2523,6 +2605,7 @@ namespace vx_ui_html_uihtml {
       mapconst["layout-else-html"] = vx_ui_html_uihtml::c_layout_else_html;
       mapconst["layout-label-html"] = vx_ui_html_uihtml::c_layout_label_html;
       mapconst["layoutenginehtml"] = vx_ui_html_uihtml::c_layoutenginehtml;
+      mapfunc["context-write"] = vx_ui_html_uihtml::t_context_write;
       mapfunc["divchild<-ui"] = vx_ui_html_uihtml::t_divchild_from_ui;
       mapfunc["divchildlist<-uimap"] = vx_ui_html_uihtml::t_divchildlist_from_uimap;
       mapfunc["node-app<-ui-orig-parent"] = vx_ui_html_uihtml::t_node_app_from_ui_orig_parent;

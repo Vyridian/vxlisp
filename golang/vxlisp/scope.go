@@ -154,6 +154,12 @@ func TypeFromListScope(listscope []vxscope, pkgname string, typename string, pat
 	if ipos < 0 {
 		ipos = IntFromStringFindLast(typename, "-3")
 	}
+	if ipos < 0 {
+		ipos = IntFromStringFindLast(typename, "-4")
+	}
+	if ipos < 0 {
+		ipos = IntFromStringFindLast(typename, "-5")
+	}
 	if ipos >= 0 {
 		typename = StringSubstring(typename, 0, ipos)
 		isgeneric = true
@@ -174,6 +180,7 @@ func TypeFromListScope(listscope []vxscope, pkgname string, typename string, pat
 	if ok && isgeneric {
 		typ = NewTypeCopy(typ)
 		typ.name = origname
+		typ.alias = "generic-" + origname
 		typ.isgeneric = true
 	}
 	return typ, ok

@@ -545,7 +545,7 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 			if fnc.generictype != nil && argtype.isgeneric {
 				argtypename = LangGenericFromType(lang, argtype)
 			} else {
-				argtypename = LangNameTypeFromType(lang, argtype)
+				argtypename = LangNameTypeFromTypeSimple(lang, argtype, true)
 			}
 			argtext := "final " + argtypename + " " + LangFromName(arg.alias)
 			listargname = append(listargname, LangFromName(arg.alias))
@@ -611,7 +611,7 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 			case 1:
 				argtypename := ""
 				arg := fnc.listarg[0]
-				argtypename = LangNameTypeFromType(lang, arg.vxtype)
+				argtypename = LangNameTypeFromTypeSimple(lang, arg.vxtype, true)
 				subargnames := "inputval"
 				contextname := ""
 				if fnc.context {
@@ -622,7 +622,7 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 				case "vx/core/empty":
 				default:
 					if fnc.generictype != nil {
-						subargnames = LangNameTFromType(lang, fnc.vxtype) + ", " + subargnames
+						subargnames = LangNameTFromTypeSimple(lang, fnc.vxtype, true) + ", " + subargnames
 					}
 				}
 				if fnc.async {
@@ -1918,7 +1918,9 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		"\n" +
 		instancefuncs +
 		"\n    @Override" +
-		"\n    public Type_" + typename + " vx_new(final Object... vals) {return e_" + typename + ".vx_copy(vals);}" +
+		"\n    public Type_" + typename + " vx_new(final Object... vals) {" +
+		"\n      return e_" + typename + ".vx_copy(vals);" +
+		"\n    }" +
 		"\n" +
 		"\n    @Override" +
 		"\n    public Type_" + typename + " vx_copy(final Object... vals) {" +
@@ -2185,7 +2187,7 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 											lambdavaluetext, msgs := LangFromValue(lang, lambdaarg.value, pkgname, fnc, argindent, true, test, argsubpath)
 											msgblock = MsgblockAddBlock(msgblock, msgs)
 											lambdatext += "" +
-												arglineindent + "final CompletableFuture<" + LangNameTypeFromType(lang, lambdaarg.vxtype) + "> future_" + LangFromName(lambdaarg.name) + " = " + lambdavaluetext + ";" +
+												arglineindent + "final CompletableFuture<" + LangNameTypeFromTypeSimple(lang, lambdaarg.vxtype, true) + "> future_" + LangFromName(lambdaarg.name) + " = " + lambdavaluetext + ";" +
 												arglineindent + "return " + LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "async_from_async_fn(future_" + LangFromName(lambdaarg.name) + ", (" + LangFromName(lambdaarg.name) + ") -> {"
 											aftertext += "" +
 												arglineindent + "});"
@@ -2193,7 +2195,7 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 										} else {
 											lambdavaluetext, msgs := LangFromValue(lang, lambdaarg.value, pkgname, fnc, argindent, true, test, argsubpath)
 											msgblock = MsgblockAddBlock(msgblock, msgs)
-											lambdatext += arglineindent + "final " + LangNameTypeFromType(lang, lambdaarg.vxtype) + " " + LangFromName(lambdaarg.name) + " = " + lambdavaluetext + ";"
+											lambdatext += arglineindent + "final " + LangNameTypeFromTypeSimple(lang, lambdaarg.vxtype, true) + " " + LangFromName(lambdaarg.name) + " = " + lambdavaluetext + ";"
 										}
 									}
 									work, msgs := LangFromValue(lang, argvalue, pkgname, fnc, 2, true, test, argsubpath)
@@ -2211,7 +2213,7 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 										lambdaargpath := argsubpath + "/:arg/" + lambdaarg.name
 										lambdavaluetext, msgs := LangFromValue(lang, lambdaarg.value, pkgname, fnc, argindent, true, test, lambdaargpath)
 										msgblock = MsgblockAddBlock(msgblock, msgs)
-										lambdatext += arglineindent + "final " + LangNameTypeFromType(lang, lambdaarg.vxtype) + " " + LangFromName(lambdaarg.name) + " = " + lambdavaluetext + ";"
+										lambdatext += arglineindent + "final " + LangNameTypeFromTypeSimple(lang, lambdaarg.vxtype, true) + " " + LangFromName(lambdaarg.name) + " = " + lambdavaluetext + ";"
 									}
 									work, msgs := LangFromValue(lang, argvalue, pkgname, fnc, 0, true, test, argsubpath)
 									msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -2443,7 +2445,7 @@ func LangGenericDefinitionFromFunc(lang *vxlang, fnc *vxfunc) string {
 	var mapgeneric = make(map[string]string)
 	if fnc.generictype != nil {
 		returntype := LangGenericFromType(lang, fnc.generictype)
-		mapgeneric[fnc.vxtype.name] = returntype + " extends " + LangNameTypeFromType(lang, fnc.vxtype)
+		mapgeneric[fnc.vxtype.name] = returntype + " extends " + LangNameTypeFromTypeSimple(lang, fnc.vxtype, true)
 		for _, arg := range fnc.listarg {
 			argtype := arg.vxtype
 			if !argtype.isfunc {
@@ -2451,7 +2453,7 @@ func LangGenericDefinitionFromFunc(lang *vxlang, fnc *vxfunc) string {
 					_, ok := mapgeneric[argtype.name]
 					if !ok {
 						argtypename := LangGenericFromType(lang, argtype)
-						worktext := argtypename + " extends " + LangNameTypeFromType(lang, arg.vxtype)
+						worktext := argtypename + " extends " + LangNameTypeFromTypeSimple(lang, arg.vxtype, true)
 						mapgeneric[argtype.name] = worktext
 					}
 				}
@@ -2851,7 +2853,7 @@ func LangInterfaceFnFromFunc(lang *vxlang, fnc *vxfunc) string {
 		for _, arg := range fnc.listarg {
 			argtype := arg.vxtype
 			argname := LangFromName(arg.alias)
-			argtypename := LangNameTypeFromType(lang, argtype)
+			argtypename := LangNameTypeFromTypeSimple(lang, argtype, true)
 			args = append(args, argtypename+" "+argname)
 		}
 		argnames := StringFromListStringJoin(args, ", ")
@@ -2909,7 +2911,7 @@ func LangInterfaceFromFunc(lang *vxlang, fnc *vxfunc) string {
 		}
 		for _, arg := range fnc.listarg {
 			argtype := arg.vxtype
-			argtypename := LangNameTypeFromType(lang, argtype)
+			argtypename := LangNameTypeFromTypeSimple(lang, argtype, true)
 			argname := LangFromName(arg.alias)
 			listargtext = append(listargtext, "final "+argtypename+" "+argname)
 		}
@@ -3073,26 +3075,44 @@ func LangNameClassFullFromType(lang *vxlang, typ *vxtype) string {
 func LangNameEFromType(lang *vxlang, typ *vxtype) string {
 	output := ""
 	if typ.isgeneric {
-		output = "Core.f_empty(generic_" + LangFromName(typ.name) + ")"
+		output = LangNameFromPkgName(lang, typ.pkgname) + lang.pkgref
+		if lang == langcpp {
+			output += "vx_empty"
+		} else {
+			output += "f_empty"
+		}
+		output += "(generic_" + LangFromName(typ.name) + ")"
 	} else {
 		output = "e_" + LangNameFromType(lang, typ)
 		if typ.pkgname != "" {
-			output = LangNameFromPkgName(lang, typ.pkgname) + "." + output
+			output = LangNameFromPkgName(lang, typ.pkgname) + lang.pkgref + output
 		}
 	}
 	return output
 }
 
+func LangNameEFromFunc(lang *vxlang, fnc *vxfunc) string {
+	name := "e_" + LangNameFromFunc(fnc)
+	if fnc.pkgname != "" {
+		name = LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + name
+	}
+	return name
+}
+
 func LangNameFFromFunc(lang *vxlang, fnc *vxfunc) string {
 	name := "f_" + LangNameFromFunc(fnc)
 	if fnc.pkgname != "" {
-		name = LangNameFromPkgName(lang, fnc.pkgname) + "." + name
+		name = LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + name
 	}
 	return name
 }
 
 func LangNameFromArg(lang *vxlang, arg vxarg) string {
 	return LangFromName(arg.alias)
+}
+
+func LangNameFromConst(cnst *vxconst) string {
+	return LangFromName(cnst.alias)
 }
 
 func LangNameFromFunc(fnc *vxfunc) string {
@@ -3122,11 +3142,21 @@ func LangNameFromPkgName(lang *vxlang, pkgname string) string {
 }
 
 func LangNameFromType(lang *vxlang, typ *vxtype) string {
+	return LangNameFromTypeSimple(lang, typ, false)
+}
+
+func LangNameFromTypeSimple(lang *vxlang, typ *vxtype, simple bool) string {
 	name := ""
-	if typ.alias == "" {
+	alias := typ.alias
+	if alias == "" {
 		name += LangFromName(typ.name)
 	} else {
-		name += LangFromName(typ.alias)
+		if simple && BooleanFromStringStarts(alias, "generic-") {
+			alias = StringFromStringFindReplace(alias, "generic-", "")
+			ipos := IntFromStringFindLast(alias, "-")
+			alias = alias[0:ipos]
+		}
+		name += LangFromName(alias)
 	}
 	return name
 }
@@ -3134,17 +3164,13 @@ func LangNameFromType(lang *vxlang, typ *vxtype) string {
 func LangNameTFromFunc(lang *vxlang, fnc *vxfunc) string {
 	name := "t_" + LangNameFromFunc(fnc)
 	if fnc.pkgname != "" {
-		name = LangNameFromPkgName(lang, fnc.pkgname) + "." + name
+		name = LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + name
 	}
 	return name
 }
 
 func LangNameTFromType(lang *vxlang, typ *vxtype) string {
-	name := "t_" + LangNameFromType(lang, typ)
-	if typ.pkgname != "" {
-		name = LangNameFromPkgName(lang, typ.pkgname) + lang.pkgref + name
-	}
-	return name
+	return LangNameTFromTypeSimple(lang, typ, false)
 }
 
 func LangNameTFromTypeGeneric(lang *vxlang, typ *vxtype) string {
@@ -3157,16 +3183,32 @@ func LangNameTFromTypeGeneric(lang *vxlang, typ *vxtype) string {
 	return name
 }
 
+func LangNameTFromTypeSimple(lang *vxlang, typ *vxtype, simple bool) string {
+	name := "t_" + LangNameFromTypeSimple(lang, typ, simple)
+	if typ.pkgname != "" {
+		name = LangNameFromPkgName(lang, typ.pkgname) + lang.pkgref + name
+	}
+	return name
+}
+
 func LangNameTypeFromType(lang *vxlang, typ *vxtype) string {
-	name := LangNameTypeFullFromType(lang, typ)
-	switch name {
-	case "Core.Type_none":
+	return LangNameTypeFromTypeSimple(lang, typ, false)
+}
+
+func LangNameTypeFromTypeSimple(lang *vxlang, typ *vxtype, simple bool) string {
+	name := LangNameTypeFullFromTypeSimple(lang, typ, simple)
+	switch NameFromType(typ) {
+	case "vx/core/none":
 		name = "void"
 	}
 	return name
 }
 
 func LangNameTypeFullFromType(lang *vxlang, typ *vxtype) string {
+	return LangNameTypeFullFromTypeSimple(lang, typ, false)
+}
+
+func LangNameTypeFullFromTypeSimple(lang *vxlang, typ *vxtype, simple bool) string {
 	name := ""
 	switch typ {
 	case anylisttype:
@@ -3184,7 +3226,7 @@ func LangNameTypeFullFromType(lang *vxlang, typ *vxtype) string {
 		} else {
 			name += lang.pkgref + "Type_"
 		}
-		name += LangNameFromType(lang, typ)
+		name += LangNameFromTypeSimple(lang, typ, simple)
 	}
 	return name
 }
@@ -3282,8 +3324,8 @@ func LangReplFromFunc(lang *vxlang, fnc *vxfunc) string {
 		outputttype = "Core.t_any"
 		//emptytype = "Core.e_any"
 	default:
-		outputtype = LangNameTypeFromType(lang, fnc.vxtype)
-		outputttype = LangNameTFromType(lang, fnc.vxtype)
+		outputtype = LangNameTypeFromTypeSimple(lang, fnc.vxtype, true)
+		outputttype = LangNameTFromTypeSimple(lang, fnc.vxtype, true)
 		//emptytype = LangNameEFromType(fnc.vxtype)
 		returnvalue = "output = "
 	}
@@ -3307,7 +3349,7 @@ func LangReplFromFunc(lang *vxlang, fnc *vxfunc) string {
 		if (funcname == "let" || funcname == "let_async") && arg.name == "args" {
 		} else {
 			argname := LangFromName(arg.alias)
-			replparam := LangNameTypeFromType(lang, arg.vxtype) + " " + argname + " = Core.f_any_from_any(" + LangNameTFromType(lang, arg.vxtype) + ", arglist.vx_any(Core.vx_new_int(" + StringFromInt(argidx) + ")));"
+			replparam := LangNameTypeFromTypeSimple(lang, arg.vxtype, true) + " " + argname + " = Core.f_any_from_any(" + LangNameTFromTypeSimple(lang, arg.vxtype, true) + ", arglist.vx_any(Core.vx_new_int(" + StringFromInt(argidx) + ")));"
 			replparams += "\n      " + replparam
 			listargname = append(listargname, argname)
 			argidx += 1

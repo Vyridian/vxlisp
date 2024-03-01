@@ -897,8 +897,8 @@ export default class vx_test {
   /**
    * @function test
    * Test expected equal actual
-   * @param  {any} expected
-   * @param  {any} actual
+   * @param  {generic_any_1} expected
+   * @param  {generic_any_2} actual
    * @return {testresult}
    */
   static t_test = {

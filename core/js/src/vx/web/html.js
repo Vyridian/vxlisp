@@ -721,7 +721,7 @@ export default class vx_web_html {
   /**
    * @function string_from_node_indent
    * Returns a string from any node
-   * @param  {any} node
+   * @param  {generic_any_1} node
    * @param  {int} indent
    * @return {string}
    */
@@ -864,7 +864,7 @@ export default class vx_web_html {
   /**
    * @function string_from_nodelist_indent
    * Returns a string from any node
-   * @param  {list} nodelist
+   * @param  {generic_list_1} nodelist
    * @param  {int} indent
    * @return {string}
    */
@@ -897,7 +897,7 @@ export default class vx_web_html {
   /**
    * @function string_from_nodelist_tag_prop_indent
    * Returns string from generic nodelist
-   * @param  {list} nodes
+   * @param  {generic_list_1} nodes
    * @param  {string} tag
    * @param  {string} prop
    * @param  {int} indent

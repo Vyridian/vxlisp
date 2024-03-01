@@ -110,7 +110,9 @@ public final class Tree {
     }
 
     @Override
-    public Type_branch vx_new(final Object... vals) {return e_branch.vx_copy(vals);}
+    public Type_branch vx_new(final Object... vals) {
+      return e_branch.vx_copy(vals);
+    }
 
     @Override
     public Type_branch vx_copy(final Object... vals) {
@@ -364,7 +366,9 @@ public final class Tree {
   public static class Class_brancharrow extends Core.Class_base implements Type_brancharrow {
 
     @Override
-    public Type_brancharrow vx_new(final Object... vals) {return e_brancharrow.vx_copy(vals);}
+    public Type_brancharrow vx_new(final Object... vals) {
+      return e_brancharrow.vx_copy(vals);
+    }
 
     @Override
     public Type_brancharrow vx_copy(final Object... vals) {
@@ -453,7 +457,9 @@ public final class Tree {
     }
 
     @Override
-    public Type_branchlist vx_new(final Object... vals) {return e_branchlist.vx_copy(vals);}
+    public Type_branchlist vx_new(final Object... vals) {
+      return e_branchlist.vx_copy(vals);
+    }
 
     @Override
     public Type_branchlist vx_copy(final Object... vals) {
@@ -602,7 +608,9 @@ public final class Tree {
     }
 
     @Override
-    public Type_leaf vx_new(final Object... vals) {return e_leaf.vx_copy(vals);}
+    public Type_leaf vx_new(final Object... vals) {
+      return e_leaf.vx_copy(vals);
+    }
 
     @Override
     public Type_leaf vx_copy(final Object... vals) {
@@ -817,7 +825,9 @@ public final class Tree {
     }
 
     @Override
-    public Type_leaflist vx_new(final Object... vals) {return e_leaflist.vx_copy(vals);}
+    public Type_leaflist vx_new(final Object... vals) {
+      return e_leaflist.vx_copy(vals);
+    }
 
     @Override
     public Type_leaflist vx_copy(final Object... vals) {
@@ -966,7 +976,9 @@ public final class Tree {
     }
 
     @Override
-    public Type_tree vx_new(final Object... vals) {return e_tree.vx_copy(vals);}
+    public Type_tree vx_new(final Object... vals) {
+      return e_tree.vx_copy(vals);
+    }
 
     @Override
     public Type_tree vx_copy(final Object... vals) {

@@ -52,7 +52,9 @@ public final class Db {
     }
 
     @Override
-    public Type_db vx_new(final Object... vals) {return e_db.vx_copy(vals);}
+    public Type_db vx_new(final Object... vals) {
+      return e_db.vx_copy(vals);
+    }
 
     @Override
     public Type_db vx_copy(final Object... vals) {
@@ -267,7 +269,9 @@ public final class Db {
     }
 
     @Override
-    public Type_dbcell vx_new(final Object... vals) {return e_dbcell.vx_copy(vals);}
+    public Type_dbcell vx_new(final Object... vals) {
+      return e_dbcell.vx_copy(vals);
+    }
 
     @Override
     public Type_dbcell vx_copy(final Object... vals) {
@@ -547,7 +551,9 @@ public final class Db {
     }
 
     @Override
-    public Type_dbcellmap vx_new(final Object... vals) {return e_dbcellmap.vx_copy(vals);}
+    public Type_dbcellmap vx_new(final Object... vals) {
+      return e_dbcellmap.vx_copy(vals);
+    }
 
     @Override
     public Type_dbcellmap vx_copy(final Object... vals) {
@@ -716,7 +722,9 @@ public final class Db {
     }
 
     @Override
-    public Type_dbfield vx_new(final Object... vals) {return e_dbfield.vx_copy(vals);}
+    public Type_dbfield vx_new(final Object... vals) {
+      return e_dbfield.vx_copy(vals);
+    }
 
     @Override
     public Type_dbfield vx_copy(final Object... vals) {
@@ -950,7 +958,9 @@ public final class Db {
     }
 
     @Override
-    public Type_dbfieldmap vx_new(final Object... vals) {return e_dbfieldmap.vx_copy(vals);}
+    public Type_dbfieldmap vx_new(final Object... vals) {
+      return e_dbfieldmap.vx_copy(vals);
+    }
 
     @Override
     public Type_dbfieldmap vx_copy(final Object... vals) {
@@ -1068,7 +1078,9 @@ public final class Db {
   public static class Class_dbid extends Core.Class_base implements Type_dbid {
 
     @Override
-    public Type_dbid vx_new(final Object... vals) {return e_dbid.vx_copy(vals);}
+    public Type_dbid vx_new(final Object... vals) {
+      return e_dbid.vx_copy(vals);
+    }
 
     @Override
     public Type_dbid vx_copy(final Object... vals) {
@@ -1170,7 +1182,9 @@ public final class Db {
     }
 
     @Override
-    public Type_dblink vx_new(final Object... vals) {return e_dblink.vx_copy(vals);}
+    public Type_dblink vx_new(final Object... vals) {
+      return e_dblink.vx_copy(vals);
+    }
 
     @Override
     public Type_dblink vx_copy(final Object... vals) {
@@ -1357,7 +1371,9 @@ public final class Db {
     }
 
     @Override
-    public Type_dblinklist vx_new(final Object... vals) {return e_dblinklist.vx_copy(vals);}
+    public Type_dblinklist vx_new(final Object... vals) {
+      return e_dblinklist.vx_copy(vals);
+    }
 
     @Override
     public Type_dblinklist vx_copy(final Object... vals) {
@@ -1495,7 +1511,9 @@ public final class Db {
     }
 
     @Override
-    public Type_dbnode vx_new(final Object... vals) {return e_dbnode.vx_copy(vals);}
+    public Type_dbnode vx_new(final Object... vals) {
+      return e_dbnode.vx_copy(vals);
+    }
 
     @Override
     public Type_dbnode vx_copy(final Object... vals) {
@@ -1730,7 +1748,9 @@ public final class Db {
     }
 
     @Override
-    public Type_dbnote vx_new(final Object... vals) {return e_dbnote.vx_copy(vals);}
+    public Type_dbnote vx_new(final Object... vals) {
+      return e_dbnote.vx_copy(vals);
+    }
 
     @Override
     public Type_dbnote vx_copy(final Object... vals) {
@@ -2025,7 +2045,9 @@ public final class Db {
     }
 
     @Override
-    public Type_dbtable vx_new(final Object... vals) {return e_dbtable.vx_copy(vals);}
+    public Type_dbtable vx_new(final Object... vals) {
+      return e_dbtable.vx_copy(vals);
+    }
 
     @Override
     public Type_dbtable vx_copy(final Object... vals) {
@@ -2321,7 +2343,9 @@ public final class Db {
     }
 
     @Override
-    public Type_dbvalue vx_new(final Object... vals) {return e_dbvalue.vx_copy(vals);}
+    public Type_dbvalue vx_new(final Object... vals) {
+      return e_dbvalue.vx_copy(vals);
+    }
 
     @Override
     public Type_dbvalue vx_copy(final Object... vals) {

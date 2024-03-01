@@ -525,19 +525,19 @@
                  (vx/web/html/p
                   :text "vx/core")
                  (vx/web/html/p
-                  :text "32% 72/222")
+                  :text "32% 72/224")
                  (vx/web/html/p
-                  :text "6% 5/73")
+                  :text "6% 5/74")
                  (vx/web/html/p
                   :text "14% 2/14")
                  (vx/web/html/p
-                  :text "48% 65/135")
+                  :text "47% 65/136")
                  (vx/web/html/p
-                  :text "89% 221/248")
+                  :text "89% 224/250")
                  (vx/web/html/p
-                  :text "0% 1/161")
+                  :text "0% 1/162")
                  (vx/web/html/p
-                  :text "0% 1/161"))
+                  :text "0% 1/162"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -2561,7 +2561,7 @@
                                  "(test
  \"v2\"
  (any<-map
-  (map
+  (stringmap
    :a \"v1\"
    :b \"v2\"
    :c \"v3\")
@@ -2966,7 +2966,9 @@
                                  "(test
  \"b\"
  (first<-list
-  (stringlist \"b\" \"c\")))")))
+  (stringlist
+   \"b\"
+   \"c\")))")))
                             (vx/web/html/td
                              :nodes
                               (vx/web/html/divchildlist
@@ -2997,7 +2999,7 @@
                                 :text
                                  "(test
  \"b\"
- (first<-list-any<-any
+ (first<-list-any<-any : string
   (list nothing \"b\" \"c\")
   resolve))")))
                             (vx/web/html/td
@@ -3680,7 +3682,13 @@
                              :nodes
                               (vx/web/html/divchildlist
                                (vx/web/html/p
-                                :text "(test \"c\" (last<-list (list \"b\" \"c\")))")))
+                                :text
+                                 "(test
+ \"c\"
+ (last<-list
+  (stringlist
+   \"b\"
+   \"c\")))")))
                             (vx/web/html/td
                              :nodes
                               (vx/web/html/divchildlist
@@ -18054,19 +18062,19 @@
                  (vx/web/html/p
                   :text "vx/event")
                  (vx/web/html/p
-                  :text "0% 0/9")
+                  :text "0% 0/10")
                  (vx/web/html/p
                   :text "0% 0/3")
                  (vx/web/html/p
                   :text "0% 0/4")
                  (vx/web/html/p
-                  :text "0% 0/2")
+                  :text "0% 0/3")
                  (vx/web/html/p
-                  :text "100% 9/9")
+                  :text "90% 9/10")
                  (vx/web/html/p
-                  :text "0% 0/2")
+                  :text "0% 0/3")
                  (vx/web/html/p
-                  :text "0% 0/2"))
+                  :text "0% 0/3"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -20034,19 +20042,19 @@
                  (vx/web/html/p
                   :text "vx/state")
                  (vx/web/html/p
-                  :text "0% 0/3")
+                  :text "0% 0/13")
                  (vx/web/html/p
                   :text "0% 0/1")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "0% 0/2")
+                  :text "0% 0/12")
                  (vx/web/html/p
-                  :text "33% 1/3")
+                  :text "84% 11/13")
                  (vx/web/html/p
-                  :text "0% 0/2")
+                  :text "0% 0/12")
                  (vx/web/html/p
-                  :text "0% 0/2"))
+                  :text "0% 0/12"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -22120,19 +22128,19 @@ ab
                  (vx/web/html/p
                   :text "vx/ui/html/uihtml")
                  (vx/web/html/p
-                  :text "0% 0/18")
+                  :text "0% 0/19")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
                   :text "0% 0/4")
                  (vx/web/html/p
-                  :text "0% 0/14")
+                  :text "0% 0/15")
                  (vx/web/html/p
-                  :text "55% 10/18")
+                  :text "52% 10/19")
                  (vx/web/html/p
-                  :text "0% 0/14")
+                  :text "0% 0/15")
                  (vx/web/html/p
-                  :text "0% 0/14"))
+                  :text "0% 0/15"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -22246,19 +22254,19 @@ ab
                  (vx/web/html/p
                   :text "vx/ui/ui")
                  (vx/web/html/p
-                  :text "0% 0/67")
+                  :text "0% 0/73")
                  (vx/web/html/p
                   :text "0% 0/21")
                  (vx/web/html/p
                   :text "0% 0/32")
                  (vx/web/html/p
-                  :text "0% 0/14")
+                  :text "0% 0/20")
                  (vx/web/html/p
-                  :text "41% 28/67")
+                  :text "46% 34/73")
                  (vx/web/html/p
-                  :text "0% 0/14")
+                  :text "0% 0/20")
                  (vx/web/html/p
-                  :text "0% 0/14"))
+                  :text "0% 0/20"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -22685,19 +22693,19 @@ ab
                  (vx/web/html/p
                   :text "vx/web/htmldoc")
                  (vx/web/html/p
-                  :text "0% 0/7")
+                  :text "0% 0/9")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "0% 0/7")
+                  :text "0% 0/9")
                  (vx/web/html/p
-                  :text "100% 7/7")
+                  :text "100% 9/9")
                  (vx/web/html/p
-                  :text "0% 0/7")
+                  :text "0% 0/9")
                  (vx/web/html/p
-                  :text "0% 0/7"))
+                  :text "0% 0/9"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div

@@ -745,8 +745,94 @@ namespace vx_event {
 
   //}
 
+  // (func any-from<-event)
+  // class Class_any_from_from_event {
+    Abstract_any_from_from_event::~Abstract_any_from_from_event() {}
+
+    Class_any_from_from_event::Class_any_from_from_event() : Abstract_any_from_from_event::Abstract_any_from_from_event() {
+      vx_core::refcount += 1;
+    }
+
+    Class_any_from_from_event::~Class_any_from_from_event() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_any_from_from_event::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_event::Func_any_from_from_event output = vx_event::e_any_from_from_event;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_any_from_from_event::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_event::Func_any_from_from_event output = vx_event::e_any_from_from_event;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_any_from_from_event::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/event", // pkgname
+        "any-from<-event", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_any_from_from_event::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_any_from_from_event::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/event", // pkgname
+        "any-from<-event", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_any_from_from_event::vx_empty() const {return vx_event::e_any_from_from_event;}
+    vx_core::Type_any Class_any_from_from_event::vx_type() const {return vx_event::t_any_from_from_event;}
+    vx_core::Type_msgblock Class_any_from_from_event::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_any_from_from_event::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_any_from_from_event::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_any_from_from_event::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_event::Type_event inputval = vx_core::vx_any_from_any(vx_event::t_event, val);
+      output = vx_event::f_any_from_from_event(vx_core::t_any, inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_any_from_from_event::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_any generic_any_1 = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_event::Type_event event = vx_core::vx_any_from_any(vx_event::t_event, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_event::f_any_from_from_event(generic_any_1, event);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func event<-event)
-  vx_event::Type_event f_event_from_event(vx_event::Type_event event) {
+  vx_event::Type_event f_event_from_event(vx_core::Type_context context, vx_event::Type_event event) {
     vx_event::Type_event output = vx_event::e_event;
     vx_core::vx_reserve(event);
     output = event;
@@ -817,22 +903,23 @@ namespace vx_event {
     vx_core::Type_msgblock Class_event_from_event::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_event_from_event::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_event_from_event::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
-      return vx_core::e_any_from_any;
+    vx_core::Func_any_from_any_context Class_event_from_event::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const {
+      return vx_core::e_any_from_any_context;
     }
 
-    vx_core::Type_any Class_event_from_event::vx_any_from_any(vx_core::Type_any val) const {
+    vx_core::Type_any Class_event_from_event::vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any val) const {
       vx_core::Type_any output = vx_core::e_any;
       vx_event::Type_event inputval = vx_core::vx_any_from_any(vx_event::t_event, val);
-      output = vx_event::f_event_from_event(inputval);
+      output = vx_event::f_event_from_event(context, inputval);
       vx_core::vx_release_except(val, output);
       return output;
     }
 
     vx_core::Type_any Class_event_from_event::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_event::Type_event event = vx_core::vx_any_from_any(vx_event::t_event, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_event::f_event_from_event(event);
+      output = vx_event::f_event_from_event(context, event);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -952,6 +1039,8 @@ namespace vx_event {
   vx_event::Const_event_click c_event_click = NULL;
   vx_event::Const_event_move c_event_move = NULL;
   vx_event::Const_event_select c_event_select = NULL;
+  vx_event::Func_any_from_from_event e_any_from_from_event = NULL;
+  vx_event::Func_any_from_from_event t_any_from_from_event = NULL;
   vx_event::Func_event_from_event e_event_from_event = NULL;
   vx_event::Func_event_from_event t_event_from_event = NULL;
   vx_event::Func_eventmap_from_eventlist e_eventmap_from_eventlist = NULL;
@@ -978,6 +1067,10 @@ namespace vx_event {
       vx_core::vx_reserve_empty(vx_event::e_eventmap);
       vx_event::t_eventmap = new Class_eventmap();
       vx_core::vx_reserve_type(vx_event::t_eventmap);
+      vx_event::e_any_from_from_event = new vx_event::Class_any_from_from_event();
+      vx_core::vx_reserve_empty(vx_event::e_any_from_from_event);
+      vx_event::t_any_from_from_event = new vx_event::Class_any_from_from_event();
+      vx_core::vx_reserve_type(vx_event::t_any_from_from_event);
       vx_event::e_event_from_event = new vx_event::Class_event_from_event();
       vx_core::vx_reserve_empty(vx_event::e_event_from_event);
       vx_event::t_event_from_event = new vx_event::Class_event_from_event();
@@ -1001,6 +1094,7 @@ namespace vx_event {
       mapconst["event-click"] = vx_event::c_event_click;
       mapconst["event-move"] = vx_event::c_event_move;
       mapconst["event-select"] = vx_event::c_event_select;
+      mapfunc["any-from<-event"] = vx_event::t_any_from_from_event;
       mapfunc["event<-event"] = vx_event::t_event_from_event;
       mapfunc["eventmap<-eventlist"] = vx_event::t_eventmap_from_eventlist;
       vx_core::vx_global_package_set("vx/event", maptype, mapconst, mapfunc);

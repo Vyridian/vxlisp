@@ -22,6 +22,10 @@ namespace vx_ui_html_uihtml {
   class Class_layoutenginehtml;
   typedef Class_layoutenginehtml* Const_layoutenginehtml;
   extern Const_layoutenginehtml c_layoutenginehtml;
+  class Abstract_context_write;
+  typedef Abstract_context_write* Func_context_write;
+  extern Func_context_write e_context_write;
+  extern Func_context_write t_context_write;
   class Abstract_divchild_from_ui;
   typedef Abstract_divchild_from_ui* Func_divchild_from_ui;
   extern Func_divchild_from_ui e_divchild_from_ui;
@@ -78,6 +82,9 @@ namespace vx_ui_html_uihtml {
   typedef Abstract_ui_render_label_from_ui_orig_parent* Func_ui_render_label_from_ui_orig_parent;
   extern Func_ui_render_label_from_ui_orig_parent e_ui_render_label_from_ui_orig_parent;
   extern Func_ui_render_label_from_ui_orig_parent t_ui_render_label_from_ui_orig_parent;
+  // (func context-write)
+  vx_core::Type_context f_context_write(vx_core::Type_context context);
+
   // (func divchild<-ui)
   vx_web_html::Type_divchild f_divchild_from_ui(vx_ui_ui::Type_ui ui);
 
@@ -142,6 +149,29 @@ namespace vx_ui_html_uihtml {
   class Class_layoutenginehtml : public vx_ui_ui::Class_layoutengine {
   public:
     static void vx_const_new(vx_ui_html_uihtml::Const_layoutenginehtml output);
+  };
+
+  // (func context-write)
+  class Abstract_context_write : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_context_write() {};
+    virtual ~Abstract_context_write() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_context_write : public virtual Abstract_context_write {
+  public:
+    Class_context_write();
+    virtual ~Class_context_write() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
   // (func divchild<-ui)

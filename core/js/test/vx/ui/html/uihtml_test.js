@@ -28,11 +28,11 @@ export default class vx_ui_html_uihtml_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/ui/html/uihtml", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 4), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 55, ":tests", 10, ":total", 18), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 14), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 52, ":tests", 10, ":total", 19), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 15), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 18), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 19), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     )
   }
@@ -56,6 +56,7 @@ export default class vx_ui_html_uihtml_test {
       "funcmap",
         vx_core.f_new(
           vx_core.t_intmap,
+          "context-write", 0,
           "divchild<-ui", 0,
           "divchildlist<-uimap", 0,
           "node-app<-ui-orig-parent", 0,

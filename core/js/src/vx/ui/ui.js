@@ -3,6 +3,7 @@
 import vx_core from "../../vx/core.js"
 import vx_event from "../../vx/event.js"
 import vx_data_file from "../../vx/data/file.js"
+import vx_state from "../../vx/state.js"
 
 
 export default class vx_ui_ui {
@@ -346,6 +347,57 @@ export default class vx_ui_ui {
   static c_styletype_system = {vx_type: vx_ui_ui.t_styletype, vx_constdef: {pkgname: 'vx/ui/ui', name: 'styletype-system'}}
 
   /**
+   * @function boolean_writestate_from_ui
+   * @param  {ui} ui
+   * @return {boolean}
+   */
+  static t_boolean_writestate_from_ui = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_writestate_from_ui = {
+    vx_type: vx_ui_ui.t_boolean_writestate_from_ui
+  }
+
+  // (func boolean-writestate<-ui)
+  static f_boolean_writestate_from_ui(context, ui) {
+    let output = vx_core.e_boolean
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_boolean},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const uid = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_ui}, ui, ":uid")
+        return vx_state.f_boolean_writestate_from_mapname_name_value(
+          context,
+          ":uimap",
+          uid,
+          vx_core.t_value
+        )
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function boolean_writestate_from_uiengine
+   * Writes the uiengine to state
+   * @param  {uiengine} uiengine
+   * @return {boolean}
+   */
+  static t_boolean_writestate_from_uiengine = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_writestate_from_uiengine = {
+    vx_type: vx_ui_ui.t_boolean_writestate_from_uiengine
+  }
+
+  // (func boolean-writestate<-uiengine)
+  static f_boolean_writestate_from_uiengine(context, uiengine) {
+    let output = vx_core.e_boolean
+    output = vx_state.f_boolean_writestate_from_name_value(context, ":uiengine", uiengine)
+    return output
+  }
+
+  /**
    * @function layout_from_style
    * @param  {style} style
    * @return {layout}
@@ -433,6 +485,53 @@ export default class vx_ui_ui {
   }
 
   /**
+   * @function ui_data_from_ui
+   * Returns (:data ui) cast as ui
+   * @param  {ui} ui
+   * @return {ui}
+   */
+  static t_ui_data_from_ui = {
+    vx_type: vx_core.t_type
+  }
+  static e_ui_data_from_ui = {
+    vx_type: vx_ui_ui.t_ui_data_from_ui
+  }
+
+  // (func ui-data<-ui)
+  static f_ui_data_from_ui(ui) {
+    let output = vx_ui_ui.e_ui
+    output = vx_core.f_let(
+      {"any-1": vx_ui_ui.t_ui, "any-2": vx_core.t_any},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const data = vx_core.f_any_from_struct({"any-1": vx_core.t_any, "struct-2": vx_ui_ui.t_ui}, ui, ":data")
+        return vx_core.f_any_from_any({"any-1": vx_ui_ui.t_ui, "any-2": vx_core.t_any}, data)
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function ui_from_from_event
+   * Returns (:from event) cast as ui
+   * @param  {event} event
+   * @return {ui}
+   */
+  static t_ui_from_from_event = {
+    vx_type: vx_core.t_type
+  }
+  static e_ui_from_from_event = {
+    vx_type: vx_ui_ui.t_ui_from_from_event
+  }
+
+  // (func ui-from<-event)
+  static f_ui_from_from_event(event) {
+    let output = vx_ui_ui.e_ui
+    output = vx_event.f_any_from_from_event({"any-1": vx_ui_ui.t_ui}, event)
+    return output
+  }
+
+  /**
    * @function ui_layout_from_ui_layoutmap_else
    * Returns a ui with a renderer added to each ui.
    * @param  {ui} ui
@@ -473,6 +572,26 @@ export default class vx_ui_ui {
   }
 
   /**
+   * @function ui_readstate_from_uid
+   * Returns the named ui from state
+   * @param  {string} uid
+   * @return {ui}
+   */
+  static t_ui_readstate_from_uid = {
+    vx_type: vx_core.t_type
+  }
+  static e_ui_readstate_from_uid = {
+    vx_type: vx_ui_ui.t_ui_readstate_from_uid
+  }
+
+  // (func ui-readstate<-uid)
+  static f_ui_readstate_from_uid(context, uid) {
+    let output = vx_ui_ui.e_ui
+    output = vx_state.f_any_readstate_from_mapname_name({"any-1": vx_ui_ui.t_ui}, context, ":uimap", uid)
+    return output
+  }
+
+  /**
    * @function ui_render
    * @param  {ui} uiarg
    * @return {ui}
@@ -501,6 +620,7 @@ export default class vx_ui_ui {
 
   /**
    * @function ui_render_from_fn_render_ui_orig_parent
+   * Returns a rendered ui
    * @param  {ui_render_from_ui_orig_parent} fn_render
    * @param  {ui} ui
    * @param  {ui} orig
@@ -592,6 +712,25 @@ export default class vx_ui_ui {
   }
 
   /**
+   * @function uiengine_readstate
+   * Returns the current uiengine from state
+   * @return {uiengine}
+   */
+  static t_uiengine_readstate = {
+    vx_type: vx_core.t_type
+  }
+  static e_uiengine_readstate = {
+    vx_type: vx_ui_ui.t_uiengine_readstate
+  }
+
+  // (func uiengine-readstate)
+  static f_uiengine_readstate(context) {
+    let output = vx_ui_ui.e_uiengine
+    output = vx_state.f_any_readstate_from_name({"any-1": vx_ui_ui.t_uiengine}, context, ":uiengine")
+    return output
+  }
+
+  /**
    * @function uiengine_render
    * Returns a fully rendered ui for a given engine.
    * @param  {uiengine} uiengine
@@ -605,7 +744,7 @@ export default class vx_ui_ui {
   }
 
   // (func uiengine-render)
-  static f_uiengine_render(uiengine) {
+  static f_uiengine_render(context, uiengine) {
     let output = vx_ui_ui.e_uiengine
     output = vx_core.f_let(
       {"any-1": vx_ui_ui.t_uiengine, "struct-2": vx_ui_ui.t_layoutengine},
@@ -788,15 +927,21 @@ export default class vx_ui_ui {
       "uiengine": vx_ui_ui.e_uiengine,
       "uilist": vx_ui_ui.e_uilist,
       "uimap": vx_ui_ui.e_uimap,
+      "boolean-writestate<-ui": vx_ui_ui.e_boolean_writestate_from_ui,
+      "boolean-writestate<-uiengine": vx_ui_ui.e_boolean_writestate_from_uiengine,
       "layout<-style": vx_ui_ui.e_layout_from_style,
       "layoutmap<-layoutlist": vx_ui_ui.e_layoutmap_from_layoutlist,
       "stylemap<-stylelist": vx_ui_ui.e_stylemap_from_stylelist,
       "stylesheet-render": vx_ui_ui.e_stylesheet_render,
+      "ui-data<-ui": vx_ui_ui.e_ui_data_from_ui,
+      "ui-from<-event": vx_ui_ui.e_ui_from_from_event,
       "ui-layout<-ui-layoutmap-else": vx_ui_ui.e_ui_layout_from_ui_layoutmap_else,
+      "ui-readstate<-uid": vx_ui_ui.e_ui_readstate_from_uid,
       "ui-render": vx_ui_ui.e_ui_render,
       "ui-render<-fn-render-ui-orig-parent": vx_ui_ui.e_ui_render_from_fn_render_ui_orig_parent,
       "ui-render<-ui-orig-parent": vx_ui_ui.e_ui_render_from_ui_orig_parent,
       "ui<-renderer-ui-orig-parent": vx_ui_ui.e_ui_from_renderer_ui_orig_parent,
+      "uiengine-readstate": vx_ui_ui.e_uiengine_readstate,
       "uiengine-render": vx_ui_ui.e_uiengine_render,
       "uimap-layout<-uimap-layoutmap-else": vx_ui_ui.e_uimap_layout_from_uimap_layoutmap_else,
       "uimap-render<-uimap-parent": vx_ui_ui.e_uimap_render_from_uimap_parent,
@@ -804,15 +949,21 @@ export default class vx_ui_ui {
       "uimap<-uimap-data": vx_ui_ui.e_uimap_from_uimap_data
     })
     const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      "boolean-writestate<-ui": vx_ui_ui.t_boolean_writestate_from_ui,
+      "boolean-writestate<-uiengine": vx_ui_ui.t_boolean_writestate_from_uiengine,
       "layout<-style": vx_ui_ui.t_layout_from_style,
       "layoutmap<-layoutlist": vx_ui_ui.t_layoutmap_from_layoutlist,
       "stylemap<-stylelist": vx_ui_ui.t_stylemap_from_stylelist,
       "stylesheet-render": vx_ui_ui.t_stylesheet_render,
+      "ui-data<-ui": vx_ui_ui.t_ui_data_from_ui,
+      "ui-from<-event": vx_ui_ui.t_ui_from_from_event,
       "ui-layout<-ui-layoutmap-else": vx_ui_ui.t_ui_layout_from_ui_layoutmap_else,
+      "ui-readstate<-uid": vx_ui_ui.t_ui_readstate_from_uid,
       "ui-render": vx_ui_ui.t_ui_render,
       "ui-render<-fn-render-ui-orig-parent": vx_ui_ui.t_ui_render_from_fn_render_ui_orig_parent,
       "ui-render<-ui-orig-parent": vx_ui_ui.t_ui_render_from_ui_orig_parent,
       "ui<-renderer-ui-orig-parent": vx_ui_ui.t_ui_from_renderer_ui_orig_parent,
+      "uiengine-readstate": vx_ui_ui.t_uiengine_readstate,
       "uiengine-render": vx_ui_ui.t_uiengine_render,
       "uimap-layout<-uimap-layoutmap-else": vx_ui_ui.t_uimap_layout_from_uimap_layoutmap_else,
       "uimap-render<-uimap-parent": vx_ui_ui.t_uimap_render_from_uimap_parent,
@@ -1391,6 +1542,11 @@ export default class vx_ui_ui {
           "type" : vx_ui_ui.t_uimap_from_uimap_data,
           "multi": false
         },
+        "parent": {
+          "name" : "parent",
+          "type" : vx_core.t_string,
+          "multi": false
+        },
         "path": {
           "name" : "path",
           "type" : vx_core.t_string,
@@ -1522,6 +1678,42 @@ export default class vx_ui_ui {
     vx_ui_ui.e_uimap['vx_type'] = vx_ui_ui.t_uimap
     vx_ui_ui.e_uimap['vx_value'] = {}
 
+    // (func boolean-writestate<-ui)
+    vx_ui_ui.t_boolean_writestate_from_ui['vx_value'] = {
+      name          : "boolean-writestate<-ui",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_boolean_writestate_from_ui
+    }
+
+    // (func boolean-writestate<-uiengine)
+    vx_ui_ui.t_boolean_writestate_from_uiengine['vx_value'] = {
+      name          : "boolean-writestate<-uiengine",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_boolean_writestate_from_uiengine
+    }
+
     // (func layout<-style)
     vx_ui_ui.t_layout_from_style['vx_value'] = {
       name          : "layout<-style",
@@ -1594,6 +1786,42 @@ export default class vx_ui_ui {
       fn            : vx_ui_ui.f_stylesheet_render
     }
 
+    // (func ui-data<-ui)
+    vx_ui_ui.t_ui_data_from_ui['vx_value'] = {
+      name          : "ui-data<-ui",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_ui_data_from_ui
+    }
+
+    // (func ui-from<-event)
+    vx_ui_ui.t_ui_from_from_event['vx_value'] = {
+      name          : "ui-from<-event",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_ui_from_from_event
+    }
+
     // (func ui-layout<-ui-layoutmap-else)
     vx_ui_ui.t_ui_layout_from_ui_layoutmap_else['vx_value'] = {
       name          : "ui-layout<-ui-layoutmap-else",
@@ -1610,6 +1838,24 @@ export default class vx_ui_ui {
       properties    : [],
       proplast      : {},
       fn            : vx_ui_ui.f_ui_layout_from_ui_layoutmap_else
+    }
+
+    // (func ui-readstate<-uid)
+    vx_ui_ui.t_ui_readstate_from_uid['vx_value'] = {
+      name          : "ui-readstate<-uid",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_ui_readstate_from_uid
     }
 
     // (func ui-render)
@@ -1682,6 +1928,24 @@ export default class vx_ui_ui {
       properties    : [],
       proplast      : {},
       fn            : vx_ui_ui.f_ui_from_renderer_ui_orig_parent
+    }
+
+    // (func uiengine-readstate)
+    vx_ui_ui.t_uiengine_readstate['vx_value'] = {
+      name          : "uiengine-readstate",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_uiengine_readstate
     }
 
     // (func uiengine-render)

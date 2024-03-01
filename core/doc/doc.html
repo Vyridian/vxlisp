@@ -405,6 +405,9 @@
           <li class="ntype" onclick="docjs.navigate('type_vx/core/statelistener')">
             (t) statelistener
           </li>
+          <li class="ntype" onclick="docjs.navigate('type_vx/core/statelistenermap')">
+            (t) statelistenermap
+          </li>
           <li class="ntype" onclick="docjs.navigate('type_vx/core/string')">
             (t) string
           </li>
@@ -689,6 +692,9 @@
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/core/boolean-permission&lt;-func')">
             (f) boolean-permission&lt;-func
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/core/boolean-write&lt;-map-name-value')">
+            (f) boolean-write&lt;-map-name-value
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/core/case')">
             (f) case
@@ -1439,6 +1445,9 @@
           <li class="nconst" onclick="docjs.navigate('const_vx/event/event-select')">
             (c) event-select
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/event/any-from&lt;-event')">
+            (f) any-from&lt;-event
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/event/event&lt;-event')">
             (f) event&lt;-event
           </li>
@@ -1562,14 +1571,44 @@
           <span class="npackage" onclick="docjs.navigate('pkg_vx/state')">vx/state</span>
         </summary>
         <ul class="packagenav" id="n_pkgnav_vx/state">
-          <li class="ntype" onclick="docjs.navigate('type_vx/state/value-map')">
-            (t) value-map
+          <li class="ntype" onclick="docjs.navigate('type_vx/state/valuemap')">
+            (t) valuemap
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/state/any-readstate&lt;-mapname-name')">
+            (f) any-readstate&lt;-mapname-name
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/state/any-readstate&lt;-name')">
+            (f) any-readstate&lt;-name
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/state/boolean-writestate&lt;-mapname-name-value')">
+            (f) boolean-writestate&lt;-mapname-name-value
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/state/boolean-writestate&lt;-name-value')">
+            (f) boolean-writestate&lt;-name-value
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/state/boolean-writestate&lt;-statelistener')">
+            (f) boolean-writestate&lt;-statelistener
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/state/change')">
             (f) change
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/state/register')">
             (f) register
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/state/state&lt;-context')">
+            (f) state&lt;-context
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/state/statelistener-readstate&lt;-name')">
+            (f) statelistener-readstate&lt;-name
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/state/statelistenermap-readstate')">
+            (f) statelistenermap-readstate
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/state/value-readstate&lt;-name')">
+            (f) value-readstate&lt;-name
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/state/valuemap-readstate&lt;-mapname')">
+            (f) valuemap-readstate&lt;-mapname
           </li>
         </ul>
       </details>
@@ -1914,6 +1953,9 @@
           <li class="nconst" onclick="docjs.navigate('const_vx/ui/html/uihtml/layoutenginehtml')">
             (c) layoutenginehtml
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/context-write')">
+            (f) context-write
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/divchild&lt;-ui')">
             (f) divchild&lt;-ui
           </li>
@@ -2129,6 +2171,12 @@
           <li class="nconst" onclick="docjs.navigate('const_vx/ui/ui/styletype-system')">
             (c) styletype-system
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/boolean-writestate&lt;-ui')">
+            (f) boolean-writestate&lt;-ui
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/boolean-writestate&lt;-uiengine')">
+            (f) boolean-writestate&lt;-uiengine
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/layout&lt;-style')">
             (f) layout&lt;-style
           </li>
@@ -2144,29 +2192,41 @@
           <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui&lt;-renderer-ui-orig-parent')">
             (f) ui&lt;-renderer-ui-orig-parent
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-data&lt;-ui')">
+            (f) ui-data&lt;-ui
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-from&lt;-event')">
+            (f) ui-from&lt;-event
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-layout&lt;-ui-layoutmap-else')">
             (f) ui-layout&lt;-ui-layoutmap-else
           </li>
-          <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap&lt;-uimap-data')">
-            (f) uimap&lt;-uimap-data
-          </li>
-          <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap-layout&lt;-uimap-layoutmap-else')">
-            (f) uimap-layout&lt;-uimap-layoutmap-else
-          </li>
-          <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render&lt;-fn-render-ui-orig-parent')">
-            (f) ui-render&lt;-fn-render-ui-orig-parent
+          <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-readstate&lt;-uid')">
+            (f) ui-readstate&lt;-uid
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render')">
             (f) ui-render
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render&lt;-fn-render-ui-orig-parent')">
+            (f) ui-render&lt;-fn-render-ui-orig-parent
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render&lt;-ui-orig-parent')">
             (f) ui-render&lt;-ui-orig-parent
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uiengine-readstate')">
+            (f) uiengine-readstate
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uiengine-render')">
             (f) uiengine-render
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap&lt;-uilist')">
             (f) uimap&lt;-uilist
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap&lt;-uimap-data')">
+            (f) uimap&lt;-uimap-data
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap-layout&lt;-uimap-layoutmap-else')">
+            (f) uimap-layout&lt;-uimap-layoutmap-else
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap-render&lt;-uimap-parent')">
             (f) uimap-render&lt;-uimap-parent
@@ -2398,14 +2458,11 @@
           <span class="npackage" onclick="docjs.navigate('pkg_vx/web/htmldoc')">vx/web/htmldoc</span>
         </summary>
         <ul class="packagenav" id="n_pkgnav_vx/web/htmldoc">
-          <li class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/any-data&lt;-id')">
-            (f) any-data&lt;-id
-          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/boolean-replace&lt;-id-htmltext')">
             (f) boolean-replace&lt;-id-htmltext
           </li>
-          <li class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/boolean-replace&lt;-id-htmltext-data-eventmap')">
-            (f) boolean-replace&lt;-id-htmltext-data-eventmap
+          <li class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/boolean-replace&lt;-ui-htmltext')">
+            (f) boolean-replace&lt;-ui-htmltext
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/boolean-write&lt;-id-htmltext')">
             (f) boolean-write&lt;-id-htmltext
@@ -2416,8 +2473,17 @@
           <li class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/boolean-write-stylesheet&lt;-string')">
             (f) boolean-write-stylesheet&lt;-string
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/context-read')">
+            (f) context-read
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/context-write')">
+            (f) context-write
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/string&lt;-id')">
             (f) string&lt;-id
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/ui-readstate&lt;-uid')">
+            (f) ui-readstate&lt;-uid
           </li>
         </ul>
       </details>
@@ -4534,7 +4600,7 @@ output : list-1 := (empty list-1)
           </summary>
           <ul>
             <li>
-              <span class="ntype" onclick="docjs.navigate('type_vx/core/any')">any</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/any-async&lt;-func')">any-async&lt;-func</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/any&lt;-anylist')">any&lt;-anylist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/anylist')">anylist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/anymap')">anymap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/anytype')">anytype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/arg')">arg</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/arglist')">arglist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/argmap')">argmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/boolean')">boolean</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/booleanlist')">booleanlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/collection')">collection</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/compilelanguages')">compilelanguages</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/connect')">connect</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/connectlist')">connectlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/connectmap')">connectmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/const')">const</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/constdef')">constdef</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/constlist')">constlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/constmap')">constmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/context')">context</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/date')">date</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/decimal')">decimal</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/error')">error</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/float')">float</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/func')">func</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/funcdef')">funcdef</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/funclist')">funclist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/funcmap')">funcmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/int')">int</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/intlist')">intlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/intmap')">intmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/list')">list</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/listtype')">listtype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/locale')">locale</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/map')">map</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/maptype')">maptype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/mempool')">mempool</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/msg')">msg</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/msgblock')">msgblock</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/msgblocklist')">msgblocklist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/msglist')">msglist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/none')">none</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/notype')">notype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/number')">number</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/numberlist')">numberlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/numbermap')">numbermap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/package')">package</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/packagemap')">packagemap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/permission')">permission</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/permissionlist')">permissionlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/permissionmap')">permissionmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/project')">project</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/security')">security</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/session')">session</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/setting')">setting</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/state')">state</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/statelistener')">statelistener</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/string')">string</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/stringlist')">stringlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/stringmap')">stringmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/struct')">struct</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/thenelse')">thenelse</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/thenelselist')">thenelselist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/translation')">translation</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/translationlist')">translationlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/translationmap')">translationmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/type')">type</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/typedef')">typedef</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/typelist')">typelist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/typemap')">typemap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/user')">user</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/value')">value</span>
+              <span class="ntype" onclick="docjs.navigate('type_vx/core/any')">any</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/any-async&lt;-func')">any-async&lt;-func</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/any&lt;-anylist')">any&lt;-anylist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/anylist')">anylist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/anymap')">anymap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/anytype')">anytype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/arg')">arg</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/arglist')">arglist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/argmap')">argmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/boolean')">boolean</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/booleanlist')">booleanlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/collection')">collection</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/compilelanguages')">compilelanguages</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/connect')">connect</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/connectlist')">connectlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/connectmap')">connectmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/const')">const</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/constdef')">constdef</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/constlist')">constlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/constmap')">constmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/context')">context</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/date')">date</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/decimal')">decimal</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/error')">error</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/float')">float</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/func')">func</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/funcdef')">funcdef</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/funclist')">funclist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/funcmap')">funcmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/int')">int</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/intlist')">intlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/intmap')">intmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/list')">list</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/listtype')">listtype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/locale')">locale</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/map')">map</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/maptype')">maptype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/mempool')">mempool</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/msg')">msg</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/msgblock')">msgblock</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/msgblocklist')">msgblocklist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/msglist')">msglist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/none')">none</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/notype')">notype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/number')">number</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/numberlist')">numberlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/numbermap')">numbermap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/package')">package</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/packagemap')">packagemap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/permission')">permission</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/permissionlist')">permissionlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/permissionmap')">permissionmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/project')">project</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/security')">security</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/session')">session</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/setting')">setting</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/state')">state</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/statelistener')">statelistener</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/statelistenermap')">statelistenermap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/string')">string</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/stringlist')">stringlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/stringmap')">stringmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/struct')">struct</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/thenelse')">thenelse</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/thenelselist')">thenelselist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/translation')">translation</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/translationlist')">translationlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/translationmap')">translationmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/type')">type</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/typedef')">typedef</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/typelist')">typelist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/typemap')">typemap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/user')">user</span>, <span class="ntype" onclick="docjs.navigate('type_vx/core/value')">value</span>
             </li>
           </ul>
         </details>
@@ -4554,7 +4620,7 @@ output : list-1 := (empty list-1)
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/core/.')">.</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_1')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_2')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_3')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+1')">+1</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_1')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_2')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_3')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-1')">-1</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_1')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_2')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_3')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core//')">/</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/=')">=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/=_1')">=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/==')">==</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!')">!</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!=')">!=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!==')">!==</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty')">!-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty_1')">!-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;')">&lt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;_1')">&lt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;=')">&lt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;=_1')">&lt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;-')">&lt;-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;&lt;-')">&lt;&lt;-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;')">&gt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;_1')">&gt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;=')">&gt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;=_1')">&gt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowfuncs&lt;-security')">allowfuncs&lt;-security</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowtypenames&lt;-typedef')">allowtypenames&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowtypes&lt;-typedef')">allowtypes&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/and')">and</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/and_1')">and</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any')">any&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-async')">any&lt;-any-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context')">any&lt;-any-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context-async')">any&lt;-any-context-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-key-value')">any&lt;-any-key-value</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-int')">any&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-func')">any&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-func-async')">any&lt;-func-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-key-value')">any&lt;-key-value</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-key-value-async')">any&lt;-key-value-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list')">any&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-start-reduce')">any&lt;-list-start-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-start-reduce-next')">any&lt;-list-start-reduce-next</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-map')">any&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-map-start-reduce')">any&lt;-map-start-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none')">any&lt;-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none-async')">any&lt;-none-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce')">any&lt;-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-async')">any&lt;-reduce-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-next')">any&lt;-reduce-next</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-next-async')">any&lt;-reduce-next-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-struct')">any&lt;-struct</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/async')">async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-any')">boolean&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-func')">boolean&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-none')">boolean&lt;-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean-permission&lt;-func')">boolean-permission&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/case')">case</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/case_1')">case</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/compare')">compare</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/contains')">contains</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/contains_1')">contains</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/context-main')">context-main</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/copy')">copy</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/else')">else</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/empty')">empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/extends&lt;-any')">extends&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/extends&lt;-typedef')">extends&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/first&lt;-list')">first&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/first&lt;-list-any&lt;-any')">first&lt;-list-any&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/float&lt;-string')">float&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/fn')">fn</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/funcdef&lt;-func')">funcdef&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/funcname&lt;-funcdef')">funcname&lt;-funcdef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if_1')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if_2')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/int&lt;-func')">int&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/int&lt;-string')">int&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-empty')">is-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-empty_1')">is-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-endswith')">is-endswith</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-func')">is-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-int')">is-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-float')">is-float</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-number')">is-number</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-pass&lt;-permission')">is-pass&lt;-permission</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/last&lt;-list')">last&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/length&lt;-list')">length&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/let')">let</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/let-async')">let-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-list')">list&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-list-async')">list&lt;-list-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list-join&lt;-list')">list-join&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-map')">list&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-map-async')">list&lt;-map-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-type')">list&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/log')">log</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/log_1')">log</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/main')">main</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/map&lt;-list')">map&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/map&lt;-map')">map&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-addref')">mempool-addref</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-reserve')">mempool-reserve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-release')">mempool-release</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-removeref')">mempool-removeref</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-removerefchildren')">mempool-removerefchildren</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error_1')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error_2')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-warning')">msg&lt;-warning</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msgblock&lt;-msgblock-msg')">msgblock&lt;-msgblock-msg</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msgblock&lt;-msgblock-msgblock')">msgblock&lt;-msgblock-msgblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/name&lt;-typedef')">name&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/native')">native</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/native&lt;-any')">native&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/new')">new</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/number&lt;-func')">number&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/or')">or</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/or_1')">or</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/package-global&lt;-name')">package-global&lt;-name</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/packagename&lt;-typedef')">packagename&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/path&lt;-context-path')">path&lt;-context-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/path&lt;-setting-path')">path&lt;-setting-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/permission&lt;-id-context')">permission&lt;-id-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/properties&lt;-typedef')">properties&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/proplast&lt;-typedef')">proplast&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve')">resolve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve_1')">resolve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-async')">resolve-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-first')">resolve-first</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-list')">resolve-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/security&lt;-context')">security&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/security&lt;-user')">security&lt;-user</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/session&lt;-context')">session&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/setting&lt;-context')">setting&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string-repeat')">string-repeat</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-any')">string&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-any-indent')">string&lt;-any-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-func')">string&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-string-find-replace')">string&lt;-string-find-replace</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/switch')">switch</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/then')">then</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/traits&lt;-typedef')">traits&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/type&lt;-any')">type&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typedef&lt;-any')">typedef&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typedef&lt;-type')">typedef&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-any')">typename&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-type')">typename&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-typedef')">typename&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typenames&lt;-typelist')">typenames&lt;-typelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/user&lt;-context')">user&lt;-context</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/core/.')">.</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_1')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_2')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+_3')">+</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/+1')">+1</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_1')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_2')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-_3')">-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/-1')">-1</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_1')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_2')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/*_3')">*</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core//')">/</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/=')">=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/=_1')">=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/==')">==</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!')">!</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!=')">!=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!==')">!==</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty')">!-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/!-empty_1')">!-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;')">&lt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;_1')">&lt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;=')">&lt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;=_1')">&lt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;-')">&lt;-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&lt;&lt;-')">&lt;&lt;-</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;')">&gt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;_1')">&gt;</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;=')">&gt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/&gt;=_1')">&gt;=</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowfuncs&lt;-security')">allowfuncs&lt;-security</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowtypenames&lt;-typedef')">allowtypenames&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/allowtypes&lt;-typedef')">allowtypes&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/and')">and</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/and_1')">and</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any')">any&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-async')">any&lt;-any-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context')">any&lt;-any-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-context-async')">any&lt;-any-context-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-any-key-value')">any&lt;-any-key-value</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-int')">any&lt;-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-func')">any&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-func-async')">any&lt;-func-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-key-value')">any&lt;-key-value</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-key-value-async')">any&lt;-key-value-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list')">any&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-start-reduce')">any&lt;-list-start-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-list-start-reduce-next')">any&lt;-list-start-reduce-next</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-map')">any&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-map-start-reduce')">any&lt;-map-start-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none')">any&lt;-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-none-async')">any&lt;-none-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce')">any&lt;-reduce</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-async')">any&lt;-reduce-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-next')">any&lt;-reduce-next</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-reduce-next-async')">any&lt;-reduce-next-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/any&lt;-struct')">any&lt;-struct</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/async')">async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-any')">boolean&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-func')">boolean&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean&lt;-none')">boolean&lt;-none</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean-permission&lt;-func')">boolean-permission&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean-write&lt;-map-name-value')">boolean-write&lt;-map-name-value</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/case')">case</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/case_1')">case</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/compare')">compare</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/contains')">contains</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/contains_1')">contains</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/context-main')">context-main</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/copy')">copy</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/else')">else</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/empty')">empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/extends&lt;-any')">extends&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/extends&lt;-typedef')">extends&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/first&lt;-list')">first&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/first&lt;-list-any&lt;-any')">first&lt;-list-any&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/float&lt;-string')">float&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/fn')">fn</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/funcdef&lt;-func')">funcdef&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/funcname&lt;-funcdef')">funcname&lt;-funcdef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if_1')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/if_2')">if</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/int&lt;-func')">int&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/int&lt;-string')">int&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-empty')">is-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-empty_1')">is-empty</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-endswith')">is-endswith</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-func')">is-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-int')">is-int</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-float')">is-float</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-number')">is-number</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/is-pass&lt;-permission')">is-pass&lt;-permission</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/last&lt;-list')">last&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/length&lt;-list')">length&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/let')">let</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/let-async')">let-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-list')">list&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-list-async')">list&lt;-list-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list-join&lt;-list')">list-join&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-map')">list&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-map-async')">list&lt;-map-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/list&lt;-type')">list&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/log')">log</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/log_1')">log</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/main')">main</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/map&lt;-list')">map&lt;-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/map&lt;-map')">map&lt;-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-addref')">mempool-addref</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-reserve')">mempool-reserve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-release')">mempool-release</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-removeref')">mempool-removeref</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/mempool-removerefchildren')">mempool-removerefchildren</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error_1')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-error_2')">msg&lt;-error</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msg&lt;-warning')">msg&lt;-warning</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msgblock&lt;-msgblock-msg')">msgblock&lt;-msgblock-msg</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/msgblock&lt;-msgblock-msgblock')">msgblock&lt;-msgblock-msgblock</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/name&lt;-typedef')">name&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/native')">native</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/native&lt;-any')">native&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/new')">new</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/number&lt;-func')">number&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/or')">or</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/or_1')">or</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/package-global&lt;-name')">package-global&lt;-name</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/packagename&lt;-typedef')">packagename&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/path&lt;-context-path')">path&lt;-context-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/path&lt;-setting-path')">path&lt;-setting-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/permission&lt;-id-context')">permission&lt;-id-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/properties&lt;-typedef')">properties&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/proplast&lt;-typedef')">proplast&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve')">resolve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve_1')">resolve</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-async')">resolve-async</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-first')">resolve-first</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/resolve-list')">resolve-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/security&lt;-context')">security&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/security&lt;-user')">security&lt;-user</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/session&lt;-context')">session&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/setting&lt;-context')">setting&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string-repeat')">string-repeat</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-any')">string&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-any-indent')">string&lt;-any-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-func')">string&lt;-func</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/string&lt;-string-find-replace')">string&lt;-string-find-replace</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/switch')">switch</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/then')">then</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/traits&lt;-typedef')">traits&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/type&lt;-any')">type&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typedef&lt;-any')">typedef&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typedef&lt;-type')">typedef&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-any')">typename&lt;-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-type')">typename&lt;-type</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typename&lt;-typedef')">typename&lt;-typedef</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/typenames&lt;-typelist')">typenames&lt;-typelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/core/user&lt;-context')">user&lt;-context</span>
             </li>
           </ul>
         </details>
@@ -4994,14 +5060,20 @@ output : list-1 := (empty list-1)
  :properties [pathmap : stringmap]
  :doc        &quot;Settings&quot;)
 
-(type state : map
- :allowtypes [statelistener])
+(type state : struct
+ :properties [statelistenermap : statelistenermap]
+ :doc &quot;State. Note that this type is has mutable values.&quot;)
 
 (type statelistener : struct
  :properties
-  [path       : string
+  [name       : string
    value      : any
    fn-boolean : boolean&lt;-none])
+
+(type statelistenermap : map
+ :allowtypes [statelistener]
+ :mutable
+ :doc &quot;Mutable map of statelisteners&quot;)
 
 (type string : string
  :default &quot;&quot;
@@ -5553,8 +5625,7 @@ output : list-1 := (empty list-1)
    [reduce  : boolean
     current : any
     next    : any]
-   (and reduce (&lt; current next)))
- )
+   (and reduce (&lt; current next))))
  :alias &quot;lt&quot;
  :test (test-true
         (&lt; 2 3))
@@ -5910,7 +5981,7 @@ output : list-1 := (empty list-1)
  :test (test
         &quot;v2&quot;
         (any&lt;-map
-         (map
+         (stringmap
           :a &quot;v1&quot;
           :b &quot;v2&quot;
           :c &quot;v3&quot;)
@@ -5923,7 +5994,9 @@ output : list-1 := (empty list-1)
   key       : string
   valueelse : any-1]
  (let : any-1
-  [value : any-1 := (any&lt;-map valuemap key)]
+  [value : any-1 := (any&lt;-map
+                     valuemap
+                     key)]
   (if : any-1
    (then
     (!-empty value)
@@ -6043,6 +6116,15 @@ output : list-1 := (empty list-1)
   func)
  :context
  :doc &quot;Returns true if the given func has permission.&quot;)
+
+(func boolean-write&lt;-map-name-value : boolean
+ [valuemap : map-1
+  name     : string
+  value    : any-1]
+ (native
+  :js :auto)
+ :sideeffects &quot;Alters a mutable map. Warning: vxlisp is immutable by design and this function will produce unexpected results.&quot;
+ :doc &quot;Returns true if it alters a mutable map false if it fails.&quot;)
 
 (func case : thenelse
  [values : list-1
@@ -6220,7 +6302,9 @@ output : list-1 := (empty list-1)
  :test (test
         &quot;b&quot;
         (first&lt;-list
-         (stringlist &quot;b&quot; &quot;c&quot;))))
+         (stringlist
+          &quot;b&quot;
+          &quot;c&quot;))))
 
 (func first&lt;-list-any&lt;-any : any-1
  [values      : list-1
@@ -6257,7 +6341,7 @@ output : list-1 := (empty list-1)
  :doc &quot;Returns first value that is not nothing&quot;
  :test (test
         &quot;b&quot;
-        (first&lt;-list-any&lt;-any
+        (first&lt;-list-any&lt;-any : string
          (list nothing &quot;b&quot; &quot;c&quot;)
          resolve)))
 
@@ -6613,8 +6697,13 @@ output : list-1 := (empty list-1)
  (let
   [len  : int := (length&lt;-list values)]
   (any&lt;-list values len))
- :doc  &quot;Returns last value&quot;
- :test (test &quot;c&quot; (last&lt;-list (list &quot;b&quot; &quot;c&quot;))))
+ :test (test
+        &quot;c&quot;
+        (last&lt;-list
+         (stringlist
+          &quot;b&quot;
+          &quot;c&quot;)))
+ :doc  &quot;Returns last value&quot;)
 
 (func length&lt;-list : int
  [values : list-1]
@@ -7230,7 +7319,9 @@ output : list-1 := (empty list-1)
 
 (func resolve-first : any-1
  [clauses : list-1 :...]
- (first&lt;-list-any&lt;-any clauses resolve)
+ (first&lt;-list-any&lt;-any
+  clauses
+  resolve)
  :doc &quot;Returns the first value that is not nothing&quot;)
 
 (func resolve-list : list-1
@@ -11021,7 +11112,7 @@ output : list-1 := (empty list-1)
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt"></div>
+                <div class="txt">State. Note that this type is has mutable values.</div>
               </li>
             </ul>
             <div class="lbl">Type Name:</div>
@@ -11033,7 +11124,7 @@ output : list-1 := (empty list-1)
             <div class="lbl">Extends:</div>
             <ul>
               <li>
-                <div class="txt">:map</div>
+                <div class="txt">:struct</div>
               </li>
             </ul>
             <div class="lbl">Default:</div>
@@ -11042,12 +11133,31 @@ output : list-1 := (empty list-1)
                 <div class="txt"></div>
               </li>
             </ul>
-            <div class="lbl">Allowed Types:</div>
-            <ul>
-              <li>
-                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/statelistener')">statelistener</span></div>
-              </li>
-            </ul>
+            <details>
+              <summary>
+                <span class="lbl">Properties:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="table">
+                    <div class="th">
+                      <div class="td">Name</div>
+                      <div class="td">Type</div>
+                      <div class="td">Description</div>
+                      <div class="td">Is Multi</div>
+                      <div class="td">Is Default</div>
+                    </div>
+                    <div class="tr">
+                      <div class="td">statelistenermap</div>
+                      <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/statelistenermap')">vx/core/statelistenermap</span></div>
+                      <div class="td"></div>
+                      <div class="td">false</div>
+                      <div class="td">false</div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </details>
             <details open="true">
               <summary>
                 <span class="lbl">Usage/Test Cases:</span>
@@ -11061,8 +11171,9 @@ output : list-1 := (empty list-1)
               </summary>
               <ul>
                 <li>
-                  <div class="source">(type state : map
- :allowtypes [statelistener])</div>
+                  <div class="source">(type state : struct
+ :properties [statelistenermap : statelistenermap]
+ :doc &quot;State. Note that this type is has mutable values.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -11108,7 +11219,7 @@ output : list-1 := (empty list-1)
                       <div class="td">Is Default</div>
                     </div>
                     <div class="tr">
-                      <div class="td">path</div>
+                      <div class="td">name</div>
                       <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
                       <div class="td"></div>
                       <div class="td">false</div>
@@ -11147,9 +11258,62 @@ output : list-1 := (empty list-1)
                 <li>
                   <div class="source">(type statelistener : struct
  :properties
-  [path       : string
+  [name       : string
    value      : any
    fn-boolean : boolean&lt;-none])</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_type_vx/core/statelistenermap">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/core')">vx/core</span> / <span class="ntype" onclick="docjs.navigate('type_vx/core/statelistenermap')">statelistenermap</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Mutable map of statelisteners</div>
+              </li>
+            </ul>
+            <div class="lbl">Type Name:</div>
+            <ul>
+              <li>
+                <div class="txt">statelistenermap</div>
+              </li>
+            </ul>
+            <div class="lbl">Extends:</div>
+            <ul>
+              <li>
+                <div class="txt">:map</div>
+              </li>
+            </ul>
+            <div class="lbl">Default:</div>
+            <ul>
+              <li>
+                <div class="txt"></div>
+              </li>
+            </ul>
+            <div class="lbl">Allowed Types:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/statelistener')">statelistener</span></div>
+              </li>
+            </ul>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(type statelistenermap : map
+ :allowtypes [statelistener]
+ :mutable
+ :doc &quot;Mutable map of statelisteners&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -14762,8 +14926,7 @@ output : list-1 := (empty list-1)
    [reduce  : boolean
     current : any
     next    : any]
-   (and reduce (&lt; current next)))
- )
+   (and reduce (&lt; current next))))
  :alias &quot;lt&quot;
  :test (test-true
         (&lt; 2 3))
@@ -16782,7 +16945,7 @@ improves readability.</div>
                 <li><div class="test">(test
  &quot;v2&quot;
  (any&lt;-map
-  (map
+  (stringmap
    :a &quot;v1&quot;
    :b &quot;v2&quot;
    :c &quot;v3&quot;)
@@ -16816,7 +16979,7 @@ improves readability.</div>
  :test (test
         &quot;v2&quot;
         (any&lt;-map
-         (map
+         (stringmap
           :a &quot;v1&quot;
           :b &quot;v2&quot;
           :c &quot;v3&quot;)
@@ -17718,6 +17881,83 @@ improves readability.</div>
   func)
  :context
  :doc &quot;Returns true if the given func has permission.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/core/boolean-write&lt;-map-name-value">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/core')">vx/core</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/core/boolean-write&lt;-map-name-value')">boolean-write&lt;-map-name-value</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns true if it alters a mutable map false if it fails.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">boolean-write&lt;-map-name-value</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/boolean')">vx/core/boolean</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">valuemap</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/map-1')">vx/core/map-1</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">name</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">value</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any-1')">vx/core/any-1</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func boolean-write&lt;-map-name-value : boolean
+ [valuemap : map-1
+  name     : string
+  value    : any-1]
+ (native
+  :js :auto)
+ :sideeffects &quot;Alters a mutable map. Warning: vxlisp is immutable by design and this function will produce unexpected results.&quot;
+ :doc &quot;Returns true if it alters a mutable map false if it fails.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -18629,7 +18869,9 @@ improves readability.</div>
                 <li><div class="test">(test
  &quot;b&quot;
  (first&lt;-list
-  (stringlist &quot;b&quot; &quot;c&quot;)))</div></li>
+  (stringlist
+   &quot;b&quot;
+   &quot;c&quot;)))</div></li>
               </ul>
             </details>
             <details open="true">
@@ -18645,7 +18887,9 @@ improves readability.</div>
  :test (test
         &quot;b&quot;
         (first&lt;-list
-         (stringlist &quot;b&quot; &quot;c&quot;))))</div>
+         (stringlist
+          &quot;b&quot;
+          &quot;c&quot;))))</div>
                 </li>
               </ul>
             </details>
@@ -18704,7 +18948,7 @@ improves readability.</div>
               <ul>
                 <li><div class="test">(test
  &quot;b&quot;
- (first&lt;-list-any&lt;-any
+ (first&lt;-list-any&lt;-any : string
   (list nothing &quot;b&quot; &quot;c&quot;)
   resolve))</div></li>
               </ul>
@@ -18750,7 +18994,7 @@ improves readability.</div>
  :doc &quot;Returns first value that is not nothing&quot;
  :test (test
         &quot;b&quot;
-        (first&lt;-list-any&lt;-any
+        (first&lt;-list-any&lt;-any : string
          (list nothing &quot;b&quot; &quot;c&quot;)
          resolve)))</div>
                 </li>
@@ -20206,7 +20450,12 @@ improves readability.</div>
                 <span class="lbl">Usage/Test Cases:</span>
               </summary>
               <ul>
-                <li><div class="test">(test &quot;c&quot; (last&lt;-list (list &quot;b&quot; &quot;c&quot;)))</div></li>
+                <li><div class="test">(test
+ &quot;c&quot;
+ (last&lt;-list
+  (stringlist
+   &quot;b&quot;
+   &quot;c&quot;)))</div></li>
               </ul>
             </details>
             <details open="true">
@@ -20220,8 +20469,13 @@ improves readability.</div>
  (let
   [len  : int := (length&lt;-list values)]
   (any&lt;-list values len))
- :doc  &quot;Returns last value&quot;
- :test (test &quot;c&quot; (last&lt;-list (list &quot;b&quot; &quot;c&quot;))))</div>
+ :test (test
+        &quot;c&quot;
+        (last&lt;-list
+         (stringlist
+          &quot;b&quot;
+          &quot;c&quot;)))
+ :doc  &quot;Returns last value&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -23465,7 +23719,9 @@ improves readability.</div>
                 <li>
                   <div class="source">(func resolve-first : any-1
  [clauses : list-1 :...]
- (first&lt;-list-any&lt;-any clauses resolve)
+ (first&lt;-list-any&lt;-any
+  clauses
+  resolve)
  :doc &quot;Returns the first value that is not nothing&quot;)</div>
                 </li>
               </ul>
@@ -51737,7 +51993,7 @@ improves readability.</div>
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/event/event&lt;-event')">event&lt;-event</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/event/eventmap&lt;-eventlist')">eventmap&lt;-eventlist</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/event/any-from&lt;-event')">any-from&lt;-event</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/event/event&lt;-event')">event&lt;-event</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/event/eventmap&lt;-eventlist')">eventmap&lt;-eventlist</span>
             </li>
           </ul>
         </details>
@@ -51786,9 +52042,18 @@ improves readability.</div>
   :name &quot;move&quot;)
  :doc &quot;Move Event&quot;)
 
+(func any-from&lt;-event : any-1
+ [event : event]
+ (let : any-1
+  [value : any := (:from event)]
+  (any&lt;-any : any-1
+   value))
+ :doc &quot;&quot;)
+
 (func event&lt;-event : event
  [event : event]
  event
+ :context
  :sideeffects &quot;Triggering an event will cause some kind of change&quot;
  :doc &quot;Template for triggering ui events&quot;)
 
@@ -52176,6 +52441,72 @@ improves readability.</div>
               </ul>
             </details>
           </div>
+          <div class="d" id="d_func_vx/event/any-from&lt;-event">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/event')">vx/event</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/event/any-from&lt;-event')">any-from&lt;-event</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt"></div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">any-from&lt;-event</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/any-1')">vx/core/any-1</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">event</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/event/event')">vx/event/event</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func any-from&lt;-event : any-1
+ [event : event]
+ (let : any-1
+  [value : any := (:from event)]
+  (any&lt;-any : any-1
+   value))
+ :doc &quot;&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
           <div class="d" id="d_func_vx/event/event&lt;-event">
             <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/event')">vx/event</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/event/event&lt;-event')">event&lt;-event</span></div>
             <div class="lbl">Description:</div>
@@ -52234,6 +52565,7 @@ improves readability.</div>
                   <div class="source">(func event&lt;-event : event
  [event : event]
  event
+ :context
  :sideeffects &quot;Triggering an event will cause some kind of change&quot;
  :doc &quot;Template for triggering ui events&quot;)</div>
                 </li>
@@ -56910,7 +57242,7 @@ improves readability.</div>
           </summary>
           <ul>
             <li>
-              <span class="ntype" onclick="docjs.navigate('type_vx/state/value-map')">value-map</span>
+              <span class="ntype" onclick="docjs.navigate('type_vx/state/valuemap')">valuemap</span>
             </li>
           </ul>
         </details>
@@ -56930,7 +57262,7 @@ improves readability.</div>
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/state/change')">change</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/state/register')">register</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/state/any-readstate&lt;-mapname-name')">any-readstate&lt;-mapname-name</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/state/any-readstate&lt;-name')">any-readstate&lt;-name</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/state/boolean-writestate&lt;-mapname-name-value')">boolean-writestate&lt;-mapname-name-value</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/state/boolean-writestate&lt;-name-value')">boolean-writestate&lt;-name-value</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/state/boolean-writestate&lt;-statelistener')">boolean-writestate&lt;-statelistener</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/state/change')">change</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/state/register')">register</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/state/state&lt;-context')">state&lt;-context</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/state/statelistener-readstate&lt;-name')">statelistener-readstate&lt;-name</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/state/statelistenermap-readstate')">statelistenermap-readstate</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/state/value-readstate&lt;-name')">value-readstate&lt;-name</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/state/valuemap-readstate&lt;-mapname')">valuemap-readstate&lt;-mapname</span>
             </li>
           </ul>
         </details>
@@ -56943,22 +57275,140 @@ improves readability.</div>
               <div class="source">(package vx/state
  :doc &quot;State handler&quot;)
 
-(type value-map : map
+(type valuemap : map
  :allowtypes [any])
 
+(func any-readstate&lt;-mapname-name : any-1
+ [mapname : string
+  name    : string]
+ (let : any-1
+  [submap : valuemap := (valuemap-readstate&lt;-mapname
+                         mapname)]
+  (any&lt;-map : any-1
+   submap
+   name))
+ :context
+ :doc &quot;Returns the named state value&quot;)
+
+(func any-readstate&lt;-name : any-1
+ [name  : string]
+ (any&lt;-any : any-1
+  (value-readstate&lt;-name
+   name))
+ :context
+ :doc &quot;Returns the named state value&quot;)
+
+(func boolean-writestate&lt;-mapname-name-value : boolean
+ [mapname : string
+  name    : string
+  value  : any]
+ (let : boolean
+  [valmap  : valuemap := (any-readstate&lt;-name : valuemap
+                          mapname)
+   valtype : any      := (type&lt;-any valmap)]
+  (if : boolean
+   (then
+    (== valtype valuemap)
+    (boolean-write&lt;-map-name-value
+     valmap
+     name
+     value))
+   (else
+    (let : boolean
+     [valmap2       : valuemap      := (valuemap
+                                        name value)
+      statelistener : statelistener := (statelistener
+                                        :name  mapname
+                                        :value valmap2)]
+     (boolean-writestate&lt;-statelistener
+      statelistener)))))
+ :context
+ :sideeffects &quot;Changes State&quot;
+ :doc &quot;Returns the named state value and changes it to the new value&quot;)
+
+(func boolean-writestate&lt;-name-value : boolean
+ [name  : string
+  value : any]
+ (let : boolean
+  [statelistener : statelistener := (statelistener-readstate&lt;-name
+                                     name)
+   statelistchg  : statelistener := (copy statelistener
+                                     :name  name
+                                     :value value)]
+  (boolean-writestate&lt;-statelistener
+   statelistchg))
+ :context
+ :sideeffects &quot;Changes State&quot;
+ :doc &quot;Returns the named state value and changes it to the new value&quot;)
+
+(func boolean-writestate&lt;-statelistener : boolean
+ [statelistener  : statelistener]
+ (let : boolean
+  [statelistenermap : statelistenermap := (statelistenermap-readstate)
+   name             : string           := (:name statelistener)]
+  (boolean-write&lt;-map-name-value
+   statelistenermap
+   name
+   statelistener))
+ :context
+ :sideeffects &quot;Changes State&quot;
+ :doc &quot;Writes statelistener into state&quot;)
+
 (func change : boolean
- [valuemap : value-map]
+ [valuemap : valuemap]
  :doc &quot;Changes the current state&quot;)
 
 (func register : boolean
  [listener : statelistener])
+
+(func state&lt;-context : state
+ (:state context)
+ :context
+ :doc &quot;Returns the full current state&quot;)
+
+(func statelistener-readstate&lt;-name : statelistener
+ [name  : string]
+ (let : statelistener
+  [statelistenermap : statelistenermap := (statelistenermap-readstate)]
+  (any&lt;-map : statelistener
+   statelistenermap
+   name))
+ :context
+ :doc &quot;Returns the named statelistener&quot;)
+
+(func statelistenermap-readstate : statelistenermap
+ (let : statelistenermap
+  [state : state := (state&lt;-context)]
+  (:statelistenermap state))
+ :context
+ :doc &quot;Returns the current state valuemap&quot;)
+
+(func value-readstate&lt;-name : any
+ [name  : string]
+ (let : any
+  [statelistener : statelistener := (statelistener-readstate&lt;-name
+                                     name)]
+  (:value statelistener))
+ :context
+ :doc &quot;Returns the named state value&quot;)
+
+(func valuemap-readstate&lt;-mapname : valuemap
+ [mapname : string]
+ (let : valuemap
+  [value  : any      := (any-readstate&lt;-name
+                         mapname)
+   valmap : valuemap := (any&lt;-any : valuemap
+                         value)]
+  valmap)
+ :context
+ :doc &quot;Returns the current state valuemap&quot;)
 </div>
             </li>
           </ul>
         </details>
       </div>
-          <div class="d" id="d_type_vx/state/value-map">
-            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/state')">vx/state</span> / <span class="ntype" onclick="docjs.navigate('type_vx/state/value-map')">value-map</span></div>
+          <div class="d" id="d_type_vx/state/valuemap">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/state')">vx/state</span> / <span class="ntype" onclick="docjs.navigate('type_vx/state/valuemap')">valuemap</span></div>
             <div class="lbl">Description:</div>
             <ul>
               <li>
@@ -56968,7 +57418,7 @@ improves readability.</div>
             <div class="lbl">Type Name:</div>
             <ul>
               <li>
-                <div class="txt">value-map</div>
+                <div class="txt">valuemap</div>
               </li>
             </ul>
             <div class="lbl">Extends:</div>
@@ -57002,8 +57452,394 @@ improves readability.</div>
               </summary>
               <ul>
                 <li>
-                  <div class="source">(type value-map : map
+                  <div class="source">(type valuemap : map
  :allowtypes [any])</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/state/any-readstate&lt;-mapname-name">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/state')">vx/state</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/state/any-readstate&lt;-mapname-name')">any-readstate&lt;-mapname-name</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns the named state value</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">any-readstate&lt;-mapname-name</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/any-1')">vx/core/any-1</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">mapname</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">name</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func any-readstate&lt;-mapname-name : any-1
+ [mapname : string
+  name    : string]
+ (let : any-1
+  [submap : valuemap := (valuemap-readstate&lt;-mapname
+                         mapname)]
+  (any&lt;-map : any-1
+   submap
+   name))
+ :context
+ :doc &quot;Returns the named state value&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/state/any-readstate&lt;-name">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/state')">vx/state</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/state/any-readstate&lt;-name')">any-readstate&lt;-name</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns the named state value</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">any-readstate&lt;-name</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/any-1')">vx/core/any-1</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">name</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func any-readstate&lt;-name : any-1
+ [name  : string]
+ (any&lt;-any : any-1
+  (value-readstate&lt;-name
+   name))
+ :context
+ :doc &quot;Returns the named state value&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/state/boolean-writestate&lt;-mapname-name-value">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/state')">vx/state</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/state/boolean-writestate&lt;-mapname-name-value')">boolean-writestate&lt;-mapname-name-value</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns the named state value and changes it to the new value</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">boolean-writestate&lt;-mapname-name-value</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/boolean')">vx/core/boolean</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">mapname</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">name</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">value</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func boolean-writestate&lt;-mapname-name-value : boolean
+ [mapname : string
+  name    : string
+  value  : any]
+ (let : boolean
+  [valmap  : valuemap := (any-readstate&lt;-name : valuemap
+                          mapname)
+   valtype : any      := (type&lt;-any valmap)]
+  (if : boolean
+   (then
+    (== valtype valuemap)
+    (boolean-write&lt;-map-name-value
+     valmap
+     name
+     value))
+   (else
+    (let : boolean
+     [valmap2       : valuemap      := (valuemap
+                                        name value)
+      statelistener : statelistener := (statelistener
+                                        :name  mapname
+                                        :value valmap2)]
+     (boolean-writestate&lt;-statelistener
+      statelistener)))))
+ :context
+ :sideeffects &quot;Changes State&quot;
+ :doc &quot;Returns the named state value and changes it to the new value&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/state/boolean-writestate&lt;-name-value">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/state')">vx/state</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/state/boolean-writestate&lt;-name-value')">boolean-writestate&lt;-name-value</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns the named state value and changes it to the new value</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">boolean-writestate&lt;-name-value</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/boolean')">vx/core/boolean</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">name</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">value</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func boolean-writestate&lt;-name-value : boolean
+ [name  : string
+  value : any]
+ (let : boolean
+  [statelistener : statelistener := (statelistener-readstate&lt;-name
+                                     name)
+   statelistchg  : statelistener := (copy statelistener
+                                     :name  name
+                                     :value value)]
+  (boolean-writestate&lt;-statelistener
+   statelistchg))
+ :context
+ :sideeffects &quot;Changes State&quot;
+ :doc &quot;Returns the named state value and changes it to the new value&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/state/boolean-writestate&lt;-statelistener">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/state')">vx/state</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/state/boolean-writestate&lt;-statelistener')">boolean-writestate&lt;-statelistener</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Writes statelistener into state</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">boolean-writestate&lt;-statelistener</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/boolean')">vx/core/boolean</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">statelistener</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/statelistener')">vx/core/statelistener</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func boolean-writestate&lt;-statelistener : boolean
+ [statelistener  : statelistener]
+ (let : boolean
+  [statelistenermap : statelistenermap := (statelistenermap-readstate)
+   name             : string           := (:name statelistener)]
+  (boolean-write&lt;-map-name-value
+   statelistenermap
+   name
+   statelistener))
+ :context
+ :sideeffects &quot;Changes State&quot;
+ :doc &quot;Writes statelistener into state&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -57043,7 +57879,7 @@ improves readability.</div>
                   </div>
                   <div class="tr">
                     <div class="td">valuemap</div>
-                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/state/value-map')">vx/state/value-map</span></div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/state/valuemap')">vx/state/valuemap</span></div>
                     <div class="td"></div>
                   </div>
                 </div>
@@ -57064,7 +57900,7 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func change : boolean
- [valuemap : value-map]
+ [valuemap : valuemap]
  :doc &quot;Changes the current state&quot;)</div>
                 </li>
               </ul>
@@ -57127,6 +57963,328 @@ improves readability.</div>
                 <li>
                   <div class="source">(func register : boolean
  [listener : statelistener])</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/state/state&lt;-context">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/state')">vx/state</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/state/state&lt;-context')">state&lt;-context</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns the full current state</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">state&lt;-context</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/state')">vx/core/state</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func state&lt;-context : state
+ (:state context)
+ :context
+ :doc &quot;Returns the full current state&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/state/statelistener-readstate&lt;-name">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/state')">vx/state</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/state/statelistener-readstate&lt;-name')">statelistener-readstate&lt;-name</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns the named statelistener</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">statelistener-readstate&lt;-name</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/statelistener')">vx/core/statelistener</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">name</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func statelistener-readstate&lt;-name : statelistener
+ [name  : string]
+ (let : statelistener
+  [statelistenermap : statelistenermap := (statelistenermap-readstate)]
+  (any&lt;-map : statelistener
+   statelistenermap
+   name))
+ :context
+ :doc &quot;Returns the named statelistener&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/state/statelistenermap-readstate">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/state')">vx/state</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/state/statelistenermap-readstate')">statelistenermap-readstate</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns the current state valuemap</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">statelistenermap-readstate</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/statelistenermap')">vx/core/statelistenermap</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func statelistenermap-readstate : statelistenermap
+ (let : statelistenermap
+  [state : state := (state&lt;-context)]
+  (:statelistenermap state))
+ :context
+ :doc &quot;Returns the current state valuemap&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/state/value-readstate&lt;-name">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/state')">vx/state</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/state/value-readstate&lt;-name')">value-readstate&lt;-name</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns the named state value</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">value-readstate&lt;-name</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">name</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func value-readstate&lt;-name : any
+ [name  : string]
+ (let : any
+  [statelistener : statelistener := (statelistener-readstate&lt;-name
+                                     name)]
+  (:value statelistener))
+ :context
+ :doc &quot;Returns the named state value&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/state/valuemap-readstate&lt;-mapname">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/state')">vx/state</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/state/valuemap-readstate&lt;-mapname')">valuemap-readstate&lt;-mapname</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns the current state valuemap</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">valuemap-readstate&lt;-mapname</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/state/valuemap')">vx/state/valuemap</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">mapname</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func valuemap-readstate&lt;-mapname : valuemap
+ [mapname : string]
+ (let : valuemap
+  [value  : any      := (any-readstate&lt;-name
+                         mapname)
+   valmap : valuemap := (any&lt;-any : valuemap
+                         value)]
+  valmap)
+ :context
+ :doc &quot;Returns the current state valuemap&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -66155,7 +67313,7 @@ improves readability.</div>
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/divchild&lt;-ui')">divchild&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/divchildlist&lt;-uimap')">divchildlist&lt;-uimap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/node-app&lt;-ui-orig-parent')">node-app&lt;-ui-orig-parent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/node-render&lt;-node-ui')">node-render&lt;-node-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/string-stylename&lt;-name-styletype')">string-stylename&lt;-name-styletype</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/style&lt;-style')">style&lt;-style</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/stylelist&lt;-stylelist')">stylelist&lt;-stylelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/stylelist&lt;-stylemap')">stylelist&lt;-stylemap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/stylemap&lt;-stylemap')">stylemap&lt;-stylemap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/stylesheet&lt;-stylesheet')">stylesheet&lt;-stylesheet</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/stylesheet-render-html')">stylesheet-render-html</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/ui-render-app&lt;-ui-orig-parent')">ui-render-app&lt;-ui-orig-parent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/ui-render-label&lt;-ui-orig-parent')">ui-render-label&lt;-ui-orig-parent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/ui-render-default&lt;-ui-orig-parent')">ui-render-default&lt;-ui-orig-parent</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/context-write')">context-write</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/divchild&lt;-ui')">divchild&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/divchildlist&lt;-uimap')">divchildlist&lt;-uimap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/node-app&lt;-ui-orig-parent')">node-app&lt;-ui-orig-parent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/node-render&lt;-node-ui')">node-render&lt;-node-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/string-stylename&lt;-name-styletype')">string-stylename&lt;-name-styletype</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/style&lt;-style')">style&lt;-style</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/stylelist&lt;-stylelist')">stylelist&lt;-stylelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/stylelist&lt;-stylemap')">stylelist&lt;-stylemap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/stylemap&lt;-stylemap')">stylemap&lt;-stylemap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/stylesheet&lt;-stylesheet')">stylesheet&lt;-stylesheet</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/stylesheet-render-html')">stylesheet-render-html</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/ui-render-app&lt;-ui-orig-parent')">ui-render-app&lt;-ui-orig-parent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/ui-render-label&lt;-ui-orig-parent')">ui-render-label&lt;-ui-orig-parent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/ui-render-default&lt;-ui-orig-parent')">ui-render-default&lt;-ui-orig-parent</span>
             </li>
           </ul>
         </details>
@@ -66195,17 +67353,22 @@ improves readability.</div>
   :layoutelse       layout-else-html
   :stylesheetrender stylesheet-render-html))
 
+(func context-write : context
+ (doc/context-write)
+ :context
+ :doc &quot;&quot;)
+
 (func divchild&lt;-ui : html/divchild
  [ui : ui/ui]
  (let : html/div
-  [uid         : string            := (:uid       ui)
-   uimapchild  : ui/uimap          := (:uimap     ui)
-   uistyle     : ui/style          := (:style     ui)
-   uistyles    : ui/stylelist      := (:stylelist ui)
-   styleunique : html/style        := (style&lt;-style
-                                       uistyle)
-   htmlstyles  : html/stylelist    := (stylelist&lt;-stylelist
-                                       uistyles)]
+  [uid         : string         := (:uid       ui)
+   uimapchild  : ui/uimap       := (:uimap     ui)
+   uistyle     : ui/style       := (:style     ui)
+   uistyles    : ui/stylelist   := (:stylelist ui)
+   styleunique : html/style     := (style&lt;-style
+                                    uistyle)
+   htmlstyles  : html/stylelist := (stylelist&lt;-stylelist
+                                    uistyles)]
   (html/div
    :id uid
    :style-unique styleunique
@@ -66233,16 +67396,12 @@ improves readability.</div>
  [node : html/node
   ui   : ui]
  (let : html/node
-  [uid      : string         := (:uid ui)
-   eventmap : event/eventmap := (:eventmap ui)
-   htmltext : string         := (html/string&lt;-node-indent
-                                 node
-                                 2)
-   htmldone : boolean        := (doc/boolean-replace&lt;-id-htmltext-data-eventmap
-                                 uid
-                                 htmltext
-                                 ui
-                                 eventmap)]
+  [htmltext : string  := (html/string&lt;-node-indent
+                          node
+                          2)
+   htmldone : boolean := (doc/boolean-replace&lt;-ui-htmltext
+                          ui
+                          htmltext)]
   node)
  :sideeffects &quot;UI altered&quot;
  :doc &quot;&quot;)
@@ -66770,6 +67929,64 @@ improves readability.</div>
               </ul>
             </details>
           </div>
+          <div class="d" id="d_func_vx/ui/html/uihtml/context-write">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/html/uihtml')">vx/ui/html/uihtml</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/context-write')">context-write</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt"></div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">context-write</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/context')">vx/core/context</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func context-write : context
+ (doc/context-write)
+ :context
+ :doc &quot;&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
           <div class="d" id="d_func_vx/ui/html/uihtml/divchild&lt;-ui">
             <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/html/uihtml')">vx/ui/html/uihtml</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/html/uihtml/divchild&lt;-ui')">divchild&lt;-ui</span></div>
             <div class="lbl">Description:</div>
@@ -66828,14 +68045,14 @@ improves readability.</div>
                   <div class="source">(func divchild&lt;-ui : html/divchild
  [ui : ui/ui]
  (let : html/div
-  [uid         : string            := (:uid       ui)
-   uimapchild  : ui/uimap          := (:uimap     ui)
-   uistyle     : ui/style          := (:style     ui)
-   uistyles    : ui/stylelist      := (:stylelist ui)
-   styleunique : html/style        := (style&lt;-style
-                                       uistyle)
-   htmlstyles  : html/stylelist    := (stylelist&lt;-stylelist
-                                       uistyles)]
+  [uid         : string         := (:uid       ui)
+   uimapchild  : ui/uimap       := (:uimap     ui)
+   uistyle     : ui/style       := (:style     ui)
+   uistyles    : ui/stylelist   := (:stylelist ui)
+   styleunique : html/style     := (style&lt;-style
+                                    uistyle)
+   htmlstyles  : html/stylelist := (stylelist&lt;-stylelist
+                                    uistyles)]
   (html/div
    :id uid
    :style-unique styleunique
@@ -67052,16 +68269,12 @@ improves readability.</div>
  [node : html/node
   ui   : ui]
  (let : html/node
-  [uid      : string         := (:uid ui)
-   eventmap : event/eventmap := (:eventmap ui)
-   htmltext : string         := (html/string&lt;-node-indent
-                                 node
-                                 2)
-   htmldone : boolean        := (doc/boolean-replace&lt;-id-htmltext-data-eventmap
-                                 uid
-                                 htmltext
-                                 ui
-                                 eventmap)]
+  [htmltext : string  := (html/string&lt;-node-indent
+                          node
+                          2)
+   htmldone : boolean := (doc/boolean-replace&lt;-ui-htmltext
+                          ui
+                          htmltext)]
   node)
  :sideeffects &quot;UI altered&quot;
  :doc &quot;&quot;)</div>
@@ -68160,6 +69373,10 @@ improves readability.</div>
                 <div class="td">file</div>
                 <div class="td">vx/data/file</div>
               </div>
+              <div class="tr">
+                <div class="td">state</div>
+                <div class="td">vx/state</div>
+              </div>
             </div>
           </li>
         </ul>
@@ -68190,7 +69407,7 @@ improves readability.</div>
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/layout&lt;-style')">layout&lt;-style</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/layoutmap&lt;-layoutlist')">layoutmap&lt;-layoutlist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/stylemap&lt;-stylelist')">stylemap&lt;-stylelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/stylesheet-render')">stylesheet-render</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui&lt;-renderer-ui-orig-parent')">ui&lt;-renderer-ui-orig-parent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-layout&lt;-ui-layoutmap-else')">ui-layout&lt;-ui-layoutmap-else</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap&lt;-uimap-data')">uimap&lt;-uimap-data</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap-layout&lt;-uimap-layoutmap-else')">uimap-layout&lt;-uimap-layoutmap-else</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render&lt;-fn-render-ui-orig-parent')">ui-render&lt;-fn-render-ui-orig-parent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render')">ui-render</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render&lt;-ui-orig-parent')">ui-render&lt;-ui-orig-parent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uiengine-render')">uiengine-render</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap&lt;-uilist')">uimap&lt;-uilist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap-render&lt;-uimap-parent')">uimap-render&lt;-uimap-parent</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/boolean-writestate&lt;-ui')">boolean-writestate&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/boolean-writestate&lt;-uiengine')">boolean-writestate&lt;-uiengine</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/layout&lt;-style')">layout&lt;-style</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/layoutmap&lt;-layoutlist')">layoutmap&lt;-layoutlist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/stylemap&lt;-stylelist')">stylemap&lt;-stylelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/stylesheet-render')">stylesheet-render</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui&lt;-renderer-ui-orig-parent')">ui&lt;-renderer-ui-orig-parent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-data&lt;-ui')">ui-data&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-from&lt;-event')">ui-from&lt;-event</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-layout&lt;-ui-layoutmap-else')">ui-layout&lt;-ui-layoutmap-else</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-readstate&lt;-uid')">ui-readstate&lt;-uid</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render')">ui-render</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render&lt;-fn-render-ui-orig-parent')">ui-render&lt;-fn-render-ui-orig-parent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render&lt;-ui-orig-parent')">ui-render&lt;-ui-orig-parent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uiengine-readstate')">uiengine-readstate</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uiengine-render')">uiengine-render</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap&lt;-uilist')">uimap&lt;-uilist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap&lt;-uimap-data')">uimap&lt;-uimap-data</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap-layout&lt;-uimap-layoutmap-else')">uimap-layout&lt;-uimap-layoutmap-else</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap-render&lt;-uimap-parent')">uimap-render&lt;-uimap-parent</span>
             </li>
           </ul>
         </details>
@@ -68203,6 +69420,7 @@ improves readability.</div>
               <div class="source">(package vx/ui/ui
  :libs (lib event :path vx/event)
        (lib file  :path vx/data/file)
+       (lib state :path vx/state)
  :doc &quot;Universal Ui Element&quot;)
 
 (type bounds : struct
@@ -68259,22 +69477,6 @@ improves readability.</div>
  :allowtypes [render]
  :doc &quot;Map of render&quot;)
 
-/*
-(type renderer : struct
- :properties [name      : string
-              layout    : layout
-              fn-render : ui-render&lt;-ui-orig-parent]
- :doc &quot;Universal Renderer&quot;)
-
-(type rendererlist : list
- :allowtypes [renderer]
- :doc &quot;Map of renderer&quot;)
-
-(type renderermap : map
- :allowtypes [renderer]
- :doc &quot;Map of renderer&quot;)
-*/
-
 (type style : struct
  :properties [name             : string
               boundsmargin     : bounds
@@ -68309,6 +69511,7 @@ improves readability.</div>
  :properties [data            : any
               eventmap        : event/eventmap
               fn-uimap-data   : uimap&lt;-uimap-data
+              parent          : string
               path            : string
               render          : render
               renderer        : layout
@@ -68335,10 +69538,6 @@ improves readability.</div>
  :doc &quot;Template for uiengine&quot;)
 
 (type cursor-pointer : cursor)
-
-/*
-(const global-uiengine : uiengine)
-*/
 
 (const layout-app : layout
  (layout
@@ -68446,6 +69645,25 @@ improves readability.</div>
 
 (const styletype-system : styletype)
 
+(func boolean-writestate&lt;-ui : boolean
+ [ui : ui]
+ (let : boolean
+  [uid : string := (:uid ui)]
+  (state/boolean-writestate&lt;-mapname-name-value
+   :uimap
+   uid
+   value))
+ :context
+ :doc &quot;&quot;)
+
+(func boolean-writestate&lt;-uiengine : boolean
+ [uiengine : uiengine]
+ (state/boolean-writestate&lt;-name-value
+  :uiengine uiengine)
+ :context
+ :sideeffects &quot;Changes state&quot;
+ :doc &quot;Writes the uiengine to state&quot;)
+
 (func layout&lt;-style : layout
  [style : style]
  (:layout style)
@@ -68488,6 +69706,20 @@ improves readability.</div>
   uichg)
  :doc &quot;&quot;)
 
+(func ui-data&lt;-ui : ui
+ [ui : ui]
+ (let : ui
+  [data  : any   := (:data ui)]
+  (any&lt;-any : ui
+   data))
+ :doc &quot;Returns (:data ui) cast as ui&quot;)
+
+(func ui-from&lt;-event : ui
+ [event : event/event]
+ (event/any-from&lt;-event : ui
+  event)
+ :doc &quot;Returns (:from event) cast as ui&quot;)
+
 (func ui-layout&lt;-ui-layoutmap-else : ui
  [ui : ui
   layoutmap  : layoutmap
@@ -68514,25 +69746,21 @@ improves readability.</div>
    :uimap  uimaprend))
  :doc &quot;Returns a ui with a renderer added to each ui.&quot;)
 
-(func uimap&lt;-uimap-data : uimap
- [uimap : uimap
-  data  : any]
- :doc &quot;Template for creating uimap dynamically&quot;)
+(func ui-readstate&lt;-uid : ui
+ [uid : string]
+ (state/any-readstate&lt;-mapname-name : ui
+  :uimap
+  uid)
+ :context
+ :doc &quot;Returns the named ui from state&quot;)
 
-(func uimap-layout&lt;-uimap-layoutmap-else : uimap
- [uimap : uimap
-  layoutmap  : layoutmap
-  layoutelse : layout]
- (map&lt;-map : uimap
-  uimap
-  (fn : ui
-   [key : string
-    ui  : ui]
-   (ui-layout&lt;-ui-layoutmap-else
-    ui
-    layoutmap
-    layoutelse)))
- :doc &quot;Returns a uimap with a renderer added to each ui.&quot;)
+(func ui-render : ui
+ [uiarg : ui]
+ (ui-render&lt;-ui-orig-parent
+  uiarg
+  (empty ui)
+  (empty ui))
+ :doc &quot;&quot;)
 
 (func ui-render&lt;-fn-render-ui-orig-parent : render
  [fn-render : ui-render&lt;-ui-orig-parent
@@ -68542,15 +69770,8 @@ improves readability.</div>
  (fn-render
   ui
   orig
-  parent))
-
-(func ui-render : ui
- [uiarg : ui]
- (ui-render&lt;-ui-orig-parent
-  uiarg
-  (empty ui)
-  (empty ui))
- :doc &quot;&quot;)
+  parent)
+ :doc &quot;Returns a rendered ui&quot;)
 
 (func ui-render&lt;-ui-orig-parent : ui
  [ui     : ui
@@ -68573,6 +69794,12 @@ improves readability.</div>
  :sideeffects &quot;Alters UI&quot;
  :doc &quot;Returns a rendered object from a UI Element.&quot;)
 
+(func uiengine-readstate : uiengine
+ (state/any-readstate&lt;-name : uiengine
+  :uiengine)
+ :context
+ :doc &quot;Returns the current uiengine from state&quot;)
+
 (func uiengine-render : uiengine
  [uiengine : uiengine]
  (let : uiengine
@@ -68592,6 +69819,7 @@ improves readability.</div>
                                             uirenderer)]
   (copy uiengine
    :ui uirendered))
+ :context
  :doc &quot;Returns a fully rendered ui for a given engine.&quot;)
 
 (func uimap&lt;-uilist : uimap
@@ -68602,6 +69830,26 @@ improves readability.</div>
    [ui : ui]
    (:uid ui)))
  :doc &quot;&quot;)
+
+(func uimap&lt;-uimap-data : uimap
+ [uimap : uimap
+  data  : any]
+ :doc &quot;Template for creating uimap dynamically&quot;)
+
+(func uimap-layout&lt;-uimap-layoutmap-else : uimap
+ [uimap : uimap
+  layoutmap  : layoutmap
+  layoutelse : layout]
+ (map&lt;-map : uimap
+  uimap
+  (fn : ui
+   [key : string
+    ui  : ui]
+   (ui-layout&lt;-ui-layoutmap-else
+    ui
+    layoutmap
+    layoutelse)))
+ :doc &quot;Returns a uimap with a renderer added to each ui.&quot;)
 
 (func uimap-render&lt;-uimap-parent : uimap
  [uimap  : uimap
@@ -69813,6 +71061,13 @@ improves readability.</div>
                       <div class="td">false</div>
                     </div>
                     <div class="tr">
+                      <div class="td">parent</div>
+                      <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                      <div class="td"></div>
+                      <div class="td">false</div>
+                      <div class="td">false</div>
+                    </div>
+                    <div class="tr">
                       <div class="td">path</div>
                       <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
                       <div class="td"></div>
@@ -69889,6 +71144,7 @@ improves readability.</div>
  :properties [data            : any
               eventmap        : event/eventmap
               fn-uimap-data   : uimap&lt;-uimap-data
+              parent          : string
               path            : string
               render          : render
               renderer        : layout
@@ -71403,6 +72659,141 @@ improves readability.</div>
               </ul>
             </details>
           </div>
+          <div class="d" id="d_func_vx/ui/ui/boolean-writestate&lt;-ui">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/boolean-writestate&lt;-ui')">boolean-writestate&lt;-ui</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt"></div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">boolean-writestate&lt;-ui</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/boolean')">vx/core/boolean</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">ui</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func boolean-writestate&lt;-ui : boolean
+ [ui : ui]
+ (let : boolean
+  [uid : string := (:uid ui)]
+  (state/boolean-writestate&lt;-mapname-name-value
+   :uimap
+   uid
+   value))
+ :context
+ :doc &quot;&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/ui/ui/boolean-writestate&lt;-uiengine">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/boolean-writestate&lt;-uiengine')">boolean-writestate&lt;-uiengine</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Writes the uiengine to state</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">boolean-writestate&lt;-uiengine</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/boolean')">vx/core/boolean</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">uiengine</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uiengine')">vx/ui/ui/uiengine</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func boolean-writestate&lt;-uiengine : boolean
+ [uiengine : uiengine]
+ (state/boolean-writestate&lt;-name-value
+  :uiengine uiengine)
+ :context
+ :sideeffects &quot;Changes state&quot;
+ :doc &quot;Writes the uiengine to state&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
           <div class="d" id="d_func_vx/ui/ui/layout&lt;-style">
             <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/layout&lt;-style')">layout&lt;-style</span></div>
             <div class="lbl">Description:</div>
@@ -71750,6 +73141,136 @@ improves readability.</div>
               </ul>
             </details>
           </div>
+          <div class="d" id="d_func_vx/ui/ui/ui-data&lt;-ui">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-data&lt;-ui')">ui-data&lt;-ui</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns (:data ui) cast as ui</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">ui-data&lt;-ui</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">ui</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func ui-data&lt;-ui : ui
+ [ui : ui]
+ (let : ui
+  [data  : any   := (:data ui)]
+  (any&lt;-any : ui
+   data))
+ :doc &quot;Returns (:data ui) cast as ui&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/ui/ui/ui-from&lt;-event">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-from&lt;-event')">ui-from&lt;-event</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns (:from event) cast as ui</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">ui-from&lt;-event</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">event</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/event/event')">vx/event/event</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func ui-from&lt;-event : ui
+ [event : event/event]
+ (event/any-from&lt;-event : ui
+  event)
+ :doc &quot;Returns (:from event) cast as ui&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
           <div class="d" id="d_func_vx/ui/ui/ui-layout&lt;-ui-layoutmap-else">
             <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-layout&lt;-ui-layoutmap-else')">ui-layout&lt;-ui-layoutmap-else</span></div>
             <div class="lbl">Description:</div>
@@ -71840,6 +73361,517 @@ improves readability.</div>
    :renderer renderer
    :uimap  uimaprend))
  :doc &quot;Returns a ui with a renderer added to each ui.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/ui/ui/ui-readstate&lt;-uid">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-readstate&lt;-uid')">ui-readstate&lt;-uid</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns the named ui from state</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">ui-readstate&lt;-uid</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">uid</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func ui-readstate&lt;-uid : ui
+ [uid : string]
+ (state/any-readstate&lt;-mapname-name : ui
+  :uimap
+  uid)
+ :context
+ :doc &quot;Returns the named ui from state&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/ui/ui/ui-render">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render')">ui-render</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt"></div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">ui-render</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">uiarg</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func ui-render : ui
+ [uiarg : ui]
+ (ui-render&lt;-ui-orig-parent
+  uiarg
+  (empty ui)
+  (empty ui))
+ :doc &quot;&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/ui/ui/ui-render&lt;-fn-render-ui-orig-parent">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render&lt;-fn-render-ui-orig-parent')">ui-render&lt;-fn-render-ui-orig-parent</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a rendered ui</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">ui-render&lt;-fn-render-ui-orig-parent</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/render')">vx/ui/ui/render</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">fn-render</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui-render&lt;-ui-orig-parent')">vx/ui/ui/ui-render&lt;-ui-orig-parent</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">ui</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">orig</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">parent</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func ui-render&lt;-fn-render-ui-orig-parent : render
+ [fn-render : ui-render&lt;-ui-orig-parent
+  ui        : ui
+  orig      : ui
+  parent    : ui]
+ (fn-render
+  ui
+  orig
+  parent)
+ :doc &quot;Returns a rendered ui&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/ui/ui/ui-render&lt;-ui-orig-parent">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render&lt;-ui-orig-parent')">ui-render&lt;-ui-orig-parent</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a rendered object from a UI Element.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">ui-render&lt;-ui-orig-parent</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">ui</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">orig</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">parent</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func ui-render&lt;-ui-orig-parent : ui
+ [ui     : ui
+  orig   : ui
+  parent : ui]
+ (if : ui
+  (then
+   (== ui orig)
+   orig)
+  (else
+   (let : ui
+    [uimap    : uimap  := (:uimap    ui)
+     renderer : layout := (:renderer ui)
+     uiout    : ui     := (ui&lt;-renderer-ui-orig-parent
+                           renderer
+                           ui
+                           orig
+                           parent)]
+    uiout)))
+ :sideeffects &quot;Alters UI&quot;
+ :doc &quot;Returns a rendered object from a UI Element.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/ui/ui/uiengine-readstate">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uiengine-readstate')">uiengine-readstate</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns the current uiengine from state</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">uiengine-readstate</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uiengine')">vx/ui/ui/uiengine</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func uiengine-readstate : uiengine
+ (state/any-readstate&lt;-name : uiengine
+  :uiengine)
+ :context
+ :doc &quot;Returns the current uiengine from state&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/ui/ui/uiengine-render">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uiengine-render')">uiengine-render</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a fully rendered ui for a given engine.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">uiengine-render</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uiengine')">vx/ui/ui/uiengine</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">uiengine</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uiengine')">vx/ui/ui/uiengine</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func uiengine-render : uiengine
+ [uiengine : uiengine]
+ (let : uiengine
+  [stylesheet       : stylesheet        := (:stylesheet       uiengine)
+   ui               : ui                := (:ui               uiengine)
+   layoutengine     : layoutengine      := (:layoutengine     uiengine)
+   layoutmap        : layoutmap         := (:layoutmap        layoutengine)
+   layoutelse       : layout            := (:layoutelse       layoutengine)
+   stylesheetrender : stylesheet-render := (:stylesheetrender layoutengine)
+   stylesheetrend   : stylesheet        := (stylesheetrender
+                                            stylesheet)
+   uirenderer       : ui                := (ui-layout&lt;-ui-layoutmap-else
+                                            ui
+                                            layoutmap
+                                            layoutelse)
+   uirendered       : ui                := (ui-render
+                                            uirenderer)]
+  (copy uiengine
+   :ui uirendered))
+ :context
+ :doc &quot;Returns a fully rendered ui for a given engine.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/ui/ui/uimap&lt;-uilist">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap&lt;-uilist')">uimap&lt;-uilist</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt"></div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">uimap&lt;-uilist</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uimap')">vx/ui/ui/uimap</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">uilist</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uilist')">vx/ui/ui/uilist</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func uimap&lt;-uilist : uimap
+ [uilist : uilist]
+ (map&lt;-list : uimap
+  uilist
+  (fn : string
+   [ui : ui]
+   (:uid ui)))
+ :doc &quot;&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -71991,390 +74023,6 @@ improves readability.</div>
     layoutmap
     layoutelse)))
  :doc &quot;Returns a uimap with a renderer added to each ui.&quot;)</div>
-                </li>
-              </ul>
-            </details>
-          </div>
-          <div class="d" id="d_func_vx/ui/ui/ui-render&lt;-fn-render-ui-orig-parent">
-            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render&lt;-fn-render-ui-orig-parent')">ui-render&lt;-fn-render-ui-orig-parent</span></div>
-            <div class="lbl">Description:</div>
-            <ul>
-              <li>
-                <div class="txt"></div>
-              </li>
-            </ul>
-            <div class="lbl">Function Name:</div>
-            <ul>
-              <li>
-                <div class="txt">ui-render&lt;-fn-render-ui-orig-parent</div>
-              </li>
-            </ul>
-            <div class="lbl">Return Type:</div>
-            <ul>
-              <li>
-                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/render')">vx/ui/ui/render</span></div>
-              </li>
-            </ul>
-          <details open="true">
-            <summary>
-              <span class="lbl">Arguments:</span>
-            </summary>
-            <ul>
-              <li>
-                <div class="table">
-                  <div class="th">
-                    <div class="td">Name</div>
-                    <div class="td">Type</div>
-                    <div class="td">Generic</div>
-                    <div class="td">Description</div>
-                  </div>
-                  <div class="tr">
-                    <div class="td">fn-render</div>
-                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui-render&lt;-ui-orig-parent')">vx/ui/ui/ui-render&lt;-ui-orig-parent</span></div>
-                    <div class="td"></div>
-                  </div>
-                  <div class="tr">
-                    <div class="td">ui</div>
-                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
-                    <div class="td"></div>
-                  </div>
-                  <div class="tr">
-                    <div class="td">orig</div>
-                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
-                    <div class="td"></div>
-                  </div>
-                  <div class="tr">
-                    <div class="td">parent</div>
-                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
-                    <div class="td"></div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </details>
-            <details open="true">
-              <summary>
-                <span class="lbl">Usage/Test Cases:</span>
-              </summary>
-              <ul>
-              </ul>
-            </details>
-            <details open="true">
-              <summary>
-                <span class="lbl">Source Code:</span>
-              </summary>
-              <ul>
-                <li>
-                  <div class="source">(func ui-render&lt;-fn-render-ui-orig-parent : render
- [fn-render : ui-render&lt;-ui-orig-parent
-  ui        : ui
-  orig      : ui
-  parent    : ui]
- (fn-render
-  ui
-  orig
-  parent))</div>
-                </li>
-              </ul>
-            </details>
-          </div>
-          <div class="d" id="d_func_vx/ui/ui/ui-render">
-            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render')">ui-render</span></div>
-            <div class="lbl">Description:</div>
-            <ul>
-              <li>
-                <div class="txt"></div>
-              </li>
-            </ul>
-            <div class="lbl">Function Name:</div>
-            <ul>
-              <li>
-                <div class="txt">ui-render</div>
-              </li>
-            </ul>
-            <div class="lbl">Return Type:</div>
-            <ul>
-              <li>
-                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
-              </li>
-            </ul>
-          <details open="true">
-            <summary>
-              <span class="lbl">Arguments:</span>
-            </summary>
-            <ul>
-              <li>
-                <div class="table">
-                  <div class="th">
-                    <div class="td">Name</div>
-                    <div class="td">Type</div>
-                    <div class="td">Generic</div>
-                    <div class="td">Description</div>
-                  </div>
-                  <div class="tr">
-                    <div class="td">uiarg</div>
-                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
-                    <div class="td"></div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </details>
-            <details open="true">
-              <summary>
-                <span class="lbl">Usage/Test Cases:</span>
-              </summary>
-              <ul>
-              </ul>
-            </details>
-            <details open="true">
-              <summary>
-                <span class="lbl">Source Code:</span>
-              </summary>
-              <ul>
-                <li>
-                  <div class="source">(func ui-render : ui
- [uiarg : ui]
- (ui-render&lt;-ui-orig-parent
-  uiarg
-  (empty ui)
-  (empty ui))
- :doc &quot;&quot;)</div>
-                </li>
-              </ul>
-            </details>
-          </div>
-          <div class="d" id="d_func_vx/ui/ui/ui-render&lt;-ui-orig-parent">
-            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render&lt;-ui-orig-parent')">ui-render&lt;-ui-orig-parent</span></div>
-            <div class="lbl">Description:</div>
-            <ul>
-              <li>
-                <div class="txt">Returns a rendered object from a UI Element.</div>
-              </li>
-            </ul>
-            <div class="lbl">Function Name:</div>
-            <ul>
-              <li>
-                <div class="txt">ui-render&lt;-ui-orig-parent</div>
-              </li>
-            </ul>
-            <div class="lbl">Return Type:</div>
-            <ul>
-              <li>
-                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
-              </li>
-            </ul>
-          <details open="true">
-            <summary>
-              <span class="lbl">Arguments:</span>
-            </summary>
-            <ul>
-              <li>
-                <div class="table">
-                  <div class="th">
-                    <div class="td">Name</div>
-                    <div class="td">Type</div>
-                    <div class="td">Generic</div>
-                    <div class="td">Description</div>
-                  </div>
-                  <div class="tr">
-                    <div class="td">ui</div>
-                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
-                    <div class="td"></div>
-                  </div>
-                  <div class="tr">
-                    <div class="td">orig</div>
-                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
-                    <div class="td"></div>
-                  </div>
-                  <div class="tr">
-                    <div class="td">parent</div>
-                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
-                    <div class="td"></div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </details>
-            <details open="true">
-              <summary>
-                <span class="lbl">Usage/Test Cases:</span>
-              </summary>
-              <ul>
-              </ul>
-            </details>
-            <details open="true">
-              <summary>
-                <span class="lbl">Source Code:</span>
-              </summary>
-              <ul>
-                <li>
-                  <div class="source">(func ui-render&lt;-ui-orig-parent : ui
- [ui     : ui
-  orig   : ui
-  parent : ui]
- (if : ui
-  (then
-   (== ui orig)
-   orig)
-  (else
-   (let : ui
-    [uimap    : uimap  := (:uimap    ui)
-     renderer : layout := (:renderer ui)
-     uiout    : ui     := (ui&lt;-renderer-ui-orig-parent
-                           renderer
-                           ui
-                           orig
-                           parent)]
-    uiout)))
- :sideeffects &quot;Alters UI&quot;
- :doc &quot;Returns a rendered object from a UI Element.&quot;)</div>
-                </li>
-              </ul>
-            </details>
-          </div>
-          <div class="d" id="d_func_vx/ui/ui/uiengine-render">
-            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uiengine-render')">uiengine-render</span></div>
-            <div class="lbl">Description:</div>
-            <ul>
-              <li>
-                <div class="txt">Returns a fully rendered ui for a given engine.</div>
-              </li>
-            </ul>
-            <div class="lbl">Function Name:</div>
-            <ul>
-              <li>
-                <div class="txt">uiengine-render</div>
-              </li>
-            </ul>
-            <div class="lbl">Return Type:</div>
-            <ul>
-              <li>
-                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uiengine')">vx/ui/ui/uiengine</span></div>
-              </li>
-            </ul>
-          <details open="true">
-            <summary>
-              <span class="lbl">Arguments:</span>
-            </summary>
-            <ul>
-              <li>
-                <div class="table">
-                  <div class="th">
-                    <div class="td">Name</div>
-                    <div class="td">Type</div>
-                    <div class="td">Generic</div>
-                    <div class="td">Description</div>
-                  </div>
-                  <div class="tr">
-                    <div class="td">uiengine</div>
-                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uiengine')">vx/ui/ui/uiengine</span></div>
-                    <div class="td"></div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </details>
-            <details open="true">
-              <summary>
-                <span class="lbl">Usage/Test Cases:</span>
-              </summary>
-              <ul>
-              </ul>
-            </details>
-            <details open="true">
-              <summary>
-                <span class="lbl">Source Code:</span>
-              </summary>
-              <ul>
-                <li>
-                  <div class="source">(func uiengine-render : uiengine
- [uiengine : uiengine]
- (let : uiengine
-  [stylesheet       : stylesheet        := (:stylesheet       uiengine)
-   ui               : ui                := (:ui               uiengine)
-   layoutengine     : layoutengine      := (:layoutengine     uiengine)
-   layoutmap        : layoutmap         := (:layoutmap        layoutengine)
-   layoutelse       : layout            := (:layoutelse       layoutengine)
-   stylesheetrender : stylesheet-render := (:stylesheetrender layoutengine)
-   stylesheetrend   : stylesheet        := (stylesheetrender
-                                            stylesheet)
-   uirenderer       : ui                := (ui-layout&lt;-ui-layoutmap-else
-                                            ui
-                                            layoutmap
-                                            layoutelse)
-   uirendered       : ui                := (ui-render
-                                            uirenderer)]
-  (copy uiengine
-   :ui uirendered))
- :doc &quot;Returns a fully rendered ui for a given engine.&quot;)</div>
-                </li>
-              </ul>
-            </details>
-          </div>
-          <div class="d" id="d_func_vx/ui/ui/uimap&lt;-uilist">
-            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap&lt;-uilist')">uimap&lt;-uilist</span></div>
-            <div class="lbl">Description:</div>
-            <ul>
-              <li>
-                <div class="txt"></div>
-              </li>
-            </ul>
-            <div class="lbl">Function Name:</div>
-            <ul>
-              <li>
-                <div class="txt">uimap&lt;-uilist</div>
-              </li>
-            </ul>
-            <div class="lbl">Return Type:</div>
-            <ul>
-              <li>
-                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uimap')">vx/ui/ui/uimap</span></div>
-              </li>
-            </ul>
-          <details open="true">
-            <summary>
-              <span class="lbl">Arguments:</span>
-            </summary>
-            <ul>
-              <li>
-                <div class="table">
-                  <div class="th">
-                    <div class="td">Name</div>
-                    <div class="td">Type</div>
-                    <div class="td">Generic</div>
-                    <div class="td">Description</div>
-                  </div>
-                  <div class="tr">
-                    <div class="td">uilist</div>
-                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uilist')">vx/ui/ui/uilist</span></div>
-                    <div class="td"></div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </details>
-            <details open="true">
-              <summary>
-                <span class="lbl">Usage/Test Cases:</span>
-              </summary>
-              <ul>
-              </ul>
-            </details>
-            <details open="true">
-              <summary>
-                <span class="lbl">Source Code:</span>
-              </summary>
-              <ul>
-                <li>
-                  <div class="source">(func uimap&lt;-uilist : uimap
- [uilist : uilist]
- (map&lt;-list : uimap
-  uilist
-  (fn : string
-   [ui : ui]
-   (:uid ui)))
- :doc &quot;&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -78474,6 +80122,10 @@ improves readability.</div>
                 <div class="td">html</div>
                 <div class="td">vx/web/html</div>
               </div>
+              <div class="tr">
+                <div class="td">ui</div>
+                <div class="td">vx/ui/ui</div>
+              </div>
             </div>
           </li>
         </ul>
@@ -78504,7 +80156,7 @@ improves readability.</div>
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/any-data&lt;-id')">any-data&lt;-id</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/boolean-replace&lt;-id-htmltext')">boolean-replace&lt;-id-htmltext</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/boolean-replace&lt;-id-htmltext-data-eventmap')">boolean-replace&lt;-id-htmltext-data-eventmap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/boolean-write&lt;-id-htmltext')">boolean-write&lt;-id-htmltext</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/boolean-write&lt;-stylesheet')">boolean-write&lt;-stylesheet</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/boolean-write-stylesheet&lt;-string')">boolean-write-stylesheet&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/string&lt;-id')">string&lt;-id</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/boolean-replace&lt;-id-htmltext')">boolean-replace&lt;-id-htmltext</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/boolean-replace&lt;-ui-htmltext')">boolean-replace&lt;-ui-htmltext</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/boolean-write&lt;-id-htmltext')">boolean-write&lt;-id-htmltext</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/boolean-write&lt;-stylesheet')">boolean-write&lt;-stylesheet</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/boolean-write-stylesheet&lt;-string')">boolean-write-stylesheet&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/context-read')">context-read</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/context-write')">context-write</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/string&lt;-id')">string&lt;-id</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/ui-readstate&lt;-uid')">ui-readstate&lt;-uid</span>
             </li>
           </ul>
         </details>
@@ -78517,13 +80169,8 @@ improves readability.</div>
               <div class="source">(package vx/web/htmldoc
  :libs (lib event :path vx/event)
        (lib html  :path vx/web/html)
+       (lib ui    :path vx/ui/ui)
  :doc &quot;Html Client-side document handler&quot;)
-
-(func any-data&lt;-id : any
- [id : string]
- (native
-  :js :auto)
- :doc &quot;Returns data component from element.&quot;)
 
 (func boolean-replace&lt;-id-htmltext : boolean
  [id       : string
@@ -78534,11 +80181,9 @@ improves readability.</div>
  :clientserver :client
  :doc &quot;Replaces an html node with given id and text.&quot;)
 
-(func boolean-replace&lt;-id-htmltext-data-eventmap : boolean
- [id       : string
-  htmltext : string
-  data     : any
-  eventmap : event/eventmap]
+(func boolean-replace&lt;-ui-htmltext : boolean
+ [ui       : ui/ui
+  htmltext : string]
  (native
   :js :auto)
  :sideeffects &quot;Changes HTML display.&quot;
@@ -78579,81 +80224,34 @@ improves readability.</div>
  :clientserver :client
  :doc &quot;Writes a css stylesheet.&quot;)
 
+(func context-read : context
+ (native
+  :js :auto)
+ :doc &quot;Reads context from document.data.context&quot;)
+
+(func context-write : context
+ (native
+  :js :auto)
+ :context
+ :doc &quot;Writes context to document.data.context&quot;)
+
 (func string&lt;-id : string
  [id   : string]
  (native
   :js :auto)
  :clientserver :client
  :doc &quot;Reads the value of an html node by id.&quot;)
+
+(func ui-readstate&lt;-uid : any
+ [uid : string]
+ (native
+  :js :auto)
+ :doc &quot;Returns ui component from element.&quot;)
 </div>
             </li>
           </ul>
         </details>
       </div>
-          <div class="d" id="d_func_vx/web/htmldoc/any-data&lt;-id">
-            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/web/htmldoc')">vx/web/htmldoc</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/any-data&lt;-id')">any-data&lt;-id</span></div>
-            <div class="lbl">Description:</div>
-            <ul>
-              <li>
-                <div class="txt">Returns data component from element.</div>
-              </li>
-            </ul>
-            <div class="lbl">Function Name:</div>
-            <ul>
-              <li>
-                <div class="txt">any-data&lt;-id</div>
-              </li>
-            </ul>
-            <div class="lbl">Return Type:</div>
-            <ul>
-              <li>
-                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
-              </li>
-            </ul>
-          <details open="true">
-            <summary>
-              <span class="lbl">Arguments:</span>
-            </summary>
-            <ul>
-              <li>
-                <div class="table">
-                  <div class="th">
-                    <div class="td">Name</div>
-                    <div class="td">Type</div>
-                    <div class="td">Generic</div>
-                    <div class="td">Description</div>
-                  </div>
-                  <div class="tr">
-                    <div class="td">id</div>
-                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
-                    <div class="td"></div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </details>
-            <details open="true">
-              <summary>
-                <span class="lbl">Usage/Test Cases:</span>
-              </summary>
-              <ul>
-              </ul>
-            </details>
-            <details open="true">
-              <summary>
-                <span class="lbl">Source Code:</span>
-              </summary>
-              <ul>
-                <li>
-                  <div class="source">(func any-data&lt;-id : any
- [id : string]
- (native
-  :js :auto)
- :doc &quot;Returns data component from element.&quot;)</div>
-                </li>
-              </ul>
-            </details>
-          </div>
           <div class="d" id="d_func_vx/web/htmldoc/boolean-replace&lt;-id-htmltext">
             <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/web/htmldoc')">vx/web/htmldoc</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/boolean-replace&lt;-id-htmltext')">boolean-replace&lt;-id-htmltext</span></div>
             <div class="lbl">Description:</div>
@@ -78726,8 +80324,8 @@ improves readability.</div>
               </ul>
             </details>
           </div>
-          <div class="d" id="d_func_vx/web/htmldoc/boolean-replace&lt;-id-htmltext-data-eventmap">
-            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/web/htmldoc')">vx/web/htmldoc</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/boolean-replace&lt;-id-htmltext-data-eventmap')">boolean-replace&lt;-id-htmltext-data-eventmap</span></div>
+          <div class="d" id="d_func_vx/web/htmldoc/boolean-replace&lt;-ui-htmltext">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/web/htmldoc')">vx/web/htmldoc</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/boolean-replace&lt;-ui-htmltext')">boolean-replace&lt;-ui-htmltext</span></div>
             <div class="lbl">Description:</div>
             <ul>
               <li>
@@ -78737,7 +80335,7 @@ improves readability.</div>
             <div class="lbl">Function Name:</div>
             <ul>
               <li>
-                <div class="txt">boolean-replace&lt;-id-htmltext-data-eventmap</div>
+                <div class="txt">boolean-replace&lt;-ui-htmltext</div>
               </li>
             </ul>
             <div class="lbl">Return Type:</div>
@@ -78760,23 +80358,13 @@ improves readability.</div>
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">id</div>
-                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td">ui</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
                     <div class="td"></div>
                   </div>
                   <div class="tr">
                     <div class="td">htmltext</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
-                    <div class="td"></div>
-                  </div>
-                  <div class="tr">
-                    <div class="td">data</div>
-                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
-                    <div class="td"></div>
-                  </div>
-                  <div class="tr">
-                    <div class="td">eventmap</div>
-                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/event/eventmap')">vx/event/eventmap</span></div>
                     <div class="td"></div>
                   </div>
                 </div>
@@ -78796,11 +80384,9 @@ improves readability.</div>
               </summary>
               <ul>
                 <li>
-                  <div class="source">(func boolean-replace&lt;-id-htmltext-data-eventmap : boolean
- [id       : string
-  htmltext : string
-  data     : any
-  eventmap : event/eventmap]
+                  <div class="source">(func boolean-replace&lt;-ui-htmltext : boolean
+ [ui       : ui/ui
+  htmltext : string]
  (native
   :js :auto)
  :sideeffects &quot;Changes HTML display.&quot;
@@ -79023,6 +80609,123 @@ improves readability.</div>
               </ul>
             </details>
           </div>
+          <div class="d" id="d_func_vx/web/htmldoc/context-read">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/web/htmldoc')">vx/web/htmldoc</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/context-read')">context-read</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Reads context from document.data.context</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">context-read</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/context')">vx/core/context</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func context-read : context
+ (native
+  :js :auto)
+ :doc &quot;Reads context from document.data.context&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/web/htmldoc/context-write">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/web/htmldoc')">vx/web/htmldoc</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/context-write')">context-write</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Writes context to document.data.context</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">context-write</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/context')">vx/core/context</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func context-write : context
+ (native
+  :js :auto)
+ :context
+ :doc &quot;Writes context to document.data.context&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
           <div class="d" id="d_func_vx/web/htmldoc/string&lt;-id">
             <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/web/htmldoc')">vx/web/htmldoc</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/string&lt;-id')">string&lt;-id</span></div>
             <div class="lbl">Description:</div>
@@ -79084,6 +80787,70 @@ improves readability.</div>
   :js :auto)
  :clientserver :client
  :doc &quot;Reads the value of an html node by id.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/web/htmldoc/ui-readstate&lt;-uid">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/web/htmldoc')">vx/web/htmldoc</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/web/htmldoc/ui-readstate&lt;-uid')">ui-readstate&lt;-uid</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns ui component from element.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">ui-readstate&lt;-uid</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">uid</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func ui-readstate&lt;-uid : any
+ [uid : string]
+ (native
+  :js :auto)
+ :doc &quot;Returns ui component from element.&quot;)</div>
                 </li>
               </ul>
             </details>

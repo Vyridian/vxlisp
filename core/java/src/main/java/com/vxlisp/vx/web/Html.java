@@ -52,7 +52,9 @@ public final class Html {
     }
 
     @Override
-    public Type_body vx_new(final Object... vals) {return e_body.vx_copy(vals);}
+    public Type_body vx_new(final Object... vals) {
+      return e_body.vx_copy(vals);
+    }
 
     @Override
     public Type_body vx_copy(final Object... vals) {
@@ -301,7 +303,9 @@ public final class Html {
     }
 
     @Override
-    public Type_details vx_new(final Object... vals) {return e_details.vx_copy(vals);}
+    public Type_details vx_new(final Object... vals) {
+      return e_details.vx_copy(vals);
+    }
 
     @Override
     public Type_details vx_copy(final Object... vals) {
@@ -666,7 +670,9 @@ public final class Html {
     }
 
     @Override
-    public Type_div vx_new(final Object... vals) {return e_div.vx_copy(vals);}
+    public Type_div vx_new(final Object... vals) {
+      return e_div.vx_copy(vals);
+    }
 
     @Override
     public Type_div vx_copy(final Object... vals) {
@@ -949,7 +955,9 @@ public final class Html {
     }
 
     @Override
-    public Type_divchild vx_new(final Object... vals) {return e_divchild.vx_copy(vals);}
+    public Type_divchild vx_new(final Object... vals) {
+      return e_divchild.vx_copy(vals);
+    }
 
     @Override
     public Type_divchild vx_copy(final Object... vals) {
@@ -1039,7 +1047,9 @@ public final class Html {
     }
 
     @Override
-    public Type_divchildlist vx_new(final Object... vals) {return e_divchildlist.vx_copy(vals);}
+    public Type_divchildlist vx_new(final Object... vals) {
+      return e_divchildlist.vx_copy(vals);
+    }
 
     @Override
     public Type_divchildlist vx_copy(final Object... vals) {
@@ -1165,7 +1175,9 @@ public final class Html {
     }
 
     @Override
-    public Type_divlist vx_new(final Object... vals) {return e_divlist.vx_copy(vals);}
+    public Type_divlist vx_new(final Object... vals) {
+      return e_divlist.vx_copy(vals);
+    }
 
     @Override
     public Type_divlist vx_copy(final Object... vals) {
@@ -1291,7 +1303,9 @@ public final class Html {
     }
 
     @Override
-    public Type_footer vx_new(final Object... vals) {return e_footer.vx_copy(vals);}
+    public Type_footer vx_new(final Object... vals) {
+      return e_footer.vx_copy(vals);
+    }
 
     @Override
     public Type_footer vx_copy(final Object... vals) {
@@ -1528,7 +1542,9 @@ public final class Html {
     }
 
     @Override
-    public Type_h1 vx_new(final Object... vals) {return e_h1.vx_copy(vals);}
+    public Type_h1 vx_new(final Object... vals) {
+      return e_h1.vx_copy(vals);
+    }
 
     @Override
     public Type_h1 vx_copy(final Object... vals) {
@@ -1882,7 +1898,9 @@ public final class Html {
     }
 
     @Override
-    public Type_h2 vx_new(final Object... vals) {return e_h2.vx_copy(vals);}
+    public Type_h2 vx_new(final Object... vals) {
+      return e_h2.vx_copy(vals);
+    }
 
     @Override
     public Type_h2 vx_copy(final Object... vals) {
@@ -2236,7 +2254,9 @@ public final class Html {
     }
 
     @Override
-    public Type_h3 vx_new(final Object... vals) {return e_h3.vx_copy(vals);}
+    public Type_h3 vx_new(final Object... vals) {
+      return e_h3.vx_copy(vals);
+    }
 
     @Override
     public Type_h3 vx_copy(final Object... vals) {
@@ -2530,7 +2550,9 @@ public final class Html {
     }
 
     @Override
-    public Type_head vx_new(final Object... vals) {return e_head.vx_copy(vals);}
+    public Type_head vx_new(final Object... vals) {
+      return e_head.vx_copy(vals);
+    }
 
     @Override
     public Type_head vx_copy(final Object... vals) {
@@ -2695,7 +2717,9 @@ public final class Html {
     }
 
     @Override
-    public Type_headchild vx_new(final Object... vals) {return e_headchild.vx_copy(vals);}
+    public Type_headchild vx_new(final Object... vals) {
+      return e_headchild.vx_copy(vals);
+    }
 
     @Override
     public Type_headchild vx_copy(final Object... vals) {
@@ -2785,7 +2809,9 @@ public final class Html {
     }
 
     @Override
-    public Type_headchildlist vx_new(final Object... vals) {return e_headchildlist.vx_copy(vals);}
+    public Type_headchildlist vx_new(final Object... vals) {
+      return e_headchildlist.vx_copy(vals);
+    }
 
     @Override
     public Type_headchildlist vx_copy(final Object... vals) {
@@ -2947,7 +2973,9 @@ public final class Html {
     }
 
     @Override
-    public Type_html vx_new(final Object... vals) {return e_html.vx_copy(vals);}
+    public Type_html vx_new(final Object... vals) {
+      return e_html.vx_copy(vals);
+    }
 
     @Override
     public Type_html vx_copy(final Object... vals) {
@@ -3267,7 +3295,9 @@ public final class Html {
     }
 
     @Override
-    public Type_meta vx_new(final Object... vals) {return e_meta.vx_copy(vals);}
+    public Type_meta vx_new(final Object... vals) {
+      return e_meta.vx_copy(vals);
+    }
 
     @Override
     public Type_meta vx_copy(final Object... vals) {
@@ -3652,7 +3682,9 @@ public final class Html {
     }
 
     @Override
-    public Type_node vx_new(final Object... vals) {return e_node.vx_copy(vals);}
+    public Type_node vx_new(final Object... vals) {
+      return e_node.vx_copy(vals);
+    }
 
     @Override
     public Type_node vx_copy(final Object... vals) {
@@ -3911,7 +3943,9 @@ public final class Html {
     }
 
     @Override
-    public Type_nodelist vx_new(final Object... vals) {return e_nodelist.vx_copy(vals);}
+    public Type_nodelist vx_new(final Object... vals) {
+      return e_nodelist.vx_copy(vals);
+    }
 
     @Override
     public Type_nodelist vx_copy(final Object... vals) {
@@ -4097,7 +4131,9 @@ public final class Html {
     }
 
     @Override
-    public Type_p vx_new(final Object... vals) {return e_p.vx_copy(vals);}
+    public Type_p vx_new(final Object... vals) {
+      return e_p.vx_copy(vals);
+    }
 
     @Override
     public Type_p vx_copy(final Object... vals) {
@@ -4412,7 +4448,9 @@ public final class Html {
     }
 
     @Override
-    public Type_propmap vx_new(final Object... vals) {return e_propmap.vx_copy(vals);}
+    public Type_propmap vx_new(final Object... vals) {
+      return e_propmap.vx_copy(vals);
+    }
 
     @Override
     public Type_propmap vx_copy(final Object... vals) {
@@ -4581,7 +4619,9 @@ public final class Html {
     }
 
     @Override
-    public Type_style vx_new(final Object... vals) {return e_style.vx_copy(vals);}
+    public Type_style vx_new(final Object... vals) {
+      return e_style.vx_copy(vals);
+    }
 
     @Override
     public Type_style vx_copy(final Object... vals) {
@@ -4794,7 +4834,9 @@ public final class Html {
     }
 
     @Override
-    public Type_stylelist vx_new(final Object... vals) {return e_stylelist.vx_copy(vals);}
+    public Type_stylelist vx_new(final Object... vals) {
+      return e_stylelist.vx_copy(vals);
+    }
 
     @Override
     public Type_stylelist vx_copy(final Object... vals) {
@@ -4941,7 +4983,9 @@ public final class Html {
     }
 
     @Override
-    public Type_stylemap vx_new(final Object... vals) {return e_stylemap.vx_copy(vals);}
+    public Type_stylemap vx_new(final Object... vals) {
+      return e_stylemap.vx_copy(vals);
+    }
 
     @Override
     public Type_stylemap vx_copy(final Object... vals) {
@@ -5170,7 +5214,9 @@ public final class Html {
     }
 
     @Override
-    public Type_stylesheet vx_new(final Object... vals) {return e_stylesheet.vx_copy(vals);}
+    public Type_stylesheet vx_new(final Object... vals) {
+      return e_stylesheet.vx_copy(vals);
+    }
 
     @Override
     public Type_stylesheet vx_copy(final Object... vals) {
@@ -5522,7 +5568,9 @@ public final class Html {
     }
 
     @Override
-    public Type_subpropmap vx_new(final Object... vals) {return e_subpropmap.vx_copy(vals);}
+    public Type_subpropmap vx_new(final Object... vals) {
+      return e_subpropmap.vx_copy(vals);
+    }
 
     @Override
     public Type_subpropmap vx_copy(final Object... vals) {
@@ -5739,7 +5787,9 @@ public final class Html {
     }
 
     @Override
-    public Type_table vx_new(final Object... vals) {return e_table.vx_copy(vals);}
+    public Type_table vx_new(final Object... vals) {
+      return e_table.vx_copy(vals);
+    }
 
     @Override
     public Type_table vx_copy(final Object... vals) {
@@ -6104,7 +6154,9 @@ public final class Html {
     }
 
     @Override
-    public Type_tbody vx_new(final Object... vals) {return e_tbody.vx_copy(vals);}
+    public Type_tbody vx_new(final Object... vals) {
+      return e_tbody.vx_copy(vals);
+    }
 
     @Override
     public Type_tbody vx_copy(final Object... vals) {
@@ -6459,7 +6511,9 @@ public final class Html {
     }
 
     @Override
-    public Type_td vx_new(final Object... vals) {return e_td.vx_copy(vals);}
+    public Type_td vx_new(final Object... vals) {
+      return e_td.vx_copy(vals);
+    }
 
     @Override
     public Type_td vx_copy(final Object... vals) {
@@ -6754,7 +6808,9 @@ public final class Html {
     }
 
     @Override
-    public Type_tdlist vx_new(final Object... vals) {return e_tdlist.vx_copy(vals);}
+    public Type_tdlist vx_new(final Object... vals) {
+      return e_tdlist.vx_copy(vals);
+    }
 
     @Override
     public Type_tdlist vx_copy(final Object... vals) {
@@ -6940,7 +6996,9 @@ public final class Html {
     }
 
     @Override
-    public Type_thead vx_new(final Object... vals) {return e_thead.vx_copy(vals);}
+    public Type_thead vx_new(final Object... vals) {
+      return e_thead.vx_copy(vals);
+    }
 
     @Override
     public Type_thead vx_copy(final Object... vals) {
@@ -7295,7 +7353,9 @@ public final class Html {
     }
 
     @Override
-    public Type_title vx_new(final Object... vals) {return e_title.vx_copy(vals);}
+    public Type_title vx_new(final Object... vals) {
+      return e_title.vx_copy(vals);
+    }
 
     @Override
     public Type_title vx_copy(final Object... vals) {
@@ -7640,7 +7700,9 @@ public final class Html {
     }
 
     @Override
-    public Type_tr vx_new(final Object... vals) {return e_tr.vx_copy(vals);}
+    public Type_tr vx_new(final Object... vals) {
+      return e_tr.vx_copy(vals);
+    }
 
     @Override
     public Type_tr vx_copy(final Object... vals) {
@@ -7935,7 +7997,9 @@ public final class Html {
     }
 
     @Override
-    public Type_trlist vx_new(final Object... vals) {return e_trlist.vx_copy(vals);}
+    public Type_trlist vx_new(final Object... vals) {
+      return e_trlist.vx_copy(vals);
+    }
 
     @Override
     public Type_trlist vx_copy(final Object... vals) {

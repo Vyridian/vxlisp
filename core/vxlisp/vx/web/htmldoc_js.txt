@@ -1,16 +1,7 @@
-  static vx_any_data_from_id(id) {
-    let output = vx_core.e_any
-    const elem = document.getElementById(id)
-    if (elem != null) {
-      const elemdata = elem.getAttribute('data-data')
-      if (elemdata) {
-        output = elemdata
-      }
-    }
-    return output
-  }
+  static vx_global = {context    : vx_core.e_context,
+                      listenermap: {}}
 
-  static vx_boolean_replace_from_id_htmltext_data_eventmap(id, htmltext, data, eventmap) {
+  static vx_boolean_replace_from_id_htmltext(id, htmltext) {
     let output = vx_core.c_false
     const elem = document.getElementById(id)
     if (elem != null) {
@@ -20,39 +11,38 @@
     return output
   }
 
-  static vx_boolean_replace_from_id_htmltext_data_eventmap(id, htmltext, data, eventmap) {
+  static vx_boolean_replace_from_ui_htmltext(ui, htmltext) {
     let output = vx_core.c_false
+    const id = vx_core.f_any_from_struct({'any-1': vx_core.t_string}, ui, ':uid')
+    const eventmap = vx_core.f_any_from_struct({'any-1': vx_event.t_eventmap}, ui, ':eventmap')
+    vx_web_htmldoc.vx_boolean_writestate_from_ui(ui)
     let elem = document.getElementById(id)
     if (elem != null) {
-      const eventmapold = elem.getAttribute('data-eventmap')
-      let issameevents = false
-      if (eventmapold == eventmap) {
-        issameevents = true
-      }
-      if (issameevents) {
-      } else if (eventmapold) {
-        for (const [key, event] of Object.entries(eventmap['vx_value'])) {
-          elem.removeEventListener(event)
+      const listenersold = vx_web_htmldoc.vx_listeners_read_from_id(id)
+      if (listenersold) {
+        vx_web_htmldoc.vx_boolean_write_from_id_listeners(id, [])
+        for (const listener of listenersold) {
+          elem.removeEventListener(listener)
         }
       }
       elem.outerHTML = htmltext
-      elem = document.getElementById(id)
-      elem.setAttribute('data-data', data)
-      if (issameevents) {
-      } else if (eventmap == vx_event.e_eventmap) {
+      if (eventmap == vx_event.e_eventmap) {
       } else {
-        elem.setAttribute('data-eventmap', eventmap)
+        elem = document.getElementById(id)
+        const listeners = []
         for (const [eventname, event] of Object.entries(eventmap['vx_value'])) {
           const listener = (nativeevent) => {
+            const context = vx_web_htmldoc.vx_context_read()
             const fn_event = event['vx_value']['event<-event']
-            const fn = fn_event['vx_value']['fn']
-            const eventchg = vx_web_htmldoc.vx_event_from_event_nativeevent(event, nativeevent)
-            const eventoutput = fn(eventchg)
+            const eventchg = vx_web_htmldoc.vx_event_from_event_ui_nativeevent(event, ui, nativeevent)
+            const eventoutput = vx_core.vx_any_from_func(vx_event.t_event, fn_event, context, eventchg)
             return eventoutput
           }
           const nativeeventname = vx_web_htmldoc.vx_nativeeventname_from_eventname(eventname)
           elem.addEventListener(nativeeventname, listener)
+          listeners.push(listener)
         }
+        vx_web_htmldoc.vx_boolean_write_from_id_listeners(id, listeners)
       }
       output = vx_core.c_true
     }
@@ -69,6 +59,16 @@
     return output
   }
 
+  static vx_boolean_write_from_id_listeners(id, listeners) {
+    vx_web_htmldoc.vx_global['listenermap'][id] = listeners
+    return vx_core.c_true
+  }
+
+  static vx_boolean_writestate_from_ui(ui) {
+    const context = vx_web_htmldoc.vx_context_read()
+    return vx_ui_ui.f_boolean_writestate_from_ui(context, ui)
+  }
+
   static async vx_boolean_write_stylesheet_from_string(text) {
     let output = vx_core.c_false
     const cssstylesheet = new CSSStyleSheet()
@@ -77,9 +77,29 @@
     return output
   }
 
-  static vx_event_from_event_nativeevent(event, nativeevent) {
-    let output = event
+  static vx_context_read() {
+    let output = vx_core.e_context
+    const context = vx_web_htmldoc.vx_global['context']
+    if (context) {
+      output = context
+    }
     return output
+  }
+
+  static vx_context_write(context) {
+    let output = context
+    vx_web_htmldoc.vx_global['context'] = context
+    return output
+  }
+
+  static vx_event_from_event_ui_nativeevent(event, ui, nativeevent) {
+    let output
+    output = vx_core.f_copy(event, ":from", ui)
+    return output
+  }
+
+  static vx_listeners_read_from_id(id) {
+    return vx_web_htmldoc.vx_global.listenermap[id]
   }
 
   static vx_nativeeventname_from_eventname(eventname) {
@@ -96,5 +116,12 @@
     } else if (elem.value) {
       output = elem.innerHTML
     }
+    return output
+  }
+
+  static vx_ui_readstate_from_uid(uid) {
+    let output = vx_ui_ui.e_ui
+    const context = vx_web_htmldoc.vx_context-read()
+    output = vx_ui_ui.f_ui_readstate_from_id(context, uid)
     return output
   }

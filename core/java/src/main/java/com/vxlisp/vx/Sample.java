@@ -60,7 +60,9 @@ public final class Sample {
     }
 
     @Override
-    public Type_mytype vx_new(final Object... vals) {return e_mytype.vx_copy(vals);}
+    public Type_mytype vx_new(final Object... vals) {
+      return e_mytype.vx_copy(vals);
+    }
 
     @Override
     public Type_mytype vx_copy(final Object... vals) {

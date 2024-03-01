@@ -27,7 +27,7 @@ func ListCaptureFromFunc(fnc *vxfunc, listinnerarg []string, path string) []stri
 				subargvalue := arg.value
 				listsubsubarg := ListArgFromValue(subargvalue)
 				for _, subsubarg := range listsubsubarg {
-					inner := CppFromName(subsubarg.alias)
+					inner := LangFromName(subsubarg.alias)
 					if !BooleanFromListStringContains(listlocalarg, inner) {
 						listlocalarg = append(listlocalarg, inner)
 					}
@@ -55,7 +55,7 @@ func ListCaptureFromFunc(fnc *vxfunc, listinnerarg []string, path string) []stri
 				argvalue := arg.value
 				listsubarg := ListArgFromValue(argvalue)
 				for _, subarg := range listsubarg {
-					inner := CppFromName(subarg.alias)
+					inner := LangFromName(subarg.alias)
 					if !BooleanFromListStringContains(listlocalarg, inner) {
 						listlocalarg = append(listlocalarg, inner)
 					}
@@ -74,7 +74,7 @@ func ListCaptureFromFunc(fnc *vxfunc, listinnerarg []string, path string) []stri
 				switch argvalue.code {
 				case ":arg":
 					subarg := ArgFromValue(argvalue)
-					outer := CppFromName(subarg.alias)
+					outer := LangFromName(subarg.alias)
 					if !BooleanFromListStringContains(listlocalarg, outer) {
 						listlocalarg = append(listlocalarg, outer)
 					}
@@ -133,7 +133,7 @@ func ListCaptureFromValue(value vxvalue, listinnerarg []string, path string) []s
 		if outer == "" {
 			outer = arg.name
 		}
-		outer = CppFromName(outer)
+		outer = LangFromName(outer)
 		if BooleanFromListStringContains(listinnerarg, outer) {
 		} else if !BooleanFromListStringContains(output, outer) {
 			output = append(output, outer)
@@ -276,7 +276,7 @@ func CppDebugFromFunc(fnc *vxfunc, lineindent string) (string, string) {
 	if fnc.debug {
 		debugstart = lineindent + "vx_core::debug(\"" + fnc.name + "\", \"start\""
 		for _, arg := range fnc.listarg {
-			debugstart += ", " + CppTypeStringValNew(arg.name+"=") + ", " + CppFromName(arg.alias)
+			debugstart += ", " + CppTypeStringValNew(arg.name+"=") + ", " + LangFromName(arg.alias)
 		}
 		debugstart += ");"
 		debugend = lineindent + "vx_core::debug(\"" + fnc.name + "\", \"end\", output);"
@@ -311,7 +311,7 @@ func CppDocFromFunc(fnc *vxfunc) string {
 			"\n@async" +
 			"\n"
 	}
-	doc += "@function " + CppFromName(fnc.alias)
+	doc += "@function " + LangFromName(fnc.alias)
 	if fnc.idx > 0 {
 		doc += " " + StringFromInt(fnc.idx)
 	}
@@ -350,14 +350,14 @@ func CppEmptyValueFromTypeIndent(lang *vxlang, typ *vxtype, indent string) strin
 				output = "{\n"
 				for _, property := range typ.properties {
 					propdefault := CppEmptyValueFromTypeIndent(lang, property.vxtype, indent+"  ")
-					output += indent + "    " + CppFromName(property.name) + ": " + propdefault + ","
+					output += indent + "    " + LangFromName(property.name) + ": " + propdefault + ","
 					if property.doc != "" {
 						output += " // " + property.doc
 					}
 					output += "\n"
 				}
 				output += "" +
-					indent + "    vxtype: " + LangNameFromPkgName(lang, typ.pkgname) + lang.pkgref + "t_" + CppFromName(typ.name) +
+					indent + "    vxtype: " + LangNameFromPkgName(lang, typ.pkgname) + lang.pkgref + "t_" + LangFromName(typ.name) +
 					"\n" + indent + "  }"
 			} else if output == "" || strings.HasPrefix(output, ":") {
 				output = "\"" + output + "\""
@@ -443,7 +443,7 @@ func CppFromArg(lang *vxlang, arg vxarg, indent int) string {
 	output := "" +
 		"vx_core::vx_new_arg(" +
 		lineindent + "  \"" + arg.name + "\", // name" +
-		lineindent + "  " + CppNameTFromType(lang, arg.vxtype) + " // type" +
+		lineindent + "  " + LangNameTFromType(lang, arg.vxtype) + " // type" +
 		lineindent + ")"
 	return output
 }
@@ -469,9 +469,9 @@ func CppFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string, 
 	}
 	cnsttype := cnst.vxtype
 	doc += "{" + cnsttype.name + "}"
-	cnstname := CppFromName(cnst.alias)
+	cnstname := LangFromName(cnst.alias)
 	cnstclassname := "Class_" + cnstname
-	cnsttypename := CppNameFromType(cnst.vxtype)
+	cnsttypename := LangNameFromType(lang, cnst.vxtype)
 	cnsttypeclassname := CppNameTypeFullFromType(lang, cnsttype)
 	pkgname := LangNameFromPkgName(lang, cnst.pkgname)
 	fullclassname := pkgname + lang.pkgref + "Class_" + cnstname
@@ -542,7 +542,7 @@ func CppFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string, 
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			if clstext != "" {
 				allowtype, _ := TypeAllowFromType(cnsttype)
-				listtypename := CppNameFromType(allowtype)
+				listtypename := LangNameFromType(lang, allowtype)
 				if listtypename == "any" {
 					listtypename = ""
 				}
@@ -571,8 +571,8 @@ func CppFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string, 
 					"\n      " + cnsttypeclassname + " val = " + clstext + ";"
 				for _, prop := range ListPropertyTraitFromType(cnst.vxtype) {
 					cnstval += "" +
-						"\n      output->vx_p_" + CppFromName(prop.name) + " = val->" + CppFromName(prop.name) + "();" +
-						"\n      vx_core::vx_reserve(output->vx_p_" + CppFromName(prop.name) + ");"
+						"\n      output->vx_p_" + LangFromName(prop.name) + " = val->" + LangFromName(prop.name) + "();" +
+						"\n      vx_core::vx_reserve(output->vx_p_" + LangFromName(prop.name) + ");"
 				}
 				cnstval += "" +
 					"\n      vx_core::vx_release(val);" +
@@ -641,18 +641,18 @@ func CppBodyFromFunc(lang *vxlang, fnc *vxfunc) (string, string, string, *vxmsgb
 		"vx/core/any<-reduce-async", "vx/core/any<-reduce-next-async":
 		listsimplearg = append(listsimplearg, "vx_core::Type_any generic_any_1")
 	}
-	funcname := CppFromName(fnc.alias) + CppIndexFromFunc(fnc)
+	funcname := LangFromName(fnc.alias) + LangIndexFromFunc(fnc)
 	returntype := ""
 	returnttype := ""
 	returnetype := ""
 	if fnc.generictype == nil {
 		returntype = CppGenericFromType(lang, fnc.vxtype)
-		returnttype = CppNameTFromType(lang, fnc.vxtype)
-		returnetype = CppNameEFromType(lang, fnc.vxtype)
+		returnttype = LangNameTFromType(lang, fnc.vxtype)
+		returnetype = LangNameEFromType(lang, fnc.vxtype)
 	} else {
 		returntype = CppPointerDefFromClassName(CppGenericFromType(lang, fnc.generictype))
-		returnttype = CppNameTFromType(lang, fnc.generictype)
-		returnetype = CppNameEFromType(lang, fnc.generictype)
+		returnttype = LangNameTFromType(lang, fnc.generictype)
+		returnetype = LangNameEFromType(lang, fnc.generictype)
 	}
 	pkgname := LangNameFromPkgName(lang, fnc.pkgname)
 	instancevars := ""
@@ -661,7 +661,7 @@ func CppBodyFromFunc(lang *vxlang, fnc *vxfunc) (string, string, string, *vxmsgb
 	staticvars := ""
 	instancefuncs := ""
 	//staticfuncs := ""
-	path := fnc.pkgname + "/" + fnc.name + CppIndexFromFunc(fnc)
+	path := fnc.pkgname + "/" + fnc.name + LangIndexFromFunc(fnc)
 	genericdefinition := CppGenericDefinitionFromFunc(lang, fnc)
 	if fnc.isgeneric {
 		switch NameFromFunc(fnc) {
@@ -712,12 +712,12 @@ func CppBodyFromFunc(lang *vxlang, fnc *vxfunc) (string, string, string, *vxmsgb
 			if fnc.generictype != nil && argtype.isgeneric {
 				argtypename = CppPointerDefFromClassName(CppGenericFromType(lang, argtype))
 			} else {
-				argtypename = CppNameTypeFromType(lang, argtype)
+				argtypename = LangNameTypeFromTypeSimple(lang, argtype, true)
 			}
-			argtext := argtypename + " " + CppFromName(arg.alias)
-			listsimplearg = append(listsimplearg, CppNameTypeFromType(lang, argtype)+" "+CppFromName(arg.alias))
-			listargname = append(listargname, CppFromName(arg.alias))
-			listreleasename = append(listreleasename, CppFromName(arg.alias))
+			argtext := argtypename + " " + LangFromName(arg.alias)
+			listsimplearg = append(listsimplearg, LangNameTypeFromTypeSimple(lang, argtype, true)+" "+LangFromName(arg.alias))
+			listargname = append(listargname, LangFromName(arg.alias))
+			listreleasename = append(listreleasename, LangFromName(arg.alias))
 			if arg.multi {
 				listargtype = append(listargtype, argtext)
 			} else {
@@ -740,8 +740,8 @@ func CppBodyFromFunc(lang *vxlang, fnc *vxfunc) (string, string, string, *vxmsgb
 	fullabstractname := pkgname + "::Abstract_" + funcname
 	fullclassname := pkgname + "::Class_" + funcname
 	fullfuncname := pkgname + "::Func_" + funcname
-	fulltname := CppNameTFromFunc(lang, fnc)
-	fullename := CppNameEFromFunc(lang, fnc)
+	fulltname := LangNameTFromFunc(lang, fnc)
+	fullename := LangNameEFromFunc(lang, fnc)
 	constructor := "" +
 		"\n      vx_core::refcount += 1;"
 	destructor := "" +
@@ -756,10 +756,10 @@ func CppBodyFromFunc(lang *vxlang, fnc *vxfunc) (string, string, string, *vxmsgb
 		"vx/core/any<-key-value", "vx/core/any<-none",
 		"vx/core/any<-reduce", "vx/core/any<-reduce-next",
 		"vx/core/boolean<-any":
-		returntype := CppNameTypeFromType(lang, fnc.vxtype)
+		returntype := LangNameTypeFromTypeSimple(lang, fnc.vxtype, true)
 		returne := "vx_core::e_any"
 		if !fnc.vxtype.isgeneric {
-			returne = CppNameEFromType(lang, fnc.vxtype)
+			returne = LangNameEFromType(lang, fnc.vxtype)
 		}
 		destructor += "" +
 			"\n      vx_core::vx_release_one(this->lambdavars);"
@@ -813,7 +813,7 @@ func CppBodyFromFunc(lang *vxlang, fnc *vxfunc) (string, string, string, *vxmsgb
 		destructor += "" +
 			"\n      vx_core::vx_release_one(this->lambdavars);"
 		instancefuncs += "" +
-			"\n    " + fullfuncname + " " + fullclassname + "::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_" + CppFromName(fnc.vxtype.alias) + "_from_func::IFn fn) const {" +
+			"\n    " + fullfuncname + " " + fullclassname + "::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_" + LangFromName(fnc.vxtype.alias) + "_from_func::IFn fn) const {" +
 			"\n      " + fullfuncname + " output = " + CppPointerNewFromClassName(fullclassname) + ";" +
 			"\n      output->fn = fn;" +
 			"\n      output->lambdavars = lambdavars;" +
@@ -837,14 +837,14 @@ func CppBodyFromFunc(lang *vxlang, fnc *vxfunc) (string, string, string, *vxmsgb
 			case 1:
 				argtypename := ""
 				arg := fnc.listarg[0]
-				argtypename = CppNameTypeFromType(lang, arg.vxtype)
-				argtname := CppNameTFromType(lang, arg.vxtype)
+				argtypename = LangNameTypeFromTypeSimple(lang, arg.vxtype, true)
+				argtname := LangNameTFromTypeSimple(lang, arg.vxtype, true)
 				var listsubargname []string
 				switch NameFromFunc(fnc) {
 				case "vx/core/empty":
 				default:
 					if fnc.generictype != nil {
-						listsubargname = append(listsubargname, CppNameTFromType(lang, fnc.vxtype))
+						listsubargname = append(listsubargname, LangNameTFromTypeSimple(lang, fnc.vxtype, true))
 					}
 				}
 				contextname := ""
@@ -873,7 +873,7 @@ func CppBodyFromFunc(lang *vxlang, fnc *vxfunc) (string, string, string, *vxmsgb
 							"\n      vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(val);"
 					} else {
 						asyncbody += "" +
-							"\n      " + CppNameTypeFromType(lang, arg.vxtype) + " inputval = vx_core::vx_any_from_any(" + CppNameTFromType(lang, arg.vxtype) + ", val);" +
+							"\n      " + LangNameTypeFromTypeSimple(lang, arg.vxtype, true) + " inputval = vx_core::vx_any_from_any(" + LangNameTFromType(lang, arg.vxtype) + ", val);" +
 							"\n      vx_core::vx_Type_async output = " + pkgname + "::f_" + funcname + "(" + subargnames + ");"
 					}
 					instancefuncs += "" +
@@ -1038,12 +1038,12 @@ func CppBodyFromFunc(lang *vxlang, fnc *vxfunc) (string, string, string, *vxmsgb
 			defaultvalue = lineindent + "vx_core::vx_Type_async output = NULL;"
 			after += "" +
 				lineindent + "if (!output) {" +
-				lineindent + "  output = vx_core::vx_async_new_from_value(" + CppNameEFromType(lang, fnc.vxtype) + ");" +
+				lineindent + "  output = vx_core::vx_async_new_from_value(" + LangNameEFromType(lang, fnc.vxtype) + ");" +
 				lineindent + "}"
 		} else if fnc.generictype != nil {
 			defaultvalue = lineindent + returntype + " output = vx_core::vx_empty(" + CppNameTFromTypeGeneric(lang, fnc.generictype) + ");"
 		} else {
-			defaultvalue = lineindent + returntype + " output = " + CppNameEFromType(lang, fnc.vxtype) + ";"
+			defaultvalue = lineindent + returntype + " output = " + LangNameEFromType(lang, fnc.vxtype) + ";"
 		}
 	}
 	if fnc.vxtype.name == "none" {
@@ -1144,7 +1144,7 @@ func CppConstListFromListConst(listconst []*vxconst) string {
 	if len(listconst) > 0 {
 		var listtext []string
 		for _, cnst := range listconst {
-			typetext := CppNameFromConst(cnst)
+			typetext := LangNameFromConst(cnst)
 			listtext = append(listtext, typetext)
 		}
 		output = "vx_core::vx_anylist_from_listany({" + StringFromListStringJoin(listtext, ", ") + "})"
@@ -1173,6 +1173,7 @@ func CppFuncDefsFromFuncs(funcs []*vxfunc, indent string) string {
 	return output
 }
 
+/*
 func CppFromName(name string) string {
 	output := name
 	switch output {
@@ -1188,10 +1189,11 @@ func CppFromName(name string) string {
 	output = StringFromStringFindReplace(output, "/", "_")
 	return output
 }
+*/
 
 func CppFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock) {
 	msgblock := NewMsgBlock("CppFromPackage")
-	pkgname := CppFromName(pkg.name)
+	pkgname := LangFromName(pkg.name)
 	var specialtypeorder []string
 	var specialfuncorder []string
 	specialfirst := ""
@@ -1224,7 +1226,7 @@ func CppFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, strin
 	fnckeys := ListKeyFromMapFunc(pkg.mapfunc)
 	for _, typid := range typkeys {
 		typ := pkg.maptype[typid]
-		typename := CppFromName(typ.alias)
+		typename := LangFromName(typ.alias)
 		forwardheader += "" +
 			"\n  class Abstract_" + typename + ";" +
 			"\n  typedef " + CppPointerDefFromClassName("Abstract_"+typename) + " Type_" + typename + ";" +
@@ -1233,7 +1235,7 @@ func CppFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, strin
 	}
 	for _, constid := range cnstkeys {
 		cnst := pkg.mapconst[constid]
-		constname := CppFromName(cnst.alias)
+		constname := LangFromName(cnst.alias)
 		forwardheader += "" +
 			"\n  class Class_" + constname + ";" +
 			"\n  typedef " + CppPointerDefFromClassName("Class_"+constname) + " Const_" + constname + ";" +
@@ -1242,7 +1244,7 @@ func CppFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, strin
 	for _, funcid := range fnckeys {
 		fncs := pkg.mapfunc[funcid]
 		for _, fnc := range fncs {
-			funcname := CppFromName(fnc.alias) + CppIndexFromFunc(fnc)
+			funcname := LangFromName(fnc.alias) + LangIndexFromFunc(fnc)
 			forwardheader += "" +
 				"\n  class Abstract_" + funcname + ";" +
 				"\n  typedef " + CppPointerDefFromClassName("Abstract_"+funcname) + " Func_" + funcname + ";" +
@@ -1276,10 +1278,10 @@ func CppFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, strin
 				specialheader += typeheader
 			}
 			packageheader += "" +
-				"\n  " + CppNameTypeFullFromType(lang, typ) + " e_" + CppNameFromType(typ) + " = NULL;" +
-				"\n  " + CppNameTypeFullFromType(lang, typ) + " t_" + CppNameFromType(typ) + " = NULL;"
+				"\n  " + CppNameTypeFullFromType(lang, typ) + " e_" + LangNameFromType(lang, typ) + " = NULL;" +
+				"\n  " + CppNameTypeFullFromType(lang, typ) + " t_" + LangNameFromType(lang, typ) + " = NULL;"
 			packagestatic += "" +
-				"\n      maptype[\"" + typ.name + "\"] = " + CppNameTFromType(lang, typ) + ";"
+				"\n      maptype[\"" + typ.name + "\"] = " + LangNameTFromType(lang, typ) + ";"
 		}
 	}
 	remainingkeys := ListStringFromListStringNotMatch(typkeys, specialtypeorder)
@@ -1292,10 +1294,10 @@ func CppFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, strin
 		typeheaders += typeheader
 		typebodyfooters += typebodyfooter
 		packageheader += "" +
-			"\n  " + CppNameTypeFullFromType(lang, typ) + " e_" + CppNameFromType(typ) + " = NULL;" +
-			"\n  " + CppNameTypeFullFromType(lang, typ) + " t_" + CppNameFromType(typ) + " = NULL;"
+			"\n  " + CppNameTypeFullFromType(lang, typ) + " e_" + LangNameFromType(lang, typ) + " = NULL;" +
+			"\n  " + CppNameTypeFullFromType(lang, typ) + " t_" + LangNameFromType(lang, typ) + " = NULL;"
 		packagestatic += "" +
-			"\n      maptype[\"" + typ.name + "\"] = " + CppNameTFromType(lang, typ) + ";"
+			"\n      maptype[\"" + typ.name + "\"] = " + LangNameTFromType(lang, typ) + ";"
 	}
 	constheaders := ""
 	constbodys := ""
@@ -1318,7 +1320,7 @@ func CppFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, strin
 		//	constbodyfooters += constbodyfooter
 		//}
 		packageheader += "" +
-			"\n  " + CppNameTypeFullFromConst(lang, cnst) + " c_" + CppNameFromConst(cnst) + " = NULL;"
+			"\n  " + CppNameTypeFullFromConst(lang, cnst) + " c_" + LangNameFromConst(cnst) + " = NULL;"
 		packagestatic += "" +
 			"\n      mapconst[\"" + cnst.name + "\"] = " + CppNameCFromConst(lang, cnst) + ";"
 	}
@@ -1344,10 +1346,10 @@ func CppFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, strin
 					funcbodyfooters += fncbodyfooter
 					funcstaticbody += staticfunction
 					packageheader += "" +
-						"\n  " + CppNameTypeFullFromFunc(lang, fnc) + " e_" + CppNameFromFunc(fnc) + " = NULL;" +
-						"\n  " + CppNameTypeFullFromFunc(lang, fnc) + " t_" + CppNameFromFunc(fnc) + " = NULL;"
+						"\n  " + CppNameTypeFullFromFunc(lang, fnc) + " e_" + LangNameFromFunc(fnc) + " = NULL;" +
+						"\n  " + CppNameTypeFullFromFunc(lang, fnc) + " t_" + LangNameFromFunc(fnc) + " = NULL;"
 					packagestatic += "" +
-						"\n      mapfunc[\"" + fnc.name + StringIndexFromFunc(fnc) + "\"] = " + CppNameTFromFunc(lang, fnc) + ";"
+						"\n      mapfunc[\"" + fnc.name + StringIndexFromFunc(fnc) + "\"] = " + LangNameTFromFunc(lang, fnc) + ";"
 				}
 			}
 		}
@@ -1365,10 +1367,10 @@ func CppFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, strin
 			funcstaticdeclaration += fncheaderfooter
 			funcstaticbody += staticfunction
 			packageheader += "" +
-				"\n  " + CppNameTypeFullFromFunc(lang, fnc) + " e_" + CppNameFromFunc(fnc) + " = NULL;" +
-				"\n  " + CppNameTypeFullFromFunc(lang, fnc) + " t_" + CppNameFromFunc(fnc) + " = NULL;"
+				"\n  " + CppNameTypeFullFromFunc(lang, fnc) + " e_" + LangNameFromFunc(fnc) + " = NULL;" +
+				"\n  " + CppNameTypeFullFromFunc(lang, fnc) + " t_" + LangNameFromFunc(fnc) + " = NULL;"
 			packagestatic += "" +
-				"\n      mapfunc[\"" + fnc.name + StringIndexFromFunc(fnc) + "\"] = " + CppNameTFromFunc(lang, fnc) + ";"
+				"\n      mapfunc[\"" + fnc.name + StringIndexFromFunc(fnc) + "\"] = " + LangNameTFromFunc(lang, fnc) + ";"
 		}
 	}
 	packagestatic += "" +
@@ -1458,12 +1460,12 @@ func CppBodyFromType(lang *vxlang, typ *vxtype) (string, string, *vxmsgblock) {
 		doc += "\n" + typ.deprecated
 	}
 	pkgname := LangNameFromPkgName(lang, typ.pkgname)
-	typename := CppFromName(typ.alias)
+	typename := LangFromName(typ.alias)
 	classname := "Class_" + typename
 	fullclassname := CppNameClassFullFromType(lang, typ)
 	fulltypename := CppNameTypeFullFromType(lang, typ)
-	fulltname := CppNameTFromType(lang, typ)
-	fullename := CppNameEFromType(lang, typ)
+	fulltname := LangNameTFromType(lang, typ)
+	fullename := LangNameEFromType(lang, typ)
 	constructor := "" +
 		"\n      vx_core::refcount += 1;"
 	destructor := "" +
@@ -1710,9 +1712,9 @@ func CppBodyFromType(lang *vxlang, typ *vxtype) (string, string, *vxmsgblock) {
 			//				allowtype = allowfunc.vxtype
 			//}
 			allowclass = CppNameTypeFullFromType(lang, allowtype)
-			allowempty := CppNameEFromType(lang, allowtype)
-			allowttype = CppNameTFromType(lang, allowtype)
-			allowname = CppNameFromType(allowtype)
+			allowempty := LangNameEFromType(lang, allowtype)
+			allowttype = LangNameTFromType(lang, allowtype)
+			allowname = LangNameFromType(lang, allowtype)
 			if allowname != "any" {
 				allowcode = "" +
 					"\n    " + allowclass + " " + classname + "::vx_get_" + allowname + "(vx_core::Type_int index) const {" +
@@ -1838,7 +1840,7 @@ func CppBodyFromType(lang *vxlang, typ *vxtype) (string, string, *vxmsgblock) {
 			"\n          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext(\"(new " + typ.name + ") - Invalid Type: \" + vx_core::vx_string_from_any(valsub));" +
 			"\n          msgblock = vx_core::vx_copy(msgblock, {msg});"
 		for _, allowedtype := range typ.allowtypes {
-			allowedtypename := CppNameTFromType(lang, allowedtype)
+			allowedtypename := LangNameTFromType(lang, allowedtype)
 			castval := "vx_core::vx_any_from_any(" + allowedtypename + ", valsub)"
 			switch NameFromType(allowedtype) {
 			case "vx/core/any":
@@ -1900,9 +1902,9 @@ func CppBodyFromType(lang *vxlang, typ *vxtype) (string, string, *vxmsgblock) {
 		if len(allowtypes) > 0 {
 			allowtype := allowtypes[0]
 			allowclass = CppNameTypeFullFromType(lang, allowtype)
-			allowttype = CppNameTFromType(lang, allowtype)
-			allowempty = CppNameEFromType(lang, allowtype)
-			allowname = CppNameFromType(allowtype)
+			allowttype = LangNameTFromType(lang, allowtype)
+			allowempty = LangNameEFromType(lang, allowtype)
+			allowname = LangNameFromType(lang, allowtype)
 			allowcode = "" +
 				"\n    // vx_get_" + allowname + "(key)" +
 				"\n    " + allowclass + " " + classname + "::vx_get_" + allowname + "(vx_core::Type_string key) const {" +
@@ -1999,7 +2001,7 @@ func CppBodyFromType(lang *vxlang, typ *vxtype) (string, string, *vxmsgblock) {
 				"\n          if (valsubtype == " + allowttype + ") {" +
 				"\n            valany = vx_core::vx_any_from_any(" + allowttype + ", valsub);"
 			for _, allowedtype := range typ.allowtypes {
-				allowedtypename := CppNameTFromType(lang, allowedtype)
+				allowedtypename := LangNameTFromType(lang, allowedtype)
 				castval := "vx_core::vx_any_from_any(" + allowttype + ", valsub)"
 				if allowedtypename != "" {
 					allowsub += "" +
@@ -2096,7 +2098,7 @@ func CppBodyFromType(lang *vxlang, typ *vxtype) (string, string, *vxmsgblock) {
 				validkeys += "" +
 					"\n          } else if (testkey == \":" + arg.name + "\") {" +
 					"\n            key = testkey;"
-				argname := CppFromName(arg.name)
+				argname := LangFromName(arg.name)
 				destroyfields = append(destroyfields, "this->vx_p_"+argname)
 				argassign += "" +
 					"\n        if (output->vx_p_" + argname + " != vx_p_" + argname + ") {" +
@@ -2106,14 +2108,14 @@ func CppBodyFromType(lang *vxlang, typ *vxtype) (string, string, *vxmsgblock) {
 					"\n          output->vx_p_" + argname + " = vx_p_" + argname + ";" +
 					"\n          vx_core::vx_reserve(vx_p_" + argname + ");" +
 					"\n        }"
-				argclassname := CppNameTypeFromType(lang, arg.vxtype)
+				argclassname := LangNameTypeFromType(lang, arg.vxtype)
 				valcopy += "\n      " + argclassname + " vx_p_" + argname + " = val->" + argname + "();"
 				vx_map += "\n      output[\":" + arg.name + "\"] = this->" + argname + "();"
 				vx_any += "" +
 					"\n      } else if (skey == \":" + arg.name + "\") {" +
 					"\n        output = this->" + argname + "();"
-				argttype := CppNameTFromType(lang, arg.vxtype)
-				argetype := CppNameEFromType(lang, arg.vxtype)
+				argttype := LangNameTFromType(lang, arg.vxtype)
+				argetype := LangNameEFromType(lang, arg.vxtype)
 				valnewswitch += "" +
 					"\n          } else if (key == \":" + arg.name + "\") {"
 				switch NameFromType(typ) {
@@ -2157,9 +2159,9 @@ func CppBodyFromType(lang *vxlang, typ *vxtype) (string, string, *vxmsgblock) {
 			defaultkey := ""
 			lastarg := props[len(props)-1]
 			if lastarg.isdefault {
-				lastargname := CppFromName(lastarg.name)
+				lastargname := LangFromName(lastarg.name)
 				//argclassname := CppNameTypeFromType(lastarg.vxtype)
-				argttype := CppNameTFromType(lang, lastarg.vxtype)
+				argttype := LangNameTFromType(lang, lastarg.vxtype)
 				defaultkey += "" +
 					"\n          } else if (valsubtype == " + argttype + ") { // default property" +
 					"\n            ischanged = true;" +
@@ -2169,7 +2171,7 @@ func CppBodyFromType(lang *vxlang, typ *vxtype) (string, string, *vxmsgblock) {
 					"\n            vx_p_" + lastargname + " = vx_core::vx_any_from_any(" + argttype + ", valsub);"
 				if lastarg.vxtype.extends == ":list" {
 					for _, allowtype := range lastarg.vxtype.allowtypes {
-						subargttype := CppNameTFromType(lang, allowtype)
+						subargttype := LangNameTFromType(lang, allowtype)
 						defaultkey += "" +
 							"\n          } else if (valsubtype == " + subargttype + ") { // default property" +
 							"\n            ischanged = true;" +
@@ -2396,7 +2398,7 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 	switch value.code {
 	case ":arg":
 		valarg := ArgFromValue(value)
-		valstr = CppFromName(valarg.name)
+		valstr = LangFromName(valarg.name)
 		output += valstr
 	case ":const":
 		switch value.name {
@@ -2404,10 +2406,10 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 			valstr = "vx_core::vx_new_boolean(" + value.name + ")"
 		default:
 			if value.pkg == ":native" {
-				valstr = CppFromName(value.name)
+				valstr = LangFromName(value.name)
 			} else {
 				valconst := ConstFromValue(value)
-				valstr = LangNameFromPkgName(lang, valconst.pkgname) + lang.pkgref + "c_" + CppFromName(valconst.alias)
+				valstr = LangNameFromPkgName(lang, valconst.pkgname) + lang.pkgref + "c_" + LangFromName(valconst.alias)
 			}
 		}
 		output = valstr
@@ -2416,7 +2418,7 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 		subpath := path + "/" + fnc.name
 		funcname := NameFromFunc(fnc)
 		if fnc.debug {
-			output += "vx_core::f_log_1(" + CppNameTFromType(lang, fnc.vxtype) + ", vx_core::vx_new_string(\"" + funcname + "\"), "
+			output += "vx_core::f_log_1(" + LangNameTFromType(lang, fnc.vxtype) + ", vx_core::vx_new_string(\"" + funcname + "\"), "
 		}
 		switch fnc.name {
 		case "native":
@@ -2491,12 +2493,12 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 						structvalue := funcargs[0].value
 						work, msgs := CppFromValue(lang, structvalue, pkgname, fnc, 0, true, test, subpath)
 						msgblock = MsgblockAddBlock(msgblock, msgs)
-						work = work + "->" + CppFromName(propname) + "()"
+						work = work + "->" + LangFromName(propname) + "()"
 						argtexts = append(argtexts, work)
 						isskip = true
 					}
 				default:
-					output += LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + CppNameFromFunc(fnc) + "("
+					output += LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangNameFromFunc(fnc) + "("
 				}
 			case "vx/core/fn":
 			case "vx/core/let":
@@ -2549,7 +2551,7 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 								case "any<-any-key-value-async", "any<-key-value-async",
 									"any<-reduce-async", "any<-reduce-next-async":
 									argtext = "" +
-										CppNameTFromType(lang, funcarg.vxtype) + "->vx_fn_new({" + capturetext + "}, [" + capturetext + "](" + lambdatext + ") {" +
+										LangNameTFromType(lang, funcarg.vxtype) + "->vx_fn_new({" + capturetext + "}, [" + capturetext + "](" + lambdatext + ") {" +
 										lambdavartext +
 										work +
 										"\n})"
@@ -2585,7 +2587,7 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 									"any<-reduce", "any<-reduce-next",
 									"boolean<-any":
 									argtext = "" +
-										CppNameTFromType(lang, funcarg.vxtype) + "->vx_fn_new({" + capturetext + "}, [" + capturetext + "](" + lambdatext + ") {" +
+										LangNameTFromType(lang, funcarg.vxtype) + "->vx_fn_new({" + capturetext + "}, [" + capturetext + "](" + lambdatext + ") {" +
 										lambdavartext +
 										work +
 										"\n})"
@@ -2626,8 +2628,8 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 									for lambdaidx, lambdaarg := range arglist {
 										lambdaargpath := argsubpath + ":lambdaarg/" + lambdaarg.name
 										arglineindent := "\n" + StringRepeat("  ", argindent)
-										lambdaargname := CppFromName(lambdaarg.alias)
-										lambdatypename := CppNameTypeFromType(lang, lambdaarg.vxtype)
+										lambdaargname := LangFromName(lambdaarg.alias)
+										lambdatypename := LangNameTypeFromTypeSimple(lang, lambdaarg.vxtype, true)
 										if lambdaarg.async {
 											valuesubpath := lambdaargpath + "/:value"
 											var localargs []string
@@ -2636,7 +2638,7 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 												if localarg.async && i != lambdaidx {
 													break
 												} else {
-													localargname := CppFromName(localarg.alias)
+													localargname := LangFromName(localarg.alias)
 													localargs = append(localargs, localargname)
 												}
 											}
@@ -2656,11 +2658,11 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 												arglineindent + "vx_core::vx_Type_async future_" + lambdaargname + " = " + lambdavaluetext + ";" +
 												//												arglineindent + "std::function<vx_core::Type_any(" + CppNameTypeFromType(lambdaarg.vxtype) + ")> fn_any_any_" + CppFromName(lambdaarg.name) + " = [" + valuecapturetext + "](" + CppNameTypeFromType(lambdaarg.vxtype) + " " + CppFromName(lambdaarg.name) + ") {"
 												arglineindent + "vx_core::vx_Type_fn_any_from_any fn_any_any_" + lambdaargname + " = [" + valuecapturetext + "](vx_core::Type_any any_" + lambdaargname + ") {" +
-												arglineindent + "  " + lambdatypename + " " + lambdaargname + " = vx_core::vx_any_from_any(" + CppNameTFromType(lang, lambdaarg.vxtype) + ", any_" + lambdaargname + ");" +
+												arglineindent + "  " + lambdatypename + " " + lambdaargname + " = vx_core::vx_any_from_any(" + LangNameTFromTypeSimple(lang, lambdaarg.vxtype, true) + ", any_" + lambdaargname + ");" +
 												arglineindent + "  vx_core::vx_ref_plus(" + lambdaargname + ");"
 											aftertext += "" +
 												arglineindent + "};" +
-												arglineindent + "vx_core::vx_Type_async " + outputname + " = vx_core::vx_async_from_async_fn(future_" + lambdaargname + ", " + CppNameTFromType(lang, lambdaarg.vxtype) + ", {" + valuecapturetext + "}, fn_any_any_" + lambdaargname + ");" +
+												arglineindent + "vx_core::vx_Type_async " + outputname + " = vx_core::vx_async_from_async_fn(future_" + lambdaargname + ", " + LangNameTFromType(lang, lambdaarg.vxtype) + ", {" + valuecapturetext + "}, fn_any_any_" + lambdaargname + ");" +
 												lambdarelease +
 												arglineindent + "return " + outputname + ";"
 											lambdaargrelease = []string{lambdaargname}
@@ -2697,13 +2699,13 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 									arglineindent := "\n" + StringRepeat("  ", argindent)
 									var lambdaargrelease []string
 									for _, lambdaarg := range arglist {
-										lambdaargname := CppFromName(lambdaarg.alias)
+										lambdaargname := LangFromName(lambdaarg.alias)
 										lambdaargrelease = append(lambdaargrelease, lambdaargname)
 										lambdaargpath := argsubpath + "/:arg/" + lambdaarg.name
 										lambdavaluetext, msgs := CppFromValue(lang, lambdaarg.value, pkgname, fnc, argindent, true, test, lambdaargpath)
 										msgblock = MsgblockAddBlock(msgblock, msgs)
 										lambdatext += "" +
-											arglineindent + CppNameTypeFromType(lang, lambdaarg.vxtype) + " " + lambdaargname + " = " + lambdavaluetext + ";" +
+											arglineindent + LangNameTypeFromType(lang, lambdaarg.vxtype) + " " + lambdaargname + " = " + lambdavaluetext + ";" +
 											arglineindent + "vx_core::vx_ref_plus(" + lambdaargname + ");"
 									}
 									work, msgs := CppFromValue(lang, argvalue, pkgname, fnc, 0, true, test, argsubpath)
@@ -2721,7 +2723,7 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 									argtext = "" +
 										"vx_core::t_any_from_func->vx_fn_new({" + capturetext + "}, [" + capturetext + "]() {" +
 										lambdatext +
-										arglineindent + CppNameTypeFromType(lang, fnc.vxtype) + " " + outputname + " = " + work + ";" +
+										arglineindent + LangNameTypeFromTypeSimple(lang, fnc.vxtype, true) + " " + outputname + " = " + work + ";" +
 										lambdarelease +
 										arglineindent + "return " + outputname + ";" +
 										"\n})"
@@ -2754,13 +2756,13 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 								capturetext := CppCaptureFromValue(argvalue, argsubpath)
 								funcarglist := funcargfunc.listarg
 								lambdatext, lambdavartext, lambdaargtext := CppLambdaFromArgList(lang, funcarglist, funcargfunc.isgeneric)
-								work := CppNameFFromFunc(lang, funcargfunc) + "(" + lambdaargtext + ")"
+								work := LangNameFFromFunc(lang, funcargfunc) + "(" + lambdaargtext + ")"
 								outputtype := "vx_core::Type_any"
 								if funcargfunc.async {
 									outputtype = "vx_core::vx_Type_async"
 								}
 								argtext = "" +
-									CppNameTFromType(lang, funcarg.vxtype) + "->vx_fn_new({" + capturetext + "}, [" + capturetext + "](" + lambdatext + ") {" +
+									LangNameTFromType(lang, funcarg.vxtype) + "->vx_fn_new({" + capturetext + "}, [" + capturetext + "](" + lambdatext + ") {" +
 									lambdavartext +
 									"\n  " + outputtype + " output_" + StringFromInt(subindent) + " = " + work + ";" +
 									"\n  return output_" + StringFromInt(subindent) + ";" +
@@ -2785,18 +2787,18 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 								}
 								work, msgs := CppFromValue(lang, argvalue, pkgname, fnc, workindent, true, test, argsubpath)
 								if converttoasync {
-									work = "vx_core::f_async(" + CppNameTFromType(lang, argfunctype) + ",\n" + StringRepeat("  ", workindent) + work + "\n  )"
+									work = "vx_core::f_async(" + LangNameTFromType(lang, argfunctype) + ",\n" + StringRepeat("  ", workindent) + work + "\n  )"
 								}
 								msgblock = MsgblockAddBlock(msgblock, msgs)
 								if argvalue.code == ":func" && argvalue.name == "native" {
 								} else {
 									work = "" +
-										"\n  " + CppNameTypeFromType(lang, argvalue.vxtype) + " output_" + StringFromInt(workindent) + " = " + work + ";" +
+										"\n  " + LangNameTypeFromTypeSimple(lang, argvalue.vxtype, true) + " output_" + StringFromInt(workindent) + " = " + work + ";" +
 										"\n  return output_" + StringFromInt(workindent) + ";"
 								}
 								capturetext := CppCaptureFromValue(argvalue, argsubpath)
 								argtext = "" +
-									CppNameTFromType(lang, funcarg.vxtype) + "->vx_fn_new({" + capturetext + "}, [" + capturetext + "]() {" +
+									LangNameTFromType(lang, funcarg.vxtype) + "->vx_fn_new({" + capturetext + "}, [" + capturetext + "]() {" +
 									work +
 									"\n})"
 							}
@@ -2831,7 +2833,7 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 							} else {
 								multiflag = true
 								argtext = "" +
-									"vx_core::vx_new(" + CppNameTFromType(lang, funcarg.vxtype) + ", {" +
+									"vx_core::vx_new(" + LangNameTFromType(lang, funcarg.vxtype) + ", {" +
 									"\n  " + StringFromStringIndent(argtext, "  ")
 							}
 						}
@@ -2842,12 +2844,12 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 								if funcarg.vxtype.name != funcarg.value.vxtype.name {
 									ok, _ := BooleanAllowFromTypeType(funcarg.vxtype, funcarg.value.vxtype)
 									if ok {
-										argtext = "(" + CppNameTypeFromType(lang, funcarg.vxtype) + ")" + argtext
+										argtext = "(" + LangNameTypeFromType(lang, funcarg.vxtype) + ")" + argtext
 									}
 								}
 							}
 							if fncidx == 0 && funcname == "vx/core/copy" {
-								genericarg := CppNameTFromType(lang, funcarg.value.vxtype)
+								genericarg := LangNameTFromType(lang, funcarg.value.vxtype)
 								argtexts = append(argtexts, genericarg)
 							}
 							argtexts = append(argtexts, argtext)
@@ -2891,11 +2893,11 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 	case ":funcref":
 		valfunc := FuncFromValue(value)
 		valstr = ""
-		valstr += CppNameTFromFunc(lang, valfunc)
+		valstr += LangNameTFromFunc(lang, valfunc)
 		output = sindent + valstr
 	case ":type":
 		valtype := TypeFromValue(value)
-		output = CppNameTFromType(lang, valtype)
+		output = LangNameTFromType(lang, valtype)
 	case "string":
 		valstr = StringValueFromValue(value)
 		if valstr == "" {
@@ -2953,7 +2955,7 @@ func CppFuncListFromListFunc(lang *vxlang, listfunc []*vxfunc) string {
 	if len(listfunc) > 0 {
 		var listtext []string
 		for _, fnc := range listfunc {
-			typetext := CppNameTFromFunc(lang, fnc)
+			typetext := LangNameTFromFunc(lang, fnc)
 			listtext = append(listtext, typetext)
 		}
 		output = "vx_core::vx_funclist_from_listfunc({" + StringFromListStringJoin(listtext, ", ") + "})"
@@ -3022,7 +3024,7 @@ func CppGenericFromType(lang *vxlang, typ *vxtype) string {
 			output = "S"
 		}
 	} else {
-		output = CppNameTypeFromType(lang, typ)
+		output = LangNameTypeFromType(lang, typ)
 	}
 	return output
 }
@@ -3122,7 +3124,7 @@ func CppImportsFromPackage(pkg *vxpackage, pkgprefix string, body string, test b
 
 func CppHeaderFromType(lang *vxlang, typ *vxtype) string {
 	output := ""
-	typename := CppNameFromType(typ)
+	typename := LangNameFromType(lang, typ)
 	basics := "" +
 		"\n    Class_" + typename + "();" +
 		"\n    virtual ~Class_" + typename + "() override;" +
@@ -3338,7 +3340,7 @@ func CppHeaderFromType(lang *vxlang, typ *vxtype) string {
 			if len(allowtypes) > 0 {
 				allowtype := allowtypes[0]
 				allowclass = CppNameTypeFullFromType(lang, allowtype)
-				allowname = CppNameFromType(allowtype)
+				allowname = LangNameFromType(lang, allowtype)
 			}
 			interfaces += "" +
 				"\n    std::vector<" + allowclass + "> vx_p_list;" +
@@ -3365,7 +3367,7 @@ func CppHeaderFromType(lang *vxlang, typ *vxtype) string {
 			if len(allowtypes) > 0 {
 				allowtype := allowtypes[0]
 				allowclass = CppNameTypeFullFromType(lang, allowtype)
-				allowname = CppNameFromType(allowtype)
+				allowname = LangNameFromType(lang, allowtype)
 			}
 			if allowname != "any" {
 				interfaces += "" +
@@ -3391,8 +3393,8 @@ func CppHeaderFromType(lang *vxlang, typ *vxtype) string {
 				extends += ", " + StringFromListStringJoin(traitnames, ", ")
 			}
 			for _, arg := range ListPropertyTraitFromType(typ) {
-				argclassname := CppNameTypeFromType(lang, arg.vxtype)
-				argname := CppFromName(arg.alias)
+				argclassname := LangNameTypeFromType(lang, arg.vxtype)
+				argname := LangFromName(arg.alias)
 				interfaces += "" +
 					"\n    // " + arg.name + "()" +
 					"\n    " + argclassname + " vx_p_" + argname + " = NULL;" +
@@ -3536,10 +3538,10 @@ func CppHeaderFnFromFunc(fnc *vxfunc) string {
 }
 
 func CppHeaderFromFunc(lang *vxlang, fnc *vxfunc) (string, string) {
-	funcname := CppNameFromFunc(fnc)
+	funcname := LangNameFromFunc(fnc)
 	extends := ""
 	abstractinterfaces := ""
-	returntype := CppNameTypeFromType(lang, fnc.vxtype)
+	returntype := LangNameTypeFromType(lang, fnc.vxtype)
 	var listargtext []string
 	var listsimpleargtext []string
 	switch NameFromFunc(fnc) {
@@ -3568,9 +3570,9 @@ func CppHeaderFromFunc(lang *vxlang, fnc *vxfunc) (string, string) {
 			if argtype.isgeneric {
 				argtypename = CppPointerDefFromClassName(CppGenericFromType(lang, argtype))
 			} else {
-				argtypename = CppNameTypeFromType(lang, argtype)
+				argtypename = LangNameTypeFromTypeSimple(lang, argtype, true)
 			}
-			argname := CppFromName(arg.alias)
+			argname := LangFromName(arg.alias)
 			isskip := false
 			switch NameFromFunc(fnc) {
 			case "vx/core/let", "vx/core/let-async":
@@ -3581,7 +3583,7 @@ func CppHeaderFromFunc(lang *vxlang, fnc *vxfunc) (string, string) {
 			}
 			if !isskip {
 				listargtext = append(listargtext, argtypename+" "+argname)
-				listsimpleargtext = append(listsimpleargtext, CppNameTypeFromType(lang, argtype)+" "+argname)
+				listsimpleargtext = append(listsimpleargtext, LangNameTypeFromTypeSimple(lang, argtype, true)+" "+argname)
 			}
 		}
 	} else {
@@ -3591,8 +3593,8 @@ func CppHeaderFromFunc(lang *vxlang, fnc *vxfunc) (string, string) {
 		}
 		for _, arg := range fnc.listarg {
 			argtype := arg.vxtype
-			argtypename := CppNameTypeFromType(lang, argtype)
-			argname := CppFromName(arg.alias)
+			argtypename := LangNameTypeFromTypeSimple(lang, argtype, true)
+			argname := LangFromName(arg.alias)
 			listargtext = append(listargtext, argtypename+" "+argname)
 			listsimpleargtext = append(listsimpleargtext, argtypename+" "+argname)
 		}
@@ -3730,10 +3732,6 @@ func CppHeaderFromFunc(lang *vxlang, fnc *vxfunc) (string, string) {
 	return output, headerfooter
 }
 
-func CppIndexFromFunc(fnc *vxfunc) string {
-	return StringIndexFromFunc(fnc)
-}
-
 func CppLambdaFromArgList(lang *vxlang, arglist []vxarg, isgeneric bool) (string, string, string) {
 	var lambdatypenames []string
 	var lambdavars []string
@@ -3744,14 +3742,14 @@ func CppLambdaFromArgList(lang *vxlang, arglist []vxarg, isgeneric bool) (string
 	for _, lambdaarg := range arglist {
 		argvaltype := ""
 		argtype := lambdaarg.vxtype
-		lambdaargname := CppFromName(lambdaarg.alias)
+		lambdaargname := LangFromName(lambdaarg.alias)
 		lambdaargnames = append(lambdaargnames, lambdaargname)
 		switch NameFromType(argtype) {
 		case "vx/core/any", "vx/core/any-1":
 			lambdatypenames = append(lambdatypenames, "vx_core::Type_any "+lambdaargname)
 		default:
 			argvaltype = CppNameTypeFullFromType(lang, argtype)
-			argvaltname := CppNameTFromType(lang, argtype)
+			argvaltname := LangNameTFromType(lang, argtype)
 			lambdatypenames = append(lambdatypenames, "vx_core::Type_any "+lambdaargname+"_any")
 			lambdavar := argvaltype + " " + lambdaargname + " = vx_core::vx_any_from_any(" + argvaltname + ", " + lambdaargname + "_any);"
 			lambdavars = append(lambdavars, lambdavar)
@@ -3769,26 +3767,26 @@ func CppLambdaFromArgList(lang *vxlang, arglist []vxarg, isgeneric bool) (string
 func CppNameAbstractFullFromConst(lang *vxlang, cnst *vxconst) string {
 	name := LangNameFromPkgName(lang, cnst.pkgname)
 	name += lang.pkgref + "Abstract_"
-	name += CppNameFromConst(cnst)
+	name += LangNameFromConst(cnst)
 	return name
 }
 
 func CppNameAbstractFullFromFunc(lang *vxlang, fnc *vxfunc) string {
 	name := LangNameFromPkgName(lang, fnc.pkgname)
 	name += lang.pkgref + "Abstract_"
-	name += CppNameFromFunc(fnc)
+	name += LangNameFromFunc(fnc)
 	return name
 }
 
 func CppNameAbstractFullFromType(lang *vxlang, typ *vxtype) string {
 	name := LangNameFromPkgName(lang, typ.pkgname)
 	name += lang.pkgref + "Abstract_"
-	name += CppNameFromType(typ)
+	name += LangNameFromType(lang, typ)
 	return name
 }
 
 func CppNameCFromConst(lang *vxlang, cnst *vxconst) string {
-	name := "c_" + CppFromName(cnst.alias)
+	name := "c_" + LangFromName(cnst.alias)
 	if cnst.pkgname != "" {
 		name = LangNameFromPkgName(lang, cnst.pkgname) + lang.pkgref + name
 	}
@@ -3798,30 +3796,31 @@ func CppNameCFromConst(lang *vxlang, cnst *vxconst) string {
 func CppNameClassFullFromConst(lang *vxlang, cnst *vxconst) string {
 	name := LangNameFromPkgName(lang, cnst.pkgname)
 	name += lang.pkgref + "Class_"
-	name += CppNameFromConst(cnst)
+	name += LangNameFromConst(cnst)
 	return name
 }
 
 func CppNameClassFullFromFunc(lang *vxlang, fnc *vxfunc) string {
 	name := LangNameFromPkgName(lang, fnc.pkgname)
 	name += lang.pkgref + "Class_"
-	name += CppNameFromFunc(fnc)
+	name += LangNameFromFunc(fnc)
 	return name
 }
 
 func CppNameClassFullFromType(lang *vxlang, typ *vxtype) string {
 	name := LangNameFromPkgName(lang, typ.pkgname)
 	name += lang.pkgref + "Class_"
-	name += CppNameFromType(typ)
+	name += LangNameFromType(lang, typ)
 	return name
 }
 
-func CppNameEFromType(lang *vxlang, typ *vxtype) string {
+/*
+func LangNameEFromType(lang *vxlang, typ *vxtype) string {
 	output := ""
 	if typ.isgeneric {
-		output = "vx_core::vx_empty(generic_" + CppFromName(typ.name) + ")"
+		output = "vx_core::vx_empty(generic_" + LangFromName(typ.name) + ")"
 	} else {
-		output = "e_" + CppNameFromType(typ)
+		output = "e_" + LangNameFromType(typ)
 		if typ.pkgname != "" {
 			output = LangNameFromPkgName(lang, typ.pkgname) + lang.pkgref + output
 		}
@@ -3829,71 +3828,55 @@ func CppNameEFromType(lang *vxlang, typ *vxtype) string {
 	return output
 }
 
-func CppNameEFromFunc(lang *vxlang, fnc *vxfunc) string {
-	name := "e_" + CppNameFromFunc(fnc)
+func LangNameEFromFunc(lang *vxlang, fnc *vxfunc) string {
+	name := "e_" + LangNameFromFunc(fnc)
 	if fnc.pkgname != "" {
 		name = LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + name
 	}
 	return name
 }
 
-func CppNameFFromFunc(lang *vxlang, fnc *vxfunc) string {
-	name := "f_" + CppNameFromFunc(fnc)
+func LangNameFFromFunc(lang *vxlang, fnc *vxfunc) string {
+	name := "f_" + LangNameFromFunc(fnc)
 	if fnc.pkgname != "" {
 		name = LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + name
 	}
 	return name
 }
 
-func CppNameFromConst(cnst *vxconst) string {
-	return CppFromName(cnst.alias)
+func LangNameFromConst(cnst *vxconst) string {
+	return LangFromName(cnst.alias)
 }
 
-func CppNameFromFunc(fnc *vxfunc) string {
-	return CppFromName(fnc.alias) + CppIndexFromFunc(fnc)
+func LangNameFromFunc(fnc *vxfunc) string {
+	return LangFromName(fnc.alias) + LangIndexFromFunc(fnc)
 }
 
-func CppNameFromType(typ *vxtype) string {
+func LangNameFromType(typ *vxtype) string {
 	name := ""
 	if typ.alias == "" {
-		name += CppFromName(typ.name)
+		name += LangFromName(typ.name)
 	} else {
-		name += CppFromName(typ.alias)
+		name += LangFromName(typ.alias)
 	}
 	return name
 }
 
-func CppNameTFromFunc(lang *vxlang, fnc *vxfunc) string {
-	name := "t_" + CppNameFromFunc(fnc)
+func LangNameTFromFunc(lang *vxlang, fnc *vxfunc) string {
+	name := "t_" + LangNameFromFunc(fnc)
 	if fnc.pkgname != "" {
 		name = LangNameFromPkgName(lang, fnc.pkgname) + "::" + name
 	}
 	return name
 }
-
-func CppNameTFromType(lang *vxlang, typ *vxtype) string {
-	name := "t_" + CppNameFromType(typ)
-	if typ.pkgname != "" {
-		name = LangNameFromPkgName(lang, typ.pkgname) + lang.pkgref + name
-	}
-	return name
-}
+*/
 
 func CppNameTFromTypeGeneric(lang *vxlang, typ *vxtype) string {
 	name := ""
 	if typ.isgeneric {
-		name = "generic_" + CppFromName(typ.name)
+		name = "generic_" + LangFromName(typ.name)
 	} else {
-		name = CppNameTFromType(lang, typ)
-	}
-	return name
-}
-
-func CppNameTypeFromType(lang *vxlang, typ *vxtype) string {
-	name := CppNameTypeFullFromType(lang, typ)
-	switch name {
-	case "vx_core::Type_none":
-		name = "void"
+		name = LangNameTFromType(lang, typ)
 	}
 	return name
 }
@@ -3901,14 +3884,14 @@ func CppNameTypeFromType(lang *vxlang, typ *vxtype) string {
 func CppNameTypeFullFromConst(lang *vxlang, cnst *vxconst) string {
 	name := LangNameFromPkgName(lang, cnst.pkgname)
 	name += lang.pkgref + "Const_"
-	name += CppNameFromConst(cnst)
+	name += LangNameFromConst(cnst)
 	return name
 }
 
 func CppNameTypeFullFromFunc(lang *vxlang, fnc *vxfunc) string {
 	name := LangNameFromPkgName(lang, fnc.pkgname)
 	name += lang.pkgref + "Func_"
-	name += CppNameFromFunc(fnc)
+	name += LangNameFromFunc(fnc)
 	return name
 }
 
@@ -3919,7 +3902,7 @@ func CppNameTypeFullFromType(lang *vxlang, typ *vxtype) string {
 	} else {
 		name += lang.pkgref + "Type_"
 	}
-	name += CppNameFromType(typ)
+	name += LangNameFromType(lang, typ)
 	return name
 }
 
@@ -3953,7 +3936,7 @@ func CppReplFromFunc(lang *vxlang, fnc *vxfunc) string {
 	argidx := 0
 	var listargname []string
 	pkgname := LangNameFromPkgName(lang, fnc.pkgname)
-	funcname := CppFromName(fnc.alias) + CppIndexFromFunc(fnc)
+	funcname := LangFromName(fnc.alias) + LangIndexFromFunc(fnc)
 	classname := "Class_" + funcname
 	outputtype := ""
 	outputttype := ""
@@ -3965,9 +3948,9 @@ func CppReplFromFunc(lang *vxlang, fnc *vxfunc) string {
 		outputttype = "vx_core::t_any"
 		//emptytype = "vx_core::e_any"
 	default:
-		outputtype = CppNameTypeFromType(lang, fnc.vxtype)
-		outputttype = CppNameTFromType(lang, fnc.vxtype)
-		//emptytype = CppNameEFromType(fnc.vxtype)
+		outputtype = LangNameTypeFromTypeSimple(lang, fnc.vxtype, true)
+		outputttype = LangNameTFromTypeSimple(lang, fnc.vxtype, true)
+		//emptytype = LangNameEFromType(fnc.vxtype)
 		returnvalue = "output = "
 	}
 	if fnc.isgeneric {
@@ -3976,9 +3959,9 @@ func CppReplFromFunc(lang *vxlang, fnc *vxfunc) string {
 			//		case "vx/core/copy", "vx/core/empty", "vx/core/new":
 		default:
 			if fnc.generictype != nil {
-				replparam := outputtype + " generic_" + CppFromName(fnc.generictype.name) + " = vx_core::vx_any_from_any(" + outputttype + ", arglist->vx_get_any(vx_core::vx_new_int(" + StringFromInt(argidx) + ")));"
+				replparam := outputtype + " generic_" + LangFromName(fnc.generictype.name) + " = vx_core::vx_any_from_any(" + outputttype + ", arglist->vx_get_any(vx_core::vx_new_int(" + StringFromInt(argidx) + ")));"
 				replparams += "\n      " + replparam
-				listargname = append(listargname, "generic_"+CppFromName(fnc.generictype.name))
+				listargname = append(listargname, "generic_"+LangFromName(fnc.generictype.name))
 			}
 		}
 	}
@@ -3990,8 +3973,8 @@ func CppReplFromFunc(lang *vxlang, fnc *vxfunc) string {
 	for _, arg := range fnc.listarg {
 		if (funcname == "let" || funcname == "let_async") && arg.name == "args" {
 		} else {
-			argname := CppFromName(arg.alias)
-			replparam := CppNameTypeFromType(lang, arg.vxtype) + " " + argname + " = vx_core::vx_any_from_any(" + CppNameTFromType(lang, arg.vxtype) + ", arglist->vx_get_any(vx_core::vx_new_int(" + StringFromInt(argidx) + ")));"
+			argname := LangFromName(arg.alias)
+			replparam := LangNameTypeFromTypeSimple(lang, arg.vxtype, true) + " " + argname + " = vx_core::vx_any_from_any(" + LangNameTFromTypeSimple(lang, arg.vxtype, true) + ", arglist->vx_get_any(vx_core::vx_new_int(" + StringFromInt(argidx) + ")));"
 			replparams += "\n      " + replparam
 			listargname = append(listargname, argname)
 			argidx += 1
@@ -4085,7 +4068,7 @@ func CppTestFromConst(lang *vxlang, cnst *vxconst) (string, *vxmsgblock) {
 	testvalues := cnst.listtestvalue
 	testpkg := cnst.pkgname
 	testname := cnst.name
-	testcasename := "c_" + CppFromName(cnst.alias)
+	testcasename := "c_" + LangFromName(cnst.alias)
 	path := cnst.pkgname + "/" + cnst.name
 	fnc := emptyfunc
 	output, msgs := CppTestCase(lang, testvalues, testpkg, testname, testcasename, fnc, path)
@@ -4097,9 +4080,9 @@ func CppTestFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("CppTestFromFunc")
 	testvalues := fnc.listtestvalue
 	testpkg := fnc.pkgname
-	idx := CppIndexFromFunc(fnc)
+	idx := LangIndexFromFunc(fnc)
 	testname := fnc.name + idx
-	funcname := CppFromName(fnc.alias) + idx
+	funcname := LangFromName(fnc.alias) + idx
 	testcasename := "f_" + funcname
 	path := fnc.pkgname + "/" + fnc.name + StringIndexFromFunc(fnc)
 	output, msgs := CppTestCase(lang, testvalues, testpkg, testname, testcasename, fnc, path)
@@ -4132,8 +4115,8 @@ func CppTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *v
 		if test != "" {
 			covertypecnt += 1
 			typetexts += test
-			testall = append(testall, pkgname+"_test::t_"+CppFromName(typ.alias)+"(context)")
-			typeheaders += "\n  vx_test::Type_testcase t_" + CppFromName(typ.alias) + "(vx_core::Type_context context);"
+			testall = append(testall, pkgname+"_test::t_"+LangFromName(typ.alias)+"(context)")
+			typeheaders += "\n  vx_test::Type_testcase t_" + LangFromName(typ.alias) + "(vx_core::Type_context context);"
 		}
 		coverdoctotal += 1
 		if typ.doc != "" {
@@ -4160,8 +4143,8 @@ func CppTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *v
 		if test != "" {
 			coverconstcnt += 1
 			consttexts += test
-			testall = append(testall, pkgname+"_test::c_"+CppFromName(cnst.alias)+"(context)")
-			constheaders += "\n  vx_test::Type_testcase c_" + CppFromName(cnst.alias) + "(vx_core::Type_context context);"
+			testall = append(testall, pkgname+"_test::c_"+LangFromName(cnst.alias)+"(context)")
+			constheaders += "\n  vx_test::Type_testcase c_" + LangFromName(cnst.alias) + "(vx_core::Type_context context);"
 		}
 		coverdoctotal += 1
 		if cnst.doc != "" {
@@ -4184,7 +4167,7 @@ func CppTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *v
 			test, msgs := CppTestFromFunc(lang, fnc)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
-			coverfunc = append(coverfunc, "vx_core::vx_new_string(\":"+fncid+CppIndexFromFunc(fnc)+"\"), vx_core::vx_new_int("+StringFromInt(len(fnc.listtestvalue))+")")
+			coverfunc = append(coverfunc, "vx_core::vx_new_string(\":"+fncid+LangIndexFromFunc(fnc)+"\"), vx_core::vx_new_int("+StringFromInt(len(fnc.listtestvalue))+")")
 			if command.filter == "" {
 			} else if NameFromFunc(fnc) != command.filter {
 				test = ""
@@ -4192,8 +4175,8 @@ func CppTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *v
 			if test != "" {
 				coverfunccnt += 1
 				functexts += test
-				testall = append(testall, pkgname+"_test::f_"+CppFromName(fnc.alias)+CppIndexFromFunc(fnc)+"(context)")
-				funcheaders += "\n  vx_test::Type_testcase f_" + CppFromName(fnc.alias) + "(vx_core::Type_context context);"
+				testall = append(testall, pkgname+"_test::f_"+LangFromName(fnc.alias)+LangIndexFromFunc(fnc)+"(context)")
+				funcheaders += "\n  vx_test::Type_testcase f_" + LangFromName(fnc.alias) + "(vx_core::Type_context context);"
 			}
 			coverdoctotal += 1
 			if fnc.doc != "" {
@@ -4346,7 +4329,7 @@ func CppTestFromType(lang *vxlang, typ *vxtype) (string, *vxmsgblock) {
 	testvalues := typ.testvalues
 	testpkg := typ.pkgname
 	testname := typ.name
-	testcasename := "t_" + CppFromName(typ.alias)
+	testcasename := "t_" + LangFromName(typ.alias)
 	fnc := emptyfunc
 	path := typ.pkgname + "/" + typ.name
 	output, msgs := CppTestCase(lang, testvalues, testpkg, testname, testcasename, fnc, path)
@@ -4432,7 +4415,7 @@ func CppTypeListFromListType(lang *vxlang, listtype []*vxtype) string {
 	if len(listtype) > 0 {
 		var listtext []string
 		for _, typ := range listtype {
-			typetext := CppNameTFromType(lang, typ)
+			typetext := LangNameTFromType(lang, typ)
 			listtext = append(listtext, typetext)
 		}
 		output = "vx_core::vx_typelist_from_listany({" + StringFromListStringJoin(listtext, ", ") + "})"
@@ -4490,12 +4473,12 @@ func CppApp(lang *vxlang, project *vxproject, cmd *vxcommand) string {
 			}
 			if contextfunc.async {
 				contexttext = `
-    asynccontext = ` + CppNameFFromFunc(lang, contextfunc) + `(arglist);
+    asynccontext = ` + LangNameFFromFunc(lang, contextfunc) + `(arglist);
     context = vx_core::vx_sync_from_async(vx_core::t_context, asynccontext);
     vx_core::vx_reserve_context(context);`
 			} else {
 				contexttext = `
-    context = ` + CppNameFFromFunc(lang, contextfunc) + `(arglist);
+    context = ` + LangNameFFromFunc(lang, contextfunc) + `(arglist);
     vx_core::vx_reserve_context(context);`
 			}
 		}
@@ -4505,7 +4488,7 @@ func CppApp(lang *vxlang, project *vxproject, cmd *vxcommand) string {
 			if mainfunc.context {
 				params = "context, arglist"
 			}
-			mainfunctext := CppNameFFromFunc(lang, mainfunc) + "(" + params + ");"
+			mainfunctext := LangNameFFromFunc(lang, mainfunc) + "(" + params + ");"
 			if mainfunc.async {
 				maintext = `
     vx_core::vx_Type_async asyncstring = ` + mainfunctext + `
@@ -4567,11 +4550,11 @@ func CppAppTest(lang *vxlang, project *vxproject, command *vxcommand) string {
 			}
 			if contextfunc.async {
 				contexttext = `
-    asynccontext = ` + CppNameFFromFunc(lang, contextfunc) + `(arglist);
+    asynccontext = ` + LangNameFFromFunc(lang, contextfunc) + `(arglist);
     vx_core::Type_context context = vx_core::vx_sync_from_async(vx_core::t_context, asynccontext);`
 			} else {
 				contexttext = `
-    vx_core::Type_context context = ` + CppNameFFromFunc(lang, contextfunc) + `(arglist);`
+    vx_core::Type_context context = ` + LangNameFFromFunc(lang, contextfunc) + `(arglist);`
 			}
 		}
 	}

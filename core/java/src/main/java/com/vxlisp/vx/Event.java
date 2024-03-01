@@ -99,7 +99,9 @@ public final class Event {
     }
 
     @Override
-    public Type_event vx_new(final Object... vals) {return e_event.vx_copy(vals);}
+    public Type_event vx_new(final Object... vals) {
+      return e_event.vx_copy(vals);
+    }
 
     @Override
     public Type_event vx_copy(final Object... vals) {
@@ -358,7 +360,9 @@ public final class Event {
     }
 
     @Override
-    public Type_eventlist vx_new(final Object... vals) {return e_eventlist.vx_copy(vals);}
+    public Type_eventlist vx_new(final Object... vals) {
+      return e_eventlist.vx_copy(vals);
+    }
 
     @Override
     public Type_eventlist vx_copy(final Object... vals) {
@@ -505,7 +509,9 @@ public final class Event {
     }
 
     @Override
-    public Type_eventmap vx_new(final Object... vals) {return e_eventmap.vx_copy(vals);}
+    public Type_eventmap vx_new(final Object... vals) {
+      return e_eventmap.vx_copy(vals);
+    }
 
     @Override
     public Type_eventmap vx_copy(final Object... vals) {
@@ -804,14 +810,111 @@ public final class Event {
   public static final Const_event_select c_event_select = new Const_event_select();
 
   /**
+   * @function any_from_from_event
+   * @param  {event} event
+   * @return {any-1}
+   * (func any-from<-event)
+   */
+  public static interface Func_any_from_from_event extends Core.Func_any_from_any {
+    public <T extends Core.Type_any> T vx_any_from_from_event(final T generic_any_1, final Event.Type_event event);
+  }
+
+  public static class Class_any_from_from_event extends Core.Class_base implements Func_any_from_from_event {
+
+    @Override
+    public Func_any_from_from_event vx_new(Object... vals) {
+      Class_any_from_from_event output = new Class_any_from_from_event();
+      return output;
+    }
+
+    @Override
+    public Func_any_from_from_event vx_copy(Object... vals) {
+      Class_any_from_from_event output = new Class_any_from_from_event();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/event", // pkgname
+        "any-from<-event", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "any-1", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_any_from_from_event vx_empty() {return e_any_from_from_event;}
+    @Override
+    public Func_any_from_from_event vx_type() {return t_any_from_from_event;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Event.Type_event inputval = (Event.Type_event)value;
+      Core.Type_any outputval = Event.f_any_from_from_event(Core.t_any, inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Event.Type_event event = Core.f_any_from_any(Event.t_event, arglist.vx_any(Core.vx_new_int(0)));
+      output = Event.f_any_from_from_event(generic_any_1, event);
+      return output;
+    }
+
+    @Override
+    public <T extends Core.Type_any> T vx_any_from_from_event(final T generic_any_1, final Event.Type_event event) {
+      return Event.f_any_from_from_event(generic_any_1, event);
+    }
+
+  }
+
+  public static final Func_any_from_from_event e_any_from_from_event = new Event.Class_any_from_from_event();
+  public static final Func_any_from_from_event t_any_from_from_event = new Event.Class_any_from_from_event();
+
+  public static <T extends Core.Type_any> T f_any_from_from_event(final T generic_any_1, final Event.Type_event event) {
+    T output = Core.f_empty(generic_any_1);
+    output = Core.f_let(
+      generic_any_1,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_any value = event.from();
+        return Core.f_any_from_any(generic_any_1, value);
+      })
+    );
+    return output;
+  }
+
+  /**
    * @function event_from_event
    * Template for triggering ui events
    * @param  {event} event
    * @return {event}
    * (func event<-event)
    */
-  public static interface Func_event_from_event extends Core.Func_any_from_any {
-    public Event.Type_event vx_event_from_event(final Event.Type_event event);
+  public static interface Func_event_from_event extends Core.Func_any_from_any_context {
+    public Event.Type_event vx_event_from_event(final Core.Type_context context, final Event.Type_event event);
   }
 
   public static class Class_event_from_event extends Core.Class_base implements Func_event_from_event {
@@ -860,27 +963,28 @@ public final class Event {
     public Func_event_from_event vx_type() {return t_event_from_event;}
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       Event.Type_event inputval = (Event.Type_event)value;
-      Core.Type_any outputval = Event.f_event_from_event(inputval);
+      Core.Type_any outputval = Event.f_event_from_event(context, inputval);
       output = Core.f_any_from_any(generic_any_1, outputval);
       return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Event.Type_event event = Core.f_any_from_any(Event.t_event, arglist.vx_any(Core.vx_new_int(0)));
-      output = Event.f_event_from_event(event);
+      output = Event.f_event_from_event(context, event);
       return output;
     }
 
     @Override
-    public Event.Type_event vx_event_from_event(final Event.Type_event event) {
-      return Event.f_event_from_event(event);
+    public Event.Type_event vx_event_from_event(final Core.Type_context context, final Event.Type_event event) {
+      return Event.f_event_from_event(context, event);
     }
 
   }
@@ -888,7 +992,7 @@ public final class Event {
   public static final Func_event_from_event e_event_from_event = new Event.Class_event_from_event();
   public static final Func_event_from_event t_event_from_event = new Event.Class_event_from_event();
 
-  public static Event.Type_event f_event_from_event(final Event.Type_event event) {
+  public static Event.Type_event f_event_from_event(final Core.Type_context context, final Event.Type_event event) {
     Event.Type_event output = Event.e_event;
     output = event;
     return output;
@@ -1009,6 +1113,7 @@ public final class Event {
     mapconst.put("event-click", Event.c_event_click);
     mapconst.put("event-move", Event.c_event_move);
     mapconst.put("event-select", Event.c_event_select);
+    mapfunc.put("any-from<-event", Event.t_any_from_from_event);
     mapfunc.put("event<-event", Event.t_event_from_event);
     mapfunc.put("eventmap<-eventlist", Event.t_eventmap_from_eventlist);
     Core.vx_global_package_set("vx/event", maptype, mapconst, mapfunc);

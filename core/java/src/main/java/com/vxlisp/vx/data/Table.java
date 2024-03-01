@@ -63,7 +63,9 @@ public final class Table {
     }
 
     @Override
-    public Type_cell vx_new(final Object... vals) {return e_cell.vx_copy(vals);}
+    public Type_cell vx_new(final Object... vals) {
+      return e_cell.vx_copy(vals);
+    }
 
     @Override
     public Type_cell vx_copy(final Object... vals) {
@@ -252,7 +254,9 @@ public final class Table {
     }
 
     @Override
-    public Type_celllist vx_new(final Object... vals) {return e_celllist.vx_copy(vals);}
+    public Type_celllist vx_new(final Object... vals) {
+      return e_celllist.vx_copy(vals);
+    }
 
     @Override
     public Type_celllist vx_copy(final Object... vals) {
@@ -398,7 +402,9 @@ public final class Table {
     }
 
     @Override
-    public Type_cellmap vx_new(final Object... vals) {return e_cellmap.vx_copy(vals);}
+    public Type_cellmap vx_new(final Object... vals) {
+      return e_cellmap.vx_copy(vals);
+    }
 
     @Override
     public Type_cellmap vx_copy(final Object... vals) {
@@ -566,7 +572,9 @@ public final class Table {
     }
 
     @Override
-    public Type_field vx_new(final Object... vals) {return e_field.vx_copy(vals);}
+    public Type_field vx_new(final Object... vals) {
+      return e_field.vx_copy(vals);
+    }
 
     @Override
     public Type_field vx_copy(final Object... vals) {
@@ -781,7 +789,9 @@ public final class Table {
     }
 
     @Override
-    public Type_fieldlist vx_new(final Object... vals) {return e_fieldlist.vx_copy(vals);}
+    public Type_fieldlist vx_new(final Object... vals) {
+      return e_fieldlist.vx_copy(vals);
+    }
 
     @Override
     public Type_fieldlist vx_copy(final Object... vals) {
@@ -906,7 +916,9 @@ public final class Table {
     }
 
     @Override
-    public Type_fieldmap vx_new(final Object... vals) {return e_fieldmap.vx_copy(vals);}
+    public Type_fieldmap vx_new(final Object... vals) {
+      return e_fieldmap.vx_copy(vals);
+    }
 
     @Override
     public Type_fieldmap vx_copy(final Object... vals) {
@@ -1055,7 +1067,9 @@ public final class Table {
     }
 
     @Override
-    public Type_filter vx_new(final Object... vals) {return e_filter.vx_copy(vals);}
+    public Type_filter vx_new(final Object... vals) {
+      return e_filter.vx_copy(vals);
+    }
 
     @Override
     public Type_filter vx_copy(final Object... vals) {
@@ -1294,7 +1308,9 @@ public final class Table {
     }
 
     @Override
-    public Type_row vx_new(final Object... vals) {return e_row.vx_copy(vals);}
+    public Type_row vx_new(final Object... vals) {
+      return e_row.vx_copy(vals);
+    }
 
     @Override
     public Type_row vx_copy(final Object... vals) {
@@ -1506,7 +1522,9 @@ public final class Table {
     }
 
     @Override
-    public Type_rowlist vx_new(final Object... vals) {return e_rowlist.vx_copy(vals);}
+    public Type_rowlist vx_new(final Object... vals) {
+      return e_rowlist.vx_copy(vals);
+    }
 
     @Override
     public Type_rowlist vx_copy(final Object... vals) {
@@ -1652,7 +1670,9 @@ public final class Table {
     }
 
     @Override
-    public Type_rowmap vx_new(final Object... vals) {return e_rowmap.vx_copy(vals);}
+    public Type_rowmap vx_new(final Object... vals) {
+      return e_rowmap.vx_copy(vals);
+    }
 
     @Override
     public Type_rowmap vx_copy(final Object... vals) {
@@ -1820,7 +1840,9 @@ public final class Table {
     }
 
     @Override
-    public Type_sort vx_new(final Object... vals) {return e_sort.vx_copy(vals);}
+    public Type_sort vx_new(final Object... vals) {
+      return e_sort.vx_copy(vals);
+    }
 
     @Override
     public Type_sort vx_copy(final Object... vals) {
@@ -2107,7 +2129,9 @@ public final class Table {
     }
 
     @Override
-    public Type_table vx_new(final Object... vals) {return e_table.vx_copy(vals);}
+    public Type_table vx_new(final Object... vals) {
+      return e_table.vx_copy(vals);
+    }
 
     @Override
     public Type_table vx_copy(final Object... vals) {

@@ -33,6 +33,10 @@ namespace vx_event {
   class Class_event_select;
   typedef Class_event_select* Const_event_select;
   extern Const_event_select c_event_select;
+  class Abstract_any_from_from_event;
+  typedef Abstract_any_from_from_event* Func_any_from_from_event;
+  extern Func_any_from_from_event e_any_from_from_event;
+  extern Func_any_from_from_event t_any_from_from_event;
   class Abstract_event_from_event;
   typedef Abstract_event_from_event* Func_event_from_event;
   extern Func_event_from_event e_event_from_event;
@@ -42,7 +46,7 @@ namespace vx_event {
   extern Func_eventmap_from_eventlist e_eventmap_from_eventlist;
   extern Func_eventmap_from_eventlist t_eventmap_from_eventlist;
   // (func event<-event)
-  vx_event::Type_event f_event_from_event(vx_event::Type_event event);
+  vx_event::Type_event f_event_from_event(vx_core::Type_context context, vx_event::Type_event event);
 
   // (func eventmap<-eventlist)
   vx_event::Type_eventmap f_eventmap_from_eventlist(vx_event::Type_eventlist eventlist);
@@ -189,13 +193,40 @@ namespace vx_event {
     static void vx_const_new(vx_event::Const_event_select output);
   };
 
+  // (func any-from<-event)
+  class Abstract_any_from_from_event : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_any_from_from_event() {};
+    virtual ~Abstract_any_from_from_event() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_any_from_from_event : public virtual Abstract_any_from_from_event {
+  public:
+    Class_any_from_from_event();
+    virtual ~Class_any_from_from_event() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
   // (func event<-event)
-  class Abstract_event_from_event : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  class Abstract_event_from_event : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
   public:
     Abstract_event_from_event() {};
     virtual ~Abstract_event_from_event() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
-    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
   class Class_event_from_event : public virtual Abstract_event_from_event {
@@ -211,8 +242,8 @@ namespace vx_event {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
-    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -242,6 +273,24 @@ namespace vx_event {
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
+
+  // (func any-from<-event)
+  template <class T> T* f_any_from_from_event(T* generic_any_1, vx_event::Type_event event) {
+    T* output = vx_core::vx_empty(generic_any_1);
+    vx_core::vx_reserve(event);
+    output = vx_core::f_let(
+      generic_any_1,
+      vx_core::t_any_from_func->vx_fn_new({event, generic_any_1}, [event, generic_any_1]() {
+        vx_core::Type_any value = event->from();
+        vx_core::vx_ref_plus(value);
+        vx_core::Type_any output_1 = vx_core::f_any_from_any(generic_any_1, value);
+        vx_core::vx_release_one_except(value, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except(event, output);
+    return output;
+  }
 
   class vx_Class_package {
   public:

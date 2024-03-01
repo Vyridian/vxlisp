@@ -279,7 +279,7 @@ export default class vx_collection_test {
                 "d1"
               ),
               vx_collection.f_list_from_list_filter(
-                {"any-1": vx_core.t_string, "any-2": vx_core.t_any, "list-1": vx_core.t_stringlist, "list-2": vx_core.t_list},
+                {"any-1": vx_core.t_string, "list-1": vx_core.t_stringlist, "list-2": vx_core.t_list},
                 vx_core.f_new(
                   vx_core.t_list,
                   "a",
@@ -337,7 +337,7 @@ export default class vx_collection_test {
                 "c"
               ),
               vx_collection.f_list_from_list_filtertypes(
-                {"any-1": vx_core.t_any, "any-2": vx_core.t_any, "list-1": vx_core.t_list, "list-2": vx_core.t_list},
+                {"list-1": vx_core.t_list, "list-2": vx_core.t_list},
                 vx_core.f_new(
                   vx_core.t_list,
                   "a",

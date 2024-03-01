@@ -1,13 +1,8 @@
 (package vx/web/htmldoc
  :libs (lib event :path vx/event)
        (lib html  :path vx/web/html)
+       (lib ui    :path vx/ui/ui)
  :doc "Html Client-side document handler")
-
-(func any-data<-id : any
- [id : string]
- (native
-  :js :auto)
- :doc "Returns data component from element.")
 
 (func boolean-replace<-id-htmltext : boolean
  [id       : string
@@ -18,11 +13,9 @@
  :clientserver :client
  :doc "Replaces an html node with given id and text.")
 
-(func boolean-replace<-id-htmltext-data-eventmap : boolean
- [id       : string
-  htmltext : string
-  data     : any
-  eventmap : event/eventmap]
+(func boolean-replace<-ui-htmltext : boolean
+ [ui       : ui/ui
+  htmltext : string]
  (native
   :js :auto)
  :sideeffects "Changes HTML display."
@@ -63,9 +56,26 @@
  :clientserver :client
  :doc "Writes a css stylesheet.")
 
+(func context-read : context
+ (native
+  :js :auto)
+ :doc "Reads context from document.data.context")
+
+(func context-write : context
+ (native
+  :js :auto)
+ :context
+ :doc "Writes context to document.data.context")
+
 (func string<-id : string
  [id   : string]
  (native
   :js :auto)
  :clientserver :client
  :doc "Reads the value of an html node by id.")
+
+(func ui-readstate<-uid : any
+ [uid : string]
+ (native
+  :js :auto)
+ :doc "Returns ui component from element.")

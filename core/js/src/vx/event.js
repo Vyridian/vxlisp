@@ -55,6 +55,34 @@ export default class vx_event {
   static c_event_select = {vx_type: vx_event.t_event, vx_constdef: {pkgname: 'vx/event', name: 'event-select'}}
 
   /**
+   * @function any_from_from_event
+   * @param  {typemap} generic
+   * @param  {event} event
+   * @return {any-1}
+   */
+  static t_any_from_from_event = {
+    vx_type: vx_core.t_type
+  }
+  static e_any_from_from_event = {
+    vx_type: vx_event.t_any_from_from_event
+  }
+
+  // (func any-from<-event)
+  static f_any_from_from_event(generic, event) {
+    const generic_any_1 = generic["any-1"]
+    let output = vx_core.f_empty(generic_any_1)
+    output = vx_core.f_let(
+      {"any-1": generic_any_1, "any-2": vx_core.t_any},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const value = vx_core.f_any_from_struct({"any-1": vx_core.t_any, "struct-2": vx_event.t_event}, event, ":from")
+        return vx_core.f_any_from_any({"any-1": generic_any_1, "any-2": vx_core.t_any}, value)
+      })
+    )
+    return output
+  }
+
+  /**
    * @function event_from_event
    * Template for triggering ui events
    * @param  {event} event
@@ -68,7 +96,7 @@ export default class vx_event {
   }
 
   // (func event<-event)
-  static f_event_from_event(event) {
+  static f_event_from_event(context, event) {
     let output = vx_event.e_event
     output = event
     return output
@@ -112,10 +140,12 @@ export default class vx_event {
       "event": vx_event.e_event,
       "eventlist": vx_event.e_eventlist,
       "eventmap": vx_event.e_eventmap,
+      "any-from<-event": vx_event.e_any_from_from_event,
       "event<-event": vx_event.e_event_from_event,
       "eventmap<-eventlist": vx_event.e_eventmap_from_eventlist
     })
     const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      "any-from<-event": vx_event.t_any_from_from_event,
       "event<-event": vx_event.t_event_from_event,
       "eventmap<-eventlist": vx_event.t_eventmap_from_eventlist
     })
@@ -218,6 +248,24 @@ export default class vx_event {
     }
     vx_event.e_eventmap['vx_type'] = vx_event.t_eventmap
     vx_event.e_eventmap['vx_value'] = {}
+
+    // (func any-from<-event)
+    vx_event.t_any_from_from_event['vx_value'] = {
+      name          : "any-from<-event",
+      pkgname       : "vx/event",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_event.f_any_from_from_event
+    }
 
     // (func event<-event)
     vx_event.t_event_from_event['vx_value'] = {

@@ -5,6 +5,7 @@ import vx_core from "../../../src/vx/core.js"
 import vx_test from "../../../src/vx/test.js"
 import vx_event from "../../../src/vx/event.js"
 import vx_data_file from "../../../src/vx/data/file.js"
+import vx_state from "../../../src/vx/state.js"
 
 export default class vx_ui_ui_test {
 
@@ -26,11 +27,11 @@ export default class vx_ui_ui_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/ui/ui", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 32), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 41, ":tests", 28, ":total", 67), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 14), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 46, ":tests", 34, ":total", 73), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 20), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 67), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 73), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 21)
     )
   }
@@ -103,15 +104,21 @@ export default class vx_ui_ui_test {
       "funcmap",
         vx_core.f_new(
           vx_core.t_intmap,
+          "boolean-writestate<-ui", 0,
+          "boolean-writestate<-uiengine", 0,
           "layout<-style", 0,
           "layoutmap<-layoutlist", 0,
           "stylemap<-stylelist", 0,
           "stylesheet-render", 0,
+          "ui-data<-ui", 0,
+          "ui-from<-event", 0,
           "ui-layout<-ui-layoutmap-else", 0,
+          "ui-readstate<-uid", 0,
           "ui-render", 0,
           "ui-render<-fn-render-ui-orig-parent", 0,
           "ui-render<-ui-orig-parent", 0,
           "ui<-renderer-ui-orig-parent", 0,
+          "uiengine-readstate", 0,
           "uiengine-render", 0,
           "uimap-layout<-uimap-layoutmap-else", 0,
           "uimap-render<-uimap-parent", 0,

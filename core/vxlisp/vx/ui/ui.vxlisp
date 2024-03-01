@@ -1,6 +1,7 @@
 (package vx/ui/ui
  :libs (lib event :path vx/event)
        (lib file  :path vx/data/file)
+       (lib state :path vx/state)
  :doc "Universal Ui Element")
 
 (type bounds : struct
@@ -57,22 +58,6 @@
  :allowtypes [render]
  :doc "Map of render")
 
-/*
-(type renderer : struct
- :properties [name      : string
-              layout    : layout
-              fn-render : ui-render<-ui-orig-parent]
- :doc "Universal Renderer")
-
-(type rendererlist : list
- :allowtypes [renderer]
- :doc "Map of renderer")
-
-(type renderermap : map
- :allowtypes [renderer]
- :doc "Map of renderer")
-*/
-
 (type style : struct
  :properties [name             : string
               boundsmargin     : bounds
@@ -107,6 +92,7 @@
  :properties [data            : any
               eventmap        : event/eventmap
               fn-uimap-data   : uimap<-uimap-data
+              parent          : string
               path            : string
               render          : render
               renderer        : layout
@@ -133,10 +119,6 @@
  :doc "Template for uiengine")
 
 (type cursor-pointer : cursor)
-
-/*
-(const global-uiengine : uiengine)
-*/
 
 (const layout-app : layout
  (layout
@@ -244,6 +226,25 @@
 
 (const styletype-system : styletype)
 
+(func boolean-writestate<-ui : boolean
+ [ui : ui]
+ (let : boolean
+  [uid : string := (:uid ui)]
+  (state/boolean-writestate<-mapname-name-value
+   :uimap
+   uid
+   value))
+ :context
+ :doc "")
+
+(func boolean-writestate<-uiengine : boolean
+ [uiengine : uiengine]
+ (state/boolean-writestate<-name-value
+  :uiengine uiengine)
+ :context
+ :sideeffects "Changes state"
+ :doc "Writes the uiengine to state")
+
 (func layout<-style : layout
  [style : style]
  (:layout style)
@@ -286,6 +287,20 @@
   uichg)
  :doc "")
 
+(func ui-data<-ui : ui
+ [ui : ui]
+ (let : ui
+  [data  : any   := (:data ui)]
+  (any<-any : ui
+   data))
+ :doc "Returns (:data ui) cast as ui")
+
+(func ui-from<-event : ui
+ [event : event/event]
+ (event/any-from<-event : ui
+  event)
+ :doc "Returns (:from event) cast as ui")
+
 (func ui-layout<-ui-layoutmap-else : ui
  [ui : ui
   layoutmap  : layoutmap
@@ -312,25 +327,21 @@
    :uimap  uimaprend))
  :doc "Returns a ui with a renderer added to each ui.")
 
-(func uimap<-uimap-data : uimap
- [uimap : uimap
-  data  : any]
- :doc "Template for creating uimap dynamically")
+(func ui-readstate<-uid : ui
+ [uid : string]
+ (state/any-readstate<-mapname-name : ui
+  :uimap
+  uid)
+ :context
+ :doc "Returns the named ui from state")
 
-(func uimap-layout<-uimap-layoutmap-else : uimap
- [uimap : uimap
-  layoutmap  : layoutmap
-  layoutelse : layout]
- (map<-map : uimap
-  uimap
-  (fn : ui
-   [key : string
-    ui  : ui]
-   (ui-layout<-ui-layoutmap-else
-    ui
-    layoutmap
-    layoutelse)))
- :doc "Returns a uimap with a renderer added to each ui.")
+(func ui-render : ui
+ [uiarg : ui]
+ (ui-render<-ui-orig-parent
+  uiarg
+  (empty ui)
+  (empty ui))
+ :doc "")
 
 (func ui-render<-fn-render-ui-orig-parent : render
  [fn-render : ui-render<-ui-orig-parent
@@ -340,15 +351,8 @@
  (fn-render
   ui
   orig
-  parent))
-
-(func ui-render : ui
- [uiarg : ui]
- (ui-render<-ui-orig-parent
-  uiarg
-  (empty ui)
-  (empty ui))
- :doc "")
+  parent)
+ :doc "Returns a rendered ui")
 
 (func ui-render<-ui-orig-parent : ui
  [ui     : ui
@@ -371,6 +375,12 @@
  :sideeffects "Alters UI"
  :doc "Returns a rendered object from a UI Element.")
 
+(func uiengine-readstate : uiengine
+ (state/any-readstate<-name : uiengine
+  :uiengine)
+ :context
+ :doc "Returns the current uiengine from state")
+
 (func uiengine-render : uiengine
  [uiengine : uiengine]
  (let : uiengine
@@ -390,6 +400,7 @@
                                             uirenderer)]
   (copy uiengine
    :ui uirendered))
+ :context
  :doc "Returns a fully rendered ui for a given engine.")
 
 (func uimap<-uilist : uimap
@@ -400,6 +411,26 @@
    [ui : ui]
    (:uid ui)))
  :doc "")
+
+(func uimap<-uimap-data : uimap
+ [uimap : uimap
+  data  : any]
+ :doc "Template for creating uimap dynamically")
+
+(func uimap-layout<-uimap-layoutmap-else : uimap
+ [uimap : uimap
+  layoutmap  : layoutmap
+  layoutelse : layout]
+ (map<-map : uimap
+  uimap
+  (fn : ui
+   [key : string
+    ui  : ui]
+   (ui-layout<-ui-layoutmap-else
+    ui
+    layoutmap
+    layoutelse)))
+ :doc "Returns a uimap with a renderer added to each ui.")
 
 (func uimap-render<-uimap-parent : uimap
  [uimap  : uimap

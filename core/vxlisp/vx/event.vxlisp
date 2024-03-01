@@ -37,9 +37,18 @@
   :name "move")
  :doc "Move Event")
 
+(func any-from<-event : any-1
+ [event : event]
+ (let : any-1
+  [value : any := (:from event)]
+  (any<-any : any-1
+   value))
+ :doc "")
+
 (func event<-event : event
  [event : event]
  event
+ :context
  :sideeffects "Triggering an event will cause some kind of change"
  :doc "Template for triggering ui events")
 

@@ -99,7 +99,9 @@ public final class Textblock {
     }
 
     @Override
-    public Type_delim vx_new(final Object... vals) {return e_delim.vx_copy(vals);}
+    public Type_delim vx_new(final Object... vals) {
+      return e_delim.vx_copy(vals);
+    }
 
     @Override
     public Type_delim vx_copy(final Object... vals) {
@@ -367,7 +369,9 @@ public final class Textblock {
     }
 
     @Override
-    public Type_delimlist vx_new(final Object... vals) {return e_delimlist.vx_copy(vals);}
+    public Type_delimlist vx_new(final Object... vals) {
+      return e_delimlist.vx_copy(vals);
+    }
 
     @Override
     public Type_delimlist vx_copy(final Object... vals) {
@@ -613,7 +617,9 @@ public final class Textblock {
     }
 
     @Override
-    public Type_textblock vx_new(final Object... vals) {return e_textblock.vx_copy(vals);}
+    public Type_textblock vx_new(final Object... vals) {
+      return e_textblock.vx_copy(vals);
+    }
 
     @Override
     public Type_textblock vx_copy(final Object... vals) {
@@ -1028,7 +1034,9 @@ public final class Textblock {
     }
 
     @Override
-    public Type_textblocklist vx_new(final Object... vals) {return e_textblocklist.vx_copy(vals);}
+    public Type_textblocklist vx_new(final Object... vals) {
+      return e_textblocklist.vx_copy(vals);
+    }
 
     @Override
     public Type_textblocklist vx_copy(final Object... vals) {

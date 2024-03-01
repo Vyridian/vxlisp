@@ -63,7 +63,9 @@ public final class Csv {
     }
 
     @Override
-    public Type_csv vx_new(final Object... vals) {return e_csv.vx_copy(vals);}
+    public Type_csv vx_new(final Object... vals) {
+      return e_csv.vx_copy(vals);
+    }
 
     @Override
     public Type_csv vx_copy(final Object... vals) {
@@ -270,7 +272,9 @@ public final class Csv {
     }
 
     @Override
-    public Type_csvrowmap vx_new(final Object... vals) {return e_csvrowmap.vx_copy(vals);}
+    public Type_csvrowmap vx_new(final Object... vals) {
+      return e_csvrowmap.vx_copy(vals);
+    }
 
     @Override
     public Type_csvrowmap vx_copy(final Object... vals) {
@@ -414,7 +418,9 @@ public final class Csv {
     }
 
     @Override
-    public Type_csvrows vx_new(final Object... vals) {return e_csvrows.vx_copy(vals);}
+    public Type_csvrows vx_new(final Object... vals) {
+      return e_csvrows.vx_copy(vals);
+    }
 
     @Override
     public Type_csvrows vx_copy(final Object... vals) {

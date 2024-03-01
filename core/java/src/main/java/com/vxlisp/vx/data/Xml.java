@@ -111,7 +111,9 @@ public final class Xml {
     }
 
     @Override
-    public Type_xml vx_new(final Object... vals) {return e_xml.vx_copy(vals);}
+    public Type_xml vx_new(final Object... vals) {
+      return e_xml.vx_copy(vals);
+    }
 
     @Override
     public Type_xml vx_copy(final Object... vals) {
@@ -398,7 +400,9 @@ public final class Xml {
     }
 
     @Override
-    public Type_xmllist vx_new(final Object... vals) {return e_xmllist.vx_copy(vals);}
+    public Type_xmllist vx_new(final Object... vals) {
+      return e_xmllist.vx_copy(vals);
+    }
 
     @Override
     public Type_xmllist vx_copy(final Object... vals) {
@@ -544,7 +548,9 @@ public final class Xml {
     }
 
     @Override
-    public Type_xmlpropmap vx_new(final Object... vals) {return e_xmlpropmap.vx_copy(vals);}
+    public Type_xmlpropmap vx_new(final Object... vals) {
+      return e_xmlpropmap.vx_copy(vals);
+    }
 
     @Override
     public Type_xmlpropmap vx_copy(final Object... vals) {

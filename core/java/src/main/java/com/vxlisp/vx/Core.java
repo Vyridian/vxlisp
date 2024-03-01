@@ -878,7 +878,9 @@ public final class Core {
   public static class Class_any extends Core.Class_base implements Type_any {
 
     @Override
-    public Type_any vx_new(final Object... vals) {return e_any.vx_copy(vals);}
+    public Type_any vx_new(final Object... vals) {
+      return e_any.vx_copy(vals);
+    }
 
     @Override
     public Type_any vx_copy(final Object... vals) {
@@ -948,7 +950,9 @@ public final class Core {
   public static class Class_any_async_from_func extends Core.Class_base implements Type_any_async_from_func {
 
     @Override
-    public Type_any_async_from_func vx_new(final Object... vals) {return e_any_async_from_func.vx_copy(vals);}
+    public Type_any_async_from_func vx_new(final Object... vals) {
+      return e_any_async_from_func.vx_copy(vals);
+    }
 
     @Override
     public Type_any_async_from_func vx_copy(final Object... vals) {
@@ -1038,7 +1042,9 @@ public final class Core {
     }
 
     @Override
-    public Type_any_from_anylist vx_new(final Object... vals) {return e_any_from_anylist.vx_copy(vals);}
+    public Type_any_from_anylist vx_new(final Object... vals) {
+      return e_any_from_anylist.vx_copy(vals);
+    }
 
     @Override
     public Type_any_from_anylist vx_copy(final Object... vals) {
@@ -1151,7 +1157,9 @@ public final class Core {
     }
 
     @Override
-    public Type_anylist vx_new(final Object... vals) {return e_anylist.vx_copy(vals);}
+    public Type_anylist vx_new(final Object... vals) {
+      return e_anylist.vx_copy(vals);
+    }
 
     @Override
     public Type_anylist vx_copy(final Object... vals) {
@@ -1288,7 +1296,9 @@ public final class Core {
     }
 
     @Override
-    public Type_anymap vx_new(final Object... vals) {return e_anymap.vx_copy(vals);}
+    public Type_anymap vx_new(final Object... vals) {
+      return e_anymap.vx_copy(vals);
+    }
 
     @Override
     public Type_anymap vx_copy(final Object... vals) {
@@ -1406,7 +1416,9 @@ public final class Core {
   public static class Class_anytype extends Core.Class_base implements Type_anytype {
 
     @Override
-    public Type_anytype vx_new(final Object... vals) {return e_anytype.vx_copy(vals);}
+    public Type_anytype vx_new(final Object... vals) {
+      return e_anytype.vx_copy(vals);
+    }
 
     @Override
     public Type_anytype vx_copy(final Object... vals) {
@@ -1532,7 +1544,9 @@ public final class Core {
     }
 
     @Override
-    public Type_arg vx_new(final Object... vals) {return e_arg.vx_copy(vals);}
+    public Type_arg vx_new(final Object... vals) {
+      return e_arg.vx_copy(vals);
+    }
 
     @Override
     public Type_arg vx_copy(final Object... vals) {
@@ -1771,7 +1785,9 @@ public final class Core {
     }
 
     @Override
-    public Type_arglist vx_new(final Object... vals) {return e_arglist.vx_copy(vals);}
+    public Type_arglist vx_new(final Object... vals) {
+      return e_arglist.vx_copy(vals);
+    }
 
     @Override
     public Type_arglist vx_copy(final Object... vals) {
@@ -1918,7 +1934,9 @@ public final class Core {
     }
 
     @Override
-    public Type_argmap vx_new(final Object... vals) {return e_argmap.vx_copy(vals);}
+    public Type_argmap vx_new(final Object... vals) {
+      return e_argmap.vx_copy(vals);
+    }
 
     @Override
     public Type_argmap vx_copy(final Object... vals) {
@@ -2042,7 +2060,9 @@ public final class Core {
     public boolean vx_boolean() {return vxboolean;}
 
     @Override
-    public Type_boolean vx_new(final Object... vals) {return e_boolean.vx_copy(vals);}
+    public Type_boolean vx_new(final Object... vals) {
+      return e_boolean.vx_copy(vals);
+    }
 
     @Override
     public Type_boolean vx_copy(final Object... vals) {
@@ -2149,7 +2169,9 @@ public final class Core {
     }
 
     @Override
-    public Type_booleanlist vx_new(final Object... vals) {return e_booleanlist.vx_copy(vals);}
+    public Type_booleanlist vx_new(final Object... vals) {
+      return e_booleanlist.vx_copy(vals);
+    }
 
     @Override
     public Type_booleanlist vx_copy(final Object... vals) {
@@ -2247,7 +2269,9 @@ public final class Core {
   public static class Class_collection extends Core.Class_base implements Type_collection {
 
     @Override
-    public Type_collection vx_new(final Object... vals) {return e_collection.vx_copy(vals);}
+    public Type_collection vx_new(final Object... vals) {
+      return e_collection.vx_copy(vals);
+    }
 
     @Override
     public Type_collection vx_copy(final Object... vals) {
@@ -2309,7 +2333,9 @@ public final class Core {
   public static class Class_compilelanguages extends Core.Class_base implements Type_compilelanguages {
 
     @Override
-    public Type_compilelanguages vx_new(final Object... vals) {return e_compilelanguages.vx_copy(vals);}
+    public Type_compilelanguages vx_new(final Object... vals) {
+      return e_compilelanguages.vx_copy(vals);
+    }
 
     @Override
     public Type_compilelanguages vx_copy(final Object... vals) {
@@ -2372,7 +2398,9 @@ public final class Core {
   public static class Class_connect extends Core.Class_base implements Type_connect {
 
     @Override
-    public Type_connect vx_new(final Object... vals) {return e_connect.vx_copy(vals);}
+    public Type_connect vx_new(final Object... vals) {
+      return e_connect.vx_copy(vals);
+    }
 
     @Override
     public Type_connect vx_copy(final Object... vals) {
@@ -2462,7 +2490,9 @@ public final class Core {
     }
 
     @Override
-    public Type_connectlist vx_new(final Object... vals) {return e_connectlist.vx_copy(vals);}
+    public Type_connectlist vx_new(final Object... vals) {
+      return e_connectlist.vx_copy(vals);
+    }
 
     @Override
     public Type_connectlist vx_copy(final Object... vals) {
@@ -2609,7 +2639,9 @@ public final class Core {
     }
 
     @Override
-    public Type_connectmap vx_new(final Object... vals) {return e_connectmap.vx_copy(vals);}
+    public Type_connectmap vx_new(final Object... vals) {
+      return e_connectmap.vx_copy(vals);
+    }
 
     @Override
     public Type_connectmap vx_copy(final Object... vals) {
@@ -2727,7 +2759,9 @@ public final class Core {
   public static class Class_const extends Core.Class_base implements Type_const {
 
     @Override
-    public Type_const vx_new(final Object... vals) {return e_const.vx_copy(vals);}
+    public Type_const vx_new(final Object... vals) {
+      return e_const.vx_copy(vals);
+    }
 
     @Override
     public Type_const vx_copy(final Object... vals) {
@@ -2841,7 +2875,9 @@ public final class Core {
     }
 
     @Override
-    public Type_constdef vx_new(final Object... vals) {return e_constdef.vx_copy(vals);}
+    public Type_constdef vx_new(final Object... vals) {
+      return e_constdef.vx_copy(vals);
+    }
 
     @Override
     public Type_constdef vx_copy(final Object... vals) {
@@ -3047,7 +3083,9 @@ public final class Core {
     }
 
     @Override
-    public Type_constlist vx_new(final Object... vals) {return e_constlist.vx_copy(vals);}
+    public Type_constlist vx_new(final Object... vals) {
+      return e_constlist.vx_copy(vals);
+    }
 
     @Override
     public Type_constlist vx_copy(final Object... vals) {
@@ -3184,7 +3222,9 @@ public final class Core {
     }
 
     @Override
-    public Type_constmap vx_new(final Object... vals) {return e_constmap.vx_copy(vals);}
+    public Type_constmap vx_new(final Object... vals) {
+      return e_constmap.vx_copy(vals);
+    }
 
     @Override
     public Type_constmap vx_copy(final Object... vals) {
@@ -3365,7 +3405,9 @@ public final class Core {
     }
 
     @Override
-    public Type_context vx_new(final Object... vals) {return e_context.vx_copy(vals);}
+    public Type_context vx_new(final Object... vals) {
+      return e_context.vx_copy(vals);
+    }
 
     @Override
     public Type_context vx_copy(final Object... vals) {
@@ -3574,7 +3616,9 @@ public final class Core {
   public static class Class_date extends Core.Class_base implements Type_date {
 
     @Override
-    public Type_date vx_new(final Object... vals) {return e_date.vx_copy(vals);}
+    public Type_date vx_new(final Object... vals) {
+      return e_date.vx_copy(vals);
+    }
 
     @Override
     public Type_date vx_copy(final Object... vals) {
@@ -3657,7 +3701,9 @@ public final class Core {
     }
 
     @Override
-    public Type_decimal vx_new(final Object... vals) {return e_decimal.vx_copy(vals);}
+    public Type_decimal vx_new(final Object... vals) {
+      return e_decimal.vx_copy(vals);
+    }
 
     @Override
     public Type_decimal vx_copy(final Object... vals) {
@@ -3736,7 +3782,9 @@ public final class Core {
   public static class Class_error extends Core.Class_base implements Type_error {
 
     @Override
-    public Type_error vx_new(final Object... vals) {return e_error.vx_copy(vals);}
+    public Type_error vx_new(final Object... vals) {
+      return e_error.vx_copy(vals);
+    }
 
     @Override
     public Type_error vx_copy(final Object... vals) {
@@ -3805,7 +3853,9 @@ public final class Core {
     public float vx_float() {return vxfloat;}
 
     @Override
-    public Type_float vx_new(final Object... vals) {return e_float.vx_copy(vals);}
+    public Type_float vx_new(final Object... vals) {
+      return e_float.vx_copy(vals);
+    }
 
     @Override
     public Type_float vx_copy(final Object... vals) {
@@ -3906,7 +3956,9 @@ public final class Core {
       return Core.e_funcdef;
     }
     @Override
-    public Type_func vx_new(final Object... vals) {return e_func.vx_copy(vals);}
+    public Type_func vx_new(final Object... vals) {
+      return e_func.vx_copy(vals);
+    }
 
     @Override
     public Type_func vx_copy(final Object... vals) {
@@ -4044,7 +4096,9 @@ public final class Core {
     }
 
     @Override
-    public Type_funcdef vx_new(final Object... vals) {return e_funcdef.vx_copy(vals);}
+    public Type_funcdef vx_new(final Object... vals) {
+      return e_funcdef.vx_copy(vals);
+    }
 
     @Override
     public Type_funcdef vx_copy(final Object... vals) {
@@ -4312,7 +4366,9 @@ public final class Core {
     }
 
     @Override
-    public Type_funclist vx_new(final Object... vals) {return e_funclist.vx_copy(vals);}
+    public Type_funclist vx_new(final Object... vals) {
+      return e_funclist.vx_copy(vals);
+    }
 
     @Override
     public Type_funclist vx_copy(final Object... vals) {
@@ -4459,7 +4515,9 @@ public final class Core {
     }
 
     @Override
-    public Type_funcmap vx_new(final Object... vals) {return e_funcmap.vx_copy(vals);}
+    public Type_funcmap vx_new(final Object... vals) {
+      return e_funcmap.vx_copy(vals);
+    }
 
     @Override
     public Type_funcmap vx_copy(final Object... vals) {
@@ -4583,7 +4641,9 @@ public final class Core {
     public int vx_int() {return vxint;}
 
     @Override
-    public Type_int vx_new(final Object... vals) {return e_int.vx_copy(vals);}
+    public Type_int vx_new(final Object... vals) {
+      return e_int.vx_copy(vals);
+    }
 
     @Override
     public Type_int vx_copy(final Object... vals) {
@@ -4689,7 +4749,9 @@ public final class Core {
     }
 
     @Override
-    public Type_intlist vx_new(final Object... vals) {return e_intlist.vx_copy(vals);}
+    public Type_intlist vx_new(final Object... vals) {
+      return e_intlist.vx_copy(vals);
+    }
 
     @Override
     public Type_intlist vx_copy(final Object... vals) {
@@ -4836,7 +4898,9 @@ public final class Core {
     }
 
     @Override
-    public Type_intmap vx_new(final Object... vals) {return e_intmap.vx_copy(vals);}
+    public Type_intmap vx_new(final Object... vals) {
+      return e_intmap.vx_copy(vals);
+    }
 
     @Override
     public Type_intmap vx_copy(final Object... vals) {
@@ -4982,7 +5046,9 @@ public final class Core {
     }
 
     @Override
-    public Type_list vx_new(final Object... vals) {return e_list.vx_copy(vals);}
+    public Type_list vx_new(final Object... vals) {
+      return e_list.vx_copy(vals);
+    }
 
     @Override
     public Type_list vx_copy(final Object... vals) {
@@ -5108,7 +5174,9 @@ public final class Core {
   public static class Class_listtype extends Core.Class_base implements Type_listtype {
 
     @Override
-    public Type_listtype vx_new(final Object... vals) {return e_listtype.vx_copy(vals);}
+    public Type_listtype vx_new(final Object... vals) {
+      return e_listtype.vx_copy(vals);
+    }
 
     @Override
     public Type_listtype vx_copy(final Object... vals) {
@@ -5186,7 +5254,9 @@ public final class Core {
     }
 
     @Override
-    public Type_locale vx_new(final Object... vals) {return e_locale.vx_copy(vals);}
+    public Type_locale vx_new(final Object... vals) {
+      return e_locale.vx_copy(vals);
+    }
 
     @Override
     public Type_locale vx_copy(final Object... vals) {
@@ -5290,7 +5360,9 @@ public final class Core {
     }
 
     @Override
-    public Type_map vx_new(final Object... vals) {return e_map.vx_copy(vals);}
+    public Type_map vx_new(final Object... vals) {
+      return e_map.vx_copy(vals);
+    }
 
     @Override
     public Type_map vx_copy(final Object... vals) {
@@ -5408,7 +5480,9 @@ public final class Core {
   public static class Class_maptype extends Core.Class_base implements Type_maptype {
 
     @Override
-    public Type_maptype vx_new(final Object... vals) {return e_maptype.vx_copy(vals);}
+    public Type_maptype vx_new(final Object... vals) {
+      return e_maptype.vx_copy(vals);
+    }
 
     @Override
     public Type_maptype vx_copy(final Object... vals) {
@@ -5550,7 +5624,9 @@ public final class Core {
     }
 
     @Override
-    public Type_mempool vx_new(final Object... vals) {return e_mempool.vx_copy(vals);}
+    public Type_mempool vx_new(final Object... vals) {
+      return e_mempool.vx_copy(vals);
+    }
 
     @Override
     public Type_mempool vx_copy(final Object... vals) {
@@ -5765,7 +5841,9 @@ public final class Core {
     }
 
     @Override
-    public Type_msg vx_new(final Object... vals) {return e_msg.vx_copy(vals);}
+    public Type_msg vx_new(final Object... vals) {
+      return e_msg.vx_copy(vals);
+    }
 
     @Override
     public Type_msg vx_copy(final Object... vals) {
@@ -5948,7 +6026,9 @@ public final class Core {
     }
 
     @Override
-    public Type_msgblock vx_new(final Object... vals) {return e_msgblock.vx_copy(vals);}
+    public Type_msgblock vx_new(final Object... vals) {
+      return e_msgblock.vx_copy(vals);
+    }
 
     @Override
     public Type_msgblock vx_copy(final Object... vals) {
@@ -6130,7 +6210,9 @@ public final class Core {
     }
 
     @Override
-    public Type_msgblocklist vx_new(final Object... vals) {return e_msgblocklist.vx_copy(vals);}
+    public Type_msgblocklist vx_new(final Object... vals) {
+      return e_msgblocklist.vx_copy(vals);
+    }
 
     @Override
     public Type_msgblocklist vx_copy(final Object... vals) {
@@ -6251,7 +6333,9 @@ public final class Core {
     }
 
     @Override
-    public Type_msglist vx_new(final Object... vals) {return e_msglist.vx_copy(vals);}
+    public Type_msglist vx_new(final Object... vals) {
+      return e_msglist.vx_copy(vals);
+    }
 
     @Override
     public Type_msglist vx_copy(final Object... vals) {
@@ -6345,7 +6429,9 @@ public final class Core {
   public static class Class_none extends Core.Class_base implements Type_none {
 
     @Override
-    public Type_none vx_new(final Object... vals) {return e_none.vx_copy(vals);}
+    public Type_none vx_new(final Object... vals) {
+      return e_none.vx_copy(vals);
+    }
 
     @Override
     public Type_none vx_copy(final Object... vals) {
@@ -6408,7 +6494,9 @@ public final class Core {
   public static class Class_notype extends Core.Class_base implements Type_notype {
 
     @Override
-    public Type_notype vx_new(final Object... vals) {return e_notype.vx_copy(vals);}
+    public Type_notype vx_new(final Object... vals) {
+      return e_notype.vx_copy(vals);
+    }
 
     @Override
     public Type_notype vx_copy(final Object... vals) {
@@ -6471,7 +6559,9 @@ public final class Core {
   public static class Class_number extends Core.Class_base implements Type_number {
 
     @Override
-    public Type_number vx_new(final Object... vals) {return e_number.vx_copy(vals);}
+    public Type_number vx_new(final Object... vals) {
+      return e_number.vx_copy(vals);
+    }
 
     @Override
     public Type_number vx_copy(final Object... vals) {
@@ -6561,7 +6651,9 @@ public final class Core {
     }
 
     @Override
-    public Type_numberlist vx_new(final Object... vals) {return e_numberlist.vx_copy(vals);}
+    public Type_numberlist vx_new(final Object... vals) {
+      return e_numberlist.vx_copy(vals);
+    }
 
     @Override
     public Type_numberlist vx_copy(final Object... vals) {
@@ -6708,7 +6800,9 @@ public final class Core {
     }
 
     @Override
-    public Type_numbermap vx_new(final Object... vals) {return e_numbermap.vx_copy(vals);}
+    public Type_numbermap vx_new(final Object... vals) {
+      return e_numbermap.vx_copy(vals);
+    }
 
     @Override
     public Type_numbermap vx_copy(final Object... vals) {
@@ -6901,7 +6995,9 @@ public final class Core {
     }
 
     @Override
-    public Type_package vx_new(final Object... vals) {return e_package.vx_copy(vals);}
+    public Type_package vx_new(final Object... vals) {
+      return e_package.vx_copy(vals);
+    }
 
     @Override
     public Type_package vx_copy(final Object... vals) {
@@ -7180,7 +7276,9 @@ public final class Core {
     }
 
     @Override
-    public Type_packagemap vx_new(final Object... vals) {return e_packagemap.vx_copy(vals);}
+    public Type_packagemap vx_new(final Object... vals) {
+      return e_packagemap.vx_copy(vals);
+    }
 
     @Override
     public Type_packagemap vx_copy(final Object... vals) {
@@ -7325,7 +7423,9 @@ public final class Core {
     }
 
     @Override
-    public Type_permission vx_new(final Object... vals) {return e_permission.vx_copy(vals);}
+    public Type_permission vx_new(final Object... vals) {
+      return e_permission.vx_copy(vals);
+    }
 
     @Override
     public Type_permission vx_copy(final Object... vals) {
@@ -7492,7 +7592,9 @@ public final class Core {
     }
 
     @Override
-    public Type_permissionlist vx_new(final Object... vals) {return e_permissionlist.vx_copy(vals);}
+    public Type_permissionlist vx_new(final Object... vals) {
+      return e_permissionlist.vx_copy(vals);
+    }
 
     @Override
     public Type_permissionlist vx_copy(final Object... vals) {
@@ -7639,7 +7741,9 @@ public final class Core {
     }
 
     @Override
-    public Type_permissionmap vx_new(final Object... vals) {return e_permissionmap.vx_copy(vals);}
+    public Type_permissionmap vx_new(final Object... vals) {
+      return e_permissionmap.vx_copy(vals);
+    }
 
     @Override
     public Type_permissionmap vx_copy(final Object... vals) {
@@ -7784,7 +7888,9 @@ public final class Core {
     }
 
     @Override
-    public Type_project vx_new(final Object... vals) {return e_project.vx_copy(vals);}
+    public Type_project vx_new(final Object... vals) {
+      return e_project.vx_copy(vals);
+    }
 
     @Override
     public Type_project vx_copy(final Object... vals) {
@@ -7972,7 +8078,9 @@ public final class Core {
     }
 
     @Override
-    public Type_security vx_new(final Object... vals) {return e_security.vx_copy(vals);}
+    public Type_security vx_new(final Object... vals) {
+      return e_security.vx_copy(vals);
+    }
 
     @Override
     public Type_security vx_copy(final Object... vals) {
@@ -8242,7 +8350,9 @@ public final class Core {
     }
 
     @Override
-    public Type_session vx_new(final Object... vals) {return e_session.vx_copy(vals);}
+    public Type_session vx_new(final Object... vals) {
+      return e_session.vx_copy(vals);
+    }
 
     @Override
     public Type_session vx_copy(final Object... vals) {
@@ -8521,7 +8631,9 @@ public final class Core {
     }
 
     @Override
-    public Type_setting vx_new(final Object... vals) {return e_setting.vx_copy(vals);}
+    public Type_setting vx_new(final Object... vals) {
+      return e_setting.vx_copy(vals);
+    }
 
     @Override
     public Type_setting vx_copy(final Object... vals) {
@@ -8645,67 +8757,49 @@ public final class Core {
 
   /**
    * type: state
+   * State. Note that this type is has mutable values.
    * (type state)
    */
-  public interface Type_state extends Core.Type_map {
+  public interface Type_state extends Core.Type_struct {
     public Core.Type_state vx_new(final Object... vals);
     public Core.Type_state vx_copy(final Object... vals);
     public Core.Type_state vx_empty();
     public Core.Type_state vx_type();
-    public Map<String, Core.Type_statelistener> vx_mapstatelistener();
-    public Core.Type_statelistener vx_statelistener(final Core.Type_string key);
+    public Core.Type_statelistenermap statelistenermap();
   }
 
   public static class Class_state extends Core.Class_base implements Type_state {
 
-    protected Map<String, Core.Type_statelistener> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_statelistener>());
+    protected Core.Type_statelistenermap vx_p_statelistenermap;
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
-
-    @Override
-    public Core.Type_statelistener vx_statelistener(final Core.Type_string key) {
-      Core.Type_statelistener output = Core.e_statelistener;
-      Class_state map = this;
-      String skey = key.vx_string();
-      Map<String, Core.Type_statelistener> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Core.e_statelistener);
-      return output;
+    public Core.Type_statelistenermap statelistenermap() {
+      return this.vx_p_statelistenermap == null ? Core.e_statelistenermap : this.vx_p_statelistenermap;
     }
-
-    @Override
-    public Map<String, Core.Type_statelistener> vx_mapstatelistener() {return vx_p_map;}
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
-      return this.vx_statelistener(key);
-    }
-
-    @Override
-    public Type_state vx_new_from_map(final Map<String, Core.Type_any> mapval) {
-      Class_state output = new Class_state();
-      Core.Type_msgblock msgblock = Core.e_msgblock;
-      Map<String, Core.Type_statelistener> map = new LinkedHashMap<>();
-      Set<String> keys = mapval.keySet();
-      for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
-        if (val instanceof Core.Type_statelistener) {
-          Core.Type_statelistener castval = (Core.Type_statelistener)val;
-          map.put(key, castval);
-        } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/state", ":invalidvalue", val);
-          msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
-        }
-      }
-      output.vx_p_map = Core.immutablemap(map);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
+      Core.Type_any output = Core.e_any;
+      String skey = key.vx_string();
+      switch (skey) {
+      case ":statelistenermap":
+        output = this.statelistenermap();
+        break;
       }
       return output;
     }
 
     @Override
-    public Type_state vx_new(final Object... vals) {return e_state.vx_copy(vals);}
+    public Map<String, Core.Type_any> vx_map() {
+      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      output.put(":statelistenermap", this.statelistenermap());
+      return Core.immutablemap(output);
+    }
+
+    @Override
+    public Type_state vx_new(final Object... vals) {
+      return e_state.vx_copy(vals);
+    }
 
     @Override
     public Type_state vx_copy(final Object... vals) {
@@ -8716,20 +8810,26 @@ public final class Core {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, Core.Type_statelistener> mapval = new LinkedHashMap<>(val.vx_mapstatelistener());
-      Core.Type_msg msg;
+      Core.Type_statelistenermap vx_p_statelistenermap = val.statelistenermap();
+      ArrayList<String> validkeys = new ArrayList<>();
+      validkeys.add(":statelistenermap");
       String key = "";
+      Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+          msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
-        } else if (key.equals("")) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (key == "") {
+          boolean istestkey = false;
+          String testkey = "";
           if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;
-            key = valstring.vx_string();
+            Core.Type_string valstr = (Core.Type_string)valsub;
+            testkey = valstr.vx_string();
+            istestkey = true;
           } else if (valsub instanceof String) {
-            key = (String)valsub;
+            testkey = (String)valsub;
+            istestkey = true;
           } else {
             Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
@@ -8737,42 +8837,55 @@ public final class Core {
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
-            msg = Core.vx_msg_from_error("vx/core/state", ":keyexpected", msgval);
-            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+            msg = Core.vx_msg_from_error("vx/core/state", ":invalidkeytype", msgval);
+            msgblock = msgblock.vx_copy(msg);
+          }
+          if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
+            boolean isvalidkey = validkeys.contains(testkey);
+            if (isvalidkey) {
+              key = testkey;
+            } else {
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/core/state", ":invalidkey", msgval);
+              msgblock = msgblock.vx_copy(msg);
+            }
           }
         } else {
-          Core.Type_statelistener valany = null;
-          if (valsub instanceof Core.Type_statelistener) {
-            valany = (Core.Type_statelistener)valsub;
-          } else if (valsub instanceof Core.Type_statelistener) {
-            valany = (Core.Type_statelistener)valsub;
-          } else {
-            Core.Type_any msgval;
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+          switch (key) {
+          case ":statelistenermap":
+            if (valsub == vx_p_statelistenermap) {
+            } else if (valsub instanceof Core.Type_statelistenermap) {
+              ischanged = true;
+              vx_p_statelistenermap = (Core.Type_statelistenermap)valsub;
             } else {
-              msgval = Core.vx_new_string(valsub.toString());
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("statelistenermap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/core/state", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
             }
-            Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
-            mapany.put("key", Core.vx_new_string(key));
-            mapany.put("value", msgval);
-            Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
-            msg = Core.vx_msg_from_error("vx/core/state", ":invalidkeyvalue", msgmap);
-            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+            break;
+          default:
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/core/state", ":invalidkey", msgval);
+            msgblock = msgblock.vx_copy(msg);
           }
-          if (valany != null) {
-            ischanged = true;
-            if (key.startsWith(":")) {
-              key = key.substring(1);
-            }
-            mapval.put(key, valany);
-            key = "";
-          }
+          key = "";
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_state work = new Class_state();
-        work.vx_p_map = Core.immutablemap(mapval);
+        work.vx_p_statelistenermap = vx_p_statelistenermap;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -8791,9 +8904,9 @@ public final class Core {
       return Core.typedef_new(
         "vx/core", // pkgname
         "state", // name
-        ":map", // extends
+        ":struct", // extends
         Core.e_typelist, // traits
-        Core.t_typelist.vx_new(Core.t_statelistener), // allowtypes
+        Core.e_typelist, // allowtypes
         Core.e_typelist, // disallowtypes
         Core.e_funclist, // allowfuncs
         Core.e_funclist, // disallowfuncs
@@ -8817,18 +8930,18 @@ public final class Core {
     public Core.Type_statelistener vx_copy(final Object... vals);
     public Core.Type_statelistener vx_empty();
     public Core.Type_statelistener vx_type();
-    public Core.Type_string path();
+    public Core.Type_string name();
     public Core.Type_any value();
     public Core.Func_boolean_from_none fn_boolean();
   }
 
   public static class Class_statelistener extends Core.Class_base implements Type_statelistener {
 
-    protected Core.Type_string vx_p_path;
+    protected Core.Type_string vx_p_name;
 
     @Override
-    public Core.Type_string path() {
-      return this.vx_p_path == null ? Core.e_string : this.vx_p_path;
+    public Core.Type_string name() {
+      return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
     protected Core.Type_any vx_p_value;
@@ -8850,8 +8963,8 @@ public final class Core {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
       switch (skey) {
-      case ":path":
-        output = this.path();
+      case ":name":
+        output = this.name();
         break;
       case ":value":
         output = this.value();
@@ -8866,14 +8979,16 @@ public final class Core {
     @Override
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
-      output.put(":path", this.path());
+      output.put(":name", this.name());
       output.put(":value", this.value());
       output.put(":fn-boolean", this.fn_boolean());
       return Core.immutablemap(output);
     }
 
     @Override
-    public Type_statelistener vx_new(final Object... vals) {return e_statelistener.vx_copy(vals);}
+    public Type_statelistener vx_new(final Object... vals) {
+      return e_statelistener.vx_copy(vals);
+    }
 
     @Override
     public Type_statelistener vx_copy(final Object... vals) {
@@ -8884,11 +8999,11 @@ public final class Core {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Core.Type_string vx_p_path = val.path();
+      Core.Type_string vx_p_name = val.name();
       Core.Type_any vx_p_value = val.value();
       Core.Func_boolean_from_none vx_p_fn_boolean = val.fn_boolean();
       ArrayList<String> validkeys = new ArrayList<>();
-      validkeys.add(":path");
+      validkeys.add(":name");
       validkeys.add(":value");
       validkeys.add(":fn-boolean");
       String key = "";
@@ -8933,14 +9048,14 @@ public final class Core {
           }
         } else {
           switch (key) {
-          case ":path":
-            if (valsub == vx_p_path) {
+          case ":name":
+            if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
               ischanged = true;
-              vx_p_path = (Core.Type_string)valsub;
+              vx_p_name = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_path = Core.t_string.vx_new(valsub);
+              vx_p_name = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -8949,7 +9064,7 @@ public final class Core {
                 msgval = Core.vx_new_string(valsub.toString());
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
-              mapany.put("key", Core.vx_new_string("path"));
+              mapany.put("key", Core.vx_new_string("name"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/core/statelistener", ":invalidvalue", msgmap);
@@ -9006,7 +9121,7 @@ public final class Core {
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
         Class_statelistener work = new Class_statelistener();
-        work.vx_p_path = vx_p_path;
+        work.vx_p_name = vx_p_name;
         work.vx_p_value = vx_p_value;
         work.vx_p_fn_boolean = vx_p_fn_boolean;
         if (msgblock != Core.e_msgblock) {
@@ -9045,6 +9160,174 @@ public final class Core {
   public static final Type_statelistener t_statelistener = new Class_statelistener();
 
   /**
+   * type: statelistenermap
+   * Mutable map of statelisteners
+   * (type statelistenermap)
+   */
+  public interface Type_statelistenermap extends Core.Type_map {
+    public Core.Type_statelistenermap vx_new(final Object... vals);
+    public Core.Type_statelistenermap vx_copy(final Object... vals);
+    public Core.Type_statelistenermap vx_empty();
+    public Core.Type_statelistenermap vx_type();
+    public Map<String, Core.Type_statelistener> vx_mapstatelistener();
+    public Core.Type_statelistener vx_statelistener(final Core.Type_string key);
+  }
+
+  public static class Class_statelistenermap extends Core.Class_base implements Type_statelistenermap {
+
+    protected Map<String, Core.Type_statelistener> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_statelistener>());
+
+    @Override
+    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+
+    @Override
+    public Core.Type_statelistener vx_statelistener(final Core.Type_string key) {
+      Core.Type_statelistener output = Core.e_statelistener;
+      Class_statelistenermap map = this;
+      String skey = key.vx_string();
+      Map<String, Core.Type_statelistener> mapval = map.vx_p_map;
+      output = mapval.getOrDefault(skey, Core.e_statelistener);
+      return output;
+    }
+
+    @Override
+    public Map<String, Core.Type_statelistener> vx_mapstatelistener() {return vx_p_map;}
+
+    @Override
+    public Core.Type_any vx_any(final Core.Type_string key) {
+      return this.vx_statelistener(key);
+    }
+
+    @Override
+    public Type_statelistenermap vx_new_from_map(final Map<String, Core.Type_any> mapval) {
+      Class_statelistenermap output = new Class_statelistenermap();
+      Core.Type_msgblock msgblock = Core.e_msgblock;
+      Map<String, Core.Type_statelistener> map = new LinkedHashMap<>();
+      Set<String> keys = mapval.keySet();
+      for (String key : keys) {
+        Core.Type_any val = mapval.get(key);
+        if (val instanceof Core.Type_statelistener) {
+          Core.Type_statelistener castval = (Core.Type_statelistener)val;
+          map.put(key, castval);
+        } else {
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/statelistenermap", ":invalidvalue", val);
+          msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+        }
+      }
+      output.vx_p_map = Core.immutablemap(map);
+      if (msgblock != Core.e_msgblock) {
+        output.vxmsgblock = msgblock;
+      }
+      return output;
+    }
+
+    @Override
+    public Type_statelistenermap vx_new(final Object... vals) {
+      return e_statelistenermap.vx_copy(vals);
+    }
+
+    @Override
+    public Type_statelistenermap vx_copy(final Object... vals) {
+      Type_statelistenermap output = this;
+      boolean ischanged = false;
+      Class_statelistenermap val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
+      Map<String, Core.Type_statelistener> mapval = new LinkedHashMap<>(val.vx_mapstatelistener());
+      Core.Type_msg msg;
+      String key = "";
+      for (Object valsub : vals) {
+        if (valsub instanceof Core.Type_msgblock) {
+          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Core.Type_msg) {
+          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+        } else if (key.equals("")) {
+          if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstring = (Core.Type_string)valsub;
+            key = valstring.vx_string();
+          } else if (valsub instanceof String) {
+            key = (String)valsub;
+          } else {
+            Core.Type_any msgval;
+            if (valsub instanceof Core.Type_any) {
+              msgval = (Core.Type_any)valsub;
+            } else {
+              msgval = Core.vx_new_string(valsub.toString());
+            }
+            msg = Core.vx_msg_from_error("vx/core/statelistenermap", ":keyexpected", msgval);
+            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+          }
+        } else {
+          Core.Type_statelistener valany = null;
+          if (valsub instanceof Core.Type_statelistener) {
+            valany = (Core.Type_statelistener)valsub;
+          } else if (valsub instanceof Core.Type_statelistener) {
+            valany = (Core.Type_statelistener)valsub;
+          } else {
+            Core.Type_any msgval;
+            if (valsub instanceof Core.Type_any) {
+              msgval = (Core.Type_any)valsub;
+            } else {
+              msgval = Core.vx_new_string(valsub.toString());
+            }
+            Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+            mapany.put("key", Core.vx_new_string(key));
+            mapany.put("value", msgval);
+            Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+            msg = Core.vx_msg_from_error("vx/core/statelistenermap", ":invalidkeyvalue", msgmap);
+            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+          }
+          if (valany != null) {
+            ischanged = true;
+            if (key.startsWith(":")) {
+              key = key.substring(1);
+            }
+            mapval.put(key, valany);
+            key = "";
+          }
+        }
+      }
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_statelistenermap work = new Class_statelistenermap();
+        work.vx_p_map = Core.immutablemap(mapval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
+      }
+      return output;
+    }
+
+    @Override
+    public Type_statelistenermap vx_empty() {return e_statelistenermap;}
+    @Override
+    public Type_statelistenermap vx_type() {return t_statelistenermap;}
+
+    @Override
+    public Core.Type_typedef vx_typedef() {
+      return Core.typedef_new(
+        "vx/core", // pkgname
+        "statelistenermap", // name
+        ":map", // extends
+        Core.e_typelist, // traits
+        Core.t_typelist.vx_new(Core.t_statelistener), // allowtypes
+        Core.e_typelist, // disallowtypes
+        Core.e_funclist, // allowfuncs
+        Core.e_funclist, // disallowfuncs
+        Core.e_anylist, // allowvalues
+        Core.e_anylist, // disallowvalues
+        Core.e_argmap // properties
+      );
+    }
+
+  }
+
+  public static final Type_statelistenermap e_statelistenermap = new Class_statelistenermap();
+  public static final Type_statelistenermap t_statelistenermap = new Class_statelistenermap();
+
+  /**
    * type: string
    * A simple string.
    * (type string)
@@ -9067,7 +9350,9 @@ public final class Core {
     }
 
     @Override
-    public Type_string vx_new(final Object... vals) {return e_string.vx_copy(vals);}
+    public Type_string vx_new(final Object... vals) {
+      return e_string.vx_copy(vals);
+    }
 
     @Override
     public Type_string vx_copy(final Object... vals) {
@@ -9206,7 +9491,9 @@ public final class Core {
     }
 
     @Override
-    public Type_stringlist vx_new(final Object... vals) {return e_stringlist.vx_copy(vals);}
+    public Type_stringlist vx_new(final Object... vals) {
+      return e_stringlist.vx_copy(vals);
+    }
 
     @Override
     public Type_stringlist vx_copy(final Object... vals) {
@@ -9353,7 +9640,9 @@ public final class Core {
     }
 
     @Override
-    public Type_stringmap vx_new(final Object... vals) {return e_stringmap.vx_copy(vals);}
+    public Type_stringmap vx_new(final Object... vals) {
+      return e_stringmap.vx_copy(vals);
+    }
 
     @Override
     public Type_stringmap vx_copy(final Object... vals) {
@@ -9488,7 +9777,9 @@ public final class Core {
     }
 
     @Override
-    public Type_struct vx_new(final Object... vals) {return e_struct.vx_copy(vals);}
+    public Type_struct vx_new(final Object... vals) {
+      return e_struct.vx_copy(vals);
+    }
 
     @Override
     public Type_struct vx_copy(final Object... vals) {
@@ -9625,7 +9916,9 @@ public final class Core {
     }
 
     @Override
-    public Type_thenelse vx_new(final Object... vals) {return e_thenelse.vx_copy(vals);}
+    public Type_thenelse vx_new(final Object... vals) {
+      return e_thenelse.vx_copy(vals);
+    }
 
     @Override
     public Type_thenelse vx_copy(final Object... vals) {
@@ -9883,7 +10176,9 @@ public final class Core {
     }
 
     @Override
-    public Type_thenelselist vx_new(final Object... vals) {return e_thenelselist.vx_copy(vals);}
+    public Type_thenelselist vx_new(final Object... vals) {
+      return e_thenelselist.vx_copy(vals);
+    }
 
     @Override
     public Type_thenelselist vx_copy(final Object... vals) {
@@ -10021,7 +10316,9 @@ public final class Core {
     }
 
     @Override
-    public Type_translation vx_new(final Object... vals) {return e_translation.vx_copy(vals);}
+    public Type_translation vx_new(final Object... vals) {
+      return e_translation.vx_copy(vals);
+    }
 
     @Override
     public Type_translation vx_copy(final Object... vals) {
@@ -10211,7 +10508,9 @@ public final class Core {
     }
 
     @Override
-    public Type_translationlist vx_new(final Object... vals) {return e_translationlist.vx_copy(vals);}
+    public Type_translationlist vx_new(final Object... vals) {
+      return e_translationlist.vx_copy(vals);
+    }
 
     @Override
     public Type_translationlist vx_copy(final Object... vals) {
@@ -10358,7 +10657,9 @@ public final class Core {
     }
 
     @Override
-    public Type_translationmap vx_new(final Object... vals) {return e_translationmap.vx_copy(vals);}
+    public Type_translationmap vx_new(final Object... vals) {
+      return e_translationmap.vx_copy(vals);
+    }
 
     @Override
     public Type_translationmap vx_copy(final Object... vals) {
@@ -10476,7 +10777,9 @@ public final class Core {
   public static class Class_type extends Core.Class_base implements Type_type {
 
     @Override
-    public Type_type vx_new(final Object... vals) {return e_type.vx_copy(vals);}
+    public Type_type vx_new(final Object... vals) {
+      return e_type.vx_copy(vals);
+    }
 
     @Override
     public Type_type vx_copy(final Object... vals) {
@@ -10698,7 +11001,9 @@ public final class Core {
     }
 
     @Override
-    public Type_typedef vx_new(final Object... vals) {return e_typedef.vx_copy(vals);}
+    public Type_typedef vx_new(final Object... vals) {
+      return e_typedef.vx_copy(vals);
+    }
 
     @Override
     public Type_typedef vx_copy(final Object... vals) {
@@ -11114,7 +11419,9 @@ public final class Core {
     }
 
     @Override
-    public Type_typelist vx_new(final Object... vals) {return e_typelist.vx_copy(vals);}
+    public Type_typelist vx_new(final Object... vals) {
+      return e_typelist.vx_copy(vals);
+    }
 
     @Override
     public Type_typelist vx_copy(final Object... vals) {
@@ -11251,7 +11558,9 @@ public final class Core {
     }
 
     @Override
-    public Type_typemap vx_new(final Object... vals) {return e_typemap.vx_copy(vals);}
+    public Type_typemap vx_new(final Object... vals) {
+      return e_typemap.vx_copy(vals);
+    }
 
     @Override
     public Type_typemap vx_copy(final Object... vals) {
@@ -11420,7 +11729,9 @@ public final class Core {
     }
 
     @Override
-    public Type_user vx_new(final Object... vals) {return e_user.vx_copy(vals);}
+    public Type_user vx_new(final Object... vals) {
+      return e_user.vx_copy(vals);
+    }
 
     @Override
     public Type_user vx_copy(final Object... vals) {
@@ -11647,7 +11958,9 @@ public final class Core {
     }
 
     @Override
-    public Type_value vx_new(final Object... vals) {return e_value.vx_copy(vals);}
+    public Type_value vx_new(final Object... vals) {
+      return e_value.vx_copy(vals);
+    }
 
     @Override
     public Type_value vx_copy(final Object... vals) {
@@ -18284,6 +18597,88 @@ public final class Core {
       ),
       func
     );
+    return output;
+  }
+
+  /**
+   * @function boolean_write_from_map_name_value
+   * Returns true if it alters a mutable map false if it fails.
+   * @param  {map-1} valuemap
+   * @param  {string} name
+   * @param  {any-1} value
+   * @return {boolean}
+   * (func boolean-write<-map-name-value)
+   */
+  public static interface Func_boolean_write_from_map_name_value extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_boolean vx_boolean_write_from_map_name_value(final Core.Type_map valuemap, final Core.Type_string name, final Core.Type_any value);
+  }
+
+  public static class Class_boolean_write_from_map_name_value extends Core.Class_base implements Func_boolean_write_from_map_name_value {
+
+    @Override
+    public Func_boolean_write_from_map_name_value vx_new(Object... vals) {
+      Class_boolean_write_from_map_name_value output = new Class_boolean_write_from_map_name_value();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_write_from_map_name_value vx_copy(Object... vals) {
+      Class_boolean_write_from_map_name_value output = new Class_boolean_write_from_map_name_value();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "boolean-write<-map-name-value", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_write_from_map_name_value vx_empty() {return e_boolean_write_from_map_name_value;}
+    @Override
+    public Func_boolean_write_from_map_name_value vx_type() {return t_boolean_write_from_map_name_value;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string name = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(2)));
+      output = Core.f_boolean_write_from_map_name_value(valuemap, name, value);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean vx_boolean_write_from_map_name_value(final Core.Type_map valuemap, final Core.Type_string name, final Core.Type_any value) {
+      return Core.f_boolean_write_from_map_name_value(valuemap, name, value);
+    }
+
+  }
+
+  public static final Func_boolean_write_from_map_name_value e_boolean_write_from_map_name_value = new Core.Class_boolean_write_from_map_name_value();
+  public static final Func_boolean_write_from_map_name_value t_boolean_write_from_map_name_value = new Core.Class_boolean_write_from_map_name_value();
+
+  public static Core.Type_boolean f_boolean_write_from_map_name_value(final Core.Type_map valuemap, final Core.Type_string name, final Core.Type_any value) {
+    Core.Type_boolean output = Core.e_boolean;
     return output;
   }
 
@@ -27229,6 +27624,7 @@ public final class Core {
     maptype.put("setting", Core.t_setting);
     maptype.put("state", Core.t_state);
     maptype.put("statelistener", Core.t_statelistener);
+    maptype.put("statelistenermap", Core.t_statelistenermap);
     maptype.put("string", Core.t_string);
     maptype.put("stringlist", Core.t_stringlist);
     maptype.put("stringmap", Core.t_stringmap);
@@ -27321,6 +27717,7 @@ public final class Core {
     mapfunc.put("any<-struct", Core.t_any_from_struct);
     mapfunc.put("async", Core.t_async);
     mapfunc.put("boolean-permission<-func", Core.t_boolean_permission_from_func);
+    mapfunc.put("boolean-write<-map-name-value", Core.t_boolean_write_from_map_name_value);
     mapfunc.put("boolean<-any", Core.t_boolean_from_any);
     mapfunc.put("boolean<-func", Core.t_boolean_from_func);
     mapfunc.put("boolean<-none", Core.t_boolean_from_none);

@@ -28,17 +28,22 @@
   :layoutelse       layout-else-html
   :stylesheetrender stylesheet-render-html))
 
+(func context-write : context
+ (doc/context-write)
+ :context
+ :doc "")
+
 (func divchild<-ui : html/divchild
  [ui : ui/ui]
  (let : html/div
-  [uid         : string            := (:uid       ui)
-   uimapchild  : ui/uimap          := (:uimap     ui)
-   uistyle     : ui/style          := (:style     ui)
-   uistyles    : ui/stylelist      := (:stylelist ui)
-   styleunique : html/style        := (style<-style
-                                       uistyle)
-   htmlstyles  : html/stylelist    := (stylelist<-stylelist
-                                       uistyles)]
+  [uid         : string         := (:uid       ui)
+   uimapchild  : ui/uimap       := (:uimap     ui)
+   uistyle     : ui/style       := (:style     ui)
+   uistyles    : ui/stylelist   := (:stylelist ui)
+   styleunique : html/style     := (style<-style
+                                    uistyle)
+   htmlstyles  : html/stylelist := (stylelist<-stylelist
+                                    uistyles)]
   (html/div
    :id uid
    :style-unique styleunique
@@ -66,16 +71,12 @@
  [node : html/node
   ui   : ui]
  (let : html/node
-  [uid      : string         := (:uid ui)
-   eventmap : event/eventmap := (:eventmap ui)
-   htmltext : string         := (html/string<-node-indent
-                                 node
-                                 2)
-   htmldone : boolean        := (doc/boolean-replace<-id-htmltext-data-eventmap
-                                 uid
-                                 htmltext
-                                 ui
-                                 eventmap)]
+  [htmltext : string  := (html/string<-node-indent
+                          node
+                          2)
+   htmldone : boolean := (doc/boolean-replace<-ui-htmltext
+                          ui
+                          htmltext)]
   node)
  :sideeffects "UI altered"
  :doc "")

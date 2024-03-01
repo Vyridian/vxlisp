@@ -24,11 +24,11 @@ export default class vx_state_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/state", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 33, ":tests", 1, ":total", 3), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 2), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 84, ":tests", 11, ":total", 13), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 12), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 13), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 1)
     )
   }
@@ -40,7 +40,7 @@ export default class vx_state_test {
       "typemap",
         vx_core.f_new(
           vx_core.t_intmap,
-          "value-map", 0
+          "valuemap", 0
         ),
       "constmap",
         vx_core.f_new(
@@ -49,8 +49,18 @@ export default class vx_state_test {
       "funcmap",
         vx_core.f_new(
           vx_core.t_intmap,
+          "any-readstate<-mapname-name", 0,
+          "any-readstate<-name", 0,
+          "boolean-writestate<-mapname-name-value", 0,
+          "boolean-writestate<-name-value", 0,
+          "boolean-writestate<-statelistener", 0,
           "change", 0,
-          "register", 0
+          "register", 0,
+          "state<-context", 0,
+          "statelistener-readstate<-name", 0,
+          "statelistenermap-readstate", 0,
+          "value-readstate<-name", 0,
+          "valuemap-readstate<-mapname", 0
         )
     )
   }

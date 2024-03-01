@@ -21,11 +21,11 @@ public final class UiTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/ui/ui", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 32), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 41, ":tests", 28, ":total", 67), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 14), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 14), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 14), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 67), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 46, ":tests", 34, ":total", 73), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 20), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 20), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 20), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 73), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 21)
     );
   }
@@ -91,15 +91,21 @@ public final class UiTest {
         ":styletype-system", 0
       ),
       ":funcmap", Core.t_intmap.vx_new(
+        ":boolean-writestate<-ui", 0,
+        ":boolean-writestate<-uiengine", 0,
         ":layout<-style", 0,
         ":layoutmap<-layoutlist", 0,
         ":stylemap<-stylelist", 0,
         ":stylesheet-render", 0,
+        ":ui-data<-ui", 0,
+        ":ui-from<-event", 0,
         ":ui-layout<-ui-layoutmap-else", 0,
+        ":ui-readstate<-uid", 0,
         ":ui-render", 0,
         ":ui-render<-fn-render-ui-orig-parent", 0,
         ":ui-render<-ui-orig-parent", 0,
         ":ui<-renderer-ui-orig-parent", 0,
+        ":uiengine-readstate", 0,
         ":uiengine-render", 0,
         ":uimap-layout<-uimap-layoutmap-else", 0,
         ":uimap-render<-uimap-parent", 0,

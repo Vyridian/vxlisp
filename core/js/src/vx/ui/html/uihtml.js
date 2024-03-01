@@ -37,6 +37,24 @@ export default class vx_ui_html_uihtml {
   static c_layoutenginehtml = {vx_type: vx_ui_ui.t_layoutengine, vx_constdef: {pkgname: 'vx/ui/html/uihtml', name: 'layoutenginehtml'}}
 
   /**
+   * @function context_write
+   * @return {context}
+   */
+  static t_context_write = {
+    vx_type: vx_core.t_type
+  }
+  static e_context_write = {
+    vx_type: vx_ui_html_uihtml.t_context_write
+  }
+
+  // (func context-write)
+  static f_context_write(context) {
+    let output = vx_core.e_context
+    output = vx_web_htmldoc.f_context_write(context)
+    return output
+  }
+
+  /**
    * @function divchild_from_ui
    * Returns a divchildlist of empty divs from a uimap
    * @param  {ui} ui
@@ -148,10 +166,8 @@ export default class vx_ui_html_uihtml {
       {"any-1": vx_web_html.t_node},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const uid = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_ui}, ui, ":uid")
-        const eventmap = vx_core.f_any_from_struct({"any-1": vx_event.t_eventmap, "struct-2": vx_ui_ui.t_ui}, ui, ":eventmap")
         const htmltext = vx_web_html.f_string_from_node_indent(node, 2)
-        const htmldone = vx_web_htmldoc.f_boolean_replace_from_id_htmltext_data_eventmap(uid, htmltext, ui, eventmap)
+        const htmldone = vx_web_htmldoc.f_boolean_replace_from_ui_htmltext(ui, htmltext)
         return node
       })
     )
@@ -947,6 +963,7 @@ export default class vx_ui_html_uihtml {
       "layoutenginehtml": vx_ui_html_uihtml.c_layoutenginehtml
     })
     const emptymap = vx_core.vx_new_map(vx_core.t_map, {
+      "context-write": vx_ui_html_uihtml.e_context_write,
       "divchild<-ui": vx_ui_html_uihtml.e_divchild_from_ui,
       "divchildlist<-uimap": vx_ui_html_uihtml.e_divchildlist_from_uimap,
       "node-app<-ui-orig-parent": vx_ui_html_uihtml.e_node_app_from_ui_orig_parent,
@@ -963,6 +980,7 @@ export default class vx_ui_html_uihtml {
       "ui-render-label<-ui-orig-parent": vx_ui_html_uihtml.e_ui_render_label_from_ui_orig_parent
     })
     const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      "context-write": vx_ui_html_uihtml.t_context_write,
       "divchild<-ui": vx_ui_html_uihtml.t_divchild_from_ui,
       "divchildlist<-uimap": vx_ui_html_uihtml.t_divchildlist_from_uimap,
       "node-app<-ui-orig-parent": vx_ui_html_uihtml.t_node_app_from_ui_orig_parent,
@@ -989,6 +1007,24 @@ export default class vx_ui_html_uihtml {
       "typemap": typemap
     })
     vx_core.vx_global_package_set(pkg)
+
+    // (func context-write)
+    vx_ui_html_uihtml.t_context_write['vx_value'] = {
+      name          : "context-write",
+      pkgname       : "vx/ui/html/uihtml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_html_uihtml.f_context_write
+    }
 
     // (func divchild<-ui)
     vx_ui_html_uihtml.t_divchild_from_ui['vx_value'] = {

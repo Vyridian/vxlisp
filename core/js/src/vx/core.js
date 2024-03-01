@@ -6,9 +6,12 @@ export default class vx_core {
 
   // vx_any_from_func(generic_any_1, func, args...)
   static vx_any_from_func(generic_any_1, func, ...args) {
+    let output = vx_core.vx_empty(generic_any_1)
     const funcdef = func['vx_value']
-    const fn = funcdef['fn']
-    const output = fn.apply(null, args)
+    if (funcdef) {
+      const fn = funcdef['fn']
+      output = fn.apply(null, args)
+    }
     return output
   }
 
@@ -40,6 +43,14 @@ export default class vx_core {
   // vx_boolean_from_string_starts(string, string)
   static vx_boolean_from_string_starts(text, starts) {
     return text.startsWith(starts);
+  }
+
+  // vx_boolean_write_from_map_name_value(map-1, string, any-1)
+  static vx_boolean_write_from_map_name_value(valuemap, name, value) {
+    let output = vx_core.c_true
+    const mapany = valuemap['vx_value']
+    mapany[name] = value
+    return output
   }
 
   static vx_empty(type) {
@@ -1517,6 +1528,7 @@ export default class vx_core {
 
   /**
    * type: state
+   * State. Note that this type is has mutable values.
    */
   static t_state = {}
   static e_state = {vx_type: vx_core.t_state}
@@ -1526,6 +1538,13 @@ export default class vx_core {
    */
   static t_statelistener = {}
   static e_statelistener = {vx_type: vx_core.t_statelistener}
+
+  /**
+   * type: statelistenermap
+   * Mutable map of statelisteners
+   */
+  static t_statelistenermap = {}
+  static e_statelistenermap = {vx_type: vx_core.t_statelistenermap}
 
   /**
    * type: string
@@ -2255,7 +2274,7 @@ export default class vx_core {
     let output = vx_core.e_boolean
     values = vx_core.f_new(vx_core.t_anylist, ...values)
     output = vx_core.f_any_from_list_start_reduce_next(
-      {"any-1": vx_core.t_boolean, "any-2": vx_core.t_any, "list-2": vx_core.t_anylist},
+      {"any-1": vx_core.t_boolean, "list-2": vx_core.t_anylist},
       values,
       true,
       vx_core.f_new(vx_core.t_any_from_reduce_next, (reduce, current, next) => 
@@ -2273,7 +2292,7 @@ export default class vx_core {
    * The result is then used as the first argument on the next function, etc. Sometimes this
    * improves readability.
    * @param  {typemap} generic
-   * @param  {any} value
+   * @param  {generic_any_1} value
    * @param  {any_from_anylist} ... fnlist
    * @return {any-1}
    */
@@ -2298,7 +2317,7 @@ export default class vx_core {
    * The result is then used as the last argument on the next function, etc. Sometimes this
    * improves readability.
    * @param  {typemap} generic
-   * @param  {any} value
+   * @param  {generic_any_1} value
    * @param  {any_from_anylist} ... fnlist
    * @return {any-1}
    */
@@ -2402,7 +2421,7 @@ export default class vx_core {
     let output = vx_core.e_boolean
     values = vx_core.f_new(vx_core.t_anylist, ...values)
     output = vx_core.f_any_from_list_start_reduce_next(
-      {"any-1": vx_core.t_boolean, "any-2": vx_core.t_any, "list-2": vx_core.t_anylist},
+      {"any-1": vx_core.t_boolean, "list-2": vx_core.t_anylist},
       values,
       false,
       vx_core.f_new(vx_core.t_any_from_reduce_next, (reduce, current, next) => 
@@ -2484,7 +2503,7 @@ export default class vx_core {
     let output = vx_core.e_boolean
     values = vx_core.f_new(vx_core.t_anylist, ...values)
     output = vx_core.f_any_from_list_start_reduce_next(
-      {"any-1": vx_core.t_boolean, "any-2": vx_core.t_any, "list-2": vx_core.t_anylist},
+      {"any-1": vx_core.t_boolean, "list-2": vx_core.t_anylist},
       values,
       true,
       vx_core.f_new(vx_core.t_any_from_reduce_next, (reduce, current, next) => 
@@ -2677,7 +2696,7 @@ export default class vx_core {
    * @function any_from_any
    * Function Type taking any value any-2 and returning generic any-1
    * @param  {typemap} generic
-   * @param  {any} value
+   * @param  {generic_any_2} value
    * @return {any-1}
    */
   static t_any_from_any = {
@@ -2700,7 +2719,7 @@ export default class vx_core {
    * @async @function any_from_any_async
    * Function Type taking any value any-2 and returning generic any-1
    * @param  {typemap} generic
-   * @param  {any} value
+   * @param  {generic_any_2} value
    * @return {any-1}
    */
   static t_any_from_any_async = {
@@ -2721,7 +2740,7 @@ export default class vx_core {
    * @function any_from_any_context
    * Function Type taking any value any-2 and returning generic any-1 using context
    * @param  {typemap} generic
-   * @param  {any} value
+   * @param  {generic_any_2} value
    * @return {any-1}
    */
   static t_any_from_any_context = {
@@ -2743,7 +2762,7 @@ export default class vx_core {
    * @async @function any_from_any_context_async
    * Generic Function taking any value any-2 and returning generic any-1
    * @param  {typemap} generic
-   * @param  {any} value
+   * @param  {generic_any_2} value
    * @return {any-1}
    */
   static t_any_from_any_context_async = {
@@ -2764,9 +2783,9 @@ export default class vx_core {
    * @function any_from_any_key_value
    * Generic Function returning Generic any-1 from a any-1, a key, and a value.
    * @param  {typemap} generic
-   * @param  {any} current
+   * @param  {generic_any_1} current
    * @param  {string} key
-   * @param  {any} value
+   * @param  {generic_any_2} value
    * @return {any-1}
    */
   static t_any_from_any_key_value = {
@@ -2850,7 +2869,7 @@ export default class vx_core {
    * Generic Function returning Generic any-1 from a key and a value
    * @param  {typemap} generic
    * @param  {string} key
-   * @param  {any} val
+   * @param  {generic_any_2} val
    * @return {any-1}
    */
   static t_any_from_key_value = {
@@ -2873,7 +2892,7 @@ export default class vx_core {
    * Generic Function returning Asynchronous Generic any-1 from a key and a value
    * @param  {typemap} generic
    * @param  {string} key
-   * @param  {any} val
+   * @param  {generic_any_2} val
    * @return {any-1}
    */
   static t_any_from_key_value_async = {
@@ -2894,7 +2913,7 @@ export default class vx_core {
    * @function any_from_list
    * Returns nth value from a list or none if out of bounds
    * @param  {typemap} generic
-   * @param  {list} values
+   * @param  {generic_list_1} values
    * @param  {int} index
    * @return {any-1}
    */
@@ -2919,8 +2938,8 @@ export default class vx_core {
    * @function any_from_list_start_reduce
    * Returns a val from a list reduce operation
    * @param  {typemap} generic
-   * @param  {list} list
-   * @param  {any} valstart
+   * @param  {generic_list_2} list
+   * @param  {generic_any_1} valstart
    * @param  {any_from_reduce} fn_reduce
    * @return {any-1}
    */
@@ -2949,8 +2968,8 @@ export default class vx_core {
    * @function any_from_list_start_reduce_next
    * Returns a val from a list reduce operation
    * @param  {typemap} generic
-   * @param  {list} list
-   * @param  {any} valstart
+   * @param  {generic_list_2} list
+   * @param  {generic_any_1} valstart
    * @param  {any_from_reduce_next} fn_reduce_next
    * @return {any-1}
    */
@@ -2986,7 +3005,7 @@ export default class vx_core {
    * @function any_from_map
    * Returns value from a map or empty if not found
    * @param  {typemap} generic
-   * @param  {map} valuemap
+   * @param  {generic_map_1} valuemap
    * @param  {string} key
    * @return {any-1}
    */
@@ -3016,8 +3035,8 @@ export default class vx_core {
    * @function any_from_map_start_reduce
    * Returns a value by reducing each element of a map.
    * @param  {typemap} generic
-   * @param  {map} map
-   * @param  {any} start
+   * @param  {generic_map_1} map
+   * @param  {generic_any_1} start
    * @param  {any_from_any_key_value} fn_reduce
    * @return {any-1}
    */
@@ -3080,8 +3099,8 @@ export default class vx_core {
   /**
    * @function any_from_reduce
    * @param  {typemap} generic
-   * @param  {any} result
-   * @param  {any} item
+   * @param  {generic_any_1} result
+   * @param  {generic_any_2} item
    * @return {any-1}
    */
   static t_any_from_reduce = {
@@ -3102,8 +3121,8 @@ export default class vx_core {
    * 
    * @async @function any_from_reduce_async
    * @param  {typemap} generic
-   * @param  {any} result
-   * @param  {any} item
+   * @param  {generic_any_1} result
+   * @param  {generic_any_2} item
    * @return {any-1}
    */
   static t_any_from_reduce_async = {
@@ -3123,9 +3142,9 @@ export default class vx_core {
   /**
    * @function any_from_reduce_next
    * @param  {typemap} generic
-   * @param  {any} result
-   * @param  {any} current
-   * @param  {any} next
+   * @param  {generic_any_1} result
+   * @param  {generic_any_2} current
+   * @param  {generic_any_2} next
    * @return {any-1}
    */
   static t_any_from_reduce_next = {
@@ -3146,9 +3165,9 @@ export default class vx_core {
    * 
    * @async @function any_from_reduce_next_async
    * @param  {typemap} generic
-   * @param  {any} result
-   * @param  {any} current
-   * @param  {any} next
+   * @param  {generic_any_1} result
+   * @param  {generic_any_2} current
+   * @param  {generic_any_2} next
    * @return {any-1}
    */
   static t_any_from_reduce_next_async = {
@@ -3169,7 +3188,7 @@ export default class vx_core {
    * @function any_from_struct
    * Returns value from a struct
    * @param  {typemap} generic
-   * @param  {struct} vstruct
+   * @param  {generic_struct_2} vstruct
    * @param  {string} key
    * @return {any-1}
    */
@@ -3202,7 +3221,7 @@ export default class vx_core {
    * @async @function async
    * Returns an asynchonous version value. This exists mostly for type-casting.
    * @param  {typemap} generic
-   * @param  {any} value
+   * @param  {generic_any_1} value
    * @return {any-1}
    */
   static t_async = {
@@ -3246,9 +3265,31 @@ export default class vx_core {
   }
 
   /**
+   * @function boolean_write_from_map_name_value
+   * Returns true if it alters a mutable map false if it fails.
+   * @param  {generic_map_1} valuemap
+   * @param  {string} name
+   * @param  {generic_any_1} value
+   * @return {boolean}
+   */
+  static t_boolean_write_from_map_name_value = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_write_from_map_name_value = {
+    vx_type: vx_core.t_boolean_write_from_map_name_value
+  }
+
+  // (func boolean-write<-map-name-value)
+  static f_boolean_write_from_map_name_value(valuemap, name, value) {
+    let output = vx_core.e_boolean
+    output = vx_core.vx_boolean_write_from_map_name_value(valuemap, name, value)
+    return output
+  }
+
+  /**
    * @function boolean_from_any
    * Function Type taking generic any-1 and returning boolean
-   * @param  {any} value
+   * @param  {generic_any_1} value
    * @return {boolean}
    */
   static t_boolean_from_any = {
@@ -3302,7 +3343,7 @@ export default class vx_core {
 
   /**
    * @function case
-   * @param  {list} values
+   * @param  {generic_list_1} values
    * @param  {any_from_func} fn_any
    * @return {thenelse}
    */
@@ -3330,7 +3371,7 @@ export default class vx_core {
 
   /**
    * @function case
-   * @param  {any} value
+   * @param  {generic_any_1} value
    * @param  {any_from_func} fn_any
    * @return {thenelse}
    */
@@ -3407,7 +3448,7 @@ export default class vx_core {
   /**
    * @function contains
    * Returns true if the given list contains the given value.
-   * @param  {list} values Any list
+   * @param  {generic_list_2} values Any list
    * @param  {any} find Any value
    * @return {boolean}
    */
@@ -3497,7 +3538,7 @@ export default class vx_core {
   /**
    * @function empty
    * Returns the empty value for a given type. Can be called using (empty type) or simply (type)
-   * @param  {any} type
+   * @param  {generic_any_1} type
    * @return {any-1}
    */
   static t_empty = {
@@ -3516,7 +3557,7 @@ export default class vx_core {
 
   /**
    * @function extends_from_any
-   * @param  {any} val
+   * @param  {generic_any_1} val
    * @return {string}
    */
   static t_extends_from_any = {
@@ -3559,7 +3600,7 @@ export default class vx_core {
    * @function first_from_list
    * Returns first value
    * @param  {typemap} generic
-   * @param  {list} values
+   * @param  {generic_list_1} values
    * @return {any-1}
    */
   static t_first_from_list = {
@@ -3573,7 +3614,7 @@ export default class vx_core {
   static f_first_from_list(generic, values) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
-    output = vx_core.f_any_from_list({"any-1": vx_core.t_any}, values, 1)
+    output = vx_core.f_any_from_list({"any-1": generic_any_1}, values, 1)
     return output
   }
 
@@ -3581,7 +3622,7 @@ export default class vx_core {
    * @function first_from_list_any_from_any
    * Returns first value that is not nothing
    * @param  {typemap} generic
-   * @param  {list} values
+   * @param  {generic_list_1} values
    * @param  {any_from_any} fn_any_from_any
    * @return {any-1}
    */
@@ -3699,7 +3740,7 @@ export default class vx_core {
    * Logical If function
    * @param  {typemap} generic
    * @param  {boolean} clause
-   * @param  {any} then
+   * @param  {generic_any_1} then
    * @return {any-1}
    */
   static t_if = {
@@ -3724,8 +3765,8 @@ export default class vx_core {
    * Logical If function
    * @param  {typemap} generic
    * @param  {boolean} clause
-   * @param  {any} thenval
-   * @param  {any} elseval
+   * @param  {generic_any_1} thenval
+   * @param  {generic_any_1} elseval
    * @return {any-1}
    */
   static t_if_1 = {
@@ -4049,7 +4090,7 @@ export default class vx_core {
    * @function last_from_list
    * Returns last value
    * @param  {typemap} generic
-   * @param  {list} values
+   * @param  {generic_list_1} values
    * @return {any-1}
    */
   static t_last_from_list = {
@@ -4064,11 +4105,11 @@ export default class vx_core {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
     output = vx_core.f_let(
-      {"any-1": vx_core.t_any},
+      {"any-1": generic_any_1},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const len = vx_core.f_length_from_list(values)
-        return vx_core.f_any_from_list({"any-1": vx_core.t_any}, values, len)
+        return vx_core.f_any_from_list({"any-1": generic_any_1}, values, len)
       })
     )
     return output
@@ -4077,7 +4118,7 @@ export default class vx_core {
   /**
    * @function length_from_list
    * Returns the currently used size/length of a list
-   * @param  {list} values
+   * @param  {generic_list_1} values
    * @return {int}
    */
   static t_length_from_list = {
@@ -4150,7 +4191,7 @@ export default class vx_core {
    * @function list_join_from_list
    * Returns a flattened list of processed items from another list
    * @param  {typemap} generic
-   * @param  {list} values
+   * @param  {generic_list_2} values
    * @param  {any_from_any} fn_any_from_any
    * @return {list-1}
    */
@@ -4163,7 +4204,6 @@ export default class vx_core {
 
   // (func list-join<-list)
   static f_list_join_from_list(generic, values, fn_any_from_any) {
-    const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
     let output = vx_core.f_empty(generic_list_1)
     const fn = fn_any_from_any['vx_value']
@@ -4179,7 +4219,7 @@ export default class vx_core {
    * @function list_from_list
    * Returns a list of processed items from another list
    * @param  {typemap} generic
-   * @param  {list} values
+   * @param  {generic_list_2} values
    * @param  {any_from_any} fn_any_from_any
    * @return {list-1}
    */
@@ -4192,7 +4232,6 @@ export default class vx_core {
 
   // (func list<-list)
   static f_list_from_list(generic, values, fn_any_from_any) {
-    const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
     let output = vx_core.f_empty(generic_list_1)
     const fn = fn_any_from_any['vx_value']
@@ -4208,7 +4247,7 @@ export default class vx_core {
    * @async @function list_from_list_async
    * Returns an asynchronous list of the processed asynchronous items from another list
    * @param  {typemap} generic
-   * @param  {list} values
+   * @param  {generic_list_2} values
    * @param  {any_from_any_async} fn_any_from_any_async
    * @return {list-1}
    */
@@ -4221,7 +4260,6 @@ export default class vx_core {
 
   // (func list<-list-async)
   static async f_list_from_list_async(generic, values, fn_any_from_any_async) {
-    const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
     let output = Promise.resolve(vx_core.f_empty(generic_list_1))
     const fn = fn_any_from_any_async['vx_value']
@@ -4238,7 +4276,7 @@ export default class vx_core {
    * @function list_from_map
    * Returns a list from a map by applying a function to each key value.
    * @param  {typemap} generic
-   * @param  {map} valuemap
+   * @param  {generic_map_2} valuemap
    * @param  {any_from_key_value} fn_any_from_key_value
    * @return {list-1}
    */
@@ -4251,7 +4289,6 @@ export default class vx_core {
 
   // (func list<-map)
   static f_list_from_map(generic, valuemap, fn_any_from_key_value) {
-    const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
     let output = vx_core.f_empty(generic_list_1)
     output = vx_core.vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value)
@@ -4262,7 +4299,7 @@ export default class vx_core {
    * 
    * @async @function list_from_map_async
    * @param  {typemap} generic
-   * @param  {map} valuemap
+   * @param  {generic_map_2} valuemap
    * @param  {any_from_key_value_async} fn_any_from_key_value_async
    * @return {list-1}
    */
@@ -4275,7 +4312,6 @@ export default class vx_core {
 
   // (func list<-map-async)
   static async f_list_from_map_async(generic, valuemap, fn_any_from_key_value_async) {
-    const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
     let output = Promise.resolve(vx_core.f_empty(generic_list_1))
     return output
@@ -4329,7 +4365,7 @@ export default class vx_core {
    * Writes a string and a value to the console.
    * @param  {typemap} generic
    * @param  {string} text
-   * @param  {any} value
+   * @param  {generic_any_1} value
    * @return {any-1}
    */
   static t_log_1 = {
@@ -4378,7 +4414,7 @@ export default class vx_core {
    * @function map_from_list
    * Returns a map from a list by applying a function to generate a key for each value.
    * @param  {typemap} generic
-   * @param  {list} vallist
+   * @param  {generic_list_2} vallist
    * @param  {any_from_any} fn_any_from_any
    * @return {map-1}
    */
@@ -4391,7 +4427,6 @@ export default class vx_core {
 
   // (func map<-list)
   static f_map_from_list(generic, vallist, fn_any_from_any) {
-    const generic_any_1 = generic["any-1"]
     const generic_map_1 = generic["map-1"]
     let output = vx_core.f_empty(generic_map_1)
     const valmap = {}
@@ -4413,7 +4448,7 @@ export default class vx_core {
    * @function map_from_map
    * Returns a map from a map by applying a function to each key value.
    * @param  {typemap} generic
-   * @param  {map} valuemap
+   * @param  {generic_map_2} valuemap
    * @param  {any_from_key_value} fn_any_from_key_value
    * @return {map-1}
    */
@@ -4426,7 +4461,6 @@ export default class vx_core {
 
   // (func map<-map)
   static f_map_from_map(generic, valuemap, fn_any_from_key_value) {
-    const generic_any_1 = generic["any-1"]
     const generic_map_1 = generic["map-1"]
     let output = vx_core.f_empty(generic_map_1)
     output = vx_core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value)
@@ -4779,7 +4813,7 @@ export default class vx_core {
   /**
    * @function native_from_any
    * Returns native value of value object
-   * @param  {any} value
+   * @param  {generic_any_1} value
    * @return {any}
    */
   static t_native_from_any = {
@@ -4818,7 +4852,7 @@ export default class vx_core {
   /**
    * @function new
    * Create a new Value of Type A
-   * @param  {any} type
+   * @param  {generic_any_1} type
    * @param  {anylist} ... values
    * @return {any-1}
    */
@@ -5072,7 +5106,7 @@ export default class vx_core {
   /**
    * @function resolve
    * @param  {typemap} generic
-   * @param  {any} value
+   * @param  {generic_any_1} value
    * @return {any-1}
    */
   static t_resolve = {
@@ -5161,7 +5195,7 @@ export default class vx_core {
    * @function resolve_first
    * Returns the first value that is not nothing
    * @param  {typemap} generic
-   * @param  {list} ... clauses
+   * @param  {generic_list_1} ... clauses
    * @return {any-1}
    */
   static t_resolve_first = {
@@ -5175,9 +5209,9 @@ export default class vx_core {
   static f_resolve_first(generic, ...clauses) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
-    clauses = vx_core.f_new(vx_core.t_list, ...clauses)
+    clauses = vx_core.f_new(generic_list_1, ...clauses)
     output = vx_core.f_first_from_list_any_from_any(
-      {"any-1": vx_core.t_any},
+      {"any-1": generic_any_1},
       clauses,
       vx_core.f_new(vx_core.t_any_from_any, vx_core.t_resolve)
     )
@@ -5187,7 +5221,7 @@ export default class vx_core {
   /**
    * @function resolve_list
    * @param  {typemap} generic
-   * @param  {list} clauses
+   * @param  {generic_list_1} clauses
    * @return {list-1}
    */
   static t_resolve_list = {
@@ -5199,11 +5233,10 @@ export default class vx_core {
 
   // (func resolve-list)
   static f_resolve_list(generic, clauses) {
-    const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
     let output = vx_core.f_empty(generic_list_1)
     output = vx_core.f_list_from_list(
-      {"any-1": vx_core.t_any, "list-1": vx_core.t_list},
+      {"list-1": generic_list_1},
       clauses,
       vx_core.f_new(vx_core.t_any_from_any, vx_core.t_resolve)
     )
@@ -5399,7 +5432,7 @@ export default class vx_core {
    * @function switch
    * Returns a value based on a logical switch
    * @param  {typemap} generic
-   * @param  {any} val
+   * @param  {generic_any_2} val
    * @param  {thenelselist} ... thenelselist
    * @return {any-1}
    */
@@ -5508,7 +5541,7 @@ export default class vx_core {
   /**
    * @function type_from_any
    * Gets the Type of a given Value
-   * @param  {any} value
+   * @param  {generic_any_1} value
    * @return {any}
    */
   static t_type_from_any = {
@@ -5603,7 +5636,7 @@ export default class vx_core {
   /**
    * @function typename_from_any
    * Gets the typename of a given value
-   * @param  {any} value
+   * @param  {generic_any_2} value
    * @return {string}
    */
   static t_typename_from_any = {
@@ -5686,7 +5719,7 @@ export default class vx_core {
   static f_typenames_from_typelist(typelist) {
     let output = vx_core.e_stringlist
     output = vx_core.f_list_from_list(
-      {"any-1": vx_core.t_string, "any-2": vx_core.t_any, "list-1": vx_core.t_stringlist, "list-2": vx_core.t_typelist},
+      {"any-1": vx_core.t_string, "list-1": vx_core.t_stringlist, "list-2": vx_core.t_typelist},
       typelist,
       vx_core.f_new(vx_core.t_any_from_any, (type) => 
         vx_core.f_typename_from_type(type))
@@ -5795,6 +5828,7 @@ export default class vx_core {
       "setting": vx_core.e_setting,
       "state": vx_core.e_state,
       "statelistener": vx_core.e_statelistener,
+      "statelistenermap": vx_core.e_statelistenermap,
       "string": vx_core.e_string,
       "stringlist": vx_core.e_stringlist,
       "stringmap": vx_core.e_stringmap,
@@ -5873,6 +5907,7 @@ export default class vx_core {
       "any<-struct": vx_core.e_any_from_struct,
       "async": vx_core.e_async,
       "boolean-permission<-func": vx_core.e_boolean_permission_from_func,
+      "boolean-write<-map-name-value": vx_core.e_boolean_write_from_map_name_value,
       "boolean<-any": vx_core.e_boolean_from_any,
       "boolean<-func": vx_core.e_boolean_from_func,
       "boolean<-none": vx_core.e_boolean_from_none,
@@ -6036,6 +6071,7 @@ export default class vx_core {
       "any<-struct": vx_core.t_any_from_struct,
       "async": vx_core.t_async,
       "boolean-permission<-func": vx_core.t_boolean_permission_from_func,
+      "boolean-write<-map-name-value": vx_core.t_boolean_write_from_map_name_value,
       "boolean<-any": vx_core.t_boolean_from_any,
       "boolean<-func": vx_core.t_boolean_from_func,
       "boolean<-none": vx_core.t_boolean_from_none,
@@ -6194,6 +6230,7 @@ export default class vx_core {
       "setting": vx_core.t_setting,
       "state": vx_core.t_state,
       "statelistener": vx_core.t_statelistener,
+      "statelistenermap": vx_core.t_statelistenermap,
       "string": vx_core.t_string,
       "stringlist": vx_core.t_stringlist,
       "stringmap": vx_core.t_stringmap,
@@ -7536,16 +7573,26 @@ export default class vx_core {
     vx_core.t_state['vx_value'] = {
       name          : "state",
       pkgname       : "vx/core",
-      extends       : ":map",
+      extends       : ":struct",
       allowfuncs    : [],
       disallowfuncs : [],
-      allowtypes    : [vx_core.t_statelistener],
+      allowtypes    : [],
       disallowtypes : [],
       allowvalues   : [],
       disallowvalues: [],
       traits        : [],
-      properties    : {},
-      proplast      : {}
+      properties    : {
+        "statelistenermap": {
+          "name" : "statelistenermap",
+          "type" : vx_core.t_statelistenermap,
+          "multi": false
+        }
+      },
+      proplast      : {
+        "name" : "statelistenermap",
+        "type" : vx_core.t_statelistenermap,
+        "multi": false
+      }
     }
     vx_core.e_state['vx_type'] = vx_core.t_state
     vx_core.e_state['vx_value'] = {}
@@ -7564,8 +7611,8 @@ export default class vx_core {
       disallowvalues: [],
       traits        : [],
       properties    : {
-        "path": {
-          "name" : "path",
+        "name": {
+          "name" : "name",
           "type" : vx_core.t_string,
           "multi": false
         },
@@ -7588,6 +7635,25 @@ export default class vx_core {
     }
     vx_core.e_statelistener['vx_type'] = vx_core.t_statelistener
     vx_core.e_statelistener['vx_value'] = {}
+
+    // (type statelistenermap)
+    vx_core.t_statelistenermap['vx_type'] = vx_core.t_type
+    vx_core.t_statelistenermap['vx_value'] = {
+      name          : "statelistenermap",
+      pkgname       : "vx/core",
+      extends       : ":map",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [vx_core.t_statelistener],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {},
+      proplast      : {}
+    }
+    vx_core.e_statelistenermap['vx_type'] = vx_core.t_statelistenermap
+    vx_core.e_statelistenermap['vx_value'] = {}
 
     // (type string)
     vx_core.t_string['vx_type'] = vx_core.t_type
@@ -9144,6 +9210,24 @@ export default class vx_core {
       properties    : [],
       proplast      : {},
       fn            : vx_core.f_boolean_permission_from_func
+    }
+
+    // (func boolean-write<-map-name-value)
+    vx_core.t_boolean_write_from_map_name_value['vx_value'] = {
+      name          : "boolean-write<-map-name-value",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_boolean_write_from_map_name_value
     }
 
     // (func boolean<-any)

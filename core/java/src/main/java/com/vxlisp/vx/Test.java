@@ -89,7 +89,9 @@ public final class Test {
     }
 
     @Override
-    public Type_testcase vx_new(final Object... vals) {return e_testcase.vx_copy(vals);}
+    public Type_testcase vx_new(final Object... vals) {
+      return e_testcase.vx_copy(vals);
+    }
 
     @Override
     public Type_testcase vx_copy(final Object... vals) {
@@ -331,7 +333,9 @@ public final class Test {
     }
 
     @Override
-    public Type_testcaselist vx_new(final Object... vals) {return e_testcaselist.vx_copy(vals);}
+    public Type_testcaselist vx_new(final Object... vals) {
+      return e_testcaselist.vx_copy(vals);
+    }
 
     @Override
     public Type_testcaselist vx_copy(final Object... vals) {
@@ -493,7 +497,9 @@ public final class Test {
     }
 
     @Override
-    public Type_testcoveragedetail vx_new(final Object... vals) {return e_testcoveragedetail.vx_copy(vals);}
+    public Type_testcoveragedetail vx_new(final Object... vals) {
+      return e_testcoveragedetail.vx_copy(vals);
+    }
 
     @Override
     public Type_testcoveragedetail vx_copy(final Object... vals) {
@@ -765,7 +771,9 @@ public final class Test {
     }
 
     @Override
-    public Type_testcoveragenums vx_new(final Object... vals) {return e_testcoveragenums.vx_copy(vals);}
+    public Type_testcoveragenums vx_new(final Object... vals) {
+      return e_testcoveragenums.vx_copy(vals);
+    }
 
     @Override
     public Type_testcoveragenums vx_copy(final Object... vals) {
@@ -1094,7 +1102,9 @@ public final class Test {
     }
 
     @Override
-    public Type_testcoveragesummary vx_new(final Object... vals) {return e_testcoveragesummary.vx_copy(vals);}
+    public Type_testcoveragesummary vx_new(final Object... vals) {
+      return e_testcoveragesummary.vx_copy(vals);
+    }
 
     @Override
     public Type_testcoveragesummary vx_copy(final Object... vals) {
@@ -1446,7 +1456,9 @@ public final class Test {
     }
 
     @Override
-    public Type_testdescribe vx_new(final Object... vals) {return e_testdescribe.vx_copy(vals);}
+    public Type_testdescribe vx_new(final Object... vals) {
+      return e_testdescribe.vx_copy(vals);
+    }
 
     @Override
     public Type_testdescribe vx_copy(final Object... vals) {
@@ -1662,7 +1674,9 @@ public final class Test {
     }
 
     @Override
-    public Type_testdescribelist vx_new(final Object... vals) {return e_testdescribelist.vx_copy(vals);}
+    public Type_testdescribelist vx_new(final Object... vals) {
+      return e_testdescribelist.vx_copy(vals);
+    }
 
     @Override
     public Type_testdescribelist vx_copy(final Object... vals) {
@@ -1836,7 +1850,9 @@ public final class Test {
     }
 
     @Override
-    public Type_testpackage vx_new(final Object... vals) {return e_testpackage.vx_copy(vals);}
+    public Type_testpackage vx_new(final Object... vals) {
+      return e_testpackage.vx_copy(vals);
+    }
 
     @Override
     public Type_testpackage vx_copy(final Object... vals) {
@@ -2098,7 +2114,9 @@ public final class Test {
     }
 
     @Override
-    public Type_testpackagelist vx_new(final Object... vals) {return e_testpackagelist.vx_copy(vals);}
+    public Type_testpackagelist vx_new(final Object... vals) {
+      return e_testpackagelist.vx_copy(vals);
+    }
 
     @Override
     public Type_testpackagelist vx_copy(final Object... vals) {
@@ -2272,7 +2290,9 @@ public final class Test {
     }
 
     @Override
-    public Type_testresult vx_new(final Object... vals) {return e_testresult.vx_copy(vals);}
+    public Type_testresult vx_new(final Object... vals) {
+      return e_testresult.vx_copy(vals);
+    }
 
     @Override
     public Type_testresult vx_copy(final Object... vals) {
@@ -2534,7 +2554,9 @@ public final class Test {
     }
 
     @Override
-    public Type_testresultlist vx_new(final Object... vals) {return e_testresultlist.vx_copy(vals);}
+    public Type_testresultlist vx_new(final Object... vals) {
+      return e_testresultlist.vx_copy(vals);
+    }
 
     @Override
     public Type_testresultlist vx_copy(final Object... vals) {

@@ -4,98 +4,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import com.vxlisp.vx.*;
+import com.vxlisp.vx.ui.*;
 
 public final class Htmldoc {
-
-  /**
-   * @function any_data_from_id
-   * Returns data component from element.
-   * @param  {string} id
-   * @return {any}
-   * (func any-data<-id)
-   */
-  public static interface Func_any_data_from_id extends Core.Func_any_from_any {
-    public Core.Type_any vx_any_data_from_id(final Core.Type_string id);
-  }
-
-  public static class Class_any_data_from_id extends Core.Class_base implements Func_any_data_from_id {
-
-    @Override
-    public Func_any_data_from_id vx_new(Object... vals) {
-      Class_any_data_from_id output = new Class_any_data_from_id();
-      return output;
-    }
-
-    @Override
-    public Func_any_data_from_id vx_copy(Object... vals) {
-      Class_any_data_from_id output = new Class_any_data_from_id();
-      return output;
-    }
-
-    @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
-
-    @Override
-    public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
-        "vx/web/htmldoc", // pkgname
-        "any-data<-id", // name
-        0, // idx
-        false, // async
-        Core.typedef_new(
-          "vx/core", // pkgname
-          "any", // name
-          "", // extends
-          Core.e_typelist, // traits
-          Core.e_typelist, // allowtypes
-          Core.e_typelist, // disallowtypes
-          Core.e_funclist, // allowfuncs
-          Core.e_funclist, // disallowfuncs
-          Core.e_anylist, // allowvalues
-          Core.e_anylist, // disallowvalues
-          Core.e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    @Override
-    public Func_any_data_from_id vx_empty() {return e_any_data_from_id;}
-    @Override
-    public Func_any_data_from_id vx_type() {return t_any_data_from_id;}
-
-    @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
-
-    @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
-      T output = Core.f_empty(generic_any_1);
-      Core.Type_string inputval = (Core.Type_string)value;
-      Core.Type_any outputval = Htmldoc.f_any_data_from_id(inputval);
-      output = Core.f_any_from_any(generic_any_1, outputval);
-      return output;
-    }
-
-    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
-      Core.Type_any output = Core.e_any;
-      Core.Type_string id = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
-      output = Htmldoc.f_any_data_from_id(id);
-      return output;
-    }
-
-    @Override
-    public Core.Type_any vx_any_data_from_id(final Core.Type_string id) {
-      return Htmldoc.f_any_data_from_id(id);
-    }
-
-  }
-
-  public static final Func_any_data_from_id e_any_data_from_id = new Htmldoc.Class_any_data_from_id();
-  public static final Func_any_data_from_id t_any_data_from_id = new Htmldoc.Class_any_data_from_id();
-
-  public static Core.Type_any f_any_data_from_id(final Core.Type_string id) {
-    Core.Type_any output = Core.e_any;
-    return output;
-  }
 
   /**
    * @function boolean_replace_from_id_htmltext
@@ -178,30 +89,28 @@ public final class Htmldoc {
   }
 
   /**
-   * @function boolean_replace_from_id_htmltext_data_eventmap
+   * @function boolean_replace_from_ui_htmltext
    * Replaces an html node with given id and text.
-   * @param  {string} id
+   * @param  {ui} ui
    * @param  {string} htmltext
-   * @param  {any} data
-   * @param  {eventmap} eventmap
    * @return {boolean}
-   * (func boolean-replace<-id-htmltext-data-eventmap)
+   * (func boolean-replace<-ui-htmltext)
    */
-  public static interface Func_boolean_replace_from_id_htmltext_data_eventmap extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_boolean vx_boolean_replace_from_id_htmltext_data_eventmap(final Core.Type_string id, final Core.Type_string htmltext, final Core.Type_any data, final Event.Type_eventmap eventmap);
+  public static interface Func_boolean_replace_from_ui_htmltext extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_boolean vx_boolean_replace_from_ui_htmltext(final Ui.Type_ui ui, final Core.Type_string htmltext);
   }
 
-  public static class Class_boolean_replace_from_id_htmltext_data_eventmap extends Core.Class_base implements Func_boolean_replace_from_id_htmltext_data_eventmap {
+  public static class Class_boolean_replace_from_ui_htmltext extends Core.Class_base implements Func_boolean_replace_from_ui_htmltext {
 
     @Override
-    public Func_boolean_replace_from_id_htmltext_data_eventmap vx_new(Object... vals) {
-      Class_boolean_replace_from_id_htmltext_data_eventmap output = new Class_boolean_replace_from_id_htmltext_data_eventmap();
+    public Func_boolean_replace_from_ui_htmltext vx_new(Object... vals) {
+      Class_boolean_replace_from_ui_htmltext output = new Class_boolean_replace_from_ui_htmltext();
       return output;
     }
 
     @Override
-    public Func_boolean_replace_from_id_htmltext_data_eventmap vx_copy(Object... vals) {
-      Class_boolean_replace_from_id_htmltext_data_eventmap output = new Class_boolean_replace_from_id_htmltext_data_eventmap();
+    public Func_boolean_replace_from_ui_htmltext vx_copy(Object... vals) {
+      Class_boolean_replace_from_ui_htmltext output = new Class_boolean_replace_from_ui_htmltext();
       return output;
     }
 
@@ -212,7 +121,7 @@ public final class Htmldoc {
     public Core.Type_funcdef vx_funcdef() {
       return Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
-        "boolean-replace<-id-htmltext-data-eventmap", // name
+        "boolean-replace<-ui-htmltext", // name
         0, // idx
         false, // async
         Core.typedef_new(
@@ -232,31 +141,29 @@ public final class Htmldoc {
     }
 
     @Override
-    public Func_boolean_replace_from_id_htmltext_data_eventmap vx_empty() {return e_boolean_replace_from_id_htmltext_data_eventmap;}
+    public Func_boolean_replace_from_ui_htmltext vx_empty() {return e_boolean_replace_from_ui_htmltext;}
     @Override
-    public Func_boolean_replace_from_id_htmltext_data_eventmap vx_type() {return t_boolean_replace_from_id_htmltext_data_eventmap;}
+    public Func_boolean_replace_from_ui_htmltext vx_type() {return t_boolean_replace_from_ui_htmltext;}
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_string id = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_string htmltext = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
-      Core.Type_any data = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(2)));
-      Event.Type_eventmap eventmap = Core.f_any_from_any(Event.t_eventmap, arglist.vx_any(Core.vx_new_int(3)));
-      output = Htmldoc.f_boolean_replace_from_id_htmltext_data_eventmap(id, htmltext, data, eventmap);
+      output = Htmldoc.f_boolean_replace_from_ui_htmltext(ui, htmltext);
       return output;
     }
 
     @Override
-    public Core.Type_boolean vx_boolean_replace_from_id_htmltext_data_eventmap(final Core.Type_string id, final Core.Type_string htmltext, final Core.Type_any data, final Event.Type_eventmap eventmap) {
-      return Htmldoc.f_boolean_replace_from_id_htmltext_data_eventmap(id, htmltext, data, eventmap);
+    public Core.Type_boolean vx_boolean_replace_from_ui_htmltext(final Ui.Type_ui ui, final Core.Type_string htmltext) {
+      return Htmldoc.f_boolean_replace_from_ui_htmltext(ui, htmltext);
     }
 
   }
 
-  public static final Func_boolean_replace_from_id_htmltext_data_eventmap e_boolean_replace_from_id_htmltext_data_eventmap = new Htmldoc.Class_boolean_replace_from_id_htmltext_data_eventmap();
-  public static final Func_boolean_replace_from_id_htmltext_data_eventmap t_boolean_replace_from_id_htmltext_data_eventmap = new Htmldoc.Class_boolean_replace_from_id_htmltext_data_eventmap();
+  public static final Func_boolean_replace_from_ui_htmltext e_boolean_replace_from_ui_htmltext = new Htmldoc.Class_boolean_replace_from_ui_htmltext();
+  public static final Func_boolean_replace_from_ui_htmltext t_boolean_replace_from_ui_htmltext = new Htmldoc.Class_boolean_replace_from_ui_htmltext();
 
-  public static Core.Type_boolean f_boolean_replace_from_id_htmltext_data_eventmap(final Core.Type_string id, final Core.Type_string htmltext, final Core.Type_any data, final Event.Type_eventmap eventmap) {
+  public static Core.Type_boolean f_boolean_replace_from_ui_htmltext(final Ui.Type_ui ui, final Core.Type_string htmltext) {
     Core.Type_boolean output = Core.e_boolean;
     return output;
   }
@@ -539,6 +446,159 @@ public final class Htmldoc {
   }
 
   /**
+   * @function context_read
+   * Reads context from document.data.context
+   * @return {context}
+   * (func context-read)
+   */
+  public static interface Func_context_read extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_context vx_context_read();
+  }
+
+  public static class Class_context_read extends Core.Class_base implements Func_context_read {
+
+    @Override
+    public Func_context_read vx_new(Object... vals) {
+      Class_context_read output = new Class_context_read();
+      return output;
+    }
+
+    @Override
+    public Func_context_read vx_copy(Object... vals) {
+      Class_context_read output = new Class_context_read();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/web/htmldoc", // pkgname
+        "context-read", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "context", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_context_read vx_empty() {return e_context_read;}
+    @Override
+    public Func_context_read vx_type() {return t_context_read;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      output = Htmldoc.f_context_read();
+      return output;
+    }
+
+    @Override
+    public Core.Type_context vx_context_read() {
+      return Htmldoc.f_context_read();
+    }
+
+  }
+
+  public static final Func_context_read e_context_read = new Htmldoc.Class_context_read();
+  public static final Func_context_read t_context_read = new Htmldoc.Class_context_read();
+
+  public static Core.Type_context f_context_read() {
+    Core.Type_context output = Core.e_context;
+    return output;
+  }
+
+  /**
+   * @function context_write
+   * Writes context to document.data.context
+   * @return {context}
+   * (func context-write)
+   */
+  public static interface Func_context_write extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_context vx_context_write(final Core.Type_context context);
+  }
+
+  public static class Class_context_write extends Core.Class_base implements Func_context_write {
+
+    @Override
+    public Func_context_write vx_new(Object... vals) {
+      Class_context_write output = new Class_context_write();
+      return output;
+    }
+
+    @Override
+    public Func_context_write vx_copy(Object... vals) {
+      Class_context_write output = new Class_context_write();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/web/htmldoc", // pkgname
+        "context-write", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "context", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_context_write vx_empty() {return e_context_write;}
+    @Override
+    public Func_context_write vx_type() {return t_context_write;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
+      output = Htmldoc.f_context_write(context);
+      return output;
+    }
+
+    @Override
+    public Core.Type_context vx_context_write(final Core.Type_context context) {
+      return Htmldoc.f_context_write(context);
+    }
+
+  }
+
+  public static final Func_context_write e_context_write = new Htmldoc.Class_context_write();
+  public static final Func_context_write t_context_write = new Htmldoc.Class_context_write();
+
+  public static Core.Type_context f_context_write(final Core.Type_context context) {
+    Core.Type_context output = Core.e_context;
+    return output;
+  }
+
+  /**
    * @function string_from_id
    * Reads the value of an html node by id.
    * @param  {string} id
@@ -628,18 +688,110 @@ public final class Htmldoc {
     return output;
   }
 
+  /**
+   * @function ui_readstate_from_uid
+   * Returns ui component from element.
+   * @param  {string} uid
+   * @return {any}
+   * (func ui-readstate<-uid)
+   */
+  public static interface Func_ui_readstate_from_uid extends Core.Func_any_from_any {
+    public Core.Type_any vx_ui_readstate_from_uid(final Core.Type_string uid);
+  }
+
+  public static class Class_ui_readstate_from_uid extends Core.Class_base implements Func_ui_readstate_from_uid {
+
+    @Override
+    public Func_ui_readstate_from_uid vx_new(Object... vals) {
+      Class_ui_readstate_from_uid output = new Class_ui_readstate_from_uid();
+      return output;
+    }
+
+    @Override
+    public Func_ui_readstate_from_uid vx_copy(Object... vals) {
+      Class_ui_readstate_from_uid output = new Class_ui_readstate_from_uid();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/web/htmldoc", // pkgname
+        "ui-readstate<-uid", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "any", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_ui_readstate_from_uid vx_empty() {return e_ui_readstate_from_uid;}
+    @Override
+    public Func_ui_readstate_from_uid vx_type() {return t_ui_readstate_from_uid;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_string inputval = (Core.Type_string)value;
+      Core.Type_any outputval = Htmldoc.f_ui_readstate_from_uid(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string uid = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      output = Htmldoc.f_ui_readstate_from_uid(uid);
+      return output;
+    }
+
+    @Override
+    public Core.Type_any vx_ui_readstate_from_uid(final Core.Type_string uid) {
+      return Htmldoc.f_ui_readstate_from_uid(uid);
+    }
+
+  }
+
+  public static final Func_ui_readstate_from_uid e_ui_readstate_from_uid = new Htmldoc.Class_ui_readstate_from_uid();
+  public static final Func_ui_readstate_from_uid t_ui_readstate_from_uid = new Htmldoc.Class_ui_readstate_from_uid();
+
+  public static Core.Type_any f_ui_readstate_from_uid(final Core.Type_string uid) {
+    Core.Type_any output = Core.e_any;
+    return output;
+  }
+
 
   static {
     Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
     Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
     Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
-    mapfunc.put("any-data<-id", Htmldoc.t_any_data_from_id);
     mapfunc.put("boolean-replace<-id-htmltext", Htmldoc.t_boolean_replace_from_id_htmltext);
-    mapfunc.put("boolean-replace<-id-htmltext-data-eventmap", Htmldoc.t_boolean_replace_from_id_htmltext_data_eventmap);
+    mapfunc.put("boolean-replace<-ui-htmltext", Htmldoc.t_boolean_replace_from_ui_htmltext);
     mapfunc.put("boolean-write-stylesheet<-string", Htmldoc.t_boolean_write_stylesheet_from_string);
     mapfunc.put("boolean-write<-id-htmltext", Htmldoc.t_boolean_write_from_id_htmltext);
     mapfunc.put("boolean-write<-stylesheet", Htmldoc.t_boolean_write_from_stylesheet);
+    mapfunc.put("context-read", Htmldoc.t_context_read);
+    mapfunc.put("context-write", Htmldoc.t_context_write);
     mapfunc.put("string<-id", Htmldoc.t_string_from_id);
+    mapfunc.put("ui-readstate<-uid", Htmldoc.t_ui_readstate_from_uid);
     Core.vx_global_package_set("vx/web/htmldoc", maptype, mapconst, mapfunc);
   }
 

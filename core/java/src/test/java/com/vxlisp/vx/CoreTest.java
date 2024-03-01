@@ -1254,15 +1254,15 @@ public final class CoreTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n \"v2\"\n (any<-map\n  (map\n   :a \"v1\"\n   :b \"v2\"\n   :c \"v3\")\n  :b))",
+          ":describename", "(test\n \"v2\"\n (any<-map\n  (stringmap\n   :a \"v1\"\n   :b \"v2\"\n   :c \"v3\")\n  :b))",
           ":testresult",
             Test.f_test(
               context,
               Core.vx_new_string("v2"),
               Core.f_any_from_map(
-                Core.t_any,
+                Core.t_string,
                 Core.f_new(
-                  Core.t_map,
+                  Core.t_stringmap,
                   Core.t_anylist.vx_new(
                     Core.vx_new_string(":a"),
                     Core.vx_new_string("v1"),
@@ -1549,7 +1549,7 @@ public final class CoreTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n \"b\"\n (first<-list\n  (stringlist \"b\" \"c\")))",
+          ":describename", "(test\n \"b\"\n (first<-list\n  (stringlist\n   \"b\"\n   \"c\")))",
           ":testresult",
             Test.f_test(
               context,
@@ -1579,13 +1579,13 @@ public final class CoreTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n \"b\"\n (first<-list-any<-any\n  (list nothing \"b\" \"c\")\n  resolve))",
+          ":describename", "(test\n \"b\"\n (first<-list-any<-any : string\n  (list nothing \"b\" \"c\")\n  resolve))",
           ":testresult",
             Test.f_test(
               context,
               Core.vx_new_string("b"),
               Core.f_first_from_list_any_from_any(
-                Core.t_any,
+                Core.t_string,
                 Core.f_new(
                   Core.t_list,
                   Core.t_anylist.vx_new(
@@ -1954,15 +1954,15 @@ public final class CoreTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test \"c\" (last<-list (list \"b\" \"c\")))",
+          ":describename", "(test\n \"c\"\n (last<-list\n  (stringlist\n   \"b\"\n   \"c\")))",
           ":testresult",
             Test.f_test(
               context,
               Core.vx_new_string("c"),
               Core.f_last_from_list(
-                Core.t_any,
+                Core.t_string,
                 Core.f_new(
-                  Core.t_list,
+                  Core.t_stringlist,
                   Core.t_anylist.vx_new(
                     Core.vx_new_string("b"),
                     Core.vx_new_string("c")
@@ -2801,12 +2801,12 @@ public final class CoreTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/core", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 14, ":tests", 2, ":total", 14), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 89, ":tests", 221, ":total", 248), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 48, ":tests", 65, ":total", 135), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 161), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 161), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 32, ":tests", 72, ":total", 222), 
-      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 6, ":tests", 5, ":total", 73)
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 89, ":tests", 224, ":total", 250), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 47, ":tests", 65, ":total", 136), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 162), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 162), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 32, ":tests", 72, ":total", 224), 
+      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 6, ":tests", 5, ":total", 74)
     );
   }
 
@@ -2872,6 +2872,7 @@ public final class CoreTest {
         ":setting", 0,
         ":state", 0,
         ":statelistener", 0,
+        ":statelistenermap", 0,
         ":string", 2,
         ":stringlist", 0,
         ":stringmap", 0,
@@ -2968,6 +2969,7 @@ public final class CoreTest {
         ":any<-struct", 0,
         ":async", 0,
         ":boolean-permission<-func", 0,
+        ":boolean-write<-map-name-value", 0,
         ":boolean<-any", 0,
         ":boolean<-func", 0,
         ":boolean<-none", 0,

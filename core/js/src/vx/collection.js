@@ -133,7 +133,7 @@ export default class vx_collection {
    * @function any_from_for_until_loop
    * Returns a value using an until loop. Maximum 10000 times.
    * @param  {typemap} generic
-   * @param  {any} start
+   * @param  {generic_any_1} start
    * @param  {boolean_from_any} fn_until
    * @param  {any_from_any} fn_loop
    * @return {any-1}
@@ -149,7 +149,7 @@ export default class vx_collection {
   static f_any_from_for_until_loop(generic, start, fn_until, fn_loop) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
-    output = vx_collection.f_any_from_for_until_loop_max({"any-1": vx_core.t_any}, start, fn_until, fn_loop, 10000)
+    output = vx_collection.f_any_from_for_until_loop_max({"any-1": generic_any_1}, start, fn_until, fn_loop, 10000)
     return output
   }
 
@@ -165,7 +165,7 @@ export default class vx_collection {
    *     output = (fn-loop output)
    *     continue = (fn-until output)))
    * @param  {typemap} generic
-   * @param  {any} start
+   * @param  {generic_any_1} start
    * @param  {boolean_from_any} fn_until
    * @param  {any_from_any} fn_loop
    * @param  {int} max
@@ -190,7 +190,7 @@ export default class vx_collection {
    * @function any_from_for_while_loop
    * Returns a value using a while loop. Maximum 1000 times.
    * @param  {typemap} generic
-   * @param  {any} start
+   * @param  {generic_any_1} start
    * @param  {boolean_from_any} fn_while
    * @param  {any_from_any} fn_loop
    * @return {any-1}
@@ -206,7 +206,7 @@ export default class vx_collection {
   static f_any_from_for_while_loop(generic, start, fn_while, fn_loop) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
-    output = vx_collection.f_any_from_for_while_loop_max({"any-1": vx_core.t_any}, start, fn_while, fn_loop, 1000)
+    output = vx_collection.f_any_from_for_while_loop_max({"any-1": generic_any_1}, start, fn_while, fn_loop, 1000)
     return output
   }
 
@@ -223,7 +223,7 @@ export default class vx_collection {
    *    count += 1
    *    output = (fn-loop output))))
    * @param  {typemap} generic
-   * @param  {any} start
+   * @param  {generic_any_1} start
    * @param  {boolean_from_any} fn_while
    * @param  {any_from_any} fn_loop
    * @param  {int} max
@@ -319,7 +319,6 @@ export default class vx_collection {
 
   // (func list<-for-end-loop)
   static f_list_from_for_end_loop(generic, start, end, fn_loop) {
-    const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
     let output = vx_core.f_empty(generic_list_1)
     output = vx_collection.vx_list_from_for_end_loop(generic_list_1, start, end, fn_loop)
@@ -330,7 +329,7 @@ export default class vx_collection {
    * @function list_from_for_while_loop
    * Returns a list of any-1 using a while loop. Max: 1000
    * @param  {typemap} generic
-   * @param  {any} start
+   * @param  {generic_any_1} start
    * @param  {boolean_from_any} fn_while
    * @param  {any_from_any} fn_loop
    * @return {list-1}
@@ -344,10 +343,9 @@ export default class vx_collection {
 
   // (func list<-for-while-loop)
   static f_list_from_for_while_loop(generic, start, fn_while, fn_loop) {
-    const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
     let output = vx_core.f_empty(generic_list_1)
-    output = vx_collection.f_list_from_for_while_loop_max({"any-1": vx_core.t_any, "list-1": vx_core.t_list}, start, fn_while, fn_loop, 1000)
+    output = vx_collection.f_list_from_for_while_loop_max({"list-1": generic_list_1}, start, fn_while, fn_loop, 1000)
     return output
   }
 
@@ -361,7 +359,7 @@ export default class vx_collection {
    * 5. if (= check true) output := (copy output value), Go to 3 (Maximum max times).
    * 6. else end.
    * @param  {typemap} generic
-   * @param  {any} start
+   * @param  {generic_any_1} start
    * @param  {boolean_from_any} fn_while
    * @param  {any_from_any} fn_loop
    * @param  {int} max
@@ -376,7 +374,6 @@ export default class vx_collection {
 
   // (func list<-for-while-loop-max)
   static f_list_from_for_while_loop_max(generic, start, fn_while, fn_loop, max) {
-    const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
     let output = vx_core.f_empty(generic_list_1)
     output = vx_collection.vx_list_from_for_while_loop_max(generic_list_1, start, fn_while, fn_loop, max)
@@ -387,7 +384,7 @@ export default class vx_collection {
    * @function list_from_list_end
    * Returns a sub list from positions 0 to end.
    * @param  {typemap} generic
-   * @param  {list} values
+   * @param  {generic_list_1} values
    * @param  {int} end
    * @return {list-1}
    */
@@ -400,10 +397,9 @@ export default class vx_collection {
 
   // (func list<-list-end)
   static f_list_from_list_end(generic, values, end) {
-    const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
     let output = vx_core.f_empty(generic_list_1)
-    output = vx_collection.f_list_from_list_start_end({"any-1": vx_core.t_any, "list-1": vx_core.t_list}, values, 1, end)
+    output = vx_collection.f_list_from_list_start_end({"list-1": generic_list_1}, values, 1, end)
     return output
   }
 
@@ -411,7 +407,7 @@ export default class vx_collection {
    * @function list_from_list_filter
    * Filter List to only include non-empty values
    * @param  {typemap} generic
-   * @param  {list} vallist
+   * @param  {generic_list_2} vallist
    * @param  {any_from_any} fn_filter
    * @return {list-1}
    */
@@ -424,7 +420,6 @@ export default class vx_collection {
 
   // (func list<-list-filter)
   static f_list_from_list_filter(generic, vallist, fn_filter) {
-    const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
     let output = vx_core.f_empty(generic_list_1)
     output = vx_collection.vx_list_from_list_filter(generic_list_1, vallist, fn_filter)
@@ -435,7 +430,7 @@ export default class vx_collection {
    * @function list_from_list_filtertypes
    * Filter List to only include matching types
    * @param  {typemap} generic
-   * @param  {list} vallist
+   * @param  {generic_list_2} vallist
    * @param  {typelist} ... filtertypes
    * @return {list-1}
    */
@@ -448,12 +443,11 @@ export default class vx_collection {
 
   // (func list<-list-filtertypes)
   static f_list_from_list_filtertypes(generic, vallist, ...filtertypes) {
-    const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
     let output = vx_core.f_empty(generic_list_1)
     filtertypes = vx_core.f_new(vx_core.t_typelist, ...filtertypes)
     output = vx_collection.f_list_from_list_filter(
-      {"any-1": vx_core.t_any, "list-1": vx_core.t_list},
+      {"any-1": vx_core.t_any, "list-1": generic_list_1},
       vallist,
       vx_core.f_new(vx_core.t_any_from_any, (val) => 
         vx_core.f_if(
@@ -469,7 +463,7 @@ export default class vx_collection {
    * @function list_from_list_start
    * Returns a sub list from start to list end.
    * @param  {typemap} generic
-   * @param  {list} values
+   * @param  {generic_list_1} values
    * @param  {int} start
    * @return {list-1}
    */
@@ -482,11 +476,10 @@ export default class vx_collection {
 
   // (func list<-list-start)
   static f_list_from_list_start(generic, values, start) {
-    const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
     let output = vx_core.f_empty(generic_list_1)
     output = vx_collection.f_list_from_list_start_end(
-      {"any-1": vx_core.t_any, "list-1": vx_core.t_list},
+      {"list-1": generic_list_1},
       values,
       start,
       vx_core.f_length_from_list(values)
@@ -498,7 +491,7 @@ export default class vx_collection {
    * @function list_from_list_start_end
    * Returns a list from another list
    * @param  {typemap} generic
-   * @param  {list} values
+   * @param  {generic_list_1} values
    * @param  {int} start
    * @param  {int} end
    * @return {list-1}
@@ -512,7 +505,6 @@ export default class vx_collection {
 
   // (func list<-list-start-end)
   static f_list_from_list_start_end(generic, values, start, end) {
-    const generic_any_1 = generic["any-1"]
     const generic_list_1 = generic["list-1"]
     let output = vx_core.f_empty(generic_list_1)
     output = vx_collection.vx_list_from_list_start_end(generic_list_1, values, start, end)

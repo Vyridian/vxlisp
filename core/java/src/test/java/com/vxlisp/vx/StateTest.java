@@ -19,11 +19,11 @@ public final class StateTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/state", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 33, ":tests", 1, ":total", 3), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 2), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 2), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 2), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 84, ":tests", 11, ":total", 13), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 12), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 12), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 12), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 13), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 1)
     );
   }
@@ -32,14 +32,24 @@ public final class StateTest {
     return Test.t_testcoveragedetail.vx_new(
       ":testpkg", "vx/state",
       ":typemap", Core.t_intmap.vx_new(
-        ":value-map", 0
+        ":valuemap", 0
       ),
       ":constmap", Core.t_intmap.vx_new(
   
       ),
       ":funcmap", Core.t_intmap.vx_new(
+        ":any-readstate<-mapname-name", 0,
+        ":any-readstate<-name", 0,
+        ":boolean-writestate<-mapname-name-value", 0,
+        ":boolean-writestate<-name-value", 0,
+        ":boolean-writestate<-statelistener", 0,
         ":change", 0,
-        ":register", 0
+        ":register", 0,
+        ":state<-context", 0,
+        ":statelistener-readstate<-name", 0,
+        ":statelistenermap-readstate", 0,
+        ":value-readstate<-name", 0,
+        ":valuemap-readstate<-mapname", 0
       )
     );
   }

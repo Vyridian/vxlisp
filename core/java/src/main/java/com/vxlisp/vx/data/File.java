@@ -116,7 +116,9 @@ public final class File {
     }
 
     @Override
-    public Type_file vx_new(final Object... vals) {return e_file.vx_copy(vals);}
+    public Type_file vx_new(final Object... vals) {
+      return e_file.vx_copy(vals);
+    }
 
     @Override
     public Type_file vx_copy(final Object... vals) {
@@ -353,7 +355,9 @@ public final class File {
   public static class Class_fileformat extends Core.Class_base implements Type_fileformat {
 
     @Override
-    public Type_fileformat vx_new(final Object... vals) {return e_fileformat.vx_copy(vals);}
+    public Type_fileformat vx_new(final Object... vals) {
+      return e_fileformat.vx_copy(vals);
+    }
 
     @Override
     public Type_fileformat vx_copy(final Object... vals) {

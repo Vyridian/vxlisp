@@ -132,12 +132,12 @@ export default class vx_repl {
     let output = vx_core.f_empty(generic_any_1)
     anylist = vx_core.f_new(vx_core.t_anylist, ...anylist)
     output = vx_core.f_let(
-      {"any-1": vx_core.t_any, "any-2": vx_core.t_any},
+      {"any-1": generic_any_1, "any-2": vx_core.t_any},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const repl = vx_repl.f_repl_from_macro(context, ...anylist)
         const val = vx_repl.f_any_from_repl(context, repl)
-        return vx_core.f_any_from_any({"any-1": vx_core.t_any, "any-2": vx_core.t_any}, val)
+        return vx_core.f_any_from_any({"any-1": generic_any_1, "any-2": vx_core.t_any}, val)
       })
     )
     return output

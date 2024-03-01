@@ -4,6 +4,7 @@
 #include "../../vx/core.hpp"
 #include "../../vx/event.hpp"
 #include "../../vx/data/file.hpp"
+#include "../../vx/state.hpp"
 #include "ui.hpp"
 
 namespace vx_ui_ui {
@@ -3156,6 +3157,7 @@ namespace vx_ui_ui {
         this->vx_p_data,
         this->vx_p_eventmap,
         this->vx_p_fn_uimap_data,
+        this->vx_p_parent,
         this->vx_p_path,
         this->vx_p_render,
         this->vx_p_renderer,
@@ -3190,6 +3192,15 @@ namespace vx_ui_ui {
       vx_ui_ui::Func_uimap_from_uimap_data output = this->vx_p_fn_uimap_data;
       if (!output) {
         output = vx_ui_ui::e_uimap_from_uimap_data;
+      }
+      return output;
+    }
+
+    // parent()
+    vx_core::Type_string Class_ui::parent() const {
+      vx_core::Type_string output = this->vx_p_parent;
+      if (!output) {
+        output = vx_core::e_string;
       }
       return output;
     }
@@ -3277,6 +3288,8 @@ namespace vx_ui_ui {
         output = this->eventmap();
       } else if (skey == ":fn-uimap-data") {
         output = this->fn_uimap_data();
+      } else if (skey == ":parent") {
+        output = this->parent();
       } else if (skey == ":path") {
         output = this->path();
       } else if (skey == ":render") {
@@ -3304,6 +3317,7 @@ namespace vx_ui_ui {
       output[":data"] = this->data();
       output[":eventmap"] = this->eventmap();
       output[":fn-uimap-data"] = this->fn_uimap_data();
+      output[":parent"] = this->parent();
       output[":path"] = this->path();
       output[":render"] = this->render();
       output[":renderer"] = this->renderer();
@@ -3331,6 +3345,7 @@ namespace vx_ui_ui {
       vx_core::Type_any vx_p_data = val->data();
       vx_event::Type_eventmap vx_p_eventmap = val->eventmap();
       vx_ui_ui::Func_uimap_from_uimap_data vx_p_fn_uimap_data = val->fn_uimap_data();
+      vx_core::Type_string vx_p_parent = val->parent();
       vx_core::Type_string vx_p_path = val->path();
       vx_ui_ui::Type_render vx_p_render = val->render();
       vx_ui_ui::Type_layout vx_p_renderer = val->renderer();
@@ -3358,6 +3373,8 @@ namespace vx_ui_ui {
           } else if (testkey == ":eventmap") {
             key = testkey;
           } else if (testkey == ":fn-uimap-data") {
+            key = testkey;
+          } else if (testkey == ":parent") {
             key = testkey;
           } else if (testkey == ":path") {
             key = testkey;
@@ -3402,6 +3419,15 @@ namespace vx_ui_ui {
               vx_p_fn_uimap_data = vx_core::vx_any_from_any(vx_ui_ui::t_uimap_from_uimap_data, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new ui :fn-uimap-data " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              msgblock = vx_core::vx_copy(msgblock, {msg});
+            }
+          } else if (key == ":parent") {
+            if (vx_p_parent == valsub) {
+            } else if (valsubtype == vx_core::t_string) {
+              ischanged = true;
+              vx_p_parent = vx_core::vx_any_from_any(vx_core::t_string, valsub);
+            } else {
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new ui :parent " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":path") {
@@ -3506,6 +3532,13 @@ namespace vx_ui_ui {
           output->vx_p_fn_uimap_data = vx_p_fn_uimap_data;
           vx_core::vx_reserve(vx_p_fn_uimap_data);
         }
+        if (output->vx_p_parent != vx_p_parent) {
+          if (output->vx_p_parent) {
+            vx_core::vx_release_one(output->vx_p_parent);
+          }
+          output->vx_p_parent = vx_p_parent;
+          vx_core::vx_reserve(vx_p_parent);
+        }
         if (output->vx_p_path != vx_p_path) {
           if (output->vx_p_path) {
             vx_core::vx_release_one(output->vx_p_path);
@@ -3601,6 +3634,10 @@ namespace vx_ui_ui {
           vx_core::vx_new_arg(
             "fn-uimap-data", // name
             vx_ui_ui::t_uimap_from_uimap_data // type
+          ),
+          vx_core::vx_new_arg(
+            "parent", // name
+            vx_core::t_string // type
           ),
           vx_core::vx_new_arg(
             "path", // name
@@ -4875,6 +4912,210 @@ namespace vx_ui_ui {
 
   //}
 
+  // (func boolean-writestate<-ui)
+  vx_core::Type_boolean f_boolean_writestate_from_ui(vx_core::Type_context context, vx_ui_ui::Type_ui ui) {
+    vx_core::Type_boolean output = vx_core::e_boolean;
+    vx_core::vx_reserve(ui);
+    output = vx_core::f_let(
+      vx_core::t_boolean,
+      vx_core::t_any_from_func->vx_fn_new({ui, context}, [ui, context]() {
+        vx_core::Type_string uid = ui->uid();
+        vx_core::vx_ref_plus(uid);
+        vx_core::Type_boolean output_1 = vx_state::f_boolean_writestate_from_mapname_name_value(
+          context,
+          vx_core::vx_new_string(":uimap"),
+          uid,
+          vx_core::t_value
+        );
+        vx_core::vx_release_one_except(uid, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except(ui, output);
+    return output;
+  }
+
+  // (func boolean-writestate<-ui)
+  // class Class_boolean_writestate_from_ui {
+    Abstract_boolean_writestate_from_ui::~Abstract_boolean_writestate_from_ui() {}
+
+    Class_boolean_writestate_from_ui::Class_boolean_writestate_from_ui() : Abstract_boolean_writestate_from_ui::Abstract_boolean_writestate_from_ui() {
+      vx_core::refcount += 1;
+    }
+
+    Class_boolean_writestate_from_ui::~Class_boolean_writestate_from_ui() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_boolean_writestate_from_ui::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_ui_ui::Func_boolean_writestate_from_ui output = vx_ui_ui::e_boolean_writestate_from_ui;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_writestate_from_ui::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_ui_ui::Func_boolean_writestate_from_ui output = vx_ui_ui::e_boolean_writestate_from_ui;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_boolean_writestate_from_ui::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/ui/ui", // pkgname
+        "boolean-writestate<-ui", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_boolean_writestate_from_ui::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_boolean_writestate_from_ui::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/ui/ui", // pkgname
+        "boolean-writestate<-ui", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_writestate_from_ui::vx_empty() const {return vx_ui_ui::e_boolean_writestate_from_ui;}
+    vx_core::Type_any Class_boolean_writestate_from_ui::vx_type() const {return vx_ui_ui::t_boolean_writestate_from_ui;}
+    vx_core::Type_msgblock Class_boolean_writestate_from_ui::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_boolean_writestate_from_ui::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any_context Class_boolean_writestate_from_ui::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const {
+      return vx_core::e_any_from_any_context;
+    }
+
+    vx_core::Type_any Class_boolean_writestate_from_ui::vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_ui_ui::Type_ui inputval = vx_core::vx_any_from_any(vx_ui_ui::t_ui, val);
+      output = vx_ui_ui::f_boolean_writestate_from_ui(context, inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_writestate_from_ui::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_ui_ui::Type_ui ui = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_ui_ui::f_boolean_writestate_from_ui(context, ui);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func boolean-writestate<-uiengine)
+  vx_core::Type_boolean f_boolean_writestate_from_uiengine(vx_core::Type_context context, vx_ui_ui::Type_uiengine uiengine) {
+    vx_core::Type_boolean output = vx_core::e_boolean;
+    vx_core::vx_reserve(uiengine);
+    output = vx_state::f_boolean_writestate_from_name_value(context, vx_core::vx_new_string(":uiengine"), uiengine);
+    vx_core::vx_release_one_except(uiengine, output);
+    return output;
+  }
+
+  // (func boolean-writestate<-uiengine)
+  // class Class_boolean_writestate_from_uiengine {
+    Abstract_boolean_writestate_from_uiengine::~Abstract_boolean_writestate_from_uiengine() {}
+
+    Class_boolean_writestate_from_uiengine::Class_boolean_writestate_from_uiengine() : Abstract_boolean_writestate_from_uiengine::Abstract_boolean_writestate_from_uiengine() {
+      vx_core::refcount += 1;
+    }
+
+    Class_boolean_writestate_from_uiengine::~Class_boolean_writestate_from_uiengine() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_boolean_writestate_from_uiengine::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_ui_ui::Func_boolean_writestate_from_uiengine output = vx_ui_ui::e_boolean_writestate_from_uiengine;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_writestate_from_uiengine::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_ui_ui::Func_boolean_writestate_from_uiengine output = vx_ui_ui::e_boolean_writestate_from_uiengine;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_boolean_writestate_from_uiengine::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/ui/ui", // pkgname
+        "boolean-writestate<-uiengine", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_boolean_writestate_from_uiengine::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_boolean_writestate_from_uiengine::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/ui/ui", // pkgname
+        "boolean-writestate<-uiengine", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_writestate_from_uiengine::vx_empty() const {return vx_ui_ui::e_boolean_writestate_from_uiengine;}
+    vx_core::Type_any Class_boolean_writestate_from_uiengine::vx_type() const {return vx_ui_ui::t_boolean_writestate_from_uiengine;}
+    vx_core::Type_msgblock Class_boolean_writestate_from_uiengine::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_boolean_writestate_from_uiengine::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any_context Class_boolean_writestate_from_uiengine::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const {
+      return vx_core::e_any_from_any_context;
+    }
+
+    vx_core::Type_any Class_boolean_writestate_from_uiengine::vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_ui_ui::Type_uiengine inputval = vx_core::vx_any_from_any(vx_ui_ui::t_uiengine, val);
+      output = vx_ui_ui::f_boolean_writestate_from_uiengine(context, inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_writestate_from_uiengine::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_ui_ui::Type_uiengine uiengine = vx_core::vx_any_from_any(vx_ui_ui::t_uiengine, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_ui_ui::f_boolean_writestate_from_uiengine(context, uiengine);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func layout<-style)
   vx_ui_ui::Type_layout f_layout_from_style(vx_ui_ui::Type_style style) {
     vx_ui_ui::Type_layout output = vx_ui_ui::e_layout;
@@ -5268,6 +5509,203 @@ namespace vx_ui_ui {
 
   //}
 
+  // (func ui-data<-ui)
+  vx_ui_ui::Type_ui f_ui_data_from_ui(vx_ui_ui::Type_ui ui) {
+    vx_ui_ui::Type_ui output = vx_ui_ui::e_ui;
+    vx_core::vx_reserve(ui);
+    output = vx_core::f_let(
+      vx_ui_ui::t_ui,
+      vx_core::t_any_from_func->vx_fn_new({ui}, [ui]() {
+        vx_core::Type_any data = ui->data();
+        vx_core::vx_ref_plus(data);
+        vx_ui_ui::Type_ui output_1 = vx_core::f_any_from_any(vx_ui_ui::t_ui, data);
+        vx_core::vx_release_one_except(data, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except(ui, output);
+    return output;
+  }
+
+  // (func ui-data<-ui)
+  // class Class_ui_data_from_ui {
+    Abstract_ui_data_from_ui::~Abstract_ui_data_from_ui() {}
+
+    Class_ui_data_from_ui::Class_ui_data_from_ui() : Abstract_ui_data_from_ui::Abstract_ui_data_from_ui() {
+      vx_core::refcount += 1;
+    }
+
+    Class_ui_data_from_ui::~Class_ui_data_from_ui() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_ui_data_from_ui::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_ui_ui::Func_ui_data_from_ui output = vx_ui_ui::e_ui_data_from_ui;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_ui_data_from_ui::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_ui_ui::Func_ui_data_from_ui output = vx_ui_ui::e_ui_data_from_ui;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_ui_data_from_ui::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/ui/ui", // pkgname
+        "ui-data<-ui", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_ui_data_from_ui::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_ui_data_from_ui::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/ui/ui", // pkgname
+        "ui-data<-ui", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_ui_data_from_ui::vx_empty() const {return vx_ui_ui::e_ui_data_from_ui;}
+    vx_core::Type_any Class_ui_data_from_ui::vx_type() const {return vx_ui_ui::t_ui_data_from_ui;}
+    vx_core::Type_msgblock Class_ui_data_from_ui::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_ui_data_from_ui::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_ui_data_from_ui::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_ui_data_from_ui::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_ui_ui::Type_ui inputval = vx_core::vx_any_from_any(vx_ui_ui::t_ui, val);
+      output = vx_ui_ui::f_ui_data_from_ui(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_ui_data_from_ui::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_ui_ui::Type_ui ui = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_ui_ui::f_ui_data_from_ui(ui);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func ui-from<-event)
+  vx_ui_ui::Type_ui f_ui_from_from_event(vx_event::Type_event event) {
+    vx_ui_ui::Type_ui output = vx_ui_ui::e_ui;
+    vx_core::vx_reserve(event);
+    output = vx_event::f_any_from_from_event(vx_ui_ui::t_ui, event);
+    vx_core::vx_release_one_except(event, output);
+    return output;
+  }
+
+  // (func ui-from<-event)
+  // class Class_ui_from_from_event {
+    Abstract_ui_from_from_event::~Abstract_ui_from_from_event() {}
+
+    Class_ui_from_from_event::Class_ui_from_from_event() : Abstract_ui_from_from_event::Abstract_ui_from_from_event() {
+      vx_core::refcount += 1;
+    }
+
+    Class_ui_from_from_event::~Class_ui_from_from_event() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_ui_from_from_event::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_ui_ui::Func_ui_from_from_event output = vx_ui_ui::e_ui_from_from_event;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_ui_from_from_event::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_ui_ui::Func_ui_from_from_event output = vx_ui_ui::e_ui_from_from_event;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_ui_from_from_event::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/ui/ui", // pkgname
+        "ui-from<-event", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_ui_from_from_event::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_ui_from_from_event::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/ui/ui", // pkgname
+        "ui-from<-event", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_ui_from_from_event::vx_empty() const {return vx_ui_ui::e_ui_from_from_event;}
+    vx_core::Type_any Class_ui_from_from_event::vx_type() const {return vx_ui_ui::t_ui_from_from_event;}
+    vx_core::Type_msgblock Class_ui_from_from_event::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_ui_from_from_event::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_ui_from_from_event::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_ui_from_from_event::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_event::Type_event inputval = vx_core::vx_any_from_any(vx_event::t_event, val);
+      output = vx_ui_ui::f_ui_from_from_event(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_ui_from_from_event::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_event::Type_event event = vx_core::vx_any_from_any(vx_event::t_event, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_ui_ui::f_ui_from_from_event(event);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func ui-layout<-ui-layoutmap-else)
   vx_ui_ui::Type_ui f_ui_layout_from_ui_layoutmap_else(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_layoutmap layoutmap, vx_ui_ui::Type_layout layoutelse) {
     vx_ui_ui::Type_ui output = vx_ui_ui::e_ui;
@@ -5381,6 +5819,101 @@ namespace vx_ui_ui {
       vx_ui_ui::Type_layoutmap layoutmap = vx_core::vx_any_from_any(vx_ui_ui::t_layoutmap, arglist->vx_get_any(vx_core::vx_new_int(1)));
       vx_ui_ui::Type_layout layoutelse = vx_core::vx_any_from_any(vx_ui_ui::t_layout, arglist->vx_get_any(vx_core::vx_new_int(2)));
       output = vx_ui_ui::f_ui_layout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func ui-readstate<-uid)
+  vx_ui_ui::Type_ui f_ui_readstate_from_uid(vx_core::Type_context context, vx_core::Type_string uid) {
+    vx_ui_ui::Type_ui output = vx_ui_ui::e_ui;
+    vx_core::vx_reserve(uid);
+    output = vx_state::f_any_readstate_from_mapname_name(vx_ui_ui::t_ui, context, vx_core::vx_new_string(":uimap"), uid);
+    vx_core::vx_release_one_except(uid, output);
+    return output;
+  }
+
+  // (func ui-readstate<-uid)
+  // class Class_ui_readstate_from_uid {
+    Abstract_ui_readstate_from_uid::~Abstract_ui_readstate_from_uid() {}
+
+    Class_ui_readstate_from_uid::Class_ui_readstate_from_uid() : Abstract_ui_readstate_from_uid::Abstract_ui_readstate_from_uid() {
+      vx_core::refcount += 1;
+    }
+
+    Class_ui_readstate_from_uid::~Class_ui_readstate_from_uid() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_ui_readstate_from_uid::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_ui_ui::Func_ui_readstate_from_uid output = vx_ui_ui::e_ui_readstate_from_uid;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_ui_readstate_from_uid::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_ui_ui::Func_ui_readstate_from_uid output = vx_ui_ui::e_ui_readstate_from_uid;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_ui_readstate_from_uid::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/ui/ui", // pkgname
+        "ui-readstate<-uid", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_ui_readstate_from_uid::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_ui_readstate_from_uid::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/ui/ui", // pkgname
+        "ui-readstate<-uid", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_ui_readstate_from_uid::vx_empty() const {return vx_ui_ui::e_ui_readstate_from_uid;}
+    vx_core::Type_any Class_ui_readstate_from_uid::vx_type() const {return vx_ui_ui::t_ui_readstate_from_uid;}
+    vx_core::Type_msgblock Class_ui_readstate_from_uid::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_ui_readstate_from_uid::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any_context Class_ui_readstate_from_uid::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const {
+      return vx_core::e_any_from_any_context;
+    }
+
+    vx_core::Type_any Class_ui_readstate_from_uid::vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string, val);
+      output = vx_ui_ui::f_ui_readstate_from_uid(context, inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_ui_readstate_from_uid::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_string uid = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_ui_ui::f_ui_readstate_from_uid(context, uid);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -5787,8 +6320,88 @@ namespace vx_ui_ui {
 
   //}
 
+  // (func uiengine-readstate)
+  vx_ui_ui::Type_uiengine f_uiengine_readstate(vx_core::Type_context context) {
+    vx_ui_ui::Type_uiengine output = vx_ui_ui::e_uiengine;
+    output = vx_state::f_any_readstate_from_name(vx_ui_ui::t_uiengine, context, vx_core::vx_new_string(":uiengine"));
+    return output;
+  }
+
+  // (func uiengine-readstate)
+  // class Class_uiengine_readstate {
+    Abstract_uiengine_readstate::~Abstract_uiengine_readstate() {}
+
+    Class_uiengine_readstate::Class_uiengine_readstate() : Abstract_uiengine_readstate::Abstract_uiengine_readstate() {
+      vx_core::refcount += 1;
+    }
+
+    Class_uiengine_readstate::~Class_uiengine_readstate() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_uiengine_readstate::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_ui_ui::Func_uiengine_readstate output = vx_ui_ui::e_uiengine_readstate;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_uiengine_readstate::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_ui_ui::Func_uiengine_readstate output = vx_ui_ui::e_uiengine_readstate;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_uiengine_readstate::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/ui/ui", // pkgname
+        "uiengine-readstate", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_uiengine_readstate::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_uiengine_readstate::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/ui/ui", // pkgname
+        "uiengine-readstate", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_uiengine_readstate::vx_empty() const {return vx_ui_ui::e_uiengine_readstate;}
+    vx_core::Type_any Class_uiengine_readstate::vx_type() const {return vx_ui_ui::t_uiengine_readstate;}
+    vx_core::Type_msgblock Class_uiengine_readstate::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_uiengine_readstate::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_uiengine_readstate::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_ui_ui::f_uiengine_readstate(context);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func uiengine-render)
-  vx_ui_ui::Type_uiengine f_uiengine_render(vx_ui_ui::Type_uiengine uiengine) {
+  vx_ui_ui::Type_uiengine f_uiengine_render(vx_core::Type_context context, vx_ui_ui::Type_uiengine uiengine) {
     vx_ui_ui::Type_uiengine output = vx_ui_ui::e_uiengine;
     vx_core::vx_reserve(uiengine);
     output = vx_core::f_let(
@@ -5891,22 +6504,23 @@ namespace vx_ui_ui {
     vx_core::Type_msgblock Class_uiengine_render::vx_msgblock() const {return this->vx_p_msgblock;}
     vx_core::vx_Type_listany Class_uiengine_render::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_uiengine_render::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
-      return vx_core::e_any_from_any;
+    vx_core::Func_any_from_any_context Class_uiengine_render::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const {
+      return vx_core::e_any_from_any_context;
     }
 
-    vx_core::Type_any Class_uiengine_render::vx_any_from_any(vx_core::Type_any val) const {
+    vx_core::Type_any Class_uiengine_render::vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any val) const {
       vx_core::Type_any output = vx_core::e_any;
       vx_ui_ui::Type_uiengine inputval = vx_core::vx_any_from_any(vx_ui_ui::t_uiengine, val);
-      output = vx_ui_ui::f_uiengine_render(inputval);
+      output = vx_ui_ui::f_uiengine_render(context, inputval);
       vx_core::vx_release_except(val, output);
       return output;
     }
 
     vx_core::Type_any Class_uiengine_render::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_ui_ui::Type_uiengine uiengine = vx_core::vx_any_from_any(vx_ui_ui::t_uiengine, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_ui_ui::f_uiengine_render(uiengine);
+      output = vx_ui_ui::f_uiengine_render(context, uiengine);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -6365,6 +6979,10 @@ namespace vx_ui_ui {
   vx_ui_ui::Const_styletype_custom c_styletype_custom = NULL;
   vx_ui_ui::Const_styletype_shared c_styletype_shared = NULL;
   vx_ui_ui::Const_styletype_system c_styletype_system = NULL;
+  vx_ui_ui::Func_boolean_writestate_from_ui e_boolean_writestate_from_ui = NULL;
+  vx_ui_ui::Func_boolean_writestate_from_ui t_boolean_writestate_from_ui = NULL;
+  vx_ui_ui::Func_boolean_writestate_from_uiengine e_boolean_writestate_from_uiengine = NULL;
+  vx_ui_ui::Func_boolean_writestate_from_uiengine t_boolean_writestate_from_uiengine = NULL;
   vx_ui_ui::Func_layout_from_style e_layout_from_style = NULL;
   vx_ui_ui::Func_layout_from_style t_layout_from_style = NULL;
   vx_ui_ui::Func_layoutmap_from_layoutlist e_layoutmap_from_layoutlist = NULL;
@@ -6373,8 +6991,14 @@ namespace vx_ui_ui {
   vx_ui_ui::Func_stylemap_from_stylelist t_stylemap_from_stylelist = NULL;
   vx_ui_ui::Func_stylesheet_render e_stylesheet_render = NULL;
   vx_ui_ui::Func_stylesheet_render t_stylesheet_render = NULL;
+  vx_ui_ui::Func_ui_data_from_ui e_ui_data_from_ui = NULL;
+  vx_ui_ui::Func_ui_data_from_ui t_ui_data_from_ui = NULL;
+  vx_ui_ui::Func_ui_from_from_event e_ui_from_from_event = NULL;
+  vx_ui_ui::Func_ui_from_from_event t_ui_from_from_event = NULL;
   vx_ui_ui::Func_ui_layout_from_ui_layoutmap_else e_ui_layout_from_ui_layoutmap_else = NULL;
   vx_ui_ui::Func_ui_layout_from_ui_layoutmap_else t_ui_layout_from_ui_layoutmap_else = NULL;
+  vx_ui_ui::Func_ui_readstate_from_uid e_ui_readstate_from_uid = NULL;
+  vx_ui_ui::Func_ui_readstate_from_uid t_ui_readstate_from_uid = NULL;
   vx_ui_ui::Func_ui_render e_ui_render = NULL;
   vx_ui_ui::Func_ui_render t_ui_render = NULL;
   vx_ui_ui::Func_ui_render_from_fn_render_ui_orig_parent e_ui_render_from_fn_render_ui_orig_parent = NULL;
@@ -6383,6 +7007,8 @@ namespace vx_ui_ui {
   vx_ui_ui::Func_ui_render_from_ui_orig_parent t_ui_render_from_ui_orig_parent = NULL;
   vx_ui_ui::Func_ui_from_renderer_ui_orig_parent e_ui_from_renderer_ui_orig_parent = NULL;
   vx_ui_ui::Func_ui_from_renderer_ui_orig_parent t_ui_from_renderer_ui_orig_parent = NULL;
+  vx_ui_ui::Func_uiengine_readstate e_uiengine_readstate = NULL;
+  vx_ui_ui::Func_uiengine_readstate t_uiengine_readstate = NULL;
   vx_ui_ui::Func_uiengine_render e_uiengine_render = NULL;
   vx_ui_ui::Func_uiengine_render t_uiengine_render = NULL;
   vx_ui_ui::Func_uimap_layout_from_uimap_layoutmap_else e_uimap_layout_from_uimap_layoutmap_else = NULL;
@@ -6515,6 +7141,14 @@ namespace vx_ui_ui {
       vx_core::vx_reserve_empty(vx_ui_ui::e_uimap);
       vx_ui_ui::t_uimap = new Class_uimap();
       vx_core::vx_reserve_type(vx_ui_ui::t_uimap);
+      vx_ui_ui::e_boolean_writestate_from_ui = new vx_ui_ui::Class_boolean_writestate_from_ui();
+      vx_core::vx_reserve_empty(vx_ui_ui::e_boolean_writestate_from_ui);
+      vx_ui_ui::t_boolean_writestate_from_ui = new vx_ui_ui::Class_boolean_writestate_from_ui();
+      vx_core::vx_reserve_type(vx_ui_ui::t_boolean_writestate_from_ui);
+      vx_ui_ui::e_boolean_writestate_from_uiengine = new vx_ui_ui::Class_boolean_writestate_from_uiengine();
+      vx_core::vx_reserve_empty(vx_ui_ui::e_boolean_writestate_from_uiengine);
+      vx_ui_ui::t_boolean_writestate_from_uiengine = new vx_ui_ui::Class_boolean_writestate_from_uiengine();
+      vx_core::vx_reserve_type(vx_ui_ui::t_boolean_writestate_from_uiengine);
       vx_ui_ui::e_layout_from_style = new vx_ui_ui::Class_layout_from_style();
       vx_core::vx_reserve_empty(vx_ui_ui::e_layout_from_style);
       vx_ui_ui::t_layout_from_style = new vx_ui_ui::Class_layout_from_style();
@@ -6531,10 +7165,22 @@ namespace vx_ui_ui {
       vx_core::vx_reserve_empty(vx_ui_ui::e_stylesheet_render);
       vx_ui_ui::t_stylesheet_render = new vx_ui_ui::Class_stylesheet_render();
       vx_core::vx_reserve_type(vx_ui_ui::t_stylesheet_render);
+      vx_ui_ui::e_ui_data_from_ui = new vx_ui_ui::Class_ui_data_from_ui();
+      vx_core::vx_reserve_empty(vx_ui_ui::e_ui_data_from_ui);
+      vx_ui_ui::t_ui_data_from_ui = new vx_ui_ui::Class_ui_data_from_ui();
+      vx_core::vx_reserve_type(vx_ui_ui::t_ui_data_from_ui);
+      vx_ui_ui::e_ui_from_from_event = new vx_ui_ui::Class_ui_from_from_event();
+      vx_core::vx_reserve_empty(vx_ui_ui::e_ui_from_from_event);
+      vx_ui_ui::t_ui_from_from_event = new vx_ui_ui::Class_ui_from_from_event();
+      vx_core::vx_reserve_type(vx_ui_ui::t_ui_from_from_event);
       vx_ui_ui::e_ui_layout_from_ui_layoutmap_else = new vx_ui_ui::Class_ui_layout_from_ui_layoutmap_else();
       vx_core::vx_reserve_empty(vx_ui_ui::e_ui_layout_from_ui_layoutmap_else);
       vx_ui_ui::t_ui_layout_from_ui_layoutmap_else = new vx_ui_ui::Class_ui_layout_from_ui_layoutmap_else();
       vx_core::vx_reserve_type(vx_ui_ui::t_ui_layout_from_ui_layoutmap_else);
+      vx_ui_ui::e_ui_readstate_from_uid = new vx_ui_ui::Class_ui_readstate_from_uid();
+      vx_core::vx_reserve_empty(vx_ui_ui::e_ui_readstate_from_uid);
+      vx_ui_ui::t_ui_readstate_from_uid = new vx_ui_ui::Class_ui_readstate_from_uid();
+      vx_core::vx_reserve_type(vx_ui_ui::t_ui_readstate_from_uid);
       vx_ui_ui::e_ui_render = new vx_ui_ui::Class_ui_render();
       vx_core::vx_reserve_empty(vx_ui_ui::e_ui_render);
       vx_ui_ui::t_ui_render = new vx_ui_ui::Class_ui_render();
@@ -6551,6 +7197,10 @@ namespace vx_ui_ui {
       vx_core::vx_reserve_empty(vx_ui_ui::e_ui_from_renderer_ui_orig_parent);
       vx_ui_ui::t_ui_from_renderer_ui_orig_parent = new vx_ui_ui::Class_ui_from_renderer_ui_orig_parent();
       vx_core::vx_reserve_type(vx_ui_ui::t_ui_from_renderer_ui_orig_parent);
+      vx_ui_ui::e_uiengine_readstate = new vx_ui_ui::Class_uiengine_readstate();
+      vx_core::vx_reserve_empty(vx_ui_ui::e_uiengine_readstate);
+      vx_ui_ui::t_uiengine_readstate = new vx_ui_ui::Class_uiengine_readstate();
+      vx_core::vx_reserve_type(vx_ui_ui::t_uiengine_readstate);
       vx_ui_ui::e_uiengine_render = new vx_ui_ui::Class_uiengine_render();
       vx_core::vx_reserve_empty(vx_ui_ui::e_uiengine_render);
       vx_ui_ui::t_uiengine_render = new vx_ui_ui::Class_uiengine_render();
@@ -6660,15 +7310,21 @@ namespace vx_ui_ui {
       mapconst["styletype-custom"] = vx_ui_ui::c_styletype_custom;
       mapconst["styletype-shared"] = vx_ui_ui::c_styletype_shared;
       mapconst["styletype-system"] = vx_ui_ui::c_styletype_system;
+      mapfunc["boolean-writestate<-ui"] = vx_ui_ui::t_boolean_writestate_from_ui;
+      mapfunc["boolean-writestate<-uiengine"] = vx_ui_ui::t_boolean_writestate_from_uiengine;
       mapfunc["layout<-style"] = vx_ui_ui::t_layout_from_style;
       mapfunc["layoutmap<-layoutlist"] = vx_ui_ui::t_layoutmap_from_layoutlist;
       mapfunc["stylemap<-stylelist"] = vx_ui_ui::t_stylemap_from_stylelist;
       mapfunc["stylesheet-render"] = vx_ui_ui::t_stylesheet_render;
+      mapfunc["ui-data<-ui"] = vx_ui_ui::t_ui_data_from_ui;
+      mapfunc["ui-from<-event"] = vx_ui_ui::t_ui_from_from_event;
       mapfunc["ui-layout<-ui-layoutmap-else"] = vx_ui_ui::t_ui_layout_from_ui_layoutmap_else;
+      mapfunc["ui-readstate<-uid"] = vx_ui_ui::t_ui_readstate_from_uid;
       mapfunc["ui-render"] = vx_ui_ui::t_ui_render;
       mapfunc["ui-render<-fn-render-ui-orig-parent"] = vx_ui_ui::t_ui_render_from_fn_render_ui_orig_parent;
       mapfunc["ui-render<-ui-orig-parent"] = vx_ui_ui::t_ui_render_from_ui_orig_parent;
       mapfunc["ui<-renderer-ui-orig-parent"] = vx_ui_ui::t_ui_from_renderer_ui_orig_parent;
+      mapfunc["uiengine-readstate"] = vx_ui_ui::t_uiengine_readstate;
       mapfunc["uiengine-render"] = vx_ui_ui::t_uiengine_render;
       mapfunc["uimap-layout<-uimap-layoutmap-else"] = vx_ui_ui::t_uimap_layout_from_uimap_layoutmap_else;
       mapfunc["uimap-render<-uimap-parent"] = vx_ui_ui::t_uimap_render_from_uimap_parent;

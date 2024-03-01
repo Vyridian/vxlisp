@@ -1135,7 +1135,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "32% 72/222")
+                  :text "32% 72/224")
                  (p
                   :style
                    (style
@@ -1143,7 +1143,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "6% 5/73")
+                  :text "6% 5/74")
                  (p
                   :style
                    (style
@@ -1159,7 +1159,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "48% 65/135")
+                  :text "47% 65/136")
                  (p
                   :style
                    (style
@@ -1167,7 +1167,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "89% 221/248")
+                  :text "89% 224/250")
                  (p
                   :style
                    (style
@@ -1175,7 +1175,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 1/161")
+                  :text "0% 1/162")
                  (p
                   :style
                    (style
@@ -1183,7 +1183,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 1/161"))
+                  :text "0% 1/162"))
                :nodes
                 (divchildlist
                  (div
@@ -6479,7 +6479,7 @@
                                  `(test
  "v2"
  (any<-map
-  (map
+  (stringmap
    :a "v1"
    :b "v2"
    :c "v3")
@@ -7495,7 +7495,9 @@
                                  `(test
  "b"
  (first<-list
-  (stringlist "b" "c")))`)))
+  (stringlist
+   "b"
+   "c")))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -7573,7 +7575,7 @@
                                 :text
                                  `(test
  "b"
- (first<-list-any<-any
+ (first<-list-any<-any : string
   (list nothing "b" "c")
   resolve))`)))
                             (td
@@ -9337,7 +9339,13 @@
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
                                     :white-space "pre"))
-                                :text `(test "c" (last<-list (list "b" "c")))`)))
+                                :text
+                                 `(test
+ "c"
+ (last<-list
+  (stringlist
+   "b"
+   "c")))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -29496,7 +29504,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/9")
+                  :text "0% 0/10")
                  (p
                   :style
                    (style
@@ -29520,7 +29528,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/2")
+                  :text "0% 0/3")
                  (p
                   :style
                    (style
@@ -29528,7 +29536,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "100% 9/9")
+                  :text "90% 9/10")
                  (p
                   :style
                    (style
@@ -29536,7 +29544,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/2")
+                  :text "0% 0/3")
                  (p
                   :style
                    (style
@@ -29544,7 +29552,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/2"))
+                  :text "0% 0/3"))
                :nodes
                 (divchildlist
                  (div
@@ -33456,7 +33464,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/3")
+                  :text "0% 0/13")
                  (p
                   :style
                    (style
@@ -33480,7 +33488,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/2")
+                  :text "0% 0/12")
                  (p
                   :style
                    (style
@@ -33488,7 +33496,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "33% 1/3")
+                  :text "84% 11/13")
                  (p
                   :style
                    (style
@@ -33496,7 +33504,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/2")
+                  :text "0% 0/12")
                  (p
                   :style
                    (style
@@ -33504,7 +33512,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/2"))
+                  :text "0% 0/12"))
                :nodes
                 (divchildlist
                  (div
@@ -38304,6 +38312,375 @@ ab
                      (propmap
                       :font-weight "bold"
                       :width "180px"))
+                  :text "vx/ui/html/uihtml")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "0% 0/19")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "100% 0/0")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "0% 0/4")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "0% 0/15")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "52% 10/19")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "0% 0/15")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "0% 0/15"))
+               :nodes
+                (divchildlist
+                 (div
+                  :nodes
+                   (divchildlist
+                    (table
+                     :tbody (tbody)
+                     :thead
+                      (thead
+                       :nodes
+                        (trlist
+                         (tr
+                          :nodes
+                           (tdlist
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :text "Pass?")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :text "Name")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :text "Test")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :text "Expected")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :text "Actual"))))))))))))))
+           (div
+            :nodes
+             (divchildlist
+              (details
+               :summary
+                (divchildlist
+                 (p
+                  :style
+                   (style
+                    :name ".passflag"
+                    :props
+                     (propmap
+                      :background-color "green"
+                      :color "white"
+                      :padding-left "4px"
+                      :padding-right "4px"
+                      :padding-top "1px"
+                      :padding-bottom "1px"))
+                  :text "Pass")
+                 (p
+                  :style
+                   (style
+                    :name ".pkgname"
+                    :props
+                     (propmap
+                      :font-weight "bold"
+                      :width "180px"))
+                  :text "vx/ui/svg/uisvg")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "100% 0/0")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "100% 0/0")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "100% 0/0")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "100% 0/0")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "100% 0/0")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "100% 0/0")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "100% 0/0"))
+               :nodes
+                (divchildlist
+                 (div
+                  :nodes
+                   (divchildlist
+                    (table
+                     :tbody (tbody)
+                     :thead
+                      (thead
+                       :nodes
+                        (trlist
+                         (tr
+                          :nodes
+                           (tdlist
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :text "Pass?")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :text "Name")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :text "Test")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :text "Expected")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :text "Actual"))))))))))))))
+           (div
+            :nodes
+             (divchildlist
+              (details
+               :summary
+                (divchildlist
+                 (p
+                  :style
+                   (style
+                    :name ".passflag"
+                    :props
+                     (propmap
+                      :background-color "green"
+                      :color "white"
+                      :padding-left "4px"
+                      :padding-right "4px"
+                      :padding-top "1px"
+                      :padding-bottom "1px"))
+                  :text "Pass")
+                 (p
+                  :style
+                   (style
+                    :name ".pkgname"
+                    :props
+                     (propmap
+                      :font-weight "bold"
+                      :width "180px"))
+                  :text "vx/ui/ui")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "0% 0/73")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "0% 0/21")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "0% 0/32")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "0% 0/20")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "46% 34/73")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "0% 0/20")
+                 (p
+                  :style
+                   (style
+                    :name ".coveragenums"
+                    :props
+                     (propmap
+                      :width "90px"))
+                  :text "0% 0/20"))
+               :nodes
+                (divchildlist
+                 (div
+                  :nodes
+                   (divchildlist
+                    (table
+                     :tbody (tbody)
+                     :thead
+                      (thead
+                       :nodes
+                        (trlist
+                         (tr
+                          :nodes
+                           (tdlist
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :text "Pass?")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :text "Name")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :text "Test")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :text "Expected")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :text "Actual"))))))))))))))
+           (div
+            :nodes
+             (divchildlist
+              (details
+               :summary
+                (divchildlist
+                 (p
+                  :style
+                   (style
+                    :name ".passflag"
+                    :props
+                     (propmap
+                      :background-color "green"
+                      :color "white"
+                      :padding-left "4px"
+                      :padding-right "4px"
+                      :padding-top "1px"
+                      :padding-bottom "1px"))
+                  :text "Pass")
+                 (p
+                  :style
+                   (style
+                    :name ".pkgname"
+                    :props
+                     (propmap
+                      :font-weight "bold"
+                      :width "180px"))
                   :text "vx/web/html")
                  (p
                   :style
@@ -39171,7 +39548,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/7")
+                  :text "0% 0/9")
                  (p
                   :style
                    (style
@@ -39195,7 +39572,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/7")
+                  :text "0% 0/9")
                  (p
                   :style
                    (style
@@ -39203,7 +39580,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "100% 7/7")
+                  :text "100% 9/9")
                  (p
                   :style
                    (style
@@ -39211,7 +39588,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/7")
+                  :text "0% 0/9")
                  (p
                   :style
                    (style
@@ -39219,7 +39596,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/7"))
+                  :text "0% 0/9"))
                :nodes
                 (divchildlist
                  (div

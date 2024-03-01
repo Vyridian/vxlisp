@@ -428,14 +428,20 @@
  :properties [pathmap : stringmap]
  :doc        "Settings")
 
-(type state : map
- :allowtypes [statelistener])
+(type state : struct
+ :properties [statelistenermap : statelistenermap]
+ :doc "State. Note that this type is has mutable values.")
 
 (type statelistener : struct
  :properties
-  [path       : string
+  [name       : string
    value      : any
    fn-boolean : boolean<-none])
+
+(type statelistenermap : map
+ :allowtypes [statelistener]
+ :mutable
+ :doc "Mutable map of statelisteners")
 
 (type string : string
  :default ""
@@ -987,8 +993,7 @@
    [reduce  : boolean
     current : any
     next    : any]
-   (and reduce (< current next)))
- )
+   (and reduce (< current next))))
  :alias "lt"
  :test (test-true
         (< 2 3))
@@ -1344,7 +1349,7 @@
  :test (test
         "v2"
         (any<-map
-         (map
+         (stringmap
           :a "v1"
           :b "v2"
           :c "v3")
@@ -1357,7 +1362,9 @@
   key       : string
   valueelse : any-1]
  (let : any-1
-  [value : any-1 := (any<-map valuemap key)]
+  [value : any-1 := (any<-map
+                     valuemap
+                     key)]
   (if : any-1
    (then
     (!-empty value)
@@ -1477,6 +1484,15 @@
   func)
  :context
  :doc "Returns true if the given func has permission.")
+
+(func boolean-write<-map-name-value : boolean
+ [valuemap : map-1
+  name     : string
+  value    : any-1]
+ (native
+  :js :auto)
+ :sideeffects "Alters a mutable map. Warning: vxlisp is immutable by design and this function will produce unexpected results."
+ :doc "Returns true if it alters a mutable map false if it fails.")
 
 (func case : thenelse
  [values : list-1
@@ -1654,7 +1670,9 @@
  :test (test
         "b"
         (first<-list
-         (stringlist "b" "c"))))
+         (stringlist
+          "b"
+          "c"))))
 
 (func first<-list-any<-any : any-1
  [values      : list-1
@@ -1691,7 +1709,7 @@
  :doc "Returns first value that is not nothing"
  :test (test
         "b"
-        (first<-list-any<-any
+        (first<-list-any<-any : string
          (list nothing "b" "c")
          resolve)))
 
@@ -2047,8 +2065,13 @@
  (let
   [len  : int := (length<-list values)]
   (any<-list values len))
- :doc  "Returns last value"
- :test (test "c" (last<-list (list "b" "c"))))
+ :test (test
+        "c"
+        (last<-list
+         (stringlist
+          "b"
+          "c")))
+ :doc  "Returns last value")
 
 (func length<-list : int
  [values : list-1]
@@ -2664,7 +2687,9 @@
 
 (func resolve-first : any-1
  [clauses : list-1 :...]
- (first<-list-any<-any clauses resolve)
+ (first<-list-any<-any
+  clauses
+  resolve)
  :doc "Returns the first value that is not nothing")
 
 (func resolve-list : list-1

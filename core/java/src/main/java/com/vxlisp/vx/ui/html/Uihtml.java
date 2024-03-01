@@ -207,6 +207,83 @@ public final class Uihtml {
   public static final Const_layoutenginehtml c_layoutenginehtml = new Const_layoutenginehtml();
 
   /**
+   * @function context_write
+   * @return {context}
+   * (func context-write)
+   */
+  public static interface Func_context_write extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_context vx_context_write(final Core.Type_context context);
+  }
+
+  public static class Class_context_write extends Core.Class_base implements Func_context_write {
+
+    @Override
+    public Func_context_write vx_new(Object... vals) {
+      Class_context_write output = new Class_context_write();
+      return output;
+    }
+
+    @Override
+    public Func_context_write vx_copy(Object... vals) {
+      Class_context_write output = new Class_context_write();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "context-write", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "context", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_context_write vx_empty() {return e_context_write;}
+    @Override
+    public Func_context_write vx_type() {return t_context_write;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
+      output = Uihtml.f_context_write(context);
+      return output;
+    }
+
+    @Override
+    public Core.Type_context vx_context_write(final Core.Type_context context) {
+      return Uihtml.f_context_write(context);
+    }
+
+  }
+
+  public static final Func_context_write e_context_write = new Uihtml.Class_context_write();
+  public static final Func_context_write t_context_write = new Uihtml.Class_context_write();
+
+  public static Core.Type_context f_context_write(final Core.Type_context context) {
+    Core.Type_context output = Core.e_context;
+    output = Htmldoc.f_context_write(context);
+    return output;
+  }
+
+  /**
    * @function divchild_from_ui
    * Returns a divchildlist of empty divs from a uimap
    * @param  {ui} ui
@@ -587,10 +664,8 @@ public final class Uihtml {
     output = Core.f_let(
       Html.t_node,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string uid = ui.uid();
-        final Event.Type_eventmap eventmap = ui.eventmap();
         final Core.Type_string htmltext = Html.f_string_from_node_indent(node, Core.vx_new_int(2));
-        final Core.Type_boolean htmldone = Htmldoc.f_boolean_replace_from_id_htmltext_data_eventmap(uid, htmltext, ui, eventmap);
+        final Core.Type_boolean htmldone = Htmldoc.f_boolean_replace_from_ui_htmltext(ui, htmltext);
         return node;
       })
     );
@@ -2296,6 +2371,7 @@ public final class Uihtml {
     mapconst.put("layout-else-html", Uihtml.c_layout_else_html);
     mapconst.put("layout-label-html", Uihtml.c_layout_label_html);
     mapconst.put("layoutenginehtml", Uihtml.c_layoutenginehtml);
+    mapfunc.put("context-write", Uihtml.t_context_write);
     mapfunc.put("divchild<-ui", Uihtml.t_divchild_from_ui);
     mapfunc.put("divchildlist<-uimap", Uihtml.t_divchildlist_from_uimap);
     mapfunc.put("node-app<-ui-orig-parent", Uihtml.t_node_app_from_ui_orig_parent);

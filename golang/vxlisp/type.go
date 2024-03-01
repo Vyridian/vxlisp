@@ -9,6 +9,7 @@ type vxtype struct {
 	extends        string
 	generic        string
 	isgeneric      bool
+	mutable        bool
 	properties     []vxarg
 	pkgname        string
 	traits         []*vxtype
@@ -85,6 +86,8 @@ var sessiontype = NewTypeStruct("vx/core/session")
 
 var settingtype = NewTypeStruct("vx/core/setting")
 
+var statetype = NewType("vx/core/state")
+
 var stringtype = NewType("vx/core/string")
 
 var stringprimitivetype = NewType("string")
@@ -94,8 +97,6 @@ var stringlisttype = NewTypeList("vx/core/stringlist", stringtype)
 var stringmaptype = NewTypeMap("vx/core/stringmap", stringtype)
 
 var structtype = NewTypeStruct("vx/core/struct")
-
-//var structtype1 = NewType("vx/core/struct-1")
 
 var structtype2 = NewType("vx/core/struct-2")
 
@@ -110,6 +111,9 @@ func NewContextType() *vxtype {
 	listprop = append(listprop, prop)
 	prop = NewArg("session")
 	prop.vxtype = sessiontype
+	listprop = append(listprop, prop)
+	prop = NewArg("state")
+	prop.vxtype = statetype
 	listprop = append(listprop, prop)
 	output := NewType("context")
 	output.pkgname = "vx/core"
@@ -150,7 +154,7 @@ func NewType(typename string) *vxtype {
 			isfound = true
 		}
 		if isfound {
-			typ.alias = StringSubstring(typename, 0, len(typename)-2)
+			typ.alias = "generic-" + typename
 			typ.isgeneric = true
 		}
 	}
@@ -214,7 +218,7 @@ func NewTypeList(typename string, basetype *vxtype) *vxtype {
 		isfound = true
 	}
 	if isfound {
-		typ.alias = StringSubstring(typename, 0, len(typename)-2)
+		typ.alias = "generic-" + typename
 		typ.isgeneric = true
 	}
 	return typ
@@ -237,7 +241,7 @@ func NewTypeMap(typename string, basetype *vxtype) *vxtype {
 		isfound = true
 	}
 	if isfound {
-		typ.alias = StringSubstring(typename, 0, len(typename)-2)
+		typ.alias = "generic-" + typename
 		typ.isgeneric = true
 	}
 	return typ
@@ -259,7 +263,7 @@ func NewTypeStruct(typename string) *vxtype {
 		isfound = true
 	}
 	if isfound {
-		typ.alias = StringSubstring(typename, 0, len(typename)-2)
+		typ.alias = "generic-" + typename
 		typ.isgeneric = true
 	}
 	return typ
@@ -766,14 +770,22 @@ func MapGenericSetType(mapgeneric map[string]*vxtype, generic string, typ *vxtyp
 	if BooleanFromStringStarts(generic, "list-") {
 		allowtype, ok := TypeAllowFromType(typ)
 		if ok {
-			generic = StringFromStringFindReplace(generic, "list-", "any-")
-			mapgeneric[generic] = allowtype
+			switch NameFromType(allowtype) {
+			case "vx/core/any":
+			default:
+				generic = StringFromStringFindReplace(generic, "list-", "any-")
+				mapgeneric[generic] = allowtype
+			}
 		}
 	} else if BooleanFromStringStarts(generic, "map-") {
 		allowtype, ok := TypeAllowFromType(typ)
 		if ok {
-			generic = StringFromStringFindReplace(generic, "map-", "any-")
-			mapgeneric[generic] = allowtype
+			switch NameFromType(allowtype) {
+			case "vx/core/any":
+			default:
+				generic = StringFromStringFindReplace(generic, "map-", "any-")
+				mapgeneric[generic] = allowtype
+			}
 		}
 	}
 	return mapgeneric
@@ -844,6 +856,7 @@ func StringFromTypeIndent(typ *vxtype, indent int) string {
 	output := "" +
 		initindent + "(type" +
 		lineindent + " :name     " + typ.name +
+		lineindent + " :alias    " + typ.alias +
 		lineindent + " :pkgname  " + typ.pkgname +
 		lineindent + " :extends  " + typ.extends
 	if typ.isfunc {
@@ -1081,6 +1094,8 @@ func TypeFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxtype, *vxmsgb
 				switch word {
 				case ":", ":alias", ":allowfuncs", ":allowtypes", ":allowvalues", ":convert", ":create", ":default", ":deprecated", ":destroy", ":disallowfuncs", ":disallowtypes", ":disallowvalues", ":doc", ":extends", ":properties", ":traits":
 					lastword = word
+				case ":mutable":
+					typ.mutable = true
 				case ":test":
 					testcls = true
 				default:

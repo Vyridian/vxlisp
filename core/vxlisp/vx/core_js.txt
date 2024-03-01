@@ -1,8 +1,11 @@
   // vx_any_from_func(generic_any_1, func, args...)
   static vx_any_from_func(generic_any_1, func, ...args) {
+    let output = vx_core.vx_empty(generic_any_1)
     const funcdef = func['vx_value']
-    const fn = funcdef['fn']
-    const output = fn.apply(null, args)
+    if (funcdef) {
+      const fn = funcdef['fn']
+      output = fn.apply(null, args)
+    }
     return output
   }
 
@@ -34,6 +37,14 @@
   // vx_boolean_from_string_starts(string, string)
   static vx_boolean_from_string_starts(text, starts) {
     return text.startsWith(starts);
+  }
+
+  // vx_boolean_write_from_map_name_value(map-1, string, any-1)
+  static vx_boolean_write_from_map_name_value(valuemap, name, value) {
+    let output = vx_core.c_true
+    const mapany = valuemap['vx_value']
+    mapany[name] = value
+    return output
   }
 
   static vx_empty(type) {

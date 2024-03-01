@@ -10041,70 +10041,36 @@ namespace vx_core {
       if (this->vx_p_msgblock) {
         vx_core::vx_release_one(this->vx_p_msgblock);
       }
-      for (auto const& [key, val] : this->vx_p_map) {
-        vx_core::vx_release_one(val);
-      }
+      vx_core::vx_release_one({
+        this->vx_p_statelistenermap
+      });
     }
 
-    // vx_map()
-    vx_core::vx_Type_mapany Class_state::vx_map() const {
-      vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any, this->vx_p_map);
-      return output;
-    }
-
-    // vx_get_statelistener(key)
-    vx_core::Type_statelistener Class_state::vx_get_statelistener(vx_core::Type_string key) const {
-      vx_core::Type_statelistener output = vx_core::e_statelistener;
-      const vx_core::Class_state* map = this;
-      std::string skey = key->vx_string();
-      if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
-        skey = vx_core::vx_string_from_string_start(skey, 2);
+    // statelistenermap()
+    vx_core::Type_statelistenermap Class_state::statelistenermap() const {
+      vx_core::Type_statelistenermap output = this->vx_p_statelistenermap;
+      if (!output) {
+        output = vx_core::e_statelistenermap;
       }
-      std::map<std::string, vx_core::Type_statelistener> mapval = map->vx_p_map;
-      output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_statelistener);
-      vx_core::vx_release_except(key, output);
       return output;
     }
 
     // vx_get_any(key)
     vx_core::Type_any Class_state::vx_get_any(vx_core::Type_string key) const {
-      return this->vx_get_statelistener(key);
+      vx_core::Type_any output = vx_core::e_any;
+      std::string skey = key->vx_string();
+      if (false) {
+      } else if (skey == ":statelistenermap") {
+        output = this->statelistenermap();
+      }
+      vx_core::vx_release_except(key, output);
+      return output;
     }
 
-    // vx_mapstatelistener()
-    std::map<std::string, vx_core::Type_statelistener> Class_state::vx_mapstatelistener() const {return this->vx_p_map;}
-
-    // vx_new_from_map(mapval)
-    vx_core::Type_any Class_state::vx_new_from_map(vx_core::vx_Type_mapany mapval) const {
-      vx_core::Type_state output = vx_core::e_state;
-      vx_core::Type_msgblock msgblock = vx_core::e_msgblock;
-      std::map<std::string, vx_core::Type_statelistener> map;
-      for (auto const& iter : mapval) {
-        std::string key = iter.first;
-        vx_core::Type_any val = iter.second;
-        vx_core::Type_any valtype = val->vx_type();
-        if (valtype == vx_core::t_statelistener) {
-          vx_core::Type_statelistener castval = vx_core::vx_any_from_any(vx_core::t_statelistener, val);
-          map[key] = castval;
-        } else {
-          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(state) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
-          msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
-        }
-      }
-      if ((map.size() > 0) || (msgblock != vx_core::e_msgblock)) {
-        output = new vx_core::Class_state();
-        output->vx_p_map = map;
-        for (auto const& [key, val] : map) {
-          vx_core::vx_reserve(val);
-        }
-        if (msgblock != vx_core::e_msgblock) {
-          output->vx_p_msgblock = msgblock;
-          vx_core::vx_reserve(msgblock);
-        }
-      }
-      for (auto const& [key, val] : mapval) {
-        vx_core::vx_release_except(val, output);
-      }
+    // vx_map()
+    vx_core::vx_Type_mapany Class_state::vx_map() const {
+      vx_core::vx_Type_mapany output;
+      output[":statelistenermap"] = this->statelistenermap();
       return output;
     }
 
@@ -10118,60 +10084,61 @@ namespace vx_core {
       if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
       }
-      vx_core::Type_state valmap = vx_core::vx_any_from_any(vx_core::t_state, copyval);
-      output = valmap;
-      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
-      std::map<std::string, vx_core::Type_statelistener> mapval = valmap->vx_mapstatelistener();
-      std::vector<std::string> keys = valmap->vx_p_keys;
-      std::string skey = "";
+      vx_core::Type_state val = vx_core::vx_any_from_any(vx_core::t_state, copyval);
+      output = val;
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      vx_core::Type_statelistenermap vx_p_statelistenermap = val->statelistenermap();
+      std::string key = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
         if (valsubtype == vx_core::t_msgblock) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
         } else if (valsubtype == vx_core::t_msg) {
           msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (skey == "") {
+        } else if (key == "") {
+          std::string testkey = "";
           if (valsubtype == vx_core::t_string) {
-            vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
-            skey = valstring->vx_string();
-            if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
-              skey = vx_core::vx_string_from_string_start(skey, 2);
-            }
+            vx_core::Type_string valstr = vx_core::vx_any_from_any(vx_core::t_string, valsub);
+            testkey = valstr->vx_string();
+          }
+          if (false) {
+          } else if (testkey == ":statelistenermap") {
+            key = testkey;
           } else {
-            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new state) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
         } else {
-          vx_core::Type_statelistener valany = NULL;
-          if (valsubtype == vx_core::t_statelistener) {
-            valany = vx_core::vx_any_from_any(vx_core::t_statelistener, valsub);
-          } else if (valsubtype == vx_core::t_statelistener) {
-            valany = vx_core::vx_any_from_any(vx_core::t_statelistener, valsub);
+          if (false) {
+          } else if (key == ":statelistenermap") {
+            if (vx_p_statelistenermap == valsub) {
+            } else if (valsubtype == vx_core::t_statelistenermap) {
+              ischanged = true;
+              vx_p_statelistenermap = vx_core::vx_any_from_any(vx_core::t_statelistenermap, valsub);
+            } else {
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new state :statelistenermap " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              msgblock = vx_core::vx_copy(msgblock, {msg});
+            }
           } else {
-            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + skey + " "  + vx_core::vx_string_from_any(valsub) + "");
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new state) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
           }
-          if (valany) {
-            ischanged = true;
-            mapval[skey] = valany;
-            if (!vx_core::vx_boolean_from_list_find(keys, skey)) {
-          	 		keys.push_back(skey);
-            }
-            skey = "";
-          }
+          key = "";
         }
       }
       if (ischanged || (msgblock != vx_core::e_msgblock)) {
         output = new vx_core::Class_state();
-        output->vx_p_keys = keys;
-        output->vx_p_map = mapval;
-        for (auto const& [key, val] : mapval) {
-          vx_core::vx_reserve(val);
+        if (output->vx_p_statelistenermap != vx_p_statelistenermap) {
+          if (output->vx_p_statelistenermap) {
+            vx_core::vx_release_one(output->vx_p_statelistenermap);
+          }
+          output->vx_p_statelistenermap = vx_p_statelistenermap;
+          vx_core::vx_reserve(vx_p_statelistenermap);
         }
-        if (msgblock != vx_core::e_msgblock) {
-          output->vx_p_msgblock = msgblock;
-          vx_core::vx_reserve(msgblock);
-        }
+      }
+      if (msgblock != vx_core::e_msgblock) {
+        output->vx_p_msgblock = msgblock;
+        vx_core::vx_reserve(msgblock);
       }
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
@@ -10187,15 +10154,20 @@ namespace vx_core {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/core", // pkgname
         "state", // name
-        ":map", // extends
+        ":struct", // extends
         vx_core::e_typelist, // traits
-        vx_core::vx_typelist_from_listany({vx_core::t_statelistener}), // allowtypes
+        vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
         vx_core::e_funclist, // allowfuncs
         vx_core::e_funclist, // disallowfuncs
         vx_core::e_anylist, // allowvalues
         vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
+        vx_core::vx_argmap_from_listarg({
+          vx_core::vx_new_arg(
+            "statelistenermap", // name
+            vx_core::t_statelistenermap // type
+          )
+        }) // properties
       );
       return output;
     }
@@ -10219,15 +10191,15 @@ namespace vx_core {
         vx_core::vx_release_one(this->vx_p_msgblock);
       }
       vx_core::vx_release_one({
-        this->vx_p_path,
+        this->vx_p_name,
         this->vx_p_value,
         this->vx_p_fn_boolean
       });
     }
 
-    // path()
-    vx_core::Type_string Class_statelistener::path() const {
-      vx_core::Type_string output = this->vx_p_path;
+    // name()
+    vx_core::Type_string Class_statelistener::name() const {
+      vx_core::Type_string output = this->vx_p_name;
       if (!output) {
         output = vx_core::e_string;
       }
@@ -10257,8 +10229,8 @@ namespace vx_core {
       vx_core::Type_any output = vx_core::e_any;
       std::string skey = key->vx_string();
       if (false) {
-      } else if (skey == ":path") {
-        output = this->path();
+      } else if (skey == ":name") {
+        output = this->name();
       } else if (skey == ":value") {
         output = this->value();
       } else if (skey == ":fn-boolean") {
@@ -10271,7 +10243,7 @@ namespace vx_core {
     // vx_map()
     vx_core::vx_Type_mapany Class_statelistener::vx_map() const {
       vx_core::vx_Type_mapany output;
-      output[":path"] = this->path();
+      output[":name"] = this->name();
       output[":value"] = this->value();
       output[":fn-boolean"] = this->fn_boolean();
       return output;
@@ -10290,7 +10262,7 @@ namespace vx_core {
       vx_core::Type_statelistener val = vx_core::vx_any_from_any(vx_core::t_statelistener, copyval);
       output = val;
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
-      vx_core::Type_string vx_p_path = val->path();
+      vx_core::Type_string vx_p_name = val->name();
       vx_core::Type_any vx_p_value = val->value();
       vx_core::Func_boolean_from_none vx_p_fn_boolean = val->fn_boolean();
       std::string key = "";
@@ -10307,7 +10279,7 @@ namespace vx_core {
             testkey = valstr->vx_string();
           }
           if (false) {
-          } else if (testkey == ":path") {
+          } else if (testkey == ":name") {
             key = testkey;
           } else if (testkey == ":value") {
             key = testkey;
@@ -10319,13 +10291,13 @@ namespace vx_core {
           }
         } else {
           if (false) {
-          } else if (key == ":path") {
-            if (vx_p_path == valsub) {
+          } else if (key == ":name") {
+            if (vx_p_name == valsub) {
             } else if (valsubtype == vx_core::t_string) {
               ischanged = true;
-              vx_p_path = vx_core::vx_any_from_any(vx_core::t_string, valsub);
+              vx_p_name = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new statelistener :path " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new statelistener :name " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":value") {
@@ -10351,12 +10323,12 @@ namespace vx_core {
       }
       if (ischanged || (msgblock != vx_core::e_msgblock)) {
         output = new vx_core::Class_statelistener();
-        if (output->vx_p_path != vx_p_path) {
-          if (output->vx_p_path) {
-            vx_core::vx_release_one(output->vx_p_path);
+        if (output->vx_p_name != vx_p_name) {
+          if (output->vx_p_name) {
+            vx_core::vx_release_one(output->vx_p_name);
           }
-          output->vx_p_path = vx_p_path;
-          vx_core::vx_reserve(vx_p_path);
+          output->vx_p_name = vx_p_name;
+          vx_core::vx_reserve(vx_p_name);
         }
         if (output->vx_p_value != vx_p_value) {
           if (output->vx_p_value) {
@@ -10401,7 +10373,7 @@ namespace vx_core {
         vx_core::e_anylist, // disallowvalues
         vx_core::vx_argmap_from_listarg({
           vx_core::vx_new_arg(
-            "path", // name
+            "name", // name
             vx_core::t_string // type
           ),
           vx_core::vx_new_arg(
@@ -10418,6 +10390,183 @@ namespace vx_core {
     }
 
     vx_core::Type_constdef Class_statelistener::vx_constdef() const {return this->vx_p_constdef;}
+
+
+  //}
+
+  // (type statelistenermap)
+  // class Class_statelistenermap {
+    Abstract_statelistenermap::~Abstract_statelistenermap() {}
+
+    Class_statelistenermap::Class_statelistenermap() : Abstract_statelistenermap::Abstract_statelistenermap() {
+      vx_core::refcount += 1;
+    }
+
+    Class_statelistenermap::~Class_statelistenermap() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+      for (auto const& [key, val] : this->vx_p_map) {
+        vx_core::vx_release_one(val);
+      }
+    }
+
+    // vx_map()
+    vx_core::vx_Type_mapany Class_statelistenermap::vx_map() const {
+      vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any, this->vx_p_map);
+      return output;
+    }
+
+    // vx_get_statelistener(key)
+    vx_core::Type_statelistener Class_statelistenermap::vx_get_statelistener(vx_core::Type_string key) const {
+      vx_core::Type_statelistener output = vx_core::e_statelistener;
+      const vx_core::Class_statelistenermap* map = this;
+      std::string skey = key->vx_string();
+      if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+        skey = vx_core::vx_string_from_string_start(skey, 2);
+      }
+      std::map<std::string, vx_core::Type_statelistener> mapval = map->vx_p_map;
+      output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_statelistener);
+      vx_core::vx_release_except(key, output);
+      return output;
+    }
+
+    // vx_get_any(key)
+    vx_core::Type_any Class_statelistenermap::vx_get_any(vx_core::Type_string key) const {
+      return this->vx_get_statelistener(key);
+    }
+
+    // vx_mapstatelistener()
+    std::map<std::string, vx_core::Type_statelistener> Class_statelistenermap::vx_mapstatelistener() const {return this->vx_p_map;}
+
+    // vx_new_from_map(mapval)
+    vx_core::Type_any Class_statelistenermap::vx_new_from_map(vx_core::vx_Type_mapany mapval) const {
+      vx_core::Type_statelistenermap output = vx_core::e_statelistenermap;
+      vx_core::Type_msgblock msgblock = vx_core::e_msgblock;
+      std::map<std::string, vx_core::Type_statelistener> map;
+      for (auto const& iter : mapval) {
+        std::string key = iter.first;
+        vx_core::Type_any val = iter.second;
+        vx_core::Type_any valtype = val->vx_type();
+        if (valtype == vx_core::t_statelistener) {
+          vx_core::Type_statelistener castval = vx_core::vx_any_from_any(vx_core::t_statelistener, val);
+          map[key] = castval;
+        } else {
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(statelistenermap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
+          msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
+        }
+      }
+      if ((map.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_core::Class_statelistenermap();
+        output->vx_p_map = map;
+        for (auto const& [key, val] : map) {
+          vx_core::vx_reserve(val);
+        }
+        if (msgblock != vx_core::e_msgblock) {
+          output->vx_p_msgblock = msgblock;
+          vx_core::vx_reserve(msgblock);
+        }
+      }
+      for (auto const& [key, val] : mapval) {
+        vx_core::vx_release_except(val, output);
+      }
+      return output;
+    }
+
+    vx_core::Type_any Class_statelistenermap::vx_new(vx_core::vx_Type_listany vals) const {
+      return this->vx_copy(vx_core::e_statelistenermap, vals);
+    }
+
+    vx_core::Type_any Class_statelistenermap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Type_statelistenermap output = vx_core::e_statelistenermap;
+      bool ischanged = false;
+      if (copyval->vx_p_constdef != NULL) {
+        ischanged = true;
+      }
+      vx_core::Type_statelistenermap valmap = vx_core::vx_any_from_any(vx_core::t_statelistenermap, copyval);
+      output = valmap;
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      std::map<std::string, vx_core::Type_statelistener> mapval = valmap->vx_mapstatelistener();
+      std::vector<std::string> keys = valmap->vx_p_keys;
+      std::string skey = "";
+      for (vx_core::Type_any valsub : vals) {
+        vx_core::Type_any valsubtype = valsub->vx_type();
+        if (valsubtype == vx_core::t_msgblock) {
+          msgblock = vx_core::vx_copy(msgblock, {valsub});
+        } else if (valsubtype == vx_core::t_msg) {
+          msgblock = vx_core::vx_copy(msgblock, {valsub});
+        } else if (skey == "") {
+          if (valsubtype == vx_core::t_string) {
+            vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
+            skey = valstring->vx_string();
+            if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+              skey = vx_core::vx_string_from_string_start(skey, 2);
+            }
+          } else {
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            msgblock = vx_core::vx_copy(msgblock, {msg});
+          }
+        } else {
+          vx_core::Type_statelistener valany = NULL;
+          if (valsubtype == vx_core::t_statelistener) {
+            valany = vx_core::vx_any_from_any(vx_core::t_statelistener, valsub);
+          } else if (valsubtype == vx_core::t_statelistener) {
+            valany = vx_core::vx_any_from_any(vx_core::t_statelistener, valsub);
+          } else {
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + skey + " "  + vx_core::vx_string_from_any(valsub) + "");
+            msgblock = vx_core::vx_copy(msgblock, {msg});
+          }
+          if (valany) {
+            ischanged = true;
+            mapval[skey] = valany;
+            if (!vx_core::vx_boolean_from_list_find(keys, skey)) {
+          	 		keys.push_back(skey);
+            }
+            skey = "";
+          }
+        }
+      }
+      if (ischanged || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_core::Class_statelistenermap();
+        output->vx_p_keys = keys;
+        output->vx_p_map = mapval;
+        for (auto const& [key, val] : mapval) {
+          vx_core::vx_reserve(val);
+        }
+        if (msgblock != vx_core::e_msgblock) {
+          output->vx_p_msgblock = msgblock;
+          vx_core::vx_reserve(msgblock);
+        }
+      }
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_msgblock Class_statelistenermap::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany vx_core::Class_statelistenermap::vx_dispose() {return vx_core::emptylistany;}
+    vx_core::Type_any Class_statelistenermap::vx_empty() const {return vx_core::e_statelistenermap;}
+    vx_core::Type_any Class_statelistenermap::vx_type() const {return vx_core::t_statelistenermap;}
+
+    vx_core::Type_typedef Class_statelistenermap::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "statelistenermap", // name
+        ":map", // extends
+        vx_core::e_typelist, // traits
+        vx_core::vx_typelist_from_listany({vx_core::t_statelistener}), // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_statelistenermap::vx_constdef() const {return this->vx_p_constdef;}
 
 
   //}
@@ -20286,6 +20435,89 @@ namespace vx_core {
 
   //}
 
+  // (func boolean-write<-map-name-value)
+  vx_core::Type_boolean f_boolean_write_from_map_name_value(vx_core::Type_map valuemap, vx_core::Type_string name, vx_core::Type_any value) {
+    vx_core::Type_boolean output = vx_core::e_boolean;
+    vx_core::vx_reserve({valuemap, name, value});
+    vx_core::vx_release_one_except({valuemap, name, value}, output);
+    return output;
+  }
+
+  // (func boolean-write<-map-name-value)
+  // class Class_boolean_write_from_map_name_value {
+    Abstract_boolean_write_from_map_name_value::~Abstract_boolean_write_from_map_name_value() {}
+
+    Class_boolean_write_from_map_name_value::Class_boolean_write_from_map_name_value() : Abstract_boolean_write_from_map_name_value::Abstract_boolean_write_from_map_name_value() {
+      vx_core::refcount += 1;
+    }
+
+    Class_boolean_write_from_map_name_value::~Class_boolean_write_from_map_name_value() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_boolean_write_from_map_name_value::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_core::Func_boolean_write_from_map_name_value output = vx_core::e_boolean_write_from_map_name_value;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_write_from_map_name_value::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Func_boolean_write_from_map_name_value output = vx_core::e_boolean_write_from_map_name_value;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_boolean_write_from_map_name_value::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "boolean-write<-map-name-value", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_boolean_write_from_map_name_value::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_boolean_write_from_map_name_value::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/core", // pkgname
+        "boolean-write<-map-name-value", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_write_from_map_name_value::vx_empty() const {return vx_core::e_boolean_write_from_map_name_value;}
+    vx_core::Type_any Class_boolean_write_from_map_name_value::vx_type() const {return vx_core::t_boolean_write_from_map_name_value;}
+    vx_core::Type_msgblock Class_boolean_write_from_map_name_value::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_boolean_write_from_map_name_value::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_boolean_write_from_map_name_value::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_map valuemap = vx_core::vx_any_from_any(vx_core::t_map, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_string name = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(2)));
+      output = vx_core::f_boolean_write_from_map_name_value(valuemap, name, value);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func compare)
   vx_core::Type_int f_compare(vx_core::Type_any val1, vx_core::Type_any val2) {
     vx_core::Type_int output = vx_core::e_int;
@@ -27331,6 +27563,8 @@ namespace vx_core {
   vx_core::Type_state t_state = NULL;
   vx_core::Type_statelistener e_statelistener = NULL;
   vx_core::Type_statelistener t_statelistener = NULL;
+  vx_core::Type_statelistenermap e_statelistenermap = NULL;
+  vx_core::Type_statelistenermap t_statelistenermap = NULL;
   vx_core::Type_stringlist e_stringlist = NULL;
   vx_core::Type_stringlist t_stringlist = NULL;
   vx_core::Type_stringmap e_stringmap = NULL;
@@ -27537,6 +27771,8 @@ namespace vx_core {
   vx_core::Func_any_from_map_start_reduce t_any_from_map_start_reduce = NULL;
   vx_core::Func_boolean_permission_from_func e_boolean_permission_from_func = NULL;
   vx_core::Func_boolean_permission_from_func t_boolean_permission_from_func = NULL;
+  vx_core::Func_boolean_write_from_map_name_value e_boolean_write_from_map_name_value = NULL;
+  vx_core::Func_boolean_write_from_map_name_value t_boolean_write_from_map_name_value = NULL;
   vx_core::Func_compare e_compare = NULL;
   vx_core::Func_compare t_compare = NULL;
   vx_core::Func_contains e_contains = NULL;
@@ -27954,6 +28190,10 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_statelistener);
       vx_core::t_statelistener = new Class_statelistener();
       vx_core::vx_reserve_type(vx_core::t_statelistener);
+      vx_core::e_statelistenermap = new Class_statelistenermap();
+      vx_core::vx_reserve_empty(vx_core::e_statelistenermap);
+      vx_core::t_statelistenermap = new Class_statelistenermap();
+      vx_core::vx_reserve_type(vx_core::t_statelistenermap);
       vx_core::e_stringlist = new Class_stringlist();
       vx_core::vx_reserve_empty(vx_core::e_stringlist);
       vx_core::t_stringlist = new Class_stringlist();
@@ -28338,6 +28578,10 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_boolean_permission_from_func);
       vx_core::t_boolean_permission_from_func = new vx_core::Class_boolean_permission_from_func();
       vx_core::vx_reserve_type(vx_core::t_boolean_permission_from_func);
+      vx_core::e_boolean_write_from_map_name_value = new vx_core::Class_boolean_write_from_map_name_value();
+      vx_core::vx_reserve_empty(vx_core::e_boolean_write_from_map_name_value);
+      vx_core::t_boolean_write_from_map_name_value = new vx_core::Class_boolean_write_from_map_name_value();
+      vx_core::vx_reserve_type(vx_core::t_boolean_write_from_map_name_value);
       vx_core::e_compare = new vx_core::Class_compare();
       vx_core::vx_reserve_empty(vx_core::e_compare);
       vx_core::t_compare = new vx_core::Class_compare();
@@ -28725,6 +28969,7 @@ namespace vx_core {
       maptype["setting"] = vx_core::t_setting;
       maptype["state"] = vx_core::t_state;
       maptype["statelistener"] = vx_core::t_statelistener;
+      maptype["statelistenermap"] = vx_core::t_statelistenermap;
       maptype["stringlist"] = vx_core::t_stringlist;
       maptype["stringmap"] = vx_core::t_stringmap;
       maptype["thenelse"] = vx_core::t_thenelse;
@@ -28835,6 +29080,7 @@ namespace vx_core {
       mapfunc["any<-int"] = vx_core::t_any_from_int;
       mapfunc["any<-map-start-reduce"] = vx_core::t_any_from_map_start_reduce;
       mapfunc["boolean-permission<-func"] = vx_core::t_boolean_permission_from_func;
+      mapfunc["boolean-write<-map-name-value"] = vx_core::t_boolean_write_from_map_name_value;
       mapfunc["compare"] = vx_core::t_compare;
       mapfunc["contains"] = vx_core::t_contains;
       mapfunc["contains_1"] = vx_core::t_contains_1;

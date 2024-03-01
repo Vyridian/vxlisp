@@ -89,7 +89,9 @@ public final class Repl {
     }
 
     @Override
-    public Type_liblist vx_new(final Object... vals) {return e_liblist.vx_copy(vals);}
+    public Type_liblist vx_new(final Object... vals) {
+      return e_liblist.vx_copy(vals);
+    }
 
     @Override
     public Type_liblist vx_copy(final Object... vals) {
@@ -275,7 +277,9 @@ public final class Repl {
     }
 
     @Override
-    public Type_repl vx_new(final Object... vals) {return e_repl.vx_copy(vals);}
+    public Type_repl vx_new(final Object... vals) {
+      return e_repl.vx_copy(vals);
+    }
 
     @Override
     public Type_repl vx_copy(final Object... vals) {
@@ -587,7 +591,9 @@ public final class Repl {
     }
 
     @Override
-    public Type_replarglist vx_new(final Object... vals) {return e_replarglist.vx_copy(vals);}
+    public Type_replarglist vx_new(final Object... vals) {
+      return e_replarglist.vx_copy(vals);
+    }
 
     @Override
     public Type_replarglist vx_copy(final Object... vals) {
@@ -800,7 +806,9 @@ public final class Repl {
     }
 
     @Override
-    public Type_repllist vx_new(final Object... vals) {return e_repllist.vx_copy(vals);}
+    public Type_repllist vx_new(final Object... vals) {
+      return e_repllist.vx_copy(vals);
+    }
 
     @Override
     public Type_repllist vx_copy(final Object... vals) {

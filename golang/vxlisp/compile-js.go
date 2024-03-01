@@ -18,12 +18,12 @@ func JsDocFromFunc(fnc *vxfunc) string {
 	for _, arg := range fnc.listarg {
 		argsdoc += "\n@param "
 		if arg.vxtype.name != "" {
-			argsdoc += " {" + JsFromName(arg.vxtype.alias) + "}"
+			argsdoc += " {" + LangFromName(arg.vxtype.alias) + "}"
 		}
 		if arg.multi {
 			argsdoc += " ..."
 		}
-		argsdoc += " " + JsFromName(arg.alias)
+		argsdoc += " " + LangFromName(arg.alias)
 		if arg.doc != "" {
 			argsdoc += " " + arg.doc
 		}
@@ -31,7 +31,7 @@ func JsDocFromFunc(fnc *vxfunc) string {
 	if fnc.async {
 		doc += "\n@async "
 	}
-	doc += "@function " + JsFromName(fnc.alias)
+	doc += "@function " + LangFromName(fnc.alias)
 	if fnc.doc != "" {
 		doc += "\n" + fnc.doc
 	}
@@ -56,7 +56,7 @@ func JsEmptyValueFromTypeIndent(typ *vxtype, indent string) string {
 		case "string":
 			output = "\"" + output + "\""
 		case ":list":
-			output = "vx_core.f_type_to_list(" + JsFromName(typ.pkgname) + ".t_" + typ.name + ")"
+			output = "vx_core.f_type_to_list(" + LangFromName(typ.pkgname) + ".t_" + typ.name + ")"
 		default:
 			properties := ListPropertyTraitFromType(typ)
 			if len(properties) > 0 {
@@ -135,12 +135,12 @@ func JsFilesFromProjectCmd(lang *vxlang, project *vxproject, command *vxcommand)
 	return files, msgblock
 }
 
-func JsFromArg(arg vxarg, indent string) string {
+func JsFromArg(lang *vxlang, arg vxarg, indent string) string {
 	output := "{}"
 	if arg.name != "" {
 		var props []string
 		key := arg.name
-		typ := JsNameTFromType(arg.vxtype)
+		typ := LangNameTFromType(lang, arg.vxtype)
 		props = append(props, "\"name\" : \""+key+"\"")
 		props = append(props, "\"type\" : "+typ)
 		props = append(props, "\"multi\": "+StringFromBoolean(arg.multi))
@@ -152,13 +152,13 @@ func JsFromArg(arg vxarg, indent string) string {
 	return output
 }
 
-func JsFromArgs(args []vxarg, indent string) string {
+func JsFromArgs(lang *vxlang, args []vxarg, indent string) string {
 	var output = "{"
 	if len(args) > 0 {
 		var props []string
 		for _, arg := range args {
 			key := arg.name
-			argtext := JsFromArg(arg, indent+"  ")
+			argtext := JsFromArg(lang, arg, indent+"  ")
 			props = append(props, "\""+key+"\": "+argtext)
 		}
 		output += "" +
@@ -184,8 +184,8 @@ func JsFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string, *
 	cnsttype := cnst.vxtype
 	var properties []string
 	doc += "{" + cnsttype.name + "}"
-	pkgname := JsFromName(cnst.pkgname)
-	cnstname := JsFromName(cnst.alias)
+	pkgname := LangFromName(cnst.pkgname)
+	cnstname := LangFromName(cnst.alias)
 	startval := ""
 	var value = ""
 	if cnst.value.code == "" {
@@ -204,7 +204,7 @@ func JsFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string, *
 	case "vx/core/string":
 		startval = value
 	default:
-		startval = "{vx_type: " + JsNameTFromType(cnsttype) + ", vx_constdef: {pkgname: '" + cnst.pkgname + "', name: '" + cnst.name + "'}}"
+		startval = "{vx_type: " + LangNameTFromType(lang, cnsttype) + ", vx_constdef: {pkgname: '" + cnst.pkgname + "', name: '" + cnst.name + "'}}"
 		switch cnst.vxtype.extends {
 		case ":list":
 			startval = "Object.assign([], " + startval + ")"
@@ -244,7 +244,7 @@ func JsFromFunc(lang *vxlang, fnc *vxfunc) (string, string, *vxmsgblock) {
 			keys := ListKeyFromMapType(fnc.mapgeneric)
 			for _, key := range keys {
 				genericvars += "" +
-					"\n    const generic_" + JsFromName(key) + " = generic[\"" + key + "\"]"
+					"\n    const generic_" + LangFromName(key) + " = generic[\"" + key + "\"]"
 			}
 		}
 	}
@@ -252,7 +252,7 @@ func JsFromFunc(lang *vxlang, fnc *vxfunc) (string, string, *vxmsgblock) {
 		args = append(args, "context")
 	}
 	for _, arg := range fnc.listarg {
-		argname := JsFromName(arg.alias)
+		argname := LangFromName(arg.alias)
 		if arg.multi {
 			args = append(args, "..."+argname)
 		} else {
@@ -262,7 +262,7 @@ func JsFromFunc(lang *vxlang, fnc *vxfunc) (string, string, *vxmsgblock) {
 	doc := JsDocFromFunc(fnc)
 	indent := 2
 	footer := ""
-	jsfuncname := JsFromName(fnc.alias) + JsIndexFromFunc(fnc)
+	jsfuncname := LangFromName(fnc.alias) + JsIndexFromFunc(fnc)
 	var properties []string
 	properties = append(properties, "name          : \""+fnc.name+"\"")
 	properties = append(properties, "pkgname       : \""+fnc.pkgname+"\"")
@@ -277,12 +277,12 @@ func JsFromFunc(lang *vxlang, fnc *vxfunc) (string, string, *vxmsgblock) {
 	properties = append(properties, "traits        : []")
 	properties = append(properties, "properties    : []")
 	properties = append(properties, "proplast      : {}")
-	properties = append(properties, "fn            : "+JsFromName(fnc.pkgname)+".f_"+jsfuncname)
+	properties = append(properties, "fn            : "+LangFromName(fnc.pkgname)+".f_"+jsfuncname)
 	proptext := ""
 	if len(properties) > 0 {
 		proptext = "\n      " + strings.Join(properties, ",\n      ")
 	}
-	jstname := JsFromName(fnc.pkgname) + ".t_" + jsfuncname
+	jstname := LangFromName(fnc.pkgname) + ".t_" + jsfuncname
 	statics := "" +
 		"\n    // (func " + fnc.name + ")" +
 		//"\n    " + jstname + "['vx_type'] = vx_core.t_type" +
@@ -321,7 +321,7 @@ func JsFromFunc(lang *vxlang, fnc *vxfunc) (string, string, *vxmsgblock) {
 		if fnc.vxtype.name == "none" {
 		} else {
 			if fnc.generictype != nil {
-				defaultvalue = "vx_core.f_empty(generic_" + JsFromName(fnc.generictype.name) + ")"
+				defaultvalue = "vx_core.f_empty(generic_" + LangFromName(fnc.generictype.name) + ")"
 			} else {
 				defaultvalue = JsNameEFromType(fnc.vxtype)
 			}
@@ -332,7 +332,7 @@ func JsFromFunc(lang *vxlang, fnc *vxfunc) (string, string, *vxmsgblock) {
 		}
 		for _, arg := range fnc.listarg {
 			if arg.multi {
-				defaultvalue += lineindent + arg.alias + " = vx_core.f_new(" + JsNameTFromType(arg.vxtype) + ", ..." + arg.alias + ")"
+				defaultvalue += lineindent + arg.alias + " = vx_core.f_new(" + LangNameTFromTypeGeneric(lang, arg.vxtype) + ", ..." + arg.alias + ")"
 			}
 		}
 	}
@@ -368,7 +368,7 @@ func JsFromFunc(lang *vxlang, fnc *vxfunc) (string, string, *vxmsgblock) {
 		"\n    vx_type: vx_core.t_type" +
 		"\n  }" +
 		"\n  static e_" + jsfuncname + " = {" +
-		"\n    vx_type: " + JsFromName(fnc.pkgname) + ".t_" + jsfuncname +
+		"\n    vx_type: " + LangFromName(fnc.pkgname) + ".t_" + jsfuncname +
 		"\n  }" +
 		"\n" +
 		header +
@@ -383,6 +383,7 @@ func JsFromFunc(lang *vxlang, fnc *vxfunc) (string, string, *vxmsgblock) {
 	return output, statics, msgblock
 }
 
+/*
 func JsFromName(name string) string {
 	output := name
 	output = StringFromStringFindReplace(output, "->", "_to_")
@@ -394,6 +395,7 @@ func JsFromName(name string) string {
 	output = StringFromStringFindReplace(output, "/", "_")
 	return output
 }
+*/
 
 func JsFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsFromPackage")
@@ -413,21 +415,21 @@ func JsFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, *vxmsg
 			}
 			if !isskip {
 				libpath := prefix + lib.path + ".js"
-				imports += "\nimport " + JsFromName(lib.path) + " from \"" + libpath + "\""
+				imports += "\nimport " + LangFromName(lib.path) + " from \"" + libpath + "\""
 			}
 		}
 		imports += "\n"
 	}
 	allempty := ""
 	emptytypes := ""
-	pkgname := JsFromName(pkg.name)
+	pkgname := LangFromName(pkg.name)
 	specialcode := prj.mapnative[pkg.name+"_js.txt"]
 	statics := ""
 	constkeys := ListKeyFromMapConst(pkg.mapconst)
 	var constvalues []string
 	for _, constid := range constkeys {
 		cnst := pkg.mapconst[constid]
-		constname := JsFromName(cnst.alias)
+		constname := LangFromName(cnst.alias)
 		constvalue := "\"" + cnst.name + "\": " + pkgname + ".c_" + constname
 		constvalues = append(constvalues, constvalue)
 	}
@@ -437,11 +439,11 @@ func JsFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, *vxmsg
 	var typevalues []string
 	for _, typid := range typkeys {
 		typ := pkg.maptype[typid]
-		typetext, statictext, msgs := JsFromType(typ)
+		typetext, statictext, msgs := JsFromType(lang, typ)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		alltypes += typetext
 		statics += statictext
-		typename := JsFromName(typ.alias)
+		typename := LangFromName(typ.alias)
 		typeval := ""
 		switch typid {
 		case "boolean":
@@ -476,7 +478,7 @@ func JsFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, *vxmsg
 	for _, fncid := range funckeys {
 		fncs := pkg.mapfunc[fncid]
 		for _, fnc := range fncs {
-			jsfuncname := JsFromName(fnc.alias) + JsIndexFromFunc(fnc)
+			jsfuncname := LangFromName(fnc.alias) + JsIndexFromFunc(fnc)
 			emptyvalue := "\"" + fnc.name + StringIndexFromFunc(fnc) + "\": " + pkgname + ".e_" + jsfuncname
 			emptyvalues = append(emptyvalues, emptyvalue)
 			funcvalue := "\"" + fnc.name + StringIndexFromFunc(fnc) + "\": " + pkgname + ".t_" + jsfuncname
@@ -578,7 +580,7 @@ func JsFromText(text string) string {
 	return output
 }
 
-func JsFromType(typ *vxtype) (string, string, *vxmsgblock) {
+func JsFromType(lang *vxlang, typ *vxtype) (string, string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsFromType")
 	var doc = ""
 	doc += "type: " + typ.name
@@ -599,15 +601,15 @@ func JsFromType(typ *vxtype) (string, string, *vxmsgblock) {
 	properties = append(properties, "extends       : \""+typ.extends+"\"")
 	properties = append(properties, "allowfuncs    : "+JsNamesFromListFunc(typ.allowfuncs))
 	properties = append(properties, "disallowfuncs : "+JsNamesFromListFunc(typ.disallowfuncs))
-	properties = append(properties, "allowtypes    : "+JsNamesTFromListType(typ.allowtypes))
-	properties = append(properties, "disallowtypes : "+JsNamesTFromListType(typ.disallowtypes))
-	properties = append(properties, "allowvalues   : "+JsNamesFromListValue(typ.allowvalues))
-	properties = append(properties, "disallowvalues: "+JsNamesFromListValue(typ.disallowvalues))
-	properties = append(properties, "traits        : "+JsNamesTFromListType(typ.traits))
-	properties = append(properties, "properties    : "+JsFromArgs(listproperties, "      "))
-	properties = append(properties, "proplast      : "+JsFromArg(lastproperty, "      "))
-	pkgname := JsFromName(typ.pkgname)
-	typename := JsFromName(typ.alias)
+	properties = append(properties, "allowtypes    : "+JsNamesTFromListType(lang, typ.allowtypes))
+	properties = append(properties, "disallowtypes : "+JsNamesTFromListType(lang, typ.disallowtypes))
+	properties = append(properties, "allowvalues   : "+JsNamesFromListValue(lang, typ.allowvalues))
+	properties = append(properties, "disallowvalues: "+JsNamesFromListValue(lang, typ.disallowvalues))
+	properties = append(properties, "traits        : "+JsNamesTFromListType(lang, typ.traits))
+	properties = append(properties, "properties    : "+JsFromArgs(lang, listproperties, "      "))
+	properties = append(properties, "proplast      : "+JsFromArg(lang, lastproperty, "      "))
+	pkgname := LangFromName(typ.pkgname)
+	typename := LangFromName(typ.alias)
 	proptext := ""
 	evalue := ""
 	switch NameFromType(typ) {
@@ -653,7 +655,7 @@ func JsFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc, 
 	switch value.code {
 	case ":arg":
 		valarg := ArgFromValue(value)
-		valstr = JsFromName(valarg.name)
+		valstr = LangFromName(valarg.name)
 		switch parentfn.name {
 		case "new", "empty":
 		default:
@@ -668,10 +670,10 @@ func JsFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc, 
 			valstr = value.name
 		default:
 			if value.pkg == ":native" {
-				valstr = JsFromName(value.name)
+				valstr = LangFromName(value.name)
 			} else {
 				valconst := ConstFromValue(value)
-				valstr = JsFromName(valconst.pkgname) + ".c_" + JsFromName(valconst.alias)
+				valstr = LangFromName(valconst.pkgname) + ".c_" + LangFromName(valconst.alias)
 			}
 		}
 		output = sindent + valstr
@@ -680,7 +682,7 @@ func JsFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc, 
 		subpath += "/" + fnc.name + JsIndexFromFunc(fnc)
 		funcname := NameFromFunc(fnc)
 		if fnc.debug {
-			output += "vx_core.f_log_1({\"any-1\": " + JsNameTFromType(fnc.vxtype) + "}, \"" + funcname + "\", "
+			output += "vx_core.f_log_1({\"any-1\": " + LangNameTFromType(lang, fnc.vxtype) + "}, \"" + funcname + "\", "
 		}
 		switch fnc.name {
 		case "native":
@@ -763,7 +765,7 @@ func JsFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc, 
 			case "vx/core/new", "vx/core/copy", "vx/core/empty", "vx/core/fn":
 			default:
 				if fnc.vxtype.isgeneric || fnc.generictype != nil {
-					generictext := JsNamesTFromMapType(fnc.mapgeneric)
+					generictext := JsNamesTFromMapType(lang, fnc.mapgeneric)
 					argtexts = append(argtexts, generictext)
 				}
 			}
@@ -792,7 +794,7 @@ func JsFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc, 
 						} else {
 							argtext = "(" + lambdatext + ") => " + work
 						}
-						argtext = "vx_core.f_new(" + JsNameTFromType(funcarg.vxtype) + ", " + argtext + ")"
+						argtext = "vx_core.f_new(" + LangNameTFromType(lang, funcarg.vxtype) + ", " + argtext + ")"
 					} else if funcname == "vx/core/let" {
 						var lambdaargs []string
 						arglist := ListLocalArgFromFunc(fnc)
@@ -803,7 +805,7 @@ func JsFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc, 
 							for _, lambdaarg := range arglist {
 								lambdavaluetext, msgs := JsFromValue(lang, lambdaarg.value, pkgname, fnc, 1, true, test, argsubpath)
 								msgblock = MsgblockAddBlock(msgblock, msgs)
-								lambdatext := "const " + JsFromName(lambdaarg.name) + " = " + lambdavaluetext
+								lambdatext := "const " + LangFromName(lambdaarg.name) + " = " + lambdavaluetext
 								lambdaargs = append(lambdaargs, lambdatext)
 							}
 							lambdatext := strings.Join(lambdaargs, "\n  ")
@@ -816,7 +818,7 @@ func JsFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc, 
 							if parentfn.async {
 								argtext = "async " + argtext
 							}
-							argtext = "vx_core.f_new(" + JsNameTFromType(funcarg.vxtype) + ", " + argtext + ")"
+							argtext = "vx_core.f_new(" + LangNameTFromTypeGeneric(lang, funcarg.vxtype) + ", " + argtext + ")"
 						}
 					} else if funcname == "vx/core/fn" {
 					} else if funcarg.vxtype.isfunc {
@@ -838,7 +840,7 @@ func JsFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc, 
 							argtext = "() => {return " + work + "}"
 						}
 						if iswrapnew {
-							argtext = "vx_core.f_new(" + JsNameTFromType(funcarg.vxtype) + ", " + argtext + ")"
+							argtext = "vx_core.f_new(" + LangNameTFromType(lang, funcarg.vxtype) + ", " + argtext + ")"
 						}
 					}
 					if argtext == "" {
@@ -891,11 +893,11 @@ func JsFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc, 
 		//if valfunc.async {
 		//	valstr += "await "
 		//}
-		valstr += JsFromName(valfunc.pkgname) + ".t_" + JsFromName(valfunc.alias)
+		valstr += LangFromName(valfunc.pkgname) + ".t_" + LangFromName(valfunc.alias)
 		output = sindent + valstr
 	case ":type":
 		valtype := TypeFromValue(value)
-		valstr = JsFromName(valtype.pkgname) + ".t_" + JsFromName(valtype.alias)
+		valstr = LangFromName(valtype.pkgname) + ".t_" + LangFromName(valtype.alias)
 		output = sindent + valstr
 	case "decimal", "int", "number", "string":
 		valstr = StringValueFromValue(value)
@@ -937,7 +939,7 @@ func JsNameEFromType(typ *vxtype) string {
 
 func JsNameFFromFunc(fnc *vxfunc) string {
 	name := ""
-	name = "f_" + JsFromName(fnc.name)
+	name = "f_" + LangFromName(fnc.name)
 	if fnc.pkgname != "" {
 		name = JsNameFromPkgName(fnc.pkgname) + "." + name
 	}
@@ -945,7 +947,7 @@ func JsNameFFromFunc(fnc *vxfunc) string {
 }
 
 func JsNameFromPkgName(pkgname string) string {
-	output := JsFromName(pkgname)
+	output := LangFromName(pkgname)
 	return output
 }
 
@@ -962,14 +964,15 @@ func JsNameFromType(typ *vxtype) string {
 		default:
 	*/
 	if typ.alias == "" {
-		name += JsFromName(typ.name)
+		name += LangFromName(typ.name)
 	} else {
-		name += JsFromName(typ.alias)
+		name += LangFromName(typ.alias)
 	}
 	//	}
 	return name
 }
 
+/*
 func JsNameTFromType(typ *vxtype) string {
 	name := ""
 	name = "t_" + JsNameFromType(typ)
@@ -978,41 +981,42 @@ func JsNameTFromType(typ *vxtype) string {
 	}
 	return name
 }
+*/
 
 func JsNamesFromListFunc(listfunc []*vxfunc) string {
 	var outputtypes []string
 	for _, fnc := range listfunc {
-		name := "f_" + JsFromName(fnc.alias)
+		name := "f_" + LangFromName(fnc.alias)
 		if fnc.pkgname != "" {
-			name = JsFromName(fnc.pkgname) + "." + name
+			name = LangFromName(fnc.pkgname) + "." + name
 		}
 		outputtypes = append(outputtypes, name)
 	}
 	return "[" + StringFromListStringJoin(outputtypes, ", ") + "]"
 }
 
-func JsNamesTFromListType(listtype []*vxtype) string {
+func JsNamesTFromListType(lang *vxlang, listtype []*vxtype) string {
 	var outputtypes []string
 	for _, typ := range listtype {
-		name := JsNameTFromType(typ)
+		name := LangNameTFromType(lang, typ)
 		outputtypes = append(outputtypes, name)
 	}
 	return "[" + strings.Join(outputtypes, ", ") + "]"
 }
 
-func JsNamesFromListValue(listvalue []*vxconst) string {
+func JsNamesFromListValue(lang *vxlang, listvalue []*vxconst) string {
 	var output []string
 	for _, val := range listvalue {
-		name := "c_" + JsFromName(val.alias)
+		name := "c_" + LangFromName(val.alias)
 		if val.pkgname != "" {
-			name = JsFromName(val.pkgname) + "." + name
+			name = LangFromName(val.pkgname) + "." + name
 		}
 		output = append(output, name)
 	}
 	return "[" + strings.Join(output, ", ") + "]"
 }
 
-func JsNamesTFromMapType(maptype map[string]*vxtype) string {
+func JsNamesTFromMapType(lang *vxlang, maptype map[string]*vxtype) string {
 	var outputtypes []string
 	listkey := make([]string, 0, len(maptype))
 	for id := range maptype {
@@ -1021,7 +1025,7 @@ func JsNamesTFromMapType(maptype map[string]*vxtype) string {
 	sort.Strings(listkey)
 	for _, key := range listkey {
 		typ := maptype[key]
-		name := JsNameTFromType(typ)
+		name := LangNameTFromTypeGeneric(lang, typ)
 		outputtypes = append(outputtypes, "\""+key+"\": "+name)
 	}
 	return "{" + strings.Join(outputtypes, ", ") + "}"
@@ -1047,7 +1051,7 @@ func JsTestFromConst(lang *vxlang, cnst *vxconst) (string, *vxmsgblock) {
 		}
 		testdescribes := strings.Join(listtestdescribe, ",\n")
 		output = "" +
-			"\n  static c_" + JsFromName(cnst.alias) + "(context) {" +
+			"\n  static c_" + LangFromName(cnst.alias) + "(context) {" +
 			"\n    const output = vx_core.f_new(" +
 			"\n      vx_test.t_testcase," +
 			"\n      \":passfail\", false," +
@@ -1086,7 +1090,7 @@ func JsTestFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 		}
 		testdescribes := strings.Join(listtestdescribe, ",")
 		output = "" +
-			"\n  static f_" + JsFromName(fnc.alias) + JsIndexFromFunc(fnc) + "(context) {" +
+			"\n  static f_" + LangFromName(fnc.alias) + JsIndexFromFunc(fnc) + "(context) {" +
 			"\n    const output = vx_core.f_new(" +
 			"\n      vx_test.t_testcase," +
 			"\n      \":passfail\", false," +
@@ -1111,7 +1115,7 @@ func JsTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *vx
 	depth := IntCountFromStringFind(pkg.name, "/") + 1
 	prefix := StringRepeat("../", depth)
 	libpath := prefix + "src/" + pkg.name + ".js"
-	imports += "\nimport " + JsFromName(pkg.name) + " from \"" + libpath + "\""
+	imports += "\nimport " + LangFromName(pkg.name) + " from \"" + libpath + "\""
 	if len(pkg.listlib) > 0 {
 		for _, lib := range pkg.listlib {
 			isskip := false
@@ -1123,13 +1127,13 @@ func JsTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *vx
 			}
 			if !isskip {
 				libpath = prefix + "src/" + lib.path + ".js"
-				imports += "\nimport " + JsFromName(lib.path) + " from \"" + libpath + "\""
+				imports += "\nimport " + LangFromName(lib.path) + " from \"" + libpath + "\""
 			}
 		}
 	}
 	imports += "\n"
 	testdescribes := ""
-	pkgname := JsFromName(pkg.alias)
+	pkgname := LangFromName(pkg.alias)
 	typkeys := ListKeyFromMapType(pkg.maptype)
 	coverdoccnt := 0
 	coverdoctotal := 0
@@ -1150,7 +1154,7 @@ func JsTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *vx
 		if test != "" {
 			covertypecnt += 1
 			testdescribes += test
-			testall = append(testall, pkgname+"_test.t_"+JsFromName(typ.alias)+"()")
+			testall = append(testall, pkgname+"_test.t_"+LangFromName(typ.alias)+"()")
 		}
 		coverdoctotal += 1
 		if typ.doc != "" {
@@ -1175,7 +1179,7 @@ func JsTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *vx
 		if test != "" {
 			coverconstcnt += 1
 			testdescribes += test
-			testall = append(testall, pkgname+"_test.c_"+JsFromName(cnst.alias)+"()")
+			testall = append(testall, pkgname+"_test.c_"+LangFromName(cnst.alias)+"()")
 		}
 		coverdoctotal += 1
 		if cnst.doc != "" {
@@ -1208,7 +1212,7 @@ func JsTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *vx
 				if test != "" {
 					coverfunccnt += 1
 					testdescribes += test
-					testall = append(testall, pkgname+"_test.f_"+JsFromName(fnc.alias)+JsIndexFromFunc(fnc)+"(context)")
+					testall = append(testall, pkgname+"_test.f_"+LangFromName(fnc.alias)+JsIndexFromFunc(fnc)+"(context)")
 				}
 				coverdoctotal += 1
 				if fnc.doc != "" {
@@ -1350,7 +1354,7 @@ func JsTestFromType(lang *vxlang, typ *vxtype) (string, *vxmsgblock) {
 		}
 		testdescribes := strings.Join(listtestdescribe, ",")
 		output = "" +
-			"\n  static t_" + JsFromName(typ.alias) + "(context) {" +
+			"\n  static t_" + LangFromName(typ.alias) + "(context) {" +
 			"\n    const output = vx_core.f_new(" +
 			"\n      vx_test.t_testcase," +
 			"\n      \":passfail\", false," +

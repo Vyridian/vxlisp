@@ -63,7 +63,9 @@ public final class Http {
     }
 
     @Override
-    public Type_response vx_new(final Object... vals) {return e_response.vx_copy(vals);}
+    public Type_response vx_new(final Object... vals) {
+      return e_response.vx_copy(vals);
+    }
 
     @Override
     public Type_response vx_copy(final Object... vals) {
