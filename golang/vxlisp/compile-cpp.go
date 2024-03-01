@@ -3814,63 +3814,6 @@ func CppNameClassFullFromType(lang *vxlang, typ *vxtype) string {
 	return name
 }
 
-/*
-func LangNameEFromType(lang *vxlang, typ *vxtype) string {
-	output := ""
-	if typ.isgeneric {
-		output = "vx_core::vx_empty(generic_" + LangFromName(typ.name) + ")"
-	} else {
-		output = "e_" + LangNameFromType(typ)
-		if typ.pkgname != "" {
-			output = LangNameFromPkgName(lang, typ.pkgname) + lang.pkgref + output
-		}
-	}
-	return output
-}
-
-func LangNameEFromFunc(lang *vxlang, fnc *vxfunc) string {
-	name := "e_" + LangNameFromFunc(fnc)
-	if fnc.pkgname != "" {
-		name = LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + name
-	}
-	return name
-}
-
-func LangNameFFromFunc(lang *vxlang, fnc *vxfunc) string {
-	name := "f_" + LangNameFromFunc(fnc)
-	if fnc.pkgname != "" {
-		name = LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + name
-	}
-	return name
-}
-
-func LangNameFromConst(cnst *vxconst) string {
-	return LangFromName(cnst.alias)
-}
-
-func LangNameFromFunc(fnc *vxfunc) string {
-	return LangFromName(fnc.alias) + LangIndexFromFunc(fnc)
-}
-
-func LangNameFromType(typ *vxtype) string {
-	name := ""
-	if typ.alias == "" {
-		name += LangFromName(typ.name)
-	} else {
-		name += LangFromName(typ.alias)
-	}
-	return name
-}
-
-func LangNameTFromFunc(lang *vxlang, fnc *vxfunc) string {
-	name := "t_" + LangNameFromFunc(fnc)
-	if fnc.pkgname != "" {
-		name = LangNameFromPkgName(lang, fnc.pkgname) + "::" + name
-	}
-	return name
-}
-*/
-
 func CppNameTFromTypeGeneric(lang *vxlang, typ *vxtype) string {
 	name := ""
 	if typ.isgeneric {
