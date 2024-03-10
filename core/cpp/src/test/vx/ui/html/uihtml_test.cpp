@@ -25,32 +25,32 @@ namespace vx_ui_html_uihtml_test {
       vx_core::vx_new_string(":constnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(4)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(6)
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(52), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(10), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(19)
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(54), 
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(12), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(22)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(15)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(16)
       }),
       vx_core::vx_new_string(":bigospacenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(15)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(16)
       }),
       vx_core::vx_new_string(":bigotimenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(15)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(16)
       }),
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(19)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(22)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(100), 
@@ -71,7 +71,9 @@ namespace vx_ui_html_uihtml_test {
         vx_core::vx_new_string(":layout-app-html"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":layout-else-html"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":layout-label-html"), vx_core::vx_new_int(0),
-        vx_core::vx_new_string(":layoutenginehtml"), vx_core::vx_new_int(0)
+        vx_core::vx_new_string(":layoutenginehtml"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":style-hidden"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":style-selected"), vx_core::vx_new_int(0)
       }),
       vx_core::vx_new_string(":funcmap"), vx_core::vx_new(vx_core::t_intmap, {
         vx_core::vx_new_string(":context-write"), vx_core::vx_new_int(0),
@@ -81,6 +83,7 @@ namespace vx_ui_html_uihtml_test {
         vx_core::vx_new_string(":node-render<-node-ui"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":string-stylename<-name-styletype"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":style<-style"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":stylelist-extra<-ui"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":stylelist<-stylelist"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":stylelist<-stylemap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":stylemap<-stylemap"), vx_core::vx_new_int(0),

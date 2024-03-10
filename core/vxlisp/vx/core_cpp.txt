@@ -202,8 +202,8 @@ let-async
   // vx_list_from_array(arrayval)
   vx_core::vx_Type_listany vx_list_from_array(vx_core::vx_Type_listarg vals);
 
-  // vx_list_from_map_fn(generic_list_1, map, fn-any<-key-value)
-  vx_core::Type_any vx_list_from_map_fn(vx_core::Type_any generic_list_1, vx_core::Type_map valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value);
+  // vx_list_from_map_1(generic_list_1, map, fn-any<-key-value)
+  vx_core::Type_any vx_list_from_map_1(vx_core::Type_any generic_list_1, vx_core::Type_map valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value);
 
   // vx_list_join_from_list_fn(generic_list_1, list, fn-any<-any)
   vx_core::Type_any vx_list_join_from_list_fn(vx_core::Type_any generic_list_1, vx_core::Type_list values, vx_core::Func_any_from_any fn_any_from_any);
@@ -1059,13 +1059,15 @@ let-async
     return output;
   }
 
-  // vx_list_from_map_fn(generic_list_1, map, fn-any<-key-value)
-  vx_core::Type_any vx_list_from_map_fn(vx_core::Type_any generic_list_1, vx_core::Type_map valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value) {
+  // vx_list_from_map_1(generic_list_1, map, fn-any<-key-value)
+  vx_core::Type_any vx_list_from_map_1(vx_core::Type_any generic_list_1, vx_core::Type_map valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value) {
     vx_core::vx_Type_mapany map_value = valuemap->vx_map();
     vx_core::vx_Type_listany list_result;
     for (auto const& [key, val] : map_value) {
       vx_core::Type_string valkey = vx_core::vx_new_string(key);
+      vx_core::vx_reserve(valkey);
       vx_core::Type_any result = fn_any_from_key_value->vx_any_from_key_value(valkey, val);
+      vx_core::vx_release_one_except(valkey, result);
       list_result.push_back(result);
     }
     vx_core::Type_any output = generic_list_1->vx_new(list_result);

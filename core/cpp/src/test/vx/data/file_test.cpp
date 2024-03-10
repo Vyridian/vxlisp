@@ -201,9 +201,9 @@ namespace vx_data_file_test {
         vx_core::vx_new_string(":total"), vx_core::vx_new_int(0)
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(91), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(11), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(12)
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(92), 
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(12), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(13)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(40), 
@@ -221,14 +221,14 @@ namespace vx_data_file_test {
         vx_core::vx_new_string(":total"), vx_core::vx_new_int(10)
       }),
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(33), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(30), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(4), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(12)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(13)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(2)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(3)
       })
     });
     return output;
@@ -239,7 +239,8 @@ namespace vx_data_file_test {
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
       vx_core::vx_new_string(":typemap"), vx_core::vx_new(vx_core::t_intmap, {
         vx_core::vx_new_string(":file"), vx_core::vx_new_int(0),
-        vx_core::vx_new_string(":fileformat"), vx_core::vx_new_int(0)
+        vx_core::vx_new_string(":fileformat"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":filelist"), vx_core::vx_new_int(0)
       }),
       vx_core::vx_new_string(":constmap"), vx_core::vx_new(vx_core::t_intmap, {
         

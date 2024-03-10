@@ -1,6 +1,7 @@
 package com.vxlisp.vx;
 
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,10 +21,11 @@ public final class Event {
     public Event.Type_event vx_empty();
     public Event.Type_event vx_type();
     public Core.Type_string name();
-    public Core.Type_any from();
-    public Core.Type_any to();
+    public Core.Type_string from();
+    public Core.Type_string to();
     public Core.Type_anymap datamap();
     public Event.Func_event_from_event event_from_event();
+    public Event.Func_event_from_event_async event_from_event_async();
   }
 
   public static class Class_event extends Core.Class_base implements Type_event {
@@ -35,18 +37,18 @@ public final class Event {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Core.Type_any vx_p_from;
+    protected Core.Type_string vx_p_from;
 
     @Override
-    public Core.Type_any from() {
-      return this.vx_p_from == null ? Core.e_any : this.vx_p_from;
+    public Core.Type_string from() {
+      return this.vx_p_from == null ? Core.e_string : this.vx_p_from;
     }
 
-    protected Core.Type_any vx_p_to;
+    protected Core.Type_string vx_p_to;
 
     @Override
-    public Core.Type_any to() {
-      return this.vx_p_to == null ? Core.e_any : this.vx_p_to;
+    public Core.Type_string to() {
+      return this.vx_p_to == null ? Core.e_string : this.vx_p_to;
     }
 
     protected Core.Type_anymap vx_p_datamap;
@@ -61,6 +63,13 @@ public final class Event {
     @Override
     public Event.Func_event_from_event event_from_event() {
       return this.vx_p_event_from_event == null ? Event.e_event_from_event : this.vx_p_event_from_event;
+    }
+
+    protected Event.Func_event_from_event_async vx_p_event_from_event_async;
+
+    @Override
+    public Event.Func_event_from_event_async event_from_event_async() {
+      return this.vx_p_event_from_event_async == null ? Event.e_event_from_event_async : this.vx_p_event_from_event_async;
     }
 
     @Override
@@ -83,6 +92,9 @@ public final class Event {
       case ":event<-event":
         output = this.event_from_event();
         break;
+      case ":event<-event-async":
+        output = this.event_from_event_async();
+        break;
       }
       return output;
     }
@@ -95,6 +107,7 @@ public final class Event {
       output.put(":to", this.to());
       output.put(":datamap", this.datamap());
       output.put(":event<-event", this.event_from_event());
+      output.put(":event<-event-async", this.event_from_event_async());
       return Core.immutablemap(output);
     }
 
@@ -113,16 +126,18 @@ public final class Event {
         ischanged = true;
       }
       Core.Type_string vx_p_name = val.name();
-      Core.Type_any vx_p_from = val.from();
-      Core.Type_any vx_p_to = val.to();
+      Core.Type_string vx_p_from = val.from();
+      Core.Type_string vx_p_to = val.to();
       Core.Type_anymap vx_p_datamap = val.datamap();
       Event.Func_event_from_event vx_p_event_from_event = val.event_from_event();
+      Event.Func_event_from_event_async vx_p_event_from_event_async = val.event_from_event_async();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":name");
       validkeys.add(":from");
       validkeys.add(":to");
       validkeys.add(":datamap");
       validkeys.add(":event<-event");
+      validkeys.add(":event<-event-async");
       String key = "";
       Core.Type_msg msg;
       for (Object valsub : vals) {
@@ -190,9 +205,12 @@ public final class Event {
             break;
           case ":from":
             if (valsub == vx_p_from) {
-            } else if (valsub instanceof Core.Type_any) {
+            } else if (valsub instanceof Core.Type_string) {
               ischanged = true;
-              vx_p_from = (Core.Type_any)valsub;
+              vx_p_from = (Core.Type_string)valsub;
+            } else if (valsub instanceof String) {
+              ischanged = true;
+              vx_p_from = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -210,9 +228,12 @@ public final class Event {
             break;
           case ":to":
             if (valsub == vx_p_to) {
-            } else if (valsub instanceof Core.Type_any) {
+            } else if (valsub instanceof Core.Type_string) {
               ischanged = true;
-              vx_p_to = (Core.Type_any)valsub;
+              vx_p_to = (Core.Type_string)valsub;
+            } else if (valsub instanceof String) {
+              ischanged = true;
+              vx_p_to = Core.t_string.vx_new(valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -268,6 +289,26 @@ public final class Event {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":event<-event-async":
+            if (valsub == vx_p_event_from_event_async) {
+            } else if (valsub instanceof Event.Func_event_from_event_async) {
+              ischanged = true;
+              vx_p_event_from_event_async = (Event.Func_event_from_event_async)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("event<-event-async"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/event/event", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/event/event", ":invalidkey", msgval);
@@ -283,6 +324,7 @@ public final class Event {
         work.vx_p_to = vx_p_to;
         work.vx_p_datamap = vx_p_datamap;
         work.vx_p_event_from_event = vx_p_event_from_event;
+        work.vx_p_event_from_event_async = vx_p_event_from_event_async;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -655,6 +697,7 @@ public final class Event {
       output.vx_p_to = val.to();
       output.vx_p_datamap = val.datamap();
       output.vx_p_event_from_event = val.event_from_event();
+      output.vx_p_event_from_event_async = val.event_from_event_async();
     }
 
 
@@ -704,6 +747,7 @@ public final class Event {
       output.vx_p_to = val.to();
       output.vx_p_datamap = val.datamap();
       output.vx_p_event_from_event = val.event_from_event();
+      output.vx_p_event_from_event_async = val.event_from_event_async();
     }
 
 
@@ -753,6 +797,7 @@ public final class Event {
       output.vx_p_to = val.to();
       output.vx_p_datamap = val.datamap();
       output.vx_p_event_from_event = val.event_from_event();
+      output.vx_p_event_from_event_async = val.event_from_event_async();
     }
 
 
@@ -802,6 +847,7 @@ public final class Event {
       output.vx_p_to = val.to();
       output.vx_p_datamap = val.datamap();
       output.vx_p_event_from_event = val.event_from_event();
+      output.vx_p_event_from_event_async = val.event_from_event_async();
     }
 
 
@@ -999,6 +1045,100 @@ public final class Event {
   }
 
   /**
+   * 
+   * @async
+   * @function event_from_event_async
+   * Template for triggering ui asynchronous events
+   * @param  {event} event
+   * @return {event}
+   * (func event<-event-async)
+   */
+  public static interface Func_event_from_event_async extends Core.Func_any_from_any_context_async {
+    public CompletableFuture<Event.Type_event> vx_event_from_event_async(final Core.Type_context context, final Event.Type_event event);
+  }
+
+  public static class Class_event_from_event_async extends Core.Class_base implements Func_event_from_event_async {
+
+    @Override
+    public Func_event_from_event_async vx_new(Object... vals) {
+      Class_event_from_event_async output = new Class_event_from_event_async();
+      return output;
+    }
+
+    @Override
+    public Func_event_from_event_async vx_copy(Object... vals) {
+      Class_event_from_event_async output = new Class_event_from_event_async();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/event", // pkgname
+        "event<-event-async", // name
+        0, // idx
+        true, // async
+        Core.typedef_new(
+          "vx/event", // pkgname
+          "event", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_event_from_event_async vx_empty() {return e_event_from_event_async;}
+    @Override
+    public Func_event_from_event_async vx_type() {return t_event_from_event_async;}
+
+    @Override
+    public Core.Func_any_from_any_context_async vx_fn_new(Core.Class_any_from_any_context_async.IFn fn) {return Core.e_any_from_any_context_async;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_context_async(final T generic_any_1, final Core.Type_context context, final U value) {
+      Event.Type_event inputval = Core.f_any_from_any(Event.t_event, value);
+      CompletableFuture<Event.Type_event> future = Event.f_event_from_event_async(context, inputval);
+      @SuppressWarnings("unchecked")
+      CompletableFuture<T> output = (CompletableFuture<T>)future;
+      return output;
+    }
+
+    public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
+      CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
+      Event.Type_event event = Core.f_any_from_any(Event.t_event, arglist.vx_any(Core.vx_new_int(0)));
+      CompletableFuture<Event.Type_event> future = Event.f_event_from_event_async(context, event);
+      output = Core.async_from_async(Core.t_any, future);
+      return output;
+    }
+
+    @Override
+    public CompletableFuture<Event.Type_event> vx_event_from_event_async(final Core.Type_context context, final Event.Type_event event) {
+      return Event.f_event_from_event_async(context, event);
+    }
+
+  }
+
+  public static final Func_event_from_event_async e_event_from_event_async = new Event.Class_event_from_event_async();
+  public static final Func_event_from_event_async t_event_from_event_async = new Event.Class_event_from_event_async();
+
+  public static CompletableFuture<Event.Type_event> f_event_from_event_async(final Core.Type_context context, final Event.Type_event event) {
+    CompletableFuture<Event.Type_event> output = Core.async_new_completed(Event.e_event);
+    return output;
+  }
+
+  /**
    * @function eventmap_from_eventlist
    * Returns an eventmap from an eventlist
    * @param  {eventlist} eventlist
@@ -1115,6 +1255,7 @@ public final class Event {
     mapconst.put("event-select", Event.c_event_select);
     mapfunc.put("any-from<-event", Event.t_any_from_from_event);
     mapfunc.put("event<-event", Event.t_event_from_event);
+    mapfunc.put("event<-event-async", Event.t_event_from_event_async);
     mapfunc.put("eventmap<-eventlist", Event.t_eventmap_from_eventlist);
     Core.vx_global_package_set("vx/event", maptype, mapconst, mapfunc);
   }

@@ -49,7 +49,11 @@ export default class vx_core {
   static vx_boolean_write_from_map_name_value(valuemap, name, value) {
     let output = vx_core.c_true
     const mapany = valuemap['vx_value']
-    mapany[name] = value
+	let key = name
+	if (key.startsWith(':')) {
+	  key = key.substring(1)
+	}
+    mapany[key] = value
     return output
   }
 
@@ -715,16 +719,19 @@ export default class vx_core {
               msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, value)
               break
             default:
-              const typename = vx_core.f_typename_from_typedef(typedef)
-              const msg = vx_core.f_msg_from_error_2(
-                'vx/core/new',
-                'invalidkey',
-                vx_core.vx_new_map(vx_core.t_anymap, {
-                  type: type,
-                  key: vx_core.vx_string_from_any(value)
-                })
-              )
-              msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, msg)
+              if (typedef == valuetype) {
+                propmap = Object.assign(propmap, value['vx_value'])
+              } else {
+                const msg = vx_core.f_msg_from_error_2(
+                  'vx/core/new',
+                  'invalidkey',
+                  vx_core.vx_new_map(vx_core.t_anymap, {
+                    type: type,
+                    key: vx_core.vx_string_from_any(value)
+                  })
+                )
+                msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, msg)
+              }
               break
             }
           } else {
@@ -1559,6 +1566,13 @@ export default class vx_core {
    */
   static t_stringlist = {}
   static e_stringlist = vx_core.vx_new_list(vx_core.t_stringlist, [])
+
+  /**
+   * type: stringlistlist
+   * A list of stringlist.
+   */
+  static t_stringlistlist = {}
+  static e_stringlistlist = vx_core.vx_new_list(vx_core.t_stringlistlist, [])
 
   /**
    * type: stringmap
@@ -4189,10 +4203,9 @@ export default class vx_core {
 
   /**
    * @function list_join_from_list
-   * Returns a flattened list of processed items from another list
+   * Returns a list by joining the valid values in each value list
    * @param  {typemap} generic
    * @param  {generic_list_2} values
-   * @param  {any_from_any} fn_any_from_any
    * @return {list-1}
    */
   static t_list_join_from_list = {
@@ -4203,7 +4216,34 @@ export default class vx_core {
   }
 
   // (func list-join<-list)
-  static f_list_join_from_list(generic, values, fn_any_from_any) {
+  static f_list_join_from_list(generic, values) {
+    const generic_list_1 = generic["list-1"]
+    let output = vx_core.f_empty(generic_list_1)
+    output = vx_core.f_list_join_from_list_1(
+      {"any-1": vx_core.t_any, "list-1": generic_list_1},
+      values,
+      vx_core.f_new(vx_core.t_any_from_any, (value) => value)
+    )
+    return output
+  }
+
+  /**
+   * @function list_join_from_list
+   * Returns a flattened list of processed items from another list
+   * @param  {typemap} generic
+   * @param  {generic_list_2} values
+   * @param  {any_from_any} fn_any_from_any
+   * @return {list-1}
+   */
+  static t_list_join_from_list_1 = {
+    vx_type: vx_core.t_type
+  }
+  static e_list_join_from_list_1 = {
+    vx_type: vx_core.t_list_join_from_list_1
+  }
+
+  // (func list-join<-list)
+  static f_list_join_from_list_1(generic, values, fn_any_from_any) {
     const generic_list_1 = generic["list-1"]
     let output = vx_core.f_empty(generic_list_1)
     const fn = fn_any_from_any['vx_value']
@@ -4217,10 +4257,9 @@ export default class vx_core {
 
   /**
    * @function list_from_list
-   * Returns a list of processed items from another list
+   * Return a list with allowed values from another list
    * @param  {typemap} generic
    * @param  {generic_list_2} values
-   * @param  {any_from_any} fn_any_from_any
    * @return {list-1}
    */
   static t_list_from_list = {
@@ -4231,7 +4270,34 @@ export default class vx_core {
   }
 
   // (func list<-list)
-  static f_list_from_list(generic, values, fn_any_from_any) {
+  static f_list_from_list(generic, values) {
+    const generic_list_1 = generic["list-1"]
+    let output = vx_core.f_empty(generic_list_1)
+    output = vx_core.f_list_from_list_1(
+      {"any-1": vx_core.t_any, "list-1": generic_list_1},
+      values,
+      vx_core.f_new(vx_core.t_any_from_any, (value) => value)
+    )
+    return output
+  }
+
+  /**
+   * @function list_from_list
+   * Returns a list of processed items from another list
+   * @param  {typemap} generic
+   * @param  {generic_list_2} values
+   * @param  {any_from_any} fn_any_from_any
+   * @return {list-1}
+   */
+  static t_list_from_list_1 = {
+    vx_type: vx_core.t_type
+  }
+  static e_list_from_list_1 = {
+    vx_type: vx_core.t_list_from_list_1
+  }
+
+  // (func list<-list)
+  static f_list_from_list_1(generic, values, fn_any_from_any) {
     const generic_list_1 = generic["list-1"]
     let output = vx_core.f_empty(generic_list_1)
     const fn = fn_any_from_any['vx_value']
@@ -4274,10 +4340,9 @@ export default class vx_core {
 
   /**
    * @function list_from_map
-   * Returns a list from a map by applying a function to each key value.
+   * Returns a list of allowed values from a map.
    * @param  {typemap} generic
    * @param  {generic_map_2} valuemap
-   * @param  {any_from_key_value} fn_any_from_key_value
    * @return {list-1}
    */
   static t_list_from_map = {
@@ -4288,7 +4353,34 @@ export default class vx_core {
   }
 
   // (func list<-map)
-  static f_list_from_map(generic, valuemap, fn_any_from_key_value) {
+  static f_list_from_map(generic, valuemap) {
+    const generic_list_1 = generic["list-1"]
+    let output = vx_core.f_empty(generic_list_1)
+    output = vx_core.f_list_from_map_1(
+      {"any-1": vx_core.t_any, "list-1": generic_list_1},
+      valuemap,
+      vx_core.f_new(vx_core.t_any_from_key_value, ([key, value]) => value)
+    )
+    return output
+  }
+
+  /**
+   * @function list_from_map
+   * Returns a list from a map by applying a function to each key value.
+   * @param  {typemap} generic
+   * @param  {generic_map_2} valuemap
+   * @param  {any_from_key_value} fn_any_from_key_value
+   * @return {list-1}
+   */
+  static t_list_from_map_1 = {
+    vx_type: vx_core.t_type
+  }
+  static e_list_from_map_1 = {
+    vx_type: vx_core.t_list_from_map_1
+  }
+
+  // (func list<-map)
+  static f_list_from_map_1(generic, valuemap, fn_any_from_key_value) {
     const generic_list_1 = generic["list-1"]
     let output = vx_core.f_empty(generic_list_1)
     output = vx_core.vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value)
@@ -4446,10 +4538,9 @@ export default class vx_core {
 
   /**
    * @function map_from_map
-   * Returns a map from a map by applying a function to each key value.
+   * Return a map with allowed values from another map
    * @param  {typemap} generic
    * @param  {generic_map_2} valuemap
-   * @param  {any_from_key_value} fn_any_from_key_value
    * @return {map-1}
    */
   static t_map_from_map = {
@@ -4460,7 +4551,34 @@ export default class vx_core {
   }
 
   // (func map<-map)
-  static f_map_from_map(generic, valuemap, fn_any_from_key_value) {
+  static f_map_from_map(generic, valuemap) {
+    const generic_map_1 = generic["map-1"]
+    let output = vx_core.f_empty(generic_map_1)
+    output = vx_core.f_map_from_map_1(
+      {"any-1": vx_core.t_any, "map-1": generic_map_1},
+      valuemap,
+      vx_core.f_new(vx_core.t_any_from_key_value, ([key, value]) => value)
+    )
+    return output
+  }
+
+  /**
+   * @function map_from_map
+   * Returns a map from a map by applying a function to each key value.
+   * @param  {typemap} generic
+   * @param  {generic_map_2} valuemap
+   * @param  {any_from_key_value} fn_any_from_key_value
+   * @return {map-1}
+   */
+  static t_map_from_map_1 = {
+    vx_type: vx_core.t_type
+  }
+  static e_map_from_map_1 = {
+    vx_type: vx_core.t_map_from_map_1
+  }
+
+  // (func map<-map)
+  static f_map_from_map_1(generic, valuemap, fn_any_from_key_value) {
     const generic_map_1 = generic["map-1"]
     let output = vx_core.f_empty(generic_map_1)
     output = vx_core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value)
@@ -5235,7 +5353,7 @@ export default class vx_core {
   static f_resolve_list(generic, clauses) {
     const generic_list_1 = generic["list-1"]
     let output = vx_core.f_empty(generic_list_1)
-    output = vx_core.f_list_from_list(
+    output = vx_core.f_list_from_list_1(
       {"list-1": generic_list_1},
       clauses,
       vx_core.f_new(vx_core.t_any_from_any, vx_core.t_resolve)
@@ -5718,7 +5836,7 @@ export default class vx_core {
   // (func typenames<-typelist)
   static f_typenames_from_typelist(typelist) {
     let output = vx_core.e_stringlist
-    output = vx_core.f_list_from_list(
+    output = vx_core.f_list_from_list_1(
       {"any-1": vx_core.t_string, "list-1": vx_core.t_stringlist, "list-2": vx_core.t_typelist},
       typelist,
       vx_core.f_new(vx_core.t_any_from_any, (type) => 
@@ -5831,6 +5949,7 @@ export default class vx_core {
       "statelistenermap": vx_core.e_statelistenermap,
       "string": vx_core.e_string,
       "stringlist": vx_core.e_stringlist,
+      "stringlistlist": vx_core.e_stringlistlist,
       "stringmap": vx_core.e_stringmap,
       "struct": vx_core.e_struct,
       "thenelse": vx_core.e_thenelse,
@@ -5946,9 +6065,12 @@ export default class vx_core {
       "let": vx_core.e_let,
       "let-async": vx_core.e_let_async,
       "list-join<-list": vx_core.e_list_join_from_list,
+      "list-join<-list_1": vx_core.e_list_join_from_list_1,
       "list<-list": vx_core.e_list_from_list,
+      "list<-list_1": vx_core.e_list_from_list_1,
       "list<-list-async": vx_core.e_list_from_list_async,
       "list<-map": vx_core.e_list_from_map,
+      "list<-map_1": vx_core.e_list_from_map_1,
       "list<-map-async": vx_core.e_list_from_map_async,
       "list<-type": vx_core.e_list_from_type,
       "log": vx_core.e_log,
@@ -5956,6 +6078,7 @@ export default class vx_core {
       "main": vx_core.e_main,
       "map<-list": vx_core.e_map_from_list,
       "map<-map": vx_core.e_map_from_map,
+      "map<-map_1": vx_core.e_map_from_map_1,
       "mempool-addref": vx_core.e_mempool_addref,
       "mempool-release": vx_core.e_mempool_release,
       "mempool-removeref": vx_core.e_mempool_removeref,
@@ -6110,9 +6233,12 @@ export default class vx_core {
       "let": vx_core.t_let,
       "let-async": vx_core.t_let_async,
       "list-join<-list": vx_core.t_list_join_from_list,
+      "list-join<-list_1": vx_core.t_list_join_from_list_1,
       "list<-list": vx_core.t_list_from_list,
+      "list<-list_1": vx_core.t_list_from_list_1,
       "list<-list-async": vx_core.t_list_from_list_async,
       "list<-map": vx_core.t_list_from_map,
+      "list<-map_1": vx_core.t_list_from_map_1,
       "list<-map-async": vx_core.t_list_from_map_async,
       "list<-type": vx_core.t_list_from_type,
       "log": vx_core.t_log,
@@ -6120,6 +6246,7 @@ export default class vx_core {
       "main": vx_core.t_main,
       "map<-list": vx_core.t_map_from_list,
       "map<-map": vx_core.t_map_from_map,
+      "map<-map_1": vx_core.t_map_from_map_1,
       "mempool-addref": vx_core.t_mempool_addref,
       "mempool-release": vx_core.t_mempool_release,
       "mempool-removeref": vx_core.t_mempool_removeref,
@@ -6233,6 +6360,7 @@ export default class vx_core {
       "statelistenermap": vx_core.t_statelistenermap,
       "string": vx_core.t_string,
       "stringlist": vx_core.t_stringlist,
+      "stringlistlist": vx_core.t_stringlistlist,
       "stringmap": vx_core.t_stringmap,
       "struct": vx_core.t_struct,
       "thenelse": vx_core.t_thenelse,
@@ -7688,6 +7816,24 @@ export default class vx_core {
       proplast      : {}
     }
     vx_core.e_stringlist['vx_type'] = vx_core.t_stringlist
+
+    // (type stringlistlist)
+    vx_core.t_stringlistlist['vx_type'] = vx_core.t_type
+    vx_core.t_stringlistlist['vx_value'] = {
+      name          : "stringlistlist",
+      pkgname       : "vx/core",
+      extends       : ":list",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [vx_core.t_stringlist],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {},
+      proplast      : {}
+    }
+    vx_core.e_stringlistlist['vx_type'] = vx_core.t_stringlistlist
 
     // (type stringmap)
     vx_core.t_stringmap['vx_type'] = vx_core.t_type
@@ -9914,6 +10060,24 @@ export default class vx_core {
       fn            : vx_core.f_list_join_from_list
     }
 
+    // (func list-join<-list)
+    vx_core.t_list_join_from_list_1['vx_value'] = {
+      name          : "list-join<-list",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 1,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_list_join_from_list_1
+    }
+
     // (func list<-list)
     vx_core.t_list_from_list['vx_value'] = {
       name          : "list<-list",
@@ -9930,6 +10094,24 @@ export default class vx_core {
       properties    : [],
       proplast      : {},
       fn            : vx_core.f_list_from_list
+    }
+
+    // (func list<-list)
+    vx_core.t_list_from_list_1['vx_value'] = {
+      name          : "list<-list",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 1,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_list_from_list_1
     }
 
     // (func list<-list-async)
@@ -9966,6 +10148,24 @@ export default class vx_core {
       properties    : [],
       proplast      : {},
       fn            : vx_core.f_list_from_map
+    }
+
+    // (func list<-map)
+    vx_core.t_list_from_map_1['vx_value'] = {
+      name          : "list<-map",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 1,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_list_from_map_1
     }
 
     // (func list<-map-async)
@@ -10092,6 +10292,24 @@ export default class vx_core {
       properties    : [],
       proplast      : {},
       fn            : vx_core.f_map_from_map
+    }
+
+    // (func map<-map)
+    vx_core.t_map_from_map_1['vx_value'] = {
+      name          : "map<-map",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 1,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_map_from_map_1
     }
 
     // (func mempool-addref)

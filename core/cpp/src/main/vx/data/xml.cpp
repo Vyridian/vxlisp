@@ -850,7 +850,13 @@ namespace vx_data_xml {
     vx_core::vx_release_one_except(text, output);
     return output;
   }
-
+  /**
+   * @function string_decodexml_from_string
+   * Returns string decoded from xml encoding
+   * @param  {string} text
+   * @return {string}
+   * (func string-decodexml<-string)
+   */
   // (func string-decodexml<-string)
   // class Class_string_decodexml_from_string {
     Abstract_string_decodexml_from_string::~Abstract_string_decodexml_from_string() {}
@@ -963,7 +969,13 @@ namespace vx_data_xml {
     vx_core::vx_release_one_except(xml, output);
     return output;
   }
-
+  /**
+   * @function string_first_from_xml
+   * Returns string from first child's text.
+   * @param  {xml} xml
+   * @return {string}
+   * (func string-first<-xml)
+   */
   // (func string-first<-xml)
   // class Class_string_first_from_xml {
     Abstract_string_first_from_xml::~Abstract_string_first_from_xml() {}
@@ -1060,7 +1072,13 @@ namespace vx_data_xml {
     vx_core::vx_release_one_except(text, output);
     return output;
   }
-
+  /**
+   * @function textblock_xml_from_string
+   * Returns a parsed textblock from a string.
+   * @param  {string} text
+   * @return {textblock}
+   * (func textblock-xml<-string)
+   */
   // (func textblock-xml<-string)
   // class Class_textblock_xml_from_string {
     Abstract_textblock_xml_from_string::~Abstract_textblock_xml_from_string() {}
@@ -1203,7 +1221,14 @@ namespace vx_data_xml {
     vx_core::vx_release_one_except({xmlarg, tb}, output);
     return output;
   }
-
+  /**
+   * @function xml_angle_from_xml_textblock
+   * Returns a modified xml from a single textblock.
+   * @param  {xml} xmlarg
+   * @param  {textblock} tb
+   * @return {xml}
+   * (func xml-angle<-xml-textblock)
+   */
   // (func xml-angle<-xml-textblock)
   // class Class_xml_angle_from_xml_textblock {
     Abstract_xml_angle_from_xml_textblock::~Abstract_xml_angle_from_xml_textblock() {}
@@ -1399,7 +1424,14 @@ namespace vx_data_xml {
     vx_core::vx_release_one_except({xmlarg, tb}, output);
     return output;
   }
-
+  /**
+   * @function xml_close_from_xml_textblock
+   * Returns a modified xml from a closing tag.
+   * @param  {xml} xmlarg
+   * @param  {textblock} tb
+   * @return {xml}
+   * (func xml-close<-xml-textblock)
+   */
   // (func xml-close<-xml-textblock)
   // class Class_xml_close_from_xml_textblock {
     Abstract_xml_close_from_xml_textblock::~Abstract_xml_close_from_xml_textblock() {}
@@ -1551,7 +1583,14 @@ namespace vx_data_xml {
     vx_core::vx_release_one_except({xmlarg, tb}, output);
     return output;
   }
-
+  /**
+   * @function xml_parse_from_xml_textblock
+   * Returns a modified xml from a single textblock.
+   * @param  {xml} xmlarg
+   * @param  {textblock} tb
+   * @return {xml}
+   * (func xml-parse<-xml-textblock)
+   */
   // (func xml-parse<-xml-textblock)
   // class Class_xml_parse_from_xml_textblock {
     Abstract_xml_parse_from_xml_textblock::~Abstract_xml_parse_from_xml_textblock() {}
@@ -1644,7 +1683,14 @@ namespace vx_data_xml {
     vx_core::vx_release_one_except({xmlarg, textblocklist}, output);
     return output;
   }
-
+  /**
+   * @function xml_parse_from_xml_textblocklist
+   * Returns a modified xml from a textblocklist.
+   * @param  {xml} xmlarg
+   * @param  {textblocklist} textblocklist
+   * @return {xml}
+   * (func xml-parse<-xml-textblocklist)
+   */
   // (func xml-parse<-xml-textblocklist)
   // class Class_xml_parse_from_xml_textblocklist {
     Abstract_xml_parse_from_xml_textblocklist::~Abstract_xml_parse_from_xml_textblocklist() {}
@@ -1747,7 +1793,14 @@ namespace vx_data_xml {
     vx_core::vx_release_one_except({xmlarg, textblocklist}, output);
     return output;
   }
-
+  /**
+   * @function xml_properties_from_xml_textblocklist
+   * Returns a modified xml from a textblocklist.
+   * @param  {xml} xmlarg
+   * @param  {textblocklist} textblocklist
+   * @return {xml}
+   * (func xml-properties<-xml-textblocklist)
+   */
   // (func xml-properties<-xml-textblocklist)
   // class Class_xml_properties_from_xml_textblocklist {
     Abstract_xml_properties_from_xml_textblocklist::~Abstract_xml_properties_from_xml_textblocklist() {}
@@ -1957,7 +2010,14 @@ namespace vx_data_xml {
     vx_core::vx_release_one_except({xmlarg, tbarg}, output);
     return output;
   }
-
+  /**
+   * @function xml_property_from_xml_textblock
+   * Returns a modified xml from a single property.
+   * @param  {xml} xmlarg
+   * @param  {textblock} tbarg
+   * @return {xml}
+   * (func xml-property<-xml-textblock)
+   */
   // (func xml-property<-xml-textblock)
   // class Class_xml_property_from_xml_textblock {
     Abstract_xml_property_from_xml_textblock::~Abstract_xml_property_from_xml_textblock() {}
@@ -2049,7 +2109,13 @@ namespace vx_data_xml {
     vx_core::vx_release_one_except(file, output);
     return output;
   }
-
+  /**
+   * @function xml_read_from_file
+   * Returns a parsed xml from a file.
+   * @param  {file} file
+   * @return {xml}
+   * (func xml-read<-file)
+   */
   // (func xml-read<-file)
   // class Class_xml_read_from_file {
     Abstract_xml_read_from_file::~Abstract_xml_read_from_file() {}
@@ -2194,7 +2260,14 @@ namespace vx_data_xml {
     vx_core::vx_release_one_except({xmlarg, tb}, output);
     return output;
   }
-
+  /**
+   * @function xml_text_from_xml_textblock
+   * Returns a modified xml from text.
+   * @param  {xml} xmlarg
+   * @param  {textblock} tb
+   * @return {xml}
+   * (func xml-text<-xml-textblock)
+   */
   // (func xml-text<-xml-textblock)
   // class Class_xml_text_from_xml_textblock {
     Abstract_xml_text_from_xml_textblock::~Abstract_xml_text_from_xml_textblock() {}
@@ -2286,7 +2359,13 @@ namespace vx_data_xml {
     vx_core::vx_release_one_except(file, output);
     return output;
   }
-
+  /**
+   * @function xml_from_file
+   * Returns a parsed xml from a file.
+   * @param  {file} file
+   * @return {xml}
+   * (func xml<-file)
+   */
   // (func xml<-file)
   // class Class_xml_from_file {
     Abstract_xml_from_file::~Abstract_xml_from_file() {}
@@ -2389,7 +2468,13 @@ namespace vx_data_xml {
     vx_core::vx_release_one_except(text, output);
     return output;
   }
-
+  /**
+   * @function xml_from_string
+   * Returns a parsed xml from a string.
+   * @param  {string} text
+   * @return {xml}
+   * (func xml<-string)
+   */
   // (func xml<-string)
   // class Class_xml_from_string {
     Abstract_xml_from_string::~Abstract_xml_from_string() {}
@@ -2488,7 +2573,13 @@ namespace vx_data_xml {
     vx_core::vx_release_one_except(textblock, output);
     return output;
   }
-
+  /**
+   * @function xml_from_textblock
+   * Returns a parsed xml from a textblock.
+   * @param  {textblock} textblock
+   * @return {xml}
+   * (func xml<-textblock)
+   */
   // (func xml<-textblock)
   // class Class_xml_from_textblock {
     Abstract_xml_from_textblock::~Abstract_xml_from_textblock() {}

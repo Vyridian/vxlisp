@@ -164,7 +164,24 @@ namespace vx_collection {
 		  return output;
 	}
 
-
+  /**
+   * @function any_from_for_until_loop_max
+   * Returns a value using a until loop.
+   * output : any-1 := start
+   * count : int := 0
+   * (while continue
+   *   continue : boolean := (count <= max)
+   *   (if continue
+   *     count += 1
+   *     output = (fn-loop output)
+   *     continue = (fn-until output)))
+   * @param  {any-1} start
+   * @param  {boolean<-any} fn-until
+   * @param  {any<-any} fn-loop
+   * @param  {int} max
+   * @return {any-1}
+   * (func any<-for-until-loop-max)
+   */
   // (func any<-for-until-loop-max)
   // class Class_any_from_for_until_loop_max {
     Abstract_any_from_for_until_loop_max::~Abstract_any_from_for_until_loop_max() {}
@@ -241,7 +258,15 @@ namespace vx_collection {
     }
 
   //}
-
+  /**
+   * @function any_from_for_until_loop
+   * Returns a value using an until loop. Maximum 10000 times.
+   * @param  {any-1} start
+   * @param  {boolean<-any} fn-until
+   * @param  {any<-any} fn-loop
+   * @return {any-1}
+   * (func any<-for-until-loop)
+   */
   // (func any<-for-until-loop)
   // class Class_any_from_for_until_loop {
     Abstract_any_from_for_until_loop::~Abstract_any_from_for_until_loop() {}
@@ -317,7 +342,25 @@ namespace vx_collection {
     }
 
   //}
-
+  /**
+   * @function any_from_for_while_loop_max
+   * Returns a value using a while loop.
+   * output : any-1 := start
+   * count : int := 0
+   * (while continue
+   *  continue : boolean := (count <= max)
+   *  (if continue
+   *   continue = (fn-while output)
+   *   (if continue
+   *    count += 1
+   *    output = (fn-loop output))))
+   * @param  {any-1} start
+   * @param  {boolean<-any} fn-while
+   * @param  {any<-any} fn-loop
+   * @param  {int} max
+   * @return {any-1}
+   * (func any<-for-while-loop-max)
+   */
   // (func any<-for-while-loop-max)
   // class Class_any_from_for_while_loop_max {
     Abstract_any_from_for_while_loop_max::~Abstract_any_from_for_while_loop_max() {}
@@ -394,7 +437,15 @@ namespace vx_collection {
     }
 
   //}
-
+  /**
+   * @function any_from_for_while_loop
+   * Returns a value using a while loop. Maximum 1000 times.
+   * @param  {any-1} start
+   * @param  {boolean<-any} fn-while
+   * @param  {any<-any} fn-loop
+   * @return {any-1}
+   * (func any<-for-while-loop)
+   */
   // (func any<-for-while-loop)
   // class Class_any_from_for_while_loop {
     Abstract_any_from_for_while_loop::~Abstract_any_from_for_while_loop() {}
@@ -470,7 +521,22 @@ namespace vx_collection {
     }
 
   //}
-
+  /**
+   * @function list_from_for_while_loop_max
+   * Returns a list of any-1 using a while loop.
+   * 1. output : list-1 := (empty list-1)
+   * 2. value : any-1 := start.
+   * 3. value : any-1 := (fn-loop value).
+   * 4. check : boolean := (fn-while value).
+   * 5. if (= check true) output := (copy output value), Go to 3 (Maximum max times).
+   * 6. else end.
+   * @param  {any-1} start
+   * @param  {boolean<-any} fn-while
+   * @param  {any<-any} fn-loop
+   * @param  {int} max
+   * @return {list-1}
+   * (func list<-for-while-loop-max)
+   */
   // (func list<-for-while-loop-max)
   // class Class_list_from_for_while_loop_max {
     Abstract_list_from_for_while_loop_max::~Abstract_list_from_for_while_loop_max() {}
@@ -547,7 +613,15 @@ namespace vx_collection {
     }
 
   //}
-
+  /**
+   * @function list_from_for_while_loop
+   * Returns a list of any-1 using a while loop. Max: 1000
+   * @param  {any-1} start
+   * @param  {boolean<-any} fn-while
+   * @param  {any<-any} fn-loop
+   * @return {list-1}
+   * (func list<-for-while-loop)
+   */
   // (func list<-for-while-loop)
   // class Class_list_from_for_while_loop {
     Abstract_list_from_for_while_loop::~Abstract_list_from_for_while_loop() {}
@@ -623,7 +697,14 @@ namespace vx_collection {
     }
 
   //}
-
+  /**
+   * @function list_from_list_filter
+   * Filter List to only include non-empty values
+   * @param  {list-2} vallist
+   * @param  {any<-any} fn-filter
+   * @return {list-1}
+   * (func list<-list-filter)
+   */
   // (func list<-list-filter)
   // class Class_list_from_list_filter {
     Abstract_list_from_list_filter::~Abstract_list_from_list_filter() {}
@@ -698,7 +779,15 @@ namespace vx_collection {
     }
 
   //}
-
+  /**
+   * @function list_from_list_start_end
+   * Returns a list from another list
+   * @param  {list-1} values
+   * @param  {int} start
+   * @param  {int} end
+   * @return {list-1}
+   * (func list<-list-start-end)
+   */
   // (func list<-list-start-end)
   // class Class_list_from_list_start_end {
     Abstract_list_from_list_start_end::~Abstract_list_from_list_start_end() {}
@@ -786,7 +875,13 @@ namespace vx_collection {
     vx_core::vx_release_one_except(val, output);
     return output;
   }
-
+  /**
+   * @function is_list
+   * Returns true if the given value is a list.
+   * @param  {any} val Any value
+   * @return {boolean}
+   * (func is-list)
+   */
   // (func is-list)
   // class Class_is_list {
     Abstract_is_list::~Abstract_is_list() {}
@@ -883,7 +978,13 @@ namespace vx_collection {
     vx_core::vx_release_one_except(val, output);
     return output;
   }
-
+  /**
+   * @function is_map
+   * Returns true if the given value is a map.
+   * @param  {any} val Any value
+   * @return {boolean}
+   * (func is-map)
+   */
   // (func is-map)
   // class Class_is_map {
     Abstract_is_map::~Abstract_is_map() {}
@@ -968,7 +1069,26 @@ namespace vx_collection {
     }
 
   //}
-
+  /**
+   * @function list_from_for_end_loop
+   * Returns a list of any-1 by iterating i from for to next where each item is (loop i).
+   * This is similar to a for next loop in other languages.
+   * output : list-1 := (empty list-1)
+   * (if start <= end
+   *  (for i=start to end
+   *   val : any-1 := (fn-loop i)
+   *   output += val)
+   *  (else
+   *   (for i=start to end; i--
+   *    val : any-1 := (fn-loop i)
+   *    output += val)
+   *  ))
+   * @param  {int} start
+   * @param  {int} end
+   * @param  {any<-int} fn-loop
+   * @return {list-1}
+   * (func list<-for-end-loop)
+   */
   // (func list<-for-end-loop)
   // class Class_list_from_for_end_loop {
     Abstract_list_from_for_end_loop::~Abstract_list_from_for_end_loop() {}
@@ -1044,7 +1164,14 @@ namespace vx_collection {
     }
 
   //}
-
+  /**
+   * @function list_from_list_end
+   * Returns a sub list from positions 0 to end.
+   * @param  {list-1} values
+   * @param  {int} end
+   * @return {list-1}
+   * (func list<-list-end)
+   */
   // (func list<-list-end)
   // class Class_list_from_list_end {
     Abstract_list_from_list_end::~Abstract_list_from_list_end() {}
@@ -1119,7 +1246,14 @@ namespace vx_collection {
     }
 
   //}
-
+  /**
+   * @function list_from_list_filtertypes
+   * Filter List to only include matching types
+   * @param  {list-2} vallist
+   * @param  {typelist} filtertypes
+   * @return {list-1}
+   * (func list<-list-filtertypes)
+   */
   // (func list<-list-filtertypes)
   // class Class_list_from_list_filtertypes {
     Abstract_list_from_list_filtertypes::~Abstract_list_from_list_filtertypes() {}
@@ -1194,7 +1328,14 @@ namespace vx_collection {
     }
 
   //}
-
+  /**
+   * @function list_from_list_start
+   * Returns a sub list from start to list end.
+   * @param  {list-1} values
+   * @param  {int} start
+   * @return {list-1}
+   * (func list<-list-start)
+   */
   // (func list<-list-start)
   // class Class_list_from_list_start {
     Abstract_list_from_list_start::~Abstract_list_from_list_start() {}

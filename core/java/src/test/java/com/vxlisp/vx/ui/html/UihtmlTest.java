@@ -21,12 +21,12 @@ public final class UihtmlTest {
   public static Test.Type_testcoveragesummary test_coveragesummary() {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/ui/html/uihtml", 
-      ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 4), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 52, ":tests", 10, ":total", 19), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 15), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 15), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 15), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 19), 
+      ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 6), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 54, ":tests", 12, ":total", 22), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 16), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 16), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 16), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 22), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
     );
   }
@@ -41,7 +41,9 @@ public final class UihtmlTest {
         ":layout-app-html", 0,
         ":layout-else-html", 0,
         ":layout-label-html", 0,
-        ":layoutenginehtml", 0
+        ":layoutenginehtml", 0,
+        ":style-hidden", 0,
+        ":style-selected", 0
       ),
       ":funcmap", Core.t_intmap.vx_new(
         ":context-write", 0,
@@ -51,6 +53,7 @@ public final class UihtmlTest {
         ":node-render<-node-ui", 0,
         ":string-stylename<-name-styletype", 0,
         ":style<-style", 0,
+        ":stylelist-extra<-ui", 0,
         ":stylelist<-stylelist", 0,
         ":stylelist<-stylemap", 0,
         ":stylemap<-stylemap", 0,

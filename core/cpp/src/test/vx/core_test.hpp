@@ -63,8 +63,13 @@ namespace vx_core_test {
   vx_test::Type_testcase f_last_from_list(vx_core::Type_context context);
   vx_test::Type_testcase f_length_from_list(vx_core::Type_context context);
   vx_test::Type_testcase f_let(vx_core::Type_context context);
+  vx_test::Type_testcase f_list_join_from_list(vx_core::Type_context context);
+  vx_test::Type_testcase f_list_join_from_list(vx_core::Type_context context);
+  vx_test::Type_testcase f_list_from_list(vx_core::Type_context context);
+  vx_test::Type_testcase f_list_from_map(vx_core::Type_context context);
   vx_test::Type_testcase f_list_from_map(vx_core::Type_context context);
   vx_test::Type_testcase f_map_from_list(vx_core::Type_context context);
+  vx_test::Type_testcase f_map_from_map(vx_core::Type_context context);
   vx_test::Type_testcase f_map_from_map(vx_core::Type_context context);
   vx_test::Type_testcase f_new(vx_core::Type_context context);
   vx_test::Type_testcase f_or(vx_core::Type_context context);

@@ -11,8 +11,13 @@
               text       : string]
  :doc "File structure")
 
+(type filelist : list
+ :allowtypes [file]
+ :doc "List of file")
+
 (type fileformat : string
- :allowvalues [:text])
+ :allowvalues [:binary
+               :text])
 
 (func boolean-exists<-file : boolean
  [file : file]

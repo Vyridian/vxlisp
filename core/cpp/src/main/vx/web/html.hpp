@@ -103,10 +103,6 @@ namespace vx_web_html {
   typedef Abstract_stylesheet* Type_stylesheet;
   extern Type_stylesheet e_stylesheet;
   extern Type_stylesheet t_stylesheet;
-  class Abstract_subpropmap;
-  typedef Abstract_subpropmap* Type_subpropmap;
-  extern Type_subpropmap e_subpropmap;
-  extern Type_subpropmap t_subpropmap;
   class Abstract_table;
   typedef Abstract_table* Type_table;
   extern Type_table e_table;
@@ -1203,9 +1199,9 @@ namespace vx_web_html {
     // props()
     vx_web_html::Type_propmap vx_p_props = NULL;
     virtual vx_web_html::Type_propmap props() const = 0;
-    // subprops()
-    vx_web_html::Type_subpropmap vx_p_subprops = NULL;
-    virtual vx_web_html::Type_subpropmap subprops() const = 0;
+    // stylelist()
+    vx_web_html::Type_stylelist vx_p_stylelist = NULL;
+    virtual vx_web_html::Type_stylelist stylelist() const = 0;
   };
   class Class_style : public virtual Abstract_style {
   public:
@@ -1223,7 +1219,7 @@ namespace vx_web_html {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::Type_string name() const override;
     virtual vx_web_html::Type_propmap props() const override;
-    virtual vx_web_html::Type_subpropmap subprops() const override;
+    virtual vx_web_html::Type_stylelist stylelist() const override;
   };
 
   // (type stylelist)
@@ -1354,42 +1350,6 @@ namespace vx_web_html {
     virtual vx_core::Type_string name() const override;
     virtual vx_web_html::Type_stylelist styles() const override;
     virtual vx_web_html::Type_stylemap stylemap() const override;
-  };
-
-  // (type subpropmap)
-  class Abstract_subpropmap : public virtual vx_core::Abstract_map {
-  public:
-    Abstract_subpropmap() {};
-    virtual ~Abstract_subpropmap() = 0;
-    // vx_get_any(key)
-    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
-    // vx_map()
-    virtual vx_core::vx_Type_mapany vx_map() const = 0;
-    // vx_new_from_map(T, Map<T>)
-    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
-    std::map<std::string, vx_web_html::Type_propmap> vx_p_map;
-    // vx_mappropmap()
-    virtual std::map<std::string, vx_web_html::Type_propmap> vx_mappropmap() const = 0;
-    // vx_get_propmap(key)
-    virtual vx_web_html::Type_propmap vx_get_propmap(vx_core::Type_string key) const = 0;
-  };
-  class Class_subpropmap : public virtual Abstract_subpropmap {
-  public:
-    Class_subpropmap();
-    virtual ~Class_subpropmap() override;
-    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
-    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
-    virtual vx_core::Type_any vx_empty() const override;
-    virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Type_typedef vx_typedef() const override;
-    virtual vx_core::Type_constdef vx_constdef() const override;
-    virtual vx_core::Type_msgblock vx_msgblock() const override;
-    virtual vx_core::vx_Type_listany vx_dispose() override;
-    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
-    virtual vx_core::vx_Type_mapany vx_map() const override;
-    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
-    virtual std::map<std::string, vx_web_html::Type_propmap> vx_mappropmap() const override;
-    virtual vx_web_html::Type_propmap vx_get_propmap(vx_core::Type_string key) const override;
   };
 
   // (type table)

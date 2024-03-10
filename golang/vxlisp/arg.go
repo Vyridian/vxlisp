@@ -351,12 +351,15 @@ func StringFromArg(arg vxarg) string {
 }
 
 func StringFromArgIndent(arg vxarg, indent int) string {
-	lineindent := ""
+	initindent := ""
+	lineindent := "\n"
 	if indent > 0 {
-		lineindent = "\n" + StringRepeat(" ", indent)
+		sindent := StringRepeat(" ", indent)
+		lineindent += sindent
+		initindent = lineindent
 	}
 	output := "" +
-		lineindent + "(arg" +
+		initindent + "(arg" +
 		lineindent + " :name  " + arg.name +
 		lineindent + " :alias " + arg.alias
 	if arg.vxtype.name != "" {

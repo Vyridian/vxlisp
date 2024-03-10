@@ -41,12 +41,19 @@ namespace vx_event {
   typedef Abstract_event_from_event* Func_event_from_event;
   extern Func_event_from_event e_event_from_event;
   extern Func_event_from_event t_event_from_event;
+  class Abstract_event_from_event_async;
+  typedef Abstract_event_from_event_async* Func_event_from_event_async;
+  extern Func_event_from_event_async e_event_from_event_async;
+  extern Func_event_from_event_async t_event_from_event_async;
   class Abstract_eventmap_from_eventlist;
   typedef Abstract_eventmap_from_eventlist* Func_eventmap_from_eventlist;
   extern Func_eventmap_from_eventlist e_eventmap_from_eventlist;
   extern Func_eventmap_from_eventlist t_eventmap_from_eventlist;
   // (func event<-event)
   vx_event::Type_event f_event_from_event(vx_core::Type_context context, vx_event::Type_event event);
+
+  // (func event<-event-async)
+  vx_core::vx_Type_async f_event_from_event_async(vx_core::Type_context context, vx_event::Type_event event);
 
   // (func eventmap<-eventlist)
   vx_event::Type_eventmap f_eventmap_from_eventlist(vx_event::Type_eventlist eventlist);
@@ -64,17 +71,20 @@ namespace vx_event {
     vx_core::Type_string vx_p_name = NULL;
     virtual vx_core::Type_string name() const = 0;
     // from()
-    vx_core::Type_any vx_p_from = NULL;
-    virtual vx_core::Type_any from() const = 0;
+    vx_core::Type_string vx_p_from = NULL;
+    virtual vx_core::Type_string from() const = 0;
     // to()
-    vx_core::Type_any vx_p_to = NULL;
-    virtual vx_core::Type_any to() const = 0;
+    vx_core::Type_string vx_p_to = NULL;
+    virtual vx_core::Type_string to() const = 0;
     // datamap()
     vx_core::Type_anymap vx_p_datamap = NULL;
     virtual vx_core::Type_anymap datamap() const = 0;
     // event<-event()
     vx_event::Func_event_from_event vx_p_event_from_event = NULL;
     virtual vx_event::Func_event_from_event event_from_event() const = 0;
+    // event<-event-async()
+    vx_event::Func_event_from_event_async vx_p_event_from_event_async = NULL;
+    virtual vx_event::Func_event_from_event_async event_from_event_async() const = 0;
   };
   class Class_event : public virtual Abstract_event {
   public:
@@ -91,10 +101,11 @@ namespace vx_event {
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::Type_string name() const override;
-    virtual vx_core::Type_any from() const override;
-    virtual vx_core::Type_any to() const override;
+    virtual vx_core::Type_string from() const override;
+    virtual vx_core::Type_string to() const override;
     virtual vx_core::Type_anymap datamap() const override;
     virtual vx_event::Func_event_from_event event_from_event() const override;
+    virtual vx_event::Func_event_from_event_async event_from_event_async() const override;
   };
 
   // (type eventlist)
@@ -245,6 +256,33 @@ namespace vx_event {
     virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func event<-event-async)
+  class Abstract_event_from_event_async : public vx_core::Abstract_any_from_any_context_async, public virtual vx_core::Abstract_replfunc_async {
+  public:
+    Abstract_event_from_event_async() {};
+    virtual ~Abstract_event_from_event_async() = 0;
+    virtual vx_core::Func_any_from_any_context_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context_async::IFn fn) const override = 0;
+    virtual vx_core::vx_Type_async vx_any_from_any_context_async(vx_core::Type_any generic_any_1, vx_core::Type_context context, vx_core::Type_any val) const override = 0;
+    virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_event_from_event_async : public virtual Abstract_event_from_event_async {
+  public:
+    Class_event_from_event_async();
+    virtual ~Class_event_from_event_async() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any_context_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context_async::IFn fn) const override;
+    virtual vx_core::vx_Type_async vx_any_from_any_context_async(vx_core::Type_any generic_any_1, vx_core::Type_context context, vx_core::Type_any val) const override;
+    virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override;
   };
 
   // (func eventmap<-eventlist)

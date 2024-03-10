@@ -219,7 +219,15 @@ namespace vx_web_http {
     }
     return output;
   }
-
+  /**
+   * 
+   * @async
+   * @function csv_from_httpget
+   * Returns a csv file from an httpget
+   * @param  {string} url
+   * @return {csv}
+   * (func csv<-httpget)
+   */
   // (func csv<-httpget)
   // class Class_csv_from_httpget {
     Abstract_csv_from_httpget::~Abstract_csv_from_httpget() {}
@@ -329,7 +337,15 @@ namespace vx_web_http {
     }
     return output;
   }
-
+  /**
+   * 
+   * @async
+   * @function json_from_httpget
+   * Returns a json response from an httpget
+   * @param  {string} url
+   * @return {response}
+   * (func json<-httpget)
+   */
   // (func json<-httpget)
   // class Class_json_from_httpget {
     Abstract_json_from_httpget::~Abstract_json_from_httpget() {}
@@ -424,7 +440,16 @@ namespace vx_web_http {
     }
     return output;
   }
-
+  /**
+   * 
+   * @async
+   * @function response_from_httpget
+   * Returns a response from an httpget
+   * @param  {string} url
+   * @param  {string} contenttype
+   * @return {response}
+   * (func response<-httpget)
+   */
   // (func response<-httpget)
   // class Class_response_from_httpget {
     Abstract_response_from_httpget::~Abstract_response_from_httpget() {}
@@ -524,7 +549,15 @@ namespace vx_web_http {
     }
     return output;
   }
-
+  /**
+   * 
+   * @async
+   * @function text_from_httpget
+   * Returns string from an httpget
+   * @param  {string} url
+   * @return {string}
+   * (func text<-httpget)
+   */
   // (func text<-httpget)
   // class Class_text_from_httpget {
     Abstract_text_from_httpget::~Abstract_text_from_httpget() {}
@@ -616,7 +649,13 @@ namespace vx_web_http {
     vx_core::vx_release_one_except(response, output);
     return output;
   }
-
+  /**
+   * @function text_from_response
+   * Returns a string from a response
+   * @param  {response} response
+   * @return {string}
+   * (func text<-response)
+   */
   // (func text<-response)
   // class Class_text_from_response {
     Abstract_text_from_response::~Abstract_text_from_response() {}
@@ -727,7 +766,16 @@ namespace vx_web_http {
     }
     return output;
   }
-
+  /**
+   * 
+   * @async
+   * @function textblock_from_httpget
+   * Returns a textblock from an httpget
+   * @param  {string} url
+   * @param  {string} contenttype
+   * @return {textblock}
+   * (func textblock<-httpget)
+   */
   // (func textblock<-httpget)
   // class Class_textblock_from_httpget {
     Abstract_textblock_from_httpget::~Abstract_textblock_from_httpget() {}
@@ -816,7 +864,13 @@ namespace vx_web_http {
     vx_core::vx_release_one_except(response, output);
     return output;
   }
-
+  /**
+   * @function textblock_from_response
+   * Returns a textblock from a response
+   * @param  {response} response
+   * @return {textblock}
+   * (func textblock<-response)
+   */
   // (func textblock<-response)
   // class Class_textblock_from_response {
     Abstract_textblock_from_response::~Abstract_textblock_from_response() {}
@@ -927,7 +981,15 @@ namespace vx_web_http {
     }
     return output;
   }
-
+  /**
+   * 
+   * @async
+   * @function xml_from_httpget
+   * Return Xml from an httpget
+   * @param  {string} url
+   * @return {xml}
+   * (func xml<-httpget)
+   */
   // (func xml<-httpget)
   // class Class_xml_from_httpget {
     Abstract_xml_from_httpget::~Abstract_xml_from_httpget() {}

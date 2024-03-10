@@ -2764,7 +2764,7 @@ public final class Textblock {
 
   public static Textblock.Type_delimlist f_delimlist_pos_from_string_delimlist(final Core.Type_string text, final Textblock.Type_delimlist delimlist) {
     Textblock.Type_delimlist output = Textblock.e_delimlist;
-    output = Core.f_list_from_list(
+    output = Core.f_list_from_list_1(
       Textblock.t_delimlist,
       delimlist,
       Core.t_any_from_any.vx_fn_new((delim_any) -> {
@@ -3057,7 +3057,7 @@ public final class Textblock {
 
   public static Core.Type_stringlist f_stringlist_from_textblocklist(final Textblock.Type_textblocklist textblocklist) {
     Core.Type_stringlist output = Core.e_stringlist;
-    output = Core.f_list_from_list(
+    output = Core.f_list_from_list_1(
       Core.t_stringlist,
       textblocklist,
       Textblock.t_text_from_textblock

@@ -26,7 +26,18 @@
                       layout-app-html
                       layout-label-html))
   :layoutelse       layout-else-html
-  :stylesheetrender stylesheet-render-html))
+  :stylesheetrender stylesheet-render-html)
+ :doc "Html layout engine used to render html from ui and stylesheet")
+
+(const style-hidden : style
+ (style
+  :name ".style-hidden")
+ :doc "")
+
+(const style-selected : style
+ (style
+  :name ".style-selected")
+ :doc "")
 
 (func context-write : context
  (doc/context-write)
@@ -57,8 +68,10 @@
   (fn : html/div
    [key   : string
     value : ui/ui]
-   (html/div
-    :id key)))
+   (let : html/div
+    [uid : string := (:uid value)]
+    (html/div
+     :id uid))))
  :doc "Returns a divchildlist of empty divs from a uimap")
 
 (func node-app<-ui-orig-parent : html/node
@@ -95,11 +108,11 @@
     name))
   (then
    (== styletype ui/styletype-system)
-   name)
-  (else
    (string
     "#"
-    name)))
+    name))
+  (else
+   name))
  :doc "")
 
 (func style<-style : html/style
@@ -118,6 +131,8 @@
      styletype        : ui/styletype := (:type             uistyle)
      color-background : string       := (:color-background uistyle)
      color-hoverbkgrd : string       := (:color-hoverbkgrd uistyle)
+     cursor           : ui/cursor    := (:cursor           uistyle)
+     hidden           : boolean      := (:hidden           uistyle)
      posx             : int          := (:x pointpos)
      posy             : int          := (:y pointpos)
      sizex            : int          := (:x pointsize)
@@ -141,7 +156,7 @@
                                            (== layout layout-parallax)
                                            (== layout layout-statusbar))
                                           "fixed")
-                                         (else "relative"))
+                                         (else ""))
      top              : string       := (if : string
                                          (then
                                           (== pin ui/pin-expand)
@@ -233,23 +248,11 @@
                                            "mm")))
      display          : string       := (if : string
                                          (then
-                                          (or
-                                           (== layout ui/layout-flow-columns)
-                                           (== layout ui/layout-flow-rows))
-                                           "flex"))
-     flexflow         : string       := (if : string
+                                          hidden
+                                          "none")
                                          (then
-                                          (== layout ui/layout-flow-columns)
-                                          "column wrap")
-                                         (then
-                                          (== layout ui/layout-flow-rows)
-                                          "row wrap"))
-     aligncontent     : string       := (if : string
-                                         (then
-                                          (or
-                                           (== layout ui/layout-flow-columns)
-                                           (== layout ui/layout-flow-rows))
-                                           "flex-start"))
+                                          (== layout ui/layout-flow-item)
+                                          "inline-block"))
      gap              : string       := (if : string
                                          (then
                                           (or
@@ -259,20 +262,25 @@
      overflowx        : string       := (if : string
                                          (then
                                           (== layout ui/layout-flow-rows)
-                                          "scroll"))
+                                          "auto"))
      overflowy        : string       := (if : string
                                          (then
                                           (== layout ui/layout-flow-columns)
-                                          "scroll"))
+                                          "auto")
+                                         (else
+                                          "auto"))
      hoverbkgrdcolor  : string       := (if : string
                                          (then
                                           (!= "" color-hoverbkgrd)
                                           (string "#" color-hoverbkgrd)))
+     scursor          : string       := (if : string
+                                         (then
+                                          (== cursor ui/cursor-pointer)
+                                          "pointer"))
      props            : html/propmap := (html/propmap
                                          :background-color backgroundcolor
+                                         :cursor           scursor
                                          :display          display
-                                         :flex-flow        flexflow
-                                         :align-content    aligncontent
                                          :gap              gap
                                          :position         position
                                          :top              top
@@ -283,13 +291,19 @@
                                          :width            width
                                          :overflow-x       overflowx
                                          :overflow-y       overflowy)
-     hoverprops       : html/propmap := (html/propmap
+     hoverprops     : html/propmap   := (html/propmap
                                          :background-color hoverbkgrdcolor)
-     subprops         : html/subpropmap := (html/subpropmap
-                                            "&:hover" hoverprops)]
+     substylelist   : html/stylelist := (if : html/stylelist
+                                         (then
+                                          (!-empty hoverprops)
+                                          (html/stylelist
+                                          (html/style
+                                           :name  "&:hover"
+                                           :props hoverprops))))]
     (html/style
-     :name  stylename
-     :props props))))
+     :name      stylename
+     :props     props
+     :stylelist substylelist))))
  :doc "Returns a htmlstyle from a uistyle")
 
 (func stylelist<-stylelist : html/stylelist
@@ -309,6 +323,26 @@
    (style<-style
     value)))
  :doc "Returns a htmlstylelist from a uistylemap")
+
+(func stylelist-extra<-ui : html/stylelist
+ [ui : ui]
+ (let : html/stylelist
+  [uistyles : ui/stylelist   := (:stylelist ui)
+   selected : boolean        := (:selected  ui)
+   hidden  : boolean         := (:hidden    ui)
+   styles1  : html/stylelist := (stylelist<-stylelist
+                                 uistyles)
+   styles2  : html/stylelist := (if : html/stylelist
+                                 (then
+                                  hidden
+                                  (copy styles1
+                                   style-hidden))
+                                 (then selected
+                                  (copy styles1
+                                   style-selected))
+                                 (else styles1))]
+  styles2)
+ :doc "Returns a stylelist from a ui including style-hidden and style-selected")
 
 (func stylemap<-stylemap : html/stylemap
  [uistylemap : ui/stylemap]
@@ -347,7 +381,7 @@
   orig   : ui
   parent : ui]
  (let : ui/ui
-  [uid      : string            := (:uid ui)
+  [uid      : string            := (:uid   ui)
    uimap    : ui/uimap          := (:uimap ui)
    children : html/divchildlist := (divchildlist<-uimap
                                     uimap)
@@ -410,11 +444,9 @@
   [uid      : string            := (:uid       ui)
    uimap    : ui/uimap          := (:uimap     ui)
    uistyle  : ui/style          := (:style     ui)
-   uistyles : ui/stylelist      := (:stylelist ui)
    style    : html/style        := (style<-style
                                     uistyle)
-   styles   : html/stylelist    := (stylelist<-stylelist
-                                    uistyles)
+   styles   : html/stylelist    := (stylelist-extra<-ui ui)
    children : html/divchildlist := (divchildlist<-uimap
                                     uimap)
    node     : html/node         := (html/div

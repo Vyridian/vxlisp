@@ -24,6 +24,34 @@ namespace vx_ui_ui {
   typedef Abstract_cursor_pointer* Type_cursor_pointer;
   extern Type_cursor_pointer e_cursor_pointer;
   extern Type_cursor_pointer t_cursor_pointer;
+  class Abstract_font;
+  typedef Abstract_font* Type_font;
+  extern Type_font e_font;
+  extern Type_font t_font;
+  class Abstract_fontface;
+  typedef Abstract_fontface* Type_fontface;
+  extern Type_fontface e_fontface;
+  extern Type_fontface t_fontface;
+  class Abstract_fontfacelist;
+  typedef Abstract_fontfacelist* Type_fontfacelist;
+  extern Type_fontfacelist e_fontfacelist;
+  extern Type_fontfacelist t_fontfacelist;
+  class Abstract_fontfacemap;
+  typedef Abstract_fontfacemap* Type_fontfacemap;
+  extern Type_fontfacemap e_fontfacemap;
+  extern Type_fontfacemap t_fontfacemap;
+  class Abstract_fontmap;
+  typedef Abstract_fontmap* Type_fontmap;
+  extern Type_fontmap e_fontmap;
+  extern Type_fontmap t_fontmap;
+  class Abstract_fontstyle;
+  typedef Abstract_fontstyle* Type_fontstyle;
+  extern Type_fontstyle e_fontstyle;
+  extern Type_fontstyle t_fontstyle;
+  class Abstract_fontstylemap;
+  typedef Abstract_fontstylemap* Type_fontstylemap;
+  extern Type_fontstylemap e_fontstylemap;
+  extern Type_fontstylemap t_fontstylemap;
   class Abstract_layout;
   typedef Abstract_layout* Type_layout;
   extern Type_layout e_layout;
@@ -52,14 +80,6 @@ namespace vx_ui_ui {
   typedef Abstract_pointstyle* Type_pointstyle;
   extern Type_pointstyle e_pointstyle;
   extern Type_pointstyle t_pointstyle;
-  class Abstract_render;
-  typedef Abstract_render* Type_render;
-  extern Type_render e_render;
-  extern Type_render t_render;
-  class Abstract_rendermap;
-  typedef Abstract_rendermap* Type_rendermap;
-  extern Type_rendermap e_rendermap;
-  extern Type_rendermap t_rendermap;
   class Abstract_style;
   typedef Abstract_style* Type_style;
   extern Type_style e_style;
@@ -102,6 +122,9 @@ namespace vx_ui_ui {
   class Class_layout_background;
   typedef Class_layout_background* Const_layout_background;
   extern Const_layout_background c_layout_background;
+  class Class_layout_button;
+  typedef Class_layout_button* Const_layout_button;
+  extern Const_layout_button c_layout_button;
   class Class_layout_combobox;
   typedef Class_layout_combobox* Const_layout_combobox;
   extern Const_layout_combobox c_layout_combobox;
@@ -111,6 +134,9 @@ namespace vx_ui_ui {
   class Class_layout_flow_columns;
   typedef Class_layout_flow_columns* Const_layout_flow_columns;
   extern Const_layout_flow_columns c_layout_flow_columns;
+  class Class_layout_flow_item;
+  typedef Class_layout_flow_item* Const_layout_flow_item;
+  extern Const_layout_flow_item c_layout_flow_item;
   class Class_layout_flow_rows;
   typedef Class_layout_flow_rows* Const_layout_flow_rows;
   extern Const_layout_flow_rows c_layout_flow_rows;
@@ -159,6 +185,9 @@ namespace vx_ui_ui {
   class Class_layout_textentry;
   typedef Class_layout_textentry* Const_layout_textentry;
   extern Const_layout_textentry c_layout_textentry;
+  class Class_layout_titlebar;
+  typedef Class_layout_titlebar* Const_layout_titlebar;
+  extern Const_layout_titlebar c_layout_titlebar;
   class Class_pin_bottom;
   typedef Class_pin_bottom* Const_pin_bottom;
   extern Const_pin_bottom c_pin_bottom;
@@ -200,14 +229,38 @@ namespace vx_ui_ui {
   typedef Abstract_boolean_writestate_from_uiengine* Func_boolean_writestate_from_uiengine;
   extern Func_boolean_writestate_from_uiengine e_boolean_writestate_from_uiengine;
   extern Func_boolean_writestate_from_uiengine t_boolean_writestate_from_uiengine;
+  class Abstract_fontfacemap_from_fontfacelist;
+  typedef Abstract_fontfacemap_from_fontfacelist* Func_fontfacemap_from_fontfacelist;
+  extern Func_fontfacemap_from_fontfacelist e_fontfacemap_from_fontfacelist;
+  extern Func_fontfacemap_from_fontfacelist t_fontfacemap_from_fontfacelist;
   class Abstract_layout_from_style;
   typedef Abstract_layout_from_style* Func_layout_from_style;
   extern Func_layout_from_style e_layout_from_style;
   extern Func_layout_from_style t_layout_from_style;
+  class Abstract_layout_from_ui;
+  typedef Abstract_layout_from_ui* Func_layout_from_ui;
+  extern Func_layout_from_ui e_layout_from_ui;
+  extern Func_layout_from_ui t_layout_from_ui;
+  class Abstract_layout_from_ui_layoutengine;
+  typedef Abstract_layout_from_ui_layoutengine* Func_layout_from_ui_layoutengine;
+  extern Func_layout_from_ui_layoutengine e_layout_from_ui_layoutengine;
+  extern Func_layout_from_ui_layoutengine t_layout_from_ui_layoutengine;
+  class Abstract_layout_from_ui_layoutmap_else;
+  typedef Abstract_layout_from_ui_layoutmap_else* Func_layout_from_ui_layoutmap_else;
+  extern Func_layout_from_ui_layoutmap_else e_layout_from_ui_layoutmap_else;
+  extern Func_layout_from_ui_layoutmap_else t_layout_from_ui_layoutmap_else;
+  class Abstract_layoutengine_readstate;
+  typedef Abstract_layoutengine_readstate* Func_layoutengine_readstate;
+  extern Func_layoutengine_readstate e_layoutengine_readstate;
+  extern Func_layoutengine_readstate t_layoutengine_readstate;
   class Abstract_layoutmap_from_layoutlist;
   typedef Abstract_layoutmap_from_layoutlist* Func_layoutmap_from_layoutlist;
   extern Func_layoutmap_from_layoutlist e_layoutmap_from_layoutlist;
   extern Func_layoutmap_from_layoutlist t_layoutmap_from_layoutlist;
+  class Abstract_stringlist_selected_from_ui;
+  typedef Abstract_stringlist_selected_from_ui* Func_stringlist_selected_from_ui;
+  extern Func_stringlist_selected_from_ui e_stringlist_selected_from_ui;
+  extern Func_stringlist_selected_from_ui t_stringlist_selected_from_ui;
   class Abstract_stylemap_from_stylelist;
   typedef Abstract_stylemap_from_stylelist* Func_stylemap_from_stylelist;
   extern Func_stylemap_from_stylelist e_stylemap_from_stylelist;
@@ -216,18 +269,30 @@ namespace vx_ui_ui {
   typedef Abstract_stylesheet_render* Func_stylesheet_render;
   extern Func_stylesheet_render e_stylesheet_render;
   extern Func_stylesheet_render t_stylesheet_render;
-  class Abstract_ui_data_from_ui;
-  typedef Abstract_ui_data_from_ui* Func_ui_data_from_ui;
-  extern Func_ui_data_from_ui e_ui_data_from_ui;
-  extern Func_ui_data_from_ui t_ui_data_from_ui;
+  class Abstract_ui_child_from_ui_uid;
+  typedef Abstract_ui_child_from_ui_uid* Func_ui_child_from_ui_uid;
+  extern Func_ui_child_from_ui_uid e_ui_child_from_ui_uid;
+  extern Func_ui_child_from_ui_uid t_ui_child_from_ui_uid;
   class Abstract_ui_from_from_event;
   typedef Abstract_ui_from_from_event* Func_ui_from_from_event;
   extern Func_ui_from_from_event e_ui_from_from_event;
   extern Func_ui_from_from_event t_ui_from_from_event;
+  class Abstract_ui_layout_from_ui;
+  typedef Abstract_ui_layout_from_ui* Func_ui_layout_from_ui;
+  extern Func_ui_layout_from_ui e_ui_layout_from_ui;
+  extern Func_ui_layout_from_ui t_ui_layout_from_ui;
+  class Abstract_ui_layout_from_ui_layoutengine;
+  typedef Abstract_ui_layout_from_ui_layoutengine* Func_ui_layout_from_ui_layoutengine;
+  extern Func_ui_layout_from_ui_layoutengine e_ui_layout_from_ui_layoutengine;
+  extern Func_ui_layout_from_ui_layoutengine t_ui_layout_from_ui_layoutengine;
   class Abstract_ui_layout_from_ui_layoutmap_else;
   typedef Abstract_ui_layout_from_ui_layoutmap_else* Func_ui_layout_from_ui_layoutmap_else;
   extern Func_ui_layout_from_ui_layoutmap_else e_ui_layout_from_ui_layoutmap_else;
   extern Func_ui_layout_from_ui_layoutmap_else t_ui_layout_from_ui_layoutmap_else;
+  class Abstract_ui_layout_from_ui_uiengine;
+  typedef Abstract_ui_layout_from_ui_uiengine* Func_ui_layout_from_ui_uiengine;
+  extern Func_ui_layout_from_ui_uiengine e_ui_layout_from_ui_uiengine;
+  extern Func_ui_layout_from_ui_uiengine t_ui_layout_from_ui_uiengine;
   class Abstract_ui_readstate_from_uid;
   typedef Abstract_ui_readstate_from_uid* Func_ui_readstate_from_uid;
   extern Func_ui_readstate_from_uid e_ui_readstate_from_uid;
@@ -244,10 +309,26 @@ namespace vx_ui_ui {
   typedef Abstract_ui_render_from_ui_orig_parent* Func_ui_render_from_ui_orig_parent;
   extern Func_ui_render_from_ui_orig_parent e_ui_render_from_ui_orig_parent;
   extern Func_ui_render_from_ui_orig_parent t_ui_render_from_ui_orig_parent;
-  class Abstract_ui_from_renderer_ui_orig_parent;
-  typedef Abstract_ui_from_renderer_ui_orig_parent* Func_ui_from_renderer_ui_orig_parent;
-  extern Func_ui_from_renderer_ui_orig_parent e_ui_from_renderer_ui_orig_parent;
-  extern Func_ui_from_renderer_ui_orig_parent t_ui_from_renderer_ui_orig_parent;
+  class Abstract_ui_selected_from_ui;
+  typedef Abstract_ui_selected_from_ui* Func_ui_selected_from_ui;
+  extern Func_ui_selected_from_ui e_ui_selected_from_ui;
+  extern Func_ui_selected_from_ui t_ui_selected_from_ui;
+  class Abstract_ui_writechild_from_ui_child;
+  typedef Abstract_ui_writechild_from_ui_child* Func_ui_writechild_from_ui_child;
+  extern Func_ui_writechild_from_ui_child e_ui_writechild_from_ui_child;
+  extern Func_ui_writechild_from_ui_child t_ui_writechild_from_ui_child;
+  class Abstract_ui_writechildmap_from_ui_childmap;
+  typedef Abstract_ui_writechildmap_from_ui_childmap* Func_ui_writechildmap_from_ui_childmap;
+  extern Func_ui_writechildmap_from_ui_childmap e_ui_writechildmap_from_ui_childmap;
+  extern Func_ui_writechildmap_from_ui_childmap t_ui_writechildmap_from_ui_childmap;
+  class Abstract_ui_from_layout_ui_orig_parent;
+  typedef Abstract_ui_from_layout_ui_orig_parent* Func_ui_from_layout_ui_orig_parent;
+  extern Func_ui_from_layout_ui_orig_parent e_ui_from_layout_ui_orig_parent;
+  extern Func_ui_from_layout_ui_orig_parent t_ui_from_layout_ui_orig_parent;
+  class Abstract_uid_selected_from_ui;
+  typedef Abstract_uid_selected_from_ui* Func_uid_selected_from_ui;
+  extern Func_uid_selected_from_ui e_uid_selected_from_ui;
+  extern Func_uid_selected_from_ui t_uid_selected_from_ui;
   class Abstract_uiengine_readstate;
   typedef Abstract_uiengine_readstate* Func_uiengine_readstate;
   extern Func_uiengine_readstate e_uiengine_readstate;
@@ -256,6 +337,14 @@ namespace vx_ui_ui {
   typedef Abstract_uiengine_render* Func_uiengine_render;
   extern Func_uiengine_render e_uiengine_render;
   extern Func_uiengine_render t_uiengine_render;
+  class Abstract_uilist_selected_from_ui;
+  typedef Abstract_uilist_selected_from_ui* Func_uilist_selected_from_ui;
+  extern Func_uilist_selected_from_ui e_uilist_selected_from_ui;
+  extern Func_uilist_selected_from_ui t_uilist_selected_from_ui;
+  class Abstract_uilist_from_uimap;
+  typedef Abstract_uilist_from_uimap* Func_uilist_from_uimap;
+  extern Func_uilist_from_uimap e_uilist_from_uimap;
+  extern Func_uilist_from_uimap t_uilist_from_uimap;
   class Abstract_uimap_layout_from_uimap_layoutmap_else;
   typedef Abstract_uimap_layout_from_uimap_layoutmap_else* Func_uimap_layout_from_uimap_layoutmap_else;
   extern Func_uimap_layout_from_uimap_layoutmap_else e_uimap_layout_from_uimap_layoutmap_else;
@@ -278,11 +367,29 @@ namespace vx_ui_ui {
   // (func boolean-writestate<-uiengine)
   vx_core::Type_boolean f_boolean_writestate_from_uiengine(vx_core::Type_context context, vx_ui_ui::Type_uiengine uiengine);
 
+  // (func fontfacemap<-fontfacelist)
+  vx_ui_ui::Type_fontfacemap f_fontfacemap_from_fontfacelist(vx_ui_ui::Type_fontfacelist fontfacelist);
+
   // (func layout<-style)
   vx_ui_ui::Type_layout f_layout_from_style(vx_ui_ui::Type_style style);
 
+  // (func layout<-ui)
+  vx_ui_ui::Type_layout f_layout_from_ui(vx_core::Type_context context, vx_ui_ui::Type_ui ui);
+
+  // (func layout<-ui-layoutengine)
+  vx_ui_ui::Type_layout f_layout_from_ui_layoutengine(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_layoutengine layoutengine);
+
+  // (func layout<-ui-layoutmap-else)
+  vx_ui_ui::Type_layout f_layout_from_ui_layoutmap_else(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_layoutmap layoutmap, vx_ui_ui::Type_layout layoutelse);
+
+  // (func layoutengine-readstate)
+  vx_ui_ui::Type_layoutengine f_layoutengine_readstate(vx_core::Type_context context);
+
   // (func layoutmap<-layoutlist)
   vx_ui_ui::Type_layoutmap f_layoutmap_from_layoutlist(vx_ui_ui::Type_layoutlist layoutlist);
+
+  // (func stringlist-selected<-ui)
+  vx_core::Type_stringlist f_stringlist_selected_from_ui(vx_ui_ui::Type_ui ui);
 
   // (func stylemap<-stylelist)
   vx_ui_ui::Type_stylemap f_stylemap_from_stylelist(vx_ui_ui::Type_stylelist stylelist);
@@ -290,14 +397,23 @@ namespace vx_ui_ui {
   // (func stylesheet-render)
   vx_ui_ui::Type_stylesheet f_stylesheet_render(vx_ui_ui::Type_stylesheet stylesheetui);
 
-  // (func ui-data<-ui)
-  vx_ui_ui::Type_ui f_ui_data_from_ui(vx_ui_ui::Type_ui ui);
+  // (func ui-child<-ui-uid)
+  vx_ui_ui::Type_ui f_ui_child_from_ui_uid(vx_ui_ui::Type_ui ui, vx_core::Type_string uid);
 
   // (func ui-from<-event)
-  vx_ui_ui::Type_ui f_ui_from_from_event(vx_event::Type_event event);
+  vx_ui_ui::Type_ui f_ui_from_from_event(vx_core::Type_context context, vx_event::Type_event event);
+
+  // (func ui-layout<-ui)
+  vx_ui_ui::Type_ui f_ui_layout_from_ui(vx_core::Type_context context, vx_ui_ui::Type_ui ui);
+
+  // (func ui-layout<-ui-layoutengine)
+  vx_ui_ui::Type_ui f_ui_layout_from_ui_layoutengine(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_layoutengine layoutengine);
 
   // (func ui-layout<-ui-layoutmap-else)
   vx_ui_ui::Type_ui f_ui_layout_from_ui_layoutmap_else(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_layoutmap layoutmap, vx_ui_ui::Type_layout layoutelse);
+
+  // (func ui-layout<-ui-uiengine)
+  vx_ui_ui::Type_ui f_ui_layout_from_ui_uiengine(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_uiengine uiengine);
 
   // (func ui-readstate<-uid)
   vx_ui_ui::Type_ui f_ui_readstate_from_uid(vx_core::Type_context context, vx_core::Type_string uid);
@@ -306,19 +422,37 @@ namespace vx_ui_ui {
   vx_ui_ui::Type_ui f_ui_render(vx_ui_ui::Type_ui uiarg);
 
   // (func ui-render<-fn-render-ui-orig-parent)
-  vx_ui_ui::Type_render f_ui_render_from_fn_render_ui_orig_parent(vx_ui_ui::Func_ui_render_from_ui_orig_parent fn_render, vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent);
+  vx_ui_ui::Type_ui f_ui_render_from_fn_render_ui_orig_parent(vx_ui_ui::Func_ui_render_from_ui_orig_parent fn_render, vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent);
 
   // (func ui-render<-ui-orig-parent)
   vx_ui_ui::Type_ui f_ui_render_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent);
 
-  // (func ui<-renderer-ui-orig-parent)
-  vx_ui_ui::Type_ui f_ui_from_renderer_ui_orig_parent(vx_ui_ui::Type_layout renderer, vx_ui_ui::Type_ui uiarg, vx_ui_ui::Type_ui uiorig, vx_ui_ui::Type_ui parent);
+  // (func ui-selected<-ui)
+  vx_ui_ui::Type_ui f_ui_selected_from_ui(vx_ui_ui::Type_ui ui);
+
+  // (func ui-writechild<-ui-child)
+  vx_ui_ui::Type_ui f_ui_writechild_from_ui_child(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui child);
+
+  // (func ui-writechildmap<-ui-childmap)
+  vx_ui_ui::Type_ui f_ui_writechildmap_from_ui_childmap(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_uimap childmap);
+
+  // (func ui<-layout-ui-orig-parent)
+  vx_ui_ui::Type_ui f_ui_from_layout_ui_orig_parent(vx_ui_ui::Type_layout layout, vx_ui_ui::Type_ui uiarg, vx_ui_ui::Type_ui uiorig, vx_ui_ui::Type_ui parent);
+
+  // (func uid-selected<-ui)
+  vx_core::Type_string f_uid_selected_from_ui(vx_ui_ui::Type_ui ui);
 
   // (func uiengine-readstate)
   vx_ui_ui::Type_uiengine f_uiengine_readstate(vx_core::Type_context context);
 
   // (func uiengine-render)
   vx_ui_ui::Type_uiengine f_uiengine_render(vx_core::Type_context context, vx_ui_ui::Type_uiengine uiengine);
+
+  // (func uilist-selected<-ui)
+  vx_ui_ui::Type_uilist f_uilist_selected_from_ui(vx_ui_ui::Type_ui uiarg);
+
+  // (func uilist<-uimap)
+  vx_ui_ui::Type_uilist f_uilist_from_uimap(vx_ui_ui::Type_uimap uimap);
 
   // (func uimap-layout<-uimap-layoutmap-else)
   vx_ui_ui::Type_uimap f_uimap_layout_from_uimap_layoutmap_else(vx_ui_ui::Type_uimap uimap, vx_ui_ui::Type_layoutmap layoutmap, vx_ui_ui::Type_layout layoutelse);
@@ -418,6 +552,256 @@ namespace vx_ui_ui {
     virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
+  };
+
+  // (type font)
+  class Abstract_font : public virtual vx_core::Abstract_struct {
+  public:
+    Abstract_font() {};
+    virtual ~Abstract_font() = 0;
+    // vx_map()
+    virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    // name()
+    vx_core::Type_string vx_p_name = NULL;
+    virtual vx_core::Type_string name() const = 0;
+    // fontface()
+    vx_ui_ui::Type_fontface vx_p_fontface = NULL;
+    virtual vx_ui_ui::Type_fontface fontface() const = 0;
+    // fontsize()
+    vx_core::Type_int vx_p_fontsize = NULL;
+    virtual vx_core::Type_int fontsize() const = 0;
+    // fontstyle()
+    vx_ui_ui::Type_fontstyle vx_p_fontstyle = NULL;
+    virtual vx_ui_ui::Type_fontstyle fontstyle() const = 0;
+  };
+  class Class_font : public virtual Abstract_font {
+  public:
+    Class_font();
+    virtual ~Class_font() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_core::Type_string name() const override;
+    virtual vx_ui_ui::Type_fontface fontface() const override;
+    virtual vx_core::Type_int fontsize() const override;
+    virtual vx_ui_ui::Type_fontstyle fontstyle() const override;
+  };
+
+  // (type fontface)
+  class Abstract_fontface : public virtual vx_core::Abstract_struct {
+  public:
+    Abstract_fontface() {};
+    virtual ~Abstract_fontface() = 0;
+    // vx_map()
+    virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    // name()
+    vx_core::Type_string vx_p_name = NULL;
+    virtual vx_core::Type_string name() const = 0;
+    // filelist()
+    vx_data_file::Type_filelist vx_p_filelist = NULL;
+    virtual vx_data_file::Type_filelist filelist() const = 0;
+  };
+  class Class_fontface : public virtual Abstract_fontface {
+  public:
+    Class_fontface();
+    virtual ~Class_fontface() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_core::Type_string name() const override;
+    virtual vx_data_file::Type_filelist filelist() const override;
+  };
+
+  // (type fontfacelist)
+  class Abstract_fontfacelist : public virtual vx_core::Abstract_list {
+  public:
+    Abstract_fontfacelist() {};
+    virtual ~Abstract_fontfacelist() = 0;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) const = 0;
+    // vx_list()
+    virtual vx_core::vx_Type_listany vx_list() const = 0;
+    // vx_new_from_list(T, List<T>)
+    virtual vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const = 0;
+    std::vector<vx_ui_ui::Type_fontface> vx_p_list;
+    // vx_listfontface()
+    virtual std::vector<vx_ui_ui::Type_fontface> vx_listfontface() const = 0;
+    // vx_get_fontface(index)
+    virtual vx_ui_ui::Type_fontface vx_get_fontface(vx_core::Type_int index) const = 0;
+  };
+  class Class_fontfacelist : public virtual Abstract_fontfacelist {
+  public:
+    Class_fontfacelist();
+    virtual ~Class_fontfacelist() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) const override;
+    virtual vx_core::vx_Type_listany vx_list() const override;
+    virtual vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const override;
+    virtual std::vector<vx_ui_ui::Type_fontface> vx_listfontface() const override;
+    virtual vx_ui_ui::Type_fontface vx_get_fontface(vx_core::Type_int index) const override;
+  };
+
+  // (type fontfacemap)
+  class Abstract_fontfacemap : public virtual vx_core::Abstract_map {
+  public:
+    Abstract_fontfacemap() {};
+    virtual ~Abstract_fontfacemap() = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    // vx_map()
+    virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_new_from_map(T, Map<T>)
+    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
+    std::map<std::string, vx_ui_ui::Type_fontface> vx_p_map;
+    // vx_mapfontface()
+    virtual std::map<std::string, vx_ui_ui::Type_fontface> vx_mapfontface() const = 0;
+    // vx_get_fontface(key)
+    virtual vx_ui_ui::Type_fontface vx_get_fontface(vx_core::Type_string key) const = 0;
+  };
+  class Class_fontfacemap : public virtual Abstract_fontfacemap {
+  public:
+    Class_fontfacemap();
+    virtual ~Class_fontfacemap() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
+    virtual std::map<std::string, vx_ui_ui::Type_fontface> vx_mapfontface() const override;
+    virtual vx_ui_ui::Type_fontface vx_get_fontface(vx_core::Type_string key) const override;
+  };
+
+  // (type fontmap)
+  class Abstract_fontmap : public virtual vx_core::Abstract_map {
+  public:
+    Abstract_fontmap() {};
+    virtual ~Abstract_fontmap() = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    // vx_map()
+    virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_new_from_map(T, Map<T>)
+    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
+    std::map<std::string, vx_ui_ui::Type_font> vx_p_map;
+    // vx_mapfont()
+    virtual std::map<std::string, vx_ui_ui::Type_font> vx_mapfont() const = 0;
+    // vx_get_font(key)
+    virtual vx_ui_ui::Type_font vx_get_font(vx_core::Type_string key) const = 0;
+  };
+  class Class_fontmap : public virtual Abstract_fontmap {
+  public:
+    Class_fontmap();
+    virtual ~Class_fontmap() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
+    virtual std::map<std::string, vx_ui_ui::Type_font> vx_mapfont() const override;
+    virtual vx_ui_ui::Type_font vx_get_font(vx_core::Type_string key) const override;
+  };
+
+  // (type fontstyle)
+  class Abstract_fontstyle : public virtual vx_core::Abstract_struct {
+  public:
+    Abstract_fontstyle() {};
+    virtual ~Abstract_fontstyle() = 0;
+    // vx_map()
+    virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    // name()
+    vx_core::Type_string vx_p_name = NULL;
+    virtual vx_core::Type_string name() const = 0;
+  };
+  class Class_fontstyle : public virtual Abstract_fontstyle {
+  public:
+    Class_fontstyle();
+    virtual ~Class_fontstyle() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_core::Type_string name() const override;
+  };
+
+  // (type fontstylemap)
+  class Abstract_fontstylemap : public virtual vx_core::Abstract_map {
+  public:
+    Abstract_fontstylemap() {};
+    virtual ~Abstract_fontstylemap() = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    // vx_map()
+    virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_new_from_map(T, Map<T>)
+    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
+    std::map<std::string, vx_ui_ui::Type_fontstyle> vx_p_map;
+    // vx_mapfontstyle()
+    virtual std::map<std::string, vx_ui_ui::Type_fontstyle> vx_mapfontstyle() const = 0;
+    // vx_get_fontstyle(key)
+    virtual vx_ui_ui::Type_fontstyle vx_get_fontstyle(vx_core::Type_string key) const = 0;
+  };
+  class Class_fontstylemap : public virtual Abstract_fontstylemap {
+  public:
+    Class_fontstylemap();
+    virtual ~Class_fontstylemap() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
+    virtual std::map<std::string, vx_ui_ui::Type_fontstyle> vx_mapfontstyle() const override;
+    virtual vx_ui_ui::Type_fontstyle vx_get_fontstyle(vx_core::Type_string key) const override;
   };
 
   // (type layout)
@@ -678,68 +1062,6 @@ namespace vx_ui_ui {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
   };
 
-  // (type render)
-  class Abstract_render : public virtual vx_core::Abstract_struct {
-  public:
-    Abstract_render() {};
-    virtual ~Abstract_render() = 0;
-    // vx_map()
-    virtual vx_core::vx_Type_mapany vx_map() const = 0;
-    // vx_get_any(key)
-    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
-  };
-  class Class_render : public virtual Abstract_render {
-  public:
-    Class_render();
-    virtual ~Class_render() override;
-    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
-    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
-    virtual vx_core::Type_any vx_empty() const override;
-    virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Type_typedef vx_typedef() const override;
-    virtual vx_core::Type_constdef vx_constdef() const override;
-    virtual vx_core::Type_msgblock vx_msgblock() const override;
-    virtual vx_core::vx_Type_listany vx_dispose() override;
-    virtual vx_core::vx_Type_mapany vx_map() const override;
-    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
-  };
-
-  // (type rendermap)
-  class Abstract_rendermap : public virtual vx_core::Abstract_map {
-  public:
-    Abstract_rendermap() {};
-    virtual ~Abstract_rendermap() = 0;
-    // vx_get_any(key)
-    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
-    // vx_map()
-    virtual vx_core::vx_Type_mapany vx_map() const = 0;
-    // vx_new_from_map(T, Map<T>)
-    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
-    std::map<std::string, vx_ui_ui::Type_render> vx_p_map;
-    // vx_maprender()
-    virtual std::map<std::string, vx_ui_ui::Type_render> vx_maprender() const = 0;
-    // vx_get_render(key)
-    virtual vx_ui_ui::Type_render vx_get_render(vx_core::Type_string key) const = 0;
-  };
-  class Class_rendermap : public virtual Abstract_rendermap {
-  public:
-    Class_rendermap();
-    virtual ~Class_rendermap() override;
-    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
-    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
-    virtual vx_core::Type_any vx_empty() const override;
-    virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Type_typedef vx_typedef() const override;
-    virtual vx_core::Type_constdef vx_constdef() const override;
-    virtual vx_core::Type_msgblock vx_msgblock() const override;
-    virtual vx_core::vx_Type_listany vx_dispose() override;
-    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
-    virtual vx_core::vx_Type_mapany vx_map() const override;
-    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
-    virtual std::map<std::string, vx_ui_ui::Type_render> vx_maprender() const override;
-    virtual vx_ui_ui::Type_render vx_get_render(vx_core::Type_string key) const override;
-  };
-
   // (type style)
   class Abstract_style : public virtual vx_core::Abstract_struct {
   public:
@@ -767,6 +1089,12 @@ namespace vx_ui_ui {
     // cursor()
     vx_ui_ui::Type_cursor vx_p_cursor = NULL;
     virtual vx_ui_ui::Type_cursor cursor() const = 0;
+    // font()
+    vx_ui_ui::Type_font vx_p_font = NULL;
+    virtual vx_ui_ui::Type_font font() const = 0;
+    // hidden()
+    vx_core::Type_boolean vx_p_hidden = NULL;
+    virtual vx_core::Type_boolean hidden() const = 0;
     // image-background()
     vx_data_file::Type_file vx_p_image_background = NULL;
     virtual vx_data_file::Type_file image_background() const = 0;
@@ -806,6 +1134,8 @@ namespace vx_ui_ui {
     virtual vx_core::Type_string color_background() const override;
     virtual vx_core::Type_string color_hoverbkgrd() const override;
     virtual vx_ui_ui::Type_cursor cursor() const override;
+    virtual vx_ui_ui::Type_font font() const override;
+    virtual vx_core::Type_boolean hidden() const override;
     virtual vx_data_file::Type_file image_background() const override;
     virtual vx_ui_ui::Type_layout layout() const override;
     virtual vx_ui_ui::Type_styletype type() const override;
@@ -895,6 +1225,9 @@ namespace vx_ui_ui {
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
     // vx_get_any(key)
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    // fontfacemap()
+    vx_ui_ui::Type_fontfacemap vx_p_fontfacemap = NULL;
+    virtual vx_ui_ui::Type_fontfacemap fontfacemap() const = 0;
     // stylemap()
     vx_ui_ui::Type_stylemap vx_p_stylemap = NULL;
     virtual vx_ui_ui::Type_stylemap stylemap() const = 0;
@@ -913,6 +1246,7 @@ namespace vx_ui_ui {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_ui_ui::Type_fontfacemap fontfacemap() const override;
     virtual vx_ui_ui::Type_stylemap stylemap() const override;
   };
 
@@ -951,39 +1285,42 @@ namespace vx_ui_ui {
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
     // vx_get_any(key)
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
-    // data()
-    vx_core::Type_any vx_p_data = NULL;
-    virtual vx_core::Type_any data() const = 0;
-    // eventmap()
-    vx_event::Type_eventmap vx_p_eventmap = NULL;
-    virtual vx_event::Type_eventmap eventmap() const = 0;
-    // fn-uimap-data()
-    vx_ui_ui::Func_uimap_from_uimap_data vx_p_fn_uimap_data = NULL;
-    virtual vx_ui_ui::Func_uimap_from_uimap_data fn_uimap_data() const = 0;
+    // uid()
+    vx_core::Type_string vx_p_uid = NULL;
+    virtual vx_core::Type_string uid() const = 0;
+    // name()
+    vx_core::Type_string vx_p_name = NULL;
+    virtual vx_core::Type_string name() const = 0;
+    // layout()
+    vx_ui_ui::Type_layout vx_p_layout = NULL;
+    virtual vx_ui_ui::Type_layout layout() const = 0;
     // parent()
     vx_core::Type_string vx_p_parent = NULL;
     virtual vx_core::Type_string parent() const = 0;
     // path()
     vx_core::Type_string vx_p_path = NULL;
     virtual vx_core::Type_string path() const = 0;
-    // render()
-    vx_ui_ui::Type_render vx_p_render = NULL;
-    virtual vx_ui_ui::Type_render render() const = 0;
-    // renderer()
-    vx_ui_ui::Type_layout vx_p_renderer = NULL;
-    virtual vx_ui_ui::Type_layout renderer() const = 0;
+    // hidden()
+    vx_core::Type_boolean vx_p_hidden = NULL;
+    virtual vx_core::Type_boolean hidden() const = 0;
+    // selected()
+    vx_core::Type_boolean vx_p_selected = NULL;
+    virtual vx_core::Type_boolean selected() const = 0;
+    // selectmulti()
+    vx_core::Type_boolean vx_p_selectmulti = NULL;
+    virtual vx_core::Type_boolean selectmulti() const = 0;
     // style()
     vx_ui_ui::Type_style vx_p_style = NULL;
     virtual vx_ui_ui::Type_style style() const = 0;
     // stylelist()
     vx_ui_ui::Type_stylelist vx_p_stylelist = NULL;
     virtual vx_ui_ui::Type_stylelist stylelist() const = 0;
-    // stylesheet()
-    vx_ui_ui::Type_stylesheet vx_p_stylesheet = NULL;
-    virtual vx_ui_ui::Type_stylesheet stylesheet() const = 0;
-    // uid()
-    vx_core::Type_string vx_p_uid = NULL;
-    virtual vx_core::Type_string uid() const = 0;
+    // eventmap()
+    vx_event::Type_eventmap vx_p_eventmap = NULL;
+    virtual vx_event::Type_eventmap eventmap() const = 0;
+    // data()
+    vx_core::Type_any vx_p_data = NULL;
+    virtual vx_core::Type_any data() const = 0;
     // uimap()
     vx_ui_ui::Type_uimap vx_p_uimap = NULL;
     virtual vx_ui_ui::Type_uimap uimap() const = 0;
@@ -1002,17 +1339,18 @@ namespace vx_ui_ui {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
-    virtual vx_core::Type_any data() const override;
-    virtual vx_event::Type_eventmap eventmap() const override;
-    virtual vx_ui_ui::Func_uimap_from_uimap_data fn_uimap_data() const override;
+    virtual vx_core::Type_string uid() const override;
+    virtual vx_core::Type_string name() const override;
+    virtual vx_ui_ui::Type_layout layout() const override;
     virtual vx_core::Type_string parent() const override;
     virtual vx_core::Type_string path() const override;
-    virtual vx_ui_ui::Type_render render() const override;
-    virtual vx_ui_ui::Type_layout renderer() const override;
+    virtual vx_core::Type_boolean hidden() const override;
+    virtual vx_core::Type_boolean selected() const override;
+    virtual vx_core::Type_boolean selectmulti() const override;
     virtual vx_ui_ui::Type_style style() const override;
     virtual vx_ui_ui::Type_stylelist stylelist() const override;
-    virtual vx_ui_ui::Type_stylesheet stylesheet() const override;
-    virtual vx_core::Type_string uid() const override;
+    virtual vx_event::Type_eventmap eventmap() const override;
+    virtual vx_core::Type_any data() const override;
     virtual vx_ui_ui::Type_uimap uimap() const override;
   };
 
@@ -1142,6 +1480,12 @@ namespace vx_ui_ui {
     static void vx_const_new(vx_ui_ui::Const_layout_background output);
   };
 
+  // (const layout-button)
+  class Class_layout_button : public vx_ui_ui::Class_layout {
+  public:
+    static void vx_const_new(vx_ui_ui::Const_layout_button output);
+  };
+
   // (const layout-combobox)
   class Class_layout_combobox : public vx_ui_ui::Class_layout {
   public:
@@ -1158,6 +1502,12 @@ namespace vx_ui_ui {
   class Class_layout_flow_columns : public vx_ui_ui::Class_layout {
   public:
     static void vx_const_new(vx_ui_ui::Const_layout_flow_columns output);
+  };
+
+  // (const layout-flow-item)
+  class Class_layout_flow_item : public vx_ui_ui::Class_layout {
+  public:
+    static void vx_const_new(vx_ui_ui::Const_layout_flow_item output);
   };
 
   // (const layout-flow-rows)
@@ -1254,6 +1604,12 @@ namespace vx_ui_ui {
   class Class_layout_textentry : public vx_ui_ui::Class_layout {
   public:
     static void vx_const_new(vx_ui_ui::Const_layout_textentry output);
+  };
+
+  // (const layout-titlebar)
+  class Class_layout_titlebar : public vx_ui_ui::Class_layout {
+  public:
+    static void vx_const_new(vx_ui_ui::Const_layout_titlebar output);
   };
 
   // (const pin-bottom)
@@ -1376,6 +1732,33 @@ namespace vx_ui_ui {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
+  // (func fontfacemap<-fontfacelist)
+  class Abstract_fontfacemap_from_fontfacelist : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_fontfacemap_from_fontfacelist() {};
+    virtual ~Abstract_fontfacemap_from_fontfacelist() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_fontfacemap_from_fontfacelist : public virtual Abstract_fontfacemap_from_fontfacelist {
+  public:
+    Class_fontfacemap_from_fontfacelist();
+    virtual ~Class_fontfacemap_from_fontfacelist() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
   // (func layout<-style)
   class Abstract_layout_from_style : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
   public:
@@ -1403,6 +1786,102 @@ namespace vx_ui_ui {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
+  // (func layout<-ui)
+  class Abstract_layout_from_ui : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_layout_from_ui() {};
+    virtual ~Abstract_layout_from_ui() = 0;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_layout_from_ui : public virtual Abstract_layout_from_ui {
+  public:
+    Class_layout_from_ui();
+    virtual ~Class_layout_from_ui() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func layout<-ui-layoutengine)
+  class Abstract_layout_from_ui_layoutengine : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_layout_from_ui_layoutengine() {};
+    virtual ~Abstract_layout_from_ui_layoutengine() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_layout_from_ui_layoutengine : public virtual Abstract_layout_from_ui_layoutengine {
+  public:
+    Class_layout_from_ui_layoutengine();
+    virtual ~Class_layout_from_ui_layoutengine() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func layout<-ui-layoutmap-else)
+  class Abstract_layout_from_ui_layoutmap_else : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_layout_from_ui_layoutmap_else() {};
+    virtual ~Abstract_layout_from_ui_layoutmap_else() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_layout_from_ui_layoutmap_else : public virtual Abstract_layout_from_ui_layoutmap_else {
+  public:
+    Class_layout_from_ui_layoutmap_else();
+    virtual ~Class_layout_from_ui_layoutmap_else() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func layoutengine-readstate)
+  class Abstract_layoutengine_readstate : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_layoutengine_readstate() {};
+    virtual ~Abstract_layoutengine_readstate() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_layoutengine_readstate : public virtual Abstract_layoutengine_readstate {
+  public:
+    Class_layoutengine_readstate();
+    virtual ~Class_layoutengine_readstate() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
   // (func layoutmap<-layoutlist)
   class Abstract_layoutmap_from_layoutlist : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
   public:
@@ -1416,6 +1895,33 @@ namespace vx_ui_ui {
   public:
     Class_layoutmap_from_layoutlist();
     virtual ~Class_layoutmap_from_layoutlist() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func stringlist-selected<-ui)
+  class Abstract_stringlist_selected_from_ui : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_stringlist_selected_from_ui() {};
+    virtual ~Abstract_stringlist_selected_from_ui() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_stringlist_selected_from_ui : public virtual Abstract_stringlist_selected_from_ui {
+  public:
+    Class_stringlist_selected_from_ui();
+    virtual ~Class_stringlist_selected_from_ui() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -1484,19 +1990,17 @@ namespace vx_ui_ui {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func ui-data<-ui)
-  class Abstract_ui_data_from_ui : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  // (func ui-child<-ui-uid)
+  class Abstract_ui_child_from_ui_uid : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_ui_data_from_ui() {};
-    virtual ~Abstract_ui_data_from_ui() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
-    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    Abstract_ui_child_from_ui_uid() {};
+    virtual ~Abstract_ui_child_from_ui_uid() = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_ui_data_from_ui : public virtual Abstract_ui_data_from_ui {
+  class Class_ui_child_from_ui_uid : public virtual Abstract_ui_child_from_ui_uid {
   public:
-    Class_ui_data_from_ui();
-    virtual ~Class_ui_data_from_ui() override;
+    Class_ui_child_from_ui_uid();
+    virtual ~Class_ui_child_from_ui_uid() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -1506,18 +2010,16 @@ namespace vx_ui_ui {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
-    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
   // (func ui-from<-event)
-  class Abstract_ui_from_from_event : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  class Abstract_ui_from_from_event : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
   public:
     Abstract_ui_from_from_event() {};
     virtual ~Abstract_ui_from_from_event() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
-    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
   class Class_ui_from_from_event : public virtual Abstract_ui_from_from_event {
@@ -1533,8 +2035,58 @@ namespace vx_ui_ui {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
-    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func ui-layout<-ui)
+  class Abstract_ui_layout_from_ui : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_ui_layout_from_ui() {};
+    virtual ~Abstract_ui_layout_from_ui() = 0;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_ui_layout_from_ui : public virtual Abstract_ui_layout_from_ui {
+  public:
+    Class_ui_layout_from_ui();
+    virtual ~Class_ui_layout_from_ui() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func ui-layout<-ui-layoutengine)
+  class Abstract_ui_layout_from_ui_layoutengine : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_ui_layout_from_ui_layoutengine() {};
+    virtual ~Abstract_ui_layout_from_ui_layoutengine() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_ui_layout_from_ui_layoutengine : public virtual Abstract_ui_layout_from_ui_layoutengine {
+  public:
+    Class_ui_layout_from_ui_layoutengine();
+    virtual ~Class_ui_layout_from_ui_layoutengine() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -1549,6 +2101,29 @@ namespace vx_ui_ui {
   public:
     Class_ui_layout_from_ui_layoutmap_else();
     virtual ~Class_ui_layout_from_ui_layoutmap_else() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func ui-layout<-ui-uiengine)
+  class Abstract_ui_layout_from_ui_uiengine : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_ui_layout_from_ui_uiengine() {};
+    virtual ~Abstract_ui_layout_from_ui_uiengine() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_ui_layout_from_ui_uiengine : public virtual Abstract_ui_layout_from_ui_uiengine {
+  public:
+    Class_ui_layout_from_ui_uiengine();
+    virtual ~Class_ui_layout_from_ui_uiengine() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -1661,17 +2236,19 @@ namespace vx_ui_ui {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func ui<-renderer-ui-orig-parent)
-  class Abstract_ui_from_renderer_ui_orig_parent : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  // (func ui-selected<-ui)
+  class Abstract_ui_selected_from_ui : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_ui_from_renderer_ui_orig_parent() {};
-    virtual ~Abstract_ui_from_renderer_ui_orig_parent() = 0;
+    Abstract_ui_selected_from_ui() {};
+    virtual ~Abstract_ui_selected_from_ui() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_ui_from_renderer_ui_orig_parent : public virtual Abstract_ui_from_renderer_ui_orig_parent {
+  class Class_ui_selected_from_ui : public virtual Abstract_ui_selected_from_ui {
   public:
-    Class_ui_from_renderer_ui_orig_parent();
-    virtual ~Class_ui_from_renderer_ui_orig_parent() override;
+    Class_ui_selected_from_ui();
+    virtual ~Class_ui_selected_from_ui() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -1681,6 +2258,104 @@ namespace vx_ui_ui {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func ui-writechild<-ui-child)
+  class Abstract_ui_writechild_from_ui_child : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_ui_writechild_from_ui_child() {};
+    virtual ~Abstract_ui_writechild_from_ui_child() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_ui_writechild_from_ui_child : public virtual Abstract_ui_writechild_from_ui_child {
+  public:
+    Class_ui_writechild_from_ui_child();
+    virtual ~Class_ui_writechild_from_ui_child() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func ui-writechildmap<-ui-childmap)
+  class Abstract_ui_writechildmap_from_ui_childmap : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_ui_writechildmap_from_ui_childmap() {};
+    virtual ~Abstract_ui_writechildmap_from_ui_childmap() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_ui_writechildmap_from_ui_childmap : public virtual Abstract_ui_writechildmap_from_ui_childmap {
+  public:
+    Class_ui_writechildmap_from_ui_childmap();
+    virtual ~Class_ui_writechildmap_from_ui_childmap() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func ui<-layout-ui-orig-parent)
+  class Abstract_ui_from_layout_ui_orig_parent : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_ui_from_layout_ui_orig_parent() {};
+    virtual ~Abstract_ui_from_layout_ui_orig_parent() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_ui_from_layout_ui_orig_parent : public virtual Abstract_ui_from_layout_ui_orig_parent {
+  public:
+    Class_ui_from_layout_ui_orig_parent();
+    virtual ~Class_ui_from_layout_ui_orig_parent() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func uid-selected<-ui)
+  class Abstract_uid_selected_from_ui : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_uid_selected_from_ui() {};
+    virtual ~Abstract_uid_selected_from_ui() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_uid_selected_from_ui : public virtual Abstract_uid_selected_from_ui {
+  public:
+    Class_uid_selected_from_ui();
+    virtual ~Class_uid_selected_from_ui() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -1731,6 +2406,60 @@ namespace vx_ui_ui {
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func uilist-selected<-ui)
+  class Abstract_uilist_selected_from_ui : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_uilist_selected_from_ui() {};
+    virtual ~Abstract_uilist_selected_from_ui() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_uilist_selected_from_ui : public virtual Abstract_uilist_selected_from_ui {
+  public:
+    Class_uilist_selected_from_ui();
+    virtual ~Class_uilist_selected_from_ui() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func uilist<-uimap)
+  class Abstract_uilist_from_uimap : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_uilist_from_uimap() {};
+    virtual ~Abstract_uilist_from_uimap() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_uilist_from_uimap : public virtual Abstract_uilist_from_uimap {
+  public:
+    Class_uilist_from_uimap();
+    virtual ~Class_uilist_from_uimap() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 

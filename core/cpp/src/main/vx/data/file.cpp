@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <fstream>
 #include <string>
+#include <vector>
 #include "../../vx/core.hpp"
 #include "../../vx/data/textblock.hpp"
 #include "file.hpp"
@@ -438,6 +439,157 @@ namespace vx_data_file {
 
   //}
 
+  // (type filelist)
+  // class Class_filelist {
+    Abstract_filelist::~Abstract_filelist() {}
+
+    Class_filelist::Class_filelist() : Abstract_filelist::Abstract_filelist() {
+      vx_core::refcount += 1;
+    }
+
+    Class_filelist::~Class_filelist() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+      for (vx_core::Type_any any : this->vx_p_list) {
+        vx_core::vx_release_one(any);
+      }
+    }
+
+    // vx_list()
+    vx_core::vx_Type_listany Class_filelist::vx_list() const {
+      return vx_core::vx_list_from_list(vx_core::t_any, this->vx_p_list);
+    }
+
+    vx_data_file::Type_file Class_filelist::vx_get_file(vx_core::Type_int index) const {
+      vx_data_file::Type_file output = vx_data_file::e_file;
+      long iindex = index->vx_int();
+      std::vector<vx_data_file::Type_file> listval = this->vx_p_list;
+      if ((unsigned long long)iindex < listval.size()) {
+        output = listval[iindex];
+      }
+      vx_core::vx_release_except(index, output);
+      return output;
+    }
+
+    std::vector<vx_data_file::Type_file> Class_filelist::vx_listfile() const {return vx_p_list;}
+
+    vx_core::Type_any vx_data_file::Class_filelist::vx_get_any(vx_core::Type_int index) const {
+      return this->vx_get_file(index);
+    }
+
+    // vx_new_from_list(listval)
+    vx_core::Type_any Class_filelist::vx_new_from_list(vx_core::vx_Type_listany listval) const {
+      vx_data_file::Type_filelist output = vx_data_file::e_filelist;
+      vx_core::Type_msgblock msgblock = vx_core::e_msgblock;
+      std::vector<vx_data_file::Type_file> list;
+      for (auto const& valsub : listval) {
+        vx_core::Type_any valtype = valsub->vx_type();
+        if (valtype == vx_data_file::t_file) {
+          vx_data_file::Type_file castval = vx_core::vx_any_from_any(vx_data_file::t_file, valsub);
+          list.push_back(castval);
+        } else if (vx_core::vx_boolean_from_type_trait(valtype, vx_data_file::t_file)) {
+          vx_data_file::Type_file castval = vx_core::vx_any_from_any(vx_data_file::t_file, valsub);
+          list.push_back(castval);
+        } else {
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(filelist) Invalid Value: " + vx_core::vx_string_from_any(valsub) + "");
+          msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
+        }
+      }
+      if ((list.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_data_file::Class_filelist();
+        output->vx_p_list = list;
+        for (vx_core::Type_any valadd : list) {
+          vx_core::vx_reserve(valadd);
+        }
+        if (msgblock != vx_core::e_msgblock) {
+          output->vx_p_msgblock = msgblock;
+          vx_core::vx_reserve(msgblock);
+        }
+      }
+      vx_core::vx_release_except(listval, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_filelist::vx_new(vx_core::vx_Type_listany vals) const {
+      return this->vx_copy(vx_data_file::e_filelist, vals);
+    }
+
+    vx_core::Type_any Class_filelist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_data_file::Type_filelist output = vx_data_file::e_filelist;
+      bool ischanged = false;
+      if (copyval->vx_p_constdef != NULL) {
+        ischanged = true;
+      }
+      vx_data_file::Type_filelist val = vx_core::vx_any_from_any(vx_data_file::t_filelist, copyval);
+      output = val;
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      std::vector<vx_data_file::Type_file> listval = val->vx_listfile();
+      for (vx_core::Type_any valsub : vals) {
+        vx_core::Type_any valsubtype = valsub->vx_type();
+        if (valsubtype == vx_core::t_msgblock) {
+          msgblock = vx_core::vx_copy(msgblock, {valsub});
+        } else if (valsubtype == vx_core::t_msg) {
+          msgblock = vx_core::vx_copy(msgblock, {valsub});
+        } else if (valsubtype == vx_data_file::t_file) {
+          ischanged = true;
+          listval.push_back(vx_core::vx_any_from_any(vx_data_file::t_file, valsub));
+        } else if (vx_core::vx_boolean_from_type_trait(valsubtype, vx_data_file::t_file)) {
+          ischanged = true;
+          listval.push_back(vx_core::vx_any_from_any(vx_data_file::t_file, valsub));
+        } else if (valsubtype == vx_data_file::t_filelist) {
+          ischanged = true;
+          vx_data_file::Type_filelist multi = vx_core::vx_any_from_any(vx_data_file::t_filelist, valsub);
+          listval = vx_core::vx_listaddall(listval, multi->vx_listfile());
+        } else {
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new filelist) - Invalid Type: " + vx_core::vx_string_from_any(valsub));
+          msgblock = vx_core::vx_copy(msgblock, {msg});
+        }
+      }
+      if (ischanged || (listval.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_data_file::Class_filelist();
+        output->vx_p_list = listval;
+        for (vx_core::Type_any valadd : listval) {
+          vx_core::vx_reserve(valadd);
+        }
+        if (msgblock != vx_core::e_msgblock) {
+          output->vx_p_msgblock = msgblock;
+          vx_core::vx_reserve(msgblock);
+        }
+      }
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_msgblock Class_filelist::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany vx_data_file::Class_filelist::vx_dispose() {return vx_core::emptylistany;}
+    vx_core::Type_any Class_filelist::vx_empty() const {return vx_data_file::e_filelist;}
+    vx_core::Type_any Class_filelist::vx_type() const {return vx_data_file::t_filelist;}
+
+    vx_core::Type_typedef Class_filelist::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/data/file", // pkgname
+        "filelist", // name
+        ":list", // extends
+        vx_core::e_typelist, // traits
+        vx_core::vx_typelist_from_listany({vx_data_file::t_file}), // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_filelist::vx_constdef() const {return this->vx_p_constdef;}
+
+
+  //}
+
   // (func boolean-exists<-file)
   vx_core::Type_boolean f_boolean_exists_from_file(vx_data_file::Type_file file) {
     vx_core::Type_boolean output = vx_core::e_boolean;
@@ -446,7 +598,13 @@ namespace vx_data_file {
     vx_core::vx_release_one_except(file, output);
     return output;
   }
-
+  /**
+   * @function boolean_exists_from_file
+   * Returns true if file/path exists.
+   * @param  {file} file
+   * @return {boolean}
+   * (func boolean-exists<-file)
+   */
   // (func boolean-exists<-file)
   // class Class_boolean_exists_from_file {
     Abstract_boolean_exists_from_file::~Abstract_boolean_exists_from_file() {}
@@ -544,7 +702,13 @@ namespace vx_data_file {
     vx_core::vx_release_one_except(file, output);
     return output;
   }
-
+  /**
+   * @function boolean_write_from_file
+   * Write a File to Disk
+   * @param  {file} file
+   * @return {boolean}
+   * (func boolean-write<-file)
+   */
   // (func boolean-write<-file)
   // class Class_boolean_write_from_file {
     Abstract_boolean_write_from_file::~Abstract_boolean_write_from_file() {}
@@ -643,7 +807,14 @@ namespace vx_data_file {
     vx_core::vx_release_one_except({file, val}, output);
     return output;
   }
-
+  /**
+   * @function boolean_write_from_file_any
+   * Write any data structure as a file.
+   * @param  {file} file
+   * @param  {any} val
+   * @return {boolean}
+   * (func boolean-write<-file-any)
+   */
   // (func boolean-write<-file-any)
   // class Class_boolean_write_from_file_any {
     Abstract_boolean_write_from_file_any::~Abstract_boolean_write_from_file_any() {}
@@ -737,7 +908,14 @@ namespace vx_data_file {
     vx_core::vx_release_one_except({file, text}, output);
     return output;
   }
-
+  /**
+   * @function boolean_write_from_file_string
+   * Write a File to Disk
+   * @param  {file} file
+   * @param  {string} text
+   * @return {boolean}
+   * (func boolean-write<-file-string)
+   */
   // (func boolean-write<-file-string)
   // class Class_boolean_write_from_file_string {
     Abstract_boolean_write_from_file_string::~Abstract_boolean_write_from_file_string() {}
@@ -833,7 +1011,13 @@ namespace vx_data_file {
     vx_core::vx_release_one_except(file, output);
     return output;
   }
-
+  /**
+   * @function file_read_from_file
+   * Read a Text File from Disk
+   * @param  {file} file
+   * @return {file}
+   * (func file-read<-file)
+   */
   // (func file-read<-file)
   // class Class_file_read_from_file {
     Abstract_file_read_from_file::~Abstract_file_read_from_file() {}
@@ -928,7 +1112,13 @@ namespace vx_data_file {
     vx_core::vx_release_one_except(file, output);
     return output;
   }
-
+  /**
+   * @function name_from_file
+   * Returns path and name from file.
+   * @param  {file} file
+   * @return {string}
+   * (func name<-file)
+   */
   // (func name<-file)
   // class Class_name_from_file {
     Abstract_name_from_file::~Abstract_name_from_file() {}
@@ -1022,7 +1212,13 @@ namespace vx_data_file {
     vx_core::vx_release_one_except(file, output);
     return output;
   }
-
+  /**
+   * @function path_from_file
+   * Returns path and name from file.
+   * @param  {file} file
+   * @return {string}
+   * (func path<-file)
+   */
   // (func path<-file)
   // class Class_path_from_file {
     Abstract_path_from_file::~Abstract_path_from_file() {}
@@ -1114,7 +1310,12 @@ namespace vx_data_file {
     output = vx_data_file::vx_pathcurrent_from_os();
     return output;
   }
-
+  /**
+   * @function pathcurrent_from_os
+   * Returns current system path.
+   * @return {string}
+   * (func pathcurrent<-os)
+   */
   // (func pathcurrent<-os)
   // class Class_pathcurrent_from_os {
     Abstract_pathcurrent_from_os::~Abstract_pathcurrent_from_os() {}
@@ -1213,7 +1414,13 @@ namespace vx_data_file {
     vx_core::vx_release_one_except(file, output);
     return output;
   }
-
+  /**
+   * @function pathfull_from_file
+   * Returns full path and name from file.
+   * @param  {file} file
+   * @return {string}
+   * (func pathfull<-file)
+   */
   // (func pathfull<-file)
   // class Class_pathfull_from_file {
     Abstract_pathfull_from_file::~Abstract_pathfull_from_file() {}
@@ -1317,7 +1524,13 @@ namespace vx_data_file {
     vx_core::vx_release_one_except(file, output);
     return output;
   }
-
+  /**
+   * @function string_read_from_file
+   * Read text from a File
+   * @param  {file} file
+   * @return {string}
+   * (func string-read<-file)
+   */
   // (func string-read<-file)
   // class Class_string_read_from_file {
     Abstract_string_read_from_file::~Abstract_string_read_from_file() {}
@@ -1408,6 +1621,8 @@ namespace vx_data_file {
   vx_data_file::Type_file t_file = NULL;
   vx_data_file::Type_fileformat e_fileformat = NULL;
   vx_data_file::Type_fileformat t_fileformat = NULL;
+  vx_data_file::Type_filelist e_filelist = NULL;
+  vx_data_file::Type_filelist t_filelist = NULL;
   vx_data_file::Func_boolean_exists_from_file e_boolean_exists_from_file = NULL;
   vx_data_file::Func_boolean_exists_from_file t_boolean_exists_from_file = NULL;
   vx_data_file::Func_boolean_write_from_file e_boolean_write_from_file = NULL;
@@ -1442,6 +1657,10 @@ namespace vx_data_file {
       vx_core::vx_reserve_empty(vx_data_file::e_fileformat);
       vx_data_file::t_fileformat = new Class_fileformat();
       vx_core::vx_reserve_type(vx_data_file::t_fileformat);
+      vx_data_file::e_filelist = new Class_filelist();
+      vx_core::vx_reserve_empty(vx_data_file::e_filelist);
+      vx_data_file::t_filelist = new Class_filelist();
+      vx_core::vx_reserve_type(vx_data_file::t_filelist);
       vx_data_file::e_boolean_exists_from_file = new vx_data_file::Class_boolean_exists_from_file();
       vx_core::vx_reserve_empty(vx_data_file::e_boolean_exists_from_file);
       vx_data_file::t_boolean_exists_from_file = new vx_data_file::Class_boolean_exists_from_file();
@@ -1488,6 +1707,7 @@ namespace vx_data_file {
       vx_core::vx_Type_mapany mapempty;
       maptype["file"] = vx_data_file::t_file;
       maptype["fileformat"] = vx_data_file::t_fileformat;
+      maptype["filelist"] = vx_data_file::t_filelist;
       mapfunc["boolean-exists<-file"] = vx_data_file::t_boolean_exists_from_file;
       mapfunc["boolean-write<-file"] = vx_data_file::t_boolean_write_from_file;
       mapfunc["boolean-write<-file-any"] = vx_data_file::t_boolean_write_from_file_any;

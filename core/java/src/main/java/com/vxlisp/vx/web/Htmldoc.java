@@ -9,6 +9,86 @@ import com.vxlisp.vx.ui.*;
 public final class Htmldoc {
 
   /**
+   * @function boolean_print_from_id_stylesheettext
+   * Print the contents of the given id.
+   * @param  {string} id
+   * @param  {string} stylesheettext
+   * @return {boolean}
+   * (func boolean-print<-id-stylesheettext)
+   */
+  public static interface Func_boolean_print_from_id_stylesheettext extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_boolean vx_boolean_print_from_id_stylesheettext(final Core.Type_string id, final Core.Type_string stylesheettext);
+  }
+
+  public static class Class_boolean_print_from_id_stylesheettext extends Core.Class_base implements Func_boolean_print_from_id_stylesheettext {
+
+    @Override
+    public Func_boolean_print_from_id_stylesheettext vx_new(Object... vals) {
+      Class_boolean_print_from_id_stylesheettext output = new Class_boolean_print_from_id_stylesheettext();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_print_from_id_stylesheettext vx_copy(Object... vals) {
+      Class_boolean_print_from_id_stylesheettext output = new Class_boolean_print_from_id_stylesheettext();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/web/htmldoc", // pkgname
+        "boolean-print<-id-stylesheettext", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_print_from_id_stylesheettext vx_empty() {return e_boolean_print_from_id_stylesheettext;}
+    @Override
+    public Func_boolean_print_from_id_stylesheettext vx_type() {return t_boolean_print_from_id_stylesheettext;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string id = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string stylesheettext = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
+      output = Htmldoc.f_boolean_print_from_id_stylesheettext(id, stylesheettext);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean vx_boolean_print_from_id_stylesheettext(final Core.Type_string id, final Core.Type_string stylesheettext) {
+      return Htmldoc.f_boolean_print_from_id_stylesheettext(id, stylesheettext);
+    }
+
+  }
+
+  public static final Func_boolean_print_from_id_stylesheettext e_boolean_print_from_id_stylesheettext = new Htmldoc.Class_boolean_print_from_id_stylesheettext();
+  public static final Func_boolean_print_from_id_stylesheettext t_boolean_print_from_id_stylesheettext = new Htmldoc.Class_boolean_print_from_id_stylesheettext();
+
+  public static Core.Type_boolean f_boolean_print_from_id_stylesheettext(final Core.Type_string id, final Core.Type_string stylesheettext) {
+    Core.Type_boolean output = Core.e_boolean;
+    return output;
+  }
+
+  /**
    * @function boolean_replace_from_id_htmltext
    * Replaces an html node with given id and text.
    * @param  {string} id
@@ -337,6 +417,86 @@ public final class Htmldoc {
   public static final Func_boolean_write_from_id_htmltext t_boolean_write_from_id_htmltext = new Htmldoc.Class_boolean_write_from_id_htmltext();
 
   public static Core.Type_boolean f_boolean_write_from_id_htmltext(final Core.Type_string id, final Core.Type_string htmltext) {
+    Core.Type_boolean output = Core.e_boolean;
+    return output;
+  }
+
+  /**
+   * @function boolean_write_from_id_visible
+   * Writes to an html node changing its visibility.
+   * @param  {string} id
+   * @param  {boolean} visible
+   * @return {boolean}
+   * (func boolean-write<-id-visible)
+   */
+  public static interface Func_boolean_write_from_id_visible extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_boolean vx_boolean_write_from_id_visible(final Core.Type_string id, final Core.Type_boolean visible);
+  }
+
+  public static class Class_boolean_write_from_id_visible extends Core.Class_base implements Func_boolean_write_from_id_visible {
+
+    @Override
+    public Func_boolean_write_from_id_visible vx_new(Object... vals) {
+      Class_boolean_write_from_id_visible output = new Class_boolean_write_from_id_visible();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_write_from_id_visible vx_copy(Object... vals) {
+      Class_boolean_write_from_id_visible output = new Class_boolean_write_from_id_visible();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/web/htmldoc", // pkgname
+        "boolean-write<-id-visible", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_write_from_id_visible vx_empty() {return e_boolean_write_from_id_visible;}
+    @Override
+    public Func_boolean_write_from_id_visible vx_type() {return t_boolean_write_from_id_visible;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string id = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_boolean visible = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.vx_new_int(1)));
+      output = Htmldoc.f_boolean_write_from_id_visible(id, visible);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean vx_boolean_write_from_id_visible(final Core.Type_string id, final Core.Type_boolean visible) {
+      return Htmldoc.f_boolean_write_from_id_visible(id, visible);
+    }
+
+  }
+
+  public static final Func_boolean_write_from_id_visible e_boolean_write_from_id_visible = new Htmldoc.Class_boolean_write_from_id_visible();
+  public static final Func_boolean_write_from_id_visible t_boolean_write_from_id_visible = new Htmldoc.Class_boolean_write_from_id_visible();
+
+  public static Core.Type_boolean f_boolean_write_from_id_visible(final Core.Type_string id, final Core.Type_boolean visible) {
     Core.Type_boolean output = Core.e_boolean;
     return output;
   }
@@ -783,10 +943,12 @@ public final class Htmldoc {
     Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
     Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
     Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    mapfunc.put("boolean-print<-id-stylesheettext", Htmldoc.t_boolean_print_from_id_stylesheettext);
     mapfunc.put("boolean-replace<-id-htmltext", Htmldoc.t_boolean_replace_from_id_htmltext);
     mapfunc.put("boolean-replace<-ui-htmltext", Htmldoc.t_boolean_replace_from_ui_htmltext);
     mapfunc.put("boolean-write-stylesheet<-string", Htmldoc.t_boolean_write_stylesheet_from_string);
     mapfunc.put("boolean-write<-id-htmltext", Htmldoc.t_boolean_write_from_id_htmltext);
+    mapfunc.put("boolean-write<-id-visible", Htmldoc.t_boolean_write_from_id_visible);
     mapfunc.put("boolean-write<-stylesheet", Htmldoc.t_boolean_write_from_stylesheet);
     mapfunc.put("context-read", Htmldoc.t_context_read);
     mapfunc.put("context-write", Htmldoc.t_context_write);

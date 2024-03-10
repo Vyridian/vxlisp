@@ -25,12 +25,12 @@ export default class vx_data_file_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/data/file", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 80, ":tests", 4, ":total", 5), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 83, ":tests", 5, ":total", 6), 
       "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 5), 
-      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 2)
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 6), 
+      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3)
     )
   }
 
@@ -42,7 +42,8 @@ export default class vx_data_file_test {
         vx_core.f_new(
           vx_core.t_intmap,
           "file", 0,
-          "fileformat", 0
+          "fileformat", 0,
+          "filelist", 0
         ),
       "constmap",
         vx_core.f_new(

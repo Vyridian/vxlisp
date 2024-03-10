@@ -250,40 +250,40 @@ namespace vx_test {
   vx_core::Type_security f_security_test();
 
   // (func test)
-  vx_test::Type_testresult f_test(vx_core::Type_context context, vx_core::Type_any expected, vx_core::Type_any actual);
-
-  // (func test)
   vx_test::Type_testresult f_test_1(vx_core::Type_context context, vx_core::Type_any expected, vx_core::Func_any_from_func_async fn_actual);
 
-  // (func test-false)
-  vx_test::Type_testresult f_test_false(vx_core::Type_context context, vx_core::Type_any actual);
+  // (func test)
+  vx_test::Type_testresult f_test(vx_core::Type_context context, vx_core::Type_any expected, vx_core::Type_any actual);
 
   // (func test-false)
   vx_test::Type_testresult f_test_false_1(vx_core::Type_context context, vx_core::Func_any_from_func_async fn_actual);
 
-  // (func test-gt)
-  vx_test::Type_testresult f_test_gt(vx_core::Type_context context, vx_core::Type_any expected, vx_core::Type_any actual);
+  // (func test-false)
+  vx_test::Type_testresult f_test_false(vx_core::Type_context context, vx_core::Type_any actual);
 
   // (func test-gt)
   vx_test::Type_testresult f_test_gt_1(vx_core::Type_context context, vx_core::Type_any expected, vx_core::Func_any_from_func_async fn_actual);
 
-  // (func test-ne)
-  vx_test::Type_testresult f_test_ne(vx_core::Type_context context, vx_core::Type_any expected, vx_core::Type_any actual);
+  // (func test-gt)
+  vx_test::Type_testresult f_test_gt(vx_core::Type_context context, vx_core::Type_any expected, vx_core::Type_any actual);
 
   // (func test-ne)
   vx_test::Type_testresult f_test_ne_1(vx_core::Type_context context, vx_core::Type_any expected, vx_core::Func_any_from_func_async fn_actual);
 
-  // (func test-string)
-  vx_test::Type_testresult f_test_string(vx_core::Type_context context, vx_core::Type_any expected, vx_core::Type_any actual);
+  // (func test-ne)
+  vx_test::Type_testresult f_test_ne(vx_core::Type_context context, vx_core::Type_any expected, vx_core::Type_any actual);
 
   // (func test-string)
   vx_test::Type_testresult f_test_string_1(vx_core::Type_context context, vx_core::Type_any expected, vx_core::Func_any_from_func_async fn_actual);
 
-  // (func test-true)
-  vx_test::Type_testresult f_test_true(vx_core::Type_context context, vx_core::Type_any actual);
+  // (func test-string)
+  vx_test::Type_testresult f_test_string(vx_core::Type_context context, vx_core::Type_any expected, vx_core::Type_any actual);
 
   // (func test-true)
   vx_test::Type_testresult f_test_true_1(vx_core::Type_context context, vx_core::Func_any_from_func_async fn_actual);
+
+  // (func test-true)
+  vx_test::Type_testresult f_test_true(vx_core::Type_context context, vx_core::Type_any actual);
 
   // (func tr<-testdescribe-casename)
   vx_web_html::Type_tr f_tr_from_testdescribe_casename(vx_test::Type_testdescribe testdescribe, vx_core::Type_string casename);
@@ -1256,29 +1256,6 @@ namespace vx_test {
   };
 
   // (func test)
-  class Abstract_test : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
-  public:
-    Abstract_test() {};
-    virtual ~Abstract_test() = 0;
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
-  };
-  class Class_test : public virtual Abstract_test {
-  public:
-    Class_test();
-    virtual ~Class_test() override;
-    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
-    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
-    virtual vx_core::Type_funcdef vx_funcdef() const override;
-    virtual vx_core::Type_typedef vx_typedef() const override;
-    virtual vx_core::Type_constdef vx_constdef() const override;
-    virtual vx_core::Type_msgblock vx_msgblock() const override;
-    virtual vx_core::vx_Type_listany vx_dispose() override;
-    virtual vx_core::Type_any vx_empty() const override;
-    virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
-  };
-
-  // (func test)
   class Abstract_test_1 : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
     Abstract_test_1() {};
@@ -1301,19 +1278,17 @@ namespace vx_test {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func test-false)
-  class Abstract_test_false : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
+  // (func test)
+  class Abstract_test : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_test_false() {};
-    virtual ~Abstract_test_false() = 0;
-    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
-    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override = 0;
+    Abstract_test() {};
+    virtual ~Abstract_test() = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_test_false : public virtual Abstract_test_false {
+  class Class_test : public virtual Abstract_test {
   public:
-    Class_test_false();
-    virtual ~Class_test_false() override;
+    Class_test();
+    virtual ~Class_test() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -1323,8 +1298,6 @@ namespace vx_test {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
-    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -1355,17 +1328,19 @@ namespace vx_test {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func test-gt)
-  class Abstract_test_gt : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  // (func test-false)
+  class Abstract_test_false : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_test_gt() {};
-    virtual ~Abstract_test_gt() = 0;
+    Abstract_test_false() {};
+    virtual ~Abstract_test_false() = 0;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_test_gt : public virtual Abstract_test_gt {
+  class Class_test_false : public virtual Abstract_test_false {
   public:
-    Class_test_gt();
-    virtual ~Class_test_gt() override;
+    Class_test_false();
+    virtual ~Class_test_false() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -1375,6 +1350,8 @@ namespace vx_test {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -1401,17 +1378,17 @@ namespace vx_test {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func test-ne)
-  class Abstract_test_ne : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  // (func test-gt)
+  class Abstract_test_gt : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_test_ne() {};
-    virtual ~Abstract_test_ne() = 0;
+    Abstract_test_gt() {};
+    virtual ~Abstract_test_gt() = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_test_ne : public virtual Abstract_test_ne {
+  class Class_test_gt : public virtual Abstract_test_gt {
   public:
-    Class_test_ne();
-    virtual ~Class_test_ne() override;
+    Class_test_gt();
+    virtual ~Class_test_gt() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -1447,17 +1424,17 @@ namespace vx_test {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func test-string)
-  class Abstract_test_string : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  // (func test-ne)
+  class Abstract_test_ne : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_test_string() {};
-    virtual ~Abstract_test_string() = 0;
+    Abstract_test_ne() {};
+    virtual ~Abstract_test_ne() = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_test_string : public virtual Abstract_test_string {
+  class Class_test_ne : public virtual Abstract_test_ne {
   public:
-    Class_test_string();
-    virtual ~Class_test_string() override;
+    Class_test_ne();
+    virtual ~Class_test_ne() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -1493,19 +1470,17 @@ namespace vx_test {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func test-true)
-  class Abstract_test_true : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
+  // (func test-string)
+  class Abstract_test_string : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_test_true() {};
-    virtual ~Abstract_test_true() = 0;
-    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
-    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override = 0;
+    Abstract_test_string() {};
+    virtual ~Abstract_test_string() = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_test_true : public virtual Abstract_test_true {
+  class Class_test_string : public virtual Abstract_test_string {
   public:
-    Class_test_true();
-    virtual ~Class_test_true() override;
+    Class_test_string();
+    virtual ~Class_test_string() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -1515,8 +1490,6 @@ namespace vx_test {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
-    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -1533,6 +1506,33 @@ namespace vx_test {
   public:
     Class_test_true_1();
     virtual ~Class_test_true_1() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func test-true)
+  class Abstract_test_true : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_test_true() {};
+    virtual ~Abstract_test_true() = 0;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_test_true : public virtual Abstract_test_true {
+  public:
+    Class_test_true();
+    virtual ~Class_test_true() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;

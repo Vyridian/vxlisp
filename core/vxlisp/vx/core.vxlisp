@@ -458,13 +458,17 @@
      public String vx_string() {
        return vxstring;
      }")
- :test    (test "a" (string "a"))
-          (test "ab" (string "a" "b"))
- :doc     "A simple string.")
+ :test (test "a" (string "a"))
+       (test "ab" (string "a" "b"))
+ :doc  "A simple string.")
 
 (type stringlist : list
  :allowtypes [string]
  :doc        "A list of string.")
+
+(type stringlistlist : list
+ :allowtypes [stringlist]
+ :doc        "A list of stringlist.")
 
 (type stringmap : map
  :allowtypes [string]
@@ -2125,6 +2129,19 @@
  :doc "Same as normal let but returns async values.")
 
 (func list<-list : list-1
+ [values : list-2]
+ (list<-list : list-1
+  values
+  (fn : any
+   [value : any]
+   value))
+ :test (test
+        (stringlist "10" "20")
+        (list<-list : stringlist
+         (anylist "10" "20")))
+ :doc "Return a list with allowed values from another list")
+
+(func list<-list : list-1
  [values      : list-2
   fn-any<-any : any<-any]
  (native
@@ -2179,41 +2196,27 @@
     });")
  :doc "Returns an asynchronous list of the processed asynchronous items from another list")
 
-(func list-join<-list : list-1
- [values      : list-2
-  fn-any<-any : any<-any]
- (native
-  :cpp
-   "vx_core::Type_any list = vx_core::vx_list_join_from_list_fn(generic_list_1, values, fn_any_from_any);
-    output = vx_core::vx_any_from_any(generic_list_1, list);"
-  :js
-   "const fn = fn_any_from_any['vx_value']
-    if (fn) {
-      const listoflist = values.map(fn)
-      output = listoflist.flat()
-      output['vx_type'] = generic_list_1
-    }"
-  :java
-   "List<Core.Type_any> list_value = values.vx_list();
-    List<Core.Type_any> list_result = new ArrayList<>();
-    for (Core.Type_any val : list_value) {
-      Core.Type_any listoflist = fn_any_from_any.vx_any_from_any(generic_list_1, val);
-      if (listoflist instanceof Core.Type_list) {
-        Core.Type_list vallist = (Core.Type_list)listoflist;
-        List<Core.Type_any> listval = vallist.vx_list();
-        list_result.addAll(listval);
-      }
-    }
-    output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));")
- :doc "Returns a flattened list of processed items from another list")
+(func list<-map : list-1
+ [valuemap : map-2]
+ (list<-map : list-1
+  valuemap
+  (fn : any
+   [key   : string
+    value : any]
+   value))
+ :test (test
+        (stringlist "a1" "b2")
+        (list<-map : stringlist
+         (stringmap
+          :x "a1"
+          :y "b2")))
+ :doc "Returns a list of allowed values from a map.")
 
 (func list<-map : list-1
  [valuemap          : map-2
   fn-any<-key-value : any<-key-value]
  (native
-  :cpp
-   "vx_core::Type_any list = vx_core::vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value);
-    output = vx_core::vx_any_from_any(generic_list_1, list);"
+  :cpp :auto
   :js
    "vx_core.vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value)"
   :java
@@ -2244,6 +2247,58 @@
    "output = []
     output['vx_type'] = type")
  :doc "Create an empty list from a type. Used internally for default lists")
+
+(func list-join<-list : list-1
+ [values : list-2]
+ (list-join<-list : list-1
+  values
+  (fn : any
+   [value : any]
+   value))
+ :test (test
+        (stringlist "a" "b" "c" "d")
+        (list-join<-list : stringlist
+         (stringlistlist
+          (stringlist "a" "b")
+          (stringlist "c" "d"))))
+ :doc "Returns a list by joining the valid values in each value list")
+
+(func list-join<-list : list-1
+ [values      : list-2
+  fn-any<-any : any<-any]
+ (native
+  :cpp
+   "vx_core::Type_any list = vx_core::vx_list_join_from_list_fn(generic_list_1, values, fn_any_from_any);
+    output = vx_core::vx_any_from_any(generic_list_1, list);"
+  :js
+   "const fn = fn_any_from_any['vx_value']
+    if (fn) {
+      const listoflist = values.map(fn)
+      output = listoflist.flat()
+      output['vx_type'] = generic_list_1
+    }"
+  :java
+   "List<Core.Type_any> list_value = values.vx_list();
+    List<Core.Type_any> list_result = new ArrayList<>();
+    for (Core.Type_any val : list_value) {
+      Core.Type_any listoflist = fn_any_from_any.vx_any_from_any(generic_list_1, val);
+      if (listoflist instanceof Core.Type_list) {
+        Core.Type_list vallist = (Core.Type_list)listoflist;
+        List<Core.Type_any> listval = vallist.vx_list();
+        list_result.addAll(listval);
+      }
+    }
+    output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));")
+ :test (test
+        (stringlist "a" "b" "c" "d")
+        (list-join<-list : stringlist
+         (stringlistlist
+          (stringlist "a" "b")
+          (stringlist "c" "d"))
+         (fn : stringlist
+          [values : stringlist]
+          values)))
+ :doc "Returns a flattened list of processed items from another list")
 
 (func log : any
  [value : any]
@@ -2323,6 +2378,20 @@
           [val : string]
           (string "key" val))))
  :doc "Returns a map from a list by applying a function to generate a key for each value.")
+
+(func map<-map : map-1
+ [valuemap : map-2]
+ (map<-map : map-1
+  valuemap
+  (fn : any
+   [key   : string
+    value : any]
+   value))
+ :test (test
+        (stringmap :a "1")
+        (map<-map : stringmap
+         (anymap :a "1")))
+ :doc "Return a map with allowed values from another map")
 
 (func map<-map : map-1
  [valuemap          : map-2

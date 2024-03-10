@@ -4314,7 +4314,7 @@ namespace vx_web_html {
       vx_core::vx_release_one({
         this->vx_p_name,
         this->vx_p_props,
-        this->vx_p_subprops
+        this->vx_p_stylelist
       });
     }
 
@@ -4336,11 +4336,11 @@ namespace vx_web_html {
       return output;
     }
 
-    // subprops()
-    vx_web_html::Type_subpropmap Class_style::subprops() const {
-      vx_web_html::Type_subpropmap output = this->vx_p_subprops;
+    // stylelist()
+    vx_web_html::Type_stylelist Class_style::stylelist() const {
+      vx_web_html::Type_stylelist output = this->vx_p_stylelist;
       if (!output) {
-        output = vx_web_html::e_subpropmap;
+        output = vx_web_html::e_stylelist;
       }
       return output;
     }
@@ -4354,8 +4354,8 @@ namespace vx_web_html {
         output = this->name();
       } else if (skey == ":props") {
         output = this->props();
-      } else if (skey == ":subprops") {
-        output = this->subprops();
+      } else if (skey == ":stylelist") {
+        output = this->stylelist();
       }
       vx_core::vx_release_except(key, output);
       return output;
@@ -4366,7 +4366,7 @@ namespace vx_web_html {
       vx_core::vx_Type_mapany output;
       output[":name"] = this->name();
       output[":props"] = this->props();
-      output[":subprops"] = this->subprops();
+      output[":stylelist"] = this->stylelist();
       return output;
     }
 
@@ -4385,7 +4385,7 @@ namespace vx_web_html {
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_name = val->name();
       vx_web_html::Type_propmap vx_p_props = val->props();
-      vx_web_html::Type_subpropmap vx_p_subprops = val->subprops();
+      vx_web_html::Type_stylelist vx_p_stylelist = val->stylelist();
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -4404,7 +4404,7 @@ namespace vx_web_html {
             key = testkey;
           } else if (testkey == ":props") {
             key = testkey;
-          } else if (testkey == ":subprops") {
+          } else if (testkey == ":stylelist") {
             key = testkey;
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
@@ -4430,13 +4430,13 @@ namespace vx_web_html {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :props " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
-          } else if (key == ":subprops") {
-            if (vx_p_subprops == valsub) {
-            } else if (valsubtype == vx_web_html::t_subpropmap) {
+          } else if (key == ":stylelist") {
+            if (vx_p_stylelist == valsub) {
+            } else if (valsubtype == vx_web_html::t_stylelist) {
               ischanged = true;
-              vx_p_subprops = vx_core::vx_any_from_any(vx_web_html::t_subpropmap, valsub);
+              vx_p_stylelist = vx_core::vx_any_from_any(vx_web_html::t_stylelist, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :subprops " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :stylelist " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
@@ -4462,12 +4462,12 @@ namespace vx_web_html {
           output->vx_p_props = vx_p_props;
           vx_core::vx_reserve(vx_p_props);
         }
-        if (output->vx_p_subprops != vx_p_subprops) {
-          if (output->vx_p_subprops) {
-            vx_core::vx_release_one(output->vx_p_subprops);
+        if (output->vx_p_stylelist != vx_p_stylelist) {
+          if (output->vx_p_stylelist) {
+            vx_core::vx_release_one(output->vx_p_stylelist);
           }
-          output->vx_p_subprops = vx_p_subprops;
-          vx_core::vx_reserve(vx_p_subprops);
+          output->vx_p_stylelist = vx_p_stylelist;
+          vx_core::vx_reserve(vx_p_stylelist);
         }
       }
       if (msgblock != vx_core::e_msgblock) {
@@ -4506,8 +4506,8 @@ namespace vx_web_html {
             vx_web_html::t_propmap // type
           ),
           vx_core::vx_new_arg(
-            "subprops", // name
-            vx_web_html::t_subpropmap // type
+            "stylelist", // name
+            vx_web_html::t_stylelist // type
           )
         }) // properties
       );
@@ -5224,183 +5224,6 @@ namespace vx_web_html {
     }
 
     vx_core::Type_constdef Class_stylesheet::vx_constdef() const {return this->vx_p_constdef;}
-
-
-  //}
-
-  // (type subpropmap)
-  // class Class_subpropmap {
-    Abstract_subpropmap::~Abstract_subpropmap() {}
-
-    Class_subpropmap::Class_subpropmap() : Abstract_subpropmap::Abstract_subpropmap() {
-      vx_core::refcount += 1;
-    }
-
-    Class_subpropmap::~Class_subpropmap() {
-      vx_core::refcount -= 1;
-      if (this->vx_p_msgblock) {
-        vx_core::vx_release_one(this->vx_p_msgblock);
-      }
-      for (auto const& [key, val] : this->vx_p_map) {
-        vx_core::vx_release_one(val);
-      }
-    }
-
-    // vx_map()
-    vx_core::vx_Type_mapany Class_subpropmap::vx_map() const {
-      vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any, this->vx_p_map);
-      return output;
-    }
-
-    // vx_get_propmap(key)
-    vx_web_html::Type_propmap Class_subpropmap::vx_get_propmap(vx_core::Type_string key) const {
-      vx_web_html::Type_propmap output = vx_web_html::e_propmap;
-      const vx_web_html::Class_subpropmap* map = this;
-      std::string skey = key->vx_string();
-      if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
-        skey = vx_core::vx_string_from_string_start(skey, 2);
-      }
-      std::map<std::string, vx_web_html::Type_propmap> mapval = map->vx_p_map;
-      output = vx_core::vx_any_from_map(mapval, skey, vx_web_html::e_propmap);
-      vx_core::vx_release_except(key, output);
-      return output;
-    }
-
-    // vx_get_any(key)
-    vx_core::Type_any Class_subpropmap::vx_get_any(vx_core::Type_string key) const {
-      return this->vx_get_propmap(key);
-    }
-
-    // vx_mappropmap()
-    std::map<std::string, vx_web_html::Type_propmap> Class_subpropmap::vx_mappropmap() const {return this->vx_p_map;}
-
-    // vx_new_from_map(mapval)
-    vx_core::Type_any Class_subpropmap::vx_new_from_map(vx_core::vx_Type_mapany mapval) const {
-      vx_web_html::Type_subpropmap output = vx_web_html::e_subpropmap;
-      vx_core::Type_msgblock msgblock = vx_core::e_msgblock;
-      std::map<std::string, vx_web_html::Type_propmap> map;
-      for (auto const& iter : mapval) {
-        std::string key = iter.first;
-        vx_core::Type_any val = iter.second;
-        vx_core::Type_any valtype = val->vx_type();
-        if (valtype == vx_web_html::t_propmap) {
-          vx_web_html::Type_propmap castval = vx_core::vx_any_from_any(vx_web_html::t_propmap, val);
-          map[key] = castval;
-        } else {
-          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(subpropmap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
-          msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
-        }
-      }
-      if ((map.size() > 0) || (msgblock != vx_core::e_msgblock)) {
-        output = new vx_web_html::Class_subpropmap();
-        output->vx_p_map = map;
-        for (auto const& [key, val] : map) {
-          vx_core::vx_reserve(val);
-        }
-        if (msgblock != vx_core::e_msgblock) {
-          output->vx_p_msgblock = msgblock;
-          vx_core::vx_reserve(msgblock);
-        }
-      }
-      for (auto const& [key, val] : mapval) {
-        vx_core::vx_release_except(val, output);
-      }
-      return output;
-    }
-
-    vx_core::Type_any Class_subpropmap::vx_new(vx_core::vx_Type_listany vals) const {
-      return this->vx_copy(vx_web_html::e_subpropmap, vals);
-    }
-
-    vx_core::Type_any Class_subpropmap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_web_html::Type_subpropmap output = vx_web_html::e_subpropmap;
-      bool ischanged = false;
-      if (copyval->vx_p_constdef != NULL) {
-        ischanged = true;
-      }
-      vx_web_html::Type_subpropmap valmap = vx_core::vx_any_from_any(vx_web_html::t_subpropmap, copyval);
-      output = valmap;
-      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
-      std::map<std::string, vx_web_html::Type_propmap> mapval = valmap->vx_mappropmap();
-      std::vector<std::string> keys = valmap->vx_p_keys;
-      std::string skey = "";
-      for (vx_core::Type_any valsub : vals) {
-        vx_core::Type_any valsubtype = valsub->vx_type();
-        if (valsubtype == vx_core::t_msgblock) {
-          msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (valsubtype == vx_core::t_msg) {
-          msgblock = vx_core::vx_copy(msgblock, {valsub});
-        } else if (skey == "") {
-          if (valsubtype == vx_core::t_string) {
-            vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
-            skey = valstring->vx_string();
-            if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
-              skey = vx_core::vx_string_from_string_start(skey, 2);
-            }
-          } else {
-            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
-            msgblock = vx_core::vx_copy(msgblock, {msg});
-          }
-        } else {
-          vx_web_html::Type_propmap valany = NULL;
-          if (valsubtype == vx_web_html::t_propmap) {
-            valany = vx_core::vx_any_from_any(vx_web_html::t_propmap, valsub);
-          } else if (valsubtype == vx_web_html::t_propmap) {
-            valany = vx_core::vx_any_from_any(vx_web_html::t_propmap, valsub);
-          } else {
-            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + skey + " "  + vx_core::vx_string_from_any(valsub) + "");
-            msgblock = vx_core::vx_copy(msgblock, {msg});
-          }
-          if (valany) {
-            ischanged = true;
-            mapval[skey] = valany;
-            if (!vx_core::vx_boolean_from_list_find(keys, skey)) {
-          	 		keys.push_back(skey);
-            }
-            skey = "";
-          }
-        }
-      }
-      if (ischanged || (msgblock != vx_core::e_msgblock)) {
-        output = new vx_web_html::Class_subpropmap();
-        output->vx_p_keys = keys;
-        output->vx_p_map = mapval;
-        for (auto const& [key, val] : mapval) {
-          vx_core::vx_reserve(val);
-        }
-        if (msgblock != vx_core::e_msgblock) {
-          output->vx_p_msgblock = msgblock;
-          vx_core::vx_reserve(msgblock);
-        }
-      }
-      vx_core::vx_release_except(copyval, output);
-      vx_core::vx_release_except(vals, output);
-      return output;
-    }
-
-    vx_core::Type_msgblock Class_subpropmap::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany vx_web_html::Class_subpropmap::vx_dispose() {return vx_core::emptylistany;}
-    vx_core::Type_any Class_subpropmap::vx_empty() const {return vx_web_html::e_subpropmap;}
-    vx_core::Type_any Class_subpropmap::vx_type() const {return vx_web_html::t_subpropmap;}
-
-    vx_core::Type_typedef Class_subpropmap::vx_typedef() const {
-      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/web/html", // pkgname
-        "subpropmap", // name
-        ":map", // extends
-        vx_core::e_typelist, // traits
-        vx_core::vx_typelist_from_listany({vx_web_html::t_propmap}), // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-      return output;
-    }
-
-    vx_core::Type_constdef Class_subpropmap::vx_constdef() const {return this->vx_p_constdef;}
 
 
   //}
@@ -7658,7 +7481,13 @@ namespace vx_web_html {
     vx_core::vx_release_one_except(text, output);
     return output;
   }
-
+  /**
+   * @function htmlstring_from_string
+   * Convert text to HTML string
+   * @param  {string} text
+   * @return {string}
+   * (func htmlstring<-string)
+   */
   // (func htmlstring<-string)
   // class Class_htmlstring_from_string {
     Abstract_htmlstring_from_string::~Abstract_htmlstring_from_string() {}
@@ -7752,7 +7581,12 @@ namespace vx_web_html {
     vx_core::vx_release_one_except(indent, output);
     return output;
   }
-
+  /**
+   * @function string_indent
+   * @param  {int} indent
+   * @return {string}
+   * (func string-indent)
+   */
   // (func string-indent)
   // class Class_string_indent {
     Abstract_string_indent::~Abstract_string_indent() {}
@@ -7855,7 +7689,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({body, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_body_indent
+   * Returns string from body
+   * @param  {body} body
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-body-indent)
+   */
   // (func string<-body-indent)
   // class Class_string_from_body_indent {
     Abstract_string_from_body_indent::~Abstract_string_from_body_indent() {}
@@ -7975,7 +7816,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({details, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_details_indent
+   * Returns string from details
+   * @param  {details} details
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-details-indent)
+   */
   // (func string<-details-indent)
   // class Class_string_from_details_indent {
     Abstract_string_from_details_indent::~Abstract_string_from_details_indent() {}
@@ -8093,7 +7941,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({div, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_div_indent
+   * Returns string from div
+   * @param  {div} div
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-div-indent)
+   */
   // (func string<-div-indent)
   // class Class_string_from_div_indent {
     Abstract_string_from_div_indent::~Abstract_string_from_div_indent() {}
@@ -8185,7 +8040,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({footer, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_footer_indent
+   * Returns string from footer
+   * @param  {footer} footer
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-footer-indent)
+   */
   // (func string<-footer-indent)
   // class Class_string_from_footer_indent {
     Abstract_string_from_footer_indent::~Abstract_string_from_footer_indent() {}
@@ -8294,7 +8156,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({h1, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_h1_indent
+   * Returns string from h1
+   * @param  {h1} h1
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-h1-indent)
+   */
   // (func string<-h1-indent)
   // class Class_string_from_h1_indent {
     Abstract_string_from_h1_indent::~Abstract_string_from_h1_indent() {}
@@ -8403,7 +8272,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({h2, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_h2_indent
+   * Returns string from h2
+   * @param  {h2} h2
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-h2-indent)
+   */
   // (func string<-h2-indent)
   // class Class_string_from_h2_indent {
     Abstract_string_from_h2_indent::~Abstract_string_from_h2_indent() {}
@@ -8512,7 +8388,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({h3, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_h3_indent
+   * Returns string from h3
+   * @param  {h3} h3
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-h3-indent)
+   */
   // (func string<-h3-indent)
   // class Class_string_from_h3_indent {
     Abstract_string_from_h3_indent::~Abstract_string_from_h3_indent() {}
@@ -8604,7 +8487,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({head, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_head_indent
+   * Returns string from head
+   * @param  {head} head
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-head-indent)
+   */
   // (func string<-head-indent)
   // class Class_string_from_head_indent {
     Abstract_string_from_head_indent::~Abstract_string_from_head_indent() {}
@@ -8725,7 +8615,13 @@ namespace vx_web_html {
     vx_core::vx_release_one_except(html, output);
     return output;
   }
-
+  /**
+   * @function string_from_html
+   * Returns string from html
+   * @param  {html} html
+   * @return {string}
+   * (func string<-html)
+   */
   // (func string<-html)
   // class Class_string_from_html {
     Abstract_string_from_html::~Abstract_string_from_html() {}
@@ -8830,7 +8726,13 @@ namespace vx_web_html {
     vx_core::vx_release_one_except(indent, output);
     return output;
   }
-
+  /**
+   * @function string_from_indent
+   * Returns a string to do indentation for a given indent count.
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-indent)
+   */
   // (func string<-indent)
   // class Class_string_from_indent {
     Abstract_string_from_indent::~Abstract_string_from_indent() {}
@@ -8997,7 +8899,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({meta, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_meta_indent
+   * Returns string from head
+   * @param  {meta} meta
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-meta-indent)
+   */
   // (func string<-meta-indent)
   // class Class_string_from_meta_indent {
     Abstract_string_from_meta_indent::~Abstract_string_from_meta_indent() {}
@@ -9255,7 +9164,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({node, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_node_indent
+   * Returns a string from any node
+   * @param  {any-1} node
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-node-indent)
+   */
   // (func string<-node-indent)
   // class Class_string_from_node_indent {
     Abstract_string_from_node_indent::~Abstract_string_from_node_indent() {}
@@ -9337,7 +9253,7 @@ namespace vx_web_html {
     output = vx_core::f_let(
       vx_core::t_string,
       vx_core::t_any_from_func->vx_fn_new({nodelist, indent}, [nodelist, indent]() {
-        vx_core::Type_stringlist textlist = vx_core::f_list_from_list(
+        vx_core::Type_stringlist textlist = vx_core::f_list_from_list_1(
           vx_core::t_stringlist,
           nodelist,
           vx_core::t_any_from_any->vx_fn_new({indent}, [indent](vx_core::Type_any node_any) {
@@ -9356,7 +9272,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({nodelist, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_nodelist_indent
+   * Returns a string from any node
+   * @param  {list-1} nodelist
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-nodelist-indent)
+   */
   // (func string<-nodelist-indent)
   // class Class_string_from_nodelist_indent {
     Abstract_string_from_nodelist_indent::~Abstract_string_from_nodelist_indent() {}
@@ -9499,7 +9422,16 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({nodes, tag, prop, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_nodelist_tag_prop_indent
+   * Returns string from generic nodelist
+   * @param  {list-1} nodes
+   * @param  {string} tag
+   * @param  {string} prop
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-nodelist-tag-prop-indent)
+   */
   // (func string<-nodelist-tag-prop-indent)
   // class Class_string_from_nodelist_tag_prop_indent {
     Abstract_string_from_nodelist_tag_prop_indent::~Abstract_string_from_nodelist_tag_prop_indent() {}
@@ -9622,7 +9554,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({p, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_p_indent
+   * Returns string from p
+   * @param  {p} p
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-p-indent)
+   */
   // (func string<-p-indent)
   // class Class_string_from_p_indent {
     Abstract_string_from_p_indent::~Abstract_string_from_p_indent() {}
@@ -9719,7 +9658,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({key, val}, output);
     return output;
   }
-
+  /**
+   * @function string_from_propname_val
+   * Returns ' key=\"val\"' if val is not blank.
+   * @param  {string} key
+   * @param  {string} val
+   * @return {string}
+   * (func string<-propname-val)
+   */
   // (func string<-propname-val)
   // class Class_string_from_propname_val {
     Abstract_string_from_propname_val::~Abstract_string_from_propname_val() {}
@@ -9827,7 +9773,13 @@ namespace vx_web_html {
     vx_core::vx_release_one_except(style, output);
     return output;
   }
-
+  /**
+   * @function string_from_propstyle
+   * Returns ' class=\"style.name\"' if style is not empty.
+   * @param  {style} style
+   * @return {string}
+   * (func string<-propstyle)
+   */
   // (func string<-propstyle)
   // class Class_string_from_propstyle {
     Abstract_string_from_propstyle::~Abstract_string_from_propstyle() {}
@@ -9945,7 +9897,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({style, stylelist}, output);
     return output;
   }
-
+  /**
+   * @function string_from_propstyle_stylelist
+   * Returns ' class=\"style.name\"' if style is not empty.
+   * @param  {style} style
+   * @param  {stylelist} stylelist
+   * @return {string}
+   * (func string<-propstyle-stylelist)
+   */
   // (func string<-propstyle-stylelist)
   // class Class_string_from_propstyle_stylelist {
     Abstract_string_from_propstyle_stylelist::~Abstract_string_from_propstyle_stylelist() {}
@@ -10036,7 +9995,7 @@ namespace vx_web_html {
             vx_core::Type_string output_1 = vx_core::f_let(
               vx_core::t_string,
               vx_core::t_any_from_func->vx_fn_new({stylelist}, [stylelist]() {
-                vx_core::Type_stringlist namelist = vx_core::f_list_from_list(
+                vx_core::Type_stringlist namelist = vx_core::f_list_from_list_1(
                   vx_core::t_stringlist,
                   stylelist,
                   vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any item_any) {
@@ -10077,7 +10036,13 @@ namespace vx_web_html {
     vx_core::vx_release_one_except(stylelist, output);
     return output;
   }
-
+  /**
+   * @function string_from_propstylelist
+   * Returns ' class=\"style1.name style2.name\"' if stylelist is not empty.
+   * @param  {stylelist} stylelist
+   * @return {string}
+   * (func string<-propstylelist)
+   */
   // (func string<-propstylelist)
   // class Class_string_from_propstylelist {
     Abstract_string_from_propstylelist::~Abstract_string_from_propstylelist() {}
@@ -10196,7 +10161,13 @@ namespace vx_web_html {
     vx_core::vx_release_one_except(style, output);
     return output;
   }
-
+  /**
+   * @function string_from_propstyleunique
+   * Returns ' style=\"{style.propmap}\"' if style is not empty.
+   * @param  {style} style
+   * @return {string}
+   * (func string<-propstyleunique)
+   */
   // (func string<-propstyleunique)
   // class Class_string_from_propstyleunique {
     Abstract_string_from_propstyleunique::~Abstract_string_from_propstyleunique() {}
@@ -10295,11 +10266,18 @@ namespace vx_web_html {
         vx_core::vx_ref_plus(name);
         vx_web_html::Type_propmap propmap = style->props();
         vx_core::vx_ref_plus(propmap);
+        vx_web_html::Type_stylelist sublist = style->stylelist();
+        vx_core::vx_ref_plus(sublist);
         vx_core::Type_string stext = vx_web_html::f_string_from_stylepropmap_indent(
           propmap,
           vx_core::f_plus1(indent)
         );
         vx_core::vx_ref_plus(stext);
+        vx_core::Type_string subtext = vx_web_html::f_string_from_stylelist_indent(
+          sublist,
+          vx_core::f_plus1(indent)
+        );
+        vx_core::vx_ref_plus(subtext);
         vx_core::Type_string output_1 = vx_core::f_new(
           vx_core::t_string,
           vx_core::vx_new(vx_core::t_anylist, {
@@ -10307,18 +10285,26 @@ namespace vx_web_html {
             name,
             vx_core::vx_new_string(" {"),
             stext,
+            subtext,
             sindent,
             vx_core::vx_new_string("}")
           })
         );
-        vx_core::vx_release_one_except({sindent, name, propmap, stext}, output_1);
+        vx_core::vx_release_one_except({sindent, name, propmap, sublist, stext, subtext}, output_1);
         return output_1;
       })
     );
     vx_core::vx_release_one_except({style, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_style_indent
+   * Returns indent'name {key: val;}' for each style.
+   * @param  {style} style
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-style-indent)
+   */
   // (func string<-style-indent)
   // class Class_string_from_style_indent {
     Abstract_string_from_style_indent::~Abstract_string_from_style_indent() {}
@@ -10400,7 +10386,7 @@ namespace vx_web_html {
     output = vx_core::f_let(
       vx_core::t_string,
       vx_core::t_any_from_func->vx_fn_new({stylelist, indent}, [stylelist, indent]() {
-        vx_core::Type_stringlist sstyles = vx_core::f_list_from_list(
+        vx_core::Type_stringlist sstyles = vx_core::f_list_from_list_1(
           vx_core::t_stringlist,
           stylelist,
           vx_core::t_any_from_any->vx_fn_new({indent}, [indent](vx_core::Type_any substyle_any) {
@@ -10419,7 +10405,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({stylelist, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_stylelist_indent
+   * Return a string from a stylelist
+   * @param  {stylelist} stylelist
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-stylelist-indent)
+   */
   // (func string<-stylelist-indent)
   // class Class_string_from_stylelist_indent {
     Abstract_string_from_stylelist_indent::~Abstract_string_from_stylelist_indent() {}
@@ -10503,7 +10496,7 @@ namespace vx_web_html {
       vx_core::t_any_from_func->vx_fn_new({indent, propmap}, [indent, propmap]() {
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
         vx_core::vx_ref_plus(sindent);
-        vx_core::Type_stringlist sprops = vx_core::f_list_from_map(
+        vx_core::Type_stringlist sprops = vx_core::f_list_from_map_1(
           vx_core::t_stringlist,
           propmap,
           vx_core::t_any_from_key_value->vx_fn_new({sindent}, [sindent](vx_core::Type_any key_any, vx_core::Type_any val_any) {
@@ -10532,7 +10525,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({propmap, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_stylepropmap_indent
+   * Returns indent'key: val;' for each prop.
+   * @param  {propmap} propmap
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-stylepropmap-indent)
+   */
   // (func string<-stylepropmap-indent)
   // class Class_string_from_stylepropmap_indent {
     Abstract_string_from_stylepropmap_indent::~Abstract_string_from_stylepropmap_indent() {}
@@ -10644,7 +10644,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({stylesheet, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_stylesheet_indent
+   * Returns string representation of given stylesheet.
+   * @param  {stylesheet} stylesheet
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-stylesheet-indent)
+   */
   // (func string<-stylesheet-indent)
   // class Class_string_from_stylesheet_indent {
     Abstract_string_from_stylesheet_indent::~Abstract_string_from_stylesheet_indent() {}
@@ -10767,7 +10774,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({table, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_table_indent
+   * Returns string from table
+   * @param  {table} table
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-table-indent)
+   */
   // (func string<-table-indent)
   // class Class_string_from_table_indent {
     Abstract_string_from_table_indent::~Abstract_string_from_table_indent() {}
@@ -10859,7 +10873,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({tbody, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_tbody_indent
+   * Returns string from tbody
+   * @param  {tbody} tbody
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-tbody-indent)
+   */
   // (func string<-tbody-indent)
   // class Class_string_from_tbody_indent {
     Abstract_string_from_tbody_indent::~Abstract_string_from_tbody_indent() {}
@@ -10951,7 +10972,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({td, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_td_indent
+   * Returns string from td
+   * @param  {td} td
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-td-indent)
+   */
   // (func string<-td-indent)
   // class Class_string_from_td_indent {
     Abstract_string_from_td_indent::~Abstract_string_from_td_indent() {}
@@ -11043,7 +11071,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({thead, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_thead_indent
+   * Returns string from thead
+   * @param  {thead} thead
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-thead-indent)
+   */
   // (func string<-thead-indent)
   // class Class_string_from_thead_indent {
     Abstract_string_from_thead_indent::~Abstract_string_from_thead_indent() {}
@@ -11145,7 +11180,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({title, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_title_indent
+   * Returns string from h2
+   * @param  {title} title
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-title-indent)
+   */
   // (func string<-title-indent)
   // class Class_string_from_title_indent {
     Abstract_string_from_title_indent::~Abstract_string_from_title_indent() {}
@@ -11237,7 +11279,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({tr, indent}, output);
     return output;
   }
-
+  /**
+   * @function string_from_tr_indent
+   * Returns string from tr
+   * @param  {tr} tr
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-tr-indent)
+   */
   // (func string<-tr-indent)
   // class Class_string_from_tr_indent {
     Abstract_string_from_tr_indent::~Abstract_string_from_tr_indent() {}
@@ -11319,7 +11368,13 @@ namespace vx_web_html {
     vx_core::vx_release_one_except(uri, output);
     return output;
   }
-
+  /**
+   * @function string_from_uri
+   * Decode a URI string
+   * @param  {string} uri
+   * @return {string}
+   * (func string<-uri)
+   */
   // (func string<-uri)
   // class Class_string_from_uri {
     Abstract_string_from_uri::~Abstract_string_from_uri() {}
@@ -11417,7 +11472,14 @@ namespace vx_web_html {
     vx_core::vx_release_one_except({stylesheet, name}, output);
     return output;
   }
-
+  /**
+   * @function style_from_stylesheet_name
+   * Return style from stylesheet.stylemap
+   * @param  {stylesheet} stylesheet
+   * @param  {string} name
+   * @return {style}
+   * (func style<-stylesheet-name)
+   */
   // (func style<-stylesheet-name)
   // class Class_style_from_stylesheet_name {
     Abstract_style_from_stylesheet_name::~Abstract_style_from_stylesheet_name() {}
@@ -11509,7 +11571,13 @@ namespace vx_web_html {
     vx_core::vx_release_one_except(stylelist, output);
     return output;
   }
-
+  /**
+   * @function stylemap_from_stylelist
+   * Returns a stylemap from a given stylelist
+   * @param  {stylelist} stylelist
+   * @return {stylemap}
+   * (func stylemap<-stylelist)
+   */
   // (func stylemap<-stylelist)
   // class Class_stylemap_from_stylelist {
     Abstract_stylemap_from_stylelist::~Abstract_stylemap_from_stylelist() {}
@@ -11603,7 +11671,13 @@ namespace vx_web_html {
     vx_core::vx_release_one_except(stylesheet, output);
     return output;
   }
-
+  /**
+   * @function stylemap_from_stylesheet
+   * Return stylemap from stylesheet
+   * @param  {stylesheet} stylesheet
+   * @return {stylemap}
+   * (func stylemap<-stylesheet)
+   */
   // (func stylemap<-stylesheet)
   // class Class_stylemap_from_stylesheet {
     Abstract_stylemap_from_stylesheet::~Abstract_stylemap_from_stylesheet() {}
@@ -11697,7 +11771,13 @@ namespace vx_web_html {
     vx_core::vx_release_one_except(stylesheet, output);
     return output;
   }
-
+  /**
+   * @function styles_from_stylesheet
+   * Return style from stylesheet.stylemap
+   * @param  {stylesheet} stylesheet
+   * @return {stylelist}
+   * (func styles<-stylesheet)
+   */
   // (func styles<-stylesheet)
   // class Class_styles_from_stylesheet {
     Abstract_styles_from_stylesheet::~Abstract_styles_from_stylesheet() {}
@@ -11800,7 +11880,13 @@ namespace vx_web_html {
     vx_core::vx_release_one_except(stylesheet, output);
     return output;
   }
-
+  /**
+   * @function stylesheet_loadmap
+   * Decode a URI string
+   * @param  {stylesheet} stylesheet
+   * @return {stylesheet}
+   * (func stylesheet-loadmap)
+   */
   // (func stylesheet-loadmap)
   // class Class_stylesheet_loadmap {
     Abstract_stylesheet_loadmap::~Abstract_stylesheet_loadmap() {}
@@ -11893,7 +11979,13 @@ namespace vx_web_html {
     vx_core::vx_release_one_except(text, output);
     return output;
   }
-
+  /**
+   * @function uri_from_string
+   * Encode a URI string
+   * @param  {string} text
+   * @return {string}
+   * (func uri<-string)
+   */
   // (func uri<-string)
   // class Class_uri_from_string {
     Abstract_uri_from_string::~Abstract_uri_from_string() {}
@@ -12025,8 +12117,6 @@ namespace vx_web_html {
   vx_web_html::Type_stylemap t_stylemap = NULL;
   vx_web_html::Type_stylesheet e_stylesheet = NULL;
   vx_web_html::Type_stylesheet t_stylesheet = NULL;
-  vx_web_html::Type_subpropmap e_subpropmap = NULL;
-  vx_web_html::Type_subpropmap t_subpropmap = NULL;
   vx_web_html::Type_table e_table = NULL;
   vx_web_html::Type_table t_table = NULL;
   vx_web_html::Type_tbody e_tbody = NULL;
@@ -12219,10 +12309,6 @@ namespace vx_web_html {
       vx_core::vx_reserve_empty(vx_web_html::e_stylesheet);
       vx_web_html::t_stylesheet = new Class_stylesheet();
       vx_core::vx_reserve_type(vx_web_html::t_stylesheet);
-      vx_web_html::e_subpropmap = new Class_subpropmap();
-      vx_core::vx_reserve_empty(vx_web_html::e_subpropmap);
-      vx_web_html::t_subpropmap = new Class_subpropmap();
-      vx_core::vx_reserve_type(vx_web_html::t_subpropmap);
       vx_web_html::e_table = new Class_table();
       vx_core::vx_reserve_empty(vx_web_html::e_table);
       vx_web_html::t_table = new Class_table();
@@ -12438,7 +12524,6 @@ namespace vx_web_html {
       maptype["stylelist"] = vx_web_html::t_stylelist;
       maptype["stylemap"] = vx_web_html::t_stylemap;
       maptype["stylesheet"] = vx_web_html::t_stylesheet;
-      maptype["subpropmap"] = vx_web_html::t_subpropmap;
       maptype["table"] = vx_web_html::t_table;
       maptype["tbody"] = vx_web_html::t_tbody;
       maptype["td"] = vx_web_html::t_td;

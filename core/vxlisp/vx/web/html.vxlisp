@@ -94,14 +94,10 @@
  :allowtypes [string]
  :doc        "Map of props")
 
-(type subpropmap : map
- :allowtypes [propmap]
- :doc        "Map of propmap")
-
 (type style : struct
- :properties [name     : string
-              props    : propmap
-              subprops : subpropmap]
+ :properties [name      : string
+              props     : propmap
+              stylelist : stylelist]
  :doc        "Programmable Cascading Style")
 
 (type stylelist : list
@@ -532,13 +528,20 @@
  [style  : style
   indent : int]
  (let : string
-  [sindent : string  := (string<-indent indent)
-   name    : string  := (:name  style)
-   propmap : propmap := (:props style)
-   stext   : string  := (string<-stylepropmap-indent propmap (+1 indent))]
+  [sindent : string    := (string<-indent indent)
+   name    : string    := (:name      style)
+   propmap : propmap   := (:props     style)
+   sublist : stylelist := (:stylelist style)
+   stext   : string    := (string<-stylepropmap-indent
+                           propmap
+                           (+1 indent))
+   subtext : string    := (string<-stylelist-indent
+                           sublist
+                           (+1 indent))]
   (string
    sindent name " {"
    stext
+   subtext
    sindent "}"))
  :doc "Returns indent'name {key: val;}' for each style.")
 

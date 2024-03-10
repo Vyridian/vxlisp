@@ -30,24 +30,23 @@
   value  : any]
  (let : boolean
   [valmap  : valuemap := (any-readstate<-name : valuemap
-                          mapname)
-   valtype : any      := (type<-any valmap)]
+                          mapname)]
   (if : boolean
    (then
-    (== valtype valuemap)
+    (is-empty valmap)
+    (let : boolean
+     [valmap2  : valuemap      := (valuemap
+                                   name value)
+      listener : statelistener := (statelistener
+                                   :name  mapname
+                                   :value valmap2)]
+     (boolean-writestate<-statelistener
+      listener)))
+   (else
     (boolean-write<-map-name-value
      valmap
      name
-     value))
-   (else
-    (let : boolean
-     [valmap2       : valuemap      := (valuemap
-                                        name value)
-      statelistener : statelistener := (statelistener
-                                        :name  mapname
-                                        :value valmap2)]
-     (boolean-writestate<-statelistener
-      statelistener)))))
+     value))))
  :context
  :sideeffects "Changes State"
  :doc "Returns the named state value and changes it to the new value")
@@ -56,13 +55,13 @@
  [name  : string
   value : any]
  (let : boolean
-  [statelistener : statelistener := (statelistener-readstate<-name
-                                     name)
-   statelistchg  : statelistener := (copy statelistener
-                                     :name  name
-                                     :value value)]
+  [listenercur : statelistener := (statelistener-readstate<-name
+                                   name)
+   listenerchg : statelistener := (copy listenercur
+                                   :name  name
+                                   :value value)]
   (boolean-writestate<-statelistener
-   statelistchg))
+   listenerchg))
  :context
  :sideeffects "Changes State"
  :doc "Returns the named state value and changes it to the new value")
@@ -121,7 +120,7 @@
 (func valuemap-readstate<-mapname : valuemap
  [mapname : string]
  (let : valuemap
-  [value  : any      := (any-readstate<-name
+  [value  : any      := (value-readstate<-name
                          mapname)
    valmap : valuemap := (any<-any : valuemap
                          value)]

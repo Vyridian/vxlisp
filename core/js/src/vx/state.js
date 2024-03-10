@@ -89,17 +89,10 @@ export default class vx_state {
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const valmap = vx_state.f_any_readstate_from_name({"any-1": vx_state.t_valuemap}, context, mapname)
-        const valtype = vx_core.f_type_from_any(valmap)
         return vx_core.f_if_2(
           {"any-1": vx_core.t_boolean},
           vx_core.f_then(
-            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eqeq(
-              valtype,
-              vx_state.t_valuemap
-            )}),
-            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_boolean_write_from_map_name_value(valmap, name, value)})
-          ),
-          vx_core.f_else(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_is_empty_1(valmap)}),
             vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_let(
               {"any-1": vx_core.t_boolean},
               [],
@@ -109,16 +102,19 @@ export default class vx_state {
                   name,
                   value
                 )
-                const statelistener = vx_core.f_new(
+                const listener = vx_core.f_new(
                   vx_core.t_statelistener,
                   ":name",
                   mapname,
                   ":value",
                   valmap2
                 )
-                return vx_state.f_boolean_writestate_from_statelistener(context, statelistener)
+                return vx_state.f_boolean_writestate_from_statelistener(context, listener)
               })
             )})
+          ),
+          vx_core.f_else(
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_boolean_write_from_map_name_value(valmap, name, value)})
           )
         )
       })
@@ -147,9 +143,9 @@ export default class vx_state {
       {"any-1": vx_core.t_boolean},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const statelistener = vx_state.f_statelistener_readstate_from_name(context, name)
-        const statelistchg = vx_core.f_copy(statelistener, ":name", name, ":value", value)
-        return vx_state.f_boolean_writestate_from_statelistener(context, statelistchg)
+        const listenercur = vx_state.f_statelistener_readstate_from_name(context, name)
+        const listenerchg = vx_core.f_copy(listenercur, ":name", name, ":value", value)
+        return vx_state.f_boolean_writestate_from_statelistener(context, listenerchg)
       })
     )
     return output
@@ -339,7 +335,7 @@ export default class vx_state {
       {"any-1": vx_state.t_valuemap},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const value = vx_state.f_any_readstate_from_name({"any-1": vx_core.t_any}, context, mapname)
+        const value = vx_state.f_value_readstate_from_name(context, mapname)
         const valmap = vx_core.f_any_from_any({"any-1": vx_state.t_valuemap, "any-2": vx_core.t_any}, value)
         return valmap
       })

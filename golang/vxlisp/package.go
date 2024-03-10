@@ -72,7 +72,7 @@ func LibraryPathFromPackage(pkg *vxpackage, libname string) string {
 }
 
 func ListPackageLink(listpackage []*vxpackage) ([]*vxpackage, *vxmsgblock) {
-	msgblock := NewMsgBlock("PackagesLink")
+	msgblock := NewMsgBlock("ListPackageLink")
 	listpackage = ListPackageUpdateMaps(listpackage)
 	pkgmap := MapPackageFromListPackage(listpackage)
 	for _, pkg := range listpackage {
@@ -108,6 +108,61 @@ func ListPackageLink(listpackage []*vxpackage) ([]*vxpackage, *vxmsgblock) {
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	}
 	return listpackage, msgblock
+}
+
+func ListPackageSortDependencies(listpackage []*vxpackage) ([]*vxpackage, *vxmsgblock) {
+	msgblock := NewMsgBlock("ListPackageSortDependencies")
+	var addedmap = make(map[string]bool)
+	var output []*vxpackage
+	var missing []*vxpackage
+	work := make([]*vxpackage, len(listpackage))
+	copy(work, listpackage)
+	lastlen := len(work)
+	isdone := false
+	for !isdone {
+		for _, pkg := range work {
+			pkgname := pkg.name
+			listlib := pkg.listlib
+			isresolved := true
+			for _, lib := range listlib {
+				liblang := lib.lang
+				libpath := lib.path
+				if libpath == "" {
+				} else if libpath == "vx/test" {
+				} else if liblang == "" {
+					_, ok := addedmap[libpath]
+					if !ok {
+						isresolved = false
+					}
+				}
+			}
+			if isresolved {
+				addedmap[pkgname] = true
+				output = append(output, pkg)
+			} else {
+				missing = append(missing, pkg)
+			}
+		}
+		if len(missing) == 0 {
+			isdone = true
+		} else if lastlen == len(missing) {
+			isdone = true
+			var listpkgname []string
+			for _, pkg := range work {
+				pkgname := pkg.name
+				listpkgname = append(listpkgname, pkgname)
+			}
+			pkgnames := StringFromListStringJoin(listpkgname, ", ")
+			msg := NewMsg("Library dependencies cannot be resolved for packages: " + pkgnames)
+			msgblock = MsgblockAddError(msgblock, msg)
+		} else {
+			work = make([]*vxpackage, len(missing))
+			copy(work, missing)
+			lastlen = len(work)
+			missing = make([]*vxpackage, 0)
+		}
+	}
+	return output, msgblock
 }
 
 func ListPackageUpdateMaps(listpackage []*vxpackage) []*vxpackage {

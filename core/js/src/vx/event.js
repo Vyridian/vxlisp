@@ -75,7 +75,7 @@ export default class vx_event {
       {"any-1": generic_any_1, "any-2": vx_core.t_any},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const value = vx_core.f_any_from_struct({"any-1": vx_core.t_any, "struct-2": vx_event.t_event}, event, ":from")
+        const value = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_event.t_event}, event, ":from")
         return vx_core.f_any_from_any({"any-1": generic_any_1, "any-2": vx_core.t_any}, value)
       })
     )
@@ -99,6 +99,26 @@ export default class vx_event {
   static f_event_from_event(context, event) {
     let output = vx_event.e_event
     output = event
+    return output
+  }
+
+  /**
+   * 
+   * @async @function event_from_event_async
+   * Template for triggering ui asynchronous events
+   * @param  {event} event
+   * @return {event}
+   */
+  static t_event_from_event_async = {
+    vx_type: vx_core.t_type
+  }
+  static e_event_from_event_async = {
+    vx_type: vx_event.t_event_from_event_async
+  }
+
+  // (func event<-event-async)
+  static async f_event_from_event_async(context, event) {
+    let output = Promise.resolve(vx_event.e_event)
     return output
   }
 
@@ -142,11 +162,13 @@ export default class vx_event {
       "eventmap": vx_event.e_eventmap,
       "any-from<-event": vx_event.e_any_from_from_event,
       "event<-event": vx_event.e_event_from_event,
+      "event<-event-async": vx_event.e_event_from_event_async,
       "eventmap<-eventlist": vx_event.e_eventmap_from_eventlist
     })
     const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
       "any-from<-event": vx_event.t_any_from_from_event,
       "event<-event": vx_event.t_event_from_event,
+      "event<-event-async": vx_event.t_event_from_event_async,
       "eventmap<-eventlist": vx_event.t_eventmap_from_eventlist
     })
     const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
@@ -184,12 +206,12 @@ export default class vx_event {
         },
         "from": {
           "name" : "from",
-          "type" : vx_core.t_any,
+          "type" : vx_core.t_string,
           "multi": false
         },
         "to": {
           "name" : "to",
-          "type" : vx_core.t_any,
+          "type" : vx_core.t_string,
           "multi": false
         },
         "datamap": {
@@ -201,11 +223,16 @@ export default class vx_event {
           "name" : "event<-event",
           "type" : vx_event.t_event_from_event,
           "multi": false
+        },
+        "event<-event-async": {
+          "name" : "event<-event-async",
+          "type" : vx_event.t_event_from_event_async,
+          "multi": false
         }
       },
       proplast      : {
-        "name" : "event<-event",
-        "type" : vx_event.t_event_from_event,
+        "name" : "event<-event-async",
+        "type" : vx_event.t_event_from_event_async,
         "multi": false
       }
     }
@@ -283,6 +310,24 @@ export default class vx_event {
       properties    : [],
       proplast      : {},
       fn            : vx_event.f_event_from_event
+    }
+
+    // (func event<-event-async)
+    vx_event.t_event_from_event_async['vx_value'] = {
+      name          : "event<-event-async",
+      pkgname       : "vx/event",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_event.f_event_from_event_async
     }
 
     // (func eventmap<-eventlist)

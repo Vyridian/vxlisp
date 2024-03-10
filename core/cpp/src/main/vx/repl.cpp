@@ -1032,7 +1032,14 @@ namespace vx_repl {
     vx_core::vx_release_one_except({type, args}, output);
     return output;
   }
-
+  /**
+   * @function any_repl_from_functype_args
+   * Returns any from a repl func and args.
+   * @param  {any} type
+   * @param  {anylist} args
+   * @return {any}
+   * (func any-repl<-functype-args)
+   */
   // (func any-repl<-functype-args)
   // class Class_any_repl_from_functype_args {
     Abstract_any_repl_from_functype_args::~Abstract_any_repl_from_functype_args() {}
@@ -1124,7 +1131,14 @@ namespace vx_repl {
     vx_core::vx_release_one_except({liblist, text}, output);
     return output;
   }
-
+  /**
+   * @function any_from_liblist_string
+   * Run an arbitrary program in the REPL.
+   * @param  {liblist} liblist
+   * @param  {string} text Program to run
+   * @return {any}
+   * (func any<-liblist-string)
+   */
   // (func any<-liblist-string)
   // class Class_any_from_liblist_string {
     Abstract_any_from_liblist_string::~Abstract_any_from_liblist_string() {}
@@ -1199,7 +1213,13 @@ namespace vx_repl {
     }
 
   //}
-
+  /**
+   * @function any_from_macro
+   * A function that joins any number of values into a string and then parses and evaluates it.
+   * @param  {anylist} anylist
+   * @return {any-1}
+   * (func any<-macro)
+   */
   // (func any<-macro)
   // class Class_any_from_macro {
     Abstract_any_from_macro::~Abstract_any_from_macro() {}
@@ -1340,7 +1360,13 @@ namespace vx_repl {
     vx_core::vx_release_one_except(repl, output);
     return output;
   }
-
+  /**
+   * @function any_from_repl
+   * Run an arbitrary program in the REPL.
+   * @param  {repl} repl
+   * @return {any}
+   * (func any<-repl)
+   */
   // (func any<-repl)
   // class Class_any_from_repl {
     Abstract_any_from_repl::~Abstract_any_from_repl() {}
@@ -1446,7 +1472,13 @@ namespace vx_repl {
     vx_core::vx_release_one_except(script, output);
     return output;
   }
-
+  /**
+   * @function any_from_script
+   * Run an arbitrary script.
+   * @param  {string} script
+   * @return {any}
+   * (func any<-script)
+   */
   // (func any<-script)
   // class Class_any_from_script {
     Abstract_any_from_script::~Abstract_any_from_script() {}
@@ -1537,7 +1569,7 @@ namespace vx_repl {
   vx_core::Type_anylist f_anylist_from_repllist(vx_core::Type_context context, vx_repl::Type_repllist repllist) {
     vx_core::Type_anylist output = vx_core::e_anylist;
     vx_core::vx_reserve(repllist);
-    output = vx_core::f_list_from_list(
+    output = vx_core::f_list_from_list_1(
       vx_core::t_anylist,
       repllist,
       vx_core::t_any_from_any->vx_fn_new({context}, [context](vx_core::Type_any repl_any) {
@@ -1550,7 +1582,13 @@ namespace vx_repl {
     vx_core::vx_release_one_except(repllist, output);
     return output;
   }
-
+  /**
+   * @function anylist_from_repllist
+   * Run an arbitrary program in the REPL.
+   * @param  {repllist} repllist
+   * @return {anylist}
+   * (func anylist<-repllist)
+   */
   // (func anylist<-repllist)
   // class Class_anylist_from_repllist {
     Abstract_anylist_from_repllist::~Abstract_anylist_from_repllist() {}
@@ -1657,7 +1695,14 @@ namespace vx_repl {
     vx_core::vx_release_one_except({textblock, argmap}, output);
     return output;
   }
-
+  /**
+   * @function argmap_from_textblock_argmap
+   * Returns an argmap with parsed args from textblock added.
+   * @param  {textblock} textblock
+   * @param  {argmap} argmap
+   * @return {argmap}
+   * (func argmap<-textblock-argmap)
+   */
   // (func argmap<-textblock-argmap)
   // class Class_argmap_from_textblock_argmap {
     Abstract_argmap_from_textblock_argmap::~Abstract_argmap_from_textblock_argmap() {}
@@ -1782,7 +1827,13 @@ namespace vx_repl {
     vx_core::vx_release_one_except(text, output);
     return output;
   }
-
+  /**
+   * @function const_from_string
+   * Returns a constant from a fully qualified name.
+   * @param  {string} text
+   * @return {any}
+   * (func const<-string)
+   */
   // (func const<-string)
   // class Class_const_from_string {
     Abstract_const_from_string::~Abstract_const_from_string() {}
@@ -1878,7 +1929,14 @@ namespace vx_repl {
     vx_core::vx_release_one_except({textblock, argmap}, output);
     return output;
   }
-
+  /**
+   * @function repl_bracket_from_textblock_argmap
+   * Returns a repl from a squarebracket parsed textblock
+   * @param  {textblock} textblock
+   * @param  {argmap} argmap
+   * @return {repl}
+   * (func repl-bracket<-textblock-argmap)
+   */
   // (func repl-bracket<-textblock-argmap)
   // class Class_repl_bracket_from_textblock_argmap {
     Abstract_repl_bracket_from_textblock_argmap::~Abstract_repl_bracket_from_textblock_argmap() {}
@@ -2008,7 +2066,14 @@ namespace vx_repl {
     vx_core::vx_release_one_except({textblock, argmap}, output);
     return output;
   }
-
+  /**
+   * @function repl_empty_from_textblock_argmap
+   * Returns a repl from an empty delim textblock
+   * @param  {textblock} textblock
+   * @param  {argmap} argmap
+   * @return {repl}
+   * (func repl-empty<-textblock-argmap)
+   */
   // (func repl-empty<-textblock-argmap)
   // class Class_repl_empty_from_textblock_argmap {
     Abstract_repl_empty_from_textblock_argmap::~Abstract_repl_empty_from_textblock_argmap() {}
@@ -2184,7 +2249,14 @@ namespace vx_repl {
     vx_core::vx_release_one_except({textblock, argmap}, output);
     return output;
   }
-
+  /**
+   * @function repl_paren_from_textblock_argmap
+   * Returns a repl from a parsed textblock
+   * @param  {textblock} textblock
+   * @param  {argmap} argmap
+   * @return {repl}
+   * (func repl-paren<-textblock-argmap)
+   */
   // (func repl-paren<-textblock-argmap)
   // class Class_repl_paren_from_textblock_argmap {
     Abstract_repl_paren_from_textblock_argmap::~Abstract_repl_paren_from_textblock_argmap() {}
@@ -2266,7 +2338,14 @@ namespace vx_repl {
     vx_core::vx_release_one_except({liblist, text}, output);
     return output;
   }
-
+  /**
+   * @function repl_from_liblist_string
+   * Returns a repl from the given text.
+   * @param  {liblist} liblist
+   * @param  {string} text Program to run
+   * @return {repl}
+   * (func repl<-liblist-string)
+   */
   // (func repl<-liblist-string)
   // class Class_repl_from_liblist_string {
     Abstract_repl_from_liblist_string::~Abstract_repl_from_liblist_string() {}
@@ -2348,7 +2427,7 @@ namespace vx_repl {
     output = vx_core::f_let(
       vx_repl::t_repl,
       vx_core::t_any_from_func->vx_fn_new({anylist}, [anylist]() {
-        vx_core::Type_stringlist textlist = vx_core::f_list_from_list(
+        vx_core::Type_stringlist textlist = vx_core::f_list_from_list_1(
           vx_core::t_stringlist,
           anylist,
           vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any item) {
@@ -2397,7 +2476,13 @@ namespace vx_repl {
     vx_core::vx_release_one_except(anylist, output);
     return output;
   }
-
+  /**
+   * @function repl_from_macro
+   * A function that joins any number of values into a string and then parses it.
+   * @param  {anylist} anylist
+   * @return {repl}
+   * (func repl<-macro)
+   */
   // (func repl<-macro)
   // class Class_repl_from_macro {
     Abstract_repl_from_macro::~Abstract_repl_from_macro() {}
@@ -2501,7 +2586,13 @@ namespace vx_repl {
     vx_core::vx_release_one_except(script, output);
     return output;
   }
-
+  /**
+   * @function repl_from_script
+   * Returns a parsed repl from a string
+   * @param  {string} script
+   * @return {repl}
+   * (func repl<-script)
+   */
   // (func repl<-script)
   // class Class_repl_from_script {
     Abstract_repl_from_script::~Abstract_repl_from_script() {}
@@ -2772,7 +2863,14 @@ namespace vx_repl {
     vx_core::vx_release_one_except({text, argmap}, output);
     return output;
   }
-
+  /**
+   * @function repl_from_string_argmap
+   * Returns a function, type, const or primitive from given string.
+   * @param  {string} text
+   * @param  {argmap} argmap
+   * @return {repl}
+   * (func repl<-string-argmap)
+   */
   // (func repl<-string-argmap)
   // class Class_repl_from_string_argmap {
     Abstract_repl_from_string_argmap::~Abstract_repl_from_string_argmap() {}
@@ -2860,7 +2958,13 @@ namespace vx_repl {
     vx_core::vx_release_one_except(textblock, output);
     return output;
   }
-
+  /**
+   * @function repl_from_textblock
+   * Returns a repl from a parsed textblock
+   * @param  {textblock} textblock
+   * @return {repl}
+   * (func repl<-textblock)
+   */
   // (func repl<-textblock)
   // class Class_repl_from_textblock {
     Abstract_repl_from_textblock::~Abstract_repl_from_textblock() {}
@@ -2999,7 +3103,14 @@ namespace vx_repl {
     vx_core::vx_release_one_except({textblock, argmap}, output);
     return output;
   }
-
+  /**
+   * @function repl_from_textblock_argmap
+   * Returns a repl from a parsed textblock
+   * @param  {textblock} textblock
+   * @param  {argmap} argmap
+   * @return {repl}
+   * (func repl<-textblock-argmap)
+   */
   // (func repl<-textblock-argmap)
   // class Class_repl_from_textblock_argmap {
     Abstract_repl_from_textblock_argmap::~Abstract_repl_from_textblock_argmap() {}
@@ -3286,7 +3397,15 @@ namespace vx_repl {
     vx_core::vx_release_one_except({replargs, tb, argmap}, output);
     return output;
   }
-
+  /**
+   * @function replarglist_from_replarglist_textblock_argmap
+   * Returns a modified replarglist from by applying a textblock
+   * @param  {replarglist} replargs
+   * @param  {textblock} tb
+   * @param  {argmap} argmap
+   * @return {replarglist}
+   * (func replarglist<-replarglist-textblock-argmap)
+   */
   // (func replarglist<-replarglist-textblock-argmap)
   // class Class_replarglist_from_replarglist_textblock_argmap {
     Abstract_replarglist_from_replarglist_textblock_argmap::~Abstract_replarglist_from_replarglist_textblock_argmap() {}
@@ -3366,7 +3485,7 @@ namespace vx_repl {
   vx_repl::Type_repllist f_repllist_from_textblocklist_argmap(vx_data_textblock::Type_textblocklist textblocklist, vx_core::Type_argmap argmap) {
     vx_repl::Type_repllist output = vx_repl::e_repllist;
     vx_core::vx_reserve({textblocklist, argmap});
-    output = vx_core::f_list_from_list(
+    output = vx_core::f_list_from_list_1(
       vx_repl::t_repllist,
       textblocklist,
       vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any textblock_any) {
@@ -3379,7 +3498,14 @@ namespace vx_repl {
     vx_core::vx_release_one_except({textblocklist, argmap}, output);
     return output;
   }
-
+  /**
+   * @function repllist_from_textblocklist_argmap
+   * Returns a repllist from a parsed textblocklist
+   * @param  {textblocklist} textblocklist
+   * @param  {argmap} argmap
+   * @return {repllist}
+   * (func repllist<-textblocklist-argmap)
+   */
   // (func repllist<-textblocklist-argmap)
   // class Class_repllist_from_textblocklist_argmap {
     Abstract_repllist_from_textblocklist_argmap::~Abstract_repllist_from_textblocklist_argmap() {}
@@ -3465,7 +3591,13 @@ namespace vx_repl {
     vx_core::vx_release_one_except(script, output);
     return output;
   }
-
+  /**
+   * @function textblock_from_script
+   * Returns a parsed textblock from a string
+   * @param  {string} script
+   * @return {textblock}
+   * (func textblock<-script)
+   */
   // (func textblock<-script)
   // class Class_textblock_from_script {
     Abstract_textblock_from_script::~Abstract_textblock_from_script() {}
@@ -3617,7 +3749,13 @@ namespace vx_repl {
     vx_core::vx_release_one_except(text, output);
     return output;
   }
-
+  /**
+   * @function typefunc_from_string
+   * Returns a type, or func from a fully qualified name.
+   * @param  {string} text
+   * @return {any}
+   * (func typefunc<-string)
+   */
   // (func typefunc<-string)
   // class Class_typefunc_from_string {
     Abstract_typefunc_from_string::~Abstract_typefunc_from_string() {}

@@ -8,6 +8,95 @@ namespace vx_web_htmldoc {
 
 
 
+  // (func boolean-print<-id-stylesheettext)
+  vx_core::Type_boolean f_boolean_print_from_id_stylesheettext(vx_core::Type_string id, vx_core::Type_string stylesheettext) {
+    vx_core::Type_boolean output = vx_core::e_boolean;
+    vx_core::vx_reserve({id, stylesheettext});
+    vx_core::vx_release_one_except({id, stylesheettext}, output);
+    return output;
+  }
+  /**
+   * @function boolean_print_from_id_stylesheettext
+   * Print the contents of the given id.
+   * @param  {string} id
+   * @param  {string} stylesheettext
+   * @return {boolean}
+   * (func boolean-print<-id-stylesheettext)
+   */
+  // (func boolean-print<-id-stylesheettext)
+  // class Class_boolean_print_from_id_stylesheettext {
+    Abstract_boolean_print_from_id_stylesheettext::~Abstract_boolean_print_from_id_stylesheettext() {}
+
+    Class_boolean_print_from_id_stylesheettext::Class_boolean_print_from_id_stylesheettext() : Abstract_boolean_print_from_id_stylesheettext::Abstract_boolean_print_from_id_stylesheettext() {
+      vx_core::refcount += 1;
+    }
+
+    Class_boolean_print_from_id_stylesheettext::~Class_boolean_print_from_id_stylesheettext() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_boolean_print_from_id_stylesheettext::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_web_htmldoc::Func_boolean_print_from_id_stylesheettext output = vx_web_htmldoc::e_boolean_print_from_id_stylesheettext;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_print_from_id_stylesheettext::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_web_htmldoc::Func_boolean_print_from_id_stylesheettext output = vx_web_htmldoc::e_boolean_print_from_id_stylesheettext;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_boolean_print_from_id_stylesheettext::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/web/htmldoc", // pkgname
+        "boolean-print<-id-stylesheettext", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_boolean_print_from_id_stylesheettext::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_boolean_print_from_id_stylesheettext::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/web/htmldoc", // pkgname
+        "boolean-print<-id-stylesheettext", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_print_from_id_stylesheettext::vx_empty() const {return vx_web_htmldoc::e_boolean_print_from_id_stylesheettext;}
+    vx_core::Type_any Class_boolean_print_from_id_stylesheettext::vx_type() const {return vx_web_htmldoc::t_boolean_print_from_id_stylesheettext;}
+    vx_core::Type_msgblock Class_boolean_print_from_id_stylesheettext::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_boolean_print_from_id_stylesheettext::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_boolean_print_from_id_stylesheettext::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string id = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_string stylesheettext = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_web_htmldoc::f_boolean_print_from_id_stylesheettext(id, stylesheettext);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func boolean-replace<-id-htmltext)
   vx_core::Type_boolean f_boolean_replace_from_id_htmltext(vx_core::Type_string id, vx_core::Type_string htmltext) {
     vx_core::Type_boolean output = vx_core::e_boolean;
@@ -15,7 +104,14 @@ namespace vx_web_htmldoc {
     vx_core::vx_release_one_except({id, htmltext}, output);
     return output;
   }
-
+  /**
+   * @function boolean_replace_from_id_htmltext
+   * Replaces an html node with given id and text.
+   * @param  {string} id
+   * @param  {string} htmltext
+   * @return {boolean}
+   * (func boolean-replace<-id-htmltext)
+   */
   // (func boolean-replace<-id-htmltext)
   // class Class_boolean_replace_from_id_htmltext {
     Abstract_boolean_replace_from_id_htmltext::~Abstract_boolean_replace_from_id_htmltext() {}
@@ -97,7 +193,14 @@ namespace vx_web_htmldoc {
     vx_core::vx_release_one_except({ui, htmltext}, output);
     return output;
   }
-
+  /**
+   * @function boolean_replace_from_ui_htmltext
+   * Replaces an html node with given id and text.
+   * @param  {ui} ui
+   * @param  {string} htmltext
+   * @return {boolean}
+   * (func boolean-replace<-ui-htmltext)
+   */
   // (func boolean-replace<-ui-htmltext)
   // class Class_boolean_replace_from_ui_htmltext {
     Abstract_boolean_replace_from_ui_htmltext::~Abstract_boolean_replace_from_ui_htmltext() {}
@@ -182,7 +285,15 @@ namespace vx_web_htmldoc {
     }
     return output;
   }
-
+  /**
+   * 
+   * @async
+   * @function boolean_write_stylesheet_from_string
+   * Writes a css stylesheet.
+   * @param  {string} text
+   * @return {boolean}
+   * (func boolean-write-stylesheet<-string)
+   */
   // (func boolean-write-stylesheet<-string)
   // class Class_boolean_write_stylesheet_from_string {
     Abstract_boolean_write_stylesheet_from_string::~Abstract_boolean_write_stylesheet_from_string() {}
@@ -274,7 +385,14 @@ namespace vx_web_htmldoc {
     vx_core::vx_release_one_except({id, htmltext}, output);
     return output;
   }
-
+  /**
+   * @function boolean_write_from_id_htmltext
+   * Writes to an html node with given id and text.
+   * @param  {string} id
+   * @param  {string} htmltext
+   * @return {boolean}
+   * (func boolean-write<-id-htmltext)
+   */
   // (func boolean-write<-id-htmltext)
   // class Class_boolean_write_from_id_htmltext {
     Abstract_boolean_write_from_id_htmltext::~Abstract_boolean_write_from_id_htmltext() {}
@@ -349,6 +467,95 @@ namespace vx_web_htmldoc {
 
   //}
 
+  // (func boolean-write<-id-visible)
+  vx_core::Type_boolean f_boolean_write_from_id_visible(vx_core::Type_string id, vx_core::Type_boolean visible) {
+    vx_core::Type_boolean output = vx_core::e_boolean;
+    vx_core::vx_reserve({id, visible});
+    vx_core::vx_release_one_except({id, visible}, output);
+    return output;
+  }
+  /**
+   * @function boolean_write_from_id_visible
+   * Writes to an html node changing its visibility.
+   * @param  {string} id
+   * @param  {boolean} visible
+   * @return {boolean}
+   * (func boolean-write<-id-visible)
+   */
+  // (func boolean-write<-id-visible)
+  // class Class_boolean_write_from_id_visible {
+    Abstract_boolean_write_from_id_visible::~Abstract_boolean_write_from_id_visible() {}
+
+    Class_boolean_write_from_id_visible::Class_boolean_write_from_id_visible() : Abstract_boolean_write_from_id_visible::Abstract_boolean_write_from_id_visible() {
+      vx_core::refcount += 1;
+    }
+
+    Class_boolean_write_from_id_visible::~Class_boolean_write_from_id_visible() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_boolean_write_from_id_visible::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_web_htmldoc::Func_boolean_write_from_id_visible output = vx_web_htmldoc::e_boolean_write_from_id_visible;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_write_from_id_visible::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_web_htmldoc::Func_boolean_write_from_id_visible output = vx_web_htmldoc::e_boolean_write_from_id_visible;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_boolean_write_from_id_visible::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/web/htmldoc", // pkgname
+        "boolean-write<-id-visible", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_boolean_write_from_id_visible::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_boolean_write_from_id_visible::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/web/htmldoc", // pkgname
+        "boolean-write<-id-visible", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_write_from_id_visible::vx_empty() const {return vx_web_htmldoc::e_boolean_write_from_id_visible;}
+    vx_core::Type_any Class_boolean_write_from_id_visible::vx_type() const {return vx_web_htmldoc::t_boolean_write_from_id_visible;}
+    vx_core::Type_msgblock Class_boolean_write_from_id_visible::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_boolean_write_from_id_visible::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_boolean_write_from_id_visible::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string id = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_boolean visible = vx_core::vx_any_from_any(vx_core::t_boolean, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_web_htmldoc::f_boolean_write_from_id_visible(id, visible);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func boolean-write<-stylesheet)
   vx_core::vx_Type_async f_boolean_write_from_stylesheet(vx_web_html::Type_stylesheet stylesheet) {
     vx_core::vx_Type_async output = NULL;
@@ -379,7 +586,15 @@ namespace vx_web_htmldoc {
     }
     return output;
   }
-
+  /**
+   * 
+   * @async
+   * @function boolean_write_from_stylesheet
+   * Writes a css stylesheet.
+   * @param  {stylesheet} stylesheet
+   * @return {boolean}
+   * (func boolean-write<-stylesheet)
+   */
   // (func boolean-write<-stylesheet)
   // class Class_boolean_write_from_stylesheet {
     Abstract_boolean_write_from_stylesheet::~Abstract_boolean_write_from_stylesheet() {}
@@ -469,7 +684,12 @@ namespace vx_web_htmldoc {
     vx_core::Type_context output = vx_core::e_context;
     return output;
   }
-
+  /**
+   * @function context_read
+   * Reads context from document.data.context
+   * @return {context}
+   * (func context-read)
+   */
   // (func context-read)
   // class Class_context_read {
     Abstract_context_read::~Abstract_context_read() {}
@@ -547,7 +767,12 @@ namespace vx_web_htmldoc {
     vx_core::Type_context output = vx_core::e_context;
     return output;
   }
-
+  /**
+   * @function context_write
+   * Writes context to document.data.context
+   * @return {context}
+   * (func context-write)
+   */
   // (func context-write)
   // class Class_context_write {
     Abstract_context_write::~Abstract_context_write() {}
@@ -628,7 +853,13 @@ namespace vx_web_htmldoc {
     vx_core::vx_release_one_except(id, output);
     return output;
   }
-
+  /**
+   * @function string_from_id
+   * Reads the value of an html node by id.
+   * @param  {string} id
+   * @return {string}
+   * (func string<-id)
+   */
   // (func string<-id)
   // class Class_string_from_id {
     Abstract_string_from_id::~Abstract_string_from_id() {}
@@ -721,7 +952,13 @@ namespace vx_web_htmldoc {
     vx_core::vx_release_one_except(uid, output);
     return output;
   }
-
+  /**
+   * @function ui_readstate_from_uid
+   * Returns ui component from element.
+   * @param  {string} uid
+   * @return {any}
+   * (func ui-readstate<-uid)
+   */
   // (func ui-readstate<-uid)
   // class Class_ui_readstate_from_uid {
     Abstract_ui_readstate_from_uid::~Abstract_ui_readstate_from_uid() {}
@@ -807,6 +1044,8 @@ namespace vx_web_htmldoc {
 
   //}
 
+  vx_web_htmldoc::Func_boolean_print_from_id_stylesheettext e_boolean_print_from_id_stylesheettext = NULL;
+  vx_web_htmldoc::Func_boolean_print_from_id_stylesheettext t_boolean_print_from_id_stylesheettext = NULL;
   vx_web_htmldoc::Func_boolean_replace_from_id_htmltext e_boolean_replace_from_id_htmltext = NULL;
   vx_web_htmldoc::Func_boolean_replace_from_id_htmltext t_boolean_replace_from_id_htmltext = NULL;
   vx_web_htmldoc::Func_boolean_replace_from_ui_htmltext e_boolean_replace_from_ui_htmltext = NULL;
@@ -815,6 +1054,8 @@ namespace vx_web_htmldoc {
   vx_web_htmldoc::Func_boolean_write_stylesheet_from_string t_boolean_write_stylesheet_from_string = NULL;
   vx_web_htmldoc::Func_boolean_write_from_id_htmltext e_boolean_write_from_id_htmltext = NULL;
   vx_web_htmldoc::Func_boolean_write_from_id_htmltext t_boolean_write_from_id_htmltext = NULL;
+  vx_web_htmldoc::Func_boolean_write_from_id_visible e_boolean_write_from_id_visible = NULL;
+  vx_web_htmldoc::Func_boolean_write_from_id_visible t_boolean_write_from_id_visible = NULL;
   vx_web_htmldoc::Func_boolean_write_from_stylesheet e_boolean_write_from_stylesheet = NULL;
   vx_web_htmldoc::Func_boolean_write_from_stylesheet t_boolean_write_from_stylesheet = NULL;
   vx_web_htmldoc::Func_context_read e_context_read = NULL;
@@ -831,6 +1072,10 @@ namespace vx_web_htmldoc {
       init();
     }
     void vx_Class_package::init() {
+      vx_web_htmldoc::e_boolean_print_from_id_stylesheettext = new vx_web_htmldoc::Class_boolean_print_from_id_stylesheettext();
+      vx_core::vx_reserve_empty(vx_web_htmldoc::e_boolean_print_from_id_stylesheettext);
+      vx_web_htmldoc::t_boolean_print_from_id_stylesheettext = new vx_web_htmldoc::Class_boolean_print_from_id_stylesheettext();
+      vx_core::vx_reserve_type(vx_web_htmldoc::t_boolean_print_from_id_stylesheettext);
       vx_web_htmldoc::e_boolean_replace_from_id_htmltext = new vx_web_htmldoc::Class_boolean_replace_from_id_htmltext();
       vx_core::vx_reserve_empty(vx_web_htmldoc::e_boolean_replace_from_id_htmltext);
       vx_web_htmldoc::t_boolean_replace_from_id_htmltext = new vx_web_htmldoc::Class_boolean_replace_from_id_htmltext();
@@ -847,6 +1092,10 @@ namespace vx_web_htmldoc {
       vx_core::vx_reserve_empty(vx_web_htmldoc::e_boolean_write_from_id_htmltext);
       vx_web_htmldoc::t_boolean_write_from_id_htmltext = new vx_web_htmldoc::Class_boolean_write_from_id_htmltext();
       vx_core::vx_reserve_type(vx_web_htmldoc::t_boolean_write_from_id_htmltext);
+      vx_web_htmldoc::e_boolean_write_from_id_visible = new vx_web_htmldoc::Class_boolean_write_from_id_visible();
+      vx_core::vx_reserve_empty(vx_web_htmldoc::e_boolean_write_from_id_visible);
+      vx_web_htmldoc::t_boolean_write_from_id_visible = new vx_web_htmldoc::Class_boolean_write_from_id_visible();
+      vx_core::vx_reserve_type(vx_web_htmldoc::t_boolean_write_from_id_visible);
       vx_web_htmldoc::e_boolean_write_from_stylesheet = new vx_web_htmldoc::Class_boolean_write_from_stylesheet();
       vx_core::vx_reserve_empty(vx_web_htmldoc::e_boolean_write_from_stylesheet);
       vx_web_htmldoc::t_boolean_write_from_stylesheet = new vx_web_htmldoc::Class_boolean_write_from_stylesheet();
@@ -871,10 +1120,12 @@ namespace vx_web_htmldoc {
       vx_core::vx_Type_mapany mapconst;
       vx_core::vx_Type_mapfunc mapfunc;
       vx_core::vx_Type_mapany mapempty;
+      mapfunc["boolean-print<-id-stylesheettext"] = vx_web_htmldoc::t_boolean_print_from_id_stylesheettext;
       mapfunc["boolean-replace<-id-htmltext"] = vx_web_htmldoc::t_boolean_replace_from_id_htmltext;
       mapfunc["boolean-replace<-ui-htmltext"] = vx_web_htmldoc::t_boolean_replace_from_ui_htmltext;
       mapfunc["boolean-write-stylesheet<-string"] = vx_web_htmldoc::t_boolean_write_stylesheet_from_string;
       mapfunc["boolean-write<-id-htmltext"] = vx_web_htmldoc::t_boolean_write_from_id_htmltext;
+      mapfunc["boolean-write<-id-visible"] = vx_web_htmldoc::t_boolean_write_from_id_visible;
       mapfunc["boolean-write<-stylesheet"] = vx_web_htmldoc::t_boolean_write_from_stylesheet;
       mapfunc["context-read"] = vx_web_htmldoc::t_context_read;
       mapfunc["context-write"] = vx_web_htmldoc::t_context_write;

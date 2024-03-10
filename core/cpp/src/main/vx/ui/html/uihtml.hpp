@@ -22,6 +22,12 @@ namespace vx_ui_html_uihtml {
   class Class_layoutenginehtml;
   typedef Class_layoutenginehtml* Const_layoutenginehtml;
   extern Const_layoutenginehtml c_layoutenginehtml;
+  class Class_style_hidden;
+  typedef Class_style_hidden* Const_style_hidden;
+  extern Const_style_hidden c_style_hidden;
+  class Class_style_selected;
+  typedef Class_style_selected* Const_style_selected;
+  extern Const_style_selected c_style_selected;
   class Abstract_context_write;
   typedef Abstract_context_write* Func_context_write;
   extern Func_context_write e_context_write;
@@ -50,6 +56,10 @@ namespace vx_ui_html_uihtml {
   typedef Abstract_style_from_style* Func_style_from_style;
   extern Func_style_from_style e_style_from_style;
   extern Func_style_from_style t_style_from_style;
+  class Abstract_stylelist_extra_from_ui;
+  typedef Abstract_stylelist_extra_from_ui* Func_stylelist_extra_from_ui;
+  extern Func_stylelist_extra_from_ui e_stylelist_extra_from_ui;
+  extern Func_stylelist_extra_from_ui t_stylelist_extra_from_ui;
   class Abstract_stylelist_from_stylelist;
   typedef Abstract_stylelist_from_stylelist* Func_stylelist_from_stylelist;
   extern Func_stylelist_from_stylelist e_stylelist_from_stylelist;
@@ -103,6 +113,9 @@ namespace vx_ui_html_uihtml {
   // (func style<-style)
   vx_web_html::Type_style f_style_from_style(vx_ui_ui::Type_style uistyle);
 
+  // (func stylelist-extra<-ui)
+  vx_web_html::Type_stylelist f_stylelist_extra_from_ui(vx_ui_ui::Type_ui ui);
+
   // (func stylelist<-stylelist)
   vx_web_html::Type_stylelist f_stylelist_from_stylelist(vx_ui_ui::Type_stylelist uistylelist);
 
@@ -149,6 +162,18 @@ namespace vx_ui_html_uihtml {
   class Class_layoutenginehtml : public vx_ui_ui::Class_layoutengine {
   public:
     static void vx_const_new(vx_ui_html_uihtml::Const_layoutenginehtml output);
+  };
+
+  // (const style-hidden)
+  class Class_style_hidden : public vx_web_html::Class_style {
+  public:
+    static void vx_const_new(vx_ui_html_uihtml::Const_style_hidden output);
+  };
+
+  // (const style-selected)
+  class Class_style_selected : public vx_web_html::Class_style {
+  public:
+    static void vx_const_new(vx_ui_html_uihtml::Const_style_selected output);
   };
 
   // (func context-write)
@@ -310,6 +335,33 @@ namespace vx_ui_html_uihtml {
   public:
     Class_style_from_style();
     virtual ~Class_style_from_style() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func stylelist-extra<-ui)
+  class Abstract_stylelist_extra_from_ui : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_stylelist_extra_from_ui() {};
+    virtual ~Abstract_stylelist_extra_from_ui() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_stylelist_extra_from_ui : public virtual Abstract_stylelist_extra_from_ui {
+  public:
+    Class_stylelist_extra_from_ui();
+    virtual ~Class_stylelist_extra_from_ui() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;

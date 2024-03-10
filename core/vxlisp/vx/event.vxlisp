@@ -2,11 +2,12 @@
  :doc "Event Handling")
 
 (type event : struct
- :properties [name         : string
-              from         : any
-              to           : any
-              datamap      : anymap
-              event<-event : event<-event]
+ :properties [name               : string
+              from               : string
+              to                 : string
+              datamap            : anymap
+              event<-event       : event<-event
+              event<-event-async : event<-event-async]
  :doc "Generic Event")
 
 (type eventlist : list
@@ -51,6 +52,13 @@
  :context
  :sideeffects "Triggering an event will cause some kind of change"
  :doc "Template for triggering ui events")
+
+(func event<-event-async : event
+ [event : event]
+ :async
+ :context
+ :sideeffects "Triggering an event will cause some kind of change"
+ :doc "Template for triggering ui asynchronous events")
 
 (func eventmap<-eventlist : eventmap
  [eventlist : eventlist]

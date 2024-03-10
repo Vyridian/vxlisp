@@ -253,69 +253,6 @@ func FuncValidate(fnc *vxfunc, textblock *vxtextblock, path string) (*vxfunc, *v
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		fnc.listarg = listarg
 		fnc.mapgeneric = mapgeneric
-		/*
-			switch fnc.name {
-			case "any<-list":
-				arg := listarg[0]
-				argvalue := arg.value
-				argtype := argvalue.vxtype
-				switch argtype.extends {
-				case ":list":
-					if BooleanGenericFromType(argtype) {
-					} else {
-						allowtype, ok := TypeAllowFromType(argtype)
-						if ok {
-							fnc.vxtype = allowtype
-						}
-					}
-				}
-			case "any<-map":
-				arg := listarg[0]
-				fnctype := TypeFromArg(arg)
-				switch fnctype.extends {
-				case ":map":
-					allowtype, ok := TypeAllowFromType(fnctype)
-					if ok {
-						fnc.vxtype = allowtype
-					}
-				case ":struct":
-					fnc.name = "any<-struct"
-					fnc.alias = "any<-struct"
-					arg.name = "struct"
-					arg.alias = "struct"
-					arg.generictype = NewType("struct-1")
-					listarg[0] = arg
-					fnc.listarg = listarg
-					structtype, ok := fnc.mapgeneric["map-1"]
-					if ok {
-						fnc.mapgeneric["struct-1"] = structtype
-						delete(fnc.mapgeneric, "map-1")
-					}
-					argvalue := arg.value
-					switch argvalue.code {
-					case "string":
-						key := StringValueFromValue(argvalue)
-						if BooleanFromStringStarts(key, ":") {
-							key = StringSubstring(key, 1, len(key))
-						}
-						props := ListPropertyTraitFromType(fnctype)
-						proptype := emptytype
-						for _, proparg := range props {
-							if proparg.name == key {
-								proptype = proparg.vxtype
-							}
-						}
-						switch proptype.name {
-						case "":
-							msg := NewMsgFromTextblock(textblock, "Attempt to get a property that does not exist from a given structure.", path, key, StringFromType(fnctype))
-							msgblock = MsgblockAddError(msgblock, msg)
-						default:
-							fnc.vxtype = proptype
-						}
-					}
-				}
-			}
-		*/
 		if fnc.vxtype.isgeneric {
 			genericname := fnc.vxtype.name
 			generictype, ok := fnc.mapgeneric[genericname]
@@ -424,6 +361,14 @@ func ListFuncParse(textblock *vxtextblock, pkg *vxpackage) ([]*vxfunc, *vxmsgblo
 		}
 	}
 	return output, msgblock
+}
+
+func ListFuncReverse(listfunc []*vxfunc) []*vxfunc {
+	var output []*vxfunc
+	for i := len(listfunc) - 1; i >= 0; i-- {
+		output = append(output, listfunc[i])
+	}
+	return output
 }
 
 func ListFuncValidate(listfunc []*vxfunc, path string) ([]*vxfunc, *vxmsgblock) {

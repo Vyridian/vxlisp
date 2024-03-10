@@ -19,6 +19,13 @@ export default class vx_data_file {
    */
   static t_fileformat = {}
   static e_fileformat = {vx_type: vx_data_file.t_fileformat}
+
+  /**
+   * type: filelist
+   * List of file
+   */
+  static t_filelist = {}
+  static e_filelist = vx_core.vx_new_list(vx_data_file.t_filelist, [])
   /**
    * @function boolean_exists_from_file
    * Returns true if file/path exists.
@@ -258,6 +265,7 @@ export default class vx_data_file {
     const emptymap = vx_core.vx_new_map(vx_core.t_map, {
       "file": vx_data_file.e_file,
       "fileformat": vx_data_file.e_fileformat,
+      "filelist": vx_data_file.e_filelist,
       "boolean-exists<-file": vx_data_file.e_boolean_exists_from_file,
       "boolean-write<-file": vx_data_file.e_boolean_write_from_file,
       "boolean-write<-file-any": vx_data_file.e_boolean_write_from_file_any,
@@ -283,7 +291,8 @@ export default class vx_data_file {
     })
     const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
       "file": vx_data_file.t_file,
-      "fileformat": vx_data_file.t_fileformat
+      "fileformat": vx_data_file.t_fileformat,
+      "filelist": vx_data_file.t_filelist
     })
     const pkg = vx_core.vx_new_struct(vx_core.t_package, {
       "name": "vx/data/file",
@@ -361,6 +370,24 @@ export default class vx_data_file {
     }
     vx_data_file.e_fileformat['vx_type'] = vx_data_file.t_fileformat
     vx_data_file.e_fileformat['vx_value'] = {}
+
+    // (type filelist)
+    vx_data_file.t_filelist['vx_type'] = vx_core.t_type
+    vx_data_file.t_filelist['vx_value'] = {
+      name          : "filelist",
+      pkgname       : "vx/data/file",
+      extends       : ":list",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [vx_data_file.t_file],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {},
+      proplast      : {}
+    }
+    vx_data_file.e_filelist['vx_type'] = vx_data_file.t_filelist
 
     // (func boolean-exists<-file)
     vx_data_file.t_boolean_exists_from_file['vx_value'] = {

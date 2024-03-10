@@ -27,7 +27,13 @@ namespace vx_translation_en {
     vx_core::vx_release_one_except(args, output);
     return output;
   }
-
+  /**
+   * @function context_en
+   * Returns the default context for app main execution. Arguments come from the command line.
+   * @param  {anylist} args
+   * @return {context}
+   * (func context-en)
+   */
   // (func context-en)
   // class Class_context_en {
     Abstract_context_en::~Abstract_context_en() {}
@@ -141,7 +147,13 @@ namespace vx_translation_en {
     vx_core::vx_release_one_except(args, output);
     return output;
   }
-
+  /**
+   * @function context_test
+   * Returns the default context for test case execution. Arguments come from the command line.
+   * @param  {anylist} args
+   * @return {context}
+   * (func context-test)
+   */
   // (func context-test)
   // class Class_context_test {
     Abstract_context_test::~Abstract_context_test() {}
@@ -247,7 +259,12 @@ namespace vx_translation_en {
     );
     return output;
   }
-
+  /**
+   * @function securitydata_test
+   * Returns the default security for test case execution. Arguments come from the command line.
+   * @return {security}
+   * (func securitydata-test)
+   */
   // (func securitydata-test)
   // class Class_securitydata_test {
     Abstract_securitydata_test::~Abstract_securitydata_test() {}
@@ -334,7 +351,12 @@ namespace vx_translation_en {
     );
     return output;
   }
-
+  /**
+   * @function translation_en
+   * Returns translation data
+   * @return {translation}
+   * (func translation-en)
+   */
   // (func translation-en)
   // class Class_translation_en {
     Abstract_translation_en::~Abstract_translation_en() {}
@@ -427,7 +449,12 @@ namespace vx_translation_en {
     );
     return output;
   }
-
+  /**
+   * @function words
+   * Word Translation
+   * @return {stringmap}
+   * (func words)
+   */
   // (func words)
   // class Class_words {
     Abstract_words::~Abstract_words() {}

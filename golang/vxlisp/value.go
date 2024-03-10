@@ -561,8 +561,8 @@ func ValueLink(value vxvalue, expectedtype *vxtype, listscope []vxscope, textblo
 		lookuparg, ok := ArgFromListScope(listscope, value.name)
 		if ok {
 			argtype := lookuparg.vxtype
-			if argtype.name != "" && argtype.pkgname == "" {
-				lookuptype, ok := TypeOrFuncFromListScope(listscope, "", argtype.name, subpath)
+			if argtype.name != "" {
+				lookuptype, ok := TypeOrFuncFromListScope(listscope, argtype.pkgname, argtype.name, subpath)
 				if ok {
 					lookuparg.vxtype = lookuptype
 				} else {
@@ -642,10 +642,10 @@ func ValueLink(value vxvalue, expectedtype *vxtype, listscope []vxscope, textblo
 			}
 		}
 		switch fnc.name {
-		case "let":
+		case "fn", "let":
 			arglet := fnc.listarg[0]
 			listarglet := ListArgFromValue(arglet.value)
-			listarglet, msgs := ListArgLinkType(listarglet, listscope, textblock, path)
+			listarglet, msgs := ListArgLinkType(listarglet, listscope, textblock, subpath)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			arglet.value = NewValueFromArgList(listarglet)
 			fnc.listarg[0] = arglet

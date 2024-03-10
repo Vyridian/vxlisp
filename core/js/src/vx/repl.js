@@ -230,7 +230,7 @@ export default class vx_repl {
   // (func anylist<-repllist)
   static f_anylist_from_repllist(context, repllist) {
     let output = vx_core.e_anylist
-    output = vx_core.f_list_from_list(
+    output = vx_core.f_list_from_list_1(
       {"any-1": vx_core.t_any, "any-2": vx_repl.t_repl, "list-1": vx_core.t_anylist, "list-2": vx_repl.t_repllist},
       repllist,
       vx_core.f_new(vx_core.t_any_from_any, (repl) => 
@@ -513,7 +513,7 @@ export default class vx_repl {
       {"any-1": vx_repl.t_repl},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const textlist = vx_core.f_list_from_list(
+        const textlist = vx_core.f_list_from_list_1(
           {"any-1": vx_core.t_string, "any-2": vx_core.t_any, "list-1": vx_core.t_stringlist, "list-2": vx_core.t_anylist},
           anylist,
           vx_core.f_new(vx_core.t_any_from_any, (item) => 
@@ -895,7 +895,7 @@ export default class vx_repl {
   // (func repllist<-textblocklist-argmap)
   static f_repllist_from_textblocklist_argmap(textblocklist, argmap) {
     let output = vx_repl.e_repllist
-    output = vx_core.f_list_from_list(
+    output = vx_core.f_list_from_list_1(
       {"any-1": vx_repl.t_repl, "any-2": vx_data_textblock.t_textblock, "list-1": vx_repl.t_repllist, "list-2": vx_data_textblock.t_textblocklist},
       textblocklist,
       vx_core.f_new(vx_core.t_any_from_any, (textblock) => 

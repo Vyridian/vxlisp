@@ -326,8 +326,8 @@ namespace vx_web_html_test {
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(98), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(70), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(71)
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(69), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(70)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(15), 
@@ -347,12 +347,12 @@ namespace vx_web_html_test {
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(8), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(6), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(71)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(70)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(32)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(31)
       })
     });
     return output;
@@ -385,7 +385,6 @@ namespace vx_web_html_test {
         vx_core::vx_new_string(":stylelist"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":stylemap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":stylesheet"), vx_core::vx_new_int(0),
-        vx_core::vx_new_string(":subpropmap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":table"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":tbody"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":td"), vx_core::vx_new_int(0),

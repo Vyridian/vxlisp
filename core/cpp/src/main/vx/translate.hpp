@@ -62,10 +62,10 @@ namespace vx_translate {
   vx_core::Type_session f_session_from_session_translationmap_name(vx_core::Type_session session, vx_core::Type_translationmap translationmap, vx_core::Type_string name);
 
   // (func translate)
-  vx_core::Type_string f_translate(vx_core::Type_context context, vx_core::Type_string text);
+  vx_core::Type_string f_translate_1(vx_core::Type_context context, vx_core::Type_msg msg);
 
   // (func translate)
-  vx_core::Type_string f_translate_1(vx_core::Type_context context, vx_core::Type_msg msg);
+  vx_core::Type_string f_translate(vx_core::Type_context context, vx_core::Type_string text);
 
   // (func translate<-translation-string)
   vx_core::Type_string f_translate_from_translation_string(vx_core::Type_translation translation, vx_core::Type_string text);
@@ -155,18 +155,18 @@ namespace vx_translate {
   };
 
   // (func translate)
-  class Abstract_translate : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
+  class Abstract_translate_1 : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_translate() {};
-    virtual ~Abstract_translate() = 0;
+    Abstract_translate_1() {};
+    virtual ~Abstract_translate_1() = 0;
     virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_translate : public virtual Abstract_translate {
+  class Class_translate_1 : public virtual Abstract_translate_1 {
   public:
-    Class_translate();
-    virtual ~Class_translate() override;
+    Class_translate_1();
+    virtual ~Class_translate_1() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -182,18 +182,18 @@ namespace vx_translate {
   };
 
   // (func translate)
-  class Abstract_translate_1 : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
+  class Abstract_translate : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_translate_1() {};
-    virtual ~Abstract_translate_1() = 0;
+    Abstract_translate() {};
+    virtual ~Abstract_translate() = 0;
     virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
     virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_translate_1 : public virtual Abstract_translate_1 {
+  class Class_translate : public virtual Abstract_translate {
   public:
-    Class_translate_1();
-    virtual ~Class_translate_1() override;
+    Class_translate();
+    virtual ~Class_translate() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;

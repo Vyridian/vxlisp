@@ -32,9 +32,22 @@ export default class vx_ui_html_uihtml {
 
   /**
    * Constant: layoutenginehtml
+   * Html layout engine used to render html from ui and stylesheet
    * {layoutengine}
    */
   static c_layoutenginehtml = {vx_type: vx_ui_ui.t_layoutengine, vx_constdef: {pkgname: 'vx/ui/html/uihtml', name: 'layoutenginehtml'}}
+
+  /**
+   * Constant: style-hidden
+   * {style}
+   */
+  static c_style_hidden = {vx_type: vx_web_html.t_style, vx_constdef: {pkgname: 'vx/ui/html/uihtml', name: 'style-hidden'}}
+
+  /**
+   * Constant: style-selected
+   * {style}
+   */
+  static c_style_selected = {vx_type: vx_web_html.t_style, vx_constdef: {pkgname: 'vx/ui/html/uihtml', name: 'style-selected'}}
 
   /**
    * @function context_write
@@ -110,14 +123,21 @@ export default class vx_ui_html_uihtml {
   // (func divchildlist<-uimap)
   static f_divchildlist_from_uimap(uimap) {
     let output = vx_web_html.e_divchildlist
-    output = vx_core.f_list_from_map(
+    output = vx_core.f_list_from_map_1(
       {"any-1": vx_web_html.t_divchild, "any-2": vx_ui_ui.t_ui, "list-1": vx_web_html.t_divchildlist, "map-2": vx_ui_ui.t_uimap},
       uimap,
       vx_core.f_new(vx_core.t_any_from_key_value, ([key, value]) => 
-        vx_core.f_new(
-          vx_web_html.t_div,
-          ":id",
-          key
+        vx_core.f_let(
+          {"any-1": vx_web_html.t_div},
+          [],
+          vx_core.f_new(vx_core.t_any_from_func, () => {
+            const uid = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_ui}, value, ":uid")
+            return vx_core.f_new(
+              vx_web_html.t_div,
+              ":id",
+              uid
+            )
+          })
         ))
     )
     return output
@@ -212,15 +232,13 @@ export default class vx_ui_html_uihtml {
           styletype,
           vx_ui_ui.c_styletype_system
         )}),
-        vx_core.f_new(vx_core.t_any_from_func, () => {return name})
-      ),
-      vx_core.f_else(
         vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
           vx_core.t_string,
           "#",
           name
         )})
-      )
+      ),
+      vx_core.f_else(vx_core.f_new(vx_core.t_any_from_func, () => {return name}))
     )
     return output
   }
@@ -262,6 +280,8 @@ export default class vx_ui_html_uihtml {
             const styletype = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_styletype, "struct-2": vx_ui_ui.t_style}, uistyle, ":type")
             const color_background = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":color-background")
             const color_hoverbkgrd = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":color-hoverbkgrd")
+            const cursor = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_cursor, "struct-2": vx_ui_ui.t_style}, uistyle, ":cursor")
+            const hidden = vx_core.f_any_from_struct({"any-1": vx_core.t_boolean, "struct-2": vx_ui_ui.t_style}, uistyle, ":hidden")
             const posx = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_ui_ui.t_point}, pointpos, ":x")
             const posy = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_ui_ui.t_point}, pointpos, ":y")
             const sizex = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_ui_ui.t_point}, pointsize, ":x")
@@ -309,7 +329,7 @@ export default class vx_ui_html_uihtml {
                 )}),
                 vx_core.f_new(vx_core.t_any_from_func, () => {return "fixed"})
               ),
-              vx_core.f_else(vx_core.f_new(vx_core.t_any_from_func, () => {return "relative"}))
+              vx_core.f_else(vx_core.f_new(vx_core.t_any_from_func, () => {return ""}))
             )
             const top = vx_core.f_if_2(
               {"any-1": vx_core.t_string},
@@ -511,51 +531,13 @@ export default class vx_ui_html_uihtml {
             )
             const display = vx_core.f_if_2(
               {"any-1": vx_core.t_string},
-              vx_core.f_then(
-                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_or(
-                  vx_core.f_eqeq(
-                    layout,
-                    vx_ui_ui.c_layout_flow_columns
-                  ),
-                  vx_core.f_eqeq(
-                    layout,
-                    vx_ui_ui.c_layout_flow_rows
-                  )
-                )}),
-                vx_core.f_new(vx_core.t_any_from_func, () => {return "flex"})
-              )
-            )
-            const flexflow = vx_core.f_if_2(
-              {"any-1": vx_core.t_string},
+              vx_core.f_then(vx_core.f_new(vx_core.t_boolean_from_func, () => {return hidden}), vx_core.f_new(vx_core.t_any_from_func, () => {return "none"})),
               vx_core.f_then(
                 vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eqeq(
                   layout,
-                  vx_ui_ui.c_layout_flow_columns
+                  vx_ui_ui.c_layout_flow_item
                 )}),
-                vx_core.f_new(vx_core.t_any_from_func, () => {return "column wrap"})
-              ),
-              vx_core.f_then(
-                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eqeq(
-                  layout,
-                  vx_ui_ui.c_layout_flow_rows
-                )}),
-                vx_core.f_new(vx_core.t_any_from_func, () => {return "row wrap"})
-              )
-            )
-            const aligncontent = vx_core.f_if_2(
-              {"any-1": vx_core.t_string},
-              vx_core.f_then(
-                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_or(
-                  vx_core.f_eqeq(
-                    layout,
-                    vx_ui_ui.c_layout_flow_columns
-                  ),
-                  vx_core.f_eqeq(
-                    layout,
-                    vx_ui_ui.c_layout_flow_rows
-                  )
-                )}),
-                vx_core.f_new(vx_core.t_any_from_func, () => {return "flex-start"})
+                vx_core.f_new(vx_core.t_any_from_func, () => {return "inline-block"})
               )
             )
             const gap = vx_core.f_if_2(
@@ -581,7 +563,7 @@ export default class vx_ui_html_uihtml {
                   layout,
                   vx_ui_ui.c_layout_flow_rows
                 )}),
-                vx_core.f_new(vx_core.t_any_from_func, () => {return "scroll"})
+                vx_core.f_new(vx_core.t_any_from_func, () => {return "auto"})
               )
             )
             const overflowy = vx_core.f_if_2(
@@ -591,8 +573,9 @@ export default class vx_ui_html_uihtml {
                   layout,
                   vx_ui_ui.c_layout_flow_columns
                 )}),
-                vx_core.f_new(vx_core.t_any_from_func, () => {return "scroll"})
-              )
+                vx_core.f_new(vx_core.t_any_from_func, () => {return "auto"})
+              ),
+              vx_core.f_else(vx_core.f_new(vx_core.t_any_from_func, () => {return "auto"}))
             )
             const hoverbkgrdcolor = vx_core.f_if_2(
               {"any-1": vx_core.t_string},
@@ -605,16 +588,24 @@ export default class vx_ui_html_uihtml {
                 )})
               )
             )
+            const scursor = vx_core.f_if_2(
+              {"any-1": vx_core.t_string},
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eqeq(
+                  cursor,
+                  vx_ui_ui.t_cursor_pointer
+                )}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return "pointer"})
+              )
+            )
             const props = vx_core.f_new(
               vx_web_html.t_propmap,
               ":background-color",
               backgroundcolor,
+              ":cursor",
+              scursor,
               ":display",
               display,
-              ":flex-flow",
-              flexflow,
-              ":align-content",
-              aligncontent,
               ":gap",
               gap,
               ":position",
@@ -641,21 +632,82 @@ export default class vx_ui_html_uihtml {
               ":background-color",
               hoverbkgrdcolor
             )
-            const subprops = vx_core.f_new(
-              vx_web_html.t_subpropmap,
-              "&:hover",
-              hoverprops
+            const substylelist = vx_core.f_if_2(
+              {"any-1": vx_web_html.t_stylelist},
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty_1(hoverprops)}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
+                  vx_web_html.t_stylelist,
+                  vx_core.f_new(
+                    vx_web_html.t_style,
+                    ":name",
+                    "&:hover",
+                    ":props",
+                    hoverprops
+                  )
+                )})
+              )
             )
             return vx_core.f_new(
               vx_web_html.t_style,
               ":name",
               stylename,
               ":props",
-              props
+              props,
+              ":stylelist",
+              substylelist
             )
           })
         )})
       )
+    )
+    return output
+  }
+
+  /**
+   * @function stylelist_extra_from_ui
+   * Returns a stylelist from a ui including style-hidden and style-selected
+   * @param  {ui} ui
+   * @return {stylelist}
+   */
+  static t_stylelist_extra_from_ui = {
+    vx_type: vx_core.t_type
+  }
+  static e_stylelist_extra_from_ui = {
+    vx_type: vx_ui_html_uihtml.t_stylelist_extra_from_ui
+  }
+
+  // (func stylelist-extra<-ui)
+  static f_stylelist_extra_from_ui(ui) {
+    let output = vx_web_html.e_stylelist
+    output = vx_core.f_let(
+      {"any-1": vx_web_html.t_stylelist},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const uistyles = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_stylelist, "struct-2": vx_ui_ui.t_ui}, ui, ":stylelist")
+        const selected = vx_core.f_any_from_struct({"any-1": vx_core.t_boolean, "struct-2": vx_ui_ui.t_ui}, ui, ":selected")
+        const hidden = vx_core.f_any_from_struct({"any-1": vx_core.t_boolean, "struct-2": vx_ui_ui.t_ui}, ui, ":hidden")
+        const styles1 = vx_ui_html_uihtml.f_stylelist_from_stylelist(uistyles)
+        const styles2 = vx_core.f_if_2(
+          {"any-1": vx_web_html.t_stylelist},
+          vx_core.f_then(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return hidden}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(
+              styles1,
+              vx_ui_html_uihtml.c_style_hidden
+            )})
+          ),
+          vx_core.f_then(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return selected}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(
+              styles1,
+              vx_ui_html_uihtml.c_style_selected
+            )})
+          ),
+          vx_core.f_else(vx_core.f_new(vx_core.t_any_from_func, () => {return styles1}))
+        )
+        return styles2
+      })
     )
     return output
   }
@@ -676,7 +728,7 @@ export default class vx_ui_html_uihtml {
   // (func stylelist<-stylelist)
   static f_stylelist_from_stylelist(uistylelist) {
     let output = vx_web_html.e_stylelist
-    output = vx_core.f_list_from_list(
+    output = vx_core.f_list_from_list_1(
       {"any-1": vx_web_html.t_style, "any-2": vx_ui_ui.t_style, "list-1": vx_web_html.t_stylelist, "list-2": vx_ui_ui.t_stylelist},
       uistylelist,
       vx_core.f_new(vx_core.t_any_from_any, vx_ui_html_uihtml.t_style_from_style)
@@ -700,7 +752,7 @@ export default class vx_ui_html_uihtml {
   // (func stylelist<-stylemap)
   static f_stylelist_from_stylemap(uistylemap) {
     let output = vx_web_html.e_stylelist
-    output = vx_core.f_list_from_map(
+    output = vx_core.f_list_from_map_1(
       {"any-1": vx_web_html.t_style, "any-2": vx_ui_ui.t_style, "list-1": vx_web_html.t_stylelist, "map-2": vx_ui_ui.t_stylemap},
       uistylemap,
       vx_core.f_new(vx_core.t_any_from_key_value, ([key, value]) => 
@@ -725,7 +777,7 @@ export default class vx_ui_html_uihtml {
   // (func stylemap<-stylemap)
   static f_stylemap_from_stylemap(uistylemap) {
     let output = vx_web_html.e_stylemap
-    output = vx_core.f_map_from_map(
+    output = vx_core.f_map_from_map_1(
       {"any-1": vx_web_html.t_style, "any-2": vx_ui_ui.t_style, "map-1": vx_web_html.t_stylemap, "map-2": vx_ui_ui.t_stylemap},
       uistylemap,
       vx_core.f_new(vx_core.t_any_from_key_value, ([key, value]) => 
@@ -861,9 +913,8 @@ export default class vx_ui_html_uihtml {
         const uid = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_ui}, ui, ":uid")
         const uimap = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_uimap, "struct-2": vx_ui_ui.t_ui}, ui, ":uimap")
         const uistyle = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_style, "struct-2": vx_ui_ui.t_ui}, ui, ":style")
-        const uistyles = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_stylelist, "struct-2": vx_ui_ui.t_ui}, ui, ":stylelist")
         const style = vx_ui_html_uihtml.f_style_from_style(uistyle)
-        const styles = vx_ui_html_uihtml.f_stylelist_from_stylelist(uistyles)
+        const styles = vx_ui_html_uihtml.f_stylelist_extra_from_ui(ui)
         const children = vx_ui_html_uihtml.f_divchildlist_from_uimap(uimap)
         const node = vx_core.f_new(
           vx_web_html.t_div,
@@ -960,7 +1011,9 @@ export default class vx_ui_html_uihtml {
       "layout-app-html": vx_ui_html_uihtml.c_layout_app_html,
       "layout-else-html": vx_ui_html_uihtml.c_layout_else_html,
       "layout-label-html": vx_ui_html_uihtml.c_layout_label_html,
-      "layoutenginehtml": vx_ui_html_uihtml.c_layoutenginehtml
+      "layoutenginehtml": vx_ui_html_uihtml.c_layoutenginehtml,
+      "style-hidden": vx_ui_html_uihtml.c_style_hidden,
+      "style-selected": vx_ui_html_uihtml.c_style_selected
     })
     const emptymap = vx_core.vx_new_map(vx_core.t_map, {
       "context-write": vx_ui_html_uihtml.e_context_write,
@@ -970,6 +1023,7 @@ export default class vx_ui_html_uihtml {
       "node-render<-node-ui": vx_ui_html_uihtml.e_node_render_from_node_ui,
       "string-stylename<-name-styletype": vx_ui_html_uihtml.e_string_stylename_from_name_styletype,
       "style<-style": vx_ui_html_uihtml.e_style_from_style,
+      "stylelist-extra<-ui": vx_ui_html_uihtml.e_stylelist_extra_from_ui,
       "stylelist<-stylelist": vx_ui_html_uihtml.e_stylelist_from_stylelist,
       "stylelist<-stylemap": vx_ui_html_uihtml.e_stylelist_from_stylemap,
       "stylemap<-stylemap": vx_ui_html_uihtml.e_stylemap_from_stylemap,
@@ -987,6 +1041,7 @@ export default class vx_ui_html_uihtml {
       "node-render<-node-ui": vx_ui_html_uihtml.t_node_render_from_node_ui,
       "string-stylename<-name-styletype": vx_ui_html_uihtml.t_string_stylename_from_name_styletype,
       "style<-style": vx_ui_html_uihtml.t_style_from_style,
+      "stylelist-extra<-ui": vx_ui_html_uihtml.t_stylelist_extra_from_ui,
       "stylelist<-stylelist": vx_ui_html_uihtml.t_stylelist_from_stylelist,
       "stylelist<-stylemap": vx_ui_html_uihtml.t_stylelist_from_stylemap,
       "stylemap<-stylemap": vx_ui_html_uihtml.t_stylemap_from_stylemap,
@@ -1132,6 +1187,24 @@ export default class vx_ui_html_uihtml {
       properties    : [],
       proplast      : {},
       fn            : vx_ui_html_uihtml.f_style_from_style
+    }
+
+    // (func stylelist-extra<-ui)
+    vx_ui_html_uihtml.t_stylelist_extra_from_ui['vx_value'] = {
+      name          : "stylelist-extra<-ui",
+      pkgname       : "vx/ui/html/uihtml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_html_uihtml.f_stylelist_extra_from_ui
     }
 
     // (func stylelist<-stylelist)
@@ -1314,6 +1387,20 @@ export default class vx_ui_html_uihtml {
       vx_ui_html_uihtml.c_layout_else_html,
       ":stylesheetrender",
       vx_ui_html_uihtml.t_stylesheet_render_html
+    ))
+
+    // (const style-hidden)
+    Object.assign(vx_ui_html_uihtml.c_style_hidden, vx_core.f_new(
+      vx_web_html.t_style,
+      ":name",
+      ".style-hidden"
+    ))
+
+    // (const style-selected)
+    Object.assign(vx_ui_html_uihtml.c_style_selected, vx_core.f_new(
+      vx_web_html.t_style,
+      ":name",
+      ".style-selected"
     ))
 
   }

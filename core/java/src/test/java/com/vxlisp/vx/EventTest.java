@@ -19,11 +19,11 @@ public final class EventTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/event", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 4), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 90, ":tests", 9, ":total", 10), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 10), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 90, ":tests", 10, ":total", 11), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 4), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 4), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 4), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 11), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3)
     );
   }
@@ -45,6 +45,7 @@ public final class EventTest {
       ":funcmap", Core.t_intmap.vx_new(
         ":any-from<-event", 0,
         ":event<-event", 0,
+        ":event<-event-async", 0,
         ":eventmap<-eventlist", 0
       )
     );

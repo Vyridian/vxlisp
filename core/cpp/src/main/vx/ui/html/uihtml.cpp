@@ -128,13 +128,71 @@ namespace vx_ui_html_uihtml {
 
   //}
 
+  // (const style-hidden)
+  // class Class_style_hidden {
+    // vx_const_new()
+    void vx_ui_html_uihtml::Class_style_hidden::vx_const_new(vx_ui_html_uihtml::Const_style_hidden output) {
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/ui/html/uihtml", "style-hidden");
+      long irefcount = vx_core::refcount;
+      vx_web_html::Type_style val = vx_core::f_new(
+        vx_web_html::t_style,
+        vx_core::vx_new(vx_core::t_anylist, {
+          vx_core::vx_new_string(":name"),
+          vx_core::vx_new_string(".style-hidden")
+        })
+      );
+      output->vx_p_name = val->name();
+      vx_core::vx_reserve(output->vx_p_name);
+      output->vx_p_props = val->props();
+      vx_core::vx_reserve(output->vx_p_props);
+      output->vx_p_stylelist = val->stylelist();
+      vx_core::vx_reserve(output->vx_p_stylelist);
+      vx_core::vx_release(val);
+      vx_core::refcount = irefcount;
+      vx_core::vx_reserve_type(output);
+    }
+
+
+  //}
+
+  // (const style-selected)
+  // class Class_style_selected {
+    // vx_const_new()
+    void vx_ui_html_uihtml::Class_style_selected::vx_const_new(vx_ui_html_uihtml::Const_style_selected output) {
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/ui/html/uihtml", "style-selected");
+      long irefcount = vx_core::refcount;
+      vx_web_html::Type_style val = vx_core::f_new(
+        vx_web_html::t_style,
+        vx_core::vx_new(vx_core::t_anylist, {
+          vx_core::vx_new_string(":name"),
+          vx_core::vx_new_string(".style-selected")
+        })
+      );
+      output->vx_p_name = val->name();
+      vx_core::vx_reserve(output->vx_p_name);
+      output->vx_p_props = val->props();
+      vx_core::vx_reserve(output->vx_p_props);
+      output->vx_p_stylelist = val->stylelist();
+      vx_core::vx_reserve(output->vx_p_stylelist);
+      vx_core::vx_release(val);
+      vx_core::refcount = irefcount;
+      vx_core::vx_reserve_type(output);
+    }
+
+
+  //}
+
   // (func context-write)
   vx_core::Type_context f_context_write(vx_core::Type_context context) {
     vx_core::Type_context output = vx_core::e_context;
     output = vx_web_htmldoc::f_context_write(context);
     return output;
   }
-
+  /**
+   * @function context_write
+   * @return {context}
+   * (func context-write)
+   */
   // (func context-write)
   // class Class_context_write {
     Abstract_context_write::~Abstract_context_write() {}
@@ -245,7 +303,13 @@ namespace vx_ui_html_uihtml {
     vx_core::vx_release_one_except(ui, output);
     return output;
   }
-
+  /**
+   * @function divchild_from_ui
+   * Returns a divchildlist of empty divs from a uimap
+   * @param  {ui} ui
+   * @return {divchild}
+   * (func divchild<-ui)
+   */
   // (func divchild<-ui)
   // class Class_divchild_from_ui {
     Abstract_divchild_from_ui::~Abstract_divchild_from_ui() {}
@@ -335,18 +399,27 @@ namespace vx_ui_html_uihtml {
   vx_web_html::Type_divchildlist f_divchildlist_from_uimap(vx_ui_ui::Type_uimap uimap) {
     vx_web_html::Type_divchildlist output = vx_web_html::e_divchildlist;
     vx_core::vx_reserve(uimap);
-    output = vx_core::f_list_from_map(
+    output = vx_core::f_list_from_map_1(
       vx_web_html::t_divchildlist,
       uimap,
       vx_core::t_any_from_key_value->vx_fn_new({}, [](vx_core::Type_any key_any, vx_core::Type_any value_any) {
         vx_core::Type_string key = vx_core::vx_any_from_any(vx_core::t_string, key_any);
         vx_ui_ui::Type_ui value = vx_core::vx_any_from_any(vx_ui_ui::t_ui, value_any);
         vx_core::Type_any output_1 = 
-          vx_core::f_new(
+          vx_core::f_let(
             vx_web_html::t_div,
-            vx_core::vx_new(vx_core::t_anylist, {
-              vx_core::vx_new_string(":id"),
-              key
+            vx_core::t_any_from_func->vx_fn_new({value}, [value]() {
+              vx_core::Type_string uid = value->uid();
+              vx_core::vx_ref_plus(uid);
+              vx_web_html::Type_div output_1 = vx_core::f_new(
+                vx_web_html::t_div,
+                vx_core::vx_new(vx_core::t_anylist, {
+                  vx_core::vx_new_string(":id"),
+                  uid
+                })
+              );
+              vx_core::vx_release_one_except(uid, output_1);
+              return output_1;
             })
           );
         return output_1;
@@ -355,7 +428,13 @@ namespace vx_ui_html_uihtml {
     vx_core::vx_release_one_except(uimap, output);
     return output;
   }
-
+  /**
+   * @function divchildlist_from_uimap
+   * Returns a divchildlist of empty divs from a uimap
+   * @param  {uimap} uimap
+   * @return {divchildlist}
+   * (func divchildlist<-uimap)
+   */
   // (func divchildlist<-uimap)
   // class Class_divchildlist_from_uimap {
     Abstract_divchildlist_from_uimap::~Abstract_divchildlist_from_uimap() {}
@@ -451,7 +530,14 @@ namespace vx_ui_html_uihtml {
     vx_core::vx_release_one_except({ui, orig, parent}, output);
     return output;
   }
-
+  /**
+   * @function node_app_from_ui_orig_parent
+   * @param  {ui} ui
+   * @param  {ui} orig
+   * @param  {ui} parent
+   * @return {node}
+   * (func node-app<-ui-orig-parent)
+   */
   // (func node-app<-ui-orig-parent)
   // class Class_node_app_from_ui_orig_parent {
     Abstract_node_app_from_ui_orig_parent::~Abstract_node_app_from_ui_orig_parent() {}
@@ -546,7 +632,13 @@ namespace vx_ui_html_uihtml {
     vx_core::vx_release_one_except({node, ui}, output);
     return output;
   }
-
+  /**
+   * @function node_render_from_node_ui
+   * @param  {node} node
+   * @param  {ui} ui
+   * @return {node}
+   * (func node-render<-node-ui)
+   */
   // (func node-render<-node-ui)
   // class Class_node_render_from_node_ui {
     Abstract_node_render_from_node_ui::~Abstract_node_render_from_node_ui() {}
@@ -666,12 +758,6 @@ namespace vx_ui_html_uihtml {
             return output_1;
           }),
           vx_core::t_any_from_func->vx_fn_new({name}, [name]() {
-            vx_core::Type_any output_1 = name;
-            return output_1;
-          })
-        ),
-        vx_core::f_else(
-          vx_core::t_any_from_func->vx_fn_new({name}, [name]() {
             vx_core::Type_string output_1 = vx_core::f_new(
               vx_core::t_string,
               vx_core::vx_new(vx_core::t_anylist, {
@@ -681,13 +767,25 @@ namespace vx_ui_html_uihtml {
             );
             return output_1;
           })
+        ),
+        vx_core::f_else(
+          vx_core::t_any_from_func->vx_fn_new({name}, [name]() {
+            vx_core::Type_any output_1 = name;
+            return output_1;
+          })
         )
       })
     );
     vx_core::vx_release_one_except({name, styletype}, output);
     return output;
   }
-
+  /**
+   * @function string_stylename_from_name_styletype
+   * @param  {string} name
+   * @param  {styletype} styletype
+   * @return {string}
+   * (func string-stylename<-name-styletype)
+   */
   // (func string-stylename<-name-styletype)
   // class Class_string_stylename_from_name_styletype {
     Abstract_string_stylename_from_name_styletype::~Abstract_string_stylename_from_name_styletype() {}
@@ -802,6 +900,10 @@ namespace vx_ui_html_uihtml {
                 vx_core::vx_ref_plus(color_background);
                 vx_core::Type_string color_hoverbkgrd = uistyle->color_hoverbkgrd();
                 vx_core::vx_ref_plus(color_hoverbkgrd);
+                vx_ui_ui::Type_cursor cursor = uistyle->cursor();
+                vx_core::vx_ref_plus(cursor);
+                vx_core::Type_boolean hidden = uistyle->hidden();
+                vx_core::vx_ref_plus(hidden);
                 vx_core::Type_int posx = pointpos->x();
                 vx_core::vx_ref_plus(posx);
                 vx_core::Type_int posy = pointpos->y();
@@ -876,7 +978,7 @@ namespace vx_ui_html_uihtml {
                     ),
                     vx_core::f_else(
                       vx_core::t_any_from_func->vx_fn_new({}, []() {
-                        vx_core::Type_string output_1 = vx_core::vx_new_string("relative");
+                        vx_core::Type_string output_1 = vx_core::vx_new_string("");
                         return output_1;
                       })
                     )
@@ -1233,40 +1335,12 @@ namespace vx_ui_html_uihtml {
                   vx_core::t_string,
                   vx_core::vx_new(vx_core::t_thenelselist, {
                     vx_core::f_then(
-                      vx_core::t_boolean_from_func->vx_fn_new({layout}, [layout]() {
-                        vx_core::Type_boolean output_1 = vx_core::f_or(
-                          vx_core::f_eqeq(
-                            layout,
-                            vx_ui_ui::c_layout_flow_columns
-                          ),
-                          vx_core::f_eqeq(
-                            layout,
-                            vx_ui_ui::c_layout_flow_rows
-                          )
-                        );
+                      vx_core::t_boolean_from_func->vx_fn_new({hidden}, [hidden]() {
+                        vx_core::Type_boolean output_1 = hidden;
                         return output_1;
                       }),
                       vx_core::t_any_from_func->vx_fn_new({}, []() {
-                        vx_core::Type_string output_1 = vx_core::vx_new_string("flex");
-                        return output_1;
-                      })
-                    )
-                  })
-                );
-                vx_core::vx_ref_plus(display);
-                vx_core::Type_string flexflow = vx_core::f_if_2(
-                  vx_core::t_string,
-                  vx_core::vx_new(vx_core::t_thenelselist, {
-                    vx_core::f_then(
-                      vx_core::t_boolean_from_func->vx_fn_new({layout}, [layout]() {
-                        vx_core::Type_boolean output_1 = vx_core::f_eqeq(
-                          layout,
-                          vx_ui_ui::c_layout_flow_columns
-                        );
-                        return output_1;
-                      }),
-                      vx_core::t_any_from_func->vx_fn_new({}, []() {
-                        vx_core::Type_string output_1 = vx_core::vx_new_string("column wrap");
+                        vx_core::Type_string output_1 = vx_core::vx_new_string("none");
                         return output_1;
                       })
                     ),
@@ -1274,43 +1348,18 @@ namespace vx_ui_html_uihtml {
                       vx_core::t_boolean_from_func->vx_fn_new({layout}, [layout]() {
                         vx_core::Type_boolean output_1 = vx_core::f_eqeq(
                           layout,
-                          vx_ui_ui::c_layout_flow_rows
+                          vx_ui_ui::c_layout_flow_item
                         );
                         return output_1;
                       }),
                       vx_core::t_any_from_func->vx_fn_new({}, []() {
-                        vx_core::Type_string output_1 = vx_core::vx_new_string("row wrap");
+                        vx_core::Type_string output_1 = vx_core::vx_new_string("inline-block");
                         return output_1;
                       })
                     )
                   })
                 );
-                vx_core::vx_ref_plus(flexflow);
-                vx_core::Type_string aligncontent = vx_core::f_if_2(
-                  vx_core::t_string,
-                  vx_core::vx_new(vx_core::t_thenelselist, {
-                    vx_core::f_then(
-                      vx_core::t_boolean_from_func->vx_fn_new({layout}, [layout]() {
-                        vx_core::Type_boolean output_1 = vx_core::f_or(
-                          vx_core::f_eqeq(
-                            layout,
-                            vx_ui_ui::c_layout_flow_columns
-                          ),
-                          vx_core::f_eqeq(
-                            layout,
-                            vx_ui_ui::c_layout_flow_rows
-                          )
-                        );
-                        return output_1;
-                      }),
-                      vx_core::t_any_from_func->vx_fn_new({}, []() {
-                        vx_core::Type_string output_1 = vx_core::vx_new_string("flex-start");
-                        return output_1;
-                      })
-                    )
-                  })
-                );
-                vx_core::vx_ref_plus(aligncontent);
+                vx_core::vx_ref_plus(display);
                 vx_core::Type_string gap = vx_core::f_if_2(
                   vx_core::t_string,
                   vx_core::vx_new(vx_core::t_thenelselist, {
@@ -1348,7 +1397,7 @@ namespace vx_ui_html_uihtml {
                         return output_1;
                       }),
                       vx_core::t_any_from_func->vx_fn_new({}, []() {
-                        vx_core::Type_string output_1 = vx_core::vx_new_string("scroll");
+                        vx_core::Type_string output_1 = vx_core::vx_new_string("auto");
                         return output_1;
                       })
                     )
@@ -1367,7 +1416,13 @@ namespace vx_ui_html_uihtml {
                         return output_1;
                       }),
                       vx_core::t_any_from_func->vx_fn_new({}, []() {
-                        vx_core::Type_string output_1 = vx_core::vx_new_string("scroll");
+                        vx_core::Type_string output_1 = vx_core::vx_new_string("auto");
+                        return output_1;
+                      })
+                    ),
+                    vx_core::f_else(
+                      vx_core::t_any_from_func->vx_fn_new({}, []() {
+                        vx_core::Type_string output_1 = vx_core::vx_new_string("auto");
                         return output_1;
                       })
                     )
@@ -1396,17 +1451,34 @@ namespace vx_ui_html_uihtml {
                   })
                 );
                 vx_core::vx_ref_plus(hoverbkgrdcolor);
+                vx_core::Type_string scursor = vx_core::f_if_2(
+                  vx_core::t_string,
+                  vx_core::vx_new(vx_core::t_thenelselist, {
+                    vx_core::f_then(
+                      vx_core::t_boolean_from_func->vx_fn_new({cursor}, [cursor]() {
+                        vx_core::Type_boolean output_1 = vx_core::f_eqeq(
+                          cursor,
+                          vx_ui_ui::t_cursor_pointer
+                        );
+                        return output_1;
+                      }),
+                      vx_core::t_any_from_func->vx_fn_new({}, []() {
+                        vx_core::Type_string output_1 = vx_core::vx_new_string("pointer");
+                        return output_1;
+                      })
+                    )
+                  })
+                );
+                vx_core::vx_ref_plus(scursor);
                 vx_web_html::Type_propmap props = vx_core::f_new(
                   vx_web_html::t_propmap,
                   vx_core::vx_new(vx_core::t_anylist, {
                     vx_core::vx_new_string(":background-color"),
                     backgroundcolor,
+                    vx_core::vx_new_string(":cursor"),
+                    scursor,
                     vx_core::vx_new_string(":display"),
                     display,
-                    vx_core::vx_new_string(":flex-flow"),
-                    flexflow,
-                    vx_core::vx_new_string(":align-content"),
-                    aligncontent,
                     vx_core::vx_new_string(":gap"),
                     gap,
                     vx_core::vx_new_string(":position"),
@@ -1438,24 +1510,47 @@ namespace vx_ui_html_uihtml {
                   })
                 );
                 vx_core::vx_ref_plus(hoverprops);
-                vx_web_html::Type_subpropmap subprops = vx_core::f_new(
-                  vx_web_html::t_subpropmap,
-                  vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::vx_new_string("&:hover"),
-                    hoverprops
+                vx_web_html::Type_stylelist substylelist = vx_core::f_if_2(
+                  vx_web_html::t_stylelist,
+                  vx_core::vx_new(vx_core::t_thenelselist, {
+                    vx_core::f_then(
+                      vx_core::t_boolean_from_func->vx_fn_new({hoverprops}, [hoverprops]() {
+                        vx_core::Type_boolean output_1 = vx_core::f_notempty_1(hoverprops);
+                        return output_1;
+                      }),
+                      vx_core::t_any_from_func->vx_fn_new({hoverprops}, [hoverprops]() {
+                        vx_web_html::Type_stylelist output_1 = vx_core::f_new(
+                          vx_web_html::t_stylelist,
+                          vx_core::vx_new(vx_core::t_anylist, {
+                            vx_core::f_new(
+                              vx_web_html::t_style,
+                              vx_core::vx_new(vx_core::t_anylist, {
+                                vx_core::vx_new_string(":name"),
+                                vx_core::vx_new_string("&:hover"),
+                                vx_core::vx_new_string(":props"),
+                                hoverprops
+                              })
+                            )
+                          })
+                        );
+                        return output_1;
+                      })
+                    )
                   })
                 );
-                vx_core::vx_ref_plus(subprops);
+                vx_core::vx_ref_plus(substylelist);
                 vx_web_html::Type_style output_1 = vx_core::f_new(
                   vx_web_html::t_style,
                   vx_core::vx_new(vx_core::t_anylist, {
                     vx_core::vx_new_string(":name"),
                     stylename,
                     vx_core::vx_new_string(":props"),
-                    props
+                    props,
+                    vx_core::vx_new_string(":stylelist"),
+                    substylelist
                   })
                 );
-                vx_core::vx_release_one_except({layout, name, pin, pointpos, pointsize, styletype, color_background, color_hoverbkgrd, posx, posy, sizex, sizey, stylename, backgroundcolor, position, top, bottom, left, right, height, width, display, flexflow, aligncontent, gap, overflowx, overflowy, hoverbkgrdcolor, props, hoverprops, subprops}, output_1);
+                vx_core::vx_release_one_except({layout, name, pin, pointpos, pointsize, styletype, color_background, color_hoverbkgrd, cursor, hidden, posx, posy, sizex, sizey, stylename, backgroundcolor, position, top, bottom, left, right, height, width, display, gap, overflowx, overflowy, hoverbkgrdcolor, scursor, props, hoverprops, substylelist}, output_1);
                 return output_1;
               })
             );
@@ -1467,7 +1562,13 @@ namespace vx_ui_html_uihtml {
     vx_core::vx_release_one_except(uistyle, output);
     return output;
   }
-
+  /**
+   * @function style_from_style
+   * Returns a htmlstyle from a uistyle
+   * @param  {style} uistyle
+   * @return {style}
+   * (func style<-style)
+   */
   // (func style<-style)
   // class Class_style_from_style {
     Abstract_style_from_style::~Abstract_style_from_style() {}
@@ -1553,11 +1654,170 @@ namespace vx_ui_html_uihtml {
 
   //}
 
+  // (func stylelist-extra<-ui)
+  vx_web_html::Type_stylelist f_stylelist_extra_from_ui(vx_ui_ui::Type_ui ui) {
+    vx_web_html::Type_stylelist output = vx_web_html::e_stylelist;
+    vx_core::vx_reserve(ui);
+    output = vx_core::f_let(
+      vx_web_html::t_stylelist,
+      vx_core::t_any_from_func->vx_fn_new({ui}, [ui]() {
+        vx_ui_ui::Type_stylelist uistyles = ui->stylelist();
+        vx_core::vx_ref_plus(uistyles);
+        vx_core::Type_boolean selected = ui->selected();
+        vx_core::vx_ref_plus(selected);
+        vx_core::Type_boolean hidden = ui->hidden();
+        vx_core::vx_ref_plus(hidden);
+        vx_web_html::Type_stylelist styles1 = vx_ui_html_uihtml::f_stylelist_from_stylelist(uistyles);
+        vx_core::vx_ref_plus(styles1);
+        vx_web_html::Type_stylelist styles2 = vx_core::f_if_2(
+          vx_web_html::t_stylelist,
+          vx_core::vx_new(vx_core::t_thenelselist, {
+            vx_core::f_then(
+              vx_core::t_boolean_from_func->vx_fn_new({hidden}, [hidden]() {
+                vx_core::Type_boolean output_1 = hidden;
+                return output_1;
+              }),
+              vx_core::t_any_from_func->vx_fn_new({styles1}, [styles1]() {
+                vx_core::Type_any output_1 = vx_core::f_copy(
+                  vx_web_html::t_stylelist,
+                  styles1,
+                  vx_core::vx_new(vx_core::t_anylist, {
+                    vx_ui_html_uihtml::c_style_hidden
+                  })
+                );
+                return output_1;
+              })
+            ),
+            vx_core::f_then(
+              vx_core::t_boolean_from_func->vx_fn_new({selected}, [selected]() {
+                vx_core::Type_boolean output_1 = selected;
+                return output_1;
+              }),
+              vx_core::t_any_from_func->vx_fn_new({styles1}, [styles1]() {
+                vx_core::Type_any output_1 = vx_core::f_copy(
+                  vx_web_html::t_stylelist,
+                  styles1,
+                  vx_core::vx_new(vx_core::t_anylist, {
+                    vx_ui_html_uihtml::c_style_selected
+                  })
+                );
+                return output_1;
+              })
+            ),
+            vx_core::f_else(
+              vx_core::t_any_from_func->vx_fn_new({styles1}, [styles1]() {
+                vx_core::Type_any output_1 = styles1;
+                return output_1;
+              })
+            )
+          })
+        );
+        vx_core::vx_ref_plus(styles2);
+        vx_web_html::Type_stylelist output_1 = styles2;
+        vx_core::vx_release_one_except({uistyles, selected, hidden, styles1, styles2}, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except(ui, output);
+    return output;
+  }
+  /**
+   * @function stylelist_extra_from_ui
+   * Returns a stylelist from a ui including style-hidden and style-selected
+   * @param  {ui} ui
+   * @return {stylelist}
+   * (func stylelist-extra<-ui)
+   */
+  // (func stylelist-extra<-ui)
+  // class Class_stylelist_extra_from_ui {
+    Abstract_stylelist_extra_from_ui::~Abstract_stylelist_extra_from_ui() {}
+
+    Class_stylelist_extra_from_ui::Class_stylelist_extra_from_ui() : Abstract_stylelist_extra_from_ui::Abstract_stylelist_extra_from_ui() {
+      vx_core::refcount += 1;
+    }
+
+    Class_stylelist_extra_from_ui::~Class_stylelist_extra_from_ui() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_stylelist_extra_from_ui::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_ui_html_uihtml::Func_stylelist_extra_from_ui output = vx_ui_html_uihtml::e_stylelist_extra_from_ui;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_stylelist_extra_from_ui::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_ui_html_uihtml::Func_stylelist_extra_from_ui output = vx_ui_html_uihtml::e_stylelist_extra_from_ui;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_stylelist_extra_from_ui::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "stylelist-extra<-ui", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_stylelist_extra_from_ui::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_stylelist_extra_from_ui::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "stylelist-extra<-ui", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_stylelist_extra_from_ui::vx_empty() const {return vx_ui_html_uihtml::e_stylelist_extra_from_ui;}
+    vx_core::Type_any Class_stylelist_extra_from_ui::vx_type() const {return vx_ui_html_uihtml::t_stylelist_extra_from_ui;}
+    vx_core::Type_msgblock Class_stylelist_extra_from_ui::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_stylelist_extra_from_ui::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_stylelist_extra_from_ui::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_stylelist_extra_from_ui::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_ui_ui::Type_ui inputval = vx_core::vx_any_from_any(vx_ui_ui::t_ui, val);
+      output = vx_ui_html_uihtml::f_stylelist_extra_from_ui(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_stylelist_extra_from_ui::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_ui_ui::Type_ui ui = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_ui_html_uihtml::f_stylelist_extra_from_ui(ui);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func stylelist<-stylelist)
   vx_web_html::Type_stylelist f_stylelist_from_stylelist(vx_ui_ui::Type_stylelist uistylelist) {
     vx_web_html::Type_stylelist output = vx_web_html::e_stylelist;
     vx_core::vx_reserve(uistylelist);
-    output = vx_core::f_list_from_list(
+    output = vx_core::f_list_from_list_1(
       vx_web_html::t_stylelist,
       uistylelist,
       vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any uistyle_any) {
@@ -1569,7 +1829,13 @@ namespace vx_ui_html_uihtml {
     vx_core::vx_release_one_except(uistylelist, output);
     return output;
   }
-
+  /**
+   * @function stylelist_from_stylelist
+   * Returns a htmlstylelist from a uistylemap
+   * @param  {stylelist} uistylelist
+   * @return {stylelist}
+   * (func stylelist<-stylelist)
+   */
   // (func stylelist<-stylelist)
   // class Class_stylelist_from_stylelist {
     Abstract_stylelist_from_stylelist::~Abstract_stylelist_from_stylelist() {}
@@ -1659,7 +1925,7 @@ namespace vx_ui_html_uihtml {
   vx_web_html::Type_stylelist f_stylelist_from_stylemap(vx_ui_ui::Type_stylemap uistylemap) {
     vx_web_html::Type_stylelist output = vx_web_html::e_stylelist;
     vx_core::vx_reserve(uistylemap);
-    output = vx_core::f_list_from_map(
+    output = vx_core::f_list_from_map_1(
       vx_web_html::t_stylelist,
       uistylemap,
       vx_core::t_any_from_key_value->vx_fn_new({}, [](vx_core::Type_any key_any, vx_core::Type_any value_any) {
@@ -1673,7 +1939,13 @@ namespace vx_ui_html_uihtml {
     vx_core::vx_release_one_except(uistylemap, output);
     return output;
   }
-
+  /**
+   * @function stylelist_from_stylemap
+   * Returns a htmlstylelist from a uistylemap
+   * @param  {stylemap} uistylemap
+   * @return {stylelist}
+   * (func stylelist<-stylemap)
+   */
   // (func stylelist<-stylemap)
   // class Class_stylelist_from_stylemap {
     Abstract_stylelist_from_stylemap::~Abstract_stylelist_from_stylemap() {}
@@ -1763,7 +2035,7 @@ namespace vx_ui_html_uihtml {
   vx_web_html::Type_stylemap f_stylemap_from_stylemap(vx_ui_ui::Type_stylemap uistylemap) {
     vx_web_html::Type_stylemap output = vx_web_html::e_stylemap;
     vx_core::vx_reserve(uistylemap);
-    output = vx_core::f_map_from_map(
+    output = vx_core::f_map_from_map_1(
       vx_web_html::t_stylemap,
       uistylemap,
       vx_core::t_any_from_key_value->vx_fn_new({}, [](vx_core::Type_any key_any, vx_core::Type_any value_any) {
@@ -1777,7 +2049,13 @@ namespace vx_ui_html_uihtml {
     vx_core::vx_release_one_except(uistylemap, output);
     return output;
   }
-
+  /**
+   * @function stylemap_from_stylemap
+   * Returns a htmlstylesheet from a uistylesheet
+   * @param  {stylemap} uistylemap
+   * @return {stylemap}
+   * (func stylemap<-stylemap)
+   */
   // (func stylemap<-stylemap)
   // class Class_stylemap_from_stylemap {
     Abstract_stylemap_from_stylemap::~Abstract_stylemap_from_stylemap() {}
@@ -1891,7 +2169,14 @@ namespace vx_ui_html_uihtml {
     }
     return output;
   }
-
+  /**
+   * 
+   * @async
+   * @function stylesheet_render_html
+   * @param  {stylesheet} stylesheetui
+   * @return {stylesheet}
+   * (func stylesheet-render-html)
+   */
   // (func stylesheet-render-html)
   // class Class_stylesheet_render_html {
     Abstract_stylesheet_render_html::~Abstract_stylesheet_render_html() {}
@@ -2001,7 +2286,13 @@ namespace vx_ui_html_uihtml {
     vx_core::vx_release_one_except(uistylesheet, output);
     return output;
   }
-
+  /**
+   * @function stylesheet_from_stylesheet
+   * Returns a htmlstylesheet from a uistylesheet
+   * @param  {stylesheet} uistylesheet
+   * @return {stylesheet}
+   * (func stylesheet<-stylesheet)
+   */
   // (func stylesheet<-stylesheet)
   // class Class_stylesheet_from_stylesheet {
     Abstract_stylesheet_from_stylesheet::~Abstract_stylesheet_from_stylesheet() {}
@@ -2128,7 +2419,14 @@ namespace vx_ui_html_uihtml {
     vx_core::vx_release_one_except({ui, orig, parent}, output);
     return output;
   }
-
+  /**
+   * @function ui_render_app_from_ui_orig_parent
+   * @param  {ui} ui
+   * @param  {ui} orig
+   * @param  {ui} parent
+   * @return {ui}
+   * (func ui-render-app<-ui-orig-parent)
+   */
   // (func ui-render-app<-ui-orig-parent)
   // class Class_ui_render_app_from_ui_orig_parent {
     Abstract_ui_render_app_from_ui_orig_parent::~Abstract_ui_render_app_from_ui_orig_parent() {}
@@ -2217,11 +2515,9 @@ namespace vx_ui_html_uihtml {
         vx_core::vx_ref_plus(uimap);
         vx_ui_ui::Type_style uistyle = ui->style();
         vx_core::vx_ref_plus(uistyle);
-        vx_ui_ui::Type_stylelist uistyles = ui->stylelist();
-        vx_core::vx_ref_plus(uistyles);
         vx_web_html::Type_style style = vx_ui_html_uihtml::f_style_from_style(uistyle);
         vx_core::vx_ref_plus(style);
-        vx_web_html::Type_stylelist styles = vx_ui_html_uihtml::f_stylelist_from_stylelist(uistyles);
+        vx_web_html::Type_stylelist styles = vx_ui_html_uihtml::f_stylelist_extra_from_ui(ui);
         vx_core::vx_ref_plus(styles);
         vx_web_html::Type_divchildlist children = vx_ui_html_uihtml::f_divchildlist_from_uimap(uimap);
         vx_core::vx_ref_plus(children);
@@ -2250,14 +2546,21 @@ namespace vx_ui_html_uihtml {
             uimapchg
           })
         );
-        vx_core::vx_release_one_except({uid, uimap, uistyle, uistyles, style, styles, children, node, nodechg, uimapchg}, output_1);
+        vx_core::vx_release_one_except({uid, uimap, uistyle, style, styles, children, node, nodechg, uimapchg}, output_1);
         return output_1;
       })
     );
     vx_core::vx_release_one_except({ui, orig, parent}, output);
     return output;
   }
-
+  /**
+   * @function ui_render_default_from_ui_orig_parent
+   * @param  {ui} ui
+   * @param  {ui} orig
+   * @param  {ui} parent
+   * @return {ui}
+   * (func ui-render-default<-ui-orig-parent)
+   */
   // (func ui-render-default<-ui-orig-parent)
   // class Class_ui_render_default_from_ui_orig_parent {
     Abstract_ui_render_default_from_ui_orig_parent::~Abstract_ui_render_default_from_ui_orig_parent() {}
@@ -2413,7 +2716,14 @@ namespace vx_ui_html_uihtml {
     vx_core::vx_release_one_except({ui, orig, parent}, output);
     return output;
   }
-
+  /**
+   * @function ui_render_label_from_ui_orig_parent
+   * @param  {ui} ui
+   * @param  {ui} orig
+   * @param  {ui} parent
+   * @return {ui}
+   * (func ui-render-label<-ui-orig-parent)
+   */
   // (func ui-render-label<-ui-orig-parent)
   // class Class_ui_render_label_from_ui_orig_parent {
     Abstract_ui_render_label_from_ui_orig_parent::~Abstract_ui_render_label_from_ui_orig_parent() {}
@@ -2493,6 +2803,8 @@ namespace vx_ui_html_uihtml {
   vx_ui_html_uihtml::Const_layout_else_html c_layout_else_html = NULL;
   vx_ui_html_uihtml::Const_layout_label_html c_layout_label_html = NULL;
   vx_ui_html_uihtml::Const_layoutenginehtml c_layoutenginehtml = NULL;
+  vx_ui_html_uihtml::Const_style_hidden c_style_hidden = NULL;
+  vx_ui_html_uihtml::Const_style_selected c_style_selected = NULL;
   vx_ui_html_uihtml::Func_context_write e_context_write = NULL;
   vx_ui_html_uihtml::Func_context_write t_context_write = NULL;
   vx_ui_html_uihtml::Func_divchild_from_ui e_divchild_from_ui = NULL;
@@ -2507,6 +2819,8 @@ namespace vx_ui_html_uihtml {
   vx_ui_html_uihtml::Func_string_stylename_from_name_styletype t_string_stylename_from_name_styletype = NULL;
   vx_ui_html_uihtml::Func_style_from_style e_style_from_style = NULL;
   vx_ui_html_uihtml::Func_style_from_style t_style_from_style = NULL;
+  vx_ui_html_uihtml::Func_stylelist_extra_from_ui e_stylelist_extra_from_ui = NULL;
+  vx_ui_html_uihtml::Func_stylelist_extra_from_ui t_stylelist_extra_from_ui = NULL;
   vx_ui_html_uihtml::Func_stylelist_from_stylelist e_stylelist_from_stylelist = NULL;
   vx_ui_html_uihtml::Func_stylelist_from_stylelist t_stylelist_from_stylelist = NULL;
   vx_ui_html_uihtml::Func_stylelist_from_stylemap e_stylelist_from_stylemap = NULL;
@@ -2533,6 +2847,8 @@ namespace vx_ui_html_uihtml {
       vx_ui_html_uihtml::c_layout_else_html = new vx_ui_html_uihtml::Class_layout_else_html();
       vx_ui_html_uihtml::c_layout_label_html = new vx_ui_html_uihtml::Class_layout_label_html();
       vx_ui_html_uihtml::c_layoutenginehtml = new vx_ui_html_uihtml::Class_layoutenginehtml();
+      vx_ui_html_uihtml::c_style_hidden = new vx_ui_html_uihtml::Class_style_hidden();
+      vx_ui_html_uihtml::c_style_selected = new vx_ui_html_uihtml::Class_style_selected();
       vx_ui_html_uihtml::e_context_write = new vx_ui_html_uihtml::Class_context_write();
       vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_context_write);
       vx_ui_html_uihtml::t_context_write = new vx_ui_html_uihtml::Class_context_write();
@@ -2561,6 +2877,10 @@ namespace vx_ui_html_uihtml {
       vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_style_from_style);
       vx_ui_html_uihtml::t_style_from_style = new vx_ui_html_uihtml::Class_style_from_style();
       vx_core::vx_reserve_type(vx_ui_html_uihtml::t_style_from_style);
+      vx_ui_html_uihtml::e_stylelist_extra_from_ui = new vx_ui_html_uihtml::Class_stylelist_extra_from_ui();
+      vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_stylelist_extra_from_ui);
+      vx_ui_html_uihtml::t_stylelist_extra_from_ui = new vx_ui_html_uihtml::Class_stylelist_extra_from_ui();
+      vx_core::vx_reserve_type(vx_ui_html_uihtml::t_stylelist_extra_from_ui);
       vx_ui_html_uihtml::e_stylelist_from_stylelist = new vx_ui_html_uihtml::Class_stylelist_from_stylelist();
       vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_stylelist_from_stylelist);
       vx_ui_html_uihtml::t_stylelist_from_stylelist = new vx_ui_html_uihtml::Class_stylelist_from_stylelist();
@@ -2597,6 +2917,8 @@ namespace vx_ui_html_uihtml {
       vx_ui_html_uihtml::Class_layout_else_html::vx_const_new(vx_ui_html_uihtml::c_layout_else_html);
       vx_ui_html_uihtml::Class_layout_label_html::vx_const_new(vx_ui_html_uihtml::c_layout_label_html);
       vx_ui_html_uihtml::Class_layoutenginehtml::vx_const_new(vx_ui_html_uihtml::c_layoutenginehtml);
+      vx_ui_html_uihtml::Class_style_hidden::vx_const_new(vx_ui_html_uihtml::c_style_hidden);
+      vx_ui_html_uihtml::Class_style_selected::vx_const_new(vx_ui_html_uihtml::c_style_selected);
       vx_core::vx_Type_mapany maptype;
       vx_core::vx_Type_mapany mapconst;
       vx_core::vx_Type_mapfunc mapfunc;
@@ -2605,6 +2927,8 @@ namespace vx_ui_html_uihtml {
       mapconst["layout-else-html"] = vx_ui_html_uihtml::c_layout_else_html;
       mapconst["layout-label-html"] = vx_ui_html_uihtml::c_layout_label_html;
       mapconst["layoutenginehtml"] = vx_ui_html_uihtml::c_layoutenginehtml;
+      mapconst["style-hidden"] = vx_ui_html_uihtml::c_style_hidden;
+      mapconst["style-selected"] = vx_ui_html_uihtml::c_style_selected;
       mapfunc["context-write"] = vx_ui_html_uihtml::t_context_write;
       mapfunc["divchild<-ui"] = vx_ui_html_uihtml::t_divchild_from_ui;
       mapfunc["divchildlist<-uimap"] = vx_ui_html_uihtml::t_divchildlist_from_uimap;
@@ -2612,6 +2936,7 @@ namespace vx_ui_html_uihtml {
       mapfunc["node-render<-node-ui"] = vx_ui_html_uihtml::t_node_render_from_node_ui;
       mapfunc["string-stylename<-name-styletype"] = vx_ui_html_uihtml::t_string_stylename_from_name_styletype;
       mapfunc["style<-style"] = vx_ui_html_uihtml::t_style_from_style;
+      mapfunc["stylelist-extra<-ui"] = vx_ui_html_uihtml::t_stylelist_extra_from_ui;
       mapfunc["stylelist<-stylelist"] = vx_ui_html_uihtml::t_stylelist_from_stylelist;
       mapfunc["stylelist<-stylemap"] = vx_ui_html_uihtml::t_stylelist_from_stylemap;
       mapfunc["stylemap<-stylemap"] = vx_ui_html_uihtml::t_stylemap_from_stylemap;

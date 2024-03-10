@@ -239,7 +239,7 @@ func CppCaptureFromValueListInner(value vxvalue, listinnerarg []string, path str
 }
 
 func CppFolderCopyTestdataFromProjectPath(project *vxproject, targetpath string) *vxmsgblock {
-	msgblock := NewMsgBlock("CppFileCopyTestdataFromProjectPath")
+	msgblock := NewMsgBlock("CppFolderCopyTestdataFromProjectPath")
 	sourcepath := PathFromProjectPath(project, "./testdata")
 	if BooleanExistsFromPath(sourcepath) {
 		msgs := FolderCopyFromSourceTarget(sourcepath, targetpath)
@@ -282,54 +282,6 @@ func CppDebugFromFunc(fnc *vxfunc, lineindent string) (string, string) {
 		debugend = lineindent + "vx_core::debug(\"" + fnc.name + "\", \"end\", output);"
 	}
 	return debugstart, debugend
-}
-
-func CppDocFromFunc(fnc *vxfunc) string {
-	var doc = ""
-	var argsdoc = ""
-	/*
-		switch NameFromFunc(fnc) {
-		case "vx/core/copy", "vx/core/empty", "vx/core/new":
-		default:
-			//if fnc.isgeneric {
-			//	argsdoc += "\n@param  {generic} generic_any_1"
-			//}
-		}
-	*/
-	for _, arg := range fnc.listarg {
-		argsdoc += "\n@param "
-		if arg.vxtype.name != "" {
-			argsdoc += " {" + arg.vxtype.name + "}"
-		}
-		argsdoc += " " + arg.alias
-		if arg.doc != "" {
-			argsdoc += " " + arg.doc
-		}
-	}
-	if fnc.async {
-		doc += "" +
-			"\n@async" +
-			"\n"
-	}
-	doc += "@function " + LangFromName(fnc.alias)
-	if fnc.idx > 0 {
-		doc += " " + StringFromInt(fnc.idx)
-	}
-	if fnc.doc != "" {
-		doc += "\n" + fnc.doc
-	}
-	if fnc.deprecated != "" {
-		doc += "\n" + fnc.deprecated
-	}
-	doc += "" +
-		argsdoc +
-		"\n@return {" + fnc.vxtype.name + "}"
-	output := "" // +
-	//"  /**" +
-	//"\n   * " + StringFromStringIndent(doc, "   * ") +
-	//"\n   * (func " + fnc.name + ")" +
-	//"\n   */"
-	return output
 }
 
 func CppEmptyValueFromType(lang *vxlang, typ *vxtype) string {
@@ -472,7 +424,7 @@ func CppFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string, 
 	cnstname := LangFromName(cnst.alias)
 	cnstclassname := "Class_" + cnstname
 	cnsttypename := LangNameFromType(lang, cnst.vxtype)
-	cnsttypeclassname := CppNameTypeFullFromType(lang, cnsttype)
+	cnsttypeclassname := LangNameTypeFullFromType(lang, cnsttype)
 	pkgname := LangNameFromPkgName(lang, cnst.pkgname)
 	fullclassname := pkgname + lang.pkgref + "Class_" + cnstname
 	fullconstname := pkgname + lang.pkgref + "Const_" + cnstname
@@ -1073,7 +1025,7 @@ func CppBodyFromFunc(lang *vxlang, fnc *vxfunc) (string, string, string, *vxmsgb
 	} else {
 		staticfunction = fdefinition
 	}
-	doc := CppDocFromFunc(fnc)
+	doc := LangDocFromFunc(fnc)
 	output += "" +
 		doc +
 		"\n  // (func " + fnc.name + ")" +
@@ -1173,24 +1125,6 @@ func CppFuncDefsFromFuncs(funcs []*vxfunc, indent string) string {
 	return output
 }
 
-/*
-func CppFromName(name string) string {
-	output := name
-	switch output {
-	case "extends":
-		output = "extend"
-	}
-	output = StringFromStringFindReplace(output, "->", "_to_")
-	output = StringFromStringFindReplace(output, "<-", "_from_")
-	output = StringFromStringFindReplace(output, "<", "lt")
-	output = StringFromStringFindReplace(output, ">", "gt")
-	output = StringFromStringFindReplace(output, "?", "is")
-	output = StringFromStringFindReplace(output, "-", "_")
-	output = StringFromStringFindReplace(output, "/", "_")
-	return output
-}
-*/
-
 func CppFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, string, *vxmsgblock) {
 	msgblock := NewMsgBlock("CppFromPackage")
 	pkgname := LangFromName(pkg.name)
@@ -1278,8 +1212,8 @@ func CppFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, strin
 				specialheader += typeheader
 			}
 			packageheader += "" +
-				"\n  " + CppNameTypeFullFromType(lang, typ) + " e_" + LangNameFromType(lang, typ) + " = NULL;" +
-				"\n  " + CppNameTypeFullFromType(lang, typ) + " t_" + LangNameFromType(lang, typ) + " = NULL;"
+				"\n  " + LangNameTypeFullFromType(lang, typ) + " e_" + LangNameFromType(lang, typ) + " = NULL;" +
+				"\n  " + LangNameTypeFullFromType(lang, typ) + " t_" + LangNameFromType(lang, typ) + " = NULL;"
 			packagestatic += "" +
 				"\n      maptype[\"" + typ.name + "\"] = " + LangNameTFromType(lang, typ) + ";"
 		}
@@ -1294,8 +1228,8 @@ func CppFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, strin
 		typeheaders += typeheader
 		typebodyfooters += typebodyfooter
 		packageheader += "" +
-			"\n  " + CppNameTypeFullFromType(lang, typ) + " e_" + LangNameFromType(lang, typ) + " = NULL;" +
-			"\n  " + CppNameTypeFullFromType(lang, typ) + " t_" + LangNameFromType(lang, typ) + " = NULL;"
+			"\n  " + LangNameTypeFullFromType(lang, typ) + " e_" + LangNameFromType(lang, typ) + " = NULL;" +
+			"\n  " + LangNameTypeFullFromType(lang, typ) + " t_" + LangNameFromType(lang, typ) + " = NULL;"
 		packagestatic += "" +
 			"\n      maptype[\"" + typ.name + "\"] = " + LangNameTFromType(lang, typ) + ";"
 	}
@@ -1312,13 +1246,6 @@ func CppFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, strin
 		constheaders += constheader
 		constbodyfootersearly += constbodyfooter1
 		constbodyfooterslate += constbodyfooter2
-		//if cnst.pkgname == "vx/core" && cnst.name == "false" {
-		//	constbodyfootersearly += constbodyfooter
-		//} else if cnst.value.code == ":func" && cnst.value.name != "native" {
-		//	constbodyfooterslate += constbodyfooter
-		//} else {
-		//	constbodyfooters += constbodyfooter
-		//}
 		packageheader += "" +
 			"\n  " + CppNameTypeFullFromConst(lang, cnst) + " c_" + LangNameFromConst(cnst) + " = NULL;"
 		packagestatic += "" +
@@ -1357,7 +1284,9 @@ func CppFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject) (string, strin
 	remainingkeys = ListStringFromListStringNotMatch(fnckeys, specialfuncorder)
 	for _, fncid := range remainingkeys {
 		fncs := pkg.mapfunc[fncid]
-		for _, fnc := range fncs {
+		// move simple versions to the end
+		reversefuncs := ListFuncReverse(fncs)
+		for _, fnc := range reversefuncs {
 			fncheader, fncheaderfooter := CppHeaderFromFunc(lang, fnc)
 			fncbody, staticfunction, fncbodyfooter, msgs := CppBodyFromFunc(lang, fnc)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -1463,7 +1392,7 @@ func CppBodyFromType(lang *vxlang, typ *vxtype) (string, string, *vxmsgblock) {
 	typename := LangFromName(typ.alias)
 	classname := "Class_" + typename
 	fullclassname := CppNameClassFullFromType(lang, typ)
-	fulltypename := CppNameTypeFullFromType(lang, typ)
+	fulltypename := LangNameTypeFullFromType(lang, typ)
 	fulltname := LangNameTFromType(lang, typ)
 	fullename := LangNameEFromType(lang, typ)
 	constructor := "" +
@@ -1711,7 +1640,7 @@ func CppBodyFromType(lang *vxlang, typ *vxtype) (string, string, *vxmsgblock) {
 			//				allowfunc := allowtype.vxfunc
 			//				allowtype = allowfunc.vxtype
 			//}
-			allowclass = CppNameTypeFullFromType(lang, allowtype)
+			allowclass = LangNameTypeFullFromType(lang, allowtype)
 			allowempty := LangNameEFromType(lang, allowtype)
 			allowttype = LangNameTFromType(lang, allowtype)
 			allowname = LangNameFromType(lang, allowtype)
@@ -1901,7 +1830,7 @@ func CppBodyFromType(lang *vxlang, typ *vxtype) (string, string, *vxmsgblock) {
 		allowempty := "vx_core::e_any"
 		if len(allowtypes) > 0 {
 			allowtype := allowtypes[0]
-			allowclass = CppNameTypeFullFromType(lang, allowtype)
+			allowclass = LangNameTypeFullFromType(lang, allowtype)
 			allowttype = LangNameTFromType(lang, allowtype)
 			allowempty = LangNameEFromType(lang, allowtype)
 			allowname = LangNameFromType(lang, allowtype)
@@ -3339,7 +3268,7 @@ func CppHeaderFromType(lang *vxlang, typ *vxtype) string {
 			allowtypes := ListAllowTypeFromType(typ)
 			if len(allowtypes) > 0 {
 				allowtype := allowtypes[0]
-				allowclass = CppNameTypeFullFromType(lang, allowtype)
+				allowclass = LangNameTypeFullFromType(lang, allowtype)
 				allowname = LangNameFromType(lang, allowtype)
 			}
 			interfaces += "" +
@@ -3366,7 +3295,7 @@ func CppHeaderFromType(lang *vxlang, typ *vxtype) string {
 			allowtypes := ListAllowTypeFromType(typ)
 			if len(allowtypes) > 0 {
 				allowtype := allowtypes[0]
-				allowclass = CppNameTypeFullFromType(lang, allowtype)
+				allowclass = LangNameTypeFullFromType(lang, allowtype)
 				allowname = LangNameFromType(lang, allowtype)
 			}
 			if allowname != "any" {
@@ -3748,7 +3677,7 @@ func CppLambdaFromArgList(lang *vxlang, arglist []vxarg, isgeneric bool) (string
 		case "vx/core/any", "vx/core/any-1":
 			lambdatypenames = append(lambdatypenames, "vx_core::Type_any "+lambdaargname)
 		default:
-			argvaltype = CppNameTypeFullFromType(lang, argtype)
+			argvaltype = LangNameTypeFullFromType(lang, argtype)
 			argvaltname := LangNameTFromType(lang, argtype)
 			lambdatypenames = append(lambdatypenames, "vx_core::Type_any "+lambdaargname+"_any")
 			lambdavar := argvaltype + " " + lambdaargname + " = vx_core::vx_any_from_any(" + argvaltname + ", " + lambdaargname + "_any);"
@@ -3835,17 +3764,6 @@ func CppNameTypeFullFromFunc(lang *vxlang, fnc *vxfunc) string {
 	name := LangNameFromPkgName(lang, fnc.pkgname)
 	name += lang.pkgref + "Func_"
 	name += LangNameFromFunc(fnc)
-	return name
-}
-
-func CppNameTypeFullFromType(lang *vxlang, typ *vxtype) string {
-	name := LangNameFromPkgName(lang, typ.pkgname)
-	if typ.isfunc {
-		name += lang.pkgref + "Func_"
-	} else {
-		name += lang.pkgref + "Type_"
-	}
-	name += LangNameFromType(lang, typ)
 	return name
 }
 

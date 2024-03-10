@@ -30,7 +30,13 @@ namespace vx_translation_all {
     vx_core::vx_release_one_except(args, output);
     return output;
   }
-
+  /**
+   * @function context_all
+   * Returns the default context for app main execution. Arguments come from the command line.
+   * @param  {anylist} args
+   * @return {context}
+   * (func context-all)
+   */
   // (func context-all)
   // class Class_context_all {
     Abstract_context_all::~Abstract_context_all() {}
@@ -127,7 +133,12 @@ namespace vx_translation_all {
     );
     return output;
   }
-
+  /**
+   * @function translationmap_all
+   * Returns a translationmap with all translations.
+   * @return {translationmap}
+   * (func translationmap-all)
+   */
   // (func translationmap-all)
   // class Class_translationmap_all {
     Abstract_translationmap_all::~Abstract_translationmap_all() {}

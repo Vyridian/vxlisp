@@ -362,7 +362,7 @@ export default class vx_data_textblock {
   // (func delimlist-pos<-string-delimlist)
   static f_delimlist_pos_from_string_delimlist(text, delimlist) {
     let output = vx_data_textblock.e_delimlist
-    output = vx_core.f_list_from_list(
+    output = vx_core.f_list_from_list_1(
       {"any-1": vx_data_textblock.t_delim, "any-2": vx_data_textblock.t_delim, "list-1": vx_data_textblock.t_delimlist, "list-2": vx_data_textblock.t_delimlist},
       delimlist,
       vx_core.f_new(vx_core.t_any_from_any, (delim) => 
@@ -443,7 +443,7 @@ export default class vx_data_textblock {
   // (func stringlist<-textblocklist)
   static f_stringlist_from_textblocklist(textblocklist) {
     let output = vx_core.e_stringlist
-    output = vx_core.f_list_from_list(
+    output = vx_core.f_list_from_list_1(
       {"any-1": vx_core.t_string, "any-2": vx_data_textblock.t_textblock, "list-1": vx_core.t_stringlist, "list-2": vx_data_textblock.t_textblocklist},
       textblocklist,
       vx_core.f_new(vx_core.t_any_from_any, vx_data_textblock.t_text_from_textblock)

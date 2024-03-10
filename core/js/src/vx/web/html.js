@@ -170,13 +170,6 @@ export default class vx_web_html {
   static e_stylesheet = {vx_type: vx_web_html.t_stylesheet}
 
   /**
-   * type: subpropmap
-   * Map of propmap
-   */
-  static t_subpropmap = {}
-  static e_subpropmap = {vx_type: vx_web_html.t_subpropmap}
-
-  /**
    * type: table
    * <table> Tag
    */
@@ -882,7 +875,7 @@ export default class vx_web_html {
       {"any-1": vx_core.t_string},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const textlist = vx_core.f_list_from_list(
+        const textlist = vx_core.f_list_from_list_1(
           {"any-1": vx_core.t_string, "list-1": vx_core.t_stringlist},
           nodelist,
           vx_core.f_new(vx_core.t_any_from_any, (node) => 
@@ -1126,7 +1119,7 @@ export default class vx_web_html {
           {"any-1": vx_core.t_string},
           [],
           vx_core.f_new(vx_core.t_any_from_func, () => {
-            const namelist = vx_core.f_list_from_list(
+            const namelist = vx_core.f_list_from_list_1(
               {"any-1": vx_core.t_string, "any-2": vx_web_html.t_style, "list-1": vx_core.t_stringlist, "list-2": vx_web_html.t_stylelist},
               stylelist,
               vx_core.f_new(vx_core.t_any_from_any, (item) => 
@@ -1213,8 +1206,13 @@ export default class vx_web_html {
         const sindent = vx_web_html.f_string_from_indent(indent)
         const name = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_style}, style, ":name")
         const propmap = vx_core.f_any_from_struct({"any-1": vx_web_html.t_propmap, "struct-2": vx_web_html.t_style}, style, ":props")
+        const sublist = vx_core.f_any_from_struct({"any-1": vx_web_html.t_stylelist, "struct-2": vx_web_html.t_style}, style, ":stylelist")
         const stext = vx_web_html.f_string_from_stylepropmap_indent(
           propmap,
+          vx_core.f_plus1(indent)
+        )
+        const subtext = vx_web_html.f_string_from_stylelist_indent(
+          sublist,
           vx_core.f_plus1(indent)
         )
         return vx_core.f_new(
@@ -1223,6 +1221,7 @@ export default class vx_web_html {
           name,
           " {",
           stext,
+          subtext,
           sindent,
           "}"
         )
@@ -1252,13 +1251,16 @@ export default class vx_web_html {
       {"any-1": vx_core.t_string},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const sstyles = vx_core.f_list_from_list(
+        const sstyles = vx_core.f_list_from_list_1(
           {"any-1": vx_core.t_string, "any-2": vx_web_html.t_style, "list-1": vx_core.t_stringlist, "list-2": vx_web_html.t_stylelist},
           stylelist,
           vx_core.f_new(vx_core.t_any_from_any, (substyle) => 
             vx_web_html.f_string_from_style_indent(substyle, indent))
         )
-        return vx_type.f_string_from_stringlist_join(sstyles, "")
+        return vx_type.f_string_from_stringlist_join(
+          sstyles,
+          vx_core.c_newline
+        )
       })
     )
     return output
@@ -1286,7 +1288,7 @@ export default class vx_web_html {
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const sindent = vx_web_html.f_string_from_indent(indent)
-        const sprops = vx_core.f_list_from_map(
+        const sprops = vx_core.f_list_from_map_1(
           {"any-1": vx_core.t_string, "any-2": vx_core.t_string, "list-1": vx_core.t_stringlist, "map-2": vx_web_html.t_propmap},
           propmap,
           vx_core.f_new(vx_core.t_any_from_key_value, ([key, val]) => 
@@ -1734,7 +1736,6 @@ export default class vx_web_html {
       "stylelist": vx_web_html.e_stylelist,
       "stylemap": vx_web_html.e_stylemap,
       "stylesheet": vx_web_html.e_stylesheet,
-      "subpropmap": vx_web_html.e_subpropmap,
       "table": vx_web_html.e_table,
       "tbody": vx_web_html.e_tbody,
       "td": vx_web_html.e_td,
@@ -1848,7 +1849,6 @@ export default class vx_web_html {
       "stylelist": vx_web_html.t_stylelist,
       "stylemap": vx_web_html.t_stylemap,
       "stylesheet": vx_web_html.t_stylesheet,
-      "subpropmap": vx_web_html.t_subpropmap,
       "table": vx_web_html.t_table,
       "tbody": vx_web_html.t_tbody,
       "td": vx_web_html.t_td,
@@ -2593,15 +2593,15 @@ export default class vx_web_html {
           "type" : vx_web_html.t_propmap,
           "multi": false
         },
-        "subprops": {
-          "name" : "subprops",
-          "type" : vx_web_html.t_subpropmap,
+        "stylelist": {
+          "name" : "stylelist",
+          "type" : vx_web_html.t_stylelist,
           "multi": false
         }
       },
       proplast      : {
-        "name" : "subprops",
-        "type" : vx_web_html.t_subpropmap,
+        "name" : "stylelist",
+        "type" : vx_web_html.t_stylelist,
         "multi": false
       }
     }
@@ -2708,25 +2708,6 @@ export default class vx_web_html {
     }
     vx_web_html.e_stylesheet['vx_type'] = vx_web_html.t_stylesheet
     vx_web_html.e_stylesheet['vx_value'] = {}
-
-    // (type subpropmap)
-    vx_web_html.t_subpropmap['vx_type'] = vx_core.t_type
-    vx_web_html.t_subpropmap['vx_value'] = {
-      name          : "subpropmap",
-      pkgname       : "vx/web/html",
-      extends       : ":map",
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [vx_web_html.t_propmap],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : {},
-      proplast      : {}
-    }
-    vx_web_html.e_subpropmap['vx_type'] = vx_web_html.t_subpropmap
-    vx_web_html.e_subpropmap['vx_value'] = {}
 
     // (type table)
     vx_web_html.t_table['vx_type'] = vx_core.t_type

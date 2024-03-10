@@ -1165,7 +1165,7 @@ public final class Csv {
                 Core.f_any_from_list(Core.t_string, textlist, Core.vx_new_int(1));
           })
         );
-        return Core.f_map_from_map(
+        return Core.f_map_from_map_1(
           Core.t_stringmap,
           rowmap,
           Core.t_any_from_key_value.vx_fn_new((key_any, val_any) -> {

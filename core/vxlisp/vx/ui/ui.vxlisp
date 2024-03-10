@@ -14,6 +14,38 @@
 (type cursor : struct
  :doc "Univeral Cursor Type")
 
+(type font : struct
+ :properties [name      : string
+              fontface  : fontface
+              fontsize  : int
+              fontstyle : fontstyle]
+ :doc "Univeral Font Type")
+
+(type fontface : struct
+ :properties [name     : string
+              filelist : file/filelist]
+ :doc "Univeral Font Face Type")
+
+(type fontfacelist : list
+ :allowtypes [fontface]
+ :doc "List of fontface")
+
+(type fontfacemap : map
+ :allowtypes [fontface]
+ :doc "Map of fontface")
+
+(type fontmap : map
+ :allowtypes [font]
+ :doc "Map of font")
+
+(type fontstyle : struct
+ :properties [name : string]
+ :doc "Univeral Font Style Type")
+
+(type fontstylemap : map
+ :allowtypes [fontstyle]
+ :doc "Map of fontstyle")
+
 (type layout : struct
  :properties [name      : string
               fn-layout : ui-render<-ui-orig-parent]
@@ -51,12 +83,14 @@
 (type pointstyle : struct
  :doc "Universal Point Style")
 
+/*
 (type render : struct
  :doc "Universal Rendered UI")
 
 (type rendermap : map
  :allowtypes [render]
  :doc "Map of render")
+*/
 
 (type style : struct
  :properties [name             : string
@@ -65,6 +99,8 @@
               color-background : string
               color-hoverbkgrd : string
               cursor           : cursor
+              font             : font
+              hidden           : boolean
               image-background : file/file
               layout           : layout
               type             : styletype
@@ -82,25 +118,27 @@
  :doc "Universal Stylemap")
 
 (type stylesheet : struct
- :properties [stylemap : stylemap]
+ :properties [fontfacemap : fontfacemap
+              stylemap    : stylemap]
  :doc "Universal Stylesheet")
 
 (type styletype : struct
  :doc "Universal Style Type")
 
 (type ui : struct
- :properties [data            : any
-              eventmap        : event/eventmap
-              fn-uimap-data   : uimap<-uimap-data
-              parent          : string
-              path            : string
-              render          : render
-              renderer        : layout
-              style           : style
-              stylelist       : stylelist
-              stylesheet      : stylesheet
-              uid             : string
-              uimap           : uimap]
+ :properties [uid           : string
+              name          : string
+              layout        : layout
+              parent        : string
+              path          : string
+              hidden        : boolean
+              selected      : boolean
+              selectmulti   : boolean
+              style         : style
+              stylelist     : stylelist
+              eventmap      : event/eventmap
+              data          : any
+              uimap         : uimap]
  :doc "Universal UI Element")
 
 (type uilist : list
@@ -109,6 +147,7 @@
 
 (type uimap : map
  :allowtypes [ui]
+ :mutable
  :doc "Map of ui")
 
 (type uiengine : struct
@@ -128,6 +167,10 @@
  (layout
   :name "layout-background"))
 
+(const layout-button : layout
+ (layout
+  :name "layout-button"))
+
 (const layout-combobox : layout
  (layout
   :name "layout-combobox"))
@@ -139,6 +182,10 @@
 (const layout-flow-columns : layout
  (layout
   :name "layout-flow-columns"))
+
+(const layout-flow-item : layout
+ (layout
+  :name "layout-flow-item"))
 
 (const layout-flow-rows : layout
  (layout
@@ -204,6 +251,10 @@
  (layout
   :name "layout-textentry"))
 
+(const layout-titlebar : layout
+ (layout
+  :name "layout-titlebar"))
+
 (const pin-bottom : pin)
 
 (const pin-center : pin)
@@ -233,7 +284,7 @@
   (state/boolean-writestate<-mapname-name-value
    :uimap
    uid
-   value))
+   ui))
  :context
  :doc "")
 
@@ -245,10 +296,67 @@
  :sideeffects "Changes state"
  :doc "Writes the uiengine to state")
 
+(func fontfacemap<-fontfacelist : fontfacemap
+ [fontfacelist : fontfacelist]
+ (map<-list : fontfacemap
+  fontfacelist
+  (fn : string
+   [fontface : fontface]
+   (:name fontface)))
+ :doc "Returns a fontfacemap from a fontfacelist")
+
 (func layout<-style : layout
  [style : style]
  (:layout style)
  :doc "")
+
+(func layout<-ui : layout
+ [ui : ui]
+ (let : layout
+  [layoutengine : layoutengine := (layoutengine-readstate)]
+  (layout<-ui-layoutengine
+   ui
+   layoutengine))
+ :context
+ :doc "Returns the layout from layoutengine that matches the ui")
+
+(func layout<-ui-layoutengine : layout
+ [ui           : ui
+  layoutengine : layoutengine]
+ (let : layout
+  [layoutmap  : layoutmap := (:layoutmap  layoutengine)
+   layoutelse : layout    := (:layoutelse layoutengine)]
+  (layout<-ui-layoutmap-else
+   ui
+   layoutmap
+   layoutelse))
+ :doc "Returns the layout from layoutengine that matches the ui")
+
+(func layout<-ui-layoutmap-else : layout
+ [ui         : ui
+  layoutmap  : layoutmap
+  layoutelse : layout]
+ (let : layout
+  [style     : style  := (:style ui)
+   layout    : layout := (layout<-style
+                          style)
+   layname   : string := (:name layout)
+   layout1   : layout := (any<-map : layout
+                          layoutmap
+                          layname)
+   layout2   : layout := (if : layout
+                          (!-empty layout1)
+                          layout1
+                          layoutelse)]
+  layout2)
+ :doc "Returns a layout from a given ui, layoutmap, and layoutelse")
+
+(func layoutengine-readstate : layoutengine
+ (let : layoutengine
+  [uiengine : uiengine := (uiengine-readstate)]
+  (:layoutengine uiengine))
+ :context
+ :doc "Returns the current layoutengine from state")
 
 (func layoutmap<-layoutlist : layoutmap
  [layoutlist : layoutlist]
@@ -257,7 +365,23 @@
   (fn : string
    [layout : layout]
    (:name layout)))
- :doc "Returns an renderermap from an rendererlist")
+ :doc "Returns an layoutmap from an layoutlist")
+
+(func stringlist-selected<-ui : stringlist
+ [ui : ui]
+ (let : stringlist
+  [uimap  : uimap  := (:uimap ui)
+   uilist : uilist := (uilist<-uimap
+                       uimap)]
+  (list<-list : stringlist
+   uilist
+   (fn : string
+    [item : ui]
+    (if : string
+     (:selected item)
+     (:uid item)
+     ""))))
+ :doc "Return a list of uid of the ui with selected=true")
 
 (func stylemap<-stylelist : stylemap
  [stylelist : stylelist]
@@ -273,59 +397,90 @@
  :sideeffects "Stylesheet will be rendered"
  :doc "Template for rendering stylesheet")
 
-(func ui<-renderer-ui-orig-parent : ui
- [renderer : layout
-  uiarg    : ui
-  uiorig   : ui
-  parent   : ui]
+(func ui<-layout-ui-orig-parent : ui
+ [layout : layout
+  uiarg  : ui
+  uiorig : ui
+  parent : ui]
  (let : ui
-  [fn-layout : ui-render<-ui-orig-parent := (:fn-layout renderer)
-   uichg     : ui                        := (fn-layout
-                                             uiarg
-                                             uiorig
-                                             parent)]
+  [fn-layout : ui-render<-ui-orig-parent
+    := (:fn-layout layout)
+   uichg : ui
+    := (fn-layout
+        uiarg
+        uiorig
+        parent)]
   uichg)
  :doc "")
 
-(func ui-data<-ui : ui
- [ui : ui]
+(func ui-child<-ui-uid : ui
+ [ui  : ui
+  uid : string]
  (let : ui
-  [data  : any   := (:data ui)]
-  (any<-any : ui
-   data))
- :doc "Returns (:data ui) cast as ui")
+  [childmap : uimap := (:uimap ui)]
+  (any<-map : ui
+   childmap
+   uid))
+ :doc "Returns then named child from a ui.")
 
 (func ui-from<-event : ui
  [event : event/event]
- (event/any-from<-event : ui
-  event)
+ (let : ui
+  [uid : string := (:from event)]
+  (ui-readstate<-uid uid))
+ :context
  :doc "Returns (:from event) cast as ui")
+
+(func ui-layout<-ui : ui
+ [ui : ui]
+ (let : ui
+  [uiengine : uiengine := (uiengine-readstate)]
+  (ui-layout<-ui-uiengine
+   ui
+   uiengine))
+ :context
+ :doc "Returns a ui with a layout added to each ui.")
+
+(func ui-layout<-ui-layoutengine : ui
+ [ui           : ui
+  layoutengine : layoutengine]
+ (let : ui
+  [layoutmap  : layoutmap := (:layoutmap  layoutengine)
+   layoutelse : layout    := (:layoutelse layoutengine)]
+  (ui-layout<-ui-layoutmap-else
+   ui
+   layoutmap
+   layoutelse))
+ :doc "Returns a ui with a layout added to each ui.")
 
 (func ui-layout<-ui-layoutmap-else : ui
  [ui : ui
   layoutmap  : layoutmap
   layoutelse : layout]
  (let : ui
-  [style     : style  := (:style ui)
-   uimap     : uimap  := (:uimap ui)
-   layout    : layout := (layout<-style
-                          style)
-   layname   : string := (:name layout)
-   renderer1 : layout := (any<-map : layout
-                          layoutmap
-                          layname)
-   renderer  : layout := (if
-                          (!-empty renderer1)
-                          renderer1
-                          layoutelse)
-   uimaprend : uimap  := (uimap-layout<-uimap-layoutmap-else
-                          uimap
-                          layoutmap
-                          layoutelse)]
+  [uimap   : uimap  := (:uimap ui)
+   layout1 : layout := (layout<-ui-layoutmap-else
+                        ui
+                        layoutmap
+                        layoutelse)
+   uimap2  : uimap  := (uimap-layout<-uimap-layoutmap-else
+                        uimap
+                        layoutmap
+                        layoutelse)]
   (copy ui
-   :renderer renderer
-   :uimap  uimaprend))
- :doc "Returns a ui with a renderer added to each ui.")
+   :layout layout1
+   :uimap  uimap2))
+ :doc "Returns a ui with a layout added to each ui.")
+
+(func ui-layout<-ui-uiengine : ui
+ [ui       : ui
+  uiengine : uiengine]
+ (let : ui
+  [layoutengine : layoutengine := (:layoutengine uiengine)]
+  (ui-layout<-ui-layoutengine
+   ui
+   layoutengine))
+ :doc "Returns a ui with a layout added to each ui.")
 
 (func ui-readstate<-uid : ui
  [uid : string]
@@ -343,7 +498,7 @@
   (empty ui))
  :doc "")
 
-(func ui-render<-fn-render-ui-orig-parent : render
+(func ui-render<-fn-render-ui-orig-parent : ui
  [fn-render : ui-render<-ui-orig-parent
   ui        : ui
   orig      : ui
@@ -364,16 +519,60 @@
    orig)
   (else
    (let : ui
-    [uimap    : uimap  := (:uimap    ui)
-     renderer : layout := (:renderer ui)
-     uiout    : ui     := (ui<-renderer-ui-orig-parent
-                           renderer
-                           ui
-                           orig
-                           parent)]
+    [uimap  : uimap  := (:uimap  ui)
+     layout : layout := (:layout ui)
+     uiout  : ui     := (ui<-layout-ui-orig-parent
+                         layout
+                         ui
+                         orig
+                         parent)]
     uiout)))
  :sideeffects "Alters UI"
  :doc "Returns a rendered object from a UI Element.")
+
+(func ui-selected<-ui : ui
+ [ui : ui]
+ (let : ui
+  [uilist : uilist := (uilist-selected<-ui ui)]
+  (first<-list : ui
+   uilist))
+ :doc "Returns the ui of the first ui with selected=true")
+
+(func ui-writechild<-ui-child : ui
+ [ui    : ui
+  child : ui]
+ (let
+  [childid : string  := (:uid   child)
+   uimap   : uimap   := (:uimap ui)
+   write   : boolean := (boolean-write<-map-name-value
+                         uimap
+                         childid
+                         child)]
+  ui)
+ :doc "Returns the given ui with the child added to uimap")
+
+(func ui-writechildmap<-ui-childmap : ui
+ [ui       : ui
+  childmap : uimap]
+ (let : ui
+  [workmap : uimap := (map<-map : uimap
+                       childmap
+                       (fn : ui
+                        [key   : string
+                         value : ui]
+                        (ui-writechild<-ui-child
+                         ui
+                         value)))]
+  ui)
+ :doc "Returns the given ui with the members of childmap added to uimap")
+
+(func uid-selected<-ui : string
+ [ui : ui]
+ (let : string
+  [uidlist : stringlist := (stringlist-selected<-ui ui)]
+  (first<-list : string
+   uidlist))
+ :doc "Returns the uid of the first ui with selected=true")
 
 (func uiengine-readstate : uiengine
  (state/any-readstate<-name : uiengine
@@ -387,21 +586,43 @@
   [stylesheet       : stylesheet        := (:stylesheet       uiengine)
    ui               : ui                := (:ui               uiengine)
    layoutengine     : layoutengine      := (:layoutengine     uiengine)
-   layoutmap        : layoutmap         := (:layoutmap        layoutengine)
-   layoutelse       : layout            := (:layoutelse       layoutengine)
    stylesheetrender : stylesheet-render := (:stylesheetrender layoutengine)
    stylesheetrend   : stylesheet        := (stylesheetrender
                                             stylesheet)
-   uirenderer       : ui                := (ui-layout<-ui-layoutmap-else
+   uirenderer       : ui                := (ui-layout<-ui-layoutengine
                                             ui
-                                            layoutmap
-                                            layoutelse)
+                                            layoutengine)
    uirendered       : ui                := (ui-render
                                             uirenderer)]
   (copy uiengine
    :ui uirendered))
  :context
  :doc "Returns a fully rendered ui for a given engine.")
+
+(func uilist<-uimap : uilist
+ [uimap : uimap]
+ (list<-map : uilist
+  uimap
+  (fn : ui
+   [key  : string
+    item : ui]
+   item))
+ :doc "")
+
+(func uilist-selected<-ui : uilist
+ [uiarg : ui]
+ (let : uilist
+  [uimap  : uimap  := (:uimap uiarg)
+   uilist : uilist := (uilist<-uimap
+                       uimap)]
+  (list<-list : uilist
+   uilist
+   (fn : ui
+    [item : ui]
+    (if : ui
+     (:selected item)
+     item))))
+ :doc "Return a uilist of the ui with selected=true")
 
 (func uimap<-uilist : uimap
  [uilist : uilist]

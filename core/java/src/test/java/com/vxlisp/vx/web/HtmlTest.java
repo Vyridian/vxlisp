@@ -255,12 +255,12 @@ public final class HtmlTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/web/html", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 98, ":tests", 70, ":total", 71), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 98, ":tests", 69, ":total", 70), 
       ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 15, ":tests", 6, ":total", 39), 
       ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 39), 
       ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 39), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 8, ":tests", 6, ":total", 71), 
-      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 32)
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 8, ":tests", 6, ":total", 70), 
+      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 31)
     );
   }
 
@@ -291,7 +291,6 @@ public final class HtmlTest {
         ":stylelist", 0,
         ":stylemap", 0,
         ":stylesheet", 0,
-        ":subpropmap", 0,
         ":table", 0,
         ":tbody", 0,
         ":td", 0,

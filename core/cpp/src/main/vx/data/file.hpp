@@ -1,6 +1,7 @@
 #ifndef VX_DATA_FILE_HPP
 #define VX_DATA_FILE_HPP
 #include <string>
+#include <vector>
 #include "../../vx/core.hpp"
 #include "../../vx/data/textblock.hpp"
 
@@ -16,6 +17,10 @@ namespace vx_data_file {
   typedef Abstract_fileformat* Type_fileformat;
   extern Type_fileformat e_fileformat;
   extern Type_fileformat t_fileformat;
+  class Abstract_filelist;
+  typedef Abstract_filelist* Type_filelist;
+  extern Type_filelist e_filelist;
+  extern Type_filelist t_filelist;
   class Abstract_boolean_exists_from_file;
   typedef Abstract_boolean_exists_from_file* Func_boolean_exists_from_file;
   extern Func_boolean_exists_from_file e_boolean_exists_from_file;
@@ -165,6 +170,42 @@ namespace vx_data_file {
     virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
+  };
+
+  // (type filelist)
+  class Abstract_filelist : public virtual vx_core::Abstract_list {
+  public:
+    Abstract_filelist() {};
+    virtual ~Abstract_filelist() = 0;
+    // vx_get_any(index)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) const = 0;
+    // vx_list()
+    virtual vx_core::vx_Type_listany vx_list() const = 0;
+    // vx_new_from_list(T, List<T>)
+    virtual vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const = 0;
+    std::vector<vx_data_file::Type_file> vx_p_list;
+    // vx_listfile()
+    virtual std::vector<vx_data_file::Type_file> vx_listfile() const = 0;
+    // vx_get_file(index)
+    virtual vx_data_file::Type_file vx_get_file(vx_core::Type_int index) const = 0;
+  };
+  class Class_filelist : public virtual Abstract_filelist {
+  public:
+    Class_filelist();
+    virtual ~Class_filelist() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_int index) const override;
+    virtual vx_core::vx_Type_listany vx_list() const override;
+    virtual vx_core::Type_any vx_new_from_list(vx_core::vx_Type_listany listval) const override;
+    virtual std::vector<vx_data_file::Type_file> vx_listfile() const override;
+    virtual vx_data_file::Type_file vx_get_file(vx_core::Type_int index) const override;
   };
 
   // (func boolean-exists<-file)

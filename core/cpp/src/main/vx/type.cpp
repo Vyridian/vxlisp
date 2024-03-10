@@ -151,7 +151,13 @@ namespace vx_type {
     vx_core::vx_release_one_except(type, output);
     return output;
   }
-
+  /**
+   * @function allowtypenames_from_type
+   * Get the name of a given type
+   * @param  {any} type
+   * @return {stringlist}
+   * (func allowtypenames<-type)
+   */
   // (func allowtypenames<-type)
   // class Class_allowtypenames_from_type {
     Abstract_allowtypenames_from_type::~Abstract_allowtypenames_from_type() {}
@@ -249,7 +255,13 @@ namespace vx_type {
     vx_core::vx_release_one_except(type, output);
     return output;
   }
-
+  /**
+   * @function allowtypes_from_type
+   * Returns the allowed types from a given type
+   * @param  {any} type
+   * @return {typelist}
+   * (func allowtypes<-type)
+   */
   // (func allowtypes<-type)
   // class Class_allowtypes_from_type {
     Abstract_allowtypes_from_type::~Abstract_allowtypes_from_type() {}
@@ -334,7 +346,13 @@ namespace vx_type {
     }
 
   //}
-
+  /**
+   * @function any_from_int
+   * Generic function returns any from an int.
+   * @param  {int} val
+   * @return {any-1}
+   * (func any<-int)
+   */
   // (func any<-int)
   // class Class_any_from_int {
     Abstract_any_from_int::~Abstract_any_from_int() {}
@@ -430,7 +448,14 @@ namespace vx_type {
     vx_core::vx_release_one_except({text, ends}, output);
     return output;
   }
-
+  /**
+   * @function boolean_from_string_ends
+   * Returns true if string starts with find.
+   * @param  {string} text
+   * @param  {string} ends
+   * @return {boolean}
+   * (func boolean<-string-ends)
+   */
   // (func boolean<-string-ends)
   // class Class_boolean_from_string_ends {
     Abstract_boolean_from_string_ends::~Abstract_boolean_from_string_ends() {}
@@ -514,7 +539,14 @@ namespace vx_type {
     vx_core::vx_release_one_except({text, starts}, output);
     return output;
   }
-
+  /**
+   * @function boolean_from_string_starts
+   * Returns true if string starts with find.
+   * @param  {string} text
+   * @param  {string} starts
+   * @return {boolean}
+   * (func boolean<-string-starts)
+   */
   // (func boolean<-string-starts)
   // class Class_boolean_from_string_starts {
     Abstract_boolean_from_string_starts::~Abstract_boolean_from_string_starts() {}
@@ -597,7 +629,14 @@ namespace vx_type {
     vx_core::vx_release_one_except({text, find}, output);
     return output;
   }
-
+  /**
+   * @function int_from_string_find
+   * Returns integer position of find string in text string.
+   * @param  {string} text
+   * @param  {string} find
+   * @return {int}
+   * (func int<-string-find)
+   */
   // (func int<-string-find)
   // class Class_int_from_string_find {
     Abstract_int_from_string_find::~Abstract_int_from_string_find() {}
@@ -680,7 +719,14 @@ namespace vx_type {
     vx_core::vx_release_one_except({text, find}, output);
     return output;
   }
-
+  /**
+   * @function int_from_string_findkeyword
+   * Returns integer position of find string in text string. Note: the find terms :whitespace and :nonwhitespace have special meaning.
+   * @param  {string} text
+   * @param  {string} find
+   * @return {int}
+   * (func int<-string-findkeyword)
+   */
   // (func int<-string-findkeyword)
   // class Class_int_from_string_findkeyword {
     Abstract_int_from_string_findkeyword::~Abstract_int_from_string_findkeyword() {}
@@ -763,7 +809,14 @@ namespace vx_type {
     vx_core::vx_release_one_except({text, findlast}, output);
     return output;
   }
-
+  /**
+   * @function int_from_string_findlast
+   * Returns integer position of find string in text string.
+   * @param  {string} text
+   * @param  {string} findlast
+   * @return {int}
+   * (func int<-string-findlast)
+   */
   // (func int<-string-findlast)
   // class Class_int_from_string_findlast {
     Abstract_int_from_string_findlast::~Abstract_int_from_string_findlast() {}
@@ -849,7 +902,12 @@ namespace vx_type {
     vx_core::vx_release_one_except(value, output);
     return output;
   }
-
+  /**
+   * @function is_boolean
+   * @param  {any} value
+   * @return {boolean}
+   * (func is-boolean)
+   */
   // (func is-boolean)
   // class Class_is_boolean {
     Abstract_is_boolean::~Abstract_is_boolean() {}
@@ -946,7 +1004,12 @@ namespace vx_type {
     vx_core::vx_release_one_except(value, output);
     return output;
   }
-
+  /**
+   * @function is_decimal
+   * @param  {any} value
+   * @return {boolean}
+   * (func is-decimal)
+   */
   // (func is-decimal)
   // class Class_is_decimal {
     Abstract_is_decimal::~Abstract_is_decimal() {}
@@ -1043,7 +1106,12 @@ namespace vx_type {
     vx_core::vx_release_one_except(value, output);
     return output;
   }
-
+  /**
+   * @function is_none
+   * @param  {any} value
+   * @return {boolean}
+   * (func is-none)
+   */
   // (func is-none)
   // class Class_is_none {
     Abstract_is_none::~Abstract_is_none() {}
@@ -1140,7 +1208,12 @@ namespace vx_type {
     vx_core::vx_release_one_except(value, output);
     return output;
   }
-
+  /**
+   * @function is_string
+   * @param  {any} value
+   * @return {boolean}
+   * (func is-string)
+   */
   // (func is-string)
   // class Class_is_string {
     Abstract_is_string::~Abstract_is_string() {}
@@ -1249,7 +1322,13 @@ namespace vx_type {
     vx_core::vx_release_one_except({val, type}, output);
     return output;
   }
-
+  /**
+   * @function is_type
+   * @param  {any} val
+   * @param  {any} type
+   * @return {boolean}
+   * (func is-type)
+   */
   // (func is-type)
   // class Class_is_type {
     Abstract_is_type::~Abstract_is_type() {}
@@ -1345,7 +1424,14 @@ namespace vx_type {
     vx_core::vx_release_one_except({val, typelist}, output);
     return output;
   }
-
+  /**
+   * @function is_type_from_any_typelist
+   * Returns true if val is any type in typelist.
+   * @param  {any} val
+   * @param  {typelist} typelist
+   * @return {boolean}
+   * (func is-type<-any-typelist)
+   */
   // (func is-type<-any-typelist)
   // class Class_is_type_from_any_typelist {
     Abstract_is_type_from_any_typelist::~Abstract_is_type_from_any_typelist() {}
@@ -1429,7 +1515,13 @@ namespace vx_type {
     vx_core::vx_release_one_except(text, output);
     return output;
   }
-
+  /**
+   * @function length_from_string
+   * Returns length of a string.
+   * @param  {string} text
+   * @return {int}
+   * (func length<-string)
+   */
   // (func length<-string)
   // class Class_length_from_string {
     Abstract_length_from_string::~Abstract_length_from_string() {}
@@ -1523,7 +1615,13 @@ namespace vx_type {
     vx_core::vx_release_one_except(text, output);
     return output;
   }
-
+  /**
+   * @function string_lowercase
+   * Returns lowercase version of string
+   * @param  {string} text
+   * @return {string}
+   * (func string-lowercase)
+   */
   // (func string-lowercase)
   // class Class_string_lowercase {
     Abstract_string_lowercase::~Abstract_string_lowercase() {}
@@ -1669,7 +1767,13 @@ namespace vx_type {
     vx_core::vx_release_one_except(text, output);
     return output;
   }
-
+  /**
+   * @function string_outdent
+   * Returns a string replacing leading whitespace on all lines based on first line.
+   * @param  {string} text
+   * @return {string}
+   * (func string-outdent)
+   */
   // (func string-outdent)
   // class Class_string_outdent {
     Abstract_string_outdent::~Abstract_string_outdent() {}
@@ -1763,7 +1867,13 @@ namespace vx_type {
     vx_core::vx_release_one_except(text, output);
     return output;
   }
-
+  /**
+   * @function string_trim
+   * Trims whitespace from the front and back of text
+   * @param  {string} text
+   * @return {string}
+   * (func string-trim)
+   */
   // (func string-trim)
   // class Class_string_trim {
     Abstract_string_trim::~Abstract_string_trim() {}
@@ -1857,7 +1967,13 @@ namespace vx_type {
     vx_core::vx_release_one_except(text, output);
     return output;
   }
-
+  /**
+   * @function string_uppercase
+   * Returns uppercase version of string
+   * @param  {string} text
+   * @return {string}
+   * (func string-uppercase)
+   */
   // (func string-uppercase)
   // class Class_string_uppercase {
     Abstract_string_uppercase::~Abstract_string_uppercase() {}
@@ -1988,7 +2104,13 @@ namespace vx_type {
     vx_core::vx_release_one_except(val, output);
     return output;
   }
-
+  /**
+   * @function string_from_int
+   * Function Type converting int to string
+   * @param  {int} val
+   * @return {string}
+   * (func string<-int)
+   */
   // (func string<-int)
   // class Class_string_from_int {
     Abstract_string_from_int::~Abstract_string_from_int() {}
@@ -2082,7 +2204,14 @@ namespace vx_type {
     vx_core::vx_release_one_except({text, endpos}, output);
     return output;
   }
-
+  /**
+   * @function string_from_string_end
+   * Returns a substring between 0 end position.
+   * @param  {string} text
+   * @param  {int} endpos
+   * @return {string}
+   * (func string<-string-end)
+   */
   // (func string<-string-end)
   // class Class_string_from_string_end {
     Abstract_string_from_string_end::~Abstract_string_from_string_end() {}
@@ -2169,7 +2298,14 @@ namespace vx_type {
     vx_core::vx_release_one_except({text, startpos}, output);
     return output;
   }
-
+  /**
+   * @function string_from_string_start
+   * Returns a substring between start string end.
+   * @param  {string} text
+   * @param  {int} startpos
+   * @return {string}
+   * (func string<-string-start)
+   */
   // (func string<-string-start)
   // class Class_string_from_string_start {
     Abstract_string_from_string_start::~Abstract_string_from_string_start() {}
@@ -2253,7 +2389,15 @@ namespace vx_type {
     vx_core::vx_release_one_except({text, start, end}, output);
     return output;
   }
-
+  /**
+   * @function string_from_string_start_end
+   * Returns a substring between start and end positions.
+   * @param  {string} text
+   * @param  {int} start
+   * @param  {int} end
+   * @return {string}
+   * (func string<-string-start-end)
+   */
   // (func string<-string-start-end)
   // class Class_string_from_string_start_end {
     Abstract_string_from_string_start_end::~Abstract_string_from_string_start_end() {}
@@ -2337,7 +2481,14 @@ namespace vx_type {
     vx_core::vx_release_one_except({vals, delim}, output);
     return output;
   }
-
+  /**
+   * @function string_from_stringlist_join
+   * Returns a string by joining a stringlist by the delimiter
+   * @param  {stringlist} vals
+   * @param  {string} delim
+   * @return {string}
+   * (func string<-stringlist-join)
+   */
   // (func string<-stringlist-join)
   // class Class_string_from_stringlist_join {
     Abstract_string_from_stringlist_join::~Abstract_string_from_stringlist_join() {}
@@ -2420,7 +2571,14 @@ namespace vx_type {
     vx_core::vx_release_one_except({text, delim}, output);
     return output;
   }
-
+  /**
+   * @function stringlist_from_string_split
+   * Returns a stringlist by splitting a string by the delimiter
+   * @param  {string} text
+   * @param  {string} delim
+   * @return {stringlist}
+   * (func stringlist<-string-split)
+   */
   // (func stringlist<-string-split)
   // class Class_stringlist_from_string_split {
     Abstract_stringlist_from_string_split::~Abstract_stringlist_from_string_split() {}
@@ -2505,7 +2663,13 @@ namespace vx_type {
     vx_core::vx_release_one_except(val, output);
     return output;
   }
-
+  /**
+   * @function traitnames_from_any
+   * Get the trait names of a given type
+   * @param  {any} val
+   * @return {stringlist}
+   * (func traitnames<-any)
+   */
   // (func traitnames<-any)
   // class Class_traitnames_from_any {
     Abstract_traitnames_from_any::~Abstract_traitnames_from_any() {}
@@ -2601,7 +2765,13 @@ namespace vx_type {
     vx_core::vx_release_one_except(val, output);
     return output;
   }
-
+  /**
+   * @function traits_from_any
+   * Get the traits of a given value
+   * @param  {any} val
+   * @return {typelist}
+   * (func traits<-any)
+   */
   // (func traits<-any)
   // class Class_traits_from_any {
     Abstract_traits_from_any::~Abstract_traits_from_any() {}
@@ -2695,7 +2865,13 @@ namespace vx_type {
     vx_core::vx_release_one_except(vtypedef, output);
     return output;
   }
-
+  /**
+   * @function traits_from_typedef
+   * Get the traits of a given typedef
+   * @param  {typedef} vtypedef
+   * @return {typelist}
+   * (func traits<-typedef)
+   */
   // (func traits<-typedef)
   // class Class_traits_from_typedef {
     Abstract_traits_from_typedef::~Abstract_traits_from_typedef() {}

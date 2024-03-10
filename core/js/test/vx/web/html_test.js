@@ -26,12 +26,12 @@ export default class vx_web_html_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/web/html", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 98, ":tests", 70, ":total", 71), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 98, ":tests", 69, ":total", 70), 
       "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 15, ":tests", 6, ":total", 39), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 8, ":tests", 6, ":total", 71), 
-      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 32)
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 8, ":tests", 6, ":total", 70), 
+      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 31)
     )
   }
 
@@ -65,7 +65,6 @@ export default class vx_web_html_test {
           "stylelist", 0,
           "stylemap", 0,
           "stylesheet", 0,
-          "subpropmap", 0,
           "table", 0,
           "tbody", 0,
           "td", 0,

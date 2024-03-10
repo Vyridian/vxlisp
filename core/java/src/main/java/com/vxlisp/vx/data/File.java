@@ -2,6 +2,7 @@ package com.vxlisp.vx.data;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import com.vxlisp.vx.*;
 import java.nio.file.*;
@@ -404,6 +405,134 @@ public final class File {
 
   public static final Type_fileformat e_fileformat = new Class_fileformat();
   public static final Type_fileformat t_fileformat = new Class_fileformat();
+
+  /**
+   * type: filelist
+   * List of file
+   * (type filelist)
+   */
+  public interface Type_filelist extends Core.Type_list {
+    public File.Type_filelist vx_new(final Object... vals);
+    public File.Type_filelist vx_copy(final Object... vals);
+    public File.Type_filelist vx_empty();
+    public File.Type_filelist vx_type();
+    public List<File.Type_file> vx_listfile();
+    public File.Type_file vx_file(final Core.Type_int index);
+  }
+
+  public static class Class_filelist extends Core.Class_base implements Type_filelist {
+
+    protected List<File.Type_file> vx_p_list = Core.immutablelist(new ArrayList<File.Type_file>());
+
+    @Override
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
+
+    @Override
+    public File.Type_file vx_file(final Core.Type_int index) {
+      File.Type_file output = File.e_file;
+      Class_filelist list = this;
+      int iindex = index.vx_int();
+      List<File.Type_file> listval = list.vx_p_list;
+      if (iindex < listval.size()) {
+        output = listval.get(iindex);
+      }
+      return output;
+    }
+
+    @Override
+    public List<File.Type_file> vx_listfile() {return vx_p_list;}
+
+    @Override
+    public Core.Type_any vx_any(final Core.Type_int index) {
+      return this.vx_file(index);
+    }
+
+    @Override
+    public Type_filelist vx_new(final Object... vals) {
+      return e_filelist.vx_copy(vals);
+    }
+
+    @Override
+    public Type_filelist vx_copy(final Object... vals) {
+      Type_filelist output = this;
+      boolean ischanged = false;
+      Class_filelist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
+      List<File.Type_file> listval = new ArrayList<>(val.vx_listfile());
+      Core.Type_msg msg;
+      for (Object valsub : vals) {
+        if (valsub instanceof Core.Type_msgblock) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (valsub instanceof Core.Type_msg) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (valsub instanceof File.Type_file) {
+          ischanged = true;
+          listval.add((File.Type_file)valsub);
+        } else if (valsub instanceof File.Type_file) {
+          ischanged = true;
+          listval.add((File.Type_file)valsub);
+        } else if (valsub instanceof Type_filelist) {
+          Type_filelist multi = (Type_filelist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listfile());
+        } else if (valsub instanceof List) {
+          List<?> listunknown = (List<?>)valsub;
+          for (Object item : listunknown) {
+            if (item instanceof File.Type_file) {
+              File.Type_file valitem = (File.Type_file)item;
+              ischanged = true;
+              listval.add(valitem);
+            }
+          }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_from_error("vx/data/file/filelist", ":invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
+        } else {
+          msg = Core.vx_msg_from_error("vx/data/file/filelist", ":invalidtype", Core.vx_new_string(valsub.toString()));
+          msgblock = msgblock.vx_copy(msg);
+        }
+      }
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_filelist work = new Class_filelist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
+      }
+      return output;
+    }
+
+    @Override
+    public Type_filelist vx_empty() {return e_filelist;}
+    @Override
+    public Type_filelist vx_type() {return t_filelist;}
+
+    @Override
+    public Core.Type_typedef vx_typedef() {
+      return Core.typedef_new(
+        "vx/data/file", // pkgname
+        "filelist", // name
+        ":list", // extends
+        Core.e_typelist, // traits
+        Core.t_typelist.vx_new(File.t_file), // allowtypes
+        Core.e_typelist, // disallowtypes
+        Core.e_funclist, // allowfuncs
+        Core.e_funclist, // disallowfuncs
+        Core.e_anylist, // allowvalues
+        Core.e_anylist, // disallowvalues
+        Core.e_argmap // properties
+      );
+    }
+
+  }
+
+  public static final Type_filelist e_filelist = new Class_filelist();
+  public static final Type_filelist t_filelist = new Class_filelist();
   /**
    * @function boolean_exists_from_file
    * Returns true if file/path exists.
@@ -1359,6 +1488,7 @@ public final class File {
     Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
     maptype.put("file", File.t_file);
     maptype.put("fileformat", File.t_fileformat);
+    maptype.put("filelist", File.t_filelist);
     mapfunc.put("boolean-exists<-file", File.t_boolean_exists_from_file);
     mapfunc.put("boolean-write<-file", File.t_boolean_write_from_file);
     mapfunc.put("boolean-write<-file-any", File.t_boolean_write_from_file_any);

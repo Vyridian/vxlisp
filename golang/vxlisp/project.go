@@ -265,6 +265,11 @@ func ProjectReadFromPath(projectpath string) (*vxproject, *vxmsgblock) {
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 		}
 		if !msgblock.iserror {
+			listpackage, msgs = ListPackageSortDependencies(listpackage)
+			msgblock = MsgblockAddBlock(msgblock, msgs)
+			project.listpackage = listpackage
+		}
+		if !msgblock.iserror {
 			listpackage, msgs = ListPackageLink(listpackage)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			project.listpackage = listpackage

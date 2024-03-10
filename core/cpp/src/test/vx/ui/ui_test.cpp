@@ -24,37 +24,37 @@ namespace vx_ui_ui_test {
       vx_core::vx_new_string(":constnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(32)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(35)
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(46), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(34), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(73)
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(55), 
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(53), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(96)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(20)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(35)
       }),
       vx_core::vx_new_string(":bigospacenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(20)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(35)
       }),
       vx_core::vx_new_string(":bigotimenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(20)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(35)
       }),
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(73)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(96)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(21)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(26)
       })
     });
     return output;
@@ -67,6 +67,13 @@ namespace vx_ui_ui_test {
         vx_core::vx_new_string(":bounds"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":cursor"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":cursor-pointer"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":font"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":fontface"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":fontfacelist"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":fontfacemap"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":fontmap"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":fontstyle"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":fontstylemap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":layout"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":layoutengine"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":layoutlist"), vx_core::vx_new_int(0),
@@ -74,8 +81,6 @@ namespace vx_ui_ui_test {
         vx_core::vx_new_string(":pin"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":point"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":pointstyle"), vx_core::vx_new_int(0),
-        vx_core::vx_new_string(":render"), vx_core::vx_new_int(0),
-        vx_core::vx_new_string(":rendermap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":style"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":stylelist"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":stylemap"), vx_core::vx_new_int(0),
@@ -89,9 +94,11 @@ namespace vx_ui_ui_test {
       vx_core::vx_new_string(":constmap"), vx_core::vx_new(vx_core::t_intmap, {
         vx_core::vx_new_string(":layout-app"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":layout-background"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":layout-button"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":layout-combobox"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":layout-else"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":layout-flow-columns"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":layout-flow-item"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":layout-flow-rows"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":layout-image"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":layout-label"), vx_core::vx_new_int(0),
@@ -108,6 +115,7 @@ namespace vx_ui_ui_test {
         vx_core::vx_new_string(":layout-statusdrawer"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":layout-text"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":layout-textentry"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":layout-titlebar"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":pin-bottom"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":pin-center"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":pin-center-h"), vx_core::vx_new_int(0),
@@ -123,20 +131,35 @@ namespace vx_ui_ui_test {
       vx_core::vx_new_string(":funcmap"), vx_core::vx_new(vx_core::t_intmap, {
         vx_core::vx_new_string(":boolean-writestate<-ui"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":boolean-writestate<-uiengine"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":fontfacemap<-fontfacelist"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":layout<-style"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":layout<-ui"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":layout<-ui-layoutengine"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":layout<-ui-layoutmap-else"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":layoutengine-readstate"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":layoutmap<-layoutlist"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":stringlist-selected<-ui"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":stylemap<-stylelist"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":stylesheet-render"), vx_core::vx_new_int(0),
-        vx_core::vx_new_string(":ui-data<-ui"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":ui-child<-ui-uid"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":ui-from<-event"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":ui-layout<-ui"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":ui-layout<-ui-layoutengine"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":ui-layout<-ui-layoutmap-else"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":ui-layout<-ui-uiengine"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":ui-readstate<-uid"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":ui-render"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":ui-render<-fn-render-ui-orig-parent"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":ui-render<-ui-orig-parent"), vx_core::vx_new_int(0),
-        vx_core::vx_new_string(":ui<-renderer-ui-orig-parent"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":ui-selected<-ui"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":ui-writechild<-ui-child"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":ui-writechildmap<-ui-childmap"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":ui<-layout-ui-orig-parent"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":uid-selected<-ui"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":uiengine-readstate"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":uiengine-render"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":uilist-selected<-ui"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":uilist<-uimap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":uimap-layout<-uimap-layoutmap-else"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":uimap-render<-uimap-parent"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":uimap<-uilist"), vx_core::vx_new_int(0),

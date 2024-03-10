@@ -26,7 +26,8 @@ namespace vx_event {
         this->vx_p_from,
         this->vx_p_to,
         this->vx_p_datamap,
-        this->vx_p_event_from_event
+        this->vx_p_event_from_event,
+        this->vx_p_event_from_event_async
       });
     }
 
@@ -40,19 +41,19 @@ namespace vx_event {
     }
 
     // from()
-    vx_core::Type_any Class_event::from() const {
-      vx_core::Type_any output = this->vx_p_from;
+    vx_core::Type_string Class_event::from() const {
+      vx_core::Type_string output = this->vx_p_from;
       if (!output) {
-        output = vx_core::e_any;
+        output = vx_core::e_string;
       }
       return output;
     }
 
     // to()
-    vx_core::Type_any Class_event::to() const {
-      vx_core::Type_any output = this->vx_p_to;
+    vx_core::Type_string Class_event::to() const {
+      vx_core::Type_string output = this->vx_p_to;
       if (!output) {
-        output = vx_core::e_any;
+        output = vx_core::e_string;
       }
       return output;
     }
@@ -75,6 +76,15 @@ namespace vx_event {
       return output;
     }
 
+    // event_from_event_async()
+    vx_event::Func_event_from_event_async Class_event::event_from_event_async() const {
+      vx_event::Func_event_from_event_async output = this->vx_p_event_from_event_async;
+      if (!output) {
+        output = vx_event::e_event_from_event_async;
+      }
+      return output;
+    }
+
     // vx_get_any(key)
     vx_core::Type_any Class_event::vx_get_any(vx_core::Type_string key) const {
       vx_core::Type_any output = vx_core::e_any;
@@ -90,6 +100,8 @@ namespace vx_event {
         output = this->datamap();
       } else if (skey == ":event<-event") {
         output = this->event_from_event();
+      } else if (skey == ":event<-event-async") {
+        output = this->event_from_event_async();
       }
       vx_core::vx_release_except(key, output);
       return output;
@@ -103,6 +115,7 @@ namespace vx_event {
       output[":to"] = this->to();
       output[":datamap"] = this->datamap();
       output[":event<-event"] = this->event_from_event();
+      output[":event<-event-async"] = this->event_from_event_async();
       return output;
     }
 
@@ -120,10 +133,11 @@ namespace vx_event {
       output = val;
       vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
       vx_core::Type_string vx_p_name = val->name();
-      vx_core::Type_any vx_p_from = val->from();
-      vx_core::Type_any vx_p_to = val->to();
+      vx_core::Type_string vx_p_from = val->from();
+      vx_core::Type_string vx_p_to = val->to();
       vx_core::Type_anymap vx_p_datamap = val->datamap();
       vx_event::Func_event_from_event vx_p_event_from_event = val->event_from_event();
+      vx_event::Func_event_from_event_async vx_p_event_from_event_async = val->event_from_event_async();
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -148,6 +162,8 @@ namespace vx_event {
             key = testkey;
           } else if (testkey == ":event<-event") {
             key = testkey;
+          } else if (testkey == ":event<-event-async") {
+            key = testkey;
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new event) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -164,14 +180,22 @@ namespace vx_event {
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":from") {
-            if (vx_p_from != valsub) {
+            if (vx_p_from == valsub) {
+            } else if (valsubtype == vx_core::t_string) {
               ischanged = true;
-              vx_p_from = valsub;
+              vx_p_from = vx_core::vx_any_from_any(vx_core::t_string, valsub);
+            } else {
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new event :from " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":to") {
-            if (vx_p_to != valsub) {
+            if (vx_p_to == valsub) {
+            } else if (valsubtype == vx_core::t_string) {
               ischanged = true;
-              vx_p_to = valsub;
+              vx_p_to = vx_core::vx_any_from_any(vx_core::t_string, valsub);
+            } else {
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new event :to " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":datamap") {
             if (vx_p_datamap == valsub) {
@@ -189,6 +213,15 @@ namespace vx_event {
               vx_p_event_from_event = vx_core::vx_any_from_any(vx_event::t_event_from_event, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new event :event<-event " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              msgblock = vx_core::vx_copy(msgblock, {msg});
+            }
+          } else if (key == ":event<-event-async") {
+            if (vx_p_event_from_event_async == valsub) {
+            } else if (valsubtype == vx_event::t_event_from_event_async) {
+              ischanged = true;
+              vx_p_event_from_event_async = vx_core::vx_any_from_any(vx_event::t_event_from_event_async, valsub);
+            } else {
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new event :event<-event-async " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
@@ -235,6 +268,13 @@ namespace vx_event {
           output->vx_p_event_from_event = vx_p_event_from_event;
           vx_core::vx_reserve(vx_p_event_from_event);
         }
+        if (output->vx_p_event_from_event_async != vx_p_event_from_event_async) {
+          if (output->vx_p_event_from_event_async) {
+            vx_core::vx_release_one(output->vx_p_event_from_event_async);
+          }
+          output->vx_p_event_from_event_async = vx_p_event_from_event_async;
+          vx_core::vx_reserve(vx_p_event_from_event_async);
+        }
       }
       if (msgblock != vx_core::e_msgblock) {
         output->vx_p_msgblock = msgblock;
@@ -269,11 +309,11 @@ namespace vx_event {
           ),
           vx_core::vx_new_arg(
             "from", // name
-            vx_core::t_any // type
+            vx_core::t_string // type
           ),
           vx_core::vx_new_arg(
             "to", // name
-            vx_core::t_any // type
+            vx_core::t_string // type
           ),
           vx_core::vx_new_arg(
             "datamap", // name
@@ -282,6 +322,10 @@ namespace vx_event {
           vx_core::vx_new_arg(
             "event<-event", // name
             vx_event::t_event_from_event // type
+          ),
+          vx_core::vx_new_arg(
+            "event<-event-async", // name
+            vx_event::t_event_from_event_async // type
           )
         }) // properties
       );
@@ -644,6 +688,8 @@ namespace vx_event {
       vx_core::vx_reserve(output->vx_p_datamap);
       output->vx_p_event_from_event = val->event_from_event();
       vx_core::vx_reserve(output->vx_p_event_from_event);
+      output->vx_p_event_from_event_async = val->event_from_event_async();
+      vx_core::vx_reserve(output->vx_p_event_from_event_async);
       vx_core::vx_release(val);
       vx_core::refcount = irefcount;
       vx_core::vx_reserve_type(output);
@@ -675,6 +721,8 @@ namespace vx_event {
       vx_core::vx_reserve(output->vx_p_datamap);
       output->vx_p_event_from_event = val->event_from_event();
       vx_core::vx_reserve(output->vx_p_event_from_event);
+      output->vx_p_event_from_event_async = val->event_from_event_async();
+      vx_core::vx_reserve(output->vx_p_event_from_event_async);
       vx_core::vx_release(val);
       vx_core::refcount = irefcount;
       vx_core::vx_reserve_type(output);
@@ -706,6 +754,8 @@ namespace vx_event {
       vx_core::vx_reserve(output->vx_p_datamap);
       output->vx_p_event_from_event = val->event_from_event();
       vx_core::vx_reserve(output->vx_p_event_from_event);
+      output->vx_p_event_from_event_async = val->event_from_event_async();
+      vx_core::vx_reserve(output->vx_p_event_from_event_async);
       vx_core::vx_release(val);
       vx_core::refcount = irefcount;
       vx_core::vx_reserve_type(output);
@@ -737,6 +787,8 @@ namespace vx_event {
       vx_core::vx_reserve(output->vx_p_datamap);
       output->vx_p_event_from_event = val->event_from_event();
       vx_core::vx_reserve(output->vx_p_event_from_event);
+      output->vx_p_event_from_event_async = val->event_from_event_async();
+      vx_core::vx_reserve(output->vx_p_event_from_event_async);
       vx_core::vx_release(val);
       vx_core::refcount = irefcount;
       vx_core::vx_reserve_type(output);
@@ -744,7 +796,12 @@ namespace vx_event {
 
 
   //}
-
+  /**
+   * @function any_from_from_event
+   * @param  {event} event
+   * @return {any-1}
+   * (func any-from<-event)
+   */
   // (func any-from<-event)
   // class Class_any_from_from_event {
     Abstract_any_from_from_event::~Abstract_any_from_from_event() {}
@@ -839,7 +896,13 @@ namespace vx_event {
     vx_core::vx_release_one_except(event, output);
     return output;
   }
-
+  /**
+   * @function event_from_event
+   * Template for triggering ui events
+   * @param  {event} event
+   * @return {event}
+   * (func event<-event)
+   */
   // (func event<-event)
   // class Class_event_from_event {
     Abstract_event_from_event::~Abstract_event_from_event() {}
@@ -926,6 +989,110 @@ namespace vx_event {
 
   //}
 
+  // (func event<-event-async)
+  vx_core::vx_Type_async f_event_from_event_async(vx_core::Type_context context, vx_event::Type_event event) {
+    vx_core::vx_Type_async output = NULL;
+    vx_core::vx_reserve(event);
+    vx_core::vx_release_one(event);
+    if (!output) {
+      output = vx_core::vx_async_new_from_value(vx_event::e_event);
+    }
+    return output;
+  }
+  /**
+   * 
+   * @async
+   * @function event_from_event_async
+   * Template for triggering ui asynchronous events
+   * @param  {event} event
+   * @return {event}
+   * (func event<-event-async)
+   */
+  // (func event<-event-async)
+  // class Class_event_from_event_async {
+    Abstract_event_from_event_async::~Abstract_event_from_event_async() {}
+
+    Class_event_from_event_async::Class_event_from_event_async() : Abstract_event_from_event_async::Abstract_event_from_event_async() {
+      vx_core::refcount += 1;
+    }
+
+    Class_event_from_event_async::~Class_event_from_event_async() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_event_from_event_async::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_event::Func_event_from_event_async output = vx_event::e_event_from_event_async;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_event_from_event_async::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_event::Func_event_from_event_async output = vx_event::e_event_from_event_async;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_event_from_event_async::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/event", // pkgname
+        "event<-event-async", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_event_from_event_async::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_event_from_event_async::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/event", // pkgname
+        "event<-event-async", // name
+        0, // idx
+        true, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_event_from_event_async::vx_empty() const {return vx_event::e_event_from_event_async;}
+    vx_core::Type_any Class_event_from_event_async::vx_type() const {return vx_event::t_event_from_event_async;}
+    vx_core::Type_msgblock Class_event_from_event_async::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_event_from_event_async::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any_context_async Class_event_from_event_async::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context_async::IFn fn) const {
+      return vx_core::e_any_from_any_context_async;
+    }
+
+    vx_core::vx_Type_async Class_event_from_event_async::vx_any_from_any_context_async(vx_core::Type_any generic_any_1, vx_core::Type_context context, vx_core::Type_any val) const {
+      vx_event::Type_event inputval = vx_core::vx_any_from_any(vx_event::t_event, val);
+      vx_core::vx_Type_async output = vx_event::f_event_from_event_async(context, inputval);
+      vx_core::vx_release(val);
+      return output;
+    }
+
+    vx_core::vx_Type_async Class_event_from_event_async::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any);
+      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_event::Type_event event = vx_core::vx_any_from_any(vx_event::t_event, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_event::f_event_from_event_async(context, event);
+      vx_core::vx_release(arglist);
+      return output;
+    }
+
+  //}
+
   // (func eventmap<-eventlist)
   vx_event::Type_eventmap f_eventmap_from_eventlist(vx_event::Type_eventlist eventlist) {
     vx_event::Type_eventmap output = vx_event::e_eventmap;
@@ -943,7 +1110,13 @@ namespace vx_event {
     vx_core::vx_release_one_except(eventlist, output);
     return output;
   }
-
+  /**
+   * @function eventmap_from_eventlist
+   * Returns an eventmap from an eventlist
+   * @param  {eventlist} eventlist
+   * @return {eventmap}
+   * (func eventmap<-eventlist)
+   */
   // (func eventmap<-eventlist)
   // class Class_eventmap_from_eventlist {
     Abstract_eventmap_from_eventlist::~Abstract_eventmap_from_eventlist() {}
@@ -1043,6 +1216,8 @@ namespace vx_event {
   vx_event::Func_any_from_from_event t_any_from_from_event = NULL;
   vx_event::Func_event_from_event e_event_from_event = NULL;
   vx_event::Func_event_from_event t_event_from_event = NULL;
+  vx_event::Func_event_from_event_async e_event_from_event_async = NULL;
+  vx_event::Func_event_from_event_async t_event_from_event_async = NULL;
   vx_event::Func_eventmap_from_eventlist e_eventmap_from_eventlist = NULL;
   vx_event::Func_eventmap_from_eventlist t_eventmap_from_eventlist = NULL;
 
@@ -1075,6 +1250,10 @@ namespace vx_event {
       vx_core::vx_reserve_empty(vx_event::e_event_from_event);
       vx_event::t_event_from_event = new vx_event::Class_event_from_event();
       vx_core::vx_reserve_type(vx_event::t_event_from_event);
+      vx_event::e_event_from_event_async = new vx_event::Class_event_from_event_async();
+      vx_core::vx_reserve_empty(vx_event::e_event_from_event_async);
+      vx_event::t_event_from_event_async = new vx_event::Class_event_from_event_async();
+      vx_core::vx_reserve_type(vx_event::t_event_from_event_async);
       vx_event::e_eventmap_from_eventlist = new vx_event::Class_eventmap_from_eventlist();
       vx_core::vx_reserve_empty(vx_event::e_eventmap_from_eventlist);
       vx_event::t_eventmap_from_eventlist = new vx_event::Class_eventmap_from_eventlist();
@@ -1096,6 +1275,7 @@ namespace vx_event {
       mapconst["event-select"] = vx_event::c_event_select;
       mapfunc["any-from<-event"] = vx_event::t_any_from_from_event;
       mapfunc["event<-event"] = vx_event::t_event_from_event;
+      mapfunc["event<-event-async"] = vx_event::t_event_from_event_async;
       mapfunc["eventmap<-eventlist"] = vx_event::t_eventmap_from_eventlist;
       vx_core::vx_global_package_set("vx/event", maptype, mapconst, mapfunc);
 	   }

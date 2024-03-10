@@ -1814,7 +1814,13 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except(textblock, output);
     return output;
   }
-
+  /**
+   * @function children_from_textblock
+   * Returns the child textblocks from a given textblock.
+   * @param  {textblock} textblock
+   * @return {textblocklist}
+   * (func children<-textblock)
+   */
   // (func children<-textblock)
   // class Class_children_from_textblock {
     Abstract_children_from_textblock::~Abstract_children_from_textblock() {}
@@ -1979,7 +1985,14 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except({delim1, delim2}, output);
     return output;
   }
-
+  /**
+   * @function delim_first_from_delim_delim
+   * Returns non-empty delim with lowest, non-negative startpos found in string.
+   * @param  {delim} delim1
+   * @param  {delim} delim2
+   * @return {delim}
+   * (func delim-first<-delim-delim)
+   */
   // (func delim-first<-delim-delim)
   // class Class_delim_first_from_delim_delim {
     Abstract_delim_first_from_delim_delim::~Abstract_delim_first_from_delim_delim() {}
@@ -2105,7 +2118,14 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except({text, delimlist}, output);
     return output;
   }
-
+  /**
+   * @function delim_first_from_string_delimlist
+   * Returns delim with lowest startpos found in string.
+   * @param  {string} text
+   * @param  {delimlist} delimlist
+   * @return {delim}
+   * (func delim-first<-string-delimlist)
+   */
   // (func delim-first<-string-delimlist)
   // class Class_delim_first_from_string_delimlist {
     Abstract_delim_first_from_string_delimlist::~Abstract_delim_first_from_string_delimlist() {}
@@ -2226,7 +2246,14 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except({text, delim}, output);
     return output;
   }
-
+  /**
+   * @function delim_pos_from_string_delim
+   * Return a delim with istart updated to position of first starttext.
+   * @param  {string} text
+   * @param  {delim} delim
+   * @return {delim}
+   * (func delim-pos<-string-delim)
+   */
   // (func delim-pos<-string-delim)
   // class Class_delim_pos_from_string_delim {
     Abstract_delim_pos_from_string_delim::~Abstract_delim_pos_from_string_delim() {}
@@ -2305,7 +2332,7 @@ namespace vx_data_textblock {
   vx_data_textblock::Type_delimlist f_delimlist_pos_from_string_delimlist(vx_core::Type_string text, vx_data_textblock::Type_delimlist delimlist) {
     vx_data_textblock::Type_delimlist output = vx_data_textblock::e_delimlist;
     vx_core::vx_reserve({text, delimlist});
-    output = vx_core::f_list_from_list(
+    output = vx_core::f_list_from_list_1(
       vx_data_textblock::t_delimlist,
       delimlist,
       vx_core::t_any_from_any->vx_fn_new({text}, [text](vx_core::Type_any delim_any) {
@@ -2318,7 +2345,14 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except({text, delimlist}, output);
     return output;
   }
-
+  /**
+   * @function delimlist_pos_from_string_delimlist
+   * Returns a delimlist with each delim updated to position of first starttext.
+   * @param  {string} text
+   * @param  {delimlist} delimlist
+   * @return {delimlist}
+   * (func delimlist-pos<-string-delimlist)
+   */
   // (func delimlist-pos<-string-delimlist)
   // class Class_delimlist_pos_from_string_delimlist {
     Abstract_delimlist_pos_from_string_delimlist::~Abstract_delimlist_pos_from_string_delimlist() {}
@@ -2408,7 +2442,13 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except(delimarg, output);
     return output;
   }
-
+  /**
+   * @function is_close
+   * Return true if the given delim is a close delim.
+   * @param  {delim} delimarg
+   * @return {boolean}
+   * (func is-close)
+   */
   // (func is-close)
   // class Class_is_close {
     Abstract_is_close::~Abstract_is_close() {}
@@ -2511,7 +2551,13 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except(delimarg, output);
     return output;
   }
-
+  /**
+   * @function is_single
+   * Return true if the given delim is a single text delim.
+   * @param  {delim} delimarg
+   * @return {boolean}
+   * (func is-single)
+   */
   // (func is-single)
   // class Class_is_single {
     Abstract_is_single::~Abstract_is_single() {}
@@ -2601,7 +2647,7 @@ namespace vx_data_textblock {
   vx_core::Type_stringlist f_stringlist_from_textblocklist(vx_data_textblock::Type_textblocklist textblocklist) {
     vx_core::Type_stringlist output = vx_core::e_stringlist;
     vx_core::vx_reserve(textblocklist);
-    output = vx_core::f_list_from_list(
+    output = vx_core::f_list_from_list_1(
       vx_core::t_stringlist,
       textblocklist,
       vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any block_any) {
@@ -2613,7 +2659,13 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except(textblocklist, output);
     return output;
   }
-
+  /**
+   * @function stringlist_from_textblocklist
+   * Returns a stringlist from each (:text textblock).
+   * @param  {textblocklist} textblocklist
+   * @return {stringlist}
+   * (func stringlist<-textblocklist)
+   */
   // (func stringlist<-textblocklist)
   // class Class_stringlist_from_textblocklist {
     Abstract_stringlist_from_textblocklist::~Abstract_stringlist_from_textblocklist() {}
@@ -2707,7 +2759,13 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except(block, output);
     return output;
   }
-
+  /**
+   * @function text_from_textblock
+   * Returns the text from a given textblock.
+   * @param  {textblock} block
+   * @return {string}
+   * (func text<-textblock)
+   */
   // (func text<-textblock)
   // class Class_text_from_textblock {
     Abstract_text_from_textblock::~Abstract_text_from_textblock() {}
@@ -2861,7 +2919,15 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except({textblockarg, find, child}, output);
     return output;
   }
-
+  /**
+   * @function textblock_addchild_from_textblock_find_child
+   * Add the child to the given parent textblock.
+   * @param  {textblock} textblockarg
+   * @param  {textblock} find
+   * @param  {textblock} child
+   * @return {textblock}
+   * (func textblock-addchild<-textblock-find-child)
+   */
   // (func textblock-addchild<-textblock-find-child)
   // class Class_textblock_addchild_from_textblock_find_child {
     Abstract_textblock_addchild_from_textblock_find_child::~Abstract_textblock_addchild_from_textblock_find_child() {}
@@ -3269,7 +3335,13 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except(textblockarg, output);
     return output;
   }
-
+  /**
+   * @function textblock_delimnotfound
+   * Returns a textblock when a delim is not found.
+   * @param  {textblock} textblockarg
+   * @return {textblock}
+   * (func textblock-delimnotfound)
+   */
   // (func textblock-delimnotfound)
   // class Class_textblock_delimnotfound {
     Abstract_textblock_delimnotfound::~Abstract_textblock_delimnotfound() {}
@@ -3418,7 +3490,13 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except(textblockarg, output);
     return output;
   }
-
+  /**
+   * @function textblock_findparent_from_textblock
+   * Find a parent that accepts a child.
+   * @param  {textblock} textblockarg
+   * @return {textblock}
+   * (func textblock-findparent<-textblock)
+   */
   // (func textblock-findparent<-textblock)
   // class Class_textblock_findparent_from_textblock {
     Abstract_textblock_findparent_from_textblock::~Abstract_textblock_findparent_from_textblock() {}
@@ -3559,7 +3637,13 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except(textblockarg, output);
     return output;
   }
-
+  /**
+   * @function textblock_init
+   * Returns a textblock ready for parsing.
+   * @param  {textblock} textblockarg
+   * @return {textblock}
+   * (func textblock-init)
+   */
   // (func textblock-init)
   // class Class_textblock_init {
     Abstract_textblock_init::~Abstract_textblock_init() {}
@@ -3671,7 +3755,13 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except(textblock, output);
     return output;
   }
-
+  /**
+   * @function textblock_parse
+   * Returns a fully parsed textblock from an initialized textblock.
+   * @param  {textblock} textblock
+   * @return {textblock}
+   * (func textblock-parse)
+   */
   // (func textblock-parse)
   // class Class_textblock_parse {
     Abstract_textblock_parse::~Abstract_textblock_parse() {}
@@ -3895,7 +3985,13 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except(textblockarg, output);
     return output;
   }
-
+  /**
+   * @function textblock_parse_one
+   * Returns a textblock that has been parse a single level.
+   * @param  {textblock} textblockarg
+   * @return {textblock}
+   * (func textblock-parse-one)
+   */
   // (func textblock-parse-one)
   // class Class_textblock_parse_one {
     Abstract_textblock_parse_one::~Abstract_textblock_parse_one() {}
@@ -3998,7 +4094,14 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except({text, delim}, output);
     return output;
   }
-
+  /**
+   * @function textblock_parse_from_string_delim
+   * Returns a fully parsed textblock from a string and delim.
+   * @param  {string} text
+   * @param  {delim} delim
+   * @return {textblock}
+   * (func textblock-parse<-string-delim)
+   */
   // (func textblock-parse<-string-delim)
   // class Class_textblock_parse_from_string_delim {
     Abstract_textblock_parse_from_string_delim::~Abstract_textblock_parse_from_string_delim() {}
@@ -4128,7 +4231,15 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except({textblockarg, find, replace}, output);
     return output;
   }
-
+  /**
+   * @function textblock_replace_from_textblock_find_replace
+   * Replace the given parent textblock.
+   * @param  {textblock} textblockarg
+   * @param  {textblock} find
+   * @param  {textblock} replace
+   * @return {textblock}
+   * (func textblock-replace<-textblock-find-replace)
+   */
   // (func textblock-replace<-textblock-find-replace)
   // class Class_textblock_replace_from_textblock_find_replace {
     Abstract_textblock_replace_from_textblock_find_replace::~Abstract_textblock_replace_from_textblock_find_replace() {}
@@ -4271,7 +4382,15 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except({text, delim, offset}, output);
     return output;
   }
-
+  /**
+   * @function textblock_startleft_from_string_delim_offset
+   * Returns a textblock constructed from the text before the current delimiter start.
+   * @param  {string} text
+   * @param  {delim} delim
+   * @param  {int} offset
+   * @return {textblock}
+   * (func textblock-startleft<-string-delim-offset)
+   */
   // (func textblock-startleft<-string-delim-offset)
   // class Class_textblock_startleft_from_string_delim_offset {
     Abstract_textblock_startleft_from_string_delim_offset::~Abstract_textblock_startleft_from_string_delim_offset() {}
@@ -4478,7 +4597,15 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except({text, delimin, offset}, output);
     return output;
   }
-
+  /**
+   * @function textblock_startright_from_string_delim_offset
+   * Returns a textblock constructed from the text after the current delimiter start.
+   * @param  {string} text
+   * @param  {delim} delimin
+   * @param  {int} offset
+   * @return {textblock}
+   * (func textblock-startright<-string-delim-offset)
+   */
   // (func textblock-startright<-string-delim-offset)
   // class Class_textblock_startright_from_string_delim_offset {
     Abstract_textblock_startright_from_string_delim_offset::~Abstract_textblock_startright_from_string_delim_offset() {}
@@ -4715,7 +4842,14 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except({close, textblockarg}, output);
     return output;
   }
-
+  /**
+   * @function textblock_from_close_textblock
+   * Returns a textblock after a close delim found.
+   * @param  {delim} close
+   * @param  {textblock} textblockarg
+   * @return {textblock}
+   * (func textblock<-close-textblock)
+   */
   // (func textblock<-close-textblock)
   // class Class_textblock_from_close_textblock {
     Abstract_textblock_from_close_textblock::~Abstract_textblock_from_close_textblock() {}
@@ -4797,7 +4931,14 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except({empty, textblockarg}, output);
     return output;
   }
-
+  /**
+   * @function textblock_from_empty_textblock
+   * Returns a textblock after an empty delim found.
+   * @param  {delim} empty
+   * @param  {textblock} textblockarg
+   * @return {textblock}
+   * (func textblock<-empty-textblock)
+   */
   // (func textblock<-empty-textblock)
   // class Class_textblock_from_empty_textblock {
     Abstract_textblock_from_empty_textblock::~Abstract_textblock_from_empty_textblock() {}
@@ -5080,7 +5221,14 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except({open, textblockarg}, output);
     return output;
   }
-
+  /**
+   * @function textblock_from_open_textblock
+   * Returns a textblock after a close delim found.
+   * @param  {delim} open
+   * @param  {textblock} textblockarg
+   * @return {textblock}
+   * (func textblock<-open-textblock)
+   */
   // (func textblock<-open-textblock)
   // class Class_textblock_from_open_textblock {
     Abstract_textblock_from_open_textblock::~Abstract_textblock_from_open_textblock() {}
@@ -5352,7 +5500,14 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except({single, textblockarg}, output);
     return output;
   }
-
+  /**
+   * @function textblock_from_single_textblock
+   * Returns a textblock after a single value delim found.
+   * @param  {delim} single
+   * @param  {textblock} textblockarg
+   * @return {textblock}
+   * (func textblock<-single-textblock)
+   */
   // (func textblock<-single-textblock)
   // class Class_textblock_from_single_textblock {
     Abstract_textblock_from_single_textblock::~Abstract_textblock_from_single_textblock() {}
@@ -5447,7 +5602,14 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except({text, delim}, output);
     return output;
   }
-
+  /**
+   * @function textblock_from_string_delim
+   * Returns a textblock from a string and delim.
+   * @param  {string} text
+   * @param  {delim} delim
+   * @return {textblock}
+   * (func textblock<-string-delim)
+   */
   // (func textblock<-string-delim)
   // class Class_textblock_from_string_delim {
     Abstract_textblock_from_string_delim::~Abstract_textblock_from_string_delim() {}
@@ -5529,7 +5691,14 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except({textblock, delim}, output);
     return output;
   }
-
+  /**
+   * @function textblock_from_textblock_delim
+   * Returns a parsed textblock from an unparsed one.
+   * @param  {textblock} textblock
+   * @param  {delim} delim
+   * @return {textblock}
+   * (func textblock<-textblock-delim)
+   */
   // (func textblock<-textblock-delim)
   // class Class_textblock_from_textblock_delim {
     Abstract_textblock_from_textblock_delim::~Abstract_textblock_from_textblock_delim() {}
@@ -5638,7 +5807,14 @@ namespace vx_data_textblock {
     vx_core::vx_release_one_except({tblist, remove}, output);
     return output;
   }
-
+  /**
+   * @function textblocklist_from_textblocklist_remove
+   * Return a textblocklist with all removedelims removed.
+   * @param  {textblocklist} tblist
+   * @param  {delim} remove
+   * @return {textblocklist}
+   * (func textblocklist<-textblocklist-remove)
+   */
   // (func textblocklist<-textblocklist-remove)
   // class Class_textblocklist_from_textblocklist_remove {
     Abstract_textblocklist_from_textblocklist_remove::~Abstract_textblocklist_from_textblocklist_remove() {}

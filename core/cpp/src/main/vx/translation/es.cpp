@@ -20,7 +20,12 @@ namespace vx_translation_es {
     );
     return output;
   }
-
+  /**
+   * @function translation_es
+   * Returns translation data
+   * @return {translation}
+   * (func translation-es)
+   */
   // (func translation-es)
   // class Class_translation_es {
     Abstract_translation_es::~Abstract_translation_es() {}
@@ -107,7 +112,12 @@ namespace vx_translation_es {
     );
     return output;
   }
-
+  /**
+   * @function words
+   * Word Translation
+   * @return {stringmap}
+   * (func words)
+   */
   // (func words)
   // class Class_words {
     Abstract_words::~Abstract_words() {}

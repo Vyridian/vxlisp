@@ -526,7 +526,7 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 		}
 	}
 	if fnc.context {
-		listargtype = append(listargtype, "final Core.Type_context context")
+		listargtype = append(listargtype, "final "+LangNameTypeFromType(lang, contexttype)+" context")
 		listargname = append(listargname, "context")
 	}
 	switch NameFromFunc(fnc) {
@@ -568,7 +568,7 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 	}
 	contextarg := ""
 	if fnc.context {
-		contextarg = ", final Core.Type_context context"
+		contextarg = ", final " + LangNameTypeFromType(lang, contexttype) + " context"
 	}
 	switch NameFromFunc(fnc) {
 	case "vx/core/any<-any", "vx/core/any<-any-async",
@@ -2848,7 +2848,7 @@ func LangInterfaceFnFromFunc(lang *vxlang, fnc *vxfunc) string {
 		}
 		var args []string
 		if fnc.context {
-			args = append(args, "Core.Type_context context")
+			args = append(args, LangNameTypeFromType(lang, contexttype)+" context")
 		}
 		for _, arg := range fnc.listarg {
 			argtype := arg.vxtype
@@ -2882,7 +2882,7 @@ func LangInterfaceFromFunc(lang *vxlang, fnc *vxfunc) string {
 			listargtext = append(listargtext, "final "+returntype+" generic_any_1")
 		}
 		if fnc.context {
-			listargtext = append(listargtext, "final Core.Type_context context")
+			listargtext = append(listargtext, "final "+LangNameTypeFromType(lang, contexttype)+" context")
 		}
 		for _, arg := range fnc.listarg {
 			argtype := arg.vxtype
@@ -2907,7 +2907,7 @@ func LangInterfaceFromFunc(lang *vxlang, fnc *vxfunc) string {
 		}
 	} else {
 		if fnc.context {
-			listargtext = append(listargtext, "final Core.Type_context context")
+			listargtext = append(listargtext, "final "+LangNameTypeFromType(lang, contexttype)+" context")
 		}
 		for _, arg := range fnc.listarg {
 			argtype := arg.vxtype
@@ -3342,7 +3342,7 @@ func LangReplFromFunc(lang *vxlang, fnc *vxfunc) string {
 	}
 	if fnc.context {
 		listargname = append(listargname, "context")
-		replparam := "Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(" + StringFromInt(argidx) + ")));"
+		replparam := LangNameTypeFromType(lang, contexttype) + " context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(" + StringFromInt(argidx) + ")));"
 		replparams += "\n      " + replparam
 	}
 	for _, arg := range fnc.listarg {
@@ -3407,7 +3407,7 @@ func LangTestCase(lang *vxlang, testvalues []vxvalue, testpkg string, testname s
 		}
 		describelist := StringFromListStringJoin(desctexts, ",")
 		output = "" +
-			"\n  static Test.Type_testcase " + testcasename + "(final Core.Type_context context) {" +
+			"\n  static Test.Type_testcase " + testcasename + "(final " + LangNameTypeFromType(lang, contexttype) + " context) {" +
 			"\n    Test.Type_testcase output = Test.t_testcase.vx_new(" +
 			"\n      \":passfail\", false," +
 			"\n      \":testpkg\", \"" + testpkg + "\"," +
@@ -3580,7 +3580,7 @@ func LangTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *
 		typetexts +
 		consttexts +
 		functexts +
-		"\n  public static Test.Type_testcaselist test_cases(final Core.Type_context context) {" +
+		"\n  public static Test.Type_testcaselist test_cases(final " + LangNameTypeFromType(lang, contexttype) + " context) {" +
 		"\n    List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(" +
 		"\n      " + strings.Join(testall, ",\n      ") +
 		"\n    ));" +
@@ -3616,7 +3616,7 @@ func LangTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *
 		"\n    );" +
 		"\n  }" +
 		"\n" +
-		"\n  public static Test.Type_testpackage test_package(final Core.Type_context context) {" +
+		"\n  public static Test.Type_testpackage test_package(final " + LangNameTypeFromType(lang, contexttype) + " context) {" +
 		"\n    Test.Type_testcaselist testcaselist = test_cases(context);" +
 		"\n    Test.Type_testpackage output = Test.t_testpackage.vx_new(" +
 		"\n      \":testpkg\", \"" + pkg.name + "\", " +
@@ -3924,7 +3924,7 @@ func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix
 	imports += LangImport(lang, project, "vx/core", imports)
 	contexttext := `
   Core.Type_anylist arglist = Core.e_anylist;
-  Core.Type_context context = ` + pkgprefix + `vx.Test.f_context_test(arglist);`
+  ` + LangNameTypeFromType(lang, contexttype) + ` context = ` + pkgprefix + `vx.Test.f_context_test(arglist);`
 	if command.context == "" {
 	} else {
 		contextfunc := FuncFromProjectFuncname(project, command.context)
@@ -3952,12 +3952,12 @@ func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix
 			if contextfunc.async {
 				contexttext = `
   Core.Type_anylist arglist = Core.e_anylist;
-  CompletableFuture<Core.Type_context> asynccontext = ` + pkgpath + `.` + LangNameFFromFunc(lang, contextfunc) + `(arglist);
-  Core.Type_context context = Core.vx_sync_from_async(vx_core::t_context, asynccontext);`
+  CompletableFuture<` + LangNameTypeFromType(lang, contexttype) + `> asynccontext = ` + pkgpath + `.` + LangNameFFromFunc(lang, contextfunc) + `(arglist);
+  ` + LangNameTypeFromType(lang, contexttype) + ` context = Core.vx_sync_from_async(vx_core::t_context, asynccontext);`
 			} else {
 				contexttext = `
   Core.Type_anylist arglist = Core.e_anylist;
-  Core.Type_context context = ` + pkgpath + `.` + LangNameFFromFunc(lang, contextfunc) + `(arglist);`
+  ` + LangNameTypeFromType(lang, contexttype) + ` context = ` + pkgpath + `.` + LangNameFFromFunc(lang, contextfunc) + `(arglist);`
 			}
 		}
 	}
@@ -4151,7 +4151,7 @@ import com.vxlisp.vx.web.Html;
 
   // Blocking
   // This is the preferred way of writing testsuite (1 block per testsuite)
-  public static boolean write_testpackagelist_async(final Core.Type_context context, final Test.Type_testpackagelist testpackagelist) {
+  public static boolean write_testpackagelist_async(final ` + LangNameTypeFromType(lang, contexttype) + ` context, final Test.Type_testpackagelist testpackagelist) {
     boolean output = false;
     CompletableFuture<Test.Type_testpackagelist> async_testpackagelist = Test.f_resolve_testpackagelist(testpackagelist);
     Test.Type_testpackagelist testpackagelist_resolved = Core.vx_sync_from_async(Test.t_testpackagelist, async_testpackagelist);

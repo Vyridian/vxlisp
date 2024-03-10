@@ -1,5 +1,5 @@
 cls
-rem make cleanmain
+make cleanmain
 rem del app.exe
 make appmain
 app.exe Hello World

@@ -4,328 +4,6 @@
    (testcaselist
     (testcase
      :passfail true
-     :testpkg "vx/collection"
-     :casename "any<-for-until-loop"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         "(test
- 8
- (any<-for-until-loop
-  1
-  (fn : boolean
-   [current : int]
-   (> current 6))
-  (fn : int
-   [current : int]
-   (+ current current))))"
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected 8
-          :actual 8))))
-    (testcase
-     :passfail true
-     :testpkg "vx/collection"
-     :casename "any<-for-while-loop"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         "(test
- 8
- (any<-for-while-loop
-  1
-  (fn : boolean
-   [current : int]
-   (< current 5))
-  (fn : int
-   [current : int]
-   (+ current current))))"
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected 8
-          :actual 8))))
-    (testcase
-     :passfail true
-     :testpkg "vx/collection"
-     :casename "is-list"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         "(test-true
- (is-list (empty stringlist)))"
-        :testresult
-         (testresult
-          :code ":true"
-          :passfail true
-          :expected true
-          :actual true))))
-    (testcase
-     :passfail true
-     :testpkg "vx/collection"
-     :casename "is-map"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         "(test-true
- (is-map (empty stringmap)))"
-        :testresult
-         (testresult
-          :code ":true"
-          :passfail true
-          :expected true
-          :actual true))))
-    (testcase
-     :passfail true
-     :testpkg "vx/collection"
-     :casename "list<-for-end-loop"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         "(test
- (intlist 4 9)
- (list<-for-end-loop : intlist
-  2
-  3
-  (fn
-   [current : int]
-   (* current current))))"
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (intlist
-            4
-            9)
-          :actual
-           (intlist
-            4
-            9)))))
-    (testcase
-     :passfail true
-     :testpkg "vx/collection"
-     :casename "list<-list-end"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- (stringlist
-  "a" "b" "c")
- (list<-list-end
-  (stringlist
-   "a" "b" "c" "d")
-  3))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (stringlist
-            "a"
-            "b"
-            "c")
-          :actual
-           (stringlist
-            "a"
-            "b"
-            "c")))))
-    (testcase
-     :passfail true
-     :testpkg "vx/collection"
-     :casename "list<-list-filter"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- (stringlist
-  "a1" "b1" "c1" "d1")
- (list<-list-filter : stringlist
-  (list
-   "a" 4 "b" (list) "c" (map) "d")
-  (fn : string
-   [val : any]
-   (if
-    (then
-     (is-string val)
-     (string val "1"))))))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (stringlist
-            "a1"
-            "b1"
-            "c1"
-            "d1")
-          :actual
-           (stringlist
-            "a1"
-            "b1"
-            "c1"
-            "d1")))))
-    (testcase
-     :passfail true
-     :testpkg "vx/collection"
-     :casename "list<-list-filtertypes"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- (list
-  "a" 1 "b" "c")
- (list<-list-filtertypes : list
-  (list
-   "a" 1 "b" "c" 4.5)
-  string int))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (list
-            "a"
-            1
-            "b"
-            "c")
-          :actual
-           (list
-            "a"
-            1
-            "b"
-            "c")))))
-    (testcase
-     :passfail true
-     :testpkg "vx/collection"
-     :casename "list<-list-start"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- (stringlist
-  "b" "c" "d")
- (list<-list-start
-  (stringlist
-   "a" "b" "c" "d")
-  2))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (stringlist
-            "b"
-            "c"
-            "d")
-          :actual
-           (stringlist
-            "b"
-            "c"
-            "d")))))
-    (testcase
-     :passfail true
-     :testpkg "vx/collection"
-     :casename "list<-list-start-end"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- (stringlist
-  "b" "c")
- (list<-list-start-end
-  (stringlist
-   "a" "b" "c" "d")
-  2 3))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (stringlist
-            "b"
-            "c")
-          :actual
-           (stringlist
-            "b"
-            "c"))))))
-  :coveragedetail
-   (testcoveragedetail
-    :funcmap
-     (intmap
-      :any<-for-until-loop 1
-      :any<-for-until-loop-max 0
-      :any<-for-while-loop 1
-      :any<-for-while-loop-max 0
-      :is-list 1
-      :is-map 1
-      :list<-for-end-loop 1
-      :list<-for-while-loop 0
-      :list<-for-while-loop-max 0
-      :list<-list-end 1
-      :list<-list-filter 1
-      :list<-list-filtertypes 1
-      :list<-list-start 1
-      :list<-list-start-end 1)
-    :testpkg "vx/collection")
-  :coveragesummary
-   (testcoveragesummary
-    :bigospacenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 14)
-    :bigotimenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 14)
-    :constnums
-     (testcoveragenums
-      :pct 100
-      :tests 0
-      :total 0)
-    :docnums
-     (testcoveragenums
-      :pct 100
-      :tests 14
-      :total 14)
-    :funcnums
-     (testcoveragenums
-      :pct 71
-      :tests 10
-      :total 14)
-    :testpkg "vx/collection"
-    :totalnums
-     (testcoveragenums
-      :pct 71
-      :tests 10
-      :total 14)
-    :typenums
-     (testcoveragenums
-      :pct 100
-      :tests 0
-      :total 0))
-  :passfail true
-  :testpkg "vx/collection")
- (testpackage
-  :caselist
-   (testcaselist
-    (testcase
-     :passfail true
      :testpkg "vx/core"
      :casename "boolean"
      :describelist
@@ -1694,7 +1372,120 @@
     (testcase
      :passfail true
      :testpkg "vx/core"
+     :casename "list-join<-list"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (stringlist "a" "b" "c" "d")
+ (list-join<-list : stringlist
+  (stringlistlist
+   (stringlist "a" "b")
+   (stringlist "c" "d"))))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringlist
+            "a"
+            "b"
+            "c"
+            "d")
+          :actual
+           (stringlist
+            "a"
+            "b"
+            "c"
+            "d")))))
+    (testcase
+     :passfail true
+     :testpkg "vx/core"
+     :casename "list-join<-list_1"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (stringlist "a" "b" "c" "d")
+ (list-join<-list : stringlist
+  (stringlistlist
+   (stringlist "a" "b")
+   (stringlist "c" "d"))
+  (fn : stringlist
+   [values : stringlist]
+   values)))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringlist
+            "a"
+            "b"
+            "c"
+            "d")
+          :actual
+           (stringlist
+            "a"
+            "b"
+            "c"
+            "d")))))
+    (testcase
+     :passfail true
+     :testpkg "vx/core"
+     :casename "list<-list"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (stringlist "10" "20")
+ (list<-list : stringlist
+  (anylist "10" "20")))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringlist
+            "10"
+            "20")
+          :actual
+           (stringlist
+            "10"
+            "20")))))
+    (testcase
+     :passfail true
+     :testpkg "vx/core"
      :casename "list<-map"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (stringlist "a1" "b2")
+ (list<-map : stringlist
+  (stringmap
+   :x "a1"
+   :y "b2")))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringlist
+            "a1"
+            "b2")
+          :actual
+           (stringlist
+            "a1"
+            "b2")))))
+    (testcase
+     :passfail true
+     :testpkg "vx/core"
+     :casename "list<-map_1"
      :describelist
       (testdescribelist
        (testdescribe
@@ -1752,6 +1543,28 @@
      :passfail true
      :testpkg "vx/core"
      :casename "map<-map"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (stringmap :a "1")
+ (map<-map : stringmap
+  (anymap :a "1")))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringmap
+            :a "1")
+          :actual
+           (stringmap
+            :a "1")))))
+    (testcase
+     :passfail true
+     :testpkg "vx/core"
+     :casename "map<-map_1"
      :describelist
       (testdescribelist
        (testdescribe
@@ -2270,10 +2083,13 @@
       :length<-list 1
       :let 1
       :let-async 0
-      :list-join<-list 0
-      :list<-list 0
+      :list-join<-list 1
+      :list-join<-list_1 1
+      :list<-list 1
+      :list<-list_1 0
       :list<-list-async 0
       :list<-map 1
+      :list<-map_1 1
       :list<-map-async 0
       :list<-type 0
       :log 0
@@ -2281,6 +2097,7 @@
       :main 0
       :map<-list 1
       :map<-map 1
+      :map<-map_1 1
       :mempool-addref 0
       :mempool-release 0
       :mempool-removeref 0
@@ -2395,6 +2212,7 @@
       :statelistenermap 0
       :string 2
       :stringlist 0
+      :stringlistlist 0
       :stringmap 0
       :struct 0
       :thenelse 0
@@ -2414,12 +2232,12 @@
      (testcoveragenums
       :pct 0
       :tests 1
-      :total 162)
+      :total 166)
     :bigotimenums
      (testcoveragenums
       :pct 0
       :tests 1
-      :total 162)
+      :total 166)
     :constnums
      (testcoveragenums
       :pct 14
@@ -2428,350 +2246,26 @@
     :docnums
      (testcoveragenums
       :pct 89
-      :tests 224
-      :total 250)
+      :tests 229
+      :total 255)
     :funcnums
      (testcoveragenums
-      :pct 47
-      :tests 65
+      :pct 51
+      :tests 70
       :total 136)
     :testpkg "vx/core"
     :totalnums
      (testcoveragenums
-      :pct 32
-      :tests 72
-      :total 224)
+      :pct 34
+      :tests 77
+      :total 225)
     :typenums
      (testcoveragenums
       :pct 6
       :tests 5
-      :total 74))
+      :total 75))
   :passfail true
   :testpkg "vx/core")
- (testpackage
-  :caselist
-   (testcaselist
-    (testcase
-     :passfail true
-     :testpkg "vx/data/csv"
-     :casename "textblock-csv<-string"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- (tb/textblock
-  :text
-`"a","b"
-1,"2"`
-  :startpos 1
-  :endpos 13
-  :children
-   (tb/textblocklist
-    (tb/textblock
-     :text `"a"`
-     :startpos 1
-     :endpos 3
-     :delim
-      (copy tb/delimquote
-       :pos 0)
-     :children
-      (tb/textblocklist
-       (tb/textblock
-        :text "a"
-        :startpos 2
-        :endpos 2)))
-    (tb/textblock
-     :text ","
-     :startpos 4
-     :endpos 4
-     :delim
-      (copy tb/delimcomma
-       :pos 0))
-    (tb/textblock
-     :text `"b"`
-     :startpos 5
-     :endpos 7
-     :delim
-      (copy tb/delimquote
-       :pos 0)
-     :children
-      (tb/textblocklist
-       (tb/textblock
-        :text "b"
-        :startpos 6
-        :endpos 6)))
-    (tb/textblock
-     :text "
-"
-     :startpos 8
-     :endpos 8
-     :delim
-      (copy tb/delimline
-       :pos 0))
-    (tb/textblock
-     :text "1"
-     :startpos 9
-     :endpos 9)
-    (tb/textblock
-     :text ","
-     :startpos 10
-     :endpos 10
-     :delim
-      (copy tb/delimcomma
-       :pos 0))
-    (tb/textblock
-     :text `"2"`
-     :startpos 11
-     :endpos 13
-     :delim
-      (copy tb/delimquote
-       :pos 0)
-     :children
-      (tb/textblocklist
-       (tb/textblock
-        :text "2"
-        :startpos 12
-        :endpos 12)))))
- (textblock-csv<-string
-  `"a","b"
-1,"2"`))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (textblock
-            :text
-             `"a","b"
-1,"2"`
-            :startpos 1
-            :endpos 13
-            :children
-             (textblocklist
-              (textblock
-               :text `"a"`
-               :startpos 1
-               :endpos 3
-               :delim
-                (delim
-                 :name "delimquote"
-                 :starttext `"`
-                 :endtext `"`)
-               :children
-                (textblocklist
-                 (textblock
-                  :text "a"
-                  :startpos 2
-                  :endpos 2)))
-              (textblock
-               :text ","
-               :startpos 4
-               :endpos 4
-               :delim
-                (delim
-                 :name "delimcomma"
-                 :starttext ","))
-              (textblock
-               :text `"b"`
-               :startpos 5
-               :endpos 7
-               :delim
-                (delim
-                 :name "delimquote"
-                 :starttext `"`
-                 :endtext `"`)
-               :children
-                (textblocklist
-                 (textblock
-                  :text "b"
-                  :startpos 6
-                  :endpos 6)))
-              (textblock
-               :text
-                "
-"
-               :startpos 8
-               :endpos 8
-               :delim
-                (delim
-                 :name "delimline"
-                 :starttext
-                  "
-"))
-              (textblock
-               :text "1"
-               :startpos 9
-               :endpos 9)
-              (textblock
-               :text ","
-               :startpos 10
-               :endpos 10
-               :delim
-                (delim
-                 :name "delimcomma"
-                 :starttext ","))
-              (textblock
-               :text `"2"`
-               :startpos 11
-               :endpos 13
-               :delim
-                (delim
-                 :name "delimquote"
-                 :starttext `"`
-                 :endtext `"`)
-               :children
-                (textblocklist
-                 (textblock
-                  :text "2"
-                  :startpos 12
-                  :endpos 12)))))
-          :actual
-           (textblock
-            :text
-             `"a","b"
-1,"2"`
-            :startpos 1
-            :endpos 13
-            :children
-             (textblocklist
-              (textblock
-               :text `"a"`
-               :startpos 1
-               :endpos 3
-               :delim
-                (delim
-                 :name "delimquote"
-                 :starttext `"`
-                 :endtext `"`)
-               :children
-                (textblocklist
-                 (textblock
-                  :text "a"
-                  :startpos 2
-                  :endpos 2)))
-              (textblock
-               :text ","
-               :startpos 4
-               :endpos 4
-               :delim
-                (delim
-                 :name "delimcomma"
-                 :starttext ","))
-              (textblock
-               :text `"b"`
-               :startpos 5
-               :endpos 7
-               :delim
-                (delim
-                 :name "delimquote"
-                 :starttext `"`
-                 :endtext `"`)
-               :children
-                (textblocklist
-                 (textblock
-                  :text "b"
-                  :startpos 6
-                  :endpos 6)))
-              (textblock
-               :text
-                "
-"
-               :startpos 8
-               :endpos 8
-               :delim
-                (delim
-                 :name "delimline"
-                 :starttext
-                  "
-"))
-              (textblock
-               :text "1"
-               :startpos 9
-               :endpos 9)
-              (textblock
-               :text ","
-               :startpos 10
-               :endpos 10
-               :delim
-                (delim
-                 :name "delimcomma"
-                 :starttext ","))
-              (textblock
-               :text `"2"`
-               :startpos 11
-               :endpos 13
-               :delim
-                (delim
-                 :name "delimquote"
-                 :starttext `"`
-                 :endtext `"`)
-               :children
-                (textblocklist
-                 (textblock
-                  :text "2"
-                  :startpos 12
-                  :endpos 12))))))))))
-  :coveragedetail
-   (testcoveragedetail
-    :constmap
-     (intmap
-      :delimcsv 0)
-    :funcmap
-     (intmap
-      :csv-read<-file 0
-      :csv<-file 0
-      :csv<-string 0
-      :csv<-textblock 0
-      :csvrows<-textblock 0
-      :stringmap<-csv 0
-      :textblock-csv<-string 1)
-    :testpkg "vx/data/csv"
-    :typemap
-     (intmap
-      :csv 0
-      :csvrowmap 0
-      :csvrows 0))
-  :coveragesummary
-   (testcoveragesummary
-    :bigospacenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 7)
-    :bigotimenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 7)
-    :constnums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 1)
-    :docnums
-     (testcoveragenums
-      :pct 63
-      :tests 7
-      :total 11)
-    :funcnums
-     (testcoveragenums
-      :pct 14
-      :tests 1
-      :total 7)
-    :testpkg "vx/data/csv"
-    :totalnums
-     (testcoveragenums
-      :pct 9
-      :tests 1
-      :total 11)
-    :typenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 3))
-  :passfail true
-  :testpkg "vx/data/csv")
  (testpackage
   :coveragedetail
    (testcoveragedetail
@@ -2831,158 +2325,6 @@
   :passfail true
   :testpkg "vx/data/db")
  (testpackage
-  :caselist
-   (testcaselist
-    (testcase
-     :passfail true
-     :testpkg "vx/data/file"
-     :casename "boolean-exists<-file"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test-true
- (boolean-exists<-file
-  (file
-   :name "boolean_exists_from_file.txt"
-   :path "src/test/resources/vx")))`
-        :testresult
-         (testresult
-          :code ":true"
-          :passfail true
-          :expected true
-          :actual true))))
-    (testcase
-     :passfail true
-     :testpkg "vx/data/file"
-     :casename "boolean-write<-file-string"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test-true
- (boolean-write<-file-string
-  (file
-   :name "boolean_write_from_file_string.txt"
-   :path "src/test/resources/vx")
-  "writetext"))`
-        :testresult
-         (testresult
-          :code ":true"
-          :passfail true
-          :expected true
-          :actual true))))
-    (testcase
-     :passfail true
-     :testpkg "vx/data/file"
-     :casename "file-read<-file"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- (file
-  :name "string_read_from_file.txt"
-  :path "src/test/resources/vx"
-  :text "testdata")
- (file-read<-file
-  (file
-   :name "string_read_from_file.txt"
-   :path "src/test/resources/vx")))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (file
-            :name "string_read_from_file.txt"
-            :path "src/test/resources/vx"
-            :text "testdata")
-          :actual
-           (file
-            :name "string_read_from_file.txt"
-            :path "src/test/resources/vx"
-            :text "testdata")))))
-    (testcase
-     :passfail true
-     :testpkg "vx/data/file"
-     :casename "string-read<-file"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- "testdata"
- (string-read<-file
-  (file
-   :name "string_read_from_file.txt"
-   :path "src/test/resources/vx")))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "testdata"
-          :actual "testdata")))))
-  :coveragedetail
-   (testcoveragedetail
-    :funcmap
-     (intmap
-      :boolean-exists<-file 1
-      :boolean-write<-file 0
-      :boolean-write<-file-any 0
-      :boolean-write<-file-string 1
-      :file-read<-file 1
-      :name<-file 0
-      :path<-file 0
-      :pathcurrent<-os 0
-      :pathfull<-file 0
-      :string-read<-file 1)
-    :testpkg "vx/data/file"
-    :typemap
-     (intmap
-      :file 0
-      :fileformat 0))
-  :coveragesummary
-   (testcoveragesummary
-    :bigospacenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 10)
-    :bigotimenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 10)
-    :constnums
-     (testcoveragenums
-      :pct 100
-      :tests 0
-      :total 0)
-    :docnums
-     (testcoveragenums
-      :pct 91
-      :tests 11
-      :total 12)
-    :funcnums
-     (testcoveragenums
-      :pct 40
-      :tests 4
-      :total 10)
-    :testpkg "vx/data/file"
-    :totalnums
-     (testcoveragenums
-      :pct 33
-      :tests 4
-      :total 12)
-    :typenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 2))
-  :passfail true
-  :testpkg "vx/data/file")
- (testpackage
   :coveragedetail
    (testcoveragedetail
     :testpkg "vx/data/table"
@@ -3040,6 +2382,1573 @@
       :total 12))
   :passfail true
   :testpkg "vx/data/table")
+ (testpackage
+  :coveragedetail
+   (testcoveragedetail
+    :constmap
+     (intmap
+      :brancharrow-down 0
+      :brancharrow-up 0
+      :brancharrow-updown 0)
+    :testpkg "vx/data/tree"
+    :typemap
+     (intmap
+      :branch 0
+      :brancharrow 0
+      :branchlist 0
+      :leaf 0
+      :leaflist 0
+      :tree 0))
+  :coveragesummary
+   (testcoveragesummary
+    :bigospacenums
+     (testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :bigotimenums
+     (testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :constnums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 3)
+    :docnums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 9)
+    :funcnums
+     (testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :testpkg "vx/data/tree"
+    :totalnums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 9)
+    :typenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 6))
+  :passfail true
+  :testpkg "vx/data/tree")
+ (testpackage
+  :coveragedetail
+   (testcoveragedetail
+    :constmap
+     (intmap
+      :event-change 0
+      :event-click 0
+      :event-move 0
+      :event-select 0)
+    :funcmap
+     (intmap
+      :any-from<-event 0
+      :event<-event 0
+      :event<-event-async 0
+      :eventmap<-eventlist 0)
+    :testpkg "vx/event"
+    :typemap
+     (intmap
+      :event 0
+      :eventlist 0
+      :eventmap 0))
+  :coveragesummary
+   (testcoveragesummary
+    :bigospacenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 4)
+    :bigotimenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 4)
+    :constnums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 4)
+    :docnums
+     (testcoveragenums
+      :pct 90
+      :tests 10
+      :total 11)
+    :funcnums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 4)
+    :testpkg "vx/event"
+    :totalnums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 11)
+    :typenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 3))
+  :passfail true
+  :testpkg "vx/event")
+ (testpackage
+  :caselist
+   (testcaselist
+    (testcase
+     :passfail true
+     :testpkg "vx/sample"
+     :casename "myconst"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         "(test
+ myconst
+ myconst)"
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected 4
+          :actual 4))))
+    (testcase
+     :passfail true
+     :testpkg "vx/sample"
+     :casename "myfunc"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename "(test 5 (myfunc 1))"
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected 5
+          :actual 5)))))
+  :coveragedetail
+   (testcoveragedetail
+    :constmap
+     (intmap
+      :myconst 1)
+    :funcmap
+     (intmap
+      :main 0
+      :myfunc 1)
+    :testpkg "vx/sample"
+    :typemap
+     (intmap
+      :mytype 0))
+  :coveragesummary
+   (testcoveragesummary
+    :bigospacenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 2)
+    :bigotimenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 2)
+    :constnums
+     (testcoveragenums
+      :pct 100
+      :tests 1
+      :total 1)
+    :docnums
+     (testcoveragenums
+      :pct 50
+      :tests 2
+      :total 4)
+    :funcnums
+     (testcoveragenums
+      :pct 50
+      :tests 1
+      :total 2)
+    :testpkg "vx/sample"
+    :totalnums
+     (testcoveragenums
+      :pct 50
+      :tests 2
+      :total 4)
+    :typenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 1))
+  :passfail true
+  :testpkg "vx/sample")
+ (testpackage
+  :coveragedetail
+   (testcoveragedetail
+    :funcmap
+     (intmap
+      :any-readstate<-mapname-name 0
+      :any-readstate<-name 0
+      :boolean-writestate<-mapname-name-value 0
+      :boolean-writestate<-name-value 0
+      :boolean-writestate<-statelistener 0
+      :change 0
+      :register 0
+      :state<-context 0
+      :statelistener-readstate<-name 0
+      :statelistenermap-readstate 0
+      :value-readstate<-name 0
+      :valuemap-readstate<-mapname 0)
+    :testpkg "vx/state"
+    :typemap
+     (intmap
+      :valuemap 0))
+  :coveragesummary
+   (testcoveragesummary
+    :bigospacenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 12)
+    :bigotimenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 12)
+    :constnums
+     (testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :docnums
+     (testcoveragenums
+      :pct 84
+      :tests 11
+      :total 13)
+    :funcnums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 12)
+    :testpkg "vx/state"
+    :totalnums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 13)
+    :typenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 1))
+  :passfail true
+  :testpkg "vx/state")
+ (testpackage
+  :caselist
+   (testcaselist
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "boolean<-string-ends"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test-true
+ (boolean<-string-ends
+  "abcd"
+  "cd"))`
+        :testresult
+         (testresult
+          :code ":true"
+          :passfail true
+          :expected true
+          :actual true))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "boolean<-string-starts"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test-true
+ (boolean<-string-starts
+  "abcd"
+  "ab"))`
+        :testresult
+         (testresult
+          :code ":true"
+          :passfail true
+          :expected true
+          :actual true))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "int<-string-find"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ 3
+ (int<-string-find
+  "abcdcdg"
+  "cd"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected 3
+          :actual 3))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "int<-string-findkeyword"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ 3
+ (int<-string-findkeyword
+  "ab	cdefg"
+  ":whitespace"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected 3
+          :actual 3))
+       (testdescribe
+        :describename
+         `(test
+ 5
+ (int<-string-findkeyword
+  " 	
+ab"
+  ":nonwhitespace"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected 5
+          :actual 5))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "int<-string-findlast"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ 5
+ (int<-string-findlast
+  "abcdcdg"
+  "cd"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected 5
+          :actual 5))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "is-string"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test-true
+ (is-string ""))`
+        :testresult
+         (testresult
+          :code ":true"
+          :passfail true
+          :expected true
+          :actual true))
+       (testdescribe
+        :describename
+         `(test-true
+ (is-string "a"))`
+        :testresult
+         (testresult
+          :code ":true"
+          :passfail true
+          :expected true
+          :actual true))
+       (testdescribe
+        :describename
+         "(test-false
+ (is-string 5))"
+        :testresult
+         (testresult
+          :code ":false"
+          :passfail true
+          :expected false
+          :actual false))
+       (testdescribe
+        :describename
+         "(test-false
+ (is-string (list)))"
+        :testresult
+         (testresult
+          :code ":false"
+          :passfail true
+          :expected false
+          :actual false))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "is-type"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         "(test-true
+ (is-type false boolean))"
+        :testresult
+         (testresult
+          :code ":true"
+          :passfail true
+          :expected true
+          :actual true))
+       (testdescribe
+        :describename
+         `(test-true
+ (is-type "a" string))`
+        :testresult
+         (testresult
+          :code ":true"
+          :passfail true
+          :expected true
+          :actual true))
+       (testdescribe
+        :describename
+         "(test-true
+ (is-type 5.5 number))"
+        :testresult
+         (testresult
+          :code ":true"
+          :passfail true
+          :expected true
+          :actual true))
+       (testdescribe
+        :describename
+         "(test-true
+ (is-type 4 int))"
+        :testresult
+         (testresult
+          :code ":true"
+          :passfail true
+          :expected true
+          :actual true))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "is-type<-any-typelist"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         "(test-true
+ (is-type<-any-typelist
+  false
+  (typelist int boolean)))"
+        :testresult
+         (testresult
+          :code ":true"
+          :passfail true
+          :expected true
+          :actual true))
+       (testdescribe
+        :describename
+         `(test-true
+ (is-type<-any-typelist
+  "a"
+  (typelist number string)))`
+        :testresult
+         (testresult
+          :code ":true"
+          :passfail true
+          :expected true
+          :actual true))
+       (testdescribe
+        :describename
+         "(test-true
+ (is-type<-any-typelist
+  5.5
+  (typelist string number)))"
+        :testresult
+         (testresult
+          :code ":true"
+          :passfail true
+          :expected true
+          :actual true))
+       (testdescribe
+        :describename
+         "(test-true
+ (is-type<-any-typelist
+  4
+  (typelist string int)))"
+        :testresult
+         (testresult
+          :code ":true"
+          :passfail true
+          :expected true
+          :actual true))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "length<-string"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ 4
+ (length<-string "abcd"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected 4
+          :actual 4))
+       (testdescribe
+        :describename
+         `(test
+ 0
+ (length<-string ""))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "string-lowercase"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ "abc"
+ (string-lowercase
+  "AbC"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "abc"
+          :actual "abc"))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "string-outdent"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ "ab"
+ (string-outdent
+  "ab"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "ab"
+          :actual "ab"))
+       (testdescribe
+        :describename
+         `(test
+ "a
+b"
+ (string-outdent
+  "
+ a
+ b"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           "a
+b"
+          :actual
+           "a
+b"))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "string-trim"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ "ab"
+ (string-trim
+  " 	
+ab
+	 "))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "ab"
+          :actual "ab"))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "string-uppercase"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ "ABC"
+ (string-uppercase
+  "aBc"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "ABC"
+          :actual "ABC"))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "string<-int"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ "4"
+ (string<-int 4))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "4"
+          :actual "4"))
+       (testdescribe
+        :describename
+         `(test
+ "51"
+ (string<-int 51))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "51"
+          :actual "51"))
+       (testdescribe
+        :describename
+         `(test
+ "notanumber"
+ (string<-int notanumber))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "notanumber"
+          :actual "notanumber"))
+       (testdescribe
+        :describename
+         `(test
+ "infinity"
+ (string<-int infinity))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "infinity"
+          :actual "infinity"))
+       (testdescribe
+        :describename
+         `(test
+ "neginfinity"
+ (string<-int neginfinity))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "neginfinity"
+          :actual "neginfinity"))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "string<-string-end"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ "abc"
+ (string<-string-end
+  "abcd"
+  3))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "abc"
+          :actual "abc"))
+       (testdescribe
+        :describename
+         `(test
+ "ab"
+ (string<-string-end
+  "abcd"
+  2))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "ab"
+          :actual "ab"))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "string<-string-start"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ "abcd"
+ (string<-string-start
+  "abcd"
+  1))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "abcd"
+          :actual "abcd"))
+       (testdescribe
+        :describename
+         `(test
+ "bcd"
+ (string<-string-start
+  "abcd"
+  2))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "bcd"
+          :actual "bcd"))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "string<-string-start-end"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ "abc"
+ (string<-string-start-end
+  "abcd"
+  1
+  3))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "abc"
+          :actual "abc"))
+       (testdescribe
+        :describename
+         `(test
+ "bc"
+ (string<-string-start-end
+  "abcd"
+  2
+  3))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "bc"
+          :actual "bc"))
+       (testdescribe
+        :describename
+         `(test
+ ""
+ (string<-string-start-end
+  "abcd"
+  5
+  6))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true))
+       (testdescribe
+        :describename
+         `(test
+ "bcd"
+ (string<-string-start-end
+  "abcd"
+  2
+  5))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "bcd"
+          :actual "bcd"))
+       (testdescribe
+        :describename
+         `(test
+ "bc"
+ (string<-string-start-end
+  "abcd"
+  2
+  -1))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "bc"
+          :actual "bc"))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "string<-stringlist-join"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ "a$b$c"
+ (string<-stringlist-join
+  (stringlist "a" "b" "c")
+  "$"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "a$b$c"
+          :actual "a$b$c"))))
+    (testcase
+     :passfail true
+     :testpkg "vx/type"
+     :casename "stringlist<-string-split"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (stringlist "a" "b" "c")
+ (stringlist<-string-split
+  "a$b$c"
+  "$"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringlist
+            "a"
+            "b"
+            "c")
+          :actual
+           (stringlist
+            "a"
+            "b"
+            "c"))))))
+  :coveragedetail
+   (testcoveragedetail
+    :funcmap
+     (intmap
+      :allowtypenames<-type 0
+      :allowtypes<-type 0
+      :any<-int 0
+      :boolean<-string-ends 1
+      :boolean<-string-starts 1
+      :int<-string-find 1
+      :int<-string-findkeyword 2
+      :int<-string-findlast 1
+      :is-boolean 0
+      :is-decimal 0
+      :is-none 0
+      :is-string 4
+      :is-type 4
+      :is-type<-any-typelist 4
+      :length<-string 2
+      :string-lowercase 1
+      :string-outdent 2
+      :string-trim 1
+      :string-uppercase 1
+      :string<-int 5
+      :string<-string-end 2
+      :string<-string-start 2
+      :string<-string-start-end 5
+      :string<-stringlist-join 1
+      :stringlist<-string-split 1
+      :traitnames<-any 0
+      :traits<-any 0
+      :traits<-typedef 0)
+    :testpkg "vx/type")
+  :coveragesummary
+   (testcoveragesummary
+    :bigospacenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 28)
+    :bigotimenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 28)
+    :constnums
+     (testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :docnums
+     (testcoveragenums
+      :pct 82
+      :tests 23
+      :total 28)
+    :funcnums
+     (testcoveragenums
+      :pct 67
+      :tests 19
+      :total 28)
+    :testpkg "vx/type"
+    :totalnums
+     (testcoveragenums
+      :pct 67
+      :tests 19
+      :total 28)
+    :typenums
+     (testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0))
+  :passfail true
+  :testpkg "vx/type")
+ (testpackage
+  :caselist
+   (testcaselist
+    (testcase
+     :passfail true
+     :testpkg "vx/web/html"
+     :casename "string<-body-indent"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ "<body></body>"
+ (string<-body-indent (body) 0))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "<body></body>"
+          :actual "<body></body>"))
+       (testdescribe
+        :describename
+         `(test
+ "<body>
+  <div></div>
+</body>"
+ (string<-body-indent (body (div)) 0))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           "<body>
+  <div></div>
+</body>"
+          :actual
+           "<body>
+  <div></div>
+</body>"))))
+    (testcase
+     :passfail true
+     :testpkg "vx/web/html"
+     :casename "string<-div-indent"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ "<div></div>"
+ (string<-div-indent (div) 0))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "<div></div>"
+          :actual "<div></div>"))
+       (testdescribe
+        :describename
+         `(test
+ "<div id=\"myid\"></div>"
+ (string<-div-indent
+  (div :id "myid") 0))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected `<div id="myid"></div>`
+          :actual `<div id="myid"></div>`))))
+    (testcase
+     :passfail true
+     :testpkg "vx/web/html"
+     :casename "string<-head-indent"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ "<head></head>"
+ (string<-head-indent (head) 0))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "<head></head>"
+          :actual "<head></head>"))))
+    (testcase
+     :passfail true
+     :testpkg "vx/web/html"
+     :casename "string<-html"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ "<!DOCTYPE html>
+<html>
+  <head></head>
+  <body></body>
+  <footer></footer>
+</html>"
+ (string<-html
+  (html :head (head) :body (body))))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           "<!DOCTYPE html>
+<html>
+  <head></head>
+  <body></body>
+  <footer></footer>
+</html>"
+          :actual
+           "<!DOCTYPE html>
+<html>
+  <head></head>
+  <body></body>
+  <footer></footer>
+</html>"))))
+    (testcase
+     :passfail true
+     :testpkg "vx/web/html"
+     :casename "string<-meta-indent"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ "<meta charset=\"utf-8\" />"
+ (string<-meta-indent (meta :charset "utf-8") 0))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected `<meta charset="utf-8" />`
+          :actual `<meta charset="utf-8" />`))))
+    (testcase
+     :passfail true
+     :testpkg "vx/web/html"
+     :casename "string<-p-indent"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ "<p>data</p>"
+ (string<-p-indent
+  (p :text "data")
+  0))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "<p>data</p>"
+          :actual "<p>data</p>"))
+       (testdescribe
+        :describename
+         `(test
+ "<p id=\"myid\">data</p>"
+ (string<-p-indent
+  (p :id "myid" :text "data")
+  0))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected `<p id="myid">data</p>`
+          :actual `<p id="myid">data</p>`)))))
+  :coveragedetail
+   (testcoveragedetail
+    :funcmap
+     (intmap
+      :htmlstring<-string 0
+      :string-indent 0
+      :string<-body-indent 2
+      :string<-details-indent 0
+      :string<-div-indent 2
+      :string<-footer-indent 0
+      :string<-h1-indent 0
+      :string<-h2-indent 0
+      :string<-h3-indent 0
+      :string<-head-indent 1
+      :string<-html 1
+      :string<-indent 0
+      :string<-meta-indent 1
+      :string<-node-indent 0
+      :string<-nodelist-indent 0
+      :string<-nodelist-tag-prop-indent 0
+      :string<-p-indent 2
+      :string<-propname-val 0
+      :string<-propstyle 0
+      :string<-propstyle-stylelist 0
+      :string<-propstylelist 0
+      :string<-propstyleunique 0
+      :string<-style-indent 0
+      :string<-stylelist-indent 0
+      :string<-stylepropmap-indent 0
+      :string<-stylesheet-indent 0
+      :string<-table-indent 0
+      :string<-tbody-indent 0
+      :string<-td-indent 0
+      :string<-thead-indent 0
+      :string<-title-indent 0
+      :string<-tr-indent 0
+      :string<-uri 0
+      :style<-stylesheet-name 0
+      :stylemap<-stylelist 0
+      :stylemap<-stylesheet 0
+      :styles<-stylesheet 0
+      :stylesheet-loadmap 0
+      :uri<-string 0)
+    :testpkg "vx/web/html"
+    :typemap
+     (intmap
+      :body 0
+      :details 0
+      :div 0
+      :divchild 0
+      :divchildlist 0
+      :divlist 0
+      :footer 0
+      :h1 0
+      :h2 0
+      :h3 0
+      :head 0
+      :headchild 0
+      :headchildlist 0
+      :html 0
+      :meta 0
+      :node 0
+      :nodelist 0
+      :p 0
+      :propmap 0
+      :style 0
+      :stylelist 0
+      :stylemap 0
+      :stylesheet 0
+      :table 0
+      :tbody 0
+      :td 0
+      :tdlist 0
+      :thead 0
+      :title 0
+      :tr 0
+      :trlist 0))
+  :coveragesummary
+   (testcoveragesummary
+    :bigospacenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 39)
+    :bigotimenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 39)
+    :constnums
+     (testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :docnums
+     (testcoveragenums
+      :pct 98
+      :tests 69
+      :total 70)
+    :funcnums
+     (testcoveragenums
+      :pct 15
+      :tests 6
+      :total 39)
+    :testpkg "vx/web/html"
+    :totalnums
+     (testcoveragenums
+      :pct 8
+      :tests 6
+      :total 70)
+    :typenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 31))
+  :passfail true
+  :testpkg "vx/web/html")
+ (testpackage
+  :caselist
+   (testcaselist
+    (testcase
+     :passfail true
+     :testpkg "vx/collection"
+     :casename "any<-for-until-loop"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         "(test
+ 8
+ (any<-for-until-loop
+  1
+  (fn : boolean
+   [current : int]
+   (> current 6))
+  (fn : int
+   [current : int]
+   (+ current current))))"
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected 8
+          :actual 8))))
+    (testcase
+     :passfail true
+     :testpkg "vx/collection"
+     :casename "any<-for-while-loop"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         "(test
+ 8
+ (any<-for-while-loop
+  1
+  (fn : boolean
+   [current : int]
+   (< current 5))
+  (fn : int
+   [current : int]
+   (+ current current))))"
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected 8
+          :actual 8))))
+    (testcase
+     :passfail true
+     :testpkg "vx/collection"
+     :casename "is-list"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         "(test-true
+ (is-list (empty stringlist)))"
+        :testresult
+         (testresult
+          :code ":true"
+          :passfail true
+          :expected true
+          :actual true))))
+    (testcase
+     :passfail true
+     :testpkg "vx/collection"
+     :casename "is-map"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         "(test-true
+ (is-map (empty stringmap)))"
+        :testresult
+         (testresult
+          :code ":true"
+          :passfail true
+          :expected true
+          :actual true))))
+    (testcase
+     :passfail true
+     :testpkg "vx/collection"
+     :casename "list<-for-end-loop"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         "(test
+ (intlist 4 9)
+ (list<-for-end-loop : intlist
+  2
+  3
+  (fn
+   [current : int]
+   (* current current))))"
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (intlist
+            4
+            9)
+          :actual
+           (intlist
+            4
+            9)))))
+    (testcase
+     :passfail true
+     :testpkg "vx/collection"
+     :casename "list<-list-end"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (stringlist
+  "a" "b" "c")
+ (list<-list-end
+  (stringlist
+   "a" "b" "c" "d")
+  3))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringlist
+            "a"
+            "b"
+            "c")
+          :actual
+           (stringlist
+            "a"
+            "b"
+            "c")))))
+    (testcase
+     :passfail true
+     :testpkg "vx/collection"
+     :casename "list<-list-filter"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (stringlist
+  "a1" "b1" "c1" "d1")
+ (list<-list-filter : stringlist
+  (list
+   "a" 4 "b" (list) "c" (map) "d")
+  (fn : string
+   [val : any]
+   (if
+    (then
+     (is-string val)
+     (string val "1"))))))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringlist
+            "a1"
+            "b1"
+            "c1"
+            "d1")
+          :actual
+           (stringlist
+            "a1"
+            "b1"
+            "c1"
+            "d1")))))
+    (testcase
+     :passfail true
+     :testpkg "vx/collection"
+     :casename "list<-list-filtertypes"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (list
+  "a" 1 "b" "c")
+ (list<-list-filtertypes : list
+  (list
+   "a" 1 "b" "c" 4.5)
+  string int))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (list
+            "a"
+            1
+            "b"
+            "c")
+          :actual
+           (list
+            "a"
+            1
+            "b"
+            "c")))))
+    (testcase
+     :passfail true
+     :testpkg "vx/collection"
+     :casename "list<-list-start"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (stringlist
+  "b" "c" "d")
+ (list<-list-start
+  (stringlist
+   "a" "b" "c" "d")
+  2))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringlist
+            "b"
+            "c"
+            "d")
+          :actual
+           (stringlist
+            "b"
+            "c"
+            "d")))))
+    (testcase
+     :passfail true
+     :testpkg "vx/collection"
+     :casename "list<-list-start-end"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (stringlist
+  "b" "c")
+ (list<-list-start-end
+  (stringlist
+   "a" "b" "c" "d")
+  2 3))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringlist
+            "b"
+            "c")
+          :actual
+           (stringlist
+            "b"
+            "c"))))))
+  :coveragedetail
+   (testcoveragedetail
+    :funcmap
+     (intmap
+      :any<-for-until-loop 1
+      :any<-for-until-loop-max 0
+      :any<-for-while-loop 1
+      :any<-for-while-loop-max 0
+      :is-list 1
+      :is-map 1
+      :list<-for-end-loop 1
+      :list<-for-while-loop 0
+      :list<-for-while-loop-max 0
+      :list<-list-end 1
+      :list<-list-filter 1
+      :list<-list-filtertypes 1
+      :list<-list-start 1
+      :list<-list-start-end 1)
+    :testpkg "vx/collection")
+  :coveragesummary
+   (testcoveragesummary
+    :bigospacenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 14)
+    :bigotimenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 14)
+    :constnums
+     (testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :docnums
+     (testcoveragenums
+      :pct 100
+      :tests 14
+      :total 14)
+    :funcnums
+     (testcoveragenums
+      :pct 71
+      :tests 10
+      :total 14)
+    :testpkg "vx/collection"
+    :totalnums
+     (testcoveragenums
+      :pct 71
+      :tests 10
+      :total 14)
+    :typenums
+     (testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0))
+  :passfail true
+  :testpkg "vx/collection")
  (testpackage
   :caselist
    (testcaselist
@@ -12444,34 +13353,1155 @@
   :passfail true
   :testpkg "vx/data/textblock")
  (testpackage
+  :caselist
+   (testcaselist
+    (testcase
+     :passfail true
+     :testpkg "vx/repl"
+     :casename "any<-macro"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ 5
+ (any<-macro : int
+  "(+ "
+  (- 7 5)
+  " 3)"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected 5
+          :actual 5))))
+    (testcase
+     :passfail true
+     :testpkg "vx/repl"
+     :casename "any<-repl"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ "HelloWorld"
+ (any<-repl
+  (repl
+   :type string
+   :repllist
+    (repllist
+     (repl :val "Hello")
+     (repl :val "World")
+    ))))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "HelloWorld"
+          :actual "HelloWorld"))
+       (testdescribe
+        :describename
+         "(test
+ 5
+ (any<-repl
+  (repl
+   :type +
+   :repllist
+    (repllist
+     (repl :val 2)
+     (repl :val 3)))))"
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected 5
+          :actual 5))))
+    (testcase
+     :passfail true
+     :testpkg "vx/repl"
+     :casename "any<-script"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ 5
+ (any<-script
+  "(+ 2 3)"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected 5
+          :actual 5))))
+    (testcase
+     :passfail true
+     :testpkg "vx/repl"
+     :casename "const<-string"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ infinity
+ (const<-string
+  "infinity"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected infinity
+          :actual infinity))
+       (testdescribe
+        :describename
+         `(test
+ tb/delimcomma
+ (const<-string
+  "vx/data/textblock/delimcomma"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected vx/data/textblock/delimcomma
+          :actual vx/data/textblock/delimcomma))))
+    (testcase
+     :passfail true
+     :testpkg "vx/repl"
+     :casename "repl-empty<-textblock-argmap"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (repl :val 2)
+ (repl-empty<-textblock-argmap
+  (tb/textblock
+   :text "2")
+  (empty argmap)))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :val 2)
+          :actual
+           (repl
+            :val 2)))
+       (testdescribe
+        :describename
+         `(test
+ (repl :type +)
+ (repl-empty<-textblock-argmap
+  (tb/textblock
+   :text "+")
+  (empty argmap)))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :type vx/core/+)
+          :actual
+           (repl
+            :type vx/core/+)))
+       (testdescribe
+        :describename
+         `(test
+ (repl :val 2)
+ (repl-empty<-textblock-argmap
+  (tb/textblock
+   :text "1"
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "2")))
+  (empty argmap)))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :val 2)
+          :actual
+           (repl
+            :val 2)))
+       (testdescribe
+        :describename
+         `(test
+ (repl
+  (msg<-error "Empty delim cannot have more than one child."))
+ (repl-empty<-textblock-argmap
+  (tb/textblock
+   :text "1"
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "2")
+     (tb/textblock
+      :text "3")))
+  (empty argmap)))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :severity 2
+                :text "Empty delim cannot have more than one child."))))
+          :actual
+           (repl
+            (msgblock
+             :msgs
+              (msglist
+               (msg
+                :severity 2
+                :text "Empty delim cannot have more than one child."))))))))
+    (testcase
+     :passfail true
+     :testpkg "vx/repl"
+     :casename "repl-paren<-textblock-argmap"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (repl
+  :type vx/core/+
+  :repllist
+   (repllist
+    (repl
+     :val 2)
+    (repl
+     :val 3)))
+ (repl-paren<-textblock-argmap
+  (tb/textblock
+   :text "(+ 2 3)"
+   :delim
+    (copy delimvxlispparen
+     :delimlist
+      (empty delimlist))
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "+")
+     (tb/textblock
+      :text " "
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text "2")
+     (tb/textblock
+      :text " "
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text "3")))
+  (empty argmap)))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :type vx/core/+
+            :repllist
+             (repllist
+              (repl
+               :val 2)
+              (repl
+               :val 3)))
+          :actual
+           (repl
+            :type vx/core/+
+            :repllist
+             (repllist
+              (repl
+               :val 2)
+              (repl
+               :val 3)))))))
+    (testcase
+     :passfail true
+     :testpkg "vx/repl"
+     :casename "repl<-macro"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (repl
+  :type vx/core/+
+  :repllist
+   (repllist
+    (repl
+     :val 2)
+    (repl
+     :val 3)))
+ (repl<-macro
+  "(+ "
+  (- 7 5)
+  " 3)"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :type vx/core/+
+            :repllist
+             (repllist
+              (repl
+               :val 2)
+              (repl
+               :val 3)))
+          :actual
+           (repl
+            :type vx/core/+
+            :repllist
+             (repllist
+              (repl
+               :val 2)
+              (repl
+               :val 3)))))))
+    (testcase
+     :passfail true
+     :testpkg "vx/repl"
+     :casename "repl<-script"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (repl
+  :val 2)
+ (repl<-script
+  "2"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :val 2)
+          :actual
+           (repl
+            :val 2)))
+       (testdescribe
+        :describename
+         `(test
+ (repl
+  :val infinity)
+ (repl<-script
+  "infinity"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :val infinity)
+          :actual
+           (repl
+            :val infinity)))
+       (testdescribe
+        :describename
+         `(test
+ (repl
+  :type +)
+ (repl<-script
+  "+"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :type vx/core/+)
+          :actual
+           (repl
+            :type vx/core/+)))
+       (testdescribe
+        :describename
+         `(test
+ (repl
+  :type +
+  :repllist
+   (repllist
+    (repl
+     :val 2)
+    (repl
+     :val 3)))
+ (repl<-script
+  "(+ 2 3)"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :type vx/core/+
+            :repllist
+             (repllist
+              (repl
+               :val 2)
+              (repl
+               :val 3)))
+          :actual
+           (repl
+            :type vx/core/+
+            :repllist
+             (repllist
+              (repl
+               :val 2)
+              (repl
+               :val 3)))))))
+    (testcase
+     :passfail true
+     :testpkg "vx/repl"
+     :casename "repl<-string-argmap"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (repl :val "Hello")
+ (repl<-string-argmap
+  `"Hello"`
+  (empty argmap)))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :val "Hello")
+          :actual
+           (repl
+            :val "Hello")))
+       (testdescribe
+        :describename
+         `(test
+ (repl
+  :val 2)
+ (repl<-string-argmap
+  "2"
+  (empty argmap)))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :val 2)
+          :actual
+           (repl
+            :val 2)))
+       (testdescribe
+        :describename
+         `(test
+ (repl :val 2.3)
+ (repl<-string-argmap
+  "2.3"
+  (empty argmap)))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :val 2.3)
+          :actual
+           (repl
+            :val 2.3)))
+       (testdescribe
+        :describename
+         `(test
+ (repl
+  :val infinity)
+ (repl<-string-argmap
+  "infinity"
+  (empty argmap)))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :val infinity)
+          :actual
+           (repl
+            :val infinity)))
+       (testdescribe
+        :describename
+         `(test
+ (repl
+  :val tb/delimcomma)
+ (repl<-string-argmap
+  "vx/data/textblock/delimcomma"
+  (empty argmap)))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :val vx/data/textblock/delimcomma)
+          :actual
+           (repl
+            :val vx/data/textblock/delimcomma)))
+       (testdescribe
+        :describename
+         `(test
+ (repl :type string)
+ (repl<-string-argmap
+  "string"
+  (empty argmap)))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :type vx/core/string)
+          :actual
+           (repl
+            :type vx/core/string)))
+       (testdescribe
+        :describename
+         `(test
+ (repl :type +)
+ (repl<-string-argmap
+  "+"
+  (empty argmap)))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :type vx/core/+)
+          :actual
+           (repl
+            :type vx/core/+)))))
+    (testcase
+     :passfail true
+     :testpkg "vx/repl"
+     :casename "repl<-textblock"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (repl :val 2)
+ (repl<-textblock
+  (tb/textblock
+   :text "2")))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :val 2)
+          :actual
+           (repl
+            :val 2)))
+       (testdescribe
+        :describename
+         `(test
+ (repl :type +)
+ (repl<-textblock
+  (tb/textblock
+   :text "+")))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :type vx/core/+)
+          :actual
+           (repl
+            :type vx/core/+)))
+       (testdescribe
+        :describename
+         `(test
+ (repl :type +)
+ (repl<-textblock
+  (tb/textblock
+   :text "+")))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :type vx/core/+)
+          :actual
+           (repl
+            :type vx/core/+)))
+       (testdescribe
+        :describename
+         `(test
+ (repl
+  :type +
+  :repllist
+   (repllist
+    (repl :val 2)
+    (repl :val 3)))
+ (repl<-textblock
+  (tb/textblock
+   :text "(+ 2 3)"
+   :delim
+    (copy delimvxlispparen
+     :delimlist
+      (empty delimlist))
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "+")
+     (tb/textblock
+      :text " "
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text "2")
+     (tb/textblock
+      :text " "
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text "3")))))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :type vx/core/+
+            :repllist
+             (repllist
+              (repl
+               :val 2)
+              (repl
+               :val 3)))
+          :actual
+           (repl
+            :type vx/core/+
+            :repllist
+             (repllist
+              (repl
+               :val 2)
+              (repl
+               :val 3)))))
+       (testdescribe
+        :describename
+         `(test
+ (repl
+  :type +
+  :repllist
+   (repllist
+    (repl :val 2)
+    (repl :val 3)))
+ (repl<-textblock
+  (tb/textblock
+   :text "(+ 2 3)"
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "(+ 2 3)"
+      :delim
+       (copy delimvxlispparen
+        :delimlist
+         (empty delimlist))
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text "+")
+        (tb/textblock
+         :text " "
+         :delim
+          (copy tb/delimwhitespace
+           :pos 0))
+        (tb/textblock
+         :text "2")
+        (tb/textblock
+         :text " "
+         :delim
+          (copy tb/delimwhitespace
+           :pos 0))
+        (tb/textblock
+         :text "3")))))))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :type vx/core/+
+            :repllist
+             (repllist
+              (repl
+               :val 2)
+              (repl
+               :val 3)))
+          :actual
+           (repl
+            :type vx/core/+
+            :repllist
+             (repllist
+              (repl
+               :val 2)
+              (repl
+               :val 3)))))))
+    (testcase
+     :passfail true
+     :testpkg "vx/repl"
+     :casename "repl<-textblock-argmap"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (repl :val 2)
+ (repl<-textblock-argmap
+  (tb/textblock
+   :text "2")
+  (empty argmap)))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :val 2)
+          :actual
+           (repl
+            :val 2)))
+       (testdescribe
+        :describename
+         `(test
+ (repl :type +)
+ (repl<-textblock-argmap
+  (tb/textblock
+   :text "+")
+  (empty argmap)))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :type vx/core/+)
+          :actual
+           (repl
+            :type vx/core/+)))
+       (testdescribe
+        :describename
+         `(test
+ (repl
+  :type +
+  :repllist
+   (repllist
+    (repl :val 2)
+    (repl :val 3)))
+ (repl<-textblock-argmap
+  (tb/textblock
+   :text "(+ 2 3)"
+   :delim
+    (copy delimvxlispparen
+     :delimlist
+      (empty delimlist))
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "+")
+     (tb/textblock
+      :text " "
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text "2")
+     (tb/textblock
+      :text " "
+      :delim
+       (copy tb/delimwhitespace
+        :pos 0))
+     (tb/textblock
+      :text "3")))
+  (empty argmap)))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :type vx/core/+
+            :repllist
+             (repllist
+              (repl
+               :val 2)
+              (repl
+               :val 3)))
+          :actual
+           (repl
+            :type vx/core/+
+            :repllist
+             (repllist
+              (repl
+               :val 2)
+              (repl
+               :val 3)))))
+       (testdescribe
+        :describename
+         `(test
+ (repl
+  :type +
+  :repllist
+   (repllist
+    (repl :val 2)
+    (repl :val 3)))
+ (repl<-textblock-argmap
+  (tb/textblock
+   :text "(+ 2 3)"
+   :children
+    (tb/textblocklist
+     (tb/textblock
+      :text "(+ 2 3)"
+      :delim
+       (copy delimvxlispparen
+        :delimlist
+         (empty delimlist))
+      :children
+       (tb/textblocklist
+        (tb/textblock
+         :text "+")
+        (tb/textblock
+         :text " "
+         :delim
+          (copy tb/delimwhitespace
+           :pos 0))
+        (tb/textblock
+         :text "2")
+        (tb/textblock
+         :text " "
+         :delim
+          (copy tb/delimwhitespace
+           :pos 0))
+        (tb/textblock
+         :text "3")))))
+  (empty argmap)))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (repl
+            :type vx/core/+
+            :repllist
+             (repllist
+              (repl
+               :val 2)
+              (repl
+               :val 3)))
+          :actual
+           (repl
+            :type vx/core/+
+            :repllist
+             (repllist
+              (repl
+               :val 2)
+              (repl
+               :val 3)))))))
+    (testcase
+     :passfail true
+     :testpkg "vx/repl"
+     :casename "textblock<-script"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (tb/textblock
+  :text "infinity"
+  :startpos 1
+  :endpos 8
+  :children
+   (tb/textblocklist
+    (tb/textblock
+    :text "infinity"
+    :startpos 1
+    :endpos 8
+    :delim
+     (delim
+      :name "delimvxlisp"))))
+ (textblock<-script
+  "infinity"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (textblock
+            :text "infinity"
+            :startpos 1
+            :endpos 8
+            :children
+             (textblocklist
+              (textblock
+               :text "infinity"
+               :startpos 1
+               :endpos 8
+               :delim
+                (delim
+                 :name "delimvxlisp"))))
+          :actual
+           (textblock
+            :text "infinity"
+            :startpos 1
+            :endpos 8
+            :children
+             (textblocklist
+              (textblock
+               :text "infinity"
+               :startpos 1
+               :endpos 8
+               :delim
+                (delim
+                 :name "delimvxlisp"))))))
+       (testdescribe
+        :describename
+         `(test
+ (tb/textblock
+  :text "(+ 2 3)"
+  :startpos 1
+  :endpos 7
+  :children
+   (tb/textblocklist
+    (tb/textblock
+     :text "(+ 2 3)"
+     :startpos 1
+     :endpos 7
+     :delim
+      (copy delimvxlispparen
+       :delimlist
+        (empty delimlist))
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text "+"
+        :startpos 2
+        :endpos 2)
+       (tb/textblock
+        :text " "
+        :startpos 3
+        :endpos 3
+        :delim
+         (copy tb/delimwhitespace
+          :pos 0))
+       (tb/textblock
+        :text "2"
+        :startpos 4
+        :endpos 4)
+       (tb/textblock
+        :text " "
+        :startpos 5
+        :endpos 5
+        :delim
+         (copy tb/delimwhitespace
+          :pos 0))
+       (tb/textblock
+        :text "3"
+        :startpos 6
+        :endpos 6)))))
+ (textblock<-script
+  "(+ 2 3)"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (textblock
+            :text "(+ 2 3)"
+            :startpos 1
+            :endpos 7
+            :children
+             (textblocklist
+              (textblock
+               :text "(+ 2 3)"
+               :startpos 1
+               :endpos 7
+               :delim
+                (delim
+                 :name "delimvxlispparen"
+                 :starttext "("
+                 :endtext ")")
+               :children
+                (textblocklist
+                 (textblock
+                  :text "+"
+                  :startpos 2
+                  :endpos 2)
+                 (textblock
+                  :text " "
+                  :startpos 3
+                  :endpos 3
+                  :delim
+                   (delim
+                    :name "delimwhitespace"
+                    :starttext ":whitespace"))
+                 (textblock
+                  :text "2"
+                  :startpos 4
+                  :endpos 4)
+                 (textblock
+                  :text " "
+                  :startpos 5
+                  :endpos 5
+                  :delim
+                   (delim
+                    :name "delimwhitespace"
+                    :starttext ":whitespace"))
+                 (textblock
+                  :text "3"
+                  :startpos 6
+                  :endpos 6)))))
+          :actual
+           (textblock
+            :text "(+ 2 3)"
+            :startpos 1
+            :endpos 7
+            :children
+             (textblocklist
+              (textblock
+               :text "(+ 2 3)"
+               :startpos 1
+               :endpos 7
+               :delim
+                (delim
+                 :name "delimvxlispparen"
+                 :starttext "("
+                 :endtext ")")
+               :children
+                (textblocklist
+                 (textblock
+                  :text "+"
+                  :startpos 2
+                  :endpos 2)
+                 (textblock
+                  :text " "
+                  :startpos 3
+                  :endpos 3
+                  :delim
+                   (delim
+                    :name "delimwhitespace"
+                    :starttext ":whitespace"))
+                 (textblock
+                  :text "2"
+                  :startpos 4
+                  :endpos 4)
+                 (textblock
+                  :text " "
+                  :startpos 5
+                  :endpos 5
+                  :delim
+                   (delim
+                    :name "delimwhitespace"
+                    :starttext ":whitespace"))
+                 (textblock
+                  :text "3"
+                  :startpos 6
+                  :endpos 6)))))))))
+    (testcase
+     :passfail true
+     :testpkg "vx/repl"
+     :casename "typefunc<-string"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ string
+ (typefunc<-string
+  "string"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected vx/core/string
+          :actual vx/core/string))
+       (testdescribe
+        :describename
+         `(test
+ +
+ (typefunc<-string
+  "+"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected vx/core/+
+          :actual vx/core/+)))))
   :coveragedetail
    (testcoveragedetail
     :constmap
      (intmap
-      :brancharrow-down 0
-      :brancharrow-up 0
-      :brancharrow-updown 0)
-    :testpkg "vx/data/tree"
+      :delimvxlisp 0
+      :delimvxlispbracket 0
+      :delimvxlispparen 0)
+    :funcmap
+     (intmap
+      :any-repl<-functype-args 0
+      :any<-liblist-string 0
+      :any<-macro 1
+      :any<-repl 2
+      :any<-script 1
+      :anylist<-repllist 0
+      :argmap<-textblock-argmap 0
+      :const<-string 2
+      :repl-bracket<-textblock-argmap 0
+      :repl-empty<-textblock-argmap 4
+      :repl-paren<-textblock-argmap 1
+      :repl<-liblist-string 0
+      :repl<-macro 1
+      :repl<-script 4
+      :repl<-string-argmap 7
+      :repl<-textblock 5
+      :repl<-textblock-argmap 4
+      :replarglist<-replarglist-textblock-argmap 0
+      :repllist<-textblocklist-argmap 0
+      :textblock<-script 2
+      :typefunc<-string 2)
+    :testpkg "vx/repl"
     :typemap
      (intmap
-      :branch 0
-      :brancharrow 0
-      :branchlist 0
-      :leaf 0
-      :leaflist 0
-      :tree 0))
+      :liblist 0
+      :repl 0
+      :replarglist 0
+      :repllist 0))
   :coveragesummary
    (testcoveragesummary
     :bigospacenums
      (testcoveragenums
-      :pct 100
+      :pct 0
       :tests 0
-      :total 0)
+      :total 21)
     :bigotimenums
      (testcoveragenums
-      :pct 100
+      :pct 0
       :tests 0
-      :total 0)
+      :total 21)
     :constnums
      (testcoveragenums
       :pct 0
@@ -12479,27 +14509,180 @@
       :total 3)
     :docnums
      (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 9)
+      :pct 100
+      :tests 28
+      :total 28)
     :funcnums
      (testcoveragenums
-      :pct 100
-      :tests 0
-      :total 0)
-    :testpkg "vx/data/tree"
+      :pct 61
+      :tests 13
+      :total 21)
+    :testpkg "vx/repl"
     :totalnums
      (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 9)
+      :pct 46
+      :tests 13
+      :total 28)
     :typenums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 6))
+      :total 4))
   :passfail true
-  :testpkg "vx/data/tree")
+  :testpkg "vx/repl")
+ (testpackage
+  :caselist
+   (testcaselist
+    (testcase
+     :passfail true
+     :testpkg "vx/data/file"
+     :casename "boolean-exists<-file"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test-true
+ (boolean-exists<-file
+  (file
+   :name "boolean_exists_from_file.txt"
+   :path "src/test/resources/vx")))`
+        :testresult
+         (testresult
+          :code ":true"
+          :passfail true
+          :expected true
+          :actual true))))
+    (testcase
+     :passfail true
+     :testpkg "vx/data/file"
+     :casename "boolean-write<-file-string"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test-true
+ (boolean-write<-file-string
+  (file
+   :name "boolean_write_from_file_string.txt"
+   :path "src/test/resources/vx")
+  "writetext"))`
+        :testresult
+         (testresult
+          :code ":true"
+          :passfail true
+          :expected true
+          :actual true))))
+    (testcase
+     :passfail true
+     :testpkg "vx/data/file"
+     :casename "file-read<-file"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (file
+  :name "string_read_from_file.txt"
+  :path "src/test/resources/vx"
+  :text "testdata")
+ (file-read<-file
+  (file
+   :name "string_read_from_file.txt"
+   :path "src/test/resources/vx")))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (file
+            :name "string_read_from_file.txt"
+            :path "src/test/resources/vx"
+            :text "testdata")
+          :actual
+           (file
+            :name "string_read_from_file.txt"
+            :path "src/test/resources/vx"
+            :text "testdata")))))
+    (testcase
+     :passfail true
+     :testpkg "vx/data/file"
+     :casename "string-read<-file"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ "testdata"
+ (string-read<-file
+  (file
+   :name "string_read_from_file.txt"
+   :path "src/test/resources/vx")))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "testdata"
+          :actual "testdata")))))
+  :coveragedetail
+   (testcoveragedetail
+    :funcmap
+     (intmap
+      :boolean-exists<-file 1
+      :boolean-write<-file 0
+      :boolean-write<-file-any 0
+      :boolean-write<-file-string 1
+      :file-read<-file 1
+      :name<-file 0
+      :path<-file 0
+      :pathcurrent<-os 0
+      :pathfull<-file 0
+      :string-read<-file 1)
+    :testpkg "vx/data/file"
+    :typemap
+     (intmap
+      :file 0
+      :fileformat 0
+      :filelist 0))
+  :coveragesummary
+   (testcoveragesummary
+    :bigospacenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 10)
+    :bigotimenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 10)
+    :constnums
+     (testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :docnums
+     (testcoveragenums
+      :pct 92
+      :tests 12
+      :total 13)
+    :funcnums
+     (testcoveragenums
+      :pct 40
+      :tests 4
+      :total 10)
+    :testpkg "vx/data/file"
+    :totalnums
+     (testcoveragenums
+      :pct 30
+      :tests 4
+      :total 13)
+    :typenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 3))
+  :passfail true
+  :testpkg "vx/data/file")
  (testpackage
   :caselist
    (testcaselist
@@ -14483,1392 +16666,6 @@
   :passfail true
   :testpkg "vx/data/xml")
  (testpackage
-  :coveragedetail
-   (testcoveragedetail
-    :constmap
-     (intmap
-      :event-change 0
-      :event-click 0
-      :event-move 0
-      :event-select 0)
-    :funcmap
-     (intmap
-      :any-from<-event 0
-      :event<-event 0
-      :eventmap<-eventlist 0)
-    :testpkg "vx/event"
-    :typemap
-     (intmap
-      :event 0
-      :eventlist 0
-      :eventmap 0))
-  :coveragesummary
-   (testcoveragesummary
-    :bigospacenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 3)
-    :bigotimenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 3)
-    :constnums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 4)
-    :docnums
-     (testcoveragenums
-      :pct 90
-      :tests 9
-      :total 10)
-    :funcnums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 3)
-    :testpkg "vx/event"
-    :totalnums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 10)
-    :typenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 3))
-  :passfail true
-  :testpkg "vx/event")
- (testpackage
-  :caselist
-   (testcaselist
-    (testcase
-     :passfail true
-     :testpkg "vx/repl"
-     :casename "any<-macro"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- 5
- (any<-macro : int
-  "(+ "
-  (- 7 5)
-  " 3)"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected 5
-          :actual 5))))
-    (testcase
-     :passfail true
-     :testpkg "vx/repl"
-     :casename "any<-repl"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- "HelloWorld"
- (any<-repl
-  (repl
-   :type string
-   :repllist
-    (repllist
-     (repl :val "Hello")
-     (repl :val "World")
-    ))))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "HelloWorld"
-          :actual "HelloWorld"))
-       (testdescribe
-        :describename
-         "(test
- 5
- (any<-repl
-  (repl
-   :type +
-   :repllist
-    (repllist
-     (repl :val 2)
-     (repl :val 3)))))"
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected 5
-          :actual 5))))
-    (testcase
-     :passfail true
-     :testpkg "vx/repl"
-     :casename "any<-script"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- 5
- (any<-script
-  "(+ 2 3)"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected 5
-          :actual 5))))
-    (testcase
-     :passfail true
-     :testpkg "vx/repl"
-     :casename "const<-string"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- infinity
- (const<-string
-  "infinity"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected infinity
-          :actual infinity))
-       (testdescribe
-        :describename
-         `(test
- tb/delimcomma
- (const<-string
-  "vx/data/textblock/delimcomma"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected vx/data/textblock/delimcomma
-          :actual vx/data/textblock/delimcomma))))
-    (testcase
-     :passfail true
-     :testpkg "vx/repl"
-     :casename "repl-empty<-textblock-argmap"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- (repl :val 2)
- (repl-empty<-textblock-argmap
-  (tb/textblock
-   :text "2")
-  (empty argmap)))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :val 2)
-          :actual
-           (repl
-            :val 2)))
-       (testdescribe
-        :describename
-         `(test
- (repl :type +)
- (repl-empty<-textblock-argmap
-  (tb/textblock
-   :text "+")
-  (empty argmap)))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :type vx/core/+)
-          :actual
-           (repl
-            :type vx/core/+)))
-       (testdescribe
-        :describename
-         `(test
- (repl :val 2)
- (repl-empty<-textblock-argmap
-  (tb/textblock
-   :text "1"
-   :children
-    (tb/textblocklist
-     (tb/textblock
-      :text "2")))
-  (empty argmap)))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :val 2)
-          :actual
-           (repl
-            :val 2)))
-       (testdescribe
-        :describename
-         `(test
- (repl
-  (msg<-error "Empty delim cannot have more than one child."))
- (repl-empty<-textblock-argmap
-  (tb/textblock
-   :text "1"
-   :children
-    (tb/textblocklist
-     (tb/textblock
-      :text "2")
-     (tb/textblock
-      :text "3")))
-  (empty argmap)))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            (msgblock
-             :msgs
-              (msglist
-               (msg
-                :severity 2
-                :text "Empty delim cannot have more than one child."))))
-          :actual
-           (repl
-            (msgblock
-             :msgs
-              (msglist
-               (msg
-                :severity 2
-                :text "Empty delim cannot have more than one child."))))))))
-    (testcase
-     :passfail true
-     :testpkg "vx/repl"
-     :casename "repl-paren<-textblock-argmap"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- (repl
-  :type vx/core/+
-  :repllist
-   (repllist
-    (repl
-     :val 2)
-    (repl
-     :val 3)))
- (repl-paren<-textblock-argmap
-  (tb/textblock
-   :text "(+ 2 3)"
-   :delim
-    (copy delimvxlispparen
-     :delimlist
-      (empty delimlist))
-   :children
-    (tb/textblocklist
-     (tb/textblock
-      :text "+")
-     (tb/textblock
-      :text " "
-      :delim
-       (copy tb/delimwhitespace
-        :pos 0))
-     (tb/textblock
-      :text "2")
-     (tb/textblock
-      :text " "
-      :delim
-       (copy tb/delimwhitespace
-        :pos 0))
-     (tb/textblock
-      :text "3")))
-  (empty argmap)))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :type vx/core/+
-            :repllist
-             (repllist
-              (repl
-               :val 2)
-              (repl
-               :val 3)))
-          :actual
-           (repl
-            :type vx/core/+
-            :repllist
-             (repllist
-              (repl
-               :val 2)
-              (repl
-               :val 3)))))))
-    (testcase
-     :passfail true
-     :testpkg "vx/repl"
-     :casename "repl<-macro"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- (repl
-  :type vx/core/+
-  :repllist
-   (repllist
-    (repl
-     :val 2)
-    (repl
-     :val 3)))
- (repl<-macro
-  "(+ "
-  (- 7 5)
-  " 3)"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :type vx/core/+
-            :repllist
-             (repllist
-              (repl
-               :val 2)
-              (repl
-               :val 3)))
-          :actual
-           (repl
-            :type vx/core/+
-            :repllist
-             (repllist
-              (repl
-               :val 2)
-              (repl
-               :val 3)))))))
-    (testcase
-     :passfail true
-     :testpkg "vx/repl"
-     :casename "repl<-script"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- (repl
-  :val 2)
- (repl<-script
-  "2"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :val 2)
-          :actual
-           (repl
-            :val 2)))
-       (testdescribe
-        :describename
-         `(test
- (repl
-  :val infinity)
- (repl<-script
-  "infinity"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :val infinity)
-          :actual
-           (repl
-            :val infinity)))
-       (testdescribe
-        :describename
-         `(test
- (repl
-  :type +)
- (repl<-script
-  "+"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :type vx/core/+)
-          :actual
-           (repl
-            :type vx/core/+)))
-       (testdescribe
-        :describename
-         `(test
- (repl
-  :type +
-  :repllist
-   (repllist
-    (repl
-     :val 2)
-    (repl
-     :val 3)))
- (repl<-script
-  "(+ 2 3)"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :type vx/core/+
-            :repllist
-             (repllist
-              (repl
-               :val 2)
-              (repl
-               :val 3)))
-          :actual
-           (repl
-            :type vx/core/+
-            :repllist
-             (repllist
-              (repl
-               :val 2)
-              (repl
-               :val 3)))))))
-    (testcase
-     :passfail true
-     :testpkg "vx/repl"
-     :casename "repl<-string-argmap"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- (repl :val "Hello")
- (repl<-string-argmap
-  `"Hello"`
-  (empty argmap)))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :val "Hello")
-          :actual
-           (repl
-            :val "Hello")))
-       (testdescribe
-        :describename
-         `(test
- (repl
-  :val 2)
- (repl<-string-argmap
-  "2"
-  (empty argmap)))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :val 2)
-          :actual
-           (repl
-            :val 2)))
-       (testdescribe
-        :describename
-         `(test
- (repl :val 2.3)
- (repl<-string-argmap
-  "2.3"
-  (empty argmap)))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :val 2.3)
-          :actual
-           (repl
-            :val 2.3)))
-       (testdescribe
-        :describename
-         `(test
- (repl
-  :val infinity)
- (repl<-string-argmap
-  "infinity"
-  (empty argmap)))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :val infinity)
-          :actual
-           (repl
-            :val infinity)))
-       (testdescribe
-        :describename
-         `(test
- (repl
-  :val tb/delimcomma)
- (repl<-string-argmap
-  "vx/data/textblock/delimcomma"
-  (empty argmap)))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :val vx/data/textblock/delimcomma)
-          :actual
-           (repl
-            :val vx/data/textblock/delimcomma)))
-       (testdescribe
-        :describename
-         `(test
- (repl :type string)
- (repl<-string-argmap
-  "string"
-  (empty argmap)))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :type vx/core/string)
-          :actual
-           (repl
-            :type vx/core/string)))
-       (testdescribe
-        :describename
-         `(test
- (repl :type +)
- (repl<-string-argmap
-  "+"
-  (empty argmap)))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :type vx/core/+)
-          :actual
-           (repl
-            :type vx/core/+)))))
-    (testcase
-     :passfail true
-     :testpkg "vx/repl"
-     :casename "repl<-textblock"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- (repl :val 2)
- (repl<-textblock
-  (tb/textblock
-   :text "2")))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :val 2)
-          :actual
-           (repl
-            :val 2)))
-       (testdescribe
-        :describename
-         `(test
- (repl :type +)
- (repl<-textblock
-  (tb/textblock
-   :text "+")))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :type vx/core/+)
-          :actual
-           (repl
-            :type vx/core/+)))
-       (testdescribe
-        :describename
-         `(test
- (repl :type +)
- (repl<-textblock
-  (tb/textblock
-   :text "+")))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :type vx/core/+)
-          :actual
-           (repl
-            :type vx/core/+)))
-       (testdescribe
-        :describename
-         `(test
- (repl
-  :type +
-  :repllist
-   (repllist
-    (repl :val 2)
-    (repl :val 3)))
- (repl<-textblock
-  (tb/textblock
-   :text "(+ 2 3)"
-   :delim
-    (copy delimvxlispparen
-     :delimlist
-      (empty delimlist))
-   :children
-    (tb/textblocklist
-     (tb/textblock
-      :text "+")
-     (tb/textblock
-      :text " "
-      :delim
-       (copy tb/delimwhitespace
-        :pos 0))
-     (tb/textblock
-      :text "2")
-     (tb/textblock
-      :text " "
-      :delim
-       (copy tb/delimwhitespace
-        :pos 0))
-     (tb/textblock
-      :text "3")))))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :type vx/core/+
-            :repllist
-             (repllist
-              (repl
-               :val 2)
-              (repl
-               :val 3)))
-          :actual
-           (repl
-            :type vx/core/+
-            :repllist
-             (repllist
-              (repl
-               :val 2)
-              (repl
-               :val 3)))))
-       (testdescribe
-        :describename
-         `(test
- (repl
-  :type +
-  :repllist
-   (repllist
-    (repl :val 2)
-    (repl :val 3)))
- (repl<-textblock
-  (tb/textblock
-   :text "(+ 2 3)"
-   :children
-    (tb/textblocklist
-     (tb/textblock
-      :text "(+ 2 3)"
-      :delim
-       (copy delimvxlispparen
-        :delimlist
-         (empty delimlist))
-      :children
-       (tb/textblocklist
-        (tb/textblock
-         :text "+")
-        (tb/textblock
-         :text " "
-         :delim
-          (copy tb/delimwhitespace
-           :pos 0))
-        (tb/textblock
-         :text "2")
-        (tb/textblock
-         :text " "
-         :delim
-          (copy tb/delimwhitespace
-           :pos 0))
-        (tb/textblock
-         :text "3")))))))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :type vx/core/+
-            :repllist
-             (repllist
-              (repl
-               :val 2)
-              (repl
-               :val 3)))
-          :actual
-           (repl
-            :type vx/core/+
-            :repllist
-             (repllist
-              (repl
-               :val 2)
-              (repl
-               :val 3)))))))
-    (testcase
-     :passfail true
-     :testpkg "vx/repl"
-     :casename "repl<-textblock-argmap"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- (repl :val 2)
- (repl<-textblock-argmap
-  (tb/textblock
-   :text "2")
-  (empty argmap)))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :val 2)
-          :actual
-           (repl
-            :val 2)))
-       (testdescribe
-        :describename
-         `(test
- (repl :type +)
- (repl<-textblock-argmap
-  (tb/textblock
-   :text "+")
-  (empty argmap)))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :type vx/core/+)
-          :actual
-           (repl
-            :type vx/core/+)))
-       (testdescribe
-        :describename
-         `(test
- (repl
-  :type +
-  :repllist
-   (repllist
-    (repl :val 2)
-    (repl :val 3)))
- (repl<-textblock-argmap
-  (tb/textblock
-   :text "(+ 2 3)"
-   :delim
-    (copy delimvxlispparen
-     :delimlist
-      (empty delimlist))
-   :children
-    (tb/textblocklist
-     (tb/textblock
-      :text "+")
-     (tb/textblock
-      :text " "
-      :delim
-       (copy tb/delimwhitespace
-        :pos 0))
-     (tb/textblock
-      :text "2")
-     (tb/textblock
-      :text " "
-      :delim
-       (copy tb/delimwhitespace
-        :pos 0))
-     (tb/textblock
-      :text "3")))
-  (empty argmap)))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :type vx/core/+
-            :repllist
-             (repllist
-              (repl
-               :val 2)
-              (repl
-               :val 3)))
-          :actual
-           (repl
-            :type vx/core/+
-            :repllist
-             (repllist
-              (repl
-               :val 2)
-              (repl
-               :val 3)))))
-       (testdescribe
-        :describename
-         `(test
- (repl
-  :type +
-  :repllist
-   (repllist
-    (repl :val 2)
-    (repl :val 3)))
- (repl<-textblock-argmap
-  (tb/textblock
-   :text "(+ 2 3)"
-   :children
-    (tb/textblocklist
-     (tb/textblock
-      :text "(+ 2 3)"
-      :delim
-       (copy delimvxlispparen
-        :delimlist
-         (empty delimlist))
-      :children
-       (tb/textblocklist
-        (tb/textblock
-         :text "+")
-        (tb/textblock
-         :text " "
-         :delim
-          (copy tb/delimwhitespace
-           :pos 0))
-        (tb/textblock
-         :text "2")
-        (tb/textblock
-         :text " "
-         :delim
-          (copy tb/delimwhitespace
-           :pos 0))
-        (tb/textblock
-         :text "3")))))
-  (empty argmap)))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            :type vx/core/+
-            :repllist
-             (repllist
-              (repl
-               :val 2)
-              (repl
-               :val 3)))
-          :actual
-           (repl
-            :type vx/core/+
-            :repllist
-             (repllist
-              (repl
-               :val 2)
-              (repl
-               :val 3)))))))
-    (testcase
-     :passfail true
-     :testpkg "vx/repl"
-     :casename "textblock<-script"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- (tb/textblock
-  :text "infinity"
-  :startpos 1
-  :endpos 8
-  :children
-   (tb/textblocklist
-    (tb/textblock
-    :text "infinity"
-    :startpos 1
-    :endpos 8
-    :delim
-     (delim
-      :name "delimvxlisp"))))
- (textblock<-script
-  "infinity"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (textblock
-            :text "infinity"
-            :startpos 1
-            :endpos 8
-            :children
-             (textblocklist
-              (textblock
-               :text "infinity"
-               :startpos 1
-               :endpos 8
-               :delim
-                (delim
-                 :name "delimvxlisp"))))
-          :actual
-           (textblock
-            :text "infinity"
-            :startpos 1
-            :endpos 8
-            :children
-             (textblocklist
-              (textblock
-               :text "infinity"
-               :startpos 1
-               :endpos 8
-               :delim
-                (delim
-                 :name "delimvxlisp"))))))
-       (testdescribe
-        :describename
-         `(test
- (tb/textblock
-  :text "(+ 2 3)"
-  :startpos 1
-  :endpos 7
-  :children
-   (tb/textblocklist
-    (tb/textblock
-     :text "(+ 2 3)"
-     :startpos 1
-     :endpos 7
-     :delim
-      (copy delimvxlispparen
-       :delimlist
-        (empty delimlist))
-     :children
-      (tb/textblocklist
-       (tb/textblock
-        :text "+"
-        :startpos 2
-        :endpos 2)
-       (tb/textblock
-        :text " "
-        :startpos 3
-        :endpos 3
-        :delim
-         (copy tb/delimwhitespace
-          :pos 0))
-       (tb/textblock
-        :text "2"
-        :startpos 4
-        :endpos 4)
-       (tb/textblock
-        :text " "
-        :startpos 5
-        :endpos 5
-        :delim
-         (copy tb/delimwhitespace
-          :pos 0))
-       (tb/textblock
-        :text "3"
-        :startpos 6
-        :endpos 6)))))
- (textblock<-script
-  "(+ 2 3)"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (textblock
-            :text "(+ 2 3)"
-            :startpos 1
-            :endpos 7
-            :children
-             (textblocklist
-              (textblock
-               :text "(+ 2 3)"
-               :startpos 1
-               :endpos 7
-               :delim
-                (delim
-                 :name "delimvxlispparen"
-                 :starttext "("
-                 :endtext ")")
-               :children
-                (textblocklist
-                 (textblock
-                  :text "+"
-                  :startpos 2
-                  :endpos 2)
-                 (textblock
-                  :text " "
-                  :startpos 3
-                  :endpos 3
-                  :delim
-                   (delim
-                    :name "delimwhitespace"
-                    :starttext ":whitespace"))
-                 (textblock
-                  :text "2"
-                  :startpos 4
-                  :endpos 4)
-                 (textblock
-                  :text " "
-                  :startpos 5
-                  :endpos 5
-                  :delim
-                   (delim
-                    :name "delimwhitespace"
-                    :starttext ":whitespace"))
-                 (textblock
-                  :text "3"
-                  :startpos 6
-                  :endpos 6)))))
-          :actual
-           (textblock
-            :text "(+ 2 3)"
-            :startpos 1
-            :endpos 7
-            :children
-             (textblocklist
-              (textblock
-               :text "(+ 2 3)"
-               :startpos 1
-               :endpos 7
-               :delim
-                (delim
-                 :name "delimvxlispparen"
-                 :starttext "("
-                 :endtext ")")
-               :children
-                (textblocklist
-                 (textblock
-                  :text "+"
-                  :startpos 2
-                  :endpos 2)
-                 (textblock
-                  :text " "
-                  :startpos 3
-                  :endpos 3
-                  :delim
-                   (delim
-                    :name "delimwhitespace"
-                    :starttext ":whitespace"))
-                 (textblock
-                  :text "2"
-                  :startpos 4
-                  :endpos 4)
-                 (textblock
-                  :text " "
-                  :startpos 5
-                  :endpos 5
-                  :delim
-                   (delim
-                    :name "delimwhitespace"
-                    :starttext ":whitespace"))
-                 (textblock
-                  :text "3"
-                  :startpos 6
-                  :endpos 6)))))))))
-    (testcase
-     :passfail true
-     :testpkg "vx/repl"
-     :casename "typefunc<-string"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- string
- (typefunc<-string
-  "string"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected vx/core/string
-          :actual vx/core/string))
-       (testdescribe
-        :describename
-         `(test
- +
- (typefunc<-string
-  "+"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected vx/core/+
-          :actual vx/core/+)))))
-  :coveragedetail
-   (testcoveragedetail
-    :constmap
-     (intmap
-      :delimvxlisp 0
-      :delimvxlispbracket 0
-      :delimvxlispparen 0)
-    :funcmap
-     (intmap
-      :any-repl<-functype-args 0
-      :any<-liblist-string 0
-      :any<-macro 1
-      :any<-repl 2
-      :any<-script 1
-      :anylist<-repllist 0
-      :argmap<-textblock-argmap 0
-      :const<-string 2
-      :repl-bracket<-textblock-argmap 0
-      :repl-empty<-textblock-argmap 4
-      :repl-paren<-textblock-argmap 1
-      :repl<-liblist-string 0
-      :repl<-macro 1
-      :repl<-script 4
-      :repl<-string-argmap 7
-      :repl<-textblock 5
-      :repl<-textblock-argmap 4
-      :replarglist<-replarglist-textblock-argmap 0
-      :repllist<-textblocklist-argmap 0
-      :textblock<-script 2
-      :typefunc<-string 2)
-    :testpkg "vx/repl"
-    :typemap
-     (intmap
-      :liblist 0
-      :repl 0
-      :replarglist 0
-      :repllist 0))
-  :coveragesummary
-   (testcoveragesummary
-    :bigospacenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 21)
-    :bigotimenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 21)
-    :constnums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 3)
-    :docnums
-     (testcoveragenums
-      :pct 100
-      :tests 28
-      :total 28)
-    :funcnums
-     (testcoveragenums
-      :pct 61
-      :tests 13
-      :total 21)
-    :testpkg "vx/repl"
-    :totalnums
-     (testcoveragenums
-      :pct 46
-      :tests 13
-      :total 28)
-    :typenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 4))
-  :passfail true
-  :testpkg "vx/repl")
- (testpackage
-  :caselist
-   (testcaselist
-    (testcase
-     :passfail true
-     :testpkg "vx/sample"
-     :casename "myconst"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         "(test
- myconst
- myconst)"
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected 4
-          :actual 4))))
-    (testcase
-     :passfail true
-     :testpkg "vx/sample"
-     :casename "myfunc"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename "(test 5 (myfunc 1))"
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected 5
-          :actual 5)))))
-  :coveragedetail
-   (testcoveragedetail
-    :constmap
-     (intmap
-      :myconst 1)
-    :funcmap
-     (intmap
-      :main 0
-      :myfunc 1)
-    :testpkg "vx/sample"
-    :typemap
-     (intmap
-      :mytype 0))
-  :coveragesummary
-   (testcoveragesummary
-    :bigospacenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 2)
-    :bigotimenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 2)
-    :constnums
-     (testcoveragenums
-      :pct 100
-      :tests 1
-      :total 1)
-    :docnums
-     (testcoveragenums
-      :pct 50
-      :tests 2
-      :total 4)
-    :funcnums
-     (testcoveragenums
-      :pct 50
-      :tests 1
-      :total 2)
-    :testpkg "vx/sample"
-    :totalnums
-     (testcoveragenums
-      :pct 50
-      :tests 2
-      :total 4)
-    :typenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 1))
-  :passfail true
-  :testpkg "vx/sample")
- (testpackage
-  :coveragedetail
-   (testcoveragedetail
-    :funcmap
-     (intmap
-      :any-readstate<-mapname-name 0
-      :any-readstate<-name 0
-      :boolean-writestate<-mapname-name-value 0
-      :boolean-writestate<-name-value 0
-      :boolean-writestate<-statelistener 0
-      :change 0
-      :register 0
-      :state<-context 0
-      :statelistener-readstate<-name 0
-      :statelistenermap-readstate 0
-      :value-readstate<-name 0
-      :valuemap-readstate<-mapname 0)
-    :testpkg "vx/state"
-    :typemap
-     (intmap
-      :valuemap 0))
-  :coveragesummary
-   (testcoveragesummary
-    :bigospacenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 12)
-    :bigotimenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 12)
-    :constnums
-     (testcoveragenums
-      :pct 100
-      :tests 0
-      :total 0)
-    :docnums
-     (testcoveragenums
-      :pct 84
-      :tests 11
-      :total 13)
-    :funcnums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 12)
-    :testpkg "vx/state"
-    :totalnums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 13)
-    :typenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 1))
-  :passfail true
-  :testpkg "vx/state")
- (testpackage
   :caselist
    (testcaselist
     (testcase
@@ -16024,6 +16821,533 @@
   :passfail true
   :testpkg "vx/test")
  (testpackage
+  :coveragedetail
+   (testcoveragedetail
+    :constmap
+     (intmap
+      :layout-app 0
+      :layout-background 0
+      :layout-button 0
+      :layout-combobox 0
+      :layout-else 0
+      :layout-flow-columns 0
+      :layout-flow-item 0
+      :layout-flow-rows 0
+      :layout-image 0
+      :layout-label 0
+      :layout-main 0
+      :layout-maxpanel 0
+      :layout-menubar 0
+      :layout-menudrawer 0
+      :layout-msgbox 0
+      :layout-navbar 0
+      :layout-navdrawer 0
+      :layout-panel 0
+      :layout-parallax 0
+      :layout-statusbar 0
+      :layout-statusdrawer 0
+      :layout-text 0
+      :layout-textentry 0
+      :layout-titlebar 0
+      :pin-bottom 0
+      :pin-center 0
+      :pin-center-h 0
+      :pin-center-v 0
+      :pin-expand 0
+      :pin-left 0
+      :pin-right 0
+      :pin-top 0
+      :styletype-custom 0
+      :styletype-shared 0
+      :styletype-system 0)
+    :funcmap
+     (intmap
+      :boolean-writestate<-ui 0
+      :boolean-writestate<-uiengine 0
+      :fontfacemap<-fontfacelist 0
+      :layout<-style 0
+      :layout<-ui 0
+      :layout<-ui-layoutengine 0
+      :layout<-ui-layoutmap-else 0
+      :layoutengine-readstate 0
+      :layoutmap<-layoutlist 0
+      :stringlist-selected<-ui 0
+      :stylemap<-stylelist 0
+      :stylesheet-render 0
+      :ui-child<-ui-uid 0
+      :ui-from<-event 0
+      :ui-layout<-ui 0
+      :ui-layout<-ui-layoutengine 0
+      :ui-layout<-ui-layoutmap-else 0
+      :ui-layout<-ui-uiengine 0
+      :ui-readstate<-uid 0
+      :ui-render 0
+      :ui-render<-fn-render-ui-orig-parent 0
+      :ui-render<-ui-orig-parent 0
+      :ui-selected<-ui 0
+      :ui-writechild<-ui-child 0
+      :ui-writechildmap<-ui-childmap 0
+      :ui<-layout-ui-orig-parent 0
+      :uid-selected<-ui 0
+      :uiengine-readstate 0
+      :uiengine-render 0
+      :uilist-selected<-ui 0
+      :uilist<-uimap 0
+      :uimap-layout<-uimap-layoutmap-else 0
+      :uimap-render<-uimap-parent 0
+      :uimap<-uilist 0
+      :uimap<-uimap-data 0)
+    :testpkg "vx/ui/ui"
+    :typemap
+     (intmap
+      :bounds 0
+      :cursor 0
+      :cursor-pointer 0
+      :font 0
+      :fontface 0
+      :fontfacelist 0
+      :fontfacemap 0
+      :fontmap 0
+      :fontstyle 0
+      :fontstylemap 0
+      :layout 0
+      :layoutengine 0
+      :layoutlist 0
+      :layoutmap 0
+      :pin 0
+      :point 0
+      :pointstyle 0
+      :style 0
+      :stylelist 0
+      :stylemap 0
+      :stylesheet 0
+      :styletype 0
+      :ui 0
+      :uiengine 0
+      :uilist 0
+      :uimap 0))
+  :coveragesummary
+   (testcoveragesummary
+    :bigospacenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 35)
+    :bigotimenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 35)
+    :constnums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 35)
+    :docnums
+     (testcoveragenums
+      :pct 55
+      :tests 53
+      :total 96)
+    :funcnums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 35)
+    :testpkg "vx/ui/ui"
+    :totalnums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 96)
+    :typenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 26))
+  :passfail true
+  :testpkg "vx/ui/ui")
+ (testpackage
+  :coveragedetail
+   (testcoveragedetail
+    :funcmap
+     (intmap
+      :boolean-print<-id-stylesheettext 0
+      :boolean-replace<-id-htmltext 0
+      :boolean-replace<-ui-htmltext 0
+      :boolean-write-stylesheet<-string 0
+      :boolean-write<-id-htmltext 0
+      :boolean-write<-id-visible 0
+      :boolean-write<-stylesheet 0
+      :context-read 0
+      :context-write 0
+      :string<-id 0
+      :ui-readstate<-uid 0)
+    :testpkg "vx/web/htmldoc")
+  :coveragesummary
+   (testcoveragesummary
+    :bigospacenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 11)
+    :bigotimenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 11)
+    :constnums
+     (testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :docnums
+     (testcoveragenums
+      :pct 100
+      :tests 11
+      :total 11)
+    :funcnums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 11)
+    :testpkg "vx/web/htmldoc"
+    :totalnums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 11)
+    :typenums
+     (testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0))
+  :passfail true
+  :testpkg "vx/web/htmldoc")
+ (testpackage
+  :caselist
+   (testcaselist
+    (testcase
+     :passfail true
+     :testpkg "vx/data/csv"
+     :casename "textblock-csv<-string"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (tb/textblock
+  :text
+`"a","b"
+1,"2"`
+  :startpos 1
+  :endpos 13
+  :children
+   (tb/textblocklist
+    (tb/textblock
+     :text `"a"`
+     :startpos 1
+     :endpos 3
+     :delim
+      (copy tb/delimquote
+       :pos 0)
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text "a"
+        :startpos 2
+        :endpos 2)))
+    (tb/textblock
+     :text ","
+     :startpos 4
+     :endpos 4
+     :delim
+      (copy tb/delimcomma
+       :pos 0))
+    (tb/textblock
+     :text `"b"`
+     :startpos 5
+     :endpos 7
+     :delim
+      (copy tb/delimquote
+       :pos 0)
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text "b"
+        :startpos 6
+        :endpos 6)))
+    (tb/textblock
+     :text "
+"
+     :startpos 8
+     :endpos 8
+     :delim
+      (copy tb/delimline
+       :pos 0))
+    (tb/textblock
+     :text "1"
+     :startpos 9
+     :endpos 9)
+    (tb/textblock
+     :text ","
+     :startpos 10
+     :endpos 10
+     :delim
+      (copy tb/delimcomma
+       :pos 0))
+    (tb/textblock
+     :text `"2"`
+     :startpos 11
+     :endpos 13
+     :delim
+      (copy tb/delimquote
+       :pos 0)
+     :children
+      (tb/textblocklist
+       (tb/textblock
+        :text "2"
+        :startpos 12
+        :endpos 12)))))
+ (textblock-csv<-string
+  `"a","b"
+1,"2"`))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (textblock
+            :text
+             `"a","b"
+1,"2"`
+            :startpos 1
+            :endpos 13
+            :children
+             (textblocklist
+              (textblock
+               :text `"a"`
+               :startpos 1
+               :endpos 3
+               :delim
+                (delim
+                 :name "delimquote"
+                 :starttext `"`
+                 :endtext `"`)
+               :children
+                (textblocklist
+                 (textblock
+                  :text "a"
+                  :startpos 2
+                  :endpos 2)))
+              (textblock
+               :text ","
+               :startpos 4
+               :endpos 4
+               :delim
+                (delim
+                 :name "delimcomma"
+                 :starttext ","))
+              (textblock
+               :text `"b"`
+               :startpos 5
+               :endpos 7
+               :delim
+                (delim
+                 :name "delimquote"
+                 :starttext `"`
+                 :endtext `"`)
+               :children
+                (textblocklist
+                 (textblock
+                  :text "b"
+                  :startpos 6
+                  :endpos 6)))
+              (textblock
+               :text
+                "
+"
+               :startpos 8
+               :endpos 8
+               :delim
+                (delim
+                 :name "delimline"
+                 :starttext
+                  "
+"))
+              (textblock
+               :text "1"
+               :startpos 9
+               :endpos 9)
+              (textblock
+               :text ","
+               :startpos 10
+               :endpos 10
+               :delim
+                (delim
+                 :name "delimcomma"
+                 :starttext ","))
+              (textblock
+               :text `"2"`
+               :startpos 11
+               :endpos 13
+               :delim
+                (delim
+                 :name "delimquote"
+                 :starttext `"`
+                 :endtext `"`)
+               :children
+                (textblocklist
+                 (textblock
+                  :text "2"
+                  :startpos 12
+                  :endpos 12)))))
+          :actual
+           (textblock
+            :text
+             `"a","b"
+1,"2"`
+            :startpos 1
+            :endpos 13
+            :children
+             (textblocklist
+              (textblock
+               :text `"a"`
+               :startpos 1
+               :endpos 3
+               :delim
+                (delim
+                 :name "delimquote"
+                 :starttext `"`
+                 :endtext `"`)
+               :children
+                (textblocklist
+                 (textblock
+                  :text "a"
+                  :startpos 2
+                  :endpos 2)))
+              (textblock
+               :text ","
+               :startpos 4
+               :endpos 4
+               :delim
+                (delim
+                 :name "delimcomma"
+                 :starttext ","))
+              (textblock
+               :text `"b"`
+               :startpos 5
+               :endpos 7
+               :delim
+                (delim
+                 :name "delimquote"
+                 :starttext `"`
+                 :endtext `"`)
+               :children
+                (textblocklist
+                 (textblock
+                  :text "b"
+                  :startpos 6
+                  :endpos 6)))
+              (textblock
+               :text
+                "
+"
+               :startpos 8
+               :endpos 8
+               :delim
+                (delim
+                 :name "delimline"
+                 :starttext
+                  "
+"))
+              (textblock
+               :text "1"
+               :startpos 9
+               :endpos 9)
+              (textblock
+               :text ","
+               :startpos 10
+               :endpos 10
+               :delim
+                (delim
+                 :name "delimcomma"
+                 :starttext ","))
+              (textblock
+               :text `"2"`
+               :startpos 11
+               :endpos 13
+               :delim
+                (delim
+                 :name "delimquote"
+                 :starttext `"`
+                 :endtext `"`)
+               :children
+                (textblocklist
+                 (textblock
+                  :text "2"
+                  :startpos 12
+                  :endpos 12))))))))))
+  :coveragedetail
+   (testcoveragedetail
+    :constmap
+     (intmap
+      :delimcsv 0)
+    :funcmap
+     (intmap
+      :csv-read<-file 0
+      :csv<-file 0
+      :csv<-string 0
+      :csv<-textblock 0
+      :csvrows<-textblock 0
+      :stringmap<-csv 0
+      :textblock-csv<-string 1)
+    :testpkg "vx/data/csv"
+    :typemap
+     (intmap
+      :csv 0
+      :csvrowmap 0
+      :csvrows 0))
+  :coveragesummary
+   (testcoveragesummary
+    :bigospacenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 7)
+    :bigotimenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 7)
+    :constnums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 1)
+    :docnums
+     (testcoveragenums
+      :pct 63
+      :tests 7
+      :total 11)
+    :funcnums
+     (testcoveragenums
+      :pct 14
+      :tests 1
+      :total 7)
+    :testpkg "vx/data/csv"
+    :totalnums
+     (testcoveragenums
+      :pct 9
+      :tests 1
+      :total 11)
+    :typenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 3))
+  :passfail true
+  :testpkg "vx/data/csv")
+ (testpackage
   :caselist
    (testcaselist
     (testcase
@@ -16141,76 +17465,6 @@
       :total 0))
   :passfail true
   :testpkg "vx/translate")
- (testpackage
-  :caselist
-   (testcaselist
-    (testcase
-     :passfail true
-     :testpkg "vx/translation/all"
-     :casename "translationmap-all"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- "Hola"
- (trn/translate<-translationmap-name-string
-  (translationmap-all)
-  "es"
-  "Hello"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "Hola"
-          :actual "Hola")))))
-  :coveragedetail
-   (testcoveragedetail
-    :funcmap
-     (intmap
-      :context-all 0
-      :translationmap-all 1)
-    :testpkg "vx/translation/all")
-  :coveragesummary
-   (testcoveragesummary
-    :bigospacenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 2)
-    :bigotimenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 2)
-    :constnums
-     (testcoveragenums
-      :pct 100
-      :tests 0
-      :total 0)
-    :docnums
-     (testcoveragenums
-      :pct 100
-      :tests 2
-      :total 2)
-    :funcnums
-     (testcoveragenums
-      :pct 50
-      :tests 1
-      :total 2)
-    :testpkg "vx/translation/all"
-    :totalnums
-     (testcoveragenums
-      :pct 50
-      :tests 1
-      :total 2)
-    :typenums
-     (testcoveragenums
-      :pct 100
-      :tests 0
-      :total 0))
-  :passfail true
-  :testpkg "vx/translation/all")
  (testpackage
   :caselist
    (testcaselist
@@ -16353,699 +17607,6 @@
   :passfail true
   :testpkg "vx/translation/es")
  (testpackage
-  :caselist
-   (testcaselist
-    (testcase
-     :passfail true
-     :testpkg "vx/type"
-     :casename "boolean<-string-ends"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test-true
- (boolean<-string-ends
-  "abcd"
-  "cd"))`
-        :testresult
-         (testresult
-          :code ":true"
-          :passfail true
-          :expected true
-          :actual true))))
-    (testcase
-     :passfail true
-     :testpkg "vx/type"
-     :casename "boolean<-string-starts"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test-true
- (boolean<-string-starts
-  "abcd"
-  "ab"))`
-        :testresult
-         (testresult
-          :code ":true"
-          :passfail true
-          :expected true
-          :actual true))))
-    (testcase
-     :passfail true
-     :testpkg "vx/type"
-     :casename "int<-string-find"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- 3
- (int<-string-find
-  "abcdcdg"
-  "cd"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected 3
-          :actual 3))))
-    (testcase
-     :passfail true
-     :testpkg "vx/type"
-     :casename "int<-string-findkeyword"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- 3
- (int<-string-findkeyword
-  "ab	cdefg"
-  ":whitespace"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected 3
-          :actual 3))
-       (testdescribe
-        :describename
-         `(test
- 5
- (int<-string-findkeyword
-  " 	
-ab"
-  ":nonwhitespace"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected 5
-          :actual 5))))
-    (testcase
-     :passfail true
-     :testpkg "vx/type"
-     :casename "int<-string-findlast"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- 5
- (int<-string-findlast
-  "abcdcdg"
-  "cd"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected 5
-          :actual 5))))
-    (testcase
-     :passfail true
-     :testpkg "vx/type"
-     :casename "is-string"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test-true
- (is-string ""))`
-        :testresult
-         (testresult
-          :code ":true"
-          :passfail true
-          :expected true
-          :actual true))
-       (testdescribe
-        :describename
-         `(test-true
- (is-string "a"))`
-        :testresult
-         (testresult
-          :code ":true"
-          :passfail true
-          :expected true
-          :actual true))
-       (testdescribe
-        :describename
-         "(test-false
- (is-string 5))"
-        :testresult
-         (testresult
-          :code ":false"
-          :passfail true
-          :expected false
-          :actual false))
-       (testdescribe
-        :describename
-         "(test-false
- (is-string (list)))"
-        :testresult
-         (testresult
-          :code ":false"
-          :passfail true
-          :expected false
-          :actual false))))
-    (testcase
-     :passfail true
-     :testpkg "vx/type"
-     :casename "is-type"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         "(test-true
- (is-type false boolean))"
-        :testresult
-         (testresult
-          :code ":true"
-          :passfail true
-          :expected true
-          :actual true))
-       (testdescribe
-        :describename
-         `(test-true
- (is-type "a" string))`
-        :testresult
-         (testresult
-          :code ":true"
-          :passfail true
-          :expected true
-          :actual true))
-       (testdescribe
-        :describename
-         "(test-true
- (is-type 5.5 number))"
-        :testresult
-         (testresult
-          :code ":true"
-          :passfail true
-          :expected true
-          :actual true))
-       (testdescribe
-        :describename
-         "(test-true
- (is-type 4 int))"
-        :testresult
-         (testresult
-          :code ":true"
-          :passfail true
-          :expected true
-          :actual true))))
-    (testcase
-     :passfail true
-     :testpkg "vx/type"
-     :casename "is-type<-any-typelist"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         "(test-true
- (is-type<-any-typelist
-  false
-  (typelist int boolean)))"
-        :testresult
-         (testresult
-          :code ":true"
-          :passfail true
-          :expected true
-          :actual true))
-       (testdescribe
-        :describename
-         `(test-true
- (is-type<-any-typelist
-  "a"
-  (typelist number string)))`
-        :testresult
-         (testresult
-          :code ":true"
-          :passfail true
-          :expected true
-          :actual true))
-       (testdescribe
-        :describename
-         "(test-true
- (is-type<-any-typelist
-  5.5
-  (typelist string number)))"
-        :testresult
-         (testresult
-          :code ":true"
-          :passfail true
-          :expected true
-          :actual true))
-       (testdescribe
-        :describename
-         "(test-true
- (is-type<-any-typelist
-  4
-  (typelist string int)))"
-        :testresult
-         (testresult
-          :code ":true"
-          :passfail true
-          :expected true
-          :actual true))))
-    (testcase
-     :passfail true
-     :testpkg "vx/type"
-     :casename "length<-string"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- 4
- (length<-string "abcd"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected 4
-          :actual 4))
-       (testdescribe
-        :describename
-         `(test
- 0
- (length<-string ""))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true))))
-    (testcase
-     :passfail true
-     :testpkg "vx/type"
-     :casename "string-lowercase"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- "abc"
- (string-lowercase
-  "AbC"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "abc"
-          :actual "abc"))))
-    (testcase
-     :passfail true
-     :testpkg "vx/type"
-     :casename "string-outdent"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- "ab"
- (string-outdent
-  "ab"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "ab"
-          :actual "ab"))
-       (testdescribe
-        :describename
-         `(test
- "a
-b"
- (string-outdent
-  "
- a
- b"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           "a
-b"
-          :actual
-           "a
-b"))))
-    (testcase
-     :passfail true
-     :testpkg "vx/type"
-     :casename "string-trim"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- "ab"
- (string-trim
-  " 	
-ab
-	 "))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "ab"
-          :actual "ab"))))
-    (testcase
-     :passfail true
-     :testpkg "vx/type"
-     :casename "string-uppercase"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- "ABC"
- (string-uppercase
-  "aBc"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "ABC"
-          :actual "ABC"))))
-    (testcase
-     :passfail true
-     :testpkg "vx/type"
-     :casename "string<-int"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- "4"
- (string<-int 4))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "4"
-          :actual "4"))
-       (testdescribe
-        :describename
-         `(test
- "51"
- (string<-int 51))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "51"
-          :actual "51"))
-       (testdescribe
-        :describename
-         `(test
- "notanumber"
- (string<-int notanumber))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "notanumber"
-          :actual "notanumber"))
-       (testdescribe
-        :describename
-         `(test
- "infinity"
- (string<-int infinity))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "infinity"
-          :actual "infinity"))
-       (testdescribe
-        :describename
-         `(test
- "neginfinity"
- (string<-int neginfinity))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "neginfinity"
-          :actual "neginfinity"))))
-    (testcase
-     :passfail true
-     :testpkg "vx/type"
-     :casename "string<-string-end"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- "abc"
- (string<-string-end
-  "abcd"
-  3))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "abc"
-          :actual "abc"))
-       (testdescribe
-        :describename
-         `(test
- "ab"
- (string<-string-end
-  "abcd"
-  2))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "ab"
-          :actual "ab"))))
-    (testcase
-     :passfail true
-     :testpkg "vx/type"
-     :casename "string<-string-start"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- "abcd"
- (string<-string-start
-  "abcd"
-  1))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "abcd"
-          :actual "abcd"))
-       (testdescribe
-        :describename
-         `(test
- "bcd"
- (string<-string-start
-  "abcd"
-  2))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "bcd"
-          :actual "bcd"))))
-    (testcase
-     :passfail true
-     :testpkg "vx/type"
-     :casename "string<-string-start-end"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- "abc"
- (string<-string-start-end
-  "abcd"
-  1
-  3))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "abc"
-          :actual "abc"))
-       (testdescribe
-        :describename
-         `(test
- "bc"
- (string<-string-start-end
-  "abcd"
-  2
-  3))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "bc"
-          :actual "bc"))
-       (testdescribe
-        :describename
-         `(test
- ""
- (string<-string-start-end
-  "abcd"
-  5
-  6))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true))
-       (testdescribe
-        :describename
-         `(test
- "bcd"
- (string<-string-start-end
-  "abcd"
-  2
-  5))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "bcd"
-          :actual "bcd"))
-       (testdescribe
-        :describename
-         `(test
- "bc"
- (string<-string-start-end
-  "abcd"
-  2
-  -1))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "bc"
-          :actual "bc"))))
-    (testcase
-     :passfail true
-     :testpkg "vx/type"
-     :casename "string<-stringlist-join"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- "a$b$c"
- (string<-stringlist-join
-  (stringlist "a" "b" "c")
-  "$"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "a$b$c"
-          :actual "a$b$c"))))
-    (testcase
-     :passfail true
-     :testpkg "vx/type"
-     :casename "stringlist<-string-split"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- (stringlist "a" "b" "c")
- (stringlist<-string-split
-  "a$b$c"
-  "$"))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (stringlist
-            "a"
-            "b"
-            "c")
-          :actual
-           (stringlist
-            "a"
-            "b"
-            "c"))))))
-  :coveragedetail
-   (testcoveragedetail
-    :funcmap
-     (intmap
-      :allowtypenames<-type 0
-      :allowtypes<-type 0
-      :any<-int 0
-      :boolean<-string-ends 1
-      :boolean<-string-starts 1
-      :int<-string-find 1
-      :int<-string-findkeyword 2
-      :int<-string-findlast 1
-      :is-boolean 0
-      :is-decimal 0
-      :is-none 0
-      :is-string 4
-      :is-type 4
-      :is-type<-any-typelist 4
-      :length<-string 2
-      :string-lowercase 1
-      :string-outdent 2
-      :string-trim 1
-      :string-uppercase 1
-      :string<-int 5
-      :string<-string-end 2
-      :string<-string-start 2
-      :string<-string-start-end 5
-      :string<-stringlist-join 1
-      :stringlist<-string-split 1
-      :traitnames<-any 0
-      :traits<-any 0
-      :traits<-typedef 0)
-    :testpkg "vx/type")
-  :coveragesummary
-   (testcoveragesummary
-    :bigospacenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 28)
-    :bigotimenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 28)
-    :constnums
-     (testcoveragenums
-      :pct 100
-      :tests 0
-      :total 0)
-    :docnums
-     (testcoveragenums
-      :pct 82
-      :tests 23
-      :total 28)
-    :funcnums
-     (testcoveragenums
-      :pct 67
-      :tests 19
-      :total 28)
-    :testpkg "vx/type"
-    :totalnums
-     (testcoveragenums
-      :pct 67
-      :tests 19
-      :total 28)
-    :typenums
-     (testcoveragenums
-      :pct 100
-      :tests 0
-      :total 0))
-  :passfail true
-  :testpkg "vx/type")
- (testpackage
   :coveragedetail
    (testcoveragedetail
     :constmap
@@ -17053,7 +17614,9 @@ ab
       :layout-app-html 0
       :layout-else-html 0
       :layout-label-html 0
-      :layoutenginehtml 0)
+      :layoutenginehtml 0
+      :style-hidden 0
+      :style-selected 0)
     :funcmap
      (intmap
       :context-write 0
@@ -17063,6 +17626,7 @@ ab
       :node-render<-node-ui 0
       :string-stylename<-name-styletype 0
       :style<-style 0
+      :stylelist-extra<-ui 0
       :stylelist<-stylelist 0
       :stylelist<-stylemap 0
       :stylemap<-stylemap 0
@@ -17078,33 +17642,33 @@ ab
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 15)
+      :total 16)
     :bigotimenums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 15)
+      :total 16)
     :constnums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 4)
+      :total 6)
     :docnums
      (testcoveragenums
-      :pct 52
-      :tests 10
-      :total 19)
+      :pct 54
+      :tests 12
+      :total 22)
     :funcnums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 15)
+      :total 16)
     :testpkg "vx/ui/html/uihtml"
     :totalnums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 19)
+      :total 22)
     :typenums
      (testcoveragenums
       :pct 100
@@ -17156,471 +17720,6 @@ ab
       :total 0))
   :passfail true
   :testpkg "vx/ui/svg/uisvg")
- (testpackage
-  :coveragedetail
-   (testcoveragedetail
-    :constmap
-     (intmap
-      :layout-app 0
-      :layout-background 0
-      :layout-combobox 0
-      :layout-else 0
-      :layout-flow-columns 0
-      :layout-flow-rows 0
-      :layout-image 0
-      :layout-label 0
-      :layout-main 0
-      :layout-maxpanel 0
-      :layout-menubar 0
-      :layout-menudrawer 0
-      :layout-msgbox 0
-      :layout-navbar 0
-      :layout-navdrawer 0
-      :layout-panel 0
-      :layout-parallax 0
-      :layout-statusbar 0
-      :layout-statusdrawer 0
-      :layout-text 0
-      :layout-textentry 0
-      :pin-bottom 0
-      :pin-center 0
-      :pin-center-h 0
-      :pin-center-v 0
-      :pin-expand 0
-      :pin-left 0
-      :pin-right 0
-      :pin-top 0
-      :styletype-custom 0
-      :styletype-shared 0
-      :styletype-system 0)
-    :funcmap
-     (intmap
-      :boolean-writestate<-ui 0
-      :boolean-writestate<-uiengine 0
-      :layout<-style 0
-      :layoutmap<-layoutlist 0
-      :stylemap<-stylelist 0
-      :stylesheet-render 0
-      :ui-data<-ui 0
-      :ui-from<-event 0
-      :ui-layout<-ui-layoutmap-else 0
-      :ui-readstate<-uid 0
-      :ui-render 0
-      :ui-render<-fn-render-ui-orig-parent 0
-      :ui-render<-ui-orig-parent 0
-      :ui<-renderer-ui-orig-parent 0
-      :uiengine-readstate 0
-      :uiengine-render 0
-      :uimap-layout<-uimap-layoutmap-else 0
-      :uimap-render<-uimap-parent 0
-      :uimap<-uilist 0
-      :uimap<-uimap-data 0)
-    :testpkg "vx/ui/ui"
-    :typemap
-     (intmap
-      :bounds 0
-      :cursor 0
-      :cursor-pointer 0
-      :layout 0
-      :layoutengine 0
-      :layoutlist 0
-      :layoutmap 0
-      :pin 0
-      :point 0
-      :pointstyle 0
-      :render 0
-      :rendermap 0
-      :style 0
-      :stylelist 0
-      :stylemap 0
-      :stylesheet 0
-      :styletype 0
-      :ui 0
-      :uiengine 0
-      :uilist 0
-      :uimap 0))
-  :coveragesummary
-   (testcoveragesummary
-    :bigospacenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 20)
-    :bigotimenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 20)
-    :constnums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 32)
-    :docnums
-     (testcoveragenums
-      :pct 46
-      :tests 34
-      :total 73)
-    :funcnums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 20)
-    :testpkg "vx/ui/ui"
-    :totalnums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 73)
-    :typenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 21))
-  :passfail true
-  :testpkg "vx/ui/ui")
- (testpackage
-  :caselist
-   (testcaselist
-    (testcase
-     :passfail true
-     :testpkg "vx/web/html"
-     :casename "string<-body-indent"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- "<body></body>"
- (string<-body-indent (body) 0))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "<body></body>"
-          :actual "<body></body>"))
-       (testdescribe
-        :describename
-         `(test
- "<body>
-  <div></div>
-</body>"
- (string<-body-indent (body (div)) 0))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           "<body>
-  <div></div>
-</body>"
-          :actual
-           "<body>
-  <div></div>
-</body>"))))
-    (testcase
-     :passfail true
-     :testpkg "vx/web/html"
-     :casename "string<-div-indent"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- "<div></div>"
- (string<-div-indent (div) 0))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "<div></div>"
-          :actual "<div></div>"))
-       (testdescribe
-        :describename
-         `(test
- "<div id=\"myid\"></div>"
- (string<-div-indent
-  (div :id "myid") 0))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected `<div id="myid"></div>`
-          :actual `<div id="myid"></div>`))))
-    (testcase
-     :passfail true
-     :testpkg "vx/web/html"
-     :casename "string<-head-indent"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- "<head></head>"
- (string<-head-indent (head) 0))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "<head></head>"
-          :actual "<head></head>"))))
-    (testcase
-     :passfail true
-     :testpkg "vx/web/html"
-     :casename "string<-html"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- "<!DOCTYPE html>
-<html>
-  <head></head>
-  <body></body>
-  <footer></footer>
-</html>"
- (string<-html
-  (html :head (head) :body (body))))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           "<!DOCTYPE html>
-<html>
-  <head></head>
-  <body></body>
-  <footer></footer>
-</html>"
-          :actual
-           "<!DOCTYPE html>
-<html>
-  <head></head>
-  <body></body>
-  <footer></footer>
-</html>"))))
-    (testcase
-     :passfail true
-     :testpkg "vx/web/html"
-     :casename "string<-meta-indent"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- "<meta charset=\"utf-8\" />"
- (string<-meta-indent (meta :charset "utf-8") 0))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected `<meta charset="utf-8" />`
-          :actual `<meta charset="utf-8" />`))))
-    (testcase
-     :passfail true
-     :testpkg "vx/web/html"
-     :casename "string<-p-indent"
-     :describelist
-      (testdescribelist
-       (testdescribe
-        :describename
-         `(test
- "<p>data</p>"
- (string<-p-indent
-  (p :text "data")
-  0))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected "<p>data</p>"
-          :actual "<p>data</p>"))
-       (testdescribe
-        :describename
-         `(test
- "<p id=\"myid\">data</p>"
- (string<-p-indent
-  (p :id "myid" :text "data")
-  0))`
-        :testresult
-         (testresult
-          :code ":eq"
-          :passfail true
-          :expected `<p id="myid">data</p>`
-          :actual `<p id="myid">data</p>`)))))
-  :coveragedetail
-   (testcoveragedetail
-    :funcmap
-     (intmap
-      :htmlstring<-string 0
-      :string-indent 0
-      :string<-body-indent 2
-      :string<-details-indent 0
-      :string<-div-indent 2
-      :string<-footer-indent 0
-      :string<-h1-indent 0
-      :string<-h2-indent 0
-      :string<-h3-indent 0
-      :string<-head-indent 1
-      :string<-html 1
-      :string<-indent 0
-      :string<-meta-indent 1
-      :string<-node-indent 0
-      :string<-nodelist-indent 0
-      :string<-nodelist-tag-prop-indent 0
-      :string<-p-indent 2
-      :string<-propname-val 0
-      :string<-propstyle 0
-      :string<-propstyle-stylelist 0
-      :string<-propstylelist 0
-      :string<-propstyleunique 0
-      :string<-style-indent 0
-      :string<-stylelist-indent 0
-      :string<-stylepropmap-indent 0
-      :string<-stylesheet-indent 0
-      :string<-table-indent 0
-      :string<-tbody-indent 0
-      :string<-td-indent 0
-      :string<-thead-indent 0
-      :string<-title-indent 0
-      :string<-tr-indent 0
-      :string<-uri 0
-      :style<-stylesheet-name 0
-      :stylemap<-stylelist 0
-      :stylemap<-stylesheet 0
-      :styles<-stylesheet 0
-      :stylesheet-loadmap 0
-      :uri<-string 0)
-    :testpkg "vx/web/html"
-    :typemap
-     (intmap
-      :body 0
-      :details 0
-      :div 0
-      :divchild 0
-      :divchildlist 0
-      :divlist 0
-      :footer 0
-      :h1 0
-      :h2 0
-      :h3 0
-      :head 0
-      :headchild 0
-      :headchildlist 0
-      :html 0
-      :meta 0
-      :node 0
-      :nodelist 0
-      :p 0
-      :propmap 0
-      :style 0
-      :stylelist 0
-      :stylemap 0
-      :stylesheet 0
-      :subpropmap 0
-      :table 0
-      :tbody 0
-      :td 0
-      :tdlist 0
-      :thead 0
-      :title 0
-      :tr 0
-      :trlist 0))
-  :coveragesummary
-   (testcoveragesummary
-    :bigospacenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 39)
-    :bigotimenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 39)
-    :constnums
-     (testcoveragenums
-      :pct 100
-      :tests 0
-      :total 0)
-    :docnums
-     (testcoveragenums
-      :pct 98
-      :tests 70
-      :total 71)
-    :funcnums
-     (testcoveragenums
-      :pct 15
-      :tests 6
-      :total 39)
-    :testpkg "vx/web/html"
-    :totalnums
-     (testcoveragenums
-      :pct 8
-      :tests 6
-      :total 71)
-    :typenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 32))
-  :passfail true
-  :testpkg "vx/web/html")
- (testpackage
-  :coveragedetail
-   (testcoveragedetail
-    :funcmap
-     (intmap
-      :boolean-replace<-id-htmltext 0
-      :boolean-replace<-ui-htmltext 0
-      :boolean-write-stylesheet<-string 0
-      :boolean-write<-id-htmltext 0
-      :boolean-write<-stylesheet 0
-      :context-read 0
-      :context-write 0
-      :string<-id 0
-      :ui-readstate<-uid 0)
-    :testpkg "vx/web/htmldoc")
-  :coveragesummary
-   (testcoveragesummary
-    :bigospacenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 9)
-    :bigotimenums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 9)
-    :constnums
-     (testcoveragenums
-      :pct 100
-      :tests 0
-      :total 0)
-    :docnums
-     (testcoveragenums
-      :pct 100
-      :tests 9
-      :total 9)
-    :funcnums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 9)
-    :testpkg "vx/web/htmldoc"
-    :totalnums
-     (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 9)
-    :typenums
-     (testcoveragenums
-      :pct 100
-      :tests 0
-      :total 0))
-  :passfail true
-  :testpkg "vx/web/htmldoc")
  (testpackage
   :coveragedetail
    (testcoveragedetail
@@ -17677,4 +17776,74 @@ ab
       :tests 0
       :total 1))
   :passfail true
-  :testpkg "vx/web/http"))
+  :testpkg "vx/web/http")
+ (testpackage
+  :caselist
+   (testcaselist
+    (testcase
+     :passfail true
+     :testpkg "vx/translation/all"
+     :casename "translationmap-all"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ "Hola"
+ (trn/translate<-translationmap-name-string
+  (translationmap-all)
+  "es"
+  "Hello"))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "Hola"
+          :actual "Hola")))))
+  :coveragedetail
+   (testcoveragedetail
+    :funcmap
+     (intmap
+      :context-all 0
+      :translationmap-all 1)
+    :testpkg "vx/translation/all")
+  :coveragesummary
+   (testcoveragesummary
+    :bigospacenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 2)
+    :bigotimenums
+     (testcoveragenums
+      :pct 0
+      :tests 0
+      :total 2)
+    :constnums
+     (testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0)
+    :docnums
+     (testcoveragenums
+      :pct 100
+      :tests 2
+      :total 2)
+    :funcnums
+     (testcoveragenums
+      :pct 50
+      :tests 1
+      :total 2)
+    :testpkg "vx/translation/all"
+    :totalnums
+     (testcoveragenums
+      :pct 50
+      :tests 1
+      :total 2)
+    :typenums
+     (testcoveragenums
+      :pct 100
+      :tests 0
+      :total 0))
+  :passfail true
+  :testpkg "vx/translation/all"))

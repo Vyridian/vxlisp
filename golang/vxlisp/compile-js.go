@@ -44,11 +44,11 @@ func JsDocFromFunc(fnc *vxfunc) string {
 	return doc
 }
 
-func JsEmptyValueFromType(typ *vxtype) string {
-	return JsEmptyValueFromTypeIndent(typ, "  ")
+func JsEmptyValueFromType(lang *vxlang, typ *vxtype) string {
+	return JsEmptyValueFromTypeIndent(lang, typ, "  ")
 }
 
-func JsEmptyValueFromTypeIndent(typ *vxtype, indent string) string {
+func JsEmptyValueFromTypeIndent(lang *vxlang, typ *vxtype, indent string) string {
 	output := "\"\""
 	if len(indent) < 10 {
 		output = typ.defaultvalue
@@ -56,13 +56,14 @@ func JsEmptyValueFromTypeIndent(typ *vxtype, indent string) string {
 		case "string":
 			output = "\"" + output + "\""
 		case ":list":
-			output = "vx_core.f_type_to_list(" + LangFromName(typ.pkgname) + ".t_" + typ.name + ")"
+			//			output = "vx_core.f_type_to_list(" + LangFromName(typ.pkgname) + ".t_" + typ.name + ")"
+			output = LangNameEFromType(lang, typ)
 		default:
 			properties := ListPropertyTraitFromType(typ)
 			if len(properties) > 0 {
 				var proptexts []string
 				for _, property := range properties {
-					propdefault := JsEmptyValueFromTypeIndent(property.vxtype, indent+"  ")
+					propdefault := JsEmptyValueFromTypeIndent(lang, property.vxtype, indent+"  ")
 					if propdefault != "\"\"" {
 						proptext := "\"" + property.name + "\": " + propdefault
 						if property.doc != "" {
@@ -189,7 +190,7 @@ func JsFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string, *
 	startval := ""
 	var value = ""
 	if cnst.value.code == "" {
-		value = JsEmptyValueFromType(cnsttype)
+		value = JsEmptyValueFromType(lang, cnsttype)
 	} else {
 		clstextjs, msgs := JsFromValue(lang, cnst.value, cnst.pkgname, emptyfunc, 2, true, false, path)
 		value = clstextjs
@@ -682,7 +683,7 @@ func JsFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc, 
 		subpath += "/" + fnc.name + JsIndexFromFunc(fnc)
 		funcname := NameFromFunc(fnc)
 		if fnc.debug {
-			output += "vx_core.f_log_1({\"any-1\": " + LangNameTFromType(lang, fnc.vxtype) + "}, \"" + funcname + "\", "
+			output += "vx_core.f_log_1({\"any-1\": " + LangNameTFromType(lang, fnc.vxtype) + "}, \"" + subpath + "\", "
 		}
 		switch fnc.name {
 		case "native":

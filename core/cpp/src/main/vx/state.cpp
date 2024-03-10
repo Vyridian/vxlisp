@@ -161,7 +161,14 @@ namespace vx_state {
 
 
   //}
-
+  /**
+   * @function any_readstate_from_mapname_name
+   * Returns the named state value
+   * @param  {string} mapname
+   * @param  {string} name
+   * @return {any-1}
+   * (func any-readstate<-mapname-name)
+   */
   // (func any-readstate<-mapname-name)
   // class Class_any_readstate_from_mapname_name {
     Abstract_any_readstate_from_mapname_name::~Abstract_any_readstate_from_mapname_name() {}
@@ -237,7 +244,13 @@ namespace vx_state {
     }
 
   //}
-
+  /**
+   * @function any_readstate_from_name
+   * Returns the named state value
+   * @param  {string} name
+   * @return {any-1}
+   * (func any-readstate<-name)
+   */
   // (func any-readstate<-name)
   // class Class_any_readstate_from_name {
     Abstract_any_readstate_from_name::~Abstract_any_readstate_from_name() {}
@@ -334,25 +347,14 @@ namespace vx_state {
       vx_core::t_any_from_func->vx_fn_new({context, mapname, name, value}, [context, mapname, name, value]() {
         vx_state::Type_valuemap valmap = vx_state::f_any_readstate_from_name(vx_state::t_valuemap, context, mapname);
         vx_core::vx_ref_plus(valmap);
-        vx_core::Type_any valtype = vx_core::f_type_from_any(valmap);
-        vx_core::vx_ref_plus(valtype);
         vx_core::Type_boolean output_1 = vx_core::f_if_2(
           vx_core::t_boolean,
           vx_core::vx_new(vx_core::t_thenelselist, {
             vx_core::f_then(
-              vx_core::t_boolean_from_func->vx_fn_new({valtype}, [valtype]() {
-                vx_core::Type_boolean output_1 = vx_core::f_eqeq(
-                  valtype,
-                  vx_state::t_valuemap
-                );
+              vx_core::t_boolean_from_func->vx_fn_new({valmap}, [valmap]() {
+                vx_core::Type_boolean output_1 = vx_core::f_is_empty_1(valmap);
                 return output_1;
               }),
-              vx_core::t_any_from_func->vx_fn_new({valmap, name, value}, [valmap, name, value]() {
-                vx_core::Type_boolean output_1 = vx_core::f_boolean_write_from_map_name_value(valmap, name, value);
-                return output_1;
-              })
-            ),
-            vx_core::f_else(
               vx_core::t_any_from_func->vx_fn_new({name, value, mapname, context}, [name, value, mapname, context]() {
                 vx_core::Type_boolean output_1 = vx_core::f_let(
                   vx_core::t_boolean,
@@ -365,7 +367,7 @@ namespace vx_state {
                       })
                     );
                     vx_core::vx_ref_plus(valmap2);
-                    vx_core::Type_statelistener statelistener = vx_core::f_new(
+                    vx_core::Type_statelistener listener = vx_core::f_new(
                       vx_core::t_statelistener,
                       vx_core::vx_new(vx_core::t_anylist, {
                         vx_core::vx_new_string(":name"),
@@ -374,25 +376,39 @@ namespace vx_state {
                         valmap2
                       })
                     );
-                    vx_core::vx_ref_plus(statelistener);
-                    vx_core::Type_boolean output_1 = vx_state::f_boolean_writestate_from_statelistener(context, statelistener);
-                    vx_core::vx_release_one_except({valmap2, statelistener}, output_1);
+                    vx_core::vx_ref_plus(listener);
+                    vx_core::Type_boolean output_1 = vx_state::f_boolean_writestate_from_statelistener(context, listener);
+                    vx_core::vx_release_one_except({valmap2, listener}, output_1);
                     return output_1;
                   })
                 );
                 return output_1;
               })
+            ),
+            vx_core::f_else(
+              vx_core::t_any_from_func->vx_fn_new({valmap, name, value}, [valmap, name, value]() {
+                vx_core::Type_boolean output_1 = vx_core::f_boolean_write_from_map_name_value(valmap, name, value);
+                return output_1;
+              })
             )
           })
         );
-        vx_core::vx_release_one_except({valmap, valtype}, output_1);
+        vx_core::vx_release_one_except(valmap, output_1);
         return output_1;
       })
     );
     vx_core::vx_release_one_except({mapname, name, value}, output);
     return output;
   }
-
+  /**
+   * @function boolean_writestate_from_mapname_name_value
+   * Returns the named state value and changes it to the new value
+   * @param  {string} mapname
+   * @param  {string} name
+   * @param  {any} value
+   * @return {boolean}
+   * (func boolean-writestate<-mapname-name-value)
+   */
   // (func boolean-writestate<-mapname-name-value)
   // class Class_boolean_writestate_from_mapname_name_value {
     Abstract_boolean_writestate_from_mapname_name_value::~Abstract_boolean_writestate_from_mapname_name_value() {}
@@ -476,11 +492,11 @@ namespace vx_state {
     output = vx_core::f_let(
       vx_core::t_boolean,
       vx_core::t_any_from_func->vx_fn_new({context, name, value}, [context, name, value]() {
-        vx_core::Type_statelistener statelistener = vx_state::f_statelistener_readstate_from_name(context, name);
-        vx_core::vx_ref_plus(statelistener);
-        vx_core::Type_statelistener statelistchg = vx_core::f_copy(
+        vx_core::Type_statelistener listenercur = vx_state::f_statelistener_readstate_from_name(context, name);
+        vx_core::vx_ref_plus(listenercur);
+        vx_core::Type_statelistener listenerchg = vx_core::f_copy(
           vx_core::t_statelistener,
-          statelistener,
+          listenercur,
           vx_core::vx_new(vx_core::t_anylist, {
             vx_core::vx_new_string(":name"),
             name,
@@ -488,16 +504,23 @@ namespace vx_state {
             value
           })
         );
-        vx_core::vx_ref_plus(statelistchg);
-        vx_core::Type_boolean output_1 = vx_state::f_boolean_writestate_from_statelistener(context, statelistchg);
-        vx_core::vx_release_one_except({statelistener, statelistchg}, output_1);
+        vx_core::vx_ref_plus(listenerchg);
+        vx_core::Type_boolean output_1 = vx_state::f_boolean_writestate_from_statelistener(context, listenerchg);
+        vx_core::vx_release_one_except({listenercur, listenerchg}, output_1);
         return output_1;
       })
     );
     vx_core::vx_release_one_except({name, value}, output);
     return output;
   }
-
+  /**
+   * @function boolean_writestate_from_name_value
+   * Returns the named state value and changes it to the new value
+   * @param  {string} name
+   * @param  {any} value
+   * @return {boolean}
+   * (func boolean-writestate<-name-value)
+   */
   // (func boolean-writestate<-name-value)
   // class Class_boolean_writestate_from_name_value {
     Abstract_boolean_writestate_from_name_value::~Abstract_boolean_writestate_from_name_value() {}
@@ -592,7 +615,13 @@ namespace vx_state {
     vx_core::vx_release_one_except(statelistener, output);
     return output;
   }
-
+  /**
+   * @function boolean_writestate_from_statelistener
+   * Writes statelistener into state
+   * @param  {statelistener} statelistener
+   * @return {boolean}
+   * (func boolean-writestate<-statelistener)
+   */
   // (func boolean-writestate<-statelistener)
   // class Class_boolean_writestate_from_statelistener {
     Abstract_boolean_writestate_from_statelistener::~Abstract_boolean_writestate_from_statelistener() {}
@@ -686,7 +715,13 @@ namespace vx_state {
     vx_core::vx_release_one_except(valuemap, output);
     return output;
   }
-
+  /**
+   * @function change
+   * Changes the current state
+   * @param  {valuemap} valuemap
+   * @return {boolean}
+   * (func change)
+   */
   // (func change)
   // class Class_change {
     Abstract_change::~Abstract_change() {}
@@ -779,7 +814,12 @@ namespace vx_state {
     vx_core::vx_release_one_except(listener, output);
     return output;
   }
-
+  /**
+   * @function register
+   * @param  {statelistener} listener
+   * @return {boolean}
+   * (func register)
+   */
   // (func register)
   // class Class_register {
     Abstract_register::~Abstract_register() {}
@@ -871,7 +911,12 @@ namespace vx_state {
     output = context->state();
     return output;
   }
-
+  /**
+   * @function state_from_context
+   * Returns the full current state
+   * @return {state}
+   * (func state<-context)
+   */
   // (func state<-context)
   // class Class_state_from_context {
     Abstract_state_from_context::~Abstract_state_from_context() {}
@@ -962,7 +1007,13 @@ namespace vx_state {
     vx_core::vx_release_one_except(name, output);
     return output;
   }
-
+  /**
+   * @function statelistener_readstate_from_name
+   * Returns the named statelistener
+   * @param  {string} name
+   * @return {statelistener}
+   * (func statelistener-readstate<-name)
+   */
   // (func statelistener-readstate<-name)
   // class Class_statelistener_readstate_from_name {
     Abstract_statelistener_readstate_from_name::~Abstract_statelistener_readstate_from_name() {}
@@ -1064,7 +1115,12 @@ namespace vx_state {
     );
     return output;
   }
-
+  /**
+   * @function statelistenermap_readstate
+   * Returns the current state valuemap
+   * @return {statelistenermap}
+   * (func statelistenermap-readstate)
+   */
   // (func statelistenermap-readstate)
   // class Class_statelistenermap_readstate {
     Abstract_statelistenermap_readstate::~Abstract_statelistenermap_readstate() {}
@@ -1155,7 +1211,13 @@ namespace vx_state {
     vx_core::vx_release_one_except(name, output);
     return output;
   }
-
+  /**
+   * @function value_readstate_from_name
+   * Returns the named state value
+   * @param  {string} name
+   * @return {any}
+   * (func value-readstate<-name)
+   */
   // (func value-readstate<-name)
   // class Class_value_readstate_from_name {
     Abstract_value_readstate_from_name::~Abstract_value_readstate_from_name() {}
@@ -1249,7 +1311,7 @@ namespace vx_state {
     output = vx_core::f_let(
       vx_state::t_valuemap,
       vx_core::t_any_from_func->vx_fn_new({context, mapname}, [context, mapname]() {
-        vx_core::Type_any value = vx_state::f_any_readstate_from_name(vx_core::t_any, context, mapname);
+        vx_core::Type_any value = vx_state::f_value_readstate_from_name(context, mapname);
         vx_core::vx_ref_plus(value);
         vx_state::Type_valuemap valmap = vx_core::f_any_from_any(vx_state::t_valuemap, value);
         vx_core::vx_ref_plus(valmap);
@@ -1261,7 +1323,13 @@ namespace vx_state {
     vx_core::vx_release_one_except(mapname, output);
     return output;
   }
-
+  /**
+   * @function valuemap_readstate_from_mapname
+   * Returns the current state valuemap
+   * @param  {string} mapname
+   * @return {valuemap}
+   * (func valuemap-readstate<-mapname)
+   */
   // (func valuemap-readstate<-mapname)
   // class Class_valuemap_readstate_from_mapname {
     Abstract_valuemap_readstate_from_mapname::~Abstract_valuemap_readstate_from_mapname() {}

@@ -4565,7 +4565,7 @@ public final class Html {
     public Html.Type_style vx_type();
     public Core.Type_string name();
     public Html.Type_propmap props();
-    public Html.Type_subpropmap subprops();
+    public Html.Type_stylelist stylelist();
   }
 
   public static class Class_style extends Core.Class_base implements Type_style {
@@ -4584,11 +4584,11 @@ public final class Html {
       return this.vx_p_props == null ? Html.e_propmap : this.vx_p_props;
     }
 
-    protected Html.Type_subpropmap vx_p_subprops;
+    protected Html.Type_stylelist vx_p_stylelist;
 
     @Override
-    public Html.Type_subpropmap subprops() {
-      return this.vx_p_subprops == null ? Html.e_subpropmap : this.vx_p_subprops;
+    public Html.Type_stylelist stylelist() {
+      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
     @Override
@@ -4602,8 +4602,8 @@ public final class Html {
       case ":props":
         output = this.props();
         break;
-      case ":subprops":
-        output = this.subprops();
+      case ":stylelist":
+        output = this.stylelist();
         break;
       }
       return output;
@@ -4614,7 +4614,7 @@ public final class Html {
       Map<String, Core.Type_any> output = new LinkedHashMap<>();
       output.put(":name", this.name());
       output.put(":props", this.props());
-      output.put(":subprops", this.subprops());
+      output.put(":stylelist", this.stylelist());
       return Core.immutablemap(output);
     }
 
@@ -4634,11 +4634,11 @@ public final class Html {
       }
       Core.Type_string vx_p_name = val.name();
       Html.Type_propmap vx_p_props = val.props();
-      Html.Type_subpropmap vx_p_subprops = val.subprops();
+      Html.Type_stylelist vx_p_stylelist = val.stylelist();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":name");
       validkeys.add(":props");
-      validkeys.add(":subprops");
+      validkeys.add(":stylelist");
       String key = "";
       Core.Type_msg msg;
       for (Object valsub : vals) {
@@ -4724,11 +4724,11 @@ public final class Html {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
-          case ":subprops":
-            if (valsub == vx_p_subprops) {
-            } else if (valsub instanceof Html.Type_subpropmap) {
+          case ":stylelist":
+            if (valsub == vx_p_stylelist) {
+            } else if (valsub instanceof Html.Type_stylelist) {
               ischanged = true;
-              vx_p_subprops = (Html.Type_subpropmap)valsub;
+              vx_p_stylelist = (Html.Type_stylelist)valsub;
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -4737,7 +4737,7 @@ public final class Html {
                 msgval = Core.vx_new_string(valsub.toString());
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
-              mapany.put("key", Core.vx_new_string("subprops"));
+              mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/web/html/style", ":invalidvalue", msgmap);
@@ -4756,7 +4756,7 @@ public final class Html {
         Class_style work = new Class_style();
         work.vx_p_name = vx_p_name;
         work.vx_p_props = vx_p_props;
-        work.vx_p_subprops = vx_p_subprops;
+        work.vx_p_stylelist = vx_p_stylelist;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -5504,174 +5504,6 @@ public final class Html {
 
   public static final Type_stylesheet e_stylesheet = new Class_stylesheet();
   public static final Type_stylesheet t_stylesheet = new Class_stylesheet();
-
-  /**
-   * type: subpropmap
-   * Map of propmap
-   * (type subpropmap)
-   */
-  public interface Type_subpropmap extends Core.Type_map {
-    public Html.Type_subpropmap vx_new(final Object... vals);
-    public Html.Type_subpropmap vx_copy(final Object... vals);
-    public Html.Type_subpropmap vx_empty();
-    public Html.Type_subpropmap vx_type();
-    public Map<String, Html.Type_propmap> vx_mappropmap();
-    public Html.Type_propmap vx_propmap(final Core.Type_string key);
-  }
-
-  public static class Class_subpropmap extends Core.Class_base implements Type_subpropmap {
-
-    protected Map<String, Html.Type_propmap> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Html.Type_propmap>());
-
-    @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
-
-    @Override
-    public Html.Type_propmap vx_propmap(final Core.Type_string key) {
-      Html.Type_propmap output = Html.e_propmap;
-      Class_subpropmap map = this;
-      String skey = key.vx_string();
-      Map<String, Html.Type_propmap> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Html.e_propmap);
-      return output;
-    }
-
-    @Override
-    public Map<String, Html.Type_propmap> vx_mappropmap() {return vx_p_map;}
-
-    @Override
-    public Core.Type_any vx_any(final Core.Type_string key) {
-      return this.vx_propmap(key);
-    }
-
-    @Override
-    public Type_subpropmap vx_new_from_map(final Map<String, Core.Type_any> mapval) {
-      Class_subpropmap output = new Class_subpropmap();
-      Core.Type_msgblock msgblock = Core.e_msgblock;
-      Map<String, Html.Type_propmap> map = new LinkedHashMap<>();
-      Set<String> keys = mapval.keySet();
-      for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
-        if (val instanceof Html.Type_propmap) {
-          Html.Type_propmap castval = (Html.Type_propmap)val;
-          map.put(key, castval);
-        } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("vx/web/html/subpropmap", ":invalidvalue", val);
-          msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
-        }
-      }
-      output.vx_p_map = Core.immutablemap(map);
-      if (msgblock != Core.e_msgblock) {
-        output.vxmsgblock = msgblock;
-      }
-      return output;
-    }
-
-    @Override
-    public Type_subpropmap vx_new(final Object... vals) {
-      return e_subpropmap.vx_copy(vals);
-    }
-
-    @Override
-    public Type_subpropmap vx_copy(final Object... vals) {
-      Type_subpropmap output = this;
-      boolean ischanged = false;
-      Class_subpropmap val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
-        ischanged = true;
-      }
-      Map<String, Html.Type_propmap> mapval = new LinkedHashMap<>(val.vx_mappropmap());
-      Core.Type_msg msg;
-      String key = "";
-      for (Object valsub : vals) {
-        if (valsub instanceof Core.Type_msgblock) {
-          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof Core.Type_msg) {
-          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
-        } else if (key.equals("")) {
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;
-            key = valstring.vx_string();
-          } else if (valsub instanceof String) {
-            key = (String)valsub;
-          } else {
-            Core.Type_any msgval;
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
-            } else {
-              msgval = Core.vx_new_string(valsub.toString());
-            }
-            msg = Core.vx_msg_from_error("vx/web/html/subpropmap", ":keyexpected", msgval);
-            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
-          }
-        } else {
-          Html.Type_propmap valany = null;
-          if (valsub instanceof Html.Type_propmap) {
-            valany = (Html.Type_propmap)valsub;
-          } else if (valsub instanceof Html.Type_propmap) {
-            valany = (Html.Type_propmap)valsub;
-          } else {
-            Core.Type_any msgval;
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
-            } else {
-              msgval = Core.vx_new_string(valsub.toString());
-            }
-            Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
-            mapany.put("key", Core.vx_new_string(key));
-            mapany.put("value", msgval);
-            Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
-            msg = Core.vx_msg_from_error("vx/web/html/subpropmap", ":invalidkeyvalue", msgmap);
-            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
-          }
-          if (valany != null) {
-            ischanged = true;
-            if (key.startsWith(":")) {
-              key = key.substring(1);
-            }
-            mapval.put(key, valany);
-            key = "";
-          }
-        }
-      }
-      if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_subpropmap work = new Class_subpropmap();
-        work.vx_p_map = Core.immutablemap(mapval);
-        if (msgblock != Core.e_msgblock) {
-          work.vxmsgblock = msgblock;
-        }
-        output = work;
-      }
-      return output;
-    }
-
-    @Override
-    public Type_subpropmap vx_empty() {return e_subpropmap;}
-    @Override
-    public Type_subpropmap vx_type() {return t_subpropmap;}
-
-    @Override
-    public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
-        "vx/web/html", // pkgname
-        "subpropmap", // name
-        ":map", // extends
-        Core.e_typelist, // traits
-        Core.t_typelist.vx_new(Html.t_propmap), // allowtypes
-        Core.e_typelist, // disallowtypes
-        Core.e_funclist, // allowfuncs
-        Core.e_funclist, // disallowfuncs
-        Core.e_anylist, // allowvalues
-        Core.e_anylist, // disallowvalues
-        Core.e_argmap // properties
-      );
-    }
-
-  }
-
-  public static final Type_subpropmap e_subpropmap = new Class_subpropmap();
-  public static final Type_subpropmap t_subpropmap = new Class_subpropmap();
 
   /**
    * type: table
@@ -9737,7 +9569,7 @@ public final class Html {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_stringlist textlist = Core.f_list_from_list(
+        final Core.Type_stringlist textlist = Core.f_list_from_list_1(
           Core.t_stringlist,
           nodelist,
           Core.t_any_from_any.vx_fn_new((node_any) -> {
@@ -10407,7 +10239,7 @@ public final class Html {
             return Core.f_let(
               Core.t_string,
               Core.t_any_from_func.vx_fn_new(() -> {
-                final Core.Type_stringlist namelist = Core.f_list_from_list(
+                final Core.Type_stringlist namelist = Core.f_list_from_list_1(
                   Core.t_stringlist,
                   stylelist,
                   Core.t_any_from_any.vx_fn_new((item_any) -> {
@@ -10639,8 +10471,13 @@ public final class Html {
         final Core.Type_string sindent = Html.f_string_from_indent(indent);
         final Core.Type_string name = style.name();
         final Html.Type_propmap propmap = style.props();
+        final Html.Type_stylelist sublist = style.stylelist();
         final Core.Type_string stext = Html.f_string_from_stylepropmap_indent(
           propmap,
+          Core.f_plus1(indent)
+        );
+        final Core.Type_string subtext = Html.f_string_from_stylelist_indent(
+          sublist,
           Core.f_plus1(indent)
         );
         return Core.f_new(
@@ -10650,6 +10487,7 @@ public final class Html {
             name,
             Core.vx_new_string(" {"),
             stext,
+            subtext,
             sindent,
             Core.vx_new_string("}")
           )
@@ -10739,7 +10577,7 @@ public final class Html {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_stringlist sstyles = Core.f_list_from_list(
+        final Core.Type_stringlist sstyles = Core.f_list_from_list_1(
           Core.t_stringlist,
           stylelist,
           Core.t_any_from_any.vx_fn_new((substyle_any) -> {
@@ -10835,7 +10673,7 @@ public final class Html {
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
         final Core.Type_string sindent = Html.f_string_from_indent(indent);
-        final Core.Type_stringlist sprops = Core.f_list_from_map(
+        final Core.Type_stringlist sprops = Core.f_list_from_map_1(
           Core.t_stringlist,
           propmap,
           Core.t_any_from_key_value.vx_fn_new((key_any, val_any) -> {
@@ -12195,7 +12033,6 @@ public final class Html {
     maptype.put("stylelist", Html.t_stylelist);
     maptype.put("stylemap", Html.t_stylemap);
     maptype.put("stylesheet", Html.t_stylesheet);
-    maptype.put("subpropmap", Html.t_subpropmap);
     maptype.put("table", Html.t_table);
     maptype.put("tbody", Html.t_tbody);
     maptype.put("td", Html.t_td);

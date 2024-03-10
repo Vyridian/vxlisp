@@ -1657,7 +1657,7 @@ public final class Repl {
 
   public static Core.Type_anylist f_anylist_from_repllist(final Core.Type_context context, final Repl.Type_repllist repllist) {
     Core.Type_anylist output = Core.e_anylist;
-    output = Core.f_list_from_list(
+    output = Core.f_list_from_list_1(
       Core.t_anylist,
       repllist,
       Core.t_any_from_any.vx_fn_new((repl_any) -> {
@@ -2413,7 +2413,7 @@ public final class Repl {
     output = Core.f_let(
       Repl.t_repl,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_stringlist textlist = Core.f_list_from_list(
+        final Core.Type_stringlist textlist = Core.f_list_from_list_1(
           Core.t_stringlist,
           anylist,
           Core.t_any_from_any.vx_fn_new((item_any) -> {
@@ -3315,7 +3315,7 @@ public final class Repl {
 
   public static Repl.Type_repllist f_repllist_from_textblocklist_argmap(final Textblock.Type_textblocklist textblocklist, final Core.Type_argmap argmap) {
     Repl.Type_repllist output = Repl.e_repllist;
-    output = Core.f_list_from_list(
+    output = Core.f_list_from_list_1(
       Repl.t_repllist,
       textblocklist,
       Core.t_any_from_any.vx_fn_new((textblock_any) -> {

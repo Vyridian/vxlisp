@@ -421,7 +421,7 @@ export default class vx_test {
   // (func divchildlist<-testpackagelist)
   static f_divchildlist_from_testpackagelist(testpackagelist) {
     let output = vx_web_html.e_divchildlist
-    output = vx_core.f_list_from_list(
+    output = vx_core.f_list_from_list_1(
       {"any-1": vx_web_html.t_divchild, "any-2": vx_test.t_testpackage, "list-1": vx_web_html.t_divchildlist, "list-2": vx_test.t_testpackagelist},
       testpackagelist,
       vx_core.f_new(vx_core.t_any_from_any, vx_test.t_div_from_testpackage)
@@ -659,7 +659,7 @@ export default class vx_test {
       vx_core.f_new(vx_core.t_any_from_func, async () => {
         const describelist = vx_core.f_any_from_struct({"any-1": vx_test.t_testdescribelist, "struct-2": vx_test.t_testcase}, testcase, ":describelist")
         const resolvedlist = await vx_test.f_resolve_testdescribelist(describelist)
-        const passfaillist = vx_core.f_list_from_list(
+        const passfaillist = vx_core.f_list_from_list_1(
           {"any-1": vx_core.t_boolean, "any-2": vx_test.t_testdescribe, "list-1": vx_core.t_booleanlist, "list-2": vx_test.t_testdescribelist, "struct-2": vx_test.t_testresult},
           resolvedlist,
           vx_core.f_new(vx_core.t_any_from_any, (testdescribe) => 
@@ -781,7 +781,7 @@ export default class vx_test {
       vx_core.f_new(vx_core.t_any_from_func, async () => {
         const testcaselist = vx_core.f_any_from_struct({"any-1": vx_test.t_testcaselist, "struct-2": vx_test.t_testpackage}, testpackage, ":caselist")
         const resolvedlist = await vx_test.f_resolve_testcaselist(testcaselist)
-        const passfaillist = vx_core.f_list_from_list(
+        const passfaillist = vx_core.f_list_from_list_1(
           {"any-1": vx_core.t_boolean, "any-2": vx_test.t_testcase, "list-1": vx_core.t_booleanlist, "list-2": vx_test.t_testcaselist, "struct-2": vx_test.t_testcase},
           resolvedlist,
           vx_core.f_new(vx_core.t_any_from_any, (testcase) => 
@@ -1412,7 +1412,7 @@ export default class vx_test {
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const describelist = vx_core.f_any_from_struct({"any-1": vx_test.t_testdescribelist, "struct-2": vx_test.t_testcase}, testcase, ":describelist")
         const casename = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_test.t_testcase}, testcase, ":casename")
-        return vx_core.f_list_from_list(
+        return vx_core.f_list_from_list_1(
           {"any-1": vx_web_html.t_tr, "any-2": vx_test.t_testdescribe, "list-1": vx_web_html.t_trlist, "list-2": vx_test.t_testdescribelist},
           describelist,
           vx_core.f_new(vx_core.t_any_from_any, (testdescribe) => 
@@ -1439,7 +1439,7 @@ export default class vx_test {
   // (func trlist<-testcaselist)
   static f_trlist_from_testcaselist(testcaselist) {
     let output = vx_web_html.e_trlist
-    output = vx_core.f_list_join_from_list(
+    output = vx_core.f_list_join_from_list_1(
       {"any-1": vx_web_html.t_tr, "any-2": vx_test.t_testcase, "list-1": vx_web_html.t_trlist, "list-2": vx_test.t_testcaselist},
       testcaselist,
       vx_core.f_new(vx_core.t_any_from_any, vx_test.t_trlist_from_testcase)

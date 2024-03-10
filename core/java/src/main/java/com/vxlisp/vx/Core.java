@@ -9578,6 +9578,134 @@ public final class Core {
   public static final Type_stringlist t_stringlist = new Class_stringlist();
 
   /**
+   * type: stringlistlist
+   * A list of stringlist.
+   * (type stringlistlist)
+   */
+  public interface Type_stringlistlist extends Core.Type_list {
+    public Core.Type_stringlistlist vx_new(final Object... vals);
+    public Core.Type_stringlistlist vx_copy(final Object... vals);
+    public Core.Type_stringlistlist vx_empty();
+    public Core.Type_stringlistlist vx_type();
+    public List<Core.Type_stringlist> vx_liststringlist();
+    public Core.Type_stringlist vx_stringlist(final Core.Type_int index);
+  }
+
+  public static class Class_stringlistlist extends Core.Class_base implements Type_stringlistlist {
+
+    protected List<Core.Type_stringlist> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_stringlist>());
+
+    @Override
+    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
+
+    @Override
+    public Core.Type_stringlist vx_stringlist(final Core.Type_int index) {
+      Core.Type_stringlist output = Core.e_stringlist;
+      Class_stringlistlist list = this;
+      int iindex = index.vx_int();
+      List<Core.Type_stringlist> listval = list.vx_p_list;
+      if (iindex < listval.size()) {
+        output = listval.get(iindex);
+      }
+      return output;
+    }
+
+    @Override
+    public List<Core.Type_stringlist> vx_liststringlist() {return vx_p_list;}
+
+    @Override
+    public Core.Type_any vx_any(final Core.Type_int index) {
+      return this.vx_stringlist(index);
+    }
+
+    @Override
+    public Type_stringlistlist vx_new(final Object... vals) {
+      return e_stringlistlist.vx_copy(vals);
+    }
+
+    @Override
+    public Type_stringlistlist vx_copy(final Object... vals) {
+      Type_stringlistlist output = this;
+      boolean ischanged = false;
+      Class_stringlistlist val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
+      List<Core.Type_stringlist> listval = new ArrayList<>(val.vx_liststringlist());
+      Core.Type_msg msg;
+      for (Object valsub : vals) {
+        if (valsub instanceof Core.Type_msgblock) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (valsub instanceof Core.Type_msg) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (valsub instanceof Core.Type_stringlist) {
+          ischanged = true;
+          listval.add((Core.Type_stringlist)valsub);
+        } else if (valsub instanceof Core.Type_stringlist) {
+          ischanged = true;
+          listval.add((Core.Type_stringlist)valsub);
+        } else if (valsub instanceof Type_stringlistlist) {
+          Type_stringlistlist multi = (Type_stringlistlist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_liststringlist());
+        } else if (valsub instanceof List) {
+          List<?> listunknown = (List<?>)valsub;
+          for (Object item : listunknown) {
+            if (item instanceof Core.Type_stringlist) {
+              Core.Type_stringlist valitem = (Core.Type_stringlist)item;
+              ischanged = true;
+              listval.add(valitem);
+            }
+          }
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
+          msg = Core.vx_msg_from_error("vx/core/stringlistlist", ":invalidtype", anysub);
+          msgblock = msgblock.vx_copy(msg);
+        } else {
+          msg = Core.vx_msg_from_error("vx/core/stringlistlist", ":invalidtype", Core.vx_new_string(valsub.toString()));
+          msgblock = msgblock.vx_copy(msg);
+        }
+      }
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_stringlistlist work = new Class_stringlistlist();
+        work.vx_p_list = Core.immutablelist(listval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
+      }
+      return output;
+    }
+
+    @Override
+    public Type_stringlistlist vx_empty() {return e_stringlistlist;}
+    @Override
+    public Type_stringlistlist vx_type() {return t_stringlistlist;}
+
+    @Override
+    public Core.Type_typedef vx_typedef() {
+      return Core.typedef_new(
+        "vx/core", // pkgname
+        "stringlistlist", // name
+        ":list", // extends
+        Core.e_typelist, // traits
+        Core.t_typelist.vx_new(Core.t_stringlist), // allowtypes
+        Core.e_typelist, // disallowtypes
+        Core.e_funclist, // allowfuncs
+        Core.e_funclist, // disallowfuncs
+        Core.e_anylist, // allowvalues
+        Core.e_anylist, // disallowvalues
+        Core.e_argmap // properties
+      );
+    }
+
+  }
+
+  public static final Type_stringlistlist e_stringlistlist = new Class_stringlistlist();
+  public static final Type_stringlistlist t_stringlistlist = new Class_stringlistlist();
+
+  /**
    * type: stringmap
    * A map of string.
    * (type stringmap)
@@ -22130,14 +22258,13 @@ public final class Core {
 
   /**
    * @function list_join_from_list
-   * Returns a flattened list of processed items from another list
+   * Returns a list by joining the valid values in each value list
    * @param  {list-2} values
-   * @param  {any<-any} fn-any<-any
    * @return {list-1}
    * (func list-join<-list)
    */
-  public static interface Func_list_join_from_list extends Core.Type_func, Core.Type_replfunc {
-    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_join_from_list(final X generic_any_1, final Y values, final Core.Func_any_from_any fn_any_from_any);
+  public static interface Func_list_join_from_list extends Core.Func_any_from_any {
+    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_join_from_list(final X generic_any_1, final Y values);
   }
 
   public static class Class_list_join_from_list extends Core.Class_base implements Func_list_join_from_list {
@@ -22185,18 +22312,29 @@ public final class Core {
     @Override
     public Func_list_join_from_list vx_type() {return t_list_join_from_list;}
 
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_list inputval = (Core.Type_list)value;
+      Core.Type_any outputval = Core.f_list_join_from_list(Core.t_list, inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Func_any_from_any fn_any_from_any = Core.f_any_from_any(Core.t_any_from_any, arglist.vx_any(Core.vx_new_int(1)));
-      output = Core.f_list_join_from_list(generic_list_1, values, fn_any_from_any);
+      output = Core.f_list_join_from_list(generic_list_1, values);
       return output;
     }
 
     @Override
-    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_join_from_list(final X generic_list_1, final Y values, final Core.Func_any_from_any fn_any_from_any) {
-      return Core.f_list_join_from_list(generic_list_1, values, fn_any_from_any);
+    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_join_from_list(final X generic_list_1, final Y values) {
+      return Core.f_list_join_from_list(generic_list_1, values);
     }
 
   }
@@ -22204,7 +22342,96 @@ public final class Core {
   public static final Func_list_join_from_list e_list_join_from_list = new Core.Class_list_join_from_list();
   public static final Func_list_join_from_list t_list_join_from_list = new Core.Class_list_join_from_list();
 
-  public static <X extends Core.Type_list, Y extends Core.Type_list> X f_list_join_from_list(final X generic_list_1, final Y values, final Core.Func_any_from_any fn_any_from_any) {
+  public static <X extends Core.Type_list, Y extends Core.Type_list> X f_list_join_from_list(final X generic_list_1, final Y values) {
+    X output = Core.f_empty(generic_list_1);
+    output = Core.f_list_join_from_list_1(
+      generic_list_1,
+      values,
+      Core.t_any_from_any.vx_fn_new((value_any) -> {
+        Core.Type_any value = Core.f_any_from_any(Core.t_any, value_any);
+        return value;
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function list_join_from_list 1
+   * Returns a flattened list of processed items from another list
+   * @param  {list-2} values
+   * @param  {any<-any} fn-any<-any
+   * @return {list-1}
+   * (func list-join<-list)
+   */
+  public static interface Func_list_join_from_list_1 extends Core.Type_func, Core.Type_replfunc {
+    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_join_from_list_1(final X generic_any_1, final Y values, final Core.Func_any_from_any fn_any_from_any);
+  }
+
+  public static class Class_list_join_from_list_1 extends Core.Class_base implements Func_list_join_from_list_1 {
+
+    @Override
+    public Func_list_join_from_list_1 vx_new(Object... vals) {
+      Class_list_join_from_list_1 output = new Class_list_join_from_list_1();
+      return output;
+    }
+
+    @Override
+    public Func_list_join_from_list_1 vx_copy(Object... vals) {
+      Class_list_join_from_list_1 output = new Class_list_join_from_list_1();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "list-join<-list", // name
+        1, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "list-1", // name
+          ":list", // extends
+          Core.e_typelist, // traits
+          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_list_join_from_list_1 vx_empty() {return e_list_join_from_list_1;}
+    @Override
+    public Func_list_join_from_list_1 vx_type() {return t_list_join_from_list_1;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_any fn_any_from_any = Core.f_any_from_any(Core.t_any_from_any, arglist.vx_any(Core.vx_new_int(1)));
+      output = Core.f_list_join_from_list_1(generic_list_1, values, fn_any_from_any);
+      return output;
+    }
+
+    @Override
+    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_join_from_list_1(final X generic_list_1, final Y values, final Core.Func_any_from_any fn_any_from_any) {
+      return Core.f_list_join_from_list_1(generic_list_1, values, fn_any_from_any);
+    }
+
+  }
+
+  public static final Func_list_join_from_list_1 e_list_join_from_list_1 = new Core.Class_list_join_from_list_1();
+  public static final Func_list_join_from_list_1 t_list_join_from_list_1 = new Core.Class_list_join_from_list_1();
+
+  public static <X extends Core.Type_list, Y extends Core.Type_list> X f_list_join_from_list_1(final X generic_list_1, final Y values, final Core.Func_any_from_any fn_any_from_any) {
     X output = Core.f_empty(generic_list_1);
     List<Core.Type_any> list_value = values.vx_list();
     List<Core.Type_any> list_result = new ArrayList<>();
@@ -22222,14 +22449,13 @@ public final class Core {
 
   /**
    * @function list_from_list
-   * Returns a list of processed items from another list
+   * Return a list with allowed values from another list
    * @param  {list-2} values
-   * @param  {any<-any} fn-any<-any
    * @return {list-1}
    * (func list<-list)
    */
-  public static interface Func_list_from_list extends Core.Type_func, Core.Type_replfunc {
-    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list(final X generic_any_1, final Y values, final Core.Func_any_from_any fn_any_from_any);
+  public static interface Func_list_from_list extends Core.Func_any_from_any {
+    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list(final X generic_any_1, final Y values);
   }
 
   public static class Class_list_from_list extends Core.Class_base implements Func_list_from_list {
@@ -22277,18 +22503,29 @@ public final class Core {
     @Override
     public Func_list_from_list vx_type() {return t_list_from_list;}
 
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_list inputval = (Core.Type_list)value;
+      Core.Type_any outputval = Core.f_list_from_list(Core.t_list, inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Func_any_from_any fn_any_from_any = Core.f_any_from_any(Core.t_any_from_any, arglist.vx_any(Core.vx_new_int(1)));
-      output = Core.f_list_from_list(generic_list_1, values, fn_any_from_any);
+      output = Core.f_list_from_list(generic_list_1, values);
       return output;
     }
 
     @Override
-    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list(final X generic_list_1, final Y values, final Core.Func_any_from_any fn_any_from_any) {
-      return Core.f_list_from_list(generic_list_1, values, fn_any_from_any);
+    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list(final X generic_list_1, final Y values) {
+      return Core.f_list_from_list(generic_list_1, values);
     }
 
   }
@@ -22296,7 +22533,96 @@ public final class Core {
   public static final Func_list_from_list e_list_from_list = new Core.Class_list_from_list();
   public static final Func_list_from_list t_list_from_list = new Core.Class_list_from_list();
 
-  public static <X extends Core.Type_list, Y extends Core.Type_list> X f_list_from_list(final X generic_list_1, final Y values, final Core.Func_any_from_any fn_any_from_any) {
+  public static <X extends Core.Type_list, Y extends Core.Type_list> X f_list_from_list(final X generic_list_1, final Y values) {
+    X output = Core.f_empty(generic_list_1);
+    output = Core.f_list_from_list_1(
+      generic_list_1,
+      values,
+      Core.t_any_from_any.vx_fn_new((value_any) -> {
+        Core.Type_any value = Core.f_any_from_any(Core.t_any, value_any);
+        return value;
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function list_from_list 1
+   * Returns a list of processed items from another list
+   * @param  {list-2} values
+   * @param  {any<-any} fn-any<-any
+   * @return {list-1}
+   * (func list<-list)
+   */
+  public static interface Func_list_from_list_1 extends Core.Type_func, Core.Type_replfunc {
+    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list_1(final X generic_any_1, final Y values, final Core.Func_any_from_any fn_any_from_any);
+  }
+
+  public static class Class_list_from_list_1 extends Core.Class_base implements Func_list_from_list_1 {
+
+    @Override
+    public Func_list_from_list_1 vx_new(Object... vals) {
+      Class_list_from_list_1 output = new Class_list_from_list_1();
+      return output;
+    }
+
+    @Override
+    public Func_list_from_list_1 vx_copy(Object... vals) {
+      Class_list_from_list_1 output = new Class_list_from_list_1();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "list<-list", // name
+        1, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "list-1", // name
+          ":list", // extends
+          Core.e_typelist, // traits
+          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_list_from_list_1 vx_empty() {return e_list_from_list_1;}
+    @Override
+    public Func_list_from_list_1 vx_type() {return t_list_from_list_1;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_any fn_any_from_any = Core.f_any_from_any(Core.t_any_from_any, arglist.vx_any(Core.vx_new_int(1)));
+      output = Core.f_list_from_list_1(generic_list_1, values, fn_any_from_any);
+      return output;
+    }
+
+    @Override
+    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list_1(final X generic_list_1, final Y values, final Core.Func_any_from_any fn_any_from_any) {
+      return Core.f_list_from_list_1(generic_list_1, values, fn_any_from_any);
+    }
+
+  }
+
+  public static final Func_list_from_list_1 e_list_from_list_1 = new Core.Class_list_from_list_1();
+  public static final Func_list_from_list_1 t_list_from_list_1 = new Core.Class_list_from_list_1();
+
+  public static <X extends Core.Type_list, Y extends Core.Type_list> X f_list_from_list_1(final X generic_list_1, final Y values, final Core.Func_any_from_any fn_any_from_any) {
     X output = Core.f_empty(generic_list_1);
     List<Core.Type_any> list_value = values.vx_list();
     List<Core.Type_any> list_result = Core.arraylist_from_arraylist_fn(list_value, (val) -> {
@@ -22401,14 +22727,13 @@ public final class Core {
 
   /**
    * @function list_from_map
-   * Returns a list from a map by applying a function to each key value.
+   * Returns a list of allowed values from a map.
    * @param  {map-2} valuemap
-   * @param  {any<-key-value} fn-any<-key-value
    * @return {list-1}
    * (func list<-map)
    */
-  public static interface Func_list_from_map extends Core.Type_func, Core.Type_replfunc {
-    public <X extends Core.Type_list, O extends Core.Type_map> X vx_list_from_map(final X generic_any_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value);
+  public static interface Func_list_from_map extends Core.Func_any_from_any {
+    public <X extends Core.Type_list, O extends Core.Type_map> X vx_list_from_map(final X generic_any_1, final O valuemap);
   }
 
   public static class Class_list_from_map extends Core.Class_base implements Func_list_from_map {
@@ -22456,18 +22781,29 @@ public final class Core {
     @Override
     public Func_list_from_map vx_type() {return t_list_from_map;}
 
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_map inputval = (Core.Type_map)value;
+      Core.Type_any outputval = Core.f_list_from_map(Core.t_list, inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Func_any_from_key_value fn_any_from_key_value = Core.f_any_from_any(Core.t_any_from_key_value, arglist.vx_any(Core.vx_new_int(1)));
-      output = Core.f_list_from_map(generic_list_1, valuemap, fn_any_from_key_value);
+      output = Core.f_list_from_map(generic_list_1, valuemap);
       return output;
     }
 
     @Override
-    public <X extends Core.Type_list, O extends Core.Type_map> X vx_list_from_map(final X generic_list_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value) {
-      return Core.f_list_from_map(generic_list_1, valuemap, fn_any_from_key_value);
+    public <X extends Core.Type_list, O extends Core.Type_map> X vx_list_from_map(final X generic_list_1, final O valuemap) {
+      return Core.f_list_from_map(generic_list_1, valuemap);
     }
 
   }
@@ -22475,7 +22811,97 @@ public final class Core {
   public static final Func_list_from_map e_list_from_map = new Core.Class_list_from_map();
   public static final Func_list_from_map t_list_from_map = new Core.Class_list_from_map();
 
-  public static <X extends Core.Type_list, O extends Core.Type_map> X f_list_from_map(final X generic_list_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value) {
+  public static <X extends Core.Type_list, O extends Core.Type_map> X f_list_from_map(final X generic_list_1, final O valuemap) {
+    X output = Core.f_empty(generic_list_1);
+    output = Core.f_list_from_map_1(
+      generic_list_1,
+      valuemap,
+      Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
+        Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
+        Core.Type_any value = Core.f_any_from_any(Core.t_any, value_any);
+        return value;
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function list_from_map 1
+   * Returns a list from a map by applying a function to each key value.
+   * @param  {map-2} valuemap
+   * @param  {any<-key-value} fn-any<-key-value
+   * @return {list-1}
+   * (func list<-map)
+   */
+  public static interface Func_list_from_map_1 extends Core.Type_func, Core.Type_replfunc {
+    public <X extends Core.Type_list, O extends Core.Type_map> X vx_list_from_map_1(final X generic_any_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value);
+  }
+
+  public static class Class_list_from_map_1 extends Core.Class_base implements Func_list_from_map_1 {
+
+    @Override
+    public Func_list_from_map_1 vx_new(Object... vals) {
+      Class_list_from_map_1 output = new Class_list_from_map_1();
+      return output;
+    }
+
+    @Override
+    public Func_list_from_map_1 vx_copy(Object... vals) {
+      Class_list_from_map_1 output = new Class_list_from_map_1();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "list<-map", // name
+        1, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "list-1", // name
+          ":list", // extends
+          Core.e_typelist, // traits
+          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_list_from_map_1 vx_empty() {return e_list_from_map_1;}
+    @Override
+    public Func_list_from_map_1 vx_type() {return t_list_from_map_1;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_key_value fn_any_from_key_value = Core.f_any_from_any(Core.t_any_from_key_value, arglist.vx_any(Core.vx_new_int(1)));
+      output = Core.f_list_from_map_1(generic_list_1, valuemap, fn_any_from_key_value);
+      return output;
+    }
+
+    @Override
+    public <X extends Core.Type_list, O extends Core.Type_map> X vx_list_from_map_1(final X generic_list_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value) {
+      return Core.f_list_from_map_1(generic_list_1, valuemap, fn_any_from_key_value);
+    }
+
+  }
+
+  public static final Func_list_from_map_1 e_list_from_map_1 = new Core.Class_list_from_map_1();
+  public static final Func_list_from_map_1 t_list_from_map_1 = new Core.Class_list_from_map_1();
+
+  public static <X extends Core.Type_list, O extends Core.Type_map> X f_list_from_map_1(final X generic_list_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value) {
     X output = Core.f_empty(generic_list_1);
     Map<String, Core.Type_any> map_value = valuemap.vx_map();
     List<Core.Type_any> listresult = Core.arraylist_from_linkedhashmap_fn(map_value, (key, val) -> {
@@ -23019,14 +23445,13 @@ public final class Core {
 
   /**
    * @function map_from_map
-   * Returns a map from a map by applying a function to each key value.
+   * Return a map with allowed values from another map
    * @param  {map-2} valuemap
-   * @param  {any<-key-value} fn-any<-key-value
    * @return {map-1}
    * (func map<-map)
    */
-  public static interface Func_map_from_map extends Core.Type_func, Core.Type_replfunc {
-    public <N extends Core.Type_map, O extends Core.Type_map> N vx_map_from_map(final N generic_any_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value);
+  public static interface Func_map_from_map extends Core.Func_any_from_any {
+    public <N extends Core.Type_map, O extends Core.Type_map> N vx_map_from_map(final N generic_any_1, final O valuemap);
   }
 
   public static class Class_map_from_map extends Core.Class_base implements Func_map_from_map {
@@ -23074,18 +23499,29 @@ public final class Core {
     @Override
     public Func_map_from_map vx_type() {return t_map_from_map;}
 
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_map inputval = (Core.Type_map)value;
+      Core.Type_any outputval = Core.f_map_from_map(Core.t_map, inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_map generic_map_1 = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Func_any_from_key_value fn_any_from_key_value = Core.f_any_from_any(Core.t_any_from_key_value, arglist.vx_any(Core.vx_new_int(1)));
-      output = Core.f_map_from_map(generic_map_1, valuemap, fn_any_from_key_value);
+      output = Core.f_map_from_map(generic_map_1, valuemap);
       return output;
     }
 
     @Override
-    public <N extends Core.Type_map, O extends Core.Type_map> N vx_map_from_map(final N generic_map_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value) {
-      return Core.f_map_from_map(generic_map_1, valuemap, fn_any_from_key_value);
+    public <N extends Core.Type_map, O extends Core.Type_map> N vx_map_from_map(final N generic_map_1, final O valuemap) {
+      return Core.f_map_from_map(generic_map_1, valuemap);
     }
 
   }
@@ -23093,7 +23529,97 @@ public final class Core {
   public static final Func_map_from_map e_map_from_map = new Core.Class_map_from_map();
   public static final Func_map_from_map t_map_from_map = new Core.Class_map_from_map();
 
-  public static <N extends Core.Type_map, O extends Core.Type_map> N f_map_from_map(final N generic_map_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value) {
+  public static <N extends Core.Type_map, O extends Core.Type_map> N f_map_from_map(final N generic_map_1, final O valuemap) {
+    N output = Core.f_empty(generic_map_1);
+    output = Core.f_map_from_map_1(
+      generic_map_1,
+      valuemap,
+      Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
+        Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
+        Core.Type_any value = Core.f_any_from_any(Core.t_any, value_any);
+        return value;
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function map_from_map 1
+   * Returns a map from a map by applying a function to each key value.
+   * @param  {map-2} valuemap
+   * @param  {any<-key-value} fn-any<-key-value
+   * @return {map-1}
+   * (func map<-map)
+   */
+  public static interface Func_map_from_map_1 extends Core.Type_func, Core.Type_replfunc {
+    public <N extends Core.Type_map, O extends Core.Type_map> N vx_map_from_map_1(final N generic_any_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value);
+  }
+
+  public static class Class_map_from_map_1 extends Core.Class_base implements Func_map_from_map_1 {
+
+    @Override
+    public Func_map_from_map_1 vx_new(Object... vals) {
+      Class_map_from_map_1 output = new Class_map_from_map_1();
+      return output;
+    }
+
+    @Override
+    public Func_map_from_map_1 vx_copy(Object... vals) {
+      Class_map_from_map_1 output = new Class_map_from_map_1();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "map<-map", // name
+        1, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "map-1", // name
+          ":map", // extends
+          Core.e_typelist, // traits
+          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_map_from_map_1 vx_empty() {return e_map_from_map_1;}
+    @Override
+    public Func_map_from_map_1 vx_type() {return t_map_from_map_1;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_map generic_map_1 = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_key_value fn_any_from_key_value = Core.f_any_from_any(Core.t_any_from_key_value, arglist.vx_any(Core.vx_new_int(1)));
+      output = Core.f_map_from_map_1(generic_map_1, valuemap, fn_any_from_key_value);
+      return output;
+    }
+
+    @Override
+    public <N extends Core.Type_map, O extends Core.Type_map> N vx_map_from_map_1(final N generic_map_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value) {
+      return Core.f_map_from_map_1(generic_map_1, valuemap, fn_any_from_key_value);
+    }
+
+  }
+
+  public static final Func_map_from_map_1 e_map_from_map_1 = new Core.Class_map_from_map_1();
+  public static final Func_map_from_map_1 t_map_from_map_1 = new Core.Class_map_from_map_1();
+
+  public static <N extends Core.Type_map, O extends Core.Type_map> N f_map_from_map_1(final N generic_map_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value) {
     N output = Core.f_empty(generic_map_1);
     output = Core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);
     return output;
@@ -25753,7 +26279,7 @@ public final class Core {
 
   public static <X extends Core.Type_list> X f_resolve_list(final X generic_list_1, final X clauses) {
     X output = Core.f_empty(generic_list_1);
-    output = Core.f_list_from_list(
+    output = Core.f_list_from_list_1(
       generic_list_1,
       clauses,
       Core.t_resolve
@@ -27457,7 +27983,7 @@ public final class Core {
 
   public static Core.Type_stringlist f_typenames_from_typelist(final Core.Type_typelist typelist) {
     Core.Type_stringlist output = Core.e_stringlist;
-    output = Core.f_list_from_list(
+    output = Core.f_list_from_list_1(
       Core.t_stringlist,
       typelist,
       Core.t_any_from_any.vx_fn_new((type_any) -> {
@@ -27627,6 +28153,7 @@ public final class Core {
     maptype.put("statelistenermap", Core.t_statelistenermap);
     maptype.put("string", Core.t_string);
     maptype.put("stringlist", Core.t_stringlist);
+    maptype.put("stringlistlist", Core.t_stringlistlist);
     maptype.put("stringmap", Core.t_stringmap);
     maptype.put("struct", Core.t_struct);
     maptype.put("thenelse", Core.t_thenelse);
@@ -27756,9 +28283,12 @@ public final class Core {
     mapfunc.put("let", Core.t_let);
     mapfunc.put("let-async", Core.t_let_async);
     mapfunc.put("list-join<-list", Core.t_list_join_from_list);
+    mapfunc.put("list-join<-list_1", Core.t_list_join_from_list_1);
     mapfunc.put("list<-list", Core.t_list_from_list);
+    mapfunc.put("list<-list_1", Core.t_list_from_list_1);
     mapfunc.put("list<-list-async", Core.t_list_from_list_async);
     mapfunc.put("list<-map", Core.t_list_from_map);
+    mapfunc.put("list<-map_1", Core.t_list_from_map_1);
     mapfunc.put("list<-map-async", Core.t_list_from_map_async);
     mapfunc.put("list<-type", Core.t_list_from_type);
     mapfunc.put("log", Core.t_log);
@@ -27766,6 +28296,7 @@ public final class Core {
     mapfunc.put("main", Core.t_main);
     mapfunc.put("map<-list", Core.t_map_from_list);
     mapfunc.put("map<-map", Core.t_map_from_map);
+    mapfunc.put("map<-map_1", Core.t_map_from_map_1);
     mapfunc.put("mempool-addref", Core.t_mempool_addref);
     mapfunc.put("mempool-release", Core.t_mempool_release);
     mapfunc.put("mempool-removeref", Core.t_mempool_removeref);

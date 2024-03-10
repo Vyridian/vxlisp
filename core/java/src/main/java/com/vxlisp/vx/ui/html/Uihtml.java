@@ -150,6 +150,7 @@ public final class Uihtml {
 
   /**
    * Constant: layoutenginehtml
+   * Html layout engine used to render html from ui and stylesheet
    * {layoutengine}
    */
   public static class Const_layoutenginehtml extends Ui.Class_layoutengine implements Core.vx_Type_const {
@@ -205,6 +206,98 @@ public final class Uihtml {
   }
 
   public static final Const_layoutenginehtml c_layoutenginehtml = new Const_layoutenginehtml();
+
+
+  /**
+   * Constant: style-hidden
+   * {style}
+   */
+  public static class Const_style_hidden extends Html.Class_style implements Core.vx_Type_const {
+
+    @Override
+    public Core.Type_constdef vx_constdef() {
+      return Core.constdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "style-hidden", // name
+        Core.typedef_new(
+          "vx/web/html", // pkgname
+          "style", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        )
+      );
+    }
+
+    public static void const_new(Const_style_hidden output) {
+      Html.Type_style val = Core.f_new(
+        Html.t_style,
+        Core.t_anylist.vx_new(
+                Core.vx_new_string(":name"),
+                Core.vx_new_string(".style-hidden")
+        )
+      );
+      output.vx_p_name = val.name();
+      output.vx_p_props = val.props();
+      output.vx_p_stylelist = val.stylelist();
+    }
+
+
+  }
+
+  public static final Const_style_hidden c_style_hidden = new Const_style_hidden();
+
+
+  /**
+   * Constant: style-selected
+   * {style}
+   */
+  public static class Const_style_selected extends Html.Class_style implements Core.vx_Type_const {
+
+    @Override
+    public Core.Type_constdef vx_constdef() {
+      return Core.constdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "style-selected", // name
+        Core.typedef_new(
+          "vx/web/html", // pkgname
+          "style", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        )
+      );
+    }
+
+    public static void const_new(Const_style_selected output) {
+      Html.Type_style val = Core.f_new(
+        Html.t_style,
+        Core.t_anylist.vx_new(
+                Core.vx_new_string(":name"),
+                Core.vx_new_string(".style-selected")
+        )
+      );
+      output.vx_p_name = val.name();
+      output.vx_p_props = val.props();
+      output.vx_p_stylelist = val.stylelist();
+    }
+
+
+  }
+
+  public static final Const_style_selected c_style_selected = new Const_style_selected();
 
   /**
    * @function context_write
@@ -482,19 +575,25 @@ public final class Uihtml {
 
   public static Html.Type_divchildlist f_divchildlist_from_uimap(final Ui.Type_uimap uimap) {
     Html.Type_divchildlist output = Html.e_divchildlist;
-    output = Core.f_list_from_map(
+    output = Core.f_list_from_map_1(
       Html.t_divchildlist,
       uimap,
       Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Ui.Type_ui value = Core.f_any_from_any(Ui.t_ui, value_any);
         return 
-          Core.f_new(
+          Core.f_let(
             Html.t_div,
-            Core.t_anylist.vx_new(
-              Core.vx_new_string(":id"),
-              key
-            )
+            Core.t_any_from_func.vx_fn_new(() -> {
+              final Core.Type_string uid = value.uid();
+              return Core.f_new(
+                Html.t_div,
+                Core.t_anylist.vx_new(
+                  Core.vx_new_string(":id"),
+                  uid
+                )
+              );
+            })
           );
       })
     );
@@ -784,11 +883,6 @@ public final class Uihtml {
             );
           }),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return name;
-          })
-        ),
-        Core.f_else(
-          Core.t_any_from_func.vx_fn_new(() -> {
             return Core.f_new(
               Core.t_string,
               Core.t_anylist.vx_new(
@@ -796,6 +890,11 @@ public final class Uihtml {
                   name
               )
             );
+          })
+        ),
+        Core.f_else(
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return name;
           })
         )
       )
@@ -916,6 +1015,8 @@ public final class Uihtml {
                 final Ui.Type_styletype styletype = uistyle.type();
                 final Core.Type_string color_background = uistyle.color_background();
                 final Core.Type_string color_hoverbkgrd = uistyle.color_hoverbkgrd();
+                final Ui.Type_cursor cursor = uistyle.cursor();
+                final Core.Type_boolean hidden = uistyle.hidden();
                 final Core.Type_int posx = pointpos.x();
                 final Core.Type_int posy = pointpos.y();
                 final Core.Type_int sizex = pointsize.x();
@@ -980,7 +1081,7 @@ public final class Uihtml {
                       ),
                       Core.f_else(
                         Core.t_any_from_func.vx_fn_new(() -> {
-                          return Core.vx_new_string("relative");
+                          return Core.vx_new_string("");
                         })
                       )
                   )
@@ -1294,68 +1395,21 @@ public final class Uihtml {
                   Core.t_thenelselist.vx_new(
                       Core.f_then(
                         Core.t_boolean_from_func.vx_fn_new(() -> {
-                          return Core.f_or(
-                            Core.f_eqeq(
-                              layout,
-                              Ui.c_layout_flow_columns
-                            ),
-                            Core.f_eqeq(
-                              layout,
-                              Ui.c_layout_flow_rows
-                            )
-                          );
+                          return hidden;
                         }),
                         Core.t_any_from_func.vx_fn_new(() -> {
-                          return Core.vx_new_string("flex");
-                        })
-                      )
-                  )
-                );
-                final Core.Type_string flexflow = Core.f_if_2(
-                  Core.t_string,
-                  Core.t_thenelselist.vx_new(
-                      Core.f_then(
-                        Core.t_boolean_from_func.vx_fn_new(() -> {
-                          return Core.f_eqeq(
-                            layout,
-                            Ui.c_layout_flow_columns
-                          );
-                        }),
-                        Core.t_any_from_func.vx_fn_new(() -> {
-                          return Core.vx_new_string("column wrap");
+                          return Core.vx_new_string("none");
                         })
                       ),
                       Core.f_then(
                         Core.t_boolean_from_func.vx_fn_new(() -> {
                           return Core.f_eqeq(
                             layout,
-                            Ui.c_layout_flow_rows
+                            Ui.c_layout_flow_item
                           );
                         }),
                         Core.t_any_from_func.vx_fn_new(() -> {
-                          return Core.vx_new_string("row wrap");
-                        })
-                      )
-                  )
-                );
-                final Core.Type_string aligncontent = Core.f_if_2(
-                  Core.t_string,
-                  Core.t_thenelselist.vx_new(
-                      Core.f_then(
-                        Core.t_boolean_from_func.vx_fn_new(() -> {
-                          return Core.f_or(
-                            Core.f_eqeq(
-                              layout,
-                              Ui.c_layout_flow_columns
-                            ),
-                            Core.f_eqeq(
-                              layout,
-                              Ui.c_layout_flow_rows
-                            )
-                          );
-                        }),
-                        Core.t_any_from_func.vx_fn_new(() -> {
-                          return Core.vx_new_string("flex-start");
+                          return Core.vx_new_string("inline-block");
                         })
                       )
                   )
@@ -1393,7 +1447,7 @@ public final class Uihtml {
                           );
                         }),
                         Core.t_any_from_func.vx_fn_new(() -> {
-                          return Core.vx_new_string("scroll");
+                          return Core.vx_new_string("auto");
                         })
                       )
                   )
@@ -1409,7 +1463,12 @@ public final class Uihtml {
                           );
                         }),
                         Core.t_any_from_func.vx_fn_new(() -> {
-                          return Core.vx_new_string("scroll");
+                          return Core.vx_new_string("auto");
+                        })
+                      ),
+                      Core.f_else(
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.vx_new_string("auto");
                         })
                       )
                   )
@@ -1433,17 +1492,31 @@ public final class Uihtml {
                       )
                   )
                 );
+                final Core.Type_string scursor = Core.f_if_2(
+                  Core.t_string,
+                  Core.t_thenelselist.vx_new(
+                      Core.f_then(
+                        Core.t_boolean_from_func.vx_fn_new(() -> {
+                          return Core.f_eqeq(
+                            cursor,
+                            Ui.t_cursor_pointer
+                          );
+                        }),
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.vx_new_string("pointer");
+                        })
+                      )
+                  )
+                );
                 final Html.Type_propmap props = Core.f_new(
                   Html.t_propmap,
                   Core.t_anylist.vx_new(
                       Core.vx_new_string(":background-color"),
                       backgroundcolor,
+                      Core.vx_new_string(":cursor"),
+                      scursor,
                       Core.vx_new_string(":display"),
                       display,
-                      Core.vx_new_string(":flex-flow"),
-                      flexflow,
-                      Core.vx_new_string(":align-content"),
-                      aligncontent,
                       Core.vx_new_string(":gap"),
                       gap,
                       Core.vx_new_string(":position"),
@@ -1473,11 +1546,30 @@ public final class Uihtml {
                       hoverbkgrdcolor
                   )
                 );
-                final Html.Type_subpropmap subprops = Core.f_new(
-                  Html.t_subpropmap,
-                  Core.t_anylist.vx_new(
-                      Core.vx_new_string("&:hover"),
-                      hoverprops
+                final Html.Type_stylelist substylelist = Core.f_if_2(
+                  Html.t_stylelist,
+                  Core.t_thenelselist.vx_new(
+                      Core.f_then(
+                        Core.t_boolean_from_func.vx_fn_new(() -> {
+                          return Core.f_notempty_1(hoverprops);
+                        }),
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.f_new(
+                            Html.t_stylelist,
+                            Core.t_anylist.vx_new(
+                                Core.f_new(
+                                  Html.t_style,
+                                  Core.t_anylist.vx_new(
+                                    Core.vx_new_string(":name"),
+                                    Core.vx_new_string("&:hover"),
+                                    Core.vx_new_string(":props"),
+                                    hoverprops
+                                  )
+                                )
+                            )
+                          );
+                        })
+                      )
                   )
                 );
                 return Core.f_new(
@@ -1486,7 +1578,9 @@ public final class Uihtml {
                     Core.vx_new_string(":name"),
                     stylename,
                     Core.vx_new_string(":props"),
-                    props
+                    props,
+                    Core.vx_new_string(":stylelist"),
+                    substylelist
                   )
                 );
               })
@@ -1494,6 +1588,142 @@ public final class Uihtml {
           })
         )
       )
+    );
+    return output;
+  }
+
+  /**
+   * @function stylelist_extra_from_ui
+   * Returns a stylelist from a ui including style-hidden and style-selected
+   * @param  {ui} ui
+   * @return {stylelist}
+   * (func stylelist-extra<-ui)
+   */
+  public static interface Func_stylelist_extra_from_ui extends Core.Func_any_from_any {
+    public Html.Type_stylelist vx_stylelist_extra_from_ui(final Ui.Type_ui ui);
+  }
+
+  public static class Class_stylelist_extra_from_ui extends Core.Class_base implements Func_stylelist_extra_from_ui {
+
+    @Override
+    public Func_stylelist_extra_from_ui vx_new(Object... vals) {
+      Class_stylelist_extra_from_ui output = new Class_stylelist_extra_from_ui();
+      return output;
+    }
+
+    @Override
+    public Func_stylelist_extra_from_ui vx_copy(Object... vals) {
+      Class_stylelist_extra_from_ui output = new Class_stylelist_extra_from_ui();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "stylelist-extra<-ui", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/web/html", // pkgname
+          "stylelist", // name
+          ":list", // extends
+          Core.e_typelist, // traits
+          Core.t_typelist.vx_new(Html.t_style), // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_stylelist_extra_from_ui vx_empty() {return e_stylelist_extra_from_ui;}
+    @Override
+    public Func_stylelist_extra_from_ui vx_type() {return t_stylelist_extra_from_ui;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Ui.Type_ui inputval = (Ui.Type_ui)value;
+      Core.Type_any outputval = Uihtml.f_stylelist_extra_from_ui(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      output = Uihtml.f_stylelist_extra_from_ui(ui);
+      return output;
+    }
+
+    @Override
+    public Html.Type_stylelist vx_stylelist_extra_from_ui(final Ui.Type_ui ui) {
+      return Uihtml.f_stylelist_extra_from_ui(ui);
+    }
+
+  }
+
+  public static final Func_stylelist_extra_from_ui e_stylelist_extra_from_ui = new Uihtml.Class_stylelist_extra_from_ui();
+  public static final Func_stylelist_extra_from_ui t_stylelist_extra_from_ui = new Uihtml.Class_stylelist_extra_from_ui();
+
+  public static Html.Type_stylelist f_stylelist_extra_from_ui(final Ui.Type_ui ui) {
+    Html.Type_stylelist output = Html.e_stylelist;
+    output = Core.f_let(
+      Html.t_stylelist,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Ui.Type_stylelist uistyles = ui.stylelist();
+        final Core.Type_boolean selected = ui.selected();
+        final Core.Type_boolean hidden = ui.hidden();
+        final Html.Type_stylelist styles1 = Uihtml.f_stylelist_from_stylelist(uistyles);
+        final Html.Type_stylelist styles2 = Core.f_if_2(
+          Html.t_stylelist,
+          Core.t_thenelselist.vx_new(
+              Core.f_then(
+                Core.t_boolean_from_func.vx_fn_new(() -> {
+                  return hidden;
+                }),
+                Core.t_any_from_func.vx_fn_new(() -> {
+                  return Core.f_copy(
+                    styles1,
+                    Core.t_anylist.vx_new(
+                        Uihtml.c_style_hidden
+                    )
+                  );
+                })
+              ),
+              Core.f_then(
+                Core.t_boolean_from_func.vx_fn_new(() -> {
+                  return selected;
+                }),
+                Core.t_any_from_func.vx_fn_new(() -> {
+                  return Core.f_copy(
+                    styles1,
+                    Core.t_anylist.vx_new(
+                        Uihtml.c_style_selected
+                    )
+                  );
+                })
+              ),
+              Core.f_else(
+                Core.t_any_from_func.vx_fn_new(() -> {
+                  return styles1;
+                })
+              )
+          )
+        );
+        return styles2;
+      })
     );
     return output;
   }
@@ -1585,7 +1815,7 @@ public final class Uihtml {
 
   public static Html.Type_stylelist f_stylelist_from_stylelist(final Ui.Type_stylelist uistylelist) {
     Html.Type_stylelist output = Html.e_stylelist;
-    output = Core.f_list_from_list(
+    output = Core.f_list_from_list_1(
       Html.t_stylelist,
       uistylelist,
       Uihtml.t_style_from_style
@@ -1680,7 +1910,7 @@ public final class Uihtml {
 
   public static Html.Type_stylelist f_stylelist_from_stylemap(final Ui.Type_stylemap uistylemap) {
     Html.Type_stylelist output = Html.e_stylelist;
-    output = Core.f_list_from_map(
+    output = Core.f_list_from_map_1(
       Html.t_stylelist,
       uistylemap,
       Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
@@ -1780,7 +2010,7 @@ public final class Uihtml {
 
   public static Html.Type_stylemap f_stylemap_from_stylemap(final Ui.Type_stylemap uistylemap) {
     Html.Type_stylemap output = Html.e_stylemap;
-    output = Core.f_map_from_map(
+    output = Core.f_map_from_map_1(
       Html.t_stylemap,
       uistylemap,
       Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
@@ -2190,9 +2420,8 @@ public final class Uihtml {
         final Core.Type_string uid = ui.uid();
         final Ui.Type_uimap uimap = ui.uimap();
         final Ui.Type_style uistyle = ui.style();
-        final Ui.Type_stylelist uistyles = ui.stylelist();
         final Html.Type_style style = Uihtml.f_style_from_style(uistyle);
-        final Html.Type_stylelist styles = Uihtml.f_stylelist_from_stylelist(uistyles);
+        final Html.Type_stylelist styles = Uihtml.f_stylelist_extra_from_ui(ui);
         final Html.Type_divchildlist children = Uihtml.f_divchildlist_from_uimap(uimap);
         final Html.Type_node node = Core.f_new(
           Html.t_div,
@@ -2364,6 +2593,8 @@ public final class Uihtml {
     Const_layout_else_html.const_new(c_layout_else_html);
     Const_layout_label_html.const_new(c_layout_label_html);
     Const_layoutenginehtml.const_new(c_layoutenginehtml);
+    Const_style_hidden.const_new(c_style_hidden);
+    Const_style_selected.const_new(c_style_selected);
     Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
     Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
     Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
@@ -2371,6 +2602,8 @@ public final class Uihtml {
     mapconst.put("layout-else-html", Uihtml.c_layout_else_html);
     mapconst.put("layout-label-html", Uihtml.c_layout_label_html);
     mapconst.put("layoutenginehtml", Uihtml.c_layoutenginehtml);
+    mapconst.put("style-hidden", Uihtml.c_style_hidden);
+    mapconst.put("style-selected", Uihtml.c_style_selected);
     mapfunc.put("context-write", Uihtml.t_context_write);
     mapfunc.put("divchild<-ui", Uihtml.t_divchild_from_ui);
     mapfunc.put("divchildlist<-uimap", Uihtml.t_divchildlist_from_uimap);
@@ -2378,6 +2611,7 @@ public final class Uihtml {
     mapfunc.put("node-render<-node-ui", Uihtml.t_node_render_from_node_ui);
     mapfunc.put("string-stylename<-name-styletype", Uihtml.t_string_stylename_from_name_styletype);
     mapfunc.put("style<-style", Uihtml.t_style_from_style);
+    mapfunc.put("stylelist-extra<-ui", Uihtml.t_stylelist_extra_from_ui);
     mapfunc.put("stylelist<-stylelist", Uihtml.t_stylelist_from_stylelist);
     mapfunc.put("stylelist<-stylemap", Uihtml.t_stylelist_from_stylemap);
     mapfunc.put("stylemap<-stylemap", Uihtml.t_stylemap_from_stylemap);

@@ -1,5 +1,5 @@
 cls
-make cleanmain
+rem make cleanmain
 make cleantest
 rem del app_test.exe
 make apptest

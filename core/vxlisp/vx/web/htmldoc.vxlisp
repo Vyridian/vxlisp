@@ -4,6 +4,13 @@
        (lib ui    :path vx/ui/ui)
  :doc "Html Client-side document handler")
 
+(func boolean-print<-id-stylesheettext : boolean
+ [id : string
+  stylesheettext : string]
+ (native
+  :js :auto)
+ :doc "Print the contents of the given id.")
+
 (func boolean-replace<-id-htmltext : boolean
  [id       : string
   htmltext : string]
@@ -31,12 +38,21 @@
  :clientserver :client
  :doc "Writes to an html node with given id and text.")
 
+(func boolean-write<-id-visible : boolean
+ [id      : string
+  visible : boolean]
+ (native
+  :js :auto)
+ :sideeffects "Changes HTML display."
+ :clientserver :client
+ :doc "Writes to an html node changing its visibility.")
+
 (func boolean-write<-stylesheet : boolean
  [stylesheet : html/stylesheet]
  (let : boolean
-  [stylelist : stylelist := (styles<-stylesheet
+  [stylelist : stylelist := (html/styles<-stylesheet
                              stylesheet)
-   text      : string    := (string<-stylelist-indent
+   text      : string    := (html/string<-stylelist-indent
                              stylelist
                              0)
    iswrite   : boolean   := (boolean-write-stylesheet<-string

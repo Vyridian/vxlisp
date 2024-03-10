@@ -582,7 +582,13 @@ namespace vx_data_csv {
     vx_core::vx_release_one_except(file, output);
     return output;
   }
-
+  /**
+   * @function csv_read_from_file
+   * Returns a parsed csv from a file.
+   * @param  {file} file
+   * @return {csv}
+   * (func csv-read<-file)
+   */
   // (func csv-read<-file)
   // class Class_csv_read_from_file {
     Abstract_csv_read_from_file::~Abstract_csv_read_from_file() {}
@@ -686,7 +692,13 @@ namespace vx_data_csv {
     vx_core::vx_release_one_except(file, output);
     return output;
   }
-
+  /**
+   * @function csv_from_file
+   * Returns a parsed csv from a file.
+   * @param  {file} file
+   * @return {csv}
+   * (func csv<-file)
+   */
   // (func csv<-file)
   // class Class_csv_from_file {
     Abstract_csv_from_file::~Abstract_csv_from_file() {}
@@ -785,7 +797,13 @@ namespace vx_data_csv {
     vx_core::vx_release_one_except(text, output);
     return output;
   }
-
+  /**
+   * @function csv_from_string
+   * Returns a parsed csv from a string.
+   * @param  {string} text
+   * @return {csv}
+   * (func csv<-string)
+   */
   // (func csv<-string)
   // class Class_csv_from_string {
     Abstract_csv_from_string::~Abstract_csv_from_string() {}
@@ -900,7 +918,13 @@ namespace vx_data_csv {
     vx_core::vx_release_one_except(textblock, output);
     return output;
   }
-
+  /**
+   * @function csv_from_textblock
+   * Returns a parsed csv from a textblock.
+   * @param  {textblock} textblock
+   * @return {csv}
+   * (func csv<-textblock)
+   */
   // (func csv<-textblock)
   // class Class_csv_from_textblock {
     Abstract_csv_from_textblock::~Abstract_csv_from_textblock() {}
@@ -1015,7 +1039,12 @@ namespace vx_data_csv {
     vx_core::vx_release_one_except(textblock, output);
     return output;
   }
-
+  /**
+   * @function csvrows_from_textblock
+   * @param  {textblock} textblock
+   * @return {csvrows}
+   * (func csvrows<-textblock)
+   */
   // (func csvrows<-textblock)
   // class Class_csvrows_from_textblock {
     Abstract_csvrows_from_textblock::~Abstract_csvrows_from_textblock() {}
@@ -1121,7 +1150,7 @@ namespace vx_data_csv {
           })
         );
         vx_core::vx_ref_plus(rowmap);
-        vx_core::Type_stringmap output_1 = vx_core::f_map_from_map(
+        vx_core::Type_stringmap output_1 = vx_core::f_map_from_map_1(
           vx_core::t_stringmap,
           rowmap,
           vx_core::t_any_from_key_value->vx_fn_new({}, [](vx_core::Type_any key_any, vx_core::Type_any val_any) {
@@ -1139,7 +1168,13 @@ namespace vx_data_csv {
     vx_core::vx_release_one_except(csv, output);
     return output;
   }
-
+  /**
+   * @function stringmap_from_csv
+   * Returns a stringmap using the first 2 values in each row.
+   * @param  {csv} csv
+   * @return {stringmap}
+   * (func stringmap<-csv)
+   */
   // (func stringmap<-csv)
   // class Class_stringmap_from_csv {
     Abstract_stringmap_from_csv::~Abstract_stringmap_from_csv() {}
@@ -1236,7 +1271,13 @@ namespace vx_data_csv {
     vx_core::vx_release_one_except(text, output);
     return output;
   }
-
+  /**
+   * @function textblock_csv_from_string
+   * Returns a parsed csv-textblock from a string.
+   * @param  {string} text
+   * @return {textblock}
+   * (func textblock-csv<-string)
+   */
   // (func textblock-csv<-string)
   // class Class_textblock_csv_from_string {
     Abstract_textblock_csv_from_string::~Abstract_textblock_csv_from_string() {}

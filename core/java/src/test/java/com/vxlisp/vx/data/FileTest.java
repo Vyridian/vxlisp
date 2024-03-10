@@ -159,12 +159,12 @@ public final class FileTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/data/file", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 91, ":tests", 11, ":total", 12), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 92, ":tests", 12, ":total", 13), 
       ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 40, ":tests", 4, ":total", 10), 
       ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 10), 
       ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 10), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 33, ":tests", 4, ":total", 12), 
-      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 2)
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 30, ":tests", 4, ":total", 13), 
+      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3)
     );
   }
 
@@ -173,7 +173,8 @@ public final class FileTest {
       ":testpkg", "vx/data/file",
       ":typemap", Core.t_intmap.vx_new(
         ":file", 0,
-        ":fileformat", 0
+        ":fileformat", 0,
+        ":filelist", 0
       ),
       ":constmap", Core.t_intmap.vx_new(
   

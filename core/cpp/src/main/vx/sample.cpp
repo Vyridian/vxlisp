@@ -210,7 +210,11 @@ namespace vx_sample {
   void f_main() {
     vx_sample::f_myfunc(vx_core::vx_new_int(2));
   }
-
+  /**
+   * @function main
+   * @return {none}
+   * (func main)
+   */
   // (func main)
   // class Class_main {
     Abstract_main::~Abstract_main() {}
@@ -294,7 +298,13 @@ namespace vx_sample {
     vx_core::vx_release_one_except(myarg, output);
     return output;
   }
-
+  /**
+   * @function myfunc
+   * My Function
+   * @param  {int} myarg My Arg
+   * @return {int}
+   * (func myfunc)
+   */
   // (func myfunc)
   // class Class_myfunc {
     Abstract_myfunc::~Abstract_myfunc() {}

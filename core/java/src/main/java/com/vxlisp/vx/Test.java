@@ -3781,7 +3781,7 @@ public final class Test {
 
   public static Html.Type_divchildlist f_divchildlist_from_testpackagelist(final Test.Type_testpackagelist testpackagelist) {
     Html.Type_divchildlist output = Html.e_divchildlist;
-    output = Core.f_list_from_list(
+    output = Core.f_list_from_list_1(
       Html.t_divchildlist,
       testpackagelist,
       Test.t_div_from_testpackage
@@ -4506,7 +4506,7 @@ public final class Test {
         final Test.Type_testdescribelist describelist = testcase.describelist();
         final CompletableFuture<Test.Type_testdescribelist> future_resolvedlist = Test.f_resolve_testdescribelist(describelist);
         return Core.async_from_async_fn(future_resolvedlist, (resolvedlist) -> {
-          final Core.Type_booleanlist passfaillist = Core.f_list_from_list(
+          final Core.Type_booleanlist passfaillist = Core.f_list_from_list_1(
             Core.t_booleanlist,
             resolvedlist,
             Core.t_any_from_any.vx_fn_new((testdescribe_any) -> {
@@ -4938,7 +4938,7 @@ public final class Test {
         final Test.Type_testcaselist testcaselist = testpackage.caselist();
         final CompletableFuture<Test.Type_testcaselist> future_resolvedlist = Test.f_resolve_testcaselist(testcaselist);
         return Core.async_from_async_fn(future_resolvedlist, (resolvedlist) -> {
-          final Core.Type_booleanlist passfaillist = Core.f_list_from_list(
+          final Core.Type_booleanlist passfaillist = Core.f_list_from_list_1(
             Core.t_booleanlist,
             resolvedlist,
             Core.t_any_from_any.vx_fn_new((testcase_any) -> {
@@ -6766,7 +6766,7 @@ public final class Test {
       Core.t_any_from_func.vx_fn_new(() -> {
         final Test.Type_testdescribelist describelist = testcase.describelist();
         final Core.Type_string casename = testcase.casename();
-        return Core.f_list_from_list(
+        return Core.f_list_from_list_1(
           Html.t_trlist,
           describelist,
           Core.t_any_from_any.vx_fn_new((testdescribe_any) -> {
@@ -6867,7 +6867,7 @@ public final class Test {
 
   public static Html.Type_trlist f_trlist_from_testcaselist(final Test.Type_testcaselist testcaselist) {
     Html.Type_trlist output = Html.e_trlist;
-    output = Core.f_list_join_from_list(
+    output = Core.f_list_join_from_list_1(
       Html.t_trlist,
       testcaselist,
       Test.t_trlist_from_testcase
