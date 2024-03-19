@@ -1074,8 +1074,9 @@
    [reduce  : boolean
     current : any
     next    : any]
-   (and reduce (> current next)))
- )
+   (and
+    reduce
+    (> current next))))
  :alias "gt"
  :test  (test-true (> "z" "y" "b"))
  :doc   "Returns true if the first arg is greater than all of the other args")
@@ -1216,6 +1217,11 @@
  []
  :async
  :doc "Generic Function returning Generic any-1 with any parameters")
+
+(func any<-int-any : any-1
+ [num : int
+  val : any-2]
+ :doc "Generic Function returning Generic any-1 from an int and a value")
 
 (func any<-key-value : any-1
  [key : string
@@ -2089,8 +2095,8 @@
   :java
    "int intresult = values.vx_list().size();
     output = Core.vx_new_int(intresult);")
- :doc "Returns the currently used size/length of a list"
- :test (test 3 (length<-list (stringlist "a" "b" "c"))))
+ :test (test 3 (length<-list (stringlist "a" "b" "c")))
+ :doc "Returns the currently used size/length of a list")
 
 (func let : any-1
  [args   : arglist
@@ -2195,6 +2201,23 @@
       return work;
     });")
  :doc "Returns an asynchronous list of the processed asynchronous items from another list")
+
+(func list<-list-intany : list-1
+ [values          : list-2
+  fn-any<-int-any : any<-int-any]
+ (native
+  :cpp  :auto
+  :java :auto
+  :js   :auto)
+ :test (test
+        (stringlist "a1" "b2")
+        (list<-list-intany : stringlist
+         (stringlist "a" "b")
+         (fn : stringlist
+          [index : int
+           value : string]
+          (string value index))))
+ :doc "Returns a list of processed items from another list")
 
 (func list<-map : list-1
  [valuemap : map-2]

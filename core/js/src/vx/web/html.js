@@ -974,8 +974,9 @@ export default class vx_web_html {
           "id",
           vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_p}, p, ":id")
         )
-        const sclass = vx_web_html.f_string_from_propstyle(
-          vx_core.f_any_from_struct({"any-1": vx_web_html.t_style, "struct-2": vx_web_html.t_p}, p, ":style")
+        const sclass = vx_web_html.f_string_from_propstyle_stylelist(
+          vx_core.f_any_from_struct({"any-1": vx_web_html.t_style, "struct-2": vx_web_html.t_p}, p, ":style"),
+          vx_core.f_any_from_struct({"any-1": vx_web_html.t_stylelist, "struct-2": vx_web_html.t_p}, p, ":stylelist")
         )
         const sstyle = vx_web_html.f_string_from_propstyleunique(
           vx_core.f_any_from_struct({"any-1": vx_web_html.t_style, "struct-2": vx_web_html.t_p}, p, ":style-unique")
@@ -1167,15 +1168,26 @@ export default class vx_web_html {
       {"any-1": vx_core.t_string},
       vx_core.f_then(
         vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty_1(style)}),
-        vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
-          vx_core.t_string,
-          " style=",
-          vx_core.c_quote,
-          vx_web_html.f_string_from_stylepropmap_indent(
-            vx_core.f_any_from_struct({"any-1": vx_web_html.t_propmap, "struct-2": vx_web_html.t_style}, style, ":props"),
-            0
-          ),
-          vx_core.c_quote
+        vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_let(
+          {"any-1": vx_core.t_string},
+          [],
+          vx_core.f_new(vx_core.t_any_from_func, () => {
+            const props = vx_core.f_any_from_struct({"any-1": vx_web_html.t_propmap, "struct-2": vx_web_html.t_style}, style, ":props")
+            const text = vx_web_html.f_string_from_stylepropmap_indent(props, 0)
+            return vx_core.f_if_2(
+              {"any-1": vx_core.t_string},
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty(text)}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
+                  vx_core.t_string,
+                  " style=",
+                  vx_core.c_quote,
+                  text,
+                  vx_core.c_quote
+                )})
+              )
+            )
+          })
         )})
       )
     )
@@ -1328,21 +1340,22 @@ export default class vx_web_html {
       {"any-1": vx_core.t_string},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const text = vx_web_html.f_string_from_stylelist_indent(
-          vx_core.f_any_from_struct({"any-1": vx_web_html.t_stylelist, "struct-2": vx_web_html.t_stylesheet}, stylesheet, ":styles"),
+        const styles = vx_core.f_any_from_struct({"any-1": vx_web_html.t_stylelist, "struct-2": vx_web_html.t_stylesheet}, stylesheet, ":styles")
+        const sstyles = vx_web_html.f_string_from_stylelist_indent(
+          styles,
           vx_core.f_plus1(indent)
         )
         const sindent = vx_web_html.f_string_from_indent(indent)
         const eindent = vx_core.f_if(
           {"any-1": vx_core.t_string},
-          vx_core.f_notempty(text),
+          vx_core.f_notempty(sstyles),
           sindent
         )
         return vx_core.f_new(
           vx_core.t_string,
           sindent,
           "<style>",
-          text,
+          sstyles,
           eindent,
           "</style>"
         )

@@ -1,7 +1,9 @@
 (package vx/ui/html/uihtml
- :libs (lib html  :path vx/web/html)
+ :libs (lib file  :path vx/data/file)
+       (lib html  :path vx/web/html)
        (lib doc   :path vx/web/htmldoc)
        (lib event :path vx/event)
+       (lib type  :path vx/type)
        (lib ui    :path vx/ui/ui))
 
 (const layout-app-html : ui/layout
@@ -21,11 +23,12 @@
 
 (const layoutenginehtml : ui/layoutengine
  (ui/layoutengine
-  :layoutmap        (ui/layoutmap<-layoutlist
-                     (ui/layoutlist
-                      layout-app-html
-                      layout-label-html))
-  :layoutelse       layout-else-html
+  :layoutmap  (ui/layoutmap<-layoutlist
+               (ui/layoutlist
+                layout-app-html
+                layout-label-html))
+  :layoutelse layout-else-html
+  :boolean-print boolean-print-html
   :stylesheetrender stylesheet-render-html)
  :doc "Html layout engine used to render html from ui and stylesheet")
 
@@ -38,6 +41,24 @@
  (style
   :name ".style-selected")
  :doc "")
+
+(func boolean-print-html : boolean
+ [ui : ui]
+ (let : boolean
+  [uid : string := (:uid ui)
+   stylesheetui : ui/stylesheet :=
+    (ui/stylesheet-readstate)
+   stylesheethtml : html/stylesheet :=
+    (stylesheet<-stylesheet
+     stylesheetui)
+   styletext : string :=
+    (html/string<-stylesheet-indent
+     stylesheethtml 0)]
+  (doc/boolean-print<-id-stylesheettext
+   uid
+   styletext))
+ :context
+ :doc "Create a print ready version of ui")
 
 (func context-write : context
  (doc/context-write)
@@ -84,36 +105,107 @@
  [node : html/node
   ui   : ui]
  (let : html/node
-  [htmltext : string  := (html/string<-node-indent
-                          node
-                          2)
-   htmldone : boolean := (doc/boolean-replace<-ui-htmltext
-                          ui
-                          htmltext)]
+  [htmltext : string :=
+   (html/string<-node-indent
+    node 2)
+   htmldone : boolean :=
+    (doc/boolean-replace<-ui-htmltext
+     ui htmltext)]
   node)
  :sideeffects "UI altered"
  :doc "")
+
+(func string-style<-font : string
+ [font : ui/font]
+ (let : string
+  [face  : ui/fontface := (:fontface font)
+   size  : int         := (:fontsize font)
+   name  : string      := (:name face)
+   ssize : string :=
+    (if : string
+     (then
+      (> size 0)
+      (string
+       (/ size 100)
+       "em"
+       " ")))]
+  (if : string
+   (then
+    (!-empty name)
+    (string ssize quote name quote))))
+ :doc "Returns a font css string from a logical font.")
+
+(func string-style<-image : string
+ [image : ui/image]
+ (if : string
+  (then
+   (!-empty image)
+   (let : string
+    [file : file/file := (:file image)
+     url  : string    := (file/pathfull<-file
+                          file)]
+    (if : string
+     (then
+      (!-empty url)
+      (string "url(" url ")"))))))
+ :doc "Returns an image css string from a logical image.")
 
 (func string-stylename<-name-styletype : string
  [name      : string
   styletype : ui/styletype]
  (if : string
-  (then
-   (= "" name)
-   "")
+  (then (= "" name) "")
   (then
    (== styletype ui/styletype-shared)
-   (string
-    "."
-    name))
+   (string "." name))
   (then
    (== styletype ui/styletype-system)
-   (string
-    "#"
-    name))
-  (else
-   name))
+   (string "#" name))
+  (else name))
  :doc "")
+
+(func style<-fontface : html/style
+ [fontface : ui/fontface]
+ (let : html/style
+  [name : string :=
+    (:name fontface)
+   weight : string :=
+    (:weight fontface)
+   unicode : string :=
+    (:unicode fontface)
+   files : file/filelist :=
+    (:filelist fontface)
+   urls : stringlist :=
+    (list<-list : stringlist
+     files
+     (fn : string
+      [file : file/file]
+      (string
+       "url("
+       (file/pathfull<-file
+        file)
+       ")")))
+   fontfamily : string :=
+    (string quote name quote)
+   srcurls : string :=
+    (type/string<-stringlist-join
+     urls ",")
+   src : string :=
+    (string
+     srcurls
+     ";")
+   propmap : html/propmap :=
+    (html/propmap
+     :font-family fontfamily
+     :font-style "normal"
+     :font-weight weight
+     :font-display "swap"
+     :src src
+     :unicode-range unicode)]
+ (html/style
+  :name  "@font-face"
+  :props propmap))
+ :doc "Returns an html style from a font")
 
 (func style<-style : html/style
  [uistyle : ui/style]
@@ -125,186 +217,215 @@
    (let : html/style
     [layout           : ui/layout    := (:layout           uistyle)
      name             : string       := (:name             uistyle)
+     font             : ui/font      := (:font             uistyle)
      pin              : ui/pin       := (:pin              uistyle)
      pointpos         : ui/point     := (:pointpos         uistyle)
      pointsize        : ui/point     := (:pointsize        uistyle)
      styletype        : ui/styletype := (:type             uistyle)
-     color-background : string       := (:color-background uistyle)
-     color-hoverbkgrd : string       := (:color-hoverbkgrd uistyle)
+     color-bkg        : string       := (:color-background uistyle)
+     image-bkg        : ui/image     := (:image-background uistyle)
+     color-hoverbkg   : string       := (:color-hoverbkgrd uistyle)
      cursor           : ui/cursor    := (:cursor           uistyle)
      hidden           : boolean      := (:hidden           uistyle)
      posx             : int          := (:x pointpos)
      posy             : int          := (:y pointpos)
      sizex            : int          := (:x pointsize)
      sizey            : int          := (:y pointsize)
-     stylename        : string       := (string-stylename<-name-styletype
-                                         name
-                                         styletype)
-     backgroundcolor  : string       := (if : string
-                                         (then
-                                          (!-empty color-background)
-                                          (string
-                                           "#"
-                                           color-background)))
-     position         : string       := (if : string
-                                         (then
-                                          (or
-                                           (== layout layout-app)
-                                           (== layout layout-background)
-                                           (== layout layout-main)
-                                           (== layout layout-navbar)
-                                           (== layout layout-parallax)
-                                           (== layout layout-statusbar))
-                                          "fixed")
-                                         (else ""))
-     top              : string       := (if : string
-                                         (then
-                                          (== pin ui/pin-expand)
-                                          (string
-                                           posy
-                                           "mm"))
-                                         (then
-                                          (== 0 posy)
-                                          "")
-                                         (else
-                                          (string
-                                           posy
-                                           "mm")))
-     bottom           : string       := (if : string
-                                         (then
-                                          (== pin ui/pin-expand)
-                                          "")
-                                         (then
-                                          (== pin ui/pin-bottom)
-                                          "0mm")
-                                         (then
-                                          (or
-                                           (== pin ui/pin-left)
-                                           (== pin ui/pin-center-v))
-                                          (string
-                                           sizey
-                                           "mm")))
-     left             : string       := (if : string
-                                         (then
-                                          (== pin ui/pin-expand)
-                                          "")
-                                         (then
-                                          (== pin ui/pin-bottom)
-                                          (string
-                                           posx
-                                           "mm"))
-                                         (then
-                                          (== 0 posx)
-                                          "")
-                                         (else
-                                          (string
-                                           posx
-                                           "mm")))
-     right            : string       := (if : string
-                                         (then
-                                          (== pin ui/pin-expand)
-                                          "")
-                                         (then
-                                          (or
-                                           (== pin ui/pin-top)
-                                           (== pin ui/pin-bottom)
-                                           (== pin ui/pin-center-v))
-                                          (string
-                                           sizex
-                                           "mm")))
-     height           : string       := (if : string
-                                         (then
-                                          (== pin ui/pin-expand)
-                                          "100%")
-                                         (then
-                                          (or
-                                           (== pin ui/pin-left)
-                                           (== pin ui/pin-right)
-                                           (== pin ui/pin-center-v))
-                                          "")
-                                         (then
-                                          (== 0 sizey)
-                                          "")
-                                         (else
-                                          (string
-                                           sizey
-                                           "mm")))
-     width            : string       := (if : string
-                                         (then
-                                          (== pin ui/pin-expand)
-                                          "100%")
-                                         (then
-                                          (or
-                                           (== pin ui/pin-top)
-                                           (== pin ui/pin-bottom)
-                                           (== pin ui/pin-center-v))
-                                          "")
-                                         (then
-                                          (== 0 sizex)
-                                          "")
-                                         (else
-                                          (string
-                                           sizex
-                                           "mm")))
-     display          : string       := (if : string
-                                         (then
-                                          hidden
-                                          "none")
-                                         (then
-                                          (== layout ui/layout-flow-item)
-                                          "inline-block"))
-     gap              : string       := (if : string
-                                         (then
-                                          (or
-                                           (== layout ui/layout-flow-columns)
-                                           (== layout ui/layout-flow-rows))
-                                           "1mm"))
-     overflowx        : string       := (if : string
-                                         (then
-                                          (== layout ui/layout-flow-rows)
-                                          "auto"))
-     overflowy        : string       := (if : string
-                                         (then
-                                          (== layout ui/layout-flow-columns)
-                                          "auto")
-                                         (else
-                                          "auto"))
-     hoverbkgrdcolor  : string       := (if : string
-                                         (then
-                                          (!= "" color-hoverbkgrd)
-                                          (string "#" color-hoverbkgrd)))
-     scursor          : string       := (if : string
-                                         (then
-                                          (== cursor ui/cursor-pointer)
-                                          "pointer"))
-     props            : html/propmap := (html/propmap
-                                         :background-color backgroundcolor
-                                         :cursor           scursor
-                                         :display          display
-                                         :gap              gap
-                                         :position         position
-                                         :top              top
-                                         :bottom           bottom
-                                         :left             left
-                                         :right            right
-                                         :height           height
-                                         :width            width
-                                         :overflow-x       overflowx
-                                         :overflow-y       overflowy)
-     hoverprops     : html/propmap   := (html/propmap
-                                         :background-color hoverbkgrdcolor)
-     substylelist   : html/stylelist := (if : html/stylelist
-                                         (then
-                                          (!-empty hoverprops)
-                                          (html/stylelist
-                                          (html/style
-                                           :name  "&:hover"
-                                           :props hoverprops))))]
+     stylename : string :=
+      (string-stylename<-name-styletype
+       name
+       styletype)
+     bkgcolor : string :=
+      (if : string
+       (then
+        (!-empty color-bkg)
+        (string
+         "#"
+         color-bkg)))
+     bkgimage : string :=
+      (string-style<-image
+       image-bkg)
+     position : string :=
+      (if : string
+       (then
+        (or
+         (== layout layout-app)
+         (== layout layout-background)
+         (== layout layout-main)
+         (== layout layout-navbar)
+         (== layout layout-parallax)
+         (== layout layout-statusbar)
+         (== layout layout-titlebar))
+        "fixed")
+       (then
+        (!-empty pointpos)
+        "absolute")
+       (else ""))
+     top : string :=
+      (if : string
+       (then
+        (== pin ui/pin-expand)
+        (string
+         posy
+         "mm"))
+       (then
+        (== 0 posy)
+        "")
+       (else
+        (string
+         posy
+         "mm")))
+     bottom : string :=
+      (if : string
+       (then
+        (== pin ui/pin-expand)
+        "")
+       (then
+        (== pin ui/pin-bottom)
+        "0mm")
+       (then
+        (or
+         (== pin ui/pin-left)
+         (== pin ui/pin-center-v))
+        (string
+         sizey
+         "mm")))
+     left : string :=
+      (if : string
+       (then
+        (== pin ui/pin-expand)
+        "")
+       (then
+        (== pin ui/pin-bottom)
+        (string
+         posx
+         "mm"))
+       (then
+        (== 0 posx)
+        "")
+       (else
+        (string
+         posx
+         "mm")))
+     right : string :=
+      (if : string
+       (then
+        (== pin ui/pin-expand)
+        "")
+       (then
+        (or
+         (== pin ui/pin-top)
+         (== pin ui/pin-bottom)
+         (== pin ui/pin-center-v))
+        (string
+         sizex
+         "mm")))
+     height : string :=
+      (if : string
+       (then
+        (== pin ui/pin-expand)
+        "100%")
+       (then
+        (or
+         (== pin ui/pin-left)
+         (== pin ui/pin-right)
+         (== pin ui/pin-center-v))
+        "")
+       (then (== 0 sizey) "")
+       (else (string sizey "mm")))
+     width : string :=
+      (if : string
+       (then
+        (== pin ui/pin-expand)
+        "100%")
+       (then
+        (or
+         (== pin ui/pin-top)
+         (== pin ui/pin-bottom)
+         (== pin ui/pin-center-v))
+        "")
+       (then (== 0 sizex) "")
+       (else (string sizex "mm")))
+     display : string :=
+      (if : string
+       (then
+        hidden
+        "none")
+       (then
+        (== layout ui/layout-flow-item)
+        "inline-block"))
+     sfont : string :=
+      (string-style<-font font)
+     gap : string :=
+      (if : string
+       (then
+        (or
+         (== layout ui/layout-flow-columns)
+         (== layout ui/layout-flow-rows))
+         "1mm"))
+     overflowx : string :=
+      (if : string
+       (then
+        (== layout ui/layout-flow-rows)
+        "auto"))
+     overflowy : string :=
+      (if : string
+       (then
+        (== layout ui/layout-flow-columns)
+        "auto"))
+     hoverbkgrdcolor  : string :=
+      (if : string
+       (then
+        (!= "" color-hoverbkg)
+        (string "#" color-hoverbkg)))
+     scursor : string :=
+      (if : string
+       (then
+        (== cursor ui/cursor-pointer)
+        "pointer"))
+     props : html/propmap :=
+      (html/propmap
+       :background-color bkgcolor
+       :background-image bkgimage
+       :cursor           scursor
+       :display          display
+       :font             sfont
+       :gap              gap
+       :position         position
+       :top              top
+       :bottom           bottom
+       :left             left
+       :right            right
+       :height           height
+       :width            width
+       :overflow-x       overflowx
+       :overflow-y       overflowy)
+     hoverprops : html/propmap :=
+      (html/propmap
+       :background-color hoverbkgrdcolor)
+     substylelist : html/stylelist :=
+      (if : html/stylelist
+       (then
+        (!-empty hoverprops)
+        (html/stylelist
+        (html/style
+         :name  "&:hover"
+         :props hoverprops))))]
     (html/style
      :name      stylename
      :props     props
      :stylelist substylelist))))
  :doc "Returns a htmlstyle from a uistyle")
+
+(func stylelist<-fontfacemap : html/stylelist
+ [fontfacemap : ui/fontfacemap]
+ (list<-map : html/stylelist
+  fontfacemap
+  (fn : html/style
+   [key      : string
+    fontface : ui/fontface]
+   (style<-fontface fontface)))
+ :doc "Returns stylelist from a fontfacemap")
 
 (func stylelist<-stylelist : html/stylelist
  [uistylelist : ui/stylelist]
@@ -327,22 +448,55 @@
 (func stylelist-extra<-ui : html/stylelist
  [ui : ui]
  (let : html/stylelist
-  [uistyles : ui/stylelist   := (:stylelist ui)
-   selected : boolean        := (:selected  ui)
-   hidden  : boolean         := (:hidden    ui)
-   styles1  : html/stylelist := (stylelist<-stylelist
-                                 uistyles)
-   styles2  : html/stylelist := (if : html/stylelist
-                                 (then
-                                  hidden
-                                  (copy styles1
-                                   style-hidden))
-                                 (then selected
-                                  (copy styles1
-                                   style-selected))
-                                 (else styles1))]
+  [uistyles : ui/stylelist := (:stylelist ui)
+   selected : boolean      := (:selected  ui)
+   hidden   : boolean      := (:hidden    ui)
+   styles1 : html/stylelist :=
+    (stylelist<-stylelist
+     uistyles)
+   styles2 : html/stylelist :=
+    (if : html/stylelist
+     (then
+      hidden
+      (copy styles1
+       style-hidden))
+     (then selected
+      (copy styles1
+       style-selected))
+     (else styles1))]
   styles2)
  :doc "Returns a stylelist from a ui including style-hidden and style-selected")
+
+(func stylelist-reset : html/stylelist
+ (html/stylelist
+  (html/style
+   :name "html"
+   :props
+    (html/propmap
+     :margin  "0mm"
+     :padding "0mm"))
+  (html/style
+   :name "body"
+   :props
+    (html/propmap
+     :margin "0mm"
+     :padding "0mm"
+     :-webkit-print-color-adjust "exact !important"
+     :color-adjust "exact !important"
+     :print-color-adjust "exact !important"))
+  (html/style
+   :name "div"
+   :props
+    (html/propmap
+     :position "relative"))
+  (html/style
+   :name "p"
+   :props
+    (html/propmap
+     :margin-block-start "0mm"
+     :margin-block-end "0mm"
+     :white-space "pre-line")))
+ :doc "Returns the initial reset styles for ui framework")
 
 (func stylemap<-stylemap : html/stylemap
  [uistylemap : ui/stylemap]
@@ -358,20 +512,36 @@
 (func stylesheet<-stylesheet : html/stylesheet
  [uistylesheet : ui/stylesheet]
  (let : html/stylesheet
-  [uistylemap : ui/stylemap    := (:stylemap uistylesheet)
-   stylelist  : html/stylelist := (stylelist<-stylemap
-                                   uistylemap)]
+  [uistylemap : ui/stylemap :=
+    (:stylemap uistylesheet)
+   fontfacemap : ui/fontfacemap :=
+    (:fontfacemap uistylesheet)
+   resetlist : html/stylelist :=
+    (stylelist-reset)
+   fontstyles : html/stylelist :=
+    (stylelist<-fontfacemap
+     fontfacemap)
+   stylelist : html/stylelist :=
+    (stylelist<-stylemap
+     uistylemap)
+   allstyles : html/stylelist :=
+    (html/stylelist
+     resetlist
+     fontstyles
+     stylelist)]
   (html/stylesheet
-   :styles stylelist))
+   :styles allstyles))
  :doc "Returns a htmlstylesheet from a uistylesheet")
 
 (func stylesheet-render-html : ui/stylesheet
  [stylesheetui : ui/stylesheet]
  (let : ui/stylesheet
-  [stylesheethtml : html/stylesheet := (stylesheet<-stylesheet
-                                        stylesheetui)
-   write          : boolean         := (doc/boolean-write<-stylesheet
-                                        stylesheethtml)]
+  [stylesheethtml : html/stylesheet :=
+   (stylesheet<-stylesheet
+    stylesheetui)
+   write : boolean :=
+    (doc/boolean-write<-stylesheet
+     stylesheethtml)]
   stylesheetui)
  :async
  :doc "")
@@ -381,19 +551,23 @@
   orig   : ui
   parent : ui]
  (let : ui/ui
-  [uid      : string            := (:uid   ui)
-   uimap    : ui/uimap          := (:uimap ui)
-   children : html/divchildlist := (divchildlist<-uimap
-                                    uimap)
-   node     : html/node         := (html/div
-                                    :id uid
-                                    :nodes children)
-   nodechg  : html/node         := (node-render<-node-ui
-                                    node
-                                    ui)
-   uimapchg : ui/uimap          := (ui/uimap-render<-uimap-parent
-                                    uimap
-                                    ui)]
+  [uid   : string   := (:uid   ui)
+   uimap : ui/uimap := (:uimap ui)
+   children : html/divchildlist :=
+    (divchildlist<-uimap
+     uimap)
+   node : html/node :=
+    (html/div
+     :id uid
+     :nodes children)
+   nodechg : html/node :=
+    (node-render<-node-ui
+     node
+     ui)
+   uimapchg : ui/uimap :=
+    (ui/uimap-render<-uimap-parent
+     uimap
+     ui)]
   (ui/ui
    :uimap uimapchg))
  :doc "")
@@ -403,35 +577,41 @@
   orig   : ui
   parent : ui]
  (let : ui/ui
-  [uid      : string            := (:uid       ui)
-   data     : any               := (:data      ui)
-   uimap    : ui/uimap          := (:uimap     ui)
-   uistyle  : ui/style          := (:style     ui)
-   uistyles : ui/stylelist      := (:stylelist ui)
-   style    : html/style        := (style<-style
-                                    uistyle)
-   styles   : html/stylelist    := (stylelist<-stylelist
-                                    uistyles)
-   datatype : any               := (type<-any data)
-   text     : string            := (if : string
-                                    (then
-                                     (= datatype string)
-                                     (any<-any : string
-                                      data))
-                                    (else
-                                     (string<-any
-                                      data)))
-   node     : html/node         := (html/p
-                                    :id uid
-                                    :style-unique style
-                                    :stylelist styles
-                                    :text text)
-   nodechg  : html/node         := (node-render<-node-ui
-                                    node
-                                    ui)
-   uimapchg : ui/uimap          := (ui/uimap-render<-uimap-parent
-                                    uimap
-                                    ui)]
+  [uid      : string       := (:uid       ui)
+   data     : any          := (:data      ui)
+   uimap    : ui/uimap     := (:uimap     ui)
+   uistyle  : ui/style     := (:style     ui)
+   uistyles : ui/stylelist := (:stylelist ui)
+   datatype : any          := (type<-any data)
+   style : html/style :=
+    (style<-style
+     uistyle)
+   styles : html/stylelist :=
+    (stylelist<-stylelist
+     uistyles)
+   text : string :=
+    (if : string
+     (then
+      (== datatype string)
+      (any<-any : string
+       data))
+     (else
+      (string<-any
+       data)))
+   node : html/node :=
+    (html/p
+     :id uid
+     :style-unique style
+     :stylelist styles
+     :text text)
+   nodechg : html/node :=
+    (node-render<-node-ui
+     node
+     ui)
+   uimapchg : ui/uimap :=
+    (ui/uimap-render<-uimap-parent
+     uimap
+     ui)]
   (ui/ui
    :uimap uimapchg))
  :doc "")
@@ -441,25 +621,31 @@
   orig   : ui
   parent : ui]
  (let : ui/ui
-  [uid      : string            := (:uid       ui)
-   uimap    : ui/uimap          := (:uimap     ui)
-   uistyle  : ui/style          := (:style     ui)
-   style    : html/style        := (style<-style
-                                    uistyle)
-   styles   : html/stylelist    := (stylelist-extra<-ui ui)
-   children : html/divchildlist := (divchildlist<-uimap
-                                    uimap)
-   node     : html/node         := (html/div
-                                    :id uid
-                                    :style-unique style
-                                    :stylelist styles
-                                    :nodes children)
-   nodechg  : html/node         := (node-render<-node-ui
-                                    node
-                                    ui)
-   uimapchg : ui/uimap          := (ui/uimap-render<-uimap-parent
-                                    uimap
-                                    ui)]
+  [uid     : string   := (:uid   ui)
+   uimap   : ui/uimap := (:uimap ui)
+   uistyle : ui/style := (:style ui)
+   style : html/style :=
+    (style<-style
+     uistyle)
+   styles   : html/stylelist :=
+    (stylelist-extra<-ui ui)
+   children : html/divchildlist :=
+    (divchildlist<-uimap
+     uimap)
+   node : html/node :=
+    (html/div
+     :id uid
+     :style-unique style
+     :stylelist styles
+     :nodes children)
+   nodechg : html/node :=
+    (node-render<-node-ui
+     node
+     ui)
+   uimapchg : ui/uimap :=
+    (ui/uimap-render<-uimap-parent
+     uimap
+     ui)]
   (ui/ui
    :uimap uimapchg))
  :doc "")

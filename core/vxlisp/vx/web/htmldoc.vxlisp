@@ -50,13 +50,12 @@
 (func boolean-write<-stylesheet : boolean
  [stylesheet : html/stylesheet]
  (let : boolean
-  [stylelist : stylelist := (html/styles<-stylesheet
-                             stylesheet)
-   text      : string    := (html/string<-stylelist-indent
-                             stylelist
-                             0)
-   iswrite   : boolean   := (boolean-write-stylesheet<-string
-                             text)]
+  [text : string :=
+    (string<-stylesheet
+     stylesheet)
+   iswrite : boolean :=
+    (boolean-write-stylesheet<-string
+     text)]
   iswrite)
  :async
  :sideeffects "Changes Stylesheet display."
@@ -89,6 +88,18 @@
   :js :auto)
  :clientserver :client
  :doc "Reads the value of an html node by id.")
+
+(func string<-stylesheet : string
+ [stylesheet : html/stylesheet]
+ (let : string
+  [stylelist : stylelist :=
+    (html/styles<-stylesheet
+     stylesheet)
+   text : string :=
+    (html/string<-stylelist-indent
+     stylelist 0)]
+  text)
+ :doc "Returns string from a given stylesheet")
 
 (func ui-readstate<-uid : any
  [uid : string]

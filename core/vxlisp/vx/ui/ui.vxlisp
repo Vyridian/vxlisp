@@ -1,5 +1,6 @@
 (package vx/ui/ui
- :libs (lib event :path vx/event)
+ :libs (lib coll  :path vx/collection)
+       (lib event :path vx/event)
        (lib file  :path vx/data/file)
        (lib state :path vx/state)
  :doc "Universal Ui Element")
@@ -23,6 +24,8 @@
 
 (type fontface : struct
  :properties [name     : string
+              weight   : string
+              unicode  : string
               filelist : file/filelist]
  :doc "Univeral Font Face Type")
 
@@ -46,6 +49,12 @@
  :allowtypes [fontstyle]
  :doc "Map of fontstyle")
 
+(type image : struct
+ :properties [name  : string
+              label : string
+              file  : file/file]
+ :doc "Univeral Image Type")
+
 (type layout : struct
  :properties [name      : string
               fn-layout : ui-render<-ui-orig-parent]
@@ -53,6 +62,7 @@
 
 (type layoutengine : struct
  :properties [name             : string
+              boolean-print    : boolean-print
               layoutmap        : layoutmap
               layoutelse       : layout
               stylesheetrender : stylesheet-render]
@@ -83,15 +93,6 @@
 (type pointstyle : struct
  :doc "Universal Point Style")
 
-/*
-(type render : struct
- :doc "Universal Rendered UI")
-
-(type rendermap : map
- :allowtypes [render]
- :doc "Map of render")
-*/
-
 (type style : struct
  :properties [name             : string
               boundsmargin     : bounds
@@ -101,7 +102,7 @@
               cursor           : cursor
               font             : font
               hidden           : boolean
-              image-background : file/file
+              image-background : image
               layout           : layout
               type             : styletype
               pin              : pin
@@ -126,19 +127,19 @@
  :doc "Universal Style Type")
 
 (type ui : struct
- :properties [uid           : string
-              name          : string
-              layout        : layout
-              parent        : string
-              path          : string
-              hidden        : boolean
-              selected      : boolean
-              selectmulti   : boolean
-              style         : style
-              stylelist     : stylelist
-              eventmap      : event/eventmap
-              data          : any
-              uimap         : uimap]
+ :properties [uid         : string
+              name        : string
+              layout      : layout
+              parent      : string
+              path        : string
+              hidden      : boolean
+              selected    : boolean
+              selectmulti : boolean
+              style       : style
+              stylelist   : stylelist
+              eventmap    : event/eventmap
+              data        : any
+              uimap       : uimap]
  :doc "Universal UI Element")
 
 (type uilist : list
@@ -277,6 +278,17 @@
 
 (const styletype-system : styletype)
 
+(func boolean-print : boolean
+ [ui : ui]
+ (let : boolean
+  [layoutengine : layoutengine :=
+    (layoutengine-readstate)
+   fn-print : boolean-print :=
+    (:boolean-print layoutengine)]
+  (fn-print ui))
+ :context
+ :doc "Create a print ready version of ui")
+
 (func boolean-writestate<-ui : boolean
  [ui : ui]
  (let : boolean
@@ -295,6 +307,18 @@
  :context
  :sideeffects "Changes state"
  :doc "Writes the uiengine to state")
+
+(func int-selected<-ui : int
+ [ui : ui]
+ (let : int
+  [uid : string :=
+    (string-selected<-ui ui)
+   uidlist : stringlist :=
+    (stringlist<-ui ui)]
+  (coll/int<-stringlist-find
+   uidlist
+   uid))
+ :doc "Returns the position of the currently selected subui")
 
 (func fontfacemap<-fontfacelist : fontfacemap
  [fontfacelist : fontfacelist]
@@ -337,17 +361,17 @@
   layoutmap  : layoutmap
   layoutelse : layout]
  (let : layout
-  [style     : style  := (:style ui)
-   layout    : layout := (layout<-style
-                          style)
-   layname   : string := (:name layout)
-   layout1   : layout := (any<-map : layout
-                          layoutmap
-                          layname)
-   layout2   : layout := (if : layout
-                          (!-empty layout1)
-                          layout1
-                          layoutelse)]
+  [style   : style  := (:style ui)
+   layout  : layout := (layout<-style
+                        style)
+   layname : string := (:name layout)
+   layout1 : layout := (any<-map : layout
+                        layoutmap
+                        layname)
+   layout2 : layout := (if : layout
+                        (!-empty layout1)
+                        layout1
+                        layoutelse)]
   layout2)
  :doc "Returns a layout from a given ui, layoutmap, and layoutelse")
 
@@ -366,6 +390,22 @@
    [layout : layout]
    (:name layout)))
  :doc "Returns an layoutmap from an layoutlist")
+
+(func string-selected<-ui : string
+ [ui : ui]
+ (let : string
+  [selectedui : ui :=
+    (ui-selected<-ui ui)]
+  (:uid selectedui))
+ :doc "")
+
+(func stringlist<-ui : stringlist
+ [ui : ui]
+ (let : stringlist
+  [uimap  : uimap  := (:uimap ui)]
+  (coll/stringlist<-map
+   uimap))
+ :doc "Return a list of uid of the ui with selected=true")
 
 (func stringlist-selected<-ui : stringlist
  [ui : ui]
@@ -392,6 +432,13 @@
    (:name style)))
  :doc "")
 
+(func stylesheet-readstate : stylesheet
+ (let : stylesheet
+  [uiengine : uiengine := (uiengine-readstate)]
+  (:stylesheet uiengine))
+ :context
+ :doc "Returns the current uiengine from state")
+
 (func stylesheet-render : stylesheet
  [stylesheetui : stylesheet]
  :sideeffects "Stylesheet will be rendered"
@@ -403,13 +450,14 @@
   uiorig : ui
   parent : ui]
  (let : ui
-  [fn-layout : ui-render<-ui-orig-parent
-    := (:fn-layout layout)
-   uichg : ui
-    := (fn-layout
-        uiarg
-        uiorig
-        parent)]
+  [name : string := (:name layout)
+   fn-layout : ui-render<-ui-orig-parent :=
+    (:fn-layout layout)
+   uichg : ui :=
+    (fn-layout
+     uiarg
+     uiorig
+     parent)]
   uichg)
  :doc "")
 

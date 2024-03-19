@@ -198,6 +198,21 @@
     return output
   }
 
+  static vx_list_from_list_intany(generic_list_1, valuelist, fn_any_from_int_any) {
+    let output = vx_core.f_empty(generic_list_1)
+    const fn = fn_any_from_int_any['vx_value']
+    if (fn) {
+      output = []
+      output['vx_type'] = generic_list_1
+      for (let i = 0; i < valuelist.length; i++) {
+        const value = valuelist[i]
+        const outval = fn(i+1, value)
+        output[i] = outval
+      }
+    }
+    return output
+  }
+
   static vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value) {
     let output = vx_core.f_empty(generic_list_1)
     const fn = fn_any_from_key_value['vx_value']

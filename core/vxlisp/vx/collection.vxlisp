@@ -89,6 +89,51 @@ count : int := 0
           count += 1
           output = (fn-loop output))))")
 
+(func int<-map-key : int
+ [map : map-1
+  key : string]
+ (let : int
+  [keys : stringlist := (stringlist<-map map)]
+  (int<-stringlist-find
+   keys key))
+ :test (test
+        2
+        (int<-map-key
+         (stringmap
+          :a "x"
+          :b "y")
+         "b"))
+ :doc "Returns the position of key in any map.")
+
+(func int<-stringlist-find : int
+ [stringlist : stringlist
+  find       : string]
+ (let : int
+  [poslist : intlist :=
+    (list<-list-intany : intlist
+     stringlist
+     (fn : int
+      [pos   : int
+       value : string]
+      (if : int
+       (= find value)
+       pos
+       0)))
+   gt0list : intlist :=
+    (list<-list-filter
+     poslist
+     (fn : int
+      [item : int]
+      item))]
+  (first<-list : int
+   gt0list))
+ :test (test
+        2
+        (int<-stringlist-find
+         (stringlist "a" "b")
+         "b"))
+ :doc "Returns the position (first position is 1) of find text in a stringlist.")
+
 (func is-list : boolean
  [val : any :doc "Any value"]
  (= ":list" (extends<-any val))
@@ -263,3 +308,19 @@ output : list-1 := (empty list-1)
           "a" "b" "c" "d")
          2 3))
  :doc "Returns a list from another list")
+
+(func stringlist<-map : stringlist
+ [map : map-1]
+ (list<-map : stringlist
+  map
+  (fn : string
+   [key   : string
+    value : any-1]
+   key))
+ :test (test
+        (stringlist "a" "b")
+        (stringlist<-map
+         (intmap
+          :a 1
+          :b 2)))
+ :doc "Returns a stringlist of keys from any map.")

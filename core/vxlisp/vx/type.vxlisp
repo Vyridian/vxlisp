@@ -40,10 +40,10 @@
   :cpp
    "bool check = vx_core::vx_boolean_from_string_starts(text->vx_string(), starts->vx_string());
     output = vx_core::vx_new_boolean(check);"
-  :js "vx_core.vx_boolean_from_string_starts(text, starts)"
   :java
    "boolean check = Core.vx_boolean_from_string_starts(text.vx_string(), starts.vx_string());
-    output = Core.vx_new_boolean(check);")
+    output = Core.vx_new_boolean(check);"
+  :js :auto)
  :test (test-true
         (boolean<-string-starts
          "abcd"
@@ -317,9 +317,10 @@
 (func string-outdent : string
  [text : string]
  (let : string
-  [pos    : int    := (int<-string-findkeyword
-                       text
-                       :nonwhitespace)]
+  [pos : int :=
+    (int<-string-findkeyword
+     text
+     :nonwhitespace)]
   (if : string
    (then
     (= 0 pos)

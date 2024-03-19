@@ -23,11 +23,11 @@ export default class vx_core_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/core", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 14, ":tests", 2, ":total", 14), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 89, ":tests", 229, ":total", 255), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 51, ":tests", 70, ":total", 136), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 89, ":tests", 231, ":total", 257), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 51, ":tests", 71, ":total", 138), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 34, ":tests", 77, ":total", 225), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 34, ":tests", 78, ":total", 227), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 6, ":tests", 5, ":total", 75)
     )
   }
@@ -183,6 +183,7 @@ export default class vx_core_test {
           "any<-func", 0,
           "any<-func-async", 0,
           "any<-int", 0,
+          "any<-int-any", 0,
           "any<-key-value", 0,
           "any<-key-value-async", 0,
           "any<-list", 2,
@@ -242,6 +243,7 @@ export default class vx_core_test {
           "list<-list", 1,
           "list<-list_1", 0,
           "list<-list-async", 0,
+          "list<-list-intany", 1,
           "list<-map", 1,
           "list<-map_1", 1,
           "list<-map-async", 0,
@@ -2534,6 +2536,47 @@ export default class vx_core_test {
     return output
   }
 
+  static f_list_from_list_intany(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "list<-list-intany",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-list-intany : stringlist\n  (stringlist \"a\" \"b\")\n  (fn : stringlist\n   [index : int\n    value : string]\n   (string value index))))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              vx_core.f_new(
+                vx_core.t_stringlist,
+                "a1",
+                "b2"
+              ),
+              vx_core.f_list_from_list_intany(
+                {"any-1": vx_core.t_string, "any-2": vx_core.t_string, "list-1": vx_core.t_stringlist, "list-2": vx_core.t_stringlist},
+                vx_core.f_new(
+                  vx_core.t_stringlist,
+                  "a",
+                  "b"
+                ),
+                vx_core.f_new(vx_core.t_any_from_int_any, (index, value) => 
+                  vx_core.f_new(
+                    vx_core.t_string,
+                    value,
+                    index
+                  ))
+              )
+            )
+          )
+        )
+    )
+    return output
+  }
+
   static f_list_from_map(context) {
     const output = vx_core.f_new(
       vx_test.t_testcase,
@@ -3346,6 +3389,7 @@ export default class vx_core_test {
       vx_core_test.f_list_join_from_list(context),
       vx_core_test.f_list_join_from_list_1(context),
       vx_core_test.f_list_from_list(context),
+      vx_core_test.f_list_from_list_intany(context),
       vx_core_test.f_list_from_map(context),
       vx_core_test.f_list_from_map_1(context),
       vx_core_test.f_map_from_list(context),

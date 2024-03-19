@@ -3,9 +3,11 @@
 import vx_ui_html_uihtml from "../../../../src/vx/ui/html/uihtml.js"
 import vx_core from "../../../../src/vx/core.js"
 import vx_test from "../../../../src/vx/test.js"
+import vx_data_file from "../../../../src/vx/data/file.js"
 import vx_web_html from "../../../../src/vx/web/html.js"
 import vx_web_htmldoc from "../../../../src/vx/web/htmldoc.js"
 import vx_event from "../../../../src/vx/event.js"
+import vx_type from "../../../../src/vx/type.js"
 import vx_ui_ui from "../../../../src/vx/ui/ui.js"
 
 export default class vx_ui_html_uihtml_test {
@@ -28,11 +30,11 @@ export default class vx_ui_html_uihtml_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/ui/html/uihtml", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 6), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 54, ":tests", 12, ":total", 22), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 16), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 64, ":tests", 18, ":total", 28), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 22), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 22), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 28), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     )
   }
@@ -58,14 +60,20 @@ export default class vx_ui_html_uihtml_test {
       "funcmap",
         vx_core.f_new(
           vx_core.t_intmap,
+          "boolean-print-html", 0,
           "context-write", 0,
           "divchild<-ui", 0,
           "divchildlist<-uimap", 0,
           "node-app<-ui-orig-parent", 0,
           "node-render<-node-ui", 0,
+          "string-style<-font", 0,
+          "string-style<-image", 0,
           "string-stylename<-name-styletype", 0,
+          "style<-fontface", 0,
           "style<-style", 0,
           "stylelist-extra<-ui", 0,
+          "stylelist-reset", 0,
+          "stylelist<-fontfacemap", 0,
           "stylelist<-stylelist", 0,
           "stylelist<-stylemap", 0,
           "stylemap<-stylemap", 0,

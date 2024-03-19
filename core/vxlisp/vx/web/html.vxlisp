@@ -391,15 +391,18 @@
   prop   : string
   indent : int]
  (let
-  [text    : string        := (string<-nodelist-indent
-                               nodes
-                               (+1 indent))
-   sindent : string        := (string<-indent
-                               indent)
-   eindent : string        := (if
-                               (then (is-empty text) "")
-                               (then (is-empty sindent) newline)
-                               (else sindent))]
+  [text : string :=
+   (string<-nodelist-indent
+    nodes
+    (+1 indent))
+   sindent : string :=
+    (string<-indent
+     indent)
+   eindent : string :=
+    (if
+     (then (is-empty text) "")
+     (then (is-empty sindent) newline)
+     (else sindent))]
   (string
    sindent "<" tag prop ">"
    text
@@ -410,14 +413,15 @@
  [nodelist : list-1
   indent   : int]
  (let
-  [textlist : stringlist := (list<-list
-                             nodelist
-                             (fn : string
-                              [node : node]
-                              (string<-node-indent
-                               node
-                               indent)
-                             ))]
+  [textlist : stringlist :=
+    (list<-list
+     nodelist
+     (fn : string
+      [node : node]
+      (string<-node-indent
+       node
+       indent)
+     ))]
   (string<-stringlist-join textlist ""))
  :doc "Returns a string from any node")
 
@@ -428,7 +432,9 @@
   [sindent : string := (string<-indent indent)
    text    : string := (htmlstring<-string (:text p))
    sid     : string := (string<-propname-val "id" (:id p))
-   sclass  : string := (string<-propstyle (:style p))
+   sclass  : string := (string<-propstyle-stylelist
+                        (:style p)
+                        (:stylelist p))
    sstyle  : string := (string<-propstyleunique (:style-unique p))]
   (string sindent "<p" sid sclass sstyle ">" text "</p>"))
  :test (test
@@ -512,16 +518,19 @@
 
 (func string<-propstyleunique : string
  [style : style]
- (if
+ (if : string
   (then
    (!-empty style)
-   (string
-    " style="
-    quote
-    (string<-stylepropmap-indent
-     (:props style)
-     0)
-    quote)))
+   (let : string
+    [props : propmap := (:props style)
+     text  : string  := (string<-stylepropmap-indent
+                         props
+                         0)]
+    (if : string
+     (then
+      (!-empty text)
+      (string
+       " style=" quote text quote))))))
  :doc "Returns ' style=\"{style.propmap}\"' if style is not empty.")
 
 (func string<-style-indent : string
@@ -549,14 +558,15 @@
  [stylelist : stylelist
   indent    : int]
  (let : string
-  [sstyles : stringlist := (list<-list : stringlist
-                            stylelist
-                            (fn : string
-                             [substyle : style]
-                             (string<-style-indent
-                              substyle
-                              indent)))]
-  (string<-stringlist-join sstyles ""))
+  [sstyles : stringlist :=
+   (list<-list : stringlist
+    stylelist
+    (fn : string
+     [substyle : style]
+     (string<-style-indent
+      substyle
+      indent)))]
+  (string<-stringlist-join sstyles newline))
  :doc "Return a string from a stylelist")
 
 (func string<-stylepropmap-indent : string
@@ -564,16 +574,17 @@
   indent  : int]
  (let : string
   [sindent : string     := (string<-indent indent)
-   sprops  : stringlist := (list<-map : stringlist
-                            propmap
-                            (fn : string
-                             [key : string
-                              val : string]
-                             (string
-                              sindent
-                              key
-                              ": "
-                              val ";")))]
+   sprops  : stringlist :=
+    (list<-map : stringlist
+     propmap
+     (fn : string
+      [key : string
+       val : string]
+      (string
+       sindent
+       key
+       ": "
+       val ";")))]
   (string<-stringlist-join
    sprops
    ""))
@@ -583,17 +594,21 @@
  [stylesheet : stylesheet
   indent     : int]
  (let
-  [text    : string := (string<-stylelist-indent
-                        (:styles stylesheet)
-                        (+1 indent))
-   sindent : string := (string<-indent
-                        indent)
-   eindent : string := (if
-                        (!-empty text)
-                        sindent)]
+  [styles  : stylelist := (:styles stylesheet)
+   sstyles : string :=
+    (string<-stylelist-indent
+     styles
+     (+1 indent))
+   sindent : string :=
+    (string<-indent
+     indent)
+   eindent : string :=
+    (if
+     (!-empty sstyles)
+     sindent)]
   (string
    sindent "<style>"
-   text
+   sstyles
    eindent "</style>"))
  :doc "Returns string representation of given stylesheet.")
 

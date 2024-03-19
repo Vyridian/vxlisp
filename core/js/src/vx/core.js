@@ -204,6 +204,21 @@ export default class vx_core {
     return output
   }
 
+  static vx_list_from_list_intany(generic_list_1, valuelist, fn_any_from_int_any) {
+    let output = vx_core.f_empty(generic_list_1)
+    const fn = fn_any_from_int_any['vx_value']
+    if (fn) {
+      output = []
+      output['vx_type'] = generic_list_1
+      for (let i = 0; i < valuelist.length; i++) {
+        const value = valuelist[i]
+        const outval = fn(i+1, value)
+        output[i] = outval
+      }
+    }
+    return output
+  }
+
   static vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value) {
     let output = vx_core.f_empty(generic_list_1)
     const fn = fn_any_from_key_value['vx_value']
@@ -2879,6 +2894,28 @@ export default class vx_core {
   }
 
   /**
+   * @function any_from_int_any
+   * Generic Function returning Generic any-1 from an int and a value
+   * @param  {typemap} generic
+   * @param  {int} num
+   * @param  {generic_any_2} val
+   * @return {any-1}
+   */
+  static t_any_from_int_any = {
+    vx_type: vx_core.t_type
+  }
+  static e_any_from_int_any = {
+    vx_type: vx_core.t_any_from_int_any
+  }
+
+  // (func any<-int-any)
+  static f_any_from_int_any(generic, num, val) {
+    const generic_any_1 = generic["any-1"]
+    let output = vx_core.f_empty(generic_any_1)
+    return output
+  }
+
+  /**
    * @function any_from_key_value
    * Generic Function returning Generic any-1 from a key and a value
    * @param  {typemap} generic
@@ -4335,6 +4372,29 @@ export default class vx_core {
       output = await future
       output['vx_type'] = generic_list_1
     }
+    return output
+  }
+
+  /**
+   * @function list_from_list_intany
+   * Returns a list of processed items from another list
+   * @param  {typemap} generic
+   * @param  {generic_list_2} values
+   * @param  {any_from_int_any} fn_any_from_int_any
+   * @return {list-1}
+   */
+  static t_list_from_list_intany = {
+    vx_type: vx_core.t_type
+  }
+  static e_list_from_list_intany = {
+    vx_type: vx_core.t_list_from_list_intany
+  }
+
+  // (func list<-list-intany)
+  static f_list_from_list_intany(generic, values, fn_any_from_int_any) {
+    const generic_list_1 = generic["list-1"]
+    let output = vx_core.f_empty(generic_list_1)
+    output = vx_core.vx_list_from_list_intany(generic_list_1, values, fn_any_from_int_any)
     return output
   }
 
@@ -6010,6 +6070,7 @@ export default class vx_core {
       "any<-func": vx_core.e_any_from_func,
       "any<-func-async": vx_core.e_any_from_func_async,
       "any<-int": vx_core.e_any_from_int,
+      "any<-int-any": vx_core.e_any_from_int_any,
       "any<-key-value": vx_core.e_any_from_key_value,
       "any<-key-value-async": vx_core.e_any_from_key_value_async,
       "any<-list": vx_core.e_any_from_list,
@@ -6069,6 +6130,7 @@ export default class vx_core {
       "list<-list": vx_core.e_list_from_list,
       "list<-list_1": vx_core.e_list_from_list_1,
       "list<-list-async": vx_core.e_list_from_list_async,
+      "list<-list-intany": vx_core.e_list_from_list_intany,
       "list<-map": vx_core.e_list_from_map,
       "list<-map_1": vx_core.e_list_from_map_1,
       "list<-map-async": vx_core.e_list_from_map_async,
@@ -6178,6 +6240,7 @@ export default class vx_core {
       "any<-func": vx_core.t_any_from_func,
       "any<-func-async": vx_core.t_any_from_func_async,
       "any<-int": vx_core.t_any_from_int,
+      "any<-int-any": vx_core.t_any_from_int_any,
       "any<-key-value": vx_core.t_any_from_key_value,
       "any<-key-value-async": vx_core.t_any_from_key_value_async,
       "any<-list": vx_core.t_any_from_list,
@@ -6237,6 +6300,7 @@ export default class vx_core {
       "list<-list": vx_core.t_list_from_list,
       "list<-list_1": vx_core.t_list_from_list_1,
       "list<-list-async": vx_core.t_list_from_list_async,
+      "list<-list-intany": vx_core.t_list_from_list_intany,
       "list<-map": vx_core.t_list_from_map,
       "list<-map_1": vx_core.t_list_from_map_1,
       "list<-map-async": vx_core.t_list_from_map_async,
@@ -9070,6 +9134,24 @@ export default class vx_core {
       fn            : vx_core.f_any_from_int
     }
 
+    // (func any<-int-any)
+    vx_core.t_any_from_int_any['vx_value'] = {
+      name          : "any<-int-any",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_any_from_int_any
+    }
+
     // (func any<-key-value)
     vx_core.t_any_from_key_value['vx_value'] = {
       name          : "any<-key-value",
@@ -10130,6 +10212,24 @@ export default class vx_core {
       properties    : [],
       proplast      : {},
       fn            : vx_core.f_list_from_list_async
+    }
+
+    // (func list<-list-intany)
+    vx_core.t_list_from_list_intany['vx_value'] = {
+      name          : "list<-list-intany",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_list_from_list_intany
     }
 
     // (func list<-map)

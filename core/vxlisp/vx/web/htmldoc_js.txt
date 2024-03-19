@@ -3,18 +3,17 @@
 
   static vx_boolean_print_from_id_stylesheettext(id, stylesheettext) {
     const text = document.getElementById(id).innerHTML
-    const win = window.open('', '', 'height=500, width=500')
+    const win = window.open('', 'Print', 'popup=true')
     const doctext = '' +
      '<html>\n' +
      '<head>\n' +
-     '  <style>\n' +
-     stylesheettext +
-     '\n</head>\n' +
+     stylesheettext + '\n' +
+     '</head>\n' +
      '<body>\n' +
-     text +
-     '\n</body>\n' +
+     text + '\n'
+     '</body>\n' +
      '</html>'
-    win.document.write(divContents)
+    win.document.write(doctext)
     win.document.write('</body></html>')
     win.document.close()
     win.print()

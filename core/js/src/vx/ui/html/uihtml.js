@@ -1,9 +1,11 @@
 'strict mode'
 
 import vx_core from "../../../vx/core.js"
+import vx_data_file from "../../../vx/data/file.js"
 import vx_web_html from "../../../vx/web/html.js"
 import vx_web_htmldoc from "../../../vx/web/htmldoc.js"
 import vx_event from "../../../vx/event.js"
+import vx_type from "../../../vx/type.js"
 import vx_ui_ui from "../../../vx/ui/ui.js"
 
 
@@ -48,6 +50,36 @@ export default class vx_ui_html_uihtml {
    * {style}
    */
   static c_style_selected = {vx_type: vx_web_html.t_style, vx_constdef: {pkgname: 'vx/ui/html/uihtml', name: 'style-selected'}}
+
+  /**
+   * @function boolean_print_html
+   * Create a print ready version of ui
+   * @param  {ui} ui
+   * @return {boolean}
+   */
+  static t_boolean_print_html = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_print_html = {
+    vx_type: vx_ui_html_uihtml.t_boolean_print_html
+  }
+
+  // (func boolean-print-html)
+  static f_boolean_print_html(context, ui) {
+    let output = vx_core.e_boolean
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_boolean},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const uid = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_ui}, ui, ":uid")
+        const stylesheetui = vx_ui_ui.f_stylesheet_readstate(context)
+        const stylesheethtml = vx_ui_html_uihtml.f_stylesheet_from_stylesheet(stylesheetui)
+        const styletext = vx_web_html.f_string_from_stylesheet_indent(stylesheethtml, 0)
+        return vx_web_htmldoc.f_boolean_print_from_id_stylesheettext(uid, styletext)
+      })
+    )
+    return output
+  }
 
   /**
    * @function context_write
@@ -195,6 +227,104 @@ export default class vx_ui_html_uihtml {
   }
 
   /**
+   * @function string_style_from_font
+   * Returns a font css string from a logical font.
+   * @param  {font} font
+   * @return {string}
+   */
+  static t_string_style_from_font = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_style_from_font = {
+    vx_type: vx_ui_html_uihtml.t_string_style_from_font
+  }
+
+  // (func string-style<-font)
+  static f_string_style_from_font(font) {
+    let output = vx_core.e_string
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_string},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const face = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_fontface, "struct-2": vx_ui_ui.t_font}, font, ":fontface")
+        const size = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_ui_ui.t_font}, font, ":fontsize")
+        const name = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_fontface}, face, ":name")
+        const ssize = vx_core.f_if_2(
+          {"any-1": vx_core.t_string},
+          vx_core.f_then(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_gt(size, 0)}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
+              vx_core.t_string,
+              vx_core.f_divide(size, 100),
+              "em",
+              " "
+            )})
+          )
+        )
+        return vx_core.f_if_2(
+          {"any-1": vx_core.t_string},
+          vx_core.f_then(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty(name)}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
+              vx_core.t_string,
+              ssize,
+              vx_core.c_quote,
+              name,
+              vx_core.c_quote
+            )})
+          )
+        )
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function string_style_from_image
+   * Returns an image css string from a logical image.
+   * @param  {image} image
+   * @return {string}
+   */
+  static t_string_style_from_image = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_style_from_image = {
+    vx_type: vx_ui_html_uihtml.t_string_style_from_image
+  }
+
+  // (func string-style<-image)
+  static f_string_style_from_image(image) {
+    let output = vx_core.e_string
+    output = vx_core.f_if_2(
+      {"any-1": vx_core.t_string},
+      vx_core.f_then(
+        vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty_1(image)}),
+        vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_let(
+          {"any-1": vx_core.t_string},
+          [],
+          vx_core.f_new(vx_core.t_any_from_func, () => {
+            const file = vx_core.f_any_from_struct({"any-1": vx_data_file.t_file, "struct-2": vx_ui_ui.t_image}, image, ":file")
+            const url = vx_data_file.f_pathfull_from_file(file)
+            return vx_core.f_if_2(
+              {"any-1": vx_core.t_string},
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty(url)}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
+                  vx_core.t_string,
+                  "url(",
+                  url,
+                  ")"
+                )})
+              )
+            )
+          })
+        )})
+      )
+    )
+    return output
+  }
+
+  /**
    * @function string_stylename_from_name_styletype
    * @param  {string} name
    * @param  {styletype} styletype
@@ -244,6 +374,80 @@ export default class vx_ui_html_uihtml {
   }
 
   /**
+   * @function style_from_fontface
+   * Returns an html style from a font
+   * @param  {fontface} fontface
+   * @return {style}
+   */
+  static t_style_from_fontface = {
+    vx_type: vx_core.t_type
+  }
+  static e_style_from_fontface = {
+    vx_type: vx_ui_html_uihtml.t_style_from_fontface
+  }
+
+  // (func style<-fontface)
+  static f_style_from_fontface(fontface) {
+    let output = vx_web_html.e_style
+    output = vx_core.f_let(
+      {"any-1": vx_web_html.t_style},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const name = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_fontface}, fontface, ":name")
+        const weight = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_fontface}, fontface, ":weight")
+        const unicode = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_fontface}, fontface, ":unicode")
+        const files = vx_core.f_any_from_struct({"any-1": vx_data_file.t_filelist, "struct-2": vx_ui_ui.t_fontface}, fontface, ":filelist")
+        const urls = vx_core.f_list_from_list_1(
+          {"any-1": vx_core.t_string, "any-2": vx_data_file.t_file, "list-1": vx_core.t_stringlist, "list-2": vx_data_file.t_filelist},
+          files,
+          vx_core.f_new(vx_core.t_any_from_any, (file) => 
+            vx_core.f_new(
+              vx_core.t_string,
+              "url(",
+              vx_data_file.f_pathfull_from_file(file),
+              ")"
+            ))
+        )
+        const fontfamily = vx_core.f_new(
+          vx_core.t_string,
+          vx_core.c_quote,
+          name,
+          vx_core.c_quote
+        )
+        const srcurls = vx_type.f_string_from_stringlist_join(urls, ",")
+        const src = vx_core.f_new(
+          vx_core.t_string,
+          srcurls,
+          ";"
+        )
+        const propmap = vx_core.f_new(
+          vx_web_html.t_propmap,
+          ":font-family",
+          fontfamily,
+          ":font-style",
+          "normal",
+          ":font-weight",
+          weight,
+          ":font-display",
+          "swap",
+          ":src",
+          src,
+          ":unicode-range",
+          unicode
+        )
+        return vx_core.f_new(
+          vx_web_html.t_style,
+          ":name",
+          "@font-face",
+          ":props",
+          propmap
+        )
+      })
+    )
+    return output
+  }
+
+  /**
    * @function style_from_style
    * Returns a htmlstyle from a uistyle
    * @param  {style} uistyle
@@ -274,12 +478,14 @@ export default class vx_ui_html_uihtml {
           vx_core.f_new(vx_core.t_any_from_func, () => {
             const layout = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_layout, "struct-2": vx_ui_ui.t_style}, uistyle, ":layout")
             const name = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":name")
+            const font = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_font, "struct-2": vx_ui_ui.t_style}, uistyle, ":font")
             const pin = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_pin, "struct-2": vx_ui_ui.t_style}, uistyle, ":pin")
             const pointpos = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_point, "struct-2": vx_ui_ui.t_style}, uistyle, ":pointpos")
             const pointsize = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_point, "struct-2": vx_ui_ui.t_style}, uistyle, ":pointsize")
             const styletype = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_styletype, "struct-2": vx_ui_ui.t_style}, uistyle, ":type")
-            const color_background = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":color-background")
-            const color_hoverbkgrd = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":color-hoverbkgrd")
+            const color_bkg = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":color-background")
+            const image_bkg = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_image, "struct-2": vx_ui_ui.t_style}, uistyle, ":image-background")
+            const color_hoverbkg = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":color-hoverbkgrd")
             const cursor = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_cursor, "struct-2": vx_ui_ui.t_style}, uistyle, ":cursor")
             const hidden = vx_core.f_any_from_struct({"any-1": vx_core.t_boolean, "struct-2": vx_ui_ui.t_style}, uistyle, ":hidden")
             const posx = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_ui_ui.t_point}, pointpos, ":x")
@@ -287,17 +493,18 @@ export default class vx_ui_html_uihtml {
             const sizex = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_ui_ui.t_point}, pointsize, ":x")
             const sizey = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_ui_ui.t_point}, pointsize, ":y")
             const stylename = vx_ui_html_uihtml.f_string_stylename_from_name_styletype(name, styletype)
-            const backgroundcolor = vx_core.f_if_2(
+            const bkgcolor = vx_core.f_if_2(
               {"any-1": vx_core.t_string},
               vx_core.f_then(
-                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty(color_background)}),
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty(color_bkg)}),
                 vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
                   vx_core.t_string,
                   "#",
-                  color_background
+                  color_bkg
                 )})
               )
             )
+            const bkgimage = vx_ui_html_uihtml.f_string_style_from_image(image_bkg)
             const position = vx_core.f_if_2(
               {"any-1": vx_core.t_string},
               vx_core.f_then(
@@ -325,9 +532,17 @@ export default class vx_ui_html_uihtml {
                   vx_core.f_eqeq(
                     layout,
                     vx_ui_ui.c_layout_statusbar
+                  ),
+                  vx_core.f_eqeq(
+                    layout,
+                    vx_ui_ui.c_layout_titlebar
                   )
                 )}),
                 vx_core.f_new(vx_core.t_any_from_func, () => {return "fixed"})
+              ),
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty_1(pointpos)}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return "absolute"})
               ),
               vx_core.f_else(vx_core.f_new(vx_core.t_any_from_func, () => {return ""}))
             )
@@ -540,6 +755,7 @@ export default class vx_ui_html_uihtml {
                 vx_core.f_new(vx_core.t_any_from_func, () => {return "inline-block"})
               )
             )
+            const sfont = vx_ui_html_uihtml.f_string_style_from_font(font)
             const gap = vx_core.f_if_2(
               {"any-1": vx_core.t_string},
               vx_core.f_then(
@@ -574,17 +790,16 @@ export default class vx_ui_html_uihtml {
                   vx_ui_ui.c_layout_flow_columns
                 )}),
                 vx_core.f_new(vx_core.t_any_from_func, () => {return "auto"})
-              ),
-              vx_core.f_else(vx_core.f_new(vx_core.t_any_from_func, () => {return "auto"}))
+              )
             )
             const hoverbkgrdcolor = vx_core.f_if_2(
               {"any-1": vx_core.t_string},
               vx_core.f_then(
-                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_ne("", color_hoverbkgrd)}),
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_ne("", color_hoverbkg)}),
                 vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
                   vx_core.t_string,
                   "#",
-                  color_hoverbkgrd
+                  color_hoverbkg
                 )})
               )
             )
@@ -601,11 +816,15 @@ export default class vx_ui_html_uihtml {
             const props = vx_core.f_new(
               vx_web_html.t_propmap,
               ":background-color",
-              backgroundcolor,
+              bkgcolor,
+              ":background-image",
+              bkgimage,
               ":cursor",
               scursor,
               ":display",
               display,
+              ":font",
+              sfont,
               ":gap",
               gap,
               ":position",
@@ -708,6 +927,110 @@ export default class vx_ui_html_uihtml {
         )
         return styles2
       })
+    )
+    return output
+  }
+
+  /**
+   * @function stylelist_reset
+   * Returns the initial reset styles for ui framework
+   * @return {stylelist}
+   */
+  static t_stylelist_reset = {
+    vx_type: vx_core.t_type
+  }
+  static e_stylelist_reset = {
+    vx_type: vx_ui_html_uihtml.t_stylelist_reset
+  }
+
+  // (func stylelist-reset)
+  static f_stylelist_reset() {
+    let output = vx_web_html.e_stylelist
+    output = vx_core.f_new(
+      vx_web_html.t_stylelist,
+      vx_core.f_new(
+        vx_web_html.t_style,
+        ":name",
+        "html",
+        ":props",
+        vx_core.f_new(
+          vx_web_html.t_propmap,
+          ":margin",
+          "0mm",
+          ":padding",
+          "0mm"
+        )
+      ),
+      vx_core.f_new(
+        vx_web_html.t_style,
+        ":name",
+        "body",
+        ":props",
+        vx_core.f_new(
+          vx_web_html.t_propmap,
+          ":margin",
+          "0mm",
+          ":padding",
+          "0mm",
+          ":-webkit-print-color-adjust",
+          "exact !important",
+          ":color-adjust",
+          "exact !important",
+          ":print-color-adjust",
+          "exact !important"
+        )
+      ),
+      vx_core.f_new(
+        vx_web_html.t_style,
+        ":name",
+        "div",
+        ":props",
+        vx_core.f_new(
+          vx_web_html.t_propmap,
+          ":position",
+          "relative"
+        )
+      ),
+      vx_core.f_new(
+        vx_web_html.t_style,
+        ":name",
+        "p",
+        ":props",
+        vx_core.f_new(
+          vx_web_html.t_propmap,
+          ":margin-block-start",
+          "0mm",
+          ":margin-block-end",
+          "0mm",
+          ":white-space",
+          "pre-line"
+        )
+      )
+    )
+    return output
+  }
+
+  /**
+   * @function stylelist_from_fontfacemap
+   * Returns stylelist from a fontfacemap
+   * @param  {fontfacemap} fontfacemap
+   * @return {stylelist}
+   */
+  static t_stylelist_from_fontfacemap = {
+    vx_type: vx_core.t_type
+  }
+  static e_stylelist_from_fontfacemap = {
+    vx_type: vx_ui_html_uihtml.t_stylelist_from_fontfacemap
+  }
+
+  // (func stylelist<-fontfacemap)
+  static f_stylelist_from_fontfacemap(fontfacemap) {
+    let output = vx_web_html.e_stylelist
+    output = vx_core.f_list_from_map_1(
+      {"any-1": vx_web_html.t_style, "any-2": vx_ui_ui.t_fontface, "list-1": vx_web_html.t_stylelist, "map-2": vx_ui_ui.t_fontfacemap},
+      fontfacemap,
+      vx_core.f_new(vx_core.t_any_from_key_value, ([key, fontface]) => 
+        vx_ui_html_uihtml.f_style_from_fontface(fontface))
     )
     return output
   }
@@ -835,11 +1158,20 @@ export default class vx_ui_html_uihtml {
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const uistylemap = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_stylemap, "struct-2": vx_ui_ui.t_stylesheet}, uistylesheet, ":stylemap")
+        const fontfacemap = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_fontfacemap, "struct-2": vx_ui_ui.t_stylesheet}, uistylesheet, ":fontfacemap")
+        const resetlist = vx_ui_html_uihtml.f_stylelist_reset()
+        const fontstyles = vx_ui_html_uihtml.f_stylelist_from_fontfacemap(fontfacemap)
         const stylelist = vx_ui_html_uihtml.f_stylelist_from_stylemap(uistylemap)
+        const allstyles = vx_core.f_new(
+          vx_web_html.t_stylelist,
+          resetlist,
+          fontstyles,
+          stylelist
+        )
         return vx_core.f_new(
           vx_web_html.t_stylesheet,
           ":styles",
-          stylelist
+          allstyles
         )
       })
     )
@@ -965,13 +1297,13 @@ export default class vx_ui_html_uihtml {
         const uimap = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_uimap, "struct-2": vx_ui_ui.t_ui}, ui, ":uimap")
         const uistyle = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_style, "struct-2": vx_ui_ui.t_ui}, ui, ":style")
         const uistyles = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_stylelist, "struct-2": vx_ui_ui.t_ui}, ui, ":stylelist")
+        const datatype = vx_core.f_type_from_any(data)
         const style = vx_ui_html_uihtml.f_style_from_style(uistyle)
         const styles = vx_ui_html_uihtml.f_stylelist_from_stylelist(uistyles)
-        const datatype = vx_core.f_type_from_any(data)
         const text = vx_core.f_if_2(
           {"any-1": vx_core.t_string},
           vx_core.f_then(
-            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eqeq(
               datatype,
               vx_core.t_string
             )}),
@@ -1016,14 +1348,20 @@ export default class vx_ui_html_uihtml {
       "style-selected": vx_ui_html_uihtml.c_style_selected
     })
     const emptymap = vx_core.vx_new_map(vx_core.t_map, {
+      "boolean-print-html": vx_ui_html_uihtml.e_boolean_print_html,
       "context-write": vx_ui_html_uihtml.e_context_write,
       "divchild<-ui": vx_ui_html_uihtml.e_divchild_from_ui,
       "divchildlist<-uimap": vx_ui_html_uihtml.e_divchildlist_from_uimap,
       "node-app<-ui-orig-parent": vx_ui_html_uihtml.e_node_app_from_ui_orig_parent,
       "node-render<-node-ui": vx_ui_html_uihtml.e_node_render_from_node_ui,
+      "string-style<-font": vx_ui_html_uihtml.e_string_style_from_font,
+      "string-style<-image": vx_ui_html_uihtml.e_string_style_from_image,
       "string-stylename<-name-styletype": vx_ui_html_uihtml.e_string_stylename_from_name_styletype,
+      "style<-fontface": vx_ui_html_uihtml.e_style_from_fontface,
       "style<-style": vx_ui_html_uihtml.e_style_from_style,
       "stylelist-extra<-ui": vx_ui_html_uihtml.e_stylelist_extra_from_ui,
+      "stylelist-reset": vx_ui_html_uihtml.e_stylelist_reset,
+      "stylelist<-fontfacemap": vx_ui_html_uihtml.e_stylelist_from_fontfacemap,
       "stylelist<-stylelist": vx_ui_html_uihtml.e_stylelist_from_stylelist,
       "stylelist<-stylemap": vx_ui_html_uihtml.e_stylelist_from_stylemap,
       "stylemap<-stylemap": vx_ui_html_uihtml.e_stylemap_from_stylemap,
@@ -1034,14 +1372,20 @@ export default class vx_ui_html_uihtml {
       "ui-render-label<-ui-orig-parent": vx_ui_html_uihtml.e_ui_render_label_from_ui_orig_parent
     })
     const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      "boolean-print-html": vx_ui_html_uihtml.t_boolean_print_html,
       "context-write": vx_ui_html_uihtml.t_context_write,
       "divchild<-ui": vx_ui_html_uihtml.t_divchild_from_ui,
       "divchildlist<-uimap": vx_ui_html_uihtml.t_divchildlist_from_uimap,
       "node-app<-ui-orig-parent": vx_ui_html_uihtml.t_node_app_from_ui_orig_parent,
       "node-render<-node-ui": vx_ui_html_uihtml.t_node_render_from_node_ui,
+      "string-style<-font": vx_ui_html_uihtml.t_string_style_from_font,
+      "string-style<-image": vx_ui_html_uihtml.t_string_style_from_image,
       "string-stylename<-name-styletype": vx_ui_html_uihtml.t_string_stylename_from_name_styletype,
+      "style<-fontface": vx_ui_html_uihtml.t_style_from_fontface,
       "style<-style": vx_ui_html_uihtml.t_style_from_style,
       "stylelist-extra<-ui": vx_ui_html_uihtml.t_stylelist_extra_from_ui,
+      "stylelist-reset": vx_ui_html_uihtml.t_stylelist_reset,
+      "stylelist<-fontfacemap": vx_ui_html_uihtml.t_stylelist_from_fontfacemap,
       "stylelist<-stylelist": vx_ui_html_uihtml.t_stylelist_from_stylelist,
       "stylelist<-stylemap": vx_ui_html_uihtml.t_stylelist_from_stylemap,
       "stylemap<-stylemap": vx_ui_html_uihtml.t_stylemap_from_stylemap,
@@ -1062,6 +1406,24 @@ export default class vx_ui_html_uihtml {
       "typemap": typemap
     })
     vx_core.vx_global_package_set(pkg)
+
+    // (func boolean-print-html)
+    vx_ui_html_uihtml.t_boolean_print_html['vx_value'] = {
+      name          : "boolean-print-html",
+      pkgname       : "vx/ui/html/uihtml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_html_uihtml.f_boolean_print_html
+    }
 
     // (func context-write)
     vx_ui_html_uihtml.t_context_write['vx_value'] = {
@@ -1153,6 +1515,42 @@ export default class vx_ui_html_uihtml {
       fn            : vx_ui_html_uihtml.f_node_render_from_node_ui
     }
 
+    // (func string-style<-font)
+    vx_ui_html_uihtml.t_string_style_from_font['vx_value'] = {
+      name          : "string-style<-font",
+      pkgname       : "vx/ui/html/uihtml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_html_uihtml.f_string_style_from_font
+    }
+
+    // (func string-style<-image)
+    vx_ui_html_uihtml.t_string_style_from_image['vx_value'] = {
+      name          : "string-style<-image",
+      pkgname       : "vx/ui/html/uihtml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_html_uihtml.f_string_style_from_image
+    }
+
     // (func string-stylename<-name-styletype)
     vx_ui_html_uihtml.t_string_stylename_from_name_styletype['vx_value'] = {
       name          : "string-stylename<-name-styletype",
@@ -1169,6 +1567,24 @@ export default class vx_ui_html_uihtml {
       properties    : [],
       proplast      : {},
       fn            : vx_ui_html_uihtml.f_string_stylename_from_name_styletype
+    }
+
+    // (func style<-fontface)
+    vx_ui_html_uihtml.t_style_from_fontface['vx_value'] = {
+      name          : "style<-fontface",
+      pkgname       : "vx/ui/html/uihtml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_html_uihtml.f_style_from_fontface
     }
 
     // (func style<-style)
@@ -1205,6 +1621,42 @@ export default class vx_ui_html_uihtml {
       properties    : [],
       proplast      : {},
       fn            : vx_ui_html_uihtml.f_stylelist_extra_from_ui
+    }
+
+    // (func stylelist-reset)
+    vx_ui_html_uihtml.t_stylelist_reset['vx_value'] = {
+      name          : "stylelist-reset",
+      pkgname       : "vx/ui/html/uihtml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_html_uihtml.f_stylelist_reset
+    }
+
+    // (func stylelist<-fontfacemap)
+    vx_ui_html_uihtml.t_stylelist_from_fontfacemap['vx_value'] = {
+      name          : "stylelist<-fontfacemap",
+      pkgname       : "vx/ui/html/uihtml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_html_uihtml.f_stylelist_from_fontfacemap
     }
 
     // (func stylelist<-stylelist)
@@ -1385,6 +1837,8 @@ export default class vx_ui_html_uihtml {
       ),
       ":layoutelse",
       vx_ui_html_uihtml.c_layout_else_html,
+      ":boolean-print",
+      vx_ui_html_uihtml.t_boolean_print_html,
       ":stylesheetrender",
       vx_ui_html_uihtml.t_stylesheet_render_html
     ))

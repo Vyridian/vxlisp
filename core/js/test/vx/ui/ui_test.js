@@ -3,6 +3,7 @@
 import vx_ui_ui from "../../../src/vx/ui/ui.js"
 import vx_core from "../../../src/vx/core.js"
 import vx_test from "../../../src/vx/test.js"
+import vx_collection from "../../../src/vx/collection.js"
 import vx_event from "../../../src/vx/event.js"
 import vx_data_file from "../../../src/vx/data/file.js"
 import vx_state from "../../../src/vx/state.js"
@@ -27,12 +28,12 @@ export default class vx_ui_ui_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/ui/ui", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 35), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 55, ":tests", 53, ":total", 96), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 35), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 56, ":tests", 58, ":total", 102), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 40), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 96), 
-      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 26)
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 102), 
+      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 27)
     )
   }
 
@@ -53,6 +54,7 @@ export default class vx_ui_ui_test {
           "fontmap", 0,
           "fontstyle", 0,
           "fontstylemap", 0,
+          "image", 0,
           "layout", 0,
           "layoutengine", 0,
           "layoutlist", 0,
@@ -112,17 +114,22 @@ export default class vx_ui_ui_test {
       "funcmap",
         vx_core.f_new(
           vx_core.t_intmap,
+          "boolean-print", 0,
           "boolean-writestate<-ui", 0,
           "boolean-writestate<-uiengine", 0,
           "fontfacemap<-fontfacelist", 0,
+          "int-selected<-ui", 0,
           "layout<-style", 0,
           "layout<-ui", 0,
           "layout<-ui-layoutengine", 0,
           "layout<-ui-layoutmap-else", 0,
           "layoutengine-readstate", 0,
           "layoutmap<-layoutlist", 0,
+          "string-selected<-ui", 0,
           "stringlist-selected<-ui", 0,
+          "stringlist<-ui", 0,
           "stylemap<-stylelist", 0,
+          "stylesheet-readstate", 0,
           "stylesheet-render", 0,
           "ui-child<-ui-uid", 0,
           "ui-from<-event", 0,

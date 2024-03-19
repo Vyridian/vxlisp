@@ -245,6 +245,77 @@ export default class vx_collection {
   }
 
   /**
+   * @function int_from_map_key
+   * Returns the position of key in any map.
+   * @param  {generic_map_1} map
+   * @param  {string} key
+   * @return {int}
+   */
+  static t_int_from_map_key = {
+    vx_type: vx_core.t_type
+  }
+  static e_int_from_map_key = {
+    vx_type: vx_collection.t_int_from_map_key
+  }
+
+  // (func int<-map-key)
+  static f_int_from_map_key(map, key) {
+    let output = vx_core.e_int
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_int},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const keys = vx_collection.f_stringlist_from_map(map)
+        return vx_collection.f_int_from_stringlist_find(keys, key)
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function int_from_stringlist_find
+   * Returns the position (first position is 1) of find text in a stringlist.
+   * @param  {stringlist} stringlist
+   * @param  {string} find
+   * @return {int}
+   */
+  static t_int_from_stringlist_find = {
+    vx_type: vx_core.t_type
+  }
+  static e_int_from_stringlist_find = {
+    vx_type: vx_collection.t_int_from_stringlist_find
+  }
+
+  // (func int<-stringlist-find)
+  static f_int_from_stringlist_find(stringlist, find) {
+    let output = vx_core.e_int
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_int, "list-1": vx_core.t_intlist},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const poslist = vx_core.f_list_from_list_intany(
+          {"any-1": vx_core.t_int, "any-2": vx_core.t_string, "list-1": vx_core.t_intlist, "list-2": vx_core.t_stringlist},
+          stringlist,
+          vx_core.f_new(vx_core.t_any_from_int_any, (pos, value) => 
+            vx_core.f_if_1(
+              {"any-1": vx_core.t_int},
+              vx_core.f_eq(find, value),
+              pos,
+              0
+            ))
+        )
+        const gt0list = vx_collection.f_list_from_list_filter(
+          {"any-1": vx_core.t_int, "any-2": vx_core.t_int, "list-1": vx_core.t_intlist, "list-2": vx_core.t_intlist},
+          poslist,
+          vx_core.f_new(vx_core.t_any_from_any, (item) => item)
+        )
+        return vx_core.f_first_from_list({"any-1": vx_core.t_int, "list-1": vx_core.t_intlist}, gt0list)
+      })
+    )
+    return output
+  }
+
+  /**
    * @function is_list
    * Returns true if the given value is a list.
    * @param  {any} val Any value
@@ -511,6 +582,30 @@ export default class vx_collection {
     return output
   }
 
+  /**
+   * @function stringlist_from_map
+   * Returns a stringlist of keys from any map.
+   * @param  {generic_map_1} map
+   * @return {stringlist}
+   */
+  static t_stringlist_from_map = {
+    vx_type: vx_core.t_type
+  }
+  static e_stringlist_from_map = {
+    vx_type: vx_collection.t_stringlist_from_map
+  }
+
+  // (func stringlist<-map)
+  static f_stringlist_from_map(map) {
+    let output = vx_core.e_stringlist
+    output = vx_core.f_list_from_map_1(
+      {"any-1": vx_core.t_string, "list-1": vx_core.t_stringlist},
+      map,
+      vx_core.f_new(vx_core.t_any_from_key_value, ([key, value]) => key)
+    )
+    return output
+  }
+
 
 
   static {
@@ -522,6 +617,8 @@ export default class vx_collection {
       "any<-for-until-loop-max": vx_collection.e_any_from_for_until_loop_max,
       "any<-for-while-loop": vx_collection.e_any_from_for_while_loop,
       "any<-for-while-loop-max": vx_collection.e_any_from_for_while_loop_max,
+      "int<-map-key": vx_collection.e_int_from_map_key,
+      "int<-stringlist-find": vx_collection.e_int_from_stringlist_find,
       "is-list": vx_collection.e_is_list,
       "is-map": vx_collection.e_is_map,
       "list<-for-end-loop": vx_collection.e_list_from_for_end_loop,
@@ -531,13 +628,16 @@ export default class vx_collection {
       "list<-list-filter": vx_collection.e_list_from_list_filter,
       "list<-list-filtertypes": vx_collection.e_list_from_list_filtertypes,
       "list<-list-start": vx_collection.e_list_from_list_start,
-      "list<-list-start-end": vx_collection.e_list_from_list_start_end
+      "list<-list-start-end": vx_collection.e_list_from_list_start_end,
+      "stringlist<-map": vx_collection.e_stringlist_from_map
     })
     const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
       "any<-for-until-loop": vx_collection.t_any_from_for_until_loop,
       "any<-for-until-loop-max": vx_collection.t_any_from_for_until_loop_max,
       "any<-for-while-loop": vx_collection.t_any_from_for_while_loop,
       "any<-for-while-loop-max": vx_collection.t_any_from_for_while_loop_max,
+      "int<-map-key": vx_collection.t_int_from_map_key,
+      "int<-stringlist-find": vx_collection.t_int_from_stringlist_find,
       "is-list": vx_collection.t_is_list,
       "is-map": vx_collection.t_is_map,
       "list<-for-end-loop": vx_collection.t_list_from_for_end_loop,
@@ -547,7 +647,8 @@ export default class vx_collection {
       "list<-list-filter": vx_collection.t_list_from_list_filter,
       "list<-list-filtertypes": vx_collection.t_list_from_list_filtertypes,
       "list<-list-start": vx_collection.t_list_from_list_start,
-      "list<-list-start-end": vx_collection.t_list_from_list_start_end
+      "list<-list-start-end": vx_collection.t_list_from_list_start_end,
+      "stringlist<-map": vx_collection.t_stringlist_from_map
     })
     const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
       
@@ -631,6 +732,42 @@ export default class vx_collection {
       properties    : [],
       proplast      : {},
       fn            : vx_collection.f_any_from_for_while_loop_max
+    }
+
+    // (func int<-map-key)
+    vx_collection.t_int_from_map_key['vx_value'] = {
+      name          : "int<-map-key",
+      pkgname       : "vx/collection",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_collection.f_int_from_map_key
+    }
+
+    // (func int<-stringlist-find)
+    vx_collection.t_int_from_stringlist_find['vx_value'] = {
+      name          : "int<-stringlist-find",
+      pkgname       : "vx/collection",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_collection.f_int_from_stringlist_find
     }
 
     // (func is-list)
@@ -811,6 +948,24 @@ export default class vx_collection {
       properties    : [],
       proplast      : {},
       fn            : vx_collection.f_list_from_list_start_end
+    }
+
+    // (func stringlist<-map)
+    vx_collection.t_stringlist_from_map['vx_value'] = {
+      name          : "stringlist<-map",
+      pkgname       : "vx/collection",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_collection.f_stringlist_from_map
     }
 
   }
