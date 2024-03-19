@@ -13,18 +13,17 @@ export default class vx_web_htmldoc {
 
   static vx_boolean_print_from_id_stylesheettext(id, stylesheettext) {
     const text = document.getElementById(id).innerHTML
-    const win = window.open('', '', 'height=500, width=500')
+    const win = window.open('', 'Print', 'popup=true')
     const doctext = '' +
      '<html>\n' +
      '<head>\n' +
-     '  <style>\n' +
-     stylesheettext +
-     '\n</head>\n' +
+     stylesheettext + '\n' +
+     '</head>\n' +
      '<body>\n' +
-     text +
-     '\n</body>\n' +
+     text + '\n'
+     '</body>\n' +
      '</html>'
-    win.document.write(divContents)
+    win.document.write(doctext)
     win.document.write('</body></html>')
     win.document.close()
     win.print()
@@ -318,8 +317,7 @@ export default class vx_web_htmldoc {
       {"any-1": vx_core.t_boolean},
       [],
       vx_core.f_new(vx_core.t_any_from_func, async () => {
-        const stylelist = vx_web_html.f_styles_from_stylesheet(stylesheet)
-        const text = vx_web_html.f_string_from_stylelist_indent(stylelist, 0)
+        const text = vx_web_htmldoc.f_string_from_stylesheet(stylesheet)
         const iswrite = await vx_web_htmldoc.f_boolean_write_stylesheet_from_string(text)
         return iswrite
       })
@@ -386,6 +384,34 @@ export default class vx_web_htmldoc {
   }
 
   /**
+   * @function string_from_stylesheet
+   * Returns string from a given stylesheet
+   * @param  {stylesheet} stylesheet
+   * @return {string}
+   */
+  static t_string_from_stylesheet = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_stylesheet = {
+    vx_type: vx_web_htmldoc.t_string_from_stylesheet
+  }
+
+  // (func string<-stylesheet)
+  static f_string_from_stylesheet(stylesheet) {
+    let output = vx_core.e_string
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_string},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const stylelist = vx_web_html.f_styles_from_stylesheet(stylesheet)
+        const text = vx_web_html.f_string_from_stylelist_indent(stylelist, 0)
+        return text
+      })
+    )
+    return output
+  }
+
+  /**
    * @function ui_readstate_from_uid
    * Returns ui component from element.
    * @param  {string} uid
@@ -422,6 +448,7 @@ export default class vx_web_htmldoc {
       "context-read": vx_web_htmldoc.e_context_read,
       "context-write": vx_web_htmldoc.e_context_write,
       "string<-id": vx_web_htmldoc.e_string_from_id,
+      "string<-stylesheet": vx_web_htmldoc.e_string_from_stylesheet,
       "ui-readstate<-uid": vx_web_htmldoc.e_ui_readstate_from_uid
     })
     const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
@@ -435,6 +462,7 @@ export default class vx_web_htmldoc {
       "context-read": vx_web_htmldoc.t_context_read,
       "context-write": vx_web_htmldoc.t_context_write,
       "string<-id": vx_web_htmldoc.t_string_from_id,
+      "string<-stylesheet": vx_web_htmldoc.t_string_from_stylesheet,
       "ui-readstate<-uid": vx_web_htmldoc.t_ui_readstate_from_uid
     })
     const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
@@ -627,6 +655,24 @@ export default class vx_web_htmldoc {
       properties    : [],
       proplast      : {},
       fn            : vx_web_htmldoc.f_string_from_id
+    }
+
+    // (func string<-stylesheet)
+    vx_web_htmldoc.t_string_from_stylesheet['vx_value'] = {
+      name          : "string<-stylesheet",
+      pkgname       : "vx/web/htmldoc",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_web_htmldoc.f_string_from_stylesheet
     }
 
     // (func ui-readstate<-uid)
