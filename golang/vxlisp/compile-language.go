@@ -508,7 +508,7 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 		case "vx/core/any<-any", "vx/core/any<-any-async",
 			"vx/core/any<-any-context", "vx/core/any<-any-context-async",
 			"vx/core/any<-any-key-value", "vx/core/any<-any-key-value-async",
-			"vx/core/any<-int",
+			"vx/core/any<-int", "vx/core/any<-int-any",
 			"vx/core/any<-func", "vx/core/any<-func-async",
 			"vx/core/any<-key-value", "vx/core/any<-key-value-async",
 			"vx/core/any<-none", "vx/core/any<-none-async",
@@ -574,7 +574,7 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 	case "vx/core/any<-any", "vx/core/any<-any-async",
 		"vx/core/any<-any-context", "vx/core/any<-any-context-async",
 		"vx/core/any<-any-key-value", "vx/core/any<-any-key-value-async",
-		"vx/core/any<-int",
+		"vx/core/any<-int", "vx/core/any<-int-any",
 		"vx/core/any<-func", "vx/core/any<-func-async",
 		"vx/core/any<-none", "vx/core/any<-none-async",
 		"vx/core/any<-key-value", "vx/core/any<-key-value-async",
@@ -755,29 +755,34 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 			"\n      }" +
 			"\n      return output;"
 	} else {
+		anyoutput := "\n        Core.Type_any anyoutput = fn.resolve(" + strings.Join(listargname, ", ") + ");"
 		if BooleanFromStringStarts(fnc.name, "boolean<-") {
 			returnvalue += "" +
 				"\n      Core.Type_boolean output = Core.c_false;" +
 				"\n      if (fn != null) {" +
-				"\n        output = Core.f_any_from_any(Core.t_boolean, fn.resolve(" + strings.Join(listargname, ", ") + "));" +
+				anyoutput +
+				"\n        output = Core.f_any_from_any(Core.t_boolean, anyoutput);" +
 				"\n      }"
 		} else if BooleanFromStringStarts(fnc.name, "int<-") {
 			returnvalue += "" +
 				"\n      Core.Type_int output = Core.e_int;" +
 				"\n      if (fn != null) {" +
-				"\n        output = Core.f_any_from_any(Core.t_int, fn.resolve(" + strings.Join(listargname, ", ") + "));" +
+				anyoutput +
+				"\n        output = Core.f_any_from_any(Core.t_int, anyoutput);" +
 				"\n      }"
 		} else if BooleanFromStringStarts(fnc.name, "string<-") {
 			returnvalue += "" +
 				"\n      Core.Type_string output = Core.e_string;" +
 				"\n      if (fn != null) {" +
-				"\n        output = Core.f_any_from_any(Core.t_string, fn.resolve(" + strings.Join(listargname, ", ") + "));" +
+				anyoutput +
+				"\n        output = Core.f_any_from_any(Core.t_string, anyoutput);" +
 				"\n      }"
 		} else {
 			returnvalue += "" +
 				"\n      T output = Core.f_empty(generic_any_1);" +
 				"\n      if (fn != null) {" +
-				"\n        output = Core.f_any_from_any(generic_any_1, fn.resolve(" + strings.Join(listargname, ", ") + "));" +
+				anyoutput +
+				"\n        output = Core.f_any_from_any(generic_any_1, anyoutput);" +
 				"\n      }"
 		}
 		if returntype != "void" {
@@ -2136,11 +2141,11 @@ func LangFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc
 									}
 								}
 							} else {
-								work, msgs := LangFromValue(lang, argvalue, pkgname, fnc, subindent, true, test, argsubpath)
+								work, msgs := LangFromValue(lang, argvalue, pkgname, fnc, indent, true, test, argsubpath)
 								msgblock = MsgblockAddBlock(msgblock, msgs)
 								work = "\n  return " + work + ";"
 								switch funcarg.vxtype.name {
-								case "any<-int",
+								case "any<-int", "any<-int-any",
 									"any<-any-key-value", "any<-key-value",
 									"any<-reduce", "any<-reduce-next",
 									"boolean<-any":
@@ -2828,7 +2833,7 @@ func LangInterfaceFnFromFunc(lang *vxlang, fnc *vxfunc) string {
 	case "vx/core/any<-any", "vx/core/any<-any-async",
 		"vx/core/any<-any-context", "vx/core/any<-any-context-async",
 		"vx/core/any<-any-key-value", "vx/core/any<-any-key-value-async",
-		"vx/core/any<-int",
+		"vx/core/any<-int", "vx/core/any<-int-any",
 		"vx/core/any<-func", "vx/core/any<-func-async",
 		"vx/core/any<-none", "vx/core/any<-none-async",
 		"vx/core/any<-key-value", "vx/core/any<-key-value-async",
@@ -2847,6 +2852,13 @@ func LangInterfaceFnFromFunc(lang *vxlang, fnc *vxfunc) string {
 			}
 		}
 		var args []string
+		/*
+			if fnc.generictype != nil {
+				argname := LangFromName(fnc.generictype.alias)
+				argtypename := LangNameTypeFromTypeSimple(lang, fnc.generictype, true)
+				args = append(args, argtypename+" "+argname)
+			}
+		*/
 		if fnc.context {
 			args = append(args, LangNameTypeFromType(lang, contexttype)+" context")
 		}
@@ -2922,6 +2934,7 @@ func LangInterfaceFromFunc(lang *vxlang, fnc *vxfunc) string {
 		"vx/core/any<-any-context", "vx/core/any<-any-context-async",
 		"vx/core/any<-any-key-value", "vx/core/any<-any-key-value-async",
 		"vx/core/any<-func", "vx/core/any<-func-async",
+		"vx/core/any<-int-any",
 		"vx/core/any<-key-value", "vx/core/any<-key-value-async",
 		"vx/core/any<-none", "vx/core/any<-none-async",
 		"vx/core/any<-reduce", "vx/core/any<-reduce-async",

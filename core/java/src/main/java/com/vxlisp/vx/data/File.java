@@ -1013,6 +1013,119 @@ public final class File {
   }
 
   /**
+   * @function file_from_path
+   * Returns a file from a given path
+   * @param  {string} path
+   * @return {file}
+   * (func file<-path)
+   */
+  public static interface Func_file_from_path extends Core.Func_any_from_any {
+    public File.Type_file vx_file_from_path(final Core.Type_string path);
+  }
+
+  public static class Class_file_from_path extends Core.Class_base implements Func_file_from_path {
+
+    @Override
+    public Func_file_from_path vx_new(Object... vals) {
+      Class_file_from_path output = new Class_file_from_path();
+      return output;
+    }
+
+    @Override
+    public Func_file_from_path vx_copy(Object... vals) {
+      Class_file_from_path output = new Class_file_from_path();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/data/file", // pkgname
+        "file<-path", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/data/file", // pkgname
+          "file", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_file_from_path vx_empty() {return e_file_from_path;}
+    @Override
+    public Func_file_from_path vx_type() {return t_file_from_path;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_string inputval = (Core.Type_string)value;
+      Core.Type_any outputval = File.f_file_from_path(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string path = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      output = File.f_file_from_path(path);
+      return output;
+    }
+
+    @Override
+    public File.Type_file vx_file_from_path(final Core.Type_string path) {
+      return File.f_file_from_path(path);
+    }
+
+  }
+
+  public static final Func_file_from_path e_file_from_path = new File.Class_file_from_path();
+  public static final Func_file_from_path t_file_from_path = new File.Class_file_from_path();
+
+  public static File.Type_file f_file_from_path(final Core.Type_string path) {
+    File.Type_file output = File.e_file;
+    output = Core.f_let(
+      File.t_file,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_int pos = Type.f_int_from_string_findlast(path, Core.vx_new_string("/"));
+        final Core.Type_string name = Type.f_string_from_string_start(
+          path,
+          Core.f_plus1(pos)
+        );
+        final Core.Type_string pth = Type.f_string_from_string_end(
+          path,
+          Core.f_minus1(pos)
+        );
+        return Core.f_new(
+          File.t_file,
+          Core.t_anylist.vx_new(
+            Core.vx_new_string(":name"),
+            name,
+            Core.vx_new_string(":path"),
+            pth
+          )
+        );
+      })
+    );
+    return output;
+  }
+
+  /**
    * @function name_from_file
    * Returns path and name from file.
    * @param  {file} file
@@ -1494,6 +1607,7 @@ public final class File {
     mapfunc.put("boolean-write<-file-any", File.t_boolean_write_from_file_any);
     mapfunc.put("boolean-write<-file-string", File.t_boolean_write_from_file_string);
     mapfunc.put("file-read<-file", File.t_file_read_from_file);
+    mapfunc.put("file<-path", File.t_file_from_path);
     mapfunc.put("name<-file", File.t_name_from_file);
     mapfunc.put("path<-file", File.t_path_from_file);
     mapfunc.put("pathcurrent<-os", File.t_pathcurrent_from_os);

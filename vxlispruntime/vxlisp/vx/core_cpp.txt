@@ -505,16 +505,16 @@ let-async
     return output;
   }
 
-  // vx_new_from_list(T, List<any>)
-  template <class T> static T* vx_new_from_list(T* generic_any_1, vx_core::vx_Type_listany listval) {
+  // vx_new_list(T, List<any>)
+  template <class T> static T* vx_new_list(T* generic_any_1, vx_core::vx_Type_listany listval) {
     T* output;
     vx_core::Type_any val = generic_any_1->vx_new(listval);
     output = vx_core::vx_any_from_any(generic_any_1, val);
     return output;
   }
 
-  // vx_new_from_map(T, Map<string, any>)
-  template <class T> static T* vx_new_from_map(T* generic_any_1, vx_core::vx_Type_mapany mapval) {
+  // vx_new_map(T, Map<string, any>)
+  template <class T> static T* vx_new_map(T* generic_any_1, vx_core::vx_Type_mapany mapval) {
     T* output;
     vx_core::Type_any val = generic_any_1->vx_new_from_map(mapval);
     output = vx_core::vx_any_from_any(generic_any_1, val);

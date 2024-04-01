@@ -594,8 +594,7 @@ public final class Htmldoc {
     output = Core.f_let_async(
       Core.t_boolean,
       Core.t_any_from_func_async.vx_fn_new(() -> {
-        final Html.Type_stylelist stylelist = Html.f_styles_from_stylesheet(stylesheet);
-        final Core.Type_string text = Html.f_string_from_stylelist_indent(stylelist, Core.vx_new_int(0));
+        final Core.Type_string text = Htmldoc.f_string_from_stylesheet(stylesheet);
         final CompletableFuture<Core.Type_boolean> future_iswrite = Htmldoc.f_boolean_write_stylesheet_from_string(text);
         return Core.async_from_async_fn(future_iswrite, (iswrite) -> {
           return iswrite;
@@ -849,6 +848,104 @@ public final class Htmldoc {
   }
 
   /**
+   * @function string_from_stylesheet
+   * Returns string from a given stylesheet
+   * @param  {stylesheet} stylesheet
+   * @return {string}
+   * (func string<-stylesheet)
+   */
+  public static interface Func_string_from_stylesheet extends Core.Func_any_from_any {
+    public Core.Type_string vx_string_from_stylesheet(final Html.Type_stylesheet stylesheet);
+  }
+
+  public static class Class_string_from_stylesheet extends Core.Class_base implements Func_string_from_stylesheet {
+
+    @Override
+    public Func_string_from_stylesheet vx_new(Object... vals) {
+      Class_string_from_stylesheet output = new Class_string_from_stylesheet();
+      return output;
+    }
+
+    @Override
+    public Func_string_from_stylesheet vx_copy(Object... vals) {
+      Class_string_from_stylesheet output = new Class_string_from_stylesheet();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/web/htmldoc", // pkgname
+        "string<-stylesheet", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_string_from_stylesheet vx_empty() {return e_string_from_stylesheet;}
+    @Override
+    public Func_string_from_stylesheet vx_type() {return t_string_from_stylesheet;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Html.Type_stylesheet inputval = (Html.Type_stylesheet)value;
+      Core.Type_any outputval = Htmldoc.f_string_from_stylesheet(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Html.Type_stylesheet stylesheet = Core.f_any_from_any(Html.t_stylesheet, arglist.vx_any(Core.vx_new_int(0)));
+      output = Htmldoc.f_string_from_stylesheet(stylesheet);
+      return output;
+    }
+
+    @Override
+    public Core.Type_string vx_string_from_stylesheet(final Html.Type_stylesheet stylesheet) {
+      return Htmldoc.f_string_from_stylesheet(stylesheet);
+    }
+
+  }
+
+  public static final Func_string_from_stylesheet e_string_from_stylesheet = new Htmldoc.Class_string_from_stylesheet();
+  public static final Func_string_from_stylesheet t_string_from_stylesheet = new Htmldoc.Class_string_from_stylesheet();
+
+  public static Core.Type_string f_string_from_stylesheet(final Html.Type_stylesheet stylesheet) {
+    Core.Type_string output = Core.e_string;
+    output = Core.f_let(
+      Core.t_string,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Html.Type_stylelist stylelist = Html.f_styles_from_stylesheet(stylesheet);
+        final Core.Type_string text = Html.f_string_from_stylelist_indent(stylelist, Core.vx_new_int(0));
+        return text;
+      })
+    );
+    return output;
+  }
+
+  /**
    * @function ui_readstate_from_uid
    * Returns ui component from element.
    * @param  {string} uid
@@ -953,6 +1050,7 @@ public final class Htmldoc {
     mapfunc.put("context-read", Htmldoc.t_context_read);
     mapfunc.put("context-write", Htmldoc.t_context_write);
     mapfunc.put("string<-id", Htmldoc.t_string_from_id);
+    mapfunc.put("string<-stylesheet", Htmldoc.t_string_from_stylesheet);
     mapfunc.put("ui-readstate<-uid", Htmldoc.t_ui_readstate_from_uid);
     Core.vx_global_package_set("vx/web/htmldoc", maptype, mapconst, mapfunc);
   }

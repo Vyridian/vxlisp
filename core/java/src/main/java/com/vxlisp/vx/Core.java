@@ -448,6 +448,23 @@ public final class Core {
     return result;
   }
 
+  // vx_list_from_list_intany(generic_list_1, list-2, any<-int-any)
+  public static <T extends Core.Type_list, U extends Core.Type_list> T vx_list_from_list_intany(T generic_list_1, U valuelist, Core.Func_any_from_int_any fn_any_from_int_any) {
+    T output = Core.f_empty(generic_list_1);
+    List<Core.Type_any> listany = valuelist.vx_list();
+    if (listany.size() > 0) {
+      List<Core.Type_any> listout = new ArrayList<Core.Type_any>();
+      for (int i = 0; i < listany.size(); i++) {
+        Core.Type_int vali = Core.vx_new_int(i+1);
+        Core.Type_any value = listany.get(i);
+        Core.Type_any outval = fn_any_from_int_any.vx_any_from_int_any(Core.t_any, vali, value);
+        listout.add(outval);
+      }
+      output = Core.vx_new_list(generic_list_1, listout);
+    }
+    return output;
+  }
+
   // vx_log(object...)
   public static void vx_log(Object... values) {
     for (Object value : values) {
@@ -592,6 +609,20 @@ public final class Core {
       output = work;
 
     }
+    return output;
+  }
+
+  // vx_new_list(T, List<any>)
+  public static <T extends Core.Type_list> T vx_new_list(T generic_list_1, List<Core.Type_any> listval) {
+    Core.Type_list anylist = generic_list_1.vx_new(listval);
+    T output = Core.f_any_from_any(generic_list_1, anylist);
+    return output;
+  }
+
+  // vx_new_map(T, Map<string, any>)
+  public static <T extends Core.Type_map> T vx_new_map(T generic_map_1, Map<String, Core.Type_any> mapval) {
+    Core.Type_map anymap = generic_map_1.vx_new(mapval);
+    T output = Core.f_any_from_any(generic_map_1, anymap);
     return output;
   }
 
@@ -13515,7 +13546,7 @@ public final class Core {
         Core.Type_int total = Core.f_any_from_any(Core.t_int, total_any);
         Core.Type_int num = Core.f_any_from_any(Core.t_int, num_any);
         return 
-          Core.f_multiply(total, num);
+        Core.f_multiply(total, num);
       })
     );
     return output;
@@ -13616,7 +13647,7 @@ public final class Core {
         Core.Type_number total = Core.f_any_from_any(Core.t_number, total_any);
         Core.Type_number num = Core.f_any_from_any(Core.t_number, num_any);
         return 
-          Core.f_multiply_1(total, num);
+        Core.f_multiply_1(total, num);
       })
     );
     return output;
@@ -13883,7 +13914,7 @@ public final class Core {
         Core.Type_int total = Core.f_any_from_any(Core.t_int, total_any);
         Core.Type_int num = Core.f_any_from_any(Core.t_int, num_any);
         return 
-          Core.f_plus(total, num);
+        Core.f_plus(total, num);
       })
     );
     return output;
@@ -13984,7 +14015,7 @@ public final class Core {
         Core.Type_number total = Core.f_any_from_any(Core.t_number, total_any);
         Core.Type_number num = Core.f_any_from_any(Core.t_number, num_any);
         return 
-          Core.f_plus_1(total, num);
+        Core.f_plus_1(total, num);
       })
     );
     return output;
@@ -14342,7 +14373,7 @@ public final class Core {
         Core.Type_int total = Core.f_any_from_any(Core.t_int, total_any);
         Core.Type_int num = Core.f_any_from_any(Core.t_int, num_any);
         return 
-          Core.f_minus(total, num);
+        Core.f_minus(total, num);
       })
     );
     return output;
@@ -14443,7 +14474,7 @@ public final class Core {
         Core.Type_number total = Core.f_any_from_any(Core.t_number, total_any);
         Core.Type_number num = Core.f_any_from_any(Core.t_number, num_any);
         return 
-          Core.f_minus_1(total, num);
+        Core.f_minus_1(total, num);
       })
     );
     return output;
@@ -14904,10 +14935,10 @@ public final class Core {
         Core.Type_any current = Core.f_any_from_any(Core.t_any, current_any);
         Core.Type_any next = Core.f_any_from_any(Core.t_any, next_any);
         return 
-          Core.f_and(
-            reduce,
-            Core.f_lt(current, next)
-          );
+        Core.f_and(
+          reduce,
+          Core.f_lt(current, next)
+        );
       })
     );
     return output;
@@ -15442,10 +15473,10 @@ public final class Core {
         Core.Type_any current = Core.f_any_from_any(Core.t_any, current_any);
         Core.Type_any next = Core.f_any_from_any(Core.t_any, next_any);
         return 
-          Core.f_and(
-            reduce,
-            Core.f_eq(current, next)
-          );
+        Core.f_and(
+          reduce,
+          Core.f_eq(current, next)
+        );
       })
     );
     return output;
@@ -15726,10 +15757,10 @@ public final class Core {
         Core.Type_any current = Core.f_any_from_any(Core.t_any, current_any);
         Core.Type_any next = Core.f_any_from_any(Core.t_any, next_any);
         return 
-          Core.f_and(
-            reduce,
-            Core.f_gt(current, next)
-          );
+        Core.f_and(
+          reduce,
+          Core.f_gt(current, next)
+        );
       })
     );
     return output;
@@ -16385,10 +16416,10 @@ public final class Core {
                 Core.Type_boolean current = Core.f_any_from_any(Core.t_boolean, current_any);
                 Core.Type_boolean next = Core.f_any_from_any(Core.t_boolean, next_any);
                 return 
-                    Core.f_and(
-                      reduce,
-                      Core.f_and(current, next)
-                    );
+                  Core.f_and(
+                    reduce,
+                    Core.f_and(current, next)
+                  );
               })
             );
           })
@@ -16481,7 +16512,8 @@ public final class Core {
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       if (fn != null) {
-        output = Core.f_any_from_any(generic_any_1, fn.resolve(value));
+        Core.Type_any anyoutput = fn.resolve(value);
+        output = Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
     }
@@ -16686,7 +16718,8 @@ public final class Core {
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
       T output = Core.f_empty(generic_any_1);
       if (fn != null) {
-        output = Core.f_any_from_any(generic_any_1, fn.resolve(context, value));
+        Core.Type_any anyoutput = fn.resolve(context, value);
+        output = Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
     }
@@ -16895,7 +16928,8 @@ public final class Core {
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_key_value(final T generic_any_1, final T current, final Core.Type_string key, final U value) {
       T output = Core.f_empty(generic_any_1);
       if (fn != null) {
-        output = Core.f_any_from_any(generic_any_1, fn.resolve(current, key, value));
+        Core.Type_any anyoutput = fn.resolve(current, key, value);
+        output = Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
     }
@@ -16991,7 +17025,8 @@ public final class Core {
     public <T extends Core.Type_any> T vx_any_from_func(final T generic_any_1) {
       T output = Core.f_empty(generic_any_1);
       if (fn != null) {
-        output = Core.f_any_from_any(generic_any_1, fn.resolve());
+        Core.Type_any anyoutput = fn.resolve();
+        output = Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
     }
@@ -17191,7 +17226,8 @@ public final class Core {
     public <T extends Core.Type_any> T vx_any_from_int(final T generic_any_1, final Core.Type_int value) {
       T output = Core.f_empty(generic_any_1);
       if (fn != null) {
-        output = Core.f_any_from_any(generic_any_1, fn.resolve(value));
+        Core.Type_any anyoutput = fn.resolve(value);
+        output = Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
     }
@@ -17202,6 +17238,107 @@ public final class Core {
   public static final Func_any_from_int t_any_from_int = new Core.Class_any_from_int();
 
   public static <T extends Core.Type_any> T f_any_from_int(final T generic_any_1, final Core.Type_int value) {
+    T output = Core.f_empty(generic_any_1);
+    return output;
+  }
+
+  /**
+   * @function any_from_int_any
+   * Generic Function returning Generic any-1 from an int and a value
+   * @param  {int} num
+   * @param  {any-2} val
+   * @return {any-1}
+   * (func any<-int-any)
+   */
+  public static interface Func_any_from_int_any extends Core.Type_func, Core.Type_replfunc {
+    public Func_any_from_int_any vx_fn_new(Core.Class_any_from_int_any.IFn fn);
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_int_any(final T generic_any_1, final Core.Type_int num, final U val);
+  }
+
+  public static class Class_any_from_int_any extends Core.Class_base implements Func_any_from_int_any {
+
+    public IFn fn = null;
+
+    @Override
+    public Func_any_from_int_any vx_fn_new(Core.Class_any_from_int_any.IFn fn) {
+      Class_any_from_int_any output = new Class_any_from_int_any();
+      output.fn = fn;
+      return output;
+    }
+
+    @Override
+    public Func_any_from_int_any vx_new(Object... vals) {
+      Class_any_from_int_any output = new Class_any_from_int_any();
+      return output;
+    }
+
+    @Override
+    public Func_any_from_int_any vx_copy(Object... vals) {
+      Class_any_from_int_any output = new Class_any_from_int_any();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "any<-int-any", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "any-1", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_any_from_int_any vx_empty() {return e_any_from_int_any;}
+    @Override
+    public Func_any_from_int_any vx_type() {return t_any_from_int_any;}
+
+    @FunctionalInterface
+    public static interface IFn {
+      public Core.Type_any resolve(Core.Type_int num, Core.Type_any val);
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_int num = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
+      output = Core.f_any_from_int_any(generic_any_1, num, val);
+      return output;
+    }
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_int_any(final T generic_any_1, final Core.Type_int num, final U val) {
+      T output = Core.f_empty(generic_any_1);
+      if (fn != null) {
+        Core.Type_any anyoutput = fn.resolve(num, val);
+        output = Core.f_any_from_any(generic_any_1, anyoutput);
+      }
+      return output;
+    }
+
+  }
+
+  public static final Func_any_from_int_any e_any_from_int_any = new Core.Class_any_from_int_any();
+  public static final Func_any_from_int_any t_any_from_int_any = new Core.Class_any_from_int_any();
+
+  public static <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_int_any(final T generic_any_1, final Core.Type_int num, final U val) {
     T output = Core.f_empty(generic_any_1);
     return output;
   }
@@ -17291,7 +17428,8 @@ public final class Core {
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_key_value(final T generic_any_1, final Core.Type_string key, final U val) {
       T output = Core.f_empty(generic_any_1);
       if (fn != null) {
-        output = Core.f_any_from_any(generic_any_1, fn.resolve(key, val));
+        Core.Type_any anyoutput = fn.resolve(key, val);
+        output = Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
     }
@@ -17926,7 +18064,8 @@ public final class Core {
     public <T extends Core.Type_any> T vx_any_from_none(final T generic_any_1) {
       T output = Core.f_empty(generic_any_1);
       if (fn != null) {
-        output = Core.f_any_from_any(generic_any_1, fn.resolve());
+        Core.Type_any anyoutput = fn.resolve();
+        output = Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
     }
@@ -18127,7 +18266,8 @@ public final class Core {
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_reduce(final T generic_any_1, final T result, final U item) {
       T output = Core.f_empty(generic_any_1);
       if (fn != null) {
-        output = Core.f_any_from_any(generic_any_1, fn.resolve(result, item));
+        Core.Type_any anyoutput = fn.resolve(result, item);
+        output = Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
     }
@@ -18333,7 +18473,8 @@ public final class Core {
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_reduce_next(final T generic_any_1, final T result, final U current, final U next) {
       T output = Core.f_empty(generic_any_1);
       if (fn != null) {
-        output = Core.f_any_from_any(generic_any_1, fn.resolve(result, current, next));
+        Core.Type_any anyoutput = fn.resolve(result, current, next);
+        output = Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
     }
@@ -18892,7 +19033,8 @@ public final class Core {
     public Core.Type_boolean vx_boolean_from_any(final Core.Type_any value) {
       Core.Type_boolean output = Core.c_false;
       if (fn != null) {
-        output = Core.f_any_from_any(Core.t_boolean, fn.resolve(value));
+        Core.Type_any anyoutput = fn.resolve(value);
+        output = Core.f_any_from_any(Core.t_boolean, anyoutput);
       }
       return output;
     }
@@ -18987,7 +19129,8 @@ public final class Core {
     public Core.Type_boolean vx_boolean_from_func() {
       Core.Type_boolean output = Core.c_false;
       if (fn != null) {
-        output = Core.f_any_from_any(Core.t_boolean, fn.resolve());
+        Core.Type_any anyoutput = fn.resolve();
+        output = Core.f_any_from_any(Core.t_boolean, anyoutput);
       }
       return output;
     }
@@ -19082,7 +19225,8 @@ public final class Core {
     public Core.Type_boolean vx_boolean_from_none() {
       Core.Type_boolean output = Core.c_false;
       if (fn != null) {
-        output = Core.f_any_from_any(Core.t_boolean, fn.resolve());
+        Core.Type_any anyoutput = fn.resolve();
+        output = Core.f_any_from_any(Core.t_boolean, anyoutput);
       }
       return output;
     }
@@ -22726,6 +22870,88 @@ public final class Core {
   }
 
   /**
+   * @function list_from_list_intany
+   * Returns a list of processed items from another list
+   * @param  {list-2} values
+   * @param  {any<-int-any} fn-any<-int-any
+   * @return {list-1}
+   * (func list<-list-intany)
+   */
+  public static interface Func_list_from_list_intany extends Core.Type_func, Core.Type_replfunc {
+    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list_intany(final X generic_any_1, final Y values, final Core.Func_any_from_int_any fn_any_from_int_any);
+  }
+
+  public static class Class_list_from_list_intany extends Core.Class_base implements Func_list_from_list_intany {
+
+    @Override
+    public Func_list_from_list_intany vx_new(Object... vals) {
+      Class_list_from_list_intany output = new Class_list_from_list_intany();
+      return output;
+    }
+
+    @Override
+    public Func_list_from_list_intany vx_copy(Object... vals) {
+      Class_list_from_list_intany output = new Class_list_from_list_intany();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "list<-list-intany", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "list-1", // name
+          ":list", // extends
+          Core.e_typelist, // traits
+          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_list_from_list_intany vx_empty() {return e_list_from_list_intany;}
+    @Override
+    public Func_list_from_list_intany vx_type() {return t_list_from_list_intany;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Func_any_from_int_any fn_any_from_int_any = Core.f_any_from_any(Core.t_any_from_int_any, arglist.vx_any(Core.vx_new_int(1)));
+      output = Core.f_list_from_list_intany(generic_list_1, values, fn_any_from_int_any);
+      return output;
+    }
+
+    @Override
+    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list_intany(final X generic_list_1, final Y values, final Core.Func_any_from_int_any fn_any_from_int_any) {
+      return Core.f_list_from_list_intany(generic_list_1, values, fn_any_from_int_any);
+    }
+
+  }
+
+  public static final Func_list_from_list_intany e_list_from_list_intany = new Core.Class_list_from_list_intany();
+  public static final Func_list_from_list_intany t_list_from_list_intany = new Core.Class_list_from_list_intany();
+
+  public static <X extends Core.Type_list, Y extends Core.Type_list> X f_list_from_list_intany(final X generic_list_1, final Y values, final Core.Func_any_from_int_any fn_any_from_int_any) {
+    X output = Core.f_empty(generic_list_1);
+    output = Core.vx_list_from_list_intany(generic_list_1, values, fn_any_from_int_any);
+    return output;
+  }
+
+  /**
    * @function list_from_map
    * Returns a list of allowed values from a map.
    * @param  {map-2} valuemap
@@ -25166,10 +25392,10 @@ public final class Core {
         Core.Type_boolean current = Core.f_any_from_any(Core.t_boolean, current_any);
         Core.Type_boolean next = Core.f_any_from_any(Core.t_boolean, next_any);
         return 
-          Core.f_or(
-            reduce,
-            Core.f_or(current, next)
-          );
+        Core.f_or(
+          reduce,
+          Core.f_or(current, next)
+        );
       })
     );
     return output;
@@ -27989,7 +28215,7 @@ public final class Core {
       Core.t_any_from_any.vx_fn_new((type_any) -> {
         Core.Type_any type = Core.f_any_from_any(Core.t_any, type_any);
         return 
-          Core.f_typename_from_type(type);
+        Core.f_typename_from_type(type);
       })
     );
     return output;
@@ -28228,6 +28454,7 @@ public final class Core {
     mapfunc.put("any<-func", Core.t_any_from_func);
     mapfunc.put("any<-func-async", Core.t_any_from_func_async);
     mapfunc.put("any<-int", Core.t_any_from_int);
+    mapfunc.put("any<-int-any", Core.t_any_from_int_any);
     mapfunc.put("any<-key-value", Core.t_any_from_key_value);
     mapfunc.put("any<-key-value-async", Core.t_any_from_key_value_async);
     mapfunc.put("any<-list", Core.t_any_from_list);
@@ -28287,6 +28514,7 @@ public final class Core {
     mapfunc.put("list<-list", Core.t_list_from_list);
     mapfunc.put("list<-list_1", Core.t_list_from_list_1);
     mapfunc.put("list<-list-async", Core.t_list_from_list_async);
+    mapfunc.put("list<-list-intany", Core.t_list_from_list_intany);
     mapfunc.put("list<-map", Core.t_list_from_map);
     mapfunc.put("list<-map_1", Core.t_list_from_map_1);
     mapfunc.put("list<-map-async", Core.t_list_from_map_async);

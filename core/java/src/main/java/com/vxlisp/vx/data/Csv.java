@@ -1162,7 +1162,7 @@ public final class Csv {
           Core.t_any_from_any.vx_fn_new((textlist_any) -> {
             Core.Type_stringlist textlist = Core.f_any_from_any(Core.t_stringlist, textlist_any);
             return 
-                Core.f_any_from_list(Core.t_string, textlist, Core.vx_new_int(1));
+              Core.f_any_from_list(Core.t_string, textlist, Core.vx_new_int(1));
           })
         );
         return Core.f_map_from_map_1(
@@ -1172,7 +1172,7 @@ public final class Csv {
             Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
             Core.Type_stringlist val = Core.f_any_from_any(Core.t_stringlist, val_any);
             return 
-              Core.f_any_from_list(Core.t_string, val, Core.vx_new_int(2));
+            Core.f_any_from_list(Core.t_string, val, Core.vx_new_int(2));
           })
         );
       })

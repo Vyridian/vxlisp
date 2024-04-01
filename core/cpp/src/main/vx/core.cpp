@@ -530,6 +530,26 @@ namespace vx_core {
     return output;
   }
 
+  // vx_list_from_list_intany_helper(generic_list_1, list-2, any<-int-any)
+  vx_core::Type_list vx_list_from_list_intany_helper(vx_core::Type_list generic_list_1, vx_core::Type_list valuelist, vx_core::Func_any_from_int_any fn_any_from_int_any) {
+    vx_core::Type_list output = vx_core::vx_empty(generic_list_1);
+    std::vector<vx_core::Type_any> listany = valuelist->vx_list();
+    long size = vx_core::vx_int_from_sizet(listany.size());
+    if (size > 0) {
+      std::vector<vx_core::Type_any> listout;
+      for (long i = 0; i < size; i++) {
+        vx_core::Type_int vali = vx_core::vx_new_int(i+1);
+        vx_core::Type_any value = listany[i];
+        vx_core::vx_reserve({vali, value});
+        vx_core::Type_any outval = fn_any_from_int_any->vx_any_from_int_any(vali, value);
+        vx_core::vx_release_one_except({vali, value}, outval);
+        listout.push_back(outval);
+      }
+      output = vx_core::vx_new_list(generic_list_1, listout);
+    }
+    return output;
+  }
+
   // vx_list_from_map_1(generic_list_1, map, fn-any<-key-value)
   vx_core::Type_any vx_list_from_map_1(vx_core::Type_any generic_list_1, vx_core::Type_map valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value) {
     vx_core::vx_Type_mapany map_value = valuemap->vx_map();
@@ -566,7 +586,7 @@ namespace vx_core {
       }
       vx_core::vx_release_one(listoflist);
     }
-    vx_core::Type_any output = vx_core::vx_new_from_list(generic_list_1, list_result);
+    vx_core::Type_any output = vx_core::vx_new_list(generic_list_1, list_result);
     vx_core::vx_release_one(list_result);
     vx_core::vx_release_except(values, output);
     return output;
@@ -20961,6 +20981,105 @@ namespace vx_core {
 
   //}
   /**
+   * @function any_from_int_any
+   * Generic Function returning Generic any-1 from an int and a value
+   * @param  {int} num
+   * @param  {any-2} val
+   * @return {any-1}
+   * (func any<-int-any)
+   */
+  // (func any<-int-any)
+  // class Class_any_from_int_any {
+    Abstract_any_from_int_any::~Abstract_any_from_int_any() {}
+
+    Class_any_from_int_any::Class_any_from_int_any() : Abstract_any_from_int_any::Abstract_any_from_int_any() {
+      vx_core::refcount += 1;
+    }
+
+    Class_any_from_int_any::~Class_any_from_int_any() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+      vx_core::vx_release_one(this->lambdavars);
+    }
+
+    vx_core::Func_any_from_int_any Class_any_from_int_any::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_int_any::IFn fn) const {
+      vx_core::Func_any_from_int_any output = new vx_core::Class_any_from_int_any();
+      output->fn = fn;
+      output->lambdavars = lambdavars;
+      vx_core::vx_reserve(lambdavars);
+      return output;
+    }
+
+    vx_core::Type_any Class_any_from_int_any::vx_any_from_int_any(vx_core::Type_int num, vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      if (fn) {
+        output = fn(num, val);
+      }
+      return output;
+    }
+
+    vx_core::Type_any Class_any_from_int_any::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_core::Func_any_from_int_any output = vx_core::e_any_from_int_any;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_any_from_int_any::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Func_any_from_int_any output = vx_core::e_any_from_int_any;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_any_from_int_any::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "any<-int-any", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_any_from_int_any::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_any_from_int_any::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/core", // pkgname
+        "any<-int-any", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_any_from_int_any::vx_empty() const {return vx_core::e_any_from_int_any;}
+    vx_core::Type_any Class_any_from_int_any::vx_type() const {return vx_core::t_any_from_int_any;}
+    vx_core::Type_msgblock Class_any_from_int_any::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_any_from_int_any::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_any_from_int_any::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_any generic_any_1 = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_int num = vx_core::vx_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_core::f_any_from_int_any(generic_any_1, num, val);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+  /**
    * @function any_from_map_start_reduce
    * Returns a value by reducing each element of a map.
    * @param  {map-1} map
@@ -23786,6 +23905,88 @@ namespace vx_core {
       vx_core::Func_any_from_any_async fn_any_from_any_async = vx_core::vx_any_from_any(vx_core::t_any_from_any_async, arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_core::f_list_from_list_async(generic_list_1, values, fn_any_from_any_async);
       vx_core::vx_release(arglist);
+      return output;
+    }
+
+  //}
+  /**
+   * @function list_from_list_intany
+   * Returns a list of processed items from another list
+   * @param  {list-2} values
+   * @param  {any<-int-any} fn-any<-int-any
+   * @return {list-1}
+   * (func list<-list-intany)
+   */
+  // (func list<-list-intany)
+  // class Class_list_from_list_intany {
+    Abstract_list_from_list_intany::~Abstract_list_from_list_intany() {}
+
+    Class_list_from_list_intany::Class_list_from_list_intany() : Abstract_list_from_list_intany::Abstract_list_from_list_intany() {
+      vx_core::refcount += 1;
+    }
+
+    Class_list_from_list_intany::~Class_list_from_list_intany() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_list_from_list_intany::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_core::Func_list_from_list_intany output = vx_core::e_list_from_list_intany;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_list_from_list_intany::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Func_list_from_list_intany output = vx_core::e_list_from_list_intany;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_list_from_list_intany::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "list<-list-intany", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_list_from_list_intany::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_list_from_list_intany::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/core", // pkgname
+        "list<-list-intany", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_list_from_list_intany::vx_empty() const {return vx_core::e_list_from_list_intany;}
+    vx_core::Type_any Class_list_from_list_intany::vx_type() const {return vx_core::t_list_from_list_intany;}
+    vx_core::Type_msgblock Class_list_from_list_intany::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_list_from_list_intany::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_list_from_list_intany::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_list generic_list_1 = vx_core::vx_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_list values = vx_core::vx_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Func_any_from_int_any fn_any_from_int_any = vx_core::vx_any_from_any(vx_core::t_any_from_int_any, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_core::f_list_from_list_intany(generic_list_1, values, fn_any_from_int_any);
+      vx_core::vx_release_except(arglist, output);
       return output;
     }
 
@@ -29338,6 +29539,8 @@ namespace vx_core {
   vx_core::Func_any_from_any_key_value t_any_from_any_key_value = NULL;
   vx_core::Func_any_from_int e_any_from_int = NULL;
   vx_core::Func_any_from_int t_any_from_int = NULL;
+  vx_core::Func_any_from_int_any e_any_from_int_any = NULL;
+  vx_core::Func_any_from_int_any t_any_from_int_any = NULL;
   vx_core::Func_any_from_map_start_reduce e_any_from_map_start_reduce = NULL;
   vx_core::Func_any_from_map_start_reduce t_any_from_map_start_reduce = NULL;
   vx_core::Func_boolean_permission_from_func e_boolean_permission_from_func = NULL;
@@ -29396,6 +29599,8 @@ namespace vx_core {
   vx_core::Func_list_from_list t_list_from_list = NULL;
   vx_core::Func_list_from_list_async e_list_from_list_async = NULL;
   vx_core::Func_list_from_list_async t_list_from_list_async = NULL;
+  vx_core::Func_list_from_list_intany e_list_from_list_intany = NULL;
+  vx_core::Func_list_from_list_intany t_list_from_list_intany = NULL;
   vx_core::Func_list_from_map_1 e_list_from_map_1 = NULL;
   vx_core::Func_list_from_map_1 t_list_from_map_1 = NULL;
   vx_core::Func_list_from_map e_list_from_map = NULL;
@@ -30153,6 +30358,10 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_any_from_int);
       vx_core::t_any_from_int = new vx_core::Class_any_from_int();
       vx_core::vx_reserve_type(vx_core::t_any_from_int);
+      vx_core::e_any_from_int_any = new vx_core::Class_any_from_int_any();
+      vx_core::vx_reserve_empty(vx_core::e_any_from_int_any);
+      vx_core::t_any_from_int_any = new vx_core::Class_any_from_int_any();
+      vx_core::vx_reserve_type(vx_core::t_any_from_int_any);
       vx_core::e_any_from_map_start_reduce = new vx_core::Class_any_from_map_start_reduce();
       vx_core::vx_reserve_empty(vx_core::e_any_from_map_start_reduce);
       vx_core::t_any_from_map_start_reduce = new vx_core::Class_any_from_map_start_reduce();
@@ -30269,6 +30478,10 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_list_from_list_async);
       vx_core::t_list_from_list_async = new vx_core::Class_list_from_list_async();
       vx_core::vx_reserve_type(vx_core::t_list_from_list_async);
+      vx_core::e_list_from_list_intany = new vx_core::Class_list_from_list_intany();
+      vx_core::vx_reserve_empty(vx_core::e_list_from_list_intany);
+      vx_core::t_list_from_list_intany = new vx_core::Class_list_from_list_intany();
+      vx_core::vx_reserve_type(vx_core::t_list_from_list_intany);
       vx_core::e_list_from_map_1 = new vx_core::Class_list_from_map_1();
       vx_core::vx_reserve_empty(vx_core::e_list_from_map_1);
       vx_core::t_list_from_map_1 = new vx_core::Class_list_from_map_1();
@@ -30678,6 +30891,7 @@ namespace vx_core {
       mapfunc["allowtypes<-typedef"] = vx_core::t_allowtypes_from_typedef;
       mapfunc["any<-any-key-value"] = vx_core::t_any_from_any_key_value;
       mapfunc["any<-int"] = vx_core::t_any_from_int;
+      mapfunc["any<-int-any"] = vx_core::t_any_from_int_any;
       mapfunc["any<-map-start-reduce"] = vx_core::t_any_from_map_start_reduce;
       mapfunc["boolean-permission<-func"] = vx_core::t_boolean_permission_from_func;
       mapfunc["boolean-write<-map-name-value"] = vx_core::t_boolean_write_from_map_name_value;
@@ -30707,6 +30921,7 @@ namespace vx_core {
       mapfunc["list<-list_1"] = vx_core::t_list_from_list_1;
       mapfunc["list<-list"] = vx_core::t_list_from_list;
       mapfunc["list<-list-async"] = vx_core::t_list_from_list_async;
+      mapfunc["list<-list-intany"] = vx_core::t_list_from_list_intany;
       mapfunc["list<-map_1"] = vx_core::t_list_from_map_1;
       mapfunc["list<-map"] = vx_core::t_list_from_map;
       mapfunc["list<-map-async"] = vx_core::t_list_from_map_async;

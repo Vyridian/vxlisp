@@ -1826,6 +1826,9 @@
           <li class="nfunc" onclick="docjs.navigate('func_vx/data/file/boolean-write&lt;-file-string')">
             (f) boolean-write&lt;-file-string
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/data/file/file&lt;-path')">
+            (f) file&lt;-path
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/data/file/file-read&lt;-file')">
             (f) file-read&lt;-file
           </li>
@@ -2066,6 +2069,9 @@
           <span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span>
         </summary>
         <ul class="packagenav" id="n_pkgnav_vx/ui/ui">
+          <li class="ntype" onclick="docjs.navigate('type_vx/ui/ui/align')">
+            (t) align
+          </li>
           <li class="ntype" onclick="docjs.navigate('type_vx/ui/ui/bounds')">
             (t) bounds
           </li>
@@ -2146,6 +2152,15 @@
           </li>
           <li class="ntype" onclick="docjs.navigate('type_vx/ui/ui/cursor-pointer')">
             (t) cursor-pointer
+          </li>
+          <li class="nconst" onclick="docjs.navigate('const_vx/ui/ui/align-center')">
+            (c) align-center
+          </li>
+          <li class="nconst" onclick="docjs.navigate('const_vx/ui/ui/align-left')">
+            (c) align-left
+          </li>
+          <li class="nconst" onclick="docjs.navigate('const_vx/ui/ui/align-right')">
+            (c) align-right
           </li>
           <li class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-app')">
             (c) layout-app
@@ -3409,7 +3424,7 @@
      vx_core::vx_Type_mapany vx_p_map;
      vx_core::vx_Type_mapany vx_map() const;
      vx_core::Type_any vx_get_any(vx_core::Type_string key) const;
-     vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const;&quot;)
+     vx_core::Type_any vx_new_map(vx_core::vx_Type_mapany mapval) const;&quot;)
  :doc &quot;A simple untyped map.&quot;)
 
 (type maptype : type
@@ -5517,7 +5532,7 @@
   :cpp
    &quot;vx_core::vx_Type_listany listany = vallist-&gt;vx_list();
     vx_core::vx_Type_mapany mapany = vx_core::vx_map_from_list(listany, fn_any_from_any);
-    output = vx_core::vx_new_from_map(generic_map_1, mapany);&quot;
+    output = vx_core::vx_new_map(generic_map_1, mapany);&quot;
   :js
    &quot;const valmap = {}
     vallist.map(value =&gt; {
@@ -8314,7 +8329,7 @@
      vx_core::vx_Type_mapany vx_p_map;
      vx_core::vx_Type_mapany vx_map() const;
      vx_core::Type_any vx_get_any(vx_core::Type_string key) const;
-     vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const;&quot;)
+     vx_core::Type_any vx_new_map(vx_core::vx_Type_mapany mapval) const;&quot;)
  :doc &quot;A simple untyped map.&quot;)</div>
                 </li>
               </ul>
@@ -20585,7 +20600,7 @@ improves readability.</div>
   :cpp
    &quot;vx_core::vx_Type_listany listany = vallist-&gt;vx_list();
     vx_core::vx_Type_mapany mapany = vx_core::vx_map_from_list(listany, fn_any_from_any);
-    output = vx_core::vx_new_from_map(generic_map_1, mapany);&quot;
+    output = vx_core::vx_new_map(generic_map_1, mapany);&quot;
   :js
    &quot;const valmap = {}
     vallist.map(value =&gt; {
@@ -38488,7 +38503,7 @@ output : list-1 := (empty list-1)
   map
   (fn : string
    [key   : string
-    value : any-1]
+    value : any]
    key))
  :test (test
         (stringlist &quot;a&quot; &quot;b&quot;)
@@ -40047,7 +40062,7 @@ output : list-1 := (empty list-1)
   map
   (fn : string
    [key   : string
-    value : any-1]
+    value : any]
    key))
  :test (test
         (stringlist &quot;a&quot; &quot;b&quot;)
@@ -61069,6 +61084,10 @@ output : list-1 := (empty list-1)
                 <div class="td">vx/data/textblock</div>
               </div>
               <div class="tr">
+                <div class="td">typ</div>
+                <div class="td">vx/type</div>
+              </div>
+              <div class="tr">
                 <div class="td">javaniofile</div>
                 <div class="td">java.nio.file.*</div>
               </div>
@@ -61102,7 +61121,7 @@ output : list-1 := (empty list-1)
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/boolean-exists&lt;-file')">boolean-exists&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/boolean-write&lt;-file-any')">boolean-write&lt;-file-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/boolean-write&lt;-file')">boolean-write&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/boolean-write&lt;-file-string')">boolean-write&lt;-file-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/file-read&lt;-file')">file-read&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/string-read&lt;-file')">string-read&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/name&lt;-file')">name&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/path&lt;-file')">path&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/pathcurrent&lt;-os')">pathcurrent&lt;-os</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/pathfull&lt;-file')">pathfull&lt;-file</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/boolean-exists&lt;-file')">boolean-exists&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/boolean-write&lt;-file-any')">boolean-write&lt;-file-any</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/boolean-write&lt;-file')">boolean-write&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/boolean-write&lt;-file-string')">boolean-write&lt;-file-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/file&lt;-path')">file&lt;-path</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/file-read&lt;-file')">file-read&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/string-read&lt;-file')">string-read&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/name&lt;-file')">name&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/path&lt;-file')">path&lt;-file</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/pathcurrent&lt;-os')">pathcurrent&lt;-os</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/pathfull&lt;-file')">pathfull&lt;-file</span>
             </li>
           </ul>
         </details>
@@ -61113,7 +61132,8 @@ output : list-1 := (empty list-1)
           <ul>
             <li>
               <div class="source">(package vx/data/file
- :libs (lib tb :path vx/data/textblock)
+ :libs (lib tb  :path vx/data/textblock)
+       (lib typ :path vx/type)
        (lib javaniofile)
  :doc &quot;File handler&quot;)
 
@@ -61156,7 +61176,9 @@ output : list-1 := (empty list-1)
 (func boolean-write&lt;-file-any : boolean
  [file : file
   val  : any]
- (boolean-write&lt;-file-string file (string&lt;-any val))
+ (boolean-write&lt;-file-string
+  file
+  (string&lt;-any val))
  :context
  :sideeffects &quot;Writes to file io&quot;
  :clientserver :server
@@ -61198,6 +61220,23 @@ output : list-1 := (empty list-1)
          &quot;writetext&quot;))
  :clientserver :server
  :doc &quot;Write a File to Disk&quot;)
+
+(func file&lt;-path : file
+ [path : string]
+ (let : file
+  [pos : int :=
+    (typ/int&lt;-string-findlast
+     path &quot;/&quot;)
+   name : string :=
+    (typ/string&lt;-string-start
+     path (+1 pos))
+   pth : string :=
+    (typ/string&lt;-string-end
+     path (-1 pos))]
+  (file
+   :name name
+   :path pth))
+ :doc &quot;Returns a file from a given path&quot;)
 
 (func file-read&lt;-file : file
  [file : file]
@@ -61618,7 +61657,9 @@ output : list-1 := (empty list-1)
                   <div class="source">(func boolean-write&lt;-file-any : boolean
  [file : file
   val  : any]
- (boolean-write&lt;-file-string file (string&lt;-any val))
+ (boolean-write&lt;-file-string
+  file
+  (string&lt;-any val))
  :context
  :sideeffects &quot;Writes to file io&quot;
  :clientserver :server
@@ -61787,6 +61828,81 @@ output : list-1 := (empty list-1)
          &quot;writetext&quot;))
  :clientserver :server
  :doc &quot;Write a File to Disk&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/data/file/file&lt;-path">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/data/file')">vx/data/file</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/data/file/file&lt;-path')">file&lt;-path</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a file from a given path</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">file&lt;-path</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/data/file/file')">vx/data/file/file</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">path</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func file&lt;-path : file
+ [path : string]
+ (let : file
+  [pos : int :=
+    (typ/int&lt;-string-findlast
+     path &quot;/&quot;)
+   name : string :=
+    (typ/string&lt;-string-start
+     path (+1 pos))
+   pth : string :=
+    (typ/string&lt;-string-end
+     path (-1 pos))]
+  (file
+   :name name
+   :path pth))
+ :doc &quot;Returns a file from a given path&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -71403,7 +71519,7 @@ output : list-1 := (empty list-1)
           </summary>
           <ul>
             <li>
-              <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/bounds')">bounds</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/cursor')">cursor</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/font')">font</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontface')">fontface</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontfacelist')">fontfacelist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontfacemap')">fontfacemap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontmap')">fontmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontstyle')">fontstyle</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontstylemap')">fontstylemap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/image')">image</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/layout')">layout</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/layoutengine')">layoutengine</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/layoutlist')">layoutlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/layoutmap')">layoutmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/pin')">pin</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/point')">point</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/pointstyle')">pointstyle</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/style')">style</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/stylelist')">stylelist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/stylemap')">stylemap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/stylesheet')">stylesheet</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/styletype')">styletype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">ui</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uilist')">uilist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uimap')">uimap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uiengine')">uiengine</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/cursor-pointer')">cursor-pointer</span>
+              <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/align')">align</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/bounds')">bounds</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/cursor')">cursor</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/font')">font</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontface')">fontface</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontfacelist')">fontfacelist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontfacemap')">fontfacemap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontmap')">fontmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontstyle')">fontstyle</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontstylemap')">fontstylemap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/image')">image</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/layout')">layout</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/layoutengine')">layoutengine</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/layoutlist')">layoutlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/layoutmap')">layoutmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/pin')">pin</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/point')">point</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/pointstyle')">pointstyle</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/style')">style</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/stylelist')">stylelist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/stylemap')">stylemap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/stylesheet')">stylesheet</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/styletype')">styletype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">ui</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uilist')">uilist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uimap')">uimap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uiengine')">uiengine</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/cursor-pointer')">cursor-pointer</span>
             </li>
           </ul>
         </details>
@@ -71413,7 +71529,7 @@ output : list-1 := (empty list-1)
           </summary>
           <ul>
             <li>
-      <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-app')">layout-app</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-background')">layout-background</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-button')">layout-button</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-combobox')">layout-combobox</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-else')">layout-else</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-flow-columns')">layout-flow-columns</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-flow-item')">layout-flow-item</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-flow-rows')">layout-flow-rows</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-image')">layout-image</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-label')">layout-label</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-main')">layout-main</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-maxpanel')">layout-maxpanel</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-menubar')">layout-menubar</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-menudrawer')">layout-menudrawer</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-msgbox')">layout-msgbox</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-navbar')">layout-navbar</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-navdrawer')">layout-navdrawer</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-panel')">layout-panel</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-parallax')">layout-parallax</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-statusbar')">layout-statusbar</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-statusdrawer')">layout-statusdrawer</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-text')">layout-text</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-textentry')">layout-textentry</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-titlebar')">layout-titlebar</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-bottom')">pin-bottom</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-center')">pin-center</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-center-h')">pin-center-h</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-center-v')">pin-center-v</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-expand')">pin-expand</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-left')">pin-left</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-right')">pin-right</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-top')">pin-top</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/styletype-custom')">styletype-custom</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/styletype-shared')">styletype-shared</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/styletype-system')">styletype-system</span>
+      <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/align-center')">align-center</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/align-left')">align-left</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/align-right')">align-right</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-app')">layout-app</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-background')">layout-background</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-button')">layout-button</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-combobox')">layout-combobox</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-else')">layout-else</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-flow-columns')">layout-flow-columns</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-flow-item')">layout-flow-item</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-flow-rows')">layout-flow-rows</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-image')">layout-image</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-label')">layout-label</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-main')">layout-main</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-maxpanel')">layout-maxpanel</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-menubar')">layout-menubar</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-menudrawer')">layout-menudrawer</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-msgbox')">layout-msgbox</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-navbar')">layout-navbar</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-navdrawer')">layout-navdrawer</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-panel')">layout-panel</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-parallax')">layout-parallax</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-statusbar')">layout-statusbar</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-statusdrawer')">layout-statusdrawer</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-text')">layout-text</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-textentry')">layout-textentry</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-titlebar')">layout-titlebar</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-bottom')">pin-bottom</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-center')">pin-center</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-center-h')">pin-center-h</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-center-v')">pin-center-v</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-expand')">pin-expand</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-left')">pin-left</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-right')">pin-right</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-top')">pin-top</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/styletype-custom')">styletype-custom</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/styletype-shared')">styletype-shared</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/styletype-system')">styletype-system</span>
             </li>
           </ul>
         </details>
@@ -71439,6 +71555,9 @@ output : list-1 := (empty list-1)
        (lib file  :path vx/data/file)
        (lib state :path vx/state)
  :doc &quot;Universal Ui Element&quot;)
+
+(type align : struct
+ :doc &quot;Universal Alignment&quot;)
 
 (type bounds : struct
  :properties [left   : int
@@ -71530,6 +71649,7 @@ output : list-1 := (empty list-1)
 
 (type style : struct
  :properties [name             : string
+              align            : align
               boundsmargin     : bounds
               boundspadding    : bounds
               color-background : string
@@ -71542,6 +71662,7 @@ output : list-1 := (empty list-1)
               type             : styletype
               pin              : pin
               pointpos         : point
+              pointrotate      : point
               pointsize        : point]
  :doc &quot;Universal Style&quot;)
 
@@ -71594,6 +71715,15 @@ output : list-1 := (empty list-1)
  :doc &quot;Template for uiengine&quot;)
 
 (type cursor-pointer : cursor)
+
+(const align-center : align
+ :doc &quot;Logical Center Align in parent&quot;)
+
+(const align-left : align
+ :doc &quot;Logical Left Align in parent&quot;)
+
+(const align-right : align
+ :doc &quot;Logical Right Align in parent&quot;)
 
 (const layout-app : layout
  (layout
@@ -72155,6 +72285,51 @@ output : list-1 := (empty list-1)
           </ul>
         </details>
       </div>
+          <div class="d" id="d_type_vx/ui/ui/align">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/align')">align</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Universal Alignment</div>
+              </li>
+            </ul>
+            <div class="lbl">Type Name:</div>
+            <ul>
+              <li>
+                <div class="txt">align</div>
+              </li>
+            </ul>
+            <div class="lbl">Extends:</div>
+            <ul>
+              <li>
+                <div class="txt">:struct</div>
+              </li>
+            </ul>
+            <div class="lbl">Default:</div>
+            <ul>
+              <li>
+                <div class="txt"></div>
+              </li>
+            </ul>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(type align : struct
+ :doc &quot;Universal Alignment&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
           <div class="d" id="d_type_vx/ui/ui/bounds">
             <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/bounds')">bounds</span></div>
             <div class="lbl">Description:</div>
@@ -73420,6 +73595,13 @@ output : list-1 := (empty list-1)
                       <div class="td">false</div>
                     </div>
                     <div class="tr">
+                      <div class="td">align</div>
+                      <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/align')">vx/ui/ui/align</span></div>
+                      <div class="td"></div>
+                      <div class="td">false</div>
+                      <div class="td">false</div>
+                    </div>
+                    <div class="tr">
                       <div class="td">boundsmargin</div>
                       <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/bounds')">vx/ui/ui/bounds</span></div>
                       <div class="td"></div>
@@ -73504,6 +73686,13 @@ output : list-1 := (empty list-1)
                       <div class="td">false</div>
                     </div>
                     <div class="tr">
+                      <div class="td">pointrotate</div>
+                      <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/point')">vx/ui/ui/point</span></div>
+                      <div class="td"></div>
+                      <div class="td">false</div>
+                      <div class="td">false</div>
+                    </div>
+                    <div class="tr">
                       <div class="td">pointsize</div>
                       <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/point')">vx/ui/ui/point</span></div>
                       <div class="td"></div>
@@ -73529,6 +73718,7 @@ output : list-1 := (empty list-1)
                 <li>
                   <div class="source">(type style : struct
  :properties [name             : string
+              align            : align
               boundsmargin     : bounds
               boundspadding    : bounds
               color-background : string
@@ -73541,6 +73731,7 @@ output : list-1 := (empty list-1)
               type             : styletype
               pin              : pin
               pointpos         : point
+              pointrotate      : point
               pointsize        : point]
  :doc &quot;Universal Style&quot;)</div>
                 </li>
@@ -74182,6 +74373,123 @@ output : list-1 := (empty list-1)
               <ul>
                 <li>
                   <div class="source">(type cursor-pointer : cursor)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_const_vx/ui/ui/align-center">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/align-center')">align-center</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Logical Center Align in parent</div>
+              </li>
+            </ul>
+            <div class="lbl">Constant Name:</div>
+            <ul>
+              <li>
+                <div class="txt">align-center</div>
+              </li>
+            </ul>
+            <div class="lbl">Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/align')">vx/ui/ui/align</span></div>
+              </li>
+            </ul>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(const align-center : align
+ :doc &quot;Logical Center Align in parent&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_const_vx/ui/ui/align-left">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/align-left')">align-left</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Logical Left Align in parent</div>
+              </li>
+            </ul>
+            <div class="lbl">Constant Name:</div>
+            <ul>
+              <li>
+                <div class="txt">align-left</div>
+              </li>
+            </ul>
+            <div class="lbl">Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/align')">vx/ui/ui/align</span></div>
+              </li>
+            </ul>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(const align-left : align
+ :doc &quot;Logical Left Align in parent&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_const_vx/ui/ui/align-right">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/align-right')">align-right</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Logical Right Align in parent</div>
+              </li>
+            </ul>
+            <div class="lbl">Constant Name:</div>
+            <ul>
+              <li>
+                <div class="txt">align-right</div>
+              </li>
+            </ul>
+            <div class="lbl">Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/align')">vx/ui/ui/align</span></div>
+              </li>
+            </ul>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(const align-right : align
+ :doc &quot;Logical Right Align in parent&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -82595,12 +82903,14 @@ output : list-1 := (empty list-1)
      pin              : ui/pin       := (:pin              uistyle)
      pointpos         : ui/point     := (:pointpos         uistyle)
      pointsize        : ui/point     := (:pointsize        uistyle)
+     pointrotate      : ui/point     := (:pointrotate      uistyle)
      styletype        : ui/styletype := (:type             uistyle)
      color-bkg        : string       := (:color-background uistyle)
      image-bkg        : ui/image     := (:image-background uistyle)
      color-hoverbkg   : string       := (:color-hoverbkgrd uistyle)
      cursor           : ui/cursor    := (:cursor           uistyle)
      hidden           : boolean      := (:hidden           uistyle)
+     align            : ui/align     := (:align            uistyle)
      posx             : int          := (:x pointpos)
      posy             : int          := (:y pointpos)
      sizex            : int          := (:x pointsize)
@@ -82619,6 +82929,11 @@ output : list-1 := (empty list-1)
      bkgimage : string :=
       (string-style&lt;-image
        image-bkg)
+     bkgsize : string :=
+      (if : string
+       (then
+        (!-empty image-bkg)
+        &quot;cover&quot;))
      position : string :=
       (if : string
        (then
@@ -82757,10 +83072,36 @@ output : list-1 := (empty list-1)
        (then
         (== cursor ui/cursor-pointer)
         &quot;pointer&quot;))
+     textalign : string :=
+      (if : string
+       (then
+        (== align ui/align-left)
+        &quot;left&quot;)
+       (then
+        (== align ui/align-center)
+        &quot;center&quot;)
+       (then
+        (== align ui/align-right)
+        &quot;right&quot;))
+     transform : string :=
+      (if : string
+       (then (is-empty pointrotate) &quot;&quot;)
+       (else
+        (string
+         &quot;rotate(&quot;
+         (:x pointrotate)
+         &quot;deg)&quot;)))
+     transformorigin : string :=
+      (if : string
+       (then (is-empty pointrotate) &quot;&quot;)
+       (then
+        (== layout ui/layout-label)
+        &quot;left top&quot;))
      props : html/propmap :=
       (html/propmap
        :background-color bkgcolor
        :background-image bkgimage
+       :background-size  bkgsize
        :cursor           scursor
        :display          display
        :font             sfont
@@ -82773,7 +83114,10 @@ output : list-1 := (empty list-1)
        :height           height
        :width            width
        :overflow-x       overflowx
-       :overflow-y       overflowy)
+       :overflow-y       overflowy
+       :text-align       textalign
+       :transform        transform
+       :transform-origin transformorigin)
      hoverprops : html/propmap :=
       (html/propmap
        :background-color hoverbkgrdcolor)
@@ -84109,12 +84453,14 @@ output : list-1 := (empty list-1)
      pin              : ui/pin       := (:pin              uistyle)
      pointpos         : ui/point     := (:pointpos         uistyle)
      pointsize        : ui/point     := (:pointsize        uistyle)
+     pointrotate      : ui/point     := (:pointrotate      uistyle)
      styletype        : ui/styletype := (:type             uistyle)
      color-bkg        : string       := (:color-background uistyle)
      image-bkg        : ui/image     := (:image-background uistyle)
      color-hoverbkg   : string       := (:color-hoverbkgrd uistyle)
      cursor           : ui/cursor    := (:cursor           uistyle)
      hidden           : boolean      := (:hidden           uistyle)
+     align            : ui/align     := (:align            uistyle)
      posx             : int          := (:x pointpos)
      posy             : int          := (:y pointpos)
      sizex            : int          := (:x pointsize)
@@ -84133,6 +84479,11 @@ output : list-1 := (empty list-1)
      bkgimage : string :=
       (string-style&lt;-image
        image-bkg)
+     bkgsize : string :=
+      (if : string
+       (then
+        (!-empty image-bkg)
+        &quot;cover&quot;))
      position : string :=
       (if : string
        (then
@@ -84271,10 +84622,36 @@ output : list-1 := (empty list-1)
        (then
         (== cursor ui/cursor-pointer)
         &quot;pointer&quot;))
+     textalign : string :=
+      (if : string
+       (then
+        (== align ui/align-left)
+        &quot;left&quot;)
+       (then
+        (== align ui/align-center)
+        &quot;center&quot;)
+       (then
+        (== align ui/align-right)
+        &quot;right&quot;))
+     transform : string :=
+      (if : string
+       (then (is-empty pointrotate) &quot;&quot;)
+       (else
+        (string
+         &quot;rotate(&quot;
+         (:x pointrotate)
+         &quot;deg)&quot;)))
+     transformorigin : string :=
+      (if : string
+       (then (is-empty pointrotate) &quot;&quot;)
+       (then
+        (== layout ui/layout-label)
+        &quot;left top&quot;))
      props : html/propmap :=
       (html/propmap
        :background-color bkgcolor
        :background-image bkgimage
+       :background-size  bkgsize
        :cursor           scursor
        :display          display
        :font             sfont
@@ -84287,7 +84664,10 @@ output : list-1 := (empty list-1)
        :height           height
        :width            width
        :overflow-x       overflowx
-       :overflow-y       overflowy)
+       :overflow-y       overflowy
+       :text-align       textalign
+       :transform        transform
+       :transform-origin transformorigin)
      hoverprops : html/propmap :=
       (html/propmap
        :background-color hoverbkgrdcolor)

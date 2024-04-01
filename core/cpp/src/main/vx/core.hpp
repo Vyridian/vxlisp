@@ -541,6 +541,10 @@ namespace vx_core {
   typedef Abstract_any_from_int* Func_any_from_int;
   extern Func_any_from_int e_any_from_int;
   extern Func_any_from_int t_any_from_int;
+  class Abstract_any_from_int_any;
+  typedef Abstract_any_from_int_any* Func_any_from_int_any;
+  extern Func_any_from_int_any e_any_from_int_any;
+  extern Func_any_from_int_any t_any_from_int_any;
   class Abstract_any_from_key_value;
   typedef Abstract_any_from_key_value* Func_any_from_key_value;
   extern Func_any_from_key_value e_any_from_key_value;
@@ -777,6 +781,10 @@ namespace vx_core {
   typedef Abstract_list_from_list_async* Func_list_from_list_async;
   extern Func_list_from_list_async e_list_from_list_async;
   extern Func_list_from_list_async t_list_from_list_async;
+  class Abstract_list_from_list_intany;
+  typedef Abstract_list_from_list_intany* Func_list_from_list_intany;
+  extern Func_list_from_list_intany e_list_from_list_intany;
+  extern Func_list_from_list_intany t_list_from_list_intany;
   class Abstract_list_from_map;
   typedef Abstract_list_from_map* Func_list_from_map;
   extern Func_list_from_map e_list_from_map;
@@ -1158,6 +1166,9 @@ namespace vx_core {
   // vx_list_from_array(arrayval)
   vx_core::vx_Type_listany vx_list_from_array(vx_core::vx_Type_listarg vals);
 
+  // vx_list_from_list_intany_helper(generic_list_1, list-2, any<-int-any)
+  vx_core::Type_list vx_list_from_list_intany_helper(vx_core::Type_list generic_list_1, vx_core::Type_list valuelist, vx_core::Func_any_from_int_any fn_any_from_int_any);
+
   // vx_list_from_map_1(generic_list_1, map, fn-any<-key-value)
   vx_core::Type_any vx_list_from_map_1(vx_core::Type_any generic_list_1, vx_core::Type_map valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value);
 
@@ -1461,19 +1472,27 @@ namespace vx_core {
     return output;
   }
 
-  // vx_new_from_list(T, List<any>)
-  template <class T> static T* vx_new_from_list(T* generic_any_1, vx_core::vx_Type_listany listval) {
+  // vx_new_list(T, List<any>)
+  template <class T> static T* vx_new_list(T* generic_any_1, vx_core::vx_Type_listany listval) {
     T* output;
     vx_core::Type_any val = generic_any_1->vx_new(listval);
     output = vx_core::vx_any_from_any(generic_any_1, val);
     return output;
   }
 
-  // vx_new_from_map(T, Map<string, any>)
-  template <class T> static T* vx_new_from_map(T* generic_any_1, vx_core::vx_Type_mapany mapval) {
+  // vx_new_map(T, Map<string, any>)
+  template <class T> static T* vx_new_map(T* generic_any_1, vx_core::vx_Type_mapany mapval) {
     T* output;
     vx_core::Type_any val = generic_any_1->vx_new_from_map(mapval);
     output = vx_core::vx_any_from_any(generic_any_1, val);
+    return output;
+  }
+
+  // vx_list_from_list_intany(generic_list_1, list-2, any<-int-any)
+  template <class T, class U> static T* vx_list_from_list_intany(T* generic_list_1, U* valuelist, vx_core::Func_any_from_int_any fn_any_from_int_any) {
+    T* output = vx_core::vx_empty(generic_list_1);
+    vx_core::Type_list outputlist = vx_core::vx_list_from_list_intany_helper(generic_list_1, valuelist, fn_any_from_int_any);
+    output = vx_core::vx_any_from_any(generic_list_1, outputlist);
     return output;
   }
 
@@ -6470,6 +6489,36 @@ namespace vx_core {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
+  // (func any<-int-any)
+  class Abstract_any_from_int_any : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_any_from_int_any() {};
+    virtual ~Abstract_any_from_int_any() = 0;
+    typedef std::function<vx_core::Type_any(vx_core::Type_int, vx_core::Type_any)> IFn;
+    IFn fn;
+    vx_core::vx_Type_listany lambdavars;
+    virtual vx_core::Func_any_from_int_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_int_any::IFn fn) const = 0;
+    virtual vx_core::Type_any vx_any_from_int_any(vx_core::Type_int num, vx_core::Type_any val) const = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_any_from_int_any : public virtual Abstract_any_from_int_any {
+  public:
+    Class_any_from_int_any();
+    virtual ~Class_any_from_int_any() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_int_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_int_any::IFn fn) const;
+    virtual vx_core::Type_any vx_any_from_int_any(vx_core::Type_int num, vx_core::Type_any val) const;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
   // (func any<-map-start-reduce)
   class Abstract_any_from_map_start_reduce : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
@@ -7210,6 +7259,29 @@ namespace vx_core {
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func list<-list-intany)
+  class Abstract_list_from_list_intany : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_list_from_list_intany() {};
+    virtual ~Abstract_list_from_list_intany() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_list_from_list_intany : public virtual Abstract_list_from_list_intany {
+  public:
+    Class_list_from_list_intany();
+    virtual ~Class_list_from_list_intany() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
   // (func list<-map)
@@ -8926,6 +8998,14 @@ namespace vx_core {
     return output;
   }
 
+  // (func any<-int-any)
+  template <class T, class U> T* f_any_from_int_any(T* generic_any_1, vx_core::Type_int num, U* val) {
+    T* output = vx_core::vx_empty(generic_any_1);
+    vx_core::vx_reserve({num, val});
+    vx_core::vx_release_one_except({num, val}, output);
+    return output;
+  }
+
   // (func any<-map-start-reduce)
   template <class T, class N> T* f_any_from_map_start_reduce(T* generic_any_1, N* map, T* start, vx_core::Func_any_from_any_key_value fn_reduce) {
     T* output = vx_core::vx_empty(generic_any_1);
@@ -9059,6 +9139,16 @@ namespace vx_core {
     return output;
   }
 
+  // (func list<-list-intany)
+  template <class X, class Y> X* f_list_from_list_intany(X* generic_list_1, Y* values, vx_core::Func_any_from_int_any fn_any_from_int_any) {
+    X* output = vx_core::vx_empty(generic_list_1);
+    vx_core::vx_reserve({values, fn_any_from_int_any});
+    vx_core::Type_any result = vx_core::vx_list_from_list_intany(generic_list_1, values, fn_any_from_int_any);
+    output = vx_core::vx_any_from_any(generic_list_1, result);
+    vx_core::vx_release_one_except({values, fn_any_from_int_any}, output);
+    return output;
+  }
+
   // (func list<-map)
   template <class X, class O> X* f_list_from_map_1(X* generic_list_1, O* valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value) {
     X* output = vx_core::vx_empty(generic_list_1);
@@ -9114,7 +9204,7 @@ namespace vx_core {
     vx_core::vx_reserve({vallist, fn_any_from_any});
     vx_core::vx_Type_listany listany = vallist->vx_list();
     vx_core::vx_Type_mapany mapany = vx_core::vx_map_from_list(listany, fn_any_from_any);
-    output = vx_core::vx_new_from_map(generic_map_1, mapany);
+    output = vx_core::vx_new_map(generic_map_1, mapany);
     vx_core::vx_release_one_except({vallist, fn_any_from_any}, output);
     return output;
   }

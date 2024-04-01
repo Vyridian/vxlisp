@@ -11,6 +11,13 @@ export default class vx_ui_ui {
 
 
   /**
+   * type: align
+   * Universal Alignment
+   */
+  static t_align = {}
+  static e_align = {vx_type: vx_ui_ui.t_align}
+
+  /**
    * type: bounds
    * Universal Bounds
    */
@@ -197,6 +204,27 @@ export default class vx_ui_ui {
    */
   static t_uimap = {}
   static e_uimap = {vx_type: vx_ui_ui.t_uimap}
+  /**
+   * Constant: align-center
+   * Logical Center Align in parent
+   * {align}
+   */
+  static c_align_center = {vx_type: vx_ui_ui.t_align, vx_constdef: {pkgname: 'vx/ui/ui', name: 'align-center'}}
+
+  /**
+   * Constant: align-left
+   * Logical Left Align in parent
+   * {align}
+   */
+  static c_align_left = {vx_type: vx_ui_ui.t_align, vx_constdef: {pkgname: 'vx/ui/ui', name: 'align-left'}}
+
+  /**
+   * Constant: align-right
+   * Logical Right Align in parent
+   * {align}
+   */
+  static c_align_right = {vx_type: vx_ui_ui.t_align, vx_constdef: {pkgname: 'vx/ui/ui', name: 'align-right'}}
+
   /**
    * Constant: layout-app
    * {layout}
@@ -1505,6 +1533,9 @@ export default class vx_ui_ui {
 
   static {
     const constmap = vx_core.vx_new_map(vx_core.t_constmap, {
+      "align-center": vx_ui_ui.c_align_center,
+      "align-left": vx_ui_ui.c_align_left,
+      "align-right": vx_ui_ui.c_align_right,
       "layout-app": vx_ui_ui.c_layout_app,
       "layout-background": vx_ui_ui.c_layout_background,
       "layout-button": vx_ui_ui.c_layout_button,
@@ -1542,6 +1573,7 @@ export default class vx_ui_ui {
       "styletype-system": vx_ui_ui.c_styletype_system
     })
     const emptymap = vx_core.vx_new_map(vx_core.t_map, {
+      "align": vx_ui_ui.e_align,
       "bounds": vx_ui_ui.e_bounds,
       "cursor": vx_ui_ui.e_cursor,
       "cursor-pointer": vx_ui_ui.e_cursor_pointer,
@@ -1653,6 +1685,7 @@ export default class vx_ui_ui {
       "uimap<-uimap-data": vx_ui_ui.t_uimap_from_uimap_data
     })
     const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
+      "align": vx_ui_ui.t_align,
       "bounds": vx_ui_ui.t_bounds,
       "cursor": vx_ui_ui.t_cursor,
       "cursor-pointer": vx_ui_ui.t_cursor_pointer,
@@ -1689,6 +1722,25 @@ export default class vx_ui_ui {
       "typemap": typemap
     })
     vx_core.vx_global_package_set(pkg)
+
+    // (type align)
+    vx_ui_ui.t_align['vx_type'] = vx_core.t_type
+    vx_ui_ui.t_align['vx_value'] = {
+      name          : "align",
+      pkgname       : "vx/ui/ui",
+      extends       : ":struct",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {},
+      proplast      : {}
+    }
+    vx_ui_ui.e_align['vx_type'] = vx_ui_ui.t_align
+    vx_ui_ui.e_align['vx_value'] = {}
 
     // (type bounds)
     vx_ui_ui.t_bounds['vx_type'] = vx_core.t_type
@@ -2249,6 +2301,11 @@ export default class vx_ui_ui {
           "type" : vx_core.t_string,
           "multi": false
         },
+        "align": {
+          "name" : "align",
+          "type" : vx_ui_ui.t_align,
+          "multi": false
+        },
         "boundsmargin": {
           "name" : "boundsmargin",
           "type" : vx_ui_ui.t_bounds,
@@ -2306,6 +2363,11 @@ export default class vx_ui_ui {
         },
         "pointpos": {
           "name" : "pointpos",
+          "type" : vx_ui_ui.t_point,
+          "multi": false
+        },
+        "pointrotate": {
+          "name" : "pointrotate",
           "type" : vx_ui_ui.t_point,
           "multi": false
         },

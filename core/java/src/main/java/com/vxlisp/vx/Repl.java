@@ -1663,7 +1663,7 @@ public final class Repl {
       Core.t_any_from_any.vx_fn_new((repl_any) -> {
         Repl.Type_repl repl = Core.f_any_from_any(Repl.t_repl, repl_any);
         return 
-          Repl.f_any_from_repl(context, repl);
+        Repl.f_any_from_repl(context, repl);
       })
     );
     return output;
@@ -2419,29 +2419,29 @@ public final class Repl {
           Core.t_any_from_any.vx_fn_new((item_any) -> {
             Core.Type_any item = Core.f_any_from_any(Core.t_any, item_any);
             return 
-                Core.f_let(
-                  Core.t_string,
-                  Core.t_any_from_func.vx_fn_new(() -> {
-                    final Core.Type_any typ = Core.f_type_from_any(item);
-                    return Core.f_switch(
-                      Core.t_string,
-                      typ,
-                      Core.t_thenelselist.vx_new(
-                        Core.f_case_1(
-                          Core.t_string,
-                          Core.t_any_from_func.vx_fn_new(() -> {
-                            return Core.f_any_from_any(Core.t_string, item);
-                          })
-                        ),
-                        Core.f_else(
-                          Core.t_any_from_func.vx_fn_new(() -> {
-                            return Core.f_string_from_any(item);
-                          })
-                        )
+              Core.f_let(
+                Core.t_string,
+                Core.t_any_from_func.vx_fn_new(() -> {
+                  final Core.Type_any typ = Core.f_type_from_any(item);
+                  return Core.f_switch(
+                    Core.t_string,
+                    typ,
+                    Core.t_thenelselist.vx_new(
+                      Core.f_case_1(
+                        Core.t_string,
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.f_any_from_any(Core.t_string, item);
+                        })
+                      ),
+                      Core.f_else(
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.f_string_from_any(item);
+                        })
                       )
-                    );
-                  })
-                );
+                    )
+                  );
+                })
+              );
           })
         );
         final Core.Type_string script = Type.f_string_from_stringlist_join(textlist, Core.vx_new_string(""));
@@ -3321,7 +3321,7 @@ public final class Repl {
       Core.t_any_from_any.vx_fn_new((textblock_any) -> {
         Textblock.Type_textblock textblock = Core.f_any_from_any(Textblock.t_textblock, textblock_any);
         return 
-          Repl.f_repl_from_textblock(textblock);
+        Repl.f_repl_from_textblock(textblock);
       })
     );
     return output;

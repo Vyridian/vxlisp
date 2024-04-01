@@ -2770,7 +2770,7 @@ public final class Textblock {
       Core.t_any_from_any.vx_fn_new((delim_any) -> {
         Textblock.Type_delim delim = Core.f_any_from_any(Textblock.t_delim, delim_any);
         return 
-          Textblock.f_delim_pos_from_string_delim(text, delim);
+        Textblock.f_delim_pos_from_string_delim(text, delim);
       })
     );
     return output;
@@ -3999,14 +3999,14 @@ public final class Textblock {
       Core.t_boolean_from_any.vx_fn_new((current_any) -> {
         Textblock.Type_textblock current = Core.f_any_from_any(Textblock.t_textblock, current_any);
         return 
-          Core.f_is_empty_1(
-            current.parent()
-          );
+        Core.f_is_empty_1(
+          current.parent()
+        );
       }),
       Core.t_any_from_any.vx_fn_new((current_any) -> {
         Textblock.Type_textblock current = Core.f_any_from_any(Textblock.t_textblock, current_any);
         return 
-          Textblock.f_textblock_parse_one(current);
+        Textblock.f_textblock_parse_one(current);
       }),
       Core.vx_new_int(100000)
     );
@@ -5747,19 +5747,19 @@ public final class Textblock {
       Core.t_any_from_any.vx_fn_new((textblock_any) -> {
         Textblock.Type_textblock textblock = Core.f_any_from_any(Textblock.t_textblock, textblock_any);
         return 
-          Core.f_let(
-            Textblock.t_textblock,
-            Core.t_any_from_func.vx_fn_new(() -> {
-              final Textblock.Type_delim delimcurr = textblock.delim();
-              final Core.Type_string namecurr = delimcurr.name();
-              final Core.Type_string nameremove = remove.name();
-              return Core.f_if(
-                Textblock.t_textblock,
-                Core.f_ne(namecurr, nameremove),
-                textblock
-              );
-            })
-          );
+        Core.f_let(
+          Textblock.t_textblock,
+          Core.t_any_from_func.vx_fn_new(() -> {
+            final Textblock.Type_delim delimcurr = textblock.delim();
+            final Core.Type_string namecurr = delimcurr.name();
+            final Core.Type_string nameremove = remove.name();
+            return Core.f_if(
+              Textblock.t_textblock,
+              Core.f_ne(namecurr, nameremove),
+              textblock
+            );
+          })
+        );
       })
     );
     return output;

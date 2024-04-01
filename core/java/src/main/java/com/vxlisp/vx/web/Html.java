@@ -9575,7 +9575,7 @@ public final class Html {
           Core.t_any_from_any.vx_fn_new((node_any) -> {
             Html.Type_node node = Core.f_any_from_any(Html.t_node, node_any);
             return 
-                Html.f_string_from_node_indent(node, indent);
+              Html.f_string_from_node_indent(node, indent);
           })
         );
         return Type.f_string_from_stringlist_join(textlist, Core.vx_new_string(""));
@@ -9807,8 +9807,9 @@ public final class Html {
           Core.vx_new_string("id"),
           p.id()
         );
-        final Core.Type_string sclass = Html.f_string_from_propstyle(
-          p.style()
+        final Core.Type_string sclass = Html.f_string_from_propstyle_stylelist(
+          p.style(),
+          p.stylelist()
         );
         final Core.Type_string sstyle = Html.f_string_from_propstyleunique(
           p.style_unique()
@@ -10245,10 +10246,10 @@ public final class Html {
                   Core.t_any_from_any.vx_fn_new((item_any) -> {
                     Html.Type_style item = Core.f_any_from_any(Html.t_style, item_any);
                     return 
-                        Type.f_string_from_string_start(
-                          item.name(),
-                          Core.vx_new_int(2)
-                        );
+                      Type.f_string_from_string_start(
+                        item.name(),
+                        Core.vx_new_int(2)
+                      );
                   })
                 );
                 final Core.Type_string joined = Type.f_string_from_stringlist_join(namelist, Core.vx_new_string(" "));
@@ -10369,17 +10370,33 @@ public final class Html {
             return Core.f_notempty_1(style);
           }),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.f_new(
+            return Core.f_let(
               Core.t_string,
-              Core.t_anylist.vx_new(
-                  Core.vx_new_string(" style="),
-                  Core.c_quote,
-                  Html.f_string_from_stylepropmap_indent(
-                    style.props(),
-                    Core.vx_new_int(0)
-                  ),
-                  Core.c_quote
-              )
+              Core.t_any_from_func.vx_fn_new(() -> {
+                final Html.Type_propmap props = style.props();
+                final Core.Type_string text = Html.f_string_from_stylepropmap_indent(props, Core.vx_new_int(0));
+                return Core.f_if_2(
+                  Core.t_string,
+                  Core.t_thenelselist.vx_new(
+                    Core.f_then(
+                      Core.t_boolean_from_func.vx_fn_new(() -> {
+                        return Core.f_notempty(text);
+                      }),
+                      Core.t_any_from_func.vx_fn_new(() -> {
+                        return Core.f_new(
+                          Core.t_string,
+                          Core.t_anylist.vx_new(
+                              Core.vx_new_string(" style="),
+                              Core.c_quote,
+                              text,
+                              Core.c_quote
+                          )
+                        );
+                      })
+                    )
+                  )
+                );
+              })
             );
           })
         )
@@ -10583,10 +10600,13 @@ public final class Html {
           Core.t_any_from_any.vx_fn_new((substyle_any) -> {
             Html.Type_style substyle = Core.f_any_from_any(Html.t_style, substyle_any);
             return 
-                Html.f_string_from_style_indent(substyle, indent);
+              Html.f_string_from_style_indent(substyle, indent);
           })
         );
-        return Type.f_string_from_stringlist_join(sstyles, Core.vx_new_string(""));
+        return Type.f_string_from_stringlist_join(
+          sstyles,
+          Core.c_newline
+        );
       })
     );
     return output;
@@ -10680,16 +10700,16 @@ public final class Html {
             Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
             Core.Type_string val = Core.f_any_from_any(Core.t_string, val_any);
             return 
-                Core.f_new(
-                  Core.t_string,
-                  Core.t_anylist.vx_new(
-                    sindent,
-                    key,
-                    Core.vx_new_string(": "),
-                    val,
-                    Core.vx_new_string(";")
-                  )
-                );
+              Core.f_new(
+                Core.t_string,
+                Core.t_anylist.vx_new(
+                  sindent,
+                  key,
+                  Core.vx_new_string(": "),
+                  val,
+                  Core.vx_new_string(";")
+                )
+              );
           })
         );
         return Type.f_string_from_stringlist_join(sprops, Core.vx_new_string(""));
@@ -10778,14 +10798,15 @@ public final class Html {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string text = Html.f_string_from_stylelist_indent(
-          stylesheet.styles(),
+        final Html.Type_stylelist styles = stylesheet.styles();
+        final Core.Type_string sstyles = Html.f_string_from_stylelist_indent(
+          styles,
           Core.f_plus1(indent)
         );
         final Core.Type_string sindent = Html.f_string_from_indent(indent);
         final Core.Type_string eindent = Core.f_if(
           Core.t_string,
-          Core.f_notempty(text),
+          Core.f_notempty(sstyles),
           sindent
         );
         return Core.f_new(
@@ -10793,7 +10814,7 @@ public final class Html {
           Core.t_anylist.vx_new(
             sindent,
             Core.vx_new_string("<style>"),
-            text,
+            sstyles,
             eindent,
             Core.vx_new_string("</style>")
           )
@@ -11628,7 +11649,7 @@ public final class Html {
       Core.t_any_from_any.vx_fn_new((style_any) -> {
         Html.Type_style style = Core.f_any_from_any(Html.t_style, style_any);
         return 
-          style.name();
+        style.name();
       })
     );
     return output;

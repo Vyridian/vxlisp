@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 import com.vxlisp.vx.*;
+import com.vxlisp.vx.data.*;
 import com.vxlisp.vx.web.*;
 import com.vxlisp.vx.ui.*;
 
@@ -22,11 +23,11 @@ public final class UihtmlTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/ui/html/uihtml", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 6), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 54, ":tests", 12, ":total", 22), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 16), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 16), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 16), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 22), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 64, ":tests", 18, ":total", 28), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 22), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 22), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 22), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 28), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
     );
   }
@@ -46,14 +47,20 @@ public final class UihtmlTest {
         ":style-selected", 0
       ),
       ":funcmap", Core.t_intmap.vx_new(
+        ":boolean-print-html", 0,
         ":context-write", 0,
         ":divchild<-ui", 0,
         ":divchildlist<-uimap", 0,
         ":node-app<-ui-orig-parent", 0,
         ":node-render<-node-ui", 0,
+        ":string-style<-font", 0,
+        ":string-style<-image", 0,
         ":string-stylename<-name-styletype", 0,
+        ":style<-fontface", 0,
         ":style<-style", 0,
         ":stylelist-extra<-ui", 0,
+        ":stylelist-reset", 0,
+        ":stylelist<-fontfacemap", 0,
         ":stylelist<-stylelist", 0,
         ":stylelist<-stylemap", 0,
         ":stylemap<-stylemap", 0,

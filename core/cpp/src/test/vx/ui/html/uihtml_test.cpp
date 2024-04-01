@@ -1,9 +1,11 @@
 #include "../../../../main/vx/ui/html/uihtml.hpp"
 #include "../../../../main/vx/core.hpp"
 #include "../../../../main/vx/test.hpp"
+#include "../../../../main/vx/data/file.hpp"
 #include "../../../../main/vx/web/html.hpp"
 #include "../../../../main/vx/web/htmldoc.hpp"
 #include "../../../../main/vx/event.hpp"
+#include "../../../../main/vx/type.hpp"
 #include "../../../../main/vx/ui/ui.hpp"
 #include "uihtml_test.hpp"
 
@@ -28,29 +30,29 @@ namespace vx_ui_html_uihtml_test {
         vx_core::vx_new_string(":total"), vx_core::vx_new_int(6)
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(54), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(12), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(22)
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(64), 
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(18), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(28)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(16)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(22)
       }),
       vx_core::vx_new_string(":bigospacenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(16)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(22)
       }),
       vx_core::vx_new_string(":bigotimenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(16)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(22)
       }),
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(22)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(28)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(100), 
@@ -76,14 +78,20 @@ namespace vx_ui_html_uihtml_test {
         vx_core::vx_new_string(":style-selected"), vx_core::vx_new_int(0)
       }),
       vx_core::vx_new_string(":funcmap"), vx_core::vx_new(vx_core::t_intmap, {
+        vx_core::vx_new_string(":boolean-print-html"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":context-write"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":divchild<-ui"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":divchildlist<-uimap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":node-app<-ui-orig-parent"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":node-render<-node-ui"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":string-style<-font"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":string-style<-image"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":string-stylename<-name-styletype"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":style<-fontface"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":style<-style"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":stylelist-extra<-ui"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":stylelist-reset"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":stylelist<-fontfacemap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":stylelist<-stylelist"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":stylelist<-stylemap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":stylemap<-stylemap"), vx_core::vx_new_int(0),

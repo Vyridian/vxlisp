@@ -159,11 +159,11 @@ public final class FileTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/data/file", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 92, ":tests", 12, ":total", 13), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 40, ":tests", 4, ":total", 10), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 10), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 10), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 30, ":tests", 4, ":total", 13), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 92, ":tests", 13, ":total", 14), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 36, ":tests", 4, ":total", 11), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 11), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 11), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 28, ":tests", 4, ":total", 14), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3)
     );
   }
@@ -185,6 +185,7 @@ public final class FileTest {
         ":boolean-write<-file-any", 0,
         ":boolean-write<-file-string", 1,
         ":file-read<-file", 1,
+        ":file<-path", 0,
         ":name<-file", 0,
         ":path<-file", 0,
         ":pathcurrent<-os", 0,

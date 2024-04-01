@@ -4,6 +4,7 @@
 #include <vector>
 #include "../../vx/core.hpp"
 #include "../../vx/data/textblock.hpp"
+#include "../../vx/type.hpp"
 
 namespace vx_data_file {
 
@@ -41,6 +42,10 @@ namespace vx_data_file {
   typedef Abstract_file_read_from_file* Func_file_read_from_file;
   extern Func_file_read_from_file e_file_read_from_file;
   extern Func_file_read_from_file t_file_read_from_file;
+  class Abstract_file_from_path;
+  typedef Abstract_file_from_path* Func_file_from_path;
+  extern Func_file_from_path e_file_from_path;
+  extern Func_file_from_path t_file_from_path;
   class Abstract_name_from_file;
   typedef Abstract_name_from_file* Func_name_from_file;
   extern Func_name_from_file e_name_from_file;
@@ -90,6 +95,9 @@ namespace vx_data_file {
 
   // (func file-read<-file)
   vx_data_file::Type_file f_file_read_from_file(vx_core::Type_context context, vx_data_file::Type_file file);
+
+  // (func file<-path)
+  vx_data_file::Type_file f_file_from_path(vx_core::Type_string path);
 
   // (func name<-file)
   vx_core::Type_string f_name_from_file(vx_data_file::Type_file file);
@@ -332,6 +340,33 @@ namespace vx_data_file {
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func file<-path)
+  class Abstract_file_from_path : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_file_from_path() {};
+    virtual ~Abstract_file_from_path() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_file_from_path : public virtual Abstract_file_from_path {
+  public:
+    Class_file_from_path();
+    virtual ~Class_file_from_path() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 

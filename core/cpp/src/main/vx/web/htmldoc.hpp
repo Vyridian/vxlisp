@@ -49,6 +49,10 @@ namespace vx_web_htmldoc {
   typedef Abstract_string_from_id* Func_string_from_id;
   extern Func_string_from_id e_string_from_id;
   extern Func_string_from_id t_string_from_id;
+  class Abstract_string_from_stylesheet;
+  typedef Abstract_string_from_stylesheet* Func_string_from_stylesheet;
+  extern Func_string_from_stylesheet e_string_from_stylesheet;
+  extern Func_string_from_stylesheet t_string_from_stylesheet;
   class Abstract_ui_readstate_from_uid;
   typedef Abstract_ui_readstate_from_uid* Func_ui_readstate_from_uid;
   extern Func_ui_readstate_from_uid e_ui_readstate_from_uid;
@@ -82,6 +86,9 @@ namespace vx_web_htmldoc {
 
   // (func string<-id)
   vx_core::Type_string f_string_from_id(vx_core::Type_string id);
+
+  // (func string<-stylesheet)
+  vx_core::Type_string f_string_from_stylesheet(vx_web_html::Type_stylesheet stylesheet);
 
   // (func ui-readstate<-uid)
   vx_core::Type_any f_ui_readstate_from_uid(vx_core::Type_string uid);
@@ -314,6 +321,33 @@ namespace vx_web_htmldoc {
   public:
     Class_string_from_id();
     virtual ~Class_string_from_id() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func string<-stylesheet)
+  class Abstract_string_from_stylesheet : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_string_from_stylesheet() {};
+    virtual ~Abstract_string_from_stylesheet() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_string_from_stylesheet : public virtual Abstract_string_from_stylesheet {
+  public:
+    Class_string_from_stylesheet();
+    virtual ~Class_string_from_stylesheet() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;

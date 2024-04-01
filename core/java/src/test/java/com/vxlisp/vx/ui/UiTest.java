@@ -20,13 +20,13 @@ public final class UiTest {
   public static Test.Type_testcoveragesummary test_coveragesummary() {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/ui/ui", 
-      ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 35), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 55, ":tests", 53, ":total", 96), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 35), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 35), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 35), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 96), 
-      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 26)
+      ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 38), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 58, ":tests", 62, ":total", 106), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 40), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 40), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 40), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 106), 
+      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 28)
     );
   }
 
@@ -34,6 +34,7 @@ public final class UiTest {
     return Test.t_testcoveragedetail.vx_new(
       ":testpkg", "vx/ui/ui",
       ":typemap", Core.t_intmap.vx_new(
+        ":align", 0,
         ":bounds", 0,
         ":cursor", 0,
         ":cursor-pointer", 0,
@@ -44,6 +45,7 @@ public final class UiTest {
         ":fontmap", 0,
         ":fontstyle", 0,
         ":fontstylemap", 0,
+        ":image", 0,
         ":layout", 0,
         ":layoutengine", 0,
         ":layoutlist", 0,
@@ -62,6 +64,9 @@ public final class UiTest {
         ":uimap", 0
       ),
       ":constmap", Core.t_intmap.vx_new(
+        ":align-center", 0,
+        ":align-left", 0,
+        ":align-right", 0,
         ":layout-app", 0,
         ":layout-background", 0,
         ":layout-button", 0,
@@ -99,17 +104,22 @@ public final class UiTest {
         ":styletype-system", 0
       ),
       ":funcmap", Core.t_intmap.vx_new(
+        ":boolean-print", 0,
         ":boolean-writestate<-ui", 0,
         ":boolean-writestate<-uiengine", 0,
         ":fontfacemap<-fontfacelist", 0,
+        ":int-selected<-ui", 0,
         ":layout<-style", 0,
         ":layout<-ui", 0,
         ":layout<-ui-layoutengine", 0,
         ":layout<-ui-layoutmap-else", 0,
         ":layoutengine-readstate", 0,
         ":layoutmap<-layoutlist", 0,
+        ":string-selected<-ui", 0,
         ":stringlist-selected<-ui", 0,
+        ":stringlist<-ui", 0,
         ":stylemap<-stylelist", 0,
+        ":stylesheet-readstate", 0,
         ":stylesheet-render", 0,
         ":ui-child<-ui-uid", 0,
         ":ui-from<-event", 0,

@@ -864,6 +864,229 @@ namespace vx_collection {
 
   //}
 
+  // (func int<-map-key)
+  vx_core::Type_int f_int_from_map_key(vx_core::Type_map map, vx_core::Type_string key) {
+    vx_core::Type_int output = vx_core::e_int;
+    vx_core::vx_reserve({map, key});
+    output = vx_core::f_let(
+      vx_core::t_int,
+      vx_core::t_any_from_func->vx_fn_new({map, key}, [map, key]() {
+        vx_core::Type_stringlist keys = vx_collection::f_stringlist_from_map(map);
+        vx_core::vx_ref_plus(keys);
+        vx_core::Type_int output_1 = vx_collection::f_int_from_stringlist_find(keys, key);
+        vx_core::vx_release_one_except(keys, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except({map, key}, output);
+    return output;
+  }
+  /**
+   * @function int_from_map_key
+   * Returns the position of key in any map.
+   * @param  {map-1} map
+   * @param  {string} key
+   * @return {int}
+   * (func int<-map-key)
+   */
+  // (func int<-map-key)
+  // class Class_int_from_map_key {
+    Abstract_int_from_map_key::~Abstract_int_from_map_key() {}
+
+    Class_int_from_map_key::Class_int_from_map_key() : Abstract_int_from_map_key::Abstract_int_from_map_key() {
+      vx_core::refcount += 1;
+    }
+
+    Class_int_from_map_key::~Class_int_from_map_key() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_int_from_map_key::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_collection::Func_int_from_map_key output = vx_collection::e_int_from_map_key;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_int_from_map_key::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_collection::Func_int_from_map_key output = vx_collection::e_int_from_map_key;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_int_from_map_key::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/collection", // pkgname
+        "int<-map-key", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_int_from_map_key::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_int_from_map_key::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/collection", // pkgname
+        "int<-map-key", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_int_from_map_key::vx_empty() const {return vx_collection::e_int_from_map_key;}
+    vx_core::Type_any Class_int_from_map_key::vx_type() const {return vx_collection::t_int_from_map_key;}
+    vx_core::Type_msgblock Class_int_from_map_key::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_int_from_map_key::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_int_from_map_key::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_map map = vx_core::vx_any_from_any(vx_core::t_map, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_string key = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_collection::f_int_from_map_key(map, key);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func int<-stringlist-find)
+  vx_core::Type_int f_int_from_stringlist_find(vx_core::Type_stringlist stringlist, vx_core::Type_string find) {
+    vx_core::Type_int output = vx_core::e_int;
+    vx_core::vx_reserve({stringlist, find});
+    output = vx_core::f_let(
+      vx_core::t_int,
+      vx_core::t_any_from_func->vx_fn_new({stringlist, find}, [stringlist, find]() {
+        vx_core::Type_intlist poslist = vx_core::f_list_from_list_intany(
+          vx_core::t_intlist,
+          stringlist,
+          vx_core::t_any_from_int_any->vx_fn_new({find}, [find](vx_core::Type_any pos_any, vx_core::Type_any value_any) {
+            vx_core::Type_int pos = vx_core::vx_any_from_any(vx_core::t_int, pos_any);
+            vx_core::Type_string value = vx_core::vx_any_from_any(vx_core::t_string, value_any);
+            vx_core::Type_any output_1 = 
+              vx_core::f_if_1(
+                vx_core::t_int,
+                vx_core::f_eq(find, value),
+                pos,
+                vx_core::vx_new_int(0)
+              );
+            return output_1;
+          })
+        );
+        vx_core::vx_ref_plus(poslist);
+        vx_core::Type_intlist gt0list = vx_collection::f_list_from_list_filter(
+          vx_core::t_intlist,
+          poslist,
+          vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any item_any) {
+            vx_core::Type_int item = vx_core::vx_any_from_any(vx_core::t_int, item_any);
+            vx_core::Type_any output_1 = item;
+            return output_1;
+          })
+        );
+        vx_core::vx_ref_plus(gt0list);
+        vx_core::Type_int output_1 = vx_core::f_first_from_list(vx_core::t_int, gt0list);
+        vx_core::vx_release_one_except({poslist, gt0list}, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except({stringlist, find}, output);
+    return output;
+  }
+  /**
+   * @function int_from_stringlist_find
+   * Returns the position (first position is 1) of find text in a stringlist.
+   * @param  {stringlist} stringlist
+   * @param  {string} find
+   * @return {int}
+   * (func int<-stringlist-find)
+   */
+  // (func int<-stringlist-find)
+  // class Class_int_from_stringlist_find {
+    Abstract_int_from_stringlist_find::~Abstract_int_from_stringlist_find() {}
+
+    Class_int_from_stringlist_find::Class_int_from_stringlist_find() : Abstract_int_from_stringlist_find::Abstract_int_from_stringlist_find() {
+      vx_core::refcount += 1;
+    }
+
+    Class_int_from_stringlist_find::~Class_int_from_stringlist_find() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_int_from_stringlist_find::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_collection::Func_int_from_stringlist_find output = vx_collection::e_int_from_stringlist_find;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_int_from_stringlist_find::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_collection::Func_int_from_stringlist_find output = vx_collection::e_int_from_stringlist_find;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_int_from_stringlist_find::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/collection", // pkgname
+        "int<-stringlist-find", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_int_from_stringlist_find::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_int_from_stringlist_find::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/collection", // pkgname
+        "int<-stringlist-find", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_int_from_stringlist_find::vx_empty() const {return vx_collection::e_int_from_stringlist_find;}
+    vx_core::Type_any Class_int_from_stringlist_find::vx_type() const {return vx_collection::t_int_from_stringlist_find;}
+    vx_core::Type_msgblock Class_int_from_stringlist_find::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_int_from_stringlist_find::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_int_from_stringlist_find::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_stringlist stringlist = vx_core::vx_any_from_any(vx_core::t_stringlist, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_string find = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_collection::f_int_from_stringlist_find(stringlist, find);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func is-list)
   vx_core::Type_boolean f_is_list(vx_core::Type_any val) {
     vx_core::Type_boolean output = vx_core::e_boolean;
@@ -1411,6 +1634,114 @@ namespace vx_collection {
 
   //}
 
+  // (func stringlist<-map)
+  vx_core::Type_stringlist f_stringlist_from_map(vx_core::Type_map map) {
+    vx_core::Type_stringlist output = vx_core::e_stringlist;
+    vx_core::vx_reserve(map);
+    output = vx_core::f_list_from_map_1(
+      vx_core::t_stringlist,
+      map,
+      vx_core::t_any_from_key_value->vx_fn_new({}, [](vx_core::Type_any key_any, vx_core::Type_any value) {
+        vx_core::Type_string key = vx_core::vx_any_from_any(vx_core::t_string, key_any);
+        vx_core::Type_any output_1 = key;
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except(map, output);
+    return output;
+  }
+  /**
+   * @function stringlist_from_map
+   * Returns a stringlist of keys from any map.
+   * @param  {map-1} map
+   * @return {stringlist}
+   * (func stringlist<-map)
+   */
+  // (func stringlist<-map)
+  // class Class_stringlist_from_map {
+    Abstract_stringlist_from_map::~Abstract_stringlist_from_map() {}
+
+    Class_stringlist_from_map::Class_stringlist_from_map() : Abstract_stringlist_from_map::Abstract_stringlist_from_map() {
+      vx_core::refcount += 1;
+    }
+
+    Class_stringlist_from_map::~Class_stringlist_from_map() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_stringlist_from_map::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_collection::Func_stringlist_from_map output = vx_collection::e_stringlist_from_map;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_stringlist_from_map::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_collection::Func_stringlist_from_map output = vx_collection::e_stringlist_from_map;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_stringlist_from_map::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/collection", // pkgname
+        "stringlist<-map", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_stringlist_from_map::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_stringlist_from_map::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/collection", // pkgname
+        "stringlist<-map", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_stringlist_from_map::vx_empty() const {return vx_collection::e_stringlist_from_map;}
+    vx_core::Type_any Class_stringlist_from_map::vx_type() const {return vx_collection::t_stringlist_from_map;}
+    vx_core::Type_msgblock Class_stringlist_from_map::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_stringlist_from_map::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_stringlist_from_map::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_stringlist_from_map::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_map inputval = vx_core::vx_any_from_any(vx_core::t_map, val);
+      output = vx_collection::f_stringlist_from_map(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_stringlist_from_map::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_map map = vx_core::vx_any_from_any(vx_core::t_map, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_collection::f_stringlist_from_map(map);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   vx_collection::Func_any_from_for_until_loop_max e_any_from_for_until_loop_max = NULL;
   vx_collection::Func_any_from_for_until_loop_max t_any_from_for_until_loop_max = NULL;
   vx_collection::Func_any_from_for_until_loop e_any_from_for_until_loop = NULL;
@@ -1427,6 +1758,10 @@ namespace vx_collection {
   vx_collection::Func_list_from_list_filter t_list_from_list_filter = NULL;
   vx_collection::Func_list_from_list_start_end e_list_from_list_start_end = NULL;
   vx_collection::Func_list_from_list_start_end t_list_from_list_start_end = NULL;
+  vx_collection::Func_int_from_map_key e_int_from_map_key = NULL;
+  vx_collection::Func_int_from_map_key t_int_from_map_key = NULL;
+  vx_collection::Func_int_from_stringlist_find e_int_from_stringlist_find = NULL;
+  vx_collection::Func_int_from_stringlist_find t_int_from_stringlist_find = NULL;
   vx_collection::Func_is_list e_is_list = NULL;
   vx_collection::Func_is_list t_is_list = NULL;
   vx_collection::Func_is_map e_is_map = NULL;
@@ -1439,6 +1774,8 @@ namespace vx_collection {
   vx_collection::Func_list_from_list_filtertypes t_list_from_list_filtertypes = NULL;
   vx_collection::Func_list_from_list_start e_list_from_list_start = NULL;
   vx_collection::Func_list_from_list_start t_list_from_list_start = NULL;
+  vx_collection::Func_stringlist_from_map e_stringlist_from_map = NULL;
+  vx_collection::Func_stringlist_from_map t_stringlist_from_map = NULL;
 
   // class vx_Class_package {
     vx_Class_package::vx_Class_package() {
@@ -1477,6 +1814,14 @@ namespace vx_collection {
       vx_core::vx_reserve_empty(vx_collection::e_list_from_list_start_end);
       vx_collection::t_list_from_list_start_end = new vx_collection::Class_list_from_list_start_end();
       vx_core::vx_reserve_type(vx_collection::t_list_from_list_start_end);
+      vx_collection::e_int_from_map_key = new vx_collection::Class_int_from_map_key();
+      vx_core::vx_reserve_empty(vx_collection::e_int_from_map_key);
+      vx_collection::t_int_from_map_key = new vx_collection::Class_int_from_map_key();
+      vx_core::vx_reserve_type(vx_collection::t_int_from_map_key);
+      vx_collection::e_int_from_stringlist_find = new vx_collection::Class_int_from_stringlist_find();
+      vx_core::vx_reserve_empty(vx_collection::e_int_from_stringlist_find);
+      vx_collection::t_int_from_stringlist_find = new vx_collection::Class_int_from_stringlist_find();
+      vx_core::vx_reserve_type(vx_collection::t_int_from_stringlist_find);
       vx_collection::e_is_list = new vx_collection::Class_is_list();
       vx_core::vx_reserve_empty(vx_collection::e_is_list);
       vx_collection::t_is_list = new vx_collection::Class_is_list();
@@ -1501,6 +1846,10 @@ namespace vx_collection {
       vx_core::vx_reserve_empty(vx_collection::e_list_from_list_start);
       vx_collection::t_list_from_list_start = new vx_collection::Class_list_from_list_start();
       vx_core::vx_reserve_type(vx_collection::t_list_from_list_start);
+      vx_collection::e_stringlist_from_map = new vx_collection::Class_stringlist_from_map();
+      vx_core::vx_reserve_empty(vx_collection::e_stringlist_from_map);
+      vx_collection::t_stringlist_from_map = new vx_collection::Class_stringlist_from_map();
+      vx_core::vx_reserve_type(vx_collection::t_stringlist_from_map);
       vx_core::vx_Type_mapany maptype;
       vx_core::vx_Type_mapany mapconst;
       vx_core::vx_Type_mapfunc mapfunc;
@@ -1513,12 +1862,15 @@ namespace vx_collection {
       mapfunc["list<-for-while-loop"] = vx_collection::t_list_from_for_while_loop;
       mapfunc["list<-list-filter"] = vx_collection::t_list_from_list_filter;
       mapfunc["list<-list-start-end"] = vx_collection::t_list_from_list_start_end;
+      mapfunc["int<-map-key"] = vx_collection::t_int_from_map_key;
+      mapfunc["int<-stringlist-find"] = vx_collection::t_int_from_stringlist_find;
       mapfunc["is-list"] = vx_collection::t_is_list;
       mapfunc["is-map"] = vx_collection::t_is_map;
       mapfunc["list<-for-end-loop"] = vx_collection::t_list_from_for_end_loop;
       mapfunc["list<-list-end"] = vx_collection::t_list_from_list_end;
       mapfunc["list<-list-filtertypes"] = vx_collection::t_list_from_list_filtertypes;
       mapfunc["list<-list-start"] = vx_collection::t_list_from_list_start;
+      mapfunc["stringlist<-map"] = vx_collection::t_stringlist_from_map;
       vx_core::vx_global_package_set("vx/collection", maptype, mapconst, mapfunc);
 	   }
   // }

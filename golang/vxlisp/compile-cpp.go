@@ -623,7 +623,7 @@ func CppBodyFromFunc(lang *vxlang, fnc *vxfunc) (string, string, string, *vxmsgb
 		case "vx/core/any<-any", "vx/core/any<-any-async",
 			"vx/core/any<-any-context", "vx/core/any<-any-context-async",
 			"vx/core/any<-any-key-value",
-			"vx/core/any<-int",
+			"vx/core/any<-int", "vx/core/any<-int-any",
 			"vx/core/any<-func", "vx/core/any<-func-async",
 			"vx/core/any<-key-value", "vx/core/any<-key-value-async",
 			"vx/core/any<-none", "vx/core/any<-none-async",
@@ -704,7 +704,8 @@ func CppBodyFromFunc(lang *vxlang, fnc *vxfunc) (string, string, string, *vxmsgb
 	switch NameFromFunc(fnc) {
 	case "vx/core/any<-any", "vx/core/any<-any-context",
 		"vx/core/any<-any-key-value",
-		"vx/core/any<-func", "vx/core/any<-int",
+		"vx/core/any<-func",
+		"vx/core/any<-int", "vx/core/any<-int-any",
 		"vx/core/any<-key-value", "vx/core/any<-none",
 		"vx/core/any<-reduce", "vx/core/any<-reduce-next",
 		"vx/core/boolean<-any":
@@ -2511,7 +2512,7 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 									"\n  " + returntype + " output_1 = " + work + ";" +
 									"\n  return output_1;"
 								switch funcarg.vxtype.name {
-								case "any<-int",
+								case "any<-int", "any<-int-any",
 									"any<-any-key-value", "any<-key-value",
 									"any<-reduce", "any<-reduce-next",
 									"boolean<-any":
@@ -3397,6 +3398,11 @@ func CppHeaderFnFromFunc(fnc *vxfunc) string {
 			"\n    typedef std::function<vx_core::Type_any(vx_core::Type_int)> IFn;" +
 			"\n    IFn fn;" +
 			"\n    vx_core::vx_Type_listany lambdavars;"
+	case "vx/core/any<-int-any":
+		interfaces = "" +
+			"\n    typedef std::function<vx_core::Type_any(vx_core::Type_int, vx_core::Type_any)> IFn;" +
+			"\n    IFn fn;" +
+			"\n    vx_core::vx_Type_listany lambdavars;"
 	case "vx/core/any<-list-start-reduce":
 		interfaces = "" +
 			"\n    typedef std::function<vx_core::Type_any(vx_core::Type_list, vx_core::Type_any, vx_core::Func_any_from_reduce)> IFn;" +
@@ -3533,7 +3539,7 @@ func CppHeaderFromFunc(lang *vxlang, fnc *vxfunc) (string, string) {
 	switch NameFromFunc(fnc) {
 	case "vx/core/any<-any", "vx/core/any<-any-context",
 		"vx/core/any<-any-key-value",
-		"vx/core/any<-int",
+		"vx/core/any<-int", "vx/core/any<-int-any",
 		"vx/core/any<-func", "vx/core/any<-key-value",
 		"vx/core/any<-none",
 		"vx/core/any<-reduce", "vx/core/any<-reduce-next":

@@ -2887,6 +2887,64 @@ namespace vx_core_test {
     return output;
   }
 
+  vx_test::Type_testcase f_list_from_list_intany(vx_core::Type_context context) {
+    vx_core::vx_log("Test Start: f_list_from_list_intany");
+    // testdescribe_1
+    vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      context,
+      vx_core::f_new(
+        vx_core::t_stringlist,
+        vx_core::vx_new(vx_core::t_anylist, {
+          vx_core::vx_new_string("a1"),
+          vx_core::vx_new_string("b2")
+        })
+      ),
+      vx_core::f_list_from_list_intany(
+        vx_core::t_stringlist,
+        vx_core::f_new(
+          vx_core::t_stringlist,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string("a"),
+            vx_core::vx_new_string("b")
+          })
+        ),
+        vx_core::t_any_from_int_any->vx_fn_new({}, [](vx_core::Type_any index_any, vx_core::Type_any value_any) {
+          vx_core::Type_int index = vx_core::vx_any_from_any(vx_core::t_int, index_any);
+          vx_core::Type_string value = vx_core::vx_any_from_any(vx_core::t_string, value_any);
+          vx_core::Type_any output_1 = 
+            vx_core::f_new(
+              vx_core::t_string,
+              vx_core::vx_new(vx_core::t_anylist, {
+                value,
+                index
+              })
+            );
+          return output_1;
+        })
+      )
+    );
+    vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (stringlist \"a1\" \"b2\")\n (list<-list-intany : stringlist\n  (stringlist \"a\" \"b\")\n  (fn : stringlist\n   [index : int\n    value : string]\n   (string value index))))"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
+      vx_core::vx_new_string(":testresult"), testresult_1
+    });
+    vx_core::vx_Type_listany listdescribe = {
+      testdescribe_1
+    };
+    vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
+      vx_core::vx_new_string(":casename"), vx_core::vx_new_string("list<-list-intany"),
+      vx_core::vx_new_string(":describelist"),
+      vx_core::vx_any_from_any(
+        vx_test::t_testdescribelist,
+        vx_test::t_testdescribelist->vx_new_from_list(listdescribe)
+      )
+    });
+    vx_core::vx_log("Test End  : f_list_from_list_intany");
+    return output;
+  }
+
   vx_test::Type_testcase f_list_from_map(vx_core::Type_context context) {
     vx_core::vx_log("Test Start: f_list_from_map");
     // testdescribe_1
@@ -3916,6 +3974,7 @@ namespace vx_core_test {
     listtestcase.push_back(vx_core_test::f_list_join_from_list(context));
     listtestcase.push_back(vx_core_test::f_list_join_from_list_1(context));
     listtestcase.push_back(vx_core_test::f_list_from_list(context));
+    listtestcase.push_back(vx_core_test::f_list_from_list_intany(context));
     listtestcase.push_back(vx_core_test::f_list_from_map(context));
     listtestcase.push_back(vx_core_test::f_list_from_map_1(context));
     listtestcase.push_back(vx_core_test::f_map_from_list(context));
@@ -3950,28 +4009,28 @@ namespace vx_core_test {
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(89), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(229), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(255)
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(231), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(257)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(51), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(70), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(136)
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(71), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(138)
       }),
       vx_core::vx_new_string(":bigospacenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(1), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(166)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(168)
       }),
       vx_core::vx_new_string(":bigotimenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(1), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(166)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(168)
       }),
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(34), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(77), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(225)
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(78), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(227)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(6), 
@@ -4126,6 +4185,7 @@ namespace vx_core_test {
         vx_core::vx_new_string(":any<-func"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":any<-func-async"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":any<-int"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":any<-int-any"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":any<-key-value"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":any<-key-value-async"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":any<-list"), vx_core::vx_new_int(2),
@@ -4185,6 +4245,7 @@ namespace vx_core_test {
         vx_core::vx_new_string(":list<-list"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":list<-list_1"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":list<-list-async"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":list<-list-intany"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":list<-map"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":list<-map_1"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":list<-map-async"), vx_core::vx_new_int(0),

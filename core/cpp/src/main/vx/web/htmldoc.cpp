@@ -563,9 +563,7 @@ namespace vx_web_htmldoc {
     output = vx_core::f_let_async(
       vx_core::t_boolean,
       vx_core::t_any_from_func_async->vx_fn_new({stylesheet}, [stylesheet]() {
-        vx_web_html::Type_stylelist stylelist = vx_web_html::f_styles_from_stylesheet(stylesheet);
-        vx_core::vx_ref_plus(stylelist);
-        vx_core::Type_string text = vx_web_html::f_string_from_stylelist_indent(stylelist, vx_core::vx_new_int(0));
+        vx_core::Type_string text = vx_web_htmldoc::f_string_from_stylesheet(stylesheet);
         vx_core::vx_ref_plus(text);
         vx_core::vx_Type_async future_iswrite = vx_web_htmldoc::f_boolean_write_stylesheet_from_string(text);
         vx_core::vx_Type_fn_any_from_any fn_any_any_iswrite = [](vx_core::Type_any any_iswrite) {
@@ -576,7 +574,7 @@ namespace vx_web_htmldoc {
           return output_2;
         };
         vx_core::vx_Type_async output_1 = vx_core::vx_async_from_async_fn(future_iswrite, vx_core::t_boolean, {}, fn_any_any_iswrite);
-        vx_core::vx_release_one({stylelist, text});
+        vx_core::vx_release_one(text);
         return output_1;
       })
     );
@@ -945,6 +943,117 @@ namespace vx_web_htmldoc {
 
   //}
 
+  // (func string<-stylesheet)
+  vx_core::Type_string f_string_from_stylesheet(vx_web_html::Type_stylesheet stylesheet) {
+    vx_core::Type_string output = vx_core::e_string;
+    vx_core::vx_reserve(stylesheet);
+    output = vx_core::f_let(
+      vx_core::t_string,
+      vx_core::t_any_from_func->vx_fn_new({stylesheet}, [stylesheet]() {
+        vx_web_html::Type_stylelist stylelist = vx_web_html::f_styles_from_stylesheet(stylesheet);
+        vx_core::vx_ref_plus(stylelist);
+        vx_core::Type_string text = vx_web_html::f_string_from_stylelist_indent(stylelist, vx_core::vx_new_int(0));
+        vx_core::vx_ref_plus(text);
+        vx_core::Type_string output_1 = text;
+        vx_core::vx_release_one_except({stylelist, text}, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except(stylesheet, output);
+    return output;
+  }
+  /**
+   * @function string_from_stylesheet
+   * Returns string from a given stylesheet
+   * @param  {stylesheet} stylesheet
+   * @return {string}
+   * (func string<-stylesheet)
+   */
+  // (func string<-stylesheet)
+  // class Class_string_from_stylesheet {
+    Abstract_string_from_stylesheet::~Abstract_string_from_stylesheet() {}
+
+    Class_string_from_stylesheet::Class_string_from_stylesheet() : Abstract_string_from_stylesheet::Abstract_string_from_stylesheet() {
+      vx_core::refcount += 1;
+    }
+
+    Class_string_from_stylesheet::~Class_string_from_stylesheet() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_string_from_stylesheet::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_web_htmldoc::Func_string_from_stylesheet output = vx_web_htmldoc::e_string_from_stylesheet;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_string_from_stylesheet::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_web_htmldoc::Func_string_from_stylesheet output = vx_web_htmldoc::e_string_from_stylesheet;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_string_from_stylesheet::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/web/htmldoc", // pkgname
+        "string<-stylesheet", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_string_from_stylesheet::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_string_from_stylesheet::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/web/htmldoc", // pkgname
+        "string<-stylesheet", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_string_from_stylesheet::vx_empty() const {return vx_web_htmldoc::e_string_from_stylesheet;}
+    vx_core::Type_any Class_string_from_stylesheet::vx_type() const {return vx_web_htmldoc::t_string_from_stylesheet;}
+    vx_core::Type_msgblock Class_string_from_stylesheet::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_string_from_stylesheet::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_string_from_stylesheet::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_string_from_stylesheet::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_web_html::Type_stylesheet inputval = vx_core::vx_any_from_any(vx_web_html::t_stylesheet, val);
+      output = vx_web_htmldoc::f_string_from_stylesheet(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_string_from_stylesheet::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_web_html::Type_stylesheet stylesheet = vx_core::vx_any_from_any(vx_web_html::t_stylesheet, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_web_htmldoc::f_string_from_stylesheet(stylesheet);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func ui-readstate<-uid)
   vx_core::Type_any f_ui_readstate_from_uid(vx_core::Type_string uid) {
     vx_core::Type_any output = vx_core::e_any;
@@ -1064,6 +1173,8 @@ namespace vx_web_htmldoc {
   vx_web_htmldoc::Func_context_write t_context_write = NULL;
   vx_web_htmldoc::Func_string_from_id e_string_from_id = NULL;
   vx_web_htmldoc::Func_string_from_id t_string_from_id = NULL;
+  vx_web_htmldoc::Func_string_from_stylesheet e_string_from_stylesheet = NULL;
+  vx_web_htmldoc::Func_string_from_stylesheet t_string_from_stylesheet = NULL;
   vx_web_htmldoc::Func_ui_readstate_from_uid e_ui_readstate_from_uid = NULL;
   vx_web_htmldoc::Func_ui_readstate_from_uid t_ui_readstate_from_uid = NULL;
 
@@ -1112,6 +1223,10 @@ namespace vx_web_htmldoc {
       vx_core::vx_reserve_empty(vx_web_htmldoc::e_string_from_id);
       vx_web_htmldoc::t_string_from_id = new vx_web_htmldoc::Class_string_from_id();
       vx_core::vx_reserve_type(vx_web_htmldoc::t_string_from_id);
+      vx_web_htmldoc::e_string_from_stylesheet = new vx_web_htmldoc::Class_string_from_stylesheet();
+      vx_core::vx_reserve_empty(vx_web_htmldoc::e_string_from_stylesheet);
+      vx_web_htmldoc::t_string_from_stylesheet = new vx_web_htmldoc::Class_string_from_stylesheet();
+      vx_core::vx_reserve_type(vx_web_htmldoc::t_string_from_stylesheet);
       vx_web_htmldoc::e_ui_readstate_from_uid = new vx_web_htmldoc::Class_ui_readstate_from_uid();
       vx_core::vx_reserve_empty(vx_web_htmldoc::e_ui_readstate_from_uid);
       vx_web_htmldoc::t_ui_readstate_from_uid = new vx_web_htmldoc::Class_ui_readstate_from_uid();
@@ -1130,6 +1245,7 @@ namespace vx_web_htmldoc {
       mapfunc["context-read"] = vx_web_htmldoc::t_context_read;
       mapfunc["context-write"] = vx_web_htmldoc::t_context_write;
       mapfunc["string<-id"] = vx_web_htmldoc::t_string_from_id;
+      mapfunc["string<-stylesheet"] = vx_web_htmldoc::t_string_from_stylesheet;
       mapfunc["ui-readstate<-uid"] = vx_web_htmldoc::t_ui_readstate_from_uid;
       vx_core::vx_global_package_set("vx/web/htmldoc", maptype, mapconst, mapfunc);
 	   }

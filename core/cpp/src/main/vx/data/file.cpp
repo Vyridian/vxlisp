@@ -6,6 +6,7 @@
 #include <vector>
 #include "../../vx/core.hpp"
 #include "../../vx/data/textblock.hpp"
+#include "../../vx/type.hpp"
 #include "file.hpp"
 
 namespace vx_data_file {
@@ -1104,6 +1105,133 @@ namespace vx_data_file {
 
   //}
 
+  // (func file<-path)
+  vx_data_file::Type_file f_file_from_path(vx_core::Type_string path) {
+    vx_data_file::Type_file output = vx_data_file::e_file;
+    vx_core::vx_reserve(path);
+    output = vx_core::f_let(
+      vx_data_file::t_file,
+      vx_core::t_any_from_func->vx_fn_new({path}, [path]() {
+        vx_core::Type_int pos = vx_type::f_int_from_string_findlast(path, vx_core::vx_new_string("/"));
+        vx_core::vx_ref_plus(pos);
+        vx_core::Type_string name = vx_type::f_string_from_string_start(
+          path,
+          vx_core::f_plus1(pos)
+        );
+        vx_core::vx_ref_plus(name);
+        vx_core::Type_string pth = vx_type::f_string_from_string_end(
+          path,
+          vx_core::f_minus1(pos)
+        );
+        vx_core::vx_ref_plus(pth);
+        vx_data_file::Type_file output_1 = vx_core::f_new(
+          vx_data_file::t_file,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string(":name"),
+            name,
+            vx_core::vx_new_string(":path"),
+            pth
+          })
+        );
+        vx_core::vx_release_one_except({pos, name, pth}, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except(path, output);
+    return output;
+  }
+  /**
+   * @function file_from_path
+   * Returns a file from a given path
+   * @param  {string} path
+   * @return {file}
+   * (func file<-path)
+   */
+  // (func file<-path)
+  // class Class_file_from_path {
+    Abstract_file_from_path::~Abstract_file_from_path() {}
+
+    Class_file_from_path::Class_file_from_path() : Abstract_file_from_path::Abstract_file_from_path() {
+      vx_core::refcount += 1;
+    }
+
+    Class_file_from_path::~Class_file_from_path() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_file_from_path::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_data_file::Func_file_from_path output = vx_data_file::e_file_from_path;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_file_from_path::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_data_file::Func_file_from_path output = vx_data_file::e_file_from_path;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_file_from_path::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/data/file", // pkgname
+        "file<-path", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_file_from_path::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_file_from_path::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/data/file", // pkgname
+        "file<-path", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_file_from_path::vx_empty() const {return vx_data_file::e_file_from_path;}
+    vx_core::Type_any Class_file_from_path::vx_type() const {return vx_data_file::t_file_from_path;}
+    vx_core::Type_msgblock Class_file_from_path::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_file_from_path::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_file_from_path::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_file_from_path::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string, val);
+      output = vx_data_file::f_file_from_path(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_file_from_path::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string path = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_data_file::f_file_from_path(path);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func name<-file)
   vx_core::Type_string f_name_from_file(vx_data_file::Type_file file) {
     vx_core::Type_string output = vx_core::e_string;
@@ -1633,6 +1761,8 @@ namespace vx_data_file {
   vx_data_file::Func_boolean_write_from_file_string t_boolean_write_from_file_string = NULL;
   vx_data_file::Func_file_read_from_file e_file_read_from_file = NULL;
   vx_data_file::Func_file_read_from_file t_file_read_from_file = NULL;
+  vx_data_file::Func_file_from_path e_file_from_path = NULL;
+  vx_data_file::Func_file_from_path t_file_from_path = NULL;
   vx_data_file::Func_name_from_file e_name_from_file = NULL;
   vx_data_file::Func_name_from_file t_name_from_file = NULL;
   vx_data_file::Func_path_from_file e_path_from_file = NULL;
@@ -1681,6 +1811,10 @@ namespace vx_data_file {
       vx_core::vx_reserve_empty(vx_data_file::e_file_read_from_file);
       vx_data_file::t_file_read_from_file = new vx_data_file::Class_file_read_from_file();
       vx_core::vx_reserve_type(vx_data_file::t_file_read_from_file);
+      vx_data_file::e_file_from_path = new vx_data_file::Class_file_from_path();
+      vx_core::vx_reserve_empty(vx_data_file::e_file_from_path);
+      vx_data_file::t_file_from_path = new vx_data_file::Class_file_from_path();
+      vx_core::vx_reserve_type(vx_data_file::t_file_from_path);
       vx_data_file::e_name_from_file = new vx_data_file::Class_name_from_file();
       vx_core::vx_reserve_empty(vx_data_file::e_name_from_file);
       vx_data_file::t_name_from_file = new vx_data_file::Class_name_from_file();
@@ -1713,6 +1847,7 @@ namespace vx_data_file {
       mapfunc["boolean-write<-file-any"] = vx_data_file::t_boolean_write_from_file_any;
       mapfunc["boolean-write<-file-string"] = vx_data_file::t_boolean_write_from_file_string;
       mapfunc["file-read<-file"] = vx_data_file::t_file_read_from_file;
+      mapfunc["file<-path"] = vx_data_file::t_file_from_path;
       mapfunc["name<-file"] = vx_data_file::t_name_from_file;
       mapfunc["path<-file"] = vx_data_file::t_path_from_file;
       mapfunc["pathcurrent<-os"] = vx_data_file::t_pathcurrent_from_os;

@@ -1779,7 +1779,7 @@ public final class Xml {
             Xml.Type_xml reduce = Core.f_any_from_any(Xml.t_xml, reduce_any);
             Textblock.Type_textblock current = Core.f_any_from_any(Textblock.t_textblock, current_any);
             return 
-                Xml.f_xml_property_from_xml_textblock(reduce, current);
+              Xml.f_xml_property_from_xml_textblock(reduce, current);
           })
         );
         return xmlchg;

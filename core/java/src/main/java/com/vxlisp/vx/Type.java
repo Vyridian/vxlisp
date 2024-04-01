@@ -1350,10 +1350,10 @@ public final class Type {
         Core.Type_boolean result = Core.f_any_from_any(Core.t_boolean, result_any);
         Core.Type_any type = Core.f_any_from_any(Core.t_any, type_any);
         return 
-          Core.f_or(
-            result,
-            Type.f_is_type(val, type)
-          );
+        Core.f_or(
+          result,
+          Type.f_is_type(val, type)
+        );
       })
     );
     return output;

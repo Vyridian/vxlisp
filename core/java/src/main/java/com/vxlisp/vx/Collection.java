@@ -506,6 +506,202 @@ public final class Collection {
   }
 
   /**
+   * @function int_from_map_key
+   * Returns the position of key in any map.
+   * @param  {map-1} map
+   * @param  {string} key
+   * @return {int}
+   * (func int<-map-key)
+   */
+  public static interface Func_int_from_map_key extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_int vx_int_from_map_key(final Core.Type_map map, final Core.Type_string key);
+  }
+
+  public static class Class_int_from_map_key extends Core.Class_base implements Func_int_from_map_key {
+
+    @Override
+    public Func_int_from_map_key vx_new(Object... vals) {
+      Class_int_from_map_key output = new Class_int_from_map_key();
+      return output;
+    }
+
+    @Override
+    public Func_int_from_map_key vx_copy(Object... vals) {
+      Class_int_from_map_key output = new Class_int_from_map_key();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/collection", // pkgname
+        "int<-map-key", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "int", // name
+          "", // extends
+          Core.t_typelist.vx_new(Core.t_number), // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_int_from_map_key vx_empty() {return e_int_from_map_key;}
+    @Override
+    public Func_int_from_map_key vx_type() {return t_int_from_map_key;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_map map = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string key = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
+      output = Collection.f_int_from_map_key(map, key);
+      return output;
+    }
+
+    @Override
+    public Core.Type_int vx_int_from_map_key(final Core.Type_map map, final Core.Type_string key) {
+      return Collection.f_int_from_map_key(map, key);
+    }
+
+  }
+
+  public static final Func_int_from_map_key e_int_from_map_key = new Collection.Class_int_from_map_key();
+  public static final Func_int_from_map_key t_int_from_map_key = new Collection.Class_int_from_map_key();
+
+  public static Core.Type_int f_int_from_map_key(final Core.Type_map map, final Core.Type_string key) {
+    Core.Type_int output = Core.e_int;
+    output = Core.f_let(
+      Core.t_int,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_stringlist keys = Collection.f_stringlist_from_map(map);
+        return Collection.f_int_from_stringlist_find(keys, key);
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function int_from_stringlist_find
+   * Returns the position (first position is 1) of find text in a stringlist.
+   * @param  {stringlist} stringlist
+   * @param  {string} find
+   * @return {int}
+   * (func int<-stringlist-find)
+   */
+  public static interface Func_int_from_stringlist_find extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_int vx_int_from_stringlist_find(final Core.Type_stringlist stringlist, final Core.Type_string find);
+  }
+
+  public static class Class_int_from_stringlist_find extends Core.Class_base implements Func_int_from_stringlist_find {
+
+    @Override
+    public Func_int_from_stringlist_find vx_new(Object... vals) {
+      Class_int_from_stringlist_find output = new Class_int_from_stringlist_find();
+      return output;
+    }
+
+    @Override
+    public Func_int_from_stringlist_find vx_copy(Object... vals) {
+      Class_int_from_stringlist_find output = new Class_int_from_stringlist_find();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/collection", // pkgname
+        "int<-stringlist-find", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "int", // name
+          "", // extends
+          Core.t_typelist.vx_new(Core.t_number), // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_int_from_stringlist_find vx_empty() {return e_int_from_stringlist_find;}
+    @Override
+    public Func_int_from_stringlist_find vx_type() {return t_int_from_stringlist_find;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_stringlist stringlist = Core.f_any_from_any(Core.t_stringlist, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string find = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
+      output = Collection.f_int_from_stringlist_find(stringlist, find);
+      return output;
+    }
+
+    @Override
+    public Core.Type_int vx_int_from_stringlist_find(final Core.Type_stringlist stringlist, final Core.Type_string find) {
+      return Collection.f_int_from_stringlist_find(stringlist, find);
+    }
+
+  }
+
+  public static final Func_int_from_stringlist_find e_int_from_stringlist_find = new Collection.Class_int_from_stringlist_find();
+  public static final Func_int_from_stringlist_find t_int_from_stringlist_find = new Collection.Class_int_from_stringlist_find();
+
+  public static Core.Type_int f_int_from_stringlist_find(final Core.Type_stringlist stringlist, final Core.Type_string find) {
+    Core.Type_int output = Core.e_int;
+    output = Core.f_let(
+      Core.t_int,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_intlist poslist = Core.f_list_from_list_intany(
+          Core.t_intlist,
+          stringlist,
+          Core.t_any_from_int_any.vx_fn_new((pos_any, value_any) -> {
+            Core.Type_int pos = Core.f_any_from_any(Core.t_int, pos_any);
+            Core.Type_string value = Core.f_any_from_any(Core.t_string, value_any);
+            return 
+              Core.f_if_1(
+                Core.t_int,
+                Core.f_eq(find, value),
+                pos,
+                Core.vx_new_int(0)
+              );
+          })
+        );
+        final Core.Type_intlist gt0list = Collection.f_list_from_list_filter(
+          Core.t_intlist,
+          poslist,
+          Core.t_any_from_any.vx_fn_new((item_any) -> {
+            Core.Type_int item = Core.f_any_from_any(Core.t_int, item_any);
+            return item;
+          })
+        );
+        return Core.f_first_from_list(Core.t_int, gt0list);
+      })
+    );
+    return output;
+  }
+
+  /**
    * @function is_list
    * Returns true if the given value is a list.
    * @param  {any} val Any value
@@ -1212,11 +1408,11 @@ public final class Collection {
       Core.t_any_from_any.vx_fn_new((val_any) -> {
         Core.Type_any val = Core.f_any_from_any(Core.t_any, val_any);
         return 
-          Core.f_if(
-            Core.t_any,
-            Type.f_is_type_from_any_typelist(val, filtertypes),
-            val
-          );
+        Core.f_if(
+          Core.t_any,
+          Type.f_is_type_from_any_typelist(val, filtertypes),
+          val
+        );
       })
     );
     return output;
@@ -1393,6 +1589,105 @@ public final class Collection {
     return output;
   }
 
+  /**
+   * @function stringlist_from_map
+   * Returns a stringlist of keys from any map.
+   * @param  {map-1} map
+   * @return {stringlist}
+   * (func stringlist<-map)
+   */
+  public static interface Func_stringlist_from_map extends Core.Func_any_from_any {
+    public Core.Type_stringlist vx_stringlist_from_map(final Core.Type_map map);
+  }
+
+  public static class Class_stringlist_from_map extends Core.Class_base implements Func_stringlist_from_map {
+
+    @Override
+    public Func_stringlist_from_map vx_new(Object... vals) {
+      Class_stringlist_from_map output = new Class_stringlist_from_map();
+      return output;
+    }
+
+    @Override
+    public Func_stringlist_from_map vx_copy(Object... vals) {
+      Class_stringlist_from_map output = new Class_stringlist_from_map();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/collection", // pkgname
+        "stringlist<-map", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "stringlist", // name
+          ":list", // extends
+          Core.e_typelist, // traits
+          Core.t_typelist.vx_new(Core.t_string), // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_stringlist_from_map vx_empty() {return e_stringlist_from_map;}
+    @Override
+    public Func_stringlist_from_map vx_type() {return t_stringlist_from_map;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_map inputval = (Core.Type_map)value;
+      Core.Type_any outputval = Collection.f_stringlist_from_map(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_map map = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      output = Collection.f_stringlist_from_map(map);
+      return output;
+    }
+
+    @Override
+    public Core.Type_stringlist vx_stringlist_from_map(final Core.Type_map map) {
+      return Collection.f_stringlist_from_map(map);
+    }
+
+  }
+
+  public static final Func_stringlist_from_map e_stringlist_from_map = new Collection.Class_stringlist_from_map();
+  public static final Func_stringlist_from_map t_stringlist_from_map = new Collection.Class_stringlist_from_map();
+
+  public static Core.Type_stringlist f_stringlist_from_map(final Core.Type_map map) {
+    Core.Type_stringlist output = Core.e_stringlist;
+    output = Core.f_list_from_map_1(
+      Core.t_stringlist,
+      map,
+      Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
+        Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
+        Core.Type_any value = Core.f_any_from_any(Core.t_any, value_any);
+        return key;
+      })
+    );
+    return output;
+  }
+
 
   static {
     Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
@@ -1402,6 +1697,8 @@ public final class Collection {
     mapfunc.put("any<-for-until-loop-max", Collection.t_any_from_for_until_loop_max);
     mapfunc.put("any<-for-while-loop", Collection.t_any_from_for_while_loop);
     mapfunc.put("any<-for-while-loop-max", Collection.t_any_from_for_while_loop_max);
+    mapfunc.put("int<-map-key", Collection.t_int_from_map_key);
+    mapfunc.put("int<-stringlist-find", Collection.t_int_from_stringlist_find);
     mapfunc.put("is-list", Collection.t_is_list);
     mapfunc.put("is-map", Collection.t_is_map);
     mapfunc.put("list<-for-end-loop", Collection.t_list_from_for_end_loop);
@@ -1412,6 +1709,7 @@ public final class Collection {
     mapfunc.put("list<-list-filtertypes", Collection.t_list_from_list_filtertypes);
     mapfunc.put("list<-list-start", Collection.t_list_from_list_start);
     mapfunc.put("list<-list-start-end", Collection.t_list_from_list_start_end);
+    mapfunc.put("stringlist<-map", Collection.t_stringlist_from_map);
     Core.vx_global_package_set("vx/collection", maptype, mapconst, mapfunc);
   }
 

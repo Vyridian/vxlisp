@@ -1,5 +1,6 @@
 (package vx/data/file
- :libs (lib tb :path vx/data/textblock)
+ :libs (lib tb  :path vx/data/textblock)
+       (lib typ :path vx/type)
        (lib javaniofile)
  :doc "File handler")
 
@@ -42,7 +43,9 @@
 (func boolean-write<-file-any : boolean
  [file : file
   val  : any]
- (boolean-write<-file-string file (string<-any val))
+ (boolean-write<-file-string
+  file
+  (string<-any val))
  :context
  :sideeffects "Writes to file io"
  :clientserver :server
@@ -84,6 +87,23 @@
          "writetext"))
  :clientserver :server
  :doc "Write a File to Disk")
+
+(func file<-path : file
+ [path : string]
+ (let : file
+  [pos : int :=
+    (typ/int<-string-findlast
+     path "/")
+   name : string :=
+    (typ/string<-string-start
+     path (+1 pos))
+   pth : string :=
+    (typ/string<-string-end
+     path (-1 pos))]
+  (file
+   :name name
+   :path pth))
+ :doc "Returns a file from a given path")
 
 (func file-read<-file : file
  [file : file]

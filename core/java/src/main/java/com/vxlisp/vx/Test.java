@@ -4512,13 +4512,13 @@ public final class Test {
             Core.t_any_from_any.vx_fn_new((testdescribe_any) -> {
               Test.Type_testdescribe testdescribe = Core.f_any_from_any(Test.t_testdescribe, testdescribe_any);
               return 
-                    Core.f_let(
-                      Core.t_boolean,
-                      Core.t_any_from_func.vx_fn_new(() -> {
-                        final Test.Type_testresult testresult = testdescribe.testresult();
-                        return testresult.passfail();
-                      })
-                    );
+                  Core.f_let(
+                    Core.t_boolean,
+                    Core.t_any_from_func.vx_fn_new(() -> {
+                      final Test.Type_testresult testresult = testdescribe.testresult();
+                      return testresult.passfail();
+                    })
+                  );
             })
           );
           final Core.Type_boolean passfail = Core.f_and_1(passfaillist);
@@ -4944,7 +4944,7 @@ public final class Test {
             Core.t_any_from_any.vx_fn_new((testcase_any) -> {
               Test.Type_testcase testcase = Core.f_any_from_any(Test.t_testcase, testcase_any);
               return 
-                    testcase.passfail();
+                  testcase.passfail();
             })
           );
           final Core.Type_boolean passfail = Core.f_and_1(passfaillist);
@@ -6772,7 +6772,7 @@ public final class Test {
           Core.t_any_from_any.vx_fn_new((testdescribe_any) -> {
             Test.Type_testdescribe testdescribe = Core.f_any_from_any(Test.t_testdescribe, testdescribe_any);
             return 
-              Test.f_tr_from_testdescribe_casename(testdescribe, casename);
+            Test.f_tr_from_testdescribe_casename(testdescribe, casename);
           })
         );
       })

@@ -21,11 +21,11 @@ public final class HtmldocTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/web/htmldoc", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 11, ":total", 11), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 11), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 11), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 11), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 11), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 12, ":total", 12), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 12), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 12), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 12), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 12), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
     );
   }
@@ -50,6 +50,7 @@ public final class HtmldocTest {
         ":context-read", 0,
         ":context-write", 0,
         ":string<-id", 0,
+        ":string<-stylesheet", 0,
         ":ui-readstate<-uid", 0
       )
     );

@@ -2,6 +2,7 @@
 
 import vx_core from "../../vx/core.js"
 import vx_data_textblock from "../../vx/data/textblock.js"
+import vx_type from "../../vx/type.js"
 
 
 export default class vx_data_file {
@@ -143,6 +144,47 @@ export default class vx_data_file {
   }
 
   /**
+   * @function file_from_path
+   * Returns a file from a given path
+   * @param  {string} path
+   * @return {file}
+   */
+  static t_file_from_path = {
+    vx_type: vx_core.t_type
+  }
+  static e_file_from_path = {
+    vx_type: vx_data_file.t_file_from_path
+  }
+
+  // (func file<-path)
+  static f_file_from_path(path) {
+    let output = vx_data_file.e_file
+    output = vx_core.f_let(
+      {"any-1": vx_data_file.t_file},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const pos = vx_type.f_int_from_string_findlast(path, "/")
+        const name = vx_type.f_string_from_string_start(
+          path,
+          vx_core.f_plus1(pos)
+        )
+        const pth = vx_type.f_string_from_string_end(
+          path,
+          vx_core.f_minus1(pos)
+        )
+        return vx_core.f_new(
+          vx_data_file.t_file,
+          ":name",
+          name,
+          ":path",
+          pth
+        )
+      })
+    )
+    return output
+  }
+
+  /**
    * @function name_from_file
    * Returns path and name from file.
    * @param  {file} file
@@ -271,6 +313,7 @@ export default class vx_data_file {
       "boolean-write<-file-any": vx_data_file.e_boolean_write_from_file_any,
       "boolean-write<-file-string": vx_data_file.e_boolean_write_from_file_string,
       "file-read<-file": vx_data_file.e_file_read_from_file,
+      "file<-path": vx_data_file.e_file_from_path,
       "name<-file": vx_data_file.e_name_from_file,
       "path<-file": vx_data_file.e_path_from_file,
       "pathcurrent<-os": vx_data_file.e_pathcurrent_from_os,
@@ -283,6 +326,7 @@ export default class vx_data_file {
       "boolean-write<-file-any": vx_data_file.t_boolean_write_from_file_any,
       "boolean-write<-file-string": vx_data_file.t_boolean_write_from_file_string,
       "file-read<-file": vx_data_file.t_file_read_from_file,
+      "file<-path": vx_data_file.t_file_from_path,
       "name<-file": vx_data_file.t_name_from_file,
       "path<-file": vx_data_file.t_path_from_file,
       "pathcurrent<-os": vx_data_file.t_pathcurrent_from_os,
@@ -477,6 +521,24 @@ export default class vx_data_file {
       properties    : [],
       proplast      : {},
       fn            : vx_data_file.f_file_read_from_file
+    }
+
+    // (func file<-path)
+    vx_data_file.t_file_from_path['vx_value'] = {
+      name          : "file<-path",
+      pkgname       : "vx/data/file",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_data_file.f_file_from_path
     }
 
     // (func name<-file)

@@ -27,13 +27,13 @@ export default class vx_ui_ui_test {
     return vx_core.f_new(
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/ui/ui", 
-      "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 35), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 56, ":tests", 58, ":total", 102), 
+      "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 38), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 58, ":tests", 62, ":total", 106), 
       "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 40), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 102), 
-      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 27)
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 106), 
+      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 28)
     )
   }
 
@@ -44,6 +44,7 @@ export default class vx_ui_ui_test {
       "typemap",
         vx_core.f_new(
           vx_core.t_intmap,
+          "align", 0,
           "bounds", 0,
           "cursor", 0,
           "cursor-pointer", 0,
@@ -75,6 +76,9 @@ export default class vx_ui_ui_test {
       "constmap",
         vx_core.f_new(
           vx_core.t_intmap,
+          "align-center", 0,
+          "align-left", 0,
+          "align-right", 0,
           "layout-app", 0,
           "layout-background", 0,
           "layout-button", 0,

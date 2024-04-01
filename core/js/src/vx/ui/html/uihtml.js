@@ -482,12 +482,14 @@ export default class vx_ui_html_uihtml {
             const pin = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_pin, "struct-2": vx_ui_ui.t_style}, uistyle, ":pin")
             const pointpos = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_point, "struct-2": vx_ui_ui.t_style}, uistyle, ":pointpos")
             const pointsize = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_point, "struct-2": vx_ui_ui.t_style}, uistyle, ":pointsize")
+            const pointrotate = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_point, "struct-2": vx_ui_ui.t_style}, uistyle, ":pointrotate")
             const styletype = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_styletype, "struct-2": vx_ui_ui.t_style}, uistyle, ":type")
             const color_bkg = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":color-background")
             const image_bkg = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_image, "struct-2": vx_ui_ui.t_style}, uistyle, ":image-background")
             const color_hoverbkg = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":color-hoverbkgrd")
             const cursor = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_cursor, "struct-2": vx_ui_ui.t_style}, uistyle, ":cursor")
             const hidden = vx_core.f_any_from_struct({"any-1": vx_core.t_boolean, "struct-2": vx_ui_ui.t_style}, uistyle, ":hidden")
+            const align = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_align, "struct-2": vx_ui_ui.t_style}, uistyle, ":align")
             const posx = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_ui_ui.t_point}, pointpos, ":x")
             const posy = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_ui_ui.t_point}, pointpos, ":y")
             const sizex = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_ui_ui.t_point}, pointsize, ":x")
@@ -505,6 +507,13 @@ export default class vx_ui_html_uihtml {
               )
             )
             const bkgimage = vx_ui_html_uihtml.f_string_style_from_image(image_bkg)
+            const bkgsize = vx_core.f_if_2(
+              {"any-1": vx_core.t_string},
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty_1(image_bkg)}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return "cover"})
+              )
+            )
             const position = vx_core.f_if_2(
               {"any-1": vx_core.t_string},
               vx_core.f_then(
@@ -813,12 +822,67 @@ export default class vx_ui_html_uihtml {
                 vx_core.f_new(vx_core.t_any_from_func, () => {return "pointer"})
               )
             )
+            const textalign = vx_core.f_if_2(
+              {"any-1": vx_core.t_string},
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eqeq(
+                  align,
+                  vx_ui_ui.c_align_left
+                )}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return "left"})
+              ),
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eqeq(
+                  align,
+                  vx_ui_ui.c_align_center
+                )}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return "center"})
+              ),
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eqeq(
+                  align,
+                  vx_ui_ui.c_align_right
+                )}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return "right"})
+              )
+            )
+            const transform = vx_core.f_if_2(
+              {"any-1": vx_core.t_string},
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_is_empty_1(pointrotate)}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return ""})
+              ),
+              vx_core.f_else(
+                vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
+                  vx_core.t_string,
+                  "rotate(",
+                  vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_ui_ui.t_point}, pointrotate, ":x"),
+                  "deg)"
+                )})
+              )
+            )
+            const transformorigin = vx_core.f_if_2(
+              {"any-1": vx_core.t_string},
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_is_empty_1(pointrotate)}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return ""})
+              ),
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eqeq(
+                  layout,
+                  vx_ui_ui.c_layout_label
+                )}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return "left top"})
+              )
+            )
             const props = vx_core.f_new(
               vx_web_html.t_propmap,
               ":background-color",
               bkgcolor,
               ":background-image",
               bkgimage,
+              ":background-size",
+              bkgsize,
               ":cursor",
               scursor,
               ":display",
@@ -844,7 +908,13 @@ export default class vx_ui_html_uihtml {
               ":overflow-x",
               overflowx,
               ":overflow-y",
-              overflowy
+              overflowy,
+              ":text-align",
+              textalign,
+              ":transform",
+              transform,
+              ":transform-origin",
+              transformorigin
             )
             const hoverprops = vx_core.f_new(
               vx_web_html.t_propmap,

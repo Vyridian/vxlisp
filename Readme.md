@@ -30,6 +30,13 @@
             (fullname johndoe)) // actual
      :doc  "Returns fullname from any person type.")
 
+## Links
+* [Test Suite Js](core/html/testjs.html)
+* [Test Suite Java](core/java/src/test/resources/testsuite.html)
+* [Test Suite C++](core/cpp/src/test/resources/testsuite.html)
+* [API Documentation](core/doc/doc.html)
+* [Source Code](https://github.com/Vyridian/vxlisp)
+
 ## Folder Structure
 
 1. core - The core library of vxlisp. This library is intended to be included in all vxlisp projects.

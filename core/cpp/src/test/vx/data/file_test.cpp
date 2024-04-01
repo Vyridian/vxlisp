@@ -2,6 +2,7 @@
 #include "../../../main/vx/core.hpp"
 #include "../../../main/vx/test.hpp"
 #include "../../../main/vx/data/textblock.hpp"
+#include "../../../main/vx/type.hpp"
 #include "file_test.hpp"
 
 namespace vx_data_file_test {
@@ -202,28 +203,28 @@ namespace vx_data_file_test {
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(92), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(12), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(13)
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(13), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(14)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(40), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(36), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(4), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(10)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(11)
       }),
       vx_core::vx_new_string(":bigospacenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(10)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(11)
       }),
       vx_core::vx_new_string(":bigotimenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(10)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(11)
       }),
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(30), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(28), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(4), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(13)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(14)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
@@ -251,6 +252,7 @@ namespace vx_data_file_test {
         vx_core::vx_new_string(":boolean-write<-file-any"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":boolean-write<-file-string"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":file-read<-file"), vx_core::vx_new_int(1),
+        vx_core::vx_new_string(":file<-path"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":name<-file"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":path<-file"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":pathcurrent<-os"), vx_core::vx_new_int(0),

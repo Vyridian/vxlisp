@@ -1231,7 +1231,7 @@ public final class Event {
       Core.t_any_from_any.vx_fn_new((event_any) -> {
         Event.Type_event event = Core.f_any_from_any(Event.t_event, event_any);
         return 
-          event.name();
+        event.name();
       })
     );
     return output;

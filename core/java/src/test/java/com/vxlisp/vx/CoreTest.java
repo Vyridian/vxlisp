@@ -1236,7 +1236,7 @@ public final class CoreTest {
                   Core.Type_int total = Core.f_any_from_any(Core.t_int, total_any);
                   Core.Type_int num = Core.f_any_from_any(Core.t_int, num_any);
                   return 
-                    Core.f_multiply(total, num);
+                  Core.f_multiply(total, num);
                 })
               )
             )
@@ -1311,13 +1311,13 @@ public final class CoreTest {
                   Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
                   Core.Type_any value = Core.f_any_from_any(Core.t_any, value_any);
                   return 
-                    Core.f_copy(
-                      current,
-                      Core.t_anylist.vx_new(
-                        value,
-                        key
-                      )
-                    );
+                  Core.f_copy(
+                    current,
+                    Core.t_anylist.vx_new(
+                      value,
+                      key
+                    )
+                  );
                 })
               )
             )
@@ -2174,6 +2174,54 @@ public final class CoreTest {
     return output;
   }
 
+  static Test.Type_testcase f_list_from_list_intany(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "list<-list-intany",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-list-intany : stringlist\n  (stringlist \"a\" \"b\")\n  (fn : stringlist\n   [index : int\n    value : string]\n   (string value index))))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.f_new(
+                Core.t_stringlist,
+                Core.t_anylist.vx_new(
+                  Core.vx_new_string("a1"),
+                  Core.vx_new_string("b2")
+                )
+              ),
+              Core.f_list_from_list_intany(
+                Core.t_stringlist,
+                Core.f_new(
+                  Core.t_stringlist,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string("a"),
+                    Core.vx_new_string("b")
+                  )
+                ),
+                Core.t_any_from_int_any.vx_fn_new((index_any, value_any) -> {
+                  Core.Type_int index = Core.f_any_from_any(Core.t_int, index_any);
+                  Core.Type_string value = Core.f_any_from_any(Core.t_string, value_any);
+                  return 
+                  Core.f_new(
+                    Core.t_string,
+                    Core.t_anylist.vx_new(
+                      value,
+                      index
+                    )
+                  );
+                })
+              )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
   static Test.Type_testcase f_list_from_map(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
@@ -2246,13 +2294,13 @@ public final class CoreTest {
                   Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
                   Core.Type_string val = Core.f_any_from_any(Core.t_string, val_any);
                   return 
-                    Core.f_new(
-                      Core.t_string,
-                      Core.t_anylist.vx_new(
-                        key,
-                        val
-                      )
-                    );
+                  Core.f_new(
+                    Core.t_string,
+                    Core.t_anylist.vx_new(
+                      key,
+                      val
+                    )
+                  );
                 })
               )
             )
@@ -2295,13 +2343,13 @@ public final class CoreTest {
                 Core.t_any_from_any.vx_fn_new((val_any) -> {
                   Core.Type_string val = Core.f_any_from_any(Core.t_string, val_any);
                   return 
-                    Core.f_new(
-                      Core.t_string,
-                      Core.t_anylist.vx_new(
-                        Core.vx_new_string("key"),
-                        val
-                      )
-                    );
+                  Core.f_new(
+                    Core.t_string,
+                    Core.t_anylist.vx_new(
+                      Core.vx_new_string("key"),
+                      val
+                    )
+                  );
                 })
               )
             )
@@ -2383,13 +2431,13 @@ public final class CoreTest {
                   Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
                   Core.Type_string val = Core.f_any_from_any(Core.t_string, val_any);
                   return 
-                    Core.f_new(
-                      Core.t_string,
-                      Core.t_anylist.vx_new(
-                        key,
-                        val
-                      )
-                    );
+                  Core.f_new(
+                    Core.t_string,
+                    Core.t_anylist.vx_new(
+                      key,
+                      val
+                    )
+                  );
                 })
               )
             )
@@ -2639,7 +2687,7 @@ public final class CoreTest {
                 Core.t_any_from_func.vx_fn_new(() -> {
                   
                   return 
-                    Core.f_plus(Core.vx_new_int(1), Core.vx_new_int(3));
+                  Core.f_plus(Core.vx_new_int(1), Core.vx_new_int(3));
                 })
               )
             )
@@ -2667,7 +2715,7 @@ public final class CoreTest {
                 Core.t_any_from_func.vx_fn_new(() -> {
                   
                   return 
-                    Core.f_plus(Core.vx_new_int(1), Core.vx_new_int(3));
+                  Core.f_plus(Core.vx_new_int(1), Core.vx_new_int(3));
                 })
               )
             )
@@ -2994,6 +3042,7 @@ public final class CoreTest {
       CoreTest.f_list_join_from_list(context),
       CoreTest.f_list_join_from_list_1(context),
       CoreTest.f_list_from_list(context),
+      CoreTest.f_list_from_list_intany(context),
       CoreTest.f_list_from_map(context),
       CoreTest.f_list_from_map_1(context),
       CoreTest.f_map_from_list(context),
@@ -3020,11 +3069,11 @@ public final class CoreTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/core", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 14, ":tests", 2, ":total", 14), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 89, ":tests", 229, ":total", 255), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 51, ":tests", 70, ":total", 136), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 166), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 166), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 34, ":tests", 77, ":total", 225), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 89, ":tests", 231, ":total", 257), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 51, ":tests", 71, ":total", 138), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 168), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 168), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 34, ":tests", 78, ":total", 227), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 6, ":tests", 5, ":total", 75)
     );
   }
@@ -3173,6 +3222,7 @@ public final class CoreTest {
         ":any<-func", 0,
         ":any<-func-async", 0,
         ":any<-int", 0,
+        ":any<-int-any", 0,
         ":any<-key-value", 0,
         ":any<-key-value-async", 0,
         ":any<-list", 2,
@@ -3232,6 +3282,7 @@ public final class CoreTest {
         ":list<-list", 1,
         ":list<-list_1", 0,
         ":list<-list-async", 0,
+        ":list<-list-intany", 1,
         ":list<-map", 1,
         ":list<-map_1", 1,
         ":list<-map-async", 0,

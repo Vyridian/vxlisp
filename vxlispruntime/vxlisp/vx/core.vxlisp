@@ -2270,7 +2270,7 @@
   :cpp
    "vx_core::vx_Type_listany listany = vallist->vx_list();
     vx_core::vx_Type_mapany mapany = vx_core::vx_map_from_list(listany, fn_any_from_any);
-    output = vx_core::vx_new_from_map(generic_map_1, mapany);"
+    output = vx_core::vx_new_map(generic_map_1, mapany);"
   :js
    "const valmap = {}
     vallist.map(value => {

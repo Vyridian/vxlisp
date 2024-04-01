@@ -315,7 +315,7 @@ output : list-1 := (empty list-1)
   map
   (fn : string
    [key   : string
-    value : any-1]
+    value : any]
    key))
  :test (test
         (stringlist "a" "b")

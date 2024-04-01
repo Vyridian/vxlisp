@@ -4,6 +4,7 @@ import vx_data_file from "../../../src/vx/data/file.js"
 import vx_core from "../../../src/vx/core.js"
 import vx_test from "../../../src/vx/test.js"
 import vx_data_textblock from "../../../src/vx/data/textblock.js"
+import vx_type from "../../../src/vx/type.js"
 
 export default class vx_data_file_test {
 
@@ -25,11 +26,11 @@ export default class vx_data_file_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/data/file", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 83, ":tests", 5, ":total", 6), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 85, ":tests", 6, ":total", 7), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 4), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 6), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 7), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3)
     )
   }
@@ -52,6 +53,7 @@ export default class vx_data_file_test {
       "funcmap",
         vx_core.f_new(
           vx_core.t_intmap,
+          "file<-path", 0,
           "name<-file", 0,
           "path<-file", 0,
           "pathfull<-file", 0

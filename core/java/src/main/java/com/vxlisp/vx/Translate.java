@@ -1010,7 +1010,7 @@ public final class Translate {
       Core.t_any_from_any.vx_fn_new((translation_any) -> {
         Core.Type_translation translation = Core.f_any_from_any(Core.t_translation, translation_any);
         return 
-          translation.name();
+        translation.name();
       })
     );
     return output;

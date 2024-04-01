@@ -5,6 +5,9 @@
        (lib state :path vx/state)
  :doc "Universal Ui Element")
 
+(type align : struct
+ :doc "Universal Alignment")
+
 (type bounds : struct
  :properties [left   : int
               right  : int
@@ -95,6 +98,7 @@
 
 (type style : struct
  :properties [name             : string
+              align            : align
               boundsmargin     : bounds
               boundspadding    : bounds
               color-background : string
@@ -107,6 +111,7 @@
               type             : styletype
               pin              : pin
               pointpos         : point
+              pointrotate      : point
               pointsize        : point]
  :doc "Universal Style")
 
@@ -159,6 +164,15 @@
  :doc "Template for uiengine")
 
 (type cursor-pointer : cursor)
+
+(const align-center : align
+ :doc "Logical Center Align in parent")
+
+(const align-left : align
+ :doc "Logical Left Align in parent")
+
+(const align-right : align
+ :doc "Logical Right Align in parent")
 
 (const layout-app : layout
  (layout

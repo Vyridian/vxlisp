@@ -66,6 +66,7 @@ namespace vx_core_test {
   vx_test::Type_testcase f_list_join_from_list(vx_core::Type_context context);
   vx_test::Type_testcase f_list_join_from_list(vx_core::Type_context context);
   vx_test::Type_testcase f_list_from_list(vx_core::Type_context context);
+  vx_test::Type_testcase f_list_from_list_intany(vx_core::Type_context context);
   vx_test::Type_testcase f_list_from_map(vx_core::Type_context context);
   vx_test::Type_testcase f_list_from_map(vx_core::Type_context context);
   vx_test::Type_testcase f_map_from_list(vx_core::Type_context context);

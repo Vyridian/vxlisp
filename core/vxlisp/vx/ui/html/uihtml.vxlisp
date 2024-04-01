@@ -221,12 +221,14 @@
      pin              : ui/pin       := (:pin              uistyle)
      pointpos         : ui/point     := (:pointpos         uistyle)
      pointsize        : ui/point     := (:pointsize        uistyle)
+     pointrotate      : ui/point     := (:pointrotate      uistyle)
      styletype        : ui/styletype := (:type             uistyle)
      color-bkg        : string       := (:color-background uistyle)
      image-bkg        : ui/image     := (:image-background uistyle)
      color-hoverbkg   : string       := (:color-hoverbkgrd uistyle)
      cursor           : ui/cursor    := (:cursor           uistyle)
      hidden           : boolean      := (:hidden           uistyle)
+     align            : ui/align     := (:align            uistyle)
      posx             : int          := (:x pointpos)
      posy             : int          := (:y pointpos)
      sizex            : int          := (:x pointsize)
@@ -245,6 +247,11 @@
      bkgimage : string :=
       (string-style<-image
        image-bkg)
+     bkgsize : string :=
+      (if : string
+       (then
+        (!-empty image-bkg)
+        "cover"))
      position : string :=
       (if : string
        (then
@@ -383,10 +390,36 @@
        (then
         (== cursor ui/cursor-pointer)
         "pointer"))
+     textalign : string :=
+      (if : string
+       (then
+        (== align ui/align-left)
+        "left")
+       (then
+        (== align ui/align-center)
+        "center")
+       (then
+        (== align ui/align-right)
+        "right"))
+     transform : string :=
+      (if : string
+       (then (is-empty pointrotate) "")
+       (else
+        (string
+         "rotate("
+         (:x pointrotate)
+         "deg)")))
+     transformorigin : string :=
+      (if : string
+       (then (is-empty pointrotate) "")
+       (then
+        (== layout ui/layout-label)
+        "left top"))
      props : html/propmap :=
       (html/propmap
        :background-color bkgcolor
        :background-image bkgimage
+       :background-size  bkgsize
        :cursor           scursor
        :display          display
        :font             sfont
@@ -399,7 +432,10 @@
        :height           height
        :width            width
        :overflow-x       overflowx
-       :overflow-y       overflowy)
+       :overflow-y       overflowy
+       :text-align       textalign
+       :transform        transform
+       :transform-origin transformorigin)
      hoverprops : html/propmap :=
       (html/propmap
        :background-color hoverbkgrdcolor)

@@ -9526,8 +9526,9 @@ namespace vx_web_html {
           p->id()
         );
         vx_core::vx_ref_plus(sid);
-        vx_core::Type_string sclass = vx_web_html::f_string_from_propstyle(
-          p->style()
+        vx_core::Type_string sclass = vx_web_html::f_string_from_propstyle_stylelist(
+          p->style(),
+          p->stylelist()
         );
         vx_core::vx_ref_plus(sclass);
         vx_core::Type_string sstyle = vx_web_html::f_string_from_propstyleunique(
@@ -10141,16 +10142,38 @@ namespace vx_web_html {
             return output_1;
           }),
           vx_core::t_any_from_func->vx_fn_new({style}, [style]() {
-            vx_core::Type_string output_1 = vx_core::f_new(
+            vx_core::Type_string output_1 = vx_core::f_let(
               vx_core::t_string,
-              vx_core::vx_new(vx_core::t_anylist, {
-                vx_core::vx_new_string(" style="),
-                vx_core::c_quote,
-                vx_web_html::f_string_from_stylepropmap_indent(
-                  style->props(),
-                  vx_core::vx_new_int(0)
-                ),
-                vx_core::c_quote
+              vx_core::t_any_from_func->vx_fn_new({style}, [style]() {
+                vx_web_html::Type_propmap props = style->props();
+                vx_core::vx_ref_plus(props);
+                vx_core::Type_string text = vx_web_html::f_string_from_stylepropmap_indent(props, vx_core::vx_new_int(0));
+                vx_core::vx_ref_plus(text);
+                vx_core::Type_string output_1 = vx_core::f_if_2(
+                  vx_core::t_string,
+                  vx_core::vx_new(vx_core::t_thenelselist, {
+                    vx_core::f_then(
+                      vx_core::t_boolean_from_func->vx_fn_new({text}, [text]() {
+                        vx_core::Type_boolean output_1 = vx_core::f_notempty(text);
+                        return output_1;
+                      }),
+                      vx_core::t_any_from_func->vx_fn_new({text}, [text]() {
+                        vx_core::Type_string output_1 = vx_core::f_new(
+                          vx_core::t_string,
+                          vx_core::vx_new(vx_core::t_anylist, {
+                            vx_core::vx_new_string(" style="),
+                            vx_core::c_quote,
+                            text,
+                            vx_core::c_quote
+                          })
+                        );
+                        return output_1;
+                      })
+                    )
+                  })
+                );
+                vx_core::vx_release_one_except({props, text}, output_1);
+                return output_1;
               })
             );
             return output_1;
@@ -10397,7 +10420,10 @@ namespace vx_web_html {
           })
         );
         vx_core::vx_ref_plus(sstyles);
-        vx_core::Type_string output_1 = vx_type::f_string_from_stringlist_join(sstyles, vx_core::vx_new_string(""));
+        vx_core::Type_string output_1 = vx_type::f_string_from_stringlist_join(
+          sstyles,
+          vx_core::c_newline
+        );
         vx_core::vx_release_one_except(sstyles, output_1);
         return output_1;
       })
@@ -10614,16 +10640,18 @@ namespace vx_web_html {
     output = vx_core::f_let(
       vx_core::t_string,
       vx_core::t_any_from_func->vx_fn_new({stylesheet, indent}, [stylesheet, indent]() {
-        vx_core::Type_string text = vx_web_html::f_string_from_stylelist_indent(
-          stylesheet->styles(),
+        vx_web_html::Type_stylelist styles = stylesheet->styles();
+        vx_core::vx_ref_plus(styles);
+        vx_core::Type_string sstyles = vx_web_html::f_string_from_stylelist_indent(
+          styles,
           vx_core::f_plus1(indent)
         );
-        vx_core::vx_ref_plus(text);
+        vx_core::vx_ref_plus(sstyles);
         vx_core::Type_string sindent = vx_web_html::f_string_from_indent(indent);
         vx_core::vx_ref_plus(sindent);
         vx_core::Type_string eindent = vx_core::f_if(
           vx_core::t_string,
-          vx_core::f_notempty(text),
+          vx_core::f_notempty(sstyles),
           sindent
         );
         vx_core::vx_ref_plus(eindent);
@@ -10632,12 +10660,12 @@ namespace vx_web_html {
           vx_core::vx_new(vx_core::t_anylist, {
             sindent,
             vx_core::vx_new_string("<style>"),
-            text,
+            sstyles,
             eindent,
             vx_core::vx_new_string("</style>")
           })
         );
-        vx_core::vx_release_one_except({text, sindent, eindent}, output_1);
+        vx_core::vx_release_one_except({styles, sstyles, sindent, eindent}, output_1);
         return output_1;
       })
     );
