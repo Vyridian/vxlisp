@@ -4083,13 +4083,13 @@ ab
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/web/html</p>
-              <p class="coveragenums">8% 6/70</p>
-              <p class="coveragenums">0% 0/31</p>
+              <p class="coveragenums">9% 7/72</p>
+              <p class="coveragenums">0% 0/32</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">15% 6/39</p>
-              <p class="coveragenums">98% 69/70</p>
-              <p class="coveragenums">0% 0/39</p>
-              <p class="coveragenums">0% 0/39</p>
+              <p class="coveragenums">17% 7/40</p>
+              <p class="coveragenums">98% 71/72</p>
+              <p class="coveragenums">0% 0/40</p>
+              <p class="coveragenums">0% 0/40</p>
             </summary>
             <div>
               <table>
@@ -4248,6 +4248,48 @@ ab
   &lt;body&gt;&lt;/body&gt;
   &lt;footer&gt;&lt;/footer&gt;
 &lt;/html&gt;"</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">string&lt;-img-indent</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ "&lt;img src=\"test.svg\" /&gt;"
+ (string&lt;-img-indent
+  (img :src "test.svg")
+  0))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">`&lt;img src="test.svg" /&gt;`</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">`&lt;img src="test.svg" /&gt;`</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">string&lt;-img-indent</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ "&lt;img id=\"myid\" src=\"test.svg\" /&gt;"
+ (string&lt;-img-indent
+  (img :id "myid" :src "test.svg")
+  0))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">`&lt;img id="myid" src="test.svg" /&gt;`</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">`&lt;img id="myid" src="test.svg" /&gt;`</p>
                     </td>
                   </tr>
                   <tr>
@@ -17790,11 +17832,11 @@ ab
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/ui/ui</p>
-              <p class="coveragenums">0% 0/106</p>
+              <p class="coveragenums">0% 0/109</p>
               <p class="coveragenums">0% 0/28</p>
-              <p class="coveragenums">0% 0/38</p>
+              <p class="coveragenums">0% 0/41</p>
               <p class="coveragenums">0% 0/40</p>
-              <p class="coveragenums">58% 62/106</p>
+              <p class="coveragenums">56% 62/109</p>
               <p class="coveragenums">0% 0/40</p>
               <p class="coveragenums">0% 0/40</p>
             </summary>
@@ -18396,13 +18438,13 @@ ab
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/ui/html/uihtml</p>
-              <p class="coveragenums">0% 0/28</p>
+              <p class="coveragenums">0% 0/30</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">0% 0/6</p>
-              <p class="coveragenums">0% 0/22</p>
-              <p class="coveragenums">64% 18/28</p>
-              <p class="coveragenums">0% 0/22</p>
-              <p class="coveragenums">0% 0/22</p>
+              <p class="coveragenums">0% 0/7</p>
+              <p class="coveragenums">0% 0/23</p>
+              <p class="coveragenums">63% 19/30</p>
+              <p class="coveragenums">0% 0/23</p>
+              <p class="coveragenums">0% 0/23</p>
             </summary>
             <div>
               <table>

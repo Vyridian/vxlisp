@@ -22,12 +22,12 @@ public final class UihtmlTest {
   public static Test.Type_testcoveragesummary test_coveragesummary() {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/ui/html/uihtml", 
-      ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 6), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 64, ":tests", 18, ":total", 28), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 22), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 22), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 22), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 28), 
+      ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 7), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 63, ":tests", 19, ":total", 30), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 23), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 23), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 23), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 30), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
     );
   }
@@ -41,6 +41,7 @@ public final class UihtmlTest {
       ":constmap", Core.t_intmap.vx_new(
         ":layout-app-html", 0,
         ":layout-else-html", 0,
+        ":layout-image-html", 0,
         ":layout-label-html", 0,
         ":layoutenginehtml", 0,
         ":style-hidden", 0,
@@ -68,6 +69,7 @@ public final class UihtmlTest {
         ":stylesheet<-stylesheet", 0,
         ":ui-render-app<-ui-orig-parent", 0,
         ":ui-render-default<-ui-orig-parent", 0,
+        ":ui-render-image<-ui-orig-parent", 0,
         ":ui-render-label<-ui-orig-parent", 0
       )
     );

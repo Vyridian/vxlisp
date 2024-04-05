@@ -104,6 +104,52 @@ public final class Uihtml {
 
 
   /**
+   * Constant: layout-image-html
+   * Html Image Renderer
+   * {layout}
+   */
+  public static class Const_layout_image_html extends Ui.Class_layout implements Core.vx_Type_const {
+
+    @Override
+    public Core.Type_constdef vx_constdef() {
+      return Core.constdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "layout-image-html", // name
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "layout", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        )
+      );
+    }
+
+    public static void const_new(Const_layout_image_html output) {
+      Ui.Type_layout val = Core.f_copy(
+        Ui.c_layout_image,
+        Core.t_anylist.vx_new(
+                Core.vx_new_string(":fn-layout"),
+                Uihtml.t_ui_render_image_from_ui_orig_parent
+        )
+      );
+      output.vx_p_name = val.name();
+      output.vx_p_fn_layout = val.fn_layout();
+    }
+
+
+  }
+
+  public static final Const_layout_image_html c_layout_image_html = new Const_layout_image_html();
+
+
+  /**
    * Constant: layout-label-html
    * Html Label Renderer
    * {layout}
@@ -187,6 +233,7 @@ public final class Uihtml {
                     Ui.t_layoutlist,
                     Core.t_anylist.vx_new(
                       Uihtml.c_layout_app_html,
+                      Uihtml.c_layout_image_html,
                       Uihtml.c_layout_label_html
                     )
                   )
@@ -1546,15 +1593,16 @@ public final class Uihtml {
                 final Ui.Type_point pointrotate = uistyle.pointrotate();
                 final Ui.Type_styletype styletype = uistyle.type();
                 final Core.Type_string color_bkg = uistyle.color_background();
-                final Ui.Type_image image_bkg = uistyle.image_background();
                 final Core.Type_string color_hoverbkg = uistyle.color_hoverbkgrd();
                 final Ui.Type_cursor cursor = uistyle.cursor();
                 final Core.Type_boolean hidden = uistyle.hidden();
                 final Ui.Type_align align = uistyle.align();
                 final Core.Type_int posx = pointpos.x();
                 final Core.Type_int posy = pointpos.y();
+                final Ui.Type_pointtype postype = pointpos.pointtype();
                 final Core.Type_int sizex = pointsize.x();
                 final Core.Type_int sizey = pointsize.y();
+                final Ui.Type_pointtype sizetype = pointsize.pointtype();
                 final Core.Type_string stylename = Uihtml.f_string_stylename_from_name_styletype(name, styletype);
                 final Core.Type_string bkgcolor = Core.f_if_2(
                   Core.t_string,
@@ -1571,20 +1619,6 @@ public final class Uihtml {
                                 color_bkg
                             )
                           );
-                        })
-                      )
-                  )
-                );
-                final Core.Type_string bkgimage = Uihtml.f_string_style_from_image(image_bkg);
-                final Core.Type_string bkgsize = Core.f_if_2(
-                  Core.t_string,
-                  Core.t_thenelselist.vx_new(
-                      Core.f_then(
-                        Core.t_boolean_from_func.vx_fn_new(() -> {
-                          return Core.f_notempty_1(image_bkg);
-                        }),
-                        Core.t_any_from_func.vx_fn_new(() -> {
-                          return Core.vx_new_string("cover");
                         })
                       )
                   )
@@ -1629,6 +1663,28 @@ public final class Uihtml {
                         }),
                         Core.t_any_from_func.vx_fn_new(() -> {
                           return Core.vx_new_string("fixed");
+                        })
+                      ),
+                      Core.f_then(
+                        Core.t_boolean_from_func.vx_fn_new(() -> {
+                          return Core.f_eqeq(
+                            postype,
+                            Ui.c_pointtype_relative
+                          );
+                        }),
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.vx_new_string("relative");
+                        })
+                      ),
+                      Core.f_then(
+                        Core.t_boolean_from_func.vx_fn_new(() -> {
+                          return Core.f_eqeq(
+                            postype,
+                            Ui.c_pointtype_absolute
+                          );
+                        }),
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.vx_new_string("absolute");
                         })
                       ),
                       Core.f_then(
@@ -1873,6 +1929,23 @@ public final class Uihtml {
                       ),
                       Core.f_then(
                         Core.t_boolean_from_func.vx_fn_new(() -> {
+                          return Core.f_eqeq(
+                            sizetype,
+                            Ui.c_pointtype_percent
+                          );
+                        }),
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.f_new(
+                            Core.t_string,
+                            Core.t_anylist.vx_new(
+                                sizey,
+                                Core.vx_new_string("%")
+                            )
+                          );
+                        })
+                      ),
+                      Core.f_then(
+                        Core.t_boolean_from_func.vx_fn_new(() -> {
                           return Core.f_eqeq(Core.vx_new_int(0), sizey);
                         }),
                         Core.t_any_from_func.vx_fn_new(() -> {
@@ -1927,6 +2000,23 @@ public final class Uihtml {
                         }),
                         Core.t_any_from_func.vx_fn_new(() -> {
                           return Core.vx_new_string("");
+                        })
+                      ),
+                      Core.f_then(
+                        Core.t_boolean_from_func.vx_fn_new(() -> {
+                          return Core.f_eqeq(
+                            sizetype,
+                            Ui.c_pointtype_percent
+                          );
+                        }),
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.f_new(
+                            Core.t_string,
+                            Core.t_anylist.vx_new(
+                                sizex,
+                                Core.vx_new_string("%")
+                            )
+                          );
                         })
                       ),
                       Core.f_then(
@@ -2156,10 +2246,6 @@ public final class Uihtml {
                   Core.t_anylist.vx_new(
                       Core.vx_new_string(":background-color"),
                       bkgcolor,
-                      Core.vx_new_string(":background-image"),
-                      bkgimage,
-                      Core.vx_new_string(":background-size"),
-                      bkgsize,
                       Core.vx_new_string(":cursor"),
                       scursor,
                       Core.vx_new_string(":display"),
@@ -2488,13 +2574,7 @@ public final class Uihtml {
                 Core.vx_new_string(":margin"),
                 Core.vx_new_string("0mm"),
                 Core.vx_new_string(":padding"),
-                Core.vx_new_string("0mm"),
-                Core.vx_new_string(":-webkit-print-color-adjust"),
-                Core.vx_new_string("exact !important"),
-                Core.vx_new_string(":color-adjust"),
-                Core.vx_new_string("exact !important"),
-                Core.vx_new_string(":print-color-adjust"),
-                Core.vx_new_string("exact !important")
+                Core.vx_new_string("0mm")
               )
             )
           )
@@ -2508,6 +2588,10 @@ public final class Uihtml {
             Core.f_new(
               Html.t_propmap,
               Core.t_anylist.vx_new(
+                Core.vx_new_string(":margin"),
+                Core.vx_new_string("0mm"),
+                Core.vx_new_string(":padding"),
+                Core.vx_new_string("0mm"),
                 Core.vx_new_string(":position"),
                 Core.vx_new_string("relative")
               )
@@ -2529,6 +2613,25 @@ public final class Uihtml {
                 Core.vx_new_string("0mm"),
                 Core.vx_new_string(":white-space"),
                 Core.vx_new_string("pre-line")
+              )
+            )
+          )
+        ),
+        Core.f_new(
+          Html.t_style,
+          Core.t_anylist.vx_new(
+            Core.vx_new_string(":name"),
+            Core.vx_new_string("*"),
+            Core.vx_new_string(":props"),
+            Core.f_new(
+              Html.t_propmap,
+              Core.t_anylist.vx_new(
+                Core.vx_new_string(":-webkit-print-color-adjust"),
+                Core.vx_new_string("exact !important"),
+                Core.vx_new_string(":color-adjust"),
+                Core.vx_new_string("exact !important"),
+                Core.vx_new_string(":print-color-adjust"),
+                Core.vx_new_string("exact !important")
               )
             )
           )
@@ -3372,6 +3475,114 @@ public final class Uihtml {
   }
 
   /**
+   * @function ui_render_image_from_ui_orig_parent
+   * @param  {ui} ui
+   * @param  {ui} orig
+   * @param  {ui} parent
+   * @return {ui}
+   * (func ui-render-image<-ui-orig-parent)
+   */
+  public static interface Func_ui_render_image_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+    public Ui.Type_ui vx_ui_render_image_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
+  }
+
+  public static class Class_ui_render_image_from_ui_orig_parent extends Core.Class_base implements Func_ui_render_image_from_ui_orig_parent {
+
+    @Override
+    public Func_ui_render_image_from_ui_orig_parent vx_new(Object... vals) {
+      Class_ui_render_image_from_ui_orig_parent output = new Class_ui_render_image_from_ui_orig_parent();
+      return output;
+    }
+
+    @Override
+    public Func_ui_render_image_from_ui_orig_parent vx_copy(Object... vals) {
+      Class_ui_render_image_from_ui_orig_parent output = new Class_ui_render_image_from_ui_orig_parent();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "ui-render-image<-ui-orig-parent", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "ui", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_ui_render_image_from_ui_orig_parent vx_empty() {return e_ui_render_image_from_ui_orig_parent;}
+    @Override
+    public Func_ui_render_image_from_ui_orig_parent vx_type() {return t_ui_render_image_from_ui_orig_parent;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      Ui.Type_ui orig = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
+      Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(2)));
+      output = Uihtml.f_ui_render_image_from_ui_orig_parent(ui, orig, parent);
+      return output;
+    }
+
+    @Override
+    public Ui.Type_ui vx_ui_render_image_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+      return Uihtml.f_ui_render_image_from_ui_orig_parent(ui, orig, parent);
+    }
+
+  }
+
+  public static final Func_ui_render_image_from_ui_orig_parent e_ui_render_image_from_ui_orig_parent = new Uihtml.Class_ui_render_image_from_ui_orig_parent();
+  public static final Func_ui_render_image_from_ui_orig_parent t_ui_render_image_from_ui_orig_parent = new Uihtml.Class_ui_render_image_from_ui_orig_parent();
+
+  public static Ui.Type_ui f_ui_render_image_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+    Ui.Type_ui output = Ui.e_ui;
+    output = Core.f_let(
+      Ui.t_ui,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_string uid = ui.uid();
+        final Ui.Type_style uistyle = ui.style();
+        final Core.Type_any data = ui.data();
+        final File.Type_file file = Core.f_any_from_any(File.t_file, data);
+        final Core.Type_string path = File.f_pathfull_from_file(file);
+        final Html.Type_style style = Uihtml.f_style_from_style(uistyle);
+        final Html.Type_stylelist styles = Uihtml.f_stylelist_extra_from_ui(ui);
+        final Html.Type_node node = Core.f_new(
+          Html.t_img,
+          Core.t_anylist.vx_new(
+              Core.vx_new_string(":id"),
+              uid,
+              Core.vx_new_string(":style-unique"),
+              style,
+              Core.vx_new_string(":stylelist"),
+              styles,
+              Core.vx_new_string(":src"),
+              path
+          )
+        );
+        final Html.Type_node nodechg = Uihtml.f_node_render_from_node_ui(node, ui);
+        return ui;
+      })
+    );
+    return output;
+  }
+
+  /**
    * @function ui_render_label_from_ui_orig_parent
    * @param  {ui} ui
    * @param  {ui} orig
@@ -3512,6 +3723,7 @@ public final class Uihtml {
   static {
     Const_layout_app_html.const_new(c_layout_app_html);
     Const_layout_else_html.const_new(c_layout_else_html);
+    Const_layout_image_html.const_new(c_layout_image_html);
     Const_layout_label_html.const_new(c_layout_label_html);
     Const_layoutenginehtml.const_new(c_layoutenginehtml);
     Const_style_hidden.const_new(c_style_hidden);
@@ -3521,6 +3733,7 @@ public final class Uihtml {
     Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
     mapconst.put("layout-app-html", Uihtml.c_layout_app_html);
     mapconst.put("layout-else-html", Uihtml.c_layout_else_html);
+    mapconst.put("layout-image-html", Uihtml.c_layout_image_html);
     mapconst.put("layout-label-html", Uihtml.c_layout_label_html);
     mapconst.put("layoutenginehtml", Uihtml.c_layoutenginehtml);
     mapconst.put("style-hidden", Uihtml.c_style_hidden);
@@ -3546,6 +3759,7 @@ public final class Uihtml {
     mapfunc.put("stylesheet<-stylesheet", Uihtml.t_stylesheet_from_stylesheet);
     mapfunc.put("ui-render-app<-ui-orig-parent", Uihtml.t_ui_render_app_from_ui_orig_parent);
     mapfunc.put("ui-render-default<-ui-orig-parent", Uihtml.t_ui_render_default_from_ui_orig_parent);
+    mapfunc.put("ui-render-image<-ui-orig-parent", Uihtml.t_ui_render_image_from_ui_orig_parent);
     mapfunc.put("ui-render-label<-ui-orig-parent", Uihtml.t_ui_render_label_from_ui_orig_parent);
     Core.vx_global_package_set("vx/ui/html/uihtml", maptype, mapconst, mapfunc);
   }

@@ -20,12 +20,12 @@ public final class UiTest {
   public static Test.Type_testcoveragesummary test_coveragesummary() {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/ui/ui", 
-      ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 38), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 58, ":tests", 62, ":total", 106), 
+      ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 41), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 56, ":tests", 62, ":total", 109), 
       ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 40), 
       ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 40), 
       ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 40), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 106), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 109), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 28)
     );
   }
@@ -52,7 +52,7 @@ public final class UiTest {
         ":layoutmap", 0,
         ":pin", 0,
         ":point", 0,
-        ":pointstyle", 0,
+        ":pointtype", 0,
         ":style", 0,
         ":stylelist", 0,
         ":stylemap", 0,
@@ -99,6 +99,9 @@ public final class UiTest {
         ":pin-left", 0,
         ":pin-right", 0,
         ":pin-top", 0,
+        ":pointtype-absolute", 0,
+        ":pointtype-percent", 0,
+        ":pointtype-relative", 0,
         ":styletype-custom", 0,
         ":styletype-shared", 0,
         ":styletype-system", 0

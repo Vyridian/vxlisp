@@ -18,6 +18,9 @@ namespace vx_ui_html_uihtml {
   class Class_layout_else_html;
   typedef Class_layout_else_html* Const_layout_else_html;
   extern Const_layout_else_html c_layout_else_html;
+  class Class_layout_image_html;
+  typedef Class_layout_image_html* Const_layout_image_html;
+  extern Const_layout_image_html c_layout_image_html;
   class Class_layout_label_html;
   typedef Class_layout_label_html* Const_layout_label_html;
   extern Const_layout_label_html c_layout_label_html;
@@ -114,6 +117,10 @@ namespace vx_ui_html_uihtml {
   typedef Abstract_ui_render_default_from_ui_orig_parent* Func_ui_render_default_from_ui_orig_parent;
   extern Func_ui_render_default_from_ui_orig_parent e_ui_render_default_from_ui_orig_parent;
   extern Func_ui_render_default_from_ui_orig_parent t_ui_render_default_from_ui_orig_parent;
+  class Abstract_ui_render_image_from_ui_orig_parent;
+  typedef Abstract_ui_render_image_from_ui_orig_parent* Func_ui_render_image_from_ui_orig_parent;
+  extern Func_ui_render_image_from_ui_orig_parent e_ui_render_image_from_ui_orig_parent;
+  extern Func_ui_render_image_from_ui_orig_parent t_ui_render_image_from_ui_orig_parent;
   class Abstract_ui_render_label_from_ui_orig_parent;
   typedef Abstract_ui_render_label_from_ui_orig_parent* Func_ui_render_label_from_ui_orig_parent;
   extern Func_ui_render_label_from_ui_orig_parent e_ui_render_label_from_ui_orig_parent;
@@ -181,6 +188,9 @@ namespace vx_ui_html_uihtml {
   // (func ui-render-default<-ui-orig-parent)
   vx_ui_ui::Type_ui f_ui_render_default_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent);
 
+  // (func ui-render-image<-ui-orig-parent)
+  vx_ui_ui::Type_ui f_ui_render_image_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent);
+
   // (func ui-render-label<-ui-orig-parent)
   vx_ui_ui::Type_ui f_ui_render_label_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent);
 
@@ -194,6 +204,12 @@ namespace vx_ui_html_uihtml {
   class Class_layout_else_html : public vx_ui_ui::Class_layout {
   public:
     static void vx_const_new(vx_ui_html_uihtml::Const_layout_else_html output);
+  };
+
+  // (const layout-image-html)
+  class Class_layout_image_html : public vx_ui_ui::Class_layout {
+  public:
+    static void vx_const_new(vx_ui_html_uihtml::Const_layout_image_html output);
   };
 
   // (const layout-label-html)
@@ -747,6 +763,29 @@ namespace vx_ui_html_uihtml {
   public:
     Class_ui_render_default_from_ui_orig_parent();
     virtual ~Class_ui_render_default_from_ui_orig_parent() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func ui-render-image<-ui-orig-parent)
+  class Abstract_ui_render_image_from_ui_orig_parent : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_ui_render_image_from_ui_orig_parent() {};
+    virtual ~Abstract_ui_render_image_from_ui_orig_parent() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_ui_render_image_from_ui_orig_parent : public virtual Abstract_ui_render_image_from_ui_orig_parent {
+  public:
+    Class_ui_render_image_from_ui_orig_parent();
+    virtual ~Class_ui_render_image_from_ui_orig_parent() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;

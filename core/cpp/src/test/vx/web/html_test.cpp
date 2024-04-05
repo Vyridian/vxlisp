@@ -200,6 +200,68 @@ namespace vx_web_html_test {
     return output;
   }
 
+  vx_test::Type_testcase f_string_from_img_indent(vx_core::Type_context context) {
+    vx_core::vx_log("Test Start: f_string_from_img_indent");
+    // testdescribe_1
+    vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      context,
+      vx_core::vx_new_string("<img src=\"test.svg\" />"),
+      vx_web_html::f_string_from_img_indent(
+        vx_core::f_new(
+          vx_web_html::t_img,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string(":src"),
+            vx_core::vx_new_string("test.svg")
+          })
+        ),
+        vx_core::vx_new_int(0)
+      )
+    );
+    vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"<img src=\\\"test.svg\\\" />\"\n (string<-img-indent\n  (img :src \"test.svg\")\n  0))"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/web/html"),
+      vx_core::vx_new_string(":testresult"), testresult_1
+    });
+    // testdescribe_2
+    vx_test::Type_testresult testresult_2 = vx_test::f_test(
+      context,
+      vx_core::vx_new_string("<img id=\"myid\" src=\"test.svg\" />"),
+      vx_web_html::f_string_from_img_indent(
+        vx_core::f_new(
+          vx_web_html::t_img,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string(":id"),
+            vx_core::vx_new_string("myid"),
+            vx_core::vx_new_string(":src"),
+            vx_core::vx_new_string("test.svg")
+          })
+        ),
+        vx_core::vx_new_int(0)
+      )
+    );
+    vx_test::Type_testdescribe testdescribe_2 = vx_core::vx_new(vx_test::t_testdescribe, {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"<img id=\\\"myid\\\" src=\\\"test.svg\\\" />\"\n (string<-img-indent\n  (img :id \"myid\" :src \"test.svg\")\n  0))"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/web/html"),
+      vx_core::vx_new_string(":testresult"), testresult_2
+    });
+    vx_core::vx_Type_listany listdescribe = {
+      testdescribe_1,
+      testdescribe_2
+    };
+    vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/web/html"),
+      vx_core::vx_new_string(":casename"), vx_core::vx_new_string("string<-img-indent"),
+      vx_core::vx_new_string(":describelist"),
+      vx_core::vx_any_from_any(
+        vx_test::t_testdescribelist,
+        vx_test::t_testdescribelist->vx_new_from_list(listdescribe)
+      )
+    });
+    vx_core::vx_log("Test End  : f_string_from_img_indent");
+    return output;
+  }
+
   vx_test::Type_testcase f_string_from_meta_indent(vx_core::Type_context context) {
     vx_core::vx_log("Test Start: f_string_from_meta_indent");
     // testdescribe_1
@@ -307,6 +369,7 @@ namespace vx_web_html_test {
     listtestcase.push_back(vx_web_html_test::f_string_from_div_indent(context));
     listtestcase.push_back(vx_web_html_test::f_string_from_head_indent(context));
     listtestcase.push_back(vx_web_html_test::f_string_from_html(context));
+    listtestcase.push_back(vx_web_html_test::f_string_from_img_indent(context));
     listtestcase.push_back(vx_web_html_test::f_string_from_meta_indent(context));
     listtestcase.push_back(vx_web_html_test::f_string_from_p_indent(context));
     vx_test::Type_testcaselist output = vx_core::vx_any_from_any(
@@ -326,33 +389,33 @@ namespace vx_web_html_test {
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(98), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(69), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(70)
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(71), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(72)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(15), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(6), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(39)
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(17), 
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(7), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(40)
       }),
       vx_core::vx_new_string(":bigospacenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(39)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(40)
       }),
       vx_core::vx_new_string(":bigotimenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(39)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(40)
       }),
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(8), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(6), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(70)
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(9), 
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(7), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(72)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(31)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(32)
       })
     });
     return output;
@@ -376,6 +439,7 @@ namespace vx_web_html_test {
         vx_core::vx_new_string(":headchild"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":headchildlist"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":html"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":img"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":meta"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":node"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":nodelist"), vx_core::vx_new_int(0),
@@ -409,6 +473,7 @@ namespace vx_web_html_test {
         vx_core::vx_new_string(":string<-h3-indent"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":string<-head-indent"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":string<-html"), vx_core::vx_new_int(1),
+        vx_core::vx_new_string(":string<-img-indent"), vx_core::vx_new_int(2),
         vx_core::vx_new_string(":string<-indent"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":string<-meta-indent"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":string<-node-indent"), vx_core::vx_new_int(0),

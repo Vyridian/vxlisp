@@ -67,6 +67,10 @@ namespace vx_web_html {
   typedef Abstract_html* Type_html;
   extern Type_html e_html;
   extern Type_html t_html;
+  class Abstract_img;
+  typedef Abstract_img* Type_img;
+  extern Type_img e_img;
+  extern Type_img t_img;
   class Abstract_meta;
   typedef Abstract_meta* Type_meta;
   extern Type_meta e_meta;
@@ -179,6 +183,10 @@ namespace vx_web_html {
   typedef Abstract_string_from_html* Func_string_from_html;
   extern Func_string_from_html e_string_from_html;
   extern Func_string_from_html t_string_from_html;
+  class Abstract_string_from_img_indent;
+  typedef Abstract_string_from_img_indent* Func_string_from_img_indent;
+  extern Func_string_from_img_indent e_string_from_img_indent;
+  extern Func_string_from_img_indent t_string_from_img_indent;
   class Abstract_string_from_indent;
   typedef Abstract_string_from_indent* Func_string_from_indent;
   extern Func_string_from_indent e_string_from_indent;
@@ -399,6 +407,9 @@ namespace vx_web_html {
 
   // (func string<-html)
   vx_core::Type_string f_string_from_html(vx_web_html::Type_html html);
+
+  // (func string<-img-indent)
+  vx_core::Type_string f_string_from_img_indent(vx_web_html::Type_img img, vx_core::Type_int indent);
 
   // (func string<-indent)
   vx_core::Type_string f_string_from_indent(vx_core::Type_int indent);
@@ -1002,6 +1013,56 @@ namespace vx_web_html {
     virtual vx_web_html::Type_head head() const override;
     virtual vx_web_html::Type_body body() const override;
     virtual vx_web_html::Type_footer footer() const override;
+  };
+
+  // (type img)
+  class Abstract_img : public virtual vx_core::Abstract_struct, public virtual vx_web_html::Abstract_node, public virtual vx_web_html::Abstract_divchild {
+  public:
+    Abstract_img() {};
+    virtual ~Abstract_img() = 0;
+    // vx_map()
+    virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    // id()
+    vx_core::Type_string vx_p_id = NULL;
+    virtual vx_core::Type_string id() const = 0;
+    // eventmap()
+    vx_event::Type_eventmap vx_p_eventmap = NULL;
+    virtual vx_event::Type_eventmap eventmap() const = 0;
+    // style()
+    vx_web_html::Type_style vx_p_style = NULL;
+    virtual vx_web_html::Type_style style() const = 0;
+    // style-unique()
+    vx_web_html::Type_style vx_p_style_unique = NULL;
+    virtual vx_web_html::Type_style style_unique() const = 0;
+    // stylelist()
+    vx_web_html::Type_stylelist vx_p_stylelist = NULL;
+    virtual vx_web_html::Type_stylelist stylelist() const = 0;
+    // src()
+    vx_core::Type_string vx_p_src = NULL;
+    virtual vx_core::Type_string src() const = 0;
+  };
+  class Class_img : public virtual Abstract_img {
+  public:
+    Class_img();
+    virtual ~Class_img() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_core::Type_string id() const override;
+    virtual vx_event::Type_eventmap eventmap() const override;
+    virtual vx_web_html::Type_style style() const override;
+    virtual vx_web_html::Type_style style_unique() const override;
+    virtual vx_web_html::Type_stylelist stylelist() const override;
+    virtual vx_core::Type_string src() const override;
   };
 
   // (type meta)
@@ -1990,6 +2051,29 @@ namespace vx_web_html {
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func string<-img-indent)
+  class Abstract_string_from_img_indent : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_string_from_img_indent() {};
+    virtual ~Abstract_string_from_img_indent() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_string_from_img_indent : public virtual Abstract_string_from_img_indent {
+  public:
+    Class_string_from_img_indent();
+    virtual ~Class_string_from_img_indent() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 

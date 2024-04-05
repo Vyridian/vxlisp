@@ -26,6 +26,13 @@ export default class vx_ui_html_uihtml {
   static c_layout_else_html = {vx_type: vx_ui_ui.t_layout, vx_constdef: {pkgname: 'vx/ui/html/uihtml', name: 'layout-else-html'}}
 
   /**
+   * Constant: layout-image-html
+   * Html Image Renderer
+   * {layout}
+   */
+  static c_layout_image_html = {vx_type: vx_ui_ui.t_layout, vx_constdef: {pkgname: 'vx/ui/html/uihtml', name: 'layout-image-html'}}
+
+  /**
    * Constant: layout-label-html
    * Html Label Renderer
    * {layout}
@@ -485,15 +492,16 @@ export default class vx_ui_html_uihtml {
             const pointrotate = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_point, "struct-2": vx_ui_ui.t_style}, uistyle, ":pointrotate")
             const styletype = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_styletype, "struct-2": vx_ui_ui.t_style}, uistyle, ":type")
             const color_bkg = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":color-background")
-            const image_bkg = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_image, "struct-2": vx_ui_ui.t_style}, uistyle, ":image-background")
             const color_hoverbkg = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":color-hoverbkgrd")
             const cursor = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_cursor, "struct-2": vx_ui_ui.t_style}, uistyle, ":cursor")
             const hidden = vx_core.f_any_from_struct({"any-1": vx_core.t_boolean, "struct-2": vx_ui_ui.t_style}, uistyle, ":hidden")
             const align = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_align, "struct-2": vx_ui_ui.t_style}, uistyle, ":align")
             const posx = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_ui_ui.t_point}, pointpos, ":x")
             const posy = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_ui_ui.t_point}, pointpos, ":y")
+            const postype = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_pointtype, "struct-2": vx_ui_ui.t_point}, pointpos, ":pointtype")
             const sizex = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_ui_ui.t_point}, pointsize, ":x")
             const sizey = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_ui_ui.t_point}, pointsize, ":y")
+            const sizetype = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_pointtype, "struct-2": vx_ui_ui.t_point}, pointsize, ":pointtype")
             const stylename = vx_ui_html_uihtml.f_string_stylename_from_name_styletype(name, styletype)
             const bkgcolor = vx_core.f_if_2(
               {"any-1": vx_core.t_string},
@@ -504,14 +512,6 @@ export default class vx_ui_html_uihtml {
                   "#",
                   color_bkg
                 )})
-              )
-            )
-            const bkgimage = vx_ui_html_uihtml.f_string_style_from_image(image_bkg)
-            const bkgsize = vx_core.f_if_2(
-              {"any-1": vx_core.t_string},
-              vx_core.f_then(
-                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty_1(image_bkg)}),
-                vx_core.f_new(vx_core.t_any_from_func, () => {return "cover"})
               )
             )
             const position = vx_core.f_if_2(
@@ -548,6 +548,20 @@ export default class vx_ui_html_uihtml {
                   )
                 )}),
                 vx_core.f_new(vx_core.t_any_from_func, () => {return "fixed"})
+              ),
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eqeq(
+                  postype,
+                  vx_ui_ui.c_pointtype_relative
+                )}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return "relative"})
+              ),
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eqeq(
+                  postype,
+                  vx_ui_ui.c_pointtype_absolute
+                )}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return "absolute"})
               ),
               vx_core.f_then(
                 vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty_1(pointpos)}),
@@ -704,6 +718,17 @@ export default class vx_ui_html_uihtml {
                 vx_core.f_new(vx_core.t_any_from_func, () => {return ""})
               ),
               vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eqeq(
+                  sizetype,
+                  vx_ui_ui.c_pointtype_percent
+                )}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
+                  vx_core.t_string,
+                  sizey,
+                  "%"
+                )})
+              ),
+              vx_core.f_then(
                 vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eqeq(0, sizey)}),
                 vx_core.f_new(vx_core.t_any_from_func, () => {return ""})
               ),
@@ -740,6 +765,17 @@ export default class vx_ui_html_uihtml {
                   )
                 )}),
                 vx_core.f_new(vx_core.t_any_from_func, () => {return ""})
+              ),
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eqeq(
+                  sizetype,
+                  vx_ui_ui.c_pointtype_percent
+                )}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
+                  vx_core.t_string,
+                  sizex,
+                  "%"
+                )})
               ),
               vx_core.f_then(
                 vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eqeq(0, sizex)}),
@@ -879,10 +915,6 @@ export default class vx_ui_html_uihtml {
               vx_web_html.t_propmap,
               ":background-color",
               bkgcolor,
-              ":background-image",
-              bkgimage,
-              ":background-size",
-              bkgsize,
               ":cursor",
               scursor,
               ":display",
@@ -1041,13 +1073,7 @@ export default class vx_ui_html_uihtml {
           ":margin",
           "0mm",
           ":padding",
-          "0mm",
-          ":-webkit-print-color-adjust",
-          "exact !important",
-          ":color-adjust",
-          "exact !important",
-          ":print-color-adjust",
-          "exact !important"
+          "0mm"
         )
       ),
       vx_core.f_new(
@@ -1057,6 +1083,10 @@ export default class vx_ui_html_uihtml {
         ":props",
         vx_core.f_new(
           vx_web_html.t_propmap,
+          ":margin",
+          "0mm",
+          ":padding",
+          "0mm",
           ":position",
           "relative"
         )
@@ -1074,6 +1104,21 @@ export default class vx_ui_html_uihtml {
           "0mm",
           ":white-space",
           "pre-line"
+        )
+      ),
+      vx_core.f_new(
+        vx_web_html.t_style,
+        ":name",
+        "*",
+        ":props",
+        vx_core.f_new(
+          vx_web_html.t_propmap,
+          ":-webkit-print-color-adjust",
+          "exact !important",
+          ":color-adjust",
+          "exact !important",
+          ":print-color-adjust",
+          "exact !important"
         )
       )
     )
@@ -1342,6 +1387,52 @@ export default class vx_ui_html_uihtml {
   }
 
   /**
+   * @function ui_render_image_from_ui_orig_parent
+   * @param  {ui} ui
+   * @param  {ui} orig
+   * @param  {ui} parent
+   * @return {ui}
+   */
+  static t_ui_render_image_from_ui_orig_parent = {
+    vx_type: vx_core.t_type
+  }
+  static e_ui_render_image_from_ui_orig_parent = {
+    vx_type: vx_ui_html_uihtml.t_ui_render_image_from_ui_orig_parent
+  }
+
+  // (func ui-render-image<-ui-orig-parent)
+  static f_ui_render_image_from_ui_orig_parent(ui, orig, parent) {
+    let output = vx_ui_ui.e_ui
+    output = vx_core.f_let(
+      {"any-1": vx_ui_ui.t_ui},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const uid = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_ui}, ui, ":uid")
+        const uistyle = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_style, "struct-2": vx_ui_ui.t_ui}, ui, ":style")
+        const data = vx_core.f_any_from_struct({"any-1": vx_core.t_any, "struct-2": vx_ui_ui.t_ui}, ui, ":data")
+        const file = vx_core.f_any_from_any({"any-1": vx_data_file.t_file, "any-2": vx_core.t_any}, data)
+        const path = vx_data_file.f_pathfull_from_file(file)
+        const style = vx_ui_html_uihtml.f_style_from_style(uistyle)
+        const styles = vx_ui_html_uihtml.f_stylelist_extra_from_ui(ui)
+        const node = vx_core.f_new(
+          vx_web_html.t_img,
+          ":id",
+          uid,
+          ":style-unique",
+          style,
+          ":stylelist",
+          styles,
+          ":src",
+          path
+        )
+        const nodechg = vx_ui_html_uihtml.f_node_render_from_node_ui(node, ui)
+        return ui
+      })
+    )
+    return output
+  }
+
+  /**
    * @function ui_render_label_from_ui_orig_parent
    * @param  {ui} ui
    * @param  {ui} orig
@@ -1412,6 +1503,7 @@ export default class vx_ui_html_uihtml {
     const constmap = vx_core.vx_new_map(vx_core.t_constmap, {
       "layout-app-html": vx_ui_html_uihtml.c_layout_app_html,
       "layout-else-html": vx_ui_html_uihtml.c_layout_else_html,
+      "layout-image-html": vx_ui_html_uihtml.c_layout_image_html,
       "layout-label-html": vx_ui_html_uihtml.c_layout_label_html,
       "layoutenginehtml": vx_ui_html_uihtml.c_layoutenginehtml,
       "style-hidden": vx_ui_html_uihtml.c_style_hidden,
@@ -1439,6 +1531,7 @@ export default class vx_ui_html_uihtml {
       "stylesheet<-stylesheet": vx_ui_html_uihtml.e_stylesheet_from_stylesheet,
       "ui-render-app<-ui-orig-parent": vx_ui_html_uihtml.e_ui_render_app_from_ui_orig_parent,
       "ui-render-default<-ui-orig-parent": vx_ui_html_uihtml.e_ui_render_default_from_ui_orig_parent,
+      "ui-render-image<-ui-orig-parent": vx_ui_html_uihtml.e_ui_render_image_from_ui_orig_parent,
       "ui-render-label<-ui-orig-parent": vx_ui_html_uihtml.e_ui_render_label_from_ui_orig_parent
     })
     const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
@@ -1463,6 +1556,7 @@ export default class vx_ui_html_uihtml {
       "stylesheet<-stylesheet": vx_ui_html_uihtml.t_stylesheet_from_stylesheet,
       "ui-render-app<-ui-orig-parent": vx_ui_html_uihtml.t_ui_render_app_from_ui_orig_parent,
       "ui-render-default<-ui-orig-parent": vx_ui_html_uihtml.t_ui_render_default_from_ui_orig_parent,
+      "ui-render-image<-ui-orig-parent": vx_ui_html_uihtml.t_ui_render_image_from_ui_orig_parent,
       "ui-render-label<-ui-orig-parent": vx_ui_html_uihtml.t_ui_render_label_from_ui_orig_parent
     })
     const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
@@ -1855,6 +1949,24 @@ export default class vx_ui_html_uihtml {
       fn            : vx_ui_html_uihtml.f_ui_render_default_from_ui_orig_parent
     }
 
+    // (func ui-render-image<-ui-orig-parent)
+    vx_ui_html_uihtml.t_ui_render_image_from_ui_orig_parent['vx_value'] = {
+      name          : "ui-render-image<-ui-orig-parent",
+      pkgname       : "vx/ui/html/uihtml",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_html_uihtml.f_ui_render_image_from_ui_orig_parent
+    }
+
     // (func ui-render-label<-ui-orig-parent)
     vx_ui_html_uihtml.t_ui_render_label_from_ui_orig_parent['vx_value'] = {
       name          : "ui-render-label<-ui-orig-parent",
@@ -1887,6 +1999,13 @@ export default class vx_ui_html_uihtml {
       vx_ui_html_uihtml.t_ui_render_default_from_ui_orig_parent
     ))
 
+    // (const layout-image-html)
+    Object.assign(vx_ui_html_uihtml.c_layout_image_html, vx_core.f_copy(
+      vx_ui_ui.c_layout_image,
+      ":fn-layout",
+      vx_ui_html_uihtml.t_ui_render_image_from_ui_orig_parent
+    ))
+
     // (const layout-label-html)
     Object.assign(vx_ui_html_uihtml.c_layout_label_html, vx_core.f_copy(
       vx_ui_ui.c_layout_label,
@@ -1902,6 +2021,7 @@ export default class vx_ui_html_uihtml {
         vx_core.f_new(
           vx_ui_ui.t_layoutlist,
           vx_ui_html_uihtml.c_layout_app_html,
+          vx_ui_html_uihtml.c_layout_image_html,
           vx_ui_html_uihtml.c_layout_label_html
         )
       ),

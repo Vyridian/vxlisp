@@ -85,10 +85,10 @@ namespace vx_ui_ui {
   typedef Abstract_point* Type_point;
   extern Type_point e_point;
   extern Type_point t_point;
-  class Abstract_pointstyle;
-  typedef Abstract_pointstyle* Type_pointstyle;
-  extern Type_pointstyle e_pointstyle;
-  extern Type_pointstyle t_pointstyle;
+  class Abstract_pointtype;
+  typedef Abstract_pointtype* Type_pointtype;
+  extern Type_pointtype e_pointtype;
+  extern Type_pointtype t_pointtype;
   class Abstract_style;
   typedef Abstract_style* Type_style;
   extern Type_style e_style;
@@ -230,6 +230,15 @@ namespace vx_ui_ui {
   class Class_pin_top;
   typedef Class_pin_top* Const_pin_top;
   extern Const_pin_top c_pin_top;
+  class Class_pointtype_absolute;
+  typedef Class_pointtype_absolute* Const_pointtype_absolute;
+  extern Const_pointtype_absolute c_pointtype_absolute;
+  class Class_pointtype_percent;
+  typedef Class_pointtype_percent* Const_pointtype_percent;
+  extern Const_pointtype_percent c_pointtype_percent;
+  class Class_pointtype_relative;
+  typedef Class_pointtype_relative* Const_pointtype_relative;
+  extern Const_pointtype_relative c_pointtype_relative;
   class Class_styletype_custom;
   typedef Class_styletype_custom* Const_styletype_custom;
   extern Const_styletype_custom c_styletype_custom;
@@ -1135,12 +1144,9 @@ namespace vx_ui_ui {
     // i()
     vx_core::Type_int vx_p_i = NULL;
     virtual vx_core::Type_int i() const = 0;
-    // ispercent()
-    vx_core::Type_boolean vx_p_ispercent = NULL;
-    virtual vx_core::Type_boolean ispercent() const = 0;
-    // pointstyle()
-    vx_ui_ui::Type_pointstyle vx_p_pointstyle = NULL;
-    virtual vx_ui_ui::Type_pointstyle pointstyle() const = 0;
+    // pointtype()
+    vx_ui_ui::Type_pointtype vx_p_pointtype = NULL;
+    virtual vx_ui_ui::Type_pointtype pointtype() const = 0;
   };
   class Class_point : public virtual Abstract_point {
   public:
@@ -1161,24 +1167,19 @@ namespace vx_ui_ui {
     virtual vx_core::Type_int z() const override;
     virtual vx_core::Type_int t() const override;
     virtual vx_core::Type_int i() const override;
-    virtual vx_core::Type_boolean ispercent() const override;
-    virtual vx_ui_ui::Type_pointstyle pointstyle() const override;
+    virtual vx_ui_ui::Type_pointtype pointtype() const override;
   };
 
-  // (type pointstyle)
-  class Abstract_pointstyle : public virtual vx_core::Abstract_struct {
+  // (type pointtype)
+  class Abstract_pointtype : public virtual vx_core::Abstract_any {
   public:
-    Abstract_pointstyle() {};
-    virtual ~Abstract_pointstyle() = 0;
-    // vx_map()
-    virtual vx_core::vx_Type_mapany vx_map() const = 0;
-    // vx_get_any(key)
-    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    Abstract_pointtype() {};
+    virtual ~Abstract_pointtype() = 0;
   };
-  class Class_pointstyle : public virtual Abstract_pointstyle {
+  class Class_pointtype : public virtual Abstract_pointtype {
   public:
-    Class_pointstyle();
-    virtual ~Class_pointstyle() override;
+    Class_pointtype();
+    virtual ~Class_pointtype() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_empty() const override;
@@ -1187,8 +1188,6 @@ namespace vx_ui_ui {
     virtual vx_core::Type_constdef vx_constdef() const override;
     virtual vx_core::Type_msgblock vx_msgblock() const override;
     virtual vx_core::vx_Type_listany vx_dispose() override;
-    virtual vx_core::vx_Type_mapany vx_map() const override;
-    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
   };
 
   // (type style)
@@ -1813,6 +1812,24 @@ namespace vx_ui_ui {
   class Class_pin_top : public vx_ui_ui::Class_pin {
   public:
     static void vx_const_new(vx_ui_ui::Const_pin_top output);
+  };
+
+  // (const pointtype-absolute)
+  class Class_pointtype_absolute : public vx_ui_ui::Class_pointtype {
+  public:
+    static void vx_const_new(vx_ui_ui::Const_pointtype_absolute output);
+  };
+
+  // (const pointtype-percent)
+  class Class_pointtype_percent : public vx_ui_ui::Class_pointtype {
+  public:
+    static void vx_const_new(vx_ui_ui::Const_pointtype_percent output);
+  };
+
+  // (const pointtype-relative)
+  class Class_pointtype_relative : public vx_ui_ui::Class_pointtype {
+  public:
+    static void vx_const_new(vx_ui_ui::Const_pointtype_relative output);
   };
 
   // (const styletype-custom)

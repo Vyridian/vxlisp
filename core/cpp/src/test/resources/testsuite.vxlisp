@@ -3575,6 +3575,40 @@ ab
     (vx/test/testcase
      :passfail true
      :testpkg "vx/web/html"
+     :casename "string<-img-indent"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"<img src=\\"test.svg\\" />\"
+ (string<-img-indent
+  (img :src \"test.svg\")
+  0))"
+        :testpkg "vx/web/html"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected "<img src=\"test.svg\" />"
+          :actual "<img src=\"test.svg\" />"))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"<img id=\\"myid\\" src=\\"test.svg\\" />\"
+ (string<-img-indent
+  (img :id \"myid\" :src \"test.svg\")
+  0))"
+        :testpkg "vx/web/html"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected "<img id=\"myid\" src=\"test.svg\" />"
+          :actual "<img id=\"myid\" src=\"test.svg\" />"))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/web/html"
      :casename "string<-meta-indent"
      :describelist
       (vx/test/testdescribelist
@@ -3639,6 +3673,7 @@ ab
       :string<-h3-indent 0
       :string<-head-indent 1
       :string<-html 1
+      :string<-img-indent 2
       :string<-indent 0
       :string<-meta-indent 1
       :string<-node-indent 0
@@ -3684,6 +3719,7 @@ ab
       :headchild 0
       :headchildlist 0
       :html 0
+      :img 0
       :meta 0
       :node 0
       :nodelist 0
@@ -3705,32 +3741,32 @@ ab
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 39)
+      :total 40)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 39)
+      :total 40)
     :constnums
      (vx/test/testcoveragenums
       :pct 100)
     :docnums
      (vx/test/testcoveragenums
       :pct 98
-      :tests 69
-      :total 70)
+      :tests 71
+      :total 72)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 15
-      :tests 6
-      :total 39)
+      :pct 17
+      :tests 7
+      :total 40)
     :testpkg "vx/web/html"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 8
-      :tests 6
-      :total 70)
+      :pct 9
+      :tests 7
+      :total 72)
     :typenums
      (vx/test/testcoveragenums
-      :total 31))
+      :total 32))
   :passfail true
   :testpkg "vx/web/html")
  (vx/test/testpackage
@@ -17000,6 +17036,9 @@ ab
       :pin-left 0
       :pin-right 0
       :pin-top 0
+      :pointtype-absolute 0
+      :pointtype-percent 0
+      :pointtype-relative 0
       :styletype-custom 0
       :styletype-shared 0
       :styletype-system 0)
@@ -17066,7 +17105,7 @@ ab
       :layoutmap 0
       :pin 0
       :point 0
-      :pointstyle 0
+      :pointtype 0
       :style 0
       :stylelist 0
       :stylemap 0
@@ -17086,19 +17125,19 @@ ab
       :total 40)
     :constnums
      (vx/test/testcoveragenums
-      :total 38)
+      :total 41)
     :docnums
      (vx/test/testcoveragenums
-      :pct 58
+      :pct 56
       :tests 62
-      :total 106)
+      :total 109)
     :funcnums
      (vx/test/testcoveragenums
       :total 40)
     :testpkg "vx/ui/ui"
     :totalnums
      (vx/test/testcoveragenums
-      :total 106)
+      :total 109)
     :typenums
      (vx/test/testcoveragenums
       :total 28))
@@ -17714,6 +17753,7 @@ ab
      (intmap
       :layout-app-html 0
       :layout-else-html 0
+      :layout-image-html 0
       :layout-label-html 0
       :layoutenginehtml 0
       :style-hidden 0
@@ -17741,31 +17781,32 @@ ab
       :stylesheet<-stylesheet 0
       :ui-render-app<-ui-orig-parent 0
       :ui-render-default<-ui-orig-parent 0
+      :ui-render-image<-ui-orig-parent 0
       :ui-render-label<-ui-orig-parent 0)
     :testpkg "vx/ui/html/uihtml")
   :coveragesummary
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 22)
+      :total 23)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 22)
+      :total 23)
     :constnums
      (vx/test/testcoveragenums
-      :total 6)
+      :total 7)
     :docnums
      (vx/test/testcoveragenums
-      :pct 64
-      :tests 18
-      :total 28)
+      :pct 63
+      :tests 19
+      :total 30)
     :funcnums
      (vx/test/testcoveragenums
-      :total 22)
+      :total 23)
     :testpkg "vx/ui/html/uihtml"
     :totalnums
      (vx/test/testcoveragenums
-      :total 28)
+      :total 30)
     :typenums
      (vx/test/testcoveragenums
       :pct 100))

@@ -25,12 +25,12 @@ namespace vx_ui_ui_test {
       vx_core::vx_new_string(":constnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(38)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(41)
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(58), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(56), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(62), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(106)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(109)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
@@ -50,7 +50,7 @@ namespace vx_ui_ui_test {
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(106)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(109)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
@@ -83,7 +83,7 @@ namespace vx_ui_ui_test {
         vx_core::vx_new_string(":layoutmap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":pin"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":point"), vx_core::vx_new_int(0),
-        vx_core::vx_new_string(":pointstyle"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":pointtype"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":style"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":stylelist"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":stylemap"), vx_core::vx_new_int(0),
@@ -130,6 +130,9 @@ namespace vx_ui_ui_test {
         vx_core::vx_new_string(":pin-left"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":pin-right"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":pin-top"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":pointtype-absolute"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":pointtype-percent"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":pointtype-relative"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":styletype-custom"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":styletype-shared"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":styletype-system"), vx_core::vx_new_int(0)

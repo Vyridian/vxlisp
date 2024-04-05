@@ -11,6 +11,11 @@
   :fn-layout ui-render-app<-ui-orig-parent)
  :doc "Html App Renderer")
 
+(const layout-image-html : ui/layout
+ (copy ui/layout-image
+  :fn-layout ui-render-image<-ui-orig-parent)
+ :doc "Html Image Renderer")
+
 (const layout-label-html : ui/layout
  (copy ui/layout-label
   :fn-layout ui-render-label<-ui-orig-parent)
@@ -26,6 +31,7 @@
   :layoutmap  (ui/layoutmap<-layoutlist
                (ui/layoutlist
                 layout-app-html
+                layout-image-html
                 layout-label-html))
   :layoutelse layout-else-html
   :boolean-print boolean-print-html
@@ -224,15 +230,17 @@
      pointrotate      : ui/point     := (:pointrotate      uistyle)
      styletype        : ui/styletype := (:type             uistyle)
      color-bkg        : string       := (:color-background uistyle)
-     image-bkg        : ui/image     := (:image-background uistyle)
+//     image-bkg        : ui/image     := (:image-background uistyle)
      color-hoverbkg   : string       := (:color-hoverbkgrd uistyle)
      cursor           : ui/cursor    := (:cursor           uistyle)
      hidden           : boolean      := (:hidden           uistyle)
      align            : ui/align     := (:align            uistyle)
      posx             : int          := (:x pointpos)
      posy             : int          := (:y pointpos)
+     postype          : ui/pointtype := (:pointtype pointpos)
      sizex            : int          := (:x pointsize)
      sizey            : int          := (:y pointsize)
+     sizetype         : ui/pointtype := (:pointtype pointsize)
      stylename : string :=
       (string-stylename<-name-styletype
        name
@@ -244,6 +252,7 @@
         (string
          "#"
          color-bkg)))
+/*
      bkgimage : string :=
       (string-style<-image
        image-bkg)
@@ -252,6 +261,7 @@
        (then
         (!-empty image-bkg)
         "cover"))
+*/
      position : string :=
       (if : string
        (then
@@ -264,6 +274,12 @@
          (== layout layout-statusbar)
          (== layout layout-titlebar))
         "fixed")
+       (then
+        (== postype ui/pointtype-relative)
+        "relative")
+       (then
+        (== postype ui/pointtype-absolute)
+        "absolute")
        (then
         (!-empty pointpos)
         "absolute")
@@ -338,6 +354,9 @@
          (== pin ui/pin-right)
          (== pin ui/pin-center-v))
         "")
+       (then
+        (== sizetype ui/pointtype-percent)
+        (string sizey "%"))
        (then (== 0 sizey) "")
        (else (string sizey "mm")))
      width : string :=
@@ -351,6 +370,9 @@
          (== pin ui/pin-bottom)
          (== pin ui/pin-center-v))
         "")
+       (then
+        (== sizetype ui/pointtype-percent)
+        (string sizex "%"))
        (then (== 0 sizex) "")
        (else (string sizex "mm")))
      display : string :=
@@ -418,8 +440,8 @@
      props : html/propmap :=
       (html/propmap
        :background-color bkgcolor
-       :background-image bkgimage
-       :background-size  bkgsize
+//       :background-image bkgimage
+//       :background-size  bkgsize
        :cursor           scursor
        :display          display
        :font             sfont
@@ -516,14 +538,13 @@
    :props
     (html/propmap
      :margin "0mm"
-     :padding "0mm"
-     :-webkit-print-color-adjust "exact !important"
-     :color-adjust "exact !important"
-     :print-color-adjust "exact !important"))
+     :padding "0mm"))
   (html/style
    :name "div"
    :props
     (html/propmap
+     :margin "0mm"
+     :padding "0mm"
      :position "relative"))
   (html/style
    :name "p"
@@ -531,7 +552,15 @@
     (html/propmap
      :margin-block-start "0mm"
      :margin-block-end "0mm"
-     :white-space "pre-line")))
+     :white-space "pre-line"))
+  (html/style
+   :name "*"
+   :props
+    (html/propmap
+     :-webkit-print-color-adjust "exact !important"
+     :color-adjust "exact !important"
+     :print-color-adjust "exact !important"
+    )))
  :doc "Returns the initial reset styles for ui framework")
 
 (func stylemap<-stylemap : html/stylemap
@@ -608,6 +637,71 @@
    :uimap uimapchg))
  :doc "")
 
+(func ui-render-default<-ui-orig-parent : ui/ui
+ [ui     : ui
+  orig   : ui
+  parent : ui]
+ (let : ui/ui
+  [uid     : string   := (:uid   ui)
+   uimap   : ui/uimap := (:uimap ui)
+   uistyle : ui/style := (:style ui)
+   style : html/style :=
+    (style<-style
+     uistyle)
+   styles   : html/stylelist :=
+    (stylelist-extra<-ui ui)
+   children : html/divchildlist :=
+    (divchildlist<-uimap
+     uimap)
+   node : html/node :=
+    (html/div
+     :id uid
+     :style-unique style
+     :stylelist styles
+     :nodes children)
+   nodechg : html/node :=
+    (node-render<-node-ui
+     node
+     ui)
+   uimapchg : ui/uimap :=
+    (ui/uimap-render<-uimap-parent
+     uimap
+     ui)]
+  (ui/ui
+   :uimap uimapchg))
+ :doc "")
+
+(func ui-render-image<-ui-orig-parent : ui/ui
+ [ui     : ui
+  orig   : ui
+  parent : ui]
+ (let : ui/ui
+  [uid     : string   := (:uid   ui)
+   uistyle : ui/style := (:style ui)
+   data    : any      := (:data  ui)
+   file : file/file :=
+    (any<-any : file/file
+     data)
+   path : string :=
+    (file/pathfull<-file file)
+   style : html/style :=
+    (style<-style
+     uistyle)
+   styles : html/stylelist :=
+    (stylelist-extra<-ui ui)
+   node : html/node :=
+    (html/img
+     :id uid
+     :style-unique style
+     :stylelist styles
+     :src path)
+   nodechg : html/node :=
+    (node-render<-node-ui
+     node
+     ui)]
+  ui)
+ :doc "")
+
 (func ui-render-label<-ui-orig-parent : ui/ui
  [ui     : ui
   orig   : ui
@@ -640,40 +734,6 @@
      :style-unique style
      :stylelist styles
      :text text)
-   nodechg : html/node :=
-    (node-render<-node-ui
-     node
-     ui)
-   uimapchg : ui/uimap :=
-    (ui/uimap-render<-uimap-parent
-     uimap
-     ui)]
-  (ui/ui
-   :uimap uimapchg))
- :doc "")
-
-(func ui-render-default<-ui-orig-parent : ui/ui
- [ui     : ui
-  orig   : ui
-  parent : ui]
- (let : ui/ui
-  [uid     : string   := (:uid   ui)
-   uimap   : ui/uimap := (:uimap ui)
-   uistyle : ui/style := (:style ui)
-   style : html/style :=
-    (style<-style
-     uistyle)
-   styles   : html/stylelist :=
-    (stylelist-extra<-ui ui)
-   children : html/divchildlist :=
-    (divchildlist<-uimap
-     uimap)
-   node : html/node :=
-    (html/div
-     :id uid
-     :style-unique style
-     :stylelist styles
-     :nodes children)
    nodechg : html/node :=
     (node-render<-node-ui
      node

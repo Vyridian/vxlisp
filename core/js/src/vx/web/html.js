@@ -107,6 +107,13 @@ export default class vx_web_html {
   static e_html = {vx_type: vx_web_html.t_html}
 
   /**
+   * type: img
+   * Image Tag
+   */
+  static t_img = {}
+  static e_img = {vx_type: vx_web_html.t_img}
+
+  /**
    * type: meta
    * Meta Tag
    */
@@ -623,6 +630,58 @@ export default class vx_web_html {
   }
 
   /**
+   * @function string_from_img_indent
+   * Returns string from img
+   * @param  {img} img
+   * @param  {int} indent
+   * @return {string}
+   */
+  static t_string_from_img_indent = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_img_indent = {
+    vx_type: vx_web_html.t_string_from_img_indent
+  }
+
+  // (func string<-img-indent)
+  static f_string_from_img_indent(img, indent) {
+    let output = vx_core.e_string
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_string},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const sindent = vx_web_html.f_string_from_indent(indent)
+        const ssrc = vx_web_html.f_string_from_propname_val(
+          "src",
+          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_img}, img, ":src")
+        )
+        const sid = vx_web_html.f_string_from_propname_val(
+          "id",
+          vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_img}, img, ":id")
+        )
+        const sclass = vx_web_html.f_string_from_propstyle_stylelist(
+          vx_core.f_any_from_struct({"any-1": vx_web_html.t_style, "struct-2": vx_web_html.t_img}, img, ":style"),
+          vx_core.f_any_from_struct({"any-1": vx_web_html.t_stylelist, "struct-2": vx_web_html.t_img}, img, ":stylelist")
+        )
+        const sstyle = vx_web_html.f_string_from_propstyleunique(
+          vx_core.f_any_from_struct({"any-1": vx_web_html.t_style, "struct-2": vx_web_html.t_img}, img, ":style-unique")
+        )
+        return vx_core.f_new(
+          vx_core.t_string,
+          sindent,
+          "<img",
+          sid,
+          sclass,
+          sstyle,
+          ssrc,
+          " />"
+        )
+      })
+    )
+    return output
+  }
+
+  /**
    * @function string_from_indent
    * Returns a string to do indentation for a given indent count.
    * @param  {int} indent
@@ -784,6 +843,13 @@ export default class vx_web_html {
         vx_web_html.t_footer,
         vx_core.f_new(vx_core.t_any_from_func, () => {return vx_web_html.f_string_from_footer_indent(
           vx_core.f_any_from_any({"any-1": vx_web_html.t_footer}, node),
+          indent
+        )})
+      ),
+      vx_core.f_case_1(
+        vx_web_html.t_img,
+        vx_core.f_new(vx_core.t_any_from_func, () => {return vx_web_html.f_string_from_img_indent(
+          vx_core.f_any_from_any({"any-1": vx_web_html.t_img}, node),
           indent
         )})
       ),
@@ -1740,6 +1806,7 @@ export default class vx_web_html {
       "headchild": vx_web_html.e_headchild,
       "headchildlist": vx_web_html.e_headchildlist,
       "html": vx_web_html.e_html,
+      "img": vx_web_html.e_img,
       "meta": vx_web_html.e_meta,
       "node": vx_web_html.e_node,
       "nodelist": vx_web_html.e_nodelist,
@@ -1768,6 +1835,7 @@ export default class vx_web_html {
       "string<-h3-indent": vx_web_html.e_string_from_h3_indent,
       "string<-head-indent": vx_web_html.e_string_from_head_indent,
       "string<-html": vx_web_html.e_string_from_html,
+      "string<-img-indent": vx_web_html.e_string_from_img_indent,
       "string<-indent": vx_web_html.e_string_from_indent,
       "string<-meta-indent": vx_web_html.e_string_from_meta_indent,
       "string<-node-indent": vx_web_html.e_string_from_node_indent,
@@ -1809,6 +1877,7 @@ export default class vx_web_html {
       "string<-h3-indent": vx_web_html.t_string_from_h3_indent,
       "string<-head-indent": vx_web_html.t_string_from_head_indent,
       "string<-html": vx_web_html.t_string_from_html,
+      "string<-img-indent": vx_web_html.t_string_from_img_indent,
       "string<-indent": vx_web_html.t_string_from_indent,
       "string<-meta-indent": vx_web_html.t_string_from_meta_indent,
       "string<-node-indent": vx_web_html.t_string_from_node_indent,
@@ -1853,6 +1922,7 @@ export default class vx_web_html {
       "headchild": vx_web_html.t_headchild,
       "headchildlist": vx_web_html.t_headchildlist,
       "html": vx_web_html.t_html,
+      "img": vx_web_html.t_img,
       "meta": vx_web_html.t_meta,
       "node": vx_web_html.t_node,
       "nodelist": vx_web_html.t_nodelist,
@@ -2377,6 +2447,60 @@ export default class vx_web_html {
     }
     vx_web_html.e_html['vx_type'] = vx_web_html.t_html
     vx_web_html.e_html['vx_value'] = {}
+
+    // (type img)
+    vx_web_html.t_img['vx_type'] = vx_core.t_type
+    vx_web_html.t_img['vx_value'] = {
+      name          : "img",
+      pkgname       : "vx/web/html",
+      extends       : ":struct",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [vx_web_html.t_node, vx_web_html.t_divchild],
+      properties    : {
+        "id": {
+          "name" : "id",
+          "type" : vx_core.t_string,
+          "multi": false
+        },
+        "eventmap": {
+          "name" : "eventmap",
+          "type" : vx_event.t_eventmap,
+          "multi": false
+        },
+        "style": {
+          "name" : "style",
+          "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "style-unique": {
+          "name" : "style-unique",
+          "type" : vx_web_html.t_style,
+          "multi": false
+        },
+        "stylelist": {
+          "name" : "stylelist",
+          "type" : vx_web_html.t_stylelist,
+          "multi": false
+        },
+        "src": {
+          "name" : "src",
+          "type" : vx_core.t_string,
+          "multi": false
+        }
+      },
+      proplast      : {
+        "name" : "src",
+        "type" : vx_core.t_string,
+        "multi": false
+      }
+    }
+    vx_web_html.e_img['vx_type'] = vx_web_html.t_img
+    vx_web_html.e_img['vx_value'] = {}
 
     // (type meta)
     vx_web_html.t_meta['vx_type'] = vx_core.t_type
@@ -3283,6 +3407,24 @@ export default class vx_web_html {
       properties    : [],
       proplast      : {},
       fn            : vx_web_html.f_string_from_html
+    }
+
+    // (func string<-img-indent)
+    vx_web_html.t_string_from_img_indent['vx_value'] = {
+      name          : "string<-img-indent",
+      pkgname       : "vx/web/html",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_web_html.f_string_from_img_indent
     }
 
     // (func string<-indent)

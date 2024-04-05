@@ -158,6 +158,56 @@ public final class HtmlTest {
     return output;
   }
 
+  static Test.Type_testcase f_string_from_img_indent(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/web/html",
+      ":casename", "string<-img-indent",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n \"<img src=\\\"test.svg\\\" />\"\n (string<-img-indent\n  (img :src \"test.svg\")\n  0))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.vx_new_string("<img src=\"test.svg\" />"),
+              Html.f_string_from_img_indent(
+                Core.f_new(
+                  Html.t_img,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string(":src"),
+                    Core.vx_new_string("test.svg")
+                  )
+                ),
+                Core.vx_new_int(0)
+              )
+            )
+        ),
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n \"<img id=\\\"myid\\\" src=\\\"test.svg\\\" />\"\n (string<-img-indent\n  (img :id \"myid\" :src \"test.svg\")\n  0))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.vx_new_string("<img id=\"myid\" src=\"test.svg\" />"),
+              Html.f_string_from_img_indent(
+                Core.f_new(
+                  Html.t_img,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string(":id"),
+                    Core.vx_new_string("myid"),
+                    Core.vx_new_string(":src"),
+                    Core.vx_new_string("test.svg")
+                  )
+                ),
+                Core.vx_new_int(0)
+              )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
   static Test.Type_testcase f_string_from_meta_indent(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
@@ -244,6 +294,7 @@ public final class HtmlTest {
       HtmlTest.f_string_from_div_indent(context),
       HtmlTest.f_string_from_head_indent(context),
       HtmlTest.f_string_from_html(context),
+      HtmlTest.f_string_from_img_indent(context),
       HtmlTest.f_string_from_meta_indent(context),
       HtmlTest.f_string_from_p_indent(context)
     ));
@@ -255,12 +306,12 @@ public final class HtmlTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/web/html", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 98, ":tests", 69, ":total", 70), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 15, ":tests", 6, ":total", 39), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 39), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 39), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 8, ":tests", 6, ":total", 70), 
-      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 31)
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 98, ":tests", 71, ":total", 72), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 17, ":tests", 7, ":total", 40), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 40), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 40), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 9, ":tests", 7, ":total", 72), 
+      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 32)
     );
   }
 
@@ -282,6 +333,7 @@ public final class HtmlTest {
         ":headchild", 0,
         ":headchildlist", 0,
         ":html", 0,
+        ":img", 0,
         ":meta", 0,
         ":node", 0,
         ":nodelist", 0,
@@ -315,6 +367,7 @@ public final class HtmlTest {
         ":string<-h3-indent", 0,
         ":string<-head-indent", 1,
         ":string<-html", 1,
+        ":string<-img-indent", 2,
         ":string<-indent", 0,
         ":string<-meta-indent", 1,
         ":string<-node-indent", 0,

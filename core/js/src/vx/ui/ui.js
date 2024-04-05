@@ -136,11 +136,11 @@ export default class vx_ui_ui {
   static e_point = {vx_type: vx_ui_ui.t_point}
 
   /**
-   * type: pointstyle
-   * Universal Point Style
+   * type: pointtype
+   * Universal Point Scale
    */
-  static t_pointstyle = {}
-  static e_pointstyle = {vx_type: vx_ui_ui.t_pointstyle}
+  static t_pointtype = {}
+  static e_pointtype = {vx_type: vx_ui_ui.t_pointtype}
 
   /**
    * type: style
@@ -416,6 +416,24 @@ export default class vx_ui_ui {
    * {pin}
    */
   static c_pin_top = {vx_type: vx_ui_ui.t_pin, vx_constdef: {pkgname: 'vx/ui/ui', name: 'pin-top'}}
+
+  /**
+   * Constant: pointtype-absolute
+   * {pointtype}
+   */
+  static c_pointtype_absolute = {vx_type: vx_ui_ui.t_pointtype, vx_constdef: {pkgname: 'vx/ui/ui', name: 'pointtype-absolute'}}
+
+  /**
+   * Constant: pointtype-percent
+   * {pointtype}
+   */
+  static c_pointtype_percent = {vx_type: vx_ui_ui.t_pointtype, vx_constdef: {pkgname: 'vx/ui/ui', name: 'pointtype-percent'}}
+
+  /**
+   * Constant: pointtype-relative
+   * {pointtype}
+   */
+  static c_pointtype_relative = {vx_type: vx_ui_ui.t_pointtype, vx_constdef: {pkgname: 'vx/ui/ui', name: 'pointtype-relative'}}
 
   /**
    * Constant: styletype-custom
@@ -1568,6 +1586,9 @@ export default class vx_ui_ui {
       "pin-left": vx_ui_ui.c_pin_left,
       "pin-right": vx_ui_ui.c_pin_right,
       "pin-top": vx_ui_ui.c_pin_top,
+      "pointtype-absolute": vx_ui_ui.c_pointtype_absolute,
+      "pointtype-percent": vx_ui_ui.c_pointtype_percent,
+      "pointtype-relative": vx_ui_ui.c_pointtype_relative,
       "styletype-custom": vx_ui_ui.c_styletype_custom,
       "styletype-shared": vx_ui_ui.c_styletype_shared,
       "styletype-system": vx_ui_ui.c_styletype_system
@@ -1591,7 +1612,7 @@ export default class vx_ui_ui {
       "layoutmap": vx_ui_ui.e_layoutmap,
       "pin": vx_ui_ui.e_pin,
       "point": vx_ui_ui.e_point,
-      "pointstyle": vx_ui_ui.e_pointstyle,
+      "pointtype": vx_ui_ui.e_pointtype,
       "style": vx_ui_ui.e_style,
       "stylelist": vx_ui_ui.e_stylelist,
       "stylemap": vx_ui_ui.e_stylemap,
@@ -1703,7 +1724,7 @@ export default class vx_ui_ui {
       "layoutmap": vx_ui_ui.t_layoutmap,
       "pin": vx_ui_ui.t_pin,
       "point": vx_ui_ui.t_point,
-      "pointstyle": vx_ui_ui.t_pointstyle,
+      "pointtype": vx_ui_ui.t_pointtype,
       "style": vx_ui_ui.t_style,
       "stylelist": vx_ui_ui.t_stylelist,
       "stylemap": vx_ui_ui.t_stylemap,
@@ -2243,32 +2264,27 @@ export default class vx_ui_ui {
           "type" : vx_core.t_int,
           "multi": false
         },
-        "ispercent": {
-          "name" : "ispercent",
-          "type" : vx_core.t_boolean,
-          "multi": false
-        },
-        "pointstyle": {
-          "name" : "pointstyle",
-          "type" : vx_ui_ui.t_pointstyle,
+        "pointtype": {
+          "name" : "pointtype",
+          "type" : vx_ui_ui.t_pointtype,
           "multi": false
         }
       },
       proplast      : {
-        "name" : "pointstyle",
-        "type" : vx_ui_ui.t_pointstyle,
+        "name" : "pointtype",
+        "type" : vx_ui_ui.t_pointtype,
         "multi": false
       }
     }
     vx_ui_ui.e_point['vx_type'] = vx_ui_ui.t_point
     vx_ui_ui.e_point['vx_value'] = {}
 
-    // (type pointstyle)
-    vx_ui_ui.t_pointstyle['vx_type'] = vx_core.t_type
-    vx_ui_ui.t_pointstyle['vx_value'] = {
-      name          : "pointstyle",
+    // (type pointtype)
+    vx_ui_ui.t_pointtype['vx_type'] = vx_core.t_type
+    vx_ui_ui.t_pointtype['vx_value'] = {
+      name          : "pointtype",
       pkgname       : "vx/ui/ui",
-      extends       : ":struct",
+      extends       : ":int",
       allowfuncs    : [],
       disallowfuncs : [],
       allowtypes    : [],
@@ -2279,8 +2295,8 @@ export default class vx_ui_ui {
       properties    : {},
       proplast      : {}
     }
-    vx_ui_ui.e_pointstyle['vx_type'] = vx_ui_ui.t_pointstyle
-    vx_ui_ui.e_pointstyle['vx_value'] = {}
+    vx_ui_ui.e_pointtype['vx_type'] = vx_ui_ui.t_pointtype
+    vx_ui_ui.e_pointtype['vx_value'] = {}
 
     // (type style)
     vx_ui_ui.t_style['vx_type'] = vx_core.t_type

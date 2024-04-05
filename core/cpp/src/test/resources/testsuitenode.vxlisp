@@ -6426,19 +6426,19 @@ ab
                  (vx/web/html/p
                   :text "vx/web/html")
                  (vx/web/html/p
-                  :text "8% 6/70")
+                  :text "9% 7/72")
                  (vx/web/html/p
-                  :text "0% 0/31")
+                  :text "0% 0/32")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "15% 6/39")
+                  :text "17% 7/40")
                  (vx/web/html/p
-                  :text "98% 69/70")
+                  :text "98% 71/72")
                  (vx/web/html/p
-                  :text "0% 0/39")
+                  :text "0% 0/40")
                  (vx/web/html/p
-                  :text "0% 0/39"))
+                  :text "0% 0/40"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -6662,6 +6662,72 @@ ab
   <body></body>
   <footer></footer>
 </html>\"")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "string<-img-indent")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ \"<img src=\\"test.svg\\" />\"
+ (string<-img-indent
+  (img :src \"test.svg\")
+  0))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"<img src=\\"test.svg\\" />\"")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"<img src=\\"test.svg\\" />\"")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "string<-img-indent")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ \"<img id=\\"myid\\" src=\\"test.svg\\" />\"
+ (string<-img-indent
+  (img :id \"myid\" :src \"test.svg\")
+  0))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"<img id=\\"myid\\" src=\\"test.svg\\" />\"")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"<img id=\\"myid\\" src=\\"test.svg\\" />\"")))))
                          (vx/web/html/tr
                           :nodes
                            (vx/web/html/tdlist
@@ -22053,15 +22119,15 @@ ab
                  (vx/web/html/p
                   :text "vx/ui/ui")
                  (vx/web/html/p
-                  :text "0% 0/106")
+                  :text "0% 0/109")
                  (vx/web/html/p
                   :text "0% 0/28")
                  (vx/web/html/p
-                  :text "0% 0/38")
+                  :text "0% 0/41")
                  (vx/web/html/p
                   :text "0% 0/40")
                  (vx/web/html/p
-                  :text "58% 62/106")
+                  :text "56% 62/109")
                  (vx/web/html/p
                   :text "0% 0/40")
                  (vx/web/html/p
@@ -22885,19 +22951,19 @@ ab
                  (vx/web/html/p
                   :text "vx/ui/html/uihtml")
                  (vx/web/html/p
-                  :text "0% 0/28")
+                  :text "0% 0/30")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "0% 0/6")
+                  :text "0% 0/7")
                  (vx/web/html/p
-                  :text "0% 0/22")
+                  :text "0% 0/23")
                  (vx/web/html/p
-                  :text "64% 18/28")
+                  :text "63% 19/30")
                  (vx/web/html/p
-                  :text "0% 0/22")
+                  :text "0% 0/23")
                  (vx/web/html/p
-                  :text "0% 0/22"))
+                  :text "0% 0/23"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div

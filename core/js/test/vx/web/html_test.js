@@ -26,12 +26,12 @@ export default class vx_web_html_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/web/html", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 98, ":tests", 69, ":total", 70), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 15, ":tests", 6, ":total", 39), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 98, ":tests", 71, ":total", 72), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 17, ":tests", 7, ":total", 40), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 8, ":tests", 6, ":total", 70), 
-      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 31)
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 9, ":tests", 7, ":total", 72), 
+      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 32)
     )
   }
 
@@ -56,6 +56,7 @@ export default class vx_web_html_test {
           "headchild", 0,
           "headchildlist", 0,
           "html", 0,
+          "img", 0,
           "meta", 0,
           "node", 0,
           "nodelist", 0,
@@ -92,6 +93,7 @@ export default class vx_web_html_test {
           "string<-h3-indent", 0,
           "string<-head-indent", 1,
           "string<-html", 1,
+          "string<-img-indent", 2,
           "string<-indent", 0,
           "string<-meta-indent", 1,
           "string<-node-indent", 0,
@@ -282,6 +284,56 @@ export default class vx_web_html_test {
     return output
   }
 
+  static f_string_from_img_indent(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/web/html",
+      ":casename", "string<-img-indent",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n \"<img src=\\\"test.svg\\\" />\"\n (string<-img-indent\n  (img :src \"test.svg\")\n  0))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              "<img src=\"test.svg\" />",
+              vx_web_html.f_string_from_img_indent(
+                vx_core.f_new(
+                  vx_web_html.t_img,
+                  ":src",
+                  "test.svg"
+                ),
+                0
+              )
+            )
+          ),
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n \"<img id=\\\"myid\\\" src=\\\"test.svg\\\" />\"\n (string<-img-indent\n  (img :id \"myid\" :src \"test.svg\")\n  0))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              "<img id=\"myid\" src=\"test.svg\" />",
+              vx_web_html.f_string_from_img_indent(
+                vx_core.f_new(
+                  vx_web_html.t_img,
+                  ":id",
+                  "myid",
+                  ":src",
+                  "test.svg"
+                ),
+                0
+              )
+            )
+          )
+        )
+    )
+    return output
+  }
+
   static f_string_from_meta_indent(context) {
     const output = vx_core.f_new(
       vx_test.t_testcase,
@@ -370,6 +422,7 @@ export default class vx_web_html_test {
       vx_web_html_test.f_string_from_div_indent(context),
       vx_web_html_test.f_string_from_head_indent(context),
       vx_web_html_test.f_string_from_html(context),
+      vx_web_html_test.f_string_from_img_indent(context),
       vx_web_html_test.f_string_from_meta_indent(context),
       vx_web_html_test.f_string_from_p_indent(context)
     )

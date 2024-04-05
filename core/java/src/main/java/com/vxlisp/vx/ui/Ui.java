@@ -3111,8 +3111,7 @@ public final class Ui {
     public Core.Type_int z();
     public Core.Type_int t();
     public Core.Type_int i();
-    public Core.Type_boolean ispercent();
-    public Ui.Type_pointstyle pointstyle();
+    public Ui.Type_pointtype pointtype();
   }
 
   public static class Class_point extends Core.Class_base implements Type_point {
@@ -3152,18 +3151,11 @@ public final class Ui {
       return this.vx_p_i == null ? Core.e_int : this.vx_p_i;
     }
 
-    protected Core.Type_boolean vx_p_ispercent;
+    protected Ui.Type_pointtype vx_p_pointtype;
 
     @Override
-    public Core.Type_boolean ispercent() {
-      return this.vx_p_ispercent == null ? Core.e_boolean : this.vx_p_ispercent;
-    }
-
-    protected Ui.Type_pointstyle vx_p_pointstyle;
-
-    @Override
-    public Ui.Type_pointstyle pointstyle() {
-      return this.vx_p_pointstyle == null ? Ui.e_pointstyle : this.vx_p_pointstyle;
+    public Ui.Type_pointtype pointtype() {
+      return this.vx_p_pointtype == null ? Ui.e_pointtype : this.vx_p_pointtype;
     }
 
     @Override
@@ -3186,11 +3178,8 @@ public final class Ui {
       case ":i":
         output = this.i();
         break;
-      case ":ispercent":
-        output = this.ispercent();
-        break;
-      case ":pointstyle":
-        output = this.pointstyle();
+      case ":pointtype":
+        output = this.pointtype();
         break;
       }
       return output;
@@ -3204,8 +3193,7 @@ public final class Ui {
       output.put(":z", this.z());
       output.put(":t", this.t());
       output.put(":i", this.i());
-      output.put(":ispercent", this.ispercent());
-      output.put(":pointstyle", this.pointstyle());
+      output.put(":pointtype", this.pointtype());
       return Core.immutablemap(output);
     }
 
@@ -3228,16 +3216,14 @@ public final class Ui {
       Core.Type_int vx_p_z = val.z();
       Core.Type_int vx_p_t = val.t();
       Core.Type_int vx_p_i = val.i();
-      Core.Type_boolean vx_p_ispercent = val.ispercent();
-      Ui.Type_pointstyle vx_p_pointstyle = val.pointstyle();
+      Ui.Type_pointtype vx_p_pointtype = val.pointtype();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":x");
       validkeys.add(":y");
       validkeys.add(":z");
       validkeys.add(":t");
       validkeys.add(":i");
-      validkeys.add(":ispercent");
-      validkeys.add(":pointstyle");
+      validkeys.add(":pointtype");
       String key = "";
       Core.Type_msg msg;
       for (Object valsub : vals) {
@@ -3395,14 +3381,11 @@ public final class Ui {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
-          case ":ispercent":
-            if (valsub == vx_p_ispercent) {
-            } else if (valsub instanceof Core.Type_boolean) {
+          case ":pointtype":
+            if (valsub == vx_p_pointtype) {
+            } else if (valsub instanceof Ui.Type_pointtype) {
               ischanged = true;
-              vx_p_ispercent = (Core.Type_boolean)valsub;
-            } else if (valsub instanceof Boolean) {
-              ischanged = true;
-              vx_p_ispercent = Core.t_boolean.vx_new(valsub);
+              vx_p_pointtype = (Ui.Type_pointtype)valsub;
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -3411,27 +3394,7 @@ public final class Ui {
                 msgval = Core.vx_new_string(valsub.toString());
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
-              mapany.put("key", Core.vx_new_string("ispercent"));
-              mapany.put("value", msgval);
-              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
-              msg = Core.vx_msg_from_error("vx/ui/ui/point", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
-            }
-            break;
-          case ":pointstyle":
-            if (valsub == vx_p_pointstyle) {
-            } else if (valsub instanceof Ui.Type_pointstyle) {
-              ischanged = true;
-              vx_p_pointstyle = (Ui.Type_pointstyle)valsub;
-            } else {
-              Core.Type_any msgval;
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
-              } else {
-                msgval = Core.vx_new_string(valsub.toString());
-              }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
-              mapany.put("key", Core.vx_new_string("pointstyle"));
+              mapany.put("key", Core.vx_new_string("pointtype"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/ui/ui/point", ":invalidvalue", msgmap);
@@ -3453,8 +3416,7 @@ public final class Ui {
         work.vx_p_z = vx_p_z;
         work.vx_p_t = vx_p_t;
         work.vx_p_i = vx_p_i;
-        work.vx_p_ispercent = vx_p_ispercent;
-        work.vx_p_pointstyle = vx_p_pointstyle;
+        work.vx_p_pointtype = vx_p_pointtype;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -3491,50 +3453,35 @@ public final class Ui {
   public static final Type_point t_point = new Class_point();
 
   /**
-   * type: pointstyle
-   * Universal Point Style
-   * (type pointstyle)
+   * type: pointtype
+   * Universal Point Scale
+   * (type pointtype)
    */
-  public interface Type_pointstyle extends Core.Type_struct {
-    public Ui.Type_pointstyle vx_new(final Object... vals);
-    public Ui.Type_pointstyle vx_copy(final Object... vals);
-    public Ui.Type_pointstyle vx_empty();
-    public Ui.Type_pointstyle vx_type();
+  public interface Type_pointtype extends Core.Type_any {
+    public Ui.Type_pointtype vx_new(final Object... vals);
+    public Ui.Type_pointtype vx_copy(final Object... vals);
+    public Ui.Type_pointtype vx_empty();
+    public Ui.Type_pointtype vx_type();
   }
 
-  public static class Class_pointstyle extends Core.Class_base implements Type_pointstyle {
+  public static class Class_pointtype extends Core.Class_base implements Type_pointtype {
 
     @Override
-    public Core.Type_any vx_any(final Core.Type_string key) {
-      Core.Type_any output = Core.e_any;
-      String skey = key.vx_string();
-      switch (skey) {
-      }
-      return output;
+    public Type_pointtype vx_new(final Object... vals) {
+      return e_pointtype.vx_copy(vals);
     }
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
-      return Core.immutablemap(output);
-    }
-
-    @Override
-    public Type_pointstyle vx_new(final Object... vals) {
-      return e_pointstyle.vx_copy(vals);
-    }
-
-    @Override
-    public Type_pointstyle vx_copy(final Object... vals) {
-      Type_pointstyle output = this;
+    public Type_pointtype vx_copy(final Object... vals) {
+      Type_pointtype output = this;
       boolean ischanged = false;
-      Class_pointstyle val = this;
+      Class_pointtype val = this;
       Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_pointstyle work = new Class_pointstyle();
+        Class_pointtype work = new Class_pointtype();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -3544,16 +3491,16 @@ public final class Ui {
     }
 
     @Override
-    public Type_pointstyle vx_empty() {return e_pointstyle;}
+    public Type_pointtype vx_empty() {return e_pointtype;}
     @Override
-    public Type_pointstyle vx_type() {return t_pointstyle;}
+    public Type_pointtype vx_type() {return t_pointtype;}
 
     @Override
     public Core.Type_typedef vx_typedef() {
       return Core.typedef_new(
         "vx/ui/ui", // pkgname
-        "pointstyle", // name
-        ":struct", // extends
+        "pointtype", // name
+        ":int", // extends
         Core.e_typelist, // traits
         Core.e_typelist, // allowtypes
         Core.e_typelist, // disallowtypes
@@ -3567,8 +3514,8 @@ public final class Ui {
 
   }
 
-  public static final Type_pointstyle e_pointstyle = new Class_pointstyle();
-  public static final Type_pointstyle t_pointstyle = new Class_pointstyle();
+  public static final Type_pointtype e_pointtype = new Class_pointtype();
+  public static final Type_pointtype t_pointtype = new Class_pointtype();
 
   /**
    * type: style
@@ -7501,6 +7448,114 @@ public final class Ui {
   }
 
   public static final Const_pin_top c_pin_top = new Const_pin_top();
+
+
+  /**
+   * Constant: pointtype-absolute
+   * {pointtype}
+   */
+  public static class Const_pointtype_absolute extends Ui.Class_pointtype implements Core.vx_Type_const {
+
+    @Override
+    public Core.Type_constdef vx_constdef() {
+      return Core.constdef_new(
+        "vx/ui/ui", // pkgname
+        "pointtype-absolute", // name
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "pointtype", // name
+          ":int", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        )
+      );
+    }
+
+    public static void const_new(Const_pointtype_absolute output) {
+    }
+
+
+  }
+
+  public static final Const_pointtype_absolute c_pointtype_absolute = new Const_pointtype_absolute();
+
+
+  /**
+   * Constant: pointtype-percent
+   * {pointtype}
+   */
+  public static class Const_pointtype_percent extends Ui.Class_pointtype implements Core.vx_Type_const {
+
+    @Override
+    public Core.Type_constdef vx_constdef() {
+      return Core.constdef_new(
+        "vx/ui/ui", // pkgname
+        "pointtype-percent", // name
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "pointtype", // name
+          ":int", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        )
+      );
+    }
+
+    public static void const_new(Const_pointtype_percent output) {
+    }
+
+
+  }
+
+  public static final Const_pointtype_percent c_pointtype_percent = new Const_pointtype_percent();
+
+
+  /**
+   * Constant: pointtype-relative
+   * {pointtype}
+   */
+  public static class Const_pointtype_relative extends Ui.Class_pointtype implements Core.vx_Type_const {
+
+    @Override
+    public Core.Type_constdef vx_constdef() {
+      return Core.constdef_new(
+        "vx/ui/ui", // pkgname
+        "pointtype-relative", // name
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "pointtype", // name
+          ":int", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        )
+      );
+    }
+
+    public static void const_new(Const_pointtype_relative output) {
+    }
+
+
+  }
+
+  public static final Const_pointtype_relative c_pointtype_relative = new Const_pointtype_relative();
 
 
   /**
@@ -11438,6 +11493,9 @@ public final class Ui {
     Const_pin_left.const_new(c_pin_left);
     Const_pin_right.const_new(c_pin_right);
     Const_pin_top.const_new(c_pin_top);
+    Const_pointtype_absolute.const_new(c_pointtype_absolute);
+    Const_pointtype_percent.const_new(c_pointtype_percent);
+    Const_pointtype_relative.const_new(c_pointtype_relative);
     Const_styletype_custom.const_new(c_styletype_custom);
     Const_styletype_shared.const_new(c_styletype_shared);
     Const_styletype_system.const_new(c_styletype_system);
@@ -11462,7 +11520,7 @@ public final class Ui {
     maptype.put("layoutmap", Ui.t_layoutmap);
     maptype.put("pin", Ui.t_pin);
     maptype.put("point", Ui.t_point);
-    maptype.put("pointstyle", Ui.t_pointstyle);
+    maptype.put("pointtype", Ui.t_pointtype);
     maptype.put("style", Ui.t_style);
     maptype.put("stylelist", Ui.t_stylelist);
     maptype.put("stylemap", Ui.t_stylemap);
@@ -11507,6 +11565,9 @@ public final class Ui {
     mapconst.put("pin-left", Ui.c_pin_left);
     mapconst.put("pin-right", Ui.c_pin_right);
     mapconst.put("pin-top", Ui.c_pin_top);
+    mapconst.put("pointtype-absolute", Ui.c_pointtype_absolute);
+    mapconst.put("pointtype-percent", Ui.c_pointtype_percent);
+    mapconst.put("pointtype-relative", Ui.c_pointtype_relative);
     mapconst.put("styletype-custom", Ui.c_styletype_custom);
     mapconst.put("styletype-shared", Ui.c_styletype_shared);
     mapconst.put("styletype-system", Ui.c_styletype_system);

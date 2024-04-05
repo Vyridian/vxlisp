@@ -3170,6 +3170,362 @@ public final class Html {
   public static final Type_html t_html = new Class_html();
 
   /**
+   * type: img
+   * Image Tag
+   * (type img)
+   */
+  public interface Type_img extends Core.Type_struct, Html.Type_node, Html.Type_divchild {
+    public Html.Type_img vx_new(final Object... vals);
+    public Html.Type_img vx_copy(final Object... vals);
+    public Html.Type_img vx_empty();
+    public Html.Type_img vx_type();
+    public Core.Type_string id();
+    public Event.Type_eventmap eventmap();
+    public Html.Type_style style();
+    public Html.Type_style style_unique();
+    public Html.Type_stylelist stylelist();
+    public Core.Type_string src();
+  }
+
+  public static class Class_img extends Core.Class_base implements Type_img {
+
+    protected Core.Type_string vx_p_id;
+
+    @Override
+    public Core.Type_string id() {
+      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+    }
+
+    protected Event.Type_eventmap vx_p_eventmap;
+
+    @Override
+    public Event.Type_eventmap eventmap() {
+      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+    }
+
+    protected Html.Type_style vx_p_style;
+
+    @Override
+    public Html.Type_style style() {
+      return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+    }
+
+    protected Html.Type_style vx_p_style_unique;
+
+    @Override
+    public Html.Type_style style_unique() {
+      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+    }
+
+    protected Html.Type_stylelist vx_p_stylelist;
+
+    @Override
+    public Html.Type_stylelist stylelist() {
+      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
+    }
+
+    protected Core.Type_string vx_p_src;
+
+    @Override
+    public Core.Type_string src() {
+      return this.vx_p_src == null ? Core.e_string : this.vx_p_src;
+    }
+
+    @Override
+    public Core.Type_any vx_any(final Core.Type_string key) {
+      Core.Type_any output = Core.e_any;
+      String skey = key.vx_string();
+      switch (skey) {
+      case ":id":
+        output = this.id();
+        break;
+      case ":eventmap":
+        output = this.eventmap();
+        break;
+      case ":style":
+        output = this.style();
+        break;
+      case ":style-unique":
+        output = this.style_unique();
+        break;
+      case ":stylelist":
+        output = this.stylelist();
+        break;
+      case ":src":
+        output = this.src();
+        break;
+      }
+      return output;
+    }
+
+    @Override
+    public Map<String, Core.Type_any> vx_map() {
+      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      output.put(":id", this.id());
+      output.put(":eventmap", this.eventmap());
+      output.put(":style", this.style());
+      output.put(":style-unique", this.style_unique());
+      output.put(":stylelist", this.stylelist());
+      output.put(":src", this.src());
+      return Core.immutablemap(output);
+    }
+
+    @Override
+    public Type_img vx_new(final Object... vals) {
+      return e_img.vx_copy(vals);
+    }
+
+    @Override
+    public Type_img vx_copy(final Object... vals) {
+      Type_img output = this;
+      boolean ischanged = false;
+      Class_img val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
+      Core.Type_string vx_p_id = val.id();
+      Event.Type_eventmap vx_p_eventmap = val.eventmap();
+      Html.Type_style vx_p_style = val.style();
+      Html.Type_style vx_p_style_unique = val.style_unique();
+      Html.Type_stylelist vx_p_stylelist = val.stylelist();
+      Core.Type_string vx_p_src = val.src();
+      ArrayList<String> validkeys = new ArrayList<>();
+      validkeys.add(":id");
+      validkeys.add(":eventmap");
+      validkeys.add(":style");
+      validkeys.add(":style-unique");
+      validkeys.add(":stylelist");
+      validkeys.add(":src");
+      String key = "";
+      Core.Type_msg msg;
+      for (Object valsub : vals) {
+        if (valsub instanceof Core.Type_msgblock) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (valsub instanceof Core.Type_msg) {
+          msgblock = msgblock.vx_copy(valsub);
+        } else if (key == "") {
+          boolean istestkey = false;
+          String testkey = "";
+          if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;
+            testkey = valstr.vx_string();
+            istestkey = true;
+          } else if (valsub instanceof String) {
+            testkey = (String)valsub;
+            istestkey = true;
+          } else if (valsub instanceof Core.Type_string) { // default property
+            ischanged = true;
+            vx_p_src = (Core.Type_string)valsub;
+          } else {
+            Core.Type_any msgval;
+            if (valsub instanceof Core.Type_any) {
+              msgval = (Core.Type_any)valsub;
+            } else {
+              msgval = Core.vx_new_string(valsub.toString());
+            }
+            msg = Core.vx_msg_from_error("vx/web/html/img", ":invalidkeytype", msgval);
+            msgblock = msgblock.vx_copy(msg);
+          }
+          if (istestkey) {
+            if (!testkey.startsWith(":")) {
+              testkey = ":" + testkey;
+            }
+            boolean isvalidkey = validkeys.contains(testkey);
+            if (isvalidkey) {
+              key = testkey;
+            } else if (valsub instanceof Core.Type_string) { // default property
+              ischanged = true;
+              vx_p_src = (Core.Type_string)valsub;
+            } else if (valsub instanceof String) { // default property
+              ischanged = true;
+              vx_p_src = Core.t_string.vx_new(valsub);
+            } else {
+              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msg = Core.vx_msg_from_error("vx/web/html/img", ":invalidkey", msgval);
+              msgblock = msgblock.vx_copy(msg);
+            }
+          }
+        } else {
+          switch (key) {
+          case ":id":
+            if (valsub == vx_p_id) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_id = (Core.Type_string)valsub;
+            } else if (valsub instanceof String) {
+              ischanged = true;
+              vx_p_id = Core.t_string.vx_new(valsub);
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("id"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/img", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":eventmap":
+            if (valsub == vx_p_eventmap) {
+            } else if (valsub instanceof Event.Type_eventmap) {
+              ischanged = true;
+              vx_p_eventmap = (Event.Type_eventmap)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("eventmap"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/img", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":style":
+            if (valsub == vx_p_style) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style = (Html.Type_style)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("style"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/img", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":style-unique":
+            if (valsub == vx_p_style_unique) {
+            } else if (valsub instanceof Html.Type_style) {
+              ischanged = true;
+              vx_p_style_unique = (Html.Type_style)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("style-unique"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/img", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":stylelist":
+            if (valsub == vx_p_stylelist) {
+            } else if (valsub instanceof Html.Type_stylelist) {
+              ischanged = true;
+              vx_p_stylelist = (Html.Type_stylelist)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("stylelist"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/img", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":src":
+            if (valsub == vx_p_src) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_src = (Core.Type_string)valsub;
+            } else if (valsub instanceof String) {
+              ischanged = true;
+              vx_p_src = Core.t_string.vx_new(valsub);
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("src"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/web/html/img", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          default:
+            Core.Type_any msgval = Core.vx_new_string(key);
+            msg = Core.vx_msg_from_error("vx/web/html/img", ":invalidkey", msgval);
+            msgblock = msgblock.vx_copy(msg);
+          }
+          key = "";
+        }
+      }
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_img work = new Class_img();
+        work.vx_p_id = vx_p_id;
+        work.vx_p_eventmap = vx_p_eventmap;
+        work.vx_p_style = vx_p_style;
+        work.vx_p_style_unique = vx_p_style_unique;
+        work.vx_p_stylelist = vx_p_stylelist;
+        work.vx_p_src = vx_p_src;
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
+      }
+      return output;
+    }
+
+    @Override
+    public Type_img vx_empty() {return e_img;}
+    @Override
+    public Type_img vx_type() {return t_img;}
+
+    @Override
+    public Core.Type_typedef vx_typedef() {
+      return Core.typedef_new(
+        "vx/web/html", // pkgname
+        "img", // name
+        ":struct", // extends
+        Core.t_typelist.vx_new(Html.t_node, Html.t_divchild), // traits
+        Core.e_typelist, // allowtypes
+        Core.e_typelist, // disallowtypes
+        Core.e_funclist, // allowfuncs
+        Core.e_funclist, // disallowfuncs
+        Core.e_anylist, // allowvalues
+        Core.e_anylist, // disallowvalues
+        Core.e_argmap // properties
+      );
+    }
+
+  }
+
+  public static final Type_img e_img = new Class_img();
+  public static final Type_img t_img = new Class_img();
+
+  /**
    * type: meta
    * Meta Tag
    * (type meta)
@@ -9010,6 +9366,119 @@ public final class Html {
   }
 
   /**
+   * @function string_from_img_indent
+   * Returns string from img
+   * @param  {img} img
+   * @param  {int} indent
+   * @return {string}
+   * (func string<-img-indent)
+   */
+  public static interface Func_string_from_img_indent extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_string vx_string_from_img_indent(final Html.Type_img img, final Core.Type_int indent);
+  }
+
+  public static class Class_string_from_img_indent extends Core.Class_base implements Func_string_from_img_indent {
+
+    @Override
+    public Func_string_from_img_indent vx_new(Object... vals) {
+      Class_string_from_img_indent output = new Class_string_from_img_indent();
+      return output;
+    }
+
+    @Override
+    public Func_string_from_img_indent vx_copy(Object... vals) {
+      Class_string_from_img_indent output = new Class_string_from_img_indent();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/web/html", // pkgname
+        "string<-img-indent", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_string_from_img_indent vx_empty() {return e_string_from_img_indent;}
+    @Override
+    public Func_string_from_img_indent vx_type() {return t_string_from_img_indent;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Html.Type_img img = Core.f_any_from_any(Html.t_img, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_int indent = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(1)));
+      output = Html.f_string_from_img_indent(img, indent);
+      return output;
+    }
+
+    @Override
+    public Core.Type_string vx_string_from_img_indent(final Html.Type_img img, final Core.Type_int indent) {
+      return Html.f_string_from_img_indent(img, indent);
+    }
+
+  }
+
+  public static final Func_string_from_img_indent e_string_from_img_indent = new Html.Class_string_from_img_indent();
+  public static final Func_string_from_img_indent t_string_from_img_indent = new Html.Class_string_from_img_indent();
+
+  public static Core.Type_string f_string_from_img_indent(final Html.Type_img img, final Core.Type_int indent) {
+    Core.Type_string output = Core.e_string;
+    output = Core.f_let(
+      Core.t_string,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_string sindent = Html.f_string_from_indent(indent);
+        final Core.Type_string ssrc = Html.f_string_from_propname_val(
+          Core.vx_new_string("src"),
+          img.src()
+        );
+        final Core.Type_string sid = Html.f_string_from_propname_val(
+          Core.vx_new_string("id"),
+          img.id()
+        );
+        final Core.Type_string sclass = Html.f_string_from_propstyle_stylelist(
+          img.style(),
+          img.stylelist()
+        );
+        final Core.Type_string sstyle = Html.f_string_from_propstyleunique(
+          img.style_unique()
+        );
+        return Core.f_new(
+          Core.t_string,
+          Core.t_anylist.vx_new(
+            sindent,
+            Core.vx_new_string("<img"),
+            sid,
+            sclass,
+            sstyle,
+            ssrc,
+            Core.vx_new_string(" />")
+          )
+        );
+      })
+    );
+    return output;
+  }
+
+  /**
    * @function string_from_indent
    * Returns a string to do indentation for a given indent count.
    * @param  {int} indent
@@ -9399,6 +9868,15 @@ public final class Html {
           Core.t_any_from_func.vx_fn_new(() -> {
             return Html.f_string_from_footer_indent(
               Core.f_any_from_any(Html.t_footer, node),
+              indent
+            );
+          })
+        ),
+        Core.f_case_1(
+          Html.t_img,
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return Html.f_string_from_img_indent(
+              Core.f_any_from_any(Html.t_img, node),
               indent
             );
           })
@@ -12045,6 +12523,7 @@ public final class Html {
     maptype.put("headchild", Html.t_headchild);
     maptype.put("headchildlist", Html.t_headchildlist);
     maptype.put("html", Html.t_html);
+    maptype.put("img", Html.t_img);
     maptype.put("meta", Html.t_meta);
     maptype.put("node", Html.t_node);
     maptype.put("nodelist", Html.t_nodelist);
@@ -12073,6 +12552,7 @@ public final class Html {
     mapfunc.put("string<-h3-indent", Html.t_string_from_h3_indent);
     mapfunc.put("string<-head-indent", Html.t_string_from_head_indent);
     mapfunc.put("string<-html", Html.t_string_from_html);
+    mapfunc.put("string<-img-indent", Html.t_string_from_img_indent);
     mapfunc.put("string<-indent", Html.t_string_from_indent);
     mapfunc.put("string<-meta-indent", Html.t_string_from_meta_indent);
     mapfunc.put("string<-node-indent", Html.t_string_from_node_indent);

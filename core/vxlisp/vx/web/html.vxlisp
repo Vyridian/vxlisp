@@ -66,6 +66,11 @@
               footer : footer]
  :doc        "Html Tag")
 
+(type img : struct
+ :properties [src : string :default]
+ :traits     [node divchild]
+ :doc "Image Tag")
+
 (type meta : struct
  :properties [charset : string
               name    : string
@@ -316,6 +321,30 @@
          (html :head (head) :body (body))))
  :doc "Returns string from html")
 
+(func string<-img-indent : string
+ [img    : img
+  indent : int]
+ (let
+  [sindent : string := (string<-indent indent)
+   ssrc    : string := (string<-propname-val "src" (:src img))
+   sid     : string := (string<-propname-val "id"  (:id img))
+   sclass  : string := (string<-propstyle-stylelist
+                        (:style img)
+                        (:stylelist img))
+   sstyle  : string := (string<-propstyleunique (:style-unique img))]
+  (string sindent "<img" sid sclass sstyle ssrc " />"))
+ :test (test
+        "<img src=\"test.svg\" />"
+        (string<-img-indent
+         (img :src "test.svg")
+         0))
+       (test
+        "<img id=\"myid\" src=\"test.svg\" />"
+        (string<-img-indent
+         (img :id "myid" :src "test.svg")
+         0))
+ :doc "Returns string from img")
+
 (func string<-indent : string
  [indent : int]
  (if
@@ -374,6 +403,7 @@
   (case h3         (string<-h3-indent         (any<-any node) indent))
   (case head       (string<-head-indent       (any<-any node) indent))
   (case footer     (string<-footer-indent     (any<-any node) indent))
+  (case img        (string<-img-indent        (any<-any node) indent))
   (case meta       (string<-meta-indent       (any<-any node) indent))
   (case p          (string<-p-indent          (any<-any node) indent))
   (case stylesheet (string<-stylesheet-indent (any<-any node) indent))

@@ -89,12 +89,11 @@
               z          : int
               t          : int
               i          : int
-              ispercent  : boolean
-              pointstyle : pointstyle]
+              pointtype : pointtype]
  :doc "Universal Point")
 
-(type pointstyle : struct
- :doc "Universal Point Style")
+(type pointtype : int
+ :doc "Universal Point Scale")
 
 (type style : struct
  :properties [name             : string
@@ -285,6 +284,12 @@
 (const pin-right : pin)
 
 (const pin-top : pin)
+
+(const pointtype-absolute : pointtype)
+
+(const pointtype-relative : pointtype)
+
+(const pointtype-percent : pointtype)
 
 (const styletype-custom : styletype)
 

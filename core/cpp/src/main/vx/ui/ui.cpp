@@ -3032,8 +3032,7 @@ namespace vx_ui_ui {
         this->vx_p_z,
         this->vx_p_t,
         this->vx_p_i,
-        this->vx_p_ispercent,
-        this->vx_p_pointstyle
+        this->vx_p_pointtype
       });
     }
 
@@ -3082,20 +3081,11 @@ namespace vx_ui_ui {
       return output;
     }
 
-    // ispercent()
-    vx_core::Type_boolean Class_point::ispercent() const {
-      vx_core::Type_boolean output = this->vx_p_ispercent;
+    // pointtype()
+    vx_ui_ui::Type_pointtype Class_point::pointtype() const {
+      vx_ui_ui::Type_pointtype output = this->vx_p_pointtype;
       if (!output) {
-        output = vx_core::e_boolean;
-      }
-      return output;
-    }
-
-    // pointstyle()
-    vx_ui_ui::Type_pointstyle Class_point::pointstyle() const {
-      vx_ui_ui::Type_pointstyle output = this->vx_p_pointstyle;
-      if (!output) {
-        output = vx_ui_ui::e_pointstyle;
+        output = vx_ui_ui::e_pointtype;
       }
       return output;
     }
@@ -3115,10 +3105,8 @@ namespace vx_ui_ui {
         output = this->t();
       } else if (skey == ":i") {
         output = this->i();
-      } else if (skey == ":ispercent") {
-        output = this->ispercent();
-      } else if (skey == ":pointstyle") {
-        output = this->pointstyle();
+      } else if (skey == ":pointtype") {
+        output = this->pointtype();
       }
       vx_core::vx_release_except(key, output);
       return output;
@@ -3132,8 +3120,7 @@ namespace vx_ui_ui {
       output[":z"] = this->z();
       output[":t"] = this->t();
       output[":i"] = this->i();
-      output[":ispercent"] = this->ispercent();
-      output[":pointstyle"] = this->pointstyle();
+      output[":pointtype"] = this->pointtype();
       return output;
     }
 
@@ -3155,8 +3142,7 @@ namespace vx_ui_ui {
       vx_core::Type_int vx_p_z = val->z();
       vx_core::Type_int vx_p_t = val->t();
       vx_core::Type_int vx_p_i = val->i();
-      vx_core::Type_boolean vx_p_ispercent = val->ispercent();
-      vx_ui_ui::Type_pointstyle vx_p_pointstyle = val->pointstyle();
+      vx_ui_ui::Type_pointtype vx_p_pointtype = val->pointtype();
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -3181,9 +3167,7 @@ namespace vx_ui_ui {
             key = testkey;
           } else if (testkey == ":i") {
             key = testkey;
-          } else if (testkey == ":ispercent") {
-            key = testkey;
-          } else if (testkey == ":pointstyle") {
+          } else if (testkey == ":pointtype") {
             key = testkey;
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new point) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
@@ -3236,22 +3220,13 @@ namespace vx_ui_ui {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new point :i " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
-          } else if (key == ":ispercent") {
-            if (vx_p_ispercent == valsub) {
-            } else if (valsubtype == vx_core::t_boolean) {
+          } else if (key == ":pointtype") {
+            if (vx_p_pointtype == valsub) {
+            } else if (valsubtype == vx_ui_ui::t_pointtype) {
               ischanged = true;
-              vx_p_ispercent = vx_core::vx_any_from_any(vx_core::t_boolean, valsub);
+              vx_p_pointtype = vx_core::vx_any_from_any(vx_ui_ui::t_pointtype, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new point :ispercent " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
-              msgblock = vx_core::vx_copy(msgblock, {msg});
-            }
-          } else if (key == ":pointstyle") {
-            if (vx_p_pointstyle == valsub) {
-            } else if (valsubtype == vx_ui_ui::t_pointstyle) {
-              ischanged = true;
-              vx_p_pointstyle = vx_core::vx_any_from_any(vx_ui_ui::t_pointstyle, valsub);
-            } else {
-              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new point :pointstyle " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new point :pointtype " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else {
@@ -3298,19 +3273,12 @@ namespace vx_ui_ui {
           output->vx_p_i = vx_p_i;
           vx_core::vx_reserve(vx_p_i);
         }
-        if (output->vx_p_ispercent != vx_p_ispercent) {
-          if (output->vx_p_ispercent) {
-            vx_core::vx_release_one(output->vx_p_ispercent);
+        if (output->vx_p_pointtype != vx_p_pointtype) {
+          if (output->vx_p_pointtype) {
+            vx_core::vx_release_one(output->vx_p_pointtype);
           }
-          output->vx_p_ispercent = vx_p_ispercent;
-          vx_core::vx_reserve(vx_p_ispercent);
-        }
-        if (output->vx_p_pointstyle != vx_p_pointstyle) {
-          if (output->vx_p_pointstyle) {
-            vx_core::vx_release_one(output->vx_p_pointstyle);
-          }
-          output->vx_p_pointstyle = vx_p_pointstyle;
-          vx_core::vx_reserve(vx_p_pointstyle);
+          output->vx_p_pointtype = vx_p_pointtype;
+          vx_core::vx_reserve(vx_p_pointtype);
         }
       }
       if (msgblock != vx_core::e_msgblock) {
@@ -3361,12 +3329,8 @@ namespace vx_ui_ui {
             vx_core::t_int // type
           ),
           vx_core::vx_new_arg(
-            "ispercent", // name
-            vx_core::t_boolean // type
-          ),
-          vx_core::vx_new_arg(
-            "pointstyle", // name
-            vx_ui_ui::t_pointstyle // type
+            "pointtype", // name
+            vx_ui_ui::t_pointtype // type
           )
         }) // properties
       );
@@ -3378,72 +3342,46 @@ namespace vx_ui_ui {
 
   //}
 
-  // (type pointstyle)
-  // class Class_pointstyle {
-    Abstract_pointstyle::~Abstract_pointstyle() {}
+  // (type pointtype)
+  // class Class_pointtype {
+    Abstract_pointtype::~Abstract_pointtype() {}
 
-    Class_pointstyle::Class_pointstyle() : Abstract_pointstyle::Abstract_pointstyle() {
+    Class_pointtype::Class_pointtype() : Abstract_pointtype::Abstract_pointtype() {
       vx_core::refcount += 1;
     }
 
-    Class_pointstyle::~Class_pointstyle() {
+    Class_pointtype::~Class_pointtype() {
       vx_core::refcount -= 1;
       if (this->vx_p_msgblock) {
         vx_core::vx_release_one(this->vx_p_msgblock);
       }
-      vx_core::vx_release_one({
-        
-      });
     }
 
-    // vx_get_any(key)
-    vx_core::Type_any Class_pointstyle::vx_get_any(vx_core::Type_string key) const {
-      vx_core::Type_any output = vx_core::e_any;
-      std::string skey = key->vx_string();
-      if (false) {
-      }
-      vx_core::vx_release_except(key, output);
-      return output;
+    vx_core::Type_any Class_pointtype::vx_new(vx_core::vx_Type_listany vals) const {
+      return this->vx_copy(vx_ui_ui::e_pointtype, vals);
     }
 
-    // vx_map()
-    vx_core::vx_Type_mapany Class_pointstyle::vx_map() const {
-      vx_core::vx_Type_mapany output;
-      return output;
-    }
-
-    vx_core::Type_any Class_pointstyle::vx_new(vx_core::vx_Type_listany vals) const {
-      return this->vx_copy(vx_ui_ui::e_pointstyle, vals);
-    }
-
-    vx_core::Type_any Class_pointstyle::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_ui_ui::Type_pointstyle output = vx_ui_ui::e_pointstyle;
+    vx_core::Type_any Class_pointtype::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_ui_ui::Type_pointtype output = vx_ui_ui::e_pointtype;
       bool ischanged = false;
       if (copyval->vx_p_constdef != NULL) {
         ischanged = true;
-      }
-      vx_ui_ui::Type_pointstyle val = vx_core::vx_any_from_any(vx_ui_ui::t_pointstyle, copyval);
-      output = val;
-      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
-      if (msgblock != vx_core::e_msgblock) {
-        output->vx_p_msgblock = msgblock;
-        vx_core::vx_reserve(msgblock);
       }
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
       return output;
     }
 
-    vx_core::Type_msgblock Class_pointstyle::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany vx_ui_ui::Class_pointstyle::vx_dispose() {return vx_core::emptylistany;}
-    vx_core::Type_any Class_pointstyle::vx_empty() const {return vx_ui_ui::e_pointstyle;}
-    vx_core::Type_any Class_pointstyle::vx_type() const {return vx_ui_ui::t_pointstyle;}
+    vx_core::Type_msgblock Class_pointtype::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany vx_ui_ui::Class_pointtype::vx_dispose() {return vx_core::emptylistany;}
+    vx_core::Type_any Class_pointtype::vx_empty() const {return vx_ui_ui::e_pointtype;}
+    vx_core::Type_any Class_pointtype::vx_type() const {return vx_ui_ui::t_pointtype;}
 
-    vx_core::Type_typedef Class_pointstyle::vx_typedef() const {
+    vx_core::Type_typedef Class_pointtype::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/ui/ui", // pkgname
-        "pointstyle", // name
-        ":struct", // extends
+        "pointtype", // name
+        ":int", // extends
         vx_core::e_typelist, // traits
         vx_core::e_typelist, // allowtypes
         vx_core::e_typelist, // disallowtypes
@@ -3456,7 +3394,7 @@ namespace vx_ui_ui {
       return output;
     }
 
-    vx_core::Type_constdef Class_pointstyle::vx_constdef() const {return this->vx_p_constdef;}
+    vx_core::Type_constdef Class_pointtype::vx_constdef() const {return this->vx_p_constdef;}
 
 
   //}
@@ -6623,6 +6561,39 @@ namespace vx_ui_ui {
     // vx_const_new()
     void vx_ui_ui::Class_pin_top::vx_const_new(vx_ui_ui::Const_pin_top output) {
       output->vx_p_constdef = vx_core::vx_constdef_new("vx/ui/ui", "pin-top");
+      vx_core::vx_reserve_type(output);
+    }
+
+
+  //}
+
+  // (const pointtype-absolute)
+  // class Class_pointtype_absolute {
+    // vx_const_new()
+    void vx_ui_ui::Class_pointtype_absolute::vx_const_new(vx_ui_ui::Const_pointtype_absolute output) {
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/ui/ui", "pointtype-absolute");
+      vx_core::vx_reserve_type(output);
+    }
+
+
+  //}
+
+  // (const pointtype-percent)
+  // class Class_pointtype_percent {
+    // vx_const_new()
+    void vx_ui_ui::Class_pointtype_percent::vx_const_new(vx_ui_ui::Const_pointtype_percent output) {
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/ui/ui", "pointtype-percent");
+      vx_core::vx_reserve_type(output);
+    }
+
+
+  //}
+
+  // (const pointtype-relative)
+  // class Class_pointtype_relative {
+    // vx_const_new()
+    void vx_ui_ui::Class_pointtype_relative::vx_const_new(vx_ui_ui::Const_pointtype_relative output) {
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/ui/ui", "pointtype-relative");
       vx_core::vx_reserve_type(output);
     }
 
@@ -10957,8 +10928,8 @@ namespace vx_ui_ui {
   vx_ui_ui::Type_pin t_pin = NULL;
   vx_ui_ui::Type_point e_point = NULL;
   vx_ui_ui::Type_point t_point = NULL;
-  vx_ui_ui::Type_pointstyle e_pointstyle = NULL;
-  vx_ui_ui::Type_pointstyle t_pointstyle = NULL;
+  vx_ui_ui::Type_pointtype e_pointtype = NULL;
+  vx_ui_ui::Type_pointtype t_pointtype = NULL;
   vx_ui_ui::Type_style e_style = NULL;
   vx_ui_ui::Type_style t_style = NULL;
   vx_ui_ui::Type_stylelist e_stylelist = NULL;
@@ -11012,6 +10983,9 @@ namespace vx_ui_ui {
   vx_ui_ui::Const_pin_left c_pin_left = NULL;
   vx_ui_ui::Const_pin_right c_pin_right = NULL;
   vx_ui_ui::Const_pin_top c_pin_top = NULL;
+  vx_ui_ui::Const_pointtype_absolute c_pointtype_absolute = NULL;
+  vx_ui_ui::Const_pointtype_percent c_pointtype_percent = NULL;
+  vx_ui_ui::Const_pointtype_relative c_pointtype_relative = NULL;
   vx_ui_ui::Const_styletype_custom c_styletype_custom = NULL;
   vx_ui_ui::Const_styletype_shared c_styletype_shared = NULL;
   vx_ui_ui::Const_styletype_system c_styletype_system = NULL;
@@ -11136,6 +11110,9 @@ namespace vx_ui_ui {
       vx_ui_ui::c_pin_left = new vx_ui_ui::Class_pin_left();
       vx_ui_ui::c_pin_right = new vx_ui_ui::Class_pin_right();
       vx_ui_ui::c_pin_top = new vx_ui_ui::Class_pin_top();
+      vx_ui_ui::c_pointtype_absolute = new vx_ui_ui::Class_pointtype_absolute();
+      vx_ui_ui::c_pointtype_percent = new vx_ui_ui::Class_pointtype_percent();
+      vx_ui_ui::c_pointtype_relative = new vx_ui_ui::Class_pointtype_relative();
       vx_ui_ui::c_styletype_custom = new vx_ui_ui::Class_styletype_custom();
       vx_ui_ui::c_styletype_shared = new vx_ui_ui::Class_styletype_shared();
       vx_ui_ui::c_styletype_system = new vx_ui_ui::Class_styletype_system();
@@ -11211,10 +11188,10 @@ namespace vx_ui_ui {
       vx_core::vx_reserve_empty(vx_ui_ui::e_point);
       vx_ui_ui::t_point = new Class_point();
       vx_core::vx_reserve_type(vx_ui_ui::t_point);
-      vx_ui_ui::e_pointstyle = new Class_pointstyle();
-      vx_core::vx_reserve_empty(vx_ui_ui::e_pointstyle);
-      vx_ui_ui::t_pointstyle = new Class_pointstyle();
-      vx_core::vx_reserve_type(vx_ui_ui::t_pointstyle);
+      vx_ui_ui::e_pointtype = new Class_pointtype();
+      vx_core::vx_reserve_empty(vx_ui_ui::e_pointtype);
+      vx_ui_ui::t_pointtype = new Class_pointtype();
+      vx_core::vx_reserve_type(vx_ui_ui::t_pointtype);
       vx_ui_ui::e_style = new Class_style();
       vx_core::vx_reserve_empty(vx_ui_ui::e_style);
       vx_ui_ui::t_style = new Class_style();
@@ -11446,6 +11423,9 @@ namespace vx_ui_ui {
       vx_ui_ui::Class_pin_left::vx_const_new(vx_ui_ui::c_pin_left);
       vx_ui_ui::Class_pin_right::vx_const_new(vx_ui_ui::c_pin_right);
       vx_ui_ui::Class_pin_top::vx_const_new(vx_ui_ui::c_pin_top);
+      vx_ui_ui::Class_pointtype_absolute::vx_const_new(vx_ui_ui::c_pointtype_absolute);
+      vx_ui_ui::Class_pointtype_percent::vx_const_new(vx_ui_ui::c_pointtype_percent);
+      vx_ui_ui::Class_pointtype_relative::vx_const_new(vx_ui_ui::c_pointtype_relative);
       vx_ui_ui::Class_styletype_custom::vx_const_new(vx_ui_ui::c_styletype_custom);
       vx_ui_ui::Class_styletype_shared::vx_const_new(vx_ui_ui::c_styletype_shared);
       vx_ui_ui::Class_styletype_system::vx_const_new(vx_ui_ui::c_styletype_system);
@@ -11471,7 +11451,7 @@ namespace vx_ui_ui {
       maptype["layoutmap"] = vx_ui_ui::t_layoutmap;
       maptype["pin"] = vx_ui_ui::t_pin;
       maptype["point"] = vx_ui_ui::t_point;
-      maptype["pointstyle"] = vx_ui_ui::t_pointstyle;
+      maptype["pointtype"] = vx_ui_ui::t_pointtype;
       maptype["style"] = vx_ui_ui::t_style;
       maptype["stylelist"] = vx_ui_ui::t_stylelist;
       maptype["stylemap"] = vx_ui_ui::t_stylemap;
@@ -11516,6 +11496,9 @@ namespace vx_ui_ui {
       mapconst["pin-left"] = vx_ui_ui::c_pin_left;
       mapconst["pin-right"] = vx_ui_ui::c_pin_right;
       mapconst["pin-top"] = vx_ui_ui::c_pin_top;
+      mapconst["pointtype-absolute"] = vx_ui_ui::c_pointtype_absolute;
+      mapconst["pointtype-percent"] = vx_ui_ui::c_pointtype_percent;
+      mapconst["pointtype-relative"] = vx_ui_ui::c_pointtype_relative;
       mapconst["styletype-custom"] = vx_ui_ui::c_styletype_custom;
       mapconst["styletype-shared"] = vx_ui_ui::c_styletype_shared;
       mapconst["styletype-system"] = vx_ui_ui::c_styletype_system;
