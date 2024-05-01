@@ -356,6 +356,10 @@ namespace vx_ui_ui {
   typedef Abstract_ui_render_from_ui_orig_parent* Func_ui_render_from_ui_orig_parent;
   extern Func_ui_render_from_ui_orig_parent e_ui_render_from_ui_orig_parent;
   extern Func_ui_render_from_ui_orig_parent t_ui_render_from_ui_orig_parent;
+  class Abstract_ui_render_from_ui_parent_selected;
+  typedef Abstract_ui_render_from_ui_parent_selected* Func_ui_render_from_ui_parent_selected;
+  extern Func_ui_render_from_ui_parent_selected e_ui_render_from_ui_parent_selected;
+  extern Func_ui_render_from_ui_parent_selected t_ui_render_from_ui_parent_selected;
   class Abstract_ui_selected_from_ui;
   typedef Abstract_ui_selected_from_ui* Func_ui_selected_from_ui;
   extern Func_ui_selected_from_ui e_ui_selected_from_ui;
@@ -372,6 +376,10 @@ namespace vx_ui_ui {
   typedef Abstract_ui_from_layout_ui_orig_parent* Func_ui_from_layout_ui_orig_parent;
   extern Func_ui_from_layout_ui_orig_parent e_ui_from_layout_ui_orig_parent;
   extern Func_ui_from_layout_ui_orig_parent t_ui_from_layout_ui_orig_parent;
+  class Abstract_ui_from_ui_selected;
+  typedef Abstract_ui_from_ui_selected* Func_ui_from_ui_selected;
+  extern Func_ui_from_ui_selected e_ui_from_ui_selected;
+  extern Func_ui_from_ui_selected t_ui_from_ui_selected;
   class Abstract_uid_selected_from_ui;
   typedef Abstract_uid_selected_from_ui* Func_uid_selected_from_ui;
   extern Func_uid_selected_from_ui e_uid_selected_from_ui;
@@ -489,6 +497,9 @@ namespace vx_ui_ui {
   // (func ui-render<-ui-orig-parent)
   vx_ui_ui::Type_ui f_ui_render_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent);
 
+  // (func ui-render<-ui-parent-selected)
+  vx_ui_ui::Type_ui f_ui_render_from_ui_parent_selected(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui parent, vx_core::Type_int selected);
+
   // (func ui-selected<-ui)
   vx_ui_ui::Type_ui f_ui_selected_from_ui(vx_ui_ui::Type_ui ui);
 
@@ -500,6 +511,9 @@ namespace vx_ui_ui {
 
   // (func ui<-layout-ui-orig-parent)
   vx_ui_ui::Type_ui f_ui_from_layout_ui_orig_parent(vx_ui_ui::Type_layout layout, vx_ui_ui::Type_ui uiarg, vx_ui_ui::Type_ui uiorig, vx_ui_ui::Type_ui parent);
+
+  // (func ui<-ui-selected)
+  vx_ui_ui::Type_ui f_ui_from_ui_selected(vx_ui_ui::Type_ui ui, vx_core::Type_int selected);
 
   // (func uid-selected<-ui)
   vx_core::Type_string f_uid_selected_from_ui(vx_ui_ui::Type_ui ui);
@@ -1214,6 +1228,12 @@ namespace vx_ui_ui {
     // color-background()
     vx_core::Type_string vx_p_color_background = NULL;
     virtual vx_core::Type_string color_background() const = 0;
+    // color-border()
+    vx_core::Type_string vx_p_color_border = NULL;
+    virtual vx_core::Type_string color_border() const = 0;
+    // color-font()
+    vx_core::Type_string vx_p_color_font = NULL;
+    virtual vx_core::Type_string color_font() const = 0;
     // color-hoverbkgrd()
     vx_core::Type_string vx_p_color_hoverbkgrd = NULL;
     virtual vx_core::Type_string color_hoverbkgrd() const = 0;
@@ -1247,6 +1267,12 @@ namespace vx_ui_ui {
     // pointsize()
     vx_ui_ui::Type_point vx_p_pointsize = NULL;
     virtual vx_ui_ui::Type_point pointsize() const = 0;
+    // scroll-x()
+    vx_core::Type_boolean vx_p_scroll_x = NULL;
+    virtual vx_core::Type_boolean scroll_x() const = 0;
+    // scroll-y()
+    vx_core::Type_boolean vx_p_scroll_y = NULL;
+    virtual vx_core::Type_boolean scroll_y() const = 0;
   };
   class Class_style : public virtual Abstract_style {
   public:
@@ -1267,6 +1293,8 @@ namespace vx_ui_ui {
     virtual vx_ui_ui::Type_bounds boundsmargin() const override;
     virtual vx_ui_ui::Type_bounds boundspadding() const override;
     virtual vx_core::Type_string color_background() const override;
+    virtual vx_core::Type_string color_border() const override;
+    virtual vx_core::Type_string color_font() const override;
     virtual vx_core::Type_string color_hoverbkgrd() const override;
     virtual vx_ui_ui::Type_cursor cursor() const override;
     virtual vx_ui_ui::Type_font font() const override;
@@ -1278,6 +1306,8 @@ namespace vx_ui_ui {
     virtual vx_ui_ui::Type_point pointpos() const override;
     virtual vx_ui_ui::Type_point pointrotate() const override;
     virtual vx_ui_ui::Type_point pointsize() const override;
+    virtual vx_core::Type_boolean scroll_x() const override;
+    virtual vx_core::Type_boolean scroll_y() const override;
   };
 
   // (type stylelist)
@@ -2539,6 +2569,29 @@ namespace vx_ui_ui {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
+  // (func ui-render<-ui-parent-selected)
+  class Abstract_ui_render_from_ui_parent_selected : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_ui_render_from_ui_parent_selected() {};
+    virtual ~Abstract_ui_render_from_ui_parent_selected() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_ui_render_from_ui_parent_selected : public virtual Abstract_ui_render_from_ui_parent_selected {
+  public:
+    Class_ui_render_from_ui_parent_selected();
+    virtual ~Class_ui_render_from_ui_parent_selected() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
   // (func ui-selected<-ui)
   class Abstract_ui_selected_from_ui : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
   public:
@@ -2623,6 +2676,29 @@ namespace vx_ui_ui {
   public:
     Class_ui_from_layout_ui_orig_parent();
     virtual ~Class_ui_from_layout_ui_orig_parent() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func ui<-ui-selected)
+  class Abstract_ui_from_ui_selected : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_ui_from_ui_selected() {};
+    virtual ~Abstract_ui_from_ui_selected() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_ui_from_ui_selected : public virtual Abstract_ui_from_ui_selected {
+  public:
+    Class_ui_from_ui_selected();
+    virtual ~Class_ui_from_ui_selected() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;

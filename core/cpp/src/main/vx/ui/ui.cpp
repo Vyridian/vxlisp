@@ -3418,6 +3418,8 @@ namespace vx_ui_ui {
         this->vx_p_boundsmargin,
         this->vx_p_boundspadding,
         this->vx_p_color_background,
+        this->vx_p_color_border,
+        this->vx_p_color_font,
         this->vx_p_color_hoverbkgrd,
         this->vx_p_cursor,
         this->vx_p_font,
@@ -3428,7 +3430,9 @@ namespace vx_ui_ui {
         this->vx_p_pin,
         this->vx_p_pointpos,
         this->vx_p_pointrotate,
-        this->vx_p_pointsize
+        this->vx_p_pointsize,
+        this->vx_p_scroll_x,
+        this->vx_p_scroll_y
       });
     }
 
@@ -3471,6 +3475,24 @@ namespace vx_ui_ui {
     // color_background()
     vx_core::Type_string Class_style::color_background() const {
       vx_core::Type_string output = this->vx_p_color_background;
+      if (!output) {
+        output = vx_core::e_string;
+      }
+      return output;
+    }
+
+    // color_border()
+    vx_core::Type_string Class_style::color_border() const {
+      vx_core::Type_string output = this->vx_p_color_border;
+      if (!output) {
+        output = vx_core::e_string;
+      }
+      return output;
+    }
+
+    // color_font()
+    vx_core::Type_string Class_style::color_font() const {
+      vx_core::Type_string output = this->vx_p_color_font;
       if (!output) {
         output = vx_core::e_string;
       }
@@ -3576,6 +3598,24 @@ namespace vx_ui_ui {
       return output;
     }
 
+    // scroll_x()
+    vx_core::Type_boolean Class_style::scroll_x() const {
+      vx_core::Type_boolean output = this->vx_p_scroll_x;
+      if (!output) {
+        output = vx_core::e_boolean;
+      }
+      return output;
+    }
+
+    // scroll_y()
+    vx_core::Type_boolean Class_style::scroll_y() const {
+      vx_core::Type_boolean output = this->vx_p_scroll_y;
+      if (!output) {
+        output = vx_core::e_boolean;
+      }
+      return output;
+    }
+
     // vx_get_any(key)
     vx_core::Type_any Class_style::vx_get_any(vx_core::Type_string key) const {
       vx_core::Type_any output = vx_core::e_any;
@@ -3591,6 +3631,10 @@ namespace vx_ui_ui {
         output = this->boundspadding();
       } else if (skey == ":color-background") {
         output = this->color_background();
+      } else if (skey == ":color-border") {
+        output = this->color_border();
+      } else if (skey == ":color-font") {
+        output = this->color_font();
       } else if (skey == ":color-hoverbkgrd") {
         output = this->color_hoverbkgrd();
       } else if (skey == ":cursor") {
@@ -3613,6 +3657,10 @@ namespace vx_ui_ui {
         output = this->pointrotate();
       } else if (skey == ":pointsize") {
         output = this->pointsize();
+      } else if (skey == ":scroll-x") {
+        output = this->scroll_x();
+      } else if (skey == ":scroll-y") {
+        output = this->scroll_y();
       }
       vx_core::vx_release_except(key, output);
       return output;
@@ -3626,6 +3674,8 @@ namespace vx_ui_ui {
       output[":boundsmargin"] = this->boundsmargin();
       output[":boundspadding"] = this->boundspadding();
       output[":color-background"] = this->color_background();
+      output[":color-border"] = this->color_border();
+      output[":color-font"] = this->color_font();
       output[":color-hoverbkgrd"] = this->color_hoverbkgrd();
       output[":cursor"] = this->cursor();
       output[":font"] = this->font();
@@ -3637,6 +3687,8 @@ namespace vx_ui_ui {
       output[":pointpos"] = this->pointpos();
       output[":pointrotate"] = this->pointrotate();
       output[":pointsize"] = this->pointsize();
+      output[":scroll-x"] = this->scroll_x();
+      output[":scroll-y"] = this->scroll_y();
       return output;
     }
 
@@ -3658,6 +3710,8 @@ namespace vx_ui_ui {
       vx_ui_ui::Type_bounds vx_p_boundsmargin = val->boundsmargin();
       vx_ui_ui::Type_bounds vx_p_boundspadding = val->boundspadding();
       vx_core::Type_string vx_p_color_background = val->color_background();
+      vx_core::Type_string vx_p_color_border = val->color_border();
+      vx_core::Type_string vx_p_color_font = val->color_font();
       vx_core::Type_string vx_p_color_hoverbkgrd = val->color_hoverbkgrd();
       vx_ui_ui::Type_cursor vx_p_cursor = val->cursor();
       vx_ui_ui::Type_font vx_p_font = val->font();
@@ -3669,6 +3723,8 @@ namespace vx_ui_ui {
       vx_ui_ui::Type_point vx_p_pointpos = val->pointpos();
       vx_ui_ui::Type_point vx_p_pointrotate = val->pointrotate();
       vx_ui_ui::Type_point vx_p_pointsize = val->pointsize();
+      vx_core::Type_boolean vx_p_scroll_x = val->scroll_x();
+      vx_core::Type_boolean vx_p_scroll_y = val->scroll_y();
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
         vx_core::Type_any valsubtype = valsub->vx_type();
@@ -3693,6 +3749,10 @@ namespace vx_ui_ui {
             key = testkey;
           } else if (testkey == ":color-background") {
             key = testkey;
+          } else if (testkey == ":color-border") {
+            key = testkey;
+          } else if (testkey == ":color-font") {
+            key = testkey;
           } else if (testkey == ":color-hoverbkgrd") {
             key = testkey;
           } else if (testkey == ":cursor") {
@@ -3714,6 +3774,10 @@ namespace vx_ui_ui {
           } else if (testkey == ":pointrotate") {
             key = testkey;
           } else if (testkey == ":pointsize") {
+            key = testkey;
+          } else if (testkey == ":scroll-x") {
+            key = testkey;
+          } else if (testkey == ":scroll-y") {
             key = testkey;
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style) - Invalid Key Type: " + vx_core::vx_string_from_any(valsub));
@@ -3764,6 +3828,24 @@ namespace vx_ui_ui {
               vx_p_color_background = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :color-background " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              msgblock = vx_core::vx_copy(msgblock, {msg});
+            }
+          } else if (key == ":color-border") {
+            if (vx_p_color_border == valsub) {
+            } else if (valsubtype == vx_core::t_string) {
+              ischanged = true;
+              vx_p_color_border = vx_core::vx_any_from_any(vx_core::t_string, valsub);
+            } else {
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :color-border " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              msgblock = vx_core::vx_copy(msgblock, {msg});
+            }
+          } else if (key == ":color-font") {
+            if (vx_p_color_font == valsub) {
+            } else if (valsubtype == vx_core::t_string) {
+              ischanged = true;
+              vx_p_color_font = vx_core::vx_any_from_any(vx_core::t_string, valsub);
+            } else {
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :color-font " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":color-hoverbkgrd") {
@@ -3865,6 +3947,24 @@ namespace vx_ui_ui {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :pointsize " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
+          } else if (key == ":scroll-x") {
+            if (vx_p_scroll_x == valsub) {
+            } else if (valsubtype == vx_core::t_boolean) {
+              ischanged = true;
+              vx_p_scroll_x = vx_core::vx_any_from_any(vx_core::t_boolean, valsub);
+            } else {
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :scroll-x " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              msgblock = vx_core::vx_copy(msgblock, {msg});
+            }
+          } else if (key == ":scroll-y") {
+            if (vx_p_scroll_y == valsub) {
+            } else if (valsubtype == vx_core::t_boolean) {
+              ischanged = true;
+              vx_p_scroll_y = vx_core::vx_any_from_any(vx_core::t_boolean, valsub);
+            } else {
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :scroll-y " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              msgblock = vx_core::vx_copy(msgblock, {msg});
+            }
           } else {
             vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style) - Invalid Key: " + key);
             msgblock = vx_core::vx_copy(msgblock, {msg});
@@ -3908,6 +4008,20 @@ namespace vx_ui_ui {
           }
           output->vx_p_color_background = vx_p_color_background;
           vx_core::vx_reserve(vx_p_color_background);
+        }
+        if (output->vx_p_color_border != vx_p_color_border) {
+          if (output->vx_p_color_border) {
+            vx_core::vx_release_one(output->vx_p_color_border);
+          }
+          output->vx_p_color_border = vx_p_color_border;
+          vx_core::vx_reserve(vx_p_color_border);
+        }
+        if (output->vx_p_color_font != vx_p_color_font) {
+          if (output->vx_p_color_font) {
+            vx_core::vx_release_one(output->vx_p_color_font);
+          }
+          output->vx_p_color_font = vx_p_color_font;
+          vx_core::vx_reserve(vx_p_color_font);
         }
         if (output->vx_p_color_hoverbkgrd != vx_p_color_hoverbkgrd) {
           if (output->vx_p_color_hoverbkgrd) {
@@ -3986,6 +4100,20 @@ namespace vx_ui_ui {
           output->vx_p_pointsize = vx_p_pointsize;
           vx_core::vx_reserve(vx_p_pointsize);
         }
+        if (output->vx_p_scroll_x != vx_p_scroll_x) {
+          if (output->vx_p_scroll_x) {
+            vx_core::vx_release_one(output->vx_p_scroll_x);
+          }
+          output->vx_p_scroll_x = vx_p_scroll_x;
+          vx_core::vx_reserve(vx_p_scroll_x);
+        }
+        if (output->vx_p_scroll_y != vx_p_scroll_y) {
+          if (output->vx_p_scroll_y) {
+            vx_core::vx_release_one(output->vx_p_scroll_y);
+          }
+          output->vx_p_scroll_y = vx_p_scroll_y;
+          vx_core::vx_reserve(vx_p_scroll_y);
+        }
       }
       if (msgblock != vx_core::e_msgblock) {
         output->vx_p_msgblock = msgblock;
@@ -4035,6 +4163,14 @@ namespace vx_ui_ui {
             vx_core::t_string // type
           ),
           vx_core::vx_new_arg(
+            "color-border", // name
+            vx_core::t_string // type
+          ),
+          vx_core::vx_new_arg(
+            "color-font", // name
+            vx_core::t_string // type
+          ),
+          vx_core::vx_new_arg(
             "color-hoverbkgrd", // name
             vx_core::t_string // type
           ),
@@ -4077,6 +4213,14 @@ namespace vx_ui_ui {
           vx_core::vx_new_arg(
             "pointsize", // name
             vx_ui_ui::t_point // type
+          ),
+          vx_core::vx_new_arg(
+            "scroll-x", // name
+            vx_core::t_boolean // type
+          ),
+          vx_core::vx_new_arg(
+            "scroll-y", // name
+            vx_core::t_boolean // type
           )
         }) // properties
       );
@@ -7821,6 +7965,7 @@ namespace vx_ui_ui {
   }
   /**
    * @function string_selected_from_ui
+   * Return the uid of the ui with selected=true
    * @param  {ui} ui
    * @return {string}
    * (func string-selected<-ui)
@@ -8054,7 +8199,7 @@ namespace vx_ui_ui {
   }
   /**
    * @function stringlist_from_ui
-   * Return a list of uid of the ui with selected=true
+   * Return a list of uid of the ui
    * @param  {ui} ui
    * @return {stringlist}
    * (func stringlist<-ui)
@@ -9505,6 +9650,109 @@ namespace vx_ui_ui {
 
   //}
 
+  // (func ui-render<-ui-parent-selected)
+  vx_ui_ui::Type_ui f_ui_render_from_ui_parent_selected(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui parent, vx_core::Type_int selected) {
+    vx_ui_ui::Type_ui output = vx_ui_ui::e_ui;
+    vx_core::vx_reserve({ui, parent, selected});
+    output = vx_core::f_let(
+      vx_ui_ui::t_ui,
+      vx_core::t_any_from_func->vx_fn_new({ui, selected, parent}, [ui, selected, parent]() {
+        vx_ui_ui::Type_ui uichg = vx_ui_ui::f_ui_from_ui_selected(ui, selected);
+        vx_core::vx_ref_plus(uichg);
+        vx_ui_ui::Type_uimap childmap = uichg->uimap();
+        vx_core::vx_ref_plus(childmap);
+        vx_ui_ui::Type_ui output_1 = vx_ui_ui::f_ui_render_from_ui_orig_parent(uichg, ui, parent);
+        vx_core::vx_release_one_except({uichg, childmap}, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except({ui, parent, selected}, output);
+    return output;
+  }
+  /**
+   * @function ui_render_from_ui_parent_selected
+   * Return a ui after changing selected item and writing it.
+   * @param  {ui} ui
+   * @param  {ui} parent
+   * @param  {int} selected
+   * @return {ui}
+   * (func ui-render<-ui-parent-selected)
+   */
+  // (func ui-render<-ui-parent-selected)
+  // class Class_ui_render_from_ui_parent_selected {
+    Abstract_ui_render_from_ui_parent_selected::~Abstract_ui_render_from_ui_parent_selected() {}
+
+    Class_ui_render_from_ui_parent_selected::Class_ui_render_from_ui_parent_selected() : Abstract_ui_render_from_ui_parent_selected::Abstract_ui_render_from_ui_parent_selected() {
+      vx_core::refcount += 1;
+    }
+
+    Class_ui_render_from_ui_parent_selected::~Class_ui_render_from_ui_parent_selected() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_ui_render_from_ui_parent_selected::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_ui_ui::Func_ui_render_from_ui_parent_selected output = vx_ui_ui::e_ui_render_from_ui_parent_selected;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_ui_render_from_ui_parent_selected::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_ui_ui::Func_ui_render_from_ui_parent_selected output = vx_ui_ui::e_ui_render_from_ui_parent_selected;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_ui_render_from_ui_parent_selected::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/ui/ui", // pkgname
+        "ui-render<-ui-parent-selected", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_ui_render_from_ui_parent_selected::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_ui_render_from_ui_parent_selected::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/ui/ui", // pkgname
+        "ui-render<-ui-parent-selected", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_ui_render_from_ui_parent_selected::vx_empty() const {return vx_ui_ui::e_ui_render_from_ui_parent_selected;}
+    vx_core::Type_any Class_ui_render_from_ui_parent_selected::vx_type() const {return vx_ui_ui::t_ui_render_from_ui_parent_selected;}
+    vx_core::Type_msgblock Class_ui_render_from_ui_parent_selected::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_ui_render_from_ui_parent_selected::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_ui_render_from_ui_parent_selected::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_ui_ui::Type_ui ui = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_ui_ui::Type_ui parent = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      vx_core::Type_int selected = vx_core::vx_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::vx_new_int(2)));
+      output = vx_ui_ui::f_ui_render_from_ui_parent_selected(ui, parent, selected);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func ui-selected<-ui)
   vx_ui_ui::Type_ui f_ui_selected_from_ui(vx_ui_ui::Type_ui ui) {
     vx_ui_ui::Type_ui output = vx_ui_ui::e_ui;
@@ -9932,6 +10180,182 @@ namespace vx_ui_ui {
 
   //}
 
+  // (func ui<-ui-selected)
+  vx_ui_ui::Type_ui f_ui_from_ui_selected(vx_ui_ui::Type_ui ui, vx_core::Type_int selected) {
+    vx_ui_ui::Type_ui output = vx_ui_ui::e_ui;
+    vx_core::vx_reserve({ui, selected});
+    output = vx_core::f_if_2(
+      vx_ui_ui::t_ui,
+      vx_core::vx_new(vx_core::t_thenelselist, {
+        vx_core::f_then(
+          vx_core::t_boolean_from_func->vx_fn_new({selected}, [selected]() {
+            vx_core::Type_boolean output_1 = vx_core::f_lt(selected, vx_core::vx_new_int(1));
+            return output_1;
+          }),
+          vx_core::t_any_from_func->vx_fn_new({ui}, [ui]() {
+            vx_core::Type_any output_1 = ui;
+            return output_1;
+          })
+        ),
+        vx_core::f_else(
+          vx_core::t_any_from_func->vx_fn_new({ui, selected}, [ui, selected]() {
+            vx_ui_ui::Type_ui output_1 = vx_core::f_let(
+              vx_ui_ui::t_ui,
+              vx_core::t_any_from_func->vx_fn_new({ui, selected}, [ui, selected]() {
+                vx_ui_ui::Type_uimap uimap = ui->uimap();
+                vx_core::vx_ref_plus(uimap);
+                vx_ui_ui::Type_uilist uilist1 = vx_ui_ui::f_uilist_from_uimap(uimap);
+                vx_core::vx_ref_plus(uilist1);
+                vx_ui_ui::Type_uilist uilist2 = vx_core::f_list_from_list_intany(
+                  vx_ui_ui::t_uilist,
+                  uilist1,
+                  vx_core::t_any_from_int_any->vx_fn_new({selected}, [selected](vx_core::Type_any posval_any, vx_core::Type_any uival_any) {
+                    vx_core::Type_int posval = vx_core::vx_any_from_any(vx_core::t_int, posval_any);
+                    vx_ui_ui::Type_ui uival = vx_core::vx_any_from_any(vx_ui_ui::t_ui, uival_any);
+                    vx_core::Type_any output_1 = 
+                      vx_core::f_if_2(
+                        vx_ui_ui::t_ui,
+                        vx_core::vx_new(vx_core::t_thenelselist, {
+                          vx_core::f_then(
+                            vx_core::t_boolean_from_func->vx_fn_new({posval, selected}, [posval, selected]() {
+                              vx_core::Type_boolean output_1 = vx_core::f_eq(posval, selected);
+                              return output_1;
+                            }),
+                            vx_core::t_any_from_func->vx_fn_new({uival}, [uival]() {
+                              vx_core::Type_any output_1 = vx_core::f_copy(
+                                vx_ui_ui::t_ui,
+                                uival,
+                                vx_core::vx_new(vx_core::t_anylist, {
+                                  vx_core::vx_new_string(":selected"),
+                                  vx_core::vx_new_boolean(true)
+                                })
+                              );
+                              return output_1;
+                            })
+                          ),
+                          vx_core::f_else(
+                            vx_core::t_any_from_func->vx_fn_new({uival}, [uival]() {
+                              vx_core::Type_any output_1 = vx_core::f_copy(
+                                vx_ui_ui::t_ui,
+                                uival,
+                                vx_core::vx_new(vx_core::t_anylist, {
+                                  vx_core::vx_new_string(":selected"),
+                                  vx_core::vx_new_boolean(false)
+                                })
+                              );
+                              return output_1;
+                            })
+                          )
+                        })
+                      );
+                    return output_1;
+                  })
+                );
+                vx_core::vx_ref_plus(uilist2);
+                vx_ui_ui::Type_uimap childmap = vx_ui_ui::f_uimap_from_uilist(uilist2);
+                vx_core::vx_ref_plus(childmap);
+                vx_ui_ui::Type_ui output_1 = vx_core::f_copy(
+                  vx_ui_ui::t_ui,
+                  ui,
+                  vx_core::vx_new(vx_core::t_anylist, {
+                    vx_core::vx_new_string(":uimap"),
+                    childmap
+                  })
+                );
+                vx_core::vx_release_one_except({uimap, uilist1, uilist2, childmap}, output_1);
+                return output_1;
+              })
+            );
+            return output_1;
+          })
+        )
+      })
+    );
+    vx_core::vx_release_one_except({ui, selected}, output);
+    return output;
+  }
+  /**
+   * @function ui_from_ui_selected
+   * Return a ui after changing selected item and writing it.
+   * @param  {ui} ui
+   * @param  {int} selected
+   * @return {ui}
+   * (func ui<-ui-selected)
+   */
+  // (func ui<-ui-selected)
+  // class Class_ui_from_ui_selected {
+    Abstract_ui_from_ui_selected::~Abstract_ui_from_ui_selected() {}
+
+    Class_ui_from_ui_selected::Class_ui_from_ui_selected() : Abstract_ui_from_ui_selected::Abstract_ui_from_ui_selected() {
+      vx_core::refcount += 1;
+    }
+
+    Class_ui_from_ui_selected::~Class_ui_from_ui_selected() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_ui_from_ui_selected::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_ui_ui::Func_ui_from_ui_selected output = vx_ui_ui::e_ui_from_ui_selected;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_ui_from_ui_selected::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_ui_ui::Func_ui_from_ui_selected output = vx_ui_ui::e_ui_from_ui_selected;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_ui_from_ui_selected::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/ui/ui", // pkgname
+        "ui<-ui-selected", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_ui_from_ui_selected::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_ui_from_ui_selected::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/ui/ui", // pkgname
+        "ui<-ui-selected", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_ui_from_ui_selected::vx_empty() const {return vx_ui_ui::e_ui_from_ui_selected;}
+    vx_core::Type_any Class_ui_from_ui_selected::vx_type() const {return vx_ui_ui::t_ui_from_ui_selected;}
+    vx_core::Type_msgblock Class_ui_from_ui_selected::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_ui_from_ui_selected::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_ui_from_ui_selected::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_ui_ui::Type_ui ui = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_int selected = vx_core::vx_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_ui_ui::f_ui_from_ui_selected(ui, selected);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func uid-selected<-ui)
   vx_core::Type_string f_uid_selected_from_ui(vx_ui_ui::Type_ui ui) {
     vx_core::Type_string output = vx_core::e_string;
@@ -10266,7 +10690,7 @@ namespace vx_ui_ui {
         vx_core::vx_ref_plus(uimap);
         vx_ui_ui::Type_uilist uilist = vx_ui_ui::f_uilist_from_uimap(uimap);
         vx_core::vx_ref_plus(uilist);
-        vx_ui_ui::Type_uilist output_1 = vx_core::f_list_from_list_1(
+        vx_ui_ui::Type_uilist output_1 = vx_collection::f_list_from_list_filter(
           vx_ui_ui::t_uilist,
           uilist,
           vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any item_any) {
@@ -11043,6 +11467,8 @@ namespace vx_ui_ui {
   vx_ui_ui::Func_ui_render_from_fn_render_ui_orig_parent t_ui_render_from_fn_render_ui_orig_parent = NULL;
   vx_ui_ui::Func_ui_render_from_ui_orig_parent e_ui_render_from_ui_orig_parent = NULL;
   vx_ui_ui::Func_ui_render_from_ui_orig_parent t_ui_render_from_ui_orig_parent = NULL;
+  vx_ui_ui::Func_ui_render_from_ui_parent_selected e_ui_render_from_ui_parent_selected = NULL;
+  vx_ui_ui::Func_ui_render_from_ui_parent_selected t_ui_render_from_ui_parent_selected = NULL;
   vx_ui_ui::Func_ui_selected_from_ui e_ui_selected_from_ui = NULL;
   vx_ui_ui::Func_ui_selected_from_ui t_ui_selected_from_ui = NULL;
   vx_ui_ui::Func_ui_writechild_from_ui_child e_ui_writechild_from_ui_child = NULL;
@@ -11051,6 +11477,8 @@ namespace vx_ui_ui {
   vx_ui_ui::Func_ui_writechildmap_from_ui_childmap t_ui_writechildmap_from_ui_childmap = NULL;
   vx_ui_ui::Func_ui_from_layout_ui_orig_parent e_ui_from_layout_ui_orig_parent = NULL;
   vx_ui_ui::Func_ui_from_layout_ui_orig_parent t_ui_from_layout_ui_orig_parent = NULL;
+  vx_ui_ui::Func_ui_from_ui_selected e_ui_from_ui_selected = NULL;
+  vx_ui_ui::Func_ui_from_ui_selected t_ui_from_ui_selected = NULL;
   vx_ui_ui::Func_uid_selected_from_ui e_uid_selected_from_ui = NULL;
   vx_ui_ui::Func_uid_selected_from_ui t_uid_selected_from_ui = NULL;
   vx_ui_ui::Func_uiengine_readstate e_uiengine_readstate = NULL;
@@ -11336,6 +11764,10 @@ namespace vx_ui_ui {
       vx_core::vx_reserve_empty(vx_ui_ui::e_ui_render_from_ui_orig_parent);
       vx_ui_ui::t_ui_render_from_ui_orig_parent = new vx_ui_ui::Class_ui_render_from_ui_orig_parent();
       vx_core::vx_reserve_type(vx_ui_ui::t_ui_render_from_ui_orig_parent);
+      vx_ui_ui::e_ui_render_from_ui_parent_selected = new vx_ui_ui::Class_ui_render_from_ui_parent_selected();
+      vx_core::vx_reserve_empty(vx_ui_ui::e_ui_render_from_ui_parent_selected);
+      vx_ui_ui::t_ui_render_from_ui_parent_selected = new vx_ui_ui::Class_ui_render_from_ui_parent_selected();
+      vx_core::vx_reserve_type(vx_ui_ui::t_ui_render_from_ui_parent_selected);
       vx_ui_ui::e_ui_selected_from_ui = new vx_ui_ui::Class_ui_selected_from_ui();
       vx_core::vx_reserve_empty(vx_ui_ui::e_ui_selected_from_ui);
       vx_ui_ui::t_ui_selected_from_ui = new vx_ui_ui::Class_ui_selected_from_ui();
@@ -11352,6 +11784,10 @@ namespace vx_ui_ui {
       vx_core::vx_reserve_empty(vx_ui_ui::e_ui_from_layout_ui_orig_parent);
       vx_ui_ui::t_ui_from_layout_ui_orig_parent = new vx_ui_ui::Class_ui_from_layout_ui_orig_parent();
       vx_core::vx_reserve_type(vx_ui_ui::t_ui_from_layout_ui_orig_parent);
+      vx_ui_ui::e_ui_from_ui_selected = new vx_ui_ui::Class_ui_from_ui_selected();
+      vx_core::vx_reserve_empty(vx_ui_ui::e_ui_from_ui_selected);
+      vx_ui_ui::t_ui_from_ui_selected = new vx_ui_ui::Class_ui_from_ui_selected();
+      vx_core::vx_reserve_type(vx_ui_ui::t_ui_from_ui_selected);
       vx_ui_ui::e_uid_selected_from_ui = new vx_ui_ui::Class_uid_selected_from_ui();
       vx_core::vx_reserve_empty(vx_ui_ui::e_uid_selected_from_ui);
       vx_ui_ui::t_uid_selected_from_ui = new vx_ui_ui::Class_uid_selected_from_ui();
@@ -11529,10 +11965,12 @@ namespace vx_ui_ui {
       mapfunc["ui-render"] = vx_ui_ui::t_ui_render;
       mapfunc["ui-render<-fn-render-ui-orig-parent"] = vx_ui_ui::t_ui_render_from_fn_render_ui_orig_parent;
       mapfunc["ui-render<-ui-orig-parent"] = vx_ui_ui::t_ui_render_from_ui_orig_parent;
+      mapfunc["ui-render<-ui-parent-selected"] = vx_ui_ui::t_ui_render_from_ui_parent_selected;
       mapfunc["ui-selected<-ui"] = vx_ui_ui::t_ui_selected_from_ui;
       mapfunc["ui-writechild<-ui-child"] = vx_ui_ui::t_ui_writechild_from_ui_child;
       mapfunc["ui-writechildmap<-ui-childmap"] = vx_ui_ui::t_ui_writechildmap_from_ui_childmap;
       mapfunc["ui<-layout-ui-orig-parent"] = vx_ui_ui::t_ui_from_layout_ui_orig_parent;
+      mapfunc["ui<-ui-selected"] = vx_ui_ui::t_ui_from_ui_selected;
       mapfunc["uid-selected<-ui"] = vx_ui_ui::t_uid_selected_from_ui;
       mapfunc["uiengine-readstate"] = vx_ui_ui::t_uiengine_readstate;
       mapfunc["uiengine-render"] = vx_ui_ui::t_uiengine_render;

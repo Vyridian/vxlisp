@@ -294,7 +294,7 @@
   :cpp
    "output = vx_type::vx_string_from_stringlist_join(vals, delim);"
   :java :auto
-  :js "vals.join(delim)")
+  :js   :auto)
  :test (test
         "a$b$c"
         (string<-stringlist-join

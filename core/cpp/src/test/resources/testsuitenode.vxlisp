@@ -2412,6 +2412,34 @@
                              :nodes
                               (vx/web/html/divchildlist
                                (vx/web/html/p
+                                :text "(test false  (empty boolean))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "false")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "false")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "empty")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
                                 :text "(test \"\"     (empty string))")))
                             (vx/web/html/td
                              :nodes
@@ -2911,6 +2939,34 @@
                               (vx/web/html/divchildlist
                                (vx/web/html/p
                                 :text "neginfinity")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "is-empty_1")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "(test-true (is-empty false))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "true")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "true")))))
                          (vx/web/html/tr
                           :nodes
                            (vx/web/html/tdlist
@@ -19413,13 +19469,13 @@ ab
                  (vx/web/html/p
                   :text "vx/data/file")
                  (vx/web/html/p
-                  :text "28% 4/14")
+                  :text "35% 5/14")
                  (vx/web/html/p
                   :text "0% 0/3")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "36% 4/11")
+                  :text "45% 5/11")
                  (vx/web/html/p
                   :text "92% 13/14")
                  (vx/web/html/p
@@ -19548,6 +19604,73 @@ ab
  :name \"string_read_from_file.txt\"
  :path \"src/test/resources/vx\"
  :text \"testdata\")")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "pathfull<-file")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ \"fname\"
+ (pathfull<-file
+  (file
+   :name \"fname\")))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"fname\"")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"fname\"")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "pathfull<-file")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ \"fpath/fname\"
+ (pathfull<-file
+  (file
+   :path \"fpath\"
+   :name \"fname\")))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"fpath/fname\"")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"fpath/fname\"")))))
                          (vx/web/html/tr
                           :nodes
                            (vx/web/html/tdlist
@@ -22119,26 +22242,100 @@ ab
                  (vx/web/html/p
                   :text "vx/ui/ui")
                  (vx/web/html/p
-                  :text "0% 0/109")
+                  :text "0% 1/111")
                  (vx/web/html/p
                   :text "0% 0/28")
                  (vx/web/html/p
                   :text "0% 0/41")
                  (vx/web/html/p
-                  :text "0% 0/40")
+                  :text "2% 1/42")
                  (vx/web/html/p
-                  :text "56% 62/109")
+                  :text "58% 65/111")
                  (vx/web/html/p
-                  :text "0% 0/40")
+                  :text "0% 0/42")
                  (vx/web/html/p
-                  :text "0% 0/40"))
+                  :text "0% 0/42"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
                   :nodes
                    (vx/web/html/divchildlist
                     (vx/web/html/table
-                     :tbody (vx/web/html/tbody)
+                     :tbody
+                      (vx/web/html/tbody
+                       :nodes
+                        (vx/web/html/trlist
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "ui<-ui-selected")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (ui
+  :uimap
+   (uimap
+    :a
+     (ui
+      :uid \"a\")
+    :b
+     (ui
+      :uid \"b\"
+      :selected true)))
+ (ui<-ui-selected
+  (ui
+   :uimap
+    (uimap
+     :a
+      (ui
+       :uid \"a\"
+       :selected true)
+     :b
+      (ui
+       :uid \"b\")))
+  2))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/ui/ui/ui
+ :uimap
+  (vx/ui/ui/uimap
+   :a
+    (vx/ui/ui/ui
+     :uid \"a\")
+   :b
+    (vx/ui/ui/ui
+     :uid \"b\"
+     :selected true)))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/ui/ui/ui
+ :uimap
+  (vx/ui/ui/uimap
+   :a
+    (vx/ui/ui/ui
+     :uid \"a\")
+   :b
+    (vx/ui/ui/ui
+     :uid \"b\"
+     :selected true)))")))))))
                      :thead
                       (vx/web/html/thead
                        :nodes

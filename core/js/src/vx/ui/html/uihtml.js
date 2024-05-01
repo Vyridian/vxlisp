@@ -492,10 +492,14 @@ export default class vx_ui_html_uihtml {
             const pointrotate = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_point, "struct-2": vx_ui_ui.t_style}, uistyle, ":pointrotate")
             const styletype = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_styletype, "struct-2": vx_ui_ui.t_style}, uistyle, ":type")
             const color_bkg = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":color-background")
+            const color_border = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":color-border")
+            const color_font = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":color-font")
             const color_hoverbkg = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":color-hoverbkgrd")
             const cursor = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_cursor, "struct-2": vx_ui_ui.t_style}, uistyle, ":cursor")
             const hidden = vx_core.f_any_from_struct({"any-1": vx_core.t_boolean, "struct-2": vx_ui_ui.t_style}, uistyle, ":hidden")
             const align = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_align, "struct-2": vx_ui_ui.t_style}, uistyle, ":align")
+            const scroll_x = vx_core.f_any_from_struct({"any-1": vx_core.t_boolean, "struct-2": vx_ui_ui.t_style}, uistyle, ":scroll-x")
+            const scroll_y = vx_core.f_any_from_struct({"any-1": vx_core.t_boolean, "struct-2": vx_ui_ui.t_style}, uistyle, ":scroll-y")
             const posx = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_ui_ui.t_point}, pointpos, ":x")
             const posy = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_ui_ui.t_point}, pointpos, ":y")
             const postype = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_pointtype, "struct-2": vx_ui_ui.t_point}, pointpos, ":pointtype")
@@ -511,6 +515,45 @@ export default class vx_ui_html_uihtml {
                   vx_core.t_string,
                   "#",
                   color_bkg
+                )})
+              )
+            )
+            const borderwidth = vx_core.f_if_2(
+              {"any-1": vx_core.t_string},
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty(color_border)}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return "thin"})
+              )
+            )
+            const bordercolor = vx_core.f_if_2(
+              {"any-1": vx_core.t_string},
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty(color_border)}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
+                  vx_core.t_string,
+                  "#",
+                  color_border
+                )})
+              )
+            )
+            const borderstyle = vx_core.f_if_2(
+              {"any-1": vx_core.t_string},
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty(color_border)}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
+                  vx_core.t_string,
+                  "solid"
+                )})
+              )
+            )
+            const fontcolor = vx_core.f_if_2(
+              {"any-1": vx_core.t_string},
+              vx_core.f_then(
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty(color_font)}),
+                vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
+                  vx_core.t_string,
+                  "#",
+                  color_font
                 )})
               )
             )
@@ -819,23 +862,11 @@ export default class vx_ui_html_uihtml {
             )
             const overflowx = vx_core.f_if_2(
               {"any-1": vx_core.t_string},
-              vx_core.f_then(
-                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eqeq(
-                  layout,
-                  vx_ui_ui.c_layout_flow_rows
-                )}),
-                vx_core.f_new(vx_core.t_any_from_func, () => {return "auto"})
-              )
+              vx_core.f_then(vx_core.f_new(vx_core.t_boolean_from_func, () => {return scroll_x}), vx_core.f_new(vx_core.t_any_from_func, () => {return "auto"}))
             )
             const overflowy = vx_core.f_if_2(
               {"any-1": vx_core.t_string},
-              vx_core.f_then(
-                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eqeq(
-                  layout,
-                  vx_ui_ui.c_layout_flow_columns
-                )}),
-                vx_core.f_new(vx_core.t_any_from_func, () => {return "auto"})
-              )
+              vx_core.f_then(vx_core.f_new(vx_core.t_boolean_from_func, () => {return scroll_y}), vx_core.f_new(vx_core.t_any_from_func, () => {return "auto"}))
             )
             const hoverbkgrdcolor = vx_core.f_if_2(
               {"any-1": vx_core.t_string},
@@ -915,6 +946,14 @@ export default class vx_ui_html_uihtml {
               vx_web_html.t_propmap,
               ":background-color",
               bkgcolor,
+              ":border-color",
+              bordercolor,
+              ":border-style",
+              borderstyle,
+              ":border-width",
+              borderwidth,
+              ":color",
+              fontcolor,
               ":cursor",
               scursor,
               ":display",
@@ -1057,6 +1096,8 @@ export default class vx_ui_html_uihtml {
         ":props",
         vx_core.f_new(
           vx_web_html.t_propmap,
+          ":border",
+          "0mm",
           ":margin",
           "0mm",
           ":padding",
@@ -1070,6 +1111,8 @@ export default class vx_ui_html_uihtml {
         ":props",
         vx_core.f_new(
           vx_web_html.t_propmap,
+          ":border",
+          "0mm",
           ":margin",
           "0mm",
           ":padding",
@@ -1083,12 +1126,33 @@ export default class vx_ui_html_uihtml {
         ":props",
         vx_core.f_new(
           vx_web_html.t_propmap,
+          ":border",
+          "0mm",
+          ":box-sizing",
+          "border-box",
           ":margin",
           "0mm",
           ":padding",
           "0mm",
           ":position",
           "relative"
+        )
+      ),
+      vx_core.f_new(
+        vx_web_html.t_style,
+        ":name",
+        "img",
+        ":props",
+        vx_core.f_new(
+          vx_web_html.t_propmap,
+          ":border",
+          "0mm",
+          ":display",
+          "block",
+          ":margin",
+          "0mm",
+          ":padding",
+          "0mm"
         )
       ),
       vx_core.f_new(

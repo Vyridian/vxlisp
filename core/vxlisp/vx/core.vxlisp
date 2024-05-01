@@ -1659,7 +1659,8 @@
   :java
    "@SuppressWarnings(“unchecked”)
     T output = (T)(type.vx_empty());")
- :test (test ""     (empty string))
+ :test (test false  (empty boolean))
+       (test ""     (empty string))
        (test (list) (empty list))
        (test (map)  (empty map))
  :doc "Returns the empty value for a given type. Can be called using (empty type) or simply (type)")
@@ -1966,7 +1967,8 @@
     } else {
       output = Core.c_false;
     }")
- :test (test-true (is-empty ""))
+ :test (test-true (is-empty false))
+       (test-true (is-empty ""))
        (test-true (is-empty (list)))
        (test-true (is-empty (map)))
  :doc "Returns true if an value is empty")

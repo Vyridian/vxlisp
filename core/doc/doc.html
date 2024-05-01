@@ -2336,6 +2336,9 @@
           <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui&lt;-layout-ui-orig-parent')">
             (f) ui&lt;-layout-ui-orig-parent
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui&lt;-ui-selected')">
+            (f) ui&lt;-ui-selected
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-child&lt;-ui-uid')">
             (f) ui-child&lt;-ui-uid
           </li>
@@ -2365,6 +2368,9 @@
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render&lt;-ui-orig-parent')">
             (f) ui-render&lt;-ui-orig-parent
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render&lt;-ui-parent-selected')">
+            (f) ui-render&lt;-ui-parent-selected
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-selected&lt;-ui')">
             (f) ui-selected&lt;-ui
@@ -4841,7 +4847,8 @@
   :java
    &quot;@SuppressWarnings(“unchecked”)
     T output = (T)(type.vx_empty());&quot;)
- :test (test &quot;&quot;     (empty string))
+ :test (test false  (empty boolean))
+       (test &quot;&quot;     (empty string))
        (test (list) (empty list))
        (test (map)  (empty map))
  :doc &quot;Returns the empty value for a given type. Can be called using (empty type) or simply (type)&quot;)
@@ -5148,7 +5155,8 @@
     } else {
       output = Core.c_false;
     }&quot;)
- :test (test-true (is-empty &quot;&quot;))
+ :test (test-true (is-empty false))
+       (test-true (is-empty &quot;&quot;))
        (test-true (is-empty (list)))
        (test-true (is-empty (map)))
  :doc &quot;Returns true if an value is empty&quot;)
@@ -17428,6 +17436,7 @@ improves readability.</div>
                 <span class="lbl">Usage/Test Cases:</span>
               </summary>
               <ul>
+                <li><div class="test">(test false  (empty boolean))</div></li>
                 <li><div class="test">(test &quot;&quot;     (empty string))</div></li>
                 <li><div class="test">(test (list) (empty list))</div></li>
                 <li><div class="test">(test (map)  (empty map))</div></li>
@@ -17449,7 +17458,8 @@ improves readability.</div>
   :java
    &quot;@SuppressWarnings(“unchecked”)
     T output = (T)(type.vx_empty());&quot;)
- :test (test &quot;&quot;     (empty string))
+ :test (test false  (empty boolean))
+       (test &quot;&quot;     (empty string))
        (test (list) (empty list))
        (test (map)  (empty map))
  :doc &quot;Returns the empty value for a given type. Can be called using (empty type) or simply (type)&quot;)</div>
@@ -18664,6 +18674,7 @@ improves readability.</div>
                 <span class="lbl">Usage/Test Cases:</span>
               </summary>
               <ul>
+                <li><div class="test">(test-true (is-empty false))</div></li>
                 <li><div class="test">(test-true (is-empty &quot;&quot;))</div></li>
                 <li><div class="test">(test-true (is-empty (list)))</div></li>
                 <li><div class="test">(test-true (is-empty (map)))</div></li>
@@ -18695,7 +18706,8 @@ improves readability.</div>
     } else {
       output = Core.c_false;
     }&quot;)
- :test (test-true (is-empty &quot;&quot;))
+ :test (test-true (is-empty false))
+       (test-true (is-empty &quot;&quot;))
        (test-true (is-empty (list)))
        (test-true (is-empty (map)))
  :doc &quot;Returns true if an value is empty&quot;)</div>
@@ -29787,7 +29799,7 @@ improves readability.</div>
   :cpp
    &quot;output = vx_type::vx_string_from_stringlist_join(vals, delim);&quot;
   :java :auto
-  :js &quot;vals.join(delim)&quot;)
+  :js   :auto)
  :test (test
         &quot;a$b$c&quot;
         (string&lt;-stringlist-join
@@ -31553,7 +31565,7 @@ improves readability.</div>
   :cpp
    &quot;output = vx_type::vx_string_from_stringlist_join(vals, delim);&quot;
   :java :auto
-  :js &quot;vals.join(delim)&quot;)
+  :js   :auto)
  :test (test
         &quot;a$b$c&quot;
         (string&lt;-stringlist-join
@@ -32577,9 +32589,10 @@ improves readability.</div>
   [sindent : string := (string&lt;-indent indent)
    ssrc    : string := (string&lt;-propname-val &quot;src&quot; (:src img))
    sid     : string := (string&lt;-propname-val &quot;id&quot;  (:id img))
-   sclass  : string := (string&lt;-propstyle-stylelist
-                        (:style img)
-                        (:stylelist img))
+   sclass  : string :=
+    (string&lt;-propstyle-stylelist
+     (:style img)
+     (:stylelist img))
    sstyle  : string := (string&lt;-propstyleunique (:style-unique img))]
   (string sindent &quot;&lt;img&quot; sid sclass sstyle ssrc &quot; /&gt;&quot;))
  :test (test
@@ -32610,24 +32623,27 @@ improves readability.</div>
    charset  : string := (:charset meta)
    name     : string := (:name meta)
    content  : string := (:content meta)
-   scharset : string := (if : string
-                         (then
-                          (!= &quot;&quot; charset)
-                          (string&lt;-propname-val
-                           &quot;charset&quot;
-                           charset)))
-   sname    : string := (if : string
-                         (then
-                          (!= &quot;&quot; name)
-                          (string&lt;-propname-val
-                           &quot;name&quot;
-                           name)))
-   scontext : string := (if : string
-                         (then
-                          (!= &quot;&quot; content)
-                          (string&lt;-propname-val
-                           &quot;content&quot;
-                           content)))]
+   scharset : string :=
+    (if : string
+     (then
+      (!= &quot;&quot; charset)
+      (string&lt;-propname-val
+       &quot;charset&quot;
+       charset)))
+   sname : string :=
+    (if : string
+     (then
+      (!= &quot;&quot; name)
+      (string&lt;-propname-val
+       &quot;name&quot;
+       name)))
+   scontext : string :=
+    (if : string
+     (then
+      (!= &quot;&quot; content)
+      (string&lt;-propname-val
+       &quot;content&quot;
+       content)))]
   (string
    sindent
    &quot;&lt;meta&quot;
@@ -32711,10 +32727,12 @@ improves readability.</div>
   [sindent : string := (string&lt;-indent indent)
    text    : string := (htmlstring&lt;-string (:text p))
    sid     : string := (string&lt;-propname-val &quot;id&quot; (:id p))
-   sclass  : string := (string&lt;-propstyle-stylelist
-                        (:style p)
-                        (:stylelist p))
-   sstyle  : string := (string&lt;-propstyleunique (:style-unique p))]
+   sclass  : string :=
+    (string&lt;-propstyle-stylelist
+     (:style p)
+     (:stylelist p))
+   sstyle  : string :=
+    (string&lt;-propstyleunique (:style-unique p))]
   (string sindent &quot;&lt;p&quot; sid sclass sstyle &quot;&gt;&quot; text &quot;&lt;/p&gt;&quot;))
  :test (test
         &quot;&lt;p&gt;data&lt;/p&gt;&quot;
@@ -32776,16 +32794,17 @@ improves readability.</div>
   (then
    (!-empty stylelist)
    (let : string
-    [namelist : stringlist := (list&lt;-list : stringlist
-                               stylelist
-                               (fn : style
-                                [item : style]
-                                (string&lt;-string-start
-                                 (:name item)
-                                 2)))
-     joined   : string     := (string&lt;-stringlist-join
-                               namelist
-                               &quot; &quot;)]
+    [namelist : stringlist :=
+     (list&lt;-list : stringlist
+      stylelist
+      (fn : style
+       [item : style]
+       (string&lt;-string-start
+        (:name item)
+        2)))
+     joined : string :=
+      (string&lt;-stringlist-join
+       namelist &quot; &quot;)]
     (if : string
      (!= &quot;&quot; joined)
      (string
@@ -32802,9 +32821,9 @@ improves readability.</div>
    (!-empty style)
    (let : string
     [props : propmap := (:props style)
-     text  : string  := (string&lt;-stylepropmap-indent
-                         props
-                         0)]
+     text : string :=
+      (string&lt;-stylepropmap-indent
+       props 0)]
     (if : string
      (then
       (!-empty text)
@@ -32820,12 +32839,14 @@ improves readability.</div>
    name    : string    := (:name      style)
    propmap : propmap   := (:props     style)
    sublist : stylelist := (:stylelist style)
-   stext   : string    := (string&lt;-stylepropmap-indent
-                           propmap
-                           (+1 indent))
-   subtext : string    := (string&lt;-stylelist-indent
-                           sublist
-                           (+1 indent))]
+   stext : string :=
+    (string&lt;-stylepropmap-indent
+     propmap
+     (+1 indent))
+   subtext : string :=
+    (string&lt;-stylelist-indent
+     sublist
+     (+1 indent))]
   (string
    sindent name &quot; {&quot;
    stext
@@ -32852,7 +32873,7 @@ improves readability.</div>
  [propmap : propmap
   indent  : int]
  (let : string
-  [sindent : string     := (string&lt;-indent indent)
+  [sindent : string := (string&lt;-indent indent)
    sprops  : stringlist :=
     (list&lt;-map : stringlist
      propmap
@@ -32896,23 +32917,25 @@ improves readability.</div>
   indent : int]
  (let
   [sindent : string := (string&lt;-indent indent)
-   sid     : string := (string&lt;-propname-val
-                        &quot;id&quot;
-                        (:id table))
-   thead   : thead  := (:thead table)
-   tbody   : tbody  := (:tbody table)
-   shead   : string := (string&lt;-thead-indent
-                        thead
-                        (+1 indent))
-   sbody   : string := (string&lt;-tbody-indent
-                        tbody
-                        (+1 indent))]
+   sid : string :=
+    (string&lt;-propname-val
+     &quot;id&quot;
+     (:id table))
+   thead : thead  := (:thead table)
+   tbody : tbody  := (:tbody table)
+   shead : string :=
+    (string&lt;-thead-indent
+     thead
+     (+1 indent))
+   sbody : string :=
+    (string&lt;-tbody-indent
+     tbody
+     (+1 indent))]
   (string
    sindent &quot;&lt;table&quot; sid &quot;&gt;&quot;
    shead
    sbody
-   sindent &quot;&lt;/table&gt;&quot;)
- )
+   sindent &quot;&lt;/table&gt;&quot;))
  :doc &quot;Returns string from table&quot;)
 
 (func string&lt;-tbody-indent : string
@@ -32952,9 +32975,10 @@ improves readability.</div>
  [title  : title
   indent : int]
  (let
-  [sindent : string := (string&lt;-indent
-                        indent)
-   text    : string := (:text title)]
+  [sindent : string :=
+   (string&lt;-indent
+    indent)
+   text : string := (:text title)]
   (string
    sindent
    &quot;&lt;title&gt;&quot;
@@ -33011,8 +33035,9 @@ improves readability.</div>
  [stylesheet : stylesheet]
  (copy
   stylesheet
-  :stylemap (stylemap&lt;-stylelist
-             (:styles stylesheet)))
+  :stylemap
+   (stylemap&lt;-stylelist
+    (:styles stylesheet)))
  :doc &quot;Decode a URI string&quot;)
 
 (func uri&lt;-string : string
@@ -36146,9 +36171,10 @@ improves readability.</div>
   [sindent : string := (string&lt;-indent indent)
    ssrc    : string := (string&lt;-propname-val &quot;src&quot; (:src img))
    sid     : string := (string&lt;-propname-val &quot;id&quot;  (:id img))
-   sclass  : string := (string&lt;-propstyle-stylelist
-                        (:style img)
-                        (:stylelist img))
+   sclass  : string :=
+    (string&lt;-propstyle-stylelist
+     (:style img)
+     (:stylelist img))
    sstyle  : string := (string&lt;-propstyleunique (:style-unique img))]
   (string sindent &quot;&lt;img&quot; sid sclass sstyle ssrc &quot; /&gt;&quot;))
  :test (test
@@ -36303,24 +36329,27 @@ improves readability.</div>
    charset  : string := (:charset meta)
    name     : string := (:name meta)
    content  : string := (:content meta)
-   scharset : string := (if : string
-                         (then
-                          (!= &quot;&quot; charset)
-                          (string&lt;-propname-val
-                           &quot;charset&quot;
-                           charset)))
-   sname    : string := (if : string
-                         (then
-                          (!= &quot;&quot; name)
-                          (string&lt;-propname-val
-                           &quot;name&quot;
-                           name)))
-   scontext : string := (if : string
-                         (then
-                          (!= &quot;&quot; content)
-                          (string&lt;-propname-val
-                           &quot;content&quot;
-                           content)))]
+   scharset : string :=
+    (if : string
+     (then
+      (!= &quot;&quot; charset)
+      (string&lt;-propname-val
+       &quot;charset&quot;
+       charset)))
+   sname : string :=
+    (if : string
+     (then
+      (!= &quot;&quot; name)
+      (string&lt;-propname-val
+       &quot;name&quot;
+       name)))
+   scontext : string :=
+    (if : string
+     (then
+      (!= &quot;&quot; content)
+      (string&lt;-propname-val
+       &quot;content&quot;
+       content)))]
   (string
    sindent
    &quot;&lt;meta&quot;
@@ -36676,10 +36705,12 @@ improves readability.</div>
   [sindent : string := (string&lt;-indent indent)
    text    : string := (htmlstring&lt;-string (:text p))
    sid     : string := (string&lt;-propname-val &quot;id&quot; (:id p))
-   sclass  : string := (string&lt;-propstyle-stylelist
-                        (:style p)
-                        (:stylelist p))
-   sstyle  : string := (string&lt;-propstyleunique (:style-unique p))]
+   sclass  : string :=
+    (string&lt;-propstyle-stylelist
+     (:style p)
+     (:stylelist p))
+   sstyle  : string :=
+    (string&lt;-propstyleunique (:style-unique p))]
   (string sindent &quot;&lt;p&quot; sid sclass sstyle &quot;&gt;&quot; text &quot;&lt;/p&gt;&quot;))
  :test (test
         &quot;&lt;p&gt;data&lt;/p&gt;&quot;
@@ -36983,16 +37014,17 @@ improves readability.</div>
   (then
    (!-empty stylelist)
    (let : string
-    [namelist : stringlist := (list&lt;-list : stringlist
-                               stylelist
-                               (fn : style
-                                [item : style]
-                                (string&lt;-string-start
-                                 (:name item)
-                                 2)))
-     joined   : string     := (string&lt;-stringlist-join
-                               namelist
-                               &quot; &quot;)]
+    [namelist : stringlist :=
+     (list&lt;-list : stringlist
+      stylelist
+      (fn : style
+       [item : style]
+       (string&lt;-string-start
+        (:name item)
+        2)))
+     joined : string :=
+      (string&lt;-stringlist-join
+       namelist &quot; &quot;)]
     (if : string
      (!= &quot;&quot; joined)
      (string
@@ -37067,9 +37099,9 @@ improves readability.</div>
    (!-empty style)
    (let : string
     [props : propmap := (:props style)
-     text  : string  := (string&lt;-stylepropmap-indent
-                         props
-                         0)]
+     text : string :=
+      (string&lt;-stylepropmap-indent
+       props 0)]
     (if : string
      (then
       (!-empty text)
@@ -37148,12 +37180,14 @@ improves readability.</div>
    name    : string    := (:name      style)
    propmap : propmap   := (:props     style)
    sublist : stylelist := (:stylelist style)
-   stext   : string    := (string&lt;-stylepropmap-indent
-                           propmap
-                           (+1 indent))
-   subtext : string    := (string&lt;-stylelist-indent
-                           sublist
-                           (+1 indent))]
+   stext : string :=
+    (string&lt;-stylepropmap-indent
+     propmap
+     (+1 indent))
+   subtext : string :=
+    (string&lt;-stylelist-indent
+     sublist
+     (+1 indent))]
   (string
    sindent name &quot; {&quot;
    stext
@@ -37306,7 +37340,7 @@ improves readability.</div>
  [propmap : propmap
   indent  : int]
  (let : string
-  [sindent : string     := (string&lt;-indent indent)
+  [sindent : string := (string&lt;-indent indent)
    sprops  : stringlist :=
     (list&lt;-map : stringlist
      propmap
@@ -37476,23 +37510,25 @@ improves readability.</div>
   indent : int]
  (let
   [sindent : string := (string&lt;-indent indent)
-   sid     : string := (string&lt;-propname-val
-                        &quot;id&quot;
-                        (:id table))
-   thead   : thead  := (:thead table)
-   tbody   : tbody  := (:tbody table)
-   shead   : string := (string&lt;-thead-indent
-                        thead
-                        (+1 indent))
-   sbody   : string := (string&lt;-tbody-indent
-                        tbody
-                        (+1 indent))]
+   sid : string :=
+    (string&lt;-propname-val
+     &quot;id&quot;
+     (:id table))
+   thead : thead  := (:thead table)
+   tbody : tbody  := (:tbody table)
+   shead : string :=
+    (string&lt;-thead-indent
+     thead
+     (+1 indent))
+   sbody : string :=
+    (string&lt;-tbody-indent
+     tbody
+     (+1 indent))]
   (string
    sindent &quot;&lt;table&quot; sid &quot;&gt;&quot;
    shead
    sbody
-   sindent &quot;&lt;/table&gt;&quot;)
- )
+   sindent &quot;&lt;/table&gt;&quot;))
  :doc &quot;Returns string from table&quot;)</div>
                 </li>
               </ul>
@@ -37784,9 +37820,10 @@ improves readability.</div>
  [title  : title
   indent : int]
  (let
-  [sindent : string := (string&lt;-indent
-                        indent)
-   text    : string := (:text title)]
+  [sindent : string :=
+   (string&lt;-indent
+    indent)
+   text : string := (:text title)]
   (string
    sindent
    &quot;&lt;title&gt;&quot;
@@ -38259,8 +38296,9 @@ improves readability.</div>
  [stylesheet : stylesheet]
  (copy
   stylesheet
-  :stylemap (stylemap&lt;-stylelist
-             (:styles stylesheet)))
+  :stylemap
+   (stylemap&lt;-stylelist
+    (:styles stylesheet)))
  :doc &quot;Decode a URI string&quot;)</div>
                 </li>
               </ul>
@@ -61524,7 +61562,23 @@ output : list-1 := (empty list-1)
  (let : string
   [path : string := (path&lt;-file file)
    name : string := (name&lt;-file file)]
-  (string path &quot;/&quot; name))
+  (if : string
+   (then
+    (is-empty path)
+    name)
+   (else
+    (string path &quot;/&quot; name))))
+ :test (test
+        &quot;fname&quot;
+        (pathfull&lt;-file
+         (file
+          :name &quot;fname&quot;)))
+       (test
+        &quot;fpath/fname&quot;
+        (pathfull&lt;-file
+         (file
+          :path &quot;fpath&quot;
+          :name &quot;fname&quot;)))
  :doc &quot;Returns full path and name from file.&quot;)
 </div>
             </li>
@@ -62535,6 +62589,17 @@ output : list-1 := (empty list-1)
                 <span class="lbl">Usage/Test Cases:</span>
               </summary>
               <ul>
+                <li><div class="test">(test
+ &quot;fname&quot;
+ (pathfull&lt;-file
+  (file
+   :name &quot;fname&quot;)))</div></li>
+                <li><div class="test">(test
+ &quot;fpath/fname&quot;
+ (pathfull&lt;-file
+  (file
+   :path &quot;fpath&quot;
+   :name &quot;fname&quot;)))</div></li>
               </ul>
             </details>
             <details open="true">
@@ -62548,7 +62613,23 @@ output : list-1 := (empty list-1)
  (let : string
   [path : string := (path&lt;-file file)
    name : string := (name&lt;-file file)]
-  (string path &quot;/&quot; name))
+  (if : string
+   (then
+    (is-empty path)
+    name)
+   (else
+    (string path &quot;/&quot; name))))
+ :test (test
+        &quot;fname&quot;
+        (pathfull&lt;-file
+         (file
+          :name &quot;fname&quot;)))
+       (test
+        &quot;fpath/fname&quot;
+        (pathfull&lt;-file
+         (file
+          :path &quot;fpath&quot;
+          :name &quot;fname&quot;)))
  :doc &quot;Returns full path and name from file.&quot;)</div>
                 </li>
               </ul>
@@ -71760,7 +71841,7 @@ output : list-1 := (empty list-1)
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/boolean-print')">boolean-print</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/boolean-writestate&lt;-ui')">boolean-writestate&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/boolean-writestate&lt;-uiengine')">boolean-writestate&lt;-uiengine</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/int-selected&lt;-ui')">int-selected&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/fontfacemap&lt;-fontfacelist')">fontfacemap&lt;-fontfacelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/layout&lt;-style')">layout&lt;-style</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/layout&lt;-ui')">layout&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/layout&lt;-ui-layoutengine')">layout&lt;-ui-layoutengine</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/layout&lt;-ui-layoutmap-else')">layout&lt;-ui-layoutmap-else</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/layoutengine-readstate')">layoutengine-readstate</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/layoutmap&lt;-layoutlist')">layoutmap&lt;-layoutlist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/string-selected&lt;-ui')">string-selected&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/stringlist&lt;-ui')">stringlist&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/stringlist-selected&lt;-ui')">stringlist-selected&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/stylemap&lt;-stylelist')">stylemap&lt;-stylelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/stylesheet-readstate')">stylesheet-readstate</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/stylesheet-render')">stylesheet-render</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui&lt;-layout-ui-orig-parent')">ui&lt;-layout-ui-orig-parent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-child&lt;-ui-uid')">ui-child&lt;-ui-uid</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-from&lt;-event')">ui-from&lt;-event</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-layout&lt;-ui')">ui-layout&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-layout&lt;-ui-layoutengine')">ui-layout&lt;-ui-layoutengine</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-layout&lt;-ui-layoutmap-else')">ui-layout&lt;-ui-layoutmap-else</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-layout&lt;-ui-uiengine')">ui-layout&lt;-ui-uiengine</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-readstate&lt;-uid')">ui-readstate&lt;-uid</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render')">ui-render</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render&lt;-fn-render-ui-orig-parent')">ui-render&lt;-fn-render-ui-orig-parent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render&lt;-ui-orig-parent')">ui-render&lt;-ui-orig-parent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-selected&lt;-ui')">ui-selected&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-writechild&lt;-ui-child')">ui-writechild&lt;-ui-child</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-writechildmap&lt;-ui-childmap')">ui-writechildmap&lt;-ui-childmap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uid-selected&lt;-ui')">uid-selected&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uiengine-readstate')">uiengine-readstate</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uiengine-render')">uiengine-render</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uilist&lt;-uimap')">uilist&lt;-uimap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uilist-selected&lt;-ui')">uilist-selected&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap&lt;-uilist')">uimap&lt;-uilist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap&lt;-uimap-data')">uimap&lt;-uimap-data</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap-layout&lt;-uimap-layoutmap-else')">uimap-layout&lt;-uimap-layoutmap-else</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap-render&lt;-uimap-parent')">uimap-render&lt;-uimap-parent</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/boolean-print')">boolean-print</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/boolean-writestate&lt;-ui')">boolean-writestate&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/boolean-writestate&lt;-uiengine')">boolean-writestate&lt;-uiengine</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/int-selected&lt;-ui')">int-selected&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/fontfacemap&lt;-fontfacelist')">fontfacemap&lt;-fontfacelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/layout&lt;-style')">layout&lt;-style</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/layout&lt;-ui')">layout&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/layout&lt;-ui-layoutengine')">layout&lt;-ui-layoutengine</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/layout&lt;-ui-layoutmap-else')">layout&lt;-ui-layoutmap-else</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/layoutengine-readstate')">layoutengine-readstate</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/layoutmap&lt;-layoutlist')">layoutmap&lt;-layoutlist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/string-selected&lt;-ui')">string-selected&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/stringlist&lt;-ui')">stringlist&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/stringlist-selected&lt;-ui')">stringlist-selected&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/stylemap&lt;-stylelist')">stylemap&lt;-stylelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/stylesheet-readstate')">stylesheet-readstate</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/stylesheet-render')">stylesheet-render</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui&lt;-layout-ui-orig-parent')">ui&lt;-layout-ui-orig-parent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui&lt;-ui-selected')">ui&lt;-ui-selected</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-child&lt;-ui-uid')">ui-child&lt;-ui-uid</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-from&lt;-event')">ui-from&lt;-event</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-layout&lt;-ui')">ui-layout&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-layout&lt;-ui-layoutengine')">ui-layout&lt;-ui-layoutengine</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-layout&lt;-ui-layoutmap-else')">ui-layout&lt;-ui-layoutmap-else</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-layout&lt;-ui-uiengine')">ui-layout&lt;-ui-uiengine</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-readstate&lt;-uid')">ui-readstate&lt;-uid</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render')">ui-render</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render&lt;-fn-render-ui-orig-parent')">ui-render&lt;-fn-render-ui-orig-parent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render&lt;-ui-orig-parent')">ui-render&lt;-ui-orig-parent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render&lt;-ui-parent-selected')">ui-render&lt;-ui-parent-selected</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-selected&lt;-ui')">ui-selected&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-writechild&lt;-ui-child')">ui-writechild&lt;-ui-child</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-writechildmap&lt;-ui-childmap')">ui-writechildmap&lt;-ui-childmap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uid-selected&lt;-ui')">uid-selected&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uiengine-readstate')">uiengine-readstate</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uiengine-render')">uiengine-render</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uilist&lt;-uimap')">uilist&lt;-uimap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uilist-selected&lt;-ui')">uilist-selected&lt;-ui</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap&lt;-uilist')">uimap&lt;-uilist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap&lt;-uimap-data')">uimap&lt;-uimap-data</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap-layout&lt;-uimap-layoutmap-else')">uimap-layout&lt;-uimap-layoutmap-else</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/uimap-render&lt;-uimap-parent')">uimap-render&lt;-uimap-parent</span>
             </li>
           </ul>
         </details>
@@ -71873,6 +71954,8 @@ output : list-1 := (empty list-1)
               boundsmargin     : bounds
               boundspadding    : bounds
               color-background : string
+              color-border     : string
+              color-font       : string
               color-hoverbkgrd : string
               cursor           : cursor
               font             : font
@@ -71883,7 +71966,9 @@ output : list-1 := (empty list-1)
               pin              : pin
               pointpos         : point
               pointrotate      : point
-              pointsize        : point]
+              pointsize        : point
+              scroll-x         : boolean
+              scroll-y         : boolean]
  :doc &quot;Universal Style&quot;)
 
 (type stylelist : list
@@ -72188,7 +72273,7 @@ output : list-1 := (empty list-1)
   [selectedui : ui :=
     (ui-selected&lt;-ui ui)]
   (:uid selectedui))
- :doc &quot;&quot;)
+ :doc &quot;Return the uid of the ui with selected=true&quot;)
 
 (func stringlist&lt;-ui : stringlist
  [ui : ui]
@@ -72196,7 +72281,7 @@ output : list-1 := (empty list-1)
   [uimap  : uimap  := (:uimap ui)]
   (coll/stringlist&lt;-map
    uimap))
- :doc &quot;Return a list of uid of the ui with selected=true&quot;)
+ :doc &quot;Return a list of uid of the ui&quot;)
 
 (func stringlist-selected&lt;-ui : stringlist
  [ui : ui]
@@ -72252,6 +72337,61 @@ output : list-1 := (empty list-1)
   uichg)
  :doc &quot;&quot;)
 
+(func ui&lt;-ui-selected : ui
+ [ui       : ui
+  selected : int]
+ (if : ui
+  (then
+   (&lt; selected 1)
+   ui)
+  (else
+   (let : ui
+    [uimap : uimap := (:uimap ui)
+     uilist1 : uilist :=
+      (uilist&lt;-uimap uimap)
+     uilist2 : uilist :=
+      (list&lt;-list-intany
+       uilist1
+       (fn : ui
+        [posval : int
+         uival  : ui]
+        (if : ui
+         (then
+          (= posval selected)
+          (copy uival
+           :selected true))
+         (else
+          (copy uival
+           :selected false)))))
+     childmap : uimap :=
+      (uimap&lt;-uilist uilist2)]
+    (copy ui
+     :uimap childmap))))
+ :test (test
+        (ui
+         :uimap
+          (uimap
+           :a
+            (ui
+             :uid &quot;a&quot;)
+           :b
+            (ui
+             :uid &quot;b&quot;
+             :selected true)))
+        (ui&lt;-ui-selected
+         (ui
+          :uimap
+           (uimap
+            :a
+             (ui
+              :uid &quot;a&quot;
+              :selected true)
+            :b
+             (ui
+              :uid &quot;b&quot;)))
+         2))
+ :doc &quot;Return a ui after changing selected item and writing it.&quot;)
+
 (func ui-child&lt;-ui-uid : ui
  [ui  : ui
   uid : string]
@@ -72297,15 +72437,17 @@ output : list-1 := (empty list-1)
   layoutmap  : layoutmap
   layoutelse : layout]
  (let : ui
-  [uimap   : uimap  := (:uimap ui)
-   layout1 : layout := (layout&lt;-ui-layoutmap-else
-                        ui
-                        layoutmap
-                        layoutelse)
-   uimap2  : uimap  := (uimap-layout&lt;-uimap-layoutmap-else
-                        uimap
-                        layoutmap
-                        layoutelse)]
+  [uimap : uimap := (:uimap ui)
+   layout1 : layout :=
+    (layout&lt;-ui-layoutmap-else
+     ui
+     layoutmap
+     layoutelse)
+   uimap2 : uimap :=
+    (uimap-layout&lt;-uimap-layoutmap-else
+     uimap
+     layoutmap
+     layoutelse)]
   (copy ui
    :layout layout1
    :uimap  uimap2))
@@ -72315,7 +72457,8 @@ output : list-1 := (empty list-1)
  [ui       : ui
   uiengine : uiengine]
  (let : ui
-  [layoutengine : layoutengine := (:layoutengine uiengine)]
+  [layoutengine : layoutengine :=
+   (:layoutengine uiengine)]
   (ui-layout&lt;-ui-layoutengine
    ui
    layoutengine))
@@ -72360,14 +72503,25 @@ output : list-1 := (empty list-1)
    (let : ui
     [uimap  : uimap  := (:uimap  ui)
      layout : layout := (:layout ui)
-     uiout  : ui     := (ui&lt;-layout-ui-orig-parent
-                         layout
-                         ui
-                         orig
-                         parent)]
+     uiout  : ui :=
+      (ui&lt;-layout-ui-orig-parent
+       layout ui orig parent)]
     uiout)))
  :sideeffects &quot;Alters UI&quot;
  :doc &quot;Returns a rendered object from a UI Element.&quot;)
+
+(func ui-render&lt;-ui-parent-selected : ui
+ [ui       : ui
+  parent   : ui
+  selected : int]
+ (let : ui
+  [uichg : ui :=
+    (ui&lt;-ui-selected
+     ui selected)
+   childmap : uimap := (:uimap uichg)]
+  (ui-render&lt;-ui-orig-parent
+   uichg ui parent))
+ :doc &quot;Return a ui after changing selected item and writing it.&quot;)
 
 (func ui-selected&lt;-ui : ui
  [ui : ui]
@@ -72394,14 +72548,15 @@ output : list-1 := (empty list-1)
  [ui       : ui
   childmap : uimap]
  (let : ui
-  [workmap : uimap := (map&lt;-map : uimap
-                       childmap
-                       (fn : ui
-                        [key   : string
-                         value : ui]
-                        (ui-writechild&lt;-ui-child
-                         ui
-                         value)))]
+  [workmap : uimap :=
+   (map&lt;-map : uimap
+    childmap
+    (fn : ui
+     [key   : string
+      value : ui]
+     (ui-writechild&lt;-ui-child
+      ui
+      value)))]
   ui)
  :doc &quot;Returns the given ui with the members of childmap added to uimap&quot;)
 
@@ -72422,17 +72577,20 @@ output : list-1 := (empty list-1)
 (func uiengine-render : uiengine
  [uiengine : uiengine]
  (let : uiengine
-  [stylesheet       : stylesheet        := (:stylesheet       uiengine)
-   ui               : ui                := (:ui               uiengine)
-   layoutengine     : layoutengine      := (:layoutengine     uiengine)
-   stylesheetrender : stylesheet-render := (:stylesheetrender layoutengine)
-   stylesheetrend   : stylesheet        := (stylesheetrender
-                                            stylesheet)
-   uirenderer       : ui                := (ui-layout&lt;-ui-layoutengine
-                                            ui
-                                            layoutengine)
-   uirendered       : ui                := (ui-render
-                                            uirenderer)]
+  [stylesheet : stylesheet :=
+   (:stylesheet uiengine)
+   ui : ui := (:ui uiengine)
+   layoutengine : layoutengine :=
+    (:layoutengine uiengine)
+   stylesheetrender : stylesheet-render :=
+    (:stylesheetrender layoutengine)
+   stylesheetrend : stylesheet :=
+    (stylesheetrender stylesheet)
+   uirenderer : ui :=
+    (ui-layout&lt;-ui-layoutengine
+     ui layoutengine)
+   uirendered : ui :=
+    (ui-render uirenderer)]
   (copy uiengine
    :ui uirendered))
  :context
@@ -72452,9 +72610,10 @@ output : list-1 := (empty list-1)
  [uiarg : ui]
  (let : uilist
   [uimap  : uimap  := (:uimap uiarg)
-   uilist : uilist := (uilist&lt;-uimap
-                       uimap)]
-  (list&lt;-list : uilist
+   uilist : uilist :=
+    (uilist&lt;-uimap
+     uimap)]
+  (coll/list&lt;-list-filter : uilist
    uilist
    (fn : ui
     [item : ui]
@@ -72464,7 +72623,7 @@ output : list-1 := (empty list-1)
  :doc &quot;Return a uilist of the ui with selected=true&quot;)
 
 (func uimap&lt;-uilist : uimap
- [uilist : uilist]
+ [uilist : uilist :...]
  (map&lt;-list : uimap
   uilist
   (fn : string
@@ -73841,6 +74000,20 @@ output : list-1 := (empty list-1)
                       <div class="td">false</div>
                     </div>
                     <div class="tr">
+                      <div class="td">color-border</div>
+                      <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                      <div class="td"></div>
+                      <div class="td">false</div>
+                      <div class="td">false</div>
+                    </div>
+                    <div class="tr">
+                      <div class="td">color-font</div>
+                      <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                      <div class="td"></div>
+                      <div class="td">false</div>
+                      <div class="td">false</div>
+                    </div>
+                    <div class="tr">
                       <div class="td">color-hoverbkgrd</div>
                       <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
                       <div class="td"></div>
@@ -73917,6 +74090,20 @@ output : list-1 := (empty list-1)
                       <div class="td">false</div>
                       <div class="td">false</div>
                     </div>
+                    <div class="tr">
+                      <div class="td">scroll-x</div>
+                      <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/boolean')">vx/core/boolean</span></div>
+                      <div class="td"></div>
+                      <div class="td">false</div>
+                      <div class="td">false</div>
+                    </div>
+                    <div class="tr">
+                      <div class="td">scroll-y</div>
+                      <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/boolean')">vx/core/boolean</span></div>
+                      <div class="td"></div>
+                      <div class="td">false</div>
+                      <div class="td">false</div>
+                    </div>
                   </div>
                 </li>
               </ul>
@@ -73940,6 +74127,8 @@ output : list-1 := (empty list-1)
               boundsmargin     : bounds
               boundspadding    : bounds
               color-background : string
+              color-border     : string
+              color-font       : string
               color-hoverbkgrd : string
               cursor           : cursor
               font             : font
@@ -73950,7 +74139,9 @@ output : list-1 := (empty list-1)
               pin              : pin
               pointpos         : point
               pointrotate      : point
-              pointsize        : point]
+              pointsize        : point
+              scroll-x         : boolean
+              scroll-y         : boolean]
  :doc &quot;Universal Style&quot;)</div>
                 </li>
               </ul>
@@ -76970,7 +77161,7 @@ output : list-1 := (empty list-1)
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt"></div>
+                <div class="txt">Return the uid of the ui with selected=true</div>
               </li>
             </ul>
             <div class="lbl">Function Name:</div>
@@ -77026,7 +77217,7 @@ output : list-1 := (empty list-1)
   [selectedui : ui :=
     (ui-selected&lt;-ui ui)]
   (:uid selectedui))
- :doc &quot;&quot;)</div>
+ :doc &quot;Return the uid of the ui with selected=true&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -77036,7 +77227,7 @@ output : list-1 := (empty list-1)
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt">Return a list of uid of the ui with selected=true</div>
+                <div class="txt">Return a list of uid of the ui</div>
               </li>
             </ul>
             <div class="lbl">Function Name:</div>
@@ -77092,7 +77283,7 @@ output : list-1 := (empty list-1)
   [uimap  : uimap  := (:uimap ui)]
   (coll/stringlist&lt;-map
    uimap))
- :doc &quot;Return a list of uid of the ui with selected=true&quot;)</div>
+ :doc &quot;Return a list of uid of the ui&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -77451,6 +77642,147 @@ output : list-1 := (empty list-1)
               </ul>
             </details>
           </div>
+          <div class="d" id="d_func_vx/ui/ui/ui&lt;-ui-selected">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui&lt;-ui-selected')">ui&lt;-ui-selected</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Return a ui after changing selected item and writing it.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">ui&lt;-ui-selected</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">ui</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">selected</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/int')">vx/core/int</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+                <li><div class="test">(test
+ (ui
+  :uimap
+   (uimap
+    :a
+     (ui
+      :uid &quot;a&quot;)
+    :b
+     (ui
+      :uid &quot;b&quot;
+      :selected true)))
+ (ui&lt;-ui-selected
+  (ui
+   :uimap
+    (uimap
+     :a
+      (ui
+       :uid &quot;a&quot;
+       :selected true)
+     :b
+      (ui
+       :uid &quot;b&quot;)))
+  2))</div></li>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func ui&lt;-ui-selected : ui
+ [ui       : ui
+  selected : int]
+ (if : ui
+  (then
+   (&lt; selected 1)
+   ui)
+  (else
+   (let : ui
+    [uimap : uimap := (:uimap ui)
+     uilist1 : uilist :=
+      (uilist&lt;-uimap uimap)
+     uilist2 : uilist :=
+      (list&lt;-list-intany
+       uilist1
+       (fn : ui
+        [posval : int
+         uival  : ui]
+        (if : ui
+         (then
+          (= posval selected)
+          (copy uival
+           :selected true))
+         (else
+          (copy uival
+           :selected false)))))
+     childmap : uimap :=
+      (uimap&lt;-uilist uilist2)]
+    (copy ui
+     :uimap childmap))))
+ :test (test
+        (ui
+         :uimap
+          (uimap
+           :a
+            (ui
+             :uid &quot;a&quot;)
+           :b
+            (ui
+             :uid &quot;b&quot;
+             :selected true)))
+        (ui&lt;-ui-selected
+         (ui
+          :uimap
+           (uimap
+            :a
+             (ui
+              :uid &quot;a&quot;
+              :selected true)
+            :b
+             (ui
+              :uid &quot;b&quot;)))
+         2))
+ :doc &quot;Return a ui after changing selected item and writing it.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
           <div class="d" id="d_func_vx/ui/ui/ui-child&lt;-ui-uid">
             <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-child&lt;-ui-uid')">ui-child&lt;-ui-uid</span></div>
             <div class="lbl">Description:</div>
@@ -77803,15 +78135,17 @@ output : list-1 := (empty list-1)
   layoutmap  : layoutmap
   layoutelse : layout]
  (let : ui
-  [uimap   : uimap  := (:uimap ui)
-   layout1 : layout := (layout&lt;-ui-layoutmap-else
-                        ui
-                        layoutmap
-                        layoutelse)
-   uimap2  : uimap  := (uimap-layout&lt;-uimap-layoutmap-else
-                        uimap
-                        layoutmap
-                        layoutelse)]
+  [uimap : uimap := (:uimap ui)
+   layout1 : layout :=
+    (layout&lt;-ui-layoutmap-else
+     ui
+     layoutmap
+     layoutelse)
+   uimap2 : uimap :=
+    (uimap-layout&lt;-uimap-layoutmap-else
+     uimap
+     layoutmap
+     layoutelse)]
   (copy ui
    :layout layout1
    :uimap  uimap2))
@@ -77884,7 +78218,8 @@ output : list-1 := (empty list-1)
  [ui       : ui
   uiengine : uiengine]
  (let : ui
-  [layoutengine : layoutengine := (:layoutengine uiengine)]
+  [layoutengine : layoutengine :=
+   (:layoutengine uiengine)]
   (ui-layout&lt;-ui-layoutengine
    ui
    layoutengine))
@@ -78186,14 +78521,93 @@ output : list-1 := (empty list-1)
    (let : ui
     [uimap  : uimap  := (:uimap  ui)
      layout : layout := (:layout ui)
-     uiout  : ui     := (ui&lt;-layout-ui-orig-parent
-                         layout
-                         ui
-                         orig
-                         parent)]
+     uiout  : ui :=
+      (ui&lt;-layout-ui-orig-parent
+       layout ui orig parent)]
     uiout)))
  :sideeffects &quot;Alters UI&quot;
  :doc &quot;Returns a rendered object from a UI Element.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/ui/ui/ui-render&lt;-ui-parent-selected">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/ui/ui/ui-render&lt;-ui-parent-selected')">ui-render&lt;-ui-parent-selected</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Return a ui after changing selected item and writing it.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">ui-render&lt;-ui-parent-selected</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">ui</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">parent</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">vx/ui/ui/ui</span></div>
+                    <div class="td"></div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">selected</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/int')">vx/core/int</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func ui-render&lt;-ui-parent-selected : ui
+ [ui       : ui
+  parent   : ui
+  selected : int]
+ (let : ui
+  [uichg : ui :=
+    (ui&lt;-ui-selected
+     ui selected)
+   childmap : uimap := (:uimap uichg)]
+  (ui-render&lt;-ui-orig-parent
+   uichg ui parent))
+ :doc &quot;Return a ui after changing selected item and writing it.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -78404,14 +78818,15 @@ output : list-1 := (empty list-1)
  [ui       : ui
   childmap : uimap]
  (let : ui
-  [workmap : uimap := (map&lt;-map : uimap
-                       childmap
-                       (fn : ui
-                        [key   : string
-                         value : ui]
-                        (ui-writechild&lt;-ui-child
-                         ui
-                         value)))]
+  [workmap : uimap :=
+   (map&lt;-map : uimap
+    childmap
+    (fn : ui
+     [key   : string
+      value : ui]
+     (ui-writechild&lt;-ui-child
+      ui
+      value)))]
   ui)
  :doc &quot;Returns the given ui with the members of childmap added to uimap&quot;)</div>
                 </li>
@@ -78601,17 +79016,20 @@ output : list-1 := (empty list-1)
                   <div class="source">(func uiengine-render : uiengine
  [uiengine : uiengine]
  (let : uiengine
-  [stylesheet       : stylesheet        := (:stylesheet       uiengine)
-   ui               : ui                := (:ui               uiengine)
-   layoutengine     : layoutengine      := (:layoutengine     uiengine)
-   stylesheetrender : stylesheet-render := (:stylesheetrender layoutengine)
-   stylesheetrend   : stylesheet        := (stylesheetrender
-                                            stylesheet)
-   uirenderer       : ui                := (ui-layout&lt;-ui-layoutengine
-                                            ui
-                                            layoutengine)
-   uirendered       : ui                := (ui-render
-                                            uirenderer)]
+  [stylesheet : stylesheet :=
+   (:stylesheet uiengine)
+   ui : ui := (:ui uiengine)
+   layoutengine : layoutengine :=
+    (:layoutengine uiengine)
+   stylesheetrender : stylesheet-render :=
+    (:stylesheetrender layoutengine)
+   stylesheetrend : stylesheet :=
+    (stylesheetrender stylesheet)
+   uirenderer : ui :=
+    (ui-layout&lt;-ui-layoutengine
+     ui layoutengine)
+   uirendered : ui :=
+    (ui-render uirenderer)]
   (copy uiengine
    :ui uirendered))
  :context
@@ -78747,9 +79165,10 @@ output : list-1 := (empty list-1)
  [uiarg : ui]
  (let : uilist
   [uimap  : uimap  := (:uimap uiarg)
-   uilist : uilist := (uilist&lt;-uimap
-                       uimap)]
-  (list&lt;-list : uilist
+   uilist : uilist :=
+    (uilist&lt;-uimap
+     uimap)]
+  (coll/list&lt;-list-filter : uilist
    uilist
    (fn : ui
     [item : ui]
@@ -78817,7 +79236,7 @@ output : list-1 := (empty list-1)
               <ul>
                 <li>
                   <div class="source">(func uimap&lt;-uilist : uimap
- [uilist : uilist]
+ [uilist : uilist :...]
  (map&lt;-list : uimap
   uilist
   (fn : string
@@ -83244,11 +83663,14 @@ output : list-1 := (empty list-1)
      pointrotate      : ui/point     := (:pointrotate      uistyle)
      styletype        : ui/styletype := (:type             uistyle)
      color-bkg        : string       := (:color-background uistyle)
-//     image-bkg        : ui/image     := (:image-background uistyle)
+     color-border     : string       := (:color-border     uistyle)
+     color-font       : string       := (:color-font       uistyle)
      color-hoverbkg   : string       := (:color-hoverbkgrd uistyle)
      cursor           : ui/cursor    := (:cursor           uistyle)
      hidden           : boolean      := (:hidden           uistyle)
      align            : ui/align     := (:align            uistyle)
+     scroll-x         : boolean      := (:scroll-x         uistyle)
+     scroll-y         : boolean      := (:scroll-y         uistyle)
      posx             : int          := (:x pointpos)
      posy             : int          := (:y pointpos)
      postype          : ui/pointtype := (:pointtype pointpos)
@@ -83263,19 +83685,27 @@ output : list-1 := (empty list-1)
       (if : string
        (then
         (!-empty color-bkg)
-        (string
-         &quot;#&quot;
-         color-bkg)))
-/*
-     bkgimage : string :=
-      (string-style&lt;-image
-       image-bkg)
-     bkgsize : string :=
+        (string &quot;#&quot; color-bkg)))
+     borderwidth : string :=
       (if : string
        (then
-        (!-empty image-bkg)
-        &quot;cover&quot;))
-*/
+        (!-empty color-border)
+        &quot;thin&quot;))
+     bordercolor : string :=
+      (if : string
+       (then
+        (!-empty color-border)
+        (string &quot;#&quot; color-border)))
+     borderstyle : string :=
+      (if : string
+       (then
+        (!-empty color-border)
+        (string &quot;solid&quot;)))
+     fontcolor : string :=
+      (if : string
+       (then
+        (!-empty color-font)
+        (string &quot;#&quot; color-font)))
      position : string :=
       (if : string
        (then
@@ -83302,16 +83732,12 @@ output : list-1 := (empty list-1)
       (if : string
        (then
         (== pin ui/pin-expand)
-        (string
-         posy
-         &quot;mm&quot;))
+        (string posy &quot;mm&quot;))
        (then
         (== 0 posy)
         &quot;&quot;)
        (else
-        (string
-         posy
-         &quot;mm&quot;)))
+        (string posy &quot;mm&quot;)))
      bottom : string :=
       (if : string
        (then
@@ -83324,9 +83750,7 @@ output : list-1 := (empty list-1)
         (or
          (== pin ui/pin-left)
          (== pin ui/pin-center-v))
-        (string
-         sizey
-         &quot;mm&quot;)))
+        (string sizey &quot;mm&quot;)))
      left : string :=
       (if : string
        (then
@@ -83354,9 +83778,7 @@ output : list-1 := (empty list-1)
          (== pin ui/pin-top)
          (== pin ui/pin-bottom)
          (== pin ui/pin-center-v))
-        (string
-         sizex
-         &quot;mm&quot;)))
+        (string sizex &quot;mm&quot;)))
      height : string :=
       (if : string
        (then
@@ -83409,14 +83831,12 @@ output : list-1 := (empty list-1)
      overflowx : string :=
       (if : string
        (then
-        (== layout ui/layout-flow-rows)
-        &quot;auto&quot;))
+        scroll-x &quot;auto&quot;))
      overflowy : string :=
       (if : string
        (then
-        (== layout ui/layout-flow-columns)
-        &quot;auto&quot;))
-     hoverbkgrdcolor  : string :=
+        scroll-y &quot;auto&quot;))
+     hoverbkgrdcolor : string :=
       (if : string
        (then
         (!= &quot;&quot; color-hoverbkg)
@@ -83454,8 +83874,10 @@ output : list-1 := (empty list-1)
      props : html/propmap :=
       (html/propmap
        :background-color bkgcolor
-//       :background-image bkgimage
-//       :background-size  bkgsize
+       :border-color     bordercolor
+       :border-style     borderstyle
+       :border-width     borderwidth
+       :color            fontcolor
        :cursor           scursor
        :display          display
        :font             sfont
@@ -83545,21 +83967,33 @@ output : list-1 := (empty list-1)
    :name &quot;html&quot;
    :props
     (html/propmap
+     :border &quot;0mm&quot;
      :margin  &quot;0mm&quot;
      :padding &quot;0mm&quot;))
   (html/style
    :name &quot;body&quot;
    :props
     (html/propmap
+     :border &quot;0mm&quot;
      :margin &quot;0mm&quot;
      :padding &quot;0mm&quot;))
   (html/style
    :name &quot;div&quot;
    :props
     (html/propmap
+     :border &quot;0mm&quot;
+     :box-sizing &quot;border-box&quot;
      :margin &quot;0mm&quot;
      :padding &quot;0mm&quot;
      :position &quot;relative&quot;))
+  (html/style
+   :name &quot;img&quot;
+   :props
+    (html/propmap
+     :border &quot;0mm&quot;
+     :display &quot;block&quot;
+     :margin &quot;0mm&quot;
+     :padding &quot;0mm&quot;))
   (html/style
    :name &quot;p&quot;
    :props
@@ -84890,11 +85324,14 @@ output : list-1 := (empty list-1)
      pointrotate      : ui/point     := (:pointrotate      uistyle)
      styletype        : ui/styletype := (:type             uistyle)
      color-bkg        : string       := (:color-background uistyle)
-//     image-bkg        : ui/image     := (:image-background uistyle)
+     color-border     : string       := (:color-border     uistyle)
+     color-font       : string       := (:color-font       uistyle)
      color-hoverbkg   : string       := (:color-hoverbkgrd uistyle)
      cursor           : ui/cursor    := (:cursor           uistyle)
      hidden           : boolean      := (:hidden           uistyle)
      align            : ui/align     := (:align            uistyle)
+     scroll-x         : boolean      := (:scroll-x         uistyle)
+     scroll-y         : boolean      := (:scroll-y         uistyle)
      posx             : int          := (:x pointpos)
      posy             : int          := (:y pointpos)
      postype          : ui/pointtype := (:pointtype pointpos)
@@ -84909,19 +85346,27 @@ output : list-1 := (empty list-1)
       (if : string
        (then
         (!-empty color-bkg)
-        (string
-         &quot;#&quot;
-         color-bkg)))
-/*
-     bkgimage : string :=
-      (string-style&lt;-image
-       image-bkg)
-     bkgsize : string :=
+        (string &quot;#&quot; color-bkg)))
+     borderwidth : string :=
       (if : string
        (then
-        (!-empty image-bkg)
-        &quot;cover&quot;))
-*/
+        (!-empty color-border)
+        &quot;thin&quot;))
+     bordercolor : string :=
+      (if : string
+       (then
+        (!-empty color-border)
+        (string &quot;#&quot; color-border)))
+     borderstyle : string :=
+      (if : string
+       (then
+        (!-empty color-border)
+        (string &quot;solid&quot;)))
+     fontcolor : string :=
+      (if : string
+       (then
+        (!-empty color-font)
+        (string &quot;#&quot; color-font)))
      position : string :=
       (if : string
        (then
@@ -84948,16 +85393,12 @@ output : list-1 := (empty list-1)
       (if : string
        (then
         (== pin ui/pin-expand)
-        (string
-         posy
-         &quot;mm&quot;))
+        (string posy &quot;mm&quot;))
        (then
         (== 0 posy)
         &quot;&quot;)
        (else
-        (string
-         posy
-         &quot;mm&quot;)))
+        (string posy &quot;mm&quot;)))
      bottom : string :=
       (if : string
        (then
@@ -84970,9 +85411,7 @@ output : list-1 := (empty list-1)
         (or
          (== pin ui/pin-left)
          (== pin ui/pin-center-v))
-        (string
-         sizey
-         &quot;mm&quot;)))
+        (string sizey &quot;mm&quot;)))
      left : string :=
       (if : string
        (then
@@ -85000,9 +85439,7 @@ output : list-1 := (empty list-1)
          (== pin ui/pin-top)
          (== pin ui/pin-bottom)
          (== pin ui/pin-center-v))
-        (string
-         sizex
-         &quot;mm&quot;)))
+        (string sizex &quot;mm&quot;)))
      height : string :=
       (if : string
        (then
@@ -85055,14 +85492,12 @@ output : list-1 := (empty list-1)
      overflowx : string :=
       (if : string
        (then
-        (== layout ui/layout-flow-rows)
-        &quot;auto&quot;))
+        scroll-x &quot;auto&quot;))
      overflowy : string :=
       (if : string
        (then
-        (== layout ui/layout-flow-columns)
-        &quot;auto&quot;))
-     hoverbkgrdcolor  : string :=
+        scroll-y &quot;auto&quot;))
+     hoverbkgrdcolor : string :=
       (if : string
        (then
         (!= &quot;&quot; color-hoverbkg)
@@ -85100,8 +85535,10 @@ output : list-1 := (empty list-1)
      props : html/propmap :=
       (html/propmap
        :background-color bkgcolor
-//       :background-image bkgimage
-//       :background-size  bkgsize
+       :border-color     bordercolor
+       :border-style     borderstyle
+       :border-width     borderwidth
+       :color            fontcolor
        :cursor           scursor
        :display          display
        :font             sfont
@@ -85476,21 +85913,33 @@ output : list-1 := (empty list-1)
    :name &quot;html&quot;
    :props
     (html/propmap
+     :border &quot;0mm&quot;
      :margin  &quot;0mm&quot;
      :padding &quot;0mm&quot;))
   (html/style
    :name &quot;body&quot;
    :props
     (html/propmap
+     :border &quot;0mm&quot;
      :margin &quot;0mm&quot;
      :padding &quot;0mm&quot;))
   (html/style
    :name &quot;div&quot;
    :props
     (html/propmap
+     :border &quot;0mm&quot;
+     :box-sizing &quot;border-box&quot;
      :margin &quot;0mm&quot;
      :padding &quot;0mm&quot;
      :position &quot;relative&quot;))
+  (html/style
+   :name &quot;img&quot;
+   :props
+    (html/propmap
+     :border &quot;0mm&quot;
+     :display &quot;block&quot;
+     :margin &quot;0mm&quot;
+     :padding &quot;0mm&quot;))
   (html/style
    :name &quot;p&quot;
    :props

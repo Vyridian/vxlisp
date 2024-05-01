@@ -328,9 +328,10 @@
   [sindent : string := (string<-indent indent)
    ssrc    : string := (string<-propname-val "src" (:src img))
    sid     : string := (string<-propname-val "id"  (:id img))
-   sclass  : string := (string<-propstyle-stylelist
-                        (:style img)
-                        (:stylelist img))
+   sclass  : string :=
+    (string<-propstyle-stylelist
+     (:style img)
+     (:stylelist img))
    sstyle  : string := (string<-propstyleunique (:style-unique img))]
   (string sindent "<img" sid sclass sstyle ssrc " />"))
  :test (test
@@ -361,24 +362,27 @@
    charset  : string := (:charset meta)
    name     : string := (:name meta)
    content  : string := (:content meta)
-   scharset : string := (if : string
-                         (then
-                          (!= "" charset)
-                          (string<-propname-val
-                           "charset"
-                           charset)))
-   sname    : string := (if : string
-                         (then
-                          (!= "" name)
-                          (string<-propname-val
-                           "name"
-                           name)))
-   scontext : string := (if : string
-                         (then
-                          (!= "" content)
-                          (string<-propname-val
-                           "content"
-                           content)))]
+   scharset : string :=
+    (if : string
+     (then
+      (!= "" charset)
+      (string<-propname-val
+       "charset"
+       charset)))
+   sname : string :=
+    (if : string
+     (then
+      (!= "" name)
+      (string<-propname-val
+       "name"
+       name)))
+   scontext : string :=
+    (if : string
+     (then
+      (!= "" content)
+      (string<-propname-val
+       "content"
+       content)))]
   (string
    sindent
    "<meta"
@@ -462,10 +466,12 @@
   [sindent : string := (string<-indent indent)
    text    : string := (htmlstring<-string (:text p))
    sid     : string := (string<-propname-val "id" (:id p))
-   sclass  : string := (string<-propstyle-stylelist
-                        (:style p)
-                        (:stylelist p))
-   sstyle  : string := (string<-propstyleunique (:style-unique p))]
+   sclass  : string :=
+    (string<-propstyle-stylelist
+     (:style p)
+     (:stylelist p))
+   sstyle  : string :=
+    (string<-propstyleunique (:style-unique p))]
   (string sindent "<p" sid sclass sstyle ">" text "</p>"))
  :test (test
         "<p>data</p>"
@@ -527,16 +533,17 @@
   (then
    (!-empty stylelist)
    (let : string
-    [namelist : stringlist := (list<-list : stringlist
-                               stylelist
-                               (fn : style
-                                [item : style]
-                                (string<-string-start
-                                 (:name item)
-                                 2)))
-     joined   : string     := (string<-stringlist-join
-                               namelist
-                               " ")]
+    [namelist : stringlist :=
+     (list<-list : stringlist
+      stylelist
+      (fn : style
+       [item : style]
+       (string<-string-start
+        (:name item)
+        2)))
+     joined : string :=
+      (string<-stringlist-join
+       namelist " ")]
     (if : string
      (!= "" joined)
      (string
@@ -553,9 +560,9 @@
    (!-empty style)
    (let : string
     [props : propmap := (:props style)
-     text  : string  := (string<-stylepropmap-indent
-                         props
-                         0)]
+     text : string :=
+      (string<-stylepropmap-indent
+       props 0)]
     (if : string
      (then
       (!-empty text)
@@ -571,12 +578,14 @@
    name    : string    := (:name      style)
    propmap : propmap   := (:props     style)
    sublist : stylelist := (:stylelist style)
-   stext   : string    := (string<-stylepropmap-indent
-                           propmap
-                           (+1 indent))
-   subtext : string    := (string<-stylelist-indent
-                           sublist
-                           (+1 indent))]
+   stext : string :=
+    (string<-stylepropmap-indent
+     propmap
+     (+1 indent))
+   subtext : string :=
+    (string<-stylelist-indent
+     sublist
+     (+1 indent))]
   (string
    sindent name " {"
    stext
@@ -603,7 +612,7 @@
  [propmap : propmap
   indent  : int]
  (let : string
-  [sindent : string     := (string<-indent indent)
+  [sindent : string := (string<-indent indent)
    sprops  : stringlist :=
     (list<-map : stringlist
      propmap
@@ -647,23 +656,25 @@
   indent : int]
  (let
   [sindent : string := (string<-indent indent)
-   sid     : string := (string<-propname-val
-                        "id"
-                        (:id table))
-   thead   : thead  := (:thead table)
-   tbody   : tbody  := (:tbody table)
-   shead   : string := (string<-thead-indent
-                        thead
-                        (+1 indent))
-   sbody   : string := (string<-tbody-indent
-                        tbody
-                        (+1 indent))]
+   sid : string :=
+    (string<-propname-val
+     "id"
+     (:id table))
+   thead : thead  := (:thead table)
+   tbody : tbody  := (:tbody table)
+   shead : string :=
+    (string<-thead-indent
+     thead
+     (+1 indent))
+   sbody : string :=
+    (string<-tbody-indent
+     tbody
+     (+1 indent))]
   (string
    sindent "<table" sid ">"
    shead
    sbody
-   sindent "</table>")
- )
+   sindent "</table>"))
  :doc "Returns string from table")
 
 (func string<-tbody-indent : string
@@ -703,9 +714,10 @@
  [title  : title
   indent : int]
  (let
-  [sindent : string := (string<-indent
-                        indent)
-   text    : string := (:text title)]
+  [sindent : string :=
+   (string<-indent
+    indent)
+   text : string := (:text title)]
   (string
    sindent
    "<title>"
@@ -762,8 +774,9 @@
  [stylesheet : stylesheet]
  (copy
   stylesheet
-  :stylemap (stylemap<-stylelist
-             (:styles stylesheet)))
+  :stylemap
+   (stylemap<-stylelist
+    (:styles stylesheet)))
  :doc "Decode a URI string")
 
 (func uri<-string : string

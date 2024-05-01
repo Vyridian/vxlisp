@@ -57,6 +57,14 @@ export default class vx_type {
     return output
   }
 
+  static vx_string_from_stringlist_join(stringlist, join) {
+    let output = vx_core.e_string
+    if (stringlist.length > 0) {
+      output = stringlist.join(join)
+    }
+    return output
+  }
+
   static vx_string_lowercase(text) {
     let output = text.toLowerCase()
     return output
@@ -660,7 +668,7 @@ export default class vx_type {
   // (func string<-stringlist-join)
   static f_string_from_stringlist_join(vals, delim) {
     let output = vx_core.e_string
-    output = vals.join(delim)
+    output = vx_type.vx_string_from_stringlist_join(vals, delim)
     return output
   }
 

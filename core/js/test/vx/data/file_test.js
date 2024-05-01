@@ -27,10 +27,10 @@ export default class vx_data_file_test {
       "testpkg",   "vx/data/file", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 85, ":tests", 6, ":total", 7), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 4), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 25, ":tests", 1, ":total", 4), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 7), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 14, ":tests", 1, ":total", 7), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3)
     )
   }
@@ -56,14 +56,63 @@ export default class vx_data_file_test {
           "file<-path", 0,
           "name<-file", 0,
           "path<-file", 0,
-          "pathfull<-file", 0
+          "pathfull<-file", 2
         )
     )
   }
 
+  static f_pathfull_from_file(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/data/file",
+      ":casename", "pathfull<-file",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n \"fname\"\n (pathfull<-file\n  (file\n   :name \"fname\")))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              "fname",
+              vx_data_file.f_pathfull_from_file(
+                vx_core.f_new(
+                  vx_data_file.t_file,
+                  ":name",
+                  "fname"
+                )
+              )
+            )
+          ),
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n \"fpath/fname\"\n (pathfull<-file\n  (file\n   :path \"fpath\"\n   :name \"fname\")))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              "fpath/fname",
+              vx_data_file.f_pathfull_from_file(
+                vx_core.f_new(
+                  vx_data_file.t_file,
+                  ":path",
+                  "fpath",
+                  ":name",
+                  "fname"
+                )
+              )
+            )
+          )
+        )
+    )
+    return output
+  }
+
   static test_cases(context) {
     const output = vx_core.f_new(
-      vx_test.t_testcaselist
+      vx_test.t_testcaselist,
+      vx_data_file_test.f_pathfull_from_file(context)
     )
     return output
   }

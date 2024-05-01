@@ -1479,12 +1479,29 @@ public final class File {
       Core.t_any_from_func.vx_fn_new(() -> {
         final Core.Type_string path = File.f_path_from_file(file);
         final Core.Type_string name = File.f_name_from_file(file);
-        return Core.f_new(
+        return Core.f_if_2(
           Core.t_string,
-          Core.t_anylist.vx_new(
-            path,
-            Core.vx_new_string("/"),
-            name
+          Core.t_thenelselist.vx_new(
+            Core.f_then(
+              Core.t_boolean_from_func.vx_fn_new(() -> {
+                return Core.f_is_empty(path);
+              }),
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return name;
+              })
+            ),
+            Core.f_else(
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return Core.f_new(
+                  Core.t_string,
+                  Core.t_anylist.vx_new(
+                      path,
+                      Core.vx_new_string("/"),
+                      name
+                  )
+                );
+              })
+            )
           )
         );
       })

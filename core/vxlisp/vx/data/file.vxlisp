@@ -170,5 +170,21 @@
  (let : string
   [path : string := (path<-file file)
    name : string := (name<-file file)]
-  (string path "/" name))
+  (if : string
+   (then
+    (is-empty path)
+    name)
+   (else
+    (string path "/" name))))
+ :test (test
+        "fname"
+        (pathfull<-file
+         (file
+          :name "fname")))
+       (test
+        "fpath/fname"
+        (pathfull<-file
+         (file
+          :path "fpath"
+          :name "fname")))
  :doc "Returns full path and name from file.")

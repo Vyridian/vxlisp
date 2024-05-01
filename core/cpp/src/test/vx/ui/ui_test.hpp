@@ -6,6 +6,7 @@
 namespace vx_ui_ui_test {
 
 
+  vx_test::Type_testcase f_ui_from_ui_selected(vx_core::Type_context context);
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context);
   vx_test::Type_testcoveragesummary test_coveragesummary();

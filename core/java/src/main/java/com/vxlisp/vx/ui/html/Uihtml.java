@@ -1593,10 +1593,14 @@ public final class Uihtml {
                 final Ui.Type_point pointrotate = uistyle.pointrotate();
                 final Ui.Type_styletype styletype = uistyle.type();
                 final Core.Type_string color_bkg = uistyle.color_background();
+                final Core.Type_string color_border = uistyle.color_border();
+                final Core.Type_string color_font = uistyle.color_font();
                 final Core.Type_string color_hoverbkg = uistyle.color_hoverbkgrd();
                 final Ui.Type_cursor cursor = uistyle.cursor();
                 final Core.Type_boolean hidden = uistyle.hidden();
                 final Ui.Type_align align = uistyle.align();
+                final Core.Type_boolean scroll_x = uistyle.scroll_x();
+                final Core.Type_boolean scroll_y = uistyle.scroll_y();
                 final Core.Type_int posx = pointpos.x();
                 final Core.Type_int posy = pointpos.y();
                 final Ui.Type_pointtype postype = pointpos.pointtype();
@@ -1617,6 +1621,75 @@ public final class Uihtml {
                             Core.t_anylist.vx_new(
                                 Core.vx_new_string("#"),
                                 color_bkg
+                            )
+                          );
+                        })
+                      )
+                  )
+                );
+                final Core.Type_string borderwidth = Core.f_if_2(
+                  Core.t_string,
+                  Core.t_thenelselist.vx_new(
+                      Core.f_then(
+                        Core.t_boolean_from_func.vx_fn_new(() -> {
+                          return Core.f_notempty(color_border);
+                        }),
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.vx_new_string("thin");
+                        })
+                      )
+                  )
+                );
+                final Core.Type_string bordercolor = Core.f_if_2(
+                  Core.t_string,
+                  Core.t_thenelselist.vx_new(
+                      Core.f_then(
+                        Core.t_boolean_from_func.vx_fn_new(() -> {
+                          return Core.f_notempty(color_border);
+                        }),
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.f_new(
+                            Core.t_string,
+                            Core.t_anylist.vx_new(
+                                Core.vx_new_string("#"),
+                                color_border
+                            )
+                          );
+                        })
+                      )
+                  )
+                );
+                final Core.Type_string borderstyle = Core.f_if_2(
+                  Core.t_string,
+                  Core.t_thenelselist.vx_new(
+                      Core.f_then(
+                        Core.t_boolean_from_func.vx_fn_new(() -> {
+                          return Core.f_notempty(color_border);
+                        }),
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.f_new(
+                            Core.t_string,
+                            Core.t_anylist.vx_new(
+                                Core.vx_new_string("solid")
+                            )
+                          );
+                        })
+                      )
+                  )
+                );
+                final Core.Type_string fontcolor = Core.f_if_2(
+                  Core.t_string,
+                  Core.t_thenelselist.vx_new(
+                      Core.f_then(
+                        Core.t_boolean_from_func.vx_fn_new(() -> {
+                          return Core.f_notempty(color_font);
+                        }),
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.f_new(
+                            Core.t_string,
+                            Core.t_anylist.vx_new(
+                                Core.vx_new_string("#"),
+                                color_font
                             )
                           );
                         })
@@ -2092,10 +2165,7 @@ public final class Uihtml {
                   Core.t_thenelselist.vx_new(
                       Core.f_then(
                         Core.t_boolean_from_func.vx_fn_new(() -> {
-                          return Core.f_eqeq(
-                            layout,
-                            Ui.c_layout_flow_rows
-                          );
+                          return scroll_x;
                         }),
                         Core.t_any_from_func.vx_fn_new(() -> {
                           return Core.vx_new_string("auto");
@@ -2108,10 +2178,7 @@ public final class Uihtml {
                   Core.t_thenelselist.vx_new(
                       Core.f_then(
                         Core.t_boolean_from_func.vx_fn_new(() -> {
-                          return Core.f_eqeq(
-                            layout,
-                            Ui.c_layout_flow_columns
-                          );
+                          return scroll_y;
                         }),
                         Core.t_any_from_func.vx_fn_new(() -> {
                           return Core.vx_new_string("auto");
@@ -2246,6 +2313,14 @@ public final class Uihtml {
                   Core.t_anylist.vx_new(
                       Core.vx_new_string(":background-color"),
                       bkgcolor,
+                      Core.vx_new_string(":border-color"),
+                      bordercolor,
+                      Core.vx_new_string(":border-style"),
+                      borderstyle,
+                      Core.vx_new_string(":border-width"),
+                      borderwidth,
+                      Core.vx_new_string(":color"),
+                      fontcolor,
                       Core.vx_new_string(":cursor"),
                       scursor,
                       Core.vx_new_string(":display"),
@@ -2554,6 +2629,8 @@ public final class Uihtml {
             Core.f_new(
               Html.t_propmap,
               Core.t_anylist.vx_new(
+                Core.vx_new_string(":border"),
+                Core.vx_new_string("0mm"),
                 Core.vx_new_string(":margin"),
                 Core.vx_new_string("0mm"),
                 Core.vx_new_string(":padding"),
@@ -2571,6 +2648,8 @@ public final class Uihtml {
             Core.f_new(
               Html.t_propmap,
               Core.t_anylist.vx_new(
+                Core.vx_new_string(":border"),
+                Core.vx_new_string("0mm"),
                 Core.vx_new_string(":margin"),
                 Core.vx_new_string("0mm"),
                 Core.vx_new_string(":padding"),
@@ -2588,12 +2667,37 @@ public final class Uihtml {
             Core.f_new(
               Html.t_propmap,
               Core.t_anylist.vx_new(
+                Core.vx_new_string(":border"),
+                Core.vx_new_string("0mm"),
+                Core.vx_new_string(":box-sizing"),
+                Core.vx_new_string("border-box"),
                 Core.vx_new_string(":margin"),
                 Core.vx_new_string("0mm"),
                 Core.vx_new_string(":padding"),
                 Core.vx_new_string("0mm"),
                 Core.vx_new_string(":position"),
                 Core.vx_new_string("relative")
+              )
+            )
+          )
+        ),
+        Core.f_new(
+          Html.t_style,
+          Core.t_anylist.vx_new(
+            Core.vx_new_string(":name"),
+            Core.vx_new_string("img"),
+            Core.vx_new_string(":props"),
+            Core.f_new(
+              Html.t_propmap,
+              Core.t_anylist.vx_new(
+                Core.vx_new_string(":border"),
+                Core.vx_new_string("0mm"),
+                Core.vx_new_string(":display"),
+                Core.vx_new_string("block"),
+                Core.vx_new_string(":margin"),
+                Core.vx_new_string("0mm"),
+                Core.vx_new_string(":padding"),
+                Core.vx_new_string("0mm")
               )
             )
           )

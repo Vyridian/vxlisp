@@ -1533,6 +1533,10 @@ namespace vx_ui_html_uihtml {
                 vx_core::vx_ref_plus(styletype);
                 vx_core::Type_string color_bkg = uistyle->color_background();
                 vx_core::vx_ref_plus(color_bkg);
+                vx_core::Type_string color_border = uistyle->color_border();
+                vx_core::vx_ref_plus(color_border);
+                vx_core::Type_string color_font = uistyle->color_font();
+                vx_core::vx_ref_plus(color_font);
                 vx_core::Type_string color_hoverbkg = uistyle->color_hoverbkgrd();
                 vx_core::vx_ref_plus(color_hoverbkg);
                 vx_ui_ui::Type_cursor cursor = uistyle->cursor();
@@ -1541,6 +1545,10 @@ namespace vx_ui_html_uihtml {
                 vx_core::vx_ref_plus(hidden);
                 vx_ui_ui::Type_align align = uistyle->align();
                 vx_core::vx_ref_plus(align);
+                vx_core::Type_boolean scroll_x = uistyle->scroll_x();
+                vx_core::vx_ref_plus(scroll_x);
+                vx_core::Type_boolean scroll_y = uistyle->scroll_y();
+                vx_core::vx_ref_plus(scroll_y);
                 vx_core::Type_int posx = pointpos->x();
                 vx_core::vx_ref_plus(posx);
                 vx_core::Type_int posy = pointpos->y();
@@ -1577,6 +1585,87 @@ namespace vx_ui_html_uihtml {
                   })
                 );
                 vx_core::vx_ref_plus(bkgcolor);
+                vx_core::Type_string borderwidth = vx_core::f_if_2(
+                  vx_core::t_string,
+                  vx_core::vx_new(vx_core::t_thenelselist, {
+                    vx_core::f_then(
+                      vx_core::t_boolean_from_func->vx_fn_new({color_border}, [color_border]() {
+                        vx_core::Type_boolean output_1 = vx_core::f_notempty(color_border);
+                        return output_1;
+                      }),
+                      vx_core::t_any_from_func->vx_fn_new({}, []() {
+                        vx_core::Type_string output_1 = vx_core::vx_new_string("thin");
+                        return output_1;
+                      })
+                    )
+                  })
+                );
+                vx_core::vx_ref_plus(borderwidth);
+                vx_core::Type_string bordercolor = vx_core::f_if_2(
+                  vx_core::t_string,
+                  vx_core::vx_new(vx_core::t_thenelselist, {
+                    vx_core::f_then(
+                      vx_core::t_boolean_from_func->vx_fn_new({color_border}, [color_border]() {
+                        vx_core::Type_boolean output_1 = vx_core::f_notempty(color_border);
+                        return output_1;
+                      }),
+                      vx_core::t_any_from_func->vx_fn_new({color_border}, [color_border]() {
+                        vx_core::Type_string output_1 = vx_core::f_new(
+                          vx_core::t_string,
+                          vx_core::vx_new(vx_core::t_anylist, {
+                            vx_core::vx_new_string("#"),
+                            color_border
+                          })
+                        );
+                        return output_1;
+                      })
+                    )
+                  })
+                );
+                vx_core::vx_ref_plus(bordercolor);
+                vx_core::Type_string borderstyle = vx_core::f_if_2(
+                  vx_core::t_string,
+                  vx_core::vx_new(vx_core::t_thenelselist, {
+                    vx_core::f_then(
+                      vx_core::t_boolean_from_func->vx_fn_new({color_border}, [color_border]() {
+                        vx_core::Type_boolean output_1 = vx_core::f_notempty(color_border);
+                        return output_1;
+                      }),
+                      vx_core::t_any_from_func->vx_fn_new({}, []() {
+                        vx_core::Type_string output_1 = vx_core::f_new(
+                          vx_core::t_string,
+                          vx_core::vx_new(vx_core::t_anylist, {
+                            vx_core::vx_new_string("solid")
+                          })
+                        );
+                        return output_1;
+                      })
+                    )
+                  })
+                );
+                vx_core::vx_ref_plus(borderstyle);
+                vx_core::Type_string fontcolor = vx_core::f_if_2(
+                  vx_core::t_string,
+                  vx_core::vx_new(vx_core::t_thenelselist, {
+                    vx_core::f_then(
+                      vx_core::t_boolean_from_func->vx_fn_new({color_font}, [color_font]() {
+                        vx_core::Type_boolean output_1 = vx_core::f_notempty(color_font);
+                        return output_1;
+                      }),
+                      vx_core::t_any_from_func->vx_fn_new({color_font}, [color_font]() {
+                        vx_core::Type_string output_1 = vx_core::f_new(
+                          vx_core::t_string,
+                          vx_core::vx_new(vx_core::t_anylist, {
+                            vx_core::vx_new_string("#"),
+                            color_font
+                          })
+                        );
+                        return output_1;
+                      })
+                    )
+                  })
+                );
+                vx_core::vx_ref_plus(fontcolor);
                 vx_core::Type_string position = vx_core::f_if_2(
                   vx_core::t_string,
                   vx_core::vx_new(vx_core::t_thenelselist, {
@@ -2110,11 +2199,8 @@ namespace vx_ui_html_uihtml {
                   vx_core::t_string,
                   vx_core::vx_new(vx_core::t_thenelselist, {
                     vx_core::f_then(
-                      vx_core::t_boolean_from_func->vx_fn_new({layout}, [layout]() {
-                        vx_core::Type_boolean output_1 = vx_core::f_eqeq(
-                          layout,
-                          vx_ui_ui::c_layout_flow_rows
-                        );
+                      vx_core::t_boolean_from_func->vx_fn_new({scroll_x}, [scroll_x]() {
+                        vx_core::Type_boolean output_1 = scroll_x;
                         return output_1;
                       }),
                       vx_core::t_any_from_func->vx_fn_new({}, []() {
@@ -2129,11 +2215,8 @@ namespace vx_ui_html_uihtml {
                   vx_core::t_string,
                   vx_core::vx_new(vx_core::t_thenelselist, {
                     vx_core::f_then(
-                      vx_core::t_boolean_from_func->vx_fn_new({layout}, [layout]() {
-                        vx_core::Type_boolean output_1 = vx_core::f_eqeq(
-                          layout,
-                          vx_ui_ui::c_layout_flow_columns
-                        );
+                      vx_core::t_boolean_from_func->vx_fn_new({scroll_y}, [scroll_y]() {
+                        vx_core::Type_boolean output_1 = scroll_y;
                         return output_1;
                       }),
                       vx_core::t_any_from_func->vx_fn_new({}, []() {
@@ -2293,6 +2376,14 @@ namespace vx_ui_html_uihtml {
                   vx_core::vx_new(vx_core::t_anylist, {
                     vx_core::vx_new_string(":background-color"),
                     bkgcolor,
+                    vx_core::vx_new_string(":border-color"),
+                    bordercolor,
+                    vx_core::vx_new_string(":border-style"),
+                    borderstyle,
+                    vx_core::vx_new_string(":border-width"),
+                    borderwidth,
+                    vx_core::vx_new_string(":color"),
+                    fontcolor,
                     vx_core::vx_new_string(":cursor"),
                     scursor,
                     vx_core::vx_new_string(":display"),
@@ -2376,7 +2467,7 @@ namespace vx_ui_html_uihtml {
                     substylelist
                   })
                 );
-                vx_core::vx_release_one_except({layout, name, font, pin, pointpos, pointsize, pointrotate, styletype, color_bkg, color_hoverbkg, cursor, hidden, align, posx, posy, postype, sizex, sizey, sizetype, stylename, bkgcolor, position, top, bottom, left, right, height, width, display, sfont, gap, overflowx, overflowy, hoverbkgrdcolor, scursor, textalign, transform, transformorigin, props, hoverprops, substylelist}, output_1);
+                vx_core::vx_release_one_except({layout, name, font, pin, pointpos, pointsize, pointrotate, styletype, color_bkg, color_border, color_font, color_hoverbkg, cursor, hidden, align, scroll_x, scroll_y, posx, posy, postype, sizex, sizey, sizetype, stylename, bkgcolor, borderwidth, bordercolor, borderstyle, fontcolor, position, top, bottom, left, right, height, width, display, sfont, gap, overflowx, overflowy, hoverbkgrdcolor, scursor, textalign, transform, transformorigin, props, hoverprops, substylelist}, output_1);
                 return output_1;
               })
             );
@@ -2654,6 +2745,8 @@ namespace vx_ui_html_uihtml {
             vx_core::f_new(
               vx_web_html::t_propmap,
               vx_core::vx_new(vx_core::t_anylist, {
+                vx_core::vx_new_string(":border"),
+                vx_core::vx_new_string("0mm"),
                 vx_core::vx_new_string(":margin"),
                 vx_core::vx_new_string("0mm"),
                 vx_core::vx_new_string(":padding"),
@@ -2671,6 +2764,8 @@ namespace vx_ui_html_uihtml {
             vx_core::f_new(
               vx_web_html::t_propmap,
               vx_core::vx_new(vx_core::t_anylist, {
+                vx_core::vx_new_string(":border"),
+                vx_core::vx_new_string("0mm"),
                 vx_core::vx_new_string(":margin"),
                 vx_core::vx_new_string("0mm"),
                 vx_core::vx_new_string(":padding"),
@@ -2688,12 +2783,37 @@ namespace vx_ui_html_uihtml {
             vx_core::f_new(
               vx_web_html::t_propmap,
               vx_core::vx_new(vx_core::t_anylist, {
+                vx_core::vx_new_string(":border"),
+                vx_core::vx_new_string("0mm"),
+                vx_core::vx_new_string(":box-sizing"),
+                vx_core::vx_new_string("border-box"),
                 vx_core::vx_new_string(":margin"),
                 vx_core::vx_new_string("0mm"),
                 vx_core::vx_new_string(":padding"),
                 vx_core::vx_new_string("0mm"),
                 vx_core::vx_new_string(":position"),
                 vx_core::vx_new_string("relative")
+              })
+            )
+          })
+        ),
+        vx_core::f_new(
+          vx_web_html::t_style,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string(":name"),
+            vx_core::vx_new_string("img"),
+            vx_core::vx_new_string(":props"),
+            vx_core::f_new(
+              vx_web_html::t_propmap,
+              vx_core::vx_new(vx_core::t_anylist, {
+                vx_core::vx_new_string(":border"),
+                vx_core::vx_new_string("0mm"),
+                vx_core::vx_new_string(":display"),
+                vx_core::vx_new_string("block"),
+                vx_core::vx_new_string(":margin"),
+                vx_core::vx_new_string("0mm"),
+                vx_core::vx_new_string(":padding"),
+                vx_core::vx_new_string("0mm")
               })
             )
           })

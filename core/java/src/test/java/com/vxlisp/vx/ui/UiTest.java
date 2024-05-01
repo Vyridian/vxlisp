@@ -9,9 +9,89 @@ import com.vxlisp.vx.data.*;
 
 public final class UiTest {
 
+  static Test.Type_testcase f_ui_from_ui_selected(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/ui/ui",
+      ":casename", "ui<-ui-selected",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n (ui\n  :uimap\n   (uimap\n    :a\n     (ui\n      :uid \"a\")\n    :b\n     (ui\n      :uid \"b\"\n      :selected true)))\n (ui<-ui-selected\n  (ui\n   :uimap\n    (uimap\n     :a\n      (ui\n       :uid \"a\"\n       :selected true)\n     :b\n      (ui\n       :uid \"b\")))\n  2))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.f_new(
+                Ui.t_ui,
+                Core.t_anylist.vx_new(
+                  Core.vx_new_string(":uimap"),
+                  Core.f_new(
+                    Ui.t_uimap,
+                    Core.t_anylist.vx_new(
+                      Core.vx_new_string(":a"),
+                      Core.f_new(
+                        Ui.t_ui,
+                        Core.t_anylist.vx_new(
+                          Core.vx_new_string(":uid"),
+                          Core.vx_new_string("a")
+                        )
+                      ),
+                      Core.vx_new_string(":b"),
+                      Core.f_new(
+                        Ui.t_ui,
+                        Core.t_anylist.vx_new(
+                          Core.vx_new_string(":uid"),
+                          Core.vx_new_string("b"),
+                          Core.vx_new_string(":selected"),
+                          Core.vx_new_boolean(true)
+                        )
+                      )
+                    )
+                  )
+                )
+              ),
+              Ui.f_ui_from_ui_selected(
+                Core.f_new(
+                  Ui.t_ui,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string(":uimap"),
+                    Core.f_new(
+                      Ui.t_uimap,
+                      Core.t_anylist.vx_new(
+                        Core.vx_new_string(":a"),
+                        Core.f_new(
+                          Ui.t_ui,
+                          Core.t_anylist.vx_new(
+                            Core.vx_new_string(":uid"),
+                            Core.vx_new_string("a"),
+                            Core.vx_new_string(":selected"),
+                            Core.vx_new_boolean(true)
+                          )
+                        ),
+                        Core.vx_new_string(":b"),
+                        Core.f_new(
+                          Ui.t_ui,
+                          Core.t_anylist.vx_new(
+                            Core.vx_new_string(":uid"),
+                            Core.vx_new_string("b")
+                          )
+                        )
+                      )
+                    )
+                  )
+                ),
+                Core.vx_new_int(2)
+              )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
-      
+      UiTest.f_ui_from_ui_selected(context)
     ));
     Test.Type_testcaselist output = Test.t_testcaselist.vx_new(arraylisttestcase);
     return output;
@@ -21,11 +101,11 @@ public final class UiTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/ui/ui", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 41), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 56, ":tests", 62, ":total", 109), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 40), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 40), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 40), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 109), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 58, ":tests", 65, ":total", 111), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 2, ":tests", 1, ":total", 42), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 42), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 42), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 111), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 28)
     );
   }
@@ -134,10 +214,12 @@ public final class UiTest {
         ":ui-render", 0,
         ":ui-render<-fn-render-ui-orig-parent", 0,
         ":ui-render<-ui-orig-parent", 0,
+        ":ui-render<-ui-parent-selected", 0,
         ":ui-selected<-ui", 0,
         ":ui-writechild<-ui-child", 0,
         ":ui-writechildmap<-ui-childmap", 0,
         ":ui<-layout-ui-orig-parent", 0,
+        ":ui<-ui-selected", 1,
         ":uid-selected<-ui", 0,
         ":uiengine-readstate", 0,
         ":uiengine-render", 0,

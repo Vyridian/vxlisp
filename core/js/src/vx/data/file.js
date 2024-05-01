@@ -264,11 +264,20 @@ export default class vx_data_file {
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const path = vx_data_file.f_path_from_file(file)
         const name = vx_data_file.f_name_from_file(file)
-        return vx_core.f_new(
-          vx_core.t_string,
-          path,
-          "/",
-          name
+        return vx_core.f_if_2(
+          {"any-1": vx_core.t_string},
+          vx_core.f_then(
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_is_empty(path)}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return name})
+          ),
+          vx_core.f_else(
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
+              vx_core.t_string,
+              path,
+              "/",
+              name
+            )})
+          )
         )
       })
     )

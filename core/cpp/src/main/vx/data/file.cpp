@@ -1527,12 +1527,32 @@ namespace vx_data_file {
         vx_core::vx_ref_plus(path);
         vx_core::Type_string name = vx_data_file::f_name_from_file(file);
         vx_core::vx_ref_plus(name);
-        vx_core::Type_string output_1 = vx_core::f_new(
+        vx_core::Type_string output_1 = vx_core::f_if_2(
           vx_core::t_string,
-          vx_core::vx_new(vx_core::t_anylist, {
-            path,
-            vx_core::vx_new_string("/"),
-            name
+          vx_core::vx_new(vx_core::t_thenelselist, {
+            vx_core::f_then(
+              vx_core::t_boolean_from_func->vx_fn_new({path}, [path]() {
+                vx_core::Type_boolean output_1 = vx_core::f_is_empty(path);
+                return output_1;
+              }),
+              vx_core::t_any_from_func->vx_fn_new({name}, [name]() {
+                vx_core::Type_any output_1 = name;
+                return output_1;
+              })
+            ),
+            vx_core::f_else(
+              vx_core::t_any_from_func->vx_fn_new({path, name}, [path, name]() {
+                vx_core::Type_string output_1 = vx_core::f_new(
+                  vx_core::t_string,
+                  vx_core::vx_new(vx_core::t_anylist, {
+                    path,
+                    vx_core::vx_new_string("/"),
+                    name
+                  })
+                );
+                return output_1;
+              })
+            )
           })
         );
         vx_core::vx_release_one_except({path, name}, output_1);

@@ -283,9 +283,9 @@ public final class Core {
 
   @SuppressWarnings("unchecked")
   public static <T extends Core.Type_any> T vx_copy(T value, Core.Type_any arg) {
-   Core.Type_any anyvalue = value.vx_copy(arg);
-   T output = (T)anyvalue;
-   return output;
+    Core.Type_any anyvalue = value.vx_copy(arg);
+    T output = (T)anyvalue;
+    return output;
   }
 
   // vx_eqeq(any, any)
@@ -2156,7 +2156,6 @@ public final class Core {
 
   }
 
-  public static final Type_boolean e_boolean = new Class_boolean();
   public static final Type_boolean t_boolean = new Class_boolean();
 
   /**
@@ -12307,6 +12306,7 @@ public final class Core {
 
   public static final Const_false c_false = new Const_false();
 
+  public static final Type_boolean e_boolean = c_false;
 
   /**
    * Constant: global

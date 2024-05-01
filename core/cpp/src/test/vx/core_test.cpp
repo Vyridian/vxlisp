@@ -1996,28 +1996,26 @@ namespace vx_core_test {
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test(
       context,
-      vx_core::vx_new_string(""),
+      vx_core::vx_new_boolean(false),
       vx_core::f_empty(
-        vx_core::t_string
+        vx_core::t_boolean
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test \"\"     (empty string))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test false  (empty boolean))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
     // testdescribe_2
     vx_test::Type_testresult testresult_2 = vx_test::f_test(
       context,
+      vx_core::vx_new_string(""),
       vx_core::f_empty(
-        vx_core::t_list
-      ),
-      vx_core::f_empty(
-        vx_core::t_list
+        vx_core::t_string
       )
     );
     vx_test::Type_testdescribe testdescribe_2 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test (list) (empty list))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test \"\"     (empty string))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":testresult"), testresult_2
     });
@@ -2025,21 +2023,37 @@ namespace vx_core_test {
     vx_test::Type_testresult testresult_3 = vx_test::f_test(
       context,
       vx_core::f_empty(
+        vx_core::t_list
+      ),
+      vx_core::f_empty(
+        vx_core::t_list
+      )
+    );
+    vx_test::Type_testdescribe testdescribe_3 = vx_core::vx_new(vx_test::t_testdescribe, {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test (list) (empty list))"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
+      vx_core::vx_new_string(":testresult"), testresult_3
+    });
+    // testdescribe_4
+    vx_test::Type_testresult testresult_4 = vx_test::f_test(
+      context,
+      vx_core::f_empty(
         vx_core::t_map
       ),
       vx_core::f_empty(
         vx_core::t_map
       )
     );
-    vx_test::Type_testdescribe testdescribe_3 = vx_core::vx_new(vx_test::t_testdescribe, {
+    vx_test::Type_testdescribe testdescribe_4 = vx_core::vx_new(vx_test::t_testdescribe, {
       vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test (map)  (empty map))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
-      vx_core::vx_new_string(":testresult"), testresult_3
+      vx_core::vx_new_string(":testresult"), testresult_4
     });
     vx_core::vx_Type_listany listdescribe = {
       testdescribe_1,
       testdescribe_2,
-      testdescribe_3
+      testdescribe_3,
+      testdescribe_4
     };
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
       vx_core::vx_new_string(":passfail"), vx_core::c_false,
@@ -2431,24 +2445,22 @@ namespace vx_core_test {
     // testdescribe_1
     vx_test::Type_testresult testresult_1 = vx_test::f_test_true(
       context,
-      vx_core::f_is_empty(vx_core::vx_new_string(""))
+      vx_core::f_is_empty_1(
+        vx_core::vx_new_boolean(false)
+      )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true (is-empty \"\"))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true (is-empty false))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
     // testdescribe_2
     vx_test::Type_testresult testresult_2 = vx_test::f_test_true(
       context,
-      vx_core::f_is_empty_1(
-        vx_core::f_empty(
-          vx_core::t_list
-        )
-      )
+      vx_core::f_is_empty(vx_core::vx_new_string(""))
     );
     vx_test::Type_testdescribe testdescribe_2 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true (is-empty (list)))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true (is-empty \"\"))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":testresult"), testresult_2
     });
@@ -2457,19 +2469,34 @@ namespace vx_core_test {
       context,
       vx_core::f_is_empty_1(
         vx_core::f_empty(
-          vx_core::t_map
+          vx_core::t_list
         )
       )
     );
     vx_test::Type_testdescribe testdescribe_3 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true (is-empty (map)))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true (is-empty (list)))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":testresult"), testresult_3
+    });
+    // testdescribe_4
+    vx_test::Type_testresult testresult_4 = vx_test::f_test_true(
+      context,
+      vx_core::f_is_empty_1(
+        vx_core::f_empty(
+          vx_core::t_map
+        )
+      )
+    );
+    vx_test::Type_testdescribe testdescribe_4 = vx_core::vx_new(vx_test::t_testdescribe, {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true (is-empty (map)))"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
+      vx_core::vx_new_string(":testresult"), testresult_4
     });
     vx_core::vx_Type_listany listdescribe = {
       testdescribe_1,
       testdescribe_2,
-      testdescribe_3
+      testdescribe_3,
+      testdescribe_4
     };
     vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
       vx_core::vx_new_string(":passfail"), vx_core::c_false,
@@ -4214,7 +4241,7 @@ namespace vx_core_test {
         vx_core::vx_new_string(":context-main"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":copy"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":else"), vx_core::vx_new_int(0),
-        vx_core::vx_new_string(":empty"), vx_core::vx_new_int(3),
+        vx_core::vx_new_string(":empty"), vx_core::vx_new_int(4),
         vx_core::vx_new_string(":extends<-any"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":extends<-typedef"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":first<-list"), vx_core::vx_new_int(1),
@@ -4229,7 +4256,7 @@ namespace vx_core_test {
         vx_core::vx_new_string(":int<-func"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":int<-string"), vx_core::vx_new_int(6),
         vx_core::vx_new_string(":is-empty"), vx_core::vx_new_int(0),
-        vx_core::vx_new_string(":is-empty_1"), vx_core::vx_new_int(3),
+        vx_core::vx_new_string(":is-empty_1"), vx_core::vx_new_int(4),
         vx_core::vx_new_string(":is-endswith"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":is-float"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":is-func"), vx_core::vx_new_int(0),

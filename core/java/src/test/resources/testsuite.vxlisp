@@ -21,9 +21,7 @@
         :testresult
          (testresult
           :code ":false"
-          :passfail true
-          :expected false
-          :actual false))
+          :passfail true))
        (testdescribe
         :describename "(test-true (boolean true))"
         :testresult
@@ -38,7 +36,6 @@
          (testresult
           :code ":false"
           :passfail true
-          :expected false
           :actual false))))
     (testcase
      :passfail true
@@ -124,17 +121,13 @@
         :testresult
          (testresult
           :code ":false"
-          :passfail true
-          :expected false
-          :actual false))
+          :passfail true))
        (testdescribe
         :describename "(test-false (is-int 5.5))"
         :testresult
          (testresult
           :code ":false"
-          :passfail true
-          :expected false
-          :actual false))))
+          :passfail true))))
     (testcase
      :passfail true
      :testpkg "vx/core"
@@ -168,9 +161,7 @@
         :testresult
          (testresult
           :code ":false"
-          :passfail true
-          :expected false
-          :actual false))))
+          :passfail true))))
     (testcase
      :passfail true
      :testpkg "vx/core"
@@ -196,17 +187,13 @@
         :testresult
          (testresult
           :code ":false"
-          :passfail true
-          :expected false
-          :actual false))
+          :passfail true))
        (testdescribe
         :describename "(test-false (! true))"
         :testresult
          (testresult
           :code ":false"
-          :passfail true
-          :expected false
-          :actual false))))
+          :passfail true))))
     (testcase
      :passfail true
      :testpkg "vx/core"
@@ -219,8 +206,7 @@
          (testresult
           :code ":ne"
           :passfail true
-          :expected true
-          :actual false))
+          :expected true))
        (testdescribe
         :describename `(test-ne "a" "b")`
         :testresult
@@ -650,9 +636,7 @@
         :testresult
          (testresult
           :code ":false"
-          :passfail true
-          :expected false
-          :actual false))))
+          :passfail true))))
     (testcase
      :passfail true
      :testpkg "vx/core"
@@ -754,9 +738,7 @@
         :testresult
          (testresult
           :code ":false"
-          :passfail true
-          :expected false
-          :actual false))))
+          :passfail true))))
     (testcase
      :passfail true
      :testpkg "vx/core"
@@ -780,9 +762,7 @@
         :testresult
          (testresult
           :code ":false"
-          :passfail true
-          :expected false
-          :actual false))))
+          :passfail true))))
     (testcase
      :passfail true
      :testpkg "vx/core"
@@ -927,9 +907,7 @@
         :testresult
          (testresult
           :code ":false"
-          :passfail true
-          :expected false
-          :actual false))))
+          :passfail true))))
     (testcase
      :passfail true
      :testpkg "vx/core"
@@ -963,9 +941,7 @@
         :testresult
          (testresult
           :code ":false"
-          :passfail true
-          :expected false
-          :actual false))))
+          :passfail true))))
     (testcase
      :passfail true
      :testpkg "vx/core"
@@ -999,6 +975,12 @@
      :casename "empty"
      :describelist
       (testdescribelist
+       (testdescribe
+        :describename "(test false  (empty boolean))"
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true))
        (testdescribe
         :describename `(test ""     (empty string))`
         :testresult
@@ -1216,6 +1198,14 @@
      :describelist
       (testdescribelist
        (testdescribe
+        :describename "(test-true (is-empty false))"
+        :testresult
+         (testresult
+          :code ":true"
+          :passfail true
+          :expected true
+          :actual true))
+       (testdescribe
         :describename `(test-true (is-empty ""))`
         :testresult
          (testresult
@@ -1312,9 +1302,7 @@
         :testresult
          (testresult
           :code ":false"
-          :passfail true
-          :expected false
-          :actual false))))
+          :passfail true))))
     (testcase
      :passfail true
      :testpkg "vx/core"
@@ -1722,9 +1710,7 @@
         :testresult
          (testresult
           :code ":false"
-          :passfail true
-          :expected false
-          :actual false))))
+          :passfail true))))
     (testcase
      :passfail true
      :testpkg "vx/core"
@@ -1744,9 +1730,7 @@
         :testresult
          (testresult
           :code ":false"
-          :passfail true
-          :expected false
-          :actual false))))
+          :passfail true))))
     (testcase
      :passfail true
      :testpkg "vx/core"
@@ -2086,7 +2070,7 @@
       :context-main 0
       :copy 1
       :else 0
-      :empty 3
+      :empty 4
       :extends<-any 0
       :extends<-typedef 0
       :first<-list 1
@@ -2101,7 +2085,7 @@
       :int<-func 0
       :int<-string 6
       :is-empty 0
-      :is-empty_1 3
+      :is-empty_1 4
       :is-endswith 0
       :is-float 0
       :is-func 0
@@ -2821,9 +2805,7 @@
         :testresult
          (testresult
           :code ":false"
-          :passfail true
-          :expected false
-          :actual false))
+          :passfail true))
        (testdescribe
         :describename
          "(test-false
@@ -2831,9 +2813,7 @@
         :testresult
          (testresult
           :code ":false"
-          :passfail true
-          :expected false
-          :actual false))))
+          :passfail true))))
     (testcase
      :passfail true
      :testpkg "vx/type"
@@ -14739,6 +14719,39 @@ ab
     (testcase
      :passfail true
      :testpkg "vx/data/file"
+     :casename "pathfull<-file"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ "fname"
+ (pathfull<-file
+  (file
+   :name "fname")))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "fname"
+          :actual "fname"))
+       (testdescribe
+        :describename
+         `(test
+ "fpath/fname"
+ (pathfull<-file
+  (file
+   :path "fpath"
+   :name "fname")))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected "fpath/fname"
+          :actual "fpath/fname"))))
+    (testcase
+     :passfail true
+     :testpkg "vx/data/file"
      :casename "string-read<-file"
      :describelist
       (testdescribelist
@@ -14769,7 +14782,7 @@ ab
       :name<-file 0
       :path<-file 0
       :pathcurrent<-os 0
-      :pathfull<-file 0
+      :pathfull<-file 2
       :string-read<-file 1)
     :testpkg "vx/data/file"
     :typemap
@@ -14801,14 +14814,14 @@ ab
       :total 14)
     :funcnums
      (testcoveragenums
-      :pct 36
-      :tests 4
+      :pct 45
+      :tests 5
       :total 11)
     :testpkg "vx/data/file"
     :totalnums
      (testcoveragenums
-      :pct 28
-      :tests 4
+      :pct 35
+      :tests 5
       :total 14)
     :typenums
      (testcoveragenums
@@ -16955,6 +16968,65 @@ ab
   :passfail true
   :testpkg "vx/test")
  (testpackage
+  :caselist
+   (testcaselist
+    (testcase
+     :passfail true
+     :testpkg "vx/ui/ui"
+     :casename "ui<-ui-selected"
+     :describelist
+      (testdescribelist
+       (testdescribe
+        :describename
+         `(test
+ (ui
+  :uimap
+   (uimap
+    :a
+     (ui
+      :uid "a")
+    :b
+     (ui
+      :uid "b"
+      :selected true)))
+ (ui<-ui-selected
+  (ui
+   :uimap
+    (uimap
+     :a
+      (ui
+       :uid "a"
+       :selected true)
+     :b
+      (ui
+       :uid "b")))
+  2))`
+        :testresult
+         (testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (ui
+            :uimap
+             (uimap
+              :a
+               (ui
+                :uid "a")
+              :b
+               (ui
+                :uid "b"
+                :selected true)))
+          :actual
+           (ui
+            :uimap
+             (uimap
+              :a
+               (ui
+                :uid "a")
+              :b
+               (ui
+                :uid "b"
+                :selected true))))))))
   :coveragedetail
    (testcoveragedetail
     :constmap
@@ -17029,10 +17101,12 @@ ab
       :ui-render 0
       :ui-render<-fn-render-ui-orig-parent 0
       :ui-render<-ui-orig-parent 0
+      :ui-render<-ui-parent-selected 0
       :ui-selected<-ui 0
       :ui-writechild<-ui-child 0
       :ui-writechildmap<-ui-childmap 0
       :ui<-layout-ui-orig-parent 0
+      :ui<-ui-selected 1
       :uid-selected<-ui 0
       :uiengine-readstate 0
       :uiengine-render 0
@@ -17079,12 +17153,12 @@ ab
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 40)
+      :total 42)
     :bigotimenums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 40)
+      :total 42)
     :constnums
      (testcoveragenums
       :pct 0
@@ -17092,20 +17166,20 @@ ab
       :total 41)
     :docnums
      (testcoveragenums
-      :pct 56
-      :tests 62
-      :total 109)
+      :pct 58
+      :tests 65
+      :total 111)
     :funcnums
      (testcoveragenums
-      :pct 0
-      :tests 0
-      :total 40)
+      :pct 2
+      :tests 1
+      :total 42)
     :testpkg "vx/ui/ui"
     :totalnums
      (testcoveragenums
       :pct 0
-      :tests 0
-      :total 109)
+      :tests 1
+      :total 111)
     :typenums
      (testcoveragenums
       :pct 0

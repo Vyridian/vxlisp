@@ -446,12 +446,16 @@ func LangFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string,
 				for _, prop := range ListPropertyTraitFromType(cnst.vxtype) {
 					const_new += "" +
 						"\n      output.vx_p_" + LangFromName(prop.name) + " = val." + LangFromName(prop.name) + "();"
-
 				}
 			}
 		}
 	}
 	extends := LangNameClassFullFromType(lang, cnsttype)
+	e_type := ""
+	switch NameFromConst(cnst) {
+	case "vx/core/false":
+		e_type = "\n  public static final Type_boolean e_boolean = c_false;"
+	}
 	output += "" +
 		"\n  /**" +
 		"\n   * " + StringFromStringIndent(doc, "   * ") +
@@ -477,6 +481,7 @@ func LangFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string,
 		"\n" +
 		"\n  public static final " + cnstclassname + " c_" + cnstname + " = new " + cnstclassname + "();" +
 		"\n" +
+		e_type +
 		"\n"
 	constlate := "" +
 		"\n    " + cnstclassname + ".const_new(c_" + cnstname + ");"
@@ -1913,6 +1918,12 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		"\n      return " + LangTypeDefFromType(lang, typ, "      ") + ";" +
 		"\n    }" +
 		"\n"
+	e_type := ""
+	switch NameFromType(typ) {
+	case "vx/core/boolean":
+	default:
+		e_type = "\n  public static final Type_" + typename + " e_" + typename + " = new Class_" + typename + "();"
+	}
 	output += "" +
 		"\n  /**" +
 		"\n   * " + StringFromStringIndent(doc, "   * ") +
@@ -1945,7 +1956,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		staticfuncs +
 		"\n  }" +
 		"\n" +
-		"\n  public static final Type_" + typename + " e_" + typename + " = new Class_" + typename + "();" +
+		e_type +
 		"\n  public static final Type_" + typename + " t_" + typename + " = new Class_" + typename + "();" +
 		"\n"
 	return output, msgblock

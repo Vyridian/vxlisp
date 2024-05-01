@@ -101,6 +101,8 @@
               boundsmargin     : bounds
               boundspadding    : bounds
               color-background : string
+              color-border     : string
+              color-font       : string
               color-hoverbkgrd : string
               cursor           : cursor
               font             : font
@@ -111,7 +113,9 @@
               pin              : pin
               pointpos         : point
               pointrotate      : point
-              pointsize        : point]
+              pointsize        : point
+              scroll-x         : boolean
+              scroll-y         : boolean]
  :doc "Universal Style")
 
 (type stylelist : list
@@ -416,7 +420,7 @@
   [selectedui : ui :=
     (ui-selected<-ui ui)]
   (:uid selectedui))
- :doc "")
+ :doc "Return the uid of the ui with selected=true")
 
 (func stringlist<-ui : stringlist
  [ui : ui]
@@ -424,7 +428,7 @@
   [uimap  : uimap  := (:uimap ui)]
   (coll/stringlist<-map
    uimap))
- :doc "Return a list of uid of the ui with selected=true")
+ :doc "Return a list of uid of the ui")
 
 (func stringlist-selected<-ui : stringlist
  [ui : ui]
@@ -480,6 +484,61 @@
   uichg)
  :doc "")
 
+(func ui<-ui-selected : ui
+ [ui       : ui
+  selected : int]
+ (if : ui
+  (then
+   (< selected 1)
+   ui)
+  (else
+   (let : ui
+    [uimap : uimap := (:uimap ui)
+     uilist1 : uilist :=
+      (uilist<-uimap uimap)
+     uilist2 : uilist :=
+      (list<-list-intany
+       uilist1
+       (fn : ui
+        [posval : int
+         uival  : ui]
+        (if : ui
+         (then
+          (= posval selected)
+          (copy uival
+           :selected true))
+         (else
+          (copy uival
+           :selected false)))))
+     childmap : uimap :=
+      (uimap<-uilist uilist2)]
+    (copy ui
+     :uimap childmap))))
+ :test (test
+        (ui
+         :uimap
+          (uimap
+           :a
+            (ui
+             :uid "a")
+           :b
+            (ui
+             :uid "b"
+             :selected true)))
+        (ui<-ui-selected
+         (ui
+          :uimap
+           (uimap
+            :a
+             (ui
+              :uid "a"
+              :selected true)
+            :b
+             (ui
+              :uid "b")))
+         2))
+ :doc "Return a ui after changing selected item and writing it.")
+
 (func ui-child<-ui-uid : ui
  [ui  : ui
   uid : string]
@@ -525,15 +584,17 @@
   layoutmap  : layoutmap
   layoutelse : layout]
  (let : ui
-  [uimap   : uimap  := (:uimap ui)
-   layout1 : layout := (layout<-ui-layoutmap-else
-                        ui
-                        layoutmap
-                        layoutelse)
-   uimap2  : uimap  := (uimap-layout<-uimap-layoutmap-else
-                        uimap
-                        layoutmap
-                        layoutelse)]
+  [uimap : uimap := (:uimap ui)
+   layout1 : layout :=
+    (layout<-ui-layoutmap-else
+     ui
+     layoutmap
+     layoutelse)
+   uimap2 : uimap :=
+    (uimap-layout<-uimap-layoutmap-else
+     uimap
+     layoutmap
+     layoutelse)]
   (copy ui
    :layout layout1
    :uimap  uimap2))
@@ -543,7 +604,8 @@
  [ui       : ui
   uiengine : uiengine]
  (let : ui
-  [layoutengine : layoutengine := (:layoutengine uiengine)]
+  [layoutengine : layoutengine :=
+   (:layoutengine uiengine)]
   (ui-layout<-ui-layoutengine
    ui
    layoutengine))
@@ -588,14 +650,25 @@
    (let : ui
     [uimap  : uimap  := (:uimap  ui)
      layout : layout := (:layout ui)
-     uiout  : ui     := (ui<-layout-ui-orig-parent
-                         layout
-                         ui
-                         orig
-                         parent)]
+     uiout  : ui :=
+      (ui<-layout-ui-orig-parent
+       layout ui orig parent)]
     uiout)))
  :sideeffects "Alters UI"
  :doc "Returns a rendered object from a UI Element.")
+
+(func ui-render<-ui-parent-selected : ui
+ [ui       : ui
+  parent   : ui
+  selected : int]
+ (let : ui
+  [uichg : ui :=
+    (ui<-ui-selected
+     ui selected)
+   childmap : uimap := (:uimap uichg)]
+  (ui-render<-ui-orig-parent
+   uichg ui parent))
+ :doc "Return a ui after changing selected item and writing it.")
 
 (func ui-selected<-ui : ui
  [ui : ui]
@@ -622,14 +695,15 @@
  [ui       : ui
   childmap : uimap]
  (let : ui
-  [workmap : uimap := (map<-map : uimap
-                       childmap
-                       (fn : ui
-                        [key   : string
-                         value : ui]
-                        (ui-writechild<-ui-child
-                         ui
-                         value)))]
+  [workmap : uimap :=
+   (map<-map : uimap
+    childmap
+    (fn : ui
+     [key   : string
+      value : ui]
+     (ui-writechild<-ui-child
+      ui
+      value)))]
   ui)
  :doc "Returns the given ui with the members of childmap added to uimap")
 
@@ -650,17 +724,20 @@
 (func uiengine-render : uiengine
  [uiengine : uiengine]
  (let : uiengine
-  [stylesheet       : stylesheet        := (:stylesheet       uiengine)
-   ui               : ui                := (:ui               uiengine)
-   layoutengine     : layoutengine      := (:layoutengine     uiengine)
-   stylesheetrender : stylesheet-render := (:stylesheetrender layoutengine)
-   stylesheetrend   : stylesheet        := (stylesheetrender
-                                            stylesheet)
-   uirenderer       : ui                := (ui-layout<-ui-layoutengine
-                                            ui
-                                            layoutengine)
-   uirendered       : ui                := (ui-render
-                                            uirenderer)]
+  [stylesheet : stylesheet :=
+   (:stylesheet uiengine)
+   ui : ui := (:ui uiengine)
+   layoutengine : layoutengine :=
+    (:layoutengine uiengine)
+   stylesheetrender : stylesheet-render :=
+    (:stylesheetrender layoutengine)
+   stylesheetrend : stylesheet :=
+    (stylesheetrender stylesheet)
+   uirenderer : ui :=
+    (ui-layout<-ui-layoutengine
+     ui layoutengine)
+   uirendered : ui :=
+    (ui-render uirenderer)]
   (copy uiengine
    :ui uirendered))
  :context
@@ -680,9 +757,10 @@
  [uiarg : ui]
  (let : uilist
   [uimap  : uimap  := (:uimap uiarg)
-   uilist : uilist := (uilist<-uimap
-                       uimap)]
-  (list<-list : uilist
+   uilist : uilist :=
+    (uilist<-uimap
+     uimap)]
+  (coll/list<-list-filter : uilist
    uilist
    (fn : ui
     [item : ui]
@@ -692,7 +770,7 @@
  :doc "Return a uilist of the ui with selected=true")
 
 (func uimap<-uilist : uimap
- [uilist : uilist]
+ [uilist : uilist :...]
  (map<-list : uimap
   uilist
   (fn : string

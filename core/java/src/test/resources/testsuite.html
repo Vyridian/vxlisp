@@ -1590,6 +1590,23 @@
                       <p class="preformatted">empty</p>
                     </td>
                     <td>
+                      <p class="preformatted">(test false  (empty boolean))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">false</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">false</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">empty</p>
+                    </td>
+                    <td>
                       <p class="preformatted">(test ""     (empty string))</p>
                     </td>
                     <td>
@@ -1901,6 +1918,23 @@
                     </td>
                     <td>
                       <p class="preformatted">neginfinity</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">is-empty_1</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test-true (is-empty false))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">true</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">true</p>
                     </td>
                   </tr>
                   <tr>
@@ -15570,10 +15604,10 @@ ab
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/data/file</p>
-              <p class="coveragenums">28% 4/14</p>
+              <p class="coveragenums">35% 5/14</p>
               <p class="coveragenums">0% 0/3</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">36% 4/11</p>
+              <p class="coveragenums">45% 5/11</p>
               <p class="coveragenums">92% 13/14</p>
               <p class="coveragenums">0% 0/11</p>
               <p class="coveragenums">0% 0/11</p>
@@ -15672,6 +15706,49 @@ ab
  :name "string_read_from_file.txt"
  :path "src/test/resources/vx"
  :text "testdata")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">pathfull&lt;-file</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ "fname"
+ (pathfull&lt;-file
+  (file
+   :name "fname")))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"fname"</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"fname"</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">pathfull&lt;-file</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ "fpath/fname"
+ (pathfull&lt;-file
+  (file
+   :path "fpath"
+   :name "fname")))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"fpath/fname"</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"fpath/fname"</p>
                     </td>
                   </tr>
                   <tr>
@@ -17832,13 +17909,13 @@ ab
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/ui/ui</p>
-              <p class="coveragenums">0% 0/109</p>
+              <p class="coveragenums">0% 1/111</p>
               <p class="coveragenums">0% 0/28</p>
               <p class="coveragenums">0% 0/41</p>
-              <p class="coveragenums">0% 0/40</p>
-              <p class="coveragenums">56% 62/109</p>
-              <p class="coveragenums">0% 0/40</p>
-              <p class="coveragenums">0% 0/40</p>
+              <p class="coveragenums">2% 1/42</p>
+              <p class="coveragenums">58% 65/111</p>
+              <p class="coveragenums">0% 0/42</p>
+              <p class="coveragenums">0% 0/42</p>
             </summary>
             <div>
               <table>
@@ -17861,7 +17938,65 @@ ab
                     </td>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">ui&lt;-ui-selected</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (ui
+  :uimap
+   (uimap
+    :a
+     (ui
+      :uid "a")
+    :b
+     (ui
+      :uid "b"
+      :selected true)))
+ (ui&lt;-ui-selected
+  (ui
+   :uimap
+    (uimap
+     :a
+      (ui
+       :uid "a"
+       :selected true)
+     :b
+      (ui
+       :uid "b")))
+  2))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(ui
+ :uimap
+  (uimap
+   :a
+    (ui
+     :uid "a")
+   :b
+    (ui
+     :uid "b"
+     :selected true)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(ui
+ :uimap
+  (uimap
+   :a
+    (ui
+     :uid "a")
+   :b
+    (ui
+     :uid "b"
+     :selected true)))</p>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </details>

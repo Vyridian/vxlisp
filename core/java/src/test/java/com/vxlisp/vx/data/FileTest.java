@@ -112,6 +112,54 @@ public final class FileTest {
     return output;
   }
 
+  static Test.Type_testcase f_pathfull_from_file(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/data/file",
+      ":casename", "pathfull<-file",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n \"fname\"\n (pathfull<-file\n  (file\n   :name \"fname\")))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.vx_new_string("fname"),
+              File.f_pathfull_from_file(
+                Core.f_new(
+                  File.t_file,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string("fname")
+                  )
+                )
+              )
+            )
+        ),
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n \"fpath/fname\"\n (pathfull<-file\n  (file\n   :path \"fpath\"\n   :name \"fname\")))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.vx_new_string("fpath/fname"),
+              File.f_pathfull_from_file(
+                Core.f_new(
+                  File.t_file,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string(":path"),
+                    Core.vx_new_string("fpath"),
+                    Core.vx_new_string(":name"),
+                    Core.vx_new_string("fname")
+                  )
+                )
+              )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
   static Test.Type_testcase f_string_read_from_file(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
@@ -149,6 +197,7 @@ public final class FileTest {
       FileTest.f_boolean_exists_from_file(context),
       FileTest.f_boolean_write_from_file_string(context),
       FileTest.f_file_read_from_file(context),
+      FileTest.f_pathfull_from_file(context),
       FileTest.f_string_read_from_file(context)
     ));
     Test.Type_testcaselist output = Test.t_testcaselist.vx_new(arraylisttestcase);
@@ -160,10 +209,10 @@ public final class FileTest {
       ":testpkg",   "vx/data/file", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
       ":docnums", Test.t_testcoveragenums.vx_new(":pct", 92, ":tests", 13, ":total", 14), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 36, ":tests", 4, ":total", 11), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 45, ":tests", 5, ":total", 11), 
       ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 11), 
       ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 11), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 28, ":tests", 4, ":total", 14), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 35, ":tests", 5, ":total", 14), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 3)
     );
   }
@@ -189,7 +238,7 @@ public final class FileTest {
         ":name<-file", 0,
         ":path<-file", 0,
         ":pathcurrent<-os", 0,
-        ":pathfull<-file", 0,
+        ":pathfull<-file", 2,
         ":string-read<-file", 1
       )
     );

@@ -1500,6 +1500,17 @@ public final class CoreTest {
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
+          ":describename", "(test false  (empty boolean))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.vx_new_boolean(false),
+              Core.f_empty(
+                Core.t_boolean
+              )
+            )
+        ),
+        Test.t_testdescribe.vx_new(
           ":describename", "(test \"\"     (empty string))",
           ":testresult",
             Test.f_test(
@@ -1827,6 +1838,16 @@ public final class CoreTest {
       ":casename", "is-empty_1",
       ":describelist",
       Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test-true (is-empty false))",
+          ":testresult",
+            Test.f_test_true(
+              context,
+              Core.f_is_empty_1(
+                Core.vx_new_boolean(false)
+              )
+            )
+        ),
         Test.t_testdescribe.vx_new(
           ":describename", "(test-true (is-empty \"\"))",
           ":testresult",
@@ -3251,7 +3272,7 @@ public final class CoreTest {
         ":context-main", 0,
         ":copy", 1,
         ":else", 0,
-        ":empty", 3,
+        ":empty", 4,
         ":extends<-any", 0,
         ":extends<-typedef", 0,
         ":first<-list", 1,
@@ -3266,7 +3287,7 @@ public final class CoreTest {
         ":int<-func", 0,
         ":int<-string", 6,
         ":is-empty", 0,
-        ":is-empty_1", 3,
+        ":is-empty_1", 4,
         ":is-endswith", 0,
         ":is-float", 0,
         ":is-func", 0,

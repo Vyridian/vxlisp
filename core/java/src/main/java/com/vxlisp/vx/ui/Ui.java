@@ -3532,6 +3532,8 @@ public final class Ui {
     public Ui.Type_bounds boundsmargin();
     public Ui.Type_bounds boundspadding();
     public Core.Type_string color_background();
+    public Core.Type_string color_border();
+    public Core.Type_string color_font();
     public Core.Type_string color_hoverbkgrd();
     public Ui.Type_cursor cursor();
     public Ui.Type_font font();
@@ -3543,6 +3545,8 @@ public final class Ui {
     public Ui.Type_point pointpos();
     public Ui.Type_point pointrotate();
     public Ui.Type_point pointsize();
+    public Core.Type_boolean scroll_x();
+    public Core.Type_boolean scroll_y();
   }
 
   public static class Class_style extends Core.Class_base implements Type_style {
@@ -3580,6 +3584,20 @@ public final class Ui {
     @Override
     public Core.Type_string color_background() {
       return this.vx_p_color_background == null ? Core.e_string : this.vx_p_color_background;
+    }
+
+    protected Core.Type_string vx_p_color_border;
+
+    @Override
+    public Core.Type_string color_border() {
+      return this.vx_p_color_border == null ? Core.e_string : this.vx_p_color_border;
+    }
+
+    protected Core.Type_string vx_p_color_font;
+
+    @Override
+    public Core.Type_string color_font() {
+      return this.vx_p_color_font == null ? Core.e_string : this.vx_p_color_font;
     }
 
     protected Core.Type_string vx_p_color_hoverbkgrd;
@@ -3659,6 +3677,20 @@ public final class Ui {
       return this.vx_p_pointsize == null ? Ui.e_point : this.vx_p_pointsize;
     }
 
+    protected Core.Type_boolean vx_p_scroll_x;
+
+    @Override
+    public Core.Type_boolean scroll_x() {
+      return this.vx_p_scroll_x == null ? Core.e_boolean : this.vx_p_scroll_x;
+    }
+
+    protected Core.Type_boolean vx_p_scroll_y;
+
+    @Override
+    public Core.Type_boolean scroll_y() {
+      return this.vx_p_scroll_y == null ? Core.e_boolean : this.vx_p_scroll_y;
+    }
+
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
@@ -3678,6 +3710,12 @@ public final class Ui {
         break;
       case ":color-background":
         output = this.color_background();
+        break;
+      case ":color-border":
+        output = this.color_border();
+        break;
+      case ":color-font":
+        output = this.color_font();
         break;
       case ":color-hoverbkgrd":
         output = this.color_hoverbkgrd();
@@ -3712,6 +3750,12 @@ public final class Ui {
       case ":pointsize":
         output = this.pointsize();
         break;
+      case ":scroll-x":
+        output = this.scroll_x();
+        break;
+      case ":scroll-y":
+        output = this.scroll_y();
+        break;
       }
       return output;
     }
@@ -3724,6 +3768,8 @@ public final class Ui {
       output.put(":boundsmargin", this.boundsmargin());
       output.put(":boundspadding", this.boundspadding());
       output.put(":color-background", this.color_background());
+      output.put(":color-border", this.color_border());
+      output.put(":color-font", this.color_font());
       output.put(":color-hoverbkgrd", this.color_hoverbkgrd());
       output.put(":cursor", this.cursor());
       output.put(":font", this.font());
@@ -3735,6 +3781,8 @@ public final class Ui {
       output.put(":pointpos", this.pointpos());
       output.put(":pointrotate", this.pointrotate());
       output.put(":pointsize", this.pointsize());
+      output.put(":scroll-x", this.scroll_x());
+      output.put(":scroll-y", this.scroll_y());
       return Core.immutablemap(output);
     }
 
@@ -3757,6 +3805,8 @@ public final class Ui {
       Ui.Type_bounds vx_p_boundsmargin = val.boundsmargin();
       Ui.Type_bounds vx_p_boundspadding = val.boundspadding();
       Core.Type_string vx_p_color_background = val.color_background();
+      Core.Type_string vx_p_color_border = val.color_border();
+      Core.Type_string vx_p_color_font = val.color_font();
       Core.Type_string vx_p_color_hoverbkgrd = val.color_hoverbkgrd();
       Ui.Type_cursor vx_p_cursor = val.cursor();
       Ui.Type_font vx_p_font = val.font();
@@ -3768,12 +3818,16 @@ public final class Ui {
       Ui.Type_point vx_p_pointpos = val.pointpos();
       Ui.Type_point vx_p_pointrotate = val.pointrotate();
       Ui.Type_point vx_p_pointsize = val.pointsize();
+      Core.Type_boolean vx_p_scroll_x = val.scroll_x();
+      Core.Type_boolean vx_p_scroll_y = val.scroll_y();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":name");
       validkeys.add(":align");
       validkeys.add(":boundsmargin");
       validkeys.add(":boundspadding");
       validkeys.add(":color-background");
+      validkeys.add(":color-border");
+      validkeys.add(":color-font");
       validkeys.add(":color-hoverbkgrd");
       validkeys.add(":cursor");
       validkeys.add(":font");
@@ -3785,6 +3839,8 @@ public final class Ui {
       validkeys.add(":pointpos");
       validkeys.add(":pointrotate");
       validkeys.add(":pointsize");
+      validkeys.add(":scroll-x");
+      validkeys.add(":scroll-y");
       String key = "";
       Core.Type_msg msg;
       for (Object valsub : vals) {
@@ -3927,6 +3983,52 @@ public final class Ui {
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
               mapany.put("key", Core.vx_new_string("color-background"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":color-border":
+            if (valsub == vx_p_color_border) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_color_border = (Core.Type_string)valsub;
+            } else if (valsub instanceof String) {
+              ischanged = true;
+              vx_p_color_border = Core.t_string.vx_new(valsub);
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("color-border"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":color-font":
+            if (valsub == vx_p_color_font) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_color_font = (Core.Type_string)valsub;
+            } else if (valsub instanceof String) {
+              ischanged = true;
+              vx_p_color_font = Core.t_string.vx_new(valsub);
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("color-font"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
@@ -4159,6 +4261,52 @@ public final class Ui {
               msgblock = msgblock.vx_copy(msg);
             }
             break;
+          case ":scroll-x":
+            if (valsub == vx_p_scroll_x) {
+            } else if (valsub instanceof Core.Type_boolean) {
+              ischanged = true;
+              vx_p_scroll_x = (Core.Type_boolean)valsub;
+            } else if (valsub instanceof Boolean) {
+              ischanged = true;
+              vx_p_scroll_x = Core.t_boolean.vx_new(valsub);
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("scroll-x"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
+          case ":scroll-y":
+            if (valsub == vx_p_scroll_y) {
+            } else if (valsub instanceof Core.Type_boolean) {
+              ischanged = true;
+              vx_p_scroll_y = (Core.Type_boolean)valsub;
+            } else if (valsub instanceof Boolean) {
+              ischanged = true;
+              vx_p_scroll_y = Core.t_boolean.vx_new(valsub);
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("scroll-y"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
+              msgblock = msgblock.vx_copy(msg);
+            }
+            break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidkey", msgval);
@@ -4174,6 +4322,8 @@ public final class Ui {
         work.vx_p_boundsmargin = vx_p_boundsmargin;
         work.vx_p_boundspadding = vx_p_boundspadding;
         work.vx_p_color_background = vx_p_color_background;
+        work.vx_p_color_border = vx_p_color_border;
+        work.vx_p_color_font = vx_p_color_font;
         work.vx_p_color_hoverbkgrd = vx_p_color_hoverbkgrd;
         work.vx_p_cursor = vx_p_cursor;
         work.vx_p_font = vx_p_font;
@@ -4185,6 +4335,8 @@ public final class Ui {
         work.vx_p_pointpos = vx_p_pointpos;
         work.vx_p_pointrotate = vx_p_pointrotate;
         work.vx_p_pointsize = vx_p_pointsize;
+        work.vx_p_scroll_x = vx_p_scroll_x;
+        work.vx_p_scroll_y = vx_p_scroll_y;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -8709,6 +8861,7 @@ public final class Ui {
 
   /**
    * @function string_selected_from_ui
+   * Return the uid of the ui with selected=true
    * @param  {ui} ui
    * @return {string}
    * (func string-selected<-ui)
@@ -8916,7 +9069,7 @@ public final class Ui {
 
   /**
    * @function stringlist_from_ui
-   * Return a list of uid of the ui with selected=true
+   * Return a list of uid of the ui
    * @param  {ui} ui
    * @return {stringlist}
    * (func stringlist<-ui)
@@ -10224,6 +10377,96 @@ public final class Ui {
   }
 
   /**
+   * @function ui_render_from_ui_parent_selected
+   * Return a ui after changing selected item and writing it.
+   * @param  {ui} ui
+   * @param  {ui} parent
+   * @param  {int} selected
+   * @return {ui}
+   * (func ui-render<-ui-parent-selected)
+   */
+  public static interface Func_ui_render_from_ui_parent_selected extends Core.Type_func, Core.Type_replfunc {
+    public Ui.Type_ui vx_ui_render_from_ui_parent_selected(final Ui.Type_ui ui, final Ui.Type_ui parent, final Core.Type_int selected);
+  }
+
+  public static class Class_ui_render_from_ui_parent_selected extends Core.Class_base implements Func_ui_render_from_ui_parent_selected {
+
+    @Override
+    public Func_ui_render_from_ui_parent_selected vx_new(Object... vals) {
+      Class_ui_render_from_ui_parent_selected output = new Class_ui_render_from_ui_parent_selected();
+      return output;
+    }
+
+    @Override
+    public Func_ui_render_from_ui_parent_selected vx_copy(Object... vals) {
+      Class_ui_render_from_ui_parent_selected output = new Class_ui_render_from_ui_parent_selected();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/ui", // pkgname
+        "ui-render<-ui-parent-selected", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "ui", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_ui_render_from_ui_parent_selected vx_empty() {return e_ui_render_from_ui_parent_selected;}
+    @Override
+    public Func_ui_render_from_ui_parent_selected vx_type() {return t_ui_render_from_ui_parent_selected;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_int selected = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(2)));
+      output = Ui.f_ui_render_from_ui_parent_selected(ui, parent, selected);
+      return output;
+    }
+
+    @Override
+    public Ui.Type_ui vx_ui_render_from_ui_parent_selected(final Ui.Type_ui ui, final Ui.Type_ui parent, final Core.Type_int selected) {
+      return Ui.f_ui_render_from_ui_parent_selected(ui, parent, selected);
+    }
+
+  }
+
+  public static final Func_ui_render_from_ui_parent_selected e_ui_render_from_ui_parent_selected = new Ui.Class_ui_render_from_ui_parent_selected();
+  public static final Func_ui_render_from_ui_parent_selected t_ui_render_from_ui_parent_selected = new Ui.Class_ui_render_from_ui_parent_selected();
+
+  public static Ui.Type_ui f_ui_render_from_ui_parent_selected(final Ui.Type_ui ui, final Ui.Type_ui parent, final Core.Type_int selected) {
+    Ui.Type_ui output = Ui.e_ui;
+    output = Core.f_let(
+      Ui.t_ui,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Ui.Type_ui uichg = Ui.f_ui_from_ui_selected(ui, selected);
+        final Ui.Type_uimap childmap = uichg.uimap();
+        return Ui.f_ui_render_from_ui_orig_parent(uichg, ui, parent);
+      })
+    );
+    return output;
+  }
+
+  /**
    * @function ui_selected_from_ui
    * Returns the ui of the first ui with selected=true
    * @param  {ui} ui
@@ -10593,6 +10836,157 @@ public final class Ui {
         final Ui.Type_ui uichg = Core.vx_any_from_func(Ui.t_ui, fn_layout, uiarg, uiorig, parent);
         return uichg;
       })
+    );
+    return output;
+  }
+
+  /**
+   * @function ui_from_ui_selected
+   * Return a ui after changing selected item and writing it.
+   * @param  {ui} ui
+   * @param  {int} selected
+   * @return {ui}
+   * (func ui<-ui-selected)
+   */
+  public static interface Func_ui_from_ui_selected extends Core.Type_func, Core.Type_replfunc {
+    public Ui.Type_ui vx_ui_from_ui_selected(final Ui.Type_ui ui, final Core.Type_int selected);
+  }
+
+  public static class Class_ui_from_ui_selected extends Core.Class_base implements Func_ui_from_ui_selected {
+
+    @Override
+    public Func_ui_from_ui_selected vx_new(Object... vals) {
+      Class_ui_from_ui_selected output = new Class_ui_from_ui_selected();
+      return output;
+    }
+
+    @Override
+    public Func_ui_from_ui_selected vx_copy(Object... vals) {
+      Class_ui_from_ui_selected output = new Class_ui_from_ui_selected();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/ui", // pkgname
+        "ui<-ui-selected", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "ui", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_ui_from_ui_selected vx_empty() {return e_ui_from_ui_selected;}
+    @Override
+    public Func_ui_from_ui_selected vx_type() {return t_ui_from_ui_selected;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_int selected = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(1)));
+      output = Ui.f_ui_from_ui_selected(ui, selected);
+      return output;
+    }
+
+    @Override
+    public Ui.Type_ui vx_ui_from_ui_selected(final Ui.Type_ui ui, final Core.Type_int selected) {
+      return Ui.f_ui_from_ui_selected(ui, selected);
+    }
+
+  }
+
+  public static final Func_ui_from_ui_selected e_ui_from_ui_selected = new Ui.Class_ui_from_ui_selected();
+  public static final Func_ui_from_ui_selected t_ui_from_ui_selected = new Ui.Class_ui_from_ui_selected();
+
+  public static Ui.Type_ui f_ui_from_ui_selected(final Ui.Type_ui ui, final Core.Type_int selected) {
+    Ui.Type_ui output = Ui.e_ui;
+    output = Core.f_if_2(
+      Ui.t_ui,
+      Core.t_thenelselist.vx_new(
+        Core.f_then(
+          Core.t_boolean_from_func.vx_fn_new(() -> {
+            return Core.f_lt(selected, Core.vx_new_int(1));
+          }),
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return ui;
+          })
+        ),
+        Core.f_else(
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return Core.f_let(
+              Ui.t_ui,
+              Core.t_any_from_func.vx_fn_new(() -> {
+                final Ui.Type_uimap uimap = ui.uimap();
+                final Ui.Type_uilist uilist1 = Ui.f_uilist_from_uimap(uimap);
+                final Ui.Type_uilist uilist2 = Core.f_list_from_list_intany(
+                  Ui.t_uilist,
+                  uilist1,
+                  Core.t_any_from_int_any.vx_fn_new((posval_any, uival_any) -> {
+                    Core.Type_int posval = Core.f_any_from_any(Core.t_int, posval_any);
+                    Ui.Type_ui uival = Core.f_any_from_any(Ui.t_ui, uival_any);
+                    return 
+                      Core.f_if_2(
+                        Ui.t_ui,
+                        Core.t_thenelselist.vx_new(
+                          Core.f_then(
+                            Core.t_boolean_from_func.vx_fn_new(() -> {
+                              return Core.f_eq(posval, selected);
+                            }),
+                            Core.t_any_from_func.vx_fn_new(() -> {
+                              return Core.f_copy(
+                                uival,
+                                Core.t_anylist.vx_new(
+                                    Core.vx_new_string(":selected"),
+                                    Core.vx_new_boolean(true)
+                                )
+                              );
+                            })
+                          ),
+                          Core.f_else(
+                            Core.t_any_from_func.vx_fn_new(() -> {
+                              return Core.f_copy(
+                                uival,
+                                Core.t_anylist.vx_new(
+                                    Core.vx_new_string(":selected"),
+                                    Core.vx_new_boolean(false)
+                                )
+                              );
+                            })
+                          )
+                        )
+                      );
+                  })
+                );
+                final Ui.Type_uimap childmap = Ui.f_uimap_from_uilist(uilist2);
+                return Core.f_copy(
+                  ui,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string(":uimap"),
+                    childmap
+                  )
+                );
+              })
+            );
+          })
+        )
+      )
     );
     return output;
   }
@@ -10974,7 +11368,7 @@ public final class Ui {
       Core.t_any_from_func.vx_fn_new(() -> {
         final Ui.Type_uimap uimap = uiarg.uimap();
         final Ui.Type_uilist uilist = Ui.f_uilist_from_uimap(uimap);
-        return Core.f_list_from_list_1(
+        return Collection.f_list_from_list_filter(
           Ui.t_uilist,
           uilist,
           Core.t_any_from_any.vx_fn_new((item_any) -> {
@@ -11598,10 +11992,12 @@ public final class Ui {
     mapfunc.put("ui-render", Ui.t_ui_render);
     mapfunc.put("ui-render<-fn-render-ui-orig-parent", Ui.t_ui_render_from_fn_render_ui_orig_parent);
     mapfunc.put("ui-render<-ui-orig-parent", Ui.t_ui_render_from_ui_orig_parent);
+    mapfunc.put("ui-render<-ui-parent-selected", Ui.t_ui_render_from_ui_parent_selected);
     mapfunc.put("ui-selected<-ui", Ui.t_ui_selected_from_ui);
     mapfunc.put("ui-writechild<-ui-child", Ui.t_ui_writechild_from_ui_child);
     mapfunc.put("ui-writechildmap<-ui-childmap", Ui.t_ui_writechildmap_from_ui_childmap);
     mapfunc.put("ui<-layout-ui-orig-parent", Ui.t_ui_from_layout_ui_orig_parent);
+    mapfunc.put("ui<-ui-selected", Ui.t_ui_from_ui_selected);
     mapfunc.put("uid-selected<-ui", Ui.t_uid_selected_from_ui);
     mapfunc.put("uiengine-readstate", Ui.t_uiengine_readstate);
     mapfunc.put("uiengine-render", Ui.t_uiengine_render);

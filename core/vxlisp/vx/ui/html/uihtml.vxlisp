@@ -230,11 +230,14 @@
      pointrotate      : ui/point     := (:pointrotate      uistyle)
      styletype        : ui/styletype := (:type             uistyle)
      color-bkg        : string       := (:color-background uistyle)
-//     image-bkg        : ui/image     := (:image-background uistyle)
+     color-border     : string       := (:color-border     uistyle)
+     color-font       : string       := (:color-font       uistyle)
      color-hoverbkg   : string       := (:color-hoverbkgrd uistyle)
      cursor           : ui/cursor    := (:cursor           uistyle)
      hidden           : boolean      := (:hidden           uistyle)
      align            : ui/align     := (:align            uistyle)
+     scroll-x         : boolean      := (:scroll-x         uistyle)
+     scroll-y         : boolean      := (:scroll-y         uistyle)
      posx             : int          := (:x pointpos)
      posy             : int          := (:y pointpos)
      postype          : ui/pointtype := (:pointtype pointpos)
@@ -249,19 +252,27 @@
       (if : string
        (then
         (!-empty color-bkg)
-        (string
-         "#"
-         color-bkg)))
-/*
-     bkgimage : string :=
-      (string-style<-image
-       image-bkg)
-     bkgsize : string :=
+        (string "#" color-bkg)))
+     borderwidth : string :=
       (if : string
        (then
-        (!-empty image-bkg)
-        "cover"))
-*/
+        (!-empty color-border)
+        "thin"))
+     bordercolor : string :=
+      (if : string
+       (then
+        (!-empty color-border)
+        (string "#" color-border)))
+     borderstyle : string :=
+      (if : string
+       (then
+        (!-empty color-border)
+        (string "solid")))
+     fontcolor : string :=
+      (if : string
+       (then
+        (!-empty color-font)
+        (string "#" color-font)))
      position : string :=
       (if : string
        (then
@@ -288,16 +299,12 @@
       (if : string
        (then
         (== pin ui/pin-expand)
-        (string
-         posy
-         "mm"))
+        (string posy "mm"))
        (then
         (== 0 posy)
         "")
        (else
-        (string
-         posy
-         "mm")))
+        (string posy "mm")))
      bottom : string :=
       (if : string
        (then
@@ -310,9 +317,7 @@
         (or
          (== pin ui/pin-left)
          (== pin ui/pin-center-v))
-        (string
-         sizey
-         "mm")))
+        (string sizey "mm")))
      left : string :=
       (if : string
        (then
@@ -340,9 +345,7 @@
          (== pin ui/pin-top)
          (== pin ui/pin-bottom)
          (== pin ui/pin-center-v))
-        (string
-         sizex
-         "mm")))
+        (string sizex "mm")))
      height : string :=
       (if : string
        (then
@@ -395,14 +398,12 @@
      overflowx : string :=
       (if : string
        (then
-        (== layout ui/layout-flow-rows)
-        "auto"))
+        scroll-x "auto"))
      overflowy : string :=
       (if : string
        (then
-        (== layout ui/layout-flow-columns)
-        "auto"))
-     hoverbkgrdcolor  : string :=
+        scroll-y "auto"))
+     hoverbkgrdcolor : string :=
       (if : string
        (then
         (!= "" color-hoverbkg)
@@ -440,8 +441,10 @@
      props : html/propmap :=
       (html/propmap
        :background-color bkgcolor
-//       :background-image bkgimage
-//       :background-size  bkgsize
+       :border-color     bordercolor
+       :border-style     borderstyle
+       :border-width     borderwidth
+       :color            fontcolor
        :cursor           scursor
        :display          display
        :font             sfont
@@ -531,21 +534,33 @@
    :name "html"
    :props
     (html/propmap
+     :border "0mm"
      :margin  "0mm"
      :padding "0mm"))
   (html/style
    :name "body"
    :props
     (html/propmap
+     :border "0mm"
      :margin "0mm"
      :padding "0mm"))
   (html/style
    :name "div"
    :props
     (html/propmap
+     :border "0mm"
+     :box-sizing "border-box"
      :margin "0mm"
      :padding "0mm"
      :position "relative"))
+  (html/style
+   :name "img"
+   :props
+    (html/propmap
+     :border "0mm"
+     :display "block"
+     :margin "0mm"
+     :padding "0mm"))
   (html/style
    :name "p"
    :props

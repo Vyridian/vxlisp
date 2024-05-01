@@ -28,11 +28,11 @@ export default class vx_ui_ui_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/ui/ui", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 41), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 56, ":tests", 62, ":total", 109), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 40), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 58, ":tests", 65, ":total", 111), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 2, ":tests", 1, ":total", 42), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 109), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 1, ":total", 111), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 28)
     )
   }
@@ -148,10 +148,12 @@ export default class vx_ui_ui_test {
           "ui-render", 0,
           "ui-render<-fn-render-ui-orig-parent", 0,
           "ui-render<-ui-orig-parent", 0,
+          "ui-render<-ui-parent-selected", 0,
           "ui-selected<-ui", 0,
           "ui-writechild<-ui-child", 0,
           "ui-writechildmap<-ui-childmap", 0,
           "ui<-layout-ui-orig-parent", 0,
+          "ui<-ui-selected", 1,
           "uid-selected<-ui", 0,
           "uiengine-readstate", 0,
           "uiengine-render", 0,
@@ -165,9 +167,77 @@ export default class vx_ui_ui_test {
     )
   }
 
+  static f_ui_from_ui_selected(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/ui/ui",
+      ":casename", "ui<-ui-selected",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n (ui\n  :uimap\n   (uimap\n    :a\n     (ui\n      :uid \"a\")\n    :b\n     (ui\n      :uid \"b\"\n      :selected true)))\n (ui<-ui-selected\n  (ui\n   :uimap\n    (uimap\n     :a\n      (ui\n       :uid \"a\"\n       :selected true)\n     :b\n      (ui\n       :uid \"b\")))\n  2))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              vx_core.f_new(
+                vx_ui_ui.t_ui,
+                ":uimap",
+                vx_core.f_new(
+                  vx_ui_ui.t_uimap,
+                  ":a",
+                  vx_core.f_new(
+                    vx_ui_ui.t_ui,
+                    ":uid",
+                    "a"
+                  ),
+                  ":b",
+                  vx_core.f_new(
+                    vx_ui_ui.t_ui,
+                    ":uid",
+                    "b",
+                    ":selected",
+                    true
+                  )
+                )
+              ),
+              vx_ui_ui.f_ui_from_ui_selected(
+                vx_core.f_new(
+                  vx_ui_ui.t_ui,
+                  ":uimap",
+                  vx_core.f_new(
+                    vx_ui_ui.t_uimap,
+                    ":a",
+                    vx_core.f_new(
+                      vx_ui_ui.t_ui,
+                      ":uid",
+                      "a",
+                      ":selected",
+                      true
+                    ),
+                    ":b",
+                    vx_core.f_new(
+                      vx_ui_ui.t_ui,
+                      ":uid",
+                      "b"
+                    )
+                  )
+                ),
+                2
+              )
+            )
+          )
+        )
+    )
+    return output
+  }
+
   static test_cases(context) {
     const output = vx_core.f_new(
-      vx_test.t_testcaselist
+      vx_test.t_testcaselist,
+      vx_ui_ui_test.f_ui_from_ui_selected(context)
     )
     return output
   }
