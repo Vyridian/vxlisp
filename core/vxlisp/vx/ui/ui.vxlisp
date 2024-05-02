@@ -537,7 +537,62 @@
              (ui
               :uid "b")))
          2))
- :doc "Return a ui after changing selected item and writing it.")
+ :doc "Return a ui after changing selected only one child.")
+
+(func ui<-ui-visible : ui
+ [ui      : ui
+  visible : int]
+ (if : ui
+  (then
+   (< visible 1)
+   ui)
+  (else
+   (let : ui
+    [uimap : uimap := (:uimap ui)
+     uilist1 : uilist :=
+      (uilist<-uimap uimap)
+     uilist2 : uilist :=
+      (list<-list-intany
+       uilist1
+       (fn : ui
+        [posval : int
+         uival  : ui]
+        (if : ui
+         (then
+          (= posval visible)
+          (copy uival
+           :hidden false))
+         (else
+          (copy uival
+           :hidden true)))))
+     childmap : uimap :=
+      (uimap<-uilist uilist2)]
+    (copy ui
+     :uimap childmap))))
+ :test (test
+        (ui
+         :uimap
+          (uimap
+           :a
+            (ui
+             :uid "a"
+             :hidden true)
+           :b
+            (ui
+             :uid "b")))
+        (ui<-ui-visible
+         (ui
+          :uimap
+           (uimap
+            :a
+             (ui
+              :uid "a")
+            :b
+             (ui
+              :uid "b"
+              :hidden true)))
+         2))
+ :doc "Return a ui after changing hidden to all but one child.")
 
 (func ui-child<-ui-uid : ui
  [ui  : ui
@@ -664,11 +719,22 @@
  (let : ui
   [uichg : ui :=
     (ui<-ui-selected
-     ui selected)
-   childmap : uimap := (:uimap uichg)]
+     ui selected)]
   (ui-render<-ui-orig-parent
    uichg ui parent))
- :doc "Return a ui after changing selected item and writing it.")
+ :doc "Return a ui after changing selected item and rendering it.")
+
+(func ui-render<-ui-parent-visible : ui
+ [ui      : ui
+  parent  : ui
+  visible : int]
+ (let : ui
+  [uichg : ui :=
+    (ui<-ui-visible
+     ui visible)]
+  (ui-render<-ui-orig-parent
+   uichg ui parent))
+ :doc "Return a ui after changing visible item and rendering it.")
 
 (func ui-selected<-ui : ui
  [ui : ui]
