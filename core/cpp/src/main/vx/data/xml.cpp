@@ -515,6 +515,32 @@ namespace vx_data_xml {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_xmlpropmap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_core::t_string) {
+        vx_core::Type_string newval = vx_core::vx_any_from_any(vx_core::t_string, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_core::Type_string oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_core::e_string) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_string(key)
     vx_core::Type_string Class_xmlpropmap::vx_get_string(vx_core::Type_string key) const {
       vx_core::Type_string output = vx_core::e_string;

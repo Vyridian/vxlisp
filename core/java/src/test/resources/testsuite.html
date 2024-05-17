@@ -3207,13 +3207,13 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/state</p>
-              <p class="coveragenums">0% 0/13</p>
+              <p class="coveragenums">0% 0/14</p>
               <p class="coveragenums">0% 0/1</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">0% 0/12</p>
-              <p class="coveragenums">84% 11/13</p>
-              <p class="coveragenums">0% 0/12</p>
-              <p class="coveragenums">0% 0/12</p>
+              <p class="coveragenums">0% 0/13</p>
+              <p class="coveragenums">85% 12/14</p>
+              <p class="coveragenums">0% 0/13</p>
+              <p class="coveragenums">0% 0/13</p>
             </summary>
             <div>
               <table>
@@ -17909,13 +17909,13 @@ ab
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/ui/ui</p>
-              <p class="coveragenums">0% 1/111</p>
+              <p class="coveragenums">5% 7/120</p>
               <p class="coveragenums">0% 0/28</p>
               <p class="coveragenums">0% 0/41</p>
-              <p class="coveragenums">2% 1/42</p>
-              <p class="coveragenums">58% 65/111</p>
-              <p class="coveragenums">0% 0/42</p>
-              <p class="coveragenums">0% 0/42</p>
+              <p class="coveragenums">13% 7/51</p>
+              <p class="coveragenums">61% 74/120</p>
+              <p class="coveragenums">0% 0/51</p>
+              <p class="coveragenums">0% 0/51</p>
             </summary>
             <div>
               <table>
@@ -17939,6 +17939,177 @@ ab
                   </tr>
                 </thead>
                 <tbody>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">boolean-writestate&lt;-uiapp</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (ui :uid "app")
+ (let : ui
+  [iswrite : boolean :=
+    (boolean-writestate&lt;-uiapp
+     (ui :uid "app"))
+   appui : ui :=
+    (ui-readstate-uiapp)
+   isremoved : boolean :=
+    (boolean-removestate-uiapp)]
+  appui))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(ui
+ :uid "app")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(ui
+ :uid "app")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">string-parentuid&lt;-uid</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ ""
+ (string-parentuid&lt;-uid
+  "a"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">""</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">""</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">string-parentuid&lt;-uid</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ "a/b"
+ (string-parentuid&lt;-uid
+  "a/b/c"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"a/b"</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">"a/b"</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">ui-readstate-uiapp</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (ui
+  :uid "myapp")
+ (let : ui
+  [iswrite : boolean :=
+    (boolean-writestate&lt;-uiapp
+     (ui
+      :uid "myapp"))]
+  (ui-readstate-uiapp)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(ui
+ :uid "myapp")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(ui
+ :uid "myapp")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">ui-readstate&lt;-uid</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (ui
+  :uid "a/b/c")
+ (let : ui
+  [uiapp : ui :=
+    (ui
+     :uid "a"
+     :uimap
+      (uimap&lt;-uilist
+       (ui
+        :uid "a/b"
+        :uimap
+         (uimap&lt;-uilist
+          (ui
+           :uid "a/b/c")))))
+   iswrite : boolean :=
+    (boolean-writestate&lt;-uiapp uiapp)
+   readval : ui :=
+    (ui-readstate&lt;-uid
+     "a/b/c")
+   isremoved : boolean := (boolean-removestate-uiapp)]
+  readval))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(ui
+ :uid "a/b/c")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(ui
+ :uid "a/b/c")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">ui&lt;-ui-find</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (ui
+  :uid "a/b/c")
+ (ui&lt;-ui-find
+  (ui
+   :uid "a"
+   :uimap
+    (uimap
+     :a/b
+      (ui
+       :uid "a/b"
+       :uimap
+        (uimap
+         :a/b/c
+          (ui
+           :uid "a/b/c")))))
+  "a/b/c"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(ui
+ :uid "a/b/c")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(ui
+ :uid "a/b/c")</p>
+                    </td>
+                  </tr>
                   <tr>
                     <td>
                       <p class="passflag">Pass</p>
@@ -17994,6 +18165,63 @@ ab
     (ui
      :uid "b"
      :selected true)))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">ui&lt;-ui-visible</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (ui
+  :uimap
+   (uimap
+    :a
+     (ui
+      :uid "a"
+      :hidden true)
+    :b
+     (ui
+      :uid "b")))
+ (ui&lt;-ui-visible
+  (ui
+   :uimap
+    (uimap
+     :a
+      (ui
+       :uid "a")
+     :b
+      (ui
+       :uid "b"
+       :hidden true)))
+  2))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(ui
+ :uimap
+  (uimap
+   :a
+    (ui
+     :uid "a"
+     :hidden true)
+   :b
+    (ui
+     :uid "b")))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(ui
+ :uimap
+  (uimap
+   :a
+    (ui
+     :uid "a"
+     :hidden true)
+   :b
+    (ui
+     :uid "b")))</p>
                     </td>
                   </tr>
                 </tbody>

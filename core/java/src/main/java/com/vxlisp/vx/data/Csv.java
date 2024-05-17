@@ -228,7 +228,30 @@ public final class Csv {
     protected Map<String, Core.Type_stringlist> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_stringlist>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Core.Type_stringlist) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Core.Type_stringlist castval = (Core.Type_stringlist)value;
+        Map<String, Core.Type_stringlist> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Core.e_stringlist) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Core.Type_stringlist vx_stringlist(final Core.Type_string key) {

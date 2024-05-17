@@ -263,6 +263,7 @@
      vx_core::vx_Type_mapany vx_p_map;
      vx_core::vx_Type_mapany vx_map() const;
      vx_core::Type_any vx_get_any(vx_core::Type_string key) const;
+     vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value);
      vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const;")
  :doc "A simple untyped map.")
 
@@ -1500,8 +1501,11 @@
   name     : string
   value    : any-1]
  (native
-  :js :auto)
- :sideeffects "Alters a mutable map. Warning: vxlisp is immutable by design and this function will produce unexpected results."
+  :cpp  :auto
+  :java :auto
+  :js   :auto)
+ :sideeffects
+  "Alters a mutable map. Warning: vxlisp is immutable by design, so this function can produce unexpected results."
  :doc "Returns true if it alters a mutable map false if it fails.")
 
 (func case : thenelse

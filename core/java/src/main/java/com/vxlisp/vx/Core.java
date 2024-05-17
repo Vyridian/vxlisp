@@ -281,6 +281,11 @@ public final class Core {
     return text.startsWith(starts);
   }
 
+  // vx_boolean_write_from_map_name_value(map, string, any)
+  public static Core.Type_boolean vx_boolean_write_from_map_name_value(final Core.Type_map valuemap, final Core.Type_string name, final Core.Type_any value) {
+    return valuemap.vx_set(name, value);
+  }
+
   @SuppressWarnings("unchecked")
   public static <T extends Core.Type_any> T vx_copy(T value, Core.Type_any arg) {
     Core.Type_any anyvalue = value.vx_copy(arg);
@@ -1291,7 +1296,30 @@ public final class Core {
     protected Map<String, Core.Type_any> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Core.Type_any) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Core.Type_any castval = (Core.Type_any)value;
+        Map<String, Core.Type_any> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Core.e_any) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
@@ -1921,7 +1949,30 @@ public final class Core {
     protected Map<String, Core.Type_arg> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_arg>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Core.Type_arg) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Core.Type_arg castval = (Core.Type_arg)value;
+        Map<String, Core.Type_arg> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Core.e_arg) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Core.Type_arg vx_arg(final Core.Type_string key) {
@@ -2625,7 +2676,30 @@ public final class Core {
     protected Map<String, Core.Type_connect> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_connect>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Core.Type_connect) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Core.Type_connect castval = (Core.Type_connect)value;
+        Map<String, Core.Type_connect> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Core.e_connect) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Core.Type_connect vx_connect(final Core.Type_string key) {
@@ -3216,7 +3290,30 @@ public final class Core {
     protected Map<String, Core.Type_any> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Core.Type_any) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Core.Type_any castval = (Core.Type_any)value;
+        Map<String, Core.Type_any> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Core.e_any) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
@@ -4501,7 +4598,30 @@ public final class Core {
     protected Map<String, Core.Type_func> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_func>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Core.Type_func) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Core.Type_func castval = (Core.Type_func)value;
+        Map<String, Core.Type_func> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Core.e_func) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Core.Type_func vx_func(final Core.Type_string key) {
@@ -4884,7 +5004,30 @@ public final class Core {
     protected Map<String, Core.Type_int> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_int>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Core.Type_int) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Core.Type_int castval = (Core.Type_int)value;
+        Map<String, Core.Type_int> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Core.e_int) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Core.Type_int vx_int(final Core.Type_string key) {
@@ -5347,6 +5490,7 @@ public final class Core {
     public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval);
     public Core.Type_any vx_any(final Core.Type_string key);
     public Map<String, Core.Type_any> vx_map();
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value);
   }
 
   public static class Class_map extends Core.Class_base implements Type_map {
@@ -5354,7 +5498,30 @@ public final class Core {
     protected Map<String, Core.Type_any> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Core.Type_any) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Core.Type_any castval = (Core.Type_any)value;
+        Map<String, Core.Type_any> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Core.e_any) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
@@ -6786,7 +6953,30 @@ public final class Core {
     protected Map<String, Core.Type_number> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_number>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Core.Type_number) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Core.Type_number castval = (Core.Type_number)value;
+        Map<String, Core.Type_number> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Core.e_number) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Core.Type_number vx_number(final Core.Type_string key) {
@@ -7262,7 +7452,30 @@ public final class Core {
     protected Map<String, Core.Type_package> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_package>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Core.Type_package) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Core.Type_package castval = (Core.Type_package)value;
+        Map<String, Core.Type_package> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Core.e_package) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Core.Type_package vx_package(final Core.Type_string key) {
@@ -7727,7 +7940,30 @@ public final class Core {
     protected Map<String, Core.Type_permission> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_permission>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Core.Type_permission) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Core.Type_permission castval = (Core.Type_permission)value;
+        Map<String, Core.Type_permission> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Core.e_permission) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Core.Type_permission vx_permission(final Core.Type_string key) {
@@ -9208,7 +9444,30 @@ public final class Core {
     protected Map<String, Core.Type_statelistener> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_statelistener>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Core.Type_statelistener) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Core.Type_statelistener castval = (Core.Type_statelistener)value;
+        Map<String, Core.Type_statelistener> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Core.e_statelistener) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Core.Type_statelistener vx_statelistener(final Core.Type_string key) {
@@ -9754,7 +10013,30 @@ public final class Core {
     protected Map<String, Core.Type_string> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_string>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Core.Type_string) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Core.Type_string castval = (Core.Type_string)value;
+        Map<String, Core.Type_string> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Core.e_string) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Core.Type_string vx_string(final Core.Type_string key) {
@@ -10771,7 +11053,30 @@ public final class Core {
     protected Map<String, Core.Type_translation> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_translation>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Core.Type_translation) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Core.Type_translation castval = (Core.Type_translation)value;
+        Map<String, Core.Type_translation> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Core.e_translation) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Core.Type_translation vx_translation(final Core.Type_string key) {
@@ -11680,7 +11985,30 @@ public final class Core {
     protected Map<String, Core.Type_any> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Core.Type_any) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Core.Type_any castval = (Core.Type_any)value;
+        Map<String, Core.Type_any> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Core.e_any) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
@@ -18948,6 +19276,7 @@ public final class Core {
 
   public static Core.Type_boolean f_boolean_write_from_map_name_value(final Core.Type_map valuemap, final Core.Type_string name, final Core.Type_any value) {
     Core.Type_boolean output = Core.e_boolean;
+    output = Core.vx_boolean_write_from_map_name_value(valuemap, name, value);
     return output;
   }
 

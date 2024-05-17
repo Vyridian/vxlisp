@@ -474,6 +474,32 @@ namespace vx_data_db {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_dbcellmap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_data_db::t_dbcell) {
+        vx_data_db::Type_dbcell newval = vx_core::vx_any_from_any(vx_data_db::t_dbcell, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_data_db::Type_dbcell oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_data_db::e_dbcell) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_dbcell(key)
     vx_data_db::Type_dbcell Class_dbcellmap::vx_get_dbcell(vx_core::Type_string key) const {
       vx_data_db::Type_dbcell output = vx_data_db::e_dbcell;
@@ -864,6 +890,32 @@ namespace vx_data_db {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_dbfieldmap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_data_db::t_dbfield) {
+        vx_data_db::Type_dbfield newval = vx_core::vx_any_from_any(vx_data_db::t_dbfield, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_data_db::Type_dbfield oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_data_db::e_dbfield) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_dbfield(key)
     vx_data_db::Type_dbfield Class_dbfieldmap::vx_get_dbfield(vx_core::Type_string key) const {
       vx_data_db::Type_dbfield output = vx_data_db::e_dbfield;

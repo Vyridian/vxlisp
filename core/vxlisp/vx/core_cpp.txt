@@ -157,6 +157,9 @@ let-async
   // vx_boolean_from_type_trait(type, type)
   bool vx_boolean_from_type_trait(vx_core::Type_any type, vx_core::Type_any trait);
 
+  // vx_boolean_write_from_map_name_value(map, string, any)
+  vx_core::Type_boolean vx_boolean_write_from_map_name_value(vx_core::Type_map valuemap, vx_core::Type_string name, vx_core::Type_any value);
+
   // vx_compare(any, any)
   long vx_compare(vx_core::Type_any val1, vx_core::Type_any val2);
 
@@ -783,6 +786,11 @@ let-async
       vx_core::vx_release(typdef);
     }
     return output;
+  }
+
+  // vx_boolean_write_from_map_name_value(map, string, any)
+  vx_core::Type_boolean vx_boolean_write_from_map_name_value(vx_core::Type_map valuemap, vx_core::Type_string name, vx_core::Type_any value) {
+    return valuemap->vx_set(name, value);
   }
 
   // vx_compare(any, any)

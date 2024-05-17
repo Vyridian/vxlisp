@@ -364,6 +364,32 @@ namespace vx_data_table {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_cellmap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_data_table::t_cell) {
+        vx_data_table::Type_cell newval = vx_core::vx_any_from_any(vx_data_table::t_cell, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_data_table::Type_cell oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_data_table::e_cell) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_cell(key)
     vx_data_table::Type_cell Class_cellmap::vx_get_cell(vx_core::Type_string key) const {
       vx_data_table::Type_cell output = vx_data_table::e_cell;
@@ -1653,6 +1679,32 @@ namespace vx_data_table {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_rowmap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_data_table::t_row) {
+        vx_data_table::Type_row newval = vx_core::vx_any_from_any(vx_data_table::t_row, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_data_table::Type_row oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_data_table::e_row) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_row(key)
     vx_data_table::Type_row Class_rowmap::vx_get_row(vx_core::Type_string key) const {
       vx_data_table::Type_row output = vx_data_table::e_row;

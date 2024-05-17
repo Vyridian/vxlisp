@@ -22,7 +22,7 @@ namespace vx_ui_html_uihtml {
         vx_ui_ui::c_layout_app,
         vx_core::vx_new(vx_core::t_anylist, {
           vx_core::vx_new_string(":fn-layout"),
-          vx_ui_html_uihtml::t_ui_render_app_from_ui_orig_parent
+          vx_ui_html_uihtml::t_ui_layout_app_from_ui_orig_parent
         })
       );
       output->vx_p_name = val->name();
@@ -48,7 +48,7 @@ namespace vx_ui_html_uihtml {
         vx_ui_ui::c_layout_else,
         vx_core::vx_new(vx_core::t_anylist, {
           vx_core::vx_new_string(":fn-layout"),
-          vx_ui_html_uihtml::t_ui_render_default_from_ui_orig_parent
+          vx_ui_html_uihtml::t_ui_layout_default_from_ui_orig_parent
         })
       );
       output->vx_p_name = val->name();
@@ -74,7 +74,7 @@ namespace vx_ui_html_uihtml {
         vx_ui_ui::c_layout_image,
         vx_core::vx_new(vx_core::t_anylist, {
           vx_core::vx_new_string(":fn-layout"),
-          vx_ui_html_uihtml::t_ui_render_image_from_ui_orig_parent
+          vx_ui_html_uihtml::t_ui_layout_image_from_ui_orig_parent
         })
       );
       output->vx_p_name = val->name();
@@ -100,7 +100,7 @@ namespace vx_ui_html_uihtml {
         vx_ui_ui::c_layout_label,
         vx_core::vx_new(vx_core::t_anylist, {
           vx_core::vx_new_string(":fn-layout"),
-          vx_ui_html_uihtml::t_ui_render_label_from_ui_orig_parent
+          vx_ui_html_uihtml::t_ui_layout_label_from_ui_orig_parent
         })
       );
       output->vx_p_name = val->name();
@@ -140,7 +140,7 @@ namespace vx_ui_html_uihtml {
           vx_core::vx_new_string(":boolean-print"),
           vx_ui_html_uihtml::t_boolean_print_html,
           vx_core::vx_new_string(":stylesheetrender"),
-          vx_ui_html_uihtml::t_stylesheet_render_html
+          vx_ui_html_uihtml::t_stylesheet_layout_html
         })
       );
       output->vx_p_name = val->name();
@@ -762,8 +762,8 @@ namespace vx_ui_html_uihtml {
 
   //}
 
-  // (func node-render<-node-ui)
-  vx_web_html::Type_node f_node_render_from_node_ui(vx_web_html::Type_node node, vx_ui_ui::Type_ui ui) {
+  // (func node-layout<-node-ui)
+  vx_web_html::Type_node f_node_layout_from_node_ui(vx_web_html::Type_node node, vx_ui_ui::Type_ui ui) {
     vx_web_html::Type_node output = vx_web_html::e_node;
     vx_core::vx_reserve({node, ui});
     output = vx_core::f_let(
@@ -782,44 +782,44 @@ namespace vx_ui_html_uihtml {
     return output;
   }
   /**
-   * @function node_render_from_node_ui
+   * @function node_layout_from_node_ui
    * @param  {node} node
    * @param  {ui} ui
    * @return {node}
-   * (func node-render<-node-ui)
+   * (func node-layout<-node-ui)
    */
-  // (func node-render<-node-ui)
-  // class Class_node_render_from_node_ui {
-    Abstract_node_render_from_node_ui::~Abstract_node_render_from_node_ui() {}
+  // (func node-layout<-node-ui)
+  // class Class_node_layout_from_node_ui {
+    Abstract_node_layout_from_node_ui::~Abstract_node_layout_from_node_ui() {}
 
-    Class_node_render_from_node_ui::Class_node_render_from_node_ui() : Abstract_node_render_from_node_ui::Abstract_node_render_from_node_ui() {
+    Class_node_layout_from_node_ui::Class_node_layout_from_node_ui() : Abstract_node_layout_from_node_ui::Abstract_node_layout_from_node_ui() {
       vx_core::refcount += 1;
     }
 
-    Class_node_render_from_node_ui::~Class_node_render_from_node_ui() {
+    Class_node_layout_from_node_ui::~Class_node_layout_from_node_ui() {
       vx_core::refcount -= 1;
       if (this->vx_p_msgblock) {
         vx_core::vx_release_one(this->vx_p_msgblock);
       }
     }
 
-    vx_core::Type_any Class_node_render_from_node_ui::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_ui_html_uihtml::Func_node_render_from_node_ui output = vx_ui_html_uihtml::e_node_render_from_node_ui;
+    vx_core::Type_any Class_node_layout_from_node_ui::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_ui_html_uihtml::Func_node_layout_from_node_ui output = vx_ui_html_uihtml::e_node_layout_from_node_ui;
       vx_core::vx_release(vals);
       return output;
     }
 
-    vx_core::Type_any Class_node_render_from_node_ui::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_ui_html_uihtml::Func_node_render_from_node_ui output = vx_ui_html_uihtml::e_node_render_from_node_ui;
+    vx_core::Type_any Class_node_layout_from_node_ui::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_ui_html_uihtml::Func_node_layout_from_node_ui output = vx_ui_html_uihtml::e_node_layout_from_node_ui;
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
       return output;
     }
 
-    vx_core::Type_typedef Class_node_render_from_node_ui::vx_typedef() const {
+    vx_core::Type_typedef Class_node_layout_from_node_ui::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/ui/html/uihtml", // pkgname
-        "node-render<-node-ui", // name
+        "node-layout<-node-ui", // name
         ":func", // extends
         vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
@@ -833,12 +833,12 @@ namespace vx_ui_html_uihtml {
       return output;
     }
 
-    vx_core::Type_constdef Class_node_render_from_node_ui::vx_constdef() const {return this->vx_p_constdef;}
+    vx_core::Type_constdef Class_node_layout_from_node_ui::vx_constdef() const {return this->vx_p_constdef;}
 
-    vx_core::Type_funcdef Class_node_render_from_node_ui::vx_funcdef() const {
+    vx_core::Type_funcdef Class_node_layout_from_node_ui::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/ui/html/uihtml", // pkgname
-        "node-render<-node-ui", // name
+        "node-layout<-node-ui", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
@@ -846,16 +846,16 @@ namespace vx_ui_html_uihtml {
       return output;
     }
 
-    vx_core::Type_any Class_node_render_from_node_ui::vx_empty() const {return vx_ui_html_uihtml::e_node_render_from_node_ui;}
-    vx_core::Type_any Class_node_render_from_node_ui::vx_type() const {return vx_ui_html_uihtml::t_node_render_from_node_ui;}
-    vx_core::Type_msgblock Class_node_render_from_node_ui::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany Class_node_render_from_node_ui::vx_dispose() {return vx_core::emptylistany;}
+    vx_core::Type_any Class_node_layout_from_node_ui::vx_empty() const {return vx_ui_html_uihtml::e_node_layout_from_node_ui;}
+    vx_core::Type_any Class_node_layout_from_node_ui::vx_type() const {return vx_ui_html_uihtml::t_node_layout_from_node_ui;}
+    vx_core::Type_msgblock Class_node_layout_from_node_ui::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_node_layout_from_node_ui::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Type_any Class_node_render_from_node_ui::vx_repl(vx_core::Type_anylist arglist) {
+    vx_core::Type_any Class_node_layout_from_node_ui::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
       vx_web_html::Type_node node = vx_core::vx_any_from_any(vx_web_html::t_node, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_ui_ui::Type_ui ui = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(1)));
-      output = vx_ui_html_uihtml::f_node_render_from_node_ui(node, ui);
+      output = vx_ui_html_uihtml::f_node_layout_from_node_ui(node, ui);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -3376,8 +3376,8 @@ namespace vx_ui_html_uihtml {
 
   //}
 
-  // (func stylesheet-render-html)
-  vx_core::vx_Type_async f_stylesheet_render_html(vx_ui_ui::Type_stylesheet stylesheetui) {
+  // (func stylesheet-layout-html)
+  vx_core::vx_Type_async f_stylesheet_layout_html(vx_ui_ui::Type_stylesheet stylesheetui) {
     vx_core::vx_Type_async output = NULL;
     vx_core::vx_reserve(stylesheetui);
     output = vx_core::f_let_async(
@@ -3407,43 +3407,43 @@ namespace vx_ui_html_uihtml {
   /**
    * 
    * @async
-   * @function stylesheet_render_html
+   * @function stylesheet_layout_html
    * @param  {stylesheet} stylesheetui
    * @return {stylesheet}
-   * (func stylesheet-render-html)
+   * (func stylesheet-layout-html)
    */
-  // (func stylesheet-render-html)
-  // class Class_stylesheet_render_html {
-    Abstract_stylesheet_render_html::~Abstract_stylesheet_render_html() {}
+  // (func stylesheet-layout-html)
+  // class Class_stylesheet_layout_html {
+    Abstract_stylesheet_layout_html::~Abstract_stylesheet_layout_html() {}
 
-    Class_stylesheet_render_html::Class_stylesheet_render_html() : Abstract_stylesheet_render_html::Abstract_stylesheet_render_html() {
+    Class_stylesheet_layout_html::Class_stylesheet_layout_html() : Abstract_stylesheet_layout_html::Abstract_stylesheet_layout_html() {
       vx_core::refcount += 1;
     }
 
-    Class_stylesheet_render_html::~Class_stylesheet_render_html() {
+    Class_stylesheet_layout_html::~Class_stylesheet_layout_html() {
       vx_core::refcount -= 1;
       if (this->vx_p_msgblock) {
         vx_core::vx_release_one(this->vx_p_msgblock);
       }
     }
 
-    vx_core::Type_any Class_stylesheet_render_html::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_ui_html_uihtml::Func_stylesheet_render_html output = vx_ui_html_uihtml::e_stylesheet_render_html;
+    vx_core::Type_any Class_stylesheet_layout_html::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_ui_html_uihtml::Func_stylesheet_layout_html output = vx_ui_html_uihtml::e_stylesheet_layout_html;
       vx_core::vx_release(vals);
       return output;
     }
 
-    vx_core::Type_any Class_stylesheet_render_html::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_ui_html_uihtml::Func_stylesheet_render_html output = vx_ui_html_uihtml::e_stylesheet_render_html;
+    vx_core::Type_any Class_stylesheet_layout_html::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_ui_html_uihtml::Func_stylesheet_layout_html output = vx_ui_html_uihtml::e_stylesheet_layout_html;
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
       return output;
     }
 
-    vx_core::Type_typedef Class_stylesheet_render_html::vx_typedef() const {
+    vx_core::Type_typedef Class_stylesheet_layout_html::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/ui/html/uihtml", // pkgname
-        "stylesheet-render-html", // name
+        "stylesheet-layout-html", // name
         ":func", // extends
         vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
@@ -3457,12 +3457,12 @@ namespace vx_ui_html_uihtml {
       return output;
     }
 
-    vx_core::Type_constdef Class_stylesheet_render_html::vx_constdef() const {return this->vx_p_constdef;}
+    vx_core::Type_constdef Class_stylesheet_layout_html::vx_constdef() const {return this->vx_p_constdef;}
 
-    vx_core::Type_funcdef Class_stylesheet_render_html::vx_funcdef() const {
+    vx_core::Type_funcdef Class_stylesheet_layout_html::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/ui/html/uihtml", // pkgname
-        "stylesheet-render-html", // name
+        "stylesheet-layout-html", // name
         0, // idx
         true, // async
         this->vx_typedef() // typedef
@@ -3470,26 +3470,26 @@ namespace vx_ui_html_uihtml {
       return output;
     }
 
-    vx_core::Type_any Class_stylesheet_render_html::vx_empty() const {return vx_ui_html_uihtml::e_stylesheet_render_html;}
-    vx_core::Type_any Class_stylesheet_render_html::vx_type() const {return vx_ui_html_uihtml::t_stylesheet_render_html;}
-    vx_core::Type_msgblock Class_stylesheet_render_html::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany Class_stylesheet_render_html::vx_dispose() {return vx_core::emptylistany;}
+    vx_core::Type_any Class_stylesheet_layout_html::vx_empty() const {return vx_ui_html_uihtml::e_stylesheet_layout_html;}
+    vx_core::Type_any Class_stylesheet_layout_html::vx_type() const {return vx_ui_html_uihtml::t_stylesheet_layout_html;}
+    vx_core::Type_msgblock Class_stylesheet_layout_html::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_stylesheet_layout_html::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any_async Class_stylesheet_render_html::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_async::IFn fn) const {
+    vx_core::Func_any_from_any_async Class_stylesheet_layout_html::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_async::IFn fn) const {
       return vx_core::e_any_from_any_async;
     }
 
-    vx_core::vx_Type_async Class_stylesheet_render_html::vx_any_from_any_async(vx_core::Type_any generic_any_1, vx_core::Type_any val) const {
+    vx_core::vx_Type_async Class_stylesheet_layout_html::vx_any_from_any_async(vx_core::Type_any generic_any_1, vx_core::Type_any val) const {
       vx_ui_ui::Type_stylesheet inputval = vx_core::vx_any_from_any(vx_ui_ui::t_stylesheet, val);
-      vx_core::vx_Type_async output = vx_ui_html_uihtml::f_stylesheet_render_html(inputval);
+      vx_core::vx_Type_async output = vx_ui_html_uihtml::f_stylesheet_layout_html(inputval);
       vx_core::vx_release(val);
       return output;
     }
 
-    vx_core::vx_Type_async Class_stylesheet_render_html::vx_repl(vx_core::Type_anylist arglist) {
+    vx_core::vx_Type_async Class_stylesheet_layout_html::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any);
       vx_ui_ui::Type_stylesheet stylesheetui = vx_core::vx_any_from_any(vx_ui_ui::t_stylesheet, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_ui_html_uihtml::f_stylesheet_render_html(stylesheetui);
+      output = vx_ui_html_uihtml::f_stylesheet_layout_html(stylesheetui);
       vx_core::vx_release(arglist);
       return output;
     }
@@ -3628,8 +3628,8 @@ namespace vx_ui_html_uihtml {
 
   //}
 
-  // (func ui-render-app<-ui-orig-parent)
-  vx_ui_ui::Type_ui f_ui_render_app_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent) {
+  // (func ui-layout-app<-ui-orig-parent)
+  vx_ui_ui::Type_ui f_ui_layout_app_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent) {
     vx_ui_ui::Type_ui output = vx_ui_ui::e_ui;
     vx_core::vx_reserve({ui, orig, parent});
     output = vx_core::f_let(
@@ -3651,9 +3651,9 @@ namespace vx_ui_html_uihtml {
           })
         );
         vx_core::vx_ref_plus(node);
-        vx_web_html::Type_node nodechg = vx_ui_html_uihtml::f_node_render_from_node_ui(node, ui);
+        vx_web_html::Type_node nodechg = vx_ui_html_uihtml::f_node_layout_from_node_ui(node, ui);
         vx_core::vx_ref_plus(nodechg);
-        vx_ui_ui::Type_uimap uimapchg = vx_ui_ui::f_uimap_render_from_uimap_parent(uimap, ui);
+        vx_ui_ui::Type_uimap uimapchg = vx_ui_ui::f_uimap_layout_from_uimap_parent(uimap, ui);
         vx_core::vx_ref_plus(uimapchg);
         vx_ui_ui::Type_ui output_1 = vx_core::f_new(
           vx_ui_ui::t_ui,
@@ -3670,45 +3670,45 @@ namespace vx_ui_html_uihtml {
     return output;
   }
   /**
-   * @function ui_render_app_from_ui_orig_parent
+   * @function ui_layout_app_from_ui_orig_parent
    * @param  {ui} ui
    * @param  {ui} orig
    * @param  {ui} parent
    * @return {ui}
-   * (func ui-render-app<-ui-orig-parent)
+   * (func ui-layout-app<-ui-orig-parent)
    */
-  // (func ui-render-app<-ui-orig-parent)
-  // class Class_ui_render_app_from_ui_orig_parent {
-    Abstract_ui_render_app_from_ui_orig_parent::~Abstract_ui_render_app_from_ui_orig_parent() {}
+  // (func ui-layout-app<-ui-orig-parent)
+  // class Class_ui_layout_app_from_ui_orig_parent {
+    Abstract_ui_layout_app_from_ui_orig_parent::~Abstract_ui_layout_app_from_ui_orig_parent() {}
 
-    Class_ui_render_app_from_ui_orig_parent::Class_ui_render_app_from_ui_orig_parent() : Abstract_ui_render_app_from_ui_orig_parent::Abstract_ui_render_app_from_ui_orig_parent() {
+    Class_ui_layout_app_from_ui_orig_parent::Class_ui_layout_app_from_ui_orig_parent() : Abstract_ui_layout_app_from_ui_orig_parent::Abstract_ui_layout_app_from_ui_orig_parent() {
       vx_core::refcount += 1;
     }
 
-    Class_ui_render_app_from_ui_orig_parent::~Class_ui_render_app_from_ui_orig_parent() {
+    Class_ui_layout_app_from_ui_orig_parent::~Class_ui_layout_app_from_ui_orig_parent() {
       vx_core::refcount -= 1;
       if (this->vx_p_msgblock) {
         vx_core::vx_release_one(this->vx_p_msgblock);
       }
     }
 
-    vx_core::Type_any Class_ui_render_app_from_ui_orig_parent::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_ui_html_uihtml::Func_ui_render_app_from_ui_orig_parent output = vx_ui_html_uihtml::e_ui_render_app_from_ui_orig_parent;
+    vx_core::Type_any Class_ui_layout_app_from_ui_orig_parent::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_ui_html_uihtml::Func_ui_layout_app_from_ui_orig_parent output = vx_ui_html_uihtml::e_ui_layout_app_from_ui_orig_parent;
       vx_core::vx_release(vals);
       return output;
     }
 
-    vx_core::Type_any Class_ui_render_app_from_ui_orig_parent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_ui_html_uihtml::Func_ui_render_app_from_ui_orig_parent output = vx_ui_html_uihtml::e_ui_render_app_from_ui_orig_parent;
+    vx_core::Type_any Class_ui_layout_app_from_ui_orig_parent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_ui_html_uihtml::Func_ui_layout_app_from_ui_orig_parent output = vx_ui_html_uihtml::e_ui_layout_app_from_ui_orig_parent;
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
       return output;
     }
 
-    vx_core::Type_typedef Class_ui_render_app_from_ui_orig_parent::vx_typedef() const {
+    vx_core::Type_typedef Class_ui_layout_app_from_ui_orig_parent::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/ui/html/uihtml", // pkgname
-        "ui-render-app<-ui-orig-parent", // name
+        "ui-layout-app<-ui-orig-parent", // name
         ":func", // extends
         vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
@@ -3722,12 +3722,12 @@ namespace vx_ui_html_uihtml {
       return output;
     }
 
-    vx_core::Type_constdef Class_ui_render_app_from_ui_orig_parent::vx_constdef() const {return this->vx_p_constdef;}
+    vx_core::Type_constdef Class_ui_layout_app_from_ui_orig_parent::vx_constdef() const {return this->vx_p_constdef;}
 
-    vx_core::Type_funcdef Class_ui_render_app_from_ui_orig_parent::vx_funcdef() const {
+    vx_core::Type_funcdef Class_ui_layout_app_from_ui_orig_parent::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/ui/html/uihtml", // pkgname
-        "ui-render-app<-ui-orig-parent", // name
+        "ui-layout-app<-ui-orig-parent", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
@@ -3735,25 +3735,25 @@ namespace vx_ui_html_uihtml {
       return output;
     }
 
-    vx_core::Type_any Class_ui_render_app_from_ui_orig_parent::vx_empty() const {return vx_ui_html_uihtml::e_ui_render_app_from_ui_orig_parent;}
-    vx_core::Type_any Class_ui_render_app_from_ui_orig_parent::vx_type() const {return vx_ui_html_uihtml::t_ui_render_app_from_ui_orig_parent;}
-    vx_core::Type_msgblock Class_ui_render_app_from_ui_orig_parent::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany Class_ui_render_app_from_ui_orig_parent::vx_dispose() {return vx_core::emptylistany;}
+    vx_core::Type_any Class_ui_layout_app_from_ui_orig_parent::vx_empty() const {return vx_ui_html_uihtml::e_ui_layout_app_from_ui_orig_parent;}
+    vx_core::Type_any Class_ui_layout_app_from_ui_orig_parent::vx_type() const {return vx_ui_html_uihtml::t_ui_layout_app_from_ui_orig_parent;}
+    vx_core::Type_msgblock Class_ui_layout_app_from_ui_orig_parent::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_ui_layout_app_from_ui_orig_parent::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Type_any Class_ui_render_app_from_ui_orig_parent::vx_repl(vx_core::Type_anylist arglist) {
+    vx_core::Type_any Class_ui_layout_app_from_ui_orig_parent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
       vx_ui_ui::Type_ui ui = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_ui_ui::Type_ui orig = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(1)));
       vx_ui_ui::Type_ui parent = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(2)));
-      output = vx_ui_html_uihtml::f_ui_render_app_from_ui_orig_parent(ui, orig, parent);
+      output = vx_ui_html_uihtml::f_ui_layout_app_from_ui_orig_parent(ui, orig, parent);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
 
   //}
 
-  // (func ui-render-default<-ui-orig-parent)
-  vx_ui_ui::Type_ui f_ui_render_default_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent) {
+  // (func ui-layout-default<-ui-orig-parent)
+  vx_ui_ui::Type_ui f_ui_layout_default_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent) {
     vx_ui_ui::Type_ui output = vx_ui_ui::e_ui;
     vx_core::vx_reserve({ui, orig, parent});
     output = vx_core::f_let(
@@ -3785,9 +3785,9 @@ namespace vx_ui_html_uihtml {
           })
         );
         vx_core::vx_ref_plus(node);
-        vx_web_html::Type_node nodechg = vx_ui_html_uihtml::f_node_render_from_node_ui(node, ui);
+        vx_web_html::Type_node nodechg = vx_ui_html_uihtml::f_node_layout_from_node_ui(node, ui);
         vx_core::vx_ref_plus(nodechg);
-        vx_ui_ui::Type_uimap uimapchg = vx_ui_ui::f_uimap_render_from_uimap_parent(uimap, ui);
+        vx_ui_ui::Type_uimap uimapchg = vx_ui_ui::f_uimap_layout_from_uimap_parent(uimap, ui);
         vx_core::vx_ref_plus(uimapchg);
         vx_ui_ui::Type_ui output_1 = vx_core::f_new(
           vx_ui_ui::t_ui,
@@ -3804,45 +3804,45 @@ namespace vx_ui_html_uihtml {
     return output;
   }
   /**
-   * @function ui_render_default_from_ui_orig_parent
+   * @function ui_layout_default_from_ui_orig_parent
    * @param  {ui} ui
    * @param  {ui} orig
    * @param  {ui} parent
    * @return {ui}
-   * (func ui-render-default<-ui-orig-parent)
+   * (func ui-layout-default<-ui-orig-parent)
    */
-  // (func ui-render-default<-ui-orig-parent)
-  // class Class_ui_render_default_from_ui_orig_parent {
-    Abstract_ui_render_default_from_ui_orig_parent::~Abstract_ui_render_default_from_ui_orig_parent() {}
+  // (func ui-layout-default<-ui-orig-parent)
+  // class Class_ui_layout_default_from_ui_orig_parent {
+    Abstract_ui_layout_default_from_ui_orig_parent::~Abstract_ui_layout_default_from_ui_orig_parent() {}
 
-    Class_ui_render_default_from_ui_orig_parent::Class_ui_render_default_from_ui_orig_parent() : Abstract_ui_render_default_from_ui_orig_parent::Abstract_ui_render_default_from_ui_orig_parent() {
+    Class_ui_layout_default_from_ui_orig_parent::Class_ui_layout_default_from_ui_orig_parent() : Abstract_ui_layout_default_from_ui_orig_parent::Abstract_ui_layout_default_from_ui_orig_parent() {
       vx_core::refcount += 1;
     }
 
-    Class_ui_render_default_from_ui_orig_parent::~Class_ui_render_default_from_ui_orig_parent() {
+    Class_ui_layout_default_from_ui_orig_parent::~Class_ui_layout_default_from_ui_orig_parent() {
       vx_core::refcount -= 1;
       if (this->vx_p_msgblock) {
         vx_core::vx_release_one(this->vx_p_msgblock);
       }
     }
 
-    vx_core::Type_any Class_ui_render_default_from_ui_orig_parent::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_ui_html_uihtml::Func_ui_render_default_from_ui_orig_parent output = vx_ui_html_uihtml::e_ui_render_default_from_ui_orig_parent;
+    vx_core::Type_any Class_ui_layout_default_from_ui_orig_parent::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_ui_html_uihtml::Func_ui_layout_default_from_ui_orig_parent output = vx_ui_html_uihtml::e_ui_layout_default_from_ui_orig_parent;
       vx_core::vx_release(vals);
       return output;
     }
 
-    vx_core::Type_any Class_ui_render_default_from_ui_orig_parent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_ui_html_uihtml::Func_ui_render_default_from_ui_orig_parent output = vx_ui_html_uihtml::e_ui_render_default_from_ui_orig_parent;
+    vx_core::Type_any Class_ui_layout_default_from_ui_orig_parent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_ui_html_uihtml::Func_ui_layout_default_from_ui_orig_parent output = vx_ui_html_uihtml::e_ui_layout_default_from_ui_orig_parent;
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
       return output;
     }
 
-    vx_core::Type_typedef Class_ui_render_default_from_ui_orig_parent::vx_typedef() const {
+    vx_core::Type_typedef Class_ui_layout_default_from_ui_orig_parent::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/ui/html/uihtml", // pkgname
-        "ui-render-default<-ui-orig-parent", // name
+        "ui-layout-default<-ui-orig-parent", // name
         ":func", // extends
         vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
@@ -3856,12 +3856,12 @@ namespace vx_ui_html_uihtml {
       return output;
     }
 
-    vx_core::Type_constdef Class_ui_render_default_from_ui_orig_parent::vx_constdef() const {return this->vx_p_constdef;}
+    vx_core::Type_constdef Class_ui_layout_default_from_ui_orig_parent::vx_constdef() const {return this->vx_p_constdef;}
 
-    vx_core::Type_funcdef Class_ui_render_default_from_ui_orig_parent::vx_funcdef() const {
+    vx_core::Type_funcdef Class_ui_layout_default_from_ui_orig_parent::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/ui/html/uihtml", // pkgname
-        "ui-render-default<-ui-orig-parent", // name
+        "ui-layout-default<-ui-orig-parent", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
@@ -3869,25 +3869,25 @@ namespace vx_ui_html_uihtml {
       return output;
     }
 
-    vx_core::Type_any Class_ui_render_default_from_ui_orig_parent::vx_empty() const {return vx_ui_html_uihtml::e_ui_render_default_from_ui_orig_parent;}
-    vx_core::Type_any Class_ui_render_default_from_ui_orig_parent::vx_type() const {return vx_ui_html_uihtml::t_ui_render_default_from_ui_orig_parent;}
-    vx_core::Type_msgblock Class_ui_render_default_from_ui_orig_parent::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany Class_ui_render_default_from_ui_orig_parent::vx_dispose() {return vx_core::emptylistany;}
+    vx_core::Type_any Class_ui_layout_default_from_ui_orig_parent::vx_empty() const {return vx_ui_html_uihtml::e_ui_layout_default_from_ui_orig_parent;}
+    vx_core::Type_any Class_ui_layout_default_from_ui_orig_parent::vx_type() const {return vx_ui_html_uihtml::t_ui_layout_default_from_ui_orig_parent;}
+    vx_core::Type_msgblock Class_ui_layout_default_from_ui_orig_parent::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_ui_layout_default_from_ui_orig_parent::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Type_any Class_ui_render_default_from_ui_orig_parent::vx_repl(vx_core::Type_anylist arglist) {
+    vx_core::Type_any Class_ui_layout_default_from_ui_orig_parent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
       vx_ui_ui::Type_ui ui = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_ui_ui::Type_ui orig = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(1)));
       vx_ui_ui::Type_ui parent = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(2)));
-      output = vx_ui_html_uihtml::f_ui_render_default_from_ui_orig_parent(ui, orig, parent);
+      output = vx_ui_html_uihtml::f_ui_layout_default_from_ui_orig_parent(ui, orig, parent);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
 
   //}
 
-  // (func ui-render-image<-ui-orig-parent)
-  vx_ui_ui::Type_ui f_ui_render_image_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent) {
+  // (func ui-layout-image<-ui-orig-parent)
+  vx_ui_ui::Type_ui f_ui_layout_image_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent) {
     vx_ui_ui::Type_ui output = vx_ui_ui::e_ui;
     vx_core::vx_reserve({ui, orig, parent});
     output = vx_core::f_let(
@@ -3921,7 +3921,7 @@ namespace vx_ui_html_uihtml {
           })
         );
         vx_core::vx_ref_plus(node);
-        vx_web_html::Type_node nodechg = vx_ui_html_uihtml::f_node_render_from_node_ui(node, ui);
+        vx_web_html::Type_node nodechg = vx_ui_html_uihtml::f_node_layout_from_node_ui(node, ui);
         vx_core::vx_ref_plus(nodechg);
         vx_ui_ui::Type_ui output_1 = ui;
         vx_core::vx_release_one_except({uid, uistyle, data, file, path, style, styles, node, nodechg}, output_1);
@@ -3932,45 +3932,45 @@ namespace vx_ui_html_uihtml {
     return output;
   }
   /**
-   * @function ui_render_image_from_ui_orig_parent
+   * @function ui_layout_image_from_ui_orig_parent
    * @param  {ui} ui
    * @param  {ui} orig
    * @param  {ui} parent
    * @return {ui}
-   * (func ui-render-image<-ui-orig-parent)
+   * (func ui-layout-image<-ui-orig-parent)
    */
-  // (func ui-render-image<-ui-orig-parent)
-  // class Class_ui_render_image_from_ui_orig_parent {
-    Abstract_ui_render_image_from_ui_orig_parent::~Abstract_ui_render_image_from_ui_orig_parent() {}
+  // (func ui-layout-image<-ui-orig-parent)
+  // class Class_ui_layout_image_from_ui_orig_parent {
+    Abstract_ui_layout_image_from_ui_orig_parent::~Abstract_ui_layout_image_from_ui_orig_parent() {}
 
-    Class_ui_render_image_from_ui_orig_parent::Class_ui_render_image_from_ui_orig_parent() : Abstract_ui_render_image_from_ui_orig_parent::Abstract_ui_render_image_from_ui_orig_parent() {
+    Class_ui_layout_image_from_ui_orig_parent::Class_ui_layout_image_from_ui_orig_parent() : Abstract_ui_layout_image_from_ui_orig_parent::Abstract_ui_layout_image_from_ui_orig_parent() {
       vx_core::refcount += 1;
     }
 
-    Class_ui_render_image_from_ui_orig_parent::~Class_ui_render_image_from_ui_orig_parent() {
+    Class_ui_layout_image_from_ui_orig_parent::~Class_ui_layout_image_from_ui_orig_parent() {
       vx_core::refcount -= 1;
       if (this->vx_p_msgblock) {
         vx_core::vx_release_one(this->vx_p_msgblock);
       }
     }
 
-    vx_core::Type_any Class_ui_render_image_from_ui_orig_parent::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_ui_html_uihtml::Func_ui_render_image_from_ui_orig_parent output = vx_ui_html_uihtml::e_ui_render_image_from_ui_orig_parent;
+    vx_core::Type_any Class_ui_layout_image_from_ui_orig_parent::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_ui_html_uihtml::Func_ui_layout_image_from_ui_orig_parent output = vx_ui_html_uihtml::e_ui_layout_image_from_ui_orig_parent;
       vx_core::vx_release(vals);
       return output;
     }
 
-    vx_core::Type_any Class_ui_render_image_from_ui_orig_parent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_ui_html_uihtml::Func_ui_render_image_from_ui_orig_parent output = vx_ui_html_uihtml::e_ui_render_image_from_ui_orig_parent;
+    vx_core::Type_any Class_ui_layout_image_from_ui_orig_parent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_ui_html_uihtml::Func_ui_layout_image_from_ui_orig_parent output = vx_ui_html_uihtml::e_ui_layout_image_from_ui_orig_parent;
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
       return output;
     }
 
-    vx_core::Type_typedef Class_ui_render_image_from_ui_orig_parent::vx_typedef() const {
+    vx_core::Type_typedef Class_ui_layout_image_from_ui_orig_parent::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/ui/html/uihtml", // pkgname
-        "ui-render-image<-ui-orig-parent", // name
+        "ui-layout-image<-ui-orig-parent", // name
         ":func", // extends
         vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
@@ -3984,12 +3984,12 @@ namespace vx_ui_html_uihtml {
       return output;
     }
 
-    vx_core::Type_constdef Class_ui_render_image_from_ui_orig_parent::vx_constdef() const {return this->vx_p_constdef;}
+    vx_core::Type_constdef Class_ui_layout_image_from_ui_orig_parent::vx_constdef() const {return this->vx_p_constdef;}
 
-    vx_core::Type_funcdef Class_ui_render_image_from_ui_orig_parent::vx_funcdef() const {
+    vx_core::Type_funcdef Class_ui_layout_image_from_ui_orig_parent::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/ui/html/uihtml", // pkgname
-        "ui-render-image<-ui-orig-parent", // name
+        "ui-layout-image<-ui-orig-parent", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
@@ -3997,25 +3997,25 @@ namespace vx_ui_html_uihtml {
       return output;
     }
 
-    vx_core::Type_any Class_ui_render_image_from_ui_orig_parent::vx_empty() const {return vx_ui_html_uihtml::e_ui_render_image_from_ui_orig_parent;}
-    vx_core::Type_any Class_ui_render_image_from_ui_orig_parent::vx_type() const {return vx_ui_html_uihtml::t_ui_render_image_from_ui_orig_parent;}
-    vx_core::Type_msgblock Class_ui_render_image_from_ui_orig_parent::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany Class_ui_render_image_from_ui_orig_parent::vx_dispose() {return vx_core::emptylistany;}
+    vx_core::Type_any Class_ui_layout_image_from_ui_orig_parent::vx_empty() const {return vx_ui_html_uihtml::e_ui_layout_image_from_ui_orig_parent;}
+    vx_core::Type_any Class_ui_layout_image_from_ui_orig_parent::vx_type() const {return vx_ui_html_uihtml::t_ui_layout_image_from_ui_orig_parent;}
+    vx_core::Type_msgblock Class_ui_layout_image_from_ui_orig_parent::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_ui_layout_image_from_ui_orig_parent::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Type_any Class_ui_render_image_from_ui_orig_parent::vx_repl(vx_core::Type_anylist arglist) {
+    vx_core::Type_any Class_ui_layout_image_from_ui_orig_parent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
       vx_ui_ui::Type_ui ui = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_ui_ui::Type_ui orig = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(1)));
       vx_ui_ui::Type_ui parent = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(2)));
-      output = vx_ui_html_uihtml::f_ui_render_image_from_ui_orig_parent(ui, orig, parent);
+      output = vx_ui_html_uihtml::f_ui_layout_image_from_ui_orig_parent(ui, orig, parent);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
 
   //}
 
-  // (func ui-render-label<-ui-orig-parent)
-  vx_ui_ui::Type_ui f_ui_render_label_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent) {
+  // (func ui-layout-label<-ui-orig-parent)
+  vx_ui_ui::Type_ui f_ui_layout_label_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent) {
     vx_ui_ui::Type_ui output = vx_ui_ui::e_ui;
     vx_core::vx_reserve({ui, orig, parent});
     output = vx_core::f_let(
@@ -4076,9 +4076,9 @@ namespace vx_ui_html_uihtml {
           })
         );
         vx_core::vx_ref_plus(node);
-        vx_web_html::Type_node nodechg = vx_ui_html_uihtml::f_node_render_from_node_ui(node, ui);
+        vx_web_html::Type_node nodechg = vx_ui_html_uihtml::f_node_layout_from_node_ui(node, ui);
         vx_core::vx_ref_plus(nodechg);
-        vx_ui_ui::Type_uimap uimapchg = vx_ui_ui::f_uimap_render_from_uimap_parent(uimap, ui);
+        vx_ui_ui::Type_uimap uimapchg = vx_ui_ui::f_uimap_layout_from_uimap_parent(uimap, ui);
         vx_core::vx_ref_plus(uimapchg);
         vx_ui_ui::Type_ui output_1 = vx_core::f_new(
           vx_ui_ui::t_ui,
@@ -4095,45 +4095,45 @@ namespace vx_ui_html_uihtml {
     return output;
   }
   /**
-   * @function ui_render_label_from_ui_orig_parent
+   * @function ui_layout_label_from_ui_orig_parent
    * @param  {ui} ui
    * @param  {ui} orig
    * @param  {ui} parent
    * @return {ui}
-   * (func ui-render-label<-ui-orig-parent)
+   * (func ui-layout-label<-ui-orig-parent)
    */
-  // (func ui-render-label<-ui-orig-parent)
-  // class Class_ui_render_label_from_ui_orig_parent {
-    Abstract_ui_render_label_from_ui_orig_parent::~Abstract_ui_render_label_from_ui_orig_parent() {}
+  // (func ui-layout-label<-ui-orig-parent)
+  // class Class_ui_layout_label_from_ui_orig_parent {
+    Abstract_ui_layout_label_from_ui_orig_parent::~Abstract_ui_layout_label_from_ui_orig_parent() {}
 
-    Class_ui_render_label_from_ui_orig_parent::Class_ui_render_label_from_ui_orig_parent() : Abstract_ui_render_label_from_ui_orig_parent::Abstract_ui_render_label_from_ui_orig_parent() {
+    Class_ui_layout_label_from_ui_orig_parent::Class_ui_layout_label_from_ui_orig_parent() : Abstract_ui_layout_label_from_ui_orig_parent::Abstract_ui_layout_label_from_ui_orig_parent() {
       vx_core::refcount += 1;
     }
 
-    Class_ui_render_label_from_ui_orig_parent::~Class_ui_render_label_from_ui_orig_parent() {
+    Class_ui_layout_label_from_ui_orig_parent::~Class_ui_layout_label_from_ui_orig_parent() {
       vx_core::refcount -= 1;
       if (this->vx_p_msgblock) {
         vx_core::vx_release_one(this->vx_p_msgblock);
       }
     }
 
-    vx_core::Type_any Class_ui_render_label_from_ui_orig_parent::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_ui_html_uihtml::Func_ui_render_label_from_ui_orig_parent output = vx_ui_html_uihtml::e_ui_render_label_from_ui_orig_parent;
+    vx_core::Type_any Class_ui_layout_label_from_ui_orig_parent::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_ui_html_uihtml::Func_ui_layout_label_from_ui_orig_parent output = vx_ui_html_uihtml::e_ui_layout_label_from_ui_orig_parent;
       vx_core::vx_release(vals);
       return output;
     }
 
-    vx_core::Type_any Class_ui_render_label_from_ui_orig_parent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_ui_html_uihtml::Func_ui_render_label_from_ui_orig_parent output = vx_ui_html_uihtml::e_ui_render_label_from_ui_orig_parent;
+    vx_core::Type_any Class_ui_layout_label_from_ui_orig_parent::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_ui_html_uihtml::Func_ui_layout_label_from_ui_orig_parent output = vx_ui_html_uihtml::e_ui_layout_label_from_ui_orig_parent;
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
       return output;
     }
 
-    vx_core::Type_typedef Class_ui_render_label_from_ui_orig_parent::vx_typedef() const {
+    vx_core::Type_typedef Class_ui_layout_label_from_ui_orig_parent::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/ui/html/uihtml", // pkgname
-        "ui-render-label<-ui-orig-parent", // name
+        "ui-layout-label<-ui-orig-parent", // name
         ":func", // extends
         vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
@@ -4147,12 +4147,12 @@ namespace vx_ui_html_uihtml {
       return output;
     }
 
-    vx_core::Type_constdef Class_ui_render_label_from_ui_orig_parent::vx_constdef() const {return this->vx_p_constdef;}
+    vx_core::Type_constdef Class_ui_layout_label_from_ui_orig_parent::vx_constdef() const {return this->vx_p_constdef;}
 
-    vx_core::Type_funcdef Class_ui_render_label_from_ui_orig_parent::vx_funcdef() const {
+    vx_core::Type_funcdef Class_ui_layout_label_from_ui_orig_parent::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/ui/html/uihtml", // pkgname
-        "ui-render-label<-ui-orig-parent", // name
+        "ui-layout-label<-ui-orig-parent", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
@@ -4160,17 +4160,17 @@ namespace vx_ui_html_uihtml {
       return output;
     }
 
-    vx_core::Type_any Class_ui_render_label_from_ui_orig_parent::vx_empty() const {return vx_ui_html_uihtml::e_ui_render_label_from_ui_orig_parent;}
-    vx_core::Type_any Class_ui_render_label_from_ui_orig_parent::vx_type() const {return vx_ui_html_uihtml::t_ui_render_label_from_ui_orig_parent;}
-    vx_core::Type_msgblock Class_ui_render_label_from_ui_orig_parent::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany Class_ui_render_label_from_ui_orig_parent::vx_dispose() {return vx_core::emptylistany;}
+    vx_core::Type_any Class_ui_layout_label_from_ui_orig_parent::vx_empty() const {return vx_ui_html_uihtml::e_ui_layout_label_from_ui_orig_parent;}
+    vx_core::Type_any Class_ui_layout_label_from_ui_orig_parent::vx_type() const {return vx_ui_html_uihtml::t_ui_layout_label_from_ui_orig_parent;}
+    vx_core::Type_msgblock Class_ui_layout_label_from_ui_orig_parent::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_ui_layout_label_from_ui_orig_parent::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Type_any Class_ui_render_label_from_ui_orig_parent::vx_repl(vx_core::Type_anylist arglist) {
+    vx_core::Type_any Class_ui_layout_label_from_ui_orig_parent::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
       vx_ui_ui::Type_ui ui = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_ui_ui::Type_ui orig = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(1)));
       vx_ui_ui::Type_ui parent = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(2)));
-      output = vx_ui_html_uihtml::f_ui_render_label_from_ui_orig_parent(ui, orig, parent);
+      output = vx_ui_html_uihtml::f_ui_layout_label_from_ui_orig_parent(ui, orig, parent);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -4194,8 +4194,8 @@ namespace vx_ui_html_uihtml {
   vx_ui_html_uihtml::Func_divchildlist_from_uimap t_divchildlist_from_uimap = NULL;
   vx_ui_html_uihtml::Func_node_app_from_ui_orig_parent e_node_app_from_ui_orig_parent = NULL;
   vx_ui_html_uihtml::Func_node_app_from_ui_orig_parent t_node_app_from_ui_orig_parent = NULL;
-  vx_ui_html_uihtml::Func_node_render_from_node_ui e_node_render_from_node_ui = NULL;
-  vx_ui_html_uihtml::Func_node_render_from_node_ui t_node_render_from_node_ui = NULL;
+  vx_ui_html_uihtml::Func_node_layout_from_node_ui e_node_layout_from_node_ui = NULL;
+  vx_ui_html_uihtml::Func_node_layout_from_node_ui t_node_layout_from_node_ui = NULL;
   vx_ui_html_uihtml::Func_string_style_from_font e_string_style_from_font = NULL;
   vx_ui_html_uihtml::Func_string_style_from_font t_string_style_from_font = NULL;
   vx_ui_html_uihtml::Func_string_style_from_image e_string_style_from_image = NULL;
@@ -4218,18 +4218,18 @@ namespace vx_ui_html_uihtml {
   vx_ui_html_uihtml::Func_stylelist_from_stylemap t_stylelist_from_stylemap = NULL;
   vx_ui_html_uihtml::Func_stylemap_from_stylemap e_stylemap_from_stylemap = NULL;
   vx_ui_html_uihtml::Func_stylemap_from_stylemap t_stylemap_from_stylemap = NULL;
-  vx_ui_html_uihtml::Func_stylesheet_render_html e_stylesheet_render_html = NULL;
-  vx_ui_html_uihtml::Func_stylesheet_render_html t_stylesheet_render_html = NULL;
+  vx_ui_html_uihtml::Func_stylesheet_layout_html e_stylesheet_layout_html = NULL;
+  vx_ui_html_uihtml::Func_stylesheet_layout_html t_stylesheet_layout_html = NULL;
   vx_ui_html_uihtml::Func_stylesheet_from_stylesheet e_stylesheet_from_stylesheet = NULL;
   vx_ui_html_uihtml::Func_stylesheet_from_stylesheet t_stylesheet_from_stylesheet = NULL;
-  vx_ui_html_uihtml::Func_ui_render_app_from_ui_orig_parent e_ui_render_app_from_ui_orig_parent = NULL;
-  vx_ui_html_uihtml::Func_ui_render_app_from_ui_orig_parent t_ui_render_app_from_ui_orig_parent = NULL;
-  vx_ui_html_uihtml::Func_ui_render_default_from_ui_orig_parent e_ui_render_default_from_ui_orig_parent = NULL;
-  vx_ui_html_uihtml::Func_ui_render_default_from_ui_orig_parent t_ui_render_default_from_ui_orig_parent = NULL;
-  vx_ui_html_uihtml::Func_ui_render_image_from_ui_orig_parent e_ui_render_image_from_ui_orig_parent = NULL;
-  vx_ui_html_uihtml::Func_ui_render_image_from_ui_orig_parent t_ui_render_image_from_ui_orig_parent = NULL;
-  vx_ui_html_uihtml::Func_ui_render_label_from_ui_orig_parent e_ui_render_label_from_ui_orig_parent = NULL;
-  vx_ui_html_uihtml::Func_ui_render_label_from_ui_orig_parent t_ui_render_label_from_ui_orig_parent = NULL;
+  vx_ui_html_uihtml::Func_ui_layout_app_from_ui_orig_parent e_ui_layout_app_from_ui_orig_parent = NULL;
+  vx_ui_html_uihtml::Func_ui_layout_app_from_ui_orig_parent t_ui_layout_app_from_ui_orig_parent = NULL;
+  vx_ui_html_uihtml::Func_ui_layout_default_from_ui_orig_parent e_ui_layout_default_from_ui_orig_parent = NULL;
+  vx_ui_html_uihtml::Func_ui_layout_default_from_ui_orig_parent t_ui_layout_default_from_ui_orig_parent = NULL;
+  vx_ui_html_uihtml::Func_ui_layout_image_from_ui_orig_parent e_ui_layout_image_from_ui_orig_parent = NULL;
+  vx_ui_html_uihtml::Func_ui_layout_image_from_ui_orig_parent t_ui_layout_image_from_ui_orig_parent = NULL;
+  vx_ui_html_uihtml::Func_ui_layout_label_from_ui_orig_parent e_ui_layout_label_from_ui_orig_parent = NULL;
+  vx_ui_html_uihtml::Func_ui_layout_label_from_ui_orig_parent t_ui_layout_label_from_ui_orig_parent = NULL;
 
   // class vx_Class_package {
     vx_Class_package::vx_Class_package() {
@@ -4263,10 +4263,10 @@ namespace vx_ui_html_uihtml {
       vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_node_app_from_ui_orig_parent);
       vx_ui_html_uihtml::t_node_app_from_ui_orig_parent = new vx_ui_html_uihtml::Class_node_app_from_ui_orig_parent();
       vx_core::vx_reserve_type(vx_ui_html_uihtml::t_node_app_from_ui_orig_parent);
-      vx_ui_html_uihtml::e_node_render_from_node_ui = new vx_ui_html_uihtml::Class_node_render_from_node_ui();
-      vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_node_render_from_node_ui);
-      vx_ui_html_uihtml::t_node_render_from_node_ui = new vx_ui_html_uihtml::Class_node_render_from_node_ui();
-      vx_core::vx_reserve_type(vx_ui_html_uihtml::t_node_render_from_node_ui);
+      vx_ui_html_uihtml::e_node_layout_from_node_ui = new vx_ui_html_uihtml::Class_node_layout_from_node_ui();
+      vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_node_layout_from_node_ui);
+      vx_ui_html_uihtml::t_node_layout_from_node_ui = new vx_ui_html_uihtml::Class_node_layout_from_node_ui();
+      vx_core::vx_reserve_type(vx_ui_html_uihtml::t_node_layout_from_node_ui);
       vx_ui_html_uihtml::e_string_style_from_font = new vx_ui_html_uihtml::Class_string_style_from_font();
       vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_string_style_from_font);
       vx_ui_html_uihtml::t_string_style_from_font = new vx_ui_html_uihtml::Class_string_style_from_font();
@@ -4311,30 +4311,30 @@ namespace vx_ui_html_uihtml {
       vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_stylemap_from_stylemap);
       vx_ui_html_uihtml::t_stylemap_from_stylemap = new vx_ui_html_uihtml::Class_stylemap_from_stylemap();
       vx_core::vx_reserve_type(vx_ui_html_uihtml::t_stylemap_from_stylemap);
-      vx_ui_html_uihtml::e_stylesheet_render_html = new vx_ui_html_uihtml::Class_stylesheet_render_html();
-      vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_stylesheet_render_html);
-      vx_ui_html_uihtml::t_stylesheet_render_html = new vx_ui_html_uihtml::Class_stylesheet_render_html();
-      vx_core::vx_reserve_type(vx_ui_html_uihtml::t_stylesheet_render_html);
+      vx_ui_html_uihtml::e_stylesheet_layout_html = new vx_ui_html_uihtml::Class_stylesheet_layout_html();
+      vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_stylesheet_layout_html);
+      vx_ui_html_uihtml::t_stylesheet_layout_html = new vx_ui_html_uihtml::Class_stylesheet_layout_html();
+      vx_core::vx_reserve_type(vx_ui_html_uihtml::t_stylesheet_layout_html);
       vx_ui_html_uihtml::e_stylesheet_from_stylesheet = new vx_ui_html_uihtml::Class_stylesheet_from_stylesheet();
       vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_stylesheet_from_stylesheet);
       vx_ui_html_uihtml::t_stylesheet_from_stylesheet = new vx_ui_html_uihtml::Class_stylesheet_from_stylesheet();
       vx_core::vx_reserve_type(vx_ui_html_uihtml::t_stylesheet_from_stylesheet);
-      vx_ui_html_uihtml::e_ui_render_app_from_ui_orig_parent = new vx_ui_html_uihtml::Class_ui_render_app_from_ui_orig_parent();
-      vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_ui_render_app_from_ui_orig_parent);
-      vx_ui_html_uihtml::t_ui_render_app_from_ui_orig_parent = new vx_ui_html_uihtml::Class_ui_render_app_from_ui_orig_parent();
-      vx_core::vx_reserve_type(vx_ui_html_uihtml::t_ui_render_app_from_ui_orig_parent);
-      vx_ui_html_uihtml::e_ui_render_default_from_ui_orig_parent = new vx_ui_html_uihtml::Class_ui_render_default_from_ui_orig_parent();
-      vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_ui_render_default_from_ui_orig_parent);
-      vx_ui_html_uihtml::t_ui_render_default_from_ui_orig_parent = new vx_ui_html_uihtml::Class_ui_render_default_from_ui_orig_parent();
-      vx_core::vx_reserve_type(vx_ui_html_uihtml::t_ui_render_default_from_ui_orig_parent);
-      vx_ui_html_uihtml::e_ui_render_image_from_ui_orig_parent = new vx_ui_html_uihtml::Class_ui_render_image_from_ui_orig_parent();
-      vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_ui_render_image_from_ui_orig_parent);
-      vx_ui_html_uihtml::t_ui_render_image_from_ui_orig_parent = new vx_ui_html_uihtml::Class_ui_render_image_from_ui_orig_parent();
-      vx_core::vx_reserve_type(vx_ui_html_uihtml::t_ui_render_image_from_ui_orig_parent);
-      vx_ui_html_uihtml::e_ui_render_label_from_ui_orig_parent = new vx_ui_html_uihtml::Class_ui_render_label_from_ui_orig_parent();
-      vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_ui_render_label_from_ui_orig_parent);
-      vx_ui_html_uihtml::t_ui_render_label_from_ui_orig_parent = new vx_ui_html_uihtml::Class_ui_render_label_from_ui_orig_parent();
-      vx_core::vx_reserve_type(vx_ui_html_uihtml::t_ui_render_label_from_ui_orig_parent);
+      vx_ui_html_uihtml::e_ui_layout_app_from_ui_orig_parent = new vx_ui_html_uihtml::Class_ui_layout_app_from_ui_orig_parent();
+      vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_ui_layout_app_from_ui_orig_parent);
+      vx_ui_html_uihtml::t_ui_layout_app_from_ui_orig_parent = new vx_ui_html_uihtml::Class_ui_layout_app_from_ui_orig_parent();
+      vx_core::vx_reserve_type(vx_ui_html_uihtml::t_ui_layout_app_from_ui_orig_parent);
+      vx_ui_html_uihtml::e_ui_layout_default_from_ui_orig_parent = new vx_ui_html_uihtml::Class_ui_layout_default_from_ui_orig_parent();
+      vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_ui_layout_default_from_ui_orig_parent);
+      vx_ui_html_uihtml::t_ui_layout_default_from_ui_orig_parent = new vx_ui_html_uihtml::Class_ui_layout_default_from_ui_orig_parent();
+      vx_core::vx_reserve_type(vx_ui_html_uihtml::t_ui_layout_default_from_ui_orig_parent);
+      vx_ui_html_uihtml::e_ui_layout_image_from_ui_orig_parent = new vx_ui_html_uihtml::Class_ui_layout_image_from_ui_orig_parent();
+      vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_ui_layout_image_from_ui_orig_parent);
+      vx_ui_html_uihtml::t_ui_layout_image_from_ui_orig_parent = new vx_ui_html_uihtml::Class_ui_layout_image_from_ui_orig_parent();
+      vx_core::vx_reserve_type(vx_ui_html_uihtml::t_ui_layout_image_from_ui_orig_parent);
+      vx_ui_html_uihtml::e_ui_layout_label_from_ui_orig_parent = new vx_ui_html_uihtml::Class_ui_layout_label_from_ui_orig_parent();
+      vx_core::vx_reserve_empty(vx_ui_html_uihtml::e_ui_layout_label_from_ui_orig_parent);
+      vx_ui_html_uihtml::t_ui_layout_label_from_ui_orig_parent = new vx_ui_html_uihtml::Class_ui_layout_label_from_ui_orig_parent();
+      vx_core::vx_reserve_type(vx_ui_html_uihtml::t_ui_layout_label_from_ui_orig_parent);
       vx_ui_html_uihtml::Class_layout_app_html::vx_const_new(vx_ui_html_uihtml::c_layout_app_html);
       vx_ui_html_uihtml::Class_layout_else_html::vx_const_new(vx_ui_html_uihtml::c_layout_else_html);
       vx_ui_html_uihtml::Class_layout_image_html::vx_const_new(vx_ui_html_uihtml::c_layout_image_html);
@@ -4358,7 +4358,7 @@ namespace vx_ui_html_uihtml {
       mapfunc["divchild<-ui"] = vx_ui_html_uihtml::t_divchild_from_ui;
       mapfunc["divchildlist<-uimap"] = vx_ui_html_uihtml::t_divchildlist_from_uimap;
       mapfunc["node-app<-ui-orig-parent"] = vx_ui_html_uihtml::t_node_app_from_ui_orig_parent;
-      mapfunc["node-render<-node-ui"] = vx_ui_html_uihtml::t_node_render_from_node_ui;
+      mapfunc["node-layout<-node-ui"] = vx_ui_html_uihtml::t_node_layout_from_node_ui;
       mapfunc["string-style<-font"] = vx_ui_html_uihtml::t_string_style_from_font;
       mapfunc["string-style<-image"] = vx_ui_html_uihtml::t_string_style_from_image;
       mapfunc["string-stylename<-name-styletype"] = vx_ui_html_uihtml::t_string_stylename_from_name_styletype;
@@ -4370,12 +4370,12 @@ namespace vx_ui_html_uihtml {
       mapfunc["stylelist<-stylelist"] = vx_ui_html_uihtml::t_stylelist_from_stylelist;
       mapfunc["stylelist<-stylemap"] = vx_ui_html_uihtml::t_stylelist_from_stylemap;
       mapfunc["stylemap<-stylemap"] = vx_ui_html_uihtml::t_stylemap_from_stylemap;
-      mapfunc["stylesheet-render-html"] = vx_ui_html_uihtml::t_stylesheet_render_html;
+      mapfunc["stylesheet-layout-html"] = vx_ui_html_uihtml::t_stylesheet_layout_html;
       mapfunc["stylesheet<-stylesheet"] = vx_ui_html_uihtml::t_stylesheet_from_stylesheet;
-      mapfunc["ui-render-app<-ui-orig-parent"] = vx_ui_html_uihtml::t_ui_render_app_from_ui_orig_parent;
-      mapfunc["ui-render-default<-ui-orig-parent"] = vx_ui_html_uihtml::t_ui_render_default_from_ui_orig_parent;
-      mapfunc["ui-render-image<-ui-orig-parent"] = vx_ui_html_uihtml::t_ui_render_image_from_ui_orig_parent;
-      mapfunc["ui-render-label<-ui-orig-parent"] = vx_ui_html_uihtml::t_ui_render_label_from_ui_orig_parent;
+      mapfunc["ui-layout-app<-ui-orig-parent"] = vx_ui_html_uihtml::t_ui_layout_app_from_ui_orig_parent;
+      mapfunc["ui-layout-default<-ui-orig-parent"] = vx_ui_html_uihtml::t_ui_layout_default_from_ui_orig_parent;
+      mapfunc["ui-layout-image<-ui-orig-parent"] = vx_ui_html_uihtml::t_ui_layout_image_from_ui_orig_parent;
+      mapfunc["ui-layout-label<-ui-orig-parent"] = vx_ui_html_uihtml::t_ui_layout_label_from_ui_orig_parent;
       vx_core::vx_global_package_set("vx/ui/html/uihtml", maptype, mapconst, mapfunc);
 	   }
   // }

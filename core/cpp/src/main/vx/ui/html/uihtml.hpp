@@ -53,10 +53,10 @@ namespace vx_ui_html_uihtml {
   typedef Abstract_node_app_from_ui_orig_parent* Func_node_app_from_ui_orig_parent;
   extern Func_node_app_from_ui_orig_parent e_node_app_from_ui_orig_parent;
   extern Func_node_app_from_ui_orig_parent t_node_app_from_ui_orig_parent;
-  class Abstract_node_render_from_node_ui;
-  typedef Abstract_node_render_from_node_ui* Func_node_render_from_node_ui;
-  extern Func_node_render_from_node_ui e_node_render_from_node_ui;
-  extern Func_node_render_from_node_ui t_node_render_from_node_ui;
+  class Abstract_node_layout_from_node_ui;
+  typedef Abstract_node_layout_from_node_ui* Func_node_layout_from_node_ui;
+  extern Func_node_layout_from_node_ui e_node_layout_from_node_ui;
+  extern Func_node_layout_from_node_ui t_node_layout_from_node_ui;
   class Abstract_string_style_from_font;
   typedef Abstract_string_style_from_font* Func_string_style_from_font;
   extern Func_string_style_from_font e_string_style_from_font;
@@ -101,30 +101,30 @@ namespace vx_ui_html_uihtml {
   typedef Abstract_stylemap_from_stylemap* Func_stylemap_from_stylemap;
   extern Func_stylemap_from_stylemap e_stylemap_from_stylemap;
   extern Func_stylemap_from_stylemap t_stylemap_from_stylemap;
-  class Abstract_stylesheet_render_html;
-  typedef Abstract_stylesheet_render_html* Func_stylesheet_render_html;
-  extern Func_stylesheet_render_html e_stylesheet_render_html;
-  extern Func_stylesheet_render_html t_stylesheet_render_html;
+  class Abstract_stylesheet_layout_html;
+  typedef Abstract_stylesheet_layout_html* Func_stylesheet_layout_html;
+  extern Func_stylesheet_layout_html e_stylesheet_layout_html;
+  extern Func_stylesheet_layout_html t_stylesheet_layout_html;
   class Abstract_stylesheet_from_stylesheet;
   typedef Abstract_stylesheet_from_stylesheet* Func_stylesheet_from_stylesheet;
   extern Func_stylesheet_from_stylesheet e_stylesheet_from_stylesheet;
   extern Func_stylesheet_from_stylesheet t_stylesheet_from_stylesheet;
-  class Abstract_ui_render_app_from_ui_orig_parent;
-  typedef Abstract_ui_render_app_from_ui_orig_parent* Func_ui_render_app_from_ui_orig_parent;
-  extern Func_ui_render_app_from_ui_orig_parent e_ui_render_app_from_ui_orig_parent;
-  extern Func_ui_render_app_from_ui_orig_parent t_ui_render_app_from_ui_orig_parent;
-  class Abstract_ui_render_default_from_ui_orig_parent;
-  typedef Abstract_ui_render_default_from_ui_orig_parent* Func_ui_render_default_from_ui_orig_parent;
-  extern Func_ui_render_default_from_ui_orig_parent e_ui_render_default_from_ui_orig_parent;
-  extern Func_ui_render_default_from_ui_orig_parent t_ui_render_default_from_ui_orig_parent;
-  class Abstract_ui_render_image_from_ui_orig_parent;
-  typedef Abstract_ui_render_image_from_ui_orig_parent* Func_ui_render_image_from_ui_orig_parent;
-  extern Func_ui_render_image_from_ui_orig_parent e_ui_render_image_from_ui_orig_parent;
-  extern Func_ui_render_image_from_ui_orig_parent t_ui_render_image_from_ui_orig_parent;
-  class Abstract_ui_render_label_from_ui_orig_parent;
-  typedef Abstract_ui_render_label_from_ui_orig_parent* Func_ui_render_label_from_ui_orig_parent;
-  extern Func_ui_render_label_from_ui_orig_parent e_ui_render_label_from_ui_orig_parent;
-  extern Func_ui_render_label_from_ui_orig_parent t_ui_render_label_from_ui_orig_parent;
+  class Abstract_ui_layout_app_from_ui_orig_parent;
+  typedef Abstract_ui_layout_app_from_ui_orig_parent* Func_ui_layout_app_from_ui_orig_parent;
+  extern Func_ui_layout_app_from_ui_orig_parent e_ui_layout_app_from_ui_orig_parent;
+  extern Func_ui_layout_app_from_ui_orig_parent t_ui_layout_app_from_ui_orig_parent;
+  class Abstract_ui_layout_default_from_ui_orig_parent;
+  typedef Abstract_ui_layout_default_from_ui_orig_parent* Func_ui_layout_default_from_ui_orig_parent;
+  extern Func_ui_layout_default_from_ui_orig_parent e_ui_layout_default_from_ui_orig_parent;
+  extern Func_ui_layout_default_from_ui_orig_parent t_ui_layout_default_from_ui_orig_parent;
+  class Abstract_ui_layout_image_from_ui_orig_parent;
+  typedef Abstract_ui_layout_image_from_ui_orig_parent* Func_ui_layout_image_from_ui_orig_parent;
+  extern Func_ui_layout_image_from_ui_orig_parent e_ui_layout_image_from_ui_orig_parent;
+  extern Func_ui_layout_image_from_ui_orig_parent t_ui_layout_image_from_ui_orig_parent;
+  class Abstract_ui_layout_label_from_ui_orig_parent;
+  typedef Abstract_ui_layout_label_from_ui_orig_parent* Func_ui_layout_label_from_ui_orig_parent;
+  extern Func_ui_layout_label_from_ui_orig_parent e_ui_layout_label_from_ui_orig_parent;
+  extern Func_ui_layout_label_from_ui_orig_parent t_ui_layout_label_from_ui_orig_parent;
   // (func boolean-print-html)
   vx_core::Type_boolean f_boolean_print_html(vx_core::Type_context context, vx_ui_ui::Type_ui ui);
 
@@ -140,8 +140,8 @@ namespace vx_ui_html_uihtml {
   // (func node-app<-ui-orig-parent)
   vx_web_html::Type_node f_node_app_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent);
 
-  // (func node-render<-node-ui)
-  vx_web_html::Type_node f_node_render_from_node_ui(vx_web_html::Type_node node, vx_ui_ui::Type_ui ui);
+  // (func node-layout<-node-ui)
+  vx_web_html::Type_node f_node_layout_from_node_ui(vx_web_html::Type_node node, vx_ui_ui::Type_ui ui);
 
   // (func string-style<-font)
   vx_core::Type_string f_string_style_from_font(vx_ui_ui::Type_font font);
@@ -176,23 +176,23 @@ namespace vx_ui_html_uihtml {
   // (func stylemap<-stylemap)
   vx_web_html::Type_stylemap f_stylemap_from_stylemap(vx_ui_ui::Type_stylemap uistylemap);
 
-  // (func stylesheet-render-html)
-  vx_core::vx_Type_async f_stylesheet_render_html(vx_ui_ui::Type_stylesheet stylesheetui);
+  // (func stylesheet-layout-html)
+  vx_core::vx_Type_async f_stylesheet_layout_html(vx_ui_ui::Type_stylesheet stylesheetui);
 
   // (func stylesheet<-stylesheet)
   vx_web_html::Type_stylesheet f_stylesheet_from_stylesheet(vx_ui_ui::Type_stylesheet uistylesheet);
 
-  // (func ui-render-app<-ui-orig-parent)
-  vx_ui_ui::Type_ui f_ui_render_app_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent);
+  // (func ui-layout-app<-ui-orig-parent)
+  vx_ui_ui::Type_ui f_ui_layout_app_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent);
 
-  // (func ui-render-default<-ui-orig-parent)
-  vx_ui_ui::Type_ui f_ui_render_default_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent);
+  // (func ui-layout-default<-ui-orig-parent)
+  vx_ui_ui::Type_ui f_ui_layout_default_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent);
 
-  // (func ui-render-image<-ui-orig-parent)
-  vx_ui_ui::Type_ui f_ui_render_image_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent);
+  // (func ui-layout-image<-ui-orig-parent)
+  vx_ui_ui::Type_ui f_ui_layout_image_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent);
 
-  // (func ui-render-label<-ui-orig-parent)
-  vx_ui_ui::Type_ui f_ui_render_label_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent);
+  // (func ui-layout-label<-ui-orig-parent)
+  vx_ui_ui::Type_ui f_ui_layout_label_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent);
 
   // (const layout-app-html)
   class Class_layout_app_html : public vx_ui_ui::Class_layout {
@@ -363,17 +363,17 @@ namespace vx_ui_html_uihtml {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func node-render<-node-ui)
-  class Abstract_node_render_from_node_ui : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  // (func node-layout<-node-ui)
+  class Abstract_node_layout_from_node_ui : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_node_render_from_node_ui() {};
-    virtual ~Abstract_node_render_from_node_ui() = 0;
+    Abstract_node_layout_from_node_ui() {};
+    virtual ~Abstract_node_layout_from_node_ui() = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_node_render_from_node_ui : public virtual Abstract_node_render_from_node_ui {
+  class Class_node_layout_from_node_ui : public virtual Abstract_node_layout_from_node_ui {
   public:
-    Class_node_render_from_node_ui();
-    virtual ~Class_node_render_from_node_ui() override;
+    Class_node_layout_from_node_ui();
+    virtual ~Class_node_layout_from_node_ui() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -675,19 +675,19 @@ namespace vx_ui_html_uihtml {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func stylesheet-render-html)
-  class Abstract_stylesheet_render_html : public vx_core::Abstract_any_from_any_async, public virtual vx_core::Abstract_replfunc_async {
+  // (func stylesheet-layout-html)
+  class Abstract_stylesheet_layout_html : public vx_core::Abstract_any_from_any_async, public virtual vx_core::Abstract_replfunc_async {
   public:
-    Abstract_stylesheet_render_html() {};
-    virtual ~Abstract_stylesheet_render_html() = 0;
+    Abstract_stylesheet_layout_html() {};
+    virtual ~Abstract_stylesheet_layout_html() = 0;
     virtual vx_core::Func_any_from_any_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_async::IFn fn) const override = 0;
     virtual vx_core::vx_Type_async vx_any_from_any_async(vx_core::Type_any generic_any_1, vx_core::Type_any val) const override = 0;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_stylesheet_render_html : public virtual Abstract_stylesheet_render_html {
+  class Class_stylesheet_layout_html : public virtual Abstract_stylesheet_layout_html {
   public:
-    Class_stylesheet_render_html();
-    virtual ~Class_stylesheet_render_html() override;
+    Class_stylesheet_layout_html();
+    virtual ~Class_stylesheet_layout_html() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -729,17 +729,17 @@ namespace vx_ui_html_uihtml {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func ui-render-app<-ui-orig-parent)
-  class Abstract_ui_render_app_from_ui_orig_parent : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  // (func ui-layout-app<-ui-orig-parent)
+  class Abstract_ui_layout_app_from_ui_orig_parent : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_ui_render_app_from_ui_orig_parent() {};
-    virtual ~Abstract_ui_render_app_from_ui_orig_parent() = 0;
+    Abstract_ui_layout_app_from_ui_orig_parent() {};
+    virtual ~Abstract_ui_layout_app_from_ui_orig_parent() = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_ui_render_app_from_ui_orig_parent : public virtual Abstract_ui_render_app_from_ui_orig_parent {
+  class Class_ui_layout_app_from_ui_orig_parent : public virtual Abstract_ui_layout_app_from_ui_orig_parent {
   public:
-    Class_ui_render_app_from_ui_orig_parent();
-    virtual ~Class_ui_render_app_from_ui_orig_parent() override;
+    Class_ui_layout_app_from_ui_orig_parent();
+    virtual ~Class_ui_layout_app_from_ui_orig_parent() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -752,17 +752,17 @@ namespace vx_ui_html_uihtml {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func ui-render-default<-ui-orig-parent)
-  class Abstract_ui_render_default_from_ui_orig_parent : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  // (func ui-layout-default<-ui-orig-parent)
+  class Abstract_ui_layout_default_from_ui_orig_parent : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_ui_render_default_from_ui_orig_parent() {};
-    virtual ~Abstract_ui_render_default_from_ui_orig_parent() = 0;
+    Abstract_ui_layout_default_from_ui_orig_parent() {};
+    virtual ~Abstract_ui_layout_default_from_ui_orig_parent() = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_ui_render_default_from_ui_orig_parent : public virtual Abstract_ui_render_default_from_ui_orig_parent {
+  class Class_ui_layout_default_from_ui_orig_parent : public virtual Abstract_ui_layout_default_from_ui_orig_parent {
   public:
-    Class_ui_render_default_from_ui_orig_parent();
-    virtual ~Class_ui_render_default_from_ui_orig_parent() override;
+    Class_ui_layout_default_from_ui_orig_parent();
+    virtual ~Class_ui_layout_default_from_ui_orig_parent() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -775,17 +775,17 @@ namespace vx_ui_html_uihtml {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func ui-render-image<-ui-orig-parent)
-  class Abstract_ui_render_image_from_ui_orig_parent : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  // (func ui-layout-image<-ui-orig-parent)
+  class Abstract_ui_layout_image_from_ui_orig_parent : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_ui_render_image_from_ui_orig_parent() {};
-    virtual ~Abstract_ui_render_image_from_ui_orig_parent() = 0;
+    Abstract_ui_layout_image_from_ui_orig_parent() {};
+    virtual ~Abstract_ui_layout_image_from_ui_orig_parent() = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_ui_render_image_from_ui_orig_parent : public virtual Abstract_ui_render_image_from_ui_orig_parent {
+  class Class_ui_layout_image_from_ui_orig_parent : public virtual Abstract_ui_layout_image_from_ui_orig_parent {
   public:
-    Class_ui_render_image_from_ui_orig_parent();
-    virtual ~Class_ui_render_image_from_ui_orig_parent() override;
+    Class_ui_layout_image_from_ui_orig_parent();
+    virtual ~Class_ui_layout_image_from_ui_orig_parent() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -798,17 +798,17 @@ namespace vx_ui_html_uihtml {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func ui-render-label<-ui-orig-parent)
-  class Abstract_ui_render_label_from_ui_orig_parent : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  // (func ui-layout-label<-ui-orig-parent)
+  class Abstract_ui_layout_label_from_ui_orig_parent : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_ui_render_label_from_ui_orig_parent() {};
-    virtual ~Abstract_ui_render_label_from_ui_orig_parent() = 0;
+    Abstract_ui_layout_label_from_ui_orig_parent() {};
+    virtual ~Abstract_ui_layout_label_from_ui_orig_parent() = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_ui_render_label_from_ui_orig_parent : public virtual Abstract_ui_render_label_from_ui_orig_parent {
+  class Class_ui_layout_label_from_ui_orig_parent : public virtual Abstract_ui_layout_label_from_ui_orig_parent {
   public:
-    Class_ui_render_label_from_ui_orig_parent();
-    virtual ~Class_ui_render_label_from_ui_orig_parent() override;
+    Class_ui_layout_label_from_ui_orig_parent();
+    virtual ~Class_ui_layout_label_from_ui_orig_parent() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;

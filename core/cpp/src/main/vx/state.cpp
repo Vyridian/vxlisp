@@ -32,6 +32,32 @@ namespace vx_state {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_valuemap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_core::t_any) {
+        vx_core::Type_any newval = vx_core::vx_any_from_any(vx_core::t_any, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_core::Type_any oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_core::e_any) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_any(key)
     vx_core::Type_any Class_valuemap::vx_get_any(vx_core::Type_string key) const {
       vx_core::Type_any output = vx_core::e_any;
@@ -332,6 +358,122 @@ namespace vx_state {
       vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_string name = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
       output = vx_state::f_any_readstate_from_name(generic_any_1, context, name);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func boolean-removestate<-name)
+  vx_core::Type_boolean f_boolean_removestate_from_name(vx_core::Type_context context, vx_core::Type_string name) {
+    vx_core::Type_boolean output = vx_core::e_boolean;
+    vx_core::vx_reserve(name);
+    output = vx_core::f_let(
+      vx_core::t_boolean,
+      vx_core::t_any_from_func->vx_fn_new({context, name}, [context, name]() {
+        vx_core::Type_statelistenermap statelistenermap = vx_state::f_statelistenermap_readstate(context);
+        vx_core::vx_ref_plus(statelistenermap);
+        vx_core::Type_boolean output_1 = vx_core::f_boolean_write_from_map_name_value(
+          statelistenermap,
+          name,
+          vx_core::f_empty(
+            vx_core::t_statelistener
+          )
+        );
+        vx_core::vx_release_one_except(statelistenermap, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except(name, output);
+    return output;
+  }
+  /**
+   * @function boolean_removestate_from_name
+   * Returns true if named statelistener was removed.
+   * @param  {string} name
+   * @return {boolean}
+   * (func boolean-removestate<-name)
+   */
+  // (func boolean-removestate<-name)
+  // class Class_boolean_removestate_from_name {
+    Abstract_boolean_removestate_from_name::~Abstract_boolean_removestate_from_name() {}
+
+    Class_boolean_removestate_from_name::Class_boolean_removestate_from_name() : Abstract_boolean_removestate_from_name::Abstract_boolean_removestate_from_name() {
+      vx_core::refcount += 1;
+    }
+
+    Class_boolean_removestate_from_name::~Class_boolean_removestate_from_name() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_boolean_removestate_from_name::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_state::Func_boolean_removestate_from_name output = vx_state::e_boolean_removestate_from_name;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_removestate_from_name::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_state::Func_boolean_removestate_from_name output = vx_state::e_boolean_removestate_from_name;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_boolean_removestate_from_name::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/state", // pkgname
+        "boolean-removestate<-name", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_boolean_removestate_from_name::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_boolean_removestate_from_name::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/state", // pkgname
+        "boolean-removestate<-name", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_removestate_from_name::vx_empty() const {return vx_state::e_boolean_removestate_from_name;}
+    vx_core::Type_any Class_boolean_removestate_from_name::vx_type() const {return vx_state::t_boolean_removestate_from_name;}
+    vx_core::Type_msgblock Class_boolean_removestate_from_name::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_boolean_removestate_from_name::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any_context Class_boolean_removestate_from_name::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const {
+      return vx_core::e_any_from_any_context;
+    }
+
+    vx_core::Type_any Class_boolean_removestate_from_name::vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string, val);
+      output = vx_state::f_boolean_removestate_from_name(context, inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_removestate_from_name::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_string name = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_state::f_boolean_removestate_from_name(context, name);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -1422,6 +1564,8 @@ namespace vx_state {
   vx_state::Func_any_readstate_from_mapname_name t_any_readstate_from_mapname_name = NULL;
   vx_state::Func_any_readstate_from_name e_any_readstate_from_name = NULL;
   vx_state::Func_any_readstate_from_name t_any_readstate_from_name = NULL;
+  vx_state::Func_boolean_removestate_from_name e_boolean_removestate_from_name = NULL;
+  vx_state::Func_boolean_removestate_from_name t_boolean_removestate_from_name = NULL;
   vx_state::Func_boolean_writestate_from_mapname_name_value e_boolean_writestate_from_mapname_name_value = NULL;
   vx_state::Func_boolean_writestate_from_mapname_name_value t_boolean_writestate_from_mapname_name_value = NULL;
   vx_state::Func_boolean_writestate_from_name_value e_boolean_writestate_from_name_value = NULL;
@@ -1460,6 +1604,10 @@ namespace vx_state {
       vx_core::vx_reserve_empty(vx_state::e_any_readstate_from_name);
       vx_state::t_any_readstate_from_name = new vx_state::Class_any_readstate_from_name();
       vx_core::vx_reserve_type(vx_state::t_any_readstate_from_name);
+      vx_state::e_boolean_removestate_from_name = new vx_state::Class_boolean_removestate_from_name();
+      vx_core::vx_reserve_empty(vx_state::e_boolean_removestate_from_name);
+      vx_state::t_boolean_removestate_from_name = new vx_state::Class_boolean_removestate_from_name();
+      vx_core::vx_reserve_type(vx_state::t_boolean_removestate_from_name);
       vx_state::e_boolean_writestate_from_mapname_name_value = new vx_state::Class_boolean_writestate_from_mapname_name_value();
       vx_core::vx_reserve_empty(vx_state::e_boolean_writestate_from_mapname_name_value);
       vx_state::t_boolean_writestate_from_mapname_name_value = new vx_state::Class_boolean_writestate_from_mapname_name_value();
@@ -1507,6 +1655,7 @@ namespace vx_state {
       maptype["valuemap"] = vx_state::t_valuemap;
       mapfunc["any-readstate<-mapname-name"] = vx_state::t_any_readstate_from_mapname_name;
       mapfunc["any-readstate<-name"] = vx_state::t_any_readstate_from_name;
+      mapfunc["boolean-removestate<-name"] = vx_state::t_boolean_removestate_from_name;
       mapfunc["boolean-writestate<-mapname-name-value"] = vx_state::t_boolean_writestate_from_mapname_name_value;
       mapfunc["boolean-writestate<-name-value"] = vx_state::t_boolean_writestate_from_name_value;
       mapfunc["boolean-writestate<-statelistener"] = vx_state::t_boolean_writestate_from_statelistener;

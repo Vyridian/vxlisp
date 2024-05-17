@@ -18,6 +18,10 @@ namespace vx_state {
   typedef Abstract_any_readstate_from_name* Func_any_readstate_from_name;
   extern Func_any_readstate_from_name e_any_readstate_from_name;
   extern Func_any_readstate_from_name t_any_readstate_from_name;
+  class Abstract_boolean_removestate_from_name;
+  typedef Abstract_boolean_removestate_from_name* Func_boolean_removestate_from_name;
+  extern Func_boolean_removestate_from_name e_boolean_removestate_from_name;
+  extern Func_boolean_removestate_from_name t_boolean_removestate_from_name;
   class Abstract_boolean_writestate_from_mapname_name_value;
   typedef Abstract_boolean_writestate_from_mapname_name_value* Func_boolean_writestate_from_mapname_name_value;
   extern Func_boolean_writestate_from_mapname_name_value e_boolean_writestate_from_mapname_name_value;
@@ -58,6 +62,9 @@ namespace vx_state {
   typedef Abstract_valuemap_readstate_from_mapname* Func_valuemap_readstate_from_mapname;
   extern Func_valuemap_readstate_from_mapname e_valuemap_readstate_from_mapname;
   extern Func_valuemap_readstate_from_mapname t_valuemap_readstate_from_mapname;
+  // (func boolean-removestate<-name)
+  vx_core::Type_boolean f_boolean_removestate_from_name(vx_core::Type_context context, vx_core::Type_string name);
+
   // (func boolean-writestate<-mapname-name-value)
   vx_core::Type_boolean f_boolean_writestate_from_mapname_name_value(vx_core::Type_context context, vx_core::Type_string mapname, vx_core::Type_string name, vx_core::Type_any value);
 
@@ -97,6 +104,8 @@ namespace vx_state {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_set(name, value)
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) = 0;
     // vx_new_from_map(T, Map<T>)
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
   };
@@ -114,6 +123,7 @@ namespace vx_state {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) override;
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
   };
 
@@ -153,6 +163,33 @@ namespace vx_state {
   public:
     Class_any_readstate_from_name();
     virtual ~Class_any_readstate_from_name() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func boolean-removestate<-name)
+  class Abstract_boolean_removestate_from_name : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_boolean_removestate_from_name() {};
+    virtual ~Abstract_boolean_removestate_from_name() = 0;
+    virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_boolean_removestate_from_name : public virtual Abstract_boolean_removestate_from_name {
+  public:
+    Class_boolean_removestate_from_name();
+    virtual ~Class_boolean_removestate_from_name() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;

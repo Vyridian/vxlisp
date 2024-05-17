@@ -23,7 +23,30 @@ public final class State {
     protected Map<String, Core.Type_any> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Core.Type_any) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Core.Type_any castval = (Core.Type_any)value;
+        Map<String, Core.Type_any> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Core.e_any) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
@@ -344,6 +367,110 @@ public final class State {
     output = Core.f_any_from_any(
       generic_any_1,
       State.f_value_readstate_from_name(context, name)
+    );
+    return output;
+  }
+
+  /**
+   * @function boolean_removestate_from_name
+   * Returns true if named statelistener was removed.
+   * @param  {string} name
+   * @return {boolean}
+   * (func boolean-removestate<-name)
+   */
+  public static interface Func_boolean_removestate_from_name extends Core.Func_any_from_any_context {
+    public Core.Type_boolean vx_boolean_removestate_from_name(final Core.Type_context context, final Core.Type_string name);
+  }
+
+  public static class Class_boolean_removestate_from_name extends Core.Class_base implements Func_boolean_removestate_from_name {
+
+    @Override
+    public Func_boolean_removestate_from_name vx_new(Object... vals) {
+      Class_boolean_removestate_from_name output = new Class_boolean_removestate_from_name();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_removestate_from_name vx_copy(Object... vals) {
+      Class_boolean_removestate_from_name output = new Class_boolean_removestate_from_name();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/state", // pkgname
+        "boolean-removestate<-name", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_removestate_from_name vx_empty() {return e_boolean_removestate_from_name;}
+    @Override
+    public Func_boolean_removestate_from_name vx_type() {return t_boolean_removestate_from_name;}
+
+    @Override
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_string inputval = (Core.Type_string)value;
+      Core.Type_any outputval = State.f_boolean_removestate_from_name(context, inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string name = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      output = State.f_boolean_removestate_from_name(context, name);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean vx_boolean_removestate_from_name(final Core.Type_context context, final Core.Type_string name) {
+      return State.f_boolean_removestate_from_name(context, name);
+    }
+
+  }
+
+  public static final Func_boolean_removestate_from_name e_boolean_removestate_from_name = new State.Class_boolean_removestate_from_name();
+  public static final Func_boolean_removestate_from_name t_boolean_removestate_from_name = new State.Class_boolean_removestate_from_name();
+
+  public static Core.Type_boolean f_boolean_removestate_from_name(final Core.Type_context context, final Core.Type_string name) {
+    Core.Type_boolean output = Core.e_boolean;
+    output = Core.f_let(
+      Core.t_boolean,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_statelistenermap statelistenermap = State.f_statelistenermap_readstate(context);
+        return Core.f_boolean_write_from_map_name_value(
+          statelistenermap,
+          name,
+          Core.f_empty(
+            Core.t_statelistener
+          )
+        );
+      })
     );
     return output;
   }
@@ -1316,6 +1443,7 @@ public final class State {
     maptype.put("valuemap", State.t_valuemap);
     mapfunc.put("any-readstate<-mapname-name", State.t_any_readstate_from_mapname_name);
     mapfunc.put("any-readstate<-name", State.t_any_readstate_from_name);
+    mapfunc.put("boolean-removestate<-name", State.t_boolean_removestate_from_name);
     mapfunc.put("boolean-writestate<-mapname-name-value", State.t_boolean_writestate_from_mapname_name_value);
     mapfunc.put("boolean-writestate<-name-value", State.t_boolean_writestate_from_name_value);
     mapfunc.put("boolean-writestate<-statelistener", State.t_boolean_writestate_from_statelistener);

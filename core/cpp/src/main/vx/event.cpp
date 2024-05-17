@@ -512,6 +512,32 @@ namespace vx_event {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_eventmap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_event::t_event) {
+        vx_event::Type_event newval = vx_core::vx_any_from_any(vx_event::t_event, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_event::Type_event oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_event::e_event) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_event(key)
     vx_event::Type_event Class_eventmap::vx_get_event(vx_core::Type_string key) const {
       vx_event::Type_event output = vx_event::e_event;

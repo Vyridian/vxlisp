@@ -1121,6 +1121,9 @@ namespace vx_core {
   // vx_boolean_from_type_trait(type, type)
   bool vx_boolean_from_type_trait(vx_core::Type_any type, vx_core::Type_any trait);
 
+  // vx_boolean_write_from_map_name_value(map, string, any)
+  vx_core::Type_boolean vx_boolean_write_from_map_name_value(vx_core::Type_map valuemap, vx_core::Type_string name, vx_core::Type_any value);
+
   // vx_compare(any, any)
   long vx_compare(vx_core::Type_any val1, vx_core::Type_any val2);
 
@@ -1580,6 +1583,7 @@ namespace vx_core {
     vx_core::vx_Type_mapany vx_p_map;
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) = 0;
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
   };
   class Class_map : public virtual vx_core::Abstract_map {
@@ -1596,6 +1600,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) override;
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
   };
 
@@ -3804,6 +3809,8 @@ namespace vx_core {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_set(name, value)
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) = 0;
     // vx_new_from_map(T, Map<T>)
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
   };
@@ -3821,6 +3828,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) override;
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
   };
 
@@ -3931,6 +3939,8 @@ namespace vx_core {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_set(name, value)
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) = 0;
     // vx_new_from_map(T, Map<T>)
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
     std::map<std::string, vx_core::Type_arg> vx_p_map;
@@ -3953,6 +3963,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) override;
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
     virtual std::map<std::string, vx_core::Type_arg> vx_maparg() const override;
     virtual vx_core::Type_arg vx_get_arg(vx_core::Type_string key) const override;
@@ -4099,6 +4110,8 @@ namespace vx_core {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_set(name, value)
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) = 0;
     // vx_new_from_map(T, Map<T>)
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
     std::map<std::string, vx_core::Type_connect> vx_p_map;
@@ -4121,6 +4134,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) override;
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
     virtual std::map<std::string, vx_core::Type_connect> vx_mapconnect() const override;
     virtual vx_core::Type_connect vx_get_connect(vx_core::Type_string key) const override;
@@ -4223,6 +4237,8 @@ namespace vx_core {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_set(name, value)
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) = 0;
     // vx_new_from_map(T, Map<T>)
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
   };
@@ -4240,6 +4256,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) override;
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
   };
 
@@ -4370,6 +4387,8 @@ namespace vx_core {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_set(name, value)
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) = 0;
     // vx_new_from_map(T, Map<T>)
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
     std::map<std::string, vx_core::Type_func> vx_p_map;
@@ -4392,6 +4411,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) override;
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
     virtual std::map<std::string, vx_core::Type_func> vx_mapfunc() const override;
     virtual vx_core::Type_func vx_get_func(vx_core::Type_string key) const override;
@@ -4442,6 +4462,8 @@ namespace vx_core {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_set(name, value)
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) = 0;
     // vx_new_from_map(T, Map<T>)
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
     std::map<std::string, vx_core::Type_int> vx_p_map;
@@ -4464,6 +4486,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) override;
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
     virtual std::map<std::string, vx_core::Type_int> vx_mapint() const override;
     virtual vx_core::Type_int vx_get_int(vx_core::Type_string key) const override;
@@ -4650,6 +4673,8 @@ namespace vx_core {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_set(name, value)
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) = 0;
     // vx_new_from_map(T, Map<T>)
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
     std::map<std::string, vx_core::Type_number> vx_p_map;
@@ -4672,6 +4697,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) override;
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
     virtual std::map<std::string, vx_core::Type_number> vx_mapnumber() const override;
     virtual vx_core::Type_number vx_get_number(vx_core::Type_string key) const override;
@@ -4732,6 +4758,8 @@ namespace vx_core {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_set(name, value)
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) = 0;
     // vx_new_from_map(T, Map<T>)
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
     std::map<std::string, vx_core::Type_package> vx_p_map;
@@ -4754,6 +4782,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) override;
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
     virtual std::map<std::string, vx_core::Type_package> vx_mappackage() const override;
     virtual vx_core::Type_package vx_get_package(vx_core::Type_string key) const override;
@@ -4834,6 +4863,8 @@ namespace vx_core {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_set(name, value)
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) = 0;
     // vx_new_from_map(T, Map<T>)
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
     std::map<std::string, vx_core::Type_permission> vx_p_map;
@@ -4856,6 +4887,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) override;
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
     virtual std::map<std::string, vx_core::Type_permission> vx_mappermission() const override;
     virtual vx_core::Type_permission vx_get_permission(vx_core::Type_string key) const override;
@@ -5086,6 +5118,8 @@ namespace vx_core {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_set(name, value)
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) = 0;
     // vx_new_from_map(T, Map<T>)
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
     std::map<std::string, vx_core::Type_statelistener> vx_p_map;
@@ -5108,6 +5142,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) override;
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
     virtual std::map<std::string, vx_core::Type_statelistener> vx_mapstatelistener() const override;
     virtual vx_core::Type_statelistener vx_get_statelistener(vx_core::Type_string key) const override;
@@ -5194,6 +5229,8 @@ namespace vx_core {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_set(name, value)
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) = 0;
     // vx_new_from_map(T, Map<T>)
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
     std::map<std::string, vx_core::Type_string> vx_p_map;
@@ -5216,6 +5253,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) override;
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
     virtual std::map<std::string, vx_core::Type_string> vx_mapstring() const override;
     virtual vx_core::Type_string vx_get_string(vx_core::Type_string key) const override;
@@ -5382,6 +5420,8 @@ namespace vx_core {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_set(name, value)
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) = 0;
     // vx_new_from_map(T, Map<T>)
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
     std::map<std::string, vx_core::Type_translation> vx_p_map;
@@ -5404,6 +5444,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) override;
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
     virtual std::map<std::string, vx_core::Type_translation> vx_maptranslation() const override;
     virtual vx_core::Type_translation vx_get_translation(vx_core::Type_string key) const override;
@@ -5468,6 +5509,8 @@ namespace vx_core {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_set(name, value)
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) = 0;
     // vx_new_from_map(T, Map<T>)
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
   };
@@ -5485,6 +5528,7 @@ namespace vx_core {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) override;
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
   };
 

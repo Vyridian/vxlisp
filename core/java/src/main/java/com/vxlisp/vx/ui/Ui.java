@@ -1222,7 +1222,30 @@ public final class Ui {
     protected Map<String, Ui.Type_fontface> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Ui.Type_fontface>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Ui.Type_fontface) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Ui.Type_fontface castval = (Ui.Type_fontface)value;
+        Map<String, Ui.Type_fontface> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Ui.e_fontface) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Ui.Type_fontface vx_fontface(final Core.Type_string key) {
@@ -1390,7 +1413,30 @@ public final class Ui {
     protected Map<String, Ui.Type_font> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Ui.Type_font>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Ui.Type_font) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Ui.Type_font castval = (Ui.Type_font)value;
+        Map<String, Ui.Type_font> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Ui.e_font) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Ui.Type_font vx_font(final Core.Type_string key) {
@@ -1727,7 +1773,30 @@ public final class Ui {
     protected Map<String, Ui.Type_fontstyle> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Ui.Type_fontstyle>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Ui.Type_fontstyle) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Ui.Type_fontstyle castval = (Ui.Type_fontstyle)value;
+        Map<String, Ui.Type_fontstyle> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Ui.e_fontstyle) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Ui.Type_fontstyle vx_fontstyle(final Core.Type_string key) {
@@ -2129,7 +2198,7 @@ public final class Ui {
     public Ui.Type_layout vx_empty();
     public Ui.Type_layout vx_type();
     public Core.Type_string name();
-    public Ui.Func_ui_render_from_ui_orig_parent fn_layout();
+    public Ui.Func_ui_layout_from_ui_orig_parent fn_layout();
   }
 
   public static class Class_layout extends Core.Class_base implements Type_layout {
@@ -2141,11 +2210,11 @@ public final class Ui {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Ui.Func_ui_render_from_ui_orig_parent vx_p_fn_layout;
+    protected Ui.Func_ui_layout_from_ui_orig_parent vx_p_fn_layout;
 
     @Override
-    public Ui.Func_ui_render_from_ui_orig_parent fn_layout() {
-      return this.vx_p_fn_layout == null ? Ui.e_ui_render_from_ui_orig_parent : this.vx_p_fn_layout;
+    public Ui.Func_ui_layout_from_ui_orig_parent fn_layout() {
+      return this.vx_p_fn_layout == null ? Ui.e_ui_layout_from_ui_orig_parent : this.vx_p_fn_layout;
     }
 
     @Override
@@ -2186,7 +2255,7 @@ public final class Ui {
         ischanged = true;
       }
       Core.Type_string vx_p_name = val.name();
-      Ui.Func_ui_render_from_ui_orig_parent vx_p_fn_layout = val.fn_layout();
+      Ui.Func_ui_layout_from_ui_orig_parent vx_p_fn_layout = val.fn_layout();
       ArrayList<String> validkeys = new ArrayList<>();
       validkeys.add(":name");
       validkeys.add(":fn-layout");
@@ -2257,9 +2326,9 @@ public final class Ui {
             break;
           case ":fn-layout":
             if (valsub == vx_p_fn_layout) {
-            } else if (valsub instanceof Ui.Func_ui_render_from_ui_orig_parent) {
+            } else if (valsub instanceof Ui.Func_ui_layout_from_ui_orig_parent) {
               ischanged = true;
-              vx_p_fn_layout = (Ui.Func_ui_render_from_ui_orig_parent)valsub;
+              vx_p_fn_layout = (Ui.Func_ui_layout_from_ui_orig_parent)valsub;
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -2778,7 +2847,30 @@ public final class Ui {
     protected Map<String, Ui.Type_layout> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Ui.Type_layout>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Ui.Type_layout) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Ui.Type_layout castval = (Ui.Type_layout)value;
+        Map<String, Ui.Type_layout> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Ui.e_layout) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Ui.Type_layout vx_layout(final Core.Type_string key) {
@@ -4519,7 +4611,30 @@ public final class Ui {
     protected Map<String, Ui.Type_style> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Ui.Type_style>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Ui.Type_style) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Ui.Type_style castval = (Ui.Type_style)value;
+        Map<String, Ui.Type_style> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Ui.e_style) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Ui.Type_style vx_style(final Core.Type_string key) {
@@ -4962,7 +5077,6 @@ public final class Ui {
     public Core.Type_string uid();
     public Core.Type_string name();
     public Ui.Type_layout layout();
-    public Core.Type_string parent();
     public Core.Type_string path();
     public Core.Type_boolean hidden();
     public Core.Type_boolean selected();
@@ -4995,13 +5109,6 @@ public final class Ui {
     @Override
     public Ui.Type_layout layout() {
       return this.vx_p_layout == null ? Ui.e_layout : this.vx_p_layout;
-    }
-
-    protected Core.Type_string vx_p_parent;
-
-    @Override
-    public Core.Type_string parent() {
-      return this.vx_p_parent == null ? Core.e_string : this.vx_p_parent;
     }
 
     protected Core.Type_string vx_p_path;
@@ -5081,9 +5188,6 @@ public final class Ui {
       case ":layout":
         output = this.layout();
         break;
-      case ":parent":
-        output = this.parent();
-        break;
       case ":path":
         output = this.path();
         break;
@@ -5121,7 +5225,6 @@ public final class Ui {
       output.put(":uid", this.uid());
       output.put(":name", this.name());
       output.put(":layout", this.layout());
-      output.put(":parent", this.parent());
       output.put(":path", this.path());
       output.put(":hidden", this.hidden());
       output.put(":selected", this.selected());
@@ -5151,7 +5254,6 @@ public final class Ui {
       Core.Type_string vx_p_uid = val.uid();
       Core.Type_string vx_p_name = val.name();
       Ui.Type_layout vx_p_layout = val.layout();
-      Core.Type_string vx_p_parent = val.parent();
       Core.Type_string vx_p_path = val.path();
       Core.Type_boolean vx_p_hidden = val.hidden();
       Core.Type_boolean vx_p_selected = val.selected();
@@ -5165,7 +5267,6 @@ public final class Ui {
       validkeys.add(":uid");
       validkeys.add(":name");
       validkeys.add(":layout");
-      validkeys.add(":parent");
       validkeys.add(":path");
       validkeys.add(":hidden");
       validkeys.add(":selected");
@@ -5277,29 +5378,6 @@ public final class Ui {
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
               mapany.put("key", Core.vx_new_string("layout"));
-              mapany.put("value", msgval);
-              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
-              msg = Core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
-            }
-            break;
-          case ":parent":
-            if (valsub == vx_p_parent) {
-            } else if (valsub instanceof Core.Type_string) {
-              ischanged = true;
-              vx_p_parent = (Core.Type_string)valsub;
-            } else if (valsub instanceof String) {
-              ischanged = true;
-              vx_p_parent = Core.t_string.vx_new(valsub);
-            } else {
-              Core.Type_any msgval;
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
-              } else {
-                msgval = Core.vx_new_string(valsub.toString());
-              }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
-              mapany.put("key", Core.vx_new_string("parent"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap);
@@ -5511,7 +5589,6 @@ public final class Ui {
         work.vx_p_uid = vx_p_uid;
         work.vx_p_name = vx_p_name;
         work.vx_p_layout = vx_p_layout;
-        work.vx_p_parent = vx_p_parent;
         work.vx_p_path = vx_p_path;
         work.vx_p_hidden = vx_p_hidden;
         work.vx_p_selected = vx_p_selected;
@@ -5974,7 +6051,30 @@ public final class Ui {
     protected Map<String, Ui.Type_ui> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Ui.Type_ui>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Ui.Type_ui) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Ui.Type_ui castval = (Ui.Type_ui)value;
+        Map<String, Ui.Type_ui> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Ui.e_ui) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Ui.Type_ui vx_ui(final Core.Type_string key) {
@@ -7917,6 +8017,84 @@ public final class Ui {
   }
 
   /**
+   * @function boolean_removestate_uiapp
+   * Returns true if uiapp was successfully removed from state.
+   * @return {boolean}
+   * (func boolean-removestate-uiapp)
+   */
+  public static interface Func_boolean_removestate_uiapp extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_boolean vx_boolean_removestate_uiapp(final Core.Type_context context);
+  }
+
+  public static class Class_boolean_removestate_uiapp extends Core.Class_base implements Func_boolean_removestate_uiapp {
+
+    @Override
+    public Func_boolean_removestate_uiapp vx_new(Object... vals) {
+      Class_boolean_removestate_uiapp output = new Class_boolean_removestate_uiapp();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_removestate_uiapp vx_copy(Object... vals) {
+      Class_boolean_removestate_uiapp output = new Class_boolean_removestate_uiapp();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/ui", // pkgname
+        "boolean-removestate-uiapp", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_removestate_uiapp vx_empty() {return e_boolean_removestate_uiapp;}
+    @Override
+    public Func_boolean_removestate_uiapp vx_type() {return t_boolean_removestate_uiapp;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
+      output = Ui.f_boolean_removestate_uiapp(context);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean vx_boolean_removestate_uiapp(final Core.Type_context context) {
+      return Ui.f_boolean_removestate_uiapp(context);
+    }
+
+  }
+
+  public static final Func_boolean_removestate_uiapp e_boolean_removestate_uiapp = new Ui.Class_boolean_removestate_uiapp();
+  public static final Func_boolean_removestate_uiapp t_boolean_removestate_uiapp = new Ui.Class_boolean_removestate_uiapp();
+
+  public static Core.Type_boolean f_boolean_removestate_uiapp(final Core.Type_context context) {
+    Core.Type_boolean output = Core.e_boolean;
+    output = State.f_boolean_removestate_from_name(context, Core.vx_new_string(":uiapp"));
+    return output;
+  }
+
+  /**
    * @function boolean_writestate_from_ui
    * @param  {ui} ui
    * @return {boolean}
@@ -8007,9 +8185,135 @@ public final class Ui {
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
         final Core.Type_string uid = ui.uid();
-        return State.f_boolean_writestate_from_mapname_name_value(context, Core.vx_new_string(":uimap"), uid, ui);
+        final Ui.Type_ui uiapp = Ui.f_ui_readstate_uiapp(context);
+        final Core.Type_string parentuid = Ui.f_string_parentuid_from_uid(uid);
+        final Ui.Type_ui parentui = Core.f_if_2(
+          Ui.t_ui,
+          Core.t_thenelselist.vx_new(
+              Core.f_then(
+                Core.t_boolean_from_func.vx_fn_new(() -> {
+                  return Core.f_eq(Core.vx_new_string(""), parentuid);
+                }),
+                Core.t_any_from_func.vx_fn_new(() -> {
+                  return uiapp;
+                })
+              ),
+              Core.f_else(
+                Core.t_any_from_func.vx_fn_new(() -> {
+                  return Ui.f_ui_from_ui_find(uiapp, parentuid);
+                })
+              )
+          )
+        );
+        final Core.Type_boolean isfound = Core.f_notempty_1(parentui);
+        final Ui.Type_ui parent2 = Core.f_if_2(
+          Ui.t_ui,
+          Core.t_thenelselist.vx_new(
+              Core.f_then(
+                Core.t_boolean_from_func.vx_fn_new(() -> {
+                  return isfound;
+                }),
+                Core.t_any_from_func.vx_fn_new(() -> {
+                  return Ui.f_ui_writechild_from_ui_child(parentui, ui);
+                })
+              )
+          )
+        );
+        return isfound;
       })
     );
+    return output;
+  }
+
+  /**
+   * @function boolean_writestate_from_uiapp
+   * Returns true if successful write to :uiapp state
+   * @param  {ui} ui
+   * @return {boolean}
+   * (func boolean-writestate<-uiapp)
+   */
+  public static interface Func_boolean_writestate_from_uiapp extends Core.Func_any_from_any_context {
+    public Core.Type_boolean vx_boolean_writestate_from_uiapp(final Core.Type_context context, final Ui.Type_ui ui);
+  }
+
+  public static class Class_boolean_writestate_from_uiapp extends Core.Class_base implements Func_boolean_writestate_from_uiapp {
+
+    @Override
+    public Func_boolean_writestate_from_uiapp vx_new(Object... vals) {
+      Class_boolean_writestate_from_uiapp output = new Class_boolean_writestate_from_uiapp();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_writestate_from_uiapp vx_copy(Object... vals) {
+      Class_boolean_writestate_from_uiapp output = new Class_boolean_writestate_from_uiapp();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/ui", // pkgname
+        "boolean-writestate<-uiapp", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_writestate_from_uiapp vx_empty() {return e_boolean_writestate_from_uiapp;}
+    @Override
+    public Func_boolean_writestate_from_uiapp vx_type() {return t_boolean_writestate_from_uiapp;}
+
+    @Override
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Ui.Type_ui inputval = (Ui.Type_ui)value;
+      Core.Type_any outputval = Ui.f_boolean_writestate_from_uiapp(context, inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      output = Ui.f_boolean_writestate_from_uiapp(context, ui);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean vx_boolean_writestate_from_uiapp(final Core.Type_context context, final Ui.Type_ui ui) {
+      return Ui.f_boolean_writestate_from_uiapp(context, ui);
+    }
+
+  }
+
+  public static final Func_boolean_writestate_from_uiapp e_boolean_writestate_from_uiapp = new Ui.Class_boolean_writestate_from_uiapp();
+  public static final Func_boolean_writestate_from_uiapp t_boolean_writestate_from_uiapp = new Ui.Class_boolean_writestate_from_uiapp();
+
+  public static Core.Type_boolean f_boolean_writestate_from_uiapp(final Core.Type_context context, final Ui.Type_ui ui) {
+    Core.Type_boolean output = Core.e_boolean;
+    output = State.f_boolean_writestate_from_name_value(context, Core.vx_new_string(":uiapp"), ui);
     return output;
   }
 
@@ -8297,6 +8601,232 @@ public final class Ui {
         final Core.Type_string uid = Ui.f_string_selected_from_ui(ui);
         final Core.Type_stringlist uidlist = Ui.f_stringlist_from_ui(ui);
         return Collection.f_int_from_stringlist_find(uidlist, uid);
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function int_visible_from_ui
+   * Returns the position of the currently visible subui
+   * @param  {ui} ui
+   * @return {int}
+   * (func int-visible<-ui)
+   */
+  public static interface Func_int_visible_from_ui extends Core.Func_any_from_any {
+    public Core.Type_int vx_int_visible_from_ui(final Ui.Type_ui ui);
+  }
+
+  public static class Class_int_visible_from_ui extends Core.Class_base implements Func_int_visible_from_ui {
+
+    @Override
+    public Func_int_visible_from_ui vx_new(Object... vals) {
+      Class_int_visible_from_ui output = new Class_int_visible_from_ui();
+      return output;
+    }
+
+    @Override
+    public Func_int_visible_from_ui vx_copy(Object... vals) {
+      Class_int_visible_from_ui output = new Class_int_visible_from_ui();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/ui", // pkgname
+        "int-visible<-ui", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "int", // name
+          "", // extends
+          Core.t_typelist.vx_new(Core.t_number), // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_int_visible_from_ui vx_empty() {return e_int_visible_from_ui;}
+    @Override
+    public Func_int_visible_from_ui vx_type() {return t_int_visible_from_ui;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Ui.Type_ui inputval = (Ui.Type_ui)value;
+      Core.Type_any outputval = Ui.f_int_visible_from_ui(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      output = Ui.f_int_visible_from_ui(ui);
+      return output;
+    }
+
+    @Override
+    public Core.Type_int vx_int_visible_from_ui(final Ui.Type_ui ui) {
+      return Ui.f_int_visible_from_ui(ui);
+    }
+
+  }
+
+  public static final Func_int_visible_from_ui e_int_visible_from_ui = new Ui.Class_int_visible_from_ui();
+  public static final Func_int_visible_from_ui t_int_visible_from_ui = new Ui.Class_int_visible_from_ui();
+
+  public static Core.Type_int f_int_visible_from_ui(final Ui.Type_ui ui) {
+    Core.Type_int output = Core.e_int;
+    output = Core.f_let(
+      Core.t_int,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_intlist intlist = Ui.f_intlist_visible_from_ui(ui);
+        return Core.f_first_from_list(Core.t_int, intlist);
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function intlist_visible_from_ui
+   * Return a uilist of the ui with selected=true
+   * @param  {ui} uiarg
+   * @return {intlist}
+   * (func intlist-visible<-ui)
+   */
+  public static interface Func_intlist_visible_from_ui extends Core.Func_any_from_any {
+    public Core.Type_intlist vx_intlist_visible_from_ui(final Ui.Type_ui uiarg);
+  }
+
+  public static class Class_intlist_visible_from_ui extends Core.Class_base implements Func_intlist_visible_from_ui {
+
+    @Override
+    public Func_intlist_visible_from_ui vx_new(Object... vals) {
+      Class_intlist_visible_from_ui output = new Class_intlist_visible_from_ui();
+      return output;
+    }
+
+    @Override
+    public Func_intlist_visible_from_ui vx_copy(Object... vals) {
+      Class_intlist_visible_from_ui output = new Class_intlist_visible_from_ui();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/ui", // pkgname
+        "intlist-visible<-ui", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "intlist", // name
+          ":list", // extends
+          Core.e_typelist, // traits
+          Core.t_typelist.vx_new(Core.t_int), // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_intlist_visible_from_ui vx_empty() {return e_intlist_visible_from_ui;}
+    @Override
+    public Func_intlist_visible_from_ui vx_type() {return t_intlist_visible_from_ui;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Ui.Type_ui inputval = (Ui.Type_ui)value;
+      Core.Type_any outputval = Ui.f_intlist_visible_from_ui(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui uiarg = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      output = Ui.f_intlist_visible_from_ui(uiarg);
+      return output;
+    }
+
+    @Override
+    public Core.Type_intlist vx_intlist_visible_from_ui(final Ui.Type_ui uiarg) {
+      return Ui.f_intlist_visible_from_ui(uiarg);
+    }
+
+  }
+
+  public static final Func_intlist_visible_from_ui e_intlist_visible_from_ui = new Ui.Class_intlist_visible_from_ui();
+  public static final Func_intlist_visible_from_ui t_intlist_visible_from_ui = new Ui.Class_intlist_visible_from_ui();
+
+  public static Core.Type_intlist f_intlist_visible_from_ui(final Ui.Type_ui uiarg) {
+    Core.Type_intlist output = Core.e_intlist;
+    output = Core.f_let(
+      Core.t_intlist,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Ui.Type_uimap uimap = uiarg.uimap();
+        final Ui.Type_uilist uilist = Ui.f_uilist_from_uimap(uimap);
+        final Ui.Type_uilist intlist = Core.f_list_from_list_intany(
+          Ui.t_uilist,
+          uilist,
+          Core.t_any_from_int_any.vx_fn_new((pos_any, subui_any) -> {
+            Core.Type_int pos = Core.f_any_from_any(Core.t_int, pos_any);
+            Ui.Type_ui subui = Core.f_any_from_any(Ui.t_ui, subui_any);
+            return 
+              Core.f_if_2(
+                Core.t_int,
+                Core.t_thenelselist.vx_new(
+                  Core.f_then(
+                    Core.t_boolean_from_func.vx_fn_new(() -> {
+                      return Core.f_not(
+                        subui.hidden()
+                      );
+                    }),
+                    Core.t_any_from_func.vx_fn_new(() -> {
+                      return pos;
+                    })
+                  )
+                )
+              );
+          })
+        );
+        return Collection.f_list_from_list_filter(
+          Core.t_intlist,
+          intlist,
+          Core.t_any_from_any.vx_fn_new((pos_any) -> {
+            Core.Type_int pos = Core.f_any_from_any(Core.t_int, pos_any);
+            return pos;
+          })
+        );
       })
     );
     return output;
@@ -8854,6 +9384,118 @@ public final class Ui {
         Ui.Type_layout layout = Core.f_any_from_any(Ui.t_layout, layout_any);
         return 
         layout.name();
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function string_parentuid_from_uid
+   * Returns the parent uid of a given uid
+   * @param  {string} uid
+   * @return {string}
+   * (func string-parentuid<-uid)
+   */
+  public static interface Func_string_parentuid_from_uid extends Core.Func_any_from_any {
+    public Core.Type_string vx_string_parentuid_from_uid(final Core.Type_string uid);
+  }
+
+  public static class Class_string_parentuid_from_uid extends Core.Class_base implements Func_string_parentuid_from_uid {
+
+    @Override
+    public Func_string_parentuid_from_uid vx_new(Object... vals) {
+      Class_string_parentuid_from_uid output = new Class_string_parentuid_from_uid();
+      return output;
+    }
+
+    @Override
+    public Func_string_parentuid_from_uid vx_copy(Object... vals) {
+      Class_string_parentuid_from_uid output = new Class_string_parentuid_from_uid();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/ui", // pkgname
+        "string-parentuid<-uid", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_string_parentuid_from_uid vx_empty() {return e_string_parentuid_from_uid;}
+    @Override
+    public Func_string_parentuid_from_uid vx_type() {return t_string_parentuid_from_uid;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_string inputval = (Core.Type_string)value;
+      Core.Type_any outputval = Ui.f_string_parentuid_from_uid(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string uid = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      output = Ui.f_string_parentuid_from_uid(uid);
+      return output;
+    }
+
+    @Override
+    public Core.Type_string vx_string_parentuid_from_uid(final Core.Type_string uid) {
+      return Ui.f_string_parentuid_from_uid(uid);
+    }
+
+  }
+
+  public static final Func_string_parentuid_from_uid e_string_parentuid_from_uid = new Ui.Class_string_parentuid_from_uid();
+  public static final Func_string_parentuid_from_uid t_string_parentuid_from_uid = new Ui.Class_string_parentuid_from_uid();
+
+  public static Core.Type_string f_string_parentuid_from_uid(final Core.Type_string uid) {
+    Core.Type_string output = Core.e_string;
+    output = Core.f_let(
+      Core.t_string,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_int lastpos = Type.f_int_from_string_findlast(uid, Core.vx_new_string("/"));
+        return Core.f_if_2(
+          Core.t_string,
+          Core.t_thenelselist.vx_new(
+            Core.f_then(
+              Core.t_boolean_from_func.vx_fn_new(() -> {
+                return Core.f_gt(lastpos, Core.vx_new_int(0));
+              }),
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return Type.f_string_from_string_end(
+                  uid,
+                  Core.f_minus(lastpos, Core.vx_new_int(1))
+                );
+              })
+            )
+          )
+        );
       })
     );
     return output;
@@ -9437,6 +10079,378 @@ public final class Ui {
   }
 
   /**
+   * @function ui_addlayout_from_ui
+   * Returns a ui with a layout added to each ui.
+   * @param  {ui} ui
+   * @return {ui}
+   * (func ui-addlayout<-ui)
+   */
+  public static interface Func_ui_addlayout_from_ui extends Core.Func_any_from_any_context {
+    public Ui.Type_ui vx_ui_addlayout_from_ui(final Core.Type_context context, final Ui.Type_ui ui);
+  }
+
+  public static class Class_ui_addlayout_from_ui extends Core.Class_base implements Func_ui_addlayout_from_ui {
+
+    @Override
+    public Func_ui_addlayout_from_ui vx_new(Object... vals) {
+      Class_ui_addlayout_from_ui output = new Class_ui_addlayout_from_ui();
+      return output;
+    }
+
+    @Override
+    public Func_ui_addlayout_from_ui vx_copy(Object... vals) {
+      Class_ui_addlayout_from_ui output = new Class_ui_addlayout_from_ui();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/ui", // pkgname
+        "ui-addlayout<-ui", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "ui", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_ui_addlayout_from_ui vx_empty() {return e_ui_addlayout_from_ui;}
+    @Override
+    public Func_ui_addlayout_from_ui vx_type() {return t_ui_addlayout_from_ui;}
+
+    @Override
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Ui.Type_ui inputval = (Ui.Type_ui)value;
+      Core.Type_any outputval = Ui.f_ui_addlayout_from_ui(context, inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      output = Ui.f_ui_addlayout_from_ui(context, ui);
+      return output;
+    }
+
+    @Override
+    public Ui.Type_ui vx_ui_addlayout_from_ui(final Core.Type_context context, final Ui.Type_ui ui) {
+      return Ui.f_ui_addlayout_from_ui(context, ui);
+    }
+
+  }
+
+  public static final Func_ui_addlayout_from_ui e_ui_addlayout_from_ui = new Ui.Class_ui_addlayout_from_ui();
+  public static final Func_ui_addlayout_from_ui t_ui_addlayout_from_ui = new Ui.Class_ui_addlayout_from_ui();
+
+  public static Ui.Type_ui f_ui_addlayout_from_ui(final Core.Type_context context, final Ui.Type_ui ui) {
+    Ui.Type_ui output = Ui.e_ui;
+    output = Core.f_let(
+      Ui.t_ui,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Ui.Type_uiengine uiengine = Ui.f_uiengine_readstate(context);
+        return Ui.f_ui_addlayout_from_ui_uiengine(ui, uiengine);
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function ui_addlayout_from_ui_layoutengine
+   * Returns a ui with a layout added to each ui.
+   * @param  {ui} ui
+   * @param  {layoutengine} layoutengine
+   * @return {ui}
+   * (func ui-addlayout<-ui-layoutengine)
+   */
+  public static interface Func_ui_addlayout_from_ui_layoutengine extends Core.Type_func, Core.Type_replfunc {
+    public Ui.Type_ui vx_ui_addlayout_from_ui_layoutengine(final Ui.Type_ui ui, final Ui.Type_layoutengine layoutengine);
+  }
+
+  public static class Class_ui_addlayout_from_ui_layoutengine extends Core.Class_base implements Func_ui_addlayout_from_ui_layoutengine {
+
+    @Override
+    public Func_ui_addlayout_from_ui_layoutengine vx_new(Object... vals) {
+      Class_ui_addlayout_from_ui_layoutengine output = new Class_ui_addlayout_from_ui_layoutengine();
+      return output;
+    }
+
+    @Override
+    public Func_ui_addlayout_from_ui_layoutengine vx_copy(Object... vals) {
+      Class_ui_addlayout_from_ui_layoutengine output = new Class_ui_addlayout_from_ui_layoutengine();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/ui", // pkgname
+        "ui-addlayout<-ui-layoutengine", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "ui", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_ui_addlayout_from_ui_layoutengine vx_empty() {return e_ui_addlayout_from_ui_layoutengine;}
+    @Override
+    public Func_ui_addlayout_from_ui_layoutengine vx_type() {return t_ui_addlayout_from_ui_layoutengine;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      Ui.Type_layoutengine layoutengine = Core.f_any_from_any(Ui.t_layoutengine, arglist.vx_any(Core.vx_new_int(1)));
+      output = Ui.f_ui_addlayout_from_ui_layoutengine(ui, layoutengine);
+      return output;
+    }
+
+    @Override
+    public Ui.Type_ui vx_ui_addlayout_from_ui_layoutengine(final Ui.Type_ui ui, final Ui.Type_layoutengine layoutengine) {
+      return Ui.f_ui_addlayout_from_ui_layoutengine(ui, layoutengine);
+    }
+
+  }
+
+  public static final Func_ui_addlayout_from_ui_layoutengine e_ui_addlayout_from_ui_layoutengine = new Ui.Class_ui_addlayout_from_ui_layoutengine();
+  public static final Func_ui_addlayout_from_ui_layoutengine t_ui_addlayout_from_ui_layoutengine = new Ui.Class_ui_addlayout_from_ui_layoutengine();
+
+  public static Ui.Type_ui f_ui_addlayout_from_ui_layoutengine(final Ui.Type_ui ui, final Ui.Type_layoutengine layoutengine) {
+    Ui.Type_ui output = Ui.e_ui;
+    output = Core.f_let(
+      Ui.t_ui,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Ui.Type_layoutmap layoutmap = layoutengine.layoutmap();
+        final Ui.Type_layout layoutelse = layoutengine.layoutelse();
+        return Ui.f_ui_addlayout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function ui_addlayout_from_ui_layoutmap_else
+   * Returns a ui with a layout added to each ui.
+   * @param  {ui} ui
+   * @param  {layoutmap} layoutmap
+   * @param  {layout} layoutelse
+   * @return {ui}
+   * (func ui-addlayout<-ui-layoutmap-else)
+   */
+  public static interface Func_ui_addlayout_from_ui_layoutmap_else extends Core.Type_func, Core.Type_replfunc {
+    public Ui.Type_ui vx_ui_addlayout_from_ui_layoutmap_else(final Ui.Type_ui ui, final Ui.Type_layoutmap layoutmap, final Ui.Type_layout layoutelse);
+  }
+
+  public static class Class_ui_addlayout_from_ui_layoutmap_else extends Core.Class_base implements Func_ui_addlayout_from_ui_layoutmap_else {
+
+    @Override
+    public Func_ui_addlayout_from_ui_layoutmap_else vx_new(Object... vals) {
+      Class_ui_addlayout_from_ui_layoutmap_else output = new Class_ui_addlayout_from_ui_layoutmap_else();
+      return output;
+    }
+
+    @Override
+    public Func_ui_addlayout_from_ui_layoutmap_else vx_copy(Object... vals) {
+      Class_ui_addlayout_from_ui_layoutmap_else output = new Class_ui_addlayout_from_ui_layoutmap_else();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/ui", // pkgname
+        "ui-addlayout<-ui-layoutmap-else", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "ui", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_ui_addlayout_from_ui_layoutmap_else vx_empty() {return e_ui_addlayout_from_ui_layoutmap_else;}
+    @Override
+    public Func_ui_addlayout_from_ui_layoutmap_else vx_type() {return t_ui_addlayout_from_ui_layoutmap_else;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      Ui.Type_layoutmap layoutmap = Core.f_any_from_any(Ui.t_layoutmap, arglist.vx_any(Core.vx_new_int(1)));
+      Ui.Type_layout layoutelse = Core.f_any_from_any(Ui.t_layout, arglist.vx_any(Core.vx_new_int(2)));
+      output = Ui.f_ui_addlayout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
+      return output;
+    }
+
+    @Override
+    public Ui.Type_ui vx_ui_addlayout_from_ui_layoutmap_else(final Ui.Type_ui ui, final Ui.Type_layoutmap layoutmap, final Ui.Type_layout layoutelse) {
+      return Ui.f_ui_addlayout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
+    }
+
+  }
+
+  public static final Func_ui_addlayout_from_ui_layoutmap_else e_ui_addlayout_from_ui_layoutmap_else = new Ui.Class_ui_addlayout_from_ui_layoutmap_else();
+  public static final Func_ui_addlayout_from_ui_layoutmap_else t_ui_addlayout_from_ui_layoutmap_else = new Ui.Class_ui_addlayout_from_ui_layoutmap_else();
+
+  public static Ui.Type_ui f_ui_addlayout_from_ui_layoutmap_else(final Ui.Type_ui ui, final Ui.Type_layoutmap layoutmap, final Ui.Type_layout layoutelse) {
+    Ui.Type_ui output = Ui.e_ui;
+    output = Core.f_let(
+      Ui.t_ui,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Ui.Type_uimap uimap = ui.uimap();
+        final Ui.Type_layout layout1 = Ui.f_layout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
+        final Ui.Type_uimap uimap2 = Ui.f_uimap_addlayout_from_uimap_layoutmap_else(uimap, layoutmap, layoutelse);
+        return Core.f_copy(
+          ui,
+          Core.t_anylist.vx_new(
+            Core.vx_new_string(":layout"),
+            layout1,
+            Core.vx_new_string(":uimap"),
+            uimap2
+          )
+        );
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function ui_addlayout_from_ui_uiengine
+   * Returns a ui with a layout added to each ui.
+   * @param  {ui} ui
+   * @param  {uiengine} uiengine
+   * @return {ui}
+   * (func ui-addlayout<-ui-uiengine)
+   */
+  public static interface Func_ui_addlayout_from_ui_uiengine extends Core.Type_func, Core.Type_replfunc {
+    public Ui.Type_ui vx_ui_addlayout_from_ui_uiengine(final Ui.Type_ui ui, final Ui.Type_uiengine uiengine);
+  }
+
+  public static class Class_ui_addlayout_from_ui_uiengine extends Core.Class_base implements Func_ui_addlayout_from_ui_uiengine {
+
+    @Override
+    public Func_ui_addlayout_from_ui_uiengine vx_new(Object... vals) {
+      Class_ui_addlayout_from_ui_uiengine output = new Class_ui_addlayout_from_ui_uiengine();
+      return output;
+    }
+
+    @Override
+    public Func_ui_addlayout_from_ui_uiengine vx_copy(Object... vals) {
+      Class_ui_addlayout_from_ui_uiengine output = new Class_ui_addlayout_from_ui_uiengine();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/ui", // pkgname
+        "ui-addlayout<-ui-uiengine", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "ui", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_ui_addlayout_from_ui_uiengine vx_empty() {return e_ui_addlayout_from_ui_uiengine;}
+    @Override
+    public Func_ui_addlayout_from_ui_uiengine vx_type() {return t_ui_addlayout_from_ui_uiengine;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      Ui.Type_uiengine uiengine = Core.f_any_from_any(Ui.t_uiengine, arglist.vx_any(Core.vx_new_int(1)));
+      output = Ui.f_ui_addlayout_from_ui_uiengine(ui, uiengine);
+      return output;
+    }
+
+    @Override
+    public Ui.Type_ui vx_ui_addlayout_from_ui_uiengine(final Ui.Type_ui ui, final Ui.Type_uiengine uiengine) {
+      return Ui.f_ui_addlayout_from_ui_uiengine(ui, uiengine);
+    }
+
+  }
+
+  public static final Func_ui_addlayout_from_ui_uiengine e_ui_addlayout_from_ui_uiengine = new Ui.Class_ui_addlayout_from_ui_uiengine();
+  public static final Func_ui_addlayout_from_ui_uiengine t_ui_addlayout_from_ui_uiengine = new Ui.Class_ui_addlayout_from_ui_uiengine();
+
+  public static Ui.Type_ui f_ui_addlayout_from_ui_uiengine(final Ui.Type_ui ui, final Ui.Type_uiengine uiengine) {
+    Ui.Type_ui output = Ui.e_ui;
+    output = Core.f_let(
+      Ui.t_ui,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Ui.Type_layoutengine layoutengine = uiengine.layoutengine();
+        return Ui.f_ui_addlayout_from_ui_layoutengine(ui, layoutengine);
+      })
+    );
+    return output;
+  }
+
+  /**
    * @function ui_child_from_ui_uid
    * Returns then named child from a ui.
    * @param  {ui} ui
@@ -9622,27 +10636,26 @@ public final class Ui {
   }
 
   /**
-   * @function ui_layout_from_ui
-   * Returns a ui with a layout added to each ui.
-   * @param  {ui} ui
+   * @function ui_layout
+   * @param  {ui} uiarg
    * @return {ui}
-   * (func ui-layout<-ui)
+   * (func ui-layout)
    */
-  public static interface Func_ui_layout_from_ui extends Core.Func_any_from_any_context {
-    public Ui.Type_ui vx_ui_layout_from_ui(final Core.Type_context context, final Ui.Type_ui ui);
+  public static interface Func_ui_layout extends Core.Func_any_from_any {
+    public Ui.Type_ui vx_ui_layout(final Ui.Type_ui uiarg);
   }
 
-  public static class Class_ui_layout_from_ui extends Core.Class_base implements Func_ui_layout_from_ui {
+  public static class Class_ui_layout extends Core.Class_base implements Func_ui_layout {
 
     @Override
-    public Func_ui_layout_from_ui vx_new(Object... vals) {
-      Class_ui_layout_from_ui output = new Class_ui_layout_from_ui();
+    public Func_ui_layout vx_new(Object... vals) {
+      Class_ui_layout output = new Class_ui_layout();
       return output;
     }
 
     @Override
-    public Func_ui_layout_from_ui vx_copy(Object... vals) {
-      Class_ui_layout_from_ui output = new Class_ui_layout_from_ui();
+    public Func_ui_layout vx_copy(Object... vals) {
+      Class_ui_layout output = new Class_ui_layout();
       return output;
     }
 
@@ -9653,7 +10666,7 @@ public final class Ui {
     public Core.Type_funcdef vx_funcdef() {
       return Core.funcdef_new(
         "vx/ui/ui", // pkgname
-        "ui-layout<-ui", // name
+        "ui-layout", // name
         0, // idx
         false, // async
         Core.typedef_new(
@@ -9673,323 +10686,499 @@ public final class Ui {
     }
 
     @Override
-    public Func_ui_layout_from_ui vx_empty() {return e_ui_layout_from_ui;}
+    public Func_ui_layout vx_empty() {return e_ui_layout;}
     @Override
-    public Func_ui_layout_from_ui vx_type() {return t_ui_layout_from_ui;}
+    public Func_ui_layout vx_type() {return t_ui_layout;}
 
     @Override
-    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Ui.Type_ui inputval = (Ui.Type_ui)value;
-      Core.Type_any outputval = Ui.f_ui_layout_from_ui(context, inputval);
+      Core.Type_any outputval = Ui.f_ui_layout(inputval);
       output = Core.f_any_from_any(generic_any_1, outputval);
       return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
+      Ui.Type_ui uiarg = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      output = Ui.f_ui_layout(uiarg);
+      return output;
+    }
+
+    @Override
+    public Ui.Type_ui vx_ui_layout(final Ui.Type_ui uiarg) {
+      return Ui.f_ui_layout(uiarg);
+    }
+
+  }
+
+  public static final Func_ui_layout e_ui_layout = new Ui.Class_ui_layout();
+  public static final Func_ui_layout t_ui_layout = new Ui.Class_ui_layout();
+
+  public static Ui.Type_ui f_ui_layout(final Ui.Type_ui uiarg) {
+    Ui.Type_ui output = Ui.e_ui;
+    output = Ui.f_ui_layout_from_ui_orig_parent(
+      uiarg,
+      Core.f_empty(
+        Ui.t_ui
+      ),
+      Core.f_empty(
+        Ui.t_ui
+      )
+    );
+    return output;
+  }
+
+  /**
+   * @function ui_layout_from_fn_layout_ui_orig_parent
+   * Returns a rendered ui
+   * @param  {ui-layout<-ui-orig-parent} fn-layout
+   * @param  {ui} ui
+   * @param  {ui} orig
+   * @param  {ui} parent
+   * @return {ui}
+   * (func ui-layout<-fn-layout-ui-orig-parent)
+   */
+  public static interface Func_ui_layout_from_fn_layout_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+    public Ui.Type_ui vx_ui_layout_from_fn_layout_ui_orig_parent(final Ui.Func_ui_layout_from_ui_orig_parent fn_layout, final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
+  }
+
+  public static class Class_ui_layout_from_fn_layout_ui_orig_parent extends Core.Class_base implements Func_ui_layout_from_fn_layout_ui_orig_parent {
+
+    @Override
+    public Func_ui_layout_from_fn_layout_ui_orig_parent vx_new(Object... vals) {
+      Class_ui_layout_from_fn_layout_ui_orig_parent output = new Class_ui_layout_from_fn_layout_ui_orig_parent();
+      return output;
+    }
+
+    @Override
+    public Func_ui_layout_from_fn_layout_ui_orig_parent vx_copy(Object... vals) {
+      Class_ui_layout_from_fn_layout_ui_orig_parent output = new Class_ui_layout_from_fn_layout_ui_orig_parent();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/ui", // pkgname
+        "ui-layout<-fn-layout-ui-orig-parent", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "ui", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_ui_layout_from_fn_layout_ui_orig_parent vx_empty() {return e_ui_layout_from_fn_layout_ui_orig_parent;}
+    @Override
+    public Func_ui_layout_from_fn_layout_ui_orig_parent vx_type() {return t_ui_layout_from_fn_layout_ui_orig_parent;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Func_ui_layout_from_ui_orig_parent fn_layout = Core.f_any_from_any(Ui.t_ui_layout_from_ui_orig_parent, arglist.vx_any(Core.vx_new_int(0)));
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
+      Ui.Type_ui orig = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(2)));
+      Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(3)));
+      output = Ui.f_ui_layout_from_fn_layout_ui_orig_parent(fn_layout, ui, orig, parent);
+      return output;
+    }
+
+    @Override
+    public Ui.Type_ui vx_ui_layout_from_fn_layout_ui_orig_parent(final Ui.Func_ui_layout_from_ui_orig_parent fn_layout, final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+      return Ui.f_ui_layout_from_fn_layout_ui_orig_parent(fn_layout, ui, orig, parent);
+    }
+
+  }
+
+  public static final Func_ui_layout_from_fn_layout_ui_orig_parent e_ui_layout_from_fn_layout_ui_orig_parent = new Ui.Class_ui_layout_from_fn_layout_ui_orig_parent();
+  public static final Func_ui_layout_from_fn_layout_ui_orig_parent t_ui_layout_from_fn_layout_ui_orig_parent = new Ui.Class_ui_layout_from_fn_layout_ui_orig_parent();
+
+  public static Ui.Type_ui f_ui_layout_from_fn_layout_ui_orig_parent(final Ui.Func_ui_layout_from_ui_orig_parent fn_layout, final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+    Ui.Type_ui output = Ui.e_ui;
+    output = Core.vx_any_from_func(Ui.t_ui, fn_layout, ui, orig, parent);
+    return output;
+  }
+
+  /**
+   * @function ui_layout_from_ui_orig_parent
+   * Returns a rendered object from a UI Element.
+   * @param  {ui} ui
+   * @param  {ui} orig
+   * @param  {ui} parent
+   * @return {ui}
+   * (func ui-layout<-ui-orig-parent)
+   */
+  public static interface Func_ui_layout_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+    public Ui.Type_ui vx_ui_layout_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
+  }
+
+  public static class Class_ui_layout_from_ui_orig_parent extends Core.Class_base implements Func_ui_layout_from_ui_orig_parent {
+
+    @Override
+    public Func_ui_layout_from_ui_orig_parent vx_new(Object... vals) {
+      Class_ui_layout_from_ui_orig_parent output = new Class_ui_layout_from_ui_orig_parent();
+      return output;
+    }
+
+    @Override
+    public Func_ui_layout_from_ui_orig_parent vx_copy(Object... vals) {
+      Class_ui_layout_from_ui_orig_parent output = new Class_ui_layout_from_ui_orig_parent();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/ui", // pkgname
+        "ui-layout<-ui-orig-parent", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "ui", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_ui_layout_from_ui_orig_parent vx_empty() {return e_ui_layout_from_ui_orig_parent;}
+    @Override
+    public Func_ui_layout_from_ui_orig_parent vx_type() {return t_ui_layout_from_ui_orig_parent;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      Ui.Type_ui orig = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
+      Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(2)));
+      output = Ui.f_ui_layout_from_ui_orig_parent(ui, orig, parent);
+      return output;
+    }
+
+    @Override
+    public Ui.Type_ui vx_ui_layout_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+      return Ui.f_ui_layout_from_ui_orig_parent(ui, orig, parent);
+    }
+
+  }
+
+  public static final Func_ui_layout_from_ui_orig_parent e_ui_layout_from_ui_orig_parent = new Ui.Class_ui_layout_from_ui_orig_parent();
+  public static final Func_ui_layout_from_ui_orig_parent t_ui_layout_from_ui_orig_parent = new Ui.Class_ui_layout_from_ui_orig_parent();
+
+  public static Ui.Type_ui f_ui_layout_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+    Ui.Type_ui output = Ui.e_ui;
+    output = Core.f_if_2(
+      Ui.t_ui,
+      Core.t_thenelselist.vx_new(
+        Core.f_then(
+          Core.t_boolean_from_func.vx_fn_new(() -> {
+            return Core.f_eqeq(ui, orig);
+          }),
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return orig;
+          })
+        ),
+        Core.f_else(
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return Core.f_let(
+              Ui.t_ui,
+              Core.t_any_from_func.vx_fn_new(() -> {
+                final Ui.Type_uimap uimap = ui.uimap();
+                final Ui.Type_layout layout = ui.layout();
+                final Ui.Type_ui uiout = Ui.f_ui_from_layout_ui_orig_parent(layout, ui, orig, parent);
+                return uiout;
+              })
+            );
+          })
+        )
+      )
+    );
+    return output;
+  }
+
+  /**
+   * @function ui_layout_from_ui_parent_selected
+   * Return a ui after changing selected item and rendering it.
+   * @param  {ui} ui
+   * @param  {ui} parent
+   * @param  {int} selected
+   * @return {ui}
+   * (func ui-layout<-ui-parent-selected)
+   */
+  public static interface Func_ui_layout_from_ui_parent_selected extends Core.Type_func, Core.Type_replfunc {
+    public Ui.Type_ui vx_ui_layout_from_ui_parent_selected(final Ui.Type_ui ui, final Ui.Type_ui parent, final Core.Type_int selected);
+  }
+
+  public static class Class_ui_layout_from_ui_parent_selected extends Core.Class_base implements Func_ui_layout_from_ui_parent_selected {
+
+    @Override
+    public Func_ui_layout_from_ui_parent_selected vx_new(Object... vals) {
+      Class_ui_layout_from_ui_parent_selected output = new Class_ui_layout_from_ui_parent_selected();
+      return output;
+    }
+
+    @Override
+    public Func_ui_layout_from_ui_parent_selected vx_copy(Object... vals) {
+      Class_ui_layout_from_ui_parent_selected output = new Class_ui_layout_from_ui_parent_selected();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/ui", // pkgname
+        "ui-layout<-ui-parent-selected", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "ui", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_ui_layout_from_ui_parent_selected vx_empty() {return e_ui_layout_from_ui_parent_selected;}
+    @Override
+    public Func_ui_layout_from_ui_parent_selected vx_type() {return t_ui_layout_from_ui_parent_selected;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_int selected = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(2)));
+      output = Ui.f_ui_layout_from_ui_parent_selected(ui, parent, selected);
+      return output;
+    }
+
+    @Override
+    public Ui.Type_ui vx_ui_layout_from_ui_parent_selected(final Ui.Type_ui ui, final Ui.Type_ui parent, final Core.Type_int selected) {
+      return Ui.f_ui_layout_from_ui_parent_selected(ui, parent, selected);
+    }
+
+  }
+
+  public static final Func_ui_layout_from_ui_parent_selected e_ui_layout_from_ui_parent_selected = new Ui.Class_ui_layout_from_ui_parent_selected();
+  public static final Func_ui_layout_from_ui_parent_selected t_ui_layout_from_ui_parent_selected = new Ui.Class_ui_layout_from_ui_parent_selected();
+
+  public static Ui.Type_ui f_ui_layout_from_ui_parent_selected(final Ui.Type_ui ui, final Ui.Type_ui parent, final Core.Type_int selected) {
+    Ui.Type_ui output = Ui.e_ui;
+    output = Core.f_let(
+      Ui.t_ui,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Ui.Type_ui uichg = Ui.f_ui_from_ui_selected(ui, selected);
+        return Ui.f_ui_layout_from_ui_orig_parent(uichg, ui, parent);
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function ui_layout_from_ui_parent_visible
+   * Return a ui after changing visible item and rendering it.
+   * @param  {ui} ui
+   * @param  {ui} parent
+   * @param  {int} visible
+   * @return {ui}
+   * (func ui-layout<-ui-parent-visible)
+   */
+  public static interface Func_ui_layout_from_ui_parent_visible extends Core.Type_func, Core.Type_replfunc {
+    public Ui.Type_ui vx_ui_layout_from_ui_parent_visible(final Ui.Type_ui ui, final Ui.Type_ui parent, final Core.Type_int visible);
+  }
+
+  public static class Class_ui_layout_from_ui_parent_visible extends Core.Class_base implements Func_ui_layout_from_ui_parent_visible {
+
+    @Override
+    public Func_ui_layout_from_ui_parent_visible vx_new(Object... vals) {
+      Class_ui_layout_from_ui_parent_visible output = new Class_ui_layout_from_ui_parent_visible();
+      return output;
+    }
+
+    @Override
+    public Func_ui_layout_from_ui_parent_visible vx_copy(Object... vals) {
+      Class_ui_layout_from_ui_parent_visible output = new Class_ui_layout_from_ui_parent_visible();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/ui", // pkgname
+        "ui-layout<-ui-parent-visible", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "ui", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_ui_layout_from_ui_parent_visible vx_empty() {return e_ui_layout_from_ui_parent_visible;}
+    @Override
+    public Func_ui_layout_from_ui_parent_visible vx_type() {return t_ui_layout_from_ui_parent_visible;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_int visible = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(2)));
+      output = Ui.f_ui_layout_from_ui_parent_visible(ui, parent, visible);
+      return output;
+    }
+
+    @Override
+    public Ui.Type_ui vx_ui_layout_from_ui_parent_visible(final Ui.Type_ui ui, final Ui.Type_ui parent, final Core.Type_int visible) {
+      return Ui.f_ui_layout_from_ui_parent_visible(ui, parent, visible);
+    }
+
+  }
+
+  public static final Func_ui_layout_from_ui_parent_visible e_ui_layout_from_ui_parent_visible = new Ui.Class_ui_layout_from_ui_parent_visible();
+  public static final Func_ui_layout_from_ui_parent_visible t_ui_layout_from_ui_parent_visible = new Ui.Class_ui_layout_from_ui_parent_visible();
+
+  public static Ui.Type_ui f_ui_layout_from_ui_parent_visible(final Ui.Type_ui ui, final Ui.Type_ui parent, final Core.Type_int visible) {
+    Ui.Type_ui output = Ui.e_ui;
+    output = Core.f_let(
+      Ui.t_ui,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Ui.Type_ui uichg = Ui.f_ui_from_ui_visible(ui, visible);
+        return Ui.f_ui_layout_from_ui_orig_parent(uichg, ui, parent);
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function ui_readstate_uiapp
+   * Returns the top level uiapp from state
+   * @return {ui}
+   * (func ui-readstate-uiapp)
+   */
+  public static interface Func_ui_readstate_uiapp extends Core.Type_func, Core.Type_replfunc {
+    public Ui.Type_ui vx_ui_readstate_uiapp(final Core.Type_context context);
+  }
+
+  public static class Class_ui_readstate_uiapp extends Core.Class_base implements Func_ui_readstate_uiapp {
+
+    @Override
+    public Func_ui_readstate_uiapp vx_new(Object... vals) {
+      Class_ui_readstate_uiapp output = new Class_ui_readstate_uiapp();
+      return output;
+    }
+
+    @Override
+    public Func_ui_readstate_uiapp vx_copy(Object... vals) {
+      Class_ui_readstate_uiapp output = new Class_ui_readstate_uiapp();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/ui", // pkgname
+        "ui-readstate-uiapp", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "ui", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_ui_readstate_uiapp vx_empty() {return e_ui_readstate_uiapp;}
+    @Override
+    public Func_ui_readstate_uiapp vx_type() {return t_ui_readstate_uiapp;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
-      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
-      output = Ui.f_ui_layout_from_ui(context, ui);
+      output = Ui.f_ui_readstate_uiapp(context);
       return output;
     }
 
     @Override
-    public Ui.Type_ui vx_ui_layout_from_ui(final Core.Type_context context, final Ui.Type_ui ui) {
-      return Ui.f_ui_layout_from_ui(context, ui);
+    public Ui.Type_ui vx_ui_readstate_uiapp(final Core.Type_context context) {
+      return Ui.f_ui_readstate_uiapp(context);
     }
 
   }
 
-  public static final Func_ui_layout_from_ui e_ui_layout_from_ui = new Ui.Class_ui_layout_from_ui();
-  public static final Func_ui_layout_from_ui t_ui_layout_from_ui = new Ui.Class_ui_layout_from_ui();
+  public static final Func_ui_readstate_uiapp e_ui_readstate_uiapp = new Ui.Class_ui_readstate_uiapp();
+  public static final Func_ui_readstate_uiapp t_ui_readstate_uiapp = new Ui.Class_ui_readstate_uiapp();
 
-  public static Ui.Type_ui f_ui_layout_from_ui(final Core.Type_context context, final Ui.Type_ui ui) {
+  public static Ui.Type_ui f_ui_readstate_uiapp(final Core.Type_context context) {
     Ui.Type_ui output = Ui.e_ui;
-    output = Core.f_let(
-      Ui.t_ui,
-      Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uiengine uiengine = Ui.f_uiengine_readstate(context);
-        return Ui.f_ui_layout_from_ui_uiengine(ui, uiengine);
-      })
-    );
-    return output;
-  }
-
-  /**
-   * @function ui_layout_from_ui_layoutengine
-   * Returns a ui with a layout added to each ui.
-   * @param  {ui} ui
-   * @param  {layoutengine} layoutengine
-   * @return {ui}
-   * (func ui-layout<-ui-layoutengine)
-   */
-  public static interface Func_ui_layout_from_ui_layoutengine extends Core.Type_func, Core.Type_replfunc {
-    public Ui.Type_ui vx_ui_layout_from_ui_layoutengine(final Ui.Type_ui ui, final Ui.Type_layoutengine layoutengine);
-  }
-
-  public static class Class_ui_layout_from_ui_layoutengine extends Core.Class_base implements Func_ui_layout_from_ui_layoutengine {
-
-    @Override
-    public Func_ui_layout_from_ui_layoutengine vx_new(Object... vals) {
-      Class_ui_layout_from_ui_layoutengine output = new Class_ui_layout_from_ui_layoutengine();
-      return output;
-    }
-
-    @Override
-    public Func_ui_layout_from_ui_layoutengine vx_copy(Object... vals) {
-      Class_ui_layout_from_ui_layoutengine output = new Class_ui_layout_from_ui_layoutengine();
-      return output;
-    }
-
-    @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
-
-    @Override
-    public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
-        "vx/ui/ui", // pkgname
-        "ui-layout<-ui-layoutengine", // name
-        0, // idx
-        false, // async
-        Core.typedef_new(
-          "vx/ui/ui", // pkgname
-          "ui", // name
-          ":struct", // extends
-          Core.e_typelist, // traits
-          Core.e_typelist, // allowtypes
-          Core.e_typelist, // disallowtypes
-          Core.e_funclist, // allowfuncs
-          Core.e_funclist, // disallowfuncs
-          Core.e_anylist, // allowvalues
-          Core.e_anylist, // disallowvalues
-          Core.e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    @Override
-    public Func_ui_layout_from_ui_layoutengine vx_empty() {return e_ui_layout_from_ui_layoutengine;}
-    @Override
-    public Func_ui_layout_from_ui_layoutengine vx_type() {return t_ui_layout_from_ui_layoutengine;}
-
-    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
-      Core.Type_any output = Core.e_any;
-      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
-      Ui.Type_layoutengine layoutengine = Core.f_any_from_any(Ui.t_layoutengine, arglist.vx_any(Core.vx_new_int(1)));
-      output = Ui.f_ui_layout_from_ui_layoutengine(ui, layoutengine);
-      return output;
-    }
-
-    @Override
-    public Ui.Type_ui vx_ui_layout_from_ui_layoutengine(final Ui.Type_ui ui, final Ui.Type_layoutengine layoutengine) {
-      return Ui.f_ui_layout_from_ui_layoutengine(ui, layoutengine);
-    }
-
-  }
-
-  public static final Func_ui_layout_from_ui_layoutengine e_ui_layout_from_ui_layoutengine = new Ui.Class_ui_layout_from_ui_layoutengine();
-  public static final Func_ui_layout_from_ui_layoutengine t_ui_layout_from_ui_layoutengine = new Ui.Class_ui_layout_from_ui_layoutengine();
-
-  public static Ui.Type_ui f_ui_layout_from_ui_layoutengine(final Ui.Type_ui ui, final Ui.Type_layoutengine layoutengine) {
-    Ui.Type_ui output = Ui.e_ui;
-    output = Core.f_let(
-      Ui.t_ui,
-      Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_layoutmap layoutmap = layoutengine.layoutmap();
-        final Ui.Type_layout layoutelse = layoutengine.layoutelse();
-        return Ui.f_ui_layout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
-      })
-    );
-    return output;
-  }
-
-  /**
-   * @function ui_layout_from_ui_layoutmap_else
-   * Returns a ui with a layout added to each ui.
-   * @param  {ui} ui
-   * @param  {layoutmap} layoutmap
-   * @param  {layout} layoutelse
-   * @return {ui}
-   * (func ui-layout<-ui-layoutmap-else)
-   */
-  public static interface Func_ui_layout_from_ui_layoutmap_else extends Core.Type_func, Core.Type_replfunc {
-    public Ui.Type_ui vx_ui_layout_from_ui_layoutmap_else(final Ui.Type_ui ui, final Ui.Type_layoutmap layoutmap, final Ui.Type_layout layoutelse);
-  }
-
-  public static class Class_ui_layout_from_ui_layoutmap_else extends Core.Class_base implements Func_ui_layout_from_ui_layoutmap_else {
-
-    @Override
-    public Func_ui_layout_from_ui_layoutmap_else vx_new(Object... vals) {
-      Class_ui_layout_from_ui_layoutmap_else output = new Class_ui_layout_from_ui_layoutmap_else();
-      return output;
-    }
-
-    @Override
-    public Func_ui_layout_from_ui_layoutmap_else vx_copy(Object... vals) {
-      Class_ui_layout_from_ui_layoutmap_else output = new Class_ui_layout_from_ui_layoutmap_else();
-      return output;
-    }
-
-    @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
-
-    @Override
-    public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
-        "vx/ui/ui", // pkgname
-        "ui-layout<-ui-layoutmap-else", // name
-        0, // idx
-        false, // async
-        Core.typedef_new(
-          "vx/ui/ui", // pkgname
-          "ui", // name
-          ":struct", // extends
-          Core.e_typelist, // traits
-          Core.e_typelist, // allowtypes
-          Core.e_typelist, // disallowtypes
-          Core.e_funclist, // allowfuncs
-          Core.e_funclist, // disallowfuncs
-          Core.e_anylist, // allowvalues
-          Core.e_anylist, // disallowvalues
-          Core.e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    @Override
-    public Func_ui_layout_from_ui_layoutmap_else vx_empty() {return e_ui_layout_from_ui_layoutmap_else;}
-    @Override
-    public Func_ui_layout_from_ui_layoutmap_else vx_type() {return t_ui_layout_from_ui_layoutmap_else;}
-
-    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
-      Core.Type_any output = Core.e_any;
-      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
-      Ui.Type_layoutmap layoutmap = Core.f_any_from_any(Ui.t_layoutmap, arglist.vx_any(Core.vx_new_int(1)));
-      Ui.Type_layout layoutelse = Core.f_any_from_any(Ui.t_layout, arglist.vx_any(Core.vx_new_int(2)));
-      output = Ui.f_ui_layout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
-      return output;
-    }
-
-    @Override
-    public Ui.Type_ui vx_ui_layout_from_ui_layoutmap_else(final Ui.Type_ui ui, final Ui.Type_layoutmap layoutmap, final Ui.Type_layout layoutelse) {
-      return Ui.f_ui_layout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
-    }
-
-  }
-
-  public static final Func_ui_layout_from_ui_layoutmap_else e_ui_layout_from_ui_layoutmap_else = new Ui.Class_ui_layout_from_ui_layoutmap_else();
-  public static final Func_ui_layout_from_ui_layoutmap_else t_ui_layout_from_ui_layoutmap_else = new Ui.Class_ui_layout_from_ui_layoutmap_else();
-
-  public static Ui.Type_ui f_ui_layout_from_ui_layoutmap_else(final Ui.Type_ui ui, final Ui.Type_layoutmap layoutmap, final Ui.Type_layout layoutelse) {
-    Ui.Type_ui output = Ui.e_ui;
-    output = Core.f_let(
-      Ui.t_ui,
-      Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uimap uimap = ui.uimap();
-        final Ui.Type_layout layout1 = Ui.f_layout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
-        final Ui.Type_uimap uimap2 = Ui.f_uimap_layout_from_uimap_layoutmap_else(uimap, layoutmap, layoutelse);
-        return Core.f_copy(
-          ui,
-          Core.t_anylist.vx_new(
-            Core.vx_new_string(":layout"),
-            layout1,
-            Core.vx_new_string(":uimap"),
-            uimap2
-          )
-        );
-      })
-    );
-    return output;
-  }
-
-  /**
-   * @function ui_layout_from_ui_uiengine
-   * Returns a ui with a layout added to each ui.
-   * @param  {ui} ui
-   * @param  {uiengine} uiengine
-   * @return {ui}
-   * (func ui-layout<-ui-uiengine)
-   */
-  public static interface Func_ui_layout_from_ui_uiengine extends Core.Type_func, Core.Type_replfunc {
-    public Ui.Type_ui vx_ui_layout_from_ui_uiengine(final Ui.Type_ui ui, final Ui.Type_uiengine uiengine);
-  }
-
-  public static class Class_ui_layout_from_ui_uiengine extends Core.Class_base implements Func_ui_layout_from_ui_uiengine {
-
-    @Override
-    public Func_ui_layout_from_ui_uiengine vx_new(Object... vals) {
-      Class_ui_layout_from_ui_uiengine output = new Class_ui_layout_from_ui_uiengine();
-      return output;
-    }
-
-    @Override
-    public Func_ui_layout_from_ui_uiengine vx_copy(Object... vals) {
-      Class_ui_layout_from_ui_uiengine output = new Class_ui_layout_from_ui_uiengine();
-      return output;
-    }
-
-    @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
-
-    @Override
-    public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
-        "vx/ui/ui", // pkgname
-        "ui-layout<-ui-uiengine", // name
-        0, // idx
-        false, // async
-        Core.typedef_new(
-          "vx/ui/ui", // pkgname
-          "ui", // name
-          ":struct", // extends
-          Core.e_typelist, // traits
-          Core.e_typelist, // allowtypes
-          Core.e_typelist, // disallowtypes
-          Core.e_funclist, // allowfuncs
-          Core.e_funclist, // disallowfuncs
-          Core.e_anylist, // allowvalues
-          Core.e_anylist, // disallowvalues
-          Core.e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    @Override
-    public Func_ui_layout_from_ui_uiengine vx_empty() {return e_ui_layout_from_ui_uiengine;}
-    @Override
-    public Func_ui_layout_from_ui_uiengine vx_type() {return t_ui_layout_from_ui_uiengine;}
-
-    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
-      Core.Type_any output = Core.e_any;
-      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
-      Ui.Type_uiengine uiengine = Core.f_any_from_any(Ui.t_uiengine, arglist.vx_any(Core.vx_new_int(1)));
-      output = Ui.f_ui_layout_from_ui_uiengine(ui, uiengine);
-      return output;
-    }
-
-    @Override
-    public Ui.Type_ui vx_ui_layout_from_ui_uiengine(final Ui.Type_ui ui, final Ui.Type_uiengine uiengine) {
-      return Ui.f_ui_layout_from_ui_uiengine(ui, uiengine);
-    }
-
-  }
-
-  public static final Func_ui_layout_from_ui_uiengine e_ui_layout_from_ui_uiengine = new Ui.Class_ui_layout_from_ui_uiengine();
-  public static final Func_ui_layout_from_ui_uiengine t_ui_layout_from_ui_uiengine = new Ui.Class_ui_layout_from_ui_uiengine();
-
-  public static Ui.Type_ui f_ui_layout_from_ui_uiengine(final Ui.Type_ui ui, final Ui.Type_uiengine uiengine) {
-    Ui.Type_ui output = Ui.e_ui;
-    output = Core.f_let(
-      Ui.t_ui,
-      Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_layoutengine layoutengine = uiengine.layoutengine();
-        return Ui.f_ui_layout_from_ui_layoutengine(ui, layoutengine);
-      })
-    );
+    output = State.f_any_readstate_from_name(Ui.t_ui, context, Core.vx_new_string(":uiapp"));
     return output;
   }
 
@@ -10081,386 +11270,11 @@ public final class Ui {
 
   public static Ui.Type_ui f_ui_readstate_from_uid(final Core.Type_context context, final Core.Type_string uid) {
     Ui.Type_ui output = Ui.e_ui;
-    output = State.f_any_readstate_from_mapname_name(Ui.t_ui, context, Core.vx_new_string(":uimap"), uid);
-    return output;
-  }
-
-  /**
-   * @function ui_render
-   * @param  {ui} uiarg
-   * @return {ui}
-   * (func ui-render)
-   */
-  public static interface Func_ui_render extends Core.Func_any_from_any {
-    public Ui.Type_ui vx_ui_render(final Ui.Type_ui uiarg);
-  }
-
-  public static class Class_ui_render extends Core.Class_base implements Func_ui_render {
-
-    @Override
-    public Func_ui_render vx_new(Object... vals) {
-      Class_ui_render output = new Class_ui_render();
-      return output;
-    }
-
-    @Override
-    public Func_ui_render vx_copy(Object... vals) {
-      Class_ui_render output = new Class_ui_render();
-      return output;
-    }
-
-    @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
-
-    @Override
-    public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
-        "vx/ui/ui", // pkgname
-        "ui-render", // name
-        0, // idx
-        false, // async
-        Core.typedef_new(
-          "vx/ui/ui", // pkgname
-          "ui", // name
-          ":struct", // extends
-          Core.e_typelist, // traits
-          Core.e_typelist, // allowtypes
-          Core.e_typelist, // disallowtypes
-          Core.e_funclist, // allowfuncs
-          Core.e_funclist, // disallowfuncs
-          Core.e_anylist, // allowvalues
-          Core.e_anylist, // disallowvalues
-          Core.e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    @Override
-    public Func_ui_render vx_empty() {return e_ui_render;}
-    @Override
-    public Func_ui_render vx_type() {return t_ui_render;}
-
-    @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
-
-    @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
-      T output = Core.f_empty(generic_any_1);
-      Ui.Type_ui inputval = (Ui.Type_ui)value;
-      Core.Type_any outputval = Ui.f_ui_render(inputval);
-      output = Core.f_any_from_any(generic_any_1, outputval);
-      return output;
-    }
-
-    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
-      Core.Type_any output = Core.e_any;
-      Ui.Type_ui uiarg = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
-      output = Ui.f_ui_render(uiarg);
-      return output;
-    }
-
-    @Override
-    public Ui.Type_ui vx_ui_render(final Ui.Type_ui uiarg) {
-      return Ui.f_ui_render(uiarg);
-    }
-
-  }
-
-  public static final Func_ui_render e_ui_render = new Ui.Class_ui_render();
-  public static final Func_ui_render t_ui_render = new Ui.Class_ui_render();
-
-  public static Ui.Type_ui f_ui_render(final Ui.Type_ui uiarg) {
-    Ui.Type_ui output = Ui.e_ui;
-    output = Ui.f_ui_render_from_ui_orig_parent(
-      uiarg,
-      Core.f_empty(
-        Ui.t_ui
-      ),
-      Core.f_empty(
-        Ui.t_ui
-      )
-    );
-    return output;
-  }
-
-  /**
-   * @function ui_render_from_fn_render_ui_orig_parent
-   * Returns a rendered ui
-   * @param  {ui-render<-ui-orig-parent} fn-render
-   * @param  {ui} ui
-   * @param  {ui} orig
-   * @param  {ui} parent
-   * @return {ui}
-   * (func ui-render<-fn-render-ui-orig-parent)
-   */
-  public static interface Func_ui_render_from_fn_render_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
-    public Ui.Type_ui vx_ui_render_from_fn_render_ui_orig_parent(final Ui.Func_ui_render_from_ui_orig_parent fn_render, final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
-  }
-
-  public static class Class_ui_render_from_fn_render_ui_orig_parent extends Core.Class_base implements Func_ui_render_from_fn_render_ui_orig_parent {
-
-    @Override
-    public Func_ui_render_from_fn_render_ui_orig_parent vx_new(Object... vals) {
-      Class_ui_render_from_fn_render_ui_orig_parent output = new Class_ui_render_from_fn_render_ui_orig_parent();
-      return output;
-    }
-
-    @Override
-    public Func_ui_render_from_fn_render_ui_orig_parent vx_copy(Object... vals) {
-      Class_ui_render_from_fn_render_ui_orig_parent output = new Class_ui_render_from_fn_render_ui_orig_parent();
-      return output;
-    }
-
-    @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
-
-    @Override
-    public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
-        "vx/ui/ui", // pkgname
-        "ui-render<-fn-render-ui-orig-parent", // name
-        0, // idx
-        false, // async
-        Core.typedef_new(
-          "vx/ui/ui", // pkgname
-          "ui", // name
-          ":struct", // extends
-          Core.e_typelist, // traits
-          Core.e_typelist, // allowtypes
-          Core.e_typelist, // disallowtypes
-          Core.e_funclist, // allowfuncs
-          Core.e_funclist, // disallowfuncs
-          Core.e_anylist, // allowvalues
-          Core.e_anylist, // disallowvalues
-          Core.e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    @Override
-    public Func_ui_render_from_fn_render_ui_orig_parent vx_empty() {return e_ui_render_from_fn_render_ui_orig_parent;}
-    @Override
-    public Func_ui_render_from_fn_render_ui_orig_parent vx_type() {return t_ui_render_from_fn_render_ui_orig_parent;}
-
-    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
-      Core.Type_any output = Core.e_any;
-      Ui.Func_ui_render_from_ui_orig_parent fn_render = Core.f_any_from_any(Ui.t_ui_render_from_ui_orig_parent, arglist.vx_any(Core.vx_new_int(0)));
-      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
-      Ui.Type_ui orig = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(2)));
-      Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(3)));
-      output = Ui.f_ui_render_from_fn_render_ui_orig_parent(fn_render, ui, orig, parent);
-      return output;
-    }
-
-    @Override
-    public Ui.Type_ui vx_ui_render_from_fn_render_ui_orig_parent(final Ui.Func_ui_render_from_ui_orig_parent fn_render, final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
-      return Ui.f_ui_render_from_fn_render_ui_orig_parent(fn_render, ui, orig, parent);
-    }
-
-  }
-
-  public static final Func_ui_render_from_fn_render_ui_orig_parent e_ui_render_from_fn_render_ui_orig_parent = new Ui.Class_ui_render_from_fn_render_ui_orig_parent();
-  public static final Func_ui_render_from_fn_render_ui_orig_parent t_ui_render_from_fn_render_ui_orig_parent = new Ui.Class_ui_render_from_fn_render_ui_orig_parent();
-
-  public static Ui.Type_ui f_ui_render_from_fn_render_ui_orig_parent(final Ui.Func_ui_render_from_ui_orig_parent fn_render, final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
-    Ui.Type_ui output = Ui.e_ui;
-    output = Core.vx_any_from_func(Ui.t_ui, fn_render, ui, orig, parent);
-    return output;
-  }
-
-  /**
-   * @function ui_render_from_ui_orig_parent
-   * Returns a rendered object from a UI Element.
-   * @param  {ui} ui
-   * @param  {ui} orig
-   * @param  {ui} parent
-   * @return {ui}
-   * (func ui-render<-ui-orig-parent)
-   */
-  public static interface Func_ui_render_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
-    public Ui.Type_ui vx_ui_render_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
-  }
-
-  public static class Class_ui_render_from_ui_orig_parent extends Core.Class_base implements Func_ui_render_from_ui_orig_parent {
-
-    @Override
-    public Func_ui_render_from_ui_orig_parent vx_new(Object... vals) {
-      Class_ui_render_from_ui_orig_parent output = new Class_ui_render_from_ui_orig_parent();
-      return output;
-    }
-
-    @Override
-    public Func_ui_render_from_ui_orig_parent vx_copy(Object... vals) {
-      Class_ui_render_from_ui_orig_parent output = new Class_ui_render_from_ui_orig_parent();
-      return output;
-    }
-
-    @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
-
-    @Override
-    public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
-        "vx/ui/ui", // pkgname
-        "ui-render<-ui-orig-parent", // name
-        0, // idx
-        false, // async
-        Core.typedef_new(
-          "vx/ui/ui", // pkgname
-          "ui", // name
-          ":struct", // extends
-          Core.e_typelist, // traits
-          Core.e_typelist, // allowtypes
-          Core.e_typelist, // disallowtypes
-          Core.e_funclist, // allowfuncs
-          Core.e_funclist, // disallowfuncs
-          Core.e_anylist, // allowvalues
-          Core.e_anylist, // disallowvalues
-          Core.e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    @Override
-    public Func_ui_render_from_ui_orig_parent vx_empty() {return e_ui_render_from_ui_orig_parent;}
-    @Override
-    public Func_ui_render_from_ui_orig_parent vx_type() {return t_ui_render_from_ui_orig_parent;}
-
-    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
-      Core.Type_any output = Core.e_any;
-      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
-      Ui.Type_ui orig = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
-      Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(2)));
-      output = Ui.f_ui_render_from_ui_orig_parent(ui, orig, parent);
-      return output;
-    }
-
-    @Override
-    public Ui.Type_ui vx_ui_render_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
-      return Ui.f_ui_render_from_ui_orig_parent(ui, orig, parent);
-    }
-
-  }
-
-  public static final Func_ui_render_from_ui_orig_parent e_ui_render_from_ui_orig_parent = new Ui.Class_ui_render_from_ui_orig_parent();
-  public static final Func_ui_render_from_ui_orig_parent t_ui_render_from_ui_orig_parent = new Ui.Class_ui_render_from_ui_orig_parent();
-
-  public static Ui.Type_ui f_ui_render_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
-    Ui.Type_ui output = Ui.e_ui;
-    output = Core.f_if_2(
-      Ui.t_ui,
-      Core.t_thenelselist.vx_new(
-        Core.f_then(
-          Core.t_boolean_from_func.vx_fn_new(() -> {
-            return Core.f_eqeq(ui, orig);
-          }),
-          Core.t_any_from_func.vx_fn_new(() -> {
-            return orig;
-          })
-        ),
-        Core.f_else(
-          Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.f_let(
-              Ui.t_ui,
-              Core.t_any_from_func.vx_fn_new(() -> {
-                final Ui.Type_uimap uimap = ui.uimap();
-                final Ui.Type_layout layout = ui.layout();
-                final Ui.Type_ui uiout = Ui.f_ui_from_layout_ui_orig_parent(layout, ui, orig, parent);
-                return uiout;
-              })
-            );
-          })
-        )
-      )
-    );
-    return output;
-  }
-
-  /**
-   * @function ui_render_from_ui_parent_selected
-   * Return a ui after changing selected item and writing it.
-   * @param  {ui} ui
-   * @param  {ui} parent
-   * @param  {int} selected
-   * @return {ui}
-   * (func ui-render<-ui-parent-selected)
-   */
-  public static interface Func_ui_render_from_ui_parent_selected extends Core.Type_func, Core.Type_replfunc {
-    public Ui.Type_ui vx_ui_render_from_ui_parent_selected(final Ui.Type_ui ui, final Ui.Type_ui parent, final Core.Type_int selected);
-  }
-
-  public static class Class_ui_render_from_ui_parent_selected extends Core.Class_base implements Func_ui_render_from_ui_parent_selected {
-
-    @Override
-    public Func_ui_render_from_ui_parent_selected vx_new(Object... vals) {
-      Class_ui_render_from_ui_parent_selected output = new Class_ui_render_from_ui_parent_selected();
-      return output;
-    }
-
-    @Override
-    public Func_ui_render_from_ui_parent_selected vx_copy(Object... vals) {
-      Class_ui_render_from_ui_parent_selected output = new Class_ui_render_from_ui_parent_selected();
-      return output;
-    }
-
-    @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
-
-    @Override
-    public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
-        "vx/ui/ui", // pkgname
-        "ui-render<-ui-parent-selected", // name
-        0, // idx
-        false, // async
-        Core.typedef_new(
-          "vx/ui/ui", // pkgname
-          "ui", // name
-          ":struct", // extends
-          Core.e_typelist, // traits
-          Core.e_typelist, // allowtypes
-          Core.e_typelist, // disallowtypes
-          Core.e_funclist, // allowfuncs
-          Core.e_funclist, // disallowfuncs
-          Core.e_anylist, // allowvalues
-          Core.e_anylist, // disallowvalues
-          Core.e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    @Override
-    public Func_ui_render_from_ui_parent_selected vx_empty() {return e_ui_render_from_ui_parent_selected;}
-    @Override
-    public Func_ui_render_from_ui_parent_selected vx_type() {return t_ui_render_from_ui_parent_selected;}
-
-    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
-      Core.Type_any output = Core.e_any;
-      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
-      Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
-      Core.Type_int selected = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(2)));
-      output = Ui.f_ui_render_from_ui_parent_selected(ui, parent, selected);
-      return output;
-    }
-
-    @Override
-    public Ui.Type_ui vx_ui_render_from_ui_parent_selected(final Ui.Type_ui ui, final Ui.Type_ui parent, final Core.Type_int selected) {
-      return Ui.f_ui_render_from_ui_parent_selected(ui, parent, selected);
-    }
-
-  }
-
-  public static final Func_ui_render_from_ui_parent_selected e_ui_render_from_ui_parent_selected = new Ui.Class_ui_render_from_ui_parent_selected();
-  public static final Func_ui_render_from_ui_parent_selected t_ui_render_from_ui_parent_selected = new Ui.Class_ui_render_from_ui_parent_selected();
-
-  public static Ui.Type_ui f_ui_render_from_ui_parent_selected(final Ui.Type_ui ui, final Ui.Type_ui parent, final Core.Type_int selected) {
-    Ui.Type_ui output = Ui.e_ui;
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_ui uichg = Ui.f_ui_from_ui_selected(ui, selected);
-        final Ui.Type_uimap childmap = uichg.uimap();
-        return Ui.f_ui_render_from_ui_orig_parent(uichg, ui, parent);
+        final Ui.Type_ui uiapp = Ui.f_ui_readstate_uiapp(context);
+        return Ui.f_ui_from_ui_find(uiapp, uid);
       })
     );
     return output;
@@ -10832,7 +11646,7 @@ public final class Ui {
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
         final Core.Type_string name = layout.name();
-        final Ui.Func_ui_render_from_ui_orig_parent fn_layout = layout.fn_layout();
+        final Ui.Func_ui_layout_from_ui_orig_parent fn_layout = layout.fn_layout();
         final Ui.Type_ui uichg = Core.vx_any_from_func(Ui.t_ui, fn_layout, uiarg, uiorig, parent);
         return uichg;
       })
@@ -10841,8 +11655,205 @@ public final class Ui {
   }
 
   /**
+   * @function ui_from_ui_find
+   * Returns a ui given a ui and a find uid.
+   * @param  {ui} uiarg
+   * @param  {string} find
+   * @return {ui}
+   * (func ui<-ui-find)
+   */
+  public static interface Func_ui_from_ui_find extends Core.Type_func, Core.Type_replfunc {
+    public Ui.Type_ui vx_ui_from_ui_find(final Ui.Type_ui uiarg, final Core.Type_string find);
+  }
+
+  public static class Class_ui_from_ui_find extends Core.Class_base implements Func_ui_from_ui_find {
+
+    @Override
+    public Func_ui_from_ui_find vx_new(Object... vals) {
+      Class_ui_from_ui_find output = new Class_ui_from_ui_find();
+      return output;
+    }
+
+    @Override
+    public Func_ui_from_ui_find vx_copy(Object... vals) {
+      Class_ui_from_ui_find output = new Class_ui_from_ui_find();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/ui", // pkgname
+        "ui<-ui-find", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "ui", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_ui_from_ui_find vx_empty() {return e_ui_from_ui_find;}
+    @Override
+    public Func_ui_from_ui_find vx_type() {return t_ui_from_ui_find;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui uiarg = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string find = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
+      output = Ui.f_ui_from_ui_find(uiarg, find);
+      return output;
+    }
+
+    @Override
+    public Ui.Type_ui vx_ui_from_ui_find(final Ui.Type_ui uiarg, final Core.Type_string find) {
+      return Ui.f_ui_from_ui_find(uiarg, find);
+    }
+
+  }
+
+  public static final Func_ui_from_ui_find e_ui_from_ui_find = new Ui.Class_ui_from_ui_find();
+  public static final Func_ui_from_ui_find t_ui_from_ui_find = new Ui.Class_ui_from_ui_find();
+
+  public static Ui.Type_ui f_ui_from_ui_find(final Ui.Type_ui uiarg, final Core.Type_string find) {
+    Ui.Type_ui output = Ui.e_ui;
+    output = Core.f_let(
+      Ui.t_ui,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_string uid = uiarg.uid();
+        return Core.f_if_2(
+          Ui.t_ui,
+          Core.t_thenelselist.vx_new(
+            Core.f_then(
+              Core.t_boolean_from_func.vx_fn_new(() -> {
+                return Core.f_eq(uid, Core.vx_new_string(""));
+              }),
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return Core.f_empty(
+                  Ui.t_ui
+                );
+              })
+            ),
+            Core.f_then(
+              Core.t_boolean_from_func.vx_fn_new(() -> {
+                return Core.f_eq(uid, find);
+              }),
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return uiarg;
+              })
+            ),
+            Core.f_then(
+              Core.t_boolean_from_func.vx_fn_new(() -> {
+                return Type.f_boolean_from_string_starts(
+                  find,
+                  Core.f_new(
+                    Core.t_string,
+                    Core.t_anylist.vx_new(
+                      uid,
+                      Core.vx_new_string("/")
+                    )
+                  )
+                );
+              }),
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return Core.f_let(
+                  Ui.t_ui,
+                  Core.t_any_from_func.vx_fn_new(() -> {
+                    final Core.Type_int afterpos = Core.f_plus(
+                      Type.f_length_from_string(uid),
+                      Core.vx_new_int(2)
+                    );
+                    final Core.Type_string after = Type.f_string_from_string_start(find, afterpos);
+                    final Core.Type_int pos = Type.f_int_from_string_find(after, Core.vx_new_string("/"));
+                    final Core.Type_string subpart = Core.f_if_2(
+                      Core.t_string,
+                      Core.t_thenelselist.vx_new(
+                          Core.f_then(
+                            Core.t_boolean_from_func.vx_fn_new(() -> {
+                              return Core.f_gt(pos, Core.vx_new_int(0));
+                            }),
+                            Core.t_any_from_func.vx_fn_new(() -> {
+                              return Type.f_string_from_string_end(
+                                after,
+                                Core.f_minus(pos, Core.vx_new_int(1))
+                              );
+                            })
+                          ),
+                          Core.f_else(
+                            Core.t_any_from_func.vx_fn_new(() -> {
+                              return after;
+                            })
+                          )
+                      )
+                    );
+                    final Core.Type_string subfind = Core.f_if_2(
+                      Core.t_string,
+                      Core.t_thenelselist.vx_new(
+                          Core.f_then(
+                            Core.t_boolean_from_func.vx_fn_new(() -> {
+                              return Core.f_notempty(subpart);
+                            }),
+                            Core.t_any_from_func.vx_fn_new(() -> {
+                              return Core.f_new(
+                                Core.t_string,
+                                Core.t_anylist.vx_new(
+                                    uid,
+                                    Core.vx_new_string("/"),
+                                    subpart
+                                )
+                              );
+                            })
+                          )
+                      )
+                    );
+                    return Core.f_if_2(
+                      Ui.t_ui,
+                      Core.t_thenelselist.vx_new(
+                        Core.f_then(
+                          Core.t_boolean_from_func.vx_fn_new(() -> {
+                            return Core.f_notempty(subfind);
+                          }),
+                          Core.t_any_from_func.vx_fn_new(() -> {
+                            return Core.f_let(
+                              Ui.t_ui,
+                              Core.t_any_from_func.vx_fn_new(() -> {
+                                final Ui.Type_uimap uimap = uiarg.uimap();
+                                final Ui.Type_ui subui = Core.f_any_from_map(Ui.t_ui, uimap, subfind);
+                                return Ui.f_ui_from_ui_find(subui, find);
+                              })
+                            );
+                          })
+                        )
+                      )
+                    );
+                  })
+                );
+              })
+            )
+          )
+        );
+      })
+    );
+    return output;
+  }
+
+  /**
    * @function ui_from_ui_selected
-   * Return a ui after changing selected item and writing it.
+   * Return a ui after changing selected only one child.
    * @param  {ui} ui
    * @param  {int} selected
    * @return {ui}
@@ -10966,6 +11977,157 @@ public final class Ui {
                                 Core.t_anylist.vx_new(
                                     Core.vx_new_string(":selected"),
                                     Core.vx_new_boolean(false)
+                                )
+                              );
+                            })
+                          )
+                        )
+                      );
+                  })
+                );
+                final Ui.Type_uimap childmap = Ui.f_uimap_from_uilist(uilist2);
+                return Core.f_copy(
+                  ui,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string(":uimap"),
+                    childmap
+                  )
+                );
+              })
+            );
+          })
+        )
+      )
+    );
+    return output;
+  }
+
+  /**
+   * @function ui_from_ui_visible
+   * Return a ui after changing hidden to all but one child.
+   * @param  {ui} ui
+   * @param  {int} visible
+   * @return {ui}
+   * (func ui<-ui-visible)
+   */
+  public static interface Func_ui_from_ui_visible extends Core.Type_func, Core.Type_replfunc {
+    public Ui.Type_ui vx_ui_from_ui_visible(final Ui.Type_ui ui, final Core.Type_int visible);
+  }
+
+  public static class Class_ui_from_ui_visible extends Core.Class_base implements Func_ui_from_ui_visible {
+
+    @Override
+    public Func_ui_from_ui_visible vx_new(Object... vals) {
+      Class_ui_from_ui_visible output = new Class_ui_from_ui_visible();
+      return output;
+    }
+
+    @Override
+    public Func_ui_from_ui_visible vx_copy(Object... vals) {
+      Class_ui_from_ui_visible output = new Class_ui_from_ui_visible();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/ui", // pkgname
+        "ui<-ui-visible", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "ui", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_ui_from_ui_visible vx_empty() {return e_ui_from_ui_visible;}
+    @Override
+    public Func_ui_from_ui_visible vx_type() {return t_ui_from_ui_visible;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_int visible = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(1)));
+      output = Ui.f_ui_from_ui_visible(ui, visible);
+      return output;
+    }
+
+    @Override
+    public Ui.Type_ui vx_ui_from_ui_visible(final Ui.Type_ui ui, final Core.Type_int visible) {
+      return Ui.f_ui_from_ui_visible(ui, visible);
+    }
+
+  }
+
+  public static final Func_ui_from_ui_visible e_ui_from_ui_visible = new Ui.Class_ui_from_ui_visible();
+  public static final Func_ui_from_ui_visible t_ui_from_ui_visible = new Ui.Class_ui_from_ui_visible();
+
+  public static Ui.Type_ui f_ui_from_ui_visible(final Ui.Type_ui ui, final Core.Type_int visible) {
+    Ui.Type_ui output = Ui.e_ui;
+    output = Core.f_if_2(
+      Ui.t_ui,
+      Core.t_thenelselist.vx_new(
+        Core.f_then(
+          Core.t_boolean_from_func.vx_fn_new(() -> {
+            return Core.f_lt(visible, Core.vx_new_int(1));
+          }),
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return ui;
+          })
+        ),
+        Core.f_else(
+          Core.t_any_from_func.vx_fn_new(() -> {
+            return Core.f_let(
+              Ui.t_ui,
+              Core.t_any_from_func.vx_fn_new(() -> {
+                final Ui.Type_uimap uimap = ui.uimap();
+                final Ui.Type_uilist uilist1 = Ui.f_uilist_from_uimap(uimap);
+                final Ui.Type_uilist uilist2 = Core.f_list_from_list_intany(
+                  Ui.t_uilist,
+                  uilist1,
+                  Core.t_any_from_int_any.vx_fn_new((posval_any, uival_any) -> {
+                    Core.Type_int posval = Core.f_any_from_any(Core.t_int, posval_any);
+                    Ui.Type_ui uival = Core.f_any_from_any(Ui.t_ui, uival_any);
+                    return 
+                      Core.f_if_2(
+                        Ui.t_ui,
+                        Core.t_thenelselist.vx_new(
+                          Core.f_then(
+                            Core.t_boolean_from_func.vx_fn_new(() -> {
+                              return Core.f_eq(posval, visible);
+                            }),
+                            Core.t_any_from_func.vx_fn_new(() -> {
+                              return Core.f_copy(
+                                uival,
+                                Core.t_anylist.vx_new(
+                                    Core.vx_new_string(":hidden"),
+                                    Core.vx_new_boolean(false)
+                                )
+                              );
+                            })
+                          ),
+                          Core.f_else(
+                            Core.t_any_from_func.vx_fn_new(() -> {
+                              return Core.f_copy(
+                                uival,
+                                Core.t_anylist.vx_new(
+                                    Core.vx_new_string(":hidden"),
+                                    Core.vx_new_boolean(true)
                                 )
                               );
                             })
@@ -11260,10 +12422,12 @@ public final class Ui {
         final Ui.Type_stylesheet stylesheet = uiengine.stylesheet();
         final Ui.Type_ui ui = uiengine.ui();
         final Ui.Type_layoutengine layoutengine = uiengine.layoutengine();
+        final Core.Type_boolean issetstate = Ui.f_boolean_writestate_from_uiengine(context, uiengine);
         final Ui.Func_stylesheet_render stylesheetrender = layoutengine.stylesheetrender();
         final Ui.Type_stylesheet stylesheetrend = Core.vx_any_from_func(Ui.t_stylesheet, stylesheetrender, stylesheet);
-        final Ui.Type_ui uirenderer = Ui.f_ui_layout_from_ui_layoutengine(ui, layoutengine);
-        final Ui.Type_ui uirendered = Ui.f_ui_render(uirenderer);
+        final Ui.Type_ui uiaddlayout = Ui.f_ui_addlayout_from_ui_layoutengine(ui, layoutengine);
+        final Core.Type_boolean isuiwrite = Ui.f_boolean_writestate_from_uiapp(context, uiaddlayout);
+        final Ui.Type_ui uirendered = Ui.f_ui_layout(uiaddlayout);
         return Core.f_copy(
           uiengine,
           Core.t_anylist.vx_new(
@@ -11485,29 +12649,29 @@ public final class Ui {
   }
 
   /**
-   * @function uimap_layout_from_uimap_layoutmap_else
-   * Returns a uimap with a renderer added to each ui.
+   * @function uimap_addlayout_from_uimap_layoutmap_else
+   * Returns a uimap with a layout added to each ui.
    * @param  {uimap} uimap
    * @param  {layoutmap} layoutmap
    * @param  {layout} layoutelse
    * @return {uimap}
-   * (func uimap-layout<-uimap-layoutmap-else)
+   * (func uimap-addlayout<-uimap-layoutmap-else)
    */
-  public static interface Func_uimap_layout_from_uimap_layoutmap_else extends Core.Type_func, Core.Type_replfunc {
-    public Ui.Type_uimap vx_uimap_layout_from_uimap_layoutmap_else(final Ui.Type_uimap uimap, final Ui.Type_layoutmap layoutmap, final Ui.Type_layout layoutelse);
+  public static interface Func_uimap_addlayout_from_uimap_layoutmap_else extends Core.Type_func, Core.Type_replfunc {
+    public Ui.Type_uimap vx_uimap_addlayout_from_uimap_layoutmap_else(final Ui.Type_uimap uimap, final Ui.Type_layoutmap layoutmap, final Ui.Type_layout layoutelse);
   }
 
-  public static class Class_uimap_layout_from_uimap_layoutmap_else extends Core.Class_base implements Func_uimap_layout_from_uimap_layoutmap_else {
+  public static class Class_uimap_addlayout_from_uimap_layoutmap_else extends Core.Class_base implements Func_uimap_addlayout_from_uimap_layoutmap_else {
 
     @Override
-    public Func_uimap_layout_from_uimap_layoutmap_else vx_new(Object... vals) {
-      Class_uimap_layout_from_uimap_layoutmap_else output = new Class_uimap_layout_from_uimap_layoutmap_else();
+    public Func_uimap_addlayout_from_uimap_layoutmap_else vx_new(Object... vals) {
+      Class_uimap_addlayout_from_uimap_layoutmap_else output = new Class_uimap_addlayout_from_uimap_layoutmap_else();
       return output;
     }
 
     @Override
-    public Func_uimap_layout_from_uimap_layoutmap_else vx_copy(Object... vals) {
-      Class_uimap_layout_from_uimap_layoutmap_else output = new Class_uimap_layout_from_uimap_layoutmap_else();
+    public Func_uimap_addlayout_from_uimap_layoutmap_else vx_copy(Object... vals) {
+      Class_uimap_addlayout_from_uimap_layoutmap_else output = new Class_uimap_addlayout_from_uimap_layoutmap_else();
       return output;
     }
 
@@ -11518,7 +12682,7 @@ public final class Ui {
     public Core.Type_funcdef vx_funcdef() {
       return Core.funcdef_new(
         "vx/ui/ui", // pkgname
-        "uimap-layout<-uimap-layoutmap-else", // name
+        "uimap-addlayout<-uimap-layoutmap-else", // name
         0, // idx
         false, // async
         Core.typedef_new(
@@ -11538,30 +12702,30 @@ public final class Ui {
     }
 
     @Override
-    public Func_uimap_layout_from_uimap_layoutmap_else vx_empty() {return e_uimap_layout_from_uimap_layoutmap_else;}
+    public Func_uimap_addlayout_from_uimap_layoutmap_else vx_empty() {return e_uimap_addlayout_from_uimap_layoutmap_else;}
     @Override
-    public Func_uimap_layout_from_uimap_layoutmap_else vx_type() {return t_uimap_layout_from_uimap_layoutmap_else;}
+    public Func_uimap_addlayout_from_uimap_layoutmap_else vx_type() {return t_uimap_addlayout_from_uimap_layoutmap_else;}
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_uimap uimap = Core.f_any_from_any(Ui.t_uimap, arglist.vx_any(Core.vx_new_int(0)));
       Ui.Type_layoutmap layoutmap = Core.f_any_from_any(Ui.t_layoutmap, arglist.vx_any(Core.vx_new_int(1)));
       Ui.Type_layout layoutelse = Core.f_any_from_any(Ui.t_layout, arglist.vx_any(Core.vx_new_int(2)));
-      output = Ui.f_uimap_layout_from_uimap_layoutmap_else(uimap, layoutmap, layoutelse);
+      output = Ui.f_uimap_addlayout_from_uimap_layoutmap_else(uimap, layoutmap, layoutelse);
       return output;
     }
 
     @Override
-    public Ui.Type_uimap vx_uimap_layout_from_uimap_layoutmap_else(final Ui.Type_uimap uimap, final Ui.Type_layoutmap layoutmap, final Ui.Type_layout layoutelse) {
-      return Ui.f_uimap_layout_from_uimap_layoutmap_else(uimap, layoutmap, layoutelse);
+    public Ui.Type_uimap vx_uimap_addlayout_from_uimap_layoutmap_else(final Ui.Type_uimap uimap, final Ui.Type_layoutmap layoutmap, final Ui.Type_layout layoutelse) {
+      return Ui.f_uimap_addlayout_from_uimap_layoutmap_else(uimap, layoutmap, layoutelse);
     }
 
   }
 
-  public static final Func_uimap_layout_from_uimap_layoutmap_else e_uimap_layout_from_uimap_layoutmap_else = new Ui.Class_uimap_layout_from_uimap_layoutmap_else();
-  public static final Func_uimap_layout_from_uimap_layoutmap_else t_uimap_layout_from_uimap_layoutmap_else = new Ui.Class_uimap_layout_from_uimap_layoutmap_else();
+  public static final Func_uimap_addlayout_from_uimap_layoutmap_else e_uimap_addlayout_from_uimap_layoutmap_else = new Ui.Class_uimap_addlayout_from_uimap_layoutmap_else();
+  public static final Func_uimap_addlayout_from_uimap_layoutmap_else t_uimap_addlayout_from_uimap_layoutmap_else = new Ui.Class_uimap_addlayout_from_uimap_layoutmap_else();
 
-  public static Ui.Type_uimap f_uimap_layout_from_uimap_layoutmap_else(final Ui.Type_uimap uimap, final Ui.Type_layoutmap layoutmap, final Ui.Type_layout layoutelse) {
+  public static Ui.Type_uimap f_uimap_addlayout_from_uimap_layoutmap_else(final Ui.Type_uimap uimap, final Ui.Type_layoutmap layoutmap, final Ui.Type_layout layoutelse) {
     Ui.Type_uimap output = Ui.e_uimap;
     output = Core.f_map_from_map_1(
       Ui.t_uimap,
@@ -11570,35 +12734,35 @@ public final class Ui {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, ui_any);
         return 
-        Ui.f_ui_layout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
+        Ui.f_ui_addlayout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
       })
     );
     return output;
   }
 
   /**
-   * @function uimap_render_from_uimap_parent
+   * @function uimap_layout_from_uimap_parent
    * Renders a uimap and returns a rendered uimap.
    * @param  {uimap} uimap
    * @param  {ui} parent
    * @return {uimap}
-   * (func uimap-render<-uimap-parent)
+   * (func uimap-layout<-uimap-parent)
    */
-  public static interface Func_uimap_render_from_uimap_parent extends Core.Type_func, Core.Type_replfunc {
-    public Ui.Type_uimap vx_uimap_render_from_uimap_parent(final Ui.Type_uimap uimap, final Ui.Type_ui parent);
+  public static interface Func_uimap_layout_from_uimap_parent extends Core.Type_func, Core.Type_replfunc {
+    public Ui.Type_uimap vx_uimap_layout_from_uimap_parent(final Ui.Type_uimap uimap, final Ui.Type_ui parent);
   }
 
-  public static class Class_uimap_render_from_uimap_parent extends Core.Class_base implements Func_uimap_render_from_uimap_parent {
+  public static class Class_uimap_layout_from_uimap_parent extends Core.Class_base implements Func_uimap_layout_from_uimap_parent {
 
     @Override
-    public Func_uimap_render_from_uimap_parent vx_new(Object... vals) {
-      Class_uimap_render_from_uimap_parent output = new Class_uimap_render_from_uimap_parent();
+    public Func_uimap_layout_from_uimap_parent vx_new(Object... vals) {
+      Class_uimap_layout_from_uimap_parent output = new Class_uimap_layout_from_uimap_parent();
       return output;
     }
 
     @Override
-    public Func_uimap_render_from_uimap_parent vx_copy(Object... vals) {
-      Class_uimap_render_from_uimap_parent output = new Class_uimap_render_from_uimap_parent();
+    public Func_uimap_layout_from_uimap_parent vx_copy(Object... vals) {
+      Class_uimap_layout_from_uimap_parent output = new Class_uimap_layout_from_uimap_parent();
       return output;
     }
 
@@ -11609,7 +12773,7 @@ public final class Ui {
     public Core.Type_funcdef vx_funcdef() {
       return Core.funcdef_new(
         "vx/ui/ui", // pkgname
-        "uimap-render<-uimap-parent", // name
+        "uimap-layout<-uimap-parent", // name
         0, // idx
         false, // async
         Core.typedef_new(
@@ -11629,29 +12793,29 @@ public final class Ui {
     }
 
     @Override
-    public Func_uimap_render_from_uimap_parent vx_empty() {return e_uimap_render_from_uimap_parent;}
+    public Func_uimap_layout_from_uimap_parent vx_empty() {return e_uimap_layout_from_uimap_parent;}
     @Override
-    public Func_uimap_render_from_uimap_parent vx_type() {return t_uimap_render_from_uimap_parent;}
+    public Func_uimap_layout_from_uimap_parent vx_type() {return t_uimap_layout_from_uimap_parent;}
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_uimap uimap = Core.f_any_from_any(Ui.t_uimap, arglist.vx_any(Core.vx_new_int(0)));
       Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
-      output = Ui.f_uimap_render_from_uimap_parent(uimap, parent);
+      output = Ui.f_uimap_layout_from_uimap_parent(uimap, parent);
       return output;
     }
 
     @Override
-    public Ui.Type_uimap vx_uimap_render_from_uimap_parent(final Ui.Type_uimap uimap, final Ui.Type_ui parent) {
-      return Ui.f_uimap_render_from_uimap_parent(uimap, parent);
+    public Ui.Type_uimap vx_uimap_layout_from_uimap_parent(final Ui.Type_uimap uimap, final Ui.Type_ui parent) {
+      return Ui.f_uimap_layout_from_uimap_parent(uimap, parent);
     }
 
   }
 
-  public static final Func_uimap_render_from_uimap_parent e_uimap_render_from_uimap_parent = new Ui.Class_uimap_render_from_uimap_parent();
-  public static final Func_uimap_render_from_uimap_parent t_uimap_render_from_uimap_parent = new Ui.Class_uimap_render_from_uimap_parent();
+  public static final Func_uimap_layout_from_uimap_parent e_uimap_layout_from_uimap_parent = new Ui.Class_uimap_layout_from_uimap_parent();
+  public static final Func_uimap_layout_from_uimap_parent t_uimap_layout_from_uimap_parent = new Ui.Class_uimap_layout_from_uimap_parent();
 
-  public static Ui.Type_uimap f_uimap_render_from_uimap_parent(final Ui.Type_uimap uimap, final Ui.Type_ui parent) {
+  public static Ui.Type_uimap f_uimap_layout_from_uimap_parent(final Ui.Type_uimap uimap, final Ui.Type_ui parent) {
     Ui.Type_uimap output = Ui.e_uimap;
     output = Core.f_map_from_map_1(
       Ui.t_uimap,
@@ -11660,7 +12824,7 @@ public final class Ui {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Ui.Type_ui val = Core.f_any_from_any(Ui.t_ui, val_any);
         return 
-        Ui.f_ui_render_from_ui_orig_parent(
+        Ui.f_ui_layout_from_ui_orig_parent(
           val,
           Core.f_empty(
             Ui.t_ui
@@ -11966,45 +13130,54 @@ public final class Ui {
     mapconst.put("styletype-shared", Ui.c_styletype_shared);
     mapconst.put("styletype-system", Ui.c_styletype_system);
     mapfunc.put("boolean-print", Ui.t_boolean_print);
+    mapfunc.put("boolean-removestate-uiapp", Ui.t_boolean_removestate_uiapp);
     mapfunc.put("boolean-writestate<-ui", Ui.t_boolean_writestate_from_ui);
+    mapfunc.put("boolean-writestate<-uiapp", Ui.t_boolean_writestate_from_uiapp);
     mapfunc.put("boolean-writestate<-uiengine", Ui.t_boolean_writestate_from_uiengine);
     mapfunc.put("fontfacemap<-fontfacelist", Ui.t_fontfacemap_from_fontfacelist);
     mapfunc.put("int-selected<-ui", Ui.t_int_selected_from_ui);
+    mapfunc.put("int-visible<-ui", Ui.t_int_visible_from_ui);
+    mapfunc.put("intlist-visible<-ui", Ui.t_intlist_visible_from_ui);
     mapfunc.put("layout<-style", Ui.t_layout_from_style);
     mapfunc.put("layout<-ui", Ui.t_layout_from_ui);
     mapfunc.put("layout<-ui-layoutengine", Ui.t_layout_from_ui_layoutengine);
     mapfunc.put("layout<-ui-layoutmap-else", Ui.t_layout_from_ui_layoutmap_else);
     mapfunc.put("layoutengine-readstate", Ui.t_layoutengine_readstate);
     mapfunc.put("layoutmap<-layoutlist", Ui.t_layoutmap_from_layoutlist);
+    mapfunc.put("string-parentuid<-uid", Ui.t_string_parentuid_from_uid);
     mapfunc.put("string-selected<-ui", Ui.t_string_selected_from_ui);
     mapfunc.put("stringlist-selected<-ui", Ui.t_stringlist_selected_from_ui);
     mapfunc.put("stringlist<-ui", Ui.t_stringlist_from_ui);
     mapfunc.put("stylemap<-stylelist", Ui.t_stylemap_from_stylelist);
     mapfunc.put("stylesheet-readstate", Ui.t_stylesheet_readstate);
     mapfunc.put("stylesheet-render", Ui.t_stylesheet_render);
+    mapfunc.put("ui-addlayout<-ui", Ui.t_ui_addlayout_from_ui);
+    mapfunc.put("ui-addlayout<-ui-layoutengine", Ui.t_ui_addlayout_from_ui_layoutengine);
+    mapfunc.put("ui-addlayout<-ui-layoutmap-else", Ui.t_ui_addlayout_from_ui_layoutmap_else);
+    mapfunc.put("ui-addlayout<-ui-uiengine", Ui.t_ui_addlayout_from_ui_uiengine);
     mapfunc.put("ui-child<-ui-uid", Ui.t_ui_child_from_ui_uid);
     mapfunc.put("ui-from<-event", Ui.t_ui_from_from_event);
-    mapfunc.put("ui-layout<-ui", Ui.t_ui_layout_from_ui);
-    mapfunc.put("ui-layout<-ui-layoutengine", Ui.t_ui_layout_from_ui_layoutengine);
-    mapfunc.put("ui-layout<-ui-layoutmap-else", Ui.t_ui_layout_from_ui_layoutmap_else);
-    mapfunc.put("ui-layout<-ui-uiengine", Ui.t_ui_layout_from_ui_uiengine);
+    mapfunc.put("ui-layout", Ui.t_ui_layout);
+    mapfunc.put("ui-layout<-fn-layout-ui-orig-parent", Ui.t_ui_layout_from_fn_layout_ui_orig_parent);
+    mapfunc.put("ui-layout<-ui-orig-parent", Ui.t_ui_layout_from_ui_orig_parent);
+    mapfunc.put("ui-layout<-ui-parent-selected", Ui.t_ui_layout_from_ui_parent_selected);
+    mapfunc.put("ui-layout<-ui-parent-visible", Ui.t_ui_layout_from_ui_parent_visible);
+    mapfunc.put("ui-readstate-uiapp", Ui.t_ui_readstate_uiapp);
     mapfunc.put("ui-readstate<-uid", Ui.t_ui_readstate_from_uid);
-    mapfunc.put("ui-render", Ui.t_ui_render);
-    mapfunc.put("ui-render<-fn-render-ui-orig-parent", Ui.t_ui_render_from_fn_render_ui_orig_parent);
-    mapfunc.put("ui-render<-ui-orig-parent", Ui.t_ui_render_from_ui_orig_parent);
-    mapfunc.put("ui-render<-ui-parent-selected", Ui.t_ui_render_from_ui_parent_selected);
     mapfunc.put("ui-selected<-ui", Ui.t_ui_selected_from_ui);
     mapfunc.put("ui-writechild<-ui-child", Ui.t_ui_writechild_from_ui_child);
     mapfunc.put("ui-writechildmap<-ui-childmap", Ui.t_ui_writechildmap_from_ui_childmap);
     mapfunc.put("ui<-layout-ui-orig-parent", Ui.t_ui_from_layout_ui_orig_parent);
+    mapfunc.put("ui<-ui-find", Ui.t_ui_from_ui_find);
     mapfunc.put("ui<-ui-selected", Ui.t_ui_from_ui_selected);
+    mapfunc.put("ui<-ui-visible", Ui.t_ui_from_ui_visible);
     mapfunc.put("uid-selected<-ui", Ui.t_uid_selected_from_ui);
     mapfunc.put("uiengine-readstate", Ui.t_uiengine_readstate);
     mapfunc.put("uiengine-render", Ui.t_uiengine_render);
     mapfunc.put("uilist-selected<-ui", Ui.t_uilist_selected_from_ui);
     mapfunc.put("uilist<-uimap", Ui.t_uilist_from_uimap);
-    mapfunc.put("uimap-layout<-uimap-layoutmap-else", Ui.t_uimap_layout_from_uimap_layoutmap_else);
-    mapfunc.put("uimap-render<-uimap-parent", Ui.t_uimap_render_from_uimap_parent);
+    mapfunc.put("uimap-addlayout<-uimap-layoutmap-else", Ui.t_uimap_addlayout_from_uimap_layoutmap_else);
+    mapfunc.put("uimap-layout<-uimap-parent", Ui.t_uimap_layout_from_uimap_parent);
     mapfunc.put("uimap<-uilist", Ui.t_uimap_from_uilist);
     mapfunc.put("uimap<-uimap-data", Ui.t_uimap_from_uimap_data);
     Core.vx_global_package_set("vx/ui/ui", maptype, mapconst, mapfunc);

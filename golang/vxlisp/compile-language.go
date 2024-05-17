@@ -1390,9 +1390,9 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			"\n        }" +
 			"\n        output = work;" +
 			"\n      }"
-		if extendinterface == "" {
-			extendinterface = LangNameFromPkgNameDot(lang, "vx/core") + "Type_list"
-		}
+			//		if extendinterface == "" {
+			//			extendinterface = LangNameFromPkgNameDot(lang, "vx/core") + "Type_list"
+			//		}
 		if len(typ.allowtypes) == 0 && len(typ.allowfuncs) == 0 && len(typ.allowvalues) == 0 {
 			MsgLog("Missing allowed types", typ.name)
 		}
@@ -1401,10 +1401,11 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		allowname := "any"
 		allowclass := LangNameFromPkgNameDot(lang, "vx/core") + "Type_any"
 		allowtypes := ListAllowTypeFromType(typ)
+		allowempty := LangNameEFromType(lang, anytype)
 		if len(allowtypes) > 0 {
 			allowtype := allowtypes[0]
 			allowclass = LangNameTypeFullFromType(lang, allowtype)
-			allowempty := LangNameEFromType(lang, allowtype)
+			allowempty = LangNameEFromType(lang, allowtype)
 			allowname = LangNameFromType(lang, allowtype)
 			allowcode = "" +
 				"\n    @Override" +
@@ -1435,7 +1436,30 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			"\n    protected Map<String, " + allowclass + "> vx_p_map = " + LangNameFromPkgNameDot(lang, "vx/core") + "immutablemap(new LinkedHashMap<String, " + allowclass + ">());" +
 			"\n" +
 			"\n    @Override" +
-			"\n    public Map<String, " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any> vx_map() {return " + LangNameFromPkgNameDot(lang, "vx/core") + "immutablemap(new LinkedHashMap<String, " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any>(this.vx_p_map));}" +
+			"\n    public Map<String, " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any> vx_map() {" +
+			"\n      return " + LangNameFromPkgNameDot(lang, "vx/core") + "immutablemap(new LinkedHashMap<String, " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any>(this.vx_p_map));" +
+			"\n    }" +
+			"\n" +
+			"\n    @Override" +
+			"\n    public " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_boolean vx_set(final " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_string name, final " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any value) {" +
+			"\n      " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_boolean output = " + LangNameFromPkgNameDot(lang, "vx/core") + "c_false;" +
+			"\n      if (value instanceof " + allowclass + ") {" +
+			"\n        String key = name.vx_string();" +
+			"\n        if (key.startsWith(\":\")) {" +
+			"\n          key = key.substring(1);" +
+			"\n        }" +
+			"\n        " + allowclass + " castval = (" + allowclass + ")value;" +
+			"\n        Map<String, " + allowclass + "> map = new LinkedHashMap<>(this.vx_p_map);" +
+			"\n        if (castval == " + allowempty + ") {" +
+			"\n          map.remove(key);" +
+			"\n        } else {" +
+			"\n          map.put(key, castval);" +
+			"\n        }" +
+			"\n        this.vx_p_map = " + LangNameFromPkgNameDot(lang, "vx/core") + "immutablemap(map);" +
+			"\n        output = " + LangNameFromPkgNameDot(lang, "vx/core") + "c_true;" +
+			"\n      }" +
+			"\n      return output;" +
+			"\n    }" +
 			"\n" +
 			allowcode +
 			"\n    @Override" +
@@ -2745,6 +2769,7 @@ func LangInterfaceFromType(lang *vxlang, typ *vxtype) string {
 			"\n    public " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_map vx_new_from_map(final Map<String, " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any> mapval);" +
 			"\n    public " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any vx_any(final " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_string key);" +
 			"\n    public Map<String, " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any> vx_map();" +
+			"\n    public " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_boolean vx_set(final " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_string name, final " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any value);" +
 			"\n  }" +
 			"\n"
 	case "vx/core/struct":

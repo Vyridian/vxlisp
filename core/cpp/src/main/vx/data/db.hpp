@@ -142,6 +142,8 @@ namespace vx_data_db {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_set(name, value)
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) = 0;
     // vx_new_from_map(T, Map<T>)
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
     std::map<std::string, vx_data_db::Type_dbcell> vx_p_map;
@@ -164,6 +166,7 @@ namespace vx_data_db {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) override;
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
     virtual std::map<std::string, vx_data_db::Type_dbcell> vx_mapdbcell() const override;
     virtual vx_data_db::Type_dbcell vx_get_dbcell(vx_core::Type_string key) const override;
@@ -216,6 +219,8 @@ namespace vx_data_db {
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
     // vx_map()
     virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_set(name, value)
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) = 0;
     // vx_new_from_map(T, Map<T>)
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
     std::map<std::string, vx_data_db::Type_dbfield> vx_p_map;
@@ -238,6 +243,7 @@ namespace vx_data_db {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
     virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) override;
     virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
     virtual std::map<std::string, vx_data_db::Type_dbfield> vx_mapdbfield() const override;
     virtual vx_data_db::Type_dbfield vx_get_dbfield(vx_core::Type_string key) const override;

@@ -8,34 +8,35 @@
 
 (const layout-app-html : ui/layout
  (copy ui/layout-app
-  :fn-layout ui-render-app<-ui-orig-parent)
+  :fn-layout ui-layout-app<-ui-orig-parent)
  :doc "Html App Renderer")
 
 (const layout-image-html : ui/layout
  (copy ui/layout-image
-  :fn-layout ui-render-image<-ui-orig-parent)
+  :fn-layout ui-layout-image<-ui-orig-parent)
  :doc "Html Image Renderer")
 
 (const layout-label-html : ui/layout
  (copy ui/layout-label
-  :fn-layout ui-render-label<-ui-orig-parent)
+  :fn-layout ui-layout-label<-ui-orig-parent)
  :doc "Html Label Renderer")
 
 (const layout-else-html : ui/layout
  (copy ui/layout-else
-  :fn-layout ui-render-default<-ui-orig-parent)
+  :fn-layout ui-layout-default<-ui-orig-parent)
  :doc "Html Default Renderer")
 
 (const layoutenginehtml : ui/layoutengine
  (ui/layoutengine
-  :layoutmap  (ui/layoutmap<-layoutlist
-               (ui/layoutlist
-                layout-app-html
-                layout-image-html
-                layout-label-html))
+  :layoutmap
+   (ui/layoutmap<-layoutlist
+    (ui/layoutlist
+     layout-app-html
+     layout-image-html
+     layout-label-html))
   :layoutelse layout-else-html
   :boolean-print boolean-print-html
-  :stylesheetrender stylesheet-render-html)
+  :stylesheetrender stylesheet-layout-html)
  :doc "Html layout engine used to render html from ui and stylesheet")
 
 (const style-hidden : style
@@ -107,7 +108,7 @@
   parent : ui]
  (html/div))
 
-(func node-render<-node-ui : html/node
+(func node-layout<-node-ui : html/node
  [node : html/node
   ui   : ui]
  (let : html/node
@@ -147,9 +148,11 @@
   (then
    (!-empty image)
    (let : string
-    [file : file/file := (:file image)
-     url  : string    := (file/pathfull<-file
-                          file)]
+    [file : file/file :=
+      (:file image)
+     url : string :=
+      (file/pathfull<-file
+       file)]
     (if : string
      (then
       (!-empty url)
@@ -613,7 +616,7 @@
    :styles allstyles))
  :doc "Returns a htmlstylesheet from a uistylesheet")
 
-(func stylesheet-render-html : ui/stylesheet
+(func stylesheet-layout-html : ui/stylesheet
  [stylesheetui : ui/stylesheet]
  (let : ui/stylesheet
   [stylesheethtml : html/stylesheet :=
@@ -626,7 +629,7 @@
  :async
  :doc "")
 
-(func ui-render-app<-ui-orig-parent : ui/ui
+(func ui-layout-app<-ui-orig-parent : ui/ui
  [ui     : ui
   orig   : ui
   parent : ui]
@@ -641,18 +644,18 @@
      :id uid
      :nodes children)
    nodechg : html/node :=
-    (node-render<-node-ui
+    (node-layout<-node-ui
      node
      ui)
    uimapchg : ui/uimap :=
-    (ui/uimap-render<-uimap-parent
+    (ui/uimap-layout<-uimap-parent
      uimap
      ui)]
   (ui/ui
    :uimap uimapchg))
  :doc "")
 
-(func ui-render-default<-ui-orig-parent : ui/ui
+(func ui-layout-default<-ui-orig-parent : ui/ui
  [ui     : ui
   orig   : ui
   parent : ui]
@@ -675,18 +678,18 @@
      :stylelist styles
      :nodes children)
    nodechg : html/node :=
-    (node-render<-node-ui
+    (node-layout<-node-ui
      node
      ui)
    uimapchg : ui/uimap :=
-    (ui/uimap-render<-uimap-parent
+    (ui/uimap-layout<-uimap-parent
      uimap
      ui)]
   (ui/ui
    :uimap uimapchg))
  :doc "")
 
-(func ui-render-image<-ui-orig-parent : ui/ui
+(func ui-layout-image<-ui-orig-parent : ui/ui
  [ui     : ui
   orig   : ui
   parent : ui]
@@ -711,13 +714,13 @@
      :stylelist styles
      :src path)
    nodechg : html/node :=
-    (node-render<-node-ui
+    (node-layout<-node-ui
      node
      ui)]
   ui)
  :doc "")
 
-(func ui-render-label<-ui-orig-parent : ui/ui
+(func ui-layout-label<-ui-orig-parent : ui/ui
  [ui     : ui
   orig   : ui
   parent : ui]
@@ -750,11 +753,11 @@
      :stylelist styles
      :text text)
    nodechg : html/node :=
-    (node-render<-node-ui
+    (node-layout<-node-ui
      node
      ui)
    uimapchg : ui/uimap :=
-    (ui/uimap-render<-uimap-parent
+    (ui/uimap-layout<-uimap-parent
      uimap
      ui)]
   (ui/ui

@@ -245,6 +245,11 @@ namespace vx_core {
     return output;
   }
 
+  // vx_boolean_write_from_map_name_value(map, string, any)
+  vx_core::Type_boolean vx_boolean_write_from_map_name_value(vx_core::Type_map valuemap, vx_core::Type_string name, vx_core::Type_any value) {
+    return valuemap->vx_set(name, value);
+  }
+
   // vx_compare(any, any)
   long vx_compare(vx_core::Type_any val1, vx_core::Type_any val2) {
     long output = 0;
@@ -1817,6 +1822,32 @@ namespace vx_core {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_map::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_core::t_any) {
+        vx_core::Type_any newval = vx_core::vx_any_from_any(vx_core::t_any, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_core::Type_any oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_core::e_any) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_any(key)
     vx_core::Type_any Class_map::vx_get_any(vx_core::Type_string key) const {
       vx_core::Type_any output = vx_core::e_any;
@@ -4465,6 +4496,32 @@ namespace vx_core {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_anymap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_core::t_any) {
+        vx_core::Type_any newval = vx_core::vx_any_from_any(vx_core::t_any, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_core::Type_any oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_core::e_any) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_any(key)
     vx_core::Type_any Class_anymap::vx_get_any(vx_core::Type_string key) const {
       vx_core::Type_any output = vx_core::e_any;
@@ -5080,6 +5137,32 @@ namespace vx_core {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_argmap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_core::t_arg) {
+        vx_core::Type_arg newval = vx_core::vx_any_from_any(vx_core::t_arg, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_core::Type_arg oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_core::e_arg) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_arg(key)
     vx_core::Type_arg Class_argmap::vx_get_arg(vx_core::Type_string key) const {
       vx_core::Type_arg output = vx_core::e_arg;
@@ -5730,6 +5813,32 @@ namespace vx_core {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_connectmap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_core::t_connect) {
+        vx_core::Type_connect newval = vx_core::vx_any_from_any(vx_core::t_connect, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_core::Type_connect oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_core::e_connect) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_connect(key)
     vx_core::Type_connect Class_connectmap::vx_get_connect(vx_core::Type_string key) const {
       vx_core::Type_connect output = vx_core::e_connect;
@@ -6310,6 +6419,32 @@ namespace vx_core {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_constmap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_core::t_any) {
+        vx_core::Type_any newval = vx_core::vx_any_from_any(vx_core::t_any, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_core::Type_any oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_core::e_any) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_any(key)
     vx_core::Type_any Class_constmap::vx_get_any(vx_core::Type_string key) const {
       vx_core::Type_any output = vx_core::e_any;
@@ -6986,6 +7121,32 @@ namespace vx_core {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_funcmap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_core::t_func) {
+        vx_core::Type_func newval = vx_core::vx_any_from_any(vx_core::t_func, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_core::Type_func oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_core::e_func) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_func(key)
     vx_core::Type_func Class_funcmap::vx_get_func(vx_core::Type_string key) const {
       vx_core::Type_func output = vx_core::e_func;
@@ -7314,6 +7475,32 @@ namespace vx_core {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_intmap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_core::t_int) {
+        vx_core::Type_int newval = vx_core::vx_any_from_any(vx_core::t_int, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_core::Type_int oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_core::e_int) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_int(key)
     vx_core::Type_int Class_intmap::vx_get_int(vx_core::Type_string key) const {
       vx_core::Type_int output = vx_core::e_int;
@@ -8102,6 +8289,32 @@ namespace vx_core {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_numbermap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_core::t_number) {
+        vx_core::Type_number newval = vx_core::vx_any_from_any(vx_core::t_number, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_core::Type_number oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_core::e_number) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_number(key)
     vx_core::Type_number Class_numbermap::vx_get_number(vx_core::Type_string key) const {
       vx_core::Type_number output = vx_core::e_number;
@@ -8572,6 +8785,32 @@ namespace vx_core {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_packagemap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_core::t_package) {
+        vx_core::Type_package newval = vx_core::vx_any_from_any(vx_core::t_package, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_core::Type_package oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_core::e_package) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_package(key)
     vx_core::Type_package Class_packagemap::vx_get_package(vx_core::Type_string key) const {
       vx_core::Type_package output = vx_core::e_package;
@@ -9049,6 +9288,32 @@ namespace vx_core {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_permissionmap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_core::t_permission) {
+        vx_core::Type_permission newval = vx_core::vx_any_from_any(vx_core::t_permission, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_core::Type_permission oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_core::e_permission) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_permission(key)
     vx_core::Type_permission Class_permissionmap::vx_get_permission(vx_core::Type_string key) const {
       vx_core::Type_permission output = vx_core::e_permission;
@@ -10440,6 +10705,32 @@ namespace vx_core {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_statelistenermap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_core::t_statelistener) {
+        vx_core::Type_statelistener newval = vx_core::vx_any_from_any(vx_core::t_statelistener, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_core::Type_statelistener oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_core::e_statelistener) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_statelistener(key)
     vx_core::Type_statelistener Class_statelistenermap::vx_get_statelistener(vx_core::Type_string key) const {
       vx_core::Type_statelistener output = vx_core::e_statelistener;
@@ -10919,6 +11210,32 @@ namespace vx_core {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_stringmap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_core::t_string) {
+        vx_core::Type_string newval = vx_core::vx_any_from_any(vx_core::t_string, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_core::Type_string oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_core::e_string) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_string(key)
     vx_core::Type_string Class_stringmap::vx_get_string(vx_core::Type_string key) const {
       vx_core::Type_string output = vx_core::e_string;
@@ -11872,6 +12189,32 @@ namespace vx_core {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_translationmap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_core::t_translation) {
+        vx_core::Type_translation newval = vx_core::vx_any_from_any(vx_core::t_translation, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_core::Type_translation oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_core::e_translation) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_translation(key)
     vx_core::Type_translation Class_translationmap::vx_get_translation(vx_core::Type_string key) const {
       vx_core::Type_translation output = vx_core::e_translation;
@@ -12235,6 +12578,32 @@ namespace vx_core {
       return output;
     }
 
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_typemap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_core::t_any) {
+        vx_core::Type_any newval = vx_core::vx_any_from_any(vx_core::t_any, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_core::Type_any oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_core::e_any) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
     // vx_get_any(key)
     vx_core::Type_any Class_typemap::vx_get_any(vx_core::Type_string key) const {
       vx_core::Type_any output = vx_core::e_any;
@@ -21274,6 +21643,7 @@ namespace vx_core {
   vx_core::Type_boolean f_boolean_write_from_map_name_value(vx_core::Type_map valuemap, vx_core::Type_string name, vx_core::Type_any value) {
     vx_core::Type_boolean output = vx_core::e_boolean;
     vx_core::vx_reserve({valuemap, name, value});
+    output = vx_core::vx_boolean_write_from_map_name_value(valuemap, name, value);
     vx_core::vx_release_one_except({valuemap, name, value}, output);
     return output;
   }

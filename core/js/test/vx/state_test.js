@@ -24,11 +24,11 @@ export default class vx_state_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/state", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 84, ":tests", 11, ":total", 13), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 12), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 85, ":tests", 12, ":total", 14), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 13), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 13), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 14), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 1)
     )
   }
@@ -51,6 +51,7 @@ export default class vx_state_test {
           vx_core.t_intmap,
           "any-readstate<-mapname-name", 0,
           "any-readstate<-name", 0,
+          "boolean-removestate<-name", 0,
           "boolean-writestate<-mapname-name-value", 0,
           "boolean-writestate<-name-value", 0,
           "boolean-writestate<-statelistener", 0,

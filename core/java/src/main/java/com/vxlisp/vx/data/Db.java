@@ -507,7 +507,30 @@ public final class Db {
     protected Map<String, Db.Type_dbcell> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Db.Type_dbcell>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Db.Type_dbcell) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Db.Type_dbcell castval = (Db.Type_dbcell)value;
+        Map<String, Db.Type_dbcell> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Db.e_dbcell) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Db.Type_dbcell vx_dbcell(final Core.Type_string key) {
@@ -914,7 +937,30 @@ public final class Db {
     protected Map<String, Db.Type_dbfield> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Db.Type_dbfield>());
 
     @Override
-    public Map<String, Core.Type_any> vx_map() {return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));}
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Db.Type_dbfield) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Db.Type_dbfield castval = (Db.Type_dbfield)value;
+        Map<String, Db.Type_dbfield> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Db.e_dbfield) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
 
     @Override
     public Db.Type_dbfield vx_dbfield(final Core.Type_string key) {

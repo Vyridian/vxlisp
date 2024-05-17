@@ -1873,22 +1873,48 @@ func CppBodyFromType(lang *vxlang, typ *vxtype) (string, string, *vxmsgblock) {
 				"\n        map[key] = val;"
 		} else {
 			allowval += "" +
-				"\n        vx_core::Type_any valtype = val->vx_type();" +
+				"\n        " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any valtype = val->vx_type();" +
 				"\n        if (valtype == " + allowttype + ") {" +
 				"\n          " + allowclass + " castval = vx_core::vx_any_from_any(" + allowttype + ", val);" +
 				"\n          map[key] = castval;" +
 				"\n        } else {" +
-				"\n          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext(\"(" + typename + ") Invalid Value: \" + vx_core::vx_string_from_any(val) + \"\");" +
-				"\n          msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});" +
+				"\n          " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_msg msg = " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_msg_from_errortext(\"(" + typename + ") Invalid Value: \" + " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_string_from_any(val) + \"\");" +
+				"\n          msgblock = " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_copy(msgblock, {msgblock, msg});" +
 				"\n        }"
 		}
 		instancefuncs += "" +
 			"\n    // vx_map()" +
-			"\n    vx_core::vx_Type_mapany " + classname + "::vx_map() const {" +
-			"\n      vx_core::vx_Type_mapany output = " + vxmap +
+			"\n    " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_Type_mapany " + classname + "::vx_map() const {" +
+			"\n      " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_Type_mapany output = " + vxmap +
 			"\n      return output;" +
 			"\n    }" +
 			"\n" +
+			"\n    // vx_set(map, string, any)" +
+			"\n    " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_boolean " + classname + "::vx_set(" + LangNameFromPkgNameDot(lang, "vx/core") + "Type_string name, " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any value) {" +
+			"\n      " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_boolean output = " + LangNameFromPkgNameDot(lang, "vx/core") + "c_false;" +
+			"\n      " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any valtype = value->vx_type();" +
+			"\n      if (valtype == " + allowttype + ") {" +
+			"\n        " + allowclass + " newval = " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_any_from_any(" + allowttype + ", value);" +
+			"\n        std::string key = name->vx_string();" +
+			"\n        if (" + LangNameFromPkgNameDot(lang, "vx/core") + "vx_boolean_from_string_starts(key, \":\")) {" +
+			"\n          key = key.substr(1, key.length());" +
+			"\n        }" +
+			"\n        " + allowclass + " oldval = this->vx_p_map[key];" +
+			"\n        if (oldval != newval) {" +
+			"\n          if (oldval) {" +
+			"\n            vx_core::vx_release_one(oldval);" +
+			"\n          }" +
+			"\n          if (newval == " + allowempty + ") {" +
+			"\n            this->vx_p_map.erase(key);" +
+			"\n          } else {" +
+			"\n            vx_core::vx_reserve(newval);" +
+			"\n            this->vx_p_map[key] = newval;" +
+			"\n          }" +
+			"\n        }" +
+			"\n        output = " + LangNameFromPkgNameDot(lang, "vx/core") + "c_true;" +
+			"\n      }" +
+			"\n      return output;" +
+			"\n    }" +
 			allowcode +
 			"\n    // vx_new_from_map(mapval)" +
 			"\n    vx_core::Type_any " + classname + "::vx_new_from_map(vx_core::vx_Type_mapany mapval) const {" +
@@ -3290,6 +3316,8 @@ func CppHeaderFromType(lang *vxlang, typ *vxtype) string {
 				"\n    vx_core::Type_any vx_get_any(vx_core::Type_string key) const;" +
 				"\n    // vx_map()" +
 				"\n    vx_core::vx_Type_mapany vx_map() const;" +
+				"\n    // vx_set(name, value)" +
+				"\n    " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_boolean vx_set(" + LangNameFromPkgNameDot(lang, "vx/core") + "Type_string name, " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any value);" +
 				"\n    // vx_new_from_map(T, Map<T>)" +
 				"\n    vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const;"
 			allowname := "any"

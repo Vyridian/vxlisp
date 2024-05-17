@@ -206,20 +206,20 @@ export default class vx_ui_html_uihtml {
   }
 
   /**
-   * @function node_render_from_node_ui
+   * @function node_layout_from_node_ui
    * @param  {node} node
    * @param  {ui} ui
    * @return {node}
    */
-  static t_node_render_from_node_ui = {
+  static t_node_layout_from_node_ui = {
     vx_type: vx_core.t_type
   }
-  static e_node_render_from_node_ui = {
-    vx_type: vx_ui_html_uihtml.t_node_render_from_node_ui
+  static e_node_layout_from_node_ui = {
+    vx_type: vx_ui_html_uihtml.t_node_layout_from_node_ui
   }
 
-  // (func node-render<-node-ui)
-  static f_node_render_from_node_ui(node, ui) {
+  // (func node-layout<-node-ui)
+  static f_node_layout_from_node_ui(node, ui) {
     let output = vx_web_html.e_node
     output = vx_core.f_let(
       {"any-1": vx_web_html.t_node},
@@ -1290,19 +1290,19 @@ export default class vx_ui_html_uihtml {
 
   /**
    * 
-   * @async @function stylesheet_render_html
+   * @async @function stylesheet_layout_html
    * @param  {stylesheet} stylesheetui
    * @return {stylesheet}
    */
-  static t_stylesheet_render_html = {
+  static t_stylesheet_layout_html = {
     vx_type: vx_core.t_type
   }
-  static e_stylesheet_render_html = {
-    vx_type: vx_ui_html_uihtml.t_stylesheet_render_html
+  static e_stylesheet_layout_html = {
+    vx_type: vx_ui_html_uihtml.t_stylesheet_layout_html
   }
 
-  // (func stylesheet-render-html)
-  static async f_stylesheet_render_html(stylesheetui) {
+  // (func stylesheet-layout-html)
+  static async f_stylesheet_layout_html(stylesheetui) {
     let output = Promise.resolve(vx_ui_ui.e_stylesheet)
     output = await vx_core.f_let_async(
       {"any-1": vx_ui_ui.t_stylesheet},
@@ -1358,21 +1358,21 @@ export default class vx_ui_html_uihtml {
   }
 
   /**
-   * @function ui_render_app_from_ui_orig_parent
+   * @function ui_layout_app_from_ui_orig_parent
    * @param  {ui} ui
    * @param  {ui} orig
    * @param  {ui} parent
    * @return {ui}
    */
-  static t_ui_render_app_from_ui_orig_parent = {
+  static t_ui_layout_app_from_ui_orig_parent = {
     vx_type: vx_core.t_type
   }
-  static e_ui_render_app_from_ui_orig_parent = {
-    vx_type: vx_ui_html_uihtml.t_ui_render_app_from_ui_orig_parent
+  static e_ui_layout_app_from_ui_orig_parent = {
+    vx_type: vx_ui_html_uihtml.t_ui_layout_app_from_ui_orig_parent
   }
 
-  // (func ui-render-app<-ui-orig-parent)
-  static f_ui_render_app_from_ui_orig_parent(ui, orig, parent) {
+  // (func ui-layout-app<-ui-orig-parent)
+  static f_ui_layout_app_from_ui_orig_parent(ui, orig, parent) {
     let output = vx_ui_ui.e_ui
     output = vx_core.f_let(
       {"any-1": vx_ui_ui.t_ui},
@@ -1388,8 +1388,8 @@ export default class vx_ui_html_uihtml {
           ":nodes",
           children
         )
-        const nodechg = vx_ui_html_uihtml.f_node_render_from_node_ui(node, ui)
-        const uimapchg = vx_ui_ui.f_uimap_render_from_uimap_parent(uimap, ui)
+        const nodechg = vx_ui_html_uihtml.f_node_layout_from_node_ui(node, ui)
+        const uimapchg = vx_ui_ui.f_uimap_layout_from_uimap_parent(uimap, ui)
         return vx_core.f_new(
           vx_ui_ui.t_ui,
           ":uimap",
@@ -1401,21 +1401,21 @@ export default class vx_ui_html_uihtml {
   }
 
   /**
-   * @function ui_render_default_from_ui_orig_parent
+   * @function ui_layout_default_from_ui_orig_parent
    * @param  {ui} ui
    * @param  {ui} orig
    * @param  {ui} parent
    * @return {ui}
    */
-  static t_ui_render_default_from_ui_orig_parent = {
+  static t_ui_layout_default_from_ui_orig_parent = {
     vx_type: vx_core.t_type
   }
-  static e_ui_render_default_from_ui_orig_parent = {
-    vx_type: vx_ui_html_uihtml.t_ui_render_default_from_ui_orig_parent
+  static e_ui_layout_default_from_ui_orig_parent = {
+    vx_type: vx_ui_html_uihtml.t_ui_layout_default_from_ui_orig_parent
   }
 
-  // (func ui-render-default<-ui-orig-parent)
-  static f_ui_render_default_from_ui_orig_parent(ui, orig, parent) {
+  // (func ui-layout-default<-ui-orig-parent)
+  static f_ui_layout_default_from_ui_orig_parent(ui, orig, parent) {
     let output = vx_ui_ui.e_ui
     output = vx_core.f_let(
       {"any-1": vx_ui_ui.t_ui},
@@ -1438,8 +1438,8 @@ export default class vx_ui_html_uihtml {
           ":nodes",
           children
         )
-        const nodechg = vx_ui_html_uihtml.f_node_render_from_node_ui(node, ui)
-        const uimapchg = vx_ui_ui.f_uimap_render_from_uimap_parent(uimap, ui)
+        const nodechg = vx_ui_html_uihtml.f_node_layout_from_node_ui(node, ui)
+        const uimapchg = vx_ui_ui.f_uimap_layout_from_uimap_parent(uimap, ui)
         return vx_core.f_new(
           vx_ui_ui.t_ui,
           ":uimap",
@@ -1451,21 +1451,21 @@ export default class vx_ui_html_uihtml {
   }
 
   /**
-   * @function ui_render_image_from_ui_orig_parent
+   * @function ui_layout_image_from_ui_orig_parent
    * @param  {ui} ui
    * @param  {ui} orig
    * @param  {ui} parent
    * @return {ui}
    */
-  static t_ui_render_image_from_ui_orig_parent = {
+  static t_ui_layout_image_from_ui_orig_parent = {
     vx_type: vx_core.t_type
   }
-  static e_ui_render_image_from_ui_orig_parent = {
-    vx_type: vx_ui_html_uihtml.t_ui_render_image_from_ui_orig_parent
+  static e_ui_layout_image_from_ui_orig_parent = {
+    vx_type: vx_ui_html_uihtml.t_ui_layout_image_from_ui_orig_parent
   }
 
-  // (func ui-render-image<-ui-orig-parent)
-  static f_ui_render_image_from_ui_orig_parent(ui, orig, parent) {
+  // (func ui-layout-image<-ui-orig-parent)
+  static f_ui_layout_image_from_ui_orig_parent(ui, orig, parent) {
     let output = vx_ui_ui.e_ui
     output = vx_core.f_let(
       {"any-1": vx_ui_ui.t_ui},
@@ -1489,7 +1489,7 @@ export default class vx_ui_html_uihtml {
           ":src",
           path
         )
-        const nodechg = vx_ui_html_uihtml.f_node_render_from_node_ui(node, ui)
+        const nodechg = vx_ui_html_uihtml.f_node_layout_from_node_ui(node, ui)
         return ui
       })
     )
@@ -1497,21 +1497,21 @@ export default class vx_ui_html_uihtml {
   }
 
   /**
-   * @function ui_render_label_from_ui_orig_parent
+   * @function ui_layout_label_from_ui_orig_parent
    * @param  {ui} ui
    * @param  {ui} orig
    * @param  {ui} parent
    * @return {ui}
    */
-  static t_ui_render_label_from_ui_orig_parent = {
+  static t_ui_layout_label_from_ui_orig_parent = {
     vx_type: vx_core.t_type
   }
-  static e_ui_render_label_from_ui_orig_parent = {
-    vx_type: vx_ui_html_uihtml.t_ui_render_label_from_ui_orig_parent
+  static e_ui_layout_label_from_ui_orig_parent = {
+    vx_type: vx_ui_html_uihtml.t_ui_layout_label_from_ui_orig_parent
   }
 
-  // (func ui-render-label<-ui-orig-parent)
-  static f_ui_render_label_from_ui_orig_parent(ui, orig, parent) {
+  // (func ui-layout-label<-ui-orig-parent)
+  static f_ui_layout_label_from_ui_orig_parent(ui, orig, parent) {
     let output = vx_ui_ui.e_ui
     output = vx_core.f_let(
       {"any-1": vx_ui_ui.t_ui},
@@ -1549,8 +1549,8 @@ export default class vx_ui_html_uihtml {
           ":text",
           text
         )
-        const nodechg = vx_ui_html_uihtml.f_node_render_from_node_ui(node, ui)
-        const uimapchg = vx_ui_ui.f_uimap_render_from_uimap_parent(uimap, ui)
+        const nodechg = vx_ui_html_uihtml.f_node_layout_from_node_ui(node, ui)
+        const uimapchg = vx_ui_ui.f_uimap_layout_from_uimap_parent(uimap, ui)
         return vx_core.f_new(
           vx_ui_ui.t_ui,
           ":uimap",
@@ -1579,7 +1579,7 @@ export default class vx_ui_html_uihtml {
       "divchild<-ui": vx_ui_html_uihtml.e_divchild_from_ui,
       "divchildlist<-uimap": vx_ui_html_uihtml.e_divchildlist_from_uimap,
       "node-app<-ui-orig-parent": vx_ui_html_uihtml.e_node_app_from_ui_orig_parent,
-      "node-render<-node-ui": vx_ui_html_uihtml.e_node_render_from_node_ui,
+      "node-layout<-node-ui": vx_ui_html_uihtml.e_node_layout_from_node_ui,
       "string-style<-font": vx_ui_html_uihtml.e_string_style_from_font,
       "string-style<-image": vx_ui_html_uihtml.e_string_style_from_image,
       "string-stylename<-name-styletype": vx_ui_html_uihtml.e_string_stylename_from_name_styletype,
@@ -1591,12 +1591,12 @@ export default class vx_ui_html_uihtml {
       "stylelist<-stylelist": vx_ui_html_uihtml.e_stylelist_from_stylelist,
       "stylelist<-stylemap": vx_ui_html_uihtml.e_stylelist_from_stylemap,
       "stylemap<-stylemap": vx_ui_html_uihtml.e_stylemap_from_stylemap,
-      "stylesheet-render-html": vx_ui_html_uihtml.e_stylesheet_render_html,
+      "stylesheet-layout-html": vx_ui_html_uihtml.e_stylesheet_layout_html,
       "stylesheet<-stylesheet": vx_ui_html_uihtml.e_stylesheet_from_stylesheet,
-      "ui-render-app<-ui-orig-parent": vx_ui_html_uihtml.e_ui_render_app_from_ui_orig_parent,
-      "ui-render-default<-ui-orig-parent": vx_ui_html_uihtml.e_ui_render_default_from_ui_orig_parent,
-      "ui-render-image<-ui-orig-parent": vx_ui_html_uihtml.e_ui_render_image_from_ui_orig_parent,
-      "ui-render-label<-ui-orig-parent": vx_ui_html_uihtml.e_ui_render_label_from_ui_orig_parent
+      "ui-layout-app<-ui-orig-parent": vx_ui_html_uihtml.e_ui_layout_app_from_ui_orig_parent,
+      "ui-layout-default<-ui-orig-parent": vx_ui_html_uihtml.e_ui_layout_default_from_ui_orig_parent,
+      "ui-layout-image<-ui-orig-parent": vx_ui_html_uihtml.e_ui_layout_image_from_ui_orig_parent,
+      "ui-layout-label<-ui-orig-parent": vx_ui_html_uihtml.e_ui_layout_label_from_ui_orig_parent
     })
     const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
       "boolean-print-html": vx_ui_html_uihtml.t_boolean_print_html,
@@ -1604,7 +1604,7 @@ export default class vx_ui_html_uihtml {
       "divchild<-ui": vx_ui_html_uihtml.t_divchild_from_ui,
       "divchildlist<-uimap": vx_ui_html_uihtml.t_divchildlist_from_uimap,
       "node-app<-ui-orig-parent": vx_ui_html_uihtml.t_node_app_from_ui_orig_parent,
-      "node-render<-node-ui": vx_ui_html_uihtml.t_node_render_from_node_ui,
+      "node-layout<-node-ui": vx_ui_html_uihtml.t_node_layout_from_node_ui,
       "string-style<-font": vx_ui_html_uihtml.t_string_style_from_font,
       "string-style<-image": vx_ui_html_uihtml.t_string_style_from_image,
       "string-stylename<-name-styletype": vx_ui_html_uihtml.t_string_stylename_from_name_styletype,
@@ -1616,12 +1616,12 @@ export default class vx_ui_html_uihtml {
       "stylelist<-stylelist": vx_ui_html_uihtml.t_stylelist_from_stylelist,
       "stylelist<-stylemap": vx_ui_html_uihtml.t_stylelist_from_stylemap,
       "stylemap<-stylemap": vx_ui_html_uihtml.t_stylemap_from_stylemap,
-      "stylesheet-render-html": vx_ui_html_uihtml.t_stylesheet_render_html,
+      "stylesheet-layout-html": vx_ui_html_uihtml.t_stylesheet_layout_html,
       "stylesheet<-stylesheet": vx_ui_html_uihtml.t_stylesheet_from_stylesheet,
-      "ui-render-app<-ui-orig-parent": vx_ui_html_uihtml.t_ui_render_app_from_ui_orig_parent,
-      "ui-render-default<-ui-orig-parent": vx_ui_html_uihtml.t_ui_render_default_from_ui_orig_parent,
-      "ui-render-image<-ui-orig-parent": vx_ui_html_uihtml.t_ui_render_image_from_ui_orig_parent,
-      "ui-render-label<-ui-orig-parent": vx_ui_html_uihtml.t_ui_render_label_from_ui_orig_parent
+      "ui-layout-app<-ui-orig-parent": vx_ui_html_uihtml.t_ui_layout_app_from_ui_orig_parent,
+      "ui-layout-default<-ui-orig-parent": vx_ui_html_uihtml.t_ui_layout_default_from_ui_orig_parent,
+      "ui-layout-image<-ui-orig-parent": vx_ui_html_uihtml.t_ui_layout_image_from_ui_orig_parent,
+      "ui-layout-label<-ui-orig-parent": vx_ui_html_uihtml.t_ui_layout_label_from_ui_orig_parent
     })
     const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
       
@@ -1725,9 +1725,9 @@ export default class vx_ui_html_uihtml {
       fn            : vx_ui_html_uihtml.f_node_app_from_ui_orig_parent
     }
 
-    // (func node-render<-node-ui)
-    vx_ui_html_uihtml.t_node_render_from_node_ui['vx_value'] = {
-      name          : "node-render<-node-ui",
+    // (func node-layout<-node-ui)
+    vx_ui_html_uihtml.t_node_layout_from_node_ui['vx_value'] = {
+      name          : "node-layout<-node-ui",
       pkgname       : "vx/ui/html/uihtml",
       extends       : ":func",
       idx           : 0,
@@ -1740,7 +1740,7 @@ export default class vx_ui_html_uihtml {
       traits        : [],
       properties    : [],
       proplast      : {},
-      fn            : vx_ui_html_uihtml.f_node_render_from_node_ui
+      fn            : vx_ui_html_uihtml.f_node_layout_from_node_ui
     }
 
     // (func string-style<-font)
@@ -1941,9 +1941,9 @@ export default class vx_ui_html_uihtml {
       fn            : vx_ui_html_uihtml.f_stylemap_from_stylemap
     }
 
-    // (func stylesheet-render-html)
-    vx_ui_html_uihtml.t_stylesheet_render_html['vx_value'] = {
-      name          : "stylesheet-render-html",
+    // (func stylesheet-layout-html)
+    vx_ui_html_uihtml.t_stylesheet_layout_html['vx_value'] = {
+      name          : "stylesheet-layout-html",
       pkgname       : "vx/ui/html/uihtml",
       extends       : ":func",
       idx           : 0,
@@ -1956,7 +1956,7 @@ export default class vx_ui_html_uihtml {
       traits        : [],
       properties    : [],
       proplast      : {},
-      fn            : vx_ui_html_uihtml.f_stylesheet_render_html
+      fn            : vx_ui_html_uihtml.f_stylesheet_layout_html
     }
 
     // (func stylesheet<-stylesheet)
@@ -1977,9 +1977,9 @@ export default class vx_ui_html_uihtml {
       fn            : vx_ui_html_uihtml.f_stylesheet_from_stylesheet
     }
 
-    // (func ui-render-app<-ui-orig-parent)
-    vx_ui_html_uihtml.t_ui_render_app_from_ui_orig_parent['vx_value'] = {
-      name          : "ui-render-app<-ui-orig-parent",
+    // (func ui-layout-app<-ui-orig-parent)
+    vx_ui_html_uihtml.t_ui_layout_app_from_ui_orig_parent['vx_value'] = {
+      name          : "ui-layout-app<-ui-orig-parent",
       pkgname       : "vx/ui/html/uihtml",
       extends       : ":func",
       idx           : 0,
@@ -1992,12 +1992,12 @@ export default class vx_ui_html_uihtml {
       traits        : [],
       properties    : [],
       proplast      : {},
-      fn            : vx_ui_html_uihtml.f_ui_render_app_from_ui_orig_parent
+      fn            : vx_ui_html_uihtml.f_ui_layout_app_from_ui_orig_parent
     }
 
-    // (func ui-render-default<-ui-orig-parent)
-    vx_ui_html_uihtml.t_ui_render_default_from_ui_orig_parent['vx_value'] = {
-      name          : "ui-render-default<-ui-orig-parent",
+    // (func ui-layout-default<-ui-orig-parent)
+    vx_ui_html_uihtml.t_ui_layout_default_from_ui_orig_parent['vx_value'] = {
+      name          : "ui-layout-default<-ui-orig-parent",
       pkgname       : "vx/ui/html/uihtml",
       extends       : ":func",
       idx           : 0,
@@ -2010,12 +2010,12 @@ export default class vx_ui_html_uihtml {
       traits        : [],
       properties    : [],
       proplast      : {},
-      fn            : vx_ui_html_uihtml.f_ui_render_default_from_ui_orig_parent
+      fn            : vx_ui_html_uihtml.f_ui_layout_default_from_ui_orig_parent
     }
 
-    // (func ui-render-image<-ui-orig-parent)
-    vx_ui_html_uihtml.t_ui_render_image_from_ui_orig_parent['vx_value'] = {
-      name          : "ui-render-image<-ui-orig-parent",
+    // (func ui-layout-image<-ui-orig-parent)
+    vx_ui_html_uihtml.t_ui_layout_image_from_ui_orig_parent['vx_value'] = {
+      name          : "ui-layout-image<-ui-orig-parent",
       pkgname       : "vx/ui/html/uihtml",
       extends       : ":func",
       idx           : 0,
@@ -2028,12 +2028,12 @@ export default class vx_ui_html_uihtml {
       traits        : [],
       properties    : [],
       proplast      : {},
-      fn            : vx_ui_html_uihtml.f_ui_render_image_from_ui_orig_parent
+      fn            : vx_ui_html_uihtml.f_ui_layout_image_from_ui_orig_parent
     }
 
-    // (func ui-render-label<-ui-orig-parent)
-    vx_ui_html_uihtml.t_ui_render_label_from_ui_orig_parent['vx_value'] = {
-      name          : "ui-render-label<-ui-orig-parent",
+    // (func ui-layout-label<-ui-orig-parent)
+    vx_ui_html_uihtml.t_ui_layout_label_from_ui_orig_parent['vx_value'] = {
+      name          : "ui-layout-label<-ui-orig-parent",
       pkgname       : "vx/ui/html/uihtml",
       extends       : ":func",
       idx           : 0,
@@ -2046,35 +2046,35 @@ export default class vx_ui_html_uihtml {
       traits        : [],
       properties    : [],
       proplast      : {},
-      fn            : vx_ui_html_uihtml.f_ui_render_label_from_ui_orig_parent
+      fn            : vx_ui_html_uihtml.f_ui_layout_label_from_ui_orig_parent
     }
 
     // (const layout-app-html)
     Object.assign(vx_ui_html_uihtml.c_layout_app_html, vx_core.f_copy(
       vx_ui_ui.c_layout_app,
       ":fn-layout",
-      vx_ui_html_uihtml.t_ui_render_app_from_ui_orig_parent
+      vx_ui_html_uihtml.t_ui_layout_app_from_ui_orig_parent
     ))
 
     // (const layout-else-html)
     Object.assign(vx_ui_html_uihtml.c_layout_else_html, vx_core.f_copy(
       vx_ui_ui.c_layout_else,
       ":fn-layout",
-      vx_ui_html_uihtml.t_ui_render_default_from_ui_orig_parent
+      vx_ui_html_uihtml.t_ui_layout_default_from_ui_orig_parent
     ))
 
     // (const layout-image-html)
     Object.assign(vx_ui_html_uihtml.c_layout_image_html, vx_core.f_copy(
       vx_ui_ui.c_layout_image,
       ":fn-layout",
-      vx_ui_html_uihtml.t_ui_render_image_from_ui_orig_parent
+      vx_ui_html_uihtml.t_ui_layout_image_from_ui_orig_parent
     ))
 
     // (const layout-label-html)
     Object.assign(vx_ui_html_uihtml.c_layout_label_html, vx_core.f_copy(
       vx_ui_ui.c_layout_label,
       ":fn-layout",
-      vx_ui_html_uihtml.t_ui_render_label_from_ui_orig_parent
+      vx_ui_html_uihtml.t_ui_layout_label_from_ui_orig_parent
     ))
 
     // (const layoutenginehtml)
@@ -2094,7 +2094,7 @@ export default class vx_ui_html_uihtml {
       ":boolean-print",
       vx_ui_html_uihtml.t_boolean_print_html,
       ":stylesheetrender",
-      vx_ui_html_uihtml.t_stylesheet_render_html
+      vx_ui_html_uihtml.t_stylesheet_layout_html
     ))
 
     // (const style-hidden)

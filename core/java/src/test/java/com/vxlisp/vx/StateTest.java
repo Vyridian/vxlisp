@@ -19,11 +19,11 @@ public final class StateTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/state", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 84, ":tests", 11, ":total", 13), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 12), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 12), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 12), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 13), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 85, ":tests", 12, ":total", 14), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 13), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 13), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 13), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 14), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 1)
     );
   }
@@ -40,6 +40,7 @@ public final class StateTest {
       ":funcmap", Core.t_intmap.vx_new(
         ":any-readstate<-mapname-name", 0,
         ":any-readstate<-name", 0,
+        ":boolean-removestate<-name", 0,
         ":boolean-writestate<-mapname-name-value", 0,
         ":boolean-writestate<-name-value", 0,
         ":boolean-writestate<-statelistener", 0,

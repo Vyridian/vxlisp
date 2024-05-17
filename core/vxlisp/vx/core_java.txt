@@ -263,6 +263,11 @@
     return text.startsWith(starts);
   }
 
+  // vx_boolean_write_from_map_name_value(map, string, any)
+  public static Core.Type_boolean vx_boolean_write_from_map_name_value(final Core.Type_map valuemap, final Core.Type_string name, final Core.Type_any value) {
+    return valuemap.vx_set(name, value);
+  }
+
   @SuppressWarnings("unchecked")
   public static <T extends Core.Type_any> T vx_copy(T value, Core.Type_any arg) {
     Core.Type_any anyvalue = value.vx_copy(arg);

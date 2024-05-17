@@ -43,7 +43,6 @@ export default class vx_web_htmldoc {
     let output = vx_core.c_false
     const id = vx_core.f_any_from_struct({'any-1': vx_core.t_string}, ui, ':uid')
     const eventmap = vx_core.f_any_from_struct({'any-1': vx_event.t_eventmap}, ui, ':eventmap')
-    vx_web_htmldoc.vx_boolean_writestate_from_ui(ui)
     let elem = document.getElementById(id)
     if (elem != null) {
       const maplistenerold = vx_web_htmldoc.vx_maplistener_read_from_id(id)

@@ -3,6 +3,7 @@
        (lib event :path vx/event)
        (lib file  :path vx/data/file)
        (lib state :path vx/state)
+       (lib type  :path vx/type)
  :doc "Universal Ui Element")
 
 (type align : struct
@@ -60,7 +61,7 @@
 
 (type layout : struct
  :properties [name      : string
-              fn-layout : ui-render<-ui-orig-parent]
+              fn-layout : ui-layout<-ui-orig-parent]
  :doc "Universal Layout")
 
 (type layoutengine : struct
@@ -138,7 +139,6 @@
  :properties [uid         : string
               name        : string
               layout      : layout
-              parent      : string
               path        : string
               hidden      : boolean
               selected    : boolean
@@ -312,16 +312,57 @@
  :context
  :doc "Create a print ready version of ui")
 
+(func boolean-removestate-uiapp : boolean
+ (state/boolean-removestate<-name
+  :uiapp)
+ :context
+ :doc "Returns true if uiapp was successfully removed from state.")
+
 (func boolean-writestate<-ui : boolean
  [ui : ui]
  (let : boolean
-  [uid : string := (:uid ui)]
-  (state/boolean-writestate<-mapname-name-value
-   :uimap
-   uid
-   ui))
+  [uid : string := (:uid ui)
+   uiapp : ui := (ui-readstate-uiapp)
+   parentuid : string :=
+    (string-parentuid<-uid uid)
+   parentui : ui :=
+    (if : ui
+     (then
+      (= "" parentuid)
+      uiapp)
+     (else
+      (ui<-ui-find
+       uiapp
+       parentuid)))
+   isfound : boolean :=
+    (!-empty parentui)
+   parent2 : ui :=
+    (if
+     (then isfound
+      (ui-writechild<-ui-child
+       parentui ui)))]
+  isfound)
  :context
  :doc "")
+
+(func boolean-writestate<-uiapp : boolean
+ [ui : ui]
+ (state/boolean-writestate<-name-value
+  :uiapp
+  ui)
+ :test (test
+        (ui :uid "app")
+        (let : ui
+         [iswrite : boolean :=
+           (boolean-writestate<-uiapp
+            (ui :uid "app"))
+          appui : ui :=
+           (ui-readstate-uiapp)
+          isremoved : boolean :=
+           (boolean-removestate-uiapp)]
+         appui))
+ :context
+ :doc "Returns true if successful write to :uiapp state")
 
 (func boolean-writestate<-uiengine : boolean
  [uiengine : uiengine]
@@ -330,6 +371,15 @@
  :context
  :sideeffects "Changes state"
  :doc "Writes the uiengine to state")
+
+(func fontfacemap<-fontfacelist : fontfacemap
+ [fontfacelist : fontfacelist]
+ (map<-list : fontfacemap
+  fontfacelist
+  (fn : string
+   [fontface : fontface]
+   (:name fontface)))
+ :doc "Returns a fontfacemap from a fontfacelist")
 
 (func int-selected<-ui : int
  [ui : ui]
@@ -343,14 +393,37 @@
    uid))
  :doc "Returns the position of the currently selected subui")
 
-(func fontfacemap<-fontfacelist : fontfacemap
- [fontfacelist : fontfacelist]
- (map<-list : fontfacemap
-  fontfacelist
-  (fn : string
-   [fontface : fontface]
-   (:name fontface)))
- :doc "Returns a fontfacemap from a fontfacelist")
+(func int-visible<-ui : int
+ [ui : ui]
+ (let : int
+  [intlist : intlist :=
+    (intlist-visible<-ui ui)]
+  (first<-list intlist))
+ :doc "Returns the position of the currently visible subui")
+
+(func intlist-visible<-ui : intlist
+ [uiarg : ui]
+ (let : intlist
+  [uimap : uimap  := (:uimap uiarg)
+   uilist : uilist :=
+    (uilist<-uimap
+     uimap)
+   intlist : uilist :=
+    (list<-list-intany : uilist
+     uilist
+     (fn : int
+      [pos   : int
+       subui : ui]
+      (if : int
+       (then
+        (! (:hidden subui))
+        pos))))]
+   (list<-list-filter : intlist
+    intlist
+    (fn : int
+     [pos : int]
+     pos)))
+ :doc "Return a uilist of the ui with selected=true")
 
 (func layout<-style : layout
  [style : style]
@@ -414,6 +487,27 @@
    (:name layout)))
  :doc "Returns an layoutmap from an layoutlist")
 
+(func string-parentuid<-uid : string
+ [uid : string]
+ (let : string
+  [lastpos : int :=
+   (type/int<-string-findlast
+    uid "/")]
+  (if : string
+   (then
+    (> lastpos 0)
+    (type/string<-string-end
+     uid (- lastpos 1)))))
+ :test (test
+        ""
+        (string-parentuid<-uid
+         "a"))
+       (test
+        "a/b"
+        (string-parentuid<-uid
+         "a/b/c"))
+ :doc "Returns the parent uid of a given uid")
+
 (func string-selected<-ui : string
  [ui : ui]
  (let : string
@@ -474,7 +568,7 @@
   parent : ui]
  (let : ui
   [name : string := (:name layout)
-   fn-layout : ui-render<-ui-orig-parent :=
+   fn-layout : ui-layout<-ui-orig-parent :=
     (:fn-layout layout)
    uichg : ui :=
     (fn-layout
@@ -483,6 +577,66 @@
      parent)]
   uichg)
  :doc "")
+
+(func ui<-ui-find : ui
+ [uiarg : ui
+  find  : string]
+ (let : ui
+  [uid : string := (:uid uiarg)]
+  (if : ui
+   (then (= uid "") (empty ui))
+   (then (= uid find) uiarg)
+   (then
+    (boolean<-string-starts
+     find
+     (string uid "/"))
+    (let : ui
+     [afterpos : int :=
+       (+ (length<-string uid) 2)
+      after : string :=
+       (type/string<-string-start
+        find afterpos)
+      pos : int :=
+       (type/int<-string-find after "/")
+      subpart : string :=
+       (if : string
+        (then
+         (> pos 0)
+         (type/string<-string-end
+          after (- pos 1)))
+        (else after))
+      subfind : string :=
+       (if : string
+        (then
+         (!-empty subpart)
+         (string uid "/" subpart)))]
+     (if : ui
+      (then
+       (!-empty subfind)
+       (let : ui
+        [uimap : uimap :=
+          (:uimap uiarg)
+         subui : ui :=
+          (any<-map uimap subfind)]
+        (ui<-ui-find subui find))))))))
+ :test (test
+        (ui
+         :uid "a/b/c")
+        (ui<-ui-find
+         (ui
+          :uid "a"
+          :uimap
+           (uimap
+            :a/b
+             (ui
+              :uid "a/b"
+              :uimap
+               (uimap
+                :a/b/c
+                 (ui
+                  :uid "a/b/c")))))
+         "a/b/c"))
+ :doc "Returns a ui given a ui and a find uid.")
 
 (func ui<-ui-selected : ui
  [ui       : ui
@@ -594,6 +748,60 @@
          2))
  :doc "Return a ui after changing hidden to all but one child.")
 
+(func ui-addlayout<-ui : ui
+ [ui : ui]
+ (let : ui
+  [uiengine : uiengine := (uiengine-readstate)]
+  (ui-addlayout<-ui-uiengine
+   ui
+   uiengine))
+ :context
+ :doc "Returns a ui with a layout added to each ui.")
+
+(func ui-addlayout<-ui-layoutengine : ui
+ [ui           : ui
+  layoutengine : layoutengine]
+ (let : ui
+  [layoutmap  : layoutmap := (:layoutmap  layoutengine)
+   layoutelse : layout    := (:layoutelse layoutengine)]
+  (ui-addlayout<-ui-layoutmap-else
+   ui
+   layoutmap
+   layoutelse))
+ :doc "Returns a ui with a layout added to each ui.")
+
+(func ui-addlayout<-ui-layoutmap-else : ui
+ [ui : ui
+  layoutmap  : layoutmap
+  layoutelse : layout]
+ (let : ui
+  [uimap : uimap := (:uimap ui)
+   layout1 : layout :=
+    (layout<-ui-layoutmap-else
+     ui
+     layoutmap
+     layoutelse)
+   uimap2 : uimap :=
+    (uimap-addlayout<-uimap-layoutmap-else
+     uimap
+     layoutmap
+     layoutelse)]
+  (copy ui
+   :layout layout1
+   :uimap  uimap2))
+ :doc "Returns a ui with a layout added to each ui.")
+
+(func ui-addlayout<-ui-uiengine : ui
+ [ui       : ui
+  uiengine : uiengine]
+ (let : ui
+  [layoutengine : layoutengine :=
+   (:layoutengine uiengine)]
+  (ui-addlayout<-ui-layoutengine
+   ui
+   layoutengine))
+ :doc "Returns a ui with a layout added to each ui.")
+
 (func ui-child<-ui-uid : ui
  [ui  : ui
   uid : string]
@@ -612,88 +820,26 @@
  :context
  :doc "Returns (:from event) cast as ui")
 
-(func ui-layout<-ui : ui
- [ui : ui]
- (let : ui
-  [uiengine : uiengine := (uiengine-readstate)]
-  (ui-layout<-ui-uiengine
-   ui
-   uiengine))
- :context
- :doc "Returns a ui with a layout added to each ui.")
-
-(func ui-layout<-ui-layoutengine : ui
- [ui           : ui
-  layoutengine : layoutengine]
- (let : ui
-  [layoutmap  : layoutmap := (:layoutmap  layoutengine)
-   layoutelse : layout    := (:layoutelse layoutengine)]
-  (ui-layout<-ui-layoutmap-else
-   ui
-   layoutmap
-   layoutelse))
- :doc "Returns a ui with a layout added to each ui.")
-
-(func ui-layout<-ui-layoutmap-else : ui
- [ui : ui
-  layoutmap  : layoutmap
-  layoutelse : layout]
- (let : ui
-  [uimap : uimap := (:uimap ui)
-   layout1 : layout :=
-    (layout<-ui-layoutmap-else
-     ui
-     layoutmap
-     layoutelse)
-   uimap2 : uimap :=
-    (uimap-layout<-uimap-layoutmap-else
-     uimap
-     layoutmap
-     layoutelse)]
-  (copy ui
-   :layout layout1
-   :uimap  uimap2))
- :doc "Returns a ui with a layout added to each ui.")
-
-(func ui-layout<-ui-uiengine : ui
- [ui       : ui
-  uiengine : uiengine]
- (let : ui
-  [layoutengine : layoutengine :=
-   (:layoutengine uiengine)]
-  (ui-layout<-ui-layoutengine
-   ui
-   layoutengine))
- :doc "Returns a ui with a layout added to each ui.")
-
-(func ui-readstate<-uid : ui
- [uid : string]
- (state/any-readstate<-mapname-name : ui
-  :uimap
-  uid)
- :context
- :doc "Returns the named ui from state")
-
-(func ui-render : ui
+(func ui-layout : ui
  [uiarg : ui]
- (ui-render<-ui-orig-parent
+ (ui-layout<-ui-orig-parent
   uiarg
   (empty ui)
   (empty ui))
  :doc "")
 
-(func ui-render<-fn-render-ui-orig-parent : ui
- [fn-render : ui-render<-ui-orig-parent
+(func ui-layout<-fn-layout-ui-orig-parent : ui
+ [fn-layout : ui-layout<-ui-orig-parent
   ui        : ui
   orig      : ui
   parent    : ui]
- (fn-render
+ (fn-layout
   ui
   orig
   parent)
  :doc "Returns a rendered ui")
 
-(func ui-render<-ui-orig-parent : ui
+(func ui-layout<-ui-orig-parent : ui
  [ui     : ui
   orig   : ui
   parent : ui]
@@ -712,7 +858,7 @@
  :sideeffects "Alters UI"
  :doc "Returns a rendered object from a UI Element.")
 
-(func ui-render<-ui-parent-selected : ui
+(func ui-layout<-ui-parent-selected : ui
  [ui       : ui
   parent   : ui
   selected : int]
@@ -720,11 +866,11 @@
   [uichg : ui :=
     (ui<-ui-selected
      ui selected)]
-  (ui-render<-ui-orig-parent
+  (ui-layout<-ui-orig-parent
    uichg ui parent))
  :doc "Return a ui after changing selected item and rendering it.")
 
-(func ui-render<-ui-parent-visible : ui
+(func ui-layout<-ui-parent-visible : ui
  [ui      : ui
   parent  : ui
   visible : int]
@@ -732,9 +878,55 @@
   [uichg : ui :=
     (ui<-ui-visible
      ui visible)]
-  (ui-render<-ui-orig-parent
+  (ui-layout<-ui-orig-parent
    uichg ui parent))
  :doc "Return a ui after changing visible item and rendering it.")
+
+(func ui-readstate<-uid : ui
+ [uid : string]
+ (let : ui
+  [uiapp : ui := (ui-readstate-uiapp)]
+  (ui<-ui-find
+   uiapp
+   uid))
+ :test (test
+        (ui
+         :uid "a/b/c")
+        (let : ui
+         [uiapp : ui :=
+           (ui
+            :uid "a"
+            :uimap
+             (uimap<-uilist
+              (ui
+               :uid "a/b"
+               :uimap
+                (uimap<-uilist
+                 (ui
+                  :uid "a/b/c")))))
+          iswrite : boolean :=
+           (boolean-writestate<-uiapp uiapp)
+          readval : ui :=
+           (ui-readstate<-uid
+            "a/b/c")
+          isremoved : boolean := (boolean-removestate-uiapp)]
+         readval))
+ :context
+ :doc "Returns the named ui from state")
+
+(func ui-readstate-uiapp : ui
+ (state/any-readstate<-name :uiapp)
+ :test (test
+        (ui
+         :uid "myapp")
+        (let : ui
+         [iswrite : boolean :=
+           (boolean-writestate<-uiapp
+            (ui
+             :uid "myapp"))]
+         (ui-readstate-uiapp)))
+ :context
+ :doc "Returns the top level uiapp from state")
 
 (func ui-selected<-ui : ui
  [ui : ui]
@@ -748,12 +940,11 @@
  [ui    : ui
   child : ui]
  (let
-  [childid : string  := (:uid   child)
-   uimap   : uimap   := (:uimap ui)
-   write   : boolean := (boolean-write<-map-name-value
-                         uimap
-                         childid
-                         child)]
+  [childid : string := (:uid   child)
+   uimap : uimap := (:uimap ui)
+   write : boolean :=
+    (boolean-write<-map-name-value
+     uimap childid child)]
   ui)
  :doc "Returns the given ui with the child added to uimap")
 
@@ -791,19 +982,25 @@
  [uiengine : uiengine]
  (let : uiengine
   [stylesheet : stylesheet :=
-   (:stylesheet uiengine)
+    (:stylesheet uiengine)
    ui : ui := (:ui uiengine)
    layoutengine : layoutengine :=
     (:layoutengine uiengine)
+   issetstate : boolean :=
+    (boolean-writestate<-uiengine
+     uiengine)
    stylesheetrender : stylesheet-render :=
     (:stylesheetrender layoutengine)
    stylesheetrend : stylesheet :=
     (stylesheetrender stylesheet)
-   uirenderer : ui :=
-    (ui-layout<-ui-layoutengine
+   uiaddlayout : ui :=
+    (ui-addlayout<-ui-layoutengine
      ui layoutengine)
+   isuiwrite : boolean :=
+    (boolean-writestate<-uiapp
+     uiaddlayout)
    uirendered : ui :=
-    (ui-render uirenderer)]
+    (ui-layout uiaddlayout)]
   (copy uiengine
    :ui uirendered))
  :context
@@ -849,7 +1046,7 @@
   data  : any]
  :doc "Template for creating uimap dynamically")
 
-(func uimap-layout<-uimap-layoutmap-else : uimap
+(func uimap-addlayout<-uimap-layoutmap-else : uimap
  [uimap : uimap
   layoutmap  : layoutmap
   layoutelse : layout]
@@ -858,13 +1055,13 @@
   (fn : ui
    [key : string
     ui  : ui]
-   (ui-layout<-ui-layoutmap-else
+   (ui-addlayout<-ui-layoutmap-else
     ui
     layoutmap
     layoutelse)))
- :doc "Returns a uimap with a renderer added to each ui.")
+ :doc "Returns a uimap with a layout added to each ui.")
 
-(func uimap-render<-uimap-parent : uimap
+(func uimap-layout<-uimap-parent : uimap
  [uimap  : uimap
   parent : ui]
  (map<-map : uimap
@@ -872,7 +1069,7 @@
   (fn : ui
    [key : string
     val : ui]
-   (ui-render<-ui-orig-parent
+   (ui-layout<-ui-orig-parent
     val
     (empty ui)
     parent)))

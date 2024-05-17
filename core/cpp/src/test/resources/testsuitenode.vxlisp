@@ -5026,19 +5026,19 @@
                  (vx/web/html/p
                   :text "vx/state")
                  (vx/web/html/p
-                  :text "0% 0/13")
+                  :text "0% 0/14")
                  (vx/web/html/p
                   :text "0% 0/1")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "0% 0/12")
+                  :text "0% 0/13")
                  (vx/web/html/p
-                  :text "84% 11/13")
+                  :text "85% 12/14")
                  (vx/web/html/p
-                  :text "0% 0/12")
+                  :text "0% 0/13")
                  (vx/web/html/p
-                  :text "0% 0/12"))
+                  :text "0% 0/13"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -22242,19 +22242,19 @@ ab
                  (vx/web/html/p
                   :text "vx/ui/ui")
                  (vx/web/html/p
-                  :text "0% 1/111")
+                  :text "5% 7/120")
                  (vx/web/html/p
                   :text "0% 0/28")
                  (vx/web/html/p
                   :text "0% 0/41")
                  (vx/web/html/p
-                  :text "2% 1/42")
+                  :text "13% 7/51")
                  (vx/web/html/p
-                  :text "58% 65/111")
+                  :text "61% 74/120")
                  (vx/web/html/p
-                  :text "0% 0/42")
+                  :text "0% 0/51")
                  (vx/web/html/p
-                  :text "0% 0/42"))
+                  :text "0% 0/51"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -22265,6 +22265,257 @@ ab
                       (vx/web/html/tbody
                        :nodes
                         (vx/web/html/trlist
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "boolean-writestate<-uiapp")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (ui :uid \"app\")
+ (let : ui
+  [iswrite : boolean :=
+    (boolean-writestate<-uiapp
+     (ui :uid \"app\"))
+   appui : ui :=
+    (ui-readstate-uiapp)
+   isremoved : boolean :=
+    (boolean-removestate-uiapp)]
+  appui))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/ui/ui/ui
+ :uid \"app\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/ui/ui/ui
+ :uid \"app\")")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "string-parentuid<-uid")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ \"\"
+ (string-parentuid<-uid
+  \"a\"))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"\"")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"\"")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "string-parentuid<-uid")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ \"a/b\"
+ (string-parentuid<-uid
+  \"a/b/c\"))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"a/b\"")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "\"a/b\"")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "ui-readstate-uiapp")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (ui
+  :uid \"myapp\")
+ (let : ui
+  [iswrite : boolean :=
+    (boolean-writestate<-uiapp
+     (ui
+      :uid \"myapp\"))]
+  (ui-readstate-uiapp)))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/ui/ui/ui
+ :uid \"myapp\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/ui/ui/ui
+ :uid \"myapp\")")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "ui-readstate<-uid")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (ui
+  :uid \"a/b/c\")
+ (let : ui
+  [uiapp : ui :=
+    (ui
+     :uid \"a\"
+     :uimap
+      (uimap<-uilist
+       (ui
+        :uid \"a/b\"
+        :uimap
+         (uimap<-uilist
+          (ui
+           :uid \"a/b/c\")))))
+   iswrite : boolean :=
+    (boolean-writestate<-uiapp uiapp)
+   readval : ui :=
+    (ui-readstate<-uid
+     \"a/b/c\")
+   isremoved : boolean := (boolean-removestate-uiapp)]
+  readval))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/ui/ui/ui
+ :uid \"a/b/c\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/ui/ui/ui
+ :uid \"a/b/c\")")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "ui<-ui-find")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (ui
+  :uid \"a/b/c\")
+ (ui<-ui-find
+  (ui
+   :uid \"a\"
+   :uimap
+    (uimap
+     :a/b
+      (ui
+       :uid \"a/b\"
+       :uimap
+        (uimap
+         :a/b/c
+          (ui
+           :uid \"a/b/c\")))))
+  \"a/b/c\"))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/ui/ui/ui
+ :uid \"a/b/c\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/ui/ui/ui
+ :uid \"a/b/c\")")))))
                          (vx/web/html/tr
                           :nodes
                            (vx/web/html/tdlist
@@ -22335,7 +22586,78 @@ ab
    :b
     (vx/ui/ui/ui
      :uid \"b\"
-     :selected true)))")))))))
+     :selected true)))")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "ui<-ui-visible")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (ui
+  :uimap
+   (uimap
+    :a
+     (ui
+      :uid \"a\"
+      :hidden true)
+    :b
+     (ui
+      :uid \"b\")))
+ (ui<-ui-visible
+  (ui
+   :uimap
+    (uimap
+     :a
+      (ui
+       :uid \"a\")
+     :b
+      (ui
+       :uid \"b\"
+       :hidden true)))
+  2))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/ui/ui/ui
+ :uimap
+  (vx/ui/ui/uimap
+   :a
+    (vx/ui/ui/ui
+     :uid \"a\"
+     :hidden true)
+   :b
+    (vx/ui/ui/ui
+     :uid \"b\")))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/ui/ui/ui
+ :uimap
+  (vx/ui/ui/uimap
+   :a
+    (vx/ui/ui/ui
+     :uid \"a\"
+     :hidden true)
+   :b
+    (vx/ui/ui/ui
+     :uid \"b\")))")))))))
                      :thead
                       (vx/web/html/thead
                        :nodes

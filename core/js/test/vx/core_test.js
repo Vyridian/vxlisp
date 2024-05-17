@@ -212,7 +212,7 @@ export default class vx_core_test {
           "context-main", 0,
           "copy", 1,
           "else", 0,
-          "empty", 3,
+          "empty", 4,
           "extends<-any", 0,
           "extends<-typedef", 0,
           "first<-list", 1,
@@ -227,7 +227,7 @@ export default class vx_core_test {
           "int<-func", 0,
           "int<-string", 6,
           "is-empty", 0,
-          "is-empty_1", 3,
+          "is-empty_1", 4,
           "is-endswith", 0,
           "is-float", 0,
           "is-func", 0,
@@ -1842,6 +1842,18 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
+            ":describename", "(test false  (empty boolean))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              false,
+              vx_core.f_empty(
+                vx_core.t_boolean
+              )
+            )
+          ),
+          vx_core.f_new(
+            vx_test.t_testdescribe,
             ":describename", "(test \"\"     (empty string))",
             ":testresult",
             vx_test.f_test(
@@ -2183,6 +2195,17 @@ export default class vx_core_test {
       ":describelist",
         vx_core.f_new(
           vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test-true (is-empty false))",
+            ":testresult",
+            vx_test.f_test_true(
+              context,
+              vx_core.f_is_empty_1(
+                false
+              )
+            )
+          ),
           vx_core.f_new(
             vx_test.t_testdescribe,
             ":describename", "(test-true (is-empty \"\"))",

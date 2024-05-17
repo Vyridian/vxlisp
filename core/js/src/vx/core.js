@@ -49,10 +49,10 @@ export default class vx_core {
   static vx_boolean_write_from_map_name_value(valuemap, name, value) {
     let output = vx_core.c_true
     const mapany = valuemap['vx_value']
-	let key = name
-	if (key.startsWith(':')) {
-	  key = key.substring(1)
-	}
+   	let key = name
+	   if (key.startsWith(':')) {
+	     key = key.substring(1)
+   	}
     mapany[key] = value
     return output
   }

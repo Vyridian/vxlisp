@@ -53,7 +53,7 @@ public final class UihtmlTest {
         ":divchild<-ui", 0,
         ":divchildlist<-uimap", 0,
         ":node-app<-ui-orig-parent", 0,
-        ":node-render<-node-ui", 0,
+        ":node-layout<-node-ui", 0,
         ":string-style<-font", 0,
         ":string-style<-image", 0,
         ":string-stylename<-name-styletype", 0,
@@ -65,12 +65,12 @@ public final class UihtmlTest {
         ":stylelist<-stylelist", 0,
         ":stylelist<-stylemap", 0,
         ":stylemap<-stylemap", 0,
-        ":stylesheet-render-html", 0,
+        ":stylesheet-layout-html", 0,
         ":stylesheet<-stylesheet", 0,
-        ":ui-render-app<-ui-orig-parent", 0,
-        ":ui-render-default<-ui-orig-parent", 0,
-        ":ui-render-image<-ui-orig-parent", 0,
-        ":ui-render-label<-ui-orig-parent", 0
+        ":ui-layout-app<-ui-orig-parent", 0,
+        ":ui-layout-default<-ui-orig-parent", 0,
+        ":ui-layout-image<-ui-orig-parent", 0,
+        ":ui-layout-label<-ui-orig-parent", 0
       )
     );
   }

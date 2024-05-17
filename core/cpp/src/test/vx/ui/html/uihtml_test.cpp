@@ -84,7 +84,7 @@ namespace vx_ui_html_uihtml_test {
         vx_core::vx_new_string(":divchild<-ui"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":divchildlist<-uimap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":node-app<-ui-orig-parent"), vx_core::vx_new_int(0),
-        vx_core::vx_new_string(":node-render<-node-ui"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":node-layout<-node-ui"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":string-style<-font"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":string-style<-image"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":string-stylename<-name-styletype"), vx_core::vx_new_int(0),
@@ -96,12 +96,12 @@ namespace vx_ui_html_uihtml_test {
         vx_core::vx_new_string(":stylelist<-stylelist"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":stylelist<-stylemap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":stylemap<-stylemap"), vx_core::vx_new_int(0),
-        vx_core::vx_new_string(":stylesheet-render-html"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":stylesheet-layout-html"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":stylesheet<-stylesheet"), vx_core::vx_new_int(0),
-        vx_core::vx_new_string(":ui-render-app<-ui-orig-parent"), vx_core::vx_new_int(0),
-        vx_core::vx_new_string(":ui-render-default<-ui-orig-parent"), vx_core::vx_new_int(0),
-        vx_core::vx_new_string(":ui-render-image<-ui-orig-parent"), vx_core::vx_new_int(0),
-        vx_core::vx_new_string(":ui-render-label<-ui-orig-parent"), vx_core::vx_new_int(0)
+        vx_core::vx_new_string(":ui-layout-app<-ui-orig-parent"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":ui-layout-default<-ui-orig-parent"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":ui-layout-image<-ui-orig-parent"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":ui-layout-label<-ui-orig-parent"), vx_core::vx_new_int(0)
       })
     });
     return output;

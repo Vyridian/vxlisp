@@ -67,6 +67,39 @@ export default class vx_state {
   }
 
   /**
+   * @function boolean_removestate_from_name
+   * Returns true if named statelistener was removed.
+   * @param  {string} name
+   * @return {boolean}
+   */
+  static t_boolean_removestate_from_name = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_removestate_from_name = {
+    vx_type: vx_state.t_boolean_removestate_from_name
+  }
+
+  // (func boolean-removestate<-name)
+  static f_boolean_removestate_from_name(context, name) {
+    let output = vx_core.e_boolean
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_boolean, "map-1": vx_core.t_statelistenermap},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const statelistenermap = vx_state.f_statelistenermap_readstate(context)
+        return vx_core.f_boolean_write_from_map_name_value(
+          statelistenermap,
+          name,
+          vx_core.f_empty(
+            vx_core.t_statelistener
+          )
+        )
+      })
+    )
+    return output
+  }
+
+  /**
    * @function boolean_writestate_from_mapname_name_value
    * Returns the named state value and changes it to the new value
    * @param  {string} mapname
@@ -353,6 +386,7 @@ export default class vx_state {
       "valuemap": vx_state.e_valuemap,
       "any-readstate<-mapname-name": vx_state.e_any_readstate_from_mapname_name,
       "any-readstate<-name": vx_state.e_any_readstate_from_name,
+      "boolean-removestate<-name": vx_state.e_boolean_removestate_from_name,
       "boolean-writestate<-mapname-name-value": vx_state.e_boolean_writestate_from_mapname_name_value,
       "boolean-writestate<-name-value": vx_state.e_boolean_writestate_from_name_value,
       "boolean-writestate<-statelistener": vx_state.e_boolean_writestate_from_statelistener,
@@ -367,6 +401,7 @@ export default class vx_state {
     const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
       "any-readstate<-mapname-name": vx_state.t_any_readstate_from_mapname_name,
       "any-readstate<-name": vx_state.t_any_readstate_from_name,
+      "boolean-removestate<-name": vx_state.t_boolean_removestate_from_name,
       "boolean-writestate<-mapname-name-value": vx_state.t_boolean_writestate_from_mapname_name_value,
       "boolean-writestate<-name-value": vx_state.t_boolean_writestate_from_name_value,
       "boolean-writestate<-statelistener": vx_state.t_boolean_writestate_from_statelistener,
@@ -443,6 +478,24 @@ export default class vx_state {
       properties    : [],
       proplast      : {},
       fn            : vx_state.f_any_readstate_from_name
+    }
+
+    // (func boolean-removestate<-name)
+    vx_state.t_boolean_removestate_from_name['vx_value'] = {
+      name          : "boolean-removestate<-name",
+      pkgname       : "vx/state",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_state.f_boolean_removestate_from_name
     }
 
     // (func boolean-writestate<-mapname-name-value)

@@ -2698,6 +2698,7 @@
      (intmap
       :any-readstate<-mapname-name 0
       :any-readstate<-name 0
+      :boolean-removestate<-name 0
       :boolean-writestate<-mapname-name-value 0
       :boolean-writestate<-name-value 0
       :boolean-writestate<-statelistener 0
@@ -2716,25 +2717,25 @@
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 12)
+      :total 13)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 12)
+      :total 13)
     :constnums
      (vx/test/testcoveragenums
       :pct 100)
     :docnums
      (vx/test/testcoveragenums
-      :pct 84
-      :tests 11
-      :total 13)
+      :pct 85
+      :tests 12
+      :total 14)
     :funcnums
      (vx/test/testcoveragenums
-      :total 12)
+      :total 13)
     :testpkg "vx/state"
     :totalnums
      (vx/test/testcoveragenums
-      :total 13)
+      :total 14)
     :typenums
      (vx/test/testcoveragenums
       :total 1))
@@ -17053,6 +17054,171 @@ ab
     (vx/test/testcase
      :passfail true
      :testpkg "vx/ui/ui"
+     :casename "boolean-writestate<-uiapp"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (ui :uid \"app\")
+ (let : ui
+  [iswrite : boolean :=
+    (boolean-writestate<-uiapp
+     (ui :uid \"app\"))
+   appui : ui :=
+    (ui-readstate-uiapp)
+   isremoved : boolean :=
+    (boolean-removestate-uiapp)]
+  appui))"
+        :testpkg "vx/ui/ui"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/ui/ui/ui
+            :uid "app")
+          :actual
+           (vx/ui/ui/ui
+            :uid "app")))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/ui/ui"
+     :casename "string-parentuid<-uid"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"\"
+ (string-parentuid<-uid
+  \"a\"))"
+        :testpkg "vx/ui/ui"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ \"a/b\"
+ (string-parentuid<-uid
+  \"a/b/c\"))"
+        :testpkg "vx/ui/ui"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected "a/b"
+          :actual "a/b"))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/ui/ui"
+     :casename "ui-readstate-uiapp"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (ui
+  :uid \"myapp\")
+ (let : ui
+  [iswrite : boolean :=
+    (boolean-writestate<-uiapp
+     (ui
+      :uid \"myapp\"))]
+  (ui-readstate-uiapp)))"
+        :testpkg "vx/ui/ui"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/ui/ui/ui
+            :uid "myapp")
+          :actual
+           (vx/ui/ui/ui
+            :uid "myapp")))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/ui/ui"
+     :casename "ui-readstate<-uid"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (ui
+  :uid \"a/b/c\")
+ (let : ui
+  [uiapp : ui :=
+    (ui
+     :uid \"a\"
+     :uimap
+      (uimap<-uilist
+       (ui
+        :uid \"a/b\"
+        :uimap
+         (uimap<-uilist
+          (ui
+           :uid \"a/b/c\")))))
+   iswrite : boolean :=
+    (boolean-writestate<-uiapp uiapp)
+   readval : ui :=
+    (ui-readstate<-uid
+     \"a/b/c\")
+   isremoved : boolean := (boolean-removestate-uiapp)]
+  readval))"
+        :testpkg "vx/ui/ui"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/ui/ui/ui
+            :uid "a/b/c")
+          :actual
+           (vx/ui/ui/ui
+            :uid "a/b/c")))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/ui/ui"
+     :casename "ui<-ui-find"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (ui
+  :uid \"a/b/c\")
+ (ui<-ui-find
+  (ui
+   :uid \"a\"
+   :uimap
+    (uimap
+     :a/b
+      (ui
+       :uid \"a/b\"
+       :uimap
+        (uimap
+         :a/b/c
+          (ui
+           :uid \"a/b/c\")))))
+  \"a/b/c\"))"
+        :testpkg "vx/ui/ui"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/ui/ui/ui
+            :uid "a/b/c")
+          :actual
+           (vx/ui/ui/ui
+            :uid "a/b/c")))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/ui/ui"
      :casename "ui<-ui-selected"
      :describelist
       (vx/test/testdescribelist
@@ -17107,7 +17273,65 @@ ab
               :b
                (vx/ui/ui/ui
                 :uid "b"
-                :selected true))))))))
+                :selected true)))))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/ui/ui"
+     :casename "ui<-ui-visible"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (ui
+  :uimap
+   (uimap
+    :a
+     (ui
+      :uid \"a\"
+      :hidden true)
+    :b
+     (ui
+      :uid \"b\")))
+ (ui<-ui-visible
+  (ui
+   :uimap
+    (uimap
+     :a
+      (ui
+       :uid \"a\")
+     :b
+      (ui
+       :uid \"b\"
+       :hidden true)))
+  2))"
+        :testpkg "vx/ui/ui"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/ui/ui/ui
+            :uimap
+             (vx/ui/ui/uimap
+              :a
+               (vx/ui/ui/ui
+                :uid "a"
+                :hidden true)
+              :b
+               (vx/ui/ui/ui
+                :uid "b")))
+          :actual
+           (vx/ui/ui/ui
+            :uimap
+             (vx/ui/ui/uimap
+              :a
+               (vx/ui/ui/ui
+                :uid "a"
+                :hidden true)
+              :b
+               (vx/ui/ui/ui
+                :uid "b"))))))))
   :coveragedetail
    (vx/test/testcoveragedetail
     :constmap
@@ -17156,45 +17380,54 @@ ab
     :funcmap
      (intmap
       :boolean-print 0
+      :boolean-removestate-uiapp 0
       :boolean-writestate<-ui 0
+      :boolean-writestate<-uiapp 1
       :boolean-writestate<-uiengine 0
       :fontfacemap<-fontfacelist 0
       :int-selected<-ui 0
+      :int-visible<-ui 0
+      :intlist-visible<-ui 0
       :layout<-style 0
       :layout<-ui 0
       :layout<-ui-layoutengine 0
       :layout<-ui-layoutmap-else 0
       :layoutengine-readstate 0
       :layoutmap<-layoutlist 0
+      :string-parentuid<-uid 2
       :string-selected<-ui 0
       :stringlist-selected<-ui 0
       :stringlist<-ui 0
       :stylemap<-stylelist 0
       :stylesheet-readstate 0
       :stylesheet-render 0
+      :ui-addlayout<-ui 0
+      :ui-addlayout<-ui-layoutengine 0
+      :ui-addlayout<-ui-layoutmap-else 0
+      :ui-addlayout<-ui-uiengine 0
       :ui-child<-ui-uid 0
       :ui-from<-event 0
-      :ui-layout<-ui 0
-      :ui-layout<-ui-layoutengine 0
-      :ui-layout<-ui-layoutmap-else 0
-      :ui-layout<-ui-uiengine 0
-      :ui-readstate<-uid 0
-      :ui-render 0
-      :ui-render<-fn-render-ui-orig-parent 0
-      :ui-render<-ui-orig-parent 0
-      :ui-render<-ui-parent-selected 0
+      :ui-layout 0
+      :ui-layout<-fn-layout-ui-orig-parent 0
+      :ui-layout<-ui-orig-parent 0
+      :ui-layout<-ui-parent-selected 0
+      :ui-layout<-ui-parent-visible 0
+      :ui-readstate-uiapp 1
+      :ui-readstate<-uid 1
       :ui-selected<-ui 0
       :ui-writechild<-ui-child 0
       :ui-writechildmap<-ui-childmap 0
       :ui<-layout-ui-orig-parent 0
+      :ui<-ui-find 1
       :ui<-ui-selected 1
+      :ui<-ui-visible 1
       :uid-selected<-ui 0
       :uiengine-readstate 0
       :uiengine-render 0
       :uilist-selected<-ui 0
       :uilist<-uimap 0
-      :uimap-layout<-uimap-layoutmap-else 0
-      :uimap-render<-uimap-parent 0
+      :uimap-addlayout<-uimap-layoutmap-else 0
+      :uimap-layout<-uimap-parent 0
       :uimap<-uilist 0
       :uimap<-uimap-data 0)
     :testpkg "vx/ui/ui"
@@ -17232,28 +17465,29 @@ ab
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 42)
+      :total 51)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 42)
+      :total 51)
     :constnums
      (vx/test/testcoveragenums
       :total 41)
     :docnums
      (vx/test/testcoveragenums
-      :pct 58
-      :tests 65
-      :total 111)
+      :pct 61
+      :tests 74
+      :total 120)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 2
-      :tests 1
-      :total 42)
+      :pct 13
+      :tests 7
+      :total 51)
     :testpkg "vx/ui/ui"
     :totalnums
      (vx/test/testcoveragenums
-      :tests 1
-      :total 111)
+      :pct 5
+      :tests 7
+      :total 120)
     :typenums
      (vx/test/testcoveragenums
       :total 28))
@@ -17881,7 +18115,7 @@ ab
       :divchild<-ui 0
       :divchildlist<-uimap 0
       :node-app<-ui-orig-parent 0
-      :node-render<-node-ui 0
+      :node-layout<-node-ui 0
       :string-style<-font 0
       :string-style<-image 0
       :string-stylename<-name-styletype 0
@@ -17893,12 +18127,12 @@ ab
       :stylelist<-stylelist 0
       :stylelist<-stylemap 0
       :stylemap<-stylemap 0
-      :stylesheet-render-html 0
+      :stylesheet-layout-html 0
       :stylesheet<-stylesheet 0
-      :ui-render-app<-ui-orig-parent 0
-      :ui-render-default<-ui-orig-parent 0
-      :ui-render-image<-ui-orig-parent 0
-      :ui-render-label<-ui-orig-parent 0)
+      :ui-layout-app<-ui-orig-parent 0
+      :ui-layout-default<-ui-orig-parent 0
+      :ui-layout-image<-ui-orig-parent 0
+      :ui-layout-label<-ui-orig-parent 0)
     :testpkg "vx/ui/html/uihtml")
   :coveragesummary
    (vx/test/testcoveragesummary
