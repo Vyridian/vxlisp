@@ -18,7 +18,10 @@ namespace vx_collection_test {
   vx_test::Type_testcase f_list_from_list_filtertypes(vx_core::Type_context context);
   vx_test::Type_testcase f_list_from_list_start(vx_core::Type_context context);
   vx_test::Type_testcase f_list_from_list_start_end(vx_core::Type_context context);
-  vx_test::Type_testcase f_stringlist_from_map(vx_core::Type_context context);
+  vx_test::Type_testcase f_map_from_map_end(vx_core::Type_context context);
+  vx_test::Type_testcase f_map_from_map_keys(vx_core::Type_context context);
+  vx_test::Type_testcase f_map_from_map_start(vx_core::Type_context context);
+  vx_test::Type_testcase f_map_from_map_start_end(vx_core::Type_context context);
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context);
   vx_test::Type_testcoveragesummary test_coveragesummary();

@@ -148,7 +148,24 @@ public final class Collection {
     }
     return output;
   }
-    /**
+  
+  public static <T extends Core.Type_map> T vx_map_from_map_keys(T generic_map_1, Core.Type_map valuemap, Core.Type_stringlist keys) {
+    T output = Core.f_empty(generic_map_1);
+    List<Core.Type_string> keylist = keys.vx_liststring();
+    if (keylist.size() > 0) {
+      Map<String, Core.Type_any> map = valuemap.vx_map();
+      List<Core.Type_any> values = new ArrayList<>();
+      for (Core.Type_string key : keylist) {
+        Core.Type_any value = map.get(key.vx_string());
+        values.add(key);
+        values.add(value);
+      }
+      Core.Type_anylist anyvalues = Core.vx_new_anylist(values);
+      output = Core.f_new(generic_map_1, anyvalues);
+    }
+    return output;
+  }
+  /**
    * @function any_from_for_until_loop
    * Returns a value using an until loop. Maximum 10000 times.
    * @param  {any-1} start
@@ -585,7 +602,7 @@ public final class Collection {
     output = Core.f_let(
       Core.t_int,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_stringlist keys = Collection.f_stringlist_from_map(map);
+        final Core.Type_stringlist keys = Core.f_stringlist_from_map(map);
         return Collection.f_int_from_stringlist_find(keys, key);
       })
     );
@@ -1162,7 +1179,7 @@ public final class Collection {
 
   /**
    * @function list_from_list_end
-   * Returns a sub list from positions 0 to end.
+   * Returns a sub list from positions 1 to end inclusive.
    * @param  {list-1} values
    * @param  {int} end
    * @return {list-1}
@@ -1500,14 +1517,14 @@ public final class Collection {
       generic_list_1,
       values,
       start,
-      Core.f_length_from_list(values)
+      Core.f_length_1(values)
     );
     return output;
   }
 
   /**
    * @function list_from_list_start_end
-   * Returns a list from another list
+   * Returns a sublist from another list
    * @param  {list-1} values
    * @param  {int} start
    * @param  {int} end
@@ -1590,27 +1607,28 @@ public final class Collection {
   }
 
   /**
-   * @function stringlist_from_map
-   * Returns a stringlist of keys from any map.
-   * @param  {map-1} map
-   * @return {stringlist}
-   * (func stringlist<-map)
+   * @function map_from_map_end
+   * Returns a submap from key positions 1 to end inclusive.
+   * @param  {map-1} valuemap
+   * @param  {int} end
+   * @return {map-1}
+   * (func map<-map-end)
    */
-  public static interface Func_stringlist_from_map extends Core.Func_any_from_any {
-    public Core.Type_stringlist vx_stringlist_from_map(final Core.Type_map map);
+  public static interface Func_map_from_map_end extends Core.Type_func, Core.Type_replfunc {
+    public <N extends Core.Type_map> N vx_map_from_map_end(final N generic_any_1, final N valuemap, final Core.Type_int end);
   }
 
-  public static class Class_stringlist_from_map extends Core.Class_base implements Func_stringlist_from_map {
+  public static class Class_map_from_map_end extends Core.Class_base implements Func_map_from_map_end {
 
     @Override
-    public Func_stringlist_from_map vx_new(Object... vals) {
-      Class_stringlist_from_map output = new Class_stringlist_from_map();
+    public Func_map_from_map_end vx_new(Object... vals) {
+      Class_map_from_map_end output = new Class_map_from_map_end();
       return output;
     }
 
     @Override
-    public Func_stringlist_from_map vx_copy(Object... vals) {
-      Class_stringlist_from_map output = new Class_stringlist_from_map();
+    public Func_map_from_map_end vx_copy(Object... vals) {
+      Class_map_from_map_end output = new Class_map_from_map_end();
       return output;
     }
 
@@ -1621,15 +1639,15 @@ public final class Collection {
     public Core.Type_funcdef vx_funcdef() {
       return Core.funcdef_new(
         "vx/collection", // pkgname
-        "stringlist<-map", // name
+        "map<-map-end", // name
         0, // idx
         false, // async
         Core.typedef_new(
           "vx/core", // pkgname
-          "stringlist", // name
-          ":list", // extends
+          "map-1", // name
+          ":map", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_string), // allowtypes
+          Core.t_typelist.vx_new(Core.t_any), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -1641,48 +1659,290 @@ public final class Collection {
     }
 
     @Override
-    public Func_stringlist_from_map vx_empty() {return e_stringlist_from_map;}
+    public Func_map_from_map_end vx_empty() {return e_map_from_map_end;}
     @Override
-    public Func_stringlist_from_map vx_type() {return t_stringlist_from_map;}
-
-    @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
-
-    @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
-      T output = Core.f_empty(generic_any_1);
-      Core.Type_map inputval = (Core.Type_map)value;
-      Core.Type_any outputval = Collection.f_stringlist_from_map(inputval);
-      output = Core.f_any_from_any(generic_any_1, outputval);
-      return output;
-    }
+    public Func_map_from_map_end vx_type() {return t_map_from_map_end;}
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_map map = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
-      output = Collection.f_stringlist_from_map(map);
+      Core.Type_map generic_map_1 = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_int end = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(1)));
+      output = Collection.f_map_from_map_end(generic_map_1, valuemap, end);
       return output;
     }
 
     @Override
-    public Core.Type_stringlist vx_stringlist_from_map(final Core.Type_map map) {
-      return Collection.f_stringlist_from_map(map);
+    public <N extends Core.Type_map> N vx_map_from_map_end(final N generic_map_1, final N valuemap, final Core.Type_int end) {
+      return Collection.f_map_from_map_end(generic_map_1, valuemap, end);
     }
 
   }
 
-  public static final Func_stringlist_from_map e_stringlist_from_map = new Collection.Class_stringlist_from_map();
-  public static final Func_stringlist_from_map t_stringlist_from_map = new Collection.Class_stringlist_from_map();
+  public static final Func_map_from_map_end e_map_from_map_end = new Collection.Class_map_from_map_end();
+  public static final Func_map_from_map_end t_map_from_map_end = new Collection.Class_map_from_map_end();
 
-  public static Core.Type_stringlist f_stringlist_from_map(final Core.Type_map map) {
-    Core.Type_stringlist output = Core.e_stringlist;
-    output = Core.f_list_from_map_1(
-      Core.t_stringlist,
-      map,
-      Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
-        Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
-        Core.Type_any value = Core.f_any_from_any(Core.t_any, value_any);
-        return key;
+  public static <N extends Core.Type_map> N f_map_from_map_end(final N generic_map_1, final N valuemap, final Core.Type_int end) {
+    N output = Core.f_empty(generic_map_1);
+    output = Collection.f_map_from_map_start_end(generic_map_1, valuemap, Core.vx_new_int(1), end);
+    return output;
+  }
+
+  /**
+   * @function map_from_map_keys
+   * Returns a submap from another map using a keylist
+   * @param  {map-1} valuemap
+   * @param  {stringlist} keys
+   * @return {map-1}
+   * (func map<-map-keys)
+   */
+  public static interface Func_map_from_map_keys extends Core.Type_func, Core.Type_replfunc {
+    public <N extends Core.Type_map> N vx_map_from_map_keys(final N generic_any_1, final N valuemap, final Core.Type_stringlist keys);
+  }
+
+  public static class Class_map_from_map_keys extends Core.Class_base implements Func_map_from_map_keys {
+
+    @Override
+    public Func_map_from_map_keys vx_new(Object... vals) {
+      Class_map_from_map_keys output = new Class_map_from_map_keys();
+      return output;
+    }
+
+    @Override
+    public Func_map_from_map_keys vx_copy(Object... vals) {
+      Class_map_from_map_keys output = new Class_map_from_map_keys();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/collection", // pkgname
+        "map<-map-keys", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "map-1", // name
+          ":map", // extends
+          Core.e_typelist, // traits
+          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_map_from_map_keys vx_empty() {return e_map_from_map_keys;}
+    @Override
+    public Func_map_from_map_keys vx_type() {return t_map_from_map_keys;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_map generic_map_1 = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_stringlist keys = Core.f_any_from_any(Core.t_stringlist, arglist.vx_any(Core.vx_new_int(1)));
+      output = Collection.f_map_from_map_keys(generic_map_1, valuemap, keys);
+      return output;
+    }
+
+    @Override
+    public <N extends Core.Type_map> N vx_map_from_map_keys(final N generic_map_1, final N valuemap, final Core.Type_stringlist keys) {
+      return Collection.f_map_from_map_keys(generic_map_1, valuemap, keys);
+    }
+
+  }
+
+  public static final Func_map_from_map_keys e_map_from_map_keys = new Collection.Class_map_from_map_keys();
+  public static final Func_map_from_map_keys t_map_from_map_keys = new Collection.Class_map_from_map_keys();
+
+  public static <N extends Core.Type_map> N f_map_from_map_keys(final N generic_map_1, final N valuemap, final Core.Type_stringlist keys) {
+    N output = Core.f_empty(generic_map_1);
+    output = Collection.vx_map_from_map_keys(generic_map_1, valuemap, keys);
+    return output;
+  }
+
+  /**
+   * @function map_from_map_start
+   * Returns a sub map from start to map end.
+   * @param  {map-1} valuemap
+   * @param  {int} start
+   * @return {map-1}
+   * (func map<-map-start)
+   */
+  public static interface Func_map_from_map_start extends Core.Type_func, Core.Type_replfunc {
+    public <N extends Core.Type_map> N vx_map_from_map_start(final N generic_any_1, final N valuemap, final Core.Type_int start);
+  }
+
+  public static class Class_map_from_map_start extends Core.Class_base implements Func_map_from_map_start {
+
+    @Override
+    public Func_map_from_map_start vx_new(Object... vals) {
+      Class_map_from_map_start output = new Class_map_from_map_start();
+      return output;
+    }
+
+    @Override
+    public Func_map_from_map_start vx_copy(Object... vals) {
+      Class_map_from_map_start output = new Class_map_from_map_start();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/collection", // pkgname
+        "map<-map-start", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "map-1", // name
+          ":map", // extends
+          Core.e_typelist, // traits
+          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_map_from_map_start vx_empty() {return e_map_from_map_start;}
+    @Override
+    public Func_map_from_map_start vx_type() {return t_map_from_map_start;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_map generic_map_1 = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_int start = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(1)));
+      output = Collection.f_map_from_map_start(generic_map_1, valuemap, start);
+      return output;
+    }
+
+    @Override
+    public <N extends Core.Type_map> N vx_map_from_map_start(final N generic_map_1, final N valuemap, final Core.Type_int start) {
+      return Collection.f_map_from_map_start(generic_map_1, valuemap, start);
+    }
+
+  }
+
+  public static final Func_map_from_map_start e_map_from_map_start = new Collection.Class_map_from_map_start();
+  public static final Func_map_from_map_start t_map_from_map_start = new Collection.Class_map_from_map_start();
+
+  public static <N extends Core.Type_map> N f_map_from_map_start(final N generic_map_1, final N valuemap, final Core.Type_int start) {
+    N output = Core.f_empty(generic_map_1);
+    output = Collection.f_map_from_map_start_end(
+      generic_map_1,
+      valuemap,
+      start,
+      Core.f_length_2(valuemap)
+    );
+    return output;
+  }
+
+  /**
+   * @function map_from_map_start_end
+   * Returns a submap from another map using the index of the keylist
+   * @param  {map-1} valuemap
+   * @param  {int} start
+   * @param  {int} end
+   * @return {map-1}
+   * (func map<-map-start-end)
+   */
+  public static interface Func_map_from_map_start_end extends Core.Type_func, Core.Type_replfunc {
+    public <N extends Core.Type_map> N vx_map_from_map_start_end(final N generic_any_1, final N valuemap, final Core.Type_int start, final Core.Type_int end);
+  }
+
+  public static class Class_map_from_map_start_end extends Core.Class_base implements Func_map_from_map_start_end {
+
+    @Override
+    public Func_map_from_map_start_end vx_new(Object... vals) {
+      Class_map_from_map_start_end output = new Class_map_from_map_start_end();
+      return output;
+    }
+
+    @Override
+    public Func_map_from_map_start_end vx_copy(Object... vals) {
+      Class_map_from_map_start_end output = new Class_map_from_map_start_end();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/collection", // pkgname
+        "map<-map-start-end", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "map-1", // name
+          ":map", // extends
+          Core.e_typelist, // traits
+          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_map_from_map_start_end vx_empty() {return e_map_from_map_start_end;}
+    @Override
+    public Func_map_from_map_start_end vx_type() {return t_map_from_map_start_end;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_map generic_map_1 = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_int start = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_int end = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(2)));
+      output = Collection.f_map_from_map_start_end(generic_map_1, valuemap, start, end);
+      return output;
+    }
+
+    @Override
+    public <N extends Core.Type_map> N vx_map_from_map_start_end(final N generic_map_1, final N valuemap, final Core.Type_int start, final Core.Type_int end) {
+      return Collection.f_map_from_map_start_end(generic_map_1, valuemap, start, end);
+    }
+
+  }
+
+  public static final Func_map_from_map_start_end e_map_from_map_start_end = new Collection.Class_map_from_map_start_end();
+  public static final Func_map_from_map_start_end t_map_from_map_start_end = new Collection.Class_map_from_map_start_end();
+
+  public static <N extends Core.Type_map> N f_map_from_map_start_end(final N generic_map_1, final N valuemap, final Core.Type_int start, final Core.Type_int end) {
+    N output = Core.f_empty(generic_map_1);
+    output = Core.f_let(
+      generic_map_1,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_stringlist keys1 = Core.f_stringlist_from_map(valuemap);
+        final Core.Type_stringlist keys2 = Collection.f_list_from_list_start_end(Core.t_stringlist, keys1, start, end);
+        return Collection.f_map_from_map_keys(generic_map_1, valuemap, keys2);
       })
     );
     return output;
@@ -1709,7 +1969,10 @@ public final class Collection {
     mapfunc.put("list<-list-filtertypes", Collection.t_list_from_list_filtertypes);
     mapfunc.put("list<-list-start", Collection.t_list_from_list_start);
     mapfunc.put("list<-list-start-end", Collection.t_list_from_list_start_end);
-    mapfunc.put("stringlist<-map", Collection.t_stringlist_from_map);
+    mapfunc.put("map<-map-end", Collection.t_map_from_map_end);
+    mapfunc.put("map<-map-keys", Collection.t_map_from_map_keys);
+    mapfunc.put("map<-map-start", Collection.t_map_from_map_start);
+    mapfunc.put("map<-map-start-end", Collection.t_map_from_map_start_end);
     Core.vx_global_package_set("vx/collection", maptype, mapconst, mapfunc);
   }
 

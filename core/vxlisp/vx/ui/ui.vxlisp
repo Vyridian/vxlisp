@@ -458,16 +458,18 @@
   layoutelse : layout]
  (let : layout
   [style   : style  := (:style ui)
-   layout  : layout := (layout<-style
-                        style)
+   layout  : layout :=
+    (layout<-style style)
    layname : string := (:name layout)
-   layout1 : layout := (any<-map : layout
-                        layoutmap
-                        layname)
-   layout2 : layout := (if : layout
-                        (!-empty layout1)
-                        layout1
-                        layoutelse)]
+   layout1 : layout :=
+    (any<-map : layout
+     layoutmap
+     layname)
+   layout2 : layout :=
+    (if : layout
+     (!-empty layout1)
+     layout1
+     layoutelse)]
   layout2)
  :doc "Returns a layout from a given ui, layoutmap, and layoutelse")
 
@@ -520,7 +522,7 @@
  [ui : ui]
  (let : stringlist
   [uimap  : uimap  := (:uimap ui)]
-  (coll/stringlist<-map
+  (stringlist<-map
    uimap))
  :doc "Return a list of uid of the ui")
 
@@ -592,7 +594,7 @@
      (string uid "/"))
     (let : ui
      [afterpos : int :=
-       (+ (length<-string uid) 2)
+       (+ (length uid) 2)
       after : string :=
        (type/string<-string-start
         find afterpos)
@@ -863,11 +865,14 @@
   parent   : ui
   selected : int]
  (let : ui
-  [uichg : ui :=
+  [uichg1 : ui :=
     (ui<-ui-selected
-     ui selected)]
+     ui selected)
+   uichg2 : ui :=
+    (ui-writechild<-ui-child
+     parent uichg1)]
   (ui-layout<-ui-orig-parent
-   uichg ui parent))
+   uichg2 ui parent))
  :doc "Return a ui after changing selected item and rendering it.")
 
 (func ui-layout<-ui-parent-visible : ui

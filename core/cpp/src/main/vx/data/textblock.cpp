@@ -3602,7 +3602,7 @@ namespace vx_data_textblock {
           vx_core::t_int,
           vx_core::f_eq(vx_core::vx_new_string(""), text),
           vx_core::vx_new_int(0),
-          vx_type::f_length_from_string(text)
+          vx_core::f_length(text)
         );
         vx_core::vx_ref_plus(endpos);
         vx_data_textblock::Type_textblock output_1 = vx_core::f_copy(
@@ -4532,7 +4532,7 @@ namespace vx_data_textblock {
             ),
             vx_core::f_else(
               vx_core::t_any_from_func->vx_fn_new({starttext}, [starttext]() {
-                vx_core::Type_int output_1 = vx_type::f_length_from_string(starttext);
+                vx_core::Type_int output_1 = vx_core::f_length(starttext);
                 return output_1;
               })
             )
@@ -4700,7 +4700,7 @@ namespace vx_data_textblock {
         vx_core::vx_ref_plus(pos);
         vx_core::Type_string textclose = close->starttext();
         vx_core::vx_ref_plus(textclose);
-        vx_core::Type_int lenclose = vx_type::f_length_from_string(textclose);
+        vx_core::Type_int lenclose = vx_core::f_length(textclose);
         vx_core::vx_ref_plus(lenclose);
         vx_core::Type_int posminus = vx_core::f_minus1(pos);
         vx_core::vx_ref_plus(posminus);
@@ -5038,7 +5038,7 @@ namespace vx_data_textblock {
         vx_core::vx_ref_plus(textclose);
         vx_data_textblock::Type_delimlist delimlistl = open->delimlist();
         vx_core::vx_ref_plus(delimlistl);
-        vx_core::Type_int lenopen = vx_type::f_length_from_string(textopen);
+        vx_core::Type_int lenopen = vx_core::f_length(textopen);
         vx_core::vx_ref_plus(lenopen);
         vx_core::Type_int posminus = vx_core::f_minus1(pos);
         vx_core::vx_ref_plus(posminus);
@@ -5345,7 +5345,7 @@ namespace vx_data_textblock {
                             return output_1;
                           }),
                           vx_core::t_any_from_func->vx_fn_new({text2}, [text2]() {
-                            vx_core::Type_int output_1 = vx_type::f_length_from_string(text2);
+                            vx_core::Type_int output_1 = vx_core::f_length(text2);
                             return output_1;
                           })
                         ),
@@ -5387,7 +5387,7 @@ namespace vx_data_textblock {
         vx_core::vx_ref_plus(textsingle);
         vx_data_textblock::Type_delimlist delimlistl = single->delimlist();
         vx_core::vx_ref_plus(delimlistl);
-        vx_core::Type_int lensingle = vx_type::f_length_from_string(textsingle);
+        vx_core::Type_int lensingle = vx_core::f_length(textsingle);
         vx_core::vx_ref_plus(lensingle);
         vx_core::Type_int posminus = vx_core::f_minus1(pos);
         vx_core::vx_ref_plus(posminus);
@@ -5596,7 +5596,7 @@ namespace vx_data_textblock {
         vx_core::vx_new_string(":startpos"),
         vx_core::vx_new_int(0),
         vx_core::vx_new_string(":endpos"),
-        vx_type::f_length_from_string(text)
+        vx_core::f_length(text)
       })
     );
     vx_core::vx_release_one_except({text, delim}, output);

@@ -677,6 +677,105 @@ namespace vx_web_htmldoc {
 
   //}
 
+  // (func boolean-writeevents<-ui)
+  vx_core::Type_boolean f_boolean_writeevents_from_ui(vx_ui_ui::Type_ui ui) {
+    vx_core::Type_boolean output = vx_core::e_boolean;
+    vx_core::vx_reserve(ui);
+    vx_core::vx_release_one_except(ui, output);
+    return output;
+  }
+  /**
+   * @function boolean_writeevents_from_ui
+   * Writes the eventmap from ui into dom.
+   * @param  {ui} ui
+   * @return {boolean}
+   * (func boolean-writeevents<-ui)
+   */
+  // (func boolean-writeevents<-ui)
+  // class Class_boolean_writeevents_from_ui {
+    Abstract_boolean_writeevents_from_ui::~Abstract_boolean_writeevents_from_ui() {}
+
+    Class_boolean_writeevents_from_ui::Class_boolean_writeevents_from_ui() : Abstract_boolean_writeevents_from_ui::Abstract_boolean_writeevents_from_ui() {
+      vx_core::refcount += 1;
+    }
+
+    Class_boolean_writeevents_from_ui::~Class_boolean_writeevents_from_ui() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_boolean_writeevents_from_ui::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_web_htmldoc::Func_boolean_writeevents_from_ui output = vx_web_htmldoc::e_boolean_writeevents_from_ui;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_writeevents_from_ui::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_web_htmldoc::Func_boolean_writeevents_from_ui output = vx_web_htmldoc::e_boolean_writeevents_from_ui;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_boolean_writeevents_from_ui::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/web/htmldoc", // pkgname
+        "boolean-writeevents<-ui", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_boolean_writeevents_from_ui::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_boolean_writeevents_from_ui::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/web/htmldoc", // pkgname
+        "boolean-writeevents<-ui", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_writeevents_from_ui::vx_empty() const {return vx_web_htmldoc::e_boolean_writeevents_from_ui;}
+    vx_core::Type_any Class_boolean_writeevents_from_ui::vx_type() const {return vx_web_htmldoc::t_boolean_writeevents_from_ui;}
+    vx_core::Type_msgblock Class_boolean_writeevents_from_ui::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_boolean_writeevents_from_ui::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_boolean_writeevents_from_ui::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_boolean_writeevents_from_ui::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_ui_ui::Type_ui inputval = vx_core::vx_any_from_any(vx_ui_ui::t_ui, val);
+      output = vx_web_htmldoc::f_boolean_writeevents_from_ui(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_writeevents_from_ui::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_ui_ui::Type_ui ui = vx_core::vx_any_from_any(vx_ui_ui::t_ui, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_web_htmldoc::f_boolean_writeevents_from_ui(ui);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func context-read)
   vx_core::Type_context f_context_read() {
     vx_core::Type_context output = vx_core::e_context;
@@ -1167,6 +1266,8 @@ namespace vx_web_htmldoc {
   vx_web_htmldoc::Func_boolean_write_from_id_visible t_boolean_write_from_id_visible = NULL;
   vx_web_htmldoc::Func_boolean_write_from_stylesheet e_boolean_write_from_stylesheet = NULL;
   vx_web_htmldoc::Func_boolean_write_from_stylesheet t_boolean_write_from_stylesheet = NULL;
+  vx_web_htmldoc::Func_boolean_writeevents_from_ui e_boolean_writeevents_from_ui = NULL;
+  vx_web_htmldoc::Func_boolean_writeevents_from_ui t_boolean_writeevents_from_ui = NULL;
   vx_web_htmldoc::Func_context_read e_context_read = NULL;
   vx_web_htmldoc::Func_context_read t_context_read = NULL;
   vx_web_htmldoc::Func_context_write e_context_write = NULL;
@@ -1211,6 +1312,10 @@ namespace vx_web_htmldoc {
       vx_core::vx_reserve_empty(vx_web_htmldoc::e_boolean_write_from_stylesheet);
       vx_web_htmldoc::t_boolean_write_from_stylesheet = new vx_web_htmldoc::Class_boolean_write_from_stylesheet();
       vx_core::vx_reserve_type(vx_web_htmldoc::t_boolean_write_from_stylesheet);
+      vx_web_htmldoc::e_boolean_writeevents_from_ui = new vx_web_htmldoc::Class_boolean_writeevents_from_ui();
+      vx_core::vx_reserve_empty(vx_web_htmldoc::e_boolean_writeevents_from_ui);
+      vx_web_htmldoc::t_boolean_writeevents_from_ui = new vx_web_htmldoc::Class_boolean_writeevents_from_ui();
+      vx_core::vx_reserve_type(vx_web_htmldoc::t_boolean_writeevents_from_ui);
       vx_web_htmldoc::e_context_read = new vx_web_htmldoc::Class_context_read();
       vx_core::vx_reserve_empty(vx_web_htmldoc::e_context_read);
       vx_web_htmldoc::t_context_read = new vx_web_htmldoc::Class_context_read();
@@ -1242,6 +1347,7 @@ namespace vx_web_htmldoc {
       mapfunc["boolean-write<-id-htmltext"] = vx_web_htmldoc::t_boolean_write_from_id_htmltext;
       mapfunc["boolean-write<-id-visible"] = vx_web_htmldoc::t_boolean_write_from_id_visible;
       mapfunc["boolean-write<-stylesheet"] = vx_web_htmldoc::t_boolean_write_from_stylesheet;
+      mapfunc["boolean-writeevents<-ui"] = vx_web_htmldoc::t_boolean_writeevents_from_ui;
       mapfunc["context-read"] = vx_web_htmldoc::t_context_read;
       mapfunc["context-write"] = vx_web_htmldoc::t_context_write;
       mapfunc["string<-id"] = vx_web_htmldoc::t_string_from_id;

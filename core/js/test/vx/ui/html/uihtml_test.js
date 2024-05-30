@@ -6,7 +6,6 @@ import vx_test from "../../../../src/vx/test.js"
 import vx_data_file from "../../../../src/vx/data/file.js"
 import vx_web_html from "../../../../src/vx/web/html.js"
 import vx_web_htmldoc from "../../../../src/vx/web/htmldoc.js"
-import vx_event from "../../../../src/vx/event.js"
 import vx_type from "../../../../src/vx/type.js"
 import vx_ui_ui from "../../../../src/vx/ui/ui.js"
 
@@ -30,11 +29,11 @@ export default class vx_ui_html_uihtml_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/ui/html/uihtml", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 7), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 63, ":tests", 19, ":total", 30), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 23), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 60, ":tests", 23, ":total", 38), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 30), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 30), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 37), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     )
   }
@@ -62,11 +61,19 @@ export default class vx_ui_html_uihtml_test {
         vx_core.f_new(
           vx_core.t_intmap,
           "boolean-print-html", 0,
+          "boolean-writeeventsall<-ui", 0,
+          "boolean-writeeventsall<-uimap", 0,
           "context-write", 0,
           "divchild<-ui", 0,
           "divchildlist<-uimap", 0,
+          "divchildlist<-uimap_1", 0,
+          "divchildlist<-uimap-origmap-parent", 0,
           "node-app<-ui-orig-parent", 0,
+          "node-default<-ui-orig-parent", 0,
+          "node-image<-ui-orig-parent", 0,
+          "node-label<-ui-orig-parent", 0,
           "node-layout<-node-ui", 0,
+          "node<-ui-orig-parent", 0,
           "string-style<-font", 0,
           "string-style<-image", 0,
           "string-stylename<-name-styletype", 0,

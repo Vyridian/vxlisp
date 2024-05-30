@@ -2,7 +2,6 @@
  :libs (lib file  :path vx/data/file)
        (lib html  :path vx/web/html)
        (lib doc   :path vx/web/htmldoc)
-       (lib event :path vx/event)
        (lib type  :path vx/type)
        (lib ui    :path vx/ui/ui))
 
@@ -39,18 +38,18 @@
   :stylesheetrender stylesheet-layout-html)
  :doc "Html layout engine used to render html from ui and stylesheet")
 
-(const style-hidden : style
- (style
+(const style-hidden : html/style
+ (html/style
   :name ".style-hidden")
  :doc "")
 
-(const style-selected : style
- (style
+(const style-selected : html/style
+ (html/style
   :name ".style-selected")
  :doc "")
 
 (func boolean-print-html : boolean
- [ui : ui]
+ [ui : ui/ui]
  (let : boolean
   [uid : string := (:uid ui)
    stylesheetui : ui/stylesheet :=
@@ -67,6 +66,33 @@
  :context
  :doc "Create a print ready version of ui")
 
+(func boolean-writeeventsall<-ui : boolean
+ [ui : ui/ui]
+ (let : boolean
+  [uimap : ui/uimap := (:uimap ui)
+   iswrite1 : boolean :=
+    (doc/boolean-writeevents<-ui
+     ui)
+   iswrite2 : boolean :=
+    (boolean-writeeventsall<-uimap
+     uimap)]
+  (and iswrite1 iswrite2))
+ :doc "Write the events for ui and subui to the dom.")
+
+(func boolean-writeeventsall<-uimap : boolean
+ [uimap : ui/uimap]
+ (let : boolean
+  [boollist : booleanlist :=
+    (list<-map : booleanlist
+     uimap
+     (fn : boolean
+      [key : string
+       value : ui/ui]
+      (boolean-writeeventsall<-ui
+       value)))]
+  (and boollist))
+ :doc "Write the events for each ui and subui to the dom.")
+
 (func context-write : context
  (doc/context-write)
  :context
@@ -75,19 +101,19 @@
 (func divchild<-ui : html/divchild
  [ui : ui/ui]
  (let : html/div
-  [uid         : string         := (:uid       ui)
-   uimapchild  : ui/uimap       := (:uimap     ui)
-   uistyle     : ui/style       := (:style     ui)
-   uistyles    : ui/stylelist   := (:stylelist ui)
-   styleunique : html/style     := (style<-style
-                                    uistyle)
-   htmlstyles  : html/stylelist := (stylelist<-stylelist
-                                    uistyles)]
+  [uid        : string       := (:uid       ui)
+   uimapchild : ui/uimap     := (:uimap     ui)
+   uistyle    : ui/style     := (:style     ui)
+   uistyles   : ui/stylelist := (:stylelist ui)
+   styleunique : html/style :=
+    (style<-style uistyle)
+   htmlstyles : html/stylelist :=
+    (stylelist<-stylelist uistyles)]
   (html/div
    :id uid
    :style-unique styleunique
    :stylelist htmlstyles))
- :doc "Returns a divchildlist of empty divs from a uimap")
+ :doc "Returns a divchild from a ui")
 
 (func divchildlist<-uimap : html/divchildlist
  [uimap : ui/uimap]
@@ -100,13 +126,151 @@
     [uid : string := (:uid value)]
     (html/div
      :id uid))))
- :doc "Returns a divchildlist of empty divs from a uimap")
+ :doc "Returns a divchildlist of divs from a uimap")
+
+(func divchildlist<-uimap : html/divchildlist
+ [uimap : ui/uimap]
+ (list<-map : html/divchildlist
+  uimap
+  (fn : html/div
+   [key   : string
+    value : ui/ui]
+   (let : html/div
+    [uid : string := (:uid value)]
+    (html/div
+     :id uid))))
+ :doc "Returns a divchildlist of divs from a uimap")
+
+(func divchildlist<-uimap-origmap-parent : html/divchildlist
+ [uimap   : ui/uimap
+  origmap : ui/uimap
+  parent  : ui/ui]
+ (list<-map : html/divchildlist
+  uimap
+  (fn : html/node
+   [key   : string
+    value : ui/ui]
+   (let : html/node
+    [origvalue : ui/ui :=
+      (any<-map : ui/ui
+       origmap key)]
+    (node<-ui-orig-parent
+     value origvalue parent))))
+ :doc "Returns a divchildlist of divs from a uimap")
+
+(func node<-ui-orig-parent : html/node
+ [ui     : ui
+  orig   : ui
+  parent : ui]
+ (let : html/node
+  [style  : ui/style  := (:style ui)
+   layout : ui/layout := (:layout style)]
+  (switch : html/node
+   layout
+   (case ui/layout-image
+    (node-image<-ui-orig-parent
+     ui orig parent))
+   (case ui/layout-label
+    (node-label<-ui-orig-parent
+     ui orig parent))
+   (else
+    (node-default<-ui-orig-parent
+     ui orig parent))))
+ :doc "")
 
 (func node-app<-ui-orig-parent : html/node
  [ui     : ui
   orig   : ui
   parent : ui]
- (html/div))
+ (let : html/node
+  [uid     : string   := (:uid   ui)
+   uimap   : ui/uimap := (:uimap ui)
+   origmap : ui/uimap := (:uimap orig)
+   children : html/divchildlist :=
+    (divchildlist<-uimap-origmap-parent
+     uimap origmap ui)]
+  (html/div
+   :id uid
+   :nodes children))
+ :doc "")
+
+(func node-default<-ui-orig-parent : html/node
+ [ui     : ui
+  orig   : ui
+  parent : ui]
+ (let : html/node
+  [uid     : string   := (:uid   ui)
+   uimap   : ui/uimap := (:uimap ui)
+   uistyle : ui/style := (:style ui)
+   origmap : ui/uimap := (:uimap orig)
+   style : html/style :=
+    (style<-style uistyle)
+   styles : html/stylelist :=
+    (stylelist-extra<-ui ui)
+   children : html/divchildlist :=
+    (divchildlist<-uimap-origmap-parent
+     uimap origmap ui)]
+  (html/div
+   :id uid
+   :style-unique style
+   :stylelist styles
+   :nodes children))
+ :doc "")
+
+(func node-image<-ui-orig-parent : html/node
+ [ui     : ui
+  orig   : ui
+  parent : ui]
+ (let : html/node
+  [uid     : string   := (:uid   ui)
+   uistyle : ui/style := (:style ui)
+   data    : any      := (:data  ui)
+   file : file/file :=
+    (any<-any : file/file
+     data)
+   path : string :=
+    (file/pathfull<-file file)
+   style : html/style :=
+    (style<-style uistyle)
+   styles : html/stylelist :=
+    (stylelist-extra<-ui ui)]
+  (html/img
+   :id uid
+   :style-unique style
+   :stylelist styles
+   :src path))
+ :doc "")
+
+(func node-label<-ui-orig-parent : html/node
+ [ui     : ui
+  orig   : ui
+  parent : ui]
+ (let : html/node
+  [uid      : string       := (:uid       ui)
+   data     : any          := (:data      ui)
+   uimap    : ui/uimap     := (:uimap     ui)
+   uistyle  : ui/style     := (:style     ui)
+   uistyles : ui/stylelist := (:stylelist ui)
+   datatype : any :=
+    (type<-any data)
+   style : html/style :=
+    (style<-style uistyle)
+   styles : html/stylelist :=
+    (stylelist<-stylelist uistyles)
+   text : string :=
+    (if : string
+     (then
+      (== datatype string)
+      (any<-any : string
+       data))
+     (else
+      (string<-any data)))]
+  (html/p
+   :id uid
+   :style-unique style
+   :stylelist styles
+   :text text))
+ :doc "")
 
 (func node-layout<-node-ui : html/node
  [node : html/node
@@ -125,9 +289,9 @@
 (func string-style<-font : string
  [font : ui/font]
  (let : string
-  [face  : ui/fontface := (:fontface font)
-   size  : int         := (:fontsize font)
-   name  : string      := (:name face)
+  [face : ui/fontface := (:fontface font)
+   size : int         := (:fontsize font)
+   name : string      := (:name face)
    ssize : string :=
     (if : string
      (then
@@ -224,29 +388,29 @@
    (empty html/style))
   (else
    (let : html/style
-    [layout           : ui/layout    := (:layout           uistyle)
-     name             : string       := (:name             uistyle)
-     font             : ui/font      := (:font             uistyle)
-     pin              : ui/pin       := (:pin              uistyle)
-     pointpos         : ui/point     := (:pointpos         uistyle)
-     pointsize        : ui/point     := (:pointsize        uistyle)
-     pointrotate      : ui/point     := (:pointrotate      uistyle)
-     styletype        : ui/styletype := (:type             uistyle)
-     color-bkg        : string       := (:color-background uistyle)
-     color-border     : string       := (:color-border     uistyle)
-     color-font       : string       := (:color-font       uistyle)
-     color-hoverbkg   : string       := (:color-hoverbkgrd uistyle)
-     cursor           : ui/cursor    := (:cursor           uistyle)
-     hidden           : boolean      := (:hidden           uistyle)
-     align            : ui/align     := (:align            uistyle)
-     scroll-x         : boolean      := (:scroll-x         uistyle)
-     scroll-y         : boolean      := (:scroll-y         uistyle)
-     posx             : int          := (:x pointpos)
-     posy             : int          := (:y pointpos)
-     postype          : ui/pointtype := (:pointtype pointpos)
-     sizex            : int          := (:x pointsize)
-     sizey            : int          := (:y pointsize)
-     sizetype         : ui/pointtype := (:pointtype pointsize)
+    [layout         : ui/layout    := (:layout           uistyle)
+     name           : string       := (:name             uistyle)
+     font           : ui/font      := (:font             uistyle)
+     pin            : ui/pin       := (:pin              uistyle)
+     pointpos       : ui/point     := (:pointpos         uistyle)
+     pointsize      : ui/point     := (:pointsize        uistyle)
+     pointrotate    : ui/point     := (:pointrotate      uistyle)
+     styletype      : ui/styletype := (:type             uistyle)
+     color-bkg      : string       := (:color-background uistyle)
+     color-border   : string       := (:color-border     uistyle)
+     color-font     : string       := (:color-font       uistyle)
+     color-hoverbkg : string       := (:color-hoverbkgrd uistyle)
+     cursor         : ui/cursor    := (:cursor           uistyle)
+     hidden         : boolean      := (:hidden           uistyle)
+     align          : ui/align     := (:align            uistyle)
+     scroll-x       : boolean      := (:scroll-x         uistyle)
+     scroll-y       : boolean      := (:scroll-y         uistyle)
+     posx           : int          := (:x pointpos)
+     posy           : int          := (:y pointpos)
+     postype        : ui/pointtype := (:pointtype pointpos)
+     sizex          : int          := (:x pointsize)
+     sizey          : int          := (:y pointsize)
+     sizetype       : ui/pointtype := (:pointtype pointsize)
      stylename : string :=
       (string-stylename<-name-styletype
        name
@@ -328,16 +492,12 @@
         "")
        (then
         (== pin ui/pin-bottom)
-        (string
-         posx
-         "mm"))
+        (string posx "mm"))
        (then
         (== 0 posx)
         "")
        (else
-        (string
-         posx
-         "mm")))
+        (string posx "mm")))
      right : string :=
       (if : string
        (then
@@ -634,25 +794,15 @@
   orig   : ui
   parent : ui]
  (let : ui/ui
-  [uid   : string   := (:uid   ui)
-   uimap : ui/uimap := (:uimap ui)
-   children : html/divchildlist :=
-    (divchildlist<-uimap
-     uimap)
-   node : html/node :=
-    (html/div
-     :id uid
-     :nodes children)
+  [node : html/node :=
+    (node-app<-ui-orig-parent
+     ui orig parent)
    nodechg : html/node :=
     (node-layout<-node-ui
-     node
-     ui)
-   uimapchg : ui/uimap :=
-    (ui/uimap-layout<-uimap-parent
-     uimap
-     ui)]
-  (ui/ui
-   :uimap uimapchg))
+     node ui)
+   iswrite : boolean :=
+    (boolean-writeeventsall<-ui ui)]
+  ui)
  :doc "")
 
 (func ui-layout-default<-ui-orig-parent : ui/ui
@@ -660,33 +810,16 @@
   orig   : ui
   parent : ui]
  (let : ui/ui
-  [uid     : string   := (:uid   ui)
-   uimap   : ui/uimap := (:uimap ui)
-   uistyle : ui/style := (:style ui)
-   style : html/style :=
-    (style<-style
-     uistyle)
-   styles   : html/stylelist :=
-    (stylelist-extra<-ui ui)
-   children : html/divchildlist :=
-    (divchildlist<-uimap
-     uimap)
+  [uimap : ui/uimap := (:uimap ui)
    node : html/node :=
-    (html/div
-     :id uid
-     :style-unique style
-     :stylelist styles
-     :nodes children)
+    (node-default<-ui-orig-parent
+     ui orig parent)
    nodechg : html/node :=
     (node-layout<-node-ui
-     node
-     ui)
-   uimapchg : ui/uimap :=
-    (ui/uimap-layout<-uimap-parent
-     uimap
-     ui)]
-  (ui/ui
-   :uimap uimapchg))
+     node ui)
+   iswrite : boolean :=
+    (boolean-writeeventsall<-ui ui)]
+  ui)
  :doc "")
 
 (func ui-layout-image<-ui-orig-parent : ui/ui
@@ -694,29 +827,14 @@
   orig   : ui
   parent : ui]
  (let : ui/ui
-  [uid     : string   := (:uid   ui)
-   uistyle : ui/style := (:style ui)
-   data    : any      := (:data  ui)
-   file : file/file :=
-    (any<-any : file/file
-     data)
-   path : string :=
-    (file/pathfull<-file file)
-   style : html/style :=
-    (style<-style
-     uistyle)
-   styles : html/stylelist :=
-    (stylelist-extra<-ui ui)
-   node : html/node :=
-    (html/img
-     :id uid
-     :style-unique style
-     :stylelist styles
-     :src path)
+  [node : html/node :=
+    (node-image<-ui-orig-parent
+     ui orig parent)
    nodechg : html/node :=
     (node-layout<-node-ui
-     node
-     ui)]
+     node ui)
+   iswrite : boolean :=
+    (boolean-writeeventsall<-ui ui)]
   ui)
  :doc "")
 
@@ -725,41 +843,14 @@
   orig   : ui
   parent : ui]
  (let : ui/ui
-  [uid      : string       := (:uid       ui)
-   data     : any          := (:data      ui)
-   uimap    : ui/uimap     := (:uimap     ui)
-   uistyle  : ui/style     := (:style     ui)
-   uistyles : ui/stylelist := (:stylelist ui)
-   datatype : any          := (type<-any data)
-   style : html/style :=
-    (style<-style
-     uistyle)
-   styles : html/stylelist :=
-    (stylelist<-stylelist
-     uistyles)
-   text : string :=
-    (if : string
-     (then
-      (== datatype string)
-      (any<-any : string
-       data))
-     (else
-      (string<-any
-       data)))
+  [uimap : ui/uimap := (:uimap ui)
    node : html/node :=
-    (html/p
-     :id uid
-     :style-unique style
-     :stylelist styles
-     :text text)
+    (node-label<-ui-orig-parent
+     ui orig parent)
    nodechg : html/node :=
     (node-layout<-node-ui
-     node
-     ui)
-   uimapchg : ui/uimap :=
-    (ui/uimap-layout<-uimap-parent
-     uimap
-     ui)]
-  (ui/ui
-   :uimap uimapchg))
+     node ui)
+   iswrite : boolean :=
+    (boolean-writeeventsall<-ui ui)]
+  ui)
  :doc "")

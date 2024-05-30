@@ -165,25 +165,6 @@
          (typelist string int)))
  :doc "Returns true if val is any type in typelist.")
 
-(func length<-string : int
- [text : string]
- (native
-  :cpp
-   "long len = text->vx_string().length();
-    output = vx_core::vx_new_int(len);"
-  :js
-   "text.length"
-  :java
-   "int len = text.vx_string().length();
-    output = Core.vx_new_int(len);")
- :test (test
-        4
-        (length<-string "abcd"))
-       (test
-        0
-        (length<-string ""))
- :doc "Returns length of a string.")
-
 (func string<-int : string
  [val : int]
  (switch val : string
@@ -230,7 +211,8 @@
 (func string<-string-start : string
  [text     : string
   startpos : int]
- (string<-string-start-end text startpos (length<-string text))
+ (string<-string-start-end
+  text startpos (length text))
  :test (test
         "abcd"
         (string<-string-start

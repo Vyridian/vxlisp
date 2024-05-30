@@ -822,7 +822,7 @@ export default class vx_data_textblock {
           {"any-1": vx_core.t_int},
           vx_core.f_eq("", text),
           0,
-          vx_type.f_length_from_string(text)
+          vx_core.f_length(text)
         )
         return vx_core.f_copy(
           textblockarg,
@@ -1141,7 +1141,7 @@ export default class vx_data_textblock {
           vx_core.f_case_1(":nonwhitespace", vx_core.f_new(vx_core.t_any_from_func, () => {return 0})),
           vx_core.f_case_1(":whitespace", vx_core.f_new(vx_core.t_any_from_func, () => {return 0})),
           vx_core.f_else(
-            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_type.f_length_from_string(starttext)})
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_length(starttext)})
           )
         )
         const curpos = 0
@@ -1207,7 +1207,7 @@ export default class vx_data_textblock {
         const endpos = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_data_textblock.t_textblock}, textblockarg, ":endpos")
         const pos = vx_core.f_any_from_struct({"any-1": vx_core.t_int, "struct-2": vx_data_textblock.t_delim}, close, ":pos")
         const textclose = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, close, ":starttext")
-        const lenclose = vx_type.f_length_from_string(textclose)
+        const lenclose = vx_core.f_length(textclose)
         const posminus = vx_core.f_minus1(pos)
         const startleft = startpos
         const startclose = vx_core.f_plus(startpos, posminus)
@@ -1342,7 +1342,7 @@ export default class vx_data_textblock {
         const textopen = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, open, ":starttext")
         const textclose = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_data_textblock.t_delim}, open, ":endtext")
         const delimlistl = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_delimlist, "struct-2": vx_data_textblock.t_delim}, open, ":delimlist")
-        const lenopen = vx_type.f_length_from_string(textopen)
+        const lenopen = vx_core.f_length(textopen)
         const posminus = vx_core.f_minus1(pos)
         const startleft = vx_core.f_if_1(
           {"any-1": vx_core.t_int},
@@ -1497,7 +1497,7 @@ export default class vx_data_textblock {
                   {"any-1": vx_core.t_int},
                   vx_core.f_then(
                     vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq(0, pos2)}),
-                    vx_core.f_new(vx_core.t_any_from_func, () => {return vx_type.f_length_from_string(text2)})
+                    vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_length(text2)})
                   ),
                   vx_core.f_then(
                     vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq(pos2, pos)}),
@@ -1514,7 +1514,7 @@ export default class vx_data_textblock {
           vx_core.f_else(vx_core.f_new(vx_core.t_any_from_func, () => {return origsingle}))
         )
         const delimlistl = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_delimlist, "struct-2": vx_data_textblock.t_delim}, single, ":delimlist")
-        const lensingle = vx_type.f_length_from_string(textsingle)
+        const lensingle = vx_core.f_length(textsingle)
         const posminus = vx_core.f_minus1(pos)
         const startleft = startpos
         const startsingle = vx_core.f_plus(startpos, posminus)
@@ -1613,7 +1613,7 @@ export default class vx_data_textblock {
       ":startpos",
       0,
       ":endpos",
-      vx_type.f_length_from_string(text)
+      vx_core.f_length(text)
     )
     return output
   }

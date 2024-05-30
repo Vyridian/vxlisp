@@ -605,6 +605,96 @@ public final class Htmldoc {
   }
 
   /**
+   * @function boolean_writeevents_from_ui
+   * Writes the eventmap from ui into dom.
+   * @param  {ui} ui
+   * @return {boolean}
+   * (func boolean-writeevents<-ui)
+   */
+  public static interface Func_boolean_writeevents_from_ui extends Core.Func_any_from_any {
+    public Core.Type_boolean vx_boolean_writeevents_from_ui(final Ui.Type_ui ui);
+  }
+
+  public static class Class_boolean_writeevents_from_ui extends Core.Class_base implements Func_boolean_writeevents_from_ui {
+
+    @Override
+    public Func_boolean_writeevents_from_ui vx_new(Object... vals) {
+      Class_boolean_writeevents_from_ui output = new Class_boolean_writeevents_from_ui();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_writeevents_from_ui vx_copy(Object... vals) {
+      Class_boolean_writeevents_from_ui output = new Class_boolean_writeevents_from_ui();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/web/htmldoc", // pkgname
+        "boolean-writeevents<-ui", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_writeevents_from_ui vx_empty() {return e_boolean_writeevents_from_ui;}
+    @Override
+    public Func_boolean_writeevents_from_ui vx_type() {return t_boolean_writeevents_from_ui;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Ui.Type_ui inputval = (Ui.Type_ui)value;
+      Core.Type_any outputval = Htmldoc.f_boolean_writeevents_from_ui(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      output = Htmldoc.f_boolean_writeevents_from_ui(ui);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean vx_boolean_writeevents_from_ui(final Ui.Type_ui ui) {
+      return Htmldoc.f_boolean_writeevents_from_ui(ui);
+    }
+
+  }
+
+  public static final Func_boolean_writeevents_from_ui e_boolean_writeevents_from_ui = new Htmldoc.Class_boolean_writeevents_from_ui();
+  public static final Func_boolean_writeevents_from_ui t_boolean_writeevents_from_ui = new Htmldoc.Class_boolean_writeevents_from_ui();
+
+  public static Core.Type_boolean f_boolean_writeevents_from_ui(final Ui.Type_ui ui) {
+    Core.Type_boolean output = Core.e_boolean;
+    return output;
+  }
+
+  /**
    * @function context_read
    * Reads context from document.data.context
    * @return {context}
@@ -1047,6 +1137,7 @@ public final class Htmldoc {
     mapfunc.put("boolean-write<-id-htmltext", Htmldoc.t_boolean_write_from_id_htmltext);
     mapfunc.put("boolean-write<-id-visible", Htmldoc.t_boolean_write_from_id_visible);
     mapfunc.put("boolean-write<-stylesheet", Htmldoc.t_boolean_write_from_stylesheet);
+    mapfunc.put("boolean-writeevents<-ui", Htmldoc.t_boolean_writeevents_from_ui);
     mapfunc.put("context-read", Htmldoc.t_context_read);
     mapfunc.put("context-write", Htmldoc.t_context_write);
     mapfunc.put("string<-id", Htmldoc.t_string_from_id);

@@ -44,7 +44,7 @@ public final class Uihtml {
         Ui.c_layout_app,
         Core.t_anylist.vx_new(
                 Core.vx_new_string(":fn-layout"),
-                Uihtml.t_ui_render_app_from_ui_orig_parent
+                Uihtml.t_ui_layout_app_from_ui_orig_parent
         )
       );
       output.vx_p_name = val.name();
@@ -90,7 +90,7 @@ public final class Uihtml {
         Ui.c_layout_else,
         Core.t_anylist.vx_new(
                 Core.vx_new_string(":fn-layout"),
-                Uihtml.t_ui_render_default_from_ui_orig_parent
+                Uihtml.t_ui_layout_default_from_ui_orig_parent
         )
       );
       output.vx_p_name = val.name();
@@ -136,7 +136,7 @@ public final class Uihtml {
         Ui.c_layout_image,
         Core.t_anylist.vx_new(
                 Core.vx_new_string(":fn-layout"),
-                Uihtml.t_ui_render_image_from_ui_orig_parent
+                Uihtml.t_ui_layout_image_from_ui_orig_parent
         )
       );
       output.vx_p_name = val.name();
@@ -182,7 +182,7 @@ public final class Uihtml {
         Ui.c_layout_label,
         Core.t_anylist.vx_new(
                 Core.vx_new_string(":fn-layout"),
-                Uihtml.t_ui_render_label_from_ui_orig_parent
+                Uihtml.t_ui_layout_label_from_ui_orig_parent
         )
       );
       output.vx_p_name = val.name();
@@ -243,7 +243,7 @@ public final class Uihtml {
                 Core.vx_new_string(":boolean-print"),
                 Uihtml.t_boolean_print_html,
                 Core.vx_new_string(":stylesheetrender"),
-                Uihtml.t_stylesheet_render_html
+                Uihtml.t_stylesheet_layout_html
         )
       );
       output.vx_p_name = val.name();
@@ -452,6 +452,211 @@ public final class Uihtml {
   }
 
   /**
+   * @function boolean_writeeventsall_from_ui
+   * Write the events for ui and subui to the dom.
+   * @param  {ui} ui
+   * @return {boolean}
+   * (func boolean-writeeventsall<-ui)
+   */
+  public static interface Func_boolean_writeeventsall_from_ui extends Core.Func_any_from_any {
+    public Core.Type_boolean vx_boolean_writeeventsall_from_ui(final Ui.Type_ui ui);
+  }
+
+  public static class Class_boolean_writeeventsall_from_ui extends Core.Class_base implements Func_boolean_writeeventsall_from_ui {
+
+    @Override
+    public Func_boolean_writeeventsall_from_ui vx_new(Object... vals) {
+      Class_boolean_writeeventsall_from_ui output = new Class_boolean_writeeventsall_from_ui();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_writeeventsall_from_ui vx_copy(Object... vals) {
+      Class_boolean_writeeventsall_from_ui output = new Class_boolean_writeeventsall_from_ui();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "boolean-writeeventsall<-ui", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_writeeventsall_from_ui vx_empty() {return e_boolean_writeeventsall_from_ui;}
+    @Override
+    public Func_boolean_writeeventsall_from_ui vx_type() {return t_boolean_writeeventsall_from_ui;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Ui.Type_ui inputval = (Ui.Type_ui)value;
+      Core.Type_any outputval = Uihtml.f_boolean_writeeventsall_from_ui(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      output = Uihtml.f_boolean_writeeventsall_from_ui(ui);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean vx_boolean_writeeventsall_from_ui(final Ui.Type_ui ui) {
+      return Uihtml.f_boolean_writeeventsall_from_ui(ui);
+    }
+
+  }
+
+  public static final Func_boolean_writeeventsall_from_ui e_boolean_writeeventsall_from_ui = new Uihtml.Class_boolean_writeeventsall_from_ui();
+  public static final Func_boolean_writeeventsall_from_ui t_boolean_writeeventsall_from_ui = new Uihtml.Class_boolean_writeeventsall_from_ui();
+
+  public static Core.Type_boolean f_boolean_writeeventsall_from_ui(final Ui.Type_ui ui) {
+    Core.Type_boolean output = Core.e_boolean;
+    output = Core.f_let(
+      Core.t_boolean,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Ui.Type_uimap uimap = ui.uimap();
+        final Core.Type_boolean iswrite1 = Htmldoc.f_boolean_writeevents_from_ui(ui);
+        final Core.Type_boolean iswrite2 = Uihtml.f_boolean_writeeventsall_from_uimap(uimap);
+        return Core.f_and(iswrite1, iswrite2);
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function boolean_writeeventsall_from_uimap
+   * Write the events for each ui and subui to the dom.
+   * @param  {uimap} uimap
+   * @return {boolean}
+   * (func boolean-writeeventsall<-uimap)
+   */
+  public static interface Func_boolean_writeeventsall_from_uimap extends Core.Func_any_from_any {
+    public Core.Type_boolean vx_boolean_writeeventsall_from_uimap(final Ui.Type_uimap uimap);
+  }
+
+  public static class Class_boolean_writeeventsall_from_uimap extends Core.Class_base implements Func_boolean_writeeventsall_from_uimap {
+
+    @Override
+    public Func_boolean_writeeventsall_from_uimap vx_new(Object... vals) {
+      Class_boolean_writeeventsall_from_uimap output = new Class_boolean_writeeventsall_from_uimap();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_writeeventsall_from_uimap vx_copy(Object... vals) {
+      Class_boolean_writeeventsall_from_uimap output = new Class_boolean_writeeventsall_from_uimap();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "boolean-writeeventsall<-uimap", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_writeeventsall_from_uimap vx_empty() {return e_boolean_writeeventsall_from_uimap;}
+    @Override
+    public Func_boolean_writeeventsall_from_uimap vx_type() {return t_boolean_writeeventsall_from_uimap;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Ui.Type_uimap inputval = (Ui.Type_uimap)value;
+      Core.Type_any outputval = Uihtml.f_boolean_writeeventsall_from_uimap(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_uimap uimap = Core.f_any_from_any(Ui.t_uimap, arglist.vx_any(Core.vx_new_int(0)));
+      output = Uihtml.f_boolean_writeeventsall_from_uimap(uimap);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean vx_boolean_writeeventsall_from_uimap(final Ui.Type_uimap uimap) {
+      return Uihtml.f_boolean_writeeventsall_from_uimap(uimap);
+    }
+
+  }
+
+  public static final Func_boolean_writeeventsall_from_uimap e_boolean_writeeventsall_from_uimap = new Uihtml.Class_boolean_writeeventsall_from_uimap();
+  public static final Func_boolean_writeeventsall_from_uimap t_boolean_writeeventsall_from_uimap = new Uihtml.Class_boolean_writeeventsall_from_uimap();
+
+  public static Core.Type_boolean f_boolean_writeeventsall_from_uimap(final Ui.Type_uimap uimap) {
+    Core.Type_boolean output = Core.e_boolean;
+    output = Core.f_let(
+      Core.t_boolean,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_booleanlist boollist = Core.f_list_from_map_1(
+          Core.t_booleanlist,
+          uimap,
+          Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
+            Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
+            Ui.Type_ui value = Core.f_any_from_any(Ui.t_ui, value_any);
+            return 
+              Uihtml.f_boolean_writeeventsall_from_ui(value);
+          })
+        );
+        return Core.f_and_1(boollist);
+      })
+    );
+    return output;
+  }
+
+  /**
    * @function context_write
    * @return {context}
    * (func context-write)
@@ -530,7 +735,7 @@ public final class Uihtml {
 
   /**
    * @function divchild_from_ui
-   * Returns a divchildlist of empty divs from a uimap
+   * Returns a divchild from a ui
    * @param  {ui} ui
    * @return {divchild}
    * (func divchild<-ui)
@@ -642,7 +847,7 @@ public final class Uihtml {
 
   /**
    * @function divchildlist_from_uimap
-   * Returns a divchildlist of empty divs from a uimap
+   * Returns a divchildlist of divs from a uimap
    * @param  {uimap} uimap
    * @return {divchildlist}
    * (func divchildlist<-uimap)
@@ -753,6 +958,216 @@ public final class Uihtml {
   }
 
   /**
+   * @function divchildlist_from_uimap 1
+   * Returns a divchildlist of divs from a uimap
+   * @param  {uimap} uimap
+   * @return {divchildlist}
+   * (func divchildlist<-uimap)
+   */
+  public static interface Func_divchildlist_from_uimap_1 extends Core.Func_any_from_any {
+    public Html.Type_divchildlist vx_divchildlist_from_uimap_1(final Ui.Type_uimap uimap);
+  }
+
+  public static class Class_divchildlist_from_uimap_1 extends Core.Class_base implements Func_divchildlist_from_uimap_1 {
+
+    @Override
+    public Func_divchildlist_from_uimap_1 vx_new(Object... vals) {
+      Class_divchildlist_from_uimap_1 output = new Class_divchildlist_from_uimap_1();
+      return output;
+    }
+
+    @Override
+    public Func_divchildlist_from_uimap_1 vx_copy(Object... vals) {
+      Class_divchildlist_from_uimap_1 output = new Class_divchildlist_from_uimap_1();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "divchildlist<-uimap", // name
+        1, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/web/html", // pkgname
+          "divchildlist", // name
+          ":list", // extends
+          Core.e_typelist, // traits
+          Core.t_typelist.vx_new(Html.t_divchild), // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_divchildlist_from_uimap_1 vx_empty() {return e_divchildlist_from_uimap_1;}
+    @Override
+    public Func_divchildlist_from_uimap_1 vx_type() {return t_divchildlist_from_uimap_1;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Ui.Type_uimap inputval = (Ui.Type_uimap)value;
+      Core.Type_any outputval = Uihtml.f_divchildlist_from_uimap_1(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_uimap uimap = Core.f_any_from_any(Ui.t_uimap, arglist.vx_any(Core.vx_new_int(0)));
+      output = Uihtml.f_divchildlist_from_uimap_1(uimap);
+      return output;
+    }
+
+    @Override
+    public Html.Type_divchildlist vx_divchildlist_from_uimap_1(final Ui.Type_uimap uimap) {
+      return Uihtml.f_divchildlist_from_uimap_1(uimap);
+    }
+
+  }
+
+  public static final Func_divchildlist_from_uimap_1 e_divchildlist_from_uimap_1 = new Uihtml.Class_divchildlist_from_uimap_1();
+  public static final Func_divchildlist_from_uimap_1 t_divchildlist_from_uimap_1 = new Uihtml.Class_divchildlist_from_uimap_1();
+
+  public static Html.Type_divchildlist f_divchildlist_from_uimap_1(final Ui.Type_uimap uimap) {
+    Html.Type_divchildlist output = Html.e_divchildlist;
+    output = Core.f_list_from_map_1(
+      Html.t_divchildlist,
+      uimap,
+      Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
+        Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
+        Ui.Type_ui value = Core.f_any_from_any(Ui.t_ui, value_any);
+        return 
+        Core.f_let(
+          Html.t_div,
+          Core.t_any_from_func.vx_fn_new(() -> {
+            final Core.Type_string uid = value.uid();
+            return Core.f_new(
+              Html.t_div,
+              Core.t_anylist.vx_new(
+                Core.vx_new_string(":id"),
+                uid
+              )
+            );
+          })
+        );
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function divchildlist_from_uimap_origmap_parent
+   * Returns a divchildlist of divs from a uimap
+   * @param  {uimap} uimap
+   * @param  {uimap} origmap
+   * @param  {ui} parent
+   * @return {divchildlist}
+   * (func divchildlist<-uimap-origmap-parent)
+   */
+  public static interface Func_divchildlist_from_uimap_origmap_parent extends Core.Type_func, Core.Type_replfunc {
+    public Html.Type_divchildlist vx_divchildlist_from_uimap_origmap_parent(final Ui.Type_uimap uimap, final Ui.Type_uimap origmap, final Ui.Type_ui parent);
+  }
+
+  public static class Class_divchildlist_from_uimap_origmap_parent extends Core.Class_base implements Func_divchildlist_from_uimap_origmap_parent {
+
+    @Override
+    public Func_divchildlist_from_uimap_origmap_parent vx_new(Object... vals) {
+      Class_divchildlist_from_uimap_origmap_parent output = new Class_divchildlist_from_uimap_origmap_parent();
+      return output;
+    }
+
+    @Override
+    public Func_divchildlist_from_uimap_origmap_parent vx_copy(Object... vals) {
+      Class_divchildlist_from_uimap_origmap_parent output = new Class_divchildlist_from_uimap_origmap_parent();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "divchildlist<-uimap-origmap-parent", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/web/html", // pkgname
+          "divchildlist", // name
+          ":list", // extends
+          Core.e_typelist, // traits
+          Core.t_typelist.vx_new(Html.t_divchild), // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_divchildlist_from_uimap_origmap_parent vx_empty() {return e_divchildlist_from_uimap_origmap_parent;}
+    @Override
+    public Func_divchildlist_from_uimap_origmap_parent vx_type() {return t_divchildlist_from_uimap_origmap_parent;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_uimap uimap = Core.f_any_from_any(Ui.t_uimap, arglist.vx_any(Core.vx_new_int(0)));
+      Ui.Type_uimap origmap = Core.f_any_from_any(Ui.t_uimap, arglist.vx_any(Core.vx_new_int(1)));
+      Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(2)));
+      output = Uihtml.f_divchildlist_from_uimap_origmap_parent(uimap, origmap, parent);
+      return output;
+    }
+
+    @Override
+    public Html.Type_divchildlist vx_divchildlist_from_uimap_origmap_parent(final Ui.Type_uimap uimap, final Ui.Type_uimap origmap, final Ui.Type_ui parent) {
+      return Uihtml.f_divchildlist_from_uimap_origmap_parent(uimap, origmap, parent);
+    }
+
+  }
+
+  public static final Func_divchildlist_from_uimap_origmap_parent e_divchildlist_from_uimap_origmap_parent = new Uihtml.Class_divchildlist_from_uimap_origmap_parent();
+  public static final Func_divchildlist_from_uimap_origmap_parent t_divchildlist_from_uimap_origmap_parent = new Uihtml.Class_divchildlist_from_uimap_origmap_parent();
+
+  public static Html.Type_divchildlist f_divchildlist_from_uimap_origmap_parent(final Ui.Type_uimap uimap, final Ui.Type_uimap origmap, final Ui.Type_ui parent) {
+    Html.Type_divchildlist output = Html.e_divchildlist;
+    output = Core.f_list_from_map_1(
+      Html.t_divchildlist,
+      uimap,
+      Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
+        Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
+        Ui.Type_ui value = Core.f_any_from_any(Ui.t_ui, value_any);
+        return 
+        Core.f_let(
+          Html.t_node,
+          Core.t_any_from_func.vx_fn_new(() -> {
+            final Ui.Type_ui origvalue = Core.f_any_from_map(Ui.t_ui, origmap, key);
+            return Uihtml.f_node_from_ui_orig_parent(value, origvalue, parent);
+          })
+        );
+      })
+    );
+    return output;
+  }
+
+  /**
    * @function node_app_from_ui_orig_parent
    * @param  {ui} ui
    * @param  {ui} orig
@@ -830,34 +1245,50 @@ public final class Uihtml {
 
   public static Html.Type_node f_node_app_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
     Html.Type_node output = Html.e_node;
-    output = Core.f_empty(
-      Html.t_div
+    output = Core.f_let(
+      Html.t_node,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_string uid = ui.uid();
+        final Ui.Type_uimap uimap = ui.uimap();
+        final Ui.Type_uimap origmap = orig.uimap();
+        final Html.Type_divchildlist children = Uihtml.f_divchildlist_from_uimap_origmap_parent(uimap, origmap, ui);
+        return Core.f_new(
+          Html.t_div,
+          Core.t_anylist.vx_new(
+            Core.vx_new_string(":id"),
+            uid,
+            Core.vx_new_string(":nodes"),
+            children
+          )
+        );
+      })
     );
     return output;
   }
 
   /**
-   * @function node_render_from_node_ui
-   * @param  {node} node
+   * @function node_default_from_ui_orig_parent
    * @param  {ui} ui
+   * @param  {ui} orig
+   * @param  {ui} parent
    * @return {node}
-   * (func node-render<-node-ui)
+   * (func node-default<-ui-orig-parent)
    */
-  public static interface Func_node_render_from_node_ui extends Core.Type_func, Core.Type_replfunc {
-    public Html.Type_node vx_node_render_from_node_ui(final Html.Type_node node, final Ui.Type_ui ui);
+  public static interface Func_node_default_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+    public Html.Type_node vx_node_default_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
   }
 
-  public static class Class_node_render_from_node_ui extends Core.Class_base implements Func_node_render_from_node_ui {
+  public static class Class_node_default_from_ui_orig_parent extends Core.Class_base implements Func_node_default_from_ui_orig_parent {
 
     @Override
-    public Func_node_render_from_node_ui vx_new(Object... vals) {
-      Class_node_render_from_node_ui output = new Class_node_render_from_node_ui();
+    public Func_node_default_from_ui_orig_parent vx_new(Object... vals) {
+      Class_node_default_from_ui_orig_parent output = new Class_node_default_from_ui_orig_parent();
       return output;
     }
 
     @Override
-    public Func_node_render_from_node_ui vx_copy(Object... vals) {
-      Class_node_render_from_node_ui output = new Class_node_render_from_node_ui();
+    public Func_node_default_from_ui_orig_parent vx_copy(Object... vals) {
+      Class_node_default_from_ui_orig_parent output = new Class_node_default_from_ui_orig_parent();
       return output;
     }
 
@@ -868,7 +1299,7 @@ public final class Uihtml {
     public Core.Type_funcdef vx_funcdef() {
       return Core.funcdef_new(
         "vx/ui/html/uihtml", // pkgname
-        "node-render<-node-ui", // name
+        "node-default<-ui-orig-parent", // name
         0, // idx
         false, // async
         Core.typedef_new(
@@ -888,29 +1319,368 @@ public final class Uihtml {
     }
 
     @Override
-    public Func_node_render_from_node_ui vx_empty() {return e_node_render_from_node_ui;}
+    public Func_node_default_from_ui_orig_parent vx_empty() {return e_node_default_from_ui_orig_parent;}
     @Override
-    public Func_node_render_from_node_ui vx_type() {return t_node_render_from_node_ui;}
+    public Func_node_default_from_ui_orig_parent vx_type() {return t_node_default_from_ui_orig_parent;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      Ui.Type_ui orig = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
+      Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(2)));
+      output = Uihtml.f_node_default_from_ui_orig_parent(ui, orig, parent);
+      return output;
+    }
+
+    @Override
+    public Html.Type_node vx_node_default_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+      return Uihtml.f_node_default_from_ui_orig_parent(ui, orig, parent);
+    }
+
+  }
+
+  public static final Func_node_default_from_ui_orig_parent e_node_default_from_ui_orig_parent = new Uihtml.Class_node_default_from_ui_orig_parent();
+  public static final Func_node_default_from_ui_orig_parent t_node_default_from_ui_orig_parent = new Uihtml.Class_node_default_from_ui_orig_parent();
+
+  public static Html.Type_node f_node_default_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+    Html.Type_node output = Html.e_node;
+    output = Core.f_let(
+      Html.t_node,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_string uid = ui.uid();
+        final Ui.Type_uimap uimap = ui.uimap();
+        final Ui.Type_style uistyle = ui.style();
+        final Ui.Type_uimap origmap = orig.uimap();
+        final Html.Type_style style = Uihtml.f_style_from_style(uistyle);
+        final Html.Type_stylelist styles = Uihtml.f_stylelist_extra_from_ui(ui);
+        final Html.Type_divchildlist children = Uihtml.f_divchildlist_from_uimap_origmap_parent(uimap, origmap, ui);
+        return Core.f_new(
+          Html.t_div,
+          Core.t_anylist.vx_new(
+            Core.vx_new_string(":id"),
+            uid,
+            Core.vx_new_string(":style-unique"),
+            style,
+            Core.vx_new_string(":stylelist"),
+            styles,
+            Core.vx_new_string(":nodes"),
+            children
+          )
+        );
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function node_image_from_ui_orig_parent
+   * @param  {ui} ui
+   * @param  {ui} orig
+   * @param  {ui} parent
+   * @return {node}
+   * (func node-image<-ui-orig-parent)
+   */
+  public static interface Func_node_image_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+    public Html.Type_node vx_node_image_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
+  }
+
+  public static class Class_node_image_from_ui_orig_parent extends Core.Class_base implements Func_node_image_from_ui_orig_parent {
+
+    @Override
+    public Func_node_image_from_ui_orig_parent vx_new(Object... vals) {
+      Class_node_image_from_ui_orig_parent output = new Class_node_image_from_ui_orig_parent();
+      return output;
+    }
+
+    @Override
+    public Func_node_image_from_ui_orig_parent vx_copy(Object... vals) {
+      Class_node_image_from_ui_orig_parent output = new Class_node_image_from_ui_orig_parent();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "node-image<-ui-orig-parent", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/web/html", // pkgname
+          "node", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_node_image_from_ui_orig_parent vx_empty() {return e_node_image_from_ui_orig_parent;}
+    @Override
+    public Func_node_image_from_ui_orig_parent vx_type() {return t_node_image_from_ui_orig_parent;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      Ui.Type_ui orig = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
+      Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(2)));
+      output = Uihtml.f_node_image_from_ui_orig_parent(ui, orig, parent);
+      return output;
+    }
+
+    @Override
+    public Html.Type_node vx_node_image_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+      return Uihtml.f_node_image_from_ui_orig_parent(ui, orig, parent);
+    }
+
+  }
+
+  public static final Func_node_image_from_ui_orig_parent e_node_image_from_ui_orig_parent = new Uihtml.Class_node_image_from_ui_orig_parent();
+  public static final Func_node_image_from_ui_orig_parent t_node_image_from_ui_orig_parent = new Uihtml.Class_node_image_from_ui_orig_parent();
+
+  public static Html.Type_node f_node_image_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+    Html.Type_node output = Html.e_node;
+    output = Core.f_let(
+      Html.t_node,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_string uid = ui.uid();
+        final Ui.Type_style uistyle = ui.style();
+        final Core.Type_any data = ui.data();
+        final File.Type_file file = Core.f_any_from_any(File.t_file, data);
+        final Core.Type_string path = File.f_pathfull_from_file(file);
+        final Html.Type_style style = Uihtml.f_style_from_style(uistyle);
+        final Html.Type_stylelist styles = Uihtml.f_stylelist_extra_from_ui(ui);
+        return Core.f_new(
+          Html.t_img,
+          Core.t_anylist.vx_new(
+            Core.vx_new_string(":id"),
+            uid,
+            Core.vx_new_string(":style-unique"),
+            style,
+            Core.vx_new_string(":stylelist"),
+            styles,
+            Core.vx_new_string(":src"),
+            path
+          )
+        );
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function node_label_from_ui_orig_parent
+   * @param  {ui} ui
+   * @param  {ui} orig
+   * @param  {ui} parent
+   * @return {node}
+   * (func node-label<-ui-orig-parent)
+   */
+  public static interface Func_node_label_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+    public Html.Type_node vx_node_label_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
+  }
+
+  public static class Class_node_label_from_ui_orig_parent extends Core.Class_base implements Func_node_label_from_ui_orig_parent {
+
+    @Override
+    public Func_node_label_from_ui_orig_parent vx_new(Object... vals) {
+      Class_node_label_from_ui_orig_parent output = new Class_node_label_from_ui_orig_parent();
+      return output;
+    }
+
+    @Override
+    public Func_node_label_from_ui_orig_parent vx_copy(Object... vals) {
+      Class_node_label_from_ui_orig_parent output = new Class_node_label_from_ui_orig_parent();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "node-label<-ui-orig-parent", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/web/html", // pkgname
+          "node", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_node_label_from_ui_orig_parent vx_empty() {return e_node_label_from_ui_orig_parent;}
+    @Override
+    public Func_node_label_from_ui_orig_parent vx_type() {return t_node_label_from_ui_orig_parent;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      Ui.Type_ui orig = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
+      Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(2)));
+      output = Uihtml.f_node_label_from_ui_orig_parent(ui, orig, parent);
+      return output;
+    }
+
+    @Override
+    public Html.Type_node vx_node_label_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+      return Uihtml.f_node_label_from_ui_orig_parent(ui, orig, parent);
+    }
+
+  }
+
+  public static final Func_node_label_from_ui_orig_parent e_node_label_from_ui_orig_parent = new Uihtml.Class_node_label_from_ui_orig_parent();
+  public static final Func_node_label_from_ui_orig_parent t_node_label_from_ui_orig_parent = new Uihtml.Class_node_label_from_ui_orig_parent();
+
+  public static Html.Type_node f_node_label_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+    Html.Type_node output = Html.e_node;
+    output = Core.f_let(
+      Html.t_node,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_string uid = ui.uid();
+        final Core.Type_any data = ui.data();
+        final Ui.Type_uimap uimap = ui.uimap();
+        final Ui.Type_style uistyle = ui.style();
+        final Ui.Type_stylelist uistyles = ui.stylelist();
+        final Core.Type_any datatype = Core.f_type_from_any(data);
+        final Html.Type_style style = Uihtml.f_style_from_style(uistyle);
+        final Html.Type_stylelist styles = Uihtml.f_stylelist_from_stylelist(uistyles);
+        final Core.Type_string text = Core.f_if_2(
+          Core.t_string,
+          Core.t_thenelselist.vx_new(
+              Core.f_then(
+                Core.t_boolean_from_func.vx_fn_new(() -> {
+                  return Core.f_eqeq(
+                    datatype,
+                    Core.t_string
+                  );
+                }),
+                Core.t_any_from_func.vx_fn_new(() -> {
+                  return Core.f_any_from_any(Core.t_string, data);
+                })
+              ),
+              Core.f_else(
+                Core.t_any_from_func.vx_fn_new(() -> {
+                  return Core.f_string_from_any(data);
+                })
+              )
+          )
+        );
+        return Core.f_new(
+          Html.t_p,
+          Core.t_anylist.vx_new(
+            Core.vx_new_string(":id"),
+            uid,
+            Core.vx_new_string(":style-unique"),
+            style,
+            Core.vx_new_string(":stylelist"),
+            styles,
+            Core.vx_new_string(":text"),
+            text
+          )
+        );
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function node_layout_from_node_ui
+   * @param  {node} node
+   * @param  {ui} ui
+   * @return {node}
+   * (func node-layout<-node-ui)
+   */
+  public static interface Func_node_layout_from_node_ui extends Core.Type_func, Core.Type_replfunc {
+    public Html.Type_node vx_node_layout_from_node_ui(final Html.Type_node node, final Ui.Type_ui ui);
+  }
+
+  public static class Class_node_layout_from_node_ui extends Core.Class_base implements Func_node_layout_from_node_ui {
+
+    @Override
+    public Func_node_layout_from_node_ui vx_new(Object... vals) {
+      Class_node_layout_from_node_ui output = new Class_node_layout_from_node_ui();
+      return output;
+    }
+
+    @Override
+    public Func_node_layout_from_node_ui vx_copy(Object... vals) {
+      Class_node_layout_from_node_ui output = new Class_node_layout_from_node_ui();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "node-layout<-node-ui", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/web/html", // pkgname
+          "node", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_node_layout_from_node_ui vx_empty() {return e_node_layout_from_node_ui;}
+    @Override
+    public Func_node_layout_from_node_ui vx_type() {return t_node_layout_from_node_ui;}
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_node node = Core.f_any_from_any(Html.t_node, arglist.vx_any(Core.vx_new_int(0)));
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
-      output = Uihtml.f_node_render_from_node_ui(node, ui);
+      output = Uihtml.f_node_layout_from_node_ui(node, ui);
       return output;
     }
 
     @Override
-    public Html.Type_node vx_node_render_from_node_ui(final Html.Type_node node, final Ui.Type_ui ui) {
-      return Uihtml.f_node_render_from_node_ui(node, ui);
+    public Html.Type_node vx_node_layout_from_node_ui(final Html.Type_node node, final Ui.Type_ui ui) {
+      return Uihtml.f_node_layout_from_node_ui(node, ui);
     }
 
   }
 
-  public static final Func_node_render_from_node_ui e_node_render_from_node_ui = new Uihtml.Class_node_render_from_node_ui();
-  public static final Func_node_render_from_node_ui t_node_render_from_node_ui = new Uihtml.Class_node_render_from_node_ui();
+  public static final Func_node_layout_from_node_ui e_node_layout_from_node_ui = new Uihtml.Class_node_layout_from_node_ui();
+  public static final Func_node_layout_from_node_ui t_node_layout_from_node_ui = new Uihtml.Class_node_layout_from_node_ui();
 
-  public static Html.Type_node f_node_render_from_node_ui(final Html.Type_node node, final Ui.Type_ui ui) {
+  public static Html.Type_node f_node_layout_from_node_ui(final Html.Type_node node, final Ui.Type_ui ui) {
     Html.Type_node output = Html.e_node;
     output = Core.f_let(
       Html.t_node,
@@ -918,6 +1688,117 @@ public final class Uihtml {
         final Core.Type_string htmltext = Html.f_string_from_node_indent(node, Core.vx_new_int(2));
         final Core.Type_boolean htmldone = Htmldoc.f_boolean_replace_from_ui_htmltext(ui, htmltext);
         return node;
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function node_from_ui_orig_parent
+   * @param  {ui} ui
+   * @param  {ui} orig
+   * @param  {ui} parent
+   * @return {node}
+   * (func node<-ui-orig-parent)
+   */
+  public static interface Func_node_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+    public Html.Type_node vx_node_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
+  }
+
+  public static class Class_node_from_ui_orig_parent extends Core.Class_base implements Func_node_from_ui_orig_parent {
+
+    @Override
+    public Func_node_from_ui_orig_parent vx_new(Object... vals) {
+      Class_node_from_ui_orig_parent output = new Class_node_from_ui_orig_parent();
+      return output;
+    }
+
+    @Override
+    public Func_node_from_ui_orig_parent vx_copy(Object... vals) {
+      Class_node_from_ui_orig_parent output = new Class_node_from_ui_orig_parent();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "node<-ui-orig-parent", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/web/html", // pkgname
+          "node", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_node_from_ui_orig_parent vx_empty() {return e_node_from_ui_orig_parent;}
+    @Override
+    public Func_node_from_ui_orig_parent vx_type() {return t_node_from_ui_orig_parent;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      Ui.Type_ui orig = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
+      Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(2)));
+      output = Uihtml.f_node_from_ui_orig_parent(ui, orig, parent);
+      return output;
+    }
+
+    @Override
+    public Html.Type_node vx_node_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+      return Uihtml.f_node_from_ui_orig_parent(ui, orig, parent);
+    }
+
+  }
+
+  public static final Func_node_from_ui_orig_parent e_node_from_ui_orig_parent = new Uihtml.Class_node_from_ui_orig_parent();
+  public static final Func_node_from_ui_orig_parent t_node_from_ui_orig_parent = new Uihtml.Class_node_from_ui_orig_parent();
+
+  public static Html.Type_node f_node_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+    Html.Type_node output = Html.e_node;
+    output = Core.f_let(
+      Html.t_node,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Ui.Type_style style = ui.style();
+        final Ui.Type_layout layout = style.layout();
+        return Core.f_switch(
+          Html.t_node,
+          layout,
+          Core.t_thenelselist.vx_new(
+            Core.f_case_1(
+              Ui.c_layout_image,
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return Uihtml.f_node_image_from_ui_orig_parent(ui, orig, parent);
+              })
+            ),
+            Core.f_case_1(
+              Ui.c_layout_label,
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return Uihtml.f_node_label_from_ui_orig_parent(ui, orig, parent);
+              })
+            ),
+            Core.f_else(
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return Uihtml.f_node_default_from_ui_orig_parent(ui, orig, parent);
+              })
+            )
+          )
+        );
       })
     );
     return output;
@@ -3143,26 +4024,26 @@ public final class Uihtml {
   /**
    * 
    * @async
-   * @function stylesheet_render_html
+   * @function stylesheet_layout_html
    * @param  {stylesheet} stylesheetui
    * @return {stylesheet}
-   * (func stylesheet-render-html)
+   * (func stylesheet-layout-html)
    */
-  public static interface Func_stylesheet_render_html extends Core.Func_any_from_any_async {
-    public CompletableFuture<Ui.Type_stylesheet> vx_stylesheet_render_html(final Ui.Type_stylesheet stylesheetui);
+  public static interface Func_stylesheet_layout_html extends Core.Func_any_from_any_async {
+    public CompletableFuture<Ui.Type_stylesheet> vx_stylesheet_layout_html(final Ui.Type_stylesheet stylesheetui);
   }
 
-  public static class Class_stylesheet_render_html extends Core.Class_base implements Func_stylesheet_render_html {
+  public static class Class_stylesheet_layout_html extends Core.Class_base implements Func_stylesheet_layout_html {
 
     @Override
-    public Func_stylesheet_render_html vx_new(Object... vals) {
-      Class_stylesheet_render_html output = new Class_stylesheet_render_html();
+    public Func_stylesheet_layout_html vx_new(Object... vals) {
+      Class_stylesheet_layout_html output = new Class_stylesheet_layout_html();
       return output;
     }
 
     @Override
-    public Func_stylesheet_render_html vx_copy(Object... vals) {
-      Class_stylesheet_render_html output = new Class_stylesheet_render_html();
+    public Func_stylesheet_layout_html vx_copy(Object... vals) {
+      Class_stylesheet_layout_html output = new Class_stylesheet_layout_html();
       return output;
     }
 
@@ -3173,7 +4054,7 @@ public final class Uihtml {
     public Core.Type_funcdef vx_funcdef() {
       return Core.funcdef_new(
         "vx/ui/html/uihtml", // pkgname
-        "stylesheet-render-html", // name
+        "stylesheet-layout-html", // name
         0, // idx
         true, // async
         Core.typedef_new(
@@ -3193,9 +4074,9 @@ public final class Uihtml {
     }
 
     @Override
-    public Func_stylesheet_render_html vx_empty() {return e_stylesheet_render_html;}
+    public Func_stylesheet_layout_html vx_empty() {return e_stylesheet_layout_html;}
     @Override
-    public Func_stylesheet_render_html vx_type() {return t_stylesheet_render_html;}
+    public Func_stylesheet_layout_html vx_type() {return t_stylesheet_layout_html;}
 
     @Override
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
@@ -3203,7 +4084,7 @@ public final class Uihtml {
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_async(final T generic_any_1, final U value) {
       Ui.Type_stylesheet inputval = Core.f_any_from_any(Ui.t_stylesheet, value);
-      CompletableFuture<Ui.Type_stylesheet> future = Uihtml.f_stylesheet_render_html(inputval);
+      CompletableFuture<Ui.Type_stylesheet> future = Uihtml.f_stylesheet_layout_html(inputval);
       @SuppressWarnings("unchecked")
       CompletableFuture<T> output = (CompletableFuture<T>)future;
       return output;
@@ -3212,22 +4093,22 @@ public final class Uihtml {
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
       Ui.Type_stylesheet stylesheetui = Core.f_any_from_any(Ui.t_stylesheet, arglist.vx_any(Core.vx_new_int(0)));
-      CompletableFuture<Ui.Type_stylesheet> future = Uihtml.f_stylesheet_render_html(stylesheetui);
+      CompletableFuture<Ui.Type_stylesheet> future = Uihtml.f_stylesheet_layout_html(stylesheetui);
       output = Core.async_from_async(Core.t_any, future);
       return output;
     }
 
     @Override
-    public CompletableFuture<Ui.Type_stylesheet> vx_stylesheet_render_html(final Ui.Type_stylesheet stylesheetui) {
-      return Uihtml.f_stylesheet_render_html(stylesheetui);
+    public CompletableFuture<Ui.Type_stylesheet> vx_stylesheet_layout_html(final Ui.Type_stylesheet stylesheetui) {
+      return Uihtml.f_stylesheet_layout_html(stylesheetui);
     }
 
   }
 
-  public static final Func_stylesheet_render_html e_stylesheet_render_html = new Uihtml.Class_stylesheet_render_html();
-  public static final Func_stylesheet_render_html t_stylesheet_render_html = new Uihtml.Class_stylesheet_render_html();
+  public static final Func_stylesheet_layout_html e_stylesheet_layout_html = new Uihtml.Class_stylesheet_layout_html();
+  public static final Func_stylesheet_layout_html t_stylesheet_layout_html = new Uihtml.Class_stylesheet_layout_html();
 
-  public static CompletableFuture<Ui.Type_stylesheet> f_stylesheet_render_html(final Ui.Type_stylesheet stylesheetui) {
+  public static CompletableFuture<Ui.Type_stylesheet> f_stylesheet_layout_html(final Ui.Type_stylesheet stylesheetui) {
     CompletableFuture<Ui.Type_stylesheet> output = Core.async_new_completed(Ui.e_stylesheet);
     output = Core.f_let_async(
       Ui.t_stylesheet,
@@ -3358,28 +4239,28 @@ public final class Uihtml {
   }
 
   /**
-   * @function ui_render_app_from_ui_orig_parent
+   * @function ui_layout_app_from_ui_orig_parent
    * @param  {ui} ui
    * @param  {ui} orig
    * @param  {ui} parent
    * @return {ui}
-   * (func ui-render-app<-ui-orig-parent)
+   * (func ui-layout-app<-ui-orig-parent)
    */
-  public static interface Func_ui_render_app_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
-    public Ui.Type_ui vx_ui_render_app_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
+  public static interface Func_ui_layout_app_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+    public Ui.Type_ui vx_ui_layout_app_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
   }
 
-  public static class Class_ui_render_app_from_ui_orig_parent extends Core.Class_base implements Func_ui_render_app_from_ui_orig_parent {
+  public static class Class_ui_layout_app_from_ui_orig_parent extends Core.Class_base implements Func_ui_layout_app_from_ui_orig_parent {
 
     @Override
-    public Func_ui_render_app_from_ui_orig_parent vx_new(Object... vals) {
-      Class_ui_render_app_from_ui_orig_parent output = new Class_ui_render_app_from_ui_orig_parent();
+    public Func_ui_layout_app_from_ui_orig_parent vx_new(Object... vals) {
+      Class_ui_layout_app_from_ui_orig_parent output = new Class_ui_layout_app_from_ui_orig_parent();
       return output;
     }
 
     @Override
-    public Func_ui_render_app_from_ui_orig_parent vx_copy(Object... vals) {
-      Class_ui_render_app_from_ui_orig_parent output = new Class_ui_render_app_from_ui_orig_parent();
+    public Func_ui_layout_app_from_ui_orig_parent vx_copy(Object... vals) {
+      Class_ui_layout_app_from_ui_orig_parent output = new Class_ui_layout_app_from_ui_orig_parent();
       return output;
     }
 
@@ -3390,7 +4271,7 @@ public final class Uihtml {
     public Core.Type_funcdef vx_funcdef() {
       return Core.funcdef_new(
         "vx/ui/html/uihtml", // pkgname
-        "ui-render-app<-ui-orig-parent", // name
+        "ui-layout-app<-ui-orig-parent", // name
         0, // idx
         false, // async
         Core.typedef_new(
@@ -3410,276 +4291,37 @@ public final class Uihtml {
     }
 
     @Override
-    public Func_ui_render_app_from_ui_orig_parent vx_empty() {return e_ui_render_app_from_ui_orig_parent;}
+    public Func_ui_layout_app_from_ui_orig_parent vx_empty() {return e_ui_layout_app_from_ui_orig_parent;}
     @Override
-    public Func_ui_render_app_from_ui_orig_parent vx_type() {return t_ui_render_app_from_ui_orig_parent;}
+    public Func_ui_layout_app_from_ui_orig_parent vx_type() {return t_ui_layout_app_from_ui_orig_parent;}
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
       Ui.Type_ui orig = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
       Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(2)));
-      output = Uihtml.f_ui_render_app_from_ui_orig_parent(ui, orig, parent);
+      output = Uihtml.f_ui_layout_app_from_ui_orig_parent(ui, orig, parent);
       return output;
     }
 
     @Override
-    public Ui.Type_ui vx_ui_render_app_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
-      return Uihtml.f_ui_render_app_from_ui_orig_parent(ui, orig, parent);
+    public Ui.Type_ui vx_ui_layout_app_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+      return Uihtml.f_ui_layout_app_from_ui_orig_parent(ui, orig, parent);
     }
 
   }
 
-  public static final Func_ui_render_app_from_ui_orig_parent e_ui_render_app_from_ui_orig_parent = new Uihtml.Class_ui_render_app_from_ui_orig_parent();
-  public static final Func_ui_render_app_from_ui_orig_parent t_ui_render_app_from_ui_orig_parent = new Uihtml.Class_ui_render_app_from_ui_orig_parent();
+  public static final Func_ui_layout_app_from_ui_orig_parent e_ui_layout_app_from_ui_orig_parent = new Uihtml.Class_ui_layout_app_from_ui_orig_parent();
+  public static final Func_ui_layout_app_from_ui_orig_parent t_ui_layout_app_from_ui_orig_parent = new Uihtml.Class_ui_layout_app_from_ui_orig_parent();
 
-  public static Ui.Type_ui f_ui_render_app_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+  public static Ui.Type_ui f_ui_layout_app_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
     Ui.Type_ui output = Ui.e_ui;
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string uid = ui.uid();
-        final Ui.Type_uimap uimap = ui.uimap();
-        final Html.Type_divchildlist children = Uihtml.f_divchildlist_from_uimap(uimap);
-        final Html.Type_node node = Core.f_new(
-          Html.t_div,
-          Core.t_anylist.vx_new(
-              Core.vx_new_string(":id"),
-              uid,
-              Core.vx_new_string(":nodes"),
-              children
-          )
-        );
-        final Html.Type_node nodechg = Uihtml.f_node_render_from_node_ui(node, ui);
-        final Ui.Type_uimap uimapchg = Ui.f_uimap_render_from_uimap_parent(uimap, ui);
-        return Core.f_new(
-          Ui.t_ui,
-          Core.t_anylist.vx_new(
-            Core.vx_new_string(":uimap"),
-            uimapchg
-          )
-        );
-      })
-    );
-    return output;
-  }
-
-  /**
-   * @function ui_render_default_from_ui_orig_parent
-   * @param  {ui} ui
-   * @param  {ui} orig
-   * @param  {ui} parent
-   * @return {ui}
-   * (func ui-render-default<-ui-orig-parent)
-   */
-  public static interface Func_ui_render_default_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
-    public Ui.Type_ui vx_ui_render_default_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
-  }
-
-  public static class Class_ui_render_default_from_ui_orig_parent extends Core.Class_base implements Func_ui_render_default_from_ui_orig_parent {
-
-    @Override
-    public Func_ui_render_default_from_ui_orig_parent vx_new(Object... vals) {
-      Class_ui_render_default_from_ui_orig_parent output = new Class_ui_render_default_from_ui_orig_parent();
-      return output;
-    }
-
-    @Override
-    public Func_ui_render_default_from_ui_orig_parent vx_copy(Object... vals) {
-      Class_ui_render_default_from_ui_orig_parent output = new Class_ui_render_default_from_ui_orig_parent();
-      return output;
-    }
-
-    @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
-
-    @Override
-    public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
-        "vx/ui/html/uihtml", // pkgname
-        "ui-render-default<-ui-orig-parent", // name
-        0, // idx
-        false, // async
-        Core.typedef_new(
-          "vx/ui/ui", // pkgname
-          "ui", // name
-          ":struct", // extends
-          Core.e_typelist, // traits
-          Core.e_typelist, // allowtypes
-          Core.e_typelist, // disallowtypes
-          Core.e_funclist, // allowfuncs
-          Core.e_funclist, // disallowfuncs
-          Core.e_anylist, // allowvalues
-          Core.e_anylist, // disallowvalues
-          Core.e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    @Override
-    public Func_ui_render_default_from_ui_orig_parent vx_empty() {return e_ui_render_default_from_ui_orig_parent;}
-    @Override
-    public Func_ui_render_default_from_ui_orig_parent vx_type() {return t_ui_render_default_from_ui_orig_parent;}
-
-    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
-      Core.Type_any output = Core.e_any;
-      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
-      Ui.Type_ui orig = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
-      Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(2)));
-      output = Uihtml.f_ui_render_default_from_ui_orig_parent(ui, orig, parent);
-      return output;
-    }
-
-    @Override
-    public Ui.Type_ui vx_ui_render_default_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
-      return Uihtml.f_ui_render_default_from_ui_orig_parent(ui, orig, parent);
-    }
-
-  }
-
-  public static final Func_ui_render_default_from_ui_orig_parent e_ui_render_default_from_ui_orig_parent = new Uihtml.Class_ui_render_default_from_ui_orig_parent();
-  public static final Func_ui_render_default_from_ui_orig_parent t_ui_render_default_from_ui_orig_parent = new Uihtml.Class_ui_render_default_from_ui_orig_parent();
-
-  public static Ui.Type_ui f_ui_render_default_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
-    Ui.Type_ui output = Ui.e_ui;
-    output = Core.f_let(
-      Ui.t_ui,
-      Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string uid = ui.uid();
-        final Ui.Type_uimap uimap = ui.uimap();
-        final Ui.Type_style uistyle = ui.style();
-        final Html.Type_style style = Uihtml.f_style_from_style(uistyle);
-        final Html.Type_stylelist styles = Uihtml.f_stylelist_extra_from_ui(ui);
-        final Html.Type_divchildlist children = Uihtml.f_divchildlist_from_uimap(uimap);
-        final Html.Type_node node = Core.f_new(
-          Html.t_div,
-          Core.t_anylist.vx_new(
-              Core.vx_new_string(":id"),
-              uid,
-              Core.vx_new_string(":style-unique"),
-              style,
-              Core.vx_new_string(":stylelist"),
-              styles,
-              Core.vx_new_string(":nodes"),
-              children
-          )
-        );
-        final Html.Type_node nodechg = Uihtml.f_node_render_from_node_ui(node, ui);
-        final Ui.Type_uimap uimapchg = Ui.f_uimap_render_from_uimap_parent(uimap, ui);
-        return Core.f_new(
-          Ui.t_ui,
-          Core.t_anylist.vx_new(
-            Core.vx_new_string(":uimap"),
-            uimapchg
-          )
-        );
-      })
-    );
-    return output;
-  }
-
-  /**
-   * @function ui_render_image_from_ui_orig_parent
-   * @param  {ui} ui
-   * @param  {ui} orig
-   * @param  {ui} parent
-   * @return {ui}
-   * (func ui-render-image<-ui-orig-parent)
-   */
-  public static interface Func_ui_render_image_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
-    public Ui.Type_ui vx_ui_render_image_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
-  }
-
-  public static class Class_ui_render_image_from_ui_orig_parent extends Core.Class_base implements Func_ui_render_image_from_ui_orig_parent {
-
-    @Override
-    public Func_ui_render_image_from_ui_orig_parent vx_new(Object... vals) {
-      Class_ui_render_image_from_ui_orig_parent output = new Class_ui_render_image_from_ui_orig_parent();
-      return output;
-    }
-
-    @Override
-    public Func_ui_render_image_from_ui_orig_parent vx_copy(Object... vals) {
-      Class_ui_render_image_from_ui_orig_parent output = new Class_ui_render_image_from_ui_orig_parent();
-      return output;
-    }
-
-    @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
-
-    @Override
-    public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
-        "vx/ui/html/uihtml", // pkgname
-        "ui-render-image<-ui-orig-parent", // name
-        0, // idx
-        false, // async
-        Core.typedef_new(
-          "vx/ui/ui", // pkgname
-          "ui", // name
-          ":struct", // extends
-          Core.e_typelist, // traits
-          Core.e_typelist, // allowtypes
-          Core.e_typelist, // disallowtypes
-          Core.e_funclist, // allowfuncs
-          Core.e_funclist, // disallowfuncs
-          Core.e_anylist, // allowvalues
-          Core.e_anylist, // disallowvalues
-          Core.e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    @Override
-    public Func_ui_render_image_from_ui_orig_parent vx_empty() {return e_ui_render_image_from_ui_orig_parent;}
-    @Override
-    public Func_ui_render_image_from_ui_orig_parent vx_type() {return t_ui_render_image_from_ui_orig_parent;}
-
-    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
-      Core.Type_any output = Core.e_any;
-      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
-      Ui.Type_ui orig = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
-      Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(2)));
-      output = Uihtml.f_ui_render_image_from_ui_orig_parent(ui, orig, parent);
-      return output;
-    }
-
-    @Override
-    public Ui.Type_ui vx_ui_render_image_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
-      return Uihtml.f_ui_render_image_from_ui_orig_parent(ui, orig, parent);
-    }
-
-  }
-
-  public static final Func_ui_render_image_from_ui_orig_parent e_ui_render_image_from_ui_orig_parent = new Uihtml.Class_ui_render_image_from_ui_orig_parent();
-  public static final Func_ui_render_image_from_ui_orig_parent t_ui_render_image_from_ui_orig_parent = new Uihtml.Class_ui_render_image_from_ui_orig_parent();
-
-  public static Ui.Type_ui f_ui_render_image_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
-    Ui.Type_ui output = Ui.e_ui;
-    output = Core.f_let(
-      Ui.t_ui,
-      Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string uid = ui.uid();
-        final Ui.Type_style uistyle = ui.style();
-        final Core.Type_any data = ui.data();
-        final File.Type_file file = Core.f_any_from_any(File.t_file, data);
-        final Core.Type_string path = File.f_pathfull_from_file(file);
-        final Html.Type_style style = Uihtml.f_style_from_style(uistyle);
-        final Html.Type_stylelist styles = Uihtml.f_stylelist_extra_from_ui(ui);
-        final Html.Type_node node = Core.f_new(
-          Html.t_img,
-          Core.t_anylist.vx_new(
-              Core.vx_new_string(":id"),
-              uid,
-              Core.vx_new_string(":style-unique"),
-              style,
-              Core.vx_new_string(":stylelist"),
-              styles,
-              Core.vx_new_string(":src"),
-              path
-          )
-        );
-        final Html.Type_node nodechg = Uihtml.f_node_render_from_node_ui(node, ui);
+        final Html.Type_node node = Uihtml.f_node_app_from_ui_orig_parent(ui, orig, parent);
+        final Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui(node, ui);
+        final Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(ui);
         return ui;
       })
     );
@@ -3687,28 +4329,28 @@ public final class Uihtml {
   }
 
   /**
-   * @function ui_render_label_from_ui_orig_parent
+   * @function ui_layout_default_from_ui_orig_parent
    * @param  {ui} ui
    * @param  {ui} orig
    * @param  {ui} parent
    * @return {ui}
-   * (func ui-render-label<-ui-orig-parent)
+   * (func ui-layout-default<-ui-orig-parent)
    */
-  public static interface Func_ui_render_label_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
-    public Ui.Type_ui vx_ui_render_label_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
+  public static interface Func_ui_layout_default_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+    public Ui.Type_ui vx_ui_layout_default_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
   }
 
-  public static class Class_ui_render_label_from_ui_orig_parent extends Core.Class_base implements Func_ui_render_label_from_ui_orig_parent {
+  public static class Class_ui_layout_default_from_ui_orig_parent extends Core.Class_base implements Func_ui_layout_default_from_ui_orig_parent {
 
     @Override
-    public Func_ui_render_label_from_ui_orig_parent vx_new(Object... vals) {
-      Class_ui_render_label_from_ui_orig_parent output = new Class_ui_render_label_from_ui_orig_parent();
+    public Func_ui_layout_default_from_ui_orig_parent vx_new(Object... vals) {
+      Class_ui_layout_default_from_ui_orig_parent output = new Class_ui_layout_default_from_ui_orig_parent();
       return output;
     }
 
     @Override
-    public Func_ui_render_label_from_ui_orig_parent vx_copy(Object... vals) {
-      Class_ui_render_label_from_ui_orig_parent output = new Class_ui_render_label_from_ui_orig_parent();
+    public Func_ui_layout_default_from_ui_orig_parent vx_copy(Object... vals) {
+      Class_ui_layout_default_from_ui_orig_parent output = new Class_ui_layout_default_from_ui_orig_parent();
       return output;
     }
 
@@ -3719,7 +4361,7 @@ public final class Uihtml {
     public Core.Type_funcdef vx_funcdef() {
       return Core.funcdef_new(
         "vx/ui/html/uihtml", // pkgname
-        "ui-render-label<-ui-orig-parent", // name
+        "ui-layout-default<-ui-orig-parent", // name
         0, // idx
         false, // async
         Core.typedef_new(
@@ -3739,85 +4381,220 @@ public final class Uihtml {
     }
 
     @Override
-    public Func_ui_render_label_from_ui_orig_parent vx_empty() {return e_ui_render_label_from_ui_orig_parent;}
+    public Func_ui_layout_default_from_ui_orig_parent vx_empty() {return e_ui_layout_default_from_ui_orig_parent;}
     @Override
-    public Func_ui_render_label_from_ui_orig_parent vx_type() {return t_ui_render_label_from_ui_orig_parent;}
+    public Func_ui_layout_default_from_ui_orig_parent vx_type() {return t_ui_layout_default_from_ui_orig_parent;}
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
       Ui.Type_ui orig = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
       Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(2)));
-      output = Uihtml.f_ui_render_label_from_ui_orig_parent(ui, orig, parent);
+      output = Uihtml.f_ui_layout_default_from_ui_orig_parent(ui, orig, parent);
       return output;
     }
 
     @Override
-    public Ui.Type_ui vx_ui_render_label_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
-      return Uihtml.f_ui_render_label_from_ui_orig_parent(ui, orig, parent);
+    public Ui.Type_ui vx_ui_layout_default_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+      return Uihtml.f_ui_layout_default_from_ui_orig_parent(ui, orig, parent);
     }
 
   }
 
-  public static final Func_ui_render_label_from_ui_orig_parent e_ui_render_label_from_ui_orig_parent = new Uihtml.Class_ui_render_label_from_ui_orig_parent();
-  public static final Func_ui_render_label_from_ui_orig_parent t_ui_render_label_from_ui_orig_parent = new Uihtml.Class_ui_render_label_from_ui_orig_parent();
+  public static final Func_ui_layout_default_from_ui_orig_parent e_ui_layout_default_from_ui_orig_parent = new Uihtml.Class_ui_layout_default_from_ui_orig_parent();
+  public static final Func_ui_layout_default_from_ui_orig_parent t_ui_layout_default_from_ui_orig_parent = new Uihtml.Class_ui_layout_default_from_ui_orig_parent();
 
-  public static Ui.Type_ui f_ui_render_label_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+  public static Ui.Type_ui f_ui_layout_default_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
     Ui.Type_ui output = Ui.e_ui;
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string uid = ui.uid();
-        final Core.Type_any data = ui.data();
         final Ui.Type_uimap uimap = ui.uimap();
-        final Ui.Type_style uistyle = ui.style();
-        final Ui.Type_stylelist uistyles = ui.stylelist();
-        final Core.Type_any datatype = Core.f_type_from_any(data);
-        final Html.Type_style style = Uihtml.f_style_from_style(uistyle);
-        final Html.Type_stylelist styles = Uihtml.f_stylelist_from_stylelist(uistyles);
-        final Core.Type_string text = Core.f_if_2(
-          Core.t_string,
-          Core.t_thenelselist.vx_new(
-              Core.f_then(
-                Core.t_boolean_from_func.vx_fn_new(() -> {
-                  return Core.f_eqeq(
-                    datatype,
-                    Core.t_string
-                  );
-                }),
-                Core.t_any_from_func.vx_fn_new(() -> {
-                  return Core.f_any_from_any(Core.t_string, data);
-                })
-              ),
-              Core.f_else(
-                Core.t_any_from_func.vx_fn_new(() -> {
-                  return Core.f_string_from_any(data);
-                })
-              )
-          )
-        );
-        final Html.Type_node node = Core.f_new(
-          Html.t_p,
-          Core.t_anylist.vx_new(
-              Core.vx_new_string(":id"),
-              uid,
-              Core.vx_new_string(":style-unique"),
-              style,
-              Core.vx_new_string(":stylelist"),
-              styles,
-              Core.vx_new_string(":text"),
-              text
-          )
-        );
-        final Html.Type_node nodechg = Uihtml.f_node_render_from_node_ui(node, ui);
-        final Ui.Type_uimap uimapchg = Ui.f_uimap_render_from_uimap_parent(uimap, ui);
-        return Core.f_new(
-          Ui.t_ui,
-          Core.t_anylist.vx_new(
-            Core.vx_new_string(":uimap"),
-            uimapchg
-          )
-        );
+        final Html.Type_node node = Uihtml.f_node_default_from_ui_orig_parent(ui, orig, parent);
+        final Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui(node, ui);
+        final Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(ui);
+        return ui;
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function ui_layout_image_from_ui_orig_parent
+   * @param  {ui} ui
+   * @param  {ui} orig
+   * @param  {ui} parent
+   * @return {ui}
+   * (func ui-layout-image<-ui-orig-parent)
+   */
+  public static interface Func_ui_layout_image_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+    public Ui.Type_ui vx_ui_layout_image_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
+  }
+
+  public static class Class_ui_layout_image_from_ui_orig_parent extends Core.Class_base implements Func_ui_layout_image_from_ui_orig_parent {
+
+    @Override
+    public Func_ui_layout_image_from_ui_orig_parent vx_new(Object... vals) {
+      Class_ui_layout_image_from_ui_orig_parent output = new Class_ui_layout_image_from_ui_orig_parent();
+      return output;
+    }
+
+    @Override
+    public Func_ui_layout_image_from_ui_orig_parent vx_copy(Object... vals) {
+      Class_ui_layout_image_from_ui_orig_parent output = new Class_ui_layout_image_from_ui_orig_parent();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "ui-layout-image<-ui-orig-parent", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "ui", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_ui_layout_image_from_ui_orig_parent vx_empty() {return e_ui_layout_image_from_ui_orig_parent;}
+    @Override
+    public Func_ui_layout_image_from_ui_orig_parent vx_type() {return t_ui_layout_image_from_ui_orig_parent;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      Ui.Type_ui orig = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
+      Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(2)));
+      output = Uihtml.f_ui_layout_image_from_ui_orig_parent(ui, orig, parent);
+      return output;
+    }
+
+    @Override
+    public Ui.Type_ui vx_ui_layout_image_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+      return Uihtml.f_ui_layout_image_from_ui_orig_parent(ui, orig, parent);
+    }
+
+  }
+
+  public static final Func_ui_layout_image_from_ui_orig_parent e_ui_layout_image_from_ui_orig_parent = new Uihtml.Class_ui_layout_image_from_ui_orig_parent();
+  public static final Func_ui_layout_image_from_ui_orig_parent t_ui_layout_image_from_ui_orig_parent = new Uihtml.Class_ui_layout_image_from_ui_orig_parent();
+
+  public static Ui.Type_ui f_ui_layout_image_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+    Ui.Type_ui output = Ui.e_ui;
+    output = Core.f_let(
+      Ui.t_ui,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Html.Type_node node = Uihtml.f_node_image_from_ui_orig_parent(ui, orig, parent);
+        final Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui(node, ui);
+        final Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(ui);
+        return ui;
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function ui_layout_label_from_ui_orig_parent
+   * @param  {ui} ui
+   * @param  {ui} orig
+   * @param  {ui} parent
+   * @return {ui}
+   * (func ui-layout-label<-ui-orig-parent)
+   */
+  public static interface Func_ui_layout_label_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+    public Ui.Type_ui vx_ui_layout_label_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
+  }
+
+  public static class Class_ui_layout_label_from_ui_orig_parent extends Core.Class_base implements Func_ui_layout_label_from_ui_orig_parent {
+
+    @Override
+    public Func_ui_layout_label_from_ui_orig_parent vx_new(Object... vals) {
+      Class_ui_layout_label_from_ui_orig_parent output = new Class_ui_layout_label_from_ui_orig_parent();
+      return output;
+    }
+
+    @Override
+    public Func_ui_layout_label_from_ui_orig_parent vx_copy(Object... vals) {
+      Class_ui_layout_label_from_ui_orig_parent output = new Class_ui_layout_label_from_ui_orig_parent();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "ui-layout-label<-ui-orig-parent", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "ui", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_ui_layout_label_from_ui_orig_parent vx_empty() {return e_ui_layout_label_from_ui_orig_parent;}
+    @Override
+    public Func_ui_layout_label_from_ui_orig_parent vx_type() {return t_ui_layout_label_from_ui_orig_parent;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      Ui.Type_ui orig = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
+      Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(2)));
+      output = Uihtml.f_ui_layout_label_from_ui_orig_parent(ui, orig, parent);
+      return output;
+    }
+
+    @Override
+    public Ui.Type_ui vx_ui_layout_label_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+      return Uihtml.f_ui_layout_label_from_ui_orig_parent(ui, orig, parent);
+    }
+
+  }
+
+  public static final Func_ui_layout_label_from_ui_orig_parent e_ui_layout_label_from_ui_orig_parent = new Uihtml.Class_ui_layout_label_from_ui_orig_parent();
+  public static final Func_ui_layout_label_from_ui_orig_parent t_ui_layout_label_from_ui_orig_parent = new Uihtml.Class_ui_layout_label_from_ui_orig_parent();
+
+  public static Ui.Type_ui f_ui_layout_label_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
+    Ui.Type_ui output = Ui.e_ui;
+    output = Core.f_let(
+      Ui.t_ui,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Ui.Type_uimap uimap = ui.uimap();
+        final Html.Type_node node = Uihtml.f_node_label_from_ui_orig_parent(ui, orig, parent);
+        final Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui(node, ui);
+        final Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(ui);
+        return ui;
       })
     );
     return output;
@@ -3843,11 +4620,19 @@ public final class Uihtml {
     mapconst.put("style-hidden", Uihtml.c_style_hidden);
     mapconst.put("style-selected", Uihtml.c_style_selected);
     mapfunc.put("boolean-print-html", Uihtml.t_boolean_print_html);
+    mapfunc.put("boolean-writeeventsall<-ui", Uihtml.t_boolean_writeeventsall_from_ui);
+    mapfunc.put("boolean-writeeventsall<-uimap", Uihtml.t_boolean_writeeventsall_from_uimap);
     mapfunc.put("context-write", Uihtml.t_context_write);
     mapfunc.put("divchild<-ui", Uihtml.t_divchild_from_ui);
     mapfunc.put("divchildlist<-uimap", Uihtml.t_divchildlist_from_uimap);
+    mapfunc.put("divchildlist<-uimap_1", Uihtml.t_divchildlist_from_uimap_1);
+    mapfunc.put("divchildlist<-uimap-origmap-parent", Uihtml.t_divchildlist_from_uimap_origmap_parent);
     mapfunc.put("node-app<-ui-orig-parent", Uihtml.t_node_app_from_ui_orig_parent);
-    mapfunc.put("node-render<-node-ui", Uihtml.t_node_render_from_node_ui);
+    mapfunc.put("node-default<-ui-orig-parent", Uihtml.t_node_default_from_ui_orig_parent);
+    mapfunc.put("node-image<-ui-orig-parent", Uihtml.t_node_image_from_ui_orig_parent);
+    mapfunc.put("node-label<-ui-orig-parent", Uihtml.t_node_label_from_ui_orig_parent);
+    mapfunc.put("node-layout<-node-ui", Uihtml.t_node_layout_from_node_ui);
+    mapfunc.put("node<-ui-orig-parent", Uihtml.t_node_from_ui_orig_parent);
     mapfunc.put("string-style<-font", Uihtml.t_string_style_from_font);
     mapfunc.put("string-style<-image", Uihtml.t_string_style_from_image);
     mapfunc.put("string-stylename<-name-styletype", Uihtml.t_string_stylename_from_name_styletype);
@@ -3859,12 +4644,12 @@ public final class Uihtml {
     mapfunc.put("stylelist<-stylelist", Uihtml.t_stylelist_from_stylelist);
     mapfunc.put("stylelist<-stylemap", Uihtml.t_stylelist_from_stylemap);
     mapfunc.put("stylemap<-stylemap", Uihtml.t_stylemap_from_stylemap);
-    mapfunc.put("stylesheet-render-html", Uihtml.t_stylesheet_render_html);
+    mapfunc.put("stylesheet-layout-html", Uihtml.t_stylesheet_layout_html);
     mapfunc.put("stylesheet<-stylesheet", Uihtml.t_stylesheet_from_stylesheet);
-    mapfunc.put("ui-render-app<-ui-orig-parent", Uihtml.t_ui_render_app_from_ui_orig_parent);
-    mapfunc.put("ui-render-default<-ui-orig-parent", Uihtml.t_ui_render_default_from_ui_orig_parent);
-    mapfunc.put("ui-render-image<-ui-orig-parent", Uihtml.t_ui_render_image_from_ui_orig_parent);
-    mapfunc.put("ui-render-label<-ui-orig-parent", Uihtml.t_ui_render_label_from_ui_orig_parent);
+    mapfunc.put("ui-layout-app<-ui-orig-parent", Uihtml.t_ui_layout_app_from_ui_orig_parent);
+    mapfunc.put("ui-layout-default<-ui-orig-parent", Uihtml.t_ui_layout_default_from_ui_orig_parent);
+    mapfunc.put("ui-layout-image<-ui-orig-parent", Uihtml.t_ui_layout_image_from_ui_orig_parent);
+    mapfunc.put("ui-layout-label<-ui-orig-parent", Uihtml.t_ui_layout_label_from_ui_orig_parent);
     Core.vx_global_package_set("vx/ui/html/uihtml", maptype, mapconst, mapfunc);
   }
 

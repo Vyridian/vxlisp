@@ -16719,7 +16719,7 @@ public final class Core {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_switch(
       Core.t_boolean,
-      Core.f_length_from_list(values),
+      Core.f_length_1(values),
       Core.t_thenelselist.vx_new(
         Core.f_case_1(
           Core.vx_new_int(0),
@@ -22466,7 +22466,7 @@ public final class Core {
     output = Core.f_let(
       generic_any_1,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_int len = Core.f_length_from_list(values);
+        final Core.Type_int len = Core.f_length_1(values);
         return Core.f_any_from_list(generic_any_1, values, len);
       })
     );
@@ -22474,27 +22474,27 @@ public final class Core {
   }
 
   /**
-   * @function length_from_list
-   * Returns the currently used size/length of a list
-   * @param  {list-1} values
+   * @function length
+   * Returns length of a string.
+   * @param  {string} text
    * @return {int}
-   * (func length<-list)
+   * (func length)
    */
-  public static interface Func_length_from_list extends Core.Func_any_from_any {
-    public Core.Type_int vx_length_from_list(final Core.Type_list values);
+  public static interface Func_length extends Core.Func_any_from_any {
+    public Core.Type_int vx_length(final Core.Type_string text);
   }
 
-  public static class Class_length_from_list extends Core.Class_base implements Func_length_from_list {
+  public static class Class_length extends Core.Class_base implements Func_length {
 
     @Override
-    public Func_length_from_list vx_new(Object... vals) {
-      Class_length_from_list output = new Class_length_from_list();
+    public Func_length vx_new(Object... vals) {
+      Class_length output = new Class_length();
       return output;
     }
 
     @Override
-    public Func_length_from_list vx_copy(Object... vals) {
-      Class_length_from_list output = new Class_length_from_list();
+    public Func_length vx_copy(Object... vals) {
+      Class_length output = new Class_length();
       return output;
     }
 
@@ -22505,7 +22505,7 @@ public final class Core {
     public Core.Type_funcdef vx_funcdef() {
       return Core.funcdef_new(
         "vx/core", // pkgname
-        "length<-list", // name
+        "length", // name
         0, // idx
         false, // async
         Core.typedef_new(
@@ -22525,9 +22525,101 @@ public final class Core {
     }
 
     @Override
-    public Func_length_from_list vx_empty() {return e_length_from_list;}
+    public Func_length vx_empty() {return e_length;}
     @Override
-    public Func_length_from_list vx_type() {return t_length_from_list;}
+    public Func_length vx_type() {return t_length;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_string inputval = (Core.Type_string)value;
+      Core.Type_any outputval = Core.f_length(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      output = Core.f_length(text);
+      return output;
+    }
+
+    @Override
+    public Core.Type_int vx_length(final Core.Type_string text) {
+      return Core.f_length(text);
+    }
+
+  }
+
+  public static final Func_length e_length = new Core.Class_length();
+  public static final Func_length t_length = new Core.Class_length();
+
+  public static Core.Type_int f_length(final Core.Type_string text) {
+    Core.Type_int output = Core.e_int;
+    int len = text.vx_string().length();
+    output = Core.vx_new_int(len);
+    return output;
+  }
+
+  /**
+   * @function length 1
+   * Returns the currently used size/length of a list
+   * @param  {list-1} values
+   * @return {int}
+   * (func length)
+   */
+  public static interface Func_length_1 extends Core.Func_any_from_any {
+    public Core.Type_int vx_length_1(final Core.Type_list values);
+  }
+
+  public static class Class_length_1 extends Core.Class_base implements Func_length_1 {
+
+    @Override
+    public Func_length_1 vx_new(Object... vals) {
+      Class_length_1 output = new Class_length_1();
+      return output;
+    }
+
+    @Override
+    public Func_length_1 vx_copy(Object... vals) {
+      Class_length_1 output = new Class_length_1();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "length", // name
+        1, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "int", // name
+          "", // extends
+          Core.t_typelist.vx_new(Core.t_number), // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_length_1 vx_empty() {return e_length_1;}
+    @Override
+    public Func_length_1 vx_type() {return t_length_1;}
 
     @Override
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
@@ -22536,7 +22628,7 @@ public final class Core {
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
       T output = Core.f_empty(generic_any_1);
       Core.Type_list inputval = (Core.Type_list)value;
-      Core.Type_any outputval = Core.f_length_from_list(inputval);
+      Core.Type_any outputval = Core.f_length_1(inputval);
       output = Core.f_any_from_any(generic_any_1, outputval);
       return output;
     }
@@ -22544,24 +22636,117 @@ public final class Core {
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
-      output = Core.f_length_from_list(values);
+      output = Core.f_length_1(values);
       return output;
     }
 
     @Override
-    public Core.Type_int vx_length_from_list(final Core.Type_list values) {
-      return Core.f_length_from_list(values);
+    public Core.Type_int vx_length_1(final Core.Type_list values) {
+      return Core.f_length_1(values);
     }
 
   }
 
-  public static final Func_length_from_list e_length_from_list = new Core.Class_length_from_list();
-  public static final Func_length_from_list t_length_from_list = new Core.Class_length_from_list();
+  public static final Func_length_1 e_length_1 = new Core.Class_length_1();
+  public static final Func_length_1 t_length_1 = new Core.Class_length_1();
 
-  public static Core.Type_int f_length_from_list(final Core.Type_list values) {
+  public static Core.Type_int f_length_1(final Core.Type_list values) {
     Core.Type_int output = Core.e_int;
     int intresult = values.vx_list().size();
     output = Core.vx_new_int(intresult);
+    return output;
+  }
+
+  /**
+   * @function length 2
+   * Returns the length of the given map.
+   * @param  {map-1} valuemap
+   * @return {int}
+   * (func length)
+   */
+  public static interface Func_length_2 extends Core.Func_any_from_any {
+    public Core.Type_int vx_length_2(final Core.Type_map valuemap);
+  }
+
+  public static class Class_length_2 extends Core.Class_base implements Func_length_2 {
+
+    @Override
+    public Func_length_2 vx_new(Object... vals) {
+      Class_length_2 output = new Class_length_2();
+      return output;
+    }
+
+    @Override
+    public Func_length_2 vx_copy(Object... vals) {
+      Class_length_2 output = new Class_length_2();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "length", // name
+        2, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "int", // name
+          "", // extends
+          Core.t_typelist.vx_new(Core.t_number), // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_length_2 vx_empty() {return e_length_2;}
+    @Override
+    public Func_length_2 vx_type() {return t_length_2;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_map inputval = (Core.Type_map)value;
+      Core.Type_any outputval = Core.f_length_2(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      output = Core.f_length_2(valuemap);
+      return output;
+    }
+
+    @Override
+    public Core.Type_int vx_length_2(final Core.Type_map valuemap) {
+      return Core.f_length_2(valuemap);
+    }
+
+  }
+
+  public static final Func_length_2 e_length_2 = new Core.Class_length_2();
+  public static final Func_length_2 t_length_2 = new Core.Class_length_2();
+
+  public static Core.Type_int f_length_2(final Core.Type_map valuemap) {
+    Core.Type_int output = Core.e_int;
+    output = Core.f_length_1(
+      Core.f_stringlist_from_map(valuemap)
+    );
     return output;
   }
 
@@ -24177,382 +24362,6 @@ public final class Core {
   public static <N extends Core.Type_map, O extends Core.Type_map> N f_map_from_map_1(final N generic_map_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value) {
     N output = Core.f_empty(generic_map_1);
     output = Core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);
-    return output;
-  }
-
-  /**
-   * @function mempool_addref
-   * Add Value Reference
-   * @param  {anylist} values
-   * @return {none}
-   * (func mempool-addref)
-   */
-  public static interface Func_mempool_addref extends Core.Type_func, Core.Type_replfunc {
-    public void vx_mempool_addref(final Core.Type_anylist values);
-  }
-
-  public static class Class_mempool_addref extends Core.Class_base implements Func_mempool_addref {
-
-    @Override
-    public Func_mempool_addref vx_new(Object... vals) {
-      Class_mempool_addref output = new Class_mempool_addref();
-      return output;
-    }
-
-    @Override
-    public Func_mempool_addref vx_copy(Object... vals) {
-      Class_mempool_addref output = new Class_mempool_addref();
-      return output;
-    }
-
-    @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
-
-    @Override
-    public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
-        "vx/core", // pkgname
-        "mempool-addref", // name
-        0, // idx
-        false, // async
-        Core.typedef_new(
-          "vx/core", // pkgname
-          "none", // name
-          "", // extends
-          Core.e_typelist, // traits
-          Core.e_typelist, // allowtypes
-          Core.e_typelist, // disallowtypes
-          Core.e_funclist, // allowfuncs
-          Core.e_funclist, // disallowfuncs
-          Core.e_anylist, // allowvalues
-          Core.e_anylist, // disallowvalues
-          Core.e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    @Override
-    public Func_mempool_addref vx_empty() {return e_mempool_addref;}
-    @Override
-    public Func_mempool_addref vx_type() {return t_mempool_addref;}
-
-    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
-      Core.Type_any output = Core.e_any;
-      Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
-      Core.f_mempool_addref(values);
-      return output;
-    }
-
-    @Override
-    public void vx_mempool_addref(final Core.Type_anylist values) {Core.f_mempool_addref(values);
-    }
-
-  }
-
-  public static final Func_mempool_addref e_mempool_addref = new Core.Class_mempool_addref();
-  public static final Func_mempool_addref t_mempool_addref = new Core.Class_mempool_addref();
-
-  public static void f_mempool_addref(final Core.Type_anylist values) {
-  }
-
-  /**
-   * @function mempool_release
-   * Recycles a Value and adds it to the valuepool.
-   * @param  {value} value
-   * @return {none}
-   * (func mempool-release)
-   */
-  public static interface Func_mempool_release extends Core.Type_func, Core.Type_replfunc {
-    public void vx_mempool_release(final Core.Type_value value);
-  }
-
-  public static class Class_mempool_release extends Core.Class_base implements Func_mempool_release {
-
-    @Override
-    public Func_mempool_release vx_new(Object... vals) {
-      Class_mempool_release output = new Class_mempool_release();
-      return output;
-    }
-
-    @Override
-    public Func_mempool_release vx_copy(Object... vals) {
-      Class_mempool_release output = new Class_mempool_release();
-      return output;
-    }
-
-    @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
-
-    @Override
-    public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
-        "vx/core", // pkgname
-        "mempool-release", // name
-        0, // idx
-        false, // async
-        Core.typedef_new(
-          "vx/core", // pkgname
-          "none", // name
-          "", // extends
-          Core.e_typelist, // traits
-          Core.e_typelist, // allowtypes
-          Core.e_typelist, // disallowtypes
-          Core.e_funclist, // allowfuncs
-          Core.e_funclist, // disallowfuncs
-          Core.e_anylist, // allowvalues
-          Core.e_anylist, // disallowvalues
-          Core.e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    @Override
-    public Func_mempool_release vx_empty() {return e_mempool_release;}
-    @Override
-    public Func_mempool_release vx_type() {return t_mempool_release;}
-
-    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
-      Core.Type_any output = Core.e_any;
-      Core.Type_value value = Core.f_any_from_any(Core.t_value, arglist.vx_any(Core.vx_new_int(0)));
-      Core.f_mempool_release(value);
-      return output;
-    }
-
-    @Override
-    public void vx_mempool_release(final Core.Type_value value) {Core.f_mempool_release(value);
-    }
-
-  }
-
-  public static final Func_mempool_release e_mempool_release = new Core.Class_mempool_release();
-  public static final Func_mempool_release t_mempool_release = new Core.Class_mempool_release();
-
-  public static void f_mempool_release(final Core.Type_value value) {
-  }
-
-  /**
-   * @function mempool_removeref
-   * Remove Value Reference
-   * @param  {anylist} values
-   * @return {none}
-   * (func mempool-removeref)
-   */
-  public static interface Func_mempool_removeref extends Core.Type_func, Core.Type_replfunc {
-    public void vx_mempool_removeref(final Core.Type_anylist values);
-  }
-
-  public static class Class_mempool_removeref extends Core.Class_base implements Func_mempool_removeref {
-
-    @Override
-    public Func_mempool_removeref vx_new(Object... vals) {
-      Class_mempool_removeref output = new Class_mempool_removeref();
-      return output;
-    }
-
-    @Override
-    public Func_mempool_removeref vx_copy(Object... vals) {
-      Class_mempool_removeref output = new Class_mempool_removeref();
-      return output;
-    }
-
-    @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
-
-    @Override
-    public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
-        "vx/core", // pkgname
-        "mempool-removeref", // name
-        0, // idx
-        false, // async
-        Core.typedef_new(
-          "vx/core", // pkgname
-          "none", // name
-          "", // extends
-          Core.e_typelist, // traits
-          Core.e_typelist, // allowtypes
-          Core.e_typelist, // disallowtypes
-          Core.e_funclist, // allowfuncs
-          Core.e_funclist, // disallowfuncs
-          Core.e_anylist, // allowvalues
-          Core.e_anylist, // disallowvalues
-          Core.e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    @Override
-    public Func_mempool_removeref vx_empty() {return e_mempool_removeref;}
-    @Override
-    public Func_mempool_removeref vx_type() {return t_mempool_removeref;}
-
-    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
-      Core.Type_any output = Core.e_any;
-      Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
-      Core.f_mempool_removeref(values);
-      return output;
-    }
-
-    @Override
-    public void vx_mempool_removeref(final Core.Type_anylist values) {Core.f_mempool_removeref(values);
-    }
-
-  }
-
-  public static final Func_mempool_removeref e_mempool_removeref = new Core.Class_mempool_removeref();
-  public static final Func_mempool_removeref t_mempool_removeref = new Core.Class_mempool_removeref();
-
-  public static void f_mempool_removeref(final Core.Type_anylist values) {
-  }
-
-  /**
-   * @function mempool_removerefchildren
-   * Remove Value Child References
-   * @param  {anylist} values
-   * @return {none}
-   * (func mempool-removerefchildren)
-   */
-  public static interface Func_mempool_removerefchildren extends Core.Type_func, Core.Type_replfunc {
-    public void vx_mempool_removerefchildren(final Core.Type_anylist values);
-  }
-
-  public static class Class_mempool_removerefchildren extends Core.Class_base implements Func_mempool_removerefchildren {
-
-    @Override
-    public Func_mempool_removerefchildren vx_new(Object... vals) {
-      Class_mempool_removerefchildren output = new Class_mempool_removerefchildren();
-      return output;
-    }
-
-    @Override
-    public Func_mempool_removerefchildren vx_copy(Object... vals) {
-      Class_mempool_removerefchildren output = new Class_mempool_removerefchildren();
-      return output;
-    }
-
-    @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
-
-    @Override
-    public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
-        "vx/core", // pkgname
-        "mempool-removerefchildren", // name
-        0, // idx
-        false, // async
-        Core.typedef_new(
-          "vx/core", // pkgname
-          "none", // name
-          "", // extends
-          Core.e_typelist, // traits
-          Core.e_typelist, // allowtypes
-          Core.e_typelist, // disallowtypes
-          Core.e_funclist, // allowfuncs
-          Core.e_funclist, // disallowfuncs
-          Core.e_anylist, // allowvalues
-          Core.e_anylist, // disallowvalues
-          Core.e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    @Override
-    public Func_mempool_removerefchildren vx_empty() {return e_mempool_removerefchildren;}
-    @Override
-    public Func_mempool_removerefchildren vx_type() {return t_mempool_removerefchildren;}
-
-    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
-      Core.Type_any output = Core.e_any;
-      Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
-      Core.f_mempool_removerefchildren(values);
-      return output;
-    }
-
-    @Override
-    public void vx_mempool_removerefchildren(final Core.Type_anylist values) {Core.f_mempool_removerefchildren(values);
-    }
-
-  }
-
-  public static final Func_mempool_removerefchildren e_mempool_removerefchildren = new Core.Class_mempool_removerefchildren();
-  public static final Func_mempool_removerefchildren t_mempool_removerefchildren = new Core.Class_mempool_removerefchildren();
-
-  public static void f_mempool_removerefchildren(final Core.Type_anylist values) {
-  }
-
-  /**
-   * @function mempool_reserve
-   * Returns a recycled Value or creates a new one.
-   * @return {value}
-   * (func mempool-reserve)
-   */
-  public static interface Func_mempool_reserve extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_value vx_mempool_reserve();
-  }
-
-  public static class Class_mempool_reserve extends Core.Class_base implements Func_mempool_reserve {
-
-    @Override
-    public Func_mempool_reserve vx_new(Object... vals) {
-      Class_mempool_reserve output = new Class_mempool_reserve();
-      return output;
-    }
-
-    @Override
-    public Func_mempool_reserve vx_copy(Object... vals) {
-      Class_mempool_reserve output = new Class_mempool_reserve();
-      return output;
-    }
-
-    @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
-
-    @Override
-    public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
-        "vx/core", // pkgname
-        "mempool-reserve", // name
-        0, // idx
-        false, // async
-        Core.typedef_new(
-          "vx/core", // pkgname
-          "value", // name
-          ":struct", // extends
-          Core.e_typelist, // traits
-          Core.e_typelist, // allowtypes
-          Core.e_typelist, // disallowtypes
-          Core.e_funclist, // allowfuncs
-          Core.e_funclist, // disallowfuncs
-          Core.e_anylist, // allowvalues
-          Core.e_anylist, // disallowvalues
-          Core.e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    @Override
-    public Func_mempool_reserve vx_empty() {return e_mempool_reserve;}
-    @Override
-    public Func_mempool_reserve vx_type() {return t_mempool_reserve;}
-
-    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
-      Core.Type_any output = Core.e_any;
-      output = Core.f_mempool_reserve();
-      return output;
-    }
-
-    @Override
-    public Core.Type_value vx_mempool_reserve() {
-      return Core.f_mempool_reserve();
-    }
-
-  }
-
-  public static final Func_mempool_reserve e_mempool_reserve = new Core.Class_mempool_reserve();
-  public static final Func_mempool_reserve t_mempool_reserve = new Core.Class_mempool_reserve();
-
-  public static Core.Type_value f_mempool_reserve() {
-    Core.Type_value output = Core.e_value;
     return output;
   }
 
@@ -27600,6 +27409,105 @@ public final class Core {
   }
 
   /**
+   * @function stringlist_from_map
+   * Returns a stringlist of keys from any map in entry order.
+   * @param  {map-1} map
+   * @return {stringlist}
+   * (func stringlist<-map)
+   */
+  public static interface Func_stringlist_from_map extends Core.Func_any_from_any {
+    public Core.Type_stringlist vx_stringlist_from_map(final Core.Type_map map);
+  }
+
+  public static class Class_stringlist_from_map extends Core.Class_base implements Func_stringlist_from_map {
+
+    @Override
+    public Func_stringlist_from_map vx_new(Object... vals) {
+      Class_stringlist_from_map output = new Class_stringlist_from_map();
+      return output;
+    }
+
+    @Override
+    public Func_stringlist_from_map vx_copy(Object... vals) {
+      Class_stringlist_from_map output = new Class_stringlist_from_map();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/core", // pkgname
+        "stringlist<-map", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "stringlist", // name
+          ":list", // extends
+          Core.e_typelist, // traits
+          Core.t_typelist.vx_new(Core.t_string), // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_stringlist_from_map vx_empty() {return e_stringlist_from_map;}
+    @Override
+    public Func_stringlist_from_map vx_type() {return t_stringlist_from_map;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_map inputval = (Core.Type_map)value;
+      Core.Type_any outputval = Core.f_stringlist_from_map(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_map map = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      output = Core.f_stringlist_from_map(map);
+      return output;
+    }
+
+    @Override
+    public Core.Type_stringlist vx_stringlist_from_map(final Core.Type_map map) {
+      return Core.f_stringlist_from_map(map);
+    }
+
+  }
+
+  public static final Func_stringlist_from_map e_stringlist_from_map = new Core.Class_stringlist_from_map();
+  public static final Func_stringlist_from_map t_stringlist_from_map = new Core.Class_stringlist_from_map();
+
+  public static Core.Type_stringlist f_stringlist_from_map(final Core.Type_map map) {
+    Core.Type_stringlist output = Core.e_stringlist;
+    output = Core.f_list_from_map_1(
+      Core.t_stringlist,
+      map,
+      Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
+        Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
+        Core.Type_any value = Core.f_any_from_any(Core.t_any, value_any);
+        return key;
+      })
+    );
+    return output;
+  }
+
+  /**
    * @function switch
    * Returns a value based on a logical switch
    * @param  {any-2} val
@@ -28835,7 +28743,9 @@ public final class Core {
     mapfunc.put("is-number", Core.t_is_number);
     mapfunc.put("is-pass<-permission", Core.t_is_pass_from_permission);
     mapfunc.put("last<-list", Core.t_last_from_list);
-    mapfunc.put("length<-list", Core.t_length_from_list);
+    mapfunc.put("length", Core.t_length);
+    mapfunc.put("length_1", Core.t_length_1);
+    mapfunc.put("length_2", Core.t_length_2);
     mapfunc.put("let", Core.t_let);
     mapfunc.put("let-async", Core.t_let_async);
     mapfunc.put("list-join<-list", Core.t_list_join_from_list);
@@ -28854,11 +28764,6 @@ public final class Core {
     mapfunc.put("map<-list", Core.t_map_from_list);
     mapfunc.put("map<-map", Core.t_map_from_map);
     mapfunc.put("map<-map_1", Core.t_map_from_map_1);
-    mapfunc.put("mempool-addref", Core.t_mempool_addref);
-    mapfunc.put("mempool-release", Core.t_mempool_release);
-    mapfunc.put("mempool-removeref", Core.t_mempool_removeref);
-    mapfunc.put("mempool-removerefchildren", Core.t_mempool_removerefchildren);
-    mapfunc.put("mempool-reserve", Core.t_mempool_reserve);
     mapfunc.put("msg<-error", Core.t_msg_from_error);
     mapfunc.put("msg<-error_1", Core.t_msg_from_error_1);
     mapfunc.put("msg<-error_2", Core.t_msg_from_error_2);
@@ -28893,6 +28798,7 @@ public final class Core {
     mapfunc.put("string<-any-indent", Core.t_string_from_any_indent);
     mapfunc.put("string<-func", Core.t_string_from_func);
     mapfunc.put("string<-string-find-replace", Core.t_string_from_string_find_replace);
+    mapfunc.put("stringlist<-map", Core.t_stringlist_from_map);
     mapfunc.put("switch", Core.t_switch);
     mapfunc.put("then", Core.t_then);
     mapfunc.put("traits<-typedef", Core.t_traits_from_typedef);

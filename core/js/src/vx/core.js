@@ -2696,7 +2696,7 @@ export default class vx_core {
     values = vx_core.f_new(vx_core.t_booleanlist, ...values)
     output = vx_core.f_switch(
       {"any-1": vx_core.t_boolean, "any-2": vx_core.t_int},
-      vx_core.f_length_from_list(values),
+      vx_core.f_length_1(values),
       vx_core.f_case_1(
         0,
         vx_core.f_new(vx_core.t_any_from_func, () => {return true})
@@ -4159,7 +4159,7 @@ export default class vx_core {
       {"any-1": generic_any_1},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const len = vx_core.f_length_from_list(values)
+        const len = vx_core.f_length_1(values)
         return vx_core.f_any_from_list({"any-1": generic_any_1}, values, len)
       })
     )
@@ -4167,22 +4167,64 @@ export default class vx_core {
   }
 
   /**
-   * @function length_from_list
+   * @function length
+   * Returns length of a string.
+   * @param  {string} text
+   * @return {int}
+   */
+  static t_length = {
+    vx_type: vx_core.t_type
+  }
+  static e_length = {
+    vx_type: vx_core.t_length
+  }
+
+  // (func length)
+  static f_length(text) {
+    let output = vx_core.e_int
+    output = text.length
+    return output
+  }
+
+  /**
+   * @function length
    * Returns the currently used size/length of a list
    * @param  {generic_list_1} values
    * @return {int}
    */
-  static t_length_from_list = {
+  static t_length_1 = {
     vx_type: vx_core.t_type
   }
-  static e_length_from_list = {
-    vx_type: vx_core.t_length_from_list
+  static e_length_1 = {
+    vx_type: vx_core.t_length_1
   }
 
-  // (func length<-list)
-  static f_length_from_list(values) {
+  // (func length)
+  static f_length_1(values) {
     let output = vx_core.e_int
     output = values.length
+    return output
+  }
+
+  /**
+   * @function length
+   * Returns the length of the given map.
+   * @param  {generic_map_1} valuemap
+   * @return {int}
+   */
+  static t_length_2 = {
+    vx_type: vx_core.t_type
+  }
+  static e_length_2 = {
+    vx_type: vx_core.t_length_2
+  }
+
+  // (func length)
+  static f_length_2(valuemap) {
+    let output = vx_core.e_int
+    output = vx_core.f_length_1(
+      vx_core.f_stringlist_from_map(valuemap)
+    )
     return output
   }
 
@@ -4642,148 +4684,6 @@ export default class vx_core {
     const generic_map_1 = generic["map-1"]
     let output = vx_core.f_empty(generic_map_1)
     output = vx_core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value)
-    return output
-  }
-
-  /**
-   * @function mempool_addref
-   * Add Value Reference
-   * @param  {anylist} ... values
-   * @return {none}
-   */
-  static t_mempool_addref = {
-    vx_type: vx_core.t_type
-  }
-  static e_mempool_addref = {
-    vx_type: vx_core.t_mempool_addref
-  }
-
-  // (func mempool-addref)
-  static f_mempool_addref(...values) {
-    values = vx_core.f_new(vx_core.t_anylist, ...values)
-    for (const value of values) {
-      const value = values[i]
-      if (value.refs) {
-        value.refs += 1
-      }
-    }
-  }
-
-  /**
-   * @function mempool_release
-   * Recycles a Value and adds it to the valuepool.
-   * @param  {value} value
-   * @return {none}
-   */
-  static t_mempool_release = {
-    vx_type: vx_core.t_type
-  }
-  static e_mempool_release = {
-    vx_type: vx_core.t_mempool_release
-  }
-
-  // (func mempool-release)
-  static f_mempool_release(value) {
-    const mempool = vx_core.c_mempool_active
-    value.length = 0
-    for (const key in value) {
-      delete value[key]
-    }
-    next = mempool.valuepool
-    value.next = next
-    mempool.valuepool = value
-  }
-
-  /**
-   * @function mempool_removeref
-   * Remove Value Reference
-   * @param  {anylist} ... values
-   * @return {none}
-   */
-  static t_mempool_removeref = {
-    vx_type: vx_core.t_type
-  }
-  static e_mempool_removeref = {
-    vx_type: vx_core.t_mempool_removeref
-  }
-
-  // (func mempool-removeref)
-  static f_mempool_removeref(...values) {
-    values = vx_core.f_new(vx_core.t_anylist, ...values)
-    for (const value of values) {
-      const value = values[i]
-      if (value.refs) {
-        value.refs -= 1
-        if (value.refs == 0) {
-          vx_core.f_mempool_removerefchildren(value)
-          vx_core.f_mempool_recyclevalue(value)
-        }
-      }
-    }
-  }
-
-  /**
-   * @function mempool_removerefchildren
-   * Remove Value Child References
-   * @param  {anylist} ... values
-   * @return {none}
-   */
-  static t_mempool_removerefchildren = {
-    vx_type: vx_core.t_type
-  }
-  static e_mempool_removerefchildren = {
-    vx_type: vx_core.t_mempool_removerefchildren
-  }
-
-  // (func mempool-removerefchildren)
-  static f_mempool_removerefchildren(...values) {
-    values = vx_core.f_new(vx_core.t_anylist, ...values)
-    for (const value of values) {
-      const extend = vx_core.f_extends_from_any(
-      vx_core.t_value
-    )
-      switch (extend) {
-      case ':list':
-        vx_core.f_mempool_removeref(...value['vx_value'])
-        break
-      case ':map':
-      case ':struct':
-        vx_core.f_mempool_removeref(...Object.entities(value['vx_value']))
-        break
-      }
-    }
-  }
-
-  /**
-   * @function mempool_reserve
-   * Returns a recycled Value or creates a new one.
-   * @return {value}
-   */
-  static t_mempool_reserve = {
-    vx_type: vx_core.t_type
-  }
-  static e_mempool_reserve = {
-    vx_type: vx_core.t_mempool_reserve
-  }
-
-  // (func mempool-reserve)
-  static f_mempool_reserve() {
-    let output = vx_core.e_value
-    mempool = vx_core.c_mempool_active
-    output = mempool.valuepool
-    if (output == null) {
-      output = {
-        refs: 0
-      }
-    } else {
-      const next = output.next
-      if (next == null) {
-        mempool.valuepool = null
-      } else {
-        mempool.valuepool = next
-        output.next = null
-      }
-    }
     return output
   }
 
@@ -5607,6 +5507,30 @@ export default class vx_core {
   }
 
   /**
+   * @function stringlist_from_map
+   * Returns a stringlist of keys from any map in entry order.
+   * @param  {generic_map_1} map
+   * @return {stringlist}
+   */
+  static t_stringlist_from_map = {
+    vx_type: vx_core.t_type
+  }
+  static e_stringlist_from_map = {
+    vx_type: vx_core.t_stringlist_from_map
+  }
+
+  // (func stringlist<-map)
+  static f_stringlist_from_map(map) {
+    let output = vx_core.e_stringlist
+    output = vx_core.f_list_from_map_1(
+      {"any-1": vx_core.t_string, "list-1": vx_core.t_stringlist},
+      map,
+      vx_core.f_new(vx_core.t_any_from_key_value, ([key, value]) => key)
+    )
+    return output
+  }
+
+  /**
    * @function switch
    * Returns a value based on a logical switch
    * @param  {typemap} generic
@@ -6122,7 +6046,9 @@ export default class vx_core {
       "is-number": vx_core.e_is_number,
       "is-pass<-permission": vx_core.e_is_pass_from_permission,
       "last<-list": vx_core.e_last_from_list,
-      "length<-list": vx_core.e_length_from_list,
+      "length": vx_core.e_length,
+      "length_1": vx_core.e_length_1,
+      "length_2": vx_core.e_length_2,
       "let": vx_core.e_let,
       "let-async": vx_core.e_let_async,
       "list-join<-list": vx_core.e_list_join_from_list,
@@ -6141,11 +6067,6 @@ export default class vx_core {
       "map<-list": vx_core.e_map_from_list,
       "map<-map": vx_core.e_map_from_map,
       "map<-map_1": vx_core.e_map_from_map_1,
-      "mempool-addref": vx_core.e_mempool_addref,
-      "mempool-release": vx_core.e_mempool_release,
-      "mempool-removeref": vx_core.e_mempool_removeref,
-      "mempool-removerefchildren": vx_core.e_mempool_removerefchildren,
-      "mempool-reserve": vx_core.e_mempool_reserve,
       "msg<-error": vx_core.e_msg_from_error,
       "msg<-error_1": vx_core.e_msg_from_error_1,
       "msg<-error_2": vx_core.e_msg_from_error_2,
@@ -6180,6 +6101,7 @@ export default class vx_core {
       "string<-any-indent": vx_core.e_string_from_any_indent,
       "string<-func": vx_core.e_string_from_func,
       "string<-string-find-replace": vx_core.e_string_from_string_find_replace,
+      "stringlist<-map": vx_core.e_stringlist_from_map,
       "switch": vx_core.e_switch,
       "then": vx_core.e_then,
       "traits<-typedef": vx_core.e_traits_from_typedef,
@@ -6292,7 +6214,9 @@ export default class vx_core {
       "is-number": vx_core.t_is_number,
       "is-pass<-permission": vx_core.t_is_pass_from_permission,
       "last<-list": vx_core.t_last_from_list,
-      "length<-list": vx_core.t_length_from_list,
+      "length": vx_core.t_length,
+      "length_1": vx_core.t_length_1,
+      "length_2": vx_core.t_length_2,
       "let": vx_core.t_let,
       "let-async": vx_core.t_let_async,
       "list-join<-list": vx_core.t_list_join_from_list,
@@ -6311,11 +6235,6 @@ export default class vx_core {
       "map<-list": vx_core.t_map_from_list,
       "map<-map": vx_core.t_map_from_map,
       "map<-map_1": vx_core.t_map_from_map_1,
-      "mempool-addref": vx_core.t_mempool_addref,
-      "mempool-release": vx_core.t_mempool_release,
-      "mempool-removeref": vx_core.t_mempool_removeref,
-      "mempool-removerefchildren": vx_core.t_mempool_removerefchildren,
-      "mempool-reserve": vx_core.t_mempool_reserve,
       "msg<-error": vx_core.t_msg_from_error,
       "msg<-error_1": vx_core.t_msg_from_error_1,
       "msg<-error_2": vx_core.t_msg_from_error_2,
@@ -6350,6 +6269,7 @@ export default class vx_core {
       "string<-any-indent": vx_core.t_string_from_any_indent,
       "string<-func": vx_core.t_string_from_func,
       "string<-string-find-replace": vx_core.t_string_from_string_find_replace,
+      "stringlist<-map": vx_core.t_stringlist_from_map,
       "switch": vx_core.t_switch,
       "then": vx_core.t_then,
       "traits<-typedef": vx_core.t_traits_from_typedef,
@@ -10070,9 +9990,9 @@ export default class vx_core {
       fn            : vx_core.f_last_from_list
     }
 
-    // (func length<-list)
-    vx_core.t_length_from_list['vx_value'] = {
-      name          : "length<-list",
+    // (func length)
+    vx_core.t_length['vx_value'] = {
+      name          : "length",
       pkgname       : "vx/core",
       extends       : ":func",
       idx           : 0,
@@ -10085,7 +10005,43 @@ export default class vx_core {
       traits        : [],
       properties    : [],
       proplast      : {},
-      fn            : vx_core.f_length_from_list
+      fn            : vx_core.f_length
+    }
+
+    // (func length)
+    vx_core.t_length_1['vx_value'] = {
+      name          : "length",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 1,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_length_1
+    }
+
+    // (func length)
+    vx_core.t_length_2['vx_value'] = {
+      name          : "length",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 2,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_length_2
     }
 
     // (func let)
@@ -10410,96 +10366,6 @@ export default class vx_core {
       properties    : [],
       proplast      : {},
       fn            : vx_core.f_map_from_map_1
-    }
-
-    // (func mempool-addref)
-    vx_core.t_mempool_addref['vx_value'] = {
-      name          : "mempool-addref",
-      pkgname       : "vx/core",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_core.f_mempool_addref
-    }
-
-    // (func mempool-release)
-    vx_core.t_mempool_release['vx_value'] = {
-      name          : "mempool-release",
-      pkgname       : "vx/core",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_core.f_mempool_release
-    }
-
-    // (func mempool-removeref)
-    vx_core.t_mempool_removeref['vx_value'] = {
-      name          : "mempool-removeref",
-      pkgname       : "vx/core",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_core.f_mempool_removeref
-    }
-
-    // (func mempool-removerefchildren)
-    vx_core.t_mempool_removerefchildren['vx_value'] = {
-      name          : "mempool-removerefchildren",
-      pkgname       : "vx/core",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_core.f_mempool_removerefchildren
-    }
-
-    // (func mempool-reserve)
-    vx_core.t_mempool_reserve['vx_value'] = {
-      name          : "mempool-reserve",
-      pkgname       : "vx/core",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_core.f_mempool_reserve
     }
 
     // (func msg<-error)
@@ -11112,6 +10978,24 @@ export default class vx_core {
       properties    : [],
       proplast      : {},
       fn            : vx_core.f_string_from_string_find_replace
+    }
+
+    // (func stringlist<-map)
+    vx_core.t_stringlist_from_map['vx_value'] = {
+      name          : "stringlist<-map",
+      pkgname       : "vx/core",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_core.f_stringlist_from_map
     }
 
     // (func switch)

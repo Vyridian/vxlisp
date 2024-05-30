@@ -130,13 +130,13 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/core</p>
-              <p class="coveragenums">34% 78/227</p>
+              <p class="coveragenums">35% 80/223</p>
               <p class="coveragenums">6% 5/75</p>
               <p class="coveragenums">14% 2/14</p>
-              <p class="coveragenums">51% 71/138</p>
-              <p class="coveragenums">89% 231/257</p>
-              <p class="coveragenums">0% 1/168</p>
-              <p class="coveragenums">0% 1/168</p>
+              <p class="coveragenums">54% 73/134</p>
+              <p class="coveragenums">89% 229/255</p>
+              <p class="coveragenums">0% 1/166</p>
+              <p class="coveragenums">0% 1/166</p>
             </summary>
             <div>
               <table>
@@ -2138,10 +2138,51 @@
                       <p class="passflag">Pass</p>
                     </td>
                     <td>
-                      <p class="preformatted">length&lt;-list</p>
+                      <p class="preformatted">length</p>
                     </td>
                     <td>
-                      <p class="preformatted">(test 3 (length&lt;-list (stringlist "a" "b" "c")))</p>
+                      <p class="preformatted">(test
+ 4
+ (length "abcd"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">4</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">4</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">length</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ 0
+ (length ""))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">0</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">0</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">length_1</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ 3
+ (length
+  (stringlist "a" "b" "c")))</p>
                     </td>
                     <td>
                       <p class="preformatted">3</p>
@@ -2841,6 +2882,32 @@
                       <p class="passflag">Pass</p>
                     </td>
                     <td>
+                      <p class="preformatted">stringlist&lt;-map</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (stringlist "b" "a")
+ (stringlist&lt;-map
+  (intmap
+   :b 1
+   :a 2)))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(stringlist
+ "b"
+ "a")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(stringlist
+ "b"
+ "a")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
                       <p class="preformatted">switch</p>
                     </td>
                     <td>
@@ -3246,13 +3313,13 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/type</p>
-              <p class="coveragenums">67% 19/28</p>
+              <p class="coveragenums">66% 18/27</p>
               <p class="coveragenums">100% 0/0</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">67% 19/28</p>
-              <p class="coveragenums">82% 23/28</p>
-              <p class="coveragenums">0% 0/28</p>
-              <p class="coveragenums">0% 0/28</p>
+              <p class="coveragenums">66% 18/27</p>
+              <p class="coveragenums">81% 22/27</p>
+              <p class="coveragenums">0% 0/27</p>
+              <p class="coveragenums">0% 0/27</p>
             </summary>
             <div>
               <table>
@@ -3623,44 +3690,6 @@
                     </td>
                     <td>
                       <p class="preformatted">true</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p class="passflag">Pass</p>
-                    </td>
-                    <td>
-                      <p class="preformatted">length&lt;-string</p>
-                    </td>
-                    <td>
-                      <p class="preformatted">(test
- 4
- (length&lt;-string "abcd"))</p>
-                    </td>
-                    <td>
-                      <p class="preformatted">4</p>
-                    </td>
-                    <td>
-                      <p class="preformatted">4</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <p class="passflag">Pass</p>
-                    </td>
-                    <td>
-                      <p class="preformatted">length&lt;-string</p>
-                    </td>
-                    <td>
-                      <p class="preformatted">(test
- 0
- (length&lt;-string ""))</p>
-                    </td>
-                    <td>
-                      <p class="preformatted">0</p>
-                    </td>
-                    <td>
-                      <p class="preformatted">0</p>
                     </td>
                   </tr>
                   <tr>
@@ -4397,13 +4426,13 @@ ab
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/collection</p>
-              <p class="coveragenums">76% 13/17</p>
+              <p class="coveragenums">80% 16/20</p>
               <p class="coveragenums">100% 0/0</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">76% 13/17</p>
-              <p class="coveragenums">100% 17/17</p>
-              <p class="coveragenums">0% 0/17</p>
-              <p class="coveragenums">0% 0/17</p>
+              <p class="coveragenums">80% 16/20</p>
+              <p class="coveragenums">100% 20/20</p>
+              <p class="coveragenums">0% 0/20</p>
+              <p class="coveragenums">0% 0/20</p>
             </summary>
             <div>
               <table>
@@ -4744,25 +4773,121 @@ ab
                       <p class="passflag">Pass</p>
                     </td>
                     <td>
-                      <p class="preformatted">stringlist&lt;-map</p>
+                      <p class="preformatted">map&lt;-map-end</p>
                     </td>
                     <td>
                       <p class="preformatted">(test
- (stringlist "a" "b")
- (stringlist&lt;-map
-  (intmap
-   :a 1
-   :b 2)))</p>
+ (stringmap
+  :b "1"
+  :a "2")
+ (map&lt;-map-end
+  (stringmap
+   :b "1"
+   :a "2"
+   :c "3")
+  2))</p>
                     </td>
                     <td>
-                      <p class="preformatted">(stringlist
- "a"
- "b")</p>
+                      <p class="preformatted">(stringmap
+ :b "1"
+ :a "2")</p>
                     </td>
                     <td>
-                      <p class="preformatted">(stringlist
- "a"
- "b")</p>
+                      <p class="preformatted">(stringmap
+ :b "1"
+ :a "2")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">map&lt;-map-keys</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (stringmap
+  :c "3"
+  :a "1")
+ (map&lt;-map-keys
+  (stringmap
+   :a "1"
+   :b "2"
+   :c "3")
+  (stringlist
+   "c" "a")))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(stringmap
+ :c "3"
+ :a "1")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(stringmap
+ :c "3"
+ :a "1")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">map&lt;-map-start</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (stringmap
+  :a "2"
+  :c "3")
+ (map&lt;-map-start
+  (stringmap
+   :b "1"
+   :a "2"
+   :c "3")
+  2))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(stringmap
+ :a "2"
+ :c "3")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(stringmap
+ :a "2"
+ :c "3")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">map&lt;-map-start-end</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (stringmap
+  :a "2"
+  :c "3")
+ (map&lt;-map-start-end
+  (stringmap
+   :b "1"
+   :a "2"
+   :c "3"
+   :d "4")
+  2 3))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(stringmap
+ :a "2"
+ :c "3")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(stringmap
+ :a "2"
+ :c "3")</p>
                     </td>
                   </tr>
                 </tbody>
@@ -18234,13 +18359,13 @@ ab
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/web/htmldoc</p>
-              <p class="coveragenums">0% 0/12</p>
+              <p class="coveragenums">0% 0/13</p>
               <p class="coveragenums">100% 0/0</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">0% 0/12</p>
-              <p class="coveragenums">100% 12/12</p>
-              <p class="coveragenums">0% 0/12</p>
-              <p class="coveragenums">0% 0/12</p>
+              <p class="coveragenums">0% 0/13</p>
+              <p class="coveragenums">100% 13/13</p>
+              <p class="coveragenums">0% 0/13</p>
+              <p class="coveragenums">0% 0/13</p>
             </summary>
             <div>
               <table>
@@ -18801,13 +18926,13 @@ ab
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/ui/html/uihtml</p>
-              <p class="coveragenums">0% 0/30</p>
+              <p class="coveragenums">0% 0/37</p>
               <p class="coveragenums">100% 0/0</p>
               <p class="coveragenums">0% 0/7</p>
-              <p class="coveragenums">0% 0/23</p>
-              <p class="coveragenums">63% 19/30</p>
-              <p class="coveragenums">0% 0/23</p>
-              <p class="coveragenums">0% 0/23</p>
+              <p class="coveragenums">0% 0/30</p>
+              <p class="coveragenums">60% 23/38</p>
+              <p class="coveragenums">0% 0/31</p>
+              <p class="coveragenums">0% 0/31</p>
             </summary>
             <div>
               <table>

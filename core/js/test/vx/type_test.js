@@ -24,11 +24,11 @@ export default class vx_type_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/type", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 82, ":tests", 23, ":total", 28), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 67, ":tests", 19, ":total", 28), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 81, ":tests", 22, ":total", 27), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 66, ":tests", 18, ":total", 27), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 67, ":tests", 19, ":total", 28), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 66, ":tests", 18, ":total", 27), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     )
   }
@@ -62,7 +62,6 @@ export default class vx_type_test {
           "is-string", 4,
           "is-type", 4,
           "is-type<-any-typelist", 4,
-          "length<-string", 2,
           "string-lowercase", 1,
           "string-outdent", 2,
           "string-trim", 1,
@@ -395,40 +394,6 @@ export default class vx_type_test {
                   vx_core.t_int
                 )
               )
-            )
-          )
-        )
-    )
-    return output
-  }
-
-  static f_length_from_string(context) {
-    const output = vx_core.f_new(
-      vx_test.t_testcase,
-      ":passfail", false,
-      ":testpkg", "vx/type",
-      ":casename", "length<-string",
-      ":describelist",
-        vx_core.f_new(
-          vx_test.t_testdescribelist,
-          vx_core.f_new(
-            vx_test.t_testdescribe,
-            ":describename", "(test\n 4\n (length<-string \"abcd\"))",
-            ":testresult",
-            vx_test.f_test(
-              context,
-              4,
-              vx_type.f_length_from_string("abcd")
-            )
-          ),
-          vx_core.f_new(
-            vx_test.t_testdescribe,
-            ":describename", "(test\n 0\n (length<-string \"\"))",
-            ":testresult",
-            vx_test.f_test(
-              context,
-              0,
-              vx_type.f_length_from_string("")
             )
           )
         )
@@ -816,7 +781,6 @@ export default class vx_type_test {
       vx_type_test.f_is_string(context),
       vx_type_test.f_is_type(context),
       vx_type_test.f_is_type_from_any_typelist(context),
-      vx_type_test.f_length_from_string(context),
       vx_type_test.f_string_lowercase(context),
       vx_type_test.f_string_outdent(context),
       vx_type_test.f_string_trim(context),

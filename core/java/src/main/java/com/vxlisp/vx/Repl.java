@@ -2047,7 +2047,7 @@ public final class Repl {
       Repl.t_repl,
       Core.t_any_from_func.vx_fn_new(() -> {
         final Textblock.Type_textblocklist children = textblock.children();
-        final Core.Type_int len = Core.f_length_from_list(children);
+        final Core.Type_int len = Core.f_length_1(children);
         return Core.f_switch(
           Repl.t_repl,
           len,

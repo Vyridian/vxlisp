@@ -61,7 +61,8 @@ namespace vx_core_test {
   vx_test::Type_testcase f_is_int(vx_core::Type_context context);
   vx_test::Type_testcase f_is_number(vx_core::Type_context context);
   vx_test::Type_testcase f_last_from_list(vx_core::Type_context context);
-  vx_test::Type_testcase f_length_from_list(vx_core::Type_context context);
+  vx_test::Type_testcase f_length(vx_core::Type_context context);
+  vx_test::Type_testcase f_length(vx_core::Type_context context);
   vx_test::Type_testcase f_let(vx_core::Type_context context);
   vx_test::Type_testcase f_list_join_from_list(vx_core::Type_context context);
   vx_test::Type_testcase f_list_join_from_list(vx_core::Type_context context);
@@ -81,6 +82,7 @@ namespace vx_core_test {
   vx_test::Type_testcase f_string_repeat(vx_core::Type_context context);
   vx_test::Type_testcase f_string_from_any(vx_core::Type_context context);
   vx_test::Type_testcase f_string_from_string_find_replace(vx_core::Type_context context);
+  vx_test::Type_testcase f_stringlist_from_map(vx_core::Type_context context);
   vx_test::Type_testcase f_switch(vx_core::Type_context context);
   vx_test::Type_testcase f_type_from_any(vx_core::Type_context context);
   vx_test::Type_testcase f_typename_from_any(vx_core::Type_context context);

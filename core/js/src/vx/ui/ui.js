@@ -999,7 +999,7 @@ export default class vx_ui_ui {
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const uimap = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_uimap, "struct-2": vx_ui_ui.t_ui}, ui, ":uimap")
-        return vx_collection.f_stringlist_from_map(uimap)
+        return vx_core.f_stringlist_from_map(uimap)
       })
     )
     return output
@@ -1356,8 +1356,9 @@ export default class vx_ui_ui {
       {"any-1": vx_ui_ui.t_ui},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const uichg = vx_ui_ui.f_ui_from_ui_selected(ui, selected)
-        return vx_ui_ui.f_ui_layout_from_ui_orig_parent(uichg, ui, parent)
+        const uichg1 = vx_ui_ui.f_ui_from_ui_selected(ui, selected)
+        const uichg2 = vx_ui_ui.f_ui_writechild_from_ui_child(parent, uichg1)
+        return vx_ui_ui.f_ui_layout_from_ui_orig_parent(uichg2, ui, parent)
       })
     )
     return output
@@ -1607,7 +1608,7 @@ export default class vx_ui_ui {
               [],
               vx_core.f_new(vx_core.t_any_from_func, () => {
                 const afterpos = vx_core.f_plus(
-                  vx_type.f_length_from_string(uid),
+                  vx_core.f_length(uid),
                   2
                 )
                 const after = vx_type.f_string_from_string_start(find, afterpos)

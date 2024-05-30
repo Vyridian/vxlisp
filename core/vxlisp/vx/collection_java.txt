@@ -140,3 +140,19 @@
     return output;
   }
   
+  public static <T extends Core.Type_map> T vx_map_from_map_keys(T generic_map_1, Core.Type_map valuemap, Core.Type_stringlist keys) {
+    T output = Core.f_empty(generic_map_1);
+    List<Core.Type_string> keylist = keys.vx_liststring();
+    if (keylist.size() > 0) {
+      Map<String, Core.Type_any> map = valuemap.vx_map();
+      List<Core.Type_any> values = new ArrayList<>();
+      for (Core.Type_string key : keylist) {
+        Core.Type_any value = map.get(key.vx_string());
+        values.add(key);
+        values.add(value);
+      }
+      Core.Type_anylist anyvalues = Core.vx_new_anylist(values);
+      output = Core.f_new(generic_map_1, anyvalues);
+    }
+    return output;
+  }

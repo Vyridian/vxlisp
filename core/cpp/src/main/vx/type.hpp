@@ -63,10 +63,6 @@ namespace vx_type {
   typedef Abstract_is_type_from_any_typelist* Func_is_type_from_any_typelist;
   extern Func_is_type_from_any_typelist e_is_type_from_any_typelist;
   extern Func_is_type_from_any_typelist t_is_type_from_any_typelist;
-  class Abstract_length_from_string;
-  typedef Abstract_length_from_string* Func_length_from_string;
-  extern Func_length_from_string e_length_from_string;
-  extern Func_length_from_string t_length_from_string;
   class Abstract_string_lowercase;
   typedef Abstract_string_lowercase* Func_string_lowercase;
   extern Func_string_lowercase e_string_lowercase;
@@ -193,9 +189,6 @@ namespace vx_type {
 
   // (func is-type<-any-typelist)
   vx_core::Type_boolean f_is_type_from_any_typelist(vx_core::Type_any val, vx_core::Type_typelist typelist);
-
-  // (func length<-string)
-  vx_core::Type_int f_length_from_string(vx_core::Type_string text);
 
   // (func string-lowercase)
   vx_core::Type_string f_string_lowercase(vx_core::Type_string text);
@@ -583,33 +576,6 @@ namespace vx_type {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
-  };
-
-  // (func length<-string)
-  class Abstract_length_from_string : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
-  public:
-    Abstract_length_from_string() {};
-    virtual ~Abstract_length_from_string() = 0;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
-    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
-    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
-  };
-  class Class_length_from_string : public virtual Abstract_length_from_string {
-  public:
-    Class_length_from_string();
-    virtual ~Class_length_from_string() override;
-    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
-    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
-    virtual vx_core::Type_funcdef vx_funcdef() const override;
-    virtual vx_core::Type_typedef vx_typedef() const override;
-    virtual vx_core::Type_constdef vx_constdef() const override;
-    virtual vx_core::Type_msgblock vx_msgblock() const override;
-    virtual vx_core::vx_Type_listany vx_dispose() override;
-    virtual vx_core::Type_any vx_empty() const override;
-    virtual vx_core::Type_any vx_type() const override;
-    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
-    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 

@@ -8922,7 +8922,7 @@ namespace vx_ui_ui {
       vx_core::t_any_from_func->vx_fn_new({ui}, [ui]() {
         vx_ui_ui::Type_uimap uimap = ui->uimap();
         vx_core::vx_ref_plus(uimap);
-        vx_core::Type_stringlist output_1 = vx_collection::f_stringlist_from_map(uimap);
+        vx_core::Type_stringlist output_1 = vx_core::f_stringlist_from_map(uimap);
         vx_core::vx_release_one_except(uimap, output_1);
         return output_1;
       })
@@ -10289,10 +10289,12 @@ namespace vx_ui_ui {
     output = vx_core::f_let(
       vx_ui_ui::t_ui,
       vx_core::t_any_from_func->vx_fn_new({ui, selected, parent}, [ui, selected, parent]() {
-        vx_ui_ui::Type_ui uichg = vx_ui_ui::f_ui_from_ui_selected(ui, selected);
-        vx_core::vx_ref_plus(uichg);
-        vx_ui_ui::Type_ui output_1 = vx_ui_ui::f_ui_layout_from_ui_orig_parent(uichg, ui, parent);
-        vx_core::vx_release_one_except(uichg, output_1);
+        vx_ui_ui::Type_ui uichg1 = vx_ui_ui::f_ui_from_ui_selected(ui, selected);
+        vx_core::vx_ref_plus(uichg1);
+        vx_ui_ui::Type_ui uichg2 = vx_ui_ui::f_ui_writechild_from_ui_child(parent, uichg1);
+        vx_core::vx_ref_plus(uichg2);
+        vx_ui_ui::Type_ui output_1 = vx_ui_ui::f_ui_layout_from_ui_orig_parent(uichg2, ui, parent);
+        vx_core::vx_release_one_except({uichg1, uichg2}, output_1);
         return output_1;
       })
     );
@@ -11159,7 +11161,7 @@ namespace vx_ui_ui {
                   vx_ui_ui::t_ui,
                   vx_core::t_any_from_func->vx_fn_new({uid, find, uiarg}, [uid, find, uiarg]() {
                     vx_core::Type_int afterpos = vx_core::f_plus(
-                      vx_type::f_length_from_string(uid),
+                      vx_core::f_length(uid),
                       vx_core::vx_new_int(2)
                     );
                     vx_core::vx_ref_plus(afterpos);

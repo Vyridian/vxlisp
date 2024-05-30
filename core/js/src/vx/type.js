@@ -409,26 +409,6 @@ export default class vx_type {
   }
 
   /**
-   * @function length_from_string
-   * Returns length of a string.
-   * @param  {string} text
-   * @return {int}
-   */
-  static t_length_from_string = {
-    vx_type: vx_core.t_type
-  }
-  static e_length_from_string = {
-    vx_type: vx_type.t_length_from_string
-  }
-
-  // (func length<-string)
-  static f_length_from_string(text) {
-    let output = vx_core.e_int
-    output = text.length
-    return output
-  }
-
-  /**
    * @function string_lowercase
    * Returns lowercase version of string
    * @param  {string} text
@@ -624,7 +604,7 @@ export default class vx_type {
     output = vx_type.f_string_from_string_start_end(
       text,
       startpos,
-      vx_type.f_length_from_string(text)
+      vx_core.f_length(text)
     )
     return output
   }
@@ -778,7 +758,6 @@ export default class vx_type {
       "is-string": vx_type.e_is_string,
       "is-type": vx_type.e_is_type,
       "is-type<-any-typelist": vx_type.e_is_type_from_any_typelist,
-      "length<-string": vx_type.e_length_from_string,
       "string-lowercase": vx_type.e_string_lowercase,
       "string-outdent": vx_type.e_string_outdent,
       "string-trim": vx_type.e_string_trim,
@@ -808,7 +787,6 @@ export default class vx_type {
       "is-string": vx_type.t_is_string,
       "is-type": vx_type.t_is_type,
       "is-type<-any-typelist": vx_type.t_is_type_from_any_typelist,
-      "length<-string": vx_type.t_length_from_string,
       "string-lowercase": vx_type.t_string_lowercase,
       "string-outdent": vx_type.t_string_outdent,
       "string-trim": vx_type.t_string_trim,
@@ -1085,24 +1063,6 @@ export default class vx_type {
       properties    : [],
       proplast      : {},
       fn            : vx_type.f_is_type_from_any_typelist
-    }
-
-    // (func length<-string)
-    vx_type.t_length_from_string['vx_value'] = {
-      name          : "length<-string",
-      pkgname       : "vx/type",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_type.f_length_from_string
     }
 
     // (func string-lowercase)

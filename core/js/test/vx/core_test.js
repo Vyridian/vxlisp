@@ -23,11 +23,11 @@ export default class vx_core_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/core", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 14, ":tests", 2, ":total", 14), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 89, ":tests", 231, ":total", 257), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 51, ":tests", 71, ":total", 138), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 89, ":tests", 229, ":total", 255), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 54, ":tests", 73, ":total", 134), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 34, ":tests", 78, ":total", 227), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 35, ":tests", 80, ":total", 223), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 6, ":tests", 5, ":total", 75)
     )
   }
@@ -235,7 +235,9 @@ export default class vx_core_test {
           "is-number", 3,
           "is-pass<-permission", 0,
           "last<-list", 1,
-          "length<-list", 1,
+          "length", 2,
+          "length_1", 1,
+          "length_2", 0,
           "let", 1,
           "let-async", 0,
           "list-join<-list", 1,
@@ -254,11 +256,6 @@ export default class vx_core_test {
           "map<-list", 1,
           "map<-map", 1,
           "map<-map_1", 1,
-          "mempool-addref", 0,
-          "mempool-release", 0,
-          "mempool-removeref", 0,
-          "mempool-removerefchildren", 0,
-          "mempool-reserve", 0,
           "msg<-error", 0,
           "msg<-error_1", 0,
           "msg<-error_2", 0,
@@ -293,6 +290,7 @@ export default class vx_core_test {
           "string<-any-indent", 0,
           "string<-func", 0,
           "string<-string-find-replace", 1,
+          "stringlist<-map", 1,
           "switch", 1,
           "then", 0,
           "traits<-typedef", 0,
@@ -2370,23 +2368,57 @@ export default class vx_core_test {
     return output
   }
 
-  static f_length_from_list(context) {
+  static f_length(context) {
     const output = vx_core.f_new(
       vx_test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/core",
-      ":casename", "length<-list",
+      ":casename", "length",
       ":describelist",
         vx_core.f_new(
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test 3 (length<-list (stringlist \"a\" \"b\" \"c\")))",
+            ":describename", "(test\n 4\n (length \"abcd\"))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              4,
+              vx_core.f_length("abcd")
+            )
+          ),
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n 0\n (length \"\"))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              0,
+              vx_core.f_length("")
+            )
+          )
+        )
+    )
+    return output
+  }
+
+  static f_length_1(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "length",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n 3\n (length\n  (stringlist \"a\" \"b\" \"c\")))",
             ":testresult",
             vx_test.f_test(
               context,
               3,
-              vx_core.f_length_from_list(
+              vx_core.f_length_1(
                 vx_core.f_new(
                   vx_core.t_stringlist,
                   "a",
@@ -3220,6 +3252,42 @@ export default class vx_core_test {
     return output
   }
 
+  static f_stringlist_from_map(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "stringlist<-map",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n (stringlist \"b\" \"a\")\n (stringlist<-map\n  (intmap\n   :b 1\n   :a 2)))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              vx_core.f_new(
+                vx_core.t_stringlist,
+                "b",
+                "a"
+              ),
+              vx_core.f_stringlist_from_map(
+                vx_core.f_new(
+                  vx_core.t_intmap,
+                  ":b",
+                  1,
+                  ":a",
+                  2
+                )
+              )
+            )
+          )
+        )
+    )
+    return output
+  }
+
   static f_switch(context) {
     const output = vx_core.f_new(
       vx_test.t_testcase,
@@ -3407,7 +3475,8 @@ export default class vx_core_test {
       vx_core_test.f_is_int(context),
       vx_core_test.f_is_number(context),
       vx_core_test.f_last_from_list(context),
-      vx_core_test.f_length_from_list(context),
+      vx_core_test.f_length(context),
+      vx_core_test.f_length_1(context),
       vx_core_test.f_let(context),
       vx_core_test.f_list_join_from_list(context),
       vx_core_test.f_list_join_from_list_1(context),
@@ -3427,6 +3496,7 @@ export default class vx_core_test {
       vx_core_test.f_string_repeat(context),
       vx_core_test.f_string_from_any(context),
       vx_core_test.f_string_from_string_find_replace(context),
+      vx_core_test.f_stringlist_from_map(context),
       vx_core_test.f_switch(context),
       vx_core_test.f_type_from_any(context),
       vx_core_test.f_typename_from_any(context)

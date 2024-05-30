@@ -1434,11 +1434,43 @@
     (vx/test/testcase
      :passfail true
      :testpkg "vx/core"
-     :casename "length<-list"
+     :casename "length"
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test 3 (length<-list (stringlist \"a\" \"b\" \"c\")))"
+        :describename
+         "(test
+ 4
+ (length \"abcd\"))"
+        :testpkg "vx/core"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected 4
+          :actual 4))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ 0
+ (length \"\"))"
+        :testpkg "vx/core"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/core"
+     :casename "length_1"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ 3
+ (length
+  (stringlist \"a\" \"b\" \"c\")))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -2030,6 +2062,33 @@
     (vx/test/testcase
      :passfail true
      :testpkg "vx/core"
+     :casename "stringlist<-map"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (stringlist \"b\" \"a\")
+ (stringlist<-map
+  (intmap
+   :b 1
+   :a 2)))"
+        :testpkg "vx/core"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringlist
+            "b"
+            "a")
+          :actual
+           (stringlist
+            "b"
+            "a")))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/core"
      :casename "switch"
      :describelist
       (vx/test/testdescribelist
@@ -2241,7 +2300,9 @@
       :is-number 3
       :is-pass<-permission 0
       :last<-list 1
-      :length<-list 1
+      :length 2
+      :length_1 1
+      :length_2 0
       :let 1
       :let-async 0
       :list-join<-list 1
@@ -2260,11 +2321,6 @@
       :map<-list 1
       :map<-map 1
       :map<-map_1 1
-      :mempool-addref 0
-      :mempool-release 0
-      :mempool-removeref 0
-      :mempool-removerefchildren 0
-      :mempool-reserve 0
       :msg<-error 0
       :msg<-error_1 0
       :msg<-error_2 0
@@ -2299,6 +2355,7 @@
       :string<-any-indent 0
       :string<-func 0
       :string<-string-find-replace 1
+      :stringlist<-map 1
       :switch 1
       :then 0
       :traits<-typedef 0
@@ -2393,11 +2450,11 @@
     :bigospacenums
      (vx/test/testcoveragenums
       :tests 1
-      :total 168)
+      :total 166)
     :bigotimenums
      (vx/test/testcoveragenums
       :tests 1
-      :total 168)
+      :total 166)
     :constnums
      (vx/test/testcoveragenums
       :pct 14
@@ -2406,19 +2463,19 @@
     :docnums
      (vx/test/testcoveragenums
       :pct 89
-      :tests 231
-      :total 257)
+      :tests 229
+      :total 255)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 51
-      :tests 71
-      :total 138)
+      :pct 54
+      :tests 73
+      :total 134)
     :testpkg "vx/core"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 34
-      :tests 78
-      :total 227)
+      :pct 35
+      :tests 80
+      :total 223)
     :typenums
      (vx/test/testcoveragenums
       :pct 6
@@ -3014,34 +3071,6 @@
     (vx/test/testcase
      :passfail true
      :testpkg "vx/type"
-     :casename "length<-string"
-     :describelist
-      (vx/test/testdescribelist
-       (vx/test/testdescribe
-        :describename
-         "(test
- 4
- (length<-string \"abcd\"))"
-        :testpkg "vx/type"
-        :testresult
-         (vx/test/testresult
-          :code ":eq"
-          :passfail true
-          :expected 4
-          :actual 4))
-       (vx/test/testdescribe
-        :describename
-         "(test
- 0
- (length<-string \"\"))"
-        :testpkg "vx/type"
-        :testresult
-         (vx/test/testresult
-          :code ":eq"
-          :passfail true))))
-    (vx/test/testcase
-     :passfail true
-     :testpkg "vx/type"
      :casename "string-lowercase"
      :describelist
       (vx/test/testdescribelist
@@ -3416,7 +3445,6 @@ ab
       :is-string 4
       :is-type 4
       :is-type<-any-typelist 4
-      :length<-string 2
       :string-lowercase 1
       :string-outdent 2
       :string-trim 1
@@ -3435,29 +3463,29 @@ ab
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 28)
+      :total 27)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 28)
+      :total 27)
     :constnums
      (vx/test/testcoveragenums
       :pct 100)
     :docnums
      (vx/test/testcoveragenums
-      :pct 82
-      :tests 23
-      :total 28)
+      :pct 81
+      :tests 22
+      :total 27)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 67
-      :tests 19
-      :total 28)
+      :pct 66
+      :tests 18
+      :total 27)
     :testpkg "vx/type"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 67
-      :tests 19
-      :total 28)
+      :pct 66
+      :tests 18
+      :total 27)
     :typenums
      (vx/test/testcoveragenums
       :pct 100))
@@ -4104,30 +4132,129 @@ ab
     (vx/test/testcase
      :passfail true
      :testpkg "vx/collection"
-     :casename "stringlist<-map"
+     :casename "map<-map-end"
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
         :describename
          "(test
- (stringlist \"a\" \"b\")
- (stringlist<-map
-  (intmap
-   :a 1
-   :b 2)))"
+ (stringmap
+  :b \"1\"
+  :a \"2\")
+ (map<-map-end
+  (stringmap
+   :b \"1\"
+   :a \"2\"
+   :c \"3\")
+  2))"
         :testpkg "vx/collection"
         :testresult
          (vx/test/testresult
           :code ":eq"
           :passfail true
           :expected
-           (stringlist
-            "a"
-            "b")
+           (stringmap
+            :a "2"
+            :b "1")
           :actual
-           (stringlist
-            "a"
-            "b"))))))
+           (stringmap
+            :a "2"
+            :b "1")))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/collection"
+     :casename "map<-map-keys"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (stringmap
+  :c \"3\"
+  :a \"1\")
+ (map<-map-keys
+  (stringmap
+   :a \"1\"
+   :b \"2\"
+   :c \"3\")
+  (stringlist
+   \"c\" \"a\")))"
+        :testpkg "vx/collection"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringmap
+            :a "1"
+            :c "3")
+          :actual
+           (stringmap
+            :a "1"
+            :c "3")))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/collection"
+     :casename "map<-map-start"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (stringmap
+  :a \"2\"
+  :c \"3\")
+ (map<-map-start
+  (stringmap
+   :b \"1\"
+   :a \"2\"
+   :c \"3\")
+  2))"
+        :testpkg "vx/collection"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringmap
+            :a "2"
+            :c "3")
+          :actual
+           (stringmap
+            :a "2"
+            :c "3")))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/collection"
+     :casename "map<-map-start-end"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (stringmap
+  :a \"2\"
+  :c \"3\")
+ (map<-map-start-end
+  (stringmap
+   :b \"1\"
+   :a \"2\"
+   :c \"3\"
+   :d \"4\")
+  2 3))"
+        :testpkg "vx/collection"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringmap
+            :a "2"
+            :c "3")
+          :actual
+           (stringmap
+            :a "2"
+            :c "3"))))))
   :coveragedetail
    (vx/test/testcoveragedetail
     :funcmap
@@ -4148,35 +4275,38 @@ ab
       :list<-list-filtertypes 1
       :list<-list-start 1
       :list<-list-start-end 1
-      :stringlist<-map 1)
+      :map<-map-end 1
+      :map<-map-keys 1
+      :map<-map-start 1
+      :map<-map-start-end 1)
     :testpkg "vx/collection")
   :coveragesummary
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 17)
+      :total 20)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 17)
+      :total 20)
     :constnums
      (vx/test/testcoveragenums
       :pct 100)
     :docnums
      (vx/test/testcoveragenums
       :pct 100
-      :tests 17
-      :total 17)
+      :tests 20
+      :total 20)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 76
-      :tests 13
-      :total 17)
+      :pct 80
+      :tests 16
+      :total 20)
     :testpkg "vx/collection"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 76
-      :tests 13
-      :total 17)
+      :pct 80
+      :tests 16
+      :total 20)
     :typenums
      (vx/test/testcoveragenums
       :pct 100))
@@ -17505,6 +17635,7 @@ ab
       :boolean-write<-id-htmltext 0
       :boolean-write<-id-visible 0
       :boolean-write<-stylesheet 0
+      :boolean-writeevents<-ui 0
       :context-read 0
       :context-write 0
       :string<-id 0
@@ -17515,25 +17646,25 @@ ab
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 12)
+      :total 13)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 12)
+      :total 13)
     :constnums
      (vx/test/testcoveragenums
       :pct 100)
     :docnums
      (vx/test/testcoveragenums
       :pct 100
-      :tests 12
-      :total 12)
+      :tests 13
+      :total 13)
     :funcnums
      (vx/test/testcoveragenums
-      :total 12)
+      :total 13)
     :testpkg "vx/web/htmldoc"
     :totalnums
      (vx/test/testcoveragenums
-      :total 12)
+      :total 13)
     :typenums
      (vx/test/testcoveragenums
       :pct 100))
@@ -18111,11 +18242,19 @@ ab
     :funcmap
      (intmap
       :boolean-print-html 0
+      :boolean-writeeventsall<-ui 0
+      :boolean-writeeventsall<-uimap 0
       :context-write 0
       :divchild<-ui 0
       :divchildlist<-uimap 0
+      :divchildlist<-uimap-origmap-parent 0
+      :divchildlist<-uimap_1 0
       :node-app<-ui-orig-parent 0
+      :node-default<-ui-orig-parent 0
+      :node-image<-ui-orig-parent 0
+      :node-label<-ui-orig-parent 0
       :node-layout<-node-ui 0
+      :node<-ui-orig-parent 0
       :string-style<-font 0
       :string-style<-image 0
       :string-stylename<-name-styletype 0
@@ -18138,25 +18277,25 @@ ab
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 23)
+      :total 31)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 23)
+      :total 31)
     :constnums
      (vx/test/testcoveragenums
       :total 7)
     :docnums
      (vx/test/testcoveragenums
-      :pct 63
-      :tests 19
-      :total 30)
+      :pct 60
+      :tests 23
+      :total 38)
     :funcnums
      (vx/test/testcoveragenums
-      :total 23)
+      :total 30)
     :testpkg "vx/ui/html/uihtml"
     :totalnums
      (vx/test/testcoveragenums
-      :total 30)
+      :total 37)
     :typenums
      (vx/test/testcoveragenums
       :pct 100))

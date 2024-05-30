@@ -9800,7 +9800,7 @@ public final class Ui {
       Core.t_stringlist,
       Core.t_any_from_func.vx_fn_new(() -> {
         final Ui.Type_uimap uimap = ui.uimap();
-        return Collection.f_stringlist_from_map(uimap);
+        return Core.f_stringlist_from_map(uimap);
       })
     );
     return output;
@@ -11008,8 +11008,9 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_ui uichg = Ui.f_ui_from_ui_selected(ui, selected);
-        return Ui.f_ui_layout_from_ui_orig_parent(uichg, ui, parent);
+        final Ui.Type_ui uichg1 = Ui.f_ui_from_ui_selected(ui, selected);
+        final Ui.Type_ui uichg2 = Ui.f_ui_writechild_from_ui_child(parent, uichg1);
+        return Ui.f_ui_layout_from_ui_orig_parent(uichg2, ui, parent);
       })
     );
     return output;
@@ -11774,7 +11775,7 @@ public final class Ui {
                   Ui.t_ui,
                   Core.t_any_from_func.vx_fn_new(() -> {
                     final Core.Type_int afterpos = Core.f_plus(
-                      Type.f_length_from_string(uid),
+                      Core.f_length(uid),
                       Core.vx_new_int(2)
                     );
                     final Core.Type_string after = Type.f_string_from_string_start(find, afterpos);

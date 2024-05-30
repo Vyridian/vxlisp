@@ -372,7 +372,7 @@ export default class vx_repl {
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const children = vx_core.f_any_from_struct({"any-1": vx_data_textblock.t_textblocklist, "struct-2": vx_data_textblock.t_textblock}, textblock, ":children")
-        const len = vx_core.f_length_from_list(children)
+        const len = vx_core.f_length_1(children)
         return vx_core.f_switch(
           {"any-1": vx_repl.t_repl, "any-2": vx_core.t_int},
           len,

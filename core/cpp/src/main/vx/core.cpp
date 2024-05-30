@@ -557,9 +557,11 @@ namespace vx_core {
 
   // vx_list_from_map_1(generic_list_1, map, fn-any<-key-value)
   vx_core::Type_any vx_list_from_map_1(vx_core::Type_any generic_list_1, vx_core::Type_map valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value) {
+    std::vector<std::string> keys = valuemap->vx_p_keys;
     vx_core::vx_Type_mapany map_value = valuemap->vx_map();
     vx_core::vx_Type_listany list_result;
-    for (auto const& [key, val] : map_value) {
+    for (std::string key : keys) {
+      vx_core::Type_any val = map_value[key];
       vx_core::Type_string valkey = vx_core::vx_new_string(key);
       vx_core::vx_reserve(valkey);
       vx_core::Type_any result = fn_any_from_key_value->vx_any_from_key_value(valkey, val);
@@ -17359,56 +17361,54 @@ namespace vx_core {
 
   //}
 
-  // (func length<-list)
-  vx_core::Type_int f_length_from_list(vx_core::Type_list values) {
+  // (func length)
+  vx_core::Type_int f_length(vx_core::Type_string text) {
     vx_core::Type_int output = vx_core::e_int;
-    vx_core::vx_reserve(values);
-    long len = vx_core::vx_int_from_sizet(values->vx_list().size());
-    if (len > 0) {
-      output = vx_core::vx_new_int(len);
-    };
-    vx_core::vx_release_one_except(values, output);
+    vx_core::vx_reserve(text);
+    long len = text->vx_string().length();
+    output = vx_core::vx_new_int(len);
+    vx_core::vx_release_one_except(text, output);
     return output;
   }
   /**
-   * @function length_from_list
-   * Returns the currently used size/length of a list
-   * @param  {list-1} values
+   * @function length
+   * Returns length of a string.
+   * @param  {string} text
    * @return {int}
-   * (func length<-list)
+   * (func length)
    */
-  // (func length<-list)
-  // class Class_length_from_list {
-    Abstract_length_from_list::~Abstract_length_from_list() {}
+  // (func length)
+  // class Class_length {
+    Abstract_length::~Abstract_length() {}
 
-    Class_length_from_list::Class_length_from_list() : Abstract_length_from_list::Abstract_length_from_list() {
+    Class_length::Class_length() : Abstract_length::Abstract_length() {
       vx_core::refcount += 1;
     }
 
-    Class_length_from_list::~Class_length_from_list() {
+    Class_length::~Class_length() {
       vx_core::refcount -= 1;
       if (this->vx_p_msgblock) {
         vx_core::vx_release_one(this->vx_p_msgblock);
       }
     }
 
-    vx_core::Type_any Class_length_from_list::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_core::Func_length_from_list output = vx_core::e_length_from_list;
+    vx_core::Type_any Class_length::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_core::Func_length output = vx_core::e_length;
       vx_core::vx_release(vals);
       return output;
     }
 
-    vx_core::Type_any Class_length_from_list::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_core::Func_length_from_list output = vx_core::e_length_from_list;
+    vx_core::Type_any Class_length::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Func_length output = vx_core::e_length;
       vx_core::vx_release_except(copyval, output);
       vx_core::vx_release_except(vals, output);
       return output;
     }
 
-    vx_core::Type_typedef Class_length_from_list::vx_typedef() const {
+    vx_core::Type_typedef Class_length::vx_typedef() const {
       vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
         "vx/core", // pkgname
-        "length<-list", // name
+        "length", // name
         ":func", // extends
         vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
         vx_core::e_typelist, // allowtypes
@@ -17422,12 +17422,12 @@ namespace vx_core {
       return output;
     }
 
-    vx_core::Type_constdef Class_length_from_list::vx_constdef() const {return this->vx_p_constdef;}
+    vx_core::Type_constdef Class_length::vx_constdef() const {return this->vx_p_constdef;}
 
-    vx_core::Type_funcdef Class_length_from_list::vx_funcdef() const {
+    vx_core::Type_funcdef Class_length::vx_funcdef() const {
       vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
         "vx/core", // pkgname
-        "length<-list", // name
+        "length", // name
         0, // idx
         false, // async
         this->vx_typedef() // typedef
@@ -17435,27 +17435,232 @@ namespace vx_core {
       return output;
     }
 
-    vx_core::Type_any Class_length_from_list::vx_empty() const {return vx_core::e_length_from_list;}
-    vx_core::Type_any Class_length_from_list::vx_type() const {return vx_core::t_length_from_list;}
-    vx_core::Type_msgblock Class_length_from_list::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany Class_length_from_list::vx_dispose() {return vx_core::emptylistany;}
+    vx_core::Type_any Class_length::vx_empty() const {return vx_core::e_length;}
+    vx_core::Type_any Class_length::vx_type() const {return vx_core::t_length;}
+    vx_core::Type_msgblock Class_length::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_length::vx_dispose() {return vx_core::emptylistany;}
 
-    vx_core::Func_any_from_any Class_length_from_list::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+    vx_core::Func_any_from_any Class_length::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
       return vx_core::e_any_from_any;
     }
 
-    vx_core::Type_any Class_length_from_list::vx_any_from_any(vx_core::Type_any val) const {
+    vx_core::Type_any Class_length::vx_any_from_any(vx_core::Type_any val) const {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_list inputval = vx_core::vx_any_from_any(vx_core::t_list, val);
-      output = vx_core::f_length_from_list(inputval);
+      vx_core::Type_string inputval = vx_core::vx_any_from_any(vx_core::t_string, val);
+      output = vx_core::f_length(inputval);
       vx_core::vx_release_except(val, output);
       return output;
     }
 
-    vx_core::Type_any Class_length_from_list::vx_repl(vx_core::Type_anylist arglist) {
+    vx_core::Type_any Class_length::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_string text = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_core::f_length(text);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func length)
+  vx_core::Type_int f_length_1(vx_core::Type_list values) {
+    vx_core::Type_int output = vx_core::e_int;
+    vx_core::vx_reserve(values);
+    long len = vx_core::vx_int_from_sizet(values->vx_list().size());
+    if (len > 0) {
+      output = vx_core::vx_new_int(len);
+    };
+    vx_core::vx_release_one_except(values, output);
+    return output;
+  }
+  /**
+   * @function length 1
+   * Returns the currently used size/length of a list
+   * @param  {list-1} values
+   * @return {int}
+   * (func length)
+   */
+  // (func length)
+  // class Class_length_1 {
+    Abstract_length_1::~Abstract_length_1() {}
+
+    Class_length_1::Class_length_1() : Abstract_length_1::Abstract_length_1() {
+      vx_core::refcount += 1;
+    }
+
+    Class_length_1::~Class_length_1() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_length_1::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_core::Func_length_1 output = vx_core::e_length_1;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_length_1::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Func_length_1 output = vx_core::e_length_1;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_length_1::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "length", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_length_1::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_length_1::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/core", // pkgname
+        "length", // name
+        1, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_length_1::vx_empty() const {return vx_core::e_length_1;}
+    vx_core::Type_any Class_length_1::vx_type() const {return vx_core::t_length_1;}
+    vx_core::Type_msgblock Class_length_1::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_length_1::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_length_1::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_length_1::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_list inputval = vx_core::vx_any_from_any(vx_core::t_list, val);
+      output = vx_core::f_length_1(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_length_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_list values = vx_core::vx_any_from_any(vx_core::t_list, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_core::f_length_from_list(values);
+      output = vx_core::f_length_1(values);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func length)
+  vx_core::Type_int f_length_2(vx_core::Type_map valuemap) {
+    vx_core::Type_int output = vx_core::e_int;
+    vx_core::vx_reserve(valuemap);
+    output = vx_core::f_length_1(
+      vx_core::f_stringlist_from_map(valuemap)
+    );
+    vx_core::vx_release_one_except(valuemap, output);
+    return output;
+  }
+  /**
+   * @function length 2
+   * Returns the length of the given map.
+   * @param  {map-1} valuemap
+   * @return {int}
+   * (func length)
+   */
+  // (func length)
+  // class Class_length_2 {
+    Abstract_length_2::~Abstract_length_2() {}
+
+    Class_length_2::Class_length_2() : Abstract_length_2::Abstract_length_2() {
+      vx_core::refcount += 1;
+    }
+
+    Class_length_2::~Class_length_2() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_length_2::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_core::Func_length_2 output = vx_core::e_length_2;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_length_2::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Func_length_2 output = vx_core::e_length_2;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_length_2::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "length", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_length_2::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_length_2::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/core", // pkgname
+        "length", // name
+        2, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_length_2::vx_empty() const {return vx_core::e_length_2;}
+    vx_core::Type_any Class_length_2::vx_type() const {return vx_core::t_length_2;}
+    vx_core::Type_msgblock Class_length_2::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_length_2::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_length_2::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_length_2::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_map inputval = vx_core::vx_any_from_any(vx_core::t_map, val);
+      output = vx_core::f_length_2(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_length_2::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_map valuemap = vx_core::vx_any_from_any(vx_core::t_map, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_core::f_length_2(valuemap);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -17562,7 +17767,7 @@ namespace vx_core {
     vx_core::vx_reserve(values);
     output = vx_core::f_switch(
       vx_core::t_boolean,
-      vx_core::f_length_from_list(values),
+      vx_core::f_length_1(values),
       vx_core::vx_new(vx_core::t_thenelselist, {
         vx_core::f_case_1(
           vx_core::vx_new_int(0),
@@ -25260,429 +25465,6 @@ namespace vx_core {
 
   //}
 
-  // (func mempool-addref)
-  void f_mempool_addref(vx_core::Type_anylist values) {
-    vx_core::vx_reserve(values);
-    vx_core::vx_release_one(values);
-  }
-  /**
-   * @function mempool_addref
-   * Add Value Reference
-   * @param  {anylist} values
-   * @return {none}
-   * (func mempool-addref)
-   */
-  // (func mempool-addref)
-  // class Class_mempool_addref {
-    Abstract_mempool_addref::~Abstract_mempool_addref() {}
-
-    Class_mempool_addref::Class_mempool_addref() : Abstract_mempool_addref::Abstract_mempool_addref() {
-      vx_core::refcount += 1;
-    }
-
-    Class_mempool_addref::~Class_mempool_addref() {
-      vx_core::refcount -= 1;
-      if (this->vx_p_msgblock) {
-        vx_core::vx_release_one(this->vx_p_msgblock);
-      }
-    }
-
-    vx_core::Type_any Class_mempool_addref::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_core::Func_mempool_addref output = vx_core::e_mempool_addref;
-      vx_core::vx_release(vals);
-      return output;
-    }
-
-    vx_core::Type_any Class_mempool_addref::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_core::Func_mempool_addref output = vx_core::e_mempool_addref;
-      vx_core::vx_release_except(copyval, output);
-      vx_core::vx_release_except(vals, output);
-      return output;
-    }
-
-    vx_core::Type_typedef Class_mempool_addref::vx_typedef() const {
-      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "mempool-addref", // name
-        ":func", // extends
-        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
-        vx_core::e_typelist, // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-      return output;
-    }
-
-    vx_core::Type_constdef Class_mempool_addref::vx_constdef() const {return this->vx_p_constdef;}
-
-    vx_core::Type_funcdef Class_mempool_addref::vx_funcdef() const {
-      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
-        "vx/core", // pkgname
-        "mempool-addref", // name
-        0, // idx
-        false, // async
-        this->vx_typedef() // typedef
-      );
-      return output;
-    }
-
-    vx_core::Type_any Class_mempool_addref::vx_empty() const {return vx_core::e_mempool_addref;}
-    vx_core::Type_any Class_mempool_addref::vx_type() const {return vx_core::t_mempool_addref;}
-    vx_core::Type_msgblock Class_mempool_addref::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany Class_mempool_addref::vx_dispose() {return vx_core::emptylistany;}
-
-    vx_core::Type_any Class_mempool_addref::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_anylist values = vx_core::vx_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_core::f_mempool_addref(values);
-      vx_core::vx_release_except(arglist, output);
-      return output;
-    }
-
-  //}
-
-  // (func mempool-release)
-  void f_mempool_release(vx_core::Type_value value) {
-    vx_core::vx_reserve(value);
-    vx_core::vx_release_one(value);
-  }
-  /**
-   * @function mempool_release
-   * Recycles a Value and adds it to the valuepool.
-   * @param  {value} value
-   * @return {none}
-   * (func mempool-release)
-   */
-  // (func mempool-release)
-  // class Class_mempool_release {
-    Abstract_mempool_release::~Abstract_mempool_release() {}
-
-    Class_mempool_release::Class_mempool_release() : Abstract_mempool_release::Abstract_mempool_release() {
-      vx_core::refcount += 1;
-    }
-
-    Class_mempool_release::~Class_mempool_release() {
-      vx_core::refcount -= 1;
-      if (this->vx_p_msgblock) {
-        vx_core::vx_release_one(this->vx_p_msgblock);
-      }
-    }
-
-    vx_core::Type_any Class_mempool_release::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_core::Func_mempool_release output = vx_core::e_mempool_release;
-      vx_core::vx_release(vals);
-      return output;
-    }
-
-    vx_core::Type_any Class_mempool_release::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_core::Func_mempool_release output = vx_core::e_mempool_release;
-      vx_core::vx_release_except(copyval, output);
-      vx_core::vx_release_except(vals, output);
-      return output;
-    }
-
-    vx_core::Type_typedef Class_mempool_release::vx_typedef() const {
-      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "mempool-release", // name
-        ":func", // extends
-        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
-        vx_core::e_typelist, // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-      return output;
-    }
-
-    vx_core::Type_constdef Class_mempool_release::vx_constdef() const {return this->vx_p_constdef;}
-
-    vx_core::Type_funcdef Class_mempool_release::vx_funcdef() const {
-      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
-        "vx/core", // pkgname
-        "mempool-release", // name
-        0, // idx
-        false, // async
-        this->vx_typedef() // typedef
-      );
-      return output;
-    }
-
-    vx_core::Type_any Class_mempool_release::vx_empty() const {return vx_core::e_mempool_release;}
-    vx_core::Type_any Class_mempool_release::vx_type() const {return vx_core::t_mempool_release;}
-    vx_core::Type_msgblock Class_mempool_release::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany Class_mempool_release::vx_dispose() {return vx_core::emptylistany;}
-
-    vx_core::Type_any Class_mempool_release::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_value value = vx_core::vx_any_from_any(vx_core::t_value, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_core::f_mempool_release(value);
-      vx_core::vx_release_except(arglist, output);
-      return output;
-    }
-
-  //}
-
-  // (func mempool-removeref)
-  void f_mempool_removeref(vx_core::Type_anylist values) {
-    vx_core::vx_reserve(values);
-    vx_core::vx_release_one(values);
-  }
-  /**
-   * @function mempool_removeref
-   * Remove Value Reference
-   * @param  {anylist} values
-   * @return {none}
-   * (func mempool-removeref)
-   */
-  // (func mempool-removeref)
-  // class Class_mempool_removeref {
-    Abstract_mempool_removeref::~Abstract_mempool_removeref() {}
-
-    Class_mempool_removeref::Class_mempool_removeref() : Abstract_mempool_removeref::Abstract_mempool_removeref() {
-      vx_core::refcount += 1;
-    }
-
-    Class_mempool_removeref::~Class_mempool_removeref() {
-      vx_core::refcount -= 1;
-      if (this->vx_p_msgblock) {
-        vx_core::vx_release_one(this->vx_p_msgblock);
-      }
-    }
-
-    vx_core::Type_any Class_mempool_removeref::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_core::Func_mempool_removeref output = vx_core::e_mempool_removeref;
-      vx_core::vx_release(vals);
-      return output;
-    }
-
-    vx_core::Type_any Class_mempool_removeref::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_core::Func_mempool_removeref output = vx_core::e_mempool_removeref;
-      vx_core::vx_release_except(copyval, output);
-      vx_core::vx_release_except(vals, output);
-      return output;
-    }
-
-    vx_core::Type_typedef Class_mempool_removeref::vx_typedef() const {
-      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "mempool-removeref", // name
-        ":func", // extends
-        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
-        vx_core::e_typelist, // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-      return output;
-    }
-
-    vx_core::Type_constdef Class_mempool_removeref::vx_constdef() const {return this->vx_p_constdef;}
-
-    vx_core::Type_funcdef Class_mempool_removeref::vx_funcdef() const {
-      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
-        "vx/core", // pkgname
-        "mempool-removeref", // name
-        0, // idx
-        false, // async
-        this->vx_typedef() // typedef
-      );
-      return output;
-    }
-
-    vx_core::Type_any Class_mempool_removeref::vx_empty() const {return vx_core::e_mempool_removeref;}
-    vx_core::Type_any Class_mempool_removeref::vx_type() const {return vx_core::t_mempool_removeref;}
-    vx_core::Type_msgblock Class_mempool_removeref::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany Class_mempool_removeref::vx_dispose() {return vx_core::emptylistany;}
-
-    vx_core::Type_any Class_mempool_removeref::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_anylist values = vx_core::vx_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_core::f_mempool_removeref(values);
-      vx_core::vx_release_except(arglist, output);
-      return output;
-    }
-
-  //}
-
-  // (func mempool-removerefchildren)
-  void f_mempool_removerefchildren(vx_core::Type_anylist values) {
-    vx_core::vx_reserve(values);
-    vx_core::vx_release_one(values);
-  }
-  /**
-   * @function mempool_removerefchildren
-   * Remove Value Child References
-   * @param  {anylist} values
-   * @return {none}
-   * (func mempool-removerefchildren)
-   */
-  // (func mempool-removerefchildren)
-  // class Class_mempool_removerefchildren {
-    Abstract_mempool_removerefchildren::~Abstract_mempool_removerefchildren() {}
-
-    Class_mempool_removerefchildren::Class_mempool_removerefchildren() : Abstract_mempool_removerefchildren::Abstract_mempool_removerefchildren() {
-      vx_core::refcount += 1;
-    }
-
-    Class_mempool_removerefchildren::~Class_mempool_removerefchildren() {
-      vx_core::refcount -= 1;
-      if (this->vx_p_msgblock) {
-        vx_core::vx_release_one(this->vx_p_msgblock);
-      }
-    }
-
-    vx_core::Type_any Class_mempool_removerefchildren::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_core::Func_mempool_removerefchildren output = vx_core::e_mempool_removerefchildren;
-      vx_core::vx_release(vals);
-      return output;
-    }
-
-    vx_core::Type_any Class_mempool_removerefchildren::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_core::Func_mempool_removerefchildren output = vx_core::e_mempool_removerefchildren;
-      vx_core::vx_release_except(copyval, output);
-      vx_core::vx_release_except(vals, output);
-      return output;
-    }
-
-    vx_core::Type_typedef Class_mempool_removerefchildren::vx_typedef() const {
-      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "mempool-removerefchildren", // name
-        ":func", // extends
-        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
-        vx_core::e_typelist, // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-      return output;
-    }
-
-    vx_core::Type_constdef Class_mempool_removerefchildren::vx_constdef() const {return this->vx_p_constdef;}
-
-    vx_core::Type_funcdef Class_mempool_removerefchildren::vx_funcdef() const {
-      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
-        "vx/core", // pkgname
-        "mempool-removerefchildren", // name
-        0, // idx
-        false, // async
-        this->vx_typedef() // typedef
-      );
-      return output;
-    }
-
-    vx_core::Type_any Class_mempool_removerefchildren::vx_empty() const {return vx_core::e_mempool_removerefchildren;}
-    vx_core::Type_any Class_mempool_removerefchildren::vx_type() const {return vx_core::t_mempool_removerefchildren;}
-    vx_core::Type_msgblock Class_mempool_removerefchildren::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany Class_mempool_removerefchildren::vx_dispose() {return vx_core::emptylistany;}
-
-    vx_core::Type_any Class_mempool_removerefchildren::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_anylist values = vx_core::vx_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_core::f_mempool_removerefchildren(values);
-      vx_core::vx_release_except(arglist, output);
-      return output;
-    }
-
-  //}
-
-  // (func mempool-reserve)
-  vx_core::Type_value f_mempool_reserve() {
-    vx_core::Type_value output = vx_core::e_value;
-    return output;
-  }
-  /**
-   * @function mempool_reserve
-   * Returns a recycled Value or creates a new one.
-   * @return {value}
-   * (func mempool-reserve)
-   */
-  // (func mempool-reserve)
-  // class Class_mempool_reserve {
-    Abstract_mempool_reserve::~Abstract_mempool_reserve() {}
-
-    Class_mempool_reserve::Class_mempool_reserve() : Abstract_mempool_reserve::Abstract_mempool_reserve() {
-      vx_core::refcount += 1;
-    }
-
-    Class_mempool_reserve::~Class_mempool_reserve() {
-      vx_core::refcount -= 1;
-      if (this->vx_p_msgblock) {
-        vx_core::vx_release_one(this->vx_p_msgblock);
-      }
-    }
-
-    vx_core::Type_any Class_mempool_reserve::vx_new(vx_core::vx_Type_listany vals) const {
-      vx_core::Func_mempool_reserve output = vx_core::e_mempool_reserve;
-      vx_core::vx_release(vals);
-      return output;
-    }
-
-    vx_core::Type_any Class_mempool_reserve::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
-      vx_core::Func_mempool_reserve output = vx_core::e_mempool_reserve;
-      vx_core::vx_release_except(copyval, output);
-      vx_core::vx_release_except(vals, output);
-      return output;
-    }
-
-    vx_core::Type_typedef Class_mempool_reserve::vx_typedef() const {
-      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
-        "vx/core", // pkgname
-        "mempool-reserve", // name
-        ":func", // extends
-        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
-        vx_core::e_typelist, // allowtypes
-        vx_core::e_typelist, // disallowtypes
-        vx_core::e_funclist, // allowfuncs
-        vx_core::e_funclist, // disallowfuncs
-        vx_core::e_anylist, // allowvalues
-        vx_core::e_anylist, // disallowvalues
-        vx_core::e_argmap // properties
-      );
-      return output;
-    }
-
-    vx_core::Type_constdef Class_mempool_reserve::vx_constdef() const {return this->vx_p_constdef;}
-
-    vx_core::Type_funcdef Class_mempool_reserve::vx_funcdef() const {
-      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
-        "vx/core", // pkgname
-        "mempool-reserve", // name
-        0, // idx
-        false, // async
-        this->vx_typedef() // typedef
-      );
-      return output;
-    }
-
-    vx_core::Type_any Class_mempool_reserve::vx_empty() const {return vx_core::e_mempool_reserve;}
-    vx_core::Type_any Class_mempool_reserve::vx_type() const {return vx_core::t_mempool_reserve;}
-    vx_core::Type_msgblock Class_mempool_reserve::vx_msgblock() const {return this->vx_p_msgblock;}
-    vx_core::vx_Type_listany Class_mempool_reserve::vx_dispose() {return vx_core::emptylistany;}
-
-    vx_core::Type_any Class_mempool_reserve::vx_repl(vx_core::Type_anylist arglist) {
-      vx_core::Type_any output = vx_core::e_any;
-      output = vx_core::f_mempool_reserve();
-      vx_core::vx_release_except(arglist, output);
-      return output;
-    }
-
-  //}
-
   // (func msg<-error)
   vx_core::Type_msg f_msg_from_error_2(vx_core::Type_string path, vx_core::Type_string code, vx_core::Type_any detail) {
     vx_core::Type_msg output = vx_core::e_msg;
@@ -28671,6 +28453,114 @@ namespace vx_core {
 
   //}
 
+  // (func stringlist<-map)
+  vx_core::Type_stringlist f_stringlist_from_map(vx_core::Type_map map) {
+    vx_core::Type_stringlist output = vx_core::e_stringlist;
+    vx_core::vx_reserve(map);
+    output = vx_core::f_list_from_map_1(
+      vx_core::t_stringlist,
+      map,
+      vx_core::t_any_from_key_value->vx_fn_new({}, [](vx_core::Type_any key_any, vx_core::Type_any value) {
+        vx_core::Type_string key = vx_core::vx_any_from_any(vx_core::t_string, key_any);
+        vx_core::Type_any output_1 = key;
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except(map, output);
+    return output;
+  }
+  /**
+   * @function stringlist_from_map
+   * Returns a stringlist of keys from any map in entry order.
+   * @param  {map-1} map
+   * @return {stringlist}
+   * (func stringlist<-map)
+   */
+  // (func stringlist<-map)
+  // class Class_stringlist_from_map {
+    Abstract_stringlist_from_map::~Abstract_stringlist_from_map() {}
+
+    Class_stringlist_from_map::Class_stringlist_from_map() : Abstract_stringlist_from_map::Abstract_stringlist_from_map() {
+      vx_core::refcount += 1;
+    }
+
+    Class_stringlist_from_map::~Class_stringlist_from_map() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_stringlist_from_map::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_core::Func_stringlist_from_map output = vx_core::e_stringlist_from_map;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_stringlist_from_map::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Func_stringlist_from_map output = vx_core::e_stringlist_from_map;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_stringlist_from_map::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "stringlist<-map", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_stringlist_from_map::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_stringlist_from_map::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/core", // pkgname
+        "stringlist<-map", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_stringlist_from_map::vx_empty() const {return vx_core::e_stringlist_from_map;}
+    vx_core::Type_any Class_stringlist_from_map::vx_type() const {return vx_core::t_stringlist_from_map;}
+    vx_core::Type_msgblock Class_stringlist_from_map::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_stringlist_from_map::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_stringlist_from_map::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_stringlist_from_map::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_map inputval = vx_core::vx_any_from_any(vx_core::t_map, val);
+      output = vx_core::f_stringlist_from_map(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_stringlist_from_map::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_map map = vx_core::vx_any_from_any(vx_core::t_map, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_core::f_stringlist_from_map(map);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func traits<-typedef)
   vx_core::Type_typelist f_traits_from_typedef(vx_core::Type_typedef vtypedef) {
     vx_core::Type_typelist output = vx_core::e_typelist;
@@ -29829,8 +29719,12 @@ namespace vx_core {
   vx_core::Func_case_1 t_case_1 = NULL;
   vx_core::Func_switch e_switch = NULL;
   vx_core::Func_switch t_switch = NULL;
-  vx_core::Func_length_from_list e_length_from_list = NULL;
-  vx_core::Func_length_from_list t_length_from_list = NULL;
+  vx_core::Func_length e_length = NULL;
+  vx_core::Func_length t_length = NULL;
+  vx_core::Func_length_1 e_length_1 = NULL;
+  vx_core::Func_length_1 t_length_1 = NULL;
+  vx_core::Func_length_2 e_length_2 = NULL;
+  vx_core::Func_length_2 t_length_2 = NULL;
   vx_core::Func_and e_and = NULL;
   vx_core::Func_and t_and = NULL;
   vx_core::Func_and_1 e_and_1 = NULL;
@@ -29991,16 +29885,6 @@ namespace vx_core {
   vx_core::Func_map_from_map_1 t_map_from_map_1 = NULL;
   vx_core::Func_map_from_map e_map_from_map = NULL;
   vx_core::Func_map_from_map t_map_from_map = NULL;
-  vx_core::Func_mempool_addref e_mempool_addref = NULL;
-  vx_core::Func_mempool_addref t_mempool_addref = NULL;
-  vx_core::Func_mempool_release e_mempool_release = NULL;
-  vx_core::Func_mempool_release t_mempool_release = NULL;
-  vx_core::Func_mempool_removeref e_mempool_removeref = NULL;
-  vx_core::Func_mempool_removeref t_mempool_removeref = NULL;
-  vx_core::Func_mempool_removerefchildren e_mempool_removerefchildren = NULL;
-  vx_core::Func_mempool_removerefchildren t_mempool_removerefchildren = NULL;
-  vx_core::Func_mempool_reserve e_mempool_reserve = NULL;
-  vx_core::Func_mempool_reserve t_mempool_reserve = NULL;
   vx_core::Func_msg_from_error_2 e_msg_from_error_2 = NULL;
   vx_core::Func_msg_from_error_2 t_msg_from_error_2 = NULL;
   vx_core::Func_msg_from_error_1 e_msg_from_error_1 = NULL;
@@ -30063,6 +29947,8 @@ namespace vx_core {
   vx_core::Func_string_from_func t_string_from_func = NULL;
   vx_core::Func_string_from_string_find_replace e_string_from_string_find_replace = NULL;
   vx_core::Func_string_from_string_find_replace t_string_from_string_find_replace = NULL;
+  vx_core::Func_stringlist_from_map e_stringlist_from_map = NULL;
+  vx_core::Func_stringlist_from_map t_stringlist_from_map = NULL;
   vx_core::Func_traits_from_typedef e_traits_from_typedef = NULL;
   vx_core::Func_traits_from_typedef t_traits_from_typedef = NULL;
   vx_core::Func_type_from_any e_type_from_any = NULL;
@@ -30568,10 +30454,18 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_switch);
       vx_core::t_switch = new vx_core::Class_switch();
       vx_core::vx_reserve_type(vx_core::t_switch);
-      vx_core::e_length_from_list = new vx_core::Class_length_from_list();
-      vx_core::vx_reserve_empty(vx_core::e_length_from_list);
-      vx_core::t_length_from_list = new vx_core::Class_length_from_list();
-      vx_core::vx_reserve_type(vx_core::t_length_from_list);
+      vx_core::e_length = new vx_core::Class_length();
+      vx_core::vx_reserve_empty(vx_core::e_length);
+      vx_core::t_length = new vx_core::Class_length();
+      vx_core::vx_reserve_type(vx_core::t_length);
+      vx_core::e_length_1 = new vx_core::Class_length_1();
+      vx_core::vx_reserve_empty(vx_core::e_length_1);
+      vx_core::t_length_1 = new vx_core::Class_length_1();
+      vx_core::vx_reserve_type(vx_core::t_length_1);
+      vx_core::e_length_2 = new vx_core::Class_length_2();
+      vx_core::vx_reserve_empty(vx_core::e_length_2);
+      vx_core::t_length_2 = new vx_core::Class_length_2();
+      vx_core::vx_reserve_type(vx_core::t_length_2);
       vx_core::e_and = new vx_core::Class_and();
       vx_core::vx_reserve_empty(vx_core::e_and);
       vx_core::t_and = new vx_core::Class_and();
@@ -30892,26 +30786,6 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_map_from_map);
       vx_core::t_map_from_map = new vx_core::Class_map_from_map();
       vx_core::vx_reserve_type(vx_core::t_map_from_map);
-      vx_core::e_mempool_addref = new vx_core::Class_mempool_addref();
-      vx_core::vx_reserve_empty(vx_core::e_mempool_addref);
-      vx_core::t_mempool_addref = new vx_core::Class_mempool_addref();
-      vx_core::vx_reserve_type(vx_core::t_mempool_addref);
-      vx_core::e_mempool_release = new vx_core::Class_mempool_release();
-      vx_core::vx_reserve_empty(vx_core::e_mempool_release);
-      vx_core::t_mempool_release = new vx_core::Class_mempool_release();
-      vx_core::vx_reserve_type(vx_core::t_mempool_release);
-      vx_core::e_mempool_removeref = new vx_core::Class_mempool_removeref();
-      vx_core::vx_reserve_empty(vx_core::e_mempool_removeref);
-      vx_core::t_mempool_removeref = new vx_core::Class_mempool_removeref();
-      vx_core::vx_reserve_type(vx_core::t_mempool_removeref);
-      vx_core::e_mempool_removerefchildren = new vx_core::Class_mempool_removerefchildren();
-      vx_core::vx_reserve_empty(vx_core::e_mempool_removerefchildren);
-      vx_core::t_mempool_removerefchildren = new vx_core::Class_mempool_removerefchildren();
-      vx_core::vx_reserve_type(vx_core::t_mempool_removerefchildren);
-      vx_core::e_mempool_reserve = new vx_core::Class_mempool_reserve();
-      vx_core::vx_reserve_empty(vx_core::e_mempool_reserve);
-      vx_core::t_mempool_reserve = new vx_core::Class_mempool_reserve();
-      vx_core::vx_reserve_type(vx_core::t_mempool_reserve);
       vx_core::e_msg_from_error_2 = new vx_core::Class_msg_from_error_2();
       vx_core::vx_reserve_empty(vx_core::e_msg_from_error_2);
       vx_core::t_msg_from_error_2 = new vx_core::Class_msg_from_error_2();
@@ -31036,6 +30910,10 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_string_from_string_find_replace);
       vx_core::t_string_from_string_find_replace = new vx_core::Class_string_from_string_find_replace();
       vx_core::vx_reserve_type(vx_core::t_string_from_string_find_replace);
+      vx_core::e_stringlist_from_map = new vx_core::Class_stringlist_from_map();
+      vx_core::vx_reserve_empty(vx_core::e_stringlist_from_map);
+      vx_core::t_stringlist_from_map = new vx_core::Class_stringlist_from_map();
+      vx_core::vx_reserve_type(vx_core::t_stringlist_from_map);
       vx_core::e_traits_from_typedef = new vx_core::Class_traits_from_typedef();
       vx_core::vx_reserve_empty(vx_core::e_traits_from_typedef);
       vx_core::t_traits_from_typedef = new vx_core::Class_traits_from_typedef();
@@ -31221,7 +31099,9 @@ namespace vx_core {
       mapfunc["case"] = vx_core::t_case;
       mapfunc["case_1"] = vx_core::t_case_1;
       mapfunc["switch"] = vx_core::t_switch;
-      mapfunc["length<-list"] = vx_core::t_length_from_list;
+      mapfunc["length"] = vx_core::t_length;
+      mapfunc["length_1"] = vx_core::t_length_1;
+      mapfunc["length_2"] = vx_core::t_length_2;
       mapfunc["and"] = vx_core::t_and;
       mapfunc["and_1"] = vx_core::t_and_1;
       mapfunc["or"] = vx_core::t_or;
@@ -31302,11 +31182,6 @@ namespace vx_core {
       mapfunc["map<-list"] = vx_core::t_map_from_list;
       mapfunc["map<-map_1"] = vx_core::t_map_from_map_1;
       mapfunc["map<-map"] = vx_core::t_map_from_map;
-      mapfunc["mempool-addref"] = vx_core::t_mempool_addref;
-      mapfunc["mempool-release"] = vx_core::t_mempool_release;
-      mapfunc["mempool-removeref"] = vx_core::t_mempool_removeref;
-      mapfunc["mempool-removerefchildren"] = vx_core::t_mempool_removerefchildren;
-      mapfunc["mempool-reserve"] = vx_core::t_mempool_reserve;
       mapfunc["msg<-error_2"] = vx_core::t_msg_from_error_2;
       mapfunc["msg<-error_1"] = vx_core::t_msg_from_error_1;
       mapfunc["msg<-error"] = vx_core::t_msg_from_error;
@@ -31338,6 +31213,7 @@ namespace vx_core {
       mapfunc["string<-any-indent"] = vx_core::t_string_from_any_indent;
       mapfunc["string<-func"] = vx_core::t_string_from_func;
       mapfunc["string<-string-find-replace"] = vx_core::t_string_from_string_find_replace;
+      mapfunc["stringlist<-map"] = vx_core::t_stringlist_from_map;
       mapfunc["traits<-typedef"] = vx_core::t_traits_from_typedef;
       mapfunc["type<-any"] = vx_core::t_type_from_any;
       mapfunc["typedef<-any"] = vx_core::t_typedef_from_any;

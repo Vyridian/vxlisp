@@ -59,19 +59,19 @@
                  (vx/web/html/p
                   :text "vx/core")
                  (vx/web/html/p
-                  :text "34% 78/227")
+                  :text "35% 80/223")
                  (vx/web/html/p
                   :text "6% 5/75")
                  (vx/web/html/p
                   :text "14% 2/14")
                  (vx/web/html/p
-                  :text "51% 71/138")
+                  :text "54% 73/134")
                  (vx/web/html/p
-                  :text "89% 231/257")
+                  :text "89% 229/255")
                  (vx/web/html/p
-                  :text "0% 1/168")
+                  :text "0% 1/166")
                  (vx/web/html/p
-                  :text "0% 1/168"))
+                  :text "0% 1/166"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -3301,12 +3301,78 @@
                              :nodes
                               (vx/web/html/divchildlist
                                (vx/web/html/p
-                                :text "length<-list")))
+                                :text "length")))
                             (vx/web/html/td
                              :nodes
                               (vx/web/html/divchildlist
                                (vx/web/html/p
-                                :text "(test 3 (length<-list (stringlist \"a\" \"b\" \"c\")))")))
+                                :text
+                                 "(test
+ 4
+ (length \"abcd\"))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "4")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "4")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "length")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ 0
+ (length \"\"))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "0")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "0")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "length_1")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ 3
+ (length
+  (stringlist \"a\" \"b\" \"c\")))")))
                             (vx/web/html/td
                              :nodes
                               (vx/web/html/divchildlist
@@ -4408,6 +4474,46 @@
                              :nodes
                               (vx/web/html/divchildlist
                                (vx/web/html/p
+                                :text "stringlist<-map")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (stringlist \"b\" \"a\")
+ (stringlist<-map
+  (intmap
+   :b 1
+   :a 2)))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(stringlist
+ \"b\"
+ \"a\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(stringlist
+ \"b\"
+ \"a\")")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
                                 :text "switch")))
                             (vx/web/html/td
                              :nodes
@@ -5089,19 +5195,19 @@
                  (vx/web/html/p
                   :text "vx/type")
                  (vx/web/html/p
-                  :text "67% 19/28")
+                  :text "66% 18/27")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "67% 19/28")
+                  :text "66% 18/27")
                  (vx/web/html/p
-                  :text "82% 23/28")
+                  :text "81% 22/27")
                  (vx/web/html/p
-                  :text "0% 0/28")
+                  :text "0% 0/27")
                  (vx/web/html/p
-                  :text "0% 0/28"))
+                  :text "0% 0/27"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -5677,68 +5783,6 @@
                               (vx/web/html/divchildlist
                                (vx/web/html/p
                                 :text "true")))))
-                         (vx/web/html/tr
-                          :nodes
-                           (vx/web/html/tdlist
-                            (vx/web/html/td
-                             :nodes
-                              (vx/web/html/divchildlist
-                               (vx/web/html/p
-                                :text "Pass")))
-                            (vx/web/html/td
-                             :nodes
-                              (vx/web/html/divchildlist
-                               (vx/web/html/p
-                                :text "length<-string")))
-                            (vx/web/html/td
-                             :nodes
-                              (vx/web/html/divchildlist
-                               (vx/web/html/p
-                                :text
-                                 "(test
- 4
- (length<-string \"abcd\"))")))
-                            (vx/web/html/td
-                             :nodes
-                              (vx/web/html/divchildlist
-                               (vx/web/html/p
-                                :text "4")))
-                            (vx/web/html/td
-                             :nodes
-                              (vx/web/html/divchildlist
-                               (vx/web/html/p
-                                :text "4")))))
-                         (vx/web/html/tr
-                          :nodes
-                           (vx/web/html/tdlist
-                            (vx/web/html/td
-                             :nodes
-                              (vx/web/html/divchildlist
-                               (vx/web/html/p
-                                :text "Pass")))
-                            (vx/web/html/td
-                             :nodes
-                              (vx/web/html/divchildlist
-                               (vx/web/html/p
-                                :text "length<-string")))
-                            (vx/web/html/td
-                             :nodes
-                              (vx/web/html/divchildlist
-                               (vx/web/html/p
-                                :text
-                                 "(test
- 0
- (length<-string \"\"))")))
-                            (vx/web/html/td
-                             :nodes
-                              (vx/web/html/divchildlist
-                               (vx/web/html/p
-                                :text "0")))
-                            (vx/web/html/td
-                             :nodes
-                              (vx/web/html/divchildlist
-                               (vx/web/html/p
-                                :text "0")))))
                          (vx/web/html/tr
                           :nodes
                            (vx/web/html/tdlist
@@ -6924,19 +6968,19 @@ ab
                  (vx/web/html/p
                   :text "vx/collection")
                  (vx/web/html/p
-                  :text "76% 13/17")
+                  :text "80% 16/20")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "76% 13/17")
+                  :text "80% 16/20")
                  (vx/web/html/p
-                  :text "100% 17/17")
+                  :text "100% 20/20")
                  (vx/web/html/p
-                  :text "0% 0/17")
+                  :text "0% 0/20")
                  (vx/web/html/p
-                  :text "0% 0/17"))
+                  :text "0% 0/20"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -7427,34 +7471,172 @@ ab
                              :nodes
                               (vx/web/html/divchildlist
                                (vx/web/html/p
-                                :text "stringlist<-map")))
+                                :text "map<-map-end")))
                             (vx/web/html/td
                              :nodes
                               (vx/web/html/divchildlist
                                (vx/web/html/p
                                 :text
                                  "(test
- (stringlist \"a\" \"b\")
- (stringlist<-map
-  (intmap
-   :a 1
-   :b 2)))")))
+ (stringmap
+  :b \"1\"
+  :a \"2\")
+ (map<-map-end
+  (stringmap
+   :b \"1\"
+   :a \"2\"
+   :c \"3\")
+  2))")))
                             (vx/web/html/td
                              :nodes
                               (vx/web/html/divchildlist
                                (vx/web/html/p
                                 :text
-                                 "(stringlist
- \"a\"
- \"b\")")))
+                                 "(stringmap
+ :a \"2\"
+ :b \"1\")")))
                             (vx/web/html/td
                              :nodes
                               (vx/web/html/divchildlist
                                (vx/web/html/p
                                 :text
-                                 "(stringlist
- \"a\"
- \"b\")")))))))
+                                 "(stringmap
+ :a \"2\"
+ :b \"1\")")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "map<-map-keys")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (stringmap
+  :c \"3\"
+  :a \"1\")
+ (map<-map-keys
+  (stringmap
+   :a \"1\"
+   :b \"2\"
+   :c \"3\")
+  (stringlist
+   \"c\" \"a\")))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(stringmap
+ :a \"1\"
+ :c \"3\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(stringmap
+ :a \"1\"
+ :c \"3\")")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "map<-map-start")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (stringmap
+  :a \"2\"
+  :c \"3\")
+ (map<-map-start
+  (stringmap
+   :b \"1\"
+   :a \"2\"
+   :c \"3\")
+  2))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(stringmap
+ :a \"2\"
+ :c \"3\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(stringmap
+ :a \"2\"
+ :c \"3\")")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "map<-map-start-end")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (stringmap
+  :a \"2\"
+  :c \"3\")
+ (map<-map-start-end
+  (stringmap
+   :b \"1\"
+   :a \"2\"
+   :c \"3\"
+   :d \"4\")
+  2 3))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(stringmap
+ :a \"2\"
+ :c \"3\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(stringmap
+ :a \"2\"
+ :c \"3\")")))))))
                      :thead
                       (vx/web/html/thead
                        :nodes
@@ -22701,19 +22883,19 @@ ab
                  (vx/web/html/p
                   :text "vx/web/htmldoc")
                  (vx/web/html/p
-                  :text "0% 0/12")
+                  :text "0% 0/13")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "0% 0/12")
+                  :text "0% 0/13")
                  (vx/web/html/p
-                  :text "100% 12/12")
+                  :text "100% 13/13")
                  (vx/web/html/p
-                  :text "0% 0/12")
+                  :text "0% 0/13")
                  (vx/web/html/p
-                  :text "0% 0/12"))
+                  :text "0% 0/13"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -23470,19 +23652,19 @@ ab
                  (vx/web/html/p
                   :text "vx/ui/html/uihtml")
                  (vx/web/html/p
-                  :text "0% 0/30")
+                  :text "0% 0/37")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
                   :text "0% 0/7")
                  (vx/web/html/p
-                  :text "0% 0/23")
+                  :text "0% 0/30")
                  (vx/web/html/p
-                  :text "63% 19/30")
+                  :text "60% 23/38")
                  (vx/web/html/p
-                  :text "0% 0/23")
+                  :text "0% 0/31")
                  (vx/web/html/p
-                  :text "0% 0/23"))
+                  :text "0% 0/31"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div

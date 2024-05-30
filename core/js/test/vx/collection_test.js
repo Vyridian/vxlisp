@@ -25,11 +25,11 @@ export default class vx_collection_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/collection", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 17, ":total", 17), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 76, ":tests", 13, ":total", 17), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 20, ":total", 20), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 80, ":tests", 16, ":total", 20), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 76, ":tests", 13, ":total", 17), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 80, ":tests", 16, ":total", 20), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     )
   }
@@ -65,7 +65,10 @@ export default class vx_collection_test {
           "list<-list-filtertypes", 1,
           "list<-list-start", 1,
           "list<-list-start-end", 1,
-          "stringlist<-map", 1
+          "map<-map-end", 1,
+          "map<-map-keys", 1,
+          "map<-map-start", 1,
+          "map<-map-start-end", 1
         )
     )
   }
@@ -501,34 +504,173 @@ export default class vx_collection_test {
     return output
   }
 
-  static f_stringlist_from_map(context) {
+  static f_map_from_map_end(context) {
     const output = vx_core.f_new(
       vx_test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/collection",
-      ":casename", "stringlist<-map",
+      ":casename", "map<-map-end",
       ":describelist",
         vx_core.f_new(
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (stringlist \"a\" \"b\")\n (stringlist<-map\n  (intmap\n   :a 1\n   :b 2)))",
+            ":describename", "(test\n (stringmap\n  :b \"1\"\n  :a \"2\")\n (map<-map-end\n  (stringmap\n   :b \"1\"\n   :a \"2\"\n   :c \"3\")\n  2))",
             ":testresult",
             vx_test.f_test(
               context,
               vx_core.f_new(
-                vx_core.t_stringlist,
-                "a",
-                "b"
+                vx_core.t_stringmap,
+                ":b",
+                "1",
+                ":a",
+                "2"
               ),
-              vx_collection.f_stringlist_from_map(
+              vx_collection.f_map_from_map_end(
+                {"any-1": vx_core.t_string, "map-1": vx_core.t_stringmap},
                 vx_core.f_new(
-                  vx_core.t_intmap,
-                  ":a",
-                  1,
+                  vx_core.t_stringmap,
                   ":b",
-                  2
+                  "1",
+                  ":a",
+                  "2",
+                  ":c",
+                  "3"
+                ),
+                2
+              )
+            )
+          )
+        )
+    )
+    return output
+  }
+
+  static f_map_from_map_keys(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/collection",
+      ":casename", "map<-map-keys",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n (stringmap\n  :c \"3\"\n  :a \"1\")\n (map<-map-keys\n  (stringmap\n   :a \"1\"\n   :b \"2\"\n   :c \"3\")\n  (stringlist\n   \"c\" \"a\")))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              vx_core.f_new(
+                vx_core.t_stringmap,
+                ":c",
+                "3",
+                ":a",
+                "1"
+              ),
+              vx_collection.f_map_from_map_keys(
+                {"any-1": vx_core.t_string, "map-1": vx_core.t_stringmap},
+                vx_core.f_new(
+                  vx_core.t_stringmap,
+                  ":a",
+                  "1",
+                  ":b",
+                  "2",
+                  ":c",
+                  "3"
+                ),
+                vx_core.f_new(
+                  vx_core.t_stringlist,
+                  "c",
+                  "a"
                 )
+              )
+            )
+          )
+        )
+    )
+    return output
+  }
+
+  static f_map_from_map_start(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/collection",
+      ":casename", "map<-map-start",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n (stringmap\n  :a \"2\"\n  :c \"3\")\n (map<-map-start\n  (stringmap\n   :b \"1\"\n   :a \"2\"\n   :c \"3\")\n  2))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              vx_core.f_new(
+                vx_core.t_stringmap,
+                ":a",
+                "2",
+                ":c",
+                "3"
+              ),
+              vx_collection.f_map_from_map_start(
+                {"any-1": vx_core.t_string, "map-1": vx_core.t_stringmap},
+                vx_core.f_new(
+                  vx_core.t_stringmap,
+                  ":b",
+                  "1",
+                  ":a",
+                  "2",
+                  ":c",
+                  "3"
+                ),
+                2
+              )
+            )
+          )
+        )
+    )
+    return output
+  }
+
+  static f_map_from_map_start_end(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/collection",
+      ":casename", "map<-map-start-end",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n (stringmap\n  :a \"2\"\n  :c \"3\")\n (map<-map-start-end\n  (stringmap\n   :b \"1\"\n   :a \"2\"\n   :c \"3\"\n   :d \"4\")\n  2 3))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              vx_core.f_new(
+                vx_core.t_stringmap,
+                ":a",
+                "2",
+                ":c",
+                "3"
+              ),
+              vx_collection.f_map_from_map_start_end(
+                {"any-1": vx_core.t_string, "map-1": vx_core.t_stringmap},
+                vx_core.f_new(
+                  vx_core.t_stringmap,
+                  ":b",
+                  "1",
+                  ":a",
+                  "2",
+                  ":c",
+                  "3",
+                  ":d",
+                  "4"
+                ),
+                2,
+                3
               )
             )
           )
@@ -552,7 +694,10 @@ export default class vx_collection_test {
       vx_collection_test.f_list_from_list_filtertypes(context),
       vx_collection_test.f_list_from_list_start(context),
       vx_collection_test.f_list_from_list_start_end(context),
-      vx_collection_test.f_stringlist_from_map(context)
+      vx_collection_test.f_map_from_map_end(context),
+      vx_collection_test.f_map_from_map_keys(context),
+      vx_collection_test.f_map_from_map_start(context),
+      vx_collection_test.f_map_from_map_start_end(context)
     )
     return output
   }

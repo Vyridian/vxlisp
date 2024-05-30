@@ -456,35 +456,179 @@ public final class CollectionTest {
     return output;
   }
 
-  static Test.Type_testcase f_stringlist_from_map(final Core.Type_context context) {
+  static Test.Type_testcase f_map_from_map_end(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/collection",
-      ":casename", "stringlist<-map",
+      ":casename", "map<-map-end",
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test\n (stringlist \"a\" \"b\")\n (stringlist<-map\n  (intmap\n   :a 1\n   :b 2)))",
+          ":describename", "(test\n (stringmap\n  :b \"1\"\n  :a \"2\")\n (map<-map-end\n  (stringmap\n   :b \"1\"\n   :a \"2\"\n   :c \"3\")\n  2))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
-                Core.t_stringlist,
+                Core.t_stringmap,
                 Core.t_anylist.vx_new(
-                  Core.vx_new_string("a"),
-                  Core.vx_new_string("b")
+                  Core.vx_new_string(":b"),
+                  Core.vx_new_string("1"),
+                  Core.vx_new_string(":a"),
+                  Core.vx_new_string("2")
                 )
               ),
-              Collection.f_stringlist_from_map(
+              Collection.f_map_from_map_end(
+                Core.t_stringmap,
                 Core.f_new(
-                  Core.t_intmap,
+                  Core.t_stringmap,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string(":b"),
+                    Core.vx_new_string("1"),
+                    Core.vx_new_string(":a"),
+                    Core.vx_new_string("2"),
+                    Core.vx_new_string(":c"),
+                    Core.vx_new_string("3")
+                  )
+                ),
+                Core.vx_new_int(2)
+              )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
+  static Test.Type_testcase f_map_from_map_keys(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/collection",
+      ":casename", "map<-map-keys",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n (stringmap\n  :c \"3\"\n  :a \"1\")\n (map<-map-keys\n  (stringmap\n   :a \"1\"\n   :b \"2\"\n   :c \"3\")\n  (stringlist\n   \"c\" \"a\")))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.f_new(
+                Core.t_stringmap,
+                Core.t_anylist.vx_new(
+                  Core.vx_new_string(":c"),
+                  Core.vx_new_string("3"),
+                  Core.vx_new_string(":a"),
+                  Core.vx_new_string("1")
+                )
+              ),
+              Collection.f_map_from_map_keys(
+                Core.t_stringmap,
+                Core.f_new(
+                  Core.t_stringmap,
                   Core.t_anylist.vx_new(
                     Core.vx_new_string(":a"),
-                    Core.vx_new_int(1),
+                    Core.vx_new_string("1"),
                     Core.vx_new_string(":b"),
-                    Core.vx_new_int(2)
+                    Core.vx_new_string("2"),
+                    Core.vx_new_string(":c"),
+                    Core.vx_new_string("3")
+                  )
+                ),
+                Core.f_new(
+                  Core.t_stringlist,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string("c"),
+                    Core.vx_new_string("a")
                   )
                 )
+              )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
+  static Test.Type_testcase f_map_from_map_start(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/collection",
+      ":casename", "map<-map-start",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n (stringmap\n  :a \"2\"\n  :c \"3\")\n (map<-map-start\n  (stringmap\n   :b \"1\"\n   :a \"2\"\n   :c \"3\")\n  2))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.f_new(
+                Core.t_stringmap,
+                Core.t_anylist.vx_new(
+                  Core.vx_new_string(":a"),
+                  Core.vx_new_string("2"),
+                  Core.vx_new_string(":c"),
+                  Core.vx_new_string("3")
+                )
+              ),
+              Collection.f_map_from_map_start(
+                Core.t_stringmap,
+                Core.f_new(
+                  Core.t_stringmap,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string(":b"),
+                    Core.vx_new_string("1"),
+                    Core.vx_new_string(":a"),
+                    Core.vx_new_string("2"),
+                    Core.vx_new_string(":c"),
+                    Core.vx_new_string("3")
+                  )
+                ),
+                Core.vx_new_int(2)
+              )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
+  static Test.Type_testcase f_map_from_map_start_end(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/collection",
+      ":casename", "map<-map-start-end",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n (stringmap\n  :a \"2\"\n  :c \"3\")\n (map<-map-start-end\n  (stringmap\n   :b \"1\"\n   :a \"2\"\n   :c \"3\"\n   :d \"4\")\n  2 3))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.f_new(
+                Core.t_stringmap,
+                Core.t_anylist.vx_new(
+                  Core.vx_new_string(":a"),
+                  Core.vx_new_string("2"),
+                  Core.vx_new_string(":c"),
+                  Core.vx_new_string("3")
+                )
+              ),
+              Collection.f_map_from_map_start_end(
+                Core.t_stringmap,
+                Core.f_new(
+                  Core.t_stringmap,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string(":b"),
+                    Core.vx_new_string("1"),
+                    Core.vx_new_string(":a"),
+                    Core.vx_new_string("2"),
+                    Core.vx_new_string(":c"),
+                    Core.vx_new_string("3"),
+                    Core.vx_new_string(":d"),
+                    Core.vx_new_string("4")
+                  )
+                ),
+                Core.vx_new_int(2),
+                Core.vx_new_int(3)
               )
             )
         )
@@ -507,7 +651,10 @@ public final class CollectionTest {
       CollectionTest.f_list_from_list_filtertypes(context),
       CollectionTest.f_list_from_list_start(context),
       CollectionTest.f_list_from_list_start_end(context),
-      CollectionTest.f_stringlist_from_map(context)
+      CollectionTest.f_map_from_map_end(context),
+      CollectionTest.f_map_from_map_keys(context),
+      CollectionTest.f_map_from_map_start(context),
+      CollectionTest.f_map_from_map_start_end(context)
     ));
     Test.Type_testcaselist output = Test.t_testcaselist.vx_new(arraylisttestcase);
     return output;
@@ -517,11 +664,11 @@ public final class CollectionTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/collection", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 17, ":total", 17), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 76, ":tests", 13, ":total", 17), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 17), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 17), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 76, ":tests", 13, ":total", 17), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 20, ":total", 20), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 80, ":tests", 16, ":total", 20), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 20), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 20), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 80, ":tests", 16, ":total", 20), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
     );
   }
@@ -552,7 +699,10 @@ public final class CollectionTest {
         ":list<-list-filtertypes", 1,
         ":list<-list-start", 1,
         ":list<-list-start-end", 1,
-        ":stringlist<-map", 1
+        ":map<-map-end", 1,
+        ":map<-map-keys", 1,
+        ":map<-map-start", 1,
+        ":map<-map-start-end", 1
       )
     );
   }

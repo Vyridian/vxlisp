@@ -37,6 +37,10 @@ namespace vx_web_htmldoc {
   typedef Abstract_boolean_write_from_stylesheet* Func_boolean_write_from_stylesheet;
   extern Func_boolean_write_from_stylesheet e_boolean_write_from_stylesheet;
   extern Func_boolean_write_from_stylesheet t_boolean_write_from_stylesheet;
+  class Abstract_boolean_writeevents_from_ui;
+  typedef Abstract_boolean_writeevents_from_ui* Func_boolean_writeevents_from_ui;
+  extern Func_boolean_writeevents_from_ui e_boolean_writeevents_from_ui;
+  extern Func_boolean_writeevents_from_ui t_boolean_writeevents_from_ui;
   class Abstract_context_read;
   typedef Abstract_context_read* Func_context_read;
   extern Func_context_read e_context_read;
@@ -77,6 +81,9 @@ namespace vx_web_htmldoc {
 
   // (func boolean-write<-stylesheet)
   vx_core::vx_Type_async f_boolean_write_from_stylesheet(vx_web_html::Type_stylesheet stylesheet);
+
+  // (func boolean-writeevents<-ui)
+  vx_core::Type_boolean f_boolean_writeevents_from_ui(vx_ui_ui::Type_ui ui);
 
   // (func context-read)
   vx_core::Type_context f_context_read();
@@ -260,6 +267,33 @@ namespace vx_web_htmldoc {
     virtual vx_core::Func_any_from_any_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_async::IFn fn) const override;
     virtual vx_core::vx_Type_async vx_any_from_any_async(vx_core::Type_any generic_any_1, vx_core::Type_any val) const override;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func boolean-writeevents<-ui)
+  class Abstract_boolean_writeevents_from_ui : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_boolean_writeevents_from_ui() {};
+    virtual ~Abstract_boolean_writeevents_from_ui() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_boolean_writeevents_from_ui : public virtual Abstract_boolean_writeevents_from_ui {
+  public:
+    Class_boolean_writeevents_from_ui();
+    virtual ~Class_boolean_writeevents_from_ui() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
   // (func context-read)

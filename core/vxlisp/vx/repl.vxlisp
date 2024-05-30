@@ -755,8 +755,7 @@
   argmap    : argmap]
  (let : repl
   [children : tb/textblocklist := (:children textblock)
-   len      : int              := (length<-list
-                                   children)]
+   len : int := (length children)]
   (switch : repl
    len
    (case 0

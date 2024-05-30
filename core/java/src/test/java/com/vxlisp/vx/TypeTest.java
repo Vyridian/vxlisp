@@ -303,36 +303,6 @@ public final class TypeTest {
     return output;
   }
 
-  static Test.Type_testcase f_length_from_string(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
-      ":passfail", false,
-      ":testpkg", "vx/type",
-      ":casename", "length<-string",
-      ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
-          ":describename", "(test\n 4\n (length<-string \"abcd\"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_int(4),
-              Type.f_length_from_string(Core.vx_new_string("abcd"))
-            )
-        ),
-        Test.t_testdescribe.vx_new(
-          ":describename", "(test\n 0\n (length<-string \"\"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_int(0),
-              Type.f_length_from_string(Core.vx_new_string(""))
-            )
-        )
-      )
-    );
-    return output;
-  }
-
   static Test.Type_testcase f_string_lowercase(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
@@ -675,7 +645,6 @@ public final class TypeTest {
       TypeTest.f_is_string(context),
       TypeTest.f_is_type(context),
       TypeTest.f_is_type_from_any_typelist(context),
-      TypeTest.f_length_from_string(context),
       TypeTest.f_string_lowercase(context),
       TypeTest.f_string_outdent(context),
       TypeTest.f_string_trim(context),
@@ -695,11 +664,11 @@ public final class TypeTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/type", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 82, ":tests", 23, ":total", 28), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 67, ":tests", 19, ":total", 28), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 28), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 28), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 67, ":tests", 19, ":total", 28), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 81, ":tests", 22, ":total", 27), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 66, ":tests", 18, ":total", 27), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 27), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 27), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 66, ":tests", 18, ":total", 27), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
     );
   }
@@ -728,7 +697,6 @@ public final class TypeTest {
         ":is-string", 4,
         ":is-type", 4,
         ":is-type<-any-typelist", 4,
-        ":length<-string", 2,
         ":string-lowercase", 1,
         ":string-outdent", 2,
         ":string-trim", 1,

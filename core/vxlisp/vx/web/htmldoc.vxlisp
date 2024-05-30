@@ -71,6 +71,12 @@
  :clientserver :client
  :doc "Writes a css stylesheet.")
 
+(func boolean-writeevents<-ui : boolean
+ [ui : ui/ui]
+ (native
+  :js :auto)
+ :doc "Writes the eventmap from ui into dom.")
+
 (func context-read : context
  (native
   :js :auto)

@@ -3876,7 +3876,7 @@ public final class Textblock {
           Core.t_int,
           Core.f_eq(Core.vx_new_string(""), text),
           Core.vx_new_int(0),
-          Type.f_length_from_string(text)
+          Core.f_length(text)
         );
         return Core.f_copy(
           textblockarg,
@@ -4677,7 +4677,7 @@ public final class Textblock {
               ),
               Core.f_else(
                 Core.t_any_from_func.vx_fn_new(() -> {
-                  return Type.f_length_from_string(starttext);
+                  return Core.f_length(starttext);
                 })
               )
           )
@@ -4818,7 +4818,7 @@ public final class Textblock {
         final Core.Type_int endpos = textblockarg.endpos();
         final Core.Type_int pos = close.pos();
         final Core.Type_string textclose = close.starttext();
-        final Core.Type_int lenclose = Type.f_length_from_string(textclose);
+        final Core.Type_int lenclose = Core.f_length(textclose);
         final Core.Type_int posminus = Core.f_minus1(pos);
         final Core.Type_int startleft = startpos;
         final Core.Type_int startclose = Core.f_plus(startpos, posminus);
@@ -5102,7 +5102,7 @@ public final class Textblock {
         final Core.Type_string textopen = open.starttext();
         final Core.Type_string textclose = open.endtext();
         final Textblock.Type_delimlist delimlistl = open.delimlist();
-        final Core.Type_int lenopen = Type.f_length_from_string(textopen);
+        final Core.Type_int lenopen = Core.f_length(textopen);
         final Core.Type_int posminus = Core.f_minus1(pos);
         final Core.Type_int startleft = Core.f_if_1(
           Core.t_int,
@@ -5363,7 +5363,7 @@ public final class Textblock {
                                 return Core.f_eq(Core.vx_new_int(0), pos2);
                               }),
                               Core.t_any_from_func.vx_fn_new(() -> {
-                                return Type.f_length_from_string(text2);
+                                return Core.f_length(text2);
                               })
                             ),
                             Core.f_then(
@@ -5394,7 +5394,7 @@ public final class Textblock {
           )
         );
         final Textblock.Type_delimlist delimlistl = single.delimlist();
-        final Core.Type_int lensingle = Type.f_length_from_string(textsingle);
+        final Core.Type_int lensingle = Core.f_length(textsingle);
         final Core.Type_int posminus = Core.f_minus1(pos);
         final Core.Type_int startleft = startpos;
         final Core.Type_int startsingle = Core.f_plus(startpos, posminus);
@@ -5578,7 +5578,7 @@ public final class Textblock {
         Core.vx_new_string(":startpos"),
         Core.vx_new_int(0),
         Core.vx_new_string(":endpos"),
-        Type.f_length_from_string(text)
+        Core.f_length(text)
       )
     );
     return output;

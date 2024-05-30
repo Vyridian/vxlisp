@@ -2020,7 +2020,7 @@ namespace vx_repl {
       vx_core::t_any_from_func->vx_fn_new({textblock, argmap}, [textblock, argmap]() {
         vx_data_textblock::Type_textblocklist children = textblock->children();
         vx_core::vx_ref_plus(children);
-        vx_core::Type_int len = vx_core::f_length_from_list(children);
+        vx_core::Type_int len = vx_core::f_length_1(children);
         vx_core::vx_ref_plus(len);
         vx_repl::Type_repl output_1 = vx_core::f_switch(
           vx_repl::t_repl,

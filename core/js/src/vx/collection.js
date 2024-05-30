@@ -129,6 +129,21 @@ export default class vx_collection {
     }
     return output
   }
+
+  static vx_map_from_map_keys(generic_map_1, valuemap, keys) {
+    let output = vx_core.vx_empty(generic_map_1)
+    if (keys.length > 0) {
+      const map = valuemap['vx_value']
+      const values = []
+      for (const key of keys) {
+        const value = map[key]
+        values.push(key)
+        values.push(value)
+      }
+      output = vx_core.f_new(generic_map_1, ...values)
+    }
+    return output
+  }
   /**
    * @function any_from_for_until_loop
    * Returns a value using an until loop. Maximum 10000 times.
@@ -265,7 +280,7 @@ export default class vx_collection {
       {"any-1": vx_core.t_int},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const keys = vx_collection.f_stringlist_from_map(map)
+        const keys = vx_core.f_stringlist_from_map(map)
         return vx_collection.f_int_from_stringlist_find(keys, key)
       })
     )
@@ -453,7 +468,7 @@ export default class vx_collection {
 
   /**
    * @function list_from_list_end
-   * Returns a sub list from positions 0 to end.
+   * Returns a sub list from positions 1 to end inclusive.
    * @param  {typemap} generic
    * @param  {generic_list_1} values
    * @param  {int} end
@@ -553,14 +568,14 @@ export default class vx_collection {
       {"list-1": generic_list_1},
       values,
       start,
-      vx_core.f_length_from_list(values)
+      vx_core.f_length_1(values)
     )
     return output
   }
 
   /**
    * @function list_from_list_start_end
-   * Returns a list from another list
+   * Returns a sublist from another list
    * @param  {typemap} generic
    * @param  {generic_list_1} values
    * @param  {int} start
@@ -583,25 +598,107 @@ export default class vx_collection {
   }
 
   /**
-   * @function stringlist_from_map
-   * Returns a stringlist of keys from any map.
-   * @param  {generic_map_1} map
-   * @return {stringlist}
+   * @function map_from_map_end
+   * Returns a submap from key positions 1 to end inclusive.
+   * @param  {typemap} generic
+   * @param  {generic_map_1} valuemap
+   * @param  {int} end
+   * @return {map-1}
    */
-  static t_stringlist_from_map = {
+  static t_map_from_map_end = {
     vx_type: vx_core.t_type
   }
-  static e_stringlist_from_map = {
-    vx_type: vx_collection.t_stringlist_from_map
+  static e_map_from_map_end = {
+    vx_type: vx_collection.t_map_from_map_end
   }
 
-  // (func stringlist<-map)
-  static f_stringlist_from_map(map) {
-    let output = vx_core.e_stringlist
-    output = vx_core.f_list_from_map_1(
-      {"any-1": vx_core.t_string, "list-1": vx_core.t_stringlist},
-      map,
-      vx_core.f_new(vx_core.t_any_from_key_value, ([key, value]) => key)
+  // (func map<-map-end)
+  static f_map_from_map_end(generic, valuemap, end) {
+    const generic_map_1 = generic["map-1"]
+    let output = vx_core.f_empty(generic_map_1)
+    output = vx_collection.f_map_from_map_start_end({"map-1": generic_map_1}, valuemap, 1, end)
+    return output
+  }
+
+  /**
+   * @function map_from_map_keys
+   * Returns a submap from another map using a keylist
+   * @param  {typemap} generic
+   * @param  {generic_map_1} valuemap
+   * @param  {stringlist} keys
+   * @return {map-1}
+   */
+  static t_map_from_map_keys = {
+    vx_type: vx_core.t_type
+  }
+  static e_map_from_map_keys = {
+    vx_type: vx_collection.t_map_from_map_keys
+  }
+
+  // (func map<-map-keys)
+  static f_map_from_map_keys(generic, valuemap, keys) {
+    const generic_map_1 = generic["map-1"]
+    let output = vx_core.f_empty(generic_map_1)
+    output = vx_collection.vx_map_from_map_keys(generic_map_1, valuemap, keys)
+    return output
+  }
+
+  /**
+   * @function map_from_map_start
+   * Returns a sub map from start to map end.
+   * @param  {typemap} generic
+   * @param  {generic_map_1} valuemap
+   * @param  {int} start
+   * @return {map-1}
+   */
+  static t_map_from_map_start = {
+    vx_type: vx_core.t_type
+  }
+  static e_map_from_map_start = {
+    vx_type: vx_collection.t_map_from_map_start
+  }
+
+  // (func map<-map-start)
+  static f_map_from_map_start(generic, valuemap, start) {
+    const generic_map_1 = generic["map-1"]
+    let output = vx_core.f_empty(generic_map_1)
+    output = vx_collection.f_map_from_map_start_end(
+      {"map-1": generic_map_1},
+      valuemap,
+      start,
+      vx_core.f_length_2(valuemap)
+    )
+    return output
+  }
+
+  /**
+   * @function map_from_map_start_end
+   * Returns a submap from another map using the index of the keylist
+   * @param  {typemap} generic
+   * @param  {generic_map_1} valuemap
+   * @param  {int} start
+   * @param  {int} end
+   * @return {map-1}
+   */
+  static t_map_from_map_start_end = {
+    vx_type: vx_core.t_type
+  }
+  static e_map_from_map_start_end = {
+    vx_type: vx_collection.t_map_from_map_start_end
+  }
+
+  // (func map<-map-start-end)
+  static f_map_from_map_start_end(generic, valuemap, start, end) {
+    const generic_map_1 = generic["map-1"]
+    let output = vx_core.f_empty(generic_map_1)
+    output = vx_core.f_let(
+      {"any-1": generic_map_1, "map-1": generic_map_1},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const keys1 = vx_core.f_stringlist_from_map(valuemap)
+        const keys2 = vx_collection.f_list_from_list_start_end({"any-1": vx_core.t_string, "list-1": vx_core.t_stringlist}, keys1, start, end)
+        return vx_collection.f_map_from_map_keys({"map-1": generic_map_1}, valuemap, keys2)
+      })
     )
     return output
   }
@@ -629,7 +726,10 @@ export default class vx_collection {
       "list<-list-filtertypes": vx_collection.e_list_from_list_filtertypes,
       "list<-list-start": vx_collection.e_list_from_list_start,
       "list<-list-start-end": vx_collection.e_list_from_list_start_end,
-      "stringlist<-map": vx_collection.e_stringlist_from_map
+      "map<-map-end": vx_collection.e_map_from_map_end,
+      "map<-map-keys": vx_collection.e_map_from_map_keys,
+      "map<-map-start": vx_collection.e_map_from_map_start,
+      "map<-map-start-end": vx_collection.e_map_from_map_start_end
     })
     const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
       "any<-for-until-loop": vx_collection.t_any_from_for_until_loop,
@@ -648,7 +748,10 @@ export default class vx_collection {
       "list<-list-filtertypes": vx_collection.t_list_from_list_filtertypes,
       "list<-list-start": vx_collection.t_list_from_list_start,
       "list<-list-start-end": vx_collection.t_list_from_list_start_end,
-      "stringlist<-map": vx_collection.t_stringlist_from_map
+      "map<-map-end": vx_collection.t_map_from_map_end,
+      "map<-map-keys": vx_collection.t_map_from_map_keys,
+      "map<-map-start": vx_collection.t_map_from_map_start,
+      "map<-map-start-end": vx_collection.t_map_from_map_start_end
     })
     const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
       
@@ -950,9 +1053,9 @@ export default class vx_collection {
       fn            : vx_collection.f_list_from_list_start_end
     }
 
-    // (func stringlist<-map)
-    vx_collection.t_stringlist_from_map['vx_value'] = {
-      name          : "stringlist<-map",
+    // (func map<-map-end)
+    vx_collection.t_map_from_map_end['vx_value'] = {
+      name          : "map<-map-end",
       pkgname       : "vx/collection",
       extends       : ":func",
       idx           : 0,
@@ -965,7 +1068,61 @@ export default class vx_collection {
       traits        : [],
       properties    : [],
       proplast      : {},
-      fn            : vx_collection.f_stringlist_from_map
+      fn            : vx_collection.f_map_from_map_end
+    }
+
+    // (func map<-map-keys)
+    vx_collection.t_map_from_map_keys['vx_value'] = {
+      name          : "map<-map-keys",
+      pkgname       : "vx/collection",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_collection.f_map_from_map_keys
+    }
+
+    // (func map<-map-start)
+    vx_collection.t_map_from_map_start['vx_value'] = {
+      name          : "map<-map-start",
+      pkgname       : "vx/collection",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_collection.f_map_from_map_start
+    }
+
+    // (func map<-map-start-end)
+    vx_collection.t_map_from_map_start_end['vx_value'] = {
+      name          : "map<-map-start-end",
+      pkgname       : "vx/collection",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_collection.f_map_from_map_start_end
     }
 
   }

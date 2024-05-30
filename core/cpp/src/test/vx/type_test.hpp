@@ -14,7 +14,6 @@ namespace vx_type_test {
   vx_test::Type_testcase f_is_string(vx_core::Type_context context);
   vx_test::Type_testcase f_is_type(vx_core::Type_context context);
   vx_test::Type_testcase f_is_type_from_any_typelist(vx_core::Type_context context);
-  vx_test::Type_testcase f_length_from_string(vx_core::Type_context context);
   vx_test::Type_testcase f_string_lowercase(vx_core::Type_context context);
   vx_test::Type_testcase f_string_outdent(vx_core::Type_context context);
   vx_test::Type_testcase f_string_trim(vx_core::Type_context context);

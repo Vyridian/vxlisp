@@ -1149,7 +1149,7 @@
 (func and : boolean
  [values : booleanlist :...]
  (switch : boolean
-  (length<-list values)
+  (length values)
   (case 0 true)
   (case 1 (:1 values))
   (else
@@ -2079,7 +2079,7 @@
 (func last<-list : any-1
  [values : list-1]
  (let
-  [len  : int := (length<-list values)]
+  [len  : int := (length values)]
   (any<-list values len))
  :test (test
         "c"
@@ -2089,7 +2089,26 @@
           "c")))
  :doc  "Returns last value")
 
-(func length<-list : int
+(func length : int
+ [text : string]
+ (native
+  :cpp
+   "long len = text->vx_string().length();
+    output = vx_core::vx_new_int(len);"
+  :js
+   "text.length"
+  :java
+   "int len = text.vx_string().length();
+    output = Core.vx_new_int(len);")
+ :test (test
+        4
+        (length "abcd"))
+       (test
+        0
+        (length ""))
+ :doc "Returns length of a string.")
+
+(func length : int
  [values : list-1]
  (native
   :cpp
@@ -2101,8 +2120,17 @@
   :java
    "int intresult = values.vx_list().size();
     output = Core.vx_new_int(intresult);")
- :test (test 3 (length<-list (stringlist "a" "b" "c")))
+ :test (test
+        3
+        (length
+         (stringlist "a" "b" "c")))
  :doc "Returns the currently used size/length of a list")
+
+(func length : int
+ [valuemap : map-1]
+ (length
+  (stringlist<-map valuemap))
+ :doc "Returns the length of the given map.")
 
 (func let : any-1
  [args   : arglist
@@ -2447,6 +2475,7 @@
           (string key val))))
  :doc "Returns a map from a map by applying a function to each key value.")
 
+/*
 (func mempool-addref : none
  [values : anylist :...]
  (native
@@ -2527,6 +2556,7 @@
       }
     }")
  :doc "Remove Value Child References")
+*/
 
 (func msg<-error : msg
  [error : string]
@@ -2881,6 +2911,22 @@
          "xy"
          "!"))
  :doc "Returns a string with all instances of find replaced by replace.")
+
+(func stringlist<-map : stringlist
+ [map : map-1]
+ (list<-map : stringlist
+  map
+  (fn : string
+   [key   : string
+    value : any]
+   key))
+ :test (test
+        (stringlist "b" "a")
+        (stringlist<-map
+         (intmap
+          :b 1
+          :a 2)))
+ :doc "Returns a stringlist of keys from any map in entry order.")
 
 (func switch : any-1
  [val          : any-2

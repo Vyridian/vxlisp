@@ -139,7 +139,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "34% 78/227")
+                  :text "35% 80/223")
                  (p
                   :style
                    (style
@@ -163,7 +163,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "51% 71/138")
+                  :text "54% 73/134")
                  (p
                   :style
                    (style
@@ -171,7 +171,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "89% 231/257")
+                  :text "89% 229/255")
                  (p
                   :style
                    (style
@@ -179,7 +179,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 1/168")
+                  :text "0% 1/166")
                  (p
                   :style
                    (style
@@ -187,7 +187,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 1/168"))
+                  :text "0% 1/166"))
                :nodes
                 (divchildlist
                  (div
@@ -8560,7 +8560,7 @@
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
                                     :white-space "pre"))
-                                :text "length<-list")))
+                                :text "length")))
                             (td
                              :nodes
                               (divchildlist
@@ -8574,7 +8574,167 @@
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
                                     :white-space "pre"))
-                                :text `(test 3 (length<-list (stringlist "a" "b" "c")))`)))
+                                :text
+                                 `(test
+ 4
+ (length "abcd"))`)))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text "4")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text "4")))))
+                         (tr
+                          :nodes
+                           (tdlist
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".passflag"
+                                  :props
+                                   (propmap
+                                    :background-color "green"
+                                    :color "white"
+                                    :padding-left "4px"
+                                    :padding-right "4px"
+                                    :padding-top "1px"
+                                    :padding-bottom "1px"))
+                                :text "Pass")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text "length")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 `(test
+ 0
+ (length ""))`)))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text "0")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text "0")))))
+                         (tr
+                          :nodes
+                           (tdlist
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".passflag"
+                                  :props
+                                   (propmap
+                                    :background-color "green"
+                                    :color "white"
+                                    :padding-left "4px"
+                                    :padding-right "4px"
+                                    :padding-top "1px"
+                                    :padding-bottom "1px"))
+                                :text "Pass")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text "length_1")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 `(test
+ 3
+ (length
+  (stringlist "a" "b" "c")))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -11218,6 +11378,93 @@
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
                                     :white-space "pre"))
+                                :text "stringlist<-map")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 `(test
+ (stringlist "b" "a")
+ (stringlist<-map
+  (intmap
+   :b 1
+   :a 2)))`)))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 `(stringlist
+ "b"
+ "a")`)))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 `(stringlist
+ "b"
+ "a")`)))))
+                         (tr
+                          :nodes
+                           (tdlist
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".passflag"
+                                  :props
+                                   (propmap
+                                    :background-color "green"
+                                    :color "white"
+                                    :padding-left "4px"
+                                    :padding-right "4px"
+                                    :padding-top "1px"
+                                    :padding-bottom "1px"))
+                                :text "Pass")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
                                 :text "switch")))
                             (td
                              :nodes
@@ -12686,7 +12933,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "67% 19/28")
+                  :text "66% 18/27")
                  (p
                   :style
                    (style
@@ -12710,7 +12957,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "67% 19/28")
+                  :text "66% 18/27")
                  (p
                   :style
                    (style
@@ -12718,7 +12965,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "82% 23/28")
+                  :text "81% 22/27")
                  (p
                   :style
                    (style
@@ -12726,7 +12973,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/28")
+                  :text "0% 0/27")
                  (p
                   :style
                    (style
@@ -12734,7 +12981,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/28"))
+                  :text "0% 0/27"))
                :nodes
                 (divchildlist
                  (div
@@ -14156,162 +14403,6 @@
                                     :font-family "monospace"
                                     :white-space "pre"))
                                 :text "true")))))
-                         (tr
-                          :nodes
-                           (tdlist
-                            (td
-                             :nodes
-                              (divchildlist
-                               (p
-                                :style
-                                 (style
-                                  :name ".passflag"
-                                  :props
-                                   (propmap
-                                    :background-color "green"
-                                    :color "white"
-                                    :padding-left "4px"
-                                    :padding-right "4px"
-                                    :padding-top "1px"
-                                    :padding-bottom "1px"))
-                                :text "Pass")))
-                            (td
-                             :nodes
-                              (divchildlist
-                               (p
-                                :style
-                                 (style
-                                  :name ".preformatted"
-                                  :props
-                                   (propmap
-                                    :display "block"
-                                    :unicode-bidi "embed"
-                                    :font-family "monospace"
-                                    :white-space "pre"))
-                                :text "length<-string")))
-                            (td
-                             :nodes
-                              (divchildlist
-                               (p
-                                :style
-                                 (style
-                                  :name ".preformatted"
-                                  :props
-                                   (propmap
-                                    :display "block"
-                                    :unicode-bidi "embed"
-                                    :font-family "monospace"
-                                    :white-space "pre"))
-                                :text
-                                 `(test
- 4
- (length<-string "abcd"))`)))
-                            (td
-                             :nodes
-                              (divchildlist
-                               (p
-                                :style
-                                 (style
-                                  :name ".preformatted"
-                                  :props
-                                   (propmap
-                                    :display "block"
-                                    :unicode-bidi "embed"
-                                    :font-family "monospace"
-                                    :white-space "pre"))
-                                :text "4")))
-                            (td
-                             :nodes
-                              (divchildlist
-                               (p
-                                :style
-                                 (style
-                                  :name ".preformatted"
-                                  :props
-                                   (propmap
-                                    :display "block"
-                                    :unicode-bidi "embed"
-                                    :font-family "monospace"
-                                    :white-space "pre"))
-                                :text "4")))))
-                         (tr
-                          :nodes
-                           (tdlist
-                            (td
-                             :nodes
-                              (divchildlist
-                               (p
-                                :style
-                                 (style
-                                  :name ".passflag"
-                                  :props
-                                   (propmap
-                                    :background-color "green"
-                                    :color "white"
-                                    :padding-left "4px"
-                                    :padding-right "4px"
-                                    :padding-top "1px"
-                                    :padding-bottom "1px"))
-                                :text "Pass")))
-                            (td
-                             :nodes
-                              (divchildlist
-                               (p
-                                :style
-                                 (style
-                                  :name ".preformatted"
-                                  :props
-                                   (propmap
-                                    :display "block"
-                                    :unicode-bidi "embed"
-                                    :font-family "monospace"
-                                    :white-space "pre"))
-                                :text "length<-string")))
-                            (td
-                             :nodes
-                              (divchildlist
-                               (p
-                                :style
-                                 (style
-                                  :name ".preformatted"
-                                  :props
-                                   (propmap
-                                    :display "block"
-                                    :unicode-bidi "embed"
-                                    :font-family "monospace"
-                                    :white-space "pre"))
-                                :text
-                                 `(test
- 0
- (length<-string ""))`)))
-                            (td
-                             :nodes
-                              (divchildlist
-                               (p
-                                :style
-                                 (style
-                                  :name ".preformatted"
-                                  :props
-                                   (propmap
-                                    :display "block"
-                                    :unicode-bidi "embed"
-                                    :font-family "monospace"
-                                    :white-space "pre"))
-                                :text "0")))
-                            (td
-                             :nodes
-                              (divchildlist
-                               (p
-                                :style
-                                 (style
-                                  :name ".preformatted"
-                                  :props
-                                   (propmap
-                                    :display "block"
-                                    :unicode-bidi "embed"
-                                    :font-family "monospace"
-                                    :white-space "pre"))
-                                :text "0")))))
                          (tr
                           :nodes
                            (tdlist
@@ -17085,7 +17176,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "76% 13/17")
+                  :text "80% 16/20")
                  (p
                   :style
                    (style
@@ -17109,7 +17200,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "76% 13/17")
+                  :text "80% 16/20")
                  (p
                   :style
                    (style
@@ -17117,7 +17208,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "100% 17/17")
+                  :text "100% 20/20")
                  (p
                   :style
                    (style
@@ -17125,7 +17216,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/17")
+                  :text "0% 0/20")
                  (p
                   :style
                    (style
@@ -17133,7 +17224,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/17"))
+                  :text "0% 0/20"))
                :nodes
                 (divchildlist
                  (div
@@ -18208,7 +18299,7 @@ ab
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
                                     :white-space "pre"))
-                                :text "stringlist<-map")))
+                                :text "map<-map-end")))
                             (td
                              :nodes
                               (divchildlist
@@ -18224,11 +18315,15 @@ ab
                                     :white-space "pre"))
                                 :text
                                  `(test
- (stringlist "a" "b")
- (stringlist<-map
-  (intmap
-   :a 1
-   :b 2)))`)))
+ (stringmap
+  :b "1"
+  :a "2")
+ (map<-map-end
+  (stringmap
+   :b "1"
+   :a "2"
+   :c "3")
+  2))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -18243,9 +18338,9 @@ ab
                                     :font-family "monospace"
                                     :white-space "pre"))
                                 :text
-                                 `(stringlist
- "a"
- "b")`)))
+                                 `(stringmap
+ :b "1"
+ :a "2")`)))
                             (td
                              :nodes
                               (divchildlist
@@ -18260,9 +18355,284 @@ ab
                                     :font-family "monospace"
                                     :white-space "pre"))
                                 :text
-                                 `(stringlist
- "a"
- "b")`)))))))
+                                 `(stringmap
+ :b "1"
+ :a "2")`)))))
+                         (tr
+                          :nodes
+                           (tdlist
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".passflag"
+                                  :props
+                                   (propmap
+                                    :background-color "green"
+                                    :color "white"
+                                    :padding-left "4px"
+                                    :padding-right "4px"
+                                    :padding-top "1px"
+                                    :padding-bottom "1px"))
+                                :text "Pass")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text "map<-map-keys")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 `(test
+ (stringmap
+  :c "3"
+  :a "1")
+ (map<-map-keys
+  (stringmap
+   :a "1"
+   :b "2"
+   :c "3")
+  (stringlist
+   "c" "a")))`)))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 `(stringmap
+ :c "3"
+ :a "1")`)))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 `(stringmap
+ :c "3"
+ :a "1")`)))))
+                         (tr
+                          :nodes
+                           (tdlist
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".passflag"
+                                  :props
+                                   (propmap
+                                    :background-color "green"
+                                    :color "white"
+                                    :padding-left "4px"
+                                    :padding-right "4px"
+                                    :padding-top "1px"
+                                    :padding-bottom "1px"))
+                                :text "Pass")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text "map<-map-start")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 `(test
+ (stringmap
+  :a "2"
+  :c "3")
+ (map<-map-start
+  (stringmap
+   :b "1"
+   :a "2"
+   :c "3")
+  2))`)))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 `(stringmap
+ :a "2"
+ :c "3")`)))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 `(stringmap
+ :a "2"
+ :c "3")`)))))
+                         (tr
+                          :nodes
+                           (tdlist
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".passflag"
+                                  :props
+                                   (propmap
+                                    :background-color "green"
+                                    :color "white"
+                                    :padding-left "4px"
+                                    :padding-right "4px"
+                                    :padding-top "1px"
+                                    :padding-bottom "1px"))
+                                :text "Pass")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text "map<-map-start-end")))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 `(test
+ (stringmap
+  :a "2"
+  :c "3")
+ (map<-map-start-end
+  (stringmap
+   :b "1"
+   :a "2"
+   :c "3"
+   :d "4")
+  2 3))`)))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 `(stringmap
+ :a "2"
+ :c "3")`)))
+                            (td
+                             :nodes
+                              (divchildlist
+                               (p
+                                :style
+                                 (style
+                                  :name ".preformatted"
+                                  :props
+                                   (propmap
+                                    :display "block"
+                                    :unicode-bidi "embed"
+                                    :font-family "monospace"
+                                    :white-space "pre"))
+                                :text
+                                 `(stringmap
+ :a "2"
+ :c "3")`)))))))
                      :thead
                       (thead
                        :nodes
@@ -39888,7 +40258,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/12")
+                  :text "0% 0/13")
                  (p
                   :style
                    (style
@@ -39912,7 +40282,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/12")
+                  :text "0% 0/13")
                  (p
                   :style
                    (style
@@ -39920,7 +40290,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "100% 12/12")
+                  :text "100% 13/13")
                  (p
                   :style
                    (style
@@ -39928,7 +40298,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/12")
+                  :text "0% 0/13")
                  (p
                   :style
                    (style
@@ -39936,7 +40306,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/12"))
+                  :text "0% 0/13"))
                :nodes
                 (divchildlist
                  (div
@@ -41239,7 +41609,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/30")
+                  :text "0% 0/37")
                  (p
                   :style
                    (style
@@ -41263,7 +41633,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/23")
+                  :text "0% 0/30")
                  (p
                   :style
                    (style
@@ -41271,7 +41641,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "63% 19/30")
+                  :text "60% 23/38")
                  (p
                   :style
                    (style
@@ -41279,7 +41649,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/23")
+                  :text "0% 0/31")
                  (p
                   :style
                    (style
@@ -41287,7 +41657,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/23"))
+                  :text "0% 0/31"))
                :nodes
                 (divchildlist
                  (div

@@ -1997,20 +1997,50 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_length_from_list(final Core.Type_context context) {
+  static Test.Type_testcase f_length(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
       ":testpkg", "vx/core",
-      ":casename", "length<-list",
+      ":casename", "length",
       ":describelist",
       Test.t_testdescribelist.vx_new(
         Test.t_testdescribe.vx_new(
-          ":describename", "(test 3 (length<-list (stringlist \"a\" \"b\" \"c\")))",
+          ":describename", "(test\n 4\n (length \"abcd\"))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.vx_new_int(4),
+              Core.f_length(Core.vx_new_string("abcd"))
+            )
+        ),
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n 0\n (length \"\"))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.vx_new_int(0),
+              Core.f_length(Core.vx_new_string(""))
+            )
+        )
+      )
+    );
+    return output;
+  }
+
+  static Test.Type_testcase f_length_1(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "length_1",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n 3\n (length\n  (stringlist \"a\" \"b\" \"c\")))",
           ":testresult",
             Test.f_test(
               context,
               Core.vx_new_int(3),
-              Core.f_length_from_list(
+              Core.f_length_1(
                 Core.f_new(
                   Core.t_stringlist,
                   Core.t_anylist.vx_new(
@@ -2875,6 +2905,43 @@ public final class CoreTest {
     return output;
   }
 
+  static Test.Type_testcase f_stringlist_from_map(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "stringlist<-map",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n (stringlist \"b\" \"a\")\n (stringlist<-map\n  (intmap\n   :b 1\n   :a 2)))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.f_new(
+                Core.t_stringlist,
+                Core.t_anylist.vx_new(
+                  Core.vx_new_string("b"),
+                  Core.vx_new_string("a")
+                )
+              ),
+              Core.f_stringlist_from_map(
+                Core.f_new(
+                  Core.t_intmap,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string(":b"),
+                    Core.vx_new_int(1),
+                    Core.vx_new_string(":a"),
+                    Core.vx_new_int(2)
+                  )
+                )
+              )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
   static Test.Type_testcase f_switch(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
@@ -3058,7 +3125,8 @@ public final class CoreTest {
       CoreTest.f_is_int(context),
       CoreTest.f_is_number(context),
       CoreTest.f_last_from_list(context),
-      CoreTest.f_length_from_list(context),
+      CoreTest.f_length(context),
+      CoreTest.f_length_1(context),
       CoreTest.f_let(context),
       CoreTest.f_list_join_from_list(context),
       CoreTest.f_list_join_from_list_1(context),
@@ -3078,6 +3146,7 @@ public final class CoreTest {
       CoreTest.f_string_repeat(context),
       CoreTest.f_string_from_any(context),
       CoreTest.f_string_from_string_find_replace(context),
+      CoreTest.f_stringlist_from_map(context),
       CoreTest.f_switch(context),
       CoreTest.f_type_from_any(context),
       CoreTest.f_typename_from_any(context)
@@ -3090,11 +3159,11 @@ public final class CoreTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/core", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 14, ":tests", 2, ":total", 14), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 89, ":tests", 231, ":total", 257), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 51, ":tests", 71, ":total", 138), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 168), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 168), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 34, ":tests", 78, ":total", 227), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 89, ":tests", 229, ":total", 255), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 54, ":tests", 73, ":total", 134), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 166), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 166), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 35, ":tests", 80, ":total", 223), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 6, ":tests", 5, ":total", 75)
     );
   }
@@ -3295,7 +3364,9 @@ public final class CoreTest {
         ":is-number", 3,
         ":is-pass<-permission", 0,
         ":last<-list", 1,
-        ":length<-list", 1,
+        ":length", 2,
+        ":length_1", 1,
+        ":length_2", 0,
         ":let", 1,
         ":let-async", 0,
         ":list-join<-list", 1,
@@ -3314,11 +3385,6 @@ public final class CoreTest {
         ":map<-list", 1,
         ":map<-map", 1,
         ":map<-map_1", 1,
-        ":mempool-addref", 0,
-        ":mempool-release", 0,
-        ":mempool-removeref", 0,
-        ":mempool-removerefchildren", 0,
-        ":mempool-reserve", 0,
         ":msg<-error", 0,
         ":msg<-error_1", 0,
         ":msg<-error_2", 0,
@@ -3353,6 +3419,7 @@ public final class CoreTest {
         ":string<-any-indent", 0,
         ":string<-func", 0,
         ":string<-string-find-replace", 1,
+        ":stringlist<-map", 1,
         ":switch", 1,
         ":then", 0,
         ":traits<-typedef", 0,

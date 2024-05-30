@@ -1360,98 +1360,6 @@ public final class Type {
   }
 
   /**
-   * @function length_from_string
-   * Returns length of a string.
-   * @param  {string} text
-   * @return {int}
-   * (func length<-string)
-   */
-  public static interface Func_length_from_string extends Core.Func_any_from_any {
-    public Core.Type_int vx_length_from_string(final Core.Type_string text);
-  }
-
-  public static class Class_length_from_string extends Core.Class_base implements Func_length_from_string {
-
-    @Override
-    public Func_length_from_string vx_new(Object... vals) {
-      Class_length_from_string output = new Class_length_from_string();
-      return output;
-    }
-
-    @Override
-    public Func_length_from_string vx_copy(Object... vals) {
-      Class_length_from_string output = new Class_length_from_string();
-      return output;
-    }
-
-    @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
-
-    @Override
-    public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
-        "vx/type", // pkgname
-        "length<-string", // name
-        0, // idx
-        false, // async
-        Core.typedef_new(
-          "vx/core", // pkgname
-          "int", // name
-          "", // extends
-          Core.t_typelist.vx_new(Core.t_number), // traits
-          Core.e_typelist, // allowtypes
-          Core.e_typelist, // disallowtypes
-          Core.e_funclist, // allowfuncs
-          Core.e_funclist, // disallowfuncs
-          Core.e_anylist, // allowvalues
-          Core.e_anylist, // disallowvalues
-          Core.e_argmap // properties
-        ) // typedef
-      );
-    }
-
-    @Override
-    public Func_length_from_string vx_empty() {return e_length_from_string;}
-    @Override
-    public Func_length_from_string vx_type() {return t_length_from_string;}
-
-    @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
-
-    @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
-      T output = Core.f_empty(generic_any_1);
-      Core.Type_string inputval = (Core.Type_string)value;
-      Core.Type_any outputval = Type.f_length_from_string(inputval);
-      output = Core.f_any_from_any(generic_any_1, outputval);
-      return output;
-    }
-
-    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
-      Core.Type_any output = Core.e_any;
-      Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
-      output = Type.f_length_from_string(text);
-      return output;
-    }
-
-    @Override
-    public Core.Type_int vx_length_from_string(final Core.Type_string text) {
-      return Type.f_length_from_string(text);
-    }
-
-  }
-
-  public static final Func_length_from_string e_length_from_string = new Type.Class_length_from_string();
-  public static final Func_length_from_string t_length_from_string = new Type.Class_length_from_string();
-
-  public static Core.Type_int f_length_from_string(final Core.Type_string text) {
-    Core.Type_int output = Core.e_int;
-    int len = text.vx_string().length();
-    output = Core.vx_new_int(len);
-    return output;
-  }
-
-  /**
    * @function string_lowercase
    * Returns lowercase version of string
    * @param  {string} text
@@ -2140,7 +2048,7 @@ public final class Type {
     output = Type.f_string_from_string_start_end(
       text,
       startpos,
-      Type.f_length_from_string(text)
+      Core.f_length(text)
     );
     return output;
   }
@@ -2687,7 +2595,6 @@ public final class Type {
     mapfunc.put("is-string", Type.t_is_string);
     mapfunc.put("is-type", Type.t_is_type);
     mapfunc.put("is-type<-any-typelist", Type.t_is_type_from_any_typelist);
-    mapfunc.put("length<-string", Type.t_length_from_string);
     mapfunc.put("string-lowercase", Type.t_string_lowercase);
     mapfunc.put("string-outdent", Type.t_string_outdent);
     mapfunc.put("string-trim", Type.t_string_trim);
