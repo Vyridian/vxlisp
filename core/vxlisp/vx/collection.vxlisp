@@ -87,6 +87,43 @@ count : int := 0
           count += 1
           output = (fn-loop output))))")
 
+(func any<-map-pos : any-1
+ [map : map-1
+  pos : int]
+ (let : any-1
+  [keys : stringlist := (stringlist<-map map)
+   key : string :=
+    (any<-list : string
+     keys pos)]
+  (any<-map : any-1
+   map key))
+ :doc "Returns then numbered child from a map.")
+
+(func boolean-write<-map-removekey : boolean
+ [valuemap : map-1
+  key      : string]
+ (boolean-write<-map-name-value
+  valuemap key (empty any))
+ :sideeffects
+  "Alters a mutable map. Warning: vxlisp is immutable by design, so this function can produce unexpected results."
+ :doc "Returns true if it alters a mutable map false if it fails.")
+
+(func boolean-write<-map-removekeys : boolean
+ [valuemap : map-1
+  keys     : stringlist]
+ (let : boolean
+  [writelist : booleanlist :=
+    (list<-list : booleanlist
+     keys
+     (fn : boolean
+      [key : string]
+      (boolean-write<-map-removekey
+       valuemap key)))]
+  (and writelist))
+ :sideeffects
+  "Alters a mutable map. Warning: vxlisp is immutable by design, so this function can produce unexpected results."
+ :doc "Returns true if it alters a mutable map false if it fails.")
+
 (func int<-map-key : int
  [map : map-1
   key : string]
@@ -344,7 +381,8 @@ output : list-1 := (empty list-1)
 (func map<-map-start : map-1
  [valuemap : map-1
   start    : int]
- (map<-map-start-end valuemap start (length valuemap))
+ (map<-map-start-end
+  valuemap start (length valuemap))
  :test (test
         (stringmap
          :a "2"

@@ -246,6 +246,95 @@ namespace vx_ui_ui_test {
     return output;
   }
 
+  vx_test::Type_testcase f_ui_write_from_ui_visible(vx_core::Type_context context) {
+    vx_core::vx_log("Test Start: f_ui_write_from_ui_visible");
+    // testdescribe_1
+    vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      context,
+      vx_core::f_new(
+        vx_ui_ui::t_ui,
+        vx_core::vx_new(vx_core::t_anylist, {
+          vx_core::vx_new_string(":uimap"),
+          vx_core::f_new(
+            vx_ui_ui::t_uimap,
+            vx_core::vx_new(vx_core::t_anylist, {
+              vx_core::vx_new_string(":a"),
+              vx_core::f_new(
+                vx_ui_ui::t_ui,
+                vx_core::vx_new(vx_core::t_anylist, {
+                  vx_core::vx_new_string(":uid"),
+                  vx_core::vx_new_string("a"),
+                  vx_core::vx_new_string(":hidden"),
+                  vx_core::vx_new_boolean(true)
+                })
+              ),
+              vx_core::vx_new_string(":b"),
+              vx_core::f_new(
+                vx_ui_ui::t_ui,
+                vx_core::vx_new(vx_core::t_anylist, {
+                  vx_core::vx_new_string(":uid"),
+                  vx_core::vx_new_string("b")
+                })
+              )
+            })
+          )
+        })
+      ),
+      vx_ui_ui::f_ui_write_from_ui_visible(
+        vx_core::f_new(
+          vx_ui_ui::t_ui,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string(":uimap"),
+            vx_core::f_new(
+              vx_ui_ui::t_uimap,
+              vx_core::vx_new(vx_core::t_anylist, {
+                vx_core::vx_new_string(":a"),
+                vx_core::f_new(
+                  vx_ui_ui::t_ui,
+                  vx_core::vx_new(vx_core::t_anylist, {
+                    vx_core::vx_new_string(":uid"),
+                    vx_core::vx_new_string("a")
+                  })
+                ),
+                vx_core::vx_new_string(":b"),
+                vx_core::f_new(
+                  vx_ui_ui::t_ui,
+                  vx_core::vx_new(vx_core::t_anylist, {
+                    vx_core::vx_new_string(":uid"),
+                    vx_core::vx_new_string("b"),
+                    vx_core::vx_new_string(":hidden"),
+                    vx_core::vx_new_boolean(true)
+                  })
+                )
+              })
+            )
+          })
+        ),
+        vx_core::vx_new_int(2)
+      )
+    );
+    vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (ui\n  :uimap\n   (uimap\n    :a\n     (ui\n      :uid \"a\"\n      :hidden true)\n    :b\n     (ui\n      :uid \"b\")))\n (ui-write<-ui-visible\n  (ui\n   :uimap\n    (uimap\n     :a\n      (ui\n       :uid \"a\")\n     :b\n      (ui\n       :uid \"b\"\n       :hidden true)))\n  2))"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/ui/ui"),
+      vx_core::vx_new_string(":testresult"), testresult_1
+    });
+    vx_core::vx_Type_listany listdescribe = {
+      testdescribe_1
+    };
+    vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/ui/ui"),
+      vx_core::vx_new_string(":casename"), vx_core::vx_new_string("ui-write<-ui-visible"),
+      vx_core::vx_new_string(":describelist"),
+      vx_core::vx_any_from_any(
+        vx_test::t_testdescribelist,
+        vx_test::t_testdescribelist->vx_new_from_list(listdescribe)
+      )
+    });
+    vx_core::vx_log("Test End  : f_ui_write_from_ui_visible");
+    return output;
+  }
+
   vx_test::Type_testcase f_ui_from_ui_find(vx_core::Type_context context) {
     vx_core::vx_log("Test Start: f_ui_from_ui_find");
     // testdescribe_1
@@ -408,104 +497,15 @@ namespace vx_ui_ui_test {
     return output;
   }
 
-  vx_test::Type_testcase f_ui_from_ui_visible(vx_core::Type_context context) {
-    vx_core::vx_log("Test Start: f_ui_from_ui_visible");
-    // testdescribe_1
-    vx_test::Type_testresult testresult_1 = vx_test::f_test(
-      context,
-      vx_core::f_new(
-        vx_ui_ui::t_ui,
-        vx_core::vx_new(vx_core::t_anylist, {
-          vx_core::vx_new_string(":uimap"),
-          vx_core::f_new(
-            vx_ui_ui::t_uimap,
-            vx_core::vx_new(vx_core::t_anylist, {
-              vx_core::vx_new_string(":a"),
-              vx_core::f_new(
-                vx_ui_ui::t_ui,
-                vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":uid"),
-                  vx_core::vx_new_string("a"),
-                  vx_core::vx_new_string(":hidden"),
-                  vx_core::vx_new_boolean(true)
-                })
-              ),
-              vx_core::vx_new_string(":b"),
-              vx_core::f_new(
-                vx_ui_ui::t_ui,
-                vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":uid"),
-                  vx_core::vx_new_string("b")
-                })
-              )
-            })
-          )
-        })
-      ),
-      vx_ui_ui::f_ui_from_ui_visible(
-        vx_core::f_new(
-          vx_ui_ui::t_ui,
-          vx_core::vx_new(vx_core::t_anylist, {
-            vx_core::vx_new_string(":uimap"),
-            vx_core::f_new(
-              vx_ui_ui::t_uimap,
-              vx_core::vx_new(vx_core::t_anylist, {
-                vx_core::vx_new_string(":a"),
-                vx_core::f_new(
-                  vx_ui_ui::t_ui,
-                  vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::vx_new_string(":uid"),
-                    vx_core::vx_new_string("a")
-                  })
-                ),
-                vx_core::vx_new_string(":b"),
-                vx_core::f_new(
-                  vx_ui_ui::t_ui,
-                  vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::vx_new_string(":uid"),
-                    vx_core::vx_new_string("b"),
-                    vx_core::vx_new_string(":hidden"),
-                    vx_core::vx_new_boolean(true)
-                  })
-                )
-              })
-            )
-          })
-        ),
-        vx_core::vx_new_int(2)
-      )
-    );
-    vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (ui\n  :uimap\n   (uimap\n    :a\n     (ui\n      :uid \"a\"\n      :hidden true)\n    :b\n     (ui\n      :uid \"b\")))\n (ui<-ui-visible\n  (ui\n   :uimap\n    (uimap\n     :a\n      (ui\n       :uid \"a\")\n     :b\n      (ui\n       :uid \"b\"\n       :hidden true)))\n  2))"),
-      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/ui/ui"),
-      vx_core::vx_new_string(":testresult"), testresult_1
-    });
-    vx_core::vx_Type_listany listdescribe = {
-      testdescribe_1
-    };
-    vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
-      vx_core::vx_new_string(":passfail"), vx_core::c_false,
-      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/ui/ui"),
-      vx_core::vx_new_string(":casename"), vx_core::vx_new_string("ui<-ui-visible"),
-      vx_core::vx_new_string(":describelist"),
-      vx_core::vx_any_from_any(
-        vx_test::t_testdescribelist,
-        vx_test::t_testdescribelist->vx_new_from_list(listdescribe)
-      )
-    });
-    vx_core::vx_log("Test End  : f_ui_from_ui_visible");
-    return output;
-  }
-
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context) {
     vx_core::vx_Type_listany listtestcase;
     listtestcase.push_back(vx_ui_ui_test::f_boolean_writestate_from_uiapp(context));
     listtestcase.push_back(vx_ui_ui_test::f_string_parentuid_from_uid(context));
     listtestcase.push_back(vx_ui_ui_test::f_ui_readstate_uiapp(context));
     listtestcase.push_back(vx_ui_ui_test::f_ui_readstate_from_uid(context));
+    listtestcase.push_back(vx_ui_ui_test::f_ui_write_from_ui_visible(context));
     listtestcase.push_back(vx_ui_ui_test::f_ui_from_ui_find(context));
     listtestcase.push_back(vx_ui_ui_test::f_ui_from_ui_selected(context));
-    listtestcase.push_back(vx_ui_ui_test::f_ui_from_ui_visible(context));
     vx_test::Type_testcaselist output = vx_core::vx_any_from_any(
       vx_test::t_testcaselist,
       vx_test::t_testcaselist->vx_new_from_list(listtestcase)
@@ -522,29 +522,29 @@ namespace vx_ui_ui_test {
         vx_core::vx_new_string(":total"), vx_core::vx_new_int(41)
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(61), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(74), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(120)
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(66), 
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(91), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(137)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(13), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(10), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(7), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(51)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(68)
       }),
       vx_core::vx_new_string(":bigospacenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(51)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(68)
       }),
       vx_core::vx_new_string(":bigotimenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(51)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(68)
       }),
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(5), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(7), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(120)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(137)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
@@ -632,12 +632,26 @@ namespace vx_ui_ui_test {
         vx_core::vx_new_string(":styletype-system"), vx_core::vx_new_int(0)
       }),
       vx_core::vx_new_string(":funcmap"), vx_core::vx_new(vx_core::t_intmap, {
+        vx_core::vx_new_string(":boolean-layout<-ui-parent-selected"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":boolean-layout<-ui-parent-visible"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":boolean-layoutaddchild<-ui-parent"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":boolean-layoutremove<-ui"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":boolean-layoutremove<-ui-keys"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":boolean-layoutremove<-ui-parent"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":boolean-layoutremove<-ui-start-end"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":boolean-layoutselected<-ui"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":boolean-layoutselected<-ui-parent"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":boolean-layoutselected<-ui-selected"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":boolean-layoutvisible<-ui"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":boolean-print"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":boolean-removestate-uiapp"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":boolean-write<-ui-parent"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":boolean-writeremove<-ui-uid"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":boolean-writestate<-ui"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":boolean-writestate<-uiapp"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":boolean-writestate<-uiengine"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":fontfacemap<-fontfacelist"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":int-child<-ui-uid"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":int-selected<-ui"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":int-visible<-ui"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":intlist-visible<-ui"), vx_core::vx_new_int(0),
@@ -658,6 +672,7 @@ namespace vx_ui_ui_test {
         vx_core::vx_new_string(":ui-addlayout<-ui-layoutengine"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":ui-addlayout<-ui-layoutmap-else"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":ui-addlayout<-ui-uiengine"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":ui-child<-ui-pos"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":ui-child<-ui-uid"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":ui-from<-event"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":ui-layout"), vx_core::vx_new_int(0),
@@ -668,16 +683,18 @@ namespace vx_ui_ui_test {
         vx_core::vx_new_string(":ui-readstate-uiapp"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":ui-readstate<-uid"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":ui-selected<-ui"), vx_core::vx_new_int(0),
-        vx_core::vx_new_string(":ui-writechild<-ui-child"), vx_core::vx_new_int(0),
-        vx_core::vx_new_string(":ui-writechildmap<-ui-childmap"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":ui-visible<-ui"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":ui-write<-ui-child"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":ui-write<-ui-childmap"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":ui-write<-ui-visible"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":ui<-layout-ui-orig-parent"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":ui<-ui-find"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":ui<-ui-selected"), vx_core::vx_new_int(1),
-        vx_core::vx_new_string(":ui<-ui-visible"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":uid-selected<-ui"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":uiengine-readstate"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":uiengine-render"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":uilist-selected<-ui"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":uilist-visible<-ui"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":uilist<-uimap"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":uimap-addlayout<-uimap-layoutmap-else"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":uimap-layout<-uimap-parent"), vx_core::vx_new_int(0),

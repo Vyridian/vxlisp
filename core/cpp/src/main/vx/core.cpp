@@ -11391,6 +11391,209 @@ namespace vx_core {
 
   //}
 
+  // (type stringmutablemap)
+  // class Class_stringmutablemap {
+    Abstract_stringmutablemap::~Abstract_stringmutablemap() {}
+
+    Class_stringmutablemap::Class_stringmutablemap() : Abstract_stringmutablemap::Abstract_stringmutablemap() {
+      vx_core::refcount += 1;
+    }
+
+    Class_stringmutablemap::~Class_stringmutablemap() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+      for (auto const& [key, val] : this->vx_p_map) {
+        vx_core::vx_release_one(val);
+      }
+    }
+
+    // vx_map()
+    vx_core::vx_Type_mapany Class_stringmutablemap::vx_map() const {
+      vx_core::vx_Type_mapany output = vx_core::vx_map_from_map(vx_core::t_any, this->vx_p_map);
+      return output;
+    }
+
+    // vx_set(map, string, any)
+    vx_core::Type_boolean Class_stringmutablemap::vx_set(vx_core::Type_string name, vx_core::Type_any value) {
+      vx_core::Type_boolean output = vx_core::c_false;
+      vx_core::Type_any valtype = value->vx_type();
+      if (valtype == vx_core::t_string) {
+        vx_core::Type_string newval = vx_core::vx_any_from_any(vx_core::t_string, value);
+        std::string key = name->vx_string();
+        if (vx_core::vx_boolean_from_string_starts(key, ":")) {
+          key = key.substr(1, key.length());
+        }
+        vx_core::Type_string oldval = this->vx_p_map[key];
+        if (oldval != newval) {
+          if (oldval) {
+            vx_core::vx_release_one(oldval);
+          }
+          if (newval == vx_core::e_string) {
+            this->vx_p_map.erase(key);
+          } else {
+            vx_core::vx_reserve(newval);
+            this->vx_p_map[key] = newval;
+          }
+        }
+        output = vx_core::c_true;
+      }
+      return output;
+    }
+    // vx_get_string(key)
+    vx_core::Type_string Class_stringmutablemap::vx_get_string(vx_core::Type_string key) const {
+      vx_core::Type_string output = vx_core::e_string;
+      const vx_core::Class_stringmutablemap* map = this;
+      std::string skey = key->vx_string();
+      if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+        skey = vx_core::vx_string_from_string_start(skey, 2);
+      }
+      std::map<std::string, vx_core::Type_string> mapval = map->vx_p_map;
+      output = vx_core::vx_any_from_map(mapval, skey, vx_core::e_string);
+      vx_core::vx_release_except(key, output);
+      return output;
+    }
+
+    // vx_get_any(key)
+    vx_core::Type_any Class_stringmutablemap::vx_get_any(vx_core::Type_string key) const {
+      return this->vx_get_string(key);
+    }
+
+    // vx_mapstring()
+    std::map<std::string, vx_core::Type_string> Class_stringmutablemap::vx_mapstring() const {return this->vx_p_map;}
+
+    // vx_new_from_map(mapval)
+    vx_core::Type_any Class_stringmutablemap::vx_new_from_map(vx_core::vx_Type_mapany mapval) const {
+      vx_core::Type_stringmutablemap output = vx_core::e_stringmutablemap;
+      vx_core::Type_msgblock msgblock = vx_core::e_msgblock;
+      std::map<std::string, vx_core::Type_string> map;
+      for (auto const& iter : mapval) {
+        std::string key = iter.first;
+        vx_core::Type_any val = iter.second;
+        vx_core::Type_any valtype = val->vx_type();
+        if (valtype == vx_core::t_string) {
+          vx_core::Type_string castval = vx_core::vx_any_from_any(vx_core::t_string, val);
+          map[key] = castval;
+        } else {
+          vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(stringmutablemap) Invalid Value: " + vx_core::vx_string_from_any(val) + "");
+          msgblock = vx_core::vx_copy(msgblock, {msgblock, msg});
+        }
+      }
+      if ((map.size() > 0) || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_core::Class_stringmutablemap();
+        output->vx_p_map = map;
+        for (auto const& [key, val] : map) {
+          vx_core::vx_reserve(val);
+        }
+        if (msgblock != vx_core::e_msgblock) {
+          output->vx_p_msgblock = msgblock;
+          vx_core::vx_reserve(msgblock);
+        }
+      }
+      for (auto const& [key, val] : mapval) {
+        vx_core::vx_release_except(val, output);
+      }
+      return output;
+    }
+
+    vx_core::Type_any Class_stringmutablemap::vx_new(vx_core::vx_Type_listany vals) const {
+      return this->vx_copy(vx_core::e_stringmutablemap, vals);
+    }
+
+    vx_core::Type_any Class_stringmutablemap::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_core::Type_stringmutablemap output = vx_core::e_stringmutablemap;
+      bool ischanged = false;
+      if (copyval->vx_p_constdef != NULL) {
+        ischanged = true;
+      }
+      vx_core::Type_stringmutablemap valmap = vx_core::vx_any_from_any(vx_core::t_stringmutablemap, copyval);
+      output = valmap;
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(valmap->vx_msgblock(), vals);
+      std::map<std::string, vx_core::Type_string> mapval = valmap->vx_mapstring();
+      std::vector<std::string> keys = valmap->vx_p_keys;
+      std::string skey = "";
+      for (vx_core::Type_any valsub : vals) {
+        vx_core::Type_any valsubtype = valsub->vx_type();
+        if (valsubtype == vx_core::t_msgblock) {
+          msgblock = vx_core::vx_copy(msgblock, {valsub});
+        } else if (valsubtype == vx_core::t_msg) {
+          msgblock = vx_core::vx_copy(msgblock, {valsub});
+        } else if (skey == "") {
+          if (valsubtype == vx_core::t_string) {
+            vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, valsub);
+            skey = valstring->vx_string();
+            if (vx_core::vx_boolean_from_string_starts(skey, ":")) {
+              skey = vx_core::vx_string_from_string_start(skey, 2);
+            }
+          } else {
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Key Expected: " + vx_core::vx_string_from_any(valsub) + "");
+            msgblock = vx_core::vx_copy(msgblock, {msg});
+          }
+        } else {
+          vx_core::Type_string valany = NULL;
+          if (valsubtype == vx_core::t_string) {
+            valany = vx_core::vx_any_from_any(vx_core::t_string, valsub);
+          } else if (valsubtype == vx_core::t_string) {
+            valany = vx_core::vx_any_from_any(vx_core::t_string, valsub);
+          } else {
+            vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("Invalid Key/Value: " + skey + " "  + vx_core::vx_string_from_any(valsub) + "");
+            msgblock = vx_core::vx_copy(msgblock, {msg});
+          }
+          if (valany) {
+            ischanged = true;
+            mapval[skey] = valany;
+            if (!vx_core::vx_boolean_from_list_find(keys, skey)) {
+          	 		keys.push_back(skey);
+            }
+            skey = "";
+          }
+        }
+      }
+      if (ischanged || (msgblock != vx_core::e_msgblock)) {
+        output = new vx_core::Class_stringmutablemap();
+        output->vx_p_keys = keys;
+        output->vx_p_map = mapval;
+        for (auto const& [key, val] : mapval) {
+          vx_core::vx_reserve(val);
+        }
+        if (msgblock != vx_core::e_msgblock) {
+          output->vx_p_msgblock = msgblock;
+          vx_core::vx_reserve(msgblock);
+        }
+      }
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_msgblock Class_stringmutablemap::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany vx_core::Class_stringmutablemap::vx_dispose() {return vx_core::emptylistany;}
+    vx_core::Type_any Class_stringmutablemap::vx_empty() const {return vx_core::e_stringmutablemap;}
+    vx_core::Type_any Class_stringmutablemap::vx_type() const {return vx_core::t_stringmutablemap;}
+
+    vx_core::Type_typedef Class_stringmutablemap::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/core", // pkgname
+        "stringmutablemap", // name
+        ":map", // extends
+        vx_core::e_typelist, // traits
+        vx_core::vx_typelist_from_listany({vx_core::t_string}), // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_stringmutablemap::vx_constdef() const {return this->vx_p_constdef;}
+
+
+  //}
+
   // (type thenelse)
   // class Class_thenelse {
     Abstract_thenelse::~Abstract_thenelse() {}
@@ -29601,6 +29804,8 @@ namespace vx_core {
   vx_core::Type_stringlistlist t_stringlistlist = NULL;
   vx_core::Type_stringmap e_stringmap = NULL;
   vx_core::Type_stringmap t_stringmap = NULL;
+  vx_core::Type_stringmutablemap e_stringmutablemap = NULL;
+  vx_core::Type_stringmutablemap t_stringmutablemap = NULL;
   vx_core::Type_thenelse e_thenelse = NULL;
   vx_core::Type_thenelse t_thenelse = NULL;
   vx_core::Type_thenelselist e_thenelselist = NULL;
@@ -30246,6 +30451,10 @@ namespace vx_core {
       vx_core::vx_reserve_empty(vx_core::e_stringmap);
       vx_core::t_stringmap = new Class_stringmap();
       vx_core::vx_reserve_type(vx_core::t_stringmap);
+      vx_core::e_stringmutablemap = new Class_stringmutablemap();
+      vx_core::vx_reserve_empty(vx_core::e_stringmutablemap);
+      vx_core::t_stringmutablemap = new Class_stringmutablemap();
+      vx_core::vx_reserve_type(vx_core::t_stringmutablemap);
       vx_core::e_thenelse = new Class_thenelse();
       vx_core::vx_reserve_empty(vx_core::e_thenelse);
       vx_core::t_thenelse = new Class_thenelse();
@@ -31033,6 +31242,7 @@ namespace vx_core {
       maptype["stringlist"] = vx_core::t_stringlist;
       maptype["stringlistlist"] = vx_core::t_stringlistlist;
       maptype["stringmap"] = vx_core::t_stringmap;
+      maptype["stringmutablemap"] = vx_core::t_stringmutablemap;
       maptype["thenelse"] = vx_core::t_thenelse;
       maptype["thenelselist"] = vx_core::t_thenelselist;
       maptype["translation"] = vx_core::t_translation;

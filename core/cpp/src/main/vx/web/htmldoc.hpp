@@ -13,18 +13,26 @@ namespace vx_web_htmldoc {
   typedef Abstract_boolean_print_from_id_stylesheettext* Func_boolean_print_from_id_stylesheettext;
   extern Func_boolean_print_from_id_stylesheettext e_boolean_print_from_id_stylesheettext;
   extern Func_boolean_print_from_id_stylesheettext t_boolean_print_from_id_stylesheettext;
+  class Abstract_boolean_remove_from_id;
+  typedef Abstract_boolean_remove_from_id* Func_boolean_remove_from_id;
+  extern Func_boolean_remove_from_id e_boolean_remove_from_id;
+  extern Func_boolean_remove_from_id t_boolean_remove_from_id;
   class Abstract_boolean_replace_from_id_htmltext;
   typedef Abstract_boolean_replace_from_id_htmltext* Func_boolean_replace_from_id_htmltext;
   extern Func_boolean_replace_from_id_htmltext e_boolean_replace_from_id_htmltext;
   extern Func_boolean_replace_from_id_htmltext t_boolean_replace_from_id_htmltext;
-  class Abstract_boolean_replace_from_ui_htmltext;
-  typedef Abstract_boolean_replace_from_ui_htmltext* Func_boolean_replace_from_ui_htmltext;
-  extern Func_boolean_replace_from_ui_htmltext e_boolean_replace_from_ui_htmltext;
-  extern Func_boolean_replace_from_ui_htmltext t_boolean_replace_from_ui_htmltext;
+  class Abstract_boolean_replace_from_id_parent_htmltext;
+  typedef Abstract_boolean_replace_from_id_parent_htmltext* Func_boolean_replace_from_id_parent_htmltext;
+  extern Func_boolean_replace_from_id_parent_htmltext e_boolean_replace_from_id_parent_htmltext;
+  extern Func_boolean_replace_from_id_parent_htmltext t_boolean_replace_from_id_parent_htmltext;
   class Abstract_boolean_write_stylesheet_from_string;
   typedef Abstract_boolean_write_stylesheet_from_string* Func_boolean_write_stylesheet_from_string;
   extern Func_boolean_write_stylesheet_from_string e_boolean_write_stylesheet_from_string;
   extern Func_boolean_write_stylesheet_from_string t_boolean_write_stylesheet_from_string;
+  class Abstract_boolean_write_from_id_attribute_value;
+  typedef Abstract_boolean_write_from_id_attribute_value* Func_boolean_write_from_id_attribute_value;
+  extern Func_boolean_write_from_id_attribute_value e_boolean_write_from_id_attribute_value;
+  extern Func_boolean_write_from_id_attribute_value t_boolean_write_from_id_attribute_value;
   class Abstract_boolean_write_from_id_htmltext;
   typedef Abstract_boolean_write_from_id_htmltext* Func_boolean_write_from_id_htmltext;
   extern Func_boolean_write_from_id_htmltext e_boolean_write_from_id_htmltext;
@@ -64,14 +72,20 @@ namespace vx_web_htmldoc {
   // (func boolean-print<-id-stylesheettext)
   vx_core::Type_boolean f_boolean_print_from_id_stylesheettext(vx_core::Type_string id, vx_core::Type_string stylesheettext);
 
+  // (func boolean-remove<-id)
+  vx_core::Type_boolean f_boolean_remove_from_id(vx_core::Type_string id);
+
   // (func boolean-replace<-id-htmltext)
   vx_core::Type_boolean f_boolean_replace_from_id_htmltext(vx_core::Type_string id, vx_core::Type_string htmltext);
 
-  // (func boolean-replace<-ui-htmltext)
-  vx_core::Type_boolean f_boolean_replace_from_ui_htmltext(vx_ui_ui::Type_ui ui, vx_core::Type_string htmltext);
+  // (func boolean-replace<-id-parent-htmltext)
+  vx_core::Type_boolean f_boolean_replace_from_id_parent_htmltext(vx_core::Type_string id, vx_core::Type_string parent, vx_core::Type_string htmltext);
 
   // (func boolean-write-stylesheet<-string)
   vx_core::vx_Type_async f_boolean_write_stylesheet_from_string(vx_core::Type_string text);
+
+  // (func boolean-write<-id-attribute-value)
+  vx_core::Type_boolean f_boolean_write_from_id_attribute_value(vx_core::Type_string id, vx_core::Type_string attribute, vx_core::Type_string value);
 
   // (func boolean-write<-id-htmltext)
   vx_core::Type_boolean f_boolean_write_from_id_htmltext(vx_core::Type_string id, vx_core::Type_string htmltext);
@@ -123,6 +137,33 @@ namespace vx_web_htmldoc {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
+  // (func boolean-remove<-id)
+  class Abstract_boolean_remove_from_id : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_boolean_remove_from_id() {};
+    virtual ~Abstract_boolean_remove_from_id() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_boolean_remove_from_id : public virtual Abstract_boolean_remove_from_id {
+  public:
+    Class_boolean_remove_from_id();
+    virtual ~Class_boolean_remove_from_id() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
   // (func boolean-replace<-id-htmltext)
   class Abstract_boolean_replace_from_id_htmltext : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
@@ -146,17 +187,17 @@ namespace vx_web_htmldoc {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func boolean-replace<-ui-htmltext)
-  class Abstract_boolean_replace_from_ui_htmltext : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  // (func boolean-replace<-id-parent-htmltext)
+  class Abstract_boolean_replace_from_id_parent_htmltext : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_boolean_replace_from_ui_htmltext() {};
-    virtual ~Abstract_boolean_replace_from_ui_htmltext() = 0;
+    Abstract_boolean_replace_from_id_parent_htmltext() {};
+    virtual ~Abstract_boolean_replace_from_id_parent_htmltext() = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_boolean_replace_from_ui_htmltext : public virtual Abstract_boolean_replace_from_ui_htmltext {
+  class Class_boolean_replace_from_id_parent_htmltext : public virtual Abstract_boolean_replace_from_id_parent_htmltext {
   public:
-    Class_boolean_replace_from_ui_htmltext();
-    virtual ~Class_boolean_replace_from_ui_htmltext() override;
+    Class_boolean_replace_from_id_parent_htmltext();
+    virtual ~Class_boolean_replace_from_id_parent_htmltext() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -194,6 +235,29 @@ namespace vx_web_htmldoc {
     virtual vx_core::Func_any_from_any_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_async::IFn fn) const override;
     virtual vx_core::vx_Type_async vx_any_from_any_async(vx_core::Type_any generic_any_1, vx_core::Type_any val) const override;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func boolean-write<-id-attribute-value)
+  class Abstract_boolean_write_from_id_attribute_value : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_boolean_write_from_id_attribute_value() {};
+    virtual ~Abstract_boolean_write_from_id_attribute_value() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_boolean_write_from_id_attribute_value : public virtual Abstract_boolean_write_from_id_attribute_value {
+  public:
+    Class_boolean_write_from_id_attribute_value();
+    virtual ~Class_boolean_write_from_id_attribute_value() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
   // (func boolean-write<-id-htmltext)

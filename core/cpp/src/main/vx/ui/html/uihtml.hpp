@@ -32,10 +32,26 @@ namespace vx_ui_html_uihtml {
   class Class_style_selected;
   typedef Class_style_selected* Const_style_selected;
   extern Const_style_selected c_style_selected;
+  class Abstract_boolean_layoutremove_html;
+  typedef Abstract_boolean_layoutremove_html* Func_boolean_layoutremove_html;
+  extern Func_boolean_layoutremove_html e_boolean_layoutremove_html;
+  extern Func_boolean_layoutremove_html t_boolean_layoutremove_html;
+  class Abstract_boolean_layoutselected_html;
+  typedef Abstract_boolean_layoutselected_html* Func_boolean_layoutselected_html;
+  extern Func_boolean_layoutselected_html e_boolean_layoutselected_html;
+  extern Func_boolean_layoutselected_html t_boolean_layoutselected_html;
+  class Abstract_boolean_layoutvisible_html;
+  typedef Abstract_boolean_layoutvisible_html* Func_boolean_layoutvisible_html;
+  extern Func_boolean_layoutvisible_html e_boolean_layoutvisible_html;
+  extern Func_boolean_layoutvisible_html t_boolean_layoutvisible_html;
   class Abstract_boolean_print_html;
   typedef Abstract_boolean_print_html* Func_boolean_print_html;
   extern Func_boolean_print_html e_boolean_print_html;
   extern Func_boolean_print_html t_boolean_print_html;
+  class Abstract_boolean_writeclass_from_ui;
+  typedef Abstract_boolean_writeclass_from_ui* Func_boolean_writeclass_from_ui;
+  extern Func_boolean_writeclass_from_ui e_boolean_writeclass_from_ui;
+  extern Func_boolean_writeclass_from_ui t_boolean_writeclass_from_ui;
   class Abstract_boolean_writeeventsall_from_ui;
   typedef Abstract_boolean_writeeventsall_from_ui* Func_boolean_writeeventsall_from_ui;
   extern Func_boolean_writeeventsall_from_ui e_boolean_writeeventsall_from_ui;
@@ -44,6 +60,14 @@ namespace vx_ui_html_uihtml {
   typedef Abstract_boolean_writeeventsall_from_uimap* Func_boolean_writeeventsall_from_uimap;
   extern Func_boolean_writeeventsall_from_uimap e_boolean_writeeventsall_from_uimap;
   extern Func_boolean_writeeventsall_from_uimap t_boolean_writeeventsall_from_uimap;
+  class Abstract_boolean_writeselected_from_ui;
+  typedef Abstract_boolean_writeselected_from_ui* Func_boolean_writeselected_from_ui;
+  extern Func_boolean_writeselected_from_ui e_boolean_writeselected_from_ui;
+  extern Func_boolean_writeselected_from_ui t_boolean_writeselected_from_ui;
+  class Abstract_boolean_writevisible_from_ui;
+  typedef Abstract_boolean_writevisible_from_ui* Func_boolean_writevisible_from_ui;
+  extern Func_boolean_writevisible_from_ui e_boolean_writevisible_from_ui;
+  extern Func_boolean_writevisible_from_ui t_boolean_writevisible_from_ui;
   class Abstract_context_write;
   typedef Abstract_context_write* Func_context_write;
   extern Func_context_write e_context_write;
@@ -80,14 +104,18 @@ namespace vx_ui_html_uihtml {
   typedef Abstract_node_label_from_ui_orig_parent* Func_node_label_from_ui_orig_parent;
   extern Func_node_label_from_ui_orig_parent e_node_label_from_ui_orig_parent;
   extern Func_node_label_from_ui_orig_parent t_node_label_from_ui_orig_parent;
-  class Abstract_node_layout_from_node_ui;
-  typedef Abstract_node_layout_from_node_ui* Func_node_layout_from_node_ui;
-  extern Func_node_layout_from_node_ui e_node_layout_from_node_ui;
-  extern Func_node_layout_from_node_ui t_node_layout_from_node_ui;
+  class Abstract_node_layout_from_node_ui_parent;
+  typedef Abstract_node_layout_from_node_ui_parent* Func_node_layout_from_node_ui_parent;
+  extern Func_node_layout_from_node_ui_parent e_node_layout_from_node_ui_parent;
+  extern Func_node_layout_from_node_ui_parent t_node_layout_from_node_ui_parent;
   class Abstract_node_from_ui_orig_parent;
   typedef Abstract_node_from_ui_orig_parent* Func_node_from_ui_orig_parent;
   extern Func_node_from_ui_orig_parent e_node_from_ui_orig_parent;
   extern Func_node_from_ui_orig_parent t_node_from_ui_orig_parent;
+  class Abstract_string_class_from_ui;
+  typedef Abstract_string_class_from_ui* Func_string_class_from_ui;
+  extern Func_string_class_from_ui e_string_class_from_ui;
+  extern Func_string_class_from_ui t_string_class_from_ui;
   class Abstract_string_style_from_font;
   typedef Abstract_string_style_from_font* Func_string_style_from_font;
   extern Func_string_style_from_font e_string_style_from_font;
@@ -156,14 +184,32 @@ namespace vx_ui_html_uihtml {
   typedef Abstract_ui_layout_label_from_ui_orig_parent* Func_ui_layout_label_from_ui_orig_parent;
   extern Func_ui_layout_label_from_ui_orig_parent e_ui_layout_label_from_ui_orig_parent;
   extern Func_ui_layout_label_from_ui_orig_parent t_ui_layout_label_from_ui_orig_parent;
+  // (func boolean-layoutremove-html)
+  vx_core::Type_boolean f_boolean_layoutremove_html(vx_ui_ui::Type_ui ui);
+
+  // (func boolean-layoutselected-html)
+  vx_core::Type_boolean f_boolean_layoutselected_html(vx_ui_ui::Type_ui ui);
+
+  // (func boolean-layoutvisible-html)
+  vx_core::Type_boolean f_boolean_layoutvisible_html(vx_ui_ui::Type_ui ui);
+
   // (func boolean-print-html)
   vx_core::Type_boolean f_boolean_print_html(vx_core::Type_context context, vx_ui_ui::Type_ui ui);
+
+  // (func boolean-writeclass<-ui)
+  vx_core::Type_boolean f_boolean_writeclass_from_ui(vx_ui_ui::Type_ui ui);
 
   // (func boolean-writeeventsall<-ui)
   vx_core::Type_boolean f_boolean_writeeventsall_from_ui(vx_ui_ui::Type_ui ui);
 
   // (func boolean-writeeventsall<-uimap)
   vx_core::Type_boolean f_boolean_writeeventsall_from_uimap(vx_ui_ui::Type_uimap uimap);
+
+  // (func boolean-writeselected<-ui)
+  vx_core::Type_boolean f_boolean_writeselected_from_ui(vx_ui_ui::Type_ui ui);
+
+  // (func boolean-writevisible<-ui)
+  vx_core::Type_boolean f_boolean_writevisible_from_ui(vx_ui_ui::Type_ui ui);
 
   // (func context-write)
   vx_core::Type_context f_context_write(vx_core::Type_context context);
@@ -192,11 +238,14 @@ namespace vx_ui_html_uihtml {
   // (func node-label<-ui-orig-parent)
   vx_web_html::Type_node f_node_label_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent);
 
-  // (func node-layout<-node-ui)
-  vx_web_html::Type_node f_node_layout_from_node_ui(vx_web_html::Type_node node, vx_ui_ui::Type_ui ui);
+  // (func node-layout<-node-ui-parent)
+  vx_web_html::Type_node f_node_layout_from_node_ui_parent(vx_web_html::Type_node node, vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui parent);
 
   // (func node<-ui-orig-parent)
   vx_web_html::Type_node f_node_from_ui_orig_parent(vx_ui_ui::Type_ui ui, vx_ui_ui::Type_ui orig, vx_ui_ui::Type_ui parent);
+
+  // (func string-class<-ui)
+  vx_core::Type_string f_string_class_from_ui(vx_ui_ui::Type_ui ui);
 
   // (func string-style<-font)
   vx_core::Type_string f_string_style_from_font(vx_ui_ui::Type_font font);
@@ -291,6 +340,87 @@ namespace vx_ui_html_uihtml {
     static void vx_const_new(vx_ui_html_uihtml::Const_style_selected output);
   };
 
+  // (func boolean-layoutremove-html)
+  class Abstract_boolean_layoutremove_html : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_boolean_layoutremove_html() {};
+    virtual ~Abstract_boolean_layoutremove_html() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_boolean_layoutremove_html : public virtual Abstract_boolean_layoutremove_html {
+  public:
+    Class_boolean_layoutremove_html();
+    virtual ~Class_boolean_layoutremove_html() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func boolean-layoutselected-html)
+  class Abstract_boolean_layoutselected_html : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_boolean_layoutselected_html() {};
+    virtual ~Abstract_boolean_layoutselected_html() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_boolean_layoutselected_html : public virtual Abstract_boolean_layoutselected_html {
+  public:
+    Class_boolean_layoutselected_html();
+    virtual ~Class_boolean_layoutselected_html() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func boolean-layoutvisible-html)
+  class Abstract_boolean_layoutvisible_html : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_boolean_layoutvisible_html() {};
+    virtual ~Abstract_boolean_layoutvisible_html() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_boolean_layoutvisible_html : public virtual Abstract_boolean_layoutvisible_html {
+  public:
+    Class_boolean_layoutvisible_html();
+    virtual ~Class_boolean_layoutvisible_html() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
   // (func boolean-print-html)
   class Abstract_boolean_print_html : public vx_core::Abstract_any_from_any_context, public virtual vx_core::Abstract_replfunc {
   public:
@@ -315,6 +445,33 @@ namespace vx_ui_html_uihtml {
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Func_any_from_any_context vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any_context::IFn fn) const override;
     virtual vx_core::Type_any vx_any_from_any_context(vx_core::Type_context context, vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func boolean-writeclass<-ui)
+  class Abstract_boolean_writeclass_from_ui : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_boolean_writeclass_from_ui() {};
+    virtual ~Abstract_boolean_writeclass_from_ui() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_boolean_writeclass_from_ui : public virtual Abstract_boolean_writeclass_from_ui {
+  public:
+    Class_boolean_writeclass_from_ui();
+    virtual ~Class_boolean_writeclass_from_ui() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -358,6 +515,60 @@ namespace vx_ui_html_uihtml {
   public:
     Class_boolean_writeeventsall_from_uimap();
     virtual ~Class_boolean_writeeventsall_from_uimap() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func boolean-writeselected<-ui)
+  class Abstract_boolean_writeselected_from_ui : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_boolean_writeselected_from_ui() {};
+    virtual ~Abstract_boolean_writeselected_from_ui() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_boolean_writeselected_from_ui : public virtual Abstract_boolean_writeselected_from_ui {
+  public:
+    Class_boolean_writeselected_from_ui();
+    virtual ~Class_boolean_writeselected_from_ui() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func boolean-writevisible<-ui)
+  class Abstract_boolean_writevisible_from_ui : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_boolean_writevisible_from_ui() {};
+    virtual ~Abstract_boolean_writevisible_from_ui() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_boolean_writevisible_from_ui : public virtual Abstract_boolean_writevisible_from_ui {
+  public:
+    Class_boolean_writevisible_from_ui();
+    virtual ~Class_boolean_writevisible_from_ui() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -591,17 +802,17 @@ namespace vx_ui_html_uihtml {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
-  // (func node-layout<-node-ui)
-  class Abstract_node_layout_from_node_ui : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  // (func node-layout<-node-ui-parent)
+  class Abstract_node_layout_from_node_ui_parent : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
   public:
-    Abstract_node_layout_from_node_ui() {};
-    virtual ~Abstract_node_layout_from_node_ui() = 0;
+    Abstract_node_layout_from_node_ui_parent() {};
+    virtual ~Abstract_node_layout_from_node_ui_parent() = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
-  class Class_node_layout_from_node_ui : public virtual Abstract_node_layout_from_node_ui {
+  class Class_node_layout_from_node_ui_parent : public virtual Abstract_node_layout_from_node_ui_parent {
   public:
-    Class_node_layout_from_node_ui();
-    virtual ~Class_node_layout_from_node_ui() override;
+    Class_node_layout_from_node_ui_parent();
+    virtual ~Class_node_layout_from_node_ui_parent() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_funcdef vx_funcdef() const override;
@@ -634,6 +845,33 @@ namespace vx_ui_html_uihtml {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func string-class<-ui)
+  class Abstract_string_class_from_ui : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_string_class_from_ui() {};
+    virtual ~Abstract_string_class_from_ui() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_string_class_from_ui : public virtual Abstract_string_class_from_ui {
+  public:
+    Class_string_class_from_ui();
+    virtual ~Class_string_class_from_ui() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 

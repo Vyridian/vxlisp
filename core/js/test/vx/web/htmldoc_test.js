@@ -27,11 +27,11 @@ export default class vx_web_htmldoc_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/web/htmldoc", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 13, ":total", 13), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 13), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 15, ":total", 15), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 15), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 13), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 15), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     )
   }
@@ -52,9 +52,11 @@ export default class vx_web_htmldoc_test {
         vx_core.f_new(
           vx_core.t_intmap,
           "boolean-print<-id-stylesheettext", 0,
+          "boolean-remove<-id", 0,
           "boolean-replace<-id-htmltext", 0,
-          "boolean-replace<-ui-htmltext", 0,
+          "boolean-replace<-id-parent-htmltext", 0,
           "boolean-write-stylesheet<-string", 0,
+          "boolean-write<-id-attribute-value", 0,
           "boolean-write<-id-htmltext", 0,
           "boolean-write<-id-visible", 0,
           "boolean-write<-stylesheet", 0,

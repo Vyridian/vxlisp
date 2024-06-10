@@ -10764,19 +10764,7 @@ public final class Html {
             return Core.f_let(
               Core.t_string,
               Core.t_any_from_func.vx_fn_new(() -> {
-                final Core.Type_stringlist namelist = Core.f_list_from_list_1(
-                  Core.t_stringlist,
-                  stylelist,
-                  Core.t_any_from_any.vx_fn_new((item_any) -> {
-                    Html.Type_style item = Core.f_any_from_any(Html.t_style, item_any);
-                    return 
-                      Type.f_string_from_string_start(
-                        item.name(),
-                        Core.vx_new_int(2)
-                      );
-                  })
-                );
-                final Core.Type_string joined = Type.f_string_from_stringlist_join(namelist, Core.vx_new_string(" "));
+                final Core.Type_string joined = Html.f_string_from_stylelist(stylelist);
                 return Core.f_if(
                   Core.t_string,
                   Core.f_ne(Core.vx_new_string(""), joined),
@@ -11033,6 +11021,114 @@ public final class Html {
             Core.vx_new_string("}")
           )
         );
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function string_from_stylelist
+   * Returns classnames separated by spaces for each style.
+   * @param  {stylelist} stylelist
+   * @return {string}
+   * (func string<-stylelist)
+   */
+  public static interface Func_string_from_stylelist extends Core.Func_any_from_any {
+    public Core.Type_string vx_string_from_stylelist(final Html.Type_stylelist stylelist);
+  }
+
+  public static class Class_string_from_stylelist extends Core.Class_base implements Func_string_from_stylelist {
+
+    @Override
+    public Func_string_from_stylelist vx_new(Object... vals) {
+      Class_string_from_stylelist output = new Class_string_from_stylelist();
+      return output;
+    }
+
+    @Override
+    public Func_string_from_stylelist vx_copy(Object... vals) {
+      Class_string_from_stylelist output = new Class_string_from_stylelist();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/web/html", // pkgname
+        "string<-stylelist", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_string_from_stylelist vx_empty() {return e_string_from_stylelist;}
+    @Override
+    public Func_string_from_stylelist vx_type() {return t_string_from_stylelist;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Html.Type_stylelist inputval = (Html.Type_stylelist)value;
+      Core.Type_any outputval = Html.f_string_from_stylelist(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Html.Type_stylelist stylelist = Core.f_any_from_any(Html.t_stylelist, arglist.vx_any(Core.vx_new_int(0)));
+      output = Html.f_string_from_stylelist(stylelist);
+      return output;
+    }
+
+    @Override
+    public Core.Type_string vx_string_from_stylelist(final Html.Type_stylelist stylelist) {
+      return Html.f_string_from_stylelist(stylelist);
+    }
+
+  }
+
+  public static final Func_string_from_stylelist e_string_from_stylelist = new Html.Class_string_from_stylelist();
+  public static final Func_string_from_stylelist t_string_from_stylelist = new Html.Class_string_from_stylelist();
+
+  public static Core.Type_string f_string_from_stylelist(final Html.Type_stylelist stylelist) {
+    Core.Type_string output = Core.e_string;
+    output = Core.f_let(
+      Core.t_string,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_stringlist namelist = Core.f_list_from_list_1(
+          Core.t_stringlist,
+          stylelist,
+          Core.t_any_from_any.vx_fn_new((item_any) -> {
+            Html.Type_style item = Core.f_any_from_any(Html.t_style, item_any);
+            return 
+              Type.f_string_from_string_start(
+                item.name(),
+                Core.vx_new_int(2)
+              );
+          })
+        );
+        return Type.f_string_from_stringlist_join(namelist, Core.vx_new_string(" "));
       })
     );
     return output;
@@ -12611,6 +12707,7 @@ public final class Html {
     mapfunc.put("string<-propstylelist", Html.t_string_from_propstylelist);
     mapfunc.put("string<-propstyleunique", Html.t_string_from_propstyleunique);
     mapfunc.put("string<-style-indent", Html.t_string_from_style_indent);
+    mapfunc.put("string<-stylelist", Html.t_string_from_stylelist);
     mapfunc.put("string<-stylelist-indent", Html.t_string_from_stylelist_indent);
     mapfunc.put("string<-stylepropmap-indent", Html.t_string_from_stylepropmap_indent);
     mapfunc.put("string<-stylesheet-indent", Html.t_string_from_stylesheet_indent);

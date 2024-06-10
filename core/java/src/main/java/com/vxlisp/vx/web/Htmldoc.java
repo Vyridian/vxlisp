@@ -89,6 +89,96 @@ public final class Htmldoc {
   }
 
   /**
+   * @function boolean_remove_from_id
+   * Removes an html node with given id.
+   * @param  {string} id
+   * @return {boolean}
+   * (func boolean-remove<-id)
+   */
+  public static interface Func_boolean_remove_from_id extends Core.Func_any_from_any {
+    public Core.Type_boolean vx_boolean_remove_from_id(final Core.Type_string id);
+  }
+
+  public static class Class_boolean_remove_from_id extends Core.Class_base implements Func_boolean_remove_from_id {
+
+    @Override
+    public Func_boolean_remove_from_id vx_new(Object... vals) {
+      Class_boolean_remove_from_id output = new Class_boolean_remove_from_id();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_remove_from_id vx_copy(Object... vals) {
+      Class_boolean_remove_from_id output = new Class_boolean_remove_from_id();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/web/htmldoc", // pkgname
+        "boolean-remove<-id", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_remove_from_id vx_empty() {return e_boolean_remove_from_id;}
+    @Override
+    public Func_boolean_remove_from_id vx_type() {return t_boolean_remove_from_id;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_string inputval = (Core.Type_string)value;
+      Core.Type_any outputval = Htmldoc.f_boolean_remove_from_id(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string id = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      output = Htmldoc.f_boolean_remove_from_id(id);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean vx_boolean_remove_from_id(final Core.Type_string id) {
+      return Htmldoc.f_boolean_remove_from_id(id);
+    }
+
+  }
+
+  public static final Func_boolean_remove_from_id e_boolean_remove_from_id = new Htmldoc.Class_boolean_remove_from_id();
+  public static final Func_boolean_remove_from_id t_boolean_remove_from_id = new Htmldoc.Class_boolean_remove_from_id();
+
+  public static Core.Type_boolean f_boolean_remove_from_id(final Core.Type_string id) {
+    Core.Type_boolean output = Core.e_boolean;
+    return output;
+  }
+
+  /**
    * @function boolean_replace_from_id_htmltext
    * Replaces an html node with given id and text.
    * @param  {string} id
@@ -169,28 +259,29 @@ public final class Htmldoc {
   }
 
   /**
-   * @function boolean_replace_from_ui_htmltext
-   * Replaces an html node with given id and text.
-   * @param  {ui} ui
+   * @function boolean_replace_from_id_parent_htmltext
+   * Replaces an html node with given id, parentid, and text.
+   * @param  {string} id
+   * @param  {string} parent
    * @param  {string} htmltext
    * @return {boolean}
-   * (func boolean-replace<-ui-htmltext)
+   * (func boolean-replace<-id-parent-htmltext)
    */
-  public static interface Func_boolean_replace_from_ui_htmltext extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_boolean vx_boolean_replace_from_ui_htmltext(final Ui.Type_ui ui, final Core.Type_string htmltext);
+  public static interface Func_boolean_replace_from_id_parent_htmltext extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_boolean vx_boolean_replace_from_id_parent_htmltext(final Core.Type_string id, final Core.Type_string parent, final Core.Type_string htmltext);
   }
 
-  public static class Class_boolean_replace_from_ui_htmltext extends Core.Class_base implements Func_boolean_replace_from_ui_htmltext {
+  public static class Class_boolean_replace_from_id_parent_htmltext extends Core.Class_base implements Func_boolean_replace_from_id_parent_htmltext {
 
     @Override
-    public Func_boolean_replace_from_ui_htmltext vx_new(Object... vals) {
-      Class_boolean_replace_from_ui_htmltext output = new Class_boolean_replace_from_ui_htmltext();
+    public Func_boolean_replace_from_id_parent_htmltext vx_new(Object... vals) {
+      Class_boolean_replace_from_id_parent_htmltext output = new Class_boolean_replace_from_id_parent_htmltext();
       return output;
     }
 
     @Override
-    public Func_boolean_replace_from_ui_htmltext vx_copy(Object... vals) {
-      Class_boolean_replace_from_ui_htmltext output = new Class_boolean_replace_from_ui_htmltext();
+    public Func_boolean_replace_from_id_parent_htmltext vx_copy(Object... vals) {
+      Class_boolean_replace_from_id_parent_htmltext output = new Class_boolean_replace_from_id_parent_htmltext();
       return output;
     }
 
@@ -201,7 +292,7 @@ public final class Htmldoc {
     public Core.Type_funcdef vx_funcdef() {
       return Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
-        "boolean-replace<-ui-htmltext", // name
+        "boolean-replace<-id-parent-htmltext", // name
         0, // idx
         false, // async
         Core.typedef_new(
@@ -221,29 +312,30 @@ public final class Htmldoc {
     }
 
     @Override
-    public Func_boolean_replace_from_ui_htmltext vx_empty() {return e_boolean_replace_from_ui_htmltext;}
+    public Func_boolean_replace_from_id_parent_htmltext vx_empty() {return e_boolean_replace_from_id_parent_htmltext;}
     @Override
-    public Func_boolean_replace_from_ui_htmltext vx_type() {return t_boolean_replace_from_ui_htmltext;}
+    public Func_boolean_replace_from_id_parent_htmltext vx_type() {return t_boolean_replace_from_id_parent_htmltext;}
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_string htmltext = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
-      output = Htmldoc.f_boolean_replace_from_ui_htmltext(ui, htmltext);
+      Core.Type_string id = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string parent = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_string htmltext = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(2)));
+      output = Htmldoc.f_boolean_replace_from_id_parent_htmltext(id, parent, htmltext);
       return output;
     }
 
     @Override
-    public Core.Type_boolean vx_boolean_replace_from_ui_htmltext(final Ui.Type_ui ui, final Core.Type_string htmltext) {
-      return Htmldoc.f_boolean_replace_from_ui_htmltext(ui, htmltext);
+    public Core.Type_boolean vx_boolean_replace_from_id_parent_htmltext(final Core.Type_string id, final Core.Type_string parent, final Core.Type_string htmltext) {
+      return Htmldoc.f_boolean_replace_from_id_parent_htmltext(id, parent, htmltext);
     }
 
   }
 
-  public static final Func_boolean_replace_from_ui_htmltext e_boolean_replace_from_ui_htmltext = new Htmldoc.Class_boolean_replace_from_ui_htmltext();
-  public static final Func_boolean_replace_from_ui_htmltext t_boolean_replace_from_ui_htmltext = new Htmldoc.Class_boolean_replace_from_ui_htmltext();
+  public static final Func_boolean_replace_from_id_parent_htmltext e_boolean_replace_from_id_parent_htmltext = new Htmldoc.Class_boolean_replace_from_id_parent_htmltext();
+  public static final Func_boolean_replace_from_id_parent_htmltext t_boolean_replace_from_id_parent_htmltext = new Htmldoc.Class_boolean_replace_from_id_parent_htmltext();
 
-  public static Core.Type_boolean f_boolean_replace_from_ui_htmltext(final Ui.Type_ui ui, final Core.Type_string htmltext) {
+  public static Core.Type_boolean f_boolean_replace_from_id_parent_htmltext(final Core.Type_string id, final Core.Type_string parent, final Core.Type_string htmltext) {
     Core.Type_boolean output = Core.e_boolean;
     return output;
   }
@@ -338,6 +430,88 @@ public final class Htmldoc {
 
   public static CompletableFuture<Core.Type_boolean> f_boolean_write_stylesheet_from_string(final Core.Type_string text) {
     CompletableFuture<Core.Type_boolean> output = Core.async_new_completed(Core.e_boolean);
+    return output;
+  }
+
+  /**
+   * @function boolean_write_from_id_attribute_value
+   * Writes to an html node with given id and attribute name and value.
+   * @param  {string} id
+   * @param  {string} attribute
+   * @param  {string} value
+   * @return {boolean}
+   * (func boolean-write<-id-attribute-value)
+   */
+  public static interface Func_boolean_write_from_id_attribute_value extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_boolean vx_boolean_write_from_id_attribute_value(final Core.Type_string id, final Core.Type_string attribute, final Core.Type_string value);
+  }
+
+  public static class Class_boolean_write_from_id_attribute_value extends Core.Class_base implements Func_boolean_write_from_id_attribute_value {
+
+    @Override
+    public Func_boolean_write_from_id_attribute_value vx_new(Object... vals) {
+      Class_boolean_write_from_id_attribute_value output = new Class_boolean_write_from_id_attribute_value();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_write_from_id_attribute_value vx_copy(Object... vals) {
+      Class_boolean_write_from_id_attribute_value output = new Class_boolean_write_from_id_attribute_value();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/web/htmldoc", // pkgname
+        "boolean-write<-id-attribute-value", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_write_from_id_attribute_value vx_empty() {return e_boolean_write_from_id_attribute_value;}
+    @Override
+    public Func_boolean_write_from_id_attribute_value vx_type() {return t_boolean_write_from_id_attribute_value;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_string id = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string attribute = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
+      Core.Type_string value = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(2)));
+      output = Htmldoc.f_boolean_write_from_id_attribute_value(id, attribute, value);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean vx_boolean_write_from_id_attribute_value(final Core.Type_string id, final Core.Type_string attribute, final Core.Type_string value) {
+      return Htmldoc.f_boolean_write_from_id_attribute_value(id, attribute, value);
+    }
+
+  }
+
+  public static final Func_boolean_write_from_id_attribute_value e_boolean_write_from_id_attribute_value = new Htmldoc.Class_boolean_write_from_id_attribute_value();
+  public static final Func_boolean_write_from_id_attribute_value t_boolean_write_from_id_attribute_value = new Htmldoc.Class_boolean_write_from_id_attribute_value();
+
+  public static Core.Type_boolean f_boolean_write_from_id_attribute_value(final Core.Type_string id, final Core.Type_string attribute, final Core.Type_string value) {
+    Core.Type_boolean output = Core.e_boolean;
     return output;
   }
 
@@ -1131,9 +1305,11 @@ public final class Htmldoc {
     Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
     Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
     mapfunc.put("boolean-print<-id-stylesheettext", Htmldoc.t_boolean_print_from_id_stylesheettext);
+    mapfunc.put("boolean-remove<-id", Htmldoc.t_boolean_remove_from_id);
     mapfunc.put("boolean-replace<-id-htmltext", Htmldoc.t_boolean_replace_from_id_htmltext);
-    mapfunc.put("boolean-replace<-ui-htmltext", Htmldoc.t_boolean_replace_from_ui_htmltext);
+    mapfunc.put("boolean-replace<-id-parent-htmltext", Htmldoc.t_boolean_replace_from_id_parent_htmltext);
     mapfunc.put("boolean-write-stylesheet<-string", Htmldoc.t_boolean_write_stylesheet_from_string);
+    mapfunc.put("boolean-write<-id-attribute-value", Htmldoc.t_boolean_write_from_id_attribute_value);
     mapfunc.put("boolean-write<-id-htmltext", Htmldoc.t_boolean_write_from_id_htmltext);
     mapfunc.put("boolean-write<-id-visible", Htmldoc.t_boolean_write_from_id_visible);
     mapfunc.put("boolean-write<-stylesheet", Htmldoc.t_boolean_write_from_stylesheet);

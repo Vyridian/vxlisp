@@ -260,6 +260,97 @@ export default class vx_collection {
   }
 
   /**
+   * @function any_from_map_pos
+   * Returns then numbered child from a map.
+   * @param  {typemap} generic
+   * @param  {generic_map_1} map
+   * @param  {int} pos
+   * @return {any-1}
+   */
+  static t_any_from_map_pos = {
+    vx_type: vx_core.t_type
+  }
+  static e_any_from_map_pos = {
+    vx_type: vx_collection.t_any_from_map_pos
+  }
+
+  // (func any<-map-pos)
+  static f_any_from_map_pos(generic, map, pos) {
+    const generic_any_1 = generic["any-1"]
+    let output = vx_core.f_empty(generic_any_1)
+    output = vx_core.f_let(
+      {"any-1": generic_any_1},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const keys = vx_core.f_stringlist_from_map(map)
+        const key = vx_core.f_any_from_list({"any-1": vx_core.t_string, "list-1": vx_core.t_stringlist}, keys, pos)
+        return vx_core.f_any_from_map({"any-1": generic_any_1}, map, key)
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function boolean_write_from_map_removekey
+   * Returns true if it alters a mutable map false if it fails.
+   * @param  {generic_map_1} valuemap
+   * @param  {string} key
+   * @return {boolean}
+   */
+  static t_boolean_write_from_map_removekey = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_write_from_map_removekey = {
+    vx_type: vx_collection.t_boolean_write_from_map_removekey
+  }
+
+  // (func boolean-write<-map-removekey)
+  static f_boolean_write_from_map_removekey(valuemap, key) {
+    let output = vx_core.e_boolean
+    output = vx_core.f_boolean_write_from_map_name_value(
+      valuemap,
+      key,
+      vx_core.f_empty(
+        vx_core.t_any
+      )
+    )
+    return output
+  }
+
+  /**
+   * @function boolean_write_from_map_removekeys
+   * Returns true if it alters a mutable map false if it fails.
+   * @param  {generic_map_1} valuemap
+   * @param  {stringlist} keys
+   * @return {boolean}
+   */
+  static t_boolean_write_from_map_removekeys = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_write_from_map_removekeys = {
+    vx_type: vx_collection.t_boolean_write_from_map_removekeys
+  }
+
+  // (func boolean-write<-map-removekeys)
+  static f_boolean_write_from_map_removekeys(valuemap, keys) {
+    let output = vx_core.e_boolean
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_boolean},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const writelist = vx_core.f_list_from_list_1(
+          {"any-1": vx_core.t_boolean, "any-2": vx_core.t_string, "list-1": vx_core.t_booleanlist, "list-2": vx_core.t_stringlist},
+          keys,
+          vx_core.f_new(vx_core.t_any_from_any, (key) => 
+            vx_collection.f_boolean_write_from_map_removekey(valuemap, key))
+        )
+        return vx_core.f_and_1(writelist)
+      })
+    )
+    return output
+  }
+
+  /**
    * @function int_from_map_key
    * Returns the position of key in any map.
    * @param  {generic_map_1} map
@@ -714,6 +805,9 @@ export default class vx_collection {
       "any<-for-until-loop-max": vx_collection.e_any_from_for_until_loop_max,
       "any<-for-while-loop": vx_collection.e_any_from_for_while_loop,
       "any<-for-while-loop-max": vx_collection.e_any_from_for_while_loop_max,
+      "any<-map-pos": vx_collection.e_any_from_map_pos,
+      "boolean-write<-map-removekey": vx_collection.e_boolean_write_from_map_removekey,
+      "boolean-write<-map-removekeys": vx_collection.e_boolean_write_from_map_removekeys,
       "int<-map-key": vx_collection.e_int_from_map_key,
       "int<-stringlist-find": vx_collection.e_int_from_stringlist_find,
       "is-list": vx_collection.e_is_list,
@@ -736,6 +830,9 @@ export default class vx_collection {
       "any<-for-until-loop-max": vx_collection.t_any_from_for_until_loop_max,
       "any<-for-while-loop": vx_collection.t_any_from_for_while_loop,
       "any<-for-while-loop-max": vx_collection.t_any_from_for_while_loop_max,
+      "any<-map-pos": vx_collection.t_any_from_map_pos,
+      "boolean-write<-map-removekey": vx_collection.t_boolean_write_from_map_removekey,
+      "boolean-write<-map-removekeys": vx_collection.t_boolean_write_from_map_removekeys,
       "int<-map-key": vx_collection.t_int_from_map_key,
       "int<-stringlist-find": vx_collection.t_int_from_stringlist_find,
       "is-list": vx_collection.t_is_list,
@@ -835,6 +932,60 @@ export default class vx_collection {
       properties    : [],
       proplast      : {},
       fn            : vx_collection.f_any_from_for_while_loop_max
+    }
+
+    // (func any<-map-pos)
+    vx_collection.t_any_from_map_pos['vx_value'] = {
+      name          : "any<-map-pos",
+      pkgname       : "vx/collection",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_collection.f_any_from_map_pos
+    }
+
+    // (func boolean-write<-map-removekey)
+    vx_collection.t_boolean_write_from_map_removekey['vx_value'] = {
+      name          : "boolean-write<-map-removekey",
+      pkgname       : "vx/collection",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_collection.f_boolean_write_from_map_removekey
+    }
+
+    // (func boolean-write<-map-removekeys)
+    vx_collection.t_boolean_write_from_map_removekeys['vx_value'] = {
+      name          : "boolean-write<-map-removekeys",
+      pkgname       : "vx/collection",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_collection.f_boolean_write_from_map_removekeys
     }
 
     // (func int<-map-key)

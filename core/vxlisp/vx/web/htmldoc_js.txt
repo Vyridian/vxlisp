@@ -29,12 +29,44 @@
     return output
   }
 
-  static vx_boolean_replace_from_ui_htmltext(ui, htmltext) {
+  static vx_boolean_replace_from_id_parent_htmltext(id, parent, htmltext) {
     let output = vx_core.c_false
-    const id = vx_core.f_any_from_struct({'any-1': vx_core.t_string}, ui, ':uid')
     let elem = document.getElementById(id)
     if (elem != null) {
       elem.outerHTML = htmltext
+      output = vx_core.c_true
+    } else {
+      const elemparent = document.getElementById(parent)
+      if (elemparent != null) {
+        elem = document.createElement("div")
+        elemparent.appendChild(elem)
+        elem.outerHTML = htmltext
+        output = vx_core.c_true
+      }
+    }
+    return output
+  }
+
+  static vx_boolean_remove_from_id(id) {
+    let output = vx_core.c_false
+    let elem = document.getElementById(id)
+    if (elem != null) {
+      elem.remove()
+      output = vx_core.c_true
+    }
+    return output
+  }
+
+  static vx_boolean_write_from_id_attribute_value(id, attribute, value) {
+    let output = vx_core.c_false
+    const elem = document.getElementById(id)
+    if (elem != null) {
+      const oldvalue = elem.getAttribute(attribute)
+      if (oldvalue == null) {
+        elem.setAttribute(attribute, value)
+      } else if (oldvalue != value) {
+        elem.setAttribute(attribute, value)
+      }
       output = vx_core.c_true
     }
     return output
@@ -139,9 +171,13 @@
     return output
   }
 
+  static vx_element_from_id(id) {
+    const output = document.getElementById(id)
+    return output
+  }
+
   static vx_event_from_event_id_nativeevent(event, id, nativeevent) {
-    let output
-    output = vx_core.f_copy(event, ":from", id)
+    const output = vx_core.f_copy(event, ":from", id)
     return output
   }
 

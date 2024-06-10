@@ -194,15 +194,17 @@
  [div    : div
   indent : int]
  (let
-  [nodes   : divchildlist := (:nodes  div)
-   sid     : string       := (string<-propname-val
-                              "id"
-                              (:id div))
-   sclass  : string       := (string<-propstyle-stylelist
-                              (:style     div)
-                              (:stylelist div))
-   sstyle  : string       := (string<-propstyleunique
-                              (:style-unique div))]
+  [nodes : divchildlist := (:nodes  div)
+   sid : string :=
+    (string<-propname-val
+     "id" (:id div))
+   sclass : string :=
+    (string<-propstyle-stylelist
+     (:style     div)
+     (:stylelist div))
+   sstyle : string :=
+    (string<-propstyleunique
+     (:style-unique div))]
   (string<-nodelist-tag-prop-indent
    nodes "div" (string sid sclass sstyle) indent))
  :test (test
@@ -533,17 +535,8 @@
   (then
    (!-empty stylelist)
    (let : string
-    [namelist : stringlist :=
-     (list<-list : stringlist
-      stylelist
-      (fn : style
-       [item : style]
-       (string<-string-start
-        (:name item)
-        2)))
-     joined : string :=
-      (string<-stringlist-join
-       namelist " ")]
+    [joined : string :=
+      (string<-stylelist stylelist)]
     (if : string
      (!= "" joined)
      (string
@@ -592,6 +585,21 @@
    subtext
    sindent "}"))
  :doc "Returns indent'name {key: val;}' for each style.")
+
+(func string<-stylelist : string
+ [stylelist : stylelist]
+ (let : string
+  [namelist : stringlist :=
+   (list<-list : stringlist
+    stylelist
+    (fn : style
+     [item : style]
+     (string<-string-start
+      (:name item)
+      2)))]
+  (string<-stringlist-join
+   namelist " "))
+ :doc "Returns classnames separated by spaces for each style.")
 
 (func string<-stylelist-indent : string
  [stylelist : stylelist

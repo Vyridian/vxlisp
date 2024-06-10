@@ -10,9 +10,9 @@ namespace vx_ui_ui_test {
   vx_test::Type_testcase f_string_parentuid_from_uid(vx_core::Type_context context);
   vx_test::Type_testcase f_ui_readstate_uiapp(vx_core::Type_context context);
   vx_test::Type_testcase f_ui_readstate_from_uid(vx_core::Type_context context);
+  vx_test::Type_testcase f_ui_write_from_ui_visible(vx_core::Type_context context);
   vx_test::Type_testcase f_ui_from_ui_find(vx_core::Type_context context);
   vx_test::Type_testcase f_ui_from_ui_selected(vx_core::Type_context context);
-  vx_test::Type_testcase f_ui_from_ui_visible(vx_core::Type_context context);
 
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context);
   vx_test::Type_testcoveragesummary test_coveragesummary();

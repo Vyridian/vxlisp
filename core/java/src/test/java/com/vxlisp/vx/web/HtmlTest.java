@@ -306,11 +306,11 @@ public final class HtmlTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/web/html", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 98, ":tests", 71, ":total", 72), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 17, ":tests", 7, ":total", 40), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 40), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 40), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 9, ":tests", 7, ":total", 72), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 98, ":tests", 72, ":total", 73), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 17, ":tests", 7, ":total", 41), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 41), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 41), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 9, ":tests", 7, ":total", 73), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 32)
     );
   }
@@ -380,6 +380,7 @@ public final class HtmlTest {
         ":string<-propstylelist", 0,
         ":string<-propstyleunique", 0,
         ":string<-style-indent", 0,
+        ":string<-stylelist", 0,
         ":string<-stylelist-indent", 0,
         ":string<-stylepropmap-indent", 0,
         ":string<-stylesheet-indent", 0,

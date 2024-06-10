@@ -664,11 +664,11 @@ public final class CollectionTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/collection", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 20, ":total", 20), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 80, ":tests", 16, ":total", 20), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 20), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 20), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 80, ":tests", 16, ":total", 20), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 23, ":total", 23), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 69, ":tests", 16, ":total", 23), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 23), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 23), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 69, ":tests", 16, ":total", 23), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
     );
   }
@@ -687,6 +687,9 @@ public final class CollectionTest {
         ":any<-for-until-loop-max", 0,
         ":any<-for-while-loop", 1,
         ":any<-for-while-loop-max", 0,
+        ":any<-map-pos", 0,
+        ":boolean-write<-map-removekey", 0,
+        ":boolean-write<-map-removekeys", 0,
         ":int<-map-key", 1,
         ":int<-stringlist-find", 1,
         ":is-list", 1,

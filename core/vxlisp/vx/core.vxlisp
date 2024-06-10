@@ -465,15 +465,20 @@
 
 (type stringlist : list
  :allowtypes [string]
- :doc        "A list of string.")
+ :doc "A list of string.")
 
 (type stringlistlist : list
  :allowtypes [stringlist]
- :doc        "A list of stringlist.")
+ :doc "A list of stringlist.")
 
 (type stringmap : map
  :allowtypes [string]
- :doc        "A map of string.")
+ :doc "A map of string.")
+
+(type stringmutablemap : map
+ :allowtypes [string]
+ :mutable
+ :doc "A mutable map of string. Note: Mutables are dangerous.")
 
 (type struct : struct
  :create
@@ -1504,6 +1509,30 @@
   :cpp  :auto
   :java :auto
   :js   :auto)
+ :test (test
+        (stringmutablemap
+         :b "y"
+         :a "x")
+        (let : stringmutablemap
+         [smap : stringmutablemap :=
+           (stringmutablemap
+            :b "y")
+          iswrite : boolean :=
+           (boolean-write<-map-name-value
+            smap :a "x")]
+         smap))
+       (test
+        (stringmutablemap
+         :a "x")
+        (let : stringmutablemap
+         [smap : stringmutablemap :=
+           (stringmutablemap
+            :b "y"
+            :a "x")
+          iswrite : boolean :=
+           (boolean-write<-map-name-value
+            smap :b "")]
+         smap))
  :sideeffects
   "Alters a mutable map. Warning: vxlisp is immutable by design, so this function can produce unexpected results."
  :doc "Returns true if it alters a mutable map false if it fails.")

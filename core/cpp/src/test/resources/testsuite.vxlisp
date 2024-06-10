@@ -939,6 +939,64 @@
     (vx/test/testcase
      :passfail true
      :testpkg "vx/core"
+     :casename "boolean-write<-map-name-value"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (stringmutablemap
+  :b \"y\"
+  :a \"x\")
+ (let : stringmutablemap
+  [smap : stringmutablemap :=
+    (stringmutablemap
+     :b \"y\")
+   iswrite : boolean :=
+    (boolean-write<-map-name-value
+     smap :a \"x\")]
+  smap))"
+        :testpkg "vx/core"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringmutablemap
+            :a "x"
+            :b "y")
+          :actual
+           (stringmutablemap
+            :a "x"
+            :b "y")))
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (stringmutablemap
+  :a \"x\")
+ (let : stringmutablemap
+  [smap : stringmutablemap :=
+    (stringmutablemap
+     :b \"y\"
+     :a \"x\")
+   iswrite : boolean :=
+    (boolean-write<-map-name-value
+     smap :b \"\")]
+  smap))"
+        :testpkg "vx/core"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringmutablemap
+            :a "x")
+          :actual
+           (stringmutablemap
+            :a "x")))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/core"
      :casename "compare"
      :describelist
       (vx/test/testdescribelist
@@ -2265,7 +2323,7 @@
       :any<-struct 0
       :async 0
       :boolean-permission<-func 0
-      :boolean-write<-map-name-value 0
+      :boolean-write<-map-name-value 2
       :boolean<-any 0
       :boolean<-func 0
       :boolean<-none 0
@@ -2433,6 +2491,7 @@
       :stringlist 0
       :stringlistlist 0
       :stringmap 0
+      :stringmutablemap 0
       :struct 0
       :thenelse 0
       :thenelselist 0
@@ -2463,24 +2522,24 @@
     :docnums
      (vx/test/testcoveragenums
       :pct 89
-      :tests 229
-      :total 255)
+      :tests 230
+      :total 256)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 54
-      :tests 73
+      :pct 55
+      :tests 74
       :total 134)
     :testpkg "vx/core"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 35
-      :tests 80
-      :total 223)
+      :pct 36
+      :tests 81
+      :total 224)
     :typenums
      (vx/test/testcoveragenums
       :pct 6
       :tests 5
-      :total 75))
+      :total 76))
   :passfail true
   :testpkg "vx/core")
  (vx/test/testpackage
@@ -3731,6 +3790,7 @@ ab
       :string<-propstylelist 0
       :string<-propstyleunique 0
       :string<-style-indent 0
+      :string<-stylelist 0
       :string<-stylelist-indent 0
       :string<-stylepropmap-indent 0
       :string<-stylesheet-indent 0
@@ -3786,29 +3846,29 @@ ab
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 40)
+      :total 41)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 40)
+      :total 41)
     :constnums
      (vx/test/testcoveragenums
       :pct 100)
     :docnums
      (vx/test/testcoveragenums
       :pct 98
-      :tests 71
-      :total 72)
+      :tests 72
+      :total 73)
     :funcnums
      (vx/test/testcoveragenums
       :pct 17
       :tests 7
-      :total 40)
+      :total 41)
     :testpkg "vx/web/html"
     :totalnums
      (vx/test/testcoveragenums
       :pct 9
       :tests 7
-      :total 72)
+      :total 73)
     :typenums
      (vx/test/testcoveragenums
       :total 32))
@@ -4263,6 +4323,9 @@ ab
       :any<-for-until-loop-max 0
       :any<-for-while-loop 1
       :any<-for-while-loop-max 0
+      :any<-map-pos 0
+      :boolean-write<-map-removekey 0
+      :boolean-write<-map-removekeys 0
       :int<-map-key 1
       :int<-stringlist-find 1
       :is-list 1
@@ -4284,29 +4347,29 @@ ab
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 20)
+      :total 23)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 20)
+      :total 23)
     :constnums
      (vx/test/testcoveragenums
       :pct 100)
     :docnums
      (vx/test/testcoveragenums
       :pct 100
-      :tests 20
-      :total 20)
+      :tests 23
+      :total 23)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 80
+      :pct 69
       :tests 16
-      :total 20)
+      :total 23)
     :testpkg "vx/collection"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 80
+      :pct 69
       :tests 16
-      :total 20)
+      :total 23)
     :typenums
      (vx/test/testcoveragenums
       :pct 100))
@@ -17313,6 +17376,64 @@ ab
     (vx/test/testcase
      :passfail true
      :testpkg "vx/ui/ui"
+     :casename "ui-write<-ui-visible"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (ui
+  :uimap
+   (uimap
+    :a
+     (ui
+      :uid \"a\"
+      :hidden true)
+    :b
+     (ui
+      :uid \"b\")))
+ (ui-write<-ui-visible
+  (ui
+   :uimap
+    (uimap
+     :a
+      (ui
+       :uid \"a\")
+     :b
+      (ui
+       :uid \"b\"
+       :hidden true)))
+  2))"
+        :testpkg "vx/ui/ui"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (vx/ui/ui/ui
+            :uimap
+             (vx/ui/ui/uimap
+              :a
+               (vx/ui/ui/ui
+                :uid "a"
+                :hidden true)
+              :b
+               (vx/ui/ui/ui
+                :uid "b")))
+          :actual
+           (vx/ui/ui/ui
+            :uimap
+             (vx/ui/ui/uimap
+              :a
+               (vx/ui/ui/ui
+                :uid "a"
+                :hidden true)
+              :b
+               (vx/ui/ui/ui
+                :uid "b")))))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/ui/ui"
      :casename "ui<-ui-find"
      :describelist
       (vx/test/testdescribelist
@@ -17403,65 +17524,7 @@ ab
               :b
                (vx/ui/ui/ui
                 :uid "b"
-                :selected true)))))))
-    (vx/test/testcase
-     :passfail true
-     :testpkg "vx/ui/ui"
-     :casename "ui<-ui-visible"
-     :describelist
-      (vx/test/testdescribelist
-       (vx/test/testdescribe
-        :describename
-         "(test
- (ui
-  :uimap
-   (uimap
-    :a
-     (ui
-      :uid \"a\"
-      :hidden true)
-    :b
-     (ui
-      :uid \"b\")))
- (ui<-ui-visible
-  (ui
-   :uimap
-    (uimap
-     :a
-      (ui
-       :uid \"a\")
-     :b
-      (ui
-       :uid \"b\"
-       :hidden true)))
-  2))"
-        :testpkg "vx/ui/ui"
-        :testresult
-         (vx/test/testresult
-          :code ":eq"
-          :passfail true
-          :expected
-           (vx/ui/ui/ui
-            :uimap
-             (vx/ui/ui/uimap
-              :a
-               (vx/ui/ui/ui
-                :uid "a"
-                :hidden true)
-              :b
-               (vx/ui/ui/ui
-                :uid "b")))
-          :actual
-           (vx/ui/ui/ui
-            :uimap
-             (vx/ui/ui/uimap
-              :a
-               (vx/ui/ui/ui
-                :uid "a"
-                :hidden true)
-              :b
-               (vx/ui/ui/ui
-                :uid "b"))))))))
+                :selected true))))))))
   :coveragedetail
    (vx/test/testcoveragedetail
     :constmap
@@ -17509,12 +17572,26 @@ ab
       :styletype-system 0)
     :funcmap
      (intmap
+      :boolean-layout<-ui-parent-selected 0
+      :boolean-layout<-ui-parent-visible 0
+      :boolean-layoutaddchild<-ui-parent 0
+      :boolean-layoutremove<-ui 0
+      :boolean-layoutremove<-ui-keys 0
+      :boolean-layoutremove<-ui-parent 0
+      :boolean-layoutremove<-ui-start-end 0
+      :boolean-layoutselected<-ui 0
+      :boolean-layoutselected<-ui-parent 0
+      :boolean-layoutselected<-ui-selected 0
+      :boolean-layoutvisible<-ui 0
       :boolean-print 0
       :boolean-removestate-uiapp 0
+      :boolean-write<-ui-parent 0
+      :boolean-writeremove<-ui-uid 0
       :boolean-writestate<-ui 0
       :boolean-writestate<-uiapp 1
       :boolean-writestate<-uiengine 0
       :fontfacemap<-fontfacelist 0
+      :int-child<-ui-uid 0
       :int-selected<-ui 0
       :int-visible<-ui 0
       :intlist-visible<-ui 0
@@ -17535,6 +17612,7 @@ ab
       :ui-addlayout<-ui-layoutengine 0
       :ui-addlayout<-ui-layoutmap-else 0
       :ui-addlayout<-ui-uiengine 0
+      :ui-child<-ui-pos 0
       :ui-child<-ui-uid 0
       :ui-from<-event 0
       :ui-layout 0
@@ -17545,16 +17623,18 @@ ab
       :ui-readstate-uiapp 1
       :ui-readstate<-uid 1
       :ui-selected<-ui 0
-      :ui-writechild<-ui-child 0
-      :ui-writechildmap<-ui-childmap 0
+      :ui-visible<-ui 0
+      :ui-write<-ui-child 0
+      :ui-write<-ui-childmap 0
+      :ui-write<-ui-visible 1
       :ui<-layout-ui-orig-parent 0
       :ui<-ui-find 1
       :ui<-ui-selected 1
-      :ui<-ui-visible 1
       :uid-selected<-ui 0
       :uiengine-readstate 0
       :uiengine-render 0
       :uilist-selected<-ui 0
+      :uilist-visible<-ui 0
       :uilist<-uimap 0
       :uimap-addlayout<-uimap-layoutmap-else 0
       :uimap-layout<-uimap-parent 0
@@ -17595,29 +17675,29 @@ ab
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 51)
+      :total 68)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 51)
+      :total 68)
     :constnums
      (vx/test/testcoveragenums
       :total 41)
     :docnums
      (vx/test/testcoveragenums
-      :pct 61
-      :tests 74
-      :total 120)
+      :pct 66
+      :tests 91
+      :total 137)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 13
+      :pct 10
       :tests 7
-      :total 51)
+      :total 68)
     :testpkg "vx/ui/ui"
     :totalnums
      (vx/test/testcoveragenums
       :pct 5
       :tests 7
-      :total 120)
+      :total 137)
     :typenums
      (vx/test/testcoveragenums
       :total 28))
@@ -17629,9 +17709,11 @@ ab
     :funcmap
      (intmap
       :boolean-print<-id-stylesheettext 0
+      :boolean-remove<-id 0
       :boolean-replace<-id-htmltext 0
-      :boolean-replace<-ui-htmltext 0
+      :boolean-replace<-id-parent-htmltext 0
       :boolean-write-stylesheet<-string 0
+      :boolean-write<-id-attribute-value 0
       :boolean-write<-id-htmltext 0
       :boolean-write<-id-visible 0
       :boolean-write<-stylesheet 0
@@ -17646,25 +17728,25 @@ ab
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 13)
+      :total 15)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 13)
+      :total 15)
     :constnums
      (vx/test/testcoveragenums
       :pct 100)
     :docnums
      (vx/test/testcoveragenums
       :pct 100
-      :tests 13
-      :total 13)
+      :tests 15
+      :total 15)
     :funcnums
      (vx/test/testcoveragenums
-      :total 13)
+      :total 15)
     :testpkg "vx/web/htmldoc"
     :totalnums
      (vx/test/testcoveragenums
-      :total 13)
+      :total 15)
     :typenums
      (vx/test/testcoveragenums
       :pct 100))
@@ -18241,9 +18323,15 @@ ab
       :style-selected 0)
     :funcmap
      (intmap
+      :boolean-layoutremove-html 0
+      :boolean-layoutselected-html 0
+      :boolean-layoutvisible-html 0
       :boolean-print-html 0
+      :boolean-writeclass<-ui 0
       :boolean-writeeventsall<-ui 0
       :boolean-writeeventsall<-uimap 0
+      :boolean-writeselected<-ui 0
+      :boolean-writevisible<-ui 0
       :context-write 0
       :divchild<-ui 0
       :divchildlist<-uimap 0
@@ -18253,8 +18341,9 @@ ab
       :node-default<-ui-orig-parent 0
       :node-image<-ui-orig-parent 0
       :node-label<-ui-orig-parent 0
-      :node-layout<-node-ui 0
+      :node-layout<-node-ui-parent 0
       :node<-ui-orig-parent 0
+      :string-class<-ui 0
       :string-style<-font 0
       :string-style<-image 0
       :string-stylename<-name-styletype 0
@@ -18277,25 +18366,25 @@ ab
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 31)
+      :total 38)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 31)
+      :total 38)
     :constnums
      (vx/test/testcoveragenums
       :total 7)
     :docnums
      (vx/test/testcoveragenums
-      :pct 60
-      :tests 23
-      :total 38)
+      :pct 66
+      :tests 30
+      :total 45)
     :funcnums
      (vx/test/testcoveragenums
-      :total 30)
+      :total 37)
     :testpkg "vx/ui/html/uihtml"
     :totalnums
      (vx/test/testcoveragenums
-      :total 37)
+      :total 44)
     :typenums
      (vx/test/testcoveragenums
       :pct 100))

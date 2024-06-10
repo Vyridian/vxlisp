@@ -523,6 +523,277 @@ public final class Collection {
   }
 
   /**
+   * @function any_from_map_pos
+   * Returns then numbered child from a map.
+   * @param  {map-1} map
+   * @param  {int} pos
+   * @return {any-1}
+   * (func any<-map-pos)
+   */
+  public static interface Func_any_from_map_pos extends Core.Type_func, Core.Type_replfunc {
+    public <T extends Core.Type_any, N extends Core.Type_map> T vx_any_from_map_pos(final T generic_any_1, final N map, final Core.Type_int pos);
+  }
+
+  public static class Class_any_from_map_pos extends Core.Class_base implements Func_any_from_map_pos {
+
+    @Override
+    public Func_any_from_map_pos vx_new(Object... vals) {
+      Class_any_from_map_pos output = new Class_any_from_map_pos();
+      return output;
+    }
+
+    @Override
+    public Func_any_from_map_pos vx_copy(Object... vals) {
+      Class_any_from_map_pos output = new Class_any_from_map_pos();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/collection", // pkgname
+        "any<-map-pos", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "any-1", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_any_from_map_pos vx_empty() {return e_any_from_map_pos;}
+    @Override
+    public Func_any_from_map_pos vx_type() {return t_any_from_map_pos;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_map map = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_int pos = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(1)));
+      output = Collection.f_any_from_map_pos(generic_any_1, map, pos);
+      return output;
+    }
+
+    @Override
+    public <T extends Core.Type_any, N extends Core.Type_map> T vx_any_from_map_pos(final T generic_any_1, final N map, final Core.Type_int pos) {
+      return Collection.f_any_from_map_pos(generic_any_1, map, pos);
+    }
+
+  }
+
+  public static final Func_any_from_map_pos e_any_from_map_pos = new Collection.Class_any_from_map_pos();
+  public static final Func_any_from_map_pos t_any_from_map_pos = new Collection.Class_any_from_map_pos();
+
+  public static <T extends Core.Type_any, N extends Core.Type_map> T f_any_from_map_pos(final T generic_any_1, final N map, final Core.Type_int pos) {
+    T output = Core.f_empty(generic_any_1);
+    output = Core.f_let(
+      generic_any_1,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_stringlist keys = Core.f_stringlist_from_map(map);
+        final Core.Type_string key = Core.f_any_from_list(Core.t_string, keys, pos);
+        return Core.f_any_from_map(generic_any_1, map, key);
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function boolean_write_from_map_removekey
+   * Returns true if it alters a mutable map false if it fails.
+   * @param  {map-1} valuemap
+   * @param  {string} key
+   * @return {boolean}
+   * (func boolean-write<-map-removekey)
+   */
+  public static interface Func_boolean_write_from_map_removekey extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_boolean vx_boolean_write_from_map_removekey(final Core.Type_map valuemap, final Core.Type_string key);
+  }
+
+  public static class Class_boolean_write_from_map_removekey extends Core.Class_base implements Func_boolean_write_from_map_removekey {
+
+    @Override
+    public Func_boolean_write_from_map_removekey vx_new(Object... vals) {
+      Class_boolean_write_from_map_removekey output = new Class_boolean_write_from_map_removekey();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_write_from_map_removekey vx_copy(Object... vals) {
+      Class_boolean_write_from_map_removekey output = new Class_boolean_write_from_map_removekey();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/collection", // pkgname
+        "boolean-write<-map-removekey", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_write_from_map_removekey vx_empty() {return e_boolean_write_from_map_removekey;}
+    @Override
+    public Func_boolean_write_from_map_removekey vx_type() {return t_boolean_write_from_map_removekey;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_string key = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
+      output = Collection.f_boolean_write_from_map_removekey(valuemap, key);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean vx_boolean_write_from_map_removekey(final Core.Type_map valuemap, final Core.Type_string key) {
+      return Collection.f_boolean_write_from_map_removekey(valuemap, key);
+    }
+
+  }
+
+  public static final Func_boolean_write_from_map_removekey e_boolean_write_from_map_removekey = new Collection.Class_boolean_write_from_map_removekey();
+  public static final Func_boolean_write_from_map_removekey t_boolean_write_from_map_removekey = new Collection.Class_boolean_write_from_map_removekey();
+
+  public static Core.Type_boolean f_boolean_write_from_map_removekey(final Core.Type_map valuemap, final Core.Type_string key) {
+    Core.Type_boolean output = Core.e_boolean;
+    output = Core.f_boolean_write_from_map_name_value(
+      valuemap,
+      key,
+      Core.f_empty(
+        Core.t_any
+      )
+    );
+    return output;
+  }
+
+  /**
+   * @function boolean_write_from_map_removekeys
+   * Returns true if it alters a mutable map false if it fails.
+   * @param  {map-1} valuemap
+   * @param  {stringlist} keys
+   * @return {boolean}
+   * (func boolean-write<-map-removekeys)
+   */
+  public static interface Func_boolean_write_from_map_removekeys extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_boolean vx_boolean_write_from_map_removekeys(final Core.Type_map valuemap, final Core.Type_stringlist keys);
+  }
+
+  public static class Class_boolean_write_from_map_removekeys extends Core.Class_base implements Func_boolean_write_from_map_removekeys {
+
+    @Override
+    public Func_boolean_write_from_map_removekeys vx_new(Object... vals) {
+      Class_boolean_write_from_map_removekeys output = new Class_boolean_write_from_map_removekeys();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_write_from_map_removekeys vx_copy(Object... vals) {
+      Class_boolean_write_from_map_removekeys output = new Class_boolean_write_from_map_removekeys();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/collection", // pkgname
+        "boolean-write<-map-removekeys", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_write_from_map_removekeys vx_empty() {return e_boolean_write_from_map_removekeys;}
+    @Override
+    public Func_boolean_write_from_map_removekeys vx_type() {return t_boolean_write_from_map_removekeys;}
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_stringlist keys = Core.f_any_from_any(Core.t_stringlist, arglist.vx_any(Core.vx_new_int(1)));
+      output = Collection.f_boolean_write_from_map_removekeys(valuemap, keys);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean vx_boolean_write_from_map_removekeys(final Core.Type_map valuemap, final Core.Type_stringlist keys) {
+      return Collection.f_boolean_write_from_map_removekeys(valuemap, keys);
+    }
+
+  }
+
+  public static final Func_boolean_write_from_map_removekeys e_boolean_write_from_map_removekeys = new Collection.Class_boolean_write_from_map_removekeys();
+  public static final Func_boolean_write_from_map_removekeys t_boolean_write_from_map_removekeys = new Collection.Class_boolean_write_from_map_removekeys();
+
+  public static Core.Type_boolean f_boolean_write_from_map_removekeys(final Core.Type_map valuemap, final Core.Type_stringlist keys) {
+    Core.Type_boolean output = Core.e_boolean;
+    output = Core.f_let(
+      Core.t_boolean,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_booleanlist writelist = Core.f_list_from_list_1(
+          Core.t_booleanlist,
+          keys,
+          Core.t_any_from_any.vx_fn_new((key_any) -> {
+            Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
+            return 
+              Collection.f_boolean_write_from_map_removekey(valuemap, key);
+          })
+        );
+        return Core.f_and_1(writelist);
+      })
+    );
+    return output;
+  }
+
+  /**
    * @function int_from_map_key
    * Returns the position of key in any map.
    * @param  {map-1} map
@@ -1957,6 +2228,9 @@ public final class Collection {
     mapfunc.put("any<-for-until-loop-max", Collection.t_any_from_for_until_loop_max);
     mapfunc.put("any<-for-while-loop", Collection.t_any_from_for_while_loop);
     mapfunc.put("any<-for-while-loop-max", Collection.t_any_from_for_while_loop_max);
+    mapfunc.put("any<-map-pos", Collection.t_any_from_map_pos);
+    mapfunc.put("boolean-write<-map-removekey", Collection.t_boolean_write_from_map_removekey);
+    mapfunc.put("boolean-write<-map-removekeys", Collection.t_boolean_write_from_map_removekeys);
     mapfunc.put("int<-map-key", Collection.t_int_from_map_key);
     mapfunc.put("int<-stringlist-find", Collection.t_int_from_stringlist_find);
     mapfunc.put("is-list", Collection.t_is_list);

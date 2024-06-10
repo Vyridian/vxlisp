@@ -10186,6 +10186,197 @@ public final class Core {
   public static final Type_stringmap t_stringmap = new Class_stringmap();
 
   /**
+   * type: stringmutablemap
+   * A mutable map of string. Note: Mutables are dangerous.
+   * (type stringmutablemap)
+   */
+  public interface Type_stringmutablemap extends Core.Type_map {
+    public Core.Type_stringmutablemap vx_new(final Object... vals);
+    public Core.Type_stringmutablemap vx_copy(final Object... vals);
+    public Core.Type_stringmutablemap vx_empty();
+    public Core.Type_stringmutablemap vx_type();
+    public Map<String, Core.Type_string> vx_mapstring();
+    public Core.Type_string vx_string(final Core.Type_string key);
+  }
+
+  public static class Class_stringmutablemap extends Core.Class_base implements Type_stringmutablemap {
+
+    protected Map<String, Core.Type_string> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_string>());
+
+    @Override
+    public Map<String, Core.Type_any> vx_map() {
+      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+    }
+
+    @Override
+    public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
+      Core.Type_boolean output = Core.c_false;
+      if (value instanceof Core.Type_string) {
+        String key = name.vx_string();
+        if (key.startsWith(":")) {
+          key = key.substring(1);
+        }
+        Core.Type_string castval = (Core.Type_string)value;
+        Map<String, Core.Type_string> map = new LinkedHashMap<>(this.vx_p_map);
+        if (castval == Core.e_string) {
+          map.remove(key);
+        } else {
+          map.put(key, castval);
+        }
+        this.vx_p_map = Core.immutablemap(map);
+        output = Core.c_true;
+      }
+      return output;
+    }
+
+    @Override
+    public Core.Type_string vx_string(final Core.Type_string key) {
+      Core.Type_string output = Core.e_string;
+      Class_stringmutablemap map = this;
+      String skey = key.vx_string();
+      Map<String, Core.Type_string> mapval = map.vx_p_map;
+      output = mapval.getOrDefault(skey, Core.e_string);
+      return output;
+    }
+
+    @Override
+    public Map<String, Core.Type_string> vx_mapstring() {return vx_p_map;}
+
+    @Override
+    public Core.Type_any vx_any(final Core.Type_string key) {
+      return this.vx_string(key);
+    }
+
+    @Override
+    public Type_stringmutablemap vx_new_from_map(final Map<String, Core.Type_any> mapval) {
+      Class_stringmutablemap output = new Class_stringmutablemap();
+      Core.Type_msgblock msgblock = Core.e_msgblock;
+      Map<String, Core.Type_string> map = new LinkedHashMap<>();
+      Set<String> keys = mapval.keySet();
+      for (String key : keys) {
+        Core.Type_any val = mapval.get(key);
+        if (val instanceof Core.Type_string) {
+          Core.Type_string castval = (Core.Type_string)val;
+          map.put(key, castval);
+        } else {
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/stringmutablemap", ":invalidvalue", val);
+          msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+        }
+      }
+      output.vx_p_map = Core.immutablemap(map);
+      if (msgblock != Core.e_msgblock) {
+        output.vxmsgblock = msgblock;
+      }
+      return output;
+    }
+
+    @Override
+    public Type_stringmutablemap vx_new(final Object... vals) {
+      return e_stringmutablemap.vx_copy(vals);
+    }
+
+    @Override
+    public Type_stringmutablemap vx_copy(final Object... vals) {
+      Type_stringmutablemap output = this;
+      boolean ischanged = false;
+      Class_stringmutablemap val = this;
+      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
+      Map<String, Core.Type_string> mapval = new LinkedHashMap<>(val.vx_mapstring());
+      Core.Type_msg msg;
+      String key = "";
+      for (Object valsub : vals) {
+        if (valsub instanceof Core.Type_msgblock) {
+          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Core.Type_msg) {
+          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+        } else if (key.equals("")) {
+          if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstring = (Core.Type_string)valsub;
+            key = valstring.vx_string();
+          } else if (valsub instanceof String) {
+            key = (String)valsub;
+          } else {
+            Core.Type_any msgval;
+            if (valsub instanceof Core.Type_any) {
+              msgval = (Core.Type_any)valsub;
+            } else {
+              msgval = Core.vx_new_string(valsub.toString());
+            }
+            msg = Core.vx_msg_from_error("vx/core/stringmutablemap", ":keyexpected", msgval);
+            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+          }
+        } else {
+          Core.Type_string valany = null;
+          if (valsub instanceof Core.Type_string) {
+            valany = (Core.Type_string)valsub;
+          } else if (valsub instanceof String) {
+            valany = Core.t_string.vx_new(valsub);;
+          } else {
+            Core.Type_any msgval;
+            if (valsub instanceof Core.Type_any) {
+              msgval = (Core.Type_any)valsub;
+            } else {
+              msgval = Core.vx_new_string(valsub.toString());
+            }
+            Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+            mapany.put("key", Core.vx_new_string(key));
+            mapany.put("value", msgval);
+            Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+            msg = Core.vx_msg_from_error("vx/core/stringmutablemap", ":invalidkeyvalue", msgmap);
+            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+          }
+          if (valany != null) {
+            ischanged = true;
+            if (key.startsWith(":")) {
+              key = key.substring(1);
+            }
+            mapval.put(key, valany);
+            key = "";
+          }
+        }
+      }
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_stringmutablemap work = new Class_stringmutablemap();
+        work.vx_p_map = Core.immutablemap(mapval);
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
+      }
+      return output;
+    }
+
+    @Override
+    public Type_stringmutablemap vx_empty() {return e_stringmutablemap;}
+    @Override
+    public Type_stringmutablemap vx_type() {return t_stringmutablemap;}
+
+    @Override
+    public Core.Type_typedef vx_typedef() {
+      return Core.typedef_new(
+        "vx/core", // pkgname
+        "stringmutablemap", // name
+        ":map", // extends
+        Core.e_typelist, // traits
+        Core.t_typelist.vx_new(Core.t_string), // allowtypes
+        Core.e_typelist, // disallowtypes
+        Core.e_funclist, // allowfuncs
+        Core.e_funclist, // disallowfuncs
+        Core.e_anylist, // allowvalues
+        Core.e_anylist, // disallowvalues
+        Core.e_argmap // properties
+      );
+    }
+
+  }
+
+  public static final Type_stringmutablemap e_stringmutablemap = new Class_stringmutablemap();
+  public static final Type_stringmutablemap t_stringmutablemap = new Class_stringmutablemap();
+
+  /**
    * type: struct
    * Struct is the type of all structures/objects with properties.
    * (type struct)
@@ -28618,6 +28809,7 @@ public final class Core {
     maptype.put("stringlist", Core.t_stringlist);
     maptype.put("stringlistlist", Core.t_stringlistlist);
     maptype.put("stringmap", Core.t_stringmap);
+    maptype.put("stringmutablemap", Core.t_stringmutablemap);
     maptype.put("struct", Core.t_struct);
     maptype.put("thenelse", Core.t_thenelse);
     maptype.put("thenelselist", Core.t_thenelselist);

@@ -242,12 +242,21 @@ public final class Uihtml {
                 Uihtml.c_layout_else_html,
                 Core.vx_new_string(":boolean-print"),
                 Uihtml.t_boolean_print_html,
+                Core.vx_new_string(":boolean-layoutremove"),
+                Uihtml.t_boolean_layoutremove_html,
+                Core.vx_new_string(":boolean-layoutselected"),
+                Uihtml.t_boolean_layoutselected_html,
+                Core.vx_new_string(":boolean-layoutvisible"),
+                Uihtml.t_boolean_layoutvisible_html,
                 Core.vx_new_string(":stylesheetrender"),
                 Uihtml.t_stylesheet_layout_html
         )
       );
       output.vx_p_name = val.name();
       output.vx_p_boolean_print = val.boolean_print();
+      output.vx_p_boolean_layoutremove = val.boolean_layoutremove();
+      output.vx_p_boolean_layoutselected = val.boolean_layoutselected();
+      output.vx_p_boolean_layoutvisible = val.boolean_layoutvisible();
       output.vx_p_layoutmap = val.layoutmap();
       output.vx_p_layoutelse = val.layoutelse();
       output.vx_p_stylesheetrender = val.stylesheetrender();
@@ -351,6 +360,285 @@ public final class Uihtml {
   public static final Const_style_selected c_style_selected = new Const_style_selected();
 
   /**
+   * @function boolean_layoutremove_html
+   * Removes html node with a given ui.
+   * @param  {ui} ui
+   * @return {boolean}
+   * (func boolean-layoutremove-html)
+   */
+  public static interface Func_boolean_layoutremove_html extends Core.Func_any_from_any {
+    public Core.Type_boolean vx_boolean_layoutremove_html(final Ui.Type_ui ui);
+  }
+
+  public static class Class_boolean_layoutremove_html extends Core.Class_base implements Func_boolean_layoutremove_html {
+
+    @Override
+    public Func_boolean_layoutremove_html vx_new(Object... vals) {
+      Class_boolean_layoutremove_html output = new Class_boolean_layoutremove_html();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_layoutremove_html vx_copy(Object... vals) {
+      Class_boolean_layoutremove_html output = new Class_boolean_layoutremove_html();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "boolean-layoutremove-html", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_layoutremove_html vx_empty() {return e_boolean_layoutremove_html;}
+    @Override
+    public Func_boolean_layoutremove_html vx_type() {return t_boolean_layoutremove_html;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Ui.Type_ui inputval = (Ui.Type_ui)value;
+      Core.Type_any outputval = Uihtml.f_boolean_layoutremove_html(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      output = Uihtml.f_boolean_layoutremove_html(ui);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean vx_boolean_layoutremove_html(final Ui.Type_ui ui) {
+      return Uihtml.f_boolean_layoutremove_html(ui);
+    }
+
+  }
+
+  public static final Func_boolean_layoutremove_html e_boolean_layoutremove_html = new Uihtml.Class_boolean_layoutremove_html();
+  public static final Func_boolean_layoutremove_html t_boolean_layoutremove_html = new Uihtml.Class_boolean_layoutremove_html();
+
+  public static Core.Type_boolean f_boolean_layoutremove_html(final Ui.Type_ui ui) {
+    Core.Type_boolean output = Core.e_boolean;
+    output = Core.f_let(
+      Core.t_boolean,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_string id = ui.uid();
+        return Htmldoc.f_boolean_remove_from_id(id);
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function boolean_layoutselected_html
+   * Removes html node with a given ui.
+   * @param  {ui} ui
+   * @return {boolean}
+   * (func boolean-layoutselected-html)
+   */
+  public static interface Func_boolean_layoutselected_html extends Core.Func_any_from_any {
+    public Core.Type_boolean vx_boolean_layoutselected_html(final Ui.Type_ui ui);
+  }
+
+  public static class Class_boolean_layoutselected_html extends Core.Class_base implements Func_boolean_layoutselected_html {
+
+    @Override
+    public Func_boolean_layoutselected_html vx_new(Object... vals) {
+      Class_boolean_layoutselected_html output = new Class_boolean_layoutselected_html();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_layoutselected_html vx_copy(Object... vals) {
+      Class_boolean_layoutselected_html output = new Class_boolean_layoutselected_html();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "boolean-layoutselected-html", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_layoutselected_html vx_empty() {return e_boolean_layoutselected_html;}
+    @Override
+    public Func_boolean_layoutselected_html vx_type() {return t_boolean_layoutselected_html;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Ui.Type_ui inputval = (Ui.Type_ui)value;
+      Core.Type_any outputval = Uihtml.f_boolean_layoutselected_html(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      output = Uihtml.f_boolean_layoutselected_html(ui);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean vx_boolean_layoutselected_html(final Ui.Type_ui ui) {
+      return Uihtml.f_boolean_layoutselected_html(ui);
+    }
+
+  }
+
+  public static final Func_boolean_layoutselected_html e_boolean_layoutselected_html = new Uihtml.Class_boolean_layoutselected_html();
+  public static final Func_boolean_layoutselected_html t_boolean_layoutselected_html = new Uihtml.Class_boolean_layoutselected_html();
+
+  public static Core.Type_boolean f_boolean_layoutselected_html(final Ui.Type_ui ui) {
+    Core.Type_boolean output = Core.e_boolean;
+    output = Uihtml.f_boolean_writeclass_from_ui(ui);
+    return output;
+  }
+
+  /**
+   * @function boolean_layoutvisible_html
+   * Removes html node with a given ui.
+   * @param  {ui} ui
+   * @return {boolean}
+   * (func boolean-layoutvisible-html)
+   */
+  public static interface Func_boolean_layoutvisible_html extends Core.Func_any_from_any {
+    public Core.Type_boolean vx_boolean_layoutvisible_html(final Ui.Type_ui ui);
+  }
+
+  public static class Class_boolean_layoutvisible_html extends Core.Class_base implements Func_boolean_layoutvisible_html {
+
+    @Override
+    public Func_boolean_layoutvisible_html vx_new(Object... vals) {
+      Class_boolean_layoutvisible_html output = new Class_boolean_layoutvisible_html();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_layoutvisible_html vx_copy(Object... vals) {
+      Class_boolean_layoutvisible_html output = new Class_boolean_layoutvisible_html();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "boolean-layoutvisible-html", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_layoutvisible_html vx_empty() {return e_boolean_layoutvisible_html;}
+    @Override
+    public Func_boolean_layoutvisible_html vx_type() {return t_boolean_layoutvisible_html;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Ui.Type_ui inputval = (Ui.Type_ui)value;
+      Core.Type_any outputval = Uihtml.f_boolean_layoutvisible_html(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      output = Uihtml.f_boolean_layoutvisible_html(ui);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean vx_boolean_layoutvisible_html(final Ui.Type_ui ui) {
+      return Uihtml.f_boolean_layoutvisible_html(ui);
+    }
+
+  }
+
+  public static final Func_boolean_layoutvisible_html e_boolean_layoutvisible_html = new Uihtml.Class_boolean_layoutvisible_html();
+  public static final Func_boolean_layoutvisible_html t_boolean_layoutvisible_html = new Uihtml.Class_boolean_layoutvisible_html();
+
+  public static Core.Type_boolean f_boolean_layoutvisible_html(final Ui.Type_ui ui) {
+    Core.Type_boolean output = Core.e_boolean;
+    output = Uihtml.f_boolean_writeclass_from_ui(ui);
+    return output;
+  }
+
+  /**
    * @function boolean_print_html
    * Create a print ready version of ui
    * @param  {ui} ui
@@ -446,6 +734,104 @@ public final class Uihtml {
         final Html.Type_stylesheet stylesheethtml = Uihtml.f_stylesheet_from_stylesheet(stylesheetui);
         final Core.Type_string styletext = Html.f_string_from_stylesheet_indent(stylesheethtml, Core.vx_new_int(0));
         return Htmldoc.f_boolean_print_from_id_stylesheettext(uid, styletext);
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function boolean_writeclass_from_ui
+   * Writes to an html node adding or removing the given hidden class.
+   * @param  {ui} ui
+   * @return {boolean}
+   * (func boolean-writeclass<-ui)
+   */
+  public static interface Func_boolean_writeclass_from_ui extends Core.Func_any_from_any {
+    public Core.Type_boolean vx_boolean_writeclass_from_ui(final Ui.Type_ui ui);
+  }
+
+  public static class Class_boolean_writeclass_from_ui extends Core.Class_base implements Func_boolean_writeclass_from_ui {
+
+    @Override
+    public Func_boolean_writeclass_from_ui vx_new(Object... vals) {
+      Class_boolean_writeclass_from_ui output = new Class_boolean_writeclass_from_ui();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_writeclass_from_ui vx_copy(Object... vals) {
+      Class_boolean_writeclass_from_ui output = new Class_boolean_writeclass_from_ui();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "boolean-writeclass<-ui", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_writeclass_from_ui vx_empty() {return e_boolean_writeclass_from_ui;}
+    @Override
+    public Func_boolean_writeclass_from_ui vx_type() {return t_boolean_writeclass_from_ui;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Ui.Type_ui inputval = (Ui.Type_ui)value;
+      Core.Type_any outputval = Uihtml.f_boolean_writeclass_from_ui(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      output = Uihtml.f_boolean_writeclass_from_ui(ui);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean vx_boolean_writeclass_from_ui(final Ui.Type_ui ui) {
+      return Uihtml.f_boolean_writeclass_from_ui(ui);
+    }
+
+  }
+
+  public static final Func_boolean_writeclass_from_ui e_boolean_writeclass_from_ui = new Uihtml.Class_boolean_writeclass_from_ui();
+  public static final Func_boolean_writeclass_from_ui t_boolean_writeclass_from_ui = new Uihtml.Class_boolean_writeclass_from_ui();
+
+  public static Core.Type_boolean f_boolean_writeclass_from_ui(final Ui.Type_ui ui) {
+    Core.Type_boolean output = Core.e_boolean;
+    output = Core.f_let(
+      Core.t_boolean,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_string id = ui.uid();
+        final Core.Type_string sclass = Uihtml.f_string_class_from_ui(ui);
+        return Htmldoc.f_boolean_write_from_id_attribute_value(id, Core.vx_new_string("class"), sclass);
       })
     );
     return output;
@@ -653,6 +1039,188 @@ public final class Uihtml {
         return Core.f_and_1(boollist);
       })
     );
+    return output;
+  }
+
+  /**
+   * @function boolean_writeselected_from_ui
+   * Writes to an html node adding or removing the selected class.
+   * @param  {ui} ui
+   * @return {boolean}
+   * (func boolean-writeselected<-ui)
+   */
+  public static interface Func_boolean_writeselected_from_ui extends Core.Func_any_from_any {
+    public Core.Type_boolean vx_boolean_writeselected_from_ui(final Ui.Type_ui ui);
+  }
+
+  public static class Class_boolean_writeselected_from_ui extends Core.Class_base implements Func_boolean_writeselected_from_ui {
+
+    @Override
+    public Func_boolean_writeselected_from_ui vx_new(Object... vals) {
+      Class_boolean_writeselected_from_ui output = new Class_boolean_writeselected_from_ui();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_writeselected_from_ui vx_copy(Object... vals) {
+      Class_boolean_writeselected_from_ui output = new Class_boolean_writeselected_from_ui();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "boolean-writeselected<-ui", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_writeselected_from_ui vx_empty() {return e_boolean_writeselected_from_ui;}
+    @Override
+    public Func_boolean_writeselected_from_ui vx_type() {return t_boolean_writeselected_from_ui;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Ui.Type_ui inputval = (Ui.Type_ui)value;
+      Core.Type_any outputval = Uihtml.f_boolean_writeselected_from_ui(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      output = Uihtml.f_boolean_writeselected_from_ui(ui);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean vx_boolean_writeselected_from_ui(final Ui.Type_ui ui) {
+      return Uihtml.f_boolean_writeselected_from_ui(ui);
+    }
+
+  }
+
+  public static final Func_boolean_writeselected_from_ui e_boolean_writeselected_from_ui = new Uihtml.Class_boolean_writeselected_from_ui();
+  public static final Func_boolean_writeselected_from_ui t_boolean_writeselected_from_ui = new Uihtml.Class_boolean_writeselected_from_ui();
+
+  public static Core.Type_boolean f_boolean_writeselected_from_ui(final Ui.Type_ui ui) {
+    Core.Type_boolean output = Core.e_boolean;
+    output = Uihtml.f_boolean_writeclass_from_ui(ui);
+    return output;
+  }
+
+  /**
+   * @function boolean_writevisible_from_ui
+   * Writes to an html node adding or removing the hidden class.
+   * @param  {ui} ui
+   * @return {boolean}
+   * (func boolean-writevisible<-ui)
+   */
+  public static interface Func_boolean_writevisible_from_ui extends Core.Func_any_from_any {
+    public Core.Type_boolean vx_boolean_writevisible_from_ui(final Ui.Type_ui ui);
+  }
+
+  public static class Class_boolean_writevisible_from_ui extends Core.Class_base implements Func_boolean_writevisible_from_ui {
+
+    @Override
+    public Func_boolean_writevisible_from_ui vx_new(Object... vals) {
+      Class_boolean_writevisible_from_ui output = new Class_boolean_writevisible_from_ui();
+      return output;
+    }
+
+    @Override
+    public Func_boolean_writevisible_from_ui vx_copy(Object... vals) {
+      Class_boolean_writevisible_from_ui output = new Class_boolean_writevisible_from_ui();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "boolean-writevisible<-ui", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "boolean", // name
+          "", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_boolean_writevisible_from_ui vx_empty() {return e_boolean_writevisible_from_ui;}
+    @Override
+    public Func_boolean_writevisible_from_ui vx_type() {return t_boolean_writevisible_from_ui;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Ui.Type_ui inputval = (Ui.Type_ui)value;
+      Core.Type_any outputval = Uihtml.f_boolean_writevisible_from_ui(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      output = Uihtml.f_boolean_writevisible_from_ui(ui);
+      return output;
+    }
+
+    @Override
+    public Core.Type_boolean vx_boolean_writevisible_from_ui(final Ui.Type_ui ui) {
+      return Uihtml.f_boolean_writevisible_from_ui(ui);
+    }
+
+  }
+
+  public static final Func_boolean_writevisible_from_ui e_boolean_writevisible_from_ui = new Uihtml.Class_boolean_writevisible_from_ui();
+  public static final Func_boolean_writevisible_from_ui t_boolean_writevisible_from_ui = new Uihtml.Class_boolean_writevisible_from_ui();
+
+  public static Core.Type_boolean f_boolean_writevisible_from_ui(final Ui.Type_ui ui) {
+    Core.Type_boolean output = Core.e_boolean;
+    output = Uihtml.f_boolean_writeclass_from_ui(ui);
     return output;
   }
 
@@ -1607,27 +2175,28 @@ public final class Uihtml {
   }
 
   /**
-   * @function node_layout_from_node_ui
+   * @function node_layout_from_node_ui_parent
    * @param  {node} node
    * @param  {ui} ui
+   * @param  {ui} parent
    * @return {node}
-   * (func node-layout<-node-ui)
+   * (func node-layout<-node-ui-parent)
    */
-  public static interface Func_node_layout_from_node_ui extends Core.Type_func, Core.Type_replfunc {
-    public Html.Type_node vx_node_layout_from_node_ui(final Html.Type_node node, final Ui.Type_ui ui);
+  public static interface Func_node_layout_from_node_ui_parent extends Core.Type_func, Core.Type_replfunc {
+    public Html.Type_node vx_node_layout_from_node_ui_parent(final Html.Type_node node, final Ui.Type_ui ui, final Ui.Type_ui parent);
   }
 
-  public static class Class_node_layout_from_node_ui extends Core.Class_base implements Func_node_layout_from_node_ui {
+  public static class Class_node_layout_from_node_ui_parent extends Core.Class_base implements Func_node_layout_from_node_ui_parent {
 
     @Override
-    public Func_node_layout_from_node_ui vx_new(Object... vals) {
-      Class_node_layout_from_node_ui output = new Class_node_layout_from_node_ui();
+    public Func_node_layout_from_node_ui_parent vx_new(Object... vals) {
+      Class_node_layout_from_node_ui_parent output = new Class_node_layout_from_node_ui_parent();
       return output;
     }
 
     @Override
-    public Func_node_layout_from_node_ui vx_copy(Object... vals) {
-      Class_node_layout_from_node_ui output = new Class_node_layout_from_node_ui();
+    public Func_node_layout_from_node_ui_parent vx_copy(Object... vals) {
+      Class_node_layout_from_node_ui_parent output = new Class_node_layout_from_node_ui_parent();
       return output;
     }
 
@@ -1638,7 +2207,7 @@ public final class Uihtml {
     public Core.Type_funcdef vx_funcdef() {
       return Core.funcdef_new(
         "vx/ui/html/uihtml", // pkgname
-        "node-layout<-node-ui", // name
+        "node-layout<-node-ui-parent", // name
         0, // idx
         false, // async
         Core.typedef_new(
@@ -1658,35 +2227,38 @@ public final class Uihtml {
     }
 
     @Override
-    public Func_node_layout_from_node_ui vx_empty() {return e_node_layout_from_node_ui;}
+    public Func_node_layout_from_node_ui_parent vx_empty() {return e_node_layout_from_node_ui_parent;}
     @Override
-    public Func_node_layout_from_node_ui vx_type() {return t_node_layout_from_node_ui;}
+    public Func_node_layout_from_node_ui_parent vx_type() {return t_node_layout_from_node_ui_parent;}
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_node node = Core.f_any_from_any(Html.t_node, arglist.vx_any(Core.vx_new_int(0)));
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(1)));
-      output = Uihtml.f_node_layout_from_node_ui(node, ui);
+      Ui.Type_ui parent = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(2)));
+      output = Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
       return output;
     }
 
     @Override
-    public Html.Type_node vx_node_layout_from_node_ui(final Html.Type_node node, final Ui.Type_ui ui) {
-      return Uihtml.f_node_layout_from_node_ui(node, ui);
+    public Html.Type_node vx_node_layout_from_node_ui_parent(final Html.Type_node node, final Ui.Type_ui ui, final Ui.Type_ui parent) {
+      return Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
     }
 
   }
 
-  public static final Func_node_layout_from_node_ui e_node_layout_from_node_ui = new Uihtml.Class_node_layout_from_node_ui();
-  public static final Func_node_layout_from_node_ui t_node_layout_from_node_ui = new Uihtml.Class_node_layout_from_node_ui();
+  public static final Func_node_layout_from_node_ui_parent e_node_layout_from_node_ui_parent = new Uihtml.Class_node_layout_from_node_ui_parent();
+  public static final Func_node_layout_from_node_ui_parent t_node_layout_from_node_ui_parent = new Uihtml.Class_node_layout_from_node_ui_parent();
 
-  public static Html.Type_node f_node_layout_from_node_ui(final Html.Type_node node, final Ui.Type_ui ui) {
+  public static Html.Type_node f_node_layout_from_node_ui_parent(final Html.Type_node node, final Ui.Type_ui ui, final Ui.Type_ui parent) {
     Html.Type_node output = Html.e_node;
     output = Core.f_let(
       Html.t_node,
       Core.t_any_from_func.vx_fn_new(() -> {
+        final Core.Type_string id = ui.uid();
+        final Core.Type_string parentid = parent.uid();
         final Core.Type_string htmltext = Html.f_string_from_node_indent(node, Core.vx_new_int(2));
-        final Core.Type_boolean htmldone = Htmldoc.f_boolean_replace_from_ui_htmltext(ui, htmltext);
+        final Core.Type_boolean htmldone = Htmldoc.f_boolean_replace_from_id_parent_htmltext(id, parentid, htmltext);
         return node;
       })
     );
@@ -1799,6 +2371,103 @@ public final class Uihtml {
             )
           )
         );
+      })
+    );
+    return output;
+  }
+
+  /**
+   * @function string_class_from_ui
+   * Returns a class string given a ui.
+   * @param  {ui} ui
+   * @return {string}
+   * (func string-class<-ui)
+   */
+  public static interface Func_string_class_from_ui extends Core.Func_any_from_any {
+    public Core.Type_string vx_string_class_from_ui(final Ui.Type_ui ui);
+  }
+
+  public static class Class_string_class_from_ui extends Core.Class_base implements Func_string_class_from_ui {
+
+    @Override
+    public Func_string_class_from_ui vx_new(Object... vals) {
+      Class_string_class_from_ui output = new Class_string_class_from_ui();
+      return output;
+    }
+
+    @Override
+    public Func_string_class_from_ui vx_copy(Object... vals) {
+      Class_string_class_from_ui output = new Class_string_class_from_ui();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      return Core.funcdef_new(
+        "vx/ui/html/uihtml", // pkgname
+        "string-class<-ui", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+    }
+
+    @Override
+    public Func_string_class_from_ui vx_empty() {return e_string_class_from_ui;}
+    @Override
+    public Func_string_class_from_ui vx_type() {return t_string_class_from_ui;}
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Ui.Type_ui inputval = (Ui.Type_ui)value;
+      Core.Type_any outputval = Uihtml.f_string_class_from_ui(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
+      output = Uihtml.f_string_class_from_ui(ui);
+      return output;
+    }
+
+    @Override
+    public Core.Type_string vx_string_class_from_ui(final Ui.Type_ui ui) {
+      return Uihtml.f_string_class_from_ui(ui);
+    }
+
+  }
+
+  public static final Func_string_class_from_ui e_string_class_from_ui = new Uihtml.Class_string_class_from_ui();
+  public static final Func_string_class_from_ui t_string_class_from_ui = new Uihtml.Class_string_class_from_ui();
+
+  public static Core.Type_string f_string_class_from_ui(final Ui.Type_ui ui) {
+    Core.Type_string output = Core.e_string;
+    output = Core.f_let(
+      Core.t_string,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        final Html.Type_stylelist htmlstyles = Uihtml.f_stylelist_extra_from_ui(ui);
+        return Html.f_string_from_stylelist(htmlstyles);
       })
     );
     return output;
@@ -4320,7 +4989,7 @@ public final class Uihtml {
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
         final Html.Type_node node = Uihtml.f_node_app_from_ui_orig_parent(ui, orig, parent);
-        final Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui(node, ui);
+        final Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
         final Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(ui);
         return ui;
       })
@@ -4411,7 +5080,7 @@ public final class Uihtml {
       Core.t_any_from_func.vx_fn_new(() -> {
         final Ui.Type_uimap uimap = ui.uimap();
         final Html.Type_node node = Uihtml.f_node_default_from_ui_orig_parent(ui, orig, parent);
-        final Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui(node, ui);
+        final Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
         final Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(ui);
         return ui;
       })
@@ -4501,7 +5170,7 @@ public final class Uihtml {
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
         final Html.Type_node node = Uihtml.f_node_image_from_ui_orig_parent(ui, orig, parent);
-        final Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui(node, ui);
+        final Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
         final Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(ui);
         return ui;
       })
@@ -4592,7 +5261,7 @@ public final class Uihtml {
       Core.t_any_from_func.vx_fn_new(() -> {
         final Ui.Type_uimap uimap = ui.uimap();
         final Html.Type_node node = Uihtml.f_node_label_from_ui_orig_parent(ui, orig, parent);
-        final Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui(node, ui);
+        final Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
         final Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(ui);
         return ui;
       })
@@ -4619,9 +5288,15 @@ public final class Uihtml {
     mapconst.put("layoutenginehtml", Uihtml.c_layoutenginehtml);
     mapconst.put("style-hidden", Uihtml.c_style_hidden);
     mapconst.put("style-selected", Uihtml.c_style_selected);
+    mapfunc.put("boolean-layoutremove-html", Uihtml.t_boolean_layoutremove_html);
+    mapfunc.put("boolean-layoutselected-html", Uihtml.t_boolean_layoutselected_html);
+    mapfunc.put("boolean-layoutvisible-html", Uihtml.t_boolean_layoutvisible_html);
     mapfunc.put("boolean-print-html", Uihtml.t_boolean_print_html);
+    mapfunc.put("boolean-writeclass<-ui", Uihtml.t_boolean_writeclass_from_ui);
     mapfunc.put("boolean-writeeventsall<-ui", Uihtml.t_boolean_writeeventsall_from_ui);
     mapfunc.put("boolean-writeeventsall<-uimap", Uihtml.t_boolean_writeeventsall_from_uimap);
+    mapfunc.put("boolean-writeselected<-ui", Uihtml.t_boolean_writeselected_from_ui);
+    mapfunc.put("boolean-writevisible<-ui", Uihtml.t_boolean_writevisible_from_ui);
     mapfunc.put("context-write", Uihtml.t_context_write);
     mapfunc.put("divchild<-ui", Uihtml.t_divchild_from_ui);
     mapfunc.put("divchildlist<-uimap", Uihtml.t_divchildlist_from_uimap);
@@ -4631,8 +5306,9 @@ public final class Uihtml {
     mapfunc.put("node-default<-ui-orig-parent", Uihtml.t_node_default_from_ui_orig_parent);
     mapfunc.put("node-image<-ui-orig-parent", Uihtml.t_node_image_from_ui_orig_parent);
     mapfunc.put("node-label<-ui-orig-parent", Uihtml.t_node_label_from_ui_orig_parent);
-    mapfunc.put("node-layout<-node-ui", Uihtml.t_node_layout_from_node_ui);
+    mapfunc.put("node-layout<-node-ui-parent", Uihtml.t_node_layout_from_node_ui_parent);
     mapfunc.put("node<-ui-orig-parent", Uihtml.t_node_from_ui_orig_parent);
+    mapfunc.put("string-class<-ui", Uihtml.t_string_class_from_ui);
     mapfunc.put("string-style<-font", Uihtml.t_string_style_from_font);
     mapfunc.put("string-style<-image", Uihtml.t_string_style_from_image);
     mapfunc.put("string-stylename<-name-styletype", Uihtml.t_string_stylename_from_name_styletype);

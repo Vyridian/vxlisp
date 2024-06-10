@@ -65,10 +65,13 @@
  :doc "Universal Layout")
 
 (type layoutengine : struct
- :properties [name             : string
-              boolean-print    : boolean-print
-              layoutmap        : layoutmap
-              layoutelse       : layout
+ :properties [name : string
+              boolean-print : boolean-print
+              boolean-layoutremove   : boolean-layoutremove<-ui
+              boolean-layoutselected : boolean-layoutselected<-ui
+              boolean-layoutvisible  : boolean-layoutvisible<-ui
+              layoutmap  : layoutmap
+              layoutelse : layout
               stylesheetrender : stylesheet-render]
  :doc "Pluggable layoutengine")
 
@@ -85,11 +88,11 @@
  :doc "Pin an element")
 
 (type point : struct
- :properties [x          : int
-              y          : int
-              z          : int
-              t          : int
-              i          : int
+ :properties [x : int
+              y : int
+              z : int
+              t : int
+              i : int
               pointtype : pointtype]
  :doc "Universal Point")
 
@@ -301,6 +304,166 @@
 
 (const styletype-system : styletype)
 
+(func boolean-layout<-ui-parent-selected : boolean
+ [ui       : ui
+  parent   : ui
+  selected : boolean]
+ (let : boolean
+  [layoutengine : layoutengine :=
+    (layoutengine-readstate)
+   uiselected : ui :=
+    (copy ui
+     :selected selected)
+   iswrite : boolean :=
+    (boolean-write<-ui-parent
+     uiselected parent)
+   fn-layoutselected : boolean-layoutselected<-ui :=
+    (:boolean-layoutselected layoutengine)]
+  (fn-layoutselected uiselected))
+ :context
+ :sideeffects "Changes HTML class element."
+ :clientserver :client
+ :doc "Writes to an html node adding or removing the selected class.")
+
+(func boolean-layout<-ui-parent-visible : boolean
+ [ui      : ui
+  parent  : ui
+  visible : boolean]
+ (let : boolean
+  [layoutengine : layoutengine :=
+    (layoutengine-readstate)
+   uivisible : ui :=
+    (copy ui
+     :hidden (! visible))
+   iswrite : boolean :=
+    (boolean-write<-ui-parent
+     uivisible parent)
+   fn-layoutvisible : boolean-layoutvisible<-ui :=
+    (:boolean-layoutvisible layoutengine)]
+  (fn-layoutvisible uivisible))
+ :context
+ :sideeffects "Changes HTML class element."
+ :clientserver :client
+ :doc "Writes to an html node adding or removing the hidden class.")
+
+(func boolean-layoutaddchild<-ui-parent : boolean
+ [uiarg  : ui
+  parent : ui]
+ (let : boolean
+  [ui2 : ui :=
+    (ui-addlayout<-ui uiarg)
+   iswrite : boolean :=
+    (boolean-write<-ui-parent
+     ui2 parent)
+   ui3 : ui :=
+    (ui-layout<-ui-orig-parent
+     ui2 (empty ui) parent)]
+   iswrite)
+ :context
+ :sideeffects "Changes HTML class element."
+ :clientserver :client
+ :doc "Writes a new ui on an existing parent.")
+
+(func boolean-layoutremove<-ui : boolean
+ [ui : ui]
+ :sideeffects "Changes HTML class element."
+ :clientserver :client
+ :doc "Removes html node with a given ui.")
+
+(func boolean-layoutremove<-ui-parent : boolean
+ [ui     : ui
+  parent : ui]
+ (let : boolean
+  [layoutengine : layoutengine :=
+    (layoutengine-readstate)
+   uid : string := (:uid ui)
+   iswrite : boolean :=
+    (boolean-writeremove<-ui-uid : boolean
+     parent uid)
+   fn-layoutremove : boolean-layoutremove<-ui :=
+    (:boolean-layoutremove layoutengine)]
+  (fn-layoutremove ui))
+ :context
+ :sideeffects "Changes HTML class element."
+ :clientserver :client
+ :doc "Removes an html node given a ui.")
+
+(func boolean-layoutremove<-ui-keys : boolean
+ [ui   : ui
+  keys : stringlist]
+ (let : boolean
+  [uimap : uimap := (:uimap ui)
+   writelist : booleanlist :=
+    (list<-list : booleanlist
+     keys
+     (fn : boolean
+      [key : string]
+      (let : boolean
+       [childui : ui :=
+        (any<-map : ui
+         uimap key)]
+       (boolean-layoutremove<-ui-parent
+        childui ui))))]
+  (and writelist))
+ :context
+ :sideeffects "Changes HTML class element."
+ :clientserver :client
+ :doc "Writes to an html node adding or removing the selected class.")
+
+(func boolean-layoutremove<-ui-start-end : boolean
+ [ui    : ui
+  start : int
+  end   : int]
+ (let : boolean
+  [uimap : uimap := (:uimap ui)
+   keys : stringlist :=
+    (stringlist<-map uimap)
+   subkeys : stringlist :=
+    (list<-list-start-end : stringlist
+     keys start end)]
+  (boolean-layoutremove<-ui-keys
+   ui subkeys))
+ :context
+ :sideeffects "Changes HTML class element."
+ :clientserver :client
+ :doc "Writes to an html node adding or removing the selected class.")
+
+(func boolean-layoutselected<-ui : boolean
+ [ui : ui]
+ :sideeffects "Changes HTML class element."
+ :clientserver :client
+ :doc "Writes to an html node adding or removing the selected class.")
+
+(func boolean-layoutselected<-ui-parent : boolean
+ [ui     : ui
+  parent : ui]
+ (let : boolean
+  [layoutengine : layoutengine :=
+    (layoutengine-readstate)
+   iswrite : boolean :=
+    (boolean-write<-ui-parent
+     ui parent)
+   fn-layoutselected : boolean-layoutselected<-ui :=
+    (:boolean-layoutselected layoutengine)]
+  (fn-layoutselected ui))
+ :context
+ :sideeffects "Changes HTML class element."
+ :clientserver :client
+ :doc "Writes to an html node adding or removing the selected class.")
+
+(func boolean-layoutselected<-ui-selected : boolean
+ [ui       : ui
+  selected : int]
+ :sideeffects "Changes HTML class element."
+ :clientserver :client
+ :doc "Writes to an html node adding or removing the selected class.")
+
+(func boolean-layoutvisible<-ui : boolean
+ [ui : ui]
+ :sideeffects "Changes HTML class element."
+ :clientserver :client
+ :doc "Writes to an html node adding or removing the hidden class.")
+
 (func boolean-print : boolean
  [ui : ui]
  (let : boolean
@@ -317,6 +480,25 @@
   :uiapp)
  :context
  :doc "Returns true if uiapp was successfully removed from state.")
+
+(func boolean-write<-ui-parent : boolean
+ [ui     : ui
+  parent : ui]
+ (let
+  [uid : string := (:uid ui)
+   uimap : uimap := (:uimap parent)]
+  (boolean-write<-map-name-value
+   uimap uid ui))
+ :doc "Returns true if the given ui was added to parent uimap")
+
+(func boolean-writeremove<-ui-uid : boolean
+ [uiarg : ui
+  uid   : string]
+ (let
+  [uimap : uimap := (:uimap uiarg)]
+  (boolean-write<-map-name-value
+   uimap uid (empty ui)))
+ :doc "Returns true if the given uid was removed from ui uimap")
 
 (func boolean-writestate<-ui : boolean
  [ui : ui]
@@ -336,11 +518,11 @@
        parentuid)))
    isfound : boolean :=
     (!-empty parentui)
-   parent2 : ui :=
+   iswrite : boolean :=
     (if
      (then isfound
-      (ui-writechild<-ui-child
-       parentui ui)))]
+      (boolean-write<-ui-parent
+       ui parentui)))]
   isfound)
  :context
  :doc "")
@@ -380,6 +562,15 @@
    [fontface : fontface]
    (:name fontface)))
  :doc "Returns a fontfacemap from a fontfacelist")
+
+(func int-child<-ui-uid : int
+ [ui  : ui
+  uid : string]
+ (let : int
+  [uimap : uimap := (:uimap ui)]
+  (coll/int<-map-key
+   uimap uid))
+ :doc "Returns the position of the currently selected subui")
 
 (func int-selected<-ui : int
  [ui : ui]
@@ -447,9 +638,7 @@
   [layoutmap  : layoutmap := (:layoutmap  layoutengine)
    layoutelse : layout    := (:layoutelse layoutengine)]
   (layout<-ui-layoutmap-else
-   ui
-   layoutmap
-   layoutelse))
+   ui layoutmap layoutelse))
  :doc "Returns the layout from layoutengine that matches the ui")
 
 (func layout<-ui-layoutmap-else : layout
@@ -463,8 +652,7 @@
    layname : string := (:name layout)
    layout1 : layout :=
     (any<-map : layout
-     layoutmap
-     layname)
+     layoutmap layname)
    layout2 : layout :=
     (if : layout
      (!-empty layout1)
@@ -695,68 +883,12 @@
          2))
  :doc "Return a ui after changing selected only one child.")
 
-(func ui<-ui-visible : ui
- [ui      : ui
-  visible : int]
- (if : ui
-  (then
-   (< visible 1)
-   ui)
-  (else
-   (let : ui
-    [uimap : uimap := (:uimap ui)
-     uilist1 : uilist :=
-      (uilist<-uimap uimap)
-     uilist2 : uilist :=
-      (list<-list-intany
-       uilist1
-       (fn : ui
-        [posval : int
-         uival  : ui]
-        (if : ui
-         (then
-          (= posval visible)
-          (copy uival
-           :hidden false))
-         (else
-          (copy uival
-           :hidden true)))))
-     childmap : uimap :=
-      (uimap<-uilist uilist2)]
-    (copy ui
-     :uimap childmap))))
- :test (test
-        (ui
-         :uimap
-          (uimap
-           :a
-            (ui
-             :uid "a"
-             :hidden true)
-           :b
-            (ui
-             :uid "b")))
-        (ui<-ui-visible
-         (ui
-          :uimap
-           (uimap
-            :a
-             (ui
-              :uid "a")
-            :b
-             (ui
-              :uid "b"
-              :hidden true)))
-         2))
- :doc "Return a ui after changing hidden to all but one child.")
-
 (func ui-addlayout<-ui : ui
  [ui : ui]
  (let : ui
   [uiengine : uiengine := (uiengine-readstate)]
   (ui-addlayout<-ui-uiengine
-   ui
-   uiengine))
+   ui uiengine))
  :context
  :doc "Returns a ui with a layout added to each ui.")
 
@@ -804,14 +936,22 @@
    layoutengine))
  :doc "Returns a ui with a layout added to each ui.")
 
+(func ui-child<-ui-pos : ui
+ [ui  : ui
+  pos : int]
+ (let : ui
+  [childmap : uimap := (:uimap ui)]
+  (any<-map-pos : ui
+   childmap pos))
+ :doc "Returns then named child from a ui.")
+
 (func ui-child<-ui-uid : ui
  [ui  : ui
   uid : string]
  (let : ui
   [childmap : uimap := (:uimap ui)]
   (any<-map : ui
-   childmap
-   uid))
+   childmap uid))
  :doc "Returns then named child from a ui.")
 
 (func ui-from<-event : ui
@@ -868,11 +1008,11 @@
   [uichg1 : ui :=
     (ui<-ui-selected
      ui selected)
-   uichg2 : ui :=
-    (ui-writechild<-ui-child
-     parent uichg1)]
+   iswrite : boolean :=
+    (boolean-write<-ui-parent
+     uichg1 parent)]
   (ui-layout<-ui-orig-parent
-   uichg2 ui parent))
+   uichg1 ui parent))
  :doc "Return a ui after changing selected item and rendering it.")
 
 (func ui-layout<-ui-parent-visible : ui
@@ -881,7 +1021,7 @@
   visible : int]
  (let : ui
   [uichg : ui :=
-    (ui<-ui-visible
+    (ui-write<-ui-visible
      ui visible)]
   (ui-layout<-ui-orig-parent
    uichg ui parent))
@@ -939,9 +1079,73 @@
   [uilist : uilist := (uilist-selected<-ui ui)]
   (first<-list : ui
    uilist))
- :doc "Returns the ui of the first ui with selected=true")
+ :doc "Returns the first child of ui with selected=true")
 
-(func ui-writechild<-ui-child : ui
+(func ui-visible<-ui : ui
+ [ui : ui]
+ (let : ui
+  [uilist : uilist := (uilist-visible<-ui ui)]
+  (first<-list : ui
+   uilist))
+ :doc "Returns the first child of ui with hidden=false")
+
+(func ui-write<-ui-visible : ui
+ [ui      : ui
+  visible : int]
+ (if : ui
+  (then
+   (< visible 1)
+   ui)
+  (else
+   (let : ui
+    [uimap : uimap := (:uimap ui)
+     uilist1 : uilist :=
+      (uilist<-uimap uimap)
+     uilist2 : uilist :=
+      (list<-list-intany : uilist
+       uilist1
+       (fn : ui
+        [posval : int
+         uival  : ui]
+        (if : ui
+         (then
+          (= posval visible)
+          (ui-write<-ui-child
+           ui
+           (copy uival
+            :hidden false)))
+         (else
+          (ui-write<-ui-child
+           ui
+           (copy uival
+            :hidden true))))))]
+    ui)))
+ :test (test
+        (ui
+         :uimap
+          (uimap
+           :a
+            (ui
+             :uid "a"
+             :hidden true)
+           :b
+            (ui
+             :uid "b")))
+        (ui-write<-ui-visible
+         (ui
+          :uimap
+           (uimap
+            :a
+             (ui
+              :uid "a")
+            :b
+             (ui
+              :uid "b"
+              :hidden true)))
+         2))
+ :doc "Return a ui after changing hidden to all but one child.")
+
+(func ui-write<-ui-child : ui
  [ui    : ui
   child : ui]
  (let
@@ -953,7 +1157,7 @@
   ui)
  :doc "Returns the given ui with the child added to uimap")
 
-(func ui-writechildmap<-ui-childmap : ui
+(func ui-write<-ui-childmap : ui
  [ui       : ui
   childmap : uimap]
  (let : ui
@@ -963,7 +1167,7 @@
     (fn : ui
      [key   : string
       value : ui]
-     (ui-writechild<-ui-child
+     (ui-write<-ui-child
       ui
       value)))]
   ui)
@@ -1036,6 +1240,22 @@
      (:selected item)
      item))))
  :doc "Return a uilist of the ui with selected=true")
+
+(func uilist-visible<-ui : uilist
+ [uiarg : ui]
+ (let : uilist
+  [uimap  : uimap  := (:uimap uiarg)
+   uilist : uilist :=
+    (uilist<-uimap
+     uimap)]
+  (coll/list<-list-filter : uilist
+   uilist
+   (fn : ui
+    [item : ui]
+    (if : ui
+     (! (:hidden item))
+     item))))
+ :doc "Return a uilist of the ui with hidden=false")
 
 (func uimap<-uilist : uimap
  [uilist : uilist :...]

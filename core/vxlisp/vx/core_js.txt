@@ -44,10 +44,14 @@
     let output = vx_core.c_true
     const mapany = valuemap['vx_value']
    	let key = name
-	   if (key.startsWith(':')) {
-	     key = key.substring(1)
+    if (key.startsWith(':')) {
+      key = key.substring(1)
    	}
-    mapany[key] = value
+    if (vx_core.f_is_empty_1(value)) {
+      delete mapany[key]
+    } else {
+      mapany[key] = value
+    }
     return output
   }
 

@@ -191,6 +191,86 @@ public final class UiTest {
     return output;
   }
 
+  static Test.Type_testcase f_ui_write_from_ui_visible(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/ui/ui",
+      ":casename", "ui-write<-ui-visible",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n (ui\n  :uimap\n   (uimap\n    :a\n     (ui\n      :uid \"a\"\n      :hidden true)\n    :b\n     (ui\n      :uid \"b\")))\n (ui-write<-ui-visible\n  (ui\n   :uimap\n    (uimap\n     :a\n      (ui\n       :uid \"a\")\n     :b\n      (ui\n       :uid \"b\"\n       :hidden true)))\n  2))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.f_new(
+                Ui.t_ui,
+                Core.t_anylist.vx_new(
+                  Core.vx_new_string(":uimap"),
+                  Core.f_new(
+                    Ui.t_uimap,
+                    Core.t_anylist.vx_new(
+                      Core.vx_new_string(":a"),
+                      Core.f_new(
+                        Ui.t_ui,
+                        Core.t_anylist.vx_new(
+                          Core.vx_new_string(":uid"),
+                          Core.vx_new_string("a"),
+                          Core.vx_new_string(":hidden"),
+                          Core.vx_new_boolean(true)
+                        )
+                      ),
+                      Core.vx_new_string(":b"),
+                      Core.f_new(
+                        Ui.t_ui,
+                        Core.t_anylist.vx_new(
+                          Core.vx_new_string(":uid"),
+                          Core.vx_new_string("b")
+                        )
+                      )
+                    )
+                  )
+                )
+              ),
+              Ui.f_ui_write_from_ui_visible(
+                Core.f_new(
+                  Ui.t_ui,
+                  Core.t_anylist.vx_new(
+                    Core.vx_new_string(":uimap"),
+                    Core.f_new(
+                      Ui.t_uimap,
+                      Core.t_anylist.vx_new(
+                        Core.vx_new_string(":a"),
+                        Core.f_new(
+                          Ui.t_ui,
+                          Core.t_anylist.vx_new(
+                            Core.vx_new_string(":uid"),
+                            Core.vx_new_string("a")
+                          )
+                        ),
+                        Core.vx_new_string(":b"),
+                        Core.f_new(
+                          Ui.t_ui,
+                          Core.t_anylist.vx_new(
+                            Core.vx_new_string(":uid"),
+                            Core.vx_new_string("b"),
+                            Core.vx_new_string(":hidden"),
+                            Core.vx_new_boolean(true)
+                          )
+                        )
+                      )
+                    )
+                  )
+                ),
+                Core.vx_new_int(2)
+              )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
   static Test.Type_testcase f_ui_from_ui_find(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
@@ -335,95 +415,15 @@ public final class UiTest {
     return output;
   }
 
-  static Test.Type_testcase f_ui_from_ui_visible(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
-      ":passfail", false,
-      ":testpkg", "vx/ui/ui",
-      ":casename", "ui<-ui-visible",
-      ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
-          ":describename", "(test\n (ui\n  :uimap\n   (uimap\n    :a\n     (ui\n      :uid \"a\"\n      :hidden true)\n    :b\n     (ui\n      :uid \"b\")))\n (ui<-ui-visible\n  (ui\n   :uimap\n    (uimap\n     :a\n      (ui\n       :uid \"a\")\n     :b\n      (ui\n       :uid \"b\"\n       :hidden true)))\n  2))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.f_new(
-                Ui.t_ui,
-                Core.t_anylist.vx_new(
-                  Core.vx_new_string(":uimap"),
-                  Core.f_new(
-                    Ui.t_uimap,
-                    Core.t_anylist.vx_new(
-                      Core.vx_new_string(":a"),
-                      Core.f_new(
-                        Ui.t_ui,
-                        Core.t_anylist.vx_new(
-                          Core.vx_new_string(":uid"),
-                          Core.vx_new_string("a"),
-                          Core.vx_new_string(":hidden"),
-                          Core.vx_new_boolean(true)
-                        )
-                      ),
-                      Core.vx_new_string(":b"),
-                      Core.f_new(
-                        Ui.t_ui,
-                        Core.t_anylist.vx_new(
-                          Core.vx_new_string(":uid"),
-                          Core.vx_new_string("b")
-                        )
-                      )
-                    )
-                  )
-                )
-              ),
-              Ui.f_ui_from_ui_visible(
-                Core.f_new(
-                  Ui.t_ui,
-                  Core.t_anylist.vx_new(
-                    Core.vx_new_string(":uimap"),
-                    Core.f_new(
-                      Ui.t_uimap,
-                      Core.t_anylist.vx_new(
-                        Core.vx_new_string(":a"),
-                        Core.f_new(
-                          Ui.t_ui,
-                          Core.t_anylist.vx_new(
-                            Core.vx_new_string(":uid"),
-                            Core.vx_new_string("a")
-                          )
-                        ),
-                        Core.vx_new_string(":b"),
-                        Core.f_new(
-                          Ui.t_ui,
-                          Core.t_anylist.vx_new(
-                            Core.vx_new_string(":uid"),
-                            Core.vx_new_string("b"),
-                            Core.vx_new_string(":hidden"),
-                            Core.vx_new_boolean(true)
-                          )
-                        )
-                      )
-                    )
-                  )
-                ),
-                Core.vx_new_int(2)
-              )
-            )
-        )
-      )
-    );
-    return output;
-  }
-
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
       UiTest.f_boolean_writestate_from_uiapp(context),
       UiTest.f_string_parentuid_from_uid(context),
       UiTest.f_ui_readstate_uiapp(context),
       UiTest.f_ui_readstate_from_uid(context),
+      UiTest.f_ui_write_from_ui_visible(context),
       UiTest.f_ui_from_ui_find(context),
-      UiTest.f_ui_from_ui_selected(context),
-      UiTest.f_ui_from_ui_visible(context)
+      UiTest.f_ui_from_ui_selected(context)
     ));
     Test.Type_testcaselist output = Test.t_testcaselist.vx_new(arraylisttestcase);
     return output;
@@ -433,11 +433,11 @@ public final class UiTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/ui/ui", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 41), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 61, ":tests", 74, ":total", 120), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 13, ":tests", 7, ":total", 51), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 51), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 51), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 5, ":tests", 7, ":total", 120), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 66, ":tests", 91, ":total", 137), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 10, ":tests", 7, ":total", 68), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 68), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 68), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 5, ":tests", 7, ":total", 137), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 28)
     );
   }
@@ -519,12 +519,26 @@ public final class UiTest {
         ":styletype-system", 0
       ),
       ":funcmap", Core.t_intmap.vx_new(
+        ":boolean-layout<-ui-parent-selected", 0,
+        ":boolean-layout<-ui-parent-visible", 0,
+        ":boolean-layoutaddchild<-ui-parent", 0,
+        ":boolean-layoutremove<-ui", 0,
+        ":boolean-layoutremove<-ui-keys", 0,
+        ":boolean-layoutremove<-ui-parent", 0,
+        ":boolean-layoutremove<-ui-start-end", 0,
+        ":boolean-layoutselected<-ui", 0,
+        ":boolean-layoutselected<-ui-parent", 0,
+        ":boolean-layoutselected<-ui-selected", 0,
+        ":boolean-layoutvisible<-ui", 0,
         ":boolean-print", 0,
         ":boolean-removestate-uiapp", 0,
+        ":boolean-write<-ui-parent", 0,
+        ":boolean-writeremove<-ui-uid", 0,
         ":boolean-writestate<-ui", 0,
         ":boolean-writestate<-uiapp", 1,
         ":boolean-writestate<-uiengine", 0,
         ":fontfacemap<-fontfacelist", 0,
+        ":int-child<-ui-uid", 0,
         ":int-selected<-ui", 0,
         ":int-visible<-ui", 0,
         ":intlist-visible<-ui", 0,
@@ -545,6 +559,7 @@ public final class UiTest {
         ":ui-addlayout<-ui-layoutengine", 0,
         ":ui-addlayout<-ui-layoutmap-else", 0,
         ":ui-addlayout<-ui-uiengine", 0,
+        ":ui-child<-ui-pos", 0,
         ":ui-child<-ui-uid", 0,
         ":ui-from<-event", 0,
         ":ui-layout", 0,
@@ -555,16 +570,18 @@ public final class UiTest {
         ":ui-readstate-uiapp", 1,
         ":ui-readstate<-uid", 1,
         ":ui-selected<-ui", 0,
-        ":ui-writechild<-ui-child", 0,
-        ":ui-writechildmap<-ui-childmap", 0,
+        ":ui-visible<-ui", 0,
+        ":ui-write<-ui-child", 0,
+        ":ui-write<-ui-childmap", 0,
+        ":ui-write<-ui-visible", 1,
         ":ui<-layout-ui-orig-parent", 0,
         ":ui<-ui-find", 1,
         ":ui<-ui-selected", 1,
-        ":ui<-ui-visible", 1,
         ":uid-selected<-ui", 0,
         ":uiengine-readstate", 0,
         ":uiengine-render", 0,
         ":uilist-selected<-ui", 0,
+        ":uilist-visible<-ui", 0,
         ":uilist<-uimap", 0,
         ":uimap-addlayout<-uimap-layoutmap-else", 0,
         ":uimap-layout<-uimap-parent", 0,

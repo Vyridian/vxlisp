@@ -10502,21 +10502,7 @@ namespace vx_web_html {
             vx_core::Type_string output_1 = vx_core::f_let(
               vx_core::t_string,
               vx_core::t_any_from_func->vx_fn_new({stylelist}, [stylelist]() {
-                vx_core::Type_stringlist namelist = vx_core::f_list_from_list_1(
-                  vx_core::t_stringlist,
-                  stylelist,
-                  vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any item_any) {
-                    vx_web_html::Type_style item = vx_core::vx_any_from_any(vx_web_html::t_style, item_any);
-                    vx_core::Type_any output_1 = 
-                      vx_type::f_string_from_string_start(
-                        item->name(),
-                        vx_core::vx_new_int(2)
-                      );
-                    return output_1;
-                  })
-                );
-                vx_core::vx_ref_plus(namelist);
-                vx_core::Type_string joined = vx_type::f_string_from_stringlist_join(namelist, vx_core::vx_new_string(" "));
+                vx_core::Type_string joined = vx_web_html::f_string_from_stylelist(stylelist);
                 vx_core::vx_ref_plus(joined);
                 vx_core::Type_string output_1 = vx_core::f_if(
                   vx_core::t_string,
@@ -10531,7 +10517,7 @@ namespace vx_web_html {
                     })
                   )
                 );
-                vx_core::vx_release_one_except({namelist, joined}, output_1);
+                vx_core::vx_release_one_except(joined, output_1);
                 return output_1;
               })
             );
@@ -10902,6 +10888,127 @@ namespace vx_web_html {
       vx_web_html::Type_style style = vx_core::vx_any_from_any(vx_web_html::t_style, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int indent = vx_core::vx_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::vx_new_int(1)));
       output = vx_web_html::f_string_from_style_indent(style, indent);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func string<-stylelist)
+  vx_core::Type_string f_string_from_stylelist(vx_web_html::Type_stylelist stylelist) {
+    vx_core::Type_string output = vx_core::e_string;
+    vx_core::vx_reserve(stylelist);
+    output = vx_core::f_let(
+      vx_core::t_string,
+      vx_core::t_any_from_func->vx_fn_new({stylelist}, [stylelist]() {
+        vx_core::Type_stringlist namelist = vx_core::f_list_from_list_1(
+          vx_core::t_stringlist,
+          stylelist,
+          vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any item_any) {
+            vx_web_html::Type_style item = vx_core::vx_any_from_any(vx_web_html::t_style, item_any);
+            vx_core::Type_any output_1 = 
+              vx_type::f_string_from_string_start(
+                item->name(),
+                vx_core::vx_new_int(2)
+              );
+            return output_1;
+          })
+        );
+        vx_core::vx_ref_plus(namelist);
+        vx_core::Type_string output_1 = vx_type::f_string_from_stringlist_join(namelist, vx_core::vx_new_string(" "));
+        vx_core::vx_release_one_except(namelist, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except(stylelist, output);
+    return output;
+  }
+  /**
+   * @function string_from_stylelist
+   * Returns classnames separated by spaces for each style.
+   * @param  {stylelist} stylelist
+   * @return {string}
+   * (func string<-stylelist)
+   */
+  // (func string<-stylelist)
+  // class Class_string_from_stylelist {
+    Abstract_string_from_stylelist::~Abstract_string_from_stylelist() {}
+
+    Class_string_from_stylelist::Class_string_from_stylelist() : Abstract_string_from_stylelist::Abstract_string_from_stylelist() {
+      vx_core::refcount += 1;
+    }
+
+    Class_string_from_stylelist::~Class_string_from_stylelist() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_string_from_stylelist::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_web_html::Func_string_from_stylelist output = vx_web_html::e_string_from_stylelist;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_string_from_stylelist::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_web_html::Func_string_from_stylelist output = vx_web_html::e_string_from_stylelist;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_string_from_stylelist::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/web/html", // pkgname
+        "string<-stylelist", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_string_from_stylelist::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_string_from_stylelist::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/web/html", // pkgname
+        "string<-stylelist", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_string_from_stylelist::vx_empty() const {return vx_web_html::e_string_from_stylelist;}
+    vx_core::Type_any Class_string_from_stylelist::vx_type() const {return vx_web_html::t_string_from_stylelist;}
+    vx_core::Type_msgblock Class_string_from_stylelist::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_string_from_stylelist::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_string_from_stylelist::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_string_from_stylelist::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_web_html::Type_stylelist inputval = vx_core::vx_any_from_any(vx_web_html::t_stylelist, val);
+      output = vx_web_html::f_string_from_stylelist(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_string_from_stylelist::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_web_html::Type_stylelist stylelist = vx_core::vx_any_from_any(vx_web_html::t_stylelist, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_web_html::f_string_from_stylelist(stylelist);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -12717,6 +12824,8 @@ namespace vx_web_html {
   vx_web_html::Func_string_from_propstyleunique t_string_from_propstyleunique = NULL;
   vx_web_html::Func_string_from_style_indent e_string_from_style_indent = NULL;
   vx_web_html::Func_string_from_style_indent t_string_from_style_indent = NULL;
+  vx_web_html::Func_string_from_stylelist e_string_from_stylelist = NULL;
+  vx_web_html::Func_string_from_stylelist t_string_from_stylelist = NULL;
   vx_web_html::Func_string_from_stylelist_indent e_string_from_stylelist_indent = NULL;
   vx_web_html::Func_string_from_stylelist_indent t_string_from_stylelist_indent = NULL;
   vx_web_html::Func_string_from_stylepropmap_indent e_string_from_stylepropmap_indent = NULL;
@@ -12979,6 +13088,10 @@ namespace vx_web_html {
       vx_core::vx_reserve_empty(vx_web_html::e_string_from_style_indent);
       vx_web_html::t_string_from_style_indent = new vx_web_html::Class_string_from_style_indent();
       vx_core::vx_reserve_type(vx_web_html::t_string_from_style_indent);
+      vx_web_html::e_string_from_stylelist = new vx_web_html::Class_string_from_stylelist();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_stylelist);
+      vx_web_html::t_string_from_stylelist = new vx_web_html::Class_string_from_stylelist();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_stylelist);
       vx_web_html::e_string_from_stylelist_indent = new vx_web_html::Class_string_from_stylelist_indent();
       vx_core::vx_reserve_empty(vx_web_html::e_string_from_stylelist_indent);
       vx_web_html::t_string_from_stylelist_indent = new vx_web_html::Class_string_from_stylelist_indent();
@@ -13103,6 +13216,7 @@ namespace vx_web_html {
       mapfunc["string<-propstylelist"] = vx_web_html::t_string_from_propstylelist;
       mapfunc["string<-propstyleunique"] = vx_web_html::t_string_from_propstyleunique;
       mapfunc["string<-style-indent"] = vx_web_html::t_string_from_style_indent;
+      mapfunc["string<-stylelist"] = vx_web_html::t_string_from_stylelist;
       mapfunc["string<-stylelist-indent"] = vx_web_html::t_string_from_stylelist_indent;
       mapfunc["string<-stylepropmap-indent"] = vx_web_html::t_string_from_stylepropmap_indent;
       mapfunc["string<-stylesheet-indent"] = vx_web_html::t_string_from_stylesheet_indent;

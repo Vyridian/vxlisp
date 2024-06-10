@@ -23,11 +23,11 @@ public final class UihtmlTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/ui/html/uihtml", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 7), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 60, ":tests", 23, ":total", 38), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 30), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 31), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 31), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 37), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 66, ":tests", 30, ":total", 45), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 37), 
+      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 38), 
+      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 38), 
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 44), 
       ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
     );
   }
@@ -48,9 +48,15 @@ public final class UihtmlTest {
         ":style-selected", 0
       ),
       ":funcmap", Core.t_intmap.vx_new(
+        ":boolean-layoutremove-html", 0,
+        ":boolean-layoutselected-html", 0,
+        ":boolean-layoutvisible-html", 0,
         ":boolean-print-html", 0,
+        ":boolean-writeclass<-ui", 0,
         ":boolean-writeeventsall<-ui", 0,
         ":boolean-writeeventsall<-uimap", 0,
+        ":boolean-writeselected<-ui", 0,
+        ":boolean-writevisible<-ui", 0,
         ":context-write", 0,
         ":divchild<-ui", 0,
         ":divchildlist<-uimap", 0,
@@ -60,8 +66,9 @@ public final class UihtmlTest {
         ":node-default<-ui-orig-parent", 0,
         ":node-image<-ui-orig-parent", 0,
         ":node-label<-ui-orig-parent", 0,
-        ":node-layout<-node-ui", 0,
+        ":node-layout<-node-ui-parent", 0,
         ":node<-ui-orig-parent", 0,
+        ":string-class<-ui", 0,
         ":string-style<-font", 0,
         ":string-style<-image", 0,
         ":string-stylename<-name-styletype", 0,

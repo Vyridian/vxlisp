@@ -455,6 +455,320 @@ export default class vx_ui_ui {
   static c_styletype_system = {vx_type: vx_ui_ui.t_styletype, vx_constdef: {pkgname: 'vx/ui/ui', name: 'styletype-system'}}
 
   /**
+   * @function boolean_layout_from_ui_parent_selected
+   * Writes to an html node adding or removing the selected class.
+   * @param  {ui} ui
+   * @param  {ui} parent
+   * @param  {boolean} selected
+   * @return {boolean}
+   */
+  static t_boolean_layout_from_ui_parent_selected = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_layout_from_ui_parent_selected = {
+    vx_type: vx_ui_ui.t_boolean_layout_from_ui_parent_selected
+  }
+
+  // (func boolean-layout<-ui-parent-selected)
+  static f_boolean_layout_from_ui_parent_selected(context, ui, parent, selected) {
+    let output = vx_core.e_boolean
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_boolean, "struct-2": vx_ui_ui.t_layoutengine},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const layoutengine = vx_ui_ui.f_layoutengine_readstate(context)
+        const uiselected = vx_core.f_copy(ui, ":selected", selected)
+        const iswrite = vx_ui_ui.f_boolean_write_from_ui_parent(uiselected, parent)
+        const fn_layoutselected = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_boolean_layoutselected_from_ui, "struct-2": vx_ui_ui.t_layoutengine}, layoutengine, ":boolean-layoutselected")
+        return vx_core.vx_any_from_func(vx_core.t_boolean, fn_layoutselected, uiselected)
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function boolean_layout_from_ui_parent_visible
+   * Writes to an html node adding or removing the hidden class.
+   * @param  {ui} ui
+   * @param  {ui} parent
+   * @param  {boolean} visible
+   * @return {boolean}
+   */
+  static t_boolean_layout_from_ui_parent_visible = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_layout_from_ui_parent_visible = {
+    vx_type: vx_ui_ui.t_boolean_layout_from_ui_parent_visible
+  }
+
+  // (func boolean-layout<-ui-parent-visible)
+  static f_boolean_layout_from_ui_parent_visible(context, ui, parent, visible) {
+    let output = vx_core.e_boolean
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_boolean, "struct-2": vx_ui_ui.t_layoutengine},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const layoutengine = vx_ui_ui.f_layoutengine_readstate(context)
+        const uivisible = vx_core.f_copy(
+          ui,
+          ":hidden",
+          vx_core.f_not(visible)
+        )
+        const iswrite = vx_ui_ui.f_boolean_write_from_ui_parent(uivisible, parent)
+        const fn_layoutvisible = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_boolean_layoutvisible_from_ui, "struct-2": vx_ui_ui.t_layoutengine}, layoutengine, ":boolean-layoutvisible")
+        return vx_core.vx_any_from_func(vx_core.t_boolean, fn_layoutvisible, uivisible)
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function boolean_layoutaddchild_from_ui_parent
+   * Writes a new ui on an existing parent.
+   * @param  {ui} uiarg
+   * @param  {ui} parent
+   * @return {boolean}
+   */
+  static t_boolean_layoutaddchild_from_ui_parent = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_layoutaddchild_from_ui_parent = {
+    vx_type: vx_ui_ui.t_boolean_layoutaddchild_from_ui_parent
+  }
+
+  // (func boolean-layoutaddchild<-ui-parent)
+  static f_boolean_layoutaddchild_from_ui_parent(context, uiarg, parent) {
+    let output = vx_core.e_boolean
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_boolean},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const ui2 = vx_ui_ui.f_ui_addlayout_from_ui(context, uiarg)
+        const iswrite = vx_ui_ui.f_boolean_write_from_ui_parent(ui2, parent)
+        const ui3 = vx_ui_ui.f_ui_layout_from_ui_orig_parent(
+          ui2,
+          vx_core.f_empty(
+            vx_ui_ui.t_ui
+          ),
+          parent
+        )
+        return iswrite
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function boolean_layoutremove_from_ui
+   * Removes html node with a given ui.
+   * @param  {ui} ui
+   * @return {boolean}
+   */
+  static t_boolean_layoutremove_from_ui = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_layoutremove_from_ui = {
+    vx_type: vx_ui_ui.t_boolean_layoutremove_from_ui
+  }
+
+  // (func boolean-layoutremove<-ui)
+  static f_boolean_layoutremove_from_ui(ui) {
+    let output = vx_core.e_boolean
+    return output
+  }
+
+  /**
+   * @function boolean_layoutremove_from_ui_keys
+   * Writes to an html node adding or removing the selected class.
+   * @param  {ui} ui
+   * @param  {stringlist} keys
+   * @return {boolean}
+   */
+  static t_boolean_layoutremove_from_ui_keys = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_layoutremove_from_ui_keys = {
+    vx_type: vx_ui_ui.t_boolean_layoutremove_from_ui_keys
+  }
+
+  // (func boolean-layoutremove<-ui-keys)
+  static f_boolean_layoutremove_from_ui_keys(context, ui, keys) {
+    let output = vx_core.e_boolean
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_boolean},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const uimap = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_uimap, "struct-2": vx_ui_ui.t_ui}, ui, ":uimap")
+        const writelist = vx_core.f_list_from_list_1(
+          {"any-1": vx_core.t_boolean, "any-2": vx_core.t_string, "list-1": vx_core.t_booleanlist, "list-2": vx_core.t_stringlist},
+          keys,
+          vx_core.f_new(vx_core.t_any_from_any, (key) => 
+            vx_core.f_let(
+              {"any-1": vx_core.t_boolean},
+              [],
+              vx_core.f_new(vx_core.t_any_from_func, () => {
+                const childui = vx_core.f_any_from_map({"any-1": vx_ui_ui.t_ui, "map-1": vx_ui_ui.t_uimap}, uimap, key)
+                return vx_ui_ui.f_boolean_layoutremove_from_ui_parent(context, childui, ui)
+              })
+            ))
+        )
+        return vx_core.f_and_1(writelist)
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function boolean_layoutremove_from_ui_parent
+   * Removes an html node given a ui.
+   * @param  {ui} ui
+   * @param  {ui} parent
+   * @return {boolean}
+   */
+  static t_boolean_layoutremove_from_ui_parent = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_layoutremove_from_ui_parent = {
+    vx_type: vx_ui_ui.t_boolean_layoutremove_from_ui_parent
+  }
+
+  // (func boolean-layoutremove<-ui-parent)
+  static f_boolean_layoutremove_from_ui_parent(context, ui, parent) {
+    let output = vx_core.e_boolean
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_boolean, "struct-2": vx_ui_ui.t_layoutengine},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const layoutengine = vx_ui_ui.f_layoutengine_readstate(context)
+        const uid = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_ui}, ui, ":uid")
+        const iswrite = vx_ui_ui.f_boolean_writeremove_from_ui_uid(parent, uid)
+        const fn_layoutremove = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_boolean_layoutremove_from_ui, "struct-2": vx_ui_ui.t_layoutengine}, layoutengine, ":boolean-layoutremove")
+        return vx_core.vx_any_from_func(vx_core.t_boolean, fn_layoutremove, ui)
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function boolean_layoutremove_from_ui_start_end
+   * Writes to an html node adding or removing the selected class.
+   * @param  {ui} ui
+   * @param  {int} start
+   * @param  {int} end
+   * @return {boolean}
+   */
+  static t_boolean_layoutremove_from_ui_start_end = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_layoutremove_from_ui_start_end = {
+    vx_type: vx_ui_ui.t_boolean_layoutremove_from_ui_start_end
+  }
+
+  // (func boolean-layoutremove<-ui-start-end)
+  static f_boolean_layoutremove_from_ui_start_end(context, ui, start, end) {
+    let output = vx_core.e_boolean
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_boolean},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const uimap = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_uimap, "struct-2": vx_ui_ui.t_ui}, ui, ":uimap")
+        const keys = vx_core.f_stringlist_from_map(uimap)
+        const subkeys = vx_collection.f_list_from_list_start_end({"any-1": vx_core.t_string, "list-1": vx_core.t_stringlist}, keys, start, end)
+        return vx_ui_ui.f_boolean_layoutremove_from_ui_keys(context, ui, subkeys)
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function boolean_layoutselected_from_ui
+   * Writes to an html node adding or removing the selected class.
+   * @param  {ui} ui
+   * @return {boolean}
+   */
+  static t_boolean_layoutselected_from_ui = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_layoutselected_from_ui = {
+    vx_type: vx_ui_ui.t_boolean_layoutselected_from_ui
+  }
+
+  // (func boolean-layoutselected<-ui)
+  static f_boolean_layoutselected_from_ui(ui) {
+    let output = vx_core.e_boolean
+    return output
+  }
+
+  /**
+   * @function boolean_layoutselected_from_ui_parent
+   * Writes to an html node adding or removing the selected class.
+   * @param  {ui} ui
+   * @param  {ui} parent
+   * @return {boolean}
+   */
+  static t_boolean_layoutselected_from_ui_parent = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_layoutselected_from_ui_parent = {
+    vx_type: vx_ui_ui.t_boolean_layoutselected_from_ui_parent
+  }
+
+  // (func boolean-layoutselected<-ui-parent)
+  static f_boolean_layoutselected_from_ui_parent(context, ui, parent) {
+    let output = vx_core.e_boolean
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_boolean, "struct-2": vx_ui_ui.t_layoutengine},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const layoutengine = vx_ui_ui.f_layoutengine_readstate(context)
+        const iswrite = vx_ui_ui.f_boolean_write_from_ui_parent(ui, parent)
+        const fn_layoutselected = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_boolean_layoutselected_from_ui, "struct-2": vx_ui_ui.t_layoutengine}, layoutengine, ":boolean-layoutselected")
+        return vx_core.vx_any_from_func(vx_core.t_boolean, fn_layoutselected, ui)
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function boolean_layoutselected_from_ui_selected
+   * Writes to an html node adding or removing the selected class.
+   * @param  {ui} ui
+   * @param  {int} selected
+   * @return {boolean}
+   */
+  static t_boolean_layoutselected_from_ui_selected = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_layoutselected_from_ui_selected = {
+    vx_type: vx_ui_ui.t_boolean_layoutselected_from_ui_selected
+  }
+
+  // (func boolean-layoutselected<-ui-selected)
+  static f_boolean_layoutselected_from_ui_selected(ui, selected) {
+    let output = vx_core.e_boolean
+    return output
+  }
+
+  /**
+   * @function boolean_layoutvisible_from_ui
+   * Writes to an html node adding or removing the hidden class.
+   * @param  {ui} ui
+   * @return {boolean}
+   */
+  static t_boolean_layoutvisible_from_ui = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_layoutvisible_from_ui = {
+    vx_type: vx_ui_ui.t_boolean_layoutvisible_from_ui
+  }
+
+  // (func boolean-layoutvisible<-ui)
+  static f_boolean_layoutvisible_from_ui(ui) {
+    let output = vx_core.e_boolean
+    return output
+  }
+
+  /**
    * @function boolean_print
    * Create a print ready version of ui
    * @param  {ui} ui
@@ -502,6 +816,69 @@ export default class vx_ui_ui {
   }
 
   /**
+   * @function boolean_write_from_ui_parent
+   * Returns true if the given ui was added to parent uimap
+   * @param  {ui} ui
+   * @param  {ui} parent
+   * @return {boolean}
+   */
+  static t_boolean_write_from_ui_parent = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_write_from_ui_parent = {
+    vx_type: vx_ui_ui.t_boolean_write_from_ui_parent
+  }
+
+  // (func boolean-write<-ui-parent)
+  static f_boolean_write_from_ui_parent(ui, parent) {
+    let output = vx_core.e_boolean
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_boolean, "map-1": vx_ui_ui.t_uimap},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const uid = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_ui}, ui, ":uid")
+        const uimap = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_uimap, "struct-2": vx_ui_ui.t_ui}, parent, ":uimap")
+        return vx_core.f_boolean_write_from_map_name_value(uimap, uid, ui)
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function boolean_writeremove_from_ui_uid
+   * Returns true if the given uid was removed from ui uimap
+   * @param  {ui} uiarg
+   * @param  {string} uid
+   * @return {boolean}
+   */
+  static t_boolean_writeremove_from_ui_uid = {
+    vx_type: vx_core.t_type
+  }
+  static e_boolean_writeremove_from_ui_uid = {
+    vx_type: vx_ui_ui.t_boolean_writeremove_from_ui_uid
+  }
+
+  // (func boolean-writeremove<-ui-uid)
+  static f_boolean_writeremove_from_ui_uid(uiarg, uid) {
+    let output = vx_core.e_boolean
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_boolean, "map-1": vx_ui_ui.t_uimap},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const uimap = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_uimap, "struct-2": vx_ui_ui.t_ui}, uiarg, ":uimap")
+        return vx_core.f_boolean_write_from_map_name_value(
+          uimap,
+          uid,
+          vx_core.f_empty(
+            vx_ui_ui.t_ui
+          )
+        )
+      })
+    )
+    return output
+  }
+
+  /**
    * @function boolean_writestate_from_ui
    * @param  {ui} ui
    * @return {boolean}
@@ -534,11 +911,11 @@ export default class vx_ui_ui {
           )
         )
         const isfound = vx_core.f_notempty_1(parentui)
-        const parent2 = vx_core.f_if_2(
-          {"any-1": vx_ui_ui.t_ui},
+        const iswrite = vx_core.f_if_2(
+          {"any-1": vx_core.t_boolean},
           vx_core.f_then(
             vx_core.f_new(vx_core.t_boolean_from_func, () => {return isfound}),
-            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_ui_ui.f_ui_writechild_from_ui_child(parentui, ui)})
+            vx_core.f_new(vx_core.t_any_from_func, () => {return vx_ui_ui.f_boolean_write_from_ui_parent(ui, parentui)})
           )
         )
         return isfound
@@ -608,6 +985,34 @@ export default class vx_ui_ui {
       fontfacelist,
       vx_core.f_new(vx_core.t_any_from_any, (fontface) => 
         vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_fontface}, fontface, ":name"))
+    )
+    return output
+  }
+
+  /**
+   * @function int_child_from_ui_uid
+   * Returns the position of the currently selected subui
+   * @param  {ui} ui
+   * @param  {string} uid
+   * @return {int}
+   */
+  static t_int_child_from_ui_uid = {
+    vx_type: vx_core.t_type
+  }
+  static e_int_child_from_ui_uid = {
+    vx_type: vx_ui_ui.t_int_child_from_ui_uid
+  }
+
+  // (func int-child<-ui-uid)
+  static f_int_child_from_ui_uid(ui, uid) {
+    let output = vx_core.e_int
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_int, "map-1": vx_ui_ui.t_uimap},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const uimap = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_uimap, "struct-2": vx_ui_ui.t_ui}, ui, ":uimap")
+        return vx_collection.f_int_from_map_key(uimap, uid)
+      })
     )
     return output
   }
@@ -1190,6 +1595,34 @@ export default class vx_ui_ui {
   }
 
   /**
+   * @function ui_child_from_ui_pos
+   * Returns then named child from a ui.
+   * @param  {ui} ui
+   * @param  {int} pos
+   * @return {ui}
+   */
+  static t_ui_child_from_ui_pos = {
+    vx_type: vx_core.t_type
+  }
+  static e_ui_child_from_ui_pos = {
+    vx_type: vx_ui_ui.t_ui_child_from_ui_pos
+  }
+
+  // (func ui-child<-ui-pos)
+  static f_ui_child_from_ui_pos(ui, pos) {
+    let output = vx_ui_ui.e_ui
+    output = vx_core.f_let(
+      {"any-1": vx_ui_ui.t_ui, "map-1": vx_ui_ui.t_uimap},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const childmap = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_uimap, "struct-2": vx_ui_ui.t_ui}, ui, ":uimap")
+        return vx_collection.f_any_from_map_pos({"any-1": vx_ui_ui.t_ui, "map-1": vx_ui_ui.t_uimap}, childmap, pos)
+      })
+    )
+    return output
+  }
+
+  /**
    * @function ui_child_from_ui_uid
    * Returns then named child from a ui.
    * @param  {ui} ui
@@ -1357,8 +1790,8 @@ export default class vx_ui_ui {
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const uichg1 = vx_ui_ui.f_ui_from_ui_selected(ui, selected)
-        const uichg2 = vx_ui_ui.f_ui_writechild_from_ui_child(parent, uichg1)
-        return vx_ui_ui.f_ui_layout_from_ui_orig_parent(uichg2, ui, parent)
+        const iswrite = vx_ui_ui.f_boolean_write_from_ui_parent(uichg1, parent)
+        return vx_ui_ui.f_ui_layout_from_ui_orig_parent(uichg1, ui, parent)
       })
     )
     return output
@@ -1386,7 +1819,7 @@ export default class vx_ui_ui {
       {"any-1": vx_ui_ui.t_ui},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const uichg = vx_ui_ui.f_ui_from_ui_visible(ui, visible)
+        const uichg = vx_ui_ui.f_ui_write_from_ui_visible(ui, visible)
         return vx_ui_ui.f_ui_layout_from_ui_orig_parent(uichg, ui, parent)
       })
     )
@@ -1441,7 +1874,7 @@ export default class vx_ui_ui {
 
   /**
    * @function ui_selected_from_ui
-   * Returns the ui of the first ui with selected=true
+   * Returns the first child of ui with selected=true
    * @param  {ui} ui
    * @return {ui}
    */
@@ -1467,21 +1900,48 @@ export default class vx_ui_ui {
   }
 
   /**
-   * @function ui_writechild_from_ui_child
+   * @function ui_visible_from_ui
+   * Returns the first child of ui with hidden=false
+   * @param  {ui} ui
+   * @return {ui}
+   */
+  static t_ui_visible_from_ui = {
+    vx_type: vx_core.t_type
+  }
+  static e_ui_visible_from_ui = {
+    vx_type: vx_ui_ui.t_ui_visible_from_ui
+  }
+
+  // (func ui-visible<-ui)
+  static f_ui_visible_from_ui(ui) {
+    let output = vx_ui_ui.e_ui
+    output = vx_core.f_let(
+      {"any-1": vx_ui_ui.t_ui, "list-1": vx_ui_ui.t_uilist},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const uilist = vx_ui_ui.f_uilist_visible_from_ui(ui)
+        return vx_core.f_first_from_list({"any-1": vx_ui_ui.t_ui, "list-1": vx_ui_ui.t_uilist}, uilist)
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function ui_write_from_ui_child
    * Returns the given ui with the child added to uimap
    * @param  {ui} ui
    * @param  {ui} child
    * @return {ui}
    */
-  static t_ui_writechild_from_ui_child = {
+  static t_ui_write_from_ui_child = {
     vx_type: vx_core.t_type
   }
-  static e_ui_writechild_from_ui_child = {
-    vx_type: vx_ui_ui.t_ui_writechild_from_ui_child
+  static e_ui_write_from_ui_child = {
+    vx_type: vx_ui_ui.t_ui_write_from_ui_child
   }
 
-  // (func ui-writechild<-ui-child)
-  static f_ui_writechild_from_ui_child(ui, child) {
+  // (func ui-write<-ui-child)
+  static f_ui_write_from_ui_child(ui, child) {
     let output = vx_ui_ui.e_ui
     output = vx_core.f_let(
       {"any-1": vx_ui_ui.t_ui},
@@ -1497,21 +1957,21 @@ export default class vx_ui_ui {
   }
 
   /**
-   * @function ui_writechildmap_from_ui_childmap
+   * @function ui_write_from_ui_childmap
    * Returns the given ui with the members of childmap added to uimap
    * @param  {ui} ui
    * @param  {uimap} childmap
    * @return {ui}
    */
-  static t_ui_writechildmap_from_ui_childmap = {
+  static t_ui_write_from_ui_childmap = {
     vx_type: vx_core.t_type
   }
-  static e_ui_writechildmap_from_ui_childmap = {
-    vx_type: vx_ui_ui.t_ui_writechildmap_from_ui_childmap
+  static e_ui_write_from_ui_childmap = {
+    vx_type: vx_ui_ui.t_ui_write_from_ui_childmap
   }
 
-  // (func ui-writechildmap<-ui-childmap)
-  static f_ui_writechildmap_from_ui_childmap(ui, childmap) {
+  // (func ui-write<-ui-childmap)
+  static f_ui_write_from_ui_childmap(ui, childmap) {
     let output = vx_ui_ui.e_ui
     output = vx_core.f_let(
       {"any-1": vx_ui_ui.t_ui},
@@ -1521,10 +1981,77 @@ export default class vx_ui_ui {
           {"any-1": vx_ui_ui.t_ui, "any-2": vx_ui_ui.t_ui, "map-1": vx_ui_ui.t_uimap, "map-2": vx_ui_ui.t_uimap},
           childmap,
           vx_core.f_new(vx_core.t_any_from_key_value, ([key, value]) => 
-            vx_ui_ui.f_ui_writechild_from_ui_child(ui, value))
+            vx_ui_ui.f_ui_write_from_ui_child(ui, value))
         )
         return ui
       })
+    )
+    return output
+  }
+
+  /**
+   * @function ui_write_from_ui_visible
+   * Return a ui after changing hidden to all but one child.
+   * @param  {ui} ui
+   * @param  {int} visible
+   * @return {ui}
+   */
+  static t_ui_write_from_ui_visible = {
+    vx_type: vx_core.t_type
+  }
+  static e_ui_write_from_ui_visible = {
+    vx_type: vx_ui_ui.t_ui_write_from_ui_visible
+  }
+
+  // (func ui-write<-ui-visible)
+  static f_ui_write_from_ui_visible(ui, visible) {
+    let output = vx_ui_ui.e_ui
+    output = vx_core.f_if_2(
+      {"any-1": vx_ui_ui.t_ui},
+      vx_core.f_then(
+        vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_lt(visible, 1)}),
+        vx_core.f_new(vx_core.t_any_from_func, () => {return ui})
+      ),
+      vx_core.f_else(
+        vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_let(
+          {"any-1": vx_ui_ui.t_ui},
+          [],
+          vx_core.f_new(vx_core.t_any_from_func, () => {
+            const uimap = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_uimap, "struct-2": vx_ui_ui.t_ui}, ui, ":uimap")
+            const uilist1 = vx_ui_ui.f_uilist_from_uimap(uimap)
+            const uilist2 = vx_core.f_list_from_list_intany(
+              {"any-1": vx_ui_ui.t_ui, "any-2": vx_ui_ui.t_ui, "list-1": vx_ui_ui.t_uilist, "list-2": vx_ui_ui.t_uilist},
+              uilist1,
+              vx_core.f_new(vx_core.t_any_from_int_any, (posval, uival) => 
+                vx_core.f_if_2(
+                  {"any-1": vx_ui_ui.t_ui},
+                  vx_core.f_then(
+                    vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq(posval, visible)}),
+                    vx_core.f_new(vx_core.t_any_from_func, () => {return vx_ui_ui.f_ui_write_from_ui_child(
+                      ui,
+                      vx_core.f_copy(
+                        uival,
+                        ":hidden",
+                        false
+                      )
+                    )})
+                  ),
+                  vx_core.f_else(
+                    vx_core.f_new(vx_core.t_any_from_func, () => {return vx_ui_ui.f_ui_write_from_ui_child(
+                      ui,
+                      vx_core.f_copy(
+                        uival,
+                        ":hidden",
+                        true
+                      )
+                    )})
+                  )
+                ))
+            )
+            return ui
+          })
+        )})
+      )
     )
     return output
   }
@@ -1723,68 +2250,6 @@ export default class vx_ui_ui {
   }
 
   /**
-   * @function ui_from_ui_visible
-   * Return a ui after changing hidden to all but one child.
-   * @param  {ui} ui
-   * @param  {int} visible
-   * @return {ui}
-   */
-  static t_ui_from_ui_visible = {
-    vx_type: vx_core.t_type
-  }
-  static e_ui_from_ui_visible = {
-    vx_type: vx_ui_ui.t_ui_from_ui_visible
-  }
-
-  // (func ui<-ui-visible)
-  static f_ui_from_ui_visible(ui, visible) {
-    let output = vx_ui_ui.e_ui
-    output = vx_core.f_if_2(
-      {"any-1": vx_ui_ui.t_ui},
-      vx_core.f_then(
-        vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_lt(visible, 1)}),
-        vx_core.f_new(vx_core.t_any_from_func, () => {return ui})
-      ),
-      vx_core.f_else(
-        vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_let(
-          {"any-1": vx_ui_ui.t_ui},
-          [],
-          vx_core.f_new(vx_core.t_any_from_func, () => {
-            const uimap = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_uimap, "struct-2": vx_ui_ui.t_ui}, ui, ":uimap")
-            const uilist1 = vx_ui_ui.f_uilist_from_uimap(uimap)
-            const uilist2 = vx_core.f_list_from_list_intany(
-              {"any-1": vx_ui_ui.t_ui, "any-2": vx_ui_ui.t_ui, "list-1": vx_ui_ui.t_uilist, "list-2": vx_ui_ui.t_uilist},
-              uilist1,
-              vx_core.f_new(vx_core.t_any_from_int_any, (posval, uival) => 
-                vx_core.f_if_2(
-                  {"any-1": vx_ui_ui.t_ui},
-                  vx_core.f_then(
-                    vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eq(posval, visible)}),
-                    vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(
-                      uival,
-                      ":hidden",
-                      false
-                    )})
-                  ),
-                  vx_core.f_else(
-                    vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_copy(
-                      uival,
-                      ":hidden",
-                      true
-                    )})
-                  )
-                ))
-            )
-            const childmap = vx_ui_ui.f_uimap_from_uilist(uilist2)
-            return vx_core.f_copy(ui, ":uimap", childmap)
-          })
-        )})
-      )
-    )
-    return output
-  }
-
-  /**
    * @function uid_selected_from_ui
    * Returns the uid of the first ui with selected=true
    * @param  {ui} ui
@@ -1894,6 +2359,45 @@ export default class vx_ui_ui {
             vx_core.f_if(
               {"any-1": vx_ui_ui.t_ui},
               vx_core.f_any_from_struct({"any-1": vx_core.t_boolean, "struct-2": vx_ui_ui.t_ui}, item, ":selected"),
+              item
+            ))
+        )
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function uilist_visible_from_ui
+   * Return a uilist of the ui with hidden=false
+   * @param  {ui} uiarg
+   * @return {uilist}
+   */
+  static t_uilist_visible_from_ui = {
+    vx_type: vx_core.t_type
+  }
+  static e_uilist_visible_from_ui = {
+    vx_type: vx_ui_ui.t_uilist_visible_from_ui
+  }
+
+  // (func uilist-visible<-ui)
+  static f_uilist_visible_from_ui(uiarg) {
+    let output = vx_ui_ui.e_uilist
+    output = vx_core.f_let(
+      {"any-1": vx_ui_ui.t_uilist, "any-2": vx_ui_ui.t_ui, "list-1": vx_ui_ui.t_uilist, "list-2": vx_ui_ui.t_uilist},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const uimap = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_uimap, "struct-2": vx_ui_ui.t_ui}, uiarg, ":uimap")
+        const uilist = vx_ui_ui.f_uilist_from_uimap(uimap)
+        return vx_collection.f_list_from_list_filter(
+          {"any-1": vx_ui_ui.t_ui, "any-2": vx_ui_ui.t_ui, "list-1": vx_ui_ui.t_uilist, "list-2": vx_ui_ui.t_uilist},
+          uilist,
+          vx_core.f_new(vx_core.t_any_from_any, (item) => 
+            vx_core.f_if(
+              {"any-1": vx_ui_ui.t_ui},
+              vx_core.f_not(
+                vx_core.f_any_from_struct({"any-1": vx_core.t_boolean, "struct-2": vx_ui_ui.t_ui}, item, ":hidden")
+              ),
               item
             ))
         )
@@ -2104,12 +2608,26 @@ export default class vx_ui_ui {
       "uiengine": vx_ui_ui.e_uiengine,
       "uilist": vx_ui_ui.e_uilist,
       "uimap": vx_ui_ui.e_uimap,
+      "boolean-layout<-ui-parent-selected": vx_ui_ui.e_boolean_layout_from_ui_parent_selected,
+      "boolean-layout<-ui-parent-visible": vx_ui_ui.e_boolean_layout_from_ui_parent_visible,
+      "boolean-layoutaddchild<-ui-parent": vx_ui_ui.e_boolean_layoutaddchild_from_ui_parent,
+      "boolean-layoutremove<-ui": vx_ui_ui.e_boolean_layoutremove_from_ui,
+      "boolean-layoutremove<-ui-keys": vx_ui_ui.e_boolean_layoutremove_from_ui_keys,
+      "boolean-layoutremove<-ui-parent": vx_ui_ui.e_boolean_layoutremove_from_ui_parent,
+      "boolean-layoutremove<-ui-start-end": vx_ui_ui.e_boolean_layoutremove_from_ui_start_end,
+      "boolean-layoutselected<-ui": vx_ui_ui.e_boolean_layoutselected_from_ui,
+      "boolean-layoutselected<-ui-parent": vx_ui_ui.e_boolean_layoutselected_from_ui_parent,
+      "boolean-layoutselected<-ui-selected": vx_ui_ui.e_boolean_layoutselected_from_ui_selected,
+      "boolean-layoutvisible<-ui": vx_ui_ui.e_boolean_layoutvisible_from_ui,
       "boolean-print": vx_ui_ui.e_boolean_print,
       "boolean-removestate-uiapp": vx_ui_ui.e_boolean_removestate_uiapp,
+      "boolean-write<-ui-parent": vx_ui_ui.e_boolean_write_from_ui_parent,
+      "boolean-writeremove<-ui-uid": vx_ui_ui.e_boolean_writeremove_from_ui_uid,
       "boolean-writestate<-ui": vx_ui_ui.e_boolean_writestate_from_ui,
       "boolean-writestate<-uiapp": vx_ui_ui.e_boolean_writestate_from_uiapp,
       "boolean-writestate<-uiengine": vx_ui_ui.e_boolean_writestate_from_uiengine,
       "fontfacemap<-fontfacelist": vx_ui_ui.e_fontfacemap_from_fontfacelist,
+      "int-child<-ui-uid": vx_ui_ui.e_int_child_from_ui_uid,
       "int-selected<-ui": vx_ui_ui.e_int_selected_from_ui,
       "int-visible<-ui": vx_ui_ui.e_int_visible_from_ui,
       "intlist-visible<-ui": vx_ui_ui.e_intlist_visible_from_ui,
@@ -2130,6 +2648,7 @@ export default class vx_ui_ui {
       "ui-addlayout<-ui-layoutengine": vx_ui_ui.e_ui_addlayout_from_ui_layoutengine,
       "ui-addlayout<-ui-layoutmap-else": vx_ui_ui.e_ui_addlayout_from_ui_layoutmap_else,
       "ui-addlayout<-ui-uiengine": vx_ui_ui.e_ui_addlayout_from_ui_uiengine,
+      "ui-child<-ui-pos": vx_ui_ui.e_ui_child_from_ui_pos,
       "ui-child<-ui-uid": vx_ui_ui.e_ui_child_from_ui_uid,
       "ui-from<-event": vx_ui_ui.e_ui_from_from_event,
       "ui-layout": vx_ui_ui.e_ui_layout,
@@ -2140,16 +2659,18 @@ export default class vx_ui_ui {
       "ui-readstate-uiapp": vx_ui_ui.e_ui_readstate_uiapp,
       "ui-readstate<-uid": vx_ui_ui.e_ui_readstate_from_uid,
       "ui-selected<-ui": vx_ui_ui.e_ui_selected_from_ui,
-      "ui-writechild<-ui-child": vx_ui_ui.e_ui_writechild_from_ui_child,
-      "ui-writechildmap<-ui-childmap": vx_ui_ui.e_ui_writechildmap_from_ui_childmap,
+      "ui-visible<-ui": vx_ui_ui.e_ui_visible_from_ui,
+      "ui-write<-ui-child": vx_ui_ui.e_ui_write_from_ui_child,
+      "ui-write<-ui-childmap": vx_ui_ui.e_ui_write_from_ui_childmap,
+      "ui-write<-ui-visible": vx_ui_ui.e_ui_write_from_ui_visible,
       "ui<-layout-ui-orig-parent": vx_ui_ui.e_ui_from_layout_ui_orig_parent,
       "ui<-ui-find": vx_ui_ui.e_ui_from_ui_find,
       "ui<-ui-selected": vx_ui_ui.e_ui_from_ui_selected,
-      "ui<-ui-visible": vx_ui_ui.e_ui_from_ui_visible,
       "uid-selected<-ui": vx_ui_ui.e_uid_selected_from_ui,
       "uiengine-readstate": vx_ui_ui.e_uiengine_readstate,
       "uiengine-render": vx_ui_ui.e_uiengine_render,
       "uilist-selected<-ui": vx_ui_ui.e_uilist_selected_from_ui,
+      "uilist-visible<-ui": vx_ui_ui.e_uilist_visible_from_ui,
       "uilist<-uimap": vx_ui_ui.e_uilist_from_uimap,
       "uimap-addlayout<-uimap-layoutmap-else": vx_ui_ui.e_uimap_addlayout_from_uimap_layoutmap_else,
       "uimap-layout<-uimap-parent": vx_ui_ui.e_uimap_layout_from_uimap_parent,
@@ -2157,12 +2678,26 @@ export default class vx_ui_ui {
       "uimap<-uimap-data": vx_ui_ui.e_uimap_from_uimap_data
     })
     const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
+      "boolean-layout<-ui-parent-selected": vx_ui_ui.t_boolean_layout_from_ui_parent_selected,
+      "boolean-layout<-ui-parent-visible": vx_ui_ui.t_boolean_layout_from_ui_parent_visible,
+      "boolean-layoutaddchild<-ui-parent": vx_ui_ui.t_boolean_layoutaddchild_from_ui_parent,
+      "boolean-layoutremove<-ui": vx_ui_ui.t_boolean_layoutremove_from_ui,
+      "boolean-layoutremove<-ui-keys": vx_ui_ui.t_boolean_layoutremove_from_ui_keys,
+      "boolean-layoutremove<-ui-parent": vx_ui_ui.t_boolean_layoutremove_from_ui_parent,
+      "boolean-layoutremove<-ui-start-end": vx_ui_ui.t_boolean_layoutremove_from_ui_start_end,
+      "boolean-layoutselected<-ui": vx_ui_ui.t_boolean_layoutselected_from_ui,
+      "boolean-layoutselected<-ui-parent": vx_ui_ui.t_boolean_layoutselected_from_ui_parent,
+      "boolean-layoutselected<-ui-selected": vx_ui_ui.t_boolean_layoutselected_from_ui_selected,
+      "boolean-layoutvisible<-ui": vx_ui_ui.t_boolean_layoutvisible_from_ui,
       "boolean-print": vx_ui_ui.t_boolean_print,
       "boolean-removestate-uiapp": vx_ui_ui.t_boolean_removestate_uiapp,
+      "boolean-write<-ui-parent": vx_ui_ui.t_boolean_write_from_ui_parent,
+      "boolean-writeremove<-ui-uid": vx_ui_ui.t_boolean_writeremove_from_ui_uid,
       "boolean-writestate<-ui": vx_ui_ui.t_boolean_writestate_from_ui,
       "boolean-writestate<-uiapp": vx_ui_ui.t_boolean_writestate_from_uiapp,
       "boolean-writestate<-uiengine": vx_ui_ui.t_boolean_writestate_from_uiengine,
       "fontfacemap<-fontfacelist": vx_ui_ui.t_fontfacemap_from_fontfacelist,
+      "int-child<-ui-uid": vx_ui_ui.t_int_child_from_ui_uid,
       "int-selected<-ui": vx_ui_ui.t_int_selected_from_ui,
       "int-visible<-ui": vx_ui_ui.t_int_visible_from_ui,
       "intlist-visible<-ui": vx_ui_ui.t_intlist_visible_from_ui,
@@ -2183,6 +2718,7 @@ export default class vx_ui_ui {
       "ui-addlayout<-ui-layoutengine": vx_ui_ui.t_ui_addlayout_from_ui_layoutengine,
       "ui-addlayout<-ui-layoutmap-else": vx_ui_ui.t_ui_addlayout_from_ui_layoutmap_else,
       "ui-addlayout<-ui-uiengine": vx_ui_ui.t_ui_addlayout_from_ui_uiengine,
+      "ui-child<-ui-pos": vx_ui_ui.t_ui_child_from_ui_pos,
       "ui-child<-ui-uid": vx_ui_ui.t_ui_child_from_ui_uid,
       "ui-from<-event": vx_ui_ui.t_ui_from_from_event,
       "ui-layout": vx_ui_ui.t_ui_layout,
@@ -2193,16 +2729,18 @@ export default class vx_ui_ui {
       "ui-readstate-uiapp": vx_ui_ui.t_ui_readstate_uiapp,
       "ui-readstate<-uid": vx_ui_ui.t_ui_readstate_from_uid,
       "ui-selected<-ui": vx_ui_ui.t_ui_selected_from_ui,
-      "ui-writechild<-ui-child": vx_ui_ui.t_ui_writechild_from_ui_child,
-      "ui-writechildmap<-ui-childmap": vx_ui_ui.t_ui_writechildmap_from_ui_childmap,
+      "ui-visible<-ui": vx_ui_ui.t_ui_visible_from_ui,
+      "ui-write<-ui-child": vx_ui_ui.t_ui_write_from_ui_child,
+      "ui-write<-ui-childmap": vx_ui_ui.t_ui_write_from_ui_childmap,
+      "ui-write<-ui-visible": vx_ui_ui.t_ui_write_from_ui_visible,
       "ui<-layout-ui-orig-parent": vx_ui_ui.t_ui_from_layout_ui_orig_parent,
       "ui<-ui-find": vx_ui_ui.t_ui_from_ui_find,
       "ui<-ui-selected": vx_ui_ui.t_ui_from_ui_selected,
-      "ui<-ui-visible": vx_ui_ui.t_ui_from_ui_visible,
       "uid-selected<-ui": vx_ui_ui.t_uid_selected_from_ui,
       "uiengine-readstate": vx_ui_ui.t_uiengine_readstate,
       "uiengine-render": vx_ui_ui.t_uiengine_render,
       "uilist-selected<-ui": vx_ui_ui.t_uilist_selected_from_ui,
+      "uilist-visible<-ui": vx_ui_ui.t_uilist_visible_from_ui,
       "uilist<-uimap": vx_ui_ui.t_uilist_from_uimap,
       "uimap-addlayout<-uimap-layoutmap-else": vx_ui_ui.t_uimap_addlayout_from_uimap_layoutmap_else,
       "uimap-layout<-uimap-parent": vx_ui_ui.t_uimap_layout_from_uimap_parent,
@@ -2636,6 +3174,21 @@ export default class vx_ui_ui {
         "boolean-print": {
           "name" : "boolean-print",
           "type" : vx_ui_ui.t_boolean_print,
+          "multi": false
+        },
+        "boolean-layoutremove": {
+          "name" : "boolean-layoutremove",
+          "type" : vx_ui_ui.t_boolean_layoutremove_from_ui,
+          "multi": false
+        },
+        "boolean-layoutselected": {
+          "name" : "boolean-layoutselected",
+          "type" : vx_ui_ui.t_boolean_layoutselected_from_ui,
+          "multi": false
+        },
+        "boolean-layoutvisible": {
+          "name" : "boolean-layoutvisible",
+          "type" : vx_ui_ui.t_boolean_layoutvisible_from_ui,
           "multi": false
         },
         "layoutmap": {
@@ -3181,6 +3734,204 @@ export default class vx_ui_ui {
     vx_ui_ui.e_uimap['vx_type'] = vx_ui_ui.t_uimap
     vx_ui_ui.e_uimap['vx_value'] = {}
 
+    // (func boolean-layout<-ui-parent-selected)
+    vx_ui_ui.t_boolean_layout_from_ui_parent_selected['vx_value'] = {
+      name          : "boolean-layout<-ui-parent-selected",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_boolean_layout_from_ui_parent_selected
+    }
+
+    // (func boolean-layout<-ui-parent-visible)
+    vx_ui_ui.t_boolean_layout_from_ui_parent_visible['vx_value'] = {
+      name          : "boolean-layout<-ui-parent-visible",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_boolean_layout_from_ui_parent_visible
+    }
+
+    // (func boolean-layoutaddchild<-ui-parent)
+    vx_ui_ui.t_boolean_layoutaddchild_from_ui_parent['vx_value'] = {
+      name          : "boolean-layoutaddchild<-ui-parent",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_boolean_layoutaddchild_from_ui_parent
+    }
+
+    // (func boolean-layoutremove<-ui)
+    vx_ui_ui.t_boolean_layoutremove_from_ui['vx_value'] = {
+      name          : "boolean-layoutremove<-ui",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_boolean_layoutremove_from_ui
+    }
+
+    // (func boolean-layoutremove<-ui-keys)
+    vx_ui_ui.t_boolean_layoutremove_from_ui_keys['vx_value'] = {
+      name          : "boolean-layoutremove<-ui-keys",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_boolean_layoutremove_from_ui_keys
+    }
+
+    // (func boolean-layoutremove<-ui-parent)
+    vx_ui_ui.t_boolean_layoutremove_from_ui_parent['vx_value'] = {
+      name          : "boolean-layoutremove<-ui-parent",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_boolean_layoutremove_from_ui_parent
+    }
+
+    // (func boolean-layoutremove<-ui-start-end)
+    vx_ui_ui.t_boolean_layoutremove_from_ui_start_end['vx_value'] = {
+      name          : "boolean-layoutremove<-ui-start-end",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_boolean_layoutremove_from_ui_start_end
+    }
+
+    // (func boolean-layoutselected<-ui)
+    vx_ui_ui.t_boolean_layoutselected_from_ui['vx_value'] = {
+      name          : "boolean-layoutselected<-ui",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_boolean_layoutselected_from_ui
+    }
+
+    // (func boolean-layoutselected<-ui-parent)
+    vx_ui_ui.t_boolean_layoutselected_from_ui_parent['vx_value'] = {
+      name          : "boolean-layoutselected<-ui-parent",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_boolean_layoutselected_from_ui_parent
+    }
+
+    // (func boolean-layoutselected<-ui-selected)
+    vx_ui_ui.t_boolean_layoutselected_from_ui_selected['vx_value'] = {
+      name          : "boolean-layoutselected<-ui-selected",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_boolean_layoutselected_from_ui_selected
+    }
+
+    // (func boolean-layoutvisible<-ui)
+    vx_ui_ui.t_boolean_layoutvisible_from_ui['vx_value'] = {
+      name          : "boolean-layoutvisible<-ui",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_boolean_layoutvisible_from_ui
+    }
+
     // (func boolean-print)
     vx_ui_ui.t_boolean_print['vx_value'] = {
       name          : "boolean-print",
@@ -3215,6 +3966,42 @@ export default class vx_ui_ui {
       properties    : [],
       proplast      : {},
       fn            : vx_ui_ui.f_boolean_removestate_uiapp
+    }
+
+    // (func boolean-write<-ui-parent)
+    vx_ui_ui.t_boolean_write_from_ui_parent['vx_value'] = {
+      name          : "boolean-write<-ui-parent",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_boolean_write_from_ui_parent
+    }
+
+    // (func boolean-writeremove<-ui-uid)
+    vx_ui_ui.t_boolean_writeremove_from_ui_uid['vx_value'] = {
+      name          : "boolean-writeremove<-ui-uid",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_boolean_writeremove_from_ui_uid
     }
 
     // (func boolean-writestate<-ui)
@@ -3287,6 +4074,24 @@ export default class vx_ui_ui {
       properties    : [],
       proplast      : {},
       fn            : vx_ui_ui.f_fontfacemap_from_fontfacelist
+    }
+
+    // (func int-child<-ui-uid)
+    vx_ui_ui.t_int_child_from_ui_uid['vx_value'] = {
+      name          : "int-child<-ui-uid",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_int_child_from_ui_uid
     }
 
     // (func int-selected<-ui)
@@ -3649,6 +4454,24 @@ export default class vx_ui_ui {
       fn            : vx_ui_ui.f_ui_addlayout_from_ui_uiengine
     }
 
+    // (func ui-child<-ui-pos)
+    vx_ui_ui.t_ui_child_from_ui_pos['vx_value'] = {
+      name          : "ui-child<-ui-pos",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_ui_child_from_ui_pos
+    }
+
     // (func ui-child<-ui-uid)
     vx_ui_ui.t_ui_child_from_ui_uid['vx_value'] = {
       name          : "ui-child<-ui-uid",
@@ -3829,9 +4652,9 @@ export default class vx_ui_ui {
       fn            : vx_ui_ui.f_ui_selected_from_ui
     }
 
-    // (func ui-writechild<-ui-child)
-    vx_ui_ui.t_ui_writechild_from_ui_child['vx_value'] = {
-      name          : "ui-writechild<-ui-child",
+    // (func ui-visible<-ui)
+    vx_ui_ui.t_ui_visible_from_ui['vx_value'] = {
+      name          : "ui-visible<-ui",
       pkgname       : "vx/ui/ui",
       extends       : ":func",
       idx           : 0,
@@ -3844,12 +4667,12 @@ export default class vx_ui_ui {
       traits        : [],
       properties    : [],
       proplast      : {},
-      fn            : vx_ui_ui.f_ui_writechild_from_ui_child
+      fn            : vx_ui_ui.f_ui_visible_from_ui
     }
 
-    // (func ui-writechildmap<-ui-childmap)
-    vx_ui_ui.t_ui_writechildmap_from_ui_childmap['vx_value'] = {
-      name          : "ui-writechildmap<-ui-childmap",
+    // (func ui-write<-ui-child)
+    vx_ui_ui.t_ui_write_from_ui_child['vx_value'] = {
+      name          : "ui-write<-ui-child",
       pkgname       : "vx/ui/ui",
       extends       : ":func",
       idx           : 0,
@@ -3862,7 +4685,43 @@ export default class vx_ui_ui {
       traits        : [],
       properties    : [],
       proplast      : {},
-      fn            : vx_ui_ui.f_ui_writechildmap_from_ui_childmap
+      fn            : vx_ui_ui.f_ui_write_from_ui_child
+    }
+
+    // (func ui-write<-ui-childmap)
+    vx_ui_ui.t_ui_write_from_ui_childmap['vx_value'] = {
+      name          : "ui-write<-ui-childmap",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_ui_write_from_ui_childmap
+    }
+
+    // (func ui-write<-ui-visible)
+    vx_ui_ui.t_ui_write_from_ui_visible['vx_value'] = {
+      name          : "ui-write<-ui-visible",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_ui_write_from_ui_visible
     }
 
     // (func ui<-layout-ui-orig-parent)
@@ -3917,24 +4776,6 @@ export default class vx_ui_ui {
       properties    : [],
       proplast      : {},
       fn            : vx_ui_ui.f_ui_from_ui_selected
-    }
-
-    // (func ui<-ui-visible)
-    vx_ui_ui.t_ui_from_ui_visible['vx_value'] = {
-      name          : "ui<-ui-visible",
-      pkgname       : "vx/ui/ui",
-      extends       : ":func",
-      idx           : 0,
-      allowfuncs    : [],
-      disallowfuncs : [],
-      allowtypes    : [],
-      disallowtypes : [],
-      allowvalues   : [],
-      disallowvalues: [],
-      traits        : [],
-      properties    : [],
-      proplast      : {},
-      fn            : vx_ui_ui.f_ui_from_ui_visible
     }
 
     // (func uid-selected<-ui)
@@ -4007,6 +4848,24 @@ export default class vx_ui_ui {
       properties    : [],
       proplast      : {},
       fn            : vx_ui_ui.f_uilist_selected_from_ui
+    }
+
+    // (func uilist-visible<-ui)
+    vx_ui_ui.t_uilist_visible_from_ui['vx_value'] = {
+      name          : "uilist-visible<-ui",
+      pkgname       : "vx/ui/ui",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_ui_ui.f_uilist_visible_from_ui
     }
 
     // (func uilist<-uimap)

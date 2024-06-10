@@ -33,9 +33,12 @@
      layout-app-html
      layout-image-html
      layout-label-html))
-  :layoutelse layout-else-html
-  :boolean-print boolean-print-html
-  :stylesheetrender stylesheet-layout-html)
+  :layoutelse             layout-else-html
+  :boolean-print          boolean-print-html
+  :boolean-layoutremove   boolean-layoutremove-html
+  :boolean-layoutselected boolean-layoutselected-html
+  :boolean-layoutvisible  boolean-layoutvisible-html
+  :stylesheetrender       stylesheet-layout-html)
  :doc "Html layout engine used to render html from ui and stylesheet")
 
 (const style-hidden : html/style
@@ -47,6 +50,29 @@
  (html/style
   :name ".style-selected")
  :doc "")
+
+(func boolean-layoutselected-html : boolean
+ [ui : ui/ui]
+ (boolean-writeclass<-ui ui)
+ :sideeffects "Changes HTML class element."
+ :clientserver :client
+ :doc "Removes html node with a given ui.")
+
+(func boolean-layoutremove-html : boolean
+ [ui : ui/ui]
+ (let : boolean
+  [id : string := (:uid ui)]
+  (doc/boolean-remove<-id id))
+ :sideeffects "Changes HTML class element."
+ :clientserver :client
+ :doc "Removes html node with a given ui.")
+
+(func boolean-layoutvisible-html : boolean
+ [ui : ui/ui]
+ (boolean-writeclass<-ui ui)
+ :sideeffects "Changes HTML class element."
+ :clientserver :client
+ :doc "Removes html node with a given ui.")
 
 (func boolean-print-html : boolean
  [ui : ui/ui]
@@ -65,6 +91,18 @@
    styletext))
  :context
  :doc "Create a print ready version of ui")
+
+(func boolean-writeclass<-ui : boolean
+ [ui : ui/ui]
+ (let : boolean
+  [id : string := (:uid ui)
+   sclass : string :=
+    (string-class<-ui ui)]
+  (boolean-write<-id-attribute-value
+   id "class" sclass))
+ :sideeffects "Changes HTML class element."
+ :clientserver :client
+ :doc "Writes to an html node adding or removing the given hidden class.")
 
 (func boolean-writeeventsall<-ui : boolean
  [ui : ui/ui]
@@ -92,6 +130,20 @@
        value)))]
   (and boollist))
  :doc "Write the events for each ui and subui to the dom.")
+
+(func boolean-writeselected<-ui : boolean
+ [ui : ui/ui]
+ (boolean-writeclass<-ui ui)
+ :sideeffects "Changes HTML class element."
+ :clientserver :client
+ :doc "Writes to an html node adding or removing the selected class.")
+
+(func boolean-writevisible<-ui : boolean
+ [ui : ui/ui]
+ (boolean-writeclass<-ui ui)
+ :sideeffects "Changes HTML class element."
+ :clientserver :client
+ :doc "Writes to an html node adding or removing the hidden class.")
 
 (func context-write : context
  (doc/context-write)
@@ -272,19 +324,30 @@
    :text text))
  :doc "")
 
-(func node-layout<-node-ui : html/node
- [node : html/node
-  ui   : ui]
+(func node-layout<-node-ui-parent : html/node
+ [node   : html/node
+  ui     : ui
+  parent : ui]
  (let : html/node
-  [htmltext : string :=
-   (html/string<-node-indent
-    node 2)
+  [id : string := (:uid ui)
+   parentid : string := (:uid parent)
+   htmltext : string :=
+    (html/string<-node-indent
+     node 2)
    htmldone : boolean :=
-    (doc/boolean-replace<-ui-htmltext
-     ui htmltext)]
+    (doc/boolean-replace<-id-parent-htmltext
+     id parentid htmltext)]
   node)
  :sideeffects "UI altered"
  :doc "")
+
+(func string-class<-ui : string
+ [ui : ui/ui]
+ (let : string
+  [htmlstyles : html/stylelist :=
+    (stylelist-extra<-ui ui)]
+  (string<-stylelist htmlstyles))
+ :doc "Returns a class string given a ui.")
 
 (func string-style<-font : string
  [font : ui/font]
@@ -798,8 +861,8 @@
     (node-app<-ui-orig-parent
      ui orig parent)
    nodechg : html/node :=
-    (node-layout<-node-ui
-     node ui)
+    (node-layout<-node-ui-parent
+     node ui parent)
    iswrite : boolean :=
     (boolean-writeeventsall<-ui ui)]
   ui)
@@ -815,8 +878,8 @@
     (node-default<-ui-orig-parent
      ui orig parent)
    nodechg : html/node :=
-    (node-layout<-node-ui
-     node ui)
+    (node-layout<-node-ui-parent
+     node ui parent)
    iswrite : boolean :=
     (boolean-writeeventsall<-ui ui)]
   ui)
@@ -831,8 +894,8 @@
     (node-image<-ui-orig-parent
      ui orig parent)
    nodechg : html/node :=
-    (node-layout<-node-ui
-     node ui)
+    (node-layout<-node-ui-parent
+     node ui parent)
    iswrite : boolean :=
     (boolean-writeeventsall<-ui ui)]
   ui)
@@ -848,8 +911,8 @@
     (node-label<-ui-orig-parent
      ui orig parent)
    nodechg : html/node :=
-    (node-layout<-node-ui
-     node ui)
+    (node-layout<-node-ui-parent
+     node ui parent)
    iswrite : boolean :=
     (boolean-writeeventsall<-ui ui)]
   ui)

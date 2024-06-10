@@ -1327,6 +1327,78 @@ public final class CoreTest {
     return output;
   }
 
+  static Test.Type_testcase f_boolean_write_from_map_name_value(final Core.Type_context context) {
+    Test.Type_testcase output = Test.t_testcase.vx_new(
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "boolean-write<-map-name-value",
+      ":describelist",
+      Test.t_testdescribelist.vx_new(
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n (stringmutablemap\n  :b \"y\"\n  :a \"x\")\n (let : stringmutablemap\n  [smap : stringmutablemap :=\n    (stringmutablemap\n     :b \"y\")\n   iswrite : boolean :=\n    (boolean-write<-map-name-value\n     smap :a \"x\")]\n  smap))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.f_new(
+                Core.t_stringmutablemap,
+                Core.t_anylist.vx_new(
+                  Core.vx_new_string(":b"),
+                  Core.vx_new_string("y"),
+                  Core.vx_new_string(":a"),
+                  Core.vx_new_string("x")
+                )
+              ),
+              Core.f_let(
+                Core.t_stringmutablemap,
+                Core.t_any_from_func.vx_fn_new(() -> {
+                  final Core.Type_stringmutablemap smap = Core.f_new(
+                    Core.t_stringmutablemap,
+                    Core.t_anylist.vx_new(
+                        Core.vx_new_string(":b"),
+                        Core.vx_new_string("y")
+                    )
+                  );
+                  final Core.Type_boolean iswrite = Core.f_boolean_write_from_map_name_value(smap, Core.vx_new_string(":a"), Core.vx_new_string("x"));
+                  return smap;
+                })
+              )
+            )
+        ),
+        Test.t_testdescribe.vx_new(
+          ":describename", "(test\n (stringmutablemap\n  :a \"x\")\n (let : stringmutablemap\n  [smap : stringmutablemap :=\n    (stringmutablemap\n     :b \"y\"\n     :a \"x\")\n   iswrite : boolean :=\n    (boolean-write<-map-name-value\n     smap :b \"\")]\n  smap))",
+          ":testresult",
+            Test.f_test(
+              context,
+              Core.f_new(
+                Core.t_stringmutablemap,
+                Core.t_anylist.vx_new(
+                  Core.vx_new_string(":a"),
+                  Core.vx_new_string("x")
+                )
+              ),
+              Core.f_let(
+                Core.t_stringmutablemap,
+                Core.t_any_from_func.vx_fn_new(() -> {
+                  final Core.Type_stringmutablemap smap = Core.f_new(
+                    Core.t_stringmutablemap,
+                    Core.t_anylist.vx_new(
+                        Core.vx_new_string(":b"),
+                        Core.vx_new_string("y"),
+                        Core.vx_new_string(":a"),
+                        Core.vx_new_string("x")
+                    )
+                  );
+                  final Core.Type_boolean iswrite = Core.f_boolean_write_from_map_name_value(smap, Core.vx_new_string(":b"), Core.vx_new_string(""));
+                  return smap;
+                })
+              )
+            )
+        )
+      )
+    );
+    return output;
+  }
+
   static Test.Type_testcase f_compare(final Core.Type_context context) {
     Test.Type_testcase output = Test.t_testcase.vx_new(
       ":passfail", false,
@@ -3109,6 +3181,7 @@ public final class CoreTest {
       CoreTest.f_any_from_list_start_reduce(context),
       CoreTest.f_any_from_map(context),
       CoreTest.f_any_from_map_start_reduce(context),
+      CoreTest.f_boolean_write_from_map_name_value(context),
       CoreTest.f_compare(context),
       CoreTest.f_contains(context),
       CoreTest.f_contains_1(context),
@@ -3159,12 +3232,12 @@ public final class CoreTest {
     return Test.t_testcoveragesummary.vx_new(
       ":testpkg",   "vx/core", 
       ":constnums", Test.t_testcoveragenums.vx_new(":pct", 14, ":tests", 2, ":total", 14), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 89, ":tests", 229, ":total", 255), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 54, ":tests", 73, ":total", 134), 
+      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 89, ":tests", 230, ":total", 256), 
+      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 55, ":tests", 74, ":total", 134), 
       ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 166), 
       ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 1, ":total", 166), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 35, ":tests", 80, ":total", 223), 
-      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 6, ":tests", 5, ":total", 75)
+      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 36, ":tests", 81, ":total", 224), 
+      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 6, ":tests", 5, ":total", 76)
     );
   }
 
@@ -3235,6 +3308,7 @@ public final class CoreTest {
         ":stringlist", 0,
         ":stringlistlist", 0,
         ":stringmap", 0,
+        ":stringmutablemap", 0,
         ":struct", 0,
         ":thenelse", 0,
         ":thenelselist", 0,
@@ -3329,7 +3403,7 @@ public final class CoreTest {
         ":any<-struct", 0,
         ":async", 0,
         ":boolean-permission<-func", 0,
-        ":boolean-write<-map-name-value", 0,
+        ":boolean-write<-map-name-value", 2,
         ":boolean<-any", 0,
         ":boolean<-func", 0,
         ":boolean<-none", 0,

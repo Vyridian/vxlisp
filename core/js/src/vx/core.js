@@ -50,10 +50,14 @@ export default class vx_core {
     let output = vx_core.c_true
     const mapany = valuemap['vx_value']
    	let key = name
-	   if (key.startsWith(':')) {
-	     key = key.substring(1)
+    if (key.startsWith(':')) {
+      key = key.substring(1)
    	}
-    mapany[key] = value
+    if (vx_core.f_is_empty_1(value)) {
+      delete mapany[key]
+    } else {
+      mapany[key] = value
+    }
     return output
   }
 
@@ -1595,6 +1599,13 @@ export default class vx_core {
    */
   static t_stringmap = {}
   static e_stringmap = {vx_type: vx_core.t_stringmap}
+
+  /**
+   * type: stringmutablemap
+   * A mutable map of string. Note: Mutables are dangerous.
+   */
+  static t_stringmutablemap = {}
+  static e_stringmutablemap = {vx_type: vx_core.t_stringmutablemap}
 
   /**
    * type: struct
@@ -5935,6 +5946,7 @@ export default class vx_core {
       "stringlist": vx_core.e_stringlist,
       "stringlistlist": vx_core.e_stringlistlist,
       "stringmap": vx_core.e_stringmap,
+      "stringmutablemap": vx_core.e_stringmutablemap,
       "struct": vx_core.e_struct,
       "thenelse": vx_core.e_thenelse,
       "thenelselist": vx_core.e_thenelselist,
@@ -6346,6 +6358,7 @@ export default class vx_core {
       "stringlist": vx_core.t_stringlist,
       "stringlistlist": vx_core.t_stringlistlist,
       "stringmap": vx_core.t_stringmap,
+      "stringmutablemap": vx_core.t_stringmutablemap,
       "struct": vx_core.t_struct,
       "thenelse": vx_core.t_thenelse,
       "thenelselist": vx_core.t_thenelselist,
@@ -7837,6 +7850,25 @@ export default class vx_core {
     }
     vx_core.e_stringmap['vx_type'] = vx_core.t_stringmap
     vx_core.e_stringmap['vx_value'] = {}
+
+    // (type stringmutablemap)
+    vx_core.t_stringmutablemap['vx_type'] = vx_core.t_type
+    vx_core.t_stringmutablemap['vx_value'] = {
+      name          : "stringmutablemap",
+      pkgname       : "vx/core",
+      extends       : ":map",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [vx_core.t_string],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {},
+      proplast      : {}
+    }
+    vx_core.e_stringmutablemap['vx_type'] = vx_core.t_stringmutablemap
+    vx_core.e_stringmutablemap['vx_value'] = {}
 
     // (type struct)
     vx_core.t_struct['vx_type'] = vx_core.t_type

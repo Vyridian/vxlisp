@@ -263,6 +263,10 @@ namespace vx_core {
   typedef Abstract_stringmap* Type_stringmap;
   extern Type_stringmap e_stringmap;
   extern Type_stringmap t_stringmap;
+  class Abstract_stringmutablemap;
+  typedef Abstract_stringmutablemap* Type_stringmutablemap;
+  extern Type_stringmutablemap e_stringmutablemap;
+  extern Type_stringmutablemap t_stringmutablemap;
   class Abstract_struct;
   typedef Abstract_struct* Type_struct;
   extern Type_struct e_struct;
@@ -5284,6 +5288,45 @@ namespace vx_core {
   public:
     Class_stringmap();
     virtual ~Class_stringmap() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+    virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) override;
+    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const override;
+    virtual std::map<std::string, vx_core::Type_string> vx_mapstring() const override;
+    virtual vx_core::Type_string vx_get_string(vx_core::Type_string key) const override;
+  };
+
+  // (type stringmutablemap)
+  class Abstract_stringmutablemap : public virtual vx_core::Abstract_map {
+  public:
+    Abstract_stringmutablemap() {};
+    virtual ~Abstract_stringmutablemap() = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+    // vx_map()
+    virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_set(name, value)
+    virtual vx_core::Type_boolean vx_set(vx_core::Type_string name, vx_core::Type_any value) = 0;
+    // vx_new_from_map(T, Map<T>)
+    virtual vx_core::Type_any vx_new_from_map(vx_core::vx_Type_mapany mapval) const = 0;
+    std::map<std::string, vx_core::Type_string> vx_p_map;
+    // vx_mapstring()
+    virtual std::map<std::string, vx_core::Type_string> vx_mapstring() const = 0;
+    // vx_get_string(key)
+    virtual vx_core::Type_string vx_get_string(vx_core::Type_string key) const = 0;
+  };
+  class Class_stringmutablemap : public virtual Abstract_stringmutablemap {
+  public:
+    Class_stringmutablemap();
+    virtual ~Class_stringmutablemap() override;
     virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
     virtual vx_core::Type_any vx_empty() const override;

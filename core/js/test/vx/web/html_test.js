@@ -26,11 +26,11 @@ export default class vx_web_html_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/web/html", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 98, ":tests", 71, ":total", 72), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 17, ":tests", 7, ":total", 40), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 98, ":tests", 72, ":total", 73), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 17, ":tests", 7, ":total", 41), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 9, ":tests", 7, ":total", 72), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 9, ":tests", 7, ":total", 73), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 32)
     )
   }
@@ -106,6 +106,7 @@ export default class vx_web_html_test {
           "string<-propstylelist", 0,
           "string<-propstyleunique", 0,
           "string<-style-indent", 0,
+          "string<-stylelist", 0,
           "string<-stylelist-indent", 0,
           "string<-stylepropmap-indent", 0,
           "string<-stylesheet-indent", 0,

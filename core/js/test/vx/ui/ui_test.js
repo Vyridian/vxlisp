@@ -29,11 +29,11 @@ export default class vx_ui_ui_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/ui/ui", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 41), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 61, ":tests", 74, ":total", 120), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 13, ":tests", 7, ":total", 51), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 66, ":tests", 91, ":total", 137), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 10, ":tests", 7, ":total", 68), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 5, ":tests", 7, ":total", 120), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 5, ":tests", 7, ":total", 137), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 28)
     )
   }
@@ -122,12 +122,26 @@ export default class vx_ui_ui_test {
       "funcmap",
         vx_core.f_new(
           vx_core.t_intmap,
+          "boolean-layout<-ui-parent-selected", 0,
+          "boolean-layout<-ui-parent-visible", 0,
+          "boolean-layoutaddchild<-ui-parent", 0,
+          "boolean-layoutremove<-ui", 0,
+          "boolean-layoutremove<-ui-keys", 0,
+          "boolean-layoutremove<-ui-parent", 0,
+          "boolean-layoutremove<-ui-start-end", 0,
+          "boolean-layoutselected<-ui", 0,
+          "boolean-layoutselected<-ui-parent", 0,
+          "boolean-layoutselected<-ui-selected", 0,
+          "boolean-layoutvisible<-ui", 0,
           "boolean-print", 0,
           "boolean-removestate-uiapp", 0,
+          "boolean-write<-ui-parent", 0,
+          "boolean-writeremove<-ui-uid", 0,
           "boolean-writestate<-ui", 0,
           "boolean-writestate<-uiapp", 1,
           "boolean-writestate<-uiengine", 0,
           "fontfacemap<-fontfacelist", 0,
+          "int-child<-ui-uid", 0,
           "int-selected<-ui", 0,
           "int-visible<-ui", 0,
           "intlist-visible<-ui", 0,
@@ -148,6 +162,7 @@ export default class vx_ui_ui_test {
           "ui-addlayout<-ui-layoutengine", 0,
           "ui-addlayout<-ui-layoutmap-else", 0,
           "ui-addlayout<-ui-uiengine", 0,
+          "ui-child<-ui-pos", 0,
           "ui-child<-ui-uid", 0,
           "ui-from<-event", 0,
           "ui-layout", 0,
@@ -158,16 +173,18 @@ export default class vx_ui_ui_test {
           "ui-readstate-uiapp", 1,
           "ui-readstate<-uid", 1,
           "ui-selected<-ui", 0,
-          "ui-writechild<-ui-child", 0,
-          "ui-writechildmap<-ui-childmap", 0,
+          "ui-visible<-ui", 0,
+          "ui-write<-ui-child", 0,
+          "ui-write<-ui-childmap", 0,
+          "ui-write<-ui-visible", 1,
           "ui<-layout-ui-orig-parent", 0,
           "ui<-ui-find", 1,
           "ui<-ui-selected", 1,
-          "ui<-ui-visible", 1,
           "uid-selected<-ui", 0,
           "uiengine-readstate", 0,
           "uiengine-render", 0,
           "uilist-selected<-ui", 0,
+          "uilist-visible<-ui", 0,
           "uilist<-uimap", 0,
           "uimap-addlayout<-uimap-layoutmap-else", 0,
           "uimap-layout<-uimap-parent", 0,
@@ -355,6 +372,73 @@ export default class vx_ui_ui_test {
     return output
   }
 
+  static f_ui_write_from_ui_visible(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/ui/ui",
+      ":casename", "ui-write<-ui-visible",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n (ui\n  :uimap\n   (uimap\n    :a\n     (ui\n      :uid \"a\"\n      :hidden true)\n    :b\n     (ui\n      :uid \"b\")))\n (ui-write<-ui-visible\n  (ui\n   :uimap\n    (uimap\n     :a\n      (ui\n       :uid \"a\")\n     :b\n      (ui\n       :uid \"b\"\n       :hidden true)))\n  2))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              vx_core.f_new(
+                vx_ui_ui.t_ui,
+                ":uimap",
+                vx_core.f_new(
+                  vx_ui_ui.t_uimap,
+                  ":a",
+                  vx_core.f_new(
+                    vx_ui_ui.t_ui,
+                    ":uid",
+                    "a",
+                    ":hidden",
+                    true
+                  ),
+                  ":b",
+                  vx_core.f_new(
+                    vx_ui_ui.t_ui,
+                    ":uid",
+                    "b"
+                  )
+                )
+              ),
+              vx_ui_ui.f_ui_write_from_ui_visible(
+                vx_core.f_new(
+                  vx_ui_ui.t_ui,
+                  ":uimap",
+                  vx_core.f_new(
+                    vx_ui_ui.t_uimap,
+                    ":a",
+                    vx_core.f_new(
+                      vx_ui_ui.t_ui,
+                      ":uid",
+                      "a"
+                    ),
+                    ":b",
+                    vx_core.f_new(
+                      vx_ui_ui.t_ui,
+                      ":uid",
+                      "b",
+                      ":hidden",
+                      true
+                    )
+                  )
+                ),
+                2
+              )
+            )
+          )
+        )
+    )
+    return output
+  }
+
   static f_ui_from_ui_find(context) {
     const output = vx_core.f_new(
       vx_test.t_testcase,
@@ -477,73 +561,6 @@ export default class vx_ui_ui_test {
     return output
   }
 
-  static f_ui_from_ui_visible(context) {
-    const output = vx_core.f_new(
-      vx_test.t_testcase,
-      ":passfail", false,
-      ":testpkg", "vx/ui/ui",
-      ":casename", "ui<-ui-visible",
-      ":describelist",
-        vx_core.f_new(
-          vx_test.t_testdescribelist,
-          vx_core.f_new(
-            vx_test.t_testdescribe,
-            ":describename", "(test\n (ui\n  :uimap\n   (uimap\n    :a\n     (ui\n      :uid \"a\"\n      :hidden true)\n    :b\n     (ui\n      :uid \"b\")))\n (ui<-ui-visible\n  (ui\n   :uimap\n    (uimap\n     :a\n      (ui\n       :uid \"a\")\n     :b\n      (ui\n       :uid \"b\"\n       :hidden true)))\n  2))",
-            ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_new(
-                vx_ui_ui.t_ui,
-                ":uimap",
-                vx_core.f_new(
-                  vx_ui_ui.t_uimap,
-                  ":a",
-                  vx_core.f_new(
-                    vx_ui_ui.t_ui,
-                    ":uid",
-                    "a",
-                    ":hidden",
-                    true
-                  ),
-                  ":b",
-                  vx_core.f_new(
-                    vx_ui_ui.t_ui,
-                    ":uid",
-                    "b"
-                  )
-                )
-              ),
-              vx_ui_ui.f_ui_from_ui_visible(
-                vx_core.f_new(
-                  vx_ui_ui.t_ui,
-                  ":uimap",
-                  vx_core.f_new(
-                    vx_ui_ui.t_uimap,
-                    ":a",
-                    vx_core.f_new(
-                      vx_ui_ui.t_ui,
-                      ":uid",
-                      "a"
-                    ),
-                    ":b",
-                    vx_core.f_new(
-                      vx_ui_ui.t_ui,
-                      ":uid",
-                      "b",
-                      ":hidden",
-                      true
-                    )
-                  )
-                ),
-                2
-              )
-            )
-          )
-        )
-    )
-    return output
-  }
-
   static test_cases(context) {
     const output = vx_core.f_new(
       vx_test.t_testcaselist,
@@ -551,9 +568,9 @@ export default class vx_ui_ui_test {
       vx_ui_ui_test.f_string_parentuid_from_uid(context),
       vx_ui_ui_test.f_ui_readstate_uiapp(context),
       vx_ui_ui_test.f_ui_readstate_from_uid(context),
+      vx_ui_ui_test.f_ui_write_from_ui_visible(context),
       vx_ui_ui_test.f_ui_from_ui_find(context),
-      vx_ui_ui_test.f_ui_from_ui_selected(context),
-      vx_ui_ui_test.f_ui_from_ui_visible(context)
+      vx_ui_ui_test.f_ui_from_ui_selected(context)
     )
     return output
   }

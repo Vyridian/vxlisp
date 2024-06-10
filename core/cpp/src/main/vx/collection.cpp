@@ -1047,6 +1047,292 @@ namespace vx_collection {
     }
 
   //}
+  /**
+   * @function any_from_map_pos
+   * Returns then numbered child from a map.
+   * @param  {map-1} map
+   * @param  {int} pos
+   * @return {any-1}
+   * (func any<-map-pos)
+   */
+  // (func any<-map-pos)
+  // class Class_any_from_map_pos {
+    Abstract_any_from_map_pos::~Abstract_any_from_map_pos() {}
+
+    Class_any_from_map_pos::Class_any_from_map_pos() : Abstract_any_from_map_pos::Abstract_any_from_map_pos() {
+      vx_core::refcount += 1;
+    }
+
+    Class_any_from_map_pos::~Class_any_from_map_pos() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_any_from_map_pos::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_collection::Func_any_from_map_pos output = vx_collection::e_any_from_map_pos;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_any_from_map_pos::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_collection::Func_any_from_map_pos output = vx_collection::e_any_from_map_pos;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_any_from_map_pos::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/collection", // pkgname
+        "any<-map-pos", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_any_from_map_pos::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_any_from_map_pos::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/collection", // pkgname
+        "any<-map-pos", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_any_from_map_pos::vx_empty() const {return vx_collection::e_any_from_map_pos;}
+    vx_core::Type_any Class_any_from_map_pos::vx_type() const {return vx_collection::t_any_from_map_pos;}
+    vx_core::Type_msgblock Class_any_from_map_pos::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_any_from_map_pos::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_any_from_map_pos::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_any generic_any_1 = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_map map = vx_core::vx_any_from_any(vx_core::t_map, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_int pos = vx_core::vx_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_collection::f_any_from_map_pos(generic_any_1, map, pos);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func boolean-write<-map-removekey)
+  vx_core::Type_boolean f_boolean_write_from_map_removekey(vx_core::Type_map valuemap, vx_core::Type_string key) {
+    vx_core::Type_boolean output = vx_core::e_boolean;
+    vx_core::vx_reserve({valuemap, key});
+    output = vx_core::f_boolean_write_from_map_name_value(
+      valuemap,
+      key,
+      vx_core::f_empty(
+        vx_core::t_any
+      )
+    );
+    vx_core::vx_release_one_except({valuemap, key}, output);
+    return output;
+  }
+  /**
+   * @function boolean_write_from_map_removekey
+   * Returns true if it alters a mutable map false if it fails.
+   * @param  {map-1} valuemap
+   * @param  {string} key
+   * @return {boolean}
+   * (func boolean-write<-map-removekey)
+   */
+  // (func boolean-write<-map-removekey)
+  // class Class_boolean_write_from_map_removekey {
+    Abstract_boolean_write_from_map_removekey::~Abstract_boolean_write_from_map_removekey() {}
+
+    Class_boolean_write_from_map_removekey::Class_boolean_write_from_map_removekey() : Abstract_boolean_write_from_map_removekey::Abstract_boolean_write_from_map_removekey() {
+      vx_core::refcount += 1;
+    }
+
+    Class_boolean_write_from_map_removekey::~Class_boolean_write_from_map_removekey() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_boolean_write_from_map_removekey::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_collection::Func_boolean_write_from_map_removekey output = vx_collection::e_boolean_write_from_map_removekey;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_write_from_map_removekey::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_collection::Func_boolean_write_from_map_removekey output = vx_collection::e_boolean_write_from_map_removekey;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_boolean_write_from_map_removekey::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/collection", // pkgname
+        "boolean-write<-map-removekey", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_boolean_write_from_map_removekey::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_boolean_write_from_map_removekey::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/collection", // pkgname
+        "boolean-write<-map-removekey", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_write_from_map_removekey::vx_empty() const {return vx_collection::e_boolean_write_from_map_removekey;}
+    vx_core::Type_any Class_boolean_write_from_map_removekey::vx_type() const {return vx_collection::t_boolean_write_from_map_removekey;}
+    vx_core::Type_msgblock Class_boolean_write_from_map_removekey::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_boolean_write_from_map_removekey::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_boolean_write_from_map_removekey::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_map valuemap = vx_core::vx_any_from_any(vx_core::t_map, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_string key = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_collection::f_boolean_write_from_map_removekey(valuemap, key);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
+  // (func boolean-write<-map-removekeys)
+  vx_core::Type_boolean f_boolean_write_from_map_removekeys(vx_core::Type_map valuemap, vx_core::Type_stringlist keys) {
+    vx_core::Type_boolean output = vx_core::e_boolean;
+    vx_core::vx_reserve({valuemap, keys});
+    output = vx_core::f_let(
+      vx_core::t_boolean,
+      vx_core::t_any_from_func->vx_fn_new({keys, valuemap}, [keys, valuemap]() {
+        vx_core::Type_booleanlist writelist = vx_core::f_list_from_list_1(
+          vx_core::t_booleanlist,
+          keys,
+          vx_core::t_any_from_any->vx_fn_new({valuemap}, [valuemap](vx_core::Type_any key_any) {
+            vx_core::Type_string key = vx_core::vx_any_from_any(vx_core::t_string, key_any);
+            vx_core::Type_any output_1 = 
+              vx_collection::f_boolean_write_from_map_removekey(valuemap, key);
+            return output_1;
+          })
+        );
+        vx_core::vx_ref_plus(writelist);
+        vx_core::Type_boolean output_1 = vx_core::f_and_1(writelist);
+        vx_core::vx_release_one_except(writelist, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except({valuemap, keys}, output);
+    return output;
+  }
+  /**
+   * @function boolean_write_from_map_removekeys
+   * Returns true if it alters a mutable map false if it fails.
+   * @param  {map-1} valuemap
+   * @param  {stringlist} keys
+   * @return {boolean}
+   * (func boolean-write<-map-removekeys)
+   */
+  // (func boolean-write<-map-removekeys)
+  // class Class_boolean_write_from_map_removekeys {
+    Abstract_boolean_write_from_map_removekeys::~Abstract_boolean_write_from_map_removekeys() {}
+
+    Class_boolean_write_from_map_removekeys::Class_boolean_write_from_map_removekeys() : Abstract_boolean_write_from_map_removekeys::Abstract_boolean_write_from_map_removekeys() {
+      vx_core::refcount += 1;
+    }
+
+    Class_boolean_write_from_map_removekeys::~Class_boolean_write_from_map_removekeys() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_boolean_write_from_map_removekeys::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_collection::Func_boolean_write_from_map_removekeys output = vx_collection::e_boolean_write_from_map_removekeys;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_write_from_map_removekeys::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_collection::Func_boolean_write_from_map_removekeys output = vx_collection::e_boolean_write_from_map_removekeys;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_boolean_write_from_map_removekeys::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/collection", // pkgname
+        "boolean-write<-map-removekeys", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_boolean_write_from_map_removekeys::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_boolean_write_from_map_removekeys::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/collection", // pkgname
+        "boolean-write<-map-removekeys", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_boolean_write_from_map_removekeys::vx_empty() const {return vx_collection::e_boolean_write_from_map_removekeys;}
+    vx_core::Type_any Class_boolean_write_from_map_removekeys::vx_type() const {return vx_collection::t_boolean_write_from_map_removekeys;}
+    vx_core::Type_msgblock Class_boolean_write_from_map_removekeys::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_boolean_write_from_map_removekeys::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Type_any Class_boolean_write_from_map_removekeys::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_map valuemap = vx_core::vx_any_from_any(vx_core::t_map, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_stringlist keys = vx_core::vx_any_from_any(vx_core::t_stringlist, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_collection::f_boolean_write_from_map_removekeys(valuemap, keys);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
 
   // (func int<-map-key)
   vx_core::Type_int f_int_from_map_key(vx_core::Type_map map, vx_core::Type_string key) {
@@ -2002,6 +2288,12 @@ namespace vx_collection {
   vx_collection::Func_map_from_map_keys t_map_from_map_keys = NULL;
   vx_collection::Func_map_from_map_start_end e_map_from_map_start_end = NULL;
   vx_collection::Func_map_from_map_start_end t_map_from_map_start_end = NULL;
+  vx_collection::Func_any_from_map_pos e_any_from_map_pos = NULL;
+  vx_collection::Func_any_from_map_pos t_any_from_map_pos = NULL;
+  vx_collection::Func_boolean_write_from_map_removekey e_boolean_write_from_map_removekey = NULL;
+  vx_collection::Func_boolean_write_from_map_removekey t_boolean_write_from_map_removekey = NULL;
+  vx_collection::Func_boolean_write_from_map_removekeys e_boolean_write_from_map_removekeys = NULL;
+  vx_collection::Func_boolean_write_from_map_removekeys t_boolean_write_from_map_removekeys = NULL;
   vx_collection::Func_int_from_map_key e_int_from_map_key = NULL;
   vx_collection::Func_int_from_map_key t_int_from_map_key = NULL;
   vx_collection::Func_int_from_stringlist_find e_int_from_stringlist_find = NULL;
@@ -2068,6 +2360,18 @@ namespace vx_collection {
       vx_core::vx_reserve_empty(vx_collection::e_map_from_map_start_end);
       vx_collection::t_map_from_map_start_end = new vx_collection::Class_map_from_map_start_end();
       vx_core::vx_reserve_type(vx_collection::t_map_from_map_start_end);
+      vx_collection::e_any_from_map_pos = new vx_collection::Class_any_from_map_pos();
+      vx_core::vx_reserve_empty(vx_collection::e_any_from_map_pos);
+      vx_collection::t_any_from_map_pos = new vx_collection::Class_any_from_map_pos();
+      vx_core::vx_reserve_type(vx_collection::t_any_from_map_pos);
+      vx_collection::e_boolean_write_from_map_removekey = new vx_collection::Class_boolean_write_from_map_removekey();
+      vx_core::vx_reserve_empty(vx_collection::e_boolean_write_from_map_removekey);
+      vx_collection::t_boolean_write_from_map_removekey = new vx_collection::Class_boolean_write_from_map_removekey();
+      vx_core::vx_reserve_type(vx_collection::t_boolean_write_from_map_removekey);
+      vx_collection::e_boolean_write_from_map_removekeys = new vx_collection::Class_boolean_write_from_map_removekeys();
+      vx_core::vx_reserve_empty(vx_collection::e_boolean_write_from_map_removekeys);
+      vx_collection::t_boolean_write_from_map_removekeys = new vx_collection::Class_boolean_write_from_map_removekeys();
+      vx_core::vx_reserve_type(vx_collection::t_boolean_write_from_map_removekeys);
       vx_collection::e_int_from_map_key = new vx_collection::Class_int_from_map_key();
       vx_core::vx_reserve_empty(vx_collection::e_int_from_map_key);
       vx_collection::t_int_from_map_key = new vx_collection::Class_int_from_map_key();
@@ -2122,6 +2426,9 @@ namespace vx_collection {
       mapfunc["list<-list-start-end"] = vx_collection::t_list_from_list_start_end;
       mapfunc["map<-map-keys"] = vx_collection::t_map_from_map_keys;
       mapfunc["map<-map-start-end"] = vx_collection::t_map_from_map_start_end;
+      mapfunc["any<-map-pos"] = vx_collection::t_any_from_map_pos;
+      mapfunc["boolean-write<-map-removekey"] = vx_collection::t_boolean_write_from_map_removekey;
+      mapfunc["boolean-write<-map-removekeys"] = vx_collection::t_boolean_write_from_map_removekeys;
       mapfunc["int<-map-key"] = vx_collection::t_int_from_map_key;
       mapfunc["int<-stringlist-find"] = vx_collection::t_int_from_stringlist_find;
       mapfunc["is-list"] = vx_collection::t_is_list;

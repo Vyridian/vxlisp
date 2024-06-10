@@ -23,12 +23,12 @@ export default class vx_core_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/core", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 14, ":tests", 2, ":total", 14), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 89, ":tests", 229, ":total", 255), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 54, ":tests", 73, ":total", 134), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 89, ":tests", 230, ":total", 256), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 55, ":tests", 74, ":total", 134), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 35, ":tests", 80, ":total", 223), 
-      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 6, ":tests", 5, ":total", 75)
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 36, ":tests", 81, ":total", 224), 
+      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 6, ":tests", 5, ":total", 76)
     )
   }
 
@@ -102,6 +102,7 @@ export default class vx_core_test {
           "stringlist", 0,
           "stringlistlist", 0,
           "stringmap", 0,
+          "stringmutablemap", 0,
           "struct", 0,
           "thenelse", 0,
           "thenelselist", 0,
@@ -200,7 +201,7 @@ export default class vx_core_test {
           "any<-struct", 0,
           "async", 0,
           "boolean-permission<-func", 0,
-          "boolean-write<-map-name-value", 0,
+          "boolean-write<-map-name-value", 2,
           "boolean<-any", 0,
           "boolean<-func", 0,
           "boolean<-none", 0,
@@ -1652,6 +1653,76 @@ export default class vx_core_test {
                 "",
                 vx_core.f_new(vx_core.t_any_from_any_key_value, (current, key, value) => 
                   vx_core.f_copy(current, value, key))
+              )
+            )
+          )
+        )
+    )
+    return output
+  }
+
+  static f_boolean_write_from_map_name_value(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/core",
+      ":casename", "boolean-write<-map-name-value",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n (stringmutablemap\n  :b \"y\"\n  :a \"x\")\n (let : stringmutablemap\n  [smap : stringmutablemap :=\n    (stringmutablemap\n     :b \"y\")\n   iswrite : boolean :=\n    (boolean-write<-map-name-value\n     smap :a \"x\")]\n  smap))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              vx_core.f_new(
+                vx_core.t_stringmutablemap,
+                ":b",
+                "y",
+                ":a",
+                "x"
+              ),
+              vx_core.f_let(
+                {"any-1": vx_core.t_stringmutablemap},
+                [],
+                vx_core.f_new(vx_core.t_any_from_func, () => {
+                  const smap = vx_core.f_new(
+                    vx_core.t_stringmutablemap,
+                    ":b",
+                    "y"
+                  )
+                  const iswrite = vx_core.f_boolean_write_from_map_name_value(smap, ":a", "x")
+                  return smap
+                })
+              )
+            )
+          ),
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n (stringmutablemap\n  :a \"x\")\n (let : stringmutablemap\n  [smap : stringmutablemap :=\n    (stringmutablemap\n     :b \"y\"\n     :a \"x\")\n   iswrite : boolean :=\n    (boolean-write<-map-name-value\n     smap :b \"\")]\n  smap))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              vx_core.f_new(
+                vx_core.t_stringmutablemap,
+                ":a",
+                "x"
+              ),
+              vx_core.f_let(
+                {"any-1": vx_core.t_stringmutablemap},
+                [],
+                vx_core.f_new(vx_core.t_any_from_func, () => {
+                  const smap = vx_core.f_new(
+                    vx_core.t_stringmutablemap,
+                    ":b",
+                    "y",
+                    ":a",
+                    "x"
+                  )
+                  const iswrite = vx_core.f_boolean_write_from_map_name_value(smap, ":b", "")
+                  return smap
+                })
               )
             )
           )
@@ -3459,6 +3530,7 @@ export default class vx_core_test {
       vx_core_test.f_any_from_list_start_reduce(context),
       vx_core_test.f_any_from_map(context),
       vx_core_test.f_any_from_map_start_reduce(context),
+      vx_core_test.f_boolean_write_from_map_name_value(context),
       vx_core_test.f_compare(context),
       vx_core_test.f_contains(context),
       vx_core_test.f_contains_1(context),

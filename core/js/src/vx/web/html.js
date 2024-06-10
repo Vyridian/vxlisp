@@ -1186,16 +1186,7 @@ export default class vx_web_html {
           {"any-1": vx_core.t_string},
           [],
           vx_core.f_new(vx_core.t_any_from_func, () => {
-            const namelist = vx_core.f_list_from_list_1(
-              {"any-1": vx_core.t_string, "any-2": vx_web_html.t_style, "list-1": vx_core.t_stringlist, "list-2": vx_web_html.t_stylelist},
-              stylelist,
-              vx_core.f_new(vx_core.t_any_from_any, (item) => 
-                vx_type.f_string_from_string_start(
-                  vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_style}, item, ":name"),
-                  2
-                ))
-            )
-            const joined = vx_type.f_string_from_stringlist_join(namelist, " ")
+            const joined = vx_web_html.f_string_from_stylelist(stylelist)
             return vx_core.f_if(
               {"any-1": vx_core.t_string},
               vx_core.f_ne("", joined),
@@ -1303,6 +1294,41 @@ export default class vx_web_html {
           sindent,
           "}"
         )
+      })
+    )
+    return output
+  }
+
+  /**
+   * @function string_from_stylelist
+   * Returns classnames separated by spaces for each style.
+   * @param  {stylelist} stylelist
+   * @return {string}
+   */
+  static t_string_from_stylelist = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_stylelist = {
+    vx_type: vx_web_html.t_string_from_stylelist
+  }
+
+  // (func string<-stylelist)
+  static f_string_from_stylelist(stylelist) {
+    let output = vx_core.e_string
+    output = vx_core.f_let(
+      {"any-1": vx_core.t_string},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const namelist = vx_core.f_list_from_list_1(
+          {"any-1": vx_core.t_string, "any-2": vx_web_html.t_style, "list-1": vx_core.t_stringlist, "list-2": vx_web_html.t_stylelist},
+          stylelist,
+          vx_core.f_new(vx_core.t_any_from_any, (item) => 
+            vx_type.f_string_from_string_start(
+              vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_web_html.t_style}, item, ":name"),
+              2
+            ))
+        )
+        return vx_type.f_string_from_stringlist_join(namelist, " ")
       })
     )
     return output
@@ -1848,6 +1874,7 @@ export default class vx_web_html {
       "string<-propstylelist": vx_web_html.e_string_from_propstylelist,
       "string<-propstyleunique": vx_web_html.e_string_from_propstyleunique,
       "string<-style-indent": vx_web_html.e_string_from_style_indent,
+      "string<-stylelist": vx_web_html.e_string_from_stylelist,
       "string<-stylelist-indent": vx_web_html.e_string_from_stylelist_indent,
       "string<-stylepropmap-indent": vx_web_html.e_string_from_stylepropmap_indent,
       "string<-stylesheet-indent": vx_web_html.e_string_from_stylesheet_indent,
@@ -1890,6 +1917,7 @@ export default class vx_web_html {
       "string<-propstylelist": vx_web_html.t_string_from_propstylelist,
       "string<-propstyleunique": vx_web_html.t_string_from_propstyleunique,
       "string<-style-indent": vx_web_html.t_string_from_style_indent,
+      "string<-stylelist": vx_web_html.t_string_from_stylelist,
       "string<-stylelist-indent": vx_web_html.t_string_from_stylelist_indent,
       "string<-stylepropmap-indent": vx_web_html.t_string_from_stylepropmap_indent,
       "string<-stylesheet-indent": vx_web_html.t_string_from_stylesheet_indent,
@@ -3641,6 +3669,24 @@ export default class vx_web_html {
       properties    : [],
       proplast      : {},
       fn            : vx_web_html.f_string_from_style_indent
+    }
+
+    // (func string<-stylelist)
+    vx_web_html.t_string_from_stylelist['vx_value'] = {
+      name          : "string<-stylelist",
+      pkgname       : "vx/web/html",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_web_html.f_string_from_stylelist
     }
 
     // (func string<-stylelist-indent)

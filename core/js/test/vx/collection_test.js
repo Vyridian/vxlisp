@@ -25,11 +25,11 @@ export default class vx_collection_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/collection", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 20, ":total", 20), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 80, ":tests", 16, ":total", 20), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 23, ":total", 23), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 69, ":tests", 16, ":total", 23), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 80, ":tests", 16, ":total", 20), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 69, ":tests", 16, ":total", 23), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     )
   }
@@ -53,6 +53,9 @@ export default class vx_collection_test {
           "any<-for-until-loop-max", 0,
           "any<-for-while-loop", 1,
           "any<-for-while-loop-max", 0,
+          "any<-map-pos", 0,
+          "boolean-write<-map-removekey", 0,
+          "boolean-write<-map-removekeys", 0,
           "int<-map-key", 1,
           "int<-stringlist-find", 1,
           "is-list", 1,

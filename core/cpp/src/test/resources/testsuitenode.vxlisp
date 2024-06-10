@@ -59,15 +59,15 @@
                  (vx/web/html/p
                   :text "vx/core")
                  (vx/web/html/p
-                  :text "35% 80/223")
+                  :text "36% 81/224")
                  (vx/web/html/p
-                  :text "6% 5/75")
+                  :text "6% 5/76")
                  (vx/web/html/p
                   :text "14% 2/14")
                  (vx/web/html/p
-                  :text "54% 73/134")
+                  :text "55% 74/134")
                  (vx/web/html/p
-                  :text "89% 229/255")
+                  :text "89% 230/256")
                  (vx/web/html/p
                   :text "0% 1/166")
                  (vx/web/html/p
@@ -2152,6 +2152,96 @@
                               (vx/web/html/divchildlist
                                (vx/web/html/p
                                 :text "\"xayb\"")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "boolean-write<-map-name-value")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (stringmutablemap
+  :b \"y\"
+  :a \"x\")
+ (let : stringmutablemap
+  [smap : stringmutablemap :=
+    (stringmutablemap
+     :b \"y\")
+   iswrite : boolean :=
+    (boolean-write<-map-name-value
+     smap :a \"x\")]
+  smap))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(stringmutablemap
+ :a \"x\"
+ :b \"y\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(stringmutablemap
+ :a \"x\"
+ :b \"y\")")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "boolean-write<-map-name-value")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (stringmutablemap
+  :a \"x\")
+ (let : stringmutablemap
+  [smap : stringmutablemap :=
+    (stringmutablemap
+     :b \"y\"
+     :a \"x\")
+   iswrite : boolean :=
+    (boolean-write<-map-name-value
+     smap :b \"\")]
+  smap))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(stringmutablemap
+ :a \"x\")")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(stringmutablemap
+ :a \"x\")")))))
                          (vx/web/html/tr
                           :nodes
                            (vx/web/html/tdlist
@@ -6526,19 +6616,19 @@ ab
                  (vx/web/html/p
                   :text "vx/web/html")
                  (vx/web/html/p
-                  :text "9% 7/72")
+                  :text "9% 7/73")
                  (vx/web/html/p
                   :text "0% 0/32")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "17% 7/40")
+                  :text "17% 7/41")
                  (vx/web/html/p
-                  :text "98% 71/72")
+                  :text "98% 72/73")
                  (vx/web/html/p
-                  :text "0% 0/40")
+                  :text "0% 0/41")
                  (vx/web/html/p
-                  :text "0% 0/40"))
+                  :text "0% 0/41"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -6968,19 +7058,19 @@ ab
                  (vx/web/html/p
                   :text "vx/collection")
                  (vx/web/html/p
-                  :text "80% 16/20")
+                  :text "69% 16/23")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "80% 16/20")
+                  :text "69% 16/23")
                  (vx/web/html/p
-                  :text "100% 20/20")
+                  :text "100% 23/23")
                  (vx/web/html/p
-                  :text "0% 0/20")
+                  :text "0% 0/23")
                  (vx/web/html/p
-                  :text "0% 0/20"))
+                  :text "0% 0/23"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -22424,19 +22514,19 @@ ab
                  (vx/web/html/p
                   :text "vx/ui/ui")
                  (vx/web/html/p
-                  :text "5% 7/120")
+                  :text "5% 7/137")
                  (vx/web/html/p
                   :text "0% 0/28")
                  (vx/web/html/p
                   :text "0% 0/41")
                  (vx/web/html/p
-                  :text "13% 7/51")
+                  :text "10% 7/68")
                  (vx/web/html/p
-                  :text "61% 74/120")
+                  :text "66% 91/137")
                  (vx/web/html/p
-                  :text "0% 0/51")
+                  :text "0% 0/68")
                  (vx/web/html/p
-                  :text "0% 0/51"))
+                  :text "0% 0/68"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -22661,6 +22751,77 @@ ab
                              :nodes
                               (vx/web/html/divchildlist
                                (vx/web/html/p
+                                :text "ui-write<-ui-visible")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(test
+ (ui
+  :uimap
+   (uimap
+    :a
+     (ui
+      :uid \"a\"
+      :hidden true)
+    :b
+     (ui
+      :uid \"b\")))
+ (ui-write<-ui-visible
+  (ui
+   :uimap
+    (uimap
+     :a
+      (ui
+       :uid \"a\")
+     :b
+      (ui
+       :uid \"b\"
+       :hidden true)))
+  2))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/ui/ui/ui
+ :uimap
+  (vx/ui/ui/uimap
+   :a
+    (vx/ui/ui/ui
+     :uid \"a\"
+     :hidden true)
+   :b
+    (vx/ui/ui/ui
+     :uid \"b\")))")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text
+                                 "(vx/ui/ui/ui
+ :uimap
+  (vx/ui/ui/uimap
+   :a
+    (vx/ui/ui/ui
+     :uid \"a\"
+     :hidden true)
+   :b
+    (vx/ui/ui/ui
+     :uid \"b\")))")))))
+                         (vx/web/html/tr
+                          :nodes
+                           (vx/web/html/tdlist
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
+                                :text "Pass")))
+                            (vx/web/html/td
+                             :nodes
+                              (vx/web/html/divchildlist
+                               (vx/web/html/p
                                 :text "ui<-ui-find")))
                             (vx/web/html/td
                              :nodes
@@ -22768,78 +22929,7 @@ ab
    :b
     (vx/ui/ui/ui
      :uid \"b\"
-     :selected true)))")))))
-                         (vx/web/html/tr
-                          :nodes
-                           (vx/web/html/tdlist
-                            (vx/web/html/td
-                             :nodes
-                              (vx/web/html/divchildlist
-                               (vx/web/html/p
-                                :text "Pass")))
-                            (vx/web/html/td
-                             :nodes
-                              (vx/web/html/divchildlist
-                               (vx/web/html/p
-                                :text "ui<-ui-visible")))
-                            (vx/web/html/td
-                             :nodes
-                              (vx/web/html/divchildlist
-                               (vx/web/html/p
-                                :text
-                                 "(test
- (ui
-  :uimap
-   (uimap
-    :a
-     (ui
-      :uid \"a\"
-      :hidden true)
-    :b
-     (ui
-      :uid \"b\")))
- (ui<-ui-visible
-  (ui
-   :uimap
-    (uimap
-     :a
-      (ui
-       :uid \"a\")
-     :b
-      (ui
-       :uid \"b\"
-       :hidden true)))
-  2))")))
-                            (vx/web/html/td
-                             :nodes
-                              (vx/web/html/divchildlist
-                               (vx/web/html/p
-                                :text
-                                 "(vx/ui/ui/ui
- :uimap
-  (vx/ui/ui/uimap
-   :a
-    (vx/ui/ui/ui
-     :uid \"a\"
-     :hidden true)
-   :b
-    (vx/ui/ui/ui
-     :uid \"b\")))")))
-                            (vx/web/html/td
-                             :nodes
-                              (vx/web/html/divchildlist
-                               (vx/web/html/p
-                                :text
-                                 "(vx/ui/ui/ui
- :uimap
-  (vx/ui/ui/uimap
-   :a
-    (vx/ui/ui/ui
-     :uid \"a\"
-     :hidden true)
-   :b
-    (vx/ui/ui/ui
-     :uid \"b\")))")))))))
+     :selected true)))")))))))
                      :thead
                       (vx/web/html/thead
                        :nodes
@@ -22883,19 +22973,19 @@ ab
                  (vx/web/html/p
                   :text "vx/web/htmldoc")
                  (vx/web/html/p
-                  :text "0% 0/13")
+                  :text "0% 0/15")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
-                  :text "0% 0/13")
+                  :text "0% 0/15")
                  (vx/web/html/p
-                  :text "100% 13/13")
+                  :text "100% 15/15")
                  (vx/web/html/p
-                  :text "0% 0/13")
+                  :text "0% 0/15")
                  (vx/web/html/p
-                  :text "0% 0/13"))
+                  :text "0% 0/15"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div
@@ -23652,19 +23742,19 @@ ab
                  (vx/web/html/p
                   :text "vx/ui/html/uihtml")
                  (vx/web/html/p
-                  :text "0% 0/37")
+                  :text "0% 0/44")
                  (vx/web/html/p
                   :text "100% 0/0")
                  (vx/web/html/p
                   :text "0% 0/7")
                  (vx/web/html/p
-                  :text "0% 0/30")
+                  :text "0% 0/37")
                  (vx/web/html/p
-                  :text "60% 23/38")
+                  :text "66% 30/45")
                  (vx/web/html/p
-                  :text "0% 0/31")
+                  :text "0% 0/38")
                  (vx/web/html/p
-                  :text "0% 0/31"))
+                  :text "0% 0/38"))
                :nodes
                 (vx/web/html/divchildlist
                  (vx/web/html/div

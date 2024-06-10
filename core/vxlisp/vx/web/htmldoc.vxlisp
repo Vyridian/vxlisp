@@ -20,14 +20,33 @@
  :clientserver :client
  :doc "Replaces an html node with given id and text.")
 
-(func boolean-replace<-ui-htmltext : boolean
- [ui       : ui/ui
+(func boolean-replace<-id-parent-htmltext : boolean
+ [id       : string
+  parent   : string
   htmltext : string]
  (native
   :js :auto)
  :sideeffects "Changes HTML display."
  :clientserver :client
- :doc "Replaces an html node with given id and text.")
+ :doc "Replaces an html node with given id, parentid, and text.")
+
+(func boolean-remove<-id : boolean
+ [id : string]
+ (native
+  :js :auto)
+ :sideeffects "Changes HTML display."
+ :clientserver :client
+ :doc "Removes an html node with given id.")
+
+(func boolean-write<-id-attribute-value : boolean
+ [id        : string
+  attribute : string
+  value     : string]
+ (native
+  :js :auto)
+ :sideeffects "Changes HTML element value."
+ :clientserver :client
+ :doc "Writes to an html node with given id and attribute name and value.")
 
 (func boolean-write<-id-htmltext : boolean
  [id       : string

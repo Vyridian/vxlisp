@@ -130,11 +130,11 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/core</p>
-              <p class="coveragenums">35% 80/223</p>
-              <p class="coveragenums">6% 5/75</p>
+              <p class="coveragenums">36% 81/224</p>
+              <p class="coveragenums">6% 5/76</p>
               <p class="coveragenums">14% 2/14</p>
-              <p class="coveragenums">54% 73/134</p>
-              <p class="coveragenums">89% 229/255</p>
+              <p class="coveragenums">55% 74/134</p>
+              <p class="coveragenums">89% 230/256</p>
               <p class="coveragenums">0% 1/166</p>
               <p class="coveragenums">0% 1/166</p>
             </summary>
@@ -1431,6 +1431,68 @@
                     </td>
                     <td>
                       <p class="preformatted">"xayb"</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">boolean-write&lt;-map-name-value</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (stringmutablemap
+  :b "y"
+  :a "x")
+ (let : stringmutablemap
+  [smap : stringmutablemap :=
+    (stringmutablemap
+     :b "y")
+   iswrite : boolean :=
+    (boolean-write&lt;-map-name-value
+     smap :a "x")]
+  smap))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(stringmutablemap
+ :a "x"
+ :b "y")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(stringmutablemap
+ :a "x"
+ :b "y")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">boolean-write&lt;-map-name-value</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (stringmutablemap
+  :a "x")
+ (let : stringmutablemap
+  [smap : stringmutablemap :=
+    (stringmutablemap
+     :b "y"
+     :a "x")
+   iswrite : boolean :=
+    (boolean-write&lt;-map-name-value
+     smap :b "")]
+  smap))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(stringmutablemap
+ :a "x")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(stringmutablemap
+ :a "x")</p>
                     </td>
                   </tr>
                   <tr>
@@ -4146,13 +4208,13 @@ ab
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/web/html</p>
-              <p class="coveragenums">9% 7/72</p>
+              <p class="coveragenums">9% 7/73</p>
               <p class="coveragenums">0% 0/32</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">17% 7/40</p>
-              <p class="coveragenums">98% 71/72</p>
-              <p class="coveragenums">0% 0/40</p>
-              <p class="coveragenums">0% 0/40</p>
+              <p class="coveragenums">17% 7/41</p>
+              <p class="coveragenums">98% 72/73</p>
+              <p class="coveragenums">0% 0/41</p>
+              <p class="coveragenums">0% 0/41</p>
             </summary>
             <div>
               <table>
@@ -4426,13 +4488,13 @@ ab
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/collection</p>
-              <p class="coveragenums">80% 16/20</p>
+              <p class="coveragenums">69% 16/23</p>
               <p class="coveragenums">100% 0/0</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">80% 16/20</p>
-              <p class="coveragenums">100% 20/20</p>
-              <p class="coveragenums">0% 0/20</p>
-              <p class="coveragenums">0% 0/20</p>
+              <p class="coveragenums">69% 16/23</p>
+              <p class="coveragenums">100% 23/23</p>
+              <p class="coveragenums">0% 0/23</p>
+              <p class="coveragenums">0% 0/23</p>
             </summary>
             <div>
               <table>
@@ -17916,13 +17978,13 @@ ab
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/ui/ui</p>
-              <p class="coveragenums">5% 7/120</p>
+              <p class="coveragenums">5% 7/137</p>
               <p class="coveragenums">0% 0/28</p>
               <p class="coveragenums">0% 0/41</p>
-              <p class="coveragenums">13% 7/51</p>
-              <p class="coveragenums">61% 74/120</p>
-              <p class="coveragenums">0% 0/51</p>
-              <p class="coveragenums">0% 0/51</p>
+              <p class="coveragenums">10% 7/68</p>
+              <p class="coveragenums">66% 91/137</p>
+              <p class="coveragenums">0% 0/68</p>
+              <p class="coveragenums">0% 0/68</p>
             </summary>
             <div>
               <table>
@@ -18087,6 +18149,63 @@ ab
                       <p class="passflag">Pass</p>
                     </td>
                     <td>
+                      <p class="preformatted">ui-write&lt;-ui-visible</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (ui
+  :uimap
+   (uimap
+    :a
+     (ui
+      :uid "a"
+      :hidden true)
+    :b
+     (ui
+      :uid "b")))
+ (ui-write&lt;-ui-visible
+  (ui
+   :uimap
+    (uimap
+     :a
+      (ui
+       :uid "a")
+     :b
+      (ui
+       :uid "b"
+       :hidden true)))
+  2))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/ui/ui/ui
+ :uimap
+  (vx/ui/ui/uimap
+   :a
+    (vx/ui/ui/ui
+     :uid "a"
+     :hidden true)
+   :b
+    (vx/ui/ui/ui
+     :uid "b")))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(vx/ui/ui/ui
+ :uimap
+  (vx/ui/ui/uimap
+   :a
+    (vx/ui/ui/ui
+     :uid "a"
+     :hidden true)
+   :b
+    (vx/ui/ui/ui
+     :uid "b")))</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
                       <p class="preformatted">ui&lt;-ui-find</p>
                     </td>
                     <td>
@@ -18174,63 +18293,6 @@ ab
      :selected true)))</p>
                     </td>
                   </tr>
-                  <tr>
-                    <td>
-                      <p class="passflag">Pass</p>
-                    </td>
-                    <td>
-                      <p class="preformatted">ui&lt;-ui-visible</p>
-                    </td>
-                    <td>
-                      <p class="preformatted">(test
- (ui
-  :uimap
-   (uimap
-    :a
-     (ui
-      :uid "a"
-      :hidden true)
-    :b
-     (ui
-      :uid "b")))
- (ui&lt;-ui-visible
-  (ui
-   :uimap
-    (uimap
-     :a
-      (ui
-       :uid "a")
-     :b
-      (ui
-       :uid "b"
-       :hidden true)))
-  2))</p>
-                    </td>
-                    <td>
-                      <p class="preformatted">(vx/ui/ui/ui
- :uimap
-  (vx/ui/ui/uimap
-   :a
-    (vx/ui/ui/ui
-     :uid "a"
-     :hidden true)
-   :b
-    (vx/ui/ui/ui
-     :uid "b")))</p>
-                    </td>
-                    <td>
-                      <p class="preformatted">(vx/ui/ui/ui
- :uimap
-  (vx/ui/ui/uimap
-   :a
-    (vx/ui/ui/ui
-     :uid "a"
-     :hidden true)
-   :b
-    (vx/ui/ui/ui
-     :uid "b")))</p>
-                    </td>
-                  </tr>
                 </tbody>
               </table>
             </div>
@@ -18241,13 +18303,13 @@ ab
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/web/htmldoc</p>
-              <p class="coveragenums">0% 0/13</p>
+              <p class="coveragenums">0% 0/15</p>
               <p class="coveragenums">100% 0/0</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">0% 0/13</p>
-              <p class="coveragenums">100% 13/13</p>
-              <p class="coveragenums">0% 0/13</p>
-              <p class="coveragenums">0% 0/13</p>
+              <p class="coveragenums">0% 0/15</p>
+              <p class="coveragenums">100% 15/15</p>
+              <p class="coveragenums">0% 0/15</p>
+              <p class="coveragenums">0% 0/15</p>
             </summary>
             <div>
               <table>
@@ -18808,13 +18870,13 @@ ab
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/ui/html/uihtml</p>
-              <p class="coveragenums">0% 0/37</p>
+              <p class="coveragenums">0% 0/44</p>
               <p class="coveragenums">100% 0/0</p>
               <p class="coveragenums">0% 0/7</p>
-              <p class="coveragenums">0% 0/30</p>
-              <p class="coveragenums">60% 23/38</p>
-              <p class="coveragenums">0% 0/31</p>
-              <p class="coveragenums">0% 0/31</p>
+              <p class="coveragenums">0% 0/37</p>
+              <p class="coveragenums">66% 30/45</p>
+              <p class="coveragenums">0% 0/38</p>
+              <p class="coveragenums">0% 0/38</p>
             </summary>
             <div>
               <table>

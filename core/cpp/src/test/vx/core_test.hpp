@@ -45,6 +45,7 @@ namespace vx_core_test {
   vx_test::Type_testcase f_any_from_list_start_reduce(vx_core::Type_context context);
   vx_test::Type_testcase f_any_from_map(vx_core::Type_context context);
   vx_test::Type_testcase f_any_from_map_start_reduce(vx_core::Type_context context);
+  vx_test::Type_testcase f_boolean_write_from_map_name_value(vx_core::Type_context context);
   vx_test::Type_testcase f_compare(vx_core::Type_context context);
   vx_test::Type_testcase f_contains(vx_core::Type_context context);
   vx_test::Type_testcase f_contains(vx_core::Type_context context);

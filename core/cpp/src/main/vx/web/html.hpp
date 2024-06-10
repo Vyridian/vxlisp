@@ -235,6 +235,10 @@ namespace vx_web_html {
   typedef Abstract_string_from_style_indent* Func_string_from_style_indent;
   extern Func_string_from_style_indent e_string_from_style_indent;
   extern Func_string_from_style_indent t_string_from_style_indent;
+  class Abstract_string_from_stylelist;
+  typedef Abstract_string_from_stylelist* Func_string_from_stylelist;
+  extern Func_string_from_stylelist e_string_from_stylelist;
+  extern Func_string_from_stylelist t_string_from_stylelist;
   class Abstract_string_from_stylelist_indent;
   typedef Abstract_string_from_stylelist_indent* Func_string_from_stylelist_indent;
   extern Func_string_from_stylelist_indent e_string_from_stylelist_indent;
@@ -446,6 +450,9 @@ namespace vx_web_html {
 
   // (func string<-style-indent)
   vx_core::Type_string f_string_from_style_indent(vx_web_html::Type_style style, vx_core::Type_int indent);
+
+  // (func string<-stylelist)
+  vx_core::Type_string f_string_from_stylelist(vx_web_html::Type_stylelist stylelist);
 
   // (func string<-stylelist-indent)
   vx_core::Type_string f_string_from_stylelist_indent(vx_web_html::Type_stylelist stylelist, vx_core::Type_int indent);
@@ -2372,6 +2379,33 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func string<-stylelist)
+  class Abstract_string_from_stylelist : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_string_from_stylelist() {};
+    virtual ~Abstract_string_from_stylelist() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_string_from_stylelist : public virtual Abstract_string_from_stylelist {
+  public:
+    Class_string_from_stylelist();
+    virtual ~Class_string_from_stylelist() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 

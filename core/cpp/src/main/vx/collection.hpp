@@ -23,6 +23,18 @@ namespace vx_collection {
   typedef Abstract_any_from_for_while_loop_max* Func_any_from_for_while_loop_max;
   extern Func_any_from_for_while_loop_max e_any_from_for_while_loop_max;
   extern Func_any_from_for_while_loop_max t_any_from_for_while_loop_max;
+  class Abstract_any_from_map_pos;
+  typedef Abstract_any_from_map_pos* Func_any_from_map_pos;
+  extern Func_any_from_map_pos e_any_from_map_pos;
+  extern Func_any_from_map_pos t_any_from_map_pos;
+  class Abstract_boolean_write_from_map_removekey;
+  typedef Abstract_boolean_write_from_map_removekey* Func_boolean_write_from_map_removekey;
+  extern Func_boolean_write_from_map_removekey e_boolean_write_from_map_removekey;
+  extern Func_boolean_write_from_map_removekey t_boolean_write_from_map_removekey;
+  class Abstract_boolean_write_from_map_removekeys;
+  typedef Abstract_boolean_write_from_map_removekeys* Func_boolean_write_from_map_removekeys;
+  extern Func_boolean_write_from_map_removekeys e_boolean_write_from_map_removekeys;
+  extern Func_boolean_write_from_map_removekeys t_boolean_write_from_map_removekeys;
   class Abstract_int_from_map_key;
   typedef Abstract_int_from_map_key* Func_int_from_map_key;
   extern Func_int_from_map_key e_int_from_map_key;
@@ -341,6 +353,12 @@ namespace vx_collection {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
+  // (func boolean-write<-map-removekey)
+  vx_core::Type_boolean f_boolean_write_from_map_removekey(vx_core::Type_map valuemap, vx_core::Type_string key);
+
+  // (func boolean-write<-map-removekeys)
+  vx_core::Type_boolean f_boolean_write_from_map_removekeys(vx_core::Type_map valuemap, vx_core::Type_stringlist keys);
+
   // (func int<-map-key)
   vx_core::Type_int f_int_from_map_key(vx_core::Type_map map, vx_core::Type_string key);
 
@@ -352,6 +370,75 @@ namespace vx_collection {
 
   // (func is-map)
   vx_core::Type_boolean f_is_map(vx_core::Type_any val);
+
+  // (func any<-map-pos)
+  class Abstract_any_from_map_pos : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_any_from_map_pos() {};
+    virtual ~Abstract_any_from_map_pos() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_any_from_map_pos : public virtual Abstract_any_from_map_pos {
+  public:
+    Class_any_from_map_pos();
+    virtual ~Class_any_from_map_pos() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func boolean-write<-map-removekey)
+  class Abstract_boolean_write_from_map_removekey : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_boolean_write_from_map_removekey() {};
+    virtual ~Abstract_boolean_write_from_map_removekey() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_boolean_write_from_map_removekey : public virtual Abstract_boolean_write_from_map_removekey {
+  public:
+    Class_boolean_write_from_map_removekey();
+    virtual ~Class_boolean_write_from_map_removekey() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func boolean-write<-map-removekeys)
+  class Abstract_boolean_write_from_map_removekeys : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_boolean_write_from_map_removekeys() {};
+    virtual ~Abstract_boolean_write_from_map_removekeys() = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_boolean_write_from_map_removekeys : public virtual Abstract_boolean_write_from_map_removekeys {
+  public:
+    Class_boolean_write_from_map_removekeys();
+    virtual ~Class_boolean_write_from_map_removekeys() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
 
   // (func int<-map-key)
   class Abstract_int_from_map_key : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
@@ -695,6 +782,26 @@ namespace vx_collection {
       })
     );
     vx_core::vx_release_one_except({valuemap, start, end}, output);
+    return output;
+  }
+
+  // (func any<-map-pos)
+  template <class T, class N> T* f_any_from_map_pos(T* generic_any_1, N* map, vx_core::Type_int pos) {
+    T* output = vx_core::vx_empty(generic_any_1);
+    vx_core::vx_reserve({map, pos});
+    output = vx_core::f_let(
+      generic_any_1,
+      vx_core::t_any_from_func->vx_fn_new({map, pos, generic_any_1}, [map, pos, generic_any_1]() {
+        vx_core::Type_stringlist keys = vx_core::f_stringlist_from_map(map);
+        vx_core::vx_ref_plus(keys);
+        vx_core::Type_string key = vx_core::f_any_from_list(vx_core::t_string, keys, pos);
+        vx_core::vx_ref_plus(key);
+        vx_core::Type_any output_1 = vx_core::f_any_from_map(generic_any_1, map, key);
+        vx_core::vx_release_one_except({keys, key}, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except({map, pos}, output);
     return output;
   }
 
