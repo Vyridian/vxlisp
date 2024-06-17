@@ -19,6 +19,7 @@ type vxfunc struct {
 	idx           int
 	iscopied      bool
 	isgeneric     bool
+	isoverride    bool
 	messages      bool
 	parallel      bool
 	permission    bool

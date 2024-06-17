@@ -52,12 +52,12 @@ public final class Html {
     }
 
     @Override
-    public Type_body vx_new(final Object... vals) {
+    public Html.Type_body vx_new(final Object... vals) {
       return e_body.vx_copy(vals);
     }
 
     @Override
-    public Type_body vx_copy(final Object... vals) {
+    public Html.Type_body vx_copy(final Object... vals) {
       Type_body output = this;
       boolean ischanged = false;
       Class_body val = this;
@@ -303,12 +303,12 @@ public final class Html {
     }
 
     @Override
-    public Type_details vx_new(final Object... vals) {
+    public Html.Type_details vx_new(final Object... vals) {
       return e_details.vx_copy(vals);
     }
 
     @Override
-    public Type_details vx_copy(final Object... vals) {
+    public Html.Type_details vx_copy(final Object... vals) {
       Type_details output = this;
       boolean ischanged = false;
       Class_details val = this;
@@ -670,12 +670,12 @@ public final class Html {
     }
 
     @Override
-    public Type_div vx_new(final Object... vals) {
+    public Html.Type_div vx_new(final Object... vals) {
       return e_div.vx_copy(vals);
     }
 
     @Override
-    public Type_div vx_copy(final Object... vals) {
+    public Html.Type_div vx_copy(final Object... vals) {
       Type_div output = this;
       boolean ischanged = false;
       Class_div val = this;
@@ -955,12 +955,12 @@ public final class Html {
     }
 
     @Override
-    public Type_divchild vx_new(final Object... vals) {
+    public Html.Type_divchild vx_new(final Object... vals) {
       return e_divchild.vx_copy(vals);
     }
 
     @Override
-    public Type_divchild vx_copy(final Object... vals) {
+    public Html.Type_divchild vx_copy(final Object... vals) {
       Type_divchild output = this;
       boolean ischanged = false;
       Class_divchild val = this;
@@ -1047,12 +1047,12 @@ public final class Html {
     }
 
     @Override
-    public Type_divchildlist vx_new(final Object... vals) {
+    public Html.Type_divchildlist vx_new(final Object... vals) {
       return e_divchildlist.vx_copy(vals);
     }
 
     @Override
-    public Type_divchildlist vx_copy(final Object... vals) {
+    public Html.Type_divchildlist vx_copy(final Object... vals) {
       Type_divchildlist output = this;
       boolean ischanged = false;
       Class_divchildlist val = this;
@@ -1068,12 +1068,13 @@ public final class Html {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Html.Type_divchild) {
+          Html.Type_divchild anysub = (Html.Type_divchild)valsub;
           ischanged = true;
-          listval.add((Html.Type_divchild)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Html.Type_divchild) {
           ischanged = true;
           listval.add((Html.Type_divchild)valsub);
-        } else if (valsub instanceof Type_divchildlist) {
+        } else if (valsub instanceof Html.Type_divchildlist) {
           Type_divchildlist multi = (Type_divchildlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listdivchild());
@@ -1175,12 +1176,12 @@ public final class Html {
     }
 
     @Override
-    public Type_divlist vx_new(final Object... vals) {
+    public Html.Type_divlist vx_new(final Object... vals) {
       return e_divlist.vx_copy(vals);
     }
 
     @Override
-    public Type_divlist vx_copy(final Object... vals) {
+    public Html.Type_divlist vx_copy(final Object... vals) {
       Type_divlist output = this;
       boolean ischanged = false;
       Class_divlist val = this;
@@ -1196,12 +1197,13 @@ public final class Html {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Html.Type_div) {
+          Html.Type_div anysub = (Html.Type_div)valsub;
           ischanged = true;
-          listval.add((Html.Type_div)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Html.Type_div) {
           ischanged = true;
           listval.add((Html.Type_div)valsub);
-        } else if (valsub instanceof Type_divlist) {
+        } else if (valsub instanceof Html.Type_divlist) {
           Type_divlist multi = (Type_divlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listdiv());
@@ -1303,12 +1305,12 @@ public final class Html {
     }
 
     @Override
-    public Type_footer vx_new(final Object... vals) {
+    public Html.Type_footer vx_new(final Object... vals) {
       return e_footer.vx_copy(vals);
     }
 
     @Override
-    public Type_footer vx_copy(final Object... vals) {
+    public Html.Type_footer vx_copy(final Object... vals) {
       Type_footer output = this;
       boolean ischanged = false;
       Class_footer val = this;
@@ -1542,12 +1544,12 @@ public final class Html {
     }
 
     @Override
-    public Type_h1 vx_new(final Object... vals) {
+    public Html.Type_h1 vx_new(final Object... vals) {
       return e_h1.vx_copy(vals);
     }
 
     @Override
-    public Type_h1 vx_copy(final Object... vals) {
+    public Html.Type_h1 vx_copy(final Object... vals) {
       Type_h1 output = this;
       boolean ischanged = false;
       Class_h1 val = this;
@@ -1898,12 +1900,12 @@ public final class Html {
     }
 
     @Override
-    public Type_h2 vx_new(final Object... vals) {
+    public Html.Type_h2 vx_new(final Object... vals) {
       return e_h2.vx_copy(vals);
     }
 
     @Override
-    public Type_h2 vx_copy(final Object... vals) {
+    public Html.Type_h2 vx_copy(final Object... vals) {
       Type_h2 output = this;
       boolean ischanged = false;
       Class_h2 val = this;
@@ -2254,12 +2256,12 @@ public final class Html {
     }
 
     @Override
-    public Type_h3 vx_new(final Object... vals) {
+    public Html.Type_h3 vx_new(final Object... vals) {
       return e_h3.vx_copy(vals);
     }
 
     @Override
-    public Type_h3 vx_copy(final Object... vals) {
+    public Html.Type_h3 vx_copy(final Object... vals) {
       Type_h3 output = this;
       boolean ischanged = false;
       Class_h3 val = this;
@@ -2550,12 +2552,12 @@ public final class Html {
     }
 
     @Override
-    public Type_head vx_new(final Object... vals) {
+    public Html.Type_head vx_new(final Object... vals) {
       return e_head.vx_copy(vals);
     }
 
     @Override
-    public Type_head vx_copy(final Object... vals) {
+    public Html.Type_head vx_copy(final Object... vals) {
       Type_head output = this;
       boolean ischanged = false;
       Class_head val = this;
@@ -2717,12 +2719,12 @@ public final class Html {
     }
 
     @Override
-    public Type_headchild vx_new(final Object... vals) {
+    public Html.Type_headchild vx_new(final Object... vals) {
       return e_headchild.vx_copy(vals);
     }
 
     @Override
-    public Type_headchild vx_copy(final Object... vals) {
+    public Html.Type_headchild vx_copy(final Object... vals) {
       Type_headchild output = this;
       boolean ischanged = false;
       Class_headchild val = this;
@@ -2809,12 +2811,12 @@ public final class Html {
     }
 
     @Override
-    public Type_headchildlist vx_new(final Object... vals) {
+    public Html.Type_headchildlist vx_new(final Object... vals) {
       return e_headchildlist.vx_copy(vals);
     }
 
     @Override
-    public Type_headchildlist vx_copy(final Object... vals) {
+    public Html.Type_headchildlist vx_copy(final Object... vals) {
       Type_headchildlist output = this;
       boolean ischanged = false;
       Class_headchildlist val = this;
@@ -2830,12 +2832,13 @@ public final class Html {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Html.Type_headchild) {
+          Html.Type_headchild anysub = (Html.Type_headchild)valsub;
           ischanged = true;
-          listval.add((Html.Type_headchild)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Html.Type_headchild) {
           ischanged = true;
           listval.add((Html.Type_headchild)valsub);
-        } else if (valsub instanceof Type_headchildlist) {
+        } else if (valsub instanceof Html.Type_headchildlist) {
           Type_headchildlist multi = (Type_headchildlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listheadchild());
@@ -2973,12 +2976,12 @@ public final class Html {
     }
 
     @Override
-    public Type_html vx_new(final Object... vals) {
+    public Html.Type_html vx_new(final Object... vals) {
       return e_html.vx_copy(vals);
     }
 
     @Override
-    public Type_html vx_copy(final Object... vals) {
+    public Html.Type_html vx_copy(final Object... vals) {
       Type_html output = this;
       boolean ischanged = false;
       Class_html val = this;
@@ -3271,12 +3274,12 @@ public final class Html {
     }
 
     @Override
-    public Type_img vx_new(final Object... vals) {
+    public Html.Type_img vx_new(final Object... vals) {
       return e_img.vx_copy(vals);
     }
 
     @Override
-    public Type_img vx_copy(final Object... vals) {
+    public Html.Type_img vx_copy(final Object... vals) {
       Type_img output = this;
       boolean ischanged = false;
       Class_img val = this;
@@ -3651,12 +3654,12 @@ public final class Html {
     }
 
     @Override
-    public Type_meta vx_new(final Object... vals) {
+    public Html.Type_meta vx_new(final Object... vals) {
       return e_meta.vx_copy(vals);
     }
 
     @Override
-    public Type_meta vx_copy(final Object... vals) {
+    public Html.Type_meta vx_copy(final Object... vals) {
       Type_meta output = this;
       boolean ischanged = false;
       Class_meta val = this;
@@ -4038,12 +4041,12 @@ public final class Html {
     }
 
     @Override
-    public Type_node vx_new(final Object... vals) {
+    public Html.Type_node vx_new(final Object... vals) {
       return e_node.vx_copy(vals);
     }
 
     @Override
-    public Type_node vx_copy(final Object... vals) {
+    public Html.Type_node vx_copy(final Object... vals) {
       Type_node output = this;
       boolean ischanged = false;
       Class_node val = this;
@@ -4299,12 +4302,12 @@ public final class Html {
     }
 
     @Override
-    public Type_nodelist vx_new(final Object... vals) {
+    public Html.Type_nodelist vx_new(final Object... vals) {
       return e_nodelist.vx_copy(vals);
     }
 
     @Override
-    public Type_nodelist vx_copy(final Object... vals) {
+    public Html.Type_nodelist vx_copy(final Object... vals) {
       Type_nodelist output = this;
       boolean ischanged = false;
       Class_nodelist val = this;
@@ -4320,12 +4323,13 @@ public final class Html {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Html.Type_node) {
+          Html.Type_node anysub = (Html.Type_node)valsub;
           ischanged = true;
-          listval.add((Html.Type_node)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Html.Type_node) {
           ischanged = true;
           listval.add((Html.Type_node)valsub);
-        } else if (valsub instanceof Type_nodelist) {
+        } else if (valsub instanceof Html.Type_nodelist) {
           Type_nodelist multi = (Type_nodelist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listnode());
@@ -4487,12 +4491,12 @@ public final class Html {
     }
 
     @Override
-    public Type_p vx_new(final Object... vals) {
+    public Html.Type_p vx_new(final Object... vals) {
       return e_p.vx_copy(vals);
     }
 
     @Override
-    public Type_p vx_copy(final Object... vals) {
+    public Html.Type_p vx_copy(final Object... vals) {
       Type_p output = this;
       boolean ischanged = false;
       Class_p val = this;
@@ -4827,12 +4831,12 @@ public final class Html {
     }
 
     @Override
-    public Type_propmap vx_new(final Object... vals) {
+    public Html.Type_propmap vx_new(final Object... vals) {
       return e_propmap.vx_copy(vals);
     }
 
     @Override
-    public Type_propmap vx_copy(final Object... vals) {
+    public Html.Type_propmap vx_copy(final Object... vals) {
       Type_propmap output = this;
       boolean ischanged = false;
       Class_propmap val = this;
@@ -4998,12 +5002,12 @@ public final class Html {
     }
 
     @Override
-    public Type_style vx_new(final Object... vals) {
+    public Html.Type_style vx_new(final Object... vals) {
       return e_style.vx_copy(vals);
     }
 
     @Override
-    public Type_style vx_copy(final Object... vals) {
+    public Html.Type_style vx_copy(final Object... vals) {
       Type_style output = this;
       boolean ischanged = false;
       Class_style val = this;
@@ -5213,12 +5217,12 @@ public final class Html {
     }
 
     @Override
-    public Type_stylelist vx_new(final Object... vals) {
+    public Html.Type_stylelist vx_new(final Object... vals) {
       return e_stylelist.vx_copy(vals);
     }
 
     @Override
-    public Type_stylelist vx_copy(final Object... vals) {
+    public Html.Type_stylelist vx_copy(final Object... vals) {
       Type_stylelist output = this;
       boolean ischanged = false;
       Class_stylelist val = this;
@@ -5234,12 +5238,13 @@ public final class Html {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Html.Type_style) {
+          Html.Type_style anysub = (Html.Type_style)valsub;
           ischanged = true;
-          listval.add((Html.Type_style)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Html.Type_style) {
           ischanged = true;
           listval.add((Html.Type_style)valsub);
-        } else if (valsub instanceof Type_stylelist) {
+        } else if (valsub instanceof Html.Type_stylelist) {
           Type_stylelist multi = (Type_stylelist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_liststyle());
@@ -5385,12 +5390,12 @@ public final class Html {
     }
 
     @Override
-    public Type_stylemap vx_new(final Object... vals) {
+    public Html.Type_stylemap vx_new(final Object... vals) {
       return e_stylemap.vx_copy(vals);
     }
 
     @Override
-    public Type_stylemap vx_copy(final Object... vals) {
+    public Html.Type_stylemap vx_copy(final Object... vals) {
       Type_stylemap output = this;
       boolean ischanged = false;
       Class_stylemap val = this;
@@ -5616,12 +5621,12 @@ public final class Html {
     }
 
     @Override
-    public Type_stylesheet vx_new(final Object... vals) {
+    public Html.Type_stylesheet vx_new(final Object... vals) {
       return e_stylesheet.vx_copy(vals);
     }
 
     @Override
-    public Type_stylesheet vx_copy(final Object... vals) {
+    public Html.Type_stylesheet vx_copy(final Object... vals) {
       Type_stylesheet output = this;
       boolean ischanged = false;
       Class_stylesheet val = this;
@@ -6021,12 +6026,12 @@ public final class Html {
     }
 
     @Override
-    public Type_table vx_new(final Object... vals) {
+    public Html.Type_table vx_new(final Object... vals) {
       return e_table.vx_copy(vals);
     }
 
     @Override
-    public Type_table vx_copy(final Object... vals) {
+    public Html.Type_table vx_copy(final Object... vals) {
       Type_table output = this;
       boolean ischanged = false;
       Class_table val = this;
@@ -6388,12 +6393,12 @@ public final class Html {
     }
 
     @Override
-    public Type_tbody vx_new(final Object... vals) {
+    public Html.Type_tbody vx_new(final Object... vals) {
       return e_tbody.vx_copy(vals);
     }
 
     @Override
-    public Type_tbody vx_copy(final Object... vals) {
+    public Html.Type_tbody vx_copy(final Object... vals) {
       Type_tbody output = this;
       boolean ischanged = false;
       Class_tbody val = this;
@@ -6745,12 +6750,12 @@ public final class Html {
     }
 
     @Override
-    public Type_td vx_new(final Object... vals) {
+    public Html.Type_td vx_new(final Object... vals) {
       return e_td.vx_copy(vals);
     }
 
     @Override
-    public Type_td vx_copy(final Object... vals) {
+    public Html.Type_td vx_copy(final Object... vals) {
       Type_td output = this;
       boolean ischanged = false;
       Class_td val = this;
@@ -7042,12 +7047,12 @@ public final class Html {
     }
 
     @Override
-    public Type_tdlist vx_new(final Object... vals) {
+    public Html.Type_tdlist vx_new(final Object... vals) {
       return e_tdlist.vx_copy(vals);
     }
 
     @Override
-    public Type_tdlist vx_copy(final Object... vals) {
+    public Html.Type_tdlist vx_copy(final Object... vals) {
       Type_tdlist output = this;
       boolean ischanged = false;
       Class_tdlist val = this;
@@ -7063,12 +7068,13 @@ public final class Html {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Html.Type_td) {
+          Html.Type_td anysub = (Html.Type_td)valsub;
           ischanged = true;
-          listval.add((Html.Type_td)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Html.Type_td) {
           ischanged = true;
           listval.add((Html.Type_td)valsub);
-        } else if (valsub instanceof Type_tdlist) {
+        } else if (valsub instanceof Html.Type_tdlist) {
           Type_tdlist multi = (Type_tdlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listtd());
@@ -7230,12 +7236,12 @@ public final class Html {
     }
 
     @Override
-    public Type_thead vx_new(final Object... vals) {
+    public Html.Type_thead vx_new(final Object... vals) {
       return e_thead.vx_copy(vals);
     }
 
     @Override
-    public Type_thead vx_copy(final Object... vals) {
+    public Html.Type_thead vx_copy(final Object... vals) {
       Type_thead output = this;
       boolean ischanged = false;
       Class_thead val = this;
@@ -7587,12 +7593,12 @@ public final class Html {
     }
 
     @Override
-    public Type_title vx_new(final Object... vals) {
+    public Html.Type_title vx_new(final Object... vals) {
       return e_title.vx_copy(vals);
     }
 
     @Override
-    public Type_title vx_copy(final Object... vals) {
+    public Html.Type_title vx_copy(final Object... vals) {
       Type_title output = this;
       boolean ischanged = false;
       Class_title val = this;
@@ -7934,12 +7940,12 @@ public final class Html {
     }
 
     @Override
-    public Type_tr vx_new(final Object... vals) {
+    public Html.Type_tr vx_new(final Object... vals) {
       return e_tr.vx_copy(vals);
     }
 
     @Override
-    public Type_tr vx_copy(final Object... vals) {
+    public Html.Type_tr vx_copy(final Object... vals) {
       Type_tr output = this;
       boolean ischanged = false;
       Class_tr val = this;
@@ -8231,12 +8237,12 @@ public final class Html {
     }
 
     @Override
-    public Type_trlist vx_new(final Object... vals) {
+    public Html.Type_trlist vx_new(final Object... vals) {
       return e_trlist.vx_copy(vals);
     }
 
     @Override
-    public Type_trlist vx_copy(final Object... vals) {
+    public Html.Type_trlist vx_copy(final Object... vals) {
       Type_trlist output = this;
       boolean ischanged = false;
       Class_trlist val = this;
@@ -8252,12 +8258,13 @@ public final class Html {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Html.Type_tr) {
+          Html.Type_tr anysub = (Html.Type_tr)valsub;
           ischanged = true;
-          listval.add((Html.Type_tr)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Html.Type_tr) {
           ischanged = true;
           listval.add((Html.Type_tr)valsub);
-        } else if (valsub instanceof Type_trlist) {
+        } else if (valsub instanceof Html.Type_trlist) {
           Type_trlist multi = (Type_trlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listtr());
@@ -8330,13 +8337,13 @@ public final class Html {
   public static class Class_htmlstring_from_string extends Core.Class_base implements Func_htmlstring_from_string {
 
     @Override
-    public Func_htmlstring_from_string vx_new(Object... vals) {
+    public Html.Func_htmlstring_from_string vx_new(final Object... vals) {
       Class_htmlstring_from_string output = new Class_htmlstring_from_string();
       return output;
     }
 
     @Override
-    public Func_htmlstring_from_string vx_copy(Object... vals) {
+    public Html.Func_htmlstring_from_string vx_copy(final Object... vals) {
       Class_htmlstring_from_string output = new Class_htmlstring_from_string();
       return output;
     }
@@ -8426,13 +8433,13 @@ public final class Html {
   public static class Class_string_indent extends Core.Class_base implements Func_string_indent {
 
     @Override
-    public Func_string_indent vx_new(Object... vals) {
+    public Html.Func_string_indent vx_new(final Object... vals) {
       Class_string_indent output = new Class_string_indent();
       return output;
     }
 
     @Override
-    public Func_string_indent vx_copy(Object... vals) {
+    public Html.Func_string_indent vx_copy(final Object... vals) {
       Class_string_indent output = new Class_string_indent();
       return output;
     }
@@ -8518,13 +8525,13 @@ public final class Html {
   public static class Class_string_from_body_indent extends Core.Class_base implements Func_string_from_body_indent {
 
     @Override
-    public Func_string_from_body_indent vx_new(Object... vals) {
+    public Html.Func_string_from_body_indent vx_new(final Object... vals) {
       Class_string_from_body_indent output = new Class_string_from_body_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_body_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_body_indent vx_copy(final Object... vals) {
       Class_string_from_body_indent output = new Class_string_from_body_indent();
       return output;
     }
@@ -8605,13 +8612,13 @@ public final class Html {
   public static class Class_string_from_details_indent extends Core.Class_base implements Func_string_from_details_indent {
 
     @Override
-    public Func_string_from_details_indent vx_new(Object... vals) {
+    public Html.Func_string_from_details_indent vx_new(final Object... vals) {
       Class_string_from_details_indent output = new Class_string_from_details_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_details_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_details_indent vx_copy(final Object... vals) {
       Class_string_from_details_indent output = new Class_string_from_details_indent();
       return output;
     }
@@ -8716,13 +8723,13 @@ public final class Html {
   public static class Class_string_from_div_indent extends Core.Class_base implements Func_string_from_div_indent {
 
     @Override
-    public Func_string_from_div_indent vx_new(Object... vals) {
+    public Html.Func_string_from_div_indent vx_new(final Object... vals) {
       Class_string_from_div_indent output = new Class_string_from_div_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_div_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_div_indent vx_copy(final Object... vals) {
       Class_string_from_div_indent output = new Class_string_from_div_indent();
       return output;
     }
@@ -8826,13 +8833,13 @@ public final class Html {
   public static class Class_string_from_footer_indent extends Core.Class_base implements Func_string_from_footer_indent {
 
     @Override
-    public Func_string_from_footer_indent vx_new(Object... vals) {
+    public Html.Func_string_from_footer_indent vx_new(final Object... vals) {
       Class_string_from_footer_indent output = new Class_string_from_footer_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_footer_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_footer_indent vx_copy(final Object... vals) {
       Class_string_from_footer_indent output = new Class_string_from_footer_indent();
       return output;
     }
@@ -8913,13 +8920,13 @@ public final class Html {
   public static class Class_string_from_h1_indent extends Core.Class_base implements Func_string_from_h1_indent {
 
     @Override
-    public Func_string_from_h1_indent vx_new(Object... vals) {
+    public Html.Func_string_from_h1_indent vx_new(final Object... vals) {
       Class_string_from_h1_indent output = new Class_string_from_h1_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_h1_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_h1_indent vx_copy(final Object... vals) {
       Class_string_from_h1_indent output = new Class_string_from_h1_indent();
       return output;
     }
@@ -9015,13 +9022,13 @@ public final class Html {
   public static class Class_string_from_h2_indent extends Core.Class_base implements Func_string_from_h2_indent {
 
     @Override
-    public Func_string_from_h2_indent vx_new(Object... vals) {
+    public Html.Func_string_from_h2_indent vx_new(final Object... vals) {
       Class_string_from_h2_indent output = new Class_string_from_h2_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_h2_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_h2_indent vx_copy(final Object... vals) {
       Class_string_from_h2_indent output = new Class_string_from_h2_indent();
       return output;
     }
@@ -9117,13 +9124,13 @@ public final class Html {
   public static class Class_string_from_h3_indent extends Core.Class_base implements Func_string_from_h3_indent {
 
     @Override
-    public Func_string_from_h3_indent vx_new(Object... vals) {
+    public Html.Func_string_from_h3_indent vx_new(final Object... vals) {
       Class_string_from_h3_indent output = new Class_string_from_h3_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_h3_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_h3_indent vx_copy(final Object... vals) {
       Class_string_from_h3_indent output = new Class_string_from_h3_indent();
       return output;
     }
@@ -9219,13 +9226,13 @@ public final class Html {
   public static class Class_string_from_head_indent extends Core.Class_base implements Func_string_from_head_indent {
 
     @Override
-    public Func_string_from_head_indent vx_new(Object... vals) {
+    public Html.Func_string_from_head_indent vx_new(final Object... vals) {
       Class_string_from_head_indent output = new Class_string_from_head_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_head_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_head_indent vx_copy(final Object... vals) {
       Class_string_from_head_indent output = new Class_string_from_head_indent();
       return output;
     }
@@ -9305,13 +9312,13 @@ public final class Html {
   public static class Class_string_from_html extends Core.Class_base implements Func_string_from_html {
 
     @Override
-    public Func_string_from_html vx_new(Object... vals) {
+    public Html.Func_string_from_html vx_new(final Object... vals) {
       Class_string_from_html output = new Class_string_from_html();
       return output;
     }
 
     @Override
-    public Func_string_from_html vx_copy(Object... vals) {
+    public Html.Func_string_from_html vx_copy(final Object... vals) {
       Class_string_from_html output = new Class_string_from_html();
       return output;
     }
@@ -9426,13 +9433,13 @@ public final class Html {
   public static class Class_string_from_img_indent extends Core.Class_base implements Func_string_from_img_indent {
 
     @Override
-    public Func_string_from_img_indent vx_new(Object... vals) {
+    public Html.Func_string_from_img_indent vx_new(final Object... vals) {
       Class_string_from_img_indent output = new Class_string_from_img_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_img_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_img_indent vx_copy(final Object... vals) {
       Class_string_from_img_indent output = new Class_string_from_img_indent();
       return output;
     }
@@ -9538,13 +9545,13 @@ public final class Html {
   public static class Class_string_from_indent extends Core.Class_base implements Func_string_from_indent {
 
     @Override
-    public Func_string_from_indent vx_new(Object... vals) {
+    public Html.Func_string_from_indent vx_new(final Object... vals) {
       Class_string_from_indent output = new Class_string_from_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_indent vx_copy(final Object... vals) {
       Class_string_from_indent output = new Class_string_from_indent();
       return output;
     }
@@ -9641,13 +9648,13 @@ public final class Html {
   public static class Class_string_from_meta_indent extends Core.Class_base implements Func_string_from_meta_indent {
 
     @Override
-    public Func_string_from_meta_indent vx_new(Object... vals) {
+    public Html.Func_string_from_meta_indent vx_new(final Object... vals) {
       Class_string_from_meta_indent output = new Class_string_from_meta_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_meta_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_meta_indent vx_copy(final Object... vals) {
       Class_string_from_meta_indent output = new Class_string_from_meta_indent();
       return output;
     }
@@ -9780,13 +9787,13 @@ public final class Html {
   public static class Class_string_from_node_indent extends Core.Class_base implements Func_string_from_node_indent {
 
     @Override
-    public Func_string_from_node_indent vx_new(Object... vals) {
+    public Html.Func_string_from_node_indent vx_new(final Object... vals) {
       Class_string_from_node_indent output = new Class_string_from_node_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_node_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_node_indent vx_copy(final Object... vals) {
       Class_string_from_node_indent output = new Class_string_from_node_indent();
       return output;
     }
@@ -10028,13 +10035,13 @@ public final class Html {
   public static class Class_string_from_nodelist_indent extends Core.Class_base implements Func_string_from_nodelist_indent {
 
     @Override
-    public Func_string_from_nodelist_indent vx_new(Object... vals) {
+    public Html.Func_string_from_nodelist_indent vx_new(final Object... vals) {
       Class_string_from_nodelist_indent output = new Class_string_from_nodelist_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_nodelist_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_nodelist_indent vx_copy(final Object... vals) {
       Class_string_from_nodelist_indent output = new Class_string_from_nodelist_indent();
       return output;
     }
@@ -10125,13 +10132,13 @@ public final class Html {
   public static class Class_string_from_nodelist_tag_prop_indent extends Core.Class_base implements Func_string_from_nodelist_tag_prop_indent {
 
     @Override
-    public Func_string_from_nodelist_tag_prop_indent vx_new(Object... vals) {
+    public Html.Func_string_from_nodelist_tag_prop_indent vx_new(final Object... vals) {
       Class_string_from_nodelist_tag_prop_indent output = new Class_string_from_nodelist_tag_prop_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_nodelist_tag_prop_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_nodelist_tag_prop_indent vx_copy(final Object... vals) {
       Class_string_from_nodelist_tag_prop_indent output = new Class_string_from_nodelist_tag_prop_indent();
       return output;
     }
@@ -10258,13 +10265,13 @@ public final class Html {
   public static class Class_string_from_p_indent extends Core.Class_base implements Func_string_from_p_indent {
 
     @Override
-    public Func_string_from_p_indent vx_new(Object... vals) {
+    public Html.Func_string_from_p_indent vx_new(final Object... vals) {
       Class_string_from_p_indent output = new Class_string_from_p_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_p_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_p_indent vx_copy(final Object... vals) {
       Class_string_from_p_indent output = new Class_string_from_p_indent();
       return output;
     }
@@ -10371,13 +10378,13 @@ public final class Html {
   public static class Class_string_from_propname_val extends Core.Class_base implements Func_string_from_propname_val {
 
     @Override
-    public Func_string_from_propname_val vx_new(Object... vals) {
+    public Html.Func_string_from_propname_val vx_new(final Object... vals) {
       Class_string_from_propname_val output = new Class_string_from_propname_val();
       return output;
     }
 
     @Override
-    public Func_string_from_propname_val vx_copy(Object... vals) {
+    public Html.Func_string_from_propname_val vx_copy(final Object... vals) {
       Class_string_from_propname_val output = new Class_string_from_propname_val();
       return output;
     }
@@ -10465,13 +10472,13 @@ public final class Html {
   public static class Class_string_from_propstyle extends Core.Class_base implements Func_string_from_propstyle {
 
     @Override
-    public Func_string_from_propstyle vx_new(Object... vals) {
+    public Html.Func_string_from_propstyle vx_new(final Object... vals) {
       Class_string_from_propstyle output = new Class_string_from_propstyle();
       return output;
     }
 
     @Override
-    public Func_string_from_propstyle vx_copy(Object... vals) {
+    public Html.Func_string_from_propstyle vx_copy(final Object... vals) {
       Class_string_from_propstyle output = new Class_string_from_propstyle();
       return output;
     }
@@ -10580,13 +10587,13 @@ public final class Html {
   public static class Class_string_from_propstyle_stylelist extends Core.Class_base implements Func_string_from_propstyle_stylelist {
 
     @Override
-    public Func_string_from_propstyle_stylelist vx_new(Object... vals) {
+    public Html.Func_string_from_propstyle_stylelist vx_new(final Object... vals) {
       Class_string_from_propstyle_stylelist output = new Class_string_from_propstyle_stylelist();
       return output;
     }
 
     @Override
-    public Func_string_from_propstyle_stylelist vx_copy(Object... vals) {
+    public Html.Func_string_from_propstyle_stylelist vx_copy(final Object... vals) {
       Class_string_from_propstyle_stylelist output = new Class_string_from_propstyle_stylelist();
       return output;
     }
@@ -10680,13 +10687,13 @@ public final class Html {
   public static class Class_string_from_propstylelist extends Core.Class_base implements Func_string_from_propstylelist {
 
     @Override
-    public Func_string_from_propstylelist vx_new(Object... vals) {
+    public Html.Func_string_from_propstylelist vx_new(final Object... vals) {
       Class_string_from_propstylelist output = new Class_string_from_propstylelist();
       return output;
     }
 
     @Override
-    public Func_string_from_propstylelist vx_copy(Object... vals) {
+    public Html.Func_string_from_propstylelist vx_copy(final Object... vals) {
       Class_string_from_propstylelist output = new Class_string_from_propstylelist();
       return output;
     }
@@ -10801,13 +10808,13 @@ public final class Html {
   public static class Class_string_from_propstyleunique extends Core.Class_base implements Func_string_from_propstyleunique {
 
     @Override
-    public Func_string_from_propstyleunique vx_new(Object... vals) {
+    public Html.Func_string_from_propstyleunique vx_new(final Object... vals) {
       Class_string_from_propstyleunique output = new Class_string_from_propstyleunique();
       return output;
     }
 
     @Override
-    public Func_string_from_propstyleunique vx_copy(Object... vals) {
+    public Html.Func_string_from_propstyleunique vx_copy(final Object... vals) {
       Class_string_from_propstyleunique output = new Class_string_from_propstyleunique();
       return output;
     }
@@ -10932,13 +10939,13 @@ public final class Html {
   public static class Class_string_from_style_indent extends Core.Class_base implements Func_string_from_style_indent {
 
     @Override
-    public Func_string_from_style_indent vx_new(Object... vals) {
+    public Html.Func_string_from_style_indent vx_new(final Object... vals) {
       Class_string_from_style_indent output = new Class_string_from_style_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_style_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_style_indent vx_copy(final Object... vals) {
       Class_string_from_style_indent output = new Class_string_from_style_indent();
       return output;
     }
@@ -11040,13 +11047,13 @@ public final class Html {
   public static class Class_string_from_stylelist extends Core.Class_base implements Func_string_from_stylelist {
 
     @Override
-    public Func_string_from_stylelist vx_new(Object... vals) {
+    public Html.Func_string_from_stylelist vx_new(final Object... vals) {
       Class_string_from_stylelist output = new Class_string_from_stylelist();
       return output;
     }
 
     @Override
-    public Func_string_from_stylelist vx_copy(Object... vals) {
+    public Html.Func_string_from_stylelist vx_copy(final Object... vals) {
       Class_string_from_stylelist output = new Class_string_from_stylelist();
       return output;
     }
@@ -11149,13 +11156,13 @@ public final class Html {
   public static class Class_string_from_stylelist_indent extends Core.Class_base implements Func_string_from_stylelist_indent {
 
     @Override
-    public Func_string_from_stylelist_indent vx_new(Object... vals) {
+    public Html.Func_string_from_stylelist_indent vx_new(final Object... vals) {
       Class_string_from_stylelist_indent output = new Class_string_from_stylelist_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_stylelist_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_stylelist_indent vx_copy(final Object... vals) {
       Class_string_from_stylelist_indent output = new Class_string_from_stylelist_indent();
       return output;
     }
@@ -11247,13 +11254,13 @@ public final class Html {
   public static class Class_string_from_stylepropmap_indent extends Core.Class_base implements Func_string_from_stylepropmap_indent {
 
     @Override
-    public Func_string_from_stylepropmap_indent vx_new(Object... vals) {
+    public Html.Func_string_from_stylepropmap_indent vx_new(final Object... vals) {
       Class_string_from_stylepropmap_indent output = new Class_string_from_stylepropmap_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_stylepropmap_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_stylepropmap_indent vx_copy(final Object... vals) {
       Class_string_from_stylepropmap_indent output = new Class_string_from_stylepropmap_indent();
       return output;
     }
@@ -11353,13 +11360,13 @@ public final class Html {
   public static class Class_string_from_stylesheet_indent extends Core.Class_base implements Func_string_from_stylesheet_indent {
 
     @Override
-    public Func_string_from_stylesheet_indent vx_new(Object... vals) {
+    public Html.Func_string_from_stylesheet_indent vx_new(final Object... vals) {
       Class_string_from_stylesheet_indent output = new Class_string_from_stylesheet_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_stylesheet_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_stylesheet_indent vx_copy(final Object... vals) {
       Class_string_from_stylesheet_indent output = new Class_string_from_stylesheet_indent();
       return output;
     }
@@ -11459,13 +11466,13 @@ public final class Html {
   public static class Class_string_from_table_indent extends Core.Class_base implements Func_string_from_table_indent {
 
     @Override
-    public Func_string_from_table_indent vx_new(Object... vals) {
+    public Html.Func_string_from_table_indent vx_new(final Object... vals) {
       Class_string_from_table_indent output = new Class_string_from_table_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_table_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_table_indent vx_copy(final Object... vals) {
       Class_string_from_table_indent output = new Class_string_from_table_indent();
       return output;
     }
@@ -11572,13 +11579,13 @@ public final class Html {
   public static class Class_string_from_tbody_indent extends Core.Class_base implements Func_string_from_tbody_indent {
 
     @Override
-    public Func_string_from_tbody_indent vx_new(Object... vals) {
+    public Html.Func_string_from_tbody_indent vx_new(final Object... vals) {
       Class_string_from_tbody_indent output = new Class_string_from_tbody_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_tbody_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_tbody_indent vx_copy(final Object... vals) {
       Class_string_from_tbody_indent output = new Class_string_from_tbody_indent();
       return output;
     }
@@ -11659,13 +11666,13 @@ public final class Html {
   public static class Class_string_from_td_indent extends Core.Class_base implements Func_string_from_td_indent {
 
     @Override
-    public Func_string_from_td_indent vx_new(Object... vals) {
+    public Html.Func_string_from_td_indent vx_new(final Object... vals) {
       Class_string_from_td_indent output = new Class_string_from_td_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_td_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_td_indent vx_copy(final Object... vals) {
       Class_string_from_td_indent output = new Class_string_from_td_indent();
       return output;
     }
@@ -11746,13 +11753,13 @@ public final class Html {
   public static class Class_string_from_thead_indent extends Core.Class_base implements Func_string_from_thead_indent {
 
     @Override
-    public Func_string_from_thead_indent vx_new(Object... vals) {
+    public Html.Func_string_from_thead_indent vx_new(final Object... vals) {
       Class_string_from_thead_indent output = new Class_string_from_thead_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_thead_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_thead_indent vx_copy(final Object... vals) {
       Class_string_from_thead_indent output = new Class_string_from_thead_indent();
       return output;
     }
@@ -11833,13 +11840,13 @@ public final class Html {
   public static class Class_string_from_title_indent extends Core.Class_base implements Func_string_from_title_indent {
 
     @Override
-    public Func_string_from_title_indent vx_new(Object... vals) {
+    public Html.Func_string_from_title_indent vx_new(final Object... vals) {
       Class_string_from_title_indent output = new Class_string_from_title_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_title_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_title_indent vx_copy(final Object... vals) {
       Class_string_from_title_indent output = new Class_string_from_title_indent();
       return output;
     }
@@ -11929,13 +11936,13 @@ public final class Html {
   public static class Class_string_from_tr_indent extends Core.Class_base implements Func_string_from_tr_indent {
 
     @Override
-    public Func_string_from_tr_indent vx_new(Object... vals) {
+    public Html.Func_string_from_tr_indent vx_new(final Object... vals) {
       Class_string_from_tr_indent output = new Class_string_from_tr_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_tr_indent vx_copy(Object... vals) {
+    public Html.Func_string_from_tr_indent vx_copy(final Object... vals) {
       Class_string_from_tr_indent output = new Class_string_from_tr_indent();
       return output;
     }
@@ -12015,13 +12022,13 @@ public final class Html {
   public static class Class_string_from_uri extends Core.Class_base implements Func_string_from_uri {
 
     @Override
-    public Func_string_from_uri vx_new(Object... vals) {
+    public Html.Func_string_from_uri vx_new(final Object... vals) {
       Class_string_from_uri output = new Class_string_from_uri();
       return output;
     }
 
     @Override
-    public Func_string_from_uri vx_copy(Object... vals) {
+    public Html.Func_string_from_uri vx_copy(final Object... vals) {
       Class_string_from_uri output = new Class_string_from_uri();
       return output;
     }
@@ -12106,13 +12113,13 @@ public final class Html {
   public static class Class_style_from_stylesheet_name extends Core.Class_base implements Func_style_from_stylesheet_name {
 
     @Override
-    public Func_style_from_stylesheet_name vx_new(Object... vals) {
+    public Html.Func_style_from_stylesheet_name vx_new(final Object... vals) {
       Class_style_from_stylesheet_name output = new Class_style_from_stylesheet_name();
       return output;
     }
 
     @Override
-    public Func_style_from_stylesheet_name vx_copy(Object... vals) {
+    public Html.Func_style_from_stylesheet_name vx_copy(final Object... vals) {
       Class_style_from_stylesheet_name output = new Class_style_from_stylesheet_name();
       return output;
     }
@@ -12190,13 +12197,13 @@ public final class Html {
   public static class Class_stylemap_from_stylelist extends Core.Class_base implements Func_stylemap_from_stylelist {
 
     @Override
-    public Func_stylemap_from_stylelist vx_new(Object... vals) {
+    public Html.Func_stylemap_from_stylelist vx_new(final Object... vals) {
       Class_stylemap_from_stylelist output = new Class_stylemap_from_stylelist();
       return output;
     }
 
     @Override
-    public Func_stylemap_from_stylelist vx_copy(Object... vals) {
+    public Html.Func_stylemap_from_stylelist vx_copy(final Object... vals) {
       Class_stylemap_from_stylelist output = new Class_stylemap_from_stylelist();
       return output;
     }
@@ -12289,13 +12296,13 @@ public final class Html {
   public static class Class_stylemap_from_stylesheet extends Core.Class_base implements Func_stylemap_from_stylesheet {
 
     @Override
-    public Func_stylemap_from_stylesheet vx_new(Object... vals) {
+    public Html.Func_stylemap_from_stylesheet vx_new(final Object... vals) {
       Class_stylemap_from_stylesheet output = new Class_stylemap_from_stylesheet();
       return output;
     }
 
     @Override
-    public Func_stylemap_from_stylesheet vx_copy(Object... vals) {
+    public Html.Func_stylemap_from_stylesheet vx_copy(final Object... vals) {
       Class_stylemap_from_stylesheet output = new Class_stylemap_from_stylesheet();
       return output;
     }
@@ -12380,13 +12387,13 @@ public final class Html {
   public static class Class_styles_from_stylesheet extends Core.Class_base implements Func_styles_from_stylesheet {
 
     @Override
-    public Func_styles_from_stylesheet vx_new(Object... vals) {
+    public Html.Func_styles_from_stylesheet vx_new(final Object... vals) {
       Class_styles_from_stylesheet output = new Class_styles_from_stylesheet();
       return output;
     }
 
     @Override
-    public Func_styles_from_stylesheet vx_copy(Object... vals) {
+    public Html.Func_styles_from_stylesheet vx_copy(final Object... vals) {
       Class_styles_from_stylesheet output = new Class_styles_from_stylesheet();
       return output;
     }
@@ -12471,13 +12478,13 @@ public final class Html {
   public static class Class_stylesheet_loadmap extends Core.Class_base implements Func_stylesheet_loadmap {
 
     @Override
-    public Func_stylesheet_loadmap vx_new(Object... vals) {
+    public Html.Func_stylesheet_loadmap vx_new(final Object... vals) {
       Class_stylesheet_loadmap output = new Class_stylesheet_loadmap();
       return output;
     }
 
     @Override
-    public Func_stylesheet_loadmap vx_copy(Object... vals) {
+    public Html.Func_stylesheet_loadmap vx_copy(final Object... vals) {
       Class_stylesheet_loadmap output = new Class_stylesheet_loadmap();
       return output;
     }
@@ -12570,13 +12577,13 @@ public final class Html {
   public static class Class_uri_from_string extends Core.Class_base implements Func_uri_from_string {
 
     @Override
-    public Func_uri_from_string vx_new(Object... vals) {
+    public Html.Func_uri_from_string vx_new(final Object... vals) {
       Class_uri_from_string output = new Class_uri_from_string();
       return output;
     }
 
     @Override
-    public Func_uri_from_string vx_copy(Object... vals) {
+    public Html.Func_uri_from_string vx_copy(final Object... vals) {
       Class_uri_from_string output = new Class_uri_from_string();
       return output;
     }

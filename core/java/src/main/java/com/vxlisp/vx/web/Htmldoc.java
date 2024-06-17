@@ -23,13 +23,13 @@ public final class Htmldoc {
   public static class Class_boolean_print_from_id_stylesheettext extends Core.Class_base implements Func_boolean_print_from_id_stylesheettext {
 
     @Override
-    public Func_boolean_print_from_id_stylesheettext vx_new(Object... vals) {
+    public Htmldoc.Func_boolean_print_from_id_stylesheettext vx_new(final Object... vals) {
       Class_boolean_print_from_id_stylesheettext output = new Class_boolean_print_from_id_stylesheettext();
       return output;
     }
 
     @Override
-    public Func_boolean_print_from_id_stylesheettext vx_copy(Object... vals) {
+    public Htmldoc.Func_boolean_print_from_id_stylesheettext vx_copy(final Object... vals) {
       Class_boolean_print_from_id_stylesheettext output = new Class_boolean_print_from_id_stylesheettext();
       return output;
     }
@@ -102,13 +102,13 @@ public final class Htmldoc {
   public static class Class_boolean_remove_from_id extends Core.Class_base implements Func_boolean_remove_from_id {
 
     @Override
-    public Func_boolean_remove_from_id vx_new(Object... vals) {
+    public Htmldoc.Func_boolean_remove_from_id vx_new(final Object... vals) {
       Class_boolean_remove_from_id output = new Class_boolean_remove_from_id();
       return output;
     }
 
     @Override
-    public Func_boolean_remove_from_id vx_copy(Object... vals) {
+    public Htmldoc.Func_boolean_remove_from_id vx_copy(final Object... vals) {
       Class_boolean_remove_from_id output = new Class_boolean_remove_from_id();
       return output;
     }
@@ -193,13 +193,13 @@ public final class Htmldoc {
   public static class Class_boolean_replace_from_id_htmltext extends Core.Class_base implements Func_boolean_replace_from_id_htmltext {
 
     @Override
-    public Func_boolean_replace_from_id_htmltext vx_new(Object... vals) {
+    public Htmldoc.Func_boolean_replace_from_id_htmltext vx_new(final Object... vals) {
       Class_boolean_replace_from_id_htmltext output = new Class_boolean_replace_from_id_htmltext();
       return output;
     }
 
     @Override
-    public Func_boolean_replace_from_id_htmltext vx_copy(Object... vals) {
+    public Htmldoc.Func_boolean_replace_from_id_htmltext vx_copy(final Object... vals) {
       Class_boolean_replace_from_id_htmltext output = new Class_boolean_replace_from_id_htmltext();
       return output;
     }
@@ -274,13 +274,13 @@ public final class Htmldoc {
   public static class Class_boolean_replace_from_id_parent_htmltext extends Core.Class_base implements Func_boolean_replace_from_id_parent_htmltext {
 
     @Override
-    public Func_boolean_replace_from_id_parent_htmltext vx_new(Object... vals) {
+    public Htmldoc.Func_boolean_replace_from_id_parent_htmltext vx_new(final Object... vals) {
       Class_boolean_replace_from_id_parent_htmltext output = new Class_boolean_replace_from_id_parent_htmltext();
       return output;
     }
 
     @Override
-    public Func_boolean_replace_from_id_parent_htmltext vx_copy(Object... vals) {
+    public Htmldoc.Func_boolean_replace_from_id_parent_htmltext vx_copy(final Object... vals) {
       Class_boolean_replace_from_id_parent_htmltext output = new Class_boolean_replace_from_id_parent_htmltext();
       return output;
     }
@@ -356,13 +356,13 @@ public final class Htmldoc {
   public static class Class_boolean_write_stylesheet_from_string extends Core.Class_base implements Func_boolean_write_stylesheet_from_string {
 
     @Override
-    public Func_boolean_write_stylesheet_from_string vx_new(Object... vals) {
+    public Htmldoc.Func_boolean_write_stylesheet_from_string vx_new(final Object... vals) {
       Class_boolean_write_stylesheet_from_string output = new Class_boolean_write_stylesheet_from_string();
       return output;
     }
 
     @Override
-    public Func_boolean_write_stylesheet_from_string vx_copy(Object... vals) {
+    public Htmldoc.Func_boolean_write_stylesheet_from_string vx_copy(final Object... vals) {
       Class_boolean_write_stylesheet_from_string output = new Class_boolean_write_stylesheet_from_string();
       return output;
     }
@@ -449,13 +449,13 @@ public final class Htmldoc {
   public static class Class_boolean_write_from_id_attribute_value extends Core.Class_base implements Func_boolean_write_from_id_attribute_value {
 
     @Override
-    public Func_boolean_write_from_id_attribute_value vx_new(Object... vals) {
+    public Htmldoc.Func_boolean_write_from_id_attribute_value vx_new(final Object... vals) {
       Class_boolean_write_from_id_attribute_value output = new Class_boolean_write_from_id_attribute_value();
       return output;
     }
 
     @Override
-    public Func_boolean_write_from_id_attribute_value vx_copy(Object... vals) {
+    public Htmldoc.Func_boolean_write_from_id_attribute_value vx_copy(final Object... vals) {
       Class_boolean_write_from_id_attribute_value output = new Class_boolean_write_from_id_attribute_value();
       return output;
     }
@@ -530,13 +530,13 @@ public final class Htmldoc {
   public static class Class_boolean_write_from_id_htmltext extends Core.Class_base implements Func_boolean_write_from_id_htmltext {
 
     @Override
-    public Func_boolean_write_from_id_htmltext vx_new(Object... vals) {
+    public Htmldoc.Func_boolean_write_from_id_htmltext vx_new(final Object... vals) {
       Class_boolean_write_from_id_htmltext output = new Class_boolean_write_from_id_htmltext();
       return output;
     }
 
     @Override
-    public Func_boolean_write_from_id_htmltext vx_copy(Object... vals) {
+    public Htmldoc.Func_boolean_write_from_id_htmltext vx_copy(final Object... vals) {
       Class_boolean_write_from_id_htmltext output = new Class_boolean_write_from_id_htmltext();
       return output;
     }
@@ -610,13 +610,13 @@ public final class Htmldoc {
   public static class Class_boolean_write_from_id_visible extends Core.Class_base implements Func_boolean_write_from_id_visible {
 
     @Override
-    public Func_boolean_write_from_id_visible vx_new(Object... vals) {
+    public Htmldoc.Func_boolean_write_from_id_visible vx_new(final Object... vals) {
       Class_boolean_write_from_id_visible output = new Class_boolean_write_from_id_visible();
       return output;
     }
 
     @Override
-    public Func_boolean_write_from_id_visible vx_copy(Object... vals) {
+    public Htmldoc.Func_boolean_write_from_id_visible vx_copy(final Object... vals) {
       Class_boolean_write_from_id_visible output = new Class_boolean_write_from_id_visible();
       return output;
     }
@@ -691,13 +691,13 @@ public final class Htmldoc {
   public static class Class_boolean_write_from_stylesheet extends Core.Class_base implements Func_boolean_write_from_stylesheet {
 
     @Override
-    public Func_boolean_write_from_stylesheet vx_new(Object... vals) {
+    public Htmldoc.Func_boolean_write_from_stylesheet vx_new(final Object... vals) {
       Class_boolean_write_from_stylesheet output = new Class_boolean_write_from_stylesheet();
       return output;
     }
 
     @Override
-    public Func_boolean_write_from_stylesheet vx_copy(Object... vals) {
+    public Htmldoc.Func_boolean_write_from_stylesheet vx_copy(final Object... vals) {
       Class_boolean_write_from_stylesheet output = new Class_boolean_write_from_stylesheet();
       return output;
     }
@@ -792,13 +792,13 @@ public final class Htmldoc {
   public static class Class_boolean_writeevents_from_ui extends Core.Class_base implements Func_boolean_writeevents_from_ui {
 
     @Override
-    public Func_boolean_writeevents_from_ui vx_new(Object... vals) {
+    public Htmldoc.Func_boolean_writeevents_from_ui vx_new(final Object... vals) {
       Class_boolean_writeevents_from_ui output = new Class_boolean_writeevents_from_ui();
       return output;
     }
 
     @Override
-    public Func_boolean_writeevents_from_ui vx_copy(Object... vals) {
+    public Htmldoc.Func_boolean_writeevents_from_ui vx_copy(final Object... vals) {
       Class_boolean_writeevents_from_ui output = new Class_boolean_writeevents_from_ui();
       return output;
     }
@@ -881,13 +881,13 @@ public final class Htmldoc {
   public static class Class_context_read extends Core.Class_base implements Func_context_read {
 
     @Override
-    public Func_context_read vx_new(Object... vals) {
+    public Htmldoc.Func_context_read vx_new(final Object... vals) {
       Class_context_read output = new Class_context_read();
       return output;
     }
 
     @Override
-    public Func_context_read vx_copy(Object... vals) {
+    public Htmldoc.Func_context_read vx_copy(final Object... vals) {
       Class_context_read output = new Class_context_read();
       return output;
     }
@@ -957,13 +957,13 @@ public final class Htmldoc {
   public static class Class_context_write extends Core.Class_base implements Func_context_write {
 
     @Override
-    public Func_context_write vx_new(Object... vals) {
+    public Htmldoc.Func_context_write vx_new(final Object... vals) {
       Class_context_write output = new Class_context_write();
       return output;
     }
 
     @Override
-    public Func_context_write vx_copy(Object... vals) {
+    public Htmldoc.Func_context_write vx_copy(final Object... vals) {
       Class_context_write output = new Class_context_write();
       return output;
     }
@@ -1035,13 +1035,13 @@ public final class Htmldoc {
   public static class Class_string_from_id extends Core.Class_base implements Func_string_from_id {
 
     @Override
-    public Func_string_from_id vx_new(Object... vals) {
+    public Htmldoc.Func_string_from_id vx_new(final Object... vals) {
       Class_string_from_id output = new Class_string_from_id();
       return output;
     }
 
     @Override
-    public Func_string_from_id vx_copy(Object... vals) {
+    public Htmldoc.Func_string_from_id vx_copy(final Object... vals) {
       Class_string_from_id output = new Class_string_from_id();
       return output;
     }
@@ -1125,13 +1125,13 @@ public final class Htmldoc {
   public static class Class_string_from_stylesheet extends Core.Class_base implements Func_string_from_stylesheet {
 
     @Override
-    public Func_string_from_stylesheet vx_new(Object... vals) {
+    public Htmldoc.Func_string_from_stylesheet vx_new(final Object... vals) {
       Class_string_from_stylesheet output = new Class_string_from_stylesheet();
       return output;
     }
 
     @Override
-    public Func_string_from_stylesheet vx_copy(Object... vals) {
+    public Htmldoc.Func_string_from_stylesheet vx_copy(final Object... vals) {
       Class_string_from_stylesheet output = new Class_string_from_stylesheet();
       return output;
     }
@@ -1223,13 +1223,13 @@ public final class Htmldoc {
   public static class Class_ui_readstate_from_uid extends Core.Class_base implements Func_ui_readstate_from_uid {
 
     @Override
-    public Func_ui_readstate_from_uid vx_new(Object... vals) {
+    public Htmldoc.Func_ui_readstate_from_uid vx_new(final Object... vals) {
       Class_ui_readstate_from_uid output = new Class_ui_readstate_from_uid();
       return output;
     }
 
     @Override
-    public Func_ui_readstate_from_uid vx_copy(Object... vals) {
+    public Htmldoc.Func_ui_readstate_from_uid vx_copy(final Object... vals) {
       Class_ui_readstate_from_uid output = new Class_ui_readstate_from_uid();
       return output;
     }

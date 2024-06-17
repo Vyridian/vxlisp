@@ -693,8 +693,8 @@ namespace vx_core {
    * (type any)
    */
   interface Type_any {
-    public vx_core.Type_any vx_new(Object... vals);
-    public vx_core.Type_any vx_copy(Object... vals);
+    public vx_core.Type_any vx_new(params Object vals);
+    public vx_core.Type_any vx_copy(params Object vals);
     public vx_core.Type_any vx_empty();
     public vx_core.Type_any vx_type();
     public vx_core.Type_typedef vx_typedef();
@@ -706,24 +706,22 @@ namespace vx_core {
 
   class Class_any : vx_core.Class_base, Type_any {
 
-    override
-    public Type_any vx_new(Object... vals) {
+    public override vx_core.Type_any vx_new(params Object vals) {
       return e_any.vx_copy(vals);
     }
 
-    override
-    public Type_any vx_copy(Object... vals) {
+    public override vx_core.Type_any vx_copy(params Object vals) {
       Type_any output = this;
       boolean ischanged = false;
       Class_any val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         }
       }
@@ -770,26 +768,24 @@ namespace vx_core {
    * (type any-async<-func)
    */
   interface Type_any_async_from_func : vx_core.Type_any {
-    public vx_core.Type_any_async_from_func vx_new(Object... vals);
-    public vx_core.Type_any_async_from_func vx_copy(Object... vals);
+    public vx_core.Type_any_async_from_func vx_new(params Object vals);
+    public vx_core.Type_any_async_from_func vx_copy(params Object vals);
     public vx_core.Type_any_async_from_func vx_empty();
     public vx_core.Type_any_async_from_func vx_type();
   }
 
   class Class_any_async_from_func : vx_core.Class_base, Type_any_async_from_func {
 
-    override
-    public Type_any_async_from_func vx_new(Object... vals) {
+    public override vx_core.Type_any_async_from_func vx_new(params Object vals) {
       return e_any_async_from_func.vx_copy(vals);
     }
 
-    override
-    public Type_any_async_from_func vx_copy(Object... vals) {
+    public override vx_core.Type_any_async_from_func vx_copy(params Object vals) {
       Type_any_async_from_func output = this;
       boolean ischanged = false;
       Class_any_async_from_func val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -835,8 +831,8 @@ namespace vx_core {
    * (type any<-anylist)
    */
   interface Type_any_from_anylist : vx_core.Type_list {
-    public vx_core.Type_any_from_anylist vx_new(Object... vals);
-    public vx_core.Type_any_from_anylist vx_copy(Object... vals);
+    public vx_core.Type_any_from_anylist vx_new(params Object vals);
+    public vx_core.Type_any_from_anylist vx_copy(params Object vals);
     public vx_core.Type_any_from_anylist vx_empty();
     public vx_core.Type_any_from_anylist vx_type();
     public List<vx_core.Func_any_from_any> vx_listany_from_any();
@@ -870,45 +866,44 @@ namespace vx_core {
       return this.vx_any_from_any(index);
     }
 
-    override
-    public Type_any_from_anylist vx_new(Object... vals) {
+    public override vx_core.Type_any_from_anylist vx_new(params Object vals) {
       return e_any_from_anylist.vx_copy(vals);
     }
 
-    override
-    public Type_any_from_anylist vx_copy(Object... vals) {
+    public override vx_core.Type_any_from_anylist vx_copy(params Object vals) {
       Type_any_from_anylist output = this;
       boolean ischanged = false;
       Class_any_from_anylist val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       List<vx_core.Func_any_from_any> listval = new ArrayList<>(val.vx_listany_from_any());
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Func_any_from_any) {
+        } else if (valsub is vx_core.Func_any_from_any) {
+          vx_core.Func_any_from_any anysub = valsub as vx_core.Func_any_from_any;
           ischanged = true;
-          listval.add((vx_core.Func_any_from_any)valsub);
-        } else if (valsub instanceof Type_any_from_anylist) {
+          listval.add(anysub);
+        } else if (valsub is vx_core.Type_any_from_anylist) {
           Type_any_from_anylist multi = (Type_any_from_anylist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listany_from_any());
-        } else if (valsub instanceof List) {
+        } else if (valsub is List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
-            if (item instanceof vx_core.Func_any_from_any) {
+            if (item is vx_core.Func_any_from_any) {
               vx_core.Func_any_from_any valitem = (vx_core.Func_any_from_any)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
-        } else if (valsub instanceof vx_core.Type_any) {
-          vx_core.Type_any anysub = (vx_core.Type_any)valsub;
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
           msg = vx_core.vx_msg_from_error("vx/core/any<-anylist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
@@ -960,8 +955,8 @@ namespace vx_core {
    * (type anylist)
    */
   interface Type_anylist : vx_core.Type_list {
-    public vx_core.Type_anylist vx_new(Object... vals);
-    public vx_core.Type_anylist vx_copy(Object... vals);
+    public vx_core.Type_anylist vx_new(params Object vals);
+    public vx_core.Type_anylist vx_copy(params Object vals);
     public vx_core.Type_anylist vx_empty();
     public vx_core.Type_anylist vx_type();
   }
@@ -985,48 +980,47 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Type_anylist vx_new(Object... vals) {
+    public override vx_core.Type_anylist vx_new(params Object vals) {
       return e_anylist.vx_copy(vals);
     }
 
-    override
-    public Type_anylist vx_copy(Object... vals) {
+    public override vx_core.Type_anylist vx_copy(params Object vals) {
       Type_anylist output = this;
       boolean ischanged = false;
       Class_anylist val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       List<vx_core.Type_any> listval = new ArrayList<>(val.vx_list());
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_any) {
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
+          ischanged = true;
+          listval.add(anysub);
+        } else if (valsub is vx_core.Type_any) {
           ischanged = true;
           listval.add((vx_core.Type_any)valsub);
-        } else if (valsub instanceof vx_core.Type_any) {
-          ischanged = true;
-          listval.add((vx_core.Type_any)valsub);
-        } else if (valsub instanceof Type_anylist) {
+        } else if (valsub is vx_core.Type_anylist) {
           Type_anylist multi = (Type_anylist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_list());
-        } else if (valsub instanceof List) {
+        } else if (valsub is List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
-            if (item instanceof vx_core.Type_any) {
+            if (item is vx_core.Type_any) {
               vx_core.Type_any valitem = (vx_core.Type_any)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
-        } else if (valsub instanceof vx_core.Type_any) {
-          vx_core.Type_any anysub = (vx_core.Type_any)valsub;
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
           msg = vx_core.vx_msg_from_error("vx/core/anylist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
@@ -1078,8 +1072,8 @@ namespace vx_core {
    * (type anymap)
    */
   interface Type_anymap : vx_core.Type_map {
-    public vx_core.Type_anymap vx_new(Object... vals);
-    public vx_core.Type_anymap vx_copy(Object... vals);
+    public vx_core.Type_anymap vx_new(params Object vals);
+    public vx_core.Type_anymap vx_copy(params Object vals);
     public vx_core.Type_anymap vx_empty();
     public vx_core.Type_anymap vx_type();
   }
@@ -1096,7 +1090,7 @@ namespace vx_core {
     override
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
       vx_core.Type_boolean output = vx_core.c_false;
-      if (value instanceof vx_core.Type_any) {
+      if (value is vx_core.Type_any) {
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -1132,7 +1126,7 @@ namespace vx_core {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         vx_core.Type_any val = mapval.get(key);
-        if (val instanceof vx_core.Type_any) {
+        if (val is vx_core.Type_any) {
           vx_core.Type_any castval = (vx_core.Type_any)val;
           map.put(key, castval);
         } else {
@@ -1147,38 +1141,36 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Type_anymap vx_new(Object... vals) {
+    public override vx_core.Type_anymap vx_new(params Object vals) {
       return e_anymap.vx_copy(vals);
     }
 
-    override
-    public Type_anymap vx_copy(Object... vals) {
+    public override vx_core.Type_anymap vx_copy(params Object vals) {
       Type_anymap output = this;
       boolean ischanged = false;
       Class_anymap val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       Map<String, vx_core.Type_any> mapval = new LinkedHashMap<>(val.vx_map());
       vx_core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof vx_core.Type_string) {
-            vx_core.Type_string valstring = (vx_core.Type_string)valsub;
+          if (valsub is vx_core.Type_string) {
+            vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub instanceof String) {
-            key = (String)valsub;
+          } else if (valsub is String) {
+            key = valsub as String
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -1187,14 +1179,14 @@ namespace vx_core {
           }
         } else {
           vx_core.Type_any valany = null;
-          if (valsub instanceof vx_core.Type_any) {
+          if (valsub is vx_core.Type_any) {
             valany = (vx_core.Type_any)valsub;
-          } else if (valsub instanceof vx_core.Type_any) {
-            valany = (vx_core.Type_any)valsub;
+          } else if (valsub is vx_core.Type_any) {
+            valany = valsub as vx_core.Type_any
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -1259,26 +1251,24 @@ namespace vx_core {
    * (type anytype)
    */
   interface Type_anytype : vx_core.Type_any {
-    public vx_core.Type_anytype vx_new(Object... vals);
-    public vx_core.Type_anytype vx_copy(Object... vals);
+    public vx_core.Type_anytype vx_new(params Object vals);
+    public vx_core.Type_anytype vx_copy(params Object vals);
     public vx_core.Type_anytype vx_empty();
     public vx_core.Type_anytype vx_type();
   }
 
   class Class_anytype : vx_core.Class_base, Type_anytype {
 
-    override
-    public Type_anytype vx_new(Object... vals) {
+    public override vx_core.Type_anytype vx_new(params Object vals) {
       return e_anytype.vx_copy(vals);
     }
 
-    override
-    public Type_anytype vx_copy(Object... vals) {
+    public override vx_core.Type_anytype vx_copy(params Object vals) {
       Type_anytype output = this;
       boolean ischanged = false;
       Class_anytype val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -1324,8 +1314,8 @@ namespace vx_core {
    * (type arg)
    */
   interface Type_arg : vx_core.Type_struct {
-    public vx_core.Type_arg vx_new(Object... vals);
-    public vx_core.Type_arg vx_copy(Object... vals);
+    public vx_core.Type_arg vx_new(params Object vals);
+    public vx_core.Type_arg vx_copy(params Object vals);
     public vx_core.Type_arg vx_empty();
     public vx_core.Type_arg vx_type();
     public vx_core.Type_string name();
@@ -1395,18 +1385,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_arg vx_new(Object... vals) {
+    public override vx_core.Type_arg vx_new(params Object vals) {
       return e_arg.vx_copy(vals);
     }
 
-    override
-    public Type_arg vx_copy(Object... vals) {
+    public override vx_core.Type_arg vx_copy(params Object vals) {
       Type_arg output = this;
       boolean ischanged = false;
       Class_arg val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       vx_core.Type_string vx_p_name = val.name();
@@ -1421,23 +1409,23 @@ namespace vx_core {
       String key = "";
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub instanceof String) {
+          } else if (valsub is String) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
+            if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
@@ -1462,15 +1450,15 @@ namespace vx_core {
           switch (key) {
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub instanceof vx_core.Type_string) {
+            } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_name = (vx_core.Type_string)valsub;
-            } else if (valsub instanceof String) {
+            } else if (valsub is String) {
               ischanged = true;
               vx_p_name = vx_core.t_string.vx_new(valsub);
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -1485,12 +1473,12 @@ namespace vx_core {
             break;
           case ":argtype":
             if (valsub == vx_p_argtype) {
-            } else if (valsub instanceof vx_core.Type_any) {
+            } else if (valsub is vx_core.Type_any) {
               ischanged = true;
               vx_p_argtype = (vx_core.Type_any)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -1505,12 +1493,12 @@ namespace vx_core {
             break;
           case ":fn-any":
             if (valsub == vx_p_fn_any) {
-            } else if (valsub instanceof vx_core.Func_any_from_func) {
+            } else if (valsub is vx_core.Func_any_from_func) {
               ischanged = true;
               vx_p_fn_any = (vx_core.Func_any_from_func)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -1525,15 +1513,15 @@ namespace vx_core {
             break;
           case ":doc":
             if (valsub == vx_p_doc) {
-            } else if (valsub instanceof vx_core.Type_string) {
+            } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_doc = (vx_core.Type_string)valsub;
-            } else if (valsub instanceof String) {
+            } else if (valsub is String) {
               ischanged = true;
               vx_p_doc = vx_core.t_string.vx_new(valsub);
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -1601,8 +1589,8 @@ namespace vx_core {
    * (type arglist)
    */
   interface Type_arglist : vx_core.Type_list {
-    public vx_core.Type_arglist vx_new(Object... vals);
-    public vx_core.Type_arglist vx_copy(Object... vals);
+    public vx_core.Type_arglist vx_new(params Object vals);
+    public vx_core.Type_arglist vx_copy(params Object vals);
     public vx_core.Type_arglist vx_empty();
     public vx_core.Type_arglist vx_type();
     public List<vx_core.Type_arg> vx_listarg();
@@ -1636,48 +1624,47 @@ namespace vx_core {
       return this.vx_arg(index);
     }
 
-    override
-    public Type_arglist vx_new(Object... vals) {
+    public override vx_core.Type_arglist vx_new(params Object vals) {
       return e_arglist.vx_copy(vals);
     }
 
-    override
-    public Type_arglist vx_copy(Object... vals) {
+    public override vx_core.Type_arglist vx_copy(params Object vals) {
       Type_arglist output = this;
       boolean ischanged = false;
       Class_arglist val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       List<vx_core.Type_arg> listval = new ArrayList<>(val.vx_listarg());
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_arg) {
+        } else if (valsub is vx_core.Type_arg) {
+          vx_core.Type_arg anysub = valsub as vx_core.Type_arg;
+          ischanged = true;
+          listval.add(anysub);
+        } else if (valsub is vx_core.Type_arg) {
           ischanged = true;
           listval.add((vx_core.Type_arg)valsub);
-        } else if (valsub instanceof vx_core.Type_arg) {
-          ischanged = true;
-          listval.add((vx_core.Type_arg)valsub);
-        } else if (valsub instanceof Type_arglist) {
+        } else if (valsub is vx_core.Type_arglist) {
           Type_arglist multi = (Type_arglist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listarg());
-        } else if (valsub instanceof List) {
+        } else if (valsub is List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
-            if (item instanceof vx_core.Type_arg) {
+            if (item is vx_core.Type_arg) {
               vx_core.Type_arg valitem = (vx_core.Type_arg)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
-        } else if (valsub instanceof vx_core.Type_any) {
-          vx_core.Type_any anysub = (vx_core.Type_any)valsub;
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
           msg = vx_core.vx_msg_from_error("vx/core/arglist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
@@ -1729,8 +1716,8 @@ namespace vx_core {
    * (type argmap)
    */
   interface Type_argmap : vx_core.Type_map {
-    public vx_core.Type_argmap vx_new(Object... vals);
-    public vx_core.Type_argmap vx_copy(Object... vals);
+    public vx_core.Type_argmap vx_new(params Object vals);
+    public vx_core.Type_argmap vx_copy(params Object vals);
     public vx_core.Type_argmap vx_empty();
     public vx_core.Type_argmap vx_type();
     public Map<String, vx_core.Type_arg> vx_maparg();
@@ -1749,7 +1736,7 @@ namespace vx_core {
     override
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
       vx_core.Type_boolean output = vx_core.c_false;
-      if (value instanceof vx_core.Type_arg) {
+      if (value is vx_core.Type_arg) {
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -1793,7 +1780,7 @@ namespace vx_core {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         vx_core.Type_any val = mapval.get(key);
-        if (val instanceof vx_core.Type_arg) {
+        if (val is vx_core.Type_arg) {
           vx_core.Type_arg castval = (vx_core.Type_arg)val;
           map.put(key, castval);
         } else {
@@ -1808,38 +1795,36 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Type_argmap vx_new(Object... vals) {
+    public override vx_core.Type_argmap vx_new(params Object vals) {
       return e_argmap.vx_copy(vals);
     }
 
-    override
-    public Type_argmap vx_copy(Object... vals) {
+    public override vx_core.Type_argmap vx_copy(params Object vals) {
       Type_argmap output = this;
       boolean ischanged = false;
       Class_argmap val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       Map<String, vx_core.Type_arg> mapval = new LinkedHashMap<>(val.vx_maparg());
       vx_core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof vx_core.Type_string) {
-            vx_core.Type_string valstring = (vx_core.Type_string)valsub;
+          if (valsub is vx_core.Type_string) {
+            vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub instanceof String) {
-            key = (String)valsub;
+          } else if (valsub is String) {
+            key = valsub as String
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -1848,14 +1833,14 @@ namespace vx_core {
           }
         } else {
           vx_core.Type_arg valany = null;
-          if (valsub instanceof vx_core.Type_arg) {
+          if (valsub is vx_core.Type_arg) {
             valany = (vx_core.Type_arg)valsub;
-          } else if (valsub instanceof vx_core.Type_arg) {
-            valany = (vx_core.Type_arg)valsub;
+          } else if (valsub is vx_core.Type_arg) {
+            valany = valsub as vx_core.Type_arg
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -1920,39 +1905,37 @@ namespace vx_core {
    * (type boolean)
    */
   interface Type_boolean : vx_core.Type_any {
-    public vx_core.Type_boolean vx_new(Object... vals);
-    public vx_core.Type_boolean vx_copy(Object... vals);
+    public vx_core.Type_boolean vx_new(params Object vals);
+    public vx_core.Type_boolean vx_copy(params Object vals);
     public vx_core.Type_boolean vx_empty();
     public vx_core.Type_boolean vx_type();
   }
 
   class Class_boolean : vx_core.Class_base, Type_boolean {
 
-    override
-    public Type_boolean vx_new(Object... vals) {
+    public override vx_core.Type_boolean vx_new(params Object vals) {
       return e_boolean.vx_copy(vals);
     }
 
-    override
-    public Type_boolean vx_copy(Object... vals) {
+    public override vx_core.Type_boolean vx_copy(params Object vals) {
       Type_boolean output = this;
       boolean ischanged = false;
       Class_boolean val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       boolean booleanval = val.vx_boolean();
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_boolean) {
-          vx_core.Type_boolean valboolean = (vx_core.Type_boolean)valsub;
+        } else if (valsub is vx_core.Type_boolean) {
+          vx_core.Type_boolean valboolean = valsub as vx_core.Type_boolean;
           booleanval = booleanval || valboolean.vx_boolean();
-        } else if (valsub instanceof Boolean) {
-          booleanval = booleanval || (Boolean)valsub;
+        } else if (valsub is Boolean) {
+          booleanval = booleanval || valsub as Boolean;
         }
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -2001,8 +1984,8 @@ namespace vx_core {
    * (type booleanlist)
    */
   interface Type_booleanlist : vx_core.Type_list {
-    public vx_core.Type_booleanlist vx_new(Object... vals);
-    public vx_core.Type_booleanlist vx_copy(Object... vals);
+    public vx_core.Type_booleanlist vx_new(params Object vals);
+    public vx_core.Type_booleanlist vx_copy(params Object vals);
     public vx_core.Type_booleanlist vx_empty();
     public vx_core.Type_booleanlist vx_type();
     public List<vx_core.Type_boolean> vx_listboolean();
@@ -2036,48 +2019,47 @@ namespace vx_core {
       return this.vx_boolean(index);
     }
 
-    override
-    public Type_booleanlist vx_new(Object... vals) {
+    public override vx_core.Type_booleanlist vx_new(params Object vals) {
       return e_booleanlist.vx_copy(vals);
     }
 
-    override
-    public Type_booleanlist vx_copy(Object... vals) {
+    public override vx_core.Type_booleanlist vx_copy(params Object vals) {
       Type_booleanlist output = this;
       boolean ischanged = false;
       Class_booleanlist val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       List<vx_core.Type_boolean> listval = new ArrayList<>(val.vx_listboolean());
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_boolean) {
+        } else if (valsub is vx_core.Type_boolean) {
+          vx_core.Type_boolean anysub = valsub as vx_core.Type_boolean;
           ischanged = true;
-          listval.add((vx_core.Type_boolean)valsub);
-        } else if (valsub instanceof Boolean) {
+          listval.add(anysub);
+        } else if (valsub is Boolean) {
           ischanged = true;
           listval.add(vx_core.t_boolean.vx_new(valsub));
-        } else if (valsub instanceof Type_booleanlist) {
+        } else if (valsub is vx_core.Type_booleanlist) {
           Type_booleanlist multi = (Type_booleanlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listboolean());
-        } else if (valsub instanceof List) {
+        } else if (valsub is List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
-            if (item instanceof vx_core.Type_boolean) {
+            if (item is vx_core.Type_boolean) {
               vx_core.Type_boolean valitem = (vx_core.Type_boolean)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
-        } else if (valsub instanceof vx_core.Type_any) {
-          vx_core.Type_any anysub = (vx_core.Type_any)valsub;
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
           msg = vx_core.vx_msg_from_error("vx/core/booleanlist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
@@ -2128,26 +2110,24 @@ namespace vx_core {
    * (type collection)
    */
   interface Type_collection : vx_core.Type_any {
-    public vx_core.Type_collection vx_new(Object... vals);
-    public vx_core.Type_collection vx_copy(Object... vals);
+    public vx_core.Type_collection vx_new(params Object vals);
+    public vx_core.Type_collection vx_copy(params Object vals);
     public vx_core.Type_collection vx_empty();
     public vx_core.Type_collection vx_type();
   }
 
   class Class_collection : vx_core.Class_base, Type_collection {
 
-    override
-    public Type_collection vx_new(Object... vals) {
+    public override vx_core.Type_collection vx_new(params Object vals) {
       return e_collection.vx_copy(vals);
     }
 
-    override
-    public Type_collection vx_copy(Object... vals) {
+    public override vx_core.Type_collection vx_copy(params Object vals) {
       Type_collection output = this;
       boolean ischanged = false;
       Class_collection val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -2192,26 +2172,24 @@ namespace vx_core {
    * (type compilelanguages)
    */
   interface Type_compilelanguages : vx_core.Type_any {
-    public vx_core.Type_compilelanguages vx_new(Object... vals);
-    public vx_core.Type_compilelanguages vx_copy(Object... vals);
+    public vx_core.Type_compilelanguages vx_new(params Object vals);
+    public vx_core.Type_compilelanguages vx_copy(params Object vals);
     public vx_core.Type_compilelanguages vx_empty();
     public vx_core.Type_compilelanguages vx_type();
   }
 
   class Class_compilelanguages : vx_core.Class_base, Type_compilelanguages {
 
-    override
-    public Type_compilelanguages vx_new(Object... vals) {
+    public override vx_core.Type_compilelanguages vx_new(params Object vals) {
       return e_compilelanguages.vx_copy(vals);
     }
 
-    override
-    public Type_compilelanguages vx_copy(Object... vals) {
+    public override vx_core.Type_compilelanguages vx_copy(params Object vals) {
       Type_compilelanguages output = this;
       boolean ischanged = false;
       Class_compilelanguages val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -2257,26 +2235,24 @@ namespace vx_core {
    * (type connect)
    */
   interface Type_connect : vx_core.Type_any {
-    public vx_core.Type_connect vx_new(Object... vals);
-    public vx_core.Type_connect vx_copy(Object... vals);
+    public vx_core.Type_connect vx_new(params Object vals);
+    public vx_core.Type_connect vx_copy(params Object vals);
     public vx_core.Type_connect vx_empty();
     public vx_core.Type_connect vx_type();
   }
 
   class Class_connect : vx_core.Class_base, Type_connect {
 
-    override
-    public Type_connect vx_new(Object... vals) {
+    public override vx_core.Type_connect vx_new(params Object vals) {
       return e_connect.vx_copy(vals);
     }
 
-    override
-    public Type_connect vx_copy(Object... vals) {
+    public override vx_core.Type_connect vx_copy(params Object vals) {
       Type_connect output = this;
       boolean ischanged = false;
       Class_connect val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -2322,8 +2298,8 @@ namespace vx_core {
    * (type connectlist)
    */
   interface Type_connectlist : vx_core.Type_list {
-    public vx_core.Type_connectlist vx_new(Object... vals);
-    public vx_core.Type_connectlist vx_copy(Object... vals);
+    public vx_core.Type_connectlist vx_new(params Object vals);
+    public vx_core.Type_connectlist vx_copy(params Object vals);
     public vx_core.Type_connectlist vx_empty();
     public vx_core.Type_connectlist vx_type();
     public List<vx_core.Type_connect> vx_listconnect();
@@ -2357,48 +2333,47 @@ namespace vx_core {
       return this.vx_connect(index);
     }
 
-    override
-    public Type_connectlist vx_new(Object... vals) {
+    public override vx_core.Type_connectlist vx_new(params Object vals) {
       return e_connectlist.vx_copy(vals);
     }
 
-    override
-    public Type_connectlist vx_copy(Object... vals) {
+    public override vx_core.Type_connectlist vx_copy(params Object vals) {
       Type_connectlist output = this;
       boolean ischanged = false;
       Class_connectlist val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       List<vx_core.Type_connect> listval = new ArrayList<>(val.vx_listconnect());
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_connect) {
+        } else if (valsub is vx_core.Type_connect) {
+          vx_core.Type_connect anysub = valsub as vx_core.Type_connect;
+          ischanged = true;
+          listval.add(anysub);
+        } else if (valsub is vx_core.Type_connect) {
           ischanged = true;
           listval.add((vx_core.Type_connect)valsub);
-        } else if (valsub instanceof vx_core.Type_connect) {
-          ischanged = true;
-          listval.add((vx_core.Type_connect)valsub);
-        } else if (valsub instanceof Type_connectlist) {
+        } else if (valsub is vx_core.Type_connectlist) {
           Type_connectlist multi = (Type_connectlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listconnect());
-        } else if (valsub instanceof List) {
+        } else if (valsub is List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
-            if (item instanceof vx_core.Type_connect) {
+            if (item is vx_core.Type_connect) {
               vx_core.Type_connect valitem = (vx_core.Type_connect)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
-        } else if (valsub instanceof vx_core.Type_any) {
-          vx_core.Type_any anysub = (vx_core.Type_any)valsub;
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
           msg = vx_core.vx_msg_from_error("vx/core/connectlist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
@@ -2450,8 +2425,8 @@ namespace vx_core {
    * (type connectmap)
    */
   interface Type_connectmap : vx_core.Type_map {
-    public vx_core.Type_connectmap vx_new(Object... vals);
-    public vx_core.Type_connectmap vx_copy(Object... vals);
+    public vx_core.Type_connectmap vx_new(params Object vals);
+    public vx_core.Type_connectmap vx_copy(params Object vals);
     public vx_core.Type_connectmap vx_empty();
     public vx_core.Type_connectmap vx_type();
     public Map<String, vx_core.Type_connect> vx_mapconnect();
@@ -2470,7 +2445,7 @@ namespace vx_core {
     override
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
       vx_core.Type_boolean output = vx_core.c_false;
-      if (value instanceof vx_core.Type_connect) {
+      if (value is vx_core.Type_connect) {
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -2514,7 +2489,7 @@ namespace vx_core {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         vx_core.Type_any val = mapval.get(key);
-        if (val instanceof vx_core.Type_connect) {
+        if (val is vx_core.Type_connect) {
           vx_core.Type_connect castval = (vx_core.Type_connect)val;
           map.put(key, castval);
         } else {
@@ -2529,38 +2504,36 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Type_connectmap vx_new(Object... vals) {
+    public override vx_core.Type_connectmap vx_new(params Object vals) {
       return e_connectmap.vx_copy(vals);
     }
 
-    override
-    public Type_connectmap vx_copy(Object... vals) {
+    public override vx_core.Type_connectmap vx_copy(params Object vals) {
       Type_connectmap output = this;
       boolean ischanged = false;
       Class_connectmap val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       Map<String, vx_core.Type_connect> mapval = new LinkedHashMap<>(val.vx_mapconnect());
       vx_core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof vx_core.Type_string) {
-            vx_core.Type_string valstring = (vx_core.Type_string)valsub;
+          if (valsub is vx_core.Type_string) {
+            vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub instanceof String) {
-            key = (String)valsub;
+          } else if (valsub is String) {
+            key = valsub as String
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -2569,14 +2542,14 @@ namespace vx_core {
           }
         } else {
           vx_core.Type_connect valany = null;
-          if (valsub instanceof vx_core.Type_connect) {
+          if (valsub is vx_core.Type_connect) {
             valany = (vx_core.Type_connect)valsub;
-          } else if (valsub instanceof vx_core.Type_connect) {
-            valany = (vx_core.Type_connect)valsub;
+          } else if (valsub is vx_core.Type_connect) {
+            valany = valsub as vx_core.Type_connect
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -2641,26 +2614,24 @@ namespace vx_core {
    * (type const)
    */
   interface Type_const : vx_core.Type_any {
-    public vx_core.Type_const vx_new(Object... vals);
-    public vx_core.Type_const vx_copy(Object... vals);
+    public vx_core.Type_const vx_new(params Object vals);
+    public vx_core.Type_const vx_copy(params Object vals);
     public vx_core.Type_const vx_empty();
     public vx_core.Type_const vx_type();
   }
 
   class Class_const : vx_core.Class_base, Type_const {
 
-    override
-    public Type_const vx_new(Object... vals) {
+    public override vx_core.Type_const vx_new(params Object vals) {
       return e_const.vx_copy(vals);
     }
 
-    override
-    public Type_const vx_copy(Object... vals) {
+    public override vx_core.Type_const vx_copy(params Object vals) {
       Type_const output = this;
       boolean ischanged = false;
       Class_const val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -2706,8 +2677,8 @@ namespace vx_core {
    * (type constdef)
    */
   interface Type_constdef : vx_core.Type_struct {
-    public vx_core.Type_constdef vx_new(Object... vals);
-    public vx_core.Type_constdef vx_copy(Object... vals);
+    public vx_core.Type_constdef vx_new(params Object vals);
+    public vx_core.Type_constdef vx_copy(params Object vals);
     public vx_core.Type_constdef vx_empty();
     public vx_core.Type_constdef vx_type();
     public vx_core.Type_string pkgname();
@@ -2765,18 +2736,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_constdef vx_new(Object... vals) {
+    public override vx_core.Type_constdef vx_new(params Object vals) {
       return e_constdef.vx_copy(vals);
     }
 
-    override
-    public Type_constdef vx_copy(Object... vals) {
+    public override vx_core.Type_constdef vx_copy(params Object vals) {
       Type_constdef output = this;
       boolean ischanged = false;
       Class_constdef val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       vx_core.Type_string vx_p_pkgname = val.pkgname();
@@ -2789,23 +2758,23 @@ namespace vx_core {
       String key = "";
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub instanceof String) {
+          } else if (valsub is String) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
+            if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
@@ -2830,15 +2799,15 @@ namespace vx_core {
           switch (key) {
           case ":pkgname":
             if (valsub == vx_p_pkgname) {
-            } else if (valsub instanceof vx_core.Type_string) {
+            } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_pkgname = (vx_core.Type_string)valsub;
-            } else if (valsub instanceof String) {
+            } else if (valsub is String) {
               ischanged = true;
               vx_p_pkgname = vx_core.t_string.vx_new(valsub);
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -2853,15 +2822,15 @@ namespace vx_core {
             break;
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub instanceof vx_core.Type_string) {
+            } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_name = (vx_core.Type_string)valsub;
-            } else if (valsub instanceof String) {
+            } else if (valsub is String) {
               ischanged = true;
               vx_p_name = vx_core.t_string.vx_new(valsub);
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -2876,12 +2845,12 @@ namespace vx_core {
             break;
           case ":type":
             if (valsub == vx_p_type) {
-            } else if (valsub instanceof vx_core.Type_any) {
+            } else if (valsub is vx_core.Type_any) {
               ischanged = true;
               vx_p_type = (vx_core.Type_any)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -2948,8 +2917,8 @@ namespace vx_core {
    * (type constlist)
    */
   interface Type_constlist : vx_core.Type_list {
-    public vx_core.Type_constlist vx_new(Object... vals);
-    public vx_core.Type_constlist vx_copy(Object... vals);
+    public vx_core.Type_constlist vx_new(params Object vals);
+    public vx_core.Type_constlist vx_copy(params Object vals);
     public vx_core.Type_constlist vx_empty();
     public vx_core.Type_constlist vx_type();
   }
@@ -2973,48 +2942,47 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Type_constlist vx_new(Object... vals) {
+    public override vx_core.Type_constlist vx_new(params Object vals) {
       return e_constlist.vx_copy(vals);
     }
 
-    override
-    public Type_constlist vx_copy(Object... vals) {
+    public override vx_core.Type_constlist vx_copy(params Object vals) {
       Type_constlist output = this;
       boolean ischanged = false;
       Class_constlist val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       List<vx_core.Type_any> listval = new ArrayList<>(val.vx_list());
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_any) {
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
+          ischanged = true;
+          listval.add(anysub);
+        } else if (valsub is vx_core.Type_any) {
           ischanged = true;
           listval.add((vx_core.Type_any)valsub);
-        } else if (valsub instanceof vx_core.Type_any) {
-          ischanged = true;
-          listval.add((vx_core.Type_any)valsub);
-        } else if (valsub instanceof Type_constlist) {
+        } else if (valsub is vx_core.Type_constlist) {
           Type_constlist multi = (Type_constlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_list());
-        } else if (valsub instanceof List) {
+        } else if (valsub is List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
-            if (item instanceof vx_core.Type_any) {
+            if (item is vx_core.Type_any) {
               vx_core.Type_any valitem = (vx_core.Type_any)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
-        } else if (valsub instanceof vx_core.Type_any) {
-          vx_core.Type_any anysub = (vx_core.Type_any)valsub;
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
           msg = vx_core.vx_msg_from_error("vx/core/constlist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
@@ -3066,8 +3034,8 @@ namespace vx_core {
    * (type constmap)
    */
   interface Type_constmap : vx_core.Type_map {
-    public vx_core.Type_constmap vx_new(Object... vals);
-    public vx_core.Type_constmap vx_copy(Object... vals);
+    public vx_core.Type_constmap vx_new(params Object vals);
+    public vx_core.Type_constmap vx_copy(params Object vals);
     public vx_core.Type_constmap vx_empty();
     public vx_core.Type_constmap vx_type();
   }
@@ -3084,7 +3052,7 @@ namespace vx_core {
     override
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
       vx_core.Type_boolean output = vx_core.c_false;
-      if (value instanceof vx_core.Type_any) {
+      if (value is vx_core.Type_any) {
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -3120,7 +3088,7 @@ namespace vx_core {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         vx_core.Type_any val = mapval.get(key);
-        if (val instanceof vx_core.Type_any) {
+        if (val is vx_core.Type_any) {
           vx_core.Type_any castval = (vx_core.Type_any)val;
           map.put(key, castval);
         } else {
@@ -3135,38 +3103,36 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Type_constmap vx_new(Object... vals) {
+    public override vx_core.Type_constmap vx_new(params Object vals) {
       return e_constmap.vx_copy(vals);
     }
 
-    override
-    public Type_constmap vx_copy(Object... vals) {
+    public override vx_core.Type_constmap vx_copy(params Object vals) {
       Type_constmap output = this;
       boolean ischanged = false;
       Class_constmap val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       Map<String, vx_core.Type_any> mapval = new LinkedHashMap<>(val.vx_map());
       vx_core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof vx_core.Type_string) {
-            vx_core.Type_string valstring = (vx_core.Type_string)valsub;
+          if (valsub is vx_core.Type_string) {
+            vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub instanceof String) {
-            key = (String)valsub;
+          } else if (valsub is String) {
+            key = valsub as String
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -3175,14 +3141,14 @@ namespace vx_core {
           }
         } else {
           vx_core.Type_any valany = null;
-          if (valsub instanceof vx_core.Type_any) {
+          if (valsub is vx_core.Type_any) {
             valany = (vx_core.Type_any)valsub;
-          } else if (valsub instanceof vx_core.Type_any) {
-            valany = (vx_core.Type_any)valsub;
+          } else if (valsub is vx_core.Type_any) {
+            valany = valsub as vx_core.Type_any
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -3247,8 +3213,8 @@ namespace vx_core {
    * (type context)
    */
   interface Type_context : vx_core.Type_struct {
-    public vx_core.Type_context vx_new(Object... vals);
-    public vx_core.Type_context vx_copy(Object... vals);
+    public vx_core.Type_context vx_new(params Object vals);
+    public vx_core.Type_context vx_copy(params Object vals);
     public vx_core.Type_context vx_empty();
     public vx_core.Type_context vx_type();
     public vx_core.Type_string code();
@@ -3318,18 +3284,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_context vx_new(Object... vals) {
+    public override vx_core.Type_context vx_new(params Object vals) {
       return e_context.vx_copy(vals);
     }
 
-    override
-    public Type_context vx_copy(Object... vals) {
+    public override vx_core.Type_context vx_copy(params Object vals) {
       Type_context output = this;
       boolean ischanged = false;
       Class_context val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       vx_core.Type_string vx_p_code = val.code();
@@ -3344,23 +3308,23 @@ namespace vx_core {
       String key = "";
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub instanceof String) {
+          } else if (valsub is String) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
+            if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
@@ -3385,15 +3349,15 @@ namespace vx_core {
           switch (key) {
           case ":code":
             if (valsub == vx_p_code) {
-            } else if (valsub instanceof vx_core.Type_string) {
+            } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_code = (vx_core.Type_string)valsub;
-            } else if (valsub instanceof String) {
+            } else if (valsub is String) {
               ischanged = true;
               vx_p_code = vx_core.t_string.vx_new(valsub);
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -3408,12 +3372,12 @@ namespace vx_core {
             break;
           case ":session":
             if (valsub == vx_p_session) {
-            } else if (valsub instanceof vx_core.Type_session) {
+            } else if (valsub is vx_core.Type_session) {
               ischanged = true;
               vx_p_session = (vx_core.Type_session)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -3428,12 +3392,12 @@ namespace vx_core {
             break;
           case ":setting":
             if (valsub == vx_p_setting) {
-            } else if (valsub instanceof vx_core.Type_setting) {
+            } else if (valsub is vx_core.Type_setting) {
               ischanged = true;
               vx_p_setting = (vx_core.Type_setting)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -3448,12 +3412,12 @@ namespace vx_core {
             break;
           case ":state":
             if (valsub == vx_p_state) {
-            } else if (valsub instanceof vx_core.Type_state) {
+            } else if (valsub is vx_core.Type_state) {
               ischanged = true;
               vx_p_state = (vx_core.Type_state)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -3521,26 +3485,24 @@ namespace vx_core {
    * (type date)
    */
   interface Type_date : vx_core.Type_any {
-    public vx_core.Type_date vx_new(Object... vals);
-    public vx_core.Type_date vx_copy(Object... vals);
+    public vx_core.Type_date vx_new(params Object vals);
+    public vx_core.Type_date vx_copy(params Object vals);
     public vx_core.Type_date vx_empty();
     public vx_core.Type_date vx_type();
   }
 
   class Class_date : vx_core.Class_base, Type_date {
 
-    override
-    public Type_date vx_new(Object... vals) {
+    public override vx_core.Type_date vx_new(params Object vals) {
       return e_date.vx_copy(vals);
     }
 
-    override
-    public Type_date vx_copy(Object... vals) {
+    public override vx_core.Type_date vx_copy(params Object vals) {
       Type_date output = this;
       boolean ischanged = false;
       Class_date val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -3586,39 +3548,37 @@ namespace vx_core {
    * (type decimal)
    */
   interface Type_decimal : vx_core.Type_number {
-    public vx_core.Type_decimal vx_new(Object... vals);
-    public vx_core.Type_decimal vx_copy(Object... vals);
+    public vx_core.Type_decimal vx_new(params Object vals);
+    public vx_core.Type_decimal vx_copy(params Object vals);
     public vx_core.Type_decimal vx_empty();
     public vx_core.Type_decimal vx_type();
   }
 
   class Class_decimal : vx_core.Class_base, Type_decimal {
 
-    override
-    public Type_decimal vx_new(Object... vals) {
+    public override vx_core.Type_decimal vx_new(params Object vals) {
       return e_decimal.vx_copy(vals);
     }
 
-    override
-    public Type_decimal vx_copy(Object... vals) {
+    public override vx_core.Type_decimal vx_copy(params Object vals) {
       Type_decimal output = this;
       boolean ischanged = false;
       Class_decimal val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       String sval = val.vx_string();
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_string) {
-          vx_core.Type_string valstring = (vx_core.Type_string)valsub;
+        } else if (valsub is vx_core.Type_string) {
+          vx_core.Type_string valstring = valsub as vx_core.Type_string;
           ischanged = true;
           sval = valstring.vx_string();
-        } else if (valsub instanceof String) {
+        } else if (valsub is String) {
           ischanged = true;
           sval = (String)valsub;
         }
@@ -3667,26 +3627,24 @@ namespace vx_core {
    * (type error)
    */
   interface Type_error : vx_core.Type_any {
-    public vx_core.Type_error vx_new(Object... vals);
-    public vx_core.Type_error vx_copy(Object... vals);
+    public vx_core.Type_error vx_new(params Object vals);
+    public vx_core.Type_error vx_copy(params Object vals);
     public vx_core.Type_error vx_empty();
     public vx_core.Type_error vx_type();
   }
 
   class Class_error : vx_core.Class_base, Type_error {
 
-    override
-    public Type_error vx_new(Object... vals) {
+    public override vx_core.Type_error vx_new(params Object vals) {
       return e_error.vx_copy(vals);
     }
 
-    override
-    public Type_error vx_copy(Object... vals) {
+    public override vx_core.Type_error vx_copy(params Object vals) {
       Type_error output = this;
       boolean ischanged = false;
       Class_error val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -3732,59 +3690,57 @@ namespace vx_core {
    * (type float)
    */
   interface Type_float : vx_core.Type_number {
-    public vx_core.Type_float vx_new(Object... vals);
-    public vx_core.Type_float vx_copy(Object... vals);
+    public vx_core.Type_float vx_new(params Object vals);
+    public vx_core.Type_float vx_copy(params Object vals);
     public vx_core.Type_float vx_empty();
     public vx_core.Type_float vx_type();
   }
 
   class Class_float : vx_core.Class_base, Type_float {
 
-    override
-    public Type_float vx_new(Object... vals) {
+    public override vx_core.Type_float vx_new(params Object vals) {
       return e_float.vx_copy(vals);
     }
 
-    override
-    public Type_float vx_copy(Object... vals) {
+    public override vx_core.Type_float vx_copy(params Object vals) {
       Type_float output = this;
       boolean ischanged = false;
       Class_float val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       float floatval = val.vx_float();
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_decimal) {
-          vx_core.Type_decimal valnum = (vx_core.Type_decimal)valsub;
+        } else if (valsub is vx_core.Type_decimal) {
+          vx_core.Type_decimal valnum = valsub as vx_core.Type_decimal;
           ischanged = true;
           floatval += valnum.vx_float();
-        } else if (valsub instanceof vx_core.Type_float) {
-          vx_core.Type_float valnum = (vx_core.Type_float)valsub;
+        } else if (valsub is vx_core.Type_float) {
+          vx_core.Type_float valnum = valsub as vx_core.Type_float;
           ischanged = true;
           floatval += valnum.vx_float();
-        } else if (valsub instanceof vx_core.Type_int) {
-          vx_core.Type_int valnum = (vx_core.Type_int)valsub;
+        } else if (valsub is vx_core.Type_int) {
+          vx_core.Type_int valnum = valsub as vx_core.Type_int;
           ischanged = true;
           floatval += valnum.vx_int();
-        } else if (valsub instanceof vx_core.Type_string) {
-          vx_core.Type_string valstring = (vx_core.Type_string)valsub;
+        } else if (valsub is vx_core.Type_string) {
+          vx_core.Type_string valstring = valsub as vx_core.Type_string;
           ischanged = true;
           floatval += Float.parseFloat(valstring.vx_string());
-        } else if (valsub instanceof Float) {
+        } else if (valsub is Float) {
           ischanged = true;
-          floatval += (Float)valsub;
-        } else if (valsub instanceof Integer) {
+          floatval += valsub as Float;
+        } else if (valsub is Integer) {
           ischanged = true;
-          floatval += (Integer)valsub;
-        } else if (valsub instanceof String) {
+          floatval += valsub as Integer;
+        } else if (valsub is String) {
           ischanged = true;
-          floatval += Float.parseFloat((String)valsub);
+          floatval += Float.parseFloat(valsub as String);
         }
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -3831,8 +3787,8 @@ namespace vx_core {
    * (type func)
    */
   interface Type_func : vx_core.Type_any {
-    public vx_core.Type_func vx_new(Object... vals);
-    public vx_core.Type_func vx_copy(Object... vals);
+    public vx_core.Type_func vx_new(params Object vals);
+    public vx_core.Type_func vx_copy(params Object vals);
     public vx_core.Type_func vx_empty();
     public vx_core.Type_func vx_type();
 	   public vx_core.Type_funcdef vx_funcdef();
@@ -3843,18 +3799,16 @@ namespace vx_core {
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.e_funcdef;
     }
-    override
-    public Type_func vx_new(Object... vals) {
+    public override vx_core.Type_func vx_new(params Object vals) {
       return e_func.vx_copy(vals);
     }
 
-    override
-    public Type_func vx_copy(Object... vals) {
+    public override vx_core.Type_func vx_copy(params Object vals) {
       Type_func output = this;
       boolean ischanged = false;
       Class_func val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -3900,8 +3854,8 @@ namespace vx_core {
    * (type funcdef)
    */
   interface Type_funcdef : vx_core.Type_struct {
-    public vx_core.Type_funcdef vx_new(Object... vals);
-    public vx_core.Type_funcdef vx_copy(Object... vals);
+    public vx_core.Type_funcdef vx_new(params Object vals);
+    public vx_core.Type_funcdef vx_copy(params Object vals);
     public vx_core.Type_funcdef vx_empty();
     public vx_core.Type_funcdef vx_type();
     public vx_core.Type_string pkgname();
@@ -3983,18 +3937,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_funcdef vx_new(Object... vals) {
+    public override vx_core.Type_funcdef vx_new(params Object vals) {
       return e_funcdef.vx_copy(vals);
     }
 
-    override
-    public Type_funcdef vx_copy(Object... vals) {
+    public override vx_core.Type_funcdef vx_copy(params Object vals) {
       Type_funcdef output = this;
       boolean ischanged = false;
       Class_funcdef val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       vx_core.Type_string vx_p_pkgname = val.pkgname();
@@ -4011,23 +3963,23 @@ namespace vx_core {
       String key = "";
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub instanceof String) {
+          } else if (valsub is String) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
+            if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
@@ -4052,15 +4004,15 @@ namespace vx_core {
           switch (key) {
           case ":pkgname":
             if (valsub == vx_p_pkgname) {
-            } else if (valsub instanceof vx_core.Type_string) {
+            } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_pkgname = (vx_core.Type_string)valsub;
-            } else if (valsub instanceof String) {
+            } else if (valsub is String) {
               ischanged = true;
               vx_p_pkgname = vx_core.t_string.vx_new(valsub);
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -4075,15 +4027,15 @@ namespace vx_core {
             break;
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub instanceof vx_core.Type_string) {
+            } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_name = (vx_core.Type_string)valsub;
-            } else if (valsub instanceof String) {
+            } else if (valsub is String) {
               ischanged = true;
               vx_p_name = vx_core.t_string.vx_new(valsub);
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -4098,15 +4050,15 @@ namespace vx_core {
             break;
           case ":idx":
             if (valsub == vx_p_idx) {
-            } else if (valsub instanceof vx_core.Type_int) {
+            } else if (valsub is vx_core.Type_int) {
               ischanged = true;
               vx_p_idx = (vx_core.Type_int)valsub;
-            } else if (valsub instanceof Integer) {
+            } else if (valsub is Integer) {
               ischanged = true;
               vx_p_idx = vx_core.t_int.vx_new(valsub);
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -4121,12 +4073,12 @@ namespace vx_core {
             break;
           case ":type":
             if (valsub == vx_p_type) {
-            } else if (valsub instanceof vx_core.Type_any) {
+            } else if (valsub is vx_core.Type_any) {
               ischanged = true;
               vx_p_type = (vx_core.Type_any)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -4141,15 +4093,15 @@ namespace vx_core {
             break;
           case ":async":
             if (valsub == vx_p_async) {
-            } else if (valsub instanceof vx_core.Type_boolean) {
+            } else if (valsub is vx_core.Type_boolean) {
               ischanged = true;
               vx_p_async = (vx_core.Type_boolean)valsub;
-            } else if (valsub instanceof Boolean) {
+            } else if (valsub is Boolean) {
               ischanged = true;
               vx_p_async = vx_core.t_boolean.vx_new(valsub);
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -4218,8 +4170,8 @@ namespace vx_core {
    * (type funclist)
    */
   interface Type_funclist : vx_core.Type_list {
-    public vx_core.Type_funclist vx_new(Object... vals);
-    public vx_core.Type_funclist vx_copy(Object... vals);
+    public vx_core.Type_funclist vx_new(params Object vals);
+    public vx_core.Type_funclist vx_copy(params Object vals);
     public vx_core.Type_funclist vx_empty();
     public vx_core.Type_funclist vx_type();
     public List<vx_core.Type_func> vx_listfunc();
@@ -4253,48 +4205,47 @@ namespace vx_core {
       return this.vx_func(index);
     }
 
-    override
-    public Type_funclist vx_new(Object... vals) {
+    public override vx_core.Type_funclist vx_new(params Object vals) {
       return e_funclist.vx_copy(vals);
     }
 
-    override
-    public Type_funclist vx_copy(Object... vals) {
+    public override vx_core.Type_funclist vx_copy(params Object vals) {
       Type_funclist output = this;
       boolean ischanged = false;
       Class_funclist val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       List<vx_core.Type_func> listval = new ArrayList<>(val.vx_listfunc());
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_func) {
+        } else if (valsub is vx_core.Type_func) {
+          vx_core.Type_func anysub = valsub as vx_core.Type_func;
+          ischanged = true;
+          listval.add(anysub);
+        } else if (valsub is vx_core.Type_func) {
           ischanged = true;
           listval.add((vx_core.Type_func)valsub);
-        } else if (valsub instanceof vx_core.Type_func) {
-          ischanged = true;
-          listval.add((vx_core.Type_func)valsub);
-        } else if (valsub instanceof Type_funclist) {
+        } else if (valsub is vx_core.Type_funclist) {
           Type_funclist multi = (Type_funclist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listfunc());
-        } else if (valsub instanceof List) {
+        } else if (valsub is List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
-            if (item instanceof vx_core.Type_func) {
+            if (item is vx_core.Type_func) {
               vx_core.Type_func valitem = (vx_core.Type_func)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
-        } else if (valsub instanceof vx_core.Type_any) {
-          vx_core.Type_any anysub = (vx_core.Type_any)valsub;
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
           msg = vx_core.vx_msg_from_error("vx/core/funclist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
@@ -4346,8 +4297,8 @@ namespace vx_core {
    * (type funcmap)
    */
   interface Type_funcmap : vx_core.Type_map {
-    public vx_core.Type_funcmap vx_new(Object... vals);
-    public vx_core.Type_funcmap vx_copy(Object... vals);
+    public vx_core.Type_funcmap vx_new(params Object vals);
+    public vx_core.Type_funcmap vx_copy(params Object vals);
     public vx_core.Type_funcmap vx_empty();
     public vx_core.Type_funcmap vx_type();
     public Map<String, vx_core.Type_func> vx_mapfunc();
@@ -4366,7 +4317,7 @@ namespace vx_core {
     override
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
       vx_core.Type_boolean output = vx_core.c_false;
-      if (value instanceof vx_core.Type_func) {
+      if (value is vx_core.Type_func) {
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -4410,7 +4361,7 @@ namespace vx_core {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         vx_core.Type_any val = mapval.get(key);
-        if (val instanceof vx_core.Type_func) {
+        if (val is vx_core.Type_func) {
           vx_core.Type_func castval = (vx_core.Type_func)val;
           map.put(key, castval);
         } else {
@@ -4425,38 +4376,36 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Type_funcmap vx_new(Object... vals) {
+    public override vx_core.Type_funcmap vx_new(params Object vals) {
       return e_funcmap.vx_copy(vals);
     }
 
-    override
-    public Type_funcmap vx_copy(Object... vals) {
+    public override vx_core.Type_funcmap vx_copy(params Object vals) {
       Type_funcmap output = this;
       boolean ischanged = false;
       Class_funcmap val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       Map<String, vx_core.Type_func> mapval = new LinkedHashMap<>(val.vx_mapfunc());
       vx_core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof vx_core.Type_string) {
-            vx_core.Type_string valstring = (vx_core.Type_string)valsub;
+          if (valsub is vx_core.Type_string) {
+            vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub instanceof String) {
-            key = (String)valsub;
+          } else if (valsub is String) {
+            key = valsub as String
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -4465,14 +4414,14 @@ namespace vx_core {
           }
         } else {
           vx_core.Type_func valany = null;
-          if (valsub instanceof vx_core.Type_func) {
+          if (valsub is vx_core.Type_func) {
             valany = (vx_core.Type_func)valsub;
-          } else if (valsub instanceof vx_core.Type_func) {
-            valany = (vx_core.Type_func)valsub;
+          } else if (valsub is vx_core.Type_func) {
+            valany = valsub as vx_core.Type_func
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -4537,41 +4486,43 @@ namespace vx_core {
    * (type int)
    */
   interface Type_int : vx_core.Type_number {
-    public vx_core.Type_int vx_new(Object... vals);
-    public vx_core.Type_int vx_copy(Object... vals);
+    public vx_core.Type_int vx_new(params Object vals);
+    public vx_core.Type_int vx_copy(params Object vals);
     public vx_core.Type_int vx_empty();
     public vx_core.Type_int vx_type();
   }
 
   class Class_int : vx_core.Class_base, Type_int {
 
-    override
-    public Type_int vx_new(Object... vals) {
+    public override vx_core.Type_int vx_new(params Object vals) {
       return e_int.vx_copy(vals);
     }
 
-    override
-    public Type_int vx_copy(Object... vals) {
+    public override vx_core.Type_int vx_copy(params Object vals) {
       Type_int output = this;
       boolean ischanged = false;
       Class_int val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       int intval = val.vx_int();
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_int) {
+        } else if (valsub is vx_core.Type_int) {
+          vx_core.Type_int valnum = valsub as vx_core.Type_int;
           ischanged = true;
-          vx_core.Type_int valnum = (vx_core.Type_int)valsub;
           intval += valnum.vx_int();
-        } else if (valsub instanceof Integer) {
+        } else if (valsub is Integer) {
           ischanged = true;
-          intval += (Integer)valsub;
+          intval += valsub as Integer;
+        } else if (valsub is String) {
+          String valstring = valsub as String;
+          ischanged = true;
+          intval += Integer.parseInt(valstring);
         }
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -4618,8 +4569,8 @@ namespace vx_core {
    * (type intlist)
    */
   interface Type_intlist : vx_core.Type_list {
-    public vx_core.Type_intlist vx_new(Object... vals);
-    public vx_core.Type_intlist vx_copy(Object... vals);
+    public vx_core.Type_intlist vx_new(params Object vals);
+    public vx_core.Type_intlist vx_copy(params Object vals);
     public vx_core.Type_intlist vx_empty();
     public vx_core.Type_intlist vx_type();
     public List<vx_core.Type_int> vx_listint();
@@ -4653,48 +4604,47 @@ namespace vx_core {
       return this.vx_int(index);
     }
 
-    override
-    public Type_intlist vx_new(Object... vals) {
+    public override vx_core.Type_intlist vx_new(params Object vals) {
       return e_intlist.vx_copy(vals);
     }
 
-    override
-    public Type_intlist vx_copy(Object... vals) {
+    public override vx_core.Type_intlist vx_copy(params Object vals) {
       Type_intlist output = this;
       boolean ischanged = false;
       Class_intlist val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       List<vx_core.Type_int> listval = new ArrayList<>(val.vx_listint());
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_int) {
+        } else if (valsub is vx_core.Type_int) {
+          vx_core.Type_int anysub = valsub as vx_core.Type_int;
           ischanged = true;
-          listval.add((vx_core.Type_int)valsub);
-        } else if (valsub instanceof Integer) {
+          listval.add(anysub);
+        } else if (valsub is Integer) {
           ischanged = true;
           listval.add(vx_core.t_int.vx_new(valsub));
-        } else if (valsub instanceof Type_intlist) {
+        } else if (valsub is vx_core.Type_intlist) {
           Type_intlist multi = (Type_intlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listint());
-        } else if (valsub instanceof List) {
+        } else if (valsub is List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
-            if (item instanceof vx_core.Type_int) {
+            if (item is vx_core.Type_int) {
               vx_core.Type_int valitem = (vx_core.Type_int)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
-        } else if (valsub instanceof vx_core.Type_any) {
-          vx_core.Type_any anysub = (vx_core.Type_any)valsub;
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
           msg = vx_core.vx_msg_from_error("vx/core/intlist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
@@ -4746,8 +4696,8 @@ namespace vx_core {
    * (type intmap)
    */
   interface Type_intmap : vx_core.Type_map {
-    public vx_core.Type_intmap vx_new(Object... vals);
-    public vx_core.Type_intmap vx_copy(Object... vals);
+    public vx_core.Type_intmap vx_new(params Object vals);
+    public vx_core.Type_intmap vx_copy(params Object vals);
     public vx_core.Type_intmap vx_empty();
     public vx_core.Type_intmap vx_type();
     public Map<String, vx_core.Type_int> vx_mapint();
@@ -4766,7 +4716,7 @@ namespace vx_core {
     override
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
       vx_core.Type_boolean output = vx_core.c_false;
-      if (value instanceof vx_core.Type_int) {
+      if (value is vx_core.Type_int) {
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -4810,7 +4760,7 @@ namespace vx_core {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         vx_core.Type_any val = mapval.get(key);
-        if (val instanceof vx_core.Type_int) {
+        if (val is vx_core.Type_int) {
           vx_core.Type_int castval = (vx_core.Type_int)val;
           map.put(key, castval);
         } else {
@@ -4825,38 +4775,36 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Type_intmap vx_new(Object... vals) {
+    public override vx_core.Type_intmap vx_new(params Object vals) {
       return e_intmap.vx_copy(vals);
     }
 
-    override
-    public Type_intmap vx_copy(Object... vals) {
+    public override vx_core.Type_intmap vx_copy(params Object vals) {
       Type_intmap output = this;
       boolean ischanged = false;
       Class_intmap val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       Map<String, vx_core.Type_int> mapval = new LinkedHashMap<>(val.vx_mapint());
       vx_core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof vx_core.Type_string) {
-            vx_core.Type_string valstring = (vx_core.Type_string)valsub;
+          if (valsub is vx_core.Type_string) {
+            vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub instanceof String) {
-            key = (String)valsub;
+          } else if (valsub is String) {
+            key = valsub as String
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -4865,14 +4813,14 @@ namespace vx_core {
           }
         } else {
           vx_core.Type_int valany = null;
-          if (valsub instanceof vx_core.Type_int) {
+          if (valsub is vx_core.Type_int) {
             valany = (vx_core.Type_int)valsub;
-          } else if (valsub instanceof Integer) {
-            valany = vx_core.t_int.vx_new(valsub);;
+          } else if (valsub is Integer) {
+            valany = vx_core.t_int.vx_new(valsub);
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -4937,8 +4885,8 @@ namespace vx_core {
    * (type list)
    */
   interface Type_list : vx_core.Type_any {
-    public vx_core.Type_list vx_new(Object... vals);
-    public vx_core.Type_list vx_copy(Object... vals);
+    public vx_core.Type_list vx_new(params Object vals);
+    public vx_core.Type_list vx_copy(params Object vals);
     public vx_core.Type_list vx_empty();
     public vx_core.Type_list vx_type();
     public List<vx_core.Type_any> vx_list();
@@ -4973,48 +4921,47 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Type_list vx_new(Object... vals) {
+    public override vx_core.Type_list vx_new(params Object vals) {
       return e_list.vx_copy(vals);
     }
 
-    override
-    public Type_list vx_copy(Object... vals) {
+    public override vx_core.Type_list vx_copy(params Object vals) {
       Type_list output = this;
       boolean ischanged = false;
       Class_list val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       List<vx_core.Type_any> listval = new ArrayList<>(val.vx_list());
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_any) {
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
+          ischanged = true;
+          listval.add(anysub);
+        } else if (valsub is vx_core.Type_any) {
           ischanged = true;
           listval.add((vx_core.Type_any)valsub);
-        } else if (valsub instanceof vx_core.Type_any) {
-          ischanged = true;
-          listval.add((vx_core.Type_any)valsub);
-        } else if (valsub instanceof Type_list) {
+        } else if (valsub is vx_core.Type_list) {
           Type_list multi = (Type_list)valsub;
           ischanged = true;
           listval.addAll(multi.vx_list());
-        } else if (valsub instanceof List) {
+        } else if (valsub is List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
-            if (item instanceof vx_core.Type_any) {
+            if (item is vx_core.Type_any) {
               vx_core.Type_any valitem = (vx_core.Type_any)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
-        } else if (valsub instanceof vx_core.Type_any) {
-          vx_core.Type_any anysub = (vx_core.Type_any)valsub;
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
           msg = vx_core.vx_msg_from_error("vx/core/list", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
@@ -5093,26 +5040,24 @@ namespace vx_core {
    * (type listtype)
    */
   interface Type_listtype : vx_core.Type_any {
-    public vx_core.Type_listtype vx_new(Object... vals);
-    public vx_core.Type_listtype vx_copy(Object... vals);
+    public vx_core.Type_listtype vx_new(params Object vals);
+    public vx_core.Type_listtype vx_copy(params Object vals);
     public vx_core.Type_listtype vx_empty();
     public vx_core.Type_listtype vx_type();
   }
 
   class Class_listtype : vx_core.Class_base, Type_listtype {
 
-    override
-    public Type_listtype vx_new(Object... vals) {
+    public override vx_core.Type_listtype vx_new(params Object vals) {
       return e_listtype.vx_copy(vals);
     }
 
-    override
-    public Type_listtype vx_copy(Object... vals) {
+    public override vx_core.Type_listtype vx_copy(params Object vals) {
       Type_listtype output = this;
       boolean ischanged = false;
       Class_listtype val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -5158,8 +5103,8 @@ namespace vx_core {
    * (type locale)
    */
   interface Type_locale : vx_core.Type_struct {
-    public vx_core.Type_locale vx_new(Object... vals);
-    public vx_core.Type_locale vx_copy(Object... vals);
+    public vx_core.Type_locale vx_new(params Object vals);
+    public vx_core.Type_locale vx_copy(params Object vals);
     public vx_core.Type_locale vx_empty();
     public vx_core.Type_locale vx_type();
   }
@@ -5181,18 +5126,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_locale vx_new(Object... vals) {
+    public override vx_core.Type_locale vx_new(params Object vals) {
       return e_locale.vx_copy(vals);
     }
 
-    override
-    public Type_locale vx_copy(Object... vals) {
+    public override vx_core.Type_locale vx_copy(params Object vals) {
       Type_locale output = this;
       boolean ischanged = false;
       Class_locale val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -5238,8 +5181,8 @@ namespace vx_core {
    * (type map)
    */
   interface Type_map : vx_core.Type_any {
-    public vx_core.Type_map vx_new(Object... vals);
-    public vx_core.Type_map vx_copy(Object... vals);
+    public vx_core.Type_map vx_new(params Object vals);
+    public vx_core.Type_map vx_copy(params Object vals);
     public vx_core.Type_map vx_empty();
     public vx_core.Type_map vx_type();
     public vx_core.Type_map vx_new_from_map(Map<String, vx_core.Type_any> mapval);
@@ -5260,7 +5203,7 @@ namespace vx_core {
     override
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
       vx_core.Type_boolean output = vx_core.c_false;
-      if (value instanceof vx_core.Type_any) {
+      if (value is vx_core.Type_any) {
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -5296,7 +5239,7 @@ namespace vx_core {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         vx_core.Type_any val = mapval.get(key);
-        if (val instanceof vx_core.Type_any) {
+        if (val is vx_core.Type_any) {
           vx_core.Type_any castval = (vx_core.Type_any)val;
           map.put(key, castval);
         } else {
@@ -5311,38 +5254,36 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Type_map vx_new(Object... vals) {
+    public override vx_core.Type_map vx_new(params Object vals) {
       return e_map.vx_copy(vals);
     }
 
-    override
-    public Type_map vx_copy(Object... vals) {
+    public override vx_core.Type_map vx_copy(params Object vals) {
       Type_map output = this;
       boolean ischanged = false;
       Class_map val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       Map<String, vx_core.Type_any> mapval = new LinkedHashMap<>(val.vx_map());
       vx_core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof vx_core.Type_string) {
-            vx_core.Type_string valstring = (vx_core.Type_string)valsub;
+          if (valsub is vx_core.Type_string) {
+            vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub instanceof String) {
-            key = (String)valsub;
+          } else if (valsub is String) {
+            key = valsub as String
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -5351,14 +5292,14 @@ namespace vx_core {
           }
         } else {
           vx_core.Type_any valany = null;
-          if (valsub instanceof vx_core.Type_any) {
+          if (valsub is vx_core.Type_any) {
             valany = (vx_core.Type_any)valsub;
-          } else if (valsub instanceof vx_core.Type_any) {
-            valany = (vx_core.Type_any)valsub;
+          } else if (valsub is vx_core.Type_any) {
+            valany = valsub as vx_core.Type_any
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -5423,26 +5364,24 @@ namespace vx_core {
    * (type maptype)
    */
   interface Type_maptype : vx_core.Type_any {
-    public vx_core.Type_maptype vx_new(Object... vals);
-    public vx_core.Type_maptype vx_copy(Object... vals);
+    public vx_core.Type_maptype vx_new(params Object vals);
+    public vx_core.Type_maptype vx_copy(params Object vals);
     public vx_core.Type_maptype vx_empty();
     public vx_core.Type_maptype vx_type();
   }
 
   class Class_maptype : vx_core.Class_base, Type_maptype {
 
-    override
-    public Type_maptype vx_new(Object... vals) {
+    public override vx_core.Type_maptype vx_new(params Object vals) {
       return e_maptype.vx_copy(vals);
     }
 
-    override
-    public Type_maptype vx_copy(Object... vals) {
+    public override vx_core.Type_maptype vx_copy(params Object vals) {
       Type_maptype output = this;
       boolean ischanged = false;
       Class_maptype val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -5488,8 +5427,8 @@ namespace vx_core {
    * (type mempool)
    */
   interface Type_mempool : vx_core.Type_struct {
-    public vx_core.Type_mempool vx_new(Object... vals);
-    public vx_core.Type_mempool vx_copy(Object... vals);
+    public vx_core.Type_mempool vx_new(params Object vals);
+    public vx_core.Type_mempool vx_copy(params Object vals);
     public vx_core.Type_mempool vx_empty();
     public vx_core.Type_mempool vx_type();
     public vx_core.Type_value valuepool();
@@ -5523,18 +5462,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_mempool vx_new(Object... vals) {
+    public override vx_core.Type_mempool vx_new(params Object vals) {
       return e_mempool.vx_copy(vals);
     }
 
-    override
-    public Type_mempool vx_copy(Object... vals) {
+    public override vx_core.Type_mempool vx_copy(params Object vals) {
       Type_mempool output = this;
       boolean ischanged = false;
       Class_mempool val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       vx_core.Type_value vx_p_valuepool = val.valuepool();
@@ -5543,23 +5480,23 @@ namespace vx_core {
       String key = "";
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub instanceof String) {
+          } else if (valsub is String) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
+            if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
@@ -5584,12 +5521,12 @@ namespace vx_core {
           switch (key) {
           case ":valuepool":
             if (valsub == vx_p_valuepool) {
-            } else if (valsub instanceof vx_core.Type_value) {
+            } else if (valsub is vx_core.Type_value) {
               ischanged = true;
               vx_p_valuepool = (vx_core.Type_value)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -5654,8 +5591,8 @@ namespace vx_core {
    * (type msg)
    */
   interface Type_msg : vx_core.Type_struct {
-    public vx_core.Type_msg vx_new(Object... vals);
-    public vx_core.Type_msg vx_copy(Object... vals);
+    public vx_core.Type_msg vx_new(params Object vals);
+    public vx_core.Type_msg vx_copy(params Object vals);
     public vx_core.Type_msg vx_empty();
     public vx_core.Type_msg vx_type();
     public vx_core.Type_typedef vx_typedef();
@@ -5738,17 +5675,15 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_msg vx_new(Object... vals) {
+    public override vx_core.Type_msg vx_new(params Object vals) {
       return e_msg.vx_copy(vals);
     }
 
-    override
-    public Type_msg vx_copy(Object... vals) {
+    public override vx_core.Type_msg vx_copy(params Object vals) {
       Type_msg output = this;
       boolean ischanged = false;
       Class_msg val = this;
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       vx_core.Type_string vx_p_code = val.code();
@@ -5759,57 +5694,57 @@ namespace vx_core {
       String key = "";
       for (Object valsub : vals) {
         if (key == "") {
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             key = valstr.vx_string();
-          } else if (valsub instanceof String) {
+          } else if (valsub is String) {
             key = (String)valsub;
           }
         } else {
           switch (key) {
           case ":code":
             if (valsub == vx_p_code) {
-            } else if (valsub instanceof vx_core.Type_string) {
+            } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_code = (vx_core.Type_string)valsub;
-            } else if (valsub instanceof String) {
+            } else if (valsub is String) {
               ischanged = true;
               vx_p_code = vx_core.t_string.vx_new(valsub);
             }
             break;
           case ":detail":
             if (valsub == vx_p_detail) {
-            } else if (valsub instanceof vx_core.Type_any) {
+            } else if (valsub is vx_core.Type_any) {
               ischanged = true;
               vx_p_detail = (vx_core.Type_any)valsub;
             }
             break;
           case ":path":
             if (valsub == vx_p_path) {
-            } else if (valsub instanceof vx_core.Type_string) {
+            } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_path = (vx_core.Type_string)valsub;
-            } else if (valsub instanceof String) {
+            } else if (valsub is String) {
               ischanged = true;
               vx_p_path = vx_core.t_string.vx_new(valsub);
             }
             break;
           case ":severity":
             if (valsub == vx_p_severity) {
-            } else if (valsub instanceof vx_core.Type_int) {
+            } else if (valsub is vx_core.Type_int) {
               ischanged = true;
               vx_p_severity = (vx_core.Type_int)valsub;
-            } else if (valsub instanceof Integer) {
+            } else if (valsub is Integer) {
               ischanged = true;
               vx_p_severity = vx_core.t_int.vx_new(valsub);
             }
             break;
           case ":text":
             if (valsub == vx_p_text) {
-            } else if (valsub instanceof vx_core.Type_string) {
+            } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_text = (vx_core.Type_string)valsub;
-            } else if (valsub instanceof String) {
+            } else if (valsub is String) {
               ischanged = true;
               vx_p_text = vx_core.t_string.vx_new(valsub);
             }
@@ -5865,8 +5800,8 @@ namespace vx_core {
    * (type msgblock)
    */
   interface Type_msgblock : vx_core.Type_struct {
-    public vx_core.Type_msgblock vx_new(Object... vals);
-    public vx_core.Type_msgblock vx_copy(Object... vals);
+    public vx_core.Type_msgblock vx_new(params Object vals);
+    public vx_core.Type_msgblock vx_copy(params Object vals);
     public vx_core.Type_msgblock vx_empty();
     public vx_core.Type_msgblock vx_type();
     public vx_core.Type_typedef vx_typedef();
@@ -5914,18 +5849,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_msgblock vx_new(Object... vals) {
+    public override vx_core.Type_msgblock vx_new(params Object vals) {
       return e_msgblock.vx_copy(vals);
     }
 
-    override
-    public Type_msgblock vx_copy(Object... vals) {
+    public override vx_core.Type_msgblock vx_copy(params Object vals) {
       Type_msgblock output = this;
       boolean ischanged = false;
       Class_msgblock val = this;
       vx_core.Type_msgblock msgblock = this;
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       vx_core.Type_msglist vx_p_msgs = val.msgs();
@@ -5933,52 +5866,43 @@ namespace vx_core {
       String key = "";
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           if (valsub != vx_core.e_msgblock) {
             vx_p_msgblocks = vx_p_msgblocks.vx_copy(valsub);
             ischanged = true;
           }
-        } else if (valsub instanceof vx_core.Type_msgblocklist) {
+        } else if (valsub is vx_core.Type_msgblocklist) {
           if (valsub != vx_core.e_msgblocklist) {
             vx_p_msgblocks = vx_p_msgblocks.vx_copy(valsub);
             ischanged = true;
           }
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           if (valsub != vx_core.e_msg) {
             vx_p_msgs = vx_p_msgs.vx_copy(valsub);
             ischanged = true;
           }
-        } else if (valsub instanceof vx_core.Type_msglist) {
+        } else if (valsub is vx_core.Type_msglist) {
           if (valsub != vx_core.e_msglist) {
             vx_p_msgs = vx_p_msgs.vx_copy(valsub);
             ischanged = true;
           }
         } else if (key == "") {
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             key = valstr.vx_string();
-          } else if (valsub instanceof String) {
+          } else if (valsub is String) {
             key = (String)valsub;
-          } else {
-            //vx_core.Type_any msgval;
-            //if (valsub instanceof vx_core.Type_any) {
-            //  msgval = (vx_core.Type_any)valsub;
-            //} else {
-            //  msgval = vx_core.vx_new_string(valsub.toString());
-            //}
-            //msg = vx_core.vx_msg_from_error("vx/core/msgblock", ":invalidkeytype", msgval);
-            //msgblock = msgblock.vx_copy(msg);
           }
         } else {
           switch (key) {
           case ":msgs":
             if (valsub == vx_p_msgs) {
-            } else if (valsub instanceof vx_core.Type_msglist) {
+            } else if (valsub is vx_core.Type_msglist) {
               ischanged = true;
               vx_p_msgs = (vx_core.Type_msglist)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -5993,12 +5917,12 @@ namespace vx_core {
             break;
           case ":msgblocks":
             if (valsub == vx_p_msgblocks) {
-            } else if (valsub instanceof vx_core.Type_msgblocklist) {
+            } else if (valsub is vx_core.Type_msgblocklist) {
               ischanged = true;
               vx_p_msgblocks = (vx_core.Type_msgblocklist)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -6063,8 +5987,8 @@ namespace vx_core {
    * (type msgblocklist)
    */
   interface Type_msgblocklist : vx_core.Type_list {
-    public vx_core.Type_msgblocklist vx_new(Object... vals);
-    public vx_core.Type_msgblocklist vx_copy(Object... vals);
+    public vx_core.Type_msgblocklist vx_new(params Object vals);
+    public vx_core.Type_msgblocklist vx_copy(params Object vals);
     public vx_core.Type_msgblocklist vx_empty();
     public vx_core.Type_msgblocklist vx_type();
     public List<vx_core.Type_msgblock> vx_listmsgblock();
@@ -6098,43 +6022,41 @@ namespace vx_core {
       return this.vx_msgblock(index);
     }
 
-    override
-    public Type_msgblocklist vx_new(Object... vals) {
+    public override vx_core.Type_msgblocklist vx_new(params Object vals) {
       return e_msgblocklist.vx_copy(vals);
     }
 
-    override
-    public Type_msgblocklist vx_copy(Object... vals) {
+    public override vx_core.Type_msgblocklist vx_copy(params Object vals) {
       Type_msgblocklist output = this;
       boolean ischanged = false;
       Class_msgblocklist val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       List<vx_core.Type_msgblock> listval = new ArrayList<>(val.vx_listmsgblock());
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msg) {
+        if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msgblock) {
+        } else if (valsub is vx_core.Type_msgblock) {
           ischanged = true;
           listval.add((vx_core.Type_msgblock)valsub);
-        } else if (valsub instanceof Type_msgblocklist) {
+        } else if (valsub is vx_core.Type_msgblocklist) {
           Type_msgblocklist multi = (Type_msgblocklist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listmsgblock());
-        } else if (valsub instanceof List) {
+        } else if (valsub is List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
-            if (item instanceof vx_core.Type_msgblock) {
+            if (item is vx_core.Type_msgblock) {
               vx_core.Type_msgblock valitem = (vx_core.Type_msgblock)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
-        } else if (valsub instanceof vx_core.Type_any) {
-          vx_core.Type_any anysub = (vx_core.Type_any)valsub;
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
           msg = vx_core.vx_msg_from_error("vx/core/msgblocklist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
@@ -6186,8 +6108,8 @@ namespace vx_core {
    * (type msglist)
    */
   interface Type_msglist : vx_core.Type_list {
-    public vx_core.Type_msglist vx_new(Object... vals);
-    public vx_core.Type_msglist vx_copy(Object... vals);
+    public vx_core.Type_msglist vx_new(params Object vals);
+    public vx_core.Type_msglist vx_copy(params Object vals);
     public vx_core.Type_msglist vx_empty();
     public vx_core.Type_msglist vx_type();
     public List<vx_core.Type_msg> vx_listmsg();
@@ -6221,43 +6143,41 @@ namespace vx_core {
       return this.vx_msg(index);
     }
 
-    override
-    public Type_msglist vx_new(Object... vals) {
+    public override vx_core.Type_msglist vx_new(params Object vals) {
       return e_msglist.vx_copy(vals);
     }
 
-    override
-    public Type_msglist vx_copy(Object... vals) {
+    public override vx_core.Type_msglist vx_copy(params Object vals) {
       Type_msglist output = this;
       boolean ischanged = false;
       Class_msglist val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       List<vx_core.Type_msg> listval = new ArrayList<>(val.vx_listmsg());
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           ischanged = true;
           listval.add((vx_core.Type_msg)valsub);
-        } else if (valsub instanceof Type_msglist) {
+        } else if (valsub is vx_core.Type_msglist) {
           Type_msglist multi = (Type_msglist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listmsg());
-        } else if (valsub instanceof List) {
+        } else if (valsub is List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
-            if (item instanceof vx_core.Type_msg) {
+            if (item is vx_core.Type_msg) {
               vx_core.Type_msg valitem = (vx_core.Type_msg)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
-        } else if (valsub instanceof vx_core.Type_any) {
-          vx_core.Type_any anysub = (vx_core.Type_any)valsub;
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
           msg = vx_core.vx_msg_from_error("vx/core/msglist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
@@ -6309,26 +6229,24 @@ namespace vx_core {
    * (type none)
    */
   interface Type_none : vx_core.Type_any {
-    public vx_core.Type_none vx_new(Object... vals);
-    public vx_core.Type_none vx_copy(Object... vals);
+    public vx_core.Type_none vx_new(params Object vals);
+    public vx_core.Type_none vx_copy(params Object vals);
     public vx_core.Type_none vx_empty();
     public vx_core.Type_none vx_type();
   }
 
   class Class_none : vx_core.Class_base, Type_none {
 
-    override
-    public Type_none vx_new(Object... vals) {
+    public override vx_core.Type_none vx_new(params Object vals) {
       return e_none.vx_copy(vals);
     }
 
-    override
-    public Type_none vx_copy(Object... vals) {
+    public override vx_core.Type_none vx_copy(params Object vals) {
       Type_none output = this;
       boolean ischanged = false;
       Class_none val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -6374,26 +6292,24 @@ namespace vx_core {
    * (type notype)
    */
   interface Type_notype : vx_core.Type_any {
-    public vx_core.Type_notype vx_new(Object... vals);
-    public vx_core.Type_notype vx_copy(Object... vals);
+    public vx_core.Type_notype vx_new(params Object vals);
+    public vx_core.Type_notype vx_copy(params Object vals);
     public vx_core.Type_notype vx_empty();
     public vx_core.Type_notype vx_type();
   }
 
   class Class_notype : vx_core.Class_base, Type_notype {
 
-    override
-    public Type_notype vx_new(Object... vals) {
+    public override vx_core.Type_notype vx_new(params Object vals) {
       return e_notype.vx_copy(vals);
     }
 
-    override
-    public Type_notype vx_copy(Object... vals) {
+    public override vx_core.Type_notype vx_copy(params Object vals) {
       Type_notype output = this;
       boolean ischanged = false;
       Class_notype val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -6439,26 +6355,24 @@ namespace vx_core {
    * (type number)
    */
   interface Type_number : vx_core.Type_any {
-    public vx_core.Type_number vx_new(Object... vals);
-    public vx_core.Type_number vx_copy(Object... vals);
+    public vx_core.Type_number vx_new(params Object vals);
+    public vx_core.Type_number vx_copy(params Object vals);
     public vx_core.Type_number vx_empty();
     public vx_core.Type_number vx_type();
   }
 
   class Class_number : vx_core.Class_base, Type_number {
 
-    override
-    public Type_number vx_new(Object... vals) {
+    public override vx_core.Type_number vx_new(params Object vals) {
       return e_number.vx_copy(vals);
     }
 
-    override
-    public Type_number vx_copy(Object... vals) {
+    public override vx_core.Type_number vx_copy(params Object vals) {
       Type_number output = this;
       boolean ischanged = false;
       Class_number val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -6504,8 +6418,8 @@ namespace vx_core {
    * (type numberlist)
    */
   interface Type_numberlist : vx_core.Type_list {
-    public vx_core.Type_numberlist vx_new(Object... vals);
-    public vx_core.Type_numberlist vx_copy(Object... vals);
+    public vx_core.Type_numberlist vx_new(params Object vals);
+    public vx_core.Type_numberlist vx_copy(params Object vals);
     public vx_core.Type_numberlist vx_empty();
     public vx_core.Type_numberlist vx_type();
     public List<vx_core.Type_number> vx_listnumber();
@@ -6539,48 +6453,47 @@ namespace vx_core {
       return this.vx_number(index);
     }
 
-    override
-    public Type_numberlist vx_new(Object... vals) {
+    public override vx_core.Type_numberlist vx_new(params Object vals) {
       return e_numberlist.vx_copy(vals);
     }
 
-    override
-    public Type_numberlist vx_copy(Object... vals) {
+    public override vx_core.Type_numberlist vx_copy(params Object vals) {
       Type_numberlist output = this;
       boolean ischanged = false;
       Class_numberlist val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       List<vx_core.Type_number> listval = new ArrayList<>(val.vx_listnumber());
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_number) {
+        } else if (valsub is vx_core.Type_number) {
+          vx_core.Type_number anysub = valsub as vx_core.Type_number;
+          ischanged = true;
+          listval.add(anysub);
+        } else if (valsub is vx_core.Type_number) {
           ischanged = true;
           listval.add((vx_core.Type_number)valsub);
-        } else if (valsub instanceof vx_core.Type_number) {
-          ischanged = true;
-          listval.add((vx_core.Type_number)valsub);
-        } else if (valsub instanceof Type_numberlist) {
+        } else if (valsub is vx_core.Type_numberlist) {
           Type_numberlist multi = (Type_numberlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listnumber());
-        } else if (valsub instanceof List) {
+        } else if (valsub is List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
-            if (item instanceof vx_core.Type_number) {
+            if (item is vx_core.Type_number) {
               vx_core.Type_number valitem = (vx_core.Type_number)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
-        } else if (valsub instanceof vx_core.Type_any) {
-          vx_core.Type_any anysub = (vx_core.Type_any)valsub;
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
           msg = vx_core.vx_msg_from_error("vx/core/numberlist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
@@ -6632,8 +6545,8 @@ namespace vx_core {
    * (type numbermap)
    */
   interface Type_numbermap : vx_core.Type_map {
-    public vx_core.Type_numbermap vx_new(Object... vals);
-    public vx_core.Type_numbermap vx_copy(Object... vals);
+    public vx_core.Type_numbermap vx_new(params Object vals);
+    public vx_core.Type_numbermap vx_copy(params Object vals);
     public vx_core.Type_numbermap vx_empty();
     public vx_core.Type_numbermap vx_type();
     public Map<String, vx_core.Type_number> vx_mapnumber();
@@ -6652,7 +6565,7 @@ namespace vx_core {
     override
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
       vx_core.Type_boolean output = vx_core.c_false;
-      if (value instanceof vx_core.Type_number) {
+      if (value is vx_core.Type_number) {
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -6696,7 +6609,7 @@ namespace vx_core {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         vx_core.Type_any val = mapval.get(key);
-        if (val instanceof vx_core.Type_number) {
+        if (val is vx_core.Type_number) {
           vx_core.Type_number castval = (vx_core.Type_number)val;
           map.put(key, castval);
         } else {
@@ -6711,38 +6624,36 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Type_numbermap vx_new(Object... vals) {
+    public override vx_core.Type_numbermap vx_new(params Object vals) {
       return e_numbermap.vx_copy(vals);
     }
 
-    override
-    public Type_numbermap vx_copy(Object... vals) {
+    public override vx_core.Type_numbermap vx_copy(params Object vals) {
       Type_numbermap output = this;
       boolean ischanged = false;
       Class_numbermap val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       Map<String, vx_core.Type_number> mapval = new LinkedHashMap<>(val.vx_mapnumber());
       vx_core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof vx_core.Type_string) {
-            vx_core.Type_string valstring = (vx_core.Type_string)valsub;
+          if (valsub is vx_core.Type_string) {
+            vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub instanceof String) {
-            key = (String)valsub;
+          } else if (valsub is String) {
+            key = valsub as String
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -6751,14 +6662,14 @@ namespace vx_core {
           }
         } else {
           vx_core.Type_number valany = null;
-          if (valsub instanceof vx_core.Type_number) {
+          if (valsub is vx_core.Type_number) {
             valany = (vx_core.Type_number)valsub;
-          } else if (valsub instanceof vx_core.Type_number) {
-            valany = (vx_core.Type_number)valsub;
+          } else if (valsub is vx_core.Type_number) {
+            valany = valsub as vx_core.Type_number
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -6823,8 +6734,8 @@ namespace vx_core {
    * (type package)
    */
   interface Type_package : vx_core.Type_struct {
-    public vx_core.Type_package vx_new(Object... vals);
-    public vx_core.Type_package vx_copy(Object... vals);
+    public vx_core.Type_package vx_new(params Object vals);
+    public vx_core.Type_package vx_copy(params Object vals);
     public vx_core.Type_package vx_empty();
     public vx_core.Type_package vx_type();
     public vx_core.Type_string pkgname();
@@ -6906,18 +6817,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_package vx_new(Object... vals) {
+    public override vx_core.Type_package vx_new(params Object vals) {
       return e_package.vx_copy(vals);
     }
 
-    override
-    public Type_package vx_copy(Object... vals) {
+    public override vx_core.Type_package vx_copy(params Object vals) {
       Type_package output = this;
       boolean ischanged = false;
       Class_package val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       vx_core.Type_string vx_p_pkgname = val.pkgname();
@@ -6934,23 +6843,23 @@ namespace vx_core {
       String key = "";
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub instanceof String) {
+          } else if (valsub is String) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
+            if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
@@ -6975,15 +6884,15 @@ namespace vx_core {
           switch (key) {
           case ":pkgname":
             if (valsub == vx_p_pkgname) {
-            } else if (valsub instanceof vx_core.Type_string) {
+            } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_pkgname = (vx_core.Type_string)valsub;
-            } else if (valsub instanceof String) {
+            } else if (valsub is String) {
               ischanged = true;
               vx_p_pkgname = vx_core.t_string.vx_new(valsub);
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -6998,12 +6907,12 @@ namespace vx_core {
             break;
           case ":constmap":
             if (valsub == vx_p_constmap) {
-            } else if (valsub instanceof vx_core.Type_constmap) {
+            } else if (valsub is vx_core.Type_constmap) {
               ischanged = true;
               vx_p_constmap = (vx_core.Type_constmap)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -7018,12 +6927,12 @@ namespace vx_core {
             break;
           case ":funcmap":
             if (valsub == vx_p_funcmap) {
-            } else if (valsub instanceof vx_core.Type_funcmap) {
+            } else if (valsub is vx_core.Type_funcmap) {
               ischanged = true;
               vx_p_funcmap = (vx_core.Type_funcmap)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -7038,12 +6947,12 @@ namespace vx_core {
             break;
           case ":typemap":
             if (valsub == vx_p_typemap) {
-            } else if (valsub instanceof vx_core.Type_typemap) {
+            } else if (valsub is vx_core.Type_typemap) {
               ischanged = true;
               vx_p_typemap = (vx_core.Type_typemap)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -7058,12 +6967,12 @@ namespace vx_core {
             break;
           case ":emptymap":
             if (valsub == vx_p_emptymap) {
-            } else if (valsub instanceof vx_core.Type_map) {
+            } else if (valsub is vx_core.Type_map) {
               ischanged = true;
               vx_p_emptymap = (vx_core.Type_map)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -7131,8 +7040,8 @@ namespace vx_core {
    * (type packagemap)
    */
   interface Type_packagemap : vx_core.Type_map {
-    public vx_core.Type_packagemap vx_new(Object... vals);
-    public vx_core.Type_packagemap vx_copy(Object... vals);
+    public vx_core.Type_packagemap vx_new(params Object vals);
+    public vx_core.Type_packagemap vx_copy(params Object vals);
     public vx_core.Type_packagemap vx_empty();
     public vx_core.Type_packagemap vx_type();
     public Map<String, vx_core.Type_package> vx_mappackage();
@@ -7151,7 +7060,7 @@ namespace vx_core {
     override
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
       vx_core.Type_boolean output = vx_core.c_false;
-      if (value instanceof vx_core.Type_package) {
+      if (value is vx_core.Type_package) {
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -7195,7 +7104,7 @@ namespace vx_core {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         vx_core.Type_any val = mapval.get(key);
-        if (val instanceof vx_core.Type_package) {
+        if (val is vx_core.Type_package) {
           vx_core.Type_package castval = (vx_core.Type_package)val;
           map.put(key, castval);
         } else {
@@ -7210,38 +7119,36 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Type_packagemap vx_new(Object... vals) {
+    public override vx_core.Type_packagemap vx_new(params Object vals) {
       return e_packagemap.vx_copy(vals);
     }
 
-    override
-    public Type_packagemap vx_copy(Object... vals) {
+    public override vx_core.Type_packagemap vx_copy(params Object vals) {
       Type_packagemap output = this;
       boolean ischanged = false;
       Class_packagemap val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       Map<String, vx_core.Type_package> mapval = new LinkedHashMap<>(val.vx_mappackage());
       vx_core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof vx_core.Type_string) {
-            vx_core.Type_string valstring = (vx_core.Type_string)valsub;
+          if (valsub is vx_core.Type_string) {
+            vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub instanceof String) {
-            key = (String)valsub;
+          } else if (valsub is String) {
+            key = valsub as String
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -7250,14 +7157,14 @@ namespace vx_core {
           }
         } else {
           vx_core.Type_package valany = null;
-          if (valsub instanceof vx_core.Type_package) {
+          if (valsub is vx_core.Type_package) {
             valany = (vx_core.Type_package)valsub;
-          } else if (valsub instanceof vx_core.Type_package) {
-            valany = (vx_core.Type_package)valsub;
+          } else if (valsub is vx_core.Type_package) {
+            valany = valsub as vx_core.Type_package
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -7322,8 +7229,8 @@ namespace vx_core {
    * (type permission)
    */
   interface Type_permission : vx_core.Type_struct {
-    public vx_core.Type_permission vx_new(Object... vals);
-    public vx_core.Type_permission vx_copy(Object... vals);
+    public vx_core.Type_permission vx_new(params Object vals);
+    public vx_core.Type_permission vx_copy(params Object vals);
     public vx_core.Type_permission vx_empty();
     public vx_core.Type_permission vx_type();
     public vx_core.Type_string id();
@@ -7357,18 +7264,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_permission vx_new(Object... vals) {
+    public override vx_core.Type_permission vx_new(params Object vals) {
       return e_permission.vx_copy(vals);
     }
 
-    override
-    public Type_permission vx_copy(Object... vals) {
+    public override vx_core.Type_permission vx_copy(params Object vals) {
       Type_permission output = this;
       boolean ischanged = false;
       Class_permission val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       vx_core.Type_string vx_p_id = val.id();
@@ -7377,23 +7282,23 @@ namespace vx_core {
       String key = "";
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub instanceof String) {
+          } else if (valsub is String) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
+            if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
@@ -7418,15 +7323,15 @@ namespace vx_core {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub instanceof vx_core.Type_string) {
+            } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_id = (vx_core.Type_string)valsub;
-            } else if (valsub instanceof String) {
+            } else if (valsub is String) {
               ischanged = true;
               vx_p_id = vx_core.t_string.vx_new(valsub);
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -7491,8 +7396,8 @@ namespace vx_core {
    * (type permissionlist)
    */
   interface Type_permissionlist : vx_core.Type_list {
-    public vx_core.Type_permissionlist vx_new(Object... vals);
-    public vx_core.Type_permissionlist vx_copy(Object... vals);
+    public vx_core.Type_permissionlist vx_new(params Object vals);
+    public vx_core.Type_permissionlist vx_copy(params Object vals);
     public vx_core.Type_permissionlist vx_empty();
     public vx_core.Type_permissionlist vx_type();
     public List<vx_core.Type_permission> vx_listpermission();
@@ -7526,48 +7431,47 @@ namespace vx_core {
       return this.vx_permission(index);
     }
 
-    override
-    public Type_permissionlist vx_new(Object... vals) {
+    public override vx_core.Type_permissionlist vx_new(params Object vals) {
       return e_permissionlist.vx_copy(vals);
     }
 
-    override
-    public Type_permissionlist vx_copy(Object... vals) {
+    public override vx_core.Type_permissionlist vx_copy(params Object vals) {
       Type_permissionlist output = this;
       boolean ischanged = false;
       Class_permissionlist val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       List<vx_core.Type_permission> listval = new ArrayList<>(val.vx_listpermission());
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_permission) {
+        } else if (valsub is vx_core.Type_permission) {
+          vx_core.Type_permission anysub = valsub as vx_core.Type_permission;
+          ischanged = true;
+          listval.add(anysub);
+        } else if (valsub is vx_core.Type_permission) {
           ischanged = true;
           listval.add((vx_core.Type_permission)valsub);
-        } else if (valsub instanceof vx_core.Type_permission) {
-          ischanged = true;
-          listval.add((vx_core.Type_permission)valsub);
-        } else if (valsub instanceof Type_permissionlist) {
+        } else if (valsub is vx_core.Type_permissionlist) {
           Type_permissionlist multi = (Type_permissionlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listpermission());
-        } else if (valsub instanceof List) {
+        } else if (valsub is List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
-            if (item instanceof vx_core.Type_permission) {
+            if (item is vx_core.Type_permission) {
               vx_core.Type_permission valitem = (vx_core.Type_permission)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
-        } else if (valsub instanceof vx_core.Type_any) {
-          vx_core.Type_any anysub = (vx_core.Type_any)valsub;
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
           msg = vx_core.vx_msg_from_error("vx/core/permissionlist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
@@ -7619,8 +7523,8 @@ namespace vx_core {
    * (type permissionmap)
    */
   interface Type_permissionmap : vx_core.Type_map {
-    public vx_core.Type_permissionmap vx_new(Object... vals);
-    public vx_core.Type_permissionmap vx_copy(Object... vals);
+    public vx_core.Type_permissionmap vx_new(params Object vals);
+    public vx_core.Type_permissionmap vx_copy(params Object vals);
     public vx_core.Type_permissionmap vx_empty();
     public vx_core.Type_permissionmap vx_type();
     public Map<String, vx_core.Type_permission> vx_mappermission();
@@ -7639,7 +7543,7 @@ namespace vx_core {
     override
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
       vx_core.Type_boolean output = vx_core.c_false;
-      if (value instanceof vx_core.Type_permission) {
+      if (value is vx_core.Type_permission) {
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -7683,7 +7587,7 @@ namespace vx_core {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         vx_core.Type_any val = mapval.get(key);
-        if (val instanceof vx_core.Type_permission) {
+        if (val is vx_core.Type_permission) {
           vx_core.Type_permission castval = (vx_core.Type_permission)val;
           map.put(key, castval);
         } else {
@@ -7698,38 +7602,36 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Type_permissionmap vx_new(Object... vals) {
+    public override vx_core.Type_permissionmap vx_new(params Object vals) {
       return e_permissionmap.vx_copy(vals);
     }
 
-    override
-    public Type_permissionmap vx_copy(Object... vals) {
+    public override vx_core.Type_permissionmap vx_copy(params Object vals) {
       Type_permissionmap output = this;
       boolean ischanged = false;
       Class_permissionmap val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       Map<String, vx_core.Type_permission> mapval = new LinkedHashMap<>(val.vx_mappermission());
       vx_core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof vx_core.Type_string) {
-            vx_core.Type_string valstring = (vx_core.Type_string)valsub;
+          if (valsub is vx_core.Type_string) {
+            vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub instanceof String) {
-            key = (String)valsub;
+          } else if (valsub is String) {
+            key = valsub as String
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -7738,14 +7640,14 @@ namespace vx_core {
           }
         } else {
           vx_core.Type_permission valany = null;
-          if (valsub instanceof vx_core.Type_permission) {
+          if (valsub is vx_core.Type_permission) {
             valany = (vx_core.Type_permission)valsub;
-          } else if (valsub instanceof vx_core.Type_permission) {
-            valany = (vx_core.Type_permission)valsub;
+          } else if (valsub is vx_core.Type_permission) {
+            valany = valsub as vx_core.Type_permission
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -7810,8 +7712,8 @@ namespace vx_core {
    * (type project)
    */
   interface Type_project : vx_core.Type_struct {
-    public vx_core.Type_project vx_new(Object... vals);
-    public vx_core.Type_project vx_copy(Object... vals);
+    public vx_core.Type_project vx_new(params Object vals);
+    public vx_core.Type_project vx_copy(params Object vals);
     public vx_core.Type_project vx_empty();
     public vx_core.Type_project vx_type();
     public vx_core.Type_packagemap packagemap();
@@ -7845,18 +7747,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_project vx_new(Object... vals) {
+    public override vx_core.Type_project vx_new(params Object vals) {
       return e_project.vx_copy(vals);
     }
 
-    override
-    public Type_project vx_copy(Object... vals) {
+    public override vx_core.Type_project vx_copy(params Object vals) {
       Type_project output = this;
       boolean ischanged = false;
       Class_project val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       vx_core.Type_packagemap vx_p_packagemap = val.packagemap();
@@ -7865,23 +7765,23 @@ namespace vx_core {
       String key = "";
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub instanceof String) {
+          } else if (valsub is String) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
+            if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
@@ -7906,12 +7806,12 @@ namespace vx_core {
           switch (key) {
           case ":packagemap":
             if (valsub == vx_p_packagemap) {
-            } else if (valsub instanceof vx_core.Type_packagemap) {
+            } else if (valsub is vx_core.Type_packagemap) {
               ischanged = true;
               vx_p_packagemap = (vx_core.Type_packagemap)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -7976,8 +7876,8 @@ namespace vx_core {
    * (type security)
    */
   interface Type_security : vx_core.Type_struct {
-    public vx_core.Type_security vx_new(Object... vals);
-    public vx_core.Type_security vx_copy(Object... vals);
+    public vx_core.Type_security vx_new(params Object vals);
+    public vx_core.Type_security vx_copy(params Object vals);
     public vx_core.Type_security vx_empty();
     public vx_core.Type_security vx_type();
     public vx_core.Type_funclist allowfuncs();
@@ -8035,18 +7935,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_security vx_new(Object... vals) {
+    public override vx_core.Type_security vx_new(params Object vals) {
       return e_security.vx_copy(vals);
     }
 
-    override
-    public Type_security vx_copy(Object... vals) {
+    public override vx_core.Type_security vx_copy(params Object vals) {
       Type_security output = this;
       boolean ischanged = false;
       Class_security val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       vx_core.Type_funclist vx_p_allowfuncs = val.allowfuncs();
@@ -8059,23 +7957,23 @@ namespace vx_core {
       String key = "";
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub instanceof String) {
+          } else if (valsub is String) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
+            if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
@@ -8100,12 +7998,12 @@ namespace vx_core {
           switch (key) {
           case ":allowfuncs":
             if (valsub == vx_p_allowfuncs) {
-            } else if (valsub instanceof vx_core.Type_funclist) {
+            } else if (valsub is vx_core.Type_funclist) {
               ischanged = true;
               vx_p_allowfuncs = (vx_core.Type_funclist)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -8120,12 +8018,12 @@ namespace vx_core {
             break;
           case ":permissions":
             if (valsub == vx_p_permissions) {
-            } else if (valsub instanceof vx_core.Type_permissionlist) {
+            } else if (valsub is vx_core.Type_permissionlist) {
               ischanged = true;
               vx_p_permissions = (vx_core.Type_permissionlist)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -8140,12 +8038,12 @@ namespace vx_core {
             break;
           case ":permissionmap":
             if (valsub == vx_p_permissionmap) {
-            } else if (valsub instanceof vx_core.Type_permissionmap) {
+            } else if (valsub is vx_core.Type_permissionmap) {
               ischanged = true;
               vx_p_permissionmap = (vx_core.Type_permissionmap)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -8212,8 +8110,8 @@ namespace vx_core {
    * (type session)
    */
   interface Type_session : vx_core.Type_struct {
-    public vx_core.Type_session vx_new(Object... vals);
-    public vx_core.Type_session vx_copy(Object... vals);
+    public vx_core.Type_session vx_new(params Object vals);
+    public vx_core.Type_session vx_copy(params Object vals);
     public vx_core.Type_session vx_empty();
     public vx_core.Type_session vx_type();
     public vx_core.Type_user user();
@@ -8307,18 +8205,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_session vx_new(Object... vals) {
+    public override vx_core.Type_session vx_new(params Object vals) {
       return e_session.vx_copy(vals);
     }
 
-    override
-    public Type_session vx_copy(Object... vals) {
+    public override vx_core.Type_session vx_copy(params Object vals) {
       Type_session output = this;
       boolean ischanged = false;
       Class_session val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       vx_core.Type_user vx_p_user = val.user();
@@ -8337,23 +8233,23 @@ namespace vx_core {
       String key = "";
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub instanceof String) {
+          } else if (valsub is String) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
+            if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
@@ -8378,12 +8274,12 @@ namespace vx_core {
           switch (key) {
           case ":user":
             if (valsub == vx_p_user) {
-            } else if (valsub instanceof vx_core.Type_user) {
+            } else if (valsub is vx_core.Type_user) {
               ischanged = true;
               vx_p_user = (vx_core.Type_user)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -8398,12 +8294,12 @@ namespace vx_core {
             break;
           case ":connectlist":
             if (valsub == vx_p_connectlist) {
-            } else if (valsub instanceof vx_core.Type_connectlist) {
+            } else if (valsub is vx_core.Type_connectlist) {
               ischanged = true;
               vx_p_connectlist = (vx_core.Type_connectlist)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -8418,12 +8314,12 @@ namespace vx_core {
             break;
           case ":connectmap":
             if (valsub == vx_p_connectmap) {
-            } else if (valsub instanceof vx_core.Type_connectmap) {
+            } else if (valsub is vx_core.Type_connectmap) {
               ischanged = true;
               vx_p_connectmap = (vx_core.Type_connectmap)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -8438,12 +8334,12 @@ namespace vx_core {
             break;
           case ":locale":
             if (valsub == vx_p_locale) {
-            } else if (valsub instanceof vx_core.Type_locale) {
+            } else if (valsub is vx_core.Type_locale) {
               ischanged = true;
               vx_p_locale = (vx_core.Type_locale)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -8458,12 +8354,12 @@ namespace vx_core {
             break;
           case ":translation":
             if (valsub == vx_p_translation) {
-            } else if (valsub instanceof vx_core.Type_translation) {
+            } else if (valsub is vx_core.Type_translation) {
               ischanged = true;
               vx_p_translation = (vx_core.Type_translation)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -8478,12 +8374,12 @@ namespace vx_core {
             break;
           case ":translationmap":
             if (valsub == vx_p_translationmap) {
-            } else if (valsub instanceof vx_core.Type_translationmap) {
+            } else if (valsub is vx_core.Type_translationmap) {
               ischanged = true;
               vx_p_translationmap = (vx_core.Type_translationmap)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -8553,8 +8449,8 @@ namespace vx_core {
    * (type setting)
    */
   interface Type_setting : vx_core.Type_struct {
-    public vx_core.Type_setting vx_new(Object... vals);
-    public vx_core.Type_setting vx_copy(Object... vals);
+    public vx_core.Type_setting vx_new(params Object vals);
+    public vx_core.Type_setting vx_copy(params Object vals);
     public vx_core.Type_setting vx_empty();
     public vx_core.Type_setting vx_type();
     public vx_core.Type_stringmap pathmap();
@@ -8588,18 +8484,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_setting vx_new(Object... vals) {
+    public override vx_core.Type_setting vx_new(params Object vals) {
       return e_setting.vx_copy(vals);
     }
 
-    override
-    public Type_setting vx_copy(Object... vals) {
+    public override vx_core.Type_setting vx_copy(params Object vals) {
       Type_setting output = this;
       boolean ischanged = false;
       Class_setting val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       vx_core.Type_stringmap vx_p_pathmap = val.pathmap();
@@ -8608,23 +8502,23 @@ namespace vx_core {
       String key = "";
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub instanceof String) {
+          } else if (valsub is String) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
+            if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
@@ -8649,12 +8543,12 @@ namespace vx_core {
           switch (key) {
           case ":pathmap":
             if (valsub == vx_p_pathmap) {
-            } else if (valsub instanceof vx_core.Type_stringmap) {
+            } else if (valsub is vx_core.Type_stringmap) {
               ischanged = true;
               vx_p_pathmap = (vx_core.Type_stringmap)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -8719,8 +8613,8 @@ namespace vx_core {
    * (type state)
    */
   interface Type_state : vx_core.Type_struct {
-    public vx_core.Type_state vx_new(Object... vals);
-    public vx_core.Type_state vx_copy(Object... vals);
+    public vx_core.Type_state vx_new(params Object vals);
+    public vx_core.Type_state vx_copy(params Object vals);
     public vx_core.Type_state vx_empty();
     public vx_core.Type_state vx_type();
     public vx_core.Type_statelistenermap statelistenermap();
@@ -8754,18 +8648,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_state vx_new(Object... vals) {
+    public override vx_core.Type_state vx_new(params Object vals) {
       return e_state.vx_copy(vals);
     }
 
-    override
-    public Type_state vx_copy(Object... vals) {
+    public override vx_core.Type_state vx_copy(params Object vals) {
       Type_state output = this;
       boolean ischanged = false;
       Class_state val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       vx_core.Type_statelistenermap vx_p_statelistenermap = val.statelistenermap();
@@ -8774,23 +8666,23 @@ namespace vx_core {
       String key = "";
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub instanceof String) {
+          } else if (valsub is String) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
+            if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
@@ -8815,12 +8707,12 @@ namespace vx_core {
           switch (key) {
           case ":statelistenermap":
             if (valsub == vx_p_statelistenermap) {
-            } else if (valsub instanceof vx_core.Type_statelistenermap) {
+            } else if (valsub is vx_core.Type_statelistenermap) {
               ischanged = true;
               vx_p_statelistenermap = (vx_core.Type_statelistenermap)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -8884,8 +8776,8 @@ namespace vx_core {
    * (type statelistener)
    */
   interface Type_statelistener : vx_core.Type_struct {
-    public vx_core.Type_statelistener vx_new(Object... vals);
-    public vx_core.Type_statelistener vx_copy(Object... vals);
+    public vx_core.Type_statelistener vx_new(params Object vals);
+    public vx_core.Type_statelistener vx_copy(params Object vals);
     public vx_core.Type_statelistener vx_empty();
     public vx_core.Type_statelistener vx_type();
     public vx_core.Type_string name();
@@ -8943,18 +8835,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_statelistener vx_new(Object... vals) {
+    public override vx_core.Type_statelistener vx_new(params Object vals) {
       return e_statelistener.vx_copy(vals);
     }
 
-    override
-    public Type_statelistener vx_copy(Object... vals) {
+    public override vx_core.Type_statelistener vx_copy(params Object vals) {
       Type_statelistener output = this;
       boolean ischanged = false;
       Class_statelistener val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       vx_core.Type_string vx_p_name = val.name();
@@ -8967,23 +8857,23 @@ namespace vx_core {
       String key = "";
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub instanceof String) {
+          } else if (valsub is String) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
+            if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
@@ -9008,15 +8898,15 @@ namespace vx_core {
           switch (key) {
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub instanceof vx_core.Type_string) {
+            } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_name = (vx_core.Type_string)valsub;
-            } else if (valsub instanceof String) {
+            } else if (valsub is String) {
               ischanged = true;
               vx_p_name = vx_core.t_string.vx_new(valsub);
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -9031,12 +8921,12 @@ namespace vx_core {
             break;
           case ":value":
             if (valsub == vx_p_value) {
-            } else if (valsub instanceof vx_core.Type_any) {
+            } else if (valsub is vx_core.Type_any) {
               ischanged = true;
               vx_p_value = (vx_core.Type_any)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -9051,12 +8941,12 @@ namespace vx_core {
             break;
           case ":fn-boolean":
             if (valsub == vx_p_fn_boolean) {
-            } else if (valsub instanceof vx_core.Func_boolean_from_none) {
+            } else if (valsub is vx_core.Func_boolean_from_none) {
               ischanged = true;
               vx_p_fn_boolean = (vx_core.Func_boolean_from_none)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -9123,8 +9013,8 @@ namespace vx_core {
    * (type statelistenermap)
    */
   interface Type_statelistenermap : vx_core.Type_map {
-    public vx_core.Type_statelistenermap vx_new(Object... vals);
-    public vx_core.Type_statelistenermap vx_copy(Object... vals);
+    public vx_core.Type_statelistenermap vx_new(params Object vals);
+    public vx_core.Type_statelistenermap vx_copy(params Object vals);
     public vx_core.Type_statelistenermap vx_empty();
     public vx_core.Type_statelistenermap vx_type();
     public Map<String, vx_core.Type_statelistener> vx_mapstatelistener();
@@ -9143,7 +9033,7 @@ namespace vx_core {
     override
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
       vx_core.Type_boolean output = vx_core.c_false;
-      if (value instanceof vx_core.Type_statelistener) {
+      if (value is vx_core.Type_statelistener) {
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -9187,7 +9077,7 @@ namespace vx_core {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         vx_core.Type_any val = mapval.get(key);
-        if (val instanceof vx_core.Type_statelistener) {
+        if (val is vx_core.Type_statelistener) {
           vx_core.Type_statelistener castval = (vx_core.Type_statelistener)val;
           map.put(key, castval);
         } else {
@@ -9202,38 +9092,36 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Type_statelistenermap vx_new(Object... vals) {
+    public override vx_core.Type_statelistenermap vx_new(params Object vals) {
       return e_statelistenermap.vx_copy(vals);
     }
 
-    override
-    public Type_statelistenermap vx_copy(Object... vals) {
+    public override vx_core.Type_statelistenermap vx_copy(params Object vals) {
       Type_statelistenermap output = this;
       boolean ischanged = false;
       Class_statelistenermap val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       Map<String, vx_core.Type_statelistener> mapval = new LinkedHashMap<>(val.vx_mapstatelistener());
       vx_core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof vx_core.Type_string) {
-            vx_core.Type_string valstring = (vx_core.Type_string)valsub;
+          if (valsub is vx_core.Type_string) {
+            vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub instanceof String) {
-            key = (String)valsub;
+          } else if (valsub is String) {
+            key = valsub as String
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -9242,14 +9130,14 @@ namespace vx_core {
           }
         } else {
           vx_core.Type_statelistener valany = null;
-          if (valsub instanceof vx_core.Type_statelistener) {
+          if (valsub is vx_core.Type_statelistener) {
             valany = (vx_core.Type_statelistener)valsub;
-          } else if (valsub instanceof vx_core.Type_statelistener) {
-            valany = (vx_core.Type_statelistener)valsub;
+          } else if (valsub is vx_core.Type_statelistener) {
+            valany = valsub as vx_core.Type_statelistener
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -9314,68 +9202,68 @@ namespace vx_core {
    * (type string)
    */
   interface Type_string : vx_core.Type_any {
-    public vx_core.Type_string vx_new(Object... vals);
-    public vx_core.Type_string vx_copy(Object... vals);
+    public vx_core.Type_string vx_new(params Object vals);
+    public vx_core.Type_string vx_copy(params Object vals);
     public vx_core.Type_string vx_empty();
     public vx_core.Type_string vx_type();
   }
 
   class Class_string : vx_core.Class_base, Type_string {
 
-    override
-    public Type_string vx_new(Object... vals) {
+    public override vx_core.Type_string vx_new(params Object vals) {
       return e_string.vx_copy(vals);
     }
 
-    override
-    public Type_string vx_copy(Object... vals) {
+    public override vx_core.Type_string vx_copy(params Object vals) {
       Type_string output = this;
       boolean ischanged = false;
       Class_string val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       StringBuilder sb = new StringBuilder(val.vx_string());
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_string) {
-          vx_core.Type_string valstring = (vx_core.Type_string)valsub;
+        } else if (valsub is vx_core.Type_string) {
+          vx_core.Type_string valstring = valsub as vx_core.Type_string;
           String ssub = valstring.vx_string();
           if (!ssub.equals("")) {
             ischanged = true;
             sb.append(ssub);
           }
-        } else if (valsub instanceof vx_core.Type_int) {
-          vx_core.Type_int valint = (vx_core.Type_int)valsub;
+        } else if (valsub is vx_core.Type_int) {
+          vx_core.Type_int valint = valsub as vx_core.Type_int;
           ischanged = true;
           sb.append(valint.vx_int());
-        } else if (valsub instanceof vx_core.Type_float) {
-          vx_core.Type_float valfloat = (vx_core.Type_float)valsub;
+        } else if (valsub is vx_core.Type_float) {
+          vx_core.Type_float valfloat = valsub as vx_core.Type_float;
           ischanged = true;
           sb.append(valfloat.vx_float());
-        } else if (valsub instanceof vx_core.Type_decimal) {
-          vx_core.Type_decimal valdecimal = (vx_core.Type_decimal)valsub;
+        } else if (valsub is vx_core.Type_decimal) {
+          vx_core.Type_decimal valdecimal = valsub as vx_core.Type_decimal;
           ischanged = true;
           sb.append(valdecimal.vx_string());
-        } else if (valsub instanceof String) {
-          String ssub2 = (String)valsub;
+        } else if (valsub is String) {
+          String ssub2 = valsub as String;
           if (!ssub2.equals("")) {
             ischanged = true;
             sb.append(ssub2);
           }
-        } else if (valsub instanceof Integer) {
+        } else if (valsub is Integer) {
+          Integer ssub2 = valsub as Integer;
           ischanged = true;
-          sb.append((Integer)valsub);
-        } else if (valsub instanceof Float) {
+          sb.append(ssub2);
+        } else if (valsub is Float) {
+          Float ssub2 = valsub as Float;
           ischanged = true;
-          sb.append((Float)valsub);
-        } else if (valsub instanceof vx_core.Type_any) {
-          vx_core.Type_any anysub = (vx_core.Type_any)valsub;
+          sb.append(ssub2);
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
           msg = vx_core.vx_msg_from_error("vx/core/string", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
@@ -9428,8 +9316,8 @@ namespace vx_core {
    * (type stringlist)
    */
   interface Type_stringlist : vx_core.Type_list {
-    public vx_core.Type_stringlist vx_new(Object... vals);
-    public vx_core.Type_stringlist vx_copy(Object... vals);
+    public vx_core.Type_stringlist vx_new(params Object vals);
+    public vx_core.Type_stringlist vx_copy(params Object vals);
     public vx_core.Type_stringlist vx_empty();
     public vx_core.Type_stringlist vx_type();
     public List<vx_core.Type_string> vx_liststring();
@@ -9463,48 +9351,47 @@ namespace vx_core {
       return this.vx_string(index);
     }
 
-    override
-    public Type_stringlist vx_new(Object... vals) {
+    public override vx_core.Type_stringlist vx_new(params Object vals) {
       return e_stringlist.vx_copy(vals);
     }
 
-    override
-    public Type_stringlist vx_copy(Object... vals) {
+    public override vx_core.Type_stringlist vx_copy(params Object vals) {
       Type_stringlist output = this;
       boolean ischanged = false;
       Class_stringlist val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       List<vx_core.Type_string> listval = new ArrayList<>(val.vx_liststring());
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_string) {
+        } else if (valsub is vx_core.Type_string) {
+          vx_core.Type_string anysub = valsub as vx_core.Type_string;
           ischanged = true;
-          listval.add((vx_core.Type_string)valsub);
-        } else if (valsub instanceof String) {
+          listval.add(anysub);
+        } else if (valsub is String) {
           ischanged = true;
           listval.add(vx_core.t_string.vx_new(valsub));
-        } else if (valsub instanceof Type_stringlist) {
+        } else if (valsub is vx_core.Type_stringlist) {
           Type_stringlist multi = (Type_stringlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_liststring());
-        } else if (valsub instanceof List) {
+        } else if (valsub is List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
-            if (item instanceof vx_core.Type_string) {
+            if (item is vx_core.Type_string) {
               vx_core.Type_string valitem = (vx_core.Type_string)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
-        } else if (valsub instanceof vx_core.Type_any) {
-          vx_core.Type_any anysub = (vx_core.Type_any)valsub;
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
           msg = vx_core.vx_msg_from_error("vx/core/stringlist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
@@ -9556,8 +9443,8 @@ namespace vx_core {
    * (type stringlistlist)
    */
   interface Type_stringlistlist : vx_core.Type_list {
-    public vx_core.Type_stringlistlist vx_new(Object... vals);
-    public vx_core.Type_stringlistlist vx_copy(Object... vals);
+    public vx_core.Type_stringlistlist vx_new(params Object vals);
+    public vx_core.Type_stringlistlist vx_copy(params Object vals);
     public vx_core.Type_stringlistlist vx_empty();
     public vx_core.Type_stringlistlist vx_type();
     public List<vx_core.Type_stringlist> vx_liststringlist();
@@ -9591,48 +9478,47 @@ namespace vx_core {
       return this.vx_stringlist(index);
     }
 
-    override
-    public Type_stringlistlist vx_new(Object... vals) {
+    public override vx_core.Type_stringlistlist vx_new(params Object vals) {
       return e_stringlistlist.vx_copy(vals);
     }
 
-    override
-    public Type_stringlistlist vx_copy(Object... vals) {
+    public override vx_core.Type_stringlistlist vx_copy(params Object vals) {
       Type_stringlistlist output = this;
       boolean ischanged = false;
       Class_stringlistlist val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       List<vx_core.Type_stringlist> listval = new ArrayList<>(val.vx_liststringlist());
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_stringlist) {
+        } else if (valsub is vx_core.Type_stringlist) {
+          vx_core.Type_stringlist anysub = valsub as vx_core.Type_stringlist;
+          ischanged = true;
+          listval.add(anysub);
+        } else if (valsub is vx_core.Type_stringlist) {
           ischanged = true;
           listval.add((vx_core.Type_stringlist)valsub);
-        } else if (valsub instanceof vx_core.Type_stringlist) {
-          ischanged = true;
-          listval.add((vx_core.Type_stringlist)valsub);
-        } else if (valsub instanceof Type_stringlistlist) {
+        } else if (valsub is vx_core.Type_stringlistlist) {
           Type_stringlistlist multi = (Type_stringlistlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_liststringlist());
-        } else if (valsub instanceof List) {
+        } else if (valsub is List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
-            if (item instanceof vx_core.Type_stringlist) {
+            if (item is vx_core.Type_stringlist) {
               vx_core.Type_stringlist valitem = (vx_core.Type_stringlist)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
-        } else if (valsub instanceof vx_core.Type_any) {
-          vx_core.Type_any anysub = (vx_core.Type_any)valsub;
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
           msg = vx_core.vx_msg_from_error("vx/core/stringlistlist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
@@ -9684,8 +9570,8 @@ namespace vx_core {
    * (type stringmap)
    */
   interface Type_stringmap : vx_core.Type_map {
-    public vx_core.Type_stringmap vx_new(Object... vals);
-    public vx_core.Type_stringmap vx_copy(Object... vals);
+    public vx_core.Type_stringmap vx_new(params Object vals);
+    public vx_core.Type_stringmap vx_copy(params Object vals);
     public vx_core.Type_stringmap vx_empty();
     public vx_core.Type_stringmap vx_type();
     public Map<String, vx_core.Type_string> vx_mapstring();
@@ -9704,7 +9590,7 @@ namespace vx_core {
     override
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
       vx_core.Type_boolean output = vx_core.c_false;
-      if (value instanceof vx_core.Type_string) {
+      if (value is vx_core.Type_string) {
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -9748,7 +9634,7 @@ namespace vx_core {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         vx_core.Type_any val = mapval.get(key);
-        if (val instanceof vx_core.Type_string) {
+        if (val is vx_core.Type_string) {
           vx_core.Type_string castval = (vx_core.Type_string)val;
           map.put(key, castval);
         } else {
@@ -9763,38 +9649,36 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Type_stringmap vx_new(Object... vals) {
+    public override vx_core.Type_stringmap vx_new(params Object vals) {
       return e_stringmap.vx_copy(vals);
     }
 
-    override
-    public Type_stringmap vx_copy(Object... vals) {
+    public override vx_core.Type_stringmap vx_copy(params Object vals) {
       Type_stringmap output = this;
       boolean ischanged = false;
       Class_stringmap val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       Map<String, vx_core.Type_string> mapval = new LinkedHashMap<>(val.vx_mapstring());
       vx_core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof vx_core.Type_string) {
-            vx_core.Type_string valstring = (vx_core.Type_string)valsub;
+          if (valsub is vx_core.Type_string) {
+            vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub instanceof String) {
-            key = (String)valsub;
+          } else if (valsub is String) {
+            key = valsub as String
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -9803,14 +9687,14 @@ namespace vx_core {
           }
         } else {
           vx_core.Type_string valany = null;
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             valany = (vx_core.Type_string)valsub;
-          } else if (valsub instanceof String) {
-            valany = vx_core.t_string.vx_new(valsub);;
+          } else if (valsub is String) {
+            valany = vx_core.t_string.vx_new(valsub);
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -9875,8 +9759,8 @@ namespace vx_core {
    * (type stringmutablemap)
    */
   interface Type_stringmutablemap : vx_core.Type_map {
-    public vx_core.Type_stringmutablemap vx_new(Object... vals);
-    public vx_core.Type_stringmutablemap vx_copy(Object... vals);
+    public vx_core.Type_stringmutablemap vx_new(params Object vals);
+    public vx_core.Type_stringmutablemap vx_copy(params Object vals);
     public vx_core.Type_stringmutablemap vx_empty();
     public vx_core.Type_stringmutablemap vx_type();
     public Map<String, vx_core.Type_string> vx_mapstring();
@@ -9895,7 +9779,7 @@ namespace vx_core {
     override
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
       vx_core.Type_boolean output = vx_core.c_false;
-      if (value instanceof vx_core.Type_string) {
+      if (value is vx_core.Type_string) {
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -9939,7 +9823,7 @@ namespace vx_core {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         vx_core.Type_any val = mapval.get(key);
-        if (val instanceof vx_core.Type_string) {
+        if (val is vx_core.Type_string) {
           vx_core.Type_string castval = (vx_core.Type_string)val;
           map.put(key, castval);
         } else {
@@ -9954,38 +9838,36 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Type_stringmutablemap vx_new(Object... vals) {
+    public override vx_core.Type_stringmutablemap vx_new(params Object vals) {
       return e_stringmutablemap.vx_copy(vals);
     }
 
-    override
-    public Type_stringmutablemap vx_copy(Object... vals) {
+    public override vx_core.Type_stringmutablemap vx_copy(params Object vals) {
       Type_stringmutablemap output = this;
       boolean ischanged = false;
       Class_stringmutablemap val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       Map<String, vx_core.Type_string> mapval = new LinkedHashMap<>(val.vx_mapstring());
       vx_core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof vx_core.Type_string) {
-            vx_core.Type_string valstring = (vx_core.Type_string)valsub;
+          if (valsub is vx_core.Type_string) {
+            vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub instanceof String) {
-            key = (String)valsub;
+          } else if (valsub is String) {
+            key = valsub as String
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -9994,14 +9876,14 @@ namespace vx_core {
           }
         } else {
           vx_core.Type_string valany = null;
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             valany = (vx_core.Type_string)valsub;
-          } else if (valsub instanceof String) {
-            valany = vx_core.t_string.vx_new(valsub);;
+          } else if (valsub is String) {
+            valany = vx_core.t_string.vx_new(valsub);
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -10066,8 +9948,8 @@ namespace vx_core {
    * (type struct)
    */
   interface Type_struct : vx_core.Type_any {
-    public vx_core.Type_struct vx_new(Object... vals);
-    public vx_core.Type_struct vx_copy(Object... vals);
+    public vx_core.Type_struct vx_new(params Object vals);
+    public vx_core.Type_struct vx_copy(params Object vals);
     public vx_core.Type_struct vx_empty();
     public vx_core.Type_struct vx_type();
     public vx_core.Type_any vx_any(vx_core.Type_string key);
@@ -10091,18 +9973,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_struct vx_new(Object... vals) {
+    public override vx_core.Type_struct vx_new(params Object vals) {
       return e_struct.vx_copy(vals);
     }
 
-    override
-    public Type_struct vx_copy(Object... vals) {
+    public override vx_core.Type_struct vx_copy(params Object vals) {
       Type_struct output = this;
       boolean ischanged = false;
       Class_struct val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -10147,8 +10027,8 @@ namespace vx_core {
    * (type thenelse)
    */
   interface Type_thenelse : vx_core.Type_struct {
-    public vx_core.Type_thenelse vx_new(Object... vals);
-    public vx_core.Type_thenelse vx_copy(Object... vals);
+    public vx_core.Type_thenelse vx_new(params Object vals);
+    public vx_core.Type_thenelse vx_copy(params Object vals);
     public vx_core.Type_thenelse vx_empty();
     public vx_core.Type_thenelse vx_type();
     public vx_core.Type_string code();
@@ -10230,18 +10110,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_thenelse vx_new(Object... vals) {
+    public override vx_core.Type_thenelse vx_new(params Object vals) {
       return e_thenelse.vx_copy(vals);
     }
 
-    override
-    public Type_thenelse vx_copy(Object... vals) {
+    public override vx_core.Type_thenelse vx_copy(params Object vals) {
       Type_thenelse output = this;
       boolean ischanged = false;
       Class_thenelse val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       vx_core.Type_string vx_p_code = val.code();
@@ -10258,23 +10136,23 @@ namespace vx_core {
       String key = "";
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub instanceof String) {
+          } else if (valsub is String) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
+            if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
@@ -10299,15 +10177,15 @@ namespace vx_core {
           switch (key) {
           case ":code":
             if (valsub == vx_p_code) {
-            } else if (valsub instanceof vx_core.Type_string) {
+            } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_code = (vx_core.Type_string)valsub;
-            } else if (valsub instanceof String) {
+            } else if (valsub is String) {
               ischanged = true;
               vx_p_code = vx_core.t_string.vx_new(valsub);
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -10322,12 +10200,12 @@ namespace vx_core {
             break;
           case ":value":
             if (valsub == vx_p_value) {
-            } else if (valsub instanceof vx_core.Type_any) {
+            } else if (valsub is vx_core.Type_any) {
               ischanged = true;
               vx_p_value = (vx_core.Type_any)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -10342,12 +10220,12 @@ namespace vx_core {
             break;
           case ":values":
             if (valsub == vx_p_values) {
-            } else if (valsub instanceof vx_core.Type_list) {
+            } else if (valsub is vx_core.Type_list) {
               ischanged = true;
               vx_p_values = (vx_core.Type_list)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -10362,12 +10240,12 @@ namespace vx_core {
             break;
           case ":fn-cond":
             if (valsub == vx_p_fn_cond) {
-            } else if (valsub instanceof vx_core.Func_boolean_from_func) {
+            } else if (valsub is vx_core.Func_boolean_from_func) {
               ischanged = true;
               vx_p_fn_cond = (vx_core.Func_boolean_from_func)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -10382,12 +10260,12 @@ namespace vx_core {
             break;
           case ":fn-any":
             if (valsub == vx_p_fn_any) {
-            } else if (valsub instanceof vx_core.Func_any_from_func) {
+            } else if (valsub is vx_core.Func_any_from_func) {
               ischanged = true;
               vx_p_fn_any = (vx_core.Func_any_from_func)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -10455,8 +10333,8 @@ namespace vx_core {
    * (type thenelselist)
    */
   interface Type_thenelselist : vx_core.Type_list {
-    public vx_core.Type_thenelselist vx_new(Object... vals);
-    public vx_core.Type_thenelselist vx_copy(Object... vals);
+    public vx_core.Type_thenelselist vx_new(params Object vals);
+    public vx_core.Type_thenelselist vx_copy(params Object vals);
     public vx_core.Type_thenelselist vx_empty();
     public vx_core.Type_thenelselist vx_type();
     public List<vx_core.Type_thenelse> vx_listthenelse();
@@ -10490,48 +10368,47 @@ namespace vx_core {
       return this.vx_thenelse(index);
     }
 
-    override
-    public Type_thenelselist vx_new(Object... vals) {
+    public override vx_core.Type_thenelselist vx_new(params Object vals) {
       return e_thenelselist.vx_copy(vals);
     }
 
-    override
-    public Type_thenelselist vx_copy(Object... vals) {
+    public override vx_core.Type_thenelselist vx_copy(params Object vals) {
       Type_thenelselist output = this;
       boolean ischanged = false;
       Class_thenelselist val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       List<vx_core.Type_thenelse> listval = new ArrayList<>(val.vx_listthenelse());
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_thenelse) {
+        } else if (valsub is vx_core.Type_thenelse) {
+          vx_core.Type_thenelse anysub = valsub as vx_core.Type_thenelse;
+          ischanged = true;
+          listval.add(anysub);
+        } else if (valsub is vx_core.Type_thenelse) {
           ischanged = true;
           listval.add((vx_core.Type_thenelse)valsub);
-        } else if (valsub instanceof vx_core.Type_thenelse) {
-          ischanged = true;
-          listval.add((vx_core.Type_thenelse)valsub);
-        } else if (valsub instanceof Type_thenelselist) {
+        } else if (valsub is vx_core.Type_thenelselist) {
           Type_thenelselist multi = (Type_thenelselist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listthenelse());
-        } else if (valsub instanceof List) {
+        } else if (valsub is List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
-            if (item instanceof vx_core.Type_thenelse) {
+            if (item is vx_core.Type_thenelse) {
               vx_core.Type_thenelse valitem = (vx_core.Type_thenelse)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
-        } else if (valsub instanceof vx_core.Type_any) {
-          vx_core.Type_any anysub = (vx_core.Type_any)valsub;
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
           msg = vx_core.vx_msg_from_error("vx/core/thenelselist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
@@ -10583,8 +10460,8 @@ namespace vx_core {
    * (type translation)
    */
   interface Type_translation : vx_core.Type_struct {
-    public vx_core.Type_translation vx_new(Object... vals);
-    public vx_core.Type_translation vx_copy(Object... vals);
+    public vx_core.Type_translation vx_new(params Object vals);
+    public vx_core.Type_translation vx_copy(params Object vals);
     public vx_core.Type_translation vx_empty();
     public vx_core.Type_translation vx_type();
     public vx_core.Type_string name();
@@ -10630,18 +10507,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_translation vx_new(Object... vals) {
+    public override vx_core.Type_translation vx_new(params Object vals) {
       return e_translation.vx_copy(vals);
     }
 
-    override
-    public Type_translation vx_copy(Object... vals) {
+    public override vx_core.Type_translation vx_copy(params Object vals) {
       Type_translation output = this;
       boolean ischanged = false;
       Class_translation val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       vx_core.Type_string vx_p_name = val.name();
@@ -10652,23 +10527,23 @@ namespace vx_core {
       String key = "";
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub instanceof String) {
+          } else if (valsub is String) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
+            if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
@@ -10693,15 +10568,15 @@ namespace vx_core {
           switch (key) {
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub instanceof vx_core.Type_string) {
+            } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_name = (vx_core.Type_string)valsub;
-            } else if (valsub instanceof String) {
+            } else if (valsub is String) {
               ischanged = true;
               vx_p_name = vx_core.t_string.vx_new(valsub);
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -10716,12 +10591,12 @@ namespace vx_core {
             break;
           case ":wordmap":
             if (valsub == vx_p_wordmap) {
-            } else if (valsub instanceof vx_core.Type_stringmap) {
+            } else if (valsub is vx_core.Type_stringmap) {
               ischanged = true;
               vx_p_wordmap = (vx_core.Type_stringmap)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -10787,8 +10662,8 @@ namespace vx_core {
    * (type translationlist)
    */
   interface Type_translationlist : vx_core.Type_list {
-    public vx_core.Type_translationlist vx_new(Object... vals);
-    public vx_core.Type_translationlist vx_copy(Object... vals);
+    public vx_core.Type_translationlist vx_new(params Object vals);
+    public vx_core.Type_translationlist vx_copy(params Object vals);
     public vx_core.Type_translationlist vx_empty();
     public vx_core.Type_translationlist vx_type();
     public List<vx_core.Type_translation> vx_listtranslation();
@@ -10822,48 +10697,47 @@ namespace vx_core {
       return this.vx_translation(index);
     }
 
-    override
-    public Type_translationlist vx_new(Object... vals) {
+    public override vx_core.Type_translationlist vx_new(params Object vals) {
       return e_translationlist.vx_copy(vals);
     }
 
-    override
-    public Type_translationlist vx_copy(Object... vals) {
+    public override vx_core.Type_translationlist vx_copy(params Object vals) {
       Type_translationlist output = this;
       boolean ischanged = false;
       Class_translationlist val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       List<vx_core.Type_translation> listval = new ArrayList<>(val.vx_listtranslation());
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_translation) {
+        } else if (valsub is vx_core.Type_translation) {
+          vx_core.Type_translation anysub = valsub as vx_core.Type_translation;
+          ischanged = true;
+          listval.add(anysub);
+        } else if (valsub is vx_core.Type_translation) {
           ischanged = true;
           listval.add((vx_core.Type_translation)valsub);
-        } else if (valsub instanceof vx_core.Type_translation) {
-          ischanged = true;
-          listval.add((vx_core.Type_translation)valsub);
-        } else if (valsub instanceof Type_translationlist) {
+        } else if (valsub is vx_core.Type_translationlist) {
           Type_translationlist multi = (Type_translationlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listtranslation());
-        } else if (valsub instanceof List) {
+        } else if (valsub is List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
-            if (item instanceof vx_core.Type_translation) {
+            if (item is vx_core.Type_translation) {
               vx_core.Type_translation valitem = (vx_core.Type_translation)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
-        } else if (valsub instanceof vx_core.Type_any) {
-          vx_core.Type_any anysub = (vx_core.Type_any)valsub;
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
           msg = vx_core.vx_msg_from_error("vx/core/translationlist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
@@ -10915,8 +10789,8 @@ namespace vx_core {
    * (type translationmap)
    */
   interface Type_translationmap : vx_core.Type_map {
-    public vx_core.Type_translationmap vx_new(Object... vals);
-    public vx_core.Type_translationmap vx_copy(Object... vals);
+    public vx_core.Type_translationmap vx_new(params Object vals);
+    public vx_core.Type_translationmap vx_copy(params Object vals);
     public vx_core.Type_translationmap vx_empty();
     public vx_core.Type_translationmap vx_type();
     public Map<String, vx_core.Type_translation> vx_maptranslation();
@@ -10935,7 +10809,7 @@ namespace vx_core {
     override
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
       vx_core.Type_boolean output = vx_core.c_false;
-      if (value instanceof vx_core.Type_translation) {
+      if (value is vx_core.Type_translation) {
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -10979,7 +10853,7 @@ namespace vx_core {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         vx_core.Type_any val = mapval.get(key);
-        if (val instanceof vx_core.Type_translation) {
+        if (val is vx_core.Type_translation) {
           vx_core.Type_translation castval = (vx_core.Type_translation)val;
           map.put(key, castval);
         } else {
@@ -10994,38 +10868,36 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Type_translationmap vx_new(Object... vals) {
+    public override vx_core.Type_translationmap vx_new(params Object vals) {
       return e_translationmap.vx_copy(vals);
     }
 
-    override
-    public Type_translationmap vx_copy(Object... vals) {
+    public override vx_core.Type_translationmap vx_copy(params Object vals) {
       Type_translationmap output = this;
       boolean ischanged = false;
       Class_translationmap val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       Map<String, vx_core.Type_translation> mapval = new LinkedHashMap<>(val.vx_maptranslation());
       vx_core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof vx_core.Type_string) {
-            vx_core.Type_string valstring = (vx_core.Type_string)valsub;
+          if (valsub is vx_core.Type_string) {
+            vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub instanceof String) {
-            key = (String)valsub;
+          } else if (valsub is String) {
+            key = valsub as String
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -11034,14 +10906,14 @@ namespace vx_core {
           }
         } else {
           vx_core.Type_translation valany = null;
-          if (valsub instanceof vx_core.Type_translation) {
+          if (valsub is vx_core.Type_translation) {
             valany = (vx_core.Type_translation)valsub;
-          } else if (valsub instanceof vx_core.Type_translation) {
-            valany = (vx_core.Type_translation)valsub;
+          } else if (valsub is vx_core.Type_translation) {
+            valany = valsub as vx_core.Type_translation
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -11106,26 +10978,24 @@ namespace vx_core {
    * (type type)
    */
   interface Type_type : vx_core.Type_any {
-    public vx_core.Type_type vx_new(Object... vals);
-    public vx_core.Type_type vx_copy(Object... vals);
+    public vx_core.Type_type vx_new(params Object vals);
+    public vx_core.Type_type vx_copy(params Object vals);
     public vx_core.Type_type vx_empty();
     public vx_core.Type_type vx_type();
   }
 
   class Class_type : vx_core.Class_base, Type_type {
 
-    override
-    public Type_type vx_new(Object... vals) {
+    public override vx_core.Type_type vx_new(params Object vals) {
       return e_type.vx_copy(vals);
     }
 
-    override
-    public Type_type vx_copy(Object... vals) {
+    public override vx_core.Type_type vx_copy(params Object vals) {
       Type_type output = this;
       boolean ischanged = false;
       Class_type val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -11171,8 +11041,8 @@ namespace vx_core {
    * (type typedef)
    */
   interface Type_typedef : vx_core.Type_struct {
-    public vx_core.Type_typedef vx_new(Object... vals);
-    public vx_core.Type_typedef vx_copy(Object... vals);
+    public vx_core.Type_typedef vx_new(params Object vals);
+    public vx_core.Type_typedef vx_copy(params Object vals);
     public vx_core.Type_typedef vx_empty();
     public vx_core.Type_typedef vx_type();
     public vx_core.Type_string pkgname();
@@ -11338,18 +11208,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_typedef vx_new(Object... vals) {
+    public override vx_core.Type_typedef vx_new(params Object vals) {
       return e_typedef.vx_copy(vals);
     }
 
-    override
-    public Type_typedef vx_copy(Object... vals) {
+    public override vx_core.Type_typedef vx_copy(params Object vals) {
       Type_typedef output = this;
       boolean ischanged = false;
       Class_typedef val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       vx_core.Type_string vx_p_pkgname = val.pkgname();
@@ -11380,23 +11248,23 @@ namespace vx_core {
       String key = "";
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub instanceof String) {
+          } else if (valsub is String) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
+            if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
@@ -11421,15 +11289,15 @@ namespace vx_core {
           switch (key) {
           case ":pkgname":
             if (valsub == vx_p_pkgname) {
-            } else if (valsub instanceof vx_core.Type_string) {
+            } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_pkgname = (vx_core.Type_string)valsub;
-            } else if (valsub instanceof String) {
+            } else if (valsub is String) {
               ischanged = true;
               vx_p_pkgname = vx_core.t_string.vx_new(valsub);
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -11444,15 +11312,15 @@ namespace vx_core {
             break;
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub instanceof vx_core.Type_string) {
+            } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_name = (vx_core.Type_string)valsub;
-            } else if (valsub instanceof String) {
+            } else if (valsub is String) {
               ischanged = true;
               vx_p_name = vx_core.t_string.vx_new(valsub);
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -11467,15 +11335,15 @@ namespace vx_core {
             break;
           case ":extends":
             if (valsub == vx_p_extend) {
-            } else if (valsub instanceof vx_core.Type_string) {
+            } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_extend = (vx_core.Type_string)valsub;
-            } else if (valsub instanceof String) {
+            } else if (valsub is String) {
               ischanged = true;
               vx_p_extend = vx_core.t_string.vx_new(valsub);
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -11490,12 +11358,12 @@ namespace vx_core {
             break;
           case ":allowfuncs":
             if (valsub == vx_p_allowfuncs) {
-            } else if (valsub instanceof vx_core.Type_funclist) {
+            } else if (valsub is vx_core.Type_funclist) {
               ischanged = true;
               vx_p_allowfuncs = (vx_core.Type_funclist)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -11510,12 +11378,12 @@ namespace vx_core {
             break;
           case ":allowtypes":
             if (valsub == vx_p_allowtypes) {
-            } else if (valsub instanceof vx_core.Type_typelist) {
+            } else if (valsub is vx_core.Type_typelist) {
               ischanged = true;
               vx_p_allowtypes = (vx_core.Type_typelist)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -11530,12 +11398,12 @@ namespace vx_core {
             break;
           case ":allowvalues":
             if (valsub == vx_p_allowvalues) {
-            } else if (valsub instanceof vx_core.Type_anylist) {
+            } else if (valsub is vx_core.Type_anylist) {
               ischanged = true;
               vx_p_allowvalues = (vx_core.Type_anylist)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -11550,12 +11418,12 @@ namespace vx_core {
             break;
           case ":disallowfuncs":
             if (valsub == vx_p_disallowfuncs) {
-            } else if (valsub instanceof vx_core.Type_funclist) {
+            } else if (valsub is vx_core.Type_funclist) {
               ischanged = true;
               vx_p_disallowfuncs = (vx_core.Type_funclist)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -11570,12 +11438,12 @@ namespace vx_core {
             break;
           case ":disallowtypes":
             if (valsub == vx_p_disallowtypes) {
-            } else if (valsub instanceof vx_core.Type_typelist) {
+            } else if (valsub is vx_core.Type_typelist) {
               ischanged = true;
               vx_p_disallowtypes = (vx_core.Type_typelist)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -11590,12 +11458,12 @@ namespace vx_core {
             break;
           case ":disallowvalues":
             if (valsub == vx_p_disallowvalues) {
-            } else if (valsub instanceof vx_core.Type_anylist) {
+            } else if (valsub is vx_core.Type_anylist) {
               ischanged = true;
               vx_p_disallowvalues = (vx_core.Type_anylist)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -11610,12 +11478,12 @@ namespace vx_core {
             break;
           case ":properties":
             if (valsub == vx_p_properties) {
-            } else if (valsub instanceof vx_core.Type_argmap) {
+            } else if (valsub is vx_core.Type_argmap) {
               ischanged = true;
               vx_p_properties = (vx_core.Type_argmap)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -11630,12 +11498,12 @@ namespace vx_core {
             break;
           case ":proplast":
             if (valsub == vx_p_proplast) {
-            } else if (valsub instanceof vx_core.Type_arg) {
+            } else if (valsub is vx_core.Type_arg) {
               ischanged = true;
               vx_p_proplast = (vx_core.Type_arg)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -11650,12 +11518,12 @@ namespace vx_core {
             break;
           case ":traits":
             if (valsub == vx_p_traits) {
-            } else if (valsub instanceof vx_core.Type_typelist) {
+            } else if (valsub is vx_core.Type_typelist) {
               ischanged = true;
               vx_p_traits = (vx_core.Type_typelist)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -11731,8 +11599,8 @@ namespace vx_core {
    * (type typelist)
    */
   interface Type_typelist : vx_core.Type_list {
-    public vx_core.Type_typelist vx_new(Object... vals);
-    public vx_core.Type_typelist vx_copy(Object... vals);
+    public vx_core.Type_typelist vx_new(params Object vals);
+    public vx_core.Type_typelist vx_copy(params Object vals);
     public vx_core.Type_typelist vx_empty();
     public vx_core.Type_typelist vx_type();
   }
@@ -11756,48 +11624,47 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Type_typelist vx_new(Object... vals) {
+    public override vx_core.Type_typelist vx_new(params Object vals) {
       return e_typelist.vx_copy(vals);
     }
 
-    override
-    public Type_typelist vx_copy(Object... vals) {
+    public override vx_core.Type_typelist vx_copy(params Object vals) {
       Type_typelist output = this;
       boolean ischanged = false;
       Class_typelist val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       List<vx_core.Type_any> listval = new ArrayList<>(val.vx_list());
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_any) {
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
+          ischanged = true;
+          listval.add(anysub);
+        } else if (valsub is vx_core.Type_any) {
           ischanged = true;
           listval.add((vx_core.Type_any)valsub);
-        } else if (valsub instanceof vx_core.Type_any) {
-          ischanged = true;
-          listval.add((vx_core.Type_any)valsub);
-        } else if (valsub instanceof Type_typelist) {
+        } else if (valsub is vx_core.Type_typelist) {
           Type_typelist multi = (Type_typelist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_list());
-        } else if (valsub instanceof List) {
+        } else if (valsub is List) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
-            if (item instanceof vx_core.Type_any) {
+            if (item is vx_core.Type_any) {
               vx_core.Type_any valitem = (vx_core.Type_any)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
-        } else if (valsub instanceof vx_core.Type_any) {
-          vx_core.Type_any anysub = (vx_core.Type_any)valsub;
+        } else if (valsub is vx_core.Type_any) {
+          vx_core.Type_any anysub = valsub as vx_core.Type_any;
           msg = vx_core.vx_msg_from_error("vx/core/typelist", ":invalidtype", anysub);
           msgblock = msgblock.vx_copy(msg);
         } else {
@@ -11849,8 +11716,8 @@ namespace vx_core {
    * (type typemap)
    */
   interface Type_typemap : vx_core.Type_map {
-    public vx_core.Type_typemap vx_new(Object... vals);
-    public vx_core.Type_typemap vx_copy(Object... vals);
+    public vx_core.Type_typemap vx_new(params Object vals);
+    public vx_core.Type_typemap vx_copy(params Object vals);
     public vx_core.Type_typemap vx_empty();
     public vx_core.Type_typemap vx_type();
   }
@@ -11867,7 +11734,7 @@ namespace vx_core {
     override
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
       vx_core.Type_boolean output = vx_core.c_false;
-      if (value instanceof vx_core.Type_any) {
+      if (value is vx_core.Type_any) {
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -11903,7 +11770,7 @@ namespace vx_core {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         vx_core.Type_any val = mapval.get(key);
-        if (val instanceof vx_core.Type_any) {
+        if (val is vx_core.Type_any) {
           vx_core.Type_any castval = (vx_core.Type_any)val;
           map.put(key, castval);
         } else {
@@ -11918,38 +11785,36 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Type_typemap vx_new(Object... vals) {
+    public override vx_core.Type_typemap vx_new(params Object vals) {
       return e_typemap.vx_copy(vals);
     }
 
-    override
-    public Type_typemap vx_copy(Object... vals) {
+    public override vx_core.Type_typemap vx_copy(params Object vals) {
       Type_typemap output = this;
       boolean ischanged = false;
       Class_typemap val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       Map<String, vx_core.Type_any> mapval = new LinkedHashMap<>(val.vx_map());
       vx_core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof vx_core.Type_string) {
-            vx_core.Type_string valstring = (vx_core.Type_string)valsub;
+          if (valsub is vx_core.Type_string) {
+            vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub instanceof String) {
-            key = (String)valsub;
+          } else if (valsub is String) {
+            key = valsub as String
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -11958,14 +11823,14 @@ namespace vx_core {
           }
         } else {
           vx_core.Type_any valany = null;
-          if (valsub instanceof vx_core.Type_any) {
+          if (valsub is vx_core.Type_any) {
             valany = (vx_core.Type_any)valsub;
-          } else if (valsub instanceof vx_core.Type_any) {
-            valany = (vx_core.Type_any)valsub;
+          } else if (valsub is vx_core.Type_any) {
+            valany = valsub as vx_core.Type_any
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is vx_core.Type_any) {
+              msgval = valsub as vx_core.Type_any
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -12030,8 +11895,8 @@ namespace vx_core {
    * (type user)
    */
   interface Type_user : vx_core.Type_struct {
-    public vx_core.Type_user vx_new(Object... vals);
-    public vx_core.Type_user vx_copy(Object... vals);
+    public vx_core.Type_user vx_new(params Object vals);
+    public vx_core.Type_user vx_copy(params Object vals);
     public vx_core.Type_user vx_empty();
     public vx_core.Type_user vx_type();
     public vx_core.Type_security security();
@@ -12089,18 +11954,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_user vx_new(Object... vals) {
+    public override vx_core.Type_user vx_new(params Object vals) {
       return e_user.vx_copy(vals);
     }
 
-    override
-    public Type_user vx_copy(Object... vals) {
+    public override vx_core.Type_user vx_copy(params Object vals) {
       Type_user output = this;
       boolean ischanged = false;
       Class_user val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       vx_core.Type_security vx_p_security = val.security();
@@ -12113,23 +11976,23 @@ namespace vx_core {
       String key = "";
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub instanceof String) {
+          } else if (valsub is String) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
+            if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
@@ -12154,12 +12017,12 @@ namespace vx_core {
           switch (key) {
           case ":security":
             if (valsub == vx_p_security) {
-            } else if (valsub instanceof vx_core.Type_security) {
+            } else if (valsub is vx_core.Type_security) {
               ischanged = true;
               vx_p_security = (vx_core.Type_security)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -12174,15 +12037,15 @@ namespace vx_core {
             break;
           case ":username":
             if (valsub == vx_p_username) {
-            } else if (valsub instanceof vx_core.Type_string) {
+            } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_username = (vx_core.Type_string)valsub;
-            } else if (valsub instanceof String) {
+            } else if (valsub is String) {
               ischanged = true;
               vx_p_username = vx_core.t_string.vx_new(valsub);
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -12197,15 +12060,15 @@ namespace vx_core {
             break;
           case ":token":
             if (valsub == vx_p_token) {
-            } else if (valsub instanceof vx_core.Type_string) {
+            } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_token = (vx_core.Type_string)valsub;
-            } else if (valsub instanceof String) {
+            } else if (valsub is String) {
               ischanged = true;
               vx_p_token = vx_core.t_string.vx_new(valsub);
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -12271,8 +12134,8 @@ namespace vx_core {
    * (type value)
    */
   interface Type_value : vx_core.Type_struct {
-    public vx_core.Type_value vx_new(Object... vals);
-    public vx_core.Type_value vx_copy(Object... vals);
+    public vx_core.Type_value vx_new(params Object vals);
+    public vx_core.Type_value vx_copy(params Object vals);
     public vx_core.Type_value vx_empty();
     public vx_core.Type_value vx_type();
     public vx_core.Type_any next();
@@ -12318,18 +12181,16 @@ namespace vx_core {
       return vx_core.immutablemap(output);
     }
 
-    override
-    public Type_value vx_new(Object... vals) {
+    public override vx_core.Type_value vx_new(params Object vals) {
       return e_value.vx_copy(vals);
     }
 
-    override
-    public Type_value vx_copy(Object... vals) {
+    public override vx_core.Type_value vx_copy(params Object vals) {
       Type_value output = this;
       boolean ischanged = false;
       Class_value val = this;
       vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof vx_core.vx_Type_const) {
+      if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
       vx_core.Type_any vx_p_next = val.next();
@@ -12340,23 +12201,23 @@ namespace vx_core {
       String key = "";
       vx_core.Type_msg msg;
       for (Object valsub : vals) {
-        if (valsub instanceof vx_core.Type_msgblock) {
+        if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
-        } else if (valsub instanceof vx_core.Type_msg) {
+        } else if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof vx_core.Type_string) {
+          if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub instanceof String) {
+          } else if (valsub is String) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
             vx_core.Type_any msgval;
-            if (valsub instanceof vx_core.Type_any) {
+            if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
@@ -12381,12 +12242,12 @@ namespace vx_core {
           switch (key) {
           case ":next":
             if (valsub == vx_p_next) {
-            } else if (valsub instanceof vx_core.Type_any) {
+            } else if (valsub is vx_core.Type_any) {
               ischanged = true;
               vx_p_next = (vx_core.Type_any)valsub;
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -12401,15 +12262,15 @@ namespace vx_core {
             break;
           case ":refs":
             if (valsub == vx_p_refs) {
-            } else if (valsub instanceof vx_core.Type_int) {
+            } else if (valsub is vx_core.Type_int) {
               ischanged = true;
               vx_p_refs = (vx_core.Type_int)valsub;
-            } else if (valsub instanceof Integer) {
+            } else if (valsub is Integer) {
               ischanged = true;
               vx_p_refs = vx_core.t_int.vx_new(valsub);
             } else {
               vx_core.Type_any msgval;
-              if (valsub instanceof vx_core.Type_any) {
+              if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString());
@@ -13058,14 +12919,12 @@ namespace vx_core {
 
   public static class Class_not  vx_core.Class_base implements Func_not {
 
-    override
-    public Func_not vx_new(Object... vals) {
+    public override vx_core.Func_not vx_new(params Object vals) {
       Class_not output = new Class_not();
       return output;
     }
 
-    override
-    public Func_not vx_copy(Object... vals) {
+    public override vx_core.Func_not vx_copy(params Object vals) {
       Class_not output = new Class_not();
       return output;
     }
@@ -13148,14 +13007,12 @@ namespace vx_core {
 
   public static class Class_notempty  vx_core.Class_base implements Func_notempty {
 
-    override
-    public Func_notempty vx_new(Object... vals) {
+    public override vx_core.Func_notempty vx_new(params Object vals) {
       Class_notempty output = new Class_notempty();
       return output;
     }
 
-    override
-    public Func_notempty vx_copy(Object... vals) {
+    public override vx_core.Func_notempty vx_copy(params Object vals) {
       Class_notempty output = new Class_notempty();
       return output;
     }
@@ -13241,14 +13098,12 @@ namespace vx_core {
 
   public static class Class_notempty_1  vx_core.Class_base implements Func_notempty_1 {
 
-    override
-    public Func_notempty_1 vx_new(Object... vals) {
+    public override vx_core.Func_notempty_1 vx_new(params Object vals) {
       Class_notempty_1 output = new Class_notempty_1();
       return output;
     }
 
-    override
-    public Func_notempty_1 vx_copy(Object... vals) {
+    public override vx_core.Func_notempty_1 vx_copy(params Object vals) {
       Class_notempty_1 output = new Class_notempty_1();
       return output;
     }
@@ -13335,14 +13190,12 @@ namespace vx_core {
 
   public static class Class_ne  vx_core.Class_base implements Func_ne {
 
-    override
-    public Func_ne vx_new(Object... vals) {
+    public override vx_core.Func_ne vx_new(params Object vals) {
       Class_ne output = new Class_ne();
       return output;
     }
 
-    override
-    public Func_ne vx_copy(Object... vals) {
+    public override vx_core.Func_ne vx_copy(params Object vals) {
       Class_ne output = new Class_ne();
       return output;
     }
@@ -13418,14 +13271,12 @@ namespace vx_core {
 
   public static class Class_neqeq  vx_core.Class_base implements Func_neqeq {
 
-    override
-    public Func_neqeq vx_new(Object... vals) {
+    public override vx_core.Func_neqeq vx_new(params Object vals) {
       Class_neqeq output = new Class_neqeq();
       return output;
     }
 
-    override
-    public Func_neqeq vx_copy(Object... vals) {
+    public override vx_core.Func_neqeq vx_copy(params Object vals) {
       Class_neqeq output = new Class_neqeq();
       return output;
     }
@@ -13501,14 +13352,12 @@ namespace vx_core {
 
   public static class Class_multiply  vx_core.Class_base implements Func_multiply {
 
-    override
-    public Func_multiply vx_new(Object... vals) {
+    public override vx_core.Func_multiply vx_new(params Object vals) {
       Class_multiply output = new Class_multiply();
       return output;
     }
 
-    override
-    public Func_multiply vx_copy(Object... vals) {
+    public override vx_core.Func_multiply vx_copy(params Object vals) {
       Class_multiply output = new Class_multiply();
       return output;
     }
@@ -13581,14 +13430,12 @@ namespace vx_core {
 
   public static class Class_multiply_1  vx_core.Class_base implements Func_multiply_1 {
 
-    override
-    public Func_multiply_1 vx_new(Object... vals) {
+    public override vx_core.Func_multiply_1 vx_new(params Object vals) {
       Class_multiply_1 output = new Class_multiply_1();
       return output;
     }
 
-    override
-    public Func_multiply_1 vx_copy(Object... vals) {
+    public override vx_core.Func_multiply_1 vx_copy(params Object vals) {
       Class_multiply_1 output = new Class_multiply_1();
       return output;
     }
@@ -13660,14 +13507,12 @@ namespace vx_core {
 
   public static class Class_multiply_2  vx_core.Class_base implements Func_multiply_2 {
 
-    override
-    public Func_multiply_2 vx_new(Object... vals) {
+    public override vx_core.Func_multiply_2 vx_new(params Object vals) {
       Class_multiply_2 output = new Class_multiply_2();
       return output;
     }
 
-    override
-    public Func_multiply_2 vx_copy(Object... vals) {
+    public override vx_core.Func_multiply_2 vx_copy(params Object vals) {
       Class_multiply_2 output = new Class_multiply_2();
       return output;
     }
@@ -13761,14 +13606,12 @@ namespace vx_core {
 
   public static class Class_multiply_3  vx_core.Class_base implements Func_multiply_3 {
 
-    override
-    public Func_multiply_3 vx_new(Object... vals) {
+    public override vx_core.Func_multiply_3 vx_new(params Object vals) {
       Class_multiply_3 output = new Class_multiply_3();
       return output;
     }
 
-    override
-    public Func_multiply_3 vx_copy(Object... vals) {
+    public override vx_core.Func_multiply_3 vx_copy(params Object vals) {
       Class_multiply_3 output = new Class_multiply_3();
       return output;
     }
@@ -13863,14 +13706,12 @@ namespace vx_core {
 
   public static class Class_plus  vx_core.Class_base implements Func_plus {
 
-    override
-    public Func_plus vx_new(Object... vals) {
+    public override vx_core.Func_plus vx_new(params Object vals) {
       Class_plus output = new Class_plus();
       return output;
     }
 
-    override
-    public Func_plus vx_copy(Object... vals) {
+    public override vx_core.Func_plus vx_copy(params Object vals) {
       Class_plus output = new Class_plus();
       return output;
     }
@@ -13943,14 +13784,12 @@ namespace vx_core {
 
   public static class Class_plus_1  vx_core.Class_base implements Func_plus_1 {
 
-    override
-    public Func_plus_1 vx_new(Object... vals) {
+    public override vx_core.Func_plus_1 vx_new(params Object vals) {
       Class_plus_1 output = new Class_plus_1();
       return output;
     }
 
-    override
-    public Func_plus_1 vx_copy(Object... vals) {
+    public override vx_core.Func_plus_1 vx_copy(params Object vals) {
       Class_plus_1 output = new Class_plus_1();
       return output;
     }
@@ -14022,14 +13861,12 @@ namespace vx_core {
 
   public static class Class_plus_2  vx_core.Class_base implements Func_plus_2 {
 
-    override
-    public Func_plus_2 vx_new(Object... vals) {
+    public override vx_core.Func_plus_2 vx_new(params Object vals) {
       Class_plus_2 output = new Class_plus_2();
       return output;
     }
 
-    override
-    public Func_plus_2 vx_copy(Object... vals) {
+    public override vx_core.Func_plus_2 vx_copy(params Object vals) {
       Class_plus_2 output = new Class_plus_2();
       return output;
     }
@@ -14123,14 +13960,12 @@ namespace vx_core {
 
   public static class Class_plus_3  vx_core.Class_base implements Func_plus_3 {
 
-    override
-    public Func_plus_3 vx_new(Object... vals) {
+    public override vx_core.Func_plus_3 vx_new(params Object vals) {
       Class_plus_3 output = new Class_plus_3();
       return output;
     }
 
-    override
-    public Func_plus_3 vx_copy(Object... vals) {
+    public override vx_core.Func_plus_3 vx_copy(params Object vals) {
       Class_plus_3 output = new Class_plus_3();
       return output;
     }
@@ -14224,14 +14059,12 @@ namespace vx_core {
 
   public static class Class_plus1  vx_core.Class_base implements Func_plus1 {
 
-    override
-    public Func_plus1 vx_new(Object... vals) {
+    public override vx_core.Func_plus1 vx_new(params Object vals) {
       Class_plus1 output = new Class_plus1();
       return output;
     }
 
-    override
-    public Func_plus1 vx_copy(Object... vals) {
+    public override vx_core.Func_plus1 vx_copy(params Object vals) {
       Class_plus1 output = new Class_plus1();
       return output;
     }
@@ -14316,14 +14149,12 @@ namespace vx_core {
 
   public static class Class_minus  vx_core.Class_base implements Func_minus {
 
-    override
-    public Func_minus vx_new(Object... vals) {
+    public override vx_core.Func_minus vx_new(params Object vals) {
       Class_minus output = new Class_minus();
       return output;
     }
 
-    override
-    public Func_minus vx_copy(Object... vals) {
+    public override vx_core.Func_minus vx_copy(params Object vals) {
       Class_minus output = new Class_minus();
       return output;
     }
@@ -14396,14 +14227,12 @@ namespace vx_core {
 
   public static class Class_minus_1  vx_core.Class_base implements Func_minus_1 {
 
-    override
-    public Func_minus_1 vx_new(Object... vals) {
+    public override vx_core.Func_minus_1 vx_new(params Object vals) {
       Class_minus_1 output = new Class_minus_1();
       return output;
     }
 
-    override
-    public Func_minus_1 vx_copy(Object... vals) {
+    public override vx_core.Func_minus_1 vx_copy(params Object vals) {
       Class_minus_1 output = new Class_minus_1();
       return output;
     }
@@ -14475,14 +14304,12 @@ namespace vx_core {
 
   public static class Class_minus_2  vx_core.Class_base implements Func_minus_2 {
 
-    override
-    public Func_minus_2 vx_new(Object... vals) {
+    public override vx_core.Func_minus_2 vx_new(params Object vals) {
       Class_minus_2 output = new Class_minus_2();
       return output;
     }
 
-    override
-    public Func_minus_2 vx_copy(Object... vals) {
+    public override vx_core.Func_minus_2 vx_copy(params Object vals) {
       Class_minus_2 output = new Class_minus_2();
       return output;
     }
@@ -14576,14 +14403,12 @@ namespace vx_core {
 
   public static class Class_minus_3  vx_core.Class_base implements Func_minus_3 {
 
-    override
-    public Func_minus_3 vx_new(Object... vals) {
+    public override vx_core.Func_minus_3 vx_new(params Object vals) {
       Class_minus_3 output = new Class_minus_3();
       return output;
     }
 
-    override
-    public Func_minus_3 vx_copy(Object... vals) {
+    public override vx_core.Func_minus_3 vx_copy(params Object vals) {
       Class_minus_3 output = new Class_minus_3();
       return output;
     }
@@ -14677,14 +14502,12 @@ namespace vx_core {
 
   public static class Class_minus1  vx_core.Class_base implements Func_minus1 {
 
-    override
-    public Func_minus1 vx_new(Object... vals) {
+    public override vx_core.Func_minus1 vx_new(params Object vals) {
       Class_minus1 output = new Class_minus1();
       return output;
     }
 
-    override
-    public Func_minus1 vx_copy(Object... vals) {
+    public override vx_core.Func_minus1 vx_copy(params Object vals) {
       Class_minus1 output = new Class_minus1();
       return output;
     }
@@ -14770,14 +14593,12 @@ namespace vx_core {
 
   public static class Class_dotmethod  vx_core.Class_base implements Func_dotmethod {
 
-    override
-    public Func_dotmethod vx_new(Object... vals) {
+    public override vx_core.Func_dotmethod vx_new(params Object vals) {
       Class_dotmethod output = new Class_dotmethod();
       return output;
     }
 
-    override
-    public Func_dotmethod vx_copy(Object... vals) {
+    public override vx_core.Func_dotmethod vx_copy(params Object vals) {
       Class_dotmethod output = new Class_dotmethod();
       return output;
     }
@@ -14851,14 +14672,12 @@ namespace vx_core {
 
   public static class Class_divide  vx_core.Class_base implements Func_divide {
 
-    override
-    public Func_divide vx_new(Object... vals) {
+    public override vx_core.Func_divide vx_new(params Object vals) {
       Class_divide output = new Class_divide();
       return output;
     }
 
-    override
-    public Func_divide vx_copy(Object... vals) {
+    public override vx_core.Func_divide vx_copy(params Object vals) {
       Class_divide output = new Class_divide();
       return output;
     }
@@ -14931,14 +14750,12 @@ namespace vx_core {
 
   public static class Class_lt  vx_core.Class_base implements Func_lt {
 
-    override
-    public Func_lt vx_new(Object... vals) {
+    public override vx_core.Func_lt vx_new(params Object vals) {
       Class_lt output = new Class_lt();
       return output;
     }
 
-    override
-    public Func_lt vx_copy(Object... vals) {
+    public override vx_core.Func_lt vx_copy(params Object vals) {
       Class_lt output = new Class_lt();
       return output;
     }
@@ -15027,14 +14844,12 @@ namespace vx_core {
 
   public static class Class_lt_1  vx_core.Class_base implements Func_lt_1 {
 
-    override
-    public Func_lt_1 vx_new(Object... vals) {
+    public override vx_core.Func_lt_1 vx_new(params Object vals) {
       Class_lt_1 output = new Class_lt_1();
       return output;
     }
 
-    override
-    public Func_lt_1 vx_copy(Object... vals) {
+    public override vx_core.Func_lt_1 vx_copy(params Object vals) {
       Class_lt_1 output = new Class_lt_1();
       return output;
     }
@@ -15135,14 +14950,12 @@ namespace vx_core {
 
   public static class Class_chainfirst  vx_core.Class_base implements Func_chainfirst {
 
-    override
-    public Func_chainfirst vx_new(Object... vals) {
+    public override vx_core.Func_chainfirst vx_new(params Object vals) {
       Class_chainfirst output = new Class_chainfirst();
       return output;
     }
 
-    override
-    public Func_chainfirst vx_copy(Object... vals) {
+    public override vx_core.Func_chainfirst vx_copy(params Object vals) {
       Class_chainfirst output = new Class_chainfirst();
       return output;
     }
@@ -15218,14 +15031,12 @@ namespace vx_core {
 
   public static class Class_chainlast  vx_core.Class_base implements Func_chainlast {
 
-    override
-    public Func_chainlast vx_new(Object... vals) {
+    public override vx_core.Func_chainlast vx_new(params Object vals) {
       Class_chainlast output = new Class_chainlast();
       return output;
     }
 
-    override
-    public Func_chainlast vx_copy(Object... vals) {
+    public override vx_core.Func_chainlast vx_copy(params Object vals) {
       Class_chainlast output = new Class_chainlast();
       return output;
     }
@@ -15299,14 +15110,12 @@ namespace vx_core {
 
   public static class Class_le  vx_core.Class_base implements Func_le {
 
-    override
-    public Func_le vx_new(Object... vals) {
+    public override vx_core.Func_le vx_new(params Object vals) {
       Class_le output = new Class_le();
       return output;
     }
 
-    override
-    public Func_le vx_copy(Object... vals) {
+    public override vx_core.Func_le vx_copy(params Object vals) {
       Class_le output = new Class_le();
       return output;
     }
@@ -15381,14 +15190,12 @@ namespace vx_core {
 
   public static class Class_le_1  vx_core.Class_base implements Func_le_1 {
 
-    override
-    public Func_le_1 vx_new(Object... vals) {
+    public override vx_core.Func_le_1 vx_new(params Object vals) {
       Class_le_1 output = new Class_le_1();
       return output;
     }
 
-    override
-    public Func_le_1 vx_copy(Object... vals) {
+    public override vx_core.Func_le_1 vx_copy(params Object vals) {
       Class_le_1 output = new Class_le_1();
       return output;
     }
@@ -15475,14 +15282,12 @@ namespace vx_core {
 
   public static class Class_eq  vx_core.Class_base implements Func_eq {
 
-    override
-    public Func_eq vx_new(Object... vals) {
+    public override vx_core.Func_eq vx_new(params Object vals) {
       Class_eq output = new Class_eq();
       return output;
     }
 
-    override
-    public Func_eq vx_copy(Object... vals) {
+    public override vx_core.Func_eq vx_copy(params Object vals) {
       Class_eq output = new Class_eq();
       return output;
     }
@@ -15554,14 +15359,12 @@ namespace vx_core {
 
   public static class Class_eq_1  vx_core.Class_base implements Func_eq_1 {
 
-    override
-    public Func_eq_1 vx_new(Object... vals) {
+    public override vx_core.Func_eq_1 vx_new(params Object vals) {
       Class_eq_1 output = new Class_eq_1();
       return output;
     }
 
-    override
-    public Func_eq_1 vx_copy(Object... vals) {
+    public override vx_core.Func_eq_1 vx_copy(params Object vals) {
       Class_eq_1 output = new Class_eq_1();
       return output;
     }
@@ -15660,14 +15463,12 @@ namespace vx_core {
 
   public static class Class_eqeq  vx_core.Class_base implements Func_eqeq {
 
-    override
-    public Func_eqeq vx_new(Object... vals) {
+    public override vx_core.Func_eqeq vx_new(params Object vals) {
       Class_eqeq output = new Class_eqeq();
       return output;
     }
 
-    override
-    public Func_eqeq vx_copy(Object... vals) {
+    public override vx_core.Func_eqeq vx_copy(params Object vals) {
       Class_eqeq output = new Class_eqeq();
       return output;
     }
@@ -15740,14 +15541,12 @@ namespace vx_core {
 
   public static class Class_gt  vx_core.Class_base implements Func_gt {
 
-    override
-    public Func_gt vx_new(Object... vals) {
+    public override vx_core.Func_gt vx_new(params Object vals) {
       Class_gt output = new Class_gt();
       return output;
     }
 
-    override
-    public Func_gt vx_copy(Object... vals) {
+    public override vx_core.Func_gt vx_copy(params Object vals) {
       Class_gt output = new Class_gt();
       return output;
     }
@@ -15836,14 +15635,12 @@ namespace vx_core {
 
   public static class Class_gt_1  vx_core.Class_base implements Func_gt_1 {
 
-    override
-    public Func_gt_1 vx_new(Object... vals) {
+    public override vx_core.Func_gt_1 vx_new(params Object vals) {
       Class_gt_1 output = new Class_gt_1();
       return output;
     }
 
-    override
-    public Func_gt_1 vx_copy(Object... vals) {
+    public override vx_core.Func_gt_1 vx_copy(params Object vals) {
       Class_gt_1 output = new Class_gt_1();
       return output;
     }
@@ -15942,14 +15739,12 @@ namespace vx_core {
 
   public static class Class_ge  vx_core.Class_base implements Func_ge {
 
-    override
-    public Func_ge vx_new(Object... vals) {
+    public override vx_core.Func_ge vx_new(params Object vals) {
       Class_ge output = new Class_ge();
       return output;
     }
 
-    override
-    public Func_ge vx_copy(Object... vals) {
+    public override vx_core.Func_ge vx_copy(params Object vals) {
       Class_ge output = new Class_ge();
       return output;
     }
@@ -16024,14 +15819,12 @@ namespace vx_core {
 
   public static class Class_ge_1  vx_core.Class_base implements Func_ge_1 {
 
-    override
-    public Func_ge_1 vx_new(Object... vals) {
+    public override vx_core.Func_ge_1 vx_new(params Object vals) {
       Class_ge_1 output = new Class_ge_1();
       return output;
     }
 
-    override
-    public Func_ge_1 vx_copy(Object... vals) {
+    public override vx_core.Func_ge_1 vx_copy(params Object vals) {
       Class_ge_1 output = new Class_ge_1();
       return output;
     }
@@ -16117,14 +15910,12 @@ namespace vx_core {
 
   public static class Class_allowfuncs_from_security  vx_core.Class_base implements Func_allowfuncs_from_security {
 
-    override
-    public Func_allowfuncs_from_security vx_new(Object... vals) {
+    public override vx_core.Func_allowfuncs_from_security vx_new(params Object vals) {
       Class_allowfuncs_from_security output = new Class_allowfuncs_from_security();
       return output;
     }
 
-    override
-    public Func_allowfuncs_from_security vx_copy(Object... vals) {
+    public override vx_core.Func_allowfuncs_from_security vx_copy(params Object vals) {
       Class_allowfuncs_from_security output = new Class_allowfuncs_from_security();
       return output;
     }
@@ -16208,14 +15999,12 @@ namespace vx_core {
 
   public static class Class_allowtypenames_from_typedef  vx_core.Class_base implements Func_allowtypenames_from_typedef {
 
-    override
-    public Func_allowtypenames_from_typedef vx_new(Object... vals) {
+    public override vx_core.Func_allowtypenames_from_typedef vx_new(params Object vals) {
       Class_allowtypenames_from_typedef output = new Class_allowtypenames_from_typedef();
       return output;
     }
 
-    override
-    public Func_allowtypenames_from_typedef vx_copy(Object... vals) {
+    public override vx_core.Func_allowtypenames_from_typedef vx_copy(params Object vals) {
       Class_allowtypenames_from_typedef output = new Class_allowtypenames_from_typedef();
       return output;
     }
@@ -16301,14 +16090,12 @@ namespace vx_core {
 
   public static class Class_allowtypes_from_typedef  vx_core.Class_base implements Func_allowtypes_from_typedef {
 
-    override
-    public Func_allowtypes_from_typedef vx_new(Object... vals) {
+    public override vx_core.Func_allowtypes_from_typedef vx_new(params Object vals) {
       Class_allowtypes_from_typedef output = new Class_allowtypes_from_typedef();
       return output;
     }
 
-    override
-    public Func_allowtypes_from_typedef vx_copy(Object... vals) {
+    public override vx_core.Func_allowtypes_from_typedef vx_copy(params Object vals) {
       Class_allowtypes_from_typedef output = new Class_allowtypes_from_typedef();
       return output;
     }
@@ -16392,14 +16179,12 @@ namespace vx_core {
 
   public static class Class_and  vx_core.Class_base implements Func_and {
 
-    override
-    public Func_and vx_new(Object... vals) {
+    public override vx_core.Func_and vx_new(params Object vals) {
       Class_and output = new Class_and();
       return output;
     }
 
-    override
-    public Func_and vx_copy(Object... vals) {
+    public override vx_core.Func_and vx_copy(params Object vals) {
       Class_and output = new Class_and();
       return output;
     }
@@ -16471,14 +16256,12 @@ namespace vx_core {
 
   public static class Class_and_1  vx_core.Class_base implements Func_and_1 {
 
-    override
-    public Func_and_1 vx_new(Object... vals) {
+    public override vx_core.Func_and_1 vx_new(params Object vals) {
       Class_and_1 output = new Class_and_1();
       return output;
     }
 
-    override
-    public Func_and_1 vx_copy(Object... vals) {
+    public override vx_core.Func_and_1 vx_copy(params Object vals) {
       Class_and_1 output = new Class_and_1();
       return output;
     }
@@ -16608,14 +16391,12 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Func_any_from_any vx_new(Object... vals) {
+    public override vx_core.Func_any_from_any vx_new(params Object vals) {
       Class_any_from_any output = new Class_any_from_any();
       return output;
     }
 
-    override
-    public Func_any_from_any vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_any vx_copy(params Object vals) {
       Class_any_from_any output = new Class_any_from_any();
       return output;
     }
@@ -16709,14 +16490,12 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Func_any_from_any_async vx_new(Object... vals) {
+    public override vx_core.Func_any_from_any_async vx_new(params Object vals) {
       Class_any_from_any_async output = new Class_any_from_any_async();
       return output;
     }
 
-    override
-    public Func_any_from_any_async vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_any_async vx_copy(params Object vals) {
       Class_any_from_any_async output = new Class_any_from_any_async();
       return output;
     }
@@ -16811,14 +16590,12 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Func_any_from_any_context vx_new(Object... vals) {
+    public override vx_core.Func_any_from_any_context vx_new(params Object vals) {
       Class_any_from_any_context output = new Class_any_from_any_context();
       return output;
     }
 
-    override
-    public Func_any_from_any_context vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_any_context vx_copy(params Object vals) {
       Class_any_from_any_context output = new Class_any_from_any_context();
       return output;
     }
@@ -16913,14 +16690,12 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Func_any_from_any_context_async vx_new(Object... vals) {
+    public override vx_core.Func_any_from_any_context_async vx_new(params Object vals) {
       Class_any_from_any_context_async output = new Class_any_from_any_context_async();
       return output;
     }
 
-    override
-    public Func_any_from_any_context_async vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_any_context_async vx_copy(params Object vals) {
       Class_any_from_any_context_async output = new Class_any_from_any_context_async();
       return output;
     }
@@ -17018,14 +16793,12 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Func_any_from_any_key_value vx_new(Object... vals) {
+    public override vx_core.Func_any_from_any_key_value vx_new(params Object vals) {
       Class_any_from_any_key_value output = new Class_any_from_any_key_value();
       return output;
     }
 
-    override
-    public Func_any_from_any_key_value vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_any_key_value vx_copy(params Object vals) {
       Class_any_from_any_key_value output = new Class_any_from_any_key_value();
       return output;
     }
@@ -17118,14 +16891,12 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Func_any_from_func vx_new(Object... vals) {
+    public override vx_core.Func_any_from_func vx_new(params Object vals) {
       Class_any_from_func output = new Class_any_from_func();
       return output;
     }
 
-    override
-    public Func_any_from_func vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_func vx_copy(params Object vals) {
       Class_any_from_func output = new Class_any_from_func();
       return output;
     }
@@ -17217,14 +16988,12 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Func_any_from_func_async vx_new(Object... vals) {
+    public override vx_core.Func_any_from_func_async vx_new(params Object vals) {
       Class_any_from_func_async output = new Class_any_from_func_async();
       return output;
     }
 
-    override
-    public Func_any_from_func_async vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_func_async vx_copy(params Object vals) {
       Class_any_from_func_async output = new Class_any_from_func_async();
       return output;
     }
@@ -17318,14 +17087,12 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Func_any_from_int vx_new(Object... vals) {
+    public override vx_core.Func_any_from_int vx_new(params Object vals) {
       Class_any_from_int output = new Class_any_from_int();
       return output;
     }
 
-    override
-    public Func_any_from_int vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_int vx_copy(params Object vals) {
       Class_any_from_int output = new Class_any_from_int();
       return output;
     }
@@ -17418,14 +17185,12 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Func_any_from_int_any vx_new(Object... vals) {
+    public override vx_core.Func_any_from_int_any vx_new(params Object vals) {
       Class_any_from_int_any output = new Class_any_from_int_any();
       return output;
     }
 
-    override
-    public Func_any_from_int_any vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_int_any vx_copy(params Object vals) {
       Class_any_from_int_any output = new Class_any_from_int_any();
       return output;
     }
@@ -17519,14 +17284,12 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Func_any_from_key_value vx_new(Object... vals) {
+    public override vx_core.Func_any_from_key_value vx_new(params Object vals) {
       Class_any_from_key_value output = new Class_any_from_key_value();
       return output;
     }
 
-    override
-    public Func_any_from_key_value vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_key_value vx_copy(params Object vals) {
       Class_any_from_key_value output = new Class_any_from_key_value();
       return output;
     }
@@ -17622,14 +17385,12 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Func_any_from_key_value_async vx_new(Object... vals) {
+    public override vx_core.Func_any_from_key_value_async vx_new(params Object vals) {
       Class_any_from_key_value_async output = new Class_any_from_key_value_async();
       return output;
     }
 
-    override
-    public Func_any_from_key_value_async vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_key_value_async vx_copy(params Object vals) {
       Class_any_from_key_value_async output = new Class_any_from_key_value_async();
       return output;
     }
@@ -17716,14 +17477,12 @@ namespace vx_core {
 
   public static class Class_any_from_list  vx_core.Class_base implements Func_any_from_list {
 
-    override
-    public Func_any_from_list vx_new(Object... vals) {
+    public override vx_core.Func_any_from_list vx_new(params Object vals) {
       Class_any_from_list output = new Class_any_from_list();
       return output;
     }
 
-    override
-    public Func_any_from_list vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_list vx_copy(params Object vals) {
       Class_any_from_list output = new Class_any_from_list();
       return output;
     }
@@ -17798,14 +17557,12 @@ namespace vx_core {
 
   public static class Class_any_from_list_start_reduce  vx_core.Class_base implements Func_any_from_list_start_reduce {
 
-    override
-    public Func_any_from_list_start_reduce vx_new(Object... vals) {
+    public override vx_core.Func_any_from_list_start_reduce vx_new(params Object vals) {
       Class_any_from_list_start_reduce output = new Class_any_from_list_start_reduce();
       return output;
     }
 
-    override
-    public Func_any_from_list_start_reduce vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_list_start_reduce vx_copy(params Object vals) {
       Class_any_from_list_start_reduce output = new Class_any_from_list_start_reduce();
       return output;
     }
@@ -17881,14 +17638,12 @@ namespace vx_core {
 
   public static class Class_any_from_list_start_reduce_next  vx_core.Class_base implements Func_any_from_list_start_reduce_next {
 
-    override
-    public Func_any_from_list_start_reduce_next vx_new(Object... vals) {
+    public override vx_core.Func_any_from_list_start_reduce_next vx_new(params Object vals) {
       Class_any_from_list_start_reduce_next output = new Class_any_from_list_start_reduce_next();
       return output;
     }
 
-    override
-    public Func_any_from_list_start_reduce_next vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_list_start_reduce_next vx_copy(params Object vals) {
       Class_any_from_list_start_reduce_next output = new Class_any_from_list_start_reduce_next();
       return output;
     }
@@ -17963,14 +17718,12 @@ namespace vx_core {
 
   public static class Class_any_from_map  vx_core.Class_base implements Func_any_from_map {
 
-    override
-    public Func_any_from_map vx_new(Object... vals) {
+    public override vx_core.Func_any_from_map vx_new(params Object vals) {
       Class_any_from_map output = new Class_any_from_map();
       return output;
     }
 
-    override
-    public Func_any_from_map vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_map vx_copy(params Object vals) {
       Class_any_from_map output = new Class_any_from_map();
       return output;
     }
@@ -18045,14 +17798,12 @@ namespace vx_core {
 
   public static class Class_any_from_map_start_reduce  vx_core.Class_base implements Func_any_from_map_start_reduce {
 
-    override
-    public Func_any_from_map_start_reduce vx_new(Object... vals) {
+    public override vx_core.Func_any_from_map_start_reduce vx_new(params Object vals) {
       Class_any_from_map_start_reduce output = new Class_any_from_map_start_reduce();
       return output;
     }
 
-    override
-    public Func_any_from_map_start_reduce vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_map_start_reduce vx_copy(params Object vals) {
       Class_any_from_map_start_reduce output = new Class_any_from_map_start_reduce();
       return output;
     }
@@ -18135,14 +17886,12 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Func_any_from_none vx_new(Object... vals) {
+    public override vx_core.Func_any_from_none vx_new(params Object vals) {
       Class_any_from_none output = new Class_any_from_none();
       return output;
     }
 
-    override
-    public Func_any_from_none vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_none vx_copy(params Object vals) {
       Class_any_from_none output = new Class_any_from_none();
       return output;
     }
@@ -18234,14 +17983,12 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Func_any_from_none_async vx_new(Object... vals) {
+    public override vx_core.Func_any_from_none_async vx_new(params Object vals) {
       Class_any_from_none_async output = new Class_any_from_none_async();
       return output;
     }
 
-    override
-    public Func_any_from_none_async vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_none_async vx_copy(params Object vals) {
       Class_any_from_none_async output = new Class_any_from_none_async();
       return output;
     }
@@ -18335,14 +18082,12 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Func_any_from_reduce vx_new(Object... vals) {
+    public override vx_core.Func_any_from_reduce vx_new(params Object vals) {
       Class_any_from_reduce output = new Class_any_from_reduce();
       return output;
     }
 
-    override
-    public Func_any_from_reduce vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_reduce vx_copy(params Object vals) {
       Class_any_from_reduce output = new Class_any_from_reduce();
       return output;
     }
@@ -18437,14 +18182,12 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Func_any_from_reduce_async vx_new(Object... vals) {
+    public override vx_core.Func_any_from_reduce_async vx_new(params Object vals) {
       Class_any_from_reduce_async output = new Class_any_from_reduce_async();
       return output;
     }
 
-    override
-    public Func_any_from_reduce_async vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_reduce_async vx_copy(params Object vals) {
       Class_any_from_reduce_async output = new Class_any_from_reduce_async();
       return output;
     }
@@ -18541,14 +18284,12 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Func_any_from_reduce_next vx_new(Object... vals) {
+    public override vx_core.Func_any_from_reduce_next vx_new(params Object vals) {
       Class_any_from_reduce_next output = new Class_any_from_reduce_next();
       return output;
     }
 
-    override
-    public Func_any_from_reduce_next vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_reduce_next vx_copy(params Object vals) {
       Class_any_from_reduce_next output = new Class_any_from_reduce_next();
       return output;
     }
@@ -18645,14 +18386,12 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Func_any_from_reduce_next_async vx_new(Object... vals) {
+    public override vx_core.Func_any_from_reduce_next_async vx_new(params Object vals) {
       Class_any_from_reduce_next_async output = new Class_any_from_reduce_next_async();
       return output;
     }
 
-    override
-    public Func_any_from_reduce_next_async vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_reduce_next_async vx_copy(params Object vals) {
       Class_any_from_reduce_next_async output = new Class_any_from_reduce_next_async();
       return output;
     }
@@ -18740,14 +18479,12 @@ namespace vx_core {
 
   public static class Class_any_from_struct  vx_core.Class_base implements Func_any_from_struct {
 
-    override
-    public Func_any_from_struct vx_new(Object... vals) {
+    public override vx_core.Func_any_from_struct vx_new(params Object vals) {
       Class_any_from_struct output = new Class_any_from_struct();
       return output;
     }
 
-    override
-    public Func_any_from_struct vx_copy(Object... vals) {
+    public override vx_core.Func_any_from_struct vx_copy(params Object vals) {
       Class_any_from_struct output = new Class_any_from_struct();
       return output;
     }
@@ -18822,14 +18559,12 @@ namespace vx_core {
 
   public static class Class_async  vx_core.Class_base implements Func_async {
 
-    override
-    public Func_async vx_new(Object... vals) {
+    public override vx_core.Func_async vx_new(params Object vals) {
       Class_async output = new Class_async();
       return output;
     }
 
-    override
-    public Func_async vx_copy(Object... vals) {
+    public override vx_core.Func_async vx_copy(params Object vals) {
       Class_async output = new Class_async();
       return output;
     }
@@ -18912,14 +18647,12 @@ namespace vx_core {
 
   public static class Class_boolean_permission_from_func  vx_core.Class_base implements Func_boolean_permission_from_func {
 
-    override
-    public Func_boolean_permission_from_func vx_new(Object... vals) {
+    public override vx_core.Func_boolean_permission_from_func vx_new(params Object vals) {
       Class_boolean_permission_from_func output = new Class_boolean_permission_from_func();
       return output;
     }
 
-    override
-    public Func_boolean_permission_from_func vx_copy(Object... vals) {
+    public override vx_core.Func_boolean_permission_from_func vx_copy(params Object vals) {
       Class_boolean_permission_from_func output = new Class_boolean_permission_from_func();
       return output;
     }
@@ -19011,14 +18744,12 @@ namespace vx_core {
 
   public static class Class_boolean_write_from_map_name_value  vx_core.Class_base implements Func_boolean_write_from_map_name_value {
 
-    override
-    public Func_boolean_write_from_map_name_value vx_new(Object... vals) {
+    public override vx_core.Func_boolean_write_from_map_name_value vx_new(params Object vals) {
       Class_boolean_write_from_map_name_value output = new Class_boolean_write_from_map_name_value();
       return output;
     }
 
-    override
-    public Func_boolean_write_from_map_name_value vx_copy(Object... vals) {
+    public override vx_core.Func_boolean_write_from_map_name_value vx_copy(params Object vals) {
       Class_boolean_write_from_map_name_value output = new Class_boolean_write_from_map_name_value();
       return output;
     }
@@ -19101,14 +18832,12 @@ namespace vx_core {
       return output;
     }
 
-    override
-    public Func_boolean_from_any vx_new(Object... vals) {
+    public override vx_core.Func_boolean_from_any vx_new(params Object vals) {
       Class_boolean_from_any output = new Class_boolean_from_any();
       return output;
     }
 
-    override
-    public Func_boolean_from_any vx_copy(Object... vals) {
+    public override vx_core.Func_boolean_from_any vx_copy(params Object vals) {
       Class_boolean_from_any output = new Class_boolean_from_any();
       return output;
     }
@@ -19189,14 +18918,12 @@ namespace vx_core {
 
   public static class Class_boolean_from_func  vx_core.Class_base implements Func_boolean_from_func {
 
-    override
-    public Func_boolean_from_func vx_new(Object... vals) {
+    public override vx_core.Func_boolean_from_func vx_new(params Object vals) {
       Class_boolean_from_func output = new Class_boolean_from_func();
       return output;
     }
 
-    override
-    public Func_boolean_from_func vx_copy(Object... vals) {
+    public override vx_core.Func_boolean_from_func vx_copy(params Object vals) {
       Class_boolean_from_func output = new Class_boolean_from_func();
       return output;
     }
@@ -19285,14 +19012,12 @@ namespace vx_core {
 
   public static class Class_boolean_from_none  vx_core.Class_base implements Func_boolean_from_none {
 
-    override
-    public Func_boolean_from_none vx_new(Object... vals) {
+    public override vx_core.Func_boolean_from_none vx_new(params Object vals) {
       Class_boolean_from_none output = new Class_boolean_from_none();
       return output;
     }
 
-    override
-    public Func_boolean_from_none vx_copy(Object... vals) {
+    public override vx_core.Func_boolean_from_none vx_copy(params Object vals) {
       Class_boolean_from_none output = new Class_boolean_from_none();
       return output;
     }
@@ -19381,14 +19106,12 @@ namespace vx_core {
 
   public static class Class_case  vx_core.Class_base implements Func_case {
 
-    override
-    public Func_case vx_new(Object... vals) {
+    public override vx_core.Func_case vx_new(params Object vals) {
       Class_case output = new Class_case();
       return output;
     }
 
-    override
-    public Func_case vx_copy(Object... vals) {
+    public override vx_core.Func_case vx_copy(params Object vals) {
       Class_case output = new Class_case();
       return output;
     }
@@ -19471,14 +19194,12 @@ namespace vx_core {
 
   public static class Class_case_1  vx_core.Class_base implements Func_case_1 {
 
-    override
-    public Func_case_1 vx_new(Object... vals) {
+    public override vx_core.Func_case_1 vx_new(params Object vals) {
       Class_case_1 output = new Class_case_1();
       return output;
     }
 
-    override
-    public Func_case_1 vx_copy(Object... vals) {
+    public override vx_core.Func_case_1 vx_copy(params Object vals) {
       Class_case_1 output = new Class_case_1();
       return output;
     }
@@ -19562,14 +19283,12 @@ namespace vx_core {
 
   public static class Class_compare  vx_core.Class_base implements Func_compare {
 
-    override
-    public Func_compare vx_new(Object... vals) {
+    public override vx_core.Func_compare vx_new(params Object vals) {
       Class_compare output = new Class_compare();
       return output;
     }
 
-    override
-    public Func_compare vx_copy(Object... vals) {
+    public override vx_core.Func_compare vx_copy(params Object vals) {
       Class_compare output = new Class_compare();
       return output;
     }
@@ -19642,14 +19361,12 @@ namespace vx_core {
 
   public static class Class_contains  vx_core.Class_base implements Func_contains {
 
-    override
-    public Func_contains vx_new(Object... vals) {
+    public override vx_core.Func_contains vx_new(params Object vals) {
       Class_contains output = new Class_contains();
       return output;
     }
 
-    override
-    public Func_contains vx_copy(Object... vals) {
+    public override vx_core.Func_contains vx_copy(params Object vals) {
       Class_contains output = new Class_contains();
       return output;
     }
@@ -19722,14 +19439,12 @@ namespace vx_core {
 
   public static class Class_contains_1  vx_core.Class_base implements Func_contains_1 {
 
-    override
-    public Func_contains_1 vx_new(Object... vals) {
+    public override vx_core.Func_contains_1 vx_new(params Object vals) {
       Class_contains_1 output = new Class_contains_1();
       return output;
     }
 
-    override
-    public Func_contains_1 vx_copy(Object... vals) {
+    public override vx_core.Func_contains_1 vx_copy(params Object vals) {
       Class_contains_1 output = new Class_contains_1();
       return output;
     }
@@ -19801,14 +19516,12 @@ namespace vx_core {
 
   public static class Class_context_main  vx_core.Class_base implements Func_context_main {
 
-    override
-    public Func_context_main vx_new(Object... vals) {
+    public override vx_core.Func_context_main vx_new(params Object vals) {
       Class_context_main output = new Class_context_main();
       return output;
     }
 
-    override
-    public Func_context_main vx_copy(Object... vals) {
+    public override vx_core.Func_context_main vx_copy(params Object vals) {
       Class_context_main output = new Class_context_main();
       return output;
     }
@@ -19895,14 +19608,12 @@ namespace vx_core {
 
   public static class Class_copy  vx_core.Class_base implements Func_copy {
 
-    override
-    public Func_copy vx_new(Object... vals) {
+    public override vx_core.Func_copy vx_new(params Object vals) {
       Class_copy output = new Class_copy();
       return output;
     }
 
-    override
-    public Func_copy vx_copy(Object... vals) {
+    public override vx_core.Func_copy vx_copy(params Object vals) {
       Class_copy output = new Class_copy();
       return output;
     }
@@ -19972,14 +19683,12 @@ namespace vx_core {
 
   public static class Class_else  vx_core.Class_base implements Func_else {
 
-    override
-    public Func_else vx_new(Object... vals) {
+    public override vx_core.Func_else vx_new(params Object vals) {
       Class_else output = new Class_else();
       return output;
     }
 
-    override
-    public Func_else vx_copy(Object... vals) {
+    public override vx_core.Func_else vx_copy(params Object vals) {
       Class_else output = new Class_else();
       return output;
     }
@@ -20071,14 +19780,12 @@ namespace vx_core {
 
   public static class Class_empty  vx_core.Class_base implements Func_empty {
 
-    override
-    public Func_empty vx_new(Object... vals) {
+    public override vx_core.Func_empty vx_new(params Object vals) {
       Class_empty output = new Class_empty();
       return output;
     }
 
-    override
-    public Func_empty vx_copy(Object... vals) {
+    public override vx_core.Func_empty vx_copy(params Object vals) {
       Class_empty output = new Class_empty();
       return output;
     }
@@ -20159,14 +19866,12 @@ namespace vx_core {
 
   public static class Class_extends_from_any  vx_core.Class_base implements Func_extends_from_any {
 
-    override
-    public Func_extends_from_any vx_new(Object... vals) {
+    public override vx_core.Func_extends_from_any vx_new(params Object vals) {
       Class_extends_from_any output = new Class_extends_from_any();
       return output;
     }
 
-    override
-    public Func_extends_from_any vx_copy(Object... vals) {
+    public override vx_core.Func_extends_from_any vx_copy(params Object vals) {
       Class_extends_from_any output = new Class_extends_from_any();
       return output;
     }
@@ -20252,14 +19957,12 @@ namespace vx_core {
 
   public static class Class_extends_from_typedef  vx_core.Class_base implements Func_extends_from_typedef {
 
-    override
-    public Func_extends_from_typedef vx_new(Object... vals) {
+    public override vx_core.Func_extends_from_typedef vx_new(params Object vals) {
       Class_extends_from_typedef output = new Class_extends_from_typedef();
       return output;
     }
 
-    override
-    public Func_extends_from_typedef vx_copy(Object... vals) {
+    public override vx_core.Func_extends_from_typedef vx_copy(params Object vals) {
       Class_extends_from_typedef output = new Class_extends_from_typedef();
       return output;
     }
@@ -20343,14 +20046,12 @@ namespace vx_core {
 
   public static class Class_first_from_list  vx_core.Class_base implements Func_first_from_list {
 
-    override
-    public Func_first_from_list vx_new(Object... vals) {
+    public override vx_core.Func_first_from_list vx_new(params Object vals) {
       Class_first_from_list output = new Class_first_from_list();
       return output;
     }
 
-    override
-    public Func_first_from_list vx_copy(Object... vals) {
+    public override vx_core.Func_first_from_list vx_copy(params Object vals) {
       Class_first_from_list output = new Class_first_from_list();
       return output;
     }
@@ -20436,14 +20137,12 @@ namespace vx_core {
 
   public static class Class_first_from_list_any_from_any  vx_core.Class_base implements Func_first_from_list_any_from_any {
 
-    override
-    public Func_first_from_list_any_from_any vx_new(Object... vals) {
+    public override vx_core.Func_first_from_list_any_from_any vx_new(params Object vals) {
       Class_first_from_list_any_from_any output = new Class_first_from_list_any_from_any();
       return output;
     }
 
-    override
-    public Func_first_from_list_any_from_any vx_copy(Object... vals) {
+    public override vx_core.Func_first_from_list_any_from_any vx_copy(params Object vals) {
       Class_first_from_list_any_from_any output = new Class_first_from_list_any_from_any();
       return output;
     }
@@ -20516,14 +20215,12 @@ namespace vx_core {
 
   public static class Class_float_from_string  vx_core.Class_base implements Func_float_from_string {
 
-    override
-    public Func_float_from_string vx_new(Object... vals) {
+    public override vx_core.Func_float_from_string vx_new(params Object vals) {
       Class_float_from_string output = new Class_float_from_string();
       return output;
     }
 
-    override
-    public Func_float_from_string vx_copy(Object... vals) {
+    public override vx_core.Func_float_from_string vx_copy(params Object vals) {
       Class_float_from_string output = new Class_float_from_string();
       return output;
     }
@@ -20607,14 +20304,12 @@ namespace vx_core {
 
   public static class Class_fn  vx_core.Class_base implements Func_fn {
 
-    override
-    public Func_fn vx_new(Object... vals) {
+    public override vx_core.Func_fn vx_new(params Object vals) {
       Class_fn output = new Class_fn();
       return output;
     }
 
-    override
-    public Func_fn vx_copy(Object... vals) {
+    public override vx_core.Func_fn vx_copy(params Object vals) {
       Class_fn output = new Class_fn();
       return output;
     }
@@ -20686,14 +20381,12 @@ namespace vx_core {
 
   public static class Class_funcdef_from_func  vx_core.Class_base implements Func_funcdef_from_func {
 
-    override
-    public Func_funcdef_from_func vx_new(Object... vals) {
+    public override vx_core.Func_funcdef_from_func vx_new(params Object vals) {
       Class_funcdef_from_func output = new Class_funcdef_from_func();
       return output;
     }
 
-    override
-    public Func_funcdef_from_func vx_copy(Object... vals) {
+    public override vx_core.Func_funcdef_from_func vx_copy(params Object vals) {
       Class_funcdef_from_func output = new Class_funcdef_from_func();
       return output;
     }
@@ -20776,14 +20469,12 @@ namespace vx_core {
 
   public static class Class_funcname_from_funcdef  vx_core.Class_base implements Func_funcname_from_funcdef {
 
-    override
-    public Func_funcname_from_funcdef vx_new(Object... vals) {
+    public override vx_core.Func_funcname_from_funcdef vx_new(params Object vals) {
       Class_funcname_from_funcdef output = new Class_funcname_from_funcdef();
       return output;
     }
 
-    override
-    public Func_funcname_from_funcdef vx_copy(Object... vals) {
+    public override vx_core.Func_funcname_from_funcdef vx_copy(params Object vals) {
       Class_funcname_from_funcdef output = new Class_funcname_from_funcdef();
       return output;
     }
@@ -20875,14 +20566,12 @@ namespace vx_core {
 
   public static class Class_if  vx_core.Class_base implements Func_if {
 
-    override
-    public Func_if vx_new(Object... vals) {
+    public override vx_core.Func_if vx_new(params Object vals) {
       Class_if output = new Class_if();
       return output;
     }
 
-    override
-    public Func_if vx_copy(Object... vals) {
+    public override vx_core.Func_if vx_copy(params Object vals) {
       Class_if output = new Class_if();
       return output;
     }
@@ -20957,14 +20646,12 @@ namespace vx_core {
 
   public static class Class_if_1  vx_core.Class_base implements Func_if_1 {
 
-    override
-    public Func_if_1 vx_new(Object... vals) {
+    public override vx_core.Func_if_1 vx_new(params Object vals) {
       Class_if_1 output = new Class_if_1();
       return output;
     }
 
-    override
-    public Func_if_1 vx_copy(Object... vals) {
+    public override vx_core.Func_if_1 vx_copy(params Object vals) {
       Class_if_1 output = new Class_if_1();
       return output;
     }
@@ -21038,14 +20725,12 @@ namespace vx_core {
 
   public static class Class_if_2  vx_core.Class_base implements Func_if_2 {
 
-    override
-    public Func_if_2 vx_new(Object... vals) {
+    public override vx_core.Func_if_2 vx_new(params Object vals) {
       Class_if_2 output = new Class_if_2();
       return output;
     }
 
-    override
-    public Func_if_2 vx_copy(Object... vals) {
+    public override vx_core.Func_if_2 vx_copy(params Object vals) {
       Class_if_2 output = new Class_if_2();
       return output;
     }
@@ -21129,14 +20814,12 @@ namespace vx_core {
 
   public static class Class_int_from_func  vx_core.Class_base implements Func_int_from_func {
 
-    override
-    public Func_int_from_func vx_new(Object... vals) {
+    public override vx_core.Func_int_from_func vx_new(params Object vals) {
       Class_int_from_func output = new Class_int_from_func();
       return output;
     }
 
-    override
-    public Func_int_from_func vx_copy(Object... vals) {
+    public override vx_core.Func_int_from_func vx_copy(params Object vals) {
       Class_int_from_func output = new Class_int_from_func();
       return output;
     }
@@ -21215,14 +20898,12 @@ namespace vx_core {
 
   public static class Class_int_from_string  vx_core.Class_base implements Func_int_from_string {
 
-    override
-    public Func_int_from_string vx_new(Object... vals) {
+    public override vx_core.Func_int_from_string vx_new(params Object vals) {
       Class_int_from_string output = new Class_int_from_string();
       return output;
     }
 
-    override
-    public Func_int_from_string vx_copy(Object... vals) {
+    public override vx_core.Func_int_from_string vx_copy(params Object vals) {
       Class_int_from_string output = new Class_int_from_string();
       return output;
     }
@@ -21333,14 +21014,12 @@ namespace vx_core {
 
   public static class Class_is_empty  vx_core.Class_base implements Func_is_empty {
 
-    override
-    public Func_is_empty vx_new(Object... vals) {
+    public override vx_core.Func_is_empty vx_new(params Object vals) {
       Class_is_empty output = new Class_is_empty();
       return output;
     }
 
-    override
-    public Func_is_empty vx_copy(Object... vals) {
+    public override vx_core.Func_is_empty vx_copy(params Object vals) {
       Class_is_empty output = new Class_is_empty();
       return output;
     }
@@ -21423,14 +21102,12 @@ namespace vx_core {
 
   public static class Class_is_empty_1  vx_core.Class_base implements Func_is_empty_1 {
 
-    override
-    public Func_is_empty_1 vx_new(Object... vals) {
+    public override vx_core.Func_is_empty_1 vx_new(params Object vals) {
       Class_is_empty_1 output = new Class_is_empty_1();
       return output;
     }
 
-    override
-    public Func_is_empty_1 vx_copy(Object... vals) {
+    public override vx_core.Func_is_empty_1 vx_copy(params Object vals) {
       Class_is_empty_1 output = new Class_is_empty_1();
       return output;
     }
@@ -21514,14 +21191,12 @@ namespace vx_core {
 
   public static class Class_is_endswith  vx_core.Class_base implements Func_is_endswith {
 
-    override
-    public Func_is_endswith vx_new(Object... vals) {
+    public override vx_core.Func_is_endswith vx_new(params Object vals) {
       Class_is_endswith output = new Class_is_endswith();
       return output;
     }
 
-    override
-    public Func_is_endswith vx_copy(Object... vals) {
+    public override vx_core.Func_is_endswith vx_copy(params Object vals) {
       Class_is_endswith output = new Class_is_endswith();
       return output;
     }
@@ -21593,14 +21268,12 @@ namespace vx_core {
 
   public static class Class_is_float  vx_core.Class_base implements Func_is_float {
 
-    override
-    public Func_is_float vx_new(Object... vals) {
+    public override vx_core.Func_is_float vx_new(params Object vals) {
       Class_is_float output = new Class_is_float();
       return output;
     }
 
-    override
-    public Func_is_float vx_copy(Object... vals) {
+    public override vx_core.Func_is_float vx_copy(params Object vals) {
       Class_is_float output = new Class_is_float();
       return output;
     }
@@ -21683,14 +21356,12 @@ namespace vx_core {
 
   public static class Class_is_func  vx_core.Class_base implements Func_is_func {
 
-    override
-    public Func_is_func vx_new(Object... vals) {
+    public override vx_core.Func_is_func vx_new(params Object vals) {
       Class_is_func output = new Class_is_func();
       return output;
     }
 
-    override
-    public Func_is_func vx_copy(Object... vals) {
+    public override vx_core.Func_is_func vx_copy(params Object vals) {
       Class_is_func output = new Class_is_func();
       return output;
     }
@@ -21773,14 +21444,12 @@ namespace vx_core {
 
   public static class Class_is_int  vx_core.Class_base implements Func_is_int {
 
-    override
-    public Func_is_int vx_new(Object... vals) {
+    public override vx_core.Func_is_int vx_new(params Object vals) {
       Class_is_int output = new Class_is_int();
       return output;
     }
 
-    override
-    public Func_is_int vx_copy(Object... vals) {
+    public override vx_core.Func_is_int vx_copy(params Object vals) {
       Class_is_int output = new Class_is_int();
       return output;
     }
@@ -21863,14 +21532,12 @@ namespace vx_core {
 
   public static class Class_is_number  vx_core.Class_base implements Func_is_number {
 
-    override
-    public Func_is_number vx_new(Object... vals) {
+    public override vx_core.Func_is_number vx_new(params Object vals) {
       Class_is_number output = new Class_is_number();
       return output;
     }
 
-    override
-    public Func_is_number vx_copy(Object... vals) {
+    public override vx_core.Func_is_number vx_copy(params Object vals) {
       Class_is_number output = new Class_is_number();
       return output;
     }
@@ -21978,14 +21645,12 @@ namespace vx_core {
 
   public static class Class_is_pass_from_permission  vx_core.Class_base implements Func_is_pass_from_permission {
 
-    override
-    public Func_is_pass_from_permission vx_new(Object... vals) {
+    public override vx_core.Func_is_pass_from_permission vx_new(params Object vals) {
       Class_is_pass_from_permission output = new Class_is_pass_from_permission();
       return output;
     }
 
-    override
-    public Func_is_pass_from_permission vx_copy(Object... vals) {
+    public override vx_core.Func_is_pass_from_permission vx_copy(params Object vals) {
       Class_is_pass_from_permission output = new Class_is_pass_from_permission();
       return output;
     }
@@ -22077,14 +21742,12 @@ namespace vx_core {
 
   public static class Class_last_from_list  vx_core.Class_base implements Func_last_from_list {
 
-    override
-    public Func_last_from_list vx_new(Object... vals) {
+    public override vx_core.Func_last_from_list vx_new(params Object vals) {
       Class_last_from_list output = new Class_last_from_list();
       return output;
     }
 
-    override
-    public Func_last_from_list vx_copy(Object... vals) {
+    public override vx_core.Func_last_from_list vx_copy(params Object vals) {
       Class_last_from_list output = new Class_last_from_list();
       return output;
     }
@@ -22175,14 +21838,12 @@ namespace vx_core {
 
   public static class Class_length  vx_core.Class_base implements Func_length {
 
-    override
-    public Func_length vx_new(Object... vals) {
+    public override vx_core.Func_length vx_new(params Object vals) {
       Class_length output = new Class_length();
       return output;
     }
 
-    override
-    public Func_length vx_copy(Object... vals) {
+    public override vx_core.Func_length vx_copy(params Object vals) {
       Class_length output = new Class_length();
       return output;
     }
@@ -22265,14 +21926,12 @@ namespace vx_core {
 
   public static class Class_length_1  vx_core.Class_base implements Func_length_1 {
 
-    override
-    public Func_length_1 vx_new(Object... vals) {
+    public override vx_core.Func_length_1 vx_new(params Object vals) {
       Class_length_1 output = new Class_length_1();
       return output;
     }
 
-    override
-    public Func_length_1 vx_copy(Object... vals) {
+    public override vx_core.Func_length_1 vx_copy(params Object vals) {
       Class_length_1 output = new Class_length_1();
       return output;
     }
@@ -22355,14 +22014,12 @@ namespace vx_core {
 
   public static class Class_length_2  vx_core.Class_base implements Func_length_2 {
 
-    override
-    public Func_length_2 vx_new(Object... vals) {
+    public override vx_core.Func_length_2 vx_new(params Object vals) {
       Class_length_2 output = new Class_length_2();
       return output;
     }
 
-    override
-    public Func_length_2 vx_copy(Object... vals) {
+    public override vx_core.Func_length_2 vx_copy(params Object vals) {
       Class_length_2 output = new Class_length_2();
       return output;
     }
@@ -22448,14 +22105,12 @@ namespace vx_core {
 
   public static class Class_let  vx_core.Class_base implements Func_let {
 
-    override
-    public Func_let vx_new(Object... vals) {
+    public override vx_core.Func_let vx_new(params Object vals) {
       Class_let output = new Class_let();
       return output;
     }
 
-    override
-    public Func_let vx_copy(Object... vals) {
+    public override vx_core.Func_let vx_copy(params Object vals) {
       Class_let output = new Class_let();
       return output;
     }
@@ -22530,14 +22185,12 @@ namespace vx_core {
 
   public static class Class_let_async  vx_core.Class_base implements Func_let_async {
 
-    override
-    public Func_let_async vx_new(Object... vals) {
+    public override vx_core.Func_let_async vx_new(params Object vals) {
       Class_let_async output = new Class_let_async();
       return output;
     }
 
-    override
-    public Func_let_async vx_copy(Object... vals) {
+    public override vx_core.Func_let_async vx_copy(params Object vals) {
       Class_let_async output = new Class_let_async();
       return output;
     }
@@ -22610,14 +22263,12 @@ namespace vx_core {
 
   public static class Class_list_join_from_list  vx_core.Class_base implements Func_list_join_from_list {
 
-    override
-    public Func_list_join_from_list vx_new(Object... vals) {
+    public override vx_core.Func_list_join_from_list vx_new(params Object vals) {
       Class_list_join_from_list output = new Class_list_join_from_list();
       return output;
     }
 
-    override
-    public Func_list_join_from_list vx_copy(Object... vals) {
+    public override vx_core.Func_list_join_from_list vx_copy(params Object vals) {
       Class_list_join_from_list output = new Class_list_join_from_list();
       return output;
     }
@@ -22710,14 +22361,12 @@ namespace vx_core {
 
   public static class Class_list_join_from_list_1  vx_core.Class_base implements Func_list_join_from_list_1 {
 
-    override
-    public Func_list_join_from_list_1 vx_new(Object... vals) {
+    public override vx_core.Func_list_join_from_list_1 vx_new(params Object vals) {
       Class_list_join_from_list_1 output = new Class_list_join_from_list_1();
       return output;
     }
 
-    override
-    public Func_list_join_from_list_1 vx_copy(Object... vals) {
+    public override vx_core.Func_list_join_from_list_1 vx_copy(params Object vals) {
       Class_list_join_from_list_1 output = new Class_list_join_from_list_1();
       return output;
     }
@@ -22790,14 +22439,12 @@ namespace vx_core {
 
   public static class Class_list_from_list  vx_core.Class_base implements Func_list_from_list {
 
-    override
-    public Func_list_from_list vx_new(Object... vals) {
+    public override vx_core.Func_list_from_list vx_new(params Object vals) {
       Class_list_from_list output = new Class_list_from_list();
       return output;
     }
 
-    override
-    public Func_list_from_list vx_copy(Object... vals) {
+    public override vx_core.Func_list_from_list vx_copy(params Object vals) {
       Class_list_from_list output = new Class_list_from_list();
       return output;
     }
@@ -22890,14 +22537,12 @@ namespace vx_core {
 
   public static class Class_list_from_list_1  vx_core.Class_base implements Func_list_from_list_1 {
 
-    override
-    public Func_list_from_list_1 vx_new(Object... vals) {
+    public override vx_core.Func_list_from_list_1 vx_new(params Object vals) {
       Class_list_from_list_1 output = new Class_list_from_list_1();
       return output;
     }
 
-    override
-    public Func_list_from_list_1 vx_copy(Object... vals) {
+    public override vx_core.Func_list_from_list_1 vx_copy(params Object vals) {
       Class_list_from_list_1 output = new Class_list_from_list_1();
       return output;
     }
@@ -22973,14 +22618,12 @@ namespace vx_core {
 
   public static class Class_list_from_list_async  vx_core.Class_base implements Func_list_from_list_async {
 
-    override
-    public Func_list_from_list_async vx_new(Object... vals) {
+    public override vx_core.Func_list_from_list_async vx_new(params Object vals) {
       Class_list_from_list_async output = new Class_list_from_list_async();
       return output;
     }
 
-    override
-    public Func_list_from_list_async vx_copy(Object... vals) {
+    public override vx_core.Func_list_from_list_async vx_copy(params Object vals) {
       Class_list_from_list_async output = new Class_list_from_list_async();
       return output;
     }
@@ -23055,14 +22698,12 @@ namespace vx_core {
 
   public static class Class_list_from_list_intany  vx_core.Class_base implements Func_list_from_list_intany {
 
-    override
-    public Func_list_from_list_intany vx_new(Object... vals) {
+    public override vx_core.Func_list_from_list_intany vx_new(params Object vals) {
       Class_list_from_list_intany output = new Class_list_from_list_intany();
       return output;
     }
 
-    override
-    public Func_list_from_list_intany vx_copy(Object... vals) {
+    public override vx_core.Func_list_from_list_intany vx_copy(params Object vals) {
       Class_list_from_list_intany output = new Class_list_from_list_intany();
       return output;
     }
@@ -23135,14 +22776,12 @@ namespace vx_core {
 
   public static class Class_list_from_map  vx_core.Class_base implements Func_list_from_map {
 
-    override
-    public Func_list_from_map vx_new(Object... vals) {
+    public override vx_core.Func_list_from_map vx_new(params Object vals) {
       Class_list_from_map output = new Class_list_from_map();
       return output;
     }
 
-    override
-    public Func_list_from_map vx_copy(Object... vals) {
+    public override vx_core.Func_list_from_map vx_copy(params Object vals) {
       Class_list_from_map output = new Class_list_from_map();
       return output;
     }
@@ -23236,14 +22875,12 @@ namespace vx_core {
 
   public static class Class_list_from_map_1  vx_core.Class_base implements Func_list_from_map_1 {
 
-    override
-    public Func_list_from_map_1 vx_new(Object... vals) {
+    public override vx_core.Func_list_from_map_1 vx_new(params Object vals) {
       Class_list_from_map_1 output = new Class_list_from_map_1();
       return output;
     }
 
-    override
-    public Func_list_from_map_1 vx_copy(Object... vals) {
+    public override vx_core.Func_list_from_map_1 vx_copy(params Object vals) {
       Class_list_from_map_1 output = new Class_list_from_map_1();
       return output;
     }
@@ -23318,14 +22955,12 @@ namespace vx_core {
 
   public static class Class_list_from_map_async  vx_core.Class_base implements Func_list_from_map_async {
 
-    override
-    public Func_list_from_map_async vx_new(Object... vals) {
+    public override vx_core.Func_list_from_map_async vx_new(params Object vals) {
       Class_list_from_map_async output = new Class_list_from_map_async();
       return output;
     }
 
-    override
-    public Func_list_from_map_async vx_copy(Object... vals) {
+    public override vx_core.Func_list_from_map_async vx_copy(params Object vals) {
       Class_list_from_map_async output = new Class_list_from_map_async();
       return output;
     }
@@ -23399,14 +23034,12 @@ namespace vx_core {
 
   public static class Class_list_from_type  vx_core.Class_base implements Func_list_from_type {
 
-    override
-    public Func_list_from_type vx_new(Object... vals) {
+    public override vx_core.Func_list_from_type vx_new(params Object vals) {
       Class_list_from_type output = new Class_list_from_type();
       return output;
     }
 
-    override
-    public Func_list_from_type vx_copy(Object... vals) {
+    public override vx_core.Func_list_from_type vx_copy(params Object vals) {
       Class_list_from_type output = new Class_list_from_type();
       return output;
     }
@@ -23489,14 +23122,12 @@ namespace vx_core {
 
   public static class Class_log  vx_core.Class_base implements Func_log {
 
-    override
-    public Func_log vx_new(Object... vals) {
+    public override vx_core.Func_log vx_new(params Object vals) {
       Class_log output = new Class_log();
       return output;
     }
 
-    override
-    public Func_log vx_copy(Object... vals) {
+    public override vx_core.Func_log vx_copy(params Object vals) {
       Class_log output = new Class_log();
       return output;
     }
@@ -23580,14 +23211,12 @@ namespace vx_core {
 
   public static class Class_log_1  vx_core.Class_base implements Func_log_1 {
 
-    override
-    public Func_log_1 vx_new(Object... vals) {
+    public override vx_core.Func_log_1 vx_new(params Object vals) {
       Class_log_1 output = new Class_log_1();
       return output;
     }
 
-    override
-    public Func_log_1 vx_copy(Object... vals) {
+    public override vx_core.Func_log_1 vx_copy(params Object vals) {
       Class_log_1 output = new Class_log_1();
       return output;
     }
@@ -23660,14 +23289,12 @@ namespace vx_core {
 
   public static class Class_main  vx_core.Class_base implements Func_main {
 
-    override
-    public Func_main vx_new(Object... vals) {
+    public override vx_core.Func_main vx_new(params Object vals) {
       Class_main output = new Class_main();
       return output;
     }
 
-    override
-    public Func_main vx_copy(Object... vals) {
+    public override vx_core.Func_main vx_copy(params Object vals) {
       Class_main output = new Class_main();
       return output;
     }
@@ -23755,14 +23382,12 @@ namespace vx_core {
 
   public static class Class_map_from_list  vx_core.Class_base implements Func_map_from_list {
 
-    override
-    public Func_map_from_list vx_new(Object... vals) {
+    public override vx_core.Func_map_from_list vx_new(params Object vals) {
       Class_map_from_list output = new Class_map_from_list();
       return output;
     }
 
-    override
-    public Func_map_from_list vx_copy(Object... vals) {
+    public override vx_core.Func_map_from_list vx_copy(params Object vals) {
       Class_map_from_list output = new Class_map_from_list();
       return output;
     }
@@ -23835,14 +23460,12 @@ namespace vx_core {
 
   public static class Class_map_from_map  vx_core.Class_base implements Func_map_from_map {
 
-    override
-    public Func_map_from_map vx_new(Object... vals) {
+    public override vx_core.Func_map_from_map vx_new(params Object vals) {
       Class_map_from_map output = new Class_map_from_map();
       return output;
     }
 
-    override
-    public Func_map_from_map vx_copy(Object... vals) {
+    public override vx_core.Func_map_from_map vx_copy(params Object vals) {
       Class_map_from_map output = new Class_map_from_map();
       return output;
     }
@@ -23936,14 +23559,12 @@ namespace vx_core {
 
   public static class Class_map_from_map_1  vx_core.Class_base implements Func_map_from_map_1 {
 
-    override
-    public Func_map_from_map_1 vx_new(Object... vals) {
+    public override vx_core.Func_map_from_map_1 vx_new(params Object vals) {
       Class_map_from_map_1 output = new Class_map_from_map_1();
       return output;
     }
 
-    override
-    public Func_map_from_map_1 vx_copy(Object... vals) {
+    public override vx_core.Func_map_from_map_1 vx_copy(params Object vals) {
       Class_map_from_map_1 output = new Class_map_from_map_1();
       return output;
     }
@@ -24016,14 +23637,12 @@ namespace vx_core {
 
   public static class Class_msg_from_error  vx_core.Class_base implements Func_msg_from_error {
 
-    override
-    public Func_msg_from_error vx_new(Object... vals) {
+    public override vx_core.Func_msg_from_error vx_new(params Object vals) {
       Class_msg_from_error output = new Class_msg_from_error();
       return output;
     }
 
-    override
-    public Func_msg_from_error vx_copy(Object... vals) {
+    public override vx_core.Func_msg_from_error vx_copy(params Object vals) {
       Class_msg_from_error output = new Class_msg_from_error();
       return output;
     }
@@ -24116,14 +23735,12 @@ namespace vx_core {
 
   public static class Class_msg_from_error_1  vx_core.Class_base implements Func_msg_from_error_1 {
 
-    override
-    public Func_msg_from_error_1 vx_new(Object... vals) {
+    public override vx_core.Func_msg_from_error_1 vx_new(params Object vals) {
       Class_msg_from_error_1 output = new Class_msg_from_error_1();
       return output;
     }
 
-    override
-    public Func_msg_from_error_1 vx_copy(Object... vals) {
+    public override vx_core.Func_msg_from_error_1 vx_copy(params Object vals) {
       Class_msg_from_error_1 output = new Class_msg_from_error_1();
       return output;
     }
@@ -24208,14 +23825,12 @@ namespace vx_core {
 
   public static class Class_msg_from_error_2  vx_core.Class_base implements Func_msg_from_error_2 {
 
-    override
-    public Func_msg_from_error_2 vx_new(Object... vals) {
+    public override vx_core.Func_msg_from_error_2 vx_new(params Object vals) {
       Class_msg_from_error_2 output = new Class_msg_from_error_2();
       return output;
     }
 
-    override
-    public Func_msg_from_error_2 vx_copy(Object... vals) {
+    public override vx_core.Func_msg_from_error_2 vx_copy(params Object vals) {
       Class_msg_from_error_2 output = new Class_msg_from_error_2();
       return output;
     }
@@ -24301,14 +23916,12 @@ namespace vx_core {
 
   public static class Class_msg_from_warning  vx_core.Class_base implements Func_msg_from_warning {
 
-    override
-    public Func_msg_from_warning vx_new(Object... vals) {
+    public override vx_core.Func_msg_from_warning vx_new(params Object vals) {
       Class_msg_from_warning output = new Class_msg_from_warning();
       return output;
     }
 
-    override
-    public Func_msg_from_warning vx_copy(Object... vals) {
+    public override vx_core.Func_msg_from_warning vx_copy(params Object vals) {
       Class_msg_from_warning output = new Class_msg_from_warning();
       return output;
     }
@@ -24401,14 +24014,12 @@ namespace vx_core {
 
   public static class Class_msgblock_from_msgblock_msg  vx_core.Class_base implements Func_msgblock_from_msgblock_msg {
 
-    override
-    public Func_msgblock_from_msgblock_msg vx_new(Object... vals) {
+    public override vx_core.Func_msgblock_from_msgblock_msg vx_new(params Object vals) {
       Class_msgblock_from_msgblock_msg output = new Class_msgblock_from_msgblock_msg();
       return output;
     }
 
-    override
-    public Func_msgblock_from_msgblock_msg vx_copy(Object... vals) {
+    public override vx_core.Func_msgblock_from_msgblock_msg vx_copy(params Object vals) {
       Class_msgblock_from_msgblock_msg output = new Class_msgblock_from_msgblock_msg();
       return output;
     }
@@ -24483,14 +24094,12 @@ namespace vx_core {
 
   public static class Class_msgblock_from_msgblock_msgblock  vx_core.Class_base implements Func_msgblock_from_msgblock_msgblock {
 
-    override
-    public Func_msgblock_from_msgblock_msgblock vx_new(Object... vals) {
+    public override vx_core.Func_msgblock_from_msgblock_msgblock vx_new(params Object vals) {
       Class_msgblock_from_msgblock_msgblock output = new Class_msgblock_from_msgblock_msgblock();
       return output;
     }
 
-    override
-    public Func_msgblock_from_msgblock_msgblock vx_copy(Object... vals) {
+    public override vx_core.Func_msgblock_from_msgblock_msgblock vx_copy(params Object vals) {
       Class_msgblock_from_msgblock_msgblock output = new Class_msgblock_from_msgblock_msgblock();
       return output;
     }
@@ -24569,14 +24178,12 @@ namespace vx_core {
 
   public static class Class_name_from_typedef  vx_core.Class_base implements Func_name_from_typedef {
 
-    override
-    public Func_name_from_typedef vx_new(Object... vals) {
+    public override vx_core.Func_name_from_typedef vx_new(params Object vals) {
       Class_name_from_typedef output = new Class_name_from_typedef();
       return output;
     }
 
-    override
-    public Func_name_from_typedef vx_copy(Object... vals) {
+    public override vx_core.Func_name_from_typedef vx_copy(params Object vals) {
       Class_name_from_typedef output = new Class_name_from_typedef();
       return output;
     }
@@ -24660,14 +24267,12 @@ namespace vx_core {
 
   public static class Class_native  vx_core.Class_base implements Func_native {
 
-    override
-    public Func_native vx_new(Object... vals) {
+    public override vx_core.Func_native vx_new(params Object vals) {
       Class_native output = new Class_native();
       return output;
     }
 
-    override
-    public Func_native vx_copy(Object... vals) {
+    public override vx_core.Func_native vx_copy(params Object vals) {
       Class_native output = new Class_native();
       return output;
     }
@@ -24751,14 +24356,12 @@ namespace vx_core {
 
   public static class Class_native_from_any  vx_core.Class_base implements Func_native_from_any {
 
-    override
-    public Func_native_from_any vx_new(Object... vals) {
+    public override vx_core.Func_native_from_any vx_new(params Object vals) {
       Class_native_from_any output = new Class_native_from_any();
       return output;
     }
 
-    override
-    public Func_native_from_any vx_copy(Object... vals) {
+    public override vx_core.Func_native_from_any vx_copy(params Object vals) {
       Class_native_from_any output = new Class_native_from_any();
       return output;
     }
@@ -24842,14 +24445,12 @@ namespace vx_core {
 
   public static class Class_new  vx_core.Class_base implements Func_new {
 
-    override
-    public Func_new vx_new(Object... vals) {
+    public override vx_core.Func_new vx_new(params Object vals) {
       Class_new output = new Class_new();
       return output;
     }
 
-    override
-    public Func_new vx_copy(Object... vals) {
+    public override vx_core.Func_new vx_copy(params Object vals) {
       Class_new output = new Class_new();
       return output;
     }
@@ -24920,14 +24521,12 @@ namespace vx_core {
 
   public static class Class_number_from_func  vx_core.Class_base implements Func_number_from_func {
 
-    override
-    public Func_number_from_func vx_new(Object... vals) {
+    public override vx_core.Func_number_from_func vx_new(params Object vals) {
       Class_number_from_func output = new Class_number_from_func();
       return output;
     }
 
-    override
-    public Func_number_from_func vx_copy(Object... vals) {
+    public override vx_core.Func_number_from_func vx_copy(params Object vals) {
       Class_number_from_func output = new Class_number_from_func();
       return output;
     }
@@ -24998,14 +24597,12 @@ namespace vx_core {
 
   public static class Class_or  vx_core.Class_base implements Func_or {
 
-    override
-    public Func_or vx_new(Object... vals) {
+    public override vx_core.Func_or vx_new(params Object vals) {
       Class_or output = new Class_or();
       return output;
     }
 
-    override
-    public Func_or vx_copy(Object... vals) {
+    public override vx_core.Func_or vx_copy(params Object vals) {
       Class_or output = new Class_or();
       return output;
     }
@@ -25077,14 +24674,12 @@ namespace vx_core {
 
   public static class Class_or_1  vx_core.Class_base implements Func_or_1 {
 
-    override
-    public Func_or_1 vx_new(Object... vals) {
+    public override vx_core.Func_or_1 vx_new(params Object vals) {
       Class_or_1 output = new Class_or_1();
       return output;
     }
 
-    override
-    public Func_or_1 vx_copy(Object... vals) {
+    public override vx_core.Func_or_1 vx_copy(params Object vals) {
       Class_or_1 output = new Class_or_1();
       return output;
     }
@@ -25182,14 +24777,12 @@ namespace vx_core {
 
   public static class Class_package_global_from_name  vx_core.Class_base implements Func_package_global_from_name {
 
-    override
-    public Func_package_global_from_name vx_new(Object... vals) {
+    public override vx_core.Func_package_global_from_name vx_new(params Object vals) {
       Class_package_global_from_name output = new Class_package_global_from_name();
       return output;
     }
 
-    override
-    public Func_package_global_from_name vx_copy(Object... vals) {
+    public override vx_core.Func_package_global_from_name vx_copy(params Object vals) {
       Class_package_global_from_name output = new Class_package_global_from_name();
       return output;
     }
@@ -25277,14 +24870,12 @@ namespace vx_core {
 
   public static class Class_packagename_from_typedef  vx_core.Class_base implements Func_packagename_from_typedef {
 
-    override
-    public Func_packagename_from_typedef vx_new(Object... vals) {
+    public override vx_core.Func_packagename_from_typedef vx_new(params Object vals) {
       Class_packagename_from_typedef output = new Class_packagename_from_typedef();
       return output;
     }
 
-    override
-    public Func_packagename_from_typedef vx_copy(Object... vals) {
+    public override vx_core.Func_packagename_from_typedef vx_copy(params Object vals) {
       Class_packagename_from_typedef output = new Class_packagename_from_typedef();
       return output;
     }
@@ -25368,14 +24959,12 @@ namespace vx_core {
 
   public static class Class_path_from_context_path  vx_core.Class_base implements Func_path_from_context_path {
 
-    override
-    public Func_path_from_context_path vx_new(Object... vals) {
+    public override vx_core.Func_path_from_context_path vx_new(params Object vals) {
       Class_path_from_context_path output = new Class_path_from_context_path();
       return output;
     }
 
-    override
-    public Func_path_from_context_path vx_copy(Object... vals) {
+    public override vx_core.Func_path_from_context_path vx_copy(params Object vals) {
       Class_path_from_context_path output = new Class_path_from_context_path();
       return output;
     }
@@ -25464,14 +25053,12 @@ namespace vx_core {
 
   public static class Class_path_from_setting_path  vx_core.Class_base implements Func_path_from_setting_path {
 
-    override
-    public Func_path_from_setting_path vx_new(Object... vals) {
+    public override vx_core.Func_path_from_setting_path vx_new(params Object vals) {
       Class_path_from_setting_path output = new Class_path_from_setting_path();
       return output;
     }
 
-    override
-    public Func_path_from_setting_path vx_copy(Object... vals) {
+    public override vx_core.Func_path_from_setting_path vx_copy(params Object vals) {
       Class_path_from_setting_path output = new Class_path_from_setting_path();
       return output;
     }
@@ -25543,14 +25130,12 @@ namespace vx_core {
 
   public static class Class_permission_from_id_context  vx_core.Class_base implements Func_permission_from_id_context {
 
-    override
-    public Func_permission_from_id_context vx_new(Object... vals) {
+    public override vx_core.Func_permission_from_id_context vx_new(params Object vals) {
       Class_permission_from_id_context output = new Class_permission_from_id_context();
       return output;
     }
 
-    override
-    public Func_permission_from_id_context vx_copy(Object... vals) {
+    public override vx_core.Func_permission_from_id_context vx_copy(params Object vals) {
       Class_permission_from_id_context output = new Class_permission_from_id_context();
       return output;
     }
@@ -25643,14 +25228,12 @@ namespace vx_core {
 
   public static class Class_properties_from_typedef  vx_core.Class_base implements Func_properties_from_typedef {
 
-    override
-    public Func_properties_from_typedef vx_new(Object... vals) {
+    public override vx_core.Func_properties_from_typedef vx_new(params Object vals) {
       Class_properties_from_typedef output = new Class_properties_from_typedef();
       return output;
     }
 
-    override
-    public Func_properties_from_typedef vx_copy(Object... vals) {
+    public override vx_core.Func_properties_from_typedef vx_copy(params Object vals) {
       Class_properties_from_typedef output = new Class_properties_from_typedef();
       return output;
     }
@@ -25734,14 +25317,12 @@ namespace vx_core {
 
   public static class Class_proplast_from_typedef  vx_core.Class_base implements Func_proplast_from_typedef {
 
-    override
-    public Func_proplast_from_typedef vx_new(Object... vals) {
+    public override vx_core.Func_proplast_from_typedef vx_new(params Object vals) {
       Class_proplast_from_typedef output = new Class_proplast_from_typedef();
       return output;
     }
 
-    override
-    public Func_proplast_from_typedef vx_copy(Object... vals) {
+    public override vx_core.Func_proplast_from_typedef vx_copy(params Object vals) {
       Class_proplast_from_typedef output = new Class_proplast_from_typedef();
       return output;
     }
@@ -25824,14 +25405,12 @@ namespace vx_core {
 
   public static class Class_resolve  vx_core.Class_base implements Func_resolve {
 
-    override
-    public Func_resolve vx_new(Object... vals) {
+    public override vx_core.Func_resolve vx_new(params Object vals) {
       Class_resolve output = new Class_resolve();
       return output;
     }
 
-    override
-    public Func_resolve vx_copy(Object... vals) {
+    public override vx_core.Func_resolve vx_copy(params Object vals) {
       Class_resolve output = new Class_resolve();
       return output;
     }
@@ -25915,14 +25494,12 @@ namespace vx_core {
 
   public static class Class_resolve_1  vx_core.Class_base implements Func_resolve_1 {
 
-    override
-    public Func_resolve_1 vx_new(Object... vals) {
+    public override vx_core.Func_resolve_1 vx_new(params Object vals) {
       Class_resolve_1 output = new Class_resolve_1();
       return output;
     }
 
-    override
-    public Func_resolve_1 vx_copy(Object... vals) {
+    public override vx_core.Func_resolve_1 vx_copy(params Object vals) {
       Class_resolve_1 output = new Class_resolve_1();
       return output;
     }
@@ -26007,14 +25584,12 @@ namespace vx_core {
 
   public static class Class_resolve_async  vx_core.Class_base implements Func_resolve_async {
 
-    override
-    public Func_resolve_async vx_new(Object... vals) {
+    public override vx_core.Func_resolve_async vx_new(params Object vals) {
       Class_resolve_async output = new Class_resolve_async();
       return output;
     }
 
-    override
-    public Func_resolve_async vx_copy(Object... vals) {
+    public override vx_core.Func_resolve_async vx_copy(params Object vals) {
       Class_resolve_async output = new Class_resolve_async();
       return output;
     }
@@ -26097,14 +25672,12 @@ namespace vx_core {
 
   public static class Class_resolve_first  vx_core.Class_base implements Func_resolve_first {
 
-    override
-    public Func_resolve_first vx_new(Object... vals) {
+    public override vx_core.Func_resolve_first vx_new(params Object vals) {
       Class_resolve_first output = new Class_resolve_first();
       return output;
     }
 
-    override
-    public Func_resolve_first vx_copy(Object... vals) {
+    public override vx_core.Func_resolve_first vx_copy(params Object vals) {
       Class_resolve_first output = new Class_resolve_first();
       return output;
     }
@@ -26192,14 +25765,12 @@ namespace vx_core {
 
   public static class Class_resolve_list  vx_core.Class_base implements Func_resolve_list {
 
-    override
-    public Func_resolve_list vx_new(Object... vals) {
+    public override vx_core.Func_resolve_list vx_new(params Object vals) {
       Class_resolve_list output = new Class_resolve_list();
       return output;
     }
 
-    override
-    public Func_resolve_list vx_copy(Object... vals) {
+    public override vx_core.Func_resolve_list vx_copy(params Object vals) {
       Class_resolve_list output = new Class_resolve_list();
       return output;
     }
@@ -26287,14 +25858,12 @@ namespace vx_core {
 
   public static class Class_security_from_context  vx_core.Class_base implements Func_security_from_context {
 
-    override
-    public Func_security_from_context vx_new(Object... vals) {
+    public override vx_core.Func_security_from_context vx_new(params Object vals) {
       Class_security_from_context output = new Class_security_from_context();
       return output;
     }
 
-    override
-    public Func_security_from_context vx_copy(Object... vals) {
+    public override vx_core.Func_security_from_context vx_copy(params Object vals) {
       Class_security_from_context output = new Class_security_from_context();
       return output;
     }
@@ -26368,14 +25937,12 @@ namespace vx_core {
 
   public static class Class_security_from_user  vx_core.Class_base implements Func_security_from_user {
 
-    override
-    public Func_security_from_user vx_new(Object... vals) {
+    public override vx_core.Func_security_from_user vx_new(params Object vals) {
       Class_security_from_user output = new Class_security_from_user();
       return output;
     }
 
-    override
-    public Func_security_from_user vx_copy(Object... vals) {
+    public override vx_core.Func_security_from_user vx_copy(params Object vals) {
       Class_security_from_user output = new Class_security_from_user();
       return output;
     }
@@ -26458,14 +26025,12 @@ namespace vx_core {
 
   public static class Class_session_from_context  vx_core.Class_base implements Func_session_from_context {
 
-    override
-    public Func_session_from_context vx_new(Object... vals) {
+    public override vx_core.Func_session_from_context vx_new(params Object vals) {
       Class_session_from_context output = new Class_session_from_context();
       return output;
     }
 
-    override
-    public Func_session_from_context vx_copy(Object... vals) {
+    public override vx_core.Func_session_from_context vx_copy(params Object vals) {
       Class_session_from_context output = new Class_session_from_context();
       return output;
     }
@@ -26536,14 +26101,12 @@ namespace vx_core {
 
   public static class Class_setting_from_context  vx_core.Class_base implements Func_setting_from_context {
 
-    override
-    public Func_setting_from_context vx_new(Object... vals) {
+    public override vx_core.Func_setting_from_context vx_new(params Object vals) {
       Class_setting_from_context output = new Class_setting_from_context();
       return output;
     }
 
-    override
-    public Func_setting_from_context vx_copy(Object... vals) {
+    public override vx_core.Func_setting_from_context vx_copy(params Object vals) {
       Class_setting_from_context output = new Class_setting_from_context();
       return output;
     }
@@ -26615,14 +26178,12 @@ namespace vx_core {
 
   public static class Class_string_repeat  vx_core.Class_base implements Func_string_repeat {
 
-    override
-    public Func_string_repeat vx_new(Object... vals) {
+    public override vx_core.Func_string_repeat vx_new(params Object vals) {
       Class_string_repeat output = new Class_string_repeat();
       return output;
     }
 
-    override
-    public Func_string_repeat vx_copy(Object... vals) {
+    public override vx_core.Func_string_repeat vx_copy(params Object vals) {
       Class_string_repeat output = new Class_string_repeat();
       return output;
     }
@@ -26694,14 +26255,12 @@ namespace vx_core {
 
   public static class Class_string_from_any  vx_core.Class_base implements Func_string_from_any {
 
-    override
-    public Func_string_from_any vx_new(Object... vals) {
+    public override vx_core.Func_string_from_any vx_new(params Object vals) {
       Class_string_from_any output = new Class_string_from_any();
       return output;
     }
 
-    override
-    public Func_string_from_any vx_copy(Object... vals) {
+    public override vx_core.Func_string_from_any vx_copy(params Object vals) {
       Class_string_from_any output = new Class_string_from_any();
       return output;
     }
@@ -26791,14 +26350,12 @@ namespace vx_core {
 
   public static class Class_string_from_any_indent  vx_core.Class_base implements Func_string_from_any_indent {
 
-    override
-    public Func_string_from_any_indent vx_new(Object... vals) {
+    public override vx_core.Func_string_from_any_indent vx_new(params Object vals) {
       Class_string_from_any_indent output = new Class_string_from_any_indent();
       return output;
     }
 
-    override
-    public Func_string_from_any_indent vx_copy(Object... vals) {
+    public override vx_core.Func_string_from_any_indent vx_copy(params Object vals) {
       Class_string_from_any_indent output = new Class_string_from_any_indent();
       return output;
     }
@@ -26871,14 +26428,12 @@ namespace vx_core {
 
   public static class Class_string_from_func  vx_core.Class_base implements Func_string_from_func {
 
-    override
-    public Func_string_from_func vx_new(Object... vals) {
+    public override vx_core.Func_string_from_func vx_new(params Object vals) {
       Class_string_from_func output = new Class_string_from_func();
       return output;
     }
 
-    override
-    public Func_string_from_func vx_copy(Object... vals) {
+    public override vx_core.Func_string_from_func vx_copy(params Object vals) {
       Class_string_from_func output = new Class_string_from_func();
       return output;
     }
@@ -26959,14 +26514,12 @@ namespace vx_core {
 
   public static class Class_string_from_string_find_replace  vx_core.Class_base implements Func_string_from_string_find_replace {
 
-    override
-    public Func_string_from_string_find_replace vx_new(Object... vals) {
+    public override vx_core.Func_string_from_string_find_replace vx_new(params Object vals) {
       Class_string_from_string_find_replace output = new Class_string_from_string_find_replace();
       return output;
     }
 
-    override
-    public Func_string_from_string_find_replace vx_copy(Object... vals) {
+    public override vx_core.Func_string_from_string_find_replace vx_copy(params Object vals) {
       Class_string_from_string_find_replace output = new Class_string_from_string_find_replace();
       return output;
     }
@@ -27039,14 +26592,12 @@ namespace vx_core {
 
   public static class Class_stringlist_from_map  vx_core.Class_base implements Func_stringlist_from_map {
 
-    override
-    public Func_stringlist_from_map vx_new(Object... vals) {
+    public override vx_core.Func_stringlist_from_map vx_new(params Object vals) {
       Class_stringlist_from_map output = new Class_stringlist_from_map();
       return output;
     }
 
-    override
-    public Func_stringlist_from_map vx_copy(Object... vals) {
+    public override vx_core.Func_stringlist_from_map vx_copy(params Object vals) {
       Class_stringlist_from_map output = new Class_stringlist_from_map();
       return output;
     }
@@ -27139,14 +26690,12 @@ namespace vx_core {
 
   public static class Class_switch  vx_core.Class_base implements Func_switch {
 
-    override
-    public Func_switch vx_new(Object... vals) {
+    public override vx_core.Func_switch vx_new(params Object vals) {
       Class_switch output = new Class_switch();
       return output;
     }
 
-    override
-    public Func_switch vx_copy(Object... vals) {
+    public override vx_core.Func_switch vx_copy(params Object vals) {
       Class_switch output = new Class_switch();
       return output;
     }
@@ -27220,14 +26769,12 @@ namespace vx_core {
 
   public static class Class_then  vx_core.Class_base implements Func_then {
 
-    override
-    public Func_then vx_new(Object... vals) {
+    public override vx_core.Func_then vx_new(params Object vals) {
       Class_then output = new Class_then();
       return output;
     }
 
-    override
-    public Func_then vx_copy(Object... vals) {
+    public override vx_core.Func_then vx_copy(params Object vals) {
       Class_then output = new Class_then();
       return output;
     }
@@ -27310,14 +26857,12 @@ namespace vx_core {
 
   public static class Class_traits_from_typedef  vx_core.Class_base implements Func_traits_from_typedef {
 
-    override
-    public Func_traits_from_typedef vx_new(Object... vals) {
+    public override vx_core.Func_traits_from_typedef vx_new(params Object vals) {
       Class_traits_from_typedef output = new Class_traits_from_typedef();
       return output;
     }
 
-    override
-    public Func_traits_from_typedef vx_copy(Object... vals) {
+    public override vx_core.Func_traits_from_typedef vx_copy(params Object vals) {
       Class_traits_from_typedef output = new Class_traits_from_typedef();
       return output;
     }
@@ -27400,14 +26945,12 @@ namespace vx_core {
 
   public static class Class_type_from_any  vx_core.Class_base implements Func_type_from_any {
 
-    override
-    public Func_type_from_any vx_new(Object... vals) {
+    public override vx_core.Func_type_from_any vx_new(params Object vals) {
       Class_type_from_any output = new Class_type_from_any();
       return output;
     }
 
-    override
-    public Func_type_from_any vx_copy(Object... vals) {
+    public override vx_core.Func_type_from_any vx_copy(params Object vals) {
       Class_type_from_any output = new Class_type_from_any();
       return output;
     }
@@ -27490,14 +27033,12 @@ namespace vx_core {
 
   public static class Class_typedef_from_any  vx_core.Class_base implements Func_typedef_from_any {
 
-    override
-    public Func_typedef_from_any vx_new(Object... vals) {
+    public override vx_core.Func_typedef_from_any vx_new(params Object vals) {
       Class_typedef_from_any output = new Class_typedef_from_any();
       return output;
     }
 
-    override
-    public Func_typedef_from_any vx_copy(Object... vals) {
+    public override vx_core.Func_typedef_from_any vx_copy(params Object vals) {
       Class_typedef_from_any output = new Class_typedef_from_any();
       return output;
     }
@@ -27583,14 +27124,12 @@ namespace vx_core {
 
   public static class Class_typedef_from_type  vx_core.Class_base implements Func_typedef_from_type {
 
-    override
-    public Func_typedef_from_type vx_new(Object... vals) {
+    public override vx_core.Func_typedef_from_type vx_new(params Object vals) {
       Class_typedef_from_type output = new Class_typedef_from_type();
       return output;
     }
 
-    override
-    public Func_typedef_from_type vx_copy(Object... vals) {
+    public override vx_core.Func_typedef_from_type vx_copy(params Object vals) {
       Class_typedef_from_type output = new Class_typedef_from_type();
       return output;
     }
@@ -27673,14 +27212,12 @@ namespace vx_core {
 
   public static class Class_typename_from_any  vx_core.Class_base implements Func_typename_from_any {
 
-    override
-    public Func_typename_from_any vx_new(Object... vals) {
+    public override vx_core.Func_typename_from_any vx_new(params Object vals) {
       Class_typename_from_any output = new Class_typename_from_any();
       return output;
     }
 
-    override
-    public Func_typename_from_any vx_copy(Object... vals) {
+    public override vx_core.Func_typename_from_any vx_copy(params Object vals) {
       Class_typename_from_any output = new Class_typename_from_any();
       return output;
     }
@@ -27766,14 +27303,12 @@ namespace vx_core {
 
   public static class Class_typename_from_type  vx_core.Class_base implements Func_typename_from_type {
 
-    override
-    public Func_typename_from_type vx_new(Object... vals) {
+    public override vx_core.Func_typename_from_type vx_new(params Object vals) {
       Class_typename_from_type output = new Class_typename_from_type();
       return output;
     }
 
-    override
-    public Func_typename_from_type vx_copy(Object... vals) {
+    public override vx_core.Func_typename_from_type vx_copy(params Object vals) {
       Class_typename_from_type output = new Class_typename_from_type();
       return output;
     }
@@ -27859,14 +27394,12 @@ namespace vx_core {
 
   public static class Class_typename_from_typedef  vx_core.Class_base implements Func_typename_from_typedef {
 
-    override
-    public Func_typename_from_typedef vx_new(Object... vals) {
+    public override vx_core.Func_typename_from_typedef vx_new(params Object vals) {
       Class_typename_from_typedef output = new Class_typename_from_typedef();
       return output;
     }
 
-    override
-    public Func_typename_from_typedef vx_copy(Object... vals) {
+    public override vx_core.Func_typename_from_typedef vx_copy(params Object vals) {
       Class_typename_from_typedef output = new Class_typename_from_typedef();
       return output;
     }
@@ -27957,14 +27490,12 @@ namespace vx_core {
 
   public static class Class_typenames_from_typelist  vx_core.Class_base implements Func_typenames_from_typelist {
 
-    override
-    public Func_typenames_from_typelist vx_new(Object... vals) {
+    public override vx_core.Func_typenames_from_typelist vx_new(params Object vals) {
       Class_typenames_from_typelist output = new Class_typenames_from_typelist();
       return output;
     }
 
-    override
-    public Func_typenames_from_typelist vx_copy(Object... vals) {
+    public override vx_core.Func_typenames_from_typelist vx_copy(params Object vals) {
       Class_typenames_from_typelist output = new Class_typenames_from_typelist();
       return output;
     }
@@ -28055,14 +27586,12 @@ namespace vx_core {
 
   public static class Class_user_from_context  vx_core.Class_base implements Func_user_from_context {
 
-    override
-    public Func_user_from_context vx_new(Object... vals) {
+    public override vx_core.Func_user_from_context vx_new(params Object vals) {
       Class_user_from_context output = new Class_user_from_context();
       return output;
     }
 
-    override
-    public Func_user_from_context vx_copy(Object... vals) {
+    public override vx_core.Func_user_from_context vx_copy(params Object vals) {
       Class_user_from_context output = new Class_user_from_context();
       return output;
     }

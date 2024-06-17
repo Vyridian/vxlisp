@@ -914,12 +914,12 @@ public final class Core {
   public static class Class_any extends Core.Class_base implements Type_any {
 
     @Override
-    public Type_any vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       return e_any.vx_copy(vals);
     }
 
     @Override
-    public Type_any vx_copy(final Object... vals) {
+    public Core.Type_any vx_copy(final Object... vals) {
       Type_any output = this;
       boolean ischanged = false;
       Class_any val = this;
@@ -986,12 +986,12 @@ public final class Core {
   public static class Class_any_async_from_func extends Core.Class_base implements Type_any_async_from_func {
 
     @Override
-    public Type_any_async_from_func vx_new(final Object... vals) {
+    public Core.Type_any_async_from_func vx_new(final Object... vals) {
       return e_any_async_from_func.vx_copy(vals);
     }
 
     @Override
-    public Type_any_async_from_func vx_copy(final Object... vals) {
+    public Core.Type_any_async_from_func vx_copy(final Object... vals) {
       Type_any_async_from_func output = this;
       boolean ischanged = false;
       Class_any_async_from_func val = this;
@@ -1078,12 +1078,12 @@ public final class Core {
     }
 
     @Override
-    public Type_any_from_anylist vx_new(final Object... vals) {
+    public Core.Type_any_from_anylist vx_new(final Object... vals) {
       return e_any_from_anylist.vx_copy(vals);
     }
 
     @Override
-    public Type_any_from_anylist vx_copy(final Object... vals) {
+    public Core.Type_any_from_anylist vx_copy(final Object... vals) {
       Type_any_from_anylist output = this;
       boolean ischanged = false;
       Class_any_from_anylist val = this;
@@ -1099,9 +1099,10 @@ public final class Core {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Func_any_from_any) {
+          Core.Func_any_from_any anysub = (Core.Func_any_from_any)valsub;
           ischanged = true;
-          listval.add((Core.Func_any_from_any)valsub);
-        } else if (valsub instanceof Type_any_from_anylist) {
+          listval.add(anysub);
+        } else if (valsub instanceof Core.Type_any_from_anylist) {
           Type_any_from_anylist multi = (Type_any_from_anylist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listany_from_any());
@@ -1193,12 +1194,12 @@ public final class Core {
     }
 
     @Override
-    public Type_anylist vx_new(final Object... vals) {
+    public Core.Type_anylist vx_new(final Object... vals) {
       return e_anylist.vx_copy(vals);
     }
 
     @Override
-    public Type_anylist vx_copy(final Object... vals) {
+    public Core.Type_anylist vx_copy(final Object... vals) {
       Type_anylist output = this;
       boolean ischanged = false;
       Class_anylist val = this;
@@ -1214,12 +1215,13 @@ public final class Core {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
           ischanged = true;
-          listval.add((Core.Type_any)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Core.Type_any) {
           ischanged = true;
           listval.add((Core.Type_any)valsub);
-        } else if (valsub instanceof Type_anylist) {
+        } else if (valsub instanceof Core.Type_anylist) {
           Type_anylist multi = (Type_anylist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_list());
@@ -1355,12 +1357,12 @@ public final class Core {
     }
 
     @Override
-    public Type_anymap vx_new(final Object... vals) {
+    public Core.Type_anymap vx_new(final Object... vals) {
       return e_anymap.vx_copy(vals);
     }
 
     @Override
-    public Type_anymap vx_copy(final Object... vals) {
+    public Core.Type_anymap vx_copy(final Object... vals) {
       Type_anymap output = this;
       boolean ischanged = false;
       Class_anymap val = this;
@@ -1475,12 +1477,12 @@ public final class Core {
   public static class Class_anytype extends Core.Class_base implements Type_anytype {
 
     @Override
-    public Type_anytype vx_new(final Object... vals) {
+    public Core.Type_anytype vx_new(final Object... vals) {
       return e_anytype.vx_copy(vals);
     }
 
     @Override
-    public Type_anytype vx_copy(final Object... vals) {
+    public Core.Type_anytype vx_copy(final Object... vals) {
       Type_anytype output = this;
       boolean ischanged = false;
       Class_anytype val = this;
@@ -1603,12 +1605,12 @@ public final class Core {
     }
 
     @Override
-    public Type_arg vx_new(final Object... vals) {
+    public Core.Type_arg vx_new(final Object... vals) {
       return e_arg.vx_copy(vals);
     }
 
     @Override
-    public Type_arg vx_copy(final Object... vals) {
+    public Core.Type_arg vx_copy(final Object... vals) {
       Type_arg output = this;
       boolean ischanged = false;
       Class_arg val = this;
@@ -1844,12 +1846,12 @@ public final class Core {
     }
 
     @Override
-    public Type_arglist vx_new(final Object... vals) {
+    public Core.Type_arglist vx_new(final Object... vals) {
       return e_arglist.vx_copy(vals);
     }
 
     @Override
-    public Type_arglist vx_copy(final Object... vals) {
+    public Core.Type_arglist vx_copy(final Object... vals) {
       Type_arglist output = this;
       boolean ischanged = false;
       Class_arglist val = this;
@@ -1865,12 +1867,13 @@ public final class Core {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_arg) {
+          Core.Type_arg anysub = (Core.Type_arg)valsub;
           ischanged = true;
-          listval.add((Core.Type_arg)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Core.Type_arg) {
           ischanged = true;
           listval.add((Core.Type_arg)valsub);
-        } else if (valsub instanceof Type_arglist) {
+        } else if (valsub instanceof Core.Type_arglist) {
           Type_arglist multi = (Type_arglist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listarg());
@@ -2016,12 +2019,12 @@ public final class Core {
     }
 
     @Override
-    public Type_argmap vx_new(final Object... vals) {
+    public Core.Type_argmap vx_new(final Object... vals) {
       return e_argmap.vx_copy(vals);
     }
 
     @Override
-    public Type_argmap vx_copy(final Object... vals) {
+    public Core.Type_argmap vx_copy(final Object... vals) {
       Type_argmap output = this;
       boolean ischanged = false;
       Class_argmap val = this;
@@ -2142,12 +2145,12 @@ public final class Core {
     public boolean vx_boolean() {return vxboolean;}
 
     @Override
-    public Type_boolean vx_new(final Object... vals) {
+    public Core.Type_boolean vx_new(final Object... vals) {
       return e_boolean.vx_copy(vals);
     }
 
     @Override
-    public Type_boolean vx_copy(final Object... vals) {
+    public Core.Type_boolean vx_copy(final Object... vals) {
       Type_boolean output = this;
       boolean ischanged = false;
       Class_boolean val = this;
@@ -2250,12 +2253,12 @@ public final class Core {
     }
 
     @Override
-    public Type_booleanlist vx_new(final Object... vals) {
+    public Core.Type_booleanlist vx_new(final Object... vals) {
       return e_booleanlist.vx_copy(vals);
     }
 
     @Override
-    public Type_booleanlist vx_copy(final Object... vals) {
+    public Core.Type_booleanlist vx_copy(final Object... vals) {
       Type_booleanlist output = this;
       boolean ischanged = false;
       Class_booleanlist val = this;
@@ -2271,12 +2274,13 @@ public final class Core {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_boolean) {
+          Core.Type_boolean anysub = (Core.Type_boolean)valsub;
           ischanged = true;
-          listval.add((Core.Type_boolean)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Boolean) {
           ischanged = true;
           listval.add(Core.t_boolean.vx_new(valsub));
-        } else if (valsub instanceof Type_booleanlist) {
+        } else if (valsub instanceof Core.Type_booleanlist) {
           Type_booleanlist multi = (Type_booleanlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listboolean());
@@ -2350,12 +2354,12 @@ public final class Core {
   public static class Class_collection extends Core.Class_base implements Type_collection {
 
     @Override
-    public Type_collection vx_new(final Object... vals) {
+    public Core.Type_collection vx_new(final Object... vals) {
       return e_collection.vx_copy(vals);
     }
 
     @Override
-    public Type_collection vx_copy(final Object... vals) {
+    public Core.Type_collection vx_copy(final Object... vals) {
       Type_collection output = this;
       boolean ischanged = false;
       Class_collection val = this;
@@ -2414,12 +2418,12 @@ public final class Core {
   public static class Class_compilelanguages extends Core.Class_base implements Type_compilelanguages {
 
     @Override
-    public Type_compilelanguages vx_new(final Object... vals) {
+    public Core.Type_compilelanguages vx_new(final Object... vals) {
       return e_compilelanguages.vx_copy(vals);
     }
 
     @Override
-    public Type_compilelanguages vx_copy(final Object... vals) {
+    public Core.Type_compilelanguages vx_copy(final Object... vals) {
       Type_compilelanguages output = this;
       boolean ischanged = false;
       Class_compilelanguages val = this;
@@ -2479,12 +2483,12 @@ public final class Core {
   public static class Class_connect extends Core.Class_base implements Type_connect {
 
     @Override
-    public Type_connect vx_new(final Object... vals) {
+    public Core.Type_connect vx_new(final Object... vals) {
       return e_connect.vx_copy(vals);
     }
 
     @Override
-    public Type_connect vx_copy(final Object... vals) {
+    public Core.Type_connect vx_copy(final Object... vals) {
       Type_connect output = this;
       boolean ischanged = false;
       Class_connect val = this;
@@ -2571,12 +2575,12 @@ public final class Core {
     }
 
     @Override
-    public Type_connectlist vx_new(final Object... vals) {
+    public Core.Type_connectlist vx_new(final Object... vals) {
       return e_connectlist.vx_copy(vals);
     }
 
     @Override
-    public Type_connectlist vx_copy(final Object... vals) {
+    public Core.Type_connectlist vx_copy(final Object... vals) {
       Type_connectlist output = this;
       boolean ischanged = false;
       Class_connectlist val = this;
@@ -2592,12 +2596,13 @@ public final class Core {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_connect) {
+          Core.Type_connect anysub = (Core.Type_connect)valsub;
           ischanged = true;
-          listval.add((Core.Type_connect)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Core.Type_connect) {
           ischanged = true;
           listval.add((Core.Type_connect)valsub);
-        } else if (valsub instanceof Type_connectlist) {
+        } else if (valsub instanceof Core.Type_connectlist) {
           Type_connectlist multi = (Type_connectlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listconnect());
@@ -2743,12 +2748,12 @@ public final class Core {
     }
 
     @Override
-    public Type_connectmap vx_new(final Object... vals) {
+    public Core.Type_connectmap vx_new(final Object... vals) {
       return e_connectmap.vx_copy(vals);
     }
 
     @Override
-    public Type_connectmap vx_copy(final Object... vals) {
+    public Core.Type_connectmap vx_copy(final Object... vals) {
       Type_connectmap output = this;
       boolean ischanged = false;
       Class_connectmap val = this;
@@ -2863,12 +2868,12 @@ public final class Core {
   public static class Class_const extends Core.Class_base implements Type_const {
 
     @Override
-    public Type_const vx_new(final Object... vals) {
+    public Core.Type_const vx_new(final Object... vals) {
       return e_const.vx_copy(vals);
     }
 
     @Override
-    public Type_const vx_copy(final Object... vals) {
+    public Core.Type_const vx_copy(final Object... vals) {
       Type_const output = this;
       boolean ischanged = false;
       Class_const val = this;
@@ -2979,12 +2984,12 @@ public final class Core {
     }
 
     @Override
-    public Type_constdef vx_new(final Object... vals) {
+    public Core.Type_constdef vx_new(final Object... vals) {
       return e_constdef.vx_copy(vals);
     }
 
     @Override
-    public Type_constdef vx_copy(final Object... vals) {
+    public Core.Type_constdef vx_copy(final Object... vals) {
       Type_constdef output = this;
       boolean ischanged = false;
       Class_constdef val = this;
@@ -3187,12 +3192,12 @@ public final class Core {
     }
 
     @Override
-    public Type_constlist vx_new(final Object... vals) {
+    public Core.Type_constlist vx_new(final Object... vals) {
       return e_constlist.vx_copy(vals);
     }
 
     @Override
-    public Type_constlist vx_copy(final Object... vals) {
+    public Core.Type_constlist vx_copy(final Object... vals) {
       Type_constlist output = this;
       boolean ischanged = false;
       Class_constlist val = this;
@@ -3208,12 +3213,13 @@ public final class Core {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
           ischanged = true;
-          listval.add((Core.Type_any)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Core.Type_any) {
           ischanged = true;
           listval.add((Core.Type_any)valsub);
-        } else if (valsub instanceof Type_constlist) {
+        } else if (valsub instanceof Core.Type_constlist) {
           Type_constlist multi = (Type_constlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_list());
@@ -3349,12 +3355,12 @@ public final class Core {
     }
 
     @Override
-    public Type_constmap vx_new(final Object... vals) {
+    public Core.Type_constmap vx_new(final Object... vals) {
       return e_constmap.vx_copy(vals);
     }
 
     @Override
-    public Type_constmap vx_copy(final Object... vals) {
+    public Core.Type_constmap vx_copy(final Object... vals) {
       Type_constmap output = this;
       boolean ischanged = false;
       Class_constmap val = this;
@@ -3532,12 +3538,12 @@ public final class Core {
     }
 
     @Override
-    public Type_context vx_new(final Object... vals) {
+    public Core.Type_context vx_new(final Object... vals) {
       return e_context.vx_copy(vals);
     }
 
     @Override
-    public Type_context vx_copy(final Object... vals) {
+    public Core.Type_context vx_copy(final Object... vals) {
       Type_context output = this;
       boolean ischanged = false;
       Class_context val = this;
@@ -3743,12 +3749,12 @@ public final class Core {
   public static class Class_date extends Core.Class_base implements Type_date {
 
     @Override
-    public Type_date vx_new(final Object... vals) {
+    public Core.Type_date vx_new(final Object... vals) {
       return e_date.vx_copy(vals);
     }
 
     @Override
-    public Type_date vx_copy(final Object... vals) {
+    public Core.Type_date vx_copy(final Object... vals) {
       Type_date output = this;
       boolean ischanged = false;
       Class_date val = this;
@@ -3828,12 +3834,12 @@ public final class Core {
     }
 
     @Override
-    public Type_decimal vx_new(final Object... vals) {
+    public Core.Type_decimal vx_new(final Object... vals) {
       return e_decimal.vx_copy(vals);
     }
 
     @Override
-    public Type_decimal vx_copy(final Object... vals) {
+    public Core.Type_decimal vx_copy(final Object... vals) {
       Type_decimal output = this;
       boolean ischanged = false;
       Class_decimal val = this;
@@ -3909,12 +3915,12 @@ public final class Core {
   public static class Class_error extends Core.Class_base implements Type_error {
 
     @Override
-    public Type_error vx_new(final Object... vals) {
+    public Core.Type_error vx_new(final Object... vals) {
       return e_error.vx_copy(vals);
     }
 
     @Override
-    public Type_error vx_copy(final Object... vals) {
+    public Core.Type_error vx_copy(final Object... vals) {
       Type_error output = this;
       boolean ischanged = false;
       Class_error val = this;
@@ -3980,12 +3986,12 @@ public final class Core {
     public float vx_float() {return vxfloat;}
 
     @Override
-    public Type_float vx_new(final Object... vals) {
+    public Core.Type_float vx_new(final Object... vals) {
       return e_float.vx_copy(vals);
     }
 
     @Override
-    public Type_float vx_copy(final Object... vals) {
+    public Core.Type_float vx_copy(final Object... vals) {
       Type_float output = this;
       boolean ischanged = false;
       Class_float val = this;
@@ -4083,12 +4089,12 @@ public final class Core {
       return Core.e_funcdef;
     }
     @Override
-    public Type_func vx_new(final Object... vals) {
+    public Core.Type_func vx_new(final Object... vals) {
       return e_func.vx_copy(vals);
     }
 
     @Override
-    public Type_func vx_copy(final Object... vals) {
+    public Core.Type_func vx_copy(final Object... vals) {
       Type_func output = this;
       boolean ischanged = false;
       Class_func val = this;
@@ -4223,12 +4229,12 @@ public final class Core {
     }
 
     @Override
-    public Type_funcdef vx_new(final Object... vals) {
+    public Core.Type_funcdef vx_new(final Object... vals) {
       return e_funcdef.vx_copy(vals);
     }
 
     @Override
-    public Type_funcdef vx_copy(final Object... vals) {
+    public Core.Type_funcdef vx_copy(final Object... vals) {
       Type_funcdef output = this;
       boolean ischanged = false;
       Class_funcdef val = this;
@@ -4493,12 +4499,12 @@ public final class Core {
     }
 
     @Override
-    public Type_funclist vx_new(final Object... vals) {
+    public Core.Type_funclist vx_new(final Object... vals) {
       return e_funclist.vx_copy(vals);
     }
 
     @Override
-    public Type_funclist vx_copy(final Object... vals) {
+    public Core.Type_funclist vx_copy(final Object... vals) {
       Type_funclist output = this;
       boolean ischanged = false;
       Class_funclist val = this;
@@ -4514,12 +4520,13 @@ public final class Core {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_func) {
+          Core.Type_func anysub = (Core.Type_func)valsub;
           ischanged = true;
-          listval.add((Core.Type_func)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Core.Type_func) {
           ischanged = true;
           listval.add((Core.Type_func)valsub);
-        } else if (valsub instanceof Type_funclist) {
+        } else if (valsub instanceof Core.Type_funclist) {
           Type_funclist multi = (Type_funclist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listfunc());
@@ -4665,12 +4672,12 @@ public final class Core {
     }
 
     @Override
-    public Type_funcmap vx_new(final Object... vals) {
+    public Core.Type_funcmap vx_new(final Object... vals) {
       return e_funcmap.vx_copy(vals);
     }
 
     @Override
-    public Type_funcmap vx_copy(final Object... vals) {
+    public Core.Type_funcmap vx_copy(final Object... vals) {
       Type_funcmap output = this;
       boolean ischanged = false;
       Class_funcmap val = this;
@@ -4791,12 +4798,12 @@ public final class Core {
     public int vx_int() {return vxint;}
 
     @Override
-    public Type_int vx_new(final Object... vals) {
+    public Core.Type_int vx_new(final Object... vals) {
       return e_int.vx_copy(vals);
     }
 
     @Override
-    public Type_int vx_copy(final Object... vals) {
+    public Core.Type_int vx_copy(final Object... vals) {
       Type_int output = this;
       boolean ischanged = false;
       Class_int val = this;
@@ -4811,12 +4818,16 @@ public final class Core {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_int) {
-          ischanged = true;
           Core.Type_int valnum = (Core.Type_int)valsub;
+          ischanged = true;
           intval += valnum.vx_int();
         } else if (valsub instanceof Integer) {
           ischanged = true;
           intval += (Integer)valsub;
+        } else if (valsub instanceof String) {
+          String valstring = (String)valsub;
+          ischanged = true;
+          intval += Integer.parseInt(valstring);
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -4899,12 +4910,12 @@ public final class Core {
     }
 
     @Override
-    public Type_intlist vx_new(final Object... vals) {
+    public Core.Type_intlist vx_new(final Object... vals) {
       return e_intlist.vx_copy(vals);
     }
 
     @Override
-    public Type_intlist vx_copy(final Object... vals) {
+    public Core.Type_intlist vx_copy(final Object... vals) {
       Type_intlist output = this;
       boolean ischanged = false;
       Class_intlist val = this;
@@ -4920,12 +4931,13 @@ public final class Core {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_int) {
+          Core.Type_int anysub = (Core.Type_int)valsub;
           ischanged = true;
-          listval.add((Core.Type_int)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Integer) {
           ischanged = true;
           listval.add(Core.t_int.vx_new(valsub));
-        } else if (valsub instanceof Type_intlist) {
+        } else if (valsub instanceof Core.Type_intlist) {
           Type_intlist multi = (Type_intlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listint());
@@ -5071,12 +5083,12 @@ public final class Core {
     }
 
     @Override
-    public Type_intmap vx_new(final Object... vals) {
+    public Core.Type_intmap vx_new(final Object... vals) {
       return e_intmap.vx_copy(vals);
     }
 
     @Override
-    public Type_intmap vx_copy(final Object... vals) {
+    public Core.Type_intmap vx_copy(final Object... vals) {
       Type_intmap output = this;
       boolean ischanged = false;
       Class_intmap val = this;
@@ -5219,12 +5231,12 @@ public final class Core {
     }
 
     @Override
-    public Type_list vx_new(final Object... vals) {
+    public Core.Type_list vx_new(final Object... vals) {
       return e_list.vx_copy(vals);
     }
 
     @Override
-    public Type_list vx_copy(final Object... vals) {
+    public Core.Type_list vx_copy(final Object... vals) {
       Type_list output = this;
       boolean ischanged = false;
       Class_list val = this;
@@ -5240,12 +5252,13 @@ public final class Core {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
           ischanged = true;
-          listval.add((Core.Type_any)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Core.Type_any) {
           ischanged = true;
           listval.add((Core.Type_any)valsub);
-        } else if (valsub instanceof Type_list) {
+        } else if (valsub instanceof Core.Type_list) {
           Type_list multi = (Type_list)valsub;
           ischanged = true;
           listval.addAll(multi.vx_list());
@@ -5347,12 +5360,12 @@ public final class Core {
   public static class Class_listtype extends Core.Class_base implements Type_listtype {
 
     @Override
-    public Type_listtype vx_new(final Object... vals) {
+    public Core.Type_listtype vx_new(final Object... vals) {
       return e_listtype.vx_copy(vals);
     }
 
     @Override
-    public Type_listtype vx_copy(final Object... vals) {
+    public Core.Type_listtype vx_copy(final Object... vals) {
       Type_listtype output = this;
       boolean ischanged = false;
       Class_listtype val = this;
@@ -5427,12 +5440,12 @@ public final class Core {
     }
 
     @Override
-    public Type_locale vx_new(final Object... vals) {
+    public Core.Type_locale vx_new(final Object... vals) {
       return e_locale.vx_copy(vals);
     }
 
     @Override
-    public Type_locale vx_copy(final Object... vals) {
+    public Core.Type_locale vx_copy(final Object... vals) {
       Type_locale output = this;
       boolean ischanged = false;
       Class_locale val = this;
@@ -5557,12 +5570,12 @@ public final class Core {
     }
 
     @Override
-    public Type_map vx_new(final Object... vals) {
+    public Core.Type_map vx_new(final Object... vals) {
       return e_map.vx_copy(vals);
     }
 
     @Override
-    public Type_map vx_copy(final Object... vals) {
+    public Core.Type_map vx_copy(final Object... vals) {
       Type_map output = this;
       boolean ischanged = false;
       Class_map val = this;
@@ -5677,12 +5690,12 @@ public final class Core {
   public static class Class_maptype extends Core.Class_base implements Type_maptype {
 
     @Override
-    public Type_maptype vx_new(final Object... vals) {
+    public Core.Type_maptype vx_new(final Object... vals) {
       return e_maptype.vx_copy(vals);
     }
 
     @Override
-    public Type_maptype vx_copy(final Object... vals) {
+    public Core.Type_maptype vx_copy(final Object... vals) {
       Type_maptype output = this;
       boolean ischanged = false;
       Class_maptype val = this;
@@ -5821,12 +5834,12 @@ public final class Core {
     }
 
     @Override
-    public Type_mempool vx_new(final Object... vals) {
+    public Core.Type_mempool vx_new(final Object... vals) {
       return e_mempool.vx_copy(vals);
     }
 
     @Override
-    public Type_mempool vx_copy(final Object... vals) {
+    public Core.Type_mempool vx_copy(final Object... vals) {
       Type_mempool output = this;
       boolean ischanged = false;
       Class_mempool val = this;
@@ -6038,12 +6051,12 @@ public final class Core {
     }
 
     @Override
-    public Type_msg vx_new(final Object... vals) {
+    public Core.Type_msg vx_new(final Object... vals) {
       return e_msg.vx_copy(vals);
     }
 
     @Override
-    public Type_msg vx_copy(final Object... vals) {
+    public Core.Type_msg vx_copy(final Object... vals) {
       Type_msg output = this;
       boolean ischanged = false;
       Class_msg val = this;
@@ -6223,12 +6236,12 @@ public final class Core {
     }
 
     @Override
-    public Type_msgblock vx_new(final Object... vals) {
+    public Core.Type_msgblock vx_new(final Object... vals) {
       return e_msgblock.vx_copy(vals);
     }
 
     @Override
-    public Type_msgblock vx_copy(final Object... vals) {
+    public Core.Type_msgblock vx_copy(final Object... vals) {
       Type_msgblock output = this;
       boolean ischanged = false;
       Class_msgblock val = this;
@@ -6267,15 +6280,6 @@ public final class Core {
             key = valstr.vx_string();
           } else if (valsub instanceof String) {
             key = (String)valsub;
-          } else {
-            //Core.Type_any msgval;
-            //if (valsub instanceof Core.Type_any) {
-            //  msgval = (Core.Type_any)valsub;
-            //} else {
-            //  msgval = Core.vx_new_string(valsub.toString());
-            //}
-            //msg = Core.vx_msg_from_error("vx/core/msgblock", ":invalidkeytype", msgval);
-            //msgblock = msgblock.vx_copy(msg);
           }
         } else {
           switch (key) {
@@ -6407,12 +6411,12 @@ public final class Core {
     }
 
     @Override
-    public Type_msgblocklist vx_new(final Object... vals) {
+    public Core.Type_msgblocklist vx_new(final Object... vals) {
       return e_msgblocklist.vx_copy(vals);
     }
 
     @Override
-    public Type_msgblocklist vx_copy(final Object... vals) {
+    public Core.Type_msgblocklist vx_copy(final Object... vals) {
       Type_msgblocklist output = this;
       boolean ischanged = false;
       Class_msgblocklist val = this;
@@ -6428,7 +6432,7 @@ public final class Core {
         } else if (valsub instanceof Core.Type_msgblock) {
           ischanged = true;
           listval.add((Core.Type_msgblock)valsub);
-        } else if (valsub instanceof Type_msgblocklist) {
+        } else if (valsub instanceof Core.Type_msgblocklist) {
           Type_msgblocklist multi = (Type_msgblocklist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listmsgblock());
@@ -6530,12 +6534,12 @@ public final class Core {
     }
 
     @Override
-    public Type_msglist vx_new(final Object... vals) {
+    public Core.Type_msglist vx_new(final Object... vals) {
       return e_msglist.vx_copy(vals);
     }
 
     @Override
-    public Type_msglist vx_copy(final Object... vals) {
+    public Core.Type_msglist vx_copy(final Object... vals) {
       Type_msglist output = this;
       boolean ischanged = false;
       Class_msglist val = this;
@@ -6551,7 +6555,7 @@ public final class Core {
         } else if (valsub instanceof Core.Type_msg) {
           ischanged = true;
           listval.add((Core.Type_msg)valsub);
-        } else if (valsub instanceof Type_msglist) {
+        } else if (valsub instanceof Core.Type_msglist) {
           Type_msglist multi = (Type_msglist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listmsg());
@@ -6626,12 +6630,12 @@ public final class Core {
   public static class Class_none extends Core.Class_base implements Type_none {
 
     @Override
-    public Type_none vx_new(final Object... vals) {
+    public Core.Type_none vx_new(final Object... vals) {
       return e_none.vx_copy(vals);
     }
 
     @Override
-    public Type_none vx_copy(final Object... vals) {
+    public Core.Type_none vx_copy(final Object... vals) {
       Type_none output = this;
       boolean ischanged = false;
       Class_none val = this;
@@ -6691,12 +6695,12 @@ public final class Core {
   public static class Class_notype extends Core.Class_base implements Type_notype {
 
     @Override
-    public Type_notype vx_new(final Object... vals) {
+    public Core.Type_notype vx_new(final Object... vals) {
       return e_notype.vx_copy(vals);
     }
 
     @Override
-    public Type_notype vx_copy(final Object... vals) {
+    public Core.Type_notype vx_copy(final Object... vals) {
       Type_notype output = this;
       boolean ischanged = false;
       Class_notype val = this;
@@ -6756,12 +6760,12 @@ public final class Core {
   public static class Class_number extends Core.Class_base implements Type_number {
 
     @Override
-    public Type_number vx_new(final Object... vals) {
+    public Core.Type_number vx_new(final Object... vals) {
       return e_number.vx_copy(vals);
     }
 
     @Override
-    public Type_number vx_copy(final Object... vals) {
+    public Core.Type_number vx_copy(final Object... vals) {
       Type_number output = this;
       boolean ischanged = false;
       Class_number val = this;
@@ -6848,12 +6852,12 @@ public final class Core {
     }
 
     @Override
-    public Type_numberlist vx_new(final Object... vals) {
+    public Core.Type_numberlist vx_new(final Object... vals) {
       return e_numberlist.vx_copy(vals);
     }
 
     @Override
-    public Type_numberlist vx_copy(final Object... vals) {
+    public Core.Type_numberlist vx_copy(final Object... vals) {
       Type_numberlist output = this;
       boolean ischanged = false;
       Class_numberlist val = this;
@@ -6869,12 +6873,13 @@ public final class Core {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_number) {
+          Core.Type_number anysub = (Core.Type_number)valsub;
           ischanged = true;
-          listval.add((Core.Type_number)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Core.Type_number) {
           ischanged = true;
           listval.add((Core.Type_number)valsub);
-        } else if (valsub instanceof Type_numberlist) {
+        } else if (valsub instanceof Core.Type_numberlist) {
           Type_numberlist multi = (Type_numberlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listnumber());
@@ -7020,12 +7025,12 @@ public final class Core {
     }
 
     @Override
-    public Type_numbermap vx_new(final Object... vals) {
+    public Core.Type_numbermap vx_new(final Object... vals) {
       return e_numbermap.vx_copy(vals);
     }
 
     @Override
-    public Type_numbermap vx_copy(final Object... vals) {
+    public Core.Type_numbermap vx_copy(final Object... vals) {
       Type_numbermap output = this;
       boolean ischanged = false;
       Class_numbermap val = this;
@@ -7215,12 +7220,12 @@ public final class Core {
     }
 
     @Override
-    public Type_package vx_new(final Object... vals) {
+    public Core.Type_package vx_new(final Object... vals) {
       return e_package.vx_copy(vals);
     }
 
     @Override
-    public Type_package vx_copy(final Object... vals) {
+    public Core.Type_package vx_copy(final Object... vals) {
       Type_package output = this;
       boolean ischanged = false;
       Class_package val = this;
@@ -7519,12 +7524,12 @@ public final class Core {
     }
 
     @Override
-    public Type_packagemap vx_new(final Object... vals) {
+    public Core.Type_packagemap vx_new(final Object... vals) {
       return e_packagemap.vx_copy(vals);
     }
 
     @Override
-    public Type_packagemap vx_copy(final Object... vals) {
+    public Core.Type_packagemap vx_copy(final Object... vals) {
       Type_packagemap output = this;
       boolean ischanged = false;
       Class_packagemap val = this;
@@ -7666,12 +7671,12 @@ public final class Core {
     }
 
     @Override
-    public Type_permission vx_new(final Object... vals) {
+    public Core.Type_permission vx_new(final Object... vals) {
       return e_permission.vx_copy(vals);
     }
 
     @Override
-    public Type_permission vx_copy(final Object... vals) {
+    public Core.Type_permission vx_copy(final Object... vals) {
       Type_permission output = this;
       boolean ischanged = false;
       Class_permission val = this;
@@ -7835,12 +7840,12 @@ public final class Core {
     }
 
     @Override
-    public Type_permissionlist vx_new(final Object... vals) {
+    public Core.Type_permissionlist vx_new(final Object... vals) {
       return e_permissionlist.vx_copy(vals);
     }
 
     @Override
-    public Type_permissionlist vx_copy(final Object... vals) {
+    public Core.Type_permissionlist vx_copy(final Object... vals) {
       Type_permissionlist output = this;
       boolean ischanged = false;
       Class_permissionlist val = this;
@@ -7856,12 +7861,13 @@ public final class Core {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_permission) {
+          Core.Type_permission anysub = (Core.Type_permission)valsub;
           ischanged = true;
-          listval.add((Core.Type_permission)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Core.Type_permission) {
           ischanged = true;
           listval.add((Core.Type_permission)valsub);
-        } else if (valsub instanceof Type_permissionlist) {
+        } else if (valsub instanceof Core.Type_permissionlist) {
           Type_permissionlist multi = (Type_permissionlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listpermission());
@@ -8007,12 +8013,12 @@ public final class Core {
     }
 
     @Override
-    public Type_permissionmap vx_new(final Object... vals) {
+    public Core.Type_permissionmap vx_new(final Object... vals) {
       return e_permissionmap.vx_copy(vals);
     }
 
     @Override
-    public Type_permissionmap vx_copy(final Object... vals) {
+    public Core.Type_permissionmap vx_copy(final Object... vals) {
       Type_permissionmap output = this;
       boolean ischanged = false;
       Class_permissionmap val = this;
@@ -8154,12 +8160,12 @@ public final class Core {
     }
 
     @Override
-    public Type_project vx_new(final Object... vals) {
+    public Core.Type_project vx_new(final Object... vals) {
       return e_project.vx_copy(vals);
     }
 
     @Override
-    public Type_project vx_copy(final Object... vals) {
+    public Core.Type_project vx_copy(final Object... vals) {
       Type_project output = this;
       boolean ischanged = false;
       Class_project val = this;
@@ -8344,12 +8350,12 @@ public final class Core {
     }
 
     @Override
-    public Type_security vx_new(final Object... vals) {
+    public Core.Type_security vx_new(final Object... vals) {
       return e_security.vx_copy(vals);
     }
 
     @Override
-    public Type_security vx_copy(final Object... vals) {
+    public Core.Type_security vx_copy(final Object... vals) {
       Type_security output = this;
       boolean ischanged = false;
       Class_security val = this;
@@ -8616,12 +8622,12 @@ public final class Core {
     }
 
     @Override
-    public Type_session vx_new(final Object... vals) {
+    public Core.Type_session vx_new(final Object... vals) {
       return e_session.vx_copy(vals);
     }
 
     @Override
-    public Type_session vx_copy(final Object... vals) {
+    public Core.Type_session vx_copy(final Object... vals) {
       Type_session output = this;
       boolean ischanged = false;
       Class_session val = this;
@@ -8897,12 +8903,12 @@ public final class Core {
     }
 
     @Override
-    public Type_setting vx_new(final Object... vals) {
+    public Core.Type_setting vx_new(final Object... vals) {
       return e_setting.vx_copy(vals);
     }
 
     @Override
-    public Type_setting vx_copy(final Object... vals) {
+    public Core.Type_setting vx_copy(final Object... vals) {
       Type_setting output = this;
       boolean ischanged = false;
       Class_setting val = this;
@@ -9063,12 +9069,12 @@ public final class Core {
     }
 
     @Override
-    public Type_state vx_new(final Object... vals) {
+    public Core.Type_state vx_new(final Object... vals) {
       return e_state.vx_copy(vals);
     }
 
     @Override
-    public Type_state vx_copy(final Object... vals) {
+    public Core.Type_state vx_copy(final Object... vals) {
       Type_state output = this;
       boolean ischanged = false;
       Class_state val = this;
@@ -9252,12 +9258,12 @@ public final class Core {
     }
 
     @Override
-    public Type_statelistener vx_new(final Object... vals) {
+    public Core.Type_statelistener vx_new(final Object... vals) {
       return e_statelistener.vx_copy(vals);
     }
 
     @Override
-    public Type_statelistener vx_copy(final Object... vals) {
+    public Core.Type_statelistener vx_copy(final Object... vals) {
       Type_statelistener output = this;
       boolean ischanged = false;
       Class_statelistener val = this;
@@ -9511,12 +9517,12 @@ public final class Core {
     }
 
     @Override
-    public Type_statelistenermap vx_new(final Object... vals) {
+    public Core.Type_statelistenermap vx_new(final Object... vals) {
       return e_statelistenermap.vx_copy(vals);
     }
 
     @Override
-    public Type_statelistenermap vx_copy(final Object... vals) {
+    public Core.Type_statelistenermap vx_copy(final Object... vals) {
       Type_statelistenermap output = this;
       boolean ischanged = false;
       Class_statelistenermap val = this;
@@ -9639,12 +9645,12 @@ public final class Core {
     }
 
     @Override
-    public Type_string vx_new(final Object... vals) {
+    public Core.Type_string vx_new(final Object... vals) {
       return e_string.vx_copy(vals);
     }
 
     @Override
-    public Type_string vx_copy(final Object... vals) {
+    public Core.Type_string vx_copy(final Object... vals) {
       Type_string output = this;
       boolean ischanged = false;
       Class_string val = this;
@@ -9685,11 +9691,13 @@ public final class Core {
             sb.append(ssub2);
           }
         } else if (valsub instanceof Integer) {
+          Integer ssub2 = (Integer)valsub;
           ischanged = true;
-          sb.append((Integer)valsub);
+          sb.append(ssub2);
         } else if (valsub instanceof Float) {
+          Float ssub2 = (Float)valsub;
           ischanged = true;
-          sb.append((Float)valsub);
+          sb.append(ssub2);
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/core/string", ":invalidtype", anysub);
@@ -9780,12 +9788,12 @@ public final class Core {
     }
 
     @Override
-    public Type_stringlist vx_new(final Object... vals) {
+    public Core.Type_stringlist vx_new(final Object... vals) {
       return e_stringlist.vx_copy(vals);
     }
 
     @Override
-    public Type_stringlist vx_copy(final Object... vals) {
+    public Core.Type_stringlist vx_copy(final Object... vals) {
       Type_stringlist output = this;
       boolean ischanged = false;
       Class_stringlist val = this;
@@ -9801,12 +9809,13 @@ public final class Core {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_string) {
+          Core.Type_string anysub = (Core.Type_string)valsub;
           ischanged = true;
-          listval.add((Core.Type_string)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof String) {
           ischanged = true;
           listval.add(Core.t_string.vx_new(valsub));
-        } else if (valsub instanceof Type_stringlist) {
+        } else if (valsub instanceof Core.Type_stringlist) {
           Type_stringlist multi = (Type_stringlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_liststring());
@@ -9908,12 +9917,12 @@ public final class Core {
     }
 
     @Override
-    public Type_stringlistlist vx_new(final Object... vals) {
+    public Core.Type_stringlistlist vx_new(final Object... vals) {
       return e_stringlistlist.vx_copy(vals);
     }
 
     @Override
-    public Type_stringlistlist vx_copy(final Object... vals) {
+    public Core.Type_stringlistlist vx_copy(final Object... vals) {
       Type_stringlistlist output = this;
       boolean ischanged = false;
       Class_stringlistlist val = this;
@@ -9929,12 +9938,13 @@ public final class Core {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_stringlist) {
+          Core.Type_stringlist anysub = (Core.Type_stringlist)valsub;
           ischanged = true;
-          listval.add((Core.Type_stringlist)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Core.Type_stringlist) {
           ischanged = true;
           listval.add((Core.Type_stringlist)valsub);
-        } else if (valsub instanceof Type_stringlistlist) {
+        } else if (valsub instanceof Core.Type_stringlistlist) {
           Type_stringlistlist multi = (Type_stringlistlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_liststringlist());
@@ -10080,12 +10090,12 @@ public final class Core {
     }
 
     @Override
-    public Type_stringmap vx_new(final Object... vals) {
+    public Core.Type_stringmap vx_new(final Object... vals) {
       return e_stringmap.vx_copy(vals);
     }
 
     @Override
-    public Type_stringmap vx_copy(final Object... vals) {
+    public Core.Type_stringmap vx_copy(final Object... vals) {
       Type_stringmap output = this;
       boolean ischanged = false;
       Class_stringmap val = this;
@@ -10271,12 +10281,12 @@ public final class Core {
     }
 
     @Override
-    public Type_stringmutablemap vx_new(final Object... vals) {
+    public Core.Type_stringmutablemap vx_new(final Object... vals) {
       return e_stringmutablemap.vx_copy(vals);
     }
 
     @Override
-    public Type_stringmutablemap vx_copy(final Object... vals) {
+    public Core.Type_stringmutablemap vx_copy(final Object... vals) {
       Type_stringmutablemap output = this;
       boolean ischanged = false;
       Class_stringmutablemap val = this;
@@ -10408,12 +10418,12 @@ public final class Core {
     }
 
     @Override
-    public Type_struct vx_new(final Object... vals) {
+    public Core.Type_struct vx_new(final Object... vals) {
       return e_struct.vx_copy(vals);
     }
 
     @Override
-    public Type_struct vx_copy(final Object... vals) {
+    public Core.Type_struct vx_copy(final Object... vals) {
       Type_struct output = this;
       boolean ischanged = false;
       Class_struct val = this;
@@ -10547,12 +10557,12 @@ public final class Core {
     }
 
     @Override
-    public Type_thenelse vx_new(final Object... vals) {
+    public Core.Type_thenelse vx_new(final Object... vals) {
       return e_thenelse.vx_copy(vals);
     }
 
     @Override
-    public Type_thenelse vx_copy(final Object... vals) {
+    public Core.Type_thenelse vx_copy(final Object... vals) {
       Type_thenelse output = this;
       boolean ischanged = false;
       Class_thenelse val = this;
@@ -10807,12 +10817,12 @@ public final class Core {
     }
 
     @Override
-    public Type_thenelselist vx_new(final Object... vals) {
+    public Core.Type_thenelselist vx_new(final Object... vals) {
       return e_thenelselist.vx_copy(vals);
     }
 
     @Override
-    public Type_thenelselist vx_copy(final Object... vals) {
+    public Core.Type_thenelselist vx_copy(final Object... vals) {
       Type_thenelselist output = this;
       boolean ischanged = false;
       Class_thenelselist val = this;
@@ -10828,12 +10838,13 @@ public final class Core {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_thenelse) {
+          Core.Type_thenelse anysub = (Core.Type_thenelse)valsub;
           ischanged = true;
-          listval.add((Core.Type_thenelse)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Core.Type_thenelse) {
           ischanged = true;
           listval.add((Core.Type_thenelse)valsub);
-        } else if (valsub instanceof Type_thenelselist) {
+        } else if (valsub instanceof Core.Type_thenelselist) {
           Type_thenelselist multi = (Type_thenelselist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listthenelse());
@@ -10947,12 +10958,12 @@ public final class Core {
     }
 
     @Override
-    public Type_translation vx_new(final Object... vals) {
+    public Core.Type_translation vx_new(final Object... vals) {
       return e_translation.vx_copy(vals);
     }
 
     @Override
-    public Type_translation vx_copy(final Object... vals) {
+    public Core.Type_translation vx_copy(final Object... vals) {
       Type_translation output = this;
       boolean ischanged = false;
       Class_translation val = this;
@@ -11139,12 +11150,12 @@ public final class Core {
     }
 
     @Override
-    public Type_translationlist vx_new(final Object... vals) {
+    public Core.Type_translationlist vx_new(final Object... vals) {
       return e_translationlist.vx_copy(vals);
     }
 
     @Override
-    public Type_translationlist vx_copy(final Object... vals) {
+    public Core.Type_translationlist vx_copy(final Object... vals) {
       Type_translationlist output = this;
       boolean ischanged = false;
       Class_translationlist val = this;
@@ -11160,12 +11171,13 @@ public final class Core {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_translation) {
+          Core.Type_translation anysub = (Core.Type_translation)valsub;
           ischanged = true;
-          listval.add((Core.Type_translation)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Core.Type_translation) {
           ischanged = true;
           listval.add((Core.Type_translation)valsub);
-        } else if (valsub instanceof Type_translationlist) {
+        } else if (valsub instanceof Core.Type_translationlist) {
           Type_translationlist multi = (Type_translationlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listtranslation());
@@ -11311,12 +11323,12 @@ public final class Core {
     }
 
     @Override
-    public Type_translationmap vx_new(final Object... vals) {
+    public Core.Type_translationmap vx_new(final Object... vals) {
       return e_translationmap.vx_copy(vals);
     }
 
     @Override
-    public Type_translationmap vx_copy(final Object... vals) {
+    public Core.Type_translationmap vx_copy(final Object... vals) {
       Type_translationmap output = this;
       boolean ischanged = false;
       Class_translationmap val = this;
@@ -11431,12 +11443,12 @@ public final class Core {
   public static class Class_type extends Core.Class_base implements Type_type {
 
     @Override
-    public Type_type vx_new(final Object... vals) {
+    public Core.Type_type vx_new(final Object... vals) {
       return e_type.vx_copy(vals);
     }
 
     @Override
-    public Type_type vx_copy(final Object... vals) {
+    public Core.Type_type vx_copy(final Object... vals) {
       Type_type output = this;
       boolean ischanged = false;
       Class_type val = this;
@@ -11655,12 +11667,12 @@ public final class Core {
     }
 
     @Override
-    public Type_typedef vx_new(final Object... vals) {
+    public Core.Type_typedef vx_new(final Object... vals) {
       return e_typedef.vx_copy(vals);
     }
 
     @Override
-    public Type_typedef vx_copy(final Object... vals) {
+    public Core.Type_typedef vx_copy(final Object... vals) {
       Type_typedef output = this;
       boolean ischanged = false;
       Class_typedef val = this;
@@ -12073,12 +12085,12 @@ public final class Core {
     }
 
     @Override
-    public Type_typelist vx_new(final Object... vals) {
+    public Core.Type_typelist vx_new(final Object... vals) {
       return e_typelist.vx_copy(vals);
     }
 
     @Override
-    public Type_typelist vx_copy(final Object... vals) {
+    public Core.Type_typelist vx_copy(final Object... vals) {
       Type_typelist output = this;
       boolean ischanged = false;
       Class_typelist val = this;
@@ -12094,12 +12106,13 @@ public final class Core {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any anysub = (Core.Type_any)valsub;
           ischanged = true;
-          listval.add((Core.Type_any)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Core.Type_any) {
           ischanged = true;
           listval.add((Core.Type_any)valsub);
-        } else if (valsub instanceof Type_typelist) {
+        } else if (valsub instanceof Core.Type_typelist) {
           Type_typelist multi = (Type_typelist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_list());
@@ -12235,12 +12248,12 @@ public final class Core {
     }
 
     @Override
-    public Type_typemap vx_new(final Object... vals) {
+    public Core.Type_typemap vx_new(final Object... vals) {
       return e_typemap.vx_copy(vals);
     }
 
     @Override
-    public Type_typemap vx_copy(final Object... vals) {
+    public Core.Type_typemap vx_copy(final Object... vals) {
       Type_typemap output = this;
       boolean ischanged = false;
       Class_typemap val = this;
@@ -12406,12 +12419,12 @@ public final class Core {
     }
 
     @Override
-    public Type_user vx_new(final Object... vals) {
+    public Core.Type_user vx_new(final Object... vals) {
       return e_user.vx_copy(vals);
     }
 
     @Override
-    public Type_user vx_copy(final Object... vals) {
+    public Core.Type_user vx_copy(final Object... vals) {
       Type_user output = this;
       boolean ischanged = false;
       Class_user val = this;
@@ -12635,12 +12648,12 @@ public final class Core {
     }
 
     @Override
-    public Type_value vx_new(final Object... vals) {
+    public Core.Type_value vx_new(final Object... vals) {
       return e_value.vx_copy(vals);
     }
 
     @Override
-    public Type_value vx_copy(final Object... vals) {
+    public Core.Type_value vx_copy(final Object... vals) {
       Type_value output = this;
       boolean ischanged = false;
       Class_value val = this;
@@ -13375,13 +13388,13 @@ public final class Core {
   public static class Class_not extends Core.Class_base implements Func_not {
 
     @Override
-    public Func_not vx_new(Object... vals) {
+    public Core.Func_not vx_new(final Object... vals) {
       Class_not output = new Class_not();
       return output;
     }
 
     @Override
-    public Func_not vx_copy(Object... vals) {
+    public Core.Func_not vx_copy(final Object... vals) {
       Class_not output = new Class_not();
       return output;
     }
@@ -13466,13 +13479,13 @@ public final class Core {
   public static class Class_notempty extends Core.Class_base implements Func_notempty {
 
     @Override
-    public Func_notempty vx_new(Object... vals) {
+    public Core.Func_notempty vx_new(final Object... vals) {
       Class_notempty output = new Class_notempty();
       return output;
     }
 
     @Override
-    public Func_notempty vx_copy(Object... vals) {
+    public Core.Func_notempty vx_copy(final Object... vals) {
       Class_notempty output = new Class_notempty();
       return output;
     }
@@ -13559,13 +13572,13 @@ public final class Core {
   public static class Class_notempty_1 extends Core.Class_base implements Func_notempty_1 {
 
     @Override
-    public Func_notempty_1 vx_new(Object... vals) {
+    public Core.Func_notempty_1 vx_new(final Object... vals) {
       Class_notempty_1 output = new Class_notempty_1();
       return output;
     }
 
     @Override
-    public Func_notempty_1 vx_copy(Object... vals) {
+    public Core.Func_notempty_1 vx_copy(final Object... vals) {
       Class_notempty_1 output = new Class_notempty_1();
       return output;
     }
@@ -13653,13 +13666,13 @@ public final class Core {
   public static class Class_ne extends Core.Class_base implements Func_ne {
 
     @Override
-    public Func_ne vx_new(Object... vals) {
+    public Core.Func_ne vx_new(final Object... vals) {
       Class_ne output = new Class_ne();
       return output;
     }
 
     @Override
-    public Func_ne vx_copy(Object... vals) {
+    public Core.Func_ne vx_copy(final Object... vals) {
       Class_ne output = new Class_ne();
       return output;
     }
@@ -13736,13 +13749,13 @@ public final class Core {
   public static class Class_neqeq extends Core.Class_base implements Func_neqeq {
 
     @Override
-    public Func_neqeq vx_new(Object... vals) {
+    public Core.Func_neqeq vx_new(final Object... vals) {
       Class_neqeq output = new Class_neqeq();
       return output;
     }
 
     @Override
-    public Func_neqeq vx_copy(Object... vals) {
+    public Core.Func_neqeq vx_copy(final Object... vals) {
       Class_neqeq output = new Class_neqeq();
       return output;
     }
@@ -13819,13 +13832,13 @@ public final class Core {
   public static class Class_multiply extends Core.Class_base implements Func_multiply {
 
     @Override
-    public Func_multiply vx_new(Object... vals) {
+    public Core.Func_multiply vx_new(final Object... vals) {
       Class_multiply output = new Class_multiply();
       return output;
     }
 
     @Override
-    public Func_multiply vx_copy(Object... vals) {
+    public Core.Func_multiply vx_copy(final Object... vals) {
       Class_multiply output = new Class_multiply();
       return output;
     }
@@ -13901,13 +13914,13 @@ public final class Core {
   public static class Class_multiply_1 extends Core.Class_base implements Func_multiply_1 {
 
     @Override
-    public Func_multiply_1 vx_new(Object... vals) {
+    public Core.Func_multiply_1 vx_new(final Object... vals) {
       Class_multiply_1 output = new Class_multiply_1();
       return output;
     }
 
     @Override
-    public Func_multiply_1 vx_copy(Object... vals) {
+    public Core.Func_multiply_1 vx_copy(final Object... vals) {
       Class_multiply_1 output = new Class_multiply_1();
       return output;
     }
@@ -13984,13 +13997,13 @@ public final class Core {
   public static class Class_multiply_2 extends Core.Class_base implements Func_multiply_2 {
 
     @Override
-    public Func_multiply_2 vx_new(Object... vals) {
+    public Core.Func_multiply_2 vx_new(final Object... vals) {
       Class_multiply_2 output = new Class_multiply_2();
       return output;
     }
 
     @Override
-    public Func_multiply_2 vx_copy(Object... vals) {
+    public Core.Func_multiply_2 vx_copy(final Object... vals) {
       Class_multiply_2 output = new Class_multiply_2();
       return output;
     }
@@ -14085,13 +14098,13 @@ public final class Core {
   public static class Class_multiply_3 extends Core.Class_base implements Func_multiply_3 {
 
     @Override
-    public Func_multiply_3 vx_new(Object... vals) {
+    public Core.Func_multiply_3 vx_new(final Object... vals) {
       Class_multiply_3 output = new Class_multiply_3();
       return output;
     }
 
     @Override
-    public Func_multiply_3 vx_copy(Object... vals) {
+    public Core.Func_multiply_3 vx_copy(final Object... vals) {
       Class_multiply_3 output = new Class_multiply_3();
       return output;
     }
@@ -14187,13 +14200,13 @@ public final class Core {
   public static class Class_plus extends Core.Class_base implements Func_plus {
 
     @Override
-    public Func_plus vx_new(Object... vals) {
+    public Core.Func_plus vx_new(final Object... vals) {
       Class_plus output = new Class_plus();
       return output;
     }
 
     @Override
-    public Func_plus vx_copy(Object... vals) {
+    public Core.Func_plus vx_copy(final Object... vals) {
       Class_plus output = new Class_plus();
       return output;
     }
@@ -14269,13 +14282,13 @@ public final class Core {
   public static class Class_plus_1 extends Core.Class_base implements Func_plus_1 {
 
     @Override
-    public Func_plus_1 vx_new(Object... vals) {
+    public Core.Func_plus_1 vx_new(final Object... vals) {
       Class_plus_1 output = new Class_plus_1();
       return output;
     }
 
     @Override
-    public Func_plus_1 vx_copy(Object... vals) {
+    public Core.Func_plus_1 vx_copy(final Object... vals) {
       Class_plus_1 output = new Class_plus_1();
       return output;
     }
@@ -14352,13 +14365,13 @@ public final class Core {
   public static class Class_plus_2 extends Core.Class_base implements Func_plus_2 {
 
     @Override
-    public Func_plus_2 vx_new(Object... vals) {
+    public Core.Func_plus_2 vx_new(final Object... vals) {
       Class_plus_2 output = new Class_plus_2();
       return output;
     }
 
     @Override
-    public Func_plus_2 vx_copy(Object... vals) {
+    public Core.Func_plus_2 vx_copy(final Object... vals) {
       Class_plus_2 output = new Class_plus_2();
       return output;
     }
@@ -14453,13 +14466,13 @@ public final class Core {
   public static class Class_plus_3 extends Core.Class_base implements Func_plus_3 {
 
     @Override
-    public Func_plus_3 vx_new(Object... vals) {
+    public Core.Func_plus_3 vx_new(final Object... vals) {
       Class_plus_3 output = new Class_plus_3();
       return output;
     }
 
     @Override
-    public Func_plus_3 vx_copy(Object... vals) {
+    public Core.Func_plus_3 vx_copy(final Object... vals) {
       Class_plus_3 output = new Class_plus_3();
       return output;
     }
@@ -14554,13 +14567,13 @@ public final class Core {
   public static class Class_plus1 extends Core.Class_base implements Func_plus1 {
 
     @Override
-    public Func_plus1 vx_new(Object... vals) {
+    public Core.Func_plus1 vx_new(final Object... vals) {
       Class_plus1 output = new Class_plus1();
       return output;
     }
 
     @Override
-    public Func_plus1 vx_copy(Object... vals) {
+    public Core.Func_plus1 vx_copy(final Object... vals) {
       Class_plus1 output = new Class_plus1();
       return output;
     }
@@ -14646,13 +14659,13 @@ public final class Core {
   public static class Class_minus extends Core.Class_base implements Func_minus {
 
     @Override
-    public Func_minus vx_new(Object... vals) {
+    public Core.Func_minus vx_new(final Object... vals) {
       Class_minus output = new Class_minus();
       return output;
     }
 
     @Override
-    public Func_minus vx_copy(Object... vals) {
+    public Core.Func_minus vx_copy(final Object... vals) {
       Class_minus output = new Class_minus();
       return output;
     }
@@ -14728,13 +14741,13 @@ public final class Core {
   public static class Class_minus_1 extends Core.Class_base implements Func_minus_1 {
 
     @Override
-    public Func_minus_1 vx_new(Object... vals) {
+    public Core.Func_minus_1 vx_new(final Object... vals) {
       Class_minus_1 output = new Class_minus_1();
       return output;
     }
 
     @Override
-    public Func_minus_1 vx_copy(Object... vals) {
+    public Core.Func_minus_1 vx_copy(final Object... vals) {
       Class_minus_1 output = new Class_minus_1();
       return output;
     }
@@ -14811,13 +14824,13 @@ public final class Core {
   public static class Class_minus_2 extends Core.Class_base implements Func_minus_2 {
 
     @Override
-    public Func_minus_2 vx_new(Object... vals) {
+    public Core.Func_minus_2 vx_new(final Object... vals) {
       Class_minus_2 output = new Class_minus_2();
       return output;
     }
 
     @Override
-    public Func_minus_2 vx_copy(Object... vals) {
+    public Core.Func_minus_2 vx_copy(final Object... vals) {
       Class_minus_2 output = new Class_minus_2();
       return output;
     }
@@ -14912,13 +14925,13 @@ public final class Core {
   public static class Class_minus_3 extends Core.Class_base implements Func_minus_3 {
 
     @Override
-    public Func_minus_3 vx_new(Object... vals) {
+    public Core.Func_minus_3 vx_new(final Object... vals) {
       Class_minus_3 output = new Class_minus_3();
       return output;
     }
 
     @Override
-    public Func_minus_3 vx_copy(Object... vals) {
+    public Core.Func_minus_3 vx_copy(final Object... vals) {
       Class_minus_3 output = new Class_minus_3();
       return output;
     }
@@ -15013,13 +15026,13 @@ public final class Core {
   public static class Class_minus1 extends Core.Class_base implements Func_minus1 {
 
     @Override
-    public Func_minus1 vx_new(Object... vals) {
+    public Core.Func_minus1 vx_new(final Object... vals) {
       Class_minus1 output = new Class_minus1();
       return output;
     }
 
     @Override
-    public Func_minus1 vx_copy(Object... vals) {
+    public Core.Func_minus1 vx_copy(final Object... vals) {
       Class_minus1 output = new Class_minus1();
       return output;
     }
@@ -15106,13 +15119,13 @@ public final class Core {
   public static class Class_dotmethod extends Core.Class_base implements Func_dotmethod {
 
     @Override
-    public Func_dotmethod vx_new(Object... vals) {
+    public Core.Func_dotmethod vx_new(final Object... vals) {
       Class_dotmethod output = new Class_dotmethod();
       return output;
     }
 
     @Override
-    public Func_dotmethod vx_copy(Object... vals) {
+    public Core.Func_dotmethod vx_copy(final Object... vals) {
       Class_dotmethod output = new Class_dotmethod();
       return output;
     }
@@ -15187,13 +15200,13 @@ public final class Core {
   public static class Class_divide extends Core.Class_base implements Func_divide {
 
     @Override
-    public Func_divide vx_new(Object... vals) {
+    public Core.Func_divide vx_new(final Object... vals) {
       Class_divide output = new Class_divide();
       return output;
     }
 
     @Override
-    public Func_divide vx_copy(Object... vals) {
+    public Core.Func_divide vx_copy(final Object... vals) {
       Class_divide output = new Class_divide();
       return output;
     }
@@ -15276,13 +15289,13 @@ public final class Core {
   public static class Class_lt extends Core.Class_base implements Func_lt {
 
     @Override
-    public Func_lt vx_new(Object... vals) {
+    public Core.Func_lt vx_new(final Object... vals) {
       Class_lt output = new Class_lt();
       return output;
     }
 
     @Override
-    public Func_lt vx_copy(Object... vals) {
+    public Core.Func_lt vx_copy(final Object... vals) {
       Class_lt output = new Class_lt();
       return output;
     }
@@ -15372,13 +15385,13 @@ public final class Core {
   public static class Class_lt_1 extends Core.Class_base implements Func_lt_1 {
 
     @Override
-    public Func_lt_1 vx_new(Object... vals) {
+    public Core.Func_lt_1 vx_new(final Object... vals) {
       Class_lt_1 output = new Class_lt_1();
       return output;
     }
 
     @Override
-    public Func_lt_1 vx_copy(Object... vals) {
+    public Core.Func_lt_1 vx_copy(final Object... vals) {
       Class_lt_1 output = new Class_lt_1();
       return output;
     }
@@ -15480,13 +15493,13 @@ public final class Core {
   public static class Class_chainfirst extends Core.Class_base implements Func_chainfirst {
 
     @Override
-    public Func_chainfirst vx_new(Object... vals) {
+    public Core.Func_chainfirst vx_new(final Object... vals) {
       Class_chainfirst output = new Class_chainfirst();
       return output;
     }
 
     @Override
-    public Func_chainfirst vx_copy(Object... vals) {
+    public Core.Func_chainfirst vx_copy(final Object... vals) {
       Class_chainfirst output = new Class_chainfirst();
       return output;
     }
@@ -15563,13 +15576,13 @@ public final class Core {
   public static class Class_chainlast extends Core.Class_base implements Func_chainlast {
 
     @Override
-    public Func_chainlast vx_new(Object... vals) {
+    public Core.Func_chainlast vx_new(final Object... vals) {
       Class_chainlast output = new Class_chainlast();
       return output;
     }
 
     @Override
-    public Func_chainlast vx_copy(Object... vals) {
+    public Core.Func_chainlast vx_copy(final Object... vals) {
       Class_chainlast output = new Class_chainlast();
       return output;
     }
@@ -15644,13 +15657,13 @@ public final class Core {
   public static class Class_le extends Core.Class_base implements Func_le {
 
     @Override
-    public Func_le vx_new(Object... vals) {
+    public Core.Func_le vx_new(final Object... vals) {
       Class_le output = new Class_le();
       return output;
     }
 
     @Override
-    public Func_le vx_copy(Object... vals) {
+    public Core.Func_le vx_copy(final Object... vals) {
       Class_le output = new Class_le();
       return output;
     }
@@ -15726,13 +15739,13 @@ public final class Core {
   public static class Class_le_1 extends Core.Class_base implements Func_le_1 {
 
     @Override
-    public Func_le_1 vx_new(Object... vals) {
+    public Core.Func_le_1 vx_new(final Object... vals) {
       Class_le_1 output = new Class_le_1();
       return output;
     }
 
     @Override
-    public Func_le_1 vx_copy(Object... vals) {
+    public Core.Func_le_1 vx_copy(final Object... vals) {
       Class_le_1 output = new Class_le_1();
       return output;
     }
@@ -15820,13 +15833,13 @@ public final class Core {
   public static class Class_eq extends Core.Class_base implements Func_eq {
 
     @Override
-    public Func_eq vx_new(Object... vals) {
+    public Core.Func_eq vx_new(final Object... vals) {
       Class_eq output = new Class_eq();
       return output;
     }
 
     @Override
-    public Func_eq vx_copy(Object... vals) {
+    public Core.Func_eq vx_copy(final Object... vals) {
       Class_eq output = new Class_eq();
       return output;
     }
@@ -15910,13 +15923,13 @@ public final class Core {
   public static class Class_eq_1 extends Core.Class_base implements Func_eq_1 {
 
     @Override
-    public Func_eq_1 vx_new(Object... vals) {
+    public Core.Func_eq_1 vx_new(final Object... vals) {
       Class_eq_1 output = new Class_eq_1();
       return output;
     }
 
     @Override
-    public Func_eq_1 vx_copy(Object... vals) {
+    public Core.Func_eq_1 vx_copy(final Object... vals) {
       Class_eq_1 output = new Class_eq_1();
       return output;
     }
@@ -16016,13 +16029,13 @@ public final class Core {
   public static class Class_eqeq extends Core.Class_base implements Func_eqeq {
 
     @Override
-    public Func_eqeq vx_new(Object... vals) {
+    public Core.Func_eqeq vx_new(final Object... vals) {
       Class_eqeq output = new Class_eqeq();
       return output;
     }
 
     @Override
-    public Func_eqeq vx_copy(Object... vals) {
+    public Core.Func_eqeq vx_copy(final Object... vals) {
       Class_eqeq output = new Class_eqeq();
       return output;
     }
@@ -16098,13 +16111,13 @@ public final class Core {
   public static class Class_gt extends Core.Class_base implements Func_gt {
 
     @Override
-    public Func_gt vx_new(Object... vals) {
+    public Core.Func_gt vx_new(final Object... vals) {
       Class_gt output = new Class_gt();
       return output;
     }
 
     @Override
-    public Func_gt vx_copy(Object... vals) {
+    public Core.Func_gt vx_copy(final Object... vals) {
       Class_gt output = new Class_gt();
       return output;
     }
@@ -16194,13 +16207,13 @@ public final class Core {
   public static class Class_gt_1 extends Core.Class_base implements Func_gt_1 {
 
     @Override
-    public Func_gt_1 vx_new(Object... vals) {
+    public Core.Func_gt_1 vx_new(final Object... vals) {
       Class_gt_1 output = new Class_gt_1();
       return output;
     }
 
     @Override
-    public Func_gt_1 vx_copy(Object... vals) {
+    public Core.Func_gt_1 vx_copy(final Object... vals) {
       Class_gt_1 output = new Class_gt_1();
       return output;
     }
@@ -16300,13 +16313,13 @@ public final class Core {
   public static class Class_ge extends Core.Class_base implements Func_ge {
 
     @Override
-    public Func_ge vx_new(Object... vals) {
+    public Core.Func_ge vx_new(final Object... vals) {
       Class_ge output = new Class_ge();
       return output;
     }
 
     @Override
-    public Func_ge vx_copy(Object... vals) {
+    public Core.Func_ge vx_copy(final Object... vals) {
       Class_ge output = new Class_ge();
       return output;
     }
@@ -16382,13 +16395,13 @@ public final class Core {
   public static class Class_ge_1 extends Core.Class_base implements Func_ge_1 {
 
     @Override
-    public Func_ge_1 vx_new(Object... vals) {
+    public Core.Func_ge_1 vx_new(final Object... vals) {
       Class_ge_1 output = new Class_ge_1();
       return output;
     }
 
     @Override
-    public Func_ge_1 vx_copy(Object... vals) {
+    public Core.Func_ge_1 vx_copy(final Object... vals) {
       Class_ge_1 output = new Class_ge_1();
       return output;
     }
@@ -16475,13 +16488,13 @@ public final class Core {
   public static class Class_allowfuncs_from_security extends Core.Class_base implements Func_allowfuncs_from_security {
 
     @Override
-    public Func_allowfuncs_from_security vx_new(Object... vals) {
+    public Core.Func_allowfuncs_from_security vx_new(final Object... vals) {
       Class_allowfuncs_from_security output = new Class_allowfuncs_from_security();
       return output;
     }
 
     @Override
-    public Func_allowfuncs_from_security vx_copy(Object... vals) {
+    public Core.Func_allowfuncs_from_security vx_copy(final Object... vals) {
       Class_allowfuncs_from_security output = new Class_allowfuncs_from_security();
       return output;
     }
@@ -16566,13 +16579,13 @@ public final class Core {
   public static class Class_allowtypenames_from_typedef extends Core.Class_base implements Func_allowtypenames_from_typedef {
 
     @Override
-    public Func_allowtypenames_from_typedef vx_new(Object... vals) {
+    public Core.Func_allowtypenames_from_typedef vx_new(final Object... vals) {
       Class_allowtypenames_from_typedef output = new Class_allowtypenames_from_typedef();
       return output;
     }
 
     @Override
-    public Func_allowtypenames_from_typedef vx_copy(Object... vals) {
+    public Core.Func_allowtypenames_from_typedef vx_copy(final Object... vals) {
       Class_allowtypenames_from_typedef output = new Class_allowtypenames_from_typedef();
       return output;
     }
@@ -16659,13 +16672,13 @@ public final class Core {
   public static class Class_allowtypes_from_typedef extends Core.Class_base implements Func_allowtypes_from_typedef {
 
     @Override
-    public Func_allowtypes_from_typedef vx_new(Object... vals) {
+    public Core.Func_allowtypes_from_typedef vx_new(final Object... vals) {
       Class_allowtypes_from_typedef output = new Class_allowtypes_from_typedef();
       return output;
     }
 
     @Override
-    public Func_allowtypes_from_typedef vx_copy(Object... vals) {
+    public Core.Func_allowtypes_from_typedef vx_copy(final Object... vals) {
       Class_allowtypes_from_typedef output = new Class_allowtypes_from_typedef();
       return output;
     }
@@ -16751,13 +16764,13 @@ public final class Core {
   public static class Class_and extends Core.Class_base implements Func_and {
 
     @Override
-    public Func_and vx_new(Object... vals) {
+    public Core.Func_and vx_new(final Object... vals) {
       Class_and output = new Class_and();
       return output;
     }
 
     @Override
-    public Func_and vx_copy(Object... vals) {
+    public Core.Func_and vx_copy(final Object... vals) {
       Class_and output = new Class_and();
       return output;
     }
@@ -16835,13 +16848,13 @@ public final class Core {
   public static class Class_and_1 extends Core.Class_base implements Func_and_1 {
 
     @Override
-    public Func_and_1 vx_new(Object... vals) {
+    public Core.Func_and_1 vx_new(final Object... vals) {
       Class_and_1 output = new Class_and_1();
       return output;
     }
 
     @Override
-    public Func_and_1 vx_copy(Object... vals) {
+    public Core.Func_and_1 vx_copy(final Object... vals) {
       Class_and_1 output = new Class_and_1();
       return output;
     }
@@ -16972,13 +16985,13 @@ public final class Core {
     }
 
     @Override
-    public Func_any_from_any vx_new(Object... vals) {
+    public Core.Func_any_from_any vx_new(final Object... vals) {
       Class_any_from_any output = new Class_any_from_any();
       return output;
     }
 
     @Override
-    public Func_any_from_any vx_copy(Object... vals) {
+    public Core.Func_any_from_any vx_copy(final Object... vals) {
       Class_any_from_any output = new Class_any_from_any();
       return output;
     }
@@ -17075,13 +17088,13 @@ public final class Core {
     }
 
     @Override
-    public Func_any_from_any_async vx_new(Object... vals) {
+    public Core.Func_any_from_any_async vx_new(final Object... vals) {
       Class_any_from_any_async output = new Class_any_from_any_async();
       return output;
     }
 
     @Override
-    public Func_any_from_any_async vx_copy(Object... vals) {
+    public Core.Func_any_from_any_async vx_copy(final Object... vals) {
       Class_any_from_any_async output = new Class_any_from_any_async();
       return output;
     }
@@ -17177,13 +17190,13 @@ public final class Core {
     }
 
     @Override
-    public Func_any_from_any_context vx_new(Object... vals) {
+    public Core.Func_any_from_any_context vx_new(final Object... vals) {
       Class_any_from_any_context output = new Class_any_from_any_context();
       return output;
     }
 
     @Override
-    public Func_any_from_any_context vx_copy(Object... vals) {
+    public Core.Func_any_from_any_context vx_copy(final Object... vals) {
       Class_any_from_any_context output = new Class_any_from_any_context();
       return output;
     }
@@ -17281,13 +17294,13 @@ public final class Core {
     }
 
     @Override
-    public Func_any_from_any_context_async vx_new(Object... vals) {
+    public Core.Func_any_from_any_context_async vx_new(final Object... vals) {
       Class_any_from_any_context_async output = new Class_any_from_any_context_async();
       return output;
     }
 
     @Override
-    public Func_any_from_any_context_async vx_copy(Object... vals) {
+    public Core.Func_any_from_any_context_async vx_copy(final Object... vals) {
       Class_any_from_any_context_async output = new Class_any_from_any_context_async();
       return output;
     }
@@ -17386,13 +17399,13 @@ public final class Core {
     }
 
     @Override
-    public Func_any_from_any_key_value vx_new(Object... vals) {
+    public Core.Func_any_from_any_key_value vx_new(final Object... vals) {
       Class_any_from_any_key_value output = new Class_any_from_any_key_value();
       return output;
     }
 
     @Override
-    public Func_any_from_any_key_value vx_copy(Object... vals) {
+    public Core.Func_any_from_any_key_value vx_copy(final Object... vals) {
       Class_any_from_any_key_value output = new Class_any_from_any_key_value();
       return output;
     }
@@ -17486,13 +17499,13 @@ public final class Core {
     }
 
     @Override
-    public Func_any_from_func vx_new(Object... vals) {
+    public Core.Func_any_from_func vx_new(final Object... vals) {
       Class_any_from_func output = new Class_any_from_func();
       return output;
     }
 
     @Override
-    public Func_any_from_func vx_copy(Object... vals) {
+    public Core.Func_any_from_func vx_copy(final Object... vals) {
       Class_any_from_func output = new Class_any_from_func();
       return output;
     }
@@ -17585,13 +17598,13 @@ public final class Core {
     }
 
     @Override
-    public Func_any_from_func_async vx_new(Object... vals) {
+    public Core.Func_any_from_func_async vx_new(final Object... vals) {
       Class_any_from_func_async output = new Class_any_from_func_async();
       return output;
     }
 
     @Override
-    public Func_any_from_func_async vx_copy(Object... vals) {
+    public Core.Func_any_from_func_async vx_copy(final Object... vals) {
       Class_any_from_func_async output = new Class_any_from_func_async();
       return output;
     }
@@ -17686,13 +17699,13 @@ public final class Core {
     }
 
     @Override
-    public Func_any_from_int vx_new(Object... vals) {
+    public Core.Func_any_from_int vx_new(final Object... vals) {
       Class_any_from_int output = new Class_any_from_int();
       return output;
     }
 
     @Override
-    public Func_any_from_int vx_copy(Object... vals) {
+    public Core.Func_any_from_int vx_copy(final Object... vals) {
       Class_any_from_int output = new Class_any_from_int();
       return output;
     }
@@ -17786,13 +17799,13 @@ public final class Core {
     }
 
     @Override
-    public Func_any_from_int_any vx_new(Object... vals) {
+    public Core.Func_any_from_int_any vx_new(final Object... vals) {
       Class_any_from_int_any output = new Class_any_from_int_any();
       return output;
     }
 
     @Override
-    public Func_any_from_int_any vx_copy(Object... vals) {
+    public Core.Func_any_from_int_any vx_copy(final Object... vals) {
       Class_any_from_int_any output = new Class_any_from_int_any();
       return output;
     }
@@ -17887,13 +17900,13 @@ public final class Core {
     }
 
     @Override
-    public Func_any_from_key_value vx_new(Object... vals) {
+    public Core.Func_any_from_key_value vx_new(final Object... vals) {
       Class_any_from_key_value output = new Class_any_from_key_value();
       return output;
     }
 
     @Override
-    public Func_any_from_key_value vx_copy(Object... vals) {
+    public Core.Func_any_from_key_value vx_copy(final Object... vals) {
       Class_any_from_key_value output = new Class_any_from_key_value();
       return output;
     }
@@ -17990,13 +18003,13 @@ public final class Core {
     }
 
     @Override
-    public Func_any_from_key_value_async vx_new(Object... vals) {
+    public Core.Func_any_from_key_value_async vx_new(final Object... vals) {
       Class_any_from_key_value_async output = new Class_any_from_key_value_async();
       return output;
     }
 
     @Override
-    public Func_any_from_key_value_async vx_copy(Object... vals) {
+    public Core.Func_any_from_key_value_async vx_copy(final Object... vals) {
       Class_any_from_key_value_async output = new Class_any_from_key_value_async();
       return output;
     }
@@ -18084,13 +18097,13 @@ public final class Core {
   public static class Class_any_from_list extends Core.Class_base implements Func_any_from_list {
 
     @Override
-    public Func_any_from_list vx_new(Object... vals) {
+    public Core.Func_any_from_list vx_new(final Object... vals) {
       Class_any_from_list output = new Class_any_from_list();
       return output;
     }
 
     @Override
-    public Func_any_from_list vx_copy(Object... vals) {
+    public Core.Func_any_from_list vx_copy(final Object... vals) {
       Class_any_from_list output = new Class_any_from_list();
       return output;
     }
@@ -18173,13 +18186,13 @@ public final class Core {
   public static class Class_any_from_list_start_reduce extends Core.Class_base implements Func_any_from_list_start_reduce {
 
     @Override
-    public Func_any_from_list_start_reduce vx_new(Object... vals) {
+    public Core.Func_any_from_list_start_reduce vx_new(final Object... vals) {
       Class_any_from_list_start_reduce output = new Class_any_from_list_start_reduce();
       return output;
     }
 
     @Override
-    public Func_any_from_list_start_reduce vx_copy(Object... vals) {
+    public Core.Func_any_from_list_start_reduce vx_copy(final Object... vals) {
       Class_any_from_list_start_reduce output = new Class_any_from_list_start_reduce();
       return output;
     }
@@ -18257,13 +18270,13 @@ public final class Core {
   public static class Class_any_from_list_start_reduce_next extends Core.Class_base implements Func_any_from_list_start_reduce_next {
 
     @Override
-    public Func_any_from_list_start_reduce_next vx_new(Object... vals) {
+    public Core.Func_any_from_list_start_reduce_next vx_new(final Object... vals) {
       Class_any_from_list_start_reduce_next output = new Class_any_from_list_start_reduce_next();
       return output;
     }
 
     @Override
-    public Func_any_from_list_start_reduce_next vx_copy(Object... vals) {
+    public Core.Func_any_from_list_start_reduce_next vx_copy(final Object... vals) {
       Class_any_from_list_start_reduce_next output = new Class_any_from_list_start_reduce_next();
       return output;
     }
@@ -18351,13 +18364,13 @@ public final class Core {
   public static class Class_any_from_map extends Core.Class_base implements Func_any_from_map {
 
     @Override
-    public Func_any_from_map vx_new(Object... vals) {
+    public Core.Func_any_from_map vx_new(final Object... vals) {
       Class_any_from_map output = new Class_any_from_map();
       return output;
     }
 
     @Override
-    public Func_any_from_map vx_copy(Object... vals) {
+    public Core.Func_any_from_map vx_copy(final Object... vals) {
       Class_any_from_map output = new Class_any_from_map();
       return output;
     }
@@ -18434,13 +18447,13 @@ public final class Core {
   public static class Class_any_from_map_start_reduce extends Core.Class_base implements Func_any_from_map_start_reduce {
 
     @Override
-    public Func_any_from_map_start_reduce vx_new(Object... vals) {
+    public Core.Func_any_from_map_start_reduce vx_new(final Object... vals) {
       Class_any_from_map_start_reduce output = new Class_any_from_map_start_reduce();
       return output;
     }
 
     @Override
-    public Func_any_from_map_start_reduce vx_copy(Object... vals) {
+    public Core.Func_any_from_map_start_reduce vx_copy(final Object... vals) {
       Class_any_from_map_start_reduce output = new Class_any_from_map_start_reduce();
       return output;
     }
@@ -18525,13 +18538,13 @@ public final class Core {
     }
 
     @Override
-    public Func_any_from_none vx_new(Object... vals) {
+    public Core.Func_any_from_none vx_new(final Object... vals) {
       Class_any_from_none output = new Class_any_from_none();
       return output;
     }
 
     @Override
-    public Func_any_from_none vx_copy(Object... vals) {
+    public Core.Func_any_from_none vx_copy(final Object... vals) {
       Class_any_from_none output = new Class_any_from_none();
       return output;
     }
@@ -18624,13 +18637,13 @@ public final class Core {
     }
 
     @Override
-    public Func_any_from_none_async vx_new(Object... vals) {
+    public Core.Func_any_from_none_async vx_new(final Object... vals) {
       Class_any_from_none_async output = new Class_any_from_none_async();
       return output;
     }
 
     @Override
-    public Func_any_from_none_async vx_copy(Object... vals) {
+    public Core.Func_any_from_none_async vx_copy(final Object... vals) {
       Class_any_from_none_async output = new Class_any_from_none_async();
       return output;
     }
@@ -18725,13 +18738,13 @@ public final class Core {
     }
 
     @Override
-    public Func_any_from_reduce vx_new(Object... vals) {
+    public Core.Func_any_from_reduce vx_new(final Object... vals) {
       Class_any_from_reduce output = new Class_any_from_reduce();
       return output;
     }
 
     @Override
-    public Func_any_from_reduce vx_copy(Object... vals) {
+    public Core.Func_any_from_reduce vx_copy(final Object... vals) {
       Class_any_from_reduce output = new Class_any_from_reduce();
       return output;
     }
@@ -18827,13 +18840,13 @@ public final class Core {
     }
 
     @Override
-    public Func_any_from_reduce_async vx_new(Object... vals) {
+    public Core.Func_any_from_reduce_async vx_new(final Object... vals) {
       Class_any_from_reduce_async output = new Class_any_from_reduce_async();
       return output;
     }
 
     @Override
-    public Func_any_from_reduce_async vx_copy(Object... vals) {
+    public Core.Func_any_from_reduce_async vx_copy(final Object... vals) {
       Class_any_from_reduce_async output = new Class_any_from_reduce_async();
       return output;
     }
@@ -18931,13 +18944,13 @@ public final class Core {
     }
 
     @Override
-    public Func_any_from_reduce_next vx_new(Object... vals) {
+    public Core.Func_any_from_reduce_next vx_new(final Object... vals) {
       Class_any_from_reduce_next output = new Class_any_from_reduce_next();
       return output;
     }
 
     @Override
-    public Func_any_from_reduce_next vx_copy(Object... vals) {
+    public Core.Func_any_from_reduce_next vx_copy(final Object... vals) {
       Class_any_from_reduce_next output = new Class_any_from_reduce_next();
       return output;
     }
@@ -19035,13 +19048,13 @@ public final class Core {
     }
 
     @Override
-    public Func_any_from_reduce_next_async vx_new(Object... vals) {
+    public Core.Func_any_from_reduce_next_async vx_new(final Object... vals) {
       Class_any_from_reduce_next_async output = new Class_any_from_reduce_next_async();
       return output;
     }
 
     @Override
-    public Func_any_from_reduce_next_async vx_copy(Object... vals) {
+    public Core.Func_any_from_reduce_next_async vx_copy(final Object... vals) {
       Class_any_from_reduce_next_async output = new Class_any_from_reduce_next_async();
       return output;
     }
@@ -19130,13 +19143,13 @@ public final class Core {
   public static class Class_any_from_struct extends Core.Class_base implements Func_any_from_struct {
 
     @Override
-    public Func_any_from_struct vx_new(Object... vals) {
+    public Core.Func_any_from_struct vx_new(final Object... vals) {
       Class_any_from_struct output = new Class_any_from_struct();
       return output;
     }
 
     @Override
-    public Func_any_from_struct vx_copy(Object... vals) {
+    public Core.Func_any_from_struct vx_copy(final Object... vals) {
       Class_any_from_struct output = new Class_any_from_struct();
       return output;
     }
@@ -19214,13 +19227,13 @@ public final class Core {
   public static class Class_async extends Core.Class_base implements Func_async {
 
     @Override
-    public Func_async vx_new(Object... vals) {
+    public Core.Func_async vx_new(final Object... vals) {
       Class_async output = new Class_async();
       return output;
     }
 
     @Override
-    public Func_async vx_copy(Object... vals) {
+    public Core.Func_async vx_copy(final Object... vals) {
       Class_async output = new Class_async();
       return output;
     }
@@ -19305,13 +19318,13 @@ public final class Core {
   public static class Class_boolean_permission_from_func extends Core.Class_base implements Func_boolean_permission_from_func {
 
     @Override
-    public Func_boolean_permission_from_func vx_new(Object... vals) {
+    public Core.Func_boolean_permission_from_func vx_new(final Object... vals) {
       Class_boolean_permission_from_func output = new Class_boolean_permission_from_func();
       return output;
     }
 
     @Override
-    public Func_boolean_permission_from_func vx_copy(Object... vals) {
+    public Core.Func_boolean_permission_from_func vx_copy(final Object... vals) {
       Class_boolean_permission_from_func output = new Class_boolean_permission_from_func();
       return output;
     }
@@ -19404,13 +19417,13 @@ public final class Core {
   public static class Class_boolean_write_from_map_name_value extends Core.Class_base implements Func_boolean_write_from_map_name_value {
 
     @Override
-    public Func_boolean_write_from_map_name_value vx_new(Object... vals) {
+    public Core.Func_boolean_write_from_map_name_value vx_new(final Object... vals) {
       Class_boolean_write_from_map_name_value output = new Class_boolean_write_from_map_name_value();
       return output;
     }
 
     @Override
-    public Func_boolean_write_from_map_name_value vx_copy(Object... vals) {
+    public Core.Func_boolean_write_from_map_name_value vx_copy(final Object... vals) {
       Class_boolean_write_from_map_name_value output = new Class_boolean_write_from_map_name_value();
       return output;
     }
@@ -19495,13 +19508,13 @@ public final class Core {
     }
 
     @Override
-    public Func_boolean_from_any vx_new(Object... vals) {
+    public Core.Func_boolean_from_any vx_new(final Object... vals) {
       Class_boolean_from_any output = new Class_boolean_from_any();
       return output;
     }
 
     @Override
-    public Func_boolean_from_any vx_copy(Object... vals) {
+    public Core.Func_boolean_from_any vx_copy(final Object... vals) {
       Class_boolean_from_any output = new Class_boolean_from_any();
       return output;
     }
@@ -19583,13 +19596,13 @@ public final class Core {
   public static class Class_boolean_from_func extends Core.Class_base implements Func_boolean_from_func {
 
     @Override
-    public Func_boolean_from_func vx_new(Object... vals) {
+    public Core.Func_boolean_from_func vx_new(final Object... vals) {
       Class_boolean_from_func output = new Class_boolean_from_func();
       return output;
     }
 
     @Override
-    public Func_boolean_from_func vx_copy(Object... vals) {
+    public Core.Func_boolean_from_func vx_copy(final Object... vals) {
       Class_boolean_from_func output = new Class_boolean_from_func();
       return output;
     }
@@ -19679,13 +19692,13 @@ public final class Core {
   public static class Class_boolean_from_none extends Core.Class_base implements Func_boolean_from_none {
 
     @Override
-    public Func_boolean_from_none vx_new(Object... vals) {
+    public Core.Func_boolean_from_none vx_new(final Object... vals) {
       Class_boolean_from_none output = new Class_boolean_from_none();
       return output;
     }
 
     @Override
-    public Func_boolean_from_none vx_copy(Object... vals) {
+    public Core.Func_boolean_from_none vx_copy(final Object... vals) {
       Class_boolean_from_none output = new Class_boolean_from_none();
       return output;
     }
@@ -19775,13 +19788,13 @@ public final class Core {
   public static class Class_case extends Core.Class_base implements Func_case {
 
     @Override
-    public Func_case vx_new(Object... vals) {
+    public Core.Func_case vx_new(final Object... vals) {
       Class_case output = new Class_case();
       return output;
     }
 
     @Override
-    public Func_case vx_copy(Object... vals) {
+    public Core.Func_case vx_copy(final Object... vals) {
       Class_case output = new Class_case();
       return output;
     }
@@ -19865,13 +19878,13 @@ public final class Core {
   public static class Class_case_1 extends Core.Class_base implements Func_case_1 {
 
     @Override
-    public Func_case_1 vx_new(Object... vals) {
+    public Core.Func_case_1 vx_new(final Object... vals) {
       Class_case_1 output = new Class_case_1();
       return output;
     }
 
     @Override
-    public Func_case_1 vx_copy(Object... vals) {
+    public Core.Func_case_1 vx_copy(final Object... vals) {
       Class_case_1 output = new Class_case_1();
       return output;
     }
@@ -19956,13 +19969,13 @@ public final class Core {
   public static class Class_compare extends Core.Class_base implements Func_compare {
 
     @Override
-    public Func_compare vx_new(Object... vals) {
+    public Core.Func_compare vx_new(final Object... vals) {
       Class_compare output = new Class_compare();
       return output;
     }
 
     @Override
-    public Func_compare vx_copy(Object... vals) {
+    public Core.Func_compare vx_copy(final Object... vals) {
       Class_compare output = new Class_compare();
       return output;
     }
@@ -20058,13 +20071,13 @@ public final class Core {
   public static class Class_contains extends Core.Class_base implements Func_contains {
 
     @Override
-    public Func_contains vx_new(Object... vals) {
+    public Core.Func_contains vx_new(final Object... vals) {
       Class_contains output = new Class_contains();
       return output;
     }
 
     @Override
-    public Func_contains vx_copy(Object... vals) {
+    public Core.Func_contains vx_copy(final Object... vals) {
       Class_contains output = new Class_contains();
       return output;
     }
@@ -20140,13 +20153,13 @@ public final class Core {
   public static class Class_contains_1 extends Core.Class_base implements Func_contains_1 {
 
     @Override
-    public Func_contains_1 vx_new(Object... vals) {
+    public Core.Func_contains_1 vx_new(final Object... vals) {
       Class_contains_1 output = new Class_contains_1();
       return output;
     }
 
     @Override
-    public Func_contains_1 vx_copy(Object... vals) {
+    public Core.Func_contains_1 vx_copy(final Object... vals) {
       Class_contains_1 output = new Class_contains_1();
       return output;
     }
@@ -20229,13 +20242,13 @@ public final class Core {
   public static class Class_context_main extends Core.Class_base implements Func_context_main {
 
     @Override
-    public Func_context_main vx_new(Object... vals) {
+    public Core.Func_context_main vx_new(final Object... vals) {
       Class_context_main output = new Class_context_main();
       return output;
     }
 
     @Override
-    public Func_context_main vx_copy(Object... vals) {
+    public Core.Func_context_main vx_copy(final Object... vals) {
       Class_context_main output = new Class_context_main();
       return output;
     }
@@ -20323,13 +20336,13 @@ public final class Core {
   public static class Class_copy extends Core.Class_base implements Func_copy {
 
     @Override
-    public Func_copy vx_new(Object... vals) {
+    public Core.Func_copy vx_new(final Object... vals) {
       Class_copy output = new Class_copy();
       return output;
     }
 
     @Override
-    public Func_copy vx_copy(Object... vals) {
+    public Core.Func_copy vx_copy(final Object... vals) {
       Class_copy output = new Class_copy();
       return output;
     }
@@ -20404,13 +20417,13 @@ public final class Core {
   public static class Class_else extends Core.Class_base implements Func_else {
 
     @Override
-    public Func_else vx_new(Object... vals) {
+    public Core.Func_else vx_new(final Object... vals) {
       Class_else output = new Class_else();
       return output;
     }
 
     @Override
-    public Func_else vx_copy(Object... vals) {
+    public Core.Func_else vx_copy(final Object... vals) {
       Class_else output = new Class_else();
       return output;
     }
@@ -20503,13 +20516,13 @@ public final class Core {
   public static class Class_empty extends Core.Class_base implements Func_empty {
 
     @Override
-    public Func_empty vx_new(Object... vals) {
+    public Core.Func_empty vx_new(final Object... vals) {
       Class_empty output = new Class_empty();
       return output;
     }
 
     @Override
-    public Func_empty vx_copy(Object... vals) {
+    public Core.Func_empty vx_copy(final Object... vals) {
       Class_empty output = new Class_empty();
       return output;
     }
@@ -20593,13 +20606,13 @@ public final class Core {
   public static class Class_extends_from_any extends Core.Class_base implements Func_extends_from_any {
 
     @Override
-    public Func_extends_from_any vx_new(Object... vals) {
+    public Core.Func_extends_from_any vx_new(final Object... vals) {
       Class_extends_from_any output = new Class_extends_from_any();
       return output;
     }
 
     @Override
-    public Func_extends_from_any vx_copy(Object... vals) {
+    public Core.Func_extends_from_any vx_copy(final Object... vals) {
       Class_extends_from_any output = new Class_extends_from_any();
       return output;
     }
@@ -20686,13 +20699,13 @@ public final class Core {
   public static class Class_extends_from_typedef extends Core.Class_base implements Func_extends_from_typedef {
 
     @Override
-    public Func_extends_from_typedef vx_new(Object... vals) {
+    public Core.Func_extends_from_typedef vx_new(final Object... vals) {
       Class_extends_from_typedef output = new Class_extends_from_typedef();
       return output;
     }
 
     @Override
-    public Func_extends_from_typedef vx_copy(Object... vals) {
+    public Core.Func_extends_from_typedef vx_copy(final Object... vals) {
       Class_extends_from_typedef output = new Class_extends_from_typedef();
       return output;
     }
@@ -20777,13 +20790,13 @@ public final class Core {
   public static class Class_first_from_list extends Core.Class_base implements Func_first_from_list {
 
     @Override
-    public Func_first_from_list vx_new(Object... vals) {
+    public Core.Func_first_from_list vx_new(final Object... vals) {
       Class_first_from_list output = new Class_first_from_list();
       return output;
     }
 
     @Override
-    public Func_first_from_list vx_copy(Object... vals) {
+    public Core.Func_first_from_list vx_copy(final Object... vals) {
       Class_first_from_list output = new Class_first_from_list();
       return output;
     }
@@ -20870,13 +20883,13 @@ public final class Core {
   public static class Class_first_from_list_any_from_any extends Core.Class_base implements Func_first_from_list_any_from_any {
 
     @Override
-    public Func_first_from_list_any_from_any vx_new(Object... vals) {
+    public Core.Func_first_from_list_any_from_any vx_new(final Object... vals) {
       Class_first_from_list_any_from_any output = new Class_first_from_list_any_from_any();
       return output;
     }
 
     @Override
-    public Func_first_from_list_any_from_any vx_copy(Object... vals) {
+    public Core.Func_first_from_list_any_from_any vx_copy(final Object... vals) {
       Class_first_from_list_any_from_any output = new Class_first_from_list_any_from_any();
       return output;
     }
@@ -20957,13 +20970,13 @@ public final class Core {
   public static class Class_float_from_string extends Core.Class_base implements Func_float_from_string {
 
     @Override
-    public Func_float_from_string vx_new(Object... vals) {
+    public Core.Func_float_from_string vx_new(final Object... vals) {
       Class_float_from_string output = new Class_float_from_string();
       return output;
     }
 
     @Override
-    public Func_float_from_string vx_copy(Object... vals) {
+    public Core.Func_float_from_string vx_copy(final Object... vals) {
       Class_float_from_string output = new Class_float_from_string();
       return output;
     }
@@ -21050,13 +21063,13 @@ public final class Core {
   public static class Class_fn extends Core.Class_base implements Func_fn {
 
     @Override
-    public Func_fn vx_new(Object... vals) {
+    public Core.Func_fn vx_new(final Object... vals) {
       Class_fn output = new Class_fn();
       return output;
     }
 
     @Override
-    public Func_fn vx_copy(Object... vals) {
+    public Core.Func_fn vx_copy(final Object... vals) {
       Class_fn output = new Class_fn();
       return output;
     }
@@ -21129,13 +21142,13 @@ public final class Core {
   public static class Class_funcdef_from_func extends Core.Class_base implements Func_funcdef_from_func {
 
     @Override
-    public Func_funcdef_from_func vx_new(Object... vals) {
+    public Core.Func_funcdef_from_func vx_new(final Object... vals) {
       Class_funcdef_from_func output = new Class_funcdef_from_func();
       return output;
     }
 
     @Override
-    public Func_funcdef_from_func vx_copy(Object... vals) {
+    public Core.Func_funcdef_from_func vx_copy(final Object... vals) {
       Class_funcdef_from_func output = new Class_funcdef_from_func();
       return output;
     }
@@ -21220,13 +21233,13 @@ public final class Core {
   public static class Class_funcname_from_funcdef extends Core.Class_base implements Func_funcname_from_funcdef {
 
     @Override
-    public Func_funcname_from_funcdef vx_new(Object... vals) {
+    public Core.Func_funcname_from_funcdef vx_new(final Object... vals) {
       Class_funcname_from_funcdef output = new Class_funcname_from_funcdef();
       return output;
     }
 
     @Override
-    public Func_funcname_from_funcdef vx_copy(Object... vals) {
+    public Core.Func_funcname_from_funcdef vx_copy(final Object... vals) {
       Class_funcname_from_funcdef output = new Class_funcname_from_funcdef();
       return output;
     }
@@ -21319,13 +21332,13 @@ public final class Core {
   public static class Class_if extends Core.Class_base implements Func_if {
 
     @Override
-    public Func_if vx_new(Object... vals) {
+    public Core.Func_if vx_new(final Object... vals) {
       Class_if output = new Class_if();
       return output;
     }
 
     @Override
-    public Func_if vx_copy(Object... vals) {
+    public Core.Func_if vx_copy(final Object... vals) {
       Class_if output = new Class_if();
       return output;
     }
@@ -21404,13 +21417,13 @@ public final class Core {
   public static class Class_if_1 extends Core.Class_base implements Func_if_1 {
 
     @Override
-    public Func_if_1 vx_new(Object... vals) {
+    public Core.Func_if_1 vx_new(final Object... vals) {
       Class_if_1 output = new Class_if_1();
       return output;
     }
 
     @Override
-    public Func_if_1 vx_copy(Object... vals) {
+    public Core.Func_if_1 vx_copy(final Object... vals) {
       Class_if_1 output = new Class_if_1();
       return output;
     }
@@ -21490,13 +21503,13 @@ public final class Core {
   public static class Class_if_2 extends Core.Class_base implements Func_if_2 {
 
     @Override
-    public Func_if_2 vx_new(Object... vals) {
+    public Core.Func_if_2 vx_new(final Object... vals) {
       Class_if_2 output = new Class_if_2();
       return output;
     }
 
     @Override
-    public Func_if_2 vx_copy(Object... vals) {
+    public Core.Func_if_2 vx_copy(final Object... vals) {
       Class_if_2 output = new Class_if_2();
       return output;
     }
@@ -21604,13 +21617,13 @@ public final class Core {
   public static class Class_int_from_func extends Core.Class_base implements Func_int_from_func {
 
     @Override
-    public Func_int_from_func vx_new(Object... vals) {
+    public Core.Func_int_from_func vx_new(final Object... vals) {
       Class_int_from_func output = new Class_int_from_func();
       return output;
     }
 
     @Override
-    public Func_int_from_func vx_copy(Object... vals) {
+    public Core.Func_int_from_func vx_copy(final Object... vals) {
       Class_int_from_func output = new Class_int_from_func();
       return output;
     }
@@ -21690,13 +21703,13 @@ public final class Core {
   public static class Class_int_from_string extends Core.Class_base implements Func_int_from_string {
 
     @Override
-    public Func_int_from_string vx_new(Object... vals) {
+    public Core.Func_int_from_string vx_new(final Object... vals) {
       Class_int_from_string output = new Class_int_from_string();
       return output;
     }
 
     @Override
-    public Func_int_from_string vx_copy(Object... vals) {
+    public Core.Func_int_from_string vx_copy(final Object... vals) {
       Class_int_from_string output = new Class_int_from_string();
       return output;
     }
@@ -21816,13 +21829,13 @@ public final class Core {
   public static class Class_is_empty extends Core.Class_base implements Func_is_empty {
 
     @Override
-    public Func_is_empty vx_new(Object... vals) {
+    public Core.Func_is_empty vx_new(final Object... vals) {
       Class_is_empty output = new Class_is_empty();
       return output;
     }
 
     @Override
-    public Func_is_empty vx_copy(Object... vals) {
+    public Core.Func_is_empty vx_copy(final Object... vals) {
       Class_is_empty output = new Class_is_empty();
       return output;
     }
@@ -21909,13 +21922,13 @@ public final class Core {
   public static class Class_is_empty_1 extends Core.Class_base implements Func_is_empty_1 {
 
     @Override
-    public Func_is_empty_1 vx_new(Object... vals) {
+    public Core.Func_is_empty_1 vx_new(final Object... vals) {
       Class_is_empty_1 output = new Class_is_empty_1();
       return output;
     }
 
     @Override
-    public Func_is_empty_1 vx_copy(Object... vals) {
+    public Core.Func_is_empty_1 vx_copy(final Object... vals) {
       Class_is_empty_1 output = new Class_is_empty_1();
       return output;
     }
@@ -22005,13 +22018,13 @@ public final class Core {
   public static class Class_is_endswith extends Core.Class_base implements Func_is_endswith {
 
     @Override
-    public Func_is_endswith vx_new(Object... vals) {
+    public Core.Func_is_endswith vx_new(final Object... vals) {
       Class_is_endswith output = new Class_is_endswith();
       return output;
     }
 
     @Override
-    public Func_is_endswith vx_copy(Object... vals) {
+    public Core.Func_is_endswith vx_copy(final Object... vals) {
       Class_is_endswith output = new Class_is_endswith();
       return output;
     }
@@ -22089,13 +22102,13 @@ public final class Core {
   public static class Class_is_float extends Core.Class_base implements Func_is_float {
 
     @Override
-    public Func_is_float vx_new(Object... vals) {
+    public Core.Func_is_float vx_new(final Object... vals) {
       Class_is_float output = new Class_is_float();
       return output;
     }
 
     @Override
-    public Func_is_float vx_copy(Object... vals) {
+    public Core.Func_is_float vx_copy(final Object... vals) {
       Class_is_float output = new Class_is_float();
       return output;
     }
@@ -22181,13 +22194,13 @@ public final class Core {
   public static class Class_is_func extends Core.Class_base implements Func_is_func {
 
     @Override
-    public Func_is_func vx_new(Object... vals) {
+    public Core.Func_is_func vx_new(final Object... vals) {
       Class_is_func output = new Class_is_func();
       return output;
     }
 
     @Override
-    public Func_is_func vx_copy(Object... vals) {
+    public Core.Func_is_func vx_copy(final Object... vals) {
       Class_is_func output = new Class_is_func();
       return output;
     }
@@ -22274,13 +22287,13 @@ public final class Core {
   public static class Class_is_int extends Core.Class_base implements Func_is_int {
 
     @Override
-    public Func_is_int vx_new(Object... vals) {
+    public Core.Func_is_int vx_new(final Object... vals) {
       Class_is_int output = new Class_is_int();
       return output;
     }
 
     @Override
-    public Func_is_int vx_copy(Object... vals) {
+    public Core.Func_is_int vx_copy(final Object... vals) {
       Class_is_int output = new Class_is_int();
       return output;
     }
@@ -22366,13 +22379,13 @@ public final class Core {
   public static class Class_is_number extends Core.Class_base implements Func_is_number {
 
     @Override
-    public Func_is_number vx_new(Object... vals) {
+    public Core.Func_is_number vx_new(final Object... vals) {
       Class_is_number output = new Class_is_number();
       return output;
     }
 
     @Override
-    public Func_is_number vx_copy(Object... vals) {
+    public Core.Func_is_number vx_copy(final Object... vals) {
       Class_is_number output = new Class_is_number();
       return output;
     }
@@ -22481,13 +22494,13 @@ public final class Core {
   public static class Class_is_pass_from_permission extends Core.Class_base implements Func_is_pass_from_permission {
 
     @Override
-    public Func_is_pass_from_permission vx_new(Object... vals) {
+    public Core.Func_is_pass_from_permission vx_new(final Object... vals) {
       Class_is_pass_from_permission output = new Class_is_pass_from_permission();
       return output;
     }
 
     @Override
-    public Func_is_pass_from_permission vx_copy(Object... vals) {
+    public Core.Func_is_pass_from_permission vx_copy(final Object... vals) {
       Class_is_pass_from_permission output = new Class_is_pass_from_permission();
       return output;
     }
@@ -22580,13 +22593,13 @@ public final class Core {
   public static class Class_last_from_list extends Core.Class_base implements Func_last_from_list {
 
     @Override
-    public Func_last_from_list vx_new(Object... vals) {
+    public Core.Func_last_from_list vx_new(final Object... vals) {
       Class_last_from_list output = new Class_last_from_list();
       return output;
     }
 
     @Override
-    public Func_last_from_list vx_copy(Object... vals) {
+    public Core.Func_last_from_list vx_copy(final Object... vals) {
       Class_last_from_list output = new Class_last_from_list();
       return output;
     }
@@ -22678,13 +22691,13 @@ public final class Core {
   public static class Class_length extends Core.Class_base implements Func_length {
 
     @Override
-    public Func_length vx_new(Object... vals) {
+    public Core.Func_length vx_new(final Object... vals) {
       Class_length output = new Class_length();
       return output;
     }
 
     @Override
-    public Func_length vx_copy(Object... vals) {
+    public Core.Func_length vx_copy(final Object... vals) {
       Class_length output = new Class_length();
       return output;
     }
@@ -22770,13 +22783,13 @@ public final class Core {
   public static class Class_length_1 extends Core.Class_base implements Func_length_1 {
 
     @Override
-    public Func_length_1 vx_new(Object... vals) {
+    public Core.Func_length_1 vx_new(final Object... vals) {
       Class_length_1 output = new Class_length_1();
       return output;
     }
 
     @Override
-    public Func_length_1 vx_copy(Object... vals) {
+    public Core.Func_length_1 vx_copy(final Object... vals) {
       Class_length_1 output = new Class_length_1();
       return output;
     }
@@ -22862,13 +22875,13 @@ public final class Core {
   public static class Class_length_2 extends Core.Class_base implements Func_length_2 {
 
     @Override
-    public Func_length_2 vx_new(Object... vals) {
+    public Core.Func_length_2 vx_new(final Object... vals) {
       Class_length_2 output = new Class_length_2();
       return output;
     }
 
     @Override
-    public Func_length_2 vx_copy(Object... vals) {
+    public Core.Func_length_2 vx_copy(final Object... vals) {
       Class_length_2 output = new Class_length_2();
       return output;
     }
@@ -22955,13 +22968,13 @@ public final class Core {
   public static class Class_let extends Core.Class_base implements Func_let {
 
     @Override
-    public Func_let vx_new(Object... vals) {
+    public Core.Func_let vx_new(final Object... vals) {
       Class_let output = new Class_let();
       return output;
     }
 
     @Override
-    public Func_let vx_copy(Object... vals) {
+    public Core.Func_let vx_copy(final Object... vals) {
       Class_let output = new Class_let();
       return output;
     }
@@ -23038,13 +23051,13 @@ public final class Core {
   public static class Class_let_async extends Core.Class_base implements Func_let_async {
 
     @Override
-    public Func_let_async vx_new(Object... vals) {
+    public Core.Func_let_async vx_new(final Object... vals) {
       Class_let_async output = new Class_let_async();
       return output;
     }
 
     @Override
-    public Func_let_async vx_copy(Object... vals) {
+    public Core.Func_let_async vx_copy(final Object... vals) {
       Class_let_async output = new Class_let_async();
       return output;
     }
@@ -23119,13 +23132,13 @@ public final class Core {
   public static class Class_list_join_from_list extends Core.Class_base implements Func_list_join_from_list {
 
     @Override
-    public Func_list_join_from_list vx_new(Object... vals) {
+    public Core.Func_list_join_from_list vx_new(final Object... vals) {
       Class_list_join_from_list output = new Class_list_join_from_list();
       return output;
     }
 
     @Override
-    public Func_list_join_from_list vx_copy(Object... vals) {
+    public Core.Func_list_join_from_list vx_copy(final Object... vals) {
       Class_list_join_from_list output = new Class_list_join_from_list();
       return output;
     }
@@ -23219,13 +23232,13 @@ public final class Core {
   public static class Class_list_join_from_list_1 extends Core.Class_base implements Func_list_join_from_list_1 {
 
     @Override
-    public Func_list_join_from_list_1 vx_new(Object... vals) {
+    public Core.Func_list_join_from_list_1 vx_new(final Object... vals) {
       Class_list_join_from_list_1 output = new Class_list_join_from_list_1();
       return output;
     }
 
     @Override
-    public Func_list_join_from_list_1 vx_copy(Object... vals) {
+    public Core.Func_list_join_from_list_1 vx_copy(final Object... vals) {
       Class_list_join_from_list_1 output = new Class_list_join_from_list_1();
       return output;
     }
@@ -23310,13 +23323,13 @@ public final class Core {
   public static class Class_list_from_list extends Core.Class_base implements Func_list_from_list {
 
     @Override
-    public Func_list_from_list vx_new(Object... vals) {
+    public Core.Func_list_from_list vx_new(final Object... vals) {
       Class_list_from_list output = new Class_list_from_list();
       return output;
     }
 
     @Override
-    public Func_list_from_list vx_copy(Object... vals) {
+    public Core.Func_list_from_list vx_copy(final Object... vals) {
       Class_list_from_list output = new Class_list_from_list();
       return output;
     }
@@ -23410,13 +23423,13 @@ public final class Core {
   public static class Class_list_from_list_1 extends Core.Class_base implements Func_list_from_list_1 {
 
     @Override
-    public Func_list_from_list_1 vx_new(Object... vals) {
+    public Core.Func_list_from_list_1 vx_new(final Object... vals) {
       Class_list_from_list_1 output = new Class_list_from_list_1();
       return output;
     }
 
     @Override
-    public Func_list_from_list_1 vx_copy(Object... vals) {
+    public Core.Func_list_from_list_1 vx_copy(final Object... vals) {
       Class_list_from_list_1 output = new Class_list_from_list_1();
       return output;
     }
@@ -23498,13 +23511,13 @@ public final class Core {
   public static class Class_list_from_list_async extends Core.Class_base implements Func_list_from_list_async {
 
     @Override
-    public Func_list_from_list_async vx_new(Object... vals) {
+    public Core.Func_list_from_list_async vx_new(final Object... vals) {
       Class_list_from_list_async output = new Class_list_from_list_async();
       return output;
     }
 
     @Override
-    public Func_list_from_list_async vx_copy(Object... vals) {
+    public Core.Func_list_from_list_async vx_copy(final Object... vals) {
       Class_list_from_list_async output = new Class_list_from_list_async();
       return output;
     }
@@ -23589,13 +23602,13 @@ public final class Core {
   public static class Class_list_from_list_intany extends Core.Class_base implements Func_list_from_list_intany {
 
     @Override
-    public Func_list_from_list_intany vx_new(Object... vals) {
+    public Core.Func_list_from_list_intany vx_new(final Object... vals) {
       Class_list_from_list_intany output = new Class_list_from_list_intany();
       return output;
     }
 
     @Override
-    public Func_list_from_list_intany vx_copy(Object... vals) {
+    public Core.Func_list_from_list_intany vx_copy(final Object... vals) {
       Class_list_from_list_intany output = new Class_list_from_list_intany();
       return output;
     }
@@ -23670,13 +23683,13 @@ public final class Core {
   public static class Class_list_from_map extends Core.Class_base implements Func_list_from_map {
 
     @Override
-    public Func_list_from_map vx_new(Object... vals) {
+    public Core.Func_list_from_map vx_new(final Object... vals) {
       Class_list_from_map output = new Class_list_from_map();
       return output;
     }
 
     @Override
-    public Func_list_from_map vx_copy(Object... vals) {
+    public Core.Func_list_from_map vx_copy(final Object... vals) {
       Class_list_from_map output = new Class_list_from_map();
       return output;
     }
@@ -23771,13 +23784,13 @@ public final class Core {
   public static class Class_list_from_map_1 extends Core.Class_base implements Func_list_from_map_1 {
 
     @Override
-    public Func_list_from_map_1 vx_new(Object... vals) {
+    public Core.Func_list_from_map_1 vx_new(final Object... vals) {
       Class_list_from_map_1 output = new Class_list_from_map_1();
       return output;
     }
 
     @Override
-    public Func_list_from_map_1 vx_copy(Object... vals) {
+    public Core.Func_list_from_map_1 vx_copy(final Object... vals) {
       Class_list_from_map_1 output = new Class_list_from_map_1();
       return output;
     }
@@ -23859,13 +23872,13 @@ public final class Core {
   public static class Class_list_from_map_async extends Core.Class_base implements Func_list_from_map_async {
 
     @Override
-    public Func_list_from_map_async vx_new(Object... vals) {
+    public Core.Func_list_from_map_async vx_new(final Object... vals) {
       Class_list_from_map_async output = new Class_list_from_map_async();
       return output;
     }
 
     @Override
-    public Func_list_from_map_async vx_copy(Object... vals) {
+    public Core.Func_list_from_map_async vx_copy(final Object... vals) {
       Class_list_from_map_async output = new Class_list_from_map_async();
       return output;
     }
@@ -23940,13 +23953,13 @@ public final class Core {
   public static class Class_list_from_type extends Core.Class_base implements Func_list_from_type {
 
     @Override
-    public Func_list_from_type vx_new(Object... vals) {
+    public Core.Func_list_from_type vx_new(final Object... vals) {
       Class_list_from_type output = new Class_list_from_type();
       return output;
     }
 
     @Override
-    public Func_list_from_type vx_copy(Object... vals) {
+    public Core.Func_list_from_type vx_copy(final Object... vals) {
       Class_list_from_type output = new Class_list_from_type();
       return output;
     }
@@ -24030,13 +24043,13 @@ public final class Core {
   public static class Class_log extends Core.Class_base implements Func_log {
 
     @Override
-    public Func_log vx_new(Object... vals) {
+    public Core.Func_log vx_new(final Object... vals) {
       Class_log output = new Class_log();
       return output;
     }
 
     @Override
-    public Func_log vx_copy(Object... vals) {
+    public Core.Func_log vx_copy(final Object... vals) {
       Class_log output = new Class_log();
       return output;
     }
@@ -24125,13 +24138,13 @@ public final class Core {
   public static class Class_log_1 extends Core.Class_base implements Func_log_1 {
 
     @Override
-    public Func_log_1 vx_new(Object... vals) {
+    public Core.Func_log_1 vx_new(final Object... vals) {
       Class_log_1 output = new Class_log_1();
       return output;
     }
 
     @Override
-    public Func_log_1 vx_copy(Object... vals) {
+    public Core.Func_log_1 vx_copy(final Object... vals) {
       Class_log_1 output = new Class_log_1();
       return output;
     }
@@ -24208,13 +24221,13 @@ public final class Core {
   public static class Class_main extends Core.Class_base implements Func_main {
 
     @Override
-    public Func_main vx_new(Object... vals) {
+    public Core.Func_main vx_new(final Object... vals) {
       Class_main output = new Class_main();
       return output;
     }
 
     @Override
-    public Func_main vx_copy(Object... vals) {
+    public Core.Func_main vx_copy(final Object... vals) {
       Class_main output = new Class_main();
       return output;
     }
@@ -24303,13 +24316,13 @@ public final class Core {
   public static class Class_map_from_list extends Core.Class_base implements Func_map_from_list {
 
     @Override
-    public Func_map_from_list vx_new(Object... vals) {
+    public Core.Func_map_from_list vx_new(final Object... vals) {
       Class_map_from_list output = new Class_map_from_list();
       return output;
     }
 
     @Override
-    public Func_map_from_list vx_copy(Object... vals) {
+    public Core.Func_map_from_list vx_copy(final Object... vals) {
       Class_map_from_list output = new Class_map_from_list();
       return output;
     }
@@ -24388,13 +24401,13 @@ public final class Core {
   public static class Class_map_from_map extends Core.Class_base implements Func_map_from_map {
 
     @Override
-    public Func_map_from_map vx_new(Object... vals) {
+    public Core.Func_map_from_map vx_new(final Object... vals) {
       Class_map_from_map output = new Class_map_from_map();
       return output;
     }
 
     @Override
-    public Func_map_from_map vx_copy(Object... vals) {
+    public Core.Func_map_from_map vx_copy(final Object... vals) {
       Class_map_from_map output = new Class_map_from_map();
       return output;
     }
@@ -24489,13 +24502,13 @@ public final class Core {
   public static class Class_map_from_map_1 extends Core.Class_base implements Func_map_from_map_1 {
 
     @Override
-    public Func_map_from_map_1 vx_new(Object... vals) {
+    public Core.Func_map_from_map_1 vx_new(final Object... vals) {
       Class_map_from_map_1 output = new Class_map_from_map_1();
       return output;
     }
 
     @Override
-    public Func_map_from_map_1 vx_copy(Object... vals) {
+    public Core.Func_map_from_map_1 vx_copy(final Object... vals) {
       Class_map_from_map_1 output = new Class_map_from_map_1();
       return output;
     }
@@ -24570,13 +24583,13 @@ public final class Core {
   public static class Class_msg_from_error extends Core.Class_base implements Func_msg_from_error {
 
     @Override
-    public Func_msg_from_error vx_new(Object... vals) {
+    public Core.Func_msg_from_error vx_new(final Object... vals) {
       Class_msg_from_error output = new Class_msg_from_error();
       return output;
     }
 
     @Override
-    public Func_msg_from_error vx_copy(Object... vals) {
+    public Core.Func_msg_from_error vx_copy(final Object... vals) {
       Class_msg_from_error output = new Class_msg_from_error();
       return output;
     }
@@ -24670,13 +24683,13 @@ public final class Core {
   public static class Class_msg_from_error_1 extends Core.Class_base implements Func_msg_from_error_1 {
 
     @Override
-    public Func_msg_from_error_1 vx_new(Object... vals) {
+    public Core.Func_msg_from_error_1 vx_new(final Object... vals) {
       Class_msg_from_error_1 output = new Class_msg_from_error_1();
       return output;
     }
 
     @Override
-    public Func_msg_from_error_1 vx_copy(Object... vals) {
+    public Core.Func_msg_from_error_1 vx_copy(final Object... vals) {
       Class_msg_from_error_1 output = new Class_msg_from_error_1();
       return output;
     }
@@ -24762,13 +24775,13 @@ public final class Core {
   public static class Class_msg_from_error_2 extends Core.Class_base implements Func_msg_from_error_2 {
 
     @Override
-    public Func_msg_from_error_2 vx_new(Object... vals) {
+    public Core.Func_msg_from_error_2 vx_new(final Object... vals) {
       Class_msg_from_error_2 output = new Class_msg_from_error_2();
       return output;
     }
 
     @Override
-    public Func_msg_from_error_2 vx_copy(Object... vals) {
+    public Core.Func_msg_from_error_2 vx_copy(final Object... vals) {
       Class_msg_from_error_2 output = new Class_msg_from_error_2();
       return output;
     }
@@ -24855,13 +24868,13 @@ public final class Core {
   public static class Class_msg_from_warning extends Core.Class_base implements Func_msg_from_warning {
 
     @Override
-    public Func_msg_from_warning vx_new(Object... vals) {
+    public Core.Func_msg_from_warning vx_new(final Object... vals) {
       Class_msg_from_warning output = new Class_msg_from_warning();
       return output;
     }
 
     @Override
-    public Func_msg_from_warning vx_copy(Object... vals) {
+    public Core.Func_msg_from_warning vx_copy(final Object... vals) {
       Class_msg_from_warning output = new Class_msg_from_warning();
       return output;
     }
@@ -24955,13 +24968,13 @@ public final class Core {
   public static class Class_msgblock_from_msgblock_msg extends Core.Class_base implements Func_msgblock_from_msgblock_msg {
 
     @Override
-    public Func_msgblock_from_msgblock_msg vx_new(Object... vals) {
+    public Core.Func_msgblock_from_msgblock_msg vx_new(final Object... vals) {
       Class_msgblock_from_msgblock_msg output = new Class_msgblock_from_msgblock_msg();
       return output;
     }
 
     @Override
-    public Func_msgblock_from_msgblock_msg vx_copy(Object... vals) {
+    public Core.Func_msgblock_from_msgblock_msg vx_copy(final Object... vals) {
       Class_msgblock_from_msgblock_msg output = new Class_msgblock_from_msgblock_msg();
       return output;
     }
@@ -25037,13 +25050,13 @@ public final class Core {
   public static class Class_msgblock_from_msgblock_msgblock extends Core.Class_base implements Func_msgblock_from_msgblock_msgblock {
 
     @Override
-    public Func_msgblock_from_msgblock_msgblock vx_new(Object... vals) {
+    public Core.Func_msgblock_from_msgblock_msgblock vx_new(final Object... vals) {
       Class_msgblock_from_msgblock_msgblock output = new Class_msgblock_from_msgblock_msgblock();
       return output;
     }
 
     @Override
-    public Func_msgblock_from_msgblock_msgblock vx_copy(Object... vals) {
+    public Core.Func_msgblock_from_msgblock_msgblock vx_copy(final Object... vals) {
       Class_msgblock_from_msgblock_msgblock output = new Class_msgblock_from_msgblock_msgblock();
       return output;
     }
@@ -25123,13 +25136,13 @@ public final class Core {
   public static class Class_name_from_typedef extends Core.Class_base implements Func_name_from_typedef {
 
     @Override
-    public Func_name_from_typedef vx_new(Object... vals) {
+    public Core.Func_name_from_typedef vx_new(final Object... vals) {
       Class_name_from_typedef output = new Class_name_from_typedef();
       return output;
     }
 
     @Override
-    public Func_name_from_typedef vx_copy(Object... vals) {
+    public Core.Func_name_from_typedef vx_copy(final Object... vals) {
       Class_name_from_typedef output = new Class_name_from_typedef();
       return output;
     }
@@ -25214,13 +25227,13 @@ public final class Core {
   public static class Class_native extends Core.Class_base implements Func_native {
 
     @Override
-    public Func_native vx_new(Object... vals) {
+    public Core.Func_native vx_new(final Object... vals) {
       Class_native output = new Class_native();
       return output;
     }
 
     @Override
-    public Func_native vx_copy(Object... vals) {
+    public Core.Func_native vx_copy(final Object... vals) {
       Class_native output = new Class_native();
       return output;
     }
@@ -25305,13 +25318,13 @@ public final class Core {
   public static class Class_native_from_any extends Core.Class_base implements Func_native_from_any {
 
     @Override
-    public Func_native_from_any vx_new(Object... vals) {
+    public Core.Func_native_from_any vx_new(final Object... vals) {
       Class_native_from_any output = new Class_native_from_any();
       return output;
     }
 
     @Override
-    public Func_native_from_any vx_copy(Object... vals) {
+    public Core.Func_native_from_any vx_copy(final Object... vals) {
       Class_native_from_any output = new Class_native_from_any();
       return output;
     }
@@ -25396,13 +25409,13 @@ public final class Core {
   public static class Class_new extends Core.Class_base implements Func_new {
 
     @Override
-    public Func_new vx_new(Object... vals) {
+    public Core.Func_new vx_new(final Object... vals) {
       Class_new output = new Class_new();
       return output;
     }
 
     @Override
-    public Func_new vx_copy(Object... vals) {
+    public Core.Func_new vx_copy(final Object... vals) {
       Class_new output = new Class_new();
       return output;
     }
@@ -25477,13 +25490,13 @@ public final class Core {
   public static class Class_number_from_func extends Core.Class_base implements Func_number_from_func {
 
     @Override
-    public Func_number_from_func vx_new(Object... vals) {
+    public Core.Func_number_from_func vx_new(final Object... vals) {
       Class_number_from_func output = new Class_number_from_func();
       return output;
     }
 
     @Override
-    public Func_number_from_func vx_copy(Object... vals) {
+    public Core.Func_number_from_func vx_copy(final Object... vals) {
       Class_number_from_func output = new Class_number_from_func();
       return output;
     }
@@ -25555,13 +25568,13 @@ public final class Core {
   public static class Class_or extends Core.Class_base implements Func_or {
 
     @Override
-    public Func_or vx_new(Object... vals) {
+    public Core.Func_or vx_new(final Object... vals) {
       Class_or output = new Class_or();
       return output;
     }
 
     @Override
-    public Func_or vx_copy(Object... vals) {
+    public Core.Func_or vx_copy(final Object... vals) {
       Class_or output = new Class_or();
       return output;
     }
@@ -25639,13 +25652,13 @@ public final class Core {
   public static class Class_or_1 extends Core.Class_base implements Func_or_1 {
 
     @Override
-    public Func_or_1 vx_new(Object... vals) {
+    public Core.Func_or_1 vx_new(final Object... vals) {
       Class_or_1 output = new Class_or_1();
       return output;
     }
 
     @Override
-    public Func_or_1 vx_copy(Object... vals) {
+    public Core.Func_or_1 vx_copy(final Object... vals) {
       Class_or_1 output = new Class_or_1();
       return output;
     }
@@ -25744,13 +25757,13 @@ public final class Core {
   public static class Class_package_global_from_name extends Core.Class_base implements Func_package_global_from_name {
 
     @Override
-    public Func_package_global_from_name vx_new(Object... vals) {
+    public Core.Func_package_global_from_name vx_new(final Object... vals) {
       Class_package_global_from_name output = new Class_package_global_from_name();
       return output;
     }
 
     @Override
-    public Func_package_global_from_name vx_copy(Object... vals) {
+    public Core.Func_package_global_from_name vx_copy(final Object... vals) {
       Class_package_global_from_name output = new Class_package_global_from_name();
       return output;
     }
@@ -25839,13 +25852,13 @@ public final class Core {
   public static class Class_packagename_from_typedef extends Core.Class_base implements Func_packagename_from_typedef {
 
     @Override
-    public Func_packagename_from_typedef vx_new(Object... vals) {
+    public Core.Func_packagename_from_typedef vx_new(final Object... vals) {
       Class_packagename_from_typedef output = new Class_packagename_from_typedef();
       return output;
     }
 
     @Override
-    public Func_packagename_from_typedef vx_copy(Object... vals) {
+    public Core.Func_packagename_from_typedef vx_copy(final Object... vals) {
       Class_packagename_from_typedef output = new Class_packagename_from_typedef();
       return output;
     }
@@ -25930,13 +25943,13 @@ public final class Core {
   public static class Class_path_from_context_path extends Core.Class_base implements Func_path_from_context_path {
 
     @Override
-    public Func_path_from_context_path vx_new(Object... vals) {
+    public Core.Func_path_from_context_path vx_new(final Object... vals) {
       Class_path_from_context_path output = new Class_path_from_context_path();
       return output;
     }
 
     @Override
-    public Func_path_from_context_path vx_copy(Object... vals) {
+    public Core.Func_path_from_context_path vx_copy(final Object... vals) {
       Class_path_from_context_path output = new Class_path_from_context_path();
       return output;
     }
@@ -26026,13 +26039,13 @@ public final class Core {
   public static class Class_path_from_setting_path extends Core.Class_base implements Func_path_from_setting_path {
 
     @Override
-    public Func_path_from_setting_path vx_new(Object... vals) {
+    public Core.Func_path_from_setting_path vx_new(final Object... vals) {
       Class_path_from_setting_path output = new Class_path_from_setting_path();
       return output;
     }
 
     @Override
-    public Func_path_from_setting_path vx_copy(Object... vals) {
+    public Core.Func_path_from_setting_path vx_copy(final Object... vals) {
       Class_path_from_setting_path output = new Class_path_from_setting_path();
       return output;
     }
@@ -26105,13 +26118,13 @@ public final class Core {
   public static class Class_permission_from_id_context extends Core.Class_base implements Func_permission_from_id_context {
 
     @Override
-    public Func_permission_from_id_context vx_new(Object... vals) {
+    public Core.Func_permission_from_id_context vx_new(final Object... vals) {
       Class_permission_from_id_context output = new Class_permission_from_id_context();
       return output;
     }
 
     @Override
-    public Func_permission_from_id_context vx_copy(Object... vals) {
+    public Core.Func_permission_from_id_context vx_copy(final Object... vals) {
       Class_permission_from_id_context output = new Class_permission_from_id_context();
       return output;
     }
@@ -26205,13 +26218,13 @@ public final class Core {
   public static class Class_properties_from_typedef extends Core.Class_base implements Func_properties_from_typedef {
 
     @Override
-    public Func_properties_from_typedef vx_new(Object... vals) {
+    public Core.Func_properties_from_typedef vx_new(final Object... vals) {
       Class_properties_from_typedef output = new Class_properties_from_typedef();
       return output;
     }
 
     @Override
-    public Func_properties_from_typedef vx_copy(Object... vals) {
+    public Core.Func_properties_from_typedef vx_copy(final Object... vals) {
       Class_properties_from_typedef output = new Class_properties_from_typedef();
       return output;
     }
@@ -26296,13 +26309,13 @@ public final class Core {
   public static class Class_proplast_from_typedef extends Core.Class_base implements Func_proplast_from_typedef {
 
     @Override
-    public Func_proplast_from_typedef vx_new(Object... vals) {
+    public Core.Func_proplast_from_typedef vx_new(final Object... vals) {
       Class_proplast_from_typedef output = new Class_proplast_from_typedef();
       return output;
     }
 
     @Override
-    public Func_proplast_from_typedef vx_copy(Object... vals) {
+    public Core.Func_proplast_from_typedef vx_copy(final Object... vals) {
       Class_proplast_from_typedef output = new Class_proplast_from_typedef();
       return output;
     }
@@ -26386,13 +26399,13 @@ public final class Core {
   public static class Class_resolve extends Core.Class_base implements Func_resolve {
 
     @Override
-    public Func_resolve vx_new(Object... vals) {
+    public Core.Func_resolve vx_new(final Object... vals) {
       Class_resolve output = new Class_resolve();
       return output;
     }
 
     @Override
-    public Func_resolve vx_copy(Object... vals) {
+    public Core.Func_resolve vx_copy(final Object... vals) {
       Class_resolve output = new Class_resolve();
       return output;
     }
@@ -26477,13 +26490,13 @@ public final class Core {
   public static class Class_resolve_1 extends Core.Class_base implements Func_resolve_1 {
 
     @Override
-    public Func_resolve_1 vx_new(Object... vals) {
+    public Core.Func_resolve_1 vx_new(final Object... vals) {
       Class_resolve_1 output = new Class_resolve_1();
       return output;
     }
 
     @Override
-    public Func_resolve_1 vx_copy(Object... vals) {
+    public Core.Func_resolve_1 vx_copy(final Object... vals) {
       Class_resolve_1 output = new Class_resolve_1();
       return output;
     }
@@ -26572,13 +26585,13 @@ public final class Core {
   public static class Class_resolve_async extends Core.Class_base implements Func_resolve_async {
 
     @Override
-    public Func_resolve_async vx_new(Object... vals) {
+    public Core.Func_resolve_async vx_new(final Object... vals) {
       Class_resolve_async output = new Class_resolve_async();
       return output;
     }
 
     @Override
-    public Func_resolve_async vx_copy(Object... vals) {
+    public Core.Func_resolve_async vx_copy(final Object... vals) {
       Class_resolve_async output = new Class_resolve_async();
       return output;
     }
@@ -26665,13 +26678,13 @@ public final class Core {
   public static class Class_resolve_first extends Core.Class_base implements Func_resolve_first {
 
     @Override
-    public Func_resolve_first vx_new(Object... vals) {
+    public Core.Func_resolve_first vx_new(final Object... vals) {
       Class_resolve_first output = new Class_resolve_first();
       return output;
     }
 
     @Override
-    public Func_resolve_first vx_copy(Object... vals) {
+    public Core.Func_resolve_first vx_copy(final Object... vals) {
       Class_resolve_first output = new Class_resolve_first();
       return output;
     }
@@ -26760,13 +26773,13 @@ public final class Core {
   public static class Class_resolve_list extends Core.Class_base implements Func_resolve_list {
 
     @Override
-    public Func_resolve_list vx_new(Object... vals) {
+    public Core.Func_resolve_list vx_new(final Object... vals) {
       Class_resolve_list output = new Class_resolve_list();
       return output;
     }
 
     @Override
-    public Func_resolve_list vx_copy(Object... vals) {
+    public Core.Func_resolve_list vx_copy(final Object... vals) {
       Class_resolve_list output = new Class_resolve_list();
       return output;
     }
@@ -26855,13 +26868,13 @@ public final class Core {
   public static class Class_security_from_context extends Core.Class_base implements Func_security_from_context {
 
     @Override
-    public Func_security_from_context vx_new(Object... vals) {
+    public Core.Func_security_from_context vx_new(final Object... vals) {
       Class_security_from_context output = new Class_security_from_context();
       return output;
     }
 
     @Override
-    public Func_security_from_context vx_copy(Object... vals) {
+    public Core.Func_security_from_context vx_copy(final Object... vals) {
       Class_security_from_context output = new Class_security_from_context();
       return output;
     }
@@ -26936,13 +26949,13 @@ public final class Core {
   public static class Class_security_from_user extends Core.Class_base implements Func_security_from_user {
 
     @Override
-    public Func_security_from_user vx_new(Object... vals) {
+    public Core.Func_security_from_user vx_new(final Object... vals) {
       Class_security_from_user output = new Class_security_from_user();
       return output;
     }
 
     @Override
-    public Func_security_from_user vx_copy(Object... vals) {
+    public Core.Func_security_from_user vx_copy(final Object... vals) {
       Class_security_from_user output = new Class_security_from_user();
       return output;
     }
@@ -27026,13 +27039,13 @@ public final class Core {
   public static class Class_session_from_context extends Core.Class_base implements Func_session_from_context {
 
     @Override
-    public Func_session_from_context vx_new(Object... vals) {
+    public Core.Func_session_from_context vx_new(final Object... vals) {
       Class_session_from_context output = new Class_session_from_context();
       return output;
     }
 
     @Override
-    public Func_session_from_context vx_copy(Object... vals) {
+    public Core.Func_session_from_context vx_copy(final Object... vals) {
       Class_session_from_context output = new Class_session_from_context();
       return output;
     }
@@ -27104,13 +27117,13 @@ public final class Core {
   public static class Class_setting_from_context extends Core.Class_base implements Func_setting_from_context {
 
     @Override
-    public Func_setting_from_context vx_new(Object... vals) {
+    public Core.Func_setting_from_context vx_new(final Object... vals) {
       Class_setting_from_context output = new Class_setting_from_context();
       return output;
     }
 
     @Override
-    public Func_setting_from_context vx_copy(Object... vals) {
+    public Core.Func_setting_from_context vx_copy(final Object... vals) {
       Class_setting_from_context output = new Class_setting_from_context();
       return output;
     }
@@ -27183,13 +27196,13 @@ public final class Core {
   public static class Class_string_repeat extends Core.Class_base implements Func_string_repeat {
 
     @Override
-    public Func_string_repeat vx_new(Object... vals) {
+    public Core.Func_string_repeat vx_new(final Object... vals) {
       Class_string_repeat output = new Class_string_repeat();
       return output;
     }
 
     @Override
-    public Func_string_repeat vx_copy(Object... vals) {
+    public Core.Func_string_repeat vx_copy(final Object... vals) {
       Class_string_repeat output = new Class_string_repeat();
       return output;
     }
@@ -27266,13 +27279,13 @@ public final class Core {
   public static class Class_string_from_any extends Core.Class_base implements Func_string_from_any {
 
     @Override
-    public Func_string_from_any vx_new(Object... vals) {
+    public Core.Func_string_from_any vx_new(final Object... vals) {
       Class_string_from_any output = new Class_string_from_any();
       return output;
     }
 
     @Override
-    public Func_string_from_any vx_copy(Object... vals) {
+    public Core.Func_string_from_any vx_copy(final Object... vals) {
       Class_string_from_any output = new Class_string_from_any();
       return output;
     }
@@ -27363,13 +27376,13 @@ public final class Core {
   public static class Class_string_from_any_indent extends Core.Class_base implements Func_string_from_any_indent {
 
     @Override
-    public Func_string_from_any_indent vx_new(Object... vals) {
+    public Core.Func_string_from_any_indent vx_new(final Object... vals) {
       Class_string_from_any_indent output = new Class_string_from_any_indent();
       return output;
     }
 
     @Override
-    public Func_string_from_any_indent vx_copy(Object... vals) {
+    public Core.Func_string_from_any_indent vx_copy(final Object... vals) {
       Class_string_from_any_indent output = new Class_string_from_any_indent();
       return output;
     }
@@ -27444,13 +27457,13 @@ public final class Core {
   public static class Class_string_from_func extends Core.Class_base implements Func_string_from_func {
 
     @Override
-    public Func_string_from_func vx_new(Object... vals) {
+    public Core.Func_string_from_func vx_new(final Object... vals) {
       Class_string_from_func output = new Class_string_from_func();
       return output;
     }
 
     @Override
-    public Func_string_from_func vx_copy(Object... vals) {
+    public Core.Func_string_from_func vx_copy(final Object... vals) {
       Class_string_from_func output = new Class_string_from_func();
       return output;
     }
@@ -27532,13 +27545,13 @@ public final class Core {
   public static class Class_string_from_string_find_replace extends Core.Class_base implements Func_string_from_string_find_replace {
 
     @Override
-    public Func_string_from_string_find_replace vx_new(Object... vals) {
+    public Core.Func_string_from_string_find_replace vx_new(final Object... vals) {
       Class_string_from_string_find_replace output = new Class_string_from_string_find_replace();
       return output;
     }
 
     @Override
-    public Func_string_from_string_find_replace vx_copy(Object... vals) {
+    public Core.Func_string_from_string_find_replace vx_copy(final Object... vals) {
       Class_string_from_string_find_replace output = new Class_string_from_string_find_replace();
       return output;
     }
@@ -27613,13 +27626,13 @@ public final class Core {
   public static class Class_stringlist_from_map extends Core.Class_base implements Func_stringlist_from_map {
 
     @Override
-    public Func_stringlist_from_map vx_new(Object... vals) {
+    public Core.Func_stringlist_from_map vx_new(final Object... vals) {
       Class_stringlist_from_map output = new Class_stringlist_from_map();
       return output;
     }
 
     @Override
-    public Func_stringlist_from_map vx_copy(Object... vals) {
+    public Core.Func_stringlist_from_map vx_copy(final Object... vals) {
       Class_stringlist_from_map output = new Class_stringlist_from_map();
       return output;
     }
@@ -27713,13 +27726,13 @@ public final class Core {
   public static class Class_switch extends Core.Class_base implements Func_switch {
 
     @Override
-    public Func_switch vx_new(Object... vals) {
+    public Core.Func_switch vx_new(final Object... vals) {
       Class_switch output = new Class_switch();
       return output;
     }
 
     @Override
-    public Func_switch vx_copy(Object... vals) {
+    public Core.Func_switch vx_copy(final Object... vals) {
       Class_switch output = new Class_switch();
       return output;
     }
@@ -27824,13 +27837,13 @@ public final class Core {
   public static class Class_then extends Core.Class_base implements Func_then {
 
     @Override
-    public Func_then vx_new(Object... vals) {
+    public Core.Func_then vx_new(final Object... vals) {
       Class_then output = new Class_then();
       return output;
     }
 
     @Override
-    public Func_then vx_copy(Object... vals) {
+    public Core.Func_then vx_copy(final Object... vals) {
       Class_then output = new Class_then();
       return output;
     }
@@ -27914,13 +27927,13 @@ public final class Core {
   public static class Class_traits_from_typedef extends Core.Class_base implements Func_traits_from_typedef {
 
     @Override
-    public Func_traits_from_typedef vx_new(Object... vals) {
+    public Core.Func_traits_from_typedef vx_new(final Object... vals) {
       Class_traits_from_typedef output = new Class_traits_from_typedef();
       return output;
     }
 
     @Override
-    public Func_traits_from_typedef vx_copy(Object... vals) {
+    public Core.Func_traits_from_typedef vx_copy(final Object... vals) {
       Class_traits_from_typedef output = new Class_traits_from_typedef();
       return output;
     }
@@ -28005,13 +28018,13 @@ public final class Core {
   public static class Class_type_from_any extends Core.Class_base implements Func_type_from_any {
 
     @Override
-    public Func_type_from_any vx_new(Object... vals) {
+    public Core.Func_type_from_any vx_new(final Object... vals) {
       Class_type_from_any output = new Class_type_from_any();
       return output;
     }
 
     @Override
-    public Func_type_from_any vx_copy(Object... vals) {
+    public Core.Func_type_from_any vx_copy(final Object... vals) {
       Class_type_from_any output = new Class_type_from_any();
       return output;
     }
@@ -28096,13 +28109,13 @@ public final class Core {
   public static class Class_typedef_from_any extends Core.Class_base implements Func_typedef_from_any {
 
     @Override
-    public Func_typedef_from_any vx_new(Object... vals) {
+    public Core.Func_typedef_from_any vx_new(final Object... vals) {
       Class_typedef_from_any output = new Class_typedef_from_any();
       return output;
     }
 
     @Override
-    public Func_typedef_from_any vx_copy(Object... vals) {
+    public Core.Func_typedef_from_any vx_copy(final Object... vals) {
       Class_typedef_from_any output = new Class_typedef_from_any();
       return output;
     }
@@ -28189,13 +28202,13 @@ public final class Core {
   public static class Class_typedef_from_type extends Core.Class_base implements Func_typedef_from_type {
 
     @Override
-    public Func_typedef_from_type vx_new(Object... vals) {
+    public Core.Func_typedef_from_type vx_new(final Object... vals) {
       Class_typedef_from_type output = new Class_typedef_from_type();
       return output;
     }
 
     @Override
-    public Func_typedef_from_type vx_copy(Object... vals) {
+    public Core.Func_typedef_from_type vx_copy(final Object... vals) {
       Class_typedef_from_type output = new Class_typedef_from_type();
       return output;
     }
@@ -28280,13 +28293,13 @@ public final class Core {
   public static class Class_typename_from_any extends Core.Class_base implements Func_typename_from_any {
 
     @Override
-    public Func_typename_from_any vx_new(Object... vals) {
+    public Core.Func_typename_from_any vx_new(final Object... vals) {
       Class_typename_from_any output = new Class_typename_from_any();
       return output;
     }
 
     @Override
-    public Func_typename_from_any vx_copy(Object... vals) {
+    public Core.Func_typename_from_any vx_copy(final Object... vals) {
       Class_typename_from_any output = new Class_typename_from_any();
       return output;
     }
@@ -28373,13 +28386,13 @@ public final class Core {
   public static class Class_typename_from_type extends Core.Class_base implements Func_typename_from_type {
 
     @Override
-    public Func_typename_from_type vx_new(Object... vals) {
+    public Core.Func_typename_from_type vx_new(final Object... vals) {
       Class_typename_from_type output = new Class_typename_from_type();
       return output;
     }
 
     @Override
-    public Func_typename_from_type vx_copy(Object... vals) {
+    public Core.Func_typename_from_type vx_copy(final Object... vals) {
       Class_typename_from_type output = new Class_typename_from_type();
       return output;
     }
@@ -28466,13 +28479,13 @@ public final class Core {
   public static class Class_typename_from_typedef extends Core.Class_base implements Func_typename_from_typedef {
 
     @Override
-    public Func_typename_from_typedef vx_new(Object... vals) {
+    public Core.Func_typename_from_typedef vx_new(final Object... vals) {
       Class_typename_from_typedef output = new Class_typename_from_typedef();
       return output;
     }
 
     @Override
-    public Func_typename_from_typedef vx_copy(Object... vals) {
+    public Core.Func_typename_from_typedef vx_copy(final Object... vals) {
       Class_typename_from_typedef output = new Class_typename_from_typedef();
       return output;
     }
@@ -28564,13 +28577,13 @@ public final class Core {
   public static class Class_typenames_from_typelist extends Core.Class_base implements Func_typenames_from_typelist {
 
     @Override
-    public Func_typenames_from_typelist vx_new(Object... vals) {
+    public Core.Func_typenames_from_typelist vx_new(final Object... vals) {
       Class_typenames_from_typelist output = new Class_typenames_from_typelist();
       return output;
     }
 
     @Override
-    public Func_typenames_from_typelist vx_copy(Object... vals) {
+    public Core.Func_typenames_from_typelist vx_copy(final Object... vals) {
       Class_typenames_from_typelist output = new Class_typenames_from_typelist();
       return output;
     }
@@ -28662,13 +28675,13 @@ public final class Core {
   public static class Class_user_from_context extends Core.Class_base implements Func_user_from_context {
 
     @Override
-    public Func_user_from_context vx_new(Object... vals) {
+    public Core.Func_user_from_context vx_new(final Object... vals) {
       Class_user_from_context output = new Class_user_from_context();
       return output;
     }
 
     @Override
-    public Func_user_from_context vx_copy(Object... vals) {
+    public Core.Func_user_from_context vx_copy(final Object... vals) {
       Class_user_from_context output = new Class_user_from_context();
       return output;
     }

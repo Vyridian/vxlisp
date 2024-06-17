@@ -60,12 +60,12 @@ public final class Sample {
     }
 
     @Override
-    public Type_mytype vx_new(final Object... vals) {
+    public Sample.Type_mytype vx_new(final Object... vals) {
       return e_mytype.vx_copy(vals);
     }
 
     @Override
-    public Type_mytype vx_copy(final Object... vals) {
+    public Sample.Type_mytype vx_copy(final Object... vals) {
       Type_mytype output = this;
       boolean ischanged = false;
       Class_mytype val = this;
@@ -266,13 +266,13 @@ public final class Sample {
   public static class Class_main extends Core.Class_base implements Func_main {
 
     @Override
-    public Func_main vx_new(Object... vals) {
+    public Sample.Func_main vx_new(final Object... vals) {
       Class_main output = new Class_main();
       return output;
     }
 
     @Override
-    public Func_main vx_copy(Object... vals) {
+    public Sample.Func_main vx_copy(final Object... vals) {
       Class_main output = new Class_main();
       return output;
     }
@@ -341,13 +341,13 @@ public final class Sample {
   public static class Class_myfunc extends Core.Class_base implements Func_myfunc {
 
     @Override
-    public Func_myfunc vx_new(Object... vals) {
+    public Sample.Func_myfunc vx_new(final Object... vals) {
       Class_myfunc output = new Class_myfunc();
       return output;
     }
 
     @Override
-    public Func_myfunc vx_copy(Object... vals) {
+    public Sample.Func_myfunc vx_copy(final Object... vals) {
       Class_myfunc output = new Class_myfunc();
       return output;
     }

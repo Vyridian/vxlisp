@@ -21,13 +21,13 @@ public final class En {
   public static class Class_context_en extends Core.Class_base implements Func_context_en {
 
     @Override
-    public Func_context_en vx_new(Object... vals) {
+    public En.Func_context_en vx_new(final Object... vals) {
       Class_context_en output = new Class_context_en();
       return output;
     }
 
     @Override
-    public Func_context_en vx_copy(Object... vals) {
+    public En.Func_context_en vx_copy(final Object... vals) {
       Class_context_en output = new Class_context_en();
       return output;
     }
@@ -124,13 +124,13 @@ public final class En {
   public static class Class_context_test extends Core.Class_base implements Func_context_test {
 
     @Override
-    public Func_context_test vx_new(Object... vals) {
+    public En.Func_context_test vx_new(final Object... vals) {
       Class_context_test output = new Class_context_test();
       return output;
     }
 
     @Override
-    public Func_context_test vx_copy(Object... vals) {
+    public En.Func_context_test vx_copy(final Object... vals) {
       Class_context_test output = new Class_context_test();
       return output;
     }
@@ -234,13 +234,13 @@ public final class En {
   public static class Class_securitydata_test extends Core.Class_base implements Func_securitydata_test {
 
     @Override
-    public Func_securitydata_test vx_new(Object... vals) {
+    public En.Func_securitydata_test vx_new(final Object... vals) {
       Class_securitydata_test output = new Class_securitydata_test();
       return output;
     }
 
     @Override
-    public Func_securitydata_test vx_copy(Object... vals) {
+    public En.Func_securitydata_test vx_copy(final Object... vals) {
       Class_securitydata_test output = new Class_securitydata_test();
       return output;
     }
@@ -325,13 +325,13 @@ public final class En {
   public static class Class_translation_en extends Core.Class_base implements Func_translation_en {
 
     @Override
-    public Func_translation_en vx_new(Object... vals) {
+    public En.Func_translation_en vx_new(final Object... vals) {
       Class_translation_en output = new Class_translation_en();
       return output;
     }
 
     @Override
-    public Func_translation_en vx_copy(Object... vals) {
+    public En.Func_translation_en vx_copy(final Object... vals) {
       Class_translation_en output = new Class_translation_en();
       return output;
     }
@@ -410,13 +410,13 @@ public final class En {
   public static class Class_words extends Core.Class_base implements Func_words {
 
     @Override
-    public Func_words vx_new(Object... vals) {
+    public En.Func_words vx_new(final Object... vals) {
       Class_words output = new Class_words();
       return output;
     }
 
     @Override
-    public Func_words vx_copy(Object... vals) {
+    public En.Func_words vx_copy(final Object... vals) {
       Class_words output = new Class_words();
       return output;
     }

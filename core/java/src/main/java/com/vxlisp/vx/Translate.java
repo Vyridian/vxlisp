@@ -21,13 +21,13 @@ public final class Translate {
   public static class Class_session_from_session_name extends Core.Class_base implements Func_session_from_session_name {
 
     @Override
-    public Func_session_from_session_name vx_new(Object... vals) {
+    public Translate.Func_session_from_session_name vx_new(final Object... vals) {
       Class_session_from_session_name output = new Class_session_from_session_name();
       return output;
     }
 
     @Override
-    public Func_session_from_session_name vx_copy(Object... vals) {
+    public Translate.Func_session_from_session_name vx_copy(final Object... vals) {
       Class_session_from_session_name output = new Class_session_from_session_name();
       return output;
     }
@@ -108,13 +108,13 @@ public final class Translate {
   public static class Class_session_from_session_translation extends Core.Class_base implements Func_session_from_session_translation {
 
     @Override
-    public Func_session_from_session_translation vx_new(Object... vals) {
+    public Translate.Func_session_from_session_translation vx_new(final Object... vals) {
       Class_session_from_session_translation output = new Class_session_from_session_translation();
       return output;
     }
 
     @Override
-    public Func_session_from_session_translation vx_copy(Object... vals) {
+    public Translate.Func_session_from_session_translation vx_copy(final Object... vals) {
       Class_session_from_session_translation output = new Class_session_from_session_translation();
       return output;
     }
@@ -196,13 +196,13 @@ public final class Translate {
   public static class Class_session_from_session_translationmap_name extends Core.Class_base implements Func_session_from_session_translationmap_name {
 
     @Override
-    public Func_session_from_session_translationmap_name vx_new(Object... vals) {
+    public Translate.Func_session_from_session_translationmap_name vx_new(final Object... vals) {
       Class_session_from_session_translationmap_name output = new Class_session_from_session_translationmap_name();
       return output;
     }
 
     @Override
-    public Func_session_from_session_translationmap_name vx_copy(Object... vals) {
+    public Translate.Func_session_from_session_translationmap_name vx_copy(final Object... vals) {
       Class_session_from_session_translationmap_name output = new Class_session_from_session_translationmap_name();
       return output;
     }
@@ -285,13 +285,13 @@ public final class Translate {
   public static class Class_translate extends Core.Class_base implements Func_translate {
 
     @Override
-    public Func_translate vx_new(Object... vals) {
+    public Translate.Func_translate vx_new(final Object... vals) {
       Class_translate output = new Class_translate();
       return output;
     }
 
     @Override
-    public Func_translate vx_copy(Object... vals) {
+    public Translate.Func_translate vx_copy(final Object... vals) {
       Class_translate output = new Class_translate();
       return output;
     }
@@ -380,13 +380,13 @@ public final class Translate {
   public static class Class_translate_1 extends Core.Class_base implements Func_translate_1 {
 
     @Override
-    public Func_translate_1 vx_new(Object... vals) {
+    public Translate.Func_translate_1 vx_new(final Object... vals) {
       Class_translate_1 output = new Class_translate_1();
       return output;
     }
 
     @Override
-    public Func_translate_1 vx_copy(Object... vals) {
+    public Translate.Func_translate_1 vx_copy(final Object... vals) {
       Class_translate_1 output = new Class_translate_1();
       return output;
     }
@@ -489,13 +489,13 @@ public final class Translate {
   public static class Class_translate_from_translation_string extends Core.Class_base implements Func_translate_from_translation_string {
 
     @Override
-    public Func_translate_from_translation_string vx_new(Object... vals) {
+    public Translate.Func_translate_from_translation_string vx_new(final Object... vals) {
       Class_translate_from_translation_string output = new Class_translate_from_translation_string();
       return output;
     }
 
     @Override
-    public Func_translate_from_translation_string vx_copy(Object... vals) {
+    public Translate.Func_translate_from_translation_string vx_copy(final Object... vals) {
       Class_translate_from_translation_string output = new Class_translate_from_translation_string();
       return output;
     }
@@ -588,13 +588,13 @@ public final class Translate {
   public static class Class_translate_from_translationmap_name_string extends Core.Class_base implements Func_translate_from_translationmap_name_string {
 
     @Override
-    public Func_translate_from_translationmap_name_string vx_new(Object... vals) {
+    public Translate.Func_translate_from_translationmap_name_string vx_new(final Object... vals) {
       Class_translate_from_translationmap_name_string output = new Class_translate_from_translationmap_name_string();
       return output;
     }
 
     @Override
-    public Func_translate_from_translationmap_name_string vx_copy(Object... vals) {
+    public Translate.Func_translate_from_translationmap_name_string vx_copy(final Object... vals) {
       Class_translate_from_translationmap_name_string output = new Class_translate_from_translationmap_name_string();
       return output;
     }
@@ -675,13 +675,13 @@ public final class Translate {
   public static class Class_translation_load_session extends Core.Class_base implements Func_translation_load_session {
 
     @Override
-    public Func_translation_load_session vx_new(Object... vals) {
+    public Translate.Func_translation_load_session vx_new(final Object... vals) {
       Class_translation_load_session output = new Class_translation_load_session();
       return output;
     }
 
     @Override
-    public Func_translation_load_session vx_copy(Object... vals) {
+    public Translate.Func_translation_load_session vx_copy(final Object... vals) {
       Class_translation_load_session output = new Class_translation_load_session();
       return output;
     }
@@ -765,13 +765,13 @@ public final class Translate {
   public static class Class_translation_from_context extends Core.Class_base implements Func_translation_from_context {
 
     @Override
-    public Func_translation_from_context vx_new(Object... vals) {
+    public Translate.Func_translation_from_context vx_new(final Object... vals) {
       Class_translation_from_context output = new Class_translation_from_context();
       return output;
     }
 
     @Override
-    public Func_translation_from_context vx_copy(Object... vals) {
+    public Translate.Func_translation_from_context vx_copy(final Object... vals) {
       Class_translation_from_context output = new Class_translation_from_context();
       return output;
     }
@@ -845,13 +845,13 @@ public final class Translate {
   public static class Class_translation_from_session_name extends Core.Class_base implements Func_translation_from_session_name {
 
     @Override
-    public Func_translation_from_session_name vx_new(Object... vals) {
+    public Translate.Func_translation_from_session_name vx_new(final Object... vals) {
       Class_translation_from_session_name output = new Class_translation_from_session_name();
       return output;
     }
 
     @Override
-    public Func_translation_from_session_name vx_copy(Object... vals) {
+    public Translate.Func_translation_from_session_name vx_copy(final Object... vals) {
       Class_translation_from_session_name output = new Class_translation_from_session_name();
       return output;
     }
@@ -931,13 +931,13 @@ public final class Translate {
   public static class Class_translationmap_from_translations extends Core.Class_base implements Func_translationmap_from_translations {
 
     @Override
-    public Func_translationmap_from_translations vx_new(Object... vals) {
+    public Translate.Func_translationmap_from_translations vx_new(final Object... vals) {
       Class_translationmap_from_translations output = new Class_translationmap_from_translations();
       return output;
     }
 
     @Override
-    public Func_translationmap_from_translations vx_copy(Object... vals) {
+    public Translate.Func_translationmap_from_translations vx_copy(final Object... vals) {
       Class_translationmap_from_translations output = new Class_translationmap_from_translations();
       return output;
     }

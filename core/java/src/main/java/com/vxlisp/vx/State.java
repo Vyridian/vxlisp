@@ -82,12 +82,12 @@ public final class State {
     }
 
     @Override
-    public Type_valuemap vx_new(final Object... vals) {
+    public State.Type_valuemap vx_new(final Object... vals) {
       return e_valuemap.vx_copy(vals);
     }
 
     @Override
-    public Type_valuemap vx_copy(final Object... vals) {
+    public State.Type_valuemap vx_copy(final Object... vals) {
       Type_valuemap output = this;
       boolean ischanged = false;
       Class_valuemap val = this;
@@ -201,13 +201,13 @@ public final class State {
   public static class Class_any_readstate_from_mapname_name extends Core.Class_base implements Func_any_readstate_from_mapname_name {
 
     @Override
-    public Func_any_readstate_from_mapname_name vx_new(Object... vals) {
+    public State.Func_any_readstate_from_mapname_name vx_new(final Object... vals) {
       Class_any_readstate_from_mapname_name output = new Class_any_readstate_from_mapname_name();
       return output;
     }
 
     @Override
-    public Func_any_readstate_from_mapname_name vx_copy(Object... vals) {
+    public State.Func_any_readstate_from_mapname_name vx_copy(final Object... vals) {
       Class_any_readstate_from_mapname_name output = new Class_any_readstate_from_mapname_name();
       return output;
     }
@@ -289,13 +289,13 @@ public final class State {
   public static class Class_any_readstate_from_name extends Core.Class_base implements Func_any_readstate_from_name {
 
     @Override
-    public Func_any_readstate_from_name vx_new(Object... vals) {
+    public State.Func_any_readstate_from_name vx_new(final Object... vals) {
       Class_any_readstate_from_name output = new Class_any_readstate_from_name();
       return output;
     }
 
     @Override
-    public Func_any_readstate_from_name vx_copy(Object... vals) {
+    public State.Func_any_readstate_from_name vx_copy(final Object... vals) {
       Class_any_readstate_from_name output = new Class_any_readstate_from_name();
       return output;
     }
@@ -385,13 +385,13 @@ public final class State {
   public static class Class_boolean_removestate_from_name extends Core.Class_base implements Func_boolean_removestate_from_name {
 
     @Override
-    public Func_boolean_removestate_from_name vx_new(Object... vals) {
+    public State.Func_boolean_removestate_from_name vx_new(final Object... vals) {
       Class_boolean_removestate_from_name output = new Class_boolean_removestate_from_name();
       return output;
     }
 
     @Override
-    public Func_boolean_removestate_from_name vx_copy(Object... vals) {
+    public State.Func_boolean_removestate_from_name vx_copy(final Object... vals) {
       Class_boolean_removestate_from_name output = new Class_boolean_removestate_from_name();
       return output;
     }
@@ -491,13 +491,13 @@ public final class State {
   public static class Class_boolean_writestate_from_mapname_name_value extends Core.Class_base implements Func_boolean_writestate_from_mapname_name_value {
 
     @Override
-    public Func_boolean_writestate_from_mapname_name_value vx_new(Object... vals) {
+    public State.Func_boolean_writestate_from_mapname_name_value vx_new(final Object... vals) {
       Class_boolean_writestate_from_mapname_name_value output = new Class_boolean_writestate_from_mapname_name_value();
       return output;
     }
 
     @Override
-    public Func_boolean_writestate_from_mapname_name_value vx_copy(Object... vals) {
+    public State.Func_boolean_writestate_from_mapname_name_value vx_copy(final Object... vals) {
       Class_boolean_writestate_from_mapname_name_value output = new Class_boolean_writestate_from_mapname_name_value();
       return output;
     }
@@ -618,13 +618,13 @@ public final class State {
   public static class Class_boolean_writestate_from_name_value extends Core.Class_base implements Func_boolean_writestate_from_name_value {
 
     @Override
-    public Func_boolean_writestate_from_name_value vx_new(Object... vals) {
+    public State.Func_boolean_writestate_from_name_value vx_new(final Object... vals) {
       Class_boolean_writestate_from_name_value output = new Class_boolean_writestate_from_name_value();
       return output;
     }
 
     @Override
-    public Func_boolean_writestate_from_name_value vx_copy(Object... vals) {
+    public State.Func_boolean_writestate_from_name_value vx_copy(final Object... vals) {
       Class_boolean_writestate_from_name_value output = new Class_boolean_writestate_from_name_value();
       return output;
     }
@@ -714,13 +714,13 @@ public final class State {
   public static class Class_boolean_writestate_from_statelistener extends Core.Class_base implements Func_boolean_writestate_from_statelistener {
 
     @Override
-    public Func_boolean_writestate_from_statelistener vx_new(Object... vals) {
+    public State.Func_boolean_writestate_from_statelistener vx_new(final Object... vals) {
       Class_boolean_writestate_from_statelistener output = new Class_boolean_writestate_from_statelistener();
       return output;
     }
 
     @Override
-    public Func_boolean_writestate_from_statelistener vx_copy(Object... vals) {
+    public State.Func_boolean_writestate_from_statelistener vx_copy(final Object... vals) {
       Class_boolean_writestate_from_statelistener output = new Class_boolean_writestate_from_statelistener();
       return output;
     }
@@ -813,13 +813,13 @@ public final class State {
   public static class Class_change extends Core.Class_base implements Func_change {
 
     @Override
-    public Func_change vx_new(Object... vals) {
+    public State.Func_change vx_new(final Object... vals) {
       Class_change output = new Class_change();
       return output;
     }
 
     @Override
-    public Func_change vx_copy(Object... vals) {
+    public State.Func_change vx_copy(final Object... vals) {
       Class_change output = new Class_change();
       return output;
     }
@@ -902,13 +902,13 @@ public final class State {
   public static class Class_register extends Core.Class_base implements Func_register {
 
     @Override
-    public Func_register vx_new(Object... vals) {
+    public State.Func_register vx_new(final Object... vals) {
       Class_register output = new Class_register();
       return output;
     }
 
     @Override
-    public Func_register vx_copy(Object... vals) {
+    public State.Func_register vx_copy(final Object... vals) {
       Class_register output = new Class_register();
       return output;
     }
@@ -991,13 +991,13 @@ public final class State {
   public static class Class_state_from_context extends Core.Class_base implements Func_state_from_context {
 
     @Override
-    public Func_state_from_context vx_new(Object... vals) {
+    public State.Func_state_from_context vx_new(final Object... vals) {
       Class_state_from_context output = new Class_state_from_context();
       return output;
     }
 
     @Override
-    public Func_state_from_context vx_copy(Object... vals) {
+    public State.Func_state_from_context vx_copy(final Object... vals) {
       Class_state_from_context output = new Class_state_from_context();
       return output;
     }
@@ -1070,13 +1070,13 @@ public final class State {
   public static class Class_statelistener_readstate_from_name extends Core.Class_base implements Func_statelistener_readstate_from_name {
 
     @Override
-    public Func_statelistener_readstate_from_name vx_new(Object... vals) {
+    public State.Func_statelistener_readstate_from_name vx_new(final Object... vals) {
       Class_statelistener_readstate_from_name output = new Class_statelistener_readstate_from_name();
       return output;
     }
 
     @Override
-    public Func_statelistener_readstate_from_name vx_copy(Object... vals) {
+    public State.Func_statelistener_readstate_from_name vx_copy(final Object... vals) {
       Class_statelistener_readstate_from_name output = new Class_statelistener_readstate_from_name();
       return output;
     }
@@ -1167,13 +1167,13 @@ public final class State {
   public static class Class_statelistenermap_readstate extends Core.Class_base implements Func_statelistenermap_readstate {
 
     @Override
-    public Func_statelistenermap_readstate vx_new(Object... vals) {
+    public State.Func_statelistenermap_readstate vx_new(final Object... vals) {
       Class_statelistenermap_readstate output = new Class_statelistenermap_readstate();
       return output;
     }
 
     @Override
-    public Func_statelistenermap_readstate vx_copy(Object... vals) {
+    public State.Func_statelistenermap_readstate vx_copy(final Object... vals) {
       Class_statelistenermap_readstate output = new Class_statelistenermap_readstate();
       return output;
     }
@@ -1252,13 +1252,13 @@ public final class State {
   public static class Class_value_readstate_from_name extends Core.Class_base implements Func_value_readstate_from_name {
 
     @Override
-    public Func_value_readstate_from_name vx_new(Object... vals) {
+    public State.Func_value_readstate_from_name vx_new(final Object... vals) {
       Class_value_readstate_from_name output = new Class_value_readstate_from_name();
       return output;
     }
 
     @Override
-    public Func_value_readstate_from_name vx_copy(Object... vals) {
+    public State.Func_value_readstate_from_name vx_copy(final Object... vals) {
       Class_value_readstate_from_name output = new Class_value_readstate_from_name();
       return output;
     }
@@ -1350,13 +1350,13 @@ public final class State {
   public static class Class_valuemap_readstate_from_mapname extends Core.Class_base implements Func_valuemap_readstate_from_mapname {
 
     @Override
-    public Func_valuemap_readstate_from_mapname vx_new(Object... vals) {
+    public State.Func_valuemap_readstate_from_mapname vx_new(final Object... vals) {
       Class_valuemap_readstate_from_mapname output = new Class_valuemap_readstate_from_mapname();
       return output;
     }
 
     @Override
-    public Func_valuemap_readstate_from_mapname vx_copy(Object... vals) {
+    public State.Func_valuemap_readstate_from_mapname vx_copy(final Object... vals) {
       Class_valuemap_readstate_from_mapname output = new Class_valuemap_readstate_from_mapname();
       return output;
     }

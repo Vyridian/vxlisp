@@ -63,12 +63,12 @@ public final class Table {
     }
 
     @Override
-    public Type_cell vx_new(final Object... vals) {
+    public Table.Type_cell vx_new(final Object... vals) {
       return e_cell.vx_copy(vals);
     }
 
     @Override
-    public Type_cell vx_copy(final Object... vals) {
+    public Table.Type_cell vx_copy(final Object... vals) {
       Type_cell output = this;
       boolean ischanged = false;
       Class_cell val = this;
@@ -254,12 +254,12 @@ public final class Table {
     }
 
     @Override
-    public Type_celllist vx_new(final Object... vals) {
+    public Table.Type_celllist vx_new(final Object... vals) {
       return e_celllist.vx_copy(vals);
     }
 
     @Override
-    public Type_celllist vx_copy(final Object... vals) {
+    public Table.Type_celllist vx_copy(final Object... vals) {
       Type_celllist output = this;
       boolean ischanged = false;
       Class_celllist val = this;
@@ -275,12 +275,13 @@ public final class Table {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Table.Type_cell) {
+          Table.Type_cell anysub = (Table.Type_cell)valsub;
           ischanged = true;
-          listval.add((Table.Type_cell)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Table.Type_cell) {
           ischanged = true;
           listval.add((Table.Type_cell)valsub);
-        } else if (valsub instanceof Type_celllist) {
+        } else if (valsub instanceof Table.Type_celllist) {
           Type_celllist multi = (Type_celllist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listcell());
@@ -425,12 +426,12 @@ public final class Table {
     }
 
     @Override
-    public Type_cellmap vx_new(final Object... vals) {
+    public Table.Type_cellmap vx_new(final Object... vals) {
       return e_cellmap.vx_copy(vals);
     }
 
     @Override
-    public Type_cellmap vx_copy(final Object... vals) {
+    public Table.Type_cellmap vx_copy(final Object... vals) {
       Type_cellmap output = this;
       boolean ischanged = false;
       Class_cellmap val = this;
@@ -595,12 +596,12 @@ public final class Table {
     }
 
     @Override
-    public Type_field vx_new(final Object... vals) {
+    public Table.Type_field vx_new(final Object... vals) {
       return e_field.vx_copy(vals);
     }
 
     @Override
-    public Type_field vx_copy(final Object... vals) {
+    public Table.Type_field vx_copy(final Object... vals) {
       Type_field output = this;
       boolean ischanged = false;
       Class_field val = this;
@@ -812,12 +813,12 @@ public final class Table {
     }
 
     @Override
-    public Type_fieldlist vx_new(final Object... vals) {
+    public Table.Type_fieldlist vx_new(final Object... vals) {
       return e_fieldlist.vx_copy(vals);
     }
 
     @Override
-    public Type_fieldlist vx_copy(final Object... vals) {
+    public Table.Type_fieldlist vx_copy(final Object... vals) {
       Type_fieldlist output = this;
       boolean ischanged = false;
       Class_fieldlist val = this;
@@ -833,12 +834,13 @@ public final class Table {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Table.Type_field) {
+          Table.Type_field anysub = (Table.Type_field)valsub;
           ischanged = true;
-          listval.add((Table.Type_field)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Table.Type_field) {
           ischanged = true;
           listval.add((Table.Type_field)valsub);
-        } else if (valsub instanceof Type_fieldlist) {
+        } else if (valsub instanceof Table.Type_fieldlist) {
           Type_fieldlist multi = (Type_fieldlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listfield());
@@ -939,12 +941,12 @@ public final class Table {
     }
 
     @Override
-    public Type_fieldmap vx_new(final Object... vals) {
+    public Table.Type_fieldmap vx_new(final Object... vals) {
       return e_fieldmap.vx_copy(vals);
     }
 
     @Override
-    public Type_fieldmap vx_copy(final Object... vals) {
+    public Table.Type_fieldmap vx_copy(final Object... vals) {
       Type_fieldmap output = this;
       boolean ischanged = false;
       Class_fieldmap val = this;
@@ -960,12 +962,13 @@ public final class Table {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Table.Type_field) {
+          Table.Type_field anysub = (Table.Type_field)valsub;
           ischanged = true;
-          listval.add((Table.Type_field)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Table.Type_field) {
           ischanged = true;
           listval.add((Table.Type_field)valsub);
-        } else if (valsub instanceof Type_fieldmap) {
+        } else if (valsub instanceof Table.Type_fieldmap) {
           Type_fieldmap multi = (Type_fieldmap)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listfield());
@@ -1090,12 +1093,12 @@ public final class Table {
     }
 
     @Override
-    public Type_filter vx_new(final Object... vals) {
+    public Table.Type_filter vx_new(final Object... vals) {
       return e_filter.vx_copy(vals);
     }
 
     @Override
-    public Type_filter vx_copy(final Object... vals) {
+    public Table.Type_filter vx_copy(final Object... vals) {
       Type_filter output = this;
       boolean ischanged = false;
       Class_filter val = this;
@@ -1331,12 +1334,12 @@ public final class Table {
     }
 
     @Override
-    public Type_row vx_new(final Object... vals) {
+    public Table.Type_row vx_new(final Object... vals) {
       return e_row.vx_copy(vals);
     }
 
     @Override
-    public Type_row vx_copy(final Object... vals) {
+    public Table.Type_row vx_copy(final Object... vals) {
       Type_row output = this;
       boolean ischanged = false;
       Class_row val = this;
@@ -1545,12 +1548,12 @@ public final class Table {
     }
 
     @Override
-    public Type_rowlist vx_new(final Object... vals) {
+    public Table.Type_rowlist vx_new(final Object... vals) {
       return e_rowlist.vx_copy(vals);
     }
 
     @Override
-    public Type_rowlist vx_copy(final Object... vals) {
+    public Table.Type_rowlist vx_copy(final Object... vals) {
       Type_rowlist output = this;
       boolean ischanged = false;
       Class_rowlist val = this;
@@ -1566,12 +1569,13 @@ public final class Table {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Table.Type_row) {
+          Table.Type_row anysub = (Table.Type_row)valsub;
           ischanged = true;
-          listval.add((Table.Type_row)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Table.Type_row) {
           ischanged = true;
           listval.add((Table.Type_row)valsub);
-        } else if (valsub instanceof Type_rowlist) {
+        } else if (valsub instanceof Table.Type_rowlist) {
           Type_rowlist multi = (Type_rowlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listrow());
@@ -1716,12 +1720,12 @@ public final class Table {
     }
 
     @Override
-    public Type_rowmap vx_new(final Object... vals) {
+    public Table.Type_rowmap vx_new(final Object... vals) {
       return e_rowmap.vx_copy(vals);
     }
 
     @Override
-    public Type_rowmap vx_copy(final Object... vals) {
+    public Table.Type_rowmap vx_copy(final Object... vals) {
       Type_rowmap output = this;
       boolean ischanged = false;
       Class_rowmap val = this;
@@ -1886,12 +1890,12 @@ public final class Table {
     }
 
     @Override
-    public Type_sort vx_new(final Object... vals) {
+    public Table.Type_sort vx_new(final Object... vals) {
       return e_sort.vx_copy(vals);
     }
 
     @Override
-    public Type_sort vx_copy(final Object... vals) {
+    public Table.Type_sort vx_copy(final Object... vals) {
       Type_sort output = this;
       boolean ischanged = false;
       Class_sort val = this;
@@ -2175,12 +2179,12 @@ public final class Table {
     }
 
     @Override
-    public Type_table vx_new(final Object... vals) {
+    public Table.Type_table vx_new(final Object... vals) {
       return e_table.vx_copy(vals);
     }
 
     @Override
-    public Type_table vx_copy(final Object... vals) {
+    public Table.Type_table vx_copy(final Object... vals) {
       Type_table output = this;
       boolean ischanged = false;
       Class_table val = this;

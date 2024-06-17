@@ -89,12 +89,12 @@ public final class Test {
     }
 
     @Override
-    public Type_testcase vx_new(final Object... vals) {
+    public Test.Type_testcase vx_new(final Object... vals) {
       return e_testcase.vx_copy(vals);
     }
 
     @Override
-    public Type_testcase vx_copy(final Object... vals) {
+    public Test.Type_testcase vx_copy(final Object... vals) {
       Type_testcase output = this;
       boolean ischanged = false;
       Class_testcase val = this;
@@ -333,12 +333,12 @@ public final class Test {
     }
 
     @Override
-    public Type_testcaselist vx_new(final Object... vals) {
+    public Test.Type_testcaselist vx_new(final Object... vals) {
       return e_testcaselist.vx_copy(vals);
     }
 
     @Override
-    public Type_testcaselist vx_copy(final Object... vals) {
+    public Test.Type_testcaselist vx_copy(final Object... vals) {
       Type_testcaselist output = this;
       boolean ischanged = false;
       Class_testcaselist val = this;
@@ -354,12 +354,13 @@ public final class Test {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Test.Type_testcase) {
+          Test.Type_testcase anysub = (Test.Type_testcase)valsub;
           ischanged = true;
-          listval.add((Test.Type_testcase)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Test.Type_testcase) {
           ischanged = true;
           listval.add((Test.Type_testcase)valsub);
-        } else if (valsub instanceof Type_testcaselist) {
+        } else if (valsub instanceof Test.Type_testcaselist) {
           Type_testcaselist multi = (Type_testcaselist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listtestcase());
@@ -497,12 +498,12 @@ public final class Test {
     }
 
     @Override
-    public Type_testcoveragedetail vx_new(final Object... vals) {
+    public Test.Type_testcoveragedetail vx_new(final Object... vals) {
       return e_testcoveragedetail.vx_copy(vals);
     }
 
     @Override
-    public Type_testcoveragedetail vx_copy(final Object... vals) {
+    public Test.Type_testcoveragedetail vx_copy(final Object... vals) {
       Type_testcoveragedetail output = this;
       boolean ischanged = false;
       Class_testcoveragedetail val = this;
@@ -771,12 +772,12 @@ public final class Test {
     }
 
     @Override
-    public Type_testcoveragenums vx_new(final Object... vals) {
+    public Test.Type_testcoveragenums vx_new(final Object... vals) {
       return e_testcoveragenums.vx_copy(vals);
     }
 
     @Override
-    public Type_testcoveragenums vx_copy(final Object... vals) {
+    public Test.Type_testcoveragenums vx_copy(final Object... vals) {
       Type_testcoveragenums output = this;
       boolean ischanged = false;
       Class_testcoveragenums val = this;
@@ -1102,12 +1103,12 @@ public final class Test {
     }
 
     @Override
-    public Type_testcoveragesummary vx_new(final Object... vals) {
+    public Test.Type_testcoveragesummary vx_new(final Object... vals) {
       return e_testcoveragesummary.vx_copy(vals);
     }
 
     @Override
-    public Type_testcoveragesummary vx_copy(final Object... vals) {
+    public Test.Type_testcoveragesummary vx_copy(final Object... vals) {
       Type_testcoveragesummary output = this;
       boolean ischanged = false;
       Class_testcoveragesummary val = this;
@@ -1456,12 +1457,12 @@ public final class Test {
     }
 
     @Override
-    public Type_testdescribe vx_new(final Object... vals) {
+    public Test.Type_testdescribe vx_new(final Object... vals) {
       return e_testdescribe.vx_copy(vals);
     }
 
     @Override
-    public Type_testdescribe vx_copy(final Object... vals) {
+    public Test.Type_testdescribe vx_copy(final Object... vals) {
       Type_testdescribe output = this;
       boolean ischanged = false;
       Class_testdescribe val = this;
@@ -1674,12 +1675,12 @@ public final class Test {
     }
 
     @Override
-    public Type_testdescribelist vx_new(final Object... vals) {
+    public Test.Type_testdescribelist vx_new(final Object... vals) {
       return e_testdescribelist.vx_copy(vals);
     }
 
     @Override
-    public Type_testdescribelist vx_copy(final Object... vals) {
+    public Test.Type_testdescribelist vx_copy(final Object... vals) {
       Type_testdescribelist output = this;
       boolean ischanged = false;
       Class_testdescribelist val = this;
@@ -1695,12 +1696,13 @@ public final class Test {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Test.Type_testdescribe) {
+          Test.Type_testdescribe anysub = (Test.Type_testdescribe)valsub;
           ischanged = true;
-          listval.add((Test.Type_testdescribe)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Test.Type_testdescribe) {
           ischanged = true;
           listval.add((Test.Type_testdescribe)valsub);
-        } else if (valsub instanceof Type_testdescribelist) {
+        } else if (valsub instanceof Test.Type_testdescribelist) {
           Type_testdescribelist multi = (Type_testdescribelist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listtestdescribe());
@@ -1850,12 +1852,12 @@ public final class Test {
     }
 
     @Override
-    public Type_testpackage vx_new(final Object... vals) {
+    public Test.Type_testpackage vx_new(final Object... vals) {
       return e_testpackage.vx_copy(vals);
     }
 
     @Override
-    public Type_testpackage vx_copy(final Object... vals) {
+    public Test.Type_testpackage vx_copy(final Object... vals) {
       Type_testpackage output = this;
       boolean ischanged = false;
       Class_testpackage val = this;
@@ -2114,12 +2116,12 @@ public final class Test {
     }
 
     @Override
-    public Type_testpackagelist vx_new(final Object... vals) {
+    public Test.Type_testpackagelist vx_new(final Object... vals) {
       return e_testpackagelist.vx_copy(vals);
     }
 
     @Override
-    public Type_testpackagelist vx_copy(final Object... vals) {
+    public Test.Type_testpackagelist vx_copy(final Object... vals) {
       Type_testpackagelist output = this;
       boolean ischanged = false;
       Class_testpackagelist val = this;
@@ -2135,12 +2137,13 @@ public final class Test {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Test.Type_testpackage) {
+          Test.Type_testpackage anysub = (Test.Type_testpackage)valsub;
           ischanged = true;
-          listval.add((Test.Type_testpackage)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Test.Type_testpackage) {
           ischanged = true;
           listval.add((Test.Type_testpackage)valsub);
-        } else if (valsub instanceof Type_testpackagelist) {
+        } else if (valsub instanceof Test.Type_testpackagelist) {
           Type_testpackagelist multi = (Type_testpackagelist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listtestpackage());
@@ -2290,12 +2293,12 @@ public final class Test {
     }
 
     @Override
-    public Type_testresult vx_new(final Object... vals) {
+    public Test.Type_testresult vx_new(final Object... vals) {
       return e_testresult.vx_copy(vals);
     }
 
     @Override
-    public Type_testresult vx_copy(final Object... vals) {
+    public Test.Type_testresult vx_copy(final Object... vals) {
       Type_testresult output = this;
       boolean ischanged = false;
       Class_testresult val = this;
@@ -2554,12 +2557,12 @@ public final class Test {
     }
 
     @Override
-    public Type_testresultlist vx_new(final Object... vals) {
+    public Test.Type_testresultlist vx_new(final Object... vals) {
       return e_testresultlist.vx_copy(vals);
     }
 
     @Override
-    public Type_testresultlist vx_copy(final Object... vals) {
+    public Test.Type_testresultlist vx_copy(final Object... vals) {
       Type_testresultlist output = this;
       boolean ischanged = false;
       Class_testresultlist val = this;
@@ -2575,12 +2578,13 @@ public final class Test {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Test.Type_testresult) {
+          Test.Type_testresult anysub = (Test.Type_testresult)valsub;
           ischanged = true;
-          listval.add((Test.Type_testresult)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Test.Type_testresult) {
           ischanged = true;
           listval.add((Test.Type_testresult)valsub);
-        } else if (valsub instanceof Type_testresultlist) {
+        } else if (valsub instanceof Test.Type_testresultlist) {
           Type_testresultlist multi = (Type_testresultlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listtestresult());
@@ -3043,13 +3047,13 @@ public final class Test {
   public static class Class_context_test extends Core.Class_base implements Func_context_test {
 
     @Override
-    public Func_context_test vx_new(Object... vals) {
+    public Test.Func_context_test vx_new(final Object... vals) {
       Class_context_test output = new Class_context_test();
       return output;
     }
 
     @Override
-    public Func_context_test vx_copy(Object... vals) {
+    public Test.Func_context_test vx_copy(final Object... vals) {
       Class_context_test output = new Class_context_test();
       return output;
     }
@@ -3151,13 +3155,13 @@ public final class Test {
   public static class Class_div_from_testcaselist extends Core.Class_base implements Func_div_from_testcaselist {
 
     @Override
-    public Func_div_from_testcaselist vx_new(Object... vals) {
+    public Test.Func_div_from_testcaselist vx_new(final Object... vals) {
       Class_div_from_testcaselist output = new Class_div_from_testcaselist();
       return output;
     }
 
     @Override
-    public Func_div_from_testcaselist vx_copy(Object... vals) {
+    public Test.Func_div_from_testcaselist vx_copy(final Object... vals) {
       Class_div_from_testcaselist output = new Class_div_from_testcaselist();
       return output;
     }
@@ -3329,13 +3333,13 @@ public final class Test {
   public static class Class_div_from_testpackage extends Core.Class_base implements Func_div_from_testpackage {
 
     @Override
-    public Func_div_from_testpackage vx_new(Object... vals) {
+    public Test.Func_div_from_testpackage vx_new(final Object... vals) {
       Class_div_from_testpackage output = new Class_div_from_testpackage();
       return output;
     }
 
     @Override
-    public Func_div_from_testpackage vx_copy(Object... vals) {
+    public Test.Func_div_from_testpackage vx_copy(final Object... vals) {
       Class_div_from_testpackage output = new Class_div_from_testpackage();
       return output;
     }
@@ -3498,13 +3502,13 @@ public final class Test {
   public static class Class_div_from_testpackagelist extends Core.Class_base implements Func_div_from_testpackagelist {
 
     @Override
-    public Func_div_from_testpackagelist vx_new(Object... vals) {
+    public Test.Func_div_from_testpackagelist vx_new(final Object... vals) {
       Class_div_from_testpackagelist output = new Class_div_from_testpackagelist();
       return output;
     }
 
     @Override
-    public Func_div_from_testpackagelist vx_copy(Object... vals) {
+    public Test.Func_div_from_testpackagelist vx_copy(final Object... vals) {
       Class_div_from_testpackagelist output = new Class_div_from_testpackagelist();
       return output;
     }
@@ -3708,13 +3712,13 @@ public final class Test {
   public static class Class_divchildlist_from_testpackagelist extends Core.Class_base implements Func_divchildlist_from_testpackagelist {
 
     @Override
-    public Func_divchildlist_from_testpackagelist vx_new(Object... vals) {
+    public Test.Func_divchildlist_from_testpackagelist vx_new(final Object... vals) {
       Class_divchildlist_from_testpackagelist output = new Class_divchildlist_from_testpackagelist();
       return output;
     }
 
     @Override
-    public Func_divchildlist_from_testpackagelist vx_copy(Object... vals) {
+    public Test.Func_divchildlist_from_testpackagelist vx_copy(final Object... vals) {
       Class_divchildlist_from_testpackagelist output = new Class_divchildlist_from_testpackagelist();
       return output;
     }
@@ -3802,13 +3806,13 @@ public final class Test {
   public static class Class_file_test extends Core.Class_base implements Func_file_test {
 
     @Override
-    public Func_file_test vx_new(Object... vals) {
+    public Test.Func_file_test vx_new(final Object... vals) {
       Class_file_test output = new Class_file_test();
       return output;
     }
 
     @Override
-    public Func_file_test vx_copy(Object... vals) {
+    public Test.Func_file_test vx_copy(final Object... vals) {
       Class_file_test output = new Class_file_test();
       return output;
     }
@@ -3887,13 +3891,13 @@ public final class Test {
   public static class Class_file_testhtml extends Core.Class_base implements Func_file_testhtml {
 
     @Override
-    public Func_file_testhtml vx_new(Object... vals) {
+    public Test.Func_file_testhtml vx_new(final Object... vals) {
       Class_file_testhtml output = new Class_file_testhtml();
       return output;
     }
 
     @Override
-    public Func_file_testhtml vx_copy(Object... vals) {
+    public Test.Func_file_testhtml vx_copy(final Object... vals) {
       Class_file_testhtml output = new Class_file_testhtml();
       return output;
     }
@@ -3972,13 +3976,13 @@ public final class Test {
   public static class Class_file_testnode extends Core.Class_base implements Func_file_testnode {
 
     @Override
-    public Func_file_testnode vx_new(Object... vals) {
+    public Test.Func_file_testnode vx_new(final Object... vals) {
       Class_file_testnode output = new Class_file_testnode();
       return output;
     }
 
     @Override
-    public Func_file_testnode vx_copy(Object... vals) {
+    public Test.Func_file_testnode vx_copy(final Object... vals) {
       Class_file_testnode output = new Class_file_testnode();
       return output;
     }
@@ -4058,13 +4062,13 @@ public final class Test {
   public static class Class_html_from_divtest extends Core.Class_base implements Func_html_from_divtest {
 
     @Override
-    public Func_html_from_divtest vx_new(Object... vals) {
+    public Test.Func_html_from_divtest vx_new(final Object... vals) {
       Class_html_from_divtest output = new Class_html_from_divtest();
       return output;
     }
 
     @Override
-    public Func_html_from_divtest vx_copy(Object... vals) {
+    public Test.Func_html_from_divtest vx_copy(final Object... vals) {
       Class_html_from_divtest output = new Class_html_from_divtest();
       return output;
     }
@@ -4203,13 +4207,13 @@ public final class Test {
   public static class Class_p_from_passfail extends Core.Class_base implements Func_p_from_passfail {
 
     @Override
-    public Func_p_from_passfail vx_new(Object... vals) {
+    public Test.Func_p_from_passfail vx_new(final Object... vals) {
       Class_p_from_passfail output = new Class_p_from_passfail();
       return output;
     }
 
     @Override
-    public Func_p_from_passfail vx_copy(Object... vals) {
+    public Test.Func_p_from_passfail vx_copy(final Object... vals) {
       Class_p_from_passfail output = new Class_p_from_passfail();
       return output;
     }
@@ -4313,13 +4317,13 @@ public final class Test {
   public static class Class_p_from_testcoveragenums extends Core.Class_base implements Func_p_from_testcoveragenums {
 
     @Override
-    public Func_p_from_testcoveragenums vx_new(Object... vals) {
+    public Test.Func_p_from_testcoveragenums vx_new(final Object... vals) {
       Class_p_from_testcoveragenums output = new Class_p_from_testcoveragenums();
       return output;
     }
 
     @Override
-    public Func_p_from_testcoveragenums vx_copy(Object... vals) {
+    public Test.Func_p_from_testcoveragenums vx_copy(final Object... vals) {
       Class_p_from_testcoveragenums output = new Class_p_from_testcoveragenums();
       return output;
     }
@@ -4426,13 +4430,13 @@ public final class Test {
   public static class Class_resolve_testcase extends Core.Class_base implements Func_resolve_testcase {
 
     @Override
-    public Func_resolve_testcase vx_new(Object... vals) {
+    public Test.Func_resolve_testcase vx_new(final Object... vals) {
       Class_resolve_testcase output = new Class_resolve_testcase();
       return output;
     }
 
     @Override
-    public Func_resolve_testcase vx_copy(Object... vals) {
+    public Test.Func_resolve_testcase vx_copy(final Object... vals) {
       Class_resolve_testcase output = new Class_resolve_testcase();
       return output;
     }
@@ -4553,13 +4557,13 @@ public final class Test {
   public static class Class_resolve_testcaselist extends Core.Class_base implements Func_resolve_testcaselist {
 
     @Override
-    public Func_resolve_testcaselist vx_new(Object... vals) {
+    public Test.Func_resolve_testcaselist vx_new(final Object... vals) {
       Class_resolve_testcaselist output = new Class_resolve_testcaselist();
       return output;
     }
 
     @Override
-    public Func_resolve_testcaselist vx_copy(Object... vals) {
+    public Test.Func_resolve_testcaselist vx_copy(final Object... vals) {
       Class_resolve_testcaselist output = new Class_resolve_testcaselist();
       return output;
     }
@@ -4651,13 +4655,13 @@ public final class Test {
   public static class Class_resolve_testdescribe extends Core.Class_base implements Func_resolve_testdescribe {
 
     @Override
-    public Func_resolve_testdescribe vx_new(Object... vals) {
+    public Test.Func_resolve_testdescribe vx_new(final Object... vals) {
       Class_resolve_testdescribe output = new Class_resolve_testdescribe();
       return output;
     }
 
     @Override
-    public Func_resolve_testdescribe vx_copy(Object... vals) {
+    public Test.Func_resolve_testdescribe vx_copy(final Object... vals) {
       Class_resolve_testdescribe output = new Class_resolve_testdescribe();
       return output;
     }
@@ -4760,13 +4764,13 @@ public final class Test {
   public static class Class_resolve_testdescribelist extends Core.Class_base implements Func_resolve_testdescribelist {
 
     @Override
-    public Func_resolve_testdescribelist vx_new(Object... vals) {
+    public Test.Func_resolve_testdescribelist vx_new(final Object... vals) {
       Class_resolve_testdescribelist output = new Class_resolve_testdescribelist();
       return output;
     }
 
     @Override
-    public Func_resolve_testdescribelist vx_copy(Object... vals) {
+    public Test.Func_resolve_testdescribelist vx_copy(final Object... vals) {
       Class_resolve_testdescribelist output = new Class_resolve_testdescribelist();
       return output;
     }
@@ -4858,13 +4862,13 @@ public final class Test {
   public static class Class_resolve_testpackage extends Core.Class_base implements Func_resolve_testpackage {
 
     @Override
-    public Func_resolve_testpackage vx_new(Object... vals) {
+    public Test.Func_resolve_testpackage vx_new(final Object... vals) {
       Class_resolve_testpackage output = new Class_resolve_testpackage();
       return output;
     }
 
     @Override
-    public Func_resolve_testpackage vx_copy(Object... vals) {
+    public Test.Func_resolve_testpackage vx_copy(final Object... vals) {
       Class_resolve_testpackage output = new Class_resolve_testpackage();
       return output;
     }
@@ -4979,13 +4983,13 @@ public final class Test {
   public static class Class_resolve_testpackagelist extends Core.Class_base implements Func_resolve_testpackagelist {
 
     @Override
-    public Func_resolve_testpackagelist vx_new(Object... vals) {
+    public Test.Func_resolve_testpackagelist vx_new(final Object... vals) {
       Class_resolve_testpackagelist output = new Class_resolve_testpackagelist();
       return output;
     }
 
     @Override
-    public Func_resolve_testpackagelist vx_copy(Object... vals) {
+    public Test.Func_resolve_testpackagelist vx_copy(final Object... vals) {
       Class_resolve_testpackagelist output = new Class_resolve_testpackagelist();
       return output;
     }
@@ -5077,13 +5081,13 @@ public final class Test {
   public static class Class_resolve_testresult extends Core.Class_base implements Func_resolve_testresult {
 
     @Override
-    public Func_resolve_testresult vx_new(Object... vals) {
+    public Test.Func_resolve_testresult vx_new(final Object... vals) {
       Class_resolve_testresult output = new Class_resolve_testresult();
       return output;
     }
 
     @Override
-    public Func_resolve_testresult vx_copy(Object... vals) {
+    public Test.Func_resolve_testresult vx_copy(final Object... vals) {
       Class_resolve_testresult output = new Class_resolve_testresult();
       return output;
     }
@@ -5209,13 +5213,13 @@ public final class Test {
   public static class Class_security_test extends Core.Class_base implements Func_security_test {
 
     @Override
-    public Func_security_test vx_new(Object... vals) {
+    public Test.Func_security_test vx_new(final Object... vals) {
       Class_security_test output = new Class_security_test();
       return output;
     }
 
     @Override
-    public Func_security_test vx_copy(Object... vals) {
+    public Test.Func_security_test vx_copy(final Object... vals) {
       Class_security_test output = new Class_security_test();
       return output;
     }
@@ -5302,13 +5306,13 @@ public final class Test {
   public static class Class_test extends Core.Class_base implements Func_test {
 
     @Override
-    public Func_test vx_new(Object... vals) {
+    public Test.Func_test vx_new(final Object... vals) {
       Class_test output = new Class_test();
       return output;
     }
 
     @Override
-    public Func_test vx_copy(Object... vals) {
+    public Test.Func_test vx_copy(final Object... vals) {
       Class_test output = new Class_test();
       return output;
     }
@@ -5401,13 +5405,13 @@ public final class Test {
   public static class Class_test_1 extends Core.Class_base implements Func_test_1 {
 
     @Override
-    public Func_test_1 vx_new(Object... vals) {
+    public Test.Func_test_1 vx_new(final Object... vals) {
       Class_test_1 output = new Class_test_1();
       return output;
     }
 
     @Override
-    public Func_test_1 vx_copy(Object... vals) {
+    public Test.Func_test_1 vx_copy(final Object... vals) {
       Class_test_1 output = new Class_test_1();
       return output;
     }
@@ -5497,13 +5501,13 @@ public final class Test {
   public static class Class_test_false extends Core.Class_base implements Func_test_false {
 
     @Override
-    public Func_test_false vx_new(Object... vals) {
+    public Test.Func_test_false vx_new(final Object... vals) {
       Class_test_false output = new Class_test_false();
       return output;
     }
 
     @Override
-    public Func_test_false vx_copy(Object... vals) {
+    public Test.Func_test_false vx_copy(final Object... vals) {
       Class_test_false output = new Class_test_false();
       return output;
     }
@@ -5609,13 +5613,13 @@ public final class Test {
   public static class Class_test_false_1 extends Core.Class_base implements Func_test_false_1 {
 
     @Override
-    public Func_test_false_1 vx_new(Object... vals) {
+    public Test.Func_test_false_1 vx_new(final Object... vals) {
       Class_test_false_1 output = new Class_test_false_1();
       return output;
     }
 
     @Override
-    public Func_test_false_1 vx_copy(Object... vals) {
+    public Test.Func_test_false_1 vx_copy(final Object... vals) {
       Class_test_false_1 output = new Class_test_false_1();
       return output;
     }
@@ -5717,13 +5721,13 @@ public final class Test {
   public static class Class_test_gt extends Core.Class_base implements Func_test_gt {
 
     @Override
-    public Func_test_gt vx_new(Object... vals) {
+    public Test.Func_test_gt vx_new(final Object... vals) {
       Class_test_gt output = new Class_test_gt();
       return output;
     }
 
     @Override
-    public Func_test_gt vx_copy(Object... vals) {
+    public Test.Func_test_gt vx_copy(final Object... vals) {
       Class_test_gt output = new Class_test_gt();
       return output;
     }
@@ -5816,13 +5820,13 @@ public final class Test {
   public static class Class_test_gt_1 extends Core.Class_base implements Func_test_gt_1 {
 
     @Override
-    public Func_test_gt_1 vx_new(Object... vals) {
+    public Test.Func_test_gt_1 vx_new(final Object... vals) {
       Class_test_gt_1 output = new Class_test_gt_1();
       return output;
     }
 
     @Override
-    public Func_test_gt_1 vx_copy(Object... vals) {
+    public Test.Func_test_gt_1 vx_copy(final Object... vals) {
       Class_test_gt_1 output = new Class_test_gt_1();
       return output;
     }
@@ -5913,13 +5917,13 @@ public final class Test {
   public static class Class_test_ne extends Core.Class_base implements Func_test_ne {
 
     @Override
-    public Func_test_ne vx_new(Object... vals) {
+    public Test.Func_test_ne vx_new(final Object... vals) {
       Class_test_ne output = new Class_test_ne();
       return output;
     }
 
     @Override
-    public Func_test_ne vx_copy(Object... vals) {
+    public Test.Func_test_ne vx_copy(final Object... vals) {
       Class_test_ne output = new Class_test_ne();
       return output;
     }
@@ -6012,13 +6016,13 @@ public final class Test {
   public static class Class_test_ne_1 extends Core.Class_base implements Func_test_ne_1 {
 
     @Override
-    public Func_test_ne_1 vx_new(Object... vals) {
+    public Test.Func_test_ne_1 vx_new(final Object... vals) {
       Class_test_ne_1 output = new Class_test_ne_1();
       return output;
     }
 
     @Override
-    public Func_test_ne_1 vx_copy(Object... vals) {
+    public Test.Func_test_ne_1 vx_copy(final Object... vals) {
       Class_test_ne_1 output = new Class_test_ne_1();
       return output;
     }
@@ -6109,13 +6113,13 @@ public final class Test {
   public static class Class_test_string extends Core.Class_base implements Func_test_string {
 
     @Override
-    public Func_test_string vx_new(Object... vals) {
+    public Test.Func_test_string vx_new(final Object... vals) {
       Class_test_string output = new Class_test_string();
       return output;
     }
 
     @Override
-    public Func_test_string vx_copy(Object... vals) {
+    public Test.Func_test_string vx_copy(final Object... vals) {
       Class_test_string output = new Class_test_string();
       return output;
     }
@@ -6209,13 +6213,13 @@ public final class Test {
   public static class Class_test_string_1 extends Core.Class_base implements Func_test_string_1 {
 
     @Override
-    public Func_test_string_1 vx_new(Object... vals) {
+    public Test.Func_test_string_1 vx_new(final Object... vals) {
       Class_test_string_1 output = new Class_test_string_1();
       return output;
     }
 
     @Override
-    public Func_test_string_1 vx_copy(Object... vals) {
+    public Test.Func_test_string_1 vx_copy(final Object... vals) {
       Class_test_string_1 output = new Class_test_string_1();
       return output;
     }
@@ -6305,13 +6309,13 @@ public final class Test {
   public static class Class_test_true extends Core.Class_base implements Func_test_true {
 
     @Override
-    public Func_test_true vx_new(Object... vals) {
+    public Test.Func_test_true vx_new(final Object... vals) {
       Class_test_true output = new Class_test_true();
       return output;
     }
 
     @Override
-    public Func_test_true vx_copy(Object... vals) {
+    public Test.Func_test_true vx_copy(final Object... vals) {
       Class_test_true output = new Class_test_true();
       return output;
     }
@@ -6417,13 +6421,13 @@ public final class Test {
   public static class Class_test_true_1 extends Core.Class_base implements Func_test_true_1 {
 
     @Override
-    public Func_test_true_1 vx_new(Object... vals) {
+    public Test.Func_test_true_1 vx_new(final Object... vals) {
       Class_test_true_1 output = new Class_test_true_1();
       return output;
     }
 
     @Override
-    public Func_test_true_1 vx_copy(Object... vals) {
+    public Test.Func_test_true_1 vx_copy(final Object... vals) {
       Class_test_true_1 output = new Class_test_true_1();
       return output;
     }
@@ -6525,13 +6529,13 @@ public final class Test {
   public static class Class_tr_from_testdescribe_casename extends Core.Class_base implements Func_tr_from_testdescribe_casename {
 
     @Override
-    public Func_tr_from_testdescribe_casename vx_new(Object... vals) {
+    public Test.Func_tr_from_testdescribe_casename vx_new(final Object... vals) {
       Class_tr_from_testdescribe_casename output = new Class_tr_from_testdescribe_casename();
       return output;
     }
 
     @Override
-    public Func_tr_from_testdescribe_casename vx_copy(Object... vals) {
+    public Test.Func_tr_from_testdescribe_casename vx_copy(final Object... vals) {
       Class_tr_from_testdescribe_casename output = new Class_tr_from_testdescribe_casename();
       return output;
     }
@@ -6688,13 +6692,13 @@ public final class Test {
   public static class Class_trlist_from_testcase extends Core.Class_base implements Func_trlist_from_testcase {
 
     @Override
-    public Func_trlist_from_testcase vx_new(Object... vals) {
+    public Test.Func_trlist_from_testcase vx_new(final Object... vals) {
       Class_trlist_from_testcase output = new Class_trlist_from_testcase();
       return output;
     }
 
     @Override
-    public Func_trlist_from_testcase vx_copy(Object... vals) {
+    public Test.Func_trlist_from_testcase vx_copy(final Object... vals) {
       Class_trlist_from_testcase output = new Class_trlist_from_testcase();
       return output;
     }
@@ -6794,13 +6798,13 @@ public final class Test {
   public static class Class_trlist_from_testcaselist extends Core.Class_base implements Func_trlist_from_testcaselist {
 
     @Override
-    public Func_trlist_from_testcaselist vx_new(Object... vals) {
+    public Test.Func_trlist_from_testcaselist vx_new(final Object... vals) {
       Class_trlist_from_testcaselist output = new Class_trlist_from_testcaselist();
       return output;
     }
 
     @Override
-    public Func_trlist_from_testcaselist vx_copy(Object... vals) {
+    public Test.Func_trlist_from_testcaselist vx_copy(final Object... vals) {
       Class_trlist_from_testcaselist output = new Class_trlist_from_testcaselist();
       return output;
     }

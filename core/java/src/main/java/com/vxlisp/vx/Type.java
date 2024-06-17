@@ -130,13 +130,13 @@ public final class Type {
   public static class Class_allowtypenames_from_type extends Core.Class_base implements Func_allowtypenames_from_type {
 
     @Override
-    public Func_allowtypenames_from_type vx_new(Object... vals) {
+    public Type.Func_allowtypenames_from_type vx_new(final Object... vals) {
       Class_allowtypenames_from_type output = new Class_allowtypenames_from_type();
       return output;
     }
 
     @Override
-    public Func_allowtypenames_from_type vx_copy(Object... vals) {
+    public Type.Func_allowtypenames_from_type vx_copy(final Object... vals) {
       Class_allowtypenames_from_type output = new Class_allowtypenames_from_type();
       return output;
     }
@@ -223,13 +223,13 @@ public final class Type {
   public static class Class_allowtypes_from_type extends Core.Class_base implements Func_allowtypes_from_type {
 
     @Override
-    public Func_allowtypes_from_type vx_new(Object... vals) {
+    public Type.Func_allowtypes_from_type vx_new(final Object... vals) {
       Class_allowtypes_from_type output = new Class_allowtypes_from_type();
       return output;
     }
 
     @Override
-    public Func_allowtypes_from_type vx_copy(Object... vals) {
+    public Type.Func_allowtypes_from_type vx_copy(final Object... vals) {
       Class_allowtypes_from_type output = new Class_allowtypes_from_type();
       return output;
     }
@@ -314,13 +314,13 @@ public final class Type {
   public static class Class_any_from_int extends Core.Class_base implements Func_any_from_int {
 
     @Override
-    public Func_any_from_int vx_new(Object... vals) {
+    public Type.Func_any_from_int vx_new(final Object... vals) {
       Class_any_from_int output = new Class_any_from_int();
       return output;
     }
 
     @Override
-    public Func_any_from_int vx_copy(Object... vals) {
+    public Type.Func_any_from_int vx_copy(final Object... vals) {
       Class_any_from_int output = new Class_any_from_int();
       return output;
     }
@@ -406,13 +406,13 @@ public final class Type {
   public static class Class_boolean_from_string_ends extends Core.Class_base implements Func_boolean_from_string_ends {
 
     @Override
-    public Func_boolean_from_string_ends vx_new(Object... vals) {
+    public Type.Func_boolean_from_string_ends vx_new(final Object... vals) {
       Class_boolean_from_string_ends output = new Class_boolean_from_string_ends();
       return output;
     }
 
     @Override
-    public Func_boolean_from_string_ends vx_copy(Object... vals) {
+    public Type.Func_boolean_from_string_ends vx_copy(final Object... vals) {
       Class_boolean_from_string_ends output = new Class_boolean_from_string_ends();
       return output;
     }
@@ -488,13 +488,13 @@ public final class Type {
   public static class Class_boolean_from_string_starts extends Core.Class_base implements Func_boolean_from_string_starts {
 
     @Override
-    public Func_boolean_from_string_starts vx_new(Object... vals) {
+    public Type.Func_boolean_from_string_starts vx_new(final Object... vals) {
       Class_boolean_from_string_starts output = new Class_boolean_from_string_starts();
       return output;
     }
 
     @Override
-    public Func_boolean_from_string_starts vx_copy(Object... vals) {
+    public Type.Func_boolean_from_string_starts vx_copy(final Object... vals) {
       Class_boolean_from_string_starts output = new Class_boolean_from_string_starts();
       return output;
     }
@@ -570,13 +570,13 @@ public final class Type {
   public static class Class_int_from_string_find extends Core.Class_base implements Func_int_from_string_find {
 
     @Override
-    public Func_int_from_string_find vx_new(Object... vals) {
+    public Type.Func_int_from_string_find vx_new(final Object... vals) {
       Class_int_from_string_find output = new Class_int_from_string_find();
       return output;
     }
 
     @Override
-    public Func_int_from_string_find vx_copy(Object... vals) {
+    public Type.Func_int_from_string_find vx_copy(final Object... vals) {
       Class_int_from_string_find output = new Class_int_from_string_find();
       return output;
     }
@@ -651,13 +651,13 @@ public final class Type {
   public static class Class_int_from_string_findkeyword extends Core.Class_base implements Func_int_from_string_findkeyword {
 
     @Override
-    public Func_int_from_string_findkeyword vx_new(Object... vals) {
+    public Type.Func_int_from_string_findkeyword vx_new(final Object... vals) {
       Class_int_from_string_findkeyword output = new Class_int_from_string_findkeyword();
       return output;
     }
 
     @Override
-    public Func_int_from_string_findkeyword vx_copy(Object... vals) {
+    public Type.Func_int_from_string_findkeyword vx_copy(final Object... vals) {
       Class_int_from_string_findkeyword output = new Class_int_from_string_findkeyword();
       return output;
     }
@@ -732,13 +732,13 @@ public final class Type {
   public static class Class_int_from_string_findlast extends Core.Class_base implements Func_int_from_string_findlast {
 
     @Override
-    public Func_int_from_string_findlast vx_new(Object... vals) {
+    public Type.Func_int_from_string_findlast vx_new(final Object... vals) {
       Class_int_from_string_findlast output = new Class_int_from_string_findlast();
       return output;
     }
 
     @Override
-    public Func_int_from_string_findlast vx_copy(Object... vals) {
+    public Type.Func_int_from_string_findlast vx_copy(final Object... vals) {
       Class_int_from_string_findlast output = new Class_int_from_string_findlast();
       return output;
     }
@@ -811,13 +811,13 @@ public final class Type {
   public static class Class_is_boolean extends Core.Class_base implements Func_is_boolean {
 
     @Override
-    public Func_is_boolean vx_new(Object... vals) {
+    public Type.Func_is_boolean vx_new(final Object... vals) {
       Class_is_boolean output = new Class_is_boolean();
       return output;
     }
 
     @Override
-    public Func_is_boolean vx_copy(Object... vals) {
+    public Type.Func_is_boolean vx_copy(final Object... vals) {
       Class_is_boolean output = new Class_is_boolean();
       return output;
     }
@@ -904,13 +904,13 @@ public final class Type {
   public static class Class_is_decimal extends Core.Class_base implements Func_is_decimal {
 
     @Override
-    public Func_is_decimal vx_new(Object... vals) {
+    public Type.Func_is_decimal vx_new(final Object... vals) {
       Class_is_decimal output = new Class_is_decimal();
       return output;
     }
 
     @Override
-    public Func_is_decimal vx_copy(Object... vals) {
+    public Type.Func_is_decimal vx_copy(final Object... vals) {
       Class_is_decimal output = new Class_is_decimal();
       return output;
     }
@@ -997,13 +997,13 @@ public final class Type {
   public static class Class_is_none extends Core.Class_base implements Func_is_none {
 
     @Override
-    public Func_is_none vx_new(Object... vals) {
+    public Type.Func_is_none vx_new(final Object... vals) {
       Class_is_none output = new Class_is_none();
       return output;
     }
 
     @Override
-    public Func_is_none vx_copy(Object... vals) {
+    public Type.Func_is_none vx_copy(final Object... vals) {
       Class_is_none output = new Class_is_none();
       return output;
     }
@@ -1090,13 +1090,13 @@ public final class Type {
   public static class Class_is_string extends Core.Class_base implements Func_is_string {
 
     @Override
-    public Func_is_string vx_new(Object... vals) {
+    public Type.Func_is_string vx_new(final Object... vals) {
       Class_is_string output = new Class_is_string();
       return output;
     }
 
     @Override
-    public Func_is_string vx_copy(Object... vals) {
+    public Type.Func_is_string vx_copy(final Object... vals) {
       Class_is_string output = new Class_is_string();
       return output;
     }
@@ -1184,13 +1184,13 @@ public final class Type {
   public static class Class_is_type extends Core.Class_base implements Func_is_type {
 
     @Override
-    public Func_is_type vx_new(Object... vals) {
+    public Type.Func_is_type vx_new(final Object... vals) {
       Class_is_type output = new Class_is_type();
       return output;
     }
 
     @Override
-    public Func_is_type vx_copy(Object... vals) {
+    public Type.Func_is_type vx_copy(final Object... vals) {
       Class_is_type output = new Class_is_type();
       return output;
     }
@@ -1280,13 +1280,13 @@ public final class Type {
   public static class Class_is_type_from_any_typelist extends Core.Class_base implements Func_is_type_from_any_typelist {
 
     @Override
-    public Func_is_type_from_any_typelist vx_new(Object... vals) {
+    public Type.Func_is_type_from_any_typelist vx_new(final Object... vals) {
       Class_is_type_from_any_typelist output = new Class_is_type_from_any_typelist();
       return output;
     }
 
     @Override
-    public Func_is_type_from_any_typelist vx_copy(Object... vals) {
+    public Type.Func_is_type_from_any_typelist vx_copy(final Object... vals) {
       Class_is_type_from_any_typelist output = new Class_is_type_from_any_typelist();
       return output;
     }
@@ -1373,13 +1373,13 @@ public final class Type {
   public static class Class_string_lowercase extends Core.Class_base implements Func_string_lowercase {
 
     @Override
-    public Func_string_lowercase vx_new(Object... vals) {
+    public Type.Func_string_lowercase vx_new(final Object... vals) {
       Class_string_lowercase output = new Class_string_lowercase();
       return output;
     }
 
     @Override
-    public Func_string_lowercase vx_copy(Object... vals) {
+    public Type.Func_string_lowercase vx_copy(final Object... vals) {
       Class_string_lowercase output = new Class_string_lowercase();
       return output;
     }
@@ -1464,13 +1464,13 @@ public final class Type {
   public static class Class_string_outdent extends Core.Class_base implements Func_string_outdent {
 
     @Override
-    public Func_string_outdent vx_new(Object... vals) {
+    public Type.Func_string_outdent vx_new(final Object... vals) {
       Class_string_outdent output = new Class_string_outdent();
       return output;
     }
 
     @Override
-    public Func_string_outdent vx_copy(Object... vals) {
+    public Type.Func_string_outdent vx_copy(final Object... vals) {
       Class_string_outdent output = new Class_string_outdent();
       return output;
     }
@@ -1595,13 +1595,13 @@ public final class Type {
   public static class Class_string_trim extends Core.Class_base implements Func_string_trim {
 
     @Override
-    public Func_string_trim vx_new(Object... vals) {
+    public Type.Func_string_trim vx_new(final Object... vals) {
       Class_string_trim output = new Class_string_trim();
       return output;
     }
 
     @Override
-    public Func_string_trim vx_copy(Object... vals) {
+    public Type.Func_string_trim vx_copy(final Object... vals) {
       Class_string_trim output = new Class_string_trim();
       return output;
     }
@@ -1686,13 +1686,13 @@ public final class Type {
   public static class Class_string_uppercase extends Core.Class_base implements Func_string_uppercase {
 
     @Override
-    public Func_string_uppercase vx_new(Object... vals) {
+    public Type.Func_string_uppercase vx_new(final Object... vals) {
       Class_string_uppercase output = new Class_string_uppercase();
       return output;
     }
 
     @Override
-    public Func_string_uppercase vx_copy(Object... vals) {
+    public Type.Func_string_uppercase vx_copy(final Object... vals) {
       Class_string_uppercase output = new Class_string_uppercase();
       return output;
     }
@@ -1777,13 +1777,13 @@ public final class Type {
   public static class Class_string_from_int extends Core.Class_base implements Func_string_from_int {
 
     @Override
-    public Func_string_from_int vx_new(Object... vals) {
+    public Type.Func_string_from_int vx_new(final Object... vals) {
       Class_string_from_int output = new Class_string_from_int();
       return output;
     }
 
     @Override
-    public Func_string_from_int vx_copy(Object... vals) {
+    public Type.Func_string_from_int vx_copy(final Object... vals) {
       Class_string_from_int output = new Class_string_from_int();
       return output;
     }
@@ -1902,13 +1902,13 @@ public final class Type {
   public static class Class_string_from_string_end extends Core.Class_base implements Func_string_from_string_end {
 
     @Override
-    public Func_string_from_string_end vx_new(Object... vals) {
+    public Type.Func_string_from_string_end vx_new(final Object... vals) {
       Class_string_from_string_end output = new Class_string_from_string_end();
       return output;
     }
 
     @Override
-    public Func_string_from_string_end vx_copy(Object... vals) {
+    public Type.Func_string_from_string_end vx_copy(final Object... vals) {
       Class_string_from_string_end output = new Class_string_from_string_end();
       return output;
     }
@@ -1983,13 +1983,13 @@ public final class Type {
   public static class Class_string_from_string_start extends Core.Class_base implements Func_string_from_string_start {
 
     @Override
-    public Func_string_from_string_start vx_new(Object... vals) {
+    public Type.Func_string_from_string_start vx_new(final Object... vals) {
       Class_string_from_string_start output = new Class_string_from_string_start();
       return output;
     }
 
     @Override
-    public Func_string_from_string_start vx_copy(Object... vals) {
+    public Type.Func_string_from_string_start vx_copy(final Object... vals) {
       Class_string_from_string_start output = new Class_string_from_string_start();
       return output;
     }
@@ -2069,13 +2069,13 @@ public final class Type {
   public static class Class_string_from_string_start_end extends Core.Class_base implements Func_string_from_string_start_end {
 
     @Override
-    public Func_string_from_string_start_end vx_new(Object... vals) {
+    public Type.Func_string_from_string_start_end vx_new(final Object... vals) {
       Class_string_from_string_start_end output = new Class_string_from_string_start_end();
       return output;
     }
 
     @Override
-    public Func_string_from_string_start_end vx_copy(Object... vals) {
+    public Type.Func_string_from_string_start_end vx_copy(final Object... vals) {
       Class_string_from_string_start_end output = new Class_string_from_string_start_end();
       return output;
     }
@@ -2152,13 +2152,13 @@ public final class Type {
   public static class Class_string_from_stringlist_join extends Core.Class_base implements Func_string_from_stringlist_join {
 
     @Override
-    public Func_string_from_stringlist_join vx_new(Object... vals) {
+    public Type.Func_string_from_stringlist_join vx_new(final Object... vals) {
       Class_string_from_stringlist_join output = new Class_string_from_stringlist_join();
       return output;
     }
 
     @Override
-    public Func_string_from_stringlist_join vx_copy(Object... vals) {
+    public Type.Func_string_from_stringlist_join vx_copy(final Object... vals) {
       Class_string_from_stringlist_join output = new Class_string_from_stringlist_join();
       return output;
     }
@@ -2233,13 +2233,13 @@ public final class Type {
   public static class Class_stringlist_from_string_split extends Core.Class_base implements Func_stringlist_from_string_split {
 
     @Override
-    public Func_stringlist_from_string_split vx_new(Object... vals) {
+    public Type.Func_stringlist_from_string_split vx_new(final Object... vals) {
       Class_stringlist_from_string_split output = new Class_stringlist_from_string_split();
       return output;
     }
 
     @Override
-    public Func_stringlist_from_string_split vx_copy(Object... vals) {
+    public Type.Func_stringlist_from_string_split vx_copy(final Object... vals) {
       Class_stringlist_from_string_split output = new Class_stringlist_from_string_split();
       return output;
     }
@@ -2313,13 +2313,13 @@ public final class Type {
   public static class Class_traitnames_from_any extends Core.Class_base implements Func_traitnames_from_any {
 
     @Override
-    public Func_traitnames_from_any vx_new(Object... vals) {
+    public Type.Func_traitnames_from_any vx_new(final Object... vals) {
       Class_traitnames_from_any output = new Class_traitnames_from_any();
       return output;
     }
 
     @Override
-    public Func_traitnames_from_any vx_copy(Object... vals) {
+    public Type.Func_traitnames_from_any vx_copy(final Object... vals) {
       Class_traitnames_from_any output = new Class_traitnames_from_any();
       return output;
     }
@@ -2406,13 +2406,13 @@ public final class Type {
   public static class Class_traits_from_any extends Core.Class_base implements Func_traits_from_any {
 
     @Override
-    public Func_traits_from_any vx_new(Object... vals) {
+    public Type.Func_traits_from_any vx_new(final Object... vals) {
       Class_traits_from_any output = new Class_traits_from_any();
       return output;
     }
 
     @Override
-    public Func_traits_from_any vx_copy(Object... vals) {
+    public Type.Func_traits_from_any vx_copy(final Object... vals) {
       Class_traits_from_any output = new Class_traits_from_any();
       return output;
     }
@@ -2499,13 +2499,13 @@ public final class Type {
   public static class Class_traits_from_typedef extends Core.Class_base implements Func_traits_from_typedef {
 
     @Override
-    public Func_traits_from_typedef vx_new(Object... vals) {
+    public Type.Func_traits_from_typedef vx_new(final Object... vals) {
       Class_traits_from_typedef output = new Class_traits_from_typedef();
       return output;
     }
 
     @Override
-    public Func_traits_from_typedef vx_copy(Object... vals) {
+    public Type.Func_traits_from_typedef vx_copy(final Object... vals) {
       Class_traits_from_typedef output = new Class_traits_from_typedef();
       return output;
     }

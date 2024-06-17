@@ -117,12 +117,12 @@ public final class File {
     }
 
     @Override
-    public Type_file vx_new(final Object... vals) {
+    public File.Type_file vx_new(final Object... vals) {
       return e_file.vx_copy(vals);
     }
 
     @Override
-    public Type_file vx_copy(final Object... vals) {
+    public File.Type_file vx_copy(final Object... vals) {
       Type_file output = this;
       boolean ischanged = false;
       Class_file val = this;
@@ -356,12 +356,12 @@ public final class File {
   public static class Class_fileformat extends Core.Class_base implements Type_fileformat {
 
     @Override
-    public Type_fileformat vx_new(final Object... vals) {
+    public File.Type_fileformat vx_new(final Object... vals) {
       return e_fileformat.vx_copy(vals);
     }
 
     @Override
-    public Type_fileformat vx_copy(final Object... vals) {
+    public File.Type_fileformat vx_copy(final Object... vals) {
       Type_fileformat output = this;
       boolean ischanged = false;
       Class_fileformat val = this;
@@ -448,12 +448,12 @@ public final class File {
     }
 
     @Override
-    public Type_filelist vx_new(final Object... vals) {
+    public File.Type_filelist vx_new(final Object... vals) {
       return e_filelist.vx_copy(vals);
     }
 
     @Override
-    public Type_filelist vx_copy(final Object... vals) {
+    public File.Type_filelist vx_copy(final Object... vals) {
       Type_filelist output = this;
       boolean ischanged = false;
       Class_filelist val = this;
@@ -469,12 +469,13 @@ public final class File {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof File.Type_file) {
+          File.Type_file anysub = (File.Type_file)valsub;
           ischanged = true;
-          listval.add((File.Type_file)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof File.Type_file) {
           ischanged = true;
           listval.add((File.Type_file)valsub);
-        } else if (valsub instanceof Type_filelist) {
+        } else if (valsub instanceof File.Type_filelist) {
           Type_filelist multi = (Type_filelist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listfile());
@@ -547,13 +548,13 @@ public final class File {
   public static class Class_boolean_exists_from_file extends Core.Class_base implements Func_boolean_exists_from_file {
 
     @Override
-    public Func_boolean_exists_from_file vx_new(Object... vals) {
+    public File.Func_boolean_exists_from_file vx_new(final Object... vals) {
       Class_boolean_exists_from_file output = new Class_boolean_exists_from_file();
       return output;
     }
 
     @Override
-    public Func_boolean_exists_from_file vx_copy(Object... vals) {
+    public File.Func_boolean_exists_from_file vx_copy(final Object... vals) {
       Class_boolean_exists_from_file output = new Class_boolean_exists_from_file();
       return output;
     }
@@ -643,13 +644,13 @@ public final class File {
   public static class Class_boolean_write_from_file extends Core.Class_base implements Func_boolean_write_from_file {
 
     @Override
-    public Func_boolean_write_from_file vx_new(Object... vals) {
+    public File.Func_boolean_write_from_file vx_new(final Object... vals) {
       Class_boolean_write_from_file output = new Class_boolean_write_from_file();
       return output;
     }
 
     @Override
-    public Func_boolean_write_from_file vx_copy(Object... vals) {
+    public File.Func_boolean_write_from_file vx_copy(final Object... vals) {
       Class_boolean_write_from_file output = new Class_boolean_write_from_file();
       return output;
     }
@@ -740,13 +741,13 @@ public final class File {
   public static class Class_boolean_write_from_file_any extends Core.Class_base implements Func_boolean_write_from_file_any {
 
     @Override
-    public Func_boolean_write_from_file_any vx_new(Object... vals) {
+    public File.Func_boolean_write_from_file_any vx_new(final Object... vals) {
       Class_boolean_write_from_file_any output = new Class_boolean_write_from_file_any();
       return output;
     }
 
     @Override
-    public Func_boolean_write_from_file_any vx_copy(Object... vals) {
+    public File.Func_boolean_write_from_file_any vx_copy(final Object... vals) {
       Class_boolean_write_from_file_any output = new Class_boolean_write_from_file_any();
       return output;
     }
@@ -826,13 +827,13 @@ public final class File {
   public static class Class_boolean_write_from_file_string extends Core.Class_base implements Func_boolean_write_from_file_string {
 
     @Override
-    public Func_boolean_write_from_file_string vx_new(Object... vals) {
+    public File.Func_boolean_write_from_file_string vx_new(final Object... vals) {
       Class_boolean_write_from_file_string output = new Class_boolean_write_from_file_string();
       return output;
     }
 
     @Override
-    public Func_boolean_write_from_file_string vx_copy(Object... vals) {
+    public File.Func_boolean_write_from_file_string vx_copy(final Object... vals) {
       Class_boolean_write_from_file_string output = new Class_boolean_write_from_file_string();
       return output;
     }
@@ -923,13 +924,13 @@ public final class File {
   public static class Class_file_read_from_file extends Core.Class_base implements Func_file_read_from_file {
 
     @Override
-    public Func_file_read_from_file vx_new(Object... vals) {
+    public File.Func_file_read_from_file vx_new(final Object... vals) {
       Class_file_read_from_file output = new Class_file_read_from_file();
       return output;
     }
 
     @Override
-    public Func_file_read_from_file vx_copy(Object... vals) {
+    public File.Func_file_read_from_file vx_copy(final Object... vals) {
       Class_file_read_from_file output = new Class_file_read_from_file();
       return output;
     }
@@ -1026,13 +1027,13 @@ public final class File {
   public static class Class_file_from_path extends Core.Class_base implements Func_file_from_path {
 
     @Override
-    public Func_file_from_path vx_new(Object... vals) {
+    public File.Func_file_from_path vx_new(final Object... vals) {
       Class_file_from_path output = new Class_file_from_path();
       return output;
     }
 
     @Override
-    public Func_file_from_path vx_copy(Object... vals) {
+    public File.Func_file_from_path vx_copy(final Object... vals) {
       Class_file_from_path output = new Class_file_from_path();
       return output;
     }
@@ -1139,13 +1140,13 @@ public final class File {
   public static class Class_name_from_file extends Core.Class_base implements Func_name_from_file {
 
     @Override
-    public Func_name_from_file vx_new(Object... vals) {
+    public File.Func_name_from_file vx_new(final Object... vals) {
       Class_name_from_file output = new Class_name_from_file();
       return output;
     }
 
     @Override
-    public Func_name_from_file vx_copy(Object... vals) {
+    public File.Func_name_from_file vx_copy(final Object... vals) {
       Class_name_from_file output = new Class_name_from_file();
       return output;
     }
@@ -1230,13 +1231,13 @@ public final class File {
   public static class Class_path_from_file extends Core.Class_base implements Func_path_from_file {
 
     @Override
-    public Func_path_from_file vx_new(Object... vals) {
+    public File.Func_path_from_file vx_new(final Object... vals) {
       Class_path_from_file output = new Class_path_from_file();
       return output;
     }
 
     @Override
-    public Func_path_from_file vx_copy(Object... vals) {
+    public File.Func_path_from_file vx_copy(final Object... vals) {
       Class_path_from_file output = new Class_path_from_file();
       return output;
     }
@@ -1320,13 +1321,13 @@ public final class File {
   public static class Class_pathcurrent_from_os extends Core.Class_base implements Func_pathcurrent_from_os {
 
     @Override
-    public Func_pathcurrent_from_os vx_new(Object... vals) {
+    public File.Func_pathcurrent_from_os vx_new(final Object... vals) {
       Class_pathcurrent_from_os output = new Class_pathcurrent_from_os();
       return output;
     }
 
     @Override
-    public Func_pathcurrent_from_os vx_copy(Object... vals) {
+    public File.Func_pathcurrent_from_os vx_copy(final Object... vals) {
       Class_pathcurrent_from_os output = new Class_pathcurrent_from_os();
       return output;
     }
@@ -1401,13 +1402,13 @@ public final class File {
   public static class Class_pathfull_from_file extends Core.Class_base implements Func_pathfull_from_file {
 
     @Override
-    public Func_pathfull_from_file vx_new(Object... vals) {
+    public File.Func_pathfull_from_file vx_new(final Object... vals) {
       Class_pathfull_from_file output = new Class_pathfull_from_file();
       return output;
     }
 
     @Override
-    public Func_pathfull_from_file vx_copy(Object... vals) {
+    public File.Func_pathfull_from_file vx_copy(final Object... vals) {
       Class_pathfull_from_file output = new Class_pathfull_from_file();
       return output;
     }
@@ -1523,13 +1524,13 @@ public final class File {
   public static class Class_string_read_from_file extends Core.Class_base implements Func_string_read_from_file {
 
     @Override
-    public Func_string_read_from_file vx_new(Object... vals) {
+    public File.Func_string_read_from_file vx_new(final Object... vals) {
       Class_string_read_from_file output = new Class_string_read_from_file();
       return output;
     }
 
     @Override
-    public Func_string_read_from_file vx_copy(Object... vals) {
+    public File.Func_string_read_from_file vx_copy(final Object... vals) {
       Class_string_read_from_file output = new Class_string_read_from_file();
       return output;
     }

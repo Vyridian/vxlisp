@@ -19,13 +19,13 @@ public final class Es {
   public static class Class_translation_es extends Core.Class_base implements Func_translation_es {
 
     @Override
-    public Func_translation_es vx_new(Object... vals) {
+    public Es.Func_translation_es vx_new(final Object... vals) {
       Class_translation_es output = new Class_translation_es();
       return output;
     }
 
     @Override
-    public Func_translation_es vx_copy(Object... vals) {
+    public Es.Func_translation_es vx_copy(final Object... vals) {
       Class_translation_es output = new Class_translation_es();
       return output;
     }
@@ -104,13 +104,13 @@ public final class Es {
   public static class Class_words extends Core.Class_base implements Func_words {
 
     @Override
-    public Func_words vx_new(Object... vals) {
+    public Es.Func_words vx_new(final Object... vals) {
       Class_words output = new Class_words();
       return output;
     }
 
     @Override
-    public Func_words vx_copy(Object... vals) {
+    public Es.Func_words vx_copy(final Object... vals) {
       Class_words output = new Class_words();
       return output;
     }

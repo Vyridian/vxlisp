@@ -112,12 +112,12 @@ public final class Event {
     }
 
     @Override
-    public Type_event vx_new(final Object... vals) {
+    public Event.Type_event vx_new(final Object... vals) {
       return e_event.vx_copy(vals);
     }
 
     @Override
-    public Type_event vx_copy(final Object... vals) {
+    public Event.Type_event vx_copy(final Object... vals) {
       Type_event output = this;
       boolean ischanged = false;
       Class_event val = this;
@@ -402,12 +402,12 @@ public final class Event {
     }
 
     @Override
-    public Type_eventlist vx_new(final Object... vals) {
+    public Event.Type_eventlist vx_new(final Object... vals) {
       return e_eventlist.vx_copy(vals);
     }
 
     @Override
-    public Type_eventlist vx_copy(final Object... vals) {
+    public Event.Type_eventlist vx_copy(final Object... vals) {
       Type_eventlist output = this;
       boolean ischanged = false;
       Class_eventlist val = this;
@@ -423,12 +423,13 @@ public final class Event {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Event.Type_event) {
+          Event.Type_event anysub = (Event.Type_event)valsub;
           ischanged = true;
-          listval.add((Event.Type_event)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Event.Type_event) {
           ischanged = true;
           listval.add((Event.Type_event)valsub);
-        } else if (valsub instanceof Type_eventlist) {
+        } else if (valsub instanceof Event.Type_eventlist) {
           Type_eventlist multi = (Type_eventlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listevent());
@@ -574,12 +575,12 @@ public final class Event {
     }
 
     @Override
-    public Type_eventmap vx_new(final Object... vals) {
+    public Event.Type_eventmap vx_new(final Object... vals) {
       return e_eventmap.vx_copy(vals);
     }
 
     @Override
-    public Type_eventmap vx_copy(final Object... vals) {
+    public Event.Type_eventmap vx_copy(final Object... vals) {
       Type_eventmap output = this;
       boolean ischanged = false;
       Class_eventmap val = this;
@@ -891,13 +892,13 @@ public final class Event {
   public static class Class_any_from_from_event extends Core.Class_base implements Func_any_from_from_event {
 
     @Override
-    public Func_any_from_from_event vx_new(Object... vals) {
+    public Event.Func_any_from_from_event vx_new(final Object... vals) {
       Class_any_from_from_event output = new Class_any_from_from_event();
       return output;
     }
 
     @Override
-    public Func_any_from_from_event vx_copy(Object... vals) {
+    public Event.Func_any_from_from_event vx_copy(final Object... vals) {
       Class_any_from_from_event output = new Class_any_from_from_event();
       return output;
     }
@@ -989,13 +990,13 @@ public final class Event {
   public static class Class_event_from_event extends Core.Class_base implements Func_event_from_event {
 
     @Override
-    public Func_event_from_event vx_new(Object... vals) {
+    public Event.Func_event_from_event vx_new(final Object... vals) {
       Class_event_from_event output = new Class_event_from_event();
       return output;
     }
 
     @Override
-    public Func_event_from_event vx_copy(Object... vals) {
+    public Event.Func_event_from_event vx_copy(final Object... vals) {
       Class_event_from_event output = new Class_event_from_event();
       return output;
     }
@@ -1083,13 +1084,13 @@ public final class Event {
   public static class Class_event_from_event_async extends Core.Class_base implements Func_event_from_event_async {
 
     @Override
-    public Func_event_from_event_async vx_new(Object... vals) {
+    public Event.Func_event_from_event_async vx_new(final Object... vals) {
       Class_event_from_event_async output = new Class_event_from_event_async();
       return output;
     }
 
     @Override
-    public Func_event_from_event_async vx_copy(Object... vals) {
+    public Event.Func_event_from_event_async vx_copy(final Object... vals) {
       Class_event_from_event_async output = new Class_event_from_event_async();
       return output;
     }
@@ -1175,13 +1176,13 @@ public final class Event {
   public static class Class_eventmap_from_eventlist extends Core.Class_base implements Func_eventmap_from_eventlist {
 
     @Override
-    public Func_eventmap_from_eventlist vx_new(Object... vals) {
+    public Event.Func_eventmap_from_eventlist vx_new(final Object... vals) {
       Class_eventmap_from_eventlist output = new Class_eventmap_from_eventlist();
       return output;
     }
 
     @Override
-    public Func_eventmap_from_eventlist vx_copy(Object... vals) {
+    public Event.Func_eventmap_from_eventlist vx_copy(final Object... vals) {
       Class_eventmap_from_eventlist output = new Class_eventmap_from_eventlist();
       return output;
     }

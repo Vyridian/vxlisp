@@ -63,12 +63,12 @@ public final class Csv {
     }
 
     @Override
-    public Type_csv vx_new(final Object... vals) {
+    public Csv.Type_csv vx_new(final Object... vals) {
       return e_csv.vx_copy(vals);
     }
 
     @Override
-    public Type_csv vx_copy(final Object... vals) {
+    public Csv.Type_csv vx_copy(final Object... vals) {
       Type_csv output = this;
       boolean ischanged = false;
       Class_csv val = this;
@@ -295,12 +295,12 @@ public final class Csv {
     }
 
     @Override
-    public Type_csvrowmap vx_new(final Object... vals) {
+    public Csv.Type_csvrowmap vx_new(final Object... vals) {
       return e_csvrowmap.vx_copy(vals);
     }
 
     @Override
-    public Type_csvrowmap vx_copy(final Object... vals) {
+    public Csv.Type_csvrowmap vx_copy(final Object... vals) {
       Type_csvrowmap output = this;
       boolean ischanged = false;
       Class_csvrowmap val = this;
@@ -441,12 +441,12 @@ public final class Csv {
     }
 
     @Override
-    public Type_csvrows vx_new(final Object... vals) {
+    public Csv.Type_csvrows vx_new(final Object... vals) {
       return e_csvrows.vx_copy(vals);
     }
 
     @Override
-    public Type_csvrows vx_copy(final Object... vals) {
+    public Csv.Type_csvrows vx_copy(final Object... vals) {
       Type_csvrows output = this;
       boolean ischanged = false;
       Class_csvrows val = this;
@@ -462,12 +462,13 @@ public final class Csv {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Core.Type_stringlist) {
+          Core.Type_stringlist anysub = (Core.Type_stringlist)valsub;
           ischanged = true;
-          listval.add((Core.Type_stringlist)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Core.Type_stringlist) {
           ischanged = true;
           listval.add((Core.Type_stringlist)valsub);
-        } else if (valsub instanceof Type_csvrows) {
+        } else if (valsub instanceof Csv.Type_csvrows) {
           Type_csvrows multi = (Type_csvrows)valsub;
           ischanged = true;
           listval.addAll(multi.vx_liststringlist());
@@ -598,13 +599,13 @@ public final class Csv {
   public static class Class_csv_read_from_file extends Core.Class_base implements Func_csv_read_from_file {
 
     @Override
-    public Func_csv_read_from_file vx_new(Object... vals) {
+    public Csv.Func_csv_read_from_file vx_new(final Object... vals) {
       Class_csv_read_from_file output = new Class_csv_read_from_file();
       return output;
     }
 
     @Override
-    public Func_csv_read_from_file vx_copy(Object... vals) {
+    public Csv.Func_csv_read_from_file vx_copy(final Object... vals) {
       Class_csv_read_from_file output = new Class_csv_read_from_file();
       return output;
     }
@@ -696,13 +697,13 @@ public final class Csv {
   public static class Class_csv_from_file extends Core.Class_base implements Func_csv_from_file {
 
     @Override
-    public Func_csv_from_file vx_new(Object... vals) {
+    public Csv.Func_csv_from_file vx_new(final Object... vals) {
       Class_csv_from_file output = new Class_csv_from_file();
       return output;
     }
 
     @Override
-    public Func_csv_from_file vx_copy(Object... vals) {
+    public Csv.Func_csv_from_file vx_copy(final Object... vals) {
       Class_csv_from_file output = new Class_csv_from_file();
       return output;
     }
@@ -793,13 +794,13 @@ public final class Csv {
   public static class Class_csv_from_string extends Core.Class_base implements Func_csv_from_string {
 
     @Override
-    public Func_csv_from_string vx_new(Object... vals) {
+    public Csv.Func_csv_from_string vx_new(final Object... vals) {
       Class_csv_from_string output = new Class_csv_from_string();
       return output;
     }
 
     @Override
-    public Func_csv_from_string vx_copy(Object... vals) {
+    public Csv.Func_csv_from_string vx_copy(final Object... vals) {
       Class_csv_from_string output = new Class_csv_from_string();
       return output;
     }
@@ -889,13 +890,13 @@ public final class Csv {
   public static class Class_csv_from_textblock extends Core.Class_base implements Func_csv_from_textblock {
 
     @Override
-    public Func_csv_from_textblock vx_new(Object... vals) {
+    public Csv.Func_csv_from_textblock vx_new(final Object... vals) {
       Class_csv_from_textblock output = new Class_csv_from_textblock();
       return output;
     }
 
     @Override
-    public Func_csv_from_textblock vx_copy(Object... vals) {
+    public Csv.Func_csv_from_textblock vx_copy(final Object... vals) {
       Class_csv_from_textblock output = new Class_csv_from_textblock();
       return output;
     }
@@ -995,13 +996,13 @@ public final class Csv {
   public static class Class_csvrows_from_textblock extends Core.Class_base implements Func_csvrows_from_textblock {
 
     @Override
-    public Func_csvrows_from_textblock vx_new(Object... vals) {
+    public Csv.Func_csvrows_from_textblock vx_new(final Object... vals) {
       Class_csvrows_from_textblock output = new Class_csvrows_from_textblock();
       return output;
     }
 
     @Override
-    public Func_csvrows_from_textblock vx_copy(Object... vals) {
+    public Csv.Func_csvrows_from_textblock vx_copy(final Object... vals) {
       Class_csvrows_from_textblock output = new Class_csvrows_from_textblock();
       return output;
     }
@@ -1102,13 +1103,13 @@ public final class Csv {
   public static class Class_stringmap_from_csv extends Core.Class_base implements Func_stringmap_from_csv {
 
     @Override
-    public Func_stringmap_from_csv vx_new(Object... vals) {
+    public Csv.Func_stringmap_from_csv vx_new(final Object... vals) {
       Class_stringmap_from_csv output = new Class_stringmap_from_csv();
       return output;
     }
 
     @Override
-    public Func_stringmap_from_csv vx_copy(Object... vals) {
+    public Csv.Func_stringmap_from_csv vx_copy(final Object... vals) {
       Class_stringmap_from_csv output = new Class_stringmap_from_csv();
       return output;
     }
@@ -1217,13 +1218,13 @@ public final class Csv {
   public static class Class_textblock_csv_from_string extends Core.Class_base implements Func_textblock_csv_from_string {
 
     @Override
-    public Func_textblock_csv_from_string vx_new(Object... vals) {
+    public Csv.Func_textblock_csv_from_string vx_new(final Object... vals) {
       Class_textblock_csv_from_string output = new Class_textblock_csv_from_string();
       return output;
     }
 
     @Override
-    public Func_textblock_csv_from_string vx_copy(Object... vals) {
+    public Csv.Func_textblock_csv_from_string vx_copy(final Object... vals) {
       Class_textblock_csv_from_string output = new Class_textblock_csv_from_string();
       return output;
     }

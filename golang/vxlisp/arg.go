@@ -10,6 +10,7 @@ type vxarg struct {
 	alias       string
 	doc         string
 	isdefault   bool
+	isfinal     bool
 	isgeneric   bool
 	generictype *vxtype
 	mapgeneric  map[string]*vxtype
@@ -59,6 +60,11 @@ func NewArgContext() vxarg {
 func NewArgFromType(typ *vxtype) vxarg {
 	output := NewArg(typ.name)
 	output.value = NewValueFromType(typ)
+	return output
+}
+
+func NewListArg() []vxarg {
+	var output []vxarg
 	return output
 }
 

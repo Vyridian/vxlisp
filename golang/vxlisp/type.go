@@ -80,7 +80,27 @@ var maptype2 = NewTypeMap("vx/core/map2", anytype)
 
 var msgtype = NewType("vx/core/msg")
 
+var msgblocktype = NewType("vx/core/msgblock")
+
+var msgblocklisttype = NewType("vx/core/msgblocklist")
+
+var msglisttype = NewType("vx/core/msglist")
+
 var numbertype = NewType("vx/core/number")
+
+var rawbooleantype = NewType("boolean")
+
+var rawfloattype = NewType("float")
+
+var rawinttype = NewType("int")
+
+var rawlisttype = NewType("list")
+
+var rawmaptype = NewType("map")
+
+var rawobjecttype = NewType("object")
+
+var rawstringtype = NewType("string")
 
 var sessiontype = NewTypeStruct("vx/core/session")
 
@@ -89,8 +109,6 @@ var settingtype = NewTypeStruct("vx/core/setting")
 var statetype = NewType("vx/core/state")
 
 var stringtype = NewType("vx/core/string")
-
-var stringprimitivetype = NewType("string")
 
 var stringlisttype = NewTypeList("vx/core/stringlist", stringtype)
 

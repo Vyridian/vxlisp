@@ -99,12 +99,12 @@ public final class Textblock {
     }
 
     @Override
-    public Type_delim vx_new(final Object... vals) {
+    public Textblock.Type_delim vx_new(final Object... vals) {
       return e_delim.vx_copy(vals);
     }
 
     @Override
-    public Type_delim vx_copy(final Object... vals) {
+    public Textblock.Type_delim vx_copy(final Object... vals) {
       Type_delim output = this;
       boolean ischanged = false;
       Class_delim val = this;
@@ -369,12 +369,12 @@ public final class Textblock {
     }
 
     @Override
-    public Type_delimlist vx_new(final Object... vals) {
+    public Textblock.Type_delimlist vx_new(final Object... vals) {
       return e_delimlist.vx_copy(vals);
     }
 
     @Override
-    public Type_delimlist vx_copy(final Object... vals) {
+    public Textblock.Type_delimlist vx_copy(final Object... vals) {
       Type_delimlist output = this;
       boolean ischanged = false;
       Class_delimlist val = this;
@@ -390,12 +390,13 @@ public final class Textblock {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Textblock.Type_delim) {
+          Textblock.Type_delim anysub = (Textblock.Type_delim)valsub;
           ischanged = true;
-          listval.add((Textblock.Type_delim)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Textblock.Type_delim) {
           ischanged = true;
           listval.add((Textblock.Type_delim)valsub);
-        } else if (valsub instanceof Type_delimlist) {
+        } else if (valsub instanceof Textblock.Type_delimlist) {
           Type_delimlist multi = (Type_delimlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listdelim());
@@ -617,12 +618,12 @@ public final class Textblock {
     }
 
     @Override
-    public Type_textblock vx_new(final Object... vals) {
+    public Textblock.Type_textblock vx_new(final Object... vals) {
       return e_textblock.vx_copy(vals);
     }
 
     @Override
-    public Type_textblock vx_copy(final Object... vals) {
+    public Textblock.Type_textblock vx_copy(final Object... vals) {
       Type_textblock output = this;
       boolean ischanged = false;
       Class_textblock val = this;
@@ -1034,12 +1035,12 @@ public final class Textblock {
     }
 
     @Override
-    public Type_textblocklist vx_new(final Object... vals) {
+    public Textblock.Type_textblocklist vx_new(final Object... vals) {
       return e_textblocklist.vx_copy(vals);
     }
 
     @Override
-    public Type_textblocklist vx_copy(final Object... vals) {
+    public Textblock.Type_textblocklist vx_copy(final Object... vals) {
       Type_textblocklist output = this;
       boolean ischanged = false;
       Class_textblocklist val = this;
@@ -1055,12 +1056,13 @@ public final class Textblock {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Textblock.Type_textblock) {
+          Textblock.Type_textblock anysub = (Textblock.Type_textblock)valsub;
           ischanged = true;
-          listval.add((Textblock.Type_textblock)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Textblock.Type_textblock) {
           ischanged = true;
           listval.add((Textblock.Type_textblock)valsub);
-        } else if (valsub instanceof Type_textblocklist) {
+        } else if (valsub instanceof Textblock.Type_textblocklist) {
           Type_textblocklist multi = (Type_textblocklist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listtextblock());
@@ -2244,13 +2246,13 @@ public final class Textblock {
   public static class Class_children_from_textblock extends Core.Class_base implements Func_children_from_textblock {
 
     @Override
-    public Func_children_from_textblock vx_new(Object... vals) {
+    public Textblock.Func_children_from_textblock vx_new(final Object... vals) {
       Class_children_from_textblock output = new Class_children_from_textblock();
       return output;
     }
 
     @Override
-    public Func_children_from_textblock vx_copy(Object... vals) {
+    public Textblock.Func_children_from_textblock vx_copy(final Object... vals) {
       Class_children_from_textblock output = new Class_children_from_textblock();
       return output;
     }
@@ -2336,13 +2338,13 @@ public final class Textblock {
   public static class Class_delim_first_from_delim_delim extends Core.Class_base implements Func_delim_first_from_delim_delim {
 
     @Override
-    public Func_delim_first_from_delim_delim vx_new(Object... vals) {
+    public Textblock.Func_delim_first_from_delim_delim vx_new(final Object... vals) {
       Class_delim_first_from_delim_delim output = new Class_delim_first_from_delim_delim();
       return output;
     }
 
     @Override
-    public Func_delim_first_from_delim_delim vx_copy(Object... vals) {
+    public Textblock.Func_delim_first_from_delim_delim vx_copy(final Object... vals) {
       Class_delim_first_from_delim_delim output = new Class_delim_first_from_delim_delim();
       return output;
     }
@@ -2473,13 +2475,13 @@ public final class Textblock {
   public static class Class_delim_first_from_string_delimlist extends Core.Class_base implements Func_delim_first_from_string_delimlist {
 
     @Override
-    public Func_delim_first_from_string_delimlist vx_new(Object... vals) {
+    public Textblock.Func_delim_first_from_string_delimlist vx_new(final Object... vals) {
       Class_delim_first_from_string_delimlist output = new Class_delim_first_from_string_delimlist();
       return output;
     }
 
     @Override
-    public Func_delim_first_from_string_delimlist vx_copy(Object... vals) {
+    public Textblock.Func_delim_first_from_string_delimlist vx_copy(final Object... vals) {
       Class_delim_first_from_string_delimlist output = new Class_delim_first_from_string_delimlist();
       return output;
     }
@@ -2591,13 +2593,13 @@ public final class Textblock {
   public static class Class_delim_pos_from_string_delim extends Core.Class_base implements Func_delim_pos_from_string_delim {
 
     @Override
-    public Func_delim_pos_from_string_delim vx_new(Object... vals) {
+    public Textblock.Func_delim_pos_from_string_delim vx_new(final Object... vals) {
       Class_delim_pos_from_string_delim output = new Class_delim_pos_from_string_delim();
       return output;
     }
 
     @Override
-    public Func_delim_pos_from_string_delim vx_copy(Object... vals) {
+    public Textblock.Func_delim_pos_from_string_delim vx_copy(final Object... vals) {
       Class_delim_pos_from_string_delim output = new Class_delim_pos_from_string_delim();
       return output;
     }
@@ -2702,13 +2704,13 @@ public final class Textblock {
   public static class Class_delimlist_pos_from_string_delimlist extends Core.Class_base implements Func_delimlist_pos_from_string_delimlist {
 
     @Override
-    public Func_delimlist_pos_from_string_delimlist vx_new(Object... vals) {
+    public Textblock.Func_delimlist_pos_from_string_delimlist vx_new(final Object... vals) {
       Class_delimlist_pos_from_string_delimlist output = new Class_delimlist_pos_from_string_delimlist();
       return output;
     }
 
     @Override
-    public Func_delimlist_pos_from_string_delimlist vx_copy(Object... vals) {
+    public Textblock.Func_delimlist_pos_from_string_delimlist vx_copy(final Object... vals) {
       Class_delimlist_pos_from_string_delimlist output = new Class_delimlist_pos_from_string_delimlist();
       return output;
     }
@@ -2790,13 +2792,13 @@ public final class Textblock {
   public static class Class_is_close extends Core.Class_base implements Func_is_close {
 
     @Override
-    public Func_is_close vx_new(Object... vals) {
+    public Textblock.Func_is_close vx_new(final Object... vals) {
       Class_is_close output = new Class_is_close();
       return output;
     }
 
     @Override
-    public Func_is_close vx_copy(Object... vals) {
+    public Textblock.Func_is_close vx_copy(final Object... vals) {
       Class_is_close output = new Class_is_close();
       return output;
     }
@@ -2884,13 +2886,13 @@ public final class Textblock {
   public static class Class_is_single extends Core.Class_base implements Func_is_single {
 
     @Override
-    public Func_is_single vx_new(Object... vals) {
+    public Textblock.Func_is_single vx_new(final Object... vals) {
       Class_is_single output = new Class_is_single();
       return output;
     }
 
     @Override
-    public Func_is_single vx_copy(Object... vals) {
+    public Textblock.Func_is_single vx_copy(final Object... vals) {
       Class_is_single output = new Class_is_single();
       return output;
     }
@@ -2984,13 +2986,13 @@ public final class Textblock {
   public static class Class_stringlist_from_textblocklist extends Core.Class_base implements Func_stringlist_from_textblocklist {
 
     @Override
-    public Func_stringlist_from_textblocklist vx_new(Object... vals) {
+    public Textblock.Func_stringlist_from_textblocklist vx_new(final Object... vals) {
       Class_stringlist_from_textblocklist output = new Class_stringlist_from_textblocklist();
       return output;
     }
 
     @Override
-    public Func_stringlist_from_textblocklist vx_copy(Object... vals) {
+    public Textblock.Func_stringlist_from_textblocklist vx_copy(final Object... vals) {
       Class_stringlist_from_textblocklist output = new Class_stringlist_from_textblocklist();
       return output;
     }
@@ -3079,13 +3081,13 @@ public final class Textblock {
   public static class Class_text_from_textblock extends Core.Class_base implements Func_text_from_textblock {
 
     @Override
-    public Func_text_from_textblock vx_new(Object... vals) {
+    public Textblock.Func_text_from_textblock vx_new(final Object... vals) {
       Class_text_from_textblock output = new Class_text_from_textblock();
       return output;
     }
 
     @Override
-    public Func_text_from_textblock vx_copy(Object... vals) {
+    public Textblock.Func_text_from_textblock vx_copy(final Object... vals) {
       Class_text_from_textblock output = new Class_text_from_textblock();
       return output;
     }
@@ -3172,13 +3174,13 @@ public final class Textblock {
   public static class Class_textblock_addchild_from_textblock_find_child extends Core.Class_base implements Func_textblock_addchild_from_textblock_find_child {
 
     @Override
-    public Func_textblock_addchild_from_textblock_find_child vx_new(Object... vals) {
+    public Textblock.Func_textblock_addchild_from_textblock_find_child vx_new(final Object... vals) {
       Class_textblock_addchild_from_textblock_find_child output = new Class_textblock_addchild_from_textblock_find_child();
       return output;
     }
 
     @Override
-    public Func_textblock_addchild_from_textblock_find_child vx_copy(Object... vals) {
+    public Textblock.Func_textblock_addchild_from_textblock_find_child vx_copy(final Object... vals) {
       Class_textblock_addchild_from_textblock_find_child output = new Class_textblock_addchild_from_textblock_find_child();
       return output;
     }
@@ -3305,13 +3307,13 @@ public final class Textblock {
   public static class Class_textblock_delimnotfound extends Core.Class_base implements Func_textblock_delimnotfound {
 
     @Override
-    public Func_textblock_delimnotfound vx_new(Object... vals) {
+    public Textblock.Func_textblock_delimnotfound vx_new(final Object... vals) {
       Class_textblock_delimnotfound output = new Class_textblock_delimnotfound();
       return output;
     }
 
     @Override
-    public Func_textblock_delimnotfound vx_copy(Object... vals) {
+    public Textblock.Func_textblock_delimnotfound vx_copy(final Object... vals) {
       Class_textblock_delimnotfound output = new Class_textblock_delimnotfound();
       return output;
     }
@@ -3655,13 +3657,13 @@ public final class Textblock {
   public static class Class_textblock_findparent_from_textblock extends Core.Class_base implements Func_textblock_findparent_from_textblock {
 
     @Override
-    public Func_textblock_findparent_from_textblock vx_new(Object... vals) {
+    public Textblock.Func_textblock_findparent_from_textblock vx_new(final Object... vals) {
       Class_textblock_findparent_from_textblock output = new Class_textblock_findparent_from_textblock();
       return output;
     }
 
     @Override
-    public Func_textblock_findparent_from_textblock vx_copy(Object... vals) {
+    public Textblock.Func_textblock_findparent_from_textblock vx_copy(final Object... vals) {
       Class_textblock_findparent_from_textblock output = new Class_textblock_findparent_from_textblock();
       return output;
     }
@@ -3789,13 +3791,13 @@ public final class Textblock {
   public static class Class_textblock_init extends Core.Class_base implements Func_textblock_init {
 
     @Override
-    public Func_textblock_init vx_new(Object... vals) {
+    public Textblock.Func_textblock_init vx_new(final Object... vals) {
       Class_textblock_init output = new Class_textblock_init();
       return output;
     }
 
     @Override
-    public Func_textblock_init vx_copy(Object... vals) {
+    public Textblock.Func_textblock_init vx_copy(final Object... vals) {
       Class_textblock_init output = new Class_textblock_init();
       return output;
     }
@@ -3920,13 +3922,13 @@ public final class Textblock {
   public static class Class_textblock_parse extends Core.Class_base implements Func_textblock_parse {
 
     @Override
-    public Func_textblock_parse vx_new(Object... vals) {
+    public Textblock.Func_textblock_parse vx_new(final Object... vals) {
       Class_textblock_parse output = new Class_textblock_parse();
       return output;
     }
 
     @Override
-    public Func_textblock_parse vx_copy(Object... vals) {
+    public Textblock.Func_textblock_parse vx_copy(final Object... vals) {
       Class_textblock_parse output = new Class_textblock_parse();
       return output;
     }
@@ -4027,13 +4029,13 @@ public final class Textblock {
   public static class Class_textblock_parse_one extends Core.Class_base implements Func_textblock_parse_one {
 
     @Override
-    public Func_textblock_parse_one vx_new(Object... vals) {
+    public Textblock.Func_textblock_parse_one vx_new(final Object... vals) {
       Class_textblock_parse_one output = new Class_textblock_parse_one();
       return output;
     }
 
     @Override
-    public Func_textblock_parse_one vx_copy(Object... vals) {
+    public Textblock.Func_textblock_parse_one vx_copy(final Object... vals) {
       Class_textblock_parse_one output = new Class_textblock_parse_one();
       return output;
     }
@@ -4219,13 +4221,13 @@ public final class Textblock {
   public static class Class_textblock_parse_from_string_delim extends Core.Class_base implements Func_textblock_parse_from_string_delim {
 
     @Override
-    public Func_textblock_parse_from_string_delim vx_new(Object... vals) {
+    public Textblock.Func_textblock_parse_from_string_delim vx_new(final Object... vals) {
       Class_textblock_parse_from_string_delim output = new Class_textblock_parse_from_string_delim();
       return output;
     }
 
     @Override
-    public Func_textblock_parse_from_string_delim vx_copy(Object... vals) {
+    public Textblock.Func_textblock_parse_from_string_delim vx_copy(final Object... vals) {
       Class_textblock_parse_from_string_delim output = new Class_textblock_parse_from_string_delim();
       return output;
     }
@@ -4307,13 +4309,13 @@ public final class Textblock {
   public static class Class_textblock_replace_from_textblock_find_replace extends Core.Class_base implements Func_textblock_replace_from_textblock_find_replace {
 
     @Override
-    public Func_textblock_replace_from_textblock_find_replace vx_new(Object... vals) {
+    public Textblock.Func_textblock_replace_from_textblock_find_replace vx_new(final Object... vals) {
       Class_textblock_replace_from_textblock_find_replace output = new Class_textblock_replace_from_textblock_find_replace();
       return output;
     }
 
     @Override
-    public Func_textblock_replace_from_textblock_find_replace vx_copy(Object... vals) {
+    public Textblock.Func_textblock_replace_from_textblock_find_replace vx_copy(final Object... vals) {
       Class_textblock_replace_from_textblock_find_replace output = new Class_textblock_replace_from_textblock_find_replace();
       return output;
     }
@@ -4431,13 +4433,13 @@ public final class Textblock {
   public static class Class_textblock_startleft_from_string_delim_offset extends Core.Class_base implements Func_textblock_startleft_from_string_delim_offset {
 
     @Override
-    public Func_textblock_startleft_from_string_delim_offset vx_new(Object... vals) {
+    public Textblock.Func_textblock_startleft_from_string_delim_offset vx_new(final Object... vals) {
       Class_textblock_startleft_from_string_delim_offset output = new Class_textblock_startleft_from_string_delim_offset();
       return output;
     }
 
     @Override
-    public Func_textblock_startleft_from_string_delim_offset vx_copy(Object... vals) {
+    public Textblock.Func_textblock_startleft_from_string_delim_offset vx_copy(final Object... vals) {
       Class_textblock_startleft_from_string_delim_offset output = new Class_textblock_startleft_from_string_delim_offset();
       return output;
     }
@@ -4563,13 +4565,13 @@ public final class Textblock {
   public static class Class_textblock_startright_from_string_delim_offset extends Core.Class_base implements Func_textblock_startright_from_string_delim_offset {
 
     @Override
-    public Func_textblock_startright_from_string_delim_offset vx_new(Object... vals) {
+    public Textblock.Func_textblock_startright_from_string_delim_offset vx_new(final Object... vals) {
       Class_textblock_startright_from_string_delim_offset output = new Class_textblock_startright_from_string_delim_offset();
       return output;
     }
 
     @Override
-    public Func_textblock_startright_from_string_delim_offset vx_copy(Object... vals) {
+    public Textblock.Func_textblock_startright_from_string_delim_offset vx_copy(final Object... vals) {
       Class_textblock_startright_from_string_delim_offset output = new Class_textblock_startright_from_string_delim_offset();
       return output;
     }
@@ -4747,13 +4749,13 @@ public final class Textblock {
   public static class Class_textblock_from_close_textblock extends Core.Class_base implements Func_textblock_from_close_textblock {
 
     @Override
-    public Func_textblock_from_close_textblock vx_new(Object... vals) {
+    public Textblock.Func_textblock_from_close_textblock vx_new(final Object... vals) {
       Class_textblock_from_close_textblock output = new Class_textblock_from_close_textblock();
       return output;
     }
 
     @Override
-    public Func_textblock_from_close_textblock vx_copy(Object... vals) {
+    public Textblock.Func_textblock_from_close_textblock vx_copy(final Object... vals) {
       Class_textblock_from_close_textblock output = new Class_textblock_from_close_textblock();
       return output;
     }
@@ -4948,13 +4950,13 @@ public final class Textblock {
   public static class Class_textblock_from_empty_textblock extends Core.Class_base implements Func_textblock_from_empty_textblock {
 
     @Override
-    public Func_textblock_from_empty_textblock vx_new(Object... vals) {
+    public Textblock.Func_textblock_from_empty_textblock vx_new(final Object... vals) {
       Class_textblock_from_empty_textblock output = new Class_textblock_from_empty_textblock();
       return output;
     }
 
     @Override
-    public Func_textblock_from_empty_textblock vx_copy(Object... vals) {
+    public Textblock.Func_textblock_from_empty_textblock vx_copy(final Object... vals) {
       Class_textblock_from_empty_textblock output = new Class_textblock_from_empty_textblock();
       return output;
     }
@@ -5028,13 +5030,13 @@ public final class Textblock {
   public static class Class_textblock_from_open_textblock extends Core.Class_base implements Func_textblock_from_open_textblock {
 
     @Override
-    public Func_textblock_from_open_textblock vx_new(Object... vals) {
+    public Textblock.Func_textblock_from_open_textblock vx_new(final Object... vals) {
       Class_textblock_from_open_textblock output = new Class_textblock_from_open_textblock();
       return output;
     }
 
     @Override
-    public Func_textblock_from_open_textblock vx_copy(Object... vals) {
+    public Textblock.Func_textblock_from_open_textblock vx_copy(final Object... vals) {
       Class_textblock_from_open_textblock output = new Class_textblock_from_open_textblock();
       return output;
     }
@@ -5272,13 +5274,13 @@ public final class Textblock {
   public static class Class_textblock_from_single_textblock extends Core.Class_base implements Func_textblock_from_single_textblock {
 
     @Override
-    public Func_textblock_from_single_textblock vx_new(Object... vals) {
+    public Textblock.Func_textblock_from_single_textblock vx_new(final Object... vals) {
       Class_textblock_from_single_textblock output = new Class_textblock_from_single_textblock();
       return output;
     }
 
     @Override
-    public Func_textblock_from_single_textblock vx_copy(Object... vals) {
+    public Textblock.Func_textblock_from_single_textblock vx_copy(final Object... vals) {
       Class_textblock_from_single_textblock output = new Class_textblock_from_single_textblock();
       return output;
     }
@@ -5506,13 +5508,13 @@ public final class Textblock {
   public static class Class_textblock_from_string_delim extends Core.Class_base implements Func_textblock_from_string_delim {
 
     @Override
-    public Func_textblock_from_string_delim vx_new(Object... vals) {
+    public Textblock.Func_textblock_from_string_delim vx_new(final Object... vals) {
       Class_textblock_from_string_delim output = new Class_textblock_from_string_delim();
       return output;
     }
 
     @Override
-    public Func_textblock_from_string_delim vx_copy(Object... vals) {
+    public Textblock.Func_textblock_from_string_delim vx_copy(final Object... vals) {
       Class_textblock_from_string_delim output = new Class_textblock_from_string_delim();
       return output;
     }
@@ -5599,13 +5601,13 @@ public final class Textblock {
   public static class Class_textblock_from_textblock_delim extends Core.Class_base implements Func_textblock_from_textblock_delim {
 
     @Override
-    public Func_textblock_from_textblock_delim vx_new(Object... vals) {
+    public Textblock.Func_textblock_from_textblock_delim vx_new(final Object... vals) {
       Class_textblock_from_textblock_delim output = new Class_textblock_from_textblock_delim();
       return output;
     }
 
     @Override
-    public Func_textblock_from_textblock_delim vx_copy(Object... vals) {
+    public Textblock.Func_textblock_from_textblock_delim vx_copy(final Object... vals) {
       Class_textblock_from_textblock_delim output = new Class_textblock_from_textblock_delim();
       return output;
     }
@@ -5679,13 +5681,13 @@ public final class Textblock {
   public static class Class_textblocklist_from_textblocklist_remove extends Core.Class_base implements Func_textblocklist_from_textblocklist_remove {
 
     @Override
-    public Func_textblocklist_from_textblocklist_remove vx_new(Object... vals) {
+    public Textblock.Func_textblocklist_from_textblocklist_remove vx_new(final Object... vals) {
       Class_textblocklist_from_textblocklist_remove output = new Class_textblocklist_from_textblocklist_remove();
       return output;
     }
 
     @Override
-    public Func_textblocklist_from_textblocklist_remove vx_copy(Object... vals) {
+    public Textblock.Func_textblocklist_from_textblocklist_remove vx_copy(final Object... vals) {
       Class_textblocklist_from_textblocklist_remove output = new Class_textblocklist_from_textblocklist_remove();
       return output;
     }

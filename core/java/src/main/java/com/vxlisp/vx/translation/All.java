@@ -20,13 +20,13 @@ public final class All {
   public static class Class_context_all extends Core.Class_base implements Func_context_all {
 
     @Override
-    public Func_context_all vx_new(Object... vals) {
+    public All.Func_context_all vx_new(final Object... vals) {
       Class_context_all output = new Class_context_all();
       return output;
     }
 
     @Override
-    public Func_context_all vx_copy(Object... vals) {
+    public All.Func_context_all vx_copy(final Object... vals) {
       Class_context_all output = new Class_context_all();
       return output;
     }
@@ -124,13 +124,13 @@ public final class All {
   public static class Class_translationmap_all extends Core.Class_base implements Func_translationmap_all {
 
     @Override
-    public Func_translationmap_all vx_new(Object... vals) {
+    public All.Func_translationmap_all vx_new(final Object... vals) {
       Class_translationmap_all output = new Class_translationmap_all();
       return output;
     }
 
     @Override
-    public Func_translationmap_all vx_copy(Object... vals) {
+    public All.Func_translationmap_all vx_copy(final Object... vals) {
       Class_translationmap_all output = new Class_translationmap_all();
       return output;
     }

@@ -110,12 +110,12 @@ public final class Tree {
     }
 
     @Override
-    public Type_branch vx_new(final Object... vals) {
+    public Tree.Type_branch vx_new(final Object... vals) {
       return e_branch.vx_copy(vals);
     }
 
     @Override
-    public Type_branch vx_copy(final Object... vals) {
+    public Tree.Type_branch vx_copy(final Object... vals) {
       Type_branch output = this;
       boolean ischanged = false;
       Class_branch val = this;
@@ -366,12 +366,12 @@ public final class Tree {
   public static class Class_brancharrow extends Core.Class_base implements Type_brancharrow {
 
     @Override
-    public Type_brancharrow vx_new(final Object... vals) {
+    public Tree.Type_brancharrow vx_new(final Object... vals) {
       return e_brancharrow.vx_copy(vals);
     }
 
     @Override
-    public Type_brancharrow vx_copy(final Object... vals) {
+    public Tree.Type_brancharrow vx_copy(final Object... vals) {
       Type_brancharrow output = this;
       boolean ischanged = false;
       Class_brancharrow val = this;
@@ -457,12 +457,12 @@ public final class Tree {
     }
 
     @Override
-    public Type_branchlist vx_new(final Object... vals) {
+    public Tree.Type_branchlist vx_new(final Object... vals) {
       return e_branchlist.vx_copy(vals);
     }
 
     @Override
-    public Type_branchlist vx_copy(final Object... vals) {
+    public Tree.Type_branchlist vx_copy(final Object... vals) {
       Type_branchlist output = this;
       boolean ischanged = false;
       Class_branchlist val = this;
@@ -478,12 +478,13 @@ public final class Tree {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Tree.Type_branch) {
+          Tree.Type_branch anysub = (Tree.Type_branch)valsub;
           ischanged = true;
-          listval.add((Tree.Type_branch)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Tree.Type_branch) {
           ischanged = true;
           listval.add((Tree.Type_branch)valsub);
-        } else if (valsub instanceof Type_branchlist) {
+        } else if (valsub instanceof Tree.Type_branchlist) {
           Type_branchlist multi = (Type_branchlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listbranch());
@@ -608,12 +609,12 @@ public final class Tree {
     }
 
     @Override
-    public Type_leaf vx_new(final Object... vals) {
+    public Tree.Type_leaf vx_new(final Object... vals) {
       return e_leaf.vx_copy(vals);
     }
 
     @Override
-    public Type_leaf vx_copy(final Object... vals) {
+    public Tree.Type_leaf vx_copy(final Object... vals) {
       Type_leaf output = this;
       boolean ischanged = false;
       Class_leaf val = this;
@@ -825,12 +826,12 @@ public final class Tree {
     }
 
     @Override
-    public Type_leaflist vx_new(final Object... vals) {
+    public Tree.Type_leaflist vx_new(final Object... vals) {
       return e_leaflist.vx_copy(vals);
     }
 
     @Override
-    public Type_leaflist vx_copy(final Object... vals) {
+    public Tree.Type_leaflist vx_copy(final Object... vals) {
       Type_leaflist output = this;
       boolean ischanged = false;
       Class_leaflist val = this;
@@ -846,12 +847,13 @@ public final class Tree {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Tree.Type_leaf) {
+          Tree.Type_leaf anysub = (Tree.Type_leaf)valsub;
           ischanged = true;
-          listval.add((Tree.Type_leaf)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Tree.Type_leaf) {
           ischanged = true;
           listval.add((Tree.Type_leaf)valsub);
-        } else if (valsub instanceof Type_leaflist) {
+        } else if (valsub instanceof Tree.Type_leaflist) {
           Type_leaflist multi = (Type_leaflist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listleaf());
@@ -976,12 +978,12 @@ public final class Tree {
     }
 
     @Override
-    public Type_tree vx_new(final Object... vals) {
+    public Tree.Type_tree vx_new(final Object... vals) {
       return e_tree.vx_copy(vals);
     }
 
     @Override
-    public Type_tree vx_copy(final Object... vals) {
+    public Tree.Type_tree vx_copy(final Object... vals) {
       Type_tree output = this;
       boolean ischanged = false;
       Class_tree val = this;

@@ -52,12 +52,12 @@ public final class Db {
     }
 
     @Override
-    public Type_db vx_new(final Object... vals) {
+    public Db.Type_db vx_new(final Object... vals) {
       return e_db.vx_copy(vals);
     }
 
     @Override
-    public Type_db vx_copy(final Object... vals) {
+    public Db.Type_db vx_copy(final Object... vals) {
       Type_db output = this;
       boolean ischanged = false;
       Class_db val = this;
@@ -269,12 +269,12 @@ public final class Db {
     }
 
     @Override
-    public Type_dbcell vx_new(final Object... vals) {
+    public Db.Type_dbcell vx_new(final Object... vals) {
       return e_dbcell.vx_copy(vals);
     }
 
     @Override
-    public Type_dbcell vx_copy(final Object... vals) {
+    public Db.Type_dbcell vx_copy(final Object... vals) {
       Type_dbcell output = this;
       boolean ischanged = false;
       Class_dbcell val = this;
@@ -574,12 +574,12 @@ public final class Db {
     }
 
     @Override
-    public Type_dbcellmap vx_new(final Object... vals) {
+    public Db.Type_dbcellmap vx_new(final Object... vals) {
       return e_dbcellmap.vx_copy(vals);
     }
 
     @Override
-    public Type_dbcellmap vx_copy(final Object... vals) {
+    public Db.Type_dbcellmap vx_copy(final Object... vals) {
       Type_dbcellmap output = this;
       boolean ischanged = false;
       Class_dbcellmap val = this;
@@ -745,12 +745,12 @@ public final class Db {
     }
 
     @Override
-    public Type_dbfield vx_new(final Object... vals) {
+    public Db.Type_dbfield vx_new(final Object... vals) {
       return e_dbfield.vx_copy(vals);
     }
 
     @Override
-    public Type_dbfield vx_copy(final Object... vals) {
+    public Db.Type_dbfield vx_copy(final Object... vals) {
       Type_dbfield output = this;
       boolean ischanged = false;
       Class_dbfield val = this;
@@ -1004,12 +1004,12 @@ public final class Db {
     }
 
     @Override
-    public Type_dbfieldmap vx_new(final Object... vals) {
+    public Db.Type_dbfieldmap vx_new(final Object... vals) {
       return e_dbfieldmap.vx_copy(vals);
     }
 
     @Override
-    public Type_dbfieldmap vx_copy(final Object... vals) {
+    public Db.Type_dbfieldmap vx_copy(final Object... vals) {
       Type_dbfieldmap output = this;
       boolean ischanged = false;
       Class_dbfieldmap val = this;
@@ -1124,12 +1124,12 @@ public final class Db {
   public static class Class_dbid extends Core.Class_base implements Type_dbid {
 
     @Override
-    public Type_dbid vx_new(final Object... vals) {
+    public Db.Type_dbid vx_new(final Object... vals) {
       return e_dbid.vx_copy(vals);
     }
 
     @Override
-    public Type_dbid vx_copy(final Object... vals) {
+    public Db.Type_dbid vx_copy(final Object... vals) {
       Type_dbid output = this;
       boolean ischanged = false;
       Class_dbid val = this;
@@ -1228,12 +1228,12 @@ public final class Db {
     }
 
     @Override
-    public Type_dblink vx_new(final Object... vals) {
+    public Db.Type_dblink vx_new(final Object... vals) {
       return e_dblink.vx_copy(vals);
     }
 
     @Override
-    public Type_dblink vx_copy(final Object... vals) {
+    public Db.Type_dblink vx_copy(final Object... vals) {
       Type_dblink output = this;
       boolean ischanged = false;
       Class_dblink val = this;
@@ -1417,12 +1417,12 @@ public final class Db {
     }
 
     @Override
-    public Type_dblinklist vx_new(final Object... vals) {
+    public Db.Type_dblinklist vx_new(final Object... vals) {
       return e_dblinklist.vx_copy(vals);
     }
 
     @Override
-    public Type_dblinklist vx_copy(final Object... vals) {
+    public Db.Type_dblinklist vx_copy(final Object... vals) {
       Type_dblinklist output = this;
       boolean ischanged = false;
       Class_dblinklist val = this;
@@ -1438,12 +1438,13 @@ public final class Db {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub instanceof Db.Type_dblink) {
+          Db.Type_dblink anysub = (Db.Type_dblink)valsub;
           ischanged = true;
-          listval.add((Db.Type_dblink)valsub);
+          listval.add(anysub);
         } else if (valsub instanceof Db.Type_dblink) {
           ischanged = true;
           listval.add((Db.Type_dblink)valsub);
-        } else if (valsub instanceof Type_dblinklist) {
+        } else if (valsub instanceof Db.Type_dblinklist) {
           Type_dblinklist multi = (Type_dblinklist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listdblink());
@@ -1557,12 +1558,12 @@ public final class Db {
     }
 
     @Override
-    public Type_dbnode vx_new(final Object... vals) {
+    public Db.Type_dbnode vx_new(final Object... vals) {
       return e_dbnode.vx_copy(vals);
     }
 
     @Override
-    public Type_dbnode vx_copy(final Object... vals) {
+    public Db.Type_dbnode vx_copy(final Object... vals) {
       Type_dbnode output = this;
       boolean ischanged = false;
       Class_dbnode val = this;
@@ -1794,12 +1795,12 @@ public final class Db {
     }
 
     @Override
-    public Type_dbnote vx_new(final Object... vals) {
+    public Db.Type_dbnote vx_new(final Object... vals) {
       return e_dbnote.vx_copy(vals);
     }
 
     @Override
-    public Type_dbnote vx_copy(final Object... vals) {
+    public Db.Type_dbnote vx_copy(final Object... vals) {
       Type_dbnote output = this;
       boolean ischanged = false;
       Class_dbnote val = this;
@@ -2091,12 +2092,12 @@ public final class Db {
     }
 
     @Override
-    public Type_dbtable vx_new(final Object... vals) {
+    public Db.Type_dbtable vx_new(final Object... vals) {
       return e_dbtable.vx_copy(vals);
     }
 
     @Override
-    public Type_dbtable vx_copy(final Object... vals) {
+    public Db.Type_dbtable vx_copy(final Object... vals) {
       Type_dbtable output = this;
       boolean ischanged = false;
       Class_dbtable val = this;
@@ -2389,12 +2390,12 @@ public final class Db {
     }
 
     @Override
-    public Type_dbvalue vx_new(final Object... vals) {
+    public Db.Type_dbvalue vx_new(final Object... vals) {
       return e_dbvalue.vx_copy(vals);
     }
 
     @Override
-    public Type_dbvalue vx_copy(final Object... vals) {
+    public Db.Type_dbvalue vx_copy(final Object... vals) {
       Type_dbvalue output = this;
       boolean ischanged = false;
       Class_dbvalue val = this;
