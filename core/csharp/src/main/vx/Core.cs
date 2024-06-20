@@ -718,7 +718,7 @@ namespace vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -880,7 +880,7 @@ namespace vx_core {
       }
       List<vx_core.Func_any_from_any> listval = new ArrayList<>(val.vx_listany_from_any());
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -894,8 +894,8 @@ namespace vx_core {
           ischanged = true;
           listval.addAll(multi.vx_listany_from_any());
         } else if (valsub is List) {
-          List<?> listunknown = (List<?>)valsub;
-          for (Object item : listunknown) {
+          List listunknown = valsub as List;
+          foreach (Object item in listunknown) {
             if (item is vx_core.Func_any_from_any) {
               vx_core.Func_any_from_any valitem = (vx_core.Func_any_from_any)item;
               ischanged = true;
@@ -994,7 +994,7 @@ namespace vx_core {
       }
       List<vx_core.Type_any> listval = new ArrayList<>(val.vx_list());
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -1011,8 +1011,8 @@ namespace vx_core {
           ischanged = true;
           listval.addAll(multi.vx_list());
         } else if (valsub is List) {
-          List<?> listunknown = (List<?>)valsub;
-          for (Object item : listunknown) {
+          List listunknown = valsub as List;
+          foreach (Object item in listunknown) {
             if (item is vx_core.Type_any) {
               vx_core.Type_any valitem = (vx_core.Type_any)item;
               ischanged = true;
@@ -1124,7 +1124,7 @@ namespace vx_core {
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
       Map<String, vx_core.Type_any> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
-      for (String key : keys) {
+      foreach (String key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_any) {
           vx_core.Type_any castval = (vx_core.Type_any)val;
@@ -1156,7 +1156,7 @@ namespace vx_core {
       Map<String, vx_core.Type_any> mapval = new LinkedHashMap<>(val.vx_map());
       vx_core.Type_msg msg;
       String key = "";
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -1166,11 +1166,11 @@ namespace vx_core {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
           } else if (valsub is String) {
-            key = valsub as String
+            key = valsub as String;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -1182,11 +1182,11 @@ namespace vx_core {
           if (valsub is vx_core.Type_any) {
             valany = (vx_core.Type_any)valsub;
           } else if (valsub is vx_core.Type_any) {
-            valany = valsub as vx_core.Type_any
+            valany = valsub as vx_core.Type_any;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -1408,7 +1408,7 @@ namespace vx_core {
       validkeys.add(":doc");
       String key = "";
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -1638,7 +1638,7 @@ namespace vx_core {
       }
       List<vx_core.Type_arg> listval = new ArrayList<>(val.vx_listarg());
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -1655,8 +1655,8 @@ namespace vx_core {
           ischanged = true;
           listval.addAll(multi.vx_listarg());
         } else if (valsub is List) {
-          List<?> listunknown = (List<?>)valsub;
-          for (Object item : listunknown) {
+          List listunknown = valsub as List;
+          foreach (Object item in listunknown) {
             if (item is vx_core.Type_arg) {
               vx_core.Type_arg valitem = (vx_core.Type_arg)item;
               ischanged = true;
@@ -1778,7 +1778,7 @@ namespace vx_core {
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
       Map<String, vx_core.Type_arg> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
-      for (String key : keys) {
+      foreach (String key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_arg) {
           vx_core.Type_arg castval = (vx_core.Type_arg)val;
@@ -1810,7 +1810,7 @@ namespace vx_core {
       Map<String, vx_core.Type_arg> mapval = new LinkedHashMap<>(val.vx_maparg());
       vx_core.Type_msg msg;
       String key = "";
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -1820,11 +1820,11 @@ namespace vx_core {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
           } else if (valsub is String) {
-            key = valsub as String
+            key = valsub as String;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -1836,11 +1836,11 @@ namespace vx_core {
           if (valsub is vx_core.Type_arg) {
             valany = (vx_core.Type_arg)valsub;
           } else if (valsub is vx_core.Type_arg) {
-            valany = valsub as vx_core.Type_arg
+            valany = valsub as vx_core.Type_arg;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -1926,7 +1926,7 @@ namespace vx_core {
         ischanged = true;
       }
       boolean booleanval = val.vx_boolean();
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -2033,7 +2033,7 @@ namespace vx_core {
       }
       List<vx_core.Type_boolean> listval = new ArrayList<>(val.vx_listboolean());
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -2050,8 +2050,8 @@ namespace vx_core {
           ischanged = true;
           listval.addAll(multi.vx_listboolean());
         } else if (valsub is List) {
-          List<?> listunknown = (List<?>)valsub;
-          for (Object item : listunknown) {
+          List listunknown = valsub as List;
+          foreach (Object item in listunknown) {
             if (item is vx_core.Type_boolean) {
               vx_core.Type_boolean valitem = (vx_core.Type_boolean)item;
               ischanged = true;
@@ -2347,7 +2347,7 @@ namespace vx_core {
       }
       List<vx_core.Type_connect> listval = new ArrayList<>(val.vx_listconnect());
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -2364,8 +2364,8 @@ namespace vx_core {
           ischanged = true;
           listval.addAll(multi.vx_listconnect());
         } else if (valsub is List) {
-          List<?> listunknown = (List<?>)valsub;
-          for (Object item : listunknown) {
+          List listunknown = valsub as List;
+          foreach (Object item in listunknown) {
             if (item is vx_core.Type_connect) {
               vx_core.Type_connect valitem = (vx_core.Type_connect)item;
               ischanged = true;
@@ -2487,7 +2487,7 @@ namespace vx_core {
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
       Map<String, vx_core.Type_connect> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
-      for (String key : keys) {
+      foreach (String key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_connect) {
           vx_core.Type_connect castval = (vx_core.Type_connect)val;
@@ -2519,7 +2519,7 @@ namespace vx_core {
       Map<String, vx_core.Type_connect> mapval = new LinkedHashMap<>(val.vx_mapconnect());
       vx_core.Type_msg msg;
       String key = "";
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -2529,11 +2529,11 @@ namespace vx_core {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
           } else if (valsub is String) {
-            key = valsub as String
+            key = valsub as String;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -2545,11 +2545,11 @@ namespace vx_core {
           if (valsub is vx_core.Type_connect) {
             valany = (vx_core.Type_connect)valsub;
           } else if (valsub is vx_core.Type_connect) {
-            valany = valsub as vx_core.Type_connect
+            valany = valsub as vx_core.Type_connect;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -2757,7 +2757,7 @@ namespace vx_core {
       validkeys.add(":type");
       String key = "";
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -2956,7 +2956,7 @@ namespace vx_core {
       }
       List<vx_core.Type_any> listval = new ArrayList<>(val.vx_list());
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -2973,8 +2973,8 @@ namespace vx_core {
           ischanged = true;
           listval.addAll(multi.vx_list());
         } else if (valsub is List) {
-          List<?> listunknown = (List<?>)valsub;
-          for (Object item : listunknown) {
+          List listunknown = valsub as List;
+          foreach (Object item in listunknown) {
             if (item is vx_core.Type_any) {
               vx_core.Type_any valitem = (vx_core.Type_any)item;
               ischanged = true;
@@ -3086,7 +3086,7 @@ namespace vx_core {
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
       Map<String, vx_core.Type_any> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
-      for (String key : keys) {
+      foreach (String key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_any) {
           vx_core.Type_any castval = (vx_core.Type_any)val;
@@ -3118,7 +3118,7 @@ namespace vx_core {
       Map<String, vx_core.Type_any> mapval = new LinkedHashMap<>(val.vx_map());
       vx_core.Type_msg msg;
       String key = "";
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -3128,11 +3128,11 @@ namespace vx_core {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
           } else if (valsub is String) {
-            key = valsub as String
+            key = valsub as String;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -3144,11 +3144,11 @@ namespace vx_core {
           if (valsub is vx_core.Type_any) {
             valany = (vx_core.Type_any)valsub;
           } else if (valsub is vx_core.Type_any) {
-            valany = valsub as vx_core.Type_any
+            valany = valsub as vx_core.Type_any;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -3307,7 +3307,7 @@ namespace vx_core {
       validkeys.add(":state");
       String key = "";
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -3569,7 +3569,7 @@ namespace vx_core {
         ischanged = true;
       }
       String sval = val.vx_string();
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -3711,7 +3711,7 @@ namespace vx_core {
         ischanged = true;
       }
       float floatval = val.vx_float();
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -3962,7 +3962,7 @@ namespace vx_core {
       validkeys.add(":async");
       String key = "";
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -4219,7 +4219,7 @@ namespace vx_core {
       }
       List<vx_core.Type_func> listval = new ArrayList<>(val.vx_listfunc());
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -4236,8 +4236,8 @@ namespace vx_core {
           ischanged = true;
           listval.addAll(multi.vx_listfunc());
         } else if (valsub is List) {
-          List<?> listunknown = (List<?>)valsub;
-          for (Object item : listunknown) {
+          List listunknown = valsub as List;
+          foreach (Object item in listunknown) {
             if (item is vx_core.Type_func) {
               vx_core.Type_func valitem = (vx_core.Type_func)item;
               ischanged = true;
@@ -4359,7 +4359,7 @@ namespace vx_core {
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
       Map<String, vx_core.Type_func> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
-      for (String key : keys) {
+      foreach (String key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_func) {
           vx_core.Type_func castval = (vx_core.Type_func)val;
@@ -4391,7 +4391,7 @@ namespace vx_core {
       Map<String, vx_core.Type_func> mapval = new LinkedHashMap<>(val.vx_mapfunc());
       vx_core.Type_msg msg;
       String key = "";
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -4401,11 +4401,11 @@ namespace vx_core {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
           } else if (valsub is String) {
-            key = valsub as String
+            key = valsub as String;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -4417,11 +4417,11 @@ namespace vx_core {
           if (valsub is vx_core.Type_func) {
             valany = (vx_core.Type_func)valsub;
           } else if (valsub is vx_core.Type_func) {
-            valany = valsub as vx_core.Type_func
+            valany = valsub as vx_core.Type_func;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -4507,7 +4507,7 @@ namespace vx_core {
         ischanged = true;
       }
       int intval = val.vx_int();
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -4618,7 +4618,7 @@ namespace vx_core {
       }
       List<vx_core.Type_int> listval = new ArrayList<>(val.vx_listint());
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -4635,8 +4635,8 @@ namespace vx_core {
           ischanged = true;
           listval.addAll(multi.vx_listint());
         } else if (valsub is List) {
-          List<?> listunknown = (List<?>)valsub;
-          for (Object item : listunknown) {
+          List listunknown = valsub as List;
+          foreach (Object item in listunknown) {
             if (item is vx_core.Type_int) {
               vx_core.Type_int valitem = (vx_core.Type_int)item;
               ischanged = true;
@@ -4758,7 +4758,7 @@ namespace vx_core {
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
       Map<String, vx_core.Type_int> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
-      for (String key : keys) {
+      foreach (String key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_int) {
           vx_core.Type_int castval = (vx_core.Type_int)val;
@@ -4790,7 +4790,7 @@ namespace vx_core {
       Map<String, vx_core.Type_int> mapval = new LinkedHashMap<>(val.vx_mapint());
       vx_core.Type_msg msg;
       String key = "";
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -4800,11 +4800,11 @@ namespace vx_core {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
           } else if (valsub is String) {
-            key = valsub as String
+            key = valsub as String;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -4816,11 +4816,11 @@ namespace vx_core {
           if (valsub is vx_core.Type_int) {
             valany = (vx_core.Type_int)valsub;
           } else if (valsub is Integer) {
-            valany = vx_core.t_int.vx_new(valsub);
+            valany = vx_core.t_int.vx_new(valsub);;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -4895,12 +4895,10 @@ namespace vx_core {
 
   class Class_list : vx_core.Class_base, Type_list {
 
-
-    public <T extends vx_core.Type_any> List<T> vx_any(T generic_any_1) {
+    public List<T> vx_any<T>(T generic_any_1) where T : vx_core.Type_any {
       return vx_core.arraylist_from_arraylist(generic_any_1, this.vx_list());
     }
-
-    public <T extends vx_core.Type_any> T vx_any_from_list(T generic_any_1, int index) {
+    public T vx_any_from_list<T>(T generic_any_1, int index) where T : vx_core.Type_any {
       return vx_any_from_list(generic_any_1, this.vx_list(), index);
     }
 
@@ -4935,7 +4933,7 @@ namespace vx_core {
       }
       List<vx_core.Type_any> listval = new ArrayList<>(val.vx_list());
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -4952,8 +4950,8 @@ namespace vx_core {
           ischanged = true;
           listval.addAll(multi.vx_list());
         } else if (valsub is List) {
-          List<?> listunknown = (List<?>)valsub;
-          for (Object item : listunknown) {
+          List listunknown = valsub as List;
+          foreach (Object item in listunknown) {
             if (item is vx_core.Type_any) {
               vx_core.Type_any valitem = (vx_core.Type_any)item;
               ischanged = true;
@@ -5237,7 +5235,7 @@ namespace vx_core {
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
       Map<String, vx_core.Type_any> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
-      for (String key : keys) {
+      foreach (String key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_any) {
           vx_core.Type_any castval = (vx_core.Type_any)val;
@@ -5269,7 +5267,7 @@ namespace vx_core {
       Map<String, vx_core.Type_any> mapval = new LinkedHashMap<>(val.vx_map());
       vx_core.Type_msg msg;
       String key = "";
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -5279,11 +5277,11 @@ namespace vx_core {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
           } else if (valsub is String) {
-            key = valsub as String
+            key = valsub as String;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -5295,11 +5293,11 @@ namespace vx_core {
           if (valsub is vx_core.Type_any) {
             valany = (vx_core.Type_any)valsub;
           } else if (valsub is vx_core.Type_any) {
-            valany = valsub as vx_core.Type_any
+            valany = valsub as vx_core.Type_any;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -5479,7 +5477,7 @@ namespace vx_core {
       validkeys.add(":valuepool");
       String key = "";
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -5692,7 +5690,7 @@ namespace vx_core {
       vx_core.Type_int vx_p_severity = val.severity();
       vx_core.Type_string vx_p_text = val.text();
       String key = "";
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (key == "") {
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
@@ -5865,7 +5863,7 @@ namespace vx_core {
       vx_core.Type_msgblocklist vx_p_msgblocks = val.msgblocks();
       String key = "";
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           if (valsub != vx_core.e_msgblock) {
             vx_p_msgblocks = vx_p_msgblocks.vx_copy(valsub);
@@ -6036,7 +6034,7 @@ namespace vx_core {
       }
       List<vx_core.Type_msgblock> listval = new ArrayList<>(val.vx_listmsgblock());
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msg) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msgblock) {
@@ -6047,8 +6045,8 @@ namespace vx_core {
           ischanged = true;
           listval.addAll(multi.vx_listmsgblock());
         } else if (valsub is List) {
-          List<?> listunknown = (List<?>)valsub;
-          for (Object item : listunknown) {
+          List listunknown = valsub as List;
+          foreach (Object item in listunknown) {
             if (item is vx_core.Type_msgblock) {
               vx_core.Type_msgblock valitem = (vx_core.Type_msgblock)item;
               ischanged = true;
@@ -6157,7 +6155,7 @@ namespace vx_core {
       }
       List<vx_core.Type_msg> listval = new ArrayList<>(val.vx_listmsg());
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -6168,8 +6166,8 @@ namespace vx_core {
           ischanged = true;
           listval.addAll(multi.vx_listmsg());
         } else if (valsub is List) {
-          List<?> listunknown = (List<?>)valsub;
-          for (Object item : listunknown) {
+          List listunknown = valsub as List;
+          foreach (Object item in listunknown) {
             if (item is vx_core.Type_msg) {
               vx_core.Type_msg valitem = (vx_core.Type_msg)item;
               ischanged = true;
@@ -6467,7 +6465,7 @@ namespace vx_core {
       }
       List<vx_core.Type_number> listval = new ArrayList<>(val.vx_listnumber());
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -6484,8 +6482,8 @@ namespace vx_core {
           ischanged = true;
           listval.addAll(multi.vx_listnumber());
         } else if (valsub is List) {
-          List<?> listunknown = (List<?>)valsub;
-          for (Object item : listunknown) {
+          List listunknown = valsub as List;
+          foreach (Object item in listunknown) {
             if (item is vx_core.Type_number) {
               vx_core.Type_number valitem = (vx_core.Type_number)item;
               ischanged = true;
@@ -6607,7 +6605,7 @@ namespace vx_core {
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
       Map<String, vx_core.Type_number> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
-      for (String key : keys) {
+      foreach (String key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_number) {
           vx_core.Type_number castval = (vx_core.Type_number)val;
@@ -6639,7 +6637,7 @@ namespace vx_core {
       Map<String, vx_core.Type_number> mapval = new LinkedHashMap<>(val.vx_mapnumber());
       vx_core.Type_msg msg;
       String key = "";
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -6649,11 +6647,11 @@ namespace vx_core {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
           } else if (valsub is String) {
-            key = valsub as String
+            key = valsub as String;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -6665,11 +6663,11 @@ namespace vx_core {
           if (valsub is vx_core.Type_number) {
             valany = (vx_core.Type_number)valsub;
           } else if (valsub is vx_core.Type_number) {
-            valany = valsub as vx_core.Type_number
+            valany = valsub as vx_core.Type_number;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -6842,7 +6840,7 @@ namespace vx_core {
       validkeys.add(":emptymap");
       String key = "";
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -7102,7 +7100,7 @@ namespace vx_core {
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
       Map<String, vx_core.Type_package> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
-      for (String key : keys) {
+      foreach (String key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_package) {
           vx_core.Type_package castval = (vx_core.Type_package)val;
@@ -7134,7 +7132,7 @@ namespace vx_core {
       Map<String, vx_core.Type_package> mapval = new LinkedHashMap<>(val.vx_mappackage());
       vx_core.Type_msg msg;
       String key = "";
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -7144,11 +7142,11 @@ namespace vx_core {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
           } else if (valsub is String) {
-            key = valsub as String
+            key = valsub as String;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -7160,11 +7158,11 @@ namespace vx_core {
           if (valsub is vx_core.Type_package) {
             valany = (vx_core.Type_package)valsub;
           } else if (valsub is vx_core.Type_package) {
-            valany = valsub as vx_core.Type_package
+            valany = valsub as vx_core.Type_package;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -7281,7 +7279,7 @@ namespace vx_core {
       validkeys.add(":id");
       String key = "";
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -7445,7 +7443,7 @@ namespace vx_core {
       }
       List<vx_core.Type_permission> listval = new ArrayList<>(val.vx_listpermission());
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -7462,8 +7460,8 @@ namespace vx_core {
           ischanged = true;
           listval.addAll(multi.vx_listpermission());
         } else if (valsub is List) {
-          List<?> listunknown = (List<?>)valsub;
-          for (Object item : listunknown) {
+          List listunknown = valsub as List;
+          foreach (Object item in listunknown) {
             if (item is vx_core.Type_permission) {
               vx_core.Type_permission valitem = (vx_core.Type_permission)item;
               ischanged = true;
@@ -7585,7 +7583,7 @@ namespace vx_core {
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
       Map<String, vx_core.Type_permission> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
-      for (String key : keys) {
+      foreach (String key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_permission) {
           vx_core.Type_permission castval = (vx_core.Type_permission)val;
@@ -7617,7 +7615,7 @@ namespace vx_core {
       Map<String, vx_core.Type_permission> mapval = new LinkedHashMap<>(val.vx_mappermission());
       vx_core.Type_msg msg;
       String key = "";
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -7627,11 +7625,11 @@ namespace vx_core {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
           } else if (valsub is String) {
-            key = valsub as String
+            key = valsub as String;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -7643,11 +7641,11 @@ namespace vx_core {
           if (valsub is vx_core.Type_permission) {
             valany = (vx_core.Type_permission)valsub;
           } else if (valsub is vx_core.Type_permission) {
-            valany = valsub as vx_core.Type_permission
+            valany = valsub as vx_core.Type_permission;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -7764,7 +7762,7 @@ namespace vx_core {
       validkeys.add(":packagemap");
       String key = "";
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -7956,7 +7954,7 @@ namespace vx_core {
       validkeys.add(":permissionmap");
       String key = "";
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -8232,7 +8230,7 @@ namespace vx_core {
       validkeys.add(":translationmap");
       String key = "";
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -8501,7 +8499,7 @@ namespace vx_core {
       validkeys.add(":pathmap");
       String key = "";
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -8665,7 +8663,7 @@ namespace vx_core {
       validkeys.add(":statelistenermap");
       String key = "";
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -8856,7 +8854,7 @@ namespace vx_core {
       validkeys.add(":fn-boolean");
       String key = "";
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -9075,7 +9073,7 @@ namespace vx_core {
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
       Map<String, vx_core.Type_statelistener> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
-      for (String key : keys) {
+      foreach (String key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_statelistener) {
           vx_core.Type_statelistener castval = (vx_core.Type_statelistener)val;
@@ -9107,7 +9105,7 @@ namespace vx_core {
       Map<String, vx_core.Type_statelistener> mapval = new LinkedHashMap<>(val.vx_mapstatelistener());
       vx_core.Type_msg msg;
       String key = "";
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -9117,11 +9115,11 @@ namespace vx_core {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
           } else if (valsub is String) {
-            key = valsub as String
+            key = valsub as String;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -9133,11 +9131,11 @@ namespace vx_core {
           if (valsub is vx_core.Type_statelistener) {
             valany = (vx_core.Type_statelistener)valsub;
           } else if (valsub is vx_core.Type_statelistener) {
-            valany = valsub as vx_core.Type_statelistener
+            valany = valsub as vx_core.Type_statelistener;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -9224,7 +9222,7 @@ namespace vx_core {
       }
       StringBuilder sb = new StringBuilder(val.vx_string());
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -9255,7 +9253,7 @@ namespace vx_core {
             sb.append(ssub2);
           }
         } else if (valsub is Integer) {
-          Integer ssub2 = valsub as Integer;
+          int ssub2 = valsub as Integer;
           ischanged = true;
           sb.append(ssub2);
         } else if (valsub is Float) {
@@ -9365,7 +9363,7 @@ namespace vx_core {
       }
       List<vx_core.Type_string> listval = new ArrayList<>(val.vx_liststring());
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -9382,8 +9380,8 @@ namespace vx_core {
           ischanged = true;
           listval.addAll(multi.vx_liststring());
         } else if (valsub is List) {
-          List<?> listunknown = (List<?>)valsub;
-          for (Object item : listunknown) {
+          List listunknown = valsub as List;
+          foreach (Object item in listunknown) {
             if (item is vx_core.Type_string) {
               vx_core.Type_string valitem = (vx_core.Type_string)item;
               ischanged = true;
@@ -9492,7 +9490,7 @@ namespace vx_core {
       }
       List<vx_core.Type_stringlist> listval = new ArrayList<>(val.vx_liststringlist());
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -9509,8 +9507,8 @@ namespace vx_core {
           ischanged = true;
           listval.addAll(multi.vx_liststringlist());
         } else if (valsub is List) {
-          List<?> listunknown = (List<?>)valsub;
-          for (Object item : listunknown) {
+          List listunknown = valsub as List;
+          foreach (Object item in listunknown) {
             if (item is vx_core.Type_stringlist) {
               vx_core.Type_stringlist valitem = (vx_core.Type_stringlist)item;
               ischanged = true;
@@ -9632,7 +9630,7 @@ namespace vx_core {
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
       Map<String, vx_core.Type_string> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
-      for (String key : keys) {
+      foreach (String key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_string) {
           vx_core.Type_string castval = (vx_core.Type_string)val;
@@ -9664,7 +9662,7 @@ namespace vx_core {
       Map<String, vx_core.Type_string> mapval = new LinkedHashMap<>(val.vx_mapstring());
       vx_core.Type_msg msg;
       String key = "";
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -9674,11 +9672,11 @@ namespace vx_core {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
           } else if (valsub is String) {
-            key = valsub as String
+            key = valsub as String;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -9690,11 +9688,11 @@ namespace vx_core {
           if (valsub is vx_core.Type_string) {
             valany = (vx_core.Type_string)valsub;
           } else if (valsub is String) {
-            valany = vx_core.t_string.vx_new(valsub);
+            valany = vx_core.t_string.vx_new(valsub);;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -9821,7 +9819,7 @@ namespace vx_core {
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
       Map<String, vx_core.Type_string> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
-      for (String key : keys) {
+      foreach (String key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_string) {
           vx_core.Type_string castval = (vx_core.Type_string)val;
@@ -9853,7 +9851,7 @@ namespace vx_core {
       Map<String, vx_core.Type_string> mapval = new LinkedHashMap<>(val.vx_mapstring());
       vx_core.Type_msg msg;
       String key = "";
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -9863,11 +9861,11 @@ namespace vx_core {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
           } else if (valsub is String) {
-            key = valsub as String
+            key = valsub as String;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -9879,11 +9877,11 @@ namespace vx_core {
           if (valsub is vx_core.Type_string) {
             valany = (vx_core.Type_string)valsub;
           } else if (valsub is String) {
-            valany = vx_core.t_string.vx_new(valsub);
+            valany = vx_core.t_string.vx_new(valsub);;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -10135,7 +10133,7 @@ namespace vx_core {
       validkeys.add(":fn-any");
       String key = "";
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -10382,7 +10380,7 @@ namespace vx_core {
       }
       List<vx_core.Type_thenelse> listval = new ArrayList<>(val.vx_listthenelse());
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -10399,8 +10397,8 @@ namespace vx_core {
           ischanged = true;
           listval.addAll(multi.vx_listthenelse());
         } else if (valsub is List) {
-          List<?> listunknown = (List<?>)valsub;
-          for (Object item : listunknown) {
+          List listunknown = valsub as List;
+          foreach (Object item in listunknown) {
             if (item is vx_core.Type_thenelse) {
               vx_core.Type_thenelse valitem = (vx_core.Type_thenelse)item;
               ischanged = true;
@@ -10526,7 +10524,7 @@ namespace vx_core {
       validkeys.add(":wordmap");
       String key = "";
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -10711,7 +10709,7 @@ namespace vx_core {
       }
       List<vx_core.Type_translation> listval = new ArrayList<>(val.vx_listtranslation());
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -10728,8 +10726,8 @@ namespace vx_core {
           ischanged = true;
           listval.addAll(multi.vx_listtranslation());
         } else if (valsub is List) {
-          List<?> listunknown = (List<?>)valsub;
-          for (Object item : listunknown) {
+          List listunknown = valsub as List;
+          foreach (Object item in listunknown) {
             if (item is vx_core.Type_translation) {
               vx_core.Type_translation valitem = (vx_core.Type_translation)item;
               ischanged = true;
@@ -10851,7 +10849,7 @@ namespace vx_core {
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
       Map<String, vx_core.Type_translation> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
-      for (String key : keys) {
+      foreach (String key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_translation) {
           vx_core.Type_translation castval = (vx_core.Type_translation)val;
@@ -10883,7 +10881,7 @@ namespace vx_core {
       Map<String, vx_core.Type_translation> mapval = new LinkedHashMap<>(val.vx_maptranslation());
       vx_core.Type_msg msg;
       String key = "";
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -10893,11 +10891,11 @@ namespace vx_core {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
           } else if (valsub is String) {
-            key = valsub as String
+            key = valsub as String;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -10909,11 +10907,11 @@ namespace vx_core {
           if (valsub is vx_core.Type_translation) {
             valany = (vx_core.Type_translation)valsub;
           } else if (valsub is vx_core.Type_translation) {
-            valany = valsub as vx_core.Type_translation
+            valany = valsub as vx_core.Type_translation;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -11247,7 +11245,7 @@ namespace vx_core {
       validkeys.add(":traits");
       String key = "";
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -11638,7 +11636,7 @@ namespace vx_core {
       }
       List<vx_core.Type_any> listval = new ArrayList<>(val.vx_list());
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -11655,8 +11653,8 @@ namespace vx_core {
           ischanged = true;
           listval.addAll(multi.vx_list());
         } else if (valsub is List) {
-          List<?> listunknown = (List<?>)valsub;
-          for (Object item : listunknown) {
+          List listunknown = valsub as List;
+          foreach (Object item in listunknown) {
             if (item is vx_core.Type_any) {
               vx_core.Type_any valitem = (vx_core.Type_any)item;
               ischanged = true;
@@ -11768,7 +11766,7 @@ namespace vx_core {
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
       Map<String, vx_core.Type_any> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
-      for (String key : keys) {
+      foreach (String key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_any) {
           vx_core.Type_any castval = (vx_core.Type_any)val;
@@ -11800,7 +11798,7 @@ namespace vx_core {
       Map<String, vx_core.Type_any> mapval = new LinkedHashMap<>(val.vx_map());
       vx_core.Type_msg msg;
       String key = "";
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.t_msgblock.vx_copy(msgblock, valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -11810,11 +11808,11 @@ namespace vx_core {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
           } else if (valsub is String) {
-            key = valsub as String
+            key = valsub as String;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -11826,11 +11824,11 @@ namespace vx_core {
           if (valsub is vx_core.Type_any) {
             valany = (vx_core.Type_any)valsub;
           } else if (valsub is vx_core.Type_any) {
-            valany = valsub as vx_core.Type_any
+            valany = valsub as vx_core.Type_any;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
-              msgval = valsub as vx_core.Type_any
+              msgval = valsub as vx_core.Type_any;
             } else {
               msgval = vx_core.vx_new_string(valsub.toString());
             }
@@ -11975,7 +11973,7 @@ namespace vx_core {
       validkeys.add(":token");
       String key = "";
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -12200,7 +12198,7 @@ namespace vx_core {
       validkeys.add(":refs");
       String key = "";
       vx_core.Type_msg msg;
-      for (Object valsub : vals) {
+      foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = msgblock.vx_copy(valsub);
         } else if (valsub is vx_core.Type_msg) {
@@ -12334,7 +12332,7 @@ namespace vx_core {
    * Constant: false
    * {boolean}
    */
-  public static class Const_false  vx_core.Class_boolean implements vx_core.vx_Type_const {
+  class Const_false : vx_core.Class_boolean, vx_core.vx_Type_const {
 
     override
     public vx_core.Type_constdef vx_constdef() {
@@ -12377,7 +12375,7 @@ namespace vx_core {
    * Global variable for project data.
    * {project}
    */
-  public static class Const_global  vx_core.Class_project implements vx_core.vx_Type_const {
+  class Const_global : vx_core.Class_project, vx_core.vx_Type_const {
 
     override
     public vx_core.Type_constdef vx_constdef() {
@@ -12414,7 +12412,7 @@ namespace vx_core {
    * Infinity. Returned during unusual calculations.
    * {int}
    */
-  public static class Const_infinity  vx_core.Class_int implements vx_core.vx_Type_const {
+  class Const_infinity : vx_core.Class_int, vx_core.vx_Type_const {
 
     override
     public vx_core.Type_constdef vx_constdef() {
@@ -12456,7 +12454,7 @@ namespace vx_core {
    * Active Value Memory Pool
    * {mempool}
    */
-  public static class Const_mempool_active  vx_core.Class_mempool implements vx_core.vx_Type_const {
+  class Const_mempool_active : vx_core.Class_mempool, vx_core.vx_Type_const {
 
     override
     public vx_core.Type_constdef vx_constdef() {
@@ -12493,7 +12491,7 @@ namespace vx_core {
    * Message is an Error
    * {int}
    */
-  public static class Const_msg_error  vx_core.Class_int implements vx_core.vx_Type_const {
+  class Const_msg_error : vx_core.Class_int, vx_core.vx_Type_const {
 
     override
     public vx_core.Type_constdef vx_constdef() {
@@ -12535,7 +12533,7 @@ namespace vx_core {
    * Message is just information
    * {int}
    */
-  public static class Const_msg_info  vx_core.Class_int implements vx_core.vx_Type_const {
+  class Const_msg_info : vx_core.Class_int, vx_core.vx_Type_const {
 
     override
     public vx_core.Type_constdef vx_constdef() {
@@ -12577,7 +12575,7 @@ namespace vx_core {
    * Message is a Severe Error
    * {int}
    */
-  public static class Const_msg_severe  vx_core.Class_int implements vx_core.vx_Type_const {
+  class Const_msg_severe : vx_core.Class_int, vx_core.vx_Type_const {
 
     override
     public vx_core.Type_constdef vx_constdef() {
@@ -12619,7 +12617,7 @@ namespace vx_core {
    * Message is a Warning
    * {int}
    */
-  public static class Const_msg_warning  vx_core.Class_int implements vx_core.vx_Type_const {
+  class Const_msg_warning : vx_core.Class_int, vx_core.vx_Type_const {
 
     override
     public vx_core.Type_constdef vx_constdef() {
@@ -12661,7 +12659,7 @@ namespace vx_core {
    * Negative Infinity. Returned during unusual calculations.
    * {int}
    */
-  public static class Const_neginfinity  vx_core.Class_int implements vx_core.vx_Type_const {
+  class Const_neginfinity : vx_core.Class_int, vx_core.vx_Type_const {
 
     override
     public vx_core.Type_constdef vx_constdef() {
@@ -12703,7 +12701,7 @@ namespace vx_core {
    * New line constant
    * {string}
    */
-  public static class Const_newline  vx_core.Class_string implements vx_core.vx_Type_const {
+  class Const_newline : vx_core.Class_string, vx_core.vx_Type_const {
 
     override
     public vx_core.Type_constdef vx_constdef() {
@@ -12745,7 +12743,7 @@ namespace vx_core {
    * Not a number. Returned during invalid calculations.
    * {int}
    */
-  public static class Const_notanumber  vx_core.Class_int implements vx_core.vx_Type_const {
+  class Const_notanumber : vx_core.Class_int, vx_core.vx_Type_const {
 
     override
     public vx_core.Type_constdef vx_constdef() {
@@ -12787,7 +12785,7 @@ namespace vx_core {
    * Nothing Value. Opposite of every other value. e.g. Nil, Null
    * {string}
    */
-  public static class Const_nothing  vx_core.Class_string implements vx_core.vx_Type_const {
+  class Const_nothing : vx_core.Class_string, vx_core.vx_Type_const {
 
     override
     public vx_core.Type_constdef vx_constdef() {
@@ -12829,7 +12827,7 @@ namespace vx_core {
    * Quotation mark constant
    * {string}
    */
-  public static class Const_quote  vx_core.Class_string implements vx_core.vx_Type_const {
+  class Const_quote : vx_core.Class_string, vx_core.vx_Type_const {
 
     override
     public vx_core.Type_constdef vx_constdef() {
@@ -12870,7 +12868,7 @@ namespace vx_core {
    * Constant: true
    * {boolean}
    */
-  public static class Const_true  vx_core.Class_boolean implements vx_core.vx_Type_const {
+  class Const_true : vx_core.Class_boolean, vx_core.vx_Type_const {
 
     override
     public vx_core.Type_constdef vx_constdef() {
@@ -12913,11 +12911,11 @@ namespace vx_core {
    * @return {boolean}
    * (func !)
    */
-  public static interface Func_not  vx_core.Func_any_from_any {
+  public static interface Func_not : vx_core.Func_any_from_any {
     public vx_core.Type_boolean vx_not(vx_core.Type_boolean val);
   }
 
-  public static class Class_not  vx_core.Class_base implements Func_not {
+  class Class_not : vx_core.Class_base, Func_not {
 
     public override vx_core.Func_not vx_new(params Object vals) {
       Class_not output = new Class_not();
@@ -13001,11 +12999,11 @@ namespace vx_core {
    * @return {boolean}
    * (func !-empty)
    */
-  public static interface Func_notempty  vx_core.Func_any_from_any {
+  public static interface Func_notempty : vx_core.Func_any_from_any {
     public vx_core.Type_boolean vx_notempty(vx_core.Type_string text);
   }
 
-  public static class Class_notempty  vx_core.Class_base implements Func_notempty {
+  class Class_notempty : vx_core.Class_base, Func_notempty {
 
     public override vx_core.Func_notempty vx_new(params Object vals) {
       Class_notempty output = new Class_notempty();
@@ -13092,11 +13090,11 @@ namespace vx_core {
    * @return {boolean}
    * (func !-empty)
    */
-  public static interface Func_notempty_1  vx_core.Func_any_from_any {
+  public static interface Func_notempty_1 : vx_core.Func_any_from_any {
     public vx_core.Type_boolean vx_notempty_1(vx_core.Type_any val);
   }
 
-  public static class Class_notempty_1  vx_core.Class_base implements Func_notempty_1 {
+  class Class_notempty_1 : vx_core.Class_base, Func_notempty_1 {
 
     public override vx_core.Func_notempty_1 vx_new(params Object vals) {
       Class_notempty_1 output = new Class_notempty_1();
@@ -13184,11 +13182,11 @@ namespace vx_core {
    * @return {boolean}
    * (func !=)
    */
-  public static interface Func_ne  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_ne : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_boolean vx_ne(vx_core.Type_any val1, vx_core.Type_any val2);
   }
 
-  public static class Class_ne  vx_core.Class_base implements Func_ne {
+  class Class_ne : vx_core.Class_base, Func_ne {
 
     public override vx_core.Func_ne vx_new(params Object vals) {
       Class_ne output = new Class_ne();
@@ -13265,11 +13263,11 @@ namespace vx_core {
    * @return {boolean}
    * (func !==)
    */
-  public static interface Func_neqeq  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_neqeq : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_boolean vx_neqeq(vx_core.Type_any val1, vx_core.Type_any val2);
   }
 
-  public static class Class_neqeq  vx_core.Class_base implements Func_neqeq {
+  class Class_neqeq : vx_core.Class_base, Func_neqeq {
 
     public override vx_core.Func_neqeq vx_new(params Object vals) {
       Class_neqeq output = new Class_neqeq();
@@ -13346,11 +13344,11 @@ namespace vx_core {
    * @return {int}
    * (func *)
    */
-  public static interface Func_multiply  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_multiply : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_int vx_multiply(vx_core.Type_int num1, vx_core.Type_int num2);
   }
 
-  public static class Class_multiply  vx_core.Class_base implements Func_multiply {
+  class Class_multiply : vx_core.Class_base, Func_multiply {
 
     public override vx_core.Func_multiply vx_new(params Object vals) {
       Class_multiply output = new Class_multiply();
@@ -13424,11 +13422,11 @@ namespace vx_core {
    * @return {number}
    * (func *)
    */
-  public static interface Func_multiply_1  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_multiply_1 : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_number vx_multiply_1(vx_core.Type_number num1, vx_core.Type_number num2);
   }
 
-  public static class Class_multiply_1  vx_core.Class_base implements Func_multiply_1 {
+  class Class_multiply_1 : vx_core.Class_base, Func_multiply_1 {
 
     public override vx_core.Func_multiply_1 vx_new(params Object vals) {
       Class_multiply_1 output = new Class_multiply_1();
@@ -13501,11 +13499,11 @@ namespace vx_core {
    * @return {int}
    * (func *)
    */
-  public static interface Func_multiply_2  vx_core.Func_any_from_any {
+  public static interface Func_multiply_2 : vx_core.Func_any_from_any {
     public vx_core.Type_int vx_multiply_2(vx_core.Type_intlist nums);
   }
 
-  public static class Class_multiply_2  vx_core.Class_base implements Func_multiply_2 {
+  class Class_multiply_2 : vx_core.Class_base, Func_multiply_2 {
 
     public override vx_core.Func_multiply_2 vx_new(params Object vals) {
       Class_multiply_2 output = new Class_multiply_2();
@@ -13600,11 +13598,11 @@ namespace vx_core {
    * @return {number}
    * (func *)
    */
-  public static interface Func_multiply_3  vx_core.Func_any_from_any {
+  public static interface Func_multiply_3 : vx_core.Func_any_from_any {
     public vx_core.Type_number vx_multiply_3(vx_core.Type_numberlist nums);
   }
 
-  public static class Class_multiply_3  vx_core.Class_base implements Func_multiply_3 {
+  class Class_multiply_3 : vx_core.Class_base, Func_multiply_3 {
 
     public override vx_core.Func_multiply_3 vx_new(params Object vals) {
       Class_multiply_3 output = new Class_multiply_3();
@@ -13700,11 +13698,11 @@ namespace vx_core {
    * @return {int}
    * (func +)
    */
-  public static interface Func_plus  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_plus : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_int vx_plus(vx_core.Type_int num1, vx_core.Type_int num2);
   }
 
-  public static class Class_plus  vx_core.Class_base implements Func_plus {
+  class Class_plus : vx_core.Class_base, Func_plus {
 
     public override vx_core.Func_plus vx_new(params Object vals) {
       Class_plus output = new Class_plus();
@@ -13778,11 +13776,11 @@ namespace vx_core {
    * @return {number}
    * (func +)
    */
-  public static interface Func_plus_1  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_plus_1 : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_number vx_plus_1(vx_core.Type_number num1, vx_core.Type_number num2);
   }
 
-  public static class Class_plus_1  vx_core.Class_base implements Func_plus_1 {
+  class Class_plus_1 : vx_core.Class_base, Func_plus_1 {
 
     public override vx_core.Func_plus_1 vx_new(params Object vals) {
       Class_plus_1 output = new Class_plus_1();
@@ -13855,11 +13853,11 @@ namespace vx_core {
    * @return {int}
    * (func +)
    */
-  public static interface Func_plus_2  vx_core.Func_any_from_any {
+  public static interface Func_plus_2 : vx_core.Func_any_from_any {
     public vx_core.Type_int vx_plus_2(vx_core.Type_intlist nums);
   }
 
-  public static class Class_plus_2  vx_core.Class_base implements Func_plus_2 {
+  class Class_plus_2 : vx_core.Class_base, Func_plus_2 {
 
     public override vx_core.Func_plus_2 vx_new(params Object vals) {
       Class_plus_2 output = new Class_plus_2();
@@ -13954,11 +13952,11 @@ namespace vx_core {
    * @return {number}
    * (func +)
    */
-  public static interface Func_plus_3  vx_core.Func_any_from_any {
+  public static interface Func_plus_3 : vx_core.Func_any_from_any {
     public vx_core.Type_number vx_plus_3(vx_core.Type_numberlist nums);
   }
 
-  public static class Class_plus_3  vx_core.Class_base implements Func_plus_3 {
+  class Class_plus_3 : vx_core.Class_base, Func_plus_3 {
 
     public override vx_core.Func_plus_3 vx_new(params Object vals) {
       Class_plus_3 output = new Class_plus_3();
@@ -14053,11 +14051,11 @@ namespace vx_core {
    * @return {int}
    * (func +1)
    */
-  public static interface Func_plus1  vx_core.Func_any_from_any {
+  public static interface Func_plus1 : vx_core.Func_any_from_any {
     public vx_core.Type_int vx_plus1(vx_core.Type_int num);
   }
 
-  public static class Class_plus1  vx_core.Class_base implements Func_plus1 {
+  class Class_plus1 : vx_core.Class_base, Func_plus1 {
 
     public override vx_core.Func_plus1 vx_new(params Object vals) {
       Class_plus1 output = new Class_plus1();
@@ -14143,11 +14141,11 @@ namespace vx_core {
    * @return {int}
    * (func -)
    */
-  public static interface Func_minus  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_minus : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_int vx_minus(vx_core.Type_int num1, vx_core.Type_int num2);
   }
 
-  public static class Class_minus  vx_core.Class_base implements Func_minus {
+  class Class_minus : vx_core.Class_base, Func_minus {
 
     public override vx_core.Func_minus vx_new(params Object vals) {
       Class_minus output = new Class_minus();
@@ -14221,11 +14219,11 @@ namespace vx_core {
    * @return {number}
    * (func -)
    */
-  public static interface Func_minus_1  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_minus_1 : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_number vx_minus_1(vx_core.Type_number num1, vx_core.Type_number num2);
   }
 
-  public static class Class_minus_1  vx_core.Class_base implements Func_minus_1 {
+  class Class_minus_1 : vx_core.Class_base, Func_minus_1 {
 
     public override vx_core.Func_minus_1 vx_new(params Object vals) {
       Class_minus_1 output = new Class_minus_1();
@@ -14298,11 +14296,11 @@ namespace vx_core {
    * @return {int}
    * (func -)
    */
-  public static interface Func_minus_2  vx_core.Func_any_from_any {
+  public static interface Func_minus_2 : vx_core.Func_any_from_any {
     public vx_core.Type_int vx_minus_2(vx_core.Type_intlist nums);
   }
 
-  public static class Class_minus_2  vx_core.Class_base implements Func_minus_2 {
+  class Class_minus_2 : vx_core.Class_base, Func_minus_2 {
 
     public override vx_core.Func_minus_2 vx_new(params Object vals) {
       Class_minus_2 output = new Class_minus_2();
@@ -14397,11 +14395,11 @@ namespace vx_core {
    * @return {number}
    * (func -)
    */
-  public static interface Func_minus_3  vx_core.Func_any_from_any {
+  public static interface Func_minus_3 : vx_core.Func_any_from_any {
     public vx_core.Type_number vx_minus_3(vx_core.Type_numberlist nums);
   }
 
-  public static class Class_minus_3  vx_core.Class_base implements Func_minus_3 {
+  class Class_minus_3 : vx_core.Class_base, Func_minus_3 {
 
     public override vx_core.Func_minus_3 vx_new(params Object vals) {
       Class_minus_3 output = new Class_minus_3();
@@ -14496,11 +14494,11 @@ namespace vx_core {
    * @return {int}
    * (func -1)
    */
-  public static interface Func_minus1  vx_core.Func_any_from_any {
+  public static interface Func_minus1 : vx_core.Func_any_from_any {
     public vx_core.Type_int vx_minus1(vx_core.Type_int num);
   }
 
-  public static class Class_minus1  vx_core.Class_base implements Func_minus1 {
+  class Class_minus1 : vx_core.Class_base, Func_minus1 {
 
     public override vx_core.Func_minus1 vx_new(params Object vals) {
       Class_minus1 output = new Class_minus1();
@@ -14587,11 +14585,11 @@ namespace vx_core {
    * @return {any}
    * (func .)
    */
-  public static interface Func_dotmethod  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_dotmethod : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_any vx_dotmethod(vx_core.Type_any object, vx_core.Type_string method, vx_core.Type_anylist params);
   }
 
-  public static class Class_dotmethod  vx_core.Class_base implements Func_dotmethod {
+  class Class_dotmethod : vx_core.Class_base, Func_dotmethod {
 
     public override vx_core.Func_dotmethod vx_new(params Object vals) {
       Class_dotmethod output = new Class_dotmethod();
@@ -14666,11 +14664,11 @@ namespace vx_core {
    * @return {number}
    * (func /)
    */
-  public static interface Func_divide  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_divide : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_number vx_divide(vx_core.Type_number num1, vx_core.Type_number num2);
   }
 
-  public static class Class_divide  vx_core.Class_base implements Func_divide {
+  class Class_divide : vx_core.Class_base, Func_divide {
 
     public override vx_core.Func_divide vx_new(params Object vals) {
       Class_divide output = new Class_divide();
@@ -14744,11 +14742,11 @@ namespace vx_core {
    * @return {boolean}
    * (func <)
    */
-  public static interface Func_lt  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_lt : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_boolean vx_lt(vx_core.Type_any val1, vx_core.Type_any val2);
   }
 
-  public static class Class_lt  vx_core.Class_base implements Func_lt {
+  class Class_lt : vx_core.Class_base, Func_lt {
 
     public override vx_core.Func_lt vx_new(params Object vals) {
       Class_lt output = new Class_lt();
@@ -14838,11 +14836,11 @@ namespace vx_core {
    * @return {boolean}
    * (func <)
    */
-  public static interface Func_lt_1  vx_core.Func_any_from_any {
+  public static interface Func_lt_1 : vx_core.Func_any_from_any {
     public vx_core.Type_boolean vx_lt_1(vx_core.Type_anylist values);
   }
 
-  public static class Class_lt_1  vx_core.Class_base implements Func_lt_1 {
+  class Class_lt_1 : vx_core.Class_base, Func_lt_1 {
 
     public override vx_core.Func_lt_1 vx_new(params Object vals) {
       Class_lt_1 output = new Class_lt_1();
@@ -14944,11 +14942,11 @@ namespace vx_core {
    * @return {any-1}
    * (func <-)
    */
-  public static interface Func_chainfirst  vx_core.Type_func, vx_core.Type_replfunc {
-    public <T extends vx_core.Type_any> T vx_chainfirst(T generic_any_1, T value, vx_core.Type_any_from_anylist fnlist);
+  public static interface Func_chainfirst : vx_core.Type_func, vx_core.Type_replfunc {
+    public T vx_chainfirst<T>(T generic_any_1, T value, vx_core.Type_any_from_anylist fnlist) where T : vx_core.Type_any;
   }
 
-  public static class Class_chainfirst  vx_core.Class_base implements Func_chainfirst {
+  class Class_chainfirst : vx_core.Class_base, Func_chainfirst {
 
     public override vx_core.Func_chainfirst vx_new(params Object vals) {
       Class_chainfirst output = new Class_chainfirst();
@@ -15001,7 +14999,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> T vx_chainfirst(T generic_any_1, T value, vx_core.Type_any_from_anylist fnlist) {
+    public T vx_chainfirst<T>(T generic_any_1, T value, vx_core.Type_any_from_anylist fnlist) where T : vx_core.Type_any {
       return vx_core.f_chainfirst(generic_any_1, value, fnlist);
     }
 
@@ -15010,7 +15008,7 @@ namespace vx_core {
   public static Func_chainfirst e_chainfirst = new vx_core.Class_chainfirst();
   public static Func_chainfirst t_chainfirst = new vx_core.Class_chainfirst();
 
-  public static <T extends vx_core.Type_any> T f_chainfirst(T generic_any_1, T value, vx_core.Type_any_from_anylist fnlist) {
+  public static T f_chainfirst<T>(T generic_any_1, T value, vx_core.Type_any_from_anylist fnlist) where T : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -15025,11 +15023,11 @@ namespace vx_core {
    * @return {any-1}
    * (func <<-)
    */
-  public static interface Func_chainlast  vx_core.Type_func, vx_core.Type_replfunc {
-    public <T extends vx_core.Type_any> T vx_chainlast(T generic_any_1, T value, vx_core.Type_any_from_anylist fnlist);
+  public static interface Func_chainlast : vx_core.Type_func, vx_core.Type_replfunc {
+    public T vx_chainlast<T>(T generic_any_1, T value, vx_core.Type_any_from_anylist fnlist) where T : vx_core.Type_any;
   }
 
-  public static class Class_chainlast  vx_core.Class_base implements Func_chainlast {
+  class Class_chainlast : vx_core.Class_base, Func_chainlast {
 
     public override vx_core.Func_chainlast vx_new(params Object vals) {
       Class_chainlast output = new Class_chainlast();
@@ -15082,7 +15080,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> T vx_chainlast(T generic_any_1, T value, vx_core.Type_any_from_anylist fnlist) {
+    public T vx_chainlast<T>(T generic_any_1, T value, vx_core.Type_any_from_anylist fnlist) where T : vx_core.Type_any {
       return vx_core.f_chainlast(generic_any_1, value, fnlist);
     }
 
@@ -15091,7 +15089,7 @@ namespace vx_core {
   public static Func_chainlast e_chainlast = new vx_core.Class_chainlast();
   public static Func_chainlast t_chainlast = new vx_core.Class_chainlast();
 
-  public static <T extends vx_core.Type_any> T f_chainlast(T generic_any_1, T value, vx_core.Type_any_from_anylist fnlist) {
+  public static T f_chainlast<T>(T generic_any_1, T value, vx_core.Type_any_from_anylist fnlist) where T : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -15104,11 +15102,11 @@ namespace vx_core {
    * @return {boolean}
    * (func <=)
    */
-  public static interface Func_le  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_le : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_boolean vx_le(vx_core.Type_any val1, vx_core.Type_any val2);
   }
 
-  public static class Class_le  vx_core.Class_base implements Func_le {
+  class Class_le : vx_core.Class_base, Func_le {
 
     public override vx_core.Func_le vx_new(params Object vals) {
       Class_le output = new Class_le();
@@ -15184,11 +15182,11 @@ namespace vx_core {
    * @return {boolean}
    * (func <=)
    */
-  public static interface Func_le_1  vx_core.Func_any_from_any {
+  public static interface Func_le_1 : vx_core.Func_any_from_any {
     public vx_core.Type_boolean vx_le_1(vx_core.Type_anylist args);
   }
 
-  public static class Class_le_1  vx_core.Class_base implements Func_le_1 {
+  class Class_le_1 : vx_core.Class_base, Func_le_1 {
 
     public override vx_core.Func_le_1 vx_new(params Object vals) {
       Class_le_1 output = new Class_le_1();
@@ -15276,11 +15274,11 @@ namespace vx_core {
    * @return {boolean}
    * (func =)
    */
-  public static interface Func_eq  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_eq : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_boolean vx_eq(vx_core.Type_any val1, vx_core.Type_any val2);
   }
 
-  public static class Class_eq  vx_core.Class_base implements Func_eq {
+  class Class_eq : vx_core.Class_base, Func_eq {
 
     public override vx_core.Func_eq vx_new(params Object vals) {
       Class_eq output = new Class_eq();
@@ -15353,11 +15351,11 @@ namespace vx_core {
    * @return {boolean}
    * (func =)
    */
-  public static interface Func_eq_1  vx_core.Func_any_from_any {
+  public static interface Func_eq_1 : vx_core.Func_any_from_any {
     public vx_core.Type_boolean vx_eq_1(vx_core.Type_anylist values);
   }
 
-  public static class Class_eq_1  vx_core.Class_base implements Func_eq_1 {
+  class Class_eq_1 : vx_core.Class_base, Func_eq_1 {
 
     public override vx_core.Func_eq_1 vx_new(params Object vals) {
       Class_eq_1 output = new Class_eq_1();
@@ -15457,11 +15455,11 @@ namespace vx_core {
    * @return {boolean}
    * (func ==)
    */
-  public static interface Func_eqeq  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_eqeq : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_boolean vx_eqeq(vx_core.Type_any val1, vx_core.Type_any val2);
   }
 
-  public static class Class_eqeq  vx_core.Class_base implements Func_eqeq {
+  class Class_eqeq : vx_core.Class_base, Func_eqeq {
 
     public override vx_core.Func_eqeq vx_new(params Object vals) {
       Class_eqeq output = new Class_eqeq();
@@ -15535,11 +15533,11 @@ namespace vx_core {
    * @return {boolean}
    * (func >)
    */
-  public static interface Func_gt  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_gt : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_boolean vx_gt(vx_core.Type_any val1, vx_core.Type_any val2);
   }
 
-  public static class Class_gt  vx_core.Class_base implements Func_gt {
+  class Class_gt : vx_core.Class_base, Func_gt {
 
     public override vx_core.Func_gt vx_new(params Object vals) {
       Class_gt output = new Class_gt();
@@ -15629,11 +15627,11 @@ namespace vx_core {
    * @return {boolean}
    * (func >)
    */
-  public static interface Func_gt_1  vx_core.Func_any_from_any {
+  public static interface Func_gt_1 : vx_core.Func_any_from_any {
     public vx_core.Type_boolean vx_gt_1(vx_core.Type_anylist values);
   }
 
-  public static class Class_gt_1  vx_core.Class_base implements Func_gt_1 {
+  class Class_gt_1 : vx_core.Class_base, Func_gt_1 {
 
     public override vx_core.Func_gt_1 vx_new(params Object vals) {
       Class_gt_1 output = new Class_gt_1();
@@ -15733,11 +15731,11 @@ namespace vx_core {
    * @return {boolean}
    * (func >=)
    */
-  public static interface Func_ge  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_ge : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_boolean vx_ge(vx_core.Type_any val1, vx_core.Type_any val2);
   }
 
-  public static class Class_ge  vx_core.Class_base implements Func_ge {
+  class Class_ge : vx_core.Class_base, Func_ge {
 
     public override vx_core.Func_ge vx_new(params Object vals) {
       Class_ge output = new Class_ge();
@@ -15813,11 +15811,11 @@ namespace vx_core {
    * @return {boolean}
    * (func >=)
    */
-  public static interface Func_ge_1  vx_core.Func_any_from_any {
+  public static interface Func_ge_1 : vx_core.Func_any_from_any {
     public vx_core.Type_boolean vx_ge_1(vx_core.Type_anylist args);
   }
 
-  public static class Class_ge_1  vx_core.Class_base implements Func_ge_1 {
+  class Class_ge_1 : vx_core.Class_base, Func_ge_1 {
 
     public override vx_core.Func_ge_1 vx_new(params Object vals) {
       Class_ge_1 output = new Class_ge_1();
@@ -15904,11 +15902,11 @@ namespace vx_core {
    * @return {funclist}
    * (func allowfuncs<-security)
    */
-  public static interface Func_allowfuncs_from_security  vx_core.Func_any_from_any {
+  public static interface Func_allowfuncs_from_security : vx_core.Func_any_from_any {
     public vx_core.Type_funclist vx_allowfuncs_from_security(vx_core.Type_security security);
   }
 
-  public static class Class_allowfuncs_from_security  vx_core.Class_base implements Func_allowfuncs_from_security {
+  class Class_allowfuncs_from_security : vx_core.Class_base, Func_allowfuncs_from_security {
 
     public override vx_core.Func_allowfuncs_from_security vx_new(params Object vals) {
       Class_allowfuncs_from_security output = new Class_allowfuncs_from_security();
@@ -15993,11 +15991,11 @@ namespace vx_core {
    * @return {stringlist}
    * (func allowtypenames<-typedef)
    */
-  public static interface Func_allowtypenames_from_typedef  vx_core.Func_any_from_any {
+  public static interface Func_allowtypenames_from_typedef : vx_core.Func_any_from_any {
     public vx_core.Type_stringlist vx_allowtypenames_from_typedef(vx_core.Type_typedef vtypedef);
   }
 
-  public static class Class_allowtypenames_from_typedef  vx_core.Class_base implements Func_allowtypenames_from_typedef {
+  class Class_allowtypenames_from_typedef : vx_core.Class_base, Func_allowtypenames_from_typedef {
 
     public override vx_core.Func_allowtypenames_from_typedef vx_new(params Object vals) {
       Class_allowtypenames_from_typedef output = new Class_allowtypenames_from_typedef();
@@ -16084,11 +16082,11 @@ namespace vx_core {
    * @return {typelist}
    * (func allowtypes<-typedef)
    */
-  public static interface Func_allowtypes_from_typedef  vx_core.Func_any_from_any {
+  public static interface Func_allowtypes_from_typedef : vx_core.Func_any_from_any {
     public vx_core.Type_typelist vx_allowtypes_from_typedef(vx_core.Type_typedef vtypedef);
   }
 
-  public static class Class_allowtypes_from_typedef  vx_core.Class_base implements Func_allowtypes_from_typedef {
+  class Class_allowtypes_from_typedef : vx_core.Class_base, Func_allowtypes_from_typedef {
 
     public override vx_core.Func_allowtypes_from_typedef vx_new(params Object vals) {
       Class_allowtypes_from_typedef output = new Class_allowtypes_from_typedef();
@@ -16173,11 +16171,11 @@ namespace vx_core {
    * @return {boolean}
    * (func and)
    */
-  public static interface Func_and  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_and : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_boolean vx_and(vx_core.Type_boolean val1, vx_core.Type_boolean val2);
   }
 
-  public static class Class_and  vx_core.Class_base implements Func_and {
+  class Class_and : vx_core.Class_base, Func_and {
 
     public override vx_core.Func_and vx_new(params Object vals) {
       Class_and output = new Class_and();
@@ -16250,11 +16248,11 @@ namespace vx_core {
    * @return {boolean}
    * (func and)
    */
-  public static interface Func_and_1  vx_core.Func_any_from_any {
+  public static interface Func_and_1 : vx_core.Func_any_from_any {
     public vx_core.Type_boolean vx_and_1(vx_core.Type_booleanlist values);
   }
 
-  public static class Class_and_1  vx_core.Class_base implements Func_and_1 {
+  class Class_and_1 : vx_core.Class_base, Func_and_1 {
 
     public override vx_core.Func_and_1 vx_new(params Object vals) {
       Class_and_1 output = new Class_and_1();
@@ -16375,12 +16373,12 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-any)
    */
-  public static interface Func_any_from_any  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_any_from_any : vx_core.Type_func, vx_core.Type_replfunc {
     public Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn);
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> T vx_any_from_any(T generic_any_1, U value);
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
-  public static class Class_any_from_any  vx_core.Class_base implements Func_any_from_any {
+  class Class_any_from_any : vx_core.Class_base, Func_any_from_any {
 
     public IFn fn = null;
 
@@ -16446,7 +16444,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> T vx_any_from_any(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       if (fn != null) {
         vx_core.Type_any anyoutput = fn.resolve(value);
@@ -16460,7 +16458,7 @@ namespace vx_core {
   public static Func_any_from_any e_any_from_any = new vx_core.Class_any_from_any();
   public static Func_any_from_any t_any_from_any = new vx_core.Class_any_from_any();
 
-  public static <T extends vx_core.Type_any, U extends vx_core.Type_any> T f_any_from_any(T generic_any_1, U value) {
+  public static T f_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -16474,12 +16472,12 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-any-async)
    */
-  public static interface Func_any_from_any_async  vx_core.Type_func, vx_core.Type_replfunc_async {
+  public static interface Func_any_from_any_async : vx_core.Type_func, vx_core.Type_replfunc_async {
     public Func_any_from_any_async vx_fn_new(vx_core.Class_any_from_any_async.IFn fn);
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> CompletableFuture<T> vx_any_from_any_async(T generic_any_1, U value);
+    public Task<T> vx_any_from_any_async<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
-  public static class Class_any_from_any_async  vx_core.Class_base implements Func_any_from_any_async {
+  class Class_any_from_any_async : vx_core.Class_base, Func_any_from_any_async {
 
     public IFn fn = null;
 
@@ -16546,7 +16544,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> CompletableFuture<T> vx_any_from_any_async(T generic_any_1, U value) {
+    public CompletableFuture<T> vx_any_from_any_async<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       CompletableFuture<T> output;
       if (fn == null) {
         output = CompletableFuture.completedFuture(vx_core.f_empty(generic_any_1));
@@ -16562,7 +16560,7 @@ namespace vx_core {
   public static Func_any_from_any_async e_any_from_any_async = new vx_core.Class_any_from_any_async();
   public static Func_any_from_any_async t_any_from_any_async = new vx_core.Class_any_from_any_async();
 
-  public static <T extends vx_core.Type_any, U extends vx_core.Type_any> CompletableFuture<T> f_any_from_any_async(T generic_any_1, U value) {
+  public static CompletableFuture<T> f_any_from_any_async<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
     CompletableFuture<T> output = vx_core.async_new_completed(vx_core.f_empty(generic_any_1));
     return output;
   }
@@ -16574,12 +16572,12 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-any-context)
    */
-  public static interface Func_any_from_any_context  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_any_from_any_context : vx_core.Type_func, vx_core.Type_replfunc {
     public Func_any_from_any_context vx_fn_new(vx_core.Class_any_from_any_context.IFn fn);
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> T vx_any_from_any_context(T generic_any_1, vx_core.Type_context context, U value);
+    public T vx_any_from_any_context<T, U>(T generic_any_1, vx_core.Type_context context, U value) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
-  public static class Class_any_from_any_context  vx_core.Class_base implements Func_any_from_any_context {
+  class Class_any_from_any_context : vx_core.Class_base, Func_any_from_any_context {
 
     public IFn fn = null;
 
@@ -16646,7 +16644,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> T vx_any_from_any_context(T generic_any_1, vx_core.Type_context context, U value) {
+    public T vx_any_from_any_context<T, U>(T generic_any_1, vx_core.Type_context context, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       if (fn != null) {
         vx_core.Type_any anyoutput = fn.resolve(context, value);
@@ -16660,7 +16658,7 @@ namespace vx_core {
   public static Func_any_from_any_context e_any_from_any_context = new vx_core.Class_any_from_any_context();
   public static Func_any_from_any_context t_any_from_any_context = new vx_core.Class_any_from_any_context();
 
-  public static <T extends vx_core.Type_any, U extends vx_core.Type_any> T f_any_from_any_context(T generic_any_1, vx_core.Type_context context, U value) {
+  public static T f_any_from_any_context<T, U>(T generic_any_1, vx_core.Type_context context, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -16674,12 +16672,12 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-any-context-async)
    */
-  public static interface Func_any_from_any_context_async  vx_core.Type_func, vx_core.Type_replfunc_async {
+  public static interface Func_any_from_any_context_async : vx_core.Type_func, vx_core.Type_replfunc_async {
     public Func_any_from_any_context_async vx_fn_new(vx_core.Class_any_from_any_context_async.IFn fn);
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> CompletableFuture<T> vx_any_from_any_context_async(T generic_any_1, vx_core.Type_context context, U value);
+    public Task<T> vx_any_from_any_context_async<T, U>(T generic_any_1, vx_core.Type_context context, U value) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
-  public static class Class_any_from_any_context_async  vx_core.Class_base implements Func_any_from_any_context_async {
+  class Class_any_from_any_context_async : vx_core.Class_base, Func_any_from_any_context_async {
 
     public IFn fn = null;
 
@@ -16747,7 +16745,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> CompletableFuture<T> vx_any_from_any_context_async(T generic_any_1, vx_core.Type_context context, U value) {
+    public CompletableFuture<T> vx_any_from_any_context_async<T, U>(T generic_any_1, vx_core.Type_context context, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       CompletableFuture<T> output;
       if (fn == null) {
         output = CompletableFuture.completedFuture(vx_core.f_empty(generic_any_1));
@@ -16763,7 +16761,7 @@ namespace vx_core {
   public static Func_any_from_any_context_async e_any_from_any_context_async = new vx_core.Class_any_from_any_context_async();
   public static Func_any_from_any_context_async t_any_from_any_context_async = new vx_core.Class_any_from_any_context_async();
 
-  public static <T extends vx_core.Type_any, U extends vx_core.Type_any> CompletableFuture<T> f_any_from_any_context_async(T generic_any_1, vx_core.Type_context context, U value) {
+  public static CompletableFuture<T> f_any_from_any_context_async<T, U>(T generic_any_1, vx_core.Type_context context, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
     CompletableFuture<T> output = vx_core.async_new_completed(vx_core.f_empty(generic_any_1));
     return output;
   }
@@ -16777,12 +16775,12 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-any-key-value)
    */
-  public static interface Func_any_from_any_key_value  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_any_from_any_key_value : vx_core.Type_func, vx_core.Type_replfunc {
     public Func_any_from_any_key_value vx_fn_new(vx_core.Class_any_from_any_key_value.IFn fn);
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> T vx_any_from_any_key_value(T generic_any_1, T current, vx_core.Type_string key, U value);
+    public T vx_any_from_any_key_value<T, U>(T generic_any_1, T current, vx_core.Type_string key, U value) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
-  public static class Class_any_from_any_key_value  vx_core.Class_base implements Func_any_from_any_key_value {
+  class Class_any_from_any_key_value : vx_core.Class_base, Func_any_from_any_key_value {
 
     public IFn fn = null;
 
@@ -16850,7 +16848,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> T vx_any_from_any_key_value(T generic_any_1, T current, vx_core.Type_string key, U value) {
+    public T vx_any_from_any_key_value<T, U>(T generic_any_1, T current, vx_core.Type_string key, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       if (fn != null) {
         vx_core.Type_any anyoutput = fn.resolve(current, key, value);
@@ -16864,7 +16862,7 @@ namespace vx_core {
   public static Func_any_from_any_key_value e_any_from_any_key_value = new vx_core.Class_any_from_any_key_value();
   public static Func_any_from_any_key_value t_any_from_any_key_value = new vx_core.Class_any_from_any_key_value();
 
-  public static <T extends vx_core.Type_any, U extends vx_core.Type_any> T f_any_from_any_key_value(T generic_any_1, T current, vx_core.Type_string key, U value) {
+  public static T f_any_from_any_key_value<T, U>(T generic_any_1, T current, vx_core.Type_string key, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -16875,12 +16873,12 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-func)
    */
-  public static interface Func_any_from_func  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_any_from_func : vx_core.Type_func, vx_core.Type_replfunc {
     public Func_any_from_func vx_fn_new(vx_core.Class_any_from_func.IFn fn);
-    public <T extends vx_core.Type_any> T vx_any_from_func(T generic_any_1);
+    public T vx_any_from_func<T>(T generic_any_1) where T : vx_core.Type_any;
   }
 
-  public static class Class_any_from_func  vx_core.Class_base implements Func_any_from_func {
+  class Class_any_from_func : vx_core.Class_base, Func_any_from_func {
 
     public IFn fn = null;
 
@@ -16945,7 +16943,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> T vx_any_from_func(T generic_any_1) {
+    public T vx_any_from_func<T>(T generic_any_1) where T : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       if (fn != null) {
         vx_core.Type_any anyoutput = fn.resolve();
@@ -16959,7 +16957,7 @@ namespace vx_core {
   public static Func_any_from_func e_any_from_func = new vx_core.Class_any_from_func();
   public static Func_any_from_func t_any_from_func = new vx_core.Class_any_from_func();
 
-  public static <T extends vx_core.Type_any> T f_any_from_func(T generic_any_1) {
+  public static T f_any_from_func<T>(T generic_any_1) where T : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -16972,12 +16970,12 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-func-async)
    */
-  public static interface Func_any_from_func_async  vx_core.Type_func, vx_core.Type_replfunc_async {
+  public static interface Func_any_from_func_async : vx_core.Type_func, vx_core.Type_replfunc_async {
     public Func_any_from_func_async vx_fn_new(vx_core.Class_any_from_func_async.IFn fn);
-    public <T extends vx_core.Type_any> CompletableFuture<T> vx_any_from_func_async(T generic_any_1);
+    public Task<T> vx_any_from_func_async<T>(T generic_any_1) where T : vx_core.Type_any;
   }
 
-  public static class Class_any_from_func_async  vx_core.Class_base implements Func_any_from_func_async {
+  class Class_any_from_func_async : vx_core.Class_base, Func_any_from_func_async {
 
     public IFn fn = null;
 
@@ -17043,7 +17041,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> CompletableFuture<T> vx_any_from_func_async(T generic_any_1) {
+    public CompletableFuture<T> vx_any_from_func_async<T>(T generic_any_1) where T : vx_core.Type_any {
       CompletableFuture<T> output;
       if (fn == null) {
         output = CompletableFuture.completedFuture(vx_core.f_empty(generic_any_1));
@@ -17059,7 +17057,7 @@ namespace vx_core {
   public static Func_any_from_func_async e_any_from_func_async = new vx_core.Class_any_from_func_async();
   public static Func_any_from_func_async t_any_from_func_async = new vx_core.Class_any_from_func_async();
 
-  public static <T extends vx_core.Type_any> CompletableFuture<T> f_any_from_func_async(T generic_any_1) {
+  public static CompletableFuture<T> f_any_from_func_async<T>(T generic_any_1) where T : vx_core.Type_any {
     CompletableFuture<T> output = vx_core.async_new_completed(vx_core.f_empty(generic_any_1));
     return output;
   }
@@ -17071,12 +17069,12 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-int)
    */
-  public static interface Func_any_from_int  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_any_from_int : vx_core.Type_func, vx_core.Type_replfunc {
     public Func_any_from_int vx_fn_new(vx_core.Class_any_from_int.IFn fn);
-    public <T extends vx_core.Type_any> T vx_any_from_int(T generic_any_1, vx_core.Type_int value);
+    public T vx_any_from_int<T>(T generic_any_1, vx_core.Type_int value) where T : vx_core.Type_any;
   }
 
-  public static class Class_any_from_int  vx_core.Class_base implements Func_any_from_int {
+  class Class_any_from_int : vx_core.Class_base, Func_any_from_int {
 
     public IFn fn = null;
 
@@ -17142,7 +17140,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> T vx_any_from_int(T generic_any_1, vx_core.Type_int value) {
+    public T vx_any_from_int<T>(T generic_any_1, vx_core.Type_int value) where T : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       if (fn != null) {
         vx_core.Type_any anyoutput = fn.resolve(value);
@@ -17156,7 +17154,7 @@ namespace vx_core {
   public static Func_any_from_int e_any_from_int = new vx_core.Class_any_from_int();
   public static Func_any_from_int t_any_from_int = new vx_core.Class_any_from_int();
 
-  public static <T extends vx_core.Type_any> T f_any_from_int(T generic_any_1, vx_core.Type_int value) {
+  public static T f_any_from_int<T>(T generic_any_1, vx_core.Type_int value) where T : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -17169,12 +17167,12 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-int-any)
    */
-  public static interface Func_any_from_int_any  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_any_from_int_any : vx_core.Type_func, vx_core.Type_replfunc {
     public Func_any_from_int_any vx_fn_new(vx_core.Class_any_from_int_any.IFn fn);
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> T vx_any_from_int_any(T generic_any_1, vx_core.Type_int num, U val);
+    public T vx_any_from_int_any<T, U>(T generic_any_1, vx_core.Type_int num, U val) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
-  public static class Class_any_from_int_any  vx_core.Class_base implements Func_any_from_int_any {
+  class Class_any_from_int_any : vx_core.Class_base, Func_any_from_int_any {
 
     public IFn fn = null;
 
@@ -17241,7 +17239,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> T vx_any_from_int_any(T generic_any_1, vx_core.Type_int num, U val) {
+    public T vx_any_from_int_any<T, U>(T generic_any_1, vx_core.Type_int num, U val) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       if (fn != null) {
         vx_core.Type_any anyoutput = fn.resolve(num, val);
@@ -17255,7 +17253,7 @@ namespace vx_core {
   public static Func_any_from_int_any e_any_from_int_any = new vx_core.Class_any_from_int_any();
   public static Func_any_from_int_any t_any_from_int_any = new vx_core.Class_any_from_int_any();
 
-  public static <T extends vx_core.Type_any, U extends vx_core.Type_any> T f_any_from_int_any(T generic_any_1, vx_core.Type_int num, U val) {
+  public static T f_any_from_int_any<T, U>(T generic_any_1, vx_core.Type_int num, U val) where T : vx_core.Type_any where U : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -17268,12 +17266,12 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-key-value)
    */
-  public static interface Func_any_from_key_value  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_any_from_key_value : vx_core.Type_func, vx_core.Type_replfunc {
     public Func_any_from_key_value vx_fn_new(vx_core.Class_any_from_key_value.IFn fn);
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> T vx_any_from_key_value(T generic_any_1, vx_core.Type_string key, U val);
+    public T vx_any_from_key_value<T, U>(T generic_any_1, vx_core.Type_string key, U val) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
-  public static class Class_any_from_key_value  vx_core.Class_base implements Func_any_from_key_value {
+  class Class_any_from_key_value : vx_core.Class_base, Func_any_from_key_value {
 
     public IFn fn = null;
 
@@ -17340,7 +17338,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> T vx_any_from_key_value(T generic_any_1, vx_core.Type_string key, U val) {
+    public T vx_any_from_key_value<T, U>(T generic_any_1, vx_core.Type_string key, U val) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       if (fn != null) {
         vx_core.Type_any anyoutput = fn.resolve(key, val);
@@ -17354,7 +17352,7 @@ namespace vx_core {
   public static Func_any_from_key_value e_any_from_key_value = new vx_core.Class_any_from_key_value();
   public static Func_any_from_key_value t_any_from_key_value = new vx_core.Class_any_from_key_value();
 
-  public static <T extends vx_core.Type_any, U extends vx_core.Type_any> T f_any_from_key_value(T generic_any_1, vx_core.Type_string key, U val) {
+  public static T f_any_from_key_value<T, U>(T generic_any_1, vx_core.Type_string key, U val) where T : vx_core.Type_any where U : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -17369,12 +17367,12 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-key-value-async)
    */
-  public static interface Func_any_from_key_value_async  vx_core.Type_func, vx_core.Type_replfunc_async {
+  public static interface Func_any_from_key_value_async : vx_core.Type_func, vx_core.Type_replfunc_async {
     public Func_any_from_key_value_async vx_fn_new(vx_core.Class_any_from_key_value_async.IFn fn);
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> CompletableFuture<T> vx_any_from_key_value_async(T generic_any_1, vx_core.Type_string key, U val);
+    public Task<T> vx_any_from_key_value_async<T, U>(T generic_any_1, vx_core.Type_string key, U val) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
-  public static class Class_any_from_key_value_async  vx_core.Class_base implements Func_any_from_key_value_async {
+  class Class_any_from_key_value_async : vx_core.Class_base, Func_any_from_key_value_async {
 
     public IFn fn = null;
 
@@ -17442,7 +17440,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> CompletableFuture<T> vx_any_from_key_value_async(T generic_any_1, vx_core.Type_string key, U val) {
+    public CompletableFuture<T> vx_any_from_key_value_async<T, U>(T generic_any_1, vx_core.Type_string key, U val) where T : vx_core.Type_any where U : vx_core.Type_any {
       CompletableFuture<T> output;
       if (fn == null) {
         output = CompletableFuture.completedFuture(vx_core.f_empty(generic_any_1));
@@ -17458,7 +17456,7 @@ namespace vx_core {
   public static Func_any_from_key_value_async e_any_from_key_value_async = new vx_core.Class_any_from_key_value_async();
   public static Func_any_from_key_value_async t_any_from_key_value_async = new vx_core.Class_any_from_key_value_async();
 
-  public static <T extends vx_core.Type_any, U extends vx_core.Type_any> CompletableFuture<T> f_any_from_key_value_async(T generic_any_1, vx_core.Type_string key, U val) {
+  public static CompletableFuture<T> f_any_from_key_value_async<T, U>(T generic_any_1, vx_core.Type_string key, U val) where T : vx_core.Type_any where U : vx_core.Type_any {
     CompletableFuture<T> output = vx_core.async_new_completed(vx_core.f_empty(generic_any_1));
     return output;
   }
@@ -17471,11 +17469,11 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-list)
    */
-  public static interface Func_any_from_list  vx_core.Type_func, vx_core.Type_replfunc {
-    public <T extends vx_core.Type_any, X extends vx_core.Type_list> T vx_any_from_list(T generic_any_1, X values, vx_core.Type_int index);
+  public static interface Func_any_from_list : vx_core.Type_func, vx_core.Type_replfunc {
+    public T vx_any_from_list<T, X>(T generic_any_1, X values, vx_core.Type_int index) where T : vx_core.Type_any where X : vx_core.Type_list;
   }
 
-  public static class Class_any_from_list  vx_core.Class_base implements Func_any_from_list {
+  class Class_any_from_list : vx_core.Class_base, Func_any_from_list {
 
     public override vx_core.Func_any_from_list vx_new(params Object vals) {
       Class_any_from_list output = new Class_any_from_list();
@@ -17528,7 +17526,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, X extends vx_core.Type_list> T vx_any_from_list(T generic_any_1, X values, vx_core.Type_int index) {
+    public T vx_any_from_list<T, X>(T generic_any_1, X values, vx_core.Type_int index) where T : vx_core.Type_any where X : vx_core.Type_list {
       return vx_core.f_any_from_list(generic_any_1, values, index);
     }
 
@@ -17537,7 +17535,7 @@ namespace vx_core {
   public static Func_any_from_list e_any_from_list = new vx_core.Class_any_from_list();
   public static Func_any_from_list t_any_from_list = new vx_core.Class_any_from_list();
 
-  public static <T extends vx_core.Type_any, X extends vx_core.Type_list> T f_any_from_list(T generic_any_1, X values, vx_core.Type_int index) {
+  public static T f_any_from_list<T, X>(T generic_any_1, X values, vx_core.Type_int index) where T : vx_core.Type_any where X : vx_core.Type_list {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -17551,11 +17549,11 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-list-start-reduce)
    */
-  public static interface Func_any_from_list_start_reduce  vx_core.Type_func, vx_core.Type_replfunc {
-    public <T extends vx_core.Type_any, Y extends vx_core.Type_list> T vx_any_from_list_start_reduce(T generic_any_1, Y list, T valstart, vx_core.Func_any_from_reduce fn_reduce);
+  public static interface Func_any_from_list_start_reduce : vx_core.Type_func, vx_core.Type_replfunc {
+    public T vx_any_from_list_start_reduce<T, Y>(T generic_any_1, Y list, T valstart, vx_core.Func_any_from_reduce fn_reduce) where T : vx_core.Type_any where Y : vx_core.Type_list;
   }
 
-  public static class Class_any_from_list_start_reduce  vx_core.Class_base implements Func_any_from_list_start_reduce {
+  class Class_any_from_list_start_reduce : vx_core.Class_base, Func_any_from_list_start_reduce {
 
     public override vx_core.Func_any_from_list_start_reduce vx_new(params Object vals) {
       Class_any_from_list_start_reduce output = new Class_any_from_list_start_reduce();
@@ -17609,7 +17607,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, Y extends vx_core.Type_list> T vx_any_from_list_start_reduce(T generic_any_1, Y list, T valstart, vx_core.Func_any_from_reduce fn_reduce) {
+    public T vx_any_from_list_start_reduce<T, Y>(T generic_any_1, Y list, T valstart, vx_core.Func_any_from_reduce fn_reduce) where T : vx_core.Type_any where Y : vx_core.Type_list {
       return vx_core.f_any_from_list_start_reduce(generic_any_1, list, valstart, fn_reduce);
     }
 
@@ -17618,7 +17616,7 @@ namespace vx_core {
   public static Func_any_from_list_start_reduce e_any_from_list_start_reduce = new vx_core.Class_any_from_list_start_reduce();
   public static Func_any_from_list_start_reduce t_any_from_list_start_reduce = new vx_core.Class_any_from_list_start_reduce();
 
-  public static <T extends vx_core.Type_any, Y extends vx_core.Type_list> T f_any_from_list_start_reduce(T generic_any_1, Y list, T valstart, vx_core.Func_any_from_reduce fn_reduce) {
+  public static T f_any_from_list_start_reduce<T, Y>(T generic_any_1, Y list, T valstart, vx_core.Func_any_from_reduce fn_reduce) where T : vx_core.Type_any where Y : vx_core.Type_list {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -17632,11 +17630,11 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-list-start-reduce-next)
    */
-  public static interface Func_any_from_list_start_reduce_next  vx_core.Type_func, vx_core.Type_replfunc {
-    public <T extends vx_core.Type_any, Y extends vx_core.Type_list> T vx_any_from_list_start_reduce_next(T generic_any_1, Y list, T valstart, vx_core.Func_any_from_reduce_next fn_reduce_next);
+  public static interface Func_any_from_list_start_reduce_next : vx_core.Type_func, vx_core.Type_replfunc {
+    public T vx_any_from_list_start_reduce_next<T, Y>(T generic_any_1, Y list, T valstart, vx_core.Func_any_from_reduce_next fn_reduce_next) where T : vx_core.Type_any where Y : vx_core.Type_list;
   }
 
-  public static class Class_any_from_list_start_reduce_next  vx_core.Class_base implements Func_any_from_list_start_reduce_next {
+  class Class_any_from_list_start_reduce_next : vx_core.Class_base, Func_any_from_list_start_reduce_next {
 
     public override vx_core.Func_any_from_list_start_reduce_next vx_new(params Object vals) {
       Class_any_from_list_start_reduce_next output = new Class_any_from_list_start_reduce_next();
@@ -17690,7 +17688,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, Y extends vx_core.Type_list> T vx_any_from_list_start_reduce_next(T generic_any_1, Y list, T valstart, vx_core.Func_any_from_reduce_next fn_reduce_next) {
+    public T vx_any_from_list_start_reduce_next<T, Y>(T generic_any_1, Y list, T valstart, vx_core.Func_any_from_reduce_next fn_reduce_next) where T : vx_core.Type_any where Y : vx_core.Type_list {
       return vx_core.f_any_from_list_start_reduce_next(generic_any_1, list, valstart, fn_reduce_next);
     }
 
@@ -17699,7 +17697,7 @@ namespace vx_core {
   public static Func_any_from_list_start_reduce_next e_any_from_list_start_reduce_next = new vx_core.Class_any_from_list_start_reduce_next();
   public static Func_any_from_list_start_reduce_next t_any_from_list_start_reduce_next = new vx_core.Class_any_from_list_start_reduce_next();
 
-  public static <T extends vx_core.Type_any, Y extends vx_core.Type_list> T f_any_from_list_start_reduce_next(T generic_any_1, Y list, T valstart, vx_core.Func_any_from_reduce_next fn_reduce_next) {
+  public static T f_any_from_list_start_reduce_next<T, Y>(T generic_any_1, Y list, T valstart, vx_core.Func_any_from_reduce_next fn_reduce_next) where T : vx_core.Type_any where Y : vx_core.Type_list {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -17712,11 +17710,11 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-map)
    */
-  public static interface Func_any_from_map  vx_core.Type_func, vx_core.Type_replfunc {
-    public <T extends vx_core.Type_any, N extends vx_core.Type_map> T vx_any_from_map(T generic_any_1, N valuemap, vx_core.Type_string key);
+  public static interface Func_any_from_map : vx_core.Type_func, vx_core.Type_replfunc {
+    public T vx_any_from_map<N, T>(T generic_any_1, N valuemap, vx_core.Type_string key) where N : vx_core.Type_map where T : vx_core.Type_any;
   }
 
-  public static class Class_any_from_map  vx_core.Class_base implements Func_any_from_map {
+  class Class_any_from_map : vx_core.Class_base, Func_any_from_map {
 
     public override vx_core.Func_any_from_map vx_new(params Object vals) {
       Class_any_from_map output = new Class_any_from_map();
@@ -17769,7 +17767,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, N extends vx_core.Type_map> T vx_any_from_map(T generic_any_1, N valuemap, vx_core.Type_string key) {
+    public T vx_any_from_map<N, T>(T generic_any_1, N valuemap, vx_core.Type_string key) where N : vx_core.Type_map where T : vx_core.Type_any {
       return vx_core.f_any_from_map(generic_any_1, valuemap, key);
     }
 
@@ -17778,7 +17776,7 @@ namespace vx_core {
   public static Func_any_from_map e_any_from_map = new vx_core.Class_any_from_map();
   public static Func_any_from_map t_any_from_map = new vx_core.Class_any_from_map();
 
-  public static <T extends vx_core.Type_any, N extends vx_core.Type_map> T f_any_from_map(T generic_any_1, N valuemap, vx_core.Type_string key) {
+  public static T f_any_from_map<N, T>(T generic_any_1, N valuemap, vx_core.Type_string key) where N : vx_core.Type_map where T : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -17792,11 +17790,11 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-map-start-reduce)
    */
-  public static interface Func_any_from_map_start_reduce  vx_core.Type_func, vx_core.Type_replfunc {
-    public <T extends vx_core.Type_any, N extends vx_core.Type_map> T vx_any_from_map_start_reduce(T generic_any_1, N map, T start, vx_core.Func_any_from_any_key_value fn_reduce);
+  public static interface Func_any_from_map_start_reduce : vx_core.Type_func, vx_core.Type_replfunc {
+    public T vx_any_from_map_start_reduce<N, T>(T generic_any_1, N map, T start, vx_core.Func_any_from_any_key_value fn_reduce) where N : vx_core.Type_map where T : vx_core.Type_any;
   }
 
-  public static class Class_any_from_map_start_reduce  vx_core.Class_base implements Func_any_from_map_start_reduce {
+  class Class_any_from_map_start_reduce : vx_core.Class_base, Func_any_from_map_start_reduce {
 
     public override vx_core.Func_any_from_map_start_reduce vx_new(params Object vals) {
       Class_any_from_map_start_reduce output = new Class_any_from_map_start_reduce();
@@ -17850,7 +17848,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, N extends vx_core.Type_map> T vx_any_from_map_start_reduce(T generic_any_1, N map, T start, vx_core.Func_any_from_any_key_value fn_reduce) {
+    public T vx_any_from_map_start_reduce<N, T>(T generic_any_1, N map, T start, vx_core.Func_any_from_any_key_value fn_reduce) where N : vx_core.Type_map where T : vx_core.Type_any {
       return vx_core.f_any_from_map_start_reduce(generic_any_1, map, start, fn_reduce);
     }
 
@@ -17859,7 +17857,7 @@ namespace vx_core {
   public static Func_any_from_map_start_reduce e_any_from_map_start_reduce = new vx_core.Class_any_from_map_start_reduce();
   public static Func_any_from_map_start_reduce t_any_from_map_start_reduce = new vx_core.Class_any_from_map_start_reduce();
 
-  public static <T extends vx_core.Type_any, N extends vx_core.Type_map> T f_any_from_map_start_reduce(T generic_any_1, N map, T start, vx_core.Func_any_from_any_key_value fn_reduce) {
+  public static T f_any_from_map_start_reduce<N, T>(T generic_any_1, N map, T start, vx_core.Func_any_from_any_key_value fn_reduce) where N : vx_core.Type_map where T : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -17870,12 +17868,12 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-none)
    */
-  public static interface Func_any_from_none  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_any_from_none : vx_core.Type_func, vx_core.Type_replfunc {
     public Func_any_from_none vx_fn_new(vx_core.Class_any_from_none.IFn fn);
-    public <T extends vx_core.Type_any> T vx_any_from_none(T generic_any_1);
+    public T vx_any_from_none<T>(T generic_any_1) where T : vx_core.Type_any;
   }
 
-  public static class Class_any_from_none  vx_core.Class_base implements Func_any_from_none {
+  class Class_any_from_none : vx_core.Class_base, Func_any_from_none {
 
     public IFn fn = null;
 
@@ -17940,7 +17938,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> T vx_any_from_none(T generic_any_1) {
+    public T vx_any_from_none<T>(T generic_any_1) where T : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       if (fn != null) {
         vx_core.Type_any anyoutput = fn.resolve();
@@ -17954,7 +17952,7 @@ namespace vx_core {
   public static Func_any_from_none e_any_from_none = new vx_core.Class_any_from_none();
   public static Func_any_from_none t_any_from_none = new vx_core.Class_any_from_none();
 
-  public static <T extends vx_core.Type_any> T f_any_from_none(T generic_any_1) {
+  public static T f_any_from_none<T>(T generic_any_1) where T : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -17967,12 +17965,12 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-none-async)
    */
-  public static interface Func_any_from_none_async  vx_core.Type_func, vx_core.Type_replfunc_async {
+  public static interface Func_any_from_none_async : vx_core.Type_func, vx_core.Type_replfunc_async {
     public Func_any_from_none_async vx_fn_new(vx_core.Class_any_from_none_async.IFn fn);
-    public <T extends vx_core.Type_any> CompletableFuture<T> vx_any_from_none_async(T generic_any_1);
+    public Task<T> vx_any_from_none_async<T>(T generic_any_1) where T : vx_core.Type_any;
   }
 
-  public static class Class_any_from_none_async  vx_core.Class_base implements Func_any_from_none_async {
+  class Class_any_from_none_async : vx_core.Class_base, Func_any_from_none_async {
 
     public IFn fn = null;
 
@@ -18038,7 +18036,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> CompletableFuture<T> vx_any_from_none_async(T generic_any_1) {
+    public CompletableFuture<T> vx_any_from_none_async<T>(T generic_any_1) where T : vx_core.Type_any {
       CompletableFuture<T> output;
       if (fn == null) {
         output = CompletableFuture.completedFuture(vx_core.f_empty(generic_any_1));
@@ -18054,7 +18052,7 @@ namespace vx_core {
   public static Func_any_from_none_async e_any_from_none_async = new vx_core.Class_any_from_none_async();
   public static Func_any_from_none_async t_any_from_none_async = new vx_core.Class_any_from_none_async();
 
-  public static <T extends vx_core.Type_any> CompletableFuture<T> f_any_from_none_async(T generic_any_1) {
+  public static CompletableFuture<T> f_any_from_none_async<T>(T generic_any_1) where T : vx_core.Type_any {
     CompletableFuture<T> output = vx_core.async_new_completed(vx_core.f_empty(generic_any_1));
     return output;
   }
@@ -18066,12 +18064,12 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-reduce)
    */
-  public static interface Func_any_from_reduce  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_any_from_reduce : vx_core.Type_func, vx_core.Type_replfunc {
     public Func_any_from_reduce vx_fn_new(vx_core.Class_any_from_reduce.IFn fn);
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> T vx_any_from_reduce(T generic_any_1, T result, U item);
+    public T vx_any_from_reduce<T, U>(T generic_any_1, T result, U item) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
-  public static class Class_any_from_reduce  vx_core.Class_base implements Func_any_from_reduce {
+  class Class_any_from_reduce : vx_core.Class_base, Func_any_from_reduce {
 
     public IFn fn = null;
 
@@ -18138,7 +18136,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> T vx_any_from_reduce(T generic_any_1, T result, U item) {
+    public T vx_any_from_reduce<T, U>(T generic_any_1, T result, U item) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       if (fn != null) {
         vx_core.Type_any anyoutput = fn.resolve(result, item);
@@ -18152,7 +18150,7 @@ namespace vx_core {
   public static Func_any_from_reduce e_any_from_reduce = new vx_core.Class_any_from_reduce();
   public static Func_any_from_reduce t_any_from_reduce = new vx_core.Class_any_from_reduce();
 
-  public static <T extends vx_core.Type_any, U extends vx_core.Type_any> T f_any_from_reduce(T generic_any_1, T result, U item) {
+  public static T f_any_from_reduce<T, U>(T generic_any_1, T result, U item) where T : vx_core.Type_any where U : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -18166,12 +18164,12 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-reduce-async)
    */
-  public static interface Func_any_from_reduce_async  vx_core.Type_func, vx_core.Type_replfunc_async {
+  public static interface Func_any_from_reduce_async : vx_core.Type_func, vx_core.Type_replfunc_async {
     public Func_any_from_reduce_async vx_fn_new(vx_core.Class_any_from_reduce_async.IFn fn);
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> CompletableFuture<T> vx_any_from_reduce_async(T generic_any_1, T result, U item);
+    public Task<T> vx_any_from_reduce_async<T, U>(T generic_any_1, T result, U item) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
-  public static class Class_any_from_reduce_async  vx_core.Class_base implements Func_any_from_reduce_async {
+  class Class_any_from_reduce_async : vx_core.Class_base, Func_any_from_reduce_async {
 
     public IFn fn = null;
 
@@ -18239,7 +18237,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> CompletableFuture<T> vx_any_from_reduce_async(T generic_any_1, T result, U item) {
+    public CompletableFuture<T> vx_any_from_reduce_async<T, U>(T generic_any_1, T result, U item) where T : vx_core.Type_any where U : vx_core.Type_any {
       CompletableFuture<T> output;
       if (fn == null) {
         output = CompletableFuture.completedFuture(vx_core.f_empty(generic_any_1));
@@ -18255,7 +18253,7 @@ namespace vx_core {
   public static Func_any_from_reduce_async e_any_from_reduce_async = new vx_core.Class_any_from_reduce_async();
   public static Func_any_from_reduce_async t_any_from_reduce_async = new vx_core.Class_any_from_reduce_async();
 
-  public static <T extends vx_core.Type_any, U extends vx_core.Type_any> CompletableFuture<T> f_any_from_reduce_async(T generic_any_1, T result, U item) {
+  public static CompletableFuture<T> f_any_from_reduce_async<T, U>(T generic_any_1, T result, U item) where T : vx_core.Type_any where U : vx_core.Type_any {
     CompletableFuture<T> output = vx_core.async_new_completed(vx_core.f_empty(generic_any_1));
     return output;
   }
@@ -18268,12 +18266,12 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-reduce-next)
    */
-  public static interface Func_any_from_reduce_next  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_any_from_reduce_next : vx_core.Type_func, vx_core.Type_replfunc {
     public Func_any_from_reduce_next vx_fn_new(vx_core.Class_any_from_reduce_next.IFn fn);
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> T vx_any_from_reduce_next(T generic_any_1, T result, U current, U next);
+    public T vx_any_from_reduce_next<T, U>(T generic_any_1, T result, U current, U next) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
-  public static class Class_any_from_reduce_next  vx_core.Class_base implements Func_any_from_reduce_next {
+  class Class_any_from_reduce_next : vx_core.Class_base, Func_any_from_reduce_next {
 
     public IFn fn = null;
 
@@ -18341,7 +18339,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> T vx_any_from_reduce_next(T generic_any_1, T result, U current, U next) {
+    public T vx_any_from_reduce_next<T, U>(T generic_any_1, T result, U current, U next) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       if (fn != null) {
         vx_core.Type_any anyoutput = fn.resolve(result, current, next);
@@ -18355,7 +18353,7 @@ namespace vx_core {
   public static Func_any_from_reduce_next e_any_from_reduce_next = new vx_core.Class_any_from_reduce_next();
   public static Func_any_from_reduce_next t_any_from_reduce_next = new vx_core.Class_any_from_reduce_next();
 
-  public static <T extends vx_core.Type_any, U extends vx_core.Type_any> T f_any_from_reduce_next(T generic_any_1, T result, U current, U next) {
+  public static T f_any_from_reduce_next<T, U>(T generic_any_1, T result, U current, U next) where T : vx_core.Type_any where U : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -18370,12 +18368,12 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-reduce-next-async)
    */
-  public static interface Func_any_from_reduce_next_async  vx_core.Type_func, vx_core.Type_replfunc_async {
+  public static interface Func_any_from_reduce_next_async : vx_core.Type_func, vx_core.Type_replfunc_async {
     public Func_any_from_reduce_next_async vx_fn_new(vx_core.Class_any_from_reduce_next_async.IFn fn);
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> CompletableFuture<T> vx_any_from_reduce_next_async(T generic_any_1, T result, U current, U next);
+    public Task<T> vx_any_from_reduce_next_async<T, U>(T generic_any_1, T result, U current, U next) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
-  public static class Class_any_from_reduce_next_async  vx_core.Class_base implements Func_any_from_reduce_next_async {
+  class Class_any_from_reduce_next_async : vx_core.Class_base, Func_any_from_reduce_next_async {
 
     public IFn fn = null;
 
@@ -18444,7 +18442,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> CompletableFuture<T> vx_any_from_reduce_next_async(T generic_any_1, T result, U current, U next) {
+    public CompletableFuture<T> vx_any_from_reduce_next_async<T, U>(T generic_any_1, T result, U current, U next) where T : vx_core.Type_any where U : vx_core.Type_any {
       CompletableFuture<T> output;
       if (fn == null) {
         output = CompletableFuture.completedFuture(vx_core.f_empty(generic_any_1));
@@ -18460,7 +18458,7 @@ namespace vx_core {
   public static Func_any_from_reduce_next_async e_any_from_reduce_next_async = new vx_core.Class_any_from_reduce_next_async();
   public static Func_any_from_reduce_next_async t_any_from_reduce_next_async = new vx_core.Class_any_from_reduce_next_async();
 
-  public static <T extends vx_core.Type_any, U extends vx_core.Type_any> CompletableFuture<T> f_any_from_reduce_next_async(T generic_any_1, T result, U current, U next) {
+  public static CompletableFuture<T> f_any_from_reduce_next_async<T, U>(T generic_any_1, T result, U current, U next) where T : vx_core.Type_any where U : vx_core.Type_any {
     CompletableFuture<T> output = vx_core.async_new_completed(vx_core.f_empty(generic_any_1));
     return output;
   }
@@ -18473,11 +18471,11 @@ namespace vx_core {
    * @return {any-1}
    * (func any<-struct)
    */
-  public static interface Func_any_from_struct  vx_core.Type_func, vx_core.Type_replfunc {
-    public <T extends vx_core.Type_any, R extends vx_core.Type_struct> T vx_any_from_struct(T generic_any_1, R vstruct, vx_core.Type_string key);
+  public static interface Func_any_from_struct : vx_core.Type_func, vx_core.Type_replfunc {
+    public T vx_any_from_struct<R, T>(T generic_any_1, R vstruct, vx_core.Type_string key) where R : vx_core.Type_struct where T : vx_core.Type_any;
   }
 
-  public static class Class_any_from_struct  vx_core.Class_base implements Func_any_from_struct {
+  class Class_any_from_struct : vx_core.Class_base, Func_any_from_struct {
 
     public override vx_core.Func_any_from_struct vx_new(params Object vals) {
       Class_any_from_struct output = new Class_any_from_struct();
@@ -18530,7 +18528,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, R extends vx_core.Type_struct> T vx_any_from_struct(T generic_any_1, R vstruct, vx_core.Type_string key) {
+    public T vx_any_from_struct<R, T>(T generic_any_1, R vstruct, vx_core.Type_string key) where R : vx_core.Type_struct where T : vx_core.Type_any {
       return vx_core.f_any_from_struct(generic_any_1, vstruct, key);
     }
 
@@ -18539,7 +18537,7 @@ namespace vx_core {
   public static Func_any_from_struct e_any_from_struct = new vx_core.Class_any_from_struct();
   public static Func_any_from_struct t_any_from_struct = new vx_core.Class_any_from_struct();
 
-  public static <T extends vx_core.Type_any, R extends vx_core.Type_struct> T f_any_from_struct(T generic_any_1, R vstruct, vx_core.Type_string key) {
+  public static T f_any_from_struct<R, T>(T generic_any_1, R vstruct, vx_core.Type_string key) where R : vx_core.Type_struct where T : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -18553,11 +18551,11 @@ namespace vx_core {
    * @return {any-1}
    * (func async)
    */
-  public static interface Func_async  vx_core.Func_any_from_any_async {
-    public <T extends vx_core.Type_any> CompletableFuture<T> vx_async(T generic_any_1, T value);
+  public static interface Func_async : vx_core.Func_any_from_any_async {
+    public Task<T> vx_async<T>(T generic_any_1, T value) where T : vx_core.Type_any;
   }
 
-  public static class Class_async  vx_core.Class_base implements Func_async {
+  class Class_async : vx_core.Class_base, Func_async {
 
     public override vx_core.Func_async vx_new(params Object vals) {
       Class_async output = new Class_async();
@@ -18620,7 +18618,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> CompletableFuture<T> vx_async(T generic_any_1, T value) {
+    public CompletableFuture<T> vx_async<T>(T generic_any_1, T value) where T : vx_core.Type_any {
       return vx_core.f_async(generic_any_1, value);
     }
 
@@ -18629,7 +18627,7 @@ namespace vx_core {
   public static Func_async e_async = new vx_core.Class_async();
   public static Func_async t_async = new vx_core.Class_async();
 
-  public static <T extends vx_core.Type_any> CompletableFuture<T> f_async(T generic_any_1, T value) {
+  public static CompletableFuture<T> f_async<T>(T generic_any_1, T value) where T : vx_core.Type_any {
     CompletableFuture<T> output = vx_core.async_new_completed(vx_core.f_empty(generic_any_1));
     return output;
   }
@@ -18641,11 +18639,11 @@ namespace vx_core {
    * @return {boolean}
    * (func boolean-permission<-func)
    */
-  public static interface Func_boolean_permission_from_func  vx_core.Func_any_from_any_context {
+  public static interface Func_boolean_permission_from_func : vx_core.Func_any_from_any_context {
     public vx_core.Type_boolean vx_boolean_permission_from_func(vx_core.Type_context context, vx_core.Type_func func);
   }
 
-  public static class Class_boolean_permission_from_func  vx_core.Class_base implements Func_boolean_permission_from_func {
+  class Class_boolean_permission_from_func : vx_core.Class_base, Func_boolean_permission_from_func {
 
     public override vx_core.Func_boolean_permission_from_func vx_new(params Object vals) {
       Class_boolean_permission_from_func output = new Class_boolean_permission_from_func();
@@ -18738,11 +18736,11 @@ namespace vx_core {
    * @return {boolean}
    * (func boolean-write<-map-name-value)
    */
-  public static interface Func_boolean_write_from_map_name_value  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_boolean_write_from_map_name_value : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_boolean vx_boolean_write_from_map_name_value(vx_core.Type_map valuemap, vx_core.Type_string name, vx_core.Type_any value);
   }
 
-  public static class Class_boolean_write_from_map_name_value  vx_core.Class_base implements Func_boolean_write_from_map_name_value {
+  class Class_boolean_write_from_map_name_value : vx_core.Class_base, Func_boolean_write_from_map_name_value {
 
     public override vx_core.Func_boolean_write_from_map_name_value vx_new(params Object vals) {
       Class_boolean_write_from_map_name_value output = new Class_boolean_write_from_map_name_value();
@@ -18816,12 +18814,12 @@ namespace vx_core {
    * @return {boolean}
    * (func boolean<-any)
    */
-  public static interface Func_boolean_from_any  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_boolean_from_any : vx_core.Type_func, vx_core.Type_replfunc {
     public Func_boolean_from_any vx_fn_new(vx_core.Class_boolean_from_any.IFn fn);
     public vx_core.Type_boolean vx_boolean_from_any(vx_core.Type_any value);
   }
 
-  public static class Class_boolean_from_any  vx_core.Class_base implements Func_boolean_from_any {
+  class Class_boolean_from_any : vx_core.Class_base, Func_boolean_from_any {
 
     public IFn fn = null;
 
@@ -18911,12 +18909,12 @@ namespace vx_core {
    * @return {boolean}
    * (func boolean<-func)
    */
-  public static interface Func_boolean_from_func  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_boolean_from_func : vx_core.Type_func, vx_core.Type_replfunc {
     public Func_boolean_from_func vx_fn_new(vx_core.Class_any_from_func.IFn fn);
     public vx_core.Type_boolean vx_boolean_from_func();
   }
 
-  public static class Class_boolean_from_func  vx_core.Class_base implements Func_boolean_from_func {
+  class Class_boolean_from_func : vx_core.Class_base, Func_boolean_from_func {
 
     public override vx_core.Func_boolean_from_func vx_new(params Object vals) {
       Class_boolean_from_func output = new Class_boolean_from_func();
@@ -19005,12 +19003,12 @@ namespace vx_core {
    * @return {boolean}
    * (func boolean<-none)
    */
-  public static interface Func_boolean_from_none  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_boolean_from_none : vx_core.Type_func, vx_core.Type_replfunc {
     public Func_boolean_from_none vx_fn_new(vx_core.Class_any_from_func.IFn fn);
     public vx_core.Type_boolean vx_boolean_from_none();
   }
 
-  public static class Class_boolean_from_none  vx_core.Class_base implements Func_boolean_from_none {
+  class Class_boolean_from_none : vx_core.Class_base, Func_boolean_from_none {
 
     public override vx_core.Func_boolean_from_none vx_new(params Object vals) {
       Class_boolean_from_none output = new Class_boolean_from_none();
@@ -19100,11 +19098,11 @@ namespace vx_core {
    * @return {thenelse}
    * (func case)
    */
-  public static interface Func_case  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_case : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_thenelse vx_case(vx_core.Type_list values, vx_core.Func_any_from_func fn_any);
   }
 
-  public static class Class_case  vx_core.Class_base implements Func_case {
+  class Class_case : vx_core.Class_base, Func_case {
 
     public override vx_core.Func_case vx_new(params Object vals) {
       Class_case output = new Class_case();
@@ -19188,11 +19186,11 @@ namespace vx_core {
    * @return {thenelse}
    * (func case)
    */
-  public static interface Func_case_1  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_case_1 : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_thenelse vx_case_1(vx_core.Type_any value, vx_core.Func_any_from_func fn_any);
   }
 
-  public static class Class_case_1  vx_core.Class_base implements Func_case_1 {
+  class Class_case_1 : vx_core.Class_base, Func_case_1 {
 
     public override vx_core.Func_case_1 vx_new(params Object vals) {
       Class_case_1 output = new Class_case_1();
@@ -19277,11 +19275,11 @@ namespace vx_core {
    * @return {int}
    * (func compare)
    */
-  public static interface Func_compare  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_compare : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_int vx_compare(vx_core.Type_any val1, vx_core.Type_any val2);
   }
 
-  public static class Class_compare  vx_core.Class_base implements Func_compare {
+  class Class_compare : vx_core.Class_base, Func_compare {
 
     public override vx_core.Func_compare vx_new(params Object vals) {
       Class_compare output = new Class_compare();
@@ -19355,11 +19353,11 @@ namespace vx_core {
    * @return {boolean}
    * (func contains)
    */
-  public static interface Func_contains  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_contains : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_boolean vx_contains(vx_core.Type_string text, vx_core.Type_string find);
   }
 
-  public static class Class_contains  vx_core.Class_base implements Func_contains {
+  class Class_contains : vx_core.Class_base, Func_contains {
 
     public override vx_core.Func_contains vx_new(params Object vals) {
       Class_contains output = new Class_contains();
@@ -19433,11 +19431,11 @@ namespace vx_core {
    * @return {boolean}
    * (func contains)
    */
-  public static interface Func_contains_1  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_contains_1 : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_boolean vx_contains_1(vx_core.Type_list values, vx_core.Type_any find);
   }
 
-  public static class Class_contains_1  vx_core.Class_base implements Func_contains_1 {
+  class Class_contains_1 : vx_core.Class_base, Func_contains_1 {
 
     public override vx_core.Func_contains_1 vx_new(params Object vals) {
       Class_contains_1 output = new Class_contains_1();
@@ -19510,11 +19508,11 @@ namespace vx_core {
    * @return {context}
    * (func context-main)
    */
-  public static interface Func_context_main  vx_core.Func_any_from_any {
+  public static interface Func_context_main : vx_core.Func_any_from_any {
     public vx_core.Type_context vx_context_main(vx_core.Type_anylist args);
   }
 
-  public static class Class_context_main  vx_core.Class_base implements Func_context_main {
+  class Class_context_main : vx_core.Class_base, Func_context_main {
 
     public override vx_core.Func_context_main vx_new(params Object vals) {
       Class_context_main output = new Class_context_main();
@@ -19602,11 +19600,11 @@ namespace vx_core {
    * @return {any-1}
    * (func copy)
    */
-  public static interface Func_copy  vx_core.Type_func, vx_core.Type_replfunc {
-    public <T extends vx_core.Type_any> T vx_copy(vx_core.Type_any value, vx_core.Type_anylist values);
+  public static interface Func_copy : vx_core.Type_func, vx_core.Type_replfunc {
+    public T vx_copy<T>(vx_core.Type_any value, vx_core.Type_anylist values) where T : vx_core.Type_any;
   }
 
-  public static class Class_copy  vx_core.Class_base implements Func_copy {
+  class Class_copy : vx_core.Class_base, Func_copy {
 
     public override vx_core.Func_copy vx_new(params Object vals) {
       Class_copy output = new Class_copy();
@@ -19658,7 +19656,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> T vx_copy(vx_core.Type_any value, vx_core.Type_anylist values) {
+    public T vx_copy<T>(vx_core.Type_any value, vx_core.Type_anylist values) where T : vx_core.Type_any {
       return vx_core.f_copy(value, values);
     }
 
@@ -19667,7 +19665,7 @@ namespace vx_core {
   public static Func_copy e_copy = new vx_core.Class_copy();
   public static Func_copy t_copy = new vx_core.Class_copy();
 
-  public static <T extends vx_core.Type_any> T f_copy(vx_core.Type_any value, vx_core.Type_anylist values) {
+  public static T f_copy<T>(vx_core.Type_any value, vx_core.Type_anylist values) where T : vx_core.Type_any {
     return output;
   }
 
@@ -19677,11 +19675,11 @@ namespace vx_core {
    * @return {thenelse}
    * (func else)
    */
-  public static interface Func_else  vx_core.Func_any_from_any {
+  public static interface Func_else : vx_core.Func_any_from_any {
     public vx_core.Type_thenelse vx_else(vx_core.Func_any_from_func fn_any);
   }
 
-  public static class Class_else  vx_core.Class_base implements Func_else {
+  class Class_else : vx_core.Class_base, Func_else {
 
     public override vx_core.Func_else vx_new(params Object vals) {
       Class_else output = new Class_else();
@@ -19774,11 +19772,11 @@ namespace vx_core {
    * @return {any-1}
    * (func empty)
    */
-  public static interface Func_empty  vx_core.Func_any_from_any {
-    public <T extends vx_core.Type_any> T vx_empty(T type);
+  public static interface Func_empty : vx_core.Func_any_from_any {
+    public T vx_empty<T>(T type) where T : vx_core.Type_any;
   }
 
-  public static class Class_empty  vx_core.Class_base implements Func_empty {
+  class Class_empty : vx_core.Class_base, Func_empty {
 
     public override vx_core.Func_empty vx_new(params Object vals) {
       Class_empty output = new Class_empty();
@@ -19841,7 +19839,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> T vx_empty(T type) {
+    public T vx_empty<T>(T type) where T : vx_core.Type_any {
       return vx_core.f_empty(type);
     }
 
@@ -19850,7 +19848,7 @@ namespace vx_core {
   public static Func_empty e_empty = new vx_core.Class_empty();
   public static Func_empty t_empty = new vx_core.Class_empty();
 
-  public static <T extends vx_core.Type_any> T f_empty(T type) {
+  public static T f_empty<T>(T type) where T : vx_core.Type_any {
     return output;
   }
 
@@ -19860,11 +19858,11 @@ namespace vx_core {
    * @return {string}
    * (func extends<-any)
    */
-  public static interface Func_extends_from_any  vx_core.Func_any_from_any {
+  public static interface Func_extends_from_any : vx_core.Func_any_from_any {
     public vx_core.Type_string vx_extends_from_any(vx_core.Type_any val);
   }
 
-  public static class Class_extends_from_any  vx_core.Class_base implements Func_extends_from_any {
+  class Class_extends_from_any : vx_core.Class_base, Func_extends_from_any {
 
     public override vx_core.Func_extends_from_any vx_new(params Object vals) {
       Class_extends_from_any output = new Class_extends_from_any();
@@ -19951,11 +19949,11 @@ namespace vx_core {
    * @return {string}
    * (func extends<-typedef)
    */
-  public static interface Func_extends_from_typedef  vx_core.Func_any_from_any {
+  public static interface Func_extends_from_typedef : vx_core.Func_any_from_any {
     public vx_core.Type_string vx_extends_from_typedef(vx_core.Type_typedef vtypedef);
   }
 
-  public static class Class_extends_from_typedef  vx_core.Class_base implements Func_extends_from_typedef {
+  class Class_extends_from_typedef : vx_core.Class_base, Func_extends_from_typedef {
 
     public override vx_core.Func_extends_from_typedef vx_new(params Object vals) {
       Class_extends_from_typedef output = new Class_extends_from_typedef();
@@ -20040,11 +20038,11 @@ namespace vx_core {
    * @return {any-1}
    * (func first<-list)
    */
-  public static interface Func_first_from_list  vx_core.Func_any_from_any {
-    public <T extends vx_core.Type_any, X extends vx_core.Type_list> T vx_first_from_list(T generic_any_1, X values);
+  public static interface Func_first_from_list : vx_core.Func_any_from_any {
+    public T vx_first_from_list<T, X>(T generic_any_1, X values) where T : vx_core.Type_any where X : vx_core.Type_list;
   }
 
-  public static class Class_first_from_list  vx_core.Class_base implements Func_first_from_list {
+  class Class_first_from_list : vx_core.Class_base, Func_first_from_list {
 
     public override vx_core.Func_first_from_list vx_new(params Object vals) {
       Class_first_from_list output = new Class_first_from_list();
@@ -20108,7 +20106,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, X extends vx_core.Type_list> T vx_first_from_list(T generic_any_1, X values) {
+    public T vx_first_from_list<T, X>(T generic_any_1, X values) where T : vx_core.Type_any where X : vx_core.Type_list {
       return vx_core.f_first_from_list(generic_any_1, values);
     }
 
@@ -20117,7 +20115,7 @@ namespace vx_core {
   public static Func_first_from_list e_first_from_list = new vx_core.Class_first_from_list();
   public static Func_first_from_list t_first_from_list = new vx_core.Class_first_from_list();
 
-  public static <T extends vx_core.Type_any, X extends vx_core.Type_list> T f_first_from_list(T generic_any_1, X values) {
+  public static T f_first_from_list<T, X>(T generic_any_1, X values) where T : vx_core.Type_any where X : vx_core.Type_list {
     T output = vx_core.f_empty(generic_any_1);
     output = vx_core.f_any_from_list(generic_any_1, values, vx_core.vx_new_int(1));
     return output;
@@ -20131,11 +20129,11 @@ namespace vx_core {
    * @return {any-1}
    * (func first<-list-any<-any)
    */
-  public static interface Func_first_from_list_any_from_any  vx_core.Type_func, vx_core.Type_replfunc {
-    public <T extends vx_core.Type_any, X extends vx_core.Type_list> T vx_first_from_list_any_from_any(T generic_any_1, X values, vx_core.Func_any_from_any fn_any_from_any);
+  public static interface Func_first_from_list_any_from_any : vx_core.Type_func, vx_core.Type_replfunc {
+    public T vx_first_from_list_any_from_any<T, X>(T generic_any_1, X values, vx_core.Func_any_from_any fn_any_from_any) where T : vx_core.Type_any where X : vx_core.Type_list;
   }
 
-  public static class Class_first_from_list_any_from_any  vx_core.Class_base implements Func_first_from_list_any_from_any {
+  class Class_first_from_list_any_from_any : vx_core.Class_base, Func_first_from_list_any_from_any {
 
     public override vx_core.Func_first_from_list_any_from_any vx_new(params Object vals) {
       Class_first_from_list_any_from_any output = new Class_first_from_list_any_from_any();
@@ -20188,7 +20186,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, X extends vx_core.Type_list> T vx_first_from_list_any_from_any(T generic_any_1, X values, vx_core.Func_any_from_any fn_any_from_any) {
+    public T vx_first_from_list_any_from_any<T, X>(T generic_any_1, X values, vx_core.Func_any_from_any fn_any_from_any) where T : vx_core.Type_any where X : vx_core.Type_list {
       return vx_core.f_first_from_list_any_from_any(generic_any_1, values, fn_any_from_any);
     }
 
@@ -20197,7 +20195,7 @@ namespace vx_core {
   public static Func_first_from_list_any_from_any e_first_from_list_any_from_any = new vx_core.Class_first_from_list_any_from_any();
   public static Func_first_from_list_any_from_any t_first_from_list_any_from_any = new vx_core.Class_first_from_list_any_from_any();
 
-  public static <T extends vx_core.Type_any, X extends vx_core.Type_list> T f_first_from_list_any_from_any(T generic_any_1, X values, vx_core.Func_any_from_any fn_any_from_any) {
+  public static T f_first_from_list_any_from_any<T, X>(T generic_any_1, X values, vx_core.Func_any_from_any fn_any_from_any) where T : vx_core.Type_any where X : vx_core.Type_list {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -20209,11 +20207,11 @@ namespace vx_core {
    * @return {float}
    * (func float<-string)
    */
-  public static interface Func_float_from_string  vx_core.Func_any_from_any {
+  public static interface Func_float_from_string : vx_core.Func_any_from_any {
     public vx_core.Type_float vx_float_from_string(vx_core.Type_string text);
   }
 
-  public static class Class_float_from_string  vx_core.Class_base implements Func_float_from_string {
+  class Class_float_from_string : vx_core.Class_base, Func_float_from_string {
 
     public override vx_core.Func_float_from_string vx_new(params Object vals) {
       Class_float_from_string output = new Class_float_from_string();
@@ -20298,11 +20296,11 @@ namespace vx_core {
    * @return {any-1}
    * (func fn)
    */
-  public static interface Func_fn  vx_core.Type_func, vx_core.Type_replfunc {
-    public <T extends vx_core.Type_any> T vx_fn(T generic_any_1, vx_core.Type_arglist params, vx_core.Func_any_from_func fn_any);
+  public static interface Func_fn : vx_core.Type_func, vx_core.Type_replfunc {
+    public T vx_fn<T>(T generic_any_1, vx_core.Type_arglist params, vx_core.Func_any_from_func fn_any) where T : vx_core.Type_any;
   }
 
-  public static class Class_fn  vx_core.Class_base implements Func_fn {
+  class Class_fn : vx_core.Class_base, Func_fn {
 
     public override vx_core.Func_fn vx_new(params Object vals) {
       Class_fn output = new Class_fn();
@@ -20355,7 +20353,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> T vx_fn(T generic_any_1, vx_core.Type_arglist params, vx_core.Func_any_from_func fn_any) {
+    public T vx_fn<T>(T generic_any_1, vx_core.Type_arglist params, vx_core.Func_any_from_func fn_any) where T : vx_core.Type_any {
       return vx_core.f_fn(generic_any_1, params, fn_any);
     }
 
@@ -20364,7 +20362,7 @@ namespace vx_core {
   public static Func_fn e_fn = new vx_core.Class_fn();
   public static Func_fn t_fn = new vx_core.Class_fn();
 
-  public static <T extends vx_core.Type_any> T f_fn(T generic_any_1, vx_core.Type_arglist params, vx_core.Func_any_from_func fn_any) {
+  public static T f_fn<T>(T generic_any_1, vx_core.Type_arglist params, vx_core.Func_any_from_func fn_any) where T : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -20375,11 +20373,11 @@ namespace vx_core {
    * @return {funcdef}
    * (func funcdef<-func)
    */
-  public static interface Func_funcdef_from_func  vx_core.Func_any_from_any {
+  public static interface Func_funcdef_from_func : vx_core.Func_any_from_any {
     public vx_core.Type_funcdef vx_funcdef_from_func(vx_core.Type_func val);
   }
 
-  public static class Class_funcdef_from_func  vx_core.Class_base implements Func_funcdef_from_func {
+  class Class_funcdef_from_func : vx_core.Class_base, Func_funcdef_from_func {
 
     public override vx_core.Func_funcdef_from_func vx_new(params Object vals) {
       Class_funcdef_from_func output = new Class_funcdef_from_func();
@@ -20463,11 +20461,11 @@ namespace vx_core {
    * @return {string}
    * (func funcname<-funcdef)
    */
-  public static interface Func_funcname_from_funcdef  vx_core.Func_any_from_any {
+  public static interface Func_funcname_from_funcdef : vx_core.Func_any_from_any {
     public vx_core.Type_string vx_funcname_from_funcdef(vx_core.Type_funcdef funcdef);
   }
 
-  public static class Class_funcname_from_funcdef  vx_core.Class_base implements Func_funcname_from_funcdef {
+  class Class_funcname_from_funcdef : vx_core.Class_base, Func_funcname_from_funcdef {
 
     public override vx_core.Func_funcname_from_funcdef vx_new(params Object vals) {
       Class_funcname_from_funcdef output = new Class_funcname_from_funcdef();
@@ -20560,11 +20558,11 @@ namespace vx_core {
    * @return {any-1}
    * (func if)
    */
-  public static interface Func_if  vx_core.Type_func, vx_core.Type_replfunc {
-    public <T extends vx_core.Type_any> T vx_if(T generic_any_1, vx_core.Type_boolean clause, T then);
+  public static interface Func_if : vx_core.Type_func, vx_core.Type_replfunc {
+    public T vx_if<T>(T generic_any_1, vx_core.Type_boolean clause, T then) where T : vx_core.Type_any;
   }
 
-  public static class Class_if  vx_core.Class_base implements Func_if {
+  class Class_if : vx_core.Class_base, Func_if {
 
     public override vx_core.Func_if vx_new(params Object vals) {
       Class_if output = new Class_if();
@@ -20617,7 +20615,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> T vx_if(T generic_any_1, vx_core.Type_boolean clause, T then) {
+    public T vx_if<T>(T generic_any_1, vx_core.Type_boolean clause, T then) where T : vx_core.Type_any {
       return vx_core.f_if(generic_any_1, clause, then);
     }
 
@@ -20626,7 +20624,7 @@ namespace vx_core {
   public static Func_if e_if = new vx_core.Class_if();
   public static Func_if t_if = new vx_core.Class_if();
 
-  public static <T extends vx_core.Type_any> T f_if(T generic_any_1, vx_core.Type_boolean clause, T then) {
+  public static T f_if<T>(T generic_any_1, vx_core.Type_boolean clause, T then) where T : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -20640,11 +20638,11 @@ namespace vx_core {
    * @return {any-1}
    * (func if)
    */
-  public static interface Func_if_1  vx_core.Type_func, vx_core.Type_replfunc {
-    public <T extends vx_core.Type_any> T vx_if_1(T generic_any_1, vx_core.Type_boolean clause, T thenval, T elseval);
+  public static interface Func_if_1 : vx_core.Type_func, vx_core.Type_replfunc {
+    public T vx_if_1<T>(T generic_any_1, vx_core.Type_boolean clause, T thenval, T elseval) where T : vx_core.Type_any;
   }
 
-  public static class Class_if_1  vx_core.Class_base implements Func_if_1 {
+  class Class_if_1 : vx_core.Class_base, Func_if_1 {
 
     public override vx_core.Func_if_1 vx_new(params Object vals) {
       Class_if_1 output = new Class_if_1();
@@ -20698,7 +20696,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> T vx_if_1(T generic_any_1, vx_core.Type_boolean clause, T thenval, T elseval) {
+    public T vx_if_1<T>(T generic_any_1, vx_core.Type_boolean clause, T thenval, T elseval) where T : vx_core.Type_any {
       return vx_core.f_if_1(generic_any_1, clause, thenval, elseval);
     }
 
@@ -20707,7 +20705,7 @@ namespace vx_core {
   public static Func_if_1 e_if_1 = new vx_core.Class_if_1();
   public static Func_if_1 t_if_1 = new vx_core.Class_if_1();
 
-  public static <T extends vx_core.Type_any> T f_if_1(T generic_any_1, vx_core.Type_boolean clause, T thenval, T elseval) {
+  public static T f_if_1<T>(T generic_any_1, vx_core.Type_boolean clause, T thenval, T elseval) where T : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -20719,11 +20717,11 @@ namespace vx_core {
    * @return {any-1}
    * (func if)
    */
-  public static interface Func_if_2  vx_core.Func_any_from_any {
-    public <T extends vx_core.Type_any> T vx_if_2(T generic_any_1, vx_core.Type_thenelselist thenelselist);
+  public static interface Func_if_2 : vx_core.Func_any_from_any {
+    public T vx_if_2<T>(T generic_any_1, vx_core.Type_thenelselist thenelselist) where T : vx_core.Type_any;
   }
 
-  public static class Class_if_2  vx_core.Class_base implements Func_if_2 {
+  class Class_if_2 : vx_core.Class_base, Func_if_2 {
 
     public override vx_core.Func_if_2 vx_new(params Object vals) {
       Class_if_2 output = new Class_if_2();
@@ -20787,7 +20785,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> T vx_if_2(T generic_any_1, vx_core.Type_thenelselist thenelselist) {
+    public T vx_if_2<T>(T generic_any_1, vx_core.Type_thenelselist thenelselist) where T : vx_core.Type_any {
       return vx_core.f_if_2(generic_any_1, thenelselist);
     }
 
@@ -20796,7 +20794,7 @@ namespace vx_core {
   public static Func_if_2 e_if_2 = new vx_core.Class_if_2();
   public static Func_if_2 t_if_2 = new vx_core.Class_if_2();
 
-  public static <T extends vx_core.Type_any> T f_if_2(T generic_any_1, vx_core.Type_thenelselist thenelselist) {
+  public static T f_if_2<T>(T generic_any_1, vx_core.Type_thenelselist thenelselist) where T : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -20807,12 +20805,12 @@ namespace vx_core {
    * @return {int}
    * (func int<-func)
    */
-  public static interface Func_int_from_func  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_int_from_func : vx_core.Type_func, vx_core.Type_replfunc {
     public Func_int_from_func vx_fn_new(vx_core.Class_any_from_func.IFn fn);
     public vx_core.Type_int vx_int_from_func();
   }
 
-  public static class Class_int_from_func  vx_core.Class_base implements Func_int_from_func {
+  class Class_int_from_func : vx_core.Class_base, Func_int_from_func {
 
     public override vx_core.Func_int_from_func vx_new(params Object vals) {
       Class_int_from_func output = new Class_int_from_func();
@@ -20892,11 +20890,11 @@ namespace vx_core {
    * @return {int}
    * (func int<-string)
    */
-  public static interface Func_int_from_string  vx_core.Func_any_from_any {
+  public static interface Func_int_from_string : vx_core.Func_any_from_any {
     public vx_core.Type_int vx_int_from_string(vx_core.Type_string val);
   }
 
-  public static class Class_int_from_string  vx_core.Class_base implements Func_int_from_string {
+  class Class_int_from_string : vx_core.Class_base, Func_int_from_string {
 
     public override vx_core.Func_int_from_string vx_new(params Object vals) {
       Class_int_from_string output = new Class_int_from_string();
@@ -21008,11 +21006,11 @@ namespace vx_core {
    * @return {boolean}
    * (func is-empty)
    */
-  public static interface Func_is_empty  vx_core.Func_any_from_any {
+  public static interface Func_is_empty : vx_core.Func_any_from_any {
     public vx_core.Type_boolean vx_is_empty(vx_core.Type_string text);
   }
 
-  public static class Class_is_empty  vx_core.Class_base implements Func_is_empty {
+  class Class_is_empty : vx_core.Class_base, Func_is_empty {
 
     public override vx_core.Func_is_empty vx_new(params Object vals) {
       Class_is_empty output = new Class_is_empty();
@@ -21096,11 +21094,11 @@ namespace vx_core {
    * @return {boolean}
    * (func is-empty)
    */
-  public static interface Func_is_empty_1  vx_core.Func_any_from_any {
+  public static interface Func_is_empty_1 : vx_core.Func_any_from_any {
     public vx_core.Type_boolean vx_is_empty_1(vx_core.Type_any value);
   }
 
-  public static class Class_is_empty_1  vx_core.Class_base implements Func_is_empty_1 {
+  class Class_is_empty_1 : vx_core.Class_base, Func_is_empty_1 {
 
     public override vx_core.Func_is_empty_1 vx_new(params Object vals) {
       Class_is_empty_1 output = new Class_is_empty_1();
@@ -21185,11 +21183,11 @@ namespace vx_core {
    * @return {boolean}
    * (func is-endswith)
    */
-  public static interface Func_is_endswith  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_is_endswith : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_boolean vx_is_endswith(vx_core.Type_string text, vx_core.Type_string find);
   }
 
-  public static class Class_is_endswith  vx_core.Class_base implements Func_is_endswith {
+  class Class_is_endswith : vx_core.Class_base, Func_is_endswith {
 
     public override vx_core.Func_is_endswith vx_new(params Object vals) {
       Class_is_endswith output = new Class_is_endswith();
@@ -21262,11 +21260,11 @@ namespace vx_core {
    * @return {boolean}
    * (func is-float)
    */
-  public static interface Func_is_float  vx_core.Func_any_from_any {
+  public static interface Func_is_float : vx_core.Func_any_from_any {
     public vx_core.Type_boolean vx_is_float(vx_core.Type_any value);
   }
 
-  public static class Class_is_float  vx_core.Class_base implements Func_is_float {
+  class Class_is_float : vx_core.Class_base, Func_is_float {
 
     public override vx_core.Func_is_float vx_new(params Object vals) {
       Class_is_float output = new Class_is_float();
@@ -21350,11 +21348,11 @@ namespace vx_core {
    * @return {boolean}
    * (func is-func)
    */
-  public static interface Func_is_func  vx_core.Func_any_from_any {
+  public static interface Func_is_func : vx_core.Func_any_from_any {
     public vx_core.Type_boolean vx_is_func(vx_core.Type_any val);
   }
 
-  public static class Class_is_func  vx_core.Class_base implements Func_is_func {
+  class Class_is_func : vx_core.Class_base, Func_is_func {
 
     public override vx_core.Func_is_func vx_new(params Object vals) {
       Class_is_func output = new Class_is_func();
@@ -21438,11 +21436,11 @@ namespace vx_core {
    * @return {boolean}
    * (func is-int)
    */
-  public static interface Func_is_int  vx_core.Func_any_from_any {
+  public static interface Func_is_int : vx_core.Func_any_from_any {
     public vx_core.Type_boolean vx_is_int(vx_core.Type_any value);
   }
 
-  public static class Class_is_int  vx_core.Class_base implements Func_is_int {
+  class Class_is_int : vx_core.Class_base, Func_is_int {
 
     public override vx_core.Func_is_int vx_new(params Object vals) {
       Class_is_int output = new Class_is_int();
@@ -21526,11 +21524,11 @@ namespace vx_core {
    * @return {boolean}
    * (func is-number)
    */
-  public static interface Func_is_number  vx_core.Func_any_from_any {
+  public static interface Func_is_number : vx_core.Func_any_from_any {
     public vx_core.Type_boolean vx_is_number(vx_core.Type_any value);
   }
 
-  public static class Class_is_number  vx_core.Class_base implements Func_is_number {
+  class Class_is_number : vx_core.Class_base, Func_is_number {
 
     public override vx_core.Func_is_number vx_new(params Object vals) {
       Class_is_number output = new Class_is_number();
@@ -21639,11 +21637,11 @@ namespace vx_core {
    * @return {boolean}
    * (func is-pass<-permission)
    */
-  public static interface Func_is_pass_from_permission  vx_core.Func_any_from_any_context {
+  public static interface Func_is_pass_from_permission : vx_core.Func_any_from_any_context {
     public vx_core.Type_boolean vx_is_pass_from_permission(vx_core.Type_context context, vx_core.Type_permission permission);
   }
 
-  public static class Class_is_pass_from_permission  vx_core.Class_base implements Func_is_pass_from_permission {
+  class Class_is_pass_from_permission : vx_core.Class_base, Func_is_pass_from_permission {
 
     public override vx_core.Func_is_pass_from_permission vx_new(params Object vals) {
       Class_is_pass_from_permission output = new Class_is_pass_from_permission();
@@ -21736,11 +21734,11 @@ namespace vx_core {
    * @return {any-1}
    * (func last<-list)
    */
-  public static interface Func_last_from_list  vx_core.Func_any_from_any {
-    public <T extends vx_core.Type_any, X extends vx_core.Type_list> T vx_last_from_list(T generic_any_1, X values);
+  public static interface Func_last_from_list : vx_core.Func_any_from_any {
+    public T vx_last_from_list<T, X>(T generic_any_1, X values) where T : vx_core.Type_any where X : vx_core.Type_list;
   }
 
-  public static class Class_last_from_list  vx_core.Class_base implements Func_last_from_list {
+  class Class_last_from_list : vx_core.Class_base, Func_last_from_list {
 
     public override vx_core.Func_last_from_list vx_new(params Object vals) {
       Class_last_from_list output = new Class_last_from_list();
@@ -21804,7 +21802,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, X extends vx_core.Type_list> T vx_last_from_list(T generic_any_1, X values) {
+    public T vx_last_from_list<T, X>(T generic_any_1, X values) where T : vx_core.Type_any where X : vx_core.Type_list {
       return vx_core.f_last_from_list(generic_any_1, values);
     }
 
@@ -21813,7 +21811,7 @@ namespace vx_core {
   public static Func_last_from_list e_last_from_list = new vx_core.Class_last_from_list();
   public static Func_last_from_list t_last_from_list = new vx_core.Class_last_from_list();
 
-  public static <T extends vx_core.Type_any, X extends vx_core.Type_list> T f_last_from_list(T generic_any_1, X values) {
+  public static T f_last_from_list<T, X>(T generic_any_1, X values) where T : vx_core.Type_any where X : vx_core.Type_list {
     T output = vx_core.f_empty(generic_any_1);
     output = vx_core.f_let(
       generic_any_1,
@@ -21832,11 +21830,11 @@ namespace vx_core {
    * @return {int}
    * (func length)
    */
-  public static interface Func_length  vx_core.Func_any_from_any {
+  public static interface Func_length : vx_core.Func_any_from_any {
     public vx_core.Type_int vx_length(vx_core.Type_string text);
   }
 
-  public static class Class_length  vx_core.Class_base implements Func_length {
+  class Class_length : vx_core.Class_base, Func_length {
 
     public override vx_core.Func_length vx_new(params Object vals) {
       Class_length output = new Class_length();
@@ -21920,11 +21918,11 @@ namespace vx_core {
    * @return {int}
    * (func length)
    */
-  public static interface Func_length_1  vx_core.Func_any_from_any {
+  public static interface Func_length_1 : vx_core.Func_any_from_any {
     public vx_core.Type_int vx_length_1(vx_core.Type_list values);
   }
 
-  public static class Class_length_1  vx_core.Class_base implements Func_length_1 {
+  class Class_length_1 : vx_core.Class_base, Func_length_1 {
 
     public override vx_core.Func_length_1 vx_new(params Object vals) {
       Class_length_1 output = new Class_length_1();
@@ -22008,11 +22006,11 @@ namespace vx_core {
    * @return {int}
    * (func length)
    */
-  public static interface Func_length_2  vx_core.Func_any_from_any {
+  public static interface Func_length_2 : vx_core.Func_any_from_any {
     public vx_core.Type_int vx_length_2(vx_core.Type_map valuemap);
   }
 
-  public static class Class_length_2  vx_core.Class_base implements Func_length_2 {
+  class Class_length_2 : vx_core.Class_base, Func_length_2 {
 
     public override vx_core.Func_length_2 vx_new(params Object vals) {
       Class_length_2 output = new Class_length_2();
@@ -22099,11 +22097,11 @@ namespace vx_core {
    * @return {any-1}
    * (func let)
    */
-  public static interface Func_let  vx_core.Type_func, vx_core.Type_replfunc {
-    public <T extends vx_core.Type_any> T vx_let(T generic_any_1, vx_core.Func_any_from_func fn_any);
+  public static interface Func_let : vx_core.Type_func, vx_core.Type_replfunc {
+    public T vx_let<T>(T generic_any_1, vx_core.Func_any_from_func fn_any) where T : vx_core.Type_any;
   }
 
-  public static class Class_let  vx_core.Class_base implements Func_let {
+  class Class_let : vx_core.Class_base, Func_let {
 
     public override vx_core.Func_let vx_new(params Object vals) {
       Class_let output = new Class_let();
@@ -22155,7 +22153,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> T vx_let(T generic_any_1, vx_core.Func_any_from_func fn_any) {
+    public T vx_let<T>(T generic_any_1, vx_core.Func_any_from_func fn_any) where T : vx_core.Type_any {
       return vx_core.f_let(generic_any_1, fn_any);
     }
 
@@ -22164,7 +22162,7 @@ namespace vx_core {
   public static Func_let e_let = new vx_core.Class_let();
   public static Func_let t_let = new vx_core.Class_let();
 
-  public static <T extends vx_core.Type_any> T f_let(T generic_any_1, vx_core.Func_any_from_func fn_any) {
+  public static T f_let<T>(T generic_any_1, vx_core.Func_any_from_func fn_any) where T : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -22179,11 +22177,11 @@ namespace vx_core {
    * @return {any-1}
    * (func let-async)
    */
-  public static interface Func_let_async  vx_core.Type_func, vx_core.Type_replfunc_async {
-    public <T extends vx_core.Type_any> CompletableFuture<T> vx_let_async(T generic_any_1, vx_core.Func_any_from_func_async fn_any_async);
+  public static interface Func_let_async : vx_core.Type_func, vx_core.Type_replfunc_async {
+    public Task<T> vx_let_async<T>(T generic_any_1, vx_core.Func_any_from_func_async fn_any_async) where T : vx_core.Type_any;
   }
 
-  public static class Class_let_async  vx_core.Class_base implements Func_let_async {
+  class Class_let_async : vx_core.Class_base, Func_let_async {
 
     public override vx_core.Func_let_async vx_new(params Object vals) {
       Class_let_async output = new Class_let_async();
@@ -22236,7 +22234,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> CompletableFuture<T> vx_let_async(T generic_any_1, vx_core.Func_any_from_func_async fn_any_async) {
+    public CompletableFuture<T> vx_let_async<T>(T generic_any_1, vx_core.Func_any_from_func_async fn_any_async) where T : vx_core.Type_any {
       return vx_core.f_let_async(generic_any_1, fn_any_async);
     }
 
@@ -22245,7 +22243,7 @@ namespace vx_core {
   public static Func_let_async e_let_async = new vx_core.Class_let_async();
   public static Func_let_async t_let_async = new vx_core.Class_let_async();
 
-  public static <T extends vx_core.Type_any> CompletableFuture<T> f_let_async(T generic_any_1, vx_core.Func_any_from_func_async fn_any_async) {
+  public static CompletableFuture<T> f_let_async<T>(T generic_any_1, vx_core.Func_any_from_func_async fn_any_async) where T : vx_core.Type_any {
     CompletableFuture<T> output = vx_core.async_new_completed(vx_core.f_empty(generic_any_1));
     return output;
   }
@@ -22257,11 +22255,11 @@ namespace vx_core {
    * @return {list-1}
    * (func list-join<-list)
    */
-  public static interface Func_list_join_from_list  vx_core.Func_any_from_any {
-    public <X extends vx_core.Type_list, Y extends vx_core.Type_list> X vx_list_join_from_list(X generic_any_1, Y values);
+  public static interface Func_list_join_from_list : vx_core.Func_any_from_any {
+    public X vx_list_join_from_list<X, Y>(X generic_any_1, Y values) where X : vx_core.Type_list where Y : vx_core.Type_list;
   }
 
-  public static class Class_list_join_from_list  vx_core.Class_base implements Func_list_join_from_list {
+  class Class_list_join_from_list : vx_core.Class_base, Func_list_join_from_list {
 
     public override vx_core.Func_list_join_from_list vx_new(params Object vals) {
       Class_list_join_from_list output = new Class_list_join_from_list();
@@ -22325,7 +22323,7 @@ namespace vx_core {
     }
 
     override
-    public <X extends vx_core.Type_list, Y extends vx_core.Type_list> X vx_list_join_from_list(X generic_list_1, Y values) {
+    public X vx_list_join_from_list<X, Y>(X generic_list_1, Y values) where X : vx_core.Type_list where Y : vx_core.Type_list {
       return vx_core.f_list_join_from_list(generic_list_1, values);
     }
 
@@ -22334,7 +22332,7 @@ namespace vx_core {
   public static Func_list_join_from_list e_list_join_from_list = new vx_core.Class_list_join_from_list();
   public static Func_list_join_from_list t_list_join_from_list = new vx_core.Class_list_join_from_list();
 
-  public static <X extends vx_core.Type_list, Y extends vx_core.Type_list> X f_list_join_from_list(X generic_list_1, Y values) {
+  public static X f_list_join_from_list<X, Y>(X generic_list_1, Y values) where X : vx_core.Type_list where Y : vx_core.Type_list {
     X output = vx_core.f_empty(generic_list_1);
     output = vx_core.f_list_join_from_list_1(
       generic_list_1,
@@ -22355,11 +22353,11 @@ namespace vx_core {
    * @return {list-1}
    * (func list-join<-list)
    */
-  public static interface Func_list_join_from_list_1  vx_core.Type_func, vx_core.Type_replfunc {
-    public <X extends vx_core.Type_list, Y extends vx_core.Type_list> X vx_list_join_from_list_1(X generic_any_1, Y values, vx_core.Func_any_from_any fn_any_from_any);
+  public static interface Func_list_join_from_list_1 : vx_core.Type_func, vx_core.Type_replfunc {
+    public X vx_list_join_from_list_1<X, Y>(X generic_any_1, Y values, vx_core.Func_any_from_any fn_any_from_any) where X : vx_core.Type_list where Y : vx_core.Type_list;
   }
 
-  public static class Class_list_join_from_list_1  vx_core.Class_base implements Func_list_join_from_list_1 {
+  class Class_list_join_from_list_1 : vx_core.Class_base, Func_list_join_from_list_1 {
 
     public override vx_core.Func_list_join_from_list_1 vx_new(params Object vals) {
       Class_list_join_from_list_1 output = new Class_list_join_from_list_1();
@@ -22412,7 +22410,7 @@ namespace vx_core {
     }
 
     override
-    public <X extends vx_core.Type_list, Y extends vx_core.Type_list> X vx_list_join_from_list_1(X generic_list_1, Y values, vx_core.Func_any_from_any fn_any_from_any) {
+    public X vx_list_join_from_list_1<X, Y>(X generic_list_1, Y values, vx_core.Func_any_from_any fn_any_from_any) where X : vx_core.Type_list where Y : vx_core.Type_list {
       return vx_core.f_list_join_from_list_1(generic_list_1, values, fn_any_from_any);
     }
 
@@ -22421,7 +22419,7 @@ namespace vx_core {
   public static Func_list_join_from_list_1 e_list_join_from_list_1 = new vx_core.Class_list_join_from_list_1();
   public static Func_list_join_from_list_1 t_list_join_from_list_1 = new vx_core.Class_list_join_from_list_1();
 
-  public static <X extends vx_core.Type_list, Y extends vx_core.Type_list> X f_list_join_from_list_1(X generic_list_1, Y values, vx_core.Func_any_from_any fn_any_from_any) {
+  public static X f_list_join_from_list_1<X, Y>(X generic_list_1, Y values, vx_core.Func_any_from_any fn_any_from_any) where X : vx_core.Type_list where Y : vx_core.Type_list {
     X output = vx_core.f_empty(generic_list_1);
     return output;
   }
@@ -22433,11 +22431,11 @@ namespace vx_core {
    * @return {list-1}
    * (func list<-list)
    */
-  public static interface Func_list_from_list  vx_core.Func_any_from_any {
-    public <X extends vx_core.Type_list, Y extends vx_core.Type_list> X vx_list_from_list(X generic_any_1, Y values);
+  public static interface Func_list_from_list : vx_core.Func_any_from_any {
+    public X vx_list_from_list<X, Y>(X generic_any_1, Y values) where X : vx_core.Type_list where Y : vx_core.Type_list;
   }
 
-  public static class Class_list_from_list  vx_core.Class_base implements Func_list_from_list {
+  class Class_list_from_list : vx_core.Class_base, Func_list_from_list {
 
     public override vx_core.Func_list_from_list vx_new(params Object vals) {
       Class_list_from_list output = new Class_list_from_list();
@@ -22501,7 +22499,7 @@ namespace vx_core {
     }
 
     override
-    public <X extends vx_core.Type_list, Y extends vx_core.Type_list> X vx_list_from_list(X generic_list_1, Y values) {
+    public X vx_list_from_list<X, Y>(X generic_list_1, Y values) where X : vx_core.Type_list where Y : vx_core.Type_list {
       return vx_core.f_list_from_list(generic_list_1, values);
     }
 
@@ -22510,7 +22508,7 @@ namespace vx_core {
   public static Func_list_from_list e_list_from_list = new vx_core.Class_list_from_list();
   public static Func_list_from_list t_list_from_list = new vx_core.Class_list_from_list();
 
-  public static <X extends vx_core.Type_list, Y extends vx_core.Type_list> X f_list_from_list(X generic_list_1, Y values) {
+  public static X f_list_from_list<X, Y>(X generic_list_1, Y values) where X : vx_core.Type_list where Y : vx_core.Type_list {
     X output = vx_core.f_empty(generic_list_1);
     output = vx_core.f_list_from_list_1(
       generic_list_1,
@@ -22531,11 +22529,11 @@ namespace vx_core {
    * @return {list-1}
    * (func list<-list)
    */
-  public static interface Func_list_from_list_1  vx_core.Type_func, vx_core.Type_replfunc {
-    public <X extends vx_core.Type_list, Y extends vx_core.Type_list> X vx_list_from_list_1(X generic_any_1, Y values, vx_core.Func_any_from_any fn_any_from_any);
+  public static interface Func_list_from_list_1 : vx_core.Type_func, vx_core.Type_replfunc {
+    public X vx_list_from_list_1<X, Y>(X generic_any_1, Y values, vx_core.Func_any_from_any fn_any_from_any) where X : vx_core.Type_list where Y : vx_core.Type_list;
   }
 
-  public static class Class_list_from_list_1  vx_core.Class_base implements Func_list_from_list_1 {
+  class Class_list_from_list_1 : vx_core.Class_base, Func_list_from_list_1 {
 
     public override vx_core.Func_list_from_list_1 vx_new(params Object vals) {
       Class_list_from_list_1 output = new Class_list_from_list_1();
@@ -22588,7 +22586,7 @@ namespace vx_core {
     }
 
     override
-    public <X extends vx_core.Type_list, Y extends vx_core.Type_list> X vx_list_from_list_1(X generic_list_1, Y values, vx_core.Func_any_from_any fn_any_from_any) {
+    public X vx_list_from_list_1<X, Y>(X generic_list_1, Y values, vx_core.Func_any_from_any fn_any_from_any) where X : vx_core.Type_list where Y : vx_core.Type_list {
       return vx_core.f_list_from_list_1(generic_list_1, values, fn_any_from_any);
     }
 
@@ -22597,7 +22595,7 @@ namespace vx_core {
   public static Func_list_from_list_1 e_list_from_list_1 = new vx_core.Class_list_from_list_1();
   public static Func_list_from_list_1 t_list_from_list_1 = new vx_core.Class_list_from_list_1();
 
-  public static <X extends vx_core.Type_list, Y extends vx_core.Type_list> X f_list_from_list_1(X generic_list_1, Y values, vx_core.Func_any_from_any fn_any_from_any) {
+  public static X f_list_from_list_1<X, Y>(X generic_list_1, Y values, vx_core.Func_any_from_any fn_any_from_any) where X : vx_core.Type_list where Y : vx_core.Type_list {
     X output = vx_core.f_empty(generic_list_1);
     return output;
   }
@@ -22612,11 +22610,11 @@ namespace vx_core {
    * @return {list-1}
    * (func list<-list-async)
    */
-  public static interface Func_list_from_list_async  vx_core.Type_func, vx_core.Type_replfunc_async {
-    public <X extends vx_core.Type_list, Y extends vx_core.Type_list> CompletableFuture<X> vx_list_from_list_async(X generic_any_1, Y values, vx_core.Func_any_from_any_async fn_any_from_any_async);
+  public static interface Func_list_from_list_async : vx_core.Type_func, vx_core.Type_replfunc_async {
+    public Task<X> vx_list_from_list_async<X, Y>(X generic_any_1, Y values, vx_core.Func_any_from_any_async fn_any_from_any_async) where X : vx_core.Type_list where Y : vx_core.Type_list;
   }
 
-  public static class Class_list_from_list_async  vx_core.Class_base implements Func_list_from_list_async {
+  class Class_list_from_list_async : vx_core.Class_base, Func_list_from_list_async {
 
     public override vx_core.Func_list_from_list_async vx_new(params Object vals) {
       Class_list_from_list_async output = new Class_list_from_list_async();
@@ -22670,7 +22668,7 @@ namespace vx_core {
     }
 
     override
-    public <X extends vx_core.Type_list, Y extends vx_core.Type_list> CompletableFuture<X> vx_list_from_list_async(X generic_list_1, Y values, vx_core.Func_any_from_any_async fn_any_from_any_async) {
+    public CompletableFuture<X> vx_list_from_list_async<X, Y>(X generic_list_1, Y values, vx_core.Func_any_from_any_async fn_any_from_any_async) where X : vx_core.Type_list where Y : vx_core.Type_list {
       return vx_core.f_list_from_list_async(generic_list_1, values, fn_any_from_any_async);
     }
 
@@ -22679,7 +22677,7 @@ namespace vx_core {
   public static Func_list_from_list_async e_list_from_list_async = new vx_core.Class_list_from_list_async();
   public static Func_list_from_list_async t_list_from_list_async = new vx_core.Class_list_from_list_async();
 
-  public static <X extends vx_core.Type_list, Y extends vx_core.Type_list> CompletableFuture<X> f_list_from_list_async(X generic_list_1, Y values, vx_core.Func_any_from_any_async fn_any_from_any_async) {
+  public static CompletableFuture<X> f_list_from_list_async<X, Y>(X generic_list_1, Y values, vx_core.Func_any_from_any_async fn_any_from_any_async) where X : vx_core.Type_list where Y : vx_core.Type_list {
     CompletableFuture<X> output = vx_core.async_new_completed(vx_core.f_empty(generic_list_1));
     return output;
   }
@@ -22692,11 +22690,11 @@ namespace vx_core {
    * @return {list-1}
    * (func list<-list-intany)
    */
-  public static interface Func_list_from_list_intany  vx_core.Type_func, vx_core.Type_replfunc {
-    public <X extends vx_core.Type_list, Y extends vx_core.Type_list> X vx_list_from_list_intany(X generic_any_1, Y values, vx_core.Func_any_from_int_any fn_any_from_int_any);
+  public static interface Func_list_from_list_intany : vx_core.Type_func, vx_core.Type_replfunc {
+    public X vx_list_from_list_intany<X, Y>(X generic_any_1, Y values, vx_core.Func_any_from_int_any fn_any_from_int_any) where X : vx_core.Type_list where Y : vx_core.Type_list;
   }
 
-  public static class Class_list_from_list_intany  vx_core.Class_base implements Func_list_from_list_intany {
+  class Class_list_from_list_intany : vx_core.Class_base, Func_list_from_list_intany {
 
     public override vx_core.Func_list_from_list_intany vx_new(params Object vals) {
       Class_list_from_list_intany output = new Class_list_from_list_intany();
@@ -22749,7 +22747,7 @@ namespace vx_core {
     }
 
     override
-    public <X extends vx_core.Type_list, Y extends vx_core.Type_list> X vx_list_from_list_intany(X generic_list_1, Y values, vx_core.Func_any_from_int_any fn_any_from_int_any) {
+    public X vx_list_from_list_intany<X, Y>(X generic_list_1, Y values, vx_core.Func_any_from_int_any fn_any_from_int_any) where X : vx_core.Type_list where Y : vx_core.Type_list {
       return vx_core.f_list_from_list_intany(generic_list_1, values, fn_any_from_int_any);
     }
 
@@ -22758,7 +22756,7 @@ namespace vx_core {
   public static Func_list_from_list_intany e_list_from_list_intany = new vx_core.Class_list_from_list_intany();
   public static Func_list_from_list_intany t_list_from_list_intany = new vx_core.Class_list_from_list_intany();
 
-  public static <X extends vx_core.Type_list, Y extends vx_core.Type_list> X f_list_from_list_intany(X generic_list_1, Y values, vx_core.Func_any_from_int_any fn_any_from_int_any) {
+  public static X f_list_from_list_intany<X, Y>(X generic_list_1, Y values, vx_core.Func_any_from_int_any fn_any_from_int_any) where X : vx_core.Type_list where Y : vx_core.Type_list {
     X output = vx_core.f_empty(generic_list_1);
     return output;
   }
@@ -22770,11 +22768,11 @@ namespace vx_core {
    * @return {list-1}
    * (func list<-map)
    */
-  public static interface Func_list_from_map  vx_core.Func_any_from_any {
-    public <X extends vx_core.Type_list, O extends vx_core.Type_map> X vx_list_from_map(X generic_any_1, O valuemap);
+  public static interface Func_list_from_map : vx_core.Func_any_from_any {
+    public X vx_list_from_map<O, X>(X generic_any_1, O valuemap) where O : vx_core.Type_map where X : vx_core.Type_list;
   }
 
-  public static class Class_list_from_map  vx_core.Class_base implements Func_list_from_map {
+  class Class_list_from_map : vx_core.Class_base, Func_list_from_map {
 
     public override vx_core.Func_list_from_map vx_new(params Object vals) {
       Class_list_from_map output = new Class_list_from_map();
@@ -22838,7 +22836,7 @@ namespace vx_core {
     }
 
     override
-    public <X extends vx_core.Type_list, O extends vx_core.Type_map> X vx_list_from_map(X generic_list_1, O valuemap) {
+    public X vx_list_from_map<O, X>(X generic_list_1, O valuemap) where O : vx_core.Type_map where X : vx_core.Type_list {
       return vx_core.f_list_from_map(generic_list_1, valuemap);
     }
 
@@ -22847,7 +22845,7 @@ namespace vx_core {
   public static Func_list_from_map e_list_from_map = new vx_core.Class_list_from_map();
   public static Func_list_from_map t_list_from_map = new vx_core.Class_list_from_map();
 
-  public static <X extends vx_core.Type_list, O extends vx_core.Type_map> X f_list_from_map(X generic_list_1, O valuemap) {
+  public static X f_list_from_map<O, X>(X generic_list_1, O valuemap) where O : vx_core.Type_map where X : vx_core.Type_list {
     X output = vx_core.f_empty(generic_list_1);
     output = vx_core.f_list_from_map_1(
       generic_list_1,
@@ -22869,11 +22867,11 @@ namespace vx_core {
    * @return {list-1}
    * (func list<-map)
    */
-  public static interface Func_list_from_map_1  vx_core.Type_func, vx_core.Type_replfunc {
-    public <X extends vx_core.Type_list, O extends vx_core.Type_map> X vx_list_from_map_1(X generic_any_1, O valuemap, vx_core.Func_any_from_key_value fn_any_from_key_value);
+  public static interface Func_list_from_map_1 : vx_core.Type_func, vx_core.Type_replfunc {
+    public X vx_list_from_map_1<O, X>(X generic_any_1, O valuemap, vx_core.Func_any_from_key_value fn_any_from_key_value) where O : vx_core.Type_map where X : vx_core.Type_list;
   }
 
-  public static class Class_list_from_map_1  vx_core.Class_base implements Func_list_from_map_1 {
+  class Class_list_from_map_1 : vx_core.Class_base, Func_list_from_map_1 {
 
     public override vx_core.Func_list_from_map_1 vx_new(params Object vals) {
       Class_list_from_map_1 output = new Class_list_from_map_1();
@@ -22926,7 +22924,7 @@ namespace vx_core {
     }
 
     override
-    public <X extends vx_core.Type_list, O extends vx_core.Type_map> X vx_list_from_map_1(X generic_list_1, O valuemap, vx_core.Func_any_from_key_value fn_any_from_key_value) {
+    public X vx_list_from_map_1<O, X>(X generic_list_1, O valuemap, vx_core.Func_any_from_key_value fn_any_from_key_value) where O : vx_core.Type_map where X : vx_core.Type_list {
       return vx_core.f_list_from_map_1(generic_list_1, valuemap, fn_any_from_key_value);
     }
 
@@ -22935,7 +22933,7 @@ namespace vx_core {
   public static Func_list_from_map_1 e_list_from_map_1 = new vx_core.Class_list_from_map_1();
   public static Func_list_from_map_1 t_list_from_map_1 = new vx_core.Class_list_from_map_1();
 
-  public static <X extends vx_core.Type_list, O extends vx_core.Type_map> X f_list_from_map_1(X generic_list_1, O valuemap, vx_core.Func_any_from_key_value fn_any_from_key_value) {
+  public static X f_list_from_map_1<O, X>(X generic_list_1, O valuemap, vx_core.Func_any_from_key_value fn_any_from_key_value) where O : vx_core.Type_map where X : vx_core.Type_list {
     X output = vx_core.f_empty(generic_list_1);
     return output;
   }
@@ -22949,11 +22947,11 @@ namespace vx_core {
    * @return {list-1}
    * (func list<-map-async)
    */
-  public static interface Func_list_from_map_async  vx_core.Type_func, vx_core.Type_replfunc_async {
-    public <X extends vx_core.Type_list, O extends vx_core.Type_map> CompletableFuture<X> vx_list_from_map_async(X generic_any_1, O valuemap, vx_core.Func_any_from_key_value_async fn_any_from_key_value_async);
+  public static interface Func_list_from_map_async : vx_core.Type_func, vx_core.Type_replfunc_async {
+    public Task<X> vx_list_from_map_async<O, X>(X generic_any_1, O valuemap, vx_core.Func_any_from_key_value_async fn_any_from_key_value_async) where O : vx_core.Type_map where X : vx_core.Type_list;
   }
 
-  public static class Class_list_from_map_async  vx_core.Class_base implements Func_list_from_map_async {
+  class Class_list_from_map_async : vx_core.Class_base, Func_list_from_map_async {
 
     public override vx_core.Func_list_from_map_async vx_new(params Object vals) {
       Class_list_from_map_async output = new Class_list_from_map_async();
@@ -23007,7 +23005,7 @@ namespace vx_core {
     }
 
     override
-    public <X extends vx_core.Type_list, O extends vx_core.Type_map> CompletableFuture<X> vx_list_from_map_async(X generic_list_1, O valuemap, vx_core.Func_any_from_key_value_async fn_any_from_key_value_async) {
+    public CompletableFuture<X> vx_list_from_map_async<O, X>(X generic_list_1, O valuemap, vx_core.Func_any_from_key_value_async fn_any_from_key_value_async) where O : vx_core.Type_map where X : vx_core.Type_list {
       return vx_core.f_list_from_map_async(generic_list_1, valuemap, fn_any_from_key_value_async);
     }
 
@@ -23016,7 +23014,7 @@ namespace vx_core {
   public static Func_list_from_map_async e_list_from_map_async = new vx_core.Class_list_from_map_async();
   public static Func_list_from_map_async t_list_from_map_async = new vx_core.Class_list_from_map_async();
 
-  public static <X extends vx_core.Type_list, O extends vx_core.Type_map> CompletableFuture<X> f_list_from_map_async(X generic_list_1, O valuemap, vx_core.Func_any_from_key_value_async fn_any_from_key_value_async) {
+  public static CompletableFuture<X> f_list_from_map_async<O, X>(X generic_list_1, O valuemap, vx_core.Func_any_from_key_value_async fn_any_from_key_value_async) where O : vx_core.Type_map where X : vx_core.Type_list {
     CompletableFuture<X> output = vx_core.async_new_completed(vx_core.f_empty(generic_list_1));
     return output;
   }
@@ -23028,11 +23026,11 @@ namespace vx_core {
    * @return {any}
    * (func list<-type)
    */
-  public static interface Func_list_from_type  vx_core.Func_any_from_any {
+  public static interface Func_list_from_type : vx_core.Func_any_from_any {
     public vx_core.Type_any vx_list_from_type(vx_core.Type_any type);
   }
 
-  public static class Class_list_from_type  vx_core.Class_base implements Func_list_from_type {
+  class Class_list_from_type : vx_core.Class_base, Func_list_from_type {
 
     public override vx_core.Func_list_from_type vx_new(params Object vals) {
       Class_list_from_type output = new Class_list_from_type();
@@ -23116,11 +23114,11 @@ namespace vx_core {
    * @return {any}
    * (func log)
    */
-  public static interface Func_log  vx_core.Func_any_from_any {
+  public static interface Func_log : vx_core.Func_any_from_any {
     public vx_core.Type_any vx_log(vx_core.Type_any value);
   }
 
-  public static class Class_log  vx_core.Class_base implements Func_log {
+  class Class_log : vx_core.Class_base, Func_log {
 
     public override vx_core.Func_log vx_new(params Object vals) {
       Class_log output = new Class_log();
@@ -23205,11 +23203,11 @@ namespace vx_core {
    * @return {any-1}
    * (func log)
    */
-  public static interface Func_log_1  vx_core.Type_func, vx_core.Type_replfunc {
-    public <T extends vx_core.Type_any> T vx_log_1(T generic_any_1, vx_core.Type_string text, T value);
+  public static interface Func_log_1 : vx_core.Type_func, vx_core.Type_replfunc {
+    public T vx_log_1<T>(T generic_any_1, vx_core.Type_string text, T value) where T : vx_core.Type_any;
   }
 
-  public static class Class_log_1  vx_core.Class_base implements Func_log_1 {
+  class Class_log_1 : vx_core.Class_base, Func_log_1 {
 
     public override vx_core.Func_log_1 vx_new(params Object vals) {
       Class_log_1 output = new Class_log_1();
@@ -23262,7 +23260,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> T vx_log_1(T generic_any_1, vx_core.Type_string text, T value) {
+    public T vx_log_1<T>(T generic_any_1, vx_core.Type_string text, T value) where T : vx_core.Type_any {
       return vx_core.f_log_1(generic_any_1, text, value);
     }
 
@@ -23271,7 +23269,7 @@ namespace vx_core {
   public static Func_log_1 e_log_1 = new vx_core.Class_log_1();
   public static Func_log_1 t_log_1 = new vx_core.Class_log_1();
 
-  public static <T extends vx_core.Type_any> T f_log_1(T generic_any_1, vx_core.Type_string text, T value) {
+  public static T f_log_1<T>(T generic_any_1, vx_core.Type_string text, T value) where T : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -23283,11 +23281,11 @@ namespace vx_core {
    * @return {string}
    * (func main)
    */
-  public static interface Func_main  vx_core.Func_any_from_any {
+  public static interface Func_main : vx_core.Func_any_from_any {
     public vx_core.Type_string vx_main(vx_core.Type_anylist args);
   }
 
-  public static class Class_main  vx_core.Class_base implements Func_main {
+  class Class_main : vx_core.Class_base, Func_main {
 
     public override vx_core.Func_main vx_new(params Object vals) {
       Class_main output = new Class_main();
@@ -23376,11 +23374,11 @@ namespace vx_core {
    * @return {map-1}
    * (func map<-list)
    */
-  public static interface Func_map_from_list  vx_core.Type_func, vx_core.Type_replfunc {
-    public <Y extends vx_core.Type_list, N extends vx_core.Type_map> N vx_map_from_list(N generic_any_1, Y vallist, vx_core.Func_any_from_any fn_any_from_any);
+  public static interface Func_map_from_list : vx_core.Type_func, vx_core.Type_replfunc {
+    public N vx_map_from_list<N, Y>(N generic_any_1, Y vallist, vx_core.Func_any_from_any fn_any_from_any) where N : vx_core.Type_map where Y : vx_core.Type_list;
   }
 
-  public static class Class_map_from_list  vx_core.Class_base implements Func_map_from_list {
+  class Class_map_from_list : vx_core.Class_base, Func_map_from_list {
 
     public override vx_core.Func_map_from_list vx_new(params Object vals) {
       Class_map_from_list output = new Class_map_from_list();
@@ -23433,7 +23431,7 @@ namespace vx_core {
     }
 
     override
-    public <Y extends vx_core.Type_list, N extends vx_core.Type_map> N vx_map_from_list(N generic_map_1, Y vallist, vx_core.Func_any_from_any fn_any_from_any) {
+    public N vx_map_from_list<N, Y>(N generic_map_1, Y vallist, vx_core.Func_any_from_any fn_any_from_any) where N : vx_core.Type_map where Y : vx_core.Type_list {
       return vx_core.f_map_from_list(generic_map_1, vallist, fn_any_from_any);
     }
 
@@ -23442,7 +23440,7 @@ namespace vx_core {
   public static Func_map_from_list e_map_from_list = new vx_core.Class_map_from_list();
   public static Func_map_from_list t_map_from_list = new vx_core.Class_map_from_list();
 
-  public static <Y extends vx_core.Type_list, N extends vx_core.Type_map> N f_map_from_list(N generic_map_1, Y vallist, vx_core.Func_any_from_any fn_any_from_any) {
+  public static N f_map_from_list<N, Y>(N generic_map_1, Y vallist, vx_core.Func_any_from_any fn_any_from_any) where N : vx_core.Type_map where Y : vx_core.Type_list {
     N output = vx_core.f_empty(generic_map_1);
     return output;
   }
@@ -23454,11 +23452,11 @@ namespace vx_core {
    * @return {map-1}
    * (func map<-map)
    */
-  public static interface Func_map_from_map  vx_core.Func_any_from_any {
-    public <N extends vx_core.Type_map, O extends vx_core.Type_map> N vx_map_from_map(N generic_any_1, O valuemap);
+  public static interface Func_map_from_map : vx_core.Func_any_from_any {
+    public N vx_map_from_map<N, O>(N generic_any_1, O valuemap) where N : vx_core.Type_map where O : vx_core.Type_map;
   }
 
-  public static class Class_map_from_map  vx_core.Class_base implements Func_map_from_map {
+  class Class_map_from_map : vx_core.Class_base, Func_map_from_map {
 
     public override vx_core.Func_map_from_map vx_new(params Object vals) {
       Class_map_from_map output = new Class_map_from_map();
@@ -23522,7 +23520,7 @@ namespace vx_core {
     }
 
     override
-    public <N extends vx_core.Type_map, O extends vx_core.Type_map> N vx_map_from_map(N generic_map_1, O valuemap) {
+    public N vx_map_from_map<N, O>(N generic_map_1, O valuemap) where N : vx_core.Type_map where O : vx_core.Type_map {
       return vx_core.f_map_from_map(generic_map_1, valuemap);
     }
 
@@ -23531,7 +23529,7 @@ namespace vx_core {
   public static Func_map_from_map e_map_from_map = new vx_core.Class_map_from_map();
   public static Func_map_from_map t_map_from_map = new vx_core.Class_map_from_map();
 
-  public static <N extends vx_core.Type_map, O extends vx_core.Type_map> N f_map_from_map(N generic_map_1, O valuemap) {
+  public static N f_map_from_map<N, O>(N generic_map_1, O valuemap) where N : vx_core.Type_map where O : vx_core.Type_map {
     N output = vx_core.f_empty(generic_map_1);
     output = vx_core.f_map_from_map_1(
       generic_map_1,
@@ -23553,11 +23551,11 @@ namespace vx_core {
    * @return {map-1}
    * (func map<-map)
    */
-  public static interface Func_map_from_map_1  vx_core.Type_func, vx_core.Type_replfunc {
-    public <N extends vx_core.Type_map, O extends vx_core.Type_map> N vx_map_from_map_1(N generic_any_1, O valuemap, vx_core.Func_any_from_key_value fn_any_from_key_value);
+  public static interface Func_map_from_map_1 : vx_core.Type_func, vx_core.Type_replfunc {
+    public N vx_map_from_map_1<N, O>(N generic_any_1, O valuemap, vx_core.Func_any_from_key_value fn_any_from_key_value) where N : vx_core.Type_map where O : vx_core.Type_map;
   }
 
-  public static class Class_map_from_map_1  vx_core.Class_base implements Func_map_from_map_1 {
+  class Class_map_from_map_1 : vx_core.Class_base, Func_map_from_map_1 {
 
     public override vx_core.Func_map_from_map_1 vx_new(params Object vals) {
       Class_map_from_map_1 output = new Class_map_from_map_1();
@@ -23610,7 +23608,7 @@ namespace vx_core {
     }
 
     override
-    public <N extends vx_core.Type_map, O extends vx_core.Type_map> N vx_map_from_map_1(N generic_map_1, O valuemap, vx_core.Func_any_from_key_value fn_any_from_key_value) {
+    public N vx_map_from_map_1<N, O>(N generic_map_1, O valuemap, vx_core.Func_any_from_key_value fn_any_from_key_value) where N : vx_core.Type_map where O : vx_core.Type_map {
       return vx_core.f_map_from_map_1(generic_map_1, valuemap, fn_any_from_key_value);
     }
 
@@ -23619,7 +23617,7 @@ namespace vx_core {
   public static Func_map_from_map_1 e_map_from_map_1 = new vx_core.Class_map_from_map_1();
   public static Func_map_from_map_1 t_map_from_map_1 = new vx_core.Class_map_from_map_1();
 
-  public static <N extends vx_core.Type_map, O extends vx_core.Type_map> N f_map_from_map_1(N generic_map_1, O valuemap, vx_core.Func_any_from_key_value fn_any_from_key_value) {
+  public static N f_map_from_map_1<N, O>(N generic_map_1, O valuemap, vx_core.Func_any_from_key_value fn_any_from_key_value) where N : vx_core.Type_map where O : vx_core.Type_map {
     N output = vx_core.f_empty(generic_map_1);
     return output;
   }
@@ -23631,11 +23629,11 @@ namespace vx_core {
    * @return {msg}
    * (func msg<-error)
    */
-  public static interface Func_msg_from_error  vx_core.Func_any_from_any {
+  public static interface Func_msg_from_error : vx_core.Func_any_from_any {
     public vx_core.Type_msg vx_msg_from_error(vx_core.Type_string error);
   }
 
-  public static class Class_msg_from_error  vx_core.Class_base implements Func_msg_from_error {
+  class Class_msg_from_error : vx_core.Class_base, Func_msg_from_error {
 
     public override vx_core.Func_msg_from_error vx_new(params Object vals) {
       Class_msg_from_error output = new Class_msg_from_error();
@@ -23729,11 +23727,11 @@ namespace vx_core {
    * @return {msg}
    * (func msg<-error)
    */
-  public static interface Func_msg_from_error_1  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_msg_from_error_1 : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_msg vx_msg_from_error_1(vx_core.Type_string code, vx_core.Type_any detail);
   }
 
-  public static class Class_msg_from_error_1  vx_core.Class_base implements Func_msg_from_error_1 {
+  class Class_msg_from_error_1 : vx_core.Class_base, Func_msg_from_error_1 {
 
     public override vx_core.Func_msg_from_error_1 vx_new(params Object vals) {
       Class_msg_from_error_1 output = new Class_msg_from_error_1();
@@ -23819,11 +23817,11 @@ namespace vx_core {
    * @return {msg}
    * (func msg<-error)
    */
-  public static interface Func_msg_from_error_2  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_msg_from_error_2 : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_msg vx_msg_from_error_2(vx_core.Type_string path, vx_core.Type_string code, vx_core.Type_any detail);
   }
 
-  public static class Class_msg_from_error_2  vx_core.Class_base implements Func_msg_from_error_2 {
+  class Class_msg_from_error_2 : vx_core.Class_base, Func_msg_from_error_2 {
 
     public override vx_core.Func_msg_from_error_2 vx_new(params Object vals) {
       Class_msg_from_error_2 output = new Class_msg_from_error_2();
@@ -23910,11 +23908,11 @@ namespace vx_core {
    * @return {msg}
    * (func msg<-warning)
    */
-  public static interface Func_msg_from_warning  vx_core.Func_any_from_any {
+  public static interface Func_msg_from_warning : vx_core.Func_any_from_any {
     public vx_core.Type_msg vx_msg_from_warning(vx_core.Type_string warning);
   }
 
-  public static class Class_msg_from_warning  vx_core.Class_base implements Func_msg_from_warning {
+  class Class_msg_from_warning : vx_core.Class_base, Func_msg_from_warning {
 
     public override vx_core.Func_msg_from_warning vx_new(params Object vals) {
       Class_msg_from_warning output = new Class_msg_from_warning();
@@ -24008,11 +24006,11 @@ namespace vx_core {
    * @return {msgblock}
    * (func msgblock<-msgblock-msg)
    */
-  public static interface Func_msgblock_from_msgblock_msg  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_msgblock_from_msgblock_msg : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_msgblock vx_msgblock_from_msgblock_msg(vx_core.Type_msgblock origblock, vx_core.Type_msg addmsg);
   }
 
-  public static class Class_msgblock_from_msgblock_msg  vx_core.Class_base implements Func_msgblock_from_msgblock_msg {
+  class Class_msgblock_from_msgblock_msg : vx_core.Class_base, Func_msgblock_from_msgblock_msg {
 
     public override vx_core.Func_msgblock_from_msgblock_msg vx_new(params Object vals) {
       Class_msgblock_from_msgblock_msg output = new Class_msgblock_from_msgblock_msg();
@@ -24088,11 +24086,11 @@ namespace vx_core {
    * @return {msgblock}
    * (func msgblock<-msgblock-msgblock)
    */
-  public static interface Func_msgblock_from_msgblock_msgblock  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_msgblock_from_msgblock_msgblock : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_msgblock vx_msgblock_from_msgblock_msgblock(vx_core.Type_msgblock origblock, vx_core.Type_msgblock addblock);
   }
 
-  public static class Class_msgblock_from_msgblock_msgblock  vx_core.Class_base implements Func_msgblock_from_msgblock_msgblock {
+  class Class_msgblock_from_msgblock_msgblock : vx_core.Class_base, Func_msgblock_from_msgblock_msgblock {
 
     public override vx_core.Func_msgblock_from_msgblock_msgblock vx_new(params Object vals) {
       Class_msgblock_from_msgblock_msgblock output = new Class_msgblock_from_msgblock_msgblock();
@@ -24172,11 +24170,11 @@ namespace vx_core {
    * @return {string}
    * (func name<-typedef)
    */
-  public static interface Func_name_from_typedef  vx_core.Func_any_from_any {
+  public static interface Func_name_from_typedef : vx_core.Func_any_from_any {
     public vx_core.Type_string vx_name_from_typedef(vx_core.Type_typedef vtypedef);
   }
 
-  public static class Class_name_from_typedef  vx_core.Class_base implements Func_name_from_typedef {
+  class Class_name_from_typedef : vx_core.Class_base, Func_name_from_typedef {
 
     public override vx_core.Func_name_from_typedef vx_new(params Object vals) {
       Class_name_from_typedef output = new Class_name_from_typedef();
@@ -24261,11 +24259,11 @@ namespace vx_core {
    * @return {any-1}
    * (func native)
    */
-  public static interface Func_native  vx_core.Func_any_from_any {
-    public <T extends vx_core.Type_any> T vx_native(T generic_any_1, vx_core.Type_anylist clauses);
+  public static interface Func_native : vx_core.Func_any_from_any {
+    public T vx_native<T>(T generic_any_1, vx_core.Type_anylist clauses) where T : vx_core.Type_any;
   }
 
-  public static class Class_native  vx_core.Class_base implements Func_native {
+  class Class_native : vx_core.Class_base, Func_native {
 
     public override vx_core.Func_native vx_new(params Object vals) {
       Class_native output = new Class_native();
@@ -24329,7 +24327,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> T vx_native(T generic_any_1, vx_core.Type_anylist clauses) {
+    public T vx_native<T>(T generic_any_1, vx_core.Type_anylist clauses) where T : vx_core.Type_any {
       return vx_core.f_native(generic_any_1, clauses);
     }
 
@@ -24338,7 +24336,7 @@ namespace vx_core {
   public static Func_native e_native = new vx_core.Class_native();
   public static Func_native t_native = new vx_core.Class_native();
 
-  public static <T extends vx_core.Type_any> T f_native(T generic_any_1, vx_core.Type_anylist clauses) {
+  public static T f_native<T>(T generic_any_1, vx_core.Type_anylist clauses) where T : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -24350,11 +24348,11 @@ namespace vx_core {
    * @return {any}
    * (func native<-any)
    */
-  public static interface Func_native_from_any  vx_core.Func_any_from_any {
+  public static interface Func_native_from_any : vx_core.Func_any_from_any {
     public vx_core.Type_any vx_native_from_any(vx_core.Type_any value);
   }
 
-  public static class Class_native_from_any  vx_core.Class_base implements Func_native_from_any {
+  class Class_native_from_any : vx_core.Class_base, Func_native_from_any {
 
     public override vx_core.Func_native_from_any vx_new(params Object vals) {
       Class_native_from_any output = new Class_native_from_any();
@@ -24439,11 +24437,11 @@ namespace vx_core {
    * @return {any-1}
    * (func new)
    */
-  public static interface Func_new  vx_core.Type_func, vx_core.Type_replfunc {
-    public <T extends vx_core.Type_any> T vx_new(T type, vx_core.Type_anylist values);
+  public static interface Func_new : vx_core.Type_func, vx_core.Type_replfunc {
+    public T vx_new<T>(T type, vx_core.Type_anylist values) where T : vx_core.Type_any;
   }
 
-  public static class Class_new  vx_core.Class_base implements Func_new {
+  class Class_new : vx_core.Class_base, Func_new {
 
     public override vx_core.Func_new vx_new(params Object vals) {
       Class_new output = new Class_new();
@@ -24495,7 +24493,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> T vx_new(T type, vx_core.Type_anylist values) {
+    public T vx_new<T>(T type, vx_core.Type_anylist values) where T : vx_core.Type_any {
       return vx_core.f_new(type, values);
     }
 
@@ -24505,7 +24503,7 @@ namespace vx_core {
   public static Func_new t_new = new vx_core.Class_new();
 
   @SuppressWarnings("unchecked")
-  public static <T extends vx_core.Type_any> T f_new(T type, vx_core.Type_anylist values) {
+  public static T f_new<T>(T type, vx_core.Type_anylist values) where T : vx_core.Type_any {
     return output;
   }
 
@@ -24515,11 +24513,11 @@ namespace vx_core {
    * @return {number}
    * (func number<-func)
    */
-  public static interface Func_number_from_func  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_number_from_func : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_number vx_number_from_func();
   }
 
-  public static class Class_number_from_func  vx_core.Class_base implements Func_number_from_func {
+  class Class_number_from_func : vx_core.Class_base, Func_number_from_func {
 
     public override vx_core.Func_number_from_func vx_new(params Object vals) {
       Class_number_from_func output = new Class_number_from_func();
@@ -24591,11 +24589,11 @@ namespace vx_core {
    * @return {boolean}
    * (func or)
    */
-  public static interface Func_or  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_or : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_boolean vx_or(vx_core.Type_boolean val1, vx_core.Type_boolean val2);
   }
 
-  public static class Class_or  vx_core.Class_base implements Func_or {
+  class Class_or : vx_core.Class_base, Func_or {
 
     public override vx_core.Func_or vx_new(params Object vals) {
       Class_or output = new Class_or();
@@ -24668,11 +24666,11 @@ namespace vx_core {
    * @return {boolean}
    * (func or)
    */
-  public static interface Func_or_1  vx_core.Func_any_from_any {
+  public static interface Func_or_1 : vx_core.Func_any_from_any {
     public vx_core.Type_boolean vx_or_1(vx_core.Type_booleanlist values);
   }
 
-  public static class Class_or_1  vx_core.Class_base implements Func_or_1 {
+  class Class_or_1 : vx_core.Class_base, Func_or_1 {
 
     public override vx_core.Func_or_1 vx_new(params Object vals) {
       Class_or_1 output = new Class_or_1();
@@ -24771,11 +24769,11 @@ namespace vx_core {
    * @return {package}
    * (func package-global<-name)
    */
-  public static interface Func_package_global_from_name  vx_core.Func_any_from_any {
+  public static interface Func_package_global_from_name : vx_core.Func_any_from_any {
     public vx_core.Type_package vx_package_global_from_name(vx_core.Type_string name);
   }
 
-  public static class Class_package_global_from_name  vx_core.Class_base implements Func_package_global_from_name {
+  class Class_package_global_from_name : vx_core.Class_base, Func_package_global_from_name {
 
     public override vx_core.Func_package_global_from_name vx_new(params Object vals) {
       Class_package_global_from_name output = new Class_package_global_from_name();
@@ -24864,11 +24862,11 @@ namespace vx_core {
    * @return {string}
    * (func packagename<-typedef)
    */
-  public static interface Func_packagename_from_typedef  vx_core.Func_any_from_any {
+  public static interface Func_packagename_from_typedef : vx_core.Func_any_from_any {
     public vx_core.Type_string vx_packagename_from_typedef(vx_core.Type_typedef vtypedef);
   }
 
-  public static class Class_packagename_from_typedef  vx_core.Class_base implements Func_packagename_from_typedef {
+  class Class_packagename_from_typedef : vx_core.Class_base, Func_packagename_from_typedef {
 
     public override vx_core.Func_packagename_from_typedef vx_new(params Object vals) {
       Class_packagename_from_typedef output = new Class_packagename_from_typedef();
@@ -24953,11 +24951,11 @@ namespace vx_core {
    * @return {string}
    * (func path<-context-path)
    */
-  public static interface Func_path_from_context_path  vx_core.Func_any_from_any_context {
+  public static interface Func_path_from_context_path : vx_core.Func_any_from_any_context {
     public vx_core.Type_string vx_path_from_context_path(vx_core.Type_context context, vx_core.Type_string path);
   }
 
-  public static class Class_path_from_context_path  vx_core.Class_base implements Func_path_from_context_path {
+  class Class_path_from_context_path : vx_core.Class_base, Func_path_from_context_path {
 
     public override vx_core.Func_path_from_context_path vx_new(params Object vals) {
       Class_path_from_context_path output = new Class_path_from_context_path();
@@ -25047,11 +25045,11 @@ namespace vx_core {
    * @return {string}
    * (func path<-setting-path)
    */
-  public static interface Func_path_from_setting_path  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_path_from_setting_path : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_string vx_path_from_setting_path(vx_core.Type_setting session, vx_core.Type_string path);
   }
 
-  public static class Class_path_from_setting_path  vx_core.Class_base implements Func_path_from_setting_path {
+  class Class_path_from_setting_path : vx_core.Class_base, Func_path_from_setting_path {
 
     public override vx_core.Func_path_from_setting_path vx_new(params Object vals) {
       Class_path_from_setting_path output = new Class_path_from_setting_path();
@@ -25124,11 +25122,11 @@ namespace vx_core {
    * @return {permission}
    * (func permission<-id-context)
    */
-  public static interface Func_permission_from_id_context  vx_core.Func_any_from_any_context {
+  public static interface Func_permission_from_id_context : vx_core.Func_any_from_any_context {
     public vx_core.Type_permission vx_permission_from_id_context(vx_core.Type_context context, vx_core.Type_string id);
   }
 
-  public static class Class_permission_from_id_context  vx_core.Class_base implements Func_permission_from_id_context {
+  class Class_permission_from_id_context : vx_core.Class_base, Func_permission_from_id_context {
 
     public override vx_core.Func_permission_from_id_context vx_new(params Object vals) {
       Class_permission_from_id_context output = new Class_permission_from_id_context();
@@ -25222,11 +25220,11 @@ namespace vx_core {
    * @return {argmap}
    * (func properties<-typedef)
    */
-  public static interface Func_properties_from_typedef  vx_core.Func_any_from_any {
+  public static interface Func_properties_from_typedef : vx_core.Func_any_from_any {
     public vx_core.Type_argmap vx_properties_from_typedef(vx_core.Type_typedef vtypedef);
   }
 
-  public static class Class_properties_from_typedef  vx_core.Class_base implements Func_properties_from_typedef {
+  class Class_properties_from_typedef : vx_core.Class_base, Func_properties_from_typedef {
 
     public override vx_core.Func_properties_from_typedef vx_new(params Object vals) {
       Class_properties_from_typedef output = new Class_properties_from_typedef();
@@ -25311,11 +25309,11 @@ namespace vx_core {
    * @return {arg}
    * (func proplast<-typedef)
    */
-  public static interface Func_proplast_from_typedef  vx_core.Func_any_from_any {
+  public static interface Func_proplast_from_typedef : vx_core.Func_any_from_any {
     public vx_core.Type_arg vx_proplast_from_typedef(vx_core.Type_typedef vtypedef);
   }
 
-  public static class Class_proplast_from_typedef  vx_core.Class_base implements Func_proplast_from_typedef {
+  class Class_proplast_from_typedef : vx_core.Class_base, Func_proplast_from_typedef {
 
     public override vx_core.Func_proplast_from_typedef vx_new(params Object vals) {
       Class_proplast_from_typedef output = new Class_proplast_from_typedef();
@@ -25399,11 +25397,11 @@ namespace vx_core {
    * @return {any-1}
    * (func resolve)
    */
-  public static interface Func_resolve  vx_core.Func_any_from_any {
-    public <T extends vx_core.Type_any> T vx_resolve(T generic_any_1, T value);
+  public static interface Func_resolve : vx_core.Func_any_from_any {
+    public T vx_resolve<T>(T generic_any_1, T value) where T : vx_core.Type_any;
   }
 
-  public static class Class_resolve  vx_core.Class_base implements Func_resolve {
+  class Class_resolve : vx_core.Class_base, Func_resolve {
 
     public override vx_core.Func_resolve vx_new(params Object vals) {
       Class_resolve output = new Class_resolve();
@@ -25467,7 +25465,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> T vx_resolve(T generic_any_1, T value) {
+    public T vx_resolve<T>(T generic_any_1, T value) where T : vx_core.Type_any {
       return vx_core.f_resolve(generic_any_1, value);
     }
 
@@ -25476,7 +25474,7 @@ namespace vx_core {
   public static Func_resolve e_resolve = new vx_core.Class_resolve();
   public static Func_resolve t_resolve = new vx_core.Class_resolve();
 
-  public static <T extends vx_core.Type_any> T f_resolve(T generic_any_1, T value) {
+  public static T f_resolve<T>(T generic_any_1, T value) where T : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     output = value;
     return output;
@@ -25488,11 +25486,11 @@ namespace vx_core {
    * @return {any-1}
    * (func resolve)
    */
-  public static interface Func_resolve_1  vx_core.Func_any_from_any {
-    public <T extends vx_core.Type_any> T vx_resolve_1(T generic_any_1, vx_core.Func_any_from_func fn_any);
+  public static interface Func_resolve_1 : vx_core.Func_any_from_any {
+    public T vx_resolve_1<T>(T generic_any_1, vx_core.Func_any_from_func fn_any) where T : vx_core.Type_any;
   }
 
-  public static class Class_resolve_1  vx_core.Class_base implements Func_resolve_1 {
+  class Class_resolve_1 : vx_core.Class_base, Func_resolve_1 {
 
     public override vx_core.Func_resolve_1 vx_new(params Object vals) {
       Class_resolve_1 output = new Class_resolve_1();
@@ -25556,7 +25554,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> T vx_resolve_1(T generic_any_1, vx_core.Func_any_from_func fn_any) {
+    public T vx_resolve_1<T>(T generic_any_1, vx_core.Func_any_from_func fn_any) where T : vx_core.Type_any {
       return vx_core.f_resolve_1(generic_any_1, fn_any);
     }
 
@@ -25565,7 +25563,7 @@ namespace vx_core {
   public static Func_resolve_1 e_resolve_1 = new vx_core.Class_resolve_1();
   public static Func_resolve_1 t_resolve_1 = new vx_core.Class_resolve_1();
 
-  public static <T extends vx_core.Type_any> T f_resolve_1(T generic_any_1, vx_core.Func_any_from_func fn_any) {
+  public static T f_resolve_1<T>(T generic_any_1, vx_core.Func_any_from_func fn_any) where T : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -25578,11 +25576,11 @@ namespace vx_core {
    * @return {any-1}
    * (func resolve-async)
    */
-  public static interface Func_resolve_async  vx_core.Func_any_from_any_async {
-    public <T extends vx_core.Type_any> CompletableFuture<T> vx_resolve_async(T generic_any_1, vx_core.Func_any_from_func_async fn_any);
+  public static interface Func_resolve_async : vx_core.Func_any_from_any_async {
+    public Task<T> vx_resolve_async<T>(T generic_any_1, vx_core.Func_any_from_func_async fn_any) where T : vx_core.Type_any;
   }
 
-  public static class Class_resolve_async  vx_core.Class_base implements Func_resolve_async {
+  class Class_resolve_async : vx_core.Class_base, Func_resolve_async {
 
     public override vx_core.Func_resolve_async vx_new(params Object vals) {
       Class_resolve_async output = new Class_resolve_async();
@@ -25645,7 +25643,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any> CompletableFuture<T> vx_resolve_async(T generic_any_1, vx_core.Func_any_from_func_async fn_any) {
+    public CompletableFuture<T> vx_resolve_async<T>(T generic_any_1, vx_core.Func_any_from_func_async fn_any) where T : vx_core.Type_any {
       return vx_core.f_resolve_async(generic_any_1, fn_any);
     }
 
@@ -25654,7 +25652,7 @@ namespace vx_core {
   public static Func_resolve_async e_resolve_async = new vx_core.Class_resolve_async();
   public static Func_resolve_async t_resolve_async = new vx_core.Class_resolve_async();
 
-  public static <T extends vx_core.Type_any> CompletableFuture<T> f_resolve_async(T generic_any_1, vx_core.Func_any_from_func_async fn_any) {
+  public static CompletableFuture<T> f_resolve_async<T>(T generic_any_1, vx_core.Func_any_from_func_async fn_any) where T : vx_core.Type_any {
     CompletableFuture<T> output = vx_core.async_new_completed(vx_core.f_empty(generic_any_1));
     return output;
   }
@@ -25666,11 +25664,11 @@ namespace vx_core {
    * @return {any-1}
    * (func resolve-first)
    */
-  public static interface Func_resolve_first  vx_core.Func_any_from_any {
-    public <T extends vx_core.Type_any, X extends vx_core.Type_list> T vx_resolve_first(T generic_any_1, X clauses);
+  public static interface Func_resolve_first : vx_core.Func_any_from_any {
+    public T vx_resolve_first<T, X>(T generic_any_1, X clauses) where T : vx_core.Type_any where X : vx_core.Type_list;
   }
 
-  public static class Class_resolve_first  vx_core.Class_base implements Func_resolve_first {
+  class Class_resolve_first : vx_core.Class_base, Func_resolve_first {
 
     public override vx_core.Func_resolve_first vx_new(params Object vals) {
       Class_resolve_first output = new Class_resolve_first();
@@ -25734,7 +25732,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, X extends vx_core.Type_list> T vx_resolve_first(T generic_any_1, X clauses) {
+    public T vx_resolve_first<T, X>(T generic_any_1, X clauses) where T : vx_core.Type_any where X : vx_core.Type_list {
       return vx_core.f_resolve_first(generic_any_1, clauses);
     }
 
@@ -25743,7 +25741,7 @@ namespace vx_core {
   public static Func_resolve_first e_resolve_first = new vx_core.Class_resolve_first();
   public static Func_resolve_first t_resolve_first = new vx_core.Class_resolve_first();
 
-  public static <T extends vx_core.Type_any, X extends vx_core.Type_list> T f_resolve_first(T generic_any_1, X clauses) {
+  public static T f_resolve_first<T, X>(T generic_any_1, X clauses) where T : vx_core.Type_any where X : vx_core.Type_list {
     T output = vx_core.f_empty(generic_any_1);
     output = vx_core.f_first_from_list_any_from_any(
       generic_any_1,
@@ -25759,11 +25757,11 @@ namespace vx_core {
    * @return {list-1}
    * (func resolve-list)
    */
-  public static interface Func_resolve_list  vx_core.Func_any_from_any {
-    public <X extends vx_core.Type_list> X vx_resolve_list(X generic_any_1, X clauses);
+  public static interface Func_resolve_list : vx_core.Func_any_from_any {
+    public X vx_resolve_list<X>(X generic_any_1, X clauses) where X : vx_core.Type_list;
   }
 
-  public static class Class_resolve_list  vx_core.Class_base implements Func_resolve_list {
+  class Class_resolve_list : vx_core.Class_base, Func_resolve_list {
 
     public override vx_core.Func_resolve_list vx_new(params Object vals) {
       Class_resolve_list output = new Class_resolve_list();
@@ -25827,7 +25825,7 @@ namespace vx_core {
     }
 
     override
-    public <X extends vx_core.Type_list> X vx_resolve_list(X generic_list_1, X clauses) {
+    public X vx_resolve_list<X>(X generic_list_1, X clauses) where X : vx_core.Type_list {
       return vx_core.f_resolve_list(generic_list_1, clauses);
     }
 
@@ -25836,7 +25834,7 @@ namespace vx_core {
   public static Func_resolve_list e_resolve_list = new vx_core.Class_resolve_list();
   public static Func_resolve_list t_resolve_list = new vx_core.Class_resolve_list();
 
-  public static <X extends vx_core.Type_list> X f_resolve_list(X generic_list_1, X clauses) {
+  public static X f_resolve_list<X>(X generic_list_1, X clauses) where X : vx_core.Type_list {
     X output = vx_core.f_empty(generic_list_1);
     output = vx_core.f_list_from_list_1(
       generic_list_1,
@@ -25852,11 +25850,11 @@ namespace vx_core {
    * @return {security}
    * (func security<-context)
    */
-  public static interface Func_security_from_context  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_security_from_context : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_security vx_security_from_context(vx_core.Type_context context);
   }
 
-  public static class Class_security_from_context  vx_core.Class_base implements Func_security_from_context {
+  class Class_security_from_context : vx_core.Class_base, Func_security_from_context {
 
     public override vx_core.Func_security_from_context vx_new(params Object vals) {
       Class_security_from_context output = new Class_security_from_context();
@@ -25931,11 +25929,11 @@ namespace vx_core {
    * @return {security}
    * (func security<-user)
    */
-  public static interface Func_security_from_user  vx_core.Func_any_from_any {
+  public static interface Func_security_from_user : vx_core.Func_any_from_any {
     public vx_core.Type_security vx_security_from_user(vx_core.Type_user user);
   }
 
-  public static class Class_security_from_user  vx_core.Class_base implements Func_security_from_user {
+  class Class_security_from_user : vx_core.Class_base, Func_security_from_user {
 
     public override vx_core.Func_security_from_user vx_new(params Object vals) {
       Class_security_from_user output = new Class_security_from_user();
@@ -26019,11 +26017,11 @@ namespace vx_core {
    * @return {session}
    * (func session<-context)
    */
-  public static interface Func_session_from_context  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_session_from_context : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_session vx_session_from_context(vx_core.Type_context context);
   }
 
-  public static class Class_session_from_context  vx_core.Class_base implements Func_session_from_context {
+  class Class_session_from_context : vx_core.Class_base, Func_session_from_context {
 
     public override vx_core.Func_session_from_context vx_new(params Object vals) {
       Class_session_from_context output = new Class_session_from_context();
@@ -26095,11 +26093,11 @@ namespace vx_core {
    * @return {setting}
    * (func setting<-context)
    */
-  public static interface Func_setting_from_context  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_setting_from_context : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_setting vx_setting_from_context(vx_core.Type_context context);
   }
 
-  public static class Class_setting_from_context  vx_core.Class_base implements Func_setting_from_context {
+  class Class_setting_from_context : vx_core.Class_base, Func_setting_from_context {
 
     public override vx_core.Func_setting_from_context vx_new(params Object vals) {
       Class_setting_from_context output = new Class_setting_from_context();
@@ -26172,11 +26170,11 @@ namespace vx_core {
    * @return {string}
    * (func string-repeat)
    */
-  public static interface Func_string_repeat  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_string_repeat : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_string vx_string_repeat(vx_core.Type_string text, vx_core.Type_int repeat);
   }
 
-  public static class Class_string_repeat  vx_core.Class_base implements Func_string_repeat {
+  class Class_string_repeat : vx_core.Class_base, Func_string_repeat {
 
     public override vx_core.Func_string_repeat vx_new(params Object vals) {
       Class_string_repeat output = new Class_string_repeat();
@@ -26249,11 +26247,11 @@ namespace vx_core {
    * @return {string}
    * (func string<-any)
    */
-  public static interface Func_string_from_any  vx_core.Func_any_from_any {
+  public static interface Func_string_from_any : vx_core.Func_any_from_any {
     public vx_core.Type_string vx_string_from_any(vx_core.Type_any value);
   }
 
-  public static class Class_string_from_any  vx_core.Class_base implements Func_string_from_any {
+  class Class_string_from_any : vx_core.Class_base, Func_string_from_any {
 
     public override vx_core.Func_string_from_any vx_new(params Object vals) {
       Class_string_from_any output = new Class_string_from_any();
@@ -26344,11 +26342,11 @@ namespace vx_core {
    * @return {string}
    * (func string<-any-indent)
    */
-  public static interface Func_string_from_any_indent  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_string_from_any_indent : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_string vx_string_from_any_indent(vx_core.Type_any value, vx_core.Type_int indent, vx_core.Type_boolean linefeed);
   }
 
-  public static class Class_string_from_any_indent  vx_core.Class_base implements Func_string_from_any_indent {
+  class Class_string_from_any_indent : vx_core.Class_base, Func_string_from_any_indent {
 
     public override vx_core.Func_string_from_any_indent vx_new(params Object vals) {
       Class_string_from_any_indent output = new Class_string_from_any_indent();
@@ -26421,12 +26419,12 @@ namespace vx_core {
    * @return {string}
    * (func string<-func)
    */
-  public static interface Func_string_from_func  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_string_from_func : vx_core.Type_func, vx_core.Type_replfunc {
     public Func_string_from_func vx_fn_new(vx_core.Class_any_from_func.IFn fn);
     public vx_core.Type_string vx_string_from_func();
   }
 
-  public static class Class_string_from_func  vx_core.Class_base implements Func_string_from_func {
+  class Class_string_from_func : vx_core.Class_base, Func_string_from_func {
 
     public override vx_core.Func_string_from_func vx_new(params Object vals) {
       Class_string_from_func output = new Class_string_from_func();
@@ -26508,11 +26506,11 @@ namespace vx_core {
    * @return {string}
    * (func string<-string-find-replace)
    */
-  public static interface Func_string_from_string_find_replace  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_string_from_string_find_replace : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_string vx_string_from_string_find_replace(vx_core.Type_string text, vx_core.Type_string find, vx_core.Type_string replace);
   }
 
-  public static class Class_string_from_string_find_replace  vx_core.Class_base implements Func_string_from_string_find_replace {
+  class Class_string_from_string_find_replace : vx_core.Class_base, Func_string_from_string_find_replace {
 
     public override vx_core.Func_string_from_string_find_replace vx_new(params Object vals) {
       Class_string_from_string_find_replace output = new Class_string_from_string_find_replace();
@@ -26586,11 +26584,11 @@ namespace vx_core {
    * @return {stringlist}
    * (func stringlist<-map)
    */
-  public static interface Func_stringlist_from_map  vx_core.Func_any_from_any {
+  public static interface Func_stringlist_from_map : vx_core.Func_any_from_any {
     public vx_core.Type_stringlist vx_stringlist_from_map(vx_core.Type_map map);
   }
 
-  public static class Class_stringlist_from_map  vx_core.Class_base implements Func_stringlist_from_map {
+  class Class_stringlist_from_map : vx_core.Class_base, Func_stringlist_from_map {
 
     public override vx_core.Func_stringlist_from_map vx_new(params Object vals) {
       Class_stringlist_from_map output = new Class_stringlist_from_map();
@@ -26684,11 +26682,11 @@ namespace vx_core {
    * @return {any-1}
    * (func switch)
    */
-  public static interface Func_switch  vx_core.Type_func, vx_core.Type_replfunc {
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> T vx_switch(T generic_any_1, U val, vx_core.Type_thenelselist thenelselist);
+  public static interface Func_switch : vx_core.Type_func, vx_core.Type_replfunc {
+    public T vx_switch<T, U>(T generic_any_1, U val, vx_core.Type_thenelselist thenelselist) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
-  public static class Class_switch  vx_core.Class_base implements Func_switch {
+  class Class_switch : vx_core.Class_base, Func_switch {
 
     public override vx_core.Func_switch vx_new(params Object vals) {
       Class_switch output = new Class_switch();
@@ -26741,7 +26739,7 @@ namespace vx_core {
     }
 
     override
-    public <T extends vx_core.Type_any, U extends vx_core.Type_any> T vx_switch(T generic_any_1, U val, vx_core.Type_thenelselist thenelselist) {
+    public T vx_switch<T, U>(T generic_any_1, U val, vx_core.Type_thenelselist thenelselist) where T : vx_core.Type_any where U : vx_core.Type_any {
       return vx_core.f_switch(generic_any_1, val, thenelselist);
     }
 
@@ -26750,7 +26748,7 @@ namespace vx_core {
   public static Func_switch e_switch = new vx_core.Class_switch();
   public static Func_switch t_switch = new vx_core.Class_switch();
 
-  public static <T extends vx_core.Type_any, U extends vx_core.Type_any> T f_switch(T generic_any_1, U val, vx_core.Type_thenelselist thenelselist) {
+  public static T f_switch<T, U>(T generic_any_1, U val, vx_core.Type_thenelselist thenelselist) where T : vx_core.Type_any where U : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     return output;
   }
@@ -26763,11 +26761,11 @@ namespace vx_core {
    * @return {thenelse}
    * (func then)
    */
-  public static interface Func_then  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_then : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_thenelse vx_then(vx_core.Func_boolean_from_func fn_cond, vx_core.Func_any_from_func fn_any);
   }
 
-  public static class Class_then  vx_core.Class_base implements Func_then {
+  class Class_then : vx_core.Class_base, Func_then {
 
     public override vx_core.Func_then vx_new(params Object vals) {
       Class_then output = new Class_then();
@@ -26851,11 +26849,11 @@ namespace vx_core {
    * @return {typelist}
    * (func traits<-typedef)
    */
-  public static interface Func_traits_from_typedef  vx_core.Func_any_from_any {
+  public static interface Func_traits_from_typedef : vx_core.Func_any_from_any {
     public vx_core.Type_typelist vx_traits_from_typedef(vx_core.Type_typedef vtypedef);
   }
 
-  public static class Class_traits_from_typedef  vx_core.Class_base implements Func_traits_from_typedef {
+  class Class_traits_from_typedef : vx_core.Class_base, Func_traits_from_typedef {
 
     public override vx_core.Func_traits_from_typedef vx_new(params Object vals) {
       Class_traits_from_typedef output = new Class_traits_from_typedef();
@@ -26939,11 +26937,11 @@ namespace vx_core {
    * @return {any}
    * (func type<-any)
    */
-  public static interface Func_type_from_any  vx_core.Func_any_from_any {
+  public static interface Func_type_from_any : vx_core.Func_any_from_any {
     public vx_core.Type_any vx_type_from_any(vx_core.Type_any value);
   }
 
-  public static class Class_type_from_any  vx_core.Class_base implements Func_type_from_any {
+  class Class_type_from_any : vx_core.Class_base, Func_type_from_any {
 
     public override vx_core.Func_type_from_any vx_new(params Object vals) {
       Class_type_from_any output = new Class_type_from_any();
@@ -27027,11 +27025,11 @@ namespace vx_core {
    * @return {typedef}
    * (func typedef<-any)
    */
-  public static interface Func_typedef_from_any  vx_core.Func_any_from_any {
+  public static interface Func_typedef_from_any : vx_core.Func_any_from_any {
     public vx_core.Type_typedef vx_typedef_from_any(vx_core.Type_any val);
   }
 
-  public static class Class_typedef_from_any  vx_core.Class_base implements Func_typedef_from_any {
+  class Class_typedef_from_any : vx_core.Class_base, Func_typedef_from_any {
 
     public override vx_core.Func_typedef_from_any vx_new(params Object vals) {
       Class_typedef_from_any output = new Class_typedef_from_any();
@@ -27118,11 +27116,11 @@ namespace vx_core {
    * @return {typedef}
    * (func typedef<-type)
    */
-  public static interface Func_typedef_from_type  vx_core.Func_any_from_any {
+  public static interface Func_typedef_from_type : vx_core.Func_any_from_any {
     public vx_core.Type_typedef vx_typedef_from_type(vx_core.Type_any val);
   }
 
-  public static class Class_typedef_from_type  vx_core.Class_base implements Func_typedef_from_type {
+  class Class_typedef_from_type : vx_core.Class_base, Func_typedef_from_type {
 
     public override vx_core.Func_typedef_from_type vx_new(params Object vals) {
       Class_typedef_from_type output = new Class_typedef_from_type();
@@ -27206,11 +27204,11 @@ namespace vx_core {
    * @return {string}
    * (func typename<-any)
    */
-  public static interface Func_typename_from_any  vx_core.Func_any_from_any {
+  public static interface Func_typename_from_any : vx_core.Func_any_from_any {
     public vx_core.Type_string vx_typename_from_any(vx_core.Type_any value);
   }
 
-  public static class Class_typename_from_any  vx_core.Class_base implements Func_typename_from_any {
+  class Class_typename_from_any : vx_core.Class_base, Func_typename_from_any {
 
     public override vx_core.Func_typename_from_any vx_new(params Object vals) {
       Class_typename_from_any output = new Class_typename_from_any();
@@ -27297,11 +27295,11 @@ namespace vx_core {
    * @return {string}
    * (func typename<-type)
    */
-  public static interface Func_typename_from_type  vx_core.Func_any_from_any {
+  public static interface Func_typename_from_type : vx_core.Func_any_from_any {
     public vx_core.Type_string vx_typename_from_type(vx_core.Type_any type);
   }
 
-  public static class Class_typename_from_type  vx_core.Class_base implements Func_typename_from_type {
+  class Class_typename_from_type : vx_core.Class_base, Func_typename_from_type {
 
     public override vx_core.Func_typename_from_type vx_new(params Object vals) {
       Class_typename_from_type output = new Class_typename_from_type();
@@ -27388,11 +27386,11 @@ namespace vx_core {
    * @return {string}
    * (func typename<-typedef)
    */
-  public static interface Func_typename_from_typedef  vx_core.Func_any_from_any {
+  public static interface Func_typename_from_typedef : vx_core.Func_any_from_any {
     public vx_core.Type_string vx_typename_from_typedef(vx_core.Type_typedef vtypedef);
   }
 
-  public static class Class_typename_from_typedef  vx_core.Class_base implements Func_typename_from_typedef {
+  class Class_typename_from_typedef : vx_core.Class_base, Func_typename_from_typedef {
 
     public override vx_core.Func_typename_from_typedef vx_new(params Object vals) {
       Class_typename_from_typedef output = new Class_typename_from_typedef();
@@ -27484,11 +27482,11 @@ namespace vx_core {
    * @return {stringlist}
    * (func typenames<-typelist)
    */
-  public static interface Func_typenames_from_typelist  vx_core.Func_any_from_any {
+  public static interface Func_typenames_from_typelist : vx_core.Func_any_from_any {
     public vx_core.Type_stringlist vx_typenames_from_typelist(vx_core.Type_typelist typelist);
   }
 
-  public static class Class_typenames_from_typelist  vx_core.Class_base implements Func_typenames_from_typelist {
+  class Class_typenames_from_typelist : vx_core.Class_base, Func_typenames_from_typelist {
 
     public override vx_core.Func_typenames_from_typelist vx_new(params Object vals) {
       Class_typenames_from_typelist output = new Class_typenames_from_typelist();
@@ -27580,11 +27578,11 @@ namespace vx_core {
    * @return {user}
    * (func user<-context)
    */
-  public static interface Func_user_from_context  vx_core.Type_func, vx_core.Type_replfunc {
+  public static interface Func_user_from_context : vx_core.Type_func, vx_core.Type_replfunc {
     public vx_core.Type_user vx_user_from_context(vx_core.Type_context context);
   }
 
-  public static class Class_user_from_context  vx_core.Class_base implements Func_user_from_context {
+  class Class_user_from_context : vx_core.Class_base, Func_user_from_context {
 
     public override vx_core.Func_user_from_context vx_new(params Object vals) {
       Class_user_from_context output = new Class_user_from_context();

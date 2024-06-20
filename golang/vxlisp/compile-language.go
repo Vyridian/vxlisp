@@ -51,6 +51,8 @@ func NewLangCsharp() *vxlang {
 	output.pkgref = "."
 	output.indent = "  "
 	output.lineend = ";"
+	output.itfext = ":"
+	output.classext = ":"
 	output.typeref = "."
 	return output
 }
@@ -115,7 +117,19 @@ func NewLangSwift() *vxlang {
 }
 
 func LangAsType(lang *vxlang, svar string, typ *vxtype) string {
-	return LangAsTypeText(lang, svar, LangNameTypeFullFromType(lang, typ))
+	typetext := ""
+	switch typ {
+	case rawlisttype:
+		switch lang.name {
+		case "java":
+			typetext = "List<?>"
+		default:
+			typetext = LangNameTypeFullFromType(lang, typ)
+		}
+	default:
+		typetext = LangNameTypeFullFromType(lang, typ)
+	}
+	return LangAsTypeText(lang, svar, typetext)
 }
 
 func LangAsTypeText(lang *vxlang, svar string, stype string) string {
@@ -129,18 +143,32 @@ func LangAsTypeText(lang *vxlang, svar string, stype string) string {
 	return output
 }
 
-func LangFolderCopyTestdataFromProjectPath(project *vxproject, targetpath string) *vxmsgblock {
-	msgblock := NewMsgBlock("LangFileCopyTestdataFromProjectPath")
-	sourcepath := PathFromProjectPath(project, "./testdata")
-	if BooleanExistsFromPath(sourcepath) {
-		msgs := FolderCopyFromSourceTarget(sourcepath, targetpath)
-		msgblock = MsgblockAddBlock(msgblock, msgs)
+func LangClassHeaderFromConst(lang *vxlang, cnst *vxconst, indent int) string {
+	output := ""
+	lineindent := LangIndent(lang, indent, true)
+	constname := "Const_" + LangFromName(cnst.alias)
+	extends := LangNameClassFullFromType(lang, cnst.vxtype)
+	switch lang.name {
+	case "csharp", "kotlin":
+		output = lineindent + "class " + constname + " : " + extends + ", vx_core.vx_Type_const {"
+	case "java":
+		output = lineindent + "public static class " + constname + " extends " + extends + " implements Core.vx_Type_const {"
 	}
-	for _, subproject := range project.listproject {
-		msgs := LangFolderCopyTestdataFromProjectPath(subproject, targetpath)
-		msgblock = MsgblockAddBlock(msgblock, msgs)
+	return output
+}
+
+func LangClassHeaderFromFunc(lang *vxlang, fnc *vxfunc, indent int) string {
+	output := ""
+	lineindent := LangIndent(lang, indent, true)
+	funcname := LangNameFromFunc(fnc)
+	extends := LangNameFromPkgNameDot(lang, "vx/core") + "Class_base"
+	switch lang.name {
+	case "csharp", "kotlin":
+		output = lineindent + "class Class_" + funcname + " : " + extends + ", Func_" + funcname + " {"
+	case "java":
+		output = lineindent + "public static class Class_" + funcname + " extends " + extends + " implements Func_" + funcname + " {"
 	}
-	return msgblock
+	return output
 }
 
 func LangClassHeaderFromType(lang *vxlang, typ *vxtype, indent int) string {
@@ -368,11 +396,37 @@ func LangFinalVar(lang *vxlang) string {
 	return output
 }
 
+func LangFolderCopyTestdataFromProjectPath(project *vxproject, targetpath string) *vxmsgblock {
+	msgblock := NewMsgBlock("LangFileCopyTestdataFromProjectPath")
+	sourcepath := PathFromProjectPath(project, "./testdata")
+	if BooleanExistsFromPath(sourcepath) {
+		msgs := FolderCopyFromSourceTarget(sourcepath, targetpath)
+		msgblock = MsgblockAddBlock(msgblock, msgs)
+	}
+	for _, subproject := range project.listproject {
+		msgs := LangFolderCopyTestdataFromProjectPath(subproject, targetpath)
+		msgblock = MsgblockAddBlock(msgblock, msgs)
+	}
+	return msgblock
+}
+
+func LangForListHeader(lang *vxlang, forvar string, typ *vxtype, listvar string, indent int) string {
+	output := ""
+	sindent := "\n" + StringRepeat("  ", indent)
+	switch lang.name {
+	case "csharp":
+		output = sindent + "foreach (" + LangNameTypeFullFromType(lang, typ) + " " + forvar + " in " + listvar + ") {"
+	case "java":
+		output = sindent + "for (" + LangNameTypeFullFromType(lang, typ) + " " + forvar + " : " + listvar + ") {"
+	}
+	return output
+}
+
 func LangFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string, *vxmsgblock) {
 	msgblock := NewMsgBlock("LangFromConst")
-	var output = ""
-	var doc = ""
-	var override = LangOverride(lang)
+	output := ""
+	doc := ""
+	override := LangOverride(lang)
 	path := cnst.pkgname + "/" + cnst.name
 	doc += "Constant: " + cnst.name + "\n"
 	if cnst.doc != "" {
@@ -493,7 +547,6 @@ func LangFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string,
 			}
 		}
 	}
-	extends := LangNameClassFullFromType(lang, cnsttype)
 	e_type := ""
 	switch NameFromConst(cnst) {
 	case "vx/core/false":
@@ -504,7 +557,7 @@ func LangFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string,
 		"\n  /**" +
 		"\n   * " + StringFromStringIndent(doc, "   * ") +
 		"\n   */" +
-		"\n  public static class " + cnstclassname + " " + lang.classext + " " + extends + " implements " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_Type_const {" +
+		LangClassHeaderFromConst(lang, cnst, 1) +
 		"\n" +
 		"\n    " + override +
 		"\n    public " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_constdef vx_constdef() {" +
@@ -551,7 +604,7 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 	staticfuncs := ""
 	f_suppresswarnings := ""
 	path := fnc.pkgname + "/" + fnc.name + LangIndexFromFunc(fnc)
-	genericdefinition := LangGenericDefinitionFromFunc(lang, fnc)
+	genericdefinition1, genericdefinition2, genericdefinition3 := LangGenericDefinitionFromFunc(lang, fnc)
 	if fnc.isgeneric {
 		switch NameFromFunc(fnc) {
 		case "vx/core/copy", "vx/core/empty", "vx/core/new":
@@ -858,6 +911,7 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 			defaultvalue = lineindent + returntype + " output = " + LangNameEFromType(lang, fnc.vxtype) + ";"
 		}
 	}
+	funcprefix := LangNameFromFunc(fnc)
 	interfacefunc := LangInterfaceFromFunc(lang, fnc)
 	doc := LangDocFromFunc(fnc)
 	vxtypefunc := NewTypeFromFunc(fnc)
@@ -880,15 +934,15 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 	output := "" +
 		doc +
 		interfacefunc +
-		"\n  public static class Class_" + funcname + " " + lang.classext + " " + LangNameFromPkgNameDot(lang, "vx/core") + "Class_base implements Func_" + funcname + " {" +
+		LangClassHeaderFromFunc(lang, fnc, 1) +
 		"\n" +
 		instancevars +
-		LangFuncHeader(lang, funcvxnew, false) +
+		LangFuncHeader(lang, funcprefix, funcvxnew, false) +
 		"\n      Class_" + funcname + " output = new Class_" + funcname + "();" +
 		"\n      return output;" +
 		"\n    }" +
 		"\n" +
-		LangFuncHeader(lang, funcvxcopy, false) +
+		LangFuncHeader(lang, funcprefix, funcvxcopy, false) +
 		"\n      Class_" + funcname + " output = new Class_" + funcname + "();" +
 		"\n      return output;" +
 		"\n    }" +
@@ -916,7 +970,7 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 		interfacefn +
 		instancefuncs +
 		"\n    " + override +
-		"\n    public " + genericdefinition + functypetext + " vx_" + funcname + "(" + strings.Join(listargtype, ", ") + ") {" +
+		"\n    public " + genericdefinition1 + functypetext + " vx_" + funcname + genericdefinition2 + "(" + strings.Join(listargtype, ", ") + ")" + genericdefinition3 + " {" +
 		staticfuncs +
 		returnvalue +
 		"\n    }" +
@@ -927,7 +981,7 @@ func LangFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
 		"\n  public static " + LangFinalVar(lang) + "Func_" + funcname + " t_" + funcname + " = new " + LangNameFromPkgName(lang, fnc.pkgname) + ".Class_" + funcname + "();" +
 		"\n" +
 		f_suppresswarnings +
-		"\n  public static " + genericdefinition + functypetext + " f_" + funcname + "(" + strings.Join(listargtype, ", ") + ") {" +
+		"\n  public static " + genericdefinition1 + functypetext + " f_" + funcname + genericdefinition2 + "(" + strings.Join(listargtype, ", ") + ")" + genericdefinition3 + " {" +
 		debugtop +
 		defaultvalue +
 		permissiontop +
@@ -1064,7 +1118,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 	switch NameFromType(typ) {
 	case "vx/core/any":
 		valnew += "" +
-			"\n      for (Object valsub : vals) {" +
+			LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
 			"\n        if (" + LangIsType(lang, "valsub", msgblocktype) + ") {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
 			"\n        } else if (" + LangIsType(lang, "valsub", msgtype) + ") {" +
@@ -1083,13 +1137,29 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 	case "vx/core/const":
 	case "vx/core/list":
 		extendinterface = LangNameFromPkgNameDot(lang, "vx/core") + "Type_anytype"
+
+		funcvxany := NewFunc()
+		funcvxany.name = "vx_any"
+		funcvxany.vxtype = rawlisttype1
+		funcvxany.isgeneric = true
+		funcvxany.generictype = rawlisttype1
+
+		funcvxanyfromlist := NewFunc()
+		funcvxanyfromlist.name = "vx_any_from_list"
+		funcvxanyfromlist.vxtype = anytype
+		funcvxanyfromlist.isgeneric = true
+		funcvxanyfromlist.generictype = anytype1
+		argindex := NewArg("index")
+		argindex.vxtype = rawinttype
+		argsfuncvxanyfromlist := NewListArg()
+		argsfuncvxanyfromlist = append(argsfuncvxanyfromlist, argindex)
+		funcvxanyfromlist.listarg = argsfuncvxanyfromlist
+
 		instancefuncs += "" +
-			"\n" +
-			"\n    public <T extends " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any> List<T> vx_any(" + LangFinalArg(lang) + "T generic_any_1) {" +
+			LangFuncHeader(lang, typename, funcvxany, false) +
 			"\n      return " + LangNameFromPkgNameDot(lang, "vx/core") + "arraylist_from_arraylist(generic_any_1, this.vx_list());" +
 			"\n    }" +
-			"\n" +
-			"\n    public <T extends " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any> T vx_any_from_list(" + LangFinalArg(lang) + "T generic_any_1, " + LangFinalArg(lang) + "int index) {" +
+			LangFuncHeader(lang, typename, funcvxanyfromlist, false) +
 			"\n      return vx_any_from_list(generic_any_1, this.vx_list(), index);" +
 			"\n    }" +
 			"\n"
@@ -1137,7 +1207,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		valcopy += "" +
 			"\n      boolean booleanval = val.vx_boolean();"
 		valnew = "" +
-			"\n      for (Object valsub : vals) {" +
+			LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
 			"\n        if (" + LangIsType(lang, "valsub", msgblocktype) + ") {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
 			"\n        } else if (" + LangIsType(lang, "valsub", msgtype) + ") {" +
@@ -1166,7 +1236,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		valcopy += "" +
 			"\n      String sval = val.vx_string();"
 		valnew = "" +
-			"\n      for (Object valsub : vals) {" +
+			LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
 			"\n        if (" + LangIsType(lang, "valsub", msgblocktype) + ") {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
 			"\n        } else if (" + LangIsType(lang, "valsub", msgtype) + ") {" +
@@ -1193,7 +1263,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		valcopy += "" +
 			"\n      float floatval = val.vx_float();"
 		valnew = "" +
-			"\n      for (Object valsub : vals) {" +
+			LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
 			"\n        if (" + LangIsType(lang, "valsub", msgblocktype) + ") {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
 			"\n        } else if (" + LangIsType(lang, "valsub", msgtype) + ") {" +
@@ -1217,9 +1287,9 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			"\n        } else if (" + LangIsType(lang, "valsub", rawfloattype) + ") {" +
 			"\n          ischanged = true;" +
 			"\n          floatval += " + LangAsType(lang, "valsub", rawfloattype) + ";" +
-			"\n        } else if (" + LangIsType(lang, "valsub", rawinttype) + ") {" +
+			"\n        } else if (" + LangIsType(lang, "valsub", rawintegertype) + ") {" +
 			"\n          ischanged = true;" +
-			"\n          floatval += " + LangAsType(lang, "valsub", rawinttype) + ";" +
+			"\n          floatval += " + LangAsType(lang, "valsub", rawintegertype) + ";" +
 			"\n        } else if (" + LangIsType(lang, "valsub", rawstringtype) + ") {" +
 			"\n          ischanged = true;" +
 			"\n          floatval += Float.parseFloat(" + LangAsType(lang, "valsub", rawstringtype) + ");" +
@@ -1238,7 +1308,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		valcopy += "" +
 			"\n      int intval = val.vx_int();"
 		valnew = "" +
-			"\n      for (Object valsub : vals) {" +
+			LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
 			"\n        if (" + LangIsType(lang, "valsub", msgblocktype) + ") {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
 			"\n        } else if (" + LangIsType(lang, "valsub", msgtype) + ") {" +
@@ -1247,9 +1317,9 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			LangVar(lang, "valnum", inttype, LangAsType(lang, "valsub", inttype), 5, false, false) +
 			"\n          ischanged = true;" +
 			"\n          intval += valnum.vx_int();" +
-			"\n        } else if (" + LangIsType(lang, "valsub", rawinttype) + ") {" +
+			"\n        } else if (" + LangIsType(lang, "valsub", rawintegertype) + ") {" +
 			"\n          ischanged = true;" +
-			"\n          intval += " + LangAsType(lang, "valsub", rawinttype) + ";" +
+			"\n          intval += " + LangAsType(lang, "valsub", rawintegertype) + ";" +
 			"\n        } else if (" + LangIsType(lang, "valsub", rawstringtype) + ") {" +
 			LangVar(lang, "valstring", rawstringtype, LangAsType(lang, "valsub", rawstringtype), 5, false, false) +
 			"\n          ischanged = true;" +
@@ -1271,7 +1341,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			"\n      StringBuilder sb = new StringBuilder(val.vx_string());"
 		valnew = "" +
 			"\n      " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_msg msg;" +
-			"\n      for (Object valsub : vals) {" +
+			LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
 			"\n        if (" + LangIsType(lang, "valsub", msgblocktype) + ") {" +
 			"\n          msgblock = msgblock.vx_copy(valsub);" +
 			"\n        } else if (" + LangIsType(lang, "valsub", msgtype) + ") {" +
@@ -1301,8 +1371,8 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			"\n            ischanged = true;" +
 			"\n            sb.append(ssub2);" +
 			"\n          }" +
-			"\n        } else if (" + LangIsType(lang, "valsub", rawinttype) + ") {" +
-			LangVar(lang, "ssub2", rawinttype, LangAsType(lang, "valsub", rawinttype), 5, false, false) +
+			"\n        } else if (" + LangIsType(lang, "valsub", rawintegertype) + ") {" +
+			LangVar(lang, "ssub2", rawinttype, LangAsType(lang, "valsub", rawintegertype), 5, false, false) +
 			"\n          ischanged = true;" +
 			"\n          sb.append(ssub2);" +
 			"\n        } else if (" + LangIsType(lang, "valsub", rawfloattype) + ") {" +
@@ -1380,19 +1450,19 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		case "msgblocklist":
 			valnew = "" +
 				"\n      " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_msg msg;" +
-				"\n      for (Object valsub : vals) {" +
+				LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
 				"\n        if (" + LangIsType(lang, "valsub", msgtype) + ") {" +
 				"\n          msgblock = msgblock.vx_copy(valsub);"
 		case "msglist":
 			valnew = "" +
 				"\n      " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_msg msg;" +
-				"\n      for (Object valsub : vals) {" +
+				LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
 				"\n        if (" + LangIsType(lang, "valsub", msgblocktype) + ") {" +
 				"\n          msgblock = msgblock.vx_copy(valsub);"
 		default:
 			valnew = "" +
 				"\n      " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_msg msg;" +
-				"\n      for (Object valsub : vals) {" +
+				LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
 				"\n        if (" + LangIsType(lang, "valsub", msgblocktype) + ") {" +
 				"\n          msgblock = msgblock.vx_copy(valsub);" +
 				"\n        } else if (" + LangIsType(lang, "valsub", msgtype) + ") {" +
@@ -1434,8 +1504,8 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			"\n          ischanged = true;" +
 			"\n          listval.addAll(multi.vx_list" + allowname + "());" +
 			"\n        } else if (" + LangIsType(lang, "valsub", rawlisttype) + ") {" +
-			"\n          List<?> listunknown = (List<?>)valsub;" +
-			"\n          for (Object item : listunknown) {" +
+			LangVar(lang, "listunknown", rawlisttype, LangAsType(lang, "valsub", rawlisttype), 5, false, false) +
+			LangForListHeader(lang, "item", rawobjecttype, "listunknown", 5) +
 			"\n            if (" + LangIsType(lang, "item", allowtype) + ") {" +
 			"\n              " + allowclass + " valitem = (" + allowclass + ")item;" +
 			"\n              ischanged = true;" +
@@ -1538,7 +1608,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			"\n      " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_msgblock msgblock = " + LangNameFromPkgNameDot(lang, "vx/core") + "e_msgblock;" +
 			"\n      Map<String, " + allowclass + "> map = new LinkedHashMap<>();" +
 			"\n      Set<String> keys = mapval.keySet();" +
-			"\n      for (String key : keys) {" +
+			LangForListHeader(lang, "key", rawstringtype, "keys", 3) +
 			"\n        " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any val = mapval.get(key);" +
 			"\n        if (" + LangIsType(lang, "val", allowtype) + ") {" +
 			"\n          " + allowclass + " castval = (" + allowclass + ")val;" +
@@ -1560,7 +1630,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		valnew = "" +
 			"\n      " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_msg msg;" +
 			"\n      String key = \"\";" +
-			"\n      for (Object valsub : vals) {" +
+			LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
 			"\n        if (" + LangIsType(lang, "valsub", msgblocktype) + ") {" +
 			"\n          msgblock = " + LangNameFromPkgNameDot(lang, "vx/core") + "t_msgblock.vx_copy(msgblock, valsub);" +
 			"\n        } else if (" + LangIsType(lang, "valsub", msgtype) + ") {" +
@@ -1594,7 +1664,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 					allowedtype = rawbooleantype
 					castval = LangNameFromPkgNameDot(lang, "vx/core") + "t_boolean.vx_new(valsub);"
 				case "vx/core/int":
-					allowedtype = rawinttype
+					allowedtype = rawintegertype
 					castval = LangNameFromPkgNameDot(lang, "vx/core") + "t_int.vx_new(valsub);"
 				case "vx/core/float":
 					allowedtype = rawfloattype
@@ -1643,9 +1713,9 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			"\n        }" +
 			"\n        output = work;" +
 			"\n      }"
-		if extendinterface == "" {
-			extendinterface = LangNameFromPkgNameDot(lang, "vx/core") + "Type_map"
-		}
+			//		if extendinterface == "" {
+			//			extendinterface = LangNameFromPkgNameDot(lang, "vx/core") + "Type_map"
+			//		}
 		if len(typ.allowtypes) == 0 && len(typ.allowfuncs) == 0 && len(typ.allowvalues) == 0 {
 			MsgLog("Missing allowed types", typ.name)
 		}
@@ -1707,7 +1777,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 						"\n              vx_p_" + argname + " = " + LangNameFromPkgNameDot(lang, "vx/core") + "t_boolean.vx_new(valsub);"
 				case "vx/core/int":
 					argalt = "" +
-						"\n            } else if (" + LangIsType(lang, "valsub", rawinttype) + ") {" +
+						"\n            } else if (" + LangIsType(lang, "valsub", rawintegertype) + ") {" +
 						"\n              ischanged = true;" +
 						"\n              vx_p_" + argname + " = " + LangNameFromPkgNameDot(lang, "vx/core") + "t_int.vx_new(valsub);"
 				case "vx/core/float":
@@ -1779,7 +1849,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 						"\n            vx_p_" + lastargname + " = " + LangNameFromPkgNameDot(lang, "vx/core") + "t_boolean.vx_new(valsub);"
 				case "vx/core/int":
 					defaultkey += "" +
-						"\n          } else if (" + LangIsType(lang, "valsub", rawinttype) + ") { // default property" +
+						"\n          } else if (" + LangIsType(lang, "valsub", rawintegertype) + ") { // default property" +
 						"\n            ischanged = true;" +
 						"\n            vx_p_" + lastargname + " = " + LangNameFromPkgNameDot(lang, "vx/core") + "t_int.vx_new(valsub);"
 				case "vx/core/float":
@@ -1817,7 +1887,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			case "vx/core/msg":
 				valnew = "" +
 					"\n      String key = \"\";" +
-					"\n      for (Object valsub : vals) {" +
+					LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
 					"\n        if (key == \"\") {" +
 					"\n          if (" + LangIsType(lang, "valsub", stringtype) + ") {" +
 					"\n            " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_string valstr = (" + LangNameFromPkgNameDot(lang, "vx/core") + "Type_string)valsub;" +
@@ -1841,7 +1911,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 				valnew = "" +
 					"\n      String key = \"\";" +
 					"\n      " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_msg msg;" +
-					"\n      for (Object valsub : vals) {" +
+					LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
 					"\n        if (" + LangIsType(lang, "valsub", msgblocktype) + ") {" +
 					"\n          if (valsub != " + LangNameFromPkgNameDot(lang, "vx/core") + "e_msgblock) {" +
 					"\n            vx_p_msgblocks = vx_p_msgblocks.vx_copy(valsub);" +
@@ -1900,7 +1970,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 					validkeys +
 					"\n      String key = \"\";" +
 					"\n      " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_msg msg;" +
-					"\n      for (Object valsub : vals) {" +
+					LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
 					"\n        if (" + LangIsType(lang, "valsub", msgblocktype) + ") {" +
 					"\n          msgblock = msgblock.vx_copy(valsub);" +
 					"\n        } else if (" + LangIsType(lang, "valsub", msgtype) + ") {" +
@@ -2044,11 +2114,11 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		LangClassHeaderFromType(lang, typ, 1) +
 		"\n" +
 		instancefuncs +
-		LangFuncHeader(lang, funcvxnew, false) +
+		LangFuncHeader(lang, typename, funcvxnew, false) +
 		"\n      return e_" + typename + ".vx_copy(vals);" +
 		"\n    }" +
 		"\n" +
-		LangFuncHeader(lang, funcvxcopy, false) +
+		LangFuncHeader(lang, typename, funcvxcopy, false) +
 		"\n      Type_" + typename + " output = this;" +
 		valcopy +
 		valnew +
@@ -2573,18 +2643,71 @@ func LangArgHeader(lang *vxlang, arg vxarg) string {
 	return output
 }
 
-func LangFuncHeader(lang *vxlang, fnc *vxfunc, isinterface bool) string {
+func LangFuncHeader(lang *vxlang, prefix string, fnc *vxfunc, isinterface bool) string {
 	output := ""
 	funcname := fnc.name
-	typ := fnc.vxtype
-	typename := LangNameTypeFullFromType(lang, typ)
-	arglist := fnc.listarg
-	var listsarg []string
-	for _, arg := range arglist {
-		sarg := LangArgHeader(lang, arg)
-		listsarg = append(listsarg, sarg)
+	final := LangFinalArg(lang)
+	returntype := LangNameTypeFullFromTypeSimple(lang, fnc.vxtype, false)
+	var listargtext []string
+	if fnc.generictype != nil {
+		returntype = LangGenericFromType(lang, fnc.generictype)
+		generictype := returntype
+		switch fnc.generictype {
+		case rawlisttype1, rawmaptype1:
+			generictype = "T"
+		}
+		switch NameFromFunc(fnc) {
+		case "vx/core/new", "vx/core/copy", "vx/core/empty":
+		default:
+			listargtext = append(listargtext, final+generictype+" generic_any_1")
+		}
+		if fnc.context {
+			listargtext = append(listargtext, final+LangNameTypeFromType(lang, contexttype)+" context")
+		}
+		for _, arg := range fnc.listarg {
+			argtype := arg.vxtype
+			argtypename := ""
+			if argtype.isgeneric {
+				argtypename = LangGenericFromType(lang, argtype)
+			} else {
+				argtypename = LangNameTypeFromType(lang, argtype)
+			}
+			argname := LangFromName(arg.alias)
+			isskip := false
+			switch NameFromFunc(fnc) {
+			case "vx/core/let", "vx/core/let-async":
+				// args is not included in let
+				if argname == "args" {
+					isskip = true
+				}
+			}
+			if !isskip {
+				listargtext = append(listargtext, final+argtypename+" "+argname)
+			}
+		}
+	} else {
+		if fnc.context {
+			listargtext = append(listargtext, final+LangNameTypeFromType(lang, contexttype)+" context")
+		}
+		for _, arg := range fnc.listarg {
+			argtype := arg.vxtype
+			argtypename := LangNameTypeFromTypeSimple(lang, argtype, true)
+			argname := LangFromName(arg.alias)
+			params1 := ""
+			params2 := ""
+			if arg.multi {
+				switch lang.name {
+				case "csharp":
+					params1 = "params "
+				case "java":
+					params2 = "..."
+				}
+			}
+			listargtext = append(listargtext, final+params1+argtypename+params2+" "+argname)
+		}
 	}
-	sarglist := StringFromListStringJoin(listsarg, ", ")
+	argtext := StringFromListStringJoin(listargtext, ", ")
+	genericdefinition1, genericdefinition2, genericdefinition3 := LangGenericDefinitionFromFunc(lang, fnc)
 	override1 := ""
 	override2 := ""
 	if fnc.isoverride {
@@ -2602,9 +2725,14 @@ func LangFuncHeader(lang *vxlang, fnc *vxfunc, isinterface bool) string {
 	} else {
 		sopen = " {"
 	}
+	funcprefix := ""
+	switch lang.name {
+	case "cpp":
+		funcprefix = prefix + "::"
+	}
 	output = "" +
 		override1 +
-		"\n    public " + override2 + typename + " " + funcname + "(" + sarglist + ")" + sinterface + sopen
+		"\n    public " + override2 + genericdefinition1 + returntype + " " + funcprefix + funcname + genericdefinition2 + "(" + argtext + ")" + genericdefinition3 + sinterface + sopen
 	return output
 }
 
@@ -2618,35 +2746,67 @@ func LangFuncHeaderInterface(lang *vxlang, fnc *vxfunc, ispackage bool) string {
 	return output
 }
 
-func LangGenericDefinitionFromFunc(lang *vxlang, fnc *vxfunc) string {
-	output := ""
+func LangGenericDefinitionFromFunc(lang *vxlang, fnc *vxfunc) (string, string, string) {
+	output1 := ""
+	output2 := ""
+	output3 := ""
 	var mapgeneric = make(map[string]string)
 	if fnc.generictype != nil {
-		returntype := LangGenericFromType(lang, fnc.generictype)
-		mapgeneric[fnc.vxtype.name] = returntype + " extends " + LangNameTypeFromTypeSimple(lang, fnc.vxtype, true)
+		returntype := ""
+		typename := ""
+		switch fnc.generictype {
+		case rawlisttype1, rawmaptype1:
+			typename = LangNameTypeFromTypeSimple(lang, anytype, true)
+			returntype = "T"
+		default:
+			typename = LangNameTypeFromTypeSimple(lang, fnc.vxtype, true)
+			returntype = LangGenericFromType(lang, fnc.generictype)
+		}
+		mapgeneric[returntype] = returntype + " " + lang.classext + " " + typename
 		for _, arg := range fnc.listarg {
 			argtype := arg.vxtype
 			if !argtype.isfunc {
 				if argtype.isgeneric {
-					_, ok := mapgeneric[argtype.name]
+					arggenericname := ""
+					argtypename := ""
+					switch argtype {
+					case rawlisttype1, rawmaptype1:
+						arggenericname = "T"
+						argtypename = LangNameTypeFromTypeSimple(lang, anytype, true)
+					default:
+						arggenericname = LangGenericFromType(lang, argtype)
+						argtypename = LangNameTypeFromTypeSimple(lang, arg.vxtype, true)
+					}
+					_, ok := mapgeneric[arggenericname]
 					if !ok {
-						argtypename := LangGenericFromType(lang, argtype)
-						worktext := argtypename + " extends " + LangNameTypeFromTypeSimple(lang, arg.vxtype, true)
-						mapgeneric[argtype.name] = worktext
+						worktext := arggenericname + " " + lang.classext + " " + argtypename
+						mapgeneric[arggenericname] = worktext
 					}
 				}
 			}
 		}
 		generickeys := ListStringKeysFromStringMap(mapgeneric)
-		for _, generickey := range generickeys {
-			if output != "" {
-				output += ", "
+		switch lang.name {
+		case "csharp":
+			for _, generickey := range generickeys {
+				if output2 != "" {
+					output2 += ", "
+				}
+				output2 += generickey
+				output3 += " where " + mapgeneric[generickey]
 			}
-			output += mapgeneric[generickey]
+			output2 = "<" + output2 + ">"
+		case "java":
+			for _, generickey := range generickeys {
+				if output1 != "" {
+					output1 += ", "
+				}
+				output1 += mapgeneric[generickey]
+			}
+			output1 = "<" + output1 + "> "
 		}
-		output = "<" + output + "> "
 	}
-	return output
+	return output1, output2, output3
 }
 
 func LangGenericFromType(lang *vxlang, typ *vxtype) string {
@@ -2671,6 +2831,10 @@ func LangGenericFromType(lang *vxlang, typ *vxtype) string {
 			output = "O"
 		case "map-3":
 			output = "P"
+		case "rawlist-1":
+			output = "List<T>"
+		case "rawmap-1":
+			output = "Map<String, T>"
 		case "struct-1":
 			output = "Q"
 		case "struct-2":
@@ -2838,8 +3002,8 @@ func LangInterfaceFromType(lang *vxlang, typ *vxtype) string {
 	funcvxcopy.vxtype = typ
 	funcvxcopy.listarg = arglist
 	basics := "" +
-		LangFuncHeader(lang, funcvxnew, true) +
-		LangFuncHeader(lang, funcvxcopy, true) +
+		LangFuncHeader(lang, typename, funcvxnew, true) +
+		LangFuncHeader(lang, typename, funcvxcopy, true) +
 		"\n    public " + typename + " vx_empty();" +
 		"\n    public " + typename + " vx_type();"
 	createtext, _ := LangFromValue(lang, typ.createvalue, "", emptyfunc, 0, true, false, "")
@@ -2937,15 +3101,15 @@ func LangInterfaceFromType(lang *vxlang, typ *vxtype) string {
 		switch NameFromType(typ) {
 		case "vx/core/msg":
 			basics = "" +
-				LangFuncHeader(lang, funcvxnew, true) +
-				LangFuncHeader(lang, funcvxcopy, true) +
+				LangFuncHeader(lang, typename, funcvxnew, true) +
+				LangFuncHeader(lang, typename, funcvxcopy, true) +
 				"\n    public " + typename + " vx_empty();" +
 				"\n    public " + typename + " vx_type();" +
 				"\n    public " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_typedef vx_typedef();"
 		case "vx/core/msgblock":
 			basics = "" +
-				LangFuncHeader(lang, funcvxnew, true) +
-				LangFuncHeader(lang, funcvxcopy, true) +
+				LangFuncHeader(lang, typename, funcvxnew, true) +
+				LangFuncHeader(lang, typename, funcvxcopy, true) +
 				"\n    public " + typename + " vx_empty();" +
 				"\n    public " + typename + " vx_type();" +
 				"\n    public " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_typedef vx_typedef();"
@@ -3071,7 +3235,7 @@ func LangInterfaceFromFunc(lang *vxlang, fnc *vxfunc) string {
 	funcname := LangNameFromFunc(fnc)
 	extends := ""
 	interfaces := ""
-	generictypes := LangGenericDefinitionFromFunc(lang, fnc)
+	genericdefinition1, genericdefinition2, genericdefinition3 := LangGenericDefinitionFromFunc(lang, fnc)
 	returntype := LangNameTypeFromType(lang, fnc.vxtype)
 	var listargtext []string
 	if fnc.generictype != nil {
@@ -3167,7 +3331,14 @@ func LangInterfaceFromFunc(lang *vxlang, fnc *vxfunc) string {
 		}
 	}
 	if fnc.async {
-		returntype = "CompletableFuture<" + returntype + ">"
+		switch lang.name {
+		case "csharp":
+			returntype = "Task<" + returntype + ">"
+		case "java":
+			returntype = "CompletableFuture<" + returntype + ">"
+		default:
+			returntype = "Future<" + returntype + ">"
+		}
 	}
 	if extends == LangNameFromPkgNameDot(lang, "vx/core")+"Type_func" {
 		if fnc.async {
@@ -3177,7 +3348,7 @@ func LangInterfaceFromFunc(lang *vxlang, fnc *vxfunc) string {
 		}
 	}
 	interfaces += "" +
-		"\n    public " + generictypes + returntype + " vx_" + funcname + "(" + argtext + ");"
+		"\n    public " + genericdefinition1 + returntype + " vx_" + funcname + genericdefinition2 + "(" + argtext + ")" + genericdefinition3 + ";"
 	output := "" +
 		"\n  public static interface Func_" + funcname + " " + lang.itfext + " " + extends + " {" +
 		interfaces +
@@ -3383,6 +3554,11 @@ func LangNameFromTypeSimple(lang *vxlang, typ *vxtype, simple bool) string {
 	case rawinttype:
 		switch lang.name {
 		case "csharp", "java":
+			name = "int"
+		}
+	case rawintegertype:
+		switch lang.name {
+		case "csharp", "java":
 			name = "Integer"
 		}
 	case rawlisttype:
@@ -3483,6 +3659,8 @@ func LangNameTypeFullFromTypeSimple(lang *vxlang, typ *vxtype, simple bool) stri
 	case rawfloattype:
 		name = "Float"
 	case rawinttype:
+		name = "int"
+	case rawintegertype:
 		name = "Integer"
 	case rawlisttype:
 		name = "List"
@@ -4063,7 +4241,17 @@ func LangVar(lang *vxlang, varname string, vartype *vxtype, varvalue string, ind
 		output += ";"
 	case "java":
 		typetext := ""
-		typetext = LangNameTypeFullFromType(lang, vartype)
+		switch vartype {
+		case rawlisttype:
+			switch lang.name {
+			case "java":
+				typetext = "List<?>"
+			default:
+				typetext = LangNameTypeFullFromType(lang, vartype)
+			}
+		default:
+			typetext = LangNameTypeFullFromType(lang, vartype)
+		}
 		if isfuture {
 			typetext = "CompletableFuture<" + typetext + ">"
 		}
@@ -4097,7 +4285,7 @@ func LangVarSet(lang *vxlang, varname string, varvalue string, indent int) strin
 	output += varname
 	output += " = " + varvalue
 	switch lang.name {
-	case "java":
+	case "csharp", "java":
 		output += ";"
 	}
 	return output

@@ -88,19 +88,25 @@ var msglisttype = NewType("vx/core/msglist")
 
 var numbertype = NewType("vx/core/number")
 
-var rawbooleantype = NewType("boolean")
+var rawbooleantype = NewType("rawboolean")
 
-var rawfloattype = NewType("float")
+var rawfloattype = NewType("rawfloat")
 
-var rawinttype = NewType("int")
+var rawinttype = NewType("rawint")
 
-var rawlisttype = NewType("list")
+var rawintegertype = NewType("rawinteger")
 
-var rawmaptype = NewType("map")
+var rawlisttype = NewType("rawlist")
 
-var rawobjecttype = NewType("object")
+var rawlisttype1 = NewType("rawlist-1")
 
-var rawstringtype = NewType("string")
+var rawmaptype = NewType("rawmap")
+
+var rawmaptype1 = NewType("rawmap-1")
+
+var rawobjecttype = NewType("rawobject")
+
+var rawstringtype = NewType("rawstring")
 
 var sessiontype = NewTypeStruct("vx/core/session")
 

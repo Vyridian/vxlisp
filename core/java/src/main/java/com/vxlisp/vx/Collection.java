@@ -531,7 +531,7 @@ public final class Collection {
    * (func any<-map-pos)
    */
   public static interface Func_any_from_map_pos extends Core.Type_func, Core.Type_replfunc {
-    public <T extends Core.Type_any, N extends Core.Type_map> T vx_any_from_map_pos(final T generic_any_1, final N map, final Core.Type_int pos);
+    public <N extends Core.Type_map, T extends Core.Type_any> T vx_any_from_map_pos(final T generic_any_1, final N map, final Core.Type_int pos);
   }
 
   public static class Class_any_from_map_pos extends Core.Class_base implements Func_any_from_map_pos {
@@ -589,7 +589,7 @@ public final class Collection {
     }
 
     @Override
-    public <T extends Core.Type_any, N extends Core.Type_map> T vx_any_from_map_pos(final T generic_any_1, final N map, final Core.Type_int pos) {
+    public <N extends Core.Type_map, T extends Core.Type_any> T vx_any_from_map_pos(final T generic_any_1, final N map, final Core.Type_int pos) {
       return Collection.f_any_from_map_pos(generic_any_1, map, pos);
     }
 
@@ -598,7 +598,7 @@ public final class Collection {
   public static final Func_any_from_map_pos e_any_from_map_pos = new Collection.Class_any_from_map_pos();
   public static final Func_any_from_map_pos t_any_from_map_pos = new Collection.Class_any_from_map_pos();
 
-  public static <T extends Core.Type_any, N extends Core.Type_map> T f_any_from_map_pos(final T generic_any_1, final N map, final Core.Type_int pos) {
+  public static <N extends Core.Type_map, T extends Core.Type_any> T f_any_from_map_pos(final T generic_any_1, final N map, final Core.Type_int pos) {
     T output = Core.f_empty(generic_any_1);
     output = Core.f_let(
       generic_any_1,
