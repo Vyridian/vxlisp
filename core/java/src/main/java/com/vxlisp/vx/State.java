@@ -194,7 +194,7 @@ public final class State {
    * @return {any-1}
    * (func any-readstate<-mapname-name)
    */
-  public static interface Func_any_readstate_from_mapname_name extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_readstate_from_mapname_name extends Core.Type_func, Core.Type_replfunc {
     public <T extends Core.Type_any> T vx_any_readstate_from_mapname_name(final T generic_any_1, final Core.Type_context context, final Core.Type_string mapname, final Core.Type_string name);
   }
 
@@ -282,7 +282,7 @@ public final class State {
    * @return {any-1}
    * (func any-readstate<-name)
    */
-  public static interface Func_any_readstate_from_name extends Core.Func_any_from_any_context {
+  public interface Func_any_readstate_from_name extends Core.Func_any_from_any_context {
     public <T extends Core.Type_any> T vx_any_readstate_from_name(final T generic_any_1, final Core.Type_context context, final Core.Type_string name);
   }
 
@@ -378,7 +378,7 @@ public final class State {
    * @return {boolean}
    * (func boolean-removestate<-name)
    */
-  public static interface Func_boolean_removestate_from_name extends Core.Func_any_from_any_context {
+  public interface Func_boolean_removestate_from_name extends Core.Func_any_from_any_context {
     public Core.Type_boolean vx_boolean_removestate_from_name(final Core.Type_context context, final Core.Type_string name);
   }
 
@@ -484,7 +484,7 @@ public final class State {
    * @return {boolean}
    * (func boolean-writestate<-mapname-name-value)
    */
-  public static interface Func_boolean_writestate_from_mapname_name_value extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_writestate_from_mapname_name_value extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_writestate_from_mapname_name_value(final Core.Type_context context, final Core.Type_string mapname, final Core.Type_string name, final Core.Type_any value);
   }
 
@@ -611,7 +611,7 @@ public final class State {
    * @return {boolean}
    * (func boolean-writestate<-name-value)
    */
-  public static interface Func_boolean_writestate_from_name_value extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_writestate_from_name_value extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_writestate_from_name_value(final Core.Type_context context, final Core.Type_string name, final Core.Type_any value);
   }
 
@@ -707,7 +707,7 @@ public final class State {
    * @return {boolean}
    * (func boolean-writestate<-statelistener)
    */
-  public static interface Func_boolean_writestate_from_statelistener extends Core.Func_any_from_any_context {
+  public interface Func_boolean_writestate_from_statelistener extends Core.Func_any_from_any_context {
     public Core.Type_boolean vx_boolean_writestate_from_statelistener(final Core.Type_context context, final Core.Type_statelistener statelistener);
   }
 
@@ -806,7 +806,7 @@ public final class State {
    * @return {boolean}
    * (func change)
    */
-  public static interface Func_change extends Core.Func_any_from_any {
+  public interface Func_change extends Core.Func_any_from_any {
     public Core.Type_boolean vx_change(final State.Type_valuemap valuemap);
   }
 
@@ -895,7 +895,7 @@ public final class State {
    * @return {boolean}
    * (func register)
    */
-  public static interface Func_register extends Core.Func_any_from_any {
+  public interface Func_register extends Core.Func_any_from_any {
     public Core.Type_boolean vx_register(final Core.Type_statelistener listener);
   }
 
@@ -984,7 +984,7 @@ public final class State {
    * @return {state}
    * (func state<-context)
    */
-  public static interface Func_state_from_context extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_state_from_context extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_state vx_state_from_context(final Core.Type_context context);
   }
 
@@ -1063,7 +1063,7 @@ public final class State {
    * @return {statelistener}
    * (func statelistener-readstate<-name)
    */
-  public static interface Func_statelistener_readstate_from_name extends Core.Func_any_from_any_context {
+  public interface Func_statelistener_readstate_from_name extends Core.Func_any_from_any_context {
     public Core.Type_statelistener vx_statelistener_readstate_from_name(final Core.Type_context context, final Core.Type_string name);
   }
 
@@ -1160,7 +1160,7 @@ public final class State {
    * @return {statelistenermap}
    * (func statelistenermap-readstate)
    */
-  public static interface Func_statelistenermap_readstate extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_statelistenermap_readstate extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_statelistenermap vx_statelistenermap_readstate(final Core.Type_context context);
   }
 
@@ -1245,7 +1245,7 @@ public final class State {
    * @return {any}
    * (func value-readstate<-name)
    */
-  public static interface Func_value_readstate_from_name extends Core.Func_any_from_any_context {
+  public interface Func_value_readstate_from_name extends Core.Func_any_from_any_context {
     public Core.Type_any vx_value_readstate_from_name(final Core.Type_context context, final Core.Type_string name);
   }
 
@@ -1343,7 +1343,7 @@ public final class State {
    * @return {valuemap}
    * (func valuemap-readstate<-mapname)
    */
-  public static interface Func_valuemap_readstate_from_mapname extends Core.Func_any_from_any_context {
+  public interface Func_valuemap_readstate_from_mapname extends Core.Func_any_from_any_context {
     public State.Type_valuemap vx_valuemap_readstate_from_mapname(final Core.Type_context context, final Core.Type_string mapname);
   }
 

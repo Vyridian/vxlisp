@@ -1082,7 +1082,7 @@ public final class Repl {
    * @return {any}
    * (func any-repl<-functype-args)
    */
-  public static interface Func_any_repl_from_functype_args extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_repl_from_functype_args extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_any vx_any_repl_from_functype_args(final Core.Type_any type, final Core.Type_anylist args);
   }
 
@@ -1166,7 +1166,7 @@ public final class Repl {
    * @return {any}
    * (func any<-liblist-string)
    */
-  public static interface Func_any_from_liblist_string extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_liblist_string extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_any vx_any_from_liblist_string(final Core.Type_context context, final Repl.Type_liblist liblist, final Core.Type_string text);
   }
 
@@ -1253,7 +1253,7 @@ public final class Repl {
    * @return {any-1}
    * (func any<-macro)
    */
-  public static interface Func_any_from_macro extends Core.Func_any_from_any_context {
+  public interface Func_any_from_macro extends Core.Func_any_from_any_context {
     public <T extends Core.Type_any> T vx_any_from_macro(final T generic_any_1, final Core.Type_context context, final Core.Type_anylist anylist);
   }
 
@@ -1353,7 +1353,7 @@ public final class Repl {
    * @return {any}
    * (func any<-repl)
    */
-  public static interface Func_any_from_repl extends Core.Func_any_from_any_context {
+  public interface Func_any_from_repl extends Core.Func_any_from_any_context {
     public Core.Type_any vx_any_from_repl(final Core.Type_context context, final Repl.Type_repl repl);
   }
 
@@ -1479,7 +1479,7 @@ public final class Repl {
    * @return {any}
    * (func any<-script)
    */
-  public static interface Func_any_from_script extends Core.Func_any_from_any_context {
+  public interface Func_any_from_script extends Core.Func_any_from_any_context {
     public Core.Type_any vx_any_from_script(final Core.Type_context context, final Core.Type_string script);
   }
 
@@ -1578,7 +1578,7 @@ public final class Repl {
    * @return {anylist}
    * (func anylist<-repllist)
    */
-  public static interface Func_anylist_from_repllist extends Core.Func_any_from_any_context {
+  public interface Func_anylist_from_repllist extends Core.Func_any_from_any_context {
     public Core.Type_anylist vx_anylist_from_repllist(final Core.Type_context context, final Repl.Type_repllist repllist);
   }
 
@@ -1679,7 +1679,7 @@ public final class Repl {
    * @return {argmap}
    * (func argmap<-textblock-argmap)
    */
-  public static interface Func_argmap_from_textblock_argmap extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_argmap_from_textblock_argmap extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_argmap vx_argmap_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap);
   }
 
@@ -1767,7 +1767,7 @@ public final class Repl {
    * @return {any}
    * (func const<-string)
    */
-  public static interface Func_const_from_string extends Core.Func_any_from_any {
+  public interface Func_const_from_string extends Core.Func_any_from_any {
     public Core.Type_any vx_const_from_string(final Core.Type_string text);
   }
 
@@ -1893,7 +1893,7 @@ public final class Repl {
    * @return {repl}
    * (func repl-bracket<-textblock-argmap)
    */
-  public static interface Func_repl_bracket_from_textblock_argmap extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_repl_bracket_from_textblock_argmap extends Core.Type_func, Core.Type_replfunc {
     public Repl.Type_repl vx_repl_bracket_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap);
   }
 
@@ -1976,7 +1976,7 @@ public final class Repl {
    * @return {repl}
    * (func repl-empty<-textblock-argmap)
    */
-  public static interface Func_repl_empty_from_textblock_argmap extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_repl_empty_from_textblock_argmap extends Core.Type_func, Core.Type_replfunc {
     public Repl.Type_repl vx_repl_empty_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap);
   }
 
@@ -2097,7 +2097,7 @@ public final class Repl {
    * @return {repl}
    * (func repl-paren<-textblock-argmap)
    */
-  public static interface Func_repl_paren_from_textblock_argmap extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_repl_paren_from_textblock_argmap extends Core.Type_func, Core.Type_replfunc {
     public Repl.Type_repl vx_repl_paren_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap);
   }
 
@@ -2252,7 +2252,7 @@ public final class Repl {
    * @return {repl}
    * (func repl<-liblist-string)
    */
-  public static interface Func_repl_from_liblist_string extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_repl_from_liblist_string extends Core.Type_func, Core.Type_replfunc {
     public Repl.Type_repl vx_repl_from_liblist_string(final Repl.Type_liblist liblist, final Core.Type_string text);
   }
 
@@ -2331,7 +2331,7 @@ public final class Repl {
    * @return {repl}
    * (func repl<-macro)
    */
-  public static interface Func_repl_from_macro extends Core.Func_any_from_any_context {
+  public interface Func_repl_from_macro extends Core.Func_any_from_any_context {
     public Repl.Type_repl vx_repl_from_macro(final Core.Type_context context, final Core.Type_anylist anylist);
   }
 
@@ -2461,7 +2461,7 @@ public final class Repl {
    * @return {repl}
    * (func repl<-script)
    */
-  public static interface Func_repl_from_script extends Core.Func_any_from_any {
+  public interface Func_repl_from_script extends Core.Func_any_from_any {
     public Repl.Type_repl vx_repl_from_script(final Core.Type_string script);
   }
 
@@ -2559,7 +2559,7 @@ public final class Repl {
    * @return {repl}
    * (func repl<-string-argmap)
    */
-  public static interface Func_repl_from_string_argmap extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_repl_from_string_argmap extends Core.Type_func, Core.Type_replfunc {
     public Repl.Type_repl vx_repl_from_string_argmap(final Core.Type_string text, final Core.Type_argmap argmap);
   }
 
@@ -2791,7 +2791,7 @@ public final class Repl {
    * @return {repl}
    * (func repl<-textblock)
    */
-  public static interface Func_repl_from_textblock extends Core.Func_any_from_any {
+  public interface Func_repl_from_textblock extends Core.Func_any_from_any {
     public Repl.Type_repl vx_repl_from_textblock(final Textblock.Type_textblock textblock);
   }
 
@@ -2888,7 +2888,7 @@ public final class Repl {
    * @return {repl}
    * (func repl<-textblock-argmap)
    */
-  public static interface Func_repl_from_textblock_argmap extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_repl_from_textblock_argmap extends Core.Type_func, Core.Type_replfunc {
     public Repl.Type_repl vx_repl_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap);
   }
 
@@ -3000,7 +3000,7 @@ public final class Repl {
    * @return {replarglist}
    * (func replarglist<-replarglist-textblock-argmap)
    */
-  public static interface Func_replarglist_from_replarglist_textblock_argmap extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_replarglist_from_replarglist_textblock_argmap extends Core.Type_func, Core.Type_replfunc {
     public Repl.Type_replarglist vx_replarglist_from_replarglist_textblock_argmap(final Repl.Type_replarglist replargs, final Textblock.Type_textblock tb, final Core.Type_argmap argmap);
   }
 
@@ -3248,7 +3248,7 @@ public final class Repl {
    * @return {repllist}
    * (func repllist<-textblocklist-argmap)
    */
-  public static interface Func_repllist_from_textblocklist_argmap extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_repllist_from_textblocklist_argmap extends Core.Type_func, Core.Type_replfunc {
     public Repl.Type_repllist vx_repllist_from_textblocklist_argmap(final Textblock.Type_textblocklist textblocklist, final Core.Type_argmap argmap);
   }
 
@@ -3336,7 +3336,7 @@ public final class Repl {
    * @return {textblock}
    * (func textblock<-script)
    */
-  public static interface Func_textblock_from_script extends Core.Func_any_from_any {
+  public interface Func_textblock_from_script extends Core.Func_any_from_any {
     public Textblock.Type_textblock vx_textblock_from_script(final Core.Type_string script);
   }
 
@@ -3430,7 +3430,7 @@ public final class Repl {
    * @return {any}
    * (func typefunc<-string)
    */
-  public static interface Func_typefunc_from_string extends Core.Func_any_from_any {
+  public interface Func_typefunc_from_string extends Core.Func_any_from_any {
     public Core.Type_any vx_typefunc_from_string(final Core.Type_string text);
   }
 

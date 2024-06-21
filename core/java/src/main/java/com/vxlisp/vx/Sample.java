@@ -259,7 +259,7 @@ public final class Sample {
    * @return {none}
    * (func main)
    */
-  public static interface Func_main extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_main extends Core.Type_func, Core.Type_replfunc {
     public void vx_main();
   }
 
@@ -334,7 +334,7 @@ public final class Sample {
    * @return {int}
    * (func myfunc)
    */
-  public static interface Func_myfunc extends Core.Func_any_from_any {
+  public interface Func_myfunc extends Core.Func_any_from_any {
     public Core.Type_int vx_myfunc(final Core.Type_int myarg);
   }
 

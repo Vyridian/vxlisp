@@ -178,7 +178,7 @@ func NewType(typename string) *vxtype {
 			isfound = true
 		}
 		if isfound {
-			typ.alias = "generic-" + typename
+			typ.alias = "generic-" + typ.name
 			typ.isgeneric = true
 		}
 	}

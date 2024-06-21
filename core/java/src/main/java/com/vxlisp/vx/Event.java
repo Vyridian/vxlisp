@@ -885,7 +885,7 @@ public final class Event {
    * @return {any-1}
    * (func any-from<-event)
    */
-  public static interface Func_any_from_from_event extends Core.Func_any_from_any {
+  public interface Func_any_from_from_event extends Core.Func_any_from_any {
     public <T extends Core.Type_any> T vx_any_from_from_event(final T generic_any_1, final Event.Type_event event);
   }
 
@@ -983,7 +983,7 @@ public final class Event {
    * @return {event}
    * (func event<-event)
    */
-  public static interface Func_event_from_event extends Core.Func_any_from_any_context {
+  public interface Func_event_from_event extends Core.Func_any_from_any_context {
     public Event.Type_event vx_event_from_event(final Core.Type_context context, final Event.Type_event event);
   }
 
@@ -1077,7 +1077,7 @@ public final class Event {
    * @return {event}
    * (func event<-event-async)
    */
-  public static interface Func_event_from_event_async extends Core.Func_any_from_any_context_async {
+  public interface Func_event_from_event_async extends Core.Func_any_from_any_context_async {
     public CompletableFuture<Event.Type_event> vx_event_from_event_async(final Core.Type_context context, final Event.Type_event event);
   }
 
@@ -1169,7 +1169,7 @@ public final class Event {
    * @return {eventmap}
    * (func eventmap<-eventlist)
    */
-  public static interface Func_eventmap_from_eventlist extends Core.Func_any_from_any {
+  public interface Func_eventmap_from_eventlist extends Core.Func_any_from_any {
     public Event.Type_eventmap vx_eventmap_from_eventlist(final Event.Type_eventlist eventlist);
   }
 

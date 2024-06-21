@@ -14,7 +14,7 @@ public final class En {
    * @return {context}
    * (func context-en)
    */
-  public static interface Func_context_en extends Core.Func_any_from_any {
+  public interface Func_context_en extends Core.Func_any_from_any {
     public Core.Type_context vx_context_en(final Core.Type_anylist args);
   }
 
@@ -117,7 +117,7 @@ public final class En {
    * @return {context}
    * (func context-test)
    */
-  public static interface Func_context_test extends Core.Func_any_from_any {
+  public interface Func_context_test extends Core.Func_any_from_any {
     public Core.Type_context vx_context_test(final Core.Type_anylist args);
   }
 
@@ -227,7 +227,7 @@ public final class En {
    * @return {security}
    * (func securitydata-test)
    */
-  public static interface Func_securitydata_test extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_securitydata_test extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_security vx_securitydata_test();
   }
 
@@ -318,7 +318,7 @@ public final class En {
    * @return {translation}
    * (func translation-en)
    */
-  public static interface Func_translation_en extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_translation_en extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_translation vx_translation_en();
   }
 
@@ -403,7 +403,7 @@ public final class En {
    * @return {stringmap}
    * (func words)
    */
-  public static interface Func_words extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_words extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_stringmap vx_words();
   }
 

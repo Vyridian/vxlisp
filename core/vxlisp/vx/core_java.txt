@@ -1,12 +1,12 @@
-  public static interface vx_Type_const {
+  public interface vx_Type_const {
     public Core.Type_constdef vx_constdef();
   }
 
-  public static interface Type_replfunc {
+  public interface Type_replfunc {
     public Core.Type_any vx_repl(Core.Type_anylist arglist);
   }
 
-  public static interface Type_replfunc_async {
+  public interface Type_replfunc_async {
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist);
   }
 

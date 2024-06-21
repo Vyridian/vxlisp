@@ -14,7 +14,7 @@ public final class Translate {
    * @return {session}
    * (func session<-session-name)
    */
-  public static interface Func_session_from_session_name extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_session_from_session_name extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_session vx_session_from_session_name(final Core.Type_session session, final Core.Type_string name);
   }
 
@@ -101,7 +101,7 @@ public final class Translate {
    * @return {session}
    * (func session<-session-translation)
    */
-  public static interface Func_session_from_session_translation extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_session_from_session_translation extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_session vx_session_from_session_translation(final Core.Type_session session, final Core.Type_translation translation);
   }
 
@@ -189,7 +189,7 @@ public final class Translate {
    * @return {session}
    * (func session<-session-translationmap-name)
    */
-  public static interface Func_session_from_session_translationmap_name extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_session_from_session_translationmap_name extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_session vx_session_from_session_translationmap_name(final Core.Type_session session, final Core.Type_translationmap translationmap, final Core.Type_string name);
   }
 
@@ -278,7 +278,7 @@ public final class Translate {
    * @return {string}
    * (func translate)
    */
-  public static interface Func_translate extends Core.Func_any_from_any_context {
+  public interface Func_translate extends Core.Func_any_from_any_context {
     public Core.Type_string vx_translate(final Core.Type_context context, final Core.Type_string text);
   }
 
@@ -373,7 +373,7 @@ public final class Translate {
    * @return {string}
    * (func translate)
    */
-  public static interface Func_translate_1 extends Core.Func_any_from_any_context {
+  public interface Func_translate_1 extends Core.Func_any_from_any_context {
     public Core.Type_string vx_translate_1(final Core.Type_context context, final Core.Type_msg msg);
   }
 
@@ -482,7 +482,7 @@ public final class Translate {
    * @return {string}
    * (func translate<-translation-string)
    */
-  public static interface Func_translate_from_translation_string extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_translate_from_translation_string extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_string vx_translate_from_translation_string(final Core.Type_translation translation, final Core.Type_string text);
   }
 
@@ -581,7 +581,7 @@ public final class Translate {
    * @return {string}
    * (func translate<-translationmap-name-string)
    */
-  public static interface Func_translate_from_translationmap_name_string extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_translate_from_translationmap_name_string extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_string vx_translate_from_translationmap_name_string(final Core.Type_translationmap translationmap, final Core.Type_string name, final Core.Type_string text);
   }
 
@@ -668,7 +668,7 @@ public final class Translate {
    * @return {translation}
    * (func translation-load-session)
    */
-  public static interface Func_translation_load_session extends Core.Func_any_from_any_context {
+  public interface Func_translation_load_session extends Core.Func_any_from_any_context {
     public Core.Type_translation vx_translation_load_session(final Core.Type_context context, final Core.Type_translation translation);
   }
 
@@ -758,7 +758,7 @@ public final class Translate {
    * @return {translation}
    * (func translation<-context)
    */
-  public static interface Func_translation_from_context extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_translation_from_context extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_translation vx_translation_from_context(final Core.Type_context context);
   }
 
@@ -838,7 +838,7 @@ public final class Translate {
    * @return {translation}
    * (func translation<-session-name)
    */
-  public static interface Func_translation_from_session_name extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_translation_from_session_name extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_translation vx_translation_from_session_name(final Core.Type_session session, final Core.Type_string name);
   }
 
@@ -924,7 +924,7 @@ public final class Translate {
    * @return {translationmap}
    * (func translationmap<-translations)
    */
-  public static interface Func_translationmap_from_translations extends Core.Func_any_from_any {
+  public interface Func_translationmap_from_translations extends Core.Func_any_from_any {
     public Core.Type_translationmap vx_translationmap_from_translations(final Core.Type_translationlist translations);
   }
 

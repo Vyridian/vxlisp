@@ -123,7 +123,7 @@ public final class Type {
    * @return {stringlist}
    * (func allowtypenames<-type)
    */
-  public static interface Func_allowtypenames_from_type extends Core.Func_any_from_any {
+  public interface Func_allowtypenames_from_type extends Core.Func_any_from_any {
     public Core.Type_stringlist vx_allowtypenames_from_type(final Core.Type_any type);
   }
 
@@ -216,7 +216,7 @@ public final class Type {
    * @return {typelist}
    * (func allowtypes<-type)
    */
-  public static interface Func_allowtypes_from_type extends Core.Func_any_from_any {
+  public interface Func_allowtypes_from_type extends Core.Func_any_from_any {
     public Core.Type_typelist vx_allowtypes_from_type(final Core.Type_any type);
   }
 
@@ -307,7 +307,7 @@ public final class Type {
    * @return {any-1}
    * (func any<-int)
    */
-  public static interface Func_any_from_int extends Core.Func_any_from_any {
+  public interface Func_any_from_int extends Core.Func_any_from_any {
     public <T extends Core.Type_any> T vx_any_from_int(final T generic_any_1, final Core.Type_int val);
   }
 
@@ -399,7 +399,7 @@ public final class Type {
    * @return {boolean}
    * (func boolean<-string-ends)
    */
-  public static interface Func_boolean_from_string_ends extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_from_string_ends extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_from_string_ends(final Core.Type_string text, final Core.Type_string ends);
   }
 
@@ -481,7 +481,7 @@ public final class Type {
    * @return {boolean}
    * (func boolean<-string-starts)
    */
-  public static interface Func_boolean_from_string_starts extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_from_string_starts extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_from_string_starts(final Core.Type_string text, final Core.Type_string starts);
   }
 
@@ -563,7 +563,7 @@ public final class Type {
    * @return {int}
    * (func int<-string-find)
    */
-  public static interface Func_int_from_string_find extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_int_from_string_find extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_int vx_int_from_string_find(final Core.Type_string text, final Core.Type_string find);
   }
 
@@ -644,7 +644,7 @@ public final class Type {
    * @return {int}
    * (func int<-string-findkeyword)
    */
-  public static interface Func_int_from_string_findkeyword extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_int_from_string_findkeyword extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_int vx_int_from_string_findkeyword(final Core.Type_string text, final Core.Type_string find);
   }
 
@@ -725,7 +725,7 @@ public final class Type {
    * @return {int}
    * (func int<-string-findlast)
    */
-  public static interface Func_int_from_string_findlast extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_int_from_string_findlast extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_int vx_int_from_string_findlast(final Core.Type_string text, final Core.Type_string findlast);
   }
 
@@ -804,7 +804,7 @@ public final class Type {
    * @return {boolean}
    * (func is-boolean)
    */
-  public static interface Func_is_boolean extends Core.Func_any_from_any {
+  public interface Func_is_boolean extends Core.Func_any_from_any {
     public Core.Type_boolean vx_is_boolean(final Core.Type_any value);
   }
 
@@ -897,7 +897,7 @@ public final class Type {
    * @return {boolean}
    * (func is-decimal)
    */
-  public static interface Func_is_decimal extends Core.Func_any_from_any {
+  public interface Func_is_decimal extends Core.Func_any_from_any {
     public Core.Type_boolean vx_is_decimal(final Core.Type_any value);
   }
 
@@ -990,7 +990,7 @@ public final class Type {
    * @return {boolean}
    * (func is-none)
    */
-  public static interface Func_is_none extends Core.Func_any_from_any {
+  public interface Func_is_none extends Core.Func_any_from_any {
     public Core.Type_boolean vx_is_none(final Core.Type_any value);
   }
 
@@ -1083,7 +1083,7 @@ public final class Type {
    * @return {boolean}
    * (func is-string)
    */
-  public static interface Func_is_string extends Core.Func_any_from_any {
+  public interface Func_is_string extends Core.Func_any_from_any {
     public Core.Type_boolean vx_is_string(final Core.Type_any value);
   }
 
@@ -1177,7 +1177,7 @@ public final class Type {
    * @return {boolean}
    * (func is-type)
    */
-  public static interface Func_is_type extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_is_type extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_is_type(final Core.Type_any val, final Core.Type_any type);
   }
 
@@ -1273,7 +1273,7 @@ public final class Type {
    * @return {boolean}
    * (func is-type<-any-typelist)
    */
-  public static interface Func_is_type_from_any_typelist extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_is_type_from_any_typelist extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_is_type_from_any_typelist(final Core.Type_any val, final Core.Type_typelist typelist);
   }
 
@@ -1366,7 +1366,7 @@ public final class Type {
    * @return {string}
    * (func string-lowercase)
    */
-  public static interface Func_string_lowercase extends Core.Func_any_from_any {
+  public interface Func_string_lowercase extends Core.Func_any_from_any {
     public Core.Type_string vx_string_lowercase(final Core.Type_string text);
   }
 
@@ -1457,7 +1457,7 @@ public final class Type {
    * @return {string}
    * (func string-outdent)
    */
-  public static interface Func_string_outdent extends Core.Func_any_from_any {
+  public interface Func_string_outdent extends Core.Func_any_from_any {
     public Core.Type_string vx_string_outdent(final Core.Type_string text);
   }
 
@@ -1588,7 +1588,7 @@ public final class Type {
    * @return {string}
    * (func string-trim)
    */
-  public static interface Func_string_trim extends Core.Func_any_from_any {
+  public interface Func_string_trim extends Core.Func_any_from_any {
     public Core.Type_string vx_string_trim(final Core.Type_string text);
   }
 
@@ -1679,7 +1679,7 @@ public final class Type {
    * @return {string}
    * (func string-uppercase)
    */
-  public static interface Func_string_uppercase extends Core.Func_any_from_any {
+  public interface Func_string_uppercase extends Core.Func_any_from_any {
     public Core.Type_string vx_string_uppercase(final Core.Type_string text);
   }
 
@@ -1770,7 +1770,7 @@ public final class Type {
    * @return {string}
    * (func string<-int)
    */
-  public static interface Func_string_from_int extends Core.Func_any_from_any {
+  public interface Func_string_from_int extends Core.Func_any_from_any {
     public Core.Type_string vx_string_from_int(final Core.Type_int val);
   }
 
@@ -1895,7 +1895,7 @@ public final class Type {
    * @return {string}
    * (func string<-string-end)
    */
-  public static interface Func_string_from_string_end extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_string_from_string_end extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_string vx_string_from_string_end(final Core.Type_string text, final Core.Type_int endpos);
   }
 
@@ -1976,7 +1976,7 @@ public final class Type {
    * @return {string}
    * (func string<-string-start)
    */
-  public static interface Func_string_from_string_start extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_string_from_string_start extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_string vx_string_from_string_start(final Core.Type_string text, final Core.Type_int startpos);
   }
 
@@ -2062,7 +2062,7 @@ public final class Type {
    * @return {string}
    * (func string<-string-start-end)
    */
-  public static interface Func_string_from_string_start_end extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_string_from_string_start_end extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_string vx_string_from_string_start_end(final Core.Type_string text, final Core.Type_int start, final Core.Type_int end);
   }
 
@@ -2145,7 +2145,7 @@ public final class Type {
    * @return {string}
    * (func string<-stringlist-join)
    */
-  public static interface Func_string_from_stringlist_join extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_string_from_stringlist_join extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_string vx_string_from_stringlist_join(final Core.Type_stringlist vals, final Core.Type_string delim);
   }
 
@@ -2226,7 +2226,7 @@ public final class Type {
    * @return {stringlist}
    * (func stringlist<-string-split)
    */
-  public static interface Func_stringlist_from_string_split extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_stringlist_from_string_split extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_stringlist vx_stringlist_from_string_split(final Core.Type_string text, final Core.Type_string delim);
   }
 
@@ -2306,7 +2306,7 @@ public final class Type {
    * @return {stringlist}
    * (func traitnames<-any)
    */
-  public static interface Func_traitnames_from_any extends Core.Func_any_from_any {
+  public interface Func_traitnames_from_any extends Core.Func_any_from_any {
     public Core.Type_stringlist vx_traitnames_from_any(final Core.Type_any val);
   }
 
@@ -2399,7 +2399,7 @@ public final class Type {
    * @return {typelist}
    * (func traits<-any)
    */
-  public static interface Func_traits_from_any extends Core.Func_any_from_any {
+  public interface Func_traits_from_any extends Core.Func_any_from_any {
     public Core.Type_typelist vx_traits_from_any(final Core.Type_any val);
   }
 
@@ -2492,7 +2492,7 @@ public final class Type {
    * @return {typelist}
    * (func traits<-typedef)
    */
-  public static interface Func_traits_from_typedef extends Core.Func_any_from_any {
+  public interface Func_traits_from_typedef extends Core.Func_any_from_any {
     public Core.Type_typelist vx_traits_from_typedef(final Core.Type_typedef vtypedef);
   }
 

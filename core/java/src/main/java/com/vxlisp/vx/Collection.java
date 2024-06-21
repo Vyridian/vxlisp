@@ -174,7 +174,7 @@ public final class Collection {
    * @return {any-1}
    * (func any<-for-until-loop)
    */
-  public static interface Func_any_from_for_until_loop extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_for_until_loop extends Core.Type_func, Core.Type_replfunc {
     public <T extends Core.Type_any> T vx_any_from_for_until_loop(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_until, final Core.Func_any_from_any fn_loop);
   }
 
@@ -267,7 +267,7 @@ public final class Collection {
    * @return {any-1}
    * (func any<-for-until-loop-max)
    */
-  public static interface Func_any_from_for_until_loop_max extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_for_until_loop_max extends Core.Type_func, Core.Type_replfunc {
     public <T extends Core.Type_any> T vx_any_from_for_until_loop_max(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_until, final Core.Func_any_from_any fn_loop, final Core.Type_int max);
   }
 
@@ -352,7 +352,7 @@ public final class Collection {
    * @return {any-1}
    * (func any<-for-while-loop)
    */
-  public static interface Func_any_from_for_while_loop extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_for_while_loop extends Core.Type_func, Core.Type_replfunc {
     public <T extends Core.Type_any> T vx_any_from_for_while_loop(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_while, final Core.Func_any_from_any fn_loop);
   }
 
@@ -446,7 +446,7 @@ public final class Collection {
    * @return {any-1}
    * (func any<-for-while-loop-max)
    */
-  public static interface Func_any_from_for_while_loop_max extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_for_while_loop_max extends Core.Type_func, Core.Type_replfunc {
     public <T extends Core.Type_any> T vx_any_from_for_while_loop_max(final T generic_any_1, final T start, final Core.Func_boolean_from_any fn_while, final Core.Func_any_from_any fn_loop, final Core.Type_int max);
   }
 
@@ -530,7 +530,7 @@ public final class Collection {
    * @return {any-1}
    * (func any<-map-pos)
    */
-  public static interface Func_any_from_map_pos extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_map_pos extends Core.Type_func, Core.Type_replfunc {
     public <N extends Core.Type_map, T extends Core.Type_any> T vx_any_from_map_pos(final T generic_any_1, final N map, final Core.Type_int pos);
   }
 
@@ -619,7 +619,7 @@ public final class Collection {
    * @return {boolean}
    * (func boolean-write<-map-removekey)
    */
-  public static interface Func_boolean_write_from_map_removekey extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_write_from_map_removekey extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_write_from_map_removekey(final Core.Type_map valuemap, final Core.Type_string key);
   }
 
@@ -706,7 +706,7 @@ public final class Collection {
    * @return {boolean}
    * (func boolean-write<-map-removekeys)
    */
-  public static interface Func_boolean_write_from_map_removekeys extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_write_from_map_removekeys extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_write_from_map_removekeys(final Core.Type_map valuemap, final Core.Type_stringlist keys);
   }
 
@@ -801,7 +801,7 @@ public final class Collection {
    * @return {int}
    * (func int<-map-key)
    */
-  public static interface Func_int_from_map_key extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_int_from_map_key extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_int vx_int_from_map_key(final Core.Type_map map, final Core.Type_string key);
   }
 
@@ -888,7 +888,7 @@ public final class Collection {
    * @return {int}
    * (func int<-stringlist-find)
    */
-  public static interface Func_int_from_stringlist_find extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_int_from_stringlist_find extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_int vx_int_from_stringlist_find(final Core.Type_stringlist stringlist, final Core.Type_string find);
   }
 
@@ -996,7 +996,7 @@ public final class Collection {
    * @return {boolean}
    * (func is-list)
    */
-  public static interface Func_is_list extends Core.Func_any_from_any {
+  public interface Func_is_list extends Core.Func_any_from_any {
     public Core.Type_boolean vx_is_list(final Core.Type_any val);
   }
 
@@ -1090,7 +1090,7 @@ public final class Collection {
    * @return {boolean}
    * (func is-map)
    */
-  public static interface Func_is_map extends Core.Func_any_from_any {
+  public interface Func_is_map extends Core.Func_any_from_any {
     public Core.Type_boolean vx_is_map(final Core.Type_any val);
   }
 
@@ -1197,7 +1197,7 @@ public final class Collection {
    * @return {list-1}
    * (func list<-for-end-loop)
    */
-  public static interface Func_list_from_for_end_loop extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_list_from_for_end_loop extends Core.Type_func, Core.Type_replfunc {
     public <X extends Core.Type_list> X vx_list_from_for_end_loop(final X generic_any_1, final Core.Type_int start, final Core.Type_int end, final Core.Func_any_from_int fn_loop);
   }
 
@@ -1281,7 +1281,7 @@ public final class Collection {
    * @return {list-1}
    * (func list<-for-while-loop)
    */
-  public static interface Func_list_from_for_while_loop extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_list_from_for_while_loop extends Core.Type_func, Core.Type_replfunc {
     public <T extends Core.Type_any, X extends Core.Type_list> X vx_list_from_for_while_loop(final X generic_any_1, final T start, final Core.Func_boolean_from_any fn_while, final Core.Func_any_from_any fn_loop);
   }
 
@@ -1372,7 +1372,7 @@ public final class Collection {
    * @return {list-1}
    * (func list<-for-while-loop-max)
    */
-  public static interface Func_list_from_for_while_loop_max extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_list_from_for_while_loop_max extends Core.Type_func, Core.Type_replfunc {
     public <T extends Core.Type_any, X extends Core.Type_list> X vx_list_from_for_while_loop_max(final X generic_any_1, final T start, final Core.Func_boolean_from_any fn_while, final Core.Func_any_from_any fn_loop, final Core.Type_int max);
   }
 
@@ -1456,7 +1456,7 @@ public final class Collection {
    * @return {list-1}
    * (func list<-list-end)
    */
-  public static interface Func_list_from_list_end extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_list_from_list_end extends Core.Type_func, Core.Type_replfunc {
     public <X extends Core.Type_list> X vx_list_from_list_end(final X generic_any_1, final X values, final Core.Type_int end);
   }
 
@@ -1538,7 +1538,7 @@ public final class Collection {
    * @return {list-1}
    * (func list<-list-filter)
    */
-  public static interface Func_list_from_list_filter extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_list_from_list_filter extends Core.Type_func, Core.Type_replfunc {
     public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list_filter(final X generic_any_1, final Y vallist, final Core.Func_any_from_any fn_filter);
   }
 
@@ -1620,7 +1620,7 @@ public final class Collection {
    * @return {list-1}
    * (func list<-list-filtertypes)
    */
-  public static interface Func_list_from_list_filtertypes extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_list_from_list_filtertypes extends Core.Type_func, Core.Type_replfunc {
     public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list_filtertypes(final X generic_any_1, final Y vallist, final Core.Type_typelist filtertypes);
   }
 
@@ -1714,7 +1714,7 @@ public final class Collection {
    * @return {list-1}
    * (func list<-list-start)
    */
-  public static interface Func_list_from_list_start extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_list_from_list_start extends Core.Type_func, Core.Type_replfunc {
     public <X extends Core.Type_list> X vx_list_from_list_start(final X generic_any_1, final X values, final Core.Type_int start);
   }
 
@@ -1802,7 +1802,7 @@ public final class Collection {
    * @return {list-1}
    * (func list<-list-start-end)
    */
-  public static interface Func_list_from_list_start_end extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_list_from_list_start_end extends Core.Type_func, Core.Type_replfunc {
     public <X extends Core.Type_list> X vx_list_from_list_start_end(final X generic_any_1, final X values, final Core.Type_int start, final Core.Type_int end);
   }
 
@@ -1885,7 +1885,7 @@ public final class Collection {
    * @return {map-1}
    * (func map<-map-end)
    */
-  public static interface Func_map_from_map_end extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_map_from_map_end extends Core.Type_func, Core.Type_replfunc {
     public <N extends Core.Type_map> N vx_map_from_map_end(final N generic_any_1, final N valuemap, final Core.Type_int end);
   }
 
@@ -1967,7 +1967,7 @@ public final class Collection {
    * @return {map-1}
    * (func map<-map-keys)
    */
-  public static interface Func_map_from_map_keys extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_map_from_map_keys extends Core.Type_func, Core.Type_replfunc {
     public <N extends Core.Type_map> N vx_map_from_map_keys(final N generic_any_1, final N valuemap, final Core.Type_stringlist keys);
   }
 
@@ -2049,7 +2049,7 @@ public final class Collection {
    * @return {map-1}
    * (func map<-map-start)
    */
-  public static interface Func_map_from_map_start extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_map_from_map_start extends Core.Type_func, Core.Type_replfunc {
     public <N extends Core.Type_map> N vx_map_from_map_start(final N generic_any_1, final N valuemap, final Core.Type_int start);
   }
 
@@ -2137,7 +2137,7 @@ public final class Collection {
    * @return {map-1}
    * (func map<-map-start-end)
    */
-  public static interface Func_map_from_map_start_end extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_map_from_map_start_end extends Core.Type_func, Core.Type_replfunc {
     public <N extends Core.Type_map> N vx_map_from_map_start_end(final N generic_any_1, final N valuemap, final Core.Type_int start, final Core.Type_int end);
   }
 

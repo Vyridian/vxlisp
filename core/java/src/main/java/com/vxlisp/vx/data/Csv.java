@@ -592,7 +592,7 @@ public final class Csv {
    * @return {csv}
    * (func csv-read<-file)
    */
-  public static interface Func_csv_read_from_file extends Core.Func_any_from_any_context {
+  public interface Func_csv_read_from_file extends Core.Func_any_from_any_context {
     public Csv.Type_csv vx_csv_read_from_file(final Core.Type_context context, final File.Type_file file);
   }
 
@@ -690,7 +690,7 @@ public final class Csv {
    * @return {csv}
    * (func csv<-file)
    */
-  public static interface Func_csv_from_file extends Core.Func_any_from_any {
+  public interface Func_csv_from_file extends Core.Func_any_from_any {
     public Csv.Type_csv vx_csv_from_file(final File.Type_file file);
   }
 
@@ -787,7 +787,7 @@ public final class Csv {
    * @return {csv}
    * (func csv<-string)
    */
-  public static interface Func_csv_from_string extends Core.Func_any_from_any {
+  public interface Func_csv_from_string extends Core.Func_any_from_any {
     public Csv.Type_csv vx_csv_from_string(final Core.Type_string text);
   }
 
@@ -883,7 +883,7 @@ public final class Csv {
    * @return {csv}
    * (func csv<-textblock)
    */
-  public static interface Func_csv_from_textblock extends Core.Func_any_from_any {
+  public interface Func_csv_from_textblock extends Core.Func_any_from_any {
     public Csv.Type_csv vx_csv_from_textblock(final Textblock.Type_textblock textblock);
   }
 
@@ -989,7 +989,7 @@ public final class Csv {
    * @return {csvrows}
    * (func csvrows<-textblock)
    */
-  public static interface Func_csvrows_from_textblock extends Core.Func_any_from_any {
+  public interface Func_csvrows_from_textblock extends Core.Func_any_from_any {
     public Csv.Type_csvrows vx_csvrows_from_textblock(final Textblock.Type_textblock textblock);
   }
 
@@ -1096,7 +1096,7 @@ public final class Csv {
    * @return {stringmap}
    * (func stringmap<-csv)
    */
-  public static interface Func_stringmap_from_csv extends Core.Func_any_from_any {
+  public interface Func_stringmap_from_csv extends Core.Func_any_from_any {
     public Core.Type_stringmap vx_stringmap_from_csv(final Csv.Type_csv csv);
   }
 
@@ -1211,7 +1211,7 @@ public final class Csv {
    * @return {textblock}
    * (func textblock-csv<-string)
    */
-  public static interface Func_textblock_csv_from_string extends Core.Func_any_from_any {
+  public interface Func_textblock_csv_from_string extends Core.Func_any_from_any {
     public Textblock.Type_textblock vx_textblock_csv_from_string(final Core.Type_string text);
   }
 

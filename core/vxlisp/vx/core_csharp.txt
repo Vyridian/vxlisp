@@ -1,28 +1,26 @@
-  public static interface vx_Type_const {
+  public interface Map<TKey, TValue> {
+  }
+
+  public class LinkedHashMap<TKey, TValue> : Map<TKey, TValue> {
+  }
+
+  public interface vx_Type_const {
     public vx_core.Type_constdef vx_constdef();
   }
 
-  public static interface Type_replfunc {
+  public interface Type_replfunc {
     public vx_core.Type_any vx_repl(vx_core.Type_anylist arglist);
   }
 
-  public static interface Type_replfunc_async {
+  public interface Type_replfunc_async {
     public Task<vx_core.Type_any> vx_repl(vx_core.Type_anylist arglist);
   }
 
-  public static List<vx_core.Type_any> emptylistany = vx_core.immutablelist(new List<vx_core.Type_any>());
+  public static List<vx_core.Type_any> emptylistany = new List<vx_core.Type_any>();
 
-  public static Map<String, vx_core.Type_any> emptymapany = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>());
+  public static Map<String, vx_core.Type_any> emptymapany = new LinkedHashMap<String, vx_core.Type_any>();
 
-  public static List<T> immutablelist<T>(List<T> listany) {
-    return Collections.unmodifiableList(listany);
-  }
-
-  public static Map<String, T> immutablemap<T>(Map<String, T> mapany) {
-    return Collections.unmodifiableMap(mapany);
-  }
-
-  public static class Class_base {
+  public class Class_base {
     protected int vx_iref = 0;
     protected vx_core.Type_constdef vxconstdef = null;
     protected vx_core.Type_msgblock vxmsgblock = null;
@@ -32,8 +30,8 @@
       return emptylistany;
     }
     public vx_core.Type_msgblock vx_msgblock() {return vxmsgblock;}
-    public boolean vx_release() {
-      boolean output = false;
+    public bool vx_release() {
+      bool output = false;
       if (this.vx_iref < 0) {
       } else if (vx_iref == 0) {
         vx_iref = -1;
@@ -46,7 +44,7 @@
     public void vx_reserve() {this.vx_iref += 1;}
   }
 
-  public static class KeyValue<T> {
+  public class KeyValue<T> {
     public String key = "";
     public T value = null;
   }
@@ -67,7 +65,7 @@
     String pkgname,
     String name,
     int idx,
-    boolean async,
+    bool async,
     vx_core.Type_any typ
   ) {
     vx_core.Class_funcdef output = new vx_core.Class_funcdef();
@@ -83,9 +81,8 @@
     return list.vx_list().toArray(new vx_core.Type_any[0]);
   }
 
-  public static List<T> arraylist_from_array<T>(params T items) {
-    List<T> output = new List<T>(Arrays.asList(items));
-    output = vx_core.immutablelist(output);
+  public static List<T> arraylist_from_array<T>(params T[] items) {
+    List<T> output = new List<>(items);
     return output;
   }
 
@@ -95,7 +92,6 @@
       T t_val = vx_core.f_any_from_any(generic_any_1, value);
       output.add(t_val);
     }
-    output = vx_core.immutablelist(output);
     return output;
   }
 
@@ -105,11 +101,10 @@
       T t_val = fn_any_from_any.apply(value_u);
       output.add(t_val);
     }
-    output = vx_core.immutablelist(output);
     return output;
   }
 
-  public static List<T> arraylist_from_linkedhashmap<T, U>(T generic_any_1, Map<String, U> mapval) where T : vx_core.Type_any where U : vx_core.Type_any {
+  public static List<T> arraylist_from_linkedhashmap<T, U>(T generic_any_1, LinkedHashMap<String, U> mapval) where T : vx_core.Type_any where U : vx_core.Type_any {
     List<T> output = new List<T>();
     Set<String> keys = mapval.keySet();
     foreach (String key in keys) {
@@ -117,7 +112,6 @@
       T t_val = vx_core.f_any_from_any(generic_any_1, u_val);
       output.add(t_val);
     }
-    output = vx_core.immutablelist(output);
     return output;
   }
 
@@ -160,13 +154,13 @@
       List<T> list = list_future.stream()
         .map(future => future.join())
         .collect(Collectors.toList());
-      return vx_core.immutablelist(list);
+      return list;
     });
     return output;
   }
 
-  public static LinkedHashMap<String, T> hashmap_from_keyvalues<T>(params KeyValue<T> keyvalues) {
-    LinkedHashMap<String, T> output = new LinkedHashMap<String, T>();
+  public static LinkedHashMap<String, T> hashmap_from_keyvalues<T>(params KeyValue<T>[] keyvalues) {
+    LinkedHashMap<String, T> output = new LinkedHashMap<>();
     foreach (KeyValue<T> keyvalue in keyvalues) {
       String key = keyvalue.key;
       T value = keyvalue.value;
@@ -193,7 +187,7 @@
   }
 
   public static LinkedHashMap<String, T> map_from_map<T>(LinkedHashMap<String, vx_core.Type_any> mapval) where T : vx_core.Type_any {
-    LinkedHashMap<String, T> output = new LinkedHashMap<String, T>();
+    LinkedHashMap<String, T> output = new LinkedHashMap<>();
     Set<String> keys = mapval.keySet();
     foreach (String key in keys) {
       vx_core.Type_any value = mapval.get(key);
@@ -208,23 +202,23 @@
   }
 
   // vx_boolean_from_string_ends(string, string)
-  public static boolean vx_boolean_from_string_ends(String text, String ends) {
+  public static bool vx_boolean_from_string_ends(String text, String ends) {
     return text.endsWith(ends);
   }
 
   // vx_boolean_from_string_find(string, string)
-  public static boolean vx_boolean_from_string_find(String text, String find) {
+  public static bool vx_boolean_from_string_find(String text, String find) {
     return text.contains(find);
   }
 
   // vx_boolean_from_string_starts(string, string)
-  public static boolean vx_boolean_from_string_starts(String text, String starts) {
+  public static bool vx_boolean_from_string_starts(String text, String starts) {
     return text.startsWith(starts);
   }
 
   // vx_eqeq(any, any)
-  public static boolean vx_eqeq(vx_core.Type_any val1, vx_core.Type_any val2) {
-    boolean output = false;
+  public static bool vx_eqeq(vx_core.Type_any val1, vx_core.Type_any val2) {
+    bool output = false;
     if (val1 == val2) {
       output = true;
     } else if (val1.vx_msgblock() != vx_core.e_msgblock) {
@@ -275,11 +269,11 @@
   // vx_global_package_set(string, map<any>, map<any>, map<func>)
   public static void vx_global_package_set(String pkgname, Map<String, vx_core.Type_any> maptype, Map<String, vx_core.Type_any> mapconst, Map<String, vx_core.Type_func> mapfunc) {
     vx_core.Class_typemap typemap = new vx_core.Class_typemap();
-		  typemap.vx_p_map = vx_core.immutablemap(maptype);
+		  typemap.vx_p_map = maptype;
 	   vx_core.Class_constmap constmap = new vx_core.Class_constmap();
-		  constmap.vx_p_map = vx_core.immutablemap(mapconst);
+		  constmap.vx_p_map = mapconst;
 		  vx_core.Class_funcmap funcmap = new vx_core.Class_funcmap();
-		  funcmap.vx_p_map = vx_core.immutablemap(mapfunc);
+		  funcmap.vx_p_map = mapfunc;
     vx_core.Class_project global = (vx_core.Class_project)vx_core.c_global;
     vx_core.Class_packagemap packagemap = (vx_core.Class_packagemap)global.vx_p_packagemap;
     if (packagemap == null) {
@@ -292,7 +286,7 @@
 		  pkg.vx_p_typemap = typemap;
 		  pkg.vx_p_funcmap = funcmap;
     mappackage.put(pkgname, pkg);
-    packagemap.vx_p_map = vx_core.immutablemap(mappackage);
+    packagemap.vx_p_map = mappackage;
   }
 
   // vx_int_from_string(string)
@@ -316,8 +310,8 @@
   }
 
   // vx_is_float(string)
-  public static boolean vx_is_float(String text) {
-    boolean output = false;
+  public static bool vx_is_float(String text) {
+    bool output = false;
     try {
       Float.parseFloat(text);
       output = true;
@@ -327,8 +321,8 @@
   }
 
   // vx_is_float(any)
-  public static boolean vx_is_float(vx_core.Type_any value) {
-    boolean output = false;
+  public static bool vx_is_float(vx_core.Type_any value) {
+    bool output = false;
     if (value is vx_core.Type_number) {
       output = true;
     } else if (value is vx_core.Type_string) {
@@ -339,8 +333,8 @@
   }
 
   // vx_is_int(string)
-  public static boolean vx_is_int(String text) {
-    boolean output = false;
+  public static bool vx_is_int(String text) {
+    bool output = false;
     switch (text) {
     case "notanumber":
     case "infinity":
@@ -359,8 +353,8 @@
   }
 
   // vx_is_int(any)
-  public static boolean vx_is_int(vx_core.Type_any value) {
-    boolean result = false;
+  public static bool vx_is_int(vx_core.Type_any value) {
+    bool result = false;
     if (value == vx_core.c_infinity) {
       result = true;
     } else if (value == vx_core.c_neginfinity) {
@@ -430,7 +424,7 @@
     return output;
   }
 
-  public static Type_boolean vx_new_boolean(boolean isval) {
+  public static Type_boolean vx_new_boolean(bool isval) {
     Type_boolean output = vx_core.c_false;
     if (isval) {
       output = vx_core.c_true;
@@ -473,7 +467,7 @@
     return vx_string_from_any_indent(value, 0, false);
   }
 
-  public static String vx_string_from_any_indent(vx_core.Type_any value, int indent, boolean linefeed) {
+  public static String vx_string_from_any_indent(vx_core.Type_any value, int indent, bool linefeed) {
     String indenttext = " ".repeat(indent);
     String output = "";
     if (indent > 50) {

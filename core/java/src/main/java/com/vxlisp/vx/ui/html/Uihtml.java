@@ -366,7 +366,7 @@ public final class Uihtml {
    * @return {boolean}
    * (func boolean-layoutremove-html)
    */
-  public static interface Func_boolean_layoutremove_html extends Core.Func_any_from_any {
+  public interface Func_boolean_layoutremove_html extends Core.Func_any_from_any {
     public Core.Type_boolean vx_boolean_layoutremove_html(final Ui.Type_ui ui);
   }
 
@@ -463,7 +463,7 @@ public final class Uihtml {
    * @return {boolean}
    * (func boolean-layoutselected-html)
    */
-  public static interface Func_boolean_layoutselected_html extends Core.Func_any_from_any {
+  public interface Func_boolean_layoutselected_html extends Core.Func_any_from_any {
     public Core.Type_boolean vx_boolean_layoutselected_html(final Ui.Type_ui ui);
   }
 
@@ -554,7 +554,7 @@ public final class Uihtml {
    * @return {boolean}
    * (func boolean-layoutvisible-html)
    */
-  public static interface Func_boolean_layoutvisible_html extends Core.Func_any_from_any {
+  public interface Func_boolean_layoutvisible_html extends Core.Func_any_from_any {
     public Core.Type_boolean vx_boolean_layoutvisible_html(final Ui.Type_ui ui);
   }
 
@@ -645,7 +645,7 @@ public final class Uihtml {
    * @return {boolean}
    * (func boolean-print-html)
    */
-  public static interface Func_boolean_print_html extends Core.Func_any_from_any_context {
+  public interface Func_boolean_print_html extends Core.Func_any_from_any_context {
     public Core.Type_boolean vx_boolean_print_html(final Core.Type_context context, final Ui.Type_ui ui);
   }
 
@@ -746,7 +746,7 @@ public final class Uihtml {
    * @return {boolean}
    * (func boolean-writeclass<-ui)
    */
-  public static interface Func_boolean_writeclass_from_ui extends Core.Func_any_from_any {
+  public interface Func_boolean_writeclass_from_ui extends Core.Func_any_from_any {
     public Core.Type_boolean vx_boolean_writeclass_from_ui(final Ui.Type_ui ui);
   }
 
@@ -844,7 +844,7 @@ public final class Uihtml {
    * @return {boolean}
    * (func boolean-writeeventsall<-ui)
    */
-  public static interface Func_boolean_writeeventsall_from_ui extends Core.Func_any_from_any {
+  public interface Func_boolean_writeeventsall_from_ui extends Core.Func_any_from_any {
     public Core.Type_boolean vx_boolean_writeeventsall_from_ui(final Ui.Type_ui ui);
   }
 
@@ -943,7 +943,7 @@ public final class Uihtml {
    * @return {boolean}
    * (func boolean-writeeventsall<-uimap)
    */
-  public static interface Func_boolean_writeeventsall_from_uimap extends Core.Func_any_from_any {
+  public interface Func_boolean_writeeventsall_from_uimap extends Core.Func_any_from_any {
     public Core.Type_boolean vx_boolean_writeeventsall_from_uimap(final Ui.Type_uimap uimap);
   }
 
@@ -1049,7 +1049,7 @@ public final class Uihtml {
    * @return {boolean}
    * (func boolean-writeselected<-ui)
    */
-  public static interface Func_boolean_writeselected_from_ui extends Core.Func_any_from_any {
+  public interface Func_boolean_writeselected_from_ui extends Core.Func_any_from_any {
     public Core.Type_boolean vx_boolean_writeselected_from_ui(final Ui.Type_ui ui);
   }
 
@@ -1140,7 +1140,7 @@ public final class Uihtml {
    * @return {boolean}
    * (func boolean-writevisible<-ui)
    */
-  public static interface Func_boolean_writevisible_from_ui extends Core.Func_any_from_any {
+  public interface Func_boolean_writevisible_from_ui extends Core.Func_any_from_any {
     public Core.Type_boolean vx_boolean_writevisible_from_ui(final Ui.Type_ui ui);
   }
 
@@ -1229,7 +1229,7 @@ public final class Uihtml {
    * @return {context}
    * (func context-write)
    */
-  public static interface Func_context_write extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_context_write extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_context vx_context_write(final Core.Type_context context);
   }
 
@@ -1308,7 +1308,7 @@ public final class Uihtml {
    * @return {divchild}
    * (func divchild<-ui)
    */
-  public static interface Func_divchild_from_ui extends Core.Func_any_from_any {
+  public interface Func_divchild_from_ui extends Core.Func_any_from_any {
     public Html.Type_divchild vx_divchild_from_ui(final Ui.Type_ui ui);
   }
 
@@ -1420,7 +1420,7 @@ public final class Uihtml {
    * @return {divchildlist}
    * (func divchildlist<-uimap)
    */
-  public static interface Func_divchildlist_from_uimap extends Core.Func_any_from_any {
+  public interface Func_divchildlist_from_uimap extends Core.Func_any_from_any {
     public Html.Type_divchildlist vx_divchildlist_from_uimap(final Ui.Type_uimap uimap);
   }
 
@@ -1532,7 +1532,7 @@ public final class Uihtml {
    * @return {divchildlist}
    * (func divchildlist<-uimap)
    */
-  public static interface Func_divchildlist_from_uimap_1 extends Core.Func_any_from_any {
+  public interface Func_divchildlist_from_uimap_1 extends Core.Func_any_from_any {
     public Html.Type_divchildlist vx_divchildlist_from_uimap_1(final Ui.Type_uimap uimap);
   }
 
@@ -1646,7 +1646,7 @@ public final class Uihtml {
    * @return {divchildlist}
    * (func divchildlist<-uimap-origmap-parent)
    */
-  public static interface Func_divchildlist_from_uimap_origmap_parent extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_divchildlist_from_uimap_origmap_parent extends Core.Type_func, Core.Type_replfunc {
     public Html.Type_divchildlist vx_divchildlist_from_uimap_origmap_parent(final Ui.Type_uimap uimap, final Ui.Type_uimap origmap, final Ui.Type_ui parent);
   }
 
@@ -1743,7 +1743,7 @@ public final class Uihtml {
    * @return {node}
    * (func node-app<-ui-orig-parent)
    */
-  public static interface Func_node_app_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_node_app_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
     public Html.Type_node vx_node_app_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
   }
 
@@ -1842,7 +1842,7 @@ public final class Uihtml {
    * @return {node}
    * (func node-default<-ui-orig-parent)
    */
-  public static interface Func_node_default_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_node_default_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
     public Html.Type_node vx_node_default_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
   }
 
@@ -1948,7 +1948,7 @@ public final class Uihtml {
    * @return {node}
    * (func node-image<-ui-orig-parent)
    */
-  public static interface Func_node_image_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_node_image_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
     public Html.Type_node vx_node_image_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
   }
 
@@ -2054,7 +2054,7 @@ public final class Uihtml {
    * @return {node}
    * (func node-label<-ui-orig-parent)
    */
-  public static interface Func_node_label_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_node_label_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
     public Html.Type_node vx_node_label_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
   }
 
@@ -2182,7 +2182,7 @@ public final class Uihtml {
    * @return {node}
    * (func node-layout<-node-ui-parent)
    */
-  public static interface Func_node_layout_from_node_ui_parent extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_node_layout_from_node_ui_parent extends Core.Type_func, Core.Type_replfunc {
     public Html.Type_node vx_node_layout_from_node_ui_parent(final Html.Type_node node, final Ui.Type_ui ui, final Ui.Type_ui parent);
   }
 
@@ -2273,7 +2273,7 @@ public final class Uihtml {
    * @return {node}
    * (func node<-ui-orig-parent)
    */
-  public static interface Func_node_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_node_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
     public Html.Type_node vx_node_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
   }
 
@@ -2383,7 +2383,7 @@ public final class Uihtml {
    * @return {string}
    * (func string-class<-ui)
    */
-  public static interface Func_string_class_from_ui extends Core.Func_any_from_any {
+  public interface Func_string_class_from_ui extends Core.Func_any_from_any {
     public Core.Type_string vx_string_class_from_ui(final Ui.Type_ui ui);
   }
 
@@ -2480,7 +2480,7 @@ public final class Uihtml {
    * @return {string}
    * (func string-style<-font)
    */
-  public static interface Func_string_style_from_font extends Core.Func_any_from_any {
+  public interface Func_string_style_from_font extends Core.Func_any_from_any {
     public Core.Type_string vx_string_style_from_font(final Ui.Type_font font);
   }
 
@@ -2619,7 +2619,7 @@ public final class Uihtml {
    * @return {string}
    * (func string-style<-image)
    */
-  public static interface Func_string_style_from_image extends Core.Func_any_from_any {
+  public interface Func_string_style_from_image extends Core.Func_any_from_any {
     public Core.Type_string vx_string_style_from_image(final Ui.Type_image image);
   }
 
@@ -2748,7 +2748,7 @@ public final class Uihtml {
    * @return {string}
    * (func string-stylename<-name-styletype)
    */
-  public static interface Func_string_stylename_from_name_styletype extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_string_stylename_from_name_styletype extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_string vx_string_stylename_from_name_styletype(final Core.Type_string name, final Ui.Type_styletype styletype);
   }
 
@@ -2879,7 +2879,7 @@ public final class Uihtml {
    * @return {style}
    * (func style<-fontface)
    */
-  public static interface Func_style_from_fontface extends Core.Func_any_from_any {
+  public interface Func_style_from_fontface extends Core.Func_any_from_any {
     public Html.Type_style vx_style_from_fontface(final Ui.Type_fontface fontface);
   }
 
@@ -3036,7 +3036,7 @@ public final class Uihtml {
    * @return {style}
    * (func style<-style)
    */
-  public static interface Func_style_from_style extends Core.Func_any_from_any {
+  public interface Func_style_from_style extends Core.Func_any_from_any {
     public Html.Type_style vx_style_from_style(final Ui.Type_style uistyle);
   }
 
@@ -3965,7 +3965,7 @@ public final class Uihtml {
    * @return {stylelist}
    * (func stylelist-extra<-ui)
    */
-  public static interface Func_stylelist_extra_from_ui extends Core.Func_any_from_any {
+  public interface Func_stylelist_extra_from_ui extends Core.Func_any_from_any {
     public Html.Type_stylelist vx_stylelist_extra_from_ui(final Ui.Type_ui ui);
   }
 
@@ -4100,7 +4100,7 @@ public final class Uihtml {
    * @return {stylelist}
    * (func stylelist-reset)
    */
-  public static interface Func_stylelist_reset extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_stylelist_reset extends Core.Type_func, Core.Type_replfunc {
     public Html.Type_stylelist vx_stylelist_reset();
   }
 
@@ -4302,7 +4302,7 @@ public final class Uihtml {
    * @return {stylelist}
    * (func stylelist<-fontfacemap)
    */
-  public static interface Func_stylelist_from_fontfacemap extends Core.Func_any_from_any {
+  public interface Func_stylelist_from_fontfacemap extends Core.Func_any_from_any {
     public Html.Type_stylelist vx_stylelist_from_fontfacemap(final Ui.Type_fontfacemap fontfacemap);
   }
 
@@ -4402,7 +4402,7 @@ public final class Uihtml {
    * @return {stylelist}
    * (func stylelist<-stylelist)
    */
-  public static interface Func_stylelist_from_stylelist extends Core.Func_any_from_any {
+  public interface Func_stylelist_from_stylelist extends Core.Func_any_from_any {
     public Html.Type_stylelist vx_stylelist_from_stylelist(final Ui.Type_stylelist uistylelist);
   }
 
@@ -4497,7 +4497,7 @@ public final class Uihtml {
    * @return {stylelist}
    * (func stylelist<-stylemap)
    */
-  public static interface Func_stylelist_from_stylemap extends Core.Func_any_from_any {
+  public interface Func_stylelist_from_stylemap extends Core.Func_any_from_any {
     public Html.Type_stylelist vx_stylelist_from_stylemap(final Ui.Type_stylemap uistylemap);
   }
 
@@ -4597,7 +4597,7 @@ public final class Uihtml {
    * @return {stylemap}
    * (func stylemap<-stylemap)
    */
-  public static interface Func_stylemap_from_stylemap extends Core.Func_any_from_any {
+  public interface Func_stylemap_from_stylemap extends Core.Func_any_from_any {
     public Html.Type_stylemap vx_stylemap_from_stylemap(final Ui.Type_stylemap uistylemap);
   }
 
@@ -4698,7 +4698,7 @@ public final class Uihtml {
    * @return {stylesheet}
    * (func stylesheet-layout-html)
    */
-  public static interface Func_stylesheet_layout_html extends Core.Func_any_from_any_async {
+  public interface Func_stylesheet_layout_html extends Core.Func_any_from_any_async {
     public CompletableFuture<Ui.Type_stylesheet> vx_stylesheet_layout_html(final Ui.Type_stylesheet stylesheetui);
   }
 
@@ -4799,7 +4799,7 @@ public final class Uihtml {
    * @return {stylesheet}
    * (func stylesheet<-stylesheet)
    */
-  public static interface Func_stylesheet_from_stylesheet extends Core.Func_any_from_any {
+  public interface Func_stylesheet_from_stylesheet extends Core.Func_any_from_any {
     public Html.Type_stylesheet vx_stylesheet_from_stylesheet(final Ui.Type_stylesheet uistylesheet);
   }
 
@@ -4915,7 +4915,7 @@ public final class Uihtml {
    * @return {ui}
    * (func ui-layout-app<-ui-orig-parent)
    */
-  public static interface Func_ui_layout_app_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ui_layout_app_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_ui vx_ui_layout_app_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
   }
 
@@ -5005,7 +5005,7 @@ public final class Uihtml {
    * @return {ui}
    * (func ui-layout-default<-ui-orig-parent)
    */
-  public static interface Func_ui_layout_default_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ui_layout_default_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_ui vx_ui_layout_default_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
   }
 
@@ -5096,7 +5096,7 @@ public final class Uihtml {
    * @return {ui}
    * (func ui-layout-image<-ui-orig-parent)
    */
-  public static interface Func_ui_layout_image_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ui_layout_image_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_ui vx_ui_layout_image_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
   }
 
@@ -5186,7 +5186,7 @@ public final class Uihtml {
    * @return {ui}
    * (func ui-layout-label<-ui-orig-parent)
    */
-  public static interface Func_ui_layout_label_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ui_layout_label_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_ui vx_ui_layout_label_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
   }
 

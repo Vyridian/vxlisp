@@ -905,7 +905,7 @@ public final class Xml {
    * @return {string}
    * (func string-decodexml<-string)
    */
-  public static interface Func_string_decodexml_from_string extends Core.Func_any_from_any {
+  public interface Func_string_decodexml_from_string extends Core.Func_any_from_any {
     public Core.Type_string vx_string_decodexml_from_string(final Core.Type_string text);
   }
 
@@ -1009,7 +1009,7 @@ public final class Xml {
    * @return {string}
    * (func string-first<-xml)
    */
-  public static interface Func_string_first_from_xml extends Core.Func_any_from_any {
+  public interface Func_string_first_from_xml extends Core.Func_any_from_any {
     public Core.Type_string vx_string_first_from_xml(final Xml.Type_xml xml);
   }
 
@@ -1111,7 +1111,7 @@ public final class Xml {
    * @return {textblock}
    * (func textblock-xml<-string)
    */
-  public static interface Func_textblock_xml_from_string extends Core.Func_any_from_any {
+  public interface Func_textblock_xml_from_string extends Core.Func_any_from_any {
     public Textblock.Type_textblock vx_textblock_xml_from_string(final Core.Type_string text);
   }
 
@@ -1206,7 +1206,7 @@ public final class Xml {
    * @return {xml}
    * (func xml-angle<-xml-textblock)
    */
-  public static interface Func_xml_angle_from_xml_textblock extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_xml_angle_from_xml_textblock extends Core.Type_func, Core.Type_replfunc {
     public Xml.Type_xml vx_xml_angle_from_xml_textblock(final Xml.Type_xml xmlarg, final Textblock.Type_textblock tb);
   }
 
@@ -1329,7 +1329,7 @@ public final class Xml {
    * @return {xml}
    * (func xml-close<-xml-textblock)
    */
-  public static interface Func_xml_close_from_xml_textblock extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_xml_close_from_xml_textblock extends Core.Type_func, Core.Type_replfunc {
     public Xml.Type_xml vx_xml_close_from_xml_textblock(final Xml.Type_xml xmlarg, final Textblock.Type_textblock tb);
   }
 
@@ -1508,7 +1508,7 @@ public final class Xml {
    * @return {xml}
    * (func xml-parse<-xml-textblock)
    */
-  public static interface Func_xml_parse_from_xml_textblock extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_xml_parse_from_xml_textblock extends Core.Type_func, Core.Type_replfunc {
     public Xml.Type_xml vx_xml_parse_from_xml_textblock(final Xml.Type_xml xmlarg, final Textblock.Type_textblock tb);
   }
 
@@ -1632,7 +1632,7 @@ public final class Xml {
    * @return {xml}
    * (func xml-parse<-xml-textblocklist)
    */
-  public static interface Func_xml_parse_from_xml_textblocklist extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_xml_parse_from_xml_textblocklist extends Core.Type_func, Core.Type_replfunc {
     public Xml.Type_xml vx_xml_parse_from_xml_textblocklist(final Xml.Type_xml xmlarg, final Textblock.Type_textblocklist textblocklist);
   }
 
@@ -1723,7 +1723,7 @@ public final class Xml {
    * @return {xml}
    * (func xml-properties<-xml-textblocklist)
    */
-  public static interface Func_xml_properties_from_xml_textblocklist extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_xml_properties_from_xml_textblocklist extends Core.Type_func, Core.Type_replfunc {
     public Xml.Type_xml vx_xml_properties_from_xml_textblocklist(final Xml.Type_xml xmlarg, final Textblock.Type_textblocklist textblocklist);
   }
 
@@ -1820,7 +1820,7 @@ public final class Xml {
    * @return {xml}
    * (func xml-property<-xml-textblock)
    */
-  public static interface Func_xml_property_from_xml_textblock extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_xml_property_from_xml_textblock extends Core.Type_func, Core.Type_replfunc {
     public Xml.Type_xml vx_xml_property_from_xml_textblock(final Xml.Type_xml xmlarg, final Textblock.Type_textblock tbarg);
   }
 
@@ -2001,7 +2001,7 @@ public final class Xml {
    * @return {xml}
    * (func xml-read<-file)
    */
-  public static interface Func_xml_read_from_file extends Core.Func_any_from_any_context {
+  public interface Func_xml_read_from_file extends Core.Func_any_from_any_context {
     public Xml.Type_xml vx_xml_read_from_file(final Core.Type_context context, final File.Type_file file);
   }
 
@@ -2100,7 +2100,7 @@ public final class Xml {
    * @return {xml}
    * (func xml-text<-xml-textblock)
    */
-  public static interface Func_xml_text_from_xml_textblock extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_xml_text_from_xml_textblock extends Core.Type_func, Core.Type_replfunc {
     public Xml.Type_xml vx_xml_text_from_xml_textblock(final Xml.Type_xml xmlarg, final Textblock.Type_textblock tb);
   }
 
@@ -2222,7 +2222,7 @@ public final class Xml {
    * @return {xml}
    * (func xml<-file)
    */
-  public static interface Func_xml_from_file extends Core.Func_any_from_any {
+  public interface Func_xml_from_file extends Core.Func_any_from_any {
     public Xml.Type_xml vx_xml_from_file(final File.Type_file file);
   }
 
@@ -2319,7 +2319,7 @@ public final class Xml {
    * @return {xml}
    * (func xml<-string)
    */
-  public static interface Func_xml_from_string extends Core.Func_any_from_any {
+  public interface Func_xml_from_string extends Core.Func_any_from_any {
     public Xml.Type_xml vx_xml_from_string(final Core.Type_string text);
   }
 
@@ -2416,7 +2416,7 @@ public final class Xml {
    * @return {xml}
    * (func xml<-textblock)
    */
-  public static interface Func_xml_from_textblock extends Core.Func_any_from_any {
+  public interface Func_xml_from_textblock extends Core.Func_any_from_any {
     public Xml.Type_xml vx_xml_from_textblock(final Textblock.Type_textblock textblock);
   }
 

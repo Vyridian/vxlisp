@@ -12,7 +12,7 @@ public final class Es {
    * @return {translation}
    * (func translation-es)
    */
-  public static interface Func_translation_es extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_translation_es extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_translation vx_translation_es();
   }
 
@@ -97,7 +97,7 @@ public final class Es {
    * @return {stringmap}
    * (func words)
    */
-  public static interface Func_words extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_words extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_stringmap vx_words();
   }
 

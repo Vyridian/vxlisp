@@ -16,7 +16,7 @@ public final class Htmldoc {
    * @return {boolean}
    * (func boolean-print<-id-stylesheettext)
    */
-  public static interface Func_boolean_print_from_id_stylesheettext extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_print_from_id_stylesheettext extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_print_from_id_stylesheettext(final Core.Type_string id, final Core.Type_string stylesheettext);
   }
 
@@ -95,7 +95,7 @@ public final class Htmldoc {
    * @return {boolean}
    * (func boolean-remove<-id)
    */
-  public static interface Func_boolean_remove_from_id extends Core.Func_any_from_any {
+  public interface Func_boolean_remove_from_id extends Core.Func_any_from_any {
     public Core.Type_boolean vx_boolean_remove_from_id(final Core.Type_string id);
   }
 
@@ -186,7 +186,7 @@ public final class Htmldoc {
    * @return {boolean}
    * (func boolean-replace<-id-htmltext)
    */
-  public static interface Func_boolean_replace_from_id_htmltext extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_replace_from_id_htmltext extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_replace_from_id_htmltext(final Core.Type_string id, final Core.Type_string htmltext);
   }
 
@@ -267,7 +267,7 @@ public final class Htmldoc {
    * @return {boolean}
    * (func boolean-replace<-id-parent-htmltext)
    */
-  public static interface Func_boolean_replace_from_id_parent_htmltext extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_replace_from_id_parent_htmltext extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_replace_from_id_parent_htmltext(final Core.Type_string id, final Core.Type_string parent, final Core.Type_string htmltext);
   }
 
@@ -349,7 +349,7 @@ public final class Htmldoc {
    * @return {boolean}
    * (func boolean-write-stylesheet<-string)
    */
-  public static interface Func_boolean_write_stylesheet_from_string extends Core.Func_any_from_any_async {
+  public interface Func_boolean_write_stylesheet_from_string extends Core.Func_any_from_any_async {
     public CompletableFuture<Core.Type_boolean> vx_boolean_write_stylesheet_from_string(final Core.Type_string text);
   }
 
@@ -442,7 +442,7 @@ public final class Htmldoc {
    * @return {boolean}
    * (func boolean-write<-id-attribute-value)
    */
-  public static interface Func_boolean_write_from_id_attribute_value extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_write_from_id_attribute_value extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_write_from_id_attribute_value(final Core.Type_string id, final Core.Type_string attribute, final Core.Type_string value);
   }
 
@@ -523,7 +523,7 @@ public final class Htmldoc {
    * @return {boolean}
    * (func boolean-write<-id-htmltext)
    */
-  public static interface Func_boolean_write_from_id_htmltext extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_write_from_id_htmltext extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_write_from_id_htmltext(final Core.Type_string id, final Core.Type_string htmltext);
   }
 
@@ -603,7 +603,7 @@ public final class Htmldoc {
    * @return {boolean}
    * (func boolean-write<-id-visible)
    */
-  public static interface Func_boolean_write_from_id_visible extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_write_from_id_visible extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_write_from_id_visible(final Core.Type_string id, final Core.Type_boolean visible);
   }
 
@@ -684,7 +684,7 @@ public final class Htmldoc {
    * @return {boolean}
    * (func boolean-write<-stylesheet)
    */
-  public static interface Func_boolean_write_from_stylesheet extends Core.Func_any_from_any_async {
+  public interface Func_boolean_write_from_stylesheet extends Core.Func_any_from_any_async {
     public CompletableFuture<Core.Type_boolean> vx_boolean_write_from_stylesheet(final Html.Type_stylesheet stylesheet);
   }
 
@@ -785,7 +785,7 @@ public final class Htmldoc {
    * @return {boolean}
    * (func boolean-writeevents<-ui)
    */
-  public static interface Func_boolean_writeevents_from_ui extends Core.Func_any_from_any {
+  public interface Func_boolean_writeevents_from_ui extends Core.Func_any_from_any {
     public Core.Type_boolean vx_boolean_writeevents_from_ui(final Ui.Type_ui ui);
   }
 
@@ -874,7 +874,7 @@ public final class Htmldoc {
    * @return {context}
    * (func context-read)
    */
-  public static interface Func_context_read extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_context_read extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_context vx_context_read();
   }
 
@@ -950,7 +950,7 @@ public final class Htmldoc {
    * @return {context}
    * (func context-write)
    */
-  public static interface Func_context_write extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_context_write extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_context vx_context_write(final Core.Type_context context);
   }
 
@@ -1028,7 +1028,7 @@ public final class Htmldoc {
    * @return {string}
    * (func string<-id)
    */
-  public static interface Func_string_from_id extends Core.Func_any_from_any {
+  public interface Func_string_from_id extends Core.Func_any_from_any {
     public Core.Type_string vx_string_from_id(final Core.Type_string id);
   }
 
@@ -1118,7 +1118,7 @@ public final class Htmldoc {
    * @return {string}
    * (func string<-stylesheet)
    */
-  public static interface Func_string_from_stylesheet extends Core.Func_any_from_any {
+  public interface Func_string_from_stylesheet extends Core.Func_any_from_any {
     public Core.Type_string vx_string_from_stylesheet(final Html.Type_stylesheet stylesheet);
   }
 
@@ -1216,7 +1216,7 @@ public final class Htmldoc {
    * @return {any}
    * (func ui-readstate<-uid)
    */
-  public static interface Func_ui_readstate_from_uid extends Core.Func_any_from_any {
+  public interface Func_ui_readstate_from_uid extends Core.Func_any_from_any {
     public Core.Type_any vx_ui_readstate_from_uid(final Core.Type_string uid);
   }
 

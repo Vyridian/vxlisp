@@ -224,7 +224,7 @@ public final class Http {
    * @return {csv}
    * (func csv<-httpget)
    */
-  public static interface Func_csv_from_httpget extends Core.Func_any_from_any_async {
+  public interface Func_csv_from_httpget extends Core.Func_any_from_any_async {
     public CompletableFuture<Csv.Type_csv> vx_csv_from_httpget(final Core.Type_string url);
   }
 
@@ -326,7 +326,7 @@ public final class Http {
    * @return {response}
    * (func json<-httpget)
    */
-  public static interface Func_json_from_httpget extends Core.Func_any_from_any_async {
+  public interface Func_json_from_httpget extends Core.Func_any_from_any_async {
     public CompletableFuture<Http.Type_response> vx_json_from_httpget(final Core.Type_string url);
   }
 
@@ -429,7 +429,7 @@ public final class Http {
    * @return {response}
    * (func response<-httpget)
    */
-  public static interface Func_response_from_httpget extends Core.Type_func, Core.Type_replfunc_async {
+  public interface Func_response_from_httpget extends Core.Type_func, Core.Type_replfunc_async {
     public CompletableFuture<Http.Type_response> vx_response_from_httpget(final Core.Type_string url, final Core.Type_string contenttype);
   }
 
@@ -511,7 +511,7 @@ public final class Http {
    * @return {string}
    * (func text<-httpget)
    */
-  public static interface Func_text_from_httpget extends Core.Func_any_from_any_async {
+  public interface Func_text_from_httpget extends Core.Func_any_from_any_async {
     public CompletableFuture<Core.Type_string> vx_text_from_httpget(final Core.Type_string url);
   }
 
@@ -611,7 +611,7 @@ public final class Http {
    * @return {string}
    * (func text<-response)
    */
-  public static interface Func_text_from_response extends Core.Func_any_from_any {
+  public interface Func_text_from_response extends Core.Func_any_from_any {
     public Core.Type_string vx_text_from_response(final Http.Type_response response);
   }
 
@@ -704,7 +704,7 @@ public final class Http {
    * @return {textblock}
    * (func textblock<-httpget)
    */
-  public static interface Func_textblock_from_httpget extends Core.Type_func, Core.Type_replfunc_async {
+  public interface Func_textblock_from_httpget extends Core.Type_func, Core.Type_replfunc_async {
     public CompletableFuture<Textblock.Type_textblock> vx_textblock_from_httpget(final Core.Type_string url, final Core.Type_string contenttype);
   }
 
@@ -793,7 +793,7 @@ public final class Http {
    * @return {textblock}
    * (func textblock<-response)
    */
-  public static interface Func_textblock_from_response extends Core.Func_any_from_any {
+  public interface Func_textblock_from_response extends Core.Func_any_from_any {
     public Textblock.Type_textblock vx_textblock_from_response(final Http.Type_response response);
   }
 
@@ -892,7 +892,7 @@ public final class Http {
    * @return {xml}
    * (func xml<-httpget)
    */
-  public static interface Func_xml_from_httpget extends Core.Func_any_from_any_async {
+  public interface Func_xml_from_httpget extends Core.Func_any_from_any_async {
     public CompletableFuture<Xml.Type_xml> vx_xml_from_httpget(final Core.Type_string url);
   }
 

@@ -625,11 +625,11 @@
  :test (test-true true))
 
 (func . : any
- [object : any
-  method : string
-  params : anylist :...]
+ [target     : any
+  method     : string
+  parameters : anylist :...]
  (native
-  :js "object[method].apply(params)")
+  :js "target[method].apply(parameters)")
  :alias       "dotmethod"
  :sideeffects "Depends on object"
  :doc "Not Recommened: Support for Object Oriented dot notation. e.g. (this.foo 'a') = this.foo('a')")
@@ -1775,7 +1775,7 @@
  :doc "Returns float from a given string.")
 
 (func fn : any-1
- [params : arglist
+ [parameters : arglist
   fn-any : any<-func]
  :doc "Shell for lambda function calls")
 

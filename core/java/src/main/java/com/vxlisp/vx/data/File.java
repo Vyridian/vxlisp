@@ -541,7 +541,7 @@ public final class File {
    * @return {boolean}
    * (func boolean-exists<-file)
    */
-  public static interface Func_boolean_exists_from_file extends Core.Func_any_from_any {
+  public interface Func_boolean_exists_from_file extends Core.Func_any_from_any {
     public Core.Type_boolean vx_boolean_exists_from_file(final File.Type_file file);
   }
 
@@ -637,7 +637,7 @@ public final class File {
    * @return {boolean}
    * (func boolean-write<-file)
    */
-  public static interface Func_boolean_write_from_file extends Core.Func_any_from_any_context {
+  public interface Func_boolean_write_from_file extends Core.Func_any_from_any_context {
     public Core.Type_boolean vx_boolean_write_from_file(final Core.Type_context context, final File.Type_file file);
   }
 
@@ -734,7 +734,7 @@ public final class File {
    * @return {boolean}
    * (func boolean-write<-file-any)
    */
-  public static interface Func_boolean_write_from_file_any extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_write_from_file_any extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_write_from_file_any(final Core.Type_context context, final File.Type_file file, final Core.Type_any val);
   }
 
@@ -820,7 +820,7 @@ public final class File {
    * @return {boolean}
    * (func boolean-write<-file-string)
    */
-  public static interface Func_boolean_write_from_file_string extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_write_from_file_string extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_write_from_file_string(final Core.Type_context context, final File.Type_file file, final Core.Type_string text);
   }
 
@@ -917,7 +917,7 @@ public final class File {
    * @return {file}
    * (func file-read<-file)
    */
-  public static interface Func_file_read_from_file extends Core.Func_any_from_any_context {
+  public interface Func_file_read_from_file extends Core.Func_any_from_any_context {
     public File.Type_file vx_file_read_from_file(final Core.Type_context context, final File.Type_file file);
   }
 
@@ -1020,7 +1020,7 @@ public final class File {
    * @return {file}
    * (func file<-path)
    */
-  public static interface Func_file_from_path extends Core.Func_any_from_any {
+  public interface Func_file_from_path extends Core.Func_any_from_any {
     public File.Type_file vx_file_from_path(final Core.Type_string path);
   }
 
@@ -1133,7 +1133,7 @@ public final class File {
    * @return {string}
    * (func name<-file)
    */
-  public static interface Func_name_from_file extends Core.Func_any_from_any {
+  public interface Func_name_from_file extends Core.Func_any_from_any {
     public Core.Type_string vx_name_from_file(final File.Type_file file);
   }
 
@@ -1224,7 +1224,7 @@ public final class File {
    * @return {string}
    * (func path<-file)
    */
-  public static interface Func_path_from_file extends Core.Func_any_from_any {
+  public interface Func_path_from_file extends Core.Func_any_from_any {
     public Core.Type_string vx_path_from_file(final File.Type_file file);
   }
 
@@ -1314,7 +1314,7 @@ public final class File {
    * @return {string}
    * (func pathcurrent<-os)
    */
-  public static interface Func_pathcurrent_from_os extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_pathcurrent_from_os extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_string vx_pathcurrent_from_os();
   }
 
@@ -1395,7 +1395,7 @@ public final class File {
    * @return {string}
    * (func pathfull<-file)
    */
-  public static interface Func_pathfull_from_file extends Core.Func_any_from_any {
+  public interface Func_pathfull_from_file extends Core.Func_any_from_any {
     public Core.Type_string vx_pathfull_from_file(final File.Type_file file);
   }
 
@@ -1517,7 +1517,7 @@ public final class File {
    * @return {string}
    * (func string-read<-file)
    */
-  public static interface Func_string_read_from_file extends Core.Func_any_from_any_context {
+  public interface Func_string_read_from_file extends Core.Func_any_from_any_context {
     public Core.Type_string vx_string_read_from_file(final Core.Type_context context, final File.Type_file file);
   }
 

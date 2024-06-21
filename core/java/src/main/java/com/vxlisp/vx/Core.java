@@ -16,15 +16,15 @@ import java.util.stream.Collectors;
 
 public final class Core {
 
-  public static interface vx_Type_const {
+  public interface vx_Type_const {
     public Core.Type_constdef vx_constdef();
   }
 
-  public static interface Type_replfunc {
+  public interface Type_replfunc {
     public Core.Type_any vx_repl(Core.Type_anylist arglist);
   }
 
-  public static interface Type_replfunc_async {
+  public interface Type_replfunc_async {
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist);
   }
 
@@ -13379,7 +13379,7 @@ public final class Core {
    * @return {boolean}
    * (func !)
    */
-  public static interface Func_not extends Core.Func_any_from_any {
+  public interface Func_not extends Core.Func_any_from_any {
     public Core.Type_boolean vx_not(final Core.Type_boolean val);
   }
 
@@ -13470,7 +13470,7 @@ public final class Core {
    * @return {boolean}
    * (func !-empty)
    */
-  public static interface Func_notempty extends Core.Func_any_from_any {
+  public interface Func_notempty extends Core.Func_any_from_any {
     public Core.Type_boolean vx_notempty(final Core.Type_string text);
   }
 
@@ -13563,7 +13563,7 @@ public final class Core {
    * @return {boolean}
    * (func !-empty)
    */
-  public static interface Func_notempty_1 extends Core.Func_any_from_any {
+  public interface Func_notempty_1 extends Core.Func_any_from_any {
     public Core.Type_boolean vx_notempty_1(final Core.Type_any val);
   }
 
@@ -13657,7 +13657,7 @@ public final class Core {
    * @return {boolean}
    * (func !=)
    */
-  public static interface Func_ne extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ne extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_ne(final Core.Type_any val1, final Core.Type_any val2);
   }
 
@@ -13740,7 +13740,7 @@ public final class Core {
    * @return {boolean}
    * (func !==)
    */
-  public static interface Func_neqeq extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_neqeq extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_neqeq(final Core.Type_any val1, final Core.Type_any val2);
   }
 
@@ -13823,7 +13823,7 @@ public final class Core {
    * @return {int}
    * (func *)
    */
-  public static interface Func_multiply extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_multiply extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_int vx_multiply(final Core.Type_int num1, final Core.Type_int num2);
   }
 
@@ -13905,7 +13905,7 @@ public final class Core {
    * @return {number}
    * (func *)
    */
-  public static interface Func_multiply_1 extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_multiply_1 extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_number vx_multiply_1(final Core.Type_number num1, final Core.Type_number num2);
   }
 
@@ -13988,7 +13988,7 @@ public final class Core {
    * @return {int}
    * (func *)
    */
-  public static interface Func_multiply_2 extends Core.Func_any_from_any {
+  public interface Func_multiply_2 extends Core.Func_any_from_any {
     public Core.Type_int vx_multiply_2(final Core.Type_intlist nums);
   }
 
@@ -14089,7 +14089,7 @@ public final class Core {
    * @return {number}
    * (func *)
    */
-  public static interface Func_multiply_3 extends Core.Func_any_from_any {
+  public interface Func_multiply_3 extends Core.Func_any_from_any {
     public Core.Type_number vx_multiply_3(final Core.Type_numberlist nums);
   }
 
@@ -14191,7 +14191,7 @@ public final class Core {
    * @return {int}
    * (func +)
    */
-  public static interface Func_plus extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_plus extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_int vx_plus(final Core.Type_int num1, final Core.Type_int num2);
   }
 
@@ -14273,7 +14273,7 @@ public final class Core {
    * @return {number}
    * (func +)
    */
-  public static interface Func_plus_1 extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_plus_1 extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_number vx_plus_1(final Core.Type_number num1, final Core.Type_number num2);
   }
 
@@ -14356,7 +14356,7 @@ public final class Core {
    * @return {int}
    * (func +)
    */
-  public static interface Func_plus_2 extends Core.Func_any_from_any {
+  public interface Func_plus_2 extends Core.Func_any_from_any {
     public Core.Type_int vx_plus_2(final Core.Type_intlist nums);
   }
 
@@ -14457,7 +14457,7 @@ public final class Core {
    * @return {number}
    * (func +)
    */
-  public static interface Func_plus_3 extends Core.Func_any_from_any {
+  public interface Func_plus_3 extends Core.Func_any_from_any {
     public Core.Type_number vx_plus_3(final Core.Type_numberlist nums);
   }
 
@@ -14558,7 +14558,7 @@ public final class Core {
    * @return {int}
    * (func +1)
    */
-  public static interface Func_plus1 extends Core.Func_any_from_any {
+  public interface Func_plus1 extends Core.Func_any_from_any {
     public Core.Type_int vx_plus1(final Core.Type_int num);
   }
 
@@ -14650,7 +14650,7 @@ public final class Core {
    * @return {int}
    * (func -)
    */
-  public static interface Func_minus extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_minus extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_int vx_minus(final Core.Type_int num1, final Core.Type_int num2);
   }
 
@@ -14732,7 +14732,7 @@ public final class Core {
    * @return {number}
    * (func -)
    */
-  public static interface Func_minus_1 extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_minus_1 extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_number vx_minus_1(final Core.Type_number num1, final Core.Type_number num2);
   }
 
@@ -14815,7 +14815,7 @@ public final class Core {
    * @return {int}
    * (func -)
    */
-  public static interface Func_minus_2 extends Core.Func_any_from_any {
+  public interface Func_minus_2 extends Core.Func_any_from_any {
     public Core.Type_int vx_minus_2(final Core.Type_intlist nums);
   }
 
@@ -14916,7 +14916,7 @@ public final class Core {
    * @return {number}
    * (func -)
    */
-  public static interface Func_minus_3 extends Core.Func_any_from_any {
+  public interface Func_minus_3 extends Core.Func_any_from_any {
     public Core.Type_number vx_minus_3(final Core.Type_numberlist nums);
   }
 
@@ -15017,7 +15017,7 @@ public final class Core {
    * @return {int}
    * (func -1)
    */
-  public static interface Func_minus1 extends Core.Func_any_from_any {
+  public interface Func_minus1 extends Core.Func_any_from_any {
     public Core.Type_int vx_minus1(final Core.Type_int num);
   }
 
@@ -15104,14 +15104,14 @@ public final class Core {
   /**
    * @function dotmethod
    * Not Recommened: Support for Object Oriented dot notation. e.g. (this.foo 'a') = this.foo('a')
-   * @param  {any} object
+   * @param  {any} target
    * @param  {string} method
-   * @param  {anylist} params
+   * @param  {anylist} parameters
    * @return {any}
    * (func .)
    */
-  public static interface Func_dotmethod extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_any vx_dotmethod(final Core.Type_any object, final Core.Type_string method, final Core.Type_anylist params);
+  public interface Func_dotmethod extends Core.Type_func, Core.Type_replfunc {
+    public Core.Type_any vx_dotmethod(final Core.Type_any target, final Core.Type_string method, final Core.Type_anylist parameters);
   }
 
   public static class Class_dotmethod extends Core.Class_base implements Func_dotmethod {
@@ -15161,16 +15161,16 @@ public final class Core {
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any object = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any target = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_string method = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
-      Core.Type_anylist params = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(2)));
-      output = Core.f_dotmethod(object, method, params);
+      Core.Type_anylist parameters = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(2)));
+      output = Core.f_dotmethod(target, method, parameters);
       return output;
     }
 
     @Override
-    public Core.Type_any vx_dotmethod(final Core.Type_any object, final Core.Type_string method, final Core.Type_anylist params) {
-      return Core.f_dotmethod(object, method, params);
+    public Core.Type_any vx_dotmethod(final Core.Type_any target, final Core.Type_string method, final Core.Type_anylist parameters) {
+      return Core.f_dotmethod(target, method, parameters);
     }
 
   }
@@ -15178,7 +15178,7 @@ public final class Core {
   public static final Func_dotmethod e_dotmethod = new Core.Class_dotmethod();
   public static final Func_dotmethod t_dotmethod = new Core.Class_dotmethod();
 
-  public static Core.Type_any f_dotmethod(final Core.Type_any object, final Core.Type_string method, final Core.Type_anylist params) {
+  public static Core.Type_any f_dotmethod(final Core.Type_any target, final Core.Type_string method, final Core.Type_anylist parameters) {
     Core.Type_any output = Core.e_any;
     return output;
   }
@@ -15191,7 +15191,7 @@ public final class Core {
    * @return {number}
    * (func /)
    */
-  public static interface Func_divide extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_divide extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_number vx_divide(final Core.Type_number num1, final Core.Type_number num2);
   }
 
@@ -15280,7 +15280,7 @@ public final class Core {
    * @return {boolean}
    * (func <)
    */
-  public static interface Func_lt extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_lt extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_lt(final Core.Type_any val1, final Core.Type_any val2);
   }
 
@@ -15376,7 +15376,7 @@ public final class Core {
    * @return {boolean}
    * (func <)
    */
-  public static interface Func_lt_1 extends Core.Func_any_from_any {
+  public interface Func_lt_1 extends Core.Func_any_from_any {
     public Core.Type_boolean vx_lt_1(final Core.Type_anylist values);
   }
 
@@ -15484,7 +15484,7 @@ public final class Core {
    * @return {any-1}
    * (func <-)
    */
-  public static interface Func_chainfirst extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_chainfirst extends Core.Type_func, Core.Type_replfunc {
     public <T extends Core.Type_any> T vx_chainfirst(final T generic_any_1, final T value, final Core.Type_any_from_anylist fnlist);
   }
 
@@ -15567,7 +15567,7 @@ public final class Core {
    * @return {any-1}
    * (func <<-)
    */
-  public static interface Func_chainlast extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_chainlast extends Core.Type_func, Core.Type_replfunc {
     public <T extends Core.Type_any> T vx_chainlast(final T generic_any_1, final T value, final Core.Type_any_from_anylist fnlist);
   }
 
@@ -15648,7 +15648,7 @@ public final class Core {
    * @return {boolean}
    * (func <=)
    */
-  public static interface Func_le extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_le extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_le(final Core.Type_any val1, final Core.Type_any val2);
   }
 
@@ -15730,7 +15730,7 @@ public final class Core {
    * @return {boolean}
    * (func <=)
    */
-  public static interface Func_le_1 extends Core.Func_any_from_any {
+  public interface Func_le_1 extends Core.Func_any_from_any {
     public Core.Type_boolean vx_le_1(final Core.Type_anylist args);
   }
 
@@ -15824,7 +15824,7 @@ public final class Core {
    * @return {boolean}
    * (func =)
    */
-  public static interface Func_eq extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_eq extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_eq(final Core.Type_any val1, final Core.Type_any val2);
   }
 
@@ -15914,7 +15914,7 @@ public final class Core {
    * @return {boolean}
    * (func =)
    */
-  public static interface Func_eq_1 extends Core.Func_any_from_any {
+  public interface Func_eq_1 extends Core.Func_any_from_any {
     public Core.Type_boolean vx_eq_1(final Core.Type_anylist values);
   }
 
@@ -16020,7 +16020,7 @@ public final class Core {
    * @return {boolean}
    * (func ==)
    */
-  public static interface Func_eqeq extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_eqeq extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_eqeq(final Core.Type_any val1, final Core.Type_any val2);
   }
 
@@ -16102,7 +16102,7 @@ public final class Core {
    * @return {boolean}
    * (func >)
    */
-  public static interface Func_gt extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_gt extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_gt(final Core.Type_any val1, final Core.Type_any val2);
   }
 
@@ -16198,7 +16198,7 @@ public final class Core {
    * @return {boolean}
    * (func >)
    */
-  public static interface Func_gt_1 extends Core.Func_any_from_any {
+  public interface Func_gt_1 extends Core.Func_any_from_any {
     public Core.Type_boolean vx_gt_1(final Core.Type_anylist values);
   }
 
@@ -16304,7 +16304,7 @@ public final class Core {
    * @return {boolean}
    * (func >=)
    */
-  public static interface Func_ge extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ge extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_ge(final Core.Type_any val1, final Core.Type_any val2);
   }
 
@@ -16386,7 +16386,7 @@ public final class Core {
    * @return {boolean}
    * (func >=)
    */
-  public static interface Func_ge_1 extends Core.Func_any_from_any {
+  public interface Func_ge_1 extends Core.Func_any_from_any {
     public Core.Type_boolean vx_ge_1(final Core.Type_anylist args);
   }
 
@@ -16479,7 +16479,7 @@ public final class Core {
    * @return {funclist}
    * (func allowfuncs<-security)
    */
-  public static interface Func_allowfuncs_from_security extends Core.Func_any_from_any {
+  public interface Func_allowfuncs_from_security extends Core.Func_any_from_any {
     public Core.Type_funclist vx_allowfuncs_from_security(final Core.Type_security security);
   }
 
@@ -16570,7 +16570,7 @@ public final class Core {
    * @return {stringlist}
    * (func allowtypenames<-typedef)
    */
-  public static interface Func_allowtypenames_from_typedef extends Core.Func_any_from_any {
+  public interface Func_allowtypenames_from_typedef extends Core.Func_any_from_any {
     public Core.Type_stringlist vx_allowtypenames_from_typedef(final Core.Type_typedef vtypedef);
   }
 
@@ -16663,7 +16663,7 @@ public final class Core {
    * @return {typelist}
    * (func allowtypes<-typedef)
    */
-  public static interface Func_allowtypes_from_typedef extends Core.Func_any_from_any {
+  public interface Func_allowtypes_from_typedef extends Core.Func_any_from_any {
     public Core.Type_typelist vx_allowtypes_from_typedef(final Core.Type_typedef vtypedef);
   }
 
@@ -16755,7 +16755,7 @@ public final class Core {
    * @return {boolean}
    * (func and)
    */
-  public static interface Func_and extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_and extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_and(final Core.Type_boolean val1, final Core.Type_boolean val2);
   }
 
@@ -16839,7 +16839,7 @@ public final class Core {
    * @return {boolean}
    * (func and)
    */
-  public static interface Func_and_1 extends Core.Func_any_from_any {
+  public interface Func_and_1 extends Core.Func_any_from_any {
     public Core.Type_boolean vx_and_1(final Core.Type_booleanlist values);
   }
 
@@ -16966,7 +16966,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-any)
    */
-  public static interface Func_any_from_any extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_any extends Core.Type_func, Core.Type_replfunc {
     public Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value);
   }
@@ -17026,7 +17026,7 @@ public final class Core {
     public Func_any_from_any vx_type() {return t_any_from_any;}
 
     @FunctionalInterface
-    public static interface IFn {
+    public interface IFn {
       public Core.Type_any resolve(Core.Type_any value);
     }
 
@@ -17069,7 +17069,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-any-async)
    */
-  public static interface Func_any_from_any_async extends Core.Type_func, Core.Type_replfunc_async {
+  public interface Func_any_from_any_async extends Core.Type_func, Core.Type_replfunc_async {
     public Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_async(final T generic_any_1, final U value);
   }
@@ -17129,7 +17129,7 @@ public final class Core {
     public Func_any_from_any_async vx_type() {return t_any_from_any_async;}
 
     @FunctionalInterface
-    public static interface IFn {
+    public interface IFn {
       public CompletableFuture<Core.Type_any> resolve(Core.Type_any value);
     }
 
@@ -17171,7 +17171,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-any-context)
    */
-  public static interface Func_any_from_any_context extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_any_context extends Core.Type_func, Core.Type_replfunc {
     public Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value);
   }
@@ -17231,7 +17231,7 @@ public final class Core {
     public Func_any_from_any_context vx_type() {return t_any_from_any_context;}
 
     @FunctionalInterface
-    public static interface IFn {
+    public interface IFn {
       public Core.Type_any resolve(Core.Type_context context, Core.Type_any value);
     }
 
@@ -17275,7 +17275,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-any-context-async)
    */
-  public static interface Func_any_from_any_context_async extends Core.Type_func, Core.Type_replfunc_async {
+  public interface Func_any_from_any_context_async extends Core.Type_func, Core.Type_replfunc_async {
     public Func_any_from_any_context_async vx_fn_new(Core.Class_any_from_any_context_async.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_context_async(final T generic_any_1, final Core.Type_context context, final U value);
   }
@@ -17335,7 +17335,7 @@ public final class Core {
     public Func_any_from_any_context_async vx_type() {return t_any_from_any_context_async;}
 
     @FunctionalInterface
-    public static interface IFn {
+    public interface IFn {
       public CompletableFuture<Core.Type_any> resolve(Core.Type_context context, Core.Type_any value);
     }
 
@@ -17380,7 +17380,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-any-key-value)
    */
-  public static interface Func_any_from_any_key_value extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_any_key_value extends Core.Type_func, Core.Type_replfunc {
     public Func_any_from_any_key_value vx_fn_new(Core.Class_any_from_any_key_value.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_key_value(final T generic_any_1, final T current, final Core.Type_string key, final U value);
   }
@@ -17440,7 +17440,7 @@ public final class Core {
     public Func_any_from_any_key_value vx_type() {return t_any_from_any_key_value;}
 
     @FunctionalInterface
-    public static interface IFn {
+    public interface IFn {
       public Core.Type_any resolve(Core.Type_any current, Core.Type_string key, Core.Type_any value);
     }
 
@@ -17480,7 +17480,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-func)
    */
-  public static interface Func_any_from_func extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_func extends Core.Type_func, Core.Type_replfunc {
     public Func_any_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
     public <T extends Core.Type_any> T vx_any_from_func(final T generic_any_1);
   }
@@ -17540,7 +17540,7 @@ public final class Core {
     public Func_any_from_func vx_type() {return t_any_from_func;}
 
     @FunctionalInterface
-    public static interface IFn {
+    public interface IFn {
       public Core.Type_any resolve();
     }
 
@@ -17579,7 +17579,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-func-async)
    */
-  public static interface Func_any_from_func_async extends Core.Type_func, Core.Type_replfunc_async {
+  public interface Func_any_from_func_async extends Core.Type_func, Core.Type_replfunc_async {
     public Func_any_from_func_async vx_fn_new(Core.Class_any_from_func_async.IFn fn);
     public <T extends Core.Type_any> CompletableFuture<T> vx_any_from_func_async(final T generic_any_1);
   }
@@ -17639,7 +17639,7 @@ public final class Core {
     public Func_any_from_func_async vx_type() {return t_any_from_func_async;}
 
     @FunctionalInterface
-    public static interface IFn {
+    public interface IFn {
       public CompletableFuture<Core.Type_any> resolve();
     }
 
@@ -17680,7 +17680,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-int)
    */
-  public static interface Func_any_from_int extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_int extends Core.Type_func, Core.Type_replfunc {
     public Func_any_from_int vx_fn_new(Core.Class_any_from_int.IFn fn);
     public <T extends Core.Type_any> T vx_any_from_int(final T generic_any_1, final Core.Type_int value);
   }
@@ -17740,7 +17740,7 @@ public final class Core {
     public Func_any_from_int vx_type() {return t_any_from_int;}
 
     @FunctionalInterface
-    public static interface IFn {
+    public interface IFn {
       public Core.Type_any resolve(Core.Type_int value);
     }
 
@@ -17780,7 +17780,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-int-any)
    */
-  public static interface Func_any_from_int_any extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_int_any extends Core.Type_func, Core.Type_replfunc {
     public Func_any_from_int_any vx_fn_new(Core.Class_any_from_int_any.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_int_any(final T generic_any_1, final Core.Type_int num, final U val);
   }
@@ -17840,7 +17840,7 @@ public final class Core {
     public Func_any_from_int_any vx_type() {return t_any_from_int_any;}
 
     @FunctionalInterface
-    public static interface IFn {
+    public interface IFn {
       public Core.Type_any resolve(Core.Type_int num, Core.Type_any val);
     }
 
@@ -17881,7 +17881,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-key-value)
    */
-  public static interface Func_any_from_key_value extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_key_value extends Core.Type_func, Core.Type_replfunc {
     public Func_any_from_key_value vx_fn_new(Core.Class_any_from_key_value.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_key_value(final T generic_any_1, final Core.Type_string key, final U val);
   }
@@ -17941,7 +17941,7 @@ public final class Core {
     public Func_any_from_key_value vx_type() {return t_any_from_key_value;}
 
     @FunctionalInterface
-    public static interface IFn {
+    public interface IFn {
       public Core.Type_any resolve(Core.Type_string key, Core.Type_any val);
     }
 
@@ -17984,7 +17984,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-key-value-async)
    */
-  public static interface Func_any_from_key_value_async extends Core.Type_func, Core.Type_replfunc_async {
+  public interface Func_any_from_key_value_async extends Core.Type_func, Core.Type_replfunc_async {
     public Func_any_from_key_value_async vx_fn_new(Core.Class_any_from_key_value_async.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_key_value_async(final T generic_any_1, final Core.Type_string key, final U val);
   }
@@ -18044,7 +18044,7 @@ public final class Core {
     public Func_any_from_key_value_async vx_type() {return t_any_from_key_value_async;}
 
     @FunctionalInterface
-    public static interface IFn {
+    public interface IFn {
       public CompletableFuture<Core.Type_any> resolve(Core.Type_string key, Core.Type_any val);
     }
 
@@ -18088,7 +18088,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-list)
    */
-  public static interface Func_any_from_list extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_list extends Core.Type_func, Core.Type_replfunc {
     public <T extends Core.Type_any, X extends Core.Type_list> T vx_any_from_list(final T generic_any_1, final X values, final Core.Type_int index);
   }
 
@@ -18177,7 +18177,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-list-start-reduce)
    */
-  public static interface Func_any_from_list_start_reduce extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_list_start_reduce extends Core.Type_func, Core.Type_replfunc {
     public <T extends Core.Type_any, Y extends Core.Type_list> T vx_any_from_list_start_reduce(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce fn_reduce);
   }
 
@@ -18261,7 +18261,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-list-start-reduce-next)
    */
-  public static interface Func_any_from_list_start_reduce_next extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_list_start_reduce_next extends Core.Type_func, Core.Type_replfunc {
     public <T extends Core.Type_any, Y extends Core.Type_list> T vx_any_from_list_start_reduce_next(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce_next fn_reduce_next);
   }
 
@@ -18355,7 +18355,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-map)
    */
-  public static interface Func_any_from_map extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_map extends Core.Type_func, Core.Type_replfunc {
     public <N extends Core.Type_map, T extends Core.Type_any> T vx_any_from_map(final T generic_any_1, final N valuemap, final Core.Type_string key);
   }
 
@@ -18438,7 +18438,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-map-start-reduce)
    */
-  public static interface Func_any_from_map_start_reduce extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_map_start_reduce extends Core.Type_func, Core.Type_replfunc {
     public <N extends Core.Type_map, T extends Core.Type_any> T vx_any_from_map_start_reduce(final T generic_any_1, final N map, final T start, final Core.Func_any_from_any_key_value fn_reduce);
   }
 
@@ -18519,7 +18519,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-none)
    */
-  public static interface Func_any_from_none extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_none extends Core.Type_func, Core.Type_replfunc {
     public Func_any_from_none vx_fn_new(Core.Class_any_from_none.IFn fn);
     public <T extends Core.Type_any> T vx_any_from_none(final T generic_any_1);
   }
@@ -18579,7 +18579,7 @@ public final class Core {
     public Func_any_from_none vx_type() {return t_any_from_none;}
 
     @FunctionalInterface
-    public static interface IFn {
+    public interface IFn {
       public Core.Type_any resolve();
     }
 
@@ -18618,7 +18618,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-none-async)
    */
-  public static interface Func_any_from_none_async extends Core.Type_func, Core.Type_replfunc_async {
+  public interface Func_any_from_none_async extends Core.Type_func, Core.Type_replfunc_async {
     public Func_any_from_none_async vx_fn_new(Core.Class_any_from_none_async.IFn fn);
     public <T extends Core.Type_any> CompletableFuture<T> vx_any_from_none_async(final T generic_any_1);
   }
@@ -18678,7 +18678,7 @@ public final class Core {
     public Func_any_from_none_async vx_type() {return t_any_from_none_async;}
 
     @FunctionalInterface
-    public static interface IFn {
+    public interface IFn {
       public CompletableFuture<Core.Type_any> resolve();
     }
 
@@ -18719,7 +18719,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-reduce)
    */
-  public static interface Func_any_from_reduce extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_reduce extends Core.Type_func, Core.Type_replfunc {
     public Func_any_from_reduce vx_fn_new(Core.Class_any_from_reduce.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_reduce(final T generic_any_1, final T result, final U item);
   }
@@ -18779,7 +18779,7 @@ public final class Core {
     public Func_any_from_reduce vx_type() {return t_any_from_reduce;}
 
     @FunctionalInterface
-    public static interface IFn {
+    public interface IFn {
       public Core.Type_any resolve(Core.Type_any result, Core.Type_any item);
     }
 
@@ -18821,7 +18821,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-reduce-async)
    */
-  public static interface Func_any_from_reduce_async extends Core.Type_func, Core.Type_replfunc_async {
+  public interface Func_any_from_reduce_async extends Core.Type_func, Core.Type_replfunc_async {
     public Func_any_from_reduce_async vx_fn_new(Core.Class_any_from_reduce_async.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_reduce_async(final T generic_any_1, final T result, final U item);
   }
@@ -18881,7 +18881,7 @@ public final class Core {
     public Func_any_from_reduce_async vx_type() {return t_any_from_reduce_async;}
 
     @FunctionalInterface
-    public static interface IFn {
+    public interface IFn {
       public CompletableFuture<Core.Type_any> resolve(Core.Type_any result, Core.Type_any item);
     }
 
@@ -18925,7 +18925,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-reduce-next)
    */
-  public static interface Func_any_from_reduce_next extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_reduce_next extends Core.Type_func, Core.Type_replfunc {
     public Func_any_from_reduce_next vx_fn_new(Core.Class_any_from_reduce_next.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_reduce_next(final T generic_any_1, final T result, final U current, final U next);
   }
@@ -18985,7 +18985,7 @@ public final class Core {
     public Func_any_from_reduce_next vx_type() {return t_any_from_reduce_next;}
 
     @FunctionalInterface
-    public static interface IFn {
+    public interface IFn {
       public Core.Type_any resolve(Core.Type_any result, Core.Type_any current, Core.Type_any next);
     }
 
@@ -19029,7 +19029,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-reduce-next-async)
    */
-  public static interface Func_any_from_reduce_next_async extends Core.Type_func, Core.Type_replfunc_async {
+  public interface Func_any_from_reduce_next_async extends Core.Type_func, Core.Type_replfunc_async {
     public Func_any_from_reduce_next_async vx_fn_new(Core.Class_any_from_reduce_next_async.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_reduce_next_async(final T generic_any_1, final T result, final U current, final U next);
   }
@@ -19089,7 +19089,7 @@ public final class Core {
     public Func_any_from_reduce_next_async vx_type() {return t_any_from_reduce_next_async;}
 
     @FunctionalInterface
-    public static interface IFn {
+    public interface IFn {
       public CompletableFuture<Core.Type_any> resolve(Core.Type_any result, Core.Type_any current, Core.Type_any next);
     }
 
@@ -19134,7 +19134,7 @@ public final class Core {
    * @return {any-1}
    * (func any<-struct)
    */
-  public static interface Func_any_from_struct extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_any_from_struct extends Core.Type_func, Core.Type_replfunc {
     public <R extends Core.Type_struct, T extends Core.Type_any> T vx_any_from_struct(final T generic_any_1, final R vstruct, final Core.Type_string key);
   }
 
@@ -19218,7 +19218,7 @@ public final class Core {
    * @return {any-1}
    * (func async)
    */
-  public static interface Func_async extends Core.Func_any_from_any_async {
+  public interface Func_async extends Core.Func_any_from_any_async {
     public <T extends Core.Type_any> CompletableFuture<T> vx_async(final T generic_any_1, final T value);
   }
 
@@ -19309,7 +19309,7 @@ public final class Core {
    * @return {boolean}
    * (func boolean-permission<-func)
    */
-  public static interface Func_boolean_permission_from_func extends Core.Func_any_from_any_context {
+  public interface Func_boolean_permission_from_func extends Core.Func_any_from_any_context {
     public Core.Type_boolean vx_boolean_permission_from_func(final Core.Type_context context, final Core.Type_func func);
   }
 
@@ -19408,7 +19408,7 @@ public final class Core {
    * @return {boolean}
    * (func boolean-write<-map-name-value)
    */
-  public static interface Func_boolean_write_from_map_name_value extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_write_from_map_name_value extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_write_from_map_name_value(final Core.Type_map valuemap, final Core.Type_string name, final Core.Type_any value);
   }
 
@@ -19489,7 +19489,7 @@ public final class Core {
    * @return {boolean}
    * (func boolean<-any)
    */
-  public static interface Func_boolean_from_any extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_from_any extends Core.Type_func, Core.Type_replfunc {
     public Func_boolean_from_any vx_fn_new(Core.Class_boolean_from_any.IFn fn);
     public Core.Type_boolean vx_boolean_from_any(final Core.Type_any value);
   }
@@ -19549,7 +19549,7 @@ public final class Core {
     public Func_boolean_from_any vx_type() {return t_boolean_from_any;}
 
     @FunctionalInterface
-    public static interface IFn {
+    public interface IFn {
       public Core.Type_any resolve(Core.Type_any value);
     }
 
@@ -19586,7 +19586,7 @@ public final class Core {
    * @return {boolean}
    * (func boolean<-func)
    */
-  public static interface Func_boolean_from_func extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_from_func extends Core.Type_func, Core.Type_replfunc {
     public Func_boolean_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
     public Core.Type_boolean vx_boolean_from_func();
   }
@@ -19637,7 +19637,7 @@ public final class Core {
     public Func_boolean_from_func vx_type() {return t_boolean_from_func;}
 
     @FunctionalInterface
-    public static interface IFn {
+    public interface IFn {
       public Core.Type_any resolve();
     }
 
@@ -19682,7 +19682,7 @@ public final class Core {
    * @return {boolean}
    * (func boolean<-none)
    */
-  public static interface Func_boolean_from_none extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_from_none extends Core.Type_func, Core.Type_replfunc {
     public Func_boolean_from_none vx_fn_new(Core.Class_any_from_func.IFn fn);
     public Core.Type_boolean vx_boolean_from_none();
   }
@@ -19733,7 +19733,7 @@ public final class Core {
     public Func_boolean_from_none vx_type() {return t_boolean_from_none;}
 
     @FunctionalInterface
-    public static interface IFn {
+    public interface IFn {
       public Core.Type_any resolve();
     }
 
@@ -19779,7 +19779,7 @@ public final class Core {
    * @return {thenelse}
    * (func case)
    */
-  public static interface Func_case extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_case extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_thenelse vx_case(final Core.Type_list values, final Core.Func_any_from_func fn_any);
   }
 
@@ -19869,7 +19869,7 @@ public final class Core {
    * @return {thenelse}
    * (func case)
    */
-  public static interface Func_case_1 extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_case_1 extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_thenelse vx_case_1(final Core.Type_any value, final Core.Func_any_from_func fn_any);
   }
 
@@ -19960,7 +19960,7 @@ public final class Core {
    * @return {int}
    * (func compare)
    */
-  public static interface Func_compare extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_compare extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_int vx_compare(final Core.Type_any val1, final Core.Type_any val2);
   }
 
@@ -20062,7 +20062,7 @@ public final class Core {
    * @return {boolean}
    * (func contains)
    */
-  public static interface Func_contains extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_contains extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_contains(final Core.Type_string text, final Core.Type_string find);
   }
 
@@ -20144,7 +20144,7 @@ public final class Core {
    * @return {boolean}
    * (func contains)
    */
-  public static interface Func_contains_1 extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_contains_1 extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_contains_1(final Core.Type_list values, final Core.Type_any find);
   }
 
@@ -20233,7 +20233,7 @@ public final class Core {
    * @return {context}
    * (func context-main)
    */
-  public static interface Func_context_main extends Core.Func_any_from_any {
+  public interface Func_context_main extends Core.Func_any_from_any {
     public Core.Type_context vx_context_main(final Core.Type_anylist args);
   }
 
@@ -20327,7 +20327,7 @@ public final class Core {
    * @return {any-1}
    * (func copy)
    */
-  public static interface Func_copy extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_copy extends Core.Type_func, Core.Type_replfunc {
     public <T extends Core.Type_any> T vx_copy(final Core.Type_any value, final Core.Type_anylist values);
   }
 
@@ -20408,7 +20408,7 @@ public final class Core {
    * @return {thenelse}
    * (func else)
    */
-  public static interface Func_else extends Core.Func_any_from_any {
+  public interface Func_else extends Core.Func_any_from_any {
     public Core.Type_thenelse vx_else(final Core.Func_any_from_func fn_any);
   }
 
@@ -20507,7 +20507,7 @@ public final class Core {
    * @return {any-1}
    * (func empty)
    */
-  public static interface Func_empty extends Core.Func_any_from_any {
+  public interface Func_empty extends Core.Func_any_from_any {
     public <T extends Core.Type_any> T vx_empty(final T type);
   }
 
@@ -20597,7 +20597,7 @@ public final class Core {
    * @return {string}
    * (func extends<-any)
    */
-  public static interface Func_extends_from_any extends Core.Func_any_from_any {
+  public interface Func_extends_from_any extends Core.Func_any_from_any {
     public Core.Type_string vx_extends_from_any(final Core.Type_any val);
   }
 
@@ -20690,7 +20690,7 @@ public final class Core {
    * @return {string}
    * (func extends<-typedef)
    */
-  public static interface Func_extends_from_typedef extends Core.Func_any_from_any {
+  public interface Func_extends_from_typedef extends Core.Func_any_from_any {
     public Core.Type_string vx_extends_from_typedef(final Core.Type_typedef vtypedef);
   }
 
@@ -20781,7 +20781,7 @@ public final class Core {
    * @return {any-1}
    * (func first<-list)
    */
-  public static interface Func_first_from_list extends Core.Func_any_from_any {
+  public interface Func_first_from_list extends Core.Func_any_from_any {
     public <T extends Core.Type_any, X extends Core.Type_list> T vx_first_from_list(final T generic_any_1, final X values);
   }
 
@@ -20874,7 +20874,7 @@ public final class Core {
    * @return {any-1}
    * (func first<-list-any<-any)
    */
-  public static interface Func_first_from_list_any_from_any extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_first_from_list_any_from_any extends Core.Type_func, Core.Type_replfunc {
     public <T extends Core.Type_any, X extends Core.Type_list> T vx_first_from_list_any_from_any(final T generic_any_1, final X values, final Core.Func_any_from_any fn_any_from_any);
   }
 
@@ -20961,7 +20961,7 @@ public final class Core {
    * @return {float}
    * (func float<-string)
    */
-  public static interface Func_float_from_string extends Core.Func_any_from_any {
+  public interface Func_float_from_string extends Core.Func_any_from_any {
     public Core.Type_float vx_float_from_string(final Core.Type_string text);
   }
 
@@ -21049,13 +21049,13 @@ public final class Core {
   /**
    * @function fn
    * Shell for lambda function calls
-   * @param  {arglist} params
+   * @param  {arglist} parameters
    * @param  {any<-func} fn-any
    * @return {any-1}
    * (func fn)
    */
-  public static interface Func_fn extends Core.Type_func, Core.Type_replfunc {
-    public <T extends Core.Type_any> T vx_fn(final T generic_any_1, final Core.Type_arglist params, final Core.Func_any_from_func fn_any);
+  public interface Func_fn extends Core.Type_func, Core.Type_replfunc {
+    public <T extends Core.Type_any> T vx_fn(final T generic_any_1, final Core.Type_arglist parameters, final Core.Func_any_from_func fn_any);
   }
 
   public static class Class_fn extends Core.Class_base implements Func_fn {
@@ -21106,15 +21106,15 @@ public final class Core {
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_arglist params = Core.f_any_from_any(Core.t_arglist, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_arglist parameters = Core.f_any_from_any(Core.t_arglist, arglist.vx_any(Core.vx_new_int(0)));
       Core.Func_any_from_func fn_any = Core.f_any_from_any(Core.t_any_from_func, arglist.vx_any(Core.vx_new_int(1)));
-      output = Core.f_fn(generic_any_1, params, fn_any);
+      output = Core.f_fn(generic_any_1, parameters, fn_any);
       return output;
     }
 
     @Override
-    public <T extends Core.Type_any> T vx_fn(final T generic_any_1, final Core.Type_arglist params, final Core.Func_any_from_func fn_any) {
-      return Core.f_fn(generic_any_1, params, fn_any);
+    public <T extends Core.Type_any> T vx_fn(final T generic_any_1, final Core.Type_arglist parameters, final Core.Func_any_from_func fn_any) {
+      return Core.f_fn(generic_any_1, parameters, fn_any);
     }
 
   }
@@ -21122,7 +21122,7 @@ public final class Core {
   public static final Func_fn e_fn = new Core.Class_fn();
   public static final Func_fn t_fn = new Core.Class_fn();
 
-  public static <T extends Core.Type_any> T f_fn(final T generic_any_1, final Core.Type_arglist params, final Core.Func_any_from_func fn_any) {
+  public static <T extends Core.Type_any> T f_fn(final T generic_any_1, final Core.Type_arglist parameters, final Core.Func_any_from_func fn_any) {
     T output = Core.f_empty(generic_any_1);
     return output;
   }
@@ -21133,7 +21133,7 @@ public final class Core {
    * @return {funcdef}
    * (func funcdef<-func)
    */
-  public static interface Func_funcdef_from_func extends Core.Func_any_from_any {
+  public interface Func_funcdef_from_func extends Core.Func_any_from_any {
     public Core.Type_funcdef vx_funcdef_from_func(final Core.Type_func val);
   }
 
@@ -21224,7 +21224,7 @@ public final class Core {
    * @return {string}
    * (func funcname<-funcdef)
    */
-  public static interface Func_funcname_from_funcdef extends Core.Func_any_from_any {
+  public interface Func_funcname_from_funcdef extends Core.Func_any_from_any {
     public Core.Type_string vx_funcname_from_funcdef(final Core.Type_funcdef funcdef);
   }
 
@@ -21323,7 +21323,7 @@ public final class Core {
    * @return {any-1}
    * (func if)
    */
-  public static interface Func_if extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_if extends Core.Type_func, Core.Type_replfunc {
     public <T extends Core.Type_any> T vx_if(final T generic_any_1, final Core.Type_boolean clause, final T then);
   }
 
@@ -21408,7 +21408,7 @@ public final class Core {
    * @return {any-1}
    * (func if)
    */
-  public static interface Func_if_1 extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_if_1 extends Core.Type_func, Core.Type_replfunc {
     public <T extends Core.Type_any> T vx_if_1(final T generic_any_1, final Core.Type_boolean clause, final T thenval, final T elseval);
   }
 
@@ -21494,7 +21494,7 @@ public final class Core {
    * @return {any-1}
    * (func if)
    */
-  public static interface Func_if_2 extends Core.Func_any_from_any {
+  public interface Func_if_2 extends Core.Func_any_from_any {
     public <T extends Core.Type_any> T vx_if_2(final T generic_any_1, final Core.Type_thenelselist thenelselist);
   }
 
@@ -21607,7 +21607,7 @@ public final class Core {
    * @return {int}
    * (func int<-func)
    */
-  public static interface Func_int_from_func extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_int_from_func extends Core.Type_func, Core.Type_replfunc {
     public Func_int_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
     public Core.Type_int vx_int_from_func();
   }
@@ -21694,7 +21694,7 @@ public final class Core {
    * @return {int}
    * (func int<-string)
    */
-  public static interface Func_int_from_string extends Core.Func_any_from_any {
+  public interface Func_int_from_string extends Core.Func_any_from_any {
     public Core.Type_int vx_int_from_string(final Core.Type_string val);
   }
 
@@ -21820,7 +21820,7 @@ public final class Core {
    * @return {boolean}
    * (func is-empty)
    */
-  public static interface Func_is_empty extends Core.Func_any_from_any {
+  public interface Func_is_empty extends Core.Func_any_from_any {
     public Core.Type_boolean vx_is_empty(final Core.Type_string text);
   }
 
@@ -21913,7 +21913,7 @@ public final class Core {
    * @return {boolean}
    * (func is-empty)
    */
-  public static interface Func_is_empty_1 extends Core.Func_any_from_any {
+  public interface Func_is_empty_1 extends Core.Func_any_from_any {
     public Core.Type_boolean vx_is_empty_1(final Core.Type_any value);
   }
 
@@ -22009,7 +22009,7 @@ public final class Core {
    * @return {boolean}
    * (func is-endswith)
    */
-  public static interface Func_is_endswith extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_is_endswith extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_is_endswith(final Core.Type_string text, final Core.Type_string find);
   }
 
@@ -22093,7 +22093,7 @@ public final class Core {
    * @return {boolean}
    * (func is-float)
    */
-  public static interface Func_is_float extends Core.Func_any_from_any {
+  public interface Func_is_float extends Core.Func_any_from_any {
     public Core.Type_boolean vx_is_float(final Core.Type_any value);
   }
 
@@ -22185,7 +22185,7 @@ public final class Core {
    * @return {boolean}
    * (func is-func)
    */
-  public static interface Func_is_func extends Core.Func_any_from_any {
+  public interface Func_is_func extends Core.Func_any_from_any {
     public Core.Type_boolean vx_is_func(final Core.Type_any val);
   }
 
@@ -22278,7 +22278,7 @@ public final class Core {
    * @return {boolean}
    * (func is-int)
    */
-  public static interface Func_is_int extends Core.Func_any_from_any {
+  public interface Func_is_int extends Core.Func_any_from_any {
     public Core.Type_boolean vx_is_int(final Core.Type_any value);
   }
 
@@ -22370,7 +22370,7 @@ public final class Core {
    * @return {boolean}
    * (func is-number)
    */
-  public static interface Func_is_number extends Core.Func_any_from_any {
+  public interface Func_is_number extends Core.Func_any_from_any {
     public Core.Type_boolean vx_is_number(final Core.Type_any value);
   }
 
@@ -22485,7 +22485,7 @@ public final class Core {
    * @return {boolean}
    * (func is-pass<-permission)
    */
-  public static interface Func_is_pass_from_permission extends Core.Func_any_from_any_context {
+  public interface Func_is_pass_from_permission extends Core.Func_any_from_any_context {
     public Core.Type_boolean vx_is_pass_from_permission(final Core.Type_context context, final Core.Type_permission permission);
   }
 
@@ -22584,7 +22584,7 @@ public final class Core {
    * @return {any-1}
    * (func last<-list)
    */
-  public static interface Func_last_from_list extends Core.Func_any_from_any {
+  public interface Func_last_from_list extends Core.Func_any_from_any {
     public <T extends Core.Type_any, X extends Core.Type_list> T vx_last_from_list(final T generic_any_1, final X values);
   }
 
@@ -22682,7 +22682,7 @@ public final class Core {
    * @return {int}
    * (func length)
    */
-  public static interface Func_length extends Core.Func_any_from_any {
+  public interface Func_length extends Core.Func_any_from_any {
     public Core.Type_int vx_length(final Core.Type_string text);
   }
 
@@ -22774,7 +22774,7 @@ public final class Core {
    * @return {int}
    * (func length)
    */
-  public static interface Func_length_1 extends Core.Func_any_from_any {
+  public interface Func_length_1 extends Core.Func_any_from_any {
     public Core.Type_int vx_length_1(final Core.Type_list values);
   }
 
@@ -22866,7 +22866,7 @@ public final class Core {
    * @return {int}
    * (func length)
    */
-  public static interface Func_length_2 extends Core.Func_any_from_any {
+  public interface Func_length_2 extends Core.Func_any_from_any {
     public Core.Type_int vx_length_2(final Core.Type_map valuemap);
   }
 
@@ -22959,7 +22959,7 @@ public final class Core {
    * @return {any-1}
    * (func let)
    */
-  public static interface Func_let extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_let extends Core.Type_func, Core.Type_replfunc {
     public <T extends Core.Type_any> T vx_let(final T generic_any_1, final Core.Func_any_from_func fn_any);
   }
 
@@ -23042,7 +23042,7 @@ public final class Core {
    * @return {any-1}
    * (func let-async)
    */
-  public static interface Func_let_async extends Core.Type_func, Core.Type_replfunc_async {
+  public interface Func_let_async extends Core.Type_func, Core.Type_replfunc_async {
     public <T extends Core.Type_any> CompletableFuture<T> vx_let_async(final T generic_any_1, final Core.Func_any_from_func_async fn_any_async);
   }
 
@@ -23123,7 +23123,7 @@ public final class Core {
    * @return {list-1}
    * (func list-join<-list)
    */
-  public static interface Func_list_join_from_list extends Core.Func_any_from_any {
+  public interface Func_list_join_from_list extends Core.Func_any_from_any {
     public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_join_from_list(final X generic_any_1, final Y values);
   }
 
@@ -23223,7 +23223,7 @@ public final class Core {
    * @return {list-1}
    * (func list-join<-list)
    */
-  public static interface Func_list_join_from_list_1 extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_list_join_from_list_1 extends Core.Type_func, Core.Type_replfunc {
     public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_join_from_list_1(final X generic_any_1, final Y values, final Core.Func_any_from_any fn_any_from_any);
   }
 
@@ -23314,7 +23314,7 @@ public final class Core {
    * @return {list-1}
    * (func list<-list)
    */
-  public static interface Func_list_from_list extends Core.Func_any_from_any {
+  public interface Func_list_from_list extends Core.Func_any_from_any {
     public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list(final X generic_any_1, final Y values);
   }
 
@@ -23414,7 +23414,7 @@ public final class Core {
    * @return {list-1}
    * (func list<-list)
    */
-  public static interface Func_list_from_list_1 extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_list_from_list_1 extends Core.Type_func, Core.Type_replfunc {
     public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list_1(final X generic_any_1, final Y values, final Core.Func_any_from_any fn_any_from_any);
   }
 
@@ -23502,7 +23502,7 @@ public final class Core {
    * @return {list-1}
    * (func list<-list-async)
    */
-  public static interface Func_list_from_list_async extends Core.Type_func, Core.Type_replfunc_async {
+  public interface Func_list_from_list_async extends Core.Type_func, Core.Type_replfunc_async {
     public <X extends Core.Type_list, Y extends Core.Type_list> CompletableFuture<X> vx_list_from_list_async(final X generic_any_1, final Y values, final Core.Func_any_from_any_async fn_any_from_any_async);
   }
 
@@ -23593,7 +23593,7 @@ public final class Core {
    * @return {list-1}
    * (func list<-list-intany)
    */
-  public static interface Func_list_from_list_intany extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_list_from_list_intany extends Core.Type_func, Core.Type_replfunc {
     public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list_intany(final X generic_any_1, final Y values, final Core.Func_any_from_int_any fn_any_from_int_any);
   }
 
@@ -23674,7 +23674,7 @@ public final class Core {
    * @return {list-1}
    * (func list<-map)
    */
-  public static interface Func_list_from_map extends Core.Func_any_from_any {
+  public interface Func_list_from_map extends Core.Func_any_from_any {
     public <O extends Core.Type_map, X extends Core.Type_list> X vx_list_from_map(final X generic_any_1, final O valuemap);
   }
 
@@ -23775,7 +23775,7 @@ public final class Core {
    * @return {list-1}
    * (func list<-map)
    */
-  public static interface Func_list_from_map_1 extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_list_from_map_1 extends Core.Type_func, Core.Type_replfunc {
     public <O extends Core.Type_map, X extends Core.Type_list> X vx_list_from_map_1(final X generic_any_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value);
   }
 
@@ -23863,7 +23863,7 @@ public final class Core {
    * @return {list-1}
    * (func list<-map-async)
    */
-  public static interface Func_list_from_map_async extends Core.Type_func, Core.Type_replfunc_async {
+  public interface Func_list_from_map_async extends Core.Type_func, Core.Type_replfunc_async {
     public <O extends Core.Type_map, X extends Core.Type_list> CompletableFuture<X> vx_list_from_map_async(final X generic_any_1, final O valuemap, final Core.Func_any_from_key_value_async fn_any_from_key_value_async);
   }
 
@@ -23944,7 +23944,7 @@ public final class Core {
    * @return {any}
    * (func list<-type)
    */
-  public static interface Func_list_from_type extends Core.Func_any_from_any {
+  public interface Func_list_from_type extends Core.Func_any_from_any {
     public Core.Type_any vx_list_from_type(final Core.Type_any type);
   }
 
@@ -24034,7 +24034,7 @@ public final class Core {
    * @return {any}
    * (func log)
    */
-  public static interface Func_log extends Core.Func_any_from_any {
+  public interface Func_log extends Core.Func_any_from_any {
     public Core.Type_any vx_log(final Core.Type_any value);
   }
 
@@ -24129,7 +24129,7 @@ public final class Core {
    * @return {any-1}
    * (func log)
    */
-  public static interface Func_log_1 extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_log_1 extends Core.Type_func, Core.Type_replfunc {
     public <T extends Core.Type_any> T vx_log_1(final T generic_any_1, final Core.Type_string text, final T value);
   }
 
@@ -24212,7 +24212,7 @@ public final class Core {
    * @return {string}
    * (func main)
    */
-  public static interface Func_main extends Core.Func_any_from_any {
+  public interface Func_main extends Core.Func_any_from_any {
     public Core.Type_string vx_main(final Core.Type_anylist args);
   }
 
@@ -24307,7 +24307,7 @@ public final class Core {
    * @return {map-1}
    * (func map<-list)
    */
-  public static interface Func_map_from_list extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_map_from_list extends Core.Type_func, Core.Type_replfunc {
     public <N extends Core.Type_map, Y extends Core.Type_list> N vx_map_from_list(final N generic_any_1, final Y vallist, final Core.Func_any_from_any fn_any_from_any);
   }
 
@@ -24392,7 +24392,7 @@ public final class Core {
    * @return {map-1}
    * (func map<-map)
    */
-  public static interface Func_map_from_map extends Core.Func_any_from_any {
+  public interface Func_map_from_map extends Core.Func_any_from_any {
     public <N extends Core.Type_map, O extends Core.Type_map> N vx_map_from_map(final N generic_any_1, final O valuemap);
   }
 
@@ -24493,7 +24493,7 @@ public final class Core {
    * @return {map-1}
    * (func map<-map)
    */
-  public static interface Func_map_from_map_1 extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_map_from_map_1 extends Core.Type_func, Core.Type_replfunc {
     public <N extends Core.Type_map, O extends Core.Type_map> N vx_map_from_map_1(final N generic_any_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value);
   }
 
@@ -24574,7 +24574,7 @@ public final class Core {
    * @return {msg}
    * (func msg<-error)
    */
-  public static interface Func_msg_from_error extends Core.Func_any_from_any {
+  public interface Func_msg_from_error extends Core.Func_any_from_any {
     public Core.Type_msg vx_msg_from_error(final Core.Type_string error);
   }
 
@@ -24674,7 +24674,7 @@ public final class Core {
    * @return {msg}
    * (func msg<-error)
    */
-  public static interface Func_msg_from_error_1 extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_msg_from_error_1 extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_msg vx_msg_from_error_1(final Core.Type_string code, final Core.Type_any detail);
   }
 
@@ -24766,7 +24766,7 @@ public final class Core {
    * @return {msg}
    * (func msg<-error)
    */
-  public static interface Func_msg_from_error_2 extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_msg_from_error_2 extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_msg vx_msg_from_error_2(final Core.Type_string path, final Core.Type_string code, final Core.Type_any detail);
   }
 
@@ -24859,7 +24859,7 @@ public final class Core {
    * @return {msg}
    * (func msg<-warning)
    */
-  public static interface Func_msg_from_warning extends Core.Func_any_from_any {
+  public interface Func_msg_from_warning extends Core.Func_any_from_any {
     public Core.Type_msg vx_msg_from_warning(final Core.Type_string warning);
   }
 
@@ -24959,7 +24959,7 @@ public final class Core {
    * @return {msgblock}
    * (func msgblock<-msgblock-msg)
    */
-  public static interface Func_msgblock_from_msgblock_msg extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_msgblock_from_msgblock_msg extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_msgblock vx_msgblock_from_msgblock_msg(final Core.Type_msgblock origblock, final Core.Type_msg addmsg);
   }
 
@@ -25041,7 +25041,7 @@ public final class Core {
    * @return {msgblock}
    * (func msgblock<-msgblock-msgblock)
    */
-  public static interface Func_msgblock_from_msgblock_msgblock extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_msgblock_from_msgblock_msgblock extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_msgblock vx_msgblock_from_msgblock_msgblock(final Core.Type_msgblock origblock, final Core.Type_msgblock addblock);
   }
 
@@ -25127,7 +25127,7 @@ public final class Core {
    * @return {string}
    * (func name<-typedef)
    */
-  public static interface Func_name_from_typedef extends Core.Func_any_from_any {
+  public interface Func_name_from_typedef extends Core.Func_any_from_any {
     public Core.Type_string vx_name_from_typedef(final Core.Type_typedef vtypedef);
   }
 
@@ -25218,7 +25218,7 @@ public final class Core {
    * @return {any-1}
    * (func native)
    */
-  public static interface Func_native extends Core.Func_any_from_any {
+  public interface Func_native extends Core.Func_any_from_any {
     public <T extends Core.Type_any> T vx_native(final T generic_any_1, final Core.Type_anylist clauses);
   }
 
@@ -25309,7 +25309,7 @@ public final class Core {
    * @return {any}
    * (func native<-any)
    */
-  public static interface Func_native_from_any extends Core.Func_any_from_any {
+  public interface Func_native_from_any extends Core.Func_any_from_any {
     public Core.Type_any vx_native_from_any(final Core.Type_any value);
   }
 
@@ -25400,7 +25400,7 @@ public final class Core {
    * @return {any-1}
    * (func new)
    */
-  public static interface Func_new extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_new extends Core.Type_func, Core.Type_replfunc {
     public <T extends Core.Type_any> T vx_new(final T type, final Core.Type_anylist values);
   }
 
@@ -25481,7 +25481,7 @@ public final class Core {
    * @return {number}
    * (func number<-func)
    */
-  public static interface Func_number_from_func extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_number_from_func extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_number vx_number_from_func();
   }
 
@@ -25559,7 +25559,7 @@ public final class Core {
    * @return {boolean}
    * (func or)
    */
-  public static interface Func_or extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_or extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_or(final Core.Type_boolean val1, final Core.Type_boolean val2);
   }
 
@@ -25643,7 +25643,7 @@ public final class Core {
    * @return {boolean}
    * (func or)
    */
-  public static interface Func_or_1 extends Core.Func_any_from_any {
+  public interface Func_or_1 extends Core.Func_any_from_any {
     public Core.Type_boolean vx_or_1(final Core.Type_booleanlist values);
   }
 
@@ -25748,7 +25748,7 @@ public final class Core {
    * @return {package}
    * (func package-global<-name)
    */
-  public static interface Func_package_global_from_name extends Core.Func_any_from_any {
+  public interface Func_package_global_from_name extends Core.Func_any_from_any {
     public Core.Type_package vx_package_global_from_name(final Core.Type_string name);
   }
 
@@ -25843,7 +25843,7 @@ public final class Core {
    * @return {string}
    * (func packagename<-typedef)
    */
-  public static interface Func_packagename_from_typedef extends Core.Func_any_from_any {
+  public interface Func_packagename_from_typedef extends Core.Func_any_from_any {
     public Core.Type_string vx_packagename_from_typedef(final Core.Type_typedef vtypedef);
   }
 
@@ -25934,7 +25934,7 @@ public final class Core {
    * @return {string}
    * (func path<-context-path)
    */
-  public static interface Func_path_from_context_path extends Core.Func_any_from_any_context {
+  public interface Func_path_from_context_path extends Core.Func_any_from_any_context {
     public Core.Type_string vx_path_from_context_path(final Core.Type_context context, final Core.Type_string path);
   }
 
@@ -26030,7 +26030,7 @@ public final class Core {
    * @return {string}
    * (func path<-setting-path)
    */
-  public static interface Func_path_from_setting_path extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_path_from_setting_path extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_string vx_path_from_setting_path(final Core.Type_setting session, final Core.Type_string path);
   }
 
@@ -26109,7 +26109,7 @@ public final class Core {
    * @return {permission}
    * (func permission<-id-context)
    */
-  public static interface Func_permission_from_id_context extends Core.Func_any_from_any_context {
+  public interface Func_permission_from_id_context extends Core.Func_any_from_any_context {
     public Core.Type_permission vx_permission_from_id_context(final Core.Type_context context, final Core.Type_string id);
   }
 
@@ -26209,7 +26209,7 @@ public final class Core {
    * @return {argmap}
    * (func properties<-typedef)
    */
-  public static interface Func_properties_from_typedef extends Core.Func_any_from_any {
+  public interface Func_properties_from_typedef extends Core.Func_any_from_any {
     public Core.Type_argmap vx_properties_from_typedef(final Core.Type_typedef vtypedef);
   }
 
@@ -26300,7 +26300,7 @@ public final class Core {
    * @return {arg}
    * (func proplast<-typedef)
    */
-  public static interface Func_proplast_from_typedef extends Core.Func_any_from_any {
+  public interface Func_proplast_from_typedef extends Core.Func_any_from_any {
     public Core.Type_arg vx_proplast_from_typedef(final Core.Type_typedef vtypedef);
   }
 
@@ -26390,7 +26390,7 @@ public final class Core {
    * @return {any-1}
    * (func resolve)
    */
-  public static interface Func_resolve extends Core.Func_any_from_any {
+  public interface Func_resolve extends Core.Func_any_from_any {
     public <T extends Core.Type_any> T vx_resolve(final T generic_any_1, final T value);
   }
 
@@ -26481,7 +26481,7 @@ public final class Core {
    * @return {any-1}
    * (func resolve)
    */
-  public static interface Func_resolve_1 extends Core.Func_any_from_any {
+  public interface Func_resolve_1 extends Core.Func_any_from_any {
     public <T extends Core.Type_any> T vx_resolve_1(final T generic_any_1, final Core.Func_any_from_func fn_any);
   }
 
@@ -26576,7 +26576,7 @@ public final class Core {
    * @return {any-1}
    * (func resolve-async)
    */
-  public static interface Func_resolve_async extends Core.Func_any_from_any_async {
+  public interface Func_resolve_async extends Core.Func_any_from_any_async {
     public <T extends Core.Type_any> CompletableFuture<T> vx_resolve_async(final T generic_any_1, final Core.Func_any_from_func_async fn_any);
   }
 
@@ -26669,7 +26669,7 @@ public final class Core {
    * @return {any-1}
    * (func resolve-first)
    */
-  public static interface Func_resolve_first extends Core.Func_any_from_any {
+  public interface Func_resolve_first extends Core.Func_any_from_any {
     public <T extends Core.Type_any, X extends Core.Type_list> T vx_resolve_first(final T generic_any_1, final X clauses);
   }
 
@@ -26764,7 +26764,7 @@ public final class Core {
    * @return {list-1}
    * (func resolve-list)
    */
-  public static interface Func_resolve_list extends Core.Func_any_from_any {
+  public interface Func_resolve_list extends Core.Func_any_from_any {
     public <X extends Core.Type_list> X vx_resolve_list(final X generic_any_1, final X clauses);
   }
 
@@ -26859,7 +26859,7 @@ public final class Core {
    * @return {security}
    * (func security<-context)
    */
-  public static interface Func_security_from_context extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_security_from_context extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_security vx_security_from_context(final Core.Type_context context);
   }
 
@@ -26940,7 +26940,7 @@ public final class Core {
    * @return {security}
    * (func security<-user)
    */
-  public static interface Func_security_from_user extends Core.Func_any_from_any {
+  public interface Func_security_from_user extends Core.Func_any_from_any {
     public Core.Type_security vx_security_from_user(final Core.Type_user user);
   }
 
@@ -27030,7 +27030,7 @@ public final class Core {
    * @return {session}
    * (func session<-context)
    */
-  public static interface Func_session_from_context extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_session_from_context extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_session vx_session_from_context(final Core.Type_context context);
   }
 
@@ -27108,7 +27108,7 @@ public final class Core {
    * @return {setting}
    * (func setting<-context)
    */
-  public static interface Func_setting_from_context extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_setting_from_context extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_setting vx_setting_from_context(final Core.Type_context context);
   }
 
@@ -27187,7 +27187,7 @@ public final class Core {
    * @return {string}
    * (func string-repeat)
    */
-  public static interface Func_string_repeat extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_string_repeat extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_string vx_string_repeat(final Core.Type_string text, final Core.Type_int repeat);
   }
 
@@ -27270,7 +27270,7 @@ public final class Core {
    * @return {string}
    * (func string<-any)
    */
-  public static interface Func_string_from_any extends Core.Func_any_from_any {
+  public interface Func_string_from_any extends Core.Func_any_from_any {
     public Core.Type_string vx_string_from_any(final Core.Type_any value);
   }
 
@@ -27367,7 +27367,7 @@ public final class Core {
    * @return {string}
    * (func string<-any-indent)
    */
-  public static interface Func_string_from_any_indent extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_string_from_any_indent extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_string vx_string_from_any_indent(final Core.Type_any value, final Core.Type_int indent, final Core.Type_boolean linefeed);
   }
 
@@ -27447,7 +27447,7 @@ public final class Core {
    * @return {string}
    * (func string<-func)
    */
-  public static interface Func_string_from_func extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_string_from_func extends Core.Type_func, Core.Type_replfunc {
     public Func_string_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
     public Core.Type_string vx_string_from_func();
   }
@@ -27536,7 +27536,7 @@ public final class Core {
    * @return {string}
    * (func string<-string-find-replace)
    */
-  public static interface Func_string_from_string_find_replace extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_string_from_string_find_replace extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_string vx_string_from_string_find_replace(final Core.Type_string text, final Core.Type_string find, final Core.Type_string replace);
   }
 
@@ -27617,7 +27617,7 @@ public final class Core {
    * @return {stringlist}
    * (func stringlist<-map)
    */
-  public static interface Func_stringlist_from_map extends Core.Func_any_from_any {
+  public interface Func_stringlist_from_map extends Core.Func_any_from_any {
     public Core.Type_stringlist vx_stringlist_from_map(final Core.Type_map map);
   }
 
@@ -27717,7 +27717,7 @@ public final class Core {
    * @return {any-1}
    * (func switch)
    */
-  public static interface Func_switch extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_switch extends Core.Type_func, Core.Type_replfunc {
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_switch(final T generic_any_1, final U val, final Core.Type_thenelselist thenelselist);
   }
 
@@ -27828,7 +27828,7 @@ public final class Core {
    * @return {thenelse}
    * (func then)
    */
-  public static interface Func_then extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_then extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_thenelse vx_then(final Core.Func_boolean_from_func fn_cond, final Core.Func_any_from_func fn_any);
   }
 
@@ -27918,7 +27918,7 @@ public final class Core {
    * @return {typelist}
    * (func traits<-typedef)
    */
-  public static interface Func_traits_from_typedef extends Core.Func_any_from_any {
+  public interface Func_traits_from_typedef extends Core.Func_any_from_any {
     public Core.Type_typelist vx_traits_from_typedef(final Core.Type_typedef vtypedef);
   }
 
@@ -28009,7 +28009,7 @@ public final class Core {
    * @return {any}
    * (func type<-any)
    */
-  public static interface Func_type_from_any extends Core.Func_any_from_any {
+  public interface Func_type_from_any extends Core.Func_any_from_any {
     public Core.Type_any vx_type_from_any(final Core.Type_any value);
   }
 
@@ -28100,7 +28100,7 @@ public final class Core {
    * @return {typedef}
    * (func typedef<-any)
    */
-  public static interface Func_typedef_from_any extends Core.Func_any_from_any {
+  public interface Func_typedef_from_any extends Core.Func_any_from_any {
     public Core.Type_typedef vx_typedef_from_any(final Core.Type_any val);
   }
 
@@ -28193,7 +28193,7 @@ public final class Core {
    * @return {typedef}
    * (func typedef<-type)
    */
-  public static interface Func_typedef_from_type extends Core.Func_any_from_any {
+  public interface Func_typedef_from_type extends Core.Func_any_from_any {
     public Core.Type_typedef vx_typedef_from_type(final Core.Type_any val);
   }
 
@@ -28284,7 +28284,7 @@ public final class Core {
    * @return {string}
    * (func typename<-any)
    */
-  public static interface Func_typename_from_any extends Core.Func_any_from_any {
+  public interface Func_typename_from_any extends Core.Func_any_from_any {
     public Core.Type_string vx_typename_from_any(final Core.Type_any value);
   }
 
@@ -28377,7 +28377,7 @@ public final class Core {
    * @return {string}
    * (func typename<-type)
    */
-  public static interface Func_typename_from_type extends Core.Func_any_from_any {
+  public interface Func_typename_from_type extends Core.Func_any_from_any {
     public Core.Type_string vx_typename_from_type(final Core.Type_any type);
   }
 
@@ -28470,7 +28470,7 @@ public final class Core {
    * @return {string}
    * (func typename<-typedef)
    */
-  public static interface Func_typename_from_typedef extends Core.Func_any_from_any {
+  public interface Func_typename_from_typedef extends Core.Func_any_from_any {
     public Core.Type_string vx_typename_from_typedef(final Core.Type_typedef vtypedef);
   }
 
@@ -28568,7 +28568,7 @@ public final class Core {
    * @return {stringlist}
    * (func typenames<-typelist)
    */
-  public static interface Func_typenames_from_typelist extends Core.Func_any_from_any {
+  public interface Func_typenames_from_typelist extends Core.Func_any_from_any {
     public Core.Type_stringlist vx_typenames_from_typelist(final Core.Type_typelist typelist);
   }
 
@@ -28666,7 +28666,7 @@ public final class Core {
    * @return {user}
    * (func user<-context)
    */
-  public static interface Func_user_from_context extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_user_from_context extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_user vx_user_from_context(final Core.Type_context context);
   }
 

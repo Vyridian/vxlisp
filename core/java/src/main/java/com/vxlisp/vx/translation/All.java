@@ -13,7 +13,7 @@ public final class All {
    * @return {context}
    * (func context-all)
    */
-  public static interface Func_context_all extends Core.Func_any_from_any {
+  public interface Func_context_all extends Core.Func_any_from_any {
     public Core.Type_context vx_context_all(final Core.Type_anylist args);
   }
 
@@ -117,7 +117,7 @@ public final class All {
    * @return {translationmap}
    * (func translationmap-all)
    */
-  public static interface Func_translationmap_all extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_translationmap_all extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_translationmap vx_translationmap_all();
   }
 

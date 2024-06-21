@@ -8035,7 +8035,7 @@ public final class Ui {
    * @return {boolean}
    * (func boolean-layout<-ui-parent-selected)
    */
-  public static interface Func_boolean_layout_from_ui_parent_selected extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_layout_from_ui_parent_selected extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_layout_from_ui_parent_selected(final Core.Type_context context, final Ui.Type_ui ui, final Ui.Type_ui parent, final Core.Type_boolean selected);
   }
 
@@ -8134,7 +8134,7 @@ public final class Ui {
    * @return {boolean}
    * (func boolean-layout<-ui-parent-visible)
    */
-  public static interface Func_boolean_layout_from_ui_parent_visible extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_layout_from_ui_parent_visible extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_layout_from_ui_parent_visible(final Core.Type_context context, final Ui.Type_ui ui, final Ui.Type_ui parent, final Core.Type_boolean visible);
   }
 
@@ -8232,7 +8232,7 @@ public final class Ui {
    * @return {boolean}
    * (func boolean-layoutaddchild<-ui-parent)
    */
-  public static interface Func_boolean_layoutaddchild_from_ui_parent extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_layoutaddchild_from_ui_parent extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_layoutaddchild_from_ui_parent(final Core.Type_context context, final Ui.Type_ui uiarg, final Ui.Type_ui parent);
   }
 
@@ -8327,7 +8327,7 @@ public final class Ui {
    * @return {boolean}
    * (func boolean-layoutremove<-ui)
    */
-  public static interface Func_boolean_layoutremove_from_ui extends Core.Func_any_from_any {
+  public interface Func_boolean_layoutremove_from_ui extends Core.Func_any_from_any {
     public Core.Type_boolean vx_boolean_layoutremove_from_ui(final Ui.Type_ui ui);
   }
 
@@ -8418,7 +8418,7 @@ public final class Ui {
    * @return {boolean}
    * (func boolean-layoutremove<-ui-keys)
    */
-  public static interface Func_boolean_layoutremove_from_ui_keys extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_layoutremove_from_ui_keys extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_layoutremove_from_ui_keys(final Core.Type_context context, final Ui.Type_ui ui, final Core.Type_stringlist keys);
   }
 
@@ -8521,7 +8521,7 @@ public final class Ui {
    * @return {boolean}
    * (func boolean-layoutremove<-ui-parent)
    */
-  public static interface Func_boolean_layoutremove_from_ui_parent extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_layoutremove_from_ui_parent extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_layoutremove_from_ui_parent(final Core.Type_context context, final Ui.Type_ui ui, final Ui.Type_ui parent);
   }
 
@@ -8613,7 +8613,7 @@ public final class Ui {
    * @return {boolean}
    * (func boolean-layoutremove<-ui-start-end)
    */
-  public static interface Func_boolean_layoutremove_from_ui_start_end extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_layoutremove_from_ui_start_end extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_layoutremove_from_ui_start_end(final Core.Type_context context, final Ui.Type_ui ui, final Core.Type_int start, final Core.Type_int end);
   }
 
@@ -8703,7 +8703,7 @@ public final class Ui {
    * @return {boolean}
    * (func boolean-layoutselected<-ui)
    */
-  public static interface Func_boolean_layoutselected_from_ui extends Core.Func_any_from_any {
+  public interface Func_boolean_layoutselected_from_ui extends Core.Func_any_from_any {
     public Core.Type_boolean vx_boolean_layoutselected_from_ui(final Ui.Type_ui ui);
   }
 
@@ -8794,7 +8794,7 @@ public final class Ui {
    * @return {boolean}
    * (func boolean-layoutselected<-ui-parent)
    */
-  public static interface Func_boolean_layoutselected_from_ui_parent extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_layoutselected_from_ui_parent extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_layoutselected_from_ui_parent(final Core.Type_context context, final Ui.Type_ui ui, final Ui.Type_ui parent);
   }
 
@@ -8884,7 +8884,7 @@ public final class Ui {
    * @return {boolean}
    * (func boolean-layoutselected<-ui-selected)
    */
-  public static interface Func_boolean_layoutselected_from_ui_selected extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_layoutselected_from_ui_selected extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_layoutselected_from_ui_selected(final Ui.Type_ui ui, final Core.Type_int selected);
   }
 
@@ -8963,7 +8963,7 @@ public final class Ui {
    * @return {boolean}
    * (func boolean-layoutvisible<-ui)
    */
-  public static interface Func_boolean_layoutvisible_from_ui extends Core.Func_any_from_any {
+  public interface Func_boolean_layoutvisible_from_ui extends Core.Func_any_from_any {
     public Core.Type_boolean vx_boolean_layoutvisible_from_ui(final Ui.Type_ui ui);
   }
 
@@ -9053,7 +9053,7 @@ public final class Ui {
    * @return {boolean}
    * (func boolean-print)
    */
-  public static interface Func_boolean_print extends Core.Func_any_from_any_context {
+  public interface Func_boolean_print extends Core.Func_any_from_any_context {
     public Core.Type_boolean vx_boolean_print(final Core.Type_context context, final Ui.Type_ui ui);
   }
 
@@ -9151,7 +9151,7 @@ public final class Ui {
    * @return {boolean}
    * (func boolean-removestate-uiapp)
    */
-  public static interface Func_boolean_removestate_uiapp extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_removestate_uiapp extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_removestate_uiapp(final Core.Type_context context);
   }
 
@@ -9231,7 +9231,7 @@ public final class Ui {
    * @return {boolean}
    * (func boolean-write<-ui-parent)
    */
-  public static interface Func_boolean_write_from_ui_parent extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_write_from_ui_parent extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_write_from_ui_parent(final Ui.Type_ui ui, final Ui.Type_ui parent);
   }
 
@@ -9319,7 +9319,7 @@ public final class Ui {
    * @return {boolean}
    * (func boolean-writeremove<-ui-uid)
    */
-  public static interface Func_boolean_writeremove_from_ui_uid extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_boolean_writeremove_from_ui_uid extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_boolean vx_boolean_writeremove_from_ui_uid(final Ui.Type_ui uiarg, final Core.Type_string uid);
   }
 
@@ -9410,7 +9410,7 @@ public final class Ui {
    * @return {boolean}
    * (func boolean-writestate<-ui)
    */
-  public static interface Func_boolean_writestate_from_ui extends Core.Func_any_from_any_context {
+  public interface Func_boolean_writestate_from_ui extends Core.Func_any_from_any_context {
     public Core.Type_boolean vx_boolean_writestate_from_ui(final Core.Type_context context, final Ui.Type_ui ui);
   }
 
@@ -9542,7 +9542,7 @@ public final class Ui {
    * @return {boolean}
    * (func boolean-writestate<-uiapp)
    */
-  public static interface Func_boolean_writestate_from_uiapp extends Core.Func_any_from_any_context {
+  public interface Func_boolean_writestate_from_uiapp extends Core.Func_any_from_any_context {
     public Core.Type_boolean vx_boolean_writestate_from_uiapp(final Core.Type_context context, final Ui.Type_ui ui);
   }
 
@@ -9634,7 +9634,7 @@ public final class Ui {
    * @return {boolean}
    * (func boolean-writestate<-uiengine)
    */
-  public static interface Func_boolean_writestate_from_uiengine extends Core.Func_any_from_any_context {
+  public interface Func_boolean_writestate_from_uiengine extends Core.Func_any_from_any_context {
     public Core.Type_boolean vx_boolean_writestate_from_uiengine(final Core.Type_context context, final Ui.Type_uiengine uiengine);
   }
 
@@ -9726,7 +9726,7 @@ public final class Ui {
    * @return {fontfacemap}
    * (func fontfacemap<-fontfacelist)
    */
-  public static interface Func_fontfacemap_from_fontfacelist extends Core.Func_any_from_any {
+  public interface Func_fontfacemap_from_fontfacelist extends Core.Func_any_from_any {
     public Ui.Type_fontfacemap vx_fontfacemap_from_fontfacelist(final Ui.Type_fontfacelist fontfacelist);
   }
 
@@ -9826,7 +9826,7 @@ public final class Ui {
    * @return {int}
    * (func int-child<-ui-uid)
    */
-  public static interface Func_int_child_from_ui_uid extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_int_child_from_ui_uid extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_int vx_int_child_from_ui_uid(final Ui.Type_ui ui, final Core.Type_string uid);
   }
 
@@ -9912,7 +9912,7 @@ public final class Ui {
    * @return {int}
    * (func int-selected<-ui)
    */
-  public static interface Func_int_selected_from_ui extends Core.Func_any_from_any {
+  public interface Func_int_selected_from_ui extends Core.Func_any_from_any {
     public Core.Type_int vx_int_selected_from_ui(final Ui.Type_ui ui);
   }
 
@@ -10010,7 +10010,7 @@ public final class Ui {
    * @return {int}
    * (func int-visible<-ui)
    */
-  public static interface Func_int_visible_from_ui extends Core.Func_any_from_any {
+  public interface Func_int_visible_from_ui extends Core.Func_any_from_any {
     public Core.Type_int vx_int_visible_from_ui(final Ui.Type_ui ui);
   }
 
@@ -10107,7 +10107,7 @@ public final class Ui {
    * @return {intlist}
    * (func intlist-visible<-ui)
    */
-  public static interface Func_intlist_visible_from_ui extends Core.Func_any_from_any {
+  public interface Func_intlist_visible_from_ui extends Core.Func_any_from_any {
     public Core.Type_intlist vx_intlist_visible_from_ui(final Ui.Type_ui uiarg);
   }
 
@@ -10235,7 +10235,7 @@ public final class Ui {
    * @return {layout}
    * (func layout<-style)
    */
-  public static interface Func_layout_from_style extends Core.Func_any_from_any {
+  public interface Func_layout_from_style extends Core.Func_any_from_any {
     public Ui.Type_layout vx_layout_from_style(final Ui.Type_style style);
   }
 
@@ -10326,7 +10326,7 @@ public final class Ui {
    * @return {layout}
    * (func layout<-ui)
    */
-  public static interface Func_layout_from_ui extends Core.Func_any_from_any_context {
+  public interface Func_layout_from_ui extends Core.Func_any_from_any_context {
     public Ui.Type_layout vx_layout_from_ui(final Core.Type_context context, final Ui.Type_ui ui);
   }
 
@@ -10425,7 +10425,7 @@ public final class Ui {
    * @return {layout}
    * (func layout<-ui-layoutengine)
    */
-  public static interface Func_layout_from_ui_layoutengine extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_layout_from_ui_layoutengine extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_layout vx_layout_from_ui_layoutengine(final Ui.Type_ui ui, final Ui.Type_layoutengine layoutengine);
   }
 
@@ -10514,7 +10514,7 @@ public final class Ui {
    * @return {layout}
    * (func layout<-ui-layoutmap-else)
    */
-  public static interface Func_layout_from_ui_layoutmap_else extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_layout_from_ui_layoutmap_else extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_layout vx_layout_from_ui_layoutmap_else(final Ui.Type_ui ui, final Ui.Type_layoutmap layoutmap, final Ui.Type_layout layoutelse);
   }
 
@@ -10609,7 +10609,7 @@ public final class Ui {
    * @return {layoutengine}
    * (func layoutengine-readstate)
    */
-  public static interface Func_layoutengine_readstate extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_layoutengine_readstate extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_layoutengine vx_layoutengine_readstate(final Core.Type_context context);
   }
 
@@ -10694,7 +10694,7 @@ public final class Ui {
    * @return {layoutmap}
    * (func layoutmap<-layoutlist)
    */
-  public static interface Func_layoutmap_from_layoutlist extends Core.Func_any_from_any {
+  public interface Func_layoutmap_from_layoutlist extends Core.Func_any_from_any {
     public Ui.Type_layoutmap vx_layoutmap_from_layoutlist(final Ui.Type_layoutlist layoutlist);
   }
 
@@ -10793,7 +10793,7 @@ public final class Ui {
    * @return {string}
    * (func string-parentuid<-uid)
    */
-  public static interface Func_string_parentuid_from_uid extends Core.Func_any_from_any {
+  public interface Func_string_parentuid_from_uid extends Core.Func_any_from_any {
     public Core.Type_string vx_string_parentuid_from_uid(final Core.Type_string uid);
   }
 
@@ -10905,7 +10905,7 @@ public final class Ui {
    * @return {string}
    * (func string-selected<-ui)
    */
-  public static interface Func_string_selected_from_ui extends Core.Func_any_from_any {
+  public interface Func_string_selected_from_ui extends Core.Func_any_from_any {
     public Core.Type_string vx_string_selected_from_ui(final Ui.Type_ui ui);
   }
 
@@ -11002,7 +11002,7 @@ public final class Ui {
    * @return {stringlist}
    * (func stringlist-selected<-ui)
    */
-  public static interface Func_stringlist_selected_from_ui extends Core.Func_any_from_any {
+  public interface Func_stringlist_selected_from_ui extends Core.Func_any_from_any {
     public Core.Type_stringlist vx_stringlist_selected_from_ui(final Ui.Type_ui ui);
   }
 
@@ -11113,7 +11113,7 @@ public final class Ui {
    * @return {stringlist}
    * (func stringlist<-ui)
    */
-  public static interface Func_stringlist_from_ui extends Core.Func_any_from_any {
+  public interface Func_stringlist_from_ui extends Core.Func_any_from_any {
     public Core.Type_stringlist vx_stringlist_from_ui(final Ui.Type_ui ui);
   }
 
@@ -11209,7 +11209,7 @@ public final class Ui {
    * @return {stylemap}
    * (func stylemap<-stylelist)
    */
-  public static interface Func_stylemap_from_stylelist extends Core.Func_any_from_any {
+  public interface Func_stylemap_from_stylelist extends Core.Func_any_from_any {
     public Ui.Type_stylemap vx_stylemap_from_stylelist(final Ui.Type_stylelist stylelist);
   }
 
@@ -11307,7 +11307,7 @@ public final class Ui {
    * @return {stylesheet}
    * (func stylesheet-readstate)
    */
-  public static interface Func_stylesheet_readstate extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_stylesheet_readstate extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_stylesheet vx_stylesheet_readstate(final Core.Type_context context);
   }
 
@@ -11392,7 +11392,7 @@ public final class Ui {
    * @return {stylesheet}
    * (func stylesheet-render)
    */
-  public static interface Func_stylesheet_render extends Core.Func_any_from_any {
+  public interface Func_stylesheet_render extends Core.Func_any_from_any {
     public Ui.Type_stylesheet vx_stylesheet_render(final Ui.Type_stylesheet stylesheetui);
   }
 
@@ -11482,7 +11482,7 @@ public final class Ui {
    * @return {ui}
    * (func ui-addlayout<-ui)
    */
-  public static interface Func_ui_addlayout_from_ui extends Core.Func_any_from_any_context {
+  public interface Func_ui_addlayout_from_ui extends Core.Func_any_from_any_context {
     public Ui.Type_ui vx_ui_addlayout_from_ui(final Core.Type_context context, final Ui.Type_ui ui);
   }
 
@@ -11581,7 +11581,7 @@ public final class Ui {
    * @return {ui}
    * (func ui-addlayout<-ui-layoutengine)
    */
-  public static interface Func_ui_addlayout_from_ui_layoutengine extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ui_addlayout_from_ui_layoutengine extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_ui vx_ui_addlayout_from_ui_layoutengine(final Ui.Type_ui ui, final Ui.Type_layoutengine layoutengine);
   }
 
@@ -11670,7 +11670,7 @@ public final class Ui {
    * @return {ui}
    * (func ui-addlayout<-ui-layoutmap-else)
    */
-  public static interface Func_ui_addlayout_from_ui_layoutmap_else extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ui_addlayout_from_ui_layoutmap_else extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_ui vx_ui_addlayout_from_ui_layoutmap_else(final Ui.Type_ui ui, final Ui.Type_layoutmap layoutmap, final Ui.Type_layout layoutelse);
   }
 
@@ -11768,7 +11768,7 @@ public final class Ui {
    * @return {ui}
    * (func ui-addlayout<-ui-uiengine)
    */
-  public static interface Func_ui_addlayout_from_ui_uiengine extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ui_addlayout_from_ui_uiengine extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_ui vx_ui_addlayout_from_ui_uiengine(final Ui.Type_ui ui, final Ui.Type_uiengine uiengine);
   }
 
@@ -11855,7 +11855,7 @@ public final class Ui {
    * @return {ui}
    * (func ui-child<-ui-pos)
    */
-  public static interface Func_ui_child_from_ui_pos extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ui_child_from_ui_pos extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_ui vx_ui_child_from_ui_pos(final Ui.Type_ui ui, final Core.Type_int pos);
   }
 
@@ -11942,7 +11942,7 @@ public final class Ui {
    * @return {ui}
    * (func ui-child<-ui-uid)
    */
-  public static interface Func_ui_child_from_ui_uid extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ui_child_from_ui_uid extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_ui vx_ui_child_from_ui_uid(final Ui.Type_ui ui, final Core.Type_string uid);
   }
 
@@ -12028,7 +12028,7 @@ public final class Ui {
    * @return {ui}
    * (func ui-from<-event)
    */
-  public static interface Func_ui_from_from_event extends Core.Func_any_from_any_context {
+  public interface Func_ui_from_from_event extends Core.Func_any_from_any_context {
     public Ui.Type_ui vx_ui_from_from_event(final Core.Type_context context, final Event.Type_event event);
   }
 
@@ -12125,7 +12125,7 @@ public final class Ui {
    * @return {ui}
    * (func ui-layout)
    */
-  public static interface Func_ui_layout extends Core.Func_any_from_any {
+  public interface Func_ui_layout extends Core.Func_any_from_any {
     public Ui.Type_ui vx_ui_layout(final Ui.Type_ui uiarg);
   }
 
@@ -12227,7 +12227,7 @@ public final class Ui {
    * @return {ui}
    * (func ui-layout<-fn-layout-ui-orig-parent)
    */
-  public static interface Func_ui_layout_from_fn_layout_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ui_layout_from_fn_layout_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_ui vx_ui_layout_from_fn_layout_ui_orig_parent(final Ui.Func_ui_layout_from_ui_orig_parent fn_layout, final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
   }
 
@@ -12311,7 +12311,7 @@ public final class Ui {
    * @return {ui}
    * (func ui-layout<-ui-orig-parent)
    */
-  public static interface Func_ui_layout_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ui_layout_from_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_ui vx_ui_layout_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent);
   }
 
@@ -12419,7 +12419,7 @@ public final class Ui {
    * @return {ui}
    * (func ui-layout<-ui-parent-selected)
    */
-  public static interface Func_ui_layout_from_ui_parent_selected extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ui_layout_from_ui_parent_selected extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_ui vx_ui_layout_from_ui_parent_selected(final Ui.Type_ui ui, final Ui.Type_ui parent, final Core.Type_int selected);
   }
 
@@ -12509,7 +12509,7 @@ public final class Ui {
    * @return {ui}
    * (func ui-layout<-ui-parent-visible)
    */
-  public static interface Func_ui_layout_from_ui_parent_visible extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ui_layout_from_ui_parent_visible extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_ui vx_ui_layout_from_ui_parent_visible(final Ui.Type_ui ui, final Ui.Type_ui parent, final Core.Type_int visible);
   }
 
@@ -12595,7 +12595,7 @@ public final class Ui {
    * @return {ui}
    * (func ui-readstate-uiapp)
    */
-  public static interface Func_ui_readstate_uiapp extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ui_readstate_uiapp extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_ui vx_ui_readstate_uiapp(final Core.Type_context context);
   }
 
@@ -12674,7 +12674,7 @@ public final class Ui {
    * @return {ui}
    * (func ui-readstate<-uid)
    */
-  public static interface Func_ui_readstate_from_uid extends Core.Func_any_from_any_context {
+  public interface Func_ui_readstate_from_uid extends Core.Func_any_from_any_context {
     public Ui.Type_ui vx_ui_readstate_from_uid(final Core.Type_context context, final Core.Type_string uid);
   }
 
@@ -12772,7 +12772,7 @@ public final class Ui {
    * @return {ui}
    * (func ui-selected<-ui)
    */
-  public static interface Func_ui_selected_from_ui extends Core.Func_any_from_any {
+  public interface Func_ui_selected_from_ui extends Core.Func_any_from_any {
     public Ui.Type_ui vx_ui_selected_from_ui(final Ui.Type_ui ui);
   }
 
@@ -12869,7 +12869,7 @@ public final class Ui {
    * @return {ui}
    * (func ui-visible<-ui)
    */
-  public static interface Func_ui_visible_from_ui extends Core.Func_any_from_any {
+  public interface Func_ui_visible_from_ui extends Core.Func_any_from_any {
     public Ui.Type_ui vx_ui_visible_from_ui(final Ui.Type_ui ui);
   }
 
@@ -12967,7 +12967,7 @@ public final class Ui {
    * @return {ui}
    * (func ui-write<-ui-child)
    */
-  public static interface Func_ui_write_from_ui_child extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ui_write_from_ui_child extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_ui vx_ui_write_from_ui_child(final Ui.Type_ui ui, final Ui.Type_ui child);
   }
 
@@ -13056,7 +13056,7 @@ public final class Ui {
    * @return {ui}
    * (func ui-write<-ui-childmap)
    */
-  public static interface Func_ui_write_from_ui_childmap extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ui_write_from_ui_childmap extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_ui vx_ui_write_from_ui_childmap(final Ui.Type_ui ui, final Ui.Type_uimap childmap);
   }
 
@@ -13152,7 +13152,7 @@ public final class Ui {
    * @return {ui}
    * (func ui-write<-ui-visible)
    */
-  public static interface Func_ui_write_from_ui_visible extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ui_write_from_ui_visible extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_ui vx_ui_write_from_ui_visible(final Ui.Type_ui ui, final Core.Type_int visible);
   }
 
@@ -13303,7 +13303,7 @@ public final class Ui {
    * @return {ui}
    * (func ui<-layout-ui-orig-parent)
    */
-  public static interface Func_ui_from_layout_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ui_from_layout_ui_orig_parent extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_ui vx_ui_from_layout_ui_orig_parent(final Ui.Type_layout layout, final Ui.Type_ui uiarg, final Ui.Type_ui uiorig, final Ui.Type_ui parent);
   }
 
@@ -13394,7 +13394,7 @@ public final class Ui {
    * @return {ui}
    * (func ui<-ui-find)
    */
-  public static interface Func_ui_from_ui_find extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ui_from_ui_find extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_ui vx_ui_from_ui_find(final Ui.Type_ui uiarg, final Core.Type_string find);
   }
 
@@ -13591,7 +13591,7 @@ public final class Ui {
    * @return {ui}
    * (func ui<-ui-selected)
    */
-  public static interface Func_ui_from_ui_selected extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_ui_from_ui_selected extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_ui vx_ui_from_ui_selected(final Ui.Type_ui ui, final Core.Type_int selected);
   }
 
@@ -13741,7 +13741,7 @@ public final class Ui {
    * @return {string}
    * (func uid-selected<-ui)
    */
-  public static interface Func_uid_selected_from_ui extends Core.Func_any_from_any {
+  public interface Func_uid_selected_from_ui extends Core.Func_any_from_any {
     public Core.Type_string vx_uid_selected_from_ui(final Ui.Type_ui ui);
   }
 
@@ -13837,7 +13837,7 @@ public final class Ui {
    * @return {uiengine}
    * (func uiengine-readstate)
    */
-  public static interface Func_uiengine_readstate extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_uiengine_readstate extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_uiengine vx_uiengine_readstate(final Core.Type_context context);
   }
 
@@ -13916,7 +13916,7 @@ public final class Ui {
    * @return {uiengine}
    * (func uiengine-render)
    */
-  public static interface Func_uiengine_render extends Core.Func_any_from_any_context {
+  public interface Func_uiengine_render extends Core.Func_any_from_any_context {
     public Ui.Type_uiengine vx_uiengine_render(final Core.Type_context context, final Ui.Type_uiengine uiengine);
   }
 
@@ -14028,7 +14028,7 @@ public final class Ui {
    * @return {uilist}
    * (func uilist-selected<-ui)
    */
-  public static interface Func_uilist_selected_from_ui extends Core.Func_any_from_any {
+  public interface Func_uilist_selected_from_ui extends Core.Func_any_from_any {
     public Ui.Type_uilist vx_uilist_selected_from_ui(final Ui.Type_ui uiarg);
   }
 
@@ -14138,7 +14138,7 @@ public final class Ui {
    * @return {uilist}
    * (func uilist-visible<-ui)
    */
-  public static interface Func_uilist_visible_from_ui extends Core.Func_any_from_any {
+  public interface Func_uilist_visible_from_ui extends Core.Func_any_from_any {
     public Ui.Type_uilist vx_uilist_visible_from_ui(final Ui.Type_ui uiarg);
   }
 
@@ -14249,7 +14249,7 @@ public final class Ui {
    * @return {uilist}
    * (func uilist<-uimap)
    */
-  public static interface Func_uilist_from_uimap extends Core.Func_any_from_any {
+  public interface Func_uilist_from_uimap extends Core.Func_any_from_any {
     public Ui.Type_uilist vx_uilist_from_uimap(final Ui.Type_uimap uimap);
   }
 
@@ -14350,7 +14350,7 @@ public final class Ui {
    * @return {uimap}
    * (func uimap-addlayout<-uimap-layoutmap-else)
    */
-  public static interface Func_uimap_addlayout_from_uimap_layoutmap_else extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_uimap_addlayout_from_uimap_layoutmap_else extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_uimap vx_uimap_addlayout_from_uimap_layoutmap_else(final Ui.Type_uimap uimap, final Ui.Type_layoutmap layoutmap, final Ui.Type_layout layoutelse);
   }
 
@@ -14441,7 +14441,7 @@ public final class Ui {
    * @return {uimap}
    * (func uimap-layout<-uimap-parent)
    */
-  public static interface Func_uimap_layout_from_uimap_parent extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_uimap_layout_from_uimap_parent extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_uimap vx_uimap_layout_from_uimap_parent(final Ui.Type_uimap uimap, final Ui.Type_ui parent);
   }
 
@@ -14535,7 +14535,7 @@ public final class Ui {
    * @return {uimap}
    * (func uimap<-uilist)
    */
-  public static interface Func_uimap_from_uilist extends Core.Func_any_from_any {
+  public interface Func_uimap_from_uilist extends Core.Func_any_from_any {
     public Ui.Type_uimap vx_uimap_from_uilist(final Ui.Type_uilist uilist);
   }
 
@@ -14635,7 +14635,7 @@ public final class Ui {
    * @return {uimap}
    * (func uimap<-uimap-data)
    */
-  public static interface Func_uimap_from_uimap_data extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_uimap_from_uimap_data extends Core.Type_func, Core.Type_replfunc {
     public Ui.Type_uimap vx_uimap_from_uimap_data(final Ui.Type_uimap uimap, final Core.Type_any data);
   }
 

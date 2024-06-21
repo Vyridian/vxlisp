@@ -3040,7 +3040,7 @@ public final class Test {
    * @return {context}
    * (func context-test)
    */
-  public static interface Func_context_test extends Core.Func_any_from_any {
+  public interface Func_context_test extends Core.Func_any_from_any {
     public Core.Type_context vx_context_test(final Core.Type_anylist args);
   }
 
@@ -3148,7 +3148,7 @@ public final class Test {
    * @return {div}
    * (func div<-testcaselist)
    */
-  public static interface Func_div_from_testcaselist extends Core.Func_any_from_any {
+  public interface Func_div_from_testcaselist extends Core.Func_any_from_any {
     public Html.Type_div vx_div_from_testcaselist(final Test.Type_testcaselist testcaselist);
   }
 
@@ -3326,7 +3326,7 @@ public final class Test {
    * @return {div}
    * (func div<-testpackage)
    */
-  public static interface Func_div_from_testpackage extends Core.Func_any_from_any {
+  public interface Func_div_from_testpackage extends Core.Func_any_from_any {
     public Html.Type_div vx_div_from_testpackage(final Test.Type_testpackage testpackage);
   }
 
@@ -3495,7 +3495,7 @@ public final class Test {
    * @return {div}
    * (func div<-testpackagelist)
    */
-  public static interface Func_div_from_testpackagelist extends Core.Func_any_from_any {
+  public interface Func_div_from_testpackagelist extends Core.Func_any_from_any {
     public Html.Type_div vx_div_from_testpackagelist(final Test.Type_testpackagelist testpackagelist);
   }
 
@@ -3705,7 +3705,7 @@ public final class Test {
    * @return {divchildlist}
    * (func divchildlist<-testpackagelist)
    */
-  public static interface Func_divchildlist_from_testpackagelist extends Core.Func_any_from_any {
+  public interface Func_divchildlist_from_testpackagelist extends Core.Func_any_from_any {
     public Html.Type_divchildlist vx_divchildlist_from_testpackagelist(final Test.Type_testpackagelist testpackagelist);
   }
 
@@ -3799,7 +3799,7 @@ public final class Test {
    * @return {file}
    * (func file-test)
    */
-  public static interface Func_file_test extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_file_test extends Core.Type_func, Core.Type_replfunc {
     public File.Type_file vx_file_test();
   }
 
@@ -3884,7 +3884,7 @@ public final class Test {
    * @return {file}
    * (func file-testhtml)
    */
-  public static interface Func_file_testhtml extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_file_testhtml extends Core.Type_func, Core.Type_replfunc {
     public File.Type_file vx_file_testhtml();
   }
 
@@ -3969,7 +3969,7 @@ public final class Test {
    * @return {file}
    * (func file-testnode)
    */
-  public static interface Func_file_testnode extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_file_testnode extends Core.Type_func, Core.Type_replfunc {
     public File.Type_file vx_file_testnode();
   }
 
@@ -4055,7 +4055,7 @@ public final class Test {
    * @return {html}
    * (func html<-divtest)
    */
-  public static interface Func_html_from_divtest extends Core.Func_any_from_any {
+  public interface Func_html_from_divtest extends Core.Func_any_from_any {
     public Html.Type_html vx_html_from_divtest(final Html.Type_div divtest);
   }
 
@@ -4200,7 +4200,7 @@ public final class Test {
    * @return {p}
    * (func p<-passfail)
    */
-  public static interface Func_p_from_passfail extends Core.Func_any_from_any {
+  public interface Func_p_from_passfail extends Core.Func_any_from_any {
     public Html.Type_p vx_p_from_passfail(final Core.Type_boolean passfail);
   }
 
@@ -4310,7 +4310,7 @@ public final class Test {
    * @return {p}
    * (func p<-testcoveragenums)
    */
-  public static interface Func_p_from_testcoveragenums extends Core.Func_any_from_any {
+  public interface Func_p_from_testcoveragenums extends Core.Func_any_from_any {
     public Html.Type_p vx_p_from_testcoveragenums(final Test.Type_testcoveragenums nums);
   }
 
@@ -4423,7 +4423,7 @@ public final class Test {
    * @return {testcase}
    * (func resolve-testcase)
    */
-  public static interface Func_resolve_testcase extends Core.Func_any_from_any_async {
+  public interface Func_resolve_testcase extends Core.Func_any_from_any_async {
     public CompletableFuture<Test.Type_testcase> vx_resolve_testcase(final Test.Type_testcase testcase);
   }
 
@@ -4550,7 +4550,7 @@ public final class Test {
    * @return {testcaselist}
    * (func resolve-testcaselist)
    */
-  public static interface Func_resolve_testcaselist extends Core.Func_any_from_any_async {
+  public interface Func_resolve_testcaselist extends Core.Func_any_from_any_async {
     public CompletableFuture<Test.Type_testcaselist> vx_resolve_testcaselist(final Test.Type_testcaselist testcaselist);
   }
 
@@ -4648,7 +4648,7 @@ public final class Test {
    * @return {testdescribe}
    * (func resolve-testdescribe)
    */
-  public static interface Func_resolve_testdescribe extends Core.Func_any_from_any_async {
+  public interface Func_resolve_testdescribe extends Core.Func_any_from_any_async {
     public CompletableFuture<Test.Type_testdescribe> vx_resolve_testdescribe(final Test.Type_testdescribe testdescribe);
   }
 
@@ -4757,7 +4757,7 @@ public final class Test {
    * @return {testdescribelist}
    * (func resolve-testdescribelist)
    */
-  public static interface Func_resolve_testdescribelist extends Core.Func_any_from_any_async {
+  public interface Func_resolve_testdescribelist extends Core.Func_any_from_any_async {
     public CompletableFuture<Test.Type_testdescribelist> vx_resolve_testdescribelist(final Test.Type_testdescribelist testdescribelist);
   }
 
@@ -4855,7 +4855,7 @@ public final class Test {
    * @return {testpackage}
    * (func resolve-testpackage)
    */
-  public static interface Func_resolve_testpackage extends Core.Func_any_from_any_async {
+  public interface Func_resolve_testpackage extends Core.Func_any_from_any_async {
     public CompletableFuture<Test.Type_testpackage> vx_resolve_testpackage(final Test.Type_testpackage testpackage);
   }
 
@@ -4976,7 +4976,7 @@ public final class Test {
    * @return {testpackagelist}
    * (func resolve-testpackagelist)
    */
-  public static interface Func_resolve_testpackagelist extends Core.Func_any_from_any_async {
+  public interface Func_resolve_testpackagelist extends Core.Func_any_from_any_async {
     public CompletableFuture<Test.Type_testpackagelist> vx_resolve_testpackagelist(final Test.Type_testpackagelist testpackagelist);
   }
 
@@ -5074,7 +5074,7 @@ public final class Test {
    * @return {testresult}
    * (func resolve-testresult)
    */
-  public static interface Func_resolve_testresult extends Core.Func_any_from_any_async {
+  public interface Func_resolve_testresult extends Core.Func_any_from_any_async {
     public CompletableFuture<Test.Type_testresult> vx_resolve_testresult(final Test.Type_testresult testresult);
   }
 
@@ -5206,7 +5206,7 @@ public final class Test {
    * @return {security}
    * (func security-test)
    */
-  public static interface Func_security_test extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_security_test extends Core.Type_func, Core.Type_replfunc {
     public Core.Type_security vx_security_test();
   }
 
@@ -5299,7 +5299,7 @@ public final class Test {
    * @return {testresult}
    * (func test)
    */
-  public static interface Func_test extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_test extends Core.Type_func, Core.Type_replfunc {
     public Test.Type_testresult vx_test(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual);
   }
 
@@ -5398,7 +5398,7 @@ public final class Test {
    * @return {testresult}
    * (func test)
    */
-  public static interface Func_test_1 extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_test_1 extends Core.Type_func, Core.Type_replfunc {
     public Test.Type_testresult vx_test_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual);
   }
 
@@ -5494,7 +5494,7 @@ public final class Test {
    * @return {testresult}
    * (func test-false)
    */
-  public static interface Func_test_false extends Core.Func_any_from_any_context {
+  public interface Func_test_false extends Core.Func_any_from_any_context {
     public Test.Type_testresult vx_test_false(final Core.Type_context context, final Core.Type_any actual);
   }
 
@@ -5606,7 +5606,7 @@ public final class Test {
    * @return {testresult}
    * (func test-false)
    */
-  public static interface Func_test_false_1 extends Core.Func_any_from_any_context {
+  public interface Func_test_false_1 extends Core.Func_any_from_any_context {
     public Test.Type_testresult vx_test_false_1(final Core.Type_context context, final Core.Func_any_from_func_async fn_actual);
   }
 
@@ -5714,7 +5714,7 @@ public final class Test {
    * @return {testresult}
    * (func test-gt)
    */
-  public static interface Func_test_gt extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_test_gt extends Core.Type_func, Core.Type_replfunc {
     public Test.Type_testresult vx_test_gt(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual);
   }
 
@@ -5813,7 +5813,7 @@ public final class Test {
    * @return {testresult}
    * (func test-gt)
    */
-  public static interface Func_test_gt_1 extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_test_gt_1 extends Core.Type_func, Core.Type_replfunc {
     public Test.Type_testresult vx_test_gt_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual);
   }
 
@@ -5910,7 +5910,7 @@ public final class Test {
    * @return {testresult}
    * (func test-ne)
    */
-  public static interface Func_test_ne extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_test_ne extends Core.Type_func, Core.Type_replfunc {
     public Test.Type_testresult vx_test_ne(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual);
   }
 
@@ -6009,7 +6009,7 @@ public final class Test {
    * @return {testresult}
    * (func test-ne)
    */
-  public static interface Func_test_ne_1 extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_test_ne_1 extends Core.Type_func, Core.Type_replfunc {
     public Test.Type_testresult vx_test_ne_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual);
   }
 
@@ -6106,7 +6106,7 @@ public final class Test {
    * @return {testresult}
    * (func test-string)
    */
-  public static interface Func_test_string extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_test_string extends Core.Type_func, Core.Type_replfunc {
     public Test.Type_testresult vx_test_string(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual);
   }
 
@@ -6206,7 +6206,7 @@ public final class Test {
    * @return {testresult}
    * (func test-string)
    */
-  public static interface Func_test_string_1 extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_test_string_1 extends Core.Type_func, Core.Type_replfunc {
     public Test.Type_testresult vx_test_string_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual);
   }
 
@@ -6302,7 +6302,7 @@ public final class Test {
    * @return {testresult}
    * (func test-true)
    */
-  public static interface Func_test_true extends Core.Func_any_from_any_context {
+  public interface Func_test_true extends Core.Func_any_from_any_context {
     public Test.Type_testresult vx_test_true(final Core.Type_context context, final Core.Type_any actual);
   }
 
@@ -6414,7 +6414,7 @@ public final class Test {
    * @return {testresult}
    * (func test-true)
    */
-  public static interface Func_test_true_1 extends Core.Func_any_from_any_context {
+  public interface Func_test_true_1 extends Core.Func_any_from_any_context {
     public Test.Type_testresult vx_test_true_1(final Core.Type_context context, final Core.Func_any_from_func_async fn_actual);
   }
 
@@ -6522,7 +6522,7 @@ public final class Test {
    * @return {tr}
    * (func tr<-testdescribe-casename)
    */
-  public static interface Func_tr_from_testdescribe_casename extends Core.Type_func, Core.Type_replfunc {
+  public interface Func_tr_from_testdescribe_casename extends Core.Type_func, Core.Type_replfunc {
     public Html.Type_tr vx_tr_from_testdescribe_casename(final Test.Type_testdescribe testdescribe, final Core.Type_string casename);
   }
 
@@ -6685,7 +6685,7 @@ public final class Test {
    * @return {trlist}
    * (func trlist<-testcase)
    */
-  public static interface Func_trlist_from_testcase extends Core.Func_any_from_any {
+  public interface Func_trlist_from_testcase extends Core.Func_any_from_any {
     public Html.Type_trlist vx_trlist_from_testcase(final Test.Type_testcase testcase);
   }
 
@@ -6791,7 +6791,7 @@ public final class Test {
    * @return {trlist}
    * (func trlist<-testcaselist)
    */
-  public static interface Func_trlist_from_testcaselist extends Core.Func_any_from_any {
+  public interface Func_trlist_from_testcaselist extends Core.Func_any_from_any {
     public Html.Type_trlist vx_trlist_from_testcaselist(final Test.Type_testcaselist testcaselist);
   }
 

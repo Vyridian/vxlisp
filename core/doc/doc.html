@@ -3963,11 +3963,11 @@
  :test (test-true true))
 
 (func . : any
- [object : any
-  method : string
-  params : anylist :...]
+ [target     : any
+  method     : string
+  parameters : anylist :...]
  (native
-  :js &quot;object[method].apply(params)&quot;)
+  :js &quot;target[method].apply(parameters)&quot;)
  :alias       &quot;dotmethod&quot;
  :sideeffects &quot;Depends on object&quot;
  :doc &quot;Not Recommened: Support for Object Oriented dot notation. e.g. (this.foo 'a') = this.foo('a')&quot;)
@@ -5113,7 +5113,7 @@
  :doc &quot;Returns float from a given string.&quot;)
 
 (func fn : any-1
- [params : arglist
+ [parameters : arglist
   fn-any : any&lt;-func]
  :doc &quot;Shell for lambda function calls&quot;)
 
@@ -11946,7 +11946,7 @@
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">object</div>
+                    <div class="td">target</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
                     <div class="td"></div>
                   </div>
@@ -11956,7 +11956,7 @@
                     <div class="td"></div>
                   </div>
                   <div class="tr">
-                    <div class="td">params</div>
+                    <div class="td">parameters</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/anylist')">vx/core/anylist</span></div>
                     <div class="td"></div>
                   </div>
@@ -11978,11 +11978,11 @@
               <ul>
                 <li>
                   <div class="source">(func . : any
- [object : any
-  method : string
-  params : anylist :...]
+ [target     : any
+  method     : string
+  parameters : anylist :...]
  (native
-  :js &quot;object[method].apply(params)&quot;)
+  :js &quot;target[method].apply(parameters)&quot;)
  :alias       &quot;dotmethod&quot;
  :sideeffects &quot;Depends on object&quot;
  :doc &quot;Not Recommened: Support for Object Oriented dot notation. e.g. (this.foo 'a') = this.foo('a')&quot;)</div>
@@ -18221,7 +18221,7 @@ improves readability.</div>
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">params</div>
+                    <div class="td">parameters</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/arglist')">vx/core/arglist</span></div>
                     <div class="td"></div>
                   </div>
@@ -18248,7 +18248,7 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func fn : any-1
- [params : arglist
+ [parameters : arglist
   fn-any : any&lt;-func]
  :doc &quot;Shell for lambda function calls&quot;)</div>
                 </li>
