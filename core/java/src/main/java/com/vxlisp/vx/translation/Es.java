@@ -57,9 +57,13 @@ public final class Es {
     }
 
     @Override
-    public Func_translation_es vx_empty() {return e_translation_es;}
+    public Core.Type_any vx_empty() {
+      return e_translation_es;
+    }
     @Override
-    public Func_translation_es vx_type() {return t_translation_es;}
+    public Core.Type_any vx_type() {
+      return t_translation_es;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -81,7 +85,7 @@ public final class Es {
     Core.Type_translation output = Core.e_translation;
     output = Core.f_new(
       Core.t_translation,
-      Core.t_anylist.vx_new(
+      Core.vx_new(Core.t_anylist,
         Core.vx_new_string(":name"),
         Core.vx_new_string("es"),
         Core.vx_new_string(":wordmap"),
@@ -130,7 +134,7 @@ public final class Es {
           "stringmap", // name
           ":map", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_string), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_string), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -142,9 +146,13 @@ public final class Es {
     }
 
     @Override
-    public Func_words vx_empty() {return e_words;}
+    public Core.Type_any vx_empty() {
+      return e_words;
+    }
     @Override
-    public Func_words vx_type() {return t_words;}
+    public Core.Type_any vx_type() {
+      return t_words;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -166,7 +174,7 @@ public final class Es {
     Core.Type_stringmap output = Core.e_stringmap;
     output = Core.f_new(
       Core.t_stringmap,
-      Core.t_anylist.vx_new(
+      Core.vx_new(Core.t_anylist,
         Core.vx_new_string("Hello"),
         Core.vx_new_string("Hola"),
         Core.vx_new_string("World"),

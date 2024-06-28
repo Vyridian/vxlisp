@@ -13,33 +13,30 @@ public final class HtmldocTest {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
       
     ));
-    Test.Type_testcaselist output = Test.t_testcaselist.vx_new(arraylisttestcase);
+    Test.Type_testcaselist output = Core.vx_new(
+      Test.t_testcaselist,
+      arraylisttestcase
+    );
     return output;
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Test.t_testcoveragesummary.vx_new(
-      ":testpkg",   "vx/web/htmldoc", 
-      ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 15, ":total", 15), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 15), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 15), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 15), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 15), 
-      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
+    return Core.vx_new(
+      Test.t_testcoveragesummary,
+      ":testpkg", "vx/web/htmldoc", 
+      ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
+      ":docnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 15, ":total", 15), 
+      ":funcnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 15), 
+      ":bigospacenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 15), 
+      ":bigotimenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 15), 
+      ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 15), 
+      ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     );
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Test.t_testcoveragedetail.vx_new(
-      ":testpkg", "vx/web/htmldoc",
-      ":typemap", Core.t_intmap.vx_new(
-  
-      ),
-      ":constmap", Core.t_intmap.vx_new(
-  
-      ),
-      ":funcmap", Core.t_intmap.vx_new(
+    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/web/htmldoc", ":typemap", Core.e_intmap, ":constmap", Core.e_intmap, ":funcmap", Core.vx_new(
+  Core.t_intmap,
         ":boolean-print<-id-stylesheettext", 0,
         ":boolean-remove<-id", 0,
         ":boolean-replace<-id-htmltext", 0,
@@ -55,13 +52,13 @@ public final class HtmldocTest {
         ":string<-id", 0,
         ":string<-stylesheet", 0,
         ":ui-readstate<-uid", 0
-      )
-    );
+      ));
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {
     Test.Type_testcaselist testcaselist = test_cases(context);
-    Test.Type_testpackage output = Test.t_testpackage.vx_new(
+    Test.Type_testpackage output = Core.vx_new(
+      Test.t_testpackage,
       ":testpkg", "vx/web/htmldoc", 
       ":caselist", testcaselist,
       ":coveragesummary", test_coveragesummary(),

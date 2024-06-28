@@ -113,7 +113,7 @@ public final class Type {
     String stext = text.vx_string();
     String sdelim = delim.vx_string();
     Object[] arraystring = stext.split(java.util.regex.Pattern.quote(sdelim));
-    output = Core.t_stringlist.vx_new(arraystring);
+    output = Core.vx_new(Core.t_stringlist, arraystring);
     return output;
   }
   /**
@@ -156,7 +156,7 @@ public final class Type {
           "stringlist", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_string), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_string), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -168,12 +168,18 @@ public final class Type {
     }
 
     @Override
-    public Func_allowtypenames_from_type vx_empty() {return e_allowtypenames_from_type;}
+    public Core.Type_any vx_empty() {
+      return e_allowtypenames_from_type;
+    }
     @Override
-    public Func_allowtypenames_from_type vx_type() {return t_allowtypenames_from_type;}
+    public Core.Type_any vx_type() {
+      return t_allowtypenames_from_type;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -249,7 +255,7 @@ public final class Type {
           "typelist", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_any), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -261,12 +267,18 @@ public final class Type {
     }
 
     @Override
-    public Func_allowtypes_from_type vx_empty() {return e_allowtypes_from_type;}
+    public Core.Type_any vx_empty() {
+      return e_allowtypes_from_type;
+    }
     @Override
-    public Func_allowtypes_from_type vx_type() {return t_allowtypes_from_type;}
+    public Core.Type_any vx_type() {
+      return t_allowtypes_from_type;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -352,12 +364,18 @@ public final class Type {
     }
 
     @Override
-    public Func_any_from_int vx_empty() {return e_any_from_int;}
+    public Core.Type_any vx_empty() {
+      return e_any_from_int;
+    }
     @Override
-    public Func_any_from_int vx_type() {return t_any_from_int;}
+    public Core.Type_any vx_type() {
+      return t_any_from_int;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -444,9 +462,13 @@ public final class Type {
     }
 
     @Override
-    public Func_boolean_from_string_ends vx_empty() {return e_boolean_from_string_ends;}
+    public Core.Type_any vx_empty() {
+      return e_boolean_from_string_ends;
+    }
     @Override
-    public Func_boolean_from_string_ends vx_type() {return t_boolean_from_string_ends;}
+    public Core.Type_any vx_type() {
+      return t_boolean_from_string_ends;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -526,9 +548,13 @@ public final class Type {
     }
 
     @Override
-    public Func_boolean_from_string_starts vx_empty() {return e_boolean_from_string_starts;}
+    public Core.Type_any vx_empty() {
+      return e_boolean_from_string_starts;
+    }
     @Override
-    public Func_boolean_from_string_starts vx_type() {return t_boolean_from_string_starts;}
+    public Core.Type_any vx_type() {
+      return t_boolean_from_string_starts;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -595,7 +621,7 @@ public final class Type {
           "vx/core", // pkgname
           "int", // name
           "", // extends
-          Core.t_typelist.vx_new(Core.t_number), // traits
+          Core.vx_new(Core.t_typelist, Core.t_number), // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
@@ -608,9 +634,13 @@ public final class Type {
     }
 
     @Override
-    public Func_int_from_string_find vx_empty() {return e_int_from_string_find;}
+    public Core.Type_any vx_empty() {
+      return e_int_from_string_find;
+    }
     @Override
-    public Func_int_from_string_find vx_type() {return t_int_from_string_find;}
+    public Core.Type_any vx_type() {
+      return t_int_from_string_find;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -676,7 +706,7 @@ public final class Type {
           "vx/core", // pkgname
           "int", // name
           "", // extends
-          Core.t_typelist.vx_new(Core.t_number), // traits
+          Core.vx_new(Core.t_typelist, Core.t_number), // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
@@ -689,9 +719,13 @@ public final class Type {
     }
 
     @Override
-    public Func_int_from_string_findkeyword vx_empty() {return e_int_from_string_findkeyword;}
+    public Core.Type_any vx_empty() {
+      return e_int_from_string_findkeyword;
+    }
     @Override
-    public Func_int_from_string_findkeyword vx_type() {return t_int_from_string_findkeyword;}
+    public Core.Type_any vx_type() {
+      return t_int_from_string_findkeyword;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -757,7 +791,7 @@ public final class Type {
           "vx/core", // pkgname
           "int", // name
           "", // extends
-          Core.t_typelist.vx_new(Core.t_number), // traits
+          Core.vx_new(Core.t_typelist, Core.t_number), // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
@@ -770,9 +804,13 @@ public final class Type {
     }
 
     @Override
-    public Func_int_from_string_findlast vx_empty() {return e_int_from_string_findlast;}
+    public Core.Type_any vx_empty() {
+      return e_int_from_string_findlast;
+    }
     @Override
-    public Func_int_from_string_findlast vx_type() {return t_int_from_string_findlast;}
+    public Core.Type_any vx_type() {
+      return t_int_from_string_findlast;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -849,12 +887,18 @@ public final class Type {
     }
 
     @Override
-    public Func_is_boolean vx_empty() {return e_is_boolean;}
+    public Core.Type_any vx_empty() {
+      return e_is_boolean;
+    }
     @Override
-    public Func_is_boolean vx_type() {return t_is_boolean;}
+    public Core.Type_any vx_type() {
+      return t_is_boolean;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -942,12 +986,18 @@ public final class Type {
     }
 
     @Override
-    public Func_is_decimal vx_empty() {return e_is_decimal;}
+    public Core.Type_any vx_empty() {
+      return e_is_decimal;
+    }
     @Override
-    public Func_is_decimal vx_type() {return t_is_decimal;}
+    public Core.Type_any vx_type() {
+      return t_is_decimal;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -1035,12 +1085,18 @@ public final class Type {
     }
 
     @Override
-    public Func_is_none vx_empty() {return e_is_none;}
+    public Core.Type_any vx_empty() {
+      return e_is_none;
+    }
     @Override
-    public Func_is_none vx_type() {return t_is_none;}
+    public Core.Type_any vx_type() {
+      return t_is_none;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -1128,12 +1184,18 @@ public final class Type {
     }
 
     @Override
-    public Func_is_string vx_empty() {return e_is_string;}
+    public Core.Type_any vx_empty() {
+      return e_is_string;
+    }
     @Override
-    public Func_is_string vx_type() {return t_is_string;}
+    public Core.Type_any vx_type() {
+      return t_is_string;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -1222,9 +1284,13 @@ public final class Type {
     }
 
     @Override
-    public Func_is_type vx_empty() {return e_is_type;}
+    public Core.Type_any vx_empty() {
+      return e_is_type;
+    }
     @Override
-    public Func_is_type vx_type() {return t_is_type;}
+    public Core.Type_any vx_type() {
+      return t_is_type;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -1247,7 +1313,7 @@ public final class Type {
   public static Core.Type_boolean f_is_type(final Core.Type_any val, final Core.Type_any type) {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_or_1(
-      Core.t_booleanlist.vx_new(
+      Core.vx_new(Core.t_booleanlist,
         Core.f_eq(
           Core.f_typename_from_type(type),
           Core.f_typename_from_any(val)
@@ -1318,9 +1384,13 @@ public final class Type {
     }
 
     @Override
-    public Func_is_type_from_any_typelist vx_empty() {return e_is_type_from_any_typelist;}
+    public Core.Type_any vx_empty() {
+      return e_is_type_from_any_typelist;
+    }
     @Override
-    public Func_is_type_from_any_typelist vx_type() {return t_is_type_from_any_typelist;}
+    public Core.Type_any vx_type() {
+      return t_is_type_from_any_typelist;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -1411,12 +1481,18 @@ public final class Type {
     }
 
     @Override
-    public Func_string_lowercase vx_empty() {return e_string_lowercase;}
+    public Core.Type_any vx_empty() {
+      return e_string_lowercase;
+    }
     @Override
-    public Func_string_lowercase vx_type() {return t_string_lowercase;}
+    public Core.Type_any vx_type() {
+      return t_string_lowercase;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -1502,12 +1578,18 @@ public final class Type {
     }
 
     @Override
-    public Func_string_outdent vx_empty() {return e_string_outdent;}
+    public Core.Type_any vx_empty() {
+      return e_string_outdent;
+    }
     @Override
-    public Func_string_outdent vx_type() {return t_string_outdent;}
+    public Core.Type_any vx_type() {
+      return t_string_outdent;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -1543,7 +1625,7 @@ public final class Type {
         final Core.Type_int pos = Type.f_int_from_string_findkeyword(text, Core.vx_new_string(":nonwhitespace"));
         return Core.f_if_2(
           Core.t_string,
-          Core.t_thenelselist.vx_new(
+          Core.vx_new(Core.t_thenelselist,
             Core.f_then(
               Core.t_boolean_from_func.vx_fn_new(() -> {
                 return Core.f_eq(Core.vx_new_int(0), pos);
@@ -1633,12 +1715,18 @@ public final class Type {
     }
 
     @Override
-    public Func_string_trim vx_empty() {return e_string_trim;}
+    public Core.Type_any vx_empty() {
+      return e_string_trim;
+    }
     @Override
-    public Func_string_trim vx_type() {return t_string_trim;}
+    public Core.Type_any vx_type() {
+      return t_string_trim;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -1724,12 +1812,18 @@ public final class Type {
     }
 
     @Override
-    public Func_string_uppercase vx_empty() {return e_string_uppercase;}
+    public Core.Type_any vx_empty() {
+      return e_string_uppercase;
+    }
     @Override
-    public Func_string_uppercase vx_type() {return t_string_uppercase;}
+    public Core.Type_any vx_type() {
+      return t_string_uppercase;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -1815,12 +1909,18 @@ public final class Type {
     }
 
     @Override
-    public Func_string_from_int vx_empty() {return e_string_from_int;}
+    public Core.Type_any vx_empty() {
+      return e_string_from_int;
+    }
     @Override
-    public Func_string_from_int vx_type() {return t_string_from_int;}
+    public Core.Type_any vx_type() {
+      return t_string_from_int;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -1853,7 +1953,7 @@ public final class Type {
     output = Core.f_switch(
       Core.t_string,
       val,
-      Core.t_thenelselist.vx_new(
+      Core.vx_new(Core.t_thenelselist,
         Core.f_case_1(
           Core.c_infinity,
           Core.t_any_from_func.vx_fn_new(() -> {
@@ -1876,7 +1976,7 @@ public final class Type {
           Core.t_any_from_func.vx_fn_new(() -> {
             return Core.f_new(
               Core.t_string,
-              Core.t_anylist.vx_new(
+              Core.vx_new(Core.t_anylist,
                   val
               )
             );
@@ -1940,9 +2040,13 @@ public final class Type {
     }
 
     @Override
-    public Func_string_from_string_end vx_empty() {return e_string_from_string_end;}
+    public Core.Type_any vx_empty() {
+      return e_string_from_string_end;
+    }
     @Override
-    public Func_string_from_string_end vx_type() {return t_string_from_string_end;}
+    public Core.Type_any vx_type() {
+      return t_string_from_string_end;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -2021,9 +2125,13 @@ public final class Type {
     }
 
     @Override
-    public Func_string_from_string_start vx_empty() {return e_string_from_string_start;}
+    public Core.Type_any vx_empty() {
+      return e_string_from_string_start;
+    }
     @Override
-    public Func_string_from_string_start vx_type() {return t_string_from_string_start;}
+    public Core.Type_any vx_type() {
+      return t_string_from_string_start;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -2107,9 +2215,13 @@ public final class Type {
     }
 
     @Override
-    public Func_string_from_string_start_end vx_empty() {return e_string_from_string_start_end;}
+    public Core.Type_any vx_empty() {
+      return e_string_from_string_start_end;
+    }
     @Override
-    public Func_string_from_string_start_end vx_type() {return t_string_from_string_start_end;}
+    public Core.Type_any vx_type() {
+      return t_string_from_string_start_end;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -2190,9 +2302,13 @@ public final class Type {
     }
 
     @Override
-    public Func_string_from_stringlist_join vx_empty() {return e_string_from_stringlist_join;}
+    public Core.Type_any vx_empty() {
+      return e_string_from_stringlist_join;
+    }
     @Override
-    public Func_string_from_stringlist_join vx_type() {return t_string_from_stringlist_join;}
+    public Core.Type_any vx_type() {
+      return t_string_from_stringlist_join;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -2259,7 +2375,7 @@ public final class Type {
           "stringlist", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_string), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_string), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -2271,9 +2387,13 @@ public final class Type {
     }
 
     @Override
-    public Func_stringlist_from_string_split vx_empty() {return e_stringlist_from_string_split;}
+    public Core.Type_any vx_empty() {
+      return e_stringlist_from_string_split;
+    }
     @Override
-    public Func_stringlist_from_string_split vx_type() {return t_stringlist_from_string_split;}
+    public Core.Type_any vx_type() {
+      return t_stringlist_from_string_split;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -2339,7 +2459,7 @@ public final class Type {
           "stringlist", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_string), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_string), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -2351,12 +2471,18 @@ public final class Type {
     }
 
     @Override
-    public Func_traitnames_from_any vx_empty() {return e_traitnames_from_any;}
+    public Core.Type_any vx_empty() {
+      return e_traitnames_from_any;
+    }
     @Override
-    public Func_traitnames_from_any vx_type() {return t_traitnames_from_any;}
+    public Core.Type_any vx_type() {
+      return t_traitnames_from_any;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -2432,7 +2558,7 @@ public final class Type {
           "typelist", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_any), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -2444,12 +2570,18 @@ public final class Type {
     }
 
     @Override
-    public Func_traits_from_any vx_empty() {return e_traits_from_any;}
+    public Core.Type_any vx_empty() {
+      return e_traits_from_any;
+    }
     @Override
-    public Func_traits_from_any vx_type() {return t_traits_from_any;}
+    public Core.Type_any vx_type() {
+      return t_traits_from_any;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -2525,7 +2657,7 @@ public final class Type {
           "typelist", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_any), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -2537,12 +2669,18 @@ public final class Type {
     }
 
     @Override
-    public Func_traits_from_typedef vx_empty() {return e_traits_from_typedef;}
+    public Core.Type_any vx_empty() {
+      return e_traits_from_typedef;
+    }
     @Override
-    public Func_traits_from_typedef vx_type() {return t_traits_from_typedef;}
+    public Core.Type_any vx_type() {
+      return t_traits_from_typedef;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {

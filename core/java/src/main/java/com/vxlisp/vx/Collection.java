@@ -72,7 +72,7 @@ public final class Collection {
       }
     }
     if (listvals.size() > 0) {
-      Core.Type_anylist anylist = Core.t_anylist.vx_new(listvals);
+      Core.Type_anylist anylist = Core.vx_new(Core.t_anylist, listvals);
       output = Core.f_new(generic_list_1, anylist);
     }
     return output;
@@ -104,7 +104,7 @@ public final class Collection {
       }
     }
     if (listvals.size() > 0) {
-      Core.Type_anylist anylist = Core.t_anylist.vx_new(listvals);
+      Core.Type_anylist anylist = Core.vx_new(Core.t_anylist, listvals);
       output = Core.f_new(generic_list_1, anylist);
     }
     return output;
@@ -121,8 +121,7 @@ public final class Collection {
         items.add(newval);
       }
     }
-    Core.Type_any work = generic_list_1.vx_new(items);
-    output = Core.f_any_from_any(generic_list_1, work);
+    output = Core.vx_new(generic_list_1, items);
     return output;
   }
 
@@ -143,8 +142,7 @@ public final class Collection {
         iend = maxlen;
       }
       List<Core.Type_any> listsub = listval.subList(istart - 1, iend);
-      Core.Type_any work = generic_list_1.vx_new(listsub);
-      output = Core.f_any_from_any(generic_list_1, work);
+      output = Core.vx_new(generic_list_1, listsub);
     }
     return output;
   }
@@ -219,9 +217,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_any_from_for_until_loop vx_empty() {return e_any_from_for_until_loop;}
+    public Core.Type_any vx_empty() {
+      return e_any_from_for_until_loop;
+    }
     @Override
-    public Func_any_from_for_until_loop vx_type() {return t_any_from_for_until_loop;}
+    public Core.Type_any vx_type() {
+      return t_any_from_for_until_loop;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -312,9 +314,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_any_from_for_until_loop_max vx_empty() {return e_any_from_for_until_loop_max;}
+    public Core.Type_any vx_empty() {
+      return e_any_from_for_until_loop_max;
+    }
     @Override
-    public Func_any_from_for_until_loop_max vx_type() {return t_any_from_for_until_loop_max;}
+    public Core.Type_any vx_type() {
+      return t_any_from_for_until_loop_max;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -397,9 +403,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_any_from_for_while_loop vx_empty() {return e_any_from_for_while_loop;}
+    public Core.Type_any vx_empty() {
+      return e_any_from_for_while_loop;
+    }
     @Override
-    public Func_any_from_for_while_loop vx_type() {return t_any_from_for_while_loop;}
+    public Core.Type_any vx_type() {
+      return t_any_from_for_while_loop;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -491,9 +501,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_any_from_for_while_loop_max vx_empty() {return e_any_from_for_while_loop_max;}
+    public Core.Type_any vx_empty() {
+      return e_any_from_for_while_loop_max;
+    }
     @Override
-    public Func_any_from_for_while_loop_max vx_type() {return t_any_from_for_while_loop_max;}
+    public Core.Type_any vx_type() {
+      return t_any_from_for_while_loop_max;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -575,9 +589,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_any_from_map_pos vx_empty() {return e_any_from_map_pos;}
+    public Core.Type_any vx_empty() {
+      return e_any_from_map_pos;
+    }
     @Override
-    public Func_any_from_map_pos vx_type() {return t_any_from_map_pos;}
+    public Core.Type_any vx_type() {
+      return t_any_from_map_pos;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -664,9 +682,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_boolean_write_from_map_removekey vx_empty() {return e_boolean_write_from_map_removekey;}
+    public Core.Type_any vx_empty() {
+      return e_boolean_write_from_map_removekey;
+    }
     @Override
-    public Func_boolean_write_from_map_removekey vx_type() {return t_boolean_write_from_map_removekey;}
+    public Core.Type_any vx_type() {
+      return t_boolean_write_from_map_removekey;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -751,9 +773,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_boolean_write_from_map_removekeys vx_empty() {return e_boolean_write_from_map_removekeys;}
+    public Core.Type_any vx_empty() {
+      return e_boolean_write_from_map_removekeys;
+    }
     @Override
-    public Func_boolean_write_from_map_removekeys vx_type() {return t_boolean_write_from_map_removekeys;}
+    public Core.Type_any vx_type() {
+      return t_boolean_write_from_map_removekeys;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -833,7 +859,7 @@ public final class Collection {
           "vx/core", // pkgname
           "int", // name
           "", // extends
-          Core.t_typelist.vx_new(Core.t_number), // traits
+          Core.vx_new(Core.t_typelist, Core.t_number), // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
@@ -846,9 +872,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_int_from_map_key vx_empty() {return e_int_from_map_key;}
+    public Core.Type_any vx_empty() {
+      return e_int_from_map_key;
+    }
     @Override
-    public Func_int_from_map_key vx_type() {return t_int_from_map_key;}
+    public Core.Type_any vx_type() {
+      return t_int_from_map_key;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -920,7 +950,7 @@ public final class Collection {
           "vx/core", // pkgname
           "int", // name
           "", // extends
-          Core.t_typelist.vx_new(Core.t_number), // traits
+          Core.vx_new(Core.t_typelist, Core.t_number), // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
@@ -933,9 +963,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_int_from_stringlist_find vx_empty() {return e_int_from_stringlist_find;}
+    public Core.Type_any vx_empty() {
+      return e_int_from_stringlist_find;
+    }
     @Override
-    public Func_int_from_stringlist_find vx_type() {return t_int_from_stringlist_find;}
+    public Core.Type_any vx_type() {
+      return t_int_from_stringlist_find;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -1041,12 +1075,18 @@ public final class Collection {
     }
 
     @Override
-    public Func_is_list vx_empty() {return e_is_list;}
+    public Core.Type_any vx_empty() {
+      return e_is_list;
+    }
     @Override
-    public Func_is_list vx_type() {return t_is_list;}
+    public Core.Type_any vx_type() {
+      return t_is_list;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -1135,12 +1175,18 @@ public final class Collection {
     }
 
     @Override
-    public Func_is_map vx_empty() {return e_is_map;}
+    public Core.Type_any vx_empty() {
+      return e_is_map;
+    }
     @Override
-    public Func_is_map vx_type() {return t_is_map;}
+    public Core.Type_any vx_type() {
+      return t_is_map;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -1230,7 +1276,7 @@ public final class Collection {
           "list-1", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_any), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -1242,9 +1288,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_list_from_for_end_loop vx_empty() {return e_list_from_for_end_loop;}
+    public Core.Type_any vx_empty() {
+      return e_list_from_for_end_loop;
+    }
     @Override
-    public Func_list_from_for_end_loop vx_type() {return t_list_from_for_end_loop;}
+    public Core.Type_any vx_type() {
+      return t_list_from_for_end_loop;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -1314,7 +1364,7 @@ public final class Collection {
           "list-1", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_any), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -1326,9 +1376,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_list_from_for_while_loop vx_empty() {return e_list_from_for_while_loop;}
+    public Core.Type_any vx_empty() {
+      return e_list_from_for_while_loop;
+    }
     @Override
-    public Func_list_from_for_while_loop vx_type() {return t_list_from_for_while_loop;}
+    public Core.Type_any vx_type() {
+      return t_list_from_for_while_loop;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -1405,7 +1459,7 @@ public final class Collection {
           "list-1", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_any), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -1417,9 +1471,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_list_from_for_while_loop_max vx_empty() {return e_list_from_for_while_loop_max;}
+    public Core.Type_any vx_empty() {
+      return e_list_from_for_while_loop_max;
+    }
     @Override
-    public Func_list_from_for_while_loop_max vx_type() {return t_list_from_for_while_loop_max;}
+    public Core.Type_any vx_type() {
+      return t_list_from_for_while_loop_max;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -1489,7 +1547,7 @@ public final class Collection {
           "list-1", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_any), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -1501,9 +1559,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_list_from_list_end vx_empty() {return e_list_from_list_end;}
+    public Core.Type_any vx_empty() {
+      return e_list_from_list_end;
+    }
     @Override
-    public Func_list_from_list_end vx_type() {return t_list_from_list_end;}
+    public Core.Type_any vx_type() {
+      return t_list_from_list_end;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -1571,7 +1633,7 @@ public final class Collection {
           "list-1", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_any), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -1583,9 +1645,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_list_from_list_filter vx_empty() {return e_list_from_list_filter;}
+    public Core.Type_any vx_empty() {
+      return e_list_from_list_filter;
+    }
     @Override
-    public Func_list_from_list_filter vx_type() {return t_list_from_list_filter;}
+    public Core.Type_any vx_type() {
+      return t_list_from_list_filter;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -1653,7 +1719,7 @@ public final class Collection {
           "list-1", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_any), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -1665,9 +1731,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_list_from_list_filtertypes vx_empty() {return e_list_from_list_filtertypes;}
+    public Core.Type_any vx_empty() {
+      return e_list_from_list_filtertypes;
+    }
     @Override
-    public Func_list_from_list_filtertypes vx_type() {return t_list_from_list_filtertypes;}
+    public Core.Type_any vx_type() {
+      return t_list_from_list_filtertypes;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -1747,7 +1817,7 @@ public final class Collection {
           "list-1", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_any), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -1759,9 +1829,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_list_from_list_start vx_empty() {return e_list_from_list_start;}
+    public Core.Type_any vx_empty() {
+      return e_list_from_list_start;
+    }
     @Override
-    public Func_list_from_list_start vx_type() {return t_list_from_list_start;}
+    public Core.Type_any vx_type() {
+      return t_list_from_list_start;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -1835,7 +1909,7 @@ public final class Collection {
           "list-1", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_any), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -1847,9 +1921,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_list_from_list_start_end vx_empty() {return e_list_from_list_start_end;}
+    public Core.Type_any vx_empty() {
+      return e_list_from_list_start_end;
+    }
     @Override
-    public Func_list_from_list_start_end vx_type() {return t_list_from_list_start_end;}
+    public Core.Type_any vx_type() {
+      return t_list_from_list_start_end;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -1918,7 +1996,7 @@ public final class Collection {
           "map-1", // name
           ":map", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_any), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -1930,9 +2008,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_map_from_map_end vx_empty() {return e_map_from_map_end;}
+    public Core.Type_any vx_empty() {
+      return e_map_from_map_end;
+    }
     @Override
-    public Func_map_from_map_end vx_type() {return t_map_from_map_end;}
+    public Core.Type_any vx_type() {
+      return t_map_from_map_end;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -2000,7 +2082,7 @@ public final class Collection {
           "map-1", // name
           ":map", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_any), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -2012,9 +2094,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_map_from_map_keys vx_empty() {return e_map_from_map_keys;}
+    public Core.Type_any vx_empty() {
+      return e_map_from_map_keys;
+    }
     @Override
-    public Func_map_from_map_keys vx_type() {return t_map_from_map_keys;}
+    public Core.Type_any vx_type() {
+      return t_map_from_map_keys;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -2082,7 +2168,7 @@ public final class Collection {
           "map-1", // name
           ":map", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_any), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -2094,9 +2180,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_map_from_map_start vx_empty() {return e_map_from_map_start;}
+    public Core.Type_any vx_empty() {
+      return e_map_from_map_start;
+    }
     @Override
-    public Func_map_from_map_start vx_type() {return t_map_from_map_start;}
+    public Core.Type_any vx_type() {
+      return t_map_from_map_start;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -2170,7 +2260,7 @@ public final class Collection {
           "map-1", // name
           ":map", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_any), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -2182,9 +2272,13 @@ public final class Collection {
     }
 
     @Override
-    public Func_map_from_map_start_end vx_empty() {return e_map_from_map_start_end;}
+    public Core.Type_any vx_empty() {
+      return e_map_from_map_start_end;
+    }
     @Override
-    public Func_map_from_map_start_end vx_type() {return t_map_from_map_start_end;}
+    public Core.Type_any vx_type() {
+      return t_map_from_map_start_end;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;

@@ -61,9 +61,13 @@ public final class Htmldoc {
     }
 
     @Override
-    public Func_boolean_print_from_id_stylesheettext vx_empty() {return e_boolean_print_from_id_stylesheettext;}
+    public Core.Type_any vx_empty() {
+      return e_boolean_print_from_id_stylesheettext;
+    }
     @Override
-    public Func_boolean_print_from_id_stylesheettext vx_type() {return t_boolean_print_from_id_stylesheettext;}
+    public Core.Type_any vx_type() {
+      return t_boolean_print_from_id_stylesheettext;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -140,12 +144,18 @@ public final class Htmldoc {
     }
 
     @Override
-    public Func_boolean_remove_from_id vx_empty() {return e_boolean_remove_from_id;}
+    public Core.Type_any vx_empty() {
+      return e_boolean_remove_from_id;
+    }
     @Override
-    public Func_boolean_remove_from_id vx_type() {return t_boolean_remove_from_id;}
+    public Core.Type_any vx_type() {
+      return t_boolean_remove_from_id;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -231,9 +241,13 @@ public final class Htmldoc {
     }
 
     @Override
-    public Func_boolean_replace_from_id_htmltext vx_empty() {return e_boolean_replace_from_id_htmltext;}
+    public Core.Type_any vx_empty() {
+      return e_boolean_replace_from_id_htmltext;
+    }
     @Override
-    public Func_boolean_replace_from_id_htmltext vx_type() {return t_boolean_replace_from_id_htmltext;}
+    public Core.Type_any vx_type() {
+      return t_boolean_replace_from_id_htmltext;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -312,9 +326,13 @@ public final class Htmldoc {
     }
 
     @Override
-    public Func_boolean_replace_from_id_parent_htmltext vx_empty() {return e_boolean_replace_from_id_parent_htmltext;}
+    public Core.Type_any vx_empty() {
+      return e_boolean_replace_from_id_parent_htmltext;
+    }
     @Override
-    public Func_boolean_replace_from_id_parent_htmltext vx_type() {return t_boolean_replace_from_id_parent_htmltext;}
+    public Core.Type_any vx_type() {
+      return t_boolean_replace_from_id_parent_htmltext;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -394,9 +412,13 @@ public final class Htmldoc {
     }
 
     @Override
-    public Func_boolean_write_stylesheet_from_string vx_empty() {return e_boolean_write_stylesheet_from_string;}
+    public Core.Type_any vx_empty() {
+      return e_boolean_write_stylesheet_from_string;
+    }
     @Override
-    public Func_boolean_write_stylesheet_from_string vx_type() {return t_boolean_write_stylesheet_from_string;}
+    public Core.Type_any vx_type() {
+      return t_boolean_write_stylesheet_from_string;
+    }
 
     @Override
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
@@ -487,9 +509,13 @@ public final class Htmldoc {
     }
 
     @Override
-    public Func_boolean_write_from_id_attribute_value vx_empty() {return e_boolean_write_from_id_attribute_value;}
+    public Core.Type_any vx_empty() {
+      return e_boolean_write_from_id_attribute_value;
+    }
     @Override
-    public Func_boolean_write_from_id_attribute_value vx_type() {return t_boolean_write_from_id_attribute_value;}
+    public Core.Type_any vx_type() {
+      return t_boolean_write_from_id_attribute_value;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -568,9 +594,13 @@ public final class Htmldoc {
     }
 
     @Override
-    public Func_boolean_write_from_id_htmltext vx_empty() {return e_boolean_write_from_id_htmltext;}
+    public Core.Type_any vx_empty() {
+      return e_boolean_write_from_id_htmltext;
+    }
     @Override
-    public Func_boolean_write_from_id_htmltext vx_type() {return t_boolean_write_from_id_htmltext;}
+    public Core.Type_any vx_type() {
+      return t_boolean_write_from_id_htmltext;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -648,9 +678,13 @@ public final class Htmldoc {
     }
 
     @Override
-    public Func_boolean_write_from_id_visible vx_empty() {return e_boolean_write_from_id_visible;}
+    public Core.Type_any vx_empty() {
+      return e_boolean_write_from_id_visible;
+    }
     @Override
-    public Func_boolean_write_from_id_visible vx_type() {return t_boolean_write_from_id_visible;}
+    public Core.Type_any vx_type() {
+      return t_boolean_write_from_id_visible;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -729,9 +763,13 @@ public final class Htmldoc {
     }
 
     @Override
-    public Func_boolean_write_from_stylesheet vx_empty() {return e_boolean_write_from_stylesheet;}
+    public Core.Type_any vx_empty() {
+      return e_boolean_write_from_stylesheet;
+    }
     @Override
-    public Func_boolean_write_from_stylesheet vx_type() {return t_boolean_write_from_stylesheet;}
+    public Core.Type_any vx_type() {
+      return t_boolean_write_from_stylesheet;
+    }
 
     @Override
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
@@ -830,12 +868,18 @@ public final class Htmldoc {
     }
 
     @Override
-    public Func_boolean_writeevents_from_ui vx_empty() {return e_boolean_writeevents_from_ui;}
+    public Core.Type_any vx_empty() {
+      return e_boolean_writeevents_from_ui;
+    }
     @Override
-    public Func_boolean_writeevents_from_ui vx_type() {return t_boolean_writeevents_from_ui;}
+    public Core.Type_any vx_type() {
+      return t_boolean_writeevents_from_ui;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -919,9 +963,13 @@ public final class Htmldoc {
     }
 
     @Override
-    public Func_context_read vx_empty() {return e_context_read;}
+    public Core.Type_any vx_empty() {
+      return e_context_read;
+    }
     @Override
-    public Func_context_read vx_type() {return t_context_read;}
+    public Core.Type_any vx_type() {
+      return t_context_read;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -995,9 +1043,13 @@ public final class Htmldoc {
     }
 
     @Override
-    public Func_context_write vx_empty() {return e_context_write;}
+    public Core.Type_any vx_empty() {
+      return e_context_write;
+    }
     @Override
-    public Func_context_write vx_type() {return t_context_write;}
+    public Core.Type_any vx_type() {
+      return t_context_write;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -1073,12 +1125,18 @@ public final class Htmldoc {
     }
 
     @Override
-    public Func_string_from_id vx_empty() {return e_string_from_id;}
+    public Core.Type_any vx_empty() {
+      return e_string_from_id;
+    }
     @Override
-    public Func_string_from_id vx_type() {return t_string_from_id;}
+    public Core.Type_any vx_type() {
+      return t_string_from_id;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -1163,12 +1221,18 @@ public final class Htmldoc {
     }
 
     @Override
-    public Func_string_from_stylesheet vx_empty() {return e_string_from_stylesheet;}
+    public Core.Type_any vx_empty() {
+      return e_string_from_stylesheet;
+    }
     @Override
-    public Func_string_from_stylesheet vx_type() {return t_string_from_stylesheet;}
+    public Core.Type_any vx_type() {
+      return t_string_from_stylesheet;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -1261,12 +1325,18 @@ public final class Htmldoc {
     }
 
     @Override
-    public Func_ui_readstate_from_uid vx_empty() {return e_ui_readstate_from_uid;}
+    public Core.Type_any vx_empty() {
+      return e_ui_readstate_from_uid;
+    }
     @Override
-    public Func_ui_readstate_from_uid vx_type() {return t_ui_readstate_from_uid;}
+    public Core.Type_any vx_type() {
+      return t_ui_readstate_from_uid;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {

@@ -59,12 +59,18 @@ public final class En {
     }
 
     @Override
-    public Func_context_en vx_empty() {return e_context_en;}
+    public Core.Type_any vx_empty() {
+      return e_context_en;
+    }
     @Override
-    public Func_context_en vx_type() {return t_context_en;}
+    public Core.Type_any vx_type() {
+      return t_context_en;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -96,11 +102,11 @@ public final class En {
     Core.Type_context output = Core.e_context;
     output = Core.f_new(
       Core.t_context,
-      Core.t_anylist.vx_new(
+      Core.vx_new(Core.t_anylist,
         Core.vx_new_string(":session"),
         Core.f_new(
           Core.t_session,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":translation"),
             En.f_translation_en()
           )
@@ -162,12 +168,18 @@ public final class En {
     }
 
     @Override
-    public Func_context_test vx_empty() {return e_context_test;}
+    public Core.Type_any vx_empty() {
+      return e_context_test;
+    }
     @Override
-    public Func_context_test vx_type() {return t_context_test;}
+    public Core.Type_any vx_type() {
+      return t_context_test;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -199,17 +211,17 @@ public final class En {
     Core.Type_context output = Core.e_context;
     output = Core.f_new(
       Core.t_context,
-      Core.t_anylist.vx_new(
+      Core.vx_new(Core.t_anylist,
         Core.vx_new_string(":session"),
         Core.f_new(
           Core.t_session,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":translation"),
             En.f_translation_en(),
             Core.vx_new_string(":user"),
             Core.f_new(
               Core.t_user,
-              Core.t_anylist.vx_new(
+              Core.vx_new(Core.t_anylist,
                 Core.vx_new_string(":security"),
                 En.f_securitydata_test()
               )
@@ -272,9 +284,13 @@ public final class En {
     }
 
     @Override
-    public Func_securitydata_test vx_empty() {return e_securitydata_test;}
+    public Core.Type_any vx_empty() {
+      return e_securitydata_test;
+    }
     @Override
-    public Func_securitydata_test vx_type() {return t_securitydata_test;}
+    public Core.Type_any vx_type() {
+      return t_securitydata_test;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -296,11 +312,11 @@ public final class En {
     Core.Type_security output = Core.e_security;
     output = Core.f_new(
       Core.t_security,
-      Core.t_anylist.vx_new(
+      Core.vx_new(Core.t_anylist,
         Core.vx_new_string(":allowfuncs"),
         Core.f_new(
           Core.t_funclist,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
             File.t_boolean_write_from_file_any,
             File.t_boolean_write_from_file_string,
             File.t_file_read_from_file,
@@ -363,9 +379,13 @@ public final class En {
     }
 
     @Override
-    public Func_translation_en vx_empty() {return e_translation_en;}
+    public Core.Type_any vx_empty() {
+      return e_translation_en;
+    }
     @Override
-    public Func_translation_en vx_type() {return t_translation_en;}
+    public Core.Type_any vx_type() {
+      return t_translation_en;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -387,7 +407,7 @@ public final class En {
     Core.Type_translation output = Core.e_translation;
     output = Core.f_new(
       Core.t_translation,
-      Core.t_anylist.vx_new(
+      Core.vx_new(Core.t_anylist,
         Core.vx_new_string(":name"),
         Core.vx_new_string("en"),
         Core.vx_new_string(":wordmap"),
@@ -436,7 +456,7 @@ public final class En {
           "stringmap", // name
           ":map", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_string), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_string), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -448,9 +468,13 @@ public final class En {
     }
 
     @Override
-    public Func_words vx_empty() {return e_words;}
+    public Core.Type_any vx_empty() {
+      return e_words;
+    }
     @Override
-    public Func_words vx_type() {return t_words;}
+    public Core.Type_any vx_type() {
+      return t_words;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -472,7 +496,7 @@ public final class En {
     Core.Type_stringmap output = Core.e_stringmap;
     output = Core.f_new(
       Core.t_stringmap,
-      Core.t_anylist.vx_new(
+      Core.vx_new(Core.t_anylist,
         Core.vx_new_string("Hello"),
         Core.vx_new_string("Hello"),
         Core.vx_new_string("World"),

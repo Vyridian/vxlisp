@@ -15,30 +15,30 @@ public final class UihtmlTest {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
       
     ));
-    Test.Type_testcaselist output = Test.t_testcaselist.vx_new(arraylisttestcase);
+    Test.Type_testcaselist output = Core.vx_new(
+      Test.t_testcaselist,
+      arraylisttestcase
+    );
     return output;
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Test.t_testcoveragesummary.vx_new(
-      ":testpkg",   "vx/ui/html/uihtml", 
-      ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 7), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 66, ":tests", 30, ":total", 45), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 37), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 38), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 38), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 44), 
-      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
+    return Core.vx_new(
+      Test.t_testcoveragesummary,
+      ":testpkg", "vx/ui/html/uihtml", 
+      ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 7), 
+      ":docnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 66, ":tests", 30, ":total", 45), 
+      ":funcnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 37), 
+      ":bigospacenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 38), 
+      ":bigotimenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 38), 
+      ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 44), 
+      ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     );
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Test.t_testcoveragedetail.vx_new(
-      ":testpkg", "vx/ui/html/uihtml",
-      ":typemap", Core.t_intmap.vx_new(
-  
-      ),
-      ":constmap", Core.t_intmap.vx_new(
+    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/ui/html/uihtml", ":typemap", Core.e_intmap, ":constmap", Core.vx_new(
+  Core.t_intmap,
         ":layout-app-html", 0,
         ":layout-else-html", 0,
         ":layout-image-html", 0,
@@ -46,8 +46,8 @@ public final class UihtmlTest {
         ":layoutenginehtml", 0,
         ":style-hidden", 0,
         ":style-selected", 0
-      ),
-      ":funcmap", Core.t_intmap.vx_new(
+), ":funcmap", Core.vx_new(
+  Core.t_intmap,
         ":boolean-layoutremove-html", 0,
         ":boolean-layoutselected-html", 0,
         ":boolean-layoutvisible-html", 0,
@@ -86,13 +86,13 @@ public final class UihtmlTest {
         ":ui-layout-default<-ui-orig-parent", 0,
         ":ui-layout-image<-ui-orig-parent", 0,
         ":ui-layout-label<-ui-orig-parent", 0
-      )
-    );
+      ));
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {
     Test.Type_testcaselist testcaselist = test_cases(context);
-    Test.Type_testpackage output = Test.t_testpackage.vx_new(
+    Test.Type_testpackage output = Core.vx_new(
+      Test.t_testpackage,
       ":testpkg", "vx/ui/html/uihtml", 
       ":caselist", testcaselist,
       ":coveragesummary", test_coveragesummary(),

@@ -105,6 +105,6 @@
     String stext = text.vx_string();
     String sdelim = delim.vx_string();
     Object[] arraystring = stext.split(java.util.regex.Pattern.quote(sdelim));
-    output = Core.t_stringlist.vx_new(arraystring);
+    output = Core.vx_new(Core.t_stringlist, arraystring);
     return output;
   }

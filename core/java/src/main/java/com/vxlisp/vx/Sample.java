@@ -12,10 +12,10 @@ public final class Sample {
    * (type mytype)
    */
   public interface Type_mytype extends Core.Type_struct {
-    public Sample.Type_mytype vx_new(final Object... vals);
-    public Sample.Type_mytype vx_copy(final Object... vals);
-    public Sample.Type_mytype vx_empty();
-    public Sample.Type_mytype vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Core.Type_int mynum();
     public Core.Type_string mystr();
   }
@@ -61,7 +61,9 @@ public final class Sample {
 
     @Override
     public Sample.Type_mytype vx_new(final Object... vals) {
-      return e_mytype.vx_copy(vals);
+      return Core.vx_copy(
+       e_mytype,
+       vals);
     }
 
     @Override
@@ -82,9 +84,9 @@ public final class Sample {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -103,7 +105,7 @@ public final class Sample {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/sample/mytype", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -115,7 +117,7 @@ public final class Sample {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/sample/mytype", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -127,7 +129,7 @@ public final class Sample {
               vx_p_mynum = (Core.Type_int)valsub;
             } else if (valsub instanceof Integer) {
               ischanged = true;
-              vx_p_mynum = Core.t_int.vx_new(valsub);
+              vx_p_mynum = Core.vx_new(Core.t_int, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -140,7 +142,7 @@ public final class Sample {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/sample/mytype", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":mystr":
@@ -150,7 +152,7 @@ public final class Sample {
               vx_p_mystr = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_mystr = Core.t_string.vx_new(valsub);
+              vx_p_mystr = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -163,13 +165,13 @@ public final class Sample {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/sample/mytype", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/sample/mytype", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -187,9 +189,13 @@ public final class Sample {
     }
 
     @Override
-    public Type_mytype vx_empty() {return e_mytype;}
+    public Core.Type_any vx_empty() {
+      return e_mytype;
+    }
     @Override
-    public Type_mytype vx_type() {return t_mytype;}
+    public Core.Type_any vx_type() {
+      return t_mytype;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -229,7 +235,7 @@ public final class Sample {
           "vx/core", // pkgname
           "int", // name
           "", // extends
-          Core.t_typelist.vx_new(Core.t_number), // traits
+          Core.vx_new(Core.t_typelist, Core.t_number), // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
@@ -304,9 +310,13 @@ public final class Sample {
     }
 
     @Override
-    public Func_main vx_empty() {return e_main;}
+    public Core.Type_any vx_empty() {
+      return e_main;
+    }
     @Override
-    public Func_main vx_type() {return t_main;}
+    public Core.Type_any vx_type() {
+      return t_main;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -366,7 +376,7 @@ public final class Sample {
           "vx/core", // pkgname
           "int", // name
           "", // extends
-          Core.t_typelist.vx_new(Core.t_number), // traits
+          Core.vx_new(Core.t_typelist, Core.t_number), // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
@@ -379,12 +389,18 @@ public final class Sample {
     }
 
     @Override
-    public Func_myfunc vx_empty() {return e_myfunc;}
+    public Core.Type_any vx_empty() {
+      return e_myfunc;
+    }
     @Override
-    public Func_myfunc vx_type() {return t_myfunc;}
+    public Core.Type_any vx_type() {
+      return t_myfunc;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {

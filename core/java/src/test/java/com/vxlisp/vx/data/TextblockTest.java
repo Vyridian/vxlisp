@@ -9,27 +9,30 @@ import com.vxlisp.vx.*;
 public final class TextblockTest {
 
   static Test.Type_testcase t_delimlist(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/data/textblock",
       ":casename", "delimlist",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (new delimlist\n  delimcomma\n  delimwhitespace)\n (delimlist\n  delimcomma\n  delimwhitespace))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_delimlist,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Textblock.c_delimcomma,
                   Textblock.c_delimwhitespace
                 )
               ),
               Core.f_new(
                 Textblock.t_delimlist,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Textblock.c_delimcomma,
                   Textblock.c_delimwhitespace
                 )
@@ -42,20 +45,23 @@ public final class TextblockTest {
   }
 
   static Test.Type_testcase f_delim_first_from_delim_delim(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/data/textblock",
       ":casename", "delim-first<-delim-delim",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (copy delimcomma\n  :pos 1)\n (delim-first<-delim-delim\n  (copy delimspace\n   :pos 2)\n  (copy delimcomma\n   :pos 1)))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_copy(
                 Textblock.c_delimcomma,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":pos"),
                   Core.vx_new_int(1)
                 )
@@ -63,14 +69,14 @@ public final class TextblockTest {
               Textblock.f_delim_first_from_delim_delim(
                 Core.f_copy(
                   Textblock.c_delimspace,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":pos"),
                     Core.vx_new_int(2)
                   )
                 ),
                 Core.f_copy(
                   Textblock.c_delimcomma,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":pos"),
                     Core.vx_new_int(1)
                   )
@@ -78,7 +84,8 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (empty delim)\n (delim-first<-delim-delim\n  (delim\n   :pos 0)\n  (empty delim)))",
           ":testresult",
             Test.f_test(
@@ -89,7 +96,7 @@ public final class TextblockTest {
               Textblock.f_delim_first_from_delim_delim(
                 Core.f_new(
                   Textblock.t_delim,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":pos"),
                     Core.vx_new_int(0)
                   )
@@ -106,20 +113,23 @@ public final class TextblockTest {
   }
 
   static Test.Type_testcase f_delim_first_from_string_delimlist(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/data/textblock",
       ":casename", "delim-first<-string-delimlist",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (copy delimcomma\n  :pos 2)\n (delim-first<-string-delimlist\n  \"a, b\"\n  (delimlist\n   delimspace\n   delimcomma)))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_copy(
                 Textblock.c_delimcomma,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":pos"),
                   Core.vx_new_int(2)
                 )
@@ -128,7 +138,7 @@ public final class TextblockTest {
                 Core.vx_new_string("a, b"),
                 Core.f_new(
                   Textblock.t_delimlist,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Textblock.c_delimspace,
                     Textblock.c_delimcomma
                   )
@@ -142,20 +152,23 @@ public final class TextblockTest {
   }
 
   static Test.Type_testcase f_delim_pos_from_string_delim(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/data/textblock",
       ":casename", "delim-pos<-string-delim",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (copy delimcomma\n  :pos 2)\n (delim-pos<-string-delim\n  \"a,b\"\n  delimcomma))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_copy(
                 Textblock.c_delimcomma,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":pos"),
                   Core.vx_new_int(2)
                 )
@@ -172,30 +185,33 @@ public final class TextblockTest {
   }
 
   static Test.Type_testcase f_delimlist_pos_from_string_delimlist(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/data/textblock",
       ":casename", "delimlist-pos<-string-delimlist",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (delimlist\n  (copy delimspace\n   :pos 3)\n  (copy delimcomma\n   :pos 2))\n (delimlist-pos<-string-delimlist\n  \"a, b\"\n  (delimlist\n   delimspace\n   delimcomma)))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_delimlist,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.f_copy(
                     Textblock.c_delimspace,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":pos"),
                       Core.vx_new_int(3)
                     )
                   ),
                   Core.f_copy(
                     Textblock.c_delimcomma,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":pos"),
                       Core.vx_new_int(2)
                     )
@@ -206,7 +222,7 @@ public final class TextblockTest {
                 Core.vx_new_string("a, b"),
                 Core.f_new(
                   Textblock.t_delimlist,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Textblock.c_delimspace,
                     Textblock.c_delimcomma
                   )
@@ -220,20 +236,23 @@ public final class TextblockTest {
   }
 
   static Test.Type_testcase f_stringlist_from_textblocklist(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/data/textblock",
       ":casename", "stringlist<-textblocklist",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (stringlist\n  \"a\" \"b\")\n (stringlist<-textblocklist\n  (textblocklist\n   (textblock\n    :text \"a\")\n   (textblock\n    :text \"b\"))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Core.t_stringlist,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string("a"),
                   Core.vx_new_string("b")
                 )
@@ -241,17 +260,17 @@ public final class TextblockTest {
               Textblock.f_stringlist_from_textblocklist(
                 Core.f_new(
                   Textblock.t_textblocklist,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("a")
                       )
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("b")
                       )
@@ -267,13 +286,16 @@ public final class TextblockTest {
   }
 
   static Test.Type_testcase f_text_from_textblock(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/data/textblock",
       ":casename", "text<-textblock",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n \"a\"\n (text<-textblock\n  (textblock\n   :text \"a\")))",
           ":testresult",
             Test.f_test(
@@ -282,7 +304,7 @@ public final class TextblockTest {
               Textblock.f_text_from_textblock(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("a")
                   )
@@ -296,20 +318,23 @@ public final class TextblockTest {
   }
 
   static Test.Type_testcase f_textblock_delimnotfound(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/data/textblock",
       ":casename", "textblock-delimnotfound",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"<a\"\n  :startpos 1\n  :endpos 2\n  :children\n   (textblocklist\n    (textblock\n     :text \"<a\"\n     :startpos 1\n     :endpos 2\n     :delim\n      (copy delimbracketangle\n       :delimlist vx/data/textblock/delimlisttest1)\n     :children\n      (textblocklist\n       (textblock\n        :text \"a\"\n        :startpos 2\n        :endpos 2))\n     (msgblock\n      (msg\n       :code \"closedelimmissing\"\n       :detail\n        (delim\n         :name \"delimclose\"\n         :starttext \">\")\n       :severity 2))))\n  (msgblock\n   (msg\n    :code \"closedelimmissing\"\n    :detail\n     (delim\n      :name \"delimclose\"\n      :starttext \">\")\n    :severity 2)))\n (textblock-delimnotfound\n  (textblock\n   :text \"a\"\n   :startpos 2\n   :endpos 2\n   :delim\n    (delim\n     :delimlist vx/data/textblock/delimlisttest2)\n   :close\n    (copy delimclose\n     :starttext \">\")\n   :parent\n    (textblock\n     :text \"<a\"\n     :startpos 1\n     :endpos 2\n     :delim\n      (copy delimbracketangle\n       :delimlist vx/data/textblock/delimlisttest1)\n     :parent\n      (textblock\n       :text \"<a\"\n       :startpos 1\n       :endpos 2)))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("<a"),
                   Core.vx_new_string(":startpos"),
@@ -319,10 +344,10 @@ public final class TextblockTest {
                   Core.vx_new_string(":children"),
                   Core.f_new(
                     Textblock.t_textblocklist,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<a"),
                           Core.vx_new_string(":startpos"),
@@ -332,7 +357,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketangle,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":delimlist"),
                               Textblock.c_delimlisttest1
                             )
@@ -340,10 +365,10 @@ public final class TextblockTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("a"),
                                   Core.vx_new_string(":startpos"),
@@ -356,16 +381,16 @@ public final class TextblockTest {
                           ),
                           Core.f_new(
                             Core.t_msgblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.f_new(
                                 Core.t_msg,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":code"),
                                   Core.vx_new_string("closedelimmissing"),
                                   Core.vx_new_string(":detail"),
                                   Core.f_new(
                                     Textblock.t_delim,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":name"),
                                       Core.vx_new_string("delimclose"),
                                       Core.vx_new_string(":starttext"),
@@ -384,16 +409,16 @@ public final class TextblockTest {
                   ),
                   Core.f_new(
                     Core.t_msgblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.f_new(
                         Core.t_msg,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":code"),
                           Core.vx_new_string("closedelimmissing"),
                           Core.vx_new_string(":detail"),
                           Core.f_new(
                             Textblock.t_delim,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":name"),
                               Core.vx_new_string("delimclose"),
                               Core.vx_new_string(":starttext"),
@@ -411,7 +436,7 @@ public final class TextblockTest {
               Textblock.f_textblock_delimnotfound(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("a"),
                     Core.vx_new_string(":startpos"),
@@ -421,7 +446,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_new(
                       Textblock.t_delim,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":delimlist"),
                         Textblock.c_delimlisttest2
                       )
@@ -429,7 +454,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":close"),
                     Core.f_copy(
                       Textblock.c_delimclose,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":starttext"),
                         Core.vx_new_string(">")
                       )
@@ -437,7 +462,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("<a"),
                         Core.vx_new_string(":startpos"),
@@ -447,7 +472,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketangle,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest1
                           )
@@ -455,7 +480,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<a"),
                             Core.vx_new_string(":startpos"),
@@ -471,14 +496,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \",\"\n  :startpos 4\n  :endpos 4\n  :delim\n   (copy delimcomma\n    :pos 0)\n  :parent\n   (textblock\n    :text \"b},{c d}>\"\n    :startpos 5\n    :endpos 13\n    :delim\n     (delim\n      :delimlist delimlisttest3)\n    :close\n     (copy delimclose\n      :starttext \"}\")\n    :parent\n     (textblock\n      :text \"{a,b},{c d}>\"\n      :startpos 2\n      :endpos 13\n      :delim\n       (copy delimbracketcurly\n        :pos 0)\n      :close\n       (copy delimclose\n        :starttext \">\")\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13\n        :delim\n         (copy delimbracketangle\n          :pos 0)\n        :parent\n         (textblock\n          :text \"<{a,b},{c d}>\"\n          :startpos 1\n          :endpos 13))\n      :children\n       (textblocklist\n        (textblock\n         :text \"a\"\n         :startpos 3\n         :endpos 3)))))\n (textblock-delimnotfound\n  (textblock\n   :text \"a\"\n   :startpos 3\n   :endpos 3\n   :parent\n    (textblock\n     :text \",\"\n     :startpos 4\n     :endpos 4\n     :delim\n      (copy delimcomma\n       :pos 0)\n     :parent\n      (textblock\n       :text \"b},{c d}>\"\n       :startpos 5\n       :endpos 13\n       :delim\n        (delim\n         :delimlist delimlisttest3)\n       :close\n        (copy delimclose\n         :starttext \"}\")\n       :parent\n        (textblock\n         :text \"{a,b},{c d}>\"\n         :startpos 2\n         :endpos 13\n         :delim\n          (copy delimbracketcurly\n           :pos 0)\n         :close\n          (copy delimclose\n           :starttext \">\")\n         :parent\n          (textblock\n           :text \"<{a,b},{c d}>\"\n           :startpos 1\n           :endpos 13\n           :delim\n            (copy delimbracketangle\n             :pos 0)\n           :parent\n            (textblock\n             :text \"<{a,b},{c d}>\"\n             :startpos 1\n             :endpos 13))))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string(","),
                   Core.vx_new_string(":startpos"),
@@ -488,7 +514,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":delim"),
                   Core.f_copy(
                     Textblock.c_delimcomma,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":pos"),
                       Core.vx_new_int(0)
                     )
@@ -496,7 +522,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("b},{c d}>"),
                       Core.vx_new_string(":startpos"),
@@ -506,7 +532,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_new(
                         Textblock.t_delim,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":delimlist"),
                           Textblock.c_delimlisttest3
                         )
@@ -514,7 +540,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":close"),
                       Core.f_copy(
                         Textblock.c_delimclose,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":starttext"),
                           Core.vx_new_string("}")
                         )
@@ -522,7 +548,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("{a,b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -532,7 +558,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketcurly,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -540,7 +566,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":close"),
                           Core.f_copy(
                             Textblock.c_delimclose,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":starttext"),
                               Core.vx_new_string(">")
                             )
@@ -548,7 +574,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":parent"),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("<{a,b},{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -558,7 +584,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimbracketangle,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":pos"),
                                   Core.vx_new_int(0)
                                 )
@@ -566,7 +592,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":parent"),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("<{a,b},{c d}>"),
                                   Core.vx_new_string(":startpos"),
@@ -580,10 +606,10 @@ public final class TextblockTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("a"),
                                   Core.vx_new_string(":startpos"),
@@ -603,7 +629,7 @@ public final class TextblockTest {
               Textblock.f_textblock_delimnotfound(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("a"),
                     Core.vx_new_string(":startpos"),
@@ -613,7 +639,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string(","),
                         Core.vx_new_string(":startpos"),
@@ -623,7 +649,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimcomma,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -631,7 +657,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -641,7 +667,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":delim"),
                             Core.f_new(
                               Textblock.t_delim,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":delimlist"),
                                 Textblock.c_delimlisttest3
                               )
@@ -649,7 +675,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":close"),
                             Core.f_copy(
                               Textblock.c_delimclose,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":starttext"),
                                 Core.vx_new_string("}")
                               )
@@ -657,7 +683,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":parent"),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("{a,b},{c d}>"),
                                 Core.vx_new_string(":startpos"),
@@ -667,7 +693,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimbracketcurly,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -675,7 +701,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":close"),
                                 Core.f_copy(
                                   Textblock.c_delimclose,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":starttext"),
                                     Core.vx_new_string(">")
                                   )
@@ -683,7 +709,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":parent"),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("<{a,b},{c d}>"),
                                     Core.vx_new_string(":startpos"),
@@ -693,7 +719,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimbracketangle,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -701,7 +727,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":parent"),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("<{a,b},{c d}>"),
                                         Core.vx_new_string(":startpos"),
@@ -723,14 +749,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \",{c d}>\"\n  :startpos 7\n  :endpos 13\n  :delim\n   (delim\n    :delimlist delimlisttest3)\n  :close\n   (copy delimclose\n    :starttext \">\")\n  :parent\n   (textblock\n    :text \"<{a,b},{c d}>\"\n    :startpos 1\n    :endpos 13\n    :delim\n     (copy delimbracketangle\n      :pos 0)\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13)\n    :children\n     (textblocklist\n      (textblock\n       :text \"{a,b}\"\n       :startpos 2\n       :endpos 6\n       :delim\n        (copy delimbracketcurly\n         :pos 0)\n       :children\n        (textblocklist\n         (textblock\n          :text \"a\"\n          :startpos 3\n          :endpos 3)\n         (textblock\n          :text \",\"\n          :startpos 4\n          :endpos 4\n          :delim\n           (copy delimcomma\n            :pos 0))\n         (textblock\n          :text \"b\"\n          :startpos 5\n          :endpos 5))))))\n (textblock-delimnotfound\n  (textblock\n   :text \"b\"\n   :startpos 5\n   :endpos 5\n   :parent\n    (textblock\n     :text \",{c d}>\"\n     :startpos 7\n     :endpos 13\n     :delim\n      (delim\n       :delimlist delimlisttest3)\n     :close\n      (copy delimclose\n       :starttext \">\")\n     :parent\n      (textblock\n       :text \"{a,b}\"\n       :startpos 2\n       :endpos 6\n       :delim\n        (copy delimbracketcurly\n         :pos 0)\n       :close delimclosing\n       :parent\n        (textblock\n         :text \"<{a,b},{c d}>\"\n         :startpos 1\n         :endpos 13\n         :delim\n          (copy delimbracketangle\n           :pos 0)\n         :parent\n          (textblock\n           :text \"<{a,b},{c d}>\"\n           :startpos 1\n           :endpos 13))\n       :children\n        (textblocklist\n         (textblock\n          :text \"a\"\n          :startpos 3\n          :endpos 3)\n         (textblock\n          :text \",\"\n          :startpos 4\n          :endpos 4\n          :delim\n           (copy delimcomma\n            :pos 0))))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string(",{c d}>"),
                   Core.vx_new_string(":startpos"),
@@ -740,7 +767,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":delim"),
                   Core.f_new(
                     Textblock.t_delim,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":delimlist"),
                       Textblock.c_delimlisttest3
                     )
@@ -748,7 +775,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":close"),
                   Core.f_copy(
                     Textblock.c_delimclose,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":starttext"),
                       Core.vx_new_string(">")
                     )
@@ -756,7 +783,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("<{a,b},{c d}>"),
                       Core.vx_new_string(":startpos"),
@@ -766,7 +793,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_copy(
                         Textblock.c_delimbracketangle,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":pos"),
                           Core.vx_new_int(0)
                         )
@@ -774,7 +801,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<{a,b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -786,10 +813,10 @@ public final class TextblockTest {
                       Core.vx_new_string(":children"),
                       Core.f_new(
                         Textblock.t_textblocklist,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("{a,b}"),
                               Core.vx_new_string(":startpos"),
@@ -799,7 +826,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimbracketcurly,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":pos"),
                                   Core.vx_new_int(0)
                                 )
@@ -807,10 +834,10 @@ public final class TextblockTest {
                               Core.vx_new_string(":children"),
                               Core.f_new(
                                 Textblock.t_textblocklist,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("a"),
                                       Core.vx_new_string(":startpos"),
@@ -821,7 +848,7 @@ public final class TextblockTest {
                                   ),
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string(","),
                                       Core.vx_new_string(":startpos"),
@@ -831,7 +858,7 @@ public final class TextblockTest {
                                       Core.vx_new_string(":delim"),
                                       Core.f_copy(
                                         Textblock.c_delimcomma,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":pos"),
                                           Core.vx_new_int(0)
                                         )
@@ -840,7 +867,7 @@ public final class TextblockTest {
                                   ),
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("b"),
                                       Core.vx_new_string(":startpos"),
@@ -862,7 +889,7 @@ public final class TextblockTest {
               Textblock.f_textblock_delimnotfound(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("b"),
                     Core.vx_new_string(":startpos"),
@@ -872,7 +899,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string(",{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -882,7 +909,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_new(
                           Textblock.t_delim,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest3
                           )
@@ -890,7 +917,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":close"),
                         Core.f_copy(
                           Textblock.c_delimclose,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":starttext"),
                             Core.vx_new_string(">")
                           )
@@ -898,7 +925,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("{a,b}"),
                             Core.vx_new_string(":startpos"),
@@ -908,7 +935,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimbracketcurly,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -918,7 +945,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":parent"),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("<{a,b},{c d}>"),
                                 Core.vx_new_string(":startpos"),
@@ -928,7 +955,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimbracketangle,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -936,7 +963,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":parent"),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("<{a,b},{c d}>"),
                                     Core.vx_new_string(":startpos"),
@@ -950,10 +977,10 @@ public final class TextblockTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("a"),
                                     Core.vx_new_string(":startpos"),
@@ -964,7 +991,7 @@ public final class TextblockTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string(","),
                                     Core.vx_new_string(":startpos"),
@@ -974,7 +1001,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimcomma,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -992,14 +1019,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :startpos 14\n  :endpos 14\n  :delim\n   (delim\n    :delimlist delimlisttest1)\n  :parent\n   (textblock\n    :text \"<{a,b},{c d}>\"\n    :startpos 1\n    :endpos 13\n    :children\n     (textblocklist\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13\n       :delim\n        (copy delimbracketangle\n         :pos 0)\n       :children\n        (textblocklist\n         (textblock\n          :text \"{a,b}\"\n          :startpos 2\n          :endpos 6\n          :delim\n           (copy delimbracketcurly\n            :pos 0)\n          :children\n           (textblocklist\n            (textblock\n             :text \"a\"\n             :startpos 3\n             :endpos 3)\n            (textblock\n             :text \",\"\n             :startpos 4\n             :endpos 4\n             :delim\n              (copy delimcomma\n               :pos 0))\n            (textblock\n             :text \"b\"\n             :startpos 5\n             :endpos 5)))\n         (textblock\n          :text \",\"\n          :startpos 7\n          :endpos 7\n          :delim\n           (copy delimcomma\n            :pos 0))\n         (textblock\n          :text \"{c d}\"\n          :startpos 8\n          :endpos 12\n          :delim\n           (copy delimbracketcurly\n            :pos 0)\n          :children\n           (textblocklist\n            (textblock\n             :text \"c\"\n             :startpos 9\n             :endpos 9)\n           (textblock\n            :text \" \"\n            :startpos 10\n            :endpos 10\n            :delim\n             (copy delimwhitespace\n              :pos 0))\n           (textblock\n            :text \"d\"\n            :startpos 11\n            :endpos 11))))))))\n (textblock-delimnotfound\n  (textblock\n   :startpos 13\n   :endpos 13\n   :parent\n    (textblock\n     :startpos 14\n     :endpos 14\n     :delim\n      (delim\n       :delimlist delimlisttest1)\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13\n       :delim\n        (copy delimbracketangle\n         :pos 0)\n       :close delimclosing\n       :parent\n        (textblock\n         :text \"<{a,b},{c d}>\"\n         :startpos 1\n         :endpos 13)\n       :children\n        (textblocklist\n         (textblock\n          :text \"{a,b}\"\n          :startpos 2\n          :endpos 6\n          :delim\n           (copy delimbracketcurly\n            :pos 0)\n          :children\n           (textblocklist\n            (textblock\n             :text \"a\"\n             :startpos 3\n             :endpos 3)\n            (textblock\n             :text \",\"\n             :startpos 4\n             :endpos 4\n             :delim\n              (copy delimcomma\n               :pos 0))\n            (textblock\n             :text \"b\"\n             :startpos 5\n             :endpos 5)))\n         (textblock\n          :text \",\"\n          :startpos 7\n          :endpos 7\n          :delim\n           (copy delimcomma\n            :pos 0))\n         (textblock\n          :text \"{c d}\"\n          :startpos 8\n          :endpos 12\n          :delim\n           (copy delimbracketcurly\n            :pos 0)\n          :children\n           (textblocklist\n            (textblock\n             :text \"c\"\n             :startpos 9\n             :endpos 9)\n           (textblock\n            :text \" \"\n            :startpos 10\n            :endpos 10\n            :delim\n             (copy delimwhitespace\n              :pos 0))\n           (textblock\n            :text \"d\"\n            :startpos 11\n            :endpos 11)))))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":startpos"),
                   Core.vx_new_int(14),
                   Core.vx_new_string(":endpos"),
@@ -1007,7 +1035,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":delim"),
                   Core.f_new(
                     Textblock.t_delim,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":delimlist"),
                       Textblock.c_delimlisttest1
                     )
@@ -1015,7 +1043,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("<{a,b},{c d}>"),
                       Core.vx_new_string(":startpos"),
@@ -1025,10 +1053,10 @@ public final class TextblockTest {
                       Core.vx_new_string(":children"),
                       Core.f_new(
                         Textblock.t_textblocklist,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("<{a,b},{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -1038,7 +1066,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimbracketangle,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":pos"),
                                   Core.vx_new_int(0)
                                 )
@@ -1046,10 +1074,10 @@ public final class TextblockTest {
                               Core.vx_new_string(":children"),
                               Core.f_new(
                                 Textblock.t_textblocklist,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("{a,b}"),
                                       Core.vx_new_string(":startpos"),
@@ -1059,7 +1087,7 @@ public final class TextblockTest {
                                       Core.vx_new_string(":delim"),
                                       Core.f_copy(
                                         Textblock.c_delimbracketcurly,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":pos"),
                                           Core.vx_new_int(0)
                                         )
@@ -1067,10 +1095,10 @@ public final class TextblockTest {
                                       Core.vx_new_string(":children"),
                                       Core.f_new(
                                         Textblock.t_textblocklist,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string("a"),
                                               Core.vx_new_string(":startpos"),
@@ -1081,7 +1109,7 @@ public final class TextblockTest {
                                           ),
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string(","),
                                               Core.vx_new_string(":startpos"),
@@ -1091,7 +1119,7 @@ public final class TextblockTest {
                                               Core.vx_new_string(":delim"),
                                               Core.f_copy(
                                                 Textblock.c_delimcomma,
-                                                Core.t_anylist.vx_new(
+                                                Core.vx_new(Core.t_anylist,
                                                   Core.vx_new_string(":pos"),
                                                   Core.vx_new_int(0)
                                                 )
@@ -1100,7 +1128,7 @@ public final class TextblockTest {
                                           ),
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string("b"),
                                               Core.vx_new_string(":startpos"),
@@ -1115,7 +1143,7 @@ public final class TextblockTest {
                                   ),
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string(","),
                                       Core.vx_new_string(":startpos"),
@@ -1125,7 +1153,7 @@ public final class TextblockTest {
                                       Core.vx_new_string(":delim"),
                                       Core.f_copy(
                                         Textblock.c_delimcomma,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":pos"),
                                           Core.vx_new_int(0)
                                         )
@@ -1134,7 +1162,7 @@ public final class TextblockTest {
                                   ),
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("{c d}"),
                                       Core.vx_new_string(":startpos"),
@@ -1144,7 +1172,7 @@ public final class TextblockTest {
                                       Core.vx_new_string(":delim"),
                                       Core.f_copy(
                                         Textblock.c_delimbracketcurly,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":pos"),
                                           Core.vx_new_int(0)
                                         )
@@ -1152,10 +1180,10 @@ public final class TextblockTest {
                                       Core.vx_new_string(":children"),
                                       Core.f_new(
                                         Textblock.t_textblocklist,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string("c"),
                                               Core.vx_new_string(":startpos"),
@@ -1166,7 +1194,7 @@ public final class TextblockTest {
                                           ),
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string(" "),
                                               Core.vx_new_string(":startpos"),
@@ -1176,7 +1204,7 @@ public final class TextblockTest {
                                               Core.vx_new_string(":delim"),
                                               Core.f_copy(
                                                 Textblock.c_delimwhitespace,
-                                                Core.t_anylist.vx_new(
+                                                Core.vx_new(Core.t_anylist,
                                                   Core.vx_new_string(":pos"),
                                                   Core.vx_new_int(0)
                                                 )
@@ -1185,7 +1213,7 @@ public final class TextblockTest {
                                           ),
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string("d"),
                                               Core.vx_new_string(":startpos"),
@@ -1211,7 +1239,7 @@ public final class TextblockTest {
               Textblock.f_textblock_delimnotfound(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":startpos"),
                     Core.vx_new_int(13),
                     Core.vx_new_string(":endpos"),
@@ -1219,7 +1247,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":startpos"),
                         Core.vx_new_int(14),
                         Core.vx_new_string(":endpos"),
@@ -1227,7 +1255,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_new(
                           Textblock.t_delim,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest1
                           )
@@ -1235,7 +1263,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<{a,b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -1245,7 +1273,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimbracketangle,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -1255,7 +1283,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":parent"),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("<{a,b},{c d}>"),
                                 Core.vx_new_string(":startpos"),
@@ -1267,10 +1295,10 @@ public final class TextblockTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("{a,b}"),
                                     Core.vx_new_string(":startpos"),
@@ -1280,7 +1308,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimbracketcurly,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -1288,10 +1316,10 @@ public final class TextblockTest {
                                     Core.vx_new_string(":children"),
                                     Core.f_new(
                                       Textblock.t_textblocklist,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("a"),
                                             Core.vx_new_string(":startpos"),
@@ -1302,7 +1330,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string(","),
                                             Core.vx_new_string(":startpos"),
@@ -1312,7 +1340,7 @@ public final class TextblockTest {
                                             Core.vx_new_string(":delim"),
                                             Core.f_copy(
                                               Textblock.c_delimcomma,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":pos"),
                                                 Core.vx_new_int(0)
                                               )
@@ -1321,7 +1349,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("b"),
                                             Core.vx_new_string(":startpos"),
@@ -1336,7 +1364,7 @@ public final class TextblockTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string(","),
                                     Core.vx_new_string(":startpos"),
@@ -1346,7 +1374,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimcomma,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -1355,7 +1383,7 @@ public final class TextblockTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("{c d}"),
                                     Core.vx_new_string(":startpos"),
@@ -1365,7 +1393,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimbracketcurly,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -1373,10 +1401,10 @@ public final class TextblockTest {
                                     Core.vx_new_string(":children"),
                                     Core.f_new(
                                       Textblock.t_textblocklist,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("c"),
                                             Core.vx_new_string(":startpos"),
@@ -1387,7 +1415,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string(" "),
                                             Core.vx_new_string(":startpos"),
@@ -1397,7 +1425,7 @@ public final class TextblockTest {
                                             Core.vx_new_string(":delim"),
                                             Core.f_copy(
                                               Textblock.c_delimwhitespace,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":pos"),
                                                 Core.vx_new_int(0)
                                               )
@@ -1406,7 +1434,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("d"),
                                             Core.vx_new_string(":startpos"),
@@ -1430,14 +1458,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text\n   \"\\\"b\\\"\n1,\\\"2\\\"\"\n  :startpos 5\n  :endpos 13\n  :delim\n   (delim\n    :delimlist\n     (delimlist\n      vx/data/textblock/delimline\n      vx/data/textblock/delimquote\n      vx/data/textblock/delimcomma))\n  :parent\n   (textblock\n    :text\n     \"\\\"a\\\",\\\"b\\\"\n1,\\\"2\\\"\"\n    :startpos 1\n    :endpos 13\n    :children\n     (textblocklist\n      (textblock\n       :text \"\\\"a\\\"\"\n       :startpos 1\n       :endpos 3\n       :delim\n        (delim\n         :name \"delimquote\"\n         :starttext \"\\\"\"\n         :endtext \"\\\"\")\n       :children\n        (textblocklist\n         (textblock\n          :text \"a\"\n          :startpos 2\n          :endpos 2)))\n      (textblock\n       :text \",\"\n       :startpos 4\n       :endpos 4\n       :delim\n        (delim\n         :name \"delimcomma\"\n         :starttext \",\")))))\n(textblock-delimnotfound\n (textblock\n  :text \",\"\n  :startpos 4\n  :endpos 4\n  :delim\n   (delim\n    :name \"delimcomma\"\n    :starttext \",\")\n  :parent\n   (textblock\n    :text\n     \"\\\"b\\\"\n1,\\\"2\\\"\"\n    :startpos 5\n    :endpos 13\n    :delim\n     (delim\n      :delimlist\n       (delimlist\n        vx/data/textblock/delimline\n        vx/data/textblock/delimquote\n        vx/data/textblock/delimcomma))\n    :parent\n     (textblock\n      :text\n       \"\\\"a\\\",\\\"b\\\"\n1,\\\"2\\\"\"\n      :startpos 1\n      :endpos 13\n      :children\n       (textblocklist\n        (textblock\n         :text \"\\\"a\\\"\"\n         :startpos 1\n         :endpos 3\n         :delim\n          (delim\n           :name \"delimquote\"\n           :starttext \"\\\"\"\n           :endtext \"\\\"\")\n         :children\n          (textblocklist\n           (textblock\n            :text \"a\"\n            :startpos 2\n            :endpos 2)))))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("\"b\"\n1,\"2\""),
                   Core.vx_new_string(":startpos"),
@@ -1447,11 +1476,11 @@ public final class TextblockTest {
                   Core.vx_new_string(":delim"),
                   Core.f_new(
                     Textblock.t_delim,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":delimlist"),
                       Core.f_new(
                         Textblock.t_delimlist,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Textblock.c_delimline,
                           Textblock.c_delimquote,
                           Textblock.c_delimcomma
@@ -1462,7 +1491,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("\"a\",\"b\"\n1,\"2\""),
                       Core.vx_new_string(":startpos"),
@@ -1472,10 +1501,10 @@ public final class TextblockTest {
                       Core.vx_new_string(":children"),
                       Core.f_new(
                         Textblock.t_textblocklist,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("\"a\""),
                               Core.vx_new_string(":startpos"),
@@ -1485,7 +1514,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_new(
                                 Textblock.t_delim,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":name"),
                                   Core.vx_new_string("delimquote"),
                                   Core.vx_new_string(":starttext"),
@@ -1497,10 +1526,10 @@ public final class TextblockTest {
                               Core.vx_new_string(":children"),
                               Core.f_new(
                                 Textblock.t_textblocklist,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("a"),
                                       Core.vx_new_string(":startpos"),
@@ -1515,7 +1544,7 @@ public final class TextblockTest {
                           ),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string(","),
                               Core.vx_new_string(":startpos"),
@@ -1525,7 +1554,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_new(
                                 Textblock.t_delim,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":name"),
                                   Core.vx_new_string("delimcomma"),
                                   Core.vx_new_string(":starttext"),
@@ -1543,7 +1572,7 @@ public final class TextblockTest {
               Textblock.f_textblock_delimnotfound(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string(","),
                     Core.vx_new_string(":startpos"),
@@ -1553,7 +1582,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_new(
                       Textblock.t_delim,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":name"),
                         Core.vx_new_string("delimcomma"),
                         Core.vx_new_string(":starttext"),
@@ -1563,7 +1592,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("\"b\"\n1,\"2\""),
                         Core.vx_new_string(":startpos"),
@@ -1573,11 +1602,11 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_new(
                           Textblock.t_delim,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Core.f_new(
                               Textblock.t_delimlist,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Textblock.c_delimline,
                                 Textblock.c_delimquote,
                                 Textblock.c_delimcomma
@@ -1588,7 +1617,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("\"a\",\"b\"\n1,\"2\""),
                             Core.vx_new_string(":startpos"),
@@ -1598,10 +1627,10 @@ public final class TextblockTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("\"a\""),
                                     Core.vx_new_string(":startpos"),
@@ -1611,7 +1640,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_new(
                                       Textblock.t_delim,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":name"),
                                         Core.vx_new_string("delimquote"),
                                         Core.vx_new_string(":starttext"),
@@ -1623,10 +1652,10 @@ public final class TextblockTest {
                                     Core.vx_new_string(":children"),
                                     Core.f_new(
                                       Textblock.t_textblocklist,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("a"),
                                             Core.vx_new_string(":startpos"),
@@ -1656,20 +1685,23 @@ public final class TextblockTest {
   }
 
   static Test.Type_testcase f_textblock_init(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/data/textblock",
       ":casename", "textblock-init",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"<{a,b},{c d}>\"\n  :startpos 1\n  :endpos 13\n  :delim delimtest1\n  :parent\n   (textblock\n    :text \"<{a,b},{c d}>\"\n    :startpos 1\n    :endpos 13))\n (textblock-init\n  (textblock\n   :text \"<{a,b},{c d}>\"\n   :delim delimtest1)))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("<{a,b},{c d}>"),
                   Core.vx_new_string(":startpos"),
@@ -1681,7 +1713,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("<{a,b},{c d}>"),
                       Core.vx_new_string(":startpos"),
@@ -1695,7 +1727,7 @@ public final class TextblockTest {
               Textblock.f_textblock_init(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("<{a,b},{c d}>"),
                     Core.vx_new_string(":delim"),
@@ -1711,20 +1743,23 @@ public final class TextblockTest {
   }
 
   static Test.Type_testcase f_textblock_parse(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/data/textblock",
       ":casename", "textblock-parse",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"<{a,b},{c d}>\"\n  :startpos 1\n  :endpos 13\n  :children\n   (textblocklist\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13\n     :delim\n      (copy delimbracketangle\n       :pos 0)\n     :children\n      (textblocklist\n       (textblock\n        :text \"{a,b}\"\n        :startpos 2\n        :endpos 6\n        :delim\n         (copy delimbracketcurly\n          :pos 0)\n        :children\n         (textblocklist\n          (textblock\n           :text \"a\"\n           :startpos 3\n           :endpos 3)\n          (textblock\n           :text \",\"\n           :startpos 4\n           :endpos 4\n           :delim\n            (copy delimcomma\n             :pos 0))\n          (textblock\n           :text \"b\"\n           :startpos 5\n           :endpos 5)))\n       (textblock\n        :text \",\"\n        :startpos 7\n        :endpos 7\n        :delim\n         (copy delimcomma\n          :pos 0))\n       (textblock\n        :text \"{c d}\"\n        :startpos 8\n        :endpos 12\n        :delim\n         (copy delimbracketcurly\n          :pos 0)\n        :children\n         (textblocklist\n          (textblock\n           :text \"c\"\n           :startpos 9\n           :endpos 9)\n          (textblock\n           :text \" \"\n           :startpos 10\n           :endpos 10\n           :delim\n            (copy delimwhitespace\n             :pos 0))\n          (textblock\n           :text \"d\"\n           :startpos 11\n           :endpos 11)))))))\n (textblock-parse\n  (textblock\n   :text \"<{a,b},{c d}>\"\n   :delim delimtest1)))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("<{a,b},{c d}>"),
                   Core.vx_new_string(":startpos"),
@@ -1734,10 +1769,10 @@ public final class TextblockTest {
                   Core.vx_new_string(":children"),
                   Core.f_new(
                     Textblock.t_textblocklist,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<{a,b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -1747,7 +1782,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketangle,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -1755,10 +1790,10 @@ public final class TextblockTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("{a,b}"),
                                   Core.vx_new_string(":startpos"),
@@ -1768,7 +1803,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimbracketcurly,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -1776,10 +1811,10 @@ public final class TextblockTest {
                                   Core.vx_new_string(":children"),
                                   Core.f_new(
                                     Textblock.t_textblocklist,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("a"),
                                           Core.vx_new_string(":startpos"),
@@ -1790,7 +1825,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string(","),
                                           Core.vx_new_string(":startpos"),
@@ -1800,7 +1835,7 @@ public final class TextblockTest {
                                           Core.vx_new_string(":delim"),
                                           Core.f_copy(
                                             Textblock.c_delimcomma,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":pos"),
                                               Core.vx_new_int(0)
                                             )
@@ -1809,7 +1844,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("b"),
                                           Core.vx_new_string(":startpos"),
@@ -1824,7 +1859,7 @@ public final class TextblockTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string(","),
                                   Core.vx_new_string(":startpos"),
@@ -1834,7 +1869,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimcomma,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -1843,7 +1878,7 @@ public final class TextblockTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("{c d}"),
                                   Core.vx_new_string(":startpos"),
@@ -1853,7 +1888,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimbracketcurly,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -1861,10 +1896,10 @@ public final class TextblockTest {
                                   Core.vx_new_string(":children"),
                                   Core.f_new(
                                     Textblock.t_textblocklist,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("c"),
                                           Core.vx_new_string(":startpos"),
@@ -1875,7 +1910,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string(" "),
                                           Core.vx_new_string(":startpos"),
@@ -1885,7 +1920,7 @@ public final class TextblockTest {
                                           Core.vx_new_string(":delim"),
                                           Core.f_copy(
                                             Textblock.c_delimwhitespace,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":pos"),
                                               Core.vx_new_int(0)
                                             )
@@ -1894,7 +1929,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("d"),
                                           Core.vx_new_string(":startpos"),
@@ -1918,7 +1953,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("<{a,b},{c d}>"),
                     Core.vx_new_string(":delim"),
@@ -1934,20 +1969,23 @@ public final class TextblockTest {
   }
 
   static Test.Type_testcase f_textblock_parse_one(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/data/textblock",
       ":casename", "textblock-parse-one",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"<a\"\n  :startpos 1\n  :endpos 2\n  :children\n   (textblocklist\n    (textblock\n     :text \"<a\"\n     :startpos 1\n     :endpos 2\n     :delim\n      (copy delimbracketangle\n       :delimlist vx/data/textblock/delimlisttest1)\n     :children\n      (textblocklist\n       (textblock\n        :text \"a\"\n        :startpos 2\n        :endpos 2))\n     (msgblock\n      (msg\n       :code \"closedelimmissing\"\n       :detail\n        (delim\n         :name \"delimclose\"\n         :starttext \">\")\n       :severity 2))))\n  (msgblock\n   (msg\n    :code \"closedelimmissing\"\n    :detail\n     (delim\n      :name \"delimclose\"\n      :starttext \">\")\n    :severity 2)))\n (textblock-parse-one\n  (textblock\n   :text \"a\"\n   :startpos 2\n   :endpos 2\n   :delim\n    (delim\n     :delimlist vx/data/textblock/delimlisttest2)\n   :close\n    (copy delimclose\n     :starttext \">\")\n   :parent\n    (textblock\n     :text \"<a\"\n     :startpos 1\n     :endpos 2\n     :delim\n      (copy delimbracketangle\n       :delimlist vx/data/textblock/delimlisttest1)\n     :parent\n      (textblock\n       :text \"<a\"\n       :startpos 1\n       :endpos 2)))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("<a"),
                   Core.vx_new_string(":startpos"),
@@ -1957,10 +1995,10 @@ public final class TextblockTest {
                   Core.vx_new_string(":children"),
                   Core.f_new(
                     Textblock.t_textblocklist,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<a"),
                           Core.vx_new_string(":startpos"),
@@ -1970,7 +2008,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketangle,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":delimlist"),
                               Textblock.c_delimlisttest1
                             )
@@ -1978,10 +2016,10 @@ public final class TextblockTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("a"),
                                   Core.vx_new_string(":startpos"),
@@ -1994,16 +2032,16 @@ public final class TextblockTest {
                           ),
                           Core.f_new(
                             Core.t_msgblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.f_new(
                                 Core.t_msg,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":code"),
                                   Core.vx_new_string("closedelimmissing"),
                                   Core.vx_new_string(":detail"),
                                   Core.f_new(
                                     Textblock.t_delim,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":name"),
                                       Core.vx_new_string("delimclose"),
                                       Core.vx_new_string(":starttext"),
@@ -2022,16 +2060,16 @@ public final class TextblockTest {
                   ),
                   Core.f_new(
                     Core.t_msgblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.f_new(
                         Core.t_msg,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":code"),
                           Core.vx_new_string("closedelimmissing"),
                           Core.vx_new_string(":detail"),
                           Core.f_new(
                             Textblock.t_delim,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":name"),
                               Core.vx_new_string("delimclose"),
                               Core.vx_new_string(":starttext"),
@@ -2049,7 +2087,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("a"),
                     Core.vx_new_string(":startpos"),
@@ -2059,7 +2097,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_new(
                       Textblock.t_delim,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":delimlist"),
                         Textblock.c_delimlisttest2
                       )
@@ -2067,7 +2105,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":close"),
                     Core.f_copy(
                       Textblock.c_delimclose,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":starttext"),
                         Core.vx_new_string(">")
                       )
@@ -2075,7 +2113,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("<a"),
                         Core.vx_new_string(":startpos"),
@@ -2085,7 +2123,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketangle,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest1
                           )
@@ -2093,7 +2131,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<a"),
                             Core.vx_new_string(":startpos"),
@@ -2109,14 +2147,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"<{a,b},{c d}>\"\n  :startpos 1\n  :endpos 13\n  :delim delimtest1\n  :parent\n   (textblock\n    :text \"<{a,b},{c d}>\"\n    :startpos 1\n    :endpos 13))\n (textblock-parse-one\n  (textblock\n   :text \"<{a,b},{c d}>\"\n   :delim delimtest1)))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("<{a,b},{c d}>"),
                   Core.vx_new_string(":startpos"),
@@ -2128,7 +2167,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("<{a,b},{c d}>"),
                       Core.vx_new_string(":startpos"),
@@ -2142,7 +2181,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("<{a,b},{c d}>"),
                     Core.vx_new_string(":delim"),
@@ -2152,14 +2191,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"{a,b},{c d}>\"\n  :startpos 2\n  :endpos 13\n  :delim\n   (delim\n    :delimlist delimlisttest2)\n  :close\n   (copy delimclose\n    :starttext \">\")\n  :parent\n   (textblock\n    :text \"<{a,b},{c d}>\"\n    :startpos 1\n    :endpos 13\n    :delim\n     (copy delimbracketangle\n      :delimlist delimlisttest1)\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13)))\n (textblock-parse-one\n  (textblock\n   :text \"<{a,b},{c d}>\"\n   :startpos 1\n   :endpos 13\n   :delim delimtest1\n   :parent\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("{a,b},{c d}>"),
                   Core.vx_new_string(":startpos"),
@@ -2169,7 +2209,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":delim"),
                   Core.f_new(
                     Textblock.t_delim,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":delimlist"),
                       Textblock.c_delimlisttest2
                     )
@@ -2177,7 +2217,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":close"),
                   Core.f_copy(
                     Textblock.c_delimclose,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":starttext"),
                       Core.vx_new_string(">")
                     )
@@ -2185,7 +2225,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("<{a,b},{c d}>"),
                       Core.vx_new_string(":startpos"),
@@ -2195,7 +2235,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_copy(
                         Textblock.c_delimbracketangle,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":delimlist"),
                           Textblock.c_delimlisttest1
                         )
@@ -2203,7 +2243,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<{a,b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -2219,7 +2259,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("<{a,b},{c d}>"),
                     Core.vx_new_string(":startpos"),
@@ -2231,7 +2271,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("<{a,b},{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -2245,14 +2285,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"a,b},{c d}>\"\n  :startpos 3\n  :endpos 13\n  :delim\n   (delim\n    :delimlist delimlisttest3)\n  :close\n   (copy delimclose\n    :starttext \"}\")\n  :parent\n   (textblock\n    :text \"{a,b},{c d}>\"\n    :startpos 2\n    :endpos 13\n    :delim\n     (copy delimbracketcurly\n      :delimlist delimlisttest2)\n    :close\n     (copy delimclose\n      :starttext \">\")\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13\n      :delim\n       (copy delimbracketangle\n        :delimlist delimlisttest1)\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13))))\n (textblock-parse-one\n  (textblock\n   :text \"{a,b},{c d}>\"\n   :startpos 2\n   :endpos 13\n   :delim\n    (delim\n     :delimlist delimlisttest2)\n   :close\n    (copy delimclose\n     :starttext \">\")\n   :parent\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13\n     :delim\n      (copy delimbracketangle\n       :delimlist delimlisttest1)\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13)))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("a,b},{c d}>"),
                   Core.vx_new_string(":startpos"),
@@ -2262,7 +2303,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":delim"),
                   Core.f_new(
                     Textblock.t_delim,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":delimlist"),
                       Textblock.c_delimlisttest3
                     )
@@ -2270,7 +2311,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":close"),
                   Core.f_copy(
                     Textblock.c_delimclose,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":starttext"),
                       Core.vx_new_string("}")
                     )
@@ -2278,7 +2319,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("{a,b},{c d}>"),
                       Core.vx_new_string(":startpos"),
@@ -2288,7 +2329,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_copy(
                         Textblock.c_delimbracketcurly,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":delimlist"),
                           Textblock.c_delimlisttest2
                         )
@@ -2296,7 +2337,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":close"),
                       Core.f_copy(
                         Textblock.c_delimclose,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":starttext"),
                           Core.vx_new_string(">")
                         )
@@ -2304,7 +2345,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<{a,b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -2314,7 +2355,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketangle,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":delimlist"),
                               Textblock.c_delimlisttest1
                             )
@@ -2322,7 +2363,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":parent"),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("<{a,b},{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -2340,7 +2381,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("{a,b},{c d}>"),
                     Core.vx_new_string(":startpos"),
@@ -2350,7 +2391,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_new(
                       Textblock.t_delim,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":delimlist"),
                         Textblock.c_delimlisttest2
                       )
@@ -2358,7 +2399,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":close"),
                     Core.f_copy(
                       Textblock.c_delimclose,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":starttext"),
                         Core.vx_new_string(">")
                       )
@@ -2366,7 +2407,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("<{a,b},{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -2376,7 +2417,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketangle,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest1
                           )
@@ -2384,7 +2425,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<{a,b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -2400,14 +2441,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"a\"\n  :startpos 3\n  :endpos 3\n  :parent\n   (textblock\n    :text \",\"\n    :startpos 4\n    :endpos 4\n    :delim\n     (copy delimcomma\n      :pos 0)\n    :parent\n     (textblock\n      :text \"b},{c d}>\"\n      :startpos 5\n      :endpos 13\n      :delim\n       (delim\n        :delimlist delimlisttest3)\n      :close\n       (copy delimclose\n        :starttext \"}\")\n      :parent\n       (textblock\n        :text \"{a,b},{c d}>\"\n        :startpos 2\n        :endpos 13\n        :delim\n         (copy delimbracketcurly\n          :delimlist delimlisttest2)\n        :close\n         (copy delimclose\n          :starttext \">\")\n        :parent\n         (textblock\n          :text \"<{a,b},{c d}>\"\n          :startpos 1\n          :endpos 13\n          :delim\n           (copy delimbracketangle\n            :delimlist delimlisttest1)\n          :parent\n           (textblock\n            :text \"<{a,b},{c d}>\"\n            :startpos 1\n            :endpos 13))))))\n (textblock-parse-one\n  (textblock\n   :text \"a,b},{c d}>\"\n   :startpos 3\n   :endpos 13\n   :delim\n    (delim\n     :delimlist delimlisttest3)\n   :close\n    (copy delimclose\n     :starttext \"}\")\n   :parent\n    (textblock\n     :text \"{a,b},{c d}>\"\n     :startpos 2\n     :endpos 13\n     :delim\n      (copy delimbracketcurly\n       :delimlist delimlisttest2)\n     :close\n      (copy delimclose\n       :starttext \">\")\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13\n       :delim\n        (copy delimbracketangle\n         :delimlist delimlisttest1)\n       :parent\n        (textblock\n         :text \"<{a,b},{c d}>\"\n         :startpos 1\n         :endpos 13))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("a"),
                   Core.vx_new_string(":startpos"),
@@ -2417,7 +2459,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string(","),
                       Core.vx_new_string(":startpos"),
@@ -2427,7 +2469,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_copy(
                         Textblock.c_delimcomma,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":pos"),
                           Core.vx_new_int(0)
                         )
@@ -2435,7 +2477,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -2445,7 +2487,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_new(
                             Textblock.t_delim,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":delimlist"),
                               Textblock.c_delimlisttest3
                             )
@@ -2453,7 +2495,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":close"),
                           Core.f_copy(
                             Textblock.c_delimclose,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":starttext"),
                               Core.vx_new_string("}")
                             )
@@ -2461,7 +2503,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":parent"),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("{a,b},{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -2471,7 +2513,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimbracketcurly,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":delimlist"),
                                   Textblock.c_delimlisttest2
                                 )
@@ -2479,7 +2521,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":close"),
                               Core.f_copy(
                                 Textblock.c_delimclose,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":starttext"),
                                   Core.vx_new_string(">")
                                 )
@@ -2487,7 +2529,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":parent"),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("<{a,b},{c d}>"),
                                   Core.vx_new_string(":startpos"),
@@ -2497,7 +2539,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimbracketangle,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":delimlist"),
                                       Textblock.c_delimlisttest1
                                     )
@@ -2505,7 +2547,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":parent"),
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("<{a,b},{c d}>"),
                                       Core.vx_new_string(":startpos"),
@@ -2527,7 +2569,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("a,b},{c d}>"),
                     Core.vx_new_string(":startpos"),
@@ -2537,7 +2579,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_new(
                       Textblock.t_delim,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":delimlist"),
                         Textblock.c_delimlisttest3
                       )
@@ -2545,7 +2587,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":close"),
                     Core.f_copy(
                       Textblock.c_delimclose,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":starttext"),
                         Core.vx_new_string("}")
                       )
@@ -2553,7 +2595,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("{a,b},{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -2563,7 +2605,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketcurly,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest2
                           )
@@ -2571,7 +2613,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":close"),
                         Core.f_copy(
                           Textblock.c_delimclose,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":starttext"),
                             Core.vx_new_string(">")
                           )
@@ -2579,7 +2621,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<{a,b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -2589,7 +2631,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimbracketangle,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":delimlist"),
                                 Textblock.c_delimlisttest1
                               )
@@ -2597,7 +2639,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":parent"),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("<{a,b},{c d}>"),
                                 Core.vx_new_string(":startpos"),
@@ -2615,14 +2657,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \",\"\n  :startpos 4\n  :endpos 4\n  :delim\n   (copy delimcomma\n    :pos 0)\n  :parent\n   (textblock\n    :text \"b},{c d}>\"\n    :startpos 5\n    :endpos 13\n    :delim\n     (delim\n      :delimlist delimlisttest3)\n    :close\n     (copy delimclose\n      :starttext \"}\")\n    :parent\n     (textblock\n      :text \"{a,b},{c d}>\"\n      :startpos 2\n      :endpos 13\n      :delim\n       (copy delimbracketcurly\n        :delimlist delimlisttest2)\n      :close\n       (copy delimclose\n        :starttext \">\")\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13\n        :delim\n         (copy delimbracketangle\n          :delimlist delimlisttest1)\n        :parent\n         (textblock\n          :text \"<{a,b},{c d}>\"\n          :startpos 1\n          :endpos 13))\n      :children\n       (textblocklist\n        (textblock\n         :text \"a\"\n         :startpos 3\n         :endpos 3)))))\n (textblock-parse-one\n  (textblock\n   :text \"a\"\n   :startpos 3\n   :endpos 3\n   :parent\n    (textblock\n     :text \",\"\n     :startpos 4\n     :endpos 4\n     :delim\n      (copy delimcomma\n       :pos 0)\n     :parent\n      (textblock\n       :text \"b},{c d}>\"\n       :startpos 5\n       :endpos 13\n       :delim\n        (delim\n         :delimlist delimlisttest3)\n       :close\n        (copy delimclose\n         :starttext \"}\")\n       :parent\n        (textblock\n         :text \"{a,b},{c d}>\"\n         :startpos 2\n         :endpos 13\n         :delim\n          (copy delimbracketcurly\n           :delimlist delimlisttest2)\n         :close\n          (copy delimclose\n           :starttext \">\")\n         :parent\n          (textblock\n           :text \"<{a,b},{c d}>\"\n           :startpos 1\n           :endpos 13\n           :delim\n            (copy delimbracketangle\n             :delimlist delimlisttest1)\n           :parent\n            (textblock\n             :text \"<{a,b},{c d}>\"\n             :startpos 1\n             :endpos 13))))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string(","),
                   Core.vx_new_string(":startpos"),
@@ -2632,7 +2675,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":delim"),
                   Core.f_copy(
                     Textblock.c_delimcomma,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":pos"),
                       Core.vx_new_int(0)
                     )
@@ -2640,7 +2683,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("b},{c d}>"),
                       Core.vx_new_string(":startpos"),
@@ -2650,7 +2693,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_new(
                         Textblock.t_delim,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":delimlist"),
                           Textblock.c_delimlisttest3
                         )
@@ -2658,7 +2701,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":close"),
                       Core.f_copy(
                         Textblock.c_delimclose,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":starttext"),
                           Core.vx_new_string("}")
                         )
@@ -2666,7 +2709,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("{a,b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -2676,7 +2719,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketcurly,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":delimlist"),
                               Textblock.c_delimlisttest2
                             )
@@ -2684,7 +2727,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":close"),
                           Core.f_copy(
                             Textblock.c_delimclose,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":starttext"),
                               Core.vx_new_string(">")
                             )
@@ -2692,7 +2735,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":parent"),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("<{a,b},{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -2702,7 +2745,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimbracketangle,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":delimlist"),
                                   Textblock.c_delimlisttest1
                                 )
@@ -2710,7 +2753,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":parent"),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("<{a,b},{c d}>"),
                                   Core.vx_new_string(":startpos"),
@@ -2724,10 +2767,10 @@ public final class TextblockTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("a"),
                                   Core.vx_new_string(":startpos"),
@@ -2747,7 +2790,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("a"),
                     Core.vx_new_string(":startpos"),
@@ -2757,7 +2800,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string(","),
                         Core.vx_new_string(":startpos"),
@@ -2767,7 +2810,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimcomma,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -2775,7 +2818,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -2785,7 +2828,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":delim"),
                             Core.f_new(
                               Textblock.t_delim,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":delimlist"),
                                 Textblock.c_delimlisttest3
                               )
@@ -2793,7 +2836,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":close"),
                             Core.f_copy(
                               Textblock.c_delimclose,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":starttext"),
                                 Core.vx_new_string("}")
                               )
@@ -2801,7 +2844,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":parent"),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("{a,b},{c d}>"),
                                 Core.vx_new_string(":startpos"),
@@ -2811,7 +2854,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimbracketcurly,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":delimlist"),
                                     Textblock.c_delimlisttest2
                                   )
@@ -2819,7 +2862,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":close"),
                                 Core.f_copy(
                                   Textblock.c_delimclose,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":starttext"),
                                     Core.vx_new_string(">")
                                   )
@@ -2827,7 +2870,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":parent"),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("<{a,b},{c d}>"),
                                     Core.vx_new_string(":startpos"),
@@ -2837,7 +2880,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimbracketangle,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":delimlist"),
                                         Textblock.c_delimlisttest1
                                       )
@@ -2845,7 +2888,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":parent"),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("<{a,b},{c d}>"),
                                         Core.vx_new_string(":startpos"),
@@ -2867,14 +2910,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"b},{c d}>\"\n  :startpos 5\n  :endpos 13\n  :delim\n   (delim\n    :delimlist delimlisttest3)\n  :close\n   (copy delimclose\n    :starttext \"}\")\n  :parent\n   (textblock\n    :text \"{a,b},{c d}>\"\n    :startpos 2\n    :endpos 13\n    :delim\n     (copy delimbracketcurly\n      :delimlist delimlisttest2)\n    :close\n     (copy delimclose\n      :starttext \">\")\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13\n      :delim\n       (copy delimbracketangle\n        :delimlist delimlisttest1)\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13))\n    :children\n     (textblocklist\n      (textblock\n       :text \"a\"\n       :startpos 3\n       :endpos 3)\n      (textblock\n       :text \",\"\n       :startpos 4\n       :endpos 4\n       :delim\n        (copy delimcomma\n         :pos 0)))))\n (textblock-parse-one\n  (textblock\n   :text \",\"\n   :startpos 4\n   :endpos 4\n   :delim\n    (copy delimcomma\n     :pos 0)\n   :parent\n    (textblock\n     :text \"b},{c d}>\"\n     :startpos 5\n     :endpos 13\n     :delim\n      (delim\n       :delimlist delimlisttest3)\n     :close\n      (copy delimclose\n       :starttext \"}\")\n     :parent\n      (textblock\n       :text \"{a,b},{c d}>\"\n       :startpos 2\n       :endpos 13\n       :delim\n        (copy delimbracketcurly\n         :delimlist delimlisttest2)\n       :close\n        (copy delimclose\n         :starttext \">\")\n       :parent\n        (textblock\n         :text \"<{a,b},{c d}>\"\n         :startpos 1\n         :endpos 13\n         :delim\n          (copy delimbracketangle\n           :delimlist delimlisttest1)\n         :parent\n          (textblock\n           :text \"<{a,b},{c d}>\"\n           :startpos 1\n           :endpos 13))\n       :children\n        (textblocklist\n         (textblock\n          :text \"a\"\n          :startpos 3\n          :endpos 3)))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("b},{c d}>"),
                   Core.vx_new_string(":startpos"),
@@ -2884,7 +2928,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":delim"),
                   Core.f_new(
                     Textblock.t_delim,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":delimlist"),
                       Textblock.c_delimlisttest3
                     )
@@ -2892,7 +2936,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":close"),
                   Core.f_copy(
                     Textblock.c_delimclose,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":starttext"),
                       Core.vx_new_string("}")
                     )
@@ -2900,7 +2944,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("{a,b},{c d}>"),
                       Core.vx_new_string(":startpos"),
@@ -2910,7 +2954,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_copy(
                         Textblock.c_delimbracketcurly,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":delimlist"),
                           Textblock.c_delimlisttest2
                         )
@@ -2918,7 +2962,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":close"),
                       Core.f_copy(
                         Textblock.c_delimclose,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":starttext"),
                           Core.vx_new_string(">")
                         )
@@ -2926,7 +2970,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<{a,b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -2936,7 +2980,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketangle,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":delimlist"),
                               Textblock.c_delimlisttest1
                             )
@@ -2944,7 +2988,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":parent"),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("<{a,b},{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -2958,10 +3002,10 @@ public final class TextblockTest {
                       Core.vx_new_string(":children"),
                       Core.f_new(
                         Textblock.t_textblocklist,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("a"),
                               Core.vx_new_string(":startpos"),
@@ -2972,7 +3016,7 @@ public final class TextblockTest {
                           ),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string(","),
                               Core.vx_new_string(":startpos"),
@@ -2982,7 +3026,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimcomma,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":pos"),
                                   Core.vx_new_int(0)
                                 )
@@ -2998,7 +3042,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string(","),
                     Core.vx_new_string(":startpos"),
@@ -3008,7 +3052,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_copy(
                       Textblock.c_delimcomma,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":pos"),
                         Core.vx_new_int(0)
                       )
@@ -3016,7 +3060,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("b},{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -3026,7 +3070,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_new(
                           Textblock.t_delim,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest3
                           )
@@ -3034,7 +3078,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":close"),
                         Core.f_copy(
                           Textblock.c_delimclose,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":starttext"),
                             Core.vx_new_string("}")
                           )
@@ -3042,7 +3086,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("{a,b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -3052,7 +3096,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimbracketcurly,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":delimlist"),
                                 Textblock.c_delimlisttest2
                               )
@@ -3060,7 +3104,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":close"),
                             Core.f_copy(
                               Textblock.c_delimclose,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":starttext"),
                                 Core.vx_new_string(">")
                               )
@@ -3068,7 +3112,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":parent"),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("<{a,b},{c d}>"),
                                 Core.vx_new_string(":startpos"),
@@ -3078,7 +3122,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimbracketangle,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":delimlist"),
                                     Textblock.c_delimlisttest1
                                   )
@@ -3086,7 +3130,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":parent"),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("<{a,b},{c d}>"),
                                     Core.vx_new_string(":startpos"),
@@ -3100,10 +3144,10 @@ public final class TextblockTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("a"),
                                     Core.vx_new_string(":startpos"),
@@ -3123,14 +3167,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"b\"\n  :startpos 5\n  :endpos 5\n  :parent\n   (textblock\n    :text \",{c d}>\"\n    :startpos 7\n    :endpos 13\n    :delim\n     (delim\n      :delimlist delimlisttest2)\n    :close\n     (copy delimclose\n      :starttext \">\")\n    :parent\n     (textblock\n      :text \"{a,b}\"\n      :startpos 2\n      :endpos 6\n      :delim\n       (copy delimbracketcurly\n        :pos 0)\n      :close delimclosing\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13\n        :delim\n         (copy delimbracketangle\n          :delimlist delimlisttest1)\n        :parent\n         (textblock\n          :text \"<{a,b},{c d}>\"\n          :startpos 1\n          :endpos 13))\n      :children\n       (textblocklist\n        (textblock\n         :text \"a\"\n         :startpos 3\n         :endpos 3)\n        (textblock\n         :text \",\"\n         :startpos 4\n         :endpos 4\n         :delim\n          (copy delimcomma\n           :pos 0))))))\n (textblock-parse-one\n  (textblock\n   :text \"b},{c d}>\"\n   :startpos 5\n   :endpos 13\n   :delim\n    (delim\n     :delimlist delimlisttest3)\n   :close\n    (copy delimclose\n     :starttext \"}\")\n   :parent\n    (textblock\n     :text \"{a,b},{c d}>\"\n     :startpos 2\n     :endpos 13\n     :delim\n      (copy delimbracketcurly\n       :delimlist delimlisttest2)\n     :close\n      (copy delimclose\n       :starttext \">\")\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13\n       :delim\n        (copy delimbracketangle\n         :delimlist delimlisttest1)\n       :parent\n        (textblock\n         :text \"<{a,b},{c d}>\"\n         :startpos 1\n         :endpos 13))\n     :children\n      (textblocklist\n       (textblock\n        :text \"a\"\n        :startpos 3\n        :endpos 3)\n       (textblock\n        :text \",\"\n        :startpos 4\n        :endpos 4\n        :delim\n         (copy delimcomma\n          :pos 0)))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("b"),
                   Core.vx_new_string(":startpos"),
@@ -3140,7 +3185,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string(",{c d}>"),
                       Core.vx_new_string(":startpos"),
@@ -3150,7 +3195,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_new(
                         Textblock.t_delim,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":delimlist"),
                           Textblock.c_delimlisttest2
                         )
@@ -3158,7 +3203,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":close"),
                       Core.f_copy(
                         Textblock.c_delimclose,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":starttext"),
                           Core.vx_new_string(">")
                         )
@@ -3166,7 +3211,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("{a,b}"),
                           Core.vx_new_string(":startpos"),
@@ -3176,7 +3221,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketcurly,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -3186,7 +3231,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":parent"),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("<{a,b},{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -3196,7 +3241,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimbracketangle,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":delimlist"),
                                   Textblock.c_delimlisttest1
                                 )
@@ -3204,7 +3249,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":parent"),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("<{a,b},{c d}>"),
                                   Core.vx_new_string(":startpos"),
@@ -3218,10 +3263,10 @@ public final class TextblockTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("a"),
                                   Core.vx_new_string(":startpos"),
@@ -3232,7 +3277,7 @@ public final class TextblockTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string(","),
                                   Core.vx_new_string(":startpos"),
@@ -3242,7 +3287,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimcomma,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -3260,7 +3305,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("b},{c d}>"),
                     Core.vx_new_string(":startpos"),
@@ -3270,7 +3315,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_new(
                       Textblock.t_delim,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":delimlist"),
                         Textblock.c_delimlisttest3
                       )
@@ -3278,7 +3323,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":close"),
                     Core.f_copy(
                       Textblock.c_delimclose,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":starttext"),
                         Core.vx_new_string("}")
                       )
@@ -3286,7 +3331,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("{a,b},{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -3296,7 +3341,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketcurly,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest2
                           )
@@ -3304,7 +3349,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":close"),
                         Core.f_copy(
                           Textblock.c_delimclose,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":starttext"),
                             Core.vx_new_string(">")
                           )
@@ -3312,7 +3357,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<{a,b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -3322,7 +3367,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimbracketangle,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":delimlist"),
                                 Textblock.c_delimlisttest1
                               )
@@ -3330,7 +3375,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":parent"),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("<{a,b},{c d}>"),
                                 Core.vx_new_string(":startpos"),
@@ -3344,10 +3389,10 @@ public final class TextblockTest {
                         Core.vx_new_string(":children"),
                         Core.f_new(
                           Textblock.t_textblocklist,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("a"),
                                 Core.vx_new_string(":startpos"),
@@ -3358,7 +3403,7 @@ public final class TextblockTest {
                             ),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string(","),
                                 Core.vx_new_string(":startpos"),
@@ -3368,7 +3413,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimcomma,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -3384,14 +3429,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \",{c d}>\"\n  :startpos 7\n  :endpos 13\n  :delim\n   (delim\n    :delimlist delimlisttest2)\n  :close\n   (copy delimclose\n    :starttext \">\")\n  :parent\n   (textblock\n    :text \"<{a,b},{c d}>\"\n    :startpos 1\n    :endpos 13\n    :delim\n     (copy delimbracketangle\n      :delimlist delimlisttest1)\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13)\n    :children\n     (textblocklist\n      (textblock\n       :text \"{a,b}\"\n       :startpos 2\n       :endpos 6\n       :delim\n        (copy delimbracketcurly\n         :pos 0)\n       :children\n        (textblocklist\n         (textblock\n          :text \"a\"\n          :startpos 3\n          :endpos 3)\n         (textblock\n          :text \",\"\n          :startpos 4\n          :endpos 4\n          :delim\n           (copy delimcomma\n            :pos 0))\n         (textblock\n          :text \"b\"\n          :startpos 5\n          :endpos 5))))))\n (textblock-parse-one\n  (textblock\n   :text \"b\"\n   :startpos 5\n   :endpos 5\n   :parent\n    (textblock\n     :text \",{c d}>\"\n     :startpos 7\n     :endpos 13\n     :delim\n      (delim\n       :delimlist delimlisttest2)\n     :close\n      (copy delimclose\n       :starttext \">\")\n     :parent\n      (textblock\n       :text \"{a,b}\"\n       :startpos 2\n       :endpos 6\n       :delim\n        (copy delimbracketcurly\n         :pos 0)\n       :close delimclosing\n       :parent\n        (textblock\n         :text \"<{a,b},{c d}>\"\n         :startpos 1\n         :endpos 13\n         :delim\n          (copy delimbracketangle\n           :delimlist delimlisttest1)\n         :parent\n          (textblock\n           :text \"<{a,b},{c d}>\"\n           :startpos 1\n           :endpos 13))\n       :children\n        (textblocklist\n         (textblock\n          :text \"a\"\n          :startpos 3\n          :endpos 3)\n         (textblock\n          :text \",\"\n          :startpos 4\n          :endpos 4\n          :delim\n           (copy delimcomma\n            :pos 0))))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string(",{c d}>"),
                   Core.vx_new_string(":startpos"),
@@ -3401,7 +3447,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":delim"),
                   Core.f_new(
                     Textblock.t_delim,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":delimlist"),
                       Textblock.c_delimlisttest2
                     )
@@ -3409,7 +3455,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":close"),
                   Core.f_copy(
                     Textblock.c_delimclose,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":starttext"),
                       Core.vx_new_string(">")
                     )
@@ -3417,7 +3463,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("<{a,b},{c d}>"),
                       Core.vx_new_string(":startpos"),
@@ -3427,7 +3473,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_copy(
                         Textblock.c_delimbracketangle,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":delimlist"),
                           Textblock.c_delimlisttest1
                         )
@@ -3435,7 +3481,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<{a,b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -3447,10 +3493,10 @@ public final class TextblockTest {
                       Core.vx_new_string(":children"),
                       Core.f_new(
                         Textblock.t_textblocklist,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("{a,b}"),
                               Core.vx_new_string(":startpos"),
@@ -3460,7 +3506,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimbracketcurly,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":pos"),
                                   Core.vx_new_int(0)
                                 )
@@ -3468,10 +3514,10 @@ public final class TextblockTest {
                               Core.vx_new_string(":children"),
                               Core.f_new(
                                 Textblock.t_textblocklist,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("a"),
                                       Core.vx_new_string(":startpos"),
@@ -3482,7 +3528,7 @@ public final class TextblockTest {
                                   ),
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string(","),
                                       Core.vx_new_string(":startpos"),
@@ -3492,7 +3538,7 @@ public final class TextblockTest {
                                       Core.vx_new_string(":delim"),
                                       Core.f_copy(
                                         Textblock.c_delimcomma,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":pos"),
                                           Core.vx_new_int(0)
                                         )
@@ -3501,7 +3547,7 @@ public final class TextblockTest {
                                   ),
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("b"),
                                       Core.vx_new_string(":startpos"),
@@ -3523,7 +3569,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("b"),
                     Core.vx_new_string(":startpos"),
@@ -3533,7 +3579,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string(",{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -3543,7 +3589,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_new(
                           Textblock.t_delim,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest2
                           )
@@ -3551,7 +3597,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":close"),
                         Core.f_copy(
                           Textblock.c_delimclose,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":starttext"),
                             Core.vx_new_string(">")
                           )
@@ -3559,7 +3605,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("{a,b}"),
                             Core.vx_new_string(":startpos"),
@@ -3569,7 +3615,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimbracketcurly,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -3579,7 +3625,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":parent"),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("<{a,b},{c d}>"),
                                 Core.vx_new_string(":startpos"),
@@ -3589,7 +3635,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimbracketangle,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":delimlist"),
                                     Textblock.c_delimlisttest1
                                   )
@@ -3597,7 +3643,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":parent"),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("<{a,b},{c d}>"),
                                     Core.vx_new_string(":startpos"),
@@ -3611,10 +3657,10 @@ public final class TextblockTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("a"),
                                     Core.vx_new_string(":startpos"),
@@ -3625,7 +3671,7 @@ public final class TextblockTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string(","),
                                     Core.vx_new_string(":startpos"),
@@ -3635,7 +3681,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimcomma,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -3653,14 +3699,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :startpos 7\n  :endpos 7\n  :parent\n   (textblock\n    :text \",\"\n    :startpos 7\n    :endpos 7\n    :delim\n     (copy delimcomma\n      :pos 0)\n    :parent\n     (textblock\n      :text \"{c d}>\"\n      :startpos 8\n      :endpos 13\n      :delim\n       (delim\n        :delimlist delimlisttest2)\n      :close\n       (copy delimclose\n        :starttext \">\")\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13\n        :delim\n         (copy delimbracketangle\n          :delimlist delimlisttest1)\n        :parent\n         (textblock\n          :text \"<{a,b},{c d}>\"\n          :startpos 1\n          :endpos 13)\n        :children\n         (textblocklist\n          (textblock\n           :text \"{a,b}\"\n           :startpos 2\n           :endpos 6\n           :delim\n            (copy delimbracketcurly\n             :pos 0)\n           :children\n            (textblocklist\n             (textblock\n              :text \"a\"\n              :startpos 3\n              :endpos 3)\n             (textblock\n              :text \",\"\n              :startpos 4\n              :endpos 4\n              :delim\n               (copy delimcomma\n                :pos 0))\n             (textblock\n              :text \"b\"\n              :startpos 5\n              :endpos 5))))))))\n (textblock-parse-one\n  (textblock\n   :text \",{c d}>\"\n   :startpos 7\n   :endpos 13\n   :delim\n    (delim\n     :delimlist delimlisttest2)\n   :close\n    (copy delimclose\n     :starttext \">\")\n   :parent\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13\n     :delim\n      (copy delimbracketangle\n       :delimlist delimlisttest1)\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13)\n     :children\n      (textblocklist\n       (textblock\n        :text \"{a,b}\"\n        :startpos 2\n        :endpos 6\n        :delim\n         (copy delimbracketcurly\n          :pos 0)\n        :children\n         (textblocklist\n          (textblock\n           :text \"a\"\n           :startpos 3\n           :endpos 3)\n          (textblock\n           :text \",\"\n           :startpos 4\n           :endpos 4\n           :delim\n            (copy delimcomma\n             :pos 0))\n          (textblock\n           :text \"b\"\n           :startpos 5\n           :endpos 5))))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":startpos"),
                   Core.vx_new_int(7),
                   Core.vx_new_string(":endpos"),
@@ -3668,7 +3715,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string(","),
                       Core.vx_new_string(":startpos"),
@@ -3678,7 +3725,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_copy(
                         Textblock.c_delimcomma,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":pos"),
                           Core.vx_new_int(0)
                         )
@@ -3686,7 +3733,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -3696,7 +3743,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_new(
                             Textblock.t_delim,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":delimlist"),
                               Textblock.c_delimlisttest2
                             )
@@ -3704,7 +3751,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":close"),
                           Core.f_copy(
                             Textblock.c_delimclose,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":starttext"),
                               Core.vx_new_string(">")
                             )
@@ -3712,7 +3759,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":parent"),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("<{a,b},{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -3722,7 +3769,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimbracketangle,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":delimlist"),
                                   Textblock.c_delimlisttest1
                                 )
@@ -3730,7 +3777,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":parent"),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("<{a,b},{c d}>"),
                                   Core.vx_new_string(":startpos"),
@@ -3742,10 +3789,10 @@ public final class TextblockTest {
                               Core.vx_new_string(":children"),
                               Core.f_new(
                                 Textblock.t_textblocklist,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("{a,b}"),
                                       Core.vx_new_string(":startpos"),
@@ -3755,7 +3802,7 @@ public final class TextblockTest {
                                       Core.vx_new_string(":delim"),
                                       Core.f_copy(
                                         Textblock.c_delimbracketcurly,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":pos"),
                                           Core.vx_new_int(0)
                                         )
@@ -3763,10 +3810,10 @@ public final class TextblockTest {
                                       Core.vx_new_string(":children"),
                                       Core.f_new(
                                         Textblock.t_textblocklist,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string("a"),
                                               Core.vx_new_string(":startpos"),
@@ -3777,7 +3824,7 @@ public final class TextblockTest {
                                           ),
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string(","),
                                               Core.vx_new_string(":startpos"),
@@ -3787,7 +3834,7 @@ public final class TextblockTest {
                                               Core.vx_new_string(":delim"),
                                               Core.f_copy(
                                                 Textblock.c_delimcomma,
-                                                Core.t_anylist.vx_new(
+                                                Core.vx_new(Core.t_anylist,
                                                   Core.vx_new_string(":pos"),
                                                   Core.vx_new_int(0)
                                                 )
@@ -3796,7 +3843,7 @@ public final class TextblockTest {
                                           ),
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string("b"),
                                               Core.vx_new_string(":startpos"),
@@ -3822,7 +3869,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string(",{c d}>"),
                     Core.vx_new_string(":startpos"),
@@ -3832,7 +3879,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_new(
                       Textblock.t_delim,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":delimlist"),
                         Textblock.c_delimlisttest2
                       )
@@ -3840,7 +3887,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":close"),
                     Core.f_copy(
                       Textblock.c_delimclose,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":starttext"),
                         Core.vx_new_string(">")
                       )
@@ -3848,7 +3895,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("<{a,b},{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -3858,7 +3905,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketangle,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest1
                           )
@@ -3866,7 +3913,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<{a,b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -3878,10 +3925,10 @@ public final class TextblockTest {
                         Core.vx_new_string(":children"),
                         Core.f_new(
                           Textblock.t_textblocklist,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("{a,b}"),
                                 Core.vx_new_string(":startpos"),
@@ -3891,7 +3938,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimbracketcurly,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -3899,10 +3946,10 @@ public final class TextblockTest {
                                 Core.vx_new_string(":children"),
                                 Core.f_new(
                                   Textblock.t_textblocklist,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("a"),
                                         Core.vx_new_string(":startpos"),
@@ -3913,7 +3960,7 @@ public final class TextblockTest {
                                     ),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string(","),
                                         Core.vx_new_string(":startpos"),
@@ -3923,7 +3970,7 @@ public final class TextblockTest {
                                         Core.vx_new_string(":delim"),
                                         Core.f_copy(
                                           Textblock.c_delimcomma,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":pos"),
                                             Core.vx_new_int(0)
                                           )
@@ -3932,7 +3979,7 @@ public final class TextblockTest {
                                     ),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("b"),
                                         Core.vx_new_string(":startpos"),
@@ -3954,14 +4001,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \",\"\n  :startpos 7\n  :endpos 7\n  :delim\n   (copy delimcomma\n    :pos 0)\n  :parent\n   (textblock\n    :text \"{c d}>\"\n    :startpos 8\n    :endpos 13\n    :delim\n     (delim\n      :delimlist delimlisttest2)\n    :close\n     (copy delimclose\n      :starttext \">\")\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13\n      :delim\n       (copy delimbracketangle\n        :delimlist delimlisttest1)\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13)\n      :children\n       (textblocklist\n        (textblock\n         :text \"{a,b}\"\n         :startpos 2\n         :endpos 6\n         :delim\n          (copy delimbracketcurly\n           :pos 0)\n         :children\n          (textblocklist\n           (textblock\n            :text \"a\"\n            :startpos 3\n            :endpos 3)\n           (textblock\n            :text \",\"\n            :startpos 4\n            :endpos 4\n            :delim\n             (copy delimcomma\n              :pos 0))\n           (textblock\n            :text \"b\"\n            :startpos 5\n            :endpos 5)))))))\n (textblock-parse-one\n  (textblock\n   :startpos 7\n   :endpos 7\n   :parent\n    (textblock\n     :text \",\"\n     :startpos 7\n     :endpos 7\n     :delim\n      (copy delimcomma\n       :pos 0)\n     :parent\n      (textblock\n       :text \"{c d}>\"\n       :startpos 8\n       :endpos 13\n       :delim\n        (delim\n         :delimlist delimlisttest2)\n       :close\n        (copy delimclose\n         :starttext \">\")\n       :parent\n        (textblock\n         :text \"<{a,b},{c d}>\"\n         :startpos 1\n         :endpos 13\n         :delim\n          (copy delimbracketangle\n           :delimlist delimlisttest1)\n         :parent\n          (textblock\n           :text \"<{a,b},{c d}>\"\n           :startpos 1\n           :endpos 13)\n         :children\n          (textblocklist\n           (textblock\n            :text \"{a,b}\"\n            :startpos 2\n            :endpos 6\n            :delim\n             (copy delimbracketcurly\n              :pos 0)\n            :children\n             (textblocklist\n              (textblock\n               :text \"a\"\n               :startpos 3\n               :endpos 3)\n              (textblock\n               :text \",\"\n               :startpos 4\n               :endpos 4\n               :delim\n                (copy delimcomma\n                 :pos 0))\n              (textblock\n               :text \"b\"\n               :startpos 5\n               :endpos 5))))))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string(","),
                   Core.vx_new_string(":startpos"),
@@ -3971,7 +4019,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":delim"),
                   Core.f_copy(
                     Textblock.c_delimcomma,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":pos"),
                       Core.vx_new_int(0)
                     )
@@ -3979,7 +4027,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("{c d}>"),
                       Core.vx_new_string(":startpos"),
@@ -3989,7 +4037,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_new(
                         Textblock.t_delim,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":delimlist"),
                           Textblock.c_delimlisttest2
                         )
@@ -3997,7 +4045,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":close"),
                       Core.f_copy(
                         Textblock.c_delimclose,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":starttext"),
                           Core.vx_new_string(">")
                         )
@@ -4005,7 +4053,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<{a,b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -4015,7 +4063,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketangle,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":delimlist"),
                               Textblock.c_delimlisttest1
                             )
@@ -4023,7 +4071,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":parent"),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("<{a,b},{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -4035,10 +4083,10 @@ public final class TextblockTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("{a,b}"),
                                   Core.vx_new_string(":startpos"),
@@ -4048,7 +4096,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimbracketcurly,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -4056,10 +4104,10 @@ public final class TextblockTest {
                                   Core.vx_new_string(":children"),
                                   Core.f_new(
                                     Textblock.t_textblocklist,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("a"),
                                           Core.vx_new_string(":startpos"),
@@ -4070,7 +4118,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string(","),
                                           Core.vx_new_string(":startpos"),
@@ -4080,7 +4128,7 @@ public final class TextblockTest {
                                           Core.vx_new_string(":delim"),
                                           Core.f_copy(
                                             Textblock.c_delimcomma,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":pos"),
                                               Core.vx_new_int(0)
                                             )
@@ -4089,7 +4137,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("b"),
                                           Core.vx_new_string(":startpos"),
@@ -4113,7 +4161,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":startpos"),
                     Core.vx_new_int(7),
                     Core.vx_new_string(":endpos"),
@@ -4121,7 +4169,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string(","),
                         Core.vx_new_string(":startpos"),
@@ -4131,7 +4179,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimcomma,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -4139,7 +4187,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -4149,7 +4197,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":delim"),
                             Core.f_new(
                               Textblock.t_delim,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":delimlist"),
                                 Textblock.c_delimlisttest2
                               )
@@ -4157,7 +4205,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":close"),
                             Core.f_copy(
                               Textblock.c_delimclose,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":starttext"),
                                 Core.vx_new_string(">")
                               )
@@ -4165,7 +4213,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":parent"),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("<{a,b},{c d}>"),
                                 Core.vx_new_string(":startpos"),
@@ -4175,7 +4223,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimbracketangle,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":delimlist"),
                                     Textblock.c_delimlisttest1
                                   )
@@ -4183,7 +4231,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":parent"),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("<{a,b},{c d}>"),
                                     Core.vx_new_string(":startpos"),
@@ -4195,10 +4243,10 @@ public final class TextblockTest {
                                 Core.vx_new_string(":children"),
                                 Core.f_new(
                                   Textblock.t_textblocklist,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("{a,b}"),
                                         Core.vx_new_string(":startpos"),
@@ -4208,7 +4256,7 @@ public final class TextblockTest {
                                         Core.vx_new_string(":delim"),
                                         Core.f_copy(
                                           Textblock.c_delimbracketcurly,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":pos"),
                                             Core.vx_new_int(0)
                                           )
@@ -4216,10 +4264,10 @@ public final class TextblockTest {
                                         Core.vx_new_string(":children"),
                                         Core.f_new(
                                           Textblock.t_textblocklist,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.f_new(
                                               Textblock.t_textblock,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":text"),
                                                 Core.vx_new_string("a"),
                                                 Core.vx_new_string(":startpos"),
@@ -4230,7 +4278,7 @@ public final class TextblockTest {
                                             ),
                                             Core.f_new(
                                               Textblock.t_textblock,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":text"),
                                                 Core.vx_new_string(","),
                                                 Core.vx_new_string(":startpos"),
@@ -4240,7 +4288,7 @@ public final class TextblockTest {
                                                 Core.vx_new_string(":delim"),
                                                 Core.f_copy(
                                                   Textblock.c_delimcomma,
-                                                  Core.t_anylist.vx_new(
+                                                  Core.vx_new(Core.t_anylist,
                                                     Core.vx_new_string(":pos"),
                                                     Core.vx_new_int(0)
                                                   )
@@ -4249,7 +4297,7 @@ public final class TextblockTest {
                                             ),
                                             Core.f_new(
                                               Textblock.t_textblock,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":text"),
                                                 Core.vx_new_string("b"),
                                                 Core.vx_new_string(":startpos"),
@@ -4275,14 +4323,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"{c d}>\"\n  :startpos 8\n  :endpos 13\n  :delim\n   (delim\n    :delimlist delimlisttest2)\n  :close\n   (copy delimclose\n    :starttext \">\")\n  :parent\n   (textblock\n    :text \"<{a,b},{c d}>\"\n    :startpos 1\n    :endpos 13\n    :delim\n     (copy delimbracketangle\n      :delimlist delimlisttest1)\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13)\n    :children\n     (textblocklist\n      (textblock\n       :text \"{a,b}\"\n       :startpos 2\n       :endpos 6\n       :delim\n        (copy delimbracketcurly\n         :pos 0)\n       :children\n        (textblocklist\n         (textblock\n          :text \"a\"\n          :startpos 3\n          :endpos 3)\n         (textblock\n          :text \",\"\n          :startpos 4\n          :endpos 4\n          :delim\n           (copy delimcomma\n            :pos 0))\n         (textblock\n          :text \"b\"\n          :startpos 5\n          :endpos 5)))\n      (textblock\n       :text \",\"\n       :startpos 7\n       :endpos 7\n       :delim\n        (copy delimcomma\n         :pos 0)))))\n (textblock-parse-one\n  (textblock\n   :text \",\"\n   :startpos 7\n   :endpos 7\n   :delim\n    (copy delimcomma\n     :pos 0)\n   :parent\n    (textblock\n     :text \"{c d}>\"\n     :startpos 8\n     :endpos 13\n     :delim\n      (delim\n       :delimlist delimlisttest2)\n       :close\n        (copy delimclose\n         :starttext \">\")\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13\n       :delim\n        (copy delimbracketangle\n         :delimlist delimlisttest1)\n       :parent\n        (textblock\n         :text \"<{a,b},{c d}>\"\n         :startpos 1\n         :endpos 13)\n       :children\n        (textblocklist\n         (textblock\n          :text \"{a,b}\"\n          :startpos 2\n          :endpos 6\n          :delim\n           (copy delimbracketcurly\n            :pos 0)\n          :children\n           (textblocklist\n            (textblock\n             :text \"a\"\n             :startpos 3\n             :endpos 3)\n            (textblock\n             :text \",\"\n             :startpos 4\n             :endpos 4\n             :delim\n              (copy delimcomma\n               :pos 0))\n            (textblock\n             :text \"b\"\n             :startpos 5\n             :endpos 5)))))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("{c d}>"),
                   Core.vx_new_string(":startpos"),
@@ -4292,7 +4341,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":delim"),
                   Core.f_new(
                     Textblock.t_delim,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":delimlist"),
                       Textblock.c_delimlisttest2
                     )
@@ -4300,7 +4349,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":close"),
                   Core.f_copy(
                     Textblock.c_delimclose,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":starttext"),
                       Core.vx_new_string(">")
                     )
@@ -4308,7 +4357,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("<{a,b},{c d}>"),
                       Core.vx_new_string(":startpos"),
@@ -4318,7 +4367,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_copy(
                         Textblock.c_delimbracketangle,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":delimlist"),
                           Textblock.c_delimlisttest1
                         )
@@ -4326,7 +4375,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<{a,b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -4338,10 +4387,10 @@ public final class TextblockTest {
                       Core.vx_new_string(":children"),
                       Core.f_new(
                         Textblock.t_textblocklist,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("{a,b}"),
                               Core.vx_new_string(":startpos"),
@@ -4351,7 +4400,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimbracketcurly,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":pos"),
                                   Core.vx_new_int(0)
                                 )
@@ -4359,10 +4408,10 @@ public final class TextblockTest {
                               Core.vx_new_string(":children"),
                               Core.f_new(
                                 Textblock.t_textblocklist,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("a"),
                                       Core.vx_new_string(":startpos"),
@@ -4373,7 +4422,7 @@ public final class TextblockTest {
                                   ),
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string(","),
                                       Core.vx_new_string(":startpos"),
@@ -4383,7 +4432,7 @@ public final class TextblockTest {
                                       Core.vx_new_string(":delim"),
                                       Core.f_copy(
                                         Textblock.c_delimcomma,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":pos"),
                                           Core.vx_new_int(0)
                                         )
@@ -4392,7 +4441,7 @@ public final class TextblockTest {
                                   ),
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("b"),
                                       Core.vx_new_string(":startpos"),
@@ -4407,7 +4456,7 @@ public final class TextblockTest {
                           ),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string(","),
                               Core.vx_new_string(":startpos"),
@@ -4417,7 +4466,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimcomma,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":pos"),
                                   Core.vx_new_int(0)
                                 )
@@ -4433,7 +4482,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string(","),
                     Core.vx_new_string(":startpos"),
@@ -4443,7 +4492,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_copy(
                       Textblock.c_delimcomma,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":pos"),
                         Core.vx_new_int(0)
                       )
@@ -4451,7 +4500,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -4461,7 +4510,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_new(
                           Textblock.t_delim,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest2
                           )
@@ -4469,7 +4518,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":close"),
                         Core.f_copy(
                           Textblock.c_delimclose,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":starttext"),
                             Core.vx_new_string(">")
                           )
@@ -4477,7 +4526,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<{a,b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -4487,7 +4536,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimbracketangle,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":delimlist"),
                                 Textblock.c_delimlisttest1
                               )
@@ -4495,7 +4544,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":parent"),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("<{a,b},{c d}>"),
                                 Core.vx_new_string(":startpos"),
@@ -4507,10 +4556,10 @@ public final class TextblockTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("{a,b}"),
                                     Core.vx_new_string(":startpos"),
@@ -4520,7 +4569,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimbracketcurly,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -4528,10 +4577,10 @@ public final class TextblockTest {
                                     Core.vx_new_string(":children"),
                                     Core.f_new(
                                       Textblock.t_textblocklist,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("a"),
                                             Core.vx_new_string(":startpos"),
@@ -4542,7 +4591,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string(","),
                                             Core.vx_new_string(":startpos"),
@@ -4552,7 +4601,7 @@ public final class TextblockTest {
                                             Core.vx_new_string(":delim"),
                                             Core.f_copy(
                                               Textblock.c_delimcomma,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":pos"),
                                                 Core.vx_new_int(0)
                                               )
@@ -4561,7 +4610,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("b"),
                                             Core.vx_new_string(":startpos"),
@@ -4585,14 +4634,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"c d}>\"\n  :startpos 9\n  :endpos 13\n  :delim\n   (delim\n    :delimlist delimlisttest3)\n  :close\n   (copy delimclose\n    :starttext \"}\")\n    :parent\n     (textblock\n      :text \"{c d}>\"\n      :startpos 8\n      :endpos 13\n      :delim\n       (copy delimbracketcurly\n        :delimlist delimlisttest2)\n      :close\n       (copy delimclose\n        :starttext \">\")\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13\n        :delim\n         (copy delimbracketangle\n          :delimlist delimlisttest1)\n        :parent\n         (textblock\n          :text \"<{a,b},{c d}>\"\n          :startpos 1\n          :endpos 13)\n        :children\n         (textblocklist\n          (textblock\n           :text \"{a,b}\"\n           :startpos 2\n           :endpos 6\n           :delim\n            (copy delimbracketcurly\n             :pos 0)\n           :children\n            (textblocklist\n             (textblock\n              :text \"a\"\n              :startpos 3\n              :endpos 3)\n             (textblock\n              :text \",\"\n              :startpos 4\n              :endpos 4\n              :delim\n               (copy delimcomma\n                :pos 0))\n             (textblock\n              :text \"b\"\n              :startpos 5\n              :endpos 5)))\n          (textblock\n           :text \",\"\n           :startpos 7\n           :endpos 7\n           :delim\n            (copy delimcomma\n             :pos 0))))))\n (textblock-parse-one\n  (textblock\n   :text \"{c d}>\"\n   :startpos 8\n   :endpos 13\n   :delim\n    (delim\n     :delimlist delimlisttest2)\n   :close\n    (copy delimclose\n     :starttext \">\")\n   :parent\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13\n     :delim\n      (copy delimbracketangle\n       :delimlist delimlisttest1)\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13)\n     :children\n      (textblocklist\n       (textblock\n        :text \"{a,b}\"\n        :startpos 2\n        :endpos 6\n        :delim\n         (copy delimbracketcurly\n          :pos 0)\n        :children\n         (textblocklist\n          (textblock\n           :text \"a\"\n           :startpos 3\n           :endpos 3)\n          (textblock\n           :text \",\"\n           :startpos 4\n           :endpos 4\n           :delim\n            (copy delimcomma\n             :pos 0))\n          (textblock\n           :text \"b\"\n           :startpos 5\n           :endpos 5)))\n       (textblock\n        :text \",\"\n        :startpos 7\n        :endpos 7\n        :delim\n         (copy delimcomma\n          :pos 0)))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("c d}>"),
                   Core.vx_new_string(":startpos"),
@@ -4602,7 +4652,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":delim"),
                   Core.f_new(
                     Textblock.t_delim,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":delimlist"),
                       Textblock.c_delimlisttest3
                     )
@@ -4610,7 +4660,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":close"),
                   Core.f_copy(
                     Textblock.c_delimclose,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":starttext"),
                       Core.vx_new_string("}")
                     )
@@ -4618,7 +4668,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("{c d}>"),
                       Core.vx_new_string(":startpos"),
@@ -4628,7 +4678,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_copy(
                         Textblock.c_delimbracketcurly,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":delimlist"),
                           Textblock.c_delimlisttest2
                         )
@@ -4636,7 +4686,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":close"),
                       Core.f_copy(
                         Textblock.c_delimclose,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":starttext"),
                           Core.vx_new_string(">")
                         )
@@ -4644,7 +4694,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<{a,b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -4654,7 +4704,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketangle,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":delimlist"),
                               Textblock.c_delimlisttest1
                             )
@@ -4662,7 +4712,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":parent"),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("<{a,b},{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -4674,10 +4724,10 @@ public final class TextblockTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("{a,b}"),
                                   Core.vx_new_string(":startpos"),
@@ -4687,7 +4737,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimbracketcurly,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -4695,10 +4745,10 @@ public final class TextblockTest {
                                   Core.vx_new_string(":children"),
                                   Core.f_new(
                                     Textblock.t_textblocklist,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("a"),
                                           Core.vx_new_string(":startpos"),
@@ -4709,7 +4759,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string(","),
                                           Core.vx_new_string(":startpos"),
@@ -4719,7 +4769,7 @@ public final class TextblockTest {
                                           Core.vx_new_string(":delim"),
                                           Core.f_copy(
                                             Textblock.c_delimcomma,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":pos"),
                                               Core.vx_new_int(0)
                                             )
@@ -4728,7 +4778,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("b"),
                                           Core.vx_new_string(":startpos"),
@@ -4743,7 +4793,7 @@ public final class TextblockTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string(","),
                                   Core.vx_new_string(":startpos"),
@@ -4753,7 +4803,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimcomma,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -4771,7 +4821,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("{c d}>"),
                     Core.vx_new_string(":startpos"),
@@ -4781,7 +4831,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_new(
                       Textblock.t_delim,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":delimlist"),
                         Textblock.c_delimlisttest2
                       )
@@ -4789,7 +4839,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":close"),
                     Core.f_copy(
                       Textblock.c_delimclose,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":starttext"),
                         Core.vx_new_string(">")
                       )
@@ -4797,7 +4847,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("<{a,b},{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -4807,7 +4857,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketangle,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest1
                           )
@@ -4815,7 +4865,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<{a,b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -4827,10 +4877,10 @@ public final class TextblockTest {
                         Core.vx_new_string(":children"),
                         Core.f_new(
                           Textblock.t_textblocklist,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("{a,b}"),
                                 Core.vx_new_string(":startpos"),
@@ -4840,7 +4890,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimbracketcurly,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -4848,10 +4898,10 @@ public final class TextblockTest {
                                 Core.vx_new_string(":children"),
                                 Core.f_new(
                                   Textblock.t_textblocklist,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("a"),
                                         Core.vx_new_string(":startpos"),
@@ -4862,7 +4912,7 @@ public final class TextblockTest {
                                     ),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string(","),
                                         Core.vx_new_string(":startpos"),
@@ -4872,7 +4922,7 @@ public final class TextblockTest {
                                         Core.vx_new_string(":delim"),
                                         Core.f_copy(
                                           Textblock.c_delimcomma,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":pos"),
                                             Core.vx_new_int(0)
                                           )
@@ -4881,7 +4931,7 @@ public final class TextblockTest {
                                     ),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("b"),
                                         Core.vx_new_string(":startpos"),
@@ -4896,7 +4946,7 @@ public final class TextblockTest {
                             ),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string(","),
                                 Core.vx_new_string(":startpos"),
@@ -4906,7 +4956,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimcomma,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -4922,14 +4972,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"c\"\n  :startpos 9\n  :endpos 9\n  :parent\n   (textblock\n    :text \" \"\n    :startpos 10\n    :endpos 10\n    :delim\n     (copy delimwhitespace\n      :pos 0)\n    :parent\n     (textblock\n      :text \"d}>\"\n      :startpos 11\n      :endpos 13\n      :delim\n       (delim\n        :delimlist delimlisttest3)\n      :close\n       (copy delimclose\n        :starttext \"}\")\n      :parent\n       (textblock\n        :text \"{c d}>\"\n        :startpos 8\n        :endpos 13\n        :delim\n         (copy delimbracketcurly\n          :delimlist delimlisttest2)\n        :close\n         (copy delimclose\n          :starttext \">\")\n        :parent\n         (textblock\n          :text \"<{a,b},{c d}>\"\n          :startpos 1\n          :endpos 13\n          :delim\n           (copy delimbracketangle\n            :delimlist delimlisttest1)\n          :parent\n           (textblock\n            :text \"<{a,b},{c d}>\"\n            :startpos 1\n            :endpos 13)\n          :children\n           (textblocklist\n            (textblock\n             :text \"{a,b}\"\n             :startpos 2\n             :endpos 6\n             :delim\n              (copy delimbracketcurly\n               :pos 0)\n             :children\n              (textblocklist\n               (textblock\n                :text \"a\"\n                :startpos 3\n                :endpos 3)\n               (textblock\n                :text \",\"\n                :startpos 4\n                :endpos 4\n                :delim\n                 (copy delimcomma\n                  :pos 0))\n               (textblock\n                :text \"b\"\n                :startpos 5\n                :endpos 5)))\n            (textblock\n             :text \",\"\n             :startpos 7\n             :endpos 7\n             :delim\n              (copy delimcomma\n               :pos 0))))))))\n (textblock-parse-one\n  (textblock\n   :text \"c d}>\"\n   :startpos 9\n   :endpos 13\n   :delim\n    (delim\n     :delimlist delimlisttest3)\n     :close\n      (copy delimclose\n       :starttext \"}\")\n     :parent\n      (textblock\n       :text \"{c d}>\"\n       :startpos 8\n       :endpos 13\n       :delim\n        (copy delimbracketcurly\n         :delimlist delimlisttest2)\n       :close\n        (copy delimclose\n         :starttext \">\")\n       :parent\n        (textblock\n         :text \"<{a,b},{c d}>\"\n         :startpos 1\n         :endpos 13\n         :delim\n          (copy delimbracketangle\n           :delimlist delimlisttest1)\n         :parent\n          (textblock\n           :text \"<{a,b},{c d}>\"\n           :startpos 1\n           :endpos 13)\n         :children\n          (textblocklist\n           (textblock\n            :text \"{a,b}\"\n            :startpos 2\n            :endpos 6\n            :delim\n             (copy delimbracketcurly\n              :pos 0)\n            :children\n             (textblocklist\n              (textblock\n               :text \"a\"\n               :startpos 3\n               :endpos 3)\n              (textblock\n               :text \",\"\n               :startpos 4\n               :endpos 4\n               :delim\n                (copy delimcomma\n                 :pos 0))\n              (textblock\n               :text \"b\"\n               :startpos 5\n               :endpos 5)))\n           (textblock\n            :text \",\"\n            :startpos 7\n            :endpos 7\n            :delim\n             (copy delimcomma\n              :pos 0))))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("c"),
                   Core.vx_new_string(":startpos"),
@@ -4939,7 +4990,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string(" "),
                       Core.vx_new_string(":startpos"),
@@ -4949,7 +5000,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_copy(
                         Textblock.c_delimwhitespace,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":pos"),
                           Core.vx_new_int(0)
                         )
@@ -4957,7 +5008,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("d}>"),
                           Core.vx_new_string(":startpos"),
@@ -4967,7 +5018,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_new(
                             Textblock.t_delim,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":delimlist"),
                               Textblock.c_delimlisttest3
                             )
@@ -4975,7 +5026,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":close"),
                           Core.f_copy(
                             Textblock.c_delimclose,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":starttext"),
                               Core.vx_new_string("}")
                             )
@@ -4983,7 +5034,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":parent"),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -4993,7 +5044,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimbracketcurly,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":delimlist"),
                                   Textblock.c_delimlisttest2
                                 )
@@ -5001,7 +5052,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":close"),
                               Core.f_copy(
                                 Textblock.c_delimclose,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":starttext"),
                                   Core.vx_new_string(">")
                                 )
@@ -5009,7 +5060,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":parent"),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("<{a,b},{c d}>"),
                                   Core.vx_new_string(":startpos"),
@@ -5019,7 +5070,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimbracketangle,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":delimlist"),
                                       Textblock.c_delimlisttest1
                                     )
@@ -5027,7 +5078,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":parent"),
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("<{a,b},{c d}>"),
                                       Core.vx_new_string(":startpos"),
@@ -5039,10 +5090,10 @@ public final class TextblockTest {
                                   Core.vx_new_string(":children"),
                                   Core.f_new(
                                     Textblock.t_textblocklist,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("{a,b}"),
                                           Core.vx_new_string(":startpos"),
@@ -5052,7 +5103,7 @@ public final class TextblockTest {
                                           Core.vx_new_string(":delim"),
                                           Core.f_copy(
                                             Textblock.c_delimbracketcurly,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":pos"),
                                               Core.vx_new_int(0)
                                             )
@@ -5060,10 +5111,10 @@ public final class TextblockTest {
                                           Core.vx_new_string(":children"),
                                           Core.f_new(
                                             Textblock.t_textblocklist,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.f_new(
                                                 Textblock.t_textblock,
-                                                Core.t_anylist.vx_new(
+                                                Core.vx_new(Core.t_anylist,
                                                   Core.vx_new_string(":text"),
                                                   Core.vx_new_string("a"),
                                                   Core.vx_new_string(":startpos"),
@@ -5074,7 +5125,7 @@ public final class TextblockTest {
                                               ),
                                               Core.f_new(
                                                 Textblock.t_textblock,
-                                                Core.t_anylist.vx_new(
+                                                Core.vx_new(Core.t_anylist,
                                                   Core.vx_new_string(":text"),
                                                   Core.vx_new_string(","),
                                                   Core.vx_new_string(":startpos"),
@@ -5084,7 +5135,7 @@ public final class TextblockTest {
                                                   Core.vx_new_string(":delim"),
                                                   Core.f_copy(
                                                     Textblock.c_delimcomma,
-                                                    Core.t_anylist.vx_new(
+                                                    Core.vx_new(Core.t_anylist,
                                                       Core.vx_new_string(":pos"),
                                                       Core.vx_new_int(0)
                                                     )
@@ -5093,7 +5144,7 @@ public final class TextblockTest {
                                               ),
                                               Core.f_new(
                                                 Textblock.t_textblock,
-                                                Core.t_anylist.vx_new(
+                                                Core.vx_new(Core.t_anylist,
                                                   Core.vx_new_string(":text"),
                                                   Core.vx_new_string("b"),
                                                   Core.vx_new_string(":startpos"),
@@ -5108,7 +5159,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string(","),
                                           Core.vx_new_string(":startpos"),
@@ -5118,7 +5169,7 @@ public final class TextblockTest {
                                           Core.vx_new_string(":delim"),
                                           Core.f_copy(
                                             Textblock.c_delimcomma,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":pos"),
                                               Core.vx_new_int(0)
                                             )
@@ -5140,7 +5191,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("c d}>"),
                     Core.vx_new_string(":startpos"),
@@ -5150,7 +5201,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_new(
                       Textblock.t_delim,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":delimlist"),
                         Textblock.c_delimlisttest3
                       )
@@ -5158,7 +5209,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":close"),
                     Core.f_copy(
                       Textblock.c_delimclose,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":starttext"),
                         Core.vx_new_string("}")
                       )
@@ -5166,7 +5217,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -5176,7 +5227,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketcurly,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest2
                           )
@@ -5184,7 +5235,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":close"),
                         Core.f_copy(
                           Textblock.c_delimclose,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":starttext"),
                             Core.vx_new_string(">")
                           )
@@ -5192,7 +5243,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<{a,b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -5202,7 +5253,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimbracketangle,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":delimlist"),
                                 Textblock.c_delimlisttest1
                               )
@@ -5210,7 +5261,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":parent"),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("<{a,b},{c d}>"),
                                 Core.vx_new_string(":startpos"),
@@ -5222,10 +5273,10 @@ public final class TextblockTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("{a,b}"),
                                     Core.vx_new_string(":startpos"),
@@ -5235,7 +5286,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimbracketcurly,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -5243,10 +5294,10 @@ public final class TextblockTest {
                                     Core.vx_new_string(":children"),
                                     Core.f_new(
                                       Textblock.t_textblocklist,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("a"),
                                             Core.vx_new_string(":startpos"),
@@ -5257,7 +5308,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string(","),
                                             Core.vx_new_string(":startpos"),
@@ -5267,7 +5318,7 @@ public final class TextblockTest {
                                             Core.vx_new_string(":delim"),
                                             Core.f_copy(
                                               Textblock.c_delimcomma,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":pos"),
                                                 Core.vx_new_int(0)
                                               )
@@ -5276,7 +5327,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("b"),
                                             Core.vx_new_string(":startpos"),
@@ -5291,7 +5342,7 @@ public final class TextblockTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string(","),
                                     Core.vx_new_string(":startpos"),
@@ -5301,7 +5352,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimcomma,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -5319,14 +5370,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \" \"\n  :startpos 10\n  :endpos 10\n  :delim\n   (copy delimwhitespace\n    :pos 0)\n  :parent\n   (textblock\n    :text \"d}>\"\n    :startpos 11\n    :endpos 13\n    :delim\n     (delim\n      :delimlist delimlisttest3)\n    :close\n     (copy delimclose\n      :starttext \"}\")\n    :parent\n     (textblock\n      :text \"{c d}>\"\n      :startpos 8\n      :endpos 13\n      :delim\n       (copy delimbracketcurly\n       :delimlist delimlisttest2)\n      :close\n       (copy delimclose\n        :starttext \">\")\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13\n        :delim\n         (copy delimbracketangle\n          :delimlist delimlisttest1)\n        :parent\n         (textblock\n          :text \"<{a,b},{c d}>\"\n          :startpos 1\n          :endpos 13)\n          :children\n           (textblocklist\n            (textblock\n             :text \"{a,b}\"\n             :startpos 2\n             :endpos 6\n             :delim\n              (copy delimbracketcurly\n               :pos 0)\n             :children\n              (textblocklist\n               (textblock\n                :text \"a\"\n                :startpos 3\n                :endpos 3)\n               (textblock\n                :text \",\"\n                :startpos 4\n                :endpos 4\n                :delim\n                 (copy delimcomma\n                  :pos 0))\n               (textblock\n                :text \"b\"\n                :startpos 5\n                :endpos 5)))\n               (textblock\n                :text \",\"\n                :startpos 7\n                :endpos 7\n                :delim\n                 (copy delimcomma\n                  :pos 0))))\n      :children\n       (textblocklist\n        (textblock\n         :text \"c\"\n         :startpos 9\n         :endpos 9)))))\n (textblock-parse-one\n  (textblock\n   :text \"c\"\n   :startpos 9\n   :endpos 9\n   :parent\n    (textblock\n     :text \" \"\n     :startpos 10\n     :endpos 10\n     :delim\n      (copy delimwhitespace\n       :pos 0)\n     :parent\n      (textblock\n       :text \"d}>\"\n       :startpos 11\n       :endpos 13\n       :delim\n        (delim\n         :delimlist delimlisttest3)\n       :close\n        (copy delimclose\n         :starttext \"}\")\n       :parent\n        (textblock\n         :text \"{c d}>\"\n         :startpos 8\n         :endpos 13\n         :delim\n          (copy delimbracketcurly\n           :delimlist delimlisttest2)\n         :close\n          (copy delimclose\n           :starttext \">\")\n         :parent\n          (textblock\n           :text \"<{a,b},{c d}>\"\n           :startpos 1\n           :endpos 13\n           :delim\n            (copy delimbracketangle\n             :delimlist delimlisttest1)\n           :parent\n            (textblock\n             :text \"<{a,b},{c d}>\"\n             :startpos 1\n             :endpos 13)\n           :children\n            (textblocklist\n             (textblock\n              :text \"{a,b}\"\n              :startpos 2\n              :endpos 6\n              :delim\n               (copy delimbracketcurly\n                :pos 0)\n              :children\n               (textblocklist\n                (textblock\n                 :text \"a\"\n                 :startpos 3\n                 :endpos 3)\n                (textblock\n                 :text \",\"\n                 :startpos 4\n                 :endpos 4\n                 :delim\n                  (copy delimcomma\n                   :pos 0))\n                (textblock\n                 :text \"b\"\n                 :startpos 5\n                 :endpos 5)))\n             (textblock\n              :text \",\"\n              :startpos 7\n              :endpos 7\n              :delim\n               (copy delimcomma\n                :pos 0))))))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string(" "),
                   Core.vx_new_string(":startpos"),
@@ -5336,7 +5388,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":delim"),
                   Core.f_copy(
                     Textblock.c_delimwhitespace,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":pos"),
                       Core.vx_new_int(0)
                     )
@@ -5344,7 +5396,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("d}>"),
                       Core.vx_new_string(":startpos"),
@@ -5354,7 +5406,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_new(
                         Textblock.t_delim,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":delimlist"),
                           Textblock.c_delimlisttest3
                         )
@@ -5362,7 +5414,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":close"),
                       Core.f_copy(
                         Textblock.c_delimclose,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":starttext"),
                           Core.vx_new_string("}")
                         )
@@ -5370,7 +5422,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -5380,7 +5432,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketcurly,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":delimlist"),
                               Textblock.c_delimlisttest2
                             )
@@ -5388,7 +5440,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":close"),
                           Core.f_copy(
                             Textblock.c_delimclose,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":starttext"),
                               Core.vx_new_string(">")
                             )
@@ -5396,7 +5448,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":parent"),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("<{a,b},{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -5406,7 +5458,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimbracketangle,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":delimlist"),
                                   Textblock.c_delimlisttest1
                                 )
@@ -5414,7 +5466,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":parent"),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("<{a,b},{c d}>"),
                                   Core.vx_new_string(":startpos"),
@@ -5426,10 +5478,10 @@ public final class TextblockTest {
                               Core.vx_new_string(":children"),
                               Core.f_new(
                                 Textblock.t_textblocklist,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("{a,b}"),
                                       Core.vx_new_string(":startpos"),
@@ -5439,7 +5491,7 @@ public final class TextblockTest {
                                       Core.vx_new_string(":delim"),
                                       Core.f_copy(
                                         Textblock.c_delimbracketcurly,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":pos"),
                                           Core.vx_new_int(0)
                                         )
@@ -5447,10 +5499,10 @@ public final class TextblockTest {
                                       Core.vx_new_string(":children"),
                                       Core.f_new(
                                         Textblock.t_textblocklist,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string("a"),
                                               Core.vx_new_string(":startpos"),
@@ -5461,7 +5513,7 @@ public final class TextblockTest {
                                           ),
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string(","),
                                               Core.vx_new_string(":startpos"),
@@ -5471,7 +5523,7 @@ public final class TextblockTest {
                                               Core.vx_new_string(":delim"),
                                               Core.f_copy(
                                                 Textblock.c_delimcomma,
-                                                Core.t_anylist.vx_new(
+                                                Core.vx_new(Core.t_anylist,
                                                   Core.vx_new_string(":pos"),
                                                   Core.vx_new_int(0)
                                                 )
@@ -5480,7 +5532,7 @@ public final class TextblockTest {
                                           ),
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string("b"),
                                               Core.vx_new_string(":startpos"),
@@ -5495,7 +5547,7 @@ public final class TextblockTest {
                                   ),
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string(","),
                                       Core.vx_new_string(":startpos"),
@@ -5505,7 +5557,7 @@ public final class TextblockTest {
                                       Core.vx_new_string(":delim"),
                                       Core.f_copy(
                                         Textblock.c_delimcomma,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":pos"),
                                           Core.vx_new_int(0)
                                         )
@@ -5519,10 +5571,10 @@ public final class TextblockTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("c"),
                                   Core.vx_new_string(":startpos"),
@@ -5542,7 +5594,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("c"),
                     Core.vx_new_string(":startpos"),
@@ -5552,7 +5604,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string(" "),
                         Core.vx_new_string(":startpos"),
@@ -5562,7 +5614,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimwhitespace,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -5570,7 +5622,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("d}>"),
                             Core.vx_new_string(":startpos"),
@@ -5580,7 +5632,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":delim"),
                             Core.f_new(
                               Textblock.t_delim,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":delimlist"),
                                 Textblock.c_delimlisttest3
                               )
@@ -5588,7 +5640,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":close"),
                             Core.f_copy(
                               Textblock.c_delimclose,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":starttext"),
                                 Core.vx_new_string("}")
                               )
@@ -5596,7 +5648,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":parent"),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("{c d}>"),
                                 Core.vx_new_string(":startpos"),
@@ -5606,7 +5658,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimbracketcurly,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":delimlist"),
                                     Textblock.c_delimlisttest2
                                   )
@@ -5614,7 +5666,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":close"),
                                 Core.f_copy(
                                   Textblock.c_delimclose,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":starttext"),
                                     Core.vx_new_string(">")
                                   )
@@ -5622,7 +5674,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":parent"),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("<{a,b},{c d}>"),
                                     Core.vx_new_string(":startpos"),
@@ -5632,7 +5684,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimbracketangle,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":delimlist"),
                                         Textblock.c_delimlisttest1
                                       )
@@ -5640,7 +5692,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":parent"),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("<{a,b},{c d}>"),
                                         Core.vx_new_string(":startpos"),
@@ -5652,10 +5704,10 @@ public final class TextblockTest {
                                     Core.vx_new_string(":children"),
                                     Core.f_new(
                                       Textblock.t_textblocklist,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("{a,b}"),
                                             Core.vx_new_string(":startpos"),
@@ -5665,7 +5717,7 @@ public final class TextblockTest {
                                             Core.vx_new_string(":delim"),
                                             Core.f_copy(
                                               Textblock.c_delimbracketcurly,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":pos"),
                                                 Core.vx_new_int(0)
                                               )
@@ -5673,10 +5725,10 @@ public final class TextblockTest {
                                             Core.vx_new_string(":children"),
                                             Core.f_new(
                                               Textblock.t_textblocklist,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.f_new(
                                                   Textblock.t_textblock,
-                                                  Core.t_anylist.vx_new(
+                                                  Core.vx_new(Core.t_anylist,
                                                     Core.vx_new_string(":text"),
                                                     Core.vx_new_string("a"),
                                                     Core.vx_new_string(":startpos"),
@@ -5687,7 +5739,7 @@ public final class TextblockTest {
                                                 ),
                                                 Core.f_new(
                                                   Textblock.t_textblock,
-                                                  Core.t_anylist.vx_new(
+                                                  Core.vx_new(Core.t_anylist,
                                                     Core.vx_new_string(":text"),
                                                     Core.vx_new_string(","),
                                                     Core.vx_new_string(":startpos"),
@@ -5697,7 +5749,7 @@ public final class TextblockTest {
                                                     Core.vx_new_string(":delim"),
                                                     Core.f_copy(
                                                       Textblock.c_delimcomma,
-                                                      Core.t_anylist.vx_new(
+                                                      Core.vx_new(Core.t_anylist,
                                                         Core.vx_new_string(":pos"),
                                                         Core.vx_new_int(0)
                                                       )
@@ -5706,7 +5758,7 @@ public final class TextblockTest {
                                                 ),
                                                 Core.f_new(
                                                   Textblock.t_textblock,
-                                                  Core.t_anylist.vx_new(
+                                                  Core.vx_new(Core.t_anylist,
                                                     Core.vx_new_string(":text"),
                                                     Core.vx_new_string("b"),
                                                     Core.vx_new_string(":startpos"),
@@ -5721,7 +5773,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string(","),
                                             Core.vx_new_string(":startpos"),
@@ -5731,7 +5783,7 @@ public final class TextblockTest {
                                             Core.vx_new_string(":delim"),
                                             Core.f_copy(
                                               Textblock.c_delimcomma,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":pos"),
                                                 Core.vx_new_int(0)
                                               )
@@ -5753,14 +5805,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"d}>\"\n  :startpos 11\n  :endpos 13\n  :delim\n   (delim\n    :delimlist delimlisttest3)\n  :close\n   (copy delimclose\n    :starttext \"}\")\n  :parent\n   (textblock\n    :text \"{c d}>\"\n    :startpos 8\n    :endpos 13\n    :delim\n     (copy delimbracketcurly\n      :delimlist delimlisttest2)\n    :close\n     (copy delimclose\n      :starttext \">\")\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13\n      :delim\n       (delim\n        :name \"delimbracketangle\"\n        :starttext \"<\"\n        :endtext \">\"\n        :delimlist delimlisttest1)\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13)\n      :children\n       (textblocklist\n        (textblock\n         :text \"{a,b}\"\n         :startpos 2\n         :endpos 6\n         :delim\n          (copy delimbracketcurly\n           :pos 0)\n         :children\n          (textblocklist\n           (textblock\n            :text \"a\"\n            :startpos 3\n            :endpos 3)\n             (textblock\n              :text \",\"\n              :startpos 4\n              :endpos 4\n              :delim\n               (copy delimcomma\n                :pos 0))\n           (textblock\n            :text \"b\"\n            :startpos 5\n            :endpos 5)))\n        (textblock\n         :text \",\"\n         :startpos 7\n         :endpos 7\n         :delim\n          (copy delimcomma\n           :pos 0))))\n    :children\n     (textblocklist\n      (textblock\n       :text \"c\"\n       :startpos 9\n       :endpos 9)\n      (textblock\n       :text \" \"\n       :startpos 10\n       :endpos 10\n       :delim\n        (copy delimwhitespace\n         :pos 0)))))\n (textblock-parse-one\n  (textblock\n   :text \" \"\n   :startpos 10\n   :endpos 10\n   :delim\n    (copy delimwhitespace\n     :pos 0)\n   :parent\n    (textblock\n     :text \"d}>\"\n     :startpos 11\n     :endpos 13\n     :delim\n      (delim\n       :delimlist delimlisttest3)\n     :close\n      (copy delimclose\n       :starttext \"}\")\n     :parent\n      (textblock\n       :text \"{c d}>\"\n       :startpos 8\n       :endpos 13\n       :delim\n        (copy delimbracketcurly\n        :delimlist delimlisttest2)\n       :close\n        (copy delimclose\n         :starttext \">\")\n       :parent\n        (textblock\n         :text \"<{a,b},{c d}>\"\n         :startpos 1\n         :endpos 13\n         :delim\n          (copy delimbracketangle\n           :delimlist delimlisttest1)\n         :parent\n          (textblock\n           :text \"<{a,b},{c d}>\"\n           :startpos 1\n           :endpos 13)\n         :children\n          (textblocklist\n           (textblock\n            :text \"{a,b}\"\n            :startpos 2\n            :endpos 6\n            :delim\n             (copy delimbracketcurly\n              :pos 0)\n            :children\n             (textblocklist\n              (textblock\n               :text \"a\"\n               :startpos 3\n               :endpos 3)\n              (textblock\n               :text \",\"\n               :startpos 4\n               :endpos 4\n               :delim\n                (copy delimcomma\n                 :pos 0))\n              (textblock\n               :text \"b\"\n               :startpos 5\n               :endpos 5)))\n              (textblock\n               :text \",\"\n               :startpos 7\n               :endpos 7\n               :delim\n                (copy delimcomma\n                 :pos 0))))\n       :children\n        (textblocklist\n         (textblock\n          :text \"c\"\n          :startpos 9\n          :endpos 9)))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("d}>"),
                   Core.vx_new_string(":startpos"),
@@ -5770,7 +5823,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":delim"),
                   Core.f_new(
                     Textblock.t_delim,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":delimlist"),
                       Textblock.c_delimlisttest3
                     )
@@ -5778,7 +5831,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":close"),
                   Core.f_copy(
                     Textblock.c_delimclose,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":starttext"),
                       Core.vx_new_string("}")
                     )
@@ -5786,7 +5839,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("{c d}>"),
                       Core.vx_new_string(":startpos"),
@@ -5796,7 +5849,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_copy(
                         Textblock.c_delimbracketcurly,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":delimlist"),
                           Textblock.c_delimlisttest2
                         )
@@ -5804,7 +5857,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":close"),
                       Core.f_copy(
                         Textblock.c_delimclose,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":starttext"),
                           Core.vx_new_string(">")
                         )
@@ -5812,7 +5865,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<{a,b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -5822,7 +5875,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_new(
                             Textblock.t_delim,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":name"),
                               Core.vx_new_string("delimbracketangle"),
                               Core.vx_new_string(":starttext"),
@@ -5836,7 +5889,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":parent"),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("<{a,b},{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -5848,10 +5901,10 @@ public final class TextblockTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("{a,b}"),
                                   Core.vx_new_string(":startpos"),
@@ -5861,7 +5914,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimbracketcurly,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -5869,10 +5922,10 @@ public final class TextblockTest {
                                   Core.vx_new_string(":children"),
                                   Core.f_new(
                                     Textblock.t_textblocklist,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("a"),
                                           Core.vx_new_string(":startpos"),
@@ -5883,7 +5936,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string(","),
                                           Core.vx_new_string(":startpos"),
@@ -5893,7 +5946,7 @@ public final class TextblockTest {
                                           Core.vx_new_string(":delim"),
                                           Core.f_copy(
                                             Textblock.c_delimcomma,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":pos"),
                                               Core.vx_new_int(0)
                                             )
@@ -5902,7 +5955,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("b"),
                                           Core.vx_new_string(":startpos"),
@@ -5917,7 +5970,7 @@ public final class TextblockTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string(","),
                                   Core.vx_new_string(":startpos"),
@@ -5927,7 +5980,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimcomma,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -5941,10 +5994,10 @@ public final class TextblockTest {
                       Core.vx_new_string(":children"),
                       Core.f_new(
                         Textblock.t_textblocklist,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("c"),
                               Core.vx_new_string(":startpos"),
@@ -5955,7 +6008,7 @@ public final class TextblockTest {
                           ),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string(" "),
                               Core.vx_new_string(":startpos"),
@@ -5965,7 +6018,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimwhitespace,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":pos"),
                                   Core.vx_new_int(0)
                                 )
@@ -5981,7 +6034,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string(" "),
                     Core.vx_new_string(":startpos"),
@@ -5991,7 +6044,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_copy(
                       Textblock.c_delimwhitespace,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":pos"),
                         Core.vx_new_int(0)
                       )
@@ -5999,7 +6052,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("d}>"),
                         Core.vx_new_string(":startpos"),
@@ -6009,7 +6062,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_new(
                           Textblock.t_delim,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest3
                           )
@@ -6017,7 +6070,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":close"),
                         Core.f_copy(
                           Textblock.c_delimclose,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":starttext"),
                             Core.vx_new_string("}")
                           )
@@ -6025,7 +6078,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -6035,7 +6088,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimbracketcurly,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":delimlist"),
                                 Textblock.c_delimlisttest2
                               )
@@ -6043,7 +6096,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":close"),
                             Core.f_copy(
                               Textblock.c_delimclose,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":starttext"),
                                 Core.vx_new_string(">")
                               )
@@ -6051,7 +6104,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":parent"),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("<{a,b},{c d}>"),
                                 Core.vx_new_string(":startpos"),
@@ -6061,7 +6114,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimbracketangle,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":delimlist"),
                                     Textblock.c_delimlisttest1
                                   )
@@ -6069,7 +6122,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":parent"),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("<{a,b},{c d}>"),
                                     Core.vx_new_string(":startpos"),
@@ -6081,10 +6134,10 @@ public final class TextblockTest {
                                 Core.vx_new_string(":children"),
                                 Core.f_new(
                                   Textblock.t_textblocklist,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("{a,b}"),
                                         Core.vx_new_string(":startpos"),
@@ -6094,7 +6147,7 @@ public final class TextblockTest {
                                         Core.vx_new_string(":delim"),
                                         Core.f_copy(
                                           Textblock.c_delimbracketcurly,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":pos"),
                                             Core.vx_new_int(0)
                                           )
@@ -6102,10 +6155,10 @@ public final class TextblockTest {
                                         Core.vx_new_string(":children"),
                                         Core.f_new(
                                           Textblock.t_textblocklist,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.f_new(
                                               Textblock.t_textblock,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":text"),
                                                 Core.vx_new_string("a"),
                                                 Core.vx_new_string(":startpos"),
@@ -6116,7 +6169,7 @@ public final class TextblockTest {
                                             ),
                                             Core.f_new(
                                               Textblock.t_textblock,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":text"),
                                                 Core.vx_new_string(","),
                                                 Core.vx_new_string(":startpos"),
@@ -6126,7 +6179,7 @@ public final class TextblockTest {
                                                 Core.vx_new_string(":delim"),
                                                 Core.f_copy(
                                                   Textblock.c_delimcomma,
-                                                  Core.t_anylist.vx_new(
+                                                  Core.vx_new(Core.t_anylist,
                                                     Core.vx_new_string(":pos"),
                                                     Core.vx_new_int(0)
                                                   )
@@ -6135,7 +6188,7 @@ public final class TextblockTest {
                                             ),
                                             Core.f_new(
                                               Textblock.t_textblock,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":text"),
                                                 Core.vx_new_string("b"),
                                                 Core.vx_new_string(":startpos"),
@@ -6150,7 +6203,7 @@ public final class TextblockTest {
                                     ),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string(","),
                                         Core.vx_new_string(":startpos"),
@@ -6160,7 +6213,7 @@ public final class TextblockTest {
                                         Core.vx_new_string(":delim"),
                                         Core.f_copy(
                                           Textblock.c_delimcomma,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":pos"),
                                             Core.vx_new_int(0)
                                           )
@@ -6174,10 +6227,10 @@ public final class TextblockTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("c"),
                                     Core.vx_new_string(":startpos"),
@@ -6197,14 +6250,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"d\"\n  :startpos 11\n  :endpos 11\n  :parent\n   (textblock\n    :text \">\"\n    :startpos 13\n    :endpos 13\n    :delim\n     (delim\n      :delimlist delimlisttest2)\n    :close\n     (copy delimclose\n      :starttext \">\")\n    :parent\n     (textblock\n      :text \"{c d}\"\n      :startpos 8\n      :endpos 12\n      :delim\n       (copy delimbracketcurly\n        :pos 0)\n      :close delimclosing\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13\n        :delim\n         (copy delimbracketangle\n          :delimlist delimlisttest1)\n        :parent\n         (textblock\n          :text \"<{a,b},{c d}>\"\n          :startpos 1\n          :endpos 13)\n        :children\n         (textblocklist\n          (textblock\n           :text \"{a,b}\"\n           :startpos 2\n           :endpos 6\n           :delim\n            (copy delimbracketcurly\n             :pos 0)\n           :children\n            (textblocklist\n             (textblock\n              :text \"a\"\n              :startpos 3\n              :endpos 3)\n             (textblock\n              :text \",\"\n              :startpos 4\n              :endpos 4\n              :delim\n               (copy delimcomma\n                :pos 0))\n             (textblock\n              :text \"b\"\n              :startpos 5\n              :endpos 5)))\n          (textblock\n           :text \",\"\n           :startpos 7\n           :endpos 7\n           :delim\n            (copy delimcomma\n             :pos 0))))\n           :children\n            (textblocklist\n             (textblock\n              :text \"c\"\n              :startpos 9\n              :endpos 9)\n             (textblock\n              :text \" \"\n              :startpos 10\n              :endpos 10\n              :delim\n               (copy delimwhitespace\n                :pos 0))))))\n (textblock-parse-one\n  (textblock\n   :text \"d}>\"\n   :startpos 11\n   :endpos 13\n   :delim\n    (delim\n     :delimlist delimlisttest3)\n   :close\n    (copy delimclose\n     :starttext \"}\")\n   :parent\n    (textblock\n     :text \"{c d}>\"\n     :startpos 8\n     :endpos 13\n     :delim\n      (copy delimbracketcurly\n       :delimlist delimlisttest2)\n     :close\n      (copy delimclose\n       :starttext \">\")\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13\n       :delim\n        (delim\n         :name \"delimbracketangle\"\n         :starttext \"<\"\n         :endtext \">\"\n         :delimlist delimlisttest1)\n       :parent\n        (textblock\n         :text \"<{a,b},{c d}>\"\n         :startpos 1\n         :endpos 13)\n       :children\n        (textblocklist\n         (textblock\n          :text \"{a,b}\"\n          :startpos 2\n          :endpos 6\n          :delim\n           (copy delimbracketcurly\n            :pos 0)\n          :children\n           (textblocklist\n            (textblock\n             :text \"a\"\n             :startpos 3\n             :endpos 3)\n              (textblock\n               :text \",\"\n               :startpos 4\n               :endpos 4\n               :delim\n                (copy delimcomma\n                 :pos 0))\n            (textblock\n             :text \"b\"\n             :startpos 5\n             :endpos 5)))\n         (textblock\n          :text \",\"\n          :startpos 7\n          :endpos 7\n          :delim\n           (copy delimcomma\n            :pos 0))))\n     :children\n      (textblocklist\n       (textblock\n        :text \"c\"\n        :startpos 9\n        :endpos 9)\n       (textblock\n        :text \" \"\n        :startpos 10\n        :endpos 10\n        :delim\n         (copy delimwhitespace\n          :pos 0)))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("d"),
                   Core.vx_new_string(":startpos"),
@@ -6214,7 +6268,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string(">"),
                       Core.vx_new_string(":startpos"),
@@ -6224,7 +6278,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_new(
                         Textblock.t_delim,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":delimlist"),
                           Textblock.c_delimlisttest2
                         )
@@ -6232,7 +6286,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":close"),
                       Core.f_copy(
                         Textblock.c_delimclose,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":starttext"),
                           Core.vx_new_string(">")
                         )
@@ -6240,7 +6294,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("{c d}"),
                           Core.vx_new_string(":startpos"),
@@ -6250,7 +6304,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketcurly,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -6260,7 +6314,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":parent"),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("<{a,b},{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -6270,7 +6324,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimbracketangle,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":delimlist"),
                                   Textblock.c_delimlisttest1
                                 )
@@ -6278,7 +6332,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":parent"),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("<{a,b},{c d}>"),
                                   Core.vx_new_string(":startpos"),
@@ -6290,10 +6344,10 @@ public final class TextblockTest {
                               Core.vx_new_string(":children"),
                               Core.f_new(
                                 Textblock.t_textblocklist,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("{a,b}"),
                                       Core.vx_new_string(":startpos"),
@@ -6303,7 +6357,7 @@ public final class TextblockTest {
                                       Core.vx_new_string(":delim"),
                                       Core.f_copy(
                                         Textblock.c_delimbracketcurly,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":pos"),
                                           Core.vx_new_int(0)
                                         )
@@ -6311,10 +6365,10 @@ public final class TextblockTest {
                                       Core.vx_new_string(":children"),
                                       Core.f_new(
                                         Textblock.t_textblocklist,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string("a"),
                                               Core.vx_new_string(":startpos"),
@@ -6325,7 +6379,7 @@ public final class TextblockTest {
                                           ),
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string(","),
                                               Core.vx_new_string(":startpos"),
@@ -6335,7 +6389,7 @@ public final class TextblockTest {
                                               Core.vx_new_string(":delim"),
                                               Core.f_copy(
                                                 Textblock.c_delimcomma,
-                                                Core.t_anylist.vx_new(
+                                                Core.vx_new(Core.t_anylist,
                                                   Core.vx_new_string(":pos"),
                                                   Core.vx_new_int(0)
                                                 )
@@ -6344,7 +6398,7 @@ public final class TextblockTest {
                                           ),
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string("b"),
                                               Core.vx_new_string(":startpos"),
@@ -6359,7 +6413,7 @@ public final class TextblockTest {
                                   ),
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string(","),
                                       Core.vx_new_string(":startpos"),
@@ -6369,7 +6423,7 @@ public final class TextblockTest {
                                       Core.vx_new_string(":delim"),
                                       Core.f_copy(
                                         Textblock.c_delimcomma,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":pos"),
                                           Core.vx_new_int(0)
                                         )
@@ -6383,10 +6437,10 @@ public final class TextblockTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("c"),
                                   Core.vx_new_string(":startpos"),
@@ -6397,7 +6451,7 @@ public final class TextblockTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string(" "),
                                   Core.vx_new_string(":startpos"),
@@ -6407,7 +6461,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimwhitespace,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -6425,7 +6479,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("d}>"),
                     Core.vx_new_string(":startpos"),
@@ -6435,7 +6489,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_new(
                       Textblock.t_delim,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":delimlist"),
                         Textblock.c_delimlisttest3
                       )
@@ -6443,7 +6497,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":close"),
                     Core.f_copy(
                       Textblock.c_delimclose,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":starttext"),
                         Core.vx_new_string("}")
                       )
@@ -6451,7 +6505,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -6461,7 +6515,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketcurly,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest2
                           )
@@ -6469,7 +6523,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":close"),
                         Core.f_copy(
                           Textblock.c_delimclose,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":starttext"),
                             Core.vx_new_string(">")
                           )
@@ -6477,7 +6531,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<{a,b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -6487,7 +6541,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":delim"),
                             Core.f_new(
                               Textblock.t_delim,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":name"),
                                 Core.vx_new_string("delimbracketangle"),
                                 Core.vx_new_string(":starttext"),
@@ -6501,7 +6555,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":parent"),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("<{a,b},{c d}>"),
                                 Core.vx_new_string(":startpos"),
@@ -6513,10 +6567,10 @@ public final class TextblockTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("{a,b}"),
                                     Core.vx_new_string(":startpos"),
@@ -6526,7 +6580,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimbracketcurly,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -6534,10 +6588,10 @@ public final class TextblockTest {
                                     Core.vx_new_string(":children"),
                                     Core.f_new(
                                       Textblock.t_textblocklist,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("a"),
                                             Core.vx_new_string(":startpos"),
@@ -6548,7 +6602,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string(","),
                                             Core.vx_new_string(":startpos"),
@@ -6558,7 +6612,7 @@ public final class TextblockTest {
                                             Core.vx_new_string(":delim"),
                                             Core.f_copy(
                                               Textblock.c_delimcomma,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":pos"),
                                                 Core.vx_new_int(0)
                                               )
@@ -6567,7 +6621,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("b"),
                                             Core.vx_new_string(":startpos"),
@@ -6582,7 +6636,7 @@ public final class TextblockTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string(","),
                                     Core.vx_new_string(":startpos"),
@@ -6592,7 +6646,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimcomma,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -6606,10 +6660,10 @@ public final class TextblockTest {
                         Core.vx_new_string(":children"),
                         Core.f_new(
                           Textblock.t_textblocklist,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("c"),
                                 Core.vx_new_string(":startpos"),
@@ -6620,7 +6674,7 @@ public final class TextblockTest {
                             ),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string(" "),
                                 Core.vx_new_string(":startpos"),
@@ -6630,7 +6684,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimwhitespace,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -6646,14 +6700,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \">\"\n  :startpos 13\n  :endpos 13\n  :delim\n   (delim\n    :delimlist delimlisttest2)\n  :close\n   (copy delimclose\n    :starttext \">\")\n  :parent\n   (textblock\n    :text \"<{a,b},{c d}>\"\n    :startpos 1\n    :endpos 13\n    :delim\n     (copy delimbracketangle\n      :delimlist delimlisttest1)\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13)\n    :children\n     (textblocklist\n      (textblock\n       :text \"{a,b}\"\n       :startpos 2\n       :endpos 6\n       :delim\n        (copy delimbracketcurly\n         :pos 0)\n       :children\n        (textblocklist\n         (textblock\n          :text \"a\"\n          :startpos 3\n          :endpos 3)\n         (textblock\n          :text \",\"\n          :startpos 4\n          :endpos 4\n          :delim\n           (copy delimcomma\n            :pos 0))\n         (textblock\n          :text \"b\"\n          :startpos 5\n          :endpos 5)))\n      (textblock\n       :text \",\"\n       :startpos 7\n       :endpos 7\n       :delim\n        (copy delimcomma\n         :pos 0))\n      (textblock\n       :text \"{c d}\"\n       :startpos 8\n       :endpos 12\n       :delim\n        (copy delimbracketcurly\n         :pos 0)\n       :children\n        (textblocklist\n         (textblock\n          :text \"c\"\n          :startpos 9\n          :endpos 9)\n         (textblock\n          :text \" \"\n          :startpos 10\n          :endpos 10\n          :delim\n           (copy delimwhitespace\n            :pos 0))\n         (textblock\n          :text \"d\"\n          :startpos 11\n          :endpos 11))))))\n (textblock-parse-one\n  (textblock\n   :text \"d\"\n   :startpos 11\n   :endpos 11\n   :parent\n    (textblock\n     :text \">\"\n     :startpos 13\n     :endpos 13\n     :delim\n      (delim\n       :delimlist delimlisttest2)\n     :close\n      (copy delimclose\n       :starttext \">\")\n     :parent\n      (textblock\n       :text \"{c d}\"\n       :startpos 8\n       :endpos 12\n       :delim\n        (copy delimbracketcurly\n         :pos 0)\n       :close delimclosing\n       :parent\n        (textblock\n         :text \"<{a,b},{c d}>\"\n         :startpos 1\n         :endpos 13\n         :delim\n          (copy delimbracketangle\n           :delimlist delimlisttest1)\n         :parent\n          (textblock\n           :text \"<{a,b},{c d}>\"\n           :startpos 1\n           :endpos 13)\n         :children\n          (textblocklist\n           (textblock\n            :text \"{a,b}\"\n            :startpos 2\n            :endpos 6\n            :delim\n             (copy delimbracketcurly\n              :pos 0)\n            :children\n             (textblocklist\n              (textblock\n               :text \"a\"\n               :startpos 3\n               :endpos 3)\n              (textblock\n               :text \",\"\n               :startpos 4\n               :endpos 4\n               :delim\n                (copy delimcomma\n                 :pos 0))\n              (textblock\n               :text \"b\"\n               :startpos 5\n               :endpos 5)))\n           (textblock\n            :text \",\"\n            :startpos 7\n            :endpos 7\n            :delim\n             (copy delimcomma\n              :pos 0))))\n            :children\n             (textblocklist\n              (textblock\n               :text \"c\"\n               :startpos 9\n               :endpos 9)\n              (textblock\n               :text \" \"\n               :startpos 10\n               :endpos 10\n               :delim\n                (copy delimwhitespace\n                 :pos 0))))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string(">"),
                   Core.vx_new_string(":startpos"),
@@ -6663,7 +6718,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":delim"),
                   Core.f_new(
                     Textblock.t_delim,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":delimlist"),
                       Textblock.c_delimlisttest2
                     )
@@ -6671,7 +6726,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":close"),
                   Core.f_copy(
                     Textblock.c_delimclose,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":starttext"),
                       Core.vx_new_string(">")
                     )
@@ -6679,7 +6734,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("<{a,b},{c d}>"),
                       Core.vx_new_string(":startpos"),
@@ -6689,7 +6744,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_copy(
                         Textblock.c_delimbracketangle,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":delimlist"),
                           Textblock.c_delimlisttest1
                         )
@@ -6697,7 +6752,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<{a,b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -6709,10 +6764,10 @@ public final class TextblockTest {
                       Core.vx_new_string(":children"),
                       Core.f_new(
                         Textblock.t_textblocklist,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("{a,b}"),
                               Core.vx_new_string(":startpos"),
@@ -6722,7 +6777,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimbracketcurly,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":pos"),
                                   Core.vx_new_int(0)
                                 )
@@ -6730,10 +6785,10 @@ public final class TextblockTest {
                               Core.vx_new_string(":children"),
                               Core.f_new(
                                 Textblock.t_textblocklist,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("a"),
                                       Core.vx_new_string(":startpos"),
@@ -6744,7 +6799,7 @@ public final class TextblockTest {
                                   ),
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string(","),
                                       Core.vx_new_string(":startpos"),
@@ -6754,7 +6809,7 @@ public final class TextblockTest {
                                       Core.vx_new_string(":delim"),
                                       Core.f_copy(
                                         Textblock.c_delimcomma,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":pos"),
                                           Core.vx_new_int(0)
                                         )
@@ -6763,7 +6818,7 @@ public final class TextblockTest {
                                   ),
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("b"),
                                       Core.vx_new_string(":startpos"),
@@ -6778,7 +6833,7 @@ public final class TextblockTest {
                           ),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string(","),
                               Core.vx_new_string(":startpos"),
@@ -6788,7 +6843,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimcomma,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":pos"),
                                   Core.vx_new_int(0)
                                 )
@@ -6797,7 +6852,7 @@ public final class TextblockTest {
                           ),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("{c d}"),
                               Core.vx_new_string(":startpos"),
@@ -6807,7 +6862,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimbracketcurly,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":pos"),
                                   Core.vx_new_int(0)
                                 )
@@ -6815,10 +6870,10 @@ public final class TextblockTest {
                               Core.vx_new_string(":children"),
                               Core.f_new(
                                 Textblock.t_textblocklist,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("c"),
                                       Core.vx_new_string(":startpos"),
@@ -6829,7 +6884,7 @@ public final class TextblockTest {
                                   ),
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string(" "),
                                       Core.vx_new_string(":startpos"),
@@ -6839,7 +6894,7 @@ public final class TextblockTest {
                                       Core.vx_new_string(":delim"),
                                       Core.f_copy(
                                         Textblock.c_delimwhitespace,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":pos"),
                                           Core.vx_new_int(0)
                                         )
@@ -6848,7 +6903,7 @@ public final class TextblockTest {
                                   ),
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("d"),
                                       Core.vx_new_string(":startpos"),
@@ -6870,7 +6925,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("d"),
                     Core.vx_new_string(":startpos"),
@@ -6880,7 +6935,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string(">"),
                         Core.vx_new_string(":startpos"),
@@ -6890,7 +6945,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_new(
                           Textblock.t_delim,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest2
                           )
@@ -6898,7 +6953,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":close"),
                         Core.f_copy(
                           Textblock.c_delimclose,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":starttext"),
                             Core.vx_new_string(">")
                           )
@@ -6906,7 +6961,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("{c d}"),
                             Core.vx_new_string(":startpos"),
@@ -6916,7 +6971,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimbracketcurly,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -6926,7 +6981,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":parent"),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("<{a,b},{c d}>"),
                                 Core.vx_new_string(":startpos"),
@@ -6936,7 +6991,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimbracketangle,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":delimlist"),
                                     Textblock.c_delimlisttest1
                                   )
@@ -6944,7 +6999,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":parent"),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("<{a,b},{c d}>"),
                                     Core.vx_new_string(":startpos"),
@@ -6956,10 +7011,10 @@ public final class TextblockTest {
                                 Core.vx_new_string(":children"),
                                 Core.f_new(
                                   Textblock.t_textblocklist,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("{a,b}"),
                                         Core.vx_new_string(":startpos"),
@@ -6969,7 +7024,7 @@ public final class TextblockTest {
                                         Core.vx_new_string(":delim"),
                                         Core.f_copy(
                                           Textblock.c_delimbracketcurly,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":pos"),
                                             Core.vx_new_int(0)
                                           )
@@ -6977,10 +7032,10 @@ public final class TextblockTest {
                                         Core.vx_new_string(":children"),
                                         Core.f_new(
                                           Textblock.t_textblocklist,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.f_new(
                                               Textblock.t_textblock,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":text"),
                                                 Core.vx_new_string("a"),
                                                 Core.vx_new_string(":startpos"),
@@ -6991,7 +7046,7 @@ public final class TextblockTest {
                                             ),
                                             Core.f_new(
                                               Textblock.t_textblock,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":text"),
                                                 Core.vx_new_string(","),
                                                 Core.vx_new_string(":startpos"),
@@ -7001,7 +7056,7 @@ public final class TextblockTest {
                                                 Core.vx_new_string(":delim"),
                                                 Core.f_copy(
                                                   Textblock.c_delimcomma,
-                                                  Core.t_anylist.vx_new(
+                                                  Core.vx_new(Core.t_anylist,
                                                     Core.vx_new_string(":pos"),
                                                     Core.vx_new_int(0)
                                                   )
@@ -7010,7 +7065,7 @@ public final class TextblockTest {
                                             ),
                                             Core.f_new(
                                               Textblock.t_textblock,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":text"),
                                                 Core.vx_new_string("b"),
                                                 Core.vx_new_string(":startpos"),
@@ -7025,7 +7080,7 @@ public final class TextblockTest {
                                     ),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string(","),
                                         Core.vx_new_string(":startpos"),
@@ -7035,7 +7090,7 @@ public final class TextblockTest {
                                         Core.vx_new_string(":delim"),
                                         Core.f_copy(
                                           Textblock.c_delimcomma,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":pos"),
                                             Core.vx_new_int(0)
                                           )
@@ -7049,10 +7104,10 @@ public final class TextblockTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("c"),
                                     Core.vx_new_string(":startpos"),
@@ -7063,7 +7118,7 @@ public final class TextblockTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string(" "),
                                     Core.vx_new_string(":startpos"),
@@ -7073,7 +7128,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimwhitespace,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -7091,14 +7146,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :startpos 13\n  :endpos 13\n  :parent\n   (textblock\n    :startpos 14\n    :endpos 14\n    :delim\n     (delim\n      :delimlist delimlisttest1)\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13\n      :delim\n       (copy delimbracketangle\n        :pos 0)\n      :close delimclosing\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13)\n      :children\n       (textblocklist\n        (textblock\n         :text \"{a,b}\"\n         :startpos 2\n         :endpos 6\n         :delim\n          (copy delimbracketcurly\n           :pos 0)\n         :children\n          (textblocklist\n           (textblock\n            :text \"a\"\n            :startpos 3\n            :endpos 3)\n           (textblock\n            :text \",\"\n            :startpos 4\n            :endpos 4\n            :delim\n             (copy delimcomma\n              :pos 0))\n           (textblock\n            :text \"b\"\n            :startpos 5\n            :endpos 5)))\n        (textblock\n         :text \",\"\n         :startpos 7\n         :endpos 7\n         :delim\n          (copy delimcomma\n           :pos 0))\n        (textblock\n         :text \"{c d}\"\n         :startpos 8\n         :endpos 12\n         :delim\n          (copy delimbracketcurly\n           :pos 0)\n         :children\n          (textblocklist\n           (textblock\n            :text \"c\"\n            :startpos 9\n            :endpos 9)\n          (textblock\n           :text \" \"\n           :startpos 10\n           :endpos 10\n           :delim\n            (copy delimwhitespace\n             :pos 0))\n          (textblock\n           :text \"d\"\n           :startpos 11\n           :endpos 11)))))))\n (textblock-parse-one\n  (textblock\n   :text \">\"\n   :startpos 13\n   :endpos 13\n   :delim\n    (delim\n     :delimlist delimlisttest2)\n   :close\n    (copy delimclose\n     :starttext \">\")\n   :parent\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13\n     :delim\n      (copy delimbracketangle\n       :delimlist delimlisttest1)\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13)\n     :children\n      (textblocklist\n       (textblock\n        :text \"{a,b}\"\n        :startpos 2\n        :endpos 6\n        :delim\n         (copy delimbracketcurly\n          :pos 0)\n        :children\n         (textblocklist\n          (textblock\n           :text \"a\"\n           :startpos 3\n           :endpos 3)\n          (textblock\n           :text \",\"\n           :startpos 4\n           :endpos 4\n           :delim\n            (copy delimcomma\n             :pos 0))\n          (textblock\n           :text \"b\"\n           :startpos 5\n           :endpos 5)))\n       (textblock\n        :text \",\"\n        :startpos 7\n        :endpos 7\n        :delim\n         (copy delimcomma\n          :pos 0))\n       (textblock\n        :text \"{c d}\"\n        :startpos 8\n        :endpos 12\n        :delim\n         (copy delimbracketcurly\n          :pos 0)\n        :children\n         (textblocklist\n          (textblock\n           :text \"c\"\n           :startpos 9\n           :endpos 9)\n          (textblock\n           :text \" \"\n           :startpos 10\n           :endpos 10\n           :delim\n            (copy delimwhitespace\n             :pos 0))\n          (textblock\n           :text \"d\"\n           :startpos 11\n           :endpos 11))))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":startpos"),
                   Core.vx_new_int(13),
                   Core.vx_new_string(":endpos"),
@@ -7106,7 +7162,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":startpos"),
                       Core.vx_new_int(14),
                       Core.vx_new_string(":endpos"),
@@ -7114,7 +7170,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_new(
                         Textblock.t_delim,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":delimlist"),
                           Textblock.c_delimlisttest1
                         )
@@ -7122,7 +7178,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<{a,b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -7132,7 +7188,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketangle,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -7142,7 +7198,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":parent"),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("<{a,b},{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -7154,10 +7210,10 @@ public final class TextblockTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("{a,b}"),
                                   Core.vx_new_string(":startpos"),
@@ -7167,7 +7223,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimbracketcurly,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -7175,10 +7231,10 @@ public final class TextblockTest {
                                   Core.vx_new_string(":children"),
                                   Core.f_new(
                                     Textblock.t_textblocklist,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("a"),
                                           Core.vx_new_string(":startpos"),
@@ -7189,7 +7245,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string(","),
                                           Core.vx_new_string(":startpos"),
@@ -7199,7 +7255,7 @@ public final class TextblockTest {
                                           Core.vx_new_string(":delim"),
                                           Core.f_copy(
                                             Textblock.c_delimcomma,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":pos"),
                                               Core.vx_new_int(0)
                                             )
@@ -7208,7 +7264,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("b"),
                                           Core.vx_new_string(":startpos"),
@@ -7223,7 +7279,7 @@ public final class TextblockTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string(","),
                                   Core.vx_new_string(":startpos"),
@@ -7233,7 +7289,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimcomma,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -7242,7 +7298,7 @@ public final class TextblockTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("{c d}"),
                                   Core.vx_new_string(":startpos"),
@@ -7252,7 +7308,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimbracketcurly,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -7260,10 +7316,10 @@ public final class TextblockTest {
                                   Core.vx_new_string(":children"),
                                   Core.f_new(
                                     Textblock.t_textblocklist,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("c"),
                                           Core.vx_new_string(":startpos"),
@@ -7274,7 +7330,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string(" "),
                                           Core.vx_new_string(":startpos"),
@@ -7284,7 +7340,7 @@ public final class TextblockTest {
                                           Core.vx_new_string(":delim"),
                                           Core.f_copy(
                                             Textblock.c_delimwhitespace,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":pos"),
                                               Core.vx_new_int(0)
                                             )
@@ -7293,7 +7349,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("d"),
                                           Core.vx_new_string(":startpos"),
@@ -7317,7 +7373,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string(">"),
                     Core.vx_new_string(":startpos"),
@@ -7327,7 +7383,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_new(
                       Textblock.t_delim,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":delimlist"),
                         Textblock.c_delimlisttest2
                       )
@@ -7335,7 +7391,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":close"),
                     Core.f_copy(
                       Textblock.c_delimclose,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":starttext"),
                         Core.vx_new_string(">")
                       )
@@ -7343,7 +7399,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("<{a,b},{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -7353,7 +7409,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketangle,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest1
                           )
@@ -7361,7 +7417,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<{a,b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -7373,10 +7429,10 @@ public final class TextblockTest {
                         Core.vx_new_string(":children"),
                         Core.f_new(
                           Textblock.t_textblocklist,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("{a,b}"),
                                 Core.vx_new_string(":startpos"),
@@ -7386,7 +7442,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimbracketcurly,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -7394,10 +7450,10 @@ public final class TextblockTest {
                                 Core.vx_new_string(":children"),
                                 Core.f_new(
                                   Textblock.t_textblocklist,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("a"),
                                         Core.vx_new_string(":startpos"),
@@ -7408,7 +7464,7 @@ public final class TextblockTest {
                                     ),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string(","),
                                         Core.vx_new_string(":startpos"),
@@ -7418,7 +7474,7 @@ public final class TextblockTest {
                                         Core.vx_new_string(":delim"),
                                         Core.f_copy(
                                           Textblock.c_delimcomma,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":pos"),
                                             Core.vx_new_int(0)
                                           )
@@ -7427,7 +7483,7 @@ public final class TextblockTest {
                                     ),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("b"),
                                         Core.vx_new_string(":startpos"),
@@ -7442,7 +7498,7 @@ public final class TextblockTest {
                             ),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string(","),
                                 Core.vx_new_string(":startpos"),
@@ -7452,7 +7508,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimcomma,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -7461,7 +7517,7 @@ public final class TextblockTest {
                             ),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("{c d}"),
                                 Core.vx_new_string(":startpos"),
@@ -7471,7 +7527,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimbracketcurly,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -7479,10 +7535,10 @@ public final class TextblockTest {
                                 Core.vx_new_string(":children"),
                                 Core.f_new(
                                   Textblock.t_textblocklist,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("c"),
                                         Core.vx_new_string(":startpos"),
@@ -7493,7 +7549,7 @@ public final class TextblockTest {
                                     ),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string(" "),
                                         Core.vx_new_string(":startpos"),
@@ -7503,7 +7559,7 @@ public final class TextblockTest {
                                         Core.vx_new_string(":delim"),
                                         Core.f_copy(
                                           Textblock.c_delimwhitespace,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":pos"),
                                             Core.vx_new_int(0)
                                           )
@@ -7512,7 +7568,7 @@ public final class TextblockTest {
                                     ),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("d"),
                                         Core.vx_new_string(":startpos"),
@@ -7534,14 +7590,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :startpos 14\n  :endpos 14\n  :delim\n   (delim\n    :delimlist delimlisttest1)\n  :parent\n   (textblock\n    :text \"<{a,b},{c d}>\"\n    :startpos 1\n    :endpos 13\n    :children\n     (textblocklist\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13\n       :delim\n        (copy delimbracketangle\n         :pos 0)\n       :children\n        (textblocklist\n         (textblock\n          :text \"{a,b}\"\n          :startpos 2\n          :endpos 6\n          :delim\n           (copy delimbracketcurly\n            :pos 0)\n          :children\n           (textblocklist\n            (textblock\n             :text \"a\"\n             :startpos 3\n             :endpos 3)\n            (textblock\n             :text \",\"\n             :startpos 4\n             :endpos 4\n             :delim\n              (copy delimcomma\n               :pos 0))\n            (textblock\n             :text \"b\"\n             :startpos 5\n             :endpos 5)))\n         (textblock\n          :text \",\"\n          :startpos 7\n          :endpos 7\n          :delim\n           (copy delimcomma\n            :pos 0))\n         (textblock\n          :text \"{c d}\"\n          :startpos 8\n          :endpos 12\n          :delim\n           (copy delimbracketcurly\n            :pos 0)\n          :children\n           (textblocklist\n            (textblock\n             :text \"c\"\n             :startpos 9\n             :endpos 9)\n           (textblock\n            :text \" \"\n            :startpos 10\n            :endpos 10\n            :delim\n             (copy delimwhitespace\n              :pos 0))\n           (textblock\n            :text \"d\"\n            :startpos 11\n            :endpos 11))))))))\n (textblock-parse-one\n  (textblock\n   :startpos 13\n   :endpos 13\n   :parent\n    (textblock\n     :startpos 14\n     :endpos 14\n     :delim\n      (delim\n       :delimlist delimlisttest1)\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13\n       :delim\n        (copy delimbracketangle\n         :pos 0)\n       :close delimclosing\n       :parent\n        (textblock\n         :text \"<{a,b},{c d}>\"\n         :startpos 1\n         :endpos 13)\n       :children\n        (textblocklist\n         (textblock\n          :text \"{a,b}\"\n          :startpos 2\n          :endpos 6\n          :delim\n           (copy delimbracketcurly\n            :pos 0)\n          :children\n           (textblocklist\n            (textblock\n             :text \"a\"\n             :startpos 3\n             :endpos 3)\n            (textblock\n             :text \",\"\n             :startpos 4\n             :endpos 4\n             :delim\n              (copy delimcomma\n               :pos 0))\n            (textblock\n             :text \"b\"\n             :startpos 5\n             :endpos 5)))\n         (textblock\n          :text \",\"\n          :startpos 7\n          :endpos 7\n          :delim\n           (copy delimcomma\n            :pos 0))\n         (textblock\n          :text \"{c d}\"\n          :startpos 8\n          :endpos 12\n          :delim\n           (copy delimbracketcurly\n            :pos 0)\n          :children\n           (textblocklist\n            (textblock\n             :text \"c\"\n             :startpos 9\n             :endpos 9)\n           (textblock\n            :text \" \"\n            :startpos 10\n            :endpos 10\n            :delim\n             (copy delimwhitespace\n              :pos 0))\n           (textblock\n            :text \"d\"\n            :startpos 11\n            :endpos 11)))))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":startpos"),
                   Core.vx_new_int(14),
                   Core.vx_new_string(":endpos"),
@@ -7549,7 +7606,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":delim"),
                   Core.f_new(
                     Textblock.t_delim,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":delimlist"),
                       Textblock.c_delimlisttest1
                     )
@@ -7557,7 +7614,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("<{a,b},{c d}>"),
                       Core.vx_new_string(":startpos"),
@@ -7567,10 +7624,10 @@ public final class TextblockTest {
                       Core.vx_new_string(":children"),
                       Core.f_new(
                         Textblock.t_textblocklist,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("<{a,b},{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -7580,7 +7637,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimbracketangle,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":pos"),
                                   Core.vx_new_int(0)
                                 )
@@ -7588,10 +7645,10 @@ public final class TextblockTest {
                               Core.vx_new_string(":children"),
                               Core.f_new(
                                 Textblock.t_textblocklist,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("{a,b}"),
                                       Core.vx_new_string(":startpos"),
@@ -7601,7 +7658,7 @@ public final class TextblockTest {
                                       Core.vx_new_string(":delim"),
                                       Core.f_copy(
                                         Textblock.c_delimbracketcurly,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":pos"),
                                           Core.vx_new_int(0)
                                         )
@@ -7609,10 +7666,10 @@ public final class TextblockTest {
                                       Core.vx_new_string(":children"),
                                       Core.f_new(
                                         Textblock.t_textblocklist,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string("a"),
                                               Core.vx_new_string(":startpos"),
@@ -7623,7 +7680,7 @@ public final class TextblockTest {
                                           ),
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string(","),
                                               Core.vx_new_string(":startpos"),
@@ -7633,7 +7690,7 @@ public final class TextblockTest {
                                               Core.vx_new_string(":delim"),
                                               Core.f_copy(
                                                 Textblock.c_delimcomma,
-                                                Core.t_anylist.vx_new(
+                                                Core.vx_new(Core.t_anylist,
                                                   Core.vx_new_string(":pos"),
                                                   Core.vx_new_int(0)
                                                 )
@@ -7642,7 +7699,7 @@ public final class TextblockTest {
                                           ),
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string("b"),
                                               Core.vx_new_string(":startpos"),
@@ -7657,7 +7714,7 @@ public final class TextblockTest {
                                   ),
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string(","),
                                       Core.vx_new_string(":startpos"),
@@ -7667,7 +7724,7 @@ public final class TextblockTest {
                                       Core.vx_new_string(":delim"),
                                       Core.f_copy(
                                         Textblock.c_delimcomma,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":pos"),
                                           Core.vx_new_int(0)
                                         )
@@ -7676,7 +7733,7 @@ public final class TextblockTest {
                                   ),
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("{c d}"),
                                       Core.vx_new_string(":startpos"),
@@ -7686,7 +7743,7 @@ public final class TextblockTest {
                                       Core.vx_new_string(":delim"),
                                       Core.f_copy(
                                         Textblock.c_delimbracketcurly,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":pos"),
                                           Core.vx_new_int(0)
                                         )
@@ -7694,10 +7751,10 @@ public final class TextblockTest {
                                       Core.vx_new_string(":children"),
                                       Core.f_new(
                                         Textblock.t_textblocklist,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string("c"),
                                               Core.vx_new_string(":startpos"),
@@ -7708,7 +7765,7 @@ public final class TextblockTest {
                                           ),
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string(" "),
                                               Core.vx_new_string(":startpos"),
@@ -7718,7 +7775,7 @@ public final class TextblockTest {
                                               Core.vx_new_string(":delim"),
                                               Core.f_copy(
                                                 Textblock.c_delimwhitespace,
-                                                Core.t_anylist.vx_new(
+                                                Core.vx_new(Core.t_anylist,
                                                   Core.vx_new_string(":pos"),
                                                   Core.vx_new_int(0)
                                                 )
@@ -7727,7 +7784,7 @@ public final class TextblockTest {
                                           ),
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string("d"),
                                               Core.vx_new_string(":startpos"),
@@ -7753,7 +7810,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":startpos"),
                     Core.vx_new_int(13),
                     Core.vx_new_string(":endpos"),
@@ -7761,7 +7818,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":startpos"),
                         Core.vx_new_int(14),
                         Core.vx_new_string(":endpos"),
@@ -7769,7 +7826,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_new(
                           Textblock.t_delim,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest1
                           )
@@ -7777,7 +7834,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<{a,b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -7787,7 +7844,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimbracketangle,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -7797,7 +7854,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":parent"),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("<{a,b},{c d}>"),
                                 Core.vx_new_string(":startpos"),
@@ -7809,10 +7866,10 @@ public final class TextblockTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("{a,b}"),
                                     Core.vx_new_string(":startpos"),
@@ -7822,7 +7879,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimbracketcurly,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -7830,10 +7887,10 @@ public final class TextblockTest {
                                     Core.vx_new_string(":children"),
                                     Core.f_new(
                                       Textblock.t_textblocklist,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("a"),
                                             Core.vx_new_string(":startpos"),
@@ -7844,7 +7901,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string(","),
                                             Core.vx_new_string(":startpos"),
@@ -7854,7 +7911,7 @@ public final class TextblockTest {
                                             Core.vx_new_string(":delim"),
                                             Core.f_copy(
                                               Textblock.c_delimcomma,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":pos"),
                                                 Core.vx_new_int(0)
                                               )
@@ -7863,7 +7920,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("b"),
                                             Core.vx_new_string(":startpos"),
@@ -7878,7 +7935,7 @@ public final class TextblockTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string(","),
                                     Core.vx_new_string(":startpos"),
@@ -7888,7 +7945,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimcomma,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -7897,7 +7954,7 @@ public final class TextblockTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("{c d}"),
                                     Core.vx_new_string(":startpos"),
@@ -7907,7 +7964,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimbracketcurly,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -7915,10 +7972,10 @@ public final class TextblockTest {
                                     Core.vx_new_string(":children"),
                                     Core.f_new(
                                       Textblock.t_textblocklist,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("c"),
                                             Core.vx_new_string(":startpos"),
@@ -7929,7 +7986,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string(" "),
                                             Core.vx_new_string(":startpos"),
@@ -7939,7 +7996,7 @@ public final class TextblockTest {
                                             Core.vx_new_string(":delim"),
                                             Core.f_copy(
                                               Textblock.c_delimwhitespace,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":pos"),
                                                 Core.vx_new_int(0)
                                               )
@@ -7948,7 +8005,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("d"),
                                             Core.vx_new_string(":startpos"),
@@ -7972,14 +8029,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"<{a,b},{c d}>\"\n  :startpos 1\n  :endpos 13\n  :children\n   (textblocklist\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13\n     :delim\n      (copy delimbracketangle\n       :pos 0)\n     :children\n      (textblocklist\n       (textblock\n        :text \"{a,b}\"\n        :startpos 2\n        :endpos 6\n        :delim\n         (copy delimbracketcurly\n          :pos 0)\n        :children\n         (textblocklist\n          (textblock\n           :text \"a\"\n           :startpos 3\n           :endpos 3)\n          (textblock\n           :text \",\"\n           :startpos 4\n           :endpos 4\n           :delim\n            (copy delimcomma\n             :pos 0))\n          (textblock\n           :text \"b\"\n           :startpos 5\n           :endpos 5)))\n       (textblock\n        :text \",\"\n        :startpos 7\n        :endpos 7\n        :delim\n         (copy delimcomma\n          :pos 0))\n       (textblock\n        :text \"{c d}\"\n        :startpos 8\n        :endpos 12\n        :delim\n         (copy delimbracketcurly\n          :pos 0)\n        :children\n         (textblocklist\n          (textblock\n           :text \"c\"\n           :startpos 9\n           :endpos 9)\n          (textblock\n           :text \" \"\n           :startpos 10\n           :endpos 10\n           :delim\n            (copy delimwhitespace\n             :pos 0))\n          (textblock\n           :text \"d\"\n           :startpos 11\n           :endpos 11)))))))\n (textblock-parse-one\n  (textblock\n   :startpos 14\n   :endpos 14\n   :delim\n    (delim\n     :delimlist delimlisttest1)\n   :parent\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13\n     :children\n      (textblocklist\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13\n        :delim\n         (copy delimbracketangle\n          :pos 0)\n        :children\n         (textblocklist\n          (textblock\n           :text \"{a,b}\"\n           :startpos 2\n           :endpos 6\n           :delim\n            (copy delimbracketcurly\n             :pos 0)\n           :children\n            (textblocklist\n             (textblock\n              :text \"a\"\n              :startpos 3\n              :endpos 3)\n             (textblock\n              :text \",\"\n              :startpos 4\n              :endpos 4\n              :delim\n               (copy delimcomma\n                :pos 0))\n             (textblock\n              :text \"b\"\n              :startpos 5\n              :endpos 5)))\n          (textblock\n           :text \",\"\n           :startpos 7\n           :endpos 7\n           :delim\n            (copy delimcomma\n             :pos 0))\n          (textblock\n           :text \"{c d}\"\n           :startpos 8\n           :endpos 12\n           :delim\n            (copy delimbracketcurly\n             :pos 0)\n           :children\n            (textblocklist\n             (textblock\n              :text \"c\"\n              :startpos 9\n              :endpos 9)\n            (textblock\n             :text \" \"\n             :startpos 10\n             :endpos 10\n             :delim\n              (copy delimwhitespace\n               :pos 0))\n            (textblock\n             :text \"d\"\n             :startpos 11\n             :endpos 11))))))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("<{a,b},{c d}>"),
                   Core.vx_new_string(":startpos"),
@@ -7989,10 +8047,10 @@ public final class TextblockTest {
                   Core.vx_new_string(":children"),
                   Core.f_new(
                     Textblock.t_textblocklist,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<{a,b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -8002,7 +8060,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketangle,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -8010,10 +8068,10 @@ public final class TextblockTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("{a,b}"),
                                   Core.vx_new_string(":startpos"),
@@ -8023,7 +8081,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimbracketcurly,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -8031,10 +8089,10 @@ public final class TextblockTest {
                                   Core.vx_new_string(":children"),
                                   Core.f_new(
                                     Textblock.t_textblocklist,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("a"),
                                           Core.vx_new_string(":startpos"),
@@ -8045,7 +8103,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string(","),
                                           Core.vx_new_string(":startpos"),
@@ -8055,7 +8113,7 @@ public final class TextblockTest {
                                           Core.vx_new_string(":delim"),
                                           Core.f_copy(
                                             Textblock.c_delimcomma,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":pos"),
                                               Core.vx_new_int(0)
                                             )
@@ -8064,7 +8122,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("b"),
                                           Core.vx_new_string(":startpos"),
@@ -8079,7 +8137,7 @@ public final class TextblockTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string(","),
                                   Core.vx_new_string(":startpos"),
@@ -8089,7 +8147,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimcomma,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -8098,7 +8156,7 @@ public final class TextblockTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("{c d}"),
                                   Core.vx_new_string(":startpos"),
@@ -8108,7 +8166,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimbracketcurly,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -8116,10 +8174,10 @@ public final class TextblockTest {
                                   Core.vx_new_string(":children"),
                                   Core.f_new(
                                     Textblock.t_textblocklist,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("c"),
                                           Core.vx_new_string(":startpos"),
@@ -8130,7 +8188,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string(" "),
                                           Core.vx_new_string(":startpos"),
@@ -8140,7 +8198,7 @@ public final class TextblockTest {
                                           Core.vx_new_string(":delim"),
                                           Core.f_copy(
                                             Textblock.c_delimwhitespace,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":pos"),
                                               Core.vx_new_int(0)
                                             )
@@ -8149,7 +8207,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("d"),
                                           Core.vx_new_string(":startpos"),
@@ -8173,7 +8231,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":startpos"),
                     Core.vx_new_int(14),
                     Core.vx_new_string(":endpos"),
@@ -8181,7 +8239,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_new(
                       Textblock.t_delim,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":delimlist"),
                         Textblock.c_delimlisttest1
                       )
@@ -8189,7 +8247,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("<{a,b},{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -8199,10 +8257,10 @@ public final class TextblockTest {
                         Core.vx_new_string(":children"),
                         Core.f_new(
                           Textblock.t_textblocklist,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("<{a,b},{c d}>"),
                                 Core.vx_new_string(":startpos"),
@@ -8212,7 +8270,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimbracketangle,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -8220,10 +8278,10 @@ public final class TextblockTest {
                                 Core.vx_new_string(":children"),
                                 Core.f_new(
                                   Textblock.t_textblocklist,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("{a,b}"),
                                         Core.vx_new_string(":startpos"),
@@ -8233,7 +8291,7 @@ public final class TextblockTest {
                                         Core.vx_new_string(":delim"),
                                         Core.f_copy(
                                           Textblock.c_delimbracketcurly,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":pos"),
                                             Core.vx_new_int(0)
                                           )
@@ -8241,10 +8299,10 @@ public final class TextblockTest {
                                         Core.vx_new_string(":children"),
                                         Core.f_new(
                                           Textblock.t_textblocklist,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.f_new(
                                               Textblock.t_textblock,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":text"),
                                                 Core.vx_new_string("a"),
                                                 Core.vx_new_string(":startpos"),
@@ -8255,7 +8313,7 @@ public final class TextblockTest {
                                             ),
                                             Core.f_new(
                                               Textblock.t_textblock,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":text"),
                                                 Core.vx_new_string(","),
                                                 Core.vx_new_string(":startpos"),
@@ -8265,7 +8323,7 @@ public final class TextblockTest {
                                                 Core.vx_new_string(":delim"),
                                                 Core.f_copy(
                                                   Textblock.c_delimcomma,
-                                                  Core.t_anylist.vx_new(
+                                                  Core.vx_new(Core.t_anylist,
                                                     Core.vx_new_string(":pos"),
                                                     Core.vx_new_int(0)
                                                   )
@@ -8274,7 +8332,7 @@ public final class TextblockTest {
                                             ),
                                             Core.f_new(
                                               Textblock.t_textblock,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":text"),
                                                 Core.vx_new_string("b"),
                                                 Core.vx_new_string(":startpos"),
@@ -8289,7 +8347,7 @@ public final class TextblockTest {
                                     ),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string(","),
                                         Core.vx_new_string(":startpos"),
@@ -8299,7 +8357,7 @@ public final class TextblockTest {
                                         Core.vx_new_string(":delim"),
                                         Core.f_copy(
                                           Textblock.c_delimcomma,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":pos"),
                                             Core.vx_new_int(0)
                                           )
@@ -8308,7 +8366,7 @@ public final class TextblockTest {
                                     ),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("{c d}"),
                                         Core.vx_new_string(":startpos"),
@@ -8318,7 +8376,7 @@ public final class TextblockTest {
                                         Core.vx_new_string(":delim"),
                                         Core.f_copy(
                                           Textblock.c_delimbracketcurly,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":pos"),
                                             Core.vx_new_int(0)
                                           )
@@ -8326,10 +8384,10 @@ public final class TextblockTest {
                                         Core.vx_new_string(":children"),
                                         Core.f_new(
                                           Textblock.t_textblocklist,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.f_new(
                                               Textblock.t_textblock,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":text"),
                                                 Core.vx_new_string("c"),
                                                 Core.vx_new_string(":startpos"),
@@ -8340,7 +8398,7 @@ public final class TextblockTest {
                                             ),
                                             Core.f_new(
                                               Textblock.t_textblock,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":text"),
                                                 Core.vx_new_string(" "),
                                                 Core.vx_new_string(":startpos"),
@@ -8350,7 +8408,7 @@ public final class TextblockTest {
                                                 Core.vx_new_string(":delim"),
                                                 Core.f_copy(
                                                   Textblock.c_delimwhitespace,
-                                                  Core.t_anylist.vx_new(
+                                                  Core.vx_new(Core.t_anylist,
                                                     Core.vx_new_string(":pos"),
                                                     Core.vx_new_int(0)
                                                   )
@@ -8359,7 +8417,7 @@ public final class TextblockTest {
                                             ),
                                             Core.f_new(
                                               Textblock.t_textblock,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":text"),
                                                 Core.vx_new_string("d"),
                                                 Core.vx_new_string(":startpos"),
@@ -8385,14 +8443,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"<{a,b},{c d}>\"\n  :startpos 1\n  :endpos 13\n  :children\n   (textblocklist\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13\n     :delim\n      (copy delimbracketangle\n       :pos 0)\n     :children\n      (textblocklist\n       (textblock\n        :text \"{a,b}\"\n        :startpos 2\n        :endpos 6\n        :delim\n         (copy delimbracketcurly\n          :pos 0)\n        :children\n         (textblocklist\n          (textblock\n           :text \"a\"\n           :startpos 3\n           :endpos 3)\n          (textblock\n           :text \",\"\n           :startpos 4\n           :endpos 4\n           :delim\n            (copy delimcomma\n             :pos 0))\n          (textblock\n           :text \"b\"\n           :startpos 5\n           :endpos 5)))\n       (textblock\n        :text \",\"\n        :startpos 7\n        :endpos 7\n        :delim\n         (copy delimcomma\n          :pos 0))\n       (textblock\n        :text \"{c d}\"\n        :startpos 8\n        :endpos 12\n        :delim\n         (copy delimbracketcurly\n          :pos 0)\n        :children\n         (textblocklist\n          (textblock\n           :text \"c\"\n           :startpos 9\n           :endpos 9)\n          (textblock\n           :text \" \"\n           :startpos 10\n           :endpos 10\n           :delim\n            (copy delimwhitespace\n             :pos 0))\n          (textblock\n           :text \"d\"\n           :startpos 11\n           :endpos 11)))))))\n (textblock-parse-one\n  (textblock\n   :text \"<{a,b},{c d}>\"\n   :startpos 1\n   :endpos 13\n   :children\n    (textblocklist\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13\n      :delim\n       (copy delimbracketangle\n        :pos 0)\n      :children\n       (textblocklist\n        (textblock\n         :text \"{a,b}\"\n         :startpos 2\n         :endpos 6\n         :delim\n          (copy delimbracketcurly\n           :pos 0)\n         :children\n          (textblocklist\n           (textblock\n            :text \"a\"\n            :startpos 3\n            :endpos 3)\n           (textblock\n            :text \",\"\n            :startpos 4\n            :endpos 4\n            :delim\n             (copy delimcomma\n              :pos 0))\n           (textblock\n            :text \"b\"\n            :startpos 5\n            :endpos 5)))\n        (textblock\n         :text \",\"\n         :startpos 7\n         :endpos 7\n         :delim\n          (copy delimcomma\n           :pos 0))\n        (textblock\n         :text \"{c d}\"\n         :startpos 8\n         :endpos 12\n         :delim\n          (copy delimbracketcurly\n           :pos 0)\n         :children\n          (textblocklist\n           (textblock\n            :text \"c\"\n            :startpos 9\n            :endpos 9)\n           (textblock\n            :text \" \"\n            :startpos 10\n            :endpos 10\n            :delim\n             (copy delimwhitespace\n              :pos 0))\n           (textblock\n            :text \"d\"\n            :startpos 11\n            :endpos 11)))))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("<{a,b},{c d}>"),
                   Core.vx_new_string(":startpos"),
@@ -8402,10 +8461,10 @@ public final class TextblockTest {
                   Core.vx_new_string(":children"),
                   Core.f_new(
                     Textblock.t_textblocklist,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<{a,b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -8415,7 +8474,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketangle,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -8423,10 +8482,10 @@ public final class TextblockTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("{a,b}"),
                                   Core.vx_new_string(":startpos"),
@@ -8436,7 +8495,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimbracketcurly,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -8444,10 +8503,10 @@ public final class TextblockTest {
                                   Core.vx_new_string(":children"),
                                   Core.f_new(
                                     Textblock.t_textblocklist,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("a"),
                                           Core.vx_new_string(":startpos"),
@@ -8458,7 +8517,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string(","),
                                           Core.vx_new_string(":startpos"),
@@ -8468,7 +8527,7 @@ public final class TextblockTest {
                                           Core.vx_new_string(":delim"),
                                           Core.f_copy(
                                             Textblock.c_delimcomma,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":pos"),
                                               Core.vx_new_int(0)
                                             )
@@ -8477,7 +8536,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("b"),
                                           Core.vx_new_string(":startpos"),
@@ -8492,7 +8551,7 @@ public final class TextblockTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string(","),
                                   Core.vx_new_string(":startpos"),
@@ -8502,7 +8561,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimcomma,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -8511,7 +8570,7 @@ public final class TextblockTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("{c d}"),
                                   Core.vx_new_string(":startpos"),
@@ -8521,7 +8580,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimbracketcurly,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -8529,10 +8588,10 @@ public final class TextblockTest {
                                   Core.vx_new_string(":children"),
                                   Core.f_new(
                                     Textblock.t_textblocklist,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("c"),
                                           Core.vx_new_string(":startpos"),
@@ -8543,7 +8602,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string(" "),
                                           Core.vx_new_string(":startpos"),
@@ -8553,7 +8612,7 @@ public final class TextblockTest {
                                           Core.vx_new_string(":delim"),
                                           Core.f_copy(
                                             Textblock.c_delimwhitespace,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":pos"),
                                               Core.vx_new_int(0)
                                             )
@@ -8562,7 +8621,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("d"),
                                           Core.vx_new_string(":startpos"),
@@ -8586,7 +8645,7 @@ public final class TextblockTest {
               Textblock.f_textblock_parse_one(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("<{a,b},{c d}>"),
                     Core.vx_new_string(":startpos"),
@@ -8596,10 +8655,10 @@ public final class TextblockTest {
                     Core.vx_new_string(":children"),
                     Core.f_new(
                       Textblock.t_textblocklist,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<{a,b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -8609,7 +8668,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimbracketangle,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -8617,10 +8676,10 @@ public final class TextblockTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("{a,b}"),
                                     Core.vx_new_string(":startpos"),
@@ -8630,7 +8689,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimbracketcurly,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -8638,10 +8697,10 @@ public final class TextblockTest {
                                     Core.vx_new_string(":children"),
                                     Core.f_new(
                                       Textblock.t_textblocklist,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("a"),
                                             Core.vx_new_string(":startpos"),
@@ -8652,7 +8711,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string(","),
                                             Core.vx_new_string(":startpos"),
@@ -8662,7 +8721,7 @@ public final class TextblockTest {
                                             Core.vx_new_string(":delim"),
                                             Core.f_copy(
                                               Textblock.c_delimcomma,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":pos"),
                                                 Core.vx_new_int(0)
                                               )
@@ -8671,7 +8730,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("b"),
                                             Core.vx_new_string(":startpos"),
@@ -8686,7 +8745,7 @@ public final class TextblockTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string(","),
                                     Core.vx_new_string(":startpos"),
@@ -8696,7 +8755,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimcomma,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -8705,7 +8764,7 @@ public final class TextblockTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("{c d}"),
                                     Core.vx_new_string(":startpos"),
@@ -8715,7 +8774,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimbracketcurly,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -8723,10 +8782,10 @@ public final class TextblockTest {
                                     Core.vx_new_string(":children"),
                                     Core.f_new(
                                       Textblock.t_textblocklist,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("c"),
                                             Core.vx_new_string(":startpos"),
@@ -8737,7 +8796,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string(" "),
                                             Core.vx_new_string(":startpos"),
@@ -8747,7 +8806,7 @@ public final class TextblockTest {
                                             Core.vx_new_string(":delim"),
                                             Core.f_copy(
                                               Textblock.c_delimwhitespace,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":pos"),
                                                 Core.vx_new_int(0)
                                               )
@@ -8756,7 +8815,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("d"),
                                             Core.vx_new_string(":startpos"),
@@ -8786,20 +8845,23 @@ public final class TextblockTest {
   }
 
   static Test.Type_testcase f_textblock_startleft_from_string_delim_offset(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/data/textblock",
       ":casename", "textblock-startleft<-string-delim-offset",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"a\"\n  :startpos 1\n  :endpos 1)\n (textblock-startleft<-string-delim-offset\n  \"a,b\"\n  (delim\n   :pos 2)\n  0))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("a"),
                   Core.vx_new_string(":startpos"),
@@ -8812,7 +8874,7 @@ public final class TextblockTest {
                 Core.vx_new_string("a,b"),
                 Core.f_new(
                   Textblock.t_delim,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":pos"),
                     Core.vx_new_int(2)
                   )
@@ -8827,20 +8889,23 @@ public final class TextblockTest {
   }
 
   static Test.Type_testcase f_textblock_startright_from_string_delim_offset(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/data/textblock",
       ":casename", "textblock-startright<-string-delim-offset",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \",b\"\n  :startpos 2\n  :delim\n   (copy delimcomma\n    :pos 2))\n (textblock-startright<-string-delim-offset\n  \"a,b\"\n  (copy delimcomma\n   :pos 2)\n  0))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string(",b"),
                   Core.vx_new_string(":startpos"),
@@ -8848,7 +8913,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":delim"),
                   Core.f_copy(
                     Textblock.c_delimcomma,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":pos"),
                       Core.vx_new_int(2)
                     )
@@ -8859,7 +8924,7 @@ public final class TextblockTest {
                 Core.vx_new_string("a,b"),
                 Core.f_copy(
                   Textblock.c_delimcomma,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":pos"),
                     Core.vx_new_int(2)
                   )
@@ -8868,14 +8933,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"<b>c\"\n  :startpos 2\n  :delim\n   (copy delimbracketangle\n    :pos 2\n    :delimlist\n     (delimlist\n      delimbracketcurly))\n  :close\n   (copy delimclose\n    :starttext \">\"))\n (textblock-startright<-string-delim-offset\n  \"a<b>c\"\n  (copy delimbracketangle\n   :pos 2\n   :delimlist\n    (delimlist\n     delimbracketcurly))\n  0))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("<b>c"),
                   Core.vx_new_string(":startpos"),
@@ -8883,13 +8949,13 @@ public final class TextblockTest {
                   Core.vx_new_string(":delim"),
                   Core.f_copy(
                     Textblock.c_delimbracketangle,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":pos"),
                       Core.vx_new_int(2),
                       Core.vx_new_string(":delimlist"),
                       Core.f_new(
                         Textblock.t_delimlist,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Textblock.c_delimbracketcurly
                         )
                       )
@@ -8898,7 +8964,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":close"),
                   Core.f_copy(
                     Textblock.c_delimclose,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":starttext"),
                       Core.vx_new_string(">")
                     )
@@ -8909,13 +8975,13 @@ public final class TextblockTest {
                 Core.vx_new_string("a<b>c"),
                 Core.f_copy(
                   Textblock.c_delimbracketangle,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":pos"),
                     Core.vx_new_int(2),
                     Core.vx_new_string(":delimlist"),
                     Core.f_new(
                       Textblock.t_delimlist,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Textblock.c_delimbracketcurly
                       )
                     )
@@ -8931,20 +8997,23 @@ public final class TextblockTest {
   }
 
   static Test.Type_testcase f_textblock_from_close_textblock(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/data/textblock",
       ":casename", "textblock<-close-textblock",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"b\"\n  :startpos 5\n  :endpos 5\n  :parent\n   (textblock\n    :text \",{c d}>\"\n    :startpos 7\n    :endpos 13\n    :delim\n     (delim\n      :delimlist delimlisttest2)\n    :close\n     (copy delimclose\n      :starttext \">\")\n    :parent\n     (textblock\n      :text \"{a,b}\"\n      :startpos 2\n      :endpos 6\n      :delim\n       (copy delimbracketcurly\n        :pos 0)\n      :close delimclosing\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13\n        :delim\n         (copy delimbracketangle\n          :delimlist delimlisttest1)\n        :parent\n         (textblock\n          :text \"<{a,b},{c d}>\"\n          :startpos 1\n          :endpos 13))\n      :children\n       (textblocklist\n        (textblock\n         :text \"a\"\n         :startpos 3\n         :endpos 3)\n        (textblock\n         :text \",\"\n         :startpos 4\n         :endpos 4\n         :delim\n          (copy delimcomma\n           :pos 0))))))\n (textblock<-close-textblock\n  (copy delimclose\n   :starttext \"}\"\n   :pos 2)\n  (textblock\n   :text \"b},{c d}>\"\n   :startpos 5\n   :endpos 13\n   :delim\n    (delim\n     :delimlist delimlisttest3)\n   :close\n    (copy delimclose\n     :starttext \"}\")\n   :parent\n    (textblock\n     :text \"{a,b},{c d}>\"\n     :startpos 2\n     :endpos 13\n     :delim\n      (copy delimbracketcurly\n       :delimlist delimlisttest2)\n     :close\n      (copy delimclose\n       :starttext \">\")\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13\n       :delim\n        (copy delimbracketangle\n         :delimlist delimlisttest1)\n       :parent\n        (textblock\n         :text \"<{a,b},{c d}>\"\n         :startpos 1\n         :endpos 13))\n     :children\n      (textblocklist\n       (textblock\n        :text \"a\"\n        :startpos 3\n        :endpos 3)\n       (textblock\n        :text \",\"\n        :startpos 4\n        :endpos 4\n        :delim\n         (copy delimcomma\n          :pos 0)))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("b"),
                   Core.vx_new_string(":startpos"),
@@ -8954,7 +9023,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string(",{c d}>"),
                       Core.vx_new_string(":startpos"),
@@ -8964,7 +9033,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_new(
                         Textblock.t_delim,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":delimlist"),
                           Textblock.c_delimlisttest2
                         )
@@ -8972,7 +9041,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":close"),
                       Core.f_copy(
                         Textblock.c_delimclose,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":starttext"),
                           Core.vx_new_string(">")
                         )
@@ -8980,7 +9049,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("{a,b}"),
                           Core.vx_new_string(":startpos"),
@@ -8990,7 +9059,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketcurly,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -9000,7 +9069,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":parent"),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("<{a,b},{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -9010,7 +9079,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimbracketangle,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":delimlist"),
                                   Textblock.c_delimlisttest1
                                 )
@@ -9018,7 +9087,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":parent"),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("<{a,b},{c d}>"),
                                   Core.vx_new_string(":startpos"),
@@ -9032,10 +9101,10 @@ public final class TextblockTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("a"),
                                   Core.vx_new_string(":startpos"),
@@ -9046,7 +9115,7 @@ public final class TextblockTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string(","),
                                   Core.vx_new_string(":startpos"),
@@ -9056,7 +9125,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimcomma,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -9074,7 +9143,7 @@ public final class TextblockTest {
               Textblock.f_textblock_from_close_textblock(
                 Core.f_copy(
                   Textblock.c_delimclose,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":starttext"),
                     Core.vx_new_string("}"),
                     Core.vx_new_string(":pos"),
@@ -9083,7 +9152,7 @@ public final class TextblockTest {
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("b},{c d}>"),
                     Core.vx_new_string(":startpos"),
@@ -9093,7 +9162,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_new(
                       Textblock.t_delim,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":delimlist"),
                         Textblock.c_delimlisttest3
                       )
@@ -9101,7 +9170,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":close"),
                     Core.f_copy(
                       Textblock.c_delimclose,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":starttext"),
                         Core.vx_new_string("}")
                       )
@@ -9109,7 +9178,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("{a,b},{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -9119,7 +9188,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketcurly,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest2
                           )
@@ -9127,7 +9196,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":close"),
                         Core.f_copy(
                           Textblock.c_delimclose,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":starttext"),
                             Core.vx_new_string(">")
                           )
@@ -9135,7 +9204,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<{a,b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -9145,7 +9214,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimbracketangle,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":delimlist"),
                                 Textblock.c_delimlisttest1
                               )
@@ -9153,7 +9222,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":parent"),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("<{a,b},{c d}>"),
                                 Core.vx_new_string(":startpos"),
@@ -9167,10 +9236,10 @@ public final class TextblockTest {
                         Core.vx_new_string(":children"),
                         Core.f_new(
                           Textblock.t_textblocklist,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("a"),
                                 Core.vx_new_string(":startpos"),
@@ -9181,7 +9250,7 @@ public final class TextblockTest {
                             ),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string(","),
                                 Core.vx_new_string(":startpos"),
@@ -9191,7 +9260,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimcomma,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -9207,14 +9276,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :startpos 13\n  :endpos 13\n  :parent\n   (textblock\n    :startpos 14\n    :endpos 14\n    :delim\n     (delim\n      :delimlist delimlisttest1)\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13\n      :delim\n       (copy delimbracketangle\n        :pos 0)\n      :close delimclosing\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13)\n      :children\n       (textblocklist\n        (textblock\n         :text \"{a,b}\"\n         :startpos 2\n         :endpos 6\n         :delim\n          (copy delimbracketcurly\n           :pos 0)\n         :children\n          (textblocklist\n           (textblock\n            :text \"a\"\n            :startpos 3\n            :endpos 3)\n           (textblock\n            :text \",\"\n            :startpos 4\n            :endpos 4\n            :delim\n             (copy delimcomma\n              :pos 0))\n           (textblock\n            :text \"b\"\n            :startpos 5\n            :endpos 5)))\n        (textblock\n         :text \",\"\n         :startpos 7\n         :endpos 7\n         :delim\n          (copy delimcomma\n           :pos 0))\n        (textblock\n         :text \"{c d}\"\n         :startpos 8\n         :endpos 12\n         :delim\n          (copy delimbracketcurly\n           :pos 0)\n         :children\n          (textblocklist\n           (textblock\n            :text \"c\"\n            :startpos 9\n            :endpos 9)\n          (textblock\n           :text \" \"\n           :startpos 10\n           :endpos 10\n           :delim\n            (copy delimwhitespace\n             :pos 0))\n          (textblock\n           :text \"d\"\n           :startpos 11\n           :endpos 11)))))))\n (textblock<-close-textblock\n  (copy delimclose\n   :starttext \">\"\n   :pos 1)\n  (textblock\n   :text \">\"\n   :startpos 13\n   :endpos 13\n   :delim\n    (delim\n     :delimlist delimlisttest2)\n   :close\n    (copy delimclose\n     :starttext \">\")\n   :parent\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13\n     :delim\n      (copy delimbracketangle\n       :delimlist delimlisttest1)\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13)\n     :children\n      (textblocklist\n       (textblock\n        :text \"{a,b}\"\n        :startpos 2\n        :endpos 6\n        :delim\n         (copy delimbracketcurly\n          :pos 0)\n        :children\n         (textblocklist\n          (textblock\n           :text \"a\"\n           :startpos 3\n           :endpos 3)\n          (textblock\n           :text \",\"\n           :startpos 4\n           :endpos 4\n           :delim\n            (copy delimcomma\n             :pos 0))\n          (textblock\n           :text \"b\"\n           :startpos 5\n           :endpos 5)))\n       (textblock\n        :text \",\"\n        :startpos 7\n        :endpos 7\n        :delim\n         (copy delimcomma\n          :pos 0))\n       (textblock\n        :text \"{c d}\"\n        :startpos 8\n        :endpos 12\n        :delim\n         (copy delimbracketcurly\n          :pos 0)\n        :children\n         (textblocklist\n          (textblock\n           :text \"c\"\n           :startpos 9\n           :endpos 9)\n          (textblock\n           :text \" \"\n           :startpos 10\n           :endpos 10\n           :delim\n            (copy delimwhitespace\n             :pos 0))\n          (textblock\n           :text \"d\"\n           :startpos 11\n           :endpos 11))))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":startpos"),
                   Core.vx_new_int(13),
                   Core.vx_new_string(":endpos"),
@@ -9222,7 +9292,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":startpos"),
                       Core.vx_new_int(14),
                       Core.vx_new_string(":endpos"),
@@ -9230,7 +9300,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_new(
                         Textblock.t_delim,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":delimlist"),
                           Textblock.c_delimlisttest1
                         )
@@ -9238,7 +9308,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<{a,b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -9248,7 +9318,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketangle,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -9258,7 +9328,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":parent"),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("<{a,b},{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -9270,10 +9340,10 @@ public final class TextblockTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("{a,b}"),
                                   Core.vx_new_string(":startpos"),
@@ -9283,7 +9353,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimbracketcurly,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -9291,10 +9361,10 @@ public final class TextblockTest {
                                   Core.vx_new_string(":children"),
                                   Core.f_new(
                                     Textblock.t_textblocklist,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("a"),
                                           Core.vx_new_string(":startpos"),
@@ -9305,7 +9375,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string(","),
                                           Core.vx_new_string(":startpos"),
@@ -9315,7 +9385,7 @@ public final class TextblockTest {
                                           Core.vx_new_string(":delim"),
                                           Core.f_copy(
                                             Textblock.c_delimcomma,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":pos"),
                                               Core.vx_new_int(0)
                                             )
@@ -9324,7 +9394,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("b"),
                                           Core.vx_new_string(":startpos"),
@@ -9339,7 +9409,7 @@ public final class TextblockTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string(","),
                                   Core.vx_new_string(":startpos"),
@@ -9349,7 +9419,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimcomma,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -9358,7 +9428,7 @@ public final class TextblockTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("{c d}"),
                                   Core.vx_new_string(":startpos"),
@@ -9368,7 +9438,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimbracketcurly,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -9376,10 +9446,10 @@ public final class TextblockTest {
                                   Core.vx_new_string(":children"),
                                   Core.f_new(
                                     Textblock.t_textblocklist,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("c"),
                                           Core.vx_new_string(":startpos"),
@@ -9390,7 +9460,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string(" "),
                                           Core.vx_new_string(":startpos"),
@@ -9400,7 +9470,7 @@ public final class TextblockTest {
                                           Core.vx_new_string(":delim"),
                                           Core.f_copy(
                                             Textblock.c_delimwhitespace,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":pos"),
                                               Core.vx_new_int(0)
                                             )
@@ -9409,7 +9479,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("d"),
                                           Core.vx_new_string(":startpos"),
@@ -9433,7 +9503,7 @@ public final class TextblockTest {
               Textblock.f_textblock_from_close_textblock(
                 Core.f_copy(
                   Textblock.c_delimclose,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":starttext"),
                     Core.vx_new_string(">"),
                     Core.vx_new_string(":pos"),
@@ -9442,7 +9512,7 @@ public final class TextblockTest {
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string(">"),
                     Core.vx_new_string(":startpos"),
@@ -9452,7 +9522,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_new(
                       Textblock.t_delim,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":delimlist"),
                         Textblock.c_delimlisttest2
                       )
@@ -9460,7 +9530,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":close"),
                     Core.f_copy(
                       Textblock.c_delimclose,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":starttext"),
                         Core.vx_new_string(">")
                       )
@@ -9468,7 +9538,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("<{a,b},{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -9478,7 +9548,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketangle,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest1
                           )
@@ -9486,7 +9556,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<{a,b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -9498,10 +9568,10 @@ public final class TextblockTest {
                         Core.vx_new_string(":children"),
                         Core.f_new(
                           Textblock.t_textblocklist,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("{a,b}"),
                                 Core.vx_new_string(":startpos"),
@@ -9511,7 +9581,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimbracketcurly,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -9519,10 +9589,10 @@ public final class TextblockTest {
                                 Core.vx_new_string(":children"),
                                 Core.f_new(
                                   Textblock.t_textblocklist,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("a"),
                                         Core.vx_new_string(":startpos"),
@@ -9533,7 +9603,7 @@ public final class TextblockTest {
                                     ),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string(","),
                                         Core.vx_new_string(":startpos"),
@@ -9543,7 +9613,7 @@ public final class TextblockTest {
                                         Core.vx_new_string(":delim"),
                                         Core.f_copy(
                                           Textblock.c_delimcomma,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":pos"),
                                             Core.vx_new_int(0)
                                           )
@@ -9552,7 +9622,7 @@ public final class TextblockTest {
                                     ),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("b"),
                                         Core.vx_new_string(":startpos"),
@@ -9567,7 +9637,7 @@ public final class TextblockTest {
                             ),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string(","),
                                 Core.vx_new_string(":startpos"),
@@ -9577,7 +9647,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimcomma,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -9586,7 +9656,7 @@ public final class TextblockTest {
                             ),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("{c d}"),
                                 Core.vx_new_string(":startpos"),
@@ -9596,7 +9666,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimbracketcurly,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -9604,10 +9674,10 @@ public final class TextblockTest {
                                 Core.vx_new_string(":children"),
                                 Core.f_new(
                                   Textblock.t_textblocklist,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("c"),
                                         Core.vx_new_string(":startpos"),
@@ -9618,7 +9688,7 @@ public final class TextblockTest {
                                     ),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string(" "),
                                         Core.vx_new_string(":startpos"),
@@ -9628,7 +9698,7 @@ public final class TextblockTest {
                                         Core.vx_new_string(":delim"),
                                         Core.f_copy(
                                           Textblock.c_delimwhitespace,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":pos"),
                                             Core.vx_new_int(0)
                                           )
@@ -9637,7 +9707,7 @@ public final class TextblockTest {
                                     ),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("d"),
                                         Core.vx_new_string(":startpos"),
@@ -9665,20 +9735,23 @@ public final class TextblockTest {
   }
 
   static Test.Type_testcase f_textblock_from_open_textblock(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/data/textblock",
       ":casename", "textblock<-open-textblock",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"c}\"\n  :startpos 4\n  :endpos 5\n  :close\n   (copy delimclose\n    :starttext \"}\")\n  :parent\n   (textblock\n    :text \"{c}\"\n    :startpos 3\n    :endpos 5\n    :delim\n     (copy delimbracketcurly\n      :pos 0)\n    :parent\n     (textblock\n      :text \"ab{c}\"\n      :startpos 1\n      :endpos 5\n      :children\n       (textblocklist\n        (textblock\n         :text \"ab\"\n         :startpos 1\n         :endpos 2)))))\n (textblock<-open-textblock\n  (copy delimbracketcurly\n   :pos 3)\n  (textblock\n   :text \"ab{c}\"\n   :startpos 1\n   :endpos 5\n   :delim delimbracketcurly\n   :parent\n    (textblock\n     :text \"ab{c}\"\n     :startpos 1\n     :endpos 5))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("c}"),
                   Core.vx_new_string(":startpos"),
@@ -9688,7 +9761,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":close"),
                   Core.f_copy(
                     Textblock.c_delimclose,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":starttext"),
                       Core.vx_new_string("}")
                     )
@@ -9696,7 +9769,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("{c}"),
                       Core.vx_new_string(":startpos"),
@@ -9706,7 +9779,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_copy(
                         Textblock.c_delimbracketcurly,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":pos"),
                           Core.vx_new_int(0)
                         )
@@ -9714,7 +9787,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("ab{c}"),
                           Core.vx_new_string(":startpos"),
@@ -9724,10 +9797,10 @@ public final class TextblockTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("ab"),
                                   Core.vx_new_string(":startpos"),
@@ -9747,14 +9820,14 @@ public final class TextblockTest {
               Textblock.f_textblock_from_open_textblock(
                 Core.f_copy(
                   Textblock.c_delimbracketcurly,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":pos"),
                     Core.vx_new_int(3)
                   )
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("ab{c}"),
                     Core.vx_new_string(":startpos"),
@@ -9766,7 +9839,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("ab{c}"),
                         Core.vx_new_string(":startpos"),
@@ -9780,14 +9853,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"{a,b},{c d}>\"\n  :startpos 2\n  :endpos 13\n  :delim\n   (delim\n    :delimlist delimlisttest2)\n  :close\n   (copy delimclose\n    :starttext \">\")\n  :parent\n   (textblock\n    :text \"<{a,b},{c d}>\"\n    :startpos 1\n    :endpos 13\n    :delim\n     (copy delimbracketangle\n      :delimlist delimlisttest1)\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13)))\n (textblock<-open-textblock\n  (copy delimtest2\n   :pos 1)\n  (textblock\n   :text \"<{a,b},{c d}>\"\n   :startpos 1\n   :endpos 13\n   :delim delimtest1\n   :parent\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("{a,b},{c d}>"),
                   Core.vx_new_string(":startpos"),
@@ -9797,7 +9871,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":delim"),
                   Core.f_new(
                     Textblock.t_delim,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":delimlist"),
                       Textblock.c_delimlisttest2
                     )
@@ -9805,7 +9879,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":close"),
                   Core.f_copy(
                     Textblock.c_delimclose,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":starttext"),
                       Core.vx_new_string(">")
                     )
@@ -9813,7 +9887,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("<{a,b},{c d}>"),
                       Core.vx_new_string(":startpos"),
@@ -9823,7 +9897,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_copy(
                         Textblock.c_delimbracketangle,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":delimlist"),
                           Textblock.c_delimlisttest1
                         )
@@ -9831,7 +9905,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<{a,b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -9847,14 +9921,14 @@ public final class TextblockTest {
               Textblock.f_textblock_from_open_textblock(
                 Core.f_copy(
                   Textblock.c_delimtest2,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":pos"),
                     Core.vx_new_int(1)
                   )
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("<{a,b},{c d}>"),
                     Core.vx_new_string(":startpos"),
@@ -9866,7 +9940,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("<{a,b},{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -9880,14 +9954,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"a,b},{c d}>\"\n  :startpos 3\n  :endpos 13\n  :delim\n   (delim\n    :delimlist delimlisttest3)\n  :close\n   (copy delimclose\n    :starttext \"}\")\n  :parent\n   (textblock\n    :text \"{a,b},{c d}>\"\n    :startpos 2\n    :endpos 13\n    :delim\n     (copy delimbracketcurly\n      :delimlist delimlisttest2)\n    :close\n     (copy delimclose\n      :starttext \">\")\n    :parent\n     (textblock\n      :text \"<{a,b},{c d}>\"\n      :startpos 1\n      :endpos 13\n      :delim\n       (copy delimbracketangle\n        :pos 0)\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13))))\n (textblock<-open-textblock\n  (copy delimtest3\n   :pos 1)\n  (textblock\n   :text \"{a,b},{c d}>\"\n   :startpos 2\n   :endpos 13\n   :delim\n    (delim\n     :delimlist delimlisttest2)\n   :close\n    (copy delimclose\n     :starttext \">\")\n   :parent\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13\n     :delim\n      (copy delimbracketangle\n       :pos 0)\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13)))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("a,b},{c d}>"),
                   Core.vx_new_string(":startpos"),
@@ -9897,7 +9972,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":delim"),
                   Core.f_new(
                     Textblock.t_delim,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":delimlist"),
                       Textblock.c_delimlisttest3
                     )
@@ -9905,7 +9980,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":close"),
                   Core.f_copy(
                     Textblock.c_delimclose,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":starttext"),
                       Core.vx_new_string("}")
                     )
@@ -9913,7 +9988,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("{a,b},{c d}>"),
                       Core.vx_new_string(":startpos"),
@@ -9923,7 +9998,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_copy(
                         Textblock.c_delimbracketcurly,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":delimlist"),
                           Textblock.c_delimlisttest2
                         )
@@ -9931,7 +10006,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":close"),
                       Core.f_copy(
                         Textblock.c_delimclose,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":starttext"),
                           Core.vx_new_string(">")
                         )
@@ -9939,7 +10014,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<{a,b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -9949,7 +10024,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketangle,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -9957,7 +10032,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":parent"),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("<{a,b},{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -9975,14 +10050,14 @@ public final class TextblockTest {
               Textblock.f_textblock_from_open_textblock(
                 Core.f_copy(
                   Textblock.c_delimtest3,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":pos"),
                     Core.vx_new_int(1)
                   )
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("{a,b},{c d}>"),
                     Core.vx_new_string(":startpos"),
@@ -9992,7 +10067,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_new(
                       Textblock.t_delim,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":delimlist"),
                         Textblock.c_delimlisttest2
                       )
@@ -10000,7 +10075,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":close"),
                     Core.f_copy(
                       Textblock.c_delimclose,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":starttext"),
                         Core.vx_new_string(">")
                       )
@@ -10008,7 +10083,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("<{a,b},{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -10018,7 +10093,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketangle,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -10026,7 +10101,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<{a,b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -10048,20 +10123,23 @@ public final class TextblockTest {
   }
 
   static Test.Type_testcase f_textblock_from_single_textblock(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/data/textblock",
       ":casename", "textblock<-single-textblock",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"a\"\n  :startpos 3\n  :endpos 3\n  :parent\n   (textblock\n    :text \",\"\n    :startpos 4\n    :endpos 4\n    :delim\n     (copy delimcomma\n      :pos 0)\n    :parent\n     (textblock\n      :text \"b},{c d}>\"\n      :startpos 5\n      :endpos 13\n      :delim\n       (delim\n        :delimlist delimlisttest3)\n      :close\n       (copy delimclose\n        :starttext \"}\")\n      :parent\n       (textblock\n        :text \"{a,b},{c d}>\"\n        :startpos 2\n        :endpos 13\n        :delim\n         (copy delimbracketcurly\n          :pos 0)\n        :close\n         (copy delimclose\n          :starttext \">\")\n        :parent\n         (textblock\n          :text \"<{a,b},{c d}>\"\n          :startpos 1\n          :endpos 13\n          :delim\n           (copy delimbracketangle\n            :pos 0)\n          :parent\n           (textblock\n            :text \"<{a,b},{c d}>\"\n            :startpos 1\n            :endpos 13))))))\n (textblock<-single-textblock\n  (copy delimcomma\n   :pos 2)\n  (textblock\n   :text \"a,b},{c d}>\"\n   :startpos 3\n   :endpos 13\n   :delim\n    (delim\n     :delimlist delimlisttest3)\n   :close\n    (copy delimclose\n     :starttext \"}\")\n   :parent\n    (textblock\n     :text \"{a,b},{c d}>\"\n     :startpos 2\n     :endpos 13\n     :delim\n      (copy delimbracketcurly\n       :pos 0)\n     :close\n      (copy delimclose\n       :starttext \">\")\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13\n       :delim\n        (copy delimbracketangle\n         :pos 0)\n       :parent\n        (textblock\n         :text \"<{a,b},{c d}>\"\n         :startpos 1\n         :endpos 13))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("a"),
                   Core.vx_new_string(":startpos"),
@@ -10071,7 +10149,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string(","),
                       Core.vx_new_string(":startpos"),
@@ -10081,7 +10159,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_copy(
                         Textblock.c_delimcomma,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":pos"),
                           Core.vx_new_int(0)
                         )
@@ -10089,7 +10167,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("b},{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -10099,7 +10177,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_new(
                             Textblock.t_delim,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":delimlist"),
                               Textblock.c_delimlisttest3
                             )
@@ -10107,7 +10185,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":close"),
                           Core.f_copy(
                             Textblock.c_delimclose,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":starttext"),
                               Core.vx_new_string("}")
                             )
@@ -10115,7 +10193,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":parent"),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("{a,b},{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -10125,7 +10203,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimbracketcurly,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":pos"),
                                   Core.vx_new_int(0)
                                 )
@@ -10133,7 +10211,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":close"),
                               Core.f_copy(
                                 Textblock.c_delimclose,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":starttext"),
                                   Core.vx_new_string(">")
                                 )
@@ -10141,7 +10219,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":parent"),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("<{a,b},{c d}>"),
                                   Core.vx_new_string(":startpos"),
@@ -10151,7 +10229,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimbracketangle,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -10159,7 +10237,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":parent"),
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("<{a,b},{c d}>"),
                                       Core.vx_new_string(":startpos"),
@@ -10181,14 +10259,14 @@ public final class TextblockTest {
               Textblock.f_textblock_from_single_textblock(
                 Core.f_copy(
                   Textblock.c_delimcomma,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":pos"),
                     Core.vx_new_int(2)
                   )
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("a,b},{c d}>"),
                     Core.vx_new_string(":startpos"),
@@ -10198,7 +10276,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_new(
                       Textblock.t_delim,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":delimlist"),
                         Textblock.c_delimlisttest3
                       )
@@ -10206,7 +10284,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":close"),
                     Core.f_copy(
                       Textblock.c_delimclose,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":starttext"),
                         Core.vx_new_string("}")
                       )
@@ -10214,7 +10292,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("{a,b},{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -10224,7 +10302,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketcurly,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -10232,7 +10310,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":close"),
                         Core.f_copy(
                           Textblock.c_delimclose,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":starttext"),
                             Core.vx_new_string(">")
                           )
@@ -10240,7 +10318,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<{a,b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -10250,7 +10328,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimbracketangle,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -10258,7 +10336,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":parent"),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("<{a,b},{c d}>"),
                                 Core.vx_new_string(":startpos"),
@@ -10276,14 +10354,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :startpos 7\n  :endpos 7\n  :parent\n   (textblock\n    :text \",\"\n    :startpos 7\n    :endpos 7\n    :delim\n     (copy delimcomma\n      :pos 0)\n    :parent\n     (textblock\n      :text \"{c d}>\"\n      :startpos 8\n      :endpos 13\n      :delim\n       (delim\n        :delimlist delimlisttest3)\n      :close\n       (copy delimclose\n        :starttext \">\")\n      :parent\n       (textblock\n        :text \"<{a,b},{c d}>\"\n        :startpos 1\n        :endpos 13\n        :delim\n         (copy delimbracketangle\n          :pos 0)\n        :parent\n         (textblock\n          :text \"<{a,b},{c d}>\"\n          :startpos 1\n          :endpos 13)\n        :children\n         (textblocklist\n          (textblock\n           :text \"{a,b}\"\n           :startpos 2\n           :endpos 6\n           :delim\n            (copy delimbracketcurly\n           :pos 0)\n           :children\n            (textblocklist\n             (textblock\n              :text \"a\"\n              :startpos 3\n              :endpos 3)\n             (textblock\n              :text \",\"\n              :startpos 4\n              :endpos 4\n              :delim\n               (copy delimcomma\n                :pos 0))\n             (textblock\n              :text \"b\"\n              :startpos 5\n              :endpos 5))))))))\n (textblock<-single-textblock\n  (copy delimcomma\n   :pos 1)\n  (textblock\n   :text \",{c d}>\"\n   :startpos 7\n   :endpos 13\n   :delim\n    (delim\n     :delimlist delimlisttest3)\n   :close\n    (copy delimclose\n     :starttext \">\")\n   :parent\n    (textblock\n     :text \"<{a,b},{c d}>\"\n     :startpos 1\n     :endpos 13\n     :delim\n      (copy delimbracketangle\n       :pos 0)\n     :parent\n      (textblock\n       :text \"<{a,b},{c d}>\"\n       :startpos 1\n       :endpos 13)\n     :children\n      (textblocklist\n       (textblock\n        :text \"{a,b}\"\n        :startpos 2\n        :endpos 6\n        :delim\n         (copy delimbracketcurly\n          :pos 0)\n        :children\n         (textblocklist\n          (textblock\n           :text \"a\"\n           :startpos 3\n           :endpos 3)\n          (textblock\n           :text \",\"\n           :startpos 4\n           :endpos 4\n           :delim\n            (copy delimcomma\n             :pos 0))\n          (textblock\n           :text \"b\"\n           :startpos 5\n           :endpos 5))))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":startpos"),
                   Core.vx_new_int(7),
                   Core.vx_new_string(":endpos"),
@@ -10291,7 +10370,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string(","),
                       Core.vx_new_string(":startpos"),
@@ -10301,7 +10380,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_copy(
                         Textblock.c_delimcomma,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":pos"),
                           Core.vx_new_int(0)
                         )
@@ -10309,7 +10388,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("{c d}>"),
                           Core.vx_new_string(":startpos"),
@@ -10319,7 +10398,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_new(
                             Textblock.t_delim,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":delimlist"),
                               Textblock.c_delimlisttest3
                             )
@@ -10327,7 +10406,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":close"),
                           Core.f_copy(
                             Textblock.c_delimclose,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":starttext"),
                               Core.vx_new_string(">")
                             )
@@ -10335,7 +10414,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":parent"),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("<{a,b},{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -10345,7 +10424,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimbracketangle,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":pos"),
                                   Core.vx_new_int(0)
                                 )
@@ -10353,7 +10432,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":parent"),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("<{a,b},{c d}>"),
                                   Core.vx_new_string(":startpos"),
@@ -10365,10 +10444,10 @@ public final class TextblockTest {
                               Core.vx_new_string(":children"),
                               Core.f_new(
                                 Textblock.t_textblocklist,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("{a,b}"),
                                       Core.vx_new_string(":startpos"),
@@ -10378,7 +10457,7 @@ public final class TextblockTest {
                                       Core.vx_new_string(":delim"),
                                       Core.f_copy(
                                         Textblock.c_delimbracketcurly,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":pos"),
                                           Core.vx_new_int(0)
                                         )
@@ -10386,10 +10465,10 @@ public final class TextblockTest {
                                       Core.vx_new_string(":children"),
                                       Core.f_new(
                                         Textblock.t_textblocklist,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string("a"),
                                               Core.vx_new_string(":startpos"),
@@ -10400,7 +10479,7 @@ public final class TextblockTest {
                                           ),
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string(","),
                                               Core.vx_new_string(":startpos"),
@@ -10410,7 +10489,7 @@ public final class TextblockTest {
                                               Core.vx_new_string(":delim"),
                                               Core.f_copy(
                                                 Textblock.c_delimcomma,
-                                                Core.t_anylist.vx_new(
+                                                Core.vx_new(Core.t_anylist,
                                                   Core.vx_new_string(":pos"),
                                                   Core.vx_new_int(0)
                                                 )
@@ -10419,7 +10498,7 @@ public final class TextblockTest {
                                           ),
                                           Core.f_new(
                                             Textblock.t_textblock,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":text"),
                                               Core.vx_new_string("b"),
                                               Core.vx_new_string(":startpos"),
@@ -10445,14 +10524,14 @@ public final class TextblockTest {
               Textblock.f_textblock_from_single_textblock(
                 Core.f_copy(
                   Textblock.c_delimcomma,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":pos"),
                     Core.vx_new_int(1)
                   )
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string(",{c d}>"),
                     Core.vx_new_string(":startpos"),
@@ -10462,7 +10541,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_new(
                       Textblock.t_delim,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":delimlist"),
                         Textblock.c_delimlisttest3
                       )
@@ -10470,7 +10549,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":close"),
                     Core.f_copy(
                       Textblock.c_delimclose,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":starttext"),
                         Core.vx_new_string(">")
                       )
@@ -10478,7 +10557,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("<{a,b},{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -10488,7 +10567,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketangle,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -10496,7 +10575,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<{a,b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -10508,10 +10587,10 @@ public final class TextblockTest {
                         Core.vx_new_string(":children"),
                         Core.f_new(
                           Textblock.t_textblocklist,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("{a,b}"),
                                 Core.vx_new_string(":startpos"),
@@ -10521,7 +10600,7 @@ public final class TextblockTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimbracketcurly,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -10529,10 +10608,10 @@ public final class TextblockTest {
                                 Core.vx_new_string(":children"),
                                 Core.f_new(
                                   Textblock.t_textblocklist,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("a"),
                                         Core.vx_new_string(":startpos"),
@@ -10543,7 +10622,7 @@ public final class TextblockTest {
                                     ),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string(","),
                                         Core.vx_new_string(":startpos"),
@@ -10553,7 +10632,7 @@ public final class TextblockTest {
                                         Core.vx_new_string(":delim"),
                                         Core.f_copy(
                                           Textblock.c_delimcomma,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":pos"),
                                             Core.vx_new_int(0)
                                           )
@@ -10562,7 +10641,7 @@ public final class TextblockTest {
                                     ),
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("b"),
                                         Core.vx_new_string(":startpos"),
@@ -10584,14 +10663,15 @@ public final class TextblockTest {
               )
             )
         ),
-        Test.t_testdescribe.vx_new(
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"c\"\n  :startpos 9\n  :endpos 9\n  :parent\n   (textblock\n    :text \" \"\n    :startpos 10\n    :endpos 10\n    :delim\n     (copy delimwhitespace\n      :pos 0)\n    :parent\n     (textblock\n      :text \"d}>\"\n      :startpos 11\n      :endpos 13\n      :delim\n       (delim\n        :delimlist delimlisttest3)\n      :close\n       (copy delimclose\n        :starttext \"}\")\n      :parent\n       (textblock\n        :text \"{c d}>\"\n        :startpos 8\n        :endpos 13\n        :delim\n         (copy delimbracketcurly\n          :delimlist delimlisttest2)\n        :close\n         (copy delimclose\n          :starttext \">\")\n        :parent\n         (textblock\n          :text \"<{a,b},{c d}>\"\n          :startpos 1\n          :endpos 13\n          :delim\n           (copy delimbracketangle\n            :delimlist delimlisttest1)\n          :parent\n           (textblock\n            :text \"<{a,b},{c d}>\"\n            :startpos 1\n            :endpos 13)\n          :children\n           (textblocklist\n            (textblock\n             :text \"{a,b}\"\n             :startpos 2\n             :endpos 6\n             :delim\n              (copy delimbracketcurly\n               :pos 0)\n             :children\n              (textblocklist\n               (textblock\n                :text \"a\"\n                :startpos 3\n                :endpos 3)\n               (textblock\n                :text \",\"\n                :startpos 4\n                :endpos 4\n                :delim\n                 (copy delimcomma\n                  :pos 0))\n               (textblock\n                :text \"b\"\n                :startpos 5\n                :endpos 5)))\n            (textblock\n             :text \",\"\n             :startpos 7\n             :endpos 7\n             :delim\n              (copy delimcomma\n               :pos 0))))))))\n (textblock<-single-textblock\n  (copy delimwhitespace\n   :pos 2)\n  (textblock\n   :text \"c d}>\"\n   :startpos 9\n   :endpos 13\n   :delim\n    (delim\n     :delimlist delimlisttest3)\n     :close\n      (copy delimclose\n       :starttext \"}\")\n     :parent\n      (textblock\n       :text \"{c d}>\"\n       :startpos 8\n       :endpos 13\n       :delim\n        (copy delimbracketcurly\n         :delimlist delimlisttest2)\n       :close\n        (copy delimclose\n         :starttext \">\")\n       :parent\n        (textblock\n         :text \"<{a,b},{c d}>\"\n         :startpos 1\n         :endpos 13\n         :delim\n          (copy delimbracketangle\n           :delimlist delimlisttest1)\n         :parent\n          (textblock\n           :text \"<{a,b},{c d}>\"\n           :startpos 1\n           :endpos 13)\n         :children\n          (textblocklist\n           (textblock\n            :text \"{a,b}\"\n            :startpos 2\n            :endpos 6\n            :delim\n             (copy delimbracketcurly\n              :pos 0)\n            :children\n             (textblocklist\n              (textblock\n               :text \"a\"\n               :startpos 3\n               :endpos 3)\n              (textblock\n               :text \",\"\n               :startpos 4\n               :endpos 4\n               :delim\n                (copy delimcomma\n                 :pos 0))\n              (textblock\n               :text \"b\"\n               :startpos 5\n               :endpos 5)))\n           (textblock\n            :text \",\"\n            :startpos 7\n            :endpos 7\n            :delim\n             (copy delimcomma\n              :pos 0))))))))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("c"),
                   Core.vx_new_string(":startpos"),
@@ -10601,7 +10681,7 @@ public final class TextblockTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string(" "),
                       Core.vx_new_string(":startpos"),
@@ -10611,7 +10691,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":delim"),
                       Core.f_copy(
                         Textblock.c_delimwhitespace,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":pos"),
                           Core.vx_new_int(0)
                         )
@@ -10619,7 +10699,7 @@ public final class TextblockTest {
                       Core.vx_new_string(":parent"),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.t_anylist.vx_new(
+                        Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("d}>"),
                           Core.vx_new_string(":startpos"),
@@ -10629,7 +10709,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":delim"),
                           Core.f_new(
                             Textblock.t_delim,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":delimlist"),
                               Textblock.c_delimlisttest3
                             )
@@ -10637,7 +10717,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":close"),
                           Core.f_copy(
                             Textblock.c_delimclose,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":starttext"),
                               Core.vx_new_string("}")
                             )
@@ -10645,7 +10725,7 @@ public final class TextblockTest {
                           Core.vx_new_string(":parent"),
                           Core.f_new(
                             Textblock.t_textblock,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":text"),
                               Core.vx_new_string("{c d}>"),
                               Core.vx_new_string(":startpos"),
@@ -10655,7 +10735,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":delim"),
                               Core.f_copy(
                                 Textblock.c_delimbracketcurly,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":delimlist"),
                                   Textblock.c_delimlisttest2
                                 )
@@ -10663,7 +10743,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":close"),
                               Core.f_copy(
                                 Textblock.c_delimclose,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":starttext"),
                                   Core.vx_new_string(">")
                                 )
@@ -10671,7 +10751,7 @@ public final class TextblockTest {
                               Core.vx_new_string(":parent"),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.t_anylist.vx_new(
+                                Core.vx_new(Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("<{a,b},{c d}>"),
                                   Core.vx_new_string(":startpos"),
@@ -10681,7 +10761,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimbracketangle,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":delimlist"),
                                       Textblock.c_delimlisttest1
                                     )
@@ -10689,7 +10769,7 @@ public final class TextblockTest {
                                   Core.vx_new_string(":parent"),
                                   Core.f_new(
                                     Textblock.t_textblock,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.vx_new_string(":text"),
                                       Core.vx_new_string("<{a,b},{c d}>"),
                                       Core.vx_new_string(":startpos"),
@@ -10701,10 +10781,10 @@ public final class TextblockTest {
                                   Core.vx_new_string(":children"),
                                   Core.f_new(
                                     Textblock.t_textblocklist,
-                                    Core.t_anylist.vx_new(
+                                    Core.vx_new(Core.t_anylist,
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("{a,b}"),
                                           Core.vx_new_string(":startpos"),
@@ -10714,7 +10794,7 @@ public final class TextblockTest {
                                           Core.vx_new_string(":delim"),
                                           Core.f_copy(
                                             Textblock.c_delimbracketcurly,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":pos"),
                                               Core.vx_new_int(0)
                                             )
@@ -10722,10 +10802,10 @@ public final class TextblockTest {
                                           Core.vx_new_string(":children"),
                                           Core.f_new(
                                             Textblock.t_textblocklist,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.f_new(
                                                 Textblock.t_textblock,
-                                                Core.t_anylist.vx_new(
+                                                Core.vx_new(Core.t_anylist,
                                                   Core.vx_new_string(":text"),
                                                   Core.vx_new_string("a"),
                                                   Core.vx_new_string(":startpos"),
@@ -10736,7 +10816,7 @@ public final class TextblockTest {
                                               ),
                                               Core.f_new(
                                                 Textblock.t_textblock,
-                                                Core.t_anylist.vx_new(
+                                                Core.vx_new(Core.t_anylist,
                                                   Core.vx_new_string(":text"),
                                                   Core.vx_new_string(","),
                                                   Core.vx_new_string(":startpos"),
@@ -10746,7 +10826,7 @@ public final class TextblockTest {
                                                   Core.vx_new_string(":delim"),
                                                   Core.f_copy(
                                                     Textblock.c_delimcomma,
-                                                    Core.t_anylist.vx_new(
+                                                    Core.vx_new(Core.t_anylist,
                                                       Core.vx_new_string(":pos"),
                                                       Core.vx_new_int(0)
                                                     )
@@ -10755,7 +10835,7 @@ public final class TextblockTest {
                                               ),
                                               Core.f_new(
                                                 Textblock.t_textblock,
-                                                Core.t_anylist.vx_new(
+                                                Core.vx_new(Core.t_anylist,
                                                   Core.vx_new_string(":text"),
                                                   Core.vx_new_string("b"),
                                                   Core.vx_new_string(":startpos"),
@@ -10770,7 +10850,7 @@ public final class TextblockTest {
                                       ),
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.t_anylist.vx_new(
+                                        Core.vx_new(Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string(","),
                                           Core.vx_new_string(":startpos"),
@@ -10780,7 +10860,7 @@ public final class TextblockTest {
                                           Core.vx_new_string(":delim"),
                                           Core.f_copy(
                                             Textblock.c_delimcomma,
-                                            Core.t_anylist.vx_new(
+                                            Core.vx_new(Core.t_anylist,
                                               Core.vx_new_string(":pos"),
                                               Core.vx_new_int(0)
                                             )
@@ -10802,14 +10882,14 @@ public final class TextblockTest {
               Textblock.f_textblock_from_single_textblock(
                 Core.f_copy(
                   Textblock.c_delimwhitespace,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":pos"),
                     Core.vx_new_int(2)
                   )
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("c d}>"),
                     Core.vx_new_string(":startpos"),
@@ -10819,7 +10899,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":delim"),
                     Core.f_new(
                       Textblock.t_delim,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":delimlist"),
                         Textblock.c_delimlisttest3
                       )
@@ -10827,7 +10907,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":close"),
                     Core.f_copy(
                       Textblock.c_delimclose,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":starttext"),
                         Core.vx_new_string("}")
                       )
@@ -10835,7 +10915,7 @@ public final class TextblockTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("{c d}>"),
                         Core.vx_new_string(":startpos"),
@@ -10845,7 +10925,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketcurly,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":delimlist"),
                             Textblock.c_delimlisttest2
                           )
@@ -10853,7 +10933,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":close"),
                         Core.f_copy(
                           Textblock.c_delimclose,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":starttext"),
                             Core.vx_new_string(">")
                           )
@@ -10861,7 +10941,7 @@ public final class TextblockTest {
                         Core.vx_new_string(":parent"),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<{a,b},{c d}>"),
                             Core.vx_new_string(":startpos"),
@@ -10871,7 +10951,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimbracketangle,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":delimlist"),
                                 Textblock.c_delimlisttest1
                               )
@@ -10879,7 +10959,7 @@ public final class TextblockTest {
                             Core.vx_new_string(":parent"),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("<{a,b},{c d}>"),
                                 Core.vx_new_string(":startpos"),
@@ -10891,10 +10971,10 @@ public final class TextblockTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.t_anylist.vx_new(
+                              Core.vx_new(Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("{a,b}"),
                                     Core.vx_new_string(":startpos"),
@@ -10904,7 +10984,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimbracketcurly,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -10912,10 +10992,10 @@ public final class TextblockTest {
                                     Core.vx_new_string(":children"),
                                     Core.f_new(
                                       Textblock.t_textblocklist,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("a"),
                                             Core.vx_new_string(":startpos"),
@@ -10926,7 +11006,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string(","),
                                             Core.vx_new_string(":startpos"),
@@ -10936,7 +11016,7 @@ public final class TextblockTest {
                                             Core.vx_new_string(":delim"),
                                             Core.f_copy(
                                               Textblock.c_delimcomma,
-                                              Core.t_anylist.vx_new(
+                                              Core.vx_new(Core.t_anylist,
                                                 Core.vx_new_string(":pos"),
                                                 Core.vx_new_int(0)
                                               )
@@ -10945,7 +11025,7 @@ public final class TextblockTest {
                                         ),
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.t_anylist.vx_new(
+                                          Core.vx_new(Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("b"),
                                             Core.vx_new_string(":startpos"),
@@ -10960,7 +11040,7 @@ public final class TextblockTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.t_anylist.vx_new(
+                                  Core.vx_new(Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string(","),
                                     Core.vx_new_string(":startpos"),
@@ -10970,7 +11050,7 @@ public final class TextblockTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimcomma,
-                                      Core.t_anylist.vx_new(
+                                      Core.vx_new(Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -10994,20 +11074,23 @@ public final class TextblockTest {
   }
 
   static Test.Type_testcase f_textblock_from_string_delim(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/data/textblock",
       ":casename", "textblock<-string-delim",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblock\n  :text \"a\"\n  :startpos 0\n  :endpos 1\n  :delim delimcomma)\n (textblock<-string-delim\n  \"a\"\n  delimcomma))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("a"),
                   Core.vx_new_string(":startpos"),
@@ -11030,37 +11113,40 @@ public final class TextblockTest {
   }
 
   static Test.Type_testcase f_textblocklist_from_textblocklist_remove(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/data/textblock",
       ":casename", "textblocklist<-textblocklist-remove",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n (textblocklist\n  (textblock\n   :text \"+\")\n  (textblock\n   :text \"2\")\n  (textblock\n   :text \"3\"))\n (textblocklist<-textblocklist-remove\n  (textblocklist\n   (textblock\n    :text \"+\")\n   (textblock\n    :text \" \"\n    :delim\n     (copy delimwhitespace\n      :pos 0))\n   (textblock\n    :text \"2\")\n   (textblock\n    :text \" \"\n    :delim\n     (copy delimwhitespace\n      :pos 0))\n   (textblock\n    :text \"3\"))\n  delimwhitespace))",
           ":testresult",
             Test.f_test(
               context,
               Core.f_new(
                 Textblock.t_textblocklist,
-                Core.t_anylist.vx_new(
+                Core.vx_new(Core.t_anylist,
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("+")
                     )
                   ),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("2")
                     )
                   ),
                   Core.f_new(
                     Textblock.t_textblock,
-                    Core.t_anylist.vx_new(
+                    Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":text"),
                       Core.vx_new_string("3")
                     )
@@ -11070,23 +11156,23 @@ public final class TextblockTest {
               Textblock.f_textblocklist_from_textblocklist_remove(
                 Core.f_new(
                   Textblock.t_textblocklist,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("+")
                       )
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string(" "),
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimwhitespace,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -11095,20 +11181,20 @@ public final class TextblockTest {
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("2")
                       )
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string(" "),
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimwhitespace,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -11117,7 +11203,7 @@ public final class TextblockTest {
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("3")
                       )
@@ -11154,33 +11240,36 @@ public final class TextblockTest {
       TextblockTest.f_textblock_from_string_delim(context),
       TextblockTest.f_textblocklist_from_textblocklist_remove(context)
     ));
-    Test.Type_testcaselist output = Test.t_testcaselist.vx_new(arraylisttestcase);
+    Test.Type_testcaselist output = Core.vx_new(
+      Test.t_testcaselist,
+      arraylisttestcase
+    );
     return output;
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Test.t_testcoveragesummary.vx_new(
-      ":testpkg",   "vx/data/textblock", 
-      ":constnums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 22), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 52, ":total", 52), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 65, ":tests", 17, ":total", 26), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 3, ":tests", 1, ":total", 26), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 3, ":tests", 1, ":total", 26), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 34, ":tests", 18, ":total", 52), 
-      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 25, ":tests", 1, ":total", 4)
+    return Core.vx_new(
+      Test.t_testcoveragesummary,
+      ":testpkg", "vx/data/textblock", 
+      ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 22), 
+      ":docnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 52, ":total", 52), 
+      ":funcnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 65, ":tests", 17, ":total", 26), 
+      ":bigospacenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 3, ":tests", 1, ":total", 26), 
+      ":bigotimenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 3, ":tests", 1, ":total", 26), 
+      ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 34, ":tests", 18, ":total", 52), 
+      ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 25, ":tests", 1, ":total", 4)
     );
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Test.t_testcoveragedetail.vx_new(
-      ":testpkg", "vx/data/textblock",
-      ":typemap", Core.t_intmap.vx_new(
+    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/data/textblock", ":typemap", Core.vx_new(
+  Core.t_intmap,
         ":delim", 0,
         ":delimlist", 1,
         ":textblock", 0,
         ":textblocklist", 0
-      ),
-      ":constmap", Core.t_intmap.vx_new(
+), ":constmap", Core.vx_new(
+  Core.t_intmap,
         ":delimbracketangle", 0,
         ":delimbracketcurly", 0,
         ":delimbracketsquare", 0,
@@ -11203,8 +11292,8 @@ public final class TextblockTest {
         ":delimtest3", 0,
         ":delimtext", 0,
         ":delimwhitespace", 0
-      ),
-      ":funcmap", Core.t_intmap.vx_new(
+), ":funcmap", Core.vx_new(
+  Core.t_intmap,
         ":children<-textblock", 0,
         ":delim-first<-delim-delim", 2,
         ":delim-first<-string-delimlist", 1,
@@ -11231,13 +11320,13 @@ public final class TextblockTest {
         ":textblock<-string-delim", 1,
         ":textblock<-textblock-delim", 0,
         ":textblocklist<-textblocklist-remove", 1
-      )
-    );
+      ));
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {
     Test.Type_testcaselist testcaselist = test_cases(context);
-    Test.Type_testpackage output = Test.t_testpackage.vx_new(
+    Test.Type_testpackage output = Core.vx_new(
+      Test.t_testpackage,
       ":testpkg", "vx/data/textblock", 
       ":caselist", testcaselist,
       ":coveragesummary", test_coveragesummary(),

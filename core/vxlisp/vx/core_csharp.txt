@@ -24,6 +24,21 @@
     protected int vx_iref = 0;
     protected vx_core.Type_constdef vxconstdef = null;
     protected vx_core.Type_msgblock vxmsgblock = null;
+    public virtual vx_core.Type_any vx_new(params Object[] vals) {
+      return e_any;
+    }
+    public virtual vx_core.Type_any vx_copy(params Object[] vals) {
+      return e_any;
+    }
+    public virtual vx_core.Type_any vx_empty() {
+      return e_any;
+    }
+    public virtual vx_core.Type_any vx_type() {
+      return t_any;
+    }
+    public virtual vx_core.Type_typedef vx_typedef() {
+      return e_typedef;
+    }
     public List<Type_any> vx_dispose() {
       this.vx_iref = 0;
       this.vxmsgblock = null;
@@ -95,7 +110,7 @@
     return output;
   }
 
-  public static List<T> arraylist_from_arraylist_fn<T, U>(List<U> listval, Function<U, T> fn_any_from_any) {
+  public static List<T> arraylist_from_arraylist_fn<T, U>(List<U> listval, Func<U, T> fn_any_from_any) {
     List<T> output = new List<>();
     foreach (U value_u in listval) {
       T t_val = fn_any_from_any.apply(value_u);
@@ -115,7 +130,7 @@
     return output;
   }
 
-  public static List<T> arraylist_from_linkedhashmap_fn<T, U>(Map<String, U> mapval, BiFunction<String, U, T> fn_any_from_key_value) {
+  public static List<T> arraylist_from_linkedhashmap_fn<T, U>(Map<String, U> mapval, Func<String, U, T> fn_any_from_key_value) {
     List<T> output = new List<T>();
     Set<String> keys = mapval.keySet();
     foreach (String key in keys) {
@@ -138,7 +153,7 @@
     return output;
   }
 
-  public static Task<T> async_from_async_fn<T, U>(Task<U> future, Function<U, T> fn) {
+  public static Task<T> async_from_async_fn<T, U>(Task<U> future, Func<U, T> fn) {
     Task<T> output = future.ContinueWith(antecedent => {
       U result = antedcedent.Result;
       return fn(result);
@@ -176,7 +191,7 @@
     return output;
   }
 
-  public static Map<String, T> map_from_list_fn<T>(List<T> listval, Function<T, vx_core.Type_string> fn_any_from_any) {
+  public static Map<String, T> map_from_list_fn<T>(List<T> listval, Func<T, vx_core.Type_string> fn_any_from_any) {
     Map<String, T> output = new LinkedHashMap<>();
     foreach (T val in listval) {
       vx_core.Type_string valkey = fn_any_from_any.apply(val);
@@ -387,7 +402,7 @@
   }
 
   // vx_log(object...)
-  public static void vx_log(params Object values) {
+  public static void vx_log(params Object[] values) {
     foreach (Object value in values) {
       String text = "";
       if (value == null) {

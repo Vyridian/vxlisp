@@ -242,7 +242,7 @@ public final class AppTest {
   @Test
   @DisplayName("writetestsuite")
   void test_writetestsuite() {
-    com.vxlisp.vx.Test.Type_testpackagelist testpackagelist = com.vxlisp.vx.Test.t_testpackagelist.vx_new(
+    com.vxlisp.vx.Test.Type_testpackagelist testpackagelist = Core.vx_new(com.vxlisp.vx.Test.t_testpackagelist, 
     CoreTest.test_package(context),
     DbTest.test_package(context),
     TableTest.test_package(context),

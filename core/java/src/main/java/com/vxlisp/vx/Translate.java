@@ -59,9 +59,13 @@ public final class Translate {
     }
 
     @Override
-    public Func_session_from_session_name vx_empty() {return e_session_from_session_name;}
+    public Core.Type_any vx_empty() {
+      return e_session_from_session_name;
+    }
     @Override
-    public Func_session_from_session_name vx_type() {return t_session_from_session_name;}
+    public Core.Type_any vx_type() {
+      return t_session_from_session_name;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -85,7 +89,7 @@ public final class Translate {
     Core.Type_session output = Core.e_session;
     output = Core.f_copy(
       session,
-      Core.t_anylist.vx_new(
+      Core.vx_new(Core.t_anylist,
         Core.vx_new_string(":translation"),
         Translate.f_translation_from_session_name(session, name)
       )
@@ -146,9 +150,13 @@ public final class Translate {
     }
 
     @Override
-    public Func_session_from_session_translation vx_empty() {return e_session_from_session_translation;}
+    public Core.Type_any vx_empty() {
+      return e_session_from_session_translation;
+    }
     @Override
-    public Func_session_from_session_translation vx_type() {return t_session_from_session_translation;}
+    public Core.Type_any vx_type() {
+      return t_session_from_session_translation;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -172,7 +180,7 @@ public final class Translate {
     Core.Type_session output = Core.e_session;
     output = Core.f_copy(
       session,
-      Core.t_anylist.vx_new(
+      Core.vx_new(Core.t_anylist,
         Core.vx_new_string(":translation"),
         translation
       )
@@ -234,9 +242,13 @@ public final class Translate {
     }
 
     @Override
-    public Func_session_from_session_translationmap_name vx_empty() {return e_session_from_session_translationmap_name;}
+    public Core.Type_any vx_empty() {
+      return e_session_from_session_translationmap_name;
+    }
     @Override
-    public Func_session_from_session_translationmap_name vx_type() {return t_session_from_session_translationmap_name;}
+    public Core.Type_any vx_type() {
+      return t_session_from_session_translationmap_name;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -261,7 +273,7 @@ public final class Translate {
     Core.Type_session output = Core.e_session;
     output = Core.f_copy(
       session,
-      Core.t_anylist.vx_new(
+      Core.vx_new(Core.t_anylist,
         Core.vx_new_string(":translation"),
         Core.f_any_from_map(Core.t_anylist, translationmap, name),
         Core.vx_new_string(":translationmap"),
@@ -323,12 +335,18 @@ public final class Translate {
     }
 
     @Override
-    public Func_translate vx_empty() {return e_translate;}
+    public Core.Type_any vx_empty() {
+      return e_translate;
+    }
     @Override
-    public Func_translate vx_type() {return t_translate;}
+    public Core.Type_any vx_type() {
+      return t_translate;
+    }
 
     @Override
-    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {
+      return Core.e_any_from_any_context;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
@@ -418,12 +436,18 @@ public final class Translate {
     }
 
     @Override
-    public Func_translate_1 vx_empty() {return e_translate_1;}
+    public Core.Type_any vx_empty() {
+      return e_translate_1;
+    }
     @Override
-    public Func_translate_1 vx_type() {return t_translate_1;}
+    public Core.Type_any vx_type() {
+      return t_translate_1;
+    }
 
     @Override
-    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {
+      return Core.e_any_from_any_context;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
@@ -461,7 +485,7 @@ public final class Translate {
         final Core.Type_string code = msg.code();
         final Core.Type_string text = Core.f_new(
           Core.t_string,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
               Core.vx_new_string("!"),
               path,
               Core.vx_new_string(" "),
@@ -527,9 +551,13 @@ public final class Translate {
     }
 
     @Override
-    public Func_translate_from_translation_string vx_empty() {return e_translate_from_translation_string;}
+    public Core.Type_any vx_empty() {
+      return e_translate_from_translation_string;
+    }
     @Override
-    public Func_translate_from_translation_string vx_type() {return t_translate_from_translation_string;}
+    public Core.Type_any vx_type() {
+      return t_translate_from_translation_string;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -626,9 +654,13 @@ public final class Translate {
     }
 
     @Override
-    public Func_translate_from_translationmap_name_string vx_empty() {return e_translate_from_translationmap_name_string;}
+    public Core.Type_any vx_empty() {
+      return e_translate_from_translationmap_name_string;
+    }
     @Override
-    public Func_translate_from_translationmap_name_string vx_type() {return t_translate_from_translationmap_name_string;}
+    public Core.Type_any vx_type() {
+      return t_translate_from_translationmap_name_string;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -713,12 +745,18 @@ public final class Translate {
     }
 
     @Override
-    public Func_translation_load_session vx_empty() {return e_translation_load_session;}
+    public Core.Type_any vx_empty() {
+      return e_translation_load_session;
+    }
     @Override
-    public Func_translation_load_session vx_type() {return t_translation_load_session;}
+    public Core.Type_any vx_type() {
+      return t_translation_load_session;
+    }
 
     @Override
-    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {
+      return Core.e_any_from_any_context;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
@@ -803,9 +841,13 @@ public final class Translate {
     }
 
     @Override
-    public Func_translation_from_context vx_empty() {return e_translation_from_context;}
+    public Core.Type_any vx_empty() {
+      return e_translation_from_context;
+    }
     @Override
-    public Func_translation_from_context vx_type() {return t_translation_from_context;}
+    public Core.Type_any vx_type() {
+      return t_translation_from_context;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -883,9 +925,13 @@ public final class Translate {
     }
 
     @Override
-    public Func_translation_from_session_name vx_empty() {return e_translation_from_session_name;}
+    public Core.Type_any vx_empty() {
+      return e_translation_from_session_name;
+    }
     @Override
-    public Func_translation_from_session_name vx_type() {return t_translation_from_session_name;}
+    public Core.Type_any vx_type() {
+      return t_translation_from_session_name;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -957,7 +1003,7 @@ public final class Translate {
           "translationmap", // name
           ":map", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_translation), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_translation), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -969,12 +1015,18 @@ public final class Translate {
     }
 
     @Override
-    public Func_translationmap_from_translations vx_empty() {return e_translationmap_from_translations;}
+    public Core.Type_any vx_empty() {
+      return e_translationmap_from_translations;
+    }
     @Override
-    public Func_translationmap_from_translations vx_type() {return t_translationmap_from_translations;}
+    public Core.Type_any vx_type() {
+      return t_translationmap_from_translations;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {

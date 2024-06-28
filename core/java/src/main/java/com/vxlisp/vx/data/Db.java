@@ -16,10 +16,10 @@ public final class Db {
    * (type db)
    */
   public interface Type_db extends Core.Type_struct {
-    public Db.Type_db vx_new(final Object... vals);
-    public Db.Type_db vx_copy(final Object... vals);
-    public Db.Type_db vx_empty();
-    public Db.Type_db vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Core.Type_string dbid();
   }
 
@@ -53,7 +53,9 @@ public final class Db {
 
     @Override
     public Db.Type_db vx_new(final Object... vals) {
-      return e_db.vx_copy(vals);
+      return Core.vx_copy(
+       e_db,
+       vals);
     }
 
     @Override
@@ -72,9 +74,9 @@ public final class Db {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -93,7 +95,7 @@ public final class Db {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/data/db/db", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -105,7 +107,7 @@ public final class Db {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/data/db/db", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -117,7 +119,7 @@ public final class Db {
               vx_p_dbid = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_dbid = Core.t_string.vx_new(valsub);
+              vx_p_dbid = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -130,13 +132,13 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/db", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/db/db", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -153,9 +155,13 @@ public final class Db {
     }
 
     @Override
-    public Type_db vx_empty() {return e_db;}
+    public Core.Type_any vx_empty() {
+      return e_db;
+    }
     @Override
-    public Type_db vx_type() {return t_db;}
+    public Core.Type_any vx_type() {
+      return t_db;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -185,10 +191,10 @@ public final class Db {
    * (type dbcell)
    */
   public interface Type_dbcell extends Core.Type_struct {
-    public Db.Type_dbcell vx_new(final Object... vals);
-    public Db.Type_dbcell vx_copy(final Object... vals);
-    public Db.Type_dbcell vx_empty();
-    public Db.Type_dbcell vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Core.Type_string dbcellid();
     public Db.Type_dbcellmap dbcellmap();
     public Db.Type_dbfieldmap dbfieldmap();
@@ -270,7 +276,9 @@ public final class Db {
 
     @Override
     public Db.Type_dbcell vx_new(final Object... vals) {
-      return e_dbcell.vx_copy(vals);
+      return Core.vx_copy(
+       e_dbcell,
+       vals);
     }
 
     @Override
@@ -297,9 +305,9 @@ public final class Db {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -318,7 +326,7 @@ public final class Db {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/data/db/dbcell", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -330,7 +338,7 @@ public final class Db {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/data/db/dbcell", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -342,7 +350,7 @@ public final class Db {
               vx_p_dbcellid = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_dbcellid = Core.t_string.vx_new(valsub);
+              vx_p_dbcellid = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -355,7 +363,7 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbcell", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":dbcellmap":
@@ -375,7 +383,7 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbcell", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":dbfieldmap":
@@ -395,7 +403,7 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbcell", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":dbparent":
@@ -415,7 +423,7 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbcell", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":dbtable":
@@ -435,13 +443,13 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbcell", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/db/dbcell", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -462,9 +470,13 @@ public final class Db {
     }
 
     @Override
-    public Type_dbcell vx_empty() {return e_dbcell;}
+    public Core.Type_any vx_empty() {
+      return e_dbcell;
+    }
     @Override
-    public Type_dbcell vx_type() {return t_dbcell;}
+    public Core.Type_any vx_type() {
+      return t_dbcell;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -494,10 +506,10 @@ public final class Db {
    * (type dbcellmap)
    */
   public interface Type_dbcellmap extends Core.Type_map {
-    public Db.Type_dbcellmap vx_new(final Object... vals);
-    public Db.Type_dbcellmap vx_copy(final Object... vals);
-    public Db.Type_dbcellmap vx_empty();
-    public Db.Type_dbcellmap vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Map<String, Db.Type_dbcell> vx_mapdbcell();
     public Db.Type_dbcell vx_dbcell(final Core.Type_string key);
   }
@@ -535,7 +547,7 @@ public final class Db {
     @Override
     public Db.Type_dbcell vx_dbcell(final Core.Type_string key) {
       Db.Type_dbcell output = Db.e_dbcell;
-      Class_dbcellmap map = this;
+      Db.Class_dbcellmap map = this;
       String skey = key.vx_string();
       Map<String, Db.Type_dbcell> mapval = map.vx_p_map;
       output = mapval.getOrDefault(skey, Db.e_dbcell);
@@ -543,7 +555,9 @@ public final class Db {
     }
 
     @Override
-    public Map<String, Db.Type_dbcell> vx_mapdbcell() {return vx_p_map;}
+    public Map<String, Db.Type_dbcell> vx_mapdbcell() {
+      return vx_p_map;
+    }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
@@ -551,8 +565,8 @@ public final class Db {
     }
 
     @Override
-    public Type_dbcellmap vx_new_from_map(final Map<String, Core.Type_any> mapval) {
-      Class_dbcellmap output = new Class_dbcellmap();
+    public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
+      Db.Class_dbcellmap output = new Db.Class_dbcellmap();
       Core.Type_msgblock msgblock = Core.e_msgblock;
       Map<String, Db.Type_dbcell> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
@@ -563,7 +577,7 @@ public final class Db {
           map.put(key, castval);
         } else {
           Core.Type_msg msg = Core.vx_msg_from_error("vx/data/db/dbcellmap", ":invalidvalue", val);
-          msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         }
       }
       output.vx_p_map = Core.immutablemap(map);
@@ -575,7 +589,9 @@ public final class Db {
 
     @Override
     public Db.Type_dbcellmap vx_new(final Object... vals) {
-      return e_dbcellmap.vx_copy(vals);
+      return Core.vx_copy(
+       e_dbcellmap,
+       vals);
     }
 
     @Override
@@ -592,9 +608,9 @@ public final class Db {
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
           if (valsub instanceof Core.Type_string) {
             Core.Type_string valstring = (Core.Type_string)valsub;
@@ -609,7 +625,7 @@ public final class Db {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/data/db/dbcellmap", ":keyexpected", msgval);
-            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
         } else {
           Db.Type_dbcell valany = null;
@@ -629,7 +645,7 @@ public final class Db {
             mapany.put("value", msgval);
             Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
             msg = Core.vx_msg_from_error("vx/data/db/dbcellmap", ":invalidkeyvalue", msgmap);
-            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (valany != null) {
             ischanged = true;
@@ -653,9 +669,13 @@ public final class Db {
     }
 
     @Override
-    public Type_dbcellmap vx_empty() {return e_dbcellmap;}
+    public Core.Type_any vx_empty() {
+      return e_dbcellmap;
+    }
     @Override
-    public Type_dbcellmap vx_type() {return t_dbcellmap;}
+    public Core.Type_any vx_type() {
+      return t_dbcellmap;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -664,7 +684,7 @@ public final class Db {
         "dbcellmap", // name
         ":map", // extends
         Core.e_typelist, // traits
-        Core.t_typelist.vx_new(Db.t_dbcell), // allowtypes
+        Core.vx_new(Core.t_typelist, Db.t_dbcell), // allowtypes
         Core.e_typelist, // disallowtypes
         Core.e_funclist, // allowfuncs
         Core.e_funclist, // disallowfuncs
@@ -685,10 +705,10 @@ public final class Db {
    * (type dbfield)
    */
   public interface Type_dbfield extends Core.Type_struct {
-    public Db.Type_dbfield vx_new(final Object... vals);
-    public Db.Type_dbfield vx_copy(final Object... vals);
-    public Db.Type_dbfield vx_empty();
-    public Db.Type_dbfield vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Core.Type_string dbfieldid();
     public Core.Type_any type();
     public Core.Type_any value();
@@ -746,7 +766,9 @@ public final class Db {
 
     @Override
     public Db.Type_dbfield vx_new(final Object... vals) {
-      return e_dbfield.vx_copy(vals);
+      return Core.vx_copy(
+       e_dbfield,
+       vals);
     }
 
     @Override
@@ -769,9 +791,9 @@ public final class Db {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -790,7 +812,7 @@ public final class Db {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/data/db/dbfield", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -802,7 +824,7 @@ public final class Db {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/data/db/dbfield", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -814,7 +836,7 @@ public final class Db {
               vx_p_dbfieldid = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_dbfieldid = Core.t_string.vx_new(valsub);
+              vx_p_dbfieldid = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -827,7 +849,7 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbfield", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":type":
@@ -847,7 +869,7 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbfield", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":value":
@@ -867,13 +889,13 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbfield", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/db/dbfield", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -892,9 +914,13 @@ public final class Db {
     }
 
     @Override
-    public Type_dbfield vx_empty() {return e_dbfield;}
+    public Core.Type_any vx_empty() {
+      return e_dbfield;
+    }
     @Override
-    public Type_dbfield vx_type() {return t_dbfield;}
+    public Core.Type_any vx_type() {
+      return t_dbfield;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -924,10 +950,10 @@ public final class Db {
    * (type dbfieldmap)
    */
   public interface Type_dbfieldmap extends Core.Type_map {
-    public Db.Type_dbfieldmap vx_new(final Object... vals);
-    public Db.Type_dbfieldmap vx_copy(final Object... vals);
-    public Db.Type_dbfieldmap vx_empty();
-    public Db.Type_dbfieldmap vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Map<String, Db.Type_dbfield> vx_mapdbfield();
     public Db.Type_dbfield vx_dbfield(final Core.Type_string key);
   }
@@ -965,7 +991,7 @@ public final class Db {
     @Override
     public Db.Type_dbfield vx_dbfield(final Core.Type_string key) {
       Db.Type_dbfield output = Db.e_dbfield;
-      Class_dbfieldmap map = this;
+      Db.Class_dbfieldmap map = this;
       String skey = key.vx_string();
       Map<String, Db.Type_dbfield> mapval = map.vx_p_map;
       output = mapval.getOrDefault(skey, Db.e_dbfield);
@@ -973,7 +999,9 @@ public final class Db {
     }
 
     @Override
-    public Map<String, Db.Type_dbfield> vx_mapdbfield() {return vx_p_map;}
+    public Map<String, Db.Type_dbfield> vx_mapdbfield() {
+      return vx_p_map;
+    }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
@@ -981,8 +1009,8 @@ public final class Db {
     }
 
     @Override
-    public Type_dbfieldmap vx_new_from_map(final Map<String, Core.Type_any> mapval) {
-      Class_dbfieldmap output = new Class_dbfieldmap();
+    public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
+      Db.Class_dbfieldmap output = new Db.Class_dbfieldmap();
       Core.Type_msgblock msgblock = Core.e_msgblock;
       Map<String, Db.Type_dbfield> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
@@ -993,7 +1021,7 @@ public final class Db {
           map.put(key, castval);
         } else {
           Core.Type_msg msg = Core.vx_msg_from_error("vx/data/db/dbfieldmap", ":invalidvalue", val);
-          msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         }
       }
       output.vx_p_map = Core.immutablemap(map);
@@ -1005,7 +1033,9 @@ public final class Db {
 
     @Override
     public Db.Type_dbfieldmap vx_new(final Object... vals) {
-      return e_dbfieldmap.vx_copy(vals);
+      return Core.vx_copy(
+       e_dbfieldmap,
+       vals);
     }
 
     @Override
@@ -1022,9 +1052,9 @@ public final class Db {
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
           if (valsub instanceof Core.Type_string) {
             Core.Type_string valstring = (Core.Type_string)valsub;
@@ -1039,7 +1069,7 @@ public final class Db {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/data/db/dbfieldmap", ":keyexpected", msgval);
-            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
         } else {
           Db.Type_dbfield valany = null;
@@ -1059,7 +1089,7 @@ public final class Db {
             mapany.put("value", msgval);
             Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
             msg = Core.vx_msg_from_error("vx/data/db/dbfieldmap", ":invalidkeyvalue", msgmap);
-            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (valany != null) {
             ischanged = true;
@@ -1083,9 +1113,13 @@ public final class Db {
     }
 
     @Override
-    public Type_dbfieldmap vx_empty() {return e_dbfieldmap;}
+    public Core.Type_any vx_empty() {
+      return e_dbfieldmap;
+    }
     @Override
-    public Type_dbfieldmap vx_type() {return t_dbfieldmap;}
+    public Core.Type_any vx_type() {
+      return t_dbfieldmap;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -1094,7 +1128,7 @@ public final class Db {
         "dbfieldmap", // name
         ":map", // extends
         Core.e_typelist, // traits
-        Core.t_typelist.vx_new(Db.t_dbfield), // allowtypes
+        Core.vx_new(Core.t_typelist, Db.t_dbfield), // allowtypes
         Core.e_typelist, // disallowtypes
         Core.e_funclist, // allowfuncs
         Core.e_funclist, // disallowfuncs
@@ -1115,17 +1149,19 @@ public final class Db {
    * (type dbid)
    */
   public interface Type_dbid extends Core.Type_any {
-    public Db.Type_dbid vx_new(final Object... vals);
-    public Db.Type_dbid vx_copy(final Object... vals);
-    public Db.Type_dbid vx_empty();
-    public Db.Type_dbid vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
   }
 
   public static class Class_dbid extends Core.Class_base implements Type_dbid {
 
     @Override
     public Db.Type_dbid vx_new(final Object... vals) {
-      return e_dbid.vx_copy(vals);
+      return Core.vx_copy(
+       e_dbid,
+       vals);
     }
 
     @Override
@@ -1148,9 +1184,13 @@ public final class Db {
     }
 
     @Override
-    public Type_dbid vx_empty() {return e_dbid;}
+    public Core.Type_any vx_empty() {
+      return e_dbid;
+    }
     @Override
-    public Type_dbid vx_type() {return t_dbid;}
+    public Core.Type_any vx_type() {
+      return t_dbid;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -1180,10 +1220,10 @@ public final class Db {
    * (type dblink)
    */
   public interface Type_dblink extends Core.Type_struct {
-    public Db.Type_dblink vx_new(final Object... vals);
-    public Db.Type_dblink vx_copy(final Object... vals);
-    public Db.Type_dblink vx_empty();
-    public Db.Type_dblink vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Db.Type_dbid fromid();
     public Db.Type_dbid toid();
   }
@@ -1229,7 +1269,9 @@ public final class Db {
 
     @Override
     public Db.Type_dblink vx_new(final Object... vals) {
-      return e_dblink.vx_copy(vals);
+      return Core.vx_copy(
+       e_dblink,
+       vals);
     }
 
     @Override
@@ -1250,9 +1292,9 @@ public final class Db {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -1271,7 +1313,7 @@ public final class Db {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/data/db/dblink", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -1283,7 +1325,7 @@ public final class Db {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/data/db/dblink", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -1305,7 +1347,7 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dblink", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":toid":
@@ -1325,13 +1367,13 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dblink", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/db/dblink", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -1349,9 +1391,13 @@ public final class Db {
     }
 
     @Override
-    public Type_dblink vx_empty() {return e_dblink;}
+    public Core.Type_any vx_empty() {
+      return e_dblink;
+    }
     @Override
-    public Type_dblink vx_type() {return t_dblink;}
+    public Core.Type_any vx_type() {
+      return t_dblink;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -1381,10 +1427,10 @@ public final class Db {
    * (type dblinklist)
    */
   public interface Type_dblinklist extends Core.Type_list {
-    public Db.Type_dblinklist vx_new(final Object... vals);
-    public Db.Type_dblinklist vx_copy(final Object... vals);
-    public Db.Type_dblinklist vx_empty();
-    public Db.Type_dblinklist vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public List<Db.Type_dblink> vx_listdblink();
     public Db.Type_dblink vx_dblink(final Core.Type_int index);
   }
@@ -1394,12 +1440,15 @@ public final class Db {
     protected List<Db.Type_dblink> vx_p_list = Core.immutablelist(new ArrayList<Db.Type_dblink>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
+    public List<Core.Type_any> vx_list() {
+      List<Core.Type_any> output = Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));
+      return output;
+    }
 
     @Override
     public Db.Type_dblink vx_dblink(final Core.Type_int index) {
       Db.Type_dblink output = Db.e_dblink;
-      Class_dblinklist list = this;
+      Db.Class_dblinklist list = this;
       int iindex = index.vx_int();
       List<Db.Type_dblink> listval = list.vx_p_list;
       if (iindex < listval.size()) {
@@ -1409,7 +1458,9 @@ public final class Db {
     }
 
     @Override
-    public List<Db.Type_dblink> vx_listdblink() {return vx_p_list;}
+    public List<Db.Type_dblink> vx_listdblink() {
+      return vx_p_list;
+    }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -1418,7 +1469,9 @@ public final class Db {
 
     @Override
     public Db.Type_dblinklist vx_new(final Object... vals) {
-      return e_dblinklist.vx_copy(vals);
+      return Core.vx_copy(
+       e_dblinklist,
+       vals);
     }
 
     @Override
@@ -1434,9 +1487,9 @@ public final class Db {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Db.Type_dblink) {
           Db.Type_dblink anysub = (Db.Type_dblink)valsub;
           ischanged = true;
@@ -1460,10 +1513,10 @@ public final class Db {
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/data/db/dblinklist", ":invalidtype", anysub);
-          msgblock = msgblock.vx_copy(msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/data/db/dblinklist", ":invalidtype", Core.vx_new_string(valsub.toString()));
-          msgblock = msgblock.vx_copy(msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -1478,9 +1531,13 @@ public final class Db {
     }
 
     @Override
-    public Type_dblinklist vx_empty() {return e_dblinklist;}
+    public Core.Type_any vx_empty() {
+      return e_dblinklist;
+    }
     @Override
-    public Type_dblinklist vx_type() {return t_dblinklist;}
+    public Core.Type_any vx_type() {
+      return t_dblinklist;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -1489,7 +1546,7 @@ public final class Db {
         "dblinklist", // name
         ":list", // extends
         Core.e_typelist, // traits
-        Core.t_typelist.vx_new(Db.t_dblink), // allowtypes
+        Core.vx_new(Core.t_typelist, Db.t_dblink), // allowtypes
         Core.e_typelist, // disallowtypes
         Core.e_funclist, // allowfuncs
         Core.e_funclist, // disallowfuncs
@@ -1510,10 +1567,10 @@ public final class Db {
    * (type dbnode)
    */
   public interface Type_dbnode extends Core.Type_struct {
-    public Db.Type_dbnode vx_new(final Object... vals);
-    public Db.Type_dbnode vx_copy(final Object... vals);
-    public Db.Type_dbnode vx_empty();
-    public Db.Type_dbnode vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Db.Type_dbid dbid();
     public Db.Type_dblinklist links();
   }
@@ -1559,7 +1616,9 @@ public final class Db {
 
     @Override
     public Db.Type_dbnode vx_new(final Object... vals) {
-      return e_dbnode.vx_copy(vals);
+      return Core.vx_copy(
+       e_dbnode,
+       vals);
     }
 
     @Override
@@ -1580,9 +1639,9 @@ public final class Db {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -1601,7 +1660,7 @@ public final class Db {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/data/db/dbnode", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -1613,7 +1672,7 @@ public final class Db {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/data/db/dbnode", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -1635,7 +1694,7 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbnode", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":links":
@@ -1655,13 +1714,13 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbnode", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/db/dbnode", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -1679,9 +1738,13 @@ public final class Db {
     }
 
     @Override
-    public Type_dbnode vx_empty() {return e_dbnode;}
+    public Core.Type_any vx_empty() {
+      return e_dbnode;
+    }
     @Override
-    public Type_dbnode vx_type() {return t_dbnode;}
+    public Core.Type_any vx_type() {
+      return t_dbnode;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -1711,10 +1774,10 @@ public final class Db {
    * (type dbnote)
    */
   public interface Type_dbnote extends Core.Type_struct {
-    public Db.Type_dbnote vx_new(final Object... vals);
-    public Db.Type_dbnote vx_copy(final Object... vals);
-    public Db.Type_dbnote vx_empty();
-    public Db.Type_dbnote vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Db.Type_dbid dbid();
     public Db.Type_dbid valid();
     public Db.Type_dbid noteid();
@@ -1796,7 +1859,9 @@ public final class Db {
 
     @Override
     public Db.Type_dbnote vx_new(final Object... vals) {
-      return e_dbnote.vx_copy(vals);
+      return Core.vx_copy(
+       e_dbnote,
+       vals);
     }
 
     @Override
@@ -1823,9 +1888,9 @@ public final class Db {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -1844,7 +1909,7 @@ public final class Db {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/data/db/dbnote", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -1856,7 +1921,7 @@ public final class Db {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/data/db/dbnote", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -1878,7 +1943,7 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbnote", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":valid":
@@ -1898,7 +1963,7 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbnote", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":noteid":
@@ -1918,7 +1983,7 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbnote", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":valueid":
@@ -1938,7 +2003,7 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbnote", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":value":
@@ -1948,7 +2013,7 @@ public final class Db {
               vx_p_value = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_value = Core.t_string.vx_new(valsub);
+              vx_p_value = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -1961,13 +2026,13 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbnote", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/db/dbnote", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -1988,9 +2053,13 @@ public final class Db {
     }
 
     @Override
-    public Type_dbnote vx_empty() {return e_dbnote;}
+    public Core.Type_any vx_empty() {
+      return e_dbnote;
+    }
     @Override
-    public Type_dbnote vx_type() {return t_dbnote;}
+    public Core.Type_any vx_type() {
+      return t_dbnote;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -2020,10 +2089,10 @@ public final class Db {
    * (type dbtable)
    */
   public interface Type_dbtable extends Core.Type_struct {
-    public Db.Type_dbtable vx_new(final Object... vals);
-    public Db.Type_dbtable vx_copy(final Object... vals);
-    public Db.Type_dbtable vx_empty();
-    public Db.Type_dbtable vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Core.Type_string dbtableid();
     public Db.Type_db db();
     public Db.Type_dbcellmap dbcellmap();
@@ -2093,7 +2162,9 @@ public final class Db {
 
     @Override
     public Db.Type_dbtable vx_new(final Object... vals) {
-      return e_dbtable.vx_copy(vals);
+      return Core.vx_copy(
+       e_dbtable,
+       vals);
     }
 
     @Override
@@ -2118,9 +2189,9 @@ public final class Db {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -2139,7 +2210,7 @@ public final class Db {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/data/db/dbtable", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -2151,7 +2222,7 @@ public final class Db {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/data/db/dbtable", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -2163,7 +2234,7 @@ public final class Db {
               vx_p_dbtableid = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_dbtableid = Core.t_string.vx_new(valsub);
+              vx_p_dbtableid = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -2176,7 +2247,7 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbtable", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":db":
@@ -2196,7 +2267,7 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbtable", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":dbcellmap":
@@ -2216,7 +2287,7 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbtable", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":dbfieldmap":
@@ -2236,13 +2307,13 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbtable", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/db/dbtable", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -2262,9 +2333,13 @@ public final class Db {
     }
 
     @Override
-    public Type_dbtable vx_empty() {return e_dbtable;}
+    public Core.Type_any vx_empty() {
+      return e_dbtable;
+    }
     @Override
-    public Type_dbtable vx_type() {return t_dbtable;}
+    public Core.Type_any vx_type() {
+      return t_dbtable;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -2294,10 +2369,10 @@ public final class Db {
    * (type dbvalue)
    */
   public interface Type_dbvalue extends Core.Type_struct {
-    public Db.Type_dbvalue vx_new(final Object... vals);
-    public Db.Type_dbvalue vx_copy(final Object... vals);
-    public Db.Type_dbvalue vx_empty();
-    public Db.Type_dbvalue vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Db.Type_dbid dbid();
     public Db.Type_dbid fromid();
     public Db.Type_dbid toid();
@@ -2391,7 +2466,9 @@ public final class Db {
 
     @Override
     public Db.Type_dbvalue vx_new(final Object... vals) {
-      return e_dbvalue.vx_copy(vals);
+      return Core.vx_copy(
+       e_dbvalue,
+       vals);
     }
 
     @Override
@@ -2420,9 +2497,9 @@ public final class Db {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -2441,7 +2518,7 @@ public final class Db {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -2453,7 +2530,7 @@ public final class Db {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -2475,7 +2552,7 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":fromid":
@@ -2495,7 +2572,7 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":toid":
@@ -2515,7 +2592,7 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":noteid":
@@ -2535,7 +2612,7 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":valid":
@@ -2555,7 +2632,7 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":valtext":
@@ -2565,7 +2642,7 @@ public final class Db {
               vx_p_valtext = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_valtext = Core.t_string.vx_new(valsub);
+              vx_p_valtext = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -2578,13 +2655,13 @@ public final class Db {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/db/dbvalue", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -2606,9 +2683,13 @@ public final class Db {
     }
 
     @Override
-    public Type_dbvalue vx_empty() {return e_dbvalue;}
+    public Core.Type_any vx_empty() {
+      return e_dbvalue;
+    }
     @Override
-    public Type_dbvalue vx_type() {return t_dbvalue;}
+    public Core.Type_any vx_type() {
+      return t_dbvalue;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {

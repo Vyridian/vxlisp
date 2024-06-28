@@ -88,6 +88,8 @@ var msglisttype = NewType("vx/core/msglist")
 
 var numbertype = NewType("vx/core/number")
 
+var rawbooltype = NewType("rawbool")
+
 var rawbooleantype = NewType("rawboolean")
 
 var rawfloattype = NewType("rawfloat")
@@ -100,9 +102,13 @@ var rawlisttype = NewType("rawlist")
 
 var rawlisttype1 = NewType("rawlist-1")
 
+var rawlistanytype = NewType("rawlistany")
+
 var rawmaptype = NewType("rawmap")
 
 var rawmaptype1 = NewType("rawmap-1")
+
+var rawmapanytype = NewType("rawmapany")
 
 var rawobjecttype = NewType("rawobject")
 

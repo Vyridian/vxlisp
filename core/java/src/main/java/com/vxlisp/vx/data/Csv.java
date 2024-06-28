@@ -15,10 +15,10 @@ public final class Csv {
    * (type csv)
    */
   public interface Type_csv extends Core.Type_struct {
-    public Csv.Type_csv vx_new(final Object... vals);
-    public Csv.Type_csv vx_copy(final Object... vals);
-    public Csv.Type_csv vx_empty();
-    public Csv.Type_csv vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Core.Type_stringlist headers();
     public Csv.Type_csvrows rows();
   }
@@ -64,7 +64,9 @@ public final class Csv {
 
     @Override
     public Csv.Type_csv vx_new(final Object... vals) {
-      return e_csv.vx_copy(vals);
+      return Core.vx_copy(
+       e_csv,
+       vals);
     }
 
     @Override
@@ -85,9 +87,9 @@ public final class Csv {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -106,7 +108,7 @@ public final class Csv {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/data/csv/csv", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -118,7 +120,7 @@ public final class Csv {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/data/csv/csv", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -140,7 +142,7 @@ public final class Csv {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/csv/csv", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":rows":
@@ -160,13 +162,13 @@ public final class Csv {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/csv/csv", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/csv/csv", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -184,9 +186,13 @@ public final class Csv {
     }
 
     @Override
-    public Type_csv vx_empty() {return e_csv;}
+    public Core.Type_any vx_empty() {
+      return e_csv;
+    }
     @Override
-    public Type_csv vx_type() {return t_csv;}
+    public Core.Type_any vx_type() {
+      return t_csv;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -215,10 +221,10 @@ public final class Csv {
    * (type csvrowmap)
    */
   public interface Type_csvrowmap extends Core.Type_map {
-    public Csv.Type_csvrowmap vx_new(final Object... vals);
-    public Csv.Type_csvrowmap vx_copy(final Object... vals);
-    public Csv.Type_csvrowmap vx_empty();
-    public Csv.Type_csvrowmap vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Map<String, Core.Type_stringlist> vx_mapstringlist();
     public Core.Type_stringlist vx_stringlist(final Core.Type_string key);
   }
@@ -256,7 +262,7 @@ public final class Csv {
     @Override
     public Core.Type_stringlist vx_stringlist(final Core.Type_string key) {
       Core.Type_stringlist output = Core.e_stringlist;
-      Class_csvrowmap map = this;
+      Csv.Class_csvrowmap map = this;
       String skey = key.vx_string();
       Map<String, Core.Type_stringlist> mapval = map.vx_p_map;
       output = mapval.getOrDefault(skey, Core.e_stringlist);
@@ -264,7 +270,9 @@ public final class Csv {
     }
 
     @Override
-    public Map<String, Core.Type_stringlist> vx_mapstringlist() {return vx_p_map;}
+    public Map<String, Core.Type_stringlist> vx_mapstringlist() {
+      return vx_p_map;
+    }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
@@ -272,8 +280,8 @@ public final class Csv {
     }
 
     @Override
-    public Type_csvrowmap vx_new_from_map(final Map<String, Core.Type_any> mapval) {
-      Class_csvrowmap output = new Class_csvrowmap();
+    public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
+      Csv.Class_csvrowmap output = new Csv.Class_csvrowmap();
       Core.Type_msgblock msgblock = Core.e_msgblock;
       Map<String, Core.Type_stringlist> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
@@ -284,7 +292,7 @@ public final class Csv {
           map.put(key, castval);
         } else {
           Core.Type_msg msg = Core.vx_msg_from_error("vx/data/csv/csvrowmap", ":invalidvalue", val);
-          msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         }
       }
       output.vx_p_map = Core.immutablemap(map);
@@ -296,7 +304,9 @@ public final class Csv {
 
     @Override
     public Csv.Type_csvrowmap vx_new(final Object... vals) {
-      return e_csvrowmap.vx_copy(vals);
+      return Core.vx_copy(
+       e_csvrowmap,
+       vals);
     }
 
     @Override
@@ -313,9 +323,9 @@ public final class Csv {
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
           if (valsub instanceof Core.Type_string) {
             Core.Type_string valstring = (Core.Type_string)valsub;
@@ -330,7 +340,7 @@ public final class Csv {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/data/csv/csvrowmap", ":keyexpected", msgval);
-            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
         } else {
           Core.Type_stringlist valany = null;
@@ -350,7 +360,7 @@ public final class Csv {
             mapany.put("value", msgval);
             Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
             msg = Core.vx_msg_from_error("vx/data/csv/csvrowmap", ":invalidkeyvalue", msgmap);
-            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (valany != null) {
             ischanged = true;
@@ -374,9 +384,13 @@ public final class Csv {
     }
 
     @Override
-    public Type_csvrowmap vx_empty() {return e_csvrowmap;}
+    public Core.Type_any vx_empty() {
+      return e_csvrowmap;
+    }
     @Override
-    public Type_csvrowmap vx_type() {return t_csvrowmap;}
+    public Core.Type_any vx_type() {
+      return t_csvrowmap;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -385,7 +399,7 @@ public final class Csv {
         "csvrowmap", // name
         ":map", // extends
         Core.e_typelist, // traits
-        Core.t_typelist.vx_new(Core.t_stringlist), // allowtypes
+        Core.vx_new(Core.t_typelist, Core.t_stringlist), // allowtypes
         Core.e_typelist, // disallowtypes
         Core.e_funclist, // allowfuncs
         Core.e_funclist, // disallowfuncs
@@ -405,10 +419,10 @@ public final class Csv {
    * (type csvrows)
    */
   public interface Type_csvrows extends Core.Type_list {
-    public Csv.Type_csvrows vx_new(final Object... vals);
-    public Csv.Type_csvrows vx_copy(final Object... vals);
-    public Csv.Type_csvrows vx_empty();
-    public Csv.Type_csvrows vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public List<Core.Type_stringlist> vx_liststringlist();
     public Core.Type_stringlist vx_stringlist(final Core.Type_int index);
   }
@@ -418,12 +432,15 @@ public final class Csv {
     protected List<Core.Type_stringlist> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_stringlist>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
+    public List<Core.Type_any> vx_list() {
+      List<Core.Type_any> output = Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));
+      return output;
+    }
 
     @Override
     public Core.Type_stringlist vx_stringlist(final Core.Type_int index) {
       Core.Type_stringlist output = Core.e_stringlist;
-      Class_csvrows list = this;
+      Csv.Class_csvrows list = this;
       int iindex = index.vx_int();
       List<Core.Type_stringlist> listval = list.vx_p_list;
       if (iindex < listval.size()) {
@@ -433,7 +450,9 @@ public final class Csv {
     }
 
     @Override
-    public List<Core.Type_stringlist> vx_liststringlist() {return vx_p_list;}
+    public List<Core.Type_stringlist> vx_liststringlist() {
+      return vx_p_list;
+    }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -442,7 +461,9 @@ public final class Csv {
 
     @Override
     public Csv.Type_csvrows vx_new(final Object... vals) {
-      return e_csvrows.vx_copy(vals);
+      return Core.vx_copy(
+       e_csvrows,
+       vals);
     }
 
     @Override
@@ -458,9 +479,9 @@ public final class Csv {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_stringlist) {
           Core.Type_stringlist anysub = (Core.Type_stringlist)valsub;
           ischanged = true;
@@ -484,10 +505,10 @@ public final class Csv {
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/data/csv/csvrows", ":invalidtype", anysub);
-          msgblock = msgblock.vx_copy(msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/data/csv/csvrows", ":invalidtype", Core.vx_new_string(valsub.toString()));
-          msgblock = msgblock.vx_copy(msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -502,9 +523,13 @@ public final class Csv {
     }
 
     @Override
-    public Type_csvrows vx_empty() {return e_csvrows;}
+    public Core.Type_any vx_empty() {
+      return e_csvrows;
+    }
     @Override
-    public Type_csvrows vx_type() {return t_csvrows;}
+    public Core.Type_any vx_type() {
+      return t_csvrows;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -513,7 +538,7 @@ public final class Csv {
         "csvrows", // name
         ":list", // extends
         Core.e_typelist, // traits
-        Core.t_typelist.vx_new(Core.t_stringlist), // allowtypes
+        Core.vx_new(Core.t_typelist, Core.t_stringlist), // allowtypes
         Core.e_typelist, // disallowtypes
         Core.e_funclist, // allowfuncs
         Core.e_funclist, // disallowfuncs
@@ -559,13 +584,13 @@ public final class Csv {
     public static void const_new(Const_delimcsv output) {
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
-        Core.t_anylist.vx_new(
+        Core.vx_new(Core.t_anylist,
                 Core.vx_new_string(":name"),
                 Core.vx_new_string("delimcsv"),
                 Core.vx_new_string(":delimlist"),
                 Core.f_new(
                   Textblock.t_delimlist,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Textblock.c_delimline,
                     Textblock.c_delimquote,
                     Textblock.c_delimcomma
@@ -637,12 +662,18 @@ public final class Csv {
     }
 
     @Override
-    public Func_csv_read_from_file vx_empty() {return e_csv_read_from_file;}
+    public Core.Type_any vx_empty() {
+      return e_csv_read_from_file;
+    }
     @Override
-    public Func_csv_read_from_file vx_type() {return t_csv_read_from_file;}
+    public Core.Type_any vx_type() {
+      return t_csv_read_from_file;
+    }
 
     @Override
-    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {
+      return Core.e_any_from_any_context;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
@@ -735,12 +766,18 @@ public final class Csv {
     }
 
     @Override
-    public Func_csv_from_file vx_empty() {return e_csv_from_file;}
+    public Core.Type_any vx_empty() {
+      return e_csv_from_file;
+    }
     @Override
-    public Func_csv_from_file vx_type() {return t_csv_from_file;}
+    public Core.Type_any vx_type() {
+      return t_csv_from_file;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -832,12 +869,18 @@ public final class Csv {
     }
 
     @Override
-    public Func_csv_from_string vx_empty() {return e_csv_from_string;}
+    public Core.Type_any vx_empty() {
+      return e_csv_from_string;
+    }
     @Override
-    public Func_csv_from_string vx_type() {return t_csv_from_string;}
+    public Core.Type_any vx_type() {
+      return t_csv_from_string;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -928,12 +971,18 @@ public final class Csv {
     }
 
     @Override
-    public Func_csv_from_textblock vx_empty() {return e_csv_from_textblock;}
+    public Core.Type_any vx_empty() {
+      return e_csv_from_textblock;
+    }
     @Override
-    public Func_csv_from_textblock vx_type() {return t_csv_from_textblock;}
+    public Core.Type_any vx_type() {
+      return t_csv_from_textblock;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -971,7 +1020,7 @@ public final class Csv {
         final Csv.Type_csvrows rows = Collection.f_list_from_list_end(Csv.t_csvrows, allrows, Core.vx_new_int(2));
         return Core.f_new(
           Csv.t_csv,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":headers"),
             headers,
             Core.vx_new_string(":rows"),
@@ -1022,7 +1071,7 @@ public final class Csv {
           "csvrows", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_stringlist), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_stringlist), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -1034,12 +1083,18 @@ public final class Csv {
     }
 
     @Override
-    public Func_csvrows_from_textblock vx_empty() {return e_csvrows_from_textblock;}
+    public Core.Type_any vx_empty() {
+      return e_csvrows_from_textblock;
+    }
     @Override
-    public Func_csvrows_from_textblock vx_type() {return t_csvrows_from_textblock;}
+    public Core.Type_any vx_type() {
+      return t_csvrows_from_textblock;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -1080,7 +1135,7 @@ public final class Csv {
         final Core.Type_stringlist strings = Textblock.f_stringlist_from_textblocklist(children);
         return Core.f_new(
           Csv.t_csvrows,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
             strings
           )
         );
@@ -1129,7 +1184,7 @@ public final class Csv {
           "stringmap", // name
           ":map", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_string), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_string), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -1141,12 +1196,18 @@ public final class Csv {
     }
 
     @Override
-    public Func_stringmap_from_csv vx_empty() {return e_stringmap_from_csv;}
+    public Core.Type_any vx_empty() {
+      return e_stringmap_from_csv;
+    }
     @Override
-    public Func_stringmap_from_csv vx_type() {return t_stringmap_from_csv;}
+    public Core.Type_any vx_type() {
+      return t_stringmap_from_csv;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -1256,12 +1317,18 @@ public final class Csv {
     }
 
     @Override
-    public Func_textblock_csv_from_string vx_empty() {return e_textblock_csv_from_string;}
+    public Core.Type_any vx_empty() {
+      return e_textblock_csv_from_string;
+    }
     @Override
-    public Func_textblock_csv_from_string vx_type() {return t_textblock_csv_from_string;}
+    public Core.Type_any vx_type() {
+      return t_textblock_csv_from_string;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {

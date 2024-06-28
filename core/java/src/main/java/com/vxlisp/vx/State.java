@@ -12,10 +12,10 @@ public final class State {
    * (type valuemap)
    */
   public interface Type_valuemap extends Core.Type_map {
-    public State.Type_valuemap vx_new(final Object... vals);
-    public State.Type_valuemap vx_copy(final Object... vals);
-    public State.Type_valuemap vx_empty();
-    public State.Type_valuemap vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
   }
 
   public static class Class_valuemap extends Core.Class_base implements Type_valuemap {
@@ -51,7 +51,7 @@ public final class State {
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
-      Class_valuemap map = this;
+      State.Class_valuemap map = this;
       String skey = key.vx_string();
       Map<String, Core.Type_any> mapval = map.vx_p_map;
       output = mapval.getOrDefault(skey, Core.e_any);
@@ -59,8 +59,8 @@ public final class State {
     }
 
     @Override
-    public Type_valuemap vx_new_from_map(final Map<String, Core.Type_any> mapval) {
-      Class_valuemap output = new Class_valuemap();
+    public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
+      State.Class_valuemap output = new State.Class_valuemap();
       Core.Type_msgblock msgblock = Core.e_msgblock;
       Map<String, Core.Type_any> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
@@ -71,7 +71,7 @@ public final class State {
           map.put(key, castval);
         } else {
           Core.Type_msg msg = Core.vx_msg_from_error("vx/state/valuemap", ":invalidvalue", val);
-          msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         }
       }
       output.vx_p_map = Core.immutablemap(map);
@@ -83,7 +83,9 @@ public final class State {
 
     @Override
     public State.Type_valuemap vx_new(final Object... vals) {
-      return e_valuemap.vx_copy(vals);
+      return Core.vx_copy(
+       e_valuemap,
+       vals);
     }
 
     @Override
@@ -100,9 +102,9 @@ public final class State {
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
           if (valsub instanceof Core.Type_string) {
             Core.Type_string valstring = (Core.Type_string)valsub;
@@ -117,7 +119,7 @@ public final class State {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/state/valuemap", ":keyexpected", msgval);
-            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
         } else {
           Core.Type_any valany = null;
@@ -137,7 +139,7 @@ public final class State {
             mapany.put("value", msgval);
             Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
             msg = Core.vx_msg_from_error("vx/state/valuemap", ":invalidkeyvalue", msgmap);
-            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (valany != null) {
             ischanged = true;
@@ -161,9 +163,13 @@ public final class State {
     }
 
     @Override
-    public Type_valuemap vx_empty() {return e_valuemap;}
+    public Core.Type_any vx_empty() {
+      return e_valuemap;
+    }
     @Override
-    public Type_valuemap vx_type() {return t_valuemap;}
+    public Core.Type_any vx_type() {
+      return t_valuemap;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -172,7 +178,7 @@ public final class State {
         "valuemap", // name
         ":map", // extends
         Core.e_typelist, // traits
-        Core.t_typelist.vx_new(Core.t_any), // allowtypes
+        Core.vx_new(Core.t_typelist, Core.t_any), // allowtypes
         Core.e_typelist, // disallowtypes
         Core.e_funclist, // allowfuncs
         Core.e_funclist, // disallowfuncs
@@ -239,9 +245,13 @@ public final class State {
     }
 
     @Override
-    public Func_any_readstate_from_mapname_name vx_empty() {return e_any_readstate_from_mapname_name;}
+    public Core.Type_any vx_empty() {
+      return e_any_readstate_from_mapname_name;
+    }
     @Override
-    public Func_any_readstate_from_mapname_name vx_type() {return t_any_readstate_from_mapname_name;}
+    public Core.Type_any vx_type() {
+      return t_any_readstate_from_mapname_name;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -327,12 +337,18 @@ public final class State {
     }
 
     @Override
-    public Func_any_readstate_from_name vx_empty() {return e_any_readstate_from_name;}
+    public Core.Type_any vx_empty() {
+      return e_any_readstate_from_name;
+    }
     @Override
-    public Func_any_readstate_from_name vx_type() {return t_any_readstate_from_name;}
+    public Core.Type_any vx_type() {
+      return t_any_readstate_from_name;
+    }
 
     @Override
-    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {
+      return Core.e_any_from_any_context;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
@@ -423,12 +439,18 @@ public final class State {
     }
 
     @Override
-    public Func_boolean_removestate_from_name vx_empty() {return e_boolean_removestate_from_name;}
+    public Core.Type_any vx_empty() {
+      return e_boolean_removestate_from_name;
+    }
     @Override
-    public Func_boolean_removestate_from_name vx_type() {return t_boolean_removestate_from_name;}
+    public Core.Type_any vx_type() {
+      return t_boolean_removestate_from_name;
+    }
 
     @Override
-    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {
+      return Core.e_any_from_any_context;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
@@ -529,9 +551,13 @@ public final class State {
     }
 
     @Override
-    public Func_boolean_writestate_from_mapname_name_value vx_empty() {return e_boolean_writestate_from_mapname_name_value;}
+    public Core.Type_any vx_empty() {
+      return e_boolean_writestate_from_mapname_name_value;
+    }
     @Override
-    public Func_boolean_writestate_from_mapname_name_value vx_type() {return t_boolean_writestate_from_mapname_name_value;}
+    public Core.Type_any vx_type() {
+      return t_boolean_writestate_from_mapname_name_value;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -561,7 +587,7 @@ public final class State {
         final State.Type_valuemap valmap = State.f_any_readstate_from_name(State.t_valuemap, context, mapname);
         return Core.f_if_2(
           Core.t_boolean,
-          Core.t_thenelselist.vx_new(
+          Core.vx_new(Core.t_thenelselist,
             Core.f_then(
               Core.t_boolean_from_func.vx_fn_new(() -> {
                 return Core.f_is_empty_1(valmap);
@@ -572,14 +598,14 @@ public final class State {
                   Core.t_any_from_func.vx_fn_new(() -> {
                     final State.Type_valuemap valmap2 = Core.f_new(
                       State.t_valuemap,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                           name,
                           value
                       )
                     );
                     final Core.Type_statelistener listener = Core.f_new(
                       Core.t_statelistener,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":name"),
                           mapname,
                           Core.vx_new_string(":value"),
@@ -656,9 +682,13 @@ public final class State {
     }
 
     @Override
-    public Func_boolean_writestate_from_name_value vx_empty() {return e_boolean_writestate_from_name_value;}
+    public Core.Type_any vx_empty() {
+      return e_boolean_writestate_from_name_value;
+    }
     @Override
-    public Func_boolean_writestate_from_name_value vx_type() {return t_boolean_writestate_from_name_value;}
+    public Core.Type_any vx_type() {
+      return t_boolean_writestate_from_name_value;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -687,7 +717,7 @@ public final class State {
         final Core.Type_statelistener listenercur = State.f_statelistener_readstate_from_name(context, name);
         final Core.Type_statelistener listenerchg = Core.f_copy(
           listenercur,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
               Core.vx_new_string(":name"),
               name,
               Core.vx_new_string(":value"),
@@ -752,12 +782,18 @@ public final class State {
     }
 
     @Override
-    public Func_boolean_writestate_from_statelistener vx_empty() {return e_boolean_writestate_from_statelistener;}
+    public Core.Type_any vx_empty() {
+      return e_boolean_writestate_from_statelistener;
+    }
     @Override
-    public Func_boolean_writestate_from_statelistener vx_type() {return t_boolean_writestate_from_statelistener;}
+    public Core.Type_any vx_type() {
+      return t_boolean_writestate_from_statelistener;
+    }
 
     @Override
-    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {
+      return Core.e_any_from_any_context;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
@@ -851,12 +887,18 @@ public final class State {
     }
 
     @Override
-    public Func_change vx_empty() {return e_change;}
+    public Core.Type_any vx_empty() {
+      return e_change;
+    }
     @Override
-    public Func_change vx_type() {return t_change;}
+    public Core.Type_any vx_type() {
+      return t_change;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -940,12 +982,18 @@ public final class State {
     }
 
     @Override
-    public Func_register vx_empty() {return e_register;}
+    public Core.Type_any vx_empty() {
+      return e_register;
+    }
     @Override
-    public Func_register vx_type() {return t_register;}
+    public Core.Type_any vx_type() {
+      return t_register;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -1029,9 +1077,13 @@ public final class State {
     }
 
     @Override
-    public Func_state_from_context vx_empty() {return e_state_from_context;}
+    public Core.Type_any vx_empty() {
+      return e_state_from_context;
+    }
     @Override
-    public Func_state_from_context vx_type() {return t_state_from_context;}
+    public Core.Type_any vx_type() {
+      return t_state_from_context;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -1108,12 +1160,18 @@ public final class State {
     }
 
     @Override
-    public Func_statelistener_readstate_from_name vx_empty() {return e_statelistener_readstate_from_name;}
+    public Core.Type_any vx_empty() {
+      return e_statelistener_readstate_from_name;
+    }
     @Override
-    public Func_statelistener_readstate_from_name vx_type() {return t_statelistener_readstate_from_name;}
+    public Core.Type_any vx_type() {
+      return t_statelistener_readstate_from_name;
+    }
 
     @Override
-    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {
+      return Core.e_any_from_any_context;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
@@ -1193,7 +1251,7 @@ public final class State {
           "statelistenermap", // name
           ":map", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_statelistener), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_statelistener), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -1205,9 +1263,13 @@ public final class State {
     }
 
     @Override
-    public Func_statelistenermap_readstate vx_empty() {return e_statelistenermap_readstate;}
+    public Core.Type_any vx_empty() {
+      return e_statelistenermap_readstate;
+    }
     @Override
-    public Func_statelistenermap_readstate vx_type() {return t_statelistenermap_readstate;}
+    public Core.Type_any vx_type() {
+      return t_statelistenermap_readstate;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -1290,12 +1352,18 @@ public final class State {
     }
 
     @Override
-    public Func_value_readstate_from_name vx_empty() {return e_value_readstate_from_name;}
+    public Core.Type_any vx_empty() {
+      return e_value_readstate_from_name;
+    }
     @Override
-    public Func_value_readstate_from_name vx_type() {return t_value_readstate_from_name;}
+    public Core.Type_any vx_type() {
+      return t_value_readstate_from_name;
+    }
 
     @Override
-    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {
+      return Core.e_any_from_any_context;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
@@ -1376,7 +1444,7 @@ public final class State {
           "valuemap", // name
           ":map", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_any), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_any), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -1388,12 +1456,18 @@ public final class State {
     }
 
     @Override
-    public Func_valuemap_readstate_from_mapname vx_empty() {return e_valuemap_readstate_from_mapname;}
+    public Core.Type_any vx_empty() {
+      return e_valuemap_readstate_from_mapname;
+    }
     @Override
-    public Func_valuemap_readstate_from_mapname vx_type() {return t_valuemap_readstate_from_mapname;}
+    public Core.Type_any vx_type() {
+      return t_valuemap_readstate_from_mapname;
+    }
 
     @Override
-    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {
+      return Core.e_any_from_any_context;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {

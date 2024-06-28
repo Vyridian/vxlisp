@@ -63,7 +63,7 @@
       }
     }
     if (listvals.size() > 0) {
-      Core.Type_anylist anylist = Core.t_anylist.vx_new(listvals);
+      Core.Type_anylist anylist = Core.vx_new(Core.t_anylist, listvals);
       output = Core.f_new(generic_list_1, anylist);
     }
     return output;
@@ -95,7 +95,7 @@
       }
     }
     if (listvals.size() > 0) {
-      Core.Type_anylist anylist = Core.t_anylist.vx_new(listvals);
+      Core.Type_anylist anylist = Core.vx_new(Core.t_anylist, listvals);
       output = Core.f_new(generic_list_1, anylist);
     }
     return output;
@@ -112,8 +112,7 @@
         items.add(newval);
       }
     }
-    Core.Type_any work = generic_list_1.vx_new(items);
-    output = Core.f_any_from_any(generic_list_1, work);
+    output = Core.vx_new(generic_list_1, items);
     return output;
   }
 
@@ -134,8 +133,7 @@
         iend = maxlen;
       }
       List<Core.Type_any> listsub = listval.subList(istart - 1, iend);
-      Core.Type_any work = generic_list_1.vx_new(listsub);
-      output = Core.f_any_from_any(generic_list_1, work);
+      output = Core.vx_new(generic_list_1, listsub);
     }
     return output;
   }

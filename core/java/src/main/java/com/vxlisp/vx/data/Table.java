@@ -15,10 +15,10 @@ public final class Table {
    * (type cell)
    */
   public interface Type_cell extends Core.Type_struct {
-    public Table.Type_cell vx_new(final Object... vals);
-    public Table.Type_cell vx_copy(final Object... vals);
-    public Table.Type_cell vx_empty();
-    public Table.Type_cell vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Core.Type_string id();
     public Core.Type_any value();
   }
@@ -64,7 +64,9 @@ public final class Table {
 
     @Override
     public Table.Type_cell vx_new(final Object... vals) {
-      return e_cell.vx_copy(vals);
+      return Core.vx_copy(
+       e_cell,
+       vals);
     }
 
     @Override
@@ -85,9 +87,9 @@ public final class Table {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -106,7 +108,7 @@ public final class Table {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/data/table/cell", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -118,7 +120,7 @@ public final class Table {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/data/table/cell", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -130,7 +132,7 @@ public final class Table {
               vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_id = Core.t_string.vx_new(valsub);
+              vx_p_id = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -143,7 +145,7 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/cell", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":value":
@@ -163,13 +165,13 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/cell", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/table/cell", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -187,9 +189,13 @@ public final class Table {
     }
 
     @Override
-    public Type_cell vx_empty() {return e_cell;}
+    public Core.Type_any vx_empty() {
+      return e_cell;
+    }
     @Override
-    public Type_cell vx_type() {return t_cell;}
+    public Core.Type_any vx_type() {
+      return t_cell;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -218,10 +224,10 @@ public final class Table {
    * (type celllist)
    */
   public interface Type_celllist extends Core.Type_list {
-    public Table.Type_celllist vx_new(final Object... vals);
-    public Table.Type_celllist vx_copy(final Object... vals);
-    public Table.Type_celllist vx_empty();
-    public Table.Type_celllist vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public List<Table.Type_cell> vx_listcell();
     public Table.Type_cell vx_cell(final Core.Type_int index);
   }
@@ -231,12 +237,15 @@ public final class Table {
     protected List<Table.Type_cell> vx_p_list = Core.immutablelist(new ArrayList<Table.Type_cell>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
+    public List<Core.Type_any> vx_list() {
+      List<Core.Type_any> output = Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));
+      return output;
+    }
 
     @Override
     public Table.Type_cell vx_cell(final Core.Type_int index) {
       Table.Type_cell output = Table.e_cell;
-      Class_celllist list = this;
+      Table.Class_celllist list = this;
       int iindex = index.vx_int();
       List<Table.Type_cell> listval = list.vx_p_list;
       if (iindex < listval.size()) {
@@ -246,7 +255,9 @@ public final class Table {
     }
 
     @Override
-    public List<Table.Type_cell> vx_listcell() {return vx_p_list;}
+    public List<Table.Type_cell> vx_listcell() {
+      return vx_p_list;
+    }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -255,7 +266,9 @@ public final class Table {
 
     @Override
     public Table.Type_celllist vx_new(final Object... vals) {
-      return e_celllist.vx_copy(vals);
+      return Core.vx_copy(
+       e_celllist,
+       vals);
     }
 
     @Override
@@ -271,9 +284,9 @@ public final class Table {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Table.Type_cell) {
           Table.Type_cell anysub = (Table.Type_cell)valsub;
           ischanged = true;
@@ -297,10 +310,10 @@ public final class Table {
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/data/table/celllist", ":invalidtype", anysub);
-          msgblock = msgblock.vx_copy(msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/data/table/celllist", ":invalidtype", Core.vx_new_string(valsub.toString()));
-          msgblock = msgblock.vx_copy(msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -315,9 +328,13 @@ public final class Table {
     }
 
     @Override
-    public Type_celllist vx_empty() {return e_celllist;}
+    public Core.Type_any vx_empty() {
+      return e_celllist;
+    }
     @Override
-    public Type_celllist vx_type() {return t_celllist;}
+    public Core.Type_any vx_type() {
+      return t_celllist;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -326,7 +343,7 @@ public final class Table {
         "celllist", // name
         ":list", // extends
         Core.e_typelist, // traits
-        Core.t_typelist.vx_new(Table.t_cell), // allowtypes
+        Core.vx_new(Core.t_typelist, Table.t_cell), // allowtypes
         Core.e_typelist, // disallowtypes
         Core.e_funclist, // allowfuncs
         Core.e_funclist, // disallowfuncs
@@ -346,10 +363,10 @@ public final class Table {
    * (type cellmap)
    */
   public interface Type_cellmap extends Core.Type_map {
-    public Table.Type_cellmap vx_new(final Object... vals);
-    public Table.Type_cellmap vx_copy(final Object... vals);
-    public Table.Type_cellmap vx_empty();
-    public Table.Type_cellmap vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Map<String, Table.Type_cell> vx_mapcell();
     public Table.Type_cell vx_cell(final Core.Type_string key);
   }
@@ -387,7 +404,7 @@ public final class Table {
     @Override
     public Table.Type_cell vx_cell(final Core.Type_string key) {
       Table.Type_cell output = Table.e_cell;
-      Class_cellmap map = this;
+      Table.Class_cellmap map = this;
       String skey = key.vx_string();
       Map<String, Table.Type_cell> mapval = map.vx_p_map;
       output = mapval.getOrDefault(skey, Table.e_cell);
@@ -395,7 +412,9 @@ public final class Table {
     }
 
     @Override
-    public Map<String, Table.Type_cell> vx_mapcell() {return vx_p_map;}
+    public Map<String, Table.Type_cell> vx_mapcell() {
+      return vx_p_map;
+    }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
@@ -403,8 +422,8 @@ public final class Table {
     }
 
     @Override
-    public Type_cellmap vx_new_from_map(final Map<String, Core.Type_any> mapval) {
-      Class_cellmap output = new Class_cellmap();
+    public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
+      Table.Class_cellmap output = new Table.Class_cellmap();
       Core.Type_msgblock msgblock = Core.e_msgblock;
       Map<String, Table.Type_cell> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
@@ -415,7 +434,7 @@ public final class Table {
           map.put(key, castval);
         } else {
           Core.Type_msg msg = Core.vx_msg_from_error("vx/data/table/cellmap", ":invalidvalue", val);
-          msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         }
       }
       output.vx_p_map = Core.immutablemap(map);
@@ -427,7 +446,9 @@ public final class Table {
 
     @Override
     public Table.Type_cellmap vx_new(final Object... vals) {
-      return e_cellmap.vx_copy(vals);
+      return Core.vx_copy(
+       e_cellmap,
+       vals);
     }
 
     @Override
@@ -444,9 +465,9 @@ public final class Table {
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
           if (valsub instanceof Core.Type_string) {
             Core.Type_string valstring = (Core.Type_string)valsub;
@@ -461,7 +482,7 @@ public final class Table {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/data/table/cellmap", ":keyexpected", msgval);
-            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
         } else {
           Table.Type_cell valany = null;
@@ -481,7 +502,7 @@ public final class Table {
             mapany.put("value", msgval);
             Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
             msg = Core.vx_msg_from_error("vx/data/table/cellmap", ":invalidkeyvalue", msgmap);
-            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (valany != null) {
             ischanged = true;
@@ -505,9 +526,13 @@ public final class Table {
     }
 
     @Override
-    public Type_cellmap vx_empty() {return e_cellmap;}
+    public Core.Type_any vx_empty() {
+      return e_cellmap;
+    }
     @Override
-    public Type_cellmap vx_type() {return t_cellmap;}
+    public Core.Type_any vx_type() {
+      return t_cellmap;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -516,7 +541,7 @@ public final class Table {
         "cellmap", // name
         ":map", // extends
         Core.e_typelist, // traits
-        Core.t_typelist.vx_new(Table.t_cell), // allowtypes
+        Core.vx_new(Core.t_typelist, Table.t_cell), // allowtypes
         Core.e_typelist, // disallowtypes
         Core.e_funclist, // allowfuncs
         Core.e_funclist, // disallowfuncs
@@ -536,10 +561,10 @@ public final class Table {
    * (type field)
    */
   public interface Type_field extends Core.Type_struct {
-    public Table.Type_field vx_new(final Object... vals);
-    public Table.Type_field vx_copy(final Object... vals);
-    public Table.Type_field vx_empty();
-    public Table.Type_field vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Core.Type_string id();
     public Core.Type_string name();
     public Core.Type_any fldtype();
@@ -597,7 +622,9 @@ public final class Table {
 
     @Override
     public Table.Type_field vx_new(final Object... vals) {
-      return e_field.vx_copy(vals);
+      return Core.vx_copy(
+       e_field,
+       vals);
     }
 
     @Override
@@ -620,9 +647,9 @@ public final class Table {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -641,7 +668,7 @@ public final class Table {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/data/table/field", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -653,7 +680,7 @@ public final class Table {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/data/table/field", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -665,7 +692,7 @@ public final class Table {
               vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_id = Core.t_string.vx_new(valsub);
+              vx_p_id = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -678,7 +705,7 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/field", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":name":
@@ -688,7 +715,7 @@ public final class Table {
               vx_p_name = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_name = Core.t_string.vx_new(valsub);
+              vx_p_name = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -701,7 +728,7 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/field", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":fldtype":
@@ -721,13 +748,13 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/field", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/table/field", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -746,9 +773,13 @@ public final class Table {
     }
 
     @Override
-    public Type_field vx_empty() {return e_field;}
+    public Core.Type_any vx_empty() {
+      return e_field;
+    }
     @Override
-    public Type_field vx_type() {return t_field;}
+    public Core.Type_any vx_type() {
+      return t_field;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -777,10 +808,10 @@ public final class Table {
    * (type fieldlist)
    */
   public interface Type_fieldlist extends Core.Type_list {
-    public Table.Type_fieldlist vx_new(final Object... vals);
-    public Table.Type_fieldlist vx_copy(final Object... vals);
-    public Table.Type_fieldlist vx_empty();
-    public Table.Type_fieldlist vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public List<Table.Type_field> vx_listfield();
     public Table.Type_field vx_field(final Core.Type_int index);
   }
@@ -790,12 +821,15 @@ public final class Table {
     protected List<Table.Type_field> vx_p_list = Core.immutablelist(new ArrayList<Table.Type_field>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
+    public List<Core.Type_any> vx_list() {
+      List<Core.Type_any> output = Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));
+      return output;
+    }
 
     @Override
     public Table.Type_field vx_field(final Core.Type_int index) {
       Table.Type_field output = Table.e_field;
-      Class_fieldlist list = this;
+      Table.Class_fieldlist list = this;
       int iindex = index.vx_int();
       List<Table.Type_field> listval = list.vx_p_list;
       if (iindex < listval.size()) {
@@ -805,7 +839,9 @@ public final class Table {
     }
 
     @Override
-    public List<Table.Type_field> vx_listfield() {return vx_p_list;}
+    public List<Table.Type_field> vx_listfield() {
+      return vx_p_list;
+    }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -814,7 +850,9 @@ public final class Table {
 
     @Override
     public Table.Type_fieldlist vx_new(final Object... vals) {
-      return e_fieldlist.vx_copy(vals);
+      return Core.vx_copy(
+       e_fieldlist,
+       vals);
     }
 
     @Override
@@ -830,9 +868,9 @@ public final class Table {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Table.Type_field) {
           Table.Type_field anysub = (Table.Type_field)valsub;
           ischanged = true;
@@ -856,10 +894,10 @@ public final class Table {
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/data/table/fieldlist", ":invalidtype", anysub);
-          msgblock = msgblock.vx_copy(msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/data/table/fieldlist", ":invalidtype", Core.vx_new_string(valsub.toString()));
-          msgblock = msgblock.vx_copy(msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -874,9 +912,13 @@ public final class Table {
     }
 
     @Override
-    public Type_fieldlist vx_empty() {return e_fieldlist;}
+    public Core.Type_any vx_empty() {
+      return e_fieldlist;
+    }
     @Override
-    public Type_fieldlist vx_type() {return t_fieldlist;}
+    public Core.Type_any vx_type() {
+      return t_fieldlist;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -885,7 +927,7 @@ public final class Table {
         "fieldlist", // name
         ":list", // extends
         Core.e_typelist, // traits
-        Core.t_typelist.vx_new(Table.t_field), // allowtypes
+        Core.vx_new(Core.t_typelist, Table.t_field), // allowtypes
         Core.e_typelist, // disallowtypes
         Core.e_funclist, // allowfuncs
         Core.e_funclist, // disallowfuncs
@@ -905,10 +947,10 @@ public final class Table {
    * (type fieldmap)
    */
   public interface Type_fieldmap extends Core.Type_list {
-    public Table.Type_fieldmap vx_new(final Object... vals);
-    public Table.Type_fieldmap vx_copy(final Object... vals);
-    public Table.Type_fieldmap vx_empty();
-    public Table.Type_fieldmap vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public List<Table.Type_field> vx_listfield();
     public Table.Type_field vx_field(final Core.Type_int index);
   }
@@ -918,12 +960,15 @@ public final class Table {
     protected List<Table.Type_field> vx_p_list = Core.immutablelist(new ArrayList<Table.Type_field>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
+    public List<Core.Type_any> vx_list() {
+      List<Core.Type_any> output = Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));
+      return output;
+    }
 
     @Override
     public Table.Type_field vx_field(final Core.Type_int index) {
       Table.Type_field output = Table.e_field;
-      Class_fieldmap list = this;
+      Table.Class_fieldmap list = this;
       int iindex = index.vx_int();
       List<Table.Type_field> listval = list.vx_p_list;
       if (iindex < listval.size()) {
@@ -933,7 +978,9 @@ public final class Table {
     }
 
     @Override
-    public List<Table.Type_field> vx_listfield() {return vx_p_list;}
+    public List<Table.Type_field> vx_listfield() {
+      return vx_p_list;
+    }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -942,7 +989,9 @@ public final class Table {
 
     @Override
     public Table.Type_fieldmap vx_new(final Object... vals) {
-      return e_fieldmap.vx_copy(vals);
+      return Core.vx_copy(
+       e_fieldmap,
+       vals);
     }
 
     @Override
@@ -958,9 +1007,9 @@ public final class Table {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Table.Type_field) {
           Table.Type_field anysub = (Table.Type_field)valsub;
           ischanged = true;
@@ -984,10 +1033,10 @@ public final class Table {
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/data/table/fieldmap", ":invalidtype", anysub);
-          msgblock = msgblock.vx_copy(msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/data/table/fieldmap", ":invalidtype", Core.vx_new_string(valsub.toString()));
-          msgblock = msgblock.vx_copy(msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -1002,9 +1051,13 @@ public final class Table {
     }
 
     @Override
-    public Type_fieldmap vx_empty() {return e_fieldmap;}
+    public Core.Type_any vx_empty() {
+      return e_fieldmap;
+    }
     @Override
-    public Type_fieldmap vx_type() {return t_fieldmap;}
+    public Core.Type_any vx_type() {
+      return t_fieldmap;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -1013,7 +1066,7 @@ public final class Table {
         "fieldmap", // name
         ":list", // extends
         Core.e_typelist, // traits
-        Core.t_typelist.vx_new(Table.t_field), // allowtypes
+        Core.vx_new(Core.t_typelist, Table.t_field), // allowtypes
         Core.e_typelist, // disallowtypes
         Core.e_funclist, // allowfuncs
         Core.e_funclist, // disallowfuncs
@@ -1033,10 +1086,10 @@ public final class Table {
    * (type filter)
    */
   public interface Type_filter extends Core.Type_struct {
-    public Table.Type_filter vx_new(final Object... vals);
-    public Table.Type_filter vx_copy(final Object... vals);
-    public Table.Type_filter vx_empty();
-    public Table.Type_filter vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Core.Type_string id();
     public Core.Type_string name();
     public Core.Type_stringlist idlist();
@@ -1094,7 +1147,9 @@ public final class Table {
 
     @Override
     public Table.Type_filter vx_new(final Object... vals) {
-      return e_filter.vx_copy(vals);
+      return Core.vx_copy(
+       e_filter,
+       vals);
     }
 
     @Override
@@ -1117,9 +1172,9 @@ public final class Table {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -1138,7 +1193,7 @@ public final class Table {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/data/table/filter", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -1150,7 +1205,7 @@ public final class Table {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/data/table/filter", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -1162,7 +1217,7 @@ public final class Table {
               vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_id = Core.t_string.vx_new(valsub);
+              vx_p_id = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -1175,7 +1230,7 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/filter", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":name":
@@ -1185,7 +1240,7 @@ public final class Table {
               vx_p_name = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_name = Core.t_string.vx_new(valsub);
+              vx_p_name = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -1198,7 +1253,7 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/filter", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":idlist":
@@ -1218,13 +1273,13 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/filter", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/table/filter", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -1243,9 +1298,13 @@ public final class Table {
     }
 
     @Override
-    public Type_filter vx_empty() {return e_filter;}
+    public Core.Type_any vx_empty() {
+      return e_filter;
+    }
     @Override
-    public Type_filter vx_type() {return t_filter;}
+    public Core.Type_any vx_type() {
+      return t_filter;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -1274,10 +1333,10 @@ public final class Table {
    * (type row)
    */
   public interface Type_row extends Core.Type_struct {
-    public Table.Type_row vx_new(final Object... vals);
-    public Table.Type_row vx_copy(final Object... vals);
-    public Table.Type_row vx_empty();
-    public Table.Type_row vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Core.Type_string id();
     public Table.Type_cellmap cellmap();
     public Table.Type_sort cellsort();
@@ -1335,7 +1394,9 @@ public final class Table {
 
     @Override
     public Table.Type_row vx_new(final Object... vals) {
-      return e_row.vx_copy(vals);
+      return Core.vx_copy(
+       e_row,
+       vals);
     }
 
     @Override
@@ -1358,9 +1419,9 @@ public final class Table {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -1379,7 +1440,7 @@ public final class Table {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/data/table/row", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -1391,7 +1452,7 @@ public final class Table {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/data/table/row", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -1403,7 +1464,7 @@ public final class Table {
               vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_id = Core.t_string.vx_new(valsub);
+              vx_p_id = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -1416,7 +1477,7 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/row", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":cellmap":
@@ -1436,7 +1497,7 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/row", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":cellsort":
@@ -1456,13 +1517,13 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/row", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/table/row", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -1481,9 +1542,13 @@ public final class Table {
     }
 
     @Override
-    public Type_row vx_empty() {return e_row;}
+    public Core.Type_any vx_empty() {
+      return e_row;
+    }
     @Override
-    public Type_row vx_type() {return t_row;}
+    public Core.Type_any vx_type() {
+      return t_row;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -1512,10 +1577,10 @@ public final class Table {
    * (type rowlist)
    */
   public interface Type_rowlist extends Core.Type_list {
-    public Table.Type_rowlist vx_new(final Object... vals);
-    public Table.Type_rowlist vx_copy(final Object... vals);
-    public Table.Type_rowlist vx_empty();
-    public Table.Type_rowlist vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public List<Table.Type_row> vx_listrow();
     public Table.Type_row vx_row(final Core.Type_int index);
   }
@@ -1525,12 +1590,15 @@ public final class Table {
     protected List<Table.Type_row> vx_p_list = Core.immutablelist(new ArrayList<Table.Type_row>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
+    public List<Core.Type_any> vx_list() {
+      List<Core.Type_any> output = Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));
+      return output;
+    }
 
     @Override
     public Table.Type_row vx_row(final Core.Type_int index) {
       Table.Type_row output = Table.e_row;
-      Class_rowlist list = this;
+      Table.Class_rowlist list = this;
       int iindex = index.vx_int();
       List<Table.Type_row> listval = list.vx_p_list;
       if (iindex < listval.size()) {
@@ -1540,7 +1608,9 @@ public final class Table {
     }
 
     @Override
-    public List<Table.Type_row> vx_listrow() {return vx_p_list;}
+    public List<Table.Type_row> vx_listrow() {
+      return vx_p_list;
+    }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -1549,7 +1619,9 @@ public final class Table {
 
     @Override
     public Table.Type_rowlist vx_new(final Object... vals) {
-      return e_rowlist.vx_copy(vals);
+      return Core.vx_copy(
+       e_rowlist,
+       vals);
     }
 
     @Override
@@ -1565,9 +1637,9 @@ public final class Table {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Table.Type_row) {
           Table.Type_row anysub = (Table.Type_row)valsub;
           ischanged = true;
@@ -1591,10 +1663,10 @@ public final class Table {
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/data/table/rowlist", ":invalidtype", anysub);
-          msgblock = msgblock.vx_copy(msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/data/table/rowlist", ":invalidtype", Core.vx_new_string(valsub.toString()));
-          msgblock = msgblock.vx_copy(msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -1609,9 +1681,13 @@ public final class Table {
     }
 
     @Override
-    public Type_rowlist vx_empty() {return e_rowlist;}
+    public Core.Type_any vx_empty() {
+      return e_rowlist;
+    }
     @Override
-    public Type_rowlist vx_type() {return t_rowlist;}
+    public Core.Type_any vx_type() {
+      return t_rowlist;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -1620,7 +1696,7 @@ public final class Table {
         "rowlist", // name
         ":list", // extends
         Core.e_typelist, // traits
-        Core.t_typelist.vx_new(Table.t_row), // allowtypes
+        Core.vx_new(Core.t_typelist, Table.t_row), // allowtypes
         Core.e_typelist, // disallowtypes
         Core.e_funclist, // allowfuncs
         Core.e_funclist, // disallowfuncs
@@ -1640,10 +1716,10 @@ public final class Table {
    * (type rowmap)
    */
   public interface Type_rowmap extends Core.Type_map {
-    public Table.Type_rowmap vx_new(final Object... vals);
-    public Table.Type_rowmap vx_copy(final Object... vals);
-    public Table.Type_rowmap vx_empty();
-    public Table.Type_rowmap vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Map<String, Table.Type_row> vx_maprow();
     public Table.Type_row vx_row(final Core.Type_string key);
   }
@@ -1681,7 +1757,7 @@ public final class Table {
     @Override
     public Table.Type_row vx_row(final Core.Type_string key) {
       Table.Type_row output = Table.e_row;
-      Class_rowmap map = this;
+      Table.Class_rowmap map = this;
       String skey = key.vx_string();
       Map<String, Table.Type_row> mapval = map.vx_p_map;
       output = mapval.getOrDefault(skey, Table.e_row);
@@ -1689,7 +1765,9 @@ public final class Table {
     }
 
     @Override
-    public Map<String, Table.Type_row> vx_maprow() {return vx_p_map;}
+    public Map<String, Table.Type_row> vx_maprow() {
+      return vx_p_map;
+    }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
@@ -1697,8 +1775,8 @@ public final class Table {
     }
 
     @Override
-    public Type_rowmap vx_new_from_map(final Map<String, Core.Type_any> mapval) {
-      Class_rowmap output = new Class_rowmap();
+    public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
+      Table.Class_rowmap output = new Table.Class_rowmap();
       Core.Type_msgblock msgblock = Core.e_msgblock;
       Map<String, Table.Type_row> map = new LinkedHashMap<>();
       Set<String> keys = mapval.keySet();
@@ -1709,7 +1787,7 @@ public final class Table {
           map.put(key, castval);
         } else {
           Core.Type_msg msg = Core.vx_msg_from_error("vx/data/table/rowmap", ":invalidvalue", val);
-          msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         }
       }
       output.vx_p_map = Core.immutablemap(map);
@@ -1721,7 +1799,9 @@ public final class Table {
 
     @Override
     public Table.Type_rowmap vx_new(final Object... vals) {
-      return e_rowmap.vx_copy(vals);
+      return Core.vx_copy(
+       e_rowmap,
+       vals);
     }
 
     @Override
@@ -1738,9 +1818,9 @@ public final class Table {
       String key = "";
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = Core.t_msgblock.vx_copy(msgblock, valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
           if (valsub instanceof Core.Type_string) {
             Core.Type_string valstring = (Core.Type_string)valsub;
@@ -1755,7 +1835,7 @@ public final class Table {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/data/table/rowmap", ":keyexpected", msgval);
-            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
         } else {
           Table.Type_row valany = null;
@@ -1775,7 +1855,7 @@ public final class Table {
             mapany.put("value", msgval);
             Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
             msg = Core.vx_msg_from_error("vx/data/table/rowmap", ":invalidkeyvalue", msgmap);
-            msgblock = Core.t_msgblock.vx_copy(msgblock, msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (valany != null) {
             ischanged = true;
@@ -1799,9 +1879,13 @@ public final class Table {
     }
 
     @Override
-    public Type_rowmap vx_empty() {return e_rowmap;}
+    public Core.Type_any vx_empty() {
+      return e_rowmap;
+    }
     @Override
-    public Type_rowmap vx_type() {return t_rowmap;}
+    public Core.Type_any vx_type() {
+      return t_rowmap;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -1810,7 +1894,7 @@ public final class Table {
         "rowmap", // name
         ":map", // extends
         Core.e_typelist, // traits
-        Core.t_typelist.vx_new(Table.t_row), // allowtypes
+        Core.vx_new(Core.t_typelist, Table.t_row), // allowtypes
         Core.e_typelist, // disallowtypes
         Core.e_funclist, // allowfuncs
         Core.e_funclist, // disallowfuncs
@@ -1830,10 +1914,10 @@ public final class Table {
    * (type sort)
    */
   public interface Type_sort extends Core.Type_struct {
-    public Table.Type_sort vx_new(final Object... vals);
-    public Table.Type_sort vx_copy(final Object... vals);
-    public Table.Type_sort vx_empty();
-    public Table.Type_sort vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Core.Type_string id();
     public Core.Type_string name();
     public Core.Type_stringlist idlist();
@@ -1891,7 +1975,9 @@ public final class Table {
 
     @Override
     public Table.Type_sort vx_new(final Object... vals) {
-      return e_sort.vx_copy(vals);
+      return Core.vx_copy(
+       e_sort,
+       vals);
     }
 
     @Override
@@ -1914,9 +2000,9 @@ public final class Table {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -1935,7 +2021,7 @@ public final class Table {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/data/table/sort", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -1947,7 +2033,7 @@ public final class Table {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/data/table/sort", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -1959,7 +2045,7 @@ public final class Table {
               vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_id = Core.t_string.vx_new(valsub);
+              vx_p_id = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -1972,7 +2058,7 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/sort", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":name":
@@ -1982,7 +2068,7 @@ public final class Table {
               vx_p_name = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_name = Core.t_string.vx_new(valsub);
+              vx_p_name = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -1995,7 +2081,7 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/sort", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":idlist":
@@ -2015,13 +2101,13 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/sort", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/table/sort", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -2040,9 +2126,13 @@ public final class Table {
     }
 
     @Override
-    public Type_sort vx_empty() {return e_sort;}
+    public Core.Type_any vx_empty() {
+      return e_sort;
+    }
     @Override
-    public Type_sort vx_type() {return t_sort;}
+    public Core.Type_any vx_type() {
+      return t_sort;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -2071,10 +2161,10 @@ public final class Table {
    * (type table)
    */
   public interface Type_table extends Core.Type_struct {
-    public Table.Type_table vx_new(final Object... vals);
-    public Table.Type_table vx_copy(final Object... vals);
-    public Table.Type_table vx_empty();
-    public Table.Type_table vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Core.Type_string id();
     public Core.Type_string name();
     public Table.Type_fieldmap fieldmap();
@@ -2180,7 +2270,9 @@ public final class Table {
 
     @Override
     public Table.Type_table vx_new(final Object... vals) {
-      return e_table.vx_copy(vals);
+      return Core.vx_copy(
+       e_table,
+       vals);
     }
 
     @Override
@@ -2211,9 +2303,9 @@ public final class Table {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -2232,7 +2324,7 @@ public final class Table {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/data/table/table", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -2244,7 +2336,7 @@ public final class Table {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/data/table/table", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -2256,7 +2348,7 @@ public final class Table {
               vx_p_id = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_id = Core.t_string.vx_new(valsub);
+              vx_p_id = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -2269,7 +2361,7 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/table", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":name":
@@ -2279,7 +2371,7 @@ public final class Table {
               vx_p_name = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_name = Core.t_string.vx_new(valsub);
+              vx_p_name = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -2292,7 +2384,7 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/table", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":fieldmap":
@@ -2312,7 +2404,7 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/table", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":fieldsort":
@@ -2332,7 +2424,7 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/table", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":rowmap":
@@ -2352,7 +2444,7 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/table", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":rowfilter":
@@ -2372,7 +2464,7 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/table", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":rowsort":
@@ -2392,13 +2484,13 @@ public final class Table {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/data/table/table", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/table/table", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -2421,9 +2513,13 @@ public final class Table {
     }
 
     @Override
-    public Type_table vx_empty() {return e_table;}
+    public Core.Type_any vx_empty() {
+      return e_table;
+    }
     @Override
-    public Type_table vx_type() {return t_table;}
+    public Core.Type_any vx_type() {
+      return t_table;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {

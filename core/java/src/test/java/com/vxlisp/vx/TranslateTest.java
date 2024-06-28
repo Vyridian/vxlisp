@@ -9,13 +9,16 @@ import com.vxlisp.vx.data.*;
 public final class TranslateTest {
 
   static Test.Type_testcase f_translate(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/translate",
       ":casename", "translate",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n \"!NotFound!\"\n (translate \"!NotFound!\"))",
           ":testresult",
             Test.f_test(
@@ -30,13 +33,16 @@ public final class TranslateTest {
   }
 
   static Test.Type_testcase f_translate_1(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/translate",
       ":casename", "translate_1",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n \"Repl Type Not Found\"\n (translate\n  (msg\n   :path \"vx/repl/repl/repl<-string-argmap\"\n   :code \"repltypenotfound\")))",
           ":testresult",
             Test.f_test(
@@ -46,7 +52,7 @@ public final class TranslateTest {
                 context,
                 Core.f_new(
                   Core.t_msg,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":path"),
                     Core.vx_new_string("vx/repl/repl/repl<-string-argmap"),
                     Core.vx_new_string(":code"),
@@ -62,13 +68,16 @@ public final class TranslateTest {
   }
 
   static Test.Type_testcase f_translate_from_translation_string(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/translate",
       ":casename", "translate<-translation-string",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n \"Hola\"\n (translate<-translation-string\n  (translation\n   :wordmap\n    (stringmap\n     \"Hello\" \"Hola\"))\n  \"Hello\"))",
           ":testresult",
             Test.f_test(
@@ -77,11 +86,11 @@ public final class TranslateTest {
               Translate.f_translate_from_translation_string(
                 Core.f_new(
                   Core.t_translation,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":wordmap"),
                     Core.f_new(
                       Core.t_stringmap,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string("Hello"),
                         Core.vx_new_string("Hola")
                       )
@@ -103,33 +112,30 @@ public final class TranslateTest {
       TranslateTest.f_translate_1(context),
       TranslateTest.f_translate_from_translation_string(context)
     ));
-    Test.Type_testcaselist output = Test.t_testcaselist.vx_new(arraylisttestcase);
+    Test.Type_testcaselist output = Core.vx_new(
+      Test.t_testcaselist,
+      arraylisttestcase
+    );
     return output;
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Test.t_testcoveragesummary.vx_new(
-      ":testpkg",   "vx/translate", 
-      ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 11, ":total", 11), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 30, ":tests", 3, ":total", 10), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 11), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 11), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 30, ":tests", 3, ":total", 10), 
-      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
+    return Core.vx_new(
+      Test.t_testcoveragesummary,
+      ":testpkg", "vx/translate", 
+      ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
+      ":docnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 11, ":total", 11), 
+      ":funcnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 30, ":tests", 3, ":total", 10), 
+      ":bigospacenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 11), 
+      ":bigotimenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 11), 
+      ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 30, ":tests", 3, ":total", 10), 
+      ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     );
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Test.t_testcoveragedetail.vx_new(
-      ":testpkg", "vx/translate",
-      ":typemap", Core.t_intmap.vx_new(
-  
-      ),
-      ":constmap", Core.t_intmap.vx_new(
-  
-      ),
-      ":funcmap", Core.t_intmap.vx_new(
+    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/translate", ":typemap", Core.e_intmap, ":constmap", Core.e_intmap, ":funcmap", Core.vx_new(
+  Core.t_intmap,
         ":session<-session-name", 0,
         ":session<-session-translation", 0,
         ":session<-session-translationmap-name", 0,
@@ -141,13 +147,13 @@ public final class TranslateTest {
         ":translation<-context", 0,
         ":translation<-session-name", 0,
         ":translationmap<-translations", 0
-      )
-    );
+      ));
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {
     Test.Type_testcaselist testcaselist = test_cases(context);
-    Test.Type_testpackage output = Test.t_testpackage.vx_new(
+    Test.Type_testpackage output = Core.vx_new(
+      Test.t_testpackage,
       ":testpkg", "vx/translate", 
       ":caselist", testcaselist,
       ":coveragesummary", test_coveragesummary(),

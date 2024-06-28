@@ -58,12 +58,18 @@ public final class All {
     }
 
     @Override
-    public Func_context_all vx_empty() {return e_context_all;}
+    public Core.Type_any vx_empty() {
+      return e_context_all;
+    }
     @Override
-    public Func_context_all vx_type() {return t_context_all;}
+    public Core.Type_any vx_type() {
+      return t_context_all;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -95,11 +101,11 @@ public final class All {
     Core.Type_context output = Core.e_context;
     output = Core.f_new(
       Core.t_context,
-      Core.t_anylist.vx_new(
+      Core.vx_new(Core.t_anylist,
         Core.vx_new_string(":session"),
         Core.f_new(
           Core.t_session,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":translation"),
             En.f_translation_en(),
             Core.vx_new_string(":translationmap"),
@@ -150,7 +156,7 @@ public final class All {
           "translationmap", // name
           ":map", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Core.t_translation), // allowtypes
+          Core.vx_new(Core.t_typelist, Core.t_translation), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -162,9 +168,13 @@ public final class All {
     }
 
     @Override
-    public Func_translationmap_all vx_empty() {return e_translationmap_all;}
+    public Core.Type_any vx_empty() {
+      return e_translationmap_all;
+    }
     @Override
-    public Func_translationmap_all vx_type() {return t_translationmap_all;}
+    public Core.Type_any vx_type() {
+      return t_translationmap_all;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -185,7 +195,7 @@ public final class All {
   public static Core.Type_translationmap f_translationmap_all() {
     Core.Type_translationmap output = Core.e_translationmap;
     output = Translate.f_translationmap_from_translations(
-      Core.t_translationlist.vx_new(
+      Core.vx_new(Core.t_translationlist,
         En.f_translation_en(),
         Es.f_translation_es()
       )

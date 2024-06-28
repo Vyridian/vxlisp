@@ -661,9 +661,7 @@
   :js
    "num1 + num2"
   :java
-   "Core.Type_float float1 = Core.t_float.vx_new(num1);
-    Core.Type_float float2 = Core.t_float.vx_new(num2);
-    float result = float1.vx_float() + float2.vx_float();
+   "float result = Core.vx_float_from_number(num1) + Core.vx_float_from_number(num2);
     output = Core.vx_new_float(result);")
  :alias "plus"
  :test (test 5 (+ 2  3))
@@ -729,9 +727,7 @@
   :js
    "num1 - num2"
   :java
-   "Core.Type_float float1 = Core.t_float.vx_new(num1);
-    Core.Type_float float2 = Core.t_float.vx_new(num2);
-    float result = float1.vx_float() - float2.vx_float();
+   "float result = Core.vx_float_from_number(num1) - Core.vx_float_from_number(num2);
     output = Core.vx_new_float(result);")
  :alias "minus"
  :test (test 5 (+ 2 3))
@@ -798,9 +794,7 @@
   :js
    "num1 * num2"
   :java
-   "Core.Type_float float1 = Core.t_float.vx_new(num1);
-    Core.Type_float float2 = Core.t_float.vx_new(num2);
-    float result = float1.vx_float() * float2.vx_float();
+   "float result = Core.vx_float_from_number(num1) * Core.vx_float_from_number(num2);
     output = Core.vx_new_float(result);")
  :alias "multiply"
  :test (test 6.4 (* 3.2 2))
@@ -854,13 +848,13 @@
   :js
    "num1 / num2"
   :java
-   "Core.Type_float float1 = Core.t_float.vx_new(num1);
-    Core.Type_float float2 = Core.t_float.vx_new(num2);
-    if (float1.vx_float() == 0) {
-    } else if (float2.vx_float() == 0) {
+   "float float1 = Core.vx_float_from_number(num1);
+    float float2 = Core.vx_float_from_number(num2);
+    if (float1 == 0) {
+    } else if (float2 == 0) {
       output = Core.c_notanumber;
     } else {
-      float result = float1.vx_float() / float2.vx_float();
+      float result = float1 / float2;
       output = Core.vx_new_float(result);
     }")
  :alias "divide"
@@ -1573,8 +1567,8 @@
     if ((val1 instanceof Core.Type_number) && (val2 instanceof Core.Type_number)) {
       Core.Type_number num1 = (Core.Type_number)val1;
       Core.Type_number num2 = (Core.Type_number)val2;
-      float float1 = Core.t_float.vx_new(num1).vx_float();
-      float float2 = Core.t_float.vx_new(num2).vx_float();
+      float float1 = Core.vx_new(Core.t_float, num1).vx_float();
+      float float2 = Core.vx_new(Core.t_float, num2).vx_float();
       if (float1 < float2) {
         intresult = -1;
       } else if (float1 > float2) {
@@ -1687,11 +1681,10 @@
  (native
   :cpp
    "T* output = vx_core::vx_any_from_any(type, type->vx_empty());"
-  :js
-   "vx_core.vx_empty(type)"
   :java
-   "@SuppressWarnings(“unchecked”)
-    T output = (T)(type.vx_empty());")
+   "T output = Core.vx_empty(type);"
+  :js
+   "vx_core.vx_empty(type)")
  :test (test false  (empty boolean))
        (test ""     (empty string))
        (test (list) (empty list))

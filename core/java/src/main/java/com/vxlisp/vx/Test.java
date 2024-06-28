@@ -17,10 +17,10 @@ public final class Test {
    * (type testcase)
    */
   public interface Type_testcase extends Core.Type_struct {
-    public Test.Type_testcase vx_new(final Object... vals);
-    public Test.Type_testcase vx_copy(final Object... vals);
-    public Test.Type_testcase vx_empty();
-    public Test.Type_testcase vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Core.Type_boolean passfail();
     public Core.Type_string testpkg();
     public Core.Type_string casename();
@@ -90,7 +90,9 @@ public final class Test {
 
     @Override
     public Test.Type_testcase vx_new(final Object... vals) {
-      return e_testcase.vx_copy(vals);
+      return Core.vx_copy(
+       e_testcase,
+       vals);
     }
 
     @Override
@@ -115,9 +117,9 @@ public final class Test {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -136,7 +138,7 @@ public final class Test {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -148,7 +150,7 @@ public final class Test {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -160,7 +162,7 @@ public final class Test {
               vx_p_passfail = (Core.Type_boolean)valsub;
             } else if (valsub instanceof Boolean) {
               ischanged = true;
-              vx_p_passfail = Core.t_boolean.vx_new(valsub);
+              vx_p_passfail = Core.vx_new(Core.t_boolean, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -173,7 +175,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":testpkg":
@@ -183,7 +185,7 @@ public final class Test {
               vx_p_testpkg = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_testpkg = Core.t_string.vx_new(valsub);
+              vx_p_testpkg = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -196,7 +198,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":casename":
@@ -206,7 +208,7 @@ public final class Test {
               vx_p_casename = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_casename = Core.t_string.vx_new(valsub);
+              vx_p_casename = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -219,7 +221,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":describelist":
@@ -239,13 +241,13 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -265,9 +267,13 @@ public final class Test {
     }
 
     @Override
-    public Type_testcase vx_empty() {return e_testcase;}
+    public Core.Type_any vx_empty() {
+      return e_testcase;
+    }
     @Override
-    public Type_testcase vx_type() {return t_testcase;}
+    public Core.Type_any vx_type() {
+      return t_testcase;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -297,10 +303,10 @@ public final class Test {
    * (type testcaselist)
    */
   public interface Type_testcaselist extends Core.Type_list {
-    public Test.Type_testcaselist vx_new(final Object... vals);
-    public Test.Type_testcaselist vx_copy(final Object... vals);
-    public Test.Type_testcaselist vx_empty();
-    public Test.Type_testcaselist vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public List<Test.Type_testcase> vx_listtestcase();
     public Test.Type_testcase vx_testcase(final Core.Type_int index);
   }
@@ -310,12 +316,15 @@ public final class Test {
     protected List<Test.Type_testcase> vx_p_list = Core.immutablelist(new ArrayList<Test.Type_testcase>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
+    public List<Core.Type_any> vx_list() {
+      List<Core.Type_any> output = Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));
+      return output;
+    }
 
     @Override
     public Test.Type_testcase vx_testcase(final Core.Type_int index) {
       Test.Type_testcase output = Test.e_testcase;
-      Class_testcaselist list = this;
+      Test.Class_testcaselist list = this;
       int iindex = index.vx_int();
       List<Test.Type_testcase> listval = list.vx_p_list;
       if (iindex < listval.size()) {
@@ -325,7 +334,9 @@ public final class Test {
     }
 
     @Override
-    public List<Test.Type_testcase> vx_listtestcase() {return vx_p_list;}
+    public List<Test.Type_testcase> vx_listtestcase() {
+      return vx_p_list;
+    }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -334,7 +345,9 @@ public final class Test {
 
     @Override
     public Test.Type_testcaselist vx_new(final Object... vals) {
-      return e_testcaselist.vx_copy(vals);
+      return Core.vx_copy(
+       e_testcaselist,
+       vals);
     }
 
     @Override
@@ -350,9 +363,9 @@ public final class Test {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Test.Type_testcase) {
           Test.Type_testcase anysub = (Test.Type_testcase)valsub;
           ischanged = true;
@@ -376,10 +389,10 @@ public final class Test {
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/test/testcaselist", ":invalidtype", anysub);
-          msgblock = msgblock.vx_copy(msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/test/testcaselist", ":invalidtype", Core.vx_new_string(valsub.toString()));
-          msgblock = msgblock.vx_copy(msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -394,9 +407,13 @@ public final class Test {
     }
 
     @Override
-    public Type_testcaselist vx_empty() {return e_testcaselist;}
+    public Core.Type_any vx_empty() {
+      return e_testcaselist;
+    }
     @Override
-    public Type_testcaselist vx_type() {return t_testcaselist;}
+    public Core.Type_any vx_type() {
+      return t_testcaselist;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -405,7 +422,7 @@ public final class Test {
         "testcaselist", // name
         ":list", // extends
         Core.e_typelist, // traits
-        Core.t_typelist.vx_new(Test.t_testcase), // allowtypes
+        Core.vx_new(Core.t_typelist, Test.t_testcase), // allowtypes
         Core.e_typelist, // disallowtypes
         Core.e_funclist, // allowfuncs
         Core.e_funclist, // disallowfuncs
@@ -426,10 +443,10 @@ public final class Test {
    * (type testcoveragedetail)
    */
   public interface Type_testcoveragedetail extends Core.Type_struct {
-    public Test.Type_testcoveragedetail vx_new(final Object... vals);
-    public Test.Type_testcoveragedetail vx_copy(final Object... vals);
-    public Test.Type_testcoveragedetail vx_empty();
-    public Test.Type_testcoveragedetail vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Core.Type_intmap constmap();
     public Core.Type_intmap funcmap();
     public Core.Type_string testpkg();
@@ -499,7 +516,9 @@ public final class Test {
 
     @Override
     public Test.Type_testcoveragedetail vx_new(final Object... vals) {
-      return e_testcoveragedetail.vx_copy(vals);
+      return Core.vx_copy(
+       e_testcoveragedetail,
+       vals);
     }
 
     @Override
@@ -524,9 +543,9 @@ public final class Test {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -545,7 +564,7 @@ public final class Test {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -557,7 +576,7 @@ public final class Test {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -579,7 +598,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":funcmap":
@@ -599,7 +618,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":testpkg":
@@ -609,7 +628,7 @@ public final class Test {
               vx_p_testpkg = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_testpkg = Core.t_string.vx_new(valsub);
+              vx_p_testpkg = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -622,7 +641,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":typemap":
@@ -642,13 +661,13 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -668,9 +687,13 @@ public final class Test {
     }
 
     @Override
-    public Type_testcoveragedetail vx_empty() {return e_testcoveragedetail;}
+    public Core.Type_any vx_empty() {
+      return e_testcoveragedetail;
+    }
     @Override
-    public Type_testcoveragedetail vx_type() {return t_testcoveragedetail;}
+    public Core.Type_any vx_type() {
+      return t_testcoveragedetail;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -700,10 +723,10 @@ public final class Test {
    * (type testcoveragenums)
    */
   public interface Type_testcoveragenums extends Core.Type_struct {
-    public Test.Type_testcoveragenums vx_new(final Object... vals);
-    public Test.Type_testcoveragenums vx_copy(final Object... vals);
-    public Test.Type_testcoveragenums vx_empty();
-    public Test.Type_testcoveragenums vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Core.Type_int pct();
     public Core.Type_string testpkg();
     public Core.Type_int tests();
@@ -773,7 +796,9 @@ public final class Test {
 
     @Override
     public Test.Type_testcoveragenums vx_new(final Object... vals) {
-      return e_testcoveragenums.vx_copy(vals);
+      return Core.vx_copy(
+       e_testcoveragenums,
+       vals);
     }
 
     @Override
@@ -798,9 +823,9 @@ public final class Test {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -819,7 +844,7 @@ public final class Test {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -831,7 +856,7 @@ public final class Test {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -843,7 +868,7 @@ public final class Test {
               vx_p_pct = (Core.Type_int)valsub;
             } else if (valsub instanceof Integer) {
               ischanged = true;
-              vx_p_pct = Core.t_int.vx_new(valsub);
+              vx_p_pct = Core.vx_new(Core.t_int, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -856,7 +881,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":testpkg":
@@ -866,7 +891,7 @@ public final class Test {
               vx_p_testpkg = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_testpkg = Core.t_string.vx_new(valsub);
+              vx_p_testpkg = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -879,7 +904,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":tests":
@@ -889,7 +914,7 @@ public final class Test {
               vx_p_tests = (Core.Type_int)valsub;
             } else if (valsub instanceof Integer) {
               ischanged = true;
-              vx_p_tests = Core.t_int.vx_new(valsub);
+              vx_p_tests = Core.vx_new(Core.t_int, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -902,7 +927,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":total":
@@ -912,7 +937,7 @@ public final class Test {
               vx_p_total = (Core.Type_int)valsub;
             } else if (valsub instanceof Integer) {
               ischanged = true;
-              vx_p_total = Core.t_int.vx_new(valsub);
+              vx_p_total = Core.vx_new(Core.t_int, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -925,13 +950,13 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -951,9 +976,13 @@ public final class Test {
     }
 
     @Override
-    public Type_testcoveragenums vx_empty() {return e_testcoveragenums;}
+    public Core.Type_any vx_empty() {
+      return e_testcoveragenums;
+    }
     @Override
-    public Type_testcoveragenums vx_type() {return t_testcoveragenums;}
+    public Core.Type_any vx_type() {
+      return t_testcoveragenums;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -983,10 +1012,10 @@ public final class Test {
    * (type testcoveragesummary)
    */
   public interface Type_testcoveragesummary extends Core.Type_struct {
-    public Test.Type_testcoveragesummary vx_new(final Object... vals);
-    public Test.Type_testcoveragesummary vx_copy(final Object... vals);
-    public Test.Type_testcoveragesummary vx_empty();
-    public Test.Type_testcoveragesummary vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Test.Type_testcoveragenums bigospacenums();
     public Test.Type_testcoveragenums bigotimenums();
     public Test.Type_testcoveragenums constnums();
@@ -1104,7 +1133,9 @@ public final class Test {
 
     @Override
     public Test.Type_testcoveragesummary vx_new(final Object... vals) {
-      return e_testcoveragesummary.vx_copy(vals);
+      return Core.vx_copy(
+       e_testcoveragesummary,
+       vals);
     }
 
     @Override
@@ -1137,9 +1168,9 @@ public final class Test {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -1158,7 +1189,7 @@ public final class Test {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -1170,7 +1201,7 @@ public final class Test {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -1192,7 +1223,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":bigotimenums":
@@ -1212,7 +1243,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":constnums":
@@ -1232,7 +1263,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":docnums":
@@ -1252,7 +1283,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":funcnums":
@@ -1272,7 +1303,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":testpkg":
@@ -1282,7 +1313,7 @@ public final class Test {
               vx_p_testpkg = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_testpkg = Core.t_string.vx_new(valsub);
+              vx_p_testpkg = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -1295,7 +1326,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":totalnums":
@@ -1315,7 +1346,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":typenums":
@@ -1335,13 +1366,13 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -1365,9 +1396,13 @@ public final class Test {
     }
 
     @Override
-    public Type_testcoveragesummary vx_empty() {return e_testcoveragesummary;}
+    public Core.Type_any vx_empty() {
+      return e_testcoveragesummary;
+    }
     @Override
-    public Type_testcoveragesummary vx_type() {return t_testcoveragesummary;}
+    public Core.Type_any vx_type() {
+      return t_testcoveragesummary;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -1397,10 +1432,10 @@ public final class Test {
    * (type testdescribe)
    */
   public interface Type_testdescribe extends Core.Type_struct {
-    public Test.Type_testdescribe vx_new(final Object... vals);
-    public Test.Type_testdescribe vx_copy(final Object... vals);
-    public Test.Type_testdescribe vx_empty();
-    public Test.Type_testdescribe vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Core.Type_string describename();
     public Core.Type_string testpkg();
     public Test.Type_testresult testresult();
@@ -1458,7 +1493,9 @@ public final class Test {
 
     @Override
     public Test.Type_testdescribe vx_new(final Object... vals) {
-      return e_testdescribe.vx_copy(vals);
+      return Core.vx_copy(
+       e_testdescribe,
+       vals);
     }
 
     @Override
@@ -1481,9 +1518,9 @@ public final class Test {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -1502,7 +1539,7 @@ public final class Test {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/test/testdescribe", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -1514,7 +1551,7 @@ public final class Test {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/test/testdescribe", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -1526,7 +1563,7 @@ public final class Test {
               vx_p_describename = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_describename = Core.t_string.vx_new(valsub);
+              vx_p_describename = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -1539,7 +1576,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testdescribe", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":testpkg":
@@ -1549,7 +1586,7 @@ public final class Test {
               vx_p_testpkg = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_testpkg = Core.t_string.vx_new(valsub);
+              vx_p_testpkg = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -1562,7 +1599,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testdescribe", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":testresult":
@@ -1582,13 +1619,13 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testdescribe", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testdescribe", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -1607,9 +1644,13 @@ public final class Test {
     }
 
     @Override
-    public Type_testdescribe vx_empty() {return e_testdescribe;}
+    public Core.Type_any vx_empty() {
+      return e_testdescribe;
+    }
     @Override
-    public Type_testdescribe vx_type() {return t_testdescribe;}
+    public Core.Type_any vx_type() {
+      return t_testdescribe;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -1639,10 +1680,10 @@ public final class Test {
    * (type testdescribelist)
    */
   public interface Type_testdescribelist extends Core.Type_list {
-    public Test.Type_testdescribelist vx_new(final Object... vals);
-    public Test.Type_testdescribelist vx_copy(final Object... vals);
-    public Test.Type_testdescribelist vx_empty();
-    public Test.Type_testdescribelist vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public List<Test.Type_testdescribe> vx_listtestdescribe();
     public Test.Type_testdescribe vx_testdescribe(final Core.Type_int index);
   }
@@ -1652,12 +1693,15 @@ public final class Test {
     protected List<Test.Type_testdescribe> vx_p_list = Core.immutablelist(new ArrayList<Test.Type_testdescribe>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
+    public List<Core.Type_any> vx_list() {
+      List<Core.Type_any> output = Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));
+      return output;
+    }
 
     @Override
     public Test.Type_testdescribe vx_testdescribe(final Core.Type_int index) {
       Test.Type_testdescribe output = Test.e_testdescribe;
-      Class_testdescribelist list = this;
+      Test.Class_testdescribelist list = this;
       int iindex = index.vx_int();
       List<Test.Type_testdescribe> listval = list.vx_p_list;
       if (iindex < listval.size()) {
@@ -1667,7 +1711,9 @@ public final class Test {
     }
 
     @Override
-    public List<Test.Type_testdescribe> vx_listtestdescribe() {return vx_p_list;}
+    public List<Test.Type_testdescribe> vx_listtestdescribe() {
+      return vx_p_list;
+    }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -1676,7 +1722,9 @@ public final class Test {
 
     @Override
     public Test.Type_testdescribelist vx_new(final Object... vals) {
-      return e_testdescribelist.vx_copy(vals);
+      return Core.vx_copy(
+       e_testdescribelist,
+       vals);
     }
 
     @Override
@@ -1692,9 +1740,9 @@ public final class Test {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Test.Type_testdescribe) {
           Test.Type_testdescribe anysub = (Test.Type_testdescribe)valsub;
           ischanged = true;
@@ -1718,10 +1766,10 @@ public final class Test {
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/test/testdescribelist", ":invalidtype", anysub);
-          msgblock = msgblock.vx_copy(msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/test/testdescribelist", ":invalidtype", Core.vx_new_string(valsub.toString()));
-          msgblock = msgblock.vx_copy(msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -1736,9 +1784,13 @@ public final class Test {
     }
 
     @Override
-    public Type_testdescribelist vx_empty() {return e_testdescribelist;}
+    public Core.Type_any vx_empty() {
+      return e_testdescribelist;
+    }
     @Override
-    public Type_testdescribelist vx_type() {return t_testdescribelist;}
+    public Core.Type_any vx_type() {
+      return t_testdescribelist;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -1747,7 +1799,7 @@ public final class Test {
         "testdescribelist", // name
         ":list", // extends
         Core.e_typelist, // traits
-        Core.t_typelist.vx_new(Test.t_testdescribe), // allowtypes
+        Core.vx_new(Core.t_typelist, Test.t_testdescribe), // allowtypes
         Core.e_typelist, // disallowtypes
         Core.e_funclist, // allowfuncs
         Core.e_funclist, // disallowfuncs
@@ -1768,10 +1820,10 @@ public final class Test {
    * (type testpackage)
    */
   public interface Type_testpackage extends Core.Type_struct {
-    public Test.Type_testpackage vx_new(final Object... vals);
-    public Test.Type_testpackage vx_copy(final Object... vals);
-    public Test.Type_testpackage vx_empty();
-    public Test.Type_testpackage vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Test.Type_testcaselist caselist();
     public Test.Type_testcoveragedetail coveragedetail();
     public Test.Type_testcoveragesummary coveragesummary();
@@ -1853,7 +1905,9 @@ public final class Test {
 
     @Override
     public Test.Type_testpackage vx_new(final Object... vals) {
-      return e_testpackage.vx_copy(vals);
+      return Core.vx_copy(
+       e_testpackage,
+       vals);
     }
 
     @Override
@@ -1880,9 +1934,9 @@ public final class Test {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -1901,7 +1955,7 @@ public final class Test {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -1913,7 +1967,7 @@ public final class Test {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -1935,7 +1989,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":coveragedetail":
@@ -1955,7 +2009,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":coveragesummary":
@@ -1975,7 +2029,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":passfail":
@@ -1985,7 +2039,7 @@ public final class Test {
               vx_p_passfail = (Core.Type_boolean)valsub;
             } else if (valsub instanceof Boolean) {
               ischanged = true;
-              vx_p_passfail = Core.t_boolean.vx_new(valsub);
+              vx_p_passfail = Core.vx_new(Core.t_boolean, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -1998,7 +2052,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":testpkg":
@@ -2008,7 +2062,7 @@ public final class Test {
               vx_p_testpkg = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_testpkg = Core.t_string.vx_new(valsub);
+              vx_p_testpkg = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -2021,13 +2075,13 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -2048,9 +2102,13 @@ public final class Test {
     }
 
     @Override
-    public Type_testpackage vx_empty() {return e_testpackage;}
+    public Core.Type_any vx_empty() {
+      return e_testpackage;
+    }
     @Override
-    public Type_testpackage vx_type() {return t_testpackage;}
+    public Core.Type_any vx_type() {
+      return t_testpackage;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -2080,10 +2138,10 @@ public final class Test {
    * (type testpackagelist)
    */
   public interface Type_testpackagelist extends Core.Type_list {
-    public Test.Type_testpackagelist vx_new(final Object... vals);
-    public Test.Type_testpackagelist vx_copy(final Object... vals);
-    public Test.Type_testpackagelist vx_empty();
-    public Test.Type_testpackagelist vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public List<Test.Type_testpackage> vx_listtestpackage();
     public Test.Type_testpackage vx_testpackage(final Core.Type_int index);
   }
@@ -2093,12 +2151,15 @@ public final class Test {
     protected List<Test.Type_testpackage> vx_p_list = Core.immutablelist(new ArrayList<Test.Type_testpackage>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
+    public List<Core.Type_any> vx_list() {
+      List<Core.Type_any> output = Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));
+      return output;
+    }
 
     @Override
     public Test.Type_testpackage vx_testpackage(final Core.Type_int index) {
       Test.Type_testpackage output = Test.e_testpackage;
-      Class_testpackagelist list = this;
+      Test.Class_testpackagelist list = this;
       int iindex = index.vx_int();
       List<Test.Type_testpackage> listval = list.vx_p_list;
       if (iindex < listval.size()) {
@@ -2108,7 +2169,9 @@ public final class Test {
     }
 
     @Override
-    public List<Test.Type_testpackage> vx_listtestpackage() {return vx_p_list;}
+    public List<Test.Type_testpackage> vx_listtestpackage() {
+      return vx_p_list;
+    }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -2117,7 +2180,9 @@ public final class Test {
 
     @Override
     public Test.Type_testpackagelist vx_new(final Object... vals) {
-      return e_testpackagelist.vx_copy(vals);
+      return Core.vx_copy(
+       e_testpackagelist,
+       vals);
     }
 
     @Override
@@ -2133,9 +2198,9 @@ public final class Test {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Test.Type_testpackage) {
           Test.Type_testpackage anysub = (Test.Type_testpackage)valsub;
           ischanged = true;
@@ -2159,10 +2224,10 @@ public final class Test {
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/test/testpackagelist", ":invalidtype", anysub);
-          msgblock = msgblock.vx_copy(msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/test/testpackagelist", ":invalidtype", Core.vx_new_string(valsub.toString()));
-          msgblock = msgblock.vx_copy(msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -2177,9 +2242,13 @@ public final class Test {
     }
 
     @Override
-    public Type_testpackagelist vx_empty() {return e_testpackagelist;}
+    public Core.Type_any vx_empty() {
+      return e_testpackagelist;
+    }
     @Override
-    public Type_testpackagelist vx_type() {return t_testpackagelist;}
+    public Core.Type_any vx_type() {
+      return t_testpackagelist;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -2188,7 +2257,7 @@ public final class Test {
         "testpackagelist", // name
         ":list", // extends
         Core.e_typelist, // traits
-        Core.t_typelist.vx_new(Test.t_testpackage), // allowtypes
+        Core.vx_new(Core.t_typelist, Test.t_testpackage), // allowtypes
         Core.e_typelist, // disallowtypes
         Core.e_funclist, // allowfuncs
         Core.e_funclist, // disallowfuncs
@@ -2209,10 +2278,10 @@ public final class Test {
    * (type testresult)
    */
   public interface Type_testresult extends Core.Type_struct {
-    public Test.Type_testresult vx_new(final Object... vals);
-    public Test.Type_testresult vx_copy(final Object... vals);
-    public Test.Type_testresult vx_empty();
-    public Test.Type_testresult vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Core.Type_string code();
     public Core.Type_boolean passfail();
     public Core.Type_any expected();
@@ -2294,7 +2363,9 @@ public final class Test {
 
     @Override
     public Test.Type_testresult vx_new(final Object... vals) {
-      return e_testresult.vx_copy(vals);
+      return Core.vx_copy(
+       e_testresult,
+       vals);
     }
 
     @Override
@@ -2321,9 +2392,9 @@ public final class Test {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -2342,7 +2413,7 @@ public final class Test {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -2354,7 +2425,7 @@ public final class Test {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -2366,7 +2437,7 @@ public final class Test {
               vx_p_code = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_code = Core.t_string.vx_new(valsub);
+              vx_p_code = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -2379,7 +2450,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":passfail":
@@ -2389,7 +2460,7 @@ public final class Test {
               vx_p_passfail = (Core.Type_boolean)valsub;
             } else if (valsub instanceof Boolean) {
               ischanged = true;
-              vx_p_passfail = Core.t_boolean.vx_new(valsub);
+              vx_p_passfail = Core.vx_new(Core.t_boolean, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -2402,7 +2473,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":expected":
@@ -2422,7 +2493,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":actual":
@@ -2442,7 +2513,7 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":fn-actual":
@@ -2462,13 +2533,13 @@ public final class Test {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -2489,9 +2560,13 @@ public final class Test {
     }
 
     @Override
-    public Type_testresult vx_empty() {return e_testresult;}
+    public Core.Type_any vx_empty() {
+      return e_testresult;
+    }
     @Override
-    public Type_testresult vx_type() {return t_testresult;}
+    public Core.Type_any vx_type() {
+      return t_testresult;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -2521,10 +2596,10 @@ public final class Test {
    * (type testresultlist)
    */
   public interface Type_testresultlist extends Core.Type_list {
-    public Test.Type_testresultlist vx_new(final Object... vals);
-    public Test.Type_testresultlist vx_copy(final Object... vals);
-    public Test.Type_testresultlist vx_empty();
-    public Test.Type_testresultlist vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public List<Test.Type_testresult> vx_listtestresult();
     public Test.Type_testresult vx_testresult(final Core.Type_int index);
   }
@@ -2534,12 +2609,15 @@ public final class Test {
     protected List<Test.Type_testresult> vx_p_list = Core.immutablelist(new ArrayList<Test.Type_testresult>());
 
     @Override
-    public List<Core.Type_any> vx_list() {return Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));}
+    public List<Core.Type_any> vx_list() {
+      List<Core.Type_any> output = Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));
+      return output;
+    }
 
     @Override
     public Test.Type_testresult vx_testresult(final Core.Type_int index) {
       Test.Type_testresult output = Test.e_testresult;
-      Class_testresultlist list = this;
+      Test.Class_testresultlist list = this;
       int iindex = index.vx_int();
       List<Test.Type_testresult> listval = list.vx_p_list;
       if (iindex < listval.size()) {
@@ -2549,7 +2627,9 @@ public final class Test {
     }
 
     @Override
-    public List<Test.Type_testresult> vx_listtestresult() {return vx_p_list;}
+    public List<Test.Type_testresult> vx_listtestresult() {
+      return vx_p_list;
+    }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
@@ -2558,7 +2638,9 @@ public final class Test {
 
     @Override
     public Test.Type_testresultlist vx_new(final Object... vals) {
-      return e_testresultlist.vx_copy(vals);
+      return Core.vx_copy(
+       e_testresultlist,
+       vals);
     }
 
     @Override
@@ -2574,9 +2656,9 @@ public final class Test {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Test.Type_testresult) {
           Test.Type_testresult anysub = (Test.Type_testresult)valsub;
           ischanged = true;
@@ -2600,10 +2682,10 @@ public final class Test {
         } else if (valsub instanceof Core.Type_any) {
           Core.Type_any anysub = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/test/testresultlist", ":invalidtype", anysub);
-          msgblock = msgblock.vx_copy(msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/test/testresultlist", ":invalidtype", Core.vx_new_string(valsub.toString()));
-          msgblock = msgblock.vx_copy(msg);
+          msgblock = Core.vx_copy(msgblock, msg);
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -2618,9 +2700,13 @@ public final class Test {
     }
 
     @Override
-    public Type_testresultlist vx_empty() {return e_testresultlist;}
+    public Core.Type_any vx_empty() {
+      return e_testresultlist;
+    }
     @Override
-    public Type_testresultlist vx_type() {return t_testresultlist;}
+    public Core.Type_any vx_type() {
+      return t_testresultlist;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -2629,7 +2715,7 @@ public final class Test {
         "testresultlist", // name
         ":list", // extends
         Core.e_typelist, // traits
-        Core.t_typelist.vx_new(Test.t_testresult), // allowtypes
+        Core.vx_new(Core.t_typelist, Test.t_testresult), // allowtypes
         Core.e_typelist, // disallowtypes
         Core.e_funclist, // allowfuncs
         Core.e_funclist, // disallowfuncs
@@ -2660,7 +2746,7 @@ public final class Test {
           "vx/web/html", // pkgname
           "stylesheet", // name
           ":struct", // extends
-          Core.t_typelist.vx_new(Html.t_node, Html.t_headchild), // traits
+          Core.vx_new(Core.t_typelist, Html.t_node, Html.t_headchild), // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
@@ -2676,22 +2762,22 @@ public final class Test {
       Html.Type_stylesheet val = Html.f_stylesheet_loadmap(
         Core.f_new(
           Html.t_stylesheet,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":name"),
             Core.vx_new_string("Test Suite"),
             Core.vx_new_string(":styles"),
             Core.f_new(
               Html.t_stylelist,
-              Core.t_anylist.vx_new(
+              Core.vx_new(Core.t_anylist,
                 Core.f_new(
                   Html.t_style,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("body"),
                     Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string("font-size"),
                         Core.vx_new_string("0.9em"),
                         Core.vx_new_string("font-family"),
@@ -2702,13 +2788,13 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_style,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("details summary"),
                     Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string("cursor"),
                         Core.vx_new_string("pointer"),
                         Core.vx_new_string("display"),
@@ -2721,13 +2807,13 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_style,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("table"),
                     Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string("vertical-align"),
                         Core.vx_new_string("top"),
                         Core.vx_new_string("border-collapse"),
@@ -2744,13 +2830,13 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_style,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("thead tr"),
                     Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string("background-color"),
                         Core.vx_new_string("#009879"),
                         Core.vx_new_string("color"),
@@ -2763,13 +2849,13 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_style,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("td"),
                     Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string("padding"),
                         Core.vx_new_string("10px 10px"),
                         Core.vx_new_string("vertical-align"),
@@ -2780,13 +2866,13 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_style,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("tbody tr"),
                     Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string("border-bottom"),
                         Core.vx_new_string("1px solid #dddddd")
                       )
@@ -2795,13 +2881,13 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_style,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("tbody tr:nth-of-type(even)"),
                     Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string("background-color"),
                         Core.vx_new_string("#f3f3f3")
                       )
@@ -2810,13 +2896,13 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_style,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("tbody tr:last-of-type"),
                     Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string("border-bottom"),
                         Core.vx_new_string("2px solid #009879")
                       )
@@ -2825,13 +2911,13 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_style,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("tbody tr.active-row"),
                     Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string("font-weight"),
                         Core.vx_new_string("bold"),
                         Core.vx_new_string("color"),
@@ -2842,13 +2928,13 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_style,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string(".failflag"),
                     Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string("background-color"),
                         Core.vx_new_string("red"),
                         Core.vx_new_string("color"),
@@ -2867,13 +2953,13 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_style,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string(".passflag"),
                     Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string("background-color"),
                         Core.vx_new_string("green"),
                         Core.vx_new_string("color"),
@@ -2892,13 +2978,13 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_style,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string(".coveragenums"),
                     Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string("width"),
                         Core.vx_new_string("90px")
                       )
@@ -2907,13 +2993,13 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_style,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string(".coveragepct"),
                     Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string("text-align"),
                         Core.vx_new_string("right")
                       )
@@ -2922,13 +3008,13 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_style,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string(".coveragepctgreen"),
                     Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string("background-color"),
                         Core.vx_new_string("green"),
                         Core.vx_new_string("color"),
@@ -2941,13 +3027,13 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_style,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string(".coveragepctred"),
                     Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string("background-color"),
                         Core.vx_new_string("red"),
                         Core.vx_new_string("color"),
@@ -2960,13 +3046,13 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_style,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string(".pkgheader"),
                     Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string("display"),
                         Core.vx_new_string("inline-flex"),
                         Core.vx_new_string("gap"),
@@ -2977,13 +3063,13 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_style,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string(".pkgname"),
                     Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string("font-weight"),
                         Core.vx_new_string("bold"),
                         Core.vx_new_string("width"),
@@ -2994,13 +3080,13 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_style,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string(".preformatted"),
                     Core.vx_new_string(":props"),
                     Core.f_new(
                       Html.t_propmap,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.vx_new_string("display"),
                         Core.vx_new_string("block"),
                         Core.vx_new_string("unicode-bidi"),
@@ -3085,12 +3171,18 @@ public final class Test {
     }
 
     @Override
-    public Func_context_test vx_empty() {return e_context_test;}
+    public Core.Type_any vx_empty() {
+      return e_context_test;
+    }
     @Override
-    public Func_context_test vx_type() {return t_context_test;}
+    public Core.Type_any vx_type() {
+      return t_context_test;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -3122,15 +3214,15 @@ public final class Test {
     Core.Type_context output = Core.e_context;
     output = Core.f_new(
       Core.t_context,
-      Core.t_anylist.vx_new(
+      Core.vx_new(Core.t_anylist,
         Core.vx_new_string(":session"),
         Core.f_new(
           Core.t_session,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":user"),
             Core.f_new(
               Core.t_user,
-              Core.t_anylist.vx_new(
+              Core.vx_new(Core.t_anylist,
                 Core.vx_new_string(":security"),
                 Test.f_security_test()
               )
@@ -3180,7 +3272,7 @@ public final class Test {
           "vx/web/html", // pkgname
           "div", // name
           ":struct", // extends
-          Core.t_typelist.vx_new(Html.t_node, Html.t_divchild), // traits
+          Core.vx_new(Core.t_typelist, Html.t_node, Html.t_divchild), // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
@@ -3193,12 +3285,18 @@ public final class Test {
     }
 
     @Override
-    public Func_div_from_testcaselist vx_empty() {return e_div_from_testcaselist;}
+    public Core.Type_any vx_empty() {
+      return e_div_from_testcaselist;
+    }
     @Override
-    public Func_div_from_testcaselist vx_type() {return t_div_from_testcaselist;}
+    public Core.Type_any vx_type() {
+      return t_div_from_testcaselist;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -3230,23 +3328,23 @@ public final class Test {
     Html.Type_div output = Html.e_div;
     output = Core.f_new(
       Html.t_div,
-      Core.t_anylist.vx_new(
+      Core.vx_new(Core.t_anylist,
         Core.f_new(
           Html.t_table,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":thead"),
             Core.f_new(
               Html.t_thead,
-              Core.t_anylist.vx_new(
+              Core.vx_new(Core.t_anylist,
                 Core.f_new(
                   Html.t_tr,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.f_new(
                       Html.t_td,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.f_new(
                           Html.t_p,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("Pass?")
                           )
@@ -3255,10 +3353,10 @@ public final class Test {
                     ),
                     Core.f_new(
                       Html.t_td,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.f_new(
                           Html.t_p,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("Name")
                           )
@@ -3267,10 +3365,10 @@ public final class Test {
                     ),
                     Core.f_new(
                       Html.t_td,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.f_new(
                           Html.t_p,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("Test")
                           )
@@ -3279,10 +3377,10 @@ public final class Test {
                     ),
                     Core.f_new(
                       Html.t_td,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.f_new(
                           Html.t_p,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("Expected")
                           )
@@ -3291,10 +3389,10 @@ public final class Test {
                     ),
                     Core.f_new(
                       Html.t_td,
-                      Core.t_anylist.vx_new(
+                      Core.vx_new(Core.t_anylist,
                         Core.f_new(
                           Html.t_p,
-                          Core.t_anylist.vx_new(
+                          Core.vx_new(Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("Actual")
                           )
@@ -3308,7 +3406,7 @@ public final class Test {
             Core.vx_new_string(":tbody"),
             Core.f_new(
               Html.t_tbody,
-              Core.t_anylist.vx_new(
+              Core.vx_new(Core.t_anylist,
                 Test.f_trlist_from_testcaselist(testcaselist)
               )
             )
@@ -3358,7 +3456,7 @@ public final class Test {
           "vx/web/html", // pkgname
           "div", // name
           ":struct", // extends
-          Core.t_typelist.vx_new(Html.t_node, Html.t_divchild), // traits
+          Core.vx_new(Core.t_typelist, Html.t_node, Html.t_divchild), // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
@@ -3371,12 +3469,18 @@ public final class Test {
     }
 
     @Override
-    public Func_div_from_testpackage vx_empty() {return e_div_from_testpackage;}
+    public Core.Type_any vx_empty() {
+      return e_div_from_testpackage;
+    }
     @Override
-    public Func_div_from_testpackage vx_type() {return t_div_from_testpackage;}
+    public Core.Type_any vx_type() {
+      return t_div_from_testpackage;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -3420,14 +3524,14 @@ public final class Test {
         final Html.Type_div node = Test.f_div_from_testcaselist(caselist);
         final Html.Type_divchildlist nodes = Core.f_new(
           Html.t_divchildlist,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
               node
           )
         );
         final Html.Type_p p_passfail = Test.f_p_from_passfail(passfail);
         final Html.Type_p p_pkgname = Core.f_new(
           Html.t_p,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
               Core.vx_new_string(":style"),
               pkgnamestyle,
               Core.vx_new_string(":text"),
@@ -3457,7 +3561,7 @@ public final class Test {
         );
         final Html.Type_divchildlist summary = Core.f_new(
           Html.t_divchildlist,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
               p_passfail,
               p_pkgname,
               p_totalnums,
@@ -3471,7 +3575,7 @@ public final class Test {
         );
         final Html.Type_details details = Core.f_new(
           Html.t_details,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
               Core.vx_new_string(":summary"),
               summary,
               Core.vx_new_string(":nodes"),
@@ -3480,7 +3584,7 @@ public final class Test {
         );
         return Core.f_new(
           Html.t_div,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
             details
           )
         );
@@ -3527,7 +3631,7 @@ public final class Test {
           "vx/web/html", // pkgname
           "div", // name
           ":struct", // extends
-          Core.t_typelist.vx_new(Html.t_node, Html.t_divchild), // traits
+          Core.vx_new(Core.t_typelist, Html.t_node, Html.t_divchild), // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
@@ -3540,12 +3644,18 @@ public final class Test {
     }
 
     @Override
-    public Func_div_from_testpackagelist vx_empty() {return e_div_from_testpackagelist;}
+    public Core.Type_any vx_empty() {
+      return e_div_from_testpackagelist;
+    }
     @Override
-    public Func_div_from_testpackagelist vx_type() {return t_div_from_testpackagelist;}
+    public Core.Type_any vx_type() {
+      return t_div_from_testpackagelist;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -3596,15 +3706,15 @@ public final class Test {
         );
         return Core.f_new(
           Html.t_div,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
             Core.f_new(
               Html.t_div,
-              Core.t_anylist.vx_new(
+              Core.vx_new(Core.t_anylist,
                 Core.vx_new_string(":style"),
                 stylepkgheader,
                 Core.f_new(
                   Html.t_p,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":style"),
                     stylepassfail,
                     Core.vx_new_string(":text"),
@@ -3613,7 +3723,7 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_p,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":style"),
                     stylepkgname,
                     Core.vx_new_string(":text"),
@@ -3622,7 +3732,7 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_p,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":style"),
                     stylecoveragenum,
                     Core.vx_new_string(":text"),
@@ -3631,7 +3741,7 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_p,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":style"),
                     stylecoveragenum,
                     Core.vx_new_string(":text"),
@@ -3640,7 +3750,7 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_p,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":style"),
                     stylecoveragenum,
                     Core.vx_new_string(":text"),
@@ -3649,7 +3759,7 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_p,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":style"),
                     stylecoveragenum,
                     Core.vx_new_string(":text"),
@@ -3658,7 +3768,7 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_p,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":style"),
                     stylecoveragenum,
                     Core.vx_new_string(":text"),
@@ -3667,7 +3777,7 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_p,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":style"),
                     stylecoveragenum,
                     Core.vx_new_string(":text"),
@@ -3676,7 +3786,7 @@ public final class Test {
                 ),
                 Core.f_new(
                   Html.t_p,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":style"),
                     stylecoveragenum,
                     Core.vx_new_string(":text"),
@@ -3687,7 +3797,7 @@ public final class Test {
             ),
             Core.f_new(
               Html.t_div,
-              Core.t_anylist.vx_new(
+              Core.vx_new(Core.t_anylist,
                 Test.f_divchildlist_from_testpackagelist(testpackagelist)
               )
             )
@@ -3738,7 +3848,7 @@ public final class Test {
           "divchildlist", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Html.t_divchild), // allowtypes
+          Core.vx_new(Core.t_typelist, Html.t_divchild), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -3750,12 +3860,18 @@ public final class Test {
     }
 
     @Override
-    public Func_divchildlist_from_testpackagelist vx_empty() {return e_divchildlist_from_testpackagelist;}
+    public Core.Type_any vx_empty() {
+      return e_divchildlist_from_testpackagelist;
+    }
     @Override
-    public Func_divchildlist_from_testpackagelist vx_type() {return t_divchildlist_from_testpackagelist;}
+    public Core.Type_any vx_type() {
+      return t_divchildlist_from_testpackagelist;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -3844,9 +3960,13 @@ public final class Test {
     }
 
     @Override
-    public Func_file_test vx_empty() {return e_file_test;}
+    public Core.Type_any vx_empty() {
+      return e_file_test;
+    }
     @Override
-    public Func_file_test vx_type() {return t_file_test;}
+    public Core.Type_any vx_type() {
+      return t_file_test;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -3868,7 +3988,7 @@ public final class Test {
     File.Type_file output = File.e_file;
     output = Core.f_new(
       File.t_file,
-      Core.t_anylist.vx_new(
+      Core.vx_new(Core.t_anylist,
         Core.vx_new_string(":name"),
         Core.vx_new_string("testsuite.vxlisp"),
         Core.vx_new_string(":path"),
@@ -3929,9 +4049,13 @@ public final class Test {
     }
 
     @Override
-    public Func_file_testhtml vx_empty() {return e_file_testhtml;}
+    public Core.Type_any vx_empty() {
+      return e_file_testhtml;
+    }
     @Override
-    public Func_file_testhtml vx_type() {return t_file_testhtml;}
+    public Core.Type_any vx_type() {
+      return t_file_testhtml;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -3953,7 +4077,7 @@ public final class Test {
     File.Type_file output = File.e_file;
     output = Core.f_new(
       File.t_file,
-      Core.t_anylist.vx_new(
+      Core.vx_new(Core.t_anylist,
         Core.vx_new_string(":name"),
         Core.vx_new_string("testsuite.html"),
         Core.vx_new_string(":path"),
@@ -4014,9 +4138,13 @@ public final class Test {
     }
 
     @Override
-    public Func_file_testnode vx_empty() {return e_file_testnode;}
+    public Core.Type_any vx_empty() {
+      return e_file_testnode;
+    }
     @Override
-    public Func_file_testnode vx_type() {return t_file_testnode;}
+    public Core.Type_any vx_type() {
+      return t_file_testnode;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -4038,7 +4166,7 @@ public final class Test {
     File.Type_file output = File.e_file;
     output = Core.f_new(
       File.t_file,
-      Core.t_anylist.vx_new(
+      Core.vx_new(Core.t_anylist,
         Core.vx_new_string(":name"),
         Core.vx_new_string("testsuitenode.vxlisp"),
         Core.vx_new_string(":path"),
@@ -4100,12 +4228,18 @@ public final class Test {
     }
 
     @Override
-    public Func_html_from_divtest vx_empty() {return e_html_from_divtest;}
+    public Core.Type_any vx_empty() {
+      return e_html_from_divtest;
+    }
     @Override
-    public Func_html_from_divtest vx_type() {return t_html_from_divtest;}
+    public Core.Type_any vx_type() {
+      return t_html_from_divtest;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -4137,23 +4271,23 @@ public final class Test {
     Html.Type_html output = Html.e_html;
     output = Core.f_new(
       Html.t_html,
-      Core.t_anylist.vx_new(
+      Core.vx_new(Core.t_anylist,
         Core.vx_new_string(":lang"),
         Core.vx_new_string("en"),
         Core.vx_new_string(":head"),
         Core.f_new(
           Html.t_head,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
             Core.f_new(
               Html.t_meta,
-              Core.t_anylist.vx_new(
+              Core.vx_new(Core.t_anylist,
                 Core.vx_new_string(":charset"),
                 Core.vx_new_string("utf-8")
               )
             ),
             Core.f_new(
               Html.t_meta,
-              Core.t_anylist.vx_new(
+              Core.vx_new(Core.t_anylist,
                 Core.vx_new_string(":name"),
                 Core.vx_new_string("viewport"),
                 Core.vx_new_string(":content"),
@@ -4162,7 +4296,7 @@ public final class Test {
             ),
             Core.f_new(
               Html.t_title,
-              Core.t_anylist.vx_new(
+              Core.vx_new(Core.t_anylist,
                 Core.vx_new_string(":text"),
                 Core.vx_new_string("Test Suite")
               )
@@ -4173,13 +4307,13 @@ public final class Test {
         Core.vx_new_string(":body"),
         Core.f_new(
           Html.t_body,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
             Core.f_new(
               Html.t_div,
-              Core.t_anylist.vx_new(
+              Core.vx_new(Core.t_anylist,
                 Core.f_new(
                   Html.t_h1,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string("Test Suite")
                   )
                 )
@@ -4232,7 +4366,7 @@ public final class Test {
           "vx/web/html", // pkgname
           "p", // name
           ":struct", // extends
-          Core.t_typelist.vx_new(Html.t_node, Html.t_divchild), // traits
+          Core.vx_new(Core.t_typelist, Html.t_node, Html.t_divchild), // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
@@ -4245,12 +4379,18 @@ public final class Test {
     }
 
     @Override
-    public Func_p_from_passfail vx_empty() {return e_p_from_passfail;}
+    public Core.Type_any vx_empty() {
+      return e_p_from_passfail;
+    }
     @Override
-    public Func_p_from_passfail vx_type() {return t_p_from_passfail;}
+    public Core.Type_any vx_type() {
+      return t_p_from_passfail;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -4291,7 +4431,7 @@ public final class Test {
         );
         return Core.f_new(
           Html.t_p,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":style"),
             style,
             Core.vx_new_string(":text"),
@@ -4342,7 +4482,7 @@ public final class Test {
           "vx/web/html", // pkgname
           "p", // name
           ":struct", // extends
-          Core.t_typelist.vx_new(Html.t_node, Html.t_divchild), // traits
+          Core.vx_new(Core.t_typelist, Html.t_node, Html.t_divchild), // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
@@ -4355,12 +4495,18 @@ public final class Test {
     }
 
     @Override
-    public Func_p_from_testcoveragenums vx_empty() {return e_p_from_testcoveragenums;}
+    public Core.Type_any vx_empty() {
+      return e_p_from_testcoveragenums;
+    }
     @Override
-    public Func_p_from_testcoveragenums vx_type() {return t_p_from_testcoveragenums;}
+    public Core.Type_any vx_type() {
+      return t_p_from_testcoveragenums;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -4392,7 +4538,7 @@ public final class Test {
     Html.Type_p output = Html.e_p;
     output = Core.f_new(
       Html.t_p,
-      Core.t_anylist.vx_new(
+      Core.vx_new(Core.t_anylist,
         Core.vx_new_string(":style"),
         Html.f_style_from_stylesheet_name(
           Test.c_stylesheet_test,
@@ -4401,7 +4547,7 @@ public final class Test {
         Core.vx_new_string(":text"),
         Core.f_new(
           Core.t_string,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
             nums.pct(),
             Core.vx_new_string("% "),
             nums.tests(),
@@ -4468,9 +4614,13 @@ public final class Test {
     }
 
     @Override
-    public Func_resolve_testcase vx_empty() {return e_resolve_testcase;}
+    public Core.Type_any vx_empty() {
+      return e_resolve_testcase;
+    }
     @Override
-    public Func_resolve_testcase vx_type() {return t_resolve_testcase;}
+    public Core.Type_any vx_type() {
+      return t_resolve_testcase;
+    }
 
     @Override
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
@@ -4528,7 +4678,7 @@ public final class Test {
           final Core.Type_boolean passfail = Core.f_and_1(passfaillist);
           return Core.f_copy(
             testcase,
-            Core.t_anylist.vx_new(
+            Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":passfail"),
                   passfail,
                   Core.vx_new_string(":describelist"),
@@ -4583,7 +4733,7 @@ public final class Test {
           "testcaselist", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Test.t_testcase), // allowtypes
+          Core.vx_new(Core.t_typelist, Test.t_testcase), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -4595,9 +4745,13 @@ public final class Test {
     }
 
     @Override
-    public Func_resolve_testcaselist vx_empty() {return e_resolve_testcaselist;}
+    public Core.Type_any vx_empty() {
+      return e_resolve_testcaselist;
+    }
     @Override
-    public Func_resolve_testcaselist vx_type() {return t_resolve_testcaselist;}
+    public Core.Type_any vx_type() {
+      return t_resolve_testcaselist;
+    }
 
     @Override
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
@@ -4693,9 +4847,13 @@ public final class Test {
     }
 
     @Override
-    public Func_resolve_testdescribe vx_empty() {return e_resolve_testdescribe;}
+    public Core.Type_any vx_empty() {
+      return e_resolve_testdescribe;
+    }
     @Override
-    public Func_resolve_testdescribe vx_type() {return t_resolve_testdescribe;}
+    public Core.Type_any vx_type() {
+      return t_resolve_testdescribe;
+    }
 
     @Override
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
@@ -4737,7 +4895,7 @@ public final class Test {
         return Core.async_from_async_fn(future_resolved, (resolved) -> {
           return Core.f_copy(
             testdescribe,
-            Core.t_anylist.vx_new(
+            Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":testresult"),
                   resolved
             )
@@ -4790,7 +4948,7 @@ public final class Test {
           "testdescribelist", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Test.t_testdescribe), // allowtypes
+          Core.vx_new(Core.t_typelist, Test.t_testdescribe), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -4802,9 +4960,13 @@ public final class Test {
     }
 
     @Override
-    public Func_resolve_testdescribelist vx_empty() {return e_resolve_testdescribelist;}
+    public Core.Type_any vx_empty() {
+      return e_resolve_testdescribelist;
+    }
     @Override
-    public Func_resolve_testdescribelist vx_type() {return t_resolve_testdescribelist;}
+    public Core.Type_any vx_type() {
+      return t_resolve_testdescribelist;
+    }
 
     @Override
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
@@ -4900,9 +5062,13 @@ public final class Test {
     }
 
     @Override
-    public Func_resolve_testpackage vx_empty() {return e_resolve_testpackage;}
+    public Core.Type_any vx_empty() {
+      return e_resolve_testpackage;
+    }
     @Override
-    public Func_resolve_testpackage vx_type() {return t_resolve_testpackage;}
+    public Core.Type_any vx_type() {
+      return t_resolve_testpackage;
+    }
 
     @Override
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
@@ -4954,7 +5120,7 @@ public final class Test {
           final Core.Type_boolean passfail = Core.f_and_1(passfaillist);
           return Core.f_copy(
             testpackage,
-            Core.t_anylist.vx_new(
+            Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":passfail"),
                   passfail,
                   Core.vx_new_string(":caselist"),
@@ -5009,7 +5175,7 @@ public final class Test {
           "testpackagelist", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Test.t_testpackage), // allowtypes
+          Core.vx_new(Core.t_typelist, Test.t_testpackage), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -5021,9 +5187,13 @@ public final class Test {
     }
 
     @Override
-    public Func_resolve_testpackagelist vx_empty() {return e_resolve_testpackagelist;}
+    public Core.Type_any vx_empty() {
+      return e_resolve_testpackagelist;
+    }
     @Override
-    public Func_resolve_testpackagelist vx_type() {return t_resolve_testpackagelist;}
+    public Core.Type_any vx_type() {
+      return t_resolve_testpackagelist;
+    }
 
     @Override
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
@@ -5119,9 +5289,13 @@ public final class Test {
     }
 
     @Override
-    public Func_resolve_testresult vx_empty() {return e_resolve_testresult;}
+    public Core.Type_any vx_empty() {
+      return e_resolve_testresult;
+    }
     @Override
-    public Func_resolve_testresult vx_type() {return t_resolve_testresult;}
+    public Core.Type_any vx_type() {
+      return t_resolve_testresult;
+    }
 
     @Override
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
@@ -5164,7 +5338,7 @@ public final class Test {
         return Core.async_from_async_fn(future_actual, (actual) -> {
           return Core.f_if_2(
             Test.t_testresult,
-            Core.t_thenelselist.vx_new(
+            Core.vx_new(Core.t_thenelselist,
                   Core.f_then(
                     Core.t_boolean_from_func.vx_fn_new(() -> {
                       return Core.f_is_empty_1(fn_actual);
@@ -5181,7 +5355,7 @@ public final class Test {
                           final Core.Type_boolean passfail = Core.f_eq(expected, actual);
                           return Core.f_copy(
                             testresult,
-                            Core.t_anylist.vx_new(
+                            Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":passfail"),
                               passfail,
                               Core.vx_new_string(":actual"),
@@ -5251,9 +5425,13 @@ public final class Test {
     }
 
     @Override
-    public Func_security_test vx_empty() {return e_security_test;}
+    public Core.Type_any vx_empty() {
+      return e_security_test;
+    }
     @Override
-    public Func_security_test vx_type() {return t_security_test;}
+    public Core.Type_any vx_type() {
+      return t_security_test;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -5275,11 +5453,11 @@ public final class Test {
     Core.Type_security output = Core.e_security;
     output = Core.f_new(
       Core.t_security,
-      Core.t_anylist.vx_new(
+      Core.vx_new(Core.t_anylist,
         Core.vx_new_string(":allowfuncs"),
         Core.f_new(
           Core.t_funclist,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
             File.t_boolean_write_from_file_any,
             File.t_boolean_write_from_file_string,
             File.t_file_read_from_file,
@@ -5344,9 +5522,13 @@ public final class Test {
     }
 
     @Override
-    public Func_test vx_empty() {return e_test;}
+    public Core.Type_any vx_empty() {
+      return e_test;
+    }
     @Override
-    public Func_test vx_type() {return t_test;}
+    public Core.Type_any vx_type() {
+      return t_test;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -5372,7 +5554,7 @@ public final class Test {
     try {
       output = Core.f_new(
         Test.t_testresult,
-        Core.t_anylist.vx_new(
+        Core.vx_new(Core.t_anylist,
           Core.vx_new_string(":code"),
           Core.vx_new_string(":eq"),
           Core.vx_new_string(":passfail"),
@@ -5385,7 +5567,7 @@ public final class Test {
       );
     } catch (Exception err) {
       Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test", err);
-      output = output.vx_copy(msg);
+      output = Core.vx_copy(output, msg);
     }
     return output;
   }
@@ -5443,9 +5625,13 @@ public final class Test {
     }
 
     @Override
-    public Func_test_1 vx_empty() {return e_test_1;}
+    public Core.Type_any vx_empty() {
+      return e_test_1;
+    }
     @Override
-    public Func_test_1 vx_type() {return t_test_1;}
+    public Core.Type_any vx_type() {
+      return t_test_1;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -5471,7 +5657,7 @@ public final class Test {
     try {
       output = Core.f_new(
         Test.t_testresult,
-        Core.t_anylist.vx_new(
+        Core.vx_new(Core.t_anylist,
           Core.vx_new_string(":code"),
           Core.vx_new_string(":eq"),
           Core.vx_new_string(":expected"),
@@ -5482,7 +5668,7 @@ public final class Test {
       );
     } catch (Exception err) {
       Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test", err);
-      output = output.vx_copy(msg);
+      output = Core.vx_copy(output, msg);
     }
     return output;
   }
@@ -5539,12 +5725,18 @@ public final class Test {
     }
 
     @Override
-    public Func_test_false vx_empty() {return e_test_false;}
+    public Core.Type_any vx_empty() {
+      return e_test_false;
+    }
     @Override
-    public Func_test_false vx_type() {return t_test_false;}
+    public Core.Type_any vx_type() {
+      return t_test_false;
+    }
 
     @Override
-    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {
+      return Core.e_any_from_any_context;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
@@ -5578,7 +5770,7 @@ public final class Test {
     try {
       output = Core.f_new(
         Test.t_testresult,
-        Core.t_anylist.vx_new(
+        Core.vx_new(Core.t_anylist,
           Core.vx_new_string(":code"),
           Core.vx_new_string(":false"),
           Core.vx_new_string(":passfail"),
@@ -5594,7 +5786,7 @@ public final class Test {
       );
     } catch (Exception err) {
       Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test-false", err);
-      output = output.vx_copy(msg);
+      output = Core.vx_copy(output, msg);
     }
     return output;
   }
@@ -5651,12 +5843,18 @@ public final class Test {
     }
 
     @Override
-    public Func_test_false_1 vx_empty() {return e_test_false_1;}
+    public Core.Type_any vx_empty() {
+      return e_test_false_1;
+    }
     @Override
-    public Func_test_false_1 vx_type() {return t_test_false_1;}
+    public Core.Type_any vx_type() {
+      return t_test_false_1;
+    }
 
     @Override
-    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {
+      return Core.e_any_from_any_context;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
@@ -5690,7 +5888,7 @@ public final class Test {
     try {
       output = Core.f_new(
         Test.t_testresult,
-        Core.t_anylist.vx_new(
+        Core.vx_new(Core.t_anylist,
           Core.vx_new_string(":code"),
           Core.vx_new_string(":false"),
           Core.vx_new_string(":expected"),
@@ -5701,7 +5899,7 @@ public final class Test {
       );
     } catch (Exception err) {
       Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test-false", err);
-      output = output.vx_copy(msg);
+      output = Core.vx_copy(output, msg);
     }
     return output;
   }
@@ -5759,9 +5957,13 @@ public final class Test {
     }
 
     @Override
-    public Func_test_gt vx_empty() {return e_test_gt;}
+    public Core.Type_any vx_empty() {
+      return e_test_gt;
+    }
     @Override
-    public Func_test_gt vx_type() {return t_test_gt;}
+    public Core.Type_any vx_type() {
+      return t_test_gt;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -5787,7 +5989,7 @@ public final class Test {
     try {
       output = Core.f_new(
         Test.t_testresult,
-        Core.t_anylist.vx_new(
+        Core.vx_new(Core.t_anylist,
           Core.vx_new_string(":code"),
           Core.vx_new_string(":gt"),
           Core.vx_new_string(":passfail"),
@@ -5800,7 +6002,7 @@ public final class Test {
       );
     } catch (Exception err) {
       Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test-gt", err);
-      output = output.vx_copy(msg);
+      output = Core.vx_copy(output, msg);
     }
     return output;
   }
@@ -5858,9 +6060,13 @@ public final class Test {
     }
 
     @Override
-    public Func_test_gt_1 vx_empty() {return e_test_gt_1;}
+    public Core.Type_any vx_empty() {
+      return e_test_gt_1;
+    }
     @Override
-    public Func_test_gt_1 vx_type() {return t_test_gt_1;}
+    public Core.Type_any vx_type() {
+      return t_test_gt_1;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -5886,7 +6092,7 @@ public final class Test {
     try {
       output = Core.f_new(
         Test.t_testresult,
-        Core.t_anylist.vx_new(
+        Core.vx_new(Core.t_anylist,
           Core.vx_new_string(":code"),
           Core.vx_new_string(":gt"),
           Core.vx_new_string(":expected"),
@@ -5897,7 +6103,7 @@ public final class Test {
       );
     } catch (Exception err) {
       Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test-gt", err);
-      output = output.vx_copy(msg);
+      output = Core.vx_copy(output, msg);
     }
     return output;
   }
@@ -5955,9 +6161,13 @@ public final class Test {
     }
 
     @Override
-    public Func_test_ne vx_empty() {return e_test_ne;}
+    public Core.Type_any vx_empty() {
+      return e_test_ne;
+    }
     @Override
-    public Func_test_ne vx_type() {return t_test_ne;}
+    public Core.Type_any vx_type() {
+      return t_test_ne;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -5983,7 +6193,7 @@ public final class Test {
     try {
       output = Core.f_new(
         Test.t_testresult,
-        Core.t_anylist.vx_new(
+        Core.vx_new(Core.t_anylist,
           Core.vx_new_string(":code"),
           Core.vx_new_string(":ne"),
           Core.vx_new_string(":passfail"),
@@ -5996,7 +6206,7 @@ public final class Test {
       );
     } catch (Exception err) {
       Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test-ne", err);
-      output = output.vx_copy(msg);
+      output = Core.vx_copy(output, msg);
     }
     return output;
   }
@@ -6054,9 +6264,13 @@ public final class Test {
     }
 
     @Override
-    public Func_test_ne_1 vx_empty() {return e_test_ne_1;}
+    public Core.Type_any vx_empty() {
+      return e_test_ne_1;
+    }
     @Override
-    public Func_test_ne_1 vx_type() {return t_test_ne_1;}
+    public Core.Type_any vx_type() {
+      return t_test_ne_1;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -6082,7 +6296,7 @@ public final class Test {
     try {
       output = Core.f_new(
         Test.t_testresult,
-        Core.t_anylist.vx_new(
+        Core.vx_new(Core.t_anylist,
           Core.vx_new_string(":code"),
           Core.vx_new_string(":ne"),
           Core.vx_new_string(":expected"),
@@ -6093,7 +6307,7 @@ public final class Test {
       );
     } catch (Exception err) {
       Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test-ne", err);
-      output = output.vx_copy(msg);
+      output = Core.vx_copy(output, msg);
     }
     return output;
   }
@@ -6151,9 +6365,13 @@ public final class Test {
     }
 
     @Override
-    public Func_test_string vx_empty() {return e_test_string;}
+    public Core.Type_any vx_empty() {
+      return e_test_string;
+    }
     @Override
-    public Func_test_string vx_type() {return t_test_string;}
+    public Core.Type_any vx_type() {
+      return t_test_string;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -6179,7 +6397,7 @@ public final class Test {
     try {
       output = Core.f_new(
         Test.t_testresult,
-        Core.t_anylist.vx_new(
+        Core.vx_new(Core.t_anylist,
           Core.vx_new_string(":passfail"),
           Core.f_eq(
             Core.f_string_from_any(expected),
@@ -6193,7 +6411,7 @@ public final class Test {
       );
     } catch (Exception err) {
       Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test-string", err);
-      output = output.vx_copy(msg);
+      output = Core.vx_copy(output, msg);
     }
     return output;
   }
@@ -6251,9 +6469,13 @@ public final class Test {
     }
 
     @Override
-    public Func_test_string_1 vx_empty() {return e_test_string_1;}
+    public Core.Type_any vx_empty() {
+      return e_test_string_1;
+    }
     @Override
-    public Func_test_string_1 vx_type() {return t_test_string_1;}
+    public Core.Type_any vx_type() {
+      return t_test_string_1;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -6279,7 +6501,7 @@ public final class Test {
     try {
       output = Core.f_new(
         Test.t_testresult,
-        Core.t_anylist.vx_new(
+        Core.vx_new(Core.t_anylist,
           Core.vx_new_string(":code"),
           Core.vx_new_string(":string"),
           Core.vx_new_string(":expected"),
@@ -6290,7 +6512,7 @@ public final class Test {
       );
     } catch (Exception err) {
       Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test-string", err);
-      output = output.vx_copy(msg);
+      output = Core.vx_copy(output, msg);
     }
     return output;
   }
@@ -6347,12 +6569,18 @@ public final class Test {
     }
 
     @Override
-    public Func_test_true vx_empty() {return e_test_true;}
+    public Core.Type_any vx_empty() {
+      return e_test_true;
+    }
     @Override
-    public Func_test_true vx_type() {return t_test_true;}
+    public Core.Type_any vx_type() {
+      return t_test_true;
+    }
 
     @Override
-    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {
+      return Core.e_any_from_any_context;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
@@ -6386,7 +6614,7 @@ public final class Test {
     try {
       output = Core.f_new(
         Test.t_testresult,
-        Core.t_anylist.vx_new(
+        Core.vx_new(Core.t_anylist,
           Core.vx_new_string(":code"),
           Core.vx_new_string(":true"),
           Core.vx_new_string(":passfail"),
@@ -6402,7 +6630,7 @@ public final class Test {
       );
     } catch (Exception err) {
       Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test-true", err);
-      output = output.vx_copy(msg);
+      output = Core.vx_copy(output, msg);
     }
     return output;
   }
@@ -6459,12 +6687,18 @@ public final class Test {
     }
 
     @Override
-    public Func_test_true_1 vx_empty() {return e_test_true_1;}
+    public Core.Type_any vx_empty() {
+      return e_test_true_1;
+    }
     @Override
-    public Func_test_true_1 vx_type() {return t_test_true_1;}
+    public Core.Type_any vx_type() {
+      return t_test_true_1;
+    }
 
     @Override
-    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {return Core.e_any_from_any_context;}
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {
+      return Core.e_any_from_any_context;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
@@ -6498,7 +6732,7 @@ public final class Test {
     try {
       output = Core.f_new(
         Test.t_testresult,
-        Core.t_anylist.vx_new(
+        Core.vx_new(Core.t_anylist,
           Core.vx_new_string(":code"),
           Core.vx_new_string(":true"),
           Core.vx_new_string(":expected"),
@@ -6509,7 +6743,7 @@ public final class Test {
       );
     } catch (Exception err) {
       Core.Type_msg msg = Core.vx_msg_from_exception("vx/test/test-true", err);
-      output = output.vx_copy(msg);
+      output = Core.vx_copy(output, msg);
     }
     return output;
   }
@@ -6554,7 +6788,7 @@ public final class Test {
           "vx/web/html", // pkgname
           "tr", // name
           ":struct", // extends
-          Core.t_typelist.vx_new(Html.t_node), // traits
+          Core.vx_new(Core.t_typelist, Html.t_node), // traits
           Core.e_typelist, // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
@@ -6567,9 +6801,13 @@ public final class Test {
     }
 
     @Override
-    public Func_tr_from_testdescribe_casename vx_empty() {return e_tr_from_testdescribe_casename;}
+    public Core.Type_any vx_empty() {
+      return e_tr_from_testdescribe_casename;
+    }
     @Override
-    public Func_tr_from_testdescribe_casename vx_type() {return t_tr_from_testdescribe_casename;}
+    public Core.Type_any vx_type() {
+      return t_tr_from_testdescribe_casename;
+    }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
@@ -6609,19 +6847,19 @@ public final class Test {
         );
         return Core.f_new(
           Html.t_tr,
-          Core.t_anylist.vx_new(
+          Core.vx_new(Core.t_anylist,
             Core.f_new(
               Html.t_td,
-              Core.t_anylist.vx_new(
+              Core.vx_new(Core.t_anylist,
                 Test.f_p_from_passfail(passfail)
               )
             ),
             Core.f_new(
               Html.t_td,
-              Core.t_anylist.vx_new(
+              Core.vx_new(Core.t_anylist,
                 Core.f_new(
                   Html.t_p,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":style"),
                     prestyle,
                     Core.vx_new_string(":text"),
@@ -6632,10 +6870,10 @@ public final class Test {
             ),
             Core.f_new(
               Html.t_td,
-              Core.t_anylist.vx_new(
+              Core.vx_new(Core.t_anylist,
                 Core.f_new(
                   Html.t_p,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":style"),
                     prestyle,
                     Core.vx_new_string(":text"),
@@ -6646,10 +6884,10 @@ public final class Test {
             ),
             Core.f_new(
               Html.t_td,
-              Core.t_anylist.vx_new(
+              Core.vx_new(Core.t_anylist,
                 Core.f_new(
                   Html.t_p,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":style"),
                     prestyle,
                     Core.vx_new_string(":text"),
@@ -6660,10 +6898,10 @@ public final class Test {
             ),
             Core.f_new(
               Html.t_td,
-              Core.t_anylist.vx_new(
+              Core.vx_new(Core.t_anylist,
                 Core.f_new(
                   Html.t_p,
-                  Core.t_anylist.vx_new(
+                  Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":style"),
                     prestyle,
                     Core.vx_new_string(":text"),
@@ -6718,7 +6956,7 @@ public final class Test {
           "trlist", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Html.t_tr), // allowtypes
+          Core.vx_new(Core.t_typelist, Html.t_tr), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -6730,12 +6968,18 @@ public final class Test {
     }
 
     @Override
-    public Func_trlist_from_testcase vx_empty() {return e_trlist_from_testcase;}
+    public Core.Type_any vx_empty() {
+      return e_trlist_from_testcase;
+    }
     @Override
-    public Func_trlist_from_testcase vx_type() {return t_trlist_from_testcase;}
+    public Core.Type_any vx_type() {
+      return t_trlist_from_testcase;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -6824,7 +7068,7 @@ public final class Test {
           "trlist", // name
           ":list", // extends
           Core.e_typelist, // traits
-          Core.t_typelist.vx_new(Html.t_tr), // allowtypes
+          Core.vx_new(Core.t_typelist, Html.t_tr), // allowtypes
           Core.e_typelist, // disallowtypes
           Core.e_funclist, // allowfuncs
           Core.e_funclist, // disallowfuncs
@@ -6836,12 +7080,18 @@ public final class Test {
     }
 
     @Override
-    public Func_trlist_from_testcaselist vx_empty() {return e_trlist_from_testcaselist;}
+    public Core.Type_any vx_empty() {
+      return e_trlist_from_testcaselist;
+    }
     @Override
-    public Func_trlist_from_testcaselist vx_type() {return t_trlist_from_testcaselist;}
+    public Core.Type_any vx_type() {
+      return t_trlist_from_testcaselist;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {

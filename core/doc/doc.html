@@ -3999,9 +3999,7 @@
   :js
    &quot;num1 + num2&quot;
   :java
-   &quot;Core.Type_float float1 = Core.t_float.vx_new(num1);
-    Core.Type_float float2 = Core.t_float.vx_new(num2);
-    float result = float1.vx_float() + float2.vx_float();
+   &quot;float result = Core.vx_float_from_number(num1) + Core.vx_float_from_number(num2);
     output = Core.vx_new_float(result);&quot;)
  :alias &quot;plus&quot;
  :test (test 5 (+ 2  3))
@@ -4067,9 +4065,7 @@
   :js
    &quot;num1 - num2&quot;
   :java
-   &quot;Core.Type_float float1 = Core.t_float.vx_new(num1);
-    Core.Type_float float2 = Core.t_float.vx_new(num2);
-    float result = float1.vx_float() - float2.vx_float();
+   &quot;float result = Core.vx_float_from_number(num1) - Core.vx_float_from_number(num2);
     output = Core.vx_new_float(result);&quot;)
  :alias &quot;minus&quot;
  :test (test 5 (+ 2 3))
@@ -4136,9 +4132,7 @@
   :js
    &quot;num1 * num2&quot;
   :java
-   &quot;Core.Type_float float1 = Core.t_float.vx_new(num1);
-    Core.Type_float float2 = Core.t_float.vx_new(num2);
-    float result = float1.vx_float() * float2.vx_float();
+   &quot;float result = Core.vx_float_from_number(num1) * Core.vx_float_from_number(num2);
     output = Core.vx_new_float(result);&quot;)
  :alias &quot;multiply&quot;
  :test (test 6.4 (* 3.2 2))
@@ -4192,13 +4186,13 @@
   :js
    &quot;num1 / num2&quot;
   :java
-   &quot;Core.Type_float float1 = Core.t_float.vx_new(num1);
-    Core.Type_float float2 = Core.t_float.vx_new(num2);
-    if (float1.vx_float() == 0) {
-    } else if (float2.vx_float() == 0) {
+   &quot;float float1 = Core.vx_float_from_number(num1);
+    float float2 = Core.vx_float_from_number(num2);
+    if (float1 == 0) {
+    } else if (float2 == 0) {
       output = Core.c_notanumber;
     } else {
-      float result = float1.vx_float() / float2.vx_float();
+      float result = float1 / float2;
       output = Core.vx_new_float(result);
     }&quot;)
  :alias &quot;divide&quot;
@@ -4911,8 +4905,8 @@
     if ((val1 instanceof Core.Type_number) &amp;&amp; (val2 instanceof Core.Type_number)) {
       Core.Type_number num1 = (Core.Type_number)val1;
       Core.Type_number num2 = (Core.Type_number)val2;
-      float float1 = Core.t_float.vx_new(num1).vx_float();
-      float float2 = Core.t_float.vx_new(num2).vx_float();
+      float float1 = Core.vx_new(Core.t_float, num1).vx_float();
+      float float2 = Core.vx_new(Core.t_float, num2).vx_float();
       if (float1 &lt; float2) {
         intresult = -1;
       } else if (float1 &gt; float2) {
@@ -5025,11 +5019,10 @@
  (native
   :cpp
    &quot;T* output = vx_core::vx_any_from_any(type, type-&gt;vx_empty());&quot;
-  :js
-   &quot;vx_core.vx_empty(type)&quot;
   :java
-   &quot;@SuppressWarnings(“unchecked”)
-    T output = (T)(type.vx_empty());&quot;)
+   &quot;T output = Core.vx_empty(type);&quot;
+  :js
+   &quot;vx_core.vx_empty(type)&quot;)
  :test (test false  (empty boolean))
        (test &quot;&quot;     (empty string))
        (test (list) (empty list))
@@ -12144,9 +12137,7 @@
   :js
    &quot;num1 + num2&quot;
   :java
-   &quot;Core.Type_float float1 = Core.t_float.vx_new(num1);
-    Core.Type_float float2 = Core.t_float.vx_new(num2);
-    float result = float1.vx_float() + float2.vx_float();
+   &quot;float result = Core.vx_float_from_number(num1) + Core.vx_float_from_number(num2);
     output = Core.vx_new_float(result);&quot;)
  :alias &quot;plus&quot;
  :test (test 5 (+ 2  3))
@@ -12518,9 +12509,7 @@
   :js
    &quot;num1 - num2&quot;
   :java
-   &quot;Core.Type_float float1 = Core.t_float.vx_new(num1);
-    Core.Type_float float2 = Core.t_float.vx_new(num2);
-    float result = float1.vx_float() - float2.vx_float();
+   &quot;float result = Core.vx_float_from_number(num1) - Core.vx_float_from_number(num2);
     output = Core.vx_new_float(result);&quot;)
  :alias &quot;minus&quot;
  :test (test 5 (+ 2 3))
@@ -12893,9 +12882,7 @@
   :js
    &quot;num1 * num2&quot;
   :java
-   &quot;Core.Type_float float1 = Core.t_float.vx_new(num1);
-    Core.Type_float float2 = Core.t_float.vx_new(num2);
-    float result = float1.vx_float() * float2.vx_float();
+   &quot;float result = Core.vx_float_from_number(num1) * Core.vx_float_from_number(num2);
     output = Core.vx_new_float(result);&quot;)
  :alias &quot;multiply&quot;
  :test (test 6.4 (* 3.2 2))
@@ -13134,13 +13121,13 @@
   :js
    &quot;num1 / num2&quot;
   :java
-   &quot;Core.Type_float float1 = Core.t_float.vx_new(num1);
-    Core.Type_float float2 = Core.t_float.vx_new(num2);
-    if (float1.vx_float() == 0) {
-    } else if (float2.vx_float() == 0) {
+   &quot;float float1 = Core.vx_float_from_number(num1);
+    float float2 = Core.vx_float_from_number(num2);
+    if (float1 == 0) {
+    } else if (float2 == 0) {
       output = Core.c_notanumber;
     } else {
-      float result = float1.vx_float() / float2.vx_float();
+      float result = float1 / float2;
       output = Core.vx_new_float(result);
     }&quot;)
  :alias &quot;divide&quot;
@@ -17291,8 +17278,8 @@ improves readability.</div>
     if ((val1 instanceof Core.Type_number) &amp;&amp; (val2 instanceof Core.Type_number)) {
       Core.Type_number num1 = (Core.Type_number)val1;
       Core.Type_number num2 = (Core.Type_number)val2;
-      float float1 = Core.t_float.vx_new(num1).vx_float();
-      float float2 = Core.t_float.vx_new(num2).vx_float();
+      float float1 = Core.vx_new(Core.t_float, num1).vx_float();
+      float float2 = Core.vx_new(Core.t_float, num2).vx_float();
       if (float1 &lt; float2) {
         intresult = -1;
       } else if (float1 &gt; float2) {
@@ -17787,11 +17774,10 @@ improves readability.</div>
  (native
   :cpp
    &quot;T* output = vx_core::vx_any_from_any(type, type-&gt;vx_empty());&quot;
-  :js
-   &quot;vx_core.vx_empty(type)&quot;
   :java
-   &quot;@SuppressWarnings(“unchecked”)
-    T output = (T)(type.vx_empty());&quot;)
+   &quot;T output = Core.vx_empty(type);&quot;
+  :js
+   &quot;vx_core.vx_empty(type)&quot;)
  :test (test false  (empty boolean))
        (test &quot;&quot;     (empty string))
        (test (list) (empty list))

@@ -9,13 +9,16 @@ import com.vxlisp.vx.*;
 public final class AllTest {
 
   static Test.Type_testcase f_translationmap_all(final Core.Type_context context) {
-    Test.Type_testcase output = Test.t_testcase.vx_new(
+    Test.Type_testcase output = Core.vx_new(
+      Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/translation/all",
       ":casename", "translationmap-all",
       ":describelist",
-      Test.t_testdescribelist.vx_new(
-        Test.t_testdescribe.vx_new(
+      Core.vx_new(
+        Test.t_testdescribelist, 
+        Core.vx_new(
+          Test.t_testdescribe,
           ":describename", "(test\n \"Hola\"\n (trn/translate<-translationmap-name-string\n  (translationmap-all)\n  \"es\"\n  \"Hello\"))",
           ":testresult",
             Test.f_test(
@@ -37,42 +40,39 @@ public final class AllTest {
     List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
       AllTest.f_translationmap_all(context)
     ));
-    Test.Type_testcaselist output = Test.t_testcaselist.vx_new(arraylisttestcase);
+    Test.Type_testcaselist output = Core.vx_new(
+      Test.t_testcaselist,
+      arraylisttestcase
+    );
     return output;
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Test.t_testcoveragesummary.vx_new(
-      ":testpkg",   "vx/translation/all", 
-      ":constnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 2, ":total", 2), 
-      ":funcnums", Test.t_testcoveragenums.vx_new(":pct", 50, ":tests", 1, ":total", 2), 
-      ":bigospacenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 2), 
-      ":bigotimenums", Test.t_testcoveragenums.vx_new(":pct", 0, ":tests", 0, ":total", 2), 
-      ":totalnums", Test.t_testcoveragenums.vx_new(":pct", 50, ":tests", 1, ":total", 2), 
-      ":typenums", Test.t_testcoveragenums.vx_new(":pct", 100, ":tests", 0, ":total", 0)
+    return Core.vx_new(
+      Test.t_testcoveragesummary,
+      ":testpkg", "vx/translation/all", 
+      ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
+      ":docnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 2, ":total", 2), 
+      ":funcnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 50, ":tests", 1, ":total", 2), 
+      ":bigospacenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 2), 
+      ":bigotimenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 2), 
+      ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 50, ":tests", 1, ":total", 2), 
+      ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     );
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Test.t_testcoveragedetail.vx_new(
-      ":testpkg", "vx/translation/all",
-      ":typemap", Core.t_intmap.vx_new(
-  
-      ),
-      ":constmap", Core.t_intmap.vx_new(
-  
-      ),
-      ":funcmap", Core.t_intmap.vx_new(
+    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/translation/all", ":typemap", Core.e_intmap, ":constmap", Core.e_intmap, ":funcmap", Core.vx_new(
+  Core.t_intmap,
         ":context-all", 0,
         ":translationmap-all", 1
-      )
-    );
+      ));
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {
     Test.Type_testcaselist testcaselist = test_cases(context);
-    Test.Type_testpackage output = Test.t_testpackage.vx_new(
+    Test.Type_testpackage output = Core.vx_new(
+      Test.t_testpackage,
       ":testpkg", "vx/translation/all", 
       ":caselist", testcaselist,
       ":coveragesummary", test_coveragesummary(),

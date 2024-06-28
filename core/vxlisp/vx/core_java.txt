@@ -205,6 +205,34 @@
     return output;
   }
 
+  // vx_new(generic_any_1, args...)
+  public static <T extends Core.Type_any> T vx_new(final T generic_any_1, final Object... vals) {
+    Core.Type_any val = generic_any_1.vx_new(vals);
+    T output = Core.f_any_from_any(generic_any_1, val);
+    return output;
+  }
+
+  // vx_copy(generic_any_1, args...)
+  public static <T extends Core.Type_any> T vx_copy(final T copyval, final Object... vals) {
+    Core.Type_any val = copyval.vx_copy(vals);
+    T output = Core.f_any_from_any(copyval, val);
+    return output;
+  }
+
+  // vx_empty(generic_any_1)
+  @SuppressWarnings("unchecked")
+  public static <T extends Core.Type_any> T vx_empty(final T type) {
+    T output = (T)(type.vx_empty());
+    return output;
+  }
+
+  // vx_type(generic_any_1)
+  @SuppressWarnings("unchecked")
+  public static <T extends Core.Type_any> T vx_type(final T type) {
+    T output = (T)(type.vx_type());
+    return output;
+  }
+
   // vx_any_from_func(generic_any_1, func, args...)
   public static <T extends Core.Type_any> T vx_any_from_func(final T generic_any_1, final Core.Type_replfunc func, final Core.Type_any... args) {
     Core.Type_anylist anylist = Core.vx_new_anylist(args);
@@ -311,6 +339,23 @@
           output = true;
         }
       }
+    }
+    return output;
+  }
+
+  // vx_float_from_number(number)
+  public static float vx_float_from_number(Core.Type_number num) {
+    float output = 0;
+    Core.Type_any type = num.vx_type();
+    if (type == Core.t_float) {
+      Core.Type_float floatval = Core.f_any_from_any(Core.t_float, num);
+      output = floatval.vx_float();
+    } else if (type == Core.t_int) {
+      Core.Type_int intval = Core.f_any_from_any(Core.t_int, num);
+      output = intval.vx_int();
+    } else if (type == Core.t_decimal) {
+      Core.Type_decimal decval = Core.f_any_from_any(Core.t_decimal, num);
+      output = decval.vx_float();
     }
     return output;
   }
@@ -601,14 +646,14 @@
 
   // vx_new_list(T, List<any>)
   public static <T extends Core.Type_list> T vx_new_list(T generic_list_1, List<Core.Type_any> listval) {
-    Core.Type_list anylist = generic_list_1.vx_new(listval);
+    Core.Type_any anylist = generic_list_1.vx_new(listval);
     T output = Core.f_any_from_any(generic_list_1, anylist);
     return output;
   }
 
   // vx_new_map(T, Map<string, any>)
   public static <T extends Core.Type_map> T vx_new_map(T generic_map_1, Map<String, Core.Type_any> mapval) {
-    Core.Type_map anymap = generic_map_1.vx_new(mapval);
+    Core.Type_any anymap = generic_map_1.vx_new(mapval);
     T output = Core.f_any_from_any(generic_map_1, anymap);
     return output;
   }
@@ -859,7 +904,7 @@
       listany.add(value);
     }
     Object[] arrayany = listany.toArray();
-    Core.Type_anylist output = Core.t_anylist.vx_new(arrayany);
+    Core.Type_anylist output = Core.vx_new(Core.t_anylist, arrayany);
     return output;
   }
 

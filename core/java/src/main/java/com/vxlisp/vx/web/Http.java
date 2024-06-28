@@ -15,10 +15,10 @@ public final class Http {
    * (type response)
    */
   public interface Type_response extends Core.Type_struct {
-    public Http.Type_response vx_new(final Object... vals);
-    public Http.Type_response vx_copy(final Object... vals);
-    public Http.Type_response vx_empty();
-    public Http.Type_response vx_type();
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
     public Core.Type_boolean ok();
     public Core.Type_int status();
   }
@@ -64,7 +64,9 @@ public final class Http {
 
     @Override
     public Http.Type_response vx_new(final Object... vals) {
-      return e_response.vx_copy(vals);
+      return Core.vx_copy(
+       e_response,
+       vals);
     }
 
     @Override
@@ -85,9 +87,9 @@ public final class Http {
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
-          msgblock = msgblock.vx_copy(valsub);
+          msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
@@ -106,7 +108,7 @@ public final class Http {
               msgval = Core.vx_new_string(valsub.toString());
             }
             msg = Core.vx_msg_from_error("vx/web/http/response", ":invalidkeytype", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.startsWith(":")) {
@@ -118,7 +120,7 @@ public final class Http {
             } else {
               Core.Type_any msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/web/http/response", ":invalidkey", msgval);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
           }
         } else {
@@ -130,7 +132,7 @@ public final class Http {
               vx_p_ok = (Core.Type_boolean)valsub;
             } else if (valsub instanceof Boolean) {
               ischanged = true;
-              vx_p_ok = Core.t_boolean.vx_new(valsub);
+              vx_p_ok = Core.vx_new(Core.t_boolean, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -143,7 +145,7 @@ public final class Http {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/web/http/response", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           case ":status":
@@ -153,7 +155,7 @@ public final class Http {
               vx_p_status = (Core.Type_int)valsub;
             } else if (valsub instanceof Integer) {
               ischanged = true;
-              vx_p_status = Core.t_int.vx_new(valsub);
+              vx_p_status = Core.vx_new(Core.t_int, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -166,13 +168,13 @@ public final class Http {
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/web/http/response", ":invalidvalue", msgmap);
-              msgblock = msgblock.vx_copy(msg);
+              msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
           default:
             Core.Type_any msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/web/http/response", ":invalidkey", msgval);
-            msgblock = msgblock.vx_copy(msg);
+            msgblock = Core.vx_copy(msgblock, msg);
           }
           key = "";
         }
@@ -190,9 +192,13 @@ public final class Http {
     }
 
     @Override
-    public Type_response vx_empty() {return e_response;}
+    public Core.Type_any vx_empty() {
+      return e_response;
+    }
     @Override
-    public Type_response vx_type() {return t_response;}
+    public Core.Type_any vx_type() {
+      return t_response;
+    }
 
     @Override
     public Core.Type_typedef vx_typedef() {
@@ -269,9 +275,13 @@ public final class Http {
     }
 
     @Override
-    public Func_csv_from_httpget vx_empty() {return e_csv_from_httpget;}
+    public Core.Type_any vx_empty() {
+      return e_csv_from_httpget;
+    }
     @Override
-    public Func_csv_from_httpget vx_type() {return t_csv_from_httpget;}
+    public Core.Type_any vx_type() {
+      return t_csv_from_httpget;
+    }
 
     @Override
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
@@ -371,9 +381,13 @@ public final class Http {
     }
 
     @Override
-    public Func_json_from_httpget vx_empty() {return e_json_from_httpget;}
+    public Core.Type_any vx_empty() {
+      return e_json_from_httpget;
+    }
     @Override
-    public Func_json_from_httpget vx_type() {return t_json_from_httpget;}
+    public Core.Type_any vx_type() {
+      return t_json_from_httpget;
+    }
 
     @Override
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
@@ -474,9 +488,13 @@ public final class Http {
     }
 
     @Override
-    public Func_response_from_httpget vx_empty() {return e_response_from_httpget;}
+    public Core.Type_any vx_empty() {
+      return e_response_from_httpget;
+    }
     @Override
-    public Func_response_from_httpget vx_type() {return t_response_from_httpget;}
+    public Core.Type_any vx_type() {
+      return t_response_from_httpget;
+    }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
@@ -556,9 +574,13 @@ public final class Http {
     }
 
     @Override
-    public Func_text_from_httpget vx_empty() {return e_text_from_httpget;}
+    public Core.Type_any vx_empty() {
+      return e_text_from_httpget;
+    }
     @Override
-    public Func_text_from_httpget vx_type() {return t_text_from_httpget;}
+    public Core.Type_any vx_type() {
+      return t_text_from_httpget;
+    }
 
     @Override
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
@@ -656,12 +678,18 @@ public final class Http {
     }
 
     @Override
-    public Func_text_from_response vx_empty() {return e_text_from_response;}
+    public Core.Type_any vx_empty() {
+      return e_text_from_response;
+    }
     @Override
-    public Func_text_from_response vx_type() {return t_text_from_response;}
+    public Core.Type_any vx_type() {
+      return t_text_from_response;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -749,9 +777,13 @@ public final class Http {
     }
 
     @Override
-    public Func_textblock_from_httpget vx_empty() {return e_textblock_from_httpget;}
+    public Core.Type_any vx_empty() {
+      return e_textblock_from_httpget;
+    }
     @Override
-    public Func_textblock_from_httpget vx_type() {return t_textblock_from_httpget;}
+    public Core.Type_any vx_type() {
+      return t_textblock_from_httpget;
+    }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
@@ -838,12 +870,18 @@ public final class Http {
     }
 
     @Override
-    public Func_textblock_from_response vx_empty() {return e_textblock_from_response;}
+    public Core.Type_any vx_empty() {
+      return e_textblock_from_response;
+    }
     @Override
-    public Func_textblock_from_response vx_type() {return t_textblock_from_response;}
+    public Core.Type_any vx_type() {
+      return t_textblock_from_response;
+    }
 
     @Override
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {return Core.e_any_from_any;}
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
@@ -875,7 +913,7 @@ public final class Http {
     Textblock.Type_textblock output = Textblock.e_textblock;
     output = Core.f_new(
       Textblock.t_textblock,
-      Core.t_anylist.vx_new(
+      Core.vx_new(Core.t_anylist,
         Core.vx_new_string(":text"),
         Http.f_text_from_response(response)
       )
@@ -937,9 +975,13 @@ public final class Http {
     }
 
     @Override
-    public Func_xml_from_httpget vx_empty() {return e_xml_from_httpget;}
+    public Core.Type_any vx_empty() {
+      return e_xml_from_httpget;
+    }
     @Override
-    public Func_xml_from_httpget vx_type() {return t_xml_from_httpget;}
+    public Core.Type_any vx_type() {
+      return t_xml_from_httpget;
+    }
 
     @Override
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
