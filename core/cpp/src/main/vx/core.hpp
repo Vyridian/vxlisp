@@ -3547,7 +3547,7 @@ namespace vx_core {
   vx_core::Type_int f_minus1(vx_core::Type_int num);
 
   // (func .)
-  vx_core::Type_any f_dotmethod(vx_core::Type_any object, vx_core::Type_string method, vx_core::Type_anylist params);
+  vx_core::Type_any f_dotmethod(vx_core::Type_any target, vx_core::Type_string method, vx_core::Type_anylist parameters);
 
   // (func /)
   vx_core::Type_number f_divide(vx_core::Type_number num1, vx_core::Type_number num2);
@@ -9082,10 +9082,10 @@ namespace vx_core {
   }
 
   // (func fn)
-  template <class T> T* f_fn(T* generic_any_1, vx_core::Type_arglist params, vx_core::Func_any_from_func fn_any) {
+  template <class T> T* f_fn(T* generic_any_1, vx_core::Type_arglist parameters, vx_core::Func_any_from_func fn_any) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_reserve({params, fn_any});
-    vx_core::vx_release_one_except({params, fn_any}, output);
+    vx_core::vx_reserve({parameters, fn_any});
+    vx_core::vx_release_one_except({parameters, fn_any}, output);
     return output;
   }
 

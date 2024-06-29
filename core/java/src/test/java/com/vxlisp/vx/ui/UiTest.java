@@ -458,13 +458,13 @@ public final class UiTest {
     return Core.vx_new(
       Test.t_testcoveragesummary,
       ":testpkg", "vx/ui/ui", 
-      ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 41), 
-      ":docnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 66, ":tests", 91, ":total", 137), 
+      ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 47), 
+      ":docnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 65, ":tests", 95, ":total", 144), 
       ":funcnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 10, ":tests", 7, ":total", 68), 
       ":bigospacenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 68), 
       ":bigotimenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 68), 
-      ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 5, ":tests", 7, ":total", 137), 
-      ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 28)
+      ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 4, ":tests", 7, ":total", 144), 
+      ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 29)
     );
   }
 
@@ -475,6 +475,7 @@ public final class UiTest {
         ":bounds", 0,
         ":cursor", 0,
         ":cursor-pointer", 0,
+        ":flip", 0,
         ":font", 0,
         ":fontface", 0,
         ":fontfacelist", 0,
@@ -504,6 +505,9 @@ public final class UiTest {
         ":align-center", 0,
         ":align-left", 0,
         ":align-right", 0,
+        ":flip-x", 0,
+        ":flip-xy", 0,
+        ":flip-y", 0,
         ":layout-app", 0,
         ":layout-background", 0,
         ":layout-button", 0,
@@ -536,6 +540,9 @@ public final class UiTest {
         ":pin-left", 0,
         ":pin-right", 0,
         ":pin-top", 0,
+        ":point-center", 0,
+        ":point-lefttop", 0,
+        ":point-rightbottom", 0,
         ":pointtype-absolute", 0,
         ":pointtype-percent", 0,
         ":pointtype-relative", 0,

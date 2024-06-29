@@ -52,7 +52,7 @@ public final class Ui {
       Type_align output = this;
       boolean ischanged = false;
       Class_align val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -186,7 +186,7 @@ public final class Ui {
       Type_bounds output = this;
       boolean ischanged = false;
       Class_bounds val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -427,7 +427,7 @@ public final class Ui {
       Type_cursor output = this;
       boolean ischanged = false;
       Class_cursor val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -497,7 +497,7 @@ public final class Ui {
       Type_cursor_pointer output = this;
       boolean ischanged = false;
       Class_cursor_pointer val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -541,6 +541,92 @@ public final class Ui {
 
   public static final Type_cursor_pointer e_cursor_pointer = new Class_cursor_pointer();
   public static final Type_cursor_pointer t_cursor_pointer = new Class_cursor_pointer();
+
+  /**
+   * type: flip
+   * Universal ui flip horizontal or vertical or both.
+   * (type flip)
+   */
+  public interface Type_flip extends Core.Type_struct {
+    public Core.Type_any vx_new(final Object... vals);
+    public Core.Type_any vx_copy(final Object... vals);
+    public Core.Type_any vx_empty();
+    public Core.Type_any vx_type();
+  }
+
+  public static class Class_flip extends Core.Class_base implements Type_flip {
+
+    @Override
+    public Core.Type_any vx_any(final Core.Type_string key) {
+      Core.Type_any output = Core.e_any;
+      String skey = key.vx_string();
+      switch (skey) {
+      }
+      return output;
+    }
+
+    @Override
+    public Map<String, Core.Type_any> vx_map() {
+      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      return Core.immutablemap(output);
+    }
+
+    @Override
+    public Ui.Type_flip vx_new(final Object... vals) {
+      return Core.vx_copy(
+       e_flip,
+       vals);
+    }
+
+    @Override
+    public Ui.Type_flip vx_copy(final Object... vals) {
+      Type_flip output = this;
+      boolean ischanged = false;
+      Class_flip val = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      if (this instanceof Core.vx_Type_const) {
+        ischanged = true;
+      }
+      if (ischanged || (msgblock != Core.e_msgblock)) {
+        Class_flip work = new Class_flip();
+        if (msgblock != Core.e_msgblock) {
+          work.vxmsgblock = msgblock;
+        }
+        output = work;
+      }
+      return output;
+    }
+
+    @Override
+    public Core.Type_any vx_empty() {
+      return e_flip;
+    }
+    @Override
+    public Core.Type_any vx_type() {
+      return t_flip;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {
+      return Core.typedef_new(
+        "vx/ui/ui", // pkgname
+        "flip", // name
+        ":struct", // extends
+        Core.e_typelist, // traits
+        Core.e_typelist, // allowtypes
+        Core.e_typelist, // disallowtypes
+        Core.e_funclist, // allowfuncs
+        Core.e_funclist, // disallowfuncs
+        Core.e_anylist, // allowvalues
+        Core.e_anylist, // disallowvalues
+        Core.e_argmap // properties
+      );
+    }
+
+  }
+
+  public static final Type_flip e_flip = new Class_flip();
+  public static final Type_flip t_flip = new Class_flip();
 
   /**
    * type: font
@@ -631,7 +717,7 @@ public final class Ui {
       Type_font output = this;
       boolean ischanged = false;
       Class_font val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -914,7 +1000,7 @@ public final class Ui {
       Type_fontface output = this;
       boolean ischanged = false;
       Class_fontface val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -1169,7 +1255,7 @@ public final class Ui {
       Type_fontfacelist output = this;
       boolean ischanged = false;
       Class_fontfacelist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -1350,7 +1436,7 @@ public final class Ui {
       Type_fontfacemap output = this;
       boolean ischanged = false;
       Class_fontfacemap val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -1549,7 +1635,7 @@ public final class Ui {
       Type_fontmap output = this;
       boolean ischanged = false;
       Class_fontmap val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -1702,7 +1788,7 @@ public final class Ui {
       Type_fontstyle output = this;
       boolean ischanged = false;
       Class_fontstyle val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -1923,7 +2009,7 @@ public final class Ui {
       Type_fontstylemap output = this;
       boolean ischanged = false;
       Class_fontstylemap val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -2100,7 +2186,7 @@ public final class Ui {
       Type_image output = this;
       boolean ischanged = false;
       Class_image val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -2336,7 +2422,7 @@ public final class Ui {
       Type_layout output = this;
       boolean ischanged = false;
       Class_layout val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -2618,7 +2704,7 @@ public final class Ui {
       Type_layoutengine output = this;
       boolean ischanged = false;
       Class_layoutengine val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -2959,7 +3045,7 @@ public final class Ui {
       Type_layoutlist output = this;
       boolean ischanged = false;
       Class_layoutlist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -3140,7 +3226,7 @@ public final class Ui {
       Type_layoutmap output = this;
       boolean ischanged = false;
       Class_layoutmap val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -3293,7 +3379,7 @@ public final class Ui {
       Type_pin output = this;
       boolean ischanged = false;
       Class_pin val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -3528,7 +3614,7 @@ public final class Ui {
       Type_point output = this;
       boolean ischanged = false;
       Class_point val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -3803,7 +3889,7 @@ public final class Ui {
       Type_pointtype output = this;
       boolean ischanged = false;
       Class_pointtype val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -3862,17 +3948,19 @@ public final class Ui {
     public Ui.Type_align align();
     public Ui.Type_bounds boundsmargin();
     public Ui.Type_bounds boundspadding();
-    public Core.Type_string color_background();
+    public Core.Type_string color_bkg();
+    public Core.Type_string color_bkghover();
     public Core.Type_string color_border();
     public Core.Type_string color_font();
-    public Core.Type_string color_hoverbkgrd();
     public Ui.Type_cursor cursor();
+    public Ui.Type_flip flip();
     public Ui.Type_font font();
     public Core.Type_boolean hidden();
-    public Ui.Type_image image_background();
+    public Ui.Type_image image_bkg();
     public Ui.Type_layout layout();
     public Ui.Type_styletype type();
     public Ui.Type_pin pin();
+    public Ui.Type_point pointorigin();
     public Ui.Type_point pointpos();
     public Ui.Type_point pointrotate();
     public Ui.Type_point pointsize();
@@ -3910,11 +3998,18 @@ public final class Ui {
       return this.vx_p_boundspadding == null ? Ui.e_bounds : this.vx_p_boundspadding;
     }
 
-    protected Core.Type_string vx_p_color_background;
+    protected Core.Type_string vx_p_color_bkg;
 
     @Override
-    public Core.Type_string color_background() {
-      return this.vx_p_color_background == null ? Core.e_string : this.vx_p_color_background;
+    public Core.Type_string color_bkg() {
+      return this.vx_p_color_bkg == null ? Core.e_string : this.vx_p_color_bkg;
+    }
+
+    protected Core.Type_string vx_p_color_bkghover;
+
+    @Override
+    public Core.Type_string color_bkghover() {
+      return this.vx_p_color_bkghover == null ? Core.e_string : this.vx_p_color_bkghover;
     }
 
     protected Core.Type_string vx_p_color_border;
@@ -3931,18 +4026,18 @@ public final class Ui {
       return this.vx_p_color_font == null ? Core.e_string : this.vx_p_color_font;
     }
 
-    protected Core.Type_string vx_p_color_hoverbkgrd;
-
-    @Override
-    public Core.Type_string color_hoverbkgrd() {
-      return this.vx_p_color_hoverbkgrd == null ? Core.e_string : this.vx_p_color_hoverbkgrd;
-    }
-
     protected Ui.Type_cursor vx_p_cursor;
 
     @Override
     public Ui.Type_cursor cursor() {
       return this.vx_p_cursor == null ? Ui.e_cursor : this.vx_p_cursor;
+    }
+
+    protected Ui.Type_flip vx_p_flip;
+
+    @Override
+    public Ui.Type_flip flip() {
+      return this.vx_p_flip == null ? Ui.e_flip : this.vx_p_flip;
     }
 
     protected Ui.Type_font vx_p_font;
@@ -3959,11 +4054,11 @@ public final class Ui {
       return this.vx_p_hidden == null ? Core.e_boolean : this.vx_p_hidden;
     }
 
-    protected Ui.Type_image vx_p_image_background;
+    protected Ui.Type_image vx_p_image_bkg;
 
     @Override
-    public Ui.Type_image image_background() {
-      return this.vx_p_image_background == null ? Ui.e_image : this.vx_p_image_background;
+    public Ui.Type_image image_bkg() {
+      return this.vx_p_image_bkg == null ? Ui.e_image : this.vx_p_image_bkg;
     }
 
     protected Ui.Type_layout vx_p_layout;
@@ -3985,6 +4080,13 @@ public final class Ui {
     @Override
     public Ui.Type_pin pin() {
       return this.vx_p_pin == null ? Ui.e_pin : this.vx_p_pin;
+    }
+
+    protected Ui.Type_point vx_p_pointorigin;
+
+    @Override
+    public Ui.Type_point pointorigin() {
+      return this.vx_p_pointorigin == null ? Ui.e_point : this.vx_p_pointorigin;
     }
 
     protected Ui.Type_point vx_p_pointpos;
@@ -4039,8 +4141,11 @@ public final class Ui {
       case ":boundspadding":
         output = this.boundspadding();
         break;
-      case ":color-background":
-        output = this.color_background();
+      case ":color-bkg":
+        output = this.color_bkg();
+        break;
+      case ":color-bkghover":
+        output = this.color_bkghover();
         break;
       case ":color-border":
         output = this.color_border();
@@ -4048,11 +4153,11 @@ public final class Ui {
       case ":color-font":
         output = this.color_font();
         break;
-      case ":color-hoverbkgrd":
-        output = this.color_hoverbkgrd();
-        break;
       case ":cursor":
         output = this.cursor();
+        break;
+      case ":flip":
+        output = this.flip();
         break;
       case ":font":
         output = this.font();
@@ -4060,8 +4165,8 @@ public final class Ui {
       case ":hidden":
         output = this.hidden();
         break;
-      case ":image-background":
-        output = this.image_background();
+      case ":image-bkg":
+        output = this.image_bkg();
         break;
       case ":layout":
         output = this.layout();
@@ -4071,6 +4176,9 @@ public final class Ui {
         break;
       case ":pin":
         output = this.pin();
+        break;
+      case ":pointorigin":
+        output = this.pointorigin();
         break;
       case ":pointpos":
         output = this.pointpos();
@@ -4098,17 +4206,19 @@ public final class Ui {
       output.put(":align", this.align());
       output.put(":boundsmargin", this.boundsmargin());
       output.put(":boundspadding", this.boundspadding());
-      output.put(":color-background", this.color_background());
+      output.put(":color-bkg", this.color_bkg());
+      output.put(":color-bkghover", this.color_bkghover());
       output.put(":color-border", this.color_border());
       output.put(":color-font", this.color_font());
-      output.put(":color-hoverbkgrd", this.color_hoverbkgrd());
       output.put(":cursor", this.cursor());
+      output.put(":flip", this.flip());
       output.put(":font", this.font());
       output.put(":hidden", this.hidden());
-      output.put(":image-background", this.image_background());
+      output.put(":image-bkg", this.image_bkg());
       output.put(":layout", this.layout());
       output.put(":type", this.type());
       output.put(":pin", this.pin());
+      output.put(":pointorigin", this.pointorigin());
       output.put(":pointpos", this.pointpos());
       output.put(":pointrotate", this.pointrotate());
       output.put(":pointsize", this.pointsize());
@@ -4129,7 +4239,7 @@ public final class Ui {
       Type_style output = this;
       boolean ischanged = false;
       Class_style val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -4137,17 +4247,19 @@ public final class Ui {
       Ui.Type_align vx_p_align = val.align();
       Ui.Type_bounds vx_p_boundsmargin = val.boundsmargin();
       Ui.Type_bounds vx_p_boundspadding = val.boundspadding();
-      Core.Type_string vx_p_color_background = val.color_background();
+      Core.Type_string vx_p_color_bkg = val.color_bkg();
+      Core.Type_string vx_p_color_bkghover = val.color_bkghover();
       Core.Type_string vx_p_color_border = val.color_border();
       Core.Type_string vx_p_color_font = val.color_font();
-      Core.Type_string vx_p_color_hoverbkgrd = val.color_hoverbkgrd();
       Ui.Type_cursor vx_p_cursor = val.cursor();
+      Ui.Type_flip vx_p_flip = val.flip();
       Ui.Type_font vx_p_font = val.font();
       Core.Type_boolean vx_p_hidden = val.hidden();
-      Ui.Type_image vx_p_image_background = val.image_background();
+      Ui.Type_image vx_p_image_bkg = val.image_bkg();
       Ui.Type_layout vx_p_layout = val.layout();
       Ui.Type_styletype vx_p_type = val.type();
       Ui.Type_pin vx_p_pin = val.pin();
+      Ui.Type_point vx_p_pointorigin = val.pointorigin();
       Ui.Type_point vx_p_pointpos = val.pointpos();
       Ui.Type_point vx_p_pointrotate = val.pointrotate();
       Ui.Type_point vx_p_pointsize = val.pointsize();
@@ -4158,17 +4270,19 @@ public final class Ui {
       validkeys.add(":align");
       validkeys.add(":boundsmargin");
       validkeys.add(":boundspadding");
-      validkeys.add(":color-background");
+      validkeys.add(":color-bkg");
+      validkeys.add(":color-bkghover");
       validkeys.add(":color-border");
       validkeys.add(":color-font");
-      validkeys.add(":color-hoverbkgrd");
       validkeys.add(":cursor");
+      validkeys.add(":flip");
       validkeys.add(":font");
       validkeys.add(":hidden");
-      validkeys.add(":image-background");
+      validkeys.add(":image-bkg");
       validkeys.add(":layout");
       validkeys.add(":type");
       validkeys.add(":pin");
+      validkeys.add(":pointorigin");
       validkeys.add(":pointpos");
       validkeys.add(":pointrotate");
       validkeys.add(":pointsize");
@@ -4299,14 +4413,14 @@ public final class Ui {
               msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
-          case ":color-background":
-            if (valsub == vx_p_color_background) {
+          case ":color-bkg":
+            if (valsub == vx_p_color_bkg) {
             } else if (valsub instanceof Core.Type_string) {
               ischanged = true;
-              vx_p_color_background = (Core.Type_string)valsub;
+              vx_p_color_bkg = (Core.Type_string)valsub;
             } else if (valsub instanceof String) {
               ischanged = true;
-              vx_p_color_background = Core.vx_new(Core.t_string, valsub);
+              vx_p_color_bkg = Core.vx_new(Core.t_string, valsub);
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -4315,7 +4429,30 @@ public final class Ui {
                 msgval = Core.vx_new_string(valsub.toString());
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
-              mapany.put("key", Core.vx_new_string("color-background"));
+              mapany.put("key", Core.vx_new_string("color-bkg"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
+              msgblock = Core.vx_copy(msgblock, msg);
+            }
+            break;
+          case ":color-bkghover":
+            if (valsub == vx_p_color_bkghover) {
+            } else if (valsub instanceof Core.Type_string) {
+              ischanged = true;
+              vx_p_color_bkghover = (Core.Type_string)valsub;
+            } else if (valsub instanceof String) {
+              ischanged = true;
+              vx_p_color_bkghover = Core.vx_new(Core.t_string, valsub);
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("color-bkghover"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
@@ -4368,29 +4505,6 @@ public final class Ui {
               msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
-          case ":color-hoverbkgrd":
-            if (valsub == vx_p_color_hoverbkgrd) {
-            } else if (valsub instanceof Core.Type_string) {
-              ischanged = true;
-              vx_p_color_hoverbkgrd = (Core.Type_string)valsub;
-            } else if (valsub instanceof String) {
-              ischanged = true;
-              vx_p_color_hoverbkgrd = Core.vx_new(Core.t_string, valsub);
-            } else {
-              Core.Type_any msgval;
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
-              } else {
-                msgval = Core.vx_new_string(valsub.toString());
-              }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
-              mapany.put("key", Core.vx_new_string("color-hoverbkgrd"));
-              mapany.put("value", msgval);
-              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
-              msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
-              msgblock = Core.vx_copy(msgblock, msg);
-            }
-            break;
           case ":cursor":
             if (valsub == vx_p_cursor) {
             } else if (valsub instanceof Ui.Type_cursor) {
@@ -4405,6 +4519,26 @@ public final class Ui {
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
               mapany.put("key", Core.vx_new_string("cursor"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
+              msgblock = Core.vx_copy(msgblock, msg);
+            }
+            break;
+          case ":flip":
+            if (valsub == vx_p_flip) {
+            } else if (valsub instanceof Ui.Type_flip) {
+              ischanged = true;
+              vx_p_flip = (Ui.Type_flip)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("flip"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
@@ -4454,11 +4588,11 @@ public final class Ui {
               msgblock = Core.vx_copy(msgblock, msg);
             }
             break;
-          case ":image-background":
-            if (valsub == vx_p_image_background) {
+          case ":image-bkg":
+            if (valsub == vx_p_image_bkg) {
             } else if (valsub instanceof Ui.Type_image) {
               ischanged = true;
-              vx_p_image_background = (Ui.Type_image)valsub;
+              vx_p_image_bkg = (Ui.Type_image)valsub;
             } else {
               Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
@@ -4467,7 +4601,7 @@ public final class Ui {
                 msgval = Core.vx_new_string(valsub.toString());
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
-              mapany.put("key", Core.vx_new_string("image-background"));
+              mapany.put("key", Core.vx_new_string("image-bkg"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
@@ -4528,6 +4662,26 @@ public final class Ui {
               }
               Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
               mapany.put("key", Core.vx_new_string("pin"));
+              mapany.put("value", msgval);
+              Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
+              msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
+              msgblock = Core.vx_copy(msgblock, msg);
+            }
+            break;
+          case ":pointorigin":
+            if (valsub == vx_p_pointorigin) {
+            } else if (valsub instanceof Ui.Type_point) {
+              ischanged = true;
+              vx_p_pointorigin = (Ui.Type_point)valsub;
+            } else {
+              Core.Type_any msgval;
+              if (valsub instanceof Core.Type_any) {
+                msgval = (Core.Type_any)valsub;
+              } else {
+                msgval = Core.vx_new_string(valsub.toString());
+              }
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              mapany.put("key", Core.vx_new_string("pointorigin"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
@@ -4654,17 +4808,19 @@ public final class Ui {
         work.vx_p_align = vx_p_align;
         work.vx_p_boundsmargin = vx_p_boundsmargin;
         work.vx_p_boundspadding = vx_p_boundspadding;
-        work.vx_p_color_background = vx_p_color_background;
+        work.vx_p_color_bkg = vx_p_color_bkg;
+        work.vx_p_color_bkghover = vx_p_color_bkghover;
         work.vx_p_color_border = vx_p_color_border;
         work.vx_p_color_font = vx_p_color_font;
-        work.vx_p_color_hoverbkgrd = vx_p_color_hoverbkgrd;
         work.vx_p_cursor = vx_p_cursor;
+        work.vx_p_flip = vx_p_flip;
         work.vx_p_font = vx_p_font;
         work.vx_p_hidden = vx_p_hidden;
-        work.vx_p_image_background = vx_p_image_background;
+        work.vx_p_image_bkg = vx_p_image_bkg;
         work.vx_p_layout = vx_p_layout;
         work.vx_p_type = vx_p_type;
         work.vx_p_pin = vx_p_pin;
+        work.vx_p_pointorigin = vx_p_pointorigin;
         work.vx_p_pointpos = vx_p_pointpos;
         work.vx_p_pointrotate = vx_p_pointrotate;
         work.vx_p_pointsize = vx_p_pointsize;
@@ -4767,7 +4923,7 @@ public final class Ui {
       Type_stylelist output = this;
       boolean ischanged = false;
       Class_stylelist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -4948,7 +5104,7 @@ public final class Ui {
       Type_stylemap output = this;
       boolean ischanged = false;
       Class_stylemap val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -5113,7 +5269,7 @@ public final class Ui {
       Type_stylesheet output = this;
       boolean ischanged = false;
       Class_stylesheet val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -5296,7 +5452,7 @@ public final class Ui {
       Type_styletype output = this;
       boolean ischanged = false;
       Class_styletype val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -5526,7 +5682,7 @@ public final class Ui {
       Type_ui output = this;
       boolean ischanged = false;
       Class_ui val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -6005,7 +6161,7 @@ public final class Ui {
       Type_uiengine output = this;
       boolean ischanged = false;
       Class_uiengine val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -6251,7 +6407,7 @@ public final class Ui {
       Type_uilist output = this;
       boolean ischanged = false;
       Class_uilist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -6432,7 +6588,7 @@ public final class Ui {
       Type_uimap output = this;
       boolean ischanged = false;
       Class_uimap val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -6641,6 +6797,117 @@ public final class Ui {
   }
 
   public static final Const_align_right c_align_right = new Const_align_right();
+
+
+  /**
+   * Constant: flip-x
+   * Logical Flip Horizontally
+   * {align}
+   */
+  public static class Const_flip_x extends Ui.Class_align implements Core.vx_Type_const {
+
+    @Override
+    public Core.Type_constdef vx_constdef() {
+      return Core.constdef_new(
+        "vx/ui/ui", // pkgname
+        "flip-x", // name
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "align", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        )
+      );
+    }
+
+    public static void const_new(Const_flip_x output) {
+    }
+
+
+  }
+
+  public static final Const_flip_x c_flip_x = new Const_flip_x();
+
+
+  /**
+   * Constant: flip-xy
+   * Logical Flip Vertically and Horizontally
+   * {align}
+   */
+  public static class Const_flip_xy extends Ui.Class_align implements Core.vx_Type_const {
+
+    @Override
+    public Core.Type_constdef vx_constdef() {
+      return Core.constdef_new(
+        "vx/ui/ui", // pkgname
+        "flip-xy", // name
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "align", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        )
+      );
+    }
+
+    public static void const_new(Const_flip_xy output) {
+    }
+
+
+  }
+
+  public static final Const_flip_xy c_flip_xy = new Const_flip_xy();
+
+
+  /**
+   * Constant: flip-y
+   * Logical Flip Vertically
+   * {align}
+   */
+  public static class Const_flip_y extends Ui.Class_align implements Core.vx_Type_const {
+
+    @Override
+    public Core.Type_constdef vx_constdef() {
+      return Core.constdef_new(
+        "vx/ui/ui", // pkgname
+        "flip-y", // name
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "align", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        )
+      );
+    }
+
+    public static void const_new(Const_flip_y output) {
+    }
+
+
+  }
+
+  public static final Const_flip_y c_flip_y = new Const_flip_y();
 
 
   /**
@@ -8009,6 +8276,114 @@ public final class Ui {
   }
 
   public static final Const_pin_top c_pin_top = new Const_pin_top();
+
+
+  /**
+   * Constant: point-center
+   * {point}
+   */
+  public static class Const_point_center extends Ui.Class_point implements Core.vx_Type_const {
+
+    @Override
+    public Core.Type_constdef vx_constdef() {
+      return Core.constdef_new(
+        "vx/ui/ui", // pkgname
+        "point-center", // name
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "point", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        )
+      );
+    }
+
+    public static void const_new(Const_point_center output) {
+    }
+
+
+  }
+
+  public static final Const_point_center c_point_center = new Const_point_center();
+
+
+  /**
+   * Constant: point-lefttop
+   * {point}
+   */
+  public static class Const_point_lefttop extends Ui.Class_point implements Core.vx_Type_const {
+
+    @Override
+    public Core.Type_constdef vx_constdef() {
+      return Core.constdef_new(
+        "vx/ui/ui", // pkgname
+        "point-lefttop", // name
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "point", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        )
+      );
+    }
+
+    public static void const_new(Const_point_lefttop output) {
+    }
+
+
+  }
+
+  public static final Const_point_lefttop c_point_lefttop = new Const_point_lefttop();
+
+
+  /**
+   * Constant: point-rightbottom
+   * {point}
+   */
+  public static class Const_point_rightbottom extends Ui.Class_point implements Core.vx_Type_const {
+
+    @Override
+    public Core.Type_constdef vx_constdef() {
+      return Core.constdef_new(
+        "vx/ui/ui", // pkgname
+        "point-rightbottom", // name
+        Core.typedef_new(
+          "vx/ui/ui", // pkgname
+          "point", // name
+          ":struct", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        )
+      );
+    }
+
+    public static void const_new(Const_point_rightbottom output) {
+    }
+
+
+  }
+
+  public static final Const_point_rightbottom c_point_rightbottom = new Const_point_rightbottom();
 
 
   /**
@@ -15248,6 +15623,9 @@ public final class Ui {
     Const_align_center.const_new(c_align_center);
     Const_align_left.const_new(c_align_left);
     Const_align_right.const_new(c_align_right);
+    Const_flip_x.const_new(c_flip_x);
+    Const_flip_xy.const_new(c_flip_xy);
+    Const_flip_y.const_new(c_flip_y);
     Const_layout_app.const_new(c_layout_app);
     Const_layout_background.const_new(c_layout_background);
     Const_layout_button.const_new(c_layout_button);
@@ -15280,6 +15658,9 @@ public final class Ui {
     Const_pin_left.const_new(c_pin_left);
     Const_pin_right.const_new(c_pin_right);
     Const_pin_top.const_new(c_pin_top);
+    Const_point_center.const_new(c_point_center);
+    Const_point_lefttop.const_new(c_point_lefttop);
+    Const_point_rightbottom.const_new(c_point_rightbottom);
     Const_pointtype_absolute.const_new(c_pointtype_absolute);
     Const_pointtype_percent.const_new(c_pointtype_percent);
     Const_pointtype_relative.const_new(c_pointtype_relative);
@@ -15293,6 +15674,7 @@ public final class Ui {
     maptype.put("bounds", Ui.t_bounds);
     maptype.put("cursor", Ui.t_cursor);
     maptype.put("cursor-pointer", Ui.t_cursor_pointer);
+    maptype.put("flip", Ui.t_flip);
     maptype.put("font", Ui.t_font);
     maptype.put("fontface", Ui.t_fontface);
     maptype.put("fontfacelist", Ui.t_fontfacelist);
@@ -15320,6 +15702,9 @@ public final class Ui {
     mapconst.put("align-center", Ui.c_align_center);
     mapconst.put("align-left", Ui.c_align_left);
     mapconst.put("align-right", Ui.c_align_right);
+    mapconst.put("flip-x", Ui.c_flip_x);
+    mapconst.put("flip-xy", Ui.c_flip_xy);
+    mapconst.put("flip-y", Ui.c_flip_y);
     mapconst.put("layout-app", Ui.c_layout_app);
     mapconst.put("layout-background", Ui.c_layout_background);
     mapconst.put("layout-button", Ui.c_layout_button);
@@ -15352,6 +15737,9 @@ public final class Ui {
     mapconst.put("pin-left", Ui.c_pin_left);
     mapconst.put("pin-right", Ui.c_pin_right);
     mapconst.put("pin-top", Ui.c_pin_top);
+    mapconst.put("point-center", Ui.c_point_center);
+    mapconst.put("point-lefttop", Ui.c_point_lefttop);
+    mapconst.put("point-rightbottom", Ui.c_point_rightbottom);
     mapconst.put("pointtype-absolute", Ui.c_pointtype_absolute);
     mapconst.put("pointtype-percent", Ui.c_pointtype_percent);
     mapconst.put("pointtype-relative", Ui.c_pointtype_relative);

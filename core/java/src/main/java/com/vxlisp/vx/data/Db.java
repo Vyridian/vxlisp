@@ -63,7 +63,7 @@ public final class Db {
       Type_db output = this;
       boolean ischanged = false;
       Class_db val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -286,7 +286,7 @@ public final class Db {
       Type_dbcell output = this;
       boolean ischanged = false;
       Class_dbcell val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -599,7 +599,7 @@ public final class Db {
       Type_dbcellmap output = this;
       boolean ischanged = false;
       Class_dbcellmap val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -776,7 +776,7 @@ public final class Db {
       Type_dbfield output = this;
       boolean ischanged = false;
       Class_dbfield val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -1043,7 +1043,7 @@ public final class Db {
       Type_dbfieldmap output = this;
       boolean ischanged = false;
       Class_dbfieldmap val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -1169,7 +1169,7 @@ public final class Db {
       Type_dbid output = this;
       boolean ischanged = false;
       Class_dbid val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -1279,7 +1279,7 @@ public final class Db {
       Type_dblink output = this;
       boolean ischanged = false;
       Class_dblink val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -1479,7 +1479,7 @@ public final class Db {
       Type_dblinklist output = this;
       boolean ischanged = false;
       Class_dblinklist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -1626,7 +1626,7 @@ public final class Db {
       Type_dbnode output = this;
       boolean ischanged = false;
       Class_dbnode val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -1869,7 +1869,7 @@ public final class Db {
       Type_dbnote output = this;
       boolean ischanged = false;
       Class_dbnote val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -2172,7 +2172,7 @@ public final class Db {
       Type_dbtable output = this;
       boolean ischanged = false;
       Class_dbtable val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -2476,7 +2476,7 @@ public final class Db {
       Type_dbvalue output = this;
       boolean ischanged = false;
       Class_dbvalue val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }

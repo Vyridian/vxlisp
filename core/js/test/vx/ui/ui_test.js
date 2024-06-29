@@ -28,13 +28,13 @@ export default class vx_ui_ui_test {
     return vx_core.f_new(
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/ui/ui", 
-      "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 41), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 66, ":tests", 91, ":total", 137), 
+      "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 47), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 65, ":tests", 95, ":total", 144), 
       "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 10, ":tests", 7, ":total", 68), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 5, ":tests", 7, ":total", 137), 
-      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 28)
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 4, ":tests", 7, ":total", 144), 
+      "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 29)
     )
   }
 
@@ -49,6 +49,7 @@ export default class vx_ui_ui_test {
           "bounds", 0,
           "cursor", 0,
           "cursor-pointer", 0,
+          "flip", 0,
           "font", 0,
           "fontface", 0,
           "fontfacelist", 0,
@@ -80,6 +81,9 @@ export default class vx_ui_ui_test {
           "align-center", 0,
           "align-left", 0,
           "align-right", 0,
+          "flip-x", 0,
+          "flip-xy", 0,
+          "flip-y", 0,
           "layout-app", 0,
           "layout-background", 0,
           "layout-button", 0,
@@ -112,6 +116,9 @@ export default class vx_ui_ui_test {
           "pin-left", 0,
           "pin-right", 0,
           "pin-top", 0,
+          "point-center", 0,
+          "point-lefttop", 0,
+          "point-rightbottom", 0,
           "pointtype-absolute", 0,
           "pointtype-percent", 0,
           "pointtype-relative", 0,

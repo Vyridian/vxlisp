@@ -39,6 +39,13 @@ export default class vx_ui_ui {
   static e_cursor_pointer = {vx_type: vx_ui_ui.t_cursor_pointer}
 
   /**
+   * type: flip
+   * Universal ui flip horizontal or vertical or both.
+   */
+  static t_flip = {}
+  static e_flip = {vx_type: vx_ui_ui.t_flip}
+
+  /**
    * type: font
    * Univeral Font Type
    */
@@ -225,6 +232,27 @@ export default class vx_ui_ui {
    * {align}
    */
   static c_align_right = {vx_type: vx_ui_ui.t_align, vx_constdef: {pkgname: 'vx/ui/ui', name: 'align-right'}}
+
+  /**
+   * Constant: flip-x
+   * Logical Flip Horizontally
+   * {align}
+   */
+  static c_flip_x = {vx_type: vx_ui_ui.t_align, vx_constdef: {pkgname: 'vx/ui/ui', name: 'flip-x'}}
+
+  /**
+   * Constant: flip-xy
+   * Logical Flip Vertically and Horizontally
+   * {align}
+   */
+  static c_flip_xy = {vx_type: vx_ui_ui.t_align, vx_constdef: {pkgname: 'vx/ui/ui', name: 'flip-xy'}}
+
+  /**
+   * Constant: flip-y
+   * Logical Flip Vertically
+   * {align}
+   */
+  static c_flip_y = {vx_type: vx_ui_ui.t_align, vx_constdef: {pkgname: 'vx/ui/ui', name: 'flip-y'}}
 
   /**
    * Constant: layout-app
@@ -417,6 +445,24 @@ export default class vx_ui_ui {
    * {pin}
    */
   static c_pin_top = {vx_type: vx_ui_ui.t_pin, vx_constdef: {pkgname: 'vx/ui/ui', name: 'pin-top'}}
+
+  /**
+   * Constant: point-center
+   * {point}
+   */
+  static c_point_center = {vx_type: vx_ui_ui.t_point, vx_constdef: {pkgname: 'vx/ui/ui', name: 'point-center'}}
+
+  /**
+   * Constant: point-lefttop
+   * {point}
+   */
+  static c_point_lefttop = {vx_type: vx_ui_ui.t_point, vx_constdef: {pkgname: 'vx/ui/ui', name: 'point-lefttop'}}
+
+  /**
+   * Constant: point-rightbottom
+   * {point}
+   */
+  static c_point_rightbottom = {vx_type: vx_ui_ui.t_point, vx_constdef: {pkgname: 'vx/ui/ui', name: 'point-rightbottom'}}
 
   /**
    * Constant: pointtype-absolute
@@ -2540,6 +2586,9 @@ export default class vx_ui_ui {
       "align-center": vx_ui_ui.c_align_center,
       "align-left": vx_ui_ui.c_align_left,
       "align-right": vx_ui_ui.c_align_right,
+      "flip-x": vx_ui_ui.c_flip_x,
+      "flip-xy": vx_ui_ui.c_flip_xy,
+      "flip-y": vx_ui_ui.c_flip_y,
       "layout-app": vx_ui_ui.c_layout_app,
       "layout-background": vx_ui_ui.c_layout_background,
       "layout-button": vx_ui_ui.c_layout_button,
@@ -2572,6 +2621,9 @@ export default class vx_ui_ui {
       "pin-left": vx_ui_ui.c_pin_left,
       "pin-right": vx_ui_ui.c_pin_right,
       "pin-top": vx_ui_ui.c_pin_top,
+      "point-center": vx_ui_ui.c_point_center,
+      "point-lefttop": vx_ui_ui.c_point_lefttop,
+      "point-rightbottom": vx_ui_ui.c_point_rightbottom,
       "pointtype-absolute": vx_ui_ui.c_pointtype_absolute,
       "pointtype-percent": vx_ui_ui.c_pointtype_percent,
       "pointtype-relative": vx_ui_ui.c_pointtype_relative,
@@ -2584,6 +2636,7 @@ export default class vx_ui_ui {
       "bounds": vx_ui_ui.e_bounds,
       "cursor": vx_ui_ui.e_cursor,
       "cursor-pointer": vx_ui_ui.e_cursor_pointer,
+      "flip": vx_ui_ui.e_flip,
       "font": vx_ui_ui.e_font,
       "fontface": vx_ui_ui.e_fontface,
       "fontfacelist": vx_ui_ui.e_fontfacelist,
@@ -2752,6 +2805,7 @@ export default class vx_ui_ui {
       "bounds": vx_ui_ui.t_bounds,
       "cursor": vx_ui_ui.t_cursor,
       "cursor-pointer": vx_ui_ui.t_cursor_pointer,
+      "flip": vx_ui_ui.t_flip,
       "font": vx_ui_ui.t_font,
       "fontface": vx_ui_ui.t_fontface,
       "fontfacelist": vx_ui_ui.t_fontfacelist,
@@ -2886,6 +2940,25 @@ export default class vx_ui_ui {
     }
     vx_ui_ui.e_cursor_pointer['vx_type'] = vx_ui_ui.t_cursor_pointer
     vx_ui_ui.e_cursor_pointer['vx_value'] = {}
+
+    // (type flip)
+    vx_ui_ui.t_flip['vx_type'] = vx_core.t_type
+    vx_ui_ui.t_flip['vx_value'] = {
+      name          : "flip",
+      pkgname       : "vx/ui/ui",
+      extends       : ":struct",
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : {},
+      proplast      : {}
+    }
+    vx_ui_ui.e_flip['vx_type'] = vx_ui_ui.t_flip
+    vx_ui_ui.e_flip['vx_value'] = {}
 
     // (type font)
     vx_ui_ui.t_font['vx_type'] = vx_core.t_type
@@ -3389,8 +3462,13 @@ export default class vx_ui_ui {
           "type" : vx_ui_ui.t_bounds,
           "multi": false
         },
-        "color-background": {
-          "name" : "color-background",
+        "color-bkg": {
+          "name" : "color-bkg",
+          "type" : vx_core.t_string,
+          "multi": false
+        },
+        "color-bkghover": {
+          "name" : "color-bkghover",
           "type" : vx_core.t_string,
           "multi": false
         },
@@ -3404,14 +3482,14 @@ export default class vx_ui_ui {
           "type" : vx_core.t_string,
           "multi": false
         },
-        "color-hoverbkgrd": {
-          "name" : "color-hoverbkgrd",
-          "type" : vx_core.t_string,
-          "multi": false
-        },
         "cursor": {
           "name" : "cursor",
           "type" : vx_ui_ui.t_cursor,
+          "multi": false
+        },
+        "flip": {
+          "name" : "flip",
+          "type" : vx_ui_ui.t_flip,
           "multi": false
         },
         "font": {
@@ -3424,8 +3502,8 @@ export default class vx_ui_ui {
           "type" : vx_core.t_boolean,
           "multi": false
         },
-        "image-background": {
-          "name" : "image-background",
+        "image-bkg": {
+          "name" : "image-bkg",
           "type" : vx_ui_ui.t_image,
           "multi": false
         },
@@ -3442,6 +3520,11 @@ export default class vx_ui_ui {
         "pin": {
           "name" : "pin",
           "type" : vx_ui_ui.t_pin,
+          "multi": false
+        },
+        "pointorigin": {
+          "name" : "pointorigin",
+          "type" : vx_ui_ui.t_point,
           "multi": false
         },
         "pointpos": {
@@ -5164,6 +5247,33 @@ export default class vx_ui_ui {
     // (const pin-top)
     Object.assign(vx_ui_ui.c_pin_top, {
       
+    })
+
+    // (const point-center)
+    Object.assign(vx_ui_ui.c_point_center, {
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "t": 0,
+      "i": 0
+    })
+
+    // (const point-lefttop)
+    Object.assign(vx_ui_ui.c_point_lefttop, {
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "t": 0,
+      "i": 0
+    })
+
+    // (const point-rightbottom)
+    Object.assign(vx_ui_ui.c_point_rightbottom, {
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "t": 0,
+      "i": 0
     })
 
   }

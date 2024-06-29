@@ -74,7 +74,7 @@ public final class Table {
       Type_cell output = this;
       boolean ischanged = false;
       Class_cell val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -276,7 +276,7 @@ public final class Table {
       Type_celllist output = this;
       boolean ischanged = false;
       Class_celllist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -456,7 +456,7 @@ public final class Table {
       Type_cellmap output = this;
       boolean ischanged = false;
       Class_cellmap val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -632,7 +632,7 @@ public final class Table {
       Type_field output = this;
       boolean ischanged = false;
       Class_field val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -860,7 +860,7 @@ public final class Table {
       Type_fieldlist output = this;
       boolean ischanged = false;
       Class_fieldlist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -999,7 +999,7 @@ public final class Table {
       Type_fieldmap output = this;
       boolean ischanged = false;
       Class_fieldmap val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -1157,7 +1157,7 @@ public final class Table {
       Type_filter output = this;
       boolean ischanged = false;
       Class_filter val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -1404,7 +1404,7 @@ public final class Table {
       Type_row output = this;
       boolean ischanged = false;
       Class_row val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -1629,7 +1629,7 @@ public final class Table {
       Type_rowlist output = this;
       boolean ischanged = false;
       Class_rowlist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -1809,7 +1809,7 @@ public final class Table {
       Type_rowmap output = this;
       boolean ischanged = false;
       Class_rowmap val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -1985,7 +1985,7 @@ public final class Table {
       Type_sort output = this;
       boolean ischanged = false;
       Class_sort val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -2280,7 +2280,7 @@ public final class Table {
       Type_table output = this;
       boolean ischanged = false;
       Class_table val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }

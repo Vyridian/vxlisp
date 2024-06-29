@@ -17438,6 +17438,9 @@ ab
       :align-center 0
       :align-left 0
       :align-right 0
+      :flip-x 0
+      :flip-xy 0
+      :flip-y 0
       :layout-app 0
       :layout-background 0
       :layout-button 0
@@ -17470,6 +17473,9 @@ ab
       :pin-left 0
       :pin-right 0
       :pin-top 0
+      :point-center 0
+      :point-lefttop 0
+      :point-rightbottom 0
       :pointtype-absolute 0
       :pointtype-percent 0
       :pointtype-relative 0
@@ -17553,6 +17559,7 @@ ab
       :bounds 0
       :cursor 0
       :cursor-pointer 0
+      :flip 0
       :font 0
       :fontface 0
       :fontfacelist 0
@@ -17593,12 +17600,12 @@ ab
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 41)
+      :total 47)
     :docnums
      (testcoveragenums
-      :pct 66
-      :tests 91
-      :total 137)
+      :pct 65
+      :tests 95
+      :total 144)
     :funcnums
      (testcoveragenums
       :pct 10
@@ -17607,14 +17614,14 @@ ab
     :testpkg "vx/ui/ui"
     :totalnums
      (testcoveragenums
-      :pct 5
+      :pct 4
       :tests 7
-      :total 137)
+      :total 144)
     :typenums
      (testcoveragenums
       :pct 0
       :tests 0
-      :total 28))
+      :total 29))
   :passfail true
   :testpkg "vx/ui/ui")
  (testpackage

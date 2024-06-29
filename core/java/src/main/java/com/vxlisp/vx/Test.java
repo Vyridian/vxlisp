@@ -100,7 +100,7 @@ public final class Test {
       Type_testcase output = this;
       boolean ischanged = false;
       Class_testcase val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -355,7 +355,7 @@ public final class Test {
       Type_testcaselist output = this;
       boolean ischanged = false;
       Class_testcaselist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -526,7 +526,7 @@ public final class Test {
       Type_testcoveragedetail output = this;
       boolean ischanged = false;
       Class_testcoveragedetail val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -806,7 +806,7 @@ public final class Test {
       Type_testcoveragenums output = this;
       boolean ischanged = false;
       Class_testcoveragenums val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -1143,7 +1143,7 @@ public final class Test {
       Type_testcoveragesummary output = this;
       boolean ischanged = false;
       Class_testcoveragesummary val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -1503,7 +1503,7 @@ public final class Test {
       Type_testdescribe output = this;
       boolean ischanged = false;
       Class_testdescribe val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -1732,7 +1732,7 @@ public final class Test {
       Type_testdescribelist output = this;
       boolean ischanged = false;
       Class_testdescribelist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -1915,7 +1915,7 @@ public final class Test {
       Type_testpackage output = this;
       boolean ischanged = false;
       Class_testpackage val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -2190,7 +2190,7 @@ public final class Test {
       Type_testpackagelist output = this;
       boolean ischanged = false;
       Class_testpackagelist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -2373,7 +2373,7 @@ public final class Test {
       Type_testresult output = this;
       boolean ischanged = false;
       Class_testresult val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -2648,7 +2648,7 @@ public final class Test {
       Type_testresultlist output = this;
       boolean ischanged = false;
       Class_testresultlist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }

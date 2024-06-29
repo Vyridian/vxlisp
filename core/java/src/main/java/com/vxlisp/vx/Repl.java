@@ -105,7 +105,7 @@ public final class Repl {
       Type_liblist output = this;
       boolean ischanged = false;
       Class_liblist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -300,7 +300,7 @@ public final class Repl {
       Type_repl output = this;
       boolean ischanged = false;
       Class_repl val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -620,7 +620,7 @@ public final class Repl {
       Type_replarglist output = this;
       boolean ischanged = false;
       Class_replarglist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
@@ -846,7 +846,7 @@ public final class Repl {
       Type_repllist output = this;
       boolean ischanged = false;
       Class_repllist val = this;
-      Core.Type_msgblock msgblock = Core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }

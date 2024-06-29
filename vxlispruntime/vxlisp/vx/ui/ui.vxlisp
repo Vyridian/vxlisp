@@ -74,18 +74,18 @@
 */
 
 (type style : struct
- :properties [name             : string
-              boundsmargin     : bounds
-              boundspadding    : bounds
-              color-background : string
-              color-hoverbkgrd : string
-              cursor           : cursor
-              image-background : file/file
-              layout           : layout
-              type             : styletype
-              pin              : pin
-              pointpos         : point
-              pointsize        : point]
+ :properties [name           : string
+              boundsmargin   : bounds
+              boundspadding  : bounds
+              color-bkg      : string
+              color-bkghover : string
+              cursor         : cursor
+              image-bkg      : file/file
+              layout         : layout
+              type           : styletype
+              pin            : pin
+              pointpos       : point
+              pointsize      : point]
  :doc "Universal Style")
 
 (type stylelist : list

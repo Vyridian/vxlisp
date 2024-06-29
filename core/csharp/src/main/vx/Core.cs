@@ -725,7 +725,7 @@ public static class vx_core {
       Type_any output = this;
       boolean ischanged = false;
       Class_any val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -801,7 +801,7 @@ public static class vx_core {
       Type_any_async_from_func output = this;
       boolean ischanged = false;
       Class_any_async_from_func val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -898,7 +898,7 @@ public static class vx_core {
       Type_any_from_anylist output = this;
       boolean ischanged = false;
       Class_any_from_anylist val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -1019,7 +1019,7 @@ public static class vx_core {
       Type_anylist output = this;
       boolean ischanged = false;
       Class_anylist val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -1182,7 +1182,7 @@ public static class vx_core {
       Type_anymap output = this;
       boolean ischanged = false;
       Class_anymap val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -1306,7 +1306,7 @@ public static class vx_core {
       Type_anytype output = this;
       boolean ischanged = false;
       Class_anytype val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -1432,7 +1432,7 @@ public static class vx_core {
       Type_arg output = this;
       boolean ischanged = false;
       Class_arg val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -1678,7 +1678,7 @@ public static class vx_core {
       Type_arglist output = this;
       boolean ischanged = false;
       Class_arglist val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -1851,7 +1851,7 @@ public static class vx_core {
       Type_argmap output = this;
       boolean ischanged = false;
       Class_argmap val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -1975,7 +1975,7 @@ public static class vx_core {
       Type_boolean output = this;
       boolean ischanged = false;
       Class_boolean val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -2088,7 +2088,7 @@ public static class vx_core {
       Type_booleanlist output = this;
       boolean ischanged = false;
       Class_booleanlist val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -2193,7 +2193,7 @@ public static class vx_core {
       Type_collection output = this;
       boolean ischanged = false;
       Class_collection val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -2261,7 +2261,7 @@ public static class vx_core {
       Type_compilelanguages output = this;
       boolean ischanged = false;
       Class_compilelanguages val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -2330,7 +2330,7 @@ public static class vx_core {
       Type_connect output = this;
       boolean ischanged = false;
       Class_connect val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -2427,7 +2427,7 @@ public static class vx_core {
       Type_connectlist output = this;
       boolean ischanged = false;
       Class_connectlist val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -2600,7 +2600,7 @@ public static class vx_core {
       Type_connectmap output = this;
       boolean ischanged = false;
       Class_connectmap val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -2724,7 +2724,7 @@ public static class vx_core {
       Type_const output = this;
       boolean ischanged = false;
       Class_const val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -2839,7 +2839,7 @@ public static class vx_core {
       Type_constdef output = this;
       boolean ischanged = false;
       Class_constdef val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -3052,7 +3052,7 @@ public static class vx_core {
       Type_constlist output = this;
       boolean ischanged = false;
       Class_constlist val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -3215,7 +3215,7 @@ public static class vx_core {
       Type_constmap output = this;
       boolean ischanged = false;
       Class_constmap val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -3396,7 +3396,7 @@ public static class vx_core {
       Type_context output = this;
       boolean ischanged = false;
       Class_context val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -3611,7 +3611,7 @@ public static class vx_core {
       Type_date output = this;
       boolean ischanged = false;
       Class_date val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -3680,7 +3680,7 @@ public static class vx_core {
       Type_decimal output = this;
       boolean ischanged = false;
       Class_decimal val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -3765,7 +3765,7 @@ public static class vx_core {
       Type_error output = this;
       boolean ischanged = false;
       Class_error val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -3834,7 +3834,7 @@ public static class vx_core {
       Type_float output = this;
       boolean ischanged = false;
       Class_float val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -3941,7 +3941,7 @@ public static class vx_core {
       Type_func output = this;
       boolean ischanged = false;
       Class_func val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -4078,7 +4078,7 @@ public static class vx_core {
       Type_funcdef output = this;
       boolean ischanged = false;
       Class_funcdef val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -4353,7 +4353,7 @@ public static class vx_core {
       Type_funclist output = this;
       boolean ischanged = false;
       Class_funclist val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -4526,7 +4526,7 @@ public static class vx_core {
       Type_funcmap output = this;
       boolean ischanged = false;
       Class_funcmap val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -4650,7 +4650,7 @@ public static class vx_core {
       Type_int output = this;
       boolean ischanged = false;
       Class_int val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -4767,7 +4767,7 @@ public static class vx_core {
       Type_intlist output = this;
       boolean ischanged = false;
       Class_intlist val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -4940,7 +4940,7 @@ public static class vx_core {
       Type_intmap output = this;
       boolean ischanged = false;
       Class_intmap val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -5056,13 +5056,6 @@ public static class vx_core {
 
   public class Class_list : vx_core.Class_base, Type_list {
 
-    public List<T> vx_any<T>(T generic_any_1) {
-      return vx_core.arraylist_from_arraylist(generic_any_1, this.vx_list());
-    }
-    public T vx_any_from_list<T>(T generic_any_1, int index) {
-      return vx_any_from_list(generic_any_1, this.vx_list(), index);
-    }
-
     protected List<vx_core.Type_any> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_any>());
 
     public List<vx_core.Type_any> vx_list() {
@@ -5091,7 +5084,7 @@ public static class vx_core {
       Type_list output = this;
       boolean ischanged = false;
       Class_list val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -5168,33 +5161,6 @@ public static class vx_core {
       );
     }
 
-    public static <T extends vx_core.Type_any> List<T> list_new(T generic_any_1, vx_core.Type_any... vals) {
-      List<vx_core.Type_any> listval = Arrays.asList(vals);
-      return vx_core.arraylist_from_arraylist(generic_any_1, listval);
-    }
-
-    public static <T extends vx_core.Type_any> T vx_any_from_list(T generic_any_1, List<vx_core.Type_any> list, int index) {
-      T output = vx_core.f_empty(generic_any_1);
-      if (list.size() > index) {
-        output = vx_core.f_any_from_any(generic_any_1, list.get(index));
-      }
-      return output;
-    }
-
-    public static <T extends vx_core.Type_any> T vx_any_first_from_list_fn(T generic_any_1, vx_core.Type_list list, Function<vx_core.Type_any, T> fn_any) {
-      T output = vx_core.f_empty(generic_any_1);
-      List<vx_core.Type_any> listany = list.vx_list();
-      for (vx_core.Type_any any : listany) {
-        T tany = vx_core.f_any_from_any(generic_any_1, any);
-        T val = fn_any.apply(tany);
-        if (val != null) {
-          output = val;
-          break;
-        }
-      }
-      return output;
-    }
-
   }
 
   public static Type_list e_list = new Class_list();
@@ -5224,7 +5190,7 @@ public static class vx_core {
       Type_listtype output = this;
       boolean ischanged = false;
       Class_listtype val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -5306,7 +5272,7 @@ public static class vx_core {
       Type_locale output = this;
       boolean ischanged = false;
       Class_locale val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -5436,7 +5402,7 @@ public static class vx_core {
       Type_map output = this;
       boolean ischanged = false;
       Class_map val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -5560,7 +5526,7 @@ public static class vx_core {
       Type_maptype output = this;
       boolean ischanged = false;
       Class_maptype val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -5653,7 +5619,7 @@ public static class vx_core {
       Type_mempool output = this;
       boolean ischanged = false;
       Class_mempool val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -5946,9 +5912,11 @@ public static class vx_core {
       }
       return output;
     }
+    
+    public vx_core.Type_msgblock vx_msgblock() {
+      return vx_core.e_msgblock;
+    }
 
-    override
-    public vx_core.Type_msgblock vx_msgblock() {return vx_core.e_msgblock;}
     override
     public vx_core.Type_any vx_empty() {
       return e_msg;
@@ -5991,7 +5959,6 @@ public static class vx_core {
     public vx_core.Type_any vx_empty();
     public vx_core.Type_any vx_type();
     public vx_core.Type_typedef vx_typedef();
-    public Type_msgblock vx_msgblock_from_copy_arrayval(vx_core.Type_any copy, Object... vals);
     public vx_core.Type_msglist msgs();
     public vx_core.Type_msgblocklist msgblocks();
   }
@@ -6135,9 +6102,11 @@ public static class vx_core {
       }
       return output;
     }
+    
+    public vx_core.Type_msgblock vx_msgblock() {
+      return this;
+    }
 
-    override
-    public vx_core.Type_msgblock vx_msgblock() {return this;}
     override
     public vx_core.Type_any vx_empty() {
       return e_msgblock;
@@ -6221,7 +6190,7 @@ public static class vx_core {
       Type_msgblocklist output = this;
       boolean ischanged = false;
       Class_msgblocklist val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -6349,7 +6318,7 @@ public static class vx_core {
       Type_msglist output = this;
       boolean ischanged = false;
       Class_msglist val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -6449,7 +6418,7 @@ public static class vx_core {
       Type_none output = this;
       boolean ischanged = false;
       Class_none val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -6518,7 +6487,7 @@ public static class vx_core {
       Type_notype output = this;
       boolean ischanged = false;
       Class_notype val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -6587,7 +6556,7 @@ public static class vx_core {
       Type_number output = this;
       boolean ischanged = false;
       Class_number val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -6684,7 +6653,7 @@ public static class vx_core {
       Type_numberlist output = this;
       boolean ischanged = false;
       Class_numberlist val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -6857,7 +6826,7 @@ public static class vx_core {
       Type_numbermap output = this;
       boolean ischanged = false;
       Class_numbermap val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -7049,7 +7018,7 @@ public static class vx_core {
       Type_package output = this;
       boolean ischanged = false;
       Class_package val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -7353,7 +7322,7 @@ public static class vx_core {
       Type_packagemap output = this;
       boolean ischanged = false;
       Class_packagemap val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -7501,7 +7470,7 @@ public static class vx_core {
       Type_permission output = this;
       boolean ischanged = false;
       Class_permission val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -7675,7 +7644,7 @@ public static class vx_core {
       Type_permissionlist output = this;
       boolean ischanged = false;
       Class_permissionlist val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -7848,7 +7817,7 @@ public static class vx_core {
       Type_permissionmap output = this;
       boolean ischanged = false;
       Class_permissionmap val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -7996,7 +7965,7 @@ public static class vx_core {
       Type_project output = this;
       boolean ischanged = false;
       Class_project val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -8185,7 +8154,7 @@ public static class vx_core {
       Type_security output = this;
       boolean ischanged = false;
       Class_security val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -8453,7 +8422,7 @@ public static class vx_core {
       Type_session output = this;
       boolean ischanged = false;
       Class_session val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -8735,7 +8704,7 @@ public static class vx_core {
       Type_setting output = this;
       boolean ischanged = false;
       Class_setting val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -8902,7 +8871,7 @@ public static class vx_core {
       Type_state output = this;
       boolean ischanged = false;
       Class_state val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -9090,7 +9059,7 @@ public static class vx_core {
       Type_statelistener output = this;
       boolean ischanged = false;
       Class_statelistener val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -9349,7 +9318,7 @@ public static class vx_core {
       Type_statelistenermap output = this;
       boolean ischanged = false;
       Class_statelistenermap val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -9473,7 +9442,7 @@ public static class vx_core {
       Type_string output = this;
       boolean ischanged = false;
       Class_string val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -9621,7 +9590,7 @@ public static class vx_core {
       Type_stringlist output = this;
       boolean ischanged = false;
       Class_stringlist val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -9755,7 +9724,7 @@ public static class vx_core {
       Type_stringlistlist output = this;
       boolean ischanged = false;
       Class_stringlistlist val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -9928,7 +9897,7 @@ public static class vx_core {
       Type_stringmap output = this;
       boolean ischanged = false;
       Class_stringmap val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -10119,7 +10088,7 @@ public static class vx_core {
       Type_stringmutablemap output = this;
       boolean ischanged = false;
       Class_stringmutablemap val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -10258,7 +10227,7 @@ public static class vx_core {
       Type_struct output = this;
       boolean ischanged = false;
       Class_struct val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -10394,7 +10363,7 @@ public static class vx_core {
       Type_thenelse output = this;
       boolean ischanged = false;
       Class_thenelse val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -10659,7 +10628,7 @@ public static class vx_core {
       Type_thenelselist output = this;
       boolean ischanged = false;
       Class_thenelselist val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -10800,7 +10769,7 @@ public static class vx_core {
       Type_translation output = this;
       boolean ischanged = false;
       Class_translation val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -10997,7 +10966,7 @@ public static class vx_core {
       Type_translationlist output = this;
       boolean ischanged = false;
       Class_translationlist val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -11170,7 +11139,7 @@ public static class vx_core {
       Type_translationmap output = this;
       boolean ischanged = false;
       Class_translationmap val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -11294,7 +11263,7 @@ public static class vx_core {
       Type_type output = this;
       boolean ischanged = false;
       Class_type val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -11508,7 +11477,7 @@ public static class vx_core {
       Type_typedef output = this;
       boolean ischanged = false;
       Class_typedef val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -11931,7 +11900,7 @@ public static class vx_core {
       Type_typelist output = this;
       boolean ischanged = false;
       Class_typelist val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -12094,7 +12063,7 @@ public static class vx_core {
       Type_typemap output = this;
       boolean ischanged = false;
       Class_typemap val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -12264,7 +12233,7 @@ public static class vx_core {
       Type_user output = this;
       boolean ischanged = false;
       Class_user val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
@@ -12493,7 +12462,7 @@ public static class vx_core {
       Type_value output = this;
       boolean ischanged = false;
       Class_value val = this;
-      vx_core.Type_msgblock msgblock = vx_core.t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);
+      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }

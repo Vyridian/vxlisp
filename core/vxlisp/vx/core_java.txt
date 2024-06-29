@@ -232,6 +232,25 @@
     T output = (T)(type.vx_type());
     return output;
   }
+ 
+  // vx_any_first_from_list_fn(generic_any_1, list, fn_any)
+  public static <T extends Core.Type_any> T vx_any_first_from_list_fn(
+    final T generic_any_1,
+    final Core.Type_list list,
+    final Function<Core.Type_any, T> fn_any
+  ) {
+				T output = Core.f_empty(generic_any_1);
+				List<Core.Type_any> listany = list.vx_list();
+				for (Core.Type_any  any : listany) {
+				  T tany = Core.f_any_from_any(generic_any_1, any);
+				  T val = fn_any.apply(tany);
+				  if (val != null) {
+				    output = val;
+				    break;
+				  }
+				}
+    return output;
+  }
 
   // vx_any_from_func(generic_any_1, func, args...)
   public static <T extends Core.Type_any> T vx_any_from_func(final T generic_any_1, final Core.Type_replfunc func, final Core.Type_any... args) {
@@ -391,6 +410,34 @@
 		  pkg.vx_p_funcmap = funcmap;
     mappackage.put(pkgname, pkg);
     packagemap.vx_p_map = Core.immutablemap(mappackage);
+  }
+
+  public static <T extends Core.Type_any> T vx_if_2(final T generic_any_1, final Core.Type_thenelselist thenelselist) {
+    T output = Core.f_empty(generic_any_1);
+    Core.Func_any_from_func fn_any = Core.vx_any_first_from_list_fn(Core.t_any_from_func, thenelselist, (any) -> {
+      Core.Func_any_from_func fnany = null;
+      if (any instanceof Core.Type_thenelse) {
+        Core.Type_thenelse thenelse = (Core.Type_thenelse)any;
+        Core.Type_string code = thenelse.code();
+        switch (code.vx_string()) {
+        case ":then":
+          Core.Func_boolean_from_func fn_cond = thenelse.fn_cond();
+          Core.Type_boolean cond = fn_cond.vx_boolean_from_func();
+          if (cond.vx_boolean() == true) {
+            fnany = thenelse.fn_any();
+          }
+          break;
+        case ":else":
+          fnany = thenelse.fn_any();
+          break;
+        }
+      }
+      return fnany;
+    });
+    if (fn_any != null) {
+      output = fn_any.vx_any_from_func(generic_any_1);
+    }
+    return output;
   }
 
   // vx_int_from_string(string)
@@ -573,6 +620,16 @@
     output.vx_p_code = Core.vx_new_string(code);
     output.vx_p_detail = detail;
     output.vx_p_severity = Core.c_msg_severe;
+    return output;
+  }
+
+  // vx_msgblock_from_copy_arrayval(msgblock, any...)
+  public static Core.Type_msgblock vx_msgblock_from_copy_arrayval(final Core.Type_any copy, final Object... vals) {
+    Core.Type_msgblock output = Core.e_msgblock;
+    Core.Type_msgblock copymsgblock = copy.vx_msgblock();
+    if (copymsgblock != null) {
+      output = copymsgblock;
+    }
     return output;
   }
 

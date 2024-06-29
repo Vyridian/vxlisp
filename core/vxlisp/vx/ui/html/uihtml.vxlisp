@@ -451,23 +451,25 @@
    (empty html/style))
   (else
    (let : html/style
-    [layout         : ui/layout    := (:layout           uistyle)
-     name           : string       := (:name             uistyle)
-     font           : ui/font      := (:font             uistyle)
-     pin            : ui/pin       := (:pin              uistyle)
-     pointpos       : ui/point     := (:pointpos         uistyle)
-     pointsize      : ui/point     := (:pointsize        uistyle)
-     pointrotate    : ui/point     := (:pointrotate      uistyle)
-     styletype      : ui/styletype := (:type             uistyle)
-     color-bkg      : string       := (:color-background uistyle)
-     color-border   : string       := (:color-border     uistyle)
-     color-font     : string       := (:color-font       uistyle)
-     color-hoverbkg : string       := (:color-hoverbkgrd uistyle)
-     cursor         : ui/cursor    := (:cursor           uistyle)
-     hidden         : boolean      := (:hidden           uistyle)
-     align          : ui/align     := (:align            uistyle)
-     scroll-x       : boolean      := (:scroll-x         uistyle)
-     scroll-y       : boolean      := (:scroll-y         uistyle)
+    [layout         : ui/layout    := (:layout         uistyle)
+     name           : string       := (:name           uistyle)
+     flip           : ui/flip      := (:flip           uistyle)
+     font           : ui/font      := (:font           uistyle)
+     pin            : ui/pin       := (:pin            uistyle)
+     pointorigin    : ui/point     := (:pointorigin    uistyle)
+     pointpos       : ui/point     := (:pointpos       uistyle)
+     pointsize      : ui/point     := (:pointsize      uistyle)
+     pointrotate    : ui/point     := (:pointrotate    uistyle)
+     styletype      : ui/styletype := (:type           uistyle)
+     color-bkg      : string       := (:color-bkg      uistyle)
+     color-bkghover : string       := (:color-bkghover uistyle)
+     color-border   : string       := (:color-border   uistyle)
+     color-font     : string       := (:color-font     uistyle)
+     cursor         : ui/cursor    := (:cursor         uistyle)
+     hidden         : boolean      := (:hidden         uistyle)
+     align          : ui/align     := (:align          uistyle)
+     scroll-x       : boolean      := (:scroll-x       uistyle)
+     scroll-y       : boolean      := (:scroll-y       uistyle)
      posx           : int          := (:x pointpos)
      posy           : int          := (:y pointpos)
      postype        : ui/pointtype := (:pointtype pointpos)
@@ -632,8 +634,8 @@
      hoverbkgrdcolor : string :=
       (if : string
        (then
-        (!= "" color-hoverbkg)
-        (string "#" color-hoverbkg)))
+        (!= "" color-bkghover)
+        (string "#" color-bkghover)))
      scursor : string :=
       (if : string
        (then
@@ -650,7 +652,7 @@
        (then
         (== align ui/align-right)
         "right"))
-     transform : string :=
+     transform-rotate : string :=
       (if : string
        (then (is-empty pointrotate) "")
        (else
@@ -658,12 +660,29 @@
          "rotate("
          (:x pointrotate)
          "deg)")))
+     transform-scale : string :=
+      (switch : string
+       flip
+       (case ui/flip-x  "scale(-1, 1)")
+       (case ui/flip-y  "scale( 1,-1)")
+       (case ui/flip-xy "scale(-1,-1)"))
+     transforms : stringlist :=
+      (stringlist transform-rotate transform-scale)
+     transform : string :=
+      (string<-stringlist-join
+       transforms " ")
      transformorigin : string :=
-      (if : string
-       (then (is-empty pointrotate) "")
-       (then
-        (== layout ui/layout-label)
-        "left top"))
+      (switch
+       pointorigin
+       (case ui/point-center      "center")
+       (case ui/point-lefttop     "left top")
+       (case ui/point-rightbottom "right bottom")
+       (else
+        (if : string
+         (then (is-empty pointrotate) "")
+         (then
+          (== layout ui/layout-label)
+          "left top"))))
      props : html/propmap :=
       (html/propmap
        :background-color bkgcolor

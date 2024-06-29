@@ -343,17 +343,6 @@
 (type msgblock : struct
  :properties [msgs      : msglist
               msgblocks : msgblocklist]
- :create
-  (native
-   :java
-    "public Type_msgblock vx_msgblock_from_copy_arrayval(final Core.Type_any copy, final Object... vals) {
-       Core.Type_msgblock output = Core.e_msgblock;
-       Core.Type_msgblock copymsgblock = copy.vx_msgblock();
-       if (copymsgblock != null) {
-         output = copymsgblock;
-       }
-       return output;
-     }")
  :doc "Block of Messages")
 
 (type msgblocklist : list
@@ -1878,8 +1867,9 @@
         break
       }
     }"
-  :java
-   "Core.Func_any_from_func fn_any = Core.Class_list.vx_any_first_from_list_fn(Core.t_any_from_func, thenelselist, (any) -> {
+  :java :auto
+  :java1
+   "Core.Func_any_from_func fn_any = Core.vx_any_first_from_list_fn(Core.t_any_from_func, thenelselist, (any) -> {
       Core.Func_any_from_func fnany = null;
       if (any instanceof Core.Type_thenelse) {
         Core.Type_thenelse thenelse = (Core.Type_thenelse)any;

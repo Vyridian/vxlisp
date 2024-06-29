@@ -109,183 +109,201 @@
    (empty html/style))
   (else
    (let : html/style
-    [layout           : ui/layout    := (:layout           uistyle)
-     name             : string       := (:name             uistyle)
-     pin              : ui/pin       := (:pin              uistyle)
-     pointpos         : ui/point     := (:pointpos         uistyle)
-     pointsize        : ui/point     := (:pointsize        uistyle)
-     styletype        : ui/styletype := (:type             uistyle)
-     color-background : string       := (:color-background uistyle)
-     color-hoverbkgrd : string       := (:color-hoverbkgrd uistyle)
-     posx             : int          := (:x pointpos)
-     posy             : int          := (:y pointpos)
-     sizex            : int          := (:x pointsize)
-     sizey            : int          := (:y pointsize)
-     stylename        : string       := (string-stylename<-name-styletype
-                                         name
-                                         styletype)
-     backgroundcolor  : string       := (if : string
-                                         (then
-                                          (!-empty color-background)
-                                          (string
-                                           "#"
-                                           color-background)))
-     position         : string       := (if : string
-                                         (then
-                                          (or
-                                           (== layout layout-app)
-                                           (== layout layout-background)
-                                           (== layout layout-main)
-                                           (== layout layout-navbar)
-                                           (== layout layout-parallax)
-                                           (== layout layout-statusbar))
-                                          "fixed")
-                                         (else "relative"))
-     top              : string       := (if : string
-                                         (then
-                                          (== pin ui/pin-expand)
-                                          (string
-                                           posy
-                                           "mm"))
-                                         (then
-                                          (== 0 posy)
-                                          "")
-                                         (else
-                                          (string
-                                           posy
-                                           "mm")))
-     bottom           : string       := (if : string
-                                         (then
-                                          (== pin ui/pin-expand)
-                                          "")
-                                         (then
-                                          (== pin ui/pin-bottom)
-                                          "0mm")
-                                         (then
-                                          (or
-                                           (== pin ui/pin-left)
-                                           (== pin ui/pin-center-v))
-                                          (string
-                                           sizey
-                                           "mm")))
-     left             : string       := (if : string
-                                         (then
-                                          (== pin ui/pin-expand)
-                                          "")
-                                         (then
-                                          (== pin ui/pin-bottom)
-                                          (string
-                                           posx
-                                           "mm"))
-                                         (then
-                                          (== 0 posx)
-                                          "")
-                                         (else
-                                          (string
-                                           posx
-                                           "mm")))
-     right            : string       := (if : string
-                                         (then
-                                          (== pin ui/pin-expand)
-                                          "")
-                                         (then
-                                          (or
-                                           (== pin ui/pin-top)
-                                           (== pin ui/pin-bottom)
-                                           (== pin ui/pin-center-v))
-                                          (string
-                                           sizex
-                                           "mm")))
-     height           : string       := (if : string
-                                         (then
-                                          (== pin ui/pin-expand)
-                                          "100%")
-                                         (then
-                                          (or
-                                           (== pin ui/pin-left)
-                                           (== pin ui/pin-right)
-                                           (== pin ui/pin-center-v))
-                                          "")
-                                         (then
-                                          (== 0 sizey)
-                                          "")
-                                         (else
-                                          (string
-                                           sizey
-                                           "mm")))
-     width            : string       := (if : string
-                                         (then
-                                          (== pin ui/pin-expand)
-                                          "100%")
-                                         (then
-                                          (or
-                                           (== pin ui/pin-top)
-                                           (== pin ui/pin-bottom)
-                                           (== pin ui/pin-center-v))
-                                          "")
-                                         (then
-                                          (== 0 sizex)
-                                          "")
-                                         (else
-                                          (string
-                                           sizex
-                                           "mm")))
-     display          : string       := (if : string
-                                         (then
-                                          (or
-                                           (== layout ui/layout-flow-columns)
-                                           (== layout ui/layout-flow-rows))
-                                           "flex"))
-     flexflow         : string       := (if : string
-                                         (then
-                                          (== layout ui/layout-flow-columns)
-                                          "column wrap")
-                                         (then
-                                          (== layout ui/layout-flow-rows)
-                                          "row wrap"))
-     aligncontent     : string       := (if : string
-                                         (then
-                                          (or
-                                           (== layout ui/layout-flow-columns)
-                                           (== layout ui/layout-flow-rows))
-                                           "flex-start"))
-     gap              : string       := (if : string
-                                         (then
-                                          (or
-                                           (== layout ui/layout-flow-columns)
-                                           (== layout ui/layout-flow-rows))
-                                           "1mm"))
-     overflowx        : string       := (if : string
-                                         (then
-                                          (== layout ui/layout-flow-rows)
-                                          "scroll"))
-     overflowy        : string       := (if : string
-                                         (then
-                                          (== layout ui/layout-flow-columns)
-                                          "scroll"))
-     hoverbkgrdcolor  : string       := (if : string
-                                         (then
-                                          (!= "" color-hoverbkgrd)
-                                          (string "#" color-hoverbkgrd)))
-     props            : html/propmap := (html/propmap
-                                         :background-color backgroundcolor
-                                         :display          display
-                                         :flex-flow        flexflow
-                                         :align-content    aligncontent
-                                         :gap              gap
-                                         :position         position
-                                         :top              top
-                                         :bottom           bottom
-                                         :left             left
-                                         :right            right
-                                         :height           height
-                                         :width            width
-                                         :overflow-x       overflowx
-                                         :overflow-y       overflowy)
-     hoverprops       : html/propmap := (html/propmap
-                                         :background-color hoverbkgrdcolor)
-     subprops         : html/subpropmap := (html/subpropmap
-                                            "&:hover" hoverprops)]
+    [layout         : ui/layout    := (:layout         uistyle)
+     name           : string       := (:name           uistyle)
+     pin            : ui/pin       := (:pin            uistyle)
+     pointpos       : ui/point     := (:pointpos       uistyle)
+     pointsize      : ui/point     := (:pointsize      uistyle)
+     styletype      : ui/styletype := (:type           uistyle)
+     color-bkg      : string       := (:color-bkg      uistyle)
+     color-bkghover : string       := (:color-bkghover uistyle)
+     posx           : int          := (:x pointpos)
+     posy           : int          := (:y pointpos)
+     sizex          : int          := (:x pointsize)
+     sizey          : int          := (:y pointsize)
+     stylename : string :=
+      (string-stylename<-name-styletype
+       name styletype)
+     backgroundcolor : string :=
+      (if : string
+       (then
+        (!-empty color-bkg)
+        (string
+         "#"
+         color-bkg)))
+     position : string :=
+      (if : string
+       (then
+        (or
+         (== layout layout-app)
+         (== layout layout-background)
+         (== layout layout-main)
+         (== layout layout-navbar)
+         (== layout layout-parallax)
+         (== layout layout-statusbar))
+        "fixed")
+       (else "relative"))
+     top : string :=
+      (if : string
+       (then
+        (== pin ui/pin-expand)
+        (string
+         posy
+         "mm"))
+       (then
+        (== 0 posy)
+        "")
+       (else
+        (string
+         posy
+         "mm")))
+     bottom : string :=
+      (if : string
+       (then
+        (== pin ui/pin-expand)
+        "")
+       (then
+        (== pin ui/pin-bottom)
+        "0mm")
+       (then
+        (or
+         (== pin ui/pin-left)
+         (== pin ui/pin-center-v))
+        (string
+         sizey
+         "mm")))
+     left : string :=
+      (if : string
+       (then
+        (== pin ui/pin-expand)
+        "")
+       (then
+        (== pin ui/pin-bottom)
+        (string
+         posx
+         "mm"))
+       (then
+        (== 0 posx)
+        "")
+       (else
+        (string
+         posx
+         "mm")))
+     right : string :=
+      (if : string
+       (then
+        (== pin ui/pin-expand)
+        "")
+       (then
+        (or
+         (== pin ui/pin-top)
+         (== pin ui/pin-bottom)
+         (== pin ui/pin-center-v))
+        (string
+         sizex
+         "mm")))
+     height : string :=
+      (if : string
+       (then
+        (== pin ui/pin-expand)
+        "100%")
+       (then
+        (or
+         (== pin ui/pin-left)
+         (== pin ui/pin-right)
+         (== pin ui/pin-center-v))
+        "")
+       (then
+        (== 0 sizey)
+        "")
+       (else
+        (string
+         sizey
+         "mm")))
+     width : string :=
+      (if : string
+       (then
+        (== pin ui/pin-expand)
+        "100%")
+       (then
+        (or
+         (== pin ui/pin-top)
+         (== pin ui/pin-bottom)
+         (== pin ui/pin-center-v))
+        "")
+       (then
+        (== 0 sizex)
+        "")
+       (else
+        (string
+         sizex
+         "mm")))
+     display : string :=
+      (if : string
+       (then
+        (or
+         (== layout ui/layout-flow-columns)
+         (== layout ui/layout-flow-rows))
+         "flex"))
+     flexflow : string :=
+      (if : string
+       (then
+        (== layout ui/layout-flow-columns)
+        "column wrap")
+       (then
+        (== layout ui/layout-flow-rows)
+        "row wrap"))
+     aligncontent : string :=
+      (if : string
+       (then
+        (or
+         (== layout ui/layout-flow-columns)
+         (== layout ui/layout-flow-rows))
+         "flex-start"))
+     gap : string :=
+      (if : string
+       (then
+        (or
+         (== layout ui/layout-flow-columns)
+         (== layout ui/layout-flow-rows))
+         "1mm"))
+     overflowx : string :=
+      (if : string
+       (then
+        (== layout ui/layout-flow-rows)
+        "scroll"))
+     overflowy : string :=
+      (if : string
+       (then
+        (== layout ui/layout-flow-columns)
+        "scroll"))
+     hoverbkgcolor : string :=
+      (if : string
+       (then
+        (!= "" color-bkghover)
+        (string "#" color-bkghover)))
+     props : html/propmap :=
+      (html/propmap
+       :background-color backgroundcolor
+       :display          display
+       :flex-flow        flexflow
+       :align-content    aligncontent
+       :gap              gap
+       :position         position
+       :top              top
+       :bottom           bottom
+       :left             left
+       :right            right
+       :height           height
+       :width            width
+       :overflow-x       overflowx
+       :overflow-y       overflowy)
+     hoverprops : html/propmap :=
+      (html/propmap
+       :background-color hoverbkgcolor)
+     subprops : html/subpropmap :=
+      (html/subpropmap
+       "&:hover" hoverprops)]
     (html/style
      :name  stylename
      :props props))))

@@ -23,7 +23,7 @@ func ListCaptureFromFunc(fnc *vxfunc, listinnerarg []string, path string) []stri
 		for _, arg := range listarg {
 			subpath := path + "/:arg" + arg.name
 			switch arg.name {
-			case "params":
+			case "parameters":
 				subargvalue := arg.value
 				listsubsubarg := ListArgFromValue(subargvalue)
 				for _, subsubarg := range listsubsubarg {

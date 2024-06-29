@@ -39547,7 +39547,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "5% 7/137")
+                  :text "4% 7/144")
                  (p
                   :style
                    (style
@@ -39555,7 +39555,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/28")
+                  :text "0% 0/29")
                  (p
                   :style
                    (style
@@ -39563,7 +39563,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "0% 0/41")
+                  :text "0% 0/47")
                  (p
                   :style
                    (style
@@ -39579,7 +39579,7 @@ ab
                     :props
                      (propmap
                       :width "90px"))
-                  :text "66% 91/137")
+                  :text "65% 95/144")
                  (p
                   :style
                    (style

@@ -3280,10 +3280,14 @@ namespace vx_ui_html_uihtml {
                 vx_core::vx_ref_plus(layout);
                 vx_core::Type_string name = uistyle->name();
                 vx_core::vx_ref_plus(name);
+                vx_ui_ui::Type_flip flip = uistyle->flip();
+                vx_core::vx_ref_plus(flip);
                 vx_ui_ui::Type_font font = uistyle->font();
                 vx_core::vx_ref_plus(font);
                 vx_ui_ui::Type_pin pin = uistyle->pin();
                 vx_core::vx_ref_plus(pin);
+                vx_ui_ui::Type_point pointorigin = uistyle->pointorigin();
+                vx_core::vx_ref_plus(pointorigin);
                 vx_ui_ui::Type_point pointpos = uistyle->pointpos();
                 vx_core::vx_ref_plus(pointpos);
                 vx_ui_ui::Type_point pointsize = uistyle->pointsize();
@@ -3292,14 +3296,14 @@ namespace vx_ui_html_uihtml {
                 vx_core::vx_ref_plus(pointrotate);
                 vx_ui_ui::Type_styletype styletype = uistyle->type();
                 vx_core::vx_ref_plus(styletype);
-                vx_core::Type_string color_bkg = uistyle->color_background();
+                vx_core::Type_string color_bkg = uistyle->color_bkg();
                 vx_core::vx_ref_plus(color_bkg);
+                vx_core::Type_string color_bkghover = uistyle->color_bkghover();
+                vx_core::vx_ref_plus(color_bkghover);
                 vx_core::Type_string color_border = uistyle->color_border();
                 vx_core::vx_ref_plus(color_border);
                 vx_core::Type_string color_font = uistyle->color_font();
                 vx_core::vx_ref_plus(color_font);
-                vx_core::Type_string color_hoverbkg = uistyle->color_hoverbkgrd();
-                vx_core::vx_ref_plus(color_hoverbkg);
                 vx_ui_ui::Type_cursor cursor = uistyle->cursor();
                 vx_core::vx_ref_plus(cursor);
                 vx_core::Type_boolean hidden = uistyle->hidden();
@@ -3992,16 +3996,16 @@ namespace vx_ui_html_uihtml {
                   vx_core::t_string,
                   vx_core::vx_new(vx_core::t_thenelselist, {
                     vx_core::f_then(
-                      vx_core::t_boolean_from_func->vx_fn_new({color_hoverbkg}, [color_hoverbkg]() {
-                        vx_core::Type_boolean output_1 = vx_core::f_ne(vx_core::vx_new_string(""), color_hoverbkg);
+                      vx_core::t_boolean_from_func->vx_fn_new({color_bkghover}, [color_bkghover]() {
+                        vx_core::Type_boolean output_1 = vx_core::f_ne(vx_core::vx_new_string(""), color_bkghover);
                         return output_1;
                       }),
-                      vx_core::t_any_from_func->vx_fn_new({color_hoverbkg}, [color_hoverbkg]() {
+                      vx_core::t_any_from_func->vx_fn_new({color_bkghover}, [color_bkghover]() {
                         vx_core::Type_string output_1 = vx_core::f_new(
                           vx_core::t_string,
                           vx_core::vx_new(vx_core::t_anylist, {
                             vx_core::vx_new_string("#"),
-                            color_hoverbkg
+                            color_bkghover
                           })
                         );
                         return output_1;
@@ -4074,7 +4078,7 @@ namespace vx_ui_html_uihtml {
                   })
                 );
                 vx_core::vx_ref_plus(textalign);
-                vx_core::Type_string transform = vx_core::f_if_2(
+                vx_core::Type_string transform_rotate = vx_core::f_if_2(
                   vx_core::t_string,
                   vx_core::vx_new(vx_core::t_thenelselist, {
                     vx_core::f_then(
@@ -4102,30 +4106,100 @@ namespace vx_ui_html_uihtml {
                     )
                   })
                 );
-                vx_core::vx_ref_plus(transform);
-                vx_core::Type_string transformorigin = vx_core::f_if_2(
+                vx_core::vx_ref_plus(transform_rotate);
+                vx_core::Type_string transform_scale = vx_core::f_switch(
                   vx_core::t_string,
+                  flip,
                   vx_core::vx_new(vx_core::t_thenelselist, {
-                    vx_core::f_then(
-                      vx_core::t_boolean_from_func->vx_fn_new({pointrotate}, [pointrotate]() {
-                        vx_core::Type_boolean output_1 = vx_core::f_is_empty_1(pointrotate);
-                        return output_1;
-                      }),
+                    vx_core::f_case_1(
+                      vx_ui_ui::c_flip_x,
                       vx_core::t_any_from_func->vx_fn_new({}, []() {
-                        vx_core::Type_string output_1 = vx_core::vx_new_string("");
+                        vx_core::Type_string output_1 = vx_core::vx_new_string("scale(-1, 1)");
                         return output_1;
                       })
                     ),
-                    vx_core::f_then(
-                      vx_core::t_boolean_from_func->vx_fn_new({layout}, [layout]() {
-                        vx_core::Type_boolean output_1 = vx_core::f_eqeq(
-                          layout,
-                          vx_ui_ui::c_layout_label
-                        );
+                    vx_core::f_case_1(
+                      vx_ui_ui::c_flip_y,
+                      vx_core::t_any_from_func->vx_fn_new({}, []() {
+                        vx_core::Type_string output_1 = vx_core::vx_new_string("scale( 1,-1)");
                         return output_1;
-                      }),
+                      })
+                    ),
+                    vx_core::f_case_1(
+                      vx_ui_ui::c_flip_xy,
+                      vx_core::t_any_from_func->vx_fn_new({}, []() {
+                        vx_core::Type_string output_1 = vx_core::vx_new_string("scale(-1,-1)");
+                        return output_1;
+                      })
+                    )
+                  })
+                );
+                vx_core::vx_ref_plus(transform_scale);
+                vx_core::Type_stringlist transforms = vx_core::f_new(
+                  vx_core::t_stringlist,
+                  vx_core::vx_new(vx_core::t_anylist, {
+                    transform_rotate,
+                    transform_scale
+                  })
+                );
+                vx_core::vx_ref_plus(transforms);
+                vx_core::Type_string transform = vx_type::f_string_from_stringlist_join(transforms, vx_core::vx_new_string(" "));
+                vx_core::vx_ref_plus(transform);
+                vx_core::Type_string transformorigin = vx_core::f_switch(
+                  vx_core::t_string,
+                  pointorigin,
+                  vx_core::vx_new(vx_core::t_thenelselist, {
+                    vx_core::f_case_1(
+                      vx_ui_ui::c_point_center,
+                      vx_core::t_any_from_func->vx_fn_new({}, []() {
+                        vx_core::Type_string output_1 = vx_core::vx_new_string("center");
+                        return output_1;
+                      })
+                    ),
+                    vx_core::f_case_1(
+                      vx_ui_ui::c_point_lefttop,
                       vx_core::t_any_from_func->vx_fn_new({}, []() {
                         vx_core::Type_string output_1 = vx_core::vx_new_string("left top");
+                        return output_1;
+                      })
+                    ),
+                    vx_core::f_case_1(
+                      vx_ui_ui::c_point_rightbottom,
+                      vx_core::t_any_from_func->vx_fn_new({}, []() {
+                        vx_core::Type_string output_1 = vx_core::vx_new_string("right bottom");
+                        return output_1;
+                      })
+                    ),
+                    vx_core::f_else(
+                      vx_core::t_any_from_func->vx_fn_new({pointrotate, layout}, [pointrotate, layout]() {
+                        vx_core::Type_string output_1 = vx_core::f_if_2(
+                          vx_core::t_string,
+                          vx_core::vx_new(vx_core::t_thenelselist, {
+                            vx_core::f_then(
+                              vx_core::t_boolean_from_func->vx_fn_new({pointrotate}, [pointrotate]() {
+                                vx_core::Type_boolean output_1 = vx_core::f_is_empty_1(pointrotate);
+                                return output_1;
+                              }),
+                              vx_core::t_any_from_func->vx_fn_new({}, []() {
+                                vx_core::Type_string output_1 = vx_core::vx_new_string("");
+                                return output_1;
+                              })
+                            ),
+                            vx_core::f_then(
+                              vx_core::t_boolean_from_func->vx_fn_new({layout}, [layout]() {
+                                vx_core::Type_boolean output_1 = vx_core::f_eqeq(
+                                  layout,
+                                  vx_ui_ui::c_layout_label
+                                );
+                                return output_1;
+                              }),
+                              vx_core::t_any_from_func->vx_fn_new({}, []() {
+                                vx_core::Type_string output_1 = vx_core::vx_new_string("left top");
+                                return output_1;
+                              })
+                            )
+                          })
+                        );
                         return output_1;
                       })
                     )
@@ -4228,7 +4302,7 @@ namespace vx_ui_html_uihtml {
                     substylelist
                   })
                 );
-                vx_core::vx_release_one_except({layout, name, font, pin, pointpos, pointsize, pointrotate, styletype, color_bkg, color_border, color_font, color_hoverbkg, cursor, hidden, align, scroll_x, scroll_y, posx, posy, postype, sizex, sizey, sizetype, stylename, bkgcolor, borderwidth, bordercolor, borderstyle, fontcolor, position, top, bottom, left, right, height, width, display, sfont, gap, overflowx, overflowy, hoverbkgrdcolor, scursor, textalign, transform, transformorigin, props, hoverprops, substylelist}, output_1);
+                vx_core::vx_release_one_except({layout, name, flip, font, pin, pointorigin, pointpos, pointsize, pointrotate, styletype, color_bkg, color_bkghover, color_border, color_font, cursor, hidden, align, scroll_x, scroll_y, posx, posy, postype, sizex, sizey, sizetype, stylename, bkgcolor, borderwidth, bordercolor, borderstyle, fontcolor, position, top, bottom, left, right, height, width, display, sfont, gap, overflowx, overflowy, hoverbkgrdcolor, scursor, textalign, transform_rotate, transform_scale, transforms, transform, transformorigin, props, hoverprops, substylelist}, output_1);
                 return output_1;
               })
             );

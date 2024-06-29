@@ -493,6 +493,89 @@ namespace vx_ui_ui {
 
   //}
 
+  // (type flip)
+  // class Class_flip {
+    Abstract_flip::~Abstract_flip() {}
+
+    Class_flip::Class_flip() : Abstract_flip::Abstract_flip() {
+      vx_core::refcount += 1;
+    }
+
+    Class_flip::~Class_flip() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+      vx_core::vx_release_one({
+        
+      });
+    }
+
+    // vx_get_any(key)
+    vx_core::Type_any Class_flip::vx_get_any(vx_core::Type_string key) const {
+      vx_core::Type_any output = vx_core::e_any;
+      std::string skey = key->vx_string();
+      if (false) {
+      }
+      vx_core::vx_release_except(key, output);
+      return output;
+    }
+
+    // vx_map()
+    vx_core::vx_Type_mapany Class_flip::vx_map() const {
+      vx_core::vx_Type_mapany output;
+      return output;
+    }
+
+    vx_core::Type_any Class_flip::vx_new(vx_core::vx_Type_listany vals) const {
+      return this->vx_copy(vx_ui_ui::e_flip, vals);
+    }
+
+    vx_core::Type_any Class_flip::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_ui_ui::Type_flip output = vx_ui_ui::e_flip;
+      bool ischanged = false;
+      if (copyval->vx_p_constdef != NULL) {
+        ischanged = true;
+      }
+      vx_ui_ui::Type_flip val = vx_core::vx_any_from_any(vx_ui_ui::t_flip, copyval);
+      output = val;
+      vx_core::Type_msgblock msgblock = vx_core::vx_msgblock_from_copy_listval(val->vx_msgblock(), vals);
+      if (msgblock != vx_core::e_msgblock) {
+        output->vx_p_msgblock = msgblock;
+        vx_core::vx_reserve(msgblock);
+      }
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_msgblock Class_flip::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany vx_ui_ui::Class_flip::vx_dispose() {return vx_core::emptylistany;}
+    vx_core::Type_any Class_flip::vx_empty() const {return vx_ui_ui::e_flip;}
+    vx_core::Type_any Class_flip::vx_type() const {return vx_ui_ui::t_flip;}
+
+    vx_core::Type_typedef Class_flip::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/ui/ui", // pkgname
+        "flip", // name
+        ":struct", // extends
+        vx_core::e_typelist, // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_flip::vx_constdef() const {return this->vx_p_constdef;}
+
+
+  //}
+
   // (type font)
   // class Class_font {
     Abstract_font::~Abstract_font() {}
@@ -3630,17 +3713,19 @@ namespace vx_ui_ui {
         this->vx_p_align,
         this->vx_p_boundsmargin,
         this->vx_p_boundspadding,
-        this->vx_p_color_background,
+        this->vx_p_color_bkg,
+        this->vx_p_color_bkghover,
         this->vx_p_color_border,
         this->vx_p_color_font,
-        this->vx_p_color_hoverbkgrd,
         this->vx_p_cursor,
+        this->vx_p_flip,
         this->vx_p_font,
         this->vx_p_hidden,
-        this->vx_p_image_background,
+        this->vx_p_image_bkg,
         this->vx_p_layout,
         this->vx_p_type,
         this->vx_p_pin,
+        this->vx_p_pointorigin,
         this->vx_p_pointpos,
         this->vx_p_pointrotate,
         this->vx_p_pointsize,
@@ -3685,9 +3770,18 @@ namespace vx_ui_ui {
       return output;
     }
 
-    // color_background()
-    vx_core::Type_string Class_style::color_background() const {
-      vx_core::Type_string output = this->vx_p_color_background;
+    // color_bkg()
+    vx_core::Type_string Class_style::color_bkg() const {
+      vx_core::Type_string output = this->vx_p_color_bkg;
+      if (!output) {
+        output = vx_core::e_string;
+      }
+      return output;
+    }
+
+    // color_bkghover()
+    vx_core::Type_string Class_style::color_bkghover() const {
+      vx_core::Type_string output = this->vx_p_color_bkghover;
       if (!output) {
         output = vx_core::e_string;
       }
@@ -3712,20 +3806,20 @@ namespace vx_ui_ui {
       return output;
     }
 
-    // color_hoverbkgrd()
-    vx_core::Type_string Class_style::color_hoverbkgrd() const {
-      vx_core::Type_string output = this->vx_p_color_hoverbkgrd;
-      if (!output) {
-        output = vx_core::e_string;
-      }
-      return output;
-    }
-
     // cursor()
     vx_ui_ui::Type_cursor Class_style::cursor() const {
       vx_ui_ui::Type_cursor output = this->vx_p_cursor;
       if (!output) {
         output = vx_ui_ui::e_cursor;
+      }
+      return output;
+    }
+
+    // flip()
+    vx_ui_ui::Type_flip Class_style::flip() const {
+      vx_ui_ui::Type_flip output = this->vx_p_flip;
+      if (!output) {
+        output = vx_ui_ui::e_flip;
       }
       return output;
     }
@@ -3748,9 +3842,9 @@ namespace vx_ui_ui {
       return output;
     }
 
-    // image_background()
-    vx_ui_ui::Type_image Class_style::image_background() const {
-      vx_ui_ui::Type_image output = this->vx_p_image_background;
+    // image_bkg()
+    vx_ui_ui::Type_image Class_style::image_bkg() const {
+      vx_ui_ui::Type_image output = this->vx_p_image_bkg;
       if (!output) {
         output = vx_ui_ui::e_image;
       }
@@ -3780,6 +3874,15 @@ namespace vx_ui_ui {
       vx_ui_ui::Type_pin output = this->vx_p_pin;
       if (!output) {
         output = vx_ui_ui::e_pin;
+      }
+      return output;
+    }
+
+    // pointorigin()
+    vx_ui_ui::Type_point Class_style::pointorigin() const {
+      vx_ui_ui::Type_point output = this->vx_p_pointorigin;
+      if (!output) {
+        output = vx_ui_ui::e_point;
       }
       return output;
     }
@@ -3842,28 +3945,32 @@ namespace vx_ui_ui {
         output = this->boundsmargin();
       } else if (skey == ":boundspadding") {
         output = this->boundspadding();
-      } else if (skey == ":color-background") {
-        output = this->color_background();
+      } else if (skey == ":color-bkg") {
+        output = this->color_bkg();
+      } else if (skey == ":color-bkghover") {
+        output = this->color_bkghover();
       } else if (skey == ":color-border") {
         output = this->color_border();
       } else if (skey == ":color-font") {
         output = this->color_font();
-      } else if (skey == ":color-hoverbkgrd") {
-        output = this->color_hoverbkgrd();
       } else if (skey == ":cursor") {
         output = this->cursor();
+      } else if (skey == ":flip") {
+        output = this->flip();
       } else if (skey == ":font") {
         output = this->font();
       } else if (skey == ":hidden") {
         output = this->hidden();
-      } else if (skey == ":image-background") {
-        output = this->image_background();
+      } else if (skey == ":image-bkg") {
+        output = this->image_bkg();
       } else if (skey == ":layout") {
         output = this->layout();
       } else if (skey == ":type") {
         output = this->type();
       } else if (skey == ":pin") {
         output = this->pin();
+      } else if (skey == ":pointorigin") {
+        output = this->pointorigin();
       } else if (skey == ":pointpos") {
         output = this->pointpos();
       } else if (skey == ":pointrotate") {
@@ -3886,17 +3993,19 @@ namespace vx_ui_ui {
       output[":align"] = this->align();
       output[":boundsmargin"] = this->boundsmargin();
       output[":boundspadding"] = this->boundspadding();
-      output[":color-background"] = this->color_background();
+      output[":color-bkg"] = this->color_bkg();
+      output[":color-bkghover"] = this->color_bkghover();
       output[":color-border"] = this->color_border();
       output[":color-font"] = this->color_font();
-      output[":color-hoverbkgrd"] = this->color_hoverbkgrd();
       output[":cursor"] = this->cursor();
+      output[":flip"] = this->flip();
       output[":font"] = this->font();
       output[":hidden"] = this->hidden();
-      output[":image-background"] = this->image_background();
+      output[":image-bkg"] = this->image_bkg();
       output[":layout"] = this->layout();
       output[":type"] = this->type();
       output[":pin"] = this->pin();
+      output[":pointorigin"] = this->pointorigin();
       output[":pointpos"] = this->pointpos();
       output[":pointrotate"] = this->pointrotate();
       output[":pointsize"] = this->pointsize();
@@ -3922,17 +4031,19 @@ namespace vx_ui_ui {
       vx_ui_ui::Type_align vx_p_align = val->align();
       vx_ui_ui::Type_bounds vx_p_boundsmargin = val->boundsmargin();
       vx_ui_ui::Type_bounds vx_p_boundspadding = val->boundspadding();
-      vx_core::Type_string vx_p_color_background = val->color_background();
+      vx_core::Type_string vx_p_color_bkg = val->color_bkg();
+      vx_core::Type_string vx_p_color_bkghover = val->color_bkghover();
       vx_core::Type_string vx_p_color_border = val->color_border();
       vx_core::Type_string vx_p_color_font = val->color_font();
-      vx_core::Type_string vx_p_color_hoverbkgrd = val->color_hoverbkgrd();
       vx_ui_ui::Type_cursor vx_p_cursor = val->cursor();
+      vx_ui_ui::Type_flip vx_p_flip = val->flip();
       vx_ui_ui::Type_font vx_p_font = val->font();
       vx_core::Type_boolean vx_p_hidden = val->hidden();
-      vx_ui_ui::Type_image vx_p_image_background = val->image_background();
+      vx_ui_ui::Type_image vx_p_image_bkg = val->image_bkg();
       vx_ui_ui::Type_layout vx_p_layout = val->layout();
       vx_ui_ui::Type_styletype vx_p_type = val->type();
       vx_ui_ui::Type_pin vx_p_pin = val->pin();
+      vx_ui_ui::Type_point vx_p_pointorigin = val->pointorigin();
       vx_ui_ui::Type_point vx_p_pointpos = val->pointpos();
       vx_ui_ui::Type_point vx_p_pointrotate = val->pointrotate();
       vx_ui_ui::Type_point vx_p_pointsize = val->pointsize();
@@ -3960,27 +4071,31 @@ namespace vx_ui_ui {
             key = testkey;
           } else if (testkey == ":boundspadding") {
             key = testkey;
-          } else if (testkey == ":color-background") {
+          } else if (testkey == ":color-bkg") {
+            key = testkey;
+          } else if (testkey == ":color-bkghover") {
             key = testkey;
           } else if (testkey == ":color-border") {
             key = testkey;
           } else if (testkey == ":color-font") {
             key = testkey;
-          } else if (testkey == ":color-hoverbkgrd") {
-            key = testkey;
           } else if (testkey == ":cursor") {
+            key = testkey;
+          } else if (testkey == ":flip") {
             key = testkey;
           } else if (testkey == ":font") {
             key = testkey;
           } else if (testkey == ":hidden") {
             key = testkey;
-          } else if (testkey == ":image-background") {
+          } else if (testkey == ":image-bkg") {
             key = testkey;
           } else if (testkey == ":layout") {
             key = testkey;
           } else if (testkey == ":type") {
             key = testkey;
           } else if (testkey == ":pin") {
+            key = testkey;
+          } else if (testkey == ":pointorigin") {
             key = testkey;
           } else if (testkey == ":pointpos") {
             key = testkey;
@@ -4034,13 +4149,22 @@ namespace vx_ui_ui {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :boundspadding " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
-          } else if (key == ":color-background") {
-            if (vx_p_color_background == valsub) {
+          } else if (key == ":color-bkg") {
+            if (vx_p_color_bkg == valsub) {
             } else if (valsubtype == vx_core::t_string) {
               ischanged = true;
-              vx_p_color_background = vx_core::vx_any_from_any(vx_core::t_string, valsub);
+              vx_p_color_bkg = vx_core::vx_any_from_any(vx_core::t_string, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :color-background " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :color-bkg " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              msgblock = vx_core::vx_copy(msgblock, {msg});
+            }
+          } else if (key == ":color-bkghover") {
+            if (vx_p_color_bkghover == valsub) {
+            } else if (valsubtype == vx_core::t_string) {
+              ischanged = true;
+              vx_p_color_bkghover = vx_core::vx_any_from_any(vx_core::t_string, valsub);
+            } else {
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :color-bkghover " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":color-border") {
@@ -4061,15 +4185,6 @@ namespace vx_ui_ui {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :color-font " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
-          } else if (key == ":color-hoverbkgrd") {
-            if (vx_p_color_hoverbkgrd == valsub) {
-            } else if (valsubtype == vx_core::t_string) {
-              ischanged = true;
-              vx_p_color_hoverbkgrd = vx_core::vx_any_from_any(vx_core::t_string, valsub);
-            } else {
-              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :color-hoverbkgrd " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
-              msgblock = vx_core::vx_copy(msgblock, {msg});
-            }
           } else if (key == ":cursor") {
             if (vx_p_cursor == valsub) {
             } else if (valsubtype == vx_ui_ui::t_cursor) {
@@ -4077,6 +4192,15 @@ namespace vx_ui_ui {
               vx_p_cursor = vx_core::vx_any_from_any(vx_ui_ui::t_cursor, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :cursor " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              msgblock = vx_core::vx_copy(msgblock, {msg});
+            }
+          } else if (key == ":flip") {
+            if (vx_p_flip == valsub) {
+            } else if (valsubtype == vx_ui_ui::t_flip) {
+              ischanged = true;
+              vx_p_flip = vx_core::vx_any_from_any(vx_ui_ui::t_flip, valsub);
+            } else {
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :flip " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":font") {
@@ -4097,13 +4221,13 @@ namespace vx_ui_ui {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :hidden " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
-          } else if (key == ":image-background") {
-            if (vx_p_image_background == valsub) {
+          } else if (key == ":image-bkg") {
+            if (vx_p_image_bkg == valsub) {
             } else if (valsubtype == vx_ui_ui::t_image) {
               ischanged = true;
-              vx_p_image_background = vx_core::vx_any_from_any(vx_ui_ui::t_image, valsub);
+              vx_p_image_bkg = vx_core::vx_any_from_any(vx_ui_ui::t_image, valsub);
             } else {
-              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :image-background " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :image-bkg " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":layout") {
@@ -4131,6 +4255,15 @@ namespace vx_ui_ui {
               vx_p_pin = vx_core::vx_any_from_any(vx_ui_ui::t_pin, valsub);
             } else {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :pin " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
+              msgblock = vx_core::vx_copy(msgblock, {msg});
+            }
+          } else if (key == ":pointorigin") {
+            if (vx_p_pointorigin == valsub) {
+            } else if (valsubtype == vx_ui_ui::t_point) {
+              ischanged = true;
+              vx_p_pointorigin = vx_core::vx_any_from_any(vx_ui_ui::t_point, valsub);
+            } else {
+              vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new style :pointorigin " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
           } else if (key == ":pointpos") {
@@ -4215,12 +4348,19 @@ namespace vx_ui_ui {
           output->vx_p_boundspadding = vx_p_boundspadding;
           vx_core::vx_reserve(vx_p_boundspadding);
         }
-        if (output->vx_p_color_background != vx_p_color_background) {
-          if (output->vx_p_color_background) {
-            vx_core::vx_release_one(output->vx_p_color_background);
+        if (output->vx_p_color_bkg != vx_p_color_bkg) {
+          if (output->vx_p_color_bkg) {
+            vx_core::vx_release_one(output->vx_p_color_bkg);
           }
-          output->vx_p_color_background = vx_p_color_background;
-          vx_core::vx_reserve(vx_p_color_background);
+          output->vx_p_color_bkg = vx_p_color_bkg;
+          vx_core::vx_reserve(vx_p_color_bkg);
+        }
+        if (output->vx_p_color_bkghover != vx_p_color_bkghover) {
+          if (output->vx_p_color_bkghover) {
+            vx_core::vx_release_one(output->vx_p_color_bkghover);
+          }
+          output->vx_p_color_bkghover = vx_p_color_bkghover;
+          vx_core::vx_reserve(vx_p_color_bkghover);
         }
         if (output->vx_p_color_border != vx_p_color_border) {
           if (output->vx_p_color_border) {
@@ -4236,19 +4376,19 @@ namespace vx_ui_ui {
           output->vx_p_color_font = vx_p_color_font;
           vx_core::vx_reserve(vx_p_color_font);
         }
-        if (output->vx_p_color_hoverbkgrd != vx_p_color_hoverbkgrd) {
-          if (output->vx_p_color_hoverbkgrd) {
-            vx_core::vx_release_one(output->vx_p_color_hoverbkgrd);
-          }
-          output->vx_p_color_hoverbkgrd = vx_p_color_hoverbkgrd;
-          vx_core::vx_reserve(vx_p_color_hoverbkgrd);
-        }
         if (output->vx_p_cursor != vx_p_cursor) {
           if (output->vx_p_cursor) {
             vx_core::vx_release_one(output->vx_p_cursor);
           }
           output->vx_p_cursor = vx_p_cursor;
           vx_core::vx_reserve(vx_p_cursor);
+        }
+        if (output->vx_p_flip != vx_p_flip) {
+          if (output->vx_p_flip) {
+            vx_core::vx_release_one(output->vx_p_flip);
+          }
+          output->vx_p_flip = vx_p_flip;
+          vx_core::vx_reserve(vx_p_flip);
         }
         if (output->vx_p_font != vx_p_font) {
           if (output->vx_p_font) {
@@ -4264,12 +4404,12 @@ namespace vx_ui_ui {
           output->vx_p_hidden = vx_p_hidden;
           vx_core::vx_reserve(vx_p_hidden);
         }
-        if (output->vx_p_image_background != vx_p_image_background) {
-          if (output->vx_p_image_background) {
-            vx_core::vx_release_one(output->vx_p_image_background);
+        if (output->vx_p_image_bkg != vx_p_image_bkg) {
+          if (output->vx_p_image_bkg) {
+            vx_core::vx_release_one(output->vx_p_image_bkg);
           }
-          output->vx_p_image_background = vx_p_image_background;
-          vx_core::vx_reserve(vx_p_image_background);
+          output->vx_p_image_bkg = vx_p_image_bkg;
+          vx_core::vx_reserve(vx_p_image_bkg);
         }
         if (output->vx_p_layout != vx_p_layout) {
           if (output->vx_p_layout) {
@@ -4291,6 +4431,13 @@ namespace vx_ui_ui {
           }
           output->vx_p_pin = vx_p_pin;
           vx_core::vx_reserve(vx_p_pin);
+        }
+        if (output->vx_p_pointorigin != vx_p_pointorigin) {
+          if (output->vx_p_pointorigin) {
+            vx_core::vx_release_one(output->vx_p_pointorigin);
+          }
+          output->vx_p_pointorigin = vx_p_pointorigin;
+          vx_core::vx_reserve(vx_p_pointorigin);
         }
         if (output->vx_p_pointpos != vx_p_pointpos) {
           if (output->vx_p_pointpos) {
@@ -4372,7 +4519,11 @@ namespace vx_ui_ui {
             vx_ui_ui::t_bounds // type
           ),
           vx_core::vx_new_arg(
-            "color-background", // name
+            "color-bkg", // name
+            vx_core::t_string // type
+          ),
+          vx_core::vx_new_arg(
+            "color-bkghover", // name
             vx_core::t_string // type
           ),
           vx_core::vx_new_arg(
@@ -4384,12 +4535,12 @@ namespace vx_ui_ui {
             vx_core::t_string // type
           ),
           vx_core::vx_new_arg(
-            "color-hoverbkgrd", // name
-            vx_core::t_string // type
-          ),
-          vx_core::vx_new_arg(
             "cursor", // name
             vx_ui_ui::t_cursor // type
+          ),
+          vx_core::vx_new_arg(
+            "flip", // name
+            vx_ui_ui::t_flip // type
           ),
           vx_core::vx_new_arg(
             "font", // name
@@ -4400,7 +4551,7 @@ namespace vx_ui_ui {
             vx_core::t_boolean // type
           ),
           vx_core::vx_new_arg(
-            "image-background", // name
+            "image-bkg", // name
             vx_ui_ui::t_image // type
           ),
           vx_core::vx_new_arg(
@@ -4414,6 +4565,10 @@ namespace vx_ui_ui {
           vx_core::vx_new_arg(
             "pin", // name
             vx_ui_ui::t_pin // type
+          ),
+          vx_core::vx_new_arg(
+            "pointorigin", // name
+            vx_ui_ui::t_point // type
           ),
           vx_core::vx_new_arg(
             "pointpos", // name
@@ -6252,6 +6407,39 @@ namespace vx_ui_ui {
 
   //}
 
+  // (const flip-x)
+  // class Class_flip_x {
+    // vx_const_new()
+    void vx_ui_ui::Class_flip_x::vx_const_new(vx_ui_ui::Const_flip_x output) {
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/ui/ui", "flip-x");
+      vx_core::vx_reserve_type(output);
+    }
+
+
+  //}
+
+  // (const flip-xy)
+  // class Class_flip_xy {
+    // vx_const_new()
+    void vx_ui_ui::Class_flip_xy::vx_const_new(vx_ui_ui::Const_flip_xy output) {
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/ui/ui", "flip-xy");
+      vx_core::vx_reserve_type(output);
+    }
+
+
+  //}
+
+  // (const flip-y)
+  // class Class_flip_y {
+    // vx_const_new()
+    void vx_ui_ui::Class_flip_y::vx_const_new(vx_ui_ui::Const_flip_y output) {
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/ui/ui", "flip-y");
+      vx_core::vx_reserve_type(output);
+    }
+
+
+  //}
+
   // (const layout-app)
   // class Class_layout_app {
     // vx_const_new()
@@ -6934,6 +7122,39 @@ namespace vx_ui_ui {
     // vx_const_new()
     void vx_ui_ui::Class_pin_top::vx_const_new(vx_ui_ui::Const_pin_top output) {
       output->vx_p_constdef = vx_core::vx_constdef_new("vx/ui/ui", "pin-top");
+      vx_core::vx_reserve_type(output);
+    }
+
+
+  //}
+
+  // (const point-center)
+  // class Class_point_center {
+    // vx_const_new()
+    void vx_ui_ui::Class_point_center::vx_const_new(vx_ui_ui::Const_point_center output) {
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/ui/ui", "point-center");
+      vx_core::vx_reserve_type(output);
+    }
+
+
+  //}
+
+  // (const point-lefttop)
+  // class Class_point_lefttop {
+    // vx_const_new()
+    void vx_ui_ui::Class_point_lefttop::vx_const_new(vx_ui_ui::Const_point_lefttop output) {
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/ui/ui", "point-lefttop");
+      vx_core::vx_reserve_type(output);
+    }
+
+
+  //}
+
+  // (const point-rightbottom)
+  // class Class_point_rightbottom {
+    // vx_const_new()
+    void vx_ui_ui::Class_point_rightbottom::vx_const_new(vx_ui_ui::Const_point_rightbottom output) {
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/ui/ui", "point-rightbottom");
       vx_core::vx_reserve_type(output);
     }
 
@@ -14571,6 +14792,8 @@ namespace vx_ui_ui {
   vx_ui_ui::Type_cursor t_cursor = NULL;
   vx_ui_ui::Type_cursor_pointer e_cursor_pointer = NULL;
   vx_ui_ui::Type_cursor_pointer t_cursor_pointer = NULL;
+  vx_ui_ui::Type_flip e_flip = NULL;
+  vx_ui_ui::Type_flip t_flip = NULL;
   vx_ui_ui::Type_font e_font = NULL;
   vx_ui_ui::Type_font t_font = NULL;
   vx_ui_ui::Type_fontface e_fontface = NULL;
@@ -14622,6 +14845,9 @@ namespace vx_ui_ui {
   vx_ui_ui::Const_align_center c_align_center = NULL;
   vx_ui_ui::Const_align_left c_align_left = NULL;
   vx_ui_ui::Const_align_right c_align_right = NULL;
+  vx_ui_ui::Const_flip_x c_flip_x = NULL;
+  vx_ui_ui::Const_flip_xy c_flip_xy = NULL;
+  vx_ui_ui::Const_flip_y c_flip_y = NULL;
   vx_ui_ui::Const_layout_app c_layout_app = NULL;
   vx_ui_ui::Const_layout_background c_layout_background = NULL;
   vx_ui_ui::Const_layout_button c_layout_button = NULL;
@@ -14654,6 +14880,9 @@ namespace vx_ui_ui {
   vx_ui_ui::Const_pin_left c_pin_left = NULL;
   vx_ui_ui::Const_pin_right c_pin_right = NULL;
   vx_ui_ui::Const_pin_top c_pin_top = NULL;
+  vx_ui_ui::Const_point_center c_point_center = NULL;
+  vx_ui_ui::Const_point_lefttop c_point_lefttop = NULL;
+  vx_ui_ui::Const_point_rightbottom c_point_rightbottom = NULL;
   vx_ui_ui::Const_pointtype_absolute c_pointtype_absolute = NULL;
   vx_ui_ui::Const_pointtype_percent c_pointtype_percent = NULL;
   vx_ui_ui::Const_pointtype_relative c_pointtype_relative = NULL;
@@ -14805,6 +15034,9 @@ namespace vx_ui_ui {
       vx_ui_ui::c_align_center = new vx_ui_ui::Class_align_center();
       vx_ui_ui::c_align_left = new vx_ui_ui::Class_align_left();
       vx_ui_ui::c_align_right = new vx_ui_ui::Class_align_right();
+      vx_ui_ui::c_flip_x = new vx_ui_ui::Class_flip_x();
+      vx_ui_ui::c_flip_xy = new vx_ui_ui::Class_flip_xy();
+      vx_ui_ui::c_flip_y = new vx_ui_ui::Class_flip_y();
       vx_ui_ui::c_layout_app = new vx_ui_ui::Class_layout_app();
       vx_ui_ui::c_layout_background = new vx_ui_ui::Class_layout_background();
       vx_ui_ui::c_layout_button = new vx_ui_ui::Class_layout_button();
@@ -14837,6 +15069,9 @@ namespace vx_ui_ui {
       vx_ui_ui::c_pin_left = new vx_ui_ui::Class_pin_left();
       vx_ui_ui::c_pin_right = new vx_ui_ui::Class_pin_right();
       vx_ui_ui::c_pin_top = new vx_ui_ui::Class_pin_top();
+      vx_ui_ui::c_point_center = new vx_ui_ui::Class_point_center();
+      vx_ui_ui::c_point_lefttop = new vx_ui_ui::Class_point_lefttop();
+      vx_ui_ui::c_point_rightbottom = new vx_ui_ui::Class_point_rightbottom();
       vx_ui_ui::c_pointtype_absolute = new vx_ui_ui::Class_pointtype_absolute();
       vx_ui_ui::c_pointtype_percent = new vx_ui_ui::Class_pointtype_percent();
       vx_ui_ui::c_pointtype_relative = new vx_ui_ui::Class_pointtype_relative();
@@ -14859,6 +15094,10 @@ namespace vx_ui_ui {
       vx_core::vx_reserve_empty(vx_ui_ui::e_cursor_pointer);
       vx_ui_ui::t_cursor_pointer = new Class_cursor_pointer();
       vx_core::vx_reserve_type(vx_ui_ui::t_cursor_pointer);
+      vx_ui_ui::e_flip = new Class_flip();
+      vx_core::vx_reserve_empty(vx_ui_ui::e_flip);
+      vx_ui_ui::t_flip = new Class_flip();
+      vx_core::vx_reserve_type(vx_ui_ui::t_flip);
       vx_ui_ui::e_font = new Class_font();
       vx_core::vx_reserve_empty(vx_ui_ui::e_font);
       vx_ui_ui::t_font = new Class_font();
@@ -15230,6 +15469,9 @@ namespace vx_ui_ui {
       vx_ui_ui::Class_align_center::vx_const_new(vx_ui_ui::c_align_center);
       vx_ui_ui::Class_align_left::vx_const_new(vx_ui_ui::c_align_left);
       vx_ui_ui::Class_align_right::vx_const_new(vx_ui_ui::c_align_right);
+      vx_ui_ui::Class_flip_x::vx_const_new(vx_ui_ui::c_flip_x);
+      vx_ui_ui::Class_flip_xy::vx_const_new(vx_ui_ui::c_flip_xy);
+      vx_ui_ui::Class_flip_y::vx_const_new(vx_ui_ui::c_flip_y);
       vx_ui_ui::Class_layout_app::vx_const_new(vx_ui_ui::c_layout_app);
       vx_ui_ui::Class_layout_background::vx_const_new(vx_ui_ui::c_layout_background);
       vx_ui_ui::Class_layout_button::vx_const_new(vx_ui_ui::c_layout_button);
@@ -15262,6 +15504,9 @@ namespace vx_ui_ui {
       vx_ui_ui::Class_pin_left::vx_const_new(vx_ui_ui::c_pin_left);
       vx_ui_ui::Class_pin_right::vx_const_new(vx_ui_ui::c_pin_right);
       vx_ui_ui::Class_pin_top::vx_const_new(vx_ui_ui::c_pin_top);
+      vx_ui_ui::Class_point_center::vx_const_new(vx_ui_ui::c_point_center);
+      vx_ui_ui::Class_point_lefttop::vx_const_new(vx_ui_ui::c_point_lefttop);
+      vx_ui_ui::Class_point_rightbottom::vx_const_new(vx_ui_ui::c_point_rightbottom);
       vx_ui_ui::Class_pointtype_absolute::vx_const_new(vx_ui_ui::c_pointtype_absolute);
       vx_ui_ui::Class_pointtype_percent::vx_const_new(vx_ui_ui::c_pointtype_percent);
       vx_ui_ui::Class_pointtype_relative::vx_const_new(vx_ui_ui::c_pointtype_relative);
@@ -15276,6 +15521,7 @@ namespace vx_ui_ui {
       maptype["bounds"] = vx_ui_ui::t_bounds;
       maptype["cursor"] = vx_ui_ui::t_cursor;
       maptype["cursor-pointer"] = vx_ui_ui::t_cursor_pointer;
+      maptype["flip"] = vx_ui_ui::t_flip;
       maptype["font"] = vx_ui_ui::t_font;
       maptype["fontface"] = vx_ui_ui::t_fontface;
       maptype["fontfacelist"] = vx_ui_ui::t_fontfacelist;
@@ -15303,6 +15549,9 @@ namespace vx_ui_ui {
       mapconst["align-center"] = vx_ui_ui::c_align_center;
       mapconst["align-left"] = vx_ui_ui::c_align_left;
       mapconst["align-right"] = vx_ui_ui::c_align_right;
+      mapconst["flip-x"] = vx_ui_ui::c_flip_x;
+      mapconst["flip-xy"] = vx_ui_ui::c_flip_xy;
+      mapconst["flip-y"] = vx_ui_ui::c_flip_y;
       mapconst["layout-app"] = vx_ui_ui::c_layout_app;
       mapconst["layout-background"] = vx_ui_ui::c_layout_background;
       mapconst["layout-button"] = vx_ui_ui::c_layout_button;
@@ -15335,6 +15584,9 @@ namespace vx_ui_ui {
       mapconst["pin-left"] = vx_ui_ui::c_pin_left;
       mapconst["pin-right"] = vx_ui_ui::c_pin_right;
       mapconst["pin-top"] = vx_ui_ui::c_pin_top;
+      mapconst["point-center"] = vx_ui_ui::c_point_center;
+      mapconst["point-lefttop"] = vx_ui_ui::c_point_lefttop;
+      mapconst["point-rightbottom"] = vx_ui_ui::c_point_rightbottom;
       mapconst["pointtype-absolute"] = vx_ui_ui::c_pointtype_absolute;
       mapconst["pointtype-percent"] = vx_ui_ui::c_pointtype_percent;
       mapconst["pointtype-relative"] = vx_ui_ui::c_pointtype_relative;

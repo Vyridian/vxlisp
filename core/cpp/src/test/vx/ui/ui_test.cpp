@@ -519,12 +519,12 @@ namespace vx_ui_ui_test {
       vx_core::vx_new_string(":constnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(41)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(47)
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(66), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(91), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(137)
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(65), 
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(95), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(144)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(10), 
@@ -542,14 +542,14 @@ namespace vx_ui_ui_test {
         vx_core::vx_new_string(":total"), vx_core::vx_new_int(68)
       }),
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(5), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(4), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(7), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(137)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(144)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(28)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(29)
       })
     });
     return output;
@@ -563,6 +563,7 @@ namespace vx_ui_ui_test {
         vx_core::vx_new_string(":bounds"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":cursor"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":cursor-pointer"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":flip"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":font"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":fontface"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":fontfacelist"), vx_core::vx_new_int(0),
@@ -592,6 +593,9 @@ namespace vx_ui_ui_test {
         vx_core::vx_new_string(":align-center"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":align-left"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":align-right"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":flip-x"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":flip-xy"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":flip-y"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":layout-app"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":layout-background"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":layout-button"), vx_core::vx_new_int(0),
@@ -624,6 +628,9 @@ namespace vx_ui_ui_test {
         vx_core::vx_new_string(":pin-left"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":pin-right"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":pin-top"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":point-center"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":point-lefttop"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":point-rightbottom"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":pointtype-absolute"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":pointtype-percent"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":pointtype-relative"), vx_core::vx_new_int(0),

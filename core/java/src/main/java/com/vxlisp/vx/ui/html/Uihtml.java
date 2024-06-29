@@ -3274,16 +3274,18 @@ public final class Uihtml {
               Core.t_any_from_func.vx_fn_new(() -> {
                 final Ui.Type_layout layout = uistyle.layout();
                 final Core.Type_string name = uistyle.name();
+                final Ui.Type_flip flip = uistyle.flip();
                 final Ui.Type_font font = uistyle.font();
                 final Ui.Type_pin pin = uistyle.pin();
+                final Ui.Type_point pointorigin = uistyle.pointorigin();
                 final Ui.Type_point pointpos = uistyle.pointpos();
                 final Ui.Type_point pointsize = uistyle.pointsize();
                 final Ui.Type_point pointrotate = uistyle.pointrotate();
                 final Ui.Type_styletype styletype = uistyle.type();
-                final Core.Type_string color_bkg = uistyle.color_background();
+                final Core.Type_string color_bkg = uistyle.color_bkg();
+                final Core.Type_string color_bkghover = uistyle.color_bkghover();
                 final Core.Type_string color_border = uistyle.color_border();
                 final Core.Type_string color_font = uistyle.color_font();
-                final Core.Type_string color_hoverbkg = uistyle.color_hoverbkgrd();
                 final Ui.Type_cursor cursor = uistyle.cursor();
                 final Core.Type_boolean hidden = uistyle.hidden();
                 final Ui.Type_align align = uistyle.align();
@@ -3879,14 +3881,14 @@ public final class Uihtml {
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
                         Core.t_boolean_from_func.vx_fn_new(() -> {
-                          return Core.f_ne(Core.vx_new_string(""), color_hoverbkg);
+                          return Core.f_ne(Core.vx_new_string(""), color_bkghover);
                         }),
                         Core.t_any_from_func.vx_fn_new(() -> {
                           return Core.f_new(
                             Core.t_string,
                             Core.vx_new(Core.t_anylist,
                                 Core.vx_new_string("#"),
-                                color_hoverbkg
+                                color_bkghover
                             )
                           );
                         })
@@ -3947,7 +3949,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string transform = Core.f_if_2(
+                final Core.Type_string transform_rotate = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -3972,26 +3974,86 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string transformorigin = Core.f_if_2(
+                final Core.Type_string transform_scale = Core.f_switch(
                   Core.t_string,
+                  flip,
                   Core.vx_new(Core.t_thenelselist,
-                      Core.f_then(
-                        Core.t_boolean_from_func.vx_fn_new(() -> {
-                          return Core.f_is_empty_1(pointrotate);
-                        }),
+                      Core.f_case_1(
+                        Ui.c_flip_x,
                         Core.t_any_from_func.vx_fn_new(() -> {
-                          return Core.vx_new_string("");
+                          return Core.vx_new_string("scale(-1, 1)");
                         })
                       ),
-                      Core.f_then(
-                        Core.t_boolean_from_func.vx_fn_new(() -> {
-                          return Core.f_eqeq(
-                            layout,
-                            Ui.c_layout_label
-                          );
-                        }),
+                      Core.f_case_1(
+                        Ui.c_flip_y,
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.vx_new_string("scale( 1,-1)");
+                        })
+                      ),
+                      Core.f_case_1(
+                        Ui.c_flip_xy,
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.vx_new_string("scale(-1,-1)");
+                        })
+                      )
+                  )
+                );
+                final Core.Type_stringlist transforms = Core.f_new(
+                  Core.t_stringlist,
+                  Core.vx_new(Core.t_anylist,
+                      transform_rotate,
+                      transform_scale
+                  )
+                );
+                final Core.Type_string transform = Type.f_string_from_stringlist_join(transforms, Core.vx_new_string(" "));
+                final Core.Type_string transformorigin = Core.f_switch(
+                  Core.t_string,
+                  pointorigin,
+                  Core.vx_new(Core.t_thenelselist,
+                      Core.f_case_1(
+                        Ui.c_point_center,
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.vx_new_string("center");
+                        })
+                      ),
+                      Core.f_case_1(
+                        Ui.c_point_lefttop,
                         Core.t_any_from_func.vx_fn_new(() -> {
                           return Core.vx_new_string("left top");
+                        })
+                      ),
+                      Core.f_case_1(
+                        Ui.c_point_rightbottom,
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.vx_new_string("right bottom");
+                        })
+                      ),
+                      Core.f_else(
+                        Core.t_any_from_func.vx_fn_new(() -> {
+                          return Core.f_if_2(
+                            Core.t_string,
+                            Core.vx_new(Core.t_thenelselist,
+                                Core.f_then(
+                                  Core.t_boolean_from_func.vx_fn_new(() -> {
+                                    return Core.f_is_empty_1(pointrotate);
+                                  }),
+                                  Core.t_any_from_func.vx_fn_new(() -> {
+                                    return Core.vx_new_string("");
+                                  })
+                                ),
+                                Core.f_then(
+                                  Core.t_boolean_from_func.vx_fn_new(() -> {
+                                    return Core.f_eqeq(
+                                      layout,
+                                      Ui.c_layout_label
+                                    );
+                                  }),
+                                  Core.t_any_from_func.vx_fn_new(() -> {
+                                    return Core.vx_new_string("left top");
+                                  })
+                                )
+                            )
+                          );
                         })
                       )
                   )

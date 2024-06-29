@@ -19,6 +19,9 @@
 (type cursor : struct
  :doc "Univeral Cursor Type")
 
+(type flip : struct
+ :doc "Universal ui flip horizontal or vertical or both.")
+
 (type font : struct
  :properties [name      : string
               fontface  : fontface
@@ -100,26 +103,28 @@
  :doc "Universal Point Scale")
 
 (type style : struct
- :properties [name             : string
-              align            : align
-              boundsmargin     : bounds
-              boundspadding    : bounds
-              color-background : string
-              color-border     : string
-              color-font       : string
-              color-hoverbkgrd : string
-              cursor           : cursor
-              font             : font
-              hidden           : boolean
-              image-background : image
-              layout           : layout
-              type             : styletype
-              pin              : pin
-              pointpos         : point
-              pointrotate      : point
-              pointsize        : point
-              scroll-x         : boolean
-              scroll-y         : boolean]
+ :properties [name           : string
+              align          : align
+              boundsmargin   : bounds
+              boundspadding  : bounds
+              color-bkg      : string
+              color-bkghover : string
+              color-border   : string
+              color-font     : string
+              cursor         : cursor
+              flip           : flip
+              font           : font
+              hidden         : boolean
+              image-bkg      : image
+              layout         : layout
+              type           : styletype
+              pin            : pin
+              pointorigin    : point
+              pointpos       : point
+              pointrotate    : point
+              pointsize      : point
+              scroll-x       : boolean
+              scroll-y       : boolean]
  :doc "Universal Style")
 
 (type stylelist : list
@@ -179,6 +184,15 @@
 
 (const align-right : align
  :doc "Logical Right Align in parent")
+
+(const flip-x : align
+ :doc "Logical Flip Horizontally")
+
+(const flip-y : align
+ :doc "Logical Flip Vertically")
+
+(const flip-xy : align
+ :doc "Logical Flip Vertically and Horizontally")
 
 (const layout-app : layout
  (layout
@@ -291,6 +305,12 @@
 (const pin-right : pin)
 
 (const pin-top : pin)
+
+(const point-center : point)
+
+(const point-lefttop : point)
+
+(const point-rightbottom : point)
 
 (const pointtype-absolute : pointtype)
 

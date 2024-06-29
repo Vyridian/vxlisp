@@ -30,6 +30,10 @@ namespace vx_ui_ui {
   typedef Abstract_cursor_pointer* Type_cursor_pointer;
   extern Type_cursor_pointer e_cursor_pointer;
   extern Type_cursor_pointer t_cursor_pointer;
+  class Abstract_flip;
+  typedef Abstract_flip* Type_flip;
+  extern Type_flip e_flip;
+  extern Type_flip t_flip;
   class Abstract_font;
   typedef Abstract_font* Type_font;
   extern Type_font e_font;
@@ -135,6 +139,15 @@ namespace vx_ui_ui {
   class Class_align_right;
   typedef Class_align_right* Const_align_right;
   extern Const_align_right c_align_right;
+  class Class_flip_x;
+  typedef Class_flip_x* Const_flip_x;
+  extern Const_flip_x c_flip_x;
+  class Class_flip_xy;
+  typedef Class_flip_xy* Const_flip_xy;
+  extern Const_flip_xy c_flip_xy;
+  class Class_flip_y;
+  typedef Class_flip_y* Const_flip_y;
+  extern Const_flip_y c_flip_y;
   class Class_layout_app;
   typedef Class_layout_app* Const_layout_app;
   extern Const_layout_app c_layout_app;
@@ -231,6 +244,15 @@ namespace vx_ui_ui {
   class Class_pin_top;
   typedef Class_pin_top* Const_pin_top;
   extern Const_pin_top c_pin_top;
+  class Class_point_center;
+  typedef Class_point_center* Const_point_center;
+  extern Const_point_center c_point_center;
+  class Class_point_lefttop;
+  typedef Class_point_lefttop* Const_point_lefttop;
+  extern Const_point_lefttop c_point_lefttop;
+  class Class_point_rightbottom;
+  typedef Class_point_rightbottom* Const_point_rightbottom;
+  extern Const_point_rightbottom c_point_rightbottom;
   class Class_pointtype_absolute;
   typedef Class_pointtype_absolute* Const_pointtype_absolute;
   extern Const_pointtype_absolute c_pointtype_absolute;
@@ -839,6 +861,32 @@ namespace vx_ui_ui {
     virtual vx_core::vx_Type_listany vx_dispose() override;
   };
 
+  // (type flip)
+  class Abstract_flip : public virtual vx_core::Abstract_struct {
+  public:
+    Abstract_flip() {};
+    virtual ~Abstract_flip() = 0;
+    // vx_map()
+    virtual vx_core::vx_Type_mapany vx_map() const = 0;
+    // vx_get_any(key)
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const = 0;
+  };
+  class Class_flip : public virtual Abstract_flip {
+  public:
+    Class_flip();
+    virtual ~Class_flip() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::vx_Type_mapany vx_map() const override;
+    virtual vx_core::Type_any vx_get_any(vx_core::Type_string key) const override;
+  };
+
   // (type font)
   class Abstract_font : public virtual vx_core::Abstract_struct {
   public:
@@ -1432,30 +1480,33 @@ namespace vx_ui_ui {
     // boundspadding()
     vx_ui_ui::Type_bounds vx_p_boundspadding = NULL;
     virtual vx_ui_ui::Type_bounds boundspadding() const = 0;
-    // color-background()
-    vx_core::Type_string vx_p_color_background = NULL;
-    virtual vx_core::Type_string color_background() const = 0;
+    // color-bkg()
+    vx_core::Type_string vx_p_color_bkg = NULL;
+    virtual vx_core::Type_string color_bkg() const = 0;
+    // color-bkghover()
+    vx_core::Type_string vx_p_color_bkghover = NULL;
+    virtual vx_core::Type_string color_bkghover() const = 0;
     // color-border()
     vx_core::Type_string vx_p_color_border = NULL;
     virtual vx_core::Type_string color_border() const = 0;
     // color-font()
     vx_core::Type_string vx_p_color_font = NULL;
     virtual vx_core::Type_string color_font() const = 0;
-    // color-hoverbkgrd()
-    vx_core::Type_string vx_p_color_hoverbkgrd = NULL;
-    virtual vx_core::Type_string color_hoverbkgrd() const = 0;
     // cursor()
     vx_ui_ui::Type_cursor vx_p_cursor = NULL;
     virtual vx_ui_ui::Type_cursor cursor() const = 0;
+    // flip()
+    vx_ui_ui::Type_flip vx_p_flip = NULL;
+    virtual vx_ui_ui::Type_flip flip() const = 0;
     // font()
     vx_ui_ui::Type_font vx_p_font = NULL;
     virtual vx_ui_ui::Type_font font() const = 0;
     // hidden()
     vx_core::Type_boolean vx_p_hidden = NULL;
     virtual vx_core::Type_boolean hidden() const = 0;
-    // image-background()
-    vx_ui_ui::Type_image vx_p_image_background = NULL;
-    virtual vx_ui_ui::Type_image image_background() const = 0;
+    // image-bkg()
+    vx_ui_ui::Type_image vx_p_image_bkg = NULL;
+    virtual vx_ui_ui::Type_image image_bkg() const = 0;
     // layout()
     vx_ui_ui::Type_layout vx_p_layout = NULL;
     virtual vx_ui_ui::Type_layout layout() const = 0;
@@ -1465,6 +1516,9 @@ namespace vx_ui_ui {
     // pin()
     vx_ui_ui::Type_pin vx_p_pin = NULL;
     virtual vx_ui_ui::Type_pin pin() const = 0;
+    // pointorigin()
+    vx_ui_ui::Type_point vx_p_pointorigin = NULL;
+    virtual vx_ui_ui::Type_point pointorigin() const = 0;
     // pointpos()
     vx_ui_ui::Type_point vx_p_pointpos = NULL;
     virtual vx_ui_ui::Type_point pointpos() const = 0;
@@ -1499,17 +1553,19 @@ namespace vx_ui_ui {
     virtual vx_ui_ui::Type_align align() const override;
     virtual vx_ui_ui::Type_bounds boundsmargin() const override;
     virtual vx_ui_ui::Type_bounds boundspadding() const override;
-    virtual vx_core::Type_string color_background() const override;
+    virtual vx_core::Type_string color_bkg() const override;
+    virtual vx_core::Type_string color_bkghover() const override;
     virtual vx_core::Type_string color_border() const override;
     virtual vx_core::Type_string color_font() const override;
-    virtual vx_core::Type_string color_hoverbkgrd() const override;
     virtual vx_ui_ui::Type_cursor cursor() const override;
+    virtual vx_ui_ui::Type_flip flip() const override;
     virtual vx_ui_ui::Type_font font() const override;
     virtual vx_core::Type_boolean hidden() const override;
-    virtual vx_ui_ui::Type_image image_background() const override;
+    virtual vx_ui_ui::Type_image image_bkg() const override;
     virtual vx_ui_ui::Type_layout layout() const override;
     virtual vx_ui_ui::Type_styletype type() const override;
     virtual vx_ui_ui::Type_pin pin() const override;
+    virtual vx_ui_ui::Type_point pointorigin() const override;
     virtual vx_ui_ui::Type_point pointpos() const override;
     virtual vx_ui_ui::Type_point pointrotate() const override;
     virtual vx_ui_ui::Type_point pointsize() const override;
@@ -1861,6 +1917,24 @@ namespace vx_ui_ui {
     static void vx_const_new(vx_ui_ui::Const_align_right output);
   };
 
+  // (const flip-x)
+  class Class_flip_x : public vx_ui_ui::Class_align {
+  public:
+    static void vx_const_new(vx_ui_ui::Const_flip_x output);
+  };
+
+  // (const flip-xy)
+  class Class_flip_xy : public vx_ui_ui::Class_align {
+  public:
+    static void vx_const_new(vx_ui_ui::Const_flip_xy output);
+  };
+
+  // (const flip-y)
+  class Class_flip_y : public vx_ui_ui::Class_align {
+  public:
+    static void vx_const_new(vx_ui_ui::Const_flip_y output);
+  };
+
   // (const layout-app)
   class Class_layout_app : public vx_ui_ui::Class_layout {
   public:
@@ -2051,6 +2125,24 @@ namespace vx_ui_ui {
   class Class_pin_top : public vx_ui_ui::Class_pin {
   public:
     static void vx_const_new(vx_ui_ui::Const_pin_top output);
+  };
+
+  // (const point-center)
+  class Class_point_center : public vx_ui_ui::Class_point {
+  public:
+    static void vx_const_new(vx_ui_ui::Const_point_center output);
+  };
+
+  // (const point-lefttop)
+  class Class_point_lefttop : public vx_ui_ui::Class_point {
+  public:
+    static void vx_const_new(vx_ui_ui::Const_point_lefttop output);
+  };
+
+  // (const point-rightbottom)
+  class Class_point_rightbottom : public vx_ui_ui::Class_point {
+  public:
+    static void vx_const_new(vx_ui_ui::Const_point_rightbottom output);
   };
 
   // (const pointtype-absolute)

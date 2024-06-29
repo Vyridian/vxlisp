@@ -983,16 +983,18 @@ export default class vx_ui_html_uihtml {
           vx_core.f_new(vx_core.t_any_from_func, () => {
             const layout = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_layout, "struct-2": vx_ui_ui.t_style}, uistyle, ":layout")
             const name = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":name")
+            const flip = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_flip, "struct-2": vx_ui_ui.t_style}, uistyle, ":flip")
             const font = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_font, "struct-2": vx_ui_ui.t_style}, uistyle, ":font")
             const pin = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_pin, "struct-2": vx_ui_ui.t_style}, uistyle, ":pin")
+            const pointorigin = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_point, "struct-2": vx_ui_ui.t_style}, uistyle, ":pointorigin")
             const pointpos = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_point, "struct-2": vx_ui_ui.t_style}, uistyle, ":pointpos")
             const pointsize = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_point, "struct-2": vx_ui_ui.t_style}, uistyle, ":pointsize")
             const pointrotate = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_point, "struct-2": vx_ui_ui.t_style}, uistyle, ":pointrotate")
             const styletype = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_styletype, "struct-2": vx_ui_ui.t_style}, uistyle, ":type")
-            const color_bkg = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":color-background")
+            const color_bkg = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":color-bkg")
+            const color_bkghover = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":color-bkghover")
             const color_border = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":color-border")
             const color_font = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":color-font")
-            const color_hoverbkg = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_ui_ui.t_style}, uistyle, ":color-hoverbkgrd")
             const cursor = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_cursor, "struct-2": vx_ui_ui.t_style}, uistyle, ":cursor")
             const hidden = vx_core.f_any_from_struct({"any-1": vx_core.t_boolean, "struct-2": vx_ui_ui.t_style}, uistyle, ":hidden")
             const align = vx_core.f_any_from_struct({"any-1": vx_ui_ui.t_align, "struct-2": vx_ui_ui.t_style}, uistyle, ":align")
@@ -1369,11 +1371,11 @@ export default class vx_ui_html_uihtml {
             const hoverbkgrdcolor = vx_core.f_if_2(
               {"any-1": vx_core.t_string},
               vx_core.f_then(
-                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_ne("", color_hoverbkg)}),
+                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_ne("", color_bkghover)}),
                 vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
                   vx_core.t_string,
                   "#",
-                  color_hoverbkg
+                  color_bkghover
                 )})
               )
             )
@@ -1411,7 +1413,7 @@ export default class vx_ui_html_uihtml {
                 vx_core.f_new(vx_core.t_any_from_func, () => {return "right"})
               )
             )
-            const transform = vx_core.f_if_2(
+            const transform_rotate = vx_core.f_if_2(
               {"any-1": vx_core.t_string},
               vx_core.f_then(
                 vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_is_empty_1(pointrotate)}),
@@ -1426,18 +1428,58 @@ export default class vx_ui_html_uihtml {
                 )})
               )
             )
-            const transformorigin = vx_core.f_if_2(
-              {"any-1": vx_core.t_string},
-              vx_core.f_then(
-                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_is_empty_1(pointrotate)}),
-                vx_core.f_new(vx_core.t_any_from_func, () => {return ""})
+            const transform_scale = vx_core.f_switch(
+              {"any-1": vx_core.t_string, "any-2": vx_ui_ui.t_flip},
+              flip,
+              vx_core.f_case_1(
+                vx_ui_ui.c_flip_x,
+                vx_core.f_new(vx_core.t_any_from_func, () => {return "scale(-1, 1)"})
               ),
-              vx_core.f_then(
-                vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eqeq(
-                  layout,
-                  vx_ui_ui.c_layout_label
-                )}),
+              vx_core.f_case_1(
+                vx_ui_ui.c_flip_y,
+                vx_core.f_new(vx_core.t_any_from_func, () => {return "scale( 1,-1)"})
+              ),
+              vx_core.f_case_1(
+                vx_ui_ui.c_flip_xy,
+                vx_core.f_new(vx_core.t_any_from_func, () => {return "scale(-1,-1)"})
+              )
+            )
+            const transforms = vx_core.f_new(
+              vx_core.t_stringlist,
+              transform_rotate,
+              transform_scale
+            )
+            const transform = vx_type.f_string_from_stringlist_join(transforms, " ")
+            const transformorigin = vx_core.f_switch(
+              {"any-1": vx_core.t_string, "any-2": vx_ui_ui.t_point},
+              pointorigin,
+              vx_core.f_case_1(
+                vx_ui_ui.c_point_center,
+                vx_core.f_new(vx_core.t_any_from_func, () => {return "center"})
+              ),
+              vx_core.f_case_1(
+                vx_ui_ui.c_point_lefttop,
                 vx_core.f_new(vx_core.t_any_from_func, () => {return "left top"})
+              ),
+              vx_core.f_case_1(
+                vx_ui_ui.c_point_rightbottom,
+                vx_core.f_new(vx_core.t_any_from_func, () => {return "right bottom"})
+              ),
+              vx_core.f_else(
+                vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_if_2(
+                  {"any-1": vx_core.t_string},
+                  vx_core.f_then(
+                    vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_is_empty_1(pointrotate)}),
+                    vx_core.f_new(vx_core.t_any_from_func, () => {return ""})
+                  ),
+                  vx_core.f_then(
+                    vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_eqeq(
+                      layout,
+                      vx_ui_ui.c_layout_label
+                    )}),
+                    vx_core.f_new(vx_core.t_any_from_func, () => {return "left top"})
+                  )
+                )})
               )
             )
             const props = vx_core.f_new(

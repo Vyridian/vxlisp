@@ -19981,18 +19981,18 @@ namespace vx_core {
   //}
 
   // (func .)
-  vx_core::Type_any f_dotmethod(vx_core::Type_any object, vx_core::Type_string method, vx_core::Type_anylist params) {
+  vx_core::Type_any f_dotmethod(vx_core::Type_any target, vx_core::Type_string method, vx_core::Type_anylist parameters) {
     vx_core::Type_any output = vx_core::e_any;
-    vx_core::vx_reserve({object, method, params});
-    vx_core::vx_release_one_except({object, method, params}, output);
+    vx_core::vx_reserve({target, method, parameters});
+    vx_core::vx_release_one_except({target, method, parameters}, output);
     return output;
   }
   /**
    * @function dotmethod
    * Not Recommened: Support for Object Oriented dot notation. e.g. (this.foo 'a') = this.foo('a')
-   * @param  {any} object
+   * @param  {any} target
    * @param  {string} method
-   * @param  {anylist} params
+   * @param  {anylist} parameters
    * @return {any}
    * (func .)
    */
@@ -20061,10 +20061,10 @@ namespace vx_core {
 
     vx_core::Type_any Class_dotmethod::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any object = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_any target = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_string method = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(1)));
-      vx_core::Type_anylist params = vx_core::vx_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::vx_new_int(2)));
-      output = vx_core::f_dotmethod(object, method, params);
+      vx_core::Type_anylist parameters = vx_core::vx_any_from_any(vx_core::t_anylist, arglist->vx_get_any(vx_core::vx_new_int(2)));
+      output = vx_core::f_dotmethod(target, method, parameters);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -23000,7 +23000,7 @@ namespace vx_core {
   /**
    * @function fn
    * Shell for lambda function calls
-   * @param  {arglist} params
+   * @param  {arglist} parameters
    * @param  {any<-func} fn-any
    * @return {any-1}
    * (func fn)
@@ -23071,9 +23071,9 @@ namespace vx_core {
     vx_core::Type_any Class_fn::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_any generic_any_1 = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_core::Type_arglist params = vx_core::vx_any_from_any(vx_core::t_arglist, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_arglist parameters = vx_core::vx_any_from_any(vx_core::t_arglist, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Func_any_from_func fn_any = vx_core::vx_any_from_any(vx_core::t_any_from_func, arglist->vx_get_any(vx_core::vx_new_int(1)));
-      output = vx_core::f_fn(generic_any_1, params, fn_any);
+      output = vx_core::f_fn(generic_any_1, parameters, fn_any);
       vx_core::vx_release_except(arglist, output);
       return output;
     }

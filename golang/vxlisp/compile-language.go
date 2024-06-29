@@ -1138,7 +1138,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 	valcopy := "" +
 		"\n      boolean ischanged = false;" +
 		"\n      Class_" + typename + " val = this;" +
-		"\n      " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_msgblock msgblock = " + LangNameFromPkgNameDot(lang, "vx/core") + "t_msgblock.vx_msgblock_from_copy_arrayval(val, vals);" +
+		"\n      " + LangNameTypeFromType(lang, msgblocktype) + " msgblock = " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_msgblock_from_copy_arrayval(val, vals);" +
 		"\n      if (" + LangIsTypeText(lang, "this", LangNameFromPkgNameDot(lang, "vx/core")+"vx_Type_const") + ") {" +
 		"\n        ischanged = true;" +
 		"\n      }"
@@ -1162,59 +1162,6 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 	case "vx/core/anytype":
 	case "vx/core/const":
 	case "vx/core/list":
-		funcvxany := NewFunc()
-		funcvxany.name = "vx_any"
-		funcvxany.vxtype = rawlisttype1
-		funcvxany.isgeneric = true
-		funcvxany.generictype = rawlisttype1
-
-		funcvxanyfromlist := NewFunc()
-		funcvxanyfromlist.name = "vx_any_from_list"
-		funcvxanyfromlist.vxtype = anytype
-		funcvxanyfromlist.isgeneric = true
-		funcvxanyfromlist.generictype = anytype1
-		argindex := NewArg("index")
-		argindex.vxtype = rawinttype
-		argsfuncvxanyfromlist := NewListArg()
-		argsfuncvxanyfromlist = append(argsfuncvxanyfromlist, argindex)
-		funcvxanyfromlist.listarg = argsfuncvxanyfromlist
-
-		instancefuncs += "" +
-			LangFuncHeader(lang, typename, funcvxany, false) +
-			"\n      return " + LangNameFromPkgNameDot(lang, "vx/core") + "arraylist_from_arraylist(generic_any_1, this.vx_list());" +
-			"\n    }" +
-			LangFuncHeader(lang, typename, funcvxanyfromlist, false) +
-			"\n      return vx_any_from_list(generic_any_1, this.vx_list(), index);" +
-			"\n    }" +
-			"\n"
-		staticfuncs = "" +
-			"\n    public static <T extends " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any> List<T> list_new(" + LangFinalArg(lang) + "T generic_any_1, " + LangFinalArg(lang) + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any... vals) {" +
-			"\n      List<" + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any> listval = Arrays.asList(vals);" +
-			"\n      return " + LangNameFromPkgNameDot(lang, "vx/core") + "arraylist_from_arraylist(generic_any_1, listval);" +
-			"\n    }" +
-			"\n" +
-			"\n    public static <T extends " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any> T vx_any_from_list(" + LangFinalArg(lang) + "T generic_any_1, " + LangFinalArg(lang) + "List<" + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any> list, " + LangFinalArg(lang) + "int index) {" +
-			"\n      T output = " + LangNameFromPkgNameDot(lang, "vx/core") + "f_empty(generic_any_1);" +
-			"\n      if (list.size() > index) {" +
-			"\n        output = " + LangNameFromPkgNameDot(lang, "vx/core") + "f_any_from_any(generic_any_1, list.get(index));" +
-			"\n      }" +
-			"\n      return output;" +
-			"\n    }" +
-			"\n" +
-			"\n    public static <T extends " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any> T vx_any_first_from_list_fn(" + LangFinalArg(lang) + "T generic_any_1, " + LangFinalArg(lang) + LangNameFromPkgNameDot(lang, "vx/core") + "Type_list list, " + LangFinalArg(lang) + "Function<" + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any, T> fn_any) {" +
-			"\n      T output = " + LangNameFromPkgNameDot(lang, "vx/core") + "f_empty(generic_any_1);" +
-			"\n      List<" + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any> listany = list.vx_list();" +
-			"\n      for (" + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any any : listany) {" +
-			"\n        T tany = " + LangNameFromPkgNameDot(lang, "vx/core") + "f_any_from_any(generic_any_1, any);" +
-			"\n        T val = fn_any.apply(tany);" +
-			"\n        if (val != null) {" +
-			"\n          output = val;" +
-			"\n          break;" +
-			"\n        }" +
-			"\n      }" +
-			"\n      return output;" +
-			"\n    }" +
-			"\n"
 	case "vx/core/map":
 	case "vx/core/struct":
 	case "vx/core/func":
@@ -1984,17 +1931,6 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 				"\n      }"
 		}
 	}
-	vxmsgblock := ""
-	switch NameFromType(typ) {
-	case "vx/core/msg":
-		vxmsgblock = "" +
-			"\n    " + override +
-			"\n    public " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_msgblock vx_msgblock() {return " + LangNameFromPkgNameDot(lang, "vx/core") + "e_msgblock;}"
-	case "vx/core/msgblock":
-		vxmsgblock = "" +
-			"\n    " + override +
-			"\n    public " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_msgblock vx_msgblock() {return this;}"
-	}
 	sinterface := LangInterfaceFromType(lang, typ)
 	typedef := "" +
 		"\n    " + override +
@@ -2025,8 +1961,8 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		valnew +
 		"\n      return output;" +
 		"\n    }" +
+		LangVxMsgblockFromType(lang, typ) +
 		"\n" +
-		vxmsgblock +
 		"\n    " + override +
 		"\n    public " + LangNameTypeFullFromType(lang, anytype) + " vx_empty() {" +
 		"\n      return e_" + typename + ";" +
@@ -3040,8 +2976,6 @@ func LangInterfaceFromType(lang *vxlang, typ *vxtype) string {
 				"\n    public " + LangNameTypeFullFromType(lang, anytype) + " vx_empty();" +
 				"\n    public " + LangNameTypeFullFromType(lang, anytype) + " vx_type();" +
 				"\n    public " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_typedef vx_typedef();"
-			extras += "" +
-				"\n    public Type_msgblock vx_msgblock_from_copy_arrayval(" + LangFinalArg(lang) + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any copy, " + LangFinalArg(lang) + "Object... vals);"
 		}
 		var extends []*vxtype
 		switch typ.extends {
@@ -4495,6 +4429,30 @@ func LangVxMapFromType(lang *vxlang, typ *vxtype) string {
 		body +
 		"\n    }" +
 		"\n"
+	return output
+}
+
+func LangVxMsgblockFromType(lang *vxlang, typ *vxtype) string {
+	output := ""
+	override := ""
+	switch lang.name {
+	case "java":
+		override = "\n    @Override"
+	}
+	switch NameFromType(typ) {
+	case "vx/core/msg":
+		output = "" +
+			"\n    " + override +
+			"\n    public " + LangNameTypeFromType(lang, msgblocktype) + " vx_msgblock() {" +
+			"\n      return " + LangNameEFromType(lang, msgblocktype) + lang.lineend +
+			"\n    }"
+	case "vx/core/msgblock":
+		output = "" +
+			"\n    " + override +
+			"\n    public " + LangNameTypeFromType(lang, msgblocktype) + " vx_msgblock() {" +
+			"\n      return this" + lang.lineend +
+			"\n    }"
+	}
 	return output
 }
 

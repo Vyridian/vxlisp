@@ -2102,6 +2102,9 @@
           <li class="ntype" onclick="docjs.navigate('type_vx/ui/ui/cursor')">
             (t) cursor
           </li>
+          <li class="ntype" onclick="docjs.navigate('type_vx/ui/ui/flip')">
+            (t) flip
+          </li>
           <li class="ntype" onclick="docjs.navigate('type_vx/ui/ui/font')">
             (t) font
           </li>
@@ -2185,6 +2188,15 @@
           </li>
           <li class="nconst" onclick="docjs.navigate('const_vx/ui/ui/align-right')">
             (c) align-right
+          </li>
+          <li class="nconst" onclick="docjs.navigate('const_vx/ui/ui/flip-x')">
+            (c) flip-x
+          </li>
+          <li class="nconst" onclick="docjs.navigate('const_vx/ui/ui/flip-y')">
+            (c) flip-y
+          </li>
+          <li class="nconst" onclick="docjs.navigate('const_vx/ui/ui/flip-xy')">
+            (c) flip-xy
           </li>
           <li class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-app')">
             (c) layout-app
@@ -2281,6 +2293,15 @@
           </li>
           <li class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-top')">
             (c) pin-top
+          </li>
+          <li class="nconst" onclick="docjs.navigate('const_vx/ui/ui/point-center')">
+            (c) point-center
+          </li>
+          <li class="nconst" onclick="docjs.navigate('const_vx/ui/ui/point-lefttop')">
+            (c) point-lefttop
+          </li>
+          <li class="nconst" onclick="docjs.navigate('const_vx/ui/ui/point-rightbottom')">
+            (c) point-rightbottom
           </li>
           <li class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pointtype-absolute')">
             (c) pointtype-absolute
@@ -3681,17 +3702,6 @@
 (type msgblock : struct
  :properties [msgs      : msglist
               msgblocks : msgblocklist]
- :create
-  (native
-   :java
-    &quot;public Type_msgblock vx_msgblock_from_copy_arrayval(final Core.Type_any copy, final Object... vals) {
-       Core.Type_msgblock output = Core.e_msgblock;
-       Core.Type_msgblock copymsgblock = copy.vx_msgblock();
-       if (copymsgblock != null) {
-         output = copymsgblock;
-       }
-       return output;
-     }&quot;)
  :doc &quot;Block of Messages&quot;)
 
 (type msgblocklist : list
@@ -5216,8 +5226,9 @@
         break
       }
     }&quot;
-  :java
-   &quot;Core.Func_any_from_func fn_any = Core.Class_list.vx_any_first_from_list_fn(Core.t_any_from_func, thenelselist, (any) -&gt; {
+  :java :auto
+  :java1
+   &quot;Core.Func_any_from_func fn_any = Core.vx_any_first_from_list_fn(Core.t_any_from_func, thenelselist, (any) -&gt; {
       Core.Func_any_from_func fnany = null;
       if (any instanceof Core.Type_thenelse) {
         Core.Type_thenelse thenelse = (Core.Type_thenelse)any;
@@ -8938,17 +8949,6 @@
                   <div class="source">(type msgblock : struct
  :properties [msgs      : msglist
               msgblocks : msgblocklist]
- :create
-  (native
-   :java
-    &quot;public Type_msgblock vx_msgblock_from_copy_arrayval(final Core.Type_any copy, final Object... vals) {
-       Core.Type_msgblock output = Core.e_msgblock;
-       Core.Type_msgblock copymsgblock = copy.vx_msgblock();
-       if (copymsgblock != null) {
-         output = copymsgblock;
-       }
-       return output;
-     }&quot;)
  :doc &quot;Block of Messages&quot;)</div>
                 </li>
               </ul>
@@ -18674,8 +18674,9 @@ improves readability.</div>
         break
       }
     }&quot;
-  :java
-   &quot;Core.Func_any_from_func fn_any = Core.Class_list.vx_any_first_from_list_fn(Core.t_any_from_func, thenelselist, (any) -&gt; {
+  :java :auto
+  :java1
+   &quot;Core.Func_any_from_func fn_any = Core.vx_any_first_from_list_fn(Core.t_any_from_func, thenelselist, (any) -&gt; {
       Core.Func_any_from_func fnany = null;
       if (any instanceof Core.Type_thenelse) {
         Core.Type_thenelse thenelse = (Core.Type_thenelse)any;
@@ -72692,7 +72693,7 @@ output : list-1 := (empty list-1)
           </summary>
           <ul>
             <li>
-              <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/align')">align</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/bounds')">bounds</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/cursor')">cursor</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/font')">font</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontface')">fontface</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontfacelist')">fontfacelist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontfacemap')">fontfacemap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontmap')">fontmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontstyle')">fontstyle</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontstylemap')">fontstylemap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/image')">image</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/layout')">layout</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/layoutengine')">layoutengine</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/layoutlist')">layoutlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/layoutmap')">layoutmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/pin')">pin</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/point')">point</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/pointtype')">pointtype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/style')">style</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/stylelist')">stylelist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/stylemap')">stylemap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/stylesheet')">stylesheet</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/styletype')">styletype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">ui</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uilist')">uilist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uimap')">uimap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uiengine')">uiengine</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/cursor-pointer')">cursor-pointer</span>
+              <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/align')">align</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/bounds')">bounds</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/cursor')">cursor</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/flip')">flip</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/font')">font</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontface')">fontface</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontfacelist')">fontfacelist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontfacemap')">fontfacemap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontmap')">fontmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontstyle')">fontstyle</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/fontstylemap')">fontstylemap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/image')">image</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/layout')">layout</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/layoutengine')">layoutengine</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/layoutlist')">layoutlist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/layoutmap')">layoutmap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/pin')">pin</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/point')">point</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/pointtype')">pointtype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/style')">style</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/stylelist')">stylelist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/stylemap')">stylemap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/stylesheet')">stylesheet</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/styletype')">styletype</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/ui')">ui</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uilist')">uilist</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uimap')">uimap</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/uiengine')">uiengine</span>, <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/cursor-pointer')">cursor-pointer</span>
             </li>
           </ul>
         </details>
@@ -72702,7 +72703,7 @@ output : list-1 := (empty list-1)
           </summary>
           <ul>
             <li>
-      <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/align-center')">align-center</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/align-left')">align-left</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/align-right')">align-right</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-app')">layout-app</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-background')">layout-background</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-button')">layout-button</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-combobox')">layout-combobox</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-else')">layout-else</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-flow-columns')">layout-flow-columns</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-flow-item')">layout-flow-item</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-flow-rows')">layout-flow-rows</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-image')">layout-image</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-label')">layout-label</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-main')">layout-main</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-maxpanel')">layout-maxpanel</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-menubar')">layout-menubar</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-menudrawer')">layout-menudrawer</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-msgbox')">layout-msgbox</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-navbar')">layout-navbar</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-navdrawer')">layout-navdrawer</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-panel')">layout-panel</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-parallax')">layout-parallax</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-statusbar')">layout-statusbar</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-statusdrawer')">layout-statusdrawer</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-text')">layout-text</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-textentry')">layout-textentry</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-titlebar')">layout-titlebar</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-bottom')">pin-bottom</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-center')">pin-center</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-center-h')">pin-center-h</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-center-v')">pin-center-v</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-expand')">pin-expand</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-left')">pin-left</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-right')">pin-right</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-top')">pin-top</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pointtype-absolute')">pointtype-absolute</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pointtype-relative')">pointtype-relative</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pointtype-percent')">pointtype-percent</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/styletype-custom')">styletype-custom</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/styletype-shared')">styletype-shared</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/styletype-system')">styletype-system</span>
+      <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/align-center')">align-center</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/align-left')">align-left</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/align-right')">align-right</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/flip-x')">flip-x</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/flip-y')">flip-y</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/flip-xy')">flip-xy</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-app')">layout-app</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-background')">layout-background</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-button')">layout-button</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-combobox')">layout-combobox</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-else')">layout-else</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-flow-columns')">layout-flow-columns</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-flow-item')">layout-flow-item</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-flow-rows')">layout-flow-rows</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-image')">layout-image</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-label')">layout-label</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-main')">layout-main</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-maxpanel')">layout-maxpanel</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-menubar')">layout-menubar</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-menudrawer')">layout-menudrawer</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-msgbox')">layout-msgbox</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-navbar')">layout-navbar</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-navdrawer')">layout-navdrawer</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-panel')">layout-panel</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-parallax')">layout-parallax</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-statusbar')">layout-statusbar</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-statusdrawer')">layout-statusdrawer</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-text')">layout-text</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-textentry')">layout-textentry</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/layout-titlebar')">layout-titlebar</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-bottom')">pin-bottom</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-center')">pin-center</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-center-h')">pin-center-h</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-center-v')">pin-center-v</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-expand')">pin-expand</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-left')">pin-left</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-right')">pin-right</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pin-top')">pin-top</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/point-center')">point-center</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/point-lefttop')">point-lefttop</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/point-rightbottom')">point-rightbottom</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pointtype-absolute')">pointtype-absolute</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pointtype-relative')">pointtype-relative</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/pointtype-percent')">pointtype-percent</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/styletype-custom')">styletype-custom</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/styletype-shared')">styletype-shared</span>, <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/styletype-system')">styletype-system</span>
             </li>
           </ul>
         </details>
@@ -72742,6 +72743,9 @@ output : list-1 := (empty list-1)
 
 (type cursor : struct
  :doc &quot;Univeral Cursor Type&quot;)
+
+(type flip : struct
+ :doc &quot;Universal ui flip horizontal or vertical or both.&quot;)
 
 (type font : struct
  :properties [name      : string
@@ -72824,26 +72828,28 @@ output : list-1 := (empty list-1)
  :doc &quot;Universal Point Scale&quot;)
 
 (type style : struct
- :properties [name             : string
-              align            : align
-              boundsmargin     : bounds
-              boundspadding    : bounds
-              color-background : string
-              color-border     : string
-              color-font       : string
-              color-hoverbkgrd : string
-              cursor           : cursor
-              font             : font
-              hidden           : boolean
-              image-background : image
-              layout           : layout
-              type             : styletype
-              pin              : pin
-              pointpos         : point
-              pointrotate      : point
-              pointsize        : point
-              scroll-x         : boolean
-              scroll-y         : boolean]
+ :properties [name           : string
+              align          : align
+              boundsmargin   : bounds
+              boundspadding  : bounds
+              color-bkg      : string
+              color-bkghover : string
+              color-border   : string
+              color-font     : string
+              cursor         : cursor
+              flip           : flip
+              font           : font
+              hidden         : boolean
+              image-bkg      : image
+              layout         : layout
+              type           : styletype
+              pin            : pin
+              pointorigin    : point
+              pointpos       : point
+              pointrotate    : point
+              pointsize      : point
+              scroll-x       : boolean
+              scroll-y       : boolean]
  :doc &quot;Universal Style&quot;)
 
 (type stylelist : list
@@ -72903,6 +72909,15 @@ output : list-1 := (empty list-1)
 
 (const align-right : align
  :doc &quot;Logical Right Align in parent&quot;)
+
+(const flip-x : align
+ :doc &quot;Logical Flip Horizontally&quot;)
+
+(const flip-y : align
+ :doc &quot;Logical Flip Vertically&quot;)
+
+(const flip-xy : align
+ :doc &quot;Logical Flip Vertically and Horizontally&quot;)
 
 (const layout-app : layout
  (layout
@@ -73015,6 +73030,12 @@ output : list-1 := (empty list-1)
 (const pin-right : pin)
 
 (const pin-top : pin)
+
+(const point-center : point)
+
+(const point-lefttop : point)
+
+(const point-rightbottom : point)
 
 (const pointtype-absolute : pointtype)
 
@@ -74214,6 +74235,51 @@ output : list-1 := (empty list-1)
               </ul>
             </details>
           </div>
+          <div class="d" id="d_type_vx/ui/ui/flip">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/flip')">flip</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Universal ui flip horizontal or vertical or both.</div>
+              </li>
+            </ul>
+            <div class="lbl">Type Name:</div>
+            <ul>
+              <li>
+                <div class="txt">flip</div>
+              </li>
+            </ul>
+            <div class="lbl">Extends:</div>
+            <ul>
+              <li>
+                <div class="txt">:struct</div>
+              </li>
+            </ul>
+            <div class="lbl">Default:</div>
+            <ul>
+              <li>
+                <div class="txt"></div>
+              </li>
+            </ul>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(type flip : struct
+ :doc &quot;Universal ui flip horizontal or vertical or both.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
           <div class="d" id="d_type_vx/ui/ui/font">
             <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/font')">font</span></div>
             <div class="lbl">Description:</div>
@@ -75376,7 +75442,14 @@ output : list-1 := (empty list-1)
                       <div class="td">false</div>
                     </div>
                     <div class="tr">
-                      <div class="td">color-background</div>
+                      <div class="td">color-bkg</div>
+                      <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                      <div class="td"></div>
+                      <div class="td">false</div>
+                      <div class="td">false</div>
+                    </div>
+                    <div class="tr">
+                      <div class="td">color-bkghover</div>
                       <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
                       <div class="td"></div>
                       <div class="td">false</div>
@@ -75397,15 +75470,15 @@ output : list-1 := (empty list-1)
                       <div class="td">false</div>
                     </div>
                     <div class="tr">
-                      <div class="td">color-hoverbkgrd</div>
-                      <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+                      <div class="td">cursor</div>
+                      <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/cursor')">vx/ui/ui/cursor</span></div>
                       <div class="td"></div>
                       <div class="td">false</div>
                       <div class="td">false</div>
                     </div>
                     <div class="tr">
-                      <div class="td">cursor</div>
-                      <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/cursor')">vx/ui/ui/cursor</span></div>
+                      <div class="td">flip</div>
+                      <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/flip')">vx/ui/ui/flip</span></div>
                       <div class="td"></div>
                       <div class="td">false</div>
                       <div class="td">false</div>
@@ -75425,7 +75498,7 @@ output : list-1 := (empty list-1)
                       <div class="td">false</div>
                     </div>
                     <div class="tr">
-                      <div class="td">image-background</div>
+                      <div class="td">image-bkg</div>
                       <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/image')">vx/ui/ui/image</span></div>
                       <div class="td"></div>
                       <div class="td">false</div>
@@ -75448,6 +75521,13 @@ output : list-1 := (empty list-1)
                     <div class="tr">
                       <div class="td">pin</div>
                       <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/pin')">vx/ui/ui/pin</span></div>
+                      <div class="td"></div>
+                      <div class="td">false</div>
+                      <div class="td">false</div>
+                    </div>
+                    <div class="tr">
+                      <div class="td">pointorigin</div>
+                      <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/point')">vx/ui/ui/point</span></div>
                       <div class="td"></div>
                       <div class="td">false</div>
                       <div class="td">false</div>
@@ -75505,26 +75585,28 @@ output : list-1 := (empty list-1)
               <ul>
                 <li>
                   <div class="source">(type style : struct
- :properties [name             : string
-              align            : align
-              boundsmargin     : bounds
-              boundspadding    : bounds
-              color-background : string
-              color-border     : string
-              color-font       : string
-              color-hoverbkgrd : string
-              cursor           : cursor
-              font             : font
-              hidden           : boolean
-              image-background : image
-              layout           : layout
-              type             : styletype
-              pin              : pin
-              pointpos         : point
-              pointrotate      : point
-              pointsize        : point
-              scroll-x         : boolean
-              scroll-y         : boolean]
+ :properties [name           : string
+              align          : align
+              boundsmargin   : bounds
+              boundspadding  : bounds
+              color-bkg      : string
+              color-bkghover : string
+              color-border   : string
+              color-font     : string
+              cursor         : cursor
+              flip           : flip
+              font           : font
+              hidden         : boolean
+              image-bkg      : image
+              layout         : layout
+              type           : styletype
+              pin            : pin
+              pointorigin    : point
+              pointpos       : point
+              pointrotate    : point
+              pointsize      : point
+              scroll-x       : boolean
+              scroll-y       : boolean]
  :doc &quot;Universal Style&quot;)</div>
                 </li>
               </ul>
@@ -76274,6 +76356,123 @@ output : list-1 := (empty list-1)
                 <li>
                   <div class="source">(const align-right : align
  :doc &quot;Logical Right Align in parent&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_const_vx/ui/ui/flip-x">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/flip-x')">flip-x</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Logical Flip Horizontally</div>
+              </li>
+            </ul>
+            <div class="lbl">Constant Name:</div>
+            <ul>
+              <li>
+                <div class="txt">flip-x</div>
+              </li>
+            </ul>
+            <div class="lbl">Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/align')">vx/ui/ui/align</span></div>
+              </li>
+            </ul>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(const flip-x : align
+ :doc &quot;Logical Flip Horizontally&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_const_vx/ui/ui/flip-y">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/flip-y')">flip-y</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Logical Flip Vertically</div>
+              </li>
+            </ul>
+            <div class="lbl">Constant Name:</div>
+            <ul>
+              <li>
+                <div class="txt">flip-y</div>
+              </li>
+            </ul>
+            <div class="lbl">Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/align')">vx/ui/ui/align</span></div>
+              </li>
+            </ul>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(const flip-y : align
+ :doc &quot;Logical Flip Vertically&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_const_vx/ui/ui/flip-xy">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/flip-xy')">flip-xy</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Logical Flip Vertically and Horizontally</div>
+              </li>
+            </ul>
+            <div class="lbl">Constant Name:</div>
+            <ul>
+              <li>
+                <div class="txt">flip-xy</div>
+              </li>
+            </ul>
+            <div class="lbl">Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/align')">vx/ui/ui/align</span></div>
+              </li>
+            </ul>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(const flip-xy : align
+ :doc &quot;Logical Flip Vertically and Horizontally&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -77538,6 +77737,120 @@ output : list-1 := (empty list-1)
               <ul>
                 <li>
                   <div class="source">(const pin-top : pin)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_const_vx/ui/ui/point-center">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/point-center')">point-center</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt"></div>
+              </li>
+            </ul>
+            <div class="lbl">Constant Name:</div>
+            <ul>
+              <li>
+                <div class="txt">point-center</div>
+              </li>
+            </ul>
+            <div class="lbl">Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/point')">vx/ui/ui/point</span></div>
+              </li>
+            </ul>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(const point-center : point)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_const_vx/ui/ui/point-lefttop">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/point-lefttop')">point-lefttop</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt"></div>
+              </li>
+            </ul>
+            <div class="lbl">Constant Name:</div>
+            <ul>
+              <li>
+                <div class="txt">point-lefttop</div>
+              </li>
+            </ul>
+            <div class="lbl">Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/point')">vx/ui/ui/point</span></div>
+              </li>
+            </ul>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(const point-lefttop : point)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_const_vx/ui/ui/point-rightbottom">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/ui/ui')">vx/ui/ui</span> / <span class="nconst" onclick="docjs.navigate('const_vx/ui/ui/point-rightbottom')">point-rightbottom</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt"></div>
+              </li>
+            </ul>
+            <div class="lbl">Constant Name:</div>
+            <ul>
+              <li>
+                <div class="txt">point-rightbottom</div>
+              </li>
+            </ul>
+            <div class="lbl">Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/ui/ui/point')">vx/ui/ui/point</span></div>
+              </li>
+            </ul>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(const point-rightbottom : point)</div>
                 </li>
               </ul>
             </details>
@@ -87662,23 +87975,25 @@ output : list-1 := (empty list-1)
    (empty html/style))
   (else
    (let : html/style
-    [layout         : ui/layout    := (:layout           uistyle)
-     name           : string       := (:name             uistyle)
-     font           : ui/font      := (:font             uistyle)
-     pin            : ui/pin       := (:pin              uistyle)
-     pointpos       : ui/point     := (:pointpos         uistyle)
-     pointsize      : ui/point     := (:pointsize        uistyle)
-     pointrotate    : ui/point     := (:pointrotate      uistyle)
-     styletype      : ui/styletype := (:type             uistyle)
-     color-bkg      : string       := (:color-background uistyle)
-     color-border   : string       := (:color-border     uistyle)
-     color-font     : string       := (:color-font       uistyle)
-     color-hoverbkg : string       := (:color-hoverbkgrd uistyle)
-     cursor         : ui/cursor    := (:cursor           uistyle)
-     hidden         : boolean      := (:hidden           uistyle)
-     align          : ui/align     := (:align            uistyle)
-     scroll-x       : boolean      := (:scroll-x         uistyle)
-     scroll-y       : boolean      := (:scroll-y         uistyle)
+    [layout         : ui/layout    := (:layout         uistyle)
+     name           : string       := (:name           uistyle)
+     flip           : ui/flip      := (:flip           uistyle)
+     font           : ui/font      := (:font           uistyle)
+     pin            : ui/pin       := (:pin            uistyle)
+     pointorigin    : ui/point     := (:pointorigin    uistyle)
+     pointpos       : ui/point     := (:pointpos       uistyle)
+     pointsize      : ui/point     := (:pointsize      uistyle)
+     pointrotate    : ui/point     := (:pointrotate    uistyle)
+     styletype      : ui/styletype := (:type           uistyle)
+     color-bkg      : string       := (:color-bkg      uistyle)
+     color-bkghover : string       := (:color-bkghover uistyle)
+     color-border   : string       := (:color-border   uistyle)
+     color-font     : string       := (:color-font     uistyle)
+     cursor         : ui/cursor    := (:cursor         uistyle)
+     hidden         : boolean      := (:hidden         uistyle)
+     align          : ui/align     := (:align          uistyle)
+     scroll-x       : boolean      := (:scroll-x       uistyle)
+     scroll-y       : boolean      := (:scroll-y       uistyle)
      posx           : int          := (:x pointpos)
      posy           : int          := (:y pointpos)
      postype        : ui/pointtype := (:pointtype pointpos)
@@ -87843,8 +88158,8 @@ output : list-1 := (empty list-1)
      hoverbkgrdcolor : string :=
       (if : string
        (then
-        (!= &quot;&quot; color-hoverbkg)
-        (string &quot;#&quot; color-hoverbkg)))
+        (!= &quot;&quot; color-bkghover)
+        (string &quot;#&quot; color-bkghover)))
      scursor : string :=
       (if : string
        (then
@@ -87861,7 +88176,7 @@ output : list-1 := (empty list-1)
        (then
         (== align ui/align-right)
         &quot;right&quot;))
-     transform : string :=
+     transform-rotate : string :=
       (if : string
        (then (is-empty pointrotate) &quot;&quot;)
        (else
@@ -87869,12 +88184,29 @@ output : list-1 := (empty list-1)
          &quot;rotate(&quot;
          (:x pointrotate)
          &quot;deg)&quot;)))
+     transform-scale : string :=
+      (switch : string
+       flip
+       (case ui/flip-x  &quot;scale(-1, 1)&quot;)
+       (case ui/flip-y  &quot;scale( 1,-1)&quot;)
+       (case ui/flip-xy &quot;scale(-1,-1)&quot;))
+     transforms : stringlist :=
+      (stringlist transform-rotate transform-scale)
+     transform : string :=
+      (string&lt;-stringlist-join
+       transforms &quot; &quot;)
      transformorigin : string :=
-      (if : string
-       (then (is-empty pointrotate) &quot;&quot;)
-       (then
-        (== layout ui/layout-label)
-        &quot;left top&quot;))
+      (switch
+       pointorigin
+       (case ui/point-center      &quot;center&quot;)
+       (case ui/point-lefttop     &quot;left top&quot;)
+       (case ui/point-rightbottom &quot;right bottom&quot;)
+       (else
+        (if : string
+         (then (is-empty pointrotate) &quot;&quot;)
+         (then
+          (== layout ui/layout-label)
+          &quot;left top&quot;))))
      props : html/propmap :=
       (html/propmap
        :background-color bkgcolor
@@ -90406,23 +90738,25 @@ output : list-1 := (empty list-1)
    (empty html/style))
   (else
    (let : html/style
-    [layout         : ui/layout    := (:layout           uistyle)
-     name           : string       := (:name             uistyle)
-     font           : ui/font      := (:font             uistyle)
-     pin            : ui/pin       := (:pin              uistyle)
-     pointpos       : ui/point     := (:pointpos         uistyle)
-     pointsize      : ui/point     := (:pointsize        uistyle)
-     pointrotate    : ui/point     := (:pointrotate      uistyle)
-     styletype      : ui/styletype := (:type             uistyle)
-     color-bkg      : string       := (:color-background uistyle)
-     color-border   : string       := (:color-border     uistyle)
-     color-font     : string       := (:color-font       uistyle)
-     color-hoverbkg : string       := (:color-hoverbkgrd uistyle)
-     cursor         : ui/cursor    := (:cursor           uistyle)
-     hidden         : boolean      := (:hidden           uistyle)
-     align          : ui/align     := (:align            uistyle)
-     scroll-x       : boolean      := (:scroll-x         uistyle)
-     scroll-y       : boolean      := (:scroll-y         uistyle)
+    [layout         : ui/layout    := (:layout         uistyle)
+     name           : string       := (:name           uistyle)
+     flip           : ui/flip      := (:flip           uistyle)
+     font           : ui/font      := (:font           uistyle)
+     pin            : ui/pin       := (:pin            uistyle)
+     pointorigin    : ui/point     := (:pointorigin    uistyle)
+     pointpos       : ui/point     := (:pointpos       uistyle)
+     pointsize      : ui/point     := (:pointsize      uistyle)
+     pointrotate    : ui/point     := (:pointrotate    uistyle)
+     styletype      : ui/styletype := (:type           uistyle)
+     color-bkg      : string       := (:color-bkg      uistyle)
+     color-bkghover : string       := (:color-bkghover uistyle)
+     color-border   : string       := (:color-border   uistyle)
+     color-font     : string       := (:color-font     uistyle)
+     cursor         : ui/cursor    := (:cursor         uistyle)
+     hidden         : boolean      := (:hidden         uistyle)
+     align          : ui/align     := (:align          uistyle)
+     scroll-x       : boolean      := (:scroll-x       uistyle)
+     scroll-y       : boolean      := (:scroll-y       uistyle)
      posx           : int          := (:x pointpos)
      posy           : int          := (:y pointpos)
      postype        : ui/pointtype := (:pointtype pointpos)
@@ -90587,8 +90921,8 @@ output : list-1 := (empty list-1)
      hoverbkgrdcolor : string :=
       (if : string
        (then
-        (!= &quot;&quot; color-hoverbkg)
-        (string &quot;#&quot; color-hoverbkg)))
+        (!= &quot;&quot; color-bkghover)
+        (string &quot;#&quot; color-bkghover)))
      scursor : string :=
       (if : string
        (then
@@ -90605,7 +90939,7 @@ output : list-1 := (empty list-1)
        (then
         (== align ui/align-right)
         &quot;right&quot;))
-     transform : string :=
+     transform-rotate : string :=
       (if : string
        (then (is-empty pointrotate) &quot;&quot;)
        (else
@@ -90613,12 +90947,29 @@ output : list-1 := (empty list-1)
          &quot;rotate(&quot;
          (:x pointrotate)
          &quot;deg)&quot;)))
+     transform-scale : string :=
+      (switch : string
+       flip
+       (case ui/flip-x  &quot;scale(-1, 1)&quot;)
+       (case ui/flip-y  &quot;scale( 1,-1)&quot;)
+       (case ui/flip-xy &quot;scale(-1,-1)&quot;))
+     transforms : stringlist :=
+      (stringlist transform-rotate transform-scale)
+     transform : string :=
+      (string&lt;-stringlist-join
+       transforms &quot; &quot;)
      transformorigin : string :=
-      (if : string
-       (then (is-empty pointrotate) &quot;&quot;)
-       (then
-        (== layout ui/layout-label)
-        &quot;left top&quot;))
+      (switch
+       pointorigin
+       (case ui/point-center      &quot;center&quot;)
+       (case ui/point-lefttop     &quot;left top&quot;)
+       (case ui/point-rightbottom &quot;right bottom&quot;)
+       (else
+        (if : string
+         (then (is-empty pointrotate) &quot;&quot;)
+         (then
+          (== layout ui/layout-label)
+          &quot;left top&quot;))))
      props : html/propmap :=
       (html/propmap
        :background-color bkgcolor
