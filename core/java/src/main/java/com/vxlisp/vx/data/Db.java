@@ -25,7 +25,7 @@ public final class Db {
 
   public static class Class_db extends Core.Class_base implements Type_db {
 
-    protected Core.Type_string vx_p_dbid;
+    public Core.Type_string vx_p_dbid;
 
     @Override
     public Core.Type_string dbid() {
@@ -46,7 +46,7 @@ public final class Db {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":dbid", this.dbid());
       return Core.immutablemap(output);
     }
@@ -204,35 +204,35 @@ public final class Db {
 
   public static class Class_dbcell extends Core.Class_base implements Type_dbcell {
 
-    protected Core.Type_string vx_p_dbcellid;
+    public Core.Type_string vx_p_dbcellid;
 
     @Override
     public Core.Type_string dbcellid() {
       return this.vx_p_dbcellid == null ? Core.e_string : this.vx_p_dbcellid;
     }
 
-    protected Db.Type_dbcellmap vx_p_dbcellmap;
+    public Db.Type_dbcellmap vx_p_dbcellmap;
 
     @Override
     public Db.Type_dbcellmap dbcellmap() {
       return this.vx_p_dbcellmap == null ? Db.e_dbcellmap : this.vx_p_dbcellmap;
     }
 
-    protected Db.Type_dbfieldmap vx_p_dbfieldmap;
+    public Db.Type_dbfieldmap vx_p_dbfieldmap;
 
     @Override
     public Db.Type_dbfieldmap dbfieldmap() {
       return this.vx_p_dbfieldmap == null ? Db.e_dbfieldmap : this.vx_p_dbfieldmap;
     }
 
-    protected Db.Type_dbcell vx_p_dbparent;
+    public Db.Type_dbcell vx_p_dbparent;
 
     @Override
     public Db.Type_dbcell dbparent() {
       return this.vx_p_dbparent == null ? Db.e_dbcell : this.vx_p_dbparent;
     }
 
-    protected Db.Type_dbtable vx_p_dbtable;
+    public Db.Type_dbtable vx_p_dbtable;
 
     @Override
     public Db.Type_dbtable dbtable() {
@@ -265,7 +265,7 @@ public final class Db {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":dbcellid", this.dbcellid());
       output.put(":dbcellmap", this.dbcellmap());
       output.put(":dbfieldmap", this.dbfieldmap());
@@ -516,7 +516,7 @@ public final class Db {
 
   public static class Class_dbcellmap extends Core.Class_base implements Type_dbcellmap {
 
-    protected Map<String, Db.Type_dbcell> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Db.Type_dbcell>());
+    public Map<String, Db.Type_dbcell> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Db.Type_dbcell>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -716,21 +716,21 @@ public final class Db {
 
   public static class Class_dbfield extends Core.Class_base implements Type_dbfield {
 
-    protected Core.Type_string vx_p_dbfieldid;
+    public Core.Type_string vx_p_dbfieldid;
 
     @Override
     public Core.Type_string dbfieldid() {
       return this.vx_p_dbfieldid == null ? Core.e_string : this.vx_p_dbfieldid;
     }
 
-    protected Core.Type_any vx_p_type;
+    public Core.Type_any vx_p_type;
 
     @Override
     public Core.Type_any type() {
       return this.vx_p_type == null ? Core.e_any : this.vx_p_type;
     }
 
-    protected Core.Type_any vx_p_value;
+    public Core.Type_any vx_p_value;
 
     @Override
     public Core.Type_any value() {
@@ -757,7 +757,7 @@ public final class Db {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":dbfieldid", this.dbfieldid());
       output.put(":type", this.type());
       output.put(":value", this.value());
@@ -960,7 +960,7 @@ public final class Db {
 
   public static class Class_dbfieldmap extends Core.Class_base implements Type_dbfieldmap {
 
-    protected Map<String, Db.Type_dbfield> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Db.Type_dbfield>());
+    public Map<String, Db.Type_dbfield> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Db.Type_dbfield>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -1230,14 +1230,14 @@ public final class Db {
 
   public static class Class_dblink extends Core.Class_base implements Type_dblink {
 
-    protected Db.Type_dbid vx_p_fromid;
+    public Db.Type_dbid vx_p_fromid;
 
     @Override
     public Db.Type_dbid fromid() {
       return this.vx_p_fromid == null ? Db.e_dbid : this.vx_p_fromid;
     }
 
-    protected Db.Type_dbid vx_p_toid;
+    public Db.Type_dbid vx_p_toid;
 
     @Override
     public Db.Type_dbid toid() {
@@ -1261,7 +1261,7 @@ public final class Db {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":fromid", this.fromid());
       output.put(":toid", this.toid());
       return Core.immutablemap(output);
@@ -1437,7 +1437,7 @@ public final class Db {
 
   public static class Class_dblinklist extends Core.Class_base implements Type_dblinklist {
 
-    protected List<Db.Type_dblink> vx_p_list = Core.immutablelist(new ArrayList<Db.Type_dblink>());
+    public List<Db.Type_dblink> vx_p_list = Core.immutablelist(new ArrayList<Db.Type_dblink>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -1577,14 +1577,14 @@ public final class Db {
 
   public static class Class_dbnode extends Core.Class_base implements Type_dbnode {
 
-    protected Db.Type_dbid vx_p_dbid;
+    public Db.Type_dbid vx_p_dbid;
 
     @Override
     public Db.Type_dbid dbid() {
       return this.vx_p_dbid == null ? Db.e_dbid : this.vx_p_dbid;
     }
 
-    protected Db.Type_dblinklist vx_p_links;
+    public Db.Type_dblinklist vx_p_links;
 
     @Override
     public Db.Type_dblinklist links() {
@@ -1608,7 +1608,7 @@ public final class Db {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":dbid", this.dbid());
       output.put(":links", this.links());
       return Core.immutablemap(output);
@@ -1787,35 +1787,35 @@ public final class Db {
 
   public static class Class_dbnote extends Core.Class_base implements Type_dbnote {
 
-    protected Db.Type_dbid vx_p_dbid;
+    public Db.Type_dbid vx_p_dbid;
 
     @Override
     public Db.Type_dbid dbid() {
       return this.vx_p_dbid == null ? Db.e_dbid : this.vx_p_dbid;
     }
 
-    protected Db.Type_dbid vx_p_valid;
+    public Db.Type_dbid vx_p_valid;
 
     @Override
     public Db.Type_dbid valid() {
       return this.vx_p_valid == null ? Db.e_dbid : this.vx_p_valid;
     }
 
-    protected Db.Type_dbid vx_p_noteid;
+    public Db.Type_dbid vx_p_noteid;
 
     @Override
     public Db.Type_dbid noteid() {
       return this.vx_p_noteid == null ? Db.e_dbid : this.vx_p_noteid;
     }
 
-    protected Db.Type_dbid vx_p_valueid;
+    public Db.Type_dbid vx_p_valueid;
 
     @Override
     public Db.Type_dbid valueid() {
       return this.vx_p_valueid == null ? Db.e_dbid : this.vx_p_valueid;
     }
 
-    protected Core.Type_string vx_p_value;
+    public Core.Type_string vx_p_value;
 
     @Override
     public Core.Type_string value() {
@@ -1848,7 +1848,7 @@ public final class Db {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":dbid", this.dbid());
       output.put(":valid", this.valid());
       output.put(":noteid", this.noteid());
@@ -2101,28 +2101,28 @@ public final class Db {
 
   public static class Class_dbtable extends Core.Class_base implements Type_dbtable {
 
-    protected Core.Type_string vx_p_dbtableid;
+    public Core.Type_string vx_p_dbtableid;
 
     @Override
     public Core.Type_string dbtableid() {
       return this.vx_p_dbtableid == null ? Core.e_string : this.vx_p_dbtableid;
     }
 
-    protected Db.Type_db vx_p_db;
+    public Db.Type_db vx_p_db;
 
     @Override
     public Db.Type_db db() {
       return this.vx_p_db == null ? Db.e_db : this.vx_p_db;
     }
 
-    protected Db.Type_dbcellmap vx_p_dbcellmap;
+    public Db.Type_dbcellmap vx_p_dbcellmap;
 
     @Override
     public Db.Type_dbcellmap dbcellmap() {
       return this.vx_p_dbcellmap == null ? Db.e_dbcellmap : this.vx_p_dbcellmap;
     }
 
-    protected Db.Type_dbfieldmap vx_p_dbfieldmap;
+    public Db.Type_dbfieldmap vx_p_dbfieldmap;
 
     @Override
     public Db.Type_dbfieldmap dbfieldmap() {
@@ -2152,7 +2152,7 @@ public final class Db {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":dbtableid", this.dbtableid());
       output.put(":db", this.db());
       output.put(":dbcellmap", this.dbcellmap());
@@ -2383,42 +2383,42 @@ public final class Db {
 
   public static class Class_dbvalue extends Core.Class_base implements Type_dbvalue {
 
-    protected Db.Type_dbid vx_p_dbid;
+    public Db.Type_dbid vx_p_dbid;
 
     @Override
     public Db.Type_dbid dbid() {
       return this.vx_p_dbid == null ? Db.e_dbid : this.vx_p_dbid;
     }
 
-    protected Db.Type_dbid vx_p_fromid;
+    public Db.Type_dbid vx_p_fromid;
 
     @Override
     public Db.Type_dbid fromid() {
       return this.vx_p_fromid == null ? Db.e_dbid : this.vx_p_fromid;
     }
 
-    protected Db.Type_dbid vx_p_toid;
+    public Db.Type_dbid vx_p_toid;
 
     @Override
     public Db.Type_dbid toid() {
       return this.vx_p_toid == null ? Db.e_dbid : this.vx_p_toid;
     }
 
-    protected Db.Type_dbid vx_p_noteid;
+    public Db.Type_dbid vx_p_noteid;
 
     @Override
     public Db.Type_dbid noteid() {
       return this.vx_p_noteid == null ? Db.e_dbid : this.vx_p_noteid;
     }
 
-    protected Db.Type_dbid vx_p_valid;
+    public Db.Type_dbid vx_p_valid;
 
     @Override
     public Db.Type_dbid valid() {
       return this.vx_p_valid == null ? Db.e_dbid : this.vx_p_valid;
     }
 
-    protected Core.Type_string vx_p_valtext;
+    public Core.Type_string vx_p_valtext;
 
     @Override
     public Core.Type_string valtext() {
@@ -2454,7 +2454,7 @@ public final class Db {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":dbid", this.dbid());
       output.put(":fromid", this.fromid());
       output.put(":toid", this.toid());

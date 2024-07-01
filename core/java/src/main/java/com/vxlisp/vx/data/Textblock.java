@@ -28,35 +28,35 @@ public final class Textblock {
 
   public static class Class_delim extends Core.Class_base implements Type_delim {
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Core.Type_string vx_p_starttext;
+    public Core.Type_string vx_p_starttext;
 
     @Override
     public Core.Type_string starttext() {
       return this.vx_p_starttext == null ? Core.e_string : this.vx_p_starttext;
     }
 
-    protected Core.Type_string vx_p_endtext;
+    public Core.Type_string vx_p_endtext;
 
     @Override
     public Core.Type_string endtext() {
       return this.vx_p_endtext == null ? Core.e_string : this.vx_p_endtext;
     }
 
-    protected Core.Type_int vx_p_pos;
+    public Core.Type_int vx_p_pos;
 
     @Override
     public Core.Type_int pos() {
       return this.vx_p_pos == null ? Core.e_int : this.vx_p_pos;
     }
 
-    protected Textblock.Type_delimlist vx_p_delimlist;
+    public Textblock.Type_delimlist vx_p_delimlist;
 
     @Override
     public Textblock.Type_delimlist delimlist() {
@@ -89,7 +89,7 @@ public final class Textblock {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":name", this.name());
       output.put(":starttext", this.starttext());
       output.put(":endtext", this.endtext());
@@ -349,7 +349,7 @@ public final class Textblock {
 
   public static class Class_delimlist extends Core.Class_base implements Type_delimlist {
 
-    protected List<Textblock.Type_delim> vx_p_list = Core.immutablelist(new ArrayList<Textblock.Type_delim>());
+    public List<Textblock.Type_delim> vx_p_list = Core.immutablelist(new ArrayList<Textblock.Type_delim>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -498,77 +498,77 @@ public final class Textblock {
 
   public static class Class_textblock extends Core.Class_base implements Type_textblock {
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Core.Type_string vx_p_text;
+    public Core.Type_string vx_p_text;
 
     @Override
     public Core.Type_string text() {
       return this.vx_p_text == null ? Core.e_string : this.vx_p_text;
     }
 
-    protected Core.Type_int vx_p_startpos;
+    public Core.Type_int vx_p_startpos;
 
     @Override
     public Core.Type_int startpos() {
       return this.vx_p_startpos == null ? Core.e_int : this.vx_p_startpos;
     }
 
-    protected Core.Type_int vx_p_endpos;
+    public Core.Type_int vx_p_endpos;
 
     @Override
     public Core.Type_int endpos() {
       return this.vx_p_endpos == null ? Core.e_int : this.vx_p_endpos;
     }
 
-    protected Core.Type_int vx_p_curpos;
+    public Core.Type_int vx_p_curpos;
 
     @Override
     public Core.Type_int curpos() {
       return this.vx_p_curpos == null ? Core.e_int : this.vx_p_curpos;
     }
 
-    protected Core.Type_int vx_p_line;
+    public Core.Type_int vx_p_line;
 
     @Override
     public Core.Type_int line() {
       return this.vx_p_line == null ? Core.e_int : this.vx_p_line;
     }
 
-    protected Core.Type_int vx_p_column;
+    public Core.Type_int vx_p_column;
 
     @Override
     public Core.Type_int column() {
       return this.vx_p_column == null ? Core.e_int : this.vx_p_column;
     }
 
-    protected Textblock.Type_delim vx_p_delim;
+    public Textblock.Type_delim vx_p_delim;
 
     @Override
     public Textblock.Type_delim delim() {
       return this.vx_p_delim == null ? Textblock.e_delim : this.vx_p_delim;
     }
 
-    protected Textblock.Type_delim vx_p_close;
+    public Textblock.Type_delim vx_p_close;
 
     @Override
     public Textblock.Type_delim close() {
       return this.vx_p_close == null ? Textblock.e_delim : this.vx_p_close;
     }
 
-    protected Textblock.Type_textblock vx_p_parent;
+    public Textblock.Type_textblock vx_p_parent;
 
     @Override
     public Textblock.Type_textblock parent() {
       return this.vx_p_parent == null ? Textblock.e_textblock : this.vx_p_parent;
     }
 
-    protected Textblock.Type_textblocklist vx_p_children;
+    public Textblock.Type_textblocklist vx_p_children;
 
     @Override
     public Textblock.Type_textblocklist children() {
@@ -619,7 +619,7 @@ public final class Textblock {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":name", this.name());
       output.put(":text", this.text());
       output.put(":startpos", this.startpos());
@@ -1032,7 +1032,7 @@ public final class Textblock {
 
   public static class Class_textblocklist extends Core.Class_base implements Type_textblocklist {
 
-    protected List<Textblock.Type_textblock> vx_p_list = Core.immutablelist(new ArrayList<Textblock.Type_textblock>());
+    public List<Textblock.Type_textblock> vx_p_list = Core.immutablelist(new ArrayList<Textblock.Type_textblock>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -2323,6 +2323,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_children_from_textblock;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_children_from_textblock;
@@ -2423,6 +2424,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_delim_first_from_delim_delim;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_delim_first_from_delim_delim;
@@ -2566,6 +2568,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_delim_first_from_string_delimlist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_delim_first_from_string_delimlist;
@@ -2690,6 +2693,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_delim_pos_from_string_delim;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_delim_pos_from_string_delim;
@@ -2807,6 +2811,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_delimlist_pos_from_string_delimlist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_delimlist_pos_from_string_delimlist;
@@ -2901,6 +2906,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_is_close;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_is_close;
@@ -3003,6 +3009,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_is_single;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_is_single;
@@ -3111,6 +3118,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_stringlist_from_textblocklist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_stringlist_from_textblocklist;
@@ -3214,6 +3222,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_text_from_textblock;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_text_from_textblock;
@@ -3315,6 +3324,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_textblock_addchild_from_textblock_find_child;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_addchild_from_textblock_find_child;
@@ -3454,6 +3464,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_textblock_delimnotfound;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_delimnotfound;
@@ -3812,6 +3823,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_textblock_findparent_from_textblock;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_findparent_from_textblock;
@@ -3954,6 +3966,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_textblock_init;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_init;
@@ -4093,6 +4106,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_textblock_parse;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_parse;
@@ -4208,6 +4222,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_textblock_parse_one;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_parse_one;
@@ -4408,6 +4423,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_textblock_parse_from_string_delim;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_parse_from_string_delim;
@@ -4502,6 +4518,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_textblock_replace_from_textblock_find_replace;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_replace_from_textblock_find_replace;
@@ -4632,6 +4649,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_textblock_startleft_from_string_delim_offset;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_startleft_from_string_delim_offset;
@@ -4770,6 +4788,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_textblock_startright_from_string_delim_offset;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_startright_from_string_delim_offset;
@@ -4960,6 +4979,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_textblock_from_close_textblock;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_from_close_textblock;
@@ -5167,6 +5187,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_textblock_from_empty_textblock;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_from_empty_textblock;
@@ -5253,6 +5274,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_textblock_from_open_textblock;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_from_open_textblock;
@@ -5503,6 +5525,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_textblock_from_single_textblock;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_from_single_textblock;
@@ -5743,6 +5766,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_textblock_from_string_delim;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_from_string_delim;
@@ -5842,6 +5866,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_textblock_from_textblock_delim;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_from_textblock_delim;
@@ -5928,6 +5953,7 @@ public final class Textblock {
     public Core.Type_any vx_empty() {
       return e_textblocklist_from_textblocklist_remove;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblocklist_from_textblocklist_remove;

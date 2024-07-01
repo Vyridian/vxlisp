@@ -29,42 +29,42 @@ public final class Xml {
 
   public static class Class_xml extends Core.Class_base implements Type_xml {
 
-    protected Core.Type_string vx_p_tag;
+    public Core.Type_string vx_p_tag;
 
     @Override
     public Core.Type_string tag() {
       return this.vx_p_tag == null ? Core.e_string : this.vx_p_tag;
     }
 
-    protected Core.Type_string vx_p_text;
+    public Core.Type_string vx_p_text;
 
     @Override
     public Core.Type_string text() {
       return this.vx_p_text == null ? Core.e_string : this.vx_p_text;
     }
 
-    protected Core.Type_string vx_p_prop;
+    public Core.Type_string vx_p_prop;
 
     @Override
     public Core.Type_string prop() {
       return this.vx_p_prop == null ? Core.e_string : this.vx_p_prop;
     }
 
-    protected Core.Type_stringmap vx_p_propmap;
+    public Core.Type_stringmap vx_p_propmap;
 
     @Override
     public Core.Type_stringmap propmap() {
       return this.vx_p_propmap == null ? Core.e_stringmap : this.vx_p_propmap;
     }
 
-    protected Xml.Type_xmllist vx_p_children;
+    public Xml.Type_xmllist vx_p_children;
 
     @Override
     public Xml.Type_xmllist children() {
       return this.vx_p_children == null ? Xml.e_xmllist : this.vx_p_children;
     }
 
-    protected Xml.Type_xml vx_p_parent;
+    public Xml.Type_xml vx_p_parent;
 
     @Override
     public Xml.Type_xml parent() {
@@ -100,7 +100,7 @@ public final class Xml {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":tag", this.tag());
       output.put(":text", this.text());
       output.put(":prop", this.prop());
@@ -380,7 +380,7 @@ public final class Xml {
 
   public static class Class_xmllist extends Core.Class_base implements Type_xmllist {
 
-    protected List<Xml.Type_xml> vx_p_list = Core.immutablelist(new ArrayList<Xml.Type_xml>());
+    public List<Xml.Type_xml> vx_p_list = Core.immutablelist(new ArrayList<Xml.Type_xml>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -519,7 +519,7 @@ public final class Xml {
 
   public static class Class_xmlpropmap extends Core.Class_base implements Type_xmlpropmap {
 
-    protected Map<String, Core.Type_string> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_string>());
+    public Map<String, Core.Type_string> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_string>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -980,6 +980,7 @@ public final class Xml {
     public Core.Type_any vx_empty() {
       return e_string_decodexml_from_string;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_decodexml_from_string;
@@ -1092,6 +1093,7 @@ public final class Xml {
     public Core.Type_any vx_empty() {
       return e_string_first_from_xml;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_first_from_xml;
@@ -1202,6 +1204,7 @@ public final class Xml {
     public Core.Type_any vx_empty() {
       return e_textblock_xml_from_string;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_xml_from_string;
@@ -1305,6 +1308,7 @@ public final class Xml {
     public Core.Type_any vx_empty() {
       return e_xml_angle_from_xml_textblock;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_xml_angle_from_xml_textblock;
@@ -1434,6 +1438,7 @@ public final class Xml {
     public Core.Type_any vx_empty() {
       return e_xml_close_from_xml_textblock;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_xml_close_from_xml_textblock;
@@ -1619,6 +1624,7 @@ public final class Xml {
     public Core.Type_any vx_empty() {
       return e_xml_parse_from_xml_textblock;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_xml_parse_from_xml_textblock;
@@ -1749,6 +1755,7 @@ public final class Xml {
     public Core.Type_any vx_empty() {
       return e_xml_parse_from_xml_textblocklist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_xml_parse_from_xml_textblocklist;
@@ -1846,6 +1853,7 @@ public final class Xml {
     public Core.Type_any vx_empty() {
       return e_xml_properties_from_xml_textblocklist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_xml_properties_from_xml_textblocklist;
@@ -1949,6 +1957,7 @@ public final class Xml {
     public Core.Type_any vx_empty() {
       return e_xml_property_from_xml_textblock;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_xml_property_from_xml_textblock;
@@ -2136,6 +2145,7 @@ public final class Xml {
     public Core.Type_any vx_empty() {
       return e_xml_read_from_file;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_xml_read_from_file;
@@ -2243,6 +2253,7 @@ public final class Xml {
     public Core.Type_any vx_empty() {
       return e_xml_text_from_xml_textblock;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_xml_text_from_xml_textblock;
@@ -2371,6 +2382,7 @@ public final class Xml {
     public Core.Type_any vx_empty() {
       return e_xml_from_file;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_xml_from_file;
@@ -2476,6 +2488,7 @@ public final class Xml {
     public Core.Type_any vx_empty() {
       return e_xml_from_string;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_xml_from_string;
@@ -2581,6 +2594,7 @@ public final class Xml {
     public Core.Type_any vx_empty() {
       return e_xml_from_textblock;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_xml_from_textblock;

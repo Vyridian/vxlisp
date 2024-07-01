@@ -416,6 +416,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_boolean_layoutremove_html;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_layoutremove_html;
@@ -521,6 +522,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_boolean_layoutselected_html;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_layoutselected_html;
@@ -620,6 +622,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_boolean_layoutvisible_html;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_layoutvisible_html;
@@ -719,6 +722,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_boolean_print_html;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_print_html;
@@ -828,6 +832,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_boolean_writeclass_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_writeclass_from_ui;
@@ -934,6 +939,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_boolean_writeeventsall_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_writeeventsall_from_ui;
@@ -1041,6 +1047,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_boolean_writeeventsall_from_uimap;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_writeeventsall_from_uimap;
@@ -1155,6 +1162,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_boolean_writeselected_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_writeselected_from_ui;
@@ -1254,6 +1262,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_boolean_writevisible_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_writevisible_from_ui;
@@ -1351,6 +1360,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_context_write;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_context_write;
@@ -1436,6 +1446,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_divchild_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_divchild_from_ui;
@@ -1556,6 +1567,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_divchildlist_from_uimap;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_divchildlist_from_uimap;
@@ -1676,6 +1688,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_divchildlist_from_uimap_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_divchildlist_from_uimap_1;
@@ -1798,6 +1811,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_divchildlist_from_uimap_origmap_parent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_divchildlist_from_uimap_origmap_parent;
@@ -1901,6 +1915,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_node_app_from_ui_orig_parent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_node_app_from_ui_orig_parent;
@@ -2006,6 +2021,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_node_default_from_ui_orig_parent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_node_default_from_ui_orig_parent;
@@ -2118,6 +2134,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_node_image_from_ui_orig_parent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_node_image_from_ui_orig_parent;
@@ -2230,6 +2247,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_node_label_from_ui_orig_parent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_node_label_from_ui_orig_parent;
@@ -2364,6 +2382,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_node_layout_from_node_ui_parent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_node_layout_from_node_ui_parent;
@@ -2461,6 +2480,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_node_from_ui_orig_parent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_node_from_ui_orig_parent;
@@ -2577,6 +2597,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_string_class_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_class_from_ui;
@@ -2682,6 +2703,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_string_style_from_font;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_style_from_font;
@@ -2829,6 +2851,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_string_style_from_image;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_style_from_image;
@@ -2966,6 +2989,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_string_stylename_from_name_styletype;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_stylename_from_name_styletype;
@@ -3103,6 +3127,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_style_from_fontface;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_style_from_fontface;
@@ -3268,6 +3293,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_style_from_style;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_style_from_style;
@@ -4267,6 +4293,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_stylelist_extra_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_stylelist_extra_from_ui;
@@ -4410,6 +4437,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_stylelist_reset;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_stylelist_reset;
@@ -4618,6 +4646,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_stylelist_from_fontfacemap;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_stylelist_from_fontfacemap;
@@ -4726,6 +4755,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_stylelist_from_stylelist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_stylelist_from_stylelist;
@@ -4829,6 +4859,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_stylelist_from_stylemap;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_stylelist_from_stylemap;
@@ -4937,6 +4968,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_stylemap_from_stylemap;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_stylemap_from_stylemap;
@@ -5046,6 +5078,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_stylesheet_layout_html;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_stylesheet_layout_html;
@@ -5155,6 +5188,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_stylesheet_from_stylesheet;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_stylesheet_from_stylesheet;
@@ -5279,6 +5313,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_ui_layout_app_from_ui_orig_parent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_layout_app_from_ui_orig_parent;
@@ -5375,6 +5410,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_ui_layout_default_from_ui_orig_parent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_layout_default_from_ui_orig_parent;
@@ -5472,6 +5508,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_ui_layout_image_from_ui_orig_parent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_layout_image_from_ui_orig_parent;
@@ -5568,6 +5605,7 @@ public final class Uihtml {
     public Core.Type_any vx_empty() {
       return e_ui_layout_label_from_ui_orig_parent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_layout_label_from_ui_orig_parent;

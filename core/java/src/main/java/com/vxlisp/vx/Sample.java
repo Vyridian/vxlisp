@@ -22,14 +22,14 @@ public final class Sample {
 
   public static class Class_mytype extends Core.Class_base implements Type_mytype {
 
-    protected Core.Type_int vx_p_mynum;
+    public Core.Type_int vx_p_mynum;
 
     @Override
     public Core.Type_int mynum() {
       return this.vx_p_mynum == null ? Core.e_int : this.vx_p_mynum;
     }
 
-    protected Core.Type_string vx_p_mystr;
+    public Core.Type_string vx_p_mystr;
 
     @Override
     public Core.Type_string mystr() {
@@ -53,7 +53,7 @@ public final class Sample {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":mynum", this.mynum());
       output.put(":mystr", this.mystr());
       return Core.immutablemap(output);
@@ -315,6 +315,7 @@ public final class Sample {
     public Core.Type_any vx_empty() {
       return e_main;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_main;
@@ -396,6 +397,7 @@ public final class Sample {
     public Core.Type_any vx_empty() {
       return e_myfunc;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_myfunc;

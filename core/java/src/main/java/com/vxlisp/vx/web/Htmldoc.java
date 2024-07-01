@@ -66,6 +66,7 @@ public final class Htmldoc {
     public Core.Type_any vx_empty() {
       return e_boolean_print_from_id_stylesheettext;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_print_from_id_stylesheettext;
@@ -151,6 +152,7 @@ public final class Htmldoc {
     public Core.Type_any vx_empty() {
       return e_boolean_remove_from_id;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_remove_from_id;
@@ -250,6 +252,7 @@ public final class Htmldoc {
     public Core.Type_any vx_empty() {
       return e_boolean_replace_from_id_htmltext;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_replace_from_id_htmltext;
@@ -337,6 +340,7 @@ public final class Htmldoc {
     public Core.Type_any vx_empty() {
       return e_boolean_replace_from_id_parent_htmltext;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_replace_from_id_parent_htmltext;
@@ -425,6 +429,7 @@ public final class Htmldoc {
     public Core.Type_any vx_empty() {
       return e_boolean_write_stylesheet_from_string;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_write_stylesheet_from_string;
@@ -526,6 +531,7 @@ public final class Htmldoc {
     public Core.Type_any vx_empty() {
       return e_boolean_write_from_id_attribute_value;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_write_from_id_attribute_value;
@@ -613,6 +619,7 @@ public final class Htmldoc {
     public Core.Type_any vx_empty() {
       return e_boolean_write_from_id_htmltext;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_write_from_id_htmltext;
@@ -699,6 +706,7 @@ public final class Htmldoc {
     public Core.Type_any vx_empty() {
       return e_boolean_write_from_id_visible;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_write_from_id_visible;
@@ -786,6 +794,7 @@ public final class Htmldoc {
     public Core.Type_any vx_empty() {
       return e_boolean_write_from_stylesheet;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_write_from_stylesheet;
@@ -895,6 +904,7 @@ public final class Htmldoc {
     public Core.Type_any vx_empty() {
       return e_boolean_writeevents_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_writeevents_from_ui;
@@ -992,6 +1002,7 @@ public final class Htmldoc {
     public Core.Type_any vx_empty() {
       return e_context_read;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_context_read;
@@ -1074,6 +1085,7 @@ public final class Htmldoc {
     public Core.Type_any vx_empty() {
       return e_context_write;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_context_write;
@@ -1158,6 +1170,7 @@ public final class Htmldoc {
     public Core.Type_any vx_empty() {
       return e_string_from_id;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_id;
@@ -1256,6 +1269,7 @@ public final class Htmldoc {
     public Core.Type_any vx_empty() {
       return e_string_from_stylesheet;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_stylesheet;
@@ -1362,6 +1376,7 @@ public final class Htmldoc {
     public Core.Type_any vx_empty() {
       return e_ui_readstate_from_uid;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_readstate_from_uid;

@@ -173,6 +173,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_allowtypenames_from_type;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_allowtypenames_from_type;
@@ -274,6 +275,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_allowtypes_from_type;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_allowtypes_from_type;
@@ -373,6 +375,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_any_from_int;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_int;
@@ -473,6 +476,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_boolean_from_string_ends;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_from_string_ends;
@@ -561,6 +565,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_boolean_from_string_starts;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_from_string_starts;
@@ -649,6 +654,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_int_from_string_find;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_int_from_string_find;
@@ -736,6 +742,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_int_from_string_findkeyword;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_int_from_string_findkeyword;
@@ -823,6 +830,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_int_from_string_findlast;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_int_from_string_findlast;
@@ -908,6 +916,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_is_boolean;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_is_boolean;
@@ -1009,6 +1018,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_is_decimal;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_is_decimal;
@@ -1110,6 +1120,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_is_none;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_is_none;
@@ -1211,6 +1222,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_is_string;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_is_string;
@@ -1313,6 +1325,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_is_type;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_is_type;
@@ -1415,6 +1428,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_is_type_from_any_typelist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_is_type_from_any_typelist;
@@ -1514,6 +1528,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_string_lowercase;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_lowercase;
@@ -1613,6 +1628,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_string_outdent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_outdent;
@@ -1752,6 +1768,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_string_trim;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_trim;
@@ -1851,6 +1868,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_string_uppercase;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_uppercase;
@@ -1950,6 +1968,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_string_from_int;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_int;
@@ -2083,6 +2102,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_string_from_string_end;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_string_end;
@@ -2170,6 +2190,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_string_from_string_start;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_string_start;
@@ -2262,6 +2283,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_string_from_string_start_end;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_string_start_end;
@@ -2351,6 +2373,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_string_from_stringlist_join;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_stringlist_join;
@@ -2438,6 +2461,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_stringlist_from_string_split;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_stringlist_from_string_split;
@@ -2524,6 +2548,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_traitnames_from_any;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_traitnames_from_any;
@@ -2625,6 +2650,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_traits_from_any;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_traits_from_any;
@@ -2726,6 +2752,7 @@ public final class Type {
     public Core.Type_any vx_empty() {
       return e_traits_from_typedef;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_traits_from_typedef;

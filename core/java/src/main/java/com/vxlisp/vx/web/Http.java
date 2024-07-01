@@ -25,14 +25,14 @@ public final class Http {
 
   public static class Class_response extends Core.Class_base implements Type_response {
 
-    protected Core.Type_boolean vx_p_ok;
+    public Core.Type_boolean vx_p_ok;
 
     @Override
     public Core.Type_boolean ok() {
       return this.vx_p_ok == null ? Core.e_boolean : this.vx_p_ok;
     }
 
-    protected Core.Type_int vx_p_status;
+    public Core.Type_int vx_p_status;
 
     @Override
     public Core.Type_int status() {
@@ -56,7 +56,7 @@ public final class Http {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":ok", this.ok());
       output.put(":status", this.status());
       return Core.immutablemap(output);
@@ -280,6 +280,7 @@ public final class Http {
     public Core.Type_any vx_empty() {
       return e_csv_from_httpget;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_csv_from_httpget;
@@ -390,6 +391,7 @@ public final class Http {
     public Core.Type_any vx_empty() {
       return e_json_from_httpget;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_json_from_httpget;
@@ -501,6 +503,7 @@ public final class Http {
     public Core.Type_any vx_empty() {
       return e_response_from_httpget;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_response_from_httpget;
@@ -589,6 +592,7 @@ public final class Http {
     public Core.Type_any vx_empty() {
       return e_text_from_httpget;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_text_from_httpget;
@@ -697,6 +701,7 @@ public final class Http {
     public Core.Type_any vx_empty() {
       return e_text_from_response;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_text_from_response;
@@ -798,6 +803,7 @@ public final class Http {
     public Core.Type_any vx_empty() {
       return e_textblock_from_httpget;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_from_httpget;
@@ -893,6 +899,7 @@ public final class Http {
     public Core.Type_any vx_empty() {
       return e_textblock_from_response;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_from_response;
@@ -1000,6 +1007,7 @@ public final class Http {
     public Core.Type_any vx_empty() {
       return e_xml_from_httpget;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_xml_from_httpget;

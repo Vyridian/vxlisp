@@ -20,7 +20,7 @@ public final class State {
 
   public static class Class_valuemap extends Core.Class_base implements Type_valuemap {
 
-    protected Map<String, Core.Type_any> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
+    public Map<String, Core.Type_any> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -250,6 +250,7 @@ public final class State {
     public Core.Type_any vx_empty() {
       return e_any_readstate_from_mapname_name;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_readstate_from_mapname_name;
@@ -344,6 +345,7 @@ public final class State {
     public Core.Type_any vx_empty() {
       return e_any_readstate_from_name;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_readstate_from_name;
@@ -448,6 +450,7 @@ public final class State {
     public Core.Type_any vx_empty() {
       return e_boolean_removestate_from_name;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_removestate_from_name;
@@ -562,6 +565,7 @@ public final class State {
     public Core.Type_any vx_empty() {
       return e_boolean_writestate_from_mapname_name_value;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_writestate_from_mapname_name_value;
@@ -695,6 +699,7 @@ public final class State {
     public Core.Type_any vx_empty() {
       return e_boolean_writestate_from_name_value;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_writestate_from_name_value;
@@ -797,6 +802,7 @@ public final class State {
     public Core.Type_any vx_empty() {
       return e_boolean_writestate_from_statelistener;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_writestate_from_statelistener;
@@ -904,6 +910,7 @@ public final class State {
     public Core.Type_any vx_empty() {
       return e_change;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_change;
@@ -1001,6 +1008,7 @@ public final class State {
     public Core.Type_any vx_empty() {
       return e_register;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_register;
@@ -1098,6 +1106,7 @@ public final class State {
     public Core.Type_any vx_empty() {
       return e_state_from_context;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_state_from_context;
@@ -1183,6 +1192,7 @@ public final class State {
     public Core.Type_any vx_empty() {
       return e_statelistener_readstate_from_name;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_statelistener_readstate_from_name;
@@ -1288,6 +1298,7 @@ public final class State {
     public Core.Type_any vx_empty() {
       return e_statelistenermap_readstate;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_statelistenermap_readstate;
@@ -1379,6 +1390,7 @@ public final class State {
     public Core.Type_any vx_empty() {
       return e_value_readstate_from_name;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_value_readstate_from_name;
@@ -1485,6 +1497,7 @@ public final class State {
     public Core.Type_any vx_empty() {
       return e_valuemap_readstate_from_mapname;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_valuemap_readstate_from_mapname;

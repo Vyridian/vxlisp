@@ -63,7 +63,7 @@ public final class Repl {
 
   public static class Class_liblist extends Core.Class_base implements Type_liblist {
 
-    protected List<Core.Type_string> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_string>());
+    public List<Core.Type_string> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_string>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -207,42 +207,42 @@ public final class Repl {
 
   public static class Class_repl extends Core.Class_base implements Type_repl {
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Core.Type_any vx_p_type;
+    public Core.Type_any vx_p_type;
 
     @Override
     public Core.Type_any type() {
       return this.vx_p_type == null ? Core.e_any : this.vx_p_type;
     }
 
-    protected Repl.Type_repllist vx_p_repllist;
+    public Repl.Type_repllist vx_p_repllist;
 
     @Override
     public Repl.Type_repllist repllist() {
       return this.vx_p_repllist == null ? Repl.e_repllist : this.vx_p_repllist;
     }
 
-    protected Core.Type_boolean vx_p_async;
+    public Core.Type_boolean vx_p_async;
 
     @Override
     public Core.Type_boolean async() {
       return this.vx_p_async == null ? Core.e_boolean : this.vx_p_async;
     }
 
-    protected Core.Type_any vx_p_val;
+    public Core.Type_any vx_p_val;
 
     @Override
     public Core.Type_any val() {
       return this.vx_p_val == null ? Core.e_any : this.vx_p_val;
     }
 
-    protected Core.Type_string vx_p_doc;
+    public Core.Type_string vx_p_doc;
 
     @Override
     public Core.Type_string doc() {
@@ -278,7 +278,7 @@ public final class Repl {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":name", this.name());
       output.put(":type", this.type());
       output.put(":repllist", this.repllist());
@@ -560,21 +560,21 @@ public final class Repl {
 
   public static class Class_replarglist extends Core.Class_base implements Type_replarglist {
 
-    protected Core.Type_string vx_p_key;
+    public Core.Type_string vx_p_key;
 
     @Override
     public Core.Type_string key() {
       return this.vx_p_key == null ? Core.e_string : this.vx_p_key;
     }
 
-    protected Repl.Type_repl vx_p_current;
+    public Repl.Type_repl vx_p_current;
 
     @Override
     public Repl.Type_repl current() {
       return this.vx_p_current == null ? Repl.e_repl : this.vx_p_current;
     }
 
-    protected Repl.Type_repllist vx_p_repllist;
+    public Repl.Type_repllist vx_p_repllist;
 
     @Override
     public Repl.Type_repllist repllist() {
@@ -601,7 +601,7 @@ public final class Repl {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":key", this.key());
       output.put(":current", this.current());
       output.put(":repllist", this.repllist());
@@ -804,7 +804,7 @@ public final class Repl {
 
   public static class Class_repllist extends Core.Class_base implements Type_repllist {
 
-    protected List<Repl.Type_repl> vx_p_list = Core.immutablelist(new ArrayList<Repl.Type_repl>());
+    public List<Repl.Type_repl> vx_p_list = Core.immutablelist(new ArrayList<Repl.Type_repl>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -1166,6 +1166,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_any_repl_from_functype_args;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_repl_from_functype_args;
@@ -1256,6 +1257,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_any_from_liblist_string;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_liblist_string;
@@ -1349,6 +1351,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_any_from_macro;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_macro;
@@ -1457,6 +1460,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_any_from_repl;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_repl;
@@ -1591,6 +1595,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_any_from_script;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_script;
@@ -1698,6 +1703,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_anylist_from_repllist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_anylist_from_repllist;
@@ -1807,6 +1813,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_argmap_from_textblock_argmap;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_argmap_from_textblock_argmap;
@@ -1901,6 +1908,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_const_from_string;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_const_from_string;
@@ -2035,6 +2043,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_repl_bracket_from_textblock_argmap;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_repl_bracket_from_textblock_argmap;
@@ -2124,6 +2133,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_repl_empty_from_textblock_argmap;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_repl_empty_from_textblock_argmap;
@@ -2251,6 +2261,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_repl_paren_from_textblock_argmap;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_repl_paren_from_textblock_argmap;
@@ -2412,6 +2423,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_repl_from_liblist_string;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_repl_from_liblist_string;
@@ -2497,6 +2509,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_repl_from_macro;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_repl_from_macro;
@@ -2635,6 +2648,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_repl_from_script;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_repl_from_script;
@@ -2741,6 +2755,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_repl_from_string_argmap;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_repl_from_string_argmap;
@@ -2979,6 +2994,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_repl_from_textblock;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_repl_from_textblock;
@@ -3084,6 +3100,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_repl_from_textblock_argmap;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_repl_from_textblock_argmap;
@@ -3202,6 +3219,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_replarglist_from_replarglist_textblock_argmap;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_replarglist_from_replarglist_textblock_argmap;
@@ -3456,6 +3474,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_repllist_from_textblocklist_argmap;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_repllist_from_textblocklist_argmap;
@@ -3550,6 +3569,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_textblock_from_script;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_from_script;
@@ -3652,6 +3672,7 @@ public final class Repl {
     public Core.Type_any vx_empty() {
       return e_typefunc_from_string;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_typefunc_from_string;

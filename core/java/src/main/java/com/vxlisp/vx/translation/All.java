@@ -63,6 +63,7 @@ public final class All {
     public Core.Type_any vx_empty() {
       return e_context_all;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_context_all;
@@ -175,6 +176,7 @@ public final class All {
     public Core.Type_any vx_empty() {
       return e_translationmap_all;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_translationmap_all;

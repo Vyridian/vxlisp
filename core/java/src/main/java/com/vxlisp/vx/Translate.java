@@ -64,6 +64,7 @@ public final class Translate {
     public Core.Type_any vx_empty() {
       return e_session_from_session_name;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_session_from_session_name;
@@ -157,6 +158,7 @@ public final class Translate {
     public Core.Type_any vx_empty() {
       return e_session_from_session_translation;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_session_from_session_translation;
@@ -251,6 +253,7 @@ public final class Translate {
     public Core.Type_any vx_empty() {
       return e_session_from_session_translationmap_name;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_session_from_session_translationmap_name;
@@ -346,6 +349,7 @@ public final class Translate {
     public Core.Type_any vx_empty() {
       return e_translate;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_translate;
@@ -449,6 +453,7 @@ public final class Translate {
     public Core.Type_any vx_empty() {
       return e_translate_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_translate_1;
@@ -566,6 +571,7 @@ public final class Translate {
     public Core.Type_any vx_empty() {
       return e_translate_from_translation_string;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_translate_from_translation_string;
@@ -671,6 +677,7 @@ public final class Translate {
     public Core.Type_any vx_empty() {
       return e_translate_from_translationmap_name_string;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_translate_from_translationmap_name_string;
@@ -764,6 +771,7 @@ public final class Translate {
     public Core.Type_any vx_empty() {
       return e_translation_load_session;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_translation_load_session;
@@ -862,6 +870,7 @@ public final class Translate {
     public Core.Type_any vx_empty() {
       return e_translation_from_context;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_translation_from_context;
@@ -948,6 +957,7 @@ public final class Translate {
     public Core.Type_any vx_empty() {
       return e_translation_from_session_name;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_translation_from_session_name;
@@ -1040,6 +1050,7 @@ public final class Translate {
     public Core.Type_any vx_empty() {
       return e_translationmap_from_translations;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_translationmap_from_translations;

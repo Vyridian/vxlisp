@@ -3,9 +3,24 @@ namespace vx_core;
 public static class vx_core {
 
   public interface Map<TKey, TValue> {
+    public List<TKey> keys();
+    public TValue get(TKey key);
+    public void put(TKey key, TValue value);
   }
 
   public class LinkedHashMap<TKey, TValue> : Map<TKey, TValue> {
+    private Dictionary<TKey, TValue> dict = new Dictionary<TKey, TValue>();
+    private List<TKey> listkey = new List<TKey>();
+    public TValue get(TKey key) {
+      return dict[key];
+    }
+    public List<TKey> keys() {
+      return listkey;
+    }
+    public void put(TKey key, TValue value) {
+      listkey.Add(key);
+      dict[key] = value;
+    }
   }
 
   public interface vx_Type_const {
@@ -65,7 +80,7 @@ public static class vx_core {
 
   public class KeyValue<T> {
     public String key = "";
-    public T value = null;
+    public T value = default(T);
   }
 
   public static vx_core.Type_constdef constdef_new(
@@ -97,50 +112,50 @@ public static class vx_core {
   }
 
   public static vx_core.Type_any[] arrayany_from_anylist(vx_core.Type_anylist list) {
-    return list.vx_list().toArray(new vx_core.Type_any[0]);
+    return list.vx_list().ToArray();
   }
 
   public static List<T> arraylist_from_array<T>(params T[] items) {
-    List<T> output = new List<>(items);
+    List<T> output = new List<T>(items);
     return output;
   }
 
   public static List<T> arraylist_from_arraylist<T, U>(T generic_any_1, List<U> listval) where T : vx_core.Type_any where U : vx_core.Type_any {
-    List<T> output = new List<>();
+    List<T> output = new List<T>();
     foreach (vx_core.Type_any value in listval) {
       T t_val = vx_core.f_any_from_any(generic_any_1, value);
-      output.add(t_val);
+      output.Add(t_val);
     }
     return output;
   }
 
   public static List<T> arraylist_from_arraylist_fn<T, U>(List<U> listval, Func<U, T> fn_any_from_any) {
-    List<T> output = new List<>();
+    List<T> output = new List<T>();
     foreach (U value_u in listval) {
-      T t_val = fn_any_from_any.apply(value_u);
-      output.add(t_val);
+      T t_val = fn_any_from_any.Invoke(value_u);
+      output.Add(t_val);
     }
     return output;
   }
 
   public static List<T> arraylist_from_linkedhashmap<T, U>(T generic_any_1, LinkedHashMap<String, U> mapval) where T : vx_core.Type_any where U : vx_core.Type_any {
     List<T> output = new List<T>();
-    Set<String> keys = mapval.keySet();
+    List<String> keys = mapval.keys();
     foreach (String key in keys) {
       U u_val = mapval.get(key);
       T t_val = vx_core.f_any_from_any(generic_any_1, u_val);
-      output.add(t_val);
+      output.Add(t_val);
     }
     return output;
   }
 
   public static List<T> arraylist_from_linkedhashmap_fn<T, U>(Map<String, U> mapval, Func<String, U, T> fn_any_from_key_value) {
     List<T> output = new List<T>();
-    Set<String> keys = mapval.keySet();
+    List<String> keys = mapval.keys();
     foreach (String key in keys) {
       U u_val = mapval.get(key);
-      T t_val = fn_any_from_key_value.apply(key, u_val);
-      output.add(t_val);
+      T t_val = fn_any_from_key_value.Invoke(key, u_val);
+      output.Add(t_val);
     }
     return output;
   }
@@ -151,7 +166,7 @@ public static class vx_core {
   }
 
   public static Task<T> async_from_async<T, U>(T generic_any_1, Task<U> future) where T : vx_core.Type_any where U : vx_core.Type_any {
-    Task<T> output = future.thenApply(val => {
+    Task<T> output = future.ThenApply(val => {
       return vx_core.f_any_from_any(generic_any_1, val);
     });
     return output;
@@ -179,7 +194,7 @@ public static class vx_core {
   }
 
   public static LinkedHashMap<String, T> hashmap_from_keyvalues<T>(params KeyValue<T>[] keyvalues) {
-    LinkedHashMap<String, T> output = new LinkedHashMap<>();
+    LinkedHashMap<String, T> output = new LinkedHashMap<String, T>();
     foreach (KeyValue<T> keyvalue in keyvalues) {
       String key = keyvalue.key;
       T value = keyvalue.value;
@@ -195,10 +210,18 @@ public static class vx_core {
     return output;
   }
 
+  public static List<T> immutablelist<T>(List<T> listval) {
+    return listval;
+  }
+
+  public static Map<T, U> immutablemap<T, U>(Map<T, U> mapval) {
+    return mapval;
+  }
+
   public static Map<String, T> map_from_list_fn<T>(List<T> listval, Func<T, vx_core.Type_string> fn_any_from_any) {
-    Map<String, T> output = new LinkedHashMap<>();
+    Map<String, T> output = new LinkedHashMap<String, T>();
     foreach (T val in listval) {
-      vx_core.Type_string valkey = fn_any_from_any.apply(val);
+      vx_core.Type_string valkey = fn_any_from_any.Invoke(val);
       String key = valkey.vx_string();
       output.put(key, val);
     }
@@ -206,7 +229,7 @@ public static class vx_core {
   }
 
   public static LinkedHashMap<String, T> map_from_map<T>(LinkedHashMap<String, vx_core.Type_any> mapval) where T : vx_core.Type_any {
-    LinkedHashMap<String, T> output = new LinkedHashMap<>();
+    LinkedHashMap<String, T> output = new LinkedHashMap<String, T>();
     Set<String> keys = mapval.keySet();
     foreach (String key in keys) {
       vx_core.Type_any value = mapval.get(key);
@@ -222,17 +245,17 @@ public static class vx_core {
 
   // vx_boolean_from_string_ends(string, string)
   public static bool vx_boolean_from_string_ends(String text, String ends) {
-    return text.endsWith(ends);
+    return text.EndsWith(ends);
   }
 
   // vx_boolean_from_string_find(string, string)
   public static bool vx_boolean_from_string_find(String text, String find) {
-    return text.contains(find);
+    return text.Contains(find);
   }
 
   // vx_boolean_from_string_starts(string, string)
   public static bool vx_boolean_from_string_starts(String text, String starts) {
-    return text.startsWith(starts);
+    return text.StartsWith(starts);
   }
 
   // vx_eqeq(any, any)
@@ -299,7 +322,7 @@ public static class vx_core {
       packagemap = new vx_core.Class_packagemap();
       global.vx_p_packagemap = packagemap;
     }
-    Map<String, vx_core.Type_package> mappackage = new LinkedHashMap<>(packagemap.vx_p_map);
+    Map<String, vx_core.Type_package> mappackage = new LinkedHashMap<String, vx_core.Type_package>(packagemap.vx_p_map);
 		  vx_core.Class_package pkg = new vx_core.Class_package();
 		  pkg.vx_p_constmap = constmap;
 		  pkg.vx_p_typemap = typemap;
@@ -516,7 +539,7 @@ public static class vx_core {
       vx_core.Type_float valfloat = vx_core.f_any_from_any(vx_core.t_float, value);
       output = Float.toString(valfloat.vx_float());
       if (output.endsWith(".0")) {
-        output = output.substring(0, output.length() - 2);
+        output = output.Substring(0, output.length() - 2);
       }
     } else if (value is vx_core.Type_int) {
       if (value == vx_core.c_notanumber) {
@@ -639,7 +662,7 @@ public static class vx_core {
       if (end >= maxlen) {
         end = maxlen;
       }
-      output = text.substring(start - 1, end);
+      output = text.Substring(start - 1, end);
     }
     return output;
   }
@@ -723,7 +746,7 @@ public static class vx_core {
 
     public override vx_core.Type_any vx_copy(params Object[] vals) {
       Type_any output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_any val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -746,17 +769,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_any;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "any", // name
@@ -799,7 +819,7 @@ public static class vx_core {
 
     public override vx_core.Type_any_async_from_func vx_copy(params Object[] vals) {
       Type_any_async_from_func output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_any_async_from_func val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -815,17 +835,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_async_from_func;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_any_async_from_func;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "any-async<-func", // name
@@ -862,7 +879,7 @@ public static class vx_core {
 
   public class Class_any_from_anylist : vx_core.Class_base, Type_any_from_anylist {
 
-    protected List<vx_core.Func_any_from_any> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Func_any_from_any>());
+    public List<vx_core.Func_any_from_any> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Func_any_from_any>());
 
     public List<vx_core.Type_any> vx_list() {
       List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
@@ -896,7 +913,7 @@ public static class vx_core {
 
     public override vx_core.Type_any_from_anylist vx_copy(params Object[] vals) {
       Type_any_from_anylist output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_any_from_anylist val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -946,17 +963,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_anylist;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_any_from_anylist;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "any<-anylist", // name
@@ -991,7 +1005,7 @@ public static class vx_core {
 
   public class Class_anylist : vx_core.Class_base, Type_anylist {
 
-    protected List<vx_core.Type_any> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_any>());
+    public List<vx_core.Type_any> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_any>());
 
     public List<vx_core.Type_any> vx_list() {
       List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
@@ -1017,7 +1031,7 @@ public static class vx_core {
 
     public override vx_core.Type_anylist vx_copy(params Object[] vals) {
       Type_anylist output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_anylist val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -1070,17 +1084,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_anylist;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_anylist;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "anylist", // name
@@ -1115,7 +1126,7 @@ public static class vx_core {
 
   public class Class_anymap : vx_core.Class_base, Type_anymap {
 
-    protected Map<String, vx_core.Type_any> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>());
+    public Map<String, vx_core.Type_any> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>());
 
     public Map<String, vx_core.Type_any> vx_map() {
       return vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map));
@@ -1180,7 +1191,7 @@ public static class vx_core {
 
     public override vx_core.Type_anymap vx_copy(params Object[] vals) {
       Type_anymap output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_anymap val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -1251,17 +1262,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_anymap;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_anymap;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "anymap", // name
@@ -1304,7 +1312,7 @@ public static class vx_core {
 
     public override vx_core.Type_anytype vx_copy(params Object[] vals) {
       Type_anytype output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_anytype val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -1320,17 +1328,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_anytype;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_anytype;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "anytype", // name
@@ -1369,25 +1374,25 @@ public static class vx_core {
 
   public class Class_arg : vx_core.Class_base, Type_arg {
 
-    protected vx_core.Type_string vx_p_name;
+    public vx_core.Type_string vx_p_name;
 
     public vx_core.Type_string name() {
       return this.vx_p_name == null ? vx_core.e_string : this.vx_p_name;
     }
 
-    protected vx_core.Type_any vx_p_argtype;
+    public vx_core.Type_any vx_p_argtype;
 
     public vx_core.Type_any argtype() {
       return this.vx_p_argtype == null ? vx_core.e_any : this.vx_p_argtype;
     }
 
-    protected vx_core.Func_any_from_func vx_p_fn_any;
+    public vx_core.Func_any_from_func vx_p_fn_any;
 
     public vx_core.Func_any_from_func fn_any() {
       return this.vx_p_fn_any == null ? vx_core.e_any_from_func : this.vx_p_fn_any;
     }
 
-    protected vx_core.Type_string vx_p_doc;
+    public vx_core.Type_string vx_p_doc;
 
     public vx_core.Type_string doc() {
       return this.vx_p_doc == null ? vx_core.e_string : this.vx_p_doc;
@@ -1414,7 +1419,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       output.put(":name", this.name());
       output.put(":argtype", this.argtype());
       output.put(":fn-any", this.fn_any());
@@ -1430,7 +1435,7 @@ public static class vx_core {
 
     public override vx_core.Type_arg vx_copy(params Object[] vals) {
       Type_arg output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_arg val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -1453,7 +1458,7 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          boolean istestkey = false;
+          bool istestkey = false;
           String testkey = "";
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
@@ -1476,7 +1481,7 @@ public static class vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey;
             }
-            boolean isvalidkey = validkeys.contains(testkey);
+            bool isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
@@ -1595,17 +1600,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_arg;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_arg;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "arg", // name
@@ -1642,7 +1644,7 @@ public static class vx_core {
 
   public class Class_arglist : vx_core.Class_base, Type_arglist {
 
-    protected List<vx_core.Type_arg> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_arg>());
+    public List<vx_core.Type_arg> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_arg>());
 
     public List<vx_core.Type_any> vx_list() {
       List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
@@ -1676,7 +1678,7 @@ public static class vx_core {
 
     public override vx_core.Type_arglist vx_copy(params Object[] vals) {
       Type_arglist output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_arglist val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -1729,17 +1731,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_arglist;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_arglist;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "arglist", // name
@@ -1776,7 +1775,7 @@ public static class vx_core {
 
   public class Class_argmap : vx_core.Class_base, Type_argmap {
 
-    protected Map<String, vx_core.Type_arg> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_arg>());
+    public Map<String, vx_core.Type_arg> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_arg>());
 
     public Map<String, vx_core.Type_any> vx_map() {
       return vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map));
@@ -1849,7 +1848,7 @@ public static class vx_core {
 
     public override vx_core.Type_argmap vx_copy(params Object[] vals) {
       Type_argmap output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_argmap val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -1920,17 +1919,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_argmap;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_argmap;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "argmap", // name
@@ -1965,6 +1961,10 @@ public static class vx_core {
 
   public class Class_boolean : vx_core.Class_base, Type_boolean {
 
+    protected boolean vxboolean = false;
+    
+    public boolean vx_boolean() {return vxboolean;}
+
     public override vx_core.Type_boolean vx_new(params Object[] vals) {
       return vx_core.vx_copy(
        e_boolean,
@@ -1973,13 +1973,13 @@ public static class vx_core {
 
     public override vx_core.Type_boolean vx_copy(params Object[] vals) {
       Type_boolean output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_boolean val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      boolean booleanval = val.vx_boolean();
+      bool booleanval = val.vx_boolean();
       foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
@@ -2007,17 +2007,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_boolean;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_boolean;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "boolean", // name
@@ -2052,7 +2049,7 @@ public static class vx_core {
 
   public class Class_booleanlist : vx_core.Class_base, Type_booleanlist {
 
-    protected List<vx_core.Type_boolean> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_boolean>());
+    public List<vx_core.Type_boolean> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_boolean>());
 
     public List<vx_core.Type_any> vx_list() {
       List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
@@ -2086,7 +2083,7 @@ public static class vx_core {
 
     public override vx_core.Type_booleanlist vx_copy(params Object[] vals) {
       Type_booleanlist output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_booleanlist val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -2139,17 +2136,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_booleanlist;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_booleanlist;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "booleanlist", // name
@@ -2191,7 +2185,7 @@ public static class vx_core {
 
     public override vx_core.Type_collection vx_copy(params Object[] vals) {
       Type_collection output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_collection val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -2207,17 +2201,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_collection;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_collection;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "collection", // name
@@ -2259,7 +2250,7 @@ public static class vx_core {
 
     public override vx_core.Type_compilelanguages vx_copy(params Object[] vals) {
       Type_compilelanguages output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_compilelanguages val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -2275,17 +2266,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_compilelanguages;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_compilelanguages;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "compilelanguages", // name
@@ -2328,7 +2316,7 @@ public static class vx_core {
 
     public override vx_core.Type_connect vx_copy(params Object[] vals) {
       Type_connect output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_connect val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -2344,17 +2332,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_connect;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_connect;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "connect", // name
@@ -2391,7 +2376,7 @@ public static class vx_core {
 
   public class Class_connectlist : vx_core.Class_base, Type_connectlist {
 
-    protected List<vx_core.Type_connect> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_connect>());
+    public List<vx_core.Type_connect> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_connect>());
 
     public List<vx_core.Type_any> vx_list() {
       List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
@@ -2425,7 +2410,7 @@ public static class vx_core {
 
     public override vx_core.Type_connectlist vx_copy(params Object[] vals) {
       Type_connectlist output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_connectlist val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -2478,17 +2463,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_connectlist;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_connectlist;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "connectlist", // name
@@ -2525,7 +2507,7 @@ public static class vx_core {
 
   public class Class_connectmap : vx_core.Class_base, Type_connectmap {
 
-    protected Map<String, vx_core.Type_connect> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_connect>());
+    public Map<String, vx_core.Type_connect> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_connect>());
 
     public Map<String, vx_core.Type_any> vx_map() {
       return vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map));
@@ -2598,7 +2580,7 @@ public static class vx_core {
 
     public override vx_core.Type_connectmap vx_copy(params Object[] vals) {
       Type_connectmap output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_connectmap val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -2669,17 +2651,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_connectmap;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_connectmap;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "connectmap", // name
@@ -2722,7 +2701,7 @@ public static class vx_core {
 
     public override vx_core.Type_const vx_copy(params Object[] vals) {
       Type_const output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_const val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -2738,17 +2717,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_const;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_const;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "const", // name
@@ -2786,19 +2762,19 @@ public static class vx_core {
 
   public class Class_constdef : vx_core.Class_base, Type_constdef {
 
-    protected vx_core.Type_string vx_p_pkgname;
+    public vx_core.Type_string vx_p_pkgname;
 
     public vx_core.Type_string pkgname() {
       return this.vx_p_pkgname == null ? vx_core.e_string : this.vx_p_pkgname;
     }
 
-    protected vx_core.Type_string vx_p_name;
+    public vx_core.Type_string vx_p_name;
 
     public vx_core.Type_string name() {
       return this.vx_p_name == null ? vx_core.e_string : this.vx_p_name;
     }
 
-    protected vx_core.Type_any vx_p_type;
+    public vx_core.Type_any vx_p_type;
 
     public vx_core.Type_any type() {
       return this.vx_p_type == null ? vx_core.e_any : this.vx_p_type;
@@ -2822,7 +2798,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       output.put(":pkgname", this.pkgname());
       output.put(":name", this.name());
       output.put(":type", this.type());
@@ -2837,7 +2813,7 @@ public static class vx_core {
 
     public override vx_core.Type_constdef vx_copy(params Object[] vals) {
       Type_constdef output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_constdef val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -2858,7 +2834,7 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          boolean istestkey = false;
+          bool istestkey = false;
           String testkey = "";
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
@@ -2881,7 +2857,7 @@ public static class vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey;
             }
-            boolean isvalidkey = validkeys.contains(testkey);
+            bool isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
@@ -2979,17 +2955,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_constdef;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_constdef;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "constdef", // name
@@ -3024,7 +2997,7 @@ public static class vx_core {
 
   public class Class_constlist : vx_core.Class_base, Type_constlist {
 
-    protected List<vx_core.Type_any> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_any>());
+    public List<vx_core.Type_any> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_any>());
 
     public List<vx_core.Type_any> vx_list() {
       List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
@@ -3050,7 +3023,7 @@ public static class vx_core {
 
     public override vx_core.Type_constlist vx_copy(params Object[] vals) {
       Type_constlist output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_constlist val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -3103,17 +3076,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_constlist;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_constlist;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "constlist", // name
@@ -3148,7 +3118,7 @@ public static class vx_core {
 
   public class Class_constmap : vx_core.Class_base, Type_constmap {
 
-    protected Map<String, vx_core.Type_any> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>());
+    public Map<String, vx_core.Type_any> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>());
 
     public Map<String, vx_core.Type_any> vx_map() {
       return vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map));
@@ -3213,7 +3183,7 @@ public static class vx_core {
 
     public override vx_core.Type_constmap vx_copy(params Object[] vals) {
       Type_constmap output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_constmap val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -3284,17 +3254,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_constmap;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_constmap;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "constmap", // name
@@ -3333,25 +3300,25 @@ public static class vx_core {
 
   public class Class_context : vx_core.Class_base, Type_context {
 
-    protected vx_core.Type_string vx_p_code;
+    public vx_core.Type_string vx_p_code;
 
     public vx_core.Type_string code() {
       return this.vx_p_code == null ? vx_core.e_string : this.vx_p_code;
     }
 
-    protected vx_core.Type_session vx_p_session;
+    public vx_core.Type_session vx_p_session;
 
     public vx_core.Type_session session() {
       return this.vx_p_session == null ? vx_core.e_session : this.vx_p_session;
     }
 
-    protected vx_core.Type_setting vx_p_setting;
+    public vx_core.Type_setting vx_p_setting;
 
     public vx_core.Type_setting setting() {
       return this.vx_p_setting == null ? vx_core.e_setting : this.vx_p_setting;
     }
 
-    protected vx_core.Type_state vx_p_state;
+    public vx_core.Type_state vx_p_state;
 
     public vx_core.Type_state state() {
       return this.vx_p_state == null ? vx_core.e_state : this.vx_p_state;
@@ -3378,7 +3345,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       output.put(":code", this.code());
       output.put(":session", this.session());
       output.put(":setting", this.setting());
@@ -3394,7 +3361,7 @@ public static class vx_core {
 
     public override vx_core.Type_context vx_copy(params Object[] vals) {
       Type_context output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_context val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -3417,7 +3384,7 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          boolean istestkey = false;
+          bool istestkey = false;
           String testkey = "";
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
@@ -3440,7 +3407,7 @@ public static class vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey;
             }
-            boolean isvalidkey = validkeys.contains(testkey);
+            bool isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
@@ -3556,17 +3523,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_context;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_context;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "context", // name
@@ -3609,7 +3573,7 @@ public static class vx_core {
 
     public override vx_core.Type_date vx_copy(params Object[] vals) {
       Type_date output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_date val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -3625,17 +3589,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_date;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_date;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "date", // name
@@ -3678,7 +3639,7 @@ public static class vx_core {
 
     public override vx_core.Type_decimal vx_copy(params Object[] vals) {
       Type_decimal output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_decimal val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -3710,17 +3671,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_decimal;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_decimal;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "decimal", // name
@@ -3763,7 +3721,7 @@ public static class vx_core {
 
     public override vx_core.Type_error vx_copy(params Object[] vals) {
       Type_error output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_error val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -3779,17 +3737,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_error;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_error;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "error", // name
@@ -3832,7 +3787,7 @@ public static class vx_core {
 
     public override vx_core.Type_float vx_copy(params Object[] vals) {
       Type_float output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_float val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -3882,17 +3837,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_float;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_float;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "float", // name
@@ -3939,7 +3891,7 @@ public static class vx_core {
 
     public override vx_core.Type_func vx_copy(params Object[] vals) {
       Type_func output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_func val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -3955,17 +3907,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_func;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_func;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "func", // name
@@ -4005,31 +3954,31 @@ public static class vx_core {
 
   public class Class_funcdef : vx_core.Class_base, Type_funcdef {
 
-    protected vx_core.Type_string vx_p_pkgname;
+    public vx_core.Type_string vx_p_pkgname;
 
     public vx_core.Type_string pkgname() {
       return this.vx_p_pkgname == null ? vx_core.e_string : this.vx_p_pkgname;
     }
 
-    protected vx_core.Type_string vx_p_name;
+    public vx_core.Type_string vx_p_name;
 
     public vx_core.Type_string name() {
       return this.vx_p_name == null ? vx_core.e_string : this.vx_p_name;
     }
 
-    protected vx_core.Type_int vx_p_idx;
+    public vx_core.Type_int vx_p_idx;
 
     public vx_core.Type_int idx() {
       return this.vx_p_idx == null ? vx_core.e_int : this.vx_p_idx;
     }
 
-    protected vx_core.Type_any vx_p_type;
+    public vx_core.Type_any vx_p_type;
 
     public vx_core.Type_any type() {
       return this.vx_p_type == null ? vx_core.e_any : this.vx_p_type;
     }
 
-    protected vx_core.Type_boolean vx_p_async;
+    public vx_core.Type_boolean vx_p_async;
 
     public vx_core.Type_boolean async() {
       return this.vx_p_async == null ? vx_core.e_boolean : this.vx_p_async;
@@ -4059,7 +4008,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       output.put(":pkgname", this.pkgname());
       output.put(":name", this.name());
       output.put(":idx", this.idx());
@@ -4076,7 +4025,7 @@ public static class vx_core {
 
     public override vx_core.Type_funcdef vx_copy(params Object[] vals) {
       Type_funcdef output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_funcdef val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -4101,7 +4050,7 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          boolean istestkey = false;
+          bool istestkey = false;
           String testkey = "";
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
@@ -4124,7 +4073,7 @@ public static class vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey;
             }
-            boolean isvalidkey = validkeys.contains(testkey);
+            bool isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
@@ -4270,17 +4219,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_funcdef;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_funcdef;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "funcdef", // name
@@ -4317,7 +4263,7 @@ public static class vx_core {
 
   public class Class_funclist : vx_core.Class_base, Type_funclist {
 
-    protected List<vx_core.Type_func> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_func>());
+    public List<vx_core.Type_func> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_func>());
 
     public List<vx_core.Type_any> vx_list() {
       List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
@@ -4351,7 +4297,7 @@ public static class vx_core {
 
     public override vx_core.Type_funclist vx_copy(params Object[] vals) {
       Type_funclist output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_funclist val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -4404,17 +4350,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_funclist;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_funclist;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "funclist", // name
@@ -4451,7 +4394,7 @@ public static class vx_core {
 
   public class Class_funcmap : vx_core.Class_base, Type_funcmap {
 
-    protected Map<String, vx_core.Type_func> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_func>());
+    public Map<String, vx_core.Type_func> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_func>());
 
     public Map<String, vx_core.Type_any> vx_map() {
       return vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map));
@@ -4524,7 +4467,7 @@ public static class vx_core {
 
     public override vx_core.Type_funcmap vx_copy(params Object[] vals) {
       Type_funcmap output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_funcmap val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -4595,17 +4538,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_funcmap;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_funcmap;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "funcmap", // name
@@ -4640,6 +4580,10 @@ public static class vx_core {
 
   public class Class_int : vx_core.Class_base, Type_int {
 
+    protected int vxint = 0;
+    
+    public int vx_int() {return vxint;}
+
     public override vx_core.Type_int vx_new(params Object[] vals) {
       return vx_core.vx_copy(
        e_int,
@@ -4648,7 +4592,7 @@ public static class vx_core {
 
     public override vx_core.Type_int vx_copy(params Object[] vals) {
       Type_int output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_int val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -4684,17 +4628,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_int;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_int;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "int", // name
@@ -4731,7 +4672,7 @@ public static class vx_core {
 
   public class Class_intlist : vx_core.Class_base, Type_intlist {
 
-    protected List<vx_core.Type_int> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_int>());
+    public List<vx_core.Type_int> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_int>());
 
     public List<vx_core.Type_any> vx_list() {
       List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
@@ -4765,7 +4706,7 @@ public static class vx_core {
 
     public override vx_core.Type_intlist vx_copy(params Object[] vals) {
       Type_intlist output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_intlist val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -4818,17 +4759,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_intlist;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_intlist;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "intlist", // name
@@ -4865,7 +4803,7 @@ public static class vx_core {
 
   public class Class_intmap : vx_core.Class_base, Type_intmap {
 
-    protected Map<String, vx_core.Type_int> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_int>());
+    public Map<String, vx_core.Type_int> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_int>());
 
     public Map<String, vx_core.Type_any> vx_map() {
       return vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map));
@@ -4938,7 +4876,7 @@ public static class vx_core {
 
     public override vx_core.Type_intmap vx_copy(params Object[] vals) {
       Type_intmap output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_intmap val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -5009,17 +4947,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_intmap;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_intmap;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "intmap", // name
@@ -5056,7 +4991,7 @@ public static class vx_core {
 
   public class Class_list : vx_core.Class_base, Type_list {
 
-    protected List<vx_core.Type_any> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_any>());
+    public List<vx_core.Type_any> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_any>());
 
     public List<vx_core.Type_any> vx_list() {
       List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
@@ -5082,7 +5017,7 @@ public static class vx_core {
 
     public override vx_core.Type_list vx_copy(params Object[] vals) {
       Type_list output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_list val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -5135,17 +5070,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_list;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_list;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "list", // name
@@ -5188,7 +5120,7 @@ public static class vx_core {
 
     public override vx_core.Type_listtype vx_copy(params Object[] vals) {
       Type_listtype output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_listtype val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -5204,17 +5136,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_listtype;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_listtype;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "listtype", // name
@@ -5258,7 +5187,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       return vx_core.immutablemap(output);
     }
 
@@ -5270,7 +5199,7 @@ public static class vx_core {
 
     public override vx_core.Type_locale vx_copy(params Object[] vals) {
       Type_locale output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_locale val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -5286,17 +5215,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_locale;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_locale;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "locale", // name
@@ -5335,7 +5261,7 @@ public static class vx_core {
 
   public class Class_map : vx_core.Class_base, Type_map {
 
-    protected Map<String, vx_core.Type_any> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>());
+    public Map<String, vx_core.Type_any> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>());
 
     public Map<String, vx_core.Type_any> vx_map() {
       return vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map));
@@ -5400,7 +5326,7 @@ public static class vx_core {
 
     public override vx_core.Type_map vx_copy(params Object[] vals) {
       Type_map output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_map val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -5471,17 +5397,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_map;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_map;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "map", // name
@@ -5524,7 +5447,7 @@ public static class vx_core {
 
     public override vx_core.Type_maptype vx_copy(params Object[] vals) {
       Type_maptype output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_maptype val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -5540,17 +5463,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_maptype;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_maptype;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "maptype", // name
@@ -5586,7 +5506,7 @@ public static class vx_core {
 
   public class Class_mempool : vx_core.Class_base, Type_mempool {
 
-    protected vx_core.Type_value vx_p_valuepool;
+    public vx_core.Type_value vx_p_valuepool;
 
     public vx_core.Type_value valuepool() {
       return this.vx_p_valuepool == null ? vx_core.e_value : this.vx_p_valuepool;
@@ -5604,7 +5524,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       output.put(":valuepool", this.valuepool());
       return vx_core.immutablemap(output);
     }
@@ -5617,7 +5537,7 @@ public static class vx_core {
 
     public override vx_core.Type_mempool vx_copy(params Object[] vals) {
       Type_mempool output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_mempool val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -5634,7 +5554,7 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          boolean istestkey = false;
+          bool istestkey = false;
           String testkey = "";
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
@@ -5657,7 +5577,7 @@ public static class vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey;
             }
-            boolean isvalidkey = validkeys.contains(testkey);
+            bool isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
@@ -5707,17 +5627,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_mempool;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_mempool;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "mempool", // name
@@ -5758,31 +5675,31 @@ public static class vx_core {
 
   public class Class_msg : vx_core.Class_base, Type_msg {
 
-    protected vx_core.Type_string vx_p_code;
+    public vx_core.Type_string vx_p_code;
 
     public vx_core.Type_string code() {
       return this.vx_p_code == null ? vx_core.e_string : this.vx_p_code;
     }
 
-    protected vx_core.Type_any vx_p_detail;
+    public vx_core.Type_any vx_p_detail;
 
     public vx_core.Type_any detail() {
       return this.vx_p_detail == null ? vx_core.e_any : this.vx_p_detail;
     }
 
-    protected vx_core.Type_string vx_p_path;
+    public vx_core.Type_string vx_p_path;
 
     public vx_core.Type_string path() {
       return this.vx_p_path == null ? vx_core.e_string : this.vx_p_path;
     }
 
-    protected vx_core.Type_int vx_p_severity;
+    public vx_core.Type_int vx_p_severity;
 
     public vx_core.Type_int severity() {
       return this.vx_p_severity == null ? vx_core.e_int : this.vx_p_severity;
     }
 
-    protected vx_core.Type_string vx_p_text;
+    public vx_core.Type_string vx_p_text;
 
     public vx_core.Type_string text() {
       return this.vx_p_text == null ? vx_core.e_string : this.vx_p_text;
@@ -5812,7 +5729,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       output.put(":code", this.code());
       output.put(":detail", this.detail());
       output.put(":path", this.path());
@@ -5829,7 +5746,7 @@ public static class vx_core {
 
     public override vx_core.Type_msg vx_copy(params Object[] vals) {
       Type_msg output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_msg val = this;
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
@@ -5917,17 +5834,14 @@ public static class vx_core {
       return vx_core.e_msgblock;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_msg;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_msg;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "msg", // name
@@ -5965,13 +5879,13 @@ public static class vx_core {
 
   public class Class_msgblock : vx_core.Class_base, Type_msgblock {
 
-    protected vx_core.Type_msglist vx_p_msgs;
+    public vx_core.Type_msglist vx_p_msgs;
 
     public vx_core.Type_msglist msgs() {
       return this.vx_p_msgs == null ? vx_core.e_msglist : this.vx_p_msgs;
     }
 
-    protected vx_core.Type_msgblocklist vx_p_msgblocks;
+    public vx_core.Type_msgblocklist vx_p_msgblocks;
 
     public vx_core.Type_msgblocklist msgblocks() {
       return this.vx_p_msgblocks == null ? vx_core.e_msgblocklist : this.vx_p_msgblocks;
@@ -5992,7 +5906,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       output.put(":msgs", this.msgs());
       output.put(":msgblocks", this.msgblocks());
       return vx_core.immutablemap(output);
@@ -6006,7 +5920,7 @@ public static class vx_core {
 
     public override vx_core.Type_msgblock vx_copy(params Object[] vals) {
       Type_msgblock output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_msgblock val = this;
       vx_core.Type_msgblock msgblock = this;
       if (this is vx_core.vx_Type_const) {
@@ -6107,17 +6021,14 @@ public static class vx_core {
       return this;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_msgblock;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_msgblock;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "msgblock", // name
@@ -6154,7 +6065,7 @@ public static class vx_core {
 
   public class Class_msgblocklist : vx_core.Class_base, Type_msgblocklist {
 
-    protected List<vx_core.Type_msgblock> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_msgblock>());
+    public List<vx_core.Type_msgblock> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_msgblock>());
 
     public List<vx_core.Type_any> vx_list() {
       List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
@@ -6188,7 +6099,7 @@ public static class vx_core {
 
     public override vx_core.Type_msgblocklist vx_copy(params Object[] vals) {
       Type_msgblocklist output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_msgblocklist val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -6235,17 +6146,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_msgblocklist;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_msgblocklist;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "msgblocklist", // name
@@ -6282,7 +6190,7 @@ public static class vx_core {
 
   public class Class_msglist : vx_core.Class_base, Type_msglist {
 
-    protected List<vx_core.Type_msg> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_msg>());
+    public List<vx_core.Type_msg> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_msg>());
 
     public List<vx_core.Type_any> vx_list() {
       List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
@@ -6316,7 +6224,7 @@ public static class vx_core {
 
     public override vx_core.Type_msglist vx_copy(params Object[] vals) {
       Type_msglist output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_msglist val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -6363,17 +6271,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_msglist;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_msglist;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "msglist", // name
@@ -6416,7 +6321,7 @@ public static class vx_core {
 
     public override vx_core.Type_none vx_copy(params Object[] vals) {
       Type_none output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_none val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -6432,17 +6337,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_none;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_none;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "none", // name
@@ -6485,7 +6387,7 @@ public static class vx_core {
 
     public override vx_core.Type_notype vx_copy(params Object[] vals) {
       Type_notype output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_notype val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -6501,17 +6403,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_notype;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_notype;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "notype", // name
@@ -6554,7 +6453,7 @@ public static class vx_core {
 
     public override vx_core.Type_number vx_copy(params Object[] vals) {
       Type_number output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_number val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -6570,17 +6469,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_number;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_number;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "number", // name
@@ -6617,7 +6513,7 @@ public static class vx_core {
 
   public class Class_numberlist : vx_core.Class_base, Type_numberlist {
 
-    protected List<vx_core.Type_number> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_number>());
+    public List<vx_core.Type_number> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_number>());
 
     public List<vx_core.Type_any> vx_list() {
       List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
@@ -6651,7 +6547,7 @@ public static class vx_core {
 
     public override vx_core.Type_numberlist vx_copy(params Object[] vals) {
       Type_numberlist output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_numberlist val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -6704,17 +6600,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_numberlist;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_numberlist;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "numberlist", // name
@@ -6751,7 +6644,7 @@ public static class vx_core {
 
   public class Class_numbermap : vx_core.Class_base, Type_numbermap {
 
-    protected Map<String, vx_core.Type_number> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_number>());
+    public Map<String, vx_core.Type_number> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_number>());
 
     public Map<String, vx_core.Type_any> vx_map() {
       return vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map));
@@ -6824,7 +6717,7 @@ public static class vx_core {
 
     public override vx_core.Type_numbermap vx_copy(params Object[] vals) {
       Type_numbermap output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_numbermap val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -6895,17 +6788,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_numbermap;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_numbermap;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "numbermap", // name
@@ -6945,31 +6835,31 @@ public static class vx_core {
 
   public class Class_package : vx_core.Class_base, Type_package {
 
-    protected vx_core.Type_string vx_p_pkgname;
+    public vx_core.Type_string vx_p_pkgname;
 
     public vx_core.Type_string pkgname() {
       return this.vx_p_pkgname == null ? vx_core.e_string : this.vx_p_pkgname;
     }
 
-    protected vx_core.Type_constmap vx_p_constmap;
+    public vx_core.Type_constmap vx_p_constmap;
 
     public vx_core.Type_constmap constmap() {
       return this.vx_p_constmap == null ? vx_core.e_constmap : this.vx_p_constmap;
     }
 
-    protected vx_core.Type_funcmap vx_p_funcmap;
+    public vx_core.Type_funcmap vx_p_funcmap;
 
     public vx_core.Type_funcmap funcmap() {
       return this.vx_p_funcmap == null ? vx_core.e_funcmap : this.vx_p_funcmap;
     }
 
-    protected vx_core.Type_typemap vx_p_typemap;
+    public vx_core.Type_typemap vx_p_typemap;
 
     public vx_core.Type_typemap typemap() {
       return this.vx_p_typemap == null ? vx_core.e_typemap : this.vx_p_typemap;
     }
 
-    protected vx_core.Type_map vx_p_emptymap;
+    public vx_core.Type_map vx_p_emptymap;
 
     public vx_core.Type_map emptymap() {
       return this.vx_p_emptymap == null ? vx_core.e_map : this.vx_p_emptymap;
@@ -6999,7 +6889,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       output.put(":pkgname", this.pkgname());
       output.put(":constmap", this.constmap());
       output.put(":funcmap", this.funcmap());
@@ -7016,7 +6906,7 @@ public static class vx_core {
 
     public override vx_core.Type_package vx_copy(params Object[] vals) {
       Type_package output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_package val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -7041,7 +6931,7 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          boolean istestkey = false;
+          bool istestkey = false;
           String testkey = "";
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
@@ -7064,7 +6954,7 @@ public static class vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey;
             }
-            boolean isvalidkey = validkeys.contains(testkey);
+            bool isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
@@ -7201,17 +7091,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_package;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_package;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "package", // name
@@ -7247,7 +7134,7 @@ public static class vx_core {
 
   public class Class_packagemap : vx_core.Class_base, Type_packagemap {
 
-    protected Map<String, vx_core.Type_package> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_package>());
+    public Map<String, vx_core.Type_package> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_package>());
 
     public Map<String, vx_core.Type_any> vx_map() {
       return vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map));
@@ -7320,7 +7207,7 @@ public static class vx_core {
 
     public override vx_core.Type_packagemap vx_copy(params Object[] vals) {
       Type_packagemap output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_packagemap val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -7391,17 +7278,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_packagemap;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_packagemap;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "packagemap", // name
@@ -7437,7 +7321,7 @@ public static class vx_core {
 
   public class Class_permission : vx_core.Class_base, Type_permission {
 
-    protected vx_core.Type_string vx_p_id;
+    public vx_core.Type_string vx_p_id;
 
     public vx_core.Type_string id() {
       return this.vx_p_id == null ? vx_core.e_string : this.vx_p_id;
@@ -7455,7 +7339,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       output.put(":id", this.id());
       return vx_core.immutablemap(output);
     }
@@ -7468,7 +7352,7 @@ public static class vx_core {
 
     public override vx_core.Type_permission vx_copy(params Object[] vals) {
       Type_permission output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_permission val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -7485,7 +7369,7 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          boolean istestkey = false;
+          bool istestkey = false;
           String testkey = "";
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
@@ -7508,7 +7392,7 @@ public static class vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey;
             }
-            boolean isvalidkey = validkeys.contains(testkey);
+            bool isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
@@ -7561,17 +7445,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_permission;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_permission;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "permission", // name
@@ -7608,7 +7489,7 @@ public static class vx_core {
 
   public class Class_permissionlist : vx_core.Class_base, Type_permissionlist {
 
-    protected List<vx_core.Type_permission> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_permission>());
+    public List<vx_core.Type_permission> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_permission>());
 
     public List<vx_core.Type_any> vx_list() {
       List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
@@ -7642,7 +7523,7 @@ public static class vx_core {
 
     public override vx_core.Type_permissionlist vx_copy(params Object[] vals) {
       Type_permissionlist output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_permissionlist val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -7695,17 +7576,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_permissionlist;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_permissionlist;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "permissionlist", // name
@@ -7742,7 +7620,7 @@ public static class vx_core {
 
   public class Class_permissionmap : vx_core.Class_base, Type_permissionmap {
 
-    protected Map<String, vx_core.Type_permission> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_permission>());
+    public Map<String, vx_core.Type_permission> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_permission>());
 
     public Map<String, vx_core.Type_any> vx_map() {
       return vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map));
@@ -7815,7 +7693,7 @@ public static class vx_core {
 
     public override vx_core.Type_permissionmap vx_copy(params Object[] vals) {
       Type_permissionmap output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_permissionmap val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -7886,17 +7764,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_permissionmap;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_permissionmap;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "permissionmap", // name
@@ -7932,7 +7807,7 @@ public static class vx_core {
 
   public class Class_project : vx_core.Class_base, Type_project {
 
-    protected vx_core.Type_packagemap vx_p_packagemap;
+    public vx_core.Type_packagemap vx_p_packagemap;
 
     public vx_core.Type_packagemap packagemap() {
       return this.vx_p_packagemap == null ? vx_core.e_packagemap : this.vx_p_packagemap;
@@ -7950,7 +7825,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       output.put(":packagemap", this.packagemap());
       return vx_core.immutablemap(output);
     }
@@ -7963,7 +7838,7 @@ public static class vx_core {
 
     public override vx_core.Type_project vx_copy(params Object[] vals) {
       Type_project output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_project val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -7980,7 +7855,7 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          boolean istestkey = false;
+          bool istestkey = false;
           String testkey = "";
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
@@ -8003,7 +7878,7 @@ public static class vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey;
             }
-            boolean isvalidkey = validkeys.contains(testkey);
+            bool isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
@@ -8053,17 +7928,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_project;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_project;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "project", // name
@@ -8101,19 +7973,19 @@ public static class vx_core {
 
   public class Class_security : vx_core.Class_base, Type_security {
 
-    protected vx_core.Type_funclist vx_p_allowfuncs;
+    public vx_core.Type_funclist vx_p_allowfuncs;
 
     public vx_core.Type_funclist allowfuncs() {
       return this.vx_p_allowfuncs == null ? vx_core.e_funclist : this.vx_p_allowfuncs;
     }
 
-    protected vx_core.Type_permissionlist vx_p_permissions;
+    public vx_core.Type_permissionlist vx_p_permissions;
 
     public vx_core.Type_permissionlist permissions() {
       return this.vx_p_permissions == null ? vx_core.e_permissionlist : this.vx_p_permissions;
     }
 
-    protected vx_core.Type_permissionmap vx_p_permissionmap;
+    public vx_core.Type_permissionmap vx_p_permissionmap;
 
     public vx_core.Type_permissionmap permissionmap() {
       return this.vx_p_permissionmap == null ? vx_core.e_permissionmap : this.vx_p_permissionmap;
@@ -8137,7 +8009,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       output.put(":allowfuncs", this.allowfuncs());
       output.put(":permissions", this.permissions());
       output.put(":permissionmap", this.permissionmap());
@@ -8152,7 +8024,7 @@ public static class vx_core {
 
     public override vx_core.Type_security vx_copy(params Object[] vals) {
       Type_security output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_security val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -8173,7 +8045,7 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          boolean istestkey = false;
+          bool istestkey = false;
           String testkey = "";
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
@@ -8196,7 +8068,7 @@ public static class vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey;
             }
-            boolean isvalidkey = validkeys.contains(testkey);
+            bool isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
@@ -8288,17 +8160,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_security;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_security;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "security", // name
@@ -8339,37 +8208,37 @@ public static class vx_core {
 
   public class Class_session : vx_core.Class_base, Type_session {
 
-    protected vx_core.Type_user vx_p_user;
+    public vx_core.Type_user vx_p_user;
 
     public vx_core.Type_user user() {
       return this.vx_p_user == null ? vx_core.e_user : this.vx_p_user;
     }
 
-    protected vx_core.Type_connectlist vx_p_connectlist;
+    public vx_core.Type_connectlist vx_p_connectlist;
 
     public vx_core.Type_connectlist connectlist() {
       return this.vx_p_connectlist == null ? vx_core.e_connectlist : this.vx_p_connectlist;
     }
 
-    protected vx_core.Type_connectmap vx_p_connectmap;
+    public vx_core.Type_connectmap vx_p_connectmap;
 
     public vx_core.Type_connectmap connectmap() {
       return this.vx_p_connectmap == null ? vx_core.e_connectmap : this.vx_p_connectmap;
     }
 
-    protected vx_core.Type_locale vx_p_locale;
+    public vx_core.Type_locale vx_p_locale;
 
     public vx_core.Type_locale locale() {
       return this.vx_p_locale == null ? vx_core.e_locale : this.vx_p_locale;
     }
 
-    protected vx_core.Type_translation vx_p_translation;
+    public vx_core.Type_translation vx_p_translation;
 
     public vx_core.Type_translation translation() {
       return this.vx_p_translation == null ? vx_core.e_translation : this.vx_p_translation;
     }
 
-    protected vx_core.Type_translationmap vx_p_translationmap;
+    public vx_core.Type_translationmap vx_p_translationmap;
 
     public vx_core.Type_translationmap translationmap() {
       return this.vx_p_translationmap == null ? vx_core.e_translationmap : this.vx_p_translationmap;
@@ -8402,7 +8271,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       output.put(":user", this.user());
       output.put(":connectlist", this.connectlist());
       output.put(":connectmap", this.connectmap());
@@ -8420,7 +8289,7 @@ public static class vx_core {
 
     public override vx_core.Type_session vx_copy(params Object[] vals) {
       Type_session output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_session val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -8447,7 +8316,7 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          boolean istestkey = false;
+          bool istestkey = false;
           String testkey = "";
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
@@ -8470,7 +8339,7 @@ public static class vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey;
             }
-            boolean isvalidkey = validkeys.contains(testkey);
+            bool isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
@@ -8625,17 +8494,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_session;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_session;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "session", // name
@@ -8671,7 +8537,7 @@ public static class vx_core {
 
   public class Class_setting : vx_core.Class_base, Type_setting {
 
-    protected vx_core.Type_stringmap vx_p_pathmap;
+    public vx_core.Type_stringmap vx_p_pathmap;
 
     public vx_core.Type_stringmap pathmap() {
       return this.vx_p_pathmap == null ? vx_core.e_stringmap : this.vx_p_pathmap;
@@ -8689,7 +8555,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       output.put(":pathmap", this.pathmap());
       return vx_core.immutablemap(output);
     }
@@ -8702,7 +8568,7 @@ public static class vx_core {
 
     public override vx_core.Type_setting vx_copy(params Object[] vals) {
       Type_setting output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_setting val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -8719,7 +8585,7 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          boolean istestkey = false;
+          bool istestkey = false;
           String testkey = "";
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
@@ -8742,7 +8608,7 @@ public static class vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey;
             }
-            boolean isvalidkey = validkeys.contains(testkey);
+            bool isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
@@ -8792,17 +8658,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_setting;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_setting;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "setting", // name
@@ -8838,7 +8701,7 @@ public static class vx_core {
 
   public class Class_state : vx_core.Class_base, Type_state {
 
-    protected vx_core.Type_statelistenermap vx_p_statelistenermap;
+    public vx_core.Type_statelistenermap vx_p_statelistenermap;
 
     public vx_core.Type_statelistenermap statelistenermap() {
       return this.vx_p_statelistenermap == null ? vx_core.e_statelistenermap : this.vx_p_statelistenermap;
@@ -8856,7 +8719,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       output.put(":statelistenermap", this.statelistenermap());
       return vx_core.immutablemap(output);
     }
@@ -8869,7 +8732,7 @@ public static class vx_core {
 
     public override vx_core.Type_state vx_copy(params Object[] vals) {
       Type_state output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_state val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -8886,7 +8749,7 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          boolean istestkey = false;
+          bool istestkey = false;
           String testkey = "";
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
@@ -8909,7 +8772,7 @@ public static class vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey;
             }
-            boolean isvalidkey = validkeys.contains(testkey);
+            bool isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
@@ -8959,17 +8822,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_state;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_state;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "state", // name
@@ -9006,19 +8866,19 @@ public static class vx_core {
 
   public class Class_statelistener : vx_core.Class_base, Type_statelistener {
 
-    protected vx_core.Type_string vx_p_name;
+    public vx_core.Type_string vx_p_name;
 
     public vx_core.Type_string name() {
       return this.vx_p_name == null ? vx_core.e_string : this.vx_p_name;
     }
 
-    protected vx_core.Type_any vx_p_value;
+    public vx_core.Type_any vx_p_value;
 
     public vx_core.Type_any value() {
       return this.vx_p_value == null ? vx_core.e_any : this.vx_p_value;
     }
 
-    protected vx_core.Func_boolean_from_none vx_p_fn_boolean;
+    public vx_core.Func_boolean_from_none vx_p_fn_boolean;
 
     public vx_core.Func_boolean_from_none fn_boolean() {
       return this.vx_p_fn_boolean == null ? vx_core.e_boolean_from_none : this.vx_p_fn_boolean;
@@ -9042,7 +8902,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       output.put(":name", this.name());
       output.put(":value", this.value());
       output.put(":fn-boolean", this.fn_boolean());
@@ -9057,7 +8917,7 @@ public static class vx_core {
 
     public override vx_core.Type_statelistener vx_copy(params Object[] vals) {
       Type_statelistener output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_statelistener val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -9078,7 +8938,7 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          boolean istestkey = false;
+          bool istestkey = false;
           String testkey = "";
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
@@ -9101,7 +8961,7 @@ public static class vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey;
             }
-            boolean isvalidkey = validkeys.contains(testkey);
+            bool isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
@@ -9196,17 +9056,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_statelistener;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_statelistener;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "statelistener", // name
@@ -9243,7 +9100,7 @@ public static class vx_core {
 
   public class Class_statelistenermap : vx_core.Class_base, Type_statelistenermap {
 
-    protected Map<String, vx_core.Type_statelistener> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_statelistener>());
+    public Map<String, vx_core.Type_statelistener> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_statelistener>());
 
     public Map<String, vx_core.Type_any> vx_map() {
       return vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map));
@@ -9316,7 +9173,7 @@ public static class vx_core {
 
     public override vx_core.Type_statelistenermap vx_copy(params Object[] vals) {
       Type_statelistenermap output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_statelistenermap val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -9387,17 +9244,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_statelistenermap;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_statelistenermap;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "statelistenermap", // name
@@ -9432,6 +9286,12 @@ public static class vx_core {
 
   public class Class_string : vx_core.Class_base, Type_string {
 
+    protected String vxstring = "";
+    
+    public String vx_string() {
+      return vxstring;
+    }
+
     public override vx_core.Type_string vx_new(params Object[] vals) {
       return vx_core.vx_copy(
        e_string,
@@ -9440,7 +9300,7 @@ public static class vx_core {
 
     public override vx_core.Type_string vx_copy(params Object[] vals) {
       Type_string output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_string val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -9507,17 +9367,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_string;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_string;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "string", // name
@@ -9554,7 +9411,7 @@ public static class vx_core {
 
   public class Class_stringlist : vx_core.Class_base, Type_stringlist {
 
-    protected List<vx_core.Type_string> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_string>());
+    public List<vx_core.Type_string> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_string>());
 
     public List<vx_core.Type_any> vx_list() {
       List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
@@ -9588,7 +9445,7 @@ public static class vx_core {
 
     public override vx_core.Type_stringlist vx_copy(params Object[] vals) {
       Type_stringlist output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_stringlist val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -9641,17 +9498,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_stringlist;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_stringlist;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "stringlist", // name
@@ -9688,7 +9542,7 @@ public static class vx_core {
 
   public class Class_stringlistlist : vx_core.Class_base, Type_stringlistlist {
 
-    protected List<vx_core.Type_stringlist> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_stringlist>());
+    public List<vx_core.Type_stringlist> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_stringlist>());
 
     public List<vx_core.Type_any> vx_list() {
       List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
@@ -9722,7 +9576,7 @@ public static class vx_core {
 
     public override vx_core.Type_stringlistlist vx_copy(params Object[] vals) {
       Type_stringlistlist output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_stringlistlist val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -9775,17 +9629,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_stringlistlist;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_stringlistlist;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "stringlistlist", // name
@@ -9822,7 +9673,7 @@ public static class vx_core {
 
   public class Class_stringmap : vx_core.Class_base, Type_stringmap {
 
-    protected Map<String, vx_core.Type_string> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_string>());
+    public Map<String, vx_core.Type_string> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_string>());
 
     public Map<String, vx_core.Type_any> vx_map() {
       return vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map));
@@ -9895,7 +9746,7 @@ public static class vx_core {
 
     public override vx_core.Type_stringmap vx_copy(params Object[] vals) {
       Type_stringmap output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_stringmap val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -9966,17 +9817,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_stringmap;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_stringmap;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "stringmap", // name
@@ -10013,7 +9861,7 @@ public static class vx_core {
 
   public class Class_stringmutablemap : vx_core.Class_base, Type_stringmutablemap {
 
-    protected Map<String, vx_core.Type_string> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_string>());
+    public Map<String, vx_core.Type_string> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_string>());
 
     public Map<String, vx_core.Type_any> vx_map() {
       return vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map));
@@ -10086,7 +9934,7 @@ public static class vx_core {
 
     public override vx_core.Type_stringmutablemap vx_copy(params Object[] vals) {
       Type_stringmutablemap output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_stringmutablemap val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -10157,17 +10005,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_stringmutablemap;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_stringmutablemap;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "stringmutablemap", // name
@@ -10213,7 +10058,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       return vx_core.immutablemap(output);
     }
 
@@ -10225,7 +10070,7 @@ public static class vx_core {
 
     public override vx_core.Type_struct vx_copy(params Object[] vals) {
       Type_struct output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_struct val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -10241,17 +10086,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_struct;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_struct;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "struct", // name
@@ -10290,31 +10132,31 @@ public static class vx_core {
 
   public class Class_thenelse : vx_core.Class_base, Type_thenelse {
 
-    protected vx_core.Type_string vx_p_code;
+    public vx_core.Type_string vx_p_code;
 
     public vx_core.Type_string code() {
       return this.vx_p_code == null ? vx_core.e_string : this.vx_p_code;
     }
 
-    protected vx_core.Type_any vx_p_value;
+    public vx_core.Type_any vx_p_value;
 
     public vx_core.Type_any value() {
       return this.vx_p_value == null ? vx_core.e_any : this.vx_p_value;
     }
 
-    protected vx_core.Type_list vx_p_values;
+    public vx_core.Type_list vx_p_values;
 
     public vx_core.Type_list values() {
       return this.vx_p_values == null ? vx_core.e_list : this.vx_p_values;
     }
 
-    protected vx_core.Func_boolean_from_func vx_p_fn_cond;
+    public vx_core.Func_boolean_from_func vx_p_fn_cond;
 
     public vx_core.Func_boolean_from_func fn_cond() {
       return this.vx_p_fn_cond == null ? vx_core.e_boolean_from_func : this.vx_p_fn_cond;
     }
 
-    protected vx_core.Func_any_from_func vx_p_fn_any;
+    public vx_core.Func_any_from_func vx_p_fn_any;
 
     public vx_core.Func_any_from_func fn_any() {
       return this.vx_p_fn_any == null ? vx_core.e_any_from_func : this.vx_p_fn_any;
@@ -10344,7 +10186,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       output.put(":code", this.code());
       output.put(":value", this.value());
       output.put(":values", this.values());
@@ -10361,7 +10203,7 @@ public static class vx_core {
 
     public override vx_core.Type_thenelse vx_copy(params Object[] vals) {
       Type_thenelse output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_thenelse val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -10386,7 +10228,7 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          boolean istestkey = false;
+          bool istestkey = false;
           String testkey = "";
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
@@ -10409,7 +10251,7 @@ public static class vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey;
             }
-            boolean isvalidkey = validkeys.contains(testkey);
+            bool isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
@@ -10546,17 +10388,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_thenelse;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_thenelse;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "thenelse", // name
@@ -10592,7 +10431,7 @@ public static class vx_core {
 
   public class Class_thenelselist : vx_core.Class_base, Type_thenelselist {
 
-    protected List<vx_core.Type_thenelse> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_thenelse>());
+    public List<vx_core.Type_thenelse> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_thenelse>());
 
     public List<vx_core.Type_any> vx_list() {
       List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
@@ -10626,7 +10465,7 @@ public static class vx_core {
 
     public override vx_core.Type_thenelselist vx_copy(params Object[] vals) {
       Type_thenelselist output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_thenelselist val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -10679,17 +10518,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_thenelselist;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_thenelselist;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "thenelselist", // name
@@ -10726,13 +10562,13 @@ public static class vx_core {
 
   public class Class_translation : vx_core.Class_base, Type_translation {
 
-    protected vx_core.Type_string vx_p_name;
+    public vx_core.Type_string vx_p_name;
 
     public vx_core.Type_string name() {
       return this.vx_p_name == null ? vx_core.e_string : this.vx_p_name;
     }
 
-    protected vx_core.Type_stringmap vx_p_wordmap;
+    public vx_core.Type_stringmap vx_p_wordmap;
 
     public vx_core.Type_stringmap wordmap() {
       return this.vx_p_wordmap == null ? vx_core.e_stringmap : this.vx_p_wordmap;
@@ -10753,7 +10589,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       output.put(":name", this.name());
       output.put(":wordmap", this.wordmap());
       return vx_core.immutablemap(output);
@@ -10767,7 +10603,7 @@ public static class vx_core {
 
     public override vx_core.Type_translation vx_copy(params Object[] vals) {
       Type_translation output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_translation val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -10786,7 +10622,7 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          boolean istestkey = false;
+          bool istestkey = false;
           String testkey = "";
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
@@ -10809,7 +10645,7 @@ public static class vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey;
             }
-            boolean isvalidkey = validkeys.contains(testkey);
+            bool isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
@@ -10883,17 +10719,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_translation;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_translation;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "translation", // name
@@ -10930,7 +10763,7 @@ public static class vx_core {
 
   public class Class_translationlist : vx_core.Class_base, Type_translationlist {
 
-    protected List<vx_core.Type_translation> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_translation>());
+    public List<vx_core.Type_translation> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_translation>());
 
     public List<vx_core.Type_any> vx_list() {
       List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
@@ -10964,7 +10797,7 @@ public static class vx_core {
 
     public override vx_core.Type_translationlist vx_copy(params Object[] vals) {
       Type_translationlist output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_translationlist val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -11017,17 +10850,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_translationlist;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_translationlist;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "translationlist", // name
@@ -11064,7 +10894,7 @@ public static class vx_core {
 
   public class Class_translationmap : vx_core.Class_base, Type_translationmap {
 
-    protected Map<String, vx_core.Type_translation> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_translation>());
+    public Map<String, vx_core.Type_translation> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_translation>());
 
     public Map<String, vx_core.Type_any> vx_map() {
       return vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map));
@@ -11137,7 +10967,7 @@ public static class vx_core {
 
     public override vx_core.Type_translationmap vx_copy(params Object[] vals) {
       Type_translationmap output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_translationmap val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -11208,17 +11038,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_translationmap;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_translationmap;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "translationmap", // name
@@ -11261,7 +11088,7 @@ public static class vx_core {
 
     public override vx_core.Type_type vx_copy(params Object[] vals) {
       Type_type output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_type val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -11277,17 +11104,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_type;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_type;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "type", // name
@@ -11334,73 +11158,73 @@ public static class vx_core {
 
   public class Class_typedef : vx_core.Class_base, Type_typedef {
 
-    protected vx_core.Type_string vx_p_pkgname;
+    public vx_core.Type_string vx_p_pkgname;
 
     public vx_core.Type_string pkgname() {
       return this.vx_p_pkgname == null ? vx_core.e_string : this.vx_p_pkgname;
     }
 
-    protected vx_core.Type_string vx_p_name;
+    public vx_core.Type_string vx_p_name;
 
     public vx_core.Type_string name() {
       return this.vx_p_name == null ? vx_core.e_string : this.vx_p_name;
     }
 
-    protected vx_core.Type_string vx_p_extend;
+    public vx_core.Type_string vx_p_extend;
 
     public vx_core.Type_string extend() {
       return this.vx_p_extend == null ? vx_core.e_string : this.vx_p_extend;
     }
 
-    protected vx_core.Type_funclist vx_p_allowfuncs;
+    public vx_core.Type_funclist vx_p_allowfuncs;
 
     public vx_core.Type_funclist allowfuncs() {
       return this.vx_p_allowfuncs == null ? vx_core.e_funclist : this.vx_p_allowfuncs;
     }
 
-    protected vx_core.Type_typelist vx_p_allowtypes;
+    public vx_core.Type_typelist vx_p_allowtypes;
 
     public vx_core.Type_typelist allowtypes() {
       return this.vx_p_allowtypes == null ? vx_core.e_typelist : this.vx_p_allowtypes;
     }
 
-    protected vx_core.Type_anylist vx_p_allowvalues;
+    public vx_core.Type_anylist vx_p_allowvalues;
 
     public vx_core.Type_anylist allowvalues() {
       return this.vx_p_allowvalues == null ? vx_core.e_anylist : this.vx_p_allowvalues;
     }
 
-    protected vx_core.Type_funclist vx_p_disallowfuncs;
+    public vx_core.Type_funclist vx_p_disallowfuncs;
 
     public vx_core.Type_funclist disallowfuncs() {
       return this.vx_p_disallowfuncs == null ? vx_core.e_funclist : this.vx_p_disallowfuncs;
     }
 
-    protected vx_core.Type_typelist vx_p_disallowtypes;
+    public vx_core.Type_typelist vx_p_disallowtypes;
 
     public vx_core.Type_typelist disallowtypes() {
       return this.vx_p_disallowtypes == null ? vx_core.e_typelist : this.vx_p_disallowtypes;
     }
 
-    protected vx_core.Type_anylist vx_p_disallowvalues;
+    public vx_core.Type_anylist vx_p_disallowvalues;
 
     public vx_core.Type_anylist disallowvalues() {
       return this.vx_p_disallowvalues == null ? vx_core.e_anylist : this.vx_p_disallowvalues;
     }
 
-    protected vx_core.Type_argmap vx_p_properties;
+    public vx_core.Type_argmap vx_p_properties;
 
     public vx_core.Type_argmap properties() {
       return this.vx_p_properties == null ? vx_core.e_argmap : this.vx_p_properties;
     }
 
-    protected vx_core.Type_arg vx_p_proplast;
+    public vx_core.Type_arg vx_p_proplast;
 
     public vx_core.Type_arg proplast() {
       return this.vx_p_proplast == null ? vx_core.e_arg : this.vx_p_proplast;
     }
 
-    protected vx_core.Type_typelist vx_p_traits;
+    public vx_core.Type_typelist vx_p_traits;
 
     public vx_core.Type_typelist traits() {
       return this.vx_p_traits == null ? vx_core.e_typelist : this.vx_p_traits;
@@ -11451,7 +11275,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       output.put(":pkgname", this.pkgname());
       output.put(":name", this.name());
       output.put(":extends", this.extend());
@@ -11475,7 +11299,7 @@ public static class vx_core {
 
     public override vx_core.Type_typedef vx_copy(params Object[] vals) {
       Type_typedef output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_typedef val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -11514,7 +11338,7 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          boolean istestkey = false;
+          bool istestkey = false;
           String testkey = "";
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
@@ -11537,7 +11361,7 @@ public static class vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey;
             }
-            boolean isvalidkey = validkeys.contains(testkey);
+            bool isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
@@ -11827,17 +11651,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_typedef;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_typedef;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "typedef", // name
@@ -11872,7 +11693,7 @@ public static class vx_core {
 
   public class Class_typelist : vx_core.Class_base, Type_typelist {
 
-    protected List<vx_core.Type_any> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_any>());
+    public List<vx_core.Type_any> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_any>());
 
     public List<vx_core.Type_any> vx_list() {
       List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
@@ -11898,7 +11719,7 @@ public static class vx_core {
 
     public override vx_core.Type_typelist vx_copy(params Object[] vals) {
       Type_typelist output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_typelist val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -11951,17 +11772,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_typelist;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_typelist;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "typelist", // name
@@ -11996,7 +11814,7 @@ public static class vx_core {
 
   public class Class_typemap : vx_core.Class_base, Type_typemap {
 
-    protected Map<String, vx_core.Type_any> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>());
+    public Map<String, vx_core.Type_any> vx_p_map = vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>());
 
     public Map<String, vx_core.Type_any> vx_map() {
       return vx_core.immutablemap(new LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map));
@@ -12061,7 +11879,7 @@ public static class vx_core {
 
     public override vx_core.Type_typemap vx_copy(params Object[] vals) {
       Type_typemap output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_typemap val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -12132,17 +11950,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_typemap;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_typemap;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "typemap", // name
@@ -12180,19 +11995,19 @@ public static class vx_core {
 
   public class Class_user : vx_core.Class_base, Type_user {
 
-    protected vx_core.Type_security vx_p_security;
+    public vx_core.Type_security vx_p_security;
 
     public vx_core.Type_security security() {
       return this.vx_p_security == null ? vx_core.e_security : this.vx_p_security;
     }
 
-    protected vx_core.Type_string vx_p_username;
+    public vx_core.Type_string vx_p_username;
 
     public vx_core.Type_string username() {
       return this.vx_p_username == null ? vx_core.e_string : this.vx_p_username;
     }
 
-    protected vx_core.Type_string vx_p_token;
+    public vx_core.Type_string vx_p_token;
 
     public vx_core.Type_string token() {
       return this.vx_p_token == null ? vx_core.e_string : this.vx_p_token;
@@ -12216,7 +12031,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       output.put(":security", this.security());
       output.put(":username", this.username());
       output.put(":token", this.token());
@@ -12231,7 +12046,7 @@ public static class vx_core {
 
     public override vx_core.Type_user vx_copy(params Object[] vals) {
       Type_user output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_user val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -12252,7 +12067,7 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          boolean istestkey = false;
+          bool istestkey = false;
           String testkey = "";
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
@@ -12275,7 +12090,7 @@ public static class vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey;
             }
-            boolean isvalidkey = validkeys.contains(testkey);
+            bool isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
@@ -12373,17 +12188,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_user;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_user;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "user", // name
@@ -12419,13 +12231,13 @@ public static class vx_core {
 
   public class Class_value : vx_core.Class_base, Type_value {
 
-    protected vx_core.Type_any vx_p_next;
+    public vx_core.Type_any vx_p_next;
 
     public vx_core.Type_any next() {
       return this.vx_p_next == null ? vx_core.e_any : this.vx_p_next;
     }
 
-    protected vx_core.Type_int vx_p_refs;
+    public vx_core.Type_int vx_p_refs;
 
     public vx_core.Type_int refs() {
       return this.vx_p_refs == null ? vx_core.e_int : this.vx_p_refs;
@@ -12446,7 +12258,7 @@ public static class vx_core {
     }
 
     public Map<String, vx_core.Type_any> vx_map() {
-      Map<String, vx_core.Type_any> output = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> output = new LinkedHashMap<String, vx_core.Type_any>();
       output.put(":next", this.next());
       output.put(":refs", this.refs());
       return vx_core.immutablemap(output);
@@ -12460,7 +12272,7 @@ public static class vx_core {
 
     public override vx_core.Type_value vx_copy(params Object[] vals) {
       Type_value output = this;
-      boolean ischanged = false;
+      bool ischanged = false;
       Class_value val = this;
       vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
       if (this is vx_core.vx_Type_const) {
@@ -12479,7 +12291,7 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          boolean istestkey = false;
+          bool istestkey = false;
           String testkey = "";
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
@@ -12502,7 +12314,7 @@ public static class vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey;
             }
-            boolean isvalidkey = validkeys.contains(testkey);
+            bool isvalidkey = validkeys.contains(testkey);
             if (isvalidkey) {
               key = testkey;
             } else {
@@ -12576,17 +12388,14 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_value;
     }
-    override
-    public vx_core.Type_any vx_type() {
+    public override vx_core.Type_any vx_type() {
       return t_value;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {
+    public override vx_core.Type_typedef vx_typedef() {
       return vx_core.typedef_new(
         "vx/core", // pkgname
         "value", // name
@@ -13206,12 +13015,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_not;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_not;
     }
 
@@ -13219,7 +13027,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_boolean inputval = (vx_core.Type_boolean)value;
       vx_core.Type_any outputval = vx_core.f_not(inputval);
@@ -13234,7 +13042,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_not(vx_core.Type_boolean val) {
       return vx_core.f_not(val);
     }
@@ -13298,12 +13105,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_notempty;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_notempty;
     }
 
@@ -13311,7 +13117,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_string inputval = (vx_core.Type_string)value;
       vx_core.Type_any outputval = vx_core.f_notempty(inputval);
@@ -13326,7 +13132,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_notempty(vx_core.Type_string text) {
       return vx_core.f_notempty(text);
     }
@@ -13393,12 +13198,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_notempty_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_notempty_1;
     }
 
@@ -13406,7 +13210,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_any inputval = (vx_core.Type_any)value;
       vx_core.Type_any outputval = vx_core.f_notempty_1(inputval);
@@ -13421,7 +13225,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_notempty_1(vx_core.Type_any val) {
       return vx_core.f_notempty_1(val);
     }
@@ -13489,12 +13292,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_ne;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_ne;
     }
 
@@ -13506,7 +13308,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_ne(vx_core.Type_any val1, vx_core.Type_any val2) {
       return vx_core.f_ne(val1, val2);
     }
@@ -13574,12 +13375,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_neqeq;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_neqeq;
     }
 
@@ -13591,7 +13391,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_neqeq(vx_core.Type_any val1, vx_core.Type_any val2) {
       return vx_core.f_neqeq(val1, val2);
     }
@@ -13659,12 +13458,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_multiply;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_multiply;
     }
 
@@ -13676,7 +13474,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_int vx_multiply(vx_core.Type_int num1, vx_core.Type_int num2) {
       return vx_core.f_multiply(num1, num2);
     }
@@ -13741,12 +13538,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_multiply_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_multiply_1;
     }
 
@@ -13758,7 +13554,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_number vx_multiply_1(vx_core.Type_number num1, vx_core.Type_number num2) {
       return vx_core.f_multiply_1(num1, num2);
     }
@@ -13822,12 +13617,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_multiply_2;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_multiply_2;
     }
 
@@ -13835,7 +13629,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_intlist inputval = (vx_core.Type_intlist)value;
       vx_core.Type_any outputval = vx_core.f_multiply_2(inputval);
@@ -13850,7 +13644,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_int vx_multiply_2(vx_core.Type_intlist nums) {
       return vx_core.f_multiply_2(nums);
     }
@@ -13925,12 +13718,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_multiply_3;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_multiply_3;
     }
 
@@ -13938,7 +13730,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_numberlist inputval = (vx_core.Type_numberlist)value;
       vx_core.Type_any outputval = vx_core.f_multiply_3(inputval);
@@ -13953,7 +13745,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_number vx_multiply_3(vx_core.Type_numberlist nums) {
       return vx_core.f_multiply_3(nums);
     }
@@ -14029,12 +13820,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_plus;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_plus;
     }
 
@@ -14046,7 +13836,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_int vx_plus(vx_core.Type_int num1, vx_core.Type_int num2) {
       return vx_core.f_plus(num1, num2);
     }
@@ -14111,12 +13900,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_plus_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_plus_1;
     }
 
@@ -14128,7 +13916,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_number vx_plus_1(vx_core.Type_number num1, vx_core.Type_number num2) {
       return vx_core.f_plus_1(num1, num2);
     }
@@ -14192,12 +13979,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_plus_2;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_plus_2;
     }
 
@@ -14205,7 +13991,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_intlist inputval = (vx_core.Type_intlist)value;
       vx_core.Type_any outputval = vx_core.f_plus_2(inputval);
@@ -14220,7 +14006,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_int vx_plus_2(vx_core.Type_intlist nums) {
       return vx_core.f_plus_2(nums);
     }
@@ -14295,12 +14080,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_plus_3;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_plus_3;
     }
 
@@ -14308,7 +14092,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_numberlist inputval = (vx_core.Type_numberlist)value;
       vx_core.Type_any outputval = vx_core.f_plus_3(inputval);
@@ -14323,7 +14107,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_number vx_plus_3(vx_core.Type_numberlist nums) {
       return vx_core.f_plus_3(nums);
     }
@@ -14398,12 +14181,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_plus1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_plus1;
     }
 
@@ -14411,7 +14193,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_int inputval = (vx_core.Type_int)value;
       vx_core.Type_any outputval = vx_core.f_plus1(inputval);
@@ -14426,7 +14208,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_int vx_plus1(vx_core.Type_int num) {
       return vx_core.f_plus1(num);
     }
@@ -14492,12 +14273,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_minus;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_minus;
     }
 
@@ -14509,7 +14289,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_int vx_minus(vx_core.Type_int num1, vx_core.Type_int num2) {
       return vx_core.f_minus(num1, num2);
     }
@@ -14574,12 +14353,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_minus_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_minus_1;
     }
 
@@ -14591,7 +14369,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_number vx_minus_1(vx_core.Type_number num1, vx_core.Type_number num2) {
       return vx_core.f_minus_1(num1, num2);
     }
@@ -14655,12 +14432,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_minus_2;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_minus_2;
     }
 
@@ -14668,7 +14444,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_intlist inputval = (vx_core.Type_intlist)value;
       vx_core.Type_any outputval = vx_core.f_minus_2(inputval);
@@ -14683,7 +14459,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_int vx_minus_2(vx_core.Type_intlist nums) {
       return vx_core.f_minus_2(nums);
     }
@@ -14758,12 +14533,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_minus_3;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_minus_3;
     }
 
@@ -14771,7 +14545,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_numberlist inputval = (vx_core.Type_numberlist)value;
       vx_core.Type_any outputval = vx_core.f_minus_3(inputval);
@@ -14786,7 +14560,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_number vx_minus_3(vx_core.Type_numberlist nums) {
       return vx_core.f_minus_3(nums);
     }
@@ -14861,12 +14634,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_minus1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_minus1;
     }
 
@@ -14874,7 +14646,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_int inputval = (vx_core.Type_int)value;
       vx_core.Type_any outputval = vx_core.f_minus1(inputval);
@@ -14889,7 +14661,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_int vx_minus1(vx_core.Type_int num) {
       return vx_core.f_minus1(num);
     }
@@ -14956,12 +14727,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_dotmethod;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_dotmethod;
     }
 
@@ -14974,7 +14744,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_any vx_dotmethod(vx_core.Type_any target, vx_core.Type_string method, vx_core.Type_anylist parameters) {
       return vx_core.f_dotmethod(target, method, parameters);
     }
@@ -15039,12 +14808,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_divide;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_divide;
     }
 
@@ -15056,7 +14824,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_number vx_divide(vx_core.Type_number num1, vx_core.Type_number num2) {
       return vx_core.f_divide(num1, num2);
     }
@@ -15121,12 +14888,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_lt;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_lt;
     }
 
@@ -15138,7 +14904,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_lt(vx_core.Type_any val1, vx_core.Type_any val2) {
       return vx_core.f_lt(val1, val2);
     }
@@ -15219,12 +14984,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_lt_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_lt_1;
     }
 
@@ -15232,7 +14996,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_anylist inputval = (vx_core.Type_anylist)value;
       vx_core.Type_any outputval = vx_core.f_lt_1(inputval);
@@ -15247,7 +15011,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_lt_1(vx_core.Type_anylist values) {
       return vx_core.f_lt_1(values);
     }
@@ -15329,12 +15092,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_chainfirst;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_chainfirst;
     }
 
@@ -15347,7 +15109,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_chainfirst<T>(T generic_any_1, T value, vx_core.Type_any_from_anylist fnlist) where T : vx_core.Type_any {
       return vx_core.f_chainfirst(generic_any_1, value, fnlist);
     }
@@ -15414,12 +15175,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_chainlast;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_chainlast;
     }
 
@@ -15432,7 +15192,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_chainlast<T>(T generic_any_1, T value, vx_core.Type_any_from_anylist fnlist) where T : vx_core.Type_any {
       return vx_core.f_chainlast(generic_any_1, value, fnlist);
     }
@@ -15497,12 +15256,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_le;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_le;
     }
 
@@ -15514,7 +15272,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_le(vx_core.Type_any val1, vx_core.Type_any val2) {
       return vx_core.f_le(val1, val2);
     }
@@ -15581,12 +15338,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_le_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_le_1;
     }
 
@@ -15594,7 +15350,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_anylist inputval = (vx_core.Type_anylist)value;
       vx_core.Type_any outputval = vx_core.f_le_1(inputval);
@@ -15609,7 +15365,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_le_1(vx_core.Type_anylist args) {
       return vx_core.f_le_1(args);
     }
@@ -15677,12 +15432,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_eq;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_eq;
     }
 
@@ -15694,7 +15448,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_eq(vx_core.Type_any val1, vx_core.Type_any val2) {
       return vx_core.f_eq(val1, val2);
     }
@@ -15758,12 +15511,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_eq_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_eq_1;
     }
 
@@ -15771,7 +15523,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_anylist inputval = (vx_core.Type_anylist)value;
       vx_core.Type_any outputval = vx_core.f_eq_1(inputval);
@@ -15786,7 +15538,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_eq_1(vx_core.Type_anylist values) {
       return vx_core.f_eq_1(values);
     }
@@ -15866,12 +15617,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_eqeq;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_eqeq;
     }
 
@@ -15883,7 +15633,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_eqeq(vx_core.Type_any val1, vx_core.Type_any val2) {
       return vx_core.f_eqeq(val1, val2);
     }
@@ -15948,12 +15697,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_gt;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_gt;
     }
 
@@ -15965,7 +15713,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_gt(vx_core.Type_any val1, vx_core.Type_any val2) {
       return vx_core.f_gt(val1, val2);
     }
@@ -16046,12 +15793,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_gt_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_gt_1;
     }
 
@@ -16059,7 +15805,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_anylist inputval = (vx_core.Type_anylist)value;
       vx_core.Type_any outputval = vx_core.f_gt_1(inputval);
@@ -16074,7 +15820,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_gt_1(vx_core.Type_anylist values) {
       return vx_core.f_gt_1(values);
     }
@@ -16154,12 +15899,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_ge;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_ge;
     }
 
@@ -16171,7 +15915,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_ge(vx_core.Type_any val1, vx_core.Type_any val2) {
       return vx_core.f_ge(val1, val2);
     }
@@ -16238,12 +15981,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_ge_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_ge_1;
     }
 
@@ -16251,7 +15993,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_anylist inputval = (vx_core.Type_anylist)value;
       vx_core.Type_any outputval = vx_core.f_ge_1(inputval);
@@ -16266,7 +16008,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_ge_1(vx_core.Type_anylist args) {
       return vx_core.f_ge_1(args);
     }
@@ -16333,12 +16074,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_allowfuncs_from_security;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_allowfuncs_from_security;
     }
 
@@ -16346,7 +16086,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_security inputval = (vx_core.Type_security)value;
       vx_core.Type_any outputval = vx_core.f_allowfuncs_from_security(inputval);
@@ -16361,7 +16101,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_funclist vx_allowfuncs_from_security(vx_core.Type_security security) {
       return vx_core.f_allowfuncs_from_security(security);
     }
@@ -16426,12 +16165,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_allowtypenames_from_typedef;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_allowtypenames_from_typedef;
     }
 
@@ -16439,7 +16177,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_typedef inputval = (vx_core.Type_typedef)value;
       vx_core.Type_any outputval = vx_core.f_allowtypenames_from_typedef(inputval);
@@ -16454,7 +16192,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_stringlist vx_allowtypenames_from_typedef(vx_core.Type_typedef vtypedef) {
       return vx_core.f_allowtypenames_from_typedef(vtypedef);
     }
@@ -16521,12 +16258,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_allowtypes_from_typedef;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_allowtypes_from_typedef;
     }
 
@@ -16534,7 +16270,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_typedef inputval = (vx_core.Type_typedef)value;
       vx_core.Type_any outputval = vx_core.f_allowtypes_from_typedef(inputval);
@@ -16549,7 +16285,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_typelist vx_allowtypes_from_typedef(vx_core.Type_typedef vtypedef) {
       return vx_core.f_allowtypes_from_typedef(vtypedef);
     }
@@ -16614,12 +16349,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_and;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_and;
     }
 
@@ -16631,7 +16365,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_and(vx_core.Type_boolean val1, vx_core.Type_boolean val2) {
       return vx_core.f_and(val1, val2);
     }
@@ -16695,12 +16428,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_and_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_and_1;
     }
 
@@ -16708,7 +16440,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_booleanlist inputval = (vx_core.Type_booleanlist)value;
       vx_core.Type_any outputval = vx_core.f_and_1(inputval);
@@ -16723,7 +16455,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_and_1(vx_core.Type_booleanlist values) {
       return vx_core.f_and_1(values);
     }
@@ -16825,16 +16556,14 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_any;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_any;
     }
 
-    @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve(vx_core.Type_any value);
     }
@@ -16855,7 +16584,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       if (fn != null) {
@@ -16927,16 +16655,14 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_any_async;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_any_async;
     }
 
-    @FunctionalInterface
     public interface IFn {
       public Task<vx_core.Type_any> resolve(vx_core.Type_any value);
     }
@@ -16958,7 +16684,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public Task<T> vx_any_from_any_async<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       Task<T> output;
       if (fn == null) {
@@ -17030,16 +16755,14 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_any_context;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_any_context;
     }
 
-    @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve(vx_core.Type_context context, vx_core.Type_any value);
     }
@@ -17061,7 +16784,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_any_from_any_context<T, U>(T generic_any_1, vx_core.Type_context context, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       if (fn != null) {
@@ -17133,16 +16855,14 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_any_context_async;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_any_context_async;
     }
 
-    @FunctionalInterface
     public interface IFn {
       public Task<vx_core.Type_any> resolve(vx_core.Type_context context, vx_core.Type_any value);
     }
@@ -17165,7 +16885,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public Task<T> vx_any_from_any_context_async<T, U>(T generic_any_1, vx_core.Type_context context, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       Task<T> output;
       if (fn == null) {
@@ -17239,16 +16958,14 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_any_key_value;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_any_key_value;
     }
 
-    @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve(vx_core.Type_any current, vx_core.Type_string key, vx_core.Type_any value);
     }
@@ -17271,7 +16988,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_any_from_any_key_value<T, U>(T generic_any_1, T current, vx_core.Type_string key, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       if (fn != null) {
@@ -17340,16 +17056,14 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_func;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_func;
     }
 
-    @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve();
     }
@@ -17369,7 +17083,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_any_from_func<T>(T generic_any_1) where T : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       if (fn != null) {
@@ -17440,16 +17153,14 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_func_async;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_func_async;
     }
 
-    @FunctionalInterface
     public interface IFn {
       public Task<vx_core.Type_any> resolve();
     }
@@ -17470,7 +17181,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public Task<T> vx_any_from_func_async<T>(T generic_any_1) where T : vx_core.Type_any {
       Task<T> output;
       if (fn == null) {
@@ -17542,16 +17252,14 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_int;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_int;
     }
 
-    @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve(vx_core.Type_int value);
     }
@@ -17572,7 +17280,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_any_from_int<T>(T generic_any_1, vx_core.Type_int value) where T : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       if (fn != null) {
@@ -17643,16 +17350,14 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_int_any;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_int_any;
     }
 
-    @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve(vx_core.Type_int num, vx_core.Type_any val);
     }
@@ -17674,7 +17379,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_any_from_int_any<T, U>(T generic_any_1, vx_core.Type_int num, U val) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       if (fn != null) {
@@ -17745,16 +17449,14 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_key_value;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_key_value;
     }
 
-    @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve(vx_core.Type_string key, vx_core.Type_any val);
     }
@@ -17776,7 +17478,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_any_from_key_value<T, U>(T generic_any_1, vx_core.Type_string key, U val) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       if (fn != null) {
@@ -17849,16 +17550,14 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_key_value_async;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_key_value_async;
     }
 
-    @FunctionalInterface
     public interface IFn {
       public Task<vx_core.Type_any> resolve(vx_core.Type_string key, vx_core.Type_any val);
     }
@@ -17881,7 +17580,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public Task<T> vx_any_from_key_value_async<T, U>(T generic_any_1, vx_core.Type_string key, U val) where T : vx_core.Type_any where U : vx_core.Type_any {
       Task<T> output;
       if (fn == null) {
@@ -17953,12 +17651,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_list;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_list;
     }
 
@@ -17971,7 +17668,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_any_from_list<T, X>(T generic_any_1, X values, vx_core.Type_int index) where T : vx_core.Type_any where X : vx_core.Type_list {
       return vx_core.f_any_from_list(generic_any_1, values, index);
     }
@@ -18037,12 +17733,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_list_start_reduce;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_list_start_reduce;
     }
 
@@ -18056,7 +17751,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_any_from_list_start_reduce<T, Y>(T generic_any_1, Y list, T valstart, vx_core.Func_any_from_reduce fn_reduce) where T : vx_core.Type_any where Y : vx_core.Type_list {
       return vx_core.f_any_from_list_start_reduce(generic_any_1, list, valstart, fn_reduce);
     }
@@ -18122,12 +17816,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_list_start_reduce_next;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_list_start_reduce_next;
     }
 
@@ -18141,7 +17834,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_any_from_list_start_reduce_next<T, Y>(T generic_any_1, Y list, T valstart, vx_core.Func_any_from_reduce_next fn_reduce_next) where T : vx_core.Type_any where Y : vx_core.Type_list {
       return vx_core.f_any_from_list_start_reduce_next(generic_any_1, list, valstart, fn_reduce_next);
     }
@@ -18206,12 +17898,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_map;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_map;
     }
 
@@ -18224,7 +17915,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_any_from_map<N, T>(T generic_any_1, N valuemap, vx_core.Type_string key) where N : vx_core.Type_map where T : vx_core.Type_any {
       return vx_core.f_any_from_map(generic_any_1, valuemap, key);
     }
@@ -18290,12 +17980,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_map_start_reduce;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_map_start_reduce;
     }
 
@@ -18309,7 +17998,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_any_from_map_start_reduce<N, T>(T generic_any_1, N map, T start, vx_core.Func_any_from_any_key_value fn_reduce) where N : vx_core.Type_map where T : vx_core.Type_any {
       return vx_core.f_any_from_map_start_reduce(generic_any_1, map, start, fn_reduce);
     }
@@ -18373,16 +18061,14 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_none;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_none;
     }
 
-    @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve();
     }
@@ -18402,7 +18088,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_any_from_none<T>(T generic_any_1) where T : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       if (fn != null) {
@@ -18473,16 +18158,14 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_none_async;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_none_async;
     }
 
-    @FunctionalInterface
     public interface IFn {
       public Task<vx_core.Type_any> resolve();
     }
@@ -18503,7 +18186,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public Task<T> vx_any_from_none_async<T>(T generic_any_1) where T : vx_core.Type_any {
       Task<T> output;
       if (fn == null) {
@@ -18575,16 +18257,14 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_reduce;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_reduce;
     }
 
-    @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve(vx_core.Type_any result, vx_core.Type_any item);
     }
@@ -18606,7 +18286,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_any_from_reduce<T, U>(T generic_any_1, T result, U item) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       if (fn != null) {
@@ -18678,16 +18357,14 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_reduce_async;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_reduce_async;
     }
 
-    @FunctionalInterface
     public interface IFn {
       public Task<vx_core.Type_any> resolve(vx_core.Type_any result, vx_core.Type_any item);
     }
@@ -18710,7 +18387,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public Task<T> vx_any_from_reduce_async<T, U>(T generic_any_1, T result, U item) where T : vx_core.Type_any where U : vx_core.Type_any {
       Task<T> output;
       if (fn == null) {
@@ -18783,16 +18459,14 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_reduce_next;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_reduce_next;
     }
 
-    @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve(vx_core.Type_any result, vx_core.Type_any current, vx_core.Type_any next);
     }
@@ -18815,7 +18489,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_any_from_reduce_next<T, U>(T generic_any_1, T result, U current, U next) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       if (fn != null) {
@@ -18888,16 +18561,14 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_reduce_next_async;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_reduce_next_async;
     }
 
-    @FunctionalInterface
     public interface IFn {
       public Task<vx_core.Type_any> resolve(vx_core.Type_any result, vx_core.Type_any current, vx_core.Type_any next);
     }
@@ -18921,7 +18592,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public Task<T> vx_any_from_reduce_next_async<T, U>(T generic_any_1, T result, U current, U next) where T : vx_core.Type_any where U : vx_core.Type_any {
       Task<T> output;
       if (fn == null) {
@@ -18993,12 +18663,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_any_from_struct;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_any_from_struct;
     }
 
@@ -19011,7 +18680,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_any_from_struct<R, T>(T generic_any_1, R vstruct, vx_core.Type_string key) where R : vx_core.Type_struct where T : vx_core.Type_any {
       return vx_core.f_any_from_struct(generic_any_1, vstruct, key);
     }
@@ -19077,12 +18745,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_async;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_async;
     }
 
@@ -19090,7 +18757,7 @@ public static class vx_core {
       return vx_core.e_any_from_any_async;
     }
 
-    public override Task<T> vx_any_from_any_async<T, U>(T generic_any_1, U value) {
+    public Task<T> vx_any_from_any_async<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T inputval = vx_core.f_any_from_any(generic_any_1, value);
       Task<T> output = vx_core.f_async(generic_any_1, inputval);
       return output;
@@ -19105,7 +18772,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public Task<T> vx_async<T>(T generic_any_1, T value) where T : vx_core.Type_any {
       return vx_core.f_async(generic_any_1, value);
     }
@@ -19169,12 +18835,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_boolean_permission_from_func;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_boolean_permission_from_func;
     }
 
@@ -19182,7 +18847,7 @@ public static class vx_core {
       return vx_core.e_any_from_any_context;
     }
 
-    public override T vx_any_from_any_context<T, U>(T generic_any_1, vx_core.Type_context context, U value) {
+    public T vx_any_from_any_context<T, U>(T generic_any_1, vx_core.Type_context context, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_func inputval = (vx_core.Type_func)value;
       vx_core.Type_any outputval = vx_core.f_boolean_permission_from_func(context, inputval);
@@ -19198,7 +18863,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_boolean_permission_from_func(vx_core.Type_context context, vx_core.Type_func func) {
       return vx_core.f_boolean_permission_from_func(context, func);
     }
@@ -19270,12 +18934,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_boolean_write_from_map_name_value;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_boolean_write_from_map_name_value;
     }
 
@@ -19288,7 +18951,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_boolean_write_from_map_name_value(vx_core.Type_map valuemap, vx_core.Type_string name, vx_core.Type_any value) {
       return vx_core.f_boolean_write_from_map_name_value(valuemap, name, value);
     }
@@ -19353,16 +19015,14 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_boolean_from_any;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_boolean_from_any;
     }
 
-    @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve(vx_core.Type_any value);
     }
@@ -19382,7 +19042,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_boolean_from_any(vx_core.Type_any value) {
       vx_core.Type_boolean output = vx_core.c_false;
       if (fn != null) {
@@ -19451,16 +19110,14 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_boolean_from_func;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_boolean_from_func;
     }
 
-    @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve();
     }
@@ -19479,7 +19136,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_boolean_from_func() {
       vx_core.Type_boolean output = vx_core.c_false;
       if (fn != null) {
@@ -19548,16 +19204,14 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_boolean_from_none;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_boolean_from_none;
     }
 
-    @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve();
     }
@@ -19576,7 +19230,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_boolean_from_none() {
       vx_core.Type_boolean output = vx_core.c_false;
       if (fn != null) {
@@ -19645,12 +19298,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_case;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_case;
     }
 
@@ -19662,7 +19314,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_thenelse vx_case(vx_core.Type_list values, vx_core.Func_any_from_func fn_any) {
       return vx_core.f_case(values, fn_any);
     }
@@ -19737,12 +19388,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_case_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_case_1;
     }
 
@@ -19754,7 +19404,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_thenelse vx_case_1(vx_core.Type_any value, vx_core.Func_any_from_func fn_any) {
       return vx_core.f_case_1(value, fn_any);
     }
@@ -19830,12 +19479,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_compare;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_compare;
     }
 
@@ -19847,7 +19495,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_int vx_compare(vx_core.Type_any val1, vx_core.Type_any val2) {
       return vx_core.f_compare(val1, val2);
     }
@@ -19912,12 +19559,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_contains;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_contains;
     }
 
@@ -19929,7 +19575,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_contains(vx_core.Type_string text, vx_core.Type_string find) {
       return vx_core.f_contains(text, find);
     }
@@ -19994,12 +19639,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_contains_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_contains_1;
     }
 
@@ -20011,7 +19655,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_contains_1(vx_core.Type_list values, vx_core.Type_any find) {
       return vx_core.f_contains_1(values, find);
     }
@@ -20075,12 +19718,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_context_main;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_context_main;
     }
 
@@ -20088,7 +19730,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_anylist inputval = (vx_core.Type_anylist)value;
       vx_core.Type_any outputval = vx_core.f_context_main(inputval);
@@ -20103,7 +19745,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_context vx_context_main(vx_core.Type_anylist args) {
       return vx_core.f_context_main(args);
     }
@@ -20171,12 +19812,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_copy;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_copy;
     }
 
@@ -20188,7 +19828,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_copy<T>(vx_core.Type_any value, vx_core.Type_anylist values) where T : vx_core.Type_any {
       return vx_core.f_copy(value, values);
     }
@@ -20250,12 +19889,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_else;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_else;
     }
 
@@ -20263,7 +19901,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Func_any_from_func inputval = (vx_core.Func_any_from_func)value;
       vx_core.Type_any outputval = vx_core.f_else(inputval);
@@ -20278,7 +19916,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_thenelse vx_else(vx_core.Func_any_from_func fn_any) {
       return vx_core.f_else(fn_any);
     }
@@ -20351,12 +19988,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_empty;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_empty;
     }
 
@@ -20364,7 +20000,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_any inputval = (vx_core.Type_any)value;
       vx_core.Type_any outputval = vx_core.f_empty(inputval);
@@ -20379,7 +20015,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_empty<T>(T type) where T : vx_core.Type_any {
       return vx_core.f_empty(type);
     }
@@ -20441,12 +20076,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_extends_from_any;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_extends_from_any;
     }
 
@@ -20454,7 +20088,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_any inputval = (vx_core.Type_any)value;
       vx_core.Type_any outputval = vx_core.f_extends_from_any(inputval);
@@ -20469,7 +20103,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_string vx_extends_from_any(vx_core.Type_any val) {
       return vx_core.f_extends_from_any(val);
     }
@@ -20536,12 +20169,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_extends_from_typedef;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_extends_from_typedef;
     }
 
@@ -20549,7 +20181,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_typedef inputval = (vx_core.Type_typedef)value;
       vx_core.Type_any outputval = vx_core.f_extends_from_typedef(inputval);
@@ -20564,7 +20196,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_string vx_extends_from_typedef(vx_core.Type_typedef vtypedef) {
       return vx_core.f_extends_from_typedef(vtypedef);
     }
@@ -20629,12 +20260,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_first_from_list;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_first_from_list;
     }
 
@@ -20642,7 +20272,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_list inputval = (vx_core.Type_list)value;
       vx_core.Type_any outputval = vx_core.f_first_from_list(vx_core.t_any, inputval);
@@ -20658,7 +20288,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_first_from_list<T, X>(T generic_any_1, X values) where T : vx_core.Type_any where X : vx_core.Type_list {
       return vx_core.f_first_from_list(generic_any_1, values);
     }
@@ -20724,12 +20353,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_first_from_list_any_from_any;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_first_from_list_any_from_any;
     }
 
@@ -20742,7 +20370,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_first_from_list_any_from_any<T, X>(T generic_any_1, X values, vx_core.Func_any_from_any fn_any_from_any) where T : vx_core.Type_any where X : vx_core.Type_list {
       return vx_core.f_first_from_list_any_from_any(generic_any_1, values, fn_any_from_any);
     }
@@ -20806,12 +20433,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_float_from_string;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_float_from_string;
     }
 
@@ -20819,7 +20445,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_string inputval = (vx_core.Type_string)value;
       vx_core.Type_any outputval = vx_core.f_float_from_string(inputval);
@@ -20834,7 +20460,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_float vx_float_from_string(vx_core.Type_string text) {
       return vx_core.f_float_from_string(text);
     }
@@ -20899,12 +20524,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_fn;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_fn;
     }
 
@@ -20917,7 +20541,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_fn<T>(T generic_any_1, vx_core.Type_arglist parameters, vx_core.Func_any_from_func fn_any) where T : vx_core.Type_any {
       return vx_core.f_fn(generic_any_1, parameters, fn_any);
     }
@@ -20980,12 +20603,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_funcdef_from_func;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_funcdef_from_func;
     }
 
@@ -20993,7 +20615,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_func inputval = (vx_core.Type_func)value;
       vx_core.Type_any outputval = vx_core.f_funcdef_from_func(inputval);
@@ -21008,7 +20630,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_funcdef vx_funcdef_from_func(vx_core.Type_func val) {
       return vx_core.f_funcdef_from_func(val);
     }
@@ -21072,12 +20693,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_funcname_from_funcdef;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_funcname_from_funcdef;
     }
 
@@ -21085,7 +20705,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_funcdef inputval = (vx_core.Type_funcdef)value;
       vx_core.Type_any outputval = vx_core.f_funcname_from_funcdef(inputval);
@@ -21100,7 +20720,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_string vx_funcname_from_funcdef(vx_core.Type_funcdef funcdef) {
       return vx_core.f_funcname_from_funcdef(funcdef);
     }
@@ -21173,12 +20792,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_if;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_if;
     }
 
@@ -21191,7 +20809,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_if<T>(T generic_any_1, vx_core.Type_boolean clause, T then) where T : vx_core.Type_any {
       return vx_core.f_if(generic_any_1, clause, then);
     }
@@ -21257,12 +20874,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_if_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_if_1;
     }
 
@@ -21276,7 +20892,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_if_1<T>(T generic_any_1, vx_core.Type_boolean clause, T thenval, T elseval) where T : vx_core.Type_any {
       return vx_core.f_if_1(generic_any_1, clause, thenval, elseval);
     }
@@ -21340,12 +20955,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_if_2;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_if_2;
     }
 
@@ -21353,7 +20967,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_thenelselist inputval = (vx_core.Type_thenelselist)value;
       vx_core.Type_any outputval = vx_core.f_if_2(vx_core.t_any, inputval);
@@ -21369,7 +20983,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_if_2<T>(T generic_any_1, vx_core.Type_thenelselist thenelselist) where T : vx_core.Type_any {
       return vx_core.f_if_2(generic_any_1, thenelselist);
     }
@@ -21433,12 +21046,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_int_from_func;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_int_from_func;
     }
 
@@ -21456,7 +21068,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_int vx_int_from_func() {
       return vx_core.f_int_from_func();
     }
@@ -21520,12 +21131,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_int_from_string;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_int_from_string;
     }
 
@@ -21533,7 +21143,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_string inputval = (vx_core.Type_string)value;
       vx_core.Type_any outputval = vx_core.f_int_from_string(inputval);
@@ -21548,7 +21158,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_int vx_int_from_string(vx_core.Type_string val) {
       return vx_core.f_int_from_string(val);
     }
@@ -21640,12 +21249,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_is_empty;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_is_empty;
     }
 
@@ -21653,7 +21261,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_string inputval = (vx_core.Type_string)value;
       vx_core.Type_any outputval = vx_core.f_is_empty(inputval);
@@ -21668,7 +21276,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_is_empty(vx_core.Type_string text) {
       return vx_core.f_is_empty(text);
     }
@@ -21732,12 +21339,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_is_empty_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_is_empty_1;
     }
 
@@ -21745,7 +21351,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_any inputval = (vx_core.Type_any)value;
       vx_core.Type_any outputval = vx_core.f_is_empty_1(inputval);
@@ -21760,7 +21366,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_is_empty_1(vx_core.Type_any value) {
       return vx_core.f_is_empty_1(value);
     }
@@ -21825,12 +21430,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_is_endswith;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_is_endswith;
     }
 
@@ -21842,7 +21446,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_is_endswith(vx_core.Type_string text, vx_core.Type_string find) {
       return vx_core.f_is_endswith(text, find);
     }
@@ -21906,12 +21509,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_is_float;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_is_float;
     }
 
@@ -21919,7 +21521,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_any inputval = (vx_core.Type_any)value;
       vx_core.Type_any outputval = vx_core.f_is_float(inputval);
@@ -21934,7 +21536,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_is_float(vx_core.Type_any value) {
       return vx_core.f_is_float(value);
     }
@@ -21998,12 +21599,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_is_func;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_is_func;
     }
 
@@ -22011,7 +21611,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_any inputval = (vx_core.Type_any)value;
       vx_core.Type_any outputval = vx_core.f_is_func(inputval);
@@ -22026,7 +21626,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_is_func(vx_core.Type_any val) {
       return vx_core.f_is_func(val);
     }
@@ -22090,12 +21689,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_is_int;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_is_int;
     }
 
@@ -22103,7 +21701,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_any inputval = (vx_core.Type_any)value;
       vx_core.Type_any outputval = vx_core.f_is_int(inputval);
@@ -22118,7 +21716,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_is_int(vx_core.Type_any value) {
       return vx_core.f_is_int(value);
     }
@@ -22182,12 +21779,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_is_number;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_is_number;
     }
 
@@ -22195,7 +21791,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_any inputval = (vx_core.Type_any)value;
       vx_core.Type_any outputval = vx_core.f_is_number(inputval);
@@ -22210,7 +21806,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_is_number(vx_core.Type_any value) {
       return vx_core.f_is_number(value);
     }
@@ -22299,12 +21894,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_is_pass_from_permission;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_is_pass_from_permission;
     }
 
@@ -22312,7 +21906,7 @@ public static class vx_core {
       return vx_core.e_any_from_any_context;
     }
 
-    public override T vx_any_from_any_context<T, U>(T generic_any_1, vx_core.Type_context context, U value) {
+    public T vx_any_from_any_context<T, U>(T generic_any_1, vx_core.Type_context context, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_permission inputval = (vx_core.Type_permission)value;
       vx_core.Type_any outputval = vx_core.f_is_pass_from_permission(context, inputval);
@@ -22328,7 +21922,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_is_pass_from_permission(vx_core.Type_context context, vx_core.Type_permission permission) {
       return vx_core.f_is_pass_from_permission(context, permission);
     }
@@ -22400,12 +21993,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_last_from_list;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_last_from_list;
     }
 
@@ -22413,7 +22005,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_list inputval = (vx_core.Type_list)value;
       vx_core.Type_any outputval = vx_core.f_last_from_list(vx_core.t_any, inputval);
@@ -22429,7 +22021,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_last_from_list<T, X>(T generic_any_1, X values) where T : vx_core.Type_any where X : vx_core.Type_list {
       return vx_core.f_last_from_list(generic_any_1, values);
     }
@@ -22500,12 +22091,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_length;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_length;
     }
 
@@ -22513,7 +22103,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_string inputval = (vx_core.Type_string)value;
       vx_core.Type_any outputval = vx_core.f_length(inputval);
@@ -22528,7 +22118,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_int vx_length(vx_core.Type_string text) {
       return vx_core.f_length(text);
     }
@@ -22592,12 +22181,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_length_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_length_1;
     }
 
@@ -22605,7 +22193,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_list inputval = (vx_core.Type_list)value;
       vx_core.Type_any outputval = vx_core.f_length_1(inputval);
@@ -22620,7 +22208,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_int vx_length_1(vx_core.Type_list values) {
       return vx_core.f_length_1(values);
     }
@@ -22684,12 +22271,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_length_2;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_length_2;
     }
 
@@ -22697,7 +22283,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_map inputval = (vx_core.Type_map)value;
       vx_core.Type_any outputval = vx_core.f_length_2(inputval);
@@ -22712,7 +22298,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_int vx_length_2(vx_core.Type_map valuemap) {
       return vx_core.f_length_2(valuemap);
     }
@@ -22779,12 +22364,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_let;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_let;
     }
 
@@ -22796,7 +22380,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_let<T>(T generic_any_1, vx_core.Func_any_from_func fn_any) where T : vx_core.Type_any {
       return vx_core.f_let(generic_any_1, fn_any);
     }
@@ -22863,12 +22446,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_let_async;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_let_async;
     }
 
@@ -22881,7 +22463,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public Task<T> vx_let_async<T>(T generic_any_1, vx_core.Func_any_from_func_async fn_any_async) where T : vx_core.Type_any {
       return vx_core.f_let_async(generic_any_1, fn_any_async);
     }
@@ -22945,12 +22526,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_list_join_from_list;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_list_join_from_list;
     }
 
@@ -22958,7 +22538,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_list inputval = (vx_core.Type_list)value;
       vx_core.Type_any outputval = vx_core.f_list_join_from_list(vx_core.t_list, inputval);
@@ -22974,7 +22554,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public X vx_list_join_from_list<X, Y>(X generic_list_1, Y values) where X : vx_core.Type_list where Y : vx_core.Type_list {
       return vx_core.f_list_join_from_list(generic_list_1, values);
     }
@@ -23047,12 +22626,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_list_join_from_list_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_list_join_from_list_1;
     }
 
@@ -23065,7 +22643,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public X vx_list_join_from_list_1<X, Y>(X generic_list_1, Y values, vx_core.Func_any_from_any fn_any_from_any) where X : vx_core.Type_list where Y : vx_core.Type_list {
       return vx_core.f_list_join_from_list_1(generic_list_1, values, fn_any_from_any);
     }
@@ -23129,12 +22706,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_list_from_list;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_list_from_list;
     }
 
@@ -23142,7 +22718,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_list inputval = (vx_core.Type_list)value;
       vx_core.Type_any outputval = vx_core.f_list_from_list(vx_core.t_list, inputval);
@@ -23158,7 +22734,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public X vx_list_from_list<X, Y>(X generic_list_1, Y values) where X : vx_core.Type_list where Y : vx_core.Type_list {
       return vx_core.f_list_from_list(generic_list_1, values);
     }
@@ -23231,12 +22806,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_list_from_list_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_list_from_list_1;
     }
 
@@ -23249,7 +22823,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public X vx_list_from_list_1<X, Y>(X generic_list_1, Y values, vx_core.Func_any_from_any fn_any_from_any) where X : vx_core.Type_list where Y : vx_core.Type_list {
       return vx_core.f_list_from_list_1(generic_list_1, values, fn_any_from_any);
     }
@@ -23316,12 +22889,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_list_from_list_async;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_list_from_list_async;
     }
 
@@ -23335,7 +22907,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public Task<X> vx_list_from_list_async<X, Y>(X generic_list_1, Y values, vx_core.Func_any_from_any_async fn_any_from_any_async) where X : vx_core.Type_list where Y : vx_core.Type_list {
       return vx_core.f_list_from_list_async(generic_list_1, values, fn_any_from_any_async);
     }
@@ -23400,12 +22971,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_list_from_list_intany;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_list_from_list_intany;
     }
 
@@ -23418,7 +22988,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public X vx_list_from_list_intany<X, Y>(X generic_list_1, Y values, vx_core.Func_any_from_int_any fn_any_from_int_any) where X : vx_core.Type_list where Y : vx_core.Type_list {
       return vx_core.f_list_from_list_intany(generic_list_1, values, fn_any_from_int_any);
     }
@@ -23482,12 +23051,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_list_from_map;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_list_from_map;
     }
 
@@ -23495,7 +23063,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_map inputval = (vx_core.Type_map)value;
       vx_core.Type_any outputval = vx_core.f_list_from_map(vx_core.t_list, inputval);
@@ -23511,7 +23079,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public X vx_list_from_map<O, X>(X generic_list_1, O valuemap) where O : vx_core.Type_map where X : vx_core.Type_list {
       return vx_core.f_list_from_map(generic_list_1, valuemap);
     }
@@ -23585,12 +23152,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_list_from_map_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_list_from_map_1;
     }
 
@@ -23603,7 +23169,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public X vx_list_from_map_1<O, X>(X generic_list_1, O valuemap, vx_core.Func_any_from_key_value fn_any_from_key_value) where O : vx_core.Type_map where X : vx_core.Type_list {
       return vx_core.f_list_from_map_1(generic_list_1, valuemap, fn_any_from_key_value);
     }
@@ -23669,12 +23234,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_list_from_map_async;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_list_from_map_async;
     }
 
@@ -23688,7 +23252,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public Task<X> vx_list_from_map_async<O, X>(X generic_list_1, O valuemap, vx_core.Func_any_from_key_value_async fn_any_from_key_value_async) where O : vx_core.Type_map where X : vx_core.Type_list {
       return vx_core.f_list_from_map_async(generic_list_1, valuemap, fn_any_from_key_value_async);
     }
@@ -23752,12 +23315,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_list_from_type;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_list_from_type;
     }
 
@@ -23765,7 +23327,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_any inputval = (vx_core.Type_any)value;
       vx_core.Type_any outputval = vx_core.f_list_from_type(inputval);
@@ -23780,7 +23342,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_any vx_list_from_type(vx_core.Type_any type) {
       return vx_core.f_list_from_type(type);
     }
@@ -23844,12 +23405,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_log;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_log;
     }
 
@@ -23857,7 +23417,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_any inputval = (vx_core.Type_any)value;
       vx_core.Type_any outputval = vx_core.f_log(inputval);
@@ -23872,7 +23432,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_any vx_log(vx_core.Type_any value) {
       return vx_core.f_log(value);
     }
@@ -23937,12 +23496,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_log_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_log_1;
     }
 
@@ -23955,7 +23513,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_log_1<T>(T generic_any_1, vx_core.Type_string text, T value) where T : vx_core.Type_any {
       return vx_core.f_log_1(generic_any_1, text, value);
     }
@@ -24019,12 +23576,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_main;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_main;
     }
 
@@ -24032,7 +23588,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_anylist inputval = (vx_core.Type_anylist)value;
       vx_core.Type_any outputval = vx_core.f_main(inputval);
@@ -24047,7 +23603,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_string vx_main(vx_core.Type_anylist args) {
       return vx_core.f_main(args);
     }
@@ -24116,12 +23671,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_map_from_list;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_map_from_list;
     }
 
@@ -24134,7 +23688,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public N vx_map_from_list<N, Y>(N generic_map_1, Y vallist, vx_core.Func_any_from_any fn_any_from_any) where N : vx_core.Type_map where Y : vx_core.Type_list {
       return vx_core.f_map_from_list(generic_map_1, vallist, fn_any_from_any);
     }
@@ -24198,12 +23751,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_map_from_map;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_map_from_map;
     }
 
@@ -24211,7 +23763,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_map inputval = (vx_core.Type_map)value;
       vx_core.Type_any outputval = vx_core.f_map_from_map(vx_core.t_map, inputval);
@@ -24227,7 +23779,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public N vx_map_from_map<N, O>(N generic_map_1, O valuemap) where N : vx_core.Type_map where O : vx_core.Type_map {
       return vx_core.f_map_from_map(generic_map_1, valuemap);
     }
@@ -24301,12 +23852,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_map_from_map_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_map_from_map_1;
     }
 
@@ -24319,7 +23869,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public N vx_map_from_map_1<N, O>(N generic_map_1, O valuemap, vx_core.Func_any_from_key_value fn_any_from_key_value) where N : vx_core.Type_map where O : vx_core.Type_map {
       return vx_core.f_map_from_map_1(generic_map_1, valuemap, fn_any_from_key_value);
     }
@@ -24383,12 +23932,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_msg_from_error;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_msg_from_error;
     }
 
@@ -24396,7 +23944,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_string inputval = (vx_core.Type_string)value;
       vx_core.Type_any outputval = vx_core.f_msg_from_error(inputval);
@@ -24411,7 +23959,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_msg vx_msg_from_error(vx_core.Type_string error) {
       return vx_core.f_msg_from_error(error);
     }
@@ -24485,12 +24032,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_msg_from_error_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_msg_from_error_1;
     }
 
@@ -24502,7 +24048,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_msg vx_msg_from_error_1(vx_core.Type_string code, vx_core.Type_any detail) {
       return vx_core.f_msg_from_error_1(code, detail);
     }
@@ -24579,12 +24124,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_msg_from_error_2;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_msg_from_error_2;
     }
 
@@ -24597,7 +24141,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_msg vx_msg_from_error_2(vx_core.Type_string path, vx_core.Type_string code, vx_core.Type_any detail) {
       return vx_core.f_msg_from_error_2(path, code, detail);
     }
@@ -24674,12 +24217,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_msg_from_warning;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_msg_from_warning;
     }
 
@@ -24687,7 +24229,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_string inputval = (vx_core.Type_string)value;
       vx_core.Type_any outputval = vx_core.f_msg_from_warning(inputval);
@@ -24702,7 +24244,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_msg vx_msg_from_warning(vx_core.Type_string warning) {
       return vx_core.f_msg_from_warning(warning);
     }
@@ -24776,12 +24317,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_msgblock_from_msgblock_msg;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_msgblock_from_msgblock_msg;
     }
 
@@ -24793,7 +24333,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_msgblock vx_msgblock_from_msgblock_msg(vx_core.Type_msgblock origblock, vx_core.Type_msg addmsg) {
       return vx_core.f_msgblock_from_msgblock_msg(origblock, addmsg);
     }
@@ -24860,12 +24399,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_msgblock_from_msgblock_msgblock;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_msgblock_from_msgblock_msgblock;
     }
 
@@ -24877,7 +24415,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_msgblock vx_msgblock_from_msgblock_msgblock(vx_core.Type_msgblock origblock, vx_core.Type_msgblock addblock) {
       return vx_core.f_msgblock_from_msgblock_msgblock(origblock, addblock);
     }
@@ -24948,12 +24485,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_name_from_typedef;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_name_from_typedef;
     }
 
@@ -24961,7 +24497,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_typedef inputval = (vx_core.Type_typedef)value;
       vx_core.Type_any outputval = vx_core.f_name_from_typedef(inputval);
@@ -24976,7 +24512,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_string vx_name_from_typedef(vx_core.Type_typedef vtypedef) {
       return vx_core.f_name_from_typedef(vtypedef);
     }
@@ -25041,12 +24576,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_native;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_native;
     }
 
@@ -25054,7 +24588,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_anylist inputval = (vx_core.Type_anylist)value;
       vx_core.Type_any outputval = vx_core.f_native(vx_core.t_any, inputval);
@@ -25070,7 +24604,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_native<T>(T generic_any_1, vx_core.Type_anylist clauses) where T : vx_core.Type_any {
       return vx_core.f_native(generic_any_1, clauses);
     }
@@ -25134,12 +24667,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_native_from_any;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_native_from_any;
     }
 
@@ -25147,7 +24679,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_any inputval = (vx_core.Type_any)value;
       vx_core.Type_any outputval = vx_core.f_native_from_any(inputval);
@@ -25162,7 +24694,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_any vx_native_from_any(vx_core.Type_any value) {
       return vx_core.f_native_from_any(value);
     }
@@ -25227,12 +24758,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_new;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_new;
     }
 
@@ -25244,7 +24774,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_new<T>(T type, vx_core.Type_anylist values) where T : vx_core.Type_any {
       return vx_core.f_new(type, values);
     }
@@ -25254,7 +24783,6 @@ public static class vx_core {
   public static Func_new e_new = new vx_core.Class_new();
   public static Func_new t_new = new vx_core.Class_new();
 
-  @SuppressWarnings("unchecked")
   public static T f_new<T>(T type, vx_core.Type_anylist values) where T : vx_core.Type_any {
     return output;
   }
@@ -25307,12 +24835,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_number_from_func;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_number_from_func;
     }
 
@@ -25322,7 +24849,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_number vx_number_from_func() {
       return vx_core.f_number_from_func();
     }
@@ -25387,12 +24913,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_or;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_or;
     }
 
@@ -25404,7 +24929,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_or(vx_core.Type_boolean val1, vx_core.Type_boolean val2) {
       return vx_core.f_or(val1, val2);
     }
@@ -25468,12 +24992,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_or_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_or_1;
     }
 
@@ -25481,7 +25004,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_booleanlist inputval = (vx_core.Type_booleanlist)value;
       vx_core.Type_any outputval = vx_core.f_or_1(inputval);
@@ -25496,7 +25019,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_boolean vx_or_1(vx_core.Type_booleanlist values) {
       return vx_core.f_or_1(values);
     }
@@ -25575,12 +25097,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_package_global_from_name;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_package_global_from_name;
     }
 
@@ -25588,7 +25109,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_string inputval = (vx_core.Type_string)value;
       vx_core.Type_any outputval = vx_core.f_package_global_from_name(inputval);
@@ -25603,7 +25124,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_package vx_package_global_from_name(vx_core.Type_string name) {
       return vx_core.f_package_global_from_name(name);
     }
@@ -25672,12 +25192,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_packagename_from_typedef;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_packagename_from_typedef;
     }
 
@@ -25685,7 +25204,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_typedef inputval = (vx_core.Type_typedef)value;
       vx_core.Type_any outputval = vx_core.f_packagename_from_typedef(inputval);
@@ -25700,7 +25219,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_string vx_packagename_from_typedef(vx_core.Type_typedef vtypedef) {
       return vx_core.f_packagename_from_typedef(vtypedef);
     }
@@ -25765,12 +25283,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_path_from_context_path;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_path_from_context_path;
     }
 
@@ -25778,7 +25295,7 @@ public static class vx_core {
       return vx_core.e_any_from_any_context;
     }
 
-    public override T vx_any_from_any_context<T, U>(T generic_any_1, vx_core.Type_context context, U value) {
+    public T vx_any_from_any_context<T, U>(T generic_any_1, vx_core.Type_context context, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_string inputval = (vx_core.Type_string)value;
       vx_core.Type_any outputval = vx_core.f_path_from_context_path(context, inputval);
@@ -25794,7 +25311,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_string vx_path_from_context_path(vx_core.Type_context context, vx_core.Type_string path) {
       return vx_core.f_path_from_context_path(context, path);
     }
@@ -25863,12 +25379,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_path_from_setting_path;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_path_from_setting_path;
     }
 
@@ -25880,7 +25395,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_string vx_path_from_setting_path(vx_core.Type_setting session, vx_core.Type_string path) {
       return vx_core.f_path_from_setting_path(session, path);
     }
@@ -25944,12 +25458,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_permission_from_id_context;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_permission_from_id_context;
     }
 
@@ -25957,7 +25470,7 @@ public static class vx_core {
       return vx_core.e_any_from_any_context;
     }
 
-    public override T vx_any_from_any_context<T, U>(T generic_any_1, vx_core.Type_context context, U value) {
+    public T vx_any_from_any_context<T, U>(T generic_any_1, vx_core.Type_context context, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_string inputval = (vx_core.Type_string)value;
       vx_core.Type_any outputval = vx_core.f_permission_from_id_context(context, inputval);
@@ -25973,7 +25486,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_permission vx_permission_from_id_context(vx_core.Type_context context, vx_core.Type_string id) {
       return vx_core.f_permission_from_id_context(context, id);
     }
@@ -26046,12 +25558,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_properties_from_typedef;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_properties_from_typedef;
     }
 
@@ -26059,7 +25570,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_typedef inputval = (vx_core.Type_typedef)value;
       vx_core.Type_any outputval = vx_core.f_properties_from_typedef(inputval);
@@ -26074,7 +25585,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_argmap vx_properties_from_typedef(vx_core.Type_typedef vtypedef) {
       return vx_core.f_properties_from_typedef(vtypedef);
     }
@@ -26139,12 +25649,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_proplast_from_typedef;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_proplast_from_typedef;
     }
 
@@ -26152,7 +25661,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_typedef inputval = (vx_core.Type_typedef)value;
       vx_core.Type_any outputval = vx_core.f_proplast_from_typedef(inputval);
@@ -26167,7 +25676,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_arg vx_proplast_from_typedef(vx_core.Type_typedef vtypedef) {
       return vx_core.f_proplast_from_typedef(vtypedef);
     }
@@ -26231,12 +25739,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_resolve;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_resolve;
     }
 
@@ -26244,7 +25751,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_any inputval = (vx_core.Type_any)value;
       vx_core.Type_any outputval = vx_core.f_resolve(vx_core.t_any, inputval);
@@ -26260,7 +25767,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_resolve<T>(T generic_any_1, T value) where T : vx_core.Type_any {
       return vx_core.f_resolve(generic_any_1, value);
     }
@@ -26324,12 +25830,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_resolve_1;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_resolve_1;
     }
 
@@ -26337,7 +25842,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Func_any_from_func inputval = (vx_core.Func_any_from_func)value;
       vx_core.Type_any outputval = vx_core.f_resolve_1(vx_core.t_any, inputval);
@@ -26353,7 +25858,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_resolve_1<T>(T generic_any_1, vx_core.Func_any_from_func fn_any) where T : vx_core.Type_any {
       return vx_core.f_resolve_1(generic_any_1, fn_any);
     }
@@ -26418,12 +25922,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_resolve_async;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_resolve_async;
     }
 
@@ -26431,7 +25934,7 @@ public static class vx_core {
       return vx_core.e_any_from_any_async;
     }
 
-    public override Task<T> vx_any_from_any_async<T, U>(T generic_any_1, U value) {
+    public Task<T> vx_any_from_any_async<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T inputval = vx_core.f_any_from_any(generic_any_1, value);
       Task<T> output = vx_core.f_async(generic_any_1, inputval);
       return output;
@@ -26446,7 +25949,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public Task<T> vx_resolve_async<T>(T generic_any_1, vx_core.Func_any_from_func_async fn_any) where T : vx_core.Type_any {
       return vx_core.f_resolve_async(generic_any_1, fn_any);
     }
@@ -26510,12 +26012,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_resolve_first;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_resolve_first;
     }
 
@@ -26523,7 +26024,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_list inputval = (vx_core.Type_list)value;
       vx_core.Type_any outputval = vx_core.f_resolve_first(vx_core.t_any, inputval);
@@ -26539,7 +26040,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_resolve_first<T, X>(T generic_any_1, X clauses) where T : vx_core.Type_any where X : vx_core.Type_list {
       return vx_core.f_resolve_first(generic_any_1, clauses);
     }
@@ -26607,12 +26107,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_resolve_list;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_resolve_list;
     }
 
@@ -26620,7 +26119,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_list inputval = (vx_core.Type_list)value;
       vx_core.Type_any outputval = vx_core.f_resolve_list(vx_core.t_list, inputval);
@@ -26636,7 +26135,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public X vx_resolve_list<X>(X generic_list_1, X clauses) where X : vx_core.Type_list {
       return vx_core.f_resolve_list(generic_list_1, clauses);
     }
@@ -26704,12 +26202,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_security_from_context;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_security_from_context;
     }
 
@@ -26720,7 +26217,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_security vx_security_from_context(vx_core.Type_context context) {
       return vx_core.f_security_from_context(context);
     }
@@ -26787,12 +26283,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_security_from_user;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_security_from_user;
     }
 
@@ -26800,7 +26295,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_user inputval = (vx_core.Type_user)value;
       vx_core.Type_any outputval = vx_core.f_security_from_user(inputval);
@@ -26815,7 +26310,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_security vx_security_from_user(vx_core.Type_user user) {
       return vx_core.f_security_from_user(user);
     }
@@ -26879,12 +26373,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_session_from_context;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_session_from_context;
     }
 
@@ -26895,7 +26388,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_session vx_session_from_context(vx_core.Type_context context) {
       return vx_core.f_session_from_context(context);
     }
@@ -26959,12 +26451,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_setting_from_context;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_setting_from_context;
     }
 
@@ -26975,7 +26466,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_setting vx_setting_from_context(vx_core.Type_context context) {
       return vx_core.f_setting_from_context(context);
     }
@@ -27040,12 +26530,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_string_repeat;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_string_repeat;
     }
 
@@ -27057,7 +26546,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_string vx_string_repeat(vx_core.Type_string text, vx_core.Type_int repeat) {
       return vx_core.f_string_repeat(text, repeat);
     }
@@ -27121,12 +26609,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_string_from_any;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_string_from_any;
     }
 
@@ -27134,7 +26621,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_any inputval = (vx_core.Type_any)value;
       vx_core.Type_any outputval = vx_core.f_string_from_any(inputval);
@@ -27149,7 +26636,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_string vx_string_from_any(vx_core.Type_any value) {
       return vx_core.f_string_from_any(value);
     }
@@ -27220,12 +26706,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_string_from_any_indent;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_string_from_any_indent;
     }
 
@@ -27238,7 +26723,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_string vx_string_from_any_indent(vx_core.Type_any value, vx_core.Type_int indent, vx_core.Type_boolean linefeed) {
       return vx_core.f_string_from_any_indent(value, indent, linefeed);
     }
@@ -27302,12 +26786,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_string_from_func;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_string_from_func;
     }
 
@@ -27325,7 +26808,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_string vx_string_from_func() {
       return vx_core.f_string_from_func();
     }
@@ -27391,12 +26873,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_string_from_string_find_replace;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_string_from_string_find_replace;
     }
 
@@ -27409,7 +26890,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_string vx_string_from_string_find_replace(vx_core.Type_string text, vx_core.Type_string find, vx_core.Type_string replace) {
       return vx_core.f_string_from_string_find_replace(text, find, replace);
     }
@@ -27473,12 +26953,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_stringlist_from_map;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_stringlist_from_map;
     }
 
@@ -27486,7 +26965,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_map inputval = (vx_core.Type_map)value;
       vx_core.Type_any outputval = vx_core.f_stringlist_from_map(inputval);
@@ -27501,7 +26980,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_stringlist vx_stringlist_from_map(vx_core.Type_map map) {
       return vx_core.f_stringlist_from_map(map);
     }
@@ -27575,12 +27053,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_switch;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_switch;
     }
 
@@ -27593,7 +27070,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public T vx_switch<T, U>(T generic_any_1, U val, vx_core.Type_thenelselist thenelselist) where T : vx_core.Type_any where U : vx_core.Type_any {
       return vx_core.f_switch(generic_any_1, val, thenelselist);
     }
@@ -27658,12 +27134,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_then;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_then;
     }
 
@@ -27675,7 +27150,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_thenelse vx_then(vx_core.Func_boolean_from_func fn_cond, vx_core.Func_any_from_func fn_any) {
       return vx_core.f_then(fn_cond, fn_any);
     }
@@ -27750,12 +27224,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_traits_from_typedef;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_traits_from_typedef;
     }
 
@@ -27763,7 +27236,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_typedef inputval = (vx_core.Type_typedef)value;
       vx_core.Type_any outputval = vx_core.f_traits_from_typedef(inputval);
@@ -27778,7 +27251,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_typelist vx_traits_from_typedef(vx_core.Type_typedef vtypedef) {
       return vx_core.f_traits_from_typedef(vtypedef);
     }
@@ -27842,12 +27314,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_type_from_any;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_type_from_any;
     }
 
@@ -27855,7 +27326,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_any inputval = (vx_core.Type_any)value;
       vx_core.Type_any outputval = vx_core.f_type_from_any(inputval);
@@ -27870,7 +27341,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_any vx_type_from_any(vx_core.Type_any value) {
       return vx_core.f_type_from_any(value);
     }
@@ -27934,12 +27404,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_typedef_from_any;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_typedef_from_any;
     }
 
@@ -27947,7 +27416,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_any inputval = (vx_core.Type_any)value;
       vx_core.Type_any outputval = vx_core.f_typedef_from_any(inputval);
@@ -27962,7 +27431,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_typedef vx_typedef_from_any(vx_core.Type_any val) {
       return vx_core.f_typedef_from_any(val);
     }
@@ -28029,12 +27497,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_typedef_from_type;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_typedef_from_type;
     }
 
@@ -28042,7 +27509,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_any inputval = (vx_core.Type_any)value;
       vx_core.Type_any outputval = vx_core.f_typedef_from_type(inputval);
@@ -28057,7 +27524,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_typedef vx_typedef_from_type(vx_core.Type_any val) {
       return vx_core.f_typedef_from_type(val);
     }
@@ -28121,12 +27587,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_typename_from_any;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_typename_from_any;
     }
 
@@ -28134,7 +27599,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_any inputval = (vx_core.Type_any)value;
       vx_core.Type_any outputval = vx_core.f_typename_from_any(inputval);
@@ -28149,7 +27614,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_string vx_typename_from_any(vx_core.Type_any value) {
       return vx_core.f_typename_from_any(value);
     }
@@ -28216,12 +27680,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_typename_from_type;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_typename_from_type;
     }
 
@@ -28229,7 +27692,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_any inputval = (vx_core.Type_any)value;
       vx_core.Type_any outputval = vx_core.f_typename_from_type(inputval);
@@ -28244,7 +27707,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_string vx_typename_from_type(vx_core.Type_any type) {
       return vx_core.f_typename_from_type(type);
     }
@@ -28311,12 +27773,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_typename_from_typedef;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_typename_from_typedef;
     }
 
@@ -28324,7 +27785,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_typedef inputval = (vx_core.Type_typedef)value;
       vx_core.Type_any outputval = vx_core.f_typename_from_typedef(inputval);
@@ -28339,7 +27800,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_string vx_typename_from_typedef(vx_core.Type_typedef vtypedef) {
       return vx_core.f_typename_from_typedef(vtypedef);
     }
@@ -28411,12 +27871,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_typenames_from_typelist;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_typenames_from_typelist;
     }
 
@@ -28424,7 +27883,7 @@ public static class vx_core {
       return vx_core.e_any_from_any;
     }
 
-    public override T vx_any_from_any<T, U>(T generic_any_1, U value) {
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_typelist inputval = (vx_core.Type_typelist)value;
       vx_core.Type_any outputval = vx_core.f_typenames_from_typelist(inputval);
@@ -28439,7 +27898,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_stringlist vx_typenames_from_typelist(vx_core.Type_typelist typelist) {
       return vx_core.f_typenames_from_typelist(typelist);
     }
@@ -28511,12 +27969,11 @@ public static class vx_core {
       );
     }
 
-    override
-    public vx_core.Type_any vx_empty() {
+    public override vx_core.Type_any vx_empty() {
       return e_user_from_context;
     }
-    override
-    public vx_core.Type_any vx_type() {
+
+    public override vx_core.Type_any vx_type() {
       return t_user_from_context;
     }
 
@@ -28527,7 +27984,6 @@ public static class vx_core {
       return output;
     }
 
-    override
     public vx_core.Type_user vx_user_from_context(vx_core.Type_context context) {
       return vx_core.f_user_from_context(context);
     }

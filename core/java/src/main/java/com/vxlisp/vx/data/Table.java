@@ -25,14 +25,14 @@ public final class Table {
 
   public static class Class_cell extends Core.Class_base implements Type_cell {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Core.Type_any vx_p_value;
+    public Core.Type_any vx_p_value;
 
     @Override
     public Core.Type_any value() {
@@ -56,7 +56,7 @@ public final class Table {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":value", this.value());
       return Core.immutablemap(output);
@@ -234,7 +234,7 @@ public final class Table {
 
   public static class Class_celllist extends Core.Class_base implements Type_celllist {
 
-    protected List<Table.Type_cell> vx_p_list = Core.immutablelist(new ArrayList<Table.Type_cell>());
+    public List<Table.Type_cell> vx_p_list = Core.immutablelist(new ArrayList<Table.Type_cell>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -373,7 +373,7 @@ public final class Table {
 
   public static class Class_cellmap extends Core.Class_base implements Type_cellmap {
 
-    protected Map<String, Table.Type_cell> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Table.Type_cell>());
+    public Map<String, Table.Type_cell> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Table.Type_cell>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -572,21 +572,21 @@ public final class Table {
 
   public static class Class_field extends Core.Class_base implements Type_field {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Core.Type_any vx_p_fldtype;
+    public Core.Type_any vx_p_fldtype;
 
     @Override
     public Core.Type_any fldtype() {
@@ -613,7 +613,7 @@ public final class Table {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":name", this.name());
       output.put(":fldtype", this.fldtype());
@@ -818,7 +818,7 @@ public final class Table {
 
   public static class Class_fieldlist extends Core.Class_base implements Type_fieldlist {
 
-    protected List<Table.Type_field> vx_p_list = Core.immutablelist(new ArrayList<Table.Type_field>());
+    public List<Table.Type_field> vx_p_list = Core.immutablelist(new ArrayList<Table.Type_field>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -957,7 +957,7 @@ public final class Table {
 
   public static class Class_fieldmap extends Core.Class_base implements Type_fieldmap {
 
-    protected List<Table.Type_field> vx_p_list = Core.immutablelist(new ArrayList<Table.Type_field>());
+    public List<Table.Type_field> vx_p_list = Core.immutablelist(new ArrayList<Table.Type_field>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -1097,21 +1097,21 @@ public final class Table {
 
   public static class Class_filter extends Core.Class_base implements Type_filter {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Core.Type_stringlist vx_p_idlist;
+    public Core.Type_stringlist vx_p_idlist;
 
     @Override
     public Core.Type_stringlist idlist() {
@@ -1138,7 +1138,7 @@ public final class Table {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":name", this.name());
       output.put(":idlist", this.idlist());
@@ -1344,21 +1344,21 @@ public final class Table {
 
   public static class Class_row extends Core.Class_base implements Type_row {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Table.Type_cellmap vx_p_cellmap;
+    public Table.Type_cellmap vx_p_cellmap;
 
     @Override
     public Table.Type_cellmap cellmap() {
       return this.vx_p_cellmap == null ? Table.e_cellmap : this.vx_p_cellmap;
     }
 
-    protected Table.Type_sort vx_p_cellsort;
+    public Table.Type_sort vx_p_cellsort;
 
     @Override
     public Table.Type_sort cellsort() {
@@ -1385,7 +1385,7 @@ public final class Table {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":cellmap", this.cellmap());
       output.put(":cellsort", this.cellsort());
@@ -1587,7 +1587,7 @@ public final class Table {
 
   public static class Class_rowlist extends Core.Class_base implements Type_rowlist {
 
-    protected List<Table.Type_row> vx_p_list = Core.immutablelist(new ArrayList<Table.Type_row>());
+    public List<Table.Type_row> vx_p_list = Core.immutablelist(new ArrayList<Table.Type_row>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -1726,7 +1726,7 @@ public final class Table {
 
   public static class Class_rowmap extends Core.Class_base implements Type_rowmap {
 
-    protected Map<String, Table.Type_row> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Table.Type_row>());
+    public Map<String, Table.Type_row> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Table.Type_row>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -1925,21 +1925,21 @@ public final class Table {
 
   public static class Class_sort extends Core.Class_base implements Type_sort {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Core.Type_stringlist vx_p_idlist;
+    public Core.Type_stringlist vx_p_idlist;
 
     @Override
     public Core.Type_stringlist idlist() {
@@ -1966,7 +1966,7 @@ public final class Table {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":name", this.name());
       output.put(":idlist", this.idlist());
@@ -2176,49 +2176,49 @@ public final class Table {
 
   public static class Class_table extends Core.Class_base implements Type_table {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Table.Type_fieldmap vx_p_fieldmap;
+    public Table.Type_fieldmap vx_p_fieldmap;
 
     @Override
     public Table.Type_fieldmap fieldmap() {
       return this.vx_p_fieldmap == null ? Table.e_fieldmap : this.vx_p_fieldmap;
     }
 
-    protected Table.Type_sort vx_p_fieldsort;
+    public Table.Type_sort vx_p_fieldsort;
 
     @Override
     public Table.Type_sort fieldsort() {
       return this.vx_p_fieldsort == null ? Table.e_sort : this.vx_p_fieldsort;
     }
 
-    protected Table.Type_rowmap vx_p_rowmap;
+    public Table.Type_rowmap vx_p_rowmap;
 
     @Override
     public Table.Type_rowmap rowmap() {
       return this.vx_p_rowmap == null ? Table.e_rowmap : this.vx_p_rowmap;
     }
 
-    protected Table.Type_filter vx_p_rowfilter;
+    public Table.Type_filter vx_p_rowfilter;
 
     @Override
     public Table.Type_filter rowfilter() {
       return this.vx_p_rowfilter == null ? Table.e_filter : this.vx_p_rowfilter;
     }
 
-    protected Table.Type_sort vx_p_rowsort;
+    public Table.Type_sort vx_p_rowsort;
 
     @Override
     public Table.Type_sort rowsort() {
@@ -2257,7 +2257,7 @@ public final class Table {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":name", this.name());
       output.put(":fieldmap", this.fieldmap());

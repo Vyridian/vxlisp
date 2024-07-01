@@ -62,6 +62,7 @@ public final class Es {
     public Core.Type_any vx_empty() {
       return e_translation_es;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_translation_es;
@@ -153,6 +154,7 @@ public final class Es {
     public Core.Type_any vx_empty() {
       return e_words;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_words;

@@ -1166,7 +1166,7 @@ public final class Core {
 
   public static class Class_any_from_anylist extends Core.Class_base implements Type_any_from_anylist {
 
-    protected List<Core.Func_any_from_any> vx_p_list = Core.immutablelist(new ArrayList<Core.Func_any_from_any>());
+    public List<Core.Func_any_from_any> vx_p_list = Core.immutablelist(new ArrayList<Core.Func_any_from_any>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -1301,7 +1301,7 @@ public final class Core {
 
   public static class Class_anylist extends Core.Class_base implements Type_anylist {
 
-    protected List<Core.Type_any> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_any>());
+    public List<Core.Type_any> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_any>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -1429,7 +1429,7 @@ public final class Core {
 
   public static class Class_anymap extends Core.Class_base implements Type_anymap {
 
-    protected Map<String, Core.Type_any> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
+    public Map<String, Core.Type_any> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -1691,28 +1691,28 @@ public final class Core {
 
   public static class Class_arg extends Core.Class_base implements Type_arg {
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Core.Type_any vx_p_argtype;
+    public Core.Type_any vx_p_argtype;
 
     @Override
     public Core.Type_any argtype() {
       return this.vx_p_argtype == null ? Core.e_any : this.vx_p_argtype;
     }
 
-    protected Core.Func_any_from_func vx_p_fn_any;
+    public Core.Func_any_from_func vx_p_fn_any;
 
     @Override
     public Core.Func_any_from_func fn_any() {
       return this.vx_p_fn_any == null ? Core.e_any_from_func : this.vx_p_fn_any;
     }
 
-    protected Core.Type_string vx_p_doc;
+    public Core.Type_string vx_p_doc;
 
     @Override
     public Core.Type_string doc() {
@@ -1742,7 +1742,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":name", this.name());
       output.put(":argtype", this.argtype());
       output.put(":fn-any", this.fn_any());
@@ -1972,7 +1972,7 @@ public final class Core {
 
   public static class Class_arglist extends Core.Class_base implements Type_arglist {
 
-    protected List<Core.Type_arg> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_arg>());
+    public List<Core.Type_arg> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_arg>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -2112,7 +2112,7 @@ public final class Core {
 
   public static class Class_argmap extends Core.Class_base implements Type_argmap {
 
-    protected Map<String, Core.Type_arg> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_arg>());
+    public Map<String, Core.Type_arg> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_arg>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -2404,7 +2404,7 @@ public final class Core {
 
   public static class Class_booleanlist extends Core.Class_base implements Type_booleanlist {
 
-    protected List<Core.Type_boolean> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_boolean>());
+    public List<Core.Type_boolean> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_boolean>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -2755,7 +2755,7 @@ public final class Core {
 
   public static class Class_connectlist extends Core.Class_base implements Type_connectlist {
 
-    protected List<Core.Type_connect> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_connect>());
+    public List<Core.Type_connect> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_connect>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -2895,7 +2895,7 @@ public final class Core {
 
   public static class Class_connectmap extends Core.Class_base implements Type_connectmap {
 
-    protected Map<String, Core.Type_connect> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_connect>());
+    public Map<String, Core.Type_connect> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_connect>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -3166,21 +3166,21 @@ public final class Core {
 
   public static class Class_constdef extends Core.Class_base implements Type_constdef {
 
-    protected Core.Type_string vx_p_pkgname;
+    public Core.Type_string vx_p_pkgname;
 
     @Override
     public Core.Type_string pkgname() {
       return this.vx_p_pkgname == null ? Core.e_string : this.vx_p_pkgname;
     }
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Core.Type_any vx_p_type;
+    public Core.Type_any vx_p_type;
 
     @Override
     public Core.Type_any type() {
@@ -3207,7 +3207,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":pkgname", this.pkgname());
       output.put(":name", this.name());
       output.put(":type", this.type());
@@ -3411,7 +3411,7 @@ public final class Core {
 
   public static class Class_constlist extends Core.Class_base implements Type_constlist {
 
-    protected List<Core.Type_any> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_any>());
+    public List<Core.Type_any> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_any>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -3539,7 +3539,7 @@ public final class Core {
 
   public static class Class_constmap extends Core.Class_base implements Type_constmap {
 
-    protected Map<String, Core.Type_any> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
+    public Map<String, Core.Type_any> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -3730,28 +3730,28 @@ public final class Core {
 
   public static class Class_context extends Core.Class_base implements Type_context {
 
-    protected Core.Type_string vx_p_code;
+    public Core.Type_string vx_p_code;
 
     @Override
     public Core.Type_string code() {
       return this.vx_p_code == null ? Core.e_string : this.vx_p_code;
     }
 
-    protected Core.Type_session vx_p_session;
+    public Core.Type_session vx_p_session;
 
     @Override
     public Core.Type_session session() {
       return this.vx_p_session == null ? Core.e_session : this.vx_p_session;
     }
 
-    protected Core.Type_setting vx_p_setting;
+    public Core.Type_setting vx_p_setting;
 
     @Override
     public Core.Type_setting setting() {
       return this.vx_p_setting == null ? Core.e_setting : this.vx_p_setting;
     }
 
-    protected Core.Type_state vx_p_state;
+    public Core.Type_state vx_p_state;
 
     @Override
     public Core.Type_state state() {
@@ -3781,7 +3781,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":code", this.code());
       output.put(":session", this.session());
       output.put(":setting", this.setting());
@@ -4446,35 +4446,35 @@ public final class Core {
 
   public static class Class_funcdef extends Core.Class_base implements Type_funcdef {
 
-    protected Core.Type_string vx_p_pkgname;
+    public Core.Type_string vx_p_pkgname;
 
     @Override
     public Core.Type_string pkgname() {
       return this.vx_p_pkgname == null ? Core.e_string : this.vx_p_pkgname;
     }
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Core.Type_int vx_p_idx;
+    public Core.Type_int vx_p_idx;
 
     @Override
     public Core.Type_int idx() {
       return this.vx_p_idx == null ? Core.e_int : this.vx_p_idx;
     }
 
-    protected Core.Type_any vx_p_type;
+    public Core.Type_any vx_p_type;
 
     @Override
     public Core.Type_any type() {
       return this.vx_p_type == null ? Core.e_any : this.vx_p_type;
     }
 
-    protected Core.Type_boolean vx_p_async;
+    public Core.Type_boolean vx_p_async;
 
     @Override
     public Core.Type_boolean async() {
@@ -4507,7 +4507,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":pkgname", this.pkgname());
       output.put(":name", this.name());
       output.put(":idx", this.idx());
@@ -4767,7 +4767,7 @@ public final class Core {
 
   public static class Class_funclist extends Core.Class_base implements Type_funclist {
 
-    protected List<Core.Type_func> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_func>());
+    public List<Core.Type_func> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_func>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -4907,7 +4907,7 @@ public final class Core {
 
   public static class Class_funcmap extends Core.Class_base implements Type_funcmap {
 
-    protected Map<String, Core.Type_func> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_func>());
+    public Map<String, Core.Type_func> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_func>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -5203,7 +5203,7 @@ public final class Core {
 
   public static class Class_intlist extends Core.Class_base implements Type_intlist {
 
-    protected List<Core.Type_int> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_int>());
+    public List<Core.Type_int> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_int>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -5343,7 +5343,7 @@ public final class Core {
 
   public static class Class_intmap extends Core.Class_base implements Type_intmap {
 
-    protected Map<String, Core.Type_int> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_int>());
+    public Map<String, Core.Type_int> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_int>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -5542,7 +5542,7 @@ public final class Core {
 
   public static class Class_list extends Core.Class_base implements Type_list {
 
-    protected List<Core.Type_any> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_any>());
+    public List<Core.Type_any> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_any>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -5752,7 +5752,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       return Core.immutablemap(output);
     }
 
@@ -5831,7 +5831,7 @@ public final class Core {
 
   public static class Class_map extends Core.Class_base implements Type_map {
 
-    protected Map<String, Core.Type_any> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
+    public Map<String, Core.Type_any> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -6142,7 +6142,7 @@ public final class Core {
       }
     }
 
-    protected Core.Type_value vx_p_valuepool;
+    public Core.Type_value vx_p_valuepool;
 
     @Override
     public Core.Type_value valuepool() {
@@ -6163,7 +6163,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":valuepool", this.valuepool());
       return Core.immutablemap(output);
     }
@@ -6321,35 +6321,35 @@ public final class Core {
 
     public Exception err = null;
 
-    protected Core.Type_string vx_p_code;
+    public Core.Type_string vx_p_code;
 
     @Override
     public Core.Type_string code() {
       return this.vx_p_code == null ? Core.e_string : this.vx_p_code;
     }
 
-    protected Core.Type_any vx_p_detail;
+    public Core.Type_any vx_p_detail;
 
     @Override
     public Core.Type_any detail() {
       return this.vx_p_detail == null ? Core.e_any : this.vx_p_detail;
     }
 
-    protected Core.Type_string vx_p_path;
+    public Core.Type_string vx_p_path;
 
     @Override
     public Core.Type_string path() {
       return this.vx_p_path == null ? Core.e_string : this.vx_p_path;
     }
 
-    protected Core.Type_int vx_p_severity;
+    public Core.Type_int vx_p_severity;
 
     @Override
     public Core.Type_int severity() {
       return this.vx_p_severity == null ? Core.e_int : this.vx_p_severity;
     }
 
-    protected Core.Type_string vx_p_text;
+    public Core.Type_string vx_p_text;
 
     @Override
     public Core.Type_string text() {
@@ -6382,7 +6382,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":code", this.code());
       output.put(":detail", this.detail());
       output.put(":path", this.path());
@@ -6538,14 +6538,14 @@ public final class Core {
 
   public static class Class_msgblock extends Core.Class_base implements Type_msgblock {
 
-    protected Core.Type_msglist vx_p_msgs;
+    public Core.Type_msglist vx_p_msgs;
 
     @Override
     public Core.Type_msglist msgs() {
       return this.vx_p_msgs == null ? Core.e_msglist : this.vx_p_msgs;
     }
 
-    protected Core.Type_msgblocklist vx_p_msgblocks;
+    public Core.Type_msgblocklist vx_p_msgblocks;
 
     @Override
     public Core.Type_msgblocklist msgblocks() {
@@ -6569,7 +6569,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":msgs", this.msgs());
       output.put(":msgblocks", this.msgblocks());
       return Core.immutablemap(output);
@@ -6734,7 +6734,7 @@ public final class Core {
 
   public static class Class_msgblocklist extends Core.Class_base implements Type_msgblocklist {
 
-    protected List<Core.Type_msgblock> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_msgblock>());
+    public List<Core.Type_msgblock> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_msgblock>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -6868,7 +6868,7 @@ public final class Core {
 
   public static class Class_msglist extends Core.Class_base implements Type_msglist {
 
-    protected List<Core.Type_msg> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_msg>());
+    public List<Core.Type_msg> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_msg>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -7215,7 +7215,7 @@ public final class Core {
 
   public static class Class_numberlist extends Core.Class_base implements Type_numberlist {
 
-    protected List<Core.Type_number> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_number>());
+    public List<Core.Type_number> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_number>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -7355,7 +7355,7 @@ public final class Core {
 
   public static class Class_numbermap extends Core.Class_base implements Type_numbermap {
 
-    protected Map<String, Core.Type_number> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_number>());
+    public Map<String, Core.Type_number> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_number>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -7557,35 +7557,35 @@ public final class Core {
 
   public static class Class_package extends Core.Class_base implements Type_package {
 
-    protected Core.Type_string vx_p_pkgname;
+    public Core.Type_string vx_p_pkgname;
 
     @Override
     public Core.Type_string pkgname() {
       return this.vx_p_pkgname == null ? Core.e_string : this.vx_p_pkgname;
     }
 
-    protected Core.Type_constmap vx_p_constmap;
+    public Core.Type_constmap vx_p_constmap;
 
     @Override
     public Core.Type_constmap constmap() {
       return this.vx_p_constmap == null ? Core.e_constmap : this.vx_p_constmap;
     }
 
-    protected Core.Type_funcmap vx_p_funcmap;
+    public Core.Type_funcmap vx_p_funcmap;
 
     @Override
     public Core.Type_funcmap funcmap() {
       return this.vx_p_funcmap == null ? Core.e_funcmap : this.vx_p_funcmap;
     }
 
-    protected Core.Type_typemap vx_p_typemap;
+    public Core.Type_typemap vx_p_typemap;
 
     @Override
     public Core.Type_typemap typemap() {
       return this.vx_p_typemap == null ? Core.e_typemap : this.vx_p_typemap;
     }
 
-    protected Core.Type_map vx_p_emptymap;
+    public Core.Type_map vx_p_emptymap;
 
     @Override
     public Core.Type_map emptymap() {
@@ -7618,7 +7618,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":pkgname", this.pkgname());
       output.put(":constmap", this.constmap());
       output.put(":funcmap", this.funcmap());
@@ -7868,7 +7868,7 @@ public final class Core {
 
   public static class Class_packagemap extends Core.Class_base implements Type_packagemap {
 
-    protected Map<String, Core.Type_package> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_package>());
+    public Map<String, Core.Type_package> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_package>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -8066,7 +8066,7 @@ public final class Core {
 
   public static class Class_permission extends Core.Class_base implements Type_permission {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
@@ -8087,7 +8087,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       return Core.immutablemap(output);
     }
@@ -8242,7 +8242,7 @@ public final class Core {
 
   public static class Class_permissionlist extends Core.Class_base implements Type_permissionlist {
 
-    protected List<Core.Type_permission> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_permission>());
+    public List<Core.Type_permission> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_permission>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -8382,7 +8382,7 @@ public final class Core {
 
   public static class Class_permissionmap extends Core.Class_base implements Type_permissionmap {
 
-    protected Map<String, Core.Type_permission> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_permission>());
+    public Map<String, Core.Type_permission> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_permission>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -8580,7 +8580,7 @@ public final class Core {
 
   public static class Class_project extends Core.Class_base implements Type_project {
 
-    protected Core.Type_packagemap vx_p_packagemap;
+    public Core.Type_packagemap vx_p_packagemap;
 
     @Override
     public Core.Type_packagemap packagemap() {
@@ -8601,7 +8601,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":packagemap", this.packagemap());
       return Core.immutablemap(output);
     }
@@ -8754,21 +8754,21 @@ public final class Core {
 
   public static class Class_security extends Core.Class_base implements Type_security {
 
-    protected Core.Type_funclist vx_p_allowfuncs;
+    public Core.Type_funclist vx_p_allowfuncs;
 
     @Override
     public Core.Type_funclist allowfuncs() {
       return this.vx_p_allowfuncs == null ? Core.e_funclist : this.vx_p_allowfuncs;
     }
 
-    protected Core.Type_permissionlist vx_p_permissions;
+    public Core.Type_permissionlist vx_p_permissions;
 
     @Override
     public Core.Type_permissionlist permissions() {
       return this.vx_p_permissions == null ? Core.e_permissionlist : this.vx_p_permissions;
     }
 
-    protected Core.Type_permissionmap vx_p_permissionmap;
+    public Core.Type_permissionmap vx_p_permissionmap;
 
     @Override
     public Core.Type_permissionmap permissionmap() {
@@ -8795,7 +8795,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":allowfuncs", this.allowfuncs());
       output.put(":permissions", this.permissions());
       output.put(":permissionmap", this.permissionmap());
@@ -8999,42 +8999,42 @@ public final class Core {
 
   public static class Class_session extends Core.Class_base implements Type_session {
 
-    protected Core.Type_user vx_p_user;
+    public Core.Type_user vx_p_user;
 
     @Override
     public Core.Type_user user() {
       return this.vx_p_user == null ? Core.e_user : this.vx_p_user;
     }
 
-    protected Core.Type_connectlist vx_p_connectlist;
+    public Core.Type_connectlist vx_p_connectlist;
 
     @Override
     public Core.Type_connectlist connectlist() {
       return this.vx_p_connectlist == null ? Core.e_connectlist : this.vx_p_connectlist;
     }
 
-    protected Core.Type_connectmap vx_p_connectmap;
+    public Core.Type_connectmap vx_p_connectmap;
 
     @Override
     public Core.Type_connectmap connectmap() {
       return this.vx_p_connectmap == null ? Core.e_connectmap : this.vx_p_connectmap;
     }
 
-    protected Core.Type_locale vx_p_locale;
+    public Core.Type_locale vx_p_locale;
 
     @Override
     public Core.Type_locale locale() {
       return this.vx_p_locale == null ? Core.e_locale : this.vx_p_locale;
     }
 
-    protected Core.Type_translation vx_p_translation;
+    public Core.Type_translation vx_p_translation;
 
     @Override
     public Core.Type_translation translation() {
       return this.vx_p_translation == null ? Core.e_translation : this.vx_p_translation;
     }
 
-    protected Core.Type_translationmap vx_p_translationmap;
+    public Core.Type_translationmap vx_p_translationmap;
 
     @Override
     public Core.Type_translationmap translationmap() {
@@ -9070,7 +9070,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":user", this.user());
       output.put(":connectlist", this.connectlist());
       output.put(":connectmap", this.connectmap());
@@ -9341,7 +9341,7 @@ public final class Core {
 
   public static class Class_setting extends Core.Class_base implements Type_setting {
 
-    protected Core.Type_stringmap vx_p_pathmap;
+    public Core.Type_stringmap vx_p_pathmap;
 
     @Override
     public Core.Type_stringmap pathmap() {
@@ -9362,7 +9362,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":pathmap", this.pathmap());
       return Core.immutablemap(output);
     }
@@ -9513,7 +9513,7 @@ public final class Core {
 
   public static class Class_state extends Core.Class_base implements Type_state {
 
-    protected Core.Type_statelistenermap vx_p_statelistenermap;
+    public Core.Type_statelistenermap vx_p_statelistenermap;
 
     @Override
     public Core.Type_statelistenermap statelistenermap() {
@@ -9534,7 +9534,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":statelistenermap", this.statelistenermap());
       return Core.immutablemap(output);
     }
@@ -9686,21 +9686,21 @@ public final class Core {
 
   public static class Class_statelistener extends Core.Class_base implements Type_statelistener {
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Core.Type_any vx_p_value;
+    public Core.Type_any vx_p_value;
 
     @Override
     public Core.Type_any value() {
       return this.vx_p_value == null ? Core.e_any : this.vx_p_value;
     }
 
-    protected Core.Func_boolean_from_none vx_p_fn_boolean;
+    public Core.Func_boolean_from_none vx_p_fn_boolean;
 
     @Override
     public Core.Func_boolean_from_none fn_boolean() {
@@ -9727,7 +9727,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":name", this.name());
       output.put(":value", this.value());
       output.put(":fn-boolean", this.fn_boolean());
@@ -9930,7 +9930,7 @@ public final class Core {
 
   public static class Class_statelistenermap extends Core.Class_base implements Type_statelistenermap {
 
-    protected Map<String, Core.Type_statelistener> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_statelistener>());
+    public Map<String, Core.Type_statelistener> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_statelistener>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -10259,7 +10259,7 @@ public final class Core {
 
   public static class Class_stringlist extends Core.Class_base implements Type_stringlist {
 
-    protected List<Core.Type_string> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_string>());
+    public List<Core.Type_string> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_string>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -10399,7 +10399,7 @@ public final class Core {
 
   public static class Class_stringlistlist extends Core.Class_base implements Type_stringlistlist {
 
-    protected List<Core.Type_stringlist> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_stringlist>());
+    public List<Core.Type_stringlist> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_stringlist>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -10539,7 +10539,7 @@ public final class Core {
 
   public static class Class_stringmap extends Core.Class_base implements Type_stringmap {
 
-    protected Map<String, Core.Type_string> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_string>());
+    public Map<String, Core.Type_string> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_string>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -10738,7 +10738,7 @@ public final class Core {
 
   public static class Class_stringmutablemap extends Core.Class_base implements Type_stringmutablemap {
 
-    protected Map<String, Core.Type_string> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_string>());
+    public Map<String, Core.Type_string> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_string>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -10948,7 +10948,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       return Core.immutablemap(output);
     }
 
@@ -11027,35 +11027,35 @@ public final class Core {
 
   public static class Class_thenelse extends Core.Class_base implements Type_thenelse {
 
-    protected Core.Type_string vx_p_code;
+    public Core.Type_string vx_p_code;
 
     @Override
     public Core.Type_string code() {
       return this.vx_p_code == null ? Core.e_string : this.vx_p_code;
     }
 
-    protected Core.Type_any vx_p_value;
+    public Core.Type_any vx_p_value;
 
     @Override
     public Core.Type_any value() {
       return this.vx_p_value == null ? Core.e_any : this.vx_p_value;
     }
 
-    protected Core.Type_list vx_p_values;
+    public Core.Type_list vx_p_values;
 
     @Override
     public Core.Type_list values() {
       return this.vx_p_values == null ? Core.e_list : this.vx_p_values;
     }
 
-    protected Core.Func_boolean_from_func vx_p_fn_cond;
+    public Core.Func_boolean_from_func vx_p_fn_cond;
 
     @Override
     public Core.Func_boolean_from_func fn_cond() {
       return this.vx_p_fn_cond == null ? Core.e_boolean_from_func : this.vx_p_fn_cond;
     }
 
-    protected Core.Func_any_from_func vx_p_fn_any;
+    public Core.Func_any_from_func vx_p_fn_any;
 
     @Override
     public Core.Func_any_from_func fn_any() {
@@ -11088,7 +11088,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":code", this.code());
       output.put(":value", this.value());
       output.put(":values", this.values());
@@ -11338,7 +11338,7 @@ public final class Core {
 
   public static class Class_thenelselist extends Core.Class_base implements Type_thenelselist {
 
-    protected List<Core.Type_thenelse> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_thenelse>());
+    public List<Core.Type_thenelse> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_thenelse>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -11478,14 +11478,14 @@ public final class Core {
 
   public static class Class_translation extends Core.Class_base implements Type_translation {
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Core.Type_stringmap vx_p_wordmap;
+    public Core.Type_stringmap vx_p_wordmap;
 
     @Override
     public Core.Type_stringmap wordmap() {
@@ -11509,7 +11509,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":name", this.name());
       output.put(":wordmap", this.wordmap());
       return Core.immutablemap(output);
@@ -11688,7 +11688,7 @@ public final class Core {
 
   public static class Class_translationlist extends Core.Class_base implements Type_translationlist {
 
-    protected List<Core.Type_translation> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_translation>());
+    public List<Core.Type_translation> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_translation>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -11828,7 +11828,7 @@ public final class Core {
 
   public static class Class_translationmap extends Core.Class_base implements Type_translationmap {
 
-    protected Map<String, Core.Type_translation> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_translation>());
+    public Map<String, Core.Type_translation> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_translation>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -12108,84 +12108,84 @@ public final class Core {
 
   public static class Class_typedef extends Core.Class_base implements Type_typedef {
 
-    protected Core.Type_string vx_p_pkgname;
+    public Core.Type_string vx_p_pkgname;
 
     @Override
     public Core.Type_string pkgname() {
       return this.vx_p_pkgname == null ? Core.e_string : this.vx_p_pkgname;
     }
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Core.Type_string vx_p_extend;
+    public Core.Type_string vx_p_extend;
 
     @Override
     public Core.Type_string extend() {
       return this.vx_p_extend == null ? Core.e_string : this.vx_p_extend;
     }
 
-    protected Core.Type_funclist vx_p_allowfuncs;
+    public Core.Type_funclist vx_p_allowfuncs;
 
     @Override
     public Core.Type_funclist allowfuncs() {
       return this.vx_p_allowfuncs == null ? Core.e_funclist : this.vx_p_allowfuncs;
     }
 
-    protected Core.Type_typelist vx_p_allowtypes;
+    public Core.Type_typelist vx_p_allowtypes;
 
     @Override
     public Core.Type_typelist allowtypes() {
       return this.vx_p_allowtypes == null ? Core.e_typelist : this.vx_p_allowtypes;
     }
 
-    protected Core.Type_anylist vx_p_allowvalues;
+    public Core.Type_anylist vx_p_allowvalues;
 
     @Override
     public Core.Type_anylist allowvalues() {
       return this.vx_p_allowvalues == null ? Core.e_anylist : this.vx_p_allowvalues;
     }
 
-    protected Core.Type_funclist vx_p_disallowfuncs;
+    public Core.Type_funclist vx_p_disallowfuncs;
 
     @Override
     public Core.Type_funclist disallowfuncs() {
       return this.vx_p_disallowfuncs == null ? Core.e_funclist : this.vx_p_disallowfuncs;
     }
 
-    protected Core.Type_typelist vx_p_disallowtypes;
+    public Core.Type_typelist vx_p_disallowtypes;
 
     @Override
     public Core.Type_typelist disallowtypes() {
       return this.vx_p_disallowtypes == null ? Core.e_typelist : this.vx_p_disallowtypes;
     }
 
-    protected Core.Type_anylist vx_p_disallowvalues;
+    public Core.Type_anylist vx_p_disallowvalues;
 
     @Override
     public Core.Type_anylist disallowvalues() {
       return this.vx_p_disallowvalues == null ? Core.e_anylist : this.vx_p_disallowvalues;
     }
 
-    protected Core.Type_argmap vx_p_properties;
+    public Core.Type_argmap vx_p_properties;
 
     @Override
     public Core.Type_argmap properties() {
       return this.vx_p_properties == null ? Core.e_argmap : this.vx_p_properties;
     }
 
-    protected Core.Type_arg vx_p_proplast;
+    public Core.Type_arg vx_p_proplast;
 
     @Override
     public Core.Type_arg proplast() {
       return this.vx_p_proplast == null ? Core.e_arg : this.vx_p_proplast;
     }
 
-    protected Core.Type_typelist vx_p_traits;
+    public Core.Type_typelist vx_p_traits;
 
     @Override
     public Core.Type_typelist traits() {
@@ -12239,7 +12239,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":pkgname", this.pkgname());
       output.put(":name", this.name());
       output.put(":extends", this.extend());
@@ -12662,7 +12662,7 @@ public final class Core {
 
   public static class Class_typelist extends Core.Class_base implements Type_typelist {
 
-    protected List<Core.Type_any> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_any>());
+    public List<Core.Type_any> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_any>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -12790,7 +12790,7 @@ public final class Core {
 
   public static class Class_typemap extends Core.Class_base implements Type_typemap {
 
-    protected Map<String, Core.Type_any> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
+    public Map<String, Core.Type_any> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -12980,21 +12980,21 @@ public final class Core {
 
   public static class Class_user extends Core.Class_base implements Type_user {
 
-    protected Core.Type_security vx_p_security;
+    public Core.Type_security vx_p_security;
 
     @Override
     public Core.Type_security security() {
       return this.vx_p_security == null ? Core.e_security : this.vx_p_security;
     }
 
-    protected Core.Type_string vx_p_username;
+    public Core.Type_string vx_p_username;
 
     @Override
     public Core.Type_string username() {
       return this.vx_p_username == null ? Core.e_string : this.vx_p_username;
     }
 
-    protected Core.Type_string vx_p_token;
+    public Core.Type_string vx_p_token;
 
     @Override
     public Core.Type_string token() {
@@ -13021,7 +13021,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":security", this.security());
       output.put(":username", this.username());
       output.put(":token", this.token());
@@ -13226,14 +13226,14 @@ public final class Core {
 
   public static class Class_value extends Core.Class_base implements Type_value {
 
-    protected Core.Type_any vx_p_next;
+    public Core.Type_any vx_p_next;
 
     @Override
     public Core.Type_any next() {
       return this.vx_p_next == null ? Core.e_any : this.vx_p_next;
     }
 
-    protected Core.Type_int vx_p_refs;
+    public Core.Type_int vx_p_refs;
 
     @Override
     public Core.Type_int refs() {
@@ -13257,7 +13257,7 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":next", this.next());
       output.put(":refs", this.refs());
       return Core.immutablemap(output);
@@ -14053,6 +14053,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_not;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_not;
@@ -14152,6 +14153,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_notempty;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_notempty;
@@ -14253,6 +14255,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_notempty_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_notempty_1;
@@ -14355,6 +14358,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_ne;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ne;
@@ -14444,6 +14448,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_neqeq;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_neqeq;
@@ -14533,6 +14538,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_multiply;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_multiply;
@@ -14621,6 +14627,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_multiply_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_multiply_1;
@@ -14708,6 +14715,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_multiply_2;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_multiply_2;
@@ -14817,6 +14825,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_multiply_3;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_multiply_3;
@@ -14927,6 +14936,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_plus;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_plus;
@@ -15015,6 +15025,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_plus_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_plus_1;
@@ -15102,6 +15113,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_plus_2;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_plus_2;
@@ -15211,6 +15223,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_plus_3;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_plus_3;
@@ -15320,6 +15333,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_plus1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_plus1;
@@ -15420,6 +15434,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_minus;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_minus;
@@ -15508,6 +15523,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_minus_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_minus_1;
@@ -15595,6 +15611,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_minus_2;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_minus_2;
@@ -15704,6 +15721,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_minus_3;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_minus_3;
@@ -15813,6 +15831,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_minus1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_minus1;
@@ -15914,6 +15933,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_dotmethod;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_dotmethod;
@@ -16001,6 +16021,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_divide;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_divide;
@@ -16096,6 +16117,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_lt;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_lt;
@@ -16198,6 +16220,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_lt_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_lt_1;
@@ -16314,6 +16337,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_chainfirst;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_chainfirst;
@@ -16403,6 +16427,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_chainlast;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_chainlast;
@@ -16490,6 +16515,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_le;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_le;
@@ -16578,6 +16604,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_le_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_le_1;
@@ -16680,6 +16707,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_eq;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_eq;
@@ -16776,6 +16804,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_eq_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_eq_1;
@@ -16890,6 +16919,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_eqeq;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_eqeq;
@@ -16978,6 +17008,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_gt;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_gt;
@@ -17080,6 +17111,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_gt_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_gt_1;
@@ -17194,6 +17226,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_ge;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ge;
@@ -17282,6 +17315,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_ge_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ge_1;
@@ -17383,6 +17417,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_allowfuncs_from_security;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_allowfuncs_from_security;
@@ -17482,6 +17517,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_allowtypenames_from_typedef;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_allowtypenames_from_typedef;
@@ -17583,6 +17619,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_allowtypes_from_typedef;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_allowtypes_from_typedef;
@@ -17683,6 +17720,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_and;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_and;
@@ -17773,6 +17811,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_and_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_and_1;
@@ -17909,6 +17948,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_any;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_any;
@@ -18018,6 +18058,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_any_async;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_any_async;
@@ -18126,6 +18167,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_any_context;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_any_context;
@@ -18236,6 +18278,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_any_context_async;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_any_context_async;
@@ -18347,6 +18390,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_any_key_value;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_any_key_value;
@@ -18453,6 +18497,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_func;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_func;
@@ -18558,6 +18603,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_func_async;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_func_async;
@@ -18665,6 +18711,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_int;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_int;
@@ -18771,6 +18818,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_int_any;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_int_any;
@@ -18878,6 +18926,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_key_value;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_key_value;
@@ -18987,6 +19036,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_key_value_async;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_key_value_async;
@@ -19096,6 +19146,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_list;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_list;
@@ -19191,6 +19242,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_list_start_reduce;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_list_start_reduce;
@@ -19281,6 +19333,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_list_start_reduce_next;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_list_start_reduce_next;
@@ -19381,6 +19434,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_map;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_map;
@@ -19470,6 +19524,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_map_start_reduce;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_map_start_reduce;
@@ -19558,6 +19613,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_none;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_none;
@@ -19663,6 +19719,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_none_async;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_none_async;
@@ -19770,6 +19827,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_reduce;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_reduce;
@@ -19878,6 +19936,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_reduce_async;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_reduce_async;
@@ -19988,6 +20047,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_reduce_next;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_reduce_next;
@@ -20098,6 +20158,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_reduce_next_async;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_reduce_next_async;
@@ -20208,6 +20269,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_any_from_struct;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_struct;
@@ -20298,6 +20360,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_async;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_async;
@@ -20397,6 +20460,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_boolean_permission_from_func;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_permission_from_func;
@@ -20504,6 +20568,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_boolean_write_from_map_name_value;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_write_from_map_name_value;
@@ -20592,6 +20657,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_boolean_from_any;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_from_any;
@@ -20695,6 +20761,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_boolean_from_func;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_from_func;
@@ -20797,6 +20864,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_boolean_from_none;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_from_none;
@@ -20899,6 +20967,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_case;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_case;
@@ -20995,6 +21064,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_case_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_case_1;
@@ -21092,6 +21162,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_compare;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_compare;
@@ -21200,6 +21271,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_contains;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_contains;
@@ -21288,6 +21360,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_contains_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_contains_1;
@@ -21383,6 +21456,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_context_main;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_context_main;
@@ -21485,6 +21559,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_copy;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_copy;
@@ -21572,6 +21647,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_else;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_else;
@@ -21679,6 +21755,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_empty;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_empty;
@@ -21776,6 +21853,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_extends_from_any;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_extends_from_any;
@@ -21877,6 +21955,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_extends_from_typedef;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_extends_from_typedef;
@@ -21976,6 +22055,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_first_from_list;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_first_from_list;
@@ -22077,6 +22157,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_first_from_list_any_from_any;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_first_from_list_any_from_any;
@@ -22170,6 +22251,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_float_from_string;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_float_from_string;
@@ -22271,6 +22353,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_fn;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_fn;
@@ -22356,6 +22439,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_funcdef_from_func;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_funcdef_from_func;
@@ -22455,6 +22539,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_funcname_from_funcdef;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_funcname_from_funcdef;
@@ -22562,6 +22647,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_if;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_if;
@@ -22653,6 +22739,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_if_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_if_1;
@@ -22745,6 +22832,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_if_2;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_if_2;
@@ -22845,6 +22933,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_int_from_func;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_int_from_func;
@@ -22937,6 +23026,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_int_from_string;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_int_from_string;
@@ -23071,6 +23161,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_is_empty;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_is_empty;
@@ -23172,6 +23263,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_is_empty_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_is_empty_1;
@@ -23276,6 +23368,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_is_endswith;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_is_endswith;
@@ -23366,6 +23459,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_is_float;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_is_float;
@@ -23466,6 +23560,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_is_func;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_is_func;
@@ -23567,6 +23662,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_is_int;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_is_int;
@@ -23667,6 +23763,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_is_number;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_is_number;
@@ -23790,6 +23887,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_is_pass_from_permission;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_is_pass_from_permission;
@@ -23897,6 +23995,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_last_from_list;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_last_from_list;
@@ -24003,6 +24102,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_length;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_length;
@@ -24103,6 +24203,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_length_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_length_1;
@@ -24203,6 +24304,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_length_2;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_length_2;
@@ -24304,6 +24406,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_let;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_let;
@@ -24393,6 +24496,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_let_async;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_let_async;
@@ -24480,6 +24584,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_list_join_from_list;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_list_join_from_list;
@@ -24588,6 +24693,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_list_join_from_list_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_list_join_from_list_1;
@@ -24685,6 +24791,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_list_from_list;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_list_from_list;
@@ -24793,6 +24900,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_list_from_list_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_list_from_list_1;
@@ -24887,6 +24995,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_list_from_list_async;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_list_from_list_async;
@@ -24984,6 +25093,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_list_from_list_intany;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_list_from_list_intany;
@@ -25071,6 +25181,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_list_from_map;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_list_from_map;
@@ -25180,6 +25291,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_list_from_map_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_list_from_map_1;
@@ -25274,6 +25386,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_list_from_map_async;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_list_from_map_async;
@@ -25361,6 +25474,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_list_from_type;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_list_from_type;
@@ -25459,6 +25573,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_log;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_log;
@@ -25562,6 +25677,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_log_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_log_1;
@@ -25651,6 +25767,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_main;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_main;
@@ -25754,6 +25871,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_map_from_list;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_map_from_list;
@@ -25845,6 +25963,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_map_from_map;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_map_from_map;
@@ -25954,6 +26073,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_map_from_map_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_map_from_map_1;
@@ -26041,6 +26161,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_msg_from_error;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_msg_from_error;
@@ -26149,6 +26270,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_msg_from_error_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_msg_from_error_1;
@@ -26247,6 +26369,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_msg_from_error_2;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_msg_from_error_2;
@@ -26346,6 +26469,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_msg_from_warning;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_msg_from_warning;
@@ -26454,6 +26578,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_msgblock_from_msgblock_msg;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_msgblock_from_msgblock_msg;
@@ -26542,6 +26667,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_msgblock_from_msgblock_msgblock;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_msgblock_from_msgblock_msgblock;
@@ -26634,6 +26760,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_name_from_typedef;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_name_from_typedef;
@@ -26733,6 +26860,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_native;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_native;
@@ -26832,6 +26960,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_native_from_any;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_native_from_any;
@@ -26931,6 +27060,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_new;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_new;
@@ -27018,6 +27148,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_number_from_func;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_number_from_func;
@@ -27102,6 +27233,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_or;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_or;
@@ -27192,6 +27324,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_or_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_or_1;
@@ -27305,6 +27438,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_package_global_from_name;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_package_global_from_name;
@@ -27408,6 +27542,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_packagename_from_typedef;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_packagename_from_typedef;
@@ -27507,6 +27642,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_path_from_context_path;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_path_from_context_path;
@@ -27611,6 +27747,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_path_from_setting_path;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_path_from_setting_path;
@@ -27696,6 +27833,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_permission_from_id_context;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_permission_from_id_context;
@@ -27804,6 +27942,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_properties_from_typedef;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_properties_from_typedef;
@@ -27903,6 +28042,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_proplast_from_typedef;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_proplast_from_typedef;
@@ -28001,6 +28141,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_resolve;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_resolve;
@@ -28100,6 +28241,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_resolve_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_resolve_1;
@@ -28203,6 +28345,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_resolve_async;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_resolve_async;
@@ -28304,6 +28447,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_resolve_first;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_resolve_first;
@@ -28407,6 +28551,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_resolve_list;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_resolve_list;
@@ -28510,6 +28655,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_security_from_context;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_security_from_context;
@@ -28597,6 +28743,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_security_from_user;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_security_from_user;
@@ -28695,6 +28842,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_session_from_context;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_session_from_context;
@@ -28779,6 +28927,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_setting_from_context;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_setting_from_context;
@@ -28864,6 +29013,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_string_repeat;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_repeat;
@@ -28953,6 +29103,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_string_from_any;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_any;
@@ -29058,6 +29209,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_string_from_any_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_any_indent;
@@ -29145,6 +29297,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_string_from_func;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_func;
@@ -29239,6 +29392,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_string_from_string_find_replace;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_string_find_replace;
@@ -29326,6 +29480,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_stringlist_from_map;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_stringlist_from_map;
@@ -29434,6 +29589,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_switch;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_switch;
@@ -29551,6 +29707,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_then;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_then;
@@ -29647,6 +29804,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_traits_from_typedef;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_traits_from_typedef;
@@ -29746,6 +29904,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_type_from_any;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_type_from_any;
@@ -29845,6 +30004,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_typedef_from_any;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_typedef_from_any;
@@ -29946,6 +30106,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_typedef_from_type;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_typedef_from_type;
@@ -30045,6 +30206,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_typename_from_any;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_typename_from_any;
@@ -30146,6 +30308,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_typename_from_type;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_typename_from_type;
@@ -30247,6 +30410,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_typename_from_typedef;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_typename_from_typedef;
@@ -30353,6 +30517,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_typenames_from_typelist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_typenames_from_typelist;
@@ -30459,6 +30624,7 @@ public final class Core {
     public Core.Type_any vx_empty() {
       return e_user_from_context;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_user_from_context;

@@ -36,7 +36,7 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       return Core.immutablemap(output);
     }
 
@@ -115,28 +115,28 @@ public final class Ui {
 
   public static class Class_bounds extends Core.Class_base implements Type_bounds {
 
-    protected Core.Type_int vx_p_left;
+    public Core.Type_int vx_p_left;
 
     @Override
     public Core.Type_int left() {
       return this.vx_p_left == null ? Core.e_int : this.vx_p_left;
     }
 
-    protected Core.Type_int vx_p_right;
+    public Core.Type_int vx_p_right;
 
     @Override
     public Core.Type_int right() {
       return this.vx_p_right == null ? Core.e_int : this.vx_p_right;
     }
 
-    protected Core.Type_int vx_p_top;
+    public Core.Type_int vx_p_top;
 
     @Override
     public Core.Type_int top() {
       return this.vx_p_top == null ? Core.e_int : this.vx_p_top;
     }
 
-    protected Core.Type_int vx_p_bottom;
+    public Core.Type_int vx_p_bottom;
 
     @Override
     public Core.Type_int bottom() {
@@ -166,7 +166,7 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":left", this.left());
       output.put(":right", this.right());
       output.put(":top", this.top());
@@ -411,7 +411,7 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       return Core.immutablemap(output);
     }
 
@@ -567,7 +567,7 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       return Core.immutablemap(output);
     }
 
@@ -646,28 +646,28 @@ public final class Ui {
 
   public static class Class_font extends Core.Class_base implements Type_font {
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Ui.Type_fontface vx_p_fontface;
+    public Ui.Type_fontface vx_p_fontface;
 
     @Override
     public Ui.Type_fontface fontface() {
       return this.vx_p_fontface == null ? Ui.e_fontface : this.vx_p_fontface;
     }
 
-    protected Core.Type_int vx_p_fontsize;
+    public Core.Type_int vx_p_fontsize;
 
     @Override
     public Core.Type_int fontsize() {
       return this.vx_p_fontsize == null ? Core.e_int : this.vx_p_fontsize;
     }
 
-    protected Ui.Type_fontstyle vx_p_fontstyle;
+    public Ui.Type_fontstyle vx_p_fontstyle;
 
     @Override
     public Ui.Type_fontstyle fontstyle() {
@@ -697,7 +697,7 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":name", this.name());
       output.put(":fontface", this.fontface());
       output.put(":fontsize", this.fontsize());
@@ -929,28 +929,28 @@ public final class Ui {
 
   public static class Class_fontface extends Core.Class_base implements Type_fontface {
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Core.Type_string vx_p_weight;
+    public Core.Type_string vx_p_weight;
 
     @Override
     public Core.Type_string weight() {
       return this.vx_p_weight == null ? Core.e_string : this.vx_p_weight;
     }
 
-    protected Core.Type_string vx_p_unicode;
+    public Core.Type_string vx_p_unicode;
 
     @Override
     public Core.Type_string unicode() {
       return this.vx_p_unicode == null ? Core.e_string : this.vx_p_unicode;
     }
 
-    protected File.Type_filelist vx_p_filelist;
+    public File.Type_filelist vx_p_filelist;
 
     @Override
     public File.Type_filelist filelist() {
@@ -980,7 +980,7 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":name", this.name());
       output.put(":weight", this.weight());
       output.put(":unicode", this.unicode());
@@ -1213,7 +1213,7 @@ public final class Ui {
 
   public static class Class_fontfacelist extends Core.Class_base implements Type_fontfacelist {
 
-    protected List<Ui.Type_fontface> vx_p_list = Core.immutablelist(new ArrayList<Ui.Type_fontface>());
+    public List<Ui.Type_fontface> vx_p_list = Core.immutablelist(new ArrayList<Ui.Type_fontface>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -1353,7 +1353,7 @@ public final class Ui {
 
   public static class Class_fontfacemap extends Core.Class_base implements Type_fontfacemap {
 
-    protected Map<String, Ui.Type_fontface> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Ui.Type_fontface>());
+    public Map<String, Ui.Type_fontface> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Ui.Type_fontface>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -1552,7 +1552,7 @@ public final class Ui {
 
   public static class Class_fontmap extends Core.Class_base implements Type_fontmap {
 
-    protected Map<String, Ui.Type_font> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Ui.Type_font>());
+    public Map<String, Ui.Type_font> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Ui.Type_font>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -1750,7 +1750,7 @@ public final class Ui {
 
   public static class Class_fontstyle extends Core.Class_base implements Type_fontstyle {
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
@@ -1771,7 +1771,7 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":name", this.name());
       return Core.immutablemap(output);
     }
@@ -1926,7 +1926,7 @@ public final class Ui {
 
   public static class Class_fontstylemap extends Core.Class_base implements Type_fontstylemap {
 
-    protected Map<String, Ui.Type_fontstyle> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Ui.Type_fontstyle>());
+    public Map<String, Ui.Type_fontstyle> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Ui.Type_fontstyle>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -2126,21 +2126,21 @@ public final class Ui {
 
   public static class Class_image extends Core.Class_base implements Type_image {
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Core.Type_string vx_p_label;
+    public Core.Type_string vx_p_label;
 
     @Override
     public Core.Type_string label() {
       return this.vx_p_label == null ? Core.e_string : this.vx_p_label;
     }
 
-    protected File.Type_file vx_p_file;
+    public File.Type_file vx_p_file;
 
     @Override
     public File.Type_file file() {
@@ -2167,7 +2167,7 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":name", this.name());
       output.put(":label", this.label());
       output.put(":file", this.file());
@@ -2373,14 +2373,14 @@ public final class Ui {
 
   public static class Class_layout extends Core.Class_base implements Type_layout {
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Ui.Func_ui_layout_from_ui_orig_parent vx_p_fn_layout;
+    public Ui.Func_ui_layout_from_ui_orig_parent vx_p_fn_layout;
 
     @Override
     public Ui.Func_ui_layout_from_ui_orig_parent fn_layout() {
@@ -2404,7 +2404,7 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":name", this.name());
       output.put(":fn-layout", this.fn_layout());
       return Core.immutablemap(output);
@@ -2589,56 +2589,56 @@ public final class Ui {
 
   public static class Class_layoutengine extends Core.Class_base implements Type_layoutengine {
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Ui.Func_boolean_print vx_p_boolean_print;
+    public Ui.Func_boolean_print vx_p_boolean_print;
 
     @Override
     public Ui.Func_boolean_print boolean_print() {
       return this.vx_p_boolean_print == null ? Ui.e_boolean_print : this.vx_p_boolean_print;
     }
 
-    protected Ui.Func_boolean_layoutremove_from_ui vx_p_boolean_layoutremove;
+    public Ui.Func_boolean_layoutremove_from_ui vx_p_boolean_layoutremove;
 
     @Override
     public Ui.Func_boolean_layoutremove_from_ui boolean_layoutremove() {
       return this.vx_p_boolean_layoutremove == null ? Ui.e_boolean_layoutremove_from_ui : this.vx_p_boolean_layoutremove;
     }
 
-    protected Ui.Func_boolean_layoutselected_from_ui vx_p_boolean_layoutselected;
+    public Ui.Func_boolean_layoutselected_from_ui vx_p_boolean_layoutselected;
 
     @Override
     public Ui.Func_boolean_layoutselected_from_ui boolean_layoutselected() {
       return this.vx_p_boolean_layoutselected == null ? Ui.e_boolean_layoutselected_from_ui : this.vx_p_boolean_layoutselected;
     }
 
-    protected Ui.Func_boolean_layoutvisible_from_ui vx_p_boolean_layoutvisible;
+    public Ui.Func_boolean_layoutvisible_from_ui vx_p_boolean_layoutvisible;
 
     @Override
     public Ui.Func_boolean_layoutvisible_from_ui boolean_layoutvisible() {
       return this.vx_p_boolean_layoutvisible == null ? Ui.e_boolean_layoutvisible_from_ui : this.vx_p_boolean_layoutvisible;
     }
 
-    protected Ui.Type_layoutmap vx_p_layoutmap;
+    public Ui.Type_layoutmap vx_p_layoutmap;
 
     @Override
     public Ui.Type_layoutmap layoutmap() {
       return this.vx_p_layoutmap == null ? Ui.e_layoutmap : this.vx_p_layoutmap;
     }
 
-    protected Ui.Type_layout vx_p_layoutelse;
+    public Ui.Type_layout vx_p_layoutelse;
 
     @Override
     public Ui.Type_layout layoutelse() {
       return this.vx_p_layoutelse == null ? Ui.e_layout : this.vx_p_layoutelse;
     }
 
-    protected Ui.Func_stylesheet_render vx_p_stylesheetrender;
+    public Ui.Func_stylesheet_render vx_p_stylesheetrender;
 
     @Override
     public Ui.Func_stylesheet_render stylesheetrender() {
@@ -2680,7 +2680,7 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":name", this.name());
       output.put(":boolean-print", this.boolean_print());
       output.put(":boolean-layoutremove", this.boolean_layoutremove());
@@ -3003,7 +3003,7 @@ public final class Ui {
 
   public static class Class_layoutlist extends Core.Class_base implements Type_layoutlist {
 
-    protected List<Ui.Type_layout> vx_p_list = Core.immutablelist(new ArrayList<Ui.Type_layout>());
+    public List<Ui.Type_layout> vx_p_list = Core.immutablelist(new ArrayList<Ui.Type_layout>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -3143,7 +3143,7 @@ public final class Ui {
 
   public static class Class_layoutmap extends Core.Class_base implements Type_layoutmap {
 
-    protected Map<String, Ui.Type_layout> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Ui.Type_layout>());
+    public Map<String, Ui.Type_layout> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Ui.Type_layout>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -3341,7 +3341,7 @@ public final class Ui {
 
   public static class Class_pin extends Core.Class_base implements Type_pin {
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
@@ -3362,7 +3362,7 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":name", this.name());
       return Core.immutablemap(output);
     }
@@ -3521,42 +3521,42 @@ public final class Ui {
 
   public static class Class_point extends Core.Class_base implements Type_point {
 
-    protected Core.Type_int vx_p_x;
+    public Core.Type_int vx_p_x;
 
     @Override
     public Core.Type_int x() {
       return this.vx_p_x == null ? Core.e_int : this.vx_p_x;
     }
 
-    protected Core.Type_int vx_p_y;
+    public Core.Type_int vx_p_y;
 
     @Override
     public Core.Type_int y() {
       return this.vx_p_y == null ? Core.e_int : this.vx_p_y;
     }
 
-    protected Core.Type_int vx_p_z;
+    public Core.Type_int vx_p_z;
 
     @Override
     public Core.Type_int z() {
       return this.vx_p_z == null ? Core.e_int : this.vx_p_z;
     }
 
-    protected Core.Type_int vx_p_t;
+    public Core.Type_int vx_p_t;
 
     @Override
     public Core.Type_int t() {
       return this.vx_p_t == null ? Core.e_int : this.vx_p_t;
     }
 
-    protected Core.Type_int vx_p_i;
+    public Core.Type_int vx_p_i;
 
     @Override
     public Core.Type_int i() {
       return this.vx_p_i == null ? Core.e_int : this.vx_p_i;
     }
 
-    protected Ui.Type_pointtype vx_p_pointtype;
+    public Ui.Type_pointtype vx_p_pointtype;
 
     @Override
     public Ui.Type_pointtype pointtype() {
@@ -3592,7 +3592,7 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":x", this.x());
       output.put(":y", this.y());
       output.put(":z", this.z());
@@ -3970,154 +3970,154 @@ public final class Ui {
 
   public static class Class_style extends Core.Class_base implements Type_style {
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Ui.Type_align vx_p_align;
+    public Ui.Type_align vx_p_align;
 
     @Override
     public Ui.Type_align align() {
       return this.vx_p_align == null ? Ui.e_align : this.vx_p_align;
     }
 
-    protected Ui.Type_bounds vx_p_boundsmargin;
+    public Ui.Type_bounds vx_p_boundsmargin;
 
     @Override
     public Ui.Type_bounds boundsmargin() {
       return this.vx_p_boundsmargin == null ? Ui.e_bounds : this.vx_p_boundsmargin;
     }
 
-    protected Ui.Type_bounds vx_p_boundspadding;
+    public Ui.Type_bounds vx_p_boundspadding;
 
     @Override
     public Ui.Type_bounds boundspadding() {
       return this.vx_p_boundspadding == null ? Ui.e_bounds : this.vx_p_boundspadding;
     }
 
-    protected Core.Type_string vx_p_color_bkg;
+    public Core.Type_string vx_p_color_bkg;
 
     @Override
     public Core.Type_string color_bkg() {
       return this.vx_p_color_bkg == null ? Core.e_string : this.vx_p_color_bkg;
     }
 
-    protected Core.Type_string vx_p_color_bkghover;
+    public Core.Type_string vx_p_color_bkghover;
 
     @Override
     public Core.Type_string color_bkghover() {
       return this.vx_p_color_bkghover == null ? Core.e_string : this.vx_p_color_bkghover;
     }
 
-    protected Core.Type_string vx_p_color_border;
+    public Core.Type_string vx_p_color_border;
 
     @Override
     public Core.Type_string color_border() {
       return this.vx_p_color_border == null ? Core.e_string : this.vx_p_color_border;
     }
 
-    protected Core.Type_string vx_p_color_font;
+    public Core.Type_string vx_p_color_font;
 
     @Override
     public Core.Type_string color_font() {
       return this.vx_p_color_font == null ? Core.e_string : this.vx_p_color_font;
     }
 
-    protected Ui.Type_cursor vx_p_cursor;
+    public Ui.Type_cursor vx_p_cursor;
 
     @Override
     public Ui.Type_cursor cursor() {
       return this.vx_p_cursor == null ? Ui.e_cursor : this.vx_p_cursor;
     }
 
-    protected Ui.Type_flip vx_p_flip;
+    public Ui.Type_flip vx_p_flip;
 
     @Override
     public Ui.Type_flip flip() {
       return this.vx_p_flip == null ? Ui.e_flip : this.vx_p_flip;
     }
 
-    protected Ui.Type_font vx_p_font;
+    public Ui.Type_font vx_p_font;
 
     @Override
     public Ui.Type_font font() {
       return this.vx_p_font == null ? Ui.e_font : this.vx_p_font;
     }
 
-    protected Core.Type_boolean vx_p_hidden;
+    public Core.Type_boolean vx_p_hidden;
 
     @Override
     public Core.Type_boolean hidden() {
       return this.vx_p_hidden == null ? Core.e_boolean : this.vx_p_hidden;
     }
 
-    protected Ui.Type_image vx_p_image_bkg;
+    public Ui.Type_image vx_p_image_bkg;
 
     @Override
     public Ui.Type_image image_bkg() {
       return this.vx_p_image_bkg == null ? Ui.e_image : this.vx_p_image_bkg;
     }
 
-    protected Ui.Type_layout vx_p_layout;
+    public Ui.Type_layout vx_p_layout;
 
     @Override
     public Ui.Type_layout layout() {
       return this.vx_p_layout == null ? Ui.e_layout : this.vx_p_layout;
     }
 
-    protected Ui.Type_styletype vx_p_type;
+    public Ui.Type_styletype vx_p_type;
 
     @Override
     public Ui.Type_styletype type() {
       return this.vx_p_type == null ? Ui.e_styletype : this.vx_p_type;
     }
 
-    protected Ui.Type_pin vx_p_pin;
+    public Ui.Type_pin vx_p_pin;
 
     @Override
     public Ui.Type_pin pin() {
       return this.vx_p_pin == null ? Ui.e_pin : this.vx_p_pin;
     }
 
-    protected Ui.Type_point vx_p_pointorigin;
+    public Ui.Type_point vx_p_pointorigin;
 
     @Override
     public Ui.Type_point pointorigin() {
       return this.vx_p_pointorigin == null ? Ui.e_point : this.vx_p_pointorigin;
     }
 
-    protected Ui.Type_point vx_p_pointpos;
+    public Ui.Type_point vx_p_pointpos;
 
     @Override
     public Ui.Type_point pointpos() {
       return this.vx_p_pointpos == null ? Ui.e_point : this.vx_p_pointpos;
     }
 
-    protected Ui.Type_point vx_p_pointrotate;
+    public Ui.Type_point vx_p_pointrotate;
 
     @Override
     public Ui.Type_point pointrotate() {
       return this.vx_p_pointrotate == null ? Ui.e_point : this.vx_p_pointrotate;
     }
 
-    protected Ui.Type_point vx_p_pointsize;
+    public Ui.Type_point vx_p_pointsize;
 
     @Override
     public Ui.Type_point pointsize() {
       return this.vx_p_pointsize == null ? Ui.e_point : this.vx_p_pointsize;
     }
 
-    protected Core.Type_boolean vx_p_scroll_x;
+    public Core.Type_boolean vx_p_scroll_x;
 
     @Override
     public Core.Type_boolean scroll_x() {
       return this.vx_p_scroll_x == null ? Core.e_boolean : this.vx_p_scroll_x;
     }
 
-    protected Core.Type_boolean vx_p_scroll_y;
+    public Core.Type_boolean vx_p_scroll_y;
 
     @Override
     public Core.Type_boolean scroll_y() {
@@ -4201,7 +4201,7 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":name", this.name());
       output.put(":align", this.align());
       output.put(":boundsmargin", this.boundsmargin());
@@ -4881,7 +4881,7 @@ public final class Ui {
 
   public static class Class_stylelist extends Core.Class_base implements Type_stylelist {
 
-    protected List<Ui.Type_style> vx_p_list = Core.immutablelist(new ArrayList<Ui.Type_style>());
+    public List<Ui.Type_style> vx_p_list = Core.immutablelist(new ArrayList<Ui.Type_style>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -5021,7 +5021,7 @@ public final class Ui {
 
   public static class Class_stylemap extends Core.Class_base implements Type_stylemap {
 
-    protected Map<String, Ui.Type_style> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Ui.Type_style>());
+    public Map<String, Ui.Type_style> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Ui.Type_style>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -5220,14 +5220,14 @@ public final class Ui {
 
   public static class Class_stylesheet extends Core.Class_base implements Type_stylesheet {
 
-    protected Ui.Type_fontfacemap vx_p_fontfacemap;
+    public Ui.Type_fontfacemap vx_p_fontfacemap;
 
     @Override
     public Ui.Type_fontfacemap fontfacemap() {
       return this.vx_p_fontfacemap == null ? Ui.e_fontfacemap : this.vx_p_fontfacemap;
     }
 
-    protected Ui.Type_stylemap vx_p_stylemap;
+    public Ui.Type_stylemap vx_p_stylemap;
 
     @Override
     public Ui.Type_stylemap stylemap() {
@@ -5251,7 +5251,7 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":fontfacemap", this.fontfacemap());
       output.put(":stylemap", this.stylemap());
       return Core.immutablemap(output);
@@ -5436,7 +5436,7 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       return Core.immutablemap(output);
     }
 
@@ -5523,84 +5523,84 @@ public final class Ui {
 
   public static class Class_ui extends Core.Class_base implements Type_ui {
 
-    protected Core.Type_string vx_p_uid;
+    public Core.Type_string vx_p_uid;
 
     @Override
     public Core.Type_string uid() {
       return this.vx_p_uid == null ? Core.e_string : this.vx_p_uid;
     }
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Ui.Type_layout vx_p_layout;
+    public Ui.Type_layout vx_p_layout;
 
     @Override
     public Ui.Type_layout layout() {
       return this.vx_p_layout == null ? Ui.e_layout : this.vx_p_layout;
     }
 
-    protected Core.Type_string vx_p_path;
+    public Core.Type_string vx_p_path;
 
     @Override
     public Core.Type_string path() {
       return this.vx_p_path == null ? Core.e_string : this.vx_p_path;
     }
 
-    protected Core.Type_boolean vx_p_hidden;
+    public Core.Type_boolean vx_p_hidden;
 
     @Override
     public Core.Type_boolean hidden() {
       return this.vx_p_hidden == null ? Core.e_boolean : this.vx_p_hidden;
     }
 
-    protected Core.Type_boolean vx_p_selected;
+    public Core.Type_boolean vx_p_selected;
 
     @Override
     public Core.Type_boolean selected() {
       return this.vx_p_selected == null ? Core.e_boolean : this.vx_p_selected;
     }
 
-    protected Core.Type_boolean vx_p_selectmulti;
+    public Core.Type_boolean vx_p_selectmulti;
 
     @Override
     public Core.Type_boolean selectmulti() {
       return this.vx_p_selectmulti == null ? Core.e_boolean : this.vx_p_selectmulti;
     }
 
-    protected Ui.Type_style vx_p_style;
+    public Ui.Type_style vx_p_style;
 
     @Override
     public Ui.Type_style style() {
       return this.vx_p_style == null ? Ui.e_style : this.vx_p_style;
     }
 
-    protected Ui.Type_stylelist vx_p_stylelist;
+    public Ui.Type_stylelist vx_p_stylelist;
 
     @Override
     public Ui.Type_stylelist stylelist() {
       return this.vx_p_stylelist == null ? Ui.e_stylelist : this.vx_p_stylelist;
     }
 
-    protected Event.Type_eventmap vx_p_eventmap;
+    public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
       return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
     }
 
-    protected Core.Type_any vx_p_data;
+    public Core.Type_any vx_p_data;
 
     @Override
     public Core.Type_any data() {
       return this.vx_p_data == null ? Core.e_any : this.vx_p_data;
     }
 
-    protected Ui.Type_uimap vx_p_uimap;
+    public Ui.Type_uimap vx_p_uimap;
 
     @Override
     public Ui.Type_uimap uimap() {
@@ -5654,7 +5654,7 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":uid", this.uid());
       output.put(":name", this.name());
       output.put(":layout", this.layout());
@@ -6090,28 +6090,28 @@ public final class Ui {
 
   public static class Class_uiengine extends Core.Class_base implements Type_uiengine {
 
-    protected Ui.Type_uimap vx_p_parentmap;
+    public Ui.Type_uimap vx_p_parentmap;
 
     @Override
     public Ui.Type_uimap parentmap() {
       return this.vx_p_parentmap == null ? Ui.e_uimap : this.vx_p_parentmap;
     }
 
-    protected Ui.Type_layoutengine vx_p_layoutengine;
+    public Ui.Type_layoutengine vx_p_layoutengine;
 
     @Override
     public Ui.Type_layoutengine layoutengine() {
       return this.vx_p_layoutengine == null ? Ui.e_layoutengine : this.vx_p_layoutengine;
     }
 
-    protected Ui.Type_stylesheet vx_p_stylesheet;
+    public Ui.Type_stylesheet vx_p_stylesheet;
 
     @Override
     public Ui.Type_stylesheet stylesheet() {
       return this.vx_p_stylesheet == null ? Ui.e_stylesheet : this.vx_p_stylesheet;
     }
 
-    protected Ui.Type_ui vx_p_ui;
+    public Ui.Type_ui vx_p_ui;
 
     @Override
     public Ui.Type_ui ui() {
@@ -6141,7 +6141,7 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":parentmap", this.parentmap());
       output.put(":layoutengine", this.layoutengine());
       output.put(":stylesheet", this.stylesheet());
@@ -6365,7 +6365,7 @@ public final class Ui {
 
   public static class Class_uilist extends Core.Class_base implements Type_uilist {
 
-    protected List<Ui.Type_ui> vx_p_list = Core.immutablelist(new ArrayList<Ui.Type_ui>());
+    public List<Ui.Type_ui> vx_p_list = Core.immutablelist(new ArrayList<Ui.Type_ui>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -6505,7 +6505,7 @@ public final class Ui {
 
   public static class Class_uimap extends Core.Class_base implements Type_uimap {
 
-    protected Map<String, Ui.Type_ui> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Ui.Type_ui>());
+    public Map<String, Ui.Type_ui> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Ui.Type_ui>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -8660,6 +8660,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_boolean_layout_from_ui_parent_selected;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_layout_from_ui_parent_selected;
@@ -8765,6 +8766,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_boolean_layout_from_ui_parent_visible;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_layout_from_ui_parent_visible;
@@ -8869,6 +8871,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_boolean_layoutaddchild_from_ui_parent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_layoutaddchild_from_ui_parent;
@@ -8970,6 +8973,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_boolean_layoutremove_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_layoutremove_from_ui;
@@ -9069,6 +9073,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_boolean_layoutremove_from_ui_keys;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_layoutremove_from_ui_keys;
@@ -9178,6 +9183,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_boolean_layoutremove_from_ui_parent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_layoutremove_from_ui_parent;
@@ -9276,6 +9282,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_boolean_layoutremove_from_ui_start_end;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_layoutremove_from_ui_start_end;
@@ -9372,6 +9379,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_boolean_layoutselected_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_layoutselected_from_ui;
@@ -9471,6 +9479,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_boolean_layoutselected_from_ui_parent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_layoutselected_from_ui_parent;
@@ -9567,6 +9576,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_boolean_layoutselected_from_ui_selected;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_layoutselected_from_ui_selected;
@@ -9652,6 +9662,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_boolean_layoutvisible_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_layoutvisible_from_ui;
@@ -9750,6 +9761,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_boolean_print;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_print;
@@ -9856,6 +9868,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_boolean_removestate_uiapp;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_removestate_uiapp;
@@ -9942,6 +9955,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_boolean_write_from_ui_parent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_write_from_ui_parent;
@@ -10036,6 +10050,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_boolean_writeremove_from_ui_uid;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_writeremove_from_ui_uid;
@@ -10133,6 +10148,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_boolean_writestate_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_writestate_from_ui;
@@ -10273,6 +10289,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_boolean_writestate_from_uiapp;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_writestate_from_uiapp;
@@ -10373,6 +10390,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_boolean_writestate_from_uiengine;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_writestate_from_uiengine;
@@ -10473,6 +10491,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_fontfacemap_from_fontfacelist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_fontfacemap_from_fontfacelist;
@@ -10581,6 +10600,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_int_child_from_ui_uid;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_int_child_from_ui_uid;
@@ -10673,6 +10693,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_int_selected_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_int_selected_from_ui;
@@ -10779,6 +10800,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_int_visible_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_int_visible_from_ui;
@@ -10884,6 +10906,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_intlist_visible_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_intlist_visible_from_ui;
@@ -11020,6 +11043,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_layout_from_style;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_layout_from_style;
@@ -11119,6 +11143,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_layout_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_layout_from_ui;
@@ -11226,6 +11251,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_layout_from_ui_layoutengine;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_layout_from_ui_layoutengine;
@@ -11321,6 +11347,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_layout_from_ui_layoutmap_else;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_layout_from_ui_layoutmap_else;
@@ -11422,6 +11449,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_layoutengine_readstate;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_layoutengine_readstate;
@@ -11513,6 +11541,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_layoutmap_from_layoutlist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_layoutmap_from_layoutlist;
@@ -11620,6 +11649,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_string_parentuid_from_uid;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_parentuid_from_uid;
@@ -11740,6 +11770,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_string_selected_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_selected_from_ui;
@@ -11845,6 +11876,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_stringlist_selected_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_stringlist_selected_from_ui;
@@ -11964,6 +11996,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_stringlist_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_stringlist_from_ui;
@@ -12068,6 +12101,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_stylemap_from_stylelist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_stylemap_from_stylelist;
@@ -12174,6 +12208,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_stylesheet_readstate;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_stylesheet_readstate;
@@ -12265,6 +12300,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_stylesheet_render;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_stylesheet_render;
@@ -12363,6 +12399,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_addlayout_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_addlayout_from_ui;
@@ -12470,6 +12507,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_addlayout_from_ui_layoutengine;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_addlayout_from_ui_layoutengine;
@@ -12565,6 +12603,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_addlayout_from_ui_layoutmap_else;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_addlayout_from_ui_layoutmap_else;
@@ -12669,6 +12708,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_addlayout_from_ui_uiengine;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_addlayout_from_ui_uiengine;
@@ -12762,6 +12802,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_child_from_ui_pos;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_child_from_ui_pos;
@@ -12855,6 +12896,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_child_from_ui_uid;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_child_from_ui_uid;
@@ -12947,6 +12989,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_from_from_event;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_from_from_event;
@@ -13052,6 +13095,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_layout;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_layout;
@@ -13162,6 +13206,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_layout_from_fn_layout_ui_orig_parent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_layout_from_fn_layout_ui_orig_parent;
@@ -13252,6 +13297,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_layout_from_ui_orig_parent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_layout_from_ui_orig_parent;
@@ -13366,6 +13412,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_layout_from_ui_parent_selected;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_layout_from_ui_parent_selected;
@@ -13462,6 +13509,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_layout_from_ui_parent_visible;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_layout_from_ui_parent_visible;
@@ -13554,6 +13602,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_readstate_uiapp;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_readstate_uiapp;
@@ -13639,6 +13688,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_readstate_from_uid;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_readstate_from_uid;
@@ -13745,6 +13795,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_selected_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_selected_from_ui;
@@ -13850,6 +13901,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_visible_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_visible_from_ui;
@@ -13956,6 +14008,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_write_from_ui_child;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_write_from_ui_child;
@@ -14051,6 +14104,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_write_from_ui_childmap;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_write_from_ui_childmap;
@@ -14153,6 +14207,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_write_from_ui_visible;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_write_from_ui_visible;
@@ -14310,6 +14365,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_from_layout_ui_orig_parent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_from_layout_ui_orig_parent;
@@ -14407,6 +14463,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_from_ui_find;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_from_ui_find;
@@ -14610,6 +14667,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_ui_from_ui_selected;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_ui_from_ui_selected;
@@ -14766,6 +14824,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_uid_selected_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_uid_selected_from_ui;
@@ -14870,6 +14929,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_uiengine_readstate;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_uiengine_readstate;
@@ -14955,6 +15015,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_uiengine_render;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_uiengine_render;
@@ -15075,6 +15136,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_uilist_selected_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_uilist_selected_from_ui;
@@ -15193,6 +15255,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_uilist_visible_from_ui;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_uilist_visible_from_ui;
@@ -15312,6 +15375,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_uilist_from_uimap;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_uilist_from_uimap;
@@ -15421,6 +15485,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_uimap_addlayout_from_uimap_layoutmap_else;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_uimap_addlayout_from_uimap_layoutmap_else;
@@ -15518,6 +15583,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_uimap_layout_from_uimap_parent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_uimap_layout_from_uimap_parent;
@@ -15618,6 +15684,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_uimap_from_uilist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_uimap_from_uilist;
@@ -15726,6 +15793,7 @@ public final class Ui {
     public Core.Type_any vx_empty() {
       return e_uimap_from_uimap_data;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_uimap_from_uimap_data;

@@ -1,7 +1,22 @@
   public interface Map<TKey, TValue> {
+    public List<TKey> keys();
+    public TValue get(TKey key);
+    public void put(TKey key, TValue value);
   }
 
   public class LinkedHashMap<TKey, TValue> : Map<TKey, TValue> {
+    private Dictionary<TKey, TValue> dict = new Dictionary<TKey, TValue>();
+    private List<TKey> listkey = new List<TKey>();
+    public TValue get(TKey key) {
+      return dict[key];
+    }
+    public List<TKey> keys() {
+      return listkey;
+    }
+    public void put(TKey key, TValue value) {
+      listkey.Add(key);
+      dict[key] = value;
+    }
   }
 
   public interface vx_Type_const {
@@ -61,7 +76,7 @@
 
   public class KeyValue<T> {
     public String key = "";
-    public T value = null;
+    public T value = default(T);
   }
 
   public static vx_core.Type_constdef constdef_new(
@@ -93,50 +108,50 @@
   }
 
   public static vx_core.Type_any[] arrayany_from_anylist(vx_core.Type_anylist list) {
-    return list.vx_list().toArray(new vx_core.Type_any[0]);
+    return list.vx_list().ToArray();
   }
 
   public static List<T> arraylist_from_array<T>(params T[] items) {
-    List<T> output = new List<>(items);
+    List<T> output = new List<T>(items);
     return output;
   }
 
   public static List<T> arraylist_from_arraylist<T, U>(T generic_any_1, List<U> listval) where T : vx_core.Type_any where U : vx_core.Type_any {
-    List<T> output = new List<>();
+    List<T> output = new List<T>();
     foreach (vx_core.Type_any value in listval) {
       T t_val = vx_core.f_any_from_any(generic_any_1, value);
-      output.add(t_val);
+      output.Add(t_val);
     }
     return output;
   }
 
   public static List<T> arraylist_from_arraylist_fn<T, U>(List<U> listval, Func<U, T> fn_any_from_any) {
-    List<T> output = new List<>();
+    List<T> output = new List<T>();
     foreach (U value_u in listval) {
-      T t_val = fn_any_from_any.apply(value_u);
-      output.add(t_val);
+      T t_val = fn_any_from_any.Invoke(value_u);
+      output.Add(t_val);
     }
     return output;
   }
 
   public static List<T> arraylist_from_linkedhashmap<T, U>(T generic_any_1, LinkedHashMap<String, U> mapval) where T : vx_core.Type_any where U : vx_core.Type_any {
     List<T> output = new List<T>();
-    Set<String> keys = mapval.keySet();
+    List<String> keys = mapval.keys();
     foreach (String key in keys) {
       U u_val = mapval.get(key);
       T t_val = vx_core.f_any_from_any(generic_any_1, u_val);
-      output.add(t_val);
+      output.Add(t_val);
     }
     return output;
   }
 
   public static List<T> arraylist_from_linkedhashmap_fn<T, U>(Map<String, U> mapval, Func<String, U, T> fn_any_from_key_value) {
     List<T> output = new List<T>();
-    Set<String> keys = mapval.keySet();
+    List<String> keys = mapval.keys();
     foreach (String key in keys) {
       U u_val = mapval.get(key);
-      T t_val = fn_any_from_key_value.apply(key, u_val);
-      output.add(t_val);
+      T t_val = fn_any_from_key_value.Invoke(key, u_val);
+      output.Add(t_val);
     }
     return output;
   }
@@ -175,7 +190,7 @@
   }
 
   public static LinkedHashMap<String, T> hashmap_from_keyvalues<T>(params KeyValue<T>[] keyvalues) {
-    LinkedHashMap<String, T> output = new LinkedHashMap<>();
+    LinkedHashMap<String, T> output = new LinkedHashMap<String, T>();
     foreach (KeyValue<T> keyvalue in keyvalues) {
       String key = keyvalue.key;
       T value = keyvalue.value;
@@ -191,10 +206,18 @@
     return output;
   }
 
+  public static List<T> immutablelist<T>(List<T> listval) {
+    return listval;
+  }
+
+  public static Map<T, U> immutablemap<T, U>(Map<T, U> mapval) {
+    return mapval;
+  }
+
   public static Map<String, T> map_from_list_fn<T>(List<T> listval, Func<T, vx_core.Type_string> fn_any_from_any) {
-    Map<String, T> output = new LinkedHashMap<>();
+    Map<String, T> output = new LinkedHashMap<String, T>();
     foreach (T val in listval) {
-      vx_core.Type_string valkey = fn_any_from_any.apply(val);
+      vx_core.Type_string valkey = fn_any_from_any.Invoke(val);
       String key = valkey.vx_string();
       output.put(key, val);
     }
@@ -202,7 +225,7 @@
   }
 
   public static LinkedHashMap<String, T> map_from_map<T>(LinkedHashMap<String, vx_core.Type_any> mapval) where T : vx_core.Type_any {
-    LinkedHashMap<String, T> output = new LinkedHashMap<>();
+    LinkedHashMap<String, T> output = new LinkedHashMap<String, T>();
     Set<String> keys = mapval.keySet();
     foreach (String key in keys) {
       vx_core.Type_any value = mapval.get(key);
@@ -218,17 +241,17 @@
 
   // vx_boolean_from_string_ends(string, string)
   public static bool vx_boolean_from_string_ends(String text, String ends) {
-    return text.endsWith(ends);
+    return text.EndsWith(ends);
   }
 
   // vx_boolean_from_string_find(string, string)
   public static bool vx_boolean_from_string_find(String text, String find) {
-    return text.contains(find);
+    return text.Contains(find);
   }
 
   // vx_boolean_from_string_starts(string, string)
   public static bool vx_boolean_from_string_starts(String text, String starts) {
-    return text.startsWith(starts);
+    return text.StartsWith(starts);
   }
 
   // vx_eqeq(any, any)
@@ -295,7 +318,7 @@
       packagemap = new vx_core.Class_packagemap();
       global.vx_p_packagemap = packagemap;
     }
-    Map<String, vx_core.Type_package> mappackage = new LinkedHashMap<>(packagemap.vx_p_map);
+    Map<String, vx_core.Type_package> mappackage = new LinkedHashMap<String, vx_core.Type_package>(packagemap.vx_p_map);
 		  vx_core.Class_package pkg = new vx_core.Class_package();
 		  pkg.vx_p_constmap = constmap;
 		  pkg.vx_p_typemap = typemap;
@@ -512,7 +535,7 @@
       vx_core.Type_float valfloat = vx_core.f_any_from_any(vx_core.t_float, value);
       output = Float.toString(valfloat.vx_float());
       if (output.endsWith(".0")) {
-        output = output.substring(0, output.length() - 2);
+        output = output.Substring(0, output.length() - 2);
       }
     } else if (value is vx_core.Type_int) {
       if (value == vx_core.c_notanumber) {
@@ -635,7 +658,7 @@
       if (end >= maxlen) {
         end = maxlen;
       }
-      output = text.substring(start - 1, end);
+      output = text.Substring(start - 1, end);
     }
     return output;
   }

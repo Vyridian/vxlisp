@@ -25,14 +25,14 @@ public final class Csv {
 
   public static class Class_csv extends Core.Class_base implements Type_csv {
 
-    protected Core.Type_stringlist vx_p_headers;
+    public Core.Type_stringlist vx_p_headers;
 
     @Override
     public Core.Type_stringlist headers() {
       return this.vx_p_headers == null ? Core.e_stringlist : this.vx_p_headers;
     }
 
-    protected Csv.Type_csvrows vx_p_rows;
+    public Csv.Type_csvrows vx_p_rows;
 
     @Override
     public Csv.Type_csvrows rows() {
@@ -56,7 +56,7 @@ public final class Csv {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":headers", this.headers());
       output.put(":rows", this.rows());
       return Core.immutablemap(output);
@@ -231,7 +231,7 @@ public final class Csv {
 
   public static class Class_csvrowmap extends Core.Class_base implements Type_csvrowmap {
 
-    protected Map<String, Core.Type_stringlist> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_stringlist>());
+    public Map<String, Core.Type_stringlist> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_stringlist>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -429,7 +429,7 @@ public final class Csv {
 
   public static class Class_csvrows extends Core.Class_base implements Type_csvrows {
 
-    protected List<Core.Type_stringlist> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_stringlist>());
+    public List<Core.Type_stringlist> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_stringlist>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -667,6 +667,7 @@ public final class Csv {
     public Core.Type_any vx_empty() {
       return e_csv_read_from_file;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_csv_read_from_file;
@@ -773,6 +774,7 @@ public final class Csv {
     public Core.Type_any vx_empty() {
       return e_csv_from_file;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_csv_from_file;
@@ -878,6 +880,7 @@ public final class Csv {
     public Core.Type_any vx_empty() {
       return e_csv_from_string;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_csv_from_string;
@@ -982,6 +985,7 @@ public final class Csv {
     public Core.Type_any vx_empty() {
       return e_csv_from_textblock;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_csv_from_textblock;
@@ -1096,6 +1100,7 @@ public final class Csv {
     public Core.Type_any vx_empty() {
       return e_csvrows_from_textblock;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_csvrows_from_textblock;
@@ -1211,6 +1216,7 @@ public final class Csv {
     public Core.Type_any vx_empty() {
       return e_stringmap_from_csv;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_stringmap_from_csv;
@@ -1334,6 +1340,7 @@ public final class Csv {
     public Core.Type_any vx_empty() {
       return e_textblock_csv_from_string;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_textblock_csv_from_string;

@@ -25,7 +25,7 @@ public final class Html {
 
   public static class Class_body extends Core.Class_base implements Type_body {
 
-    protected Html.Type_divchildlist vx_p_nodes;
+    public Html.Type_divchildlist vx_p_nodes;
 
     @Override
     public Html.Type_divchildlist nodes() {
@@ -46,7 +46,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":nodes", this.nodes());
       return Core.immutablemap(output);
     }
@@ -216,49 +216,49 @@ public final class Html {
 
   public static class Class_details extends Core.Class_base implements Type_details {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Event.Type_eventmap vx_p_eventmap;
+    public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
       return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
     }
 
-    protected Html.Type_style vx_p_style;
+    public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
     }
 
-    protected Html.Type_style vx_p_style_unique;
+    public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
       return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
     }
 
-    protected Html.Type_stylelist vx_p_stylelist;
+    public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
       return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
-    protected Html.Type_divchildlist vx_p_summary;
+    public Html.Type_divchildlist vx_p_summary;
 
     @Override
     public Html.Type_divchildlist summary() {
       return this.vx_p_summary == null ? Html.e_divchildlist : this.vx_p_summary;
     }
 
-    protected Html.Type_divchildlist vx_p_nodes;
+    public Html.Type_divchildlist vx_p_nodes;
 
     @Override
     public Html.Type_divchildlist nodes() {
@@ -297,7 +297,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
@@ -600,42 +600,42 @@ public final class Html {
 
   public static class Class_div extends Core.Class_base implements Type_div {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Event.Type_eventmap vx_p_eventmap;
+    public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
       return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
     }
 
-    protected Html.Type_style vx_p_style;
+    public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
     }
 
-    protected Html.Type_style vx_p_style_unique;
+    public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
       return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
     }
 
-    protected Html.Type_stylelist vx_p_stylelist;
+    public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
       return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
-    protected Html.Type_divchildlist vx_p_nodes;
+    public Html.Type_divchildlist vx_p_nodes;
 
     @Override
     public Html.Type_divchildlist nodes() {
@@ -671,7 +671,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
@@ -968,7 +968,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       return Core.immutablemap(output);
     }
 
@@ -1045,7 +1045,7 @@ public final class Html {
 
   public static class Class_divchildlist extends Core.Class_base implements Type_divchildlist {
 
-    protected List<Html.Type_divchild> vx_p_list = Core.immutablelist(new ArrayList<Html.Type_divchild>());
+    public List<Html.Type_divchild> vx_p_list = Core.immutablelist(new ArrayList<Html.Type_divchild>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -1185,7 +1185,7 @@ public final class Html {
 
   public static class Class_divlist extends Core.Class_base implements Type_divlist {
 
-    protected List<Html.Type_div> vx_p_list = Core.immutablelist(new ArrayList<Html.Type_div>());
+    public List<Html.Type_div> vx_p_list = Core.immutablelist(new ArrayList<Html.Type_div>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -1324,7 +1324,7 @@ public final class Html {
 
   public static class Class_footer extends Core.Class_base implements Type_footer {
 
-    protected Html.Type_divchildlist vx_p_nodes;
+    public Html.Type_divchildlist vx_p_nodes;
 
     @Override
     public Html.Type_divchildlist nodes() {
@@ -1345,7 +1345,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":nodes", this.nodes());
       return Core.immutablemap(output);
     }
@@ -1514,42 +1514,42 @@ public final class Html {
 
   public static class Class_h1 extends Core.Class_base implements Type_h1 {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Event.Type_eventmap vx_p_eventmap;
+    public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
       return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
     }
 
-    protected Html.Type_style vx_p_style;
+    public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
     }
 
-    protected Html.Type_style vx_p_style_unique;
+    public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
       return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
     }
 
-    protected Html.Type_stylelist vx_p_stylelist;
+    public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
       return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
-    protected Core.Type_string vx_p_text;
+    public Core.Type_string vx_p_text;
 
     @Override
     public Core.Type_string text() {
@@ -1585,7 +1585,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
@@ -1876,42 +1876,42 @@ public final class Html {
 
   public static class Class_h2 extends Core.Class_base implements Type_h2 {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Event.Type_eventmap vx_p_eventmap;
+    public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
       return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
     }
 
-    protected Html.Type_style vx_p_style;
+    public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
     }
 
-    protected Html.Type_style vx_p_style_unique;
+    public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
       return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
     }
 
-    protected Html.Type_stylelist vx_p_stylelist;
+    public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
       return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
-    protected Core.Type_string vx_p_text;
+    public Core.Type_string vx_p_text;
 
     @Override
     public Core.Type_string text() {
@@ -1947,7 +1947,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
@@ -2238,42 +2238,42 @@ public final class Html {
 
   public static class Class_h3 extends Core.Class_base implements Type_h3 {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Event.Type_eventmap vx_p_eventmap;
+    public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
       return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
     }
 
-    protected Html.Type_style vx_p_style;
+    public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
     }
 
-    protected Html.Type_style vx_p_style_unique;
+    public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
       return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
     }
 
-    protected Html.Type_stylelist vx_p_stylelist;
+    public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
       return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
-    protected Core.Type_string vx_p_text;
+    public Core.Type_string vx_p_text;
 
     @Override
     public Core.Type_string text() {
@@ -2309,7 +2309,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
@@ -2595,7 +2595,7 @@ public final class Html {
 
   public static class Class_head extends Core.Class_base implements Type_head {
 
-    protected Html.Type_headchildlist vx_p_nodes;
+    public Html.Type_headchildlist vx_p_nodes;
 
     @Override
     public Html.Type_headchildlist nodes() {
@@ -2616,7 +2616,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":nodes", this.nodes());
       return Core.immutablemap(output);
     }
@@ -2790,7 +2790,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       return Core.immutablemap(output);
     }
 
@@ -2867,7 +2867,7 @@ public final class Html {
 
   public static class Class_headchildlist extends Core.Class_base implements Type_headchildlist {
 
-    protected List<Html.Type_headchild> vx_p_list = Core.immutablelist(new ArrayList<Html.Type_headchild>());
+    public List<Html.Type_headchild> vx_p_list = Core.immutablelist(new ArrayList<Html.Type_headchild>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -3009,28 +3009,28 @@ public final class Html {
 
   public static class Class_html extends Core.Class_base implements Type_html {
 
-    protected Core.Type_string vx_p_lang;
+    public Core.Type_string vx_p_lang;
 
     @Override
     public Core.Type_string lang() {
       return this.vx_p_lang == null ? Core.e_string : this.vx_p_lang;
     }
 
-    protected Html.Type_head vx_p_head;
+    public Html.Type_head vx_p_head;
 
     @Override
     public Html.Type_head head() {
       return this.vx_p_head == null ? Html.e_head : this.vx_p_head;
     }
 
-    protected Html.Type_body vx_p_body;
+    public Html.Type_body vx_p_body;
 
     @Override
     public Html.Type_body body() {
       return this.vx_p_body == null ? Html.e_body : this.vx_p_body;
     }
 
-    protected Html.Type_footer vx_p_footer;
+    public Html.Type_footer vx_p_footer;
 
     @Override
     public Html.Type_footer footer() {
@@ -3060,7 +3060,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":lang", this.lang());
       output.put(":head", this.head());
       output.put(":body", this.body());
@@ -3291,42 +3291,42 @@ public final class Html {
 
   public static class Class_img extends Core.Class_base implements Type_img {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Event.Type_eventmap vx_p_eventmap;
+    public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
       return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
     }
 
-    protected Html.Type_style vx_p_style;
+    public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
     }
 
-    protected Html.Type_style vx_p_style_unique;
+    public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
       return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
     }
 
-    protected Html.Type_stylelist vx_p_stylelist;
+    public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
       return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
-    protected Core.Type_string vx_p_src;
+    public Core.Type_string vx_p_src;
 
     @Override
     public Core.Type_string src() {
@@ -3362,7 +3362,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
@@ -3655,56 +3655,56 @@ public final class Html {
 
   public static class Class_meta extends Core.Class_base implements Type_meta {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Event.Type_eventmap vx_p_eventmap;
+    public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
       return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
     }
 
-    protected Html.Type_style vx_p_style;
+    public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
     }
 
-    protected Html.Type_style vx_p_style_unique;
+    public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
       return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
     }
 
-    protected Html.Type_stylelist vx_p_stylelist;
+    public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
       return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
-    protected Core.Type_string vx_p_charset;
+    public Core.Type_string vx_p_charset;
 
     @Override
     public Core.Type_string charset() {
       return this.vx_p_charset == null ? Core.e_string : this.vx_p_charset;
     }
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Core.Type_string vx_p_content;
+    public Core.Type_string vx_p_content;
 
     @Override
     public Core.Type_string content() {
@@ -3746,7 +3746,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
@@ -4081,35 +4081,35 @@ public final class Html {
 
   public static class Class_node extends Core.Class_base implements Type_node {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Event.Type_eventmap vx_p_eventmap;
+    public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
       return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
     }
 
-    protected Html.Type_style vx_p_style;
+    public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
     }
 
-    protected Html.Type_style vx_p_style_unique;
+    public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
       return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
     }
 
-    protected Html.Type_stylelist vx_p_stylelist;
+    public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
@@ -4142,7 +4142,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
@@ -4393,7 +4393,7 @@ public final class Html {
 
   public static class Class_nodelist extends Core.Class_base implements Type_nodelist {
 
-    protected List<Html.Type_node> vx_p_list = Core.immutablelist(new ArrayList<Html.Type_node>());
+    public List<Html.Type_node> vx_p_list = Core.immutablelist(new ArrayList<Html.Type_node>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -4537,42 +4537,42 @@ public final class Html {
 
   public static class Class_p extends Core.Class_base implements Type_p {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Event.Type_eventmap vx_p_eventmap;
+    public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
       return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
     }
 
-    protected Html.Type_style vx_p_style;
+    public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
     }
 
-    protected Html.Type_style vx_p_style_unique;
+    public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
       return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
     }
 
-    protected Html.Type_stylelist vx_p_stylelist;
+    public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
       return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
-    protected Core.Type_string vx_p_text;
+    public Core.Type_string vx_p_text;
 
     @Override
     public Core.Type_string text() {
@@ -4608,7 +4608,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
@@ -4895,7 +4895,7 @@ public final class Html {
 
   public static class Class_propmap extends Core.Class_base implements Type_propmap {
 
-    protected Map<String, Core.Type_string> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_string>());
+    public Map<String, Core.Type_string> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Core.Type_string>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -5095,21 +5095,21 @@ public final class Html {
 
   public static class Class_style extends Core.Class_base implements Type_style {
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Html.Type_propmap vx_p_props;
+    public Html.Type_propmap vx_p_props;
 
     @Override
     public Html.Type_propmap props() {
       return this.vx_p_props == null ? Html.e_propmap : this.vx_p_props;
     }
 
-    protected Html.Type_stylelist vx_p_stylelist;
+    public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
@@ -5136,7 +5136,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":name", this.name());
       output.put(":props", this.props());
       output.put(":stylelist", this.stylelist());
@@ -5339,7 +5339,7 @@ public final class Html {
 
   public static class Class_stylelist extends Core.Class_base implements Type_stylelist {
 
-    protected List<Html.Type_style> vx_p_list = Core.immutablelist(new ArrayList<Html.Type_style>());
+    public List<Html.Type_style> vx_p_list = Core.immutablelist(new ArrayList<Html.Type_style>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -5479,7 +5479,7 @@ public final class Html {
 
   public static class Class_stylemap extends Core.Class_base implements Type_stylemap {
 
-    protected Map<String, Html.Type_style> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Html.Type_style>());
+    public Map<String, Html.Type_style> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Html.Type_style>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -5684,56 +5684,56 @@ public final class Html {
 
   public static class Class_stylesheet extends Core.Class_base implements Type_stylesheet {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Event.Type_eventmap vx_p_eventmap;
+    public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
       return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
     }
 
-    protected Html.Type_style vx_p_style;
+    public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
     }
 
-    protected Html.Type_style vx_p_style_unique;
+    public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
       return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
     }
 
-    protected Html.Type_stylelist vx_p_stylelist;
+    public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
       return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Html.Type_stylelist vx_p_styles;
+    public Html.Type_stylelist vx_p_styles;
 
     @Override
     public Html.Type_stylelist styles() {
       return this.vx_p_styles == null ? Html.e_stylelist : this.vx_p_styles;
     }
 
-    protected Html.Type_stylemap vx_p_stylemap;
+    public Html.Type_stylemap vx_p_stylemap;
 
     @Override
     public Html.Type_stylemap stylemap() {
@@ -5775,7 +5775,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
@@ -6106,49 +6106,49 @@ public final class Html {
 
   public static class Class_table extends Core.Class_base implements Type_table {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Event.Type_eventmap vx_p_eventmap;
+    public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
       return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
     }
 
-    protected Html.Type_style vx_p_style;
+    public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
     }
 
-    protected Html.Type_style vx_p_style_unique;
+    public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
       return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
     }
 
-    protected Html.Type_stylelist vx_p_stylelist;
+    public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
       return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
-    protected Html.Type_tbody vx_p_tbody;
+    public Html.Type_tbody vx_p_tbody;
 
     @Override
     public Html.Type_tbody tbody() {
       return this.vx_p_tbody == null ? Html.e_tbody : this.vx_p_tbody;
     }
 
-    protected Html.Type_thead vx_p_thead;
+    public Html.Type_thead vx_p_thead;
 
     @Override
     public Html.Type_thead thead() {
@@ -6187,7 +6187,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
@@ -6490,42 +6490,42 @@ public final class Html {
 
   public static class Class_tbody extends Core.Class_base implements Type_tbody {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Event.Type_eventmap vx_p_eventmap;
+    public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
       return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
     }
 
-    protected Html.Type_style vx_p_style;
+    public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
     }
 
-    protected Html.Type_style vx_p_style_unique;
+    public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
       return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
     }
 
-    protected Html.Type_stylelist vx_p_stylelist;
+    public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
       return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
-    protected Html.Type_trlist vx_p_nodes;
+    public Html.Type_trlist vx_p_nodes;
 
     @Override
     public Html.Type_trlist nodes() {
@@ -6561,7 +6561,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
@@ -6853,42 +6853,42 @@ public final class Html {
 
   public static class Class_td extends Core.Class_base implements Type_td {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Event.Type_eventmap vx_p_eventmap;
+    public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
       return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
     }
 
-    protected Html.Type_style vx_p_style;
+    public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
     }
 
-    protected Html.Type_style vx_p_style_unique;
+    public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
       return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
     }
 
-    protected Html.Type_stylelist vx_p_stylelist;
+    public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
       return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
-    protected Html.Type_divchildlist vx_p_nodes;
+    public Html.Type_divchildlist vx_p_nodes;
 
     @Override
     public Html.Type_divchildlist nodes() {
@@ -6924,7 +6924,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
@@ -7212,7 +7212,7 @@ public final class Html {
 
   public static class Class_tdlist extends Core.Class_base implements Type_tdlist {
 
-    protected List<Html.Type_td> vx_p_list = Core.immutablelist(new ArrayList<Html.Type_td>());
+    public List<Html.Type_td> vx_p_list = Core.immutablelist(new ArrayList<Html.Type_td>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -7356,42 +7356,42 @@ public final class Html {
 
   public static class Class_thead extends Core.Class_base implements Type_thead {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Event.Type_eventmap vx_p_eventmap;
+    public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
       return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
     }
 
-    protected Html.Type_style vx_p_style;
+    public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
     }
 
-    protected Html.Type_style vx_p_style_unique;
+    public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
       return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
     }
 
-    protected Html.Type_stylelist vx_p_stylelist;
+    public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
       return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
-    protected Html.Type_trlist vx_p_nodes;
+    public Html.Type_trlist vx_p_nodes;
 
     @Override
     public Html.Type_trlist nodes() {
@@ -7427,7 +7427,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
@@ -7719,42 +7719,42 @@ public final class Html {
 
   public static class Class_title extends Core.Class_base implements Type_title {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Event.Type_eventmap vx_p_eventmap;
+    public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
       return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
     }
 
-    protected Html.Type_style vx_p_style;
+    public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
     }
 
-    protected Html.Type_style vx_p_style_unique;
+    public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
       return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
     }
 
-    protected Html.Type_stylelist vx_p_stylelist;
+    public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
       return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
-    protected Core.Type_string vx_p_text;
+    public Core.Type_string vx_p_text;
 
     @Override
     public Core.Type_string text() {
@@ -7790,7 +7790,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
@@ -8072,42 +8072,42 @@ public final class Html {
 
   public static class Class_tr extends Core.Class_base implements Type_tr {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Event.Type_eventmap vx_p_eventmap;
+    public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
       return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
     }
 
-    protected Html.Type_style vx_p_style;
+    public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
       return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
     }
 
-    protected Html.Type_style vx_p_style_unique;
+    public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
       return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
     }
 
-    protected Html.Type_stylelist vx_p_stylelist;
+    public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
       return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
     }
 
-    protected Html.Type_tdlist vx_p_nodes;
+    public Html.Type_tdlist vx_p_nodes;
 
     @Override
     public Html.Type_tdlist nodes() {
@@ -8143,7 +8143,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":eventmap", this.eventmap());
       output.put(":style", this.style());
@@ -8431,7 +8431,7 @@ public final class Html {
 
   public static class Class_trlist extends Core.Class_base implements Type_trlist {
 
-    protected List<Html.Type_tr> vx_p_list = Core.immutablelist(new ArrayList<Html.Type_tr>());
+    public List<Html.Type_tr> vx_p_list = Core.immutablelist(new ArrayList<Html.Type_tr>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -8611,6 +8611,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_htmlstring_from_string;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_htmlstring_from_string;
@@ -8715,6 +8716,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_indent;
@@ -8815,6 +8817,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_body_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_body_indent;
@@ -8908,6 +8911,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_details_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_details_indent;
@@ -9025,6 +9029,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_div_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_div_indent;
@@ -9141,6 +9146,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_footer_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_footer_indent;
@@ -9234,6 +9240,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_h1_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_h1_indent;
@@ -9342,6 +9349,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_h2_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_h2_indent;
@@ -9450,6 +9458,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_h3_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_h3_indent;
@@ -9558,6 +9567,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_head_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_head_indent;
@@ -9650,6 +9660,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_html;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_html;
@@ -9779,6 +9790,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_img_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_img_indent;
@@ -9897,6 +9909,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_indent;
@@ -10008,6 +10021,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_meta_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_meta_indent;
@@ -10153,6 +10167,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_node_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_node_indent;
@@ -10407,6 +10422,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_nodelist_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_nodelist_indent;
@@ -10510,6 +10526,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_nodelist_tag_prop_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_nodelist_tag_prop_indent;
@@ -10649,6 +10666,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_p_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_p_indent;
@@ -10768,6 +10786,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_propname_val;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_propname_val;
@@ -10868,6 +10887,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_propstyle;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_propstyle;
@@ -10991,6 +11011,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_propstyle_stylelist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_propstyle_stylelist;
@@ -11097,6 +11118,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_propstylelist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_propstylelist;
@@ -11226,6 +11248,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_propstyleunique;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_propstyleunique;
@@ -11365,6 +11388,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_style_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_style_indent;
@@ -11479,6 +11503,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_stylelist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_stylelist;
@@ -11596,6 +11621,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_stylelist_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_stylelist_indent;
@@ -11700,6 +11726,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_stylepropmap_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_stylepropmap_indent;
@@ -11812,6 +11839,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_stylesheet_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_stylesheet_indent;
@@ -11924,6 +11952,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_table_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_table_indent;
@@ -12043,6 +12072,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_tbody_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_tbody_indent;
@@ -12136,6 +12166,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_td_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_td_indent;
@@ -12229,6 +12260,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_thead_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_thead_indent;
@@ -12322,6 +12354,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_title_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_title_indent;
@@ -12424,6 +12457,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_tr_indent;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_tr_indent;
@@ -12516,6 +12550,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_string_from_uri;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_from_uri;
@@ -12615,6 +12650,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_style_from_stylesheet_name;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_style_from_stylesheet_name;
@@ -12705,6 +12741,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_stylemap_from_stylelist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_stylemap_from_stylelist;
@@ -12812,6 +12849,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_stylemap_from_stylesheet;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_stylemap_from_stylesheet;
@@ -12911,6 +12949,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_styles_from_stylesheet;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_styles_from_stylesheet;
@@ -13010,6 +13049,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_stylesheet_loadmap;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_stylesheet_loadmap;
@@ -13117,6 +13157,7 @@ public final class Html {
     public Core.Type_any vx_empty() {
       return e_uri_from_string;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_uri_from_string;

@@ -222,6 +222,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_any_from_for_until_loop;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_for_until_loop;
@@ -321,6 +322,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_any_from_for_until_loop_max;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_for_until_loop_max;
@@ -412,6 +414,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_any_from_for_while_loop;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_for_while_loop;
@@ -512,6 +515,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_any_from_for_while_loop_max;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_for_while_loop_max;
@@ -602,6 +606,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_any_from_map_pos;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_map_pos;
@@ -697,6 +702,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_boolean_write_from_map_removekey;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_write_from_map_removekey;
@@ -790,6 +796,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_boolean_write_from_map_removekeys;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_write_from_map_removekeys;
@@ -891,6 +898,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_int_from_map_key;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_int_from_map_key;
@@ -984,6 +992,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_int_from_stringlist_find;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_int_from_stringlist_find;
@@ -1098,6 +1107,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_is_list;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_is_list;
@@ -1200,6 +1210,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_is_map;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_is_map;
@@ -1315,6 +1326,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_list_from_for_end_loop;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_list_from_for_end_loop;
@@ -1405,6 +1417,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_list_from_for_while_loop;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_list_from_for_while_loop;
@@ -1502,6 +1515,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_list_from_for_while_loop_max;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_list_from_for_while_loop_max;
@@ -1592,6 +1606,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_list_from_list_end;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_list_from_list_end;
@@ -1680,6 +1695,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_list_from_list_filter;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_list_from_list_filter;
@@ -1768,6 +1784,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_list_from_list_filtertypes;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_list_from_list_filtertypes;
@@ -1868,6 +1885,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_list_from_list_start;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_list_from_list_start;
@@ -1962,6 +1980,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_list_from_list_start_end;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_list_from_list_start_end;
@@ -2051,6 +2070,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_map_from_map_end;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_map_from_map_end;
@@ -2139,6 +2159,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_map_from_map_keys;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_map_from_map_keys;
@@ -2227,6 +2248,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_map_from_map_start;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_map_from_map_start;
@@ -2321,6 +2343,7 @@ public final class Collection {
     public Core.Type_any vx_empty() {
       return e_map_from_map_start_end;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_map_from_map_start_end;

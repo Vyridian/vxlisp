@@ -55,6 +55,10 @@
     "// :header
      bool vx_p_boolean = false;
      bool vx_boolean() const;"
+   :csharp
+    "protected boolean vxboolean = false;
+
+     public boolean vx_boolean() {return vxboolean;}"
    :java
     "protected boolean vxboolean = false;
 
@@ -213,6 +217,10 @@
     "// :header
      long vx_p_int = 0;
      long vx_int() const;"
+   :csharp
+    "protected int vxint = 0;
+
+     public int vx_int() {return vxint;}"
    :java
     "protected int vxint = 0;
 
@@ -441,6 +449,12 @@
     "// :header
      std::string vx_p_string = “”;
      std::string vx_string() const;"
+   :csharp
+    "protected String vxstring = “”;
+
+     public String vx_string() {
+       return vxstring;
+     }"
    :java
     "protected String vxstring = “”;
 

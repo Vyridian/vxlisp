@@ -30,42 +30,42 @@ public final class Event {
 
   public static class Class_event extends Core.Class_base implements Type_event {
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Core.Type_string vx_p_from;
+    public Core.Type_string vx_p_from;
 
     @Override
     public Core.Type_string from() {
       return this.vx_p_from == null ? Core.e_string : this.vx_p_from;
     }
 
-    protected Core.Type_string vx_p_to;
+    public Core.Type_string vx_p_to;
 
     @Override
     public Core.Type_string to() {
       return this.vx_p_to == null ? Core.e_string : this.vx_p_to;
     }
 
-    protected Core.Type_anymap vx_p_datamap;
+    public Core.Type_anymap vx_p_datamap;
 
     @Override
     public Core.Type_anymap datamap() {
       return this.vx_p_datamap == null ? Core.e_anymap : this.vx_p_datamap;
     }
 
-    protected Event.Func_event_from_event vx_p_event_from_event;
+    public Event.Func_event_from_event vx_p_event_from_event;
 
     @Override
     public Event.Func_event_from_event event_from_event() {
       return this.vx_p_event_from_event == null ? Event.e_event_from_event : this.vx_p_event_from_event;
     }
 
-    protected Event.Func_event_from_event_async vx_p_event_from_event_async;
+    public Event.Func_event_from_event_async vx_p_event_from_event_async;
 
     @Override
     public Event.Func_event_from_event_async event_from_event_async() {
@@ -101,7 +101,7 @@ public final class Event {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":name", this.name());
       output.put(":from", this.from());
       output.put(":to", this.to());
@@ -382,7 +382,7 @@ public final class Event {
 
   public static class Class_eventlist extends Core.Class_base implements Type_eventlist {
 
-    protected List<Event.Type_event> vx_p_list = Core.immutablelist(new ArrayList<Event.Type_event>());
+    public List<Event.Type_event> vx_p_list = Core.immutablelist(new ArrayList<Event.Type_event>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -522,7 +522,7 @@ public final class Event {
 
   public static class Class_eventmap extends Core.Class_base implements Type_eventmap {
 
-    protected Map<String, Event.Type_event> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Event.Type_event>());
+    public Map<String, Event.Type_event> vx_p_map = Core.immutablemap(new LinkedHashMap<String, Event.Type_event>());
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
@@ -960,6 +960,7 @@ public final class Event {
     public Core.Type_any vx_empty() {
       return e_any_from_from_event;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_any_from_from_event;
@@ -1066,6 +1067,7 @@ public final class Event {
     public Core.Type_any vx_empty() {
       return e_event_from_event;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_event_from_event;
@@ -1168,6 +1170,7 @@ public final class Event {
     public Core.Type_any vx_empty() {
       return e_event_from_event_async;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_event_from_event_async;
@@ -1268,6 +1271,7 @@ public final class Event {
     public Core.Type_any vx_empty() {
       return e_eventmap_from_eventlist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_eventmap_from_eventlist;

@@ -28,42 +28,42 @@ public final class Tree {
 
   public static class Class_branch extends Core.Class_base implements Type_branch {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Tree.Type_brancharrow vx_p_brancharrow;
+    public Tree.Type_brancharrow vx_p_brancharrow;
 
     @Override
     public Tree.Type_brancharrow brancharrow() {
       return this.vx_p_brancharrow == null ? Tree.e_brancharrow : this.vx_p_brancharrow;
     }
 
-    protected Tree.Type_branchlist vx_p_branchlist;
+    public Tree.Type_branchlist vx_p_branchlist;
 
     @Override
     public Tree.Type_branchlist branchlist() {
       return this.vx_p_branchlist == null ? Tree.e_branchlist : this.vx_p_branchlist;
     }
 
-    protected Tree.Type_leaflist vx_p_leaflist;
+    public Tree.Type_leaflist vx_p_leaflist;
 
     @Override
     public Tree.Type_leaflist leaflist() {
       return this.vx_p_leaflist == null ? Tree.e_leaflist : this.vx_p_leaflist;
     }
 
-    protected Tree.Type_branch vx_p_parentbranch;
+    public Tree.Type_branch vx_p_parentbranch;
 
     @Override
     public Tree.Type_branch parentbranch() {
       return this.vx_p_parentbranch == null ? Tree.e_branch : this.vx_p_parentbranch;
     }
 
-    protected Tree.Type_tree vx_p_tree;
+    public Tree.Type_tree vx_p_tree;
 
     @Override
     public Tree.Type_tree tree() {
@@ -99,7 +99,7 @@ public final class Tree {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":brancharrow", this.brancharrow());
       output.put(":branchlist", this.branchlist());
@@ -443,7 +443,7 @@ public final class Tree {
 
   public static class Class_branchlist extends Core.Class_base implements Type_branchlist {
 
-    protected List<Tree.Type_branch> vx_p_list = Core.immutablelist(new ArrayList<Tree.Type_branch>());
+    public List<Tree.Type_branch> vx_p_list = Core.immutablelist(new ArrayList<Tree.Type_branch>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -583,21 +583,21 @@ public final class Tree {
 
   public static class Class_leaf extends Core.Class_base implements Type_leaf {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Core.Type_any vx_p_value;
+    public Core.Type_any vx_p_value;
 
     @Override
     public Core.Type_any value() {
@@ -624,7 +624,7 @@ public final class Tree {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":name", this.name());
       output.put(":value", this.value());
@@ -829,7 +829,7 @@ public final class Tree {
 
   public static class Class_leaflist extends Core.Class_base implements Type_leaflist {
 
-    protected List<Tree.Type_leaf> vx_p_list = Core.immutablelist(new ArrayList<Tree.Type_leaf>());
+    public List<Tree.Type_leaf> vx_p_list = Core.immutablelist(new ArrayList<Tree.Type_leaf>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -969,21 +969,21 @@ public final class Tree {
 
   public static class Class_tree extends Core.Class_base implements Type_tree {
 
-    protected Core.Type_string vx_p_id;
+    public Core.Type_string vx_p_id;
 
     @Override
     public Core.Type_string id() {
       return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
     }
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected Tree.Type_branch vx_p_branch;
+    public Tree.Type_branch vx_p_branch;
 
     @Override
     public Tree.Type_branch branch() {
@@ -1010,7 +1010,7 @@ public final class Tree {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
       output.put(":name", this.name());
       output.put(":branch", this.branch());

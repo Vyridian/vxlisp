@@ -46,35 +46,35 @@ public final class File {
 
   public static class Class_file extends Core.Class_base implements Type_file {
 
-    protected Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
       return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
     }
 
-    protected File.Type_fileformat vx_p_format;
+    public File.Type_fileformat vx_p_format;
 
     @Override
     public File.Type_fileformat format() {
       return this.vx_p_format == null ? File.e_fileformat : this.vx_p_format;
     }
 
-    protected Core.Type_string vx_p_path;
+    public Core.Type_string vx_p_path;
 
     @Override
     public Core.Type_string path() {
       return this.vx_p_path == null ? Core.e_string : this.vx_p_path;
     }
 
-    protected Core.Type_permission vx_p_permission;
+    public Core.Type_permission vx_p_permission;
 
     @Override
     public Core.Type_permission permission() {
       return this.vx_p_permission == null ? Core.e_permission : this.vx_p_permission;
     }
 
-    protected Core.Type_string vx_p_text;
+    public Core.Type_string vx_p_text;
 
     @Override
     public Core.Type_string text() {
@@ -107,7 +107,7 @@ public final class File {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":name", this.name());
       output.put(":format", this.format());
       output.put(":path", this.path());
@@ -434,7 +434,7 @@ public final class File {
 
   public static class Class_filelist extends Core.Class_base implements Type_filelist {
 
-    protected List<File.Type_file> vx_p_list = Core.immutablelist(new ArrayList<File.Type_file>());
+    public List<File.Type_file> vx_p_list = Core.immutablelist(new ArrayList<File.Type_file>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -614,6 +614,7 @@ public final class File {
     public Core.Type_any vx_empty() {
       return e_boolean_exists_from_file;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_exists_from_file;
@@ -718,6 +719,7 @@ public final class File {
     public Core.Type_any vx_empty() {
       return e_boolean_write_from_file;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_write_from_file;
@@ -823,6 +825,7 @@ public final class File {
     public Core.Type_any vx_empty() {
       return e_boolean_write_from_file_any;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_write_from_file_any;
@@ -915,6 +918,7 @@ public final class File {
     public Core.Type_any vx_empty() {
       return e_boolean_write_from_file_string;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_boolean_write_from_file_string;
@@ -1018,6 +1022,7 @@ public final class File {
     public Core.Type_any vx_empty() {
       return e_file_read_from_file;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_file_read_from_file;
@@ -1129,6 +1134,7 @@ public final class File {
     public Core.Type_any vx_empty() {
       return e_file_from_path;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_file_from_path;
@@ -1250,6 +1256,7 @@ public final class File {
     public Core.Type_any vx_empty() {
       return e_name_from_file;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_name_from_file;
@@ -1349,6 +1356,7 @@ public final class File {
     public Core.Type_any vx_empty() {
       return e_path_from_file;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_path_from_file;
@@ -1447,6 +1455,7 @@ public final class File {
     public Core.Type_any vx_empty() {
       return e_pathcurrent_from_os;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_pathcurrent_from_os;
@@ -1534,6 +1543,7 @@ public final class File {
     public Core.Type_any vx_empty() {
       return e_pathfull_from_file;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_pathfull_from_file;
@@ -1664,6 +1674,7 @@ public final class File {
     public Core.Type_any vx_empty() {
       return e_string_read_from_file;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_string_read_from_file;

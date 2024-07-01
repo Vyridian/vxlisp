@@ -29,28 +29,28 @@ public final class Test {
 
   public static class Class_testcase extends Core.Class_base implements Type_testcase {
 
-    protected Core.Type_boolean vx_p_passfail;
+    public Core.Type_boolean vx_p_passfail;
 
     @Override
     public Core.Type_boolean passfail() {
       return this.vx_p_passfail == null ? Core.e_boolean : this.vx_p_passfail;
     }
 
-    protected Core.Type_string vx_p_testpkg;
+    public Core.Type_string vx_p_testpkg;
 
     @Override
     public Core.Type_string testpkg() {
       return this.vx_p_testpkg == null ? Core.e_string : this.vx_p_testpkg;
     }
 
-    protected Core.Type_string vx_p_casename;
+    public Core.Type_string vx_p_casename;
 
     @Override
     public Core.Type_string casename() {
       return this.vx_p_casename == null ? Core.e_string : this.vx_p_casename;
     }
 
-    protected Test.Type_testdescribelist vx_p_describelist;
+    public Test.Type_testdescribelist vx_p_describelist;
 
     @Override
     public Test.Type_testdescribelist describelist() {
@@ -80,7 +80,7 @@ public final class Test {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":passfail", this.passfail());
       output.put(":testpkg", this.testpkg());
       output.put(":casename", this.casename());
@@ -313,7 +313,7 @@ public final class Test {
 
   public static class Class_testcaselist extends Core.Class_base implements Type_testcaselist {
 
-    protected List<Test.Type_testcase> vx_p_list = Core.immutablelist(new ArrayList<Test.Type_testcase>());
+    public List<Test.Type_testcase> vx_p_list = Core.immutablelist(new ArrayList<Test.Type_testcase>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -455,28 +455,28 @@ public final class Test {
 
   public static class Class_testcoveragedetail extends Core.Class_base implements Type_testcoveragedetail {
 
-    protected Core.Type_intmap vx_p_constmap;
+    public Core.Type_intmap vx_p_constmap;
 
     @Override
     public Core.Type_intmap constmap() {
       return this.vx_p_constmap == null ? Core.e_intmap : this.vx_p_constmap;
     }
 
-    protected Core.Type_intmap vx_p_funcmap;
+    public Core.Type_intmap vx_p_funcmap;
 
     @Override
     public Core.Type_intmap funcmap() {
       return this.vx_p_funcmap == null ? Core.e_intmap : this.vx_p_funcmap;
     }
 
-    protected Core.Type_string vx_p_testpkg;
+    public Core.Type_string vx_p_testpkg;
 
     @Override
     public Core.Type_string testpkg() {
       return this.vx_p_testpkg == null ? Core.e_string : this.vx_p_testpkg;
     }
 
-    protected Core.Type_intmap vx_p_typemap;
+    public Core.Type_intmap vx_p_typemap;
 
     @Override
     public Core.Type_intmap typemap() {
@@ -506,7 +506,7 @@ public final class Test {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":constmap", this.constmap());
       output.put(":funcmap", this.funcmap());
       output.put(":testpkg", this.testpkg());
@@ -735,28 +735,28 @@ public final class Test {
 
   public static class Class_testcoveragenums extends Core.Class_base implements Type_testcoveragenums {
 
-    protected Core.Type_int vx_p_pct;
+    public Core.Type_int vx_p_pct;
 
     @Override
     public Core.Type_int pct() {
       return this.vx_p_pct == null ? Core.e_int : this.vx_p_pct;
     }
 
-    protected Core.Type_string vx_p_testpkg;
+    public Core.Type_string vx_p_testpkg;
 
     @Override
     public Core.Type_string testpkg() {
       return this.vx_p_testpkg == null ? Core.e_string : this.vx_p_testpkg;
     }
 
-    protected Core.Type_int vx_p_tests;
+    public Core.Type_int vx_p_tests;
 
     @Override
     public Core.Type_int tests() {
       return this.vx_p_tests == null ? Core.e_int : this.vx_p_tests;
     }
 
-    protected Core.Type_int vx_p_total;
+    public Core.Type_int vx_p_total;
 
     @Override
     public Core.Type_int total() {
@@ -786,7 +786,7 @@ public final class Test {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":pct", this.pct());
       output.put(":testpkg", this.testpkg());
       output.put(":tests", this.tests());
@@ -1028,56 +1028,56 @@ public final class Test {
 
   public static class Class_testcoveragesummary extends Core.Class_base implements Type_testcoveragesummary {
 
-    protected Test.Type_testcoveragenums vx_p_bigospacenums;
+    public Test.Type_testcoveragenums vx_p_bigospacenums;
 
     @Override
     public Test.Type_testcoveragenums bigospacenums() {
       return this.vx_p_bigospacenums == null ? Test.e_testcoveragenums : this.vx_p_bigospacenums;
     }
 
-    protected Test.Type_testcoveragenums vx_p_bigotimenums;
+    public Test.Type_testcoveragenums vx_p_bigotimenums;
 
     @Override
     public Test.Type_testcoveragenums bigotimenums() {
       return this.vx_p_bigotimenums == null ? Test.e_testcoveragenums : this.vx_p_bigotimenums;
     }
 
-    protected Test.Type_testcoveragenums vx_p_constnums;
+    public Test.Type_testcoveragenums vx_p_constnums;
 
     @Override
     public Test.Type_testcoveragenums constnums() {
       return this.vx_p_constnums == null ? Test.e_testcoveragenums : this.vx_p_constnums;
     }
 
-    protected Test.Type_testcoveragenums vx_p_docnums;
+    public Test.Type_testcoveragenums vx_p_docnums;
 
     @Override
     public Test.Type_testcoveragenums docnums() {
       return this.vx_p_docnums == null ? Test.e_testcoveragenums : this.vx_p_docnums;
     }
 
-    protected Test.Type_testcoveragenums vx_p_funcnums;
+    public Test.Type_testcoveragenums vx_p_funcnums;
 
     @Override
     public Test.Type_testcoveragenums funcnums() {
       return this.vx_p_funcnums == null ? Test.e_testcoveragenums : this.vx_p_funcnums;
     }
 
-    protected Core.Type_string vx_p_testpkg;
+    public Core.Type_string vx_p_testpkg;
 
     @Override
     public Core.Type_string testpkg() {
       return this.vx_p_testpkg == null ? Core.e_string : this.vx_p_testpkg;
     }
 
-    protected Test.Type_testcoveragenums vx_p_totalnums;
+    public Test.Type_testcoveragenums vx_p_totalnums;
 
     @Override
     public Test.Type_testcoveragenums totalnums() {
       return this.vx_p_totalnums == null ? Test.e_testcoveragenums : this.vx_p_totalnums;
     }
 
-    protected Test.Type_testcoveragenums vx_p_typenums;
+    public Test.Type_testcoveragenums vx_p_typenums;
 
     @Override
     public Test.Type_testcoveragenums typenums() {
@@ -1119,7 +1119,7 @@ public final class Test {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":bigospacenums", this.bigospacenums());
       output.put(":bigotimenums", this.bigotimenums());
       output.put(":constnums", this.constnums());
@@ -1443,21 +1443,21 @@ public final class Test {
 
   public static class Class_testdescribe extends Core.Class_base implements Type_testdescribe {
 
-    protected Core.Type_string vx_p_describename;
+    public Core.Type_string vx_p_describename;
 
     @Override
     public Core.Type_string describename() {
       return this.vx_p_describename == null ? Core.e_string : this.vx_p_describename;
     }
 
-    protected Core.Type_string vx_p_testpkg;
+    public Core.Type_string vx_p_testpkg;
 
     @Override
     public Core.Type_string testpkg() {
       return this.vx_p_testpkg == null ? Core.e_string : this.vx_p_testpkg;
     }
 
-    protected Test.Type_testresult vx_p_testresult;
+    public Test.Type_testresult vx_p_testresult;
 
     @Override
     public Test.Type_testresult testresult() {
@@ -1484,7 +1484,7 @@ public final class Test {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":describename", this.describename());
       output.put(":testpkg", this.testpkg());
       output.put(":testresult", this.testresult());
@@ -1690,7 +1690,7 @@ public final class Test {
 
   public static class Class_testdescribelist extends Core.Class_base implements Type_testdescribelist {
 
-    protected List<Test.Type_testdescribe> vx_p_list = Core.immutablelist(new ArrayList<Test.Type_testdescribe>());
+    public List<Test.Type_testdescribe> vx_p_list = Core.immutablelist(new ArrayList<Test.Type_testdescribe>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -1833,35 +1833,35 @@ public final class Test {
 
   public static class Class_testpackage extends Core.Class_base implements Type_testpackage {
 
-    protected Test.Type_testcaselist vx_p_caselist;
+    public Test.Type_testcaselist vx_p_caselist;
 
     @Override
     public Test.Type_testcaselist caselist() {
       return this.vx_p_caselist == null ? Test.e_testcaselist : this.vx_p_caselist;
     }
 
-    protected Test.Type_testcoveragedetail vx_p_coveragedetail;
+    public Test.Type_testcoveragedetail vx_p_coveragedetail;
 
     @Override
     public Test.Type_testcoveragedetail coveragedetail() {
       return this.vx_p_coveragedetail == null ? Test.e_testcoveragedetail : this.vx_p_coveragedetail;
     }
 
-    protected Test.Type_testcoveragesummary vx_p_coveragesummary;
+    public Test.Type_testcoveragesummary vx_p_coveragesummary;
 
     @Override
     public Test.Type_testcoveragesummary coveragesummary() {
       return this.vx_p_coveragesummary == null ? Test.e_testcoveragesummary : this.vx_p_coveragesummary;
     }
 
-    protected Core.Type_boolean vx_p_passfail;
+    public Core.Type_boolean vx_p_passfail;
 
     @Override
     public Core.Type_boolean passfail() {
       return this.vx_p_passfail == null ? Core.e_boolean : this.vx_p_passfail;
     }
 
-    protected Core.Type_string vx_p_testpkg;
+    public Core.Type_string vx_p_testpkg;
 
     @Override
     public Core.Type_string testpkg() {
@@ -1894,7 +1894,7 @@ public final class Test {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":caselist", this.caselist());
       output.put(":coveragedetail", this.coveragedetail());
       output.put(":coveragesummary", this.coveragesummary());
@@ -2148,7 +2148,7 @@ public final class Test {
 
   public static class Class_testpackagelist extends Core.Class_base implements Type_testpackagelist {
 
-    protected List<Test.Type_testpackage> vx_p_list = Core.immutablelist(new ArrayList<Test.Type_testpackage>());
+    public List<Test.Type_testpackage> vx_p_list = Core.immutablelist(new ArrayList<Test.Type_testpackage>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -2291,35 +2291,35 @@ public final class Test {
 
   public static class Class_testresult extends Core.Class_base implements Type_testresult {
 
-    protected Core.Type_string vx_p_code;
+    public Core.Type_string vx_p_code;
 
     @Override
     public Core.Type_string code() {
       return this.vx_p_code == null ? Core.e_string : this.vx_p_code;
     }
 
-    protected Core.Type_boolean vx_p_passfail;
+    public Core.Type_boolean vx_p_passfail;
 
     @Override
     public Core.Type_boolean passfail() {
       return this.vx_p_passfail == null ? Core.e_boolean : this.vx_p_passfail;
     }
 
-    protected Core.Type_any vx_p_expected;
+    public Core.Type_any vx_p_expected;
 
     @Override
     public Core.Type_any expected() {
       return this.vx_p_expected == null ? Core.e_any : this.vx_p_expected;
     }
 
-    protected Core.Type_any vx_p_actual;
+    public Core.Type_any vx_p_actual;
 
     @Override
     public Core.Type_any actual() {
       return this.vx_p_actual == null ? Core.e_any : this.vx_p_actual;
     }
 
-    protected Core.Func_any_from_func_async vx_p_fn_actual;
+    public Core.Func_any_from_func_async vx_p_fn_actual;
 
     @Override
     public Core.Func_any_from_func_async fn_actual() {
@@ -2352,7 +2352,7 @@ public final class Test {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<>();
+      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":code", this.code());
       output.put(":passfail", this.passfail());
       output.put(":expected", this.expected());
@@ -2606,7 +2606,7 @@ public final class Test {
 
   public static class Class_testresultlist extends Core.Class_base implements Type_testresultlist {
 
-    protected List<Test.Type_testresult> vx_p_list = Core.immutablelist(new ArrayList<Test.Type_testresult>());
+    public List<Test.Type_testresult> vx_p_list = Core.immutablelist(new ArrayList<Test.Type_testresult>());
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -3176,6 +3176,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_context_test;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_context_test;
@@ -3292,6 +3293,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_div_from_testcaselist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_div_from_testcaselist;
@@ -3478,6 +3480,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_div_from_testpackage;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_div_from_testpackage;
@@ -3655,6 +3658,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_div_from_testpackagelist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_div_from_testpackagelist;
@@ -3873,6 +3877,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_divchildlist_from_testpackagelist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_divchildlist_from_testpackagelist;
@@ -3975,6 +3980,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_file_test;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_file_test;
@@ -4066,6 +4072,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_file_testhtml;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_file_testhtml;
@@ -4157,6 +4164,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_file_testnode;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_file_testnode;
@@ -4249,6 +4257,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_html_from_divtest;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_html_from_divtest;
@@ -4402,6 +4411,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_p_from_passfail;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_p_from_passfail;
@@ -4520,6 +4530,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_p_from_testcoveragenums;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_p_from_testcoveragenums;
@@ -4641,6 +4652,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_resolve_testcase;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_resolve_testcase;
@@ -4776,6 +4788,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_resolve_testcaselist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_resolve_testcaselist;
@@ -4882,6 +4895,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_resolve_testdescribe;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_resolve_testdescribe;
@@ -4999,6 +5013,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_resolve_testdescribelist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_resolve_testdescribelist;
@@ -5105,6 +5120,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_resolve_testpackage;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_resolve_testpackage;
@@ -5234,6 +5250,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_resolve_testpackagelist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_resolve_testpackagelist;
@@ -5340,6 +5357,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_resolve_testresult;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_resolve_testresult;
@@ -5480,6 +5498,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_security_test;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_security_test;
@@ -5579,6 +5598,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_test;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_test;
@@ -5684,6 +5704,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_test_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_test_1;
@@ -5786,6 +5807,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_test_false;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_test_false;
@@ -5906,6 +5928,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_test_false_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_test_false_1;
@@ -6022,6 +6045,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_test_gt;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_test_gt;
@@ -6127,6 +6151,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_test_gt_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_test_gt_1;
@@ -6230,6 +6255,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_test_ne;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_test_ne;
@@ -6335,6 +6361,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_test_ne_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_test_ne_1;
@@ -6438,6 +6465,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_test_string;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_test_string;
@@ -6544,6 +6572,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_test_string_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_test_string_1;
@@ -6646,6 +6675,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_test_true;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_test_true;
@@ -6766,6 +6796,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_test_true_1;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_test_true_1;
@@ -6882,6 +6913,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_tr_from_testdescribe_casename;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_tr_from_testdescribe_casename;
@@ -7051,6 +7083,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_trlist_from_testcase;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_trlist_from_testcase;
@@ -7165,6 +7198,7 @@ public final class Test {
     public Core.Type_any vx_empty() {
       return e_trlist_from_testcaselist;
     }
+
     @Override
     public Core.Type_any vx_type() {
       return t_trlist_from_testcaselist;
