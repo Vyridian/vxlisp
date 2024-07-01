@@ -672,7 +672,7 @@
       (string<-stringlist-join
        transforms " ")
      transformorigin : string :=
-      (switch
+      (switch : string
        pointorigin
        (case ui/point-center      "center")
        (case ui/point-lefttop     "left top")

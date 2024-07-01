@@ -1205,7 +1205,7 @@ public final class Tree {
    * {brancharrow}
    */
   public static class Const_brancharrow_down extends Tree.Class_brancharrow implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -1241,7 +1241,7 @@ public final class Tree {
    * {brancharrow}
    */
   public static class Const_brancharrow_up extends Tree.Class_brancharrow implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -1277,7 +1277,7 @@ public final class Tree {
    * {brancharrow}
    */
   public static class Const_brancharrow_updown extends Tree.Class_brancharrow implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(

@@ -5912,7 +5912,7 @@ public static class vx_core {
       }
       return output;
     }
-    
+
     public vx_core.Type_msgblock vx_msgblock() {
       return vx_core.e_msgblock;
     }
@@ -6102,7 +6102,7 @@ public static class vx_core {
       }
       return output;
     }
-    
+
     public vx_core.Type_msgblock vx_msgblock() {
       return this;
     }
@@ -12612,8 +12612,7 @@ public static class vx_core {
    * {boolean}
    */
   public class Const_false : vx_core.Class_boolean, vx_core.vx_Type_const {
-
-    override
+    
     public vx_core.Type_constdef vx_constdef() {
       return vx_core.constdef_new(
         "vx/core", // pkgname
@@ -12637,7 +12636,7 @@ public static class vx_core {
     public static void const_new(Const_false output) {
     }
 
-    public override bool vx_boolean() {
+    public bool vx_boolean() {
       this.vxboolean = false;
       return this.vxboolean;
     }
@@ -12654,8 +12653,7 @@ public static class vx_core {
    * {project}
    */
   public class Const_global : vx_core.Class_project, vx_core.vx_Type_const {
-
-    override
+    
     public vx_core.Type_constdef vx_constdef() {
       return vx_core.constdef_new(
         "vx/core", // pkgname
@@ -12691,8 +12689,7 @@ public static class vx_core {
    * {int}
    */
   public class Const_infinity : vx_core.Class_int, vx_core.vx_Type_const {
-
-    override
+    
     public vx_core.Type_constdef vx_constdef() {
       return vx_core.constdef_new(
         "vx/core", // pkgname
@@ -12716,7 +12713,6 @@ public static class vx_core {
     public static void const_new(Const_infinity output) {
     }
 
-    override
     public int vx_int() {
       this.vxint = 0;
       return this.vxint;
@@ -12733,8 +12729,7 @@ public static class vx_core {
    * {mempool}
    */
   public class Const_mempool_active : vx_core.Class_mempool, vx_core.vx_Type_const {
-
-    override
+    
     public vx_core.Type_constdef vx_constdef() {
       return vx_core.constdef_new(
         "vx/core", // pkgname
@@ -12770,8 +12765,7 @@ public static class vx_core {
    * {int}
    */
   public class Const_msg_error : vx_core.Class_int, vx_core.vx_Type_const {
-
-    override
+    
     public vx_core.Type_constdef vx_constdef() {
       return vx_core.constdef_new(
         "vx/core", // pkgname
@@ -12795,7 +12789,6 @@ public static class vx_core {
     public static void const_new(Const_msg_error output) {
     }
 
-    override
     public int vx_int() {
       this.vxint = 2;
       return this.vxint;
@@ -12812,8 +12805,7 @@ public static class vx_core {
    * {int}
    */
   public class Const_msg_info : vx_core.Class_int, vx_core.vx_Type_const {
-
-    override
+    
     public vx_core.Type_constdef vx_constdef() {
       return vx_core.constdef_new(
         "vx/core", // pkgname
@@ -12837,7 +12829,6 @@ public static class vx_core {
     public static void const_new(Const_msg_info output) {
     }
 
-    override
     public int vx_int() {
       this.vxint = 0;
       return this.vxint;
@@ -12854,8 +12845,7 @@ public static class vx_core {
    * {int}
    */
   public class Const_msg_severe : vx_core.Class_int, vx_core.vx_Type_const {
-
-    override
+    
     public vx_core.Type_constdef vx_constdef() {
       return vx_core.constdef_new(
         "vx/core", // pkgname
@@ -12879,7 +12869,6 @@ public static class vx_core {
     public static void const_new(Const_msg_severe output) {
     }
 
-    override
     public int vx_int() {
       this.vxint = 3;
       return this.vxint;
@@ -12896,8 +12885,7 @@ public static class vx_core {
    * {int}
    */
   public class Const_msg_warning : vx_core.Class_int, vx_core.vx_Type_const {
-
-    override
+    
     public vx_core.Type_constdef vx_constdef() {
       return vx_core.constdef_new(
         "vx/core", // pkgname
@@ -12921,7 +12909,6 @@ public static class vx_core {
     public static void const_new(Const_msg_warning output) {
     }
 
-    override
     public int vx_int() {
       this.vxint = 1;
       return this.vxint;
@@ -12938,8 +12925,7 @@ public static class vx_core {
    * {int}
    */
   public class Const_neginfinity : vx_core.Class_int, vx_core.vx_Type_const {
-
-    override
+    
     public vx_core.Type_constdef vx_constdef() {
       return vx_core.constdef_new(
         "vx/core", // pkgname
@@ -12963,7 +12949,6 @@ public static class vx_core {
     public static void const_new(Const_neginfinity output) {
     }
 
-    override
     public int vx_int() {
       this.vxint = 0;
       return this.vxint;
@@ -12980,8 +12965,7 @@ public static class vx_core {
    * {string}
    */
   public class Const_newline : vx_core.Class_string, vx_core.vx_Type_const {
-
-    override
+    
     public vx_core.Type_constdef vx_constdef() {
       return vx_core.constdef_new(
         "vx/core", // pkgname
@@ -13005,7 +12989,6 @@ public static class vx_core {
     public static void const_new(Const_newline output) {
     }
 
-    override
     public String vx_string() {
       this.vxstring = "\n";
       return this.vxstring;
@@ -13022,8 +13005,7 @@ public static class vx_core {
    * {int}
    */
   public class Const_notanumber : vx_core.Class_int, vx_core.vx_Type_const {
-
-    override
+    
     public vx_core.Type_constdef vx_constdef() {
       return vx_core.constdef_new(
         "vx/core", // pkgname
@@ -13047,7 +13029,6 @@ public static class vx_core {
     public static void const_new(Const_notanumber output) {
     }
 
-    override
     public int vx_int() {
       this.vxint = 0;
       return this.vxint;
@@ -13064,8 +13045,7 @@ public static class vx_core {
    * {string}
    */
   public class Const_nothing : vx_core.Class_string, vx_core.vx_Type_const {
-
-    override
+    
     public vx_core.Type_constdef vx_constdef() {
       return vx_core.constdef_new(
         "vx/core", // pkgname
@@ -13089,7 +13069,6 @@ public static class vx_core {
     public static void const_new(Const_nothing output) {
     }
 
-    override
     public String vx_string() {
       this.vxstring = "nothing";
       return this.vxstring;
@@ -13106,8 +13085,7 @@ public static class vx_core {
    * {string}
    */
   public class Const_quote : vx_core.Class_string, vx_core.vx_Type_const {
-
-    override
+    
     public vx_core.Type_constdef vx_constdef() {
       return vx_core.constdef_new(
         "vx/core", // pkgname
@@ -13131,7 +13109,6 @@ public static class vx_core {
     public static void const_new(Const_quote output) {
     }
 
-    override
     public String vx_string() {
       this.vxstring = "\"";
       return this.vxstring;
@@ -13147,8 +13124,7 @@ public static class vx_core {
    * {boolean}
    */
   public class Const_true : vx_core.Class_boolean, vx_core.vx_Type_const {
-
-    override
+    
     public vx_core.Type_constdef vx_constdef() {
       return vx_core.constdef_new(
         "vx/core", // pkgname
@@ -13172,7 +13148,7 @@ public static class vx_core {
     public static void const_new(Const_true output) {
     }
 
-    public override bool vx_boolean() {
+    public bool vx_boolean() {
       this.vxboolean = true;
       return this.vxboolean;
     }
@@ -13204,10 +13180,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -13239,7 +13215,6 @@ public static class vx_core {
       return t_not;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -13297,10 +13272,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -13332,7 +13307,6 @@ public static class vx_core {
       return t_notempty;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -13393,10 +13367,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -13428,7 +13402,6 @@ public static class vx_core {
       return t_notempty_1;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -13490,10 +13463,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -13575,10 +13548,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -13660,10 +13633,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -13742,10 +13715,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -13823,10 +13796,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -13858,7 +13831,6 @@ public static class vx_core {
       return t_multiply_2;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -13927,10 +13899,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -13962,7 +13934,6 @@ public static class vx_core {
       return t_multiply_3;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -14032,10 +14003,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -14114,10 +14085,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -14195,10 +14166,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -14230,7 +14201,6 @@ public static class vx_core {
       return t_plus_2;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -14299,10 +14269,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -14334,7 +14304,6 @@ public static class vx_core {
       return t_plus_3;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -14403,10 +14372,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -14438,7 +14407,6 @@ public static class vx_core {
       return t_plus1;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -14498,10 +14466,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -14580,10 +14548,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -14661,10 +14629,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -14696,7 +14664,6 @@ public static class vx_core {
       return t_minus_2;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -14765,10 +14732,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -14800,7 +14767,6 @@ public static class vx_core {
       return t_minus_3;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -14869,10 +14835,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -14904,7 +14870,6 @@ public static class vx_core {
       return t_minus1;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -14965,10 +14930,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -15048,10 +15013,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -15130,10 +15095,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -15228,10 +15193,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -15263,7 +15228,6 @@ public static class vx_core {
       return t_lt_1;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -15339,10 +15303,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -15424,10 +15388,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -15507,10 +15471,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -15591,10 +15555,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -15626,7 +15590,6 @@ public static class vx_core {
       return t_le_1;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -15688,10 +15651,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -15769,10 +15732,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -15804,7 +15767,6 @@ public static class vx_core {
       return t_eq_1;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -15878,10 +15840,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -15960,10 +15922,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -16058,10 +16020,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -16093,7 +16055,6 @@ public static class vx_core {
       return t_gt_1;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -16167,10 +16128,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -16251,10 +16212,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -16286,7 +16247,6 @@ public static class vx_core {
       return t_ge_1;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -16347,10 +16307,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -16382,7 +16342,6 @@ public static class vx_core {
       return t_allowfuncs_from_security;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -16441,10 +16400,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -16476,7 +16435,6 @@ public static class vx_core {
       return t_allowtypenames_from_typedef;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -16537,10 +16495,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -16572,7 +16530,6 @@ public static class vx_core {
       return t_allowtypes_from_typedef;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -16631,10 +16588,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -16712,10 +16669,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -16747,7 +16704,6 @@ public static class vx_core {
       return t_and_1;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -16827,20 +16783,11 @@ public static class vx_core {
    * (func any<-any)
    */
   public interface Func_any_from_any : vx_core.Type_func, vx_core.Type_replfunc {
-    public Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn);
+    public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn);
     public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
   public class Class_any_from_any : vx_core.Class_base, Func_any_from_any {
-
-    public IFn fn = null;
-
-    override
-    public Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
-      Class_any_from_any output = new Class_any_from_any();
-      output.fn = fn;
-      return output;
-    }
 
     public override vx_core.Func_any_from_any vx_new(params Object[] vals) {
       Class_any_from_any output = new Class_any_from_any();
@@ -16852,10 +16799,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -16890,6 +16837,14 @@ public static class vx_core {
     @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve(vx_core.Type_any value);
+    }
+
+    public IFn fn = null;
+
+    public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
+      Class_any_from_any output = new Class_any_from_any();
+      output.fn = fn;
+      return output;
     }
 
     public vx_core.Type_any vx_repl(vx_core.Type_anylist arglist) {
@@ -16930,20 +16885,11 @@ public static class vx_core {
    * (func any<-any-async)
    */
   public interface Func_any_from_any_async : vx_core.Type_func, vx_core.Type_replfunc_async {
-    public Func_any_from_any_async vx_fn_new(vx_core.Class_any_from_any_async.IFn fn);
+    public vx_core.Func_any_from_any_async vx_fn_new(vx_core.Class_any_from_any_async.IFn fn);
     public Task<T> vx_any_from_any_async<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
   public class Class_any_from_any_async : vx_core.Class_base, Func_any_from_any_async {
-
-    public IFn fn = null;
-
-    override
-    public Func_any_from_any_async vx_fn_new(vx_core.Class_any_from_any_async.IFn fn) {
-      Class_any_from_any_async output = new Class_any_from_any_async();
-      output.fn = fn;
-      return output;
-    }
 
     public override vx_core.Func_any_from_any_async vx_new(params Object[] vals) {
       Class_any_from_any_async output = new Class_any_from_any_async();
@@ -16955,10 +16901,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -16993,6 +16939,14 @@ public static class vx_core {
     @FunctionalInterface
     public interface IFn {
       public Task<vx_core.Type_any> resolve(vx_core.Type_any value);
+    }
+
+    public IFn fn = null;
+
+    public vx_core.Func_any_from_any_async vx_fn_new(vx_core.Class_any_from_any_async.IFn fn) {
+      Class_any_from_any_async output = new Class_any_from_any_async();
+      output.fn = fn;
+      return output;
     }
 
     public Task<vx_core.Type_any> vx_repl(vx_core.Type_anylist arglist) {
@@ -17034,20 +16988,11 @@ public static class vx_core {
    * (func any<-any-context)
    */
   public interface Func_any_from_any_context : vx_core.Type_func, vx_core.Type_replfunc {
-    public Func_any_from_any_context vx_fn_new(vx_core.Class_any_from_any_context.IFn fn);
+    public vx_core.Func_any_from_any_context vx_fn_new(vx_core.Class_any_from_any_context.IFn fn);
     public T vx_any_from_any_context<T, U>(T generic_any_1, vx_core.Type_context context, U value) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
   public class Class_any_from_any_context : vx_core.Class_base, Func_any_from_any_context {
-
-    public IFn fn = null;
-
-    override
-    public Func_any_from_any_context vx_fn_new(vx_core.Class_any_from_any_context.IFn fn) {
-      Class_any_from_any_context output = new Class_any_from_any_context();
-      output.fn = fn;
-      return output;
-    }
 
     public override vx_core.Func_any_from_any_context vx_new(params Object[] vals) {
       Class_any_from_any_context output = new Class_any_from_any_context();
@@ -17059,10 +17004,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -17097,6 +17042,14 @@ public static class vx_core {
     @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve(vx_core.Type_context context, vx_core.Type_any value);
+    }
+
+    public IFn fn = null;
+
+    public vx_core.Func_any_from_any_context vx_fn_new(vx_core.Class_any_from_any_context.IFn fn) {
+      Class_any_from_any_context output = new Class_any_from_any_context();
+      output.fn = fn;
+      return output;
     }
 
     public vx_core.Type_any vx_repl(vx_core.Type_anylist arglist) {
@@ -17138,20 +17091,11 @@ public static class vx_core {
    * (func any<-any-context-async)
    */
   public interface Func_any_from_any_context_async : vx_core.Type_func, vx_core.Type_replfunc_async {
-    public Func_any_from_any_context_async vx_fn_new(vx_core.Class_any_from_any_context_async.IFn fn);
+    public vx_core.Func_any_from_any_context_async vx_fn_new(vx_core.Class_any_from_any_context_async.IFn fn);
     public Task<T> vx_any_from_any_context_async<T, U>(T generic_any_1, vx_core.Type_context context, U value) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
   public class Class_any_from_any_context_async : vx_core.Class_base, Func_any_from_any_context_async {
-
-    public IFn fn = null;
-
-    override
-    public Func_any_from_any_context_async vx_fn_new(vx_core.Class_any_from_any_context_async.IFn fn) {
-      Class_any_from_any_context_async output = new Class_any_from_any_context_async();
-      output.fn = fn;
-      return output;
-    }
 
     public override vx_core.Func_any_from_any_context_async vx_new(params Object[] vals) {
       Class_any_from_any_context_async output = new Class_any_from_any_context_async();
@@ -17163,10 +17107,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -17201,6 +17145,14 @@ public static class vx_core {
     @FunctionalInterface
     public interface IFn {
       public Task<vx_core.Type_any> resolve(vx_core.Type_context context, vx_core.Type_any value);
+    }
+
+    public IFn fn = null;
+
+    public vx_core.Func_any_from_any_context_async vx_fn_new(vx_core.Class_any_from_any_context_async.IFn fn) {
+      Class_any_from_any_context_async output = new Class_any_from_any_context_async();
+      output.fn = fn;
+      return output;
     }
 
     public Task<vx_core.Type_any> vx_repl(vx_core.Type_anylist arglist) {
@@ -17245,20 +17197,11 @@ public static class vx_core {
    * (func any<-any-key-value)
    */
   public interface Func_any_from_any_key_value : vx_core.Type_func, vx_core.Type_replfunc {
-    public Func_any_from_any_key_value vx_fn_new(vx_core.Class_any_from_any_key_value.IFn fn);
+    public vx_core.Func_any_from_any_key_value vx_fn_new(vx_core.Class_any_from_any_key_value.IFn fn);
     public T vx_any_from_any_key_value<T, U>(T generic_any_1, T current, vx_core.Type_string key, U value) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
   public class Class_any_from_any_key_value : vx_core.Class_base, Func_any_from_any_key_value {
-
-    public IFn fn = null;
-
-    override
-    public Func_any_from_any_key_value vx_fn_new(vx_core.Class_any_from_any_key_value.IFn fn) {
-      Class_any_from_any_key_value output = new Class_any_from_any_key_value();
-      output.fn = fn;
-      return output;
-    }
 
     public override vx_core.Func_any_from_any_key_value vx_new(params Object[] vals) {
       Class_any_from_any_key_value output = new Class_any_from_any_key_value();
@@ -17270,10 +17213,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -17308,6 +17251,14 @@ public static class vx_core {
     @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve(vx_core.Type_any current, vx_core.Type_string key, vx_core.Type_any value);
+    }
+
+    public IFn fn = null;
+
+    public vx_core.Func_any_from_any_key_value vx_fn_new(vx_core.Class_any_from_any_key_value.IFn fn) {
+      Class_any_from_any_key_value output = new Class_any_from_any_key_value();
+      output.fn = fn;
+      return output;
     }
 
     public vx_core.Type_any vx_repl(vx_core.Type_anylist arglist) {
@@ -17347,20 +17298,11 @@ public static class vx_core {
    * (func any<-func)
    */
   public interface Func_any_from_func : vx_core.Type_func, vx_core.Type_replfunc {
-    public Func_any_from_func vx_fn_new(vx_core.Class_any_from_func.IFn fn);
+    public vx_core.Func_any_from_func vx_fn_new(vx_core.Class_any_from_func.IFn fn);
     public T vx_any_from_func<T>(T generic_any_1) where T : vx_core.Type_any;
   }
 
   public class Class_any_from_func : vx_core.Class_base, Func_any_from_func {
-
-    public IFn fn = null;
-
-    override
-    public Func_any_from_func vx_fn_new(vx_core.Class_any_from_func.IFn fn) {
-      Class_any_from_func output = new Class_any_from_func();
-      output.fn = fn;
-      return output;
-    }
 
     public override vx_core.Func_any_from_func vx_new(params Object[] vals) {
       Class_any_from_func output = new Class_any_from_func();
@@ -17372,10 +17314,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -17410,6 +17352,14 @@ public static class vx_core {
     @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve();
+    }
+
+    public IFn fn = null;
+
+    public vx_core.Func_any_from_func vx_fn_new(vx_core.Class_any_from_func.IFn fn) {
+      Class_any_from_func output = new Class_any_from_func();
+      output.fn = fn;
+      return output;
     }
 
     public vx_core.Type_any vx_repl(vx_core.Type_anylist arglist) {
@@ -17448,20 +17398,11 @@ public static class vx_core {
    * (func any<-func-async)
    */
   public interface Func_any_from_func_async : vx_core.Type_func, vx_core.Type_replfunc_async {
-    public Func_any_from_func_async vx_fn_new(vx_core.Class_any_from_func_async.IFn fn);
+    public vx_core.Func_any_from_func_async vx_fn_new(vx_core.Class_any_from_func_async.IFn fn);
     public Task<T> vx_any_from_func_async<T>(T generic_any_1) where T : vx_core.Type_any;
   }
 
   public class Class_any_from_func_async : vx_core.Class_base, Func_any_from_func_async {
-
-    public IFn fn = null;
-
-    override
-    public Func_any_from_func_async vx_fn_new(vx_core.Class_any_from_func_async.IFn fn) {
-      Class_any_from_func_async output = new Class_any_from_func_async();
-      output.fn = fn;
-      return output;
-    }
 
     public override vx_core.Func_any_from_func_async vx_new(params Object[] vals) {
       Class_any_from_func_async output = new Class_any_from_func_async();
@@ -17473,10 +17414,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -17511,6 +17452,14 @@ public static class vx_core {
     @FunctionalInterface
     public interface IFn {
       public Task<vx_core.Type_any> resolve();
+    }
+
+    public IFn fn = null;
+
+    public vx_core.Func_any_from_func_async vx_fn_new(vx_core.Class_any_from_func_async.IFn fn) {
+      Class_any_from_func_async output = new Class_any_from_func_async();
+      output.fn = fn;
+      return output;
     }
 
     public Task<vx_core.Type_any> vx_repl(vx_core.Type_anylist arglist) {
@@ -17551,20 +17500,11 @@ public static class vx_core {
    * (func any<-int)
    */
   public interface Func_any_from_int : vx_core.Type_func, vx_core.Type_replfunc {
-    public Func_any_from_int vx_fn_new(vx_core.Class_any_from_int.IFn fn);
+    public vx_core.Func_any_from_int vx_fn_new(vx_core.Class_any_from_int.IFn fn);
     public T vx_any_from_int<T>(T generic_any_1, vx_core.Type_int value) where T : vx_core.Type_any;
   }
 
   public class Class_any_from_int : vx_core.Class_base, Func_any_from_int {
-
-    public IFn fn = null;
-
-    override
-    public Func_any_from_int vx_fn_new(vx_core.Class_any_from_int.IFn fn) {
-      Class_any_from_int output = new Class_any_from_int();
-      output.fn = fn;
-      return output;
-    }
 
     public override vx_core.Func_any_from_int vx_new(params Object[] vals) {
       Class_any_from_int output = new Class_any_from_int();
@@ -17576,10 +17516,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -17614,6 +17554,14 @@ public static class vx_core {
     @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve(vx_core.Type_int value);
+    }
+
+    public IFn fn = null;
+
+    public vx_core.Func_any_from_int vx_fn_new(vx_core.Class_any_from_int.IFn fn) {
+      Class_any_from_int output = new Class_any_from_int();
+      output.fn = fn;
+      return output;
     }
 
     public vx_core.Type_any vx_repl(vx_core.Type_anylist arglist) {
@@ -17653,20 +17601,11 @@ public static class vx_core {
    * (func any<-int-any)
    */
   public interface Func_any_from_int_any : vx_core.Type_func, vx_core.Type_replfunc {
-    public Func_any_from_int_any vx_fn_new(vx_core.Class_any_from_int_any.IFn fn);
+    public vx_core.Func_any_from_int_any vx_fn_new(vx_core.Class_any_from_int_any.IFn fn);
     public T vx_any_from_int_any<T, U>(T generic_any_1, vx_core.Type_int num, U val) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
   public class Class_any_from_int_any : vx_core.Class_base, Func_any_from_int_any {
-
-    public IFn fn = null;
-
-    override
-    public Func_any_from_int_any vx_fn_new(vx_core.Class_any_from_int_any.IFn fn) {
-      Class_any_from_int_any output = new Class_any_from_int_any();
-      output.fn = fn;
-      return output;
-    }
 
     public override vx_core.Func_any_from_int_any vx_new(params Object[] vals) {
       Class_any_from_int_any output = new Class_any_from_int_any();
@@ -17678,10 +17617,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -17716,6 +17655,14 @@ public static class vx_core {
     @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve(vx_core.Type_int num, vx_core.Type_any val);
+    }
+
+    public IFn fn = null;
+
+    public vx_core.Func_any_from_int_any vx_fn_new(vx_core.Class_any_from_int_any.IFn fn) {
+      Class_any_from_int_any output = new Class_any_from_int_any();
+      output.fn = fn;
+      return output;
     }
 
     public vx_core.Type_any vx_repl(vx_core.Type_anylist arglist) {
@@ -17756,20 +17703,11 @@ public static class vx_core {
    * (func any<-key-value)
    */
   public interface Func_any_from_key_value : vx_core.Type_func, vx_core.Type_replfunc {
-    public Func_any_from_key_value vx_fn_new(vx_core.Class_any_from_key_value.IFn fn);
+    public vx_core.Func_any_from_key_value vx_fn_new(vx_core.Class_any_from_key_value.IFn fn);
     public T vx_any_from_key_value<T, U>(T generic_any_1, vx_core.Type_string key, U val) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
   public class Class_any_from_key_value : vx_core.Class_base, Func_any_from_key_value {
-
-    public IFn fn = null;
-
-    override
-    public Func_any_from_key_value vx_fn_new(vx_core.Class_any_from_key_value.IFn fn) {
-      Class_any_from_key_value output = new Class_any_from_key_value();
-      output.fn = fn;
-      return output;
-    }
 
     public override vx_core.Func_any_from_key_value vx_new(params Object[] vals) {
       Class_any_from_key_value output = new Class_any_from_key_value();
@@ -17781,10 +17719,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -17819,6 +17757,14 @@ public static class vx_core {
     @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve(vx_core.Type_string key, vx_core.Type_any val);
+    }
+
+    public IFn fn = null;
+
+    public vx_core.Func_any_from_key_value vx_fn_new(vx_core.Class_any_from_key_value.IFn fn) {
+      Class_any_from_key_value output = new Class_any_from_key_value();
+      output.fn = fn;
+      return output;
     }
 
     public vx_core.Type_any vx_repl(vx_core.Type_anylist arglist) {
@@ -17861,20 +17807,11 @@ public static class vx_core {
    * (func any<-key-value-async)
    */
   public interface Func_any_from_key_value_async : vx_core.Type_func, vx_core.Type_replfunc_async {
-    public Func_any_from_key_value_async vx_fn_new(vx_core.Class_any_from_key_value_async.IFn fn);
+    public vx_core.Func_any_from_key_value_async vx_fn_new(vx_core.Class_any_from_key_value_async.IFn fn);
     public Task<T> vx_any_from_key_value_async<T, U>(T generic_any_1, vx_core.Type_string key, U val) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
   public class Class_any_from_key_value_async : vx_core.Class_base, Func_any_from_key_value_async {
-
-    public IFn fn = null;
-
-    override
-    public Func_any_from_key_value_async vx_fn_new(vx_core.Class_any_from_key_value_async.IFn fn) {
-      Class_any_from_key_value_async output = new Class_any_from_key_value_async();
-      output.fn = fn;
-      return output;
-    }
 
     public override vx_core.Func_any_from_key_value_async vx_new(params Object[] vals) {
       Class_any_from_key_value_async output = new Class_any_from_key_value_async();
@@ -17886,10 +17823,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -17924,6 +17861,14 @@ public static class vx_core {
     @FunctionalInterface
     public interface IFn {
       public Task<vx_core.Type_any> resolve(vx_core.Type_string key, vx_core.Type_any val);
+    }
+
+    public IFn fn = null;
+
+    public vx_core.Func_any_from_key_value_async vx_fn_new(vx_core.Class_any_from_key_value_async.IFn fn) {
+      Class_any_from_key_value_async output = new Class_any_from_key_value_async();
+      output.fn = fn;
+      return output;
     }
 
     public Task<vx_core.Type_any> vx_repl(vx_core.Type_anylist arglist) {
@@ -17982,10 +17927,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -18066,10 +18011,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -18151,10 +18096,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -18235,10 +18180,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -18319,10 +18264,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -18386,20 +18331,11 @@ public static class vx_core {
    * (func any<-none)
    */
   public interface Func_any_from_none : vx_core.Type_func, vx_core.Type_replfunc {
-    public Func_any_from_none vx_fn_new(vx_core.Class_any_from_none.IFn fn);
+    public vx_core.Func_any_from_none vx_fn_new(vx_core.Class_any_from_none.IFn fn);
     public T vx_any_from_none<T>(T generic_any_1) where T : vx_core.Type_any;
   }
 
   public class Class_any_from_none : vx_core.Class_base, Func_any_from_none {
-
-    public IFn fn = null;
-
-    override
-    public Func_any_from_none vx_fn_new(vx_core.Class_any_from_none.IFn fn) {
-      Class_any_from_none output = new Class_any_from_none();
-      output.fn = fn;
-      return output;
-    }
 
     public override vx_core.Func_any_from_none vx_new(params Object[] vals) {
       Class_any_from_none output = new Class_any_from_none();
@@ -18411,10 +18347,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -18449,6 +18385,14 @@ public static class vx_core {
     @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve();
+    }
+
+    public IFn fn = null;
+
+    public vx_core.Func_any_from_none vx_fn_new(vx_core.Class_any_from_none.IFn fn) {
+      Class_any_from_none output = new Class_any_from_none();
+      output.fn = fn;
+      return output;
     }
 
     public vx_core.Type_any vx_repl(vx_core.Type_anylist arglist) {
@@ -18487,20 +18431,11 @@ public static class vx_core {
    * (func any<-none-async)
    */
   public interface Func_any_from_none_async : vx_core.Type_func, vx_core.Type_replfunc_async {
-    public Func_any_from_none_async vx_fn_new(vx_core.Class_any_from_none_async.IFn fn);
+    public vx_core.Func_any_from_none_async vx_fn_new(vx_core.Class_any_from_none_async.IFn fn);
     public Task<T> vx_any_from_none_async<T>(T generic_any_1) where T : vx_core.Type_any;
   }
 
   public class Class_any_from_none_async : vx_core.Class_base, Func_any_from_none_async {
-
-    public IFn fn = null;
-
-    override
-    public Func_any_from_none_async vx_fn_new(vx_core.Class_any_from_none_async.IFn fn) {
-      Class_any_from_none_async output = new Class_any_from_none_async();
-      output.fn = fn;
-      return output;
-    }
 
     public override vx_core.Func_any_from_none_async vx_new(params Object[] vals) {
       Class_any_from_none_async output = new Class_any_from_none_async();
@@ -18512,10 +18447,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -18550,6 +18485,14 @@ public static class vx_core {
     @FunctionalInterface
     public interface IFn {
       public Task<vx_core.Type_any> resolve();
+    }
+
+    public IFn fn = null;
+
+    public vx_core.Func_any_from_none_async vx_fn_new(vx_core.Class_any_from_none_async.IFn fn) {
+      Class_any_from_none_async output = new Class_any_from_none_async();
+      output.fn = fn;
+      return output;
     }
 
     public Task<vx_core.Type_any> vx_repl(vx_core.Type_anylist arglist) {
@@ -18590,20 +18533,11 @@ public static class vx_core {
    * (func any<-reduce)
    */
   public interface Func_any_from_reduce : vx_core.Type_func, vx_core.Type_replfunc {
-    public Func_any_from_reduce vx_fn_new(vx_core.Class_any_from_reduce.IFn fn);
+    public vx_core.Func_any_from_reduce vx_fn_new(vx_core.Class_any_from_reduce.IFn fn);
     public T vx_any_from_reduce<T, U>(T generic_any_1, T result, U item) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
   public class Class_any_from_reduce : vx_core.Class_base, Func_any_from_reduce {
-
-    public IFn fn = null;
-
-    override
-    public Func_any_from_reduce vx_fn_new(vx_core.Class_any_from_reduce.IFn fn) {
-      Class_any_from_reduce output = new Class_any_from_reduce();
-      output.fn = fn;
-      return output;
-    }
 
     public override vx_core.Func_any_from_reduce vx_new(params Object[] vals) {
       Class_any_from_reduce output = new Class_any_from_reduce();
@@ -18615,10 +18549,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -18653,6 +18587,14 @@ public static class vx_core {
     @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve(vx_core.Type_any result, vx_core.Type_any item);
+    }
+
+    public IFn fn = null;
+
+    public vx_core.Func_any_from_reduce vx_fn_new(vx_core.Class_any_from_reduce.IFn fn) {
+      Class_any_from_reduce output = new Class_any_from_reduce();
+      output.fn = fn;
+      return output;
     }
 
     public vx_core.Type_any vx_repl(vx_core.Type_anylist arglist) {
@@ -18694,20 +18636,11 @@ public static class vx_core {
    * (func any<-reduce-async)
    */
   public interface Func_any_from_reduce_async : vx_core.Type_func, vx_core.Type_replfunc_async {
-    public Func_any_from_reduce_async vx_fn_new(vx_core.Class_any_from_reduce_async.IFn fn);
+    public vx_core.Func_any_from_reduce_async vx_fn_new(vx_core.Class_any_from_reduce_async.IFn fn);
     public Task<T> vx_any_from_reduce_async<T, U>(T generic_any_1, T result, U item) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
   public class Class_any_from_reduce_async : vx_core.Class_base, Func_any_from_reduce_async {
-
-    public IFn fn = null;
-
-    override
-    public Func_any_from_reduce_async vx_fn_new(vx_core.Class_any_from_reduce_async.IFn fn) {
-      Class_any_from_reduce_async output = new Class_any_from_reduce_async();
-      output.fn = fn;
-      return output;
-    }
 
     public override vx_core.Func_any_from_reduce_async vx_new(params Object[] vals) {
       Class_any_from_reduce_async output = new Class_any_from_reduce_async();
@@ -18719,10 +18652,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -18757,6 +18690,14 @@ public static class vx_core {
     @FunctionalInterface
     public interface IFn {
       public Task<vx_core.Type_any> resolve(vx_core.Type_any result, vx_core.Type_any item);
+    }
+
+    public IFn fn = null;
+
+    public vx_core.Func_any_from_reduce_async vx_fn_new(vx_core.Class_any_from_reduce_async.IFn fn) {
+      Class_any_from_reduce_async output = new Class_any_from_reduce_async();
+      output.fn = fn;
+      return output;
     }
 
     public Task<vx_core.Type_any> vx_repl(vx_core.Type_anylist arglist) {
@@ -18800,20 +18741,11 @@ public static class vx_core {
    * (func any<-reduce-next)
    */
   public interface Func_any_from_reduce_next : vx_core.Type_func, vx_core.Type_replfunc {
-    public Func_any_from_reduce_next vx_fn_new(vx_core.Class_any_from_reduce_next.IFn fn);
+    public vx_core.Func_any_from_reduce_next vx_fn_new(vx_core.Class_any_from_reduce_next.IFn fn);
     public T vx_any_from_reduce_next<T, U>(T generic_any_1, T result, U current, U next) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
   public class Class_any_from_reduce_next : vx_core.Class_base, Func_any_from_reduce_next {
-
-    public IFn fn = null;
-
-    override
-    public Func_any_from_reduce_next vx_fn_new(vx_core.Class_any_from_reduce_next.IFn fn) {
-      Class_any_from_reduce_next output = new Class_any_from_reduce_next();
-      output.fn = fn;
-      return output;
-    }
 
     public override vx_core.Func_any_from_reduce_next vx_new(params Object[] vals) {
       Class_any_from_reduce_next output = new Class_any_from_reduce_next();
@@ -18825,10 +18757,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -18863,6 +18795,14 @@ public static class vx_core {
     @FunctionalInterface
     public interface IFn {
       public vx_core.Type_any resolve(vx_core.Type_any result, vx_core.Type_any current, vx_core.Type_any next);
+    }
+
+    public IFn fn = null;
+
+    public vx_core.Func_any_from_reduce_next vx_fn_new(vx_core.Class_any_from_reduce_next.IFn fn) {
+      Class_any_from_reduce_next output = new Class_any_from_reduce_next();
+      output.fn = fn;
+      return output;
     }
 
     public vx_core.Type_any vx_repl(vx_core.Type_anylist arglist) {
@@ -18906,20 +18846,11 @@ public static class vx_core {
    * (func any<-reduce-next-async)
    */
   public interface Func_any_from_reduce_next_async : vx_core.Type_func, vx_core.Type_replfunc_async {
-    public Func_any_from_reduce_next_async vx_fn_new(vx_core.Class_any_from_reduce_next_async.IFn fn);
+    public vx_core.Func_any_from_reduce_next_async vx_fn_new(vx_core.Class_any_from_reduce_next_async.IFn fn);
     public Task<T> vx_any_from_reduce_next_async<T, U>(T generic_any_1, T result, U current, U next) where T : vx_core.Type_any where U : vx_core.Type_any;
   }
 
   public class Class_any_from_reduce_next_async : vx_core.Class_base, Func_any_from_reduce_next_async {
-
-    public IFn fn = null;
-
-    override
-    public Func_any_from_reduce_next_async vx_fn_new(vx_core.Class_any_from_reduce_next_async.IFn fn) {
-      Class_any_from_reduce_next_async output = new Class_any_from_reduce_next_async();
-      output.fn = fn;
-      return output;
-    }
 
     public override vx_core.Func_any_from_reduce_next_async vx_new(params Object[] vals) {
       Class_any_from_reduce_next_async output = new Class_any_from_reduce_next_async();
@@ -18931,10 +18862,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -18969,6 +18900,14 @@ public static class vx_core {
     @FunctionalInterface
     public interface IFn {
       public Task<vx_core.Type_any> resolve(vx_core.Type_any result, vx_core.Type_any current, vx_core.Type_any next);
+    }
+
+    public IFn fn = null;
+
+    public vx_core.Func_any_from_reduce_next_async vx_fn_new(vx_core.Class_any_from_reduce_next_async.IFn fn) {
+      Class_any_from_reduce_next_async output = new Class_any_from_reduce_next_async();
+      output.fn = fn;
+      return output;
     }
 
     public Task<vx_core.Type_any> vx_repl(vx_core.Type_anylist arglist) {
@@ -19028,10 +18967,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -19112,10 +19051,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -19147,8 +19086,9 @@ public static class vx_core {
       return t_async;
     }
 
-    override
-    public vx_core.Func_any_from_any_async vx_fn_new(vx_core.Class_any_from_any_async.IFn fn) {return vx_core.e_any_from_any_async;}
+    public vx_core.Func_any_from_any_async vx_fn_new(vx_core.Class_any_from_any_async.IFn fn) {
+      return vx_core.e_any_from_any_async;
+    }
 
     public override Task<T> vx_any_from_any_async<T, U>(T generic_any_1, U value) {
       T inputval = vx_core.f_any_from_any(generic_any_1, value);
@@ -19203,10 +19143,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -19238,7 +19178,6 @@ public static class vx_core {
       return t_boolean_permission_from_func;
     }
 
-    override
     public vx_core.Func_any_from_any_context vx_fn_new(vx_core.Class_any_from_any_context.IFn fn) {
       return vx_core.e_any_from_any_context;
     }
@@ -19247,7 +19186,7 @@ public static class vx_core {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_func inputval = (vx_core.Type_func)value;
       vx_core.Type_any outputval = vx_core.f_boolean_permission_from_func(context, inputval);
-      output = vx_core.f_any_from_any(generic_any_1, outputval);
+      output = vx_core.f_any_from_any_context(generic_any_1, context, outputval);
       return output;
     }
 
@@ -19305,10 +19244,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -19372,20 +19311,11 @@ public static class vx_core {
    * (func boolean<-any)
    */
   public interface Func_boolean_from_any : vx_core.Type_func, vx_core.Type_replfunc {
-    public Func_boolean_from_any vx_fn_new(vx_core.Class_boolean_from_any.IFn fn);
+    public vx_core.Func_boolean_from_any vx_fn_new(vx_core.Class_boolean_from_any.IFn fn);
     public vx_core.Type_boolean vx_boolean_from_any(vx_core.Type_any value);
   }
 
   public class Class_boolean_from_any : vx_core.Class_base, Func_boolean_from_any {
-
-    public IFn fn = null;
-
-    override
-    public Func_boolean_from_any vx_fn_new(vx_core.Class_boolean_from_any.IFn fn) {
-      Class_boolean_from_any output = new Class_boolean_from_any();
-      output.fn = fn;
-      return output;
-    }
 
     public override vx_core.Func_boolean_from_any vx_new(params Object[] vals) {
       Class_boolean_from_any output = new Class_boolean_from_any();
@@ -19397,10 +19327,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -19437,6 +19367,14 @@ public static class vx_core {
       public vx_core.Type_any resolve(vx_core.Type_any value);
     }
 
+    public IFn fn = null;
+
+    public vx_core.Func_boolean_from_any vx_fn_new(vx_core.Class_boolean_from_any.IFn fn) {
+      Class_boolean_from_any output = new Class_boolean_from_any();
+      output.fn = fn;
+      return output;
+    }
+
     public vx_core.Type_any vx_repl(vx_core.Type_anylist arglist) {
       vx_core.Type_any output = vx_core.e_any;
       vx_core.Type_any value = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)));
@@ -19471,7 +19409,7 @@ public static class vx_core {
    * (func boolean<-func)
    */
   public interface Func_boolean_from_func : vx_core.Type_func, vx_core.Type_replfunc {
-    public Func_boolean_from_func vx_fn_new(vx_core.Class_any_from_func.IFn fn);
+    public vx_core.Func_boolean_from_func vx_fn_new(vx_core.Class_any_from_func.IFn fn);
     public vx_core.Type_boolean vx_boolean_from_func();
   }
 
@@ -19487,10 +19425,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -19529,8 +19467,7 @@ public static class vx_core {
 
     public vx_core.Class_any_from_func.IFn fn = null;
 
-    override
-    public Func_boolean_from_func vx_fn_new(vx_core.Class_any_from_func.IFn fn) {
+    public vx_core.Func_boolean_from_func vx_fn_new(vx_core.Class_any_from_func.IFn fn) {
       Class_boolean_from_func output = new Class_boolean_from_func();
       output.fn = fn;
       return output;
@@ -19569,7 +19506,7 @@ public static class vx_core {
    * (func boolean<-none)
    */
   public interface Func_boolean_from_none : vx_core.Type_func, vx_core.Type_replfunc {
-    public Func_boolean_from_none vx_fn_new(vx_core.Class_any_from_func.IFn fn);
+    public vx_core.Func_boolean_from_none vx_fn_new(vx_core.Class_any_from_func.IFn fn);
     public vx_core.Type_boolean vx_boolean_from_none();
   }
 
@@ -19585,10 +19522,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -19627,8 +19564,7 @@ public static class vx_core {
 
     public vx_core.Class_any_from_func.IFn fn = null;
 
-    override
-    public Func_boolean_from_none vx_fn_new(vx_core.Class_any_from_func.IFn fn) {
+    public vx_core.Func_boolean_from_none vx_fn_new(vx_core.Class_any_from_func.IFn fn) {
       Class_boolean_from_none output = new Class_boolean_from_none();
       output.fn = fn;
       return output;
@@ -19683,10 +19619,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -19775,10 +19711,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -19868,10 +19804,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -19950,10 +19886,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -20032,10 +19968,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -20113,10 +20049,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -20148,7 +20084,6 @@ public static class vx_core {
       return t_context_main;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -20210,10 +20145,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -20289,10 +20224,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -20324,7 +20259,6 @@ public static class vx_core {
       return t_else;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -20391,10 +20325,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -20426,7 +20360,6 @@ public static class vx_core {
       return t_empty;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -20482,10 +20415,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -20517,7 +20450,6 @@ public static class vx_core {
       return t_extends_from_any;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -20578,10 +20510,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -20613,7 +20545,6 @@ public static class vx_core {
       return t_extends_from_typedef;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -20672,10 +20603,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -20707,7 +20638,6 @@ public static class vx_core {
       return t_first_from_list;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -20768,10 +20698,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -20850,10 +20780,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -20885,7 +20815,6 @@ public static class vx_core {
       return t_float_from_string;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -20944,10 +20873,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -21025,10 +20954,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -21060,7 +20989,6 @@ public static class vx_core {
       return t_funcdef_from_func;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -21118,10 +21046,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -21153,7 +21081,6 @@ public static class vx_core {
       return t_funcname_from_funcdef;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -21220,10 +21147,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -21304,10 +21231,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -21387,10 +21314,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -21422,7 +21349,6 @@ public static class vx_core {
       return t_if_2;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -21465,7 +21391,7 @@ public static class vx_core {
    * (func int<-func)
    */
   public interface Func_int_from_func : vx_core.Type_func, vx_core.Type_replfunc {
-    public Func_int_from_func vx_fn_new(vx_core.Class_any_from_func.IFn fn);
+    public vx_core.Func_int_from_func vx_fn_new(vx_core.Class_any_from_func.IFn fn);
     public vx_core.Type_int vx_int_from_func();
   }
 
@@ -21481,10 +21407,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -21518,8 +21444,7 @@ public static class vx_core {
 
     public vx_core.Class_any_from_func.IFn fn = null;
 
-    override
-    public Func_int_from_func vx_fn_new(vx_core.Class_any_from_func.IFn fn) {
+    public vx_core.Func_int_from_func vx_fn_new(vx_core.Class_any_from_func.IFn fn) {
       Class_int_from_func output = new Class_int_from_func();
       output.fn = fn;
       return output;
@@ -21569,10 +21494,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -21604,7 +21529,6 @@ public static class vx_core {
       return t_int_from_string;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -21690,10 +21614,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -21725,7 +21649,6 @@ public static class vx_core {
       return t_is_empty;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -21783,10 +21706,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -21818,7 +21741,6 @@ public static class vx_core {
       return t_is_empty_1;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -21877,10 +21799,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -21958,10 +21880,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -21993,7 +21915,6 @@ public static class vx_core {
       return t_is_float;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -22051,10 +21972,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -22086,7 +22007,6 @@ public static class vx_core {
       return t_is_func;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -22144,10 +22064,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -22179,7 +22099,6 @@ public static class vx_core {
       return t_is_int;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -22237,10 +22156,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -22272,7 +22191,6 @@ public static class vx_core {
       return t_is_number;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -22355,10 +22273,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -22390,7 +22308,6 @@ public static class vx_core {
       return t_is_pass_from_permission;
     }
 
-    override
     public vx_core.Func_any_from_any_context vx_fn_new(vx_core.Class_any_from_any_context.IFn fn) {
       return vx_core.e_any_from_any_context;
     }
@@ -22399,7 +22316,7 @@ public static class vx_core {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_permission inputval = (vx_core.Type_permission)value;
       vx_core.Type_any outputval = vx_core.f_is_pass_from_permission(context, inputval);
-      output = vx_core.f_any_from_any(generic_any_1, outputval);
+      output = vx_core.f_any_from_any_context(generic_any_1, context, outputval);
       return output;
     }
 
@@ -22457,10 +22374,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -22492,7 +22409,6 @@ public static class vx_core {
       return t_last_from_list;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -22558,10 +22474,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -22593,7 +22509,6 @@ public static class vx_core {
       return t_length;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -22651,10 +22566,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -22686,7 +22601,6 @@ public static class vx_core {
       return t_length_1;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -22744,10 +22658,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -22779,7 +22693,6 @@ public static class vx_core {
       return t_length_2;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -22840,10 +22753,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -22924,10 +22837,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -23006,10 +22919,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -23041,7 +22954,6 @@ public static class vx_core {
       return t_list_join_from_list;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -23109,10 +23021,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -23191,10 +23103,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -23226,7 +23138,6 @@ public static class vx_core {
       return t_list_from_list;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -23294,10 +23205,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -23379,10 +23290,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -23463,10 +23374,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -23545,10 +23456,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -23580,7 +23491,6 @@ public static class vx_core {
       return t_list_from_map;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -23649,10 +23559,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -23733,10 +23643,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -23816,10 +23726,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -23851,7 +23761,6 @@ public static class vx_core {
       return t_list_from_type;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -23909,10 +23818,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -23944,7 +23853,6 @@ public static class vx_core {
       return t_log;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -24003,10 +23911,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -24085,10 +23993,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -24120,7 +24028,6 @@ public static class vx_core {
       return t_main;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -24183,10 +24090,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -24265,10 +24172,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -24300,7 +24207,6 @@ public static class vx_core {
       return t_map_from_map;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -24369,10 +24275,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -24451,10 +24357,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -24486,7 +24392,6 @@ public static class vx_core {
       return t_msg_from_error;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -24554,10 +24459,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -24648,10 +24553,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -24743,10 +24648,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -24778,7 +24683,6 @@ public static class vx_core {
       return t_msg_from_warning;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -24846,10 +24750,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -24930,10 +24834,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -25018,10 +24922,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -25053,7 +24957,6 @@ public static class vx_core {
       return t_name_from_typedef;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -25112,10 +25015,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -25147,7 +25050,6 @@ public static class vx_core {
       return t_native;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -25206,10 +25108,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -25241,7 +25143,6 @@ public static class vx_core {
       return t_native_from_any;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -25300,10 +25201,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -25380,10 +25281,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -25460,10 +25361,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -25541,10 +25442,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -25576,7 +25477,6 @@ public static class vx_core {
       return t_or_1;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -25649,10 +25549,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -25684,7 +25584,6 @@ public static class vx_core {
       return t_package_global_from_name;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -25747,10 +25646,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -25782,7 +25681,6 @@ public static class vx_core {
       return t_packagename_from_typedef;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -25841,10 +25739,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -25876,7 +25774,6 @@ public static class vx_core {
       return t_path_from_context_path;
     }
 
-    override
     public vx_core.Func_any_from_any_context vx_fn_new(vx_core.Class_any_from_any_context.IFn fn) {
       return vx_core.e_any_from_any_context;
     }
@@ -25885,7 +25782,7 @@ public static class vx_core {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_string inputval = (vx_core.Type_string)value;
       vx_core.Type_any outputval = vx_core.f_path_from_context_path(context, inputval);
-      output = vx_core.f_any_from_any(generic_any_1, outputval);
+      output = vx_core.f_any_from_any_context(generic_any_1, context, outputval);
       return output;
     }
 
@@ -25940,10 +25837,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -26021,10 +25918,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -26056,7 +25953,6 @@ public static class vx_core {
       return t_permission_from_id_context;
     }
 
-    override
     public vx_core.Func_any_from_any_context vx_fn_new(vx_core.Class_any_from_any_context.IFn fn) {
       return vx_core.e_any_from_any_context;
     }
@@ -26065,7 +25961,7 @@ public static class vx_core {
       T output = vx_core.f_empty(generic_any_1);
       vx_core.Type_string inputval = (vx_core.Type_string)value;
       vx_core.Type_any outputval = vx_core.f_permission_from_id_context(context, inputval);
-      output = vx_core.f_any_from_any(generic_any_1, outputval);
+      output = vx_core.f_any_from_any_context(generic_any_1, context, outputval);
       return output;
     }
 
@@ -26124,10 +26020,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -26159,7 +26055,6 @@ public static class vx_core {
       return t_properties_from_typedef;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -26218,10 +26113,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -26253,7 +26148,6 @@ public static class vx_core {
       return t_proplast_from_typedef;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -26311,10 +26205,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -26346,7 +26240,6 @@ public static class vx_core {
       return t_resolve;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -26405,10 +26298,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -26440,7 +26333,6 @@ public static class vx_core {
       return t_resolve_1;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -26500,10 +26392,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -26535,8 +26427,9 @@ public static class vx_core {
       return t_resolve_async;
     }
 
-    override
-    public vx_core.Func_any_from_any_async vx_fn_new(vx_core.Class_any_from_any_async.IFn fn) {return vx_core.e_any_from_any_async;}
+    public vx_core.Func_any_from_any_async vx_fn_new(vx_core.Class_any_from_any_async.IFn fn) {
+      return vx_core.e_any_from_any_async;
+    }
 
     public override Task<T> vx_any_from_any_async<T, U>(T generic_any_1, U value) {
       T inputval = vx_core.f_any_from_any(generic_any_1, value);
@@ -26591,10 +26484,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -26626,7 +26519,6 @@ public static class vx_core {
       return t_resolve_first;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -26689,10 +26581,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -26724,7 +26616,6 @@ public static class vx_core {
       return t_resolve_list;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -26787,10 +26678,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -26870,10 +26761,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -26905,7 +26796,6 @@ public static class vx_core {
       return t_security_from_user;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -26963,10 +26853,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -27043,10 +26933,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -27124,10 +27014,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -27205,10 +27095,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -27240,7 +27130,6 @@ public static class vx_core {
       return t_string_from_any;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -27305,10 +27194,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -27371,7 +27260,7 @@ public static class vx_core {
    * (func string<-func)
    */
   public interface Func_string_from_func : vx_core.Type_func, vx_core.Type_replfunc {
-    public Func_string_from_func vx_fn_new(vx_core.Class_any_from_func.IFn fn);
+    public vx_core.Func_string_from_func vx_fn_new(vx_core.Class_any_from_func.IFn fn);
     public vx_core.Type_string vx_string_from_func();
   }
 
@@ -27387,10 +27276,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -27424,8 +27313,7 @@ public static class vx_core {
 
     public vx_core.Class_any_from_func.IFn fn = null;
 
-    override
-    public Func_string_from_func vx_fn_new(vx_core.Class_any_from_func.IFn fn) {
+    public vx_core.Func_string_from_func vx_fn_new(vx_core.Class_any_from_func.IFn fn) {
       Class_string_from_func output = new Class_string_from_func();
       output.fn = fn;
       return output;
@@ -27477,10 +27365,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -27559,10 +27447,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -27594,7 +27482,6 @@ public static class vx_core {
       return t_stringlist_from_map;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -27662,10 +27549,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -27745,10 +27632,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -27837,10 +27724,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -27872,7 +27759,6 @@ public static class vx_core {
       return t_traits_from_typedef;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -27930,10 +27816,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -27965,7 +27851,6 @@ public static class vx_core {
       return t_type_from_any;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -28023,10 +27908,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -28058,7 +27943,6 @@ public static class vx_core {
       return t_typedef_from_any;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -28119,10 +28003,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -28154,7 +28038,6 @@ public static class vx_core {
       return t_typedef_from_type;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -28212,10 +28095,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -28247,7 +28130,6 @@ public static class vx_core {
       return t_typename_from_any;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -28308,10 +28190,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -28343,7 +28225,6 @@ public static class vx_core {
       return t_typename_from_type;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -28404,10 +28285,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -28439,7 +28320,6 @@ public static class vx_core {
       return t_typename_from_typedef;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -28505,10 +28385,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname
@@ -28540,7 +28420,6 @@ public static class vx_core {
       return t_typenames_from_typelist;
     }
 
-    override
     public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
       return vx_core.e_any_from_any;
     }
@@ -28606,10 +28485,10 @@ public static class vx_core {
       return output;
     }
 
-    override
-    public vx_core.Type_typedef vx_typedef() {return vx_core.t_func.vx_typedef();}
+    public vx_core.Type_typedef vx_typedef() {
+      return vx_core.t_func.vx_typedef();
+    }
 
-    override
     public vx_core.Type_funcdef vx_funcdef() {
       return vx_core.funcdef_new(
         "vx/core", // pkgname

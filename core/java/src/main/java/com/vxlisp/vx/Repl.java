@@ -934,7 +934,7 @@ public final class Repl {
    * {delim}
    */
   public static class Const_delimvxlisp extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -992,7 +992,7 @@ public final class Repl {
    * {delim}
    */
   public static class Const_delimvxlispbracket extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -1053,7 +1053,7 @@ public final class Repl {
    * {delim}
    */
   public static class Const_delimvxlispparen extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -1135,7 +1135,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -1223,7 +1225,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -1314,7 +1318,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -1358,7 +1364,7 @@ public final class Repl {
       T output = Core.f_empty(generic_any_1);
       Core.Type_anylist inputval = (Core.Type_anylist)value;
       Core.Type_any outputval = Repl.f_any_from_macro(Core.t_any, context, inputval);
-      output = Core.f_any_from_any(generic_any_1, outputval);
+      output = Core.f_any_from_any_context(generic_any_1, context, outputval);
       return output;
     }
 
@@ -1420,7 +1426,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -1464,7 +1472,7 @@ public final class Repl {
       T output = Core.f_empty(generic_any_1);
       Repl.Type_repl inputval = (Repl.Type_repl)value;
       Core.Type_any outputval = Repl.f_any_from_repl(context, inputval);
-      output = Core.f_any_from_any(generic_any_1, outputval);
+      output = Core.f_any_from_any_context(generic_any_1, context, outputval);
       return output;
     }
 
@@ -1552,7 +1560,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -1596,7 +1606,7 @@ public final class Repl {
       T output = Core.f_empty(generic_any_1);
       Core.Type_string inputval = (Core.Type_string)value;
       Core.Type_any outputval = Repl.f_any_from_script(context, inputval);
-      output = Core.f_any_from_any(generic_any_1, outputval);
+      output = Core.f_any_from_any_context(generic_any_1, context, outputval);
       return output;
     }
 
@@ -1657,7 +1667,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -1701,7 +1713,7 @@ public final class Repl {
       T output = Core.f_empty(generic_any_1);
       Repl.Type_repllist inputval = (Repl.Type_repllist)value;
       Core.Type_any outputval = Repl.f_anylist_from_repllist(context, inputval);
-      output = Core.f_any_from_any(generic_any_1, outputval);
+      output = Core.f_any_from_any_context(generic_any_1, context, outputval);
       return output;
     }
 
@@ -1764,7 +1776,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -1856,7 +1870,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -1988,7 +2004,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -2075,7 +2093,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -2200,7 +2220,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -2359,7 +2381,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -2442,7 +2466,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -2486,7 +2512,7 @@ public final class Repl {
       T output = Core.f_empty(generic_any_1);
       Core.Type_anylist inputval = (Core.Type_anylist)value;
       Core.Type_any outputval = Repl.f_repl_from_macro(context, inputval);
-      output = Core.f_any_from_any(generic_any_1, outputval);
+      output = Core.f_any_from_any_context(generic_any_1, context, outputval);
       return output;
     }
 
@@ -2578,7 +2604,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -2682,7 +2710,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -2918,7 +2948,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -3021,7 +3053,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -3137,7 +3171,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -3389,7 +3425,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -3481,7 +3519,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -3581,7 +3621,9 @@ public final class Repl {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {

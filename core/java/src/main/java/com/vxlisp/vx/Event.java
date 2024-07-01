@@ -711,7 +711,7 @@ public final class Event {
    * {event}
    */
   public static class Const_event_change extends Event.Class_event implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -761,7 +761,7 @@ public final class Event {
    * {event}
    */
   public static class Const_event_click extends Event.Class_event implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -811,7 +811,7 @@ public final class Event {
    * {event}
    */
   public static class Const_event_move extends Event.Class_event implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -861,7 +861,7 @@ public final class Event {
    * {event}
    */
   public static class Const_event_select extends Event.Class_event implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -929,7 +929,9 @@ public final class Event {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -1033,7 +1035,9 @@ public final class Event {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -1077,7 +1081,7 @@ public final class Event {
       T output = Core.f_empty(generic_any_1);
       Event.Type_event inputval = (Event.Type_event)value;
       Core.Type_any outputval = Event.f_event_from_event(context, inputval);
-      output = Core.f_any_from_any(generic_any_1, outputval);
+      output = Core.f_any_from_any_context(generic_any_1, context, outputval);
       return output;
     }
 
@@ -1133,7 +1137,9 @@ public final class Event {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -1168,7 +1174,9 @@ public final class Event {
     }
 
     @Override
-    public Core.Func_any_from_any_context_async vx_fn_new(Core.Class_any_from_any_context_async.IFn fn) {return Core.e_any_from_any_context_async;}
+    public Core.Func_any_from_any_context_async vx_fn_new(Core.Class_any_from_any_context_async.IFn fn) {
+      return Core.e_any_from_any_context_async;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_context_async(final T generic_any_1, final Core.Type_context context, final U value) {
@@ -1229,7 +1237,9 @@ public final class Event {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {

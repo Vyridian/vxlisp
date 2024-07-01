@@ -60,6 +60,8 @@ var functype = NewType("vx/core/func")
 
 var floattype = NewType("vx/core/float")
 
+var funcdeftype = NewType("vx/core/funcdef")
+
 var inttype = NewType("vx/core/int")
 
 var intlisttype = NewTypeList("vx/core/intlist", inttype)
@@ -131,6 +133,8 @@ var structtype = NewTypeStruct("vx/core/struct")
 var structtype2 = NewType("vx/core/struct-2")
 
 var testresulttype = NewTypeStruct("vx/test/testresult")
+
+var typedeftype = NewType("vx/core/typedef")
 
 var unknowntype = NewType("vx/core/unknown")
 

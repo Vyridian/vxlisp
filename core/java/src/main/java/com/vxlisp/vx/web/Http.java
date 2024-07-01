@@ -249,7 +249,9 @@ public final class Http {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -284,7 +286,9 @@ public final class Http {
     }
 
     @Override
-    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {
+      return Core.e_any_from_any_async;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_async(final T generic_any_1, final U value) {
@@ -355,7 +359,9 @@ public final class Http {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -390,7 +396,9 @@ public final class Http {
     }
 
     @Override
-    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {
+      return Core.e_any_from_any_async;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_async(final T generic_any_1, final U value) {
@@ -462,7 +470,9 @@ public final class Http {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -548,7 +558,9 @@ public final class Http {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -583,7 +595,9 @@ public final class Http {
     }
 
     @Override
-    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {
+      return Core.e_any_from_any_async;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_async(final T generic_any_1, final U value) {
@@ -652,7 +666,9 @@ public final class Http {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -751,7 +767,9 @@ public final class Http {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -844,7 +862,9 @@ public final class Http {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -949,7 +969,9 @@ public final class Http {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -984,7 +1006,9 @@ public final class Http {
     }
 
     @Override
-    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {
+      return Core.e_any_from_any_async;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_async(final T generic_any_1, final U value) {

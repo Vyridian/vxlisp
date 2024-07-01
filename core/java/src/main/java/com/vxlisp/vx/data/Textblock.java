@@ -1162,7 +1162,7 @@ public final class Textblock {
    * {delim}
    */
   public static class Const_delimbracketangle extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -1215,7 +1215,7 @@ public final class Textblock {
    * {delim}
    */
   public static class Const_delimbracketcurly extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -1268,7 +1268,7 @@ public final class Textblock {
    * {delim}
    */
   public static class Const_delimbracketsquare extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -1321,7 +1321,7 @@ public final class Textblock {
    * {delim}
    */
   public static class Const_delimclose extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -1370,7 +1370,7 @@ public final class Textblock {
    * {delim}
    */
   public static class Const_delimclosing extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -1419,7 +1419,7 @@ public final class Textblock {
    * {delim}
    */
   public static class Const_delimcomma extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -1470,7 +1470,7 @@ public final class Textblock {
    * {delim}
    */
   public static class Const_delimcomment extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -1523,7 +1523,7 @@ public final class Textblock {
    * {delim}
    */
   public static class Const_delimcommentblock extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -1576,7 +1576,7 @@ public final class Textblock {
    * {delim}
    */
   public static class Const_delimline extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -1627,7 +1627,7 @@ public final class Textblock {
    * {delimlist}
    */
   public static class Const_delimlisttest1 extends Textblock.Class_delimlist implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -1671,7 +1671,7 @@ public final class Textblock {
    * {delimlist}
    */
   public static class Const_delimlisttest2 extends Textblock.Class_delimlist implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -1716,7 +1716,7 @@ public final class Textblock {
    * {delimlist}
    */
   public static class Const_delimlisttest3 extends Textblock.Class_delimlist implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -1761,7 +1761,7 @@ public final class Textblock {
    * {delim}
    */
   public static class Const_delimnonwhitespace extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -1814,7 +1814,7 @@ public final class Textblock {
    * {delim}
    */
   public static class Const_delimparen extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -1867,7 +1867,7 @@ public final class Textblock {
    * {delim}
    */
   public static class Const_delimquote extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -1920,7 +1920,7 @@ public final class Textblock {
    * {delim}
    */
   public static class Const_delimquoteblock extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -1973,7 +1973,7 @@ public final class Textblock {
    * {delim}
    */
   public static class Const_delimspace extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -2026,7 +2026,7 @@ public final class Textblock {
    * {delim}
    */
   public static class Const_delimtest1 extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -2075,7 +2075,7 @@ public final class Textblock {
    * {delim}
    */
   public static class Const_delimtest2 extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -2124,7 +2124,7 @@ public final class Textblock {
    * {delim}
    */
   public static class Const_delimtest3 extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -2173,7 +2173,7 @@ public final class Textblock {
    * {delim}
    */
   public static class Const_delimtext extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -2222,7 +2222,7 @@ public final class Textblock {
    * {delim}
    */
   public static class Const_delimwhitespace extends Textblock.Class_delim implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -2292,7 +2292,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -2390,7 +2392,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -2531,7 +2535,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -2653,7 +2659,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -2768,7 +2776,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -2860,7 +2870,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -2960,7 +2972,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -3066,7 +3080,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -3167,7 +3183,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -3266,7 +3284,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -3403,7 +3423,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -3759,7 +3781,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -3899,7 +3923,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -4036,7 +4062,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -4149,7 +4177,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -4347,7 +4377,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -4439,7 +4471,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -4567,7 +4601,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -4703,7 +4739,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -4891,7 +4929,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -5096,7 +5136,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -5180,7 +5222,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -5428,7 +5472,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -5666,7 +5712,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -5763,7 +5811,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -5847,7 +5897,9 @@ public final class Textblock {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {

@@ -651,7 +651,9 @@ export default class vx_core {
         values.map(value => {
           const valuetype = vx_core.f_type_from_any(value)
           let isfound = false
-          if (typedef == valuetype) {
+          if (vx_core.f_is_empty(value)) {
+            isfound = true
+          } else if (typedef == valuetype) {
             listvals.push(...value)
             isfound = true
           } else if (allowany) {

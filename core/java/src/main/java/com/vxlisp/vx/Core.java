@@ -6484,7 +6484,7 @@ public final class Core {
       }
       return output;
     }
-    
+
     @Override
     public Core.Type_msgblock vx_msgblock() {
       return Core.e_msgblock;
@@ -6681,7 +6681,7 @@ public final class Core {
       }
       return output;
     }
-    
+
     @Override
     public Core.Type_msgblock vx_msgblock() {
       return this;
@@ -13425,7 +13425,7 @@ public final class Core {
    * {boolean}
    */
   public static class Const_false extends Core.Class_boolean implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -13468,7 +13468,7 @@ public final class Core {
    * {project}
    */
   public static class Const_global extends Core.Class_project implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -13505,7 +13505,7 @@ public final class Core {
    * {int}
    */
   public static class Const_infinity extends Core.Class_int implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -13547,7 +13547,7 @@ public final class Core {
    * {mempool}
    */
   public static class Const_mempool_active extends Core.Class_mempool implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -13584,7 +13584,7 @@ public final class Core {
    * {int}
    */
   public static class Const_msg_error extends Core.Class_int implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -13626,7 +13626,7 @@ public final class Core {
    * {int}
    */
   public static class Const_msg_info extends Core.Class_int implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -13668,7 +13668,7 @@ public final class Core {
    * {int}
    */
   public static class Const_msg_severe extends Core.Class_int implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -13710,7 +13710,7 @@ public final class Core {
    * {int}
    */
   public static class Const_msg_warning extends Core.Class_int implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -13752,7 +13752,7 @@ public final class Core {
    * {int}
    */
   public static class Const_neginfinity extends Core.Class_int implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -13794,7 +13794,7 @@ public final class Core {
    * {string}
    */
   public static class Const_newline extends Core.Class_string implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -13836,7 +13836,7 @@ public final class Core {
    * {int}
    */
   public static class Const_notanumber extends Core.Class_int implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -13878,7 +13878,7 @@ public final class Core {
    * {string}
    */
   public static class Const_nothing extends Core.Class_string implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -13920,7 +13920,7 @@ public final class Core {
    * {string}
    */
   public static class Const_quote extends Core.Class_string implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -13961,7 +13961,7 @@ public final class Core {
    * {boolean}
    */
   public static class Const_true extends Core.Class_boolean implements Core.vx_Type_const {
-
+    
     @Override
     public Core.Type_constdef vx_constdef() {
       return Core.constdef_new(
@@ -14022,7 +14022,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -14119,7 +14121,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -14218,7 +14222,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -14318,7 +14324,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -14405,7 +14413,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -14492,7 +14502,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -14578,7 +14590,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -14663,7 +14677,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -14770,7 +14786,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -14878,7 +14896,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -14964,7 +14984,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -15049,7 +15071,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -15156,7 +15180,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -15263,7 +15289,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -15361,7 +15389,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -15447,7 +15477,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -15532,7 +15564,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -15639,7 +15673,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -15746,7 +15782,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -15845,7 +15883,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -15930,7 +15970,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -16023,7 +16065,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -16123,7 +16167,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -16237,7 +16283,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -16324,7 +16372,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -16409,7 +16459,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -16495,7 +16547,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -16595,7 +16649,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -16689,7 +16745,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -16801,7 +16859,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -16887,7 +16947,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -16987,7 +17049,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -17099,7 +17163,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -17185,7 +17251,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -17284,7 +17352,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -17381,7 +17451,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -17480,7 +17552,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -17578,7 +17652,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -17666,7 +17742,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -17781,20 +17859,11 @@ public final class Core {
    * (func any<-any)
    */
   public interface Func_any_from_any extends Core.Type_func, Core.Type_replfunc {
-    public Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn);
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value);
   }
 
   public static class Class_any_from_any extends Core.Class_base implements Func_any_from_any {
-
-    public IFn fn = null;
-
-    @Override
-    public Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
-      Class_any_from_any output = new Class_any_from_any();
-      output.fn = fn;
-      return output;
-    }
 
     @Override
     public Core.Func_any_from_any vx_new(final Object... vals) {
@@ -17809,7 +17878,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -17846,6 +17917,15 @@ public final class Core {
     @FunctionalInterface
     public interface IFn {
       public Core.Type_any resolve(Core.Type_any value);
+    }
+
+    public IFn fn = null;
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      Class_any_from_any output = new Class_any_from_any();
+      output.fn = fn;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -17888,20 +17968,11 @@ public final class Core {
    * (func any<-any-async)
    */
   public interface Func_any_from_any_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn);
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_async(final T generic_any_1, final U value);
   }
 
   public static class Class_any_from_any_async extends Core.Class_base implements Func_any_from_any_async {
-
-    public IFn fn = null;
-
-    @Override
-    public Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {
-      Class_any_from_any_async output = new Class_any_from_any_async();
-      output.fn = fn;
-      return output;
-    }
 
     @Override
     public Core.Func_any_from_any_async vx_new(final Object... vals) {
@@ -17916,7 +17987,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -17953,6 +18026,15 @@ public final class Core {
     @FunctionalInterface
     public interface IFn {
       public CompletableFuture<Core.Type_any> resolve(Core.Type_any value);
+    }
+
+    public IFn fn = null;
+
+    @Override
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {
+      Class_any_from_any_async output = new Class_any_from_any_async();
+      output.fn = fn;
+      return output;
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
@@ -17994,20 +18076,11 @@ public final class Core {
    * (func any<-any-context)
    */
   public interface Func_any_from_any_context extends Core.Type_func, Core.Type_replfunc {
-    public Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn);
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value);
   }
 
   public static class Class_any_from_any_context extends Core.Class_base implements Func_any_from_any_context {
-
-    public IFn fn = null;
-
-    @Override
-    public Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {
-      Class_any_from_any_context output = new Class_any_from_any_context();
-      output.fn = fn;
-      return output;
-    }
 
     @Override
     public Core.Func_any_from_any_context vx_new(final Object... vals) {
@@ -18022,7 +18095,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -18059,6 +18134,15 @@ public final class Core {
     @FunctionalInterface
     public interface IFn {
       public Core.Type_any resolve(Core.Type_context context, Core.Type_any value);
+    }
+
+    public IFn fn = null;
+
+    @Override
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {
+      Class_any_from_any_context output = new Class_any_from_any_context();
+      output.fn = fn;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -18102,20 +18186,11 @@ public final class Core {
    * (func any<-any-context-async)
    */
   public interface Func_any_from_any_context_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Func_any_from_any_context_async vx_fn_new(Core.Class_any_from_any_context_async.IFn fn);
+    public Core.Func_any_from_any_context_async vx_fn_new(Core.Class_any_from_any_context_async.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_context_async(final T generic_any_1, final Core.Type_context context, final U value);
   }
 
   public static class Class_any_from_any_context_async extends Core.Class_base implements Func_any_from_any_context_async {
-
-    public IFn fn = null;
-
-    @Override
-    public Func_any_from_any_context_async vx_fn_new(Core.Class_any_from_any_context_async.IFn fn) {
-      Class_any_from_any_context_async output = new Class_any_from_any_context_async();
-      output.fn = fn;
-      return output;
-    }
 
     @Override
     public Core.Func_any_from_any_context_async vx_new(final Object... vals) {
@@ -18130,7 +18205,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -18167,6 +18244,15 @@ public final class Core {
     @FunctionalInterface
     public interface IFn {
       public CompletableFuture<Core.Type_any> resolve(Core.Type_context context, Core.Type_any value);
+    }
+
+    public IFn fn = null;
+
+    @Override
+    public Core.Func_any_from_any_context_async vx_fn_new(Core.Class_any_from_any_context_async.IFn fn) {
+      Class_any_from_any_context_async output = new Class_any_from_any_context_async();
+      output.fn = fn;
+      return output;
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
@@ -18211,20 +18297,11 @@ public final class Core {
    * (func any<-any-key-value)
    */
   public interface Func_any_from_any_key_value extends Core.Type_func, Core.Type_replfunc {
-    public Func_any_from_any_key_value vx_fn_new(Core.Class_any_from_any_key_value.IFn fn);
+    public Core.Func_any_from_any_key_value vx_fn_new(Core.Class_any_from_any_key_value.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_key_value(final T generic_any_1, final T current, final Core.Type_string key, final U value);
   }
 
   public static class Class_any_from_any_key_value extends Core.Class_base implements Func_any_from_any_key_value {
-
-    public IFn fn = null;
-
-    @Override
-    public Func_any_from_any_key_value vx_fn_new(Core.Class_any_from_any_key_value.IFn fn) {
-      Class_any_from_any_key_value output = new Class_any_from_any_key_value();
-      output.fn = fn;
-      return output;
-    }
 
     @Override
     public Core.Func_any_from_any_key_value vx_new(final Object... vals) {
@@ -18239,7 +18316,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -18276,6 +18355,15 @@ public final class Core {
     @FunctionalInterface
     public interface IFn {
       public Core.Type_any resolve(Core.Type_any current, Core.Type_string key, Core.Type_any value);
+    }
+
+    public IFn fn = null;
+
+    @Override
+    public Core.Func_any_from_any_key_value vx_fn_new(Core.Class_any_from_any_key_value.IFn fn) {
+      Class_any_from_any_key_value output = new Class_any_from_any_key_value();
+      output.fn = fn;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -18315,20 +18403,11 @@ public final class Core {
    * (func any<-func)
    */
   public interface Func_any_from_func extends Core.Type_func, Core.Type_replfunc {
-    public Func_any_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
+    public Core.Func_any_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
     public <T extends Core.Type_any> T vx_any_from_func(final T generic_any_1);
   }
 
   public static class Class_any_from_func extends Core.Class_base implements Func_any_from_func {
-
-    public IFn fn = null;
-
-    @Override
-    public Func_any_from_func vx_fn_new(Core.Class_any_from_func.IFn fn) {
-      Class_any_from_func output = new Class_any_from_func();
-      output.fn = fn;
-      return output;
-    }
 
     @Override
     public Core.Func_any_from_func vx_new(final Object... vals) {
@@ -18343,7 +18422,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -18382,6 +18463,15 @@ public final class Core {
       public Core.Type_any resolve();
     }
 
+    public IFn fn = null;
+
+    @Override
+    public Core.Func_any_from_func vx_fn_new(Core.Class_any_from_func.IFn fn) {
+      Class_any_from_func output = new Class_any_from_func();
+      output.fn = fn;
+      return output;
+    }
+
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -18418,20 +18508,11 @@ public final class Core {
    * (func any<-func-async)
    */
   public interface Func_any_from_func_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Func_any_from_func_async vx_fn_new(Core.Class_any_from_func_async.IFn fn);
+    public Core.Func_any_from_func_async vx_fn_new(Core.Class_any_from_func_async.IFn fn);
     public <T extends Core.Type_any> CompletableFuture<T> vx_any_from_func_async(final T generic_any_1);
   }
 
   public static class Class_any_from_func_async extends Core.Class_base implements Func_any_from_func_async {
-
-    public IFn fn = null;
-
-    @Override
-    public Func_any_from_func_async vx_fn_new(Core.Class_any_from_func_async.IFn fn) {
-      Class_any_from_func_async output = new Class_any_from_func_async();
-      output.fn = fn;
-      return output;
-    }
 
     @Override
     public Core.Func_any_from_func_async vx_new(final Object... vals) {
@@ -18446,7 +18527,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -18483,6 +18566,15 @@ public final class Core {
     @FunctionalInterface
     public interface IFn {
       public CompletableFuture<Core.Type_any> resolve();
+    }
+
+    public IFn fn = null;
+
+    @Override
+    public Core.Func_any_from_func_async vx_fn_new(Core.Class_any_from_func_async.IFn fn) {
+      Class_any_from_func_async output = new Class_any_from_func_async();
+      output.fn = fn;
+      return output;
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
@@ -18523,20 +18615,11 @@ public final class Core {
    * (func any<-int)
    */
   public interface Func_any_from_int extends Core.Type_func, Core.Type_replfunc {
-    public Func_any_from_int vx_fn_new(Core.Class_any_from_int.IFn fn);
+    public Core.Func_any_from_int vx_fn_new(Core.Class_any_from_int.IFn fn);
     public <T extends Core.Type_any> T vx_any_from_int(final T generic_any_1, final Core.Type_int value);
   }
 
   public static class Class_any_from_int extends Core.Class_base implements Func_any_from_int {
-
-    public IFn fn = null;
-
-    @Override
-    public Func_any_from_int vx_fn_new(Core.Class_any_from_int.IFn fn) {
-      Class_any_from_int output = new Class_any_from_int();
-      output.fn = fn;
-      return output;
-    }
 
     @Override
     public Core.Func_any_from_int vx_new(final Object... vals) {
@@ -18551,7 +18634,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -18588,6 +18673,15 @@ public final class Core {
     @FunctionalInterface
     public interface IFn {
       public Core.Type_any resolve(Core.Type_int value);
+    }
+
+    public IFn fn = null;
+
+    @Override
+    public Core.Func_any_from_int vx_fn_new(Core.Class_any_from_int.IFn fn) {
+      Class_any_from_int output = new Class_any_from_int();
+      output.fn = fn;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -18627,20 +18721,11 @@ public final class Core {
    * (func any<-int-any)
    */
   public interface Func_any_from_int_any extends Core.Type_func, Core.Type_replfunc {
-    public Func_any_from_int_any vx_fn_new(Core.Class_any_from_int_any.IFn fn);
+    public Core.Func_any_from_int_any vx_fn_new(Core.Class_any_from_int_any.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_int_any(final T generic_any_1, final Core.Type_int num, final U val);
   }
 
   public static class Class_any_from_int_any extends Core.Class_base implements Func_any_from_int_any {
-
-    public IFn fn = null;
-
-    @Override
-    public Func_any_from_int_any vx_fn_new(Core.Class_any_from_int_any.IFn fn) {
-      Class_any_from_int_any output = new Class_any_from_int_any();
-      output.fn = fn;
-      return output;
-    }
 
     @Override
     public Core.Func_any_from_int_any vx_new(final Object... vals) {
@@ -18655,7 +18740,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -18692,6 +18779,15 @@ public final class Core {
     @FunctionalInterface
     public interface IFn {
       public Core.Type_any resolve(Core.Type_int num, Core.Type_any val);
+    }
+
+    public IFn fn = null;
+
+    @Override
+    public Core.Func_any_from_int_any vx_fn_new(Core.Class_any_from_int_any.IFn fn) {
+      Class_any_from_int_any output = new Class_any_from_int_any();
+      output.fn = fn;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -18732,20 +18828,11 @@ public final class Core {
    * (func any<-key-value)
    */
   public interface Func_any_from_key_value extends Core.Type_func, Core.Type_replfunc {
-    public Func_any_from_key_value vx_fn_new(Core.Class_any_from_key_value.IFn fn);
+    public Core.Func_any_from_key_value vx_fn_new(Core.Class_any_from_key_value.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_key_value(final T generic_any_1, final Core.Type_string key, final U val);
   }
 
   public static class Class_any_from_key_value extends Core.Class_base implements Func_any_from_key_value {
-
-    public IFn fn = null;
-
-    @Override
-    public Func_any_from_key_value vx_fn_new(Core.Class_any_from_key_value.IFn fn) {
-      Class_any_from_key_value output = new Class_any_from_key_value();
-      output.fn = fn;
-      return output;
-    }
 
     @Override
     public Core.Func_any_from_key_value vx_new(final Object... vals) {
@@ -18760,7 +18847,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -18797,6 +18886,15 @@ public final class Core {
     @FunctionalInterface
     public interface IFn {
       public Core.Type_any resolve(Core.Type_string key, Core.Type_any val);
+    }
+
+    public IFn fn = null;
+
+    @Override
+    public Core.Func_any_from_key_value vx_fn_new(Core.Class_any_from_key_value.IFn fn) {
+      Class_any_from_key_value output = new Class_any_from_key_value();
+      output.fn = fn;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -18839,20 +18937,11 @@ public final class Core {
    * (func any<-key-value-async)
    */
   public interface Func_any_from_key_value_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Func_any_from_key_value_async vx_fn_new(Core.Class_any_from_key_value_async.IFn fn);
+    public Core.Func_any_from_key_value_async vx_fn_new(Core.Class_any_from_key_value_async.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_key_value_async(final T generic_any_1, final Core.Type_string key, final U val);
   }
 
   public static class Class_any_from_key_value_async extends Core.Class_base implements Func_any_from_key_value_async {
-
-    public IFn fn = null;
-
-    @Override
-    public Func_any_from_key_value_async vx_fn_new(Core.Class_any_from_key_value_async.IFn fn) {
-      Class_any_from_key_value_async output = new Class_any_from_key_value_async();
-      output.fn = fn;
-      return output;
-    }
 
     @Override
     public Core.Func_any_from_key_value_async vx_new(final Object... vals) {
@@ -18867,7 +18956,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -18904,6 +18995,15 @@ public final class Core {
     @FunctionalInterface
     public interface IFn {
       public CompletableFuture<Core.Type_any> resolve(Core.Type_string key, Core.Type_any val);
+    }
+
+    public IFn fn = null;
+
+    @Override
+    public Core.Func_any_from_key_value_async vx_fn_new(Core.Class_any_from_key_value_async.IFn fn) {
+      Class_any_from_key_value_async output = new Class_any_from_key_value_async();
+      output.fn = fn;
+      return output;
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
@@ -18965,7 +19065,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -19058,7 +19160,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -19146,7 +19250,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -19244,7 +19350,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -19331,7 +19439,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -19398,20 +19508,11 @@ public final class Core {
    * (func any<-none)
    */
   public interface Func_any_from_none extends Core.Type_func, Core.Type_replfunc {
-    public Func_any_from_none vx_fn_new(Core.Class_any_from_none.IFn fn);
+    public Core.Func_any_from_none vx_fn_new(Core.Class_any_from_none.IFn fn);
     public <T extends Core.Type_any> T vx_any_from_none(final T generic_any_1);
   }
 
   public static class Class_any_from_none extends Core.Class_base implements Func_any_from_none {
-
-    public IFn fn = null;
-
-    @Override
-    public Func_any_from_none vx_fn_new(Core.Class_any_from_none.IFn fn) {
-      Class_any_from_none output = new Class_any_from_none();
-      output.fn = fn;
-      return output;
-    }
 
     @Override
     public Core.Func_any_from_none vx_new(final Object... vals) {
@@ -19426,7 +19527,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -19465,6 +19568,15 @@ public final class Core {
       public Core.Type_any resolve();
     }
 
+    public IFn fn = null;
+
+    @Override
+    public Core.Func_any_from_none vx_fn_new(Core.Class_any_from_none.IFn fn) {
+      Class_any_from_none output = new Class_any_from_none();
+      output.fn = fn;
+      return output;
+    }
+
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -19501,20 +19613,11 @@ public final class Core {
    * (func any<-none-async)
    */
   public interface Func_any_from_none_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Func_any_from_none_async vx_fn_new(Core.Class_any_from_none_async.IFn fn);
+    public Core.Func_any_from_none_async vx_fn_new(Core.Class_any_from_none_async.IFn fn);
     public <T extends Core.Type_any> CompletableFuture<T> vx_any_from_none_async(final T generic_any_1);
   }
 
   public static class Class_any_from_none_async extends Core.Class_base implements Func_any_from_none_async {
-
-    public IFn fn = null;
-
-    @Override
-    public Func_any_from_none_async vx_fn_new(Core.Class_any_from_none_async.IFn fn) {
-      Class_any_from_none_async output = new Class_any_from_none_async();
-      output.fn = fn;
-      return output;
-    }
 
     @Override
     public Core.Func_any_from_none_async vx_new(final Object... vals) {
@@ -19529,7 +19632,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -19566,6 +19671,15 @@ public final class Core {
     @FunctionalInterface
     public interface IFn {
       public CompletableFuture<Core.Type_any> resolve();
+    }
+
+    public IFn fn = null;
+
+    @Override
+    public Core.Func_any_from_none_async vx_fn_new(Core.Class_any_from_none_async.IFn fn) {
+      Class_any_from_none_async output = new Class_any_from_none_async();
+      output.fn = fn;
+      return output;
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
@@ -19606,20 +19720,11 @@ public final class Core {
    * (func any<-reduce)
    */
   public interface Func_any_from_reduce extends Core.Type_func, Core.Type_replfunc {
-    public Func_any_from_reduce vx_fn_new(Core.Class_any_from_reduce.IFn fn);
+    public Core.Func_any_from_reduce vx_fn_new(Core.Class_any_from_reduce.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_reduce(final T generic_any_1, final T result, final U item);
   }
 
   public static class Class_any_from_reduce extends Core.Class_base implements Func_any_from_reduce {
-
-    public IFn fn = null;
-
-    @Override
-    public Func_any_from_reduce vx_fn_new(Core.Class_any_from_reduce.IFn fn) {
-      Class_any_from_reduce output = new Class_any_from_reduce();
-      output.fn = fn;
-      return output;
-    }
 
     @Override
     public Core.Func_any_from_reduce vx_new(final Object... vals) {
@@ -19634,7 +19739,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -19671,6 +19778,15 @@ public final class Core {
     @FunctionalInterface
     public interface IFn {
       public Core.Type_any resolve(Core.Type_any result, Core.Type_any item);
+    }
+
+    public IFn fn = null;
+
+    @Override
+    public Core.Func_any_from_reduce vx_fn_new(Core.Class_any_from_reduce.IFn fn) {
+      Class_any_from_reduce output = new Class_any_from_reduce();
+      output.fn = fn;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -19712,20 +19828,11 @@ public final class Core {
    * (func any<-reduce-async)
    */
   public interface Func_any_from_reduce_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Func_any_from_reduce_async vx_fn_new(Core.Class_any_from_reduce_async.IFn fn);
+    public Core.Func_any_from_reduce_async vx_fn_new(Core.Class_any_from_reduce_async.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_reduce_async(final T generic_any_1, final T result, final U item);
   }
 
   public static class Class_any_from_reduce_async extends Core.Class_base implements Func_any_from_reduce_async {
-
-    public IFn fn = null;
-
-    @Override
-    public Func_any_from_reduce_async vx_fn_new(Core.Class_any_from_reduce_async.IFn fn) {
-      Class_any_from_reduce_async output = new Class_any_from_reduce_async();
-      output.fn = fn;
-      return output;
-    }
 
     @Override
     public Core.Func_any_from_reduce_async vx_new(final Object... vals) {
@@ -19740,7 +19847,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -19777,6 +19886,15 @@ public final class Core {
     @FunctionalInterface
     public interface IFn {
       public CompletableFuture<Core.Type_any> resolve(Core.Type_any result, Core.Type_any item);
+    }
+
+    public IFn fn = null;
+
+    @Override
+    public Core.Func_any_from_reduce_async vx_fn_new(Core.Class_any_from_reduce_async.IFn fn) {
+      Class_any_from_reduce_async output = new Class_any_from_reduce_async();
+      output.fn = fn;
+      return output;
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
@@ -19820,20 +19938,11 @@ public final class Core {
    * (func any<-reduce-next)
    */
   public interface Func_any_from_reduce_next extends Core.Type_func, Core.Type_replfunc {
-    public Func_any_from_reduce_next vx_fn_new(Core.Class_any_from_reduce_next.IFn fn);
+    public Core.Func_any_from_reduce_next vx_fn_new(Core.Class_any_from_reduce_next.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_reduce_next(final T generic_any_1, final T result, final U current, final U next);
   }
 
   public static class Class_any_from_reduce_next extends Core.Class_base implements Func_any_from_reduce_next {
-
-    public IFn fn = null;
-
-    @Override
-    public Func_any_from_reduce_next vx_fn_new(Core.Class_any_from_reduce_next.IFn fn) {
-      Class_any_from_reduce_next output = new Class_any_from_reduce_next();
-      output.fn = fn;
-      return output;
-    }
 
     @Override
     public Core.Func_any_from_reduce_next vx_new(final Object... vals) {
@@ -19848,7 +19957,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -19885,6 +19996,15 @@ public final class Core {
     @FunctionalInterface
     public interface IFn {
       public Core.Type_any resolve(Core.Type_any result, Core.Type_any current, Core.Type_any next);
+    }
+
+    public IFn fn = null;
+
+    @Override
+    public Core.Func_any_from_reduce_next vx_fn_new(Core.Class_any_from_reduce_next.IFn fn) {
+      Class_any_from_reduce_next output = new Class_any_from_reduce_next();
+      output.fn = fn;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -19928,20 +20048,11 @@ public final class Core {
    * (func any<-reduce-next-async)
    */
   public interface Func_any_from_reduce_next_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Func_any_from_reduce_next_async vx_fn_new(Core.Class_any_from_reduce_next_async.IFn fn);
+    public Core.Func_any_from_reduce_next_async vx_fn_new(Core.Class_any_from_reduce_next_async.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_reduce_next_async(final T generic_any_1, final T result, final U current, final U next);
   }
 
   public static class Class_any_from_reduce_next_async extends Core.Class_base implements Func_any_from_reduce_next_async {
-
-    public IFn fn = null;
-
-    @Override
-    public Func_any_from_reduce_next_async vx_fn_new(Core.Class_any_from_reduce_next_async.IFn fn) {
-      Class_any_from_reduce_next_async output = new Class_any_from_reduce_next_async();
-      output.fn = fn;
-      return output;
-    }
 
     @Override
     public Core.Func_any_from_reduce_next_async vx_new(final Object... vals) {
@@ -19956,7 +20067,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -19993,6 +20106,15 @@ public final class Core {
     @FunctionalInterface
     public interface IFn {
       public CompletableFuture<Core.Type_any> resolve(Core.Type_any result, Core.Type_any current, Core.Type_any next);
+    }
+
+    public IFn fn = null;
+
+    @Override
+    public Core.Func_any_from_reduce_next_async vx_fn_new(Core.Class_any_from_reduce_next_async.IFn fn) {
+      Class_any_from_reduce_next_async output = new Class_any_from_reduce_next_async();
+      output.fn = fn;
+      return output;
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
@@ -20055,7 +20177,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -20143,7 +20267,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -20178,7 +20304,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {
+      return Core.e_any_from_any_async;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_async(final T generic_any_1, final U value) {
@@ -20238,7 +20366,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -20282,7 +20412,7 @@ public final class Core {
       T output = Core.f_empty(generic_any_1);
       Core.Type_func inputval = (Core.Type_func)value;
       Core.Type_any outputval = Core.f_boolean_permission_from_func(context, inputval);
-      output = Core.f_any_from_any(generic_any_1, outputval);
+      output = Core.f_any_from_any_context(generic_any_1, context, outputval);
       return output;
     }
 
@@ -20343,7 +20473,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -20410,20 +20542,11 @@ public final class Core {
    * (func boolean<-any)
    */
   public interface Func_boolean_from_any extends Core.Type_func, Core.Type_replfunc {
-    public Func_boolean_from_any vx_fn_new(Core.Class_boolean_from_any.IFn fn);
+    public Core.Func_boolean_from_any vx_fn_new(Core.Class_boolean_from_any.IFn fn);
     public Core.Type_boolean vx_boolean_from_any(final Core.Type_any value);
   }
 
   public static class Class_boolean_from_any extends Core.Class_base implements Func_boolean_from_any {
-
-    public IFn fn = null;
-
-    @Override
-    public Func_boolean_from_any vx_fn_new(Core.Class_boolean_from_any.IFn fn) {
-      Class_boolean_from_any output = new Class_boolean_from_any();
-      output.fn = fn;
-      return output;
-    }
 
     @Override
     public Core.Func_boolean_from_any vx_new(final Object... vals) {
@@ -20438,7 +20561,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -20477,6 +20602,15 @@ public final class Core {
       public Core.Type_any resolve(Core.Type_any value);
     }
 
+    public IFn fn = null;
+
+    @Override
+    public Core.Func_boolean_from_any vx_fn_new(Core.Class_boolean_from_any.IFn fn) {
+      Class_boolean_from_any output = new Class_boolean_from_any();
+      output.fn = fn;
+      return output;
+    }
+
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -20511,7 +20645,7 @@ public final class Core {
    * (func boolean<-func)
    */
   public interface Func_boolean_from_func extends Core.Type_func, Core.Type_replfunc {
-    public Func_boolean_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
+    public Core.Func_boolean_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
     public Core.Type_boolean vx_boolean_from_func();
   }
 
@@ -20530,7 +20664,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -20572,7 +20708,7 @@ public final class Core {
     public Core.Class_any_from_func.IFn fn = null;
 
     @Override
-    public Func_boolean_from_func vx_fn_new(Core.Class_any_from_func.IFn fn) {
+    public Core.Func_boolean_from_func vx_fn_new(Core.Class_any_from_func.IFn fn) {
       Class_boolean_from_func output = new Class_boolean_from_func();
       output.fn = fn;
       return output;
@@ -20611,7 +20747,7 @@ public final class Core {
    * (func boolean<-none)
    */
   public interface Func_boolean_from_none extends Core.Type_func, Core.Type_replfunc {
-    public Func_boolean_from_none vx_fn_new(Core.Class_any_from_func.IFn fn);
+    public Core.Func_boolean_from_none vx_fn_new(Core.Class_any_from_func.IFn fn);
     public Core.Type_boolean vx_boolean_from_none();
   }
 
@@ -20630,7 +20766,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -20672,7 +20810,7 @@ public final class Core {
     public Core.Class_any_from_func.IFn fn = null;
 
     @Override
-    public Func_boolean_from_none vx_fn_new(Core.Class_any_from_func.IFn fn) {
+    public Core.Func_boolean_from_none vx_fn_new(Core.Class_any_from_func.IFn fn) {
       Class_boolean_from_none output = new Class_boolean_from_none();
       output.fn = fn;
       return output;
@@ -20730,7 +20868,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -20824,7 +20964,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -20919,7 +21061,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -21025,7 +21169,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -21111,7 +21257,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -21204,7 +21352,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -21304,7 +21454,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -21389,7 +21541,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -21494,7 +21648,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -21589,7 +21745,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -21688,7 +21846,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -21785,7 +21945,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -21884,7 +22046,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -21975,7 +22139,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -22074,7 +22240,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -22157,7 +22325,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -22254,7 +22424,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -22359,7 +22531,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -22448,7 +22622,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -22538,7 +22714,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -22617,7 +22795,7 @@ public final class Core {
    * (func int<-func)
    */
   public interface Func_int_from_func extends Core.Type_func, Core.Type_replfunc {
-    public Func_int_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
+    public Core.Func_int_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
     public Core.Type_int vx_int_from_func();
   }
 
@@ -22636,7 +22814,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -22673,7 +22853,7 @@ public final class Core {
     public Core.Class_any_from_func.IFn fn = null;
 
     @Override
-    public Func_int_from_func vx_fn_new(Core.Class_any_from_func.IFn fn) {
+    public Core.Func_int_from_func vx_fn_new(Core.Class_any_from_func.IFn fn) {
       Class_int_from_func output = new Class_int_from_func();
       output.fn = fn;
       return output;
@@ -22726,7 +22906,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -22858,7 +23040,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -22957,7 +23141,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -23059,7 +23245,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -23147,7 +23335,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -23245,7 +23435,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -23344,7 +23536,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -23442,7 +23636,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -23563,7 +23759,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -23607,7 +23805,7 @@ public final class Core {
       T output = Core.f_empty(generic_any_1);
       Core.Type_permission inputval = (Core.Type_permission)value;
       Core.Type_any outputval = Core.f_is_pass_from_permission(context, inputval);
-      output = Core.f_any_from_any(generic_any_1, outputval);
+      output = Core.f_any_from_any_context(generic_any_1, context, outputval);
       return output;
     }
 
@@ -23668,7 +23866,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -23772,7 +23972,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -23870,7 +24072,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -23968,7 +24172,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -24067,7 +24273,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -24154,7 +24362,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -24239,7 +24449,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -24345,7 +24557,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -24440,7 +24654,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -24546,7 +24762,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -24638,7 +24856,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -24733,7 +24953,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -24818,7 +25040,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -24925,7 +25149,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -25017,7 +25243,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -25102,7 +25330,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -25198,7 +25428,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -25299,7 +25531,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -25386,7 +25620,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -25487,7 +25723,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -25576,7 +25814,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -25683,7 +25923,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -25768,7 +26010,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -25874,7 +26118,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -25970,7 +26216,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -26067,7 +26315,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -26173,7 +26423,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -26259,7 +26511,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -26349,7 +26603,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -26446,7 +26702,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -26543,7 +26801,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -26640,7 +26900,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -26725,7 +26987,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -26807,7 +27071,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -26895,7 +27161,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -27006,7 +27274,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -27107,7 +27377,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -27204,7 +27476,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -27248,7 +27522,7 @@ public final class Core {
       T output = Core.f_empty(generic_any_1);
       Core.Type_string inputval = (Core.Type_string)value;
       Core.Type_any outputval = Core.f_path_from_context_path(context, inputval);
-      output = Core.f_any_from_any(generic_any_1, outputval);
+      output = Core.f_any_from_any_context(generic_any_1, context, outputval);
       return output;
     }
 
@@ -27306,7 +27580,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -27389,7 +27665,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -27433,7 +27711,7 @@ public final class Core {
       T output = Core.f_empty(generic_any_1);
       Core.Type_string inputval = (Core.Type_string)value;
       Core.Type_any outputval = Core.f_permission_from_id_context(context, inputval);
-      output = Core.f_any_from_any(generic_any_1, outputval);
+      output = Core.f_any_from_any_context(generic_any_1, context, outputval);
       return output;
     }
 
@@ -27495,7 +27773,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -27592,7 +27872,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -27688,7 +27970,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -27785,7 +28069,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -27886,7 +28172,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -27921,7 +28209,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {return Core.e_any_from_any_async;}
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {
+      return Core.e_any_from_any_async;
+    }
 
     @Override
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_async(final T generic_any_1, final U value) {
@@ -27983,7 +28273,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -28084,7 +28376,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -28185,7 +28479,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -28270,7 +28566,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -28366,7 +28664,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -28448,7 +28748,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -28531,7 +28833,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -28618,7 +28922,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -28721,7 +29027,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -28787,7 +29095,7 @@ public final class Core {
    * (func string<-func)
    */
   public interface Func_string_from_func extends Core.Type_func, Core.Type_replfunc {
-    public Func_string_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
+    public Core.Func_string_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
     public Core.Type_string vx_string_from_func();
   }
 
@@ -28806,7 +29114,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -28843,7 +29153,7 @@ public final class Core {
     public Core.Class_any_from_func.IFn fn = null;
 
     @Override
-    public Func_string_from_func vx_fn_new(Core.Class_any_from_func.IFn fn) {
+    public Core.Func_string_from_func vx_fn_new(Core.Class_any_from_func.IFn fn) {
       Class_string_from_func output = new Class_string_from_func();
       output.fn = fn;
       return output;
@@ -28898,7 +29208,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -28983,7 +29295,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -29089,7 +29403,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -29204,7 +29520,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -29298,7 +29616,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -29395,7 +29715,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -29492,7 +29814,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -29591,7 +29915,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -29688,7 +30014,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -29787,7 +30115,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -29886,7 +30216,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -29990,7 +30322,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
@@ -30094,7 +30428,9 @@ public final class Core {
     }
 
     @Override
-    public Core.Type_typedef vx_typedef() {return Core.t_func.vx_typedef();}
+    public Core.Type_typedef vx_typedef() {
+      return Core.t_func.vx_typedef();
+    }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {

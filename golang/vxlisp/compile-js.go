@@ -1541,6 +1541,7 @@ func JsAppTest(project *vxproject, command *vxcommand) string {
 		}
 		if iscontinue {
 			importname := StringFromStringFindReplace(pkg.name, "/", "_")
+			importname = StringFromStringFindReplace(importname, "-", "_")
 			importpath := StringFromStringFindReplace(pkg.name, "/", "/")
 			packageimport := "import " + importname + "_test from \"./" + importpath + "_test.js\""
 			packagetest := importname + "_test.test_package(context)"
