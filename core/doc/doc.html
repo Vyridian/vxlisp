@@ -3415,8 +3415,9 @@
      bool vx_p_boolean = false;
      bool vx_boolean() const;&quot;
    :csharp
-    &quot;protected boolean vxboolean = false;
+    &quot;internal boolean vxboolean = false;
 
+     // :implements
      public boolean vx_boolean() {return vxboolean;}&quot;
    :java
     &quot;protected boolean vxboolean = false;
@@ -3487,6 +3488,23 @@
      std::string vx_p_decimal = “0.0”;
      float vx_float() const;
      std::string vx_string() const;&quot;
+   :csharp
+    &quot;internal String vxdecimal = “0.0”;
+
+     // :implements
+     public float vx_float() {
+       return float.Parse(vxdecimal);
+     }
+
+     // :implements
+     public String vx_string() {return vxdecimal;}
+
+     // :implements
+     public Type_decimal vx_new_from_string(final String sval) {
+       Class_decimal output = new Class_decimal();
+       output.vxdecimal = sval;
+       return output;
+     }&quot;
    :java
     &quot;protected String vxdecimal = “0.0”;
 
@@ -3518,6 +3536,11 @@
     &quot;// :header
      float vx_p_float = 0;
      float vx_float() const;&quot;
+   :csharp
+    &quot;internal float vxfloat = 0;
+
+     // :implements
+     public float vx_float() {return vxfloat;}&quot;
    :java
     &quot;protected float vxfloat = 0;
 
@@ -3540,11 +3563,12 @@
  :doc &quot;Original Function Class.&quot;)
 
 (type funcdef : struct
- :properties [pkgname : string
-              name    : string
-              idx     : int
-              type    : any
-              async   : boolean]
+ :properties
+  [pkgname : string
+   name    : string
+   idx     : int
+   type    : any
+   async   : boolean]
  :create
   (native
    :cpp
@@ -3577,8 +3601,9 @@
      long vx_p_int = 0;
      long vx_int() const;&quot;
    :csharp
-    &quot;protected int vxint = 0;
+    &quot;internal int vxint = 0;
 
+     // :implements
      public int vx_int() {return vxint;}&quot;
    :java
     &quot;protected int vxint = 0;
@@ -3615,7 +3640,7 @@
  :doc &quot;A simple untyped list.&quot;)
 
 (type listtype : type
- :doc     &quot;A generic type that extends :list.&quot;)
+ :doc &quot;A generic type that extends :list.&quot;)
 
 (type locale : struct
  :doc &quot;Localization data.&quot;)
@@ -3635,7 +3660,7 @@
  :doc &quot;A simple untyped map.&quot;)
 
 (type maptype : type
- :doc     &quot;A generic type that extends :map.&quot;)
+ :doc &quot;A generic type that extends :map.&quot;)
 
 (type mempool : struct
  :properties [valuepool : value]
@@ -3693,16 +3718,19 @@
  :doc &quot;Memory Pool&quot;)
 
 (type msg : struct
- :properties [code     : string  :doc &quot;Message Code&quot;
-              detail   : any     :doc &quot;Message Detail&quot;
-              path     : string  :doc &quot;Message Path&quot;
-              severity : int     :doc &quot;Message Severity&quot;
-              text     : string  :doc &quot;Message Text&quot;]
+ :properties
+  [code     : string  :doc &quot;Message Code&quot;
+   detail   : any     :doc &quot;Message Detail&quot;
+   path     : string  :doc &quot;Message Path&quot;
+   severity : int     :doc &quot;Message Severity&quot;
+   text     : string  :doc &quot;Message Text&quot;]
  :create
   (native
    :cpp
     &quot;// :header
      std::exception err;&quot;
+   :csharp
+    &quot;public Exception err = null;&quot;
    :java
     &quot;public Exception err = null;&quot;)
  :doc &quot;Message Type for error handling&quot;)
@@ -3773,12 +3801,13 @@
  :doc        &quot;Security rules&quot;)
 
 (type session : struct
- :properties [user           : user
-              connectlist    : connectlist
-              connectmap     : connectmap
-              locale         : locale
-              translation    : translation
-              translationmap : translationmap]
+ :properties
+  [user           : user
+   connectlist    : connectlist
+   connectmap     : connectmap
+   locale         : locale
+   translation    : translation
+   translationmap : translationmap]
  :doc        &quot;Session&quot;)
 
 (type setting : struct
@@ -3809,8 +3838,9 @@
      std::string vx_p_string = “”;
      std::string vx_string() const;&quot;
    :csharp
-    &quot;protected String vxstring = “”;
+    &quot;internal String vxstring = “”;
 
+     // :implements
      public String vx_string() {
        return vxstring;
      }&quot;
@@ -4811,6 +4841,9 @@
   :cpp
    &quot;vx_core::Type_any val = vstruct-&gt;vx_get_any(key);
     output = vx_core::vx_any_from_any(generic_any_1, val);&quot;
+  :csharp
+   &quot;vx_core.Type_any val = vstruct.vx_any(key);
+    output = vx_core.f_any_from_any(generic_any_1, val);&quot;
   :js
    &quot;const subvalmap = vstruct['vx_value']
     if (subvalmap != undefined) {
@@ -5371,6 +5404,12 @@
     std::string sfind = find-&gt;vx_string();
     if (vx_core::vx_boolean_from_string_ends(stext, sfind)) {
       output = vx_core::c_true;
+    }&quot;
+  :csharp
+   &quot;String stext = text.vx_string();
+    String sfind = find.vx_string();
+    if (stext.EndsWith(sfind)) {
+      output = Core.c_true;
     }&quot;
   :js
    &quot;if (text.endsWith(find)) {
@@ -7080,8 +7119,9 @@
      bool vx_p_boolean = false;
      bool vx_boolean() const;&quot;
    :csharp
-    &quot;protected boolean vxboolean = false;
+    &quot;internal boolean vxboolean = false;
 
+     // :implements
      public boolean vx_boolean() {return vxboolean;}&quot;
    :java
     &quot;protected boolean vxboolean = false;
@@ -7822,6 +7862,23 @@
      std::string vx_p_decimal = “0.0”;
      float vx_float() const;
      std::string vx_string() const;&quot;
+   :csharp
+    &quot;internal String vxdecimal = “0.0”;
+
+     // :implements
+     public float vx_float() {
+       return float.Parse(vxdecimal);
+     }
+
+     // :implements
+     public String vx_string() {return vxdecimal;}
+
+     // :implements
+     public Type_decimal vx_new_from_string(final String sval) {
+       Class_decimal output = new Class_decimal();
+       output.vxdecimal = sval;
+       return output;
+     }&quot;
    :java
     &quot;protected String vxdecimal = “0.0”;
 
@@ -7938,6 +7995,11 @@
     &quot;// :header
      float vx_p_float = 0;
      float vx_float() const;&quot;
+   :csharp
+    &quot;internal float vxfloat = 0;
+
+     // :implements
+     public float vx_float() {return vxfloat;}&quot;
    :java
     &quot;protected float vxfloat = 0;
 
@@ -8102,11 +8164,12 @@
               <ul>
                 <li>
                   <div class="source">(type funcdef : struct
- :properties [pkgname : string
-              name    : string
-              idx     : int
-              type    : any
-              async   : boolean]
+ :properties
+  [pkgname : string
+   name    : string
+   idx     : int
+   type    : any
+   async   : boolean]
  :create
   (native
    :cpp
@@ -8284,8 +8347,9 @@
      long vx_p_int = 0;
      long vx_int() const;&quot;
    :csharp
-    &quot;protected int vxint = 0;
+    &quot;internal int vxint = 0;
 
+     // :implements
      public int vx_int() {return vxint;}&quot;
    :java
     &quot;protected int vxint = 0;
@@ -8508,7 +8572,7 @@
               <ul>
                 <li>
                   <div class="source">(type listtype : type
- :doc     &quot;A generic type that extends :list.&quot;)</div>
+ :doc &quot;A generic type that extends :list.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -8660,7 +8724,7 @@
               <ul>
                 <li>
                   <div class="source">(type maptype : type
- :doc     &quot;A generic type that extends :map.&quot;)</div>
+ :doc &quot;A generic type that extends :map.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -8880,16 +8944,19 @@
               <ul>
                 <li>
                   <div class="source">(type msg : struct
- :properties [code     : string  :doc &quot;Message Code&quot;
-              detail   : any     :doc &quot;Message Detail&quot;
-              path     : string  :doc &quot;Message Path&quot;
-              severity : int     :doc &quot;Message Severity&quot;
-              text     : string  :doc &quot;Message Text&quot;]
+ :properties
+  [code     : string  :doc &quot;Message Code&quot;
+   detail   : any     :doc &quot;Message Detail&quot;
+   path     : string  :doc &quot;Message Path&quot;
+   severity : int     :doc &quot;Message Severity&quot;
+   text     : string  :doc &quot;Message Text&quot;]
  :create
   (native
    :cpp
     &quot;// :header
      std::exception err;&quot;
+   :csharp
+    &quot;public Exception err = null;&quot;
    :java
     &quot;public Exception err = null;&quot;)
  :doc &quot;Message Type for error handling&quot;)</div>
@@ -9920,12 +9987,13 @@
               <ul>
                 <li>
                   <div class="source">(type session : struct
- :properties [user           : user
-              connectlist    : connectlist
-              connectmap     : connectmap
-              locale         : locale
-              translation    : translation
-              translationmap : translationmap]
+ :properties
+  [user           : user
+   connectlist    : connectlist
+   connectmap     : connectmap
+   locale         : locale
+   translation    : translation
+   translationmap : translationmap]
  :doc        &quot;Session&quot;)</div>
                 </li>
               </ul>
@@ -10263,8 +10331,9 @@
      std::string vx_p_string = “”;
      std::string vx_string() const;&quot;
    :csharp
-    &quot;protected String vxstring = “”;
+    &quot;internal String vxstring = “”;
 
+     // :implements
      public String vx_string() {
        return vxstring;
      }&quot;
@@ -16625,6 +16694,9 @@ improves readability.</div>
   :cpp
    &quot;vx_core::Type_any val = vstruct-&gt;vx_get_any(key);
     output = vx_core::vx_any_from_any(generic_any_1, val);&quot;
+  :csharp
+   &quot;vx_core.Type_any val = vstruct.vx_any(key);
+    output = vx_core.f_any_from_any(generic_any_1, val);&quot;
   :js
    &quot;const subvalmap = vstruct['vx_value']
     if (subvalmap != undefined) {
@@ -19133,6 +19205,12 @@ improves readability.</div>
     std::string sfind = find-&gt;vx_string();
     if (vx_core::vx_boolean_from_string_ends(stext, sfind)) {
       output = vx_core::c_true;
+    }&quot;
+  :csharp
+   &quot;String stext = text.vx_string();
+    String sfind = find.vx_string();
+    if (stext.EndsWith(sfind)) {
+      output = Core.c_true;
     }&quot;
   :js
    &quot;if (text.endsWith(find)) {

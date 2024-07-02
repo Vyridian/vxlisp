@@ -137,7 +137,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("nodes"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -396,7 +396,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -416,7 +416,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("eventmap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -436,7 +436,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -456,7 +456,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style-unique"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -476,7 +476,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -496,7 +496,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("summary"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -516,7 +516,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("nodes"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -780,7 +780,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -800,7 +800,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("eventmap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -820,7 +820,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -840,7 +840,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style-unique"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -860,7 +860,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -880,7 +880,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("nodes"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -1091,7 +1091,7 @@ public final class Html {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      List<Html.Type_divchild> listval = new ArrayList<>(val.vx_listdivchild());
+      List<Html.Type_divchild> listval = new ArrayList<Html.Type_divchild>(val.vx_listdivchild());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -1231,7 +1231,7 @@ public final class Html {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      List<Html.Type_div> listval = new ArrayList<>(val.vx_listdiv());
+      List<Html.Type_div> listval = new ArrayList<Html.Type_div>(val.vx_listdiv());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -1436,7 +1436,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("nodes"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -1690,7 +1690,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -1710,7 +1710,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("eventmap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -1730,7 +1730,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -1750,7 +1750,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style-unique"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -1770,7 +1770,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -1793,7 +1793,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("text"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2052,7 +2052,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2072,7 +2072,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("eventmap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2092,7 +2092,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2112,7 +2112,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style-unique"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2132,7 +2132,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2155,7 +2155,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("text"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2414,7 +2414,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2434,7 +2434,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("eventmap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2454,7 +2454,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2474,7 +2474,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style-unique"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2494,7 +2494,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2517,7 +2517,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("text"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2707,7 +2707,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("nodes"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2913,7 +2913,7 @@ public final class Html {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      List<Html.Type_headchild> listval = new ArrayList<>(val.vx_listheadchild());
+      List<Html.Type_headchild> listval = new ArrayList<Html.Type_headchild>(val.vx_listheadchild());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -3150,7 +3150,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("lang"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -3170,7 +3170,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("head"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -3190,7 +3190,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("body"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -3210,7 +3210,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("footer"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -3467,7 +3467,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -3487,7 +3487,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("eventmap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -3507,7 +3507,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -3527,7 +3527,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style-unique"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -3547,7 +3547,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -3570,7 +3570,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("src"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -3848,7 +3848,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -3868,7 +3868,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("eventmap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -3888,7 +3888,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -3908,7 +3908,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style-unique"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -3928,7 +3928,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -3951,7 +3951,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("charset"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -3974,7 +3974,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("name"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -3997,7 +3997,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("content"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -4235,7 +4235,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -4255,7 +4255,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("eventmap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -4275,7 +4275,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -4295,7 +4295,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style-unique"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -4315,7 +4315,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -4439,7 +4439,7 @@ public final class Html {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      List<Html.Type_node> listval = new ArrayList<>(val.vx_listnode());
+      List<Html.Type_node> listval = new ArrayList<Html.Type_node>(val.vx_listnode());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -4713,7 +4713,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -4733,7 +4733,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("eventmap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -4753,7 +4753,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -4773,7 +4773,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style-unique"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -4793,7 +4793,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -4816,7 +4816,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("text"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -4911,7 +4911,7 @@ public final class Html {
           key = key.substring(1);
         }
         Core.Type_string castval = (Core.Type_string)value;
-        Map<String, Core.Type_string> map = new LinkedHashMap<>(this.vx_p_map);
+        Map<String, Core.Type_string> map = new LinkedHashMap<String, Core.Type_string>(this.vx_p_map);
         if (castval == Core.e_string) {
           map.remove(key);
         } else {
@@ -4947,7 +4947,7 @@ public final class Html {
     public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
       Html.Class_propmap output = new Html.Class_propmap();
       Core.Type_msgblock msgblock = Core.e_msgblock;
-      Map<String, Core.Type_string> map = new LinkedHashMap<>();
+      Map<String, Core.Type_string> map = new LinkedHashMap<String, Core.Type_string>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         Core.Type_any val = mapval.get(key);
@@ -4982,7 +4982,7 @@ public final class Html {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, Core.Type_string> mapval = new LinkedHashMap<>(val.vx_mapstring());
+      Map<String, Core.Type_string> mapval = new LinkedHashMap<String, Core.Type_string>(val.vx_mapstring());
       Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
@@ -5019,7 +5019,7 @@ public final class Html {
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
-            Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+            Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
             mapany.put("key", Core.vx_new_string(key));
             mapany.put("value", msgval);
             Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -5223,7 +5223,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("name"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -5243,7 +5243,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("props"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -5263,7 +5263,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -5385,7 +5385,7 @@ public final class Html {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      List<Html.Type_style> listval = new ArrayList<>(val.vx_liststyle());
+      List<Html.Type_style> listval = new ArrayList<Html.Type_style>(val.vx_liststyle());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -5495,7 +5495,7 @@ public final class Html {
           key = key.substring(1);
         }
         Html.Type_style castval = (Html.Type_style)value;
-        Map<String, Html.Type_style> map = new LinkedHashMap<>(this.vx_p_map);
+        Map<String, Html.Type_style> map = new LinkedHashMap<String, Html.Type_style>(this.vx_p_map);
         if (castval == Html.e_style) {
           map.remove(key);
         } else {
@@ -5531,7 +5531,7 @@ public final class Html {
     public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
       Html.Class_stylemap output = new Html.Class_stylemap();
       Core.Type_msgblock msgblock = Core.e_msgblock;
-      Map<String, Html.Type_style> map = new LinkedHashMap<>();
+      Map<String, Html.Type_style> map = new LinkedHashMap<String, Html.Type_style>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         Core.Type_any val = mapval.get(key);
@@ -5566,7 +5566,7 @@ public final class Html {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, Html.Type_style> mapval = new LinkedHashMap<>(val.vx_mapstyle());
+      Map<String, Html.Type_style> mapval = new LinkedHashMap<String, Html.Type_style>(val.vx_mapstyle());
       Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
@@ -5603,7 +5603,7 @@ public final class Html {
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
-            Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+            Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
             mapany.put("key", Core.vx_new_string(key));
             mapany.put("value", msgval);
             Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -5877,7 +5877,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -5897,7 +5897,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("eventmap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -5917,7 +5917,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -5937,7 +5937,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style-unique"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -5957,7 +5957,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -5980,7 +5980,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("name"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -6000,7 +6000,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("styles"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -6020,7 +6020,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("stylemap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -6286,7 +6286,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -6306,7 +6306,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("eventmap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -6326,7 +6326,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -6346,7 +6346,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style-unique"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -6366,7 +6366,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -6386,7 +6386,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("tbody"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -6406,7 +6406,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("thead"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -6670,7 +6670,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -6690,7 +6690,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("eventmap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -6710,7 +6710,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -6730,7 +6730,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style-unique"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -6750,7 +6750,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -6770,7 +6770,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("nodes"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -7033,7 +7033,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -7053,7 +7053,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("eventmap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -7073,7 +7073,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -7093,7 +7093,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style-unique"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -7113,7 +7113,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -7133,7 +7133,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("nodes"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -7258,7 +7258,7 @@ public final class Html {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      List<Html.Type_td> listval = new ArrayList<>(val.vx_listtd());
+      List<Html.Type_td> listval = new ArrayList<Html.Type_td>(val.vx_listtd());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -7536,7 +7536,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -7556,7 +7556,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("eventmap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -7576,7 +7576,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -7596,7 +7596,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style-unique"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -7616,7 +7616,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -7636,7 +7636,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("nodes"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -7886,7 +7886,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -7906,7 +7906,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("eventmap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -7926,7 +7926,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -7946,7 +7946,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style-unique"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -7966,7 +7966,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -7989,7 +7989,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("text"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -8252,7 +8252,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -8272,7 +8272,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("eventmap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -8292,7 +8292,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -8312,7 +8312,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("style-unique"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -8332,7 +8332,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("stylelist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -8352,7 +8352,7 @@ public final class Html {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("nodes"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -8477,7 +8477,7 @@ public final class Html {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      List<Html.Type_tr> listval = new ArrayList<>(val.vx_listtr());
+      List<Html.Type_tr> listval = new ArrayList<Html.Type_tr>(val.vx_listtr());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {

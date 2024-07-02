@@ -6,11 +6,20 @@ public static class vx_core {
     public List<TKey> keys();
     public TValue get(TKey key);
     public void put(TKey key, TValue value);
+    public void remove(TKey key);
   }
 
   public class LinkedHashMap<TKey, TValue> : Map<TKey, TValue> {
     private Dictionary<TKey, TValue> dict = new Dictionary<TKey, TValue>();
     private List<TKey> listkey = new List<TKey>();
+    public LinkedHashMap() {
+    }
+    public LinkedHashMap(Map<TKey, TValue> copy) {
+      this.listkey = new List<TKey>(copy.keys());
+      foreach (TKey key in this.listkey) {
+        dict[key] = copy.get(key);
+      }
+    }
     public TValue get(TKey key) {
       return dict[key];
     }
@@ -20,6 +29,10 @@ public static class vx_core {
     public void put(TKey key, TValue value) {
       listkey.Add(key);
       dict[key] = value;
+    }
+    public void remove(TKey key) {
+      listkey.Remove(key);
+      dict.Remove(key);
     }
   }
 
@@ -37,7 +50,7 @@ public static class vx_core {
 
   public static List<vx_core.Type_any> emptylistany = new List<vx_core.Type_any>();
 
-  public static Map<String, vx_core.Type_any> emptymapany = new LinkedHashMap<String, vx_core.Type_any>();
+  public static Map<string, vx_core.Type_any> emptymapany = new LinkedHashMap<string, vx_core.Type_any>();
 
   public class Class_base {
     protected int vx_iref = 0;
@@ -79,13 +92,13 @@ public static class vx_core {
   }
 
   public class KeyValue<T> {
-    public String key = "";
+    public string key = "";
     public T value = default(T);
   }
 
   public static vx_core.Type_constdef constdef_new(
-    String pkgname,
-    String name,
+    string pkgname,
+    string name,
     vx_core.Type_any typ
   ) {
     vx_core.Class_constdef output = new vx_core.Class_constdef();
@@ -96,8 +109,8 @@ public static class vx_core {
   }
 
   public static vx_core.Type_funcdef funcdef_new(
-    String pkgname,
-    String name,
+    string pkgname,
+    string name,
     int idx,
     bool async,
     vx_core.Type_any typ
@@ -120,7 +133,10 @@ public static class vx_core {
     return output;
   }
 
-  public static List<T> arraylist_from_arraylist<T, U>(T generic_any_1, List<U> listval) where T : vx_core.Type_any where U : vx_core.Type_any {
+  public static List<T> arraylist_from_arraylist<T, U>(
+    T generic_any_1, List<U> listval)
+    where T : vx_core.Type_any
+    where U : vx_core.Type_any {
     List<T> output = new List<T>();
     foreach (vx_core.Type_any value in listval) {
       T t_val = vx_core.f_any_from_any(generic_any_1, value);
@@ -129,7 +145,9 @@ public static class vx_core {
     return output;
   }
 
-  public static List<T> arraylist_from_arraylist_fn<T, U>(List<U> listval, Func<U, T> fn_any_from_any) {
+  public static List<T> arraylist_from_arraylist_fn<T, U>(
+    List<U> listval,
+    Func<U, T> fn_any_from_any) {
     List<T> output = new List<T>();
     foreach (U value_u in listval) {
       T t_val = fn_any_from_any.Invoke(value_u);
@@ -138,10 +156,14 @@ public static class vx_core {
     return output;
   }
 
-  public static List<T> arraylist_from_linkedhashmap<T, U>(T generic_any_1, LinkedHashMap<String, U> mapval) where T : vx_core.Type_any where U : vx_core.Type_any {
+  public static List<T> arraylist_from_linkedhashmap<T, U>(
+    T generic_any_1,
+    LinkedHashMap<string, U> mapval)
+    where T : vx_core.Type_any
+    where U : vx_core.Type_any {
     List<T> output = new List<T>();
-    List<String> keys = mapval.keys();
-    foreach (String key in keys) {
+    List<string> keys = mapval.keys();
+    foreach (string key in keys) {
       U u_val = mapval.get(key);
       T t_val = vx_core.f_any_from_any(generic_any_1, u_val);
       output.Add(t_val);
@@ -149,10 +171,10 @@ public static class vx_core {
     return output;
   }
 
-  public static List<T> arraylist_from_linkedhashmap_fn<T, U>(Map<String, U> mapval, Func<String, U, T> fn_any_from_key_value) {
+  public static List<T> arraylist_from_linkedhashmap_fn<T, U>(Map<string, U> mapval, Func<string, U, T> fn_any_from_key_value) {
     List<T> output = new List<T>();
-    List<String> keys = mapval.keys();
-    foreach (String key in keys) {
+    List<string> keys = mapval.keys();
+    foreach (string key in keys) {
       U u_val = mapval.get(key);
       T t_val = fn_any_from_key_value.Invoke(key, u_val);
       output.Add(t_val);
@@ -161,49 +183,49 @@ public static class vx_core {
   }
 
   public static Task<T> async_new_completed<T>(T val) {
-    Task<T> output = Task.completedFuture(val);
+    Task<T> output = Task.FromResult<T>(val);
     return output;
   }
 
   public static Task<T> async_from_async<T, U>(T generic_any_1, Task<U> future) where T : vx_core.Type_any where U : vx_core.Type_any {
-    Task<T> output = future.ThenApply(val => {
-      return vx_core.f_any_from_any(generic_any_1, val);
+    Task<T> output = future.ContinueWith(tasku => {
+      U tval = tasku.Result;
+      T result = vx_core.f_any_from_any(generic_any_1, tval);
+      return result;
     });
     return output;
   }
 
   public static Task<T> async_from_async_fn<T, U>(Task<U> future, Func<U, T> fn) {
-    Task<T> output = future.ContinueWith(antecedent => {
-      U result = antedcedent.Result;
-      return fn(result);
+    Task<T> output = future.ContinueWith(tasku => {
+      U uval = tasku.Result;
+      T tval = fn(uval);
+      return tval;
     });
     return output;
   }
 
   public static Task<List<T>> async_arraylist_from_arraylist_async<T>(List<Task<T>> list_future) {
-    Task<Void> allFutures = Task.allOf(
-      list_future.toArray(new Task[list_future.size()])
-    );
-    Task<List<T>> output = allFutures.thenApply(v => {
-      List<T> list = list_future.stream()
-        .map(future => future.join())
-        .collect(Collectors.toList());
-      return list;
+    Task<T[]> future = Task.WhenAll(list_future);
+    Task<List<T>> output = future.ContinueWith(taskarrayt => {
+     T[] arrayt = taskarrayt.Result;
+     List<T> listt = arrayt.ToList();
+     return listt;
     });
     return output;
   }
 
-  public static LinkedHashMap<String, T> hashmap_from_keyvalues<T>(params KeyValue<T>[] keyvalues) {
-    LinkedHashMap<String, T> output = new LinkedHashMap<String, T>();
+  public static LinkedHashMap<string, T> hashmap_from_keyvalues<T>(params KeyValue<T>[] keyvalues) {
+    LinkedHashMap<string, T> output = new LinkedHashMap<string, T>();
     foreach (KeyValue<T> keyvalue in keyvalues) {
-      String key = keyvalue.key;
+      string key = keyvalue.key;
       T value = keyvalue.value;
       output.put(key, value);
     }
     return output;
   }
 
-  public static KeyValue<T> keyvalue_from_key_value<T>(String key, T value) {
+  public static KeyValue<T> keyvalue_from_key_value<T>(string key, T value) {
     KeyValue<T> output = new KeyValue<T>();
     output.key = key;
     output.value = value;
@@ -218,20 +240,20 @@ public static class vx_core {
     return mapval;
   }
 
-  public static Map<String, T> map_from_list_fn<T>(List<T> listval, Func<T, vx_core.Type_string> fn_any_from_any) {
-    Map<String, T> output = new LinkedHashMap<String, T>();
+  public static Map<string, T> map_from_list_fn<T>(List<T> listval, Func<T, vx_core.Type_string> fn_any_from_any) {
+    Map<string, T> output = new LinkedHashMap<string, T>();
     foreach (T val in listval) {
       vx_core.Type_string valkey = fn_any_from_any.Invoke(val);
-      String key = valkey.vx_string();
+      string key = valkey.vx_string();
       output.put(key, val);
     }
     return output;
   }
 
-  public static LinkedHashMap<String, T> map_from_map<T>(LinkedHashMap<String, vx_core.Type_any> mapval) where T : vx_core.Type_any {
-    LinkedHashMap<String, T> output = new LinkedHashMap<String, T>();
-    Set<String> keys = mapval.keySet();
-    foreach (String key in keys) {
+  public static LinkedHashMap<string, T> map_from_map<T>(LinkedHashMap<string, vx_core.Type_any> mapval) where T : vx_core.Type_any {
+    LinkedHashMap<string, T> output = new LinkedHashMap<string, T>();
+    List<string> keys = mapval.keys();
+    foreach (string key in keys) {
       vx_core.Type_any value = mapval.get(key);
       try {
         T castval = (T)value;
@@ -243,18 +265,44 @@ public static class vx_core {
     return output;
   }
 
+  // vx_new(generic_any_1, args...)
+  public static T vx_new<T>(T generic_any_1, params Object[] vals) where T : vx_core.Type_any {
+    vx_core.Type_any val = generic_any_1.vx_new(vals);
+    T output = vx_core.f_any_from_any(generic_any_1, val);
+    return output;
+  }
+
+  // vx_copy(generic_any_1, args...)
+  public static T vx_copy<T>(T copyval, params Object[] vals) where T : vx_core.Type_any {
+    vx_core.Type_any val = copyval.vx_copy(vals);
+    T output = vx_core.f_any_from_any(copyval, val);
+    return output;
+  }
+
+  // vx_empty(generic_any_1)
+  public static T vx_empty<T>(T type) where T : vx_core.Type_any {
+    T output = (T)(type.vx_empty());
+    return output;
+  }
+
+  // vx_type(generic_any_1)
+  public static T vx_type<T>(T type) where T : vx_core.Type_any {
+    T output = (T)(type.vx_type());
+    return output;
+  }
+
   // vx_boolean_from_string_ends(string, string)
-  public static bool vx_boolean_from_string_ends(String text, String ends) {
+  public static bool vx_boolean_from_string_ends(string text, string ends) {
     return text.EndsWith(ends);
   }
 
   // vx_boolean_from_string_find(string, string)
-  public static bool vx_boolean_from_string_find(String text, String find) {
+  public static bool vx_boolean_from_string_find(string text, string find) {
     return text.Contains(find);
   }
 
   // vx_boolean_from_string_starts(string, string)
-  public static bool vx_boolean_from_string_starts(String text, String starts) {
+  public static bool vx_boolean_from_string_starts(string text, string starts) {
     return text.StartsWith(starts);
   }
 
@@ -299,17 +347,17 @@ public static class vx_core {
   }
 
   // vx_float_from_string(string)
-  public static float vx_float_from_string(String text) {
+  public static float vx_float_from_string(string text) {
     float output = 0;
     try {
-      output = Float.parseFloat(text);
+      output = float.Parse(text);
     } catch (Exception e) {
     }    
     return output;
   }
 
   // vx_global_package_set(string, map<any>, map<any>, map<func>)
-  public static void vx_global_package_set(String pkgname, Map<String, vx_core.Type_any> maptype, Map<String, vx_core.Type_any> mapconst, Map<String, vx_core.Type_func> mapfunc) {
+  public static void vx_global_package_set(string pkgname, Map<string, vx_core.Type_any> maptype, Map<string, vx_core.Type_any> mapconst, Map<string, vx_core.Type_func> mapfunc) {
     vx_core.Class_typemap typemap = new vx_core.Class_typemap();
 		  typemap.vx_p_map = maptype;
 	   vx_core.Class_constmap constmap = new vx_core.Class_constmap();
@@ -322,7 +370,7 @@ public static class vx_core {
       packagemap = new vx_core.Class_packagemap();
       global.vx_p_packagemap = packagemap;
     }
-    Map<String, vx_core.Type_package> mappackage = new LinkedHashMap<String, vx_core.Type_package>(packagemap.vx_p_map);
+    Map<string, vx_core.Type_package> mappackage = new LinkedHashMap<string, vx_core.Type_package>(packagemap.vx_p_map);
 		  vx_core.Class_package pkg = new vx_core.Class_package();
 		  pkg.vx_p_constmap = constmap;
 		  pkg.vx_p_typemap = typemap;
@@ -332,30 +380,30 @@ public static class vx_core {
   }
 
   // vx_int_from_string(string)
-  public static int vx_int_from_string(String text) {
+  public static int vx_int_from_string(string text) {
     int output = 0;
     try {
-      output = Integer.parseInt(text);
+      output = int.Parse(text);
     } catch (Exception e) {
     }    
     return output;
   }
 
   // vx_int_from_string_find(string, string)
-  public static int vx_int_from_string_find(String text, String find) {
+  public static int vx_int_from_string_find(string text, string find) {
     return text.IndexOf(find);
   }
 
   // vx_int_from_string_findlast(string, string)
-  public static int vx_int_from_string_findlast(String text, String findlast) {
+  public static int vx_int_from_string_findlast(string text, string findlast) {
     return text.LastIndexOf(findlast);
   }
 
   // vx_is_float(string)
-  public static bool vx_is_float(String text) {
+  public static bool vx_is_float(string text) {
     bool output = false;
     try {
-      Float.parseFloat(text);
+      float.Parse(text);
       output = true;
     } catch (Exception e) {
     }    
@@ -375,7 +423,7 @@ public static class vx_core {
   }
 
   // vx_is_int(string)
-  public static bool vx_is_int(String text) {
+  public static bool vx_is_int(string text) {
     bool output = false;
     switch (text) {
     case "notanumber":
@@ -385,7 +433,7 @@ public static class vx_core {
       break;
     default:
       try {
-        Integer.parseInt(text);
+        int.Parse(text);
         output = true;
       } catch (Exception e) {
       }
@@ -413,16 +461,16 @@ public static class vx_core {
       }
     } else if (value is vx_core.Type_decimal) {
       vx_core.Type_decimal valdec = (vx_core.Type_decimal)value;
-      String strval = valdec.vx_string();
+      string strval = valdec.vx_string();
       try {
-        if (Integer.parseInt(strval) == Float.parseFloat(strval)) {
+        if (int.Parse(strval) == float.Parse(strval)) {
           result = true;
         }
       } catch (Exception ex) {
       }
     } else if (value is vx_core.Type_string) {
       vx_core.Type_string valstr = (vx_core.Type_string)value;
-      String strval = valstr.vx_string();
+      string strval = valstr.vx_string();
       result = vx_is_int(strval);
     }
     return result;
@@ -431,7 +479,7 @@ public static class vx_core {
   // vx_log(object...)
   public static void vx_log(params Object[] values) {
     foreach (Object value in values) {
-      String text = "";
+      string text = "";
       if (value == null) {
         text = "null";
       } else if (value is vx_core.Type_string) {
@@ -442,27 +490,47 @@ public static class vx_core {
         vx_core.Type_string valstring = vx_core.f_string_from_any(valany);
         text = valstring.vx_string();
       } else {
-        text = value.toString();
+        text = value.ToString();
       }
       System.Console.WriteLine(text);
     }
   }
 
-  // vx_msg_error
-  public static Type_msg vx_msg_error(String text) {
+  // vx_msg_from_error
+  public static Type_msg vx_msg_from_error(string text) {
     Class_msg output = new Class_msg();
     output.vx_p_text = vx_core.vx_new_string(text);
     output.vx_p_severity = vx_core.c_msg_severe;
     return output;
   }
 
+  // vx_msg_from_error
+  public static Type_msg vx_msg_from_error(string path, string code, vx_core.Type_any detail) {
+    Class_msg output = new Class_msg();
+    output.vx_p_path = vx_core.vx_new_string(path);
+    output.vx_p_code = vx_core.vx_new_string(code);
+    output.vx_p_detail = detail;
+    output.vx_p_severity = vx_core.c_msg_severe;
+    return output;
+  }
+
   // vx_msg_from_exception
-  public static Type_msg vx_msg_from_exception(String text, Exception err) {
+  public static Type_msg vx_msg_from_exception(string text, Exception err) {
     Class_msg output = new Class_msg();
     output.vx_p_text = vx_core.vx_new_string(text);
     output.vx_p_severity = vx_core.c_msg_severe;
     output.err = err;
     vx_core.vx_log(output);
+    return output;
+  }
+
+  // vx_msgblock_from_copy_arrayval(msgblock, any...)
+  public static vx_core.Type_msgblock vx_msgblock_from_copy_arrayval(vx_core.Type_any copy, Object[] vals) {
+    vx_core.Type_msgblock output = vx_core.e_msgblock;
+    vx_core.Type_msgblock copymsgblock = copy.vx_msgblock();
+    if (copymsgblock != null) {
+      output = copymsgblock;
+    }
     return output;
   }
 
@@ -488,14 +556,13 @@ public static class vx_core {
       Class_int work = new vx_core.Class_int();
       work.vxint = ival;
       output = work;
-
     }
     return output;
   }
 
-  public static Type_string vx_new_string(String text) {
+  public static Type_string vx_new_string(string text) {
     Type_string output;
-    if (text.equals("") && vx_core.e_string != null) {
+    if ((text == "") && vx_core.e_string != null) {
       output = vx_core.e_string;
     } else {
       Class_string work = new vx_core.Class_string();
@@ -505,13 +572,16 @@ public static class vx_core {
     return output;
   }
 
-  public static String vx_string_from_any(vx_core.Type_any value) {
-    return vx_string_from_any_indent(value, 0, false);
+  public static string vx_string_from_any(vx_core.Type_any value) {
+    return vx_core.vx_string_from_any_indent(value, 0, false);
   }
 
-  public static String vx_string_from_any_indent(vx_core.Type_any value, int indent, bool linefeed) {
-    String indenttext = " ".repeat(indent);
-    String output = "";
+  public static string vx_string_from_any_indent(
+    vx_core.Type_any value,
+    int indent,
+    bool linefeed) {
+    string indenttext = vx_string_repeat(" ", indent);
+    string output = "";
     if (indent > 50) {
       output = "Error: Max Depth Exceeded";
     } else if (value == null) {
@@ -537,9 +607,9 @@ public static class vx_core {
       output = valdec.vx_string();
     } else if (value is vx_core.Type_float) {
       vx_core.Type_float valfloat = vx_core.f_any_from_any(vx_core.t_float, value);
-      output = Float.toString(valfloat.vx_float());
-      if (output.endsWith(".0")) {
-        output = output.Substring(0, output.length() - 2);
+      output = valfloat.vx_float().ToString();
+      if (output.EndsWith(".0")) {
+        output = output.Substring(0, output.Length - 2);
       }
     } else if (value is vx_core.Type_int) {
       if (value == vx_core.c_notanumber) {
@@ -550,7 +620,7 @@ public static class vx_core {
         output = "neginfinity";
       } else {
         vx_core.Type_int valint = vx_core.f_any_from_any(vx_core.t_int, value);
-        output = Integer.toString(valint.vx_int());
+        output = valint.vx_int().ToString();
       }
     } else if (value is vx_core.Type_string) {
       vx_core.Type_string valstring = vx_core.f_any_from_any(vx_core.t_string, value);
@@ -558,9 +628,9 @@ public static class vx_core {
     } else if (value is vx_core.vx_Type_const) {
       vx_core.vx_Type_const constvalue = (vx_core.vx_Type_const)value;
       vx_core.Type_constdef constdef = constvalue.vx_constdef();
-      String constpkg = constdef.pkgname().vx_string();
-      String constname = constdef.name().vx_string();
-      if (constpkg.equals("vx/core")) {
+      string constpkg = constdef.pkgname().vx_string();
+      string constname = constdef.name().vx_string();
+      if (constpkg == "vx/core") {
         output = constname;
       } else {
         output = constpkg + "/" + constname;
@@ -573,11 +643,11 @@ public static class vx_core {
       indentint += 1;
       List<vx_core.Type_any> listval = vallist.vx_list();
       foreach (vx_core.Type_any valsub in listval) {
-        String valtext = vx_core.vx_string_from_any_indent(valsub, indentint, linefeed);
+        string valtext = vx_core.vx_string_from_any_indent(valsub, indentint, linefeed);
         output += "\n " + indenttext + valtext;
       }
       if (vallist.vx_msgblock() != null) {
-        String msgtext = vx_core.vx_string_from_any_indent(vallist.vx_msgblock(), indentint, linefeed);
+        string msgtext = vx_core.vx_string_from_any_indent(vallist.vx_msgblock(), indentint, linefeed);
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
       }
       output = "(" + typedefname.vx_string() + output + ")";
@@ -587,15 +657,16 @@ public static class vx_core {
       vx_core.Type_string typedefname = typedef.name();
       int indentint = indent;
       indentint += 2;
-      Map<String, vx_core.Type_any> mapval = valmap.vx_map();
-      Set<String> keys = mapval.keySet();
-      foreach (String key in keys) {
+      Map<string, vx_core.Type_any> mapval = valmap.vx_map();
+      List<string> keys = mapval.keys();
+      foreach (string skey in keys) {
+        string key = skey;
         vx_core.Type_any valsub = mapval.get(key);
-        if (!key.startsWith(":")) {
+        if (!key.StartsWith(":")) {
           key = ":" + key;
         }
-        String strval = vx_core.vx_string_from_any_indent(valsub, indentint, linefeed);
-        if (strval.contains("\n")) {
+        string strval = vx_core.vx_string_from_any_indent(valsub, indentint, linefeed);
+        if (strval.Contains("\n")) {
           strval = "\n  " + indenttext + strval;
         } else {
           strval = " " + strval;
@@ -603,7 +674,7 @@ public static class vx_core {
         output += "\n" + indenttext + " " + key + strval;
       }
       if (valmap.vx_msgblock() != null) {
-        String msgtext = vx_core.vx_string_from_any_indent(valmap.vx_msgblock(), indentint, linefeed);
+        string msgtext = vx_core.vx_string_from_any_indent(valmap.vx_msgblock(), indentint, linefeed);
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
       }
       output = "(" + typedefname.vx_string() + output + ")";
@@ -613,16 +684,17 @@ public static class vx_core {
       vx_core.Type_string typedefname = typedef.name();
       int indentint2 = indent;
       indentint2 += 2;
-      Map<String, vx_core.Type_any> mapval2 = valstruct.vx_map();
-      Set<String> keys2 = mapval2.keySet();
-      foreach (String key in keys2) {
+      Map<string, vx_core.Type_any> mapval2 = valstruct.vx_map();
+      List<string> keys2 = mapval2.keys();
+      foreach (string skey in keys2) {
+        string key = skey;
         vx_core.Type_any valsub2 = mapval2.get(key);
         if (!vx_core.f_is_empty_1(valsub2).vx_boolean()) {
-          if (!key.startsWith(":")) {
+          if (!key.StartsWith(":")) {
             key = ":" + key;
           }
-          String strval2 = vx_core.vx_string_from_any_indent(valsub2, indentint2, linefeed);
-          if (strval2.contains("\n")) {
+          string strval2 = vx_core.vx_string_from_any_indent(valsub2, indentint2, linefeed);
+          if (strval2.Contains("\n")) {
             strval2 = "\n  " + indenttext + strval2;
           } else {
             strval2 = " " + strval2;
@@ -631,7 +703,7 @@ public static class vx_core {
         }
       }
       if (valstruct.vx_msgblock() != null) {
-        String msgtext2 = vx_core.vx_string_from_any_indent(valstruct.vx_msgblock(), indentint2, linefeed);
+        string msgtext2 = vx_core.vx_string_from_any_indent(valstruct.vx_msgblock(), indentint2, linefeed);
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext2;
       }
       output = "(" + typedefname.vx_string() + output + ")";
@@ -641,7 +713,7 @@ public static class vx_core {
       vx_core.Type_string funcdefname = vx_core.f_funcname_from_funcdef(funcdef);
       output = funcdefname.vx_string();
       if (valfunc.vx_msgblock() != null) {
-        String msgtext = vx_core.vx_string_from_any_indent(valfunc.vx_msgblock(), indent, linefeed);
+        string msgtext = vx_core.vx_string_from_any_indent(valfunc.vx_msgblock(), indent, linefeed);
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
       }
       output = "(" + output + ")";
@@ -649,9 +721,9 @@ public static class vx_core {
     return output;
   }
 
-  public static String vx_string_from_string_start_end(String text, int start, int end) {
-    String output = "";
-    int maxlen = text.length();
+  public static string vx_string_from_string_start_end(string text, int start, int end) {
+    string output = "";
+    int maxlen = text.Length;
     if (end < 0) {
      end += maxlen;
     }
@@ -667,10 +739,16 @@ public static class vx_core {
     return output;
   }
 
+  public static string vx_string_repeat(string text, int repeat) {
+    System.Text.StringBuilder sb = new System.Text.StringBuilder(text.Length * repeat);
+    sb.Insert(0, text, repeat);
+    string output = sb.ToString();
+    return output;
+  }
   public static vx_core.Type_typedef typedef_new(
-    String pkgname,
-    String name,
-    String extend,
+    string pkgname,
+    string name,
+    string extend,
     vx_core.Type_typelist traits,
     vx_core.Type_typelist allowtypes,
     vx_core.Type_typelist disallowtypes,
@@ -695,14 +773,14 @@ public static class vx_core {
     return output;
   }
 
-  public static vx_core.Type_anylist vx_anylist_from_arraystring(String[] arraystring) {
-    List<Object> listany = new List<>();
-    foreach (String svalue in arraystring) {
+  public static vx_core.Type_anylist vx_anylist_from_arraystring(string[] arraystring) {
+    List<Object> listany = new List<Object>();
+    foreach (string svalue in arraystring) {
       vx_core.Type_string value = vx_core.vx_new_string(svalue);
-      listany.add(value);
+      listany.Add(value);
     }
-    Object[] arrayany = listany.toArray();
-    vx_core.Type_anylist output = vx_core.t_anylist.vx_new(arrayany);
+    Object[] arrayany = listany.ToArray();
+    vx_core.Type_anylist output = vx_core.vx_new(vx_core.t_anylist, arrayany);
     return output;
   }
 
@@ -710,7 +788,8 @@ public static class vx_core {
   public static T vx_sync_from_async<T>(T generic_any_1, Task<T> future) where T : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
     try {
-      output = future.get();
+      future.Wait();
+      output = future.Result;
     } catch (Exception e) {
       vx_core.Type_msg msg = vx_core.vx_msg_from_exception("sync<-async", e);
       vx_core.Type_any val = generic_any_1.vx_new(msg);
@@ -879,10 +958,10 @@ public static class vx_core {
 
   public class Class_any_from_anylist : vx_core.Class_base, Type_any_from_anylist {
 
-    public List<vx_core.Func_any_from_any> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Func_any_from_any>());
+    public List<vx_core.Func_any_from_any> vx_p_list = vx_core.immutablelist(new List<vx_core.Func_any_from_any>());
 
     public List<vx_core.Type_any> vx_list() {
-      List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
+      List<vx_core.Type_any> output = vx_core.immutablelist(new List<vx_core.Type_any>(this.vx_p_list));
       return output;
     }
 
@@ -891,8 +970,8 @@ public static class vx_core {
       vx_core.Class_any_from_anylist list = this;
       int iindex = index.vx_int();
       List<vx_core.Func_any_from_any> listval = list.vx_p_list;
-      if (iindex < listval.size()) {
-        output = listval.get(iindex);
+      if (iindex < listval.Count) {
+        output = listval[iindex];
       }
       return output;
     }
@@ -919,7 +998,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      List<vx_core.Func_any_from_any> listval = new ArrayList<>(val.vx_listany_from_any());
+      List<vx_core.Func_any_from_any> listval = new List<vx_core.Func_any_from_any>(val.vx_listany_from_any());
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -929,18 +1008,18 @@ public static class vx_core {
         } else if (valsub is vx_core.Func_any_from_any) {
           vx_core.Func_any_from_any anysub = valsub as vx_core.Func_any_from_any;
           ischanged = true;
-          listval.add(anysub);
+          listval.Add(anysub);
         } else if (valsub is vx_core.Type_any_from_anylist) {
           Type_any_from_anylist multi = (Type_any_from_anylist)valsub;
           ischanged = true;
-          listval.addAll(multi.vx_listany_from_any());
-        } else if (valsub is List) {
-          List listunknown = valsub as List;
+          listval.AddRange(multi.vx_listany_from_any());
+        } else if (valsub is List<Object>) {
+          List<Object> listunknown = valsub as List<Object>;
           foreach (Object item in listunknown) {
             if (item is vx_core.Func_any_from_any) {
               vx_core.Func_any_from_any valitem = (vx_core.Func_any_from_any)item;
               ischanged = true;
-              listval.add(valitem);
+              listval.Add(valitem);
             }
           }
         } else if (valsub is vx_core.Type_any) {
@@ -948,7 +1027,7 @@ public static class vx_core {
           msg = vx_core.vx_msg_from_error("vx/core/any<-anylist", ":invalidtype", anysub);
           msgblock = vx_core.vx_copy(msgblock, msg);
         } else {
-          msg = vx_core.vx_msg_from_error("vx/core/any<-anylist", ":invalidtype", vx_core.vx_new_string(valsub.toString()));
+          msg = vx_core.vx_msg_from_error("vx/core/any<-anylist", ":invalidtype", vx_core.vx_new_string(valsub.ToString()));
           msgblock = vx_core.vx_copy(msgblock, msg);
         }
       }
@@ -1005,10 +1084,10 @@ public static class vx_core {
 
   public class Class_anylist : vx_core.Class_base, Type_anylist {
 
-    public List<vx_core.Type_any> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_any>());
+    public List<vx_core.Type_any> vx_p_list = vx_core.immutablelist(new List<vx_core.Type_any>());
 
     public List<vx_core.Type_any> vx_list() {
-      List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
+      List<vx_core.Type_any> output = vx_core.immutablelist(new List<vx_core.Type_any>(this.vx_p_list));
       return output;
     }
 
@@ -1017,8 +1096,8 @@ public static class vx_core {
       vx_core.Class_anylist list = this;
       int iindex = index.vx_int();
       List<vx_core.Type_any> listval = list.vx_p_list;
-      if (iindex < listval.size()) {
-        output = listval.get(iindex);
+      if (iindex < listval.Count) {
+        output = listval[iindex];
       }
       return output;
     }
@@ -1037,7 +1116,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      List<vx_core.Type_any> listval = new ArrayList<>(val.vx_list());
+      List<vx_core.Type_any> listval = new List<vx_core.Type_any>(val.vx_list());
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -1047,21 +1126,21 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_any) {
           vx_core.Type_any anysub = valsub as vx_core.Type_any;
           ischanged = true;
-          listval.add(anysub);
+          listval.Add(anysub);
         } else if (valsub is vx_core.Type_any) {
           ischanged = true;
-          listval.add((vx_core.Type_any)valsub);
+          listval.Add((vx_core.Type_any)valsub);
         } else if (valsub is vx_core.Type_anylist) {
           Type_anylist multi = (Type_anylist)valsub;
           ischanged = true;
-          listval.addAll(multi.vx_list());
-        } else if (valsub is List) {
-          List listunknown = valsub as List;
+          listval.AddRange(multi.vx_list());
+        } else if (valsub is List<Object>) {
+          List<Object> listunknown = valsub as List<Object>;
           foreach (Object item in listunknown) {
             if (item is vx_core.Type_any) {
               vx_core.Type_any valitem = (vx_core.Type_any)item;
               ischanged = true;
-              listval.add(valitem);
+              listval.Add(valitem);
             }
           }
         } else if (valsub is vx_core.Type_any) {
@@ -1069,7 +1148,7 @@ public static class vx_core {
           msg = vx_core.vx_msg_from_error("vx/core/anylist", ":invalidtype", anysub);
           msgblock = vx_core.vx_copy(msgblock, msg);
         } else {
-          msg = vx_core.vx_msg_from_error("vx/core/anylist", ":invalidtype", vx_core.vx_new_string(valsub.toString()));
+          msg = vx_core.vx_msg_from_error("vx/core/anylist", ":invalidtype", vx_core.vx_new_string(valsub.ToString()));
           msgblock = vx_core.vx_copy(msgblock, msg);
         }
       }
@@ -1136,11 +1215,11 @@ public static class vx_core {
       vx_core.Type_boolean output = vx_core.c_false;
       if (value is vx_core.Type_any) {
         String key = name.vx_string();
-        if (key.startsWith(":")) {
-          key = key.substring(1);
+        if (key.StartsWith(":")) {
+          key = key.Substring(1);
         }
         vx_core.Type_any castval = (vx_core.Type_any)value;
-        Map<String, vx_core.Type_any> map = new LinkedHashMap<>(this.vx_p_map);
+        Map<String, vx_core.Type_any> map = new LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map);
         if (castval == vx_core.e_any) {
           map.remove(key);
         } else {
@@ -1164,9 +1243,9 @@ public static class vx_core {
     public vx_core.Type_map vx_new_from_map(Map<String, vx_core.Type_any> mapval) {
       vx_core.Class_anymap output = new vx_core.Class_anymap();
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
-      Map<String, vx_core.Type_any> map = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> map = new LinkedHashMap<String, vx_core.Type_any>();
       Set<String> keys = mapval.keySet();
-      foreach (String key in keys) {
+      foreach (string key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_any) {
           vx_core.Type_any castval = (vx_core.Type_any)val;
@@ -1197,7 +1276,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, vx_core.Type_any> mapval = new LinkedHashMap<>(val.vx_map());
+      Map<String, vx_core.Type_any> mapval = new LinkedHashMap<String, vx_core.Type_any>(val.vx_map());
       vx_core.Type_msg msg;
       String key = "";
       foreach (Object valsub in vals) {
@@ -1209,14 +1288,14 @@ public static class vx_core {
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub is String) {
-            key = valsub as String;
+          } else if (valsub is string) {
+            key = valsub as string;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/anymap", ":keyexpected", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
@@ -1232,9 +1311,9 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
-            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
             mapany.put("key", vx_core.vx_new_string(key));
             mapany.put("value", msgval);
             vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -1243,8 +1322,8 @@ public static class vx_core {
           }
           if (valany != null) {
             ischanged = true;
-            if (key.startsWith(":")) {
-              key = key.substring(1);
+            if (key.StartsWith(":")) {
+              key = key.Substring(1);
             }
             mapval.put(key, valany);
             key = "";
@@ -1446,10 +1525,10 @@ public static class vx_core {
       vx_core.Func_any_from_func vx_p_fn_any = val.fn_any();
       vx_core.Type_string vx_p_doc = val.doc();
       ArrayList<String> validkeys = new ArrayList<>();
-      validkeys.add(":name");
-      validkeys.add(":argtype");
-      validkeys.add(":fn-any");
-      validkeys.add(":doc");
+      validkeys.Add(":name");
+      validkeys.Add(":argtype");
+      validkeys.Add(":fn-any");
+      validkeys.Add(":doc");
       String key = "";
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
@@ -1464,7 +1543,7 @@ public static class vx_core {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
@@ -1472,13 +1551,13 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/arg", ":invalidkeytype", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
-            if (!testkey.startsWith(":")) {
+            if (!testkey.StartsWith(":")) {
               testkey = ":" + testkey;
             }
             bool isvalidkey = validkeys.contains(testkey);
@@ -1497,7 +1576,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_name = (vx_core.Type_string)valsub;
-            } else if (valsub is String) {
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_name = vx_core.vx_new(vx_core.t_string, valsub);
             } else {
@@ -1505,9 +1584,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("name"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -1525,9 +1604,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("argtype"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -1545,9 +1624,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("fn-any"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -1560,7 +1639,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_doc = (vx_core.Type_string)valsub;
-            } else if (valsub is String) {
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_doc = vx_core.vx_new(vx_core.t_string, valsub);
             } else {
@@ -1568,9 +1647,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("doc"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -1644,10 +1723,10 @@ public static class vx_core {
 
   public class Class_arglist : vx_core.Class_base, Type_arglist {
 
-    public List<vx_core.Type_arg> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_arg>());
+    public List<vx_core.Type_arg> vx_p_list = vx_core.immutablelist(new List<vx_core.Type_arg>());
 
     public List<vx_core.Type_any> vx_list() {
-      List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
+      List<vx_core.Type_any> output = vx_core.immutablelist(new List<vx_core.Type_any>(this.vx_p_list));
       return output;
     }
 
@@ -1656,8 +1735,8 @@ public static class vx_core {
       vx_core.Class_arglist list = this;
       int iindex = index.vx_int();
       List<vx_core.Type_arg> listval = list.vx_p_list;
-      if (iindex < listval.size()) {
-        output = listval.get(iindex);
+      if (iindex < listval.Count) {
+        output = listval[iindex];
       }
       return output;
     }
@@ -1684,7 +1763,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      List<vx_core.Type_arg> listval = new ArrayList<>(val.vx_listarg());
+      List<vx_core.Type_arg> listval = new List<vx_core.Type_arg>(val.vx_listarg());
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -1694,21 +1773,21 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_arg) {
           vx_core.Type_arg anysub = valsub as vx_core.Type_arg;
           ischanged = true;
-          listval.add(anysub);
+          listval.Add(anysub);
         } else if (valsub is vx_core.Type_arg) {
           ischanged = true;
-          listval.add((vx_core.Type_arg)valsub);
+          listval.Add((vx_core.Type_arg)valsub);
         } else if (valsub is vx_core.Type_arglist) {
           Type_arglist multi = (Type_arglist)valsub;
           ischanged = true;
-          listval.addAll(multi.vx_listarg());
-        } else if (valsub is List) {
-          List listunknown = valsub as List;
+          listval.AddRange(multi.vx_listarg());
+        } else if (valsub is List<Object>) {
+          List<Object> listunknown = valsub as List<Object>;
           foreach (Object item in listunknown) {
             if (item is vx_core.Type_arg) {
               vx_core.Type_arg valitem = (vx_core.Type_arg)item;
               ischanged = true;
-              listval.add(valitem);
+              listval.Add(valitem);
             }
           }
         } else if (valsub is vx_core.Type_any) {
@@ -1716,7 +1795,7 @@ public static class vx_core {
           msg = vx_core.vx_msg_from_error("vx/core/arglist", ":invalidtype", anysub);
           msgblock = vx_core.vx_copy(msgblock, msg);
         } else {
-          msg = vx_core.vx_msg_from_error("vx/core/arglist", ":invalidtype", vx_core.vx_new_string(valsub.toString()));
+          msg = vx_core.vx_msg_from_error("vx/core/arglist", ":invalidtype", vx_core.vx_new_string(valsub.ToString()));
           msgblock = vx_core.vx_copy(msgblock, msg);
         }
       }
@@ -1785,11 +1864,11 @@ public static class vx_core {
       vx_core.Type_boolean output = vx_core.c_false;
       if (value is vx_core.Type_arg) {
         String key = name.vx_string();
-        if (key.startsWith(":")) {
-          key = key.substring(1);
+        if (key.StartsWith(":")) {
+          key = key.Substring(1);
         }
         vx_core.Type_arg castval = (vx_core.Type_arg)value;
-        Map<String, vx_core.Type_arg> map = new LinkedHashMap<>(this.vx_p_map);
+        Map<String, vx_core.Type_arg> map = new LinkedHashMap<String, vx_core.Type_arg>(this.vx_p_map);
         if (castval == vx_core.e_arg) {
           map.remove(key);
         } else {
@@ -1821,9 +1900,9 @@ public static class vx_core {
     public vx_core.Type_map vx_new_from_map(Map<String, vx_core.Type_any> mapval) {
       vx_core.Class_argmap output = new vx_core.Class_argmap();
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
-      Map<String, vx_core.Type_arg> map = new LinkedHashMap<>();
+      Map<String, vx_core.Type_arg> map = new LinkedHashMap<String, vx_core.Type_arg>();
       Set<String> keys = mapval.keySet();
-      foreach (String key in keys) {
+      foreach (string key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_arg) {
           vx_core.Type_arg castval = (vx_core.Type_arg)val;
@@ -1854,7 +1933,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, vx_core.Type_arg> mapval = new LinkedHashMap<>(val.vx_maparg());
+      Map<String, vx_core.Type_arg> mapval = new LinkedHashMap<String, vx_core.Type_arg>(val.vx_maparg());
       vx_core.Type_msg msg;
       String key = "";
       foreach (Object valsub in vals) {
@@ -1866,14 +1945,14 @@ public static class vx_core {
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub is String) {
-            key = valsub as String;
+          } else if (valsub is string) {
+            key = valsub as string;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/argmap", ":keyexpected", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
@@ -1889,9 +1968,9 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
-            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
             mapany.put("key", vx_core.vx_new_string(key));
             mapany.put("value", msgval);
             vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -1900,8 +1979,8 @@ public static class vx_core {
           }
           if (valany != null) {
             ischanged = true;
-            if (key.startsWith(":")) {
-              key = key.substring(1);
+            if (key.StartsWith(":")) {
+              key = key.Substring(1);
             }
             mapval.put(key, valany);
             key = "";
@@ -1957,12 +2036,14 @@ public static class vx_core {
     public vx_core.Type_any vx_copy(params Object[] vals);
     public vx_core.Type_any vx_empty();
     public vx_core.Type_any vx_type();
+    public boolean vx_boolean();
   }
 
   public class Class_boolean : vx_core.Class_base, Type_boolean {
 
-    protected boolean vxboolean = false;
+    internal boolean vxboolean = false;
     
+    // :implements
     public boolean vx_boolean() {return vxboolean;}
 
     public override vx_core.Type_boolean vx_new(params Object[] vals) {
@@ -2049,10 +2130,10 @@ public static class vx_core {
 
   public class Class_booleanlist : vx_core.Class_base, Type_booleanlist {
 
-    public List<vx_core.Type_boolean> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_boolean>());
+    public List<vx_core.Type_boolean> vx_p_list = vx_core.immutablelist(new List<vx_core.Type_boolean>());
 
     public List<vx_core.Type_any> vx_list() {
-      List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
+      List<vx_core.Type_any> output = vx_core.immutablelist(new List<vx_core.Type_any>(this.vx_p_list));
       return output;
     }
 
@@ -2061,8 +2142,8 @@ public static class vx_core {
       vx_core.Class_booleanlist list = this;
       int iindex = index.vx_int();
       List<vx_core.Type_boolean> listval = list.vx_p_list;
-      if (iindex < listval.size()) {
-        output = listval.get(iindex);
+      if (iindex < listval.Count) {
+        output = listval[iindex];
       }
       return output;
     }
@@ -2089,7 +2170,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      List<vx_core.Type_boolean> listval = new ArrayList<>(val.vx_listboolean());
+      List<vx_core.Type_boolean> listval = new List<vx_core.Type_boolean>(val.vx_listboolean());
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -2099,21 +2180,21 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_boolean) {
           vx_core.Type_boolean anysub = valsub as vx_core.Type_boolean;
           ischanged = true;
-          listval.add(anysub);
+          listval.Add(anysub);
         } else if (valsub is Boolean) {
           ischanged = true;
-          listval.add(vx_core.vx_new(vx_core.t_boolean, valsub));
+          listval.Add(vx_core.vx_new(vx_core.t_boolean, valsub));
         } else if (valsub is vx_core.Type_booleanlist) {
           Type_booleanlist multi = (Type_booleanlist)valsub;
           ischanged = true;
-          listval.addAll(multi.vx_listboolean());
-        } else if (valsub is List) {
-          List listunknown = valsub as List;
+          listval.AddRange(multi.vx_listboolean());
+        } else if (valsub is List<Object>) {
+          List<Object> listunknown = valsub as List<Object>;
           foreach (Object item in listunknown) {
             if (item is vx_core.Type_boolean) {
               vx_core.Type_boolean valitem = (vx_core.Type_boolean)item;
               ischanged = true;
-              listval.add(valitem);
+              listval.Add(valitem);
             }
           }
         } else if (valsub is vx_core.Type_any) {
@@ -2121,7 +2202,7 @@ public static class vx_core {
           msg = vx_core.vx_msg_from_error("vx/core/booleanlist", ":invalidtype", anysub);
           msgblock = vx_core.vx_copy(msgblock, msg);
         } else {
-          msg = vx_core.vx_msg_from_error("vx/core/booleanlist", ":invalidtype", vx_core.vx_new_string(valsub.toString()));
+          msg = vx_core.vx_msg_from_error("vx/core/booleanlist", ":invalidtype", vx_core.vx_new_string(valsub.ToString()));
           msgblock = vx_core.vx_copy(msgblock, msg);
         }
       }
@@ -2376,10 +2457,10 @@ public static class vx_core {
 
   public class Class_connectlist : vx_core.Class_base, Type_connectlist {
 
-    public List<vx_core.Type_connect> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_connect>());
+    public List<vx_core.Type_connect> vx_p_list = vx_core.immutablelist(new List<vx_core.Type_connect>());
 
     public List<vx_core.Type_any> vx_list() {
-      List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
+      List<vx_core.Type_any> output = vx_core.immutablelist(new List<vx_core.Type_any>(this.vx_p_list));
       return output;
     }
 
@@ -2388,8 +2469,8 @@ public static class vx_core {
       vx_core.Class_connectlist list = this;
       int iindex = index.vx_int();
       List<vx_core.Type_connect> listval = list.vx_p_list;
-      if (iindex < listval.size()) {
-        output = listval.get(iindex);
+      if (iindex < listval.Count) {
+        output = listval[iindex];
       }
       return output;
     }
@@ -2416,7 +2497,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      List<vx_core.Type_connect> listval = new ArrayList<>(val.vx_listconnect());
+      List<vx_core.Type_connect> listval = new List<vx_core.Type_connect>(val.vx_listconnect());
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -2426,21 +2507,21 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_connect) {
           vx_core.Type_connect anysub = valsub as vx_core.Type_connect;
           ischanged = true;
-          listval.add(anysub);
+          listval.Add(anysub);
         } else if (valsub is vx_core.Type_connect) {
           ischanged = true;
-          listval.add((vx_core.Type_connect)valsub);
+          listval.Add((vx_core.Type_connect)valsub);
         } else if (valsub is vx_core.Type_connectlist) {
           Type_connectlist multi = (Type_connectlist)valsub;
           ischanged = true;
-          listval.addAll(multi.vx_listconnect());
-        } else if (valsub is List) {
-          List listunknown = valsub as List;
+          listval.AddRange(multi.vx_listconnect());
+        } else if (valsub is List<Object>) {
+          List<Object> listunknown = valsub as List<Object>;
           foreach (Object item in listunknown) {
             if (item is vx_core.Type_connect) {
               vx_core.Type_connect valitem = (vx_core.Type_connect)item;
               ischanged = true;
-              listval.add(valitem);
+              listval.Add(valitem);
             }
           }
         } else if (valsub is vx_core.Type_any) {
@@ -2448,7 +2529,7 @@ public static class vx_core {
           msg = vx_core.vx_msg_from_error("vx/core/connectlist", ":invalidtype", anysub);
           msgblock = vx_core.vx_copy(msgblock, msg);
         } else {
-          msg = vx_core.vx_msg_from_error("vx/core/connectlist", ":invalidtype", vx_core.vx_new_string(valsub.toString()));
+          msg = vx_core.vx_msg_from_error("vx/core/connectlist", ":invalidtype", vx_core.vx_new_string(valsub.ToString()));
           msgblock = vx_core.vx_copy(msgblock, msg);
         }
       }
@@ -2517,11 +2598,11 @@ public static class vx_core {
       vx_core.Type_boolean output = vx_core.c_false;
       if (value is vx_core.Type_connect) {
         String key = name.vx_string();
-        if (key.startsWith(":")) {
-          key = key.substring(1);
+        if (key.StartsWith(":")) {
+          key = key.Substring(1);
         }
         vx_core.Type_connect castval = (vx_core.Type_connect)value;
-        Map<String, vx_core.Type_connect> map = new LinkedHashMap<>(this.vx_p_map);
+        Map<String, vx_core.Type_connect> map = new LinkedHashMap<String, vx_core.Type_connect>(this.vx_p_map);
         if (castval == vx_core.e_connect) {
           map.remove(key);
         } else {
@@ -2553,9 +2634,9 @@ public static class vx_core {
     public vx_core.Type_map vx_new_from_map(Map<String, vx_core.Type_any> mapval) {
       vx_core.Class_connectmap output = new vx_core.Class_connectmap();
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
-      Map<String, vx_core.Type_connect> map = new LinkedHashMap<>();
+      Map<String, vx_core.Type_connect> map = new LinkedHashMap<String, vx_core.Type_connect>();
       Set<String> keys = mapval.keySet();
-      foreach (String key in keys) {
+      foreach (string key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_connect) {
           vx_core.Type_connect castval = (vx_core.Type_connect)val;
@@ -2586,7 +2667,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, vx_core.Type_connect> mapval = new LinkedHashMap<>(val.vx_mapconnect());
+      Map<String, vx_core.Type_connect> mapval = new LinkedHashMap<String, vx_core.Type_connect>(val.vx_mapconnect());
       vx_core.Type_msg msg;
       String key = "";
       foreach (Object valsub in vals) {
@@ -2598,14 +2679,14 @@ public static class vx_core {
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub is String) {
-            key = valsub as String;
+          } else if (valsub is string) {
+            key = valsub as string;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/connectmap", ":keyexpected", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
@@ -2621,9 +2702,9 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
-            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
             mapany.put("key", vx_core.vx_new_string(key));
             mapany.put("value", msgval);
             vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -2632,8 +2713,8 @@ public static class vx_core {
           }
           if (valany != null) {
             ischanged = true;
-            if (key.startsWith(":")) {
-              key = key.substring(1);
+            if (key.StartsWith(":")) {
+              key = key.Substring(1);
             }
             mapval.put(key, valany);
             key = "";
@@ -2823,9 +2904,9 @@ public static class vx_core {
       vx_core.Type_string vx_p_name = val.name();
       vx_core.Type_any vx_p_type = val.type();
       ArrayList<String> validkeys = new ArrayList<>();
-      validkeys.add(":pkgname");
-      validkeys.add(":name");
-      validkeys.add(":type");
+      validkeys.Add(":pkgname");
+      validkeys.Add(":name");
+      validkeys.Add(":type");
       String key = "";
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
@@ -2840,7 +2921,7 @@ public static class vx_core {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
@@ -2848,13 +2929,13 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/constdef", ":invalidkeytype", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
-            if (!testkey.startsWith(":")) {
+            if (!testkey.StartsWith(":")) {
               testkey = ":" + testkey;
             }
             bool isvalidkey = validkeys.contains(testkey);
@@ -2873,7 +2954,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_pkgname = (vx_core.Type_string)valsub;
-            } else if (valsub is String) {
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_pkgname = vx_core.vx_new(vx_core.t_string, valsub);
             } else {
@@ -2881,9 +2962,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("pkgname"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -2896,7 +2977,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_name = (vx_core.Type_string)valsub;
-            } else if (valsub is String) {
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_name = vx_core.vx_new(vx_core.t_string, valsub);
             } else {
@@ -2904,9 +2985,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("name"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -2924,9 +3005,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("type"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -2997,10 +3078,10 @@ public static class vx_core {
 
   public class Class_constlist : vx_core.Class_base, Type_constlist {
 
-    public List<vx_core.Type_any> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_any>());
+    public List<vx_core.Type_any> vx_p_list = vx_core.immutablelist(new List<vx_core.Type_any>());
 
     public List<vx_core.Type_any> vx_list() {
-      List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
+      List<vx_core.Type_any> output = vx_core.immutablelist(new List<vx_core.Type_any>(this.vx_p_list));
       return output;
     }
 
@@ -3009,8 +3090,8 @@ public static class vx_core {
       vx_core.Class_constlist list = this;
       int iindex = index.vx_int();
       List<vx_core.Type_any> listval = list.vx_p_list;
-      if (iindex < listval.size()) {
-        output = listval.get(iindex);
+      if (iindex < listval.Count) {
+        output = listval[iindex];
       }
       return output;
     }
@@ -3029,7 +3110,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      List<vx_core.Type_any> listval = new ArrayList<>(val.vx_list());
+      List<vx_core.Type_any> listval = new List<vx_core.Type_any>(val.vx_list());
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -3039,21 +3120,21 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_any) {
           vx_core.Type_any anysub = valsub as vx_core.Type_any;
           ischanged = true;
-          listval.add(anysub);
+          listval.Add(anysub);
         } else if (valsub is vx_core.Type_any) {
           ischanged = true;
-          listval.add((vx_core.Type_any)valsub);
+          listval.Add((vx_core.Type_any)valsub);
         } else if (valsub is vx_core.Type_constlist) {
           Type_constlist multi = (Type_constlist)valsub;
           ischanged = true;
-          listval.addAll(multi.vx_list());
-        } else if (valsub is List) {
-          List listunknown = valsub as List;
+          listval.AddRange(multi.vx_list());
+        } else if (valsub is List<Object>) {
+          List<Object> listunknown = valsub as List<Object>;
           foreach (Object item in listunknown) {
             if (item is vx_core.Type_any) {
               vx_core.Type_any valitem = (vx_core.Type_any)item;
               ischanged = true;
-              listval.add(valitem);
+              listval.Add(valitem);
             }
           }
         } else if (valsub is vx_core.Type_any) {
@@ -3061,7 +3142,7 @@ public static class vx_core {
           msg = vx_core.vx_msg_from_error("vx/core/constlist", ":invalidtype", anysub);
           msgblock = vx_core.vx_copy(msgblock, msg);
         } else {
-          msg = vx_core.vx_msg_from_error("vx/core/constlist", ":invalidtype", vx_core.vx_new_string(valsub.toString()));
+          msg = vx_core.vx_msg_from_error("vx/core/constlist", ":invalidtype", vx_core.vx_new_string(valsub.ToString()));
           msgblock = vx_core.vx_copy(msgblock, msg);
         }
       }
@@ -3128,11 +3209,11 @@ public static class vx_core {
       vx_core.Type_boolean output = vx_core.c_false;
       if (value is vx_core.Type_any) {
         String key = name.vx_string();
-        if (key.startsWith(":")) {
-          key = key.substring(1);
+        if (key.StartsWith(":")) {
+          key = key.Substring(1);
         }
         vx_core.Type_any castval = (vx_core.Type_any)value;
-        Map<String, vx_core.Type_any> map = new LinkedHashMap<>(this.vx_p_map);
+        Map<String, vx_core.Type_any> map = new LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map);
         if (castval == vx_core.e_any) {
           map.remove(key);
         } else {
@@ -3156,9 +3237,9 @@ public static class vx_core {
     public vx_core.Type_map vx_new_from_map(Map<String, vx_core.Type_any> mapval) {
       vx_core.Class_constmap output = new vx_core.Class_constmap();
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
-      Map<String, vx_core.Type_any> map = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> map = new LinkedHashMap<String, vx_core.Type_any>();
       Set<String> keys = mapval.keySet();
-      foreach (String key in keys) {
+      foreach (string key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_any) {
           vx_core.Type_any castval = (vx_core.Type_any)val;
@@ -3189,7 +3270,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, vx_core.Type_any> mapval = new LinkedHashMap<>(val.vx_map());
+      Map<String, vx_core.Type_any> mapval = new LinkedHashMap<String, vx_core.Type_any>(val.vx_map());
       vx_core.Type_msg msg;
       String key = "";
       foreach (Object valsub in vals) {
@@ -3201,14 +3282,14 @@ public static class vx_core {
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub is String) {
-            key = valsub as String;
+          } else if (valsub is string) {
+            key = valsub as string;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/constmap", ":keyexpected", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
@@ -3224,9 +3305,9 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
-            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
             mapany.put("key", vx_core.vx_new_string(key));
             mapany.put("value", msgval);
             vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -3235,8 +3316,8 @@ public static class vx_core {
           }
           if (valany != null) {
             ischanged = true;
-            if (key.startsWith(":")) {
-              key = key.substring(1);
+            if (key.StartsWith(":")) {
+              key = key.Substring(1);
             }
             mapval.put(key, valany);
             key = "";
@@ -3372,10 +3453,10 @@ public static class vx_core {
       vx_core.Type_setting vx_p_setting = val.setting();
       vx_core.Type_state vx_p_state = val.state();
       ArrayList<String> validkeys = new ArrayList<>();
-      validkeys.add(":code");
-      validkeys.add(":session");
-      validkeys.add(":setting");
-      validkeys.add(":state");
+      validkeys.Add(":code");
+      validkeys.Add(":session");
+      validkeys.Add(":setting");
+      validkeys.Add(":state");
       String key = "";
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
@@ -3390,7 +3471,7 @@ public static class vx_core {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
@@ -3398,13 +3479,13 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/context", ":invalidkeytype", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
-            if (!testkey.startsWith(":")) {
+            if (!testkey.StartsWith(":")) {
               testkey = ":" + testkey;
             }
             bool isvalidkey = validkeys.contains(testkey);
@@ -3423,7 +3504,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_code = (vx_core.Type_string)valsub;
-            } else if (valsub is String) {
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_code = vx_core.vx_new(vx_core.t_string, valsub);
             } else {
@@ -3431,9 +3512,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("code"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -3451,9 +3532,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("session"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -3471,9 +3552,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("setting"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -3491,9 +3572,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("state"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -3627,9 +3708,29 @@ public static class vx_core {
     public vx_core.Type_any vx_copy(params Object[] vals);
     public vx_core.Type_any vx_empty();
     public vx_core.Type_any vx_type();
+    public float vx_float();
+    public String vx_string();
+    public Type_decimal vx_new_from_string(final String sval);
   }
 
   public class Class_decimal : vx_core.Class_base, Type_decimal {
+
+    internal String vxdecimal = "0.0";
+    
+    // :implements
+    public float vx_float() {
+      return float.Parse(vxdecimal);
+    }
+    
+    // :implements
+    public String vx_string() {return vxdecimal;}
+    
+    // :implements
+    public Type_decimal vx_new_from_string(final String sval) {
+      Class_decimal output = new Class_decimal();
+      output.vxdecimal = sval;
+      return output;
+    }
 
     public override vx_core.Type_decimal vx_new(params Object[] vals) {
       return vx_core.vx_copy(
@@ -3655,7 +3756,7 @@ public static class vx_core {
           vx_core.Type_string valstring = valsub as vx_core.Type_string;
           ischanged = true;
           sval = valstring.vx_string();
-        } else if (valsub is String) {
+        } else if (valsub is string) {
           ischanged = true;
           sval = (String)valsub;
         }
@@ -3775,9 +3876,15 @@ public static class vx_core {
     public vx_core.Type_any vx_copy(params Object[] vals);
     public vx_core.Type_any vx_empty();
     public vx_core.Type_any vx_type();
+    public float vx_float();
   }
 
   public class Class_float : vx_core.Class_base, Type_float {
+
+    internal float vxfloat = 0;
+    
+    // :implements
+    public float vx_float() {return vxfloat;}
 
     public override vx_core.Type_float vx_new(params Object[] vals) {
       return vx_core.vx_copy(
@@ -3815,15 +3922,15 @@ public static class vx_core {
           vx_core.Type_string valstring = valsub as vx_core.Type_string;
           ischanged = true;
           floatval += Float.parseFloat(valstring.vx_string());
-        } else if (valsub is Float) {
+        } else if (valsub is float) {
           ischanged = true;
-          floatval += valsub as Float;
-        } else if (valsub is Integer) {
+          floatval += valsub as float;
+        } else if (valsub is int) {
           ischanged = true;
-          floatval += valsub as Integer;
-        } else if (valsub is String) {
+          floatval += valsub as int;
+        } else if (valsub is string) {
           ischanged = true;
-          floatval += Float.parseFloat(valsub as String);
+          floatval += Float.parseFloat(valsub as string);
         }
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -4037,11 +4144,11 @@ public static class vx_core {
       vx_core.Type_any vx_p_type = val.type();
       vx_core.Type_boolean vx_p_async = val.async();
       ArrayList<String> validkeys = new ArrayList<>();
-      validkeys.add(":pkgname");
-      validkeys.add(":name");
-      validkeys.add(":idx");
-      validkeys.add(":type");
-      validkeys.add(":async");
+      validkeys.Add(":pkgname");
+      validkeys.Add(":name");
+      validkeys.Add(":idx");
+      validkeys.Add(":type");
+      validkeys.Add(":async");
       String key = "";
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
@@ -4056,7 +4163,7 @@ public static class vx_core {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
@@ -4064,13 +4171,13 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/funcdef", ":invalidkeytype", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
-            if (!testkey.startsWith(":")) {
+            if (!testkey.StartsWith(":")) {
               testkey = ":" + testkey;
             }
             bool isvalidkey = validkeys.contains(testkey);
@@ -4089,7 +4196,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_pkgname = (vx_core.Type_string)valsub;
-            } else if (valsub is String) {
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_pkgname = vx_core.vx_new(vx_core.t_string, valsub);
             } else {
@@ -4097,9 +4204,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("pkgname"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -4112,7 +4219,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_name = (vx_core.Type_string)valsub;
-            } else if (valsub is String) {
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_name = vx_core.vx_new(vx_core.t_string, valsub);
             } else {
@@ -4120,9 +4227,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("name"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -4135,7 +4242,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_int) {
               ischanged = true;
               vx_p_idx = (vx_core.Type_int)valsub;
-            } else if (valsub is Integer) {
+            } else if (valsub is int) {
               ischanged = true;
               vx_p_idx = vx_core.vx_new(vx_core.t_int, valsub);
             } else {
@@ -4143,9 +4250,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("idx"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -4163,9 +4270,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("type"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -4186,9 +4293,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("async"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -4263,10 +4370,10 @@ public static class vx_core {
 
   public class Class_funclist : vx_core.Class_base, Type_funclist {
 
-    public List<vx_core.Type_func> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_func>());
+    public List<vx_core.Type_func> vx_p_list = vx_core.immutablelist(new List<vx_core.Type_func>());
 
     public List<vx_core.Type_any> vx_list() {
-      List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
+      List<vx_core.Type_any> output = vx_core.immutablelist(new List<vx_core.Type_any>(this.vx_p_list));
       return output;
     }
 
@@ -4275,8 +4382,8 @@ public static class vx_core {
       vx_core.Class_funclist list = this;
       int iindex = index.vx_int();
       List<vx_core.Type_func> listval = list.vx_p_list;
-      if (iindex < listval.size()) {
-        output = listval.get(iindex);
+      if (iindex < listval.Count) {
+        output = listval[iindex];
       }
       return output;
     }
@@ -4303,7 +4410,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      List<vx_core.Type_func> listval = new ArrayList<>(val.vx_listfunc());
+      List<vx_core.Type_func> listval = new List<vx_core.Type_func>(val.vx_listfunc());
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -4313,21 +4420,21 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_func) {
           vx_core.Type_func anysub = valsub as vx_core.Type_func;
           ischanged = true;
-          listval.add(anysub);
+          listval.Add(anysub);
         } else if (valsub is vx_core.Type_func) {
           ischanged = true;
-          listval.add((vx_core.Type_func)valsub);
+          listval.Add((vx_core.Type_func)valsub);
         } else if (valsub is vx_core.Type_funclist) {
           Type_funclist multi = (Type_funclist)valsub;
           ischanged = true;
-          listval.addAll(multi.vx_listfunc());
-        } else if (valsub is List) {
-          List listunknown = valsub as List;
+          listval.AddRange(multi.vx_listfunc());
+        } else if (valsub is List<Object>) {
+          List<Object> listunknown = valsub as List<Object>;
           foreach (Object item in listunknown) {
             if (item is vx_core.Type_func) {
               vx_core.Type_func valitem = (vx_core.Type_func)item;
               ischanged = true;
-              listval.add(valitem);
+              listval.Add(valitem);
             }
           }
         } else if (valsub is vx_core.Type_any) {
@@ -4335,7 +4442,7 @@ public static class vx_core {
           msg = vx_core.vx_msg_from_error("vx/core/funclist", ":invalidtype", anysub);
           msgblock = vx_core.vx_copy(msgblock, msg);
         } else {
-          msg = vx_core.vx_msg_from_error("vx/core/funclist", ":invalidtype", vx_core.vx_new_string(valsub.toString()));
+          msg = vx_core.vx_msg_from_error("vx/core/funclist", ":invalidtype", vx_core.vx_new_string(valsub.ToString()));
           msgblock = vx_core.vx_copy(msgblock, msg);
         }
       }
@@ -4404,11 +4511,11 @@ public static class vx_core {
       vx_core.Type_boolean output = vx_core.c_false;
       if (value is vx_core.Type_func) {
         String key = name.vx_string();
-        if (key.startsWith(":")) {
-          key = key.substring(1);
+        if (key.StartsWith(":")) {
+          key = key.Substring(1);
         }
         vx_core.Type_func castval = (vx_core.Type_func)value;
-        Map<String, vx_core.Type_func> map = new LinkedHashMap<>(this.vx_p_map);
+        Map<String, vx_core.Type_func> map = new LinkedHashMap<String, vx_core.Type_func>(this.vx_p_map);
         if (castval == vx_core.e_func) {
           map.remove(key);
         } else {
@@ -4440,9 +4547,9 @@ public static class vx_core {
     public vx_core.Type_map vx_new_from_map(Map<String, vx_core.Type_any> mapval) {
       vx_core.Class_funcmap output = new vx_core.Class_funcmap();
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
-      Map<String, vx_core.Type_func> map = new LinkedHashMap<>();
+      Map<String, vx_core.Type_func> map = new LinkedHashMap<String, vx_core.Type_func>();
       Set<String> keys = mapval.keySet();
-      foreach (String key in keys) {
+      foreach (string key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_func) {
           vx_core.Type_func castval = (vx_core.Type_func)val;
@@ -4473,7 +4580,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, vx_core.Type_func> mapval = new LinkedHashMap<>(val.vx_mapfunc());
+      Map<String, vx_core.Type_func> mapval = new LinkedHashMap<String, vx_core.Type_func>(val.vx_mapfunc());
       vx_core.Type_msg msg;
       String key = "";
       foreach (Object valsub in vals) {
@@ -4485,14 +4592,14 @@ public static class vx_core {
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub is String) {
-            key = valsub as String;
+          } else if (valsub is string) {
+            key = valsub as string;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/funcmap", ":keyexpected", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
@@ -4508,9 +4615,9 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
-            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
             mapany.put("key", vx_core.vx_new_string(key));
             mapany.put("value", msgval);
             vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -4519,8 +4626,8 @@ public static class vx_core {
           }
           if (valany != null) {
             ischanged = true;
-            if (key.startsWith(":")) {
-              key = key.substring(1);
+            if (key.StartsWith(":")) {
+              key = key.Substring(1);
             }
             mapval.put(key, valany);
             key = "";
@@ -4576,12 +4683,14 @@ public static class vx_core {
     public vx_core.Type_any vx_copy(params Object[] vals);
     public vx_core.Type_any vx_empty();
     public vx_core.Type_any vx_type();
+    public int vx_int();
   }
 
   public class Class_int : vx_core.Class_base, Type_int {
 
-    protected int vxint = 0;
+    internal int vxint = 0;
     
+    // :implements
     public int vx_int() {return vxint;}
 
     public override vx_core.Type_int vx_new(params Object[] vals) {
@@ -4608,11 +4717,11 @@ public static class vx_core {
           vx_core.Type_int valnum = valsub as vx_core.Type_int;
           ischanged = true;
           intval += valnum.vx_int();
-        } else if (valsub is Integer) {
+        } else if (valsub is int) {
           ischanged = true;
-          intval += valsub as Integer;
-        } else if (valsub is String) {
-          String valstring = valsub as String;
+          intval += valsub as int;
+        } else if (valsub is string) {
+          string valstring = valsub as string;
           ischanged = true;
           intval += Integer.parseInt(valstring);
         }
@@ -4672,10 +4781,10 @@ public static class vx_core {
 
   public class Class_intlist : vx_core.Class_base, Type_intlist {
 
-    public List<vx_core.Type_int> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_int>());
+    public List<vx_core.Type_int> vx_p_list = vx_core.immutablelist(new List<vx_core.Type_int>());
 
     public List<vx_core.Type_any> vx_list() {
-      List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
+      List<vx_core.Type_any> output = vx_core.immutablelist(new List<vx_core.Type_any>(this.vx_p_list));
       return output;
     }
 
@@ -4684,8 +4793,8 @@ public static class vx_core {
       vx_core.Class_intlist list = this;
       int iindex = index.vx_int();
       List<vx_core.Type_int> listval = list.vx_p_list;
-      if (iindex < listval.size()) {
-        output = listval.get(iindex);
+      if (iindex < listval.Count) {
+        output = listval[iindex];
       }
       return output;
     }
@@ -4712,7 +4821,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      List<vx_core.Type_int> listval = new ArrayList<>(val.vx_listint());
+      List<vx_core.Type_int> listval = new List<vx_core.Type_int>(val.vx_listint());
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -4722,21 +4831,21 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_int) {
           vx_core.Type_int anysub = valsub as vx_core.Type_int;
           ischanged = true;
-          listval.add(anysub);
+          listval.Add(anysub);
         } else if (valsub is Integer) {
           ischanged = true;
-          listval.add(vx_core.vx_new(vx_core.t_int, valsub));
+          listval.Add(vx_core.vx_new(vx_core.t_int, valsub));
         } else if (valsub is vx_core.Type_intlist) {
           Type_intlist multi = (Type_intlist)valsub;
           ischanged = true;
-          listval.addAll(multi.vx_listint());
-        } else if (valsub is List) {
-          List listunknown = valsub as List;
+          listval.AddRange(multi.vx_listint());
+        } else if (valsub is List<Object>) {
+          List<Object> listunknown = valsub as List<Object>;
           foreach (Object item in listunknown) {
             if (item is vx_core.Type_int) {
               vx_core.Type_int valitem = (vx_core.Type_int)item;
               ischanged = true;
-              listval.add(valitem);
+              listval.Add(valitem);
             }
           }
         } else if (valsub is vx_core.Type_any) {
@@ -4744,7 +4853,7 @@ public static class vx_core {
           msg = vx_core.vx_msg_from_error("vx/core/intlist", ":invalidtype", anysub);
           msgblock = vx_core.vx_copy(msgblock, msg);
         } else {
-          msg = vx_core.vx_msg_from_error("vx/core/intlist", ":invalidtype", vx_core.vx_new_string(valsub.toString()));
+          msg = vx_core.vx_msg_from_error("vx/core/intlist", ":invalidtype", vx_core.vx_new_string(valsub.ToString()));
           msgblock = vx_core.vx_copy(msgblock, msg);
         }
       }
@@ -4813,11 +4922,11 @@ public static class vx_core {
       vx_core.Type_boolean output = vx_core.c_false;
       if (value is vx_core.Type_int) {
         String key = name.vx_string();
-        if (key.startsWith(":")) {
-          key = key.substring(1);
+        if (key.StartsWith(":")) {
+          key = key.Substring(1);
         }
         vx_core.Type_int castval = (vx_core.Type_int)value;
-        Map<String, vx_core.Type_int> map = new LinkedHashMap<>(this.vx_p_map);
+        Map<String, vx_core.Type_int> map = new LinkedHashMap<String, vx_core.Type_int>(this.vx_p_map);
         if (castval == vx_core.e_int) {
           map.remove(key);
         } else {
@@ -4849,9 +4958,9 @@ public static class vx_core {
     public vx_core.Type_map vx_new_from_map(Map<String, vx_core.Type_any> mapval) {
       vx_core.Class_intmap output = new vx_core.Class_intmap();
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
-      Map<String, vx_core.Type_int> map = new LinkedHashMap<>();
+      Map<String, vx_core.Type_int> map = new LinkedHashMap<String, vx_core.Type_int>();
       Set<String> keys = mapval.keySet();
-      foreach (String key in keys) {
+      foreach (string key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_int) {
           vx_core.Type_int castval = (vx_core.Type_int)val;
@@ -4882,7 +4991,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, vx_core.Type_int> mapval = new LinkedHashMap<>(val.vx_mapint());
+      Map<String, vx_core.Type_int> mapval = new LinkedHashMap<String, vx_core.Type_int>(val.vx_mapint());
       vx_core.Type_msg msg;
       String key = "";
       foreach (Object valsub in vals) {
@@ -4894,14 +5003,14 @@ public static class vx_core {
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub is String) {
-            key = valsub as String;
+          } else if (valsub is string) {
+            key = valsub as string;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/intmap", ":keyexpected", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
@@ -4910,16 +5019,16 @@ public static class vx_core {
           vx_core.Type_int valany = null;
           if (valsub is vx_core.Type_int) {
             valany = (vx_core.Type_int)valsub;
-          } else if (valsub is Integer) {
+          } else if (valsub is int) {
             valany = vx_core.vx_new(vx_core.t_int, valsub);
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
-            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
             mapany.put("key", vx_core.vx_new_string(key));
             mapany.put("value", msgval);
             vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -4928,8 +5037,8 @@ public static class vx_core {
           }
           if (valany != null) {
             ischanged = true;
-            if (key.startsWith(":")) {
-              key = key.substring(1);
+            if (key.StartsWith(":")) {
+              key = key.Substring(1);
             }
             mapval.put(key, valany);
             key = "";
@@ -4991,10 +5100,10 @@ public static class vx_core {
 
   public class Class_list : vx_core.Class_base, Type_list {
 
-    public List<vx_core.Type_any> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_any>());
+    public List<vx_core.Type_any> vx_p_list = vx_core.immutablelist(new List<vx_core.Type_any>());
 
     public List<vx_core.Type_any> vx_list() {
-      List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
+      List<vx_core.Type_any> output = vx_core.immutablelist(new List<vx_core.Type_any>(this.vx_p_list));
       return output;
     }
 
@@ -5003,8 +5112,8 @@ public static class vx_core {
       vx_core.Class_list list = this;
       int iindex = index.vx_int();
       List<vx_core.Type_any> listval = list.vx_p_list;
-      if (iindex < listval.size()) {
-        output = listval.get(iindex);
+      if (iindex < listval.Count) {
+        output = listval[iindex];
       }
       return output;
     }
@@ -5023,7 +5132,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      List<vx_core.Type_any> listval = new ArrayList<>(val.vx_list());
+      List<vx_core.Type_any> listval = new List<vx_core.Type_any>(val.vx_list());
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -5033,21 +5142,21 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_any) {
           vx_core.Type_any anysub = valsub as vx_core.Type_any;
           ischanged = true;
-          listval.add(anysub);
+          listval.Add(anysub);
         } else if (valsub is vx_core.Type_any) {
           ischanged = true;
-          listval.add((vx_core.Type_any)valsub);
+          listval.Add((vx_core.Type_any)valsub);
         } else if (valsub is vx_core.Type_list) {
           Type_list multi = (Type_list)valsub;
           ischanged = true;
-          listval.addAll(multi.vx_list());
-        } else if (valsub is List) {
-          List listunknown = valsub as List;
+          listval.AddRange(multi.vx_list());
+        } else if (valsub is List<Object>) {
+          List<Object> listunknown = valsub as List<Object>;
           foreach (Object item in listunknown) {
             if (item is vx_core.Type_any) {
               vx_core.Type_any valitem = (vx_core.Type_any)item;
               ischanged = true;
-              listval.add(valitem);
+              listval.Add(valitem);
             }
           }
         } else if (valsub is vx_core.Type_any) {
@@ -5055,7 +5164,7 @@ public static class vx_core {
           msg = vx_core.vx_msg_from_error("vx/core/list", ":invalidtype", anysub);
           msgblock = vx_core.vx_copy(msgblock, msg);
         } else {
-          msg = vx_core.vx_msg_from_error("vx/core/list", ":invalidtype", vx_core.vx_new_string(valsub.toString()));
+          msg = vx_core.vx_msg_from_error("vx/core/list", ":invalidtype", vx_core.vx_new_string(valsub.ToString()));
           msgblock = vx_core.vx_copy(msgblock, msg);
         }
       }
@@ -5271,11 +5380,11 @@ public static class vx_core {
       vx_core.Type_boolean output = vx_core.c_false;
       if (value is vx_core.Type_any) {
         String key = name.vx_string();
-        if (key.startsWith(":")) {
-          key = key.substring(1);
+        if (key.StartsWith(":")) {
+          key = key.Substring(1);
         }
         vx_core.Type_any castval = (vx_core.Type_any)value;
-        Map<String, vx_core.Type_any> map = new LinkedHashMap<>(this.vx_p_map);
+        Map<String, vx_core.Type_any> map = new LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map);
         if (castval == vx_core.e_any) {
           map.remove(key);
         } else {
@@ -5299,9 +5408,9 @@ public static class vx_core {
     public vx_core.Type_map vx_new_from_map(Map<String, vx_core.Type_any> mapval) {
       vx_core.Class_map output = new vx_core.Class_map();
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
-      Map<String, vx_core.Type_any> map = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> map = new LinkedHashMap<String, vx_core.Type_any>();
       Set<String> keys = mapval.keySet();
-      foreach (String key in keys) {
+      foreach (string key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_any) {
           vx_core.Type_any castval = (vx_core.Type_any)val;
@@ -5332,7 +5441,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, vx_core.Type_any> mapval = new LinkedHashMap<>(val.vx_map());
+      Map<String, vx_core.Type_any> mapval = new LinkedHashMap<String, vx_core.Type_any>(val.vx_map());
       vx_core.Type_msg msg;
       String key = "";
       foreach (Object valsub in vals) {
@@ -5344,14 +5453,14 @@ public static class vx_core {
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub is String) {
-            key = valsub as String;
+          } else if (valsub is string) {
+            key = valsub as string;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/map", ":keyexpected", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
@@ -5367,9 +5476,9 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
-            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
             mapany.put("key", vx_core.vx_new_string(key));
             mapany.put("value", msgval);
             vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -5378,8 +5487,8 @@ public static class vx_core {
           }
           if (valany != null) {
             ischanged = true;
-            if (key.startsWith(":")) {
-              key = key.substring(1);
+            if (key.StartsWith(":")) {
+              key = key.Substring(1);
             }
             mapval.put(key, valany);
             key = "";
@@ -5545,7 +5654,7 @@ public static class vx_core {
       }
       vx_core.Type_value vx_p_valuepool = val.valuepool();
       ArrayList<String> validkeys = new ArrayList<>();
-      validkeys.add(":valuepool");
+      validkeys.Add(":valuepool");
       String key = "";
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
@@ -5560,7 +5669,7 @@ public static class vx_core {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
@@ -5568,13 +5677,13 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/mempool", ":invalidkeytype", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
-            if (!testkey.startsWith(":")) {
+            if (!testkey.StartsWith(":")) {
               testkey = ":" + testkey;
             }
             bool isvalidkey = validkeys.contains(testkey);
@@ -5598,9 +5707,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("valuepool"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -5674,6 +5783,8 @@ public static class vx_core {
   }
 
   public class Class_msg : vx_core.Class_base, Type_msg {
+
+    public Exception err = null;
 
     public vx_core.Type_string vx_p_code;
 
@@ -5762,7 +5873,7 @@ public static class vx_core {
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             key = valstr.vx_string();
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             key = (String)valsub;
           }
         } else {
@@ -5772,7 +5883,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_code = (vx_core.Type_string)valsub;
-            } else if (valsub is String) {
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_code = vx_core.vx_new(vx_core.t_string, valsub);
             }
@@ -5789,7 +5900,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_path = (vx_core.Type_string)valsub;
-            } else if (valsub is String) {
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_path = vx_core.vx_new(vx_core.t_string, valsub);
             }
@@ -5799,7 +5910,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_int) {
               ischanged = true;
               vx_p_severity = (vx_core.Type_int)valsub;
-            } else if (valsub is Integer) {
+            } else if (valsub is int) {
               ischanged = true;
               vx_p_severity = vx_core.vx_new(vx_core.t_int, valsub);
             }
@@ -5809,7 +5920,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_text = (vx_core.Type_string)valsub;
-            } else if (valsub is String) {
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_text = vx_core.vx_new(vx_core.t_string, valsub);
             }
@@ -5955,8 +6066,8 @@ public static class vx_core {
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             key = valstr.vx_string();
-          } else if (valsub is String) {
-            key = (String)valsub;
+          } else if (valsub is string) {
+            key = valsub as string;
           }
         } else {
           switch (key) {
@@ -5970,9 +6081,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("msgs"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -5990,9 +6101,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("msgblocks"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -6065,10 +6176,10 @@ public static class vx_core {
 
   public class Class_msgblocklist : vx_core.Class_base, Type_msgblocklist {
 
-    public List<vx_core.Type_msgblock> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_msgblock>());
+    public List<vx_core.Type_msgblock> vx_p_list = vx_core.immutablelist(new List<vx_core.Type_msgblock>());
 
     public List<vx_core.Type_any> vx_list() {
-      List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
+      List<vx_core.Type_any> output = vx_core.immutablelist(new List<vx_core.Type_any>(this.vx_p_list));
       return output;
     }
 
@@ -6077,8 +6188,8 @@ public static class vx_core {
       vx_core.Class_msgblocklist list = this;
       int iindex = index.vx_int();
       List<vx_core.Type_msgblock> listval = list.vx_p_list;
-      if (iindex < listval.size()) {
-        output = listval.get(iindex);
+      if (iindex < listval.Count) {
+        output = listval[iindex];
       }
       return output;
     }
@@ -6105,25 +6216,25 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      List<vx_core.Type_msgblock> listval = new ArrayList<>(val.vx_listmsgblock());
+      List<vx_core.Type_msgblock> listval = new List<vx_core.Type_msgblock>(val.vx_listmsgblock());
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
         } else if (valsub is vx_core.Type_msgblock) {
           ischanged = true;
-          listval.add((vx_core.Type_msgblock)valsub);
+          listval.Add((vx_core.Type_msgblock)valsub);
         } else if (valsub is vx_core.Type_msgblocklist) {
           Type_msgblocklist multi = (Type_msgblocklist)valsub;
           ischanged = true;
-          listval.addAll(multi.vx_listmsgblock());
-        } else if (valsub is List) {
-          List listunknown = valsub as List;
+          listval.AddRange(multi.vx_listmsgblock());
+        } else if (valsub is List<Object>) {
+          List<Object> listunknown = valsub as List<Object>;
           foreach (Object item in listunknown) {
             if (item is vx_core.Type_msgblock) {
               vx_core.Type_msgblock valitem = (vx_core.Type_msgblock)item;
               ischanged = true;
-              listval.add(valitem);
+              listval.Add(valitem);
             }
           }
         } else if (valsub is vx_core.Type_any) {
@@ -6131,7 +6242,7 @@ public static class vx_core {
           msg = vx_core.vx_msg_from_error("vx/core/msgblocklist", ":invalidtype", anysub);
           msgblock = vx_core.vx_copy(msgblock, msg);
         } else {
-          msg = vx_core.vx_msg_from_error("vx/core/msgblocklist", ":invalidtype", vx_core.vx_new_string(valsub.toString()));
+          msg = vx_core.vx_msg_from_error("vx/core/msgblocklist", ":invalidtype", vx_core.vx_new_string(valsub.ToString()));
           msgblock = vx_core.vx_copy(msgblock, msg);
         }
       }
@@ -6190,10 +6301,10 @@ public static class vx_core {
 
   public class Class_msglist : vx_core.Class_base, Type_msglist {
 
-    public List<vx_core.Type_msg> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_msg>());
+    public List<vx_core.Type_msg> vx_p_list = vx_core.immutablelist(new List<vx_core.Type_msg>());
 
     public List<vx_core.Type_any> vx_list() {
-      List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
+      List<vx_core.Type_any> output = vx_core.immutablelist(new List<vx_core.Type_any>(this.vx_p_list));
       return output;
     }
 
@@ -6202,8 +6313,8 @@ public static class vx_core {
       vx_core.Class_msglist list = this;
       int iindex = index.vx_int();
       List<vx_core.Type_msg> listval = list.vx_p_list;
-      if (iindex < listval.size()) {
-        output = listval.get(iindex);
+      if (iindex < listval.Count) {
+        output = listval[iindex];
       }
       return output;
     }
@@ -6230,25 +6341,25 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      List<vx_core.Type_msg> listval = new ArrayList<>(val.vx_listmsg());
+      List<vx_core.Type_msg> listval = new List<vx_core.Type_msg>(val.vx_listmsg());
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.vx_copy(msgblock, valsub);
         } else if (valsub is vx_core.Type_msg) {
           ischanged = true;
-          listval.add((vx_core.Type_msg)valsub);
+          listval.Add((vx_core.Type_msg)valsub);
         } else if (valsub is vx_core.Type_msglist) {
           Type_msglist multi = (Type_msglist)valsub;
           ischanged = true;
-          listval.addAll(multi.vx_listmsg());
-        } else if (valsub is List) {
-          List listunknown = valsub as List;
+          listval.AddRange(multi.vx_listmsg());
+        } else if (valsub is List<Object>) {
+          List<Object> listunknown = valsub as List<Object>;
           foreach (Object item in listunknown) {
             if (item is vx_core.Type_msg) {
               vx_core.Type_msg valitem = (vx_core.Type_msg)item;
               ischanged = true;
-              listval.add(valitem);
+              listval.Add(valitem);
             }
           }
         } else if (valsub is vx_core.Type_any) {
@@ -6256,7 +6367,7 @@ public static class vx_core {
           msg = vx_core.vx_msg_from_error("vx/core/msglist", ":invalidtype", anysub);
           msgblock = vx_core.vx_copy(msgblock, msg);
         } else {
-          msg = vx_core.vx_msg_from_error("vx/core/msglist", ":invalidtype", vx_core.vx_new_string(valsub.toString()));
+          msg = vx_core.vx_msg_from_error("vx/core/msglist", ":invalidtype", vx_core.vx_new_string(valsub.ToString()));
           msgblock = vx_core.vx_copy(msgblock, msg);
         }
       }
@@ -6513,10 +6624,10 @@ public static class vx_core {
 
   public class Class_numberlist : vx_core.Class_base, Type_numberlist {
 
-    public List<vx_core.Type_number> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_number>());
+    public List<vx_core.Type_number> vx_p_list = vx_core.immutablelist(new List<vx_core.Type_number>());
 
     public List<vx_core.Type_any> vx_list() {
-      List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
+      List<vx_core.Type_any> output = vx_core.immutablelist(new List<vx_core.Type_any>(this.vx_p_list));
       return output;
     }
 
@@ -6525,8 +6636,8 @@ public static class vx_core {
       vx_core.Class_numberlist list = this;
       int iindex = index.vx_int();
       List<vx_core.Type_number> listval = list.vx_p_list;
-      if (iindex < listval.size()) {
-        output = listval.get(iindex);
+      if (iindex < listval.Count) {
+        output = listval[iindex];
       }
       return output;
     }
@@ -6553,7 +6664,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      List<vx_core.Type_number> listval = new ArrayList<>(val.vx_listnumber());
+      List<vx_core.Type_number> listval = new List<vx_core.Type_number>(val.vx_listnumber());
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -6563,21 +6674,21 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_number) {
           vx_core.Type_number anysub = valsub as vx_core.Type_number;
           ischanged = true;
-          listval.add(anysub);
+          listval.Add(anysub);
         } else if (valsub is vx_core.Type_number) {
           ischanged = true;
-          listval.add((vx_core.Type_number)valsub);
+          listval.Add((vx_core.Type_number)valsub);
         } else if (valsub is vx_core.Type_numberlist) {
           Type_numberlist multi = (Type_numberlist)valsub;
           ischanged = true;
-          listval.addAll(multi.vx_listnumber());
-        } else if (valsub is List) {
-          List listunknown = valsub as List;
+          listval.AddRange(multi.vx_listnumber());
+        } else if (valsub is List<Object>) {
+          List<Object> listunknown = valsub as List<Object>;
           foreach (Object item in listunknown) {
             if (item is vx_core.Type_number) {
               vx_core.Type_number valitem = (vx_core.Type_number)item;
               ischanged = true;
-              listval.add(valitem);
+              listval.Add(valitem);
             }
           }
         } else if (valsub is vx_core.Type_any) {
@@ -6585,7 +6696,7 @@ public static class vx_core {
           msg = vx_core.vx_msg_from_error("vx/core/numberlist", ":invalidtype", anysub);
           msgblock = vx_core.vx_copy(msgblock, msg);
         } else {
-          msg = vx_core.vx_msg_from_error("vx/core/numberlist", ":invalidtype", vx_core.vx_new_string(valsub.toString()));
+          msg = vx_core.vx_msg_from_error("vx/core/numberlist", ":invalidtype", vx_core.vx_new_string(valsub.ToString()));
           msgblock = vx_core.vx_copy(msgblock, msg);
         }
       }
@@ -6654,11 +6765,11 @@ public static class vx_core {
       vx_core.Type_boolean output = vx_core.c_false;
       if (value is vx_core.Type_number) {
         String key = name.vx_string();
-        if (key.startsWith(":")) {
-          key = key.substring(1);
+        if (key.StartsWith(":")) {
+          key = key.Substring(1);
         }
         vx_core.Type_number castval = (vx_core.Type_number)value;
-        Map<String, vx_core.Type_number> map = new LinkedHashMap<>(this.vx_p_map);
+        Map<String, vx_core.Type_number> map = new LinkedHashMap<String, vx_core.Type_number>(this.vx_p_map);
         if (castval == vx_core.e_number) {
           map.remove(key);
         } else {
@@ -6690,9 +6801,9 @@ public static class vx_core {
     public vx_core.Type_map vx_new_from_map(Map<String, vx_core.Type_any> mapval) {
       vx_core.Class_numbermap output = new vx_core.Class_numbermap();
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
-      Map<String, vx_core.Type_number> map = new LinkedHashMap<>();
+      Map<String, vx_core.Type_number> map = new LinkedHashMap<String, vx_core.Type_number>();
       Set<String> keys = mapval.keySet();
-      foreach (String key in keys) {
+      foreach (string key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_number) {
           vx_core.Type_number castval = (vx_core.Type_number)val;
@@ -6723,7 +6834,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, vx_core.Type_number> mapval = new LinkedHashMap<>(val.vx_mapnumber());
+      Map<String, vx_core.Type_number> mapval = new LinkedHashMap<String, vx_core.Type_number>(val.vx_mapnumber());
       vx_core.Type_msg msg;
       String key = "";
       foreach (Object valsub in vals) {
@@ -6735,14 +6846,14 @@ public static class vx_core {
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub is String) {
-            key = valsub as String;
+          } else if (valsub is string) {
+            key = valsub as string;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/numbermap", ":keyexpected", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
@@ -6758,9 +6869,9 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
-            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
             mapany.put("key", vx_core.vx_new_string(key));
             mapany.put("value", msgval);
             vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -6769,8 +6880,8 @@ public static class vx_core {
           }
           if (valany != null) {
             ischanged = true;
-            if (key.startsWith(":")) {
-              key = key.substring(1);
+            if (key.StartsWith(":")) {
+              key = key.Substring(1);
             }
             mapval.put(key, valany);
             key = "";
@@ -6918,11 +7029,11 @@ public static class vx_core {
       vx_core.Type_typemap vx_p_typemap = val.typemap();
       vx_core.Type_map vx_p_emptymap = val.emptymap();
       ArrayList<String> validkeys = new ArrayList<>();
-      validkeys.add(":pkgname");
-      validkeys.add(":constmap");
-      validkeys.add(":funcmap");
-      validkeys.add(":typemap");
-      validkeys.add(":emptymap");
+      validkeys.Add(":pkgname");
+      validkeys.Add(":constmap");
+      validkeys.Add(":funcmap");
+      validkeys.Add(":typemap");
+      validkeys.Add(":emptymap");
       String key = "";
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
@@ -6937,7 +7048,7 @@ public static class vx_core {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
@@ -6945,13 +7056,13 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/package", ":invalidkeytype", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
-            if (!testkey.startsWith(":")) {
+            if (!testkey.StartsWith(":")) {
               testkey = ":" + testkey;
             }
             bool isvalidkey = validkeys.contains(testkey);
@@ -6970,7 +7081,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_pkgname = (vx_core.Type_string)valsub;
-            } else if (valsub is String) {
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_pkgname = vx_core.vx_new(vx_core.t_string, valsub);
             } else {
@@ -6978,9 +7089,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("pkgname"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -6998,9 +7109,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("constmap"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -7018,9 +7129,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("funcmap"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -7038,9 +7149,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("typemap"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -7058,9 +7169,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("emptymap"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -7144,11 +7255,11 @@ public static class vx_core {
       vx_core.Type_boolean output = vx_core.c_false;
       if (value is vx_core.Type_package) {
         String key = name.vx_string();
-        if (key.startsWith(":")) {
-          key = key.substring(1);
+        if (key.StartsWith(":")) {
+          key = key.Substring(1);
         }
         vx_core.Type_package castval = (vx_core.Type_package)value;
-        Map<String, vx_core.Type_package> map = new LinkedHashMap<>(this.vx_p_map);
+        Map<String, vx_core.Type_package> map = new LinkedHashMap<String, vx_core.Type_package>(this.vx_p_map);
         if (castval == vx_core.e_package) {
           map.remove(key);
         } else {
@@ -7180,9 +7291,9 @@ public static class vx_core {
     public vx_core.Type_map vx_new_from_map(Map<String, vx_core.Type_any> mapval) {
       vx_core.Class_packagemap output = new vx_core.Class_packagemap();
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
-      Map<String, vx_core.Type_package> map = new LinkedHashMap<>();
+      Map<String, vx_core.Type_package> map = new LinkedHashMap<String, vx_core.Type_package>();
       Set<String> keys = mapval.keySet();
-      foreach (String key in keys) {
+      foreach (string key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_package) {
           vx_core.Type_package castval = (vx_core.Type_package)val;
@@ -7213,7 +7324,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, vx_core.Type_package> mapval = new LinkedHashMap<>(val.vx_mappackage());
+      Map<String, vx_core.Type_package> mapval = new LinkedHashMap<String, vx_core.Type_package>(val.vx_mappackage());
       vx_core.Type_msg msg;
       String key = "";
       foreach (Object valsub in vals) {
@@ -7225,14 +7336,14 @@ public static class vx_core {
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub is String) {
-            key = valsub as String;
+          } else if (valsub is string) {
+            key = valsub as string;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/packagemap", ":keyexpected", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
@@ -7248,9 +7359,9 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
-            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
             mapany.put("key", vx_core.vx_new_string(key));
             mapany.put("value", msgval);
             vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -7259,8 +7370,8 @@ public static class vx_core {
           }
           if (valany != null) {
             ischanged = true;
-            if (key.startsWith(":")) {
-              key = key.substring(1);
+            if (key.StartsWith(":")) {
+              key = key.Substring(1);
             }
             mapval.put(key, valany);
             key = "";
@@ -7360,7 +7471,7 @@ public static class vx_core {
       }
       vx_core.Type_string vx_p_id = val.id();
       ArrayList<String> validkeys = new ArrayList<>();
-      validkeys.add(":id");
+      validkeys.Add(":id");
       String key = "";
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
@@ -7375,7 +7486,7 @@ public static class vx_core {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
@@ -7383,13 +7494,13 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/permission", ":invalidkeytype", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
-            if (!testkey.startsWith(":")) {
+            if (!testkey.StartsWith(":")) {
               testkey = ":" + testkey;
             }
             bool isvalidkey = validkeys.contains(testkey);
@@ -7408,7 +7519,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_id = (vx_core.Type_string)valsub;
-            } else if (valsub is String) {
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_id = vx_core.vx_new(vx_core.t_string, valsub);
             } else {
@@ -7416,9 +7527,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("id"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -7489,10 +7600,10 @@ public static class vx_core {
 
   public class Class_permissionlist : vx_core.Class_base, Type_permissionlist {
 
-    public List<vx_core.Type_permission> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_permission>());
+    public List<vx_core.Type_permission> vx_p_list = vx_core.immutablelist(new List<vx_core.Type_permission>());
 
     public List<vx_core.Type_any> vx_list() {
-      List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
+      List<vx_core.Type_any> output = vx_core.immutablelist(new List<vx_core.Type_any>(this.vx_p_list));
       return output;
     }
 
@@ -7501,8 +7612,8 @@ public static class vx_core {
       vx_core.Class_permissionlist list = this;
       int iindex = index.vx_int();
       List<vx_core.Type_permission> listval = list.vx_p_list;
-      if (iindex < listval.size()) {
-        output = listval.get(iindex);
+      if (iindex < listval.Count) {
+        output = listval[iindex];
       }
       return output;
     }
@@ -7529,7 +7640,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      List<vx_core.Type_permission> listval = new ArrayList<>(val.vx_listpermission());
+      List<vx_core.Type_permission> listval = new List<vx_core.Type_permission>(val.vx_listpermission());
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -7539,21 +7650,21 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_permission) {
           vx_core.Type_permission anysub = valsub as vx_core.Type_permission;
           ischanged = true;
-          listval.add(anysub);
+          listval.Add(anysub);
         } else if (valsub is vx_core.Type_permission) {
           ischanged = true;
-          listval.add((vx_core.Type_permission)valsub);
+          listval.Add((vx_core.Type_permission)valsub);
         } else if (valsub is vx_core.Type_permissionlist) {
           Type_permissionlist multi = (Type_permissionlist)valsub;
           ischanged = true;
-          listval.addAll(multi.vx_listpermission());
-        } else if (valsub is List) {
-          List listunknown = valsub as List;
+          listval.AddRange(multi.vx_listpermission());
+        } else if (valsub is List<Object>) {
+          List<Object> listunknown = valsub as List<Object>;
           foreach (Object item in listunknown) {
             if (item is vx_core.Type_permission) {
               vx_core.Type_permission valitem = (vx_core.Type_permission)item;
               ischanged = true;
-              listval.add(valitem);
+              listval.Add(valitem);
             }
           }
         } else if (valsub is vx_core.Type_any) {
@@ -7561,7 +7672,7 @@ public static class vx_core {
           msg = vx_core.vx_msg_from_error("vx/core/permissionlist", ":invalidtype", anysub);
           msgblock = vx_core.vx_copy(msgblock, msg);
         } else {
-          msg = vx_core.vx_msg_from_error("vx/core/permissionlist", ":invalidtype", vx_core.vx_new_string(valsub.toString()));
+          msg = vx_core.vx_msg_from_error("vx/core/permissionlist", ":invalidtype", vx_core.vx_new_string(valsub.ToString()));
           msgblock = vx_core.vx_copy(msgblock, msg);
         }
       }
@@ -7630,11 +7741,11 @@ public static class vx_core {
       vx_core.Type_boolean output = vx_core.c_false;
       if (value is vx_core.Type_permission) {
         String key = name.vx_string();
-        if (key.startsWith(":")) {
-          key = key.substring(1);
+        if (key.StartsWith(":")) {
+          key = key.Substring(1);
         }
         vx_core.Type_permission castval = (vx_core.Type_permission)value;
-        Map<String, vx_core.Type_permission> map = new LinkedHashMap<>(this.vx_p_map);
+        Map<String, vx_core.Type_permission> map = new LinkedHashMap<String, vx_core.Type_permission>(this.vx_p_map);
         if (castval == vx_core.e_permission) {
           map.remove(key);
         } else {
@@ -7666,9 +7777,9 @@ public static class vx_core {
     public vx_core.Type_map vx_new_from_map(Map<String, vx_core.Type_any> mapval) {
       vx_core.Class_permissionmap output = new vx_core.Class_permissionmap();
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
-      Map<String, vx_core.Type_permission> map = new LinkedHashMap<>();
+      Map<String, vx_core.Type_permission> map = new LinkedHashMap<String, vx_core.Type_permission>();
       Set<String> keys = mapval.keySet();
-      foreach (String key in keys) {
+      foreach (string key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_permission) {
           vx_core.Type_permission castval = (vx_core.Type_permission)val;
@@ -7699,7 +7810,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, vx_core.Type_permission> mapval = new LinkedHashMap<>(val.vx_mappermission());
+      Map<String, vx_core.Type_permission> mapval = new LinkedHashMap<String, vx_core.Type_permission>(val.vx_mappermission());
       vx_core.Type_msg msg;
       String key = "";
       foreach (Object valsub in vals) {
@@ -7711,14 +7822,14 @@ public static class vx_core {
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub is String) {
-            key = valsub as String;
+          } else if (valsub is string) {
+            key = valsub as string;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/permissionmap", ":keyexpected", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
@@ -7734,9 +7845,9 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
-            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
             mapany.put("key", vx_core.vx_new_string(key));
             mapany.put("value", msgval);
             vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -7745,8 +7856,8 @@ public static class vx_core {
           }
           if (valany != null) {
             ischanged = true;
-            if (key.startsWith(":")) {
-              key = key.substring(1);
+            if (key.StartsWith(":")) {
+              key = key.Substring(1);
             }
             mapval.put(key, valany);
             key = "";
@@ -7846,7 +7957,7 @@ public static class vx_core {
       }
       vx_core.Type_packagemap vx_p_packagemap = val.packagemap();
       ArrayList<String> validkeys = new ArrayList<>();
-      validkeys.add(":packagemap");
+      validkeys.Add(":packagemap");
       String key = "";
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
@@ -7861,7 +7972,7 @@ public static class vx_core {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
@@ -7869,13 +7980,13 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/project", ":invalidkeytype", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
-            if (!testkey.startsWith(":")) {
+            if (!testkey.StartsWith(":")) {
               testkey = ":" + testkey;
             }
             bool isvalidkey = validkeys.contains(testkey);
@@ -7899,9 +8010,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("packagemap"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -8034,9 +8145,9 @@ public static class vx_core {
       vx_core.Type_permissionlist vx_p_permissions = val.permissions();
       vx_core.Type_permissionmap vx_p_permissionmap = val.permissionmap();
       ArrayList<String> validkeys = new ArrayList<>();
-      validkeys.add(":allowfuncs");
-      validkeys.add(":permissions");
-      validkeys.add(":permissionmap");
+      validkeys.Add(":allowfuncs");
+      validkeys.Add(":permissions");
+      validkeys.Add(":permissionmap");
       String key = "";
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
@@ -8051,7 +8162,7 @@ public static class vx_core {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
@@ -8059,13 +8170,13 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/security", ":invalidkeytype", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
-            if (!testkey.startsWith(":")) {
+            if (!testkey.StartsWith(":")) {
               testkey = ":" + testkey;
             }
             bool isvalidkey = validkeys.contains(testkey);
@@ -8089,9 +8200,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("allowfuncs"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -8109,9 +8220,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("permissions"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -8129,9 +8240,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("permissionmap"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -8302,12 +8413,12 @@ public static class vx_core {
       vx_core.Type_translation vx_p_translation = val.translation();
       vx_core.Type_translationmap vx_p_translationmap = val.translationmap();
       ArrayList<String> validkeys = new ArrayList<>();
-      validkeys.add(":user");
-      validkeys.add(":connectlist");
-      validkeys.add(":connectmap");
-      validkeys.add(":locale");
-      validkeys.add(":translation");
-      validkeys.add(":translationmap");
+      validkeys.Add(":user");
+      validkeys.Add(":connectlist");
+      validkeys.Add(":connectmap");
+      validkeys.Add(":locale");
+      validkeys.Add(":translation");
+      validkeys.Add(":translationmap");
       String key = "";
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
@@ -8322,7 +8433,7 @@ public static class vx_core {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
@@ -8330,13 +8441,13 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/session", ":invalidkeytype", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
-            if (!testkey.startsWith(":")) {
+            if (!testkey.StartsWith(":")) {
               testkey = ":" + testkey;
             }
             bool isvalidkey = validkeys.contains(testkey);
@@ -8360,9 +8471,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("user"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -8380,9 +8491,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("connectlist"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -8400,9 +8511,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("connectmap"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -8420,9 +8531,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("locale"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -8440,9 +8551,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("translation"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -8460,9 +8571,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("translationmap"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -8576,7 +8687,7 @@ public static class vx_core {
       }
       vx_core.Type_stringmap vx_p_pathmap = val.pathmap();
       ArrayList<String> validkeys = new ArrayList<>();
-      validkeys.add(":pathmap");
+      validkeys.Add(":pathmap");
       String key = "";
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
@@ -8591,7 +8702,7 @@ public static class vx_core {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
@@ -8599,13 +8710,13 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/setting", ":invalidkeytype", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
-            if (!testkey.startsWith(":")) {
+            if (!testkey.StartsWith(":")) {
               testkey = ":" + testkey;
             }
             bool isvalidkey = validkeys.contains(testkey);
@@ -8629,9 +8740,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("pathmap"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -8740,7 +8851,7 @@ public static class vx_core {
       }
       vx_core.Type_statelistenermap vx_p_statelistenermap = val.statelistenermap();
       ArrayList<String> validkeys = new ArrayList<>();
-      validkeys.add(":statelistenermap");
+      validkeys.Add(":statelistenermap");
       String key = "";
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
@@ -8755,7 +8866,7 @@ public static class vx_core {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
@@ -8763,13 +8874,13 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/state", ":invalidkeytype", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
-            if (!testkey.startsWith(":")) {
+            if (!testkey.StartsWith(":")) {
               testkey = ":" + testkey;
             }
             bool isvalidkey = validkeys.contains(testkey);
@@ -8793,9 +8904,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("statelistenermap"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -8927,9 +9038,9 @@ public static class vx_core {
       vx_core.Type_any vx_p_value = val.value();
       vx_core.Func_boolean_from_none vx_p_fn_boolean = val.fn_boolean();
       ArrayList<String> validkeys = new ArrayList<>();
-      validkeys.add(":name");
-      validkeys.add(":value");
-      validkeys.add(":fn-boolean");
+      validkeys.Add(":name");
+      validkeys.Add(":value");
+      validkeys.Add(":fn-boolean");
       String key = "";
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
@@ -8944,7 +9055,7 @@ public static class vx_core {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
@@ -8952,13 +9063,13 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/statelistener", ":invalidkeytype", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
-            if (!testkey.startsWith(":")) {
+            if (!testkey.StartsWith(":")) {
               testkey = ":" + testkey;
             }
             bool isvalidkey = validkeys.contains(testkey);
@@ -8977,7 +9088,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_name = (vx_core.Type_string)valsub;
-            } else if (valsub is String) {
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_name = vx_core.vx_new(vx_core.t_string, valsub);
             } else {
@@ -8985,9 +9096,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("name"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -9005,9 +9116,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("value"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -9025,9 +9136,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("fn-boolean"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -9110,11 +9221,11 @@ public static class vx_core {
       vx_core.Type_boolean output = vx_core.c_false;
       if (value is vx_core.Type_statelistener) {
         String key = name.vx_string();
-        if (key.startsWith(":")) {
-          key = key.substring(1);
+        if (key.StartsWith(":")) {
+          key = key.Substring(1);
         }
         vx_core.Type_statelistener castval = (vx_core.Type_statelistener)value;
-        Map<String, vx_core.Type_statelistener> map = new LinkedHashMap<>(this.vx_p_map);
+        Map<String, vx_core.Type_statelistener> map = new LinkedHashMap<String, vx_core.Type_statelistener>(this.vx_p_map);
         if (castval == vx_core.e_statelistener) {
           map.remove(key);
         } else {
@@ -9146,9 +9257,9 @@ public static class vx_core {
     public vx_core.Type_map vx_new_from_map(Map<String, vx_core.Type_any> mapval) {
       vx_core.Class_statelistenermap output = new vx_core.Class_statelistenermap();
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
-      Map<String, vx_core.Type_statelistener> map = new LinkedHashMap<>();
+      Map<String, vx_core.Type_statelistener> map = new LinkedHashMap<String, vx_core.Type_statelistener>();
       Set<String> keys = mapval.keySet();
-      foreach (String key in keys) {
+      foreach (string key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_statelistener) {
           vx_core.Type_statelistener castval = (vx_core.Type_statelistener)val;
@@ -9179,7 +9290,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, vx_core.Type_statelistener> mapval = new LinkedHashMap<>(val.vx_mapstatelistener());
+      Map<String, vx_core.Type_statelistener> mapval = new LinkedHashMap<String, vx_core.Type_statelistener>(val.vx_mapstatelistener());
       vx_core.Type_msg msg;
       String key = "";
       foreach (Object valsub in vals) {
@@ -9191,14 +9302,14 @@ public static class vx_core {
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub is String) {
-            key = valsub as String;
+          } else if (valsub is string) {
+            key = valsub as string;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/statelistenermap", ":keyexpected", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
@@ -9214,9 +9325,9 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
-            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
             mapany.put("key", vx_core.vx_new_string(key));
             mapany.put("value", msgval);
             vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -9225,8 +9336,8 @@ public static class vx_core {
           }
           if (valany != null) {
             ischanged = true;
-            if (key.startsWith(":")) {
-              key = key.substring(1);
+            if (key.StartsWith(":")) {
+              key = key.Substring(1);
             }
             mapval.put(key, valany);
             key = "";
@@ -9282,12 +9393,14 @@ public static class vx_core {
     public vx_core.Type_any vx_copy(params Object[] vals);
     public vx_core.Type_any vx_empty();
     public vx_core.Type_any vx_type();
+    public String vx_string();
   }
 
   public class Class_string : vx_core.Class_base, Type_string {
 
-    protected String vxstring = "";
+    internal String vxstring = "";
     
+    // :implements
     public String vx_string() {
       return vxstring;
     }
@@ -9332,18 +9445,18 @@ public static class vx_core {
           vx_core.Type_decimal valdecimal = valsub as vx_core.Type_decimal;
           ischanged = true;
           sb.append(valdecimal.vx_string());
-        } else if (valsub is String) {
-          String ssub2 = valsub as String;
+        } else if (valsub is string) {
+          string ssub2 = valsub as string;
           if (!ssub2.equals("")) {
             ischanged = true;
             sb.append(ssub2);
           }
-        } else if (valsub is Integer) {
-          int ssub2 = valsub as Integer;
+        } else if (valsub is int) {
+          int ssub2 = valsub as int;
           ischanged = true;
           sb.append(ssub2);
-        } else if (valsub is Float) {
-          Float ssub2 = valsub as Float;
+        } else if (valsub is float) {
+          float ssub2 = valsub as float;
           ischanged = true;
           sb.append(ssub2);
         } else if (valsub is vx_core.Type_any) {
@@ -9351,12 +9464,12 @@ public static class vx_core {
           msg = vx_core.vx_msg_from_error("vx/core/string", ":invalidtype", anysub);
           msgblock = vx_core.vx_copy(msgblock, msg);
         } else {
-          msg = vx_core.vx_msg_from_error("vx/core/string", ":invalidtype", vx_core.vx_new_string(valsub.toString()));
+          msg = vx_core.vx_msg_from_error("vx/core/string", ":invalidtype", vx_core.vx_new_string(valsub.ToString()));
           msgblock = vx_core.vx_copy(msgblock, msg);
         }
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
-        String vxstring = sb.toString();
+        String vxstring = sb.ToString();
         Class_string work = new Class_string();
         work.vxstring = vxstring;
         if (msgblock != vx_core.e_msgblock) {
@@ -9411,10 +9524,10 @@ public static class vx_core {
 
   public class Class_stringlist : vx_core.Class_base, Type_stringlist {
 
-    public List<vx_core.Type_string> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_string>());
+    public List<vx_core.Type_string> vx_p_list = vx_core.immutablelist(new List<vx_core.Type_string>());
 
     public List<vx_core.Type_any> vx_list() {
-      List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
+      List<vx_core.Type_any> output = vx_core.immutablelist(new List<vx_core.Type_any>(this.vx_p_list));
       return output;
     }
 
@@ -9423,8 +9536,8 @@ public static class vx_core {
       vx_core.Class_stringlist list = this;
       int iindex = index.vx_int();
       List<vx_core.Type_string> listval = list.vx_p_list;
-      if (iindex < listval.size()) {
-        output = listval.get(iindex);
+      if (iindex < listval.Count) {
+        output = listval[iindex];
       }
       return output;
     }
@@ -9451,7 +9564,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      List<vx_core.Type_string> listval = new ArrayList<>(val.vx_liststring());
+      List<vx_core.Type_string> listval = new List<vx_core.Type_string>(val.vx_liststring());
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -9461,21 +9574,21 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_string) {
           vx_core.Type_string anysub = valsub as vx_core.Type_string;
           ischanged = true;
-          listval.add(anysub);
+          listval.Add(anysub);
         } else if (valsub is String) {
           ischanged = true;
-          listval.add(vx_core.vx_new(vx_core.t_string, valsub));
+          listval.Add(vx_core.vx_new(vx_core.t_string, valsub));
         } else if (valsub is vx_core.Type_stringlist) {
           Type_stringlist multi = (Type_stringlist)valsub;
           ischanged = true;
-          listval.addAll(multi.vx_liststring());
-        } else if (valsub is List) {
-          List listunknown = valsub as List;
+          listval.AddRange(multi.vx_liststring());
+        } else if (valsub is List<Object>) {
+          List<Object> listunknown = valsub as List<Object>;
           foreach (Object item in listunknown) {
             if (item is vx_core.Type_string) {
               vx_core.Type_string valitem = (vx_core.Type_string)item;
               ischanged = true;
-              listval.add(valitem);
+              listval.Add(valitem);
             }
           }
         } else if (valsub is vx_core.Type_any) {
@@ -9483,7 +9596,7 @@ public static class vx_core {
           msg = vx_core.vx_msg_from_error("vx/core/stringlist", ":invalidtype", anysub);
           msgblock = vx_core.vx_copy(msgblock, msg);
         } else {
-          msg = vx_core.vx_msg_from_error("vx/core/stringlist", ":invalidtype", vx_core.vx_new_string(valsub.toString()));
+          msg = vx_core.vx_msg_from_error("vx/core/stringlist", ":invalidtype", vx_core.vx_new_string(valsub.ToString()));
           msgblock = vx_core.vx_copy(msgblock, msg);
         }
       }
@@ -9542,10 +9655,10 @@ public static class vx_core {
 
   public class Class_stringlistlist : vx_core.Class_base, Type_stringlistlist {
 
-    public List<vx_core.Type_stringlist> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_stringlist>());
+    public List<vx_core.Type_stringlist> vx_p_list = vx_core.immutablelist(new List<vx_core.Type_stringlist>());
 
     public List<vx_core.Type_any> vx_list() {
-      List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
+      List<vx_core.Type_any> output = vx_core.immutablelist(new List<vx_core.Type_any>(this.vx_p_list));
       return output;
     }
 
@@ -9554,8 +9667,8 @@ public static class vx_core {
       vx_core.Class_stringlistlist list = this;
       int iindex = index.vx_int();
       List<vx_core.Type_stringlist> listval = list.vx_p_list;
-      if (iindex < listval.size()) {
-        output = listval.get(iindex);
+      if (iindex < listval.Count) {
+        output = listval[iindex];
       }
       return output;
     }
@@ -9582,7 +9695,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      List<vx_core.Type_stringlist> listval = new ArrayList<>(val.vx_liststringlist());
+      List<vx_core.Type_stringlist> listval = new List<vx_core.Type_stringlist>(val.vx_liststringlist());
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -9592,21 +9705,21 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_stringlist) {
           vx_core.Type_stringlist anysub = valsub as vx_core.Type_stringlist;
           ischanged = true;
-          listval.add(anysub);
+          listval.Add(anysub);
         } else if (valsub is vx_core.Type_stringlist) {
           ischanged = true;
-          listval.add((vx_core.Type_stringlist)valsub);
+          listval.Add((vx_core.Type_stringlist)valsub);
         } else if (valsub is vx_core.Type_stringlistlist) {
           Type_stringlistlist multi = (Type_stringlistlist)valsub;
           ischanged = true;
-          listval.addAll(multi.vx_liststringlist());
-        } else if (valsub is List) {
-          List listunknown = valsub as List;
+          listval.AddRange(multi.vx_liststringlist());
+        } else if (valsub is List<Object>) {
+          List<Object> listunknown = valsub as List<Object>;
           foreach (Object item in listunknown) {
             if (item is vx_core.Type_stringlist) {
               vx_core.Type_stringlist valitem = (vx_core.Type_stringlist)item;
               ischanged = true;
-              listval.add(valitem);
+              listval.Add(valitem);
             }
           }
         } else if (valsub is vx_core.Type_any) {
@@ -9614,7 +9727,7 @@ public static class vx_core {
           msg = vx_core.vx_msg_from_error("vx/core/stringlistlist", ":invalidtype", anysub);
           msgblock = vx_core.vx_copy(msgblock, msg);
         } else {
-          msg = vx_core.vx_msg_from_error("vx/core/stringlistlist", ":invalidtype", vx_core.vx_new_string(valsub.toString()));
+          msg = vx_core.vx_msg_from_error("vx/core/stringlistlist", ":invalidtype", vx_core.vx_new_string(valsub.ToString()));
           msgblock = vx_core.vx_copy(msgblock, msg);
         }
       }
@@ -9683,11 +9796,11 @@ public static class vx_core {
       vx_core.Type_boolean output = vx_core.c_false;
       if (value is vx_core.Type_string) {
         String key = name.vx_string();
-        if (key.startsWith(":")) {
-          key = key.substring(1);
+        if (key.StartsWith(":")) {
+          key = key.Substring(1);
         }
         vx_core.Type_string castval = (vx_core.Type_string)value;
-        Map<String, vx_core.Type_string> map = new LinkedHashMap<>(this.vx_p_map);
+        Map<String, vx_core.Type_string> map = new LinkedHashMap<String, vx_core.Type_string>(this.vx_p_map);
         if (castval == vx_core.e_string) {
           map.remove(key);
         } else {
@@ -9719,9 +9832,9 @@ public static class vx_core {
     public vx_core.Type_map vx_new_from_map(Map<String, vx_core.Type_any> mapval) {
       vx_core.Class_stringmap output = new vx_core.Class_stringmap();
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
-      Map<String, vx_core.Type_string> map = new LinkedHashMap<>();
+      Map<String, vx_core.Type_string> map = new LinkedHashMap<String, vx_core.Type_string>();
       Set<String> keys = mapval.keySet();
-      foreach (String key in keys) {
+      foreach (string key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_string) {
           vx_core.Type_string castval = (vx_core.Type_string)val;
@@ -9752,7 +9865,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, vx_core.Type_string> mapval = new LinkedHashMap<>(val.vx_mapstring());
+      Map<String, vx_core.Type_string> mapval = new LinkedHashMap<String, vx_core.Type_string>(val.vx_mapstring());
       vx_core.Type_msg msg;
       String key = "";
       foreach (Object valsub in vals) {
@@ -9764,14 +9877,14 @@ public static class vx_core {
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub is String) {
-            key = valsub as String;
+          } else if (valsub is string) {
+            key = valsub as string;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/stringmap", ":keyexpected", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
@@ -9780,16 +9893,16 @@ public static class vx_core {
           vx_core.Type_string valany = null;
           if (valsub is vx_core.Type_string) {
             valany = (vx_core.Type_string)valsub;
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             valany = vx_core.vx_new(vx_core.t_string, valsub);
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
-            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
             mapany.put("key", vx_core.vx_new_string(key));
             mapany.put("value", msgval);
             vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -9798,8 +9911,8 @@ public static class vx_core {
           }
           if (valany != null) {
             ischanged = true;
-            if (key.startsWith(":")) {
-              key = key.substring(1);
+            if (key.StartsWith(":")) {
+              key = key.Substring(1);
             }
             mapval.put(key, valany);
             key = "";
@@ -9871,11 +9984,11 @@ public static class vx_core {
       vx_core.Type_boolean output = vx_core.c_false;
       if (value is vx_core.Type_string) {
         String key = name.vx_string();
-        if (key.startsWith(":")) {
-          key = key.substring(1);
+        if (key.StartsWith(":")) {
+          key = key.Substring(1);
         }
         vx_core.Type_string castval = (vx_core.Type_string)value;
-        Map<String, vx_core.Type_string> map = new LinkedHashMap<>(this.vx_p_map);
+        Map<String, vx_core.Type_string> map = new LinkedHashMap<String, vx_core.Type_string>(this.vx_p_map);
         if (castval == vx_core.e_string) {
           map.remove(key);
         } else {
@@ -9907,9 +10020,9 @@ public static class vx_core {
     public vx_core.Type_map vx_new_from_map(Map<String, vx_core.Type_any> mapval) {
       vx_core.Class_stringmutablemap output = new vx_core.Class_stringmutablemap();
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
-      Map<String, vx_core.Type_string> map = new LinkedHashMap<>();
+      Map<String, vx_core.Type_string> map = new LinkedHashMap<String, vx_core.Type_string>();
       Set<String> keys = mapval.keySet();
-      foreach (String key in keys) {
+      foreach (string key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_string) {
           vx_core.Type_string castval = (vx_core.Type_string)val;
@@ -9940,7 +10053,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, vx_core.Type_string> mapval = new LinkedHashMap<>(val.vx_mapstring());
+      Map<String, vx_core.Type_string> mapval = new LinkedHashMap<String, vx_core.Type_string>(val.vx_mapstring());
       vx_core.Type_msg msg;
       String key = "";
       foreach (Object valsub in vals) {
@@ -9952,14 +10065,14 @@ public static class vx_core {
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub is String) {
-            key = valsub as String;
+          } else if (valsub is string) {
+            key = valsub as string;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/stringmutablemap", ":keyexpected", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
@@ -9968,16 +10081,16 @@ public static class vx_core {
           vx_core.Type_string valany = null;
           if (valsub is vx_core.Type_string) {
             valany = (vx_core.Type_string)valsub;
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             valany = vx_core.vx_new(vx_core.t_string, valsub);
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
-            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
             mapany.put("key", vx_core.vx_new_string(key));
             mapany.put("value", msgval);
             vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -9986,8 +10099,8 @@ public static class vx_core {
           }
           if (valany != null) {
             ischanged = true;
-            if (key.startsWith(":")) {
-              key = key.substring(1);
+            if (key.StartsWith(":")) {
+              key = key.Substring(1);
             }
             mapval.put(key, valany);
             key = "";
@@ -10215,11 +10328,11 @@ public static class vx_core {
       vx_core.Func_boolean_from_func vx_p_fn_cond = val.fn_cond();
       vx_core.Func_any_from_func vx_p_fn_any = val.fn_any();
       ArrayList<String> validkeys = new ArrayList<>();
-      validkeys.add(":code");
-      validkeys.add(":value");
-      validkeys.add(":values");
-      validkeys.add(":fn-cond");
-      validkeys.add(":fn-any");
+      validkeys.Add(":code");
+      validkeys.Add(":value");
+      validkeys.Add(":values");
+      validkeys.Add(":fn-cond");
+      validkeys.Add(":fn-any");
       String key = "";
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
@@ -10234,7 +10347,7 @@ public static class vx_core {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
@@ -10242,13 +10355,13 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/thenelse", ":invalidkeytype", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
-            if (!testkey.startsWith(":")) {
+            if (!testkey.StartsWith(":")) {
               testkey = ":" + testkey;
             }
             bool isvalidkey = validkeys.contains(testkey);
@@ -10267,7 +10380,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_code = (vx_core.Type_string)valsub;
-            } else if (valsub is String) {
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_code = vx_core.vx_new(vx_core.t_string, valsub);
             } else {
@@ -10275,9 +10388,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("code"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -10295,9 +10408,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("value"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -10315,9 +10428,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("values"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -10335,9 +10448,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("fn-cond"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -10355,9 +10468,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("fn-any"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -10431,10 +10544,10 @@ public static class vx_core {
 
   public class Class_thenelselist : vx_core.Class_base, Type_thenelselist {
 
-    public List<vx_core.Type_thenelse> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_thenelse>());
+    public List<vx_core.Type_thenelse> vx_p_list = vx_core.immutablelist(new List<vx_core.Type_thenelse>());
 
     public List<vx_core.Type_any> vx_list() {
-      List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
+      List<vx_core.Type_any> output = vx_core.immutablelist(new List<vx_core.Type_any>(this.vx_p_list));
       return output;
     }
 
@@ -10443,8 +10556,8 @@ public static class vx_core {
       vx_core.Class_thenelselist list = this;
       int iindex = index.vx_int();
       List<vx_core.Type_thenelse> listval = list.vx_p_list;
-      if (iindex < listval.size()) {
-        output = listval.get(iindex);
+      if (iindex < listval.Count) {
+        output = listval[iindex];
       }
       return output;
     }
@@ -10471,7 +10584,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      List<vx_core.Type_thenelse> listval = new ArrayList<>(val.vx_listthenelse());
+      List<vx_core.Type_thenelse> listval = new List<vx_core.Type_thenelse>(val.vx_listthenelse());
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -10481,21 +10594,21 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_thenelse) {
           vx_core.Type_thenelse anysub = valsub as vx_core.Type_thenelse;
           ischanged = true;
-          listval.add(anysub);
+          listval.Add(anysub);
         } else if (valsub is vx_core.Type_thenelse) {
           ischanged = true;
-          listval.add((vx_core.Type_thenelse)valsub);
+          listval.Add((vx_core.Type_thenelse)valsub);
         } else if (valsub is vx_core.Type_thenelselist) {
           Type_thenelselist multi = (Type_thenelselist)valsub;
           ischanged = true;
-          listval.addAll(multi.vx_listthenelse());
-        } else if (valsub is List) {
-          List listunknown = valsub as List;
+          listval.AddRange(multi.vx_listthenelse());
+        } else if (valsub is List<Object>) {
+          List<Object> listunknown = valsub as List<Object>;
           foreach (Object item in listunknown) {
             if (item is vx_core.Type_thenelse) {
               vx_core.Type_thenelse valitem = (vx_core.Type_thenelse)item;
               ischanged = true;
-              listval.add(valitem);
+              listval.Add(valitem);
             }
           }
         } else if (valsub is vx_core.Type_any) {
@@ -10503,7 +10616,7 @@ public static class vx_core {
           msg = vx_core.vx_msg_from_error("vx/core/thenelselist", ":invalidtype", anysub);
           msgblock = vx_core.vx_copy(msgblock, msg);
         } else {
-          msg = vx_core.vx_msg_from_error("vx/core/thenelselist", ":invalidtype", vx_core.vx_new_string(valsub.toString()));
+          msg = vx_core.vx_msg_from_error("vx/core/thenelselist", ":invalidtype", vx_core.vx_new_string(valsub.ToString()));
           msgblock = vx_core.vx_copy(msgblock, msg);
         }
       }
@@ -10612,8 +10725,8 @@ public static class vx_core {
       vx_core.Type_string vx_p_name = val.name();
       vx_core.Type_stringmap vx_p_wordmap = val.wordmap();
       ArrayList<String> validkeys = new ArrayList<>();
-      validkeys.add(":name");
-      validkeys.add(":wordmap");
+      validkeys.Add(":name");
+      validkeys.Add(":wordmap");
       String key = "";
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
@@ -10628,7 +10741,7 @@ public static class vx_core {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
@@ -10636,13 +10749,13 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/translation", ":invalidkeytype", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
-            if (!testkey.startsWith(":")) {
+            if (!testkey.StartsWith(":")) {
               testkey = ":" + testkey;
             }
             bool isvalidkey = validkeys.contains(testkey);
@@ -10661,7 +10774,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_name = (vx_core.Type_string)valsub;
-            } else if (valsub is String) {
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_name = vx_core.vx_new(vx_core.t_string, valsub);
             } else {
@@ -10669,9 +10782,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("name"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -10689,9 +10802,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("wordmap"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -10763,10 +10876,10 @@ public static class vx_core {
 
   public class Class_translationlist : vx_core.Class_base, Type_translationlist {
 
-    public List<vx_core.Type_translation> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_translation>());
+    public List<vx_core.Type_translation> vx_p_list = vx_core.immutablelist(new List<vx_core.Type_translation>());
 
     public List<vx_core.Type_any> vx_list() {
-      List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
+      List<vx_core.Type_any> output = vx_core.immutablelist(new List<vx_core.Type_any>(this.vx_p_list));
       return output;
     }
 
@@ -10775,8 +10888,8 @@ public static class vx_core {
       vx_core.Class_translationlist list = this;
       int iindex = index.vx_int();
       List<vx_core.Type_translation> listval = list.vx_p_list;
-      if (iindex < listval.size()) {
-        output = listval.get(iindex);
+      if (iindex < listval.Count) {
+        output = listval[iindex];
       }
       return output;
     }
@@ -10803,7 +10916,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      List<vx_core.Type_translation> listval = new ArrayList<>(val.vx_listtranslation());
+      List<vx_core.Type_translation> listval = new List<vx_core.Type_translation>(val.vx_listtranslation());
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -10813,21 +10926,21 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_translation) {
           vx_core.Type_translation anysub = valsub as vx_core.Type_translation;
           ischanged = true;
-          listval.add(anysub);
+          listval.Add(anysub);
         } else if (valsub is vx_core.Type_translation) {
           ischanged = true;
-          listval.add((vx_core.Type_translation)valsub);
+          listval.Add((vx_core.Type_translation)valsub);
         } else if (valsub is vx_core.Type_translationlist) {
           Type_translationlist multi = (Type_translationlist)valsub;
           ischanged = true;
-          listval.addAll(multi.vx_listtranslation());
-        } else if (valsub is List) {
-          List listunknown = valsub as List;
+          listval.AddRange(multi.vx_listtranslation());
+        } else if (valsub is List<Object>) {
+          List<Object> listunknown = valsub as List<Object>;
           foreach (Object item in listunknown) {
             if (item is vx_core.Type_translation) {
               vx_core.Type_translation valitem = (vx_core.Type_translation)item;
               ischanged = true;
-              listval.add(valitem);
+              listval.Add(valitem);
             }
           }
         } else if (valsub is vx_core.Type_any) {
@@ -10835,7 +10948,7 @@ public static class vx_core {
           msg = vx_core.vx_msg_from_error("vx/core/translationlist", ":invalidtype", anysub);
           msgblock = vx_core.vx_copy(msgblock, msg);
         } else {
-          msg = vx_core.vx_msg_from_error("vx/core/translationlist", ":invalidtype", vx_core.vx_new_string(valsub.toString()));
+          msg = vx_core.vx_msg_from_error("vx/core/translationlist", ":invalidtype", vx_core.vx_new_string(valsub.ToString()));
           msgblock = vx_core.vx_copy(msgblock, msg);
         }
       }
@@ -10904,11 +11017,11 @@ public static class vx_core {
       vx_core.Type_boolean output = vx_core.c_false;
       if (value is vx_core.Type_translation) {
         String key = name.vx_string();
-        if (key.startsWith(":")) {
-          key = key.substring(1);
+        if (key.StartsWith(":")) {
+          key = key.Substring(1);
         }
         vx_core.Type_translation castval = (vx_core.Type_translation)value;
-        Map<String, vx_core.Type_translation> map = new LinkedHashMap<>(this.vx_p_map);
+        Map<String, vx_core.Type_translation> map = new LinkedHashMap<String, vx_core.Type_translation>(this.vx_p_map);
         if (castval == vx_core.e_translation) {
           map.remove(key);
         } else {
@@ -10940,9 +11053,9 @@ public static class vx_core {
     public vx_core.Type_map vx_new_from_map(Map<String, vx_core.Type_any> mapval) {
       vx_core.Class_translationmap output = new vx_core.Class_translationmap();
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
-      Map<String, vx_core.Type_translation> map = new LinkedHashMap<>();
+      Map<String, vx_core.Type_translation> map = new LinkedHashMap<String, vx_core.Type_translation>();
       Set<String> keys = mapval.keySet();
-      foreach (String key in keys) {
+      foreach (string key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_translation) {
           vx_core.Type_translation castval = (vx_core.Type_translation)val;
@@ -10973,7 +11086,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, vx_core.Type_translation> mapval = new LinkedHashMap<>(val.vx_maptranslation());
+      Map<String, vx_core.Type_translation> mapval = new LinkedHashMap<String, vx_core.Type_translation>(val.vx_maptranslation());
       vx_core.Type_msg msg;
       String key = "";
       foreach (Object valsub in vals) {
@@ -10985,14 +11098,14 @@ public static class vx_core {
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub is String) {
-            key = valsub as String;
+          } else if (valsub is string) {
+            key = valsub as string;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/translationmap", ":keyexpected", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
@@ -11008,9 +11121,9 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
-            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
             mapany.put("key", vx_core.vx_new_string(key));
             mapany.put("value", msgval);
             vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -11019,8 +11132,8 @@ public static class vx_core {
           }
           if (valany != null) {
             ischanged = true;
-            if (key.startsWith(":")) {
-              key = key.substring(1);
+            if (key.StartsWith(":")) {
+              key = key.Substring(1);
             }
             mapval.put(key, valany);
             key = "";
@@ -11318,18 +11431,18 @@ public static class vx_core {
       vx_core.Type_arg vx_p_proplast = val.proplast();
       vx_core.Type_typelist vx_p_traits = val.traits();
       ArrayList<String> validkeys = new ArrayList<>();
-      validkeys.add(":pkgname");
-      validkeys.add(":name");
-      validkeys.add(":extends");
-      validkeys.add(":allowfuncs");
-      validkeys.add(":allowtypes");
-      validkeys.add(":allowvalues");
-      validkeys.add(":disallowfuncs");
-      validkeys.add(":disallowtypes");
-      validkeys.add(":disallowvalues");
-      validkeys.add(":properties");
-      validkeys.add(":proplast");
-      validkeys.add(":traits");
+      validkeys.Add(":pkgname");
+      validkeys.Add(":name");
+      validkeys.Add(":extends");
+      validkeys.Add(":allowfuncs");
+      validkeys.Add(":allowtypes");
+      validkeys.Add(":allowvalues");
+      validkeys.Add(":disallowfuncs");
+      validkeys.Add(":disallowtypes");
+      validkeys.Add(":disallowvalues");
+      validkeys.Add(":properties");
+      validkeys.Add(":proplast");
+      validkeys.Add(":traits");
       String key = "";
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
@@ -11344,7 +11457,7 @@ public static class vx_core {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
@@ -11352,13 +11465,13 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/typedef", ":invalidkeytype", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
-            if (!testkey.startsWith(":")) {
+            if (!testkey.StartsWith(":")) {
               testkey = ":" + testkey;
             }
             bool isvalidkey = validkeys.contains(testkey);
@@ -11377,7 +11490,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_pkgname = (vx_core.Type_string)valsub;
-            } else if (valsub is String) {
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_pkgname = vx_core.vx_new(vx_core.t_string, valsub);
             } else {
@@ -11385,9 +11498,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("pkgname"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -11400,7 +11513,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_name = (vx_core.Type_string)valsub;
-            } else if (valsub is String) {
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_name = vx_core.vx_new(vx_core.t_string, valsub);
             } else {
@@ -11408,9 +11521,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("name"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -11423,7 +11536,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_extend = (vx_core.Type_string)valsub;
-            } else if (valsub is String) {
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_extend = vx_core.vx_new(vx_core.t_string, valsub);
             } else {
@@ -11431,9 +11544,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("extends"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -11451,9 +11564,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("allowfuncs"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -11471,9 +11584,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("allowtypes"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -11491,9 +11604,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("allowvalues"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -11511,9 +11624,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("disallowfuncs"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -11531,9 +11644,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("disallowtypes"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -11551,9 +11664,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("disallowvalues"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -11571,9 +11684,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("properties"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -11591,9 +11704,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("proplast"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -11611,9 +11724,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("traits"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -11693,10 +11806,10 @@ public static class vx_core {
 
   public class Class_typelist : vx_core.Class_base, Type_typelist {
 
-    public List<vx_core.Type_any> vx_p_list = vx_core.immutablelist(new ArrayList<vx_core.Type_any>());
+    public List<vx_core.Type_any> vx_p_list = vx_core.immutablelist(new List<vx_core.Type_any>());
 
     public List<vx_core.Type_any> vx_list() {
-      List<vx_core.Type_any> output = vx_core.immutablelist(new ArrayList<vx_core.Type_any>(this.vx_p_list));
+      List<vx_core.Type_any> output = vx_core.immutablelist(new List<vx_core.Type_any>(this.vx_p_list));
       return output;
     }
 
@@ -11705,8 +11818,8 @@ public static class vx_core {
       vx_core.Class_typelist list = this;
       int iindex = index.vx_int();
       List<vx_core.Type_any> listval = list.vx_p_list;
-      if (iindex < listval.size()) {
-        output = listval.get(iindex);
+      if (iindex < listval.Count) {
+        output = listval[iindex];
       }
       return output;
     }
@@ -11725,7 +11838,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      List<vx_core.Type_any> listval = new ArrayList<>(val.vx_list());
+      List<vx_core.Type_any> listval = new List<vx_core.Type_any>(val.vx_list());
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -11735,21 +11848,21 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_any) {
           vx_core.Type_any anysub = valsub as vx_core.Type_any;
           ischanged = true;
-          listval.add(anysub);
+          listval.Add(anysub);
         } else if (valsub is vx_core.Type_any) {
           ischanged = true;
-          listval.add((vx_core.Type_any)valsub);
+          listval.Add((vx_core.Type_any)valsub);
         } else if (valsub is vx_core.Type_typelist) {
           Type_typelist multi = (Type_typelist)valsub;
           ischanged = true;
-          listval.addAll(multi.vx_list());
-        } else if (valsub is List) {
-          List listunknown = valsub as List;
+          listval.AddRange(multi.vx_list());
+        } else if (valsub is List<Object>) {
+          List<Object> listunknown = valsub as List<Object>;
           foreach (Object item in listunknown) {
             if (item is vx_core.Type_any) {
               vx_core.Type_any valitem = (vx_core.Type_any)item;
               ischanged = true;
-              listval.add(valitem);
+              listval.Add(valitem);
             }
           }
         } else if (valsub is vx_core.Type_any) {
@@ -11757,7 +11870,7 @@ public static class vx_core {
           msg = vx_core.vx_msg_from_error("vx/core/typelist", ":invalidtype", anysub);
           msgblock = vx_core.vx_copy(msgblock, msg);
         } else {
-          msg = vx_core.vx_msg_from_error("vx/core/typelist", ":invalidtype", vx_core.vx_new_string(valsub.toString()));
+          msg = vx_core.vx_msg_from_error("vx/core/typelist", ":invalidtype", vx_core.vx_new_string(valsub.ToString()));
           msgblock = vx_core.vx_copy(msgblock, msg);
         }
       }
@@ -11824,11 +11937,11 @@ public static class vx_core {
       vx_core.Type_boolean output = vx_core.c_false;
       if (value is vx_core.Type_any) {
         String key = name.vx_string();
-        if (key.startsWith(":")) {
-          key = key.substring(1);
+        if (key.StartsWith(":")) {
+          key = key.Substring(1);
         }
         vx_core.Type_any castval = (vx_core.Type_any)value;
-        Map<String, vx_core.Type_any> map = new LinkedHashMap<>(this.vx_p_map);
+        Map<String, vx_core.Type_any> map = new LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map);
         if (castval == vx_core.e_any) {
           map.remove(key);
         } else {
@@ -11852,9 +11965,9 @@ public static class vx_core {
     public vx_core.Type_map vx_new_from_map(Map<String, vx_core.Type_any> mapval) {
       vx_core.Class_typemap output = new vx_core.Class_typemap();
       vx_core.Type_msgblock msgblock = vx_core.e_msgblock;
-      Map<String, vx_core.Type_any> map = new LinkedHashMap<>();
+      Map<String, vx_core.Type_any> map = new LinkedHashMap<String, vx_core.Type_any>();
       Set<String> keys = mapval.keySet();
-      foreach (String key in keys) {
+      foreach (string key in keys) {
         vx_core.Type_any val = mapval.get(key);
         if (val is vx_core.Type_any) {
           vx_core.Type_any castval = (vx_core.Type_any)val;
@@ -11885,7 +11998,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, vx_core.Type_any> mapval = new LinkedHashMap<>(val.vx_map());
+      Map<String, vx_core.Type_any> mapval = new LinkedHashMap<String, vx_core.Type_any>(val.vx_map());
       vx_core.Type_msg msg;
       String key = "";
       foreach (Object valsub in vals) {
@@ -11897,14 +12010,14 @@ public static class vx_core {
           if (valsub is vx_core.Type_string) {
             vx_core.Type_string valstring = valsub as vx_core.Type_string;
             key = valstring.vx_string();
-          } else if (valsub is String) {
-            key = valsub as String;
+          } else if (valsub is string) {
+            key = valsub as string;
           } else {
             vx_core.Type_any msgval;
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/typemap", ":keyexpected", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
@@ -11920,9 +12033,9 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = valsub as vx_core.Type_any;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
-            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+            Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
             mapany.put("key", vx_core.vx_new_string(key));
             mapany.put("value", msgval);
             vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -11931,8 +12044,8 @@ public static class vx_core {
           }
           if (valany != null) {
             ischanged = true;
-            if (key.startsWith(":")) {
-              key = key.substring(1);
+            if (key.StartsWith(":")) {
+              key = key.Substring(1);
             }
             mapval.put(key, valany);
             key = "";
@@ -12056,9 +12169,9 @@ public static class vx_core {
       vx_core.Type_string vx_p_username = val.username();
       vx_core.Type_string vx_p_token = val.token();
       ArrayList<String> validkeys = new ArrayList<>();
-      validkeys.add(":security");
-      validkeys.add(":username");
-      validkeys.add(":token");
+      validkeys.Add(":security");
+      validkeys.Add(":username");
+      validkeys.Add(":token");
       String key = "";
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
@@ -12073,7 +12186,7 @@ public static class vx_core {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
@@ -12081,13 +12194,13 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/user", ":invalidkeytype", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
-            if (!testkey.startsWith(":")) {
+            if (!testkey.StartsWith(":")) {
               testkey = ":" + testkey;
             }
             bool isvalidkey = validkeys.contains(testkey);
@@ -12111,9 +12224,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("security"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -12126,7 +12239,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_username = (vx_core.Type_string)valsub;
-            } else if (valsub is String) {
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_username = vx_core.vx_new(vx_core.t_string, valsub);
             } else {
@@ -12134,9 +12247,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("username"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -12149,7 +12262,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_string) {
               ischanged = true;
               vx_p_token = (vx_core.Type_string)valsub;
-            } else if (valsub is String) {
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_token = vx_core.vx_new(vx_core.t_string, valsub);
             } else {
@@ -12157,9 +12270,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("token"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -12281,8 +12394,8 @@ public static class vx_core {
       vx_core.Type_any vx_p_next = val.next();
       vx_core.Type_int vx_p_refs = val.refs();
       ArrayList<String> validkeys = new ArrayList<>();
-      validkeys.add(":next");
-      validkeys.add(":refs");
+      validkeys.Add(":next");
+      validkeys.Add(":refs");
       String key = "";
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
@@ -12297,7 +12410,7 @@ public static class vx_core {
             vx_core.Type_string valstr = (vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is String) {
+          } else if (valsub is string) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
@@ -12305,13 +12418,13 @@ public static class vx_core {
             if (valsub is vx_core.Type_any) {
               msgval = (vx_core.Type_any)valsub;
             } else {
-              msgval = vx_core.vx_new_string(valsub.toString());
+              msgval = vx_core.vx_new_string(valsub.ToString());
             }
             msg = vx_core.vx_msg_from_error("vx/core/value", ":invalidkeytype", msgval);
             msgblock = vx_core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
-            if (!testkey.startsWith(":")) {
+            if (!testkey.StartsWith(":")) {
               testkey = ":" + testkey;
             }
             bool isvalidkey = validkeys.contains(testkey);
@@ -12335,9 +12448,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("next"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -12350,7 +12463,7 @@ public static class vx_core {
             } else if (valsub is vx_core.Type_int) {
               ischanged = true;
               vx_p_refs = (vx_core.Type_int)valsub;
-            } else if (valsub is Integer) {
+            } else if (valsub is int) {
               ischanged = true;
               vx_p_refs = vx_core.vx_new(vx_core.t_int, valsub);
             } else {
@@ -12358,9 +12471,9 @@ public static class vx_core {
               if (valsub is vx_core.Type_any) {
                 msgval = (vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.toString());
+                msgval = vx_core.vx_new_string(valsub.ToString());
               }
-              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, vx_core.Type_any> mapany = new LinkedHashMap<String, vx_core.Type_any>();
               mapany.put("key", vx_core.vx_new_string("refs"));
               mapany.put("value", msgval);
               vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
@@ -12798,7 +12911,7 @@ public static class vx_core {
     public static void const_new(Const_newline output) {
     }
 
-    public String vx_string() {
+    public string vx_string() {
       this.vxstring = "\n";
       return this.vxstring;
     }
@@ -12878,7 +12991,7 @@ public static class vx_core {
     public static void const_new(Const_nothing output) {
     }
 
-    public String vx_string() {
+    public string vx_string() {
       this.vxstring = "nothing";
       return this.vxstring;
     }
@@ -12918,7 +13031,7 @@ public static class vx_core {
     public static void const_new(Const_quote output) {
     }
 
-    public String vx_string() {
+    public string vx_string() {
       this.vxstring = "\"";
       return this.vxstring;
     }
@@ -18691,6 +18804,8 @@ public static class vx_core {
 
   public static T f_any_from_struct<R, T>(T generic_any_1, R vstruct, vx_core.Type_string key) where R : vx_core.Type_struct where T : vx_core.Type_any {
     T output = vx_core.f_empty(generic_any_1);
+    vx_core.Type_any val = vstruct.vx_any(key);
+    output = vx_core.f_any_from_any(generic_any_1, val);
     return output;
   }
 
@@ -21457,6 +21572,11 @@ public static class vx_core {
 
   public static vx_core.Type_boolean f_is_endswith(vx_core.Type_string text, vx_core.Type_string find) {
     vx_core.Type_boolean output = vx_core.e_boolean;
+    String stext = text.vx_string();
+    String sfind = find.vx_string();
+    if (stext.EndsWith(sfind)) {
+      output = Core.c_true;
+    };
     return output;
   }
 

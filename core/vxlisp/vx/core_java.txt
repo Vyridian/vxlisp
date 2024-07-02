@@ -315,12 +315,14 @@
     return valuemap.vx_set(name, value);
   }
 
+/*
   @SuppressWarnings("unchecked")
   public static <T extends Core.Type_any> T vx_copy(T value, Core.Type_any arg) {
     Core.Type_any anyvalue = value.vx_copy(arg);
     T output = (T)anyvalue;
     return output;
   }
+*/
 
   // vx_eqeq(any, any)
   public static boolean vx_eqeq(Core.Type_any val1, Core.Type_any val2) {
@@ -594,17 +596,6 @@
     return output;
   }
 
-  // vx_msg_from_exception
-  public static Type_msg vx_msg_from_exception(final String path, final Exception err) {
-    Class_msg output = new Class_msg();
-    output.vx_p_path = Core.vx_new_string(path);
-    output.vx_p_code = Core.vx_new_string("exception");
-    output.vx_p_severity = Core.c_msg_severe;
-    output.err = err;
-    Core.vx_log(output);
-    return output;
-  }
-
   // vx_msg_from_error
   public static Type_msg vx_msg_from_error(final String text) {
     Class_msg output = new Class_msg();
@@ -620,6 +611,17 @@
     output.vx_p_code = Core.vx_new_string(code);
     output.vx_p_detail = detail;
     output.vx_p_severity = Core.c_msg_severe;
+    return output;
+  }
+
+  // vx_msg_from_exception
+  public static Type_msg vx_msg_from_exception(final String path, final Exception err) {
+    Class_msg output = new Class_msg();
+    output.vx_p_path = Core.vx_new_string(path);
+    output.vx_p_code = Core.vx_new_string("exception");
+    output.vx_p_severity = Core.c_msg_severe;
+    output.err = err;
+    Core.vx_log(output);
     return output;
   }
 

@@ -140,7 +140,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -160,7 +160,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("value"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -280,7 +280,7 @@ public final class Table {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      List<Table.Type_cell> listval = new ArrayList<>(val.vx_listcell());
+      List<Table.Type_cell> listval = new ArrayList<Table.Type_cell>(val.vx_listcell());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -389,7 +389,7 @@ public final class Table {
           key = key.substring(1);
         }
         Table.Type_cell castval = (Table.Type_cell)value;
-        Map<String, Table.Type_cell> map = new LinkedHashMap<>(this.vx_p_map);
+        Map<String, Table.Type_cell> map = new LinkedHashMap<String, Table.Type_cell>(this.vx_p_map);
         if (castval == Table.e_cell) {
           map.remove(key);
         } else {
@@ -425,7 +425,7 @@ public final class Table {
     public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
       Table.Class_cellmap output = new Table.Class_cellmap();
       Core.Type_msgblock msgblock = Core.e_msgblock;
-      Map<String, Table.Type_cell> map = new LinkedHashMap<>();
+      Map<String, Table.Type_cell> map = new LinkedHashMap<String, Table.Type_cell>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         Core.Type_any val = mapval.get(key);
@@ -460,7 +460,7 @@ public final class Table {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, Table.Type_cell> mapval = new LinkedHashMap<>(val.vx_mapcell());
+      Map<String, Table.Type_cell> mapval = new LinkedHashMap<String, Table.Type_cell>(val.vx_mapcell());
       Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
@@ -497,7 +497,7 @@ public final class Table {
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
-            Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+            Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
             mapany.put("key", Core.vx_new_string(key));
             mapany.put("value", msgval);
             Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -700,7 +700,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -723,7 +723,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("name"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -743,7 +743,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("fldtype"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -864,7 +864,7 @@ public final class Table {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      List<Table.Type_field> listval = new ArrayList<>(val.vx_listfield());
+      List<Table.Type_field> listval = new ArrayList<Table.Type_field>(val.vx_listfield());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -1003,7 +1003,7 @@ public final class Table {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      List<Table.Type_field> listval = new ArrayList<>(val.vx_listfield());
+      List<Table.Type_field> listval = new ArrayList<Table.Type_field>(val.vx_listfield());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -1225,7 +1225,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -1248,7 +1248,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("name"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -1268,7 +1268,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("idlist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -1472,7 +1472,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -1492,7 +1492,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("cellmap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -1512,7 +1512,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("cellsort"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -1633,7 +1633,7 @@ public final class Table {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      List<Table.Type_row> listval = new ArrayList<>(val.vx_listrow());
+      List<Table.Type_row> listval = new ArrayList<Table.Type_row>(val.vx_listrow());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -1742,7 +1742,7 @@ public final class Table {
           key = key.substring(1);
         }
         Table.Type_row castval = (Table.Type_row)value;
-        Map<String, Table.Type_row> map = new LinkedHashMap<>(this.vx_p_map);
+        Map<String, Table.Type_row> map = new LinkedHashMap<String, Table.Type_row>(this.vx_p_map);
         if (castval == Table.e_row) {
           map.remove(key);
         } else {
@@ -1778,7 +1778,7 @@ public final class Table {
     public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
       Table.Class_rowmap output = new Table.Class_rowmap();
       Core.Type_msgblock msgblock = Core.e_msgblock;
-      Map<String, Table.Type_row> map = new LinkedHashMap<>();
+      Map<String, Table.Type_row> map = new LinkedHashMap<String, Table.Type_row>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         Core.Type_any val = mapval.get(key);
@@ -1813,7 +1813,7 @@ public final class Table {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, Table.Type_row> mapval = new LinkedHashMap<>(val.vx_maprow());
+      Map<String, Table.Type_row> mapval = new LinkedHashMap<String, Table.Type_row>(val.vx_maprow());
       Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
@@ -1850,7 +1850,7 @@ public final class Table {
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
-            Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+            Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
             mapany.put("key", Core.vx_new_string(key));
             mapany.put("value", msgval);
             Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2053,7 +2053,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2076,7 +2076,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("name"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2096,7 +2096,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("idlist"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2356,7 +2356,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("id"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2379,7 +2379,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("name"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2399,7 +2399,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("fieldmap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2419,7 +2419,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("fieldsort"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2439,7 +2439,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("rowmap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2459,7 +2459,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("rowfilter"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -2479,7 +2479,7 @@ public final class Table {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("rowsort"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);

@@ -196,7 +196,7 @@ public final class Xml {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("tag"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -219,7 +219,7 @@ public final class Xml {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("text"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -242,7 +242,7 @@ public final class Xml {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("prop"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -262,7 +262,7 @@ public final class Xml {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("propmap"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -282,7 +282,7 @@ public final class Xml {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("children"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -302,7 +302,7 @@ public final class Xml {
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
-              Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+              Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
               mapany.put("key", Core.vx_new_string("parent"));
               mapany.put("value", msgval);
               Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
@@ -426,7 +426,7 @@ public final class Xml {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      List<Xml.Type_xml> listval = new ArrayList<>(val.vx_listxml());
+      List<Xml.Type_xml> listval = new ArrayList<Xml.Type_xml>(val.vx_listxml());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -535,7 +535,7 @@ public final class Xml {
           key = key.substring(1);
         }
         Core.Type_string castval = (Core.Type_string)value;
-        Map<String, Core.Type_string> map = new LinkedHashMap<>(this.vx_p_map);
+        Map<String, Core.Type_string> map = new LinkedHashMap<String, Core.Type_string>(this.vx_p_map);
         if (castval == Core.e_string) {
           map.remove(key);
         } else {
@@ -571,7 +571,7 @@ public final class Xml {
     public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
       Xml.Class_xmlpropmap output = new Xml.Class_xmlpropmap();
       Core.Type_msgblock msgblock = Core.e_msgblock;
-      Map<String, Core.Type_string> map = new LinkedHashMap<>();
+      Map<String, Core.Type_string> map = new LinkedHashMap<String, Core.Type_string>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         Core.Type_any val = mapval.get(key);
@@ -606,7 +606,7 @@ public final class Xml {
       if (this instanceof Core.vx_Type_const) {
         ischanged = true;
       }
-      Map<String, Core.Type_string> mapval = new LinkedHashMap<>(val.vx_mapstring());
+      Map<String, Core.Type_string> mapval = new LinkedHashMap<String, Core.Type_string>(val.vx_mapstring());
       Core.Type_msg msg;
       String key = "";
       for (Object valsub : vals) {
@@ -643,7 +643,7 @@ public final class Xml {
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
-            Map<String, Core.Type_any> mapany = new LinkedHashMap<>();
+            Map<String, Core.Type_any> mapany = new LinkedHashMap<String, Core.Type_any>();
             mapany.put("key", Core.vx_new_string(key));
             mapany.put("value", msgval);
             Core.Type_map msgmap = Core.t_anymap.vx_new_from_map(mapany);
