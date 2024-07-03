@@ -80,11 +80,12 @@ public final class Csv {
       }
       Core.Type_stringlist vx_p_headers = val.headers();
       Csv.Type_csvrows vx_p_rows = val.rows();
-      ArrayList<String> validkeys = new ArrayList<>();
+      List<String> validkeys = new ArrayList<String>();
       validkeys.add(":headers");
       validkeys.add(":rows");
       String key = "";
       Core.Type_msg msg;
+      Core.Type_any msgval;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -101,7 +102,6 @@ public final class Csv {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
               msgval = (Core.Type_any)valsub;
             } else {
@@ -118,7 +118,7 @@ public final class Csv {
             if (isvalidkey) {
               key = testkey;
             } else {
-              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/data/csv/csv", ":invalidkey", msgval);
               msgblock = Core.vx_copy(msgblock, msg);
             }
@@ -131,7 +131,6 @@ public final class Csv {
               ischanged = true;
               vx_p_headers = (Core.Type_stringlist)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -151,7 +150,6 @@ public final class Csv {
               ischanged = true;
               vx_p_rows = (Csv.Type_csvrows)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -166,9 +164,10 @@ public final class Csv {
             }
             break;
           default:
-            Core.Type_any msgval = Core.vx_new_string(key);
+            msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/csv/csv", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
+            break;
           }
           key = "";
         }
@@ -235,7 +234,9 @@ public final class Csv {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+      return Core.immutablemap(
+        new LinkedHashMap<String, Core.Type_any>(this.vx_p_map)
+      );
     }
 
     @Override
@@ -321,6 +322,7 @@ public final class Csv {
       Map<String, Core.Type_stringlist> mapval = new LinkedHashMap<String, Core.Type_stringlist>(val.vx_mapstringlist());
       Core.Type_msg msg;
       String key = "";
+      Core.Type_any msgval;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -333,7 +335,6 @@ public final class Csv {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
               msgval = (Core.Type_any)valsub;
             } else {
@@ -349,7 +350,6 @@ public final class Csv {
           } else if (valsub instanceof Core.Type_stringlist) {
             valany = (Core.Type_stringlist)valsub;
           } else {
-            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
               msgval = (Core.Type_any)valsub;
             } else {
@@ -433,7 +433,9 @@ public final class Csv {
 
     @Override
     public List<Core.Type_any> vx_list() {
-      List<Core.Type_any> output = Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));
+      List<Core.Type_any> output = Core.immutablelist(
+        new ArrayList<Core.Type_any>(this.vx_p_list)
+      );
       return output;
     }
 
@@ -1389,9 +1391,9 @@ public final class Csv {
 
   static {
     Const_delimcsv.const_new(c_delimcsv);
-    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
-    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
-    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<String, Core.Type_func>();
     maptype.put("csv", Csv.t_csv);
     maptype.put("csvrowmap", Csv.t_csvrowmap);
     maptype.put("csvrows", Csv.t_csvrows);

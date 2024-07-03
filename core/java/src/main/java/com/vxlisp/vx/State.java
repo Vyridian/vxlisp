@@ -24,7 +24,9 @@ public final class State {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      return Core.immutablemap(new LinkedHashMap<String, Core.Type_any>(this.vx_p_map));
+      return Core.immutablemap(
+        new LinkedHashMap<String, Core.Type_any>(this.vx_p_map)
+      );
     }
 
     @Override
@@ -100,6 +102,7 @@ public final class State {
       Map<String, Core.Type_any> mapval = new LinkedHashMap<String, Core.Type_any>(val.vx_map());
       Core.Type_msg msg;
       String key = "";
+      Core.Type_any msgval;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -112,7 +115,6 @@ public final class State {
           } else if (valsub instanceof String) {
             key = (String)valsub;
           } else {
-            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
               msgval = (Core.Type_any)valsub;
             } else {
@@ -128,7 +130,6 @@ public final class State {
           } else if (valsub instanceof Core.Type_any) {
             valany = (Core.Type_any)valsub;
           } else {
-            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
               msgval = (Core.Type_any)valsub;
             } else {
@@ -1550,9 +1551,9 @@ public final class State {
 
 
   static {
-    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
-    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
-    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<String, Core.Type_func>();
     maptype.put("valuemap", State.t_valuemap);
     mapfunc.put("any-readstate<-mapname-name", State.t_any_readstate_from_mapname_name);
     mapfunc.put("any-readstate<-name", State.t_any_readstate_from_name);

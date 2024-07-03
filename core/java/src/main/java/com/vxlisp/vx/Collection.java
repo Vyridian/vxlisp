@@ -2384,9 +2384,9 @@ public final class Collection {
 
 
   static {
-    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
-    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
-    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<String, Core.Type_func>();
     mapfunc.put("any<-for-until-loop", Collection.t_any_from_for_until_loop);
     mapfunc.put("any<-for-until-loop-max", Collection.t_any_from_for_until_loop_max);
     mapfunc.put("any<-for-while-loop", Collection.t_any_from_for_while_loop);

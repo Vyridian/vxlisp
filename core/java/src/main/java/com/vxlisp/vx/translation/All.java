@@ -211,9 +211,9 @@ public final class All {
 
 
   static {
-    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
-    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
-    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<String, Core.Type_func>();
     mapfunc.put("context-all", All.t_context_all);
     mapfunc.put("translationmap-all", All.t_translationmap_all);
     Core.vx_global_package_set("vx/translation/all", maptype, mapconst, mapfunc);

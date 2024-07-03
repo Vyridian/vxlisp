@@ -2797,9 +2797,9 @@ public final class Type {
 
 
   static {
-    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
-    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
-    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<String, Core.Type_func>();
     mapfunc.put("allowtypenames<-type", Type.t_allowtypenames_from_type);
     mapfunc.put("allowtypes<-type", Type.t_allowtypes_from_type);
     mapfunc.put("any<-int", Type.t_any_from_int);

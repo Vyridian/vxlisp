@@ -119,7 +119,7 @@ public final class Textblock {
       Core.Type_string vx_p_endtext = val.endtext();
       Core.Type_int vx_p_pos = val.pos();
       Textblock.Type_delimlist vx_p_delimlist = val.delimlist();
-      ArrayList<String> validkeys = new ArrayList<>();
+      List<String> validkeys = new ArrayList<String>();
       validkeys.add(":name");
       validkeys.add(":starttext");
       validkeys.add(":endtext");
@@ -127,6 +127,7 @@ public final class Textblock {
       validkeys.add(":delimlist");
       String key = "";
       Core.Type_msg msg;
+      Core.Type_any msgval;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -143,7 +144,6 @@ public final class Textblock {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
               msgval = (Core.Type_any)valsub;
             } else {
@@ -160,7 +160,7 @@ public final class Textblock {
             if (isvalidkey) {
               key = testkey;
             } else {
-              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/data/textblock/delim", ":invalidkey", msgval);
               msgblock = Core.vx_copy(msgblock, msg);
             }
@@ -176,7 +176,6 @@ public final class Textblock {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -199,7 +198,6 @@ public final class Textblock {
               ischanged = true;
               vx_p_starttext = Core.vx_new(Core.t_string, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -222,7 +220,6 @@ public final class Textblock {
               ischanged = true;
               vx_p_endtext = Core.vx_new(Core.t_string, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -245,7 +242,6 @@ public final class Textblock {
               ischanged = true;
               vx_p_pos = Core.vx_new(Core.t_int, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -265,7 +261,6 @@ public final class Textblock {
               ischanged = true;
               vx_p_delimlist = (Textblock.Type_delimlist)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -280,9 +275,10 @@ public final class Textblock {
             }
             break;
           default:
-            Core.Type_any msgval = Core.vx_new_string(key);
+            msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/textblock/delim", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
+            break;
           }
           key = "";
         }
@@ -353,7 +349,9 @@ public final class Textblock {
 
     @Override
     public List<Core.Type_any> vx_list() {
-      List<Core.Type_any> output = Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));
+      List<Core.Type_any> output = Core.immutablelist(
+        new ArrayList<Core.Type_any>(this.vx_p_list)
+      );
       return output;
     }
 
@@ -661,7 +659,7 @@ public final class Textblock {
       Textblock.Type_delim vx_p_close = val.close();
       Textblock.Type_textblock vx_p_parent = val.parent();
       Textblock.Type_textblocklist vx_p_children = val.children();
-      ArrayList<String> validkeys = new ArrayList<>();
+      List<String> validkeys = new ArrayList<String>();
       validkeys.add(":name");
       validkeys.add(":text");
       validkeys.add(":startpos");
@@ -675,6 +673,7 @@ public final class Textblock {
       validkeys.add(":children");
       String key = "";
       Core.Type_msg msg;
+      Core.Type_any msgval;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -691,7 +690,6 @@ public final class Textblock {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
               msgval = (Core.Type_any)valsub;
             } else {
@@ -708,7 +706,7 @@ public final class Textblock {
             if (isvalidkey) {
               key = testkey;
             } else {
-              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidkey", msgval);
               msgblock = Core.vx_copy(msgblock, msg);
             }
@@ -724,7 +722,6 @@ public final class Textblock {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -747,7 +744,6 @@ public final class Textblock {
               ischanged = true;
               vx_p_text = Core.vx_new(Core.t_string, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -770,7 +766,6 @@ public final class Textblock {
               ischanged = true;
               vx_p_startpos = Core.vx_new(Core.t_int, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -793,7 +788,6 @@ public final class Textblock {
               ischanged = true;
               vx_p_endpos = Core.vx_new(Core.t_int, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -816,7 +810,6 @@ public final class Textblock {
               ischanged = true;
               vx_p_curpos = Core.vx_new(Core.t_int, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -839,7 +832,6 @@ public final class Textblock {
               ischanged = true;
               vx_p_line = Core.vx_new(Core.t_int, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -862,7 +854,6 @@ public final class Textblock {
               ischanged = true;
               vx_p_column = Core.vx_new(Core.t_int, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -882,7 +873,6 @@ public final class Textblock {
               ischanged = true;
               vx_p_delim = (Textblock.Type_delim)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -902,7 +892,6 @@ public final class Textblock {
               ischanged = true;
               vx_p_close = (Textblock.Type_delim)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -922,7 +911,6 @@ public final class Textblock {
               ischanged = true;
               vx_p_parent = (Textblock.Type_textblock)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -942,7 +930,6 @@ public final class Textblock {
               ischanged = true;
               vx_p_children = (Textblock.Type_textblocklist)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -957,9 +944,10 @@ public final class Textblock {
             }
             break;
           default:
-            Core.Type_any msgval = Core.vx_new_string(key);
+            msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
+            break;
           }
           key = "";
         }
@@ -1036,7 +1024,9 @@ public final class Textblock {
 
     @Override
     public List<Core.Type_any> vx_list() {
-      List<Core.Type_any> output = Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));
+      List<Core.Type_any> output = Core.immutablelist(
+        new ArrayList<Core.Type_any>(this.vx_p_list)
+      );
       return output;
     }
 
@@ -6027,9 +6017,9 @@ public final class Textblock {
     Const_delimtest3.const_new(c_delimtest3);
     Const_delimtext.const_new(c_delimtext);
     Const_delimwhitespace.const_new(c_delimwhitespace);
-    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
-    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
-    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<String, Core.Type_func>();
     maptype.put("delim", Textblock.t_delim);
     maptype.put("delimlist", Textblock.t_delimlist);
     maptype.put("textblock", Textblock.t_textblock);

@@ -1103,9 +1103,9 @@ public final class Translate {
 
 
   static {
-    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
-    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
-    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<String, Core.Type_func>();
     mapfunc.put("session<-session-name", Translate.t_session_from_session_name);
     mapfunc.put("session<-session-translation", Translate.t_session_from_session_translation);
     mapfunc.put("session<-session-translationmap-name", Translate.t_session_from_session_translationmap_name);

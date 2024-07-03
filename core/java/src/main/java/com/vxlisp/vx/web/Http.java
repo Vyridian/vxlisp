@@ -3,6 +3,7 @@ package com.vxlisp.vx.web;
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import com.vxlisp.vx.*;
 import com.vxlisp.vx.data.*;
@@ -80,11 +81,12 @@ public final class Http {
       }
       Core.Type_boolean vx_p_ok = val.ok();
       Core.Type_int vx_p_status = val.status();
-      ArrayList<String> validkeys = new ArrayList<>();
+      List<String> validkeys = new ArrayList<String>();
       validkeys.add(":ok");
       validkeys.add(":status");
       String key = "";
       Core.Type_msg msg;
+      Core.Type_any msgval;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -101,7 +103,6 @@ public final class Http {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
               msgval = (Core.Type_any)valsub;
             } else {
@@ -118,7 +119,7 @@ public final class Http {
             if (isvalidkey) {
               key = testkey;
             } else {
-              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/web/http/response", ":invalidkey", msgval);
               msgblock = Core.vx_copy(msgblock, msg);
             }
@@ -134,7 +135,6 @@ public final class Http {
               ischanged = true;
               vx_p_ok = Core.vx_new(Core.t_boolean, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -157,7 +157,6 @@ public final class Http {
               ischanged = true;
               vx_p_status = Core.vx_new(Core.t_int, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -172,9 +171,10 @@ public final class Http {
             }
             break;
           default:
-            Core.Type_any msgval = Core.vx_new_string(key);
+            msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/web/http/response", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
+            break;
           }
           key = "";
         }
@@ -301,10 +301,10 @@ public final class Http {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
       Core.Type_string url = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Csv.Type_csv> future = Http.f_csv_from_httpget(url);
-      output = Core.async_from_async(Core.t_any, future);
+      output = Core.vx_async_from_async(Core.t_any, future);
       return output;
     }
 
@@ -319,12 +319,12 @@ public final class Http {
   public static final Func_csv_from_httpget t_csv_from_httpget = new Http.Class_csv_from_httpget();
 
   public static CompletableFuture<Csv.Type_csv> f_csv_from_httpget(final Core.Type_string url) {
-    CompletableFuture<Csv.Type_csv> output = Core.async_new_completed(Csv.e_csv);
+    CompletableFuture<Csv.Type_csv> output = Core.vx_async_new_completed(Csv.e_csv);
     output = Core.f_let_async(
       Csv.t_csv,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final CompletableFuture<Textblock.Type_textblock> future_textblock = Http.f_textblock_from_httpget(url, Core.vx_new_string("text/csv"));
-        return Core.async_from_async_fn(future_textblock, (textblock) -> {
+        return Core.vx_async_from_async_fn(future_textblock, (textblock) -> {
           return Csv.f_csv_from_textblock(textblock);
         });
       })
@@ -412,10 +412,10 @@ public final class Http {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
       Core.Type_string url = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Http.Type_response> future = Http.f_json_from_httpget(url);
-      output = Core.async_from_async(Core.t_any, future);
+      output = Core.vx_async_from_async(Core.t_any, future);
       return output;
     }
 
@@ -430,12 +430,12 @@ public final class Http {
   public static final Func_json_from_httpget t_json_from_httpget = new Http.Class_json_from_httpget();
 
   public static CompletableFuture<Http.Type_response> f_json_from_httpget(final Core.Type_string url) {
-    CompletableFuture<Http.Type_response> output = Core.async_new_completed(Http.e_response);
+    CompletableFuture<Http.Type_response> output = Core.vx_async_new_completed(Http.e_response);
     output = Core.f_let_async(
       Http.t_response,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final CompletableFuture<Http.Type_response> future_response = Http.f_response_from_httpget(url, Core.vx_new_string("application/json"));
-        return Core.async_from_async_fn(future_response, (response) -> {
+        return Core.vx_async_from_async_fn(future_response, (response) -> {
           return response;
         });
       })
@@ -510,11 +510,11 @@ public final class Http {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
       Core.Type_string url = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_string contenttype = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
       CompletableFuture<Http.Type_response> future = Http.f_response_from_httpget(url, contenttype);
-      output = Core.async_from_async(Core.t_any, future);
+      output = Core.vx_async_from_async(Core.t_any, future);
       return output;
     }
 
@@ -529,7 +529,7 @@ public final class Http {
   public static final Func_response_from_httpget t_response_from_httpget = new Http.Class_response_from_httpget();
 
   public static CompletableFuture<Http.Type_response> f_response_from_httpget(final Core.Type_string url, final Core.Type_string contenttype) {
-    CompletableFuture<Http.Type_response> output = Core.async_new_completed(Http.e_response);
+    CompletableFuture<Http.Type_response> output = Core.vx_async_new_completed(Http.e_response);
     return output;
   }
 
@@ -613,10 +613,10 @@ public final class Http {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
       Core.Type_string url = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Core.Type_string> future = Http.f_text_from_httpget(url);
-      output = Core.async_from_async(Core.t_any, future);
+      output = Core.vx_async_from_async(Core.t_any, future);
       return output;
     }
 
@@ -631,12 +631,12 @@ public final class Http {
   public static final Func_text_from_httpget t_text_from_httpget = new Http.Class_text_from_httpget();
 
   public static CompletableFuture<Core.Type_string> f_text_from_httpget(final Core.Type_string url) {
-    CompletableFuture<Core.Type_string> output = Core.async_new_completed(Core.e_string);
+    CompletableFuture<Core.Type_string> output = Core.vx_async_new_completed(Core.e_string);
     output = Core.f_let_async(
       Core.t_string,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final CompletableFuture<Http.Type_response> future_response = Http.f_response_from_httpget(url, Core.vx_new_string("text/plain"));
-        return Core.async_from_async_fn(future_response, (response) -> {
+        return Core.vx_async_from_async_fn(future_response, (response) -> {
           return Http.f_text_from_response(response);
         });
       })
@@ -810,11 +810,11 @@ public final class Http {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
       Core.Type_string url = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_string contenttype = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
       CompletableFuture<Textblock.Type_textblock> future = Http.f_textblock_from_httpget(url, contenttype);
-      output = Core.async_from_async(Core.t_any, future);
+      output = Core.vx_async_from_async(Core.t_any, future);
       return output;
     }
 
@@ -829,12 +829,12 @@ public final class Http {
   public static final Func_textblock_from_httpget t_textblock_from_httpget = new Http.Class_textblock_from_httpget();
 
   public static CompletableFuture<Textblock.Type_textblock> f_textblock_from_httpget(final Core.Type_string url, final Core.Type_string contenttype) {
-    CompletableFuture<Textblock.Type_textblock> output = Core.async_new_completed(Textblock.e_textblock);
+    CompletableFuture<Textblock.Type_textblock> output = Core.vx_async_new_completed(Textblock.e_textblock);
     output = Core.f_let_async(
       Textblock.t_textblock,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final CompletableFuture<Http.Type_response> future_response = Http.f_response_from_httpget(url, contenttype);
-        return Core.async_from_async_fn(future_response, (response) -> {
+        return Core.vx_async_from_async_fn(future_response, (response) -> {
           return Http.f_textblock_from_response(response);
         });
       })
@@ -1028,10 +1028,10 @@ public final class Http {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
       Core.Type_string url = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Xml.Type_xml> future = Http.f_xml_from_httpget(url);
-      output = Core.async_from_async(Core.t_any, future);
+      output = Core.vx_async_from_async(Core.t_any, future);
       return output;
     }
 
@@ -1046,12 +1046,12 @@ public final class Http {
   public static final Func_xml_from_httpget t_xml_from_httpget = new Http.Class_xml_from_httpget();
 
   public static CompletableFuture<Xml.Type_xml> f_xml_from_httpget(final Core.Type_string url) {
-    CompletableFuture<Xml.Type_xml> output = Core.async_new_completed(Xml.e_xml);
+    CompletableFuture<Xml.Type_xml> output = Core.vx_async_new_completed(Xml.e_xml);
     output = Core.f_let_async(
       Xml.t_xml,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final CompletableFuture<Textblock.Type_textblock> future_textblock = Http.f_textblock_from_httpget(url, Core.vx_new_string("text/xml"));
-        return Core.async_from_async_fn(future_textblock, (textblock) -> {
+        return Core.vx_async_from_async_fn(future_textblock, (textblock) -> {
           return Xml.f_xml_from_textblock(textblock);
         });
       })
@@ -1061,9 +1061,9 @@ public final class Http {
 
 
   static {
-    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
-    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
-    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<String, Core.Type_func>();
     maptype.put("response", Http.t_response);
     mapfunc.put("csv<-httpget", Http.t_csv_from_httpget);
     mapfunc.put("json<-httpget", Http.t_json_from_httpget);

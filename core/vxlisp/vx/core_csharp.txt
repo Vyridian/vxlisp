@@ -1,6 +1,9 @@
   public interface Map<TKey, TValue> {
-    public List<TKey> keys();
+    public Map<UKey, UValue> cast<UKey, UValue>() where UKey : TKey where UValue : TValue;
+    public Map<UKey, UValue> copy<UKey, UValue>() where UKey : TKey where UValue : TValue;
     public TValue get(TKey key);
+    public TValue getOrDefault(TKey key, TValue defaultvalue);
+    public List<TKey> keys();
     public void put(TKey key, TValue value);
     public void remove(TKey key);
   }
@@ -16,8 +19,24 @@
         dict[key] = copy.get(key);
       }
     }
+    public Map<UKey, UValue> cast<UKey, UValue>() where UKey : TKey where UValue : TValue {
+     Map<UKey, UValue> output = (Map<UKey, UValue>)this;
+     return output;
+    }
+    public Map<UKey, UValue> copy<UKey, UValue>() where UKey : TKey where UValue : TValue {
+     Map<UKey, UValue> castmap = this.cast<UKey, UValue>();
+     Map<UKey, UValue> output = (Map<UKey, UValue>)castmap;
+     return output;
+    }
     public TValue get(TKey key) {
       return dict[key];
+    }
+    public TValue getOrDefault(TKey key, TValue defaultvalue) {
+      TValue output = defaultvalue;
+      if (dict.ContainsKey(key)) {
+        output = dict[key];
+      }
+      return output;
     }
     public List<TKey> keys() {
       return listkey;
@@ -178,39 +197,6 @@
     return output;
   }
 
-  public static Task<T> async_new_completed<T>(T val) {
-    Task<T> output = Task.FromResult<T>(val);
-    return output;
-  }
-
-  public static Task<T> async_from_async<T, U>(T generic_any_1, Task<U> future) where T : vx_core.Type_any where U : vx_core.Type_any {
-    Task<T> output = future.ContinueWith(tasku => {
-      U tval = tasku.Result;
-      T result = vx_core.f_any_from_any(generic_any_1, tval);
-      return result;
-    });
-    return output;
-  }
-
-  public static Task<T> async_from_async_fn<T, U>(Task<U> future, Func<U, T> fn) {
-    Task<T> output = future.ContinueWith(tasku => {
-      U uval = tasku.Result;
-      T tval = fn(uval);
-      return tval;
-    });
-    return output;
-  }
-
-  public static Task<List<T>> async_arraylist_from_arraylist_async<T>(List<Task<T>> list_future) {
-    Task<T[]> future = Task.WhenAll(list_future);
-    Task<List<T>> output = future.ContinueWith(taskarrayt => {
-     T[] arrayt = taskarrayt.Result;
-     List<T> listt = arrayt.ToList();
-     return listt;
-    });
-    return output;
-  }
-
   public static LinkedHashMap<string, T> hashmap_from_keyvalues<T>(params KeyValue<T>[] keyvalues) {
     LinkedHashMap<string, T> output = new LinkedHashMap<string, T>();
     foreach (KeyValue<T> keyvalue in keyvalues) {
@@ -284,6 +270,39 @@
   // vx_type(generic_any_1)
   public static T vx_type<T>(T type) where T : vx_core.Type_any {
     T output = (T)(type.vx_type());
+    return output;
+  }
+
+  public static Task<T> vx_async_new_completed<T>(T val) {
+    Task<T> output = Task.FromResult<T>(val);
+    return output;
+  }
+
+  public static Task<T> vx_async_from_async<T, U>(T generic_any_1, Task<U> future) where T : vx_core.Type_any where U : vx_core.Type_any {
+    Task<T> output = future.ContinueWith(tasku => {
+      U tval = tasku.Result;
+      T result = vx_core.f_any_from_any(generic_any_1, tval);
+      return result;
+    });
+    return output;
+  }
+
+  public static Task<T> vx_async_from_async_fn<T, U>(Task<U> future, Func<U, T> fn) {
+    Task<T> output = future.ContinueWith(tasku => {
+      U uval = tasku.Result;
+      T tval = fn(uval);
+      return tval;
+    });
+    return output;
+  }
+
+  public static Task<List<T>> vx_async_arraylist_from_arraylist_async<T>(List<Task<T>> list_future) {
+    Task<T[]> future = Task.WhenAll(list_future);
+    Task<List<T>> output = future.ContinueWith(taskarrayt => {
+     T[] arrayt = taskarrayt.Result;
+     List<T> listt = arrayt.ToList();
+     return listt;
+    });
     return output;
   }
 

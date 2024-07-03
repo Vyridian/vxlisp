@@ -108,13 +108,14 @@ public final class Test {
       Core.Type_string vx_p_testpkg = val.testpkg();
       Core.Type_string vx_p_casename = val.casename();
       Test.Type_testdescribelist vx_p_describelist = val.describelist();
-      ArrayList<String> validkeys = new ArrayList<>();
+      List<String> validkeys = new ArrayList<String>();
       validkeys.add(":passfail");
       validkeys.add(":testpkg");
       validkeys.add(":casename");
       validkeys.add(":describelist");
       String key = "";
       Core.Type_msg msg;
+      Core.Type_any msgval;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -131,7 +132,6 @@ public final class Test {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
               msgval = (Core.Type_any)valsub;
             } else {
@@ -148,7 +148,7 @@ public final class Test {
             if (isvalidkey) {
               key = testkey;
             } else {
-              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidkey", msgval);
               msgblock = Core.vx_copy(msgblock, msg);
             }
@@ -164,7 +164,6 @@ public final class Test {
               ischanged = true;
               vx_p_passfail = Core.vx_new(Core.t_boolean, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -187,7 +186,6 @@ public final class Test {
               ischanged = true;
               vx_p_testpkg = Core.vx_new(Core.t_string, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -210,7 +208,6 @@ public final class Test {
               ischanged = true;
               vx_p_casename = Core.vx_new(Core.t_string, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -230,7 +227,6 @@ public final class Test {
               ischanged = true;
               vx_p_describelist = (Test.Type_testdescribelist)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -245,9 +241,10 @@ public final class Test {
             }
             break;
           default:
-            Core.Type_any msgval = Core.vx_new_string(key);
+            msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
+            break;
           }
           key = "";
         }
@@ -317,7 +314,9 @@ public final class Test {
 
     @Override
     public List<Core.Type_any> vx_list() {
-      List<Core.Type_any> output = Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));
+      List<Core.Type_any> output = Core.immutablelist(
+        new ArrayList<Core.Type_any>(this.vx_p_list)
+      );
       return output;
     }
 
@@ -534,13 +533,14 @@ public final class Test {
       Core.Type_intmap vx_p_funcmap = val.funcmap();
       Core.Type_string vx_p_testpkg = val.testpkg();
       Core.Type_intmap vx_p_typemap = val.typemap();
-      ArrayList<String> validkeys = new ArrayList<>();
+      List<String> validkeys = new ArrayList<String>();
       validkeys.add(":constmap");
       validkeys.add(":funcmap");
       validkeys.add(":testpkg");
       validkeys.add(":typemap");
       String key = "";
       Core.Type_msg msg;
+      Core.Type_any msgval;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -557,7 +557,6 @@ public final class Test {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
               msgval = (Core.Type_any)valsub;
             } else {
@@ -574,7 +573,7 @@ public final class Test {
             if (isvalidkey) {
               key = testkey;
             } else {
-              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidkey", msgval);
               msgblock = Core.vx_copy(msgblock, msg);
             }
@@ -587,7 +586,6 @@ public final class Test {
               ischanged = true;
               vx_p_constmap = (Core.Type_intmap)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -607,7 +605,6 @@ public final class Test {
               ischanged = true;
               vx_p_funcmap = (Core.Type_intmap)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -630,7 +627,6 @@ public final class Test {
               ischanged = true;
               vx_p_testpkg = Core.vx_new(Core.t_string, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -650,7 +646,6 @@ public final class Test {
               ischanged = true;
               vx_p_typemap = (Core.Type_intmap)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -665,9 +660,10 @@ public final class Test {
             }
             break;
           default:
-            Core.Type_any msgval = Core.vx_new_string(key);
+            msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
+            break;
           }
           key = "";
         }
@@ -814,13 +810,14 @@ public final class Test {
       Core.Type_string vx_p_testpkg = val.testpkg();
       Core.Type_int vx_p_tests = val.tests();
       Core.Type_int vx_p_total = val.total();
-      ArrayList<String> validkeys = new ArrayList<>();
+      List<String> validkeys = new ArrayList<String>();
       validkeys.add(":pct");
       validkeys.add(":testpkg");
       validkeys.add(":tests");
       validkeys.add(":total");
       String key = "";
       Core.Type_msg msg;
+      Core.Type_any msgval;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -837,7 +834,6 @@ public final class Test {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
               msgval = (Core.Type_any)valsub;
             } else {
@@ -854,7 +850,7 @@ public final class Test {
             if (isvalidkey) {
               key = testkey;
             } else {
-              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidkey", msgval);
               msgblock = Core.vx_copy(msgblock, msg);
             }
@@ -870,7 +866,6 @@ public final class Test {
               ischanged = true;
               vx_p_pct = Core.vx_new(Core.t_int, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -893,7 +888,6 @@ public final class Test {
               ischanged = true;
               vx_p_testpkg = Core.vx_new(Core.t_string, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -916,7 +910,6 @@ public final class Test {
               ischanged = true;
               vx_p_tests = Core.vx_new(Core.t_int, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -939,7 +932,6 @@ public final class Test {
               ischanged = true;
               vx_p_total = Core.vx_new(Core.t_int, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -954,9 +946,10 @@ public final class Test {
             }
             break;
           default:
-            Core.Type_any msgval = Core.vx_new_string(key);
+            msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
+            break;
           }
           key = "";
         }
@@ -1155,7 +1148,7 @@ public final class Test {
       Core.Type_string vx_p_testpkg = val.testpkg();
       Test.Type_testcoveragenums vx_p_totalnums = val.totalnums();
       Test.Type_testcoveragenums vx_p_typenums = val.typenums();
-      ArrayList<String> validkeys = new ArrayList<>();
+      List<String> validkeys = new ArrayList<String>();
       validkeys.add(":bigospacenums");
       validkeys.add(":bigotimenums");
       validkeys.add(":constnums");
@@ -1166,6 +1159,7 @@ public final class Test {
       validkeys.add(":typenums");
       String key = "";
       Core.Type_msg msg;
+      Core.Type_any msgval;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -1182,7 +1176,6 @@ public final class Test {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
               msgval = (Core.Type_any)valsub;
             } else {
@@ -1199,7 +1192,7 @@ public final class Test {
             if (isvalidkey) {
               key = testkey;
             } else {
-              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidkey", msgval);
               msgblock = Core.vx_copy(msgblock, msg);
             }
@@ -1212,7 +1205,6 @@ public final class Test {
               ischanged = true;
               vx_p_bigospacenums = (Test.Type_testcoveragenums)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -1232,7 +1224,6 @@ public final class Test {
               ischanged = true;
               vx_p_bigotimenums = (Test.Type_testcoveragenums)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -1252,7 +1243,6 @@ public final class Test {
               ischanged = true;
               vx_p_constnums = (Test.Type_testcoveragenums)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -1272,7 +1262,6 @@ public final class Test {
               ischanged = true;
               vx_p_docnums = (Test.Type_testcoveragenums)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -1292,7 +1281,6 @@ public final class Test {
               ischanged = true;
               vx_p_funcnums = (Test.Type_testcoveragenums)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -1315,7 +1303,6 @@ public final class Test {
               ischanged = true;
               vx_p_testpkg = Core.vx_new(Core.t_string, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -1335,7 +1322,6 @@ public final class Test {
               ischanged = true;
               vx_p_totalnums = (Test.Type_testcoveragenums)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -1355,7 +1341,6 @@ public final class Test {
               ischanged = true;
               vx_p_typenums = (Test.Type_testcoveragenums)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -1370,9 +1355,10 @@ public final class Test {
             }
             break;
           default:
-            Core.Type_any msgval = Core.vx_new_string(key);
+            msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
+            break;
           }
           key = "";
         }
@@ -1510,12 +1496,13 @@ public final class Test {
       Core.Type_string vx_p_describename = val.describename();
       Core.Type_string vx_p_testpkg = val.testpkg();
       Test.Type_testresult vx_p_testresult = val.testresult();
-      ArrayList<String> validkeys = new ArrayList<>();
+      List<String> validkeys = new ArrayList<String>();
       validkeys.add(":describename");
       validkeys.add(":testpkg");
       validkeys.add(":testresult");
       String key = "";
       Core.Type_msg msg;
+      Core.Type_any msgval;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -1532,7 +1519,6 @@ public final class Test {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
               msgval = (Core.Type_any)valsub;
             } else {
@@ -1549,7 +1535,7 @@ public final class Test {
             if (isvalidkey) {
               key = testkey;
             } else {
-              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/test/testdescribe", ":invalidkey", msgval);
               msgblock = Core.vx_copy(msgblock, msg);
             }
@@ -1565,7 +1551,6 @@ public final class Test {
               ischanged = true;
               vx_p_describename = Core.vx_new(Core.t_string, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -1588,7 +1573,6 @@ public final class Test {
               ischanged = true;
               vx_p_testpkg = Core.vx_new(Core.t_string, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -1608,7 +1592,6 @@ public final class Test {
               ischanged = true;
               vx_p_testresult = (Test.Type_testresult)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -1623,9 +1606,10 @@ public final class Test {
             }
             break;
           default:
-            Core.Type_any msgval = Core.vx_new_string(key);
+            msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testdescribe", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
+            break;
           }
           key = "";
         }
@@ -1694,7 +1678,9 @@ public final class Test {
 
     @Override
     public List<Core.Type_any> vx_list() {
-      List<Core.Type_any> output = Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));
+      List<Core.Type_any> output = Core.immutablelist(
+        new ArrayList<Core.Type_any>(this.vx_p_list)
+      );
       return output;
     }
 
@@ -1924,7 +1910,7 @@ public final class Test {
       Test.Type_testcoveragesummary vx_p_coveragesummary = val.coveragesummary();
       Core.Type_boolean vx_p_passfail = val.passfail();
       Core.Type_string vx_p_testpkg = val.testpkg();
-      ArrayList<String> validkeys = new ArrayList<>();
+      List<String> validkeys = new ArrayList<String>();
       validkeys.add(":caselist");
       validkeys.add(":coveragedetail");
       validkeys.add(":coveragesummary");
@@ -1932,6 +1918,7 @@ public final class Test {
       validkeys.add(":testpkg");
       String key = "";
       Core.Type_msg msg;
+      Core.Type_any msgval;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -1948,7 +1935,6 @@ public final class Test {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
               msgval = (Core.Type_any)valsub;
             } else {
@@ -1965,7 +1951,7 @@ public final class Test {
             if (isvalidkey) {
               key = testkey;
             } else {
-              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidkey", msgval);
               msgblock = Core.vx_copy(msgblock, msg);
             }
@@ -1978,7 +1964,6 @@ public final class Test {
               ischanged = true;
               vx_p_caselist = (Test.Type_testcaselist)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -1998,7 +1983,6 @@ public final class Test {
               ischanged = true;
               vx_p_coveragedetail = (Test.Type_testcoveragedetail)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -2018,7 +2002,6 @@ public final class Test {
               ischanged = true;
               vx_p_coveragesummary = (Test.Type_testcoveragesummary)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -2041,7 +2024,6 @@ public final class Test {
               ischanged = true;
               vx_p_passfail = Core.vx_new(Core.t_boolean, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -2064,7 +2046,6 @@ public final class Test {
               ischanged = true;
               vx_p_testpkg = Core.vx_new(Core.t_string, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -2079,9 +2060,10 @@ public final class Test {
             }
             break;
           default:
-            Core.Type_any msgval = Core.vx_new_string(key);
+            msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
+            break;
           }
           key = "";
         }
@@ -2152,7 +2134,9 @@ public final class Test {
 
     @Override
     public List<Core.Type_any> vx_list() {
-      List<Core.Type_any> output = Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));
+      List<Core.Type_any> output = Core.immutablelist(
+        new ArrayList<Core.Type_any>(this.vx_p_list)
+      );
       return output;
     }
 
@@ -2382,7 +2366,7 @@ public final class Test {
       Core.Type_any vx_p_expected = val.expected();
       Core.Type_any vx_p_actual = val.actual();
       Core.Func_any_from_func_async vx_p_fn_actual = val.fn_actual();
-      ArrayList<String> validkeys = new ArrayList<>();
+      List<String> validkeys = new ArrayList<String>();
       validkeys.add(":code");
       validkeys.add(":passfail");
       validkeys.add(":expected");
@@ -2390,6 +2374,7 @@ public final class Test {
       validkeys.add(":fn-actual");
       String key = "";
       Core.Type_msg msg;
+      Core.Type_any msgval;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -2406,7 +2391,6 @@ public final class Test {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            Core.Type_any msgval;
             if (valsub instanceof Core.Type_any) {
               msgval = (Core.Type_any)valsub;
             } else {
@@ -2423,7 +2407,7 @@ public final class Test {
             if (isvalidkey) {
               key = testkey;
             } else {
-              Core.Type_any msgval = Core.vx_new_string(testkey);
+              msgval = Core.vx_new_string(testkey);
               msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidkey", msgval);
               msgblock = Core.vx_copy(msgblock, msg);
             }
@@ -2439,7 +2423,6 @@ public final class Test {
               ischanged = true;
               vx_p_code = Core.vx_new(Core.t_string, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -2462,7 +2445,6 @@ public final class Test {
               ischanged = true;
               vx_p_passfail = Core.vx_new(Core.t_boolean, valsub);
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -2482,7 +2464,6 @@ public final class Test {
               ischanged = true;
               vx_p_expected = (Core.Type_any)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -2502,7 +2483,6 @@ public final class Test {
               ischanged = true;
               vx_p_actual = (Core.Type_any)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -2522,7 +2502,6 @@ public final class Test {
               ischanged = true;
               vx_p_fn_actual = (Core.Func_any_from_func_async)valsub;
             } else {
-              Core.Type_any msgval;
               if (valsub instanceof Core.Type_any) {
                 msgval = (Core.Type_any)valsub;
               } else {
@@ -2537,9 +2516,10 @@ public final class Test {
             }
             break;
           default:
-            Core.Type_any msgval = Core.vx_new_string(key);
+            msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
+            break;
           }
           key = "";
         }
@@ -2610,7 +2590,9 @@ public final class Test {
 
     @Override
     public List<Core.Type_any> vx_list() {
-      List<Core.Type_any> output = Core.immutablelist(new ArrayList<Core.Type_any>(this.vx_p_list));
+      List<Core.Type_any> output = Core.immutablelist(
+        new ArrayList<Core.Type_any>(this.vx_p_list)
+      );
       return output;
     }
 
@@ -4673,10 +4655,10 @@ public final class Test {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
       Test.Type_testcase testcase = Core.f_any_from_any(Test.t_testcase, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testcase> future = Test.f_resolve_testcase(testcase);
-      output = Core.async_from_async(Core.t_any, future);
+      output = Core.vx_async_from_async(Core.t_any, future);
       return output;
     }
 
@@ -4691,13 +4673,13 @@ public final class Test {
   public static final Func_resolve_testcase t_resolve_testcase = new Test.Class_resolve_testcase();
 
   public static CompletableFuture<Test.Type_testcase> f_resolve_testcase(final Test.Type_testcase testcase) {
-    CompletableFuture<Test.Type_testcase> output = Core.async_new_completed(Test.e_testcase);
+    CompletableFuture<Test.Type_testcase> output = Core.vx_async_new_completed(Test.e_testcase);
     output = Core.f_let_async(
       Test.t_testcase,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final Test.Type_testdescribelist describelist = testcase.describelist();
         final CompletableFuture<Test.Type_testdescribelist> future_resolvedlist = Test.f_resolve_testdescribelist(describelist);
-        return Core.async_from_async_fn(future_resolvedlist, (resolvedlist) -> {
+        return Core.vx_async_from_async_fn(future_resolvedlist, (resolvedlist) -> {
           final Core.Type_booleanlist passfaillist = Core.f_list_from_list_1(
             Core.t_booleanlist,
             resolvedlist,
@@ -4809,10 +4791,10 @@ public final class Test {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
       Test.Type_testcaselist testcaselist = Core.f_any_from_any(Test.t_testcaselist, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testcaselist> future = Test.f_resolve_testcaselist(testcaselist);
-      output = Core.async_from_async(Core.t_any, future);
+      output = Core.vx_async_from_async(Core.t_any, future);
       return output;
     }
 
@@ -4827,7 +4809,7 @@ public final class Test {
   public static final Func_resolve_testcaselist t_resolve_testcaselist = new Test.Class_resolve_testcaselist();
 
   public static CompletableFuture<Test.Type_testcaselist> f_resolve_testcaselist(final Test.Type_testcaselist testcaselist) {
-    CompletableFuture<Test.Type_testcaselist> output = Core.async_new_completed(Test.e_testcaselist);
+    CompletableFuture<Test.Type_testcaselist> output = Core.vx_async_new_completed(Test.e_testcaselist);
     output = Core.f_list_from_list_async(
       Test.t_testcaselist,
       testcaselist,
@@ -4916,10 +4898,10 @@ public final class Test {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
       Test.Type_testdescribe testdescribe = Core.f_any_from_any(Test.t_testdescribe, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testdescribe> future = Test.f_resolve_testdescribe(testdescribe);
-      output = Core.async_from_async(Core.t_any, future);
+      output = Core.vx_async_from_async(Core.t_any, future);
       return output;
     }
 
@@ -4934,13 +4916,13 @@ public final class Test {
   public static final Func_resolve_testdescribe t_resolve_testdescribe = new Test.Class_resolve_testdescribe();
 
   public static CompletableFuture<Test.Type_testdescribe> f_resolve_testdescribe(final Test.Type_testdescribe testdescribe) {
-    CompletableFuture<Test.Type_testdescribe> output = Core.async_new_completed(Test.e_testdescribe);
+    CompletableFuture<Test.Type_testdescribe> output = Core.vx_async_new_completed(Test.e_testdescribe);
     output = Core.f_let_async(
       Test.t_testdescribe,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final Test.Type_testresult testresult = testdescribe.testresult();
         final CompletableFuture<Test.Type_testresult> future_resolved = Test.f_resolve_testresult(testresult);
-        return Core.async_from_async_fn(future_resolved, (resolved) -> {
+        return Core.vx_async_from_async_fn(future_resolved, (resolved) -> {
           return Core.f_copy(
             testdescribe,
             Core.vx_new(Core.t_anylist,
@@ -5034,10 +5016,10 @@ public final class Test {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
       Test.Type_testdescribelist testdescribelist = Core.f_any_from_any(Test.t_testdescribelist, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testdescribelist> future = Test.f_resolve_testdescribelist(testdescribelist);
-      output = Core.async_from_async(Core.t_any, future);
+      output = Core.vx_async_from_async(Core.t_any, future);
       return output;
     }
 
@@ -5052,7 +5034,7 @@ public final class Test {
   public static final Func_resolve_testdescribelist t_resolve_testdescribelist = new Test.Class_resolve_testdescribelist();
 
   public static CompletableFuture<Test.Type_testdescribelist> f_resolve_testdescribelist(final Test.Type_testdescribelist testdescribelist) {
-    CompletableFuture<Test.Type_testdescribelist> output = Core.async_new_completed(Test.e_testdescribelist);
+    CompletableFuture<Test.Type_testdescribelist> output = Core.vx_async_new_completed(Test.e_testdescribelist);
     output = Core.f_list_from_list_async(
       Test.t_testdescribelist,
       testdescribelist,
@@ -5141,10 +5123,10 @@ public final class Test {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
       Test.Type_testpackage testpackage = Core.f_any_from_any(Test.t_testpackage, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testpackage> future = Test.f_resolve_testpackage(testpackage);
-      output = Core.async_from_async(Core.t_any, future);
+      output = Core.vx_async_from_async(Core.t_any, future);
       return output;
     }
 
@@ -5159,13 +5141,13 @@ public final class Test {
   public static final Func_resolve_testpackage t_resolve_testpackage = new Test.Class_resolve_testpackage();
 
   public static CompletableFuture<Test.Type_testpackage> f_resolve_testpackage(final Test.Type_testpackage testpackage) {
-    CompletableFuture<Test.Type_testpackage> output = Core.async_new_completed(Test.e_testpackage);
+    CompletableFuture<Test.Type_testpackage> output = Core.vx_async_new_completed(Test.e_testpackage);
     output = Core.f_let_async(
       Test.t_testpackage,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final Test.Type_testcaselist testcaselist = testpackage.caselist();
         final CompletableFuture<Test.Type_testcaselist> future_resolvedlist = Test.f_resolve_testcaselist(testcaselist);
-        return Core.async_from_async_fn(future_resolvedlist, (resolvedlist) -> {
+        return Core.vx_async_from_async_fn(future_resolvedlist, (resolvedlist) -> {
           final Core.Type_booleanlist passfaillist = Core.f_list_from_list_1(
             Core.t_booleanlist,
             resolvedlist,
@@ -5271,10 +5253,10 @@ public final class Test {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
       Test.Type_testpackagelist testpackagelist = Core.f_any_from_any(Test.t_testpackagelist, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testpackagelist> future = Test.f_resolve_testpackagelist(testpackagelist);
-      output = Core.async_from_async(Core.t_any, future);
+      output = Core.vx_async_from_async(Core.t_any, future);
       return output;
     }
 
@@ -5289,7 +5271,7 @@ public final class Test {
   public static final Func_resolve_testpackagelist t_resolve_testpackagelist = new Test.Class_resolve_testpackagelist();
 
   public static CompletableFuture<Test.Type_testpackagelist> f_resolve_testpackagelist(final Test.Type_testpackagelist testpackagelist) {
-    CompletableFuture<Test.Type_testpackagelist> output = Core.async_new_completed(Test.e_testpackagelist);
+    CompletableFuture<Test.Type_testpackagelist> output = Core.vx_async_new_completed(Test.e_testpackagelist);
     output = Core.f_list_from_list_async(
       Test.t_testpackagelist,
       testpackagelist,
@@ -5378,10 +5360,10 @@ public final class Test {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
       Test.Type_testresult testresult = Core.f_any_from_any(Test.t_testresult, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testresult> future = Test.f_resolve_testresult(testresult);
-      output = Core.async_from_async(Core.t_any, future);
+      output = Core.vx_async_from_async(Core.t_any, future);
       return output;
     }
 
@@ -5396,14 +5378,14 @@ public final class Test {
   public static final Func_resolve_testresult t_resolve_testresult = new Test.Class_resolve_testresult();
 
   public static CompletableFuture<Test.Type_testresult> f_resolve_testresult(final Test.Type_testresult testresult) {
-    CompletableFuture<Test.Type_testresult> output = Core.async_new_completed(Test.e_testresult);
+    CompletableFuture<Test.Type_testresult> output = Core.vx_async_new_completed(Test.e_testresult);
     output = Core.f_let_async(
       Test.t_testresult,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final Core.Func_any_from_func_async fn_actual = testresult.fn_actual();
         final Core.Type_any expected = testresult.expected();
         final CompletableFuture<Core.Type_any> future_actual = Core.f_resolve_async(Core.t_any, fn_actual);
-        return Core.async_from_async_fn(future_actual, (actual) -> {
+        return Core.vx_async_from_async_fn(future_actual, (actual) -> {
           return Core.f_if_2(
             Test.t_testresult,
             Core.vx_new(Core.t_thenelselist,
@@ -7248,9 +7230,9 @@ public final class Test {
 
   static {
     Const_stylesheet_test.const_new(c_stylesheet_test);
-    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
-    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
-    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<String, Core.Type_func>();
     maptype.put("testcase", Test.t_testcase);
     maptype.put("testcaselist", Test.t_testcaselist);
     maptype.put("testcoveragedetail", Test.t_testcoveragedetail);

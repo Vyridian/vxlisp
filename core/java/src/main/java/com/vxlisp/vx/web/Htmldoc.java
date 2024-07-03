@@ -450,10 +450,10 @@ public final class Htmldoc {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
       Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Core.Type_boolean> future = Htmldoc.f_boolean_write_stylesheet_from_string(text);
-      output = Core.async_from_async(Core.t_any, future);
+      output = Core.vx_async_from_async(Core.t_any, future);
       return output;
     }
 
@@ -468,7 +468,7 @@ public final class Htmldoc {
   public static final Func_boolean_write_stylesheet_from_string t_boolean_write_stylesheet_from_string = new Htmldoc.Class_boolean_write_stylesheet_from_string();
 
   public static CompletableFuture<Core.Type_boolean> f_boolean_write_stylesheet_from_string(final Core.Type_string text) {
-    CompletableFuture<Core.Type_boolean> output = Core.async_new_completed(Core.e_boolean);
+    CompletableFuture<Core.Type_boolean> output = Core.vx_async_new_completed(Core.e_boolean);
     return output;
   }
 
@@ -815,10 +815,10 @@ public final class Htmldoc {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
       Html.Type_stylesheet stylesheet = Core.f_any_from_any(Html.t_stylesheet, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Core.Type_boolean> future = Htmldoc.f_boolean_write_from_stylesheet(stylesheet);
-      output = Core.async_from_async(Core.t_any, future);
+      output = Core.vx_async_from_async(Core.t_any, future);
       return output;
     }
 
@@ -833,13 +833,13 @@ public final class Htmldoc {
   public static final Func_boolean_write_from_stylesheet t_boolean_write_from_stylesheet = new Htmldoc.Class_boolean_write_from_stylesheet();
 
   public static CompletableFuture<Core.Type_boolean> f_boolean_write_from_stylesheet(final Html.Type_stylesheet stylesheet) {
-    CompletableFuture<Core.Type_boolean> output = Core.async_new_completed(Core.e_boolean);
+    CompletableFuture<Core.Type_boolean> output = Core.vx_async_new_completed(Core.e_boolean);
     output = Core.f_let_async(
       Core.t_boolean,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final Core.Type_string text = Htmldoc.f_string_from_stylesheet(stylesheet);
         final CompletableFuture<Core.Type_boolean> future_iswrite = Htmldoc.f_boolean_write_stylesheet_from_string(text);
-        return Core.async_from_async_fn(future_iswrite, (iswrite) -> {
+        return Core.vx_async_from_async_fn(future_iswrite, (iswrite) -> {
           return iswrite;
         });
       })
@@ -1420,9 +1420,9 @@ public final class Htmldoc {
 
 
   static {
-    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
-    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
-    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<String, Core.Type_func>();
     mapfunc.put("boolean-print<-id-stylesheettext", Htmldoc.t_boolean_print_from_id_stylesheettext);
     mapfunc.put("boolean-remove<-id", Htmldoc.t_boolean_remove_from_id);
     mapfunc.put("boolean-replace<-id-htmltext", Htmldoc.t_boolean_replace_from_id_htmltext);

@@ -5099,10 +5099,10 @@ public final class Uihtml {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = CompletableFuture.completedFuture(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
       Ui.Type_stylesheet stylesheetui = Core.f_any_from_any(Ui.t_stylesheet, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Ui.Type_stylesheet> future = Uihtml.f_stylesheet_layout_html(stylesheetui);
-      output = Core.async_from_async(Core.t_any, future);
+      output = Core.vx_async_from_async(Core.t_any, future);
       return output;
     }
 
@@ -5117,13 +5117,13 @@ public final class Uihtml {
   public static final Func_stylesheet_layout_html t_stylesheet_layout_html = new Uihtml.Class_stylesheet_layout_html();
 
   public static CompletableFuture<Ui.Type_stylesheet> f_stylesheet_layout_html(final Ui.Type_stylesheet stylesheetui) {
-    CompletableFuture<Ui.Type_stylesheet> output = Core.async_new_completed(Ui.e_stylesheet);
+    CompletableFuture<Ui.Type_stylesheet> output = Core.vx_async_new_completed(Ui.e_stylesheet);
     output = Core.f_let_async(
       Ui.t_stylesheet,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final Html.Type_stylesheet stylesheethtml = Uihtml.f_stylesheet_from_stylesheet(stylesheetui);
         final CompletableFuture<Core.Type_boolean> future_write = Htmldoc.f_boolean_write_from_stylesheet(stylesheethtml);
-        return Core.async_from_async_fn(future_write, (write) -> {
+        return Core.vx_async_from_async_fn(future_write, (write) -> {
           return stylesheetui;
         });
       })
@@ -5654,9 +5654,9 @@ public final class Uihtml {
     Const_layoutenginehtml.const_new(c_layoutenginehtml);
     Const_style_hidden.const_new(c_style_hidden);
     Const_style_selected.const_new(c_style_selected);
-    Map<String, Core.Type_any> maptype = new LinkedHashMap<>();
-    Map<String, Core.Type_any> mapconst = new LinkedHashMap<>();
-    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<>();
+    Map<String, Core.Type_any> maptype = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_any> mapconst = new LinkedHashMap<String, Core.Type_any>();
+    Map<String, Core.Type_func> mapfunc = new LinkedHashMap<String, Core.Type_func>();
     mapconst.put("layout-app-html", Uihtml.c_layout_app_html);
     mapconst.put("layout-else-html", Uihtml.c_layout_else_html);
     mapconst.put("layout-image-html", Uihtml.c_layout_image_html);

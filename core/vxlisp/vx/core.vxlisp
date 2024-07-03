@@ -141,7 +141,7 @@
      public String vx_string() {return vxdecimal;}
 
      // :implements
-     public Type_decimal vx_new_from_string(final String sval) {
+     public Type_decimal vx_new_from_string(string sval) {
        Class_decimal output = new Class_decimal();
        output.vxdecimal = sval;
        return output;
@@ -1504,10 +1504,12 @@
 (func async : any-1 :async
  [value : any-1]
  (native
-  :js
-   "value"
+  :csharpt
+   "output = vx_core.vx_async_new_completed(value);"
   :java
-   "output = Core.async_new_completed(value);")
+   "output = Core.vx_async_new_completed(value);"
+  :js
+   "value")
  :doc "Returns an asynchonous version value. This exists mostly for type-casting.")
 
 (func boolean<-any : boolean
@@ -2050,7 +2052,7 @@
    "String stext = text.vx_string();
     String sfind = find.vx_string();
     if (stext.EndsWith(sfind)) {
-      output = Core.c_true;
+      output = vx_core.c_true;
     }"
   :js
    "if (text.endsWith(find)) {
@@ -2294,8 +2296,8 @@
     List<CompletableFuture<Core.Type_any>> list_async_result = Core.arraylist_from_arraylist_fn(list_value, (val) -> {
       return fn_any_from_any_async.vx_any_from_any_async(generic_list_1, val);
     });
-    CompletableFuture<List<Core.Type_any>> async_list_result = Core.async_arraylist_from_arraylist_async(list_async_result);
-    output = Core.async_from_async_fn(async_list_result, (list_result) -> {
+    CompletableFuture<List<Core.Type_any>> async_list_result = Core.vx_async_arraylist_from_arraylist_async(list_async_result);
+    output = Core.vx_async_from_async_fn(async_list_result, (list_result) -> {
       X work = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));
       return work;
     });")

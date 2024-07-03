@@ -141,36 +141,6 @@
     return output;
   }
 
-  public static <T> CompletableFuture<T> async_new_completed(final T val) {
-    CompletableFuture<T> output = CompletableFuture.completedFuture(val);
-    return output;
-  }
-
-  public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> async_from_async(T generic_any_1, final CompletableFuture<U> future) {
-    CompletableFuture<T> output = future.thenApply(val -> {
-      return Core.f_any_from_any(generic_any_1, val);
-    });
-    return output;
-  }
-
-  public static <T, U> CompletableFuture<T> async_from_async_fn(final CompletableFuture<U> future, final Function<? super U, ? extends T> fn) {
-    CompletableFuture<T> output = future.thenApply(fn);
-    return output;
-  }
-
-  public static <T> CompletableFuture<List<T>> async_arraylist_from_arraylist_async(final List<CompletableFuture<T>> list_future) {
-    CompletableFuture<Void> allFutures = CompletableFuture.allOf(
-      list_future.toArray(new CompletableFuture[list_future.size()])
-    );
-    CompletableFuture<List<T>> output = allFutures.thenApply(v -> {
-      List<T> list = list_future.stream()
-        .map(future -> future.join())
-        .collect(Collectors.toList());
-      return Core.immutablelist(list);
-    });
-    return output;
-  }
-
   @SafeVarargs
   public static <T> LinkedHashMap<String, T> hashmap_from_keyvalues(final KeyValue<T>... keyvalues) {
     LinkedHashMap<String, T> output = new LinkedHashMap<String, T>();
@@ -232,7 +202,43 @@
     T output = (T)(type.vx_type());
     return output;
   }
- 
+
+  public static <T> CompletableFuture<T> vx_async_new_completed(final T val) {
+    CompletableFuture<T> output = CompletableFuture.completedFuture(val);
+    return output;
+  }
+
+  public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_async_from_async(
+    final T generic_any_1,
+    final CompletableFuture<U> future) {
+    CompletableFuture<T> output = future.thenApply(val -> {
+      return Core.f_any_from_any(generic_any_1, val);
+    });
+    return output;
+  }
+
+  public static <T, U> CompletableFuture<T> vx_async_from_async_fn(
+    final CompletableFuture<U> future,
+    final Function<? super U,
+    ? extends T> fn) {
+    CompletableFuture<T> output = future.thenApply(fn);
+    return output;
+  }
+
+  public static <T> CompletableFuture<List<T>> vx_async_arraylist_from_arraylist_async(
+    final List<CompletableFuture<T>> list_future) {
+    CompletableFuture<Void> allFutures = CompletableFuture.allOf(
+      list_future.toArray(new CompletableFuture[list_future.size()])
+    );
+    CompletableFuture<List<T>> output = allFutures.thenApply(v -> {
+      List<T> list = list_future.stream()
+        .map(future -> future.join())
+        .collect(Collectors.toList());
+      return Core.immutablelist(list);
+    });
+    return output;
+  }
+
   // vx_any_first_from_list_fn(generic_any_1, list, fn_any)
   public static <T extends Core.Type_any> T vx_any_first_from_list_fn(
     final T generic_any_1,
