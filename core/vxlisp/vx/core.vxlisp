@@ -56,10 +56,10 @@
      bool vx_p_boolean = false;
      bool vx_boolean() const;"
    :csharp
-    "internal boolean vxboolean = false;
+    "internal bool vxboolean = false;
 
      // :implements
-     public boolean vx_boolean() {return vxboolean;}"
+     public bool vx_boolean() {return vxboolean;}"
    :java
     "protected boolean vxboolean = false;
 
@@ -1719,6 +1719,8 @@
  (native
   :cpp
    "T* output = vx_core::vx_any_from_any(type, type->vx_empty());"
+  :csharp
+   "T output = vx_core.vx_empty(type);"
   :java
    "T output = Core.vx_empty(type);"
   :js
@@ -2712,12 +2714,16 @@
  (native
   :cpp
    "T* output = vx_core::vx_new(type, values->vx_list());"
-  :js
-   "vx_core.vx_new(type, values)"
+  :csharp
+   "vx_core.Type_any[] arrayany = vx_core.arrayany_from_anylist(values);
+    object[] arrayobj = (vx_core.Type_any[])arrayany;
+    T output = (T)(type.vx_new(arrayobj));"
   :java
    "Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
     Object[] arrayobj = (Core.Type_any[])arrayany;
-    T output = (T)(type.vx_new(arrayobj));")
+    T output = (T)(type.vx_new(arrayobj));"
+  :js
+   "vx_core.vx_new(type, values)")
  :doc "Create a new Value of Type A"
  :test (test true (new boolean true))
        (test 4 (new int 4))

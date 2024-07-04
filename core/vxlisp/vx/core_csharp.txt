@@ -1,6 +1,5 @@
   public interface Map<TKey, TValue> {
-    public Map<UKey, UValue> cast<UKey, UValue>() where UKey : TKey where UValue : TValue;
-    public Map<UKey, UValue> copy<UKey, UValue>() where UKey : TKey where UValue : TValue;
+    public Map<TKey, TValue> copy();
     public TValue get(TKey key);
     public TValue getOrDefault(TKey key, TValue defaultvalue);
     public List<TKey> keys();
@@ -19,14 +18,8 @@
         dict[key] = copy.get(key);
       }
     }
-    public Map<UKey, UValue> cast<UKey, UValue>() where UKey : TKey where UValue : TValue {
-     Map<UKey, UValue> output = (Map<UKey, UValue>)this;
-     return output;
-    }
-    public Map<UKey, UValue> copy<UKey, UValue>() where UKey : TKey where UValue : TValue {
-     Map<UKey, UValue> castmap = this.cast<UKey, UValue>();
-     Map<UKey, UValue> output = (Map<UKey, UValue>)castmap;
-     return output;
+    public Map<TKey, TValue> copy() {
+      return new LinkedHashMap<TKey, TValue>(this);
     }
     public TValue get(TKey key) {
       return dict[key];

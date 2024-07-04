@@ -1445,9 +1445,8 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      return Core.immutablemap(
-        new LinkedHashMap<String, Core.Type_any>(this.vx_p_map)
-      );
+       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      return Core.immutablemap(map);
     }
 
     @Override
@@ -2128,9 +2127,8 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      return Core.immutablemap(
-        new LinkedHashMap<String, Core.Type_any>(this.vx_p_map)
-      );
+       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      return Core.immutablemap(map);
     }
 
     @Override
@@ -2354,7 +2352,8 @@ public final class Core {
           Core.Type_boolean valboolean = (Core.Type_boolean)valsub;
           booleanval = booleanval || valboolean.vx_boolean();
         } else if (valsub instanceof Boolean) {
-          booleanval = booleanval || (Boolean)valsub;
+          boolean issubval = (boolean)valsub;
+          booleanval = booleanval || issubval;
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -2916,9 +2915,8 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      return Core.immutablemap(
-        new LinkedHashMap<String, Core.Type_any>(this.vx_p_map)
-      );
+       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      return Core.immutablemap(map);
     }
 
     @Override
@@ -3561,9 +3559,8 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      return Core.immutablemap(
-        new LinkedHashMap<String, Core.Type_any>(this.vx_p_map)
-      );
+       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      return Core.immutablemap(map);
     }
 
     @Override
@@ -4925,9 +4922,8 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      return Core.immutablemap(
-        new LinkedHashMap<String, Core.Type_any>(this.vx_p_map)
-      );
+       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      return Core.immutablemap(map);
     }
 
     @Override
@@ -5364,9 +5360,8 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      return Core.immutablemap(
-        new LinkedHashMap<String, Core.Type_any>(this.vx_p_map)
-      );
+       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      return Core.immutablemap(map);
     }
 
     @Override
@@ -5855,9 +5850,8 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      return Core.immutablemap(
-        new LinkedHashMap<String, Core.Type_any>(this.vx_p_map)
-      );
+       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      return Core.immutablemap(map);
     }
 
     @Override
@@ -7386,9 +7380,8 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      return Core.immutablemap(
-        new LinkedHashMap<String, Core.Type_any>(this.vx_p_map)
-      );
+       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      return Core.immutablemap(map);
     }
 
     @Override
@@ -7896,9 +7889,8 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      return Core.immutablemap(
-        new LinkedHashMap<String, Core.Type_any>(this.vx_p_map)
-      );
+       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      return Core.immutablemap(map);
     }
 
     @Override
@@ -8413,9 +8405,8 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      return Core.immutablemap(
-        new LinkedHashMap<String, Core.Type_any>(this.vx_p_map)
-      );
+       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      return Core.immutablemap(map);
     }
 
     @Override
@@ -9953,9 +9944,8 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      return Core.immutablemap(
-        new LinkedHashMap<String, Core.Type_any>(this.vx_p_map)
-      );
+       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      return Core.immutablemap(map);
     }
 
     @Override
@@ -10181,7 +10171,8 @@ public final class Core {
         } else if (valsub instanceof Core.Type_string) {
           Core.Type_string valstring = (Core.Type_string)valsub;
           String ssub = valstring.vx_string();
-          if (!ssub.equals("")) {
+          if (ssub.equals("")) {
+          } else {
             ischanged = true;
             sb.append(ssub);
           }
@@ -10199,7 +10190,8 @@ public final class Core {
           sb.append(valdecimal.vx_string());
         } else if (valsub instanceof String) {
           String ssub2 = (String)valsub;
-          if (!ssub2.equals("")) {
+          if (ssub2.equals("")) {
+          } else {
             ischanged = true;
             sb.append(ssub2);
           }
@@ -10567,9 +10559,8 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      return Core.immutablemap(
-        new LinkedHashMap<String, Core.Type_any>(this.vx_p_map)
-      );
+       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      return Core.immutablemap(map);
     }
 
     @Override
@@ -10767,9 +10758,8 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      return Core.immutablemap(
-        new LinkedHashMap<String, Core.Type_any>(this.vx_p_map)
-      );
+       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      return Core.immutablemap(map);
     }
 
     @Override
@@ -11857,9 +11847,8 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      return Core.immutablemap(
-        new LinkedHashMap<String, Core.Type_any>(this.vx_p_map)
-      );
+       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      return Core.immutablemap(map);
     }
 
     @Override
@@ -12811,9 +12800,8 @@ public final class Core {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      return Core.immutablemap(
-        new LinkedHashMap<String, Core.Type_any>(this.vx_p_map)
-      );
+       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      return Core.immutablemap(map);
     }
 
     @Override

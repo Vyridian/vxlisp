@@ -378,9 +378,8 @@ public final class Table {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      return Core.immutablemap(
-        new LinkedHashMap<String, Core.Type_any>(this.vx_p_map)
-      );
+       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      return Core.immutablemap(map);
     }
 
     @Override
@@ -1732,9 +1731,8 @@ public final class Table {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      return Core.immutablemap(
-        new LinkedHashMap<String, Core.Type_any>(this.vx_p_map)
-      );
+       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      return Core.immutablemap(map);
     }
 
     @Override

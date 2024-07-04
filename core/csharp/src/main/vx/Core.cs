@@ -3,8 +3,7 @@ namespace vx_core;
 public static class vx_core {
 
   public interface Map<TKey, TValue> {
-    public Map<UKey, UValue> cast<UKey, UValue>() where UKey : TKey where UValue : TValue;
-    public Map<UKey, UValue> copy<UKey, UValue>() where UKey : TKey where UValue : TValue;
+    public Map<TKey, TValue> copy();
     public TValue get(TKey key);
     public TValue getOrDefault(TKey key, TValue defaultvalue);
     public List<TKey> keys();
@@ -23,14 +22,8 @@ public static class vx_core {
         dict[key] = copy.get(key);
       }
     }
-    public Map<UKey, UValue> cast<UKey, UValue>() where UKey : TKey where UValue : TValue {
-     Map<UKey, UValue> output = (Map<UKey, UValue>)this;
-     return output;
-    }
-    public Map<UKey, UValue> copy<UKey, UValue>() where UKey : TKey where UValue : TValue {
-     Map<UKey, UValue> castmap = this.cast<UKey, UValue>();
-     Map<UKey, UValue> output = (Map<UKey, UValue>)castmap;
-     return output;
+    public Map<TKey, TValue> copy() {
+      return new LinkedHashMap<TKey, TValue>(this);
     }
     public TValue get(TKey key) {
       return dict[key];
@@ -1231,9 +1224,9 @@ public static class vx_core {
     public Map<string, vx_core.Type_any> vx_p_map = vx_core.immutablemap(new LinkedHashMap<string, vx_core.Type_any>());
 
     public Map<string, vx_core.Type_any> vx_map() {
-      return vx_core.immutablemap(
-        this.vx_p_map.copy<string, vx_core.Type_any>()
-      );
+      Map<string, vx_core.Type_any> anymap = (Map<string, vx_core.Type_any>)this.vx_p_map;
+      Map<string, vx_core.Type_any> map = anymap.copy();
+      return vx_core.immutablemap(map);
     }
 
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
@@ -1880,9 +1873,9 @@ public static class vx_core {
     public Map<string, vx_core.Type_arg> vx_p_map = vx_core.immutablemap(new LinkedHashMap<string, vx_core.Type_arg>());
 
     public Map<string, vx_core.Type_any> vx_map() {
-      return vx_core.immutablemap(
-        this.vx_p_map.copy<string, vx_core.Type_any>()
-      );
+      Map<string, vx_core.Type_any> anymap = (Map<string, vx_core.Type_any>)this.vx_p_map;
+      Map<string, vx_core.Type_any> map = anymap.copy();
+      return vx_core.immutablemap(map);
     }
 
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
@@ -2060,15 +2053,15 @@ public static class vx_core {
     public vx_core.Type_any vx_copy(params Object[] vals);
     public vx_core.Type_any vx_empty();
     public vx_core.Type_any vx_type();
-    public boolean vx_boolean();
+    public bool vx_boolean();
   }
 
   public class Class_boolean : vx_core.Class_base, Type_boolean {
 
-    internal boolean vxboolean = false;
+    internal bool vxboolean = false;
     
     // :implements
-    public boolean vx_boolean() {return vxboolean;}
+    public bool vx_boolean() {return vxboolean;}
 
     public override vx_core.Type_boolean vx_new(params Object[] vals) {
       return vx_core.vx_copy(
@@ -2094,7 +2087,8 @@ public static class vx_core {
           vx_core.Type_boolean valboolean = valsub as vx_core.Type_boolean;
           booleanval = booleanval || valboolean.vx_boolean();
         } else if (valsub is bool) {
-          booleanval = booleanval || valsub as bool;
+          bool issubval = (bool)valsub;
+          booleanval = booleanval || issubval;
         }
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -2207,7 +2201,7 @@ public static class vx_core {
           vx_core.Type_boolean anysub = valsub as vx_core.Type_boolean;
           ischanged = true;
           listval.Add(anysub);
-        } else if (valsub is Boolean) {
+        } else if (valsub is vx_core.Type_boolean) {
           ischanged = true;
           listval.Add(vx_core.vx_new(vx_core.t_boolean, valsub));
         } else if (valsub is vx_core.Type_booleanlist) {
@@ -2619,9 +2613,9 @@ public static class vx_core {
     public Map<string, vx_core.Type_connect> vx_p_map = vx_core.immutablemap(new LinkedHashMap<string, vx_core.Type_connect>());
 
     public Map<string, vx_core.Type_any> vx_map() {
-      return vx_core.immutablemap(
-        this.vx_p_map.copy<string, vx_core.Type_any>()
-      );
+      Map<string, vx_core.Type_any> anymap = (Map<string, vx_core.Type_any>)this.vx_p_map;
+      Map<string, vx_core.Type_any> map = anymap.copy();
+      return vx_core.immutablemap(map);
     }
 
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
@@ -3231,9 +3225,9 @@ public static class vx_core {
     public Map<string, vx_core.Type_any> vx_p_map = vx_core.immutablemap(new LinkedHashMap<string, vx_core.Type_any>());
 
     public Map<string, vx_core.Type_any> vx_map() {
-      return vx_core.immutablemap(
-        this.vx_p_map.copy<string, vx_core.Type_any>()
-      );
+      Map<string, vx_core.Type_any> anymap = (Map<string, vx_core.Type_any>)this.vx_p_map;
+      Map<string, vx_core.Type_any> map = anymap.copy();
+      return vx_core.immutablemap(map);
     }
 
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
@@ -3951,7 +3945,7 @@ public static class vx_core {
           floatval += float.Parse(valstring.vx_string());
         } else if (valsub is float) {
           ischanged = true;
-          floatval += valsub as float;
+          floatval += (float)valsub;
         } else if (valsub is int) {
           ischanged = true;
           floatval += Convert.ToInt32(valsub);
@@ -4529,9 +4523,9 @@ public static class vx_core {
     public Map<string, vx_core.Type_func> vx_p_map = vx_core.immutablemap(new LinkedHashMap<string, vx_core.Type_func>());
 
     public Map<string, vx_core.Type_any> vx_map() {
-      return vx_core.immutablemap(
-        this.vx_p_map.copy<string, vx_core.Type_any>()
-      );
+      Map<string, vx_core.Type_any> anymap = (Map<string, vx_core.Type_any>)this.vx_p_map;
+      Map<string, vx_core.Type_any> map = anymap.copy();
+      return vx_core.immutablemap(map);
     }
 
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
@@ -4860,7 +4854,7 @@ public static class vx_core {
           vx_core.Type_int anysub = valsub as vx_core.Type_int;
           ischanged = true;
           listval.Add(anysub);
-        } else if (valsub is Integer) {
+        } else if (valsub is vx_core.Type_int) {
           ischanged = true;
           listval.Add(vx_core.vx_new(vx_core.t_int, valsub));
         } else if (valsub is vx_core.Type_intlist) {
@@ -4943,9 +4937,9 @@ public static class vx_core {
     public Map<string, vx_core.Type_int> vx_p_map = vx_core.immutablemap(new LinkedHashMap<string, vx_core.Type_int>());
 
     public Map<string, vx_core.Type_any> vx_map() {
-      return vx_core.immutablemap(
-        this.vx_p_map.copy<string, vx_core.Type_any>()
-      );
+      Map<string, vx_core.Type_any> anymap = (Map<string, vx_core.Type_any>)this.vx_p_map;
+      Map<string, vx_core.Type_any> map = anymap.copy();
+      return vx_core.immutablemap(map);
     }
 
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
@@ -5404,9 +5398,9 @@ public static class vx_core {
     public Map<string, vx_core.Type_any> vx_p_map = vx_core.immutablemap(new LinkedHashMap<string, vx_core.Type_any>());
 
     public Map<string, vx_core.Type_any> vx_map() {
-      return vx_core.immutablemap(
-        this.vx_p_map.copy<string, vx_core.Type_any>()
-      );
+      Map<string, vx_core.Type_any> anymap = (Map<string, vx_core.Type_any>)this.vx_p_map;
+      Map<string, vx_core.Type_any> map = anymap.copy();
+      return vx_core.immutablemap(map);
     }
 
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
@@ -6148,8 +6142,8 @@ public static class vx_core {
         }
       }
       if (ischanged) {
-        if ((vx_p_msgs.vx_list().size() == 0) && (vx_p_msgblocks.vx_list().size() == 1)) {
-          output = vx_p_msgblocks.vx_listmsgblock().get(0);
+        if ((vx_p_msgs.vx_list().Count == 0) && (vx_p_msgblocks.vx_list().Count == 1)) {
+          output = vx_p_msgblocks.vx_listmsgblock()[0];
         } else {
           Class_msgblock work = new Class_msgblock();
           work.vx_p_msgs = vx_p_msgs;
@@ -6796,9 +6790,9 @@ public static class vx_core {
     public Map<string, vx_core.Type_number> vx_p_map = vx_core.immutablemap(new LinkedHashMap<string, vx_core.Type_number>());
 
     public Map<string, vx_core.Type_any> vx_map() {
-      return vx_core.immutablemap(
-        this.vx_p_map.copy<string, vx_core.Type_any>()
-      );
+      Map<string, vx_core.Type_any> anymap = (Map<string, vx_core.Type_any>)this.vx_p_map;
+      Map<string, vx_core.Type_any> map = anymap.copy();
+      return vx_core.immutablemap(map);
     }
 
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
@@ -7283,9 +7277,9 @@ public static class vx_core {
     public Map<string, vx_core.Type_package> vx_p_map = vx_core.immutablemap(new LinkedHashMap<string, vx_core.Type_package>());
 
     public Map<string, vx_core.Type_any> vx_map() {
-      return vx_core.immutablemap(
-        this.vx_p_map.copy<string, vx_core.Type_any>()
-      );
+      Map<string, vx_core.Type_any> anymap = (Map<string, vx_core.Type_any>)this.vx_p_map;
+      Map<string, vx_core.Type_any> map = anymap.copy();
+      return vx_core.immutablemap(map);
     }
 
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
@@ -7772,9 +7766,9 @@ public static class vx_core {
     public Map<string, vx_core.Type_permission> vx_p_map = vx_core.immutablemap(new LinkedHashMap<string, vx_core.Type_permission>());
 
     public Map<string, vx_core.Type_any> vx_map() {
-      return vx_core.immutablemap(
-        this.vx_p_map.copy<string, vx_core.Type_any>()
-      );
+      Map<string, vx_core.Type_any> anymap = (Map<string, vx_core.Type_any>)this.vx_p_map;
+      Map<string, vx_core.Type_any> map = anymap.copy();
+      return vx_core.immutablemap(map);
     }
 
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
@@ -9244,9 +9238,9 @@ public static class vx_core {
     public Map<string, vx_core.Type_statelistener> vx_p_map = vx_core.immutablemap(new LinkedHashMap<string, vx_core.Type_statelistener>());
 
     public Map<string, vx_core.Type_any> vx_map() {
-      return vx_core.immutablemap(
-        this.vx_p_map.copy<string, vx_core.Type_any>()
-      );
+      Map<string, vx_core.Type_any> anymap = (Map<string, vx_core.Type_any>)this.vx_p_map;
+      Map<string, vx_core.Type_any> map = anymap.copy();
+      return vx_core.immutablemap(map);
     }
 
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
@@ -9450,7 +9444,7 @@ public static class vx_core {
       if (this is vx_core.vx_Type_const) {
         ischanged = true;
       }
-      StringBuilder sb = new StringBuilder(val.vx_string());
+      System.Text.StringBuilder sb = new System.Text.StringBuilder(val.vx_string());
       vx_core.Type_msg msg;
       foreach (Object valsub in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -9460,36 +9454,38 @@ public static class vx_core {
         } else if (valsub is vx_core.Type_string) {
           vx_core.Type_string valstring = valsub as vx_core.Type_string;
           string ssub = valstring.vx_string();
-          if (!ssub == "") {
+          if (ssub == "") {
+          } else {
             ischanged = true;
-            sb.append(ssub);
+            sb.Append(ssub);
           }
         } else if (valsub is vx_core.Type_int) {
           vx_core.Type_int valint = valsub as vx_core.Type_int;
           ischanged = true;
-          sb.append(valint.vx_int());
+          sb.Append(valint.vx_int());
         } else if (valsub is vx_core.Type_float) {
           vx_core.Type_float valfloat = valsub as vx_core.Type_float;
           ischanged = true;
-          sb.append(valfloat.vx_float());
+          sb.Append(valfloat.vx_float());
         } else if (valsub is vx_core.Type_decimal) {
           vx_core.Type_decimal valdecimal = valsub as vx_core.Type_decimal;
           ischanged = true;
-          sb.append(valdecimal.vx_string());
+          sb.Append(valdecimal.vx_string());
         } else if (valsub is string) {
           string ssub2 = valsub as string;
-          if (!ssub2 == "") {
+          if (ssub2 == "") {
+          } else {
             ischanged = true;
-            sb.append(ssub2);
+            sb.Append(ssub2);
           }
         } else if (valsub is int) {
           int ssub2 = Convert.ToInt32(valsub);
           ischanged = true;
-          sb.append(ssub2);
+          sb.Append(ssub2);
         } else if (valsub is float) {
-          float ssub2 = valsub as float;
+          float ssub2 = (float)valsub;
           ischanged = true;
-          sb.append(ssub2);
+          sb.Append(ssub2);
         } else if (valsub is vx_core.Type_any) {
           vx_core.Type_any anysub = valsub as vx_core.Type_any;
           msg = vx_core.vx_msg_from_error("vx/core/string", ":invalidtype", anysub);
@@ -9608,7 +9604,7 @@ public static class vx_core {
           vx_core.Type_string anysub = valsub as vx_core.Type_string;
           ischanged = true;
           listval.Add(anysub);
-        } else if (valsub is String) {
+        } else if (valsub is vx_core.Type_string) {
           ischanged = true;
           listval.Add(vx_core.vx_new(vx_core.t_string, valsub));
         } else if (valsub is vx_core.Type_stringlist) {
@@ -9824,9 +9820,9 @@ public static class vx_core {
     public Map<string, vx_core.Type_string> vx_p_map = vx_core.immutablemap(new LinkedHashMap<string, vx_core.Type_string>());
 
     public Map<string, vx_core.Type_any> vx_map() {
-      return vx_core.immutablemap(
-        this.vx_p_map.copy<string, vx_core.Type_any>()
-      );
+      Map<string, vx_core.Type_any> anymap = (Map<string, vx_core.Type_any>)this.vx_p_map;
+      Map<string, vx_core.Type_any> map = anymap.copy();
+      return vx_core.immutablemap(map);
     }
 
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
@@ -10013,9 +10009,9 @@ public static class vx_core {
     public Map<string, vx_core.Type_string> vx_p_map = vx_core.immutablemap(new LinkedHashMap<string, vx_core.Type_string>());
 
     public Map<string, vx_core.Type_any> vx_map() {
-      return vx_core.immutablemap(
-        this.vx_p_map.copy<string, vx_core.Type_any>()
-      );
+      Map<string, vx_core.Type_any> anymap = (Map<string, vx_core.Type_any>)this.vx_p_map;
+      Map<string, vx_core.Type_any> map = anymap.copy();
+      return vx_core.immutablemap(map);
     }
 
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
@@ -11046,9 +11042,9 @@ public static class vx_core {
     public Map<string, vx_core.Type_translation> vx_p_map = vx_core.immutablemap(new LinkedHashMap<string, vx_core.Type_translation>());
 
     public Map<string, vx_core.Type_any> vx_map() {
-      return vx_core.immutablemap(
-        this.vx_p_map.copy<string, vx_core.Type_any>()
-      );
+      Map<string, vx_core.Type_any> anymap = (Map<string, vx_core.Type_any>)this.vx_p_map;
+      Map<string, vx_core.Type_any> map = anymap.copy();
+      return vx_core.immutablemap(map);
     }
 
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
@@ -11958,9 +11954,9 @@ public static class vx_core {
     public Map<string, vx_core.Type_any> vx_p_map = vx_core.immutablemap(new LinkedHashMap<string, vx_core.Type_any>());
 
     public Map<string, vx_core.Type_any> vx_map() {
-      return vx_core.immutablemap(
-        this.vx_p_map.copy<string, vx_core.Type_any>()
-      );
+      Map<string, vx_core.Type_any> anymap = (Map<string, vx_core.Type_any>)this.vx_p_map;
+      Map<string, vx_core.Type_any> map = anymap.copy();
+      return vx_core.immutablemap(map);
     }
 
     public vx_core.Type_boolean vx_set(vx_core.Type_string name, vx_core.Type_any value) {
@@ -20166,6 +20162,7 @@ public static class vx_core {
   public static Func_empty t_empty = new vx_core.Class_empty();
 
   public static T f_empty<T>(T type) where T : vx_core.Type_any {
+    T output = vx_core.vx_empty(type);
     return output;
   }
 
@@ -24930,6 +24927,9 @@ public static class vx_core {
   public static Func_new t_new = new vx_core.Class_new();
 
   public static T f_new<T>(T type, vx_core.Type_anylist values) where T : vx_core.Type_any {
+    vx_core.Type_any[] arrayany = vx_core.arrayany_from_anylist(values);
+    object[] arrayobj = (vx_core.Type_any[])arrayany;
+    T output = (T)(type.vx_new(arrayobj));
     return output;
   }
 
