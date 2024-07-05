@@ -15926,7 +15926,7 @@ namespace vx_core {
   /**
    * @function copy
    * Returns a copy of a given value with the given values added or updated.
-   * @param  {any} value
+   * @param  {any-1} value
    * @param  {anylist} values
    * @return {any-1}
    * (func copy)

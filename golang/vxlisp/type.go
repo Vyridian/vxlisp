@@ -106,6 +106,8 @@ var rawlisttype1 = NewType("rawlist-1")
 
 var rawlistanytype = NewType("rawlistany")
 
+var rawlistunknowntype = NewType("rawlistunknown")
+
 var rawmaptype = NewType("rawmap")
 
 var rawmaptype1 = NewType("rawmap-1")

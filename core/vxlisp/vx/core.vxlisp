@@ -130,7 +130,7 @@
      float vx_float() const;
      std::string vx_string() const;"
    :csharp
-    "internal String vxdecimal = “0.0”;
+    "internal string vxdecimal = “0.0”;
 
      // :implements
      public float vx_float() {
@@ -138,7 +138,7 @@
      }
 
      // :implements
-     public String vx_string() {return vxdecimal;}
+     public string vx_string() {return vxdecimal;}
 
      // :implements
      public Type_decimal vx_new_from_string(string sval) {
@@ -479,10 +479,10 @@
      std::string vx_p_string = “”;
      std::string vx_string() const;"
    :csharp
-    "internal String vxstring = “”;
+    "internal string vxstring = “”;
 
      // :implements
-     public String vx_string() {
+     public string vx_string() {
        return vxstring;
      }"
    :java
@@ -1685,18 +1685,22 @@
  :doc "Returns the default context for app main execution. Arguments come from the command line.")
 
 (func copy : any-1
- [value  : any
+ [value  : any-1
   values : anylist :...]
  (native
   :cpp
    "T* output = vx_core::vx_copy(generic_any_1, value, values->vx_list());"
-  :js
-   "vx_core.f_new(value, ...values)"
+  :csharp
+   "vx_core.Type_any[] arrayany = vx_core.arrayany_from_anylist(values);
+    object[] arrayobj = (vx_core.Type_any[])arrayany;
+    T output = (T)(((T)value).vx_copy(arrayobj));"
   :java
    "@SuppressWarnings(“unchecked”)
     Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
     Object[] arrayobj = (Core.Type_any[])arrayany;
-    T output = (T)(value.vx_copy(arrayobj));")
+    T output = (T)(value.vx_copy(arrayobj));"
+  :js
+   "vx_core.f_new(value, ...values)")
  :bigospace :n
  :bigotime :n
  :test (test
@@ -1974,8 +1978,16 @@
         intresult = vx_core::c_notanumber;
       }
       return intresult;"
-    :js
-     "parseInt(val)"
+    :csharp
+     "int intresult = 0;
+      string strval = val.vx_string();
+      try {
+        float floatresult = float.Parse(strval);
+        intresult = (int)floatresult;
+        return vx_core.vx_new_int(intresult);
+      } catch (Exception ex) {
+        return vx_core.c_notanumber;
+      }"
     :java
      "int intresult = 0;
       String strval = val.vx_string();
@@ -1986,6 +1998,8 @@
       } catch (Exception ex) {
         return Core.c_notanumber;
       }"
+    :js
+     "parseInt(val)"
     )
   )
  )
@@ -2051,8 +2065,8 @@
       output = vx_core::c_true;
     }"
   :csharp
-   "String stext = text.vx_string();
-    String sfind = find.vx_string();
+   "string stext = text.vx_string();
+    string sfind = find.vx_string();
     if (stext.EndsWith(sfind)) {
       output = vx_core.c_true;
     }"

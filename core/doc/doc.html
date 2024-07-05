@@ -3489,7 +3489,7 @@
      float vx_float() const;
      std::string vx_string() const;&quot;
    :csharp
-    &quot;internal String vxdecimal = “0.0”;
+    &quot;internal string vxdecimal = “0.0”;
 
      // :implements
      public float vx_float() {
@@ -3497,7 +3497,7 @@
      }
 
      // :implements
-     public String vx_string() {return vxdecimal;}
+     public string vx_string() {return vxdecimal;}
 
      // :implements
      public Type_decimal vx_new_from_string(string sval) {
@@ -3838,10 +3838,10 @@
      std::string vx_p_string = “”;
      std::string vx_string() const;&quot;
    :csharp
-    &quot;internal String vxstring = “”;
+    &quot;internal string vxstring = “”;
 
      // :implements
-     public String vx_string() {
+     public string vx_string() {
        return vxstring;
      }&quot;
    :java
@@ -5044,18 +5044,22 @@
  :doc &quot;Returns the default context for app main execution. Arguments come from the command line.&quot;)
 
 (func copy : any-1
- [value  : any
+ [value  : any-1
   values : anylist :...]
  (native
   :cpp
    &quot;T* output = vx_core::vx_copy(generic_any_1, value, values-&gt;vx_list());&quot;
-  :js
-   &quot;vx_core.f_new(value, ...values)&quot;
+  :csharp
+   &quot;vx_core.Type_any[] arrayany = vx_core.arrayany_from_anylist(values);
+    object[] arrayobj = (vx_core.Type_any[])arrayany;
+    T output = (T)(((T)value).vx_copy(arrayobj));&quot;
   :java
    &quot;@SuppressWarnings(“unchecked”)
     Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
     Object[] arrayobj = (Core.Type_any[])arrayany;
-    T output = (T)(value.vx_copy(arrayobj));&quot;)
+    T output = (T)(value.vx_copy(arrayobj));&quot;
+  :js
+   &quot;vx_core.f_new(value, ...values)&quot;)
  :bigospace :n
  :bigotime :n
  :test (test
@@ -5333,8 +5337,16 @@
         intresult = vx_core::c_notanumber;
       }
       return intresult;&quot;
-    :js
-     &quot;parseInt(val)&quot;
+    :csharp
+     &quot;int intresult = 0;
+      string strval = val.vx_string();
+      try {
+        float floatresult = float.Parse(strval);
+        intresult = (int)floatresult;
+        return vx_core.vx_new_int(intresult);
+      } catch (Exception ex) {
+        return vx_core.c_notanumber;
+      }&quot;
     :java
      &quot;int intresult = 0;
       String strval = val.vx_string();
@@ -5345,6 +5357,8 @@
       } catch (Exception ex) {
         return Core.c_notanumber;
       }&quot;
+    :js
+     &quot;parseInt(val)&quot;
     )
   )
  )
@@ -5410,8 +5424,8 @@
       output = vx_core::c_true;
     }&quot;
   :csharp
-   &quot;String stext = text.vx_string();
-    String sfind = find.vx_string();
+   &quot;string stext = text.vx_string();
+    string sfind = find.vx_string();
     if (stext.EndsWith(sfind)) {
       output = vx_core.c_true;
     }&quot;
@@ -7871,7 +7885,7 @@
      float vx_float() const;
      std::string vx_string() const;&quot;
    :csharp
-    &quot;internal String vxdecimal = “0.0”;
+    &quot;internal string vxdecimal = “0.0”;
 
      // :implements
      public float vx_float() {
@@ -7879,7 +7893,7 @@
      }
 
      // :implements
-     public String vx_string() {return vxdecimal;}
+     public string vx_string() {return vxdecimal;}
 
      // :implements
      public Type_decimal vx_new_from_string(string sval) {
@@ -10339,10 +10353,10 @@
      std::string vx_p_string = “”;
      std::string vx_string() const;&quot;
    :csharp
-    &quot;internal String vxstring = “”;
+    &quot;internal string vxstring = “”;
 
      // :implements
-     public String vx_string() {
+     public string vx_string() {
        return vxstring;
      }&quot;
    :java
@@ -17697,7 +17711,7 @@ improves readability.</div>
                   </div>
                   <div class="tr">
                     <div class="td">value</div>
-                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any-1')">vx/core/any-1</span></div>
                     <div class="td"></div>
                   </div>
                   <div class="tr">
@@ -17730,18 +17744,22 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func copy : any-1
- [value  : any
+ [value  : any-1
   values : anylist :...]
  (native
   :cpp
    &quot;T* output = vx_core::vx_copy(generic_any_1, value, values-&gt;vx_list());&quot;
-  :js
-   &quot;vx_core.f_new(value, ...values)&quot;
+  :csharp
+   &quot;vx_core.Type_any[] arrayany = vx_core.arrayany_from_anylist(values);
+    object[] arrayobj = (vx_core.Type_any[])arrayany;
+    T output = (T)(((T)value).vx_copy(arrayobj));&quot;
   :java
    &quot;@SuppressWarnings(“unchecked”)
     Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
     Object[] arrayobj = (Core.Type_any[])arrayany;
-    T output = (T)(value.vx_copy(arrayobj));&quot;)
+    T output = (T)(value.vx_copy(arrayobj));&quot;
+  :js
+   &quot;vx_core.f_new(value, ...values)&quot;)
  :bigospace :n
  :bigotime :n
  :test (test
@@ -18959,8 +18977,16 @@ improves readability.</div>
         intresult = vx_core::c_notanumber;
       }
       return intresult;&quot;
-    :js
-     &quot;parseInt(val)&quot;
+    :csharp
+     &quot;int intresult = 0;
+      string strval = val.vx_string();
+      try {
+        float floatresult = float.Parse(strval);
+        intresult = (int)floatresult;
+        return vx_core.vx_new_int(intresult);
+      } catch (Exception ex) {
+        return vx_core.c_notanumber;
+      }&quot;
     :java
      &quot;int intresult = 0;
       String strval = val.vx_string();
@@ -18971,6 +18997,8 @@ improves readability.</div>
       } catch (Exception ex) {
         return Core.c_notanumber;
       }&quot;
+    :js
+     &quot;parseInt(val)&quot;
     )
   )
  )
@@ -19219,8 +19247,8 @@ improves readability.</div>
       output = vx_core::c_true;
     }&quot;
   :csharp
-   &quot;String stext = text.vx_string();
-    String sfind = find.vx_string();
+   &quot;string stext = text.vx_string();
+    string sfind = find.vx_string();
     if (stext.EndsWith(sfind)) {
       output = vx_core.c_true;
     }&quot;

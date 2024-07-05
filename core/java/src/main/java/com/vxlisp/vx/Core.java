@@ -21507,13 +21507,13 @@ public final class Core {
   /**
    * @function copy
    * Returns a copy of a given value with the given values added or updated.
-   * @param  {any} value
+   * @param  {any-1} value
    * @param  {anylist} values
    * @return {any-1}
    * (func copy)
    */
   public interface Func_copy extends Core.Type_func, Core.Type_replfunc {
-    public <T extends Core.Type_any> T vx_copy(final Core.Type_any value, final Core.Type_anylist values);
+    public <T extends Core.Type_any> T vx_copy(final T value, final Core.Type_anylist values);
   }
 
   public static class Class_copy extends Core.Class_base implements Func_copy {
@@ -21577,7 +21577,7 @@ public final class Core {
     }
 
     @Override
-    public <T extends Core.Type_any> T vx_copy(final Core.Type_any value, final Core.Type_anylist values) {
+    public <T extends Core.Type_any> T vx_copy(final T value, final Core.Type_anylist values) {
       return Core.f_copy(value, values);
     }
 
@@ -21587,7 +21587,7 @@ public final class Core {
   public static final Func_copy t_copy = new Core.Class_copy();
 
   @SuppressWarnings("unchecked")
-  public static <T extends Core.Type_any> T f_copy(final Core.Type_any value, final Core.Type_anylist values) {
+  public static <T extends Core.Type_any> T f_copy(final T value, final Core.Type_anylist values) {
     Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
     Object[] arrayobj = (Core.Type_any[])arrayany;
     T output = (T)(value.vx_copy(arrayobj));
