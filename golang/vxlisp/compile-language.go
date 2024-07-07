@@ -2490,7 +2490,8 @@ func LangImportsFromPackage(lang *vxlang, pkg *vxpackage, pkgprefix string, body
 				if lib.pkg != nil {
 					switch lang.name {
 					case "csharp":
-						libpath = pkgpath
+						libpath = StringSubstring(pkgpath, 0, -1)
+						libpath = StringUCaseFirst(libpath)
 					case "java", "kotlin":
 						libprefix := pkgpath
 						libprefix = lib.pkg.project.javadomain

@@ -311,6 +311,9 @@ func StringSubstring(str string, startpos int, endpos int) string {
 	if startnum < 0 {
 		startnum = 0
 	}
+	if endnum < 0 {
+		endnum = len(str) + endnum
+	}
 	if endnum < startnum {
 		endnum = startnum
 	}
