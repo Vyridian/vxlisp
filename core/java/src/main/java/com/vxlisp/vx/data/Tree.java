@@ -32,42 +32,66 @@ public final class Tree {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Tree.Type_brancharrow vx_p_brancharrow;
 
     @Override
     public Tree.Type_brancharrow brancharrow() {
-      return this.vx_p_brancharrow == null ? Tree.e_brancharrow : this.vx_p_brancharrow;
+      Tree.Type_brancharrow output = Tree.e_brancharrow;
+      if (this.vx_p_brancharrow != null) {
+        output = this.vx_p_brancharrow;
+      }
+      return output;
     }
 
     public Tree.Type_branchlist vx_p_branchlist;
 
     @Override
     public Tree.Type_branchlist branchlist() {
-      return this.vx_p_branchlist == null ? Tree.e_branchlist : this.vx_p_branchlist;
+      Tree.Type_branchlist output = Tree.e_branchlist;
+      if (this.vx_p_branchlist != null) {
+        output = this.vx_p_branchlist;
+      }
+      return output;
     }
 
     public Tree.Type_leaflist vx_p_leaflist;
 
     @Override
     public Tree.Type_leaflist leaflist() {
-      return this.vx_p_leaflist == null ? Tree.e_leaflist : this.vx_p_leaflist;
+      Tree.Type_leaflist output = Tree.e_leaflist;
+      if (this.vx_p_leaflist != null) {
+        output = this.vx_p_leaflist;
+      }
+      return output;
     }
 
     public Tree.Type_branch vx_p_parentbranch;
 
     @Override
     public Tree.Type_branch parentbranch() {
-      return this.vx_p_parentbranch == null ? Tree.e_branch : this.vx_p_parentbranch;
+      Tree.Type_branch output = Tree.e_branch;
+      if (this.vx_p_parentbranch != null) {
+        output = this.vx_p_parentbranch;
+      }
+      return output;
     }
 
     public Tree.Type_tree vx_p_tree;
 
     @Override
     public Tree.Type_tree tree() {
-      return this.vx_p_tree == null ? Tree.e_tree : this.vx_p_tree;
+      Tree.Type_tree output = Tree.e_tree;
+      if (this.vx_p_tree != null) {
+        output = this.vx_p_tree;
+      }
+      return output;
     }
 
     @Override
@@ -584,21 +608,33 @@ public final class Tree {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
-      return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_name != null) {
+        output = this.vx_p_name;
+      }
+      return output;
     }
 
     public Core.Type_any vx_p_value;
 
     @Override
     public Core.Type_any value() {
-      return this.vx_p_value == null ? Core.e_any : this.vx_p_value;
+      Core.Type_any output = Core.e_any;
+      if (this.vx_p_value != null) {
+        output = this.vx_p_value;
+      }
+      return output;
     }
 
     @Override
@@ -970,21 +1006,33 @@ public final class Tree {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
-      return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_name != null) {
+        output = this.vx_p_name;
+      }
+      return output;
     }
 
     public Tree.Type_branch vx_p_branch;
 
     @Override
     public Tree.Type_branch branch() {
-      return this.vx_p_branch == null ? Tree.e_branch : this.vx_p_branch;
+      Tree.Type_branch output = Tree.e_branch;
+      if (this.vx_p_branch != null) {
+        output = this.vx_p_branch;
+      }
+      return output;
     }
 
     @Override

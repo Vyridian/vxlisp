@@ -213,42 +213,66 @@ public final class Repl {
 
     @Override
     public Core.Type_string name() {
-      return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_name != null) {
+        output = this.vx_p_name;
+      }
+      return output;
     }
 
     public Core.Type_any vx_p_type;
 
     @Override
     public Core.Type_any type() {
-      return this.vx_p_type == null ? Core.e_any : this.vx_p_type;
+      Core.Type_any output = Core.e_any;
+      if (this.vx_p_type != null) {
+        output = this.vx_p_type;
+      }
+      return output;
     }
 
     public Repl.Type_repllist vx_p_repllist;
 
     @Override
     public Repl.Type_repllist repllist() {
-      return this.vx_p_repllist == null ? Repl.e_repllist : this.vx_p_repllist;
+      Repl.Type_repllist output = Repl.e_repllist;
+      if (this.vx_p_repllist != null) {
+        output = this.vx_p_repllist;
+      }
+      return output;
     }
 
     public Core.Type_boolean vx_p_async;
 
     @Override
     public Core.Type_boolean async() {
-      return this.vx_p_async == null ? Core.e_boolean : this.vx_p_async;
+      Core.Type_boolean output = Core.e_boolean;
+      if (this.vx_p_async != null) {
+        output = this.vx_p_async;
+      }
+      return output;
     }
 
     public Core.Type_any vx_p_val;
 
     @Override
     public Core.Type_any val() {
-      return this.vx_p_val == null ? Core.e_any : this.vx_p_val;
+      Core.Type_any output = Core.e_any;
+      if (this.vx_p_val != null) {
+        output = this.vx_p_val;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_doc;
 
     @Override
     public Core.Type_string doc() {
-      return this.vx_p_doc == null ? Core.e_string : this.vx_p_doc;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_doc != null) {
+        output = this.vx_p_doc;
+      }
+      return output;
     }
 
     @Override
@@ -561,21 +585,33 @@ public final class Repl {
 
     @Override
     public Core.Type_string key() {
-      return this.vx_p_key == null ? Core.e_string : this.vx_p_key;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_key != null) {
+        output = this.vx_p_key;
+      }
+      return output;
     }
 
     public Repl.Type_repl vx_p_current;
 
     @Override
     public Repl.Type_repl current() {
-      return this.vx_p_current == null ? Repl.e_repl : this.vx_p_current;
+      Repl.Type_repl output = Repl.e_repl;
+      if (this.vx_p_current != null) {
+        output = this.vx_p_current;
+      }
+      return output;
     }
 
     public Repl.Type_repllist vx_p_repllist;
 
     @Override
     public Repl.Type_repllist repllist() {
-      return this.vx_p_repllist == null ? Repl.e_repllist : this.vx_p_repllist;
+      Repl.Type_repllist output = Repl.e_repllist;
+      if (this.vx_p_repllist != null) {
+        output = this.vx_p_repllist;
+      }
+      return output;
     }
 
     @Override

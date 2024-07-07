@@ -29,7 +29,11 @@ public final class Html {
 
     @Override
     public Html.Type_divchildlist nodes() {
-      return this.vx_p_nodes == null ? Html.e_divchildlist : this.vx_p_nodes;
+      Html.Type_divchildlist output = Html.e_divchildlist;
+      if (this.vx_p_nodes != null) {
+        output = this.vx_p_nodes;
+      }
+      return output;
     }
 
     @Override
@@ -220,49 +224,77 @@ public final class Html {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
-      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+      Event.Type_eventmap output = Event.e_eventmap;
+      if (this.vx_p_eventmap != null) {
+        output = this.vx_p_eventmap;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
-      return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style != null) {
+        output = this.vx_p_style;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
-      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style_unique != null) {
+        output = this.vx_p_style_unique;
+      }
+      return output;
     }
 
     public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
-      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
+      Html.Type_stylelist output = Html.e_stylelist;
+      if (this.vx_p_stylelist != null) {
+        output = this.vx_p_stylelist;
+      }
+      return output;
     }
 
     public Html.Type_divchildlist vx_p_summary;
 
     @Override
     public Html.Type_divchildlist summary() {
-      return this.vx_p_summary == null ? Html.e_divchildlist : this.vx_p_summary;
+      Html.Type_divchildlist output = Html.e_divchildlist;
+      if (this.vx_p_summary != null) {
+        output = this.vx_p_summary;
+      }
+      return output;
     }
 
     public Html.Type_divchildlist vx_p_nodes;
 
     @Override
     public Html.Type_divchildlist nodes() {
-      return this.vx_p_nodes == null ? Html.e_divchildlist : this.vx_p_nodes;
+      Html.Type_divchildlist output = Html.e_divchildlist;
+      if (this.vx_p_nodes != null) {
+        output = this.vx_p_nodes;
+      }
+      return output;
     }
 
     @Override
@@ -598,42 +630,66 @@ public final class Html {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
-      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+      Event.Type_eventmap output = Event.e_eventmap;
+      if (this.vx_p_eventmap != null) {
+        output = this.vx_p_eventmap;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
-      return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style != null) {
+        output = this.vx_p_style;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
-      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style_unique != null) {
+        output = this.vx_p_style_unique;
+      }
+      return output;
     }
 
     public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
-      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
+      Html.Type_stylelist output = Html.e_stylelist;
+      if (this.vx_p_stylelist != null) {
+        output = this.vx_p_stylelist;
+      }
+      return output;
     }
 
     public Html.Type_divchildlist vx_p_nodes;
 
     @Override
     public Html.Type_divchildlist nodes() {
-      return this.vx_p_nodes == null ? Html.e_divchildlist : this.vx_p_nodes;
+      Html.Type_divchildlist output = Html.e_divchildlist;
+      if (this.vx_p_nodes != null) {
+        output = this.vx_p_nodes;
+      }
+      return output;
     }
 
     @Override
@@ -1321,7 +1377,11 @@ public final class Html {
 
     @Override
     public Html.Type_divchildlist nodes() {
-      return this.vx_p_nodes == null ? Html.e_divchildlist : this.vx_p_nodes;
+      Html.Type_divchildlist output = Html.e_divchildlist;
+      if (this.vx_p_nodes != null) {
+        output = this.vx_p_nodes;
+      }
+      return output;
     }
 
     @Override
@@ -1511,42 +1571,66 @@ public final class Html {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
-      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+      Event.Type_eventmap output = Event.e_eventmap;
+      if (this.vx_p_eventmap != null) {
+        output = this.vx_p_eventmap;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
-      return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style != null) {
+        output = this.vx_p_style;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
-      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style_unique != null) {
+        output = this.vx_p_style_unique;
+      }
+      return output;
     }
 
     public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
-      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
+      Html.Type_stylelist output = Html.e_stylelist;
+      if (this.vx_p_stylelist != null) {
+        output = this.vx_p_stylelist;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_text;
 
     @Override
     public Core.Type_string text() {
-      return this.vx_p_text == null ? Core.e_string : this.vx_p_text;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_text != null) {
+        output = this.vx_p_text;
+      }
+      return output;
     }
 
     @Override
@@ -1868,42 +1952,66 @@ public final class Html {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
-      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+      Event.Type_eventmap output = Event.e_eventmap;
+      if (this.vx_p_eventmap != null) {
+        output = this.vx_p_eventmap;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
-      return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style != null) {
+        output = this.vx_p_style;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
-      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style_unique != null) {
+        output = this.vx_p_style_unique;
+      }
+      return output;
     }
 
     public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
-      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
+      Html.Type_stylelist output = Html.e_stylelist;
+      if (this.vx_p_stylelist != null) {
+        output = this.vx_p_stylelist;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_text;
 
     @Override
     public Core.Type_string text() {
-      return this.vx_p_text == null ? Core.e_string : this.vx_p_text;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_text != null) {
+        output = this.vx_p_text;
+      }
+      return output;
     }
 
     @Override
@@ -2225,42 +2333,66 @@ public final class Html {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
-      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+      Event.Type_eventmap output = Event.e_eventmap;
+      if (this.vx_p_eventmap != null) {
+        output = this.vx_p_eventmap;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
-      return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style != null) {
+        output = this.vx_p_style;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
-      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style_unique != null) {
+        output = this.vx_p_style_unique;
+      }
+      return output;
     }
 
     public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
-      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
+      Html.Type_stylelist output = Html.e_stylelist;
+      if (this.vx_p_stylelist != null) {
+        output = this.vx_p_stylelist;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_text;
 
     @Override
     public Core.Type_string text() {
-      return this.vx_p_text == null ? Core.e_string : this.vx_p_text;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_text != null) {
+        output = this.vx_p_text;
+      }
+      return output;
     }
 
     @Override
@@ -2577,7 +2709,11 @@ public final class Html {
 
     @Override
     public Html.Type_headchildlist nodes() {
-      return this.vx_p_nodes == null ? Html.e_headchildlist : this.vx_p_nodes;
+      Html.Type_headchildlist output = Html.e_headchildlist;
+      if (this.vx_p_nodes != null) {
+        output = this.vx_p_nodes;
+      }
+      return output;
     }
 
     @Override
@@ -2993,28 +3129,44 @@ public final class Html {
 
     @Override
     public Core.Type_string lang() {
-      return this.vx_p_lang == null ? Core.e_string : this.vx_p_lang;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_lang != null) {
+        output = this.vx_p_lang;
+      }
+      return output;
     }
 
     public Html.Type_head vx_p_head;
 
     @Override
     public Html.Type_head head() {
-      return this.vx_p_head == null ? Html.e_head : this.vx_p_head;
+      Html.Type_head output = Html.e_head;
+      if (this.vx_p_head != null) {
+        output = this.vx_p_head;
+      }
+      return output;
     }
 
     public Html.Type_body vx_p_body;
 
     @Override
     public Html.Type_body body() {
-      return this.vx_p_body == null ? Html.e_body : this.vx_p_body;
+      Html.Type_body output = Html.e_body;
+      if (this.vx_p_body != null) {
+        output = this.vx_p_body;
+      }
+      return output;
     }
 
     public Html.Type_footer vx_p_footer;
 
     @Override
     public Html.Type_footer footer() {
-      return this.vx_p_footer == null ? Html.e_footer : this.vx_p_footer;
+      Html.Type_footer output = Html.e_footer;
+      if (this.vx_p_footer != null) {
+        output = this.vx_p_footer;
+      }
+      return output;
     }
 
     @Override
@@ -3272,42 +3424,66 @@ public final class Html {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
-      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+      Event.Type_eventmap output = Event.e_eventmap;
+      if (this.vx_p_eventmap != null) {
+        output = this.vx_p_eventmap;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
-      return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style != null) {
+        output = this.vx_p_style;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
-      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style_unique != null) {
+        output = this.vx_p_style_unique;
+      }
+      return output;
     }
 
     public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
-      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
+      Html.Type_stylelist output = Html.e_stylelist;
+      if (this.vx_p_stylelist != null) {
+        output = this.vx_p_stylelist;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_src;
 
     @Override
     public Core.Type_string src() {
-      return this.vx_p_src == null ? Core.e_string : this.vx_p_src;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_src != null) {
+        output = this.vx_p_src;
+      }
+      return output;
     }
 
     @Override
@@ -3631,56 +3807,88 @@ public final class Html {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
-      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+      Event.Type_eventmap output = Event.e_eventmap;
+      if (this.vx_p_eventmap != null) {
+        output = this.vx_p_eventmap;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
-      return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style != null) {
+        output = this.vx_p_style;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
-      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style_unique != null) {
+        output = this.vx_p_style_unique;
+      }
+      return output;
     }
 
     public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
-      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
+      Html.Type_stylelist output = Html.e_stylelist;
+      if (this.vx_p_stylelist != null) {
+        output = this.vx_p_stylelist;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_charset;
 
     @Override
     public Core.Type_string charset() {
-      return this.vx_p_charset == null ? Core.e_string : this.vx_p_charset;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_charset != null) {
+        output = this.vx_p_charset;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
-      return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_name != null) {
+        output = this.vx_p_name;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_content;
 
     @Override
     public Core.Type_string content() {
-      return this.vx_p_content == null ? Core.e_string : this.vx_p_content;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_content != null) {
+        output = this.vx_p_content;
+      }
+      return output;
     }
 
     @Override
@@ -4050,35 +4258,55 @@ public final class Html {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
-      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+      Event.Type_eventmap output = Event.e_eventmap;
+      if (this.vx_p_eventmap != null) {
+        output = this.vx_p_eventmap;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
-      return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style != null) {
+        output = this.vx_p_style;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
-      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style_unique != null) {
+        output = this.vx_p_style_unique;
+      }
+      return output;
     }
 
     public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
-      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
+      Html.Type_stylelist output = Html.e_stylelist;
+      if (this.vx_p_stylelist != null) {
+        output = this.vx_p_stylelist;
+      }
+      return output;
     }
 
     @Override
@@ -4504,42 +4732,66 @@ public final class Html {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
-      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+      Event.Type_eventmap output = Event.e_eventmap;
+      if (this.vx_p_eventmap != null) {
+        output = this.vx_p_eventmap;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
-      return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style != null) {
+        output = this.vx_p_style;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
-      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style_unique != null) {
+        output = this.vx_p_style_unique;
+      }
+      return output;
     }
 
     public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
-      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
+      Html.Type_stylelist output = Html.e_stylelist;
+      if (this.vx_p_stylelist != null) {
+        output = this.vx_p_stylelist;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_text;
 
     @Override
     public Core.Type_string text() {
-      return this.vx_p_text == null ? Core.e_string : this.vx_p_text;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_text != null) {
+        output = this.vx_p_text;
+      }
+      return output;
     }
 
     @Override
@@ -4857,7 +5109,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
       return Core.immutablemap(map);
     }
 
@@ -5057,21 +5309,33 @@ public final class Html {
 
     @Override
     public Core.Type_string name() {
-      return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_name != null) {
+        output = this.vx_p_name;
+      }
+      return output;
     }
 
     public Html.Type_propmap vx_p_props;
 
     @Override
     public Html.Type_propmap props() {
-      return this.vx_p_props == null ? Html.e_propmap : this.vx_p_props;
+      Html.Type_propmap output = Html.e_propmap;
+      if (this.vx_p_props != null) {
+        output = this.vx_p_props;
+      }
+      return output;
     }
 
     public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
-      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
+      Html.Type_stylelist output = Html.e_stylelist;
+      if (this.vx_p_stylelist != null) {
+        output = this.vx_p_stylelist;
+      }
+      return output;
     }
 
     @Override
@@ -5441,7 +5705,7 @@ public final class Html {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
       return Core.immutablemap(map);
     }
 
@@ -5646,56 +5910,88 @@ public final class Html {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
-      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+      Event.Type_eventmap output = Event.e_eventmap;
+      if (this.vx_p_eventmap != null) {
+        output = this.vx_p_eventmap;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
-      return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style != null) {
+        output = this.vx_p_style;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
-      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style_unique != null) {
+        output = this.vx_p_style_unique;
+      }
+      return output;
     }
 
     public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
-      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
+      Html.Type_stylelist output = Html.e_stylelist;
+      if (this.vx_p_stylelist != null) {
+        output = this.vx_p_stylelist;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
-      return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_name != null) {
+        output = this.vx_p_name;
+      }
+      return output;
     }
 
     public Html.Type_stylelist vx_p_styles;
 
     @Override
     public Html.Type_stylelist styles() {
-      return this.vx_p_styles == null ? Html.e_stylelist : this.vx_p_styles;
+      Html.Type_stylelist output = Html.e_stylelist;
+      if (this.vx_p_styles != null) {
+        output = this.vx_p_styles;
+      }
+      return output;
     }
 
     public Html.Type_stylemap vx_p_stylemap;
 
     @Override
     public Html.Type_stylemap stylemap() {
-      return this.vx_p_stylemap == null ? Html.e_stylemap : this.vx_p_stylemap;
+      Html.Type_stylemap output = Html.e_stylemap;
+      if (this.vx_p_stylemap != null) {
+        output = this.vx_p_stylemap;
+      }
+      return output;
     }
 
     @Override
@@ -6061,49 +6357,77 @@ public final class Html {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
-      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+      Event.Type_eventmap output = Event.e_eventmap;
+      if (this.vx_p_eventmap != null) {
+        output = this.vx_p_eventmap;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
-      return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style != null) {
+        output = this.vx_p_style;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
-      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style_unique != null) {
+        output = this.vx_p_style_unique;
+      }
+      return output;
     }
 
     public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
-      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
+      Html.Type_stylelist output = Html.e_stylelist;
+      if (this.vx_p_stylelist != null) {
+        output = this.vx_p_stylelist;
+      }
+      return output;
     }
 
     public Html.Type_tbody vx_p_tbody;
 
     @Override
     public Html.Type_tbody tbody() {
-      return this.vx_p_tbody == null ? Html.e_tbody : this.vx_p_tbody;
+      Html.Type_tbody output = Html.e_tbody;
+      if (this.vx_p_tbody != null) {
+        output = this.vx_p_tbody;
+      }
+      return output;
     }
 
     public Html.Type_thead vx_p_thead;
 
     @Override
     public Html.Type_thead thead() {
-      return this.vx_p_thead == null ? Html.e_thead : this.vx_p_thead;
+      Html.Type_thead output = Html.e_thead;
+      if (this.vx_p_thead != null) {
+        output = this.vx_p_thead;
+      }
+      return output;
     }
 
     @Override
@@ -6439,42 +6763,66 @@ public final class Html {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
-      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+      Event.Type_eventmap output = Event.e_eventmap;
+      if (this.vx_p_eventmap != null) {
+        output = this.vx_p_eventmap;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
-      return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style != null) {
+        output = this.vx_p_style;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
-      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style_unique != null) {
+        output = this.vx_p_style_unique;
+      }
+      return output;
     }
 
     public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
-      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
+      Html.Type_stylelist output = Html.e_stylelist;
+      if (this.vx_p_stylelist != null) {
+        output = this.vx_p_stylelist;
+      }
+      return output;
     }
 
     public Html.Type_trlist vx_p_nodes;
 
     @Override
     public Html.Type_trlist nodes() {
-      return this.vx_p_nodes == null ? Html.e_trlist : this.vx_p_nodes;
+      Html.Type_trlist output = Html.e_trlist;
+      if (this.vx_p_nodes != null) {
+        output = this.vx_p_nodes;
+      }
+      return output;
     }
 
     @Override
@@ -6797,42 +7145,66 @@ public final class Html {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
-      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+      Event.Type_eventmap output = Event.e_eventmap;
+      if (this.vx_p_eventmap != null) {
+        output = this.vx_p_eventmap;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
-      return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style != null) {
+        output = this.vx_p_style;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
-      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style_unique != null) {
+        output = this.vx_p_style_unique;
+      }
+      return output;
     }
 
     public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
-      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
+      Html.Type_stylelist output = Html.e_stylelist;
+      if (this.vx_p_stylelist != null) {
+        output = this.vx_p_stylelist;
+      }
+      return output;
     }
 
     public Html.Type_divchildlist vx_p_nodes;
 
     @Override
     public Html.Type_divchildlist nodes() {
-      return this.vx_p_nodes == null ? Html.e_divchildlist : this.vx_p_nodes;
+      Html.Type_divchildlist output = Html.e_divchildlist;
+      if (this.vx_p_nodes != null) {
+        output = this.vx_p_nodes;
+      }
+      return output;
     }
 
     @Override
@@ -7297,42 +7669,66 @@ public final class Html {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
-      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+      Event.Type_eventmap output = Event.e_eventmap;
+      if (this.vx_p_eventmap != null) {
+        output = this.vx_p_eventmap;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
-      return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style != null) {
+        output = this.vx_p_style;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
-      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style_unique != null) {
+        output = this.vx_p_style_unique;
+      }
+      return output;
     }
 
     public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
-      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
+      Html.Type_stylelist output = Html.e_stylelist;
+      if (this.vx_p_stylelist != null) {
+        output = this.vx_p_stylelist;
+      }
+      return output;
     }
 
     public Html.Type_trlist vx_p_nodes;
 
     @Override
     public Html.Type_trlist nodes() {
-      return this.vx_p_nodes == null ? Html.e_trlist : this.vx_p_nodes;
+      Html.Type_trlist output = Html.e_trlist;
+      if (this.vx_p_nodes != null) {
+        output = this.vx_p_nodes;
+      }
+      return output;
     }
 
     @Override
@@ -7655,42 +8051,66 @@ public final class Html {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
-      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+      Event.Type_eventmap output = Event.e_eventmap;
+      if (this.vx_p_eventmap != null) {
+        output = this.vx_p_eventmap;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
-      return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style != null) {
+        output = this.vx_p_style;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
-      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style_unique != null) {
+        output = this.vx_p_style_unique;
+      }
+      return output;
     }
 
     public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
-      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
+      Html.Type_stylelist output = Html.e_stylelist;
+      if (this.vx_p_stylelist != null) {
+        output = this.vx_p_stylelist;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_text;
 
     @Override
     public Core.Type_string text() {
-      return this.vx_p_text == null ? Core.e_string : this.vx_p_text;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_text != null) {
+        output = this.vx_p_text;
+      }
+      return output;
     }
 
     @Override
@@ -8003,42 +8423,66 @@ public final class Html {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Event.Type_eventmap vx_p_eventmap;
 
     @Override
     public Event.Type_eventmap eventmap() {
-      return this.vx_p_eventmap == null ? Event.e_eventmap : this.vx_p_eventmap;
+      Event.Type_eventmap output = Event.e_eventmap;
+      if (this.vx_p_eventmap != null) {
+        output = this.vx_p_eventmap;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style;
 
     @Override
     public Html.Type_style style() {
-      return this.vx_p_style == null ? Html.e_style : this.vx_p_style;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style != null) {
+        output = this.vx_p_style;
+      }
+      return output;
     }
 
     public Html.Type_style vx_p_style_unique;
 
     @Override
     public Html.Type_style style_unique() {
-      return this.vx_p_style_unique == null ? Html.e_style : this.vx_p_style_unique;
+      Html.Type_style output = Html.e_style;
+      if (this.vx_p_style_unique != null) {
+        output = this.vx_p_style_unique;
+      }
+      return output;
     }
 
     public Html.Type_stylelist vx_p_stylelist;
 
     @Override
     public Html.Type_stylelist stylelist() {
-      return this.vx_p_stylelist == null ? Html.e_stylelist : this.vx_p_stylelist;
+      Html.Type_stylelist output = Html.e_stylelist;
+      if (this.vx_p_stylelist != null) {
+        output = this.vx_p_stylelist;
+      }
+      return output;
     }
 
     public Html.Type_tdlist vx_p_nodes;
 
     @Override
     public Html.Type_tdlist nodes() {
-      return this.vx_p_nodes == null ? Html.e_tdlist : this.vx_p_nodes;
+      Html.Type_tdlist output = Html.e_tdlist;
+      if (this.vx_p_nodes != null) {
+        output = this.vx_p_nodes;
+      }
+      return output;
     }
 
     @Override

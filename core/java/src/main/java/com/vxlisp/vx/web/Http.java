@@ -30,14 +30,22 @@ public final class Http {
 
     @Override
     public Core.Type_boolean ok() {
-      return this.vx_p_ok == null ? Core.e_boolean : this.vx_p_ok;
+      Core.Type_boolean output = Core.e_boolean;
+      if (this.vx_p_ok != null) {
+        output = this.vx_p_ok;
+      }
+      return output;
     }
 
     public Core.Type_int vx_p_status;
 
     @Override
     public Core.Type_int status() {
-      return this.vx_p_status == null ? Core.e_int : this.vx_p_status;
+      Core.Type_int output = Core.e_int;
+      if (this.vx_p_status != null) {
+        output = this.vx_p_status;
+      }
+      return output;
     }
 
     @Override

@@ -33,42 +33,66 @@ public final class Xml {
 
     @Override
     public Core.Type_string tag() {
-      return this.vx_p_tag == null ? Core.e_string : this.vx_p_tag;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_tag != null) {
+        output = this.vx_p_tag;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_text;
 
     @Override
     public Core.Type_string text() {
-      return this.vx_p_text == null ? Core.e_string : this.vx_p_text;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_text != null) {
+        output = this.vx_p_text;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_prop;
 
     @Override
     public Core.Type_string prop() {
-      return this.vx_p_prop == null ? Core.e_string : this.vx_p_prop;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_prop != null) {
+        output = this.vx_p_prop;
+      }
+      return output;
     }
 
     public Core.Type_stringmap vx_p_propmap;
 
     @Override
     public Core.Type_stringmap propmap() {
-      return this.vx_p_propmap == null ? Core.e_stringmap : this.vx_p_propmap;
+      Core.Type_stringmap output = Core.e_stringmap;
+      if (this.vx_p_propmap != null) {
+        output = this.vx_p_propmap;
+      }
+      return output;
     }
 
     public Xml.Type_xmllist vx_p_children;
 
     @Override
     public Xml.Type_xmllist children() {
-      return this.vx_p_children == null ? Xml.e_xmllist : this.vx_p_children;
+      Xml.Type_xmllist output = Xml.e_xmllist;
+      if (this.vx_p_children != null) {
+        output = this.vx_p_children;
+      }
+      return output;
     }
 
     public Xml.Type_xml vx_p_parent;
 
     @Override
     public Xml.Type_xml parent() {
-      return this.vx_p_parent == null ? Xml.e_xml : this.vx_p_parent;
+      Xml.Type_xml output = Xml.e_xml;
+      if (this.vx_p_parent != null) {
+        output = this.vx_p_parent;
+      }
+      return output;
     }
 
     @Override
@@ -520,7 +544,7 @@ public final class Xml {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
       return Core.immutablemap(map);
     }
 

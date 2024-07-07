@@ -4842,8 +4842,8 @@
    &quot;vx_core::Type_any val = vstruct-&gt;vx_get_any(key);
     output = vx_core::vx_any_from_any(generic_any_1, val);&quot;
   :csharp
-   &quot;vx_core.Type_any val = vstruct.vx_any(key);
-    output = vx_core.f_any_from_any(generic_any_1, val);&quot;
+   &quot;Vx_core.Type_any val = vstruct.vx_any(key);
+    output = Vx_core.f_any_from_any(generic_any_1, val);&quot;
   :js
    &quot;const subvalmap = vstruct['vx_value']
     if (subvalmap != undefined) {
@@ -4863,8 +4863,8 @@
 (func async : any-1 :async
  [value : any-1]
  (native
-  :csharpt
-   &quot;output = vx_core.vx_async_new_completed(value);&quot;
+  :csharp
+   &quot;output = Vx_core.vx_async_new_completed(value);&quot;
   :java
    &quot;output = Core.vx_async_new_completed(value);&quot;
   :js
@@ -5050,8 +5050,8 @@
   :cpp
    &quot;T* output = vx_core::vx_copy(generic_any_1, value, values-&gt;vx_list());&quot;
   :csharp
-   &quot;vx_core.Type_any[] arrayany = vx_core.arrayany_from_anylist(values);
-    object[] arrayobj = (vx_core.Type_any[])arrayany;
+   &quot;Vx_core.Type_any[] arrayany = Vx_core.arrayany_from_anylist(values);
+    object[] arrayobj = (Vx_core.Type_any[])arrayany;
     T output = (T)(((T)value).vx_copy(arrayobj));&quot;
   :java
    &quot;@SuppressWarnings(“unchecked”)
@@ -5083,7 +5083,7 @@
   :cpp
    &quot;T* output = vx_core::vx_any_from_any(type, type-&gt;vx_empty());&quot;
   :csharp
-   &quot;T output = vx_core.vx_empty(type);&quot;
+   &quot;T output = Vx_core.vx_empty(type);&quot;
   :java
    &quot;T output = Core.vx_empty(type);&quot;
   :js
@@ -5343,9 +5343,9 @@
       try {
         float floatresult = float.Parse(strval);
         intresult = (int)floatresult;
-        return vx_core.vx_new_int(intresult);
+        return Vx_core.vx_new_int(intresult);
       } catch (Exception ex) {
-        return vx_core.c_notanumber;
+        return Vx_core.c_notanumber;
       }&quot;
     :java
      &quot;int intresult = 0;
@@ -5427,7 +5427,7 @@
    &quot;string stext = text.vx_string();
     string sfind = find.vx_string();
     if (stext.EndsWith(sfind)) {
-      output = vx_core.c_true;
+      output = Vx_core.c_true;
     }&quot;
   :js
    &quot;if (text.endsWith(find)) {
@@ -6088,8 +6088,8 @@
   :cpp
    &quot;T* output = vx_core::vx_new(type, values-&gt;vx_list());&quot;
   :csharp
-   &quot;vx_core.Type_any[] arrayany = vx_core.arrayany_from_anylist(values);
-    object[] arrayobj = (vx_core.Type_any[])arrayany;
+   &quot;Vx_core.Type_any[] arrayany = Vx_core.arrayany_from_anylist(values);
+    object[] arrayobj = (Vx_core.Type_any[])arrayany;
     T output = (T)(type.vx_new(arrayobj));&quot;
   :java
    &quot;Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
@@ -16717,8 +16717,8 @@ improves readability.</div>
    &quot;vx_core::Type_any val = vstruct-&gt;vx_get_any(key);
     output = vx_core::vx_any_from_any(generic_any_1, val);&quot;
   :csharp
-   &quot;vx_core.Type_any val = vstruct.vx_any(key);
-    output = vx_core.f_any_from_any(generic_any_1, val);&quot;
+   &quot;Vx_core.Type_any val = vstruct.vx_any(key);
+    output = Vx_core.f_any_from_any(generic_any_1, val);&quot;
   :js
    &quot;const subvalmap = vstruct['vx_value']
     if (subvalmap != undefined) {
@@ -16796,8 +16796,8 @@ improves readability.</div>
                   <div class="source">(func async : any-1 :async
  [value : any-1]
  (native
-  :csharpt
-   &quot;output = vx_core.vx_async_new_completed(value);&quot;
+  :csharp
+   &quot;output = Vx_core.vx_async_new_completed(value);&quot;
   :java
    &quot;output = Core.vx_async_new_completed(value);&quot;
   :js
@@ -17750,8 +17750,8 @@ improves readability.</div>
   :cpp
    &quot;T* output = vx_core::vx_copy(generic_any_1, value, values-&gt;vx_list());&quot;
   :csharp
-   &quot;vx_core.Type_any[] arrayany = vx_core.arrayany_from_anylist(values);
-    object[] arrayobj = (vx_core.Type_any[])arrayany;
+   &quot;Vx_core.Type_any[] arrayany = Vx_core.arrayany_from_anylist(values);
+    object[] arrayobj = (Vx_core.Type_any[])arrayany;
     T output = (T)(((T)value).vx_copy(arrayobj));&quot;
   :java
    &quot;@SuppressWarnings(“unchecked”)
@@ -17903,7 +17903,7 @@ improves readability.</div>
   :cpp
    &quot;T* output = vx_core::vx_any_from_any(type, type-&gt;vx_empty());&quot;
   :csharp
-   &quot;T output = vx_core.vx_empty(type);&quot;
+   &quot;T output = Vx_core.vx_empty(type);&quot;
   :java
    &quot;T output = Core.vx_empty(type);&quot;
   :js
@@ -18983,9 +18983,9 @@ improves readability.</div>
       try {
         float floatresult = float.Parse(strval);
         intresult = (int)floatresult;
-        return vx_core.vx_new_int(intresult);
+        return Vx_core.vx_new_int(intresult);
       } catch (Exception ex) {
-        return vx_core.c_notanumber;
+        return Vx_core.c_notanumber;
       }&quot;
     :java
      &quot;int intresult = 0;
@@ -19250,7 +19250,7 @@ improves readability.</div>
    &quot;string stext = text.vx_string();
     string sfind = find.vx_string();
     if (stext.EndsWith(sfind)) {
-      output = vx_core.c_true;
+      output = Vx_core.c_true;
     }&quot;
   :js
    &quot;if (text.endsWith(find)) {
@@ -22168,8 +22168,8 @@ improves readability.</div>
   :cpp
    &quot;T* output = vx_core::vx_new(type, values-&gt;vx_list());&quot;
   :csharp
-   &quot;vx_core.Type_any[] arrayany = vx_core.arrayany_from_anylist(values);
-    object[] arrayobj = (vx_core.Type_any[])arrayany;
+   &quot;Vx_core.Type_any[] arrayany = Vx_core.arrayany_from_anylist(values);
+    object[] arrayobj = (Vx_core.Type_any[])arrayany;
     T output = (T)(type.vx_new(arrayobj));&quot;
   :java
    &quot;Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
@@ -27620,12 +27620,13 @@ improves readability.</div>
  :doc &quot;Event Handling&quot;)
 
 (type event : struct
- :properties [name               : string
-              from               : string
-              to                 : string
-              datamap            : anymap
-              event&lt;-event       : event&lt;-event
-              event&lt;-event-async : event&lt;-event-async]
+ :properties
+  [name               : string
+   from               : string
+   to                 : string
+   datamap            : anymap
+   event&lt;-event       : event&lt;-event
+   event&lt;-event-async : event&lt;-event-async]
  :doc &quot;Generic Event&quot;)
 
 (type eventlist : list
@@ -27657,22 +27658,22 @@ improves readability.</div>
  :doc &quot;Move Event&quot;)
 
 (func any-from&lt;-event : any-1
- [event : event]
+ [evt : event]
  (let : any-1
-  [value : any := (:from event)]
+  [value : any := (:from evt)]
   (any&lt;-any : any-1
    value))
  :doc &quot;&quot;)
 
 (func event&lt;-event : event
- [event : event]
- event
+ [evt : event]
+ evt
  :context
  :sideeffects &quot;Triggering an event will cause some kind of change&quot;
  :doc &quot;Template for triggering ui events&quot;)
 
 (func event&lt;-event-async : event
- [event : event]
+ [evt : event]
  :async
  :context
  :sideeffects &quot;Triggering an event will cause some kind of change&quot;
@@ -27683,8 +27684,8 @@ improves readability.</div>
  (map&lt;-list : eventmap
   eventlist
   (fn : string
-   [event : event]
-   (:name event)))
+   [evt : event]
+   (:name evt)))
  :doc &quot;Returns an eventmap from an eventlist&quot;)
 </div>
             </li>
@@ -27791,12 +27792,13 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(type event : struct
- :properties [name               : string
-              from               : string
-              to                 : string
-              datamap            : anymap
-              event&lt;-event       : event&lt;-event
-              event&lt;-event-async : event&lt;-event-async]
+ :properties
+  [name               : string
+   from               : string
+   to                 : string
+   datamap            : anymap
+   event&lt;-event       : event&lt;-event
+   event&lt;-event-async : event&lt;-event-async]
  :doc &quot;Generic Event&quot;)</div>
                 </li>
               </ul>
@@ -28104,7 +28106,7 @@ improves readability.</div>
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">event</div>
+                    <div class="td">evt</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/event/event')">vx/event/event</span></div>
                     <div class="td"></div>
                   </div>
@@ -28126,9 +28128,9 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func any-from&lt;-event : any-1
- [event : event]
+ [evt : event]
  (let : any-1
-  [value : any := (:from event)]
+  [value : any := (:from evt)]
   (any&lt;-any : any-1
    value))
  :doc &quot;&quot;)</div>
@@ -28170,7 +28172,7 @@ improves readability.</div>
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">event</div>
+                    <div class="td">evt</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/event/event')">vx/event/event</span></div>
                     <div class="td"></div>
                   </div>
@@ -28192,8 +28194,8 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func event&lt;-event : event
- [event : event]
- event
+ [evt : event]
+ evt
  :context
  :sideeffects &quot;Triggering an event will cause some kind of change&quot;
  :doc &quot;Template for triggering ui events&quot;)</div>
@@ -28235,7 +28237,7 @@ improves readability.</div>
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">event</div>
+                    <div class="td">evt</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/event/event')">vx/event/event</span></div>
                     <div class="td"></div>
                   </div>
@@ -28257,7 +28259,7 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func event&lt;-event-async : event
- [event : event]
+ [evt : event]
  :async
  :context
  :sideeffects &quot;Triggering an event will cause some kind of change&quot;
@@ -28326,8 +28328,8 @@ improves readability.</div>
  (map&lt;-list : eventmap
   eventlist
   (fn : string
-   [event : event]
-   (:name event)))
+   [evt : event]
+   (:name evt)))
  :doc &quot;Returns an eventmap from an eventlist&quot;)</div>
                 </li>
               </ul>

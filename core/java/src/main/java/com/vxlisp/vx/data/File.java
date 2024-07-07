@@ -50,35 +50,55 @@ public final class File {
 
     @Override
     public Core.Type_string name() {
-      return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_name != null) {
+        output = this.vx_p_name;
+      }
+      return output;
     }
 
     public File.Type_fileformat vx_p_format;
 
     @Override
     public File.Type_fileformat format() {
-      return this.vx_p_format == null ? File.e_fileformat : this.vx_p_format;
+      File.Type_fileformat output = File.e_fileformat;
+      if (this.vx_p_format != null) {
+        output = this.vx_p_format;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_path;
 
     @Override
     public Core.Type_string path() {
-      return this.vx_p_path == null ? Core.e_string : this.vx_p_path;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_path != null) {
+        output = this.vx_p_path;
+      }
+      return output;
     }
 
     public Core.Type_permission vx_p_permission;
 
     @Override
     public Core.Type_permission permission() {
-      return this.vx_p_permission == null ? Core.e_permission : this.vx_p_permission;
+      Core.Type_permission output = Core.e_permission;
+      if (this.vx_p_permission != null) {
+        output = this.vx_p_permission;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_text;
 
     @Override
     public Core.Type_string text() {
-      return this.vx_p_text == null ? Core.e_string : this.vx_p_text;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_text != null) {
+        output = this.vx_p_text;
+      }
+      return output;
     }
 
     @Override

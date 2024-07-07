@@ -27,14 +27,22 @@ public final class Sample {
 
     @Override
     public Core.Type_int mynum() {
-      return this.vx_p_mynum == null ? Core.e_int : this.vx_p_mynum;
+      Core.Type_int output = Core.e_int;
+      if (this.vx_p_mynum != null) {
+        output = this.vx_p_mynum;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_mystr;
 
     @Override
     public Core.Type_string mystr() {
-      return this.vx_p_mystr == null ? Core.e_string : this.vx_p_mystr;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_mystr != null) {
+        output = this.vx_p_mystr;
+      }
+      return output;
     }
 
     @Override

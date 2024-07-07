@@ -33,28 +33,44 @@ public final class Test {
 
     @Override
     public Core.Type_boolean passfail() {
-      return this.vx_p_passfail == null ? Core.e_boolean : this.vx_p_passfail;
+      Core.Type_boolean output = Core.e_boolean;
+      if (this.vx_p_passfail != null) {
+        output = this.vx_p_passfail;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_testpkg;
 
     @Override
     public Core.Type_string testpkg() {
-      return this.vx_p_testpkg == null ? Core.e_string : this.vx_p_testpkg;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_testpkg != null) {
+        output = this.vx_p_testpkg;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_casename;
 
     @Override
     public Core.Type_string casename() {
-      return this.vx_p_casename == null ? Core.e_string : this.vx_p_casename;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_casename != null) {
+        output = this.vx_p_casename;
+      }
+      return output;
     }
 
     public Test.Type_testdescribelist vx_p_describelist;
 
     @Override
     public Test.Type_testdescribelist describelist() {
-      return this.vx_p_describelist == null ? Test.e_testdescribelist : this.vx_p_describelist;
+      Test.Type_testdescribelist output = Test.e_testdescribelist;
+      if (this.vx_p_describelist != null) {
+        output = this.vx_p_describelist;
+      }
+      return output;
     }
 
     @Override
@@ -458,28 +474,44 @@ public final class Test {
 
     @Override
     public Core.Type_intmap constmap() {
-      return this.vx_p_constmap == null ? Core.e_intmap : this.vx_p_constmap;
+      Core.Type_intmap output = Core.e_intmap;
+      if (this.vx_p_constmap != null) {
+        output = this.vx_p_constmap;
+      }
+      return output;
     }
 
     public Core.Type_intmap vx_p_funcmap;
 
     @Override
     public Core.Type_intmap funcmap() {
-      return this.vx_p_funcmap == null ? Core.e_intmap : this.vx_p_funcmap;
+      Core.Type_intmap output = Core.e_intmap;
+      if (this.vx_p_funcmap != null) {
+        output = this.vx_p_funcmap;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_testpkg;
 
     @Override
     public Core.Type_string testpkg() {
-      return this.vx_p_testpkg == null ? Core.e_string : this.vx_p_testpkg;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_testpkg != null) {
+        output = this.vx_p_testpkg;
+      }
+      return output;
     }
 
     public Core.Type_intmap vx_p_typemap;
 
     @Override
     public Core.Type_intmap typemap() {
-      return this.vx_p_typemap == null ? Core.e_intmap : this.vx_p_typemap;
+      Core.Type_intmap output = Core.e_intmap;
+      if (this.vx_p_typemap != null) {
+        output = this.vx_p_typemap;
+      }
+      return output;
     }
 
     @Override
@@ -735,28 +767,44 @@ public final class Test {
 
     @Override
     public Core.Type_int pct() {
-      return this.vx_p_pct == null ? Core.e_int : this.vx_p_pct;
+      Core.Type_int output = Core.e_int;
+      if (this.vx_p_pct != null) {
+        output = this.vx_p_pct;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_testpkg;
 
     @Override
     public Core.Type_string testpkg() {
-      return this.vx_p_testpkg == null ? Core.e_string : this.vx_p_testpkg;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_testpkg != null) {
+        output = this.vx_p_testpkg;
+      }
+      return output;
     }
 
     public Core.Type_int vx_p_tests;
 
     @Override
     public Core.Type_int tests() {
-      return this.vx_p_tests == null ? Core.e_int : this.vx_p_tests;
+      Core.Type_int output = Core.e_int;
+      if (this.vx_p_tests != null) {
+        output = this.vx_p_tests;
+      }
+      return output;
     }
 
     public Core.Type_int vx_p_total;
 
     @Override
     public Core.Type_int total() {
-      return this.vx_p_total == null ? Core.e_int : this.vx_p_total;
+      Core.Type_int output = Core.e_int;
+      if (this.vx_p_total != null) {
+        output = this.vx_p_total;
+      }
+      return output;
     }
 
     @Override
@@ -1025,56 +1073,88 @@ public final class Test {
 
     @Override
     public Test.Type_testcoveragenums bigospacenums() {
-      return this.vx_p_bigospacenums == null ? Test.e_testcoveragenums : this.vx_p_bigospacenums;
+      Test.Type_testcoveragenums output = Test.e_testcoveragenums;
+      if (this.vx_p_bigospacenums != null) {
+        output = this.vx_p_bigospacenums;
+      }
+      return output;
     }
 
     public Test.Type_testcoveragenums vx_p_bigotimenums;
 
     @Override
     public Test.Type_testcoveragenums bigotimenums() {
-      return this.vx_p_bigotimenums == null ? Test.e_testcoveragenums : this.vx_p_bigotimenums;
+      Test.Type_testcoveragenums output = Test.e_testcoveragenums;
+      if (this.vx_p_bigotimenums != null) {
+        output = this.vx_p_bigotimenums;
+      }
+      return output;
     }
 
     public Test.Type_testcoveragenums vx_p_constnums;
 
     @Override
     public Test.Type_testcoveragenums constnums() {
-      return this.vx_p_constnums == null ? Test.e_testcoveragenums : this.vx_p_constnums;
+      Test.Type_testcoveragenums output = Test.e_testcoveragenums;
+      if (this.vx_p_constnums != null) {
+        output = this.vx_p_constnums;
+      }
+      return output;
     }
 
     public Test.Type_testcoveragenums vx_p_docnums;
 
     @Override
     public Test.Type_testcoveragenums docnums() {
-      return this.vx_p_docnums == null ? Test.e_testcoveragenums : this.vx_p_docnums;
+      Test.Type_testcoveragenums output = Test.e_testcoveragenums;
+      if (this.vx_p_docnums != null) {
+        output = this.vx_p_docnums;
+      }
+      return output;
     }
 
     public Test.Type_testcoveragenums vx_p_funcnums;
 
     @Override
     public Test.Type_testcoveragenums funcnums() {
-      return this.vx_p_funcnums == null ? Test.e_testcoveragenums : this.vx_p_funcnums;
+      Test.Type_testcoveragenums output = Test.e_testcoveragenums;
+      if (this.vx_p_funcnums != null) {
+        output = this.vx_p_funcnums;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_testpkg;
 
     @Override
     public Core.Type_string testpkg() {
-      return this.vx_p_testpkg == null ? Core.e_string : this.vx_p_testpkg;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_testpkg != null) {
+        output = this.vx_p_testpkg;
+      }
+      return output;
     }
 
     public Test.Type_testcoveragenums vx_p_totalnums;
 
     @Override
     public Test.Type_testcoveragenums totalnums() {
-      return this.vx_p_totalnums == null ? Test.e_testcoveragenums : this.vx_p_totalnums;
+      Test.Type_testcoveragenums output = Test.e_testcoveragenums;
+      if (this.vx_p_totalnums != null) {
+        output = this.vx_p_totalnums;
+      }
+      return output;
     }
 
     public Test.Type_testcoveragenums vx_p_typenums;
 
     @Override
     public Test.Type_testcoveragenums typenums() {
-      return this.vx_p_typenums == null ? Test.e_testcoveragenums : this.vx_p_typenums;
+      Test.Type_testcoveragenums output = Test.e_testcoveragenums;
+      if (this.vx_p_typenums != null) {
+        output = this.vx_p_typenums;
+      }
+      return output;
     }
 
     @Override
@@ -1433,21 +1513,33 @@ public final class Test {
 
     @Override
     public Core.Type_string describename() {
-      return this.vx_p_describename == null ? Core.e_string : this.vx_p_describename;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_describename != null) {
+        output = this.vx_p_describename;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_testpkg;
 
     @Override
     public Core.Type_string testpkg() {
-      return this.vx_p_testpkg == null ? Core.e_string : this.vx_p_testpkg;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_testpkg != null) {
+        output = this.vx_p_testpkg;
+      }
+      return output;
     }
 
     public Test.Type_testresult vx_p_testresult;
 
     @Override
     public Test.Type_testresult testresult() {
-      return this.vx_p_testresult == null ? Test.e_testresult : this.vx_p_testresult;
+      Test.Type_testresult output = Test.e_testresult;
+      if (this.vx_p_testresult != null) {
+        output = this.vx_p_testresult;
+      }
+      return output;
     }
 
     @Override
@@ -1823,35 +1915,55 @@ public final class Test {
 
     @Override
     public Test.Type_testcaselist caselist() {
-      return this.vx_p_caselist == null ? Test.e_testcaselist : this.vx_p_caselist;
+      Test.Type_testcaselist output = Test.e_testcaselist;
+      if (this.vx_p_caselist != null) {
+        output = this.vx_p_caselist;
+      }
+      return output;
     }
 
     public Test.Type_testcoveragedetail vx_p_coveragedetail;
 
     @Override
     public Test.Type_testcoveragedetail coveragedetail() {
-      return this.vx_p_coveragedetail == null ? Test.e_testcoveragedetail : this.vx_p_coveragedetail;
+      Test.Type_testcoveragedetail output = Test.e_testcoveragedetail;
+      if (this.vx_p_coveragedetail != null) {
+        output = this.vx_p_coveragedetail;
+      }
+      return output;
     }
 
     public Test.Type_testcoveragesummary vx_p_coveragesummary;
 
     @Override
     public Test.Type_testcoveragesummary coveragesummary() {
-      return this.vx_p_coveragesummary == null ? Test.e_testcoveragesummary : this.vx_p_coveragesummary;
+      Test.Type_testcoveragesummary output = Test.e_testcoveragesummary;
+      if (this.vx_p_coveragesummary != null) {
+        output = this.vx_p_coveragesummary;
+      }
+      return output;
     }
 
     public Core.Type_boolean vx_p_passfail;
 
     @Override
     public Core.Type_boolean passfail() {
-      return this.vx_p_passfail == null ? Core.e_boolean : this.vx_p_passfail;
+      Core.Type_boolean output = Core.e_boolean;
+      if (this.vx_p_passfail != null) {
+        output = this.vx_p_passfail;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_testpkg;
 
     @Override
     public Core.Type_string testpkg() {
-      return this.vx_p_testpkg == null ? Core.e_string : this.vx_p_testpkg;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_testpkg != null) {
+        output = this.vx_p_testpkg;
+      }
+      return output;
     }
 
     @Override
@@ -2279,35 +2391,55 @@ public final class Test {
 
     @Override
     public Core.Type_string code() {
-      return this.vx_p_code == null ? Core.e_string : this.vx_p_code;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_code != null) {
+        output = this.vx_p_code;
+      }
+      return output;
     }
 
     public Core.Type_boolean vx_p_passfail;
 
     @Override
     public Core.Type_boolean passfail() {
-      return this.vx_p_passfail == null ? Core.e_boolean : this.vx_p_passfail;
+      Core.Type_boolean output = Core.e_boolean;
+      if (this.vx_p_passfail != null) {
+        output = this.vx_p_passfail;
+      }
+      return output;
     }
 
     public Core.Type_any vx_p_expected;
 
     @Override
     public Core.Type_any expected() {
-      return this.vx_p_expected == null ? Core.e_any : this.vx_p_expected;
+      Core.Type_any output = Core.e_any;
+      if (this.vx_p_expected != null) {
+        output = this.vx_p_expected;
+      }
+      return output;
     }
 
     public Core.Type_any vx_p_actual;
 
     @Override
     public Core.Type_any actual() {
-      return this.vx_p_actual == null ? Core.e_any : this.vx_p_actual;
+      Core.Type_any output = Core.e_any;
+      if (this.vx_p_actual != null) {
+        output = this.vx_p_actual;
+      }
+      return output;
     }
 
     public Core.Func_any_from_func_async vx_p_fn_actual;
 
     @Override
     public Core.Func_any_from_func_async fn_actual() {
-      return this.vx_p_fn_actual == null ? Core.e_any_from_func_async : this.vx_p_fn_actual;
+      Core.Func_any_from_func_async output = Core.e_any_from_func_async;
+      if (this.vx_p_fn_actual != null) {
+        output = this.vx_p_fn_actual;
+      }
+      return output;
     }
 
     @Override

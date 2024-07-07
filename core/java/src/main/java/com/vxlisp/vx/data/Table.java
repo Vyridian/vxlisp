@@ -29,14 +29,22 @@ public final class Table {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Core.Type_any vx_p_value;
 
     @Override
     public Core.Type_any value() {
-      return this.vx_p_value == null ? Core.e_any : this.vx_p_value;
+      Core.Type_any output = Core.e_any;
+      if (this.vx_p_value != null) {
+        output = this.vx_p_value;
+      }
+      return output;
     }
 
     @Override
@@ -378,7 +386,7 @@ public final class Table {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
       return Core.immutablemap(map);
     }
 
@@ -577,21 +585,33 @@ public final class Table {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
-      return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_name != null) {
+        output = this.vx_p_name;
+      }
+      return output;
     }
 
     public Core.Type_any vx_p_fldtype;
 
     @Override
     public Core.Type_any fldtype() {
-      return this.vx_p_fldtype == null ? Core.e_any : this.vx_p_fldtype;
+      Core.Type_any output = Core.e_any;
+      if (this.vx_p_fldtype != null) {
+        output = this.vx_p_fldtype;
+      }
+      return output;
     }
 
     @Override
@@ -1104,21 +1124,33 @@ public final class Table {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
-      return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_name != null) {
+        output = this.vx_p_name;
+      }
+      return output;
     }
 
     public Core.Type_stringlist vx_p_idlist;
 
     @Override
     public Core.Type_stringlist idlist() {
-      return this.vx_p_idlist == null ? Core.e_stringlist : this.vx_p_idlist;
+      Core.Type_stringlist output = Core.e_stringlist;
+      if (this.vx_p_idlist != null) {
+        output = this.vx_p_idlist;
+      }
+      return output;
     }
 
     @Override
@@ -1349,21 +1381,33 @@ public final class Table {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Table.Type_cellmap vx_p_cellmap;
 
     @Override
     public Table.Type_cellmap cellmap() {
-      return this.vx_p_cellmap == null ? Table.e_cellmap : this.vx_p_cellmap;
+      Table.Type_cellmap output = Table.e_cellmap;
+      if (this.vx_p_cellmap != null) {
+        output = this.vx_p_cellmap;
+      }
+      return output;
     }
 
     public Table.Type_sort vx_p_cellsort;
 
     @Override
     public Table.Type_sort cellsort() {
-      return this.vx_p_cellsort == null ? Table.e_sort : this.vx_p_cellsort;
+      Table.Type_sort output = Table.e_sort;
+      if (this.vx_p_cellsort != null) {
+        output = this.vx_p_cellsort;
+      }
+      return output;
     }
 
     @Override
@@ -1731,7 +1775,7 @@ public final class Table {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
       return Core.immutablemap(map);
     }
 
@@ -1930,21 +1974,33 @@ public final class Table {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
-      return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_name != null) {
+        output = this.vx_p_name;
+      }
+      return output;
     }
 
     public Core.Type_stringlist vx_p_idlist;
 
     @Override
     public Core.Type_stringlist idlist() {
-      return this.vx_p_idlist == null ? Core.e_stringlist : this.vx_p_idlist;
+      Core.Type_stringlist output = Core.e_stringlist;
+      if (this.vx_p_idlist != null) {
+        output = this.vx_p_idlist;
+      }
+      return output;
     }
 
     @Override
@@ -2179,49 +2235,77 @@ public final class Table {
 
     @Override
     public Core.Type_string id() {
-      return this.vx_p_id == null ? Core.e_string : this.vx_p_id;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_id != null) {
+        output = this.vx_p_id;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_name;
 
     @Override
     public Core.Type_string name() {
-      return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_name != null) {
+        output = this.vx_p_name;
+      }
+      return output;
     }
 
     public Table.Type_fieldmap vx_p_fieldmap;
 
     @Override
     public Table.Type_fieldmap fieldmap() {
-      return this.vx_p_fieldmap == null ? Table.e_fieldmap : this.vx_p_fieldmap;
+      Table.Type_fieldmap output = Table.e_fieldmap;
+      if (this.vx_p_fieldmap != null) {
+        output = this.vx_p_fieldmap;
+      }
+      return output;
     }
 
     public Table.Type_sort vx_p_fieldsort;
 
     @Override
     public Table.Type_sort fieldsort() {
-      return this.vx_p_fieldsort == null ? Table.e_sort : this.vx_p_fieldsort;
+      Table.Type_sort output = Table.e_sort;
+      if (this.vx_p_fieldsort != null) {
+        output = this.vx_p_fieldsort;
+      }
+      return output;
     }
 
     public Table.Type_rowmap vx_p_rowmap;
 
     @Override
     public Table.Type_rowmap rowmap() {
-      return this.vx_p_rowmap == null ? Table.e_rowmap : this.vx_p_rowmap;
+      Table.Type_rowmap output = Table.e_rowmap;
+      if (this.vx_p_rowmap != null) {
+        output = this.vx_p_rowmap;
+      }
+      return output;
     }
 
     public Table.Type_filter vx_p_rowfilter;
 
     @Override
     public Table.Type_filter rowfilter() {
-      return this.vx_p_rowfilter == null ? Table.e_filter : this.vx_p_rowfilter;
+      Table.Type_filter output = Table.e_filter;
+      if (this.vx_p_rowfilter != null) {
+        output = this.vx_p_rowfilter;
+      }
+      return output;
     }
 
     public Table.Type_sort vx_p_rowsort;
 
     @Override
     public Table.Type_sort rowsort() {
-      return this.vx_p_rowsort == null ? Table.e_sort : this.vx_p_rowsort;
+      Table.Type_sort output = Table.e_sort;
+      if (this.vx_p_rowsort != null) {
+        output = this.vx_p_rowsort;
+      }
+      return output;
     }
 
     @Override

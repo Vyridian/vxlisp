@@ -1,37 +1,45 @@
-namespace vx;
+namespace Vx;
 
-public static class vx_sample {
+public static class Vx_sample {
 
 
   /**
    * type: mytype
    * (type mytype)
    */
-  public interface Type_mytype : vx_core.Type_struct {
-    public vx_core.Type_any vx_new(params Object[] vals);
-    public vx_core.Type_any vx_copy(params Object[] vals);
-    public vx_core.Type_any vx_empty();
-    public vx_core.Type_any vx_type();
-    public vx_core.Type_int mynum();
-    public vx_core.Type_string mystr();
+  public interface Type_mytype : Vx_core.Type_struct {
+    public Vx_core.Type_any vx_new(params Object[] vals);
+    public Vx_core.Type_any vx_copy(params Object[] vals);
+    public Vx_core.Type_any vx_empty();
+    public Vx_core.Type_any vx_type();
+    public Vx_core.Type_int mynum();
+    public Vx_core.Type_string mystr();
   }
 
-  public class Class_mytype : vx_core.Class_base, Type_mytype {
+  public class Class_mytype : Vx_core.Class_base, Type_mytype {
 
-    public vx_core.Type_int vx_p_mynum;
+    public Vx_core.Type_int vx_p_mynum;
 
-    public vx_core.Type_int mynum() {
-      return this.vx_p_mynum == null ? vx_core.e_int : this.vx_p_mynum;
+    public Vx_core.Type_int mynum() {
+      Vx_core.Type_int output = Vx_core.e_int;
+      if (this.vx_p_mynum != null) {
+        output = this.vx_p_mynum;
+      }
+      return output;
     }
 
-    public vx_core.Type_string vx_p_mystr;
+    public Vx_core.Type_string vx_p_mystr;
 
-    public vx_core.Type_string mystr() {
-      return this.vx_p_mystr == null ? vx_core.e_string : this.vx_p_mystr;
+    public Vx_core.Type_string mystr() {
+      Vx_core.Type_string output = Vx_core.e_string;
+      if (this.vx_p_mystr != null) {
+        output = this.vx_p_mystr;
+      }
+      return output;
     }
 
-    public vx_core.Type_any vx_any(vx_core.Type_string key) {
-      vx_core.Type_any output = vx_core.e_any;
+    public Vx_core.Type_any vx_any(Vx_core.Type_string key) {
+      Vx_core.Type_any output = Vx_core.e_any;
       string skey = key.vx_string();
       switch (skey) {
       case ":mynum":
@@ -44,58 +52,58 @@ public static class vx_sample {
       return output;
     }
 
-    public vx_core.Map<string, vx_core.Type_any> vx_map() {
-      vx_core.Map<string, vx_core.Type_any> output = new vx_core.LinkedHashMap<string, vx_core.Type_any>();
+    public Vx_core.Map<string, Vx_core.Type_any> vx_map() {
+      Vx_core.Map<string, Vx_core.Type_any> output = new Vx_core.LinkedHashMap<string, Vx_core.Type_any>();
       output.put(":mynum", this.mynum());
       output.put(":mystr", this.mystr());
-      return vx_core.immutablemap(output);
+      return Vx_core.immutablemap(output);
     }
 
-    public override vx_sample.Type_mytype vx_new(params Object[] vals) {
-      return vx_core.vx_copy(
+    public override Vx_sample.Type_mytype vx_new(params Object[] vals) {
+      return Vx_core.vx_copy(
        e_mytype,
        vals);
     }
 
-    public override vx_sample.Type_mytype vx_copy(params Object[] vals) {
+    public override Vx_sample.Type_mytype vx_copy(params Object[] vals) {
       Type_mytype output = this;
       bool ischanged = false;
       Class_mytype val = this;
-      vx_core.Type_msgblock msgblock = vx_core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is vx_core.vx_Type_const) {
+      Vx_core.Type_msgblock msgblock = Vx_core.vx_msgblock_from_copy_arrayval(val, vals);
+      if (this is Vx_core.vx_Type_const) {
         ischanged = true;
       }
-      vx_core.Type_int vx_p_mynum = val.mynum();
-      vx_core.Type_string vx_p_mystr = val.mystr();
+      Vx_core.Type_int vx_p_mynum = val.mynum();
+      Vx_core.Type_string vx_p_mystr = val.mystr();
       List<string> validkeys = new List<string>();
       validkeys.Add(":mynum");
       validkeys.Add(":mystr");
       string key = "";
-      vx_core.Type_msg msg;
-      vx_core.Type_any msgval;
+      Vx_core.Type_msg msg;
+      Vx_core.Type_any msgval;
       foreach (Object valsub in vals) {
-        if (valsub is vx_core.Type_msgblock) {
-          msgblock = vx_core.vx_copy(msgblock, valsub);
-        } else if (valsub is vx_core.Type_msg) {
-          msgblock = vx_core.vx_copy(msgblock, valsub);
+        if (valsub is Vx_core.Type_msgblock) {
+          msgblock = Vx_core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx_core.Type_msg) {
+          msgblock = Vx_core.vx_copy(msgblock, valsub);
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is vx_core.Type_string) {
-            vx_core.Type_string valstr = (vx_core.Type_string)valsub;
+          if (valsub is Vx_core.Type_string) {
+            Vx_core.Type_string valstr = (Vx_core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub is string) {
             testkey = (String)valsub;
             istestkey = true;
           } else {
-            if (valsub is vx_core.Type_any) {
-              msgval = (vx_core.Type_any)valsub;
+            if (valsub is Vx_core.Type_any) {
+              msgval = (Vx_core.Type_any)valsub;
             } else {
-              msgval = vx_core.vx_new_string(valsub.ToString());
+              msgval = Vx_core.vx_new_string(valsub.ToString());
             }
-            msg = vx_core.vx_msg_from_error("vx/sample/mytype", ":invalidkeytype", msgval);
-            msgblock = vx_core.vx_copy(msgblock, msg);
+            msg = Vx_core.vx_msg_from_error("vx/sample/mytype", ":invalidkeytype", msgval);
+            msgblock = Vx_core.vx_copy(msgblock, msg);
           }
           if (istestkey) {
             if (!testkey.StartsWith(":")) {
@@ -105,71 +113,71 @@ public static class vx_sample {
             if (isvalidkey) {
               key = testkey;
             } else {
-              msgval = vx_core.vx_new_string(testkey);
-              msg = vx_core.vx_msg_from_error("vx/sample/mytype", ":invalidkey", msgval);
-              msgblock = vx_core.vx_copy(msgblock, msg);
+              msgval = Vx_core.vx_new_string(testkey);
+              msg = Vx_core.vx_msg_from_error("vx/sample/mytype", ":invalidkey", msgval);
+              msgblock = Vx_core.vx_copy(msgblock, msg);
             }
           }
         } else {
           switch (key) {
           case ":mynum":
             if (valsub == vx_p_mynum) {
-            } else if (valsub is vx_core.Type_int) {
+            } else if (valsub is Vx_core.Type_int) {
               ischanged = true;
-              vx_p_mynum = (vx_core.Type_int)valsub;
+              vx_p_mynum = (Vx_core.Type_int)valsub;
             } else if (valsub is int) {
               ischanged = true;
-              vx_p_mynum = vx_core.vx_new(vx_core.t_int, valsub);
+              vx_p_mynum = Vx_core.vx_new(Vx_core.t_int, valsub);
             } else {
-              if (valsub is vx_core.Type_any) {
-                msgval = (vx_core.Type_any)valsub;
+              if (valsub is Vx_core.Type_any) {
+                msgval = (Vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.ToString());
+                msgval = Vx_core.vx_new_string(valsub.ToString());
               }
-              vx_core.Map<string, vx_core.Type_any> mapany = new vx_core.LinkedHashMap<string, vx_core.Type_any>();
-              mapany.put("key", vx_core.vx_new_string("mynum"));
+              Vx_core.Map<string, Vx_core.Type_any> mapany = new Vx_core.LinkedHashMap<string, Vx_core.Type_any>();
+              mapany.put("key", Vx_core.vx_new_string("mynum"));
               mapany.put("value", msgval);
-              vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
-              msg = vx_core.vx_msg_from_error("vx/sample/mytype", ":invalidvalue", msgmap);
-              msgblock = vx_core.vx_copy(msgblock, msg);
+              Vx_core.Type_map msgmap = Vx_core.t_anymap.vx_new_from_map(mapany);
+              msg = Vx_core.vx_msg_from_error("vx/sample/mytype", ":invalidvalue", msgmap);
+              msgblock = Vx_core.vx_copy(msgblock, msg);
             }
             break;
           case ":mystr":
             if (valsub == vx_p_mystr) {
-            } else if (valsub is vx_core.Type_string) {
+            } else if (valsub is Vx_core.Type_string) {
               ischanged = true;
-              vx_p_mystr = (vx_core.Type_string)valsub;
+              vx_p_mystr = (Vx_core.Type_string)valsub;
             } else if (valsub is string) {
               ischanged = true;
-              vx_p_mystr = vx_core.vx_new(vx_core.t_string, valsub);
+              vx_p_mystr = Vx_core.vx_new(Vx_core.t_string, valsub);
             } else {
-              if (valsub is vx_core.Type_any) {
-                msgval = (vx_core.Type_any)valsub;
+              if (valsub is Vx_core.Type_any) {
+                msgval = (Vx_core.Type_any)valsub;
               } else {
-                msgval = vx_core.vx_new_string(valsub.ToString());
+                msgval = Vx_core.vx_new_string(valsub.ToString());
               }
-              vx_core.Map<string, vx_core.Type_any> mapany = new vx_core.LinkedHashMap<string, vx_core.Type_any>();
-              mapany.put("key", vx_core.vx_new_string("mystr"));
+              Vx_core.Map<string, Vx_core.Type_any> mapany = new Vx_core.LinkedHashMap<string, Vx_core.Type_any>();
+              mapany.put("key", Vx_core.vx_new_string("mystr"));
               mapany.put("value", msgval);
-              vx_core.Type_map msgmap = vx_core.t_anymap.vx_new_from_map(mapany);
-              msg = vx_core.vx_msg_from_error("vx/sample/mytype", ":invalidvalue", msgmap);
-              msgblock = vx_core.vx_copy(msgblock, msg);
+              Vx_core.Type_map msgmap = Vx_core.t_anymap.vx_new_from_map(mapany);
+              msg = Vx_core.vx_msg_from_error("vx/sample/mytype", ":invalidvalue", msgmap);
+              msgblock = Vx_core.vx_copy(msgblock, msg);
             }
             break;
           default:
-            msgval = vx_core.vx_new_string(key);
-            msg = vx_core.vx_msg_from_error("vx/sample/mytype", ":invalidkey", msgval);
-            msgblock = vx_core.vx_copy(msgblock, msg);
+            msgval = Vx_core.vx_new_string(key);
+            msg = Vx_core.vx_msg_from_error("vx/sample/mytype", ":invalidkey", msgval);
+            msgblock = Vx_core.vx_copy(msgblock, msg);
             break;
           }
           key = "";
         }
       }
-      if (ischanged || (msgblock != vx_core.e_msgblock)) {
+      if (ischanged || (msgblock != Vx_core.e_msgblock)) {
         Class_mytype work = new Class_mytype();
         work.vx_p_mynum = vx_p_mynum;
         work.vx_p_mystr = vx_p_mystr;
-        if (msgblock != vx_core.e_msgblock) {
+        if (msgblock != Vx_core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
         output = work;
@@ -177,26 +185,26 @@ public static class vx_sample {
       return output;
     }
 
-    public override vx_core.Type_any vx_empty() {
+    public override Vx_core.Type_any vx_empty() {
       return e_mytype;
     }
-    public override vx_core.Type_any vx_type() {
+    public override Vx_core.Type_any vx_type() {
       return t_mytype;
     }
 
-    public override vx_core.Type_typedef vx_typedef() {
-      return vx_core.typedef_new(
+    public override Vx_core.Type_typedef vx_typedef() {
+      return Vx_core.typedef_new(
         "vx/sample", // pkgname
         "mytype", // name
         ":struct", // extends
-        vx_core.e_typelist, // traits
-        vx_core.e_typelist, // allowtypes
-        vx_core.e_typelist, // disallowtypes
-        vx_core.e_funclist, // allowfuncs
-        vx_core.e_funclist, // disallowfuncs
-        vx_core.e_anylist, // allowvalues
-        vx_core.e_anylist, // disallowvalues
-        vx_core.e_argmap // properties
+        Vx_core.e_typelist, // traits
+        Vx_core.e_typelist, // allowtypes
+        Vx_core.e_typelist, // disallowtypes
+        Vx_core.e_funclist, // allowfuncs
+        Vx_core.e_funclist, // disallowfuncs
+        Vx_core.e_anylist, // allowvalues
+        Vx_core.e_anylist, // disallowvalues
+        Vx_core.e_argmap // properties
       );
     }
 
@@ -210,24 +218,24 @@ public static class vx_sample {
    * My Constant
    * {int}
    */
-  public class Const_myconst : vx_core.Class_int, vx_core.vx_Type_const {
+  public class Const_myconst : Vx_core.Class_int, Vx_core.vx_Type_const {
     
-    public vx_core.Type_constdef vx_constdef() {
-      return vx_core.constdef_new(
+    public Vx_core.Type_constdef vx_constdef() {
+      return Vx_core.constdef_new(
         "vx/sample", // pkgname
         "myconst", // name
-        vx_core.typedef_new(
+        Vx_core.typedef_new(
           "vx/core", // pkgname
           "int", // name
           "", // extends
-          vx_core.vx_new(vx_core.t_typelist, vx_core.t_number), // traits
-          vx_core.e_typelist, // allowtypes
-          vx_core.e_typelist, // disallowtypes
-          vx_core.e_funclist, // allowfuncs
-          vx_core.e_funclist, // disallowfuncs
-          vx_core.e_anylist, // allowvalues
-          vx_core.e_anylist, // disallowvalues
-          vx_core.e_argmap // properties
+          Vx_core.vx_new(Vx_core.t_typelist, Vx_core.t_number), // traits
+          Vx_core.e_typelist, // allowtypes
+          Vx_core.e_typelist, // disallowtypes
+          Vx_core.e_funclist, // allowfuncs
+          Vx_core.e_funclist, // disallowfuncs
+          Vx_core.e_anylist, // allowvalues
+          Vx_core.e_anylist, // disallowvalues
+          Vx_core.e_argmap // properties
         )
       );
     }
@@ -249,72 +257,72 @@ public static class vx_sample {
    * @return {none}
    * (func main)
    */
-  public interface Func_main : vx_core.Type_func, vx_core.Type_replfunc {
+  public interface Func_main : Vx_core.Type_func, Vx_core.Type_replfunc {
     public void vx_main();
   }
 
-  public class Class_main : vx_core.Class_base, Func_main {
+  public class Class_main : Vx_core.Class_base, Func_main {
 
-    public override vx_sample.Func_main vx_new(params Object[] vals) {
+    public override Vx_sample.Func_main vx_new(params Object[] vals) {
       Class_main output = new Class_main();
       return output;
     }
 
-    public override vx_sample.Func_main vx_copy(params Object[] vals) {
+    public override Vx_sample.Func_main vx_copy(params Object[] vals) {
       Class_main output = new Class_main();
       return output;
     }
 
-    public vx_core.Type_typedef vx_typedef() {
-      return vx_core.t_func.vx_typedef();
+    public Vx_core.Type_typedef vx_typedef() {
+      return Vx_core.t_func.vx_typedef();
     }
 
-    public vx_core.Type_funcdef vx_funcdef() {
-      return vx_core.funcdef_new(
+    public Vx_core.Type_funcdef vx_funcdef() {
+      return Vx_core.funcdef_new(
         "vx/sample", // pkgname
         "main", // name
         0, // idx
         false, // async
-        vx_core.typedef_new(
+        Vx_core.typedef_new(
           "vx/core", // pkgname
           "none", // name
           "", // extends
-          vx_core.e_typelist, // traits
-          vx_core.e_typelist, // allowtypes
-          vx_core.e_typelist, // disallowtypes
-          vx_core.e_funclist, // allowfuncs
-          vx_core.e_funclist, // disallowfuncs
-          vx_core.e_anylist, // allowvalues
-          vx_core.e_anylist, // disallowvalues
-          vx_core.e_argmap // properties
+          Vx_core.e_typelist, // traits
+          Vx_core.e_typelist, // allowtypes
+          Vx_core.e_typelist, // disallowtypes
+          Vx_core.e_funclist, // allowfuncs
+          Vx_core.e_funclist, // disallowfuncs
+          Vx_core.e_anylist, // allowvalues
+          Vx_core.e_anylist, // disallowvalues
+          Vx_core.e_argmap // properties
         ) // typedef
       );
     }
 
-    public override vx_core.Type_any vx_empty() {
+    public override Vx_core.Type_any vx_empty() {
       return e_main;
     }
 
-    public override vx_core.Type_any vx_type() {
+    public override Vx_core.Type_any vx_type() {
       return t_main;
     }
 
-    public vx_core.Type_any vx_repl(vx_core.Type_anylist arglist) {
-      vx_core.Type_any output = vx_core.e_any;
-      vx_sample.f_main();
+    public Vx_core.Type_any vx_repl(Vx_core.Type_anylist arglist) {
+      Vx_core.Type_any output = Vx_core.e_any;
+      Vx_sample.f_main();
       return output;
     }
 
-    public void vx_main() {vx_sample.f_main();
+    public void vx_main() {Vx_sample.f_main();
     }
 
   }
 
-  public static Func_main e_main = new vx_sample.Class_main();
-  public static Func_main t_main = new vx_sample.Class_main();
+  public static Func_main e_main = new Vx_sample.Class_main();
+  public static Func_main t_main = new Vx_sample.Class_main();
 
   public static void f_main() {
-    vx_sample.f_myfunc(vx_core.vx_new_int(2));
+    Vx_sample.f_myfunc(Vx_core.vx_new_int(2));
   }
 
   /**
@@ -324,88 +332,88 @@ public static class vx_sample {
    * @return {int}
    * (func myfunc)
    */
-  public interface Func_myfunc : vx_core.Func_any_from_any {
-    public vx_core.Type_int vx_myfunc(vx_core.Type_int myarg);
+  public interface Func_myfunc : Vx_core.Func_any_from_any {
+    public Vx_core.Type_int vx_myfunc(Vx_core.Type_int myarg);
   }
 
-  public class Class_myfunc : vx_core.Class_base, Func_myfunc {
+  public class Class_myfunc : Vx_core.Class_base, Func_myfunc {
 
-    public override vx_sample.Func_myfunc vx_new(params Object[] vals) {
+    public override Vx_sample.Func_myfunc vx_new(params Object[] vals) {
       Class_myfunc output = new Class_myfunc();
       return output;
     }
 
-    public override vx_sample.Func_myfunc vx_copy(params Object[] vals) {
+    public override Vx_sample.Func_myfunc vx_copy(params Object[] vals) {
       Class_myfunc output = new Class_myfunc();
       return output;
     }
 
-    public vx_core.Type_typedef vx_typedef() {
-      return vx_core.t_func.vx_typedef();
+    public Vx_core.Type_typedef vx_typedef() {
+      return Vx_core.t_func.vx_typedef();
     }
 
-    public vx_core.Type_funcdef vx_funcdef() {
-      return vx_core.funcdef_new(
+    public Vx_core.Type_funcdef vx_funcdef() {
+      return Vx_core.funcdef_new(
         "vx/sample", // pkgname
         "myfunc", // name
         0, // idx
         false, // async
-        vx_core.typedef_new(
+        Vx_core.typedef_new(
           "vx/core", // pkgname
           "int", // name
           "", // extends
-          vx_core.vx_new(vx_core.t_typelist, vx_core.t_number), // traits
-          vx_core.e_typelist, // allowtypes
-          vx_core.e_typelist, // disallowtypes
-          vx_core.e_funclist, // allowfuncs
-          vx_core.e_funclist, // disallowfuncs
-          vx_core.e_anylist, // allowvalues
-          vx_core.e_anylist, // disallowvalues
-          vx_core.e_argmap // properties
+          Vx_core.vx_new(Vx_core.t_typelist, Vx_core.t_number), // traits
+          Vx_core.e_typelist, // allowtypes
+          Vx_core.e_typelist, // disallowtypes
+          Vx_core.e_funclist, // allowfuncs
+          Vx_core.e_funclist, // disallowfuncs
+          Vx_core.e_anylist, // allowvalues
+          Vx_core.e_anylist, // disallowvalues
+          Vx_core.e_argmap // properties
         ) // typedef
       );
     }
 
-    public override vx_core.Type_any vx_empty() {
+    public override Vx_core.Type_any vx_empty() {
       return e_myfunc;
     }
 
-    public override vx_core.Type_any vx_type() {
+    public override Vx_core.Type_any vx_type() {
       return t_myfunc;
     }
 
-    public vx_core.Func_any_from_any vx_fn_new(vx_core.Class_any_from_any.IFn fn) {
-      return vx_core.e_any_from_any;
+    public Vx_core.Func_any_from_any vx_fn_new(Vx_core.Class_any_from_any.IFn fn) {
+      return Vx_core.e_any_from_any;
     }
 
-    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : vx_core.Type_any where U : vx_core.Type_any {
-      T output = vx_core.f_empty(generic_any_1);
-      vx_core.Type_int inputval = (vx_core.Type_int)value;
-      vx_core.Type_any outputval = vx_sample.f_myfunc(inputval);
-      output = vx_core.f_any_from_any(generic_any_1, outputval);
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : Vx_core.Type_any where U : Vx_core.Type_any {
+      T output = Vx_core.f_empty(generic_any_1);
+      Vx_core.Type_int inputval = (Vx_core.Type_int)value;
+      Vx_core.Type_any outputval = Vx_sample.f_myfunc(inputval);
+      output = Vx_core.f_any_from_any(generic_any_1, outputval);
       return output;
     }
 
-    public vx_core.Type_any vx_repl(vx_core.Type_anylist arglist) {
-      vx_core.Type_any output = vx_core.e_any;
-      vx_core.Type_int myarg = vx_core.f_any_from_any(vx_core.t_int, arglist.vx_any(vx_core.vx_new_int(0)));
-      output = vx_sample.f_myfunc(myarg);
+    public Vx_core.Type_any vx_repl(Vx_core.Type_anylist arglist) {
+      Vx_core.Type_any output = Vx_core.e_any;
+      Vx_core.Type_int myarg = Vx_core.f_any_from_any(Vx_core.t_int, arglist.vx_any(Vx_core.vx_new_int(0)));
+      output = Vx_sample.f_myfunc(myarg);
       return output;
     }
 
-    public vx_core.Type_int vx_myfunc(vx_core.Type_int myarg) {
-      return vx_sample.f_myfunc(myarg);
+    public Vx_core.Type_int vx_myfunc(Vx_core.Type_int myarg) {
+      return Vx_sample.f_myfunc(myarg);
     }
 
   }
 
-  public static Func_myfunc e_myfunc = new vx_sample.Class_myfunc();
-  public static Func_myfunc t_myfunc = new vx_sample.Class_myfunc();
+  public static Func_myfunc e_myfunc = new Vx_sample.Class_myfunc();
+  public static Func_myfunc t_myfunc = new Vx_sample.Class_myfunc();
 
-  public static vx_core.Type_int f_myfunc(vx_core.Type_int myarg) {
-    vx_core.Type_int output = vx_core.e_int;
-    output = vx_core.f_plus(
-      vx_sample.c_myconst,
+  public static Vx_core.Type_int f_myfunc(Vx_core.Type_int myarg) {
+    Vx_core.Type_int output = Vx_core.e_int;
+    output = Vx_core.f_plus(
+      Vx_sample.c_myconst,
       myarg
     );
     return output;
@@ -415,14 +423,14 @@ public static class vx_sample {
   public static class PackageRunOnce {
     public static void RunOnce() {
     Const_myconst.const_new(c_myconst);
-    vx_core.Map<string, vx_core.Type_any> maptype = new vx_core.LinkedHashMap<string, vx_core.Type_any>();
-    vx_core.Map<string, vx_core.Type_any> mapconst = new vx_core.LinkedHashMap<string, vx_core.Type_any>();
-    vx_core.Map<string, vx_core.Type_func> mapfunc = new vx_core.LinkedHashMap<string, vx_core.Type_func>();
-    maptype.put("mytype", vx_sample.t_mytype);
-    mapconst.put("myconst", vx_sample.c_myconst);
-    mapfunc.put("main", vx_sample.t_main);
-    mapfunc.put("myfunc", vx_sample.t_myfunc);
-    vx_core.vx_global_package_set("vx/sample", maptype, mapconst, mapfunc);
+    Vx_core.Map<string, Vx_core.Type_any> maptype = new Vx_core.LinkedHashMap<string, Vx_core.Type_any>();
+    Vx_core.Map<string, Vx_core.Type_any> mapconst = new Vx_core.LinkedHashMap<string, Vx_core.Type_any>();
+    Vx_core.Map<string, Vx_core.Type_func> mapfunc = new Vx_core.LinkedHashMap<string, Vx_core.Type_func>();
+    maptype.put("mytype", Vx_sample.t_mytype);
+    mapconst.put("myconst", Vx_sample.c_myconst);
+    mapfunc.put("main", Vx_sample.t_main);
+    mapfunc.put("myfunc", Vx_sample.t_myfunc);
+    Vx_core.vx_global_package_set("vx/sample", maptype, mapconst, mapfunc);
     }
   }
 

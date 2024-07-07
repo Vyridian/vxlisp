@@ -2,12 +2,13 @@
  :doc "Event Handling")
 
 (type event : struct
- :properties [name               : string
-              from               : string
-              to                 : string
-              datamap            : anymap
-              event<-event       : event<-event
-              event<-event-async : event<-event-async]
+ :properties
+  [name               : string
+   from               : string
+   to                 : string
+   datamap            : anymap
+   event<-event       : event<-event
+   event<-event-async : event<-event-async]
  :doc "Generic Event")
 
 (type eventlist : list
@@ -39,22 +40,22 @@
  :doc "Move Event")
 
 (func any-from<-event : any-1
- [event : event]
+ [evt : event]
  (let : any-1
-  [value : any := (:from event)]
+  [value : any := (:from evt)]
   (any<-any : any-1
    value))
  :doc "")
 
 (func event<-event : event
- [event : event]
- event
+ [evt : event]
+ evt
  :context
  :sideeffects "Triggering an event will cause some kind of change"
  :doc "Template for triggering ui events")
 
 (func event<-event-async : event
- [event : event]
+ [evt : event]
  :async
  :context
  :sideeffects "Triggering an event will cause some kind of change"
@@ -65,6 +66,6 @@
  (map<-list : eventmap
   eventlist
   (fn : string
-   [event : event]
-   (:name event)))
+   [evt : event]
+   (:name evt)))
  :doc "Returns an eventmap from an eventlist")

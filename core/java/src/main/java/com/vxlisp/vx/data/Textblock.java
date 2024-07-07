@@ -32,35 +32,55 @@ public final class Textblock {
 
     @Override
     public Core.Type_string name() {
-      return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_name != null) {
+        output = this.vx_p_name;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_starttext;
 
     @Override
     public Core.Type_string starttext() {
-      return this.vx_p_starttext == null ? Core.e_string : this.vx_p_starttext;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_starttext != null) {
+        output = this.vx_p_starttext;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_endtext;
 
     @Override
     public Core.Type_string endtext() {
-      return this.vx_p_endtext == null ? Core.e_string : this.vx_p_endtext;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_endtext != null) {
+        output = this.vx_p_endtext;
+      }
+      return output;
     }
 
     public Core.Type_int vx_p_pos;
 
     @Override
     public Core.Type_int pos() {
-      return this.vx_p_pos == null ? Core.e_int : this.vx_p_pos;
+      Core.Type_int output = Core.e_int;
+      if (this.vx_p_pos != null) {
+        output = this.vx_p_pos;
+      }
+      return output;
     }
 
     public Textblock.Type_delimlist vx_p_delimlist;
 
     @Override
     public Textblock.Type_delimlist delimlist() {
-      return this.vx_p_delimlist == null ? Textblock.e_delimlist : this.vx_p_delimlist;
+      Textblock.Type_delimlist output = Textblock.e_delimlist;
+      if (this.vx_p_delimlist != null) {
+        output = this.vx_p_delimlist;
+      }
+      return output;
     }
 
     @Override
@@ -500,77 +520,121 @@ public final class Textblock {
 
     @Override
     public Core.Type_string name() {
-      return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_name != null) {
+        output = this.vx_p_name;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_text;
 
     @Override
     public Core.Type_string text() {
-      return this.vx_p_text == null ? Core.e_string : this.vx_p_text;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_text != null) {
+        output = this.vx_p_text;
+      }
+      return output;
     }
 
     public Core.Type_int vx_p_startpos;
 
     @Override
     public Core.Type_int startpos() {
-      return this.vx_p_startpos == null ? Core.e_int : this.vx_p_startpos;
+      Core.Type_int output = Core.e_int;
+      if (this.vx_p_startpos != null) {
+        output = this.vx_p_startpos;
+      }
+      return output;
     }
 
     public Core.Type_int vx_p_endpos;
 
     @Override
     public Core.Type_int endpos() {
-      return this.vx_p_endpos == null ? Core.e_int : this.vx_p_endpos;
+      Core.Type_int output = Core.e_int;
+      if (this.vx_p_endpos != null) {
+        output = this.vx_p_endpos;
+      }
+      return output;
     }
 
     public Core.Type_int vx_p_curpos;
 
     @Override
     public Core.Type_int curpos() {
-      return this.vx_p_curpos == null ? Core.e_int : this.vx_p_curpos;
+      Core.Type_int output = Core.e_int;
+      if (this.vx_p_curpos != null) {
+        output = this.vx_p_curpos;
+      }
+      return output;
     }
 
     public Core.Type_int vx_p_line;
 
     @Override
     public Core.Type_int line() {
-      return this.vx_p_line == null ? Core.e_int : this.vx_p_line;
+      Core.Type_int output = Core.e_int;
+      if (this.vx_p_line != null) {
+        output = this.vx_p_line;
+      }
+      return output;
     }
 
     public Core.Type_int vx_p_column;
 
     @Override
     public Core.Type_int column() {
-      return this.vx_p_column == null ? Core.e_int : this.vx_p_column;
+      Core.Type_int output = Core.e_int;
+      if (this.vx_p_column != null) {
+        output = this.vx_p_column;
+      }
+      return output;
     }
 
     public Textblock.Type_delim vx_p_delim;
 
     @Override
     public Textblock.Type_delim delim() {
-      return this.vx_p_delim == null ? Textblock.e_delim : this.vx_p_delim;
+      Textblock.Type_delim output = Textblock.e_delim;
+      if (this.vx_p_delim != null) {
+        output = this.vx_p_delim;
+      }
+      return output;
     }
 
     public Textblock.Type_delim vx_p_close;
 
     @Override
     public Textblock.Type_delim close() {
-      return this.vx_p_close == null ? Textblock.e_delim : this.vx_p_close;
+      Textblock.Type_delim output = Textblock.e_delim;
+      if (this.vx_p_close != null) {
+        output = this.vx_p_close;
+      }
+      return output;
     }
 
     public Textblock.Type_textblock vx_p_parent;
 
     @Override
     public Textblock.Type_textblock parent() {
-      return this.vx_p_parent == null ? Textblock.e_textblock : this.vx_p_parent;
+      Textblock.Type_textblock output = Textblock.e_textblock;
+      if (this.vx_p_parent != null) {
+        output = this.vx_p_parent;
+      }
+      return output;
     }
 
     public Textblock.Type_textblocklist vx_p_children;
 
     @Override
     public Textblock.Type_textblocklist children() {
-      return this.vx_p_children == null ? Textblock.e_textblocklist : this.vx_p_children;
+      Textblock.Type_textblocklist output = Textblock.e_textblocklist;
+      if (this.vx_p_children != null) {
+        output = this.vx_p_children;
+      }
+      return output;
     }
 
     @Override

@@ -29,7 +29,11 @@ public final class Db {
 
     @Override
     public Core.Type_string dbid() {
-      return this.vx_p_dbid == null ? Core.e_string : this.vx_p_dbid;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_dbid != null) {
+        output = this.vx_p_dbid;
+      }
+      return output;
     }
 
     @Override
@@ -208,35 +212,55 @@ public final class Db {
 
     @Override
     public Core.Type_string dbcellid() {
-      return this.vx_p_dbcellid == null ? Core.e_string : this.vx_p_dbcellid;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_dbcellid != null) {
+        output = this.vx_p_dbcellid;
+      }
+      return output;
     }
 
     public Db.Type_dbcellmap vx_p_dbcellmap;
 
     @Override
     public Db.Type_dbcellmap dbcellmap() {
-      return this.vx_p_dbcellmap == null ? Db.e_dbcellmap : this.vx_p_dbcellmap;
+      Db.Type_dbcellmap output = Db.e_dbcellmap;
+      if (this.vx_p_dbcellmap != null) {
+        output = this.vx_p_dbcellmap;
+      }
+      return output;
     }
 
     public Db.Type_dbfieldmap vx_p_dbfieldmap;
 
     @Override
     public Db.Type_dbfieldmap dbfieldmap() {
-      return this.vx_p_dbfieldmap == null ? Db.e_dbfieldmap : this.vx_p_dbfieldmap;
+      Db.Type_dbfieldmap output = Db.e_dbfieldmap;
+      if (this.vx_p_dbfieldmap != null) {
+        output = this.vx_p_dbfieldmap;
+      }
+      return output;
     }
 
     public Db.Type_dbcell vx_p_dbparent;
 
     @Override
     public Db.Type_dbcell dbparent() {
-      return this.vx_p_dbparent == null ? Db.e_dbcell : this.vx_p_dbparent;
+      Db.Type_dbcell output = Db.e_dbcell;
+      if (this.vx_p_dbparent != null) {
+        output = this.vx_p_dbparent;
+      }
+      return output;
     }
 
     public Db.Type_dbtable vx_p_dbtable;
 
     @Override
     public Db.Type_dbtable dbtable() {
-      return this.vx_p_dbtable == null ? Db.e_dbtable : this.vx_p_dbtable;
+      Db.Type_dbtable output = Db.e_dbtable;
+      if (this.vx_p_dbtable != null) {
+        output = this.vx_p_dbtable;
+      }
+      return output;
     }
 
     @Override
@@ -516,7 +540,7 @@ public final class Db {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
       return Core.immutablemap(map);
     }
 
@@ -716,21 +740,33 @@ public final class Db {
 
     @Override
     public Core.Type_string dbfieldid() {
-      return this.vx_p_dbfieldid == null ? Core.e_string : this.vx_p_dbfieldid;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_dbfieldid != null) {
+        output = this.vx_p_dbfieldid;
+      }
+      return output;
     }
 
     public Core.Type_any vx_p_type;
 
     @Override
     public Core.Type_any type() {
-      return this.vx_p_type == null ? Core.e_any : this.vx_p_type;
+      Core.Type_any output = Core.e_any;
+      if (this.vx_p_type != null) {
+        output = this.vx_p_type;
+      }
+      return output;
     }
 
     public Core.Type_any vx_p_value;
 
     @Override
     public Core.Type_any value() {
-      return this.vx_p_value == null ? Core.e_any : this.vx_p_value;
+      Core.Type_any output = Core.e_any;
+      if (this.vx_p_value != null) {
+        output = this.vx_p_value;
+      }
+      return output;
     }
 
     @Override
@@ -958,7 +994,7 @@ public final class Db {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
       return Core.immutablemap(map);
     }
 
@@ -1228,14 +1264,22 @@ public final class Db {
 
     @Override
     public Db.Type_dbid fromid() {
-      return this.vx_p_fromid == null ? Db.e_dbid : this.vx_p_fromid;
+      Db.Type_dbid output = Db.e_dbid;
+      if (this.vx_p_fromid != null) {
+        output = this.vx_p_fromid;
+      }
+      return output;
     }
 
     public Db.Type_dbid vx_p_toid;
 
     @Override
     public Db.Type_dbid toid() {
-      return this.vx_p_toid == null ? Db.e_dbid : this.vx_p_toid;
+      Db.Type_dbid output = Db.e_dbid;
+      if (this.vx_p_toid != null) {
+        output = this.vx_p_toid;
+      }
+      return output;
     }
 
     @Override
@@ -1576,14 +1620,22 @@ public final class Db {
 
     @Override
     public Db.Type_dbid dbid() {
-      return this.vx_p_dbid == null ? Db.e_dbid : this.vx_p_dbid;
+      Db.Type_dbid output = Db.e_dbid;
+      if (this.vx_p_dbid != null) {
+        output = this.vx_p_dbid;
+      }
+      return output;
     }
 
     public Db.Type_dblinklist vx_p_links;
 
     @Override
     public Db.Type_dblinklist links() {
-      return this.vx_p_links == null ? Db.e_dblinklist : this.vx_p_links;
+      Db.Type_dblinklist output = Db.e_dblinklist;
+      if (this.vx_p_links != null) {
+        output = this.vx_p_links;
+      }
+      return output;
     }
 
     @Override
@@ -1785,35 +1837,55 @@ public final class Db {
 
     @Override
     public Db.Type_dbid dbid() {
-      return this.vx_p_dbid == null ? Db.e_dbid : this.vx_p_dbid;
+      Db.Type_dbid output = Db.e_dbid;
+      if (this.vx_p_dbid != null) {
+        output = this.vx_p_dbid;
+      }
+      return output;
     }
 
     public Db.Type_dbid vx_p_valid;
 
     @Override
     public Db.Type_dbid valid() {
-      return this.vx_p_valid == null ? Db.e_dbid : this.vx_p_valid;
+      Db.Type_dbid output = Db.e_dbid;
+      if (this.vx_p_valid != null) {
+        output = this.vx_p_valid;
+      }
+      return output;
     }
 
     public Db.Type_dbid vx_p_noteid;
 
     @Override
     public Db.Type_dbid noteid() {
-      return this.vx_p_noteid == null ? Db.e_dbid : this.vx_p_noteid;
+      Db.Type_dbid output = Db.e_dbid;
+      if (this.vx_p_noteid != null) {
+        output = this.vx_p_noteid;
+      }
+      return output;
     }
 
     public Db.Type_dbid vx_p_valueid;
 
     @Override
     public Db.Type_dbid valueid() {
-      return this.vx_p_valueid == null ? Db.e_dbid : this.vx_p_valueid;
+      Db.Type_dbid output = Db.e_dbid;
+      if (this.vx_p_valueid != null) {
+        output = this.vx_p_valueid;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_value;
 
     @Override
     public Core.Type_string value() {
-      return this.vx_p_value == null ? Core.e_string : this.vx_p_value;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_value != null) {
+        output = this.vx_p_value;
+      }
+      return output;
     }
 
     @Override
@@ -2095,28 +2167,44 @@ public final class Db {
 
     @Override
     public Core.Type_string dbtableid() {
-      return this.vx_p_dbtableid == null ? Core.e_string : this.vx_p_dbtableid;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_dbtableid != null) {
+        output = this.vx_p_dbtableid;
+      }
+      return output;
     }
 
     public Db.Type_db vx_p_db;
 
     @Override
     public Db.Type_db db() {
-      return this.vx_p_db == null ? Db.e_db : this.vx_p_db;
+      Db.Type_db output = Db.e_db;
+      if (this.vx_p_db != null) {
+        output = this.vx_p_db;
+      }
+      return output;
     }
 
     public Db.Type_dbcellmap vx_p_dbcellmap;
 
     @Override
     public Db.Type_dbcellmap dbcellmap() {
-      return this.vx_p_dbcellmap == null ? Db.e_dbcellmap : this.vx_p_dbcellmap;
+      Db.Type_dbcellmap output = Db.e_dbcellmap;
+      if (this.vx_p_dbcellmap != null) {
+        output = this.vx_p_dbcellmap;
+      }
+      return output;
     }
 
     public Db.Type_dbfieldmap vx_p_dbfieldmap;
 
     @Override
     public Db.Type_dbfieldmap dbfieldmap() {
-      return this.vx_p_dbfieldmap == null ? Db.e_dbfieldmap : this.vx_p_dbfieldmap;
+      Db.Type_dbfieldmap output = Db.e_dbfieldmap;
+      if (this.vx_p_dbfieldmap != null) {
+        output = this.vx_p_dbfieldmap;
+      }
+      return output;
     }
 
     @Override
@@ -2374,42 +2462,66 @@ public final class Db {
 
     @Override
     public Db.Type_dbid dbid() {
-      return this.vx_p_dbid == null ? Db.e_dbid : this.vx_p_dbid;
+      Db.Type_dbid output = Db.e_dbid;
+      if (this.vx_p_dbid != null) {
+        output = this.vx_p_dbid;
+      }
+      return output;
     }
 
     public Db.Type_dbid vx_p_fromid;
 
     @Override
     public Db.Type_dbid fromid() {
-      return this.vx_p_fromid == null ? Db.e_dbid : this.vx_p_fromid;
+      Db.Type_dbid output = Db.e_dbid;
+      if (this.vx_p_fromid != null) {
+        output = this.vx_p_fromid;
+      }
+      return output;
     }
 
     public Db.Type_dbid vx_p_toid;
 
     @Override
     public Db.Type_dbid toid() {
-      return this.vx_p_toid == null ? Db.e_dbid : this.vx_p_toid;
+      Db.Type_dbid output = Db.e_dbid;
+      if (this.vx_p_toid != null) {
+        output = this.vx_p_toid;
+      }
+      return output;
     }
 
     public Db.Type_dbid vx_p_noteid;
 
     @Override
     public Db.Type_dbid noteid() {
-      return this.vx_p_noteid == null ? Db.e_dbid : this.vx_p_noteid;
+      Db.Type_dbid output = Db.e_dbid;
+      if (this.vx_p_noteid != null) {
+        output = this.vx_p_noteid;
+      }
+      return output;
     }
 
     public Db.Type_dbid vx_p_valid;
 
     @Override
     public Db.Type_dbid valid() {
-      return this.vx_p_valid == null ? Db.e_dbid : this.vx_p_valid;
+      Db.Type_dbid output = Db.e_dbid;
+      if (this.vx_p_valid != null) {
+        output = this.vx_p_valid;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_valtext;
 
     @Override
     public Core.Type_string valtext() {
-      return this.vx_p_valtext == null ? Core.e_string : this.vx_p_valtext;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_valtext != null) {
+        output = this.vx_p_valtext;
+      }
+      return output;
     }
 
     @Override

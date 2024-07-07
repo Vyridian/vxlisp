@@ -50,8 +50,8 @@ func NewLangCsharp() *vxlang {
 	output.name = "csharp"
 	output.sourcename = "Core"
 	output.sourcefile = ".cs"
-	output.pkgpath = "vx_core"
-	output.pkgname = "vx_core"
+	output.pkgpath = "Vx_core"
+	output.pkgname = "Vx_core"
 	output.pkgref = "."
 	output.future = "Task"
 	output.indent = "  "
@@ -169,9 +169,9 @@ func LangClassHeaderFromConst(lang *vxlang, cnst *vxconst, indent int) string {
 	extends := LangNameClassFullFromType(lang, cnst.vxtype)
 	switch lang.name {
 	case "csharp", "kotlin":
-		output = lineindent + "public class " + constname + " : " + extends + ", vx_core.vx_Type_const {"
+		output = lineindent + "public class " + constname + " : " + extends + ", " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_Type_const {"
 	case "java":
-		output = lineindent + "public static class " + constname + " extends " + extends + " implements Core.vx_Type_const {"
+		output = lineindent + "public static class " + constname + " extends " + extends + " implements " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_Type_const {"
 	}
 	return output
 }
@@ -196,11 +196,11 @@ func LangClassHeaderFromType(lang *vxlang, typ *vxtype, indent int) string {
 	typename := LangFromName(typ.alias)
 	switch lang.name {
 	case "csharp":
-		output = lineindent + "public class Class_" + typename + " : vx_core.Class_base, Type_" + LangNameFromType(lang, typ) + " {"
+		output = lineindent + "public class Class_" + typename + " : " + LangNameFromPkgNameDot(lang, "vx/core") + "Class_base, Type_" + LangNameFromType(lang, typ) + " {"
 	case "java":
 		output = lineindent + "public static class Class_" + typename + " extends " + LangNameFromPkgNameDot(lang, "vx/core") + "Class_base implements Type_" + LangNameFromType(lang, typ) + " {"
 	case "kotlin":
-		output = lineindent + "class Class_" + typename + " : vx_core.Class_base, Type_" + LangNameFromType(lang, typ) + " {"
+		output = lineindent + "class Class_" + typename + " : " + LangNameFromPkgNameDot(lang, "vx/core") + "Class_base, Type_" + LangNameFromType(lang, typ) + " {"
 	}
 	return output
 }
@@ -671,8 +671,9 @@ func LangFromPackage(lang *vxlang, pkg *vxpackage, project *vxproject, pkgprefix
 	packageline := ""
 	switch lang.name {
 	case "csharp":
-		ipos := IntFromStringFindLast(pkgpath, "_")
-		csnamespace := StringSubstring(pkgpath, 0, ipos)
+		ipos := IntFromStringFindLast(pkg.name, "/")
+		csnamespace := StringSubstring(pkg.name, 0, ipos)
+		csnamespace = StringUCaseFirst(csnamespace)
 		packageline = "namespace " + csnamespace + lang.lineend + "\n"
 	case "java":
 		packageline = "package " + pkgpath + lang.lineend + "\n"
@@ -1170,14 +1171,14 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			allowname = ""
 		}
 		instancefuncs += "" +
-			"\n    public Map<" + LangNameTypeFromType(lang, rawstringtype) + ", " + allowclass + "> vx_p_map = " + LangNameFromPkgNameDot(lang, "vx/core") + "immutablemap(new LinkedHashMap<" + LangNameTypeFromType(lang, rawstringtype) + ", " + allowclass + ">());" +
+			"\n    public " + LangNameTypeFromTypeSubtype(lang, rawmaptype, allowtype) + " vx_p_map = " + LangNameFromPkgNameDot(lang, "vx/core") + "immutablemap(" + LangVxNewMap(lang, allowtype, "") + ");" +
 			"\n" +
 			LangVxMapFromType(lang, typ) +
 			LangVxSetFromType(lang, typ) +
 			LangVxAllowCodeFromMap(lang, typ) +
 			LangVxNewFromMap(lang, typ)
 		valcopy += "" +
-			"\n      Map<" + LangNameTypeFromType(lang, rawstringtype) + ", " + allowclass + "> mapval = new LinkedHashMap<" + LangNameTypeFromType(lang, rawstringtype) + ", " + allowclass + ">(val.vx_map" + allowname + "());"
+			LangVar(lang, "mapval", rawmaptype, allowtype, LangVxNewMap(lang, allowtype, "val.vx_map"+allowname+"()"), 3, false, false)
 		valnew = "" +
 			"\n      " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_msg msg;" +
 			"\n      " + LangNameTypeFromType(lang, rawstringtype) + " key = \"\";" +
@@ -2486,18 +2487,26 @@ func LangImportsFromPackage(lang *vxlang, pkg *vxpackage, pkgprefix string, body
 			} else if libpkgpath == pkgpath {
 				isskip = true
 			} else {
-				libprefix := pkgpath
 				if lib.pkg != nil {
 					switch lang.name {
+					case "csharp":
+						libpath = pkgpath
 					case "java", "kotlin":
+						libprefix := pkgpath
 						libprefix = lib.pkg.project.javadomain
+						libpath = libprefix + "/" + libpkgpath + "*"
 					}
 				}
-				libpath = libprefix + "/" + libpkgpath + "*"
 				libpath = StringFromStringFindReplace(libpath, "/", ".")
 			}
 			if !isskip {
-				importline := "\nimport " + libpath + lang.lineend
+				importline := ""
+				switch lang.name {
+				case "csharp":
+					importline = "\nusing " + libpath + lang.lineend
+				case "java", "kotlin":
+					importline = "\nimport " + libpath + lang.lineend
+				}
 				if IntFromStringFind(output, importline) < 0 {
 					output += importline
 				}
@@ -2617,9 +2626,9 @@ func LangInterfaceFromType(lang *vxlang, typ *vxtype) string {
 		output = "" +
 			LangInterfaceHeader(lang, maptype, []*vxtype{anytype}, 1) +
 			basics +
-			"\n    public " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_map vx_new_from_map(" + LangFinalArg(lang) + "Map<" + LangNameTypeFromType(lang, rawstringtype) + ", " + LangNameTypeFromType(lang, anytype) + "> mapval);" +
+			"\n    public " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_map vx_new_from_map(" + LangFinalArg(lang) + LangNameTypeFromType(lang, rawmapanytype) + " mapval);" +
 			"\n    public " + LangNameTypeFromType(lang, anytype) + " vx_any(" + LangFinalArg(lang) + LangNameTypeFromType(lang, stringtype) + " key);" +
-			"\n    public Map<" + LangNameTypeFromType(lang, rawstringtype) + ", " + LangNameTypeFromType(lang, anytype) + "> vx_map();" +
+			"\n    public " + LangNameTypeFromType(lang, rawmapanytype) + " vx_map();" +
 			"\n    public " + LangNameTypeFromType(lang, booleantype) + " vx_set(" + LangFinalArg(lang) + LangNameTypeFromType(lang, stringtype) + " name, " + LangFinalArg(lang) + LangNameTypeFromType(lang, anytype) + " value);" +
 			"\n  }" +
 			"\n"
@@ -2628,7 +2637,7 @@ func LangInterfaceFromType(lang *vxlang, typ *vxtype) string {
 			LangInterfaceHeader(lang, structtype, []*vxtype{anytype}, 1) +
 			basics +
 			"\n    public " + LangNameTypeFromType(lang, anytype) + " vx_any(" + LangFinalArg(lang) + LangNameTypeFromType(lang, stringtype) + " key);" +
-			"\n    public Map<" + LangNameTypeFromType(lang, rawstringtype) + ", " + LangNameTypeFromType(lang, anytype) + "> vx_map();" +
+			"\n    public " + LangNameTypeFromType(lang, rawmapanytype) + " vx_map();" +
 			"\n  }" +
 			"\n"
 	default:
@@ -2678,18 +2687,17 @@ func LangInterfaceFromType(lang *vxlang, typ *vxtype) string {
 			}
 		case ":map":
 			extends = append(extends, maptype)
-			allowclass := LangNameFromPkgNameDot(lang, "vx/core") + "Type_any"
+			allowtype := anytype
 			allowname := "any"
 			allowtypes := ListAllowTypeFromType(typ)
 			if len(allowtypes) > 0 {
-				allowtype := allowtypes[0]
-				allowclass = LangNameTypeFullFromType(lang, allowtype)
+				allowtype = allowtypes[0]
 				allowname = LangNameFromType(lang, allowtype)
 			}
 			if allowname != "any" {
 				extras += "" +
-					"\n    public Map<" + LangNameTypeFromType(lang, rawstringtype) + ", " + allowclass + "> vx_map" + allowname + "();" +
-					"\n    public " + allowclass + " vx_" + allowname + "(" + LangFinalArg(lang) + LangNameFromPkgNameDot(lang, "vx/core") + "Type_string key);"
+					"\n    public " + LangNameTypeFromTypeSubtype(lang, rawmaptype, allowtype) + " vx_map" + allowname + "();" +
+					"\n    public " + LangNameTypeFromType(lang, allowtype) + " vx_" + allowname + "(" + LangFinalArg(lang) + LangNameFromPkgNameDot(lang, "vx/core") + "Type_string key);"
 			}
 		case ":struct":
 			extends = append(extends, structtype)
@@ -3063,6 +3071,8 @@ func LangNameFromFunc(fnc *vxfunc) string {
 func LangNameFromPkgName(lang *vxlang, pkgname string) string {
 	output := ""
 	switch lang.name {
+	case "csharp":
+		output = StringUCaseFirst(pkgname)
 	case "java":
 		ipos := IntFromStringFindLast(pkgname, "/")
 		output = StringSubstring(pkgname, ipos+1, len(pkgname))
@@ -3139,17 +3149,27 @@ func LangNameFromTypeSimple(lang *vxlang, typ *vxtype, simple bool) string {
 		}
 	case rawmaptype:
 		switch lang.name {
-		case "csharp", "java":
+		case "csharp":
+			name = "Vx_core.Map"
+		case "java":
 			name = "Map"
 		}
 	case rawmapanytype:
 		switch lang.name {
-		case "csharp", "java":
-			name = "Map<" + LangNameTypeFromType(lang, rawstringtype) + ", " + LangNameFromTypeSimple(lang, anytype, true) + ">"
+		case "cpp":
+			name = "std::map<string, " + LangNameFromTypeSimple(lang, anytype, true) + ">"
+		case "csharp":
+			name = "Vx_core.Map<string, " + LangNameFromTypeSimple(lang, anytype, true) + ">"
+		case "java":
+			name = "Map<String, " + LangNameFromTypeSimple(lang, anytype, true) + ">"
 		}
 	case rawstringtype:
 		switch lang.name {
-		case "csharp", "java":
+		case "cpp":
+			name = "std::string"
+		case "csharp":
+			name = "string"
+		case "java":
 			name = "String"
 		}
 	case rawobjecttype:
@@ -3285,21 +3305,23 @@ func LangNameTypeFullFromTypeSimple(lang *vxlang, typ *vxtype, simple bool) stri
 	case rawmaptype:
 		switch lang.name {
 		case "csharp":
-			name = "vx_core.Map"
-		case "java":
+			name = "Vx_core.Map"
+		case "java", "kotlin":
 			name = "Map"
 		}
 	case rawmapanytype:
 		switch lang.name {
 		case "csharp":
-			name = "vx_core.Map<" + LangNameTypeFromType(lang, rawstringtype) + ", " + LangNameTypeFullFromTypeSimple(lang, anytype, true) + ">"
-		case "java":
-			name = "Map<" + LangNameTypeFromType(lang, rawstringtype) + ", " + LangNameTypeFullFromTypeSimple(lang, anytype, true) + ">"
+			name = "Vx_core.Map<string, " + LangNameTypeFullFromTypeSimple(lang, anytype, true) + ">"
+		case "java", "kotlin":
+			name = "Map<String, " + LangNameTypeFullFromTypeSimple(lang, anytype, true) + ">"
 		}
 	case rawobjecttype:
 		name = "Object"
 	case rawstringtype:
 		switch lang.name {
+		case "cpp":
+			name = "std::string"
 		case "csharp":
 			name = "string"
 		case "java":
@@ -3315,6 +3337,24 @@ func LangNameTypeFullFromTypeSimple(lang *vxlang, typ *vxtype, simple bool) stri
 		name += LangNameFromTypeSimple(lang, typ, simple)
 	}
 	return name
+}
+
+func LangNameTypeFromTypeSubtype(lang *vxlang, typ *vxtype, subtype *vxtype) string {
+	output := LangNameTypeFromTypeSimple(lang, subtype, false)
+	switch typ {
+	case rawlisttype:
+		output = "List<" + output + ">"
+	case rawmaptype:
+		switch lang.name {
+		case "cpp":
+			output = "std::map<std::string, " + output + ">"
+		case "csharp":
+			output = "Vx_core.Map<string, " + output + ">"
+		case "java":
+			output = "Map<String, " + output + ">"
+		}
+	}
+	return output
 }
 
 func LangNamespaceFromPackage(lang *vxlang, pkgname string) (string, string) {
@@ -3907,7 +3947,7 @@ func LangVar(lang *vxlang, varname string, vartype *vxtype, subtype *vxtype, var
 		case rawlisttype:
 			typetext = "List<" + LangNameTypeFullFromType(lang, subtype) + ">"
 		case rawmaptype:
-			typetext = "vx_core.Map<string, " + LangNameTypeFullFromType(lang, subtype) + ">"
+			typetext = "Vx_core.Map<string, " + LangNameTypeFullFromType(lang, subtype) + ">"
 		case rawlistunknowntype:
 			typetext = "List<object>"
 		default:
@@ -4055,21 +4095,22 @@ func LangVxAllowCodeFromMap(lang *vxlang, typ *vxtype) string {
 		override = "\n    @Override"
 	}
 	allowname := "any"
+	allowtype := anytype
 	allowclass := LangNameTypeFromType(lang, anytype)
 	allowtypes := ListAllowTypeFromType(typ)
 	if len(allowtypes) > 0 {
-		allowtype := allowtypes[0]
+		allowtype = allowtypes[0]
 		allowclass = LangNameTypeFullFromType(lang, allowtype)
 		allowempty := LangNameEFromType(lang, allowtype)
 		allowname = LangNameFromType(lang, allowtype)
 		output = "" +
 			override +
 			"\n    public " + allowclass + " vx_" + allowname + "(" + LangFinalArg(lang) + LangNameTypeFromType(lang, stringtype) + " key) {" +
-			"\n      " + allowclass + " output = " + allowempty + ";" +
+			LangVar(lang, "output", allowtype, emptytype, allowempty, 3, false, false) +
 			"\n      " + LangNameClassFullFromType(lang, typ) + " map = this;" +
-			"\n      " + LangNameTypeFromType(lang, rawstringtype) + " skey = key.vx_string();" +
-			"\n      Map<" + LangNameTypeFromType(lang, rawstringtype) + ", " + allowclass + "> mapval = map.vx_p_map;" +
-			"\n      output = mapval.getOrDefault(skey, " + allowempty + ");" +
+			LangVar(lang, "skey", rawstringtype, emptytype, "key.vx_string()", 3, false, false) +
+			LangVar(lang, "mapval", rawmaptype, allowtype, "map.vx_p_map", 3, false, false) +
+			LangVarSet(lang, "output", "mapval.getOrDefault(skey, "+allowempty+")", 3) +
 			"\n      return output;" +
 			"\n    }" +
 			"\n"
@@ -4079,7 +4120,7 @@ func LangVxAllowCodeFromMap(lang *vxlang, typ *vxtype) string {
 	} else {
 		output += "" +
 			override +
-			"\n    public Map<" + LangNameTypeFromType(lang, rawstringtype) + ", " + allowclass + "> vx_map" + allowname + "() {" +
+			"\n    public " + LangNameTypeFromTypeSubtype(lang, rawmaptype, allowtype) + " vx_map" + allowname + "() {" +
 			"\n      return vx_p_map;" +
 			"\n    }" +
 			"\n" +
@@ -4100,9 +4141,11 @@ func LangVxArgFromArg(lang *vxlang, prefix string, arg vxarg) string {
 	funcvxargname.isimplement = true
 	output := "" +
 		LangFuncHeader(lang, prefix, funcvxargname, false) +
-		"\n      return this.vx_p_" + argname + " == null ? " + LangNameEFromType(lang, arg.vxtype) + " : this.vx_p_" + argname + ";" +
-		//"\n      "+ LangNameFromPkgNameDot(lang, "vx/core") + "Type_any valsub = this.vx_map().getOrDefault(\":" + arg.name + "\", " + LangNameEFromType(arg.vxtype) + ");" +
-		//"\n      return "+ LangNameFromPkgNameDot(lang, "vx/core") + "f_any_from_any(" + LangNameTFromType(arg.vxtype) + ", valsub);" +
+		LangVar(lang, "output", arg.vxtype, emptytype, LangNameEFromType(lang, arg.vxtype), 3, false, false) +
+		"\n      if (this.vx_p_" + argname + " != null) {" +
+		"\n        output = this.vx_p_" + argname + lang.lineend +
+		"\n      }" +
+		"\n      return output" + lang.lineend +
 		"\n    }" +
 		"\n"
 	return output
@@ -4730,10 +4773,11 @@ func LangVxMapFromType(lang *vxlang, typ *vxtype) string {
 	switch lang.name {
 	case "csharp":
 		copymap = "" +
-			"\n      Map<" + LangNameTypeFromType(lang, rawstringtype) + ", " + LangNameTypeFromType(lang, anytype) + "> anymap = (Map<" + LangNameTypeFromType(lang, rawstringtype) + ", " + LangNameTypeFromType(lang, anytype) + ">)this.vx_p_map" + lang.lineend +
-			"\n      Map<" + LangNameTypeFromType(lang, rawstringtype) + ", " + LangNameTypeFromType(lang, anytype) + "> map = anymap.copy()" + lang.lineend
+			LangVar(lang, "anymap", rawmaptype, anytype, "("+LangNameTypeFromType(lang, rawmapanytype)+")this.vx_p_map", 3, false, false) +
+			LangVar(lang, "map", rawmaptype, anytype, "anymap.copy()", 3, false, false)
 	case "java":
-		copymap = "\n       Map<" + LangNameTypeFromType(lang, rawstringtype) + ", " + LangNameTypeFromType(lang, anytype) + "> map = new LinkedHashMap<" + LangNameTypeFromType(lang, rawstringtype) + ", " + LangNameTypeFromType(lang, anytype) + ">(this.vx_p_map)" + lang.lineend
+		copymap = "" +
+			LangVar(lang, "map", rawmaptype, anytype, LangVxNewMap(lang, anytype, "this.vx_p_map"), 3, false, false)
 	}
 	prefix := LangNameTypeFromType(lang, typ)
 	output := "" +
@@ -4808,16 +4852,16 @@ func LangVxNewFromMap(lang *vxlang, typ *vxtype) string {
 	keyset := ""
 	switch lang.name {
 	case "csharp":
-		keyset = "\n      List<String> keys = mapval.keys();"
+		keyset = "\n      List<string> keys = mapval.keys();"
 	case "java":
 		keyset = "\n      Set<String> keys = mapval.keySet();"
 	}
 	output += "" +
 		override +
-		"\n    public " + LangNameTypeFromType(lang, maptype) + " vx_new_from_map(" + LangFinalArg(lang) + "Map<" + LangNameTypeFromType(lang, rawstringtype) + ", " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_any> mapval) {" +
+		"\n    public " + LangNameTypeFromType(lang, maptype) + " vx_new_from_map(" + LangFinalArg(lang) + LangNameTypeFromType(lang, rawmapanytype) + " mapval) {" +
 		"\n      " + LangNameClassFullFromType(lang, typ) + " output = new " + LangNameClassFullFromType(lang, typ) + "();" +
 		"\n      " + LangNameTypeFromType(lang, msgblocktype) + " msgblock = " + LangNameFromPkgNameDot(lang, "vx/core") + "e_msgblock;" +
-		"\n      Map<" + LangNameTypeFromType(lang, rawstringtype) + ", " + allowclass + "> map = new LinkedHashMap<" + LangNameTypeFromType(lang, rawstringtype) + ", " + allowclass + ">();" +
+		LangVar(lang, "map", rawmaptype, allowtype, LangVxNewMap(lang, allowtype, ""), 3, false, false) +
 		keyset +
 		LangForListHeader(lang, "key", rawstringtype, "keys", 3) +
 		"\n        " + LangNameTypeFromType(lang, anytype) + " val = mapval.get(key);" +
@@ -4867,7 +4911,7 @@ func LangVxNewMap(lang *vxlang, typ *vxtype, value string) string {
 	output := ""
 	switch lang.name {
 	case "csharp":
-		output = "new vx_core.LinkedHashMap<string, " + LangNameTypeFromType(lang, typ) + ">(" + value + ")"
+		output = "new Vx_core.LinkedHashMap<string, " + LangNameTypeFromType(lang, typ) + ">(" + value + ")"
 	case "java":
 		output = "new LinkedHashMap<String, " + LangNameTypeFromType(lang, typ) + ">(" + value + ")"
 	}
@@ -4909,7 +4953,7 @@ func LangVxSetFromType(lang *vxlang, typ *vxtype) string {
 		"\n          key = " + LangVxSubstring(lang, "key", "1", "") + lang.lineend +
 		"\n        }" +
 		"\n        " + allowclass + " castval = (" + allowclass + ")value;" +
-		"\n        Map<" + LangNameTypeFromType(lang, rawstringtype) + ", " + allowclass + "> map = " + LangVxNewMap(lang, allowtype, "this.vx_p_map") + lang.lineend +
+		LangVar(lang, "map", rawmaptype, allowtype, LangVxNewMap(lang, allowtype, "this.vx_p_map"), 4, false, false) +
 		"\n        if (castval == " + allowempty + ") {" +
 		"\n          map.remove(key);" +
 		"\n        } else {" +
@@ -5070,7 +5114,7 @@ func LangApp(lang *vxlang, project *vxproject, cmd *vxcommand) string {
 			indent2 + "} catch (e : Exception) {" +
 			indent3 + "println(e.toString())" +
 			indent2 + "}"
-		arglistinit = LangVar(lang, "arglist", listtype, anytype, "vx_core.vx_anylist_from_arraystring(args)", 3, true, false)
+		arglistinit = LangVar(lang, "arglist", listtype, anytype, LangNameFromPkgNameDot(lang, "vx/core")+"vx_anylist_from_arraystring(args)", 3, true, false)
 		outputprint = indent3 + "println(output)"
 	}
 	output := `/**

@@ -29,14 +29,22 @@ public final class Csv {
 
     @Override
     public Core.Type_stringlist headers() {
-      return this.vx_p_headers == null ? Core.e_stringlist : this.vx_p_headers;
+      Core.Type_stringlist output = Core.e_stringlist;
+      if (this.vx_p_headers != null) {
+        output = this.vx_p_headers;
+      }
+      return output;
     }
 
     public Csv.Type_csvrows vx_p_rows;
 
     @Override
     public Csv.Type_csvrows rows() {
-      return this.vx_p_rows == null ? Csv.e_csvrows : this.vx_p_rows;
+      Csv.Type_csvrows output = Csv.e_csvrows;
+      if (this.vx_p_rows != null) {
+        output = this.vx_p_rows;
+      }
+      return output;
     }
 
     @Override
@@ -234,7 +242,7 @@ public final class Csv {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
       return Core.immutablemap(map);
     }
 

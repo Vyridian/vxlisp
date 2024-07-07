@@ -34,42 +34,66 @@ public final class Event {
 
     @Override
     public Core.Type_string name() {
-      return this.vx_p_name == null ? Core.e_string : this.vx_p_name;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_name != null) {
+        output = this.vx_p_name;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_from;
 
     @Override
     public Core.Type_string from() {
-      return this.vx_p_from == null ? Core.e_string : this.vx_p_from;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_from != null) {
+        output = this.vx_p_from;
+      }
+      return output;
     }
 
     public Core.Type_string vx_p_to;
 
     @Override
     public Core.Type_string to() {
-      return this.vx_p_to == null ? Core.e_string : this.vx_p_to;
+      Core.Type_string output = Core.e_string;
+      if (this.vx_p_to != null) {
+        output = this.vx_p_to;
+      }
+      return output;
     }
 
     public Core.Type_anymap vx_p_datamap;
 
     @Override
     public Core.Type_anymap datamap() {
-      return this.vx_p_datamap == null ? Core.e_anymap : this.vx_p_datamap;
+      Core.Type_anymap output = Core.e_anymap;
+      if (this.vx_p_datamap != null) {
+        output = this.vx_p_datamap;
+      }
+      return output;
     }
 
     public Event.Func_event_from_event vx_p_event_from_event;
 
     @Override
     public Event.Func_event_from_event event_from_event() {
-      return this.vx_p_event_from_event == null ? Event.e_event_from_event : this.vx_p_event_from_event;
+      Event.Func_event_from_event output = Event.e_event_from_event;
+      if (this.vx_p_event_from_event != null) {
+        output = this.vx_p_event_from_event;
+      }
+      return output;
     }
 
     public Event.Func_event_from_event_async vx_p_event_from_event_async;
 
     @Override
     public Event.Func_event_from_event_async event_from_event_async() {
-      return this.vx_p_event_from_event_async == null ? Event.e_event_from_event_async : this.vx_p_event_from_event_async;
+      Event.Func_event_from_event_async output = Event.e_event_from_event_async;
+      if (this.vx_p_event_from_event_async != null) {
+        output = this.vx_p_event_from_event_async;
+      }
+      return output;
     }
 
     @Override
@@ -523,7 +547,7 @@ public final class Event {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
       return Core.immutablemap(map);
     }
 
@@ -903,12 +927,12 @@ public final class Event {
 
   /**
    * @function any_from_from_event
-   * @param  {event} event
+   * @param  {event} evt
    * @return {any-1}
    * (func any-from<-event)
    */
   public interface Func_any_from_from_event extends Core.Func_any_from_any {
-    public <T extends Core.Type_any> T vx_any_from_from_event(final T generic_any_1, final Event.Type_event event);
+    public <T extends Core.Type_any> T vx_any_from_from_event(final T generic_any_1, final Event.Type_event evt);
   }
 
   public static class Class_any_from_from_event extends Core.Class_base implements Func_any_from_from_event {
@@ -980,14 +1004,14 @@ public final class Event {
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
-      Event.Type_event event = Core.f_any_from_any(Event.t_event, arglist.vx_any(Core.vx_new_int(0)));
-      output = Event.f_any_from_from_event(generic_any_1, event);
+      Event.Type_event evt = Core.f_any_from_any(Event.t_event, arglist.vx_any(Core.vx_new_int(0)));
+      output = Event.f_any_from_from_event(generic_any_1, evt);
       return output;
     }
 
     @Override
-    public <T extends Core.Type_any> T vx_any_from_from_event(final T generic_any_1, final Event.Type_event event) {
-      return Event.f_any_from_from_event(generic_any_1, event);
+    public <T extends Core.Type_any> T vx_any_from_from_event(final T generic_any_1, final Event.Type_event evt) {
+      return Event.f_any_from_from_event(generic_any_1, evt);
     }
 
   }
@@ -995,12 +1019,12 @@ public final class Event {
   public static final Func_any_from_from_event e_any_from_from_event = new Event.Class_any_from_from_event();
   public static final Func_any_from_from_event t_any_from_from_event = new Event.Class_any_from_from_event();
 
-  public static <T extends Core.Type_any> T f_any_from_from_event(final T generic_any_1, final Event.Type_event event) {
+  public static <T extends Core.Type_any> T f_any_from_from_event(final T generic_any_1, final Event.Type_event evt) {
     T output = Core.f_empty(generic_any_1);
     output = Core.f_let(
       generic_any_1,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_any value = event.from();
+        final Core.Type_any value = evt.from();
         return Core.f_any_from_any(generic_any_1, value);
       })
     );
@@ -1010,12 +1034,12 @@ public final class Event {
   /**
    * @function event_from_event
    * Template for triggering ui events
-   * @param  {event} event
+   * @param  {event} evt
    * @return {event}
    * (func event<-event)
    */
   public interface Func_event_from_event extends Core.Func_any_from_any_context {
-    public Event.Type_event vx_event_from_event(final Core.Type_context context, final Event.Type_event event);
+    public Event.Type_event vx_event_from_event(final Core.Type_context context, final Event.Type_event evt);
   }
 
   public static class Class_event_from_event extends Core.Class_base implements Func_event_from_event {
@@ -1087,14 +1111,14 @@ public final class Event {
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
-      Event.Type_event event = Core.f_any_from_any(Event.t_event, arglist.vx_any(Core.vx_new_int(0)));
-      output = Event.f_event_from_event(context, event);
+      Event.Type_event evt = Core.f_any_from_any(Event.t_event, arglist.vx_any(Core.vx_new_int(0)));
+      output = Event.f_event_from_event(context, evt);
       return output;
     }
 
     @Override
-    public Event.Type_event vx_event_from_event(final Core.Type_context context, final Event.Type_event event) {
-      return Event.f_event_from_event(context, event);
+    public Event.Type_event vx_event_from_event(final Core.Type_context context, final Event.Type_event evt) {
+      return Event.f_event_from_event(context, evt);
     }
 
   }
@@ -1102,9 +1126,9 @@ public final class Event {
   public static final Func_event_from_event e_event_from_event = new Event.Class_event_from_event();
   public static final Func_event_from_event t_event_from_event = new Event.Class_event_from_event();
 
-  public static Event.Type_event f_event_from_event(final Core.Type_context context, final Event.Type_event event) {
+  public static Event.Type_event f_event_from_event(final Core.Type_context context, final Event.Type_event evt) {
     Event.Type_event output = Event.e_event;
-    output = event;
+    output = evt;
     return output;
   }
 
@@ -1113,12 +1137,12 @@ public final class Event {
    * @async
    * @function event_from_event_async
    * Template for triggering ui asynchronous events
-   * @param  {event} event
+   * @param  {event} evt
    * @return {event}
    * (func event<-event-async)
    */
   public interface Func_event_from_event_async extends Core.Func_any_from_any_context_async {
-    public CompletableFuture<Event.Type_event> vx_event_from_event_async(final Core.Type_context context, final Event.Type_event event);
+    public CompletableFuture<Event.Type_event> vx_event_from_event_async(final Core.Type_context context, final Event.Type_event evt);
   }
 
   public static class Class_event_from_event_async extends Core.Class_base implements Func_event_from_event_async {
@@ -1190,15 +1214,15 @@ public final class Event {
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
-      Event.Type_event event = Core.f_any_from_any(Event.t_event, arglist.vx_any(Core.vx_new_int(0)));
-      CompletableFuture<Event.Type_event> future = Event.f_event_from_event_async(context, event);
+      Event.Type_event evt = Core.f_any_from_any(Event.t_event, arglist.vx_any(Core.vx_new_int(0)));
+      CompletableFuture<Event.Type_event> future = Event.f_event_from_event_async(context, evt);
       output = Core.vx_async_from_async(Core.t_any, future);
       return output;
     }
 
     @Override
-    public CompletableFuture<Event.Type_event> vx_event_from_event_async(final Core.Type_context context, final Event.Type_event event) {
-      return Event.f_event_from_event_async(context, event);
+    public CompletableFuture<Event.Type_event> vx_event_from_event_async(final Core.Type_context context, final Event.Type_event evt) {
+      return Event.f_event_from_event_async(context, evt);
     }
 
   }
@@ -1206,7 +1230,7 @@ public final class Event {
   public static final Func_event_from_event_async e_event_from_event_async = new Event.Class_event_from_event_async();
   public static final Func_event_from_event_async t_event_from_event_async = new Event.Class_event_from_event_async();
 
-  public static CompletableFuture<Event.Type_event> f_event_from_event_async(final Core.Type_context context, final Event.Type_event event) {
+  public static CompletableFuture<Event.Type_event> f_event_from_event_async(final Core.Type_context context, final Event.Type_event evt) {
     CompletableFuture<Event.Type_event> output = Core.vx_async_new_completed(Event.e_event);
     return output;
   }
@@ -1310,10 +1334,10 @@ public final class Event {
     output = Core.f_map_from_list(
       Event.t_eventmap,
       eventlist,
-      Core.t_any_from_any.vx_fn_new((event_any) -> {
-        Event.Type_event event = Core.f_any_from_any(Event.t_event, event_any);
+      Core.t_any_from_any.vx_fn_new((evt_any) -> {
+        Event.Type_event evt = Core.f_any_from_any(Event.t_event, evt_any);
         return 
-        event.name();
+        evt.name();
       })
     );
     return output;

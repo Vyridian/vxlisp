@@ -45,38 +45,38 @@
   }
 
   public interface vx_Type_const {
-    public vx_core.Type_constdef vx_constdef();
+    public Vx_core.Type_constdef vx_constdef();
   }
 
   public interface Type_replfunc {
-    public vx_core.Type_any vx_repl(vx_core.Type_anylist arglist);
+    public Vx_core.Type_any vx_repl(Vx_core.Type_anylist arglist);
   }
 
   public interface Type_replfunc_async {
-    public Task<vx_core.Type_any> vx_repl(vx_core.Type_anylist arglist);
+    public Task<Vx_core.Type_any> vx_repl(Vx_core.Type_anylist arglist);
   }
 
-  public static List<vx_core.Type_any> emptylistany = new List<vx_core.Type_any>();
+  public static List<Vx_core.Type_any> emptylistany = new List<Vx_core.Type_any>();
 
-  public static Map<string, vx_core.Type_any> emptymapany = new LinkedHashMap<string, vx_core.Type_any>();
+  public static Map<string, Vx_core.Type_any> emptymapany = new LinkedHashMap<string, Vx_core.Type_any>();
 
   public class Class_base {
     protected int vx_iref = 0;
-    protected vx_core.Type_constdef vxconstdef = null;
-    protected vx_core.Type_msgblock vxmsgblock = null;
-    public virtual vx_core.Type_any vx_new(params Object[] vals) {
+    protected Vx_core.Type_constdef vxconstdef = null;
+    protected Vx_core.Type_msgblock vxmsgblock = null;
+    public virtual Vx_core.Type_any vx_new(params Object[] vals) {
       return e_any;
     }
-    public virtual vx_core.Type_any vx_copy(params Object[] vals) {
+    public virtual Vx_core.Type_any vx_copy(params Object[] vals) {
       return e_any;
     }
-    public virtual vx_core.Type_any vx_empty() {
+    public virtual Vx_core.Type_any vx_empty() {
       return e_any;
     }
-    public virtual vx_core.Type_any vx_type() {
+    public virtual Vx_core.Type_any vx_type() {
       return t_any;
     }
-    public virtual vx_core.Type_typedef vx_typedef() {
+    public virtual Vx_core.Type_typedef vx_typedef() {
       return e_typedef;
     }
     public List<Type_any> vx_dispose() {
@@ -84,7 +84,7 @@
       this.vxmsgblock = null;
       return emptylistany;
     }
-    public vx_core.Type_msgblock vx_msgblock() {return vxmsgblock;}
+    public Vx_core.Type_msgblock vx_msgblock() {return vxmsgblock;}
     public bool vx_release() {
       bool output = false;
       if (this.vx_iref < 0) {
@@ -104,35 +104,35 @@
     public T value = default(T);
   }
 
-  public static vx_core.Type_constdef constdef_new(
+  public static Vx_core.Type_constdef constdef_new(
     string pkgname,
     string name,
-    vx_core.Type_any typ
+    Vx_core.Type_any typ
   ) {
-    vx_core.Class_constdef output = new vx_core.Class_constdef();
-    output.vx_p_pkgname = vx_core.vx_new_string(pkgname);
-    output.vx_p_name = vx_core.vx_new_string(name);
+    Vx_core.Class_constdef output = new Vx_core.Class_constdef();
+    output.vx_p_pkgname = Vx_core.vx_new_string(pkgname);
+    output.vx_p_name = Vx_core.vx_new_string(name);
     output.vx_p_type = typ;
     return output;
   }
 
-  public static vx_core.Type_funcdef funcdef_new(
+  public static Vx_core.Type_funcdef funcdef_new(
     string pkgname,
     string name,
     int idx,
     bool async,
-    vx_core.Type_any typ
+    Vx_core.Type_any typ
   ) {
-    vx_core.Class_funcdef output = new vx_core.Class_funcdef();
-    output.vx_p_pkgname = vx_core.vx_new_string(pkgname);
-    output.vx_p_name = vx_core.vx_new_string(name);
-    output.vx_p_idx = vx_core.vx_new_int(idx);
-    output.vx_p_async = vx_core.vx_new_boolean(async);
+    Vx_core.Class_funcdef output = new Vx_core.Class_funcdef();
+    output.vx_p_pkgname = Vx_core.vx_new_string(pkgname);
+    output.vx_p_name = Vx_core.vx_new_string(name);
+    output.vx_p_idx = Vx_core.vx_new_int(idx);
+    output.vx_p_async = Vx_core.vx_new_boolean(async);
     output.vx_p_type = typ;
     return output;
   }
 
-  public static vx_core.Type_any[] arrayany_from_anylist(vx_core.Type_anylist list) {
+  public static Vx_core.Type_any[] arrayany_from_anylist(Vx_core.Type_anylist list) {
     return list.vx_list().ToArray();
   }
 
@@ -143,11 +143,11 @@
 
   public static List<T> arraylist_from_arraylist<T, U>(
     T generic_any_1, List<U> listval)
-    where T : vx_core.Type_any
-    where U : vx_core.Type_any {
+    where T : Vx_core.Type_any
+    where U : Vx_core.Type_any {
     List<T> output = new List<T>();
-    foreach (vx_core.Type_any value in listval) {
-      T t_val = vx_core.f_any_from_any(generic_any_1, value);
+    foreach (Vx_core.Type_any value in listval) {
+      T t_val = Vx_core.f_any_from_any(generic_any_1, value);
       output.Add(t_val);
     }
     return output;
@@ -167,13 +167,13 @@
   public static List<T> arraylist_from_linkedhashmap<T, U>(
     T generic_any_1,
     LinkedHashMap<string, U> mapval)
-    where T : vx_core.Type_any
-    where U : vx_core.Type_any {
+    where T : Vx_core.Type_any
+    where U : Vx_core.Type_any {
     List<T> output = new List<T>();
     List<string> keys = mapval.keys();
     foreach (string key in keys) {
       U u_val = mapval.get(key);
-      T t_val = vx_core.f_any_from_any(generic_any_1, u_val);
+      T t_val = Vx_core.f_any_from_any(generic_any_1, u_val);
       output.Add(t_val);
     }
     return output;
@@ -215,53 +215,53 @@
     return mapval;
   }
 
-  public static Map<string, T> map_from_list_fn<T>(List<T> listval, Func<T, vx_core.Type_string> fn_any_from_any) {
+  public static Map<string, T> map_from_list_fn<T>(List<T> listval, Func<T, Vx_core.Type_string> fn_any_from_any) {
     Map<string, T> output = new LinkedHashMap<string, T>();
     foreach (T val in listval) {
-      vx_core.Type_string valkey = fn_any_from_any.Invoke(val);
+      Vx_core.Type_string valkey = fn_any_from_any.Invoke(val);
       string key = valkey.vx_string();
       output.put(key, val);
     }
     return output;
   }
 
-  public static LinkedHashMap<string, T> map_from_map<T>(LinkedHashMap<string, vx_core.Type_any> mapval) where T : vx_core.Type_any {
+  public static LinkedHashMap<string, T> map_from_map<T>(LinkedHashMap<string, Vx_core.Type_any> mapval) where T : Vx_core.Type_any {
     LinkedHashMap<string, T> output = new LinkedHashMap<string, T>();
     List<string> keys = mapval.keys();
     foreach (string key in keys) {
-      vx_core.Type_any value = mapval.get(key);
+      Vx_core.Type_any value = mapval.get(key);
       try {
         T castval = (T)value;
         output.put(key, castval);
       } catch (Exception ex) {
-        vx_core.vx_log("map<-map", ex);
+        Vx_core.vx_log("map<-map", ex);
       }
     }
     return output;
   }
 
   // vx_new(generic_any_1, args...)
-  public static T vx_new<T>(T generic_any_1, params Object[] vals) where T : vx_core.Type_any {
-    vx_core.Type_any val = generic_any_1.vx_new(vals);
-    T output = vx_core.f_any_from_any(generic_any_1, val);
+  public static T vx_new<T>(T generic_any_1, params Object[] vals) where T : Vx_core.Type_any {
+    Vx_core.Type_any val = generic_any_1.vx_new(vals);
+    T output = Vx_core.f_any_from_any(generic_any_1, val);
     return output;
   }
 
   // vx_copy(generic_any_1, args...)
-  public static T vx_copy<T>(T copyval, params Object[] vals) where T : vx_core.Type_any {
-    vx_core.Type_any val = copyval.vx_copy(vals);
-    T output = vx_core.f_any_from_any(copyval, val);
+  public static T vx_copy<T>(T copyval, params Object[] vals) where T : Vx_core.Type_any {
+    Vx_core.Type_any val = copyval.vx_copy(vals);
+    T output = Vx_core.f_any_from_any(copyval, val);
     return output;
   }
 
   // vx_empty(generic_any_1)
-  public static T vx_empty<T>(T type) where T : vx_core.Type_any {
+  public static T vx_empty<T>(T type) where T : Vx_core.Type_any {
     T output = (T)(type.vx_empty());
     return output;
   }
 
   // vx_type(generic_any_1)
-  public static T vx_type<T>(T type) where T : vx_core.Type_any {
+  public static T vx_type<T>(T type) where T : Vx_core.Type_any {
     T output = (T)(type.vx_type());
     return output;
   }
@@ -271,10 +271,10 @@
     return output;
   }
 
-  public static Task<T> vx_async_from_async<T, U>(T generic_any_1, Task<U> future) where T : vx_core.Type_any where U : vx_core.Type_any {
+  public static Task<T> vx_async_from_async<T, U>(T generic_any_1, Task<U> future) where T : Vx_core.Type_any where U : Vx_core.Type_any {
     Task<T> output = future.ContinueWith(tasku => {
       U tval = tasku.Result;
-      T result = vx_core.f_any_from_any(generic_any_1, tval);
+      T result = Vx_core.f_any_from_any(generic_any_1, tval);
       return result;
     });
     return output;
@@ -315,37 +315,37 @@
   }
 
   // vx_eqeq(any, any)
-  public static bool vx_eqeq(vx_core.Type_any val1, vx_core.Type_any val2) {
+  public static bool vx_eqeq(Vx_core.Type_any val1, Vx_core.Type_any val2) {
     bool output = false;
     if (val1 == val2) {
       output = true;
-    } else if (val1.vx_msgblock() != vx_core.e_msgblock) {
-    } else if (val2.vx_msgblock() != vx_core.e_msgblock) {
+    } else if (val1.vx_msgblock() != Vx_core.e_msgblock) {
+    } else if (val2.vx_msgblock() != Vx_core.e_msgblock) {
     } else {
-      vx_core.Type_any type1 = val1.vx_type();
-      vx_core.Type_any type2 = val2.vx_type();
+      Vx_core.Type_any type1 = val1.vx_type();
+      Vx_core.Type_any type2 = val2.vx_type();
       if (type1 != type2) {
-      } else if (type1 == vx_core.t_int) {
-        vx_core.Type_int valint1 = (vx_core.Type_int)val1;
-        vx_core.Type_int valint2 = (vx_core.Type_int)val2;
+      } else if (type1 == Vx_core.t_int) {
+        Vx_core.Type_int valint1 = (Vx_core.Type_int)val1;
+        Vx_core.Type_int valint2 = (Vx_core.Type_int)val2;
         if (valint1.vx_int() == valint2.vx_int()) {
           output = true;
         }
-      } else if (type1 == vx_core.t_float) {
-        vx_core.Type_float valfloat1 = (vx_core.Type_float)val1;
-        vx_core.Type_float valfloat2 = (vx_core.Type_float)val2;
+      } else if (type1 == Vx_core.t_float) {
+        Vx_core.Type_float valfloat1 = (Vx_core.Type_float)val1;
+        Vx_core.Type_float valfloat2 = (Vx_core.Type_float)val2;
         if (valfloat1.vx_float() == valfloat2.vx_float()) {
           output = true;
         }
-      } else if (type1 == vx_core.t_decimal) {
-        vx_core.Type_decimal valdecimal1 = (vx_core.Type_decimal)val1;
-        vx_core.Type_decimal valdecimal2 = (vx_core.Type_decimal)val2;
+      } else if (type1 == Vx_core.t_decimal) {
+        Vx_core.Type_decimal valdecimal1 = (Vx_core.Type_decimal)val1;
+        Vx_core.Type_decimal valdecimal2 = (Vx_core.Type_decimal)val2;
         if (valdecimal1.vx_string() == valdecimal2.vx_string()) {
           output = true;
         }
-      } else if (type1 == vx_core.t_string) {
-        vx_core.Type_string valstring1 = (vx_core.Type_string)val1;
-        vx_core.Type_string valstring2 = (vx_core.Type_string)val2;
+      } else if (type1 == Vx_core.t_string) {
+        Vx_core.Type_string valstring1 = (Vx_core.Type_string)val1;
+        Vx_core.Type_string valstring2 = (Vx_core.Type_string)val2;
         if (valstring1.vx_string() == valstring2.vx_string()) {
           output = true;
         }
@@ -365,21 +365,21 @@
   }
 
   // vx_global_package_set(string, map<any>, map<any>, map<func>)
-  public static void vx_global_package_set(string pkgname, Map<string, vx_core.Type_any> maptype, Map<string, vx_core.Type_any> mapconst, Map<string, vx_core.Type_func> mapfunc) {
-    vx_core.Class_typemap typemap = new vx_core.Class_typemap();
+  public static void vx_global_package_set(string pkgname, Map<string, Vx_core.Type_any> maptype, Map<string, Vx_core.Type_any> mapconst, Map<string, Vx_core.Type_func> mapfunc) {
+    Vx_core.Class_typemap typemap = new Vx_core.Class_typemap();
 		  typemap.vx_p_map = maptype;
-	   vx_core.Class_constmap constmap = new vx_core.Class_constmap();
+	   Vx_core.Class_constmap constmap = new Vx_core.Class_constmap();
 		  constmap.vx_p_map = mapconst;
-		  vx_core.Class_funcmap funcmap = new vx_core.Class_funcmap();
+		  Vx_core.Class_funcmap funcmap = new Vx_core.Class_funcmap();
 		  funcmap.vx_p_map = mapfunc;
-    vx_core.Class_project global = (vx_core.Class_project)vx_core.c_global;
-    vx_core.Class_packagemap packagemap = (vx_core.Class_packagemap)global.vx_p_packagemap;
+    Vx_core.Class_project global = (Vx_core.Class_project)Vx_core.c_global;
+    Vx_core.Class_packagemap packagemap = (Vx_core.Class_packagemap)global.vx_p_packagemap;
     if (packagemap == null) {
-      packagemap = new vx_core.Class_packagemap();
+      packagemap = new Vx_core.Class_packagemap();
       global.vx_p_packagemap = packagemap;
     }
-    Map<string, vx_core.Type_package> mappackage = new LinkedHashMap<string, vx_core.Type_package>(packagemap.vx_p_map);
-		  vx_core.Class_package pkg = new vx_core.Class_package();
+    Map<string, Vx_core.Type_package> mappackage = new LinkedHashMap<string, Vx_core.Type_package>(packagemap.vx_p_map);
+		  Vx_core.Class_package pkg = new Vx_core.Class_package();
 		  pkg.vx_p_constmap = constmap;
 		  pkg.vx_p_typemap = typemap;
 		  pkg.vx_p_funcmap = funcmap;
@@ -419,13 +419,13 @@
   }
 
   // vx_is_float(any)
-  public static bool vx_is_float(vx_core.Type_any value) {
+  public static bool vx_is_float(Vx_core.Type_any value) {
     bool output = false;
-    if (value is vx_core.Type_number) {
+    if (value is Vx_core.Type_number) {
       output = true;
-    } else if (value is vx_core.Type_string) {
-      vx_core.Type_string valuestring = (vx_core.Type_string)value;
-      output = vx_core.vx_is_float(valuestring.vx_string());
+    } else if (value is Vx_core.Type_string) {
+      Vx_core.Type_string valuestring = (Vx_core.Type_string)value;
+      output = Vx_core.vx_is_float(valuestring.vx_string());
     }
     return output;
   }
@@ -451,24 +451,24 @@
   }
 
   // vx_is_int(any)
-  public static bool vx_is_int(vx_core.Type_any value) {
+  public static bool vx_is_int(Vx_core.Type_any value) {
     bool result = false;
-    if (value == vx_core.c_infinity) {
+    if (value == Vx_core.c_infinity) {
       result = true;
-    } else if (value == vx_core.c_neginfinity) {
+    } else if (value == Vx_core.c_neginfinity) {
       result = true;
-    } else if (value == vx_core.c_notanumber) {
+    } else if (value == Vx_core.c_notanumber) {
       result = true;
-    } else if (value is vx_core.Type_int) {
+    } else if (value is Vx_core.Type_int) {
       result = true;
-    } else if (value is vx_core.Type_float) {
-      vx_core.Type_float valfloat = (vx_core.Type_float)value;
+    } else if (value is Vx_core.Type_float) {
+      Vx_core.Type_float valfloat = (Vx_core.Type_float)value;
       float floatval = valfloat.vx_float();
       if ((int)floatval == floatval) {
         result = true;
       }
-    } else if (value is vx_core.Type_decimal) {
-      vx_core.Type_decimal valdec = (vx_core.Type_decimal)value;
+    } else if (value is Vx_core.Type_decimal) {
+      Vx_core.Type_decimal valdec = (Vx_core.Type_decimal)value;
       string strval = valdec.vx_string();
       try {
         if (int.Parse(strval) == float.Parse(strval)) {
@@ -476,8 +476,8 @@
         }
       } catch (Exception ex) {
       }
-    } else if (value is vx_core.Type_string) {
-      vx_core.Type_string valstr = (vx_core.Type_string)value;
+    } else if (value is Vx_core.Type_string) {
+      Vx_core.Type_string valstr = (Vx_core.Type_string)value;
       string strval = valstr.vx_string();
       result = vx_is_int(strval);
     }
@@ -490,12 +490,12 @@
       string text = "";
       if (value == null) {
         text = "null";
-      } else if (value is vx_core.Type_string) {
-        vx_core.Type_string valstring = (vx_core.Type_string)value;
+      } else if (value is Vx_core.Type_string) {
+        Vx_core.Type_string valstring = (Vx_core.Type_string)value;
         text = valstring.vx_string();
-      } else if (value is vx_core.Type_any) {
-        vx_core.Type_any valany = (vx_core.Type_any)value;
-        vx_core.Type_string valstring = vx_core.f_string_from_any(valany);
+      } else if (value is Vx_core.Type_any) {
+        Vx_core.Type_any valany = (Vx_core.Type_any)value;
+        Vx_core.Type_string valstring = Vx_core.f_string_from_any(valany);
         text = valstring.vx_string();
       } else {
         text = value.ToString();
@@ -507,35 +507,35 @@
   // vx_msg_from_error
   public static Type_msg vx_msg_from_error(string text) {
     Class_msg output = new Class_msg();
-    output.vx_p_text = vx_core.vx_new_string(text);
-    output.vx_p_severity = vx_core.c_msg_severe;
+    output.vx_p_text = Vx_core.vx_new_string(text);
+    output.vx_p_severity = Vx_core.c_msg_severe;
     return output;
   }
 
   // vx_msg_from_error
-  public static Type_msg vx_msg_from_error(string path, string code, vx_core.Type_any detail) {
+  public static Type_msg vx_msg_from_error(string path, string code, Vx_core.Type_any detail) {
     Class_msg output = new Class_msg();
-    output.vx_p_path = vx_core.vx_new_string(path);
-    output.vx_p_code = vx_core.vx_new_string(code);
+    output.vx_p_path = Vx_core.vx_new_string(path);
+    output.vx_p_code = Vx_core.vx_new_string(code);
     output.vx_p_detail = detail;
-    output.vx_p_severity = vx_core.c_msg_severe;
+    output.vx_p_severity = Vx_core.c_msg_severe;
     return output;
   }
 
   // vx_msg_from_exception
   public static Type_msg vx_msg_from_exception(string text, Exception err) {
     Class_msg output = new Class_msg();
-    output.vx_p_text = vx_core.vx_new_string(text);
-    output.vx_p_severity = vx_core.c_msg_severe;
+    output.vx_p_text = Vx_core.vx_new_string(text);
+    output.vx_p_severity = Vx_core.c_msg_severe;
     output.err = err;
-    vx_core.vx_log(output);
+    Vx_core.vx_log(output);
     return output;
   }
 
   // vx_msgblock_from_copy_arrayval(msgblock, any...)
-  public static vx_core.Type_msgblock vx_msgblock_from_copy_arrayval(vx_core.Type_any copy, Object[] vals) {
-    vx_core.Type_msgblock output = vx_core.e_msgblock;
-    vx_core.Type_msgblock copymsgblock = copy.vx_msgblock();
+  public static Vx_core.Type_msgblock vx_msgblock_from_copy_arrayval(Vx_core.Type_any copy, Object[] vals) {
+    Vx_core.Type_msgblock output = Vx_core.e_msgblock;
+    Vx_core.Type_msgblock copymsgblock = copy.vx_msgblock();
     if (copymsgblock != null) {
       output = copymsgblock;
     }
@@ -543,25 +543,25 @@
   }
 
   public static Type_boolean vx_new_boolean(bool isval) {
-    Type_boolean output = vx_core.c_false;
+    Type_boolean output = Vx_core.c_false;
     if (isval) {
-      output = vx_core.c_true;
+      output = Vx_core.c_true;
     }
     return output;
   }
 
   public static Type_float vx_new_float(float fval) {
-    Class_float output = new vx_core.Class_float();
+    Class_float output = new Vx_core.Class_float();
     output.vxfloat = fval;
     return output;
   }
 
   public static Type_int vx_new_int(int ival) {
     Type_int output;
-    if ((ival == 0) && vx_core.e_int != null) {
-      output = vx_core.e_int;
+    if ((ival == 0) && Vx_core.e_int != null) {
+      output = Vx_core.e_int;
     } else {
-      Class_int work = new vx_core.Class_int();
+      Class_int work = new Vx_core.Class_int();
       work.vxint = ival;
       output = work;
     }
@@ -570,22 +570,22 @@
 
   public static Type_string vx_new_string(string text) {
     Type_string output;
-    if ((text == "") && vx_core.e_string != null) {
-      output = vx_core.e_string;
+    if ((text == "") && Vx_core.e_string != null) {
+      output = Vx_core.e_string;
     } else {
-      Class_string work = new vx_core.Class_string();
+      Class_string work = new Vx_core.Class_string();
       work.vxstring = text;
       output = work;
     }
     return output;
   }
 
-  public static string vx_string_from_any(vx_core.Type_any value) {
-    return vx_core.vx_string_from_any_indent(value, 0, false);
+  public static string vx_string_from_any(Vx_core.Type_any value) {
+    return Vx_core.vx_string_from_any_indent(value, 0, false);
   }
 
   public static string vx_string_from_any_indent(
-    vx_core.Type_any value,
+    Vx_core.Type_any value,
     int indent,
     bool linefeed) {
     string indenttext = vx_string_repeat(" ", indent);
@@ -595,47 +595,47 @@
     } else if (value == null) {
       output = "null";
     } else if (value == value.vx_type()) {
-      if (value is vx_core.Type_func) {
-        vx_core.Type_func valuefunc = (vx_core.Type_func)value;
-        vx_core.Type_funcdef funcdef = valuefunc.vx_funcdef();
+      if (value is Vx_core.Type_func) {
+        Vx_core.Type_func valuefunc = (Vx_core.Type_func)value;
+        Vx_core.Type_funcdef funcdef = valuefunc.vx_funcdef();
         output = funcdef.pkgname().vx_string() + "/" + funcdef.name().vx_string();
       } else {
-        vx_core.Type_typedef typedef = value.vx_typedef();
+        Vx_core.Type_typedef typedef = value.vx_typedef();
         output = typedef.pkgname().vx_string() + "/" + typedef.name().vx_string();
       }
-    } else if (value is vx_core.Type_boolean) {
-      vx_core.Type_boolean valbool = vx_core.f_any_from_any(vx_core.t_boolean, value);
+    } else if (value is Vx_core.Type_boolean) {
+      Vx_core.Type_boolean valbool = Vx_core.f_any_from_any(Vx_core.t_boolean, value);
       if (valbool.vx_boolean() == true) {
         output = "true";
       } else {
         output = "false";
       }
-    } else if (value is vx_core.Type_decimal) {
-      vx_core.Type_decimal valdec = vx_core.f_any_from_any(vx_core.t_decimal, value);
+    } else if (value is Vx_core.Type_decimal) {
+      Vx_core.Type_decimal valdec = Vx_core.f_any_from_any(Vx_core.t_decimal, value);
       output = valdec.vx_string();
-    } else if (value is vx_core.Type_float) {
-      vx_core.Type_float valfloat = vx_core.f_any_from_any(vx_core.t_float, value);
+    } else if (value is Vx_core.Type_float) {
+      Vx_core.Type_float valfloat = Vx_core.f_any_from_any(Vx_core.t_float, value);
       output = valfloat.vx_float().ToString();
       if (output.EndsWith(".0")) {
         output = output.Substring(0, output.Length - 2);
       }
-    } else if (value is vx_core.Type_int) {
-      if (value == vx_core.c_notanumber) {
+    } else if (value is Vx_core.Type_int) {
+      if (value == Vx_core.c_notanumber) {
         output = "notanumber";
-      } else if (value == vx_core.c_infinity) {
+      } else if (value == Vx_core.c_infinity) {
         output = "infinity";
-      } else if (value == vx_core.c_neginfinity) {
+      } else if (value == Vx_core.c_neginfinity) {
         output = "neginfinity";
       } else {
-        vx_core.Type_int valint = vx_core.f_any_from_any(vx_core.t_int, value);
+        Vx_core.Type_int valint = Vx_core.f_any_from_any(Vx_core.t_int, value);
         output = valint.vx_int().ToString();
       }
-    } else if (value is vx_core.Type_string) {
-      vx_core.Type_string valstring = vx_core.f_any_from_any(vx_core.t_string, value);
+    } else if (value is Vx_core.Type_string) {
+      Vx_core.Type_string valstring = Vx_core.f_any_from_any(Vx_core.t_string, value);
       output = "\"" + valstring.vx_string() + "\"";
-    } else if (value is vx_core.vx_Type_const) {
-      vx_core.vx_Type_const constvalue = (vx_core.vx_Type_const)value;
-      vx_core.Type_constdef constdef = constvalue.vx_constdef();
+    } else if (value is Vx_core.vx_Type_const) {
+      Vx_core.vx_Type_const constvalue = (Vx_core.vx_Type_const)value;
+      Vx_core.Type_constdef constdef = constvalue.vx_constdef();
       string constpkg = constdef.pkgname().vx_string();
       string constname = constdef.name().vx_string();
       if (constpkg == "vx/core") {
@@ -643,37 +643,37 @@
       } else {
         output = constpkg + "/" + constname;
       }
-    } else if (value is vx_core.Type_list) {
-      vx_core.Type_list vallist = vx_core.f_any_from_any(vx_core.t_list, value);
-      vx_core.Type_typedef typedef = vallist.vx_typedef();
-      vx_core.Type_string typedefname = typedef.name();
+    } else if (value is Vx_core.Type_list) {
+      Vx_core.Type_list vallist = Vx_core.f_any_from_any(Vx_core.t_list, value);
+      Vx_core.Type_typedef typedef = vallist.vx_typedef();
+      Vx_core.Type_string typedefname = typedef.name();
       int indentint = indent;
       indentint += 1;
-      List<vx_core.Type_any> listval = vallist.vx_list();
-      foreach (vx_core.Type_any valsub in listval) {
-        string valtext = vx_core.vx_string_from_any_indent(valsub, indentint, linefeed);
+      List<Vx_core.Type_any> listval = vallist.vx_list();
+      foreach (Vx_core.Type_any valsub in listval) {
+        string valtext = Vx_core.vx_string_from_any_indent(valsub, indentint, linefeed);
         output += "\n " + indenttext + valtext;
       }
       if (vallist.vx_msgblock() != null) {
-        string msgtext = vx_core.vx_string_from_any_indent(vallist.vx_msgblock(), indentint, linefeed);
+        string msgtext = Vx_core.vx_string_from_any_indent(vallist.vx_msgblock(), indentint, linefeed);
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
       }
       output = "(" + typedefname.vx_string() + output + ")";
-    } else if (value is vx_core.Type_map) {
-      vx_core.Type_map valmap = vx_core.f_any_from_any(vx_core.t_map, value);
-      vx_core.Type_typedef typedef = valmap.vx_typedef();
-      vx_core.Type_string typedefname = typedef.name();
+    } else if (value is Vx_core.Type_map) {
+      Vx_core.Type_map valmap = Vx_core.f_any_from_any(Vx_core.t_map, value);
+      Vx_core.Type_typedef typedef = valmap.vx_typedef();
+      Vx_core.Type_string typedefname = typedef.name();
       int indentint = indent;
       indentint += 2;
-      Map<string, vx_core.Type_any> mapval = valmap.vx_map();
+      Map<string, Vx_core.Type_any> mapval = valmap.vx_map();
       List<string> keys = mapval.keys();
       foreach (string skey in keys) {
         string key = skey;
-        vx_core.Type_any valsub = mapval.get(key);
+        Vx_core.Type_any valsub = mapval.get(key);
         if (!key.StartsWith(":")) {
           key = ":" + key;
         }
-        string strval = vx_core.vx_string_from_any_indent(valsub, indentint, linefeed);
+        string strval = Vx_core.vx_string_from_any_indent(valsub, indentint, linefeed);
         if (strval.Contains("\n")) {
           strval = "\n  " + indenttext + strval;
         } else {
@@ -682,26 +682,26 @@
         output += "\n" + indenttext + " " + key + strval;
       }
       if (valmap.vx_msgblock() != null) {
-        string msgtext = vx_core.vx_string_from_any_indent(valmap.vx_msgblock(), indentint, linefeed);
+        string msgtext = Vx_core.vx_string_from_any_indent(valmap.vx_msgblock(), indentint, linefeed);
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
       }
       output = "(" + typedefname.vx_string() + output + ")";
-    } else if (value is vx_core.Type_struct) {
-      vx_core.Type_struct valstruct = vx_core.f_any_from_any(vx_core.t_struct, value);
-      vx_core.Type_typedef typedef = valstruct.vx_typedef();
-      vx_core.Type_string typedefname = typedef.name();
+    } else if (value is Vx_core.Type_struct) {
+      Vx_core.Type_struct valstruct = Vx_core.f_any_from_any(Vx_core.t_struct, value);
+      Vx_core.Type_typedef typedef = valstruct.vx_typedef();
+      Vx_core.Type_string typedefname = typedef.name();
       int indentint2 = indent;
       indentint2 += 2;
-      Map<string, vx_core.Type_any> mapval2 = valstruct.vx_map();
+      Map<string, Vx_core.Type_any> mapval2 = valstruct.vx_map();
       List<string> keys2 = mapval2.keys();
       foreach (string skey in keys2) {
         string key = skey;
-        vx_core.Type_any valsub2 = mapval2.get(key);
-        if (!vx_core.f_is_empty_1(valsub2).vx_boolean()) {
+        Vx_core.Type_any valsub2 = mapval2.get(key);
+        if (!Vx_core.f_is_empty_1(valsub2).vx_boolean()) {
           if (!key.StartsWith(":")) {
             key = ":" + key;
           }
-          string strval2 = vx_core.vx_string_from_any_indent(valsub2, indentint2, linefeed);
+          string strval2 = Vx_core.vx_string_from_any_indent(valsub2, indentint2, linefeed);
           if (strval2.Contains("\n")) {
             strval2 = "\n  " + indenttext + strval2;
           } else {
@@ -711,17 +711,17 @@
         }
       }
       if (valstruct.vx_msgblock() != null) {
-        string msgtext2 = vx_core.vx_string_from_any_indent(valstruct.vx_msgblock(), indentint2, linefeed);
+        string msgtext2 = Vx_core.vx_string_from_any_indent(valstruct.vx_msgblock(), indentint2, linefeed);
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext2;
       }
       output = "(" + typedefname.vx_string() + output + ")";
-    } else if (value is vx_core.Type_func) {
-      vx_core.Type_func valfunc = vx_core.f_any_from_any(vx_core.t_func, value);
-      vx_core.Type_funcdef funcdef = valfunc.vx_funcdef();
-      vx_core.Type_string funcdefname = vx_core.f_funcname_from_funcdef(funcdef);
+    } else if (value is Vx_core.Type_func) {
+      Vx_core.Type_func valfunc = Vx_core.f_any_from_any(Vx_core.t_func, value);
+      Vx_core.Type_funcdef funcdef = valfunc.vx_funcdef();
+      Vx_core.Type_string funcdefname = Vx_core.f_funcname_from_funcdef(funcdef);
       output = funcdefname.vx_string();
       if (valfunc.vx_msgblock() != null) {
-        string msgtext = vx_core.vx_string_from_any_indent(valfunc.vx_msgblock(), indent, linefeed);
+        string msgtext = Vx_core.vx_string_from_any_indent(valfunc.vx_msgblock(), indent, linefeed);
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
       }
       output = "(" + output + ")";
@@ -753,23 +753,23 @@
     string output = sb.ToString();
     return output;
   }
-  public static vx_core.Type_typedef typedef_new(
+  public static Vx_core.Type_typedef typedef_new(
     string pkgname,
     string name,
     string extend,
-    vx_core.Type_typelist traits,
-    vx_core.Type_typelist allowtypes,
-    vx_core.Type_typelist disallowtypes,
-    vx_core.Type_funclist allowfuncs,
-    vx_core.Type_funclist disallowfuncs,
-    vx_core.Type_anylist allowvalues,
-    vx_core.Type_anylist disallowvalues,
-    vx_core.Type_argmap properties
+    Vx_core.Type_typelist traits,
+    Vx_core.Type_typelist allowtypes,
+    Vx_core.Type_typelist disallowtypes,
+    Vx_core.Type_funclist allowfuncs,
+    Vx_core.Type_funclist disallowfuncs,
+    Vx_core.Type_anylist allowvalues,
+    Vx_core.Type_anylist disallowvalues,
+    Vx_core.Type_argmap properties
   ) {
-    vx_core.Class_typedef output = new vx_core.Class_typedef();
-    output.vx_p_pkgname = vx_core.vx_new_string(pkgname);
-    output.vx_p_name = vx_core.vx_new_string(name);
-    output.vx_p_extend = vx_core.vx_new_string(extend);
+    Vx_core.Class_typedef output = new Vx_core.Class_typedef();
+    output.vx_p_pkgname = Vx_core.vx_new_string(pkgname);
+    output.vx_p_name = Vx_core.vx_new_string(name);
+    output.vx_p_extend = Vx_core.vx_new_string(extend);
     output.vx_p_traits = traits;
     output.vx_p_allowtypes = allowtypes;
     output.vx_p_disallowtypes = disallowtypes;
@@ -781,27 +781,27 @@
     return output;
   }
 
-  public static vx_core.Type_anylist vx_anylist_from_arraystring(string[] arraystring) {
+  public static Vx_core.Type_anylist vx_anylist_from_arraystring(string[] arraystring) {
     List<Object> listany = new List<Object>();
     foreach (string svalue in arraystring) {
-      vx_core.Type_string value = vx_core.vx_new_string(svalue);
+      Vx_core.Type_string value = Vx_core.vx_new_string(svalue);
       listany.Add(value);
     }
     Object[] arrayany = listany.ToArray();
-    vx_core.Type_anylist output = vx_core.vx_new(vx_core.t_anylist, arrayany);
+    Vx_core.Type_anylist output = Vx_core.vx_new(Vx_core.t_anylist, arrayany);
     return output;
   }
 
   // Warning!: Blocking
-  public static T vx_sync_from_async<T>(T generic_any_1, Task<T> future) where T : vx_core.Type_any {
-    T output = vx_core.f_empty(generic_any_1);
+  public static T vx_sync_from_async<T>(T generic_any_1, Task<T> future) where T : Vx_core.Type_any {
+    T output = Vx_core.f_empty(generic_any_1);
     try {
       future.Wait();
       output = future.Result;
     } catch (Exception e) {
-      vx_core.Type_msg msg = vx_core.vx_msg_from_exception("sync<-async", e);
-      vx_core.Type_any val = generic_any_1.vx_new(msg);
-      output = vx_core.f_any_from_any(generic_any_1, val);
+      Vx_core.Type_msg msg = Vx_core.vx_msg_from_exception("sync<-async", e);
+      Vx_core.Type_any val = generic_any_1.vx_new(msg);
+      output = Vx_core.f_any_from_any(generic_any_1, val);
     }
     return output;
   }

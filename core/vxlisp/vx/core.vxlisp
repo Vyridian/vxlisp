@@ -1483,8 +1483,8 @@
    "vx_core::Type_any val = vstruct->vx_get_any(key);
     output = vx_core::vx_any_from_any(generic_any_1, val);"
   :csharp
-   "vx_core.Type_any val = vstruct.vx_any(key);
-    output = vx_core.f_any_from_any(generic_any_1, val);"
+   "Vx_core.Type_any val = vstruct.vx_any(key);
+    output = Vx_core.f_any_from_any(generic_any_1, val);"
   :js
    "const subvalmap = vstruct['vx_value']
     if (subvalmap != undefined) {
@@ -1504,8 +1504,8 @@
 (func async : any-1 :async
  [value : any-1]
  (native
-  :csharpt
-   "output = vx_core.vx_async_new_completed(value);"
+  :csharp
+   "output = Vx_core.vx_async_new_completed(value);"
   :java
    "output = Core.vx_async_new_completed(value);"
   :js
@@ -1691,8 +1691,8 @@
   :cpp
    "T* output = vx_core::vx_copy(generic_any_1, value, values->vx_list());"
   :csharp
-   "vx_core.Type_any[] arrayany = vx_core.arrayany_from_anylist(values);
-    object[] arrayobj = (vx_core.Type_any[])arrayany;
+   "Vx_core.Type_any[] arrayany = Vx_core.arrayany_from_anylist(values);
+    object[] arrayobj = (Vx_core.Type_any[])arrayany;
     T output = (T)(((T)value).vx_copy(arrayobj));"
   :java
    "@SuppressWarnings(“unchecked”)
@@ -1724,7 +1724,7 @@
   :cpp
    "T* output = vx_core::vx_any_from_any(type, type->vx_empty());"
   :csharp
-   "T output = vx_core.vx_empty(type);"
+   "T output = Vx_core.vx_empty(type);"
   :java
    "T output = Core.vx_empty(type);"
   :js
@@ -1984,9 +1984,9 @@
       try {
         float floatresult = float.Parse(strval);
         intresult = (int)floatresult;
-        return vx_core.vx_new_int(intresult);
+        return Vx_core.vx_new_int(intresult);
       } catch (Exception ex) {
-        return vx_core.c_notanumber;
+        return Vx_core.c_notanumber;
       }"
     :java
      "int intresult = 0;
@@ -2068,7 +2068,7 @@
    "string stext = text.vx_string();
     string sfind = find.vx_string();
     if (stext.EndsWith(sfind)) {
-      output = vx_core.c_true;
+      output = Vx_core.c_true;
     }"
   :js
    "if (text.endsWith(find)) {
@@ -2729,8 +2729,8 @@
   :cpp
    "T* output = vx_core::vx_new(type, values->vx_list());"
   :csharp
-   "vx_core.Type_any[] arrayany = vx_core.arrayany_from_anylist(values);
-    object[] arrayobj = (vx_core.Type_any[])arrayany;
+   "Vx_core.Type_any[] arrayany = Vx_core.arrayany_from_anylist(values);
+    object[] arrayobj = (Vx_core.Type_any[])arrayany;
     T output = (T)(type.vx_new(arrayobj));"
   :java
    "Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
