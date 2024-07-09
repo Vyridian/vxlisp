@@ -975,12 +975,12 @@
  :doc "Returns then named child from a ui.")
 
 (func ui-from<-event : ui
- [event : event/event]
+ [evt : event/event]
  (let : ui
-  [uid : string := (:from event)]
+  [uid : string := (:from evt)]
   (ui-readstate<-uid uid))
  :context
- :doc "Returns (:from event) cast as ui")
+ :doc "Returns (:from evt) cast as ui")
 
 (func ui-layout : ui
  [uiarg : ui]

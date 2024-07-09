@@ -11742,26 +11742,26 @@ namespace vx_ui_ui {
   //}
 
   // (func ui-from<-event)
-  vx_ui_ui::Type_ui f_ui_from_from_event(vx_core::Type_context context, vx_event::Type_event event) {
+  vx_ui_ui::Type_ui f_ui_from_from_event(vx_core::Type_context context, vx_event::Type_event evt) {
     vx_ui_ui::Type_ui output = vx_ui_ui::e_ui;
-    vx_core::vx_reserve(event);
+    vx_core::vx_reserve(evt);
     output = vx_core::f_let(
       vx_ui_ui::t_ui,
-      vx_core::t_any_from_func->vx_fn_new({event, context}, [event, context]() {
-        vx_core::Type_string uid = event->from();
+      vx_core::t_any_from_func->vx_fn_new({evt, context}, [evt, context]() {
+        vx_core::Type_string uid = evt->from();
         vx_core::vx_ref_plus(uid);
         vx_ui_ui::Type_ui output_1 = vx_ui_ui::f_ui_readstate_from_uid(context, uid);
         vx_core::vx_release_one_except(uid, output_1);
         return output_1;
       })
     );
-    vx_core::vx_release_one_except(event, output);
+    vx_core::vx_release_one_except(evt, output);
     return output;
   }
   /**
    * @function ui_from_from_event
-   * Returns (:from event) cast as ui
-   * @param  {event} event
+   * Returns (:from evt) cast as ui
+   * @param  {event} evt
    * @return {ui}
    * (func ui-from<-event)
    */
@@ -11843,8 +11843,8 @@ namespace vx_ui_ui {
     vx_core::Type_any Class_ui_from_from_event::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_event::Type_event event = vx_core::vx_any_from_any(vx_event::t_event, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_ui_ui::f_ui_from_from_event(context, event);
+      vx_event::Type_event evt = vx_core::vx_any_from_any(vx_event::t_event, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_ui_ui::f_ui_from_from_event(context, evt);
       vx_core::vx_release_except(arglist, output);
       return output;
     }

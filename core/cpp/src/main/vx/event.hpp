@@ -50,10 +50,10 @@ namespace vx_event {
   extern Func_eventmap_from_eventlist e_eventmap_from_eventlist;
   extern Func_eventmap_from_eventlist t_eventmap_from_eventlist;
   // (func event<-event)
-  vx_event::Type_event f_event_from_event(vx_core::Type_context context, vx_event::Type_event event);
+  vx_event::Type_event f_event_from_event(vx_core::Type_context context, vx_event::Type_event evt);
 
   // (func event<-event-async)
-  vx_core::vx_Type_async f_event_from_event_async(vx_core::Type_context context, vx_event::Type_event event);
+  vx_core::vx_Type_async f_event_from_event_async(vx_core::Type_context context, vx_event::Type_event evt);
 
   // (func eventmap<-eventlist)
   vx_event::Type_eventmap f_eventmap_from_eventlist(vx_event::Type_eventlist eventlist);
@@ -316,20 +316,20 @@ namespace vx_event {
   };
 
   // (func any-from<-event)
-  template <class T> T* f_any_from_from_event(T* generic_any_1, vx_event::Type_event event) {
+  template <class T> T* f_any_from_from_event(T* generic_any_1, vx_event::Type_event evt) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_reserve(event);
+    vx_core::vx_reserve(evt);
     output = vx_core::f_let(
       generic_any_1,
-      vx_core::t_any_from_func->vx_fn_new({event, generic_any_1}, [event, generic_any_1]() {
-        vx_core::Type_any value = event->from();
+      vx_core::t_any_from_func->vx_fn_new({evt, generic_any_1}, [evt, generic_any_1]() {
+        vx_core::Type_any value = evt->from();
         vx_core::vx_ref_plus(value);
         vx_core::Type_any output_1 = vx_core::f_any_from_any(generic_any_1, value);
         vx_core::vx_release_one_except(value, output_1);
         return output_1;
       })
     );
-    vx_core::vx_release_one_except(event, output);
+    vx_core::vx_release_one_except(evt, output);
     return output;
   }
 

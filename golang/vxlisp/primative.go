@@ -345,3 +345,12 @@ func StringUCaseFirst(str string) string {
 	}
 	return output
 }
+
+func StringUCaseFirstFromStringDelim(text string, delim string) string {
+	liststring := ListStringFromStringSplit(text, delim)
+	for i, text := range liststring {
+		liststring[i] = StringUCaseFirst(text)
+	}
+	output := StringFromListStringJoin(liststring, delim)
+	return output
+}

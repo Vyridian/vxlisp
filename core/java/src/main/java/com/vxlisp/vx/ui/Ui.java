@@ -13174,13 +13174,13 @@ public final class Ui {
 
   /**
    * @function ui_from_from_event
-   * Returns (:from event) cast as ui
-   * @param  {event} event
+   * Returns (:from evt) cast as ui
+   * @param  {event} evt
    * @return {ui}
    * (func ui-from<-event)
    */
   public interface Func_ui_from_from_event extends Core.Func_any_from_any_context {
-    public Ui.Type_ui vx_ui_from_from_event(final Core.Type_context context, final Event.Type_event event);
+    public Ui.Type_ui vx_ui_from_from_event(final Core.Type_context context, final Event.Type_event evt);
   }
 
   public static class Class_ui_from_from_event extends Core.Class_base implements Func_ui_from_from_event {
@@ -13252,14 +13252,14 @@ public final class Ui {
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
-      Event.Type_event event = Core.f_any_from_any(Event.t_event, arglist.vx_any(Core.vx_new_int(0)));
-      output = Ui.f_ui_from_from_event(context, event);
+      Event.Type_event evt = Core.f_any_from_any(Event.t_event, arglist.vx_any(Core.vx_new_int(0)));
+      output = Ui.f_ui_from_from_event(context, evt);
       return output;
     }
 
     @Override
-    public Ui.Type_ui vx_ui_from_from_event(final Core.Type_context context, final Event.Type_event event) {
-      return Ui.f_ui_from_from_event(context, event);
+    public Ui.Type_ui vx_ui_from_from_event(final Core.Type_context context, final Event.Type_event evt) {
+      return Ui.f_ui_from_from_event(context, evt);
     }
 
   }
@@ -13267,12 +13267,12 @@ public final class Ui {
   public static final Func_ui_from_from_event e_ui_from_from_event = new Ui.Class_ui_from_from_event();
   public static final Func_ui_from_from_event t_ui_from_from_event = new Ui.Class_ui_from_from_event();
 
-  public static Ui.Type_ui f_ui_from_from_event(final Core.Type_context context, final Event.Type_event event) {
+  public static Ui.Type_ui f_ui_from_from_event(final Core.Type_context context, final Event.Type_event evt) {
     Ui.Type_ui output = Ui.e_ui;
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string uid = event.from();
+        final Core.Type_string uid = evt.from();
         return Ui.f_ui_readstate_from_uid(context, uid);
       })
     );

@@ -42,7 +42,6 @@ public final class Core {
 
   public static class Class_base {
     protected int vx_iref = 0;
-    protected Core.Type_constdef vxconstdef = null;
     protected Core.Type_msgblock vxmsgblock = null;
     public List<Type_any> vx_dispose() {
       this.vx_iref = 0;

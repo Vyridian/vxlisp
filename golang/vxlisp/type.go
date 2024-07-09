@@ -134,6 +134,10 @@ var structtype = NewTypeStruct("vx/core/struct")
 
 var structtype2 = NewType("vx/core/struct-2")
 
+var testpackagetype = NewTypeStruct("vx/test/testpackage")
+
+var testpackagelisttype = NewTypeList("vx/test/testpackagelist", testpackagetype)
+
 var testresulttype = NewTypeStruct("vx/test/testresult")
 
 var typedeftype = NewType("vx/core/typedef")

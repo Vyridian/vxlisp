@@ -3024,7 +3024,7 @@
                 <div class="tr">
                   <div class="td">srccsharp</div>
                   <div class="td">:source</div>
-                  <div class="td">../csharp/src/main</div>
+                  <div class="td">../csharp/src</div>
                   <div class="td">:csharp</div>
                   <div class="td">vx/core/main</div>
                   <div class="td">vx/translation/en/context-en</div>
@@ -3034,7 +3034,7 @@
                 <div class="tr">
                   <div class="td">testcsharp</div>
                   <div class="td">:test</div>
-                  <div class="td">../csharp/src/test</div>
+                  <div class="td">../csharp/test</div>
                   <div class="td">:csharp</div>
                   <div class="td"></div>
                   <div class="td">vx/translation/en/context-test</div>
@@ -3207,14 +3207,14 @@
   (cmd srccsharp
    :code    :source
    :lang    :csharp
-   :path    ../csharp/src/main
+   :path    ../csharp/src
    :main    vx/core/main
    :context vx/translation/en/context-en
    :doc     &quot;Build C# Source Code&quot;)
   (cmd testcsharp
    :code    :test
    :lang    :csharp
-   :path    ../csharp/src/test
+   :path    ../csharp/test
    :context vx/translation/en/context-test
    :doc     &quot;Build C# Test Code&quot;)
   (cmd srcjava
@@ -4842,8 +4842,8 @@
    &quot;vx_core::Type_any val = vstruct-&gt;vx_get_any(key);
     output = vx_core::vx_any_from_any(generic_any_1, val);&quot;
   :csharp
-   &quot;Vx_core.Type_any val = vstruct.vx_any(key);
-    output = Vx_core.f_any_from_any(generic_any_1, val);&quot;
+   &quot;Vx.Core.Type_any val = vstruct.vx_any(key);
+    output = Vx.Core.f_any_from_any(generic_any_1, val);&quot;
   :js
    &quot;const subvalmap = vstruct['vx_value']
     if (subvalmap != undefined) {
@@ -4864,7 +4864,7 @@
  [value : any-1]
  (native
   :csharp
-   &quot;output = Vx_core.vx_async_new_completed(value);&quot;
+   &quot;output = Vx.Core.vx_async_new_completed(value);&quot;
   :java
    &quot;output = Core.vx_async_new_completed(value);&quot;
   :js
@@ -5050,8 +5050,8 @@
   :cpp
    &quot;T* output = vx_core::vx_copy(generic_any_1, value, values-&gt;vx_list());&quot;
   :csharp
-   &quot;Vx_core.Type_any[] arrayany = Vx_core.arrayany_from_anylist(values);
-    object[] arrayobj = (Vx_core.Type_any[])arrayany;
+   &quot;Vx.Core.Type_any[] arrayany = Vx.Core.arrayany_from_anylist(values);
+    object[] arrayobj = (Vx.Core.Type_any[])arrayany;
     T output = (T)(((T)value).vx_copy(arrayobj));&quot;
   :java
    &quot;@SuppressWarnings(“unchecked”)
@@ -5083,7 +5083,7 @@
   :cpp
    &quot;T* output = vx_core::vx_any_from_any(type, type-&gt;vx_empty());&quot;
   :csharp
-   &quot;T output = Vx_core.vx_empty(type);&quot;
+   &quot;T output = Vx.Core.vx_empty(type);&quot;
   :java
    &quot;T output = Core.vx_empty(type);&quot;
   :js
@@ -5343,9 +5343,9 @@
       try {
         float floatresult = float.Parse(strval);
         intresult = (int)floatresult;
-        return Vx_core.vx_new_int(intresult);
+        return Vx.Core.vx_new_int(intresult);
       } catch (Exception ex) {
-        return Vx_core.c_notanumber;
+        return Vx.Core.c_notanumber;
       }&quot;
     :java
      &quot;int intresult = 0;
@@ -5427,7 +5427,7 @@
    &quot;string stext = text.vx_string();
     string sfind = find.vx_string();
     if (stext.EndsWith(sfind)) {
-      output = Vx_core.c_true;
+      output = Vx.Core.c_true;
     }&quot;
   :js
    &quot;if (text.endsWith(find)) {
@@ -6088,8 +6088,8 @@
   :cpp
    &quot;T* output = vx_core::vx_new(type, values-&gt;vx_list());&quot;
   :csharp
-   &quot;Vx_core.Type_any[] arrayany = Vx_core.arrayany_from_anylist(values);
-    object[] arrayobj = (Vx_core.Type_any[])arrayany;
+   &quot;Vx.Core.Type_any[] arrayany = Vx.Core.arrayany_from_anylist(values);
+    object[] arrayobj = (Vx.Core.Type_any[])arrayany;
     T output = (T)(type.vx_new(arrayobj));&quot;
   :java
    &quot;Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
@@ -16717,8 +16717,8 @@ improves readability.</div>
    &quot;vx_core::Type_any val = vstruct-&gt;vx_get_any(key);
     output = vx_core::vx_any_from_any(generic_any_1, val);&quot;
   :csharp
-   &quot;Vx_core.Type_any val = vstruct.vx_any(key);
-    output = Vx_core.f_any_from_any(generic_any_1, val);&quot;
+   &quot;Vx.Core.Type_any val = vstruct.vx_any(key);
+    output = Vx.Core.f_any_from_any(generic_any_1, val);&quot;
   :js
    &quot;const subvalmap = vstruct['vx_value']
     if (subvalmap != undefined) {
@@ -16797,7 +16797,7 @@ improves readability.</div>
  [value : any-1]
  (native
   :csharp
-   &quot;output = Vx_core.vx_async_new_completed(value);&quot;
+   &quot;output = Vx.Core.vx_async_new_completed(value);&quot;
   :java
    &quot;output = Core.vx_async_new_completed(value);&quot;
   :js
@@ -17750,8 +17750,8 @@ improves readability.</div>
   :cpp
    &quot;T* output = vx_core::vx_copy(generic_any_1, value, values-&gt;vx_list());&quot;
   :csharp
-   &quot;Vx_core.Type_any[] arrayany = Vx_core.arrayany_from_anylist(values);
-    object[] arrayobj = (Vx_core.Type_any[])arrayany;
+   &quot;Vx.Core.Type_any[] arrayany = Vx.Core.arrayany_from_anylist(values);
+    object[] arrayobj = (Vx.Core.Type_any[])arrayany;
     T output = (T)(((T)value).vx_copy(arrayobj));&quot;
   :java
    &quot;@SuppressWarnings(“unchecked”)
@@ -17903,7 +17903,7 @@ improves readability.</div>
   :cpp
    &quot;T* output = vx_core::vx_any_from_any(type, type-&gt;vx_empty());&quot;
   :csharp
-   &quot;T output = Vx_core.vx_empty(type);&quot;
+   &quot;T output = Vx.Core.vx_empty(type);&quot;
   :java
    &quot;T output = Core.vx_empty(type);&quot;
   :js
@@ -18983,9 +18983,9 @@ improves readability.</div>
       try {
         float floatresult = float.Parse(strval);
         intresult = (int)floatresult;
-        return Vx_core.vx_new_int(intresult);
+        return Vx.Core.vx_new_int(intresult);
       } catch (Exception ex) {
-        return Vx_core.c_notanumber;
+        return Vx.Core.c_notanumber;
       }&quot;
     :java
      &quot;int intresult = 0;
@@ -19250,7 +19250,7 @@ improves readability.</div>
    &quot;string stext = text.vx_string();
     string sfind = find.vx_string();
     if (stext.EndsWith(sfind)) {
-      output = Vx_core.c_true;
+      output = Vx.Core.c_true;
     }&quot;
   :js
    &quot;if (text.endsWith(find)) {
@@ -22168,8 +22168,8 @@ improves readability.</div>
   :cpp
    &quot;T* output = vx_core::vx_new(type, values-&gt;vx_list());&quot;
   :csharp
-   &quot;Vx_core.Type_any[] arrayany = Vx_core.arrayany_from_anylist(values);
-    object[] arrayobj = (Vx_core.Type_any[])arrayany;
+   &quot;Vx.Core.Type_any[] arrayany = Vx.Core.arrayany_from_anylist(values);
+    object[] arrayobj = (Vx.Core.Type_any[])arrayany;
     T output = (T)(type.vx_new(arrayobj));&quot;
   :java
    &quot;Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
@@ -73852,12 +73852,12 @@ output : list-1 := (empty list-1)
  :doc &quot;Returns then named child from a ui.&quot;)
 
 (func ui-from&lt;-event : ui
- [event : event/event]
+ [evt : event/event]
  (let : ui
-  [uid : string := (:from event)]
+  [uid : string := (:from evt)]
   (ui-readstate&lt;-uid uid))
  :context
- :doc &quot;Returns (:from event) cast as ui&quot;)
+ :doc &quot;Returns (:from evt) cast as ui&quot;)
 
 (func ui-layout : ui
  [uiarg : ui]
@@ -81684,7 +81684,7 @@ output : list-1 := (empty list-1)
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt">Returns (:from event) cast as ui</div>
+                <div class="txt">Returns (:from evt) cast as ui</div>
               </li>
             </ul>
             <div class="lbl">Function Name:</div>
@@ -81713,7 +81713,7 @@ output : list-1 := (empty list-1)
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">event</div>
+                    <div class="td">evt</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/event/event')">vx/event/event</span></div>
                     <div class="td"></div>
                   </div>
@@ -81735,12 +81735,12 @@ output : list-1 := (empty list-1)
               <ul>
                 <li>
                   <div class="source">(func ui-from&lt;-event : ui
- [event : event/event]
+ [evt : event/event]
  (let : ui
-  [uid : string := (:from event)]
+  [uid : string := (:from evt)]
   (ui-readstate&lt;-uid uid))
  :context
- :doc &quot;Returns (:from event) cast as ui&quot;)</div>
+ :doc &quot;Returns (:from evt) cast as ui&quot;)</div>
                 </li>
               </ul>
             </details>

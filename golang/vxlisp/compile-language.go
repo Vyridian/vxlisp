@@ -50,8 +50,8 @@ func NewLangCsharp() *vxlang {
 	output.name = "csharp"
 	output.sourcename = "Core"
 	output.sourcefile = ".cs"
-	output.pkgpath = "Vx_core"
-	output.pkgname = "Vx_core"
+	output.pkgpath = "Vx.Core"
+	output.pkgname = "Vx.Core"
 	output.pkgref = "."
 	output.future = "Task"
 	output.indent = "  "
@@ -673,7 +673,8 @@ func LangFromPackage(lang *vxlang, pkg *vxpackage, project *vxproject, pkgprefix
 	case "csharp":
 		ipos := IntFromStringFindLast(pkg.name, "/")
 		csnamespace := StringSubstring(pkg.name, 0, ipos)
-		csnamespace = StringUCaseFirst(csnamespace)
+		csnamespace = StringFromStringFindReplace(csnamespace, "/", ".")
+		csnamespace = StringUCaseFirstFromStringDelim(csnamespace, ".")
 		packageline = "namespace " + csnamespace + lang.lineend + "\n"
 	case "java":
 		packageline = "package " + pkgpath + lang.lineend + "\n"
@@ -2386,8 +2387,9 @@ func LangImport(lang *vxlang, project *vxproject, pkgname string, imports string
 	case "cpp":
 		importline = "#include \"" + pkgname + ".hpp\""
 	case "csharp":
-		path := StringFromStringFindReplace(pkgname, "/", ".")
-		importline = "using " + path + ";"
+		//path := StringFromStringFindReplace(pkgname, "/", ".")
+		//path = StringUCaseFirstFromStringDelim(path, ".")
+		//importline = "using static " + path + ";"
 	case "java":
 		ipos := IntFromStringFindLast(pkgname, "/")
 		path := StringSubstring(pkgname, 0, ipos)
@@ -2413,8 +2415,8 @@ func LangImportTest(lang *vxlang, project *vxproject, pkgname string, imports st
 	case "cpp":
 		importline = "#include \"" + pkgname + "test.hpp\""
 	case "csharp":
-		path := StringFromStringFindReplace(pkgname, "/", ".")
-		importline = "using " + path + ";"
+		//path := StringFromStringFindReplace(pkgname, "/", ".")
+		//importline = "using " + path + ";"
 	case "java":
 		ipos := IntFromStringFindLast(pkgname, "/")
 		path := StringSubstring(pkgname, 0, ipos)
@@ -2490,8 +2492,8 @@ func LangImportsFromPackage(lang *vxlang, pkg *vxpackage, pkgprefix string, body
 				if lib.pkg != nil {
 					switch lang.name {
 					case "csharp":
-						libpath = StringSubstring(pkgpath, 0, -1)
-						libpath = StringUCaseFirst(libpath)
+						//libpath = StringSubstring(pkgpath, 0, -1)
+						libpath = StringUCaseFirstFromStringDelim(libpkgpath, "/")
 					case "java", "kotlin":
 						libprefix := pkgpath
 						libprefix = lib.pkg.project.javadomain
@@ -2504,7 +2506,7 @@ func LangImportsFromPackage(lang *vxlang, pkg *vxpackage, pkgprefix string, body
 				importline := ""
 				switch lang.name {
 				case "csharp":
-					importline = "\nusing " + libpath + lang.lineend
+					//importline = "\nusing static " + libpath + lang.lineend
 				case "java", "kotlin":
 					importline = "\nimport " + libpath + lang.lineend
 				}
@@ -3073,7 +3075,8 @@ func LangNameFromPkgName(lang *vxlang, pkgname string) string {
 	output := ""
 	switch lang.name {
 	case "csharp":
-		output = StringUCaseFirst(pkgname)
+		output = StringUCaseFirstFromStringDelim(pkgname, "/")
+		output = StringFromStringFindReplace(output, "/", ".")
 	case "java":
 		ipos := IntFromStringFindLast(pkgname, "/")
 		output = StringSubstring(pkgname, ipos+1, len(pkgname))
@@ -3151,7 +3154,7 @@ func LangNameFromTypeSimple(lang *vxlang, typ *vxtype, simple bool) string {
 	case rawmaptype:
 		switch lang.name {
 		case "csharp":
-			name = "Vx_core.Map"
+			name = "Vx.Core.Map"
 		case "java":
 			name = "Map"
 		}
@@ -3160,7 +3163,7 @@ func LangNameFromTypeSimple(lang *vxlang, typ *vxtype, simple bool) string {
 		case "cpp":
 			name = "std::map<string, " + LangNameFromTypeSimple(lang, anytype, true) + ">"
 		case "csharp":
-			name = "Vx_core.Map<string, " + LangNameFromTypeSimple(lang, anytype, true) + ">"
+			name = "Vx.Core.Map<string, " + LangNameFromTypeSimple(lang, anytype, true) + ">"
 		case "java":
 			name = "Map<String, " + LangNameFromTypeSimple(lang, anytype, true) + ">"
 		}
@@ -3306,14 +3309,14 @@ func LangNameTypeFullFromTypeSimple(lang *vxlang, typ *vxtype, simple bool) stri
 	case rawmaptype:
 		switch lang.name {
 		case "csharp":
-			name = "Vx_core.Map"
+			name = "Vx.Core.Map"
 		case "java", "kotlin":
 			name = "Map"
 		}
 	case rawmapanytype:
 		switch lang.name {
 		case "csharp":
-			name = "Vx_core.Map<string, " + LangNameTypeFullFromTypeSimple(lang, anytype, true) + ">"
+			name = "Vx.Core.Map<string, " + LangNameTypeFullFromTypeSimple(lang, anytype, true) + ">"
 		case "java", "kotlin":
 			name = "Map<String, " + LangNameTypeFullFromTypeSimple(lang, anytype, true) + ">"
 		}
@@ -3350,7 +3353,7 @@ func LangNameTypeFromTypeSubtype(lang *vxlang, typ *vxtype, subtype *vxtype) str
 		case "cpp":
 			output = "std::map<std::string, " + output + ">"
 		case "csharp":
-			output = "Vx_core.Map<string, " + output + ">"
+			output = "Vx.Core.Map<string, " + output + ">"
 		case "java":
 			output = "Map<String, " + output + ">"
 		}
@@ -3366,7 +3369,9 @@ func LangNamespaceFromPackage(lang *vxlang, pkgname string) (string, string) {
 		namespaceopen = "\nnamespace " + pkgname + " {\n\n"
 		namespaceclose = "\n}\n"
 	case "csharp":
-		namespaceopen = "\npublic static class " + pkgname + " {\n\n"
+		ipos := IntFromStringFindLast(pkgname, ".")
+		after := StringSubstring(pkgname, ipos+1, len(pkgname))
+		namespaceopen = "\npublic static class " + after + " {\n\n"
 		namespaceclose = "\n}\n"
 	case "java":
 		namespaceopen = "\npublic final class " + pkgname + " {\n\n"
@@ -3948,7 +3953,7 @@ func LangVar(lang *vxlang, varname string, vartype *vxtype, subtype *vxtype, var
 		case rawlisttype:
 			typetext = "List<" + LangNameTypeFullFromType(lang, subtype) + ">"
 		case rawmaptype:
-			typetext = "Vx_core.Map<string, " + LangNameTypeFullFromType(lang, subtype) + ">"
+			typetext = "Vx.Core.Map<string, " + LangNameTypeFullFromType(lang, subtype) + ">"
 		case rawlistunknowntype:
 			typetext = "List<object>"
 		default:
@@ -4606,11 +4611,18 @@ func LangVxFnNewFromFunc(lang *vxlang, fnc *vxfunc, isinterface bool) string {
 						case "java":
 							suppresswarnings = "\n      @SuppressWarnings(\"unchecked\")"
 						}
+						vxasyncanyfromany := ""
+						switch lang.name {
+						case "csharp":
+							vxasyncanyfromany = LangNameFromPkgNameDot(lang, "vx/core") + "vx_async_from_async(generic_any_1, future)"
+						case "java":
+							vxasyncanyfromany = "(" + lang.future + "<T>)future"
+						}
 						asyncbody += "" +
 							"\n      " + LangNameTypeFromType(lang, arg.vxtype) + " inputval = " + LangNameFromPkgNameDot(lang, "vx/core") + "f_any_from_any(" + LangNameTFromType(lang, arg.vxtype) + ", value);" +
-							"\n      " + lang.future + "<" + LangNameTypeFromType(lang, fnc.vxtype) + "> future = " + LangNameFFromFunc(lang, fnc) + "(" + arginputnames + ");" +
+							"\n      " + lang.future + "<" + LangNameTypeFromType(lang, fnc.vxtype) + "> future = " + LangNameFFromFunc(lang, fnc) + "(" + arginputnames + ")" + lang.lineend +
 							suppresswarnings +
-							"\n      " + lang.future + "<T> output = (" + lang.future + "<T>)future;"
+							"\n      " + lang.future + "<T> output = " + vxasyncanyfromany + lang.lineend
 					}
 					funcs += "" +
 						LangFuncHeader(lang, LangNameFFromFunc(lang, fnc), funcvxanyfromany, false) +
@@ -4912,7 +4924,7 @@ func LangVxNewMap(lang *vxlang, typ *vxtype, value string) string {
 	output := ""
 	switch lang.name {
 	case "csharp":
-		output = "new Vx_core.LinkedHashMap<string, " + LangNameTypeFromType(lang, typ) + ">(" + value + ")"
+		output = "new Vx.Core.LinkedHashMap<string, " + LangNameTypeFromType(lang, typ) + ">(" + value + ")"
 	case "java":
 		output = "new LinkedHashMap<String, " + LangNameTypeFromType(lang, typ) + ">(" + value + ")"
 	}
@@ -5014,14 +5026,17 @@ func LangVxToString(lang *vxlang, varname string) string {
 }
 
 func LangVxTypedefFromFunc(lang *vxlang, fnc *vxfunc) string {
-	override := ""
+	override1 := ""
+	override2 := ""
 	switch lang.name {
+	case "csharp":
+		override2 = "override "
 	case "java":
-		override = "\n    @Override"
+		override1 = "\n    @Override"
 	}
 	output := "" +
-		override +
-		"\n    public " + LangNameTypeFromType(lang, typedeftype) + " vx_typedef() {" +
+		override1 +
+		"\n    public " + override2 + LangNameTypeFromType(lang, typedeftype) + " vx_typedef() {" +
 		"\n      return " + LangNameTFromType(lang, functype) + lang.typeref + "vx_typedef();" +
 		"\n    }" +
 		"\n"
@@ -5094,6 +5109,18 @@ func LangApp(lang *vxlang, project *vxproject, cmd *vxcommand) string {
 	outputopen = LangVar(lang, "output", rawstringtype, emptytype, "\"\"", 3, false, false)
 	outputclose = LangVarSet(lang, "output", "mainstring.vx_string()", 3)
 	switch lang.name {
+	case "csharp":
+		classopen = indent0 + "class App {\n"
+		classclose = indent0 + "}\n"
+		mainopen = indent1 + "static void Main(string[] args) {"
+		mainclose = indent1 + "}\n"
+		tryopen = indent2 + "try {"
+		tryclose = "" +
+			indent2 + "} catch (Exception e) {" +
+			indent3 + "System.Console.WriteLine(\"Untrapped Error!\" + e.ToString());" +
+			indent2 + "}"
+		arglistinit = LangVar(lang, "arglist", anylisttype, emptytype, LangNameFromPkgNameDot(lang, "vx/core")+"vx_anylist_from_arraystring(args)", 3, true, false)
+		outputprint = indent3 + "System.Console.WriteLine(output);"
 	case "java":
 		classopen = indent0 + "public final class App {\n"
 		classclose = indent0 + "}\n"
@@ -5142,9 +5169,9 @@ func LangApp(lang *vxlang, project *vxproject, cmd *vxcommand) string {
 func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix string) string {
 	imports := ""
 	imports += LangImport(lang, project, "vx/core", imports)
-	contexttext := `
-  ` + LangNameTypeFromType(lang, anylisttype) + ` arglist = ` + LangNameFromPkgNameDot(lang, "vx/core") + `e_anylist;
-  ` + LangNameTypeFromType(lang, contexttype) + ` context = ` + pkgprefix + `vx.Test.f_context_test(arglist);`
+	contexttext := "" +
+		LangVar(lang, "arglist", anylisttype, emptytype, LangNameFromPkgNameDot(lang, "vx/core")+"e_anylist", 0, false, false) +
+		LangVar(lang, "context", contexttype, emptytype, pkgprefix+"vx.Test.f_context_test(arglist)", 0, false, false)
 	if command.context == "" {
 	} else {
 		contextfunc := FuncFromProjectFuncname(project, command.context)
@@ -5177,7 +5204,8 @@ func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix
 			} else {
 				contexttext = `
   ` + LangNameTypeFromType(lang, anylisttype) + ` arglist = ` + LangNameFromPkgNameDot(lang, "vx/core") + `e_anylist;
-  ` + LangNameTypeFromType(lang, contexttype) + ` context = ` + pkgpath + `.` + LangNameFFromFunc(lang, contextfunc) + `(arglist);`
+  ` + LangNameTypeFromType(lang, contexttype) + ` context = ` + pkgpath + `.` + LangNameFFromFunc(lang, contextfunc) + `(arglist);
+`
 			}
 		}
 	}
@@ -5191,50 +5219,86 @@ func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix
 			iscontinue = false
 		}
 		if iscontinue {
-			pkgname := pkg.name
 			if pkg.name != "" {
-				imports += LangImportTest(lang, project, pkgname, imports)
-				pos := strings.LastIndex(pkgname, "/")
-				if pos >= 0 {
-					pkgname = pkgname[pos+1:]
-				}
-				pkgname = StringUCaseFirst(pkgname)
-				testpackage := "\n    " + pkgname + "Test.test_package(context)"
+				imports += LangImportTest(lang, project, pkg.name, imports)
+				testpackage := "\n      " + LangNameFromPkgName(lang, pkg.name) + "Test.test_package(context)"
 				listtestpackage = append(listtestpackage, testpackage)
-				tests += `
-  @Test
-  @DisplayName("` + pkg.name + `")
-  void test_` + StringFromStringFindReplace(pkg.name, "/", "_") + `() {
-	  com.vxlisp.vx.Test.Type_testpackage testpackage = ` + pkgname + `Test.test_package(context);
-	  TestLib.run_testpackage_async(testpackage);
-  }
-
-`
+				switch lang.name {
+				case "csharp":
+					tests += "" +
+						"\n  [TestMethod]" +
+						"\n  public void test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() {" +
+						LangVar(lang, "testpackage", testpackagetype, emptytype, LangNameFromPkgName(lang, pkg.name)+"Test.test_package(context)", 2, false, false) +
+						"\n    TestLib.run_testpackage_async(testpackage);" +
+						"\n  }" +
+						"\n"
+				case "java":
+					tests += "" +
+						"\n  @Test" +
+						"\n  @DisplayName(\"" + pkg.name + "\")" +
+						"\n  void test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() {" +
+						"\n    com.vxlisp.vx.Test.Type_testpackage testpackage = " + LangNameFromPkgName(lang, pkg.name) + "Test.test_package(context);" +
+						"\n    TestLib.run_testpackage_async(testpackage);" +
+						"\n  }" +
+						"\n"
+				}
 			}
 		}
 	}
 	testpackages := StringFromListStringJoin(listtestpackage, ",")
 	namespaceopen, namespaceclose := LangNamespaceFromPackage(lang, "AppTest")
-	output := `
-` + imports + `
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-/**
- * Unit test for whole App.
- */` +
+	writetestsuite := ""
+	switch lang.name {
+	case "csharp":
+		namespaceopen = "" +
+			"\n" +
+			"\nnamespace Test.Vx;" +
+			"\n" +
+			"\npublic class AppTest {" +
+			"\n"
+		namespaceclose = "" +
+			"\n}" +
+			"\n"
+		testpackagedata := "" +
+			LangNameFromPkgNameDot(lang, "vx/core") + "vx_new(" +
+			"\n      com.vxlisp.vx.Test.t_testpackagelist," +
+			testpackages +
+			"\n    );"
+		writetestsuite = "" +
+			"\n 	[TestClass]" +
+			"\n  public class AppTest {" +
+			"\n    [TestMethod]" +
+			"\n    public void test_writetestsuite() {" +
+			LangVar(lang, "testpackagelist", testpackagelisttype, emptytype, testpackagedata, 3, false, false) +
+			"\n    TestLib.write_testpackagelist_async(context, testpackagelist);" +
+			"\n    }" +
+			"\n  }" +
+			"\n"
+	case "java":
+		imports += "" +
+			"\nimport org.junit.jupiter.api.DisplayName;" +
+			"\nimport org.junit.jupiter.api.Test;"
+		writetestsuite = "" +
+			"\n  @Test" +
+			"\n  @DisplayName(\"writetestsuite\")" +
+			"\n  void test_writetestsuite() {" +
+			"\n    com.vxlisp.vx.Test.Type_testpackagelist testpackagelist = " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_new(" +
+			"\n      com.vxlisp.vx.Test.t_testpackagelist," +
+			testpackages +
+			"\n    );" +
+			"\n    TestLib.write_testpackagelist_async(context, testpackagelist);" +
+			"\n  }"
+	}
+	output := "" +
+		"/**" +
+		"\n * Unit test for whole App." +
+		"\n */" +
+		"\n" +
+		imports +
 		namespaceopen +
-		contexttext + `
-` + tests + `
-  @Test
-  @DisplayName("writetestsuite")
-  void test_writetestsuite() {
-    com.vxlisp.vx.Test.Type_testpackagelist testpackagelist = ` + LangNameFromPkgNameDot(lang, "vx/core") + `vx_new(com.vxlisp.vx.Test.t_testpackagelist, ` +
-		testpackages +
-		`
-    );
-    TestLib.write_testpackagelist_async(context, testpackagelist);
-  }` +
+		contexttext +
+		tests +
+		writetestsuite +
 		namespaceclose
 	return output
 }

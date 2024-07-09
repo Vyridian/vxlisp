@@ -670,7 +670,7 @@ namespace vx_ui_ui {
   vx_ui_ui::Type_ui f_ui_child_from_ui_uid(vx_ui_ui::Type_ui ui, vx_core::Type_string uid);
 
   // (func ui-from<-event)
-  vx_ui_ui::Type_ui f_ui_from_from_event(vx_core::Type_context context, vx_event::Type_event event);
+  vx_ui_ui::Type_ui f_ui_from_from_event(vx_core::Type_context context, vx_event::Type_event evt);
 
   // (func ui-layout)
   vx_ui_ui::Type_ui f_ui_layout(vx_ui_ui::Type_ui uiarg);

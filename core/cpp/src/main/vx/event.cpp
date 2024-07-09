@@ -824,7 +824,7 @@ namespace vx_event {
   //}
   /**
    * @function any_from_from_event
-   * @param  {event} event
+   * @param  {event} evt
    * @return {any-1}
    * (func any-from<-event)
    */
@@ -906,8 +906,8 @@ namespace vx_event {
     vx_core::Type_any Class_any_from_from_event::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_any generic_any_1 = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_event::Type_event event = vx_core::vx_any_from_any(vx_event::t_event, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_event::f_any_from_from_event(generic_any_1, event);
+      vx_event::Type_event evt = vx_core::vx_any_from_any(vx_event::t_event, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_event::f_any_from_from_event(generic_any_1, evt);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -915,17 +915,17 @@ namespace vx_event {
   //}
 
   // (func event<-event)
-  vx_event::Type_event f_event_from_event(vx_core::Type_context context, vx_event::Type_event event) {
+  vx_event::Type_event f_event_from_event(vx_core::Type_context context, vx_event::Type_event evt) {
     vx_event::Type_event output = vx_event::e_event;
-    vx_core::vx_reserve(event);
-    output = event;
-    vx_core::vx_release_one_except(event, output);
+    vx_core::vx_reserve(evt);
+    output = evt;
+    vx_core::vx_release_one_except(evt, output);
     return output;
   }
   /**
    * @function event_from_event
    * Template for triggering ui events
-   * @param  {event} event
+   * @param  {event} evt
    * @return {event}
    * (func event<-event)
    */
@@ -1007,8 +1007,8 @@ namespace vx_event {
     vx_core::Type_any Class_event_from_event::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_event::Type_event event = vx_core::vx_any_from_any(vx_event::t_event, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_event::f_event_from_event(context, event);
+      vx_event::Type_event evt = vx_core::vx_any_from_any(vx_event::t_event, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_event::f_event_from_event(context, evt);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -1016,10 +1016,10 @@ namespace vx_event {
   //}
 
   // (func event<-event-async)
-  vx_core::vx_Type_async f_event_from_event_async(vx_core::Type_context context, vx_event::Type_event event) {
+  vx_core::vx_Type_async f_event_from_event_async(vx_core::Type_context context, vx_event::Type_event evt) {
     vx_core::vx_Type_async output = NULL;
-    vx_core::vx_reserve(event);
-    vx_core::vx_release_one(event);
+    vx_core::vx_reserve(evt);
+    vx_core::vx_release_one(evt);
     if (!output) {
       output = vx_core::vx_async_new_from_value(vx_event::e_event);
     }
@@ -1030,7 +1030,7 @@ namespace vx_event {
    * @async
    * @function event_from_event_async
    * Template for triggering ui asynchronous events
-   * @param  {event} event
+   * @param  {event} evt
    * @return {event}
    * (func event<-event-async)
    */
@@ -1111,8 +1111,8 @@ namespace vx_event {
     vx_core::vx_Type_async Class_event_from_event_async::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any);
       vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_event::Type_event event = vx_core::vx_any_from_any(vx_event::t_event, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_event::f_event_from_event_async(context, event);
+      vx_event::Type_event evt = vx_core::vx_any_from_any(vx_event::t_event, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_event::f_event_from_event_async(context, evt);
       vx_core::vx_release(arglist);
       return output;
     }
@@ -1126,10 +1126,10 @@ namespace vx_event {
     output = vx_core::f_map_from_list(
       vx_event::t_eventmap,
       eventlist,
-      vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any event_any) {
-        vx_event::Type_event event = vx_core::vx_any_from_any(vx_event::t_event, event_any);
+      vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any evt_any) {
+        vx_event::Type_event evt = vx_core::vx_any_from_any(vx_event::t_event, evt_any);
         vx_core::Type_any output_1 = 
-          event->name();
+          evt->name();
         return output_1;
       })
     );

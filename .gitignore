@@ -31,3 +31,8 @@ bin
 
 # Ignore vscode
 .vscode
+
+# Ignore csharp
+core/csharp/obj
+core/csharp/src/obj
+core/csharp/test/obj

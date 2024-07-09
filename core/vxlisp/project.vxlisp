@@ -42,14 +42,14 @@
   (cmd srccsharp
    :code    :source
    :lang    :csharp
-   :path    ../csharp/src/main
+   :path    ../csharp/src
    :main    vx/core/main
    :context vx/translation/en/context-en
    :doc     "Build C# Source Code")
   (cmd testcsharp
    :code    :test
    :lang    :csharp
-   :path    ../csharp/src/test
+   :path    ../csharp/test
    :context vx/translation/en/context-test
    :doc     "Build C# Test Code")
   (cmd srcjava

@@ -671,9 +671,6 @@ func CppBodyFromFunc(lang *vxlang, fnc *vxfunc) (string, string, string, *vxmsgb
 				argtypename = "vx_core::Type_any"
 			}
 			argtext := argtypename + " " + LangFromName(arg.alias)
-			if fnc.name == "copy" {
-				MsgLog("copy", argtypename, argtext)
-			}
 			listsimplearg = append(listsimplearg, LangNameTypeFromTypeSimple(lang, argtype, true)+" "+LangFromName(arg.alias))
 			listargname = append(listargname, LangFromName(arg.alias))
 			listreleasename = append(listreleasename, LangFromName(arg.alias))
