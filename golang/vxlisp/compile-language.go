@@ -324,8 +324,16 @@ func LangFilesFromProjectCmd(lang *vxlang, project *vxproject, command *vxcomman
 	var files []*vxfile
 	cmdpath := PathFromProjectCmd(project, command)
 	pkgprefix := ""
+	apppath := cmdpath
+	testpath := cmdpath
 	switch lang.name {
 	case "csharp":
+		apppath += "/App"
+		testpath += "/AppTest"
+		switch command.code {
+		case ":test":
+			pkgprefix = "AppTest.Test"
+		}
 	case "java", "kotlin":
 		pkgprefix = project.javadomain + "."
 	}
@@ -333,18 +341,18 @@ func LangFilesFromProjectCmd(lang *vxlang, project *vxproject, command *vxcomman
 	case ":source":
 		file := NewFile()
 		file.name = "App" + lang.sourcefile
-		file.path = cmdpath
+		file.path = apppath
 		file.text = LangApp(lang, project, command)
 		files = append(files, file)
 	case ":test":
 		file := NewFile()
 		file.name = "AppTest" + lang.sourcefile
-		file.path = cmdpath
+		file.path = testpath
 		file.text = LangAppTest(lang, project, command, pkgprefix)
 		files = append(files, file)
 		file = NewFile()
 		file.name = "TestLib" + lang.sourcefile
-		file.path = cmdpath
+		file.path = testpath
 		file.text = LangTestLib(lang)
 		files = append(files, file)
 	}
@@ -352,12 +360,18 @@ func LangFilesFromProjectCmd(lang *vxlang, project *vxproject, command *vxcomman
 	for _, pkg := range pkgs {
 		subproject := pkg.project
 		subprefix := ""
+		subdomainpath := ""
 		switch lang.name {
 		case "csharp":
+			switch command.code {
+			case ":test":
+				subprefix = "AppTest.Test"
+				subdomainpath = "Test"
+			}
 		case "java", "kotlin":
 			subprefix = subproject.javadomain + "/"
+			subdomainpath = StringFromStringFindReplace(subprefix, ".", "/")
 		}
-		subdomainpath := StringFromStringFindReplace(subprefix, ".", "/")
 		pkgname := pkg.name
 		pkgpath := ""
 		pos := strings.LastIndex(pkgname, "/")
@@ -366,6 +380,10 @@ func LangFilesFromProjectCmd(lang *vxlang, project *vxproject, command *vxcomman
 			pkgname = pkgname[pos+1:]
 		}
 		pkgname = StringUCaseFirst(pkgname)
+		switch lang.name {
+		case "csharp":
+			pkgpath = StringUCaseFirstFromStringDelim(pkgpath, "/")
+		}
 		switch command.code {
 		case ":source":
 			text, msgs := LangFromPackage(lang, pkg, project, subprefix)
@@ -380,7 +398,7 @@ func LangFilesFromProjectCmd(lang *vxlang, project *vxproject, command *vxcomman
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			file := NewFile()
 			file.name = pkgname + "Test" + lang.sourcefile
-			file.path = cmdpath + "/" + subdomainpath + pkgpath
+			file.path = testpath + "/" + subdomainpath + pkgpath
 			file.text = text
 			files = append(files, file)
 		}
@@ -3435,6 +3453,14 @@ func LangPackagePathFromPrefixName(lang *vxlang, pkgprefix string, pkgname strin
 	pkgpath := ""
 	name := ""
 	switch lang.name {
+	case "csharp":
+		pkgpath = pkgprefix + StringUCaseFirstFromStringDelim(pkgname, "/")
+		ipos := IntFromStringFindLast(pkgpath, "/")
+		name = StringSubstring(pkgpath, ipos+1, len(pkgpath))
+		pkgpath = StringSubstring(pkgpath, 0, ipos)
+		pkgpath = StringFromStringFindReplace(pkgpath, "/", ".")
+		pkgpath = LangFromName(pkgpath)
+		name = LangNameFromPkgName(lang, name)
 	case "java":
 		pkgpath = pkgprefix + pkgname
 		ipos := IntFromStringFindLast(pkgpath, "/")
@@ -3447,8 +3473,13 @@ func LangPackagePathFromPrefixName(lang *vxlang, pkgprefix string, pkgname strin
 		name = LangNameFromPkgName(lang, pkgname)
 		pkgpath = name
 	default:
-		name = LangNameFromPkgName(lang, pkgname)
-		pkgpath = name
+		pkgpath = pkgprefix + pkgname
+		ipos := IntFromStringFindLast(pkgpath, "/")
+		name = StringSubstring(pkgpath, ipos+1, len(pkgpath))
+		pkgpath = StringSubstring(pkgpath, 0, ipos)
+		pkgpath = StringFromStringFindReplace(pkgpath, "/", ".")
+		pkgpath = LangFromName(pkgpath)
+		name = LangNameFromPkgName(lang, name)
 	}
 	return pkgpath, name
 }
@@ -3523,16 +3554,6 @@ func LangReplFromFunc(lang *vxlang, fnc *vxfunc) string {
 	}
 	return output
 }
-
-/*
-func LangStringFromProjectCmd(prj *vxproject, cmd *vxcommand) (string, *vxmsgblock) {
-	msgblock := NewMsgBlock("LangStringFromProjectCmd")
-	files, msgs := LangFilesFromProjectCmd(prj, cmd)
-	msgblock = MsgblockAddBlock(msgblock, msgs)
-	text := StringFromListFile(files)
-	return text, msgblock
-}
-*/
 
 func LangTestCase(lang *vxlang, testvalues []vxvalue, testpkg string, testname string, testcasename string, fnc *vxfunc, path string) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("LangTestCase")
@@ -3807,8 +3828,15 @@ func LangTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *
 		"\n  }" +
 		"\n"
 	imports := LangImportsFromPackage(lang, pkg, pkgprefix, body, true)
+	namespace := ""
+	switch lang.name {
+	case "csharp":
+		namespace = "\nnamespace " + pkgpath + lang.lineend
+	case "java":
+		namespace = "\npackage " + pkgpath + lang.lineend
+	}
 	output := "" +
-		"\npackage " + pkgpath + lang.lineend +
+		namespace +
 		"\n" +
 		imports +
 		"\npublic " + LangFinalClass(lang) + "class " + pkgname + "Test {" +
@@ -4102,11 +4130,10 @@ func LangVxAllowCodeFromMap(lang *vxlang, typ *vxtype) string {
 	}
 	allowname := "any"
 	allowtype := anytype
-	allowclass := LangNameTypeFromType(lang, anytype)
 	allowtypes := ListAllowTypeFromType(typ)
 	if len(allowtypes) > 0 {
 		allowtype = allowtypes[0]
-		allowclass = LangNameTypeFullFromType(lang, allowtype)
+		allowclass := LangNameTypeFullFromType(lang, allowtype)
 		allowempty := LangNameEFromType(lang, allowtype)
 		allowname = LangNameFromType(lang, allowtype)
 		output = "" +
@@ -5169,10 +5196,10 @@ func LangApp(lang *vxlang, project *vxproject, cmd *vxcommand) string {
 func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix string) string {
 	imports := ""
 	imports += LangImport(lang, project, "vx/core", imports)
-	contexttext := "" +
-		LangVar(lang, "arglist", anylisttype, emptytype, LangNameFromPkgNameDot(lang, "vx/core")+"e_anylist", 0, false, false) +
-		LangVar(lang, "context", contexttype, emptytype, pkgprefix+"vx.Test.f_context_test(arglist)", 0, false, false)
+	contexttext := LangVar(lang, "arglist", anylisttype, emptytype, LangNameFromPkgNameDot(lang, "vx/core")+"e_anylist", 1, false, false)
 	if command.context == "" {
+		contexttext += "" +
+			LangVar(lang, "context", contexttype, emptytype, pkgprefix+"vx.Test.f_context_test(arglist)", 2, false, false)
 	} else {
 		contextfunc := FuncFromProjectFuncname(project, command.context)
 		if command.context != "" && contextfunc == emptyfunc {
@@ -5197,15 +5224,12 @@ func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix
 				pkgpath = libprefix + StringFromStringFindReplace(pkgpath, "/", ".")
 			}
 			if contextfunc.async {
-				contexttext = `
-  ` + LangNameTypeFromType(lang, anylisttype) + ` arglist = ` + LangNameFromPkgNameDot(lang, "vx/core") + `e_anylist;
-  " + lang.future + "<` + LangNameTypeFromType(lang, contexttype) + `> asynccontext = ` + pkgpath + `.` + LangNameFFromFunc(lang, contextfunc) + `(arglist);
-  ` + LangNameTypeFromType(lang, contexttype) + ` context = ` + LangNameFromPkgNameDot(lang, "vx/core") + `vx_sync_from_async(vx_core::t_context, asynccontext);`
+				contexttext += "" +
+					LangVar(lang, "asynccontext", contexttype, emptytype, pkgpath+"."+LangNameFFromFunc(lang, contextfunc)+"(arglist)", 1, false, true) +
+					LangVar(lang, "context", contexttype, emptytype, LangNameFromPkgNameDot(lang, "vx/core")+"vx_sync_from_async(vx_core.t_context, asynccontext)", 1, false, false)
 			} else {
-				contexttext = `
-  ` + LangNameTypeFromType(lang, anylisttype) + ` arglist = ` + LangNameFromPkgNameDot(lang, "vx/core") + `e_anylist;
-  ` + LangNameTypeFromType(lang, contexttype) + ` context = ` + pkgpath + `.` + LangNameFFromFunc(lang, contextfunc) + `(arglist);
-`
+				contexttext += "" +
+					LangVar(lang, "context", contexttype, emptytype, pkgpath+"."+LangNameFFromFunc(lang, contextfunc)+"(arglist)", 1, false, false)
 			}
 		}
 	}
@@ -5226,9 +5250,9 @@ func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix
 				switch lang.name {
 				case "csharp":
 					tests += "" +
-						"\n  [TestMethod]" +
+						"\n  [Fact]" +
 						"\n  public void test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() {" +
-						LangVar(lang, "testpackage", testpackagetype, emptytype, LangNameFromPkgName(lang, pkg.name)+"Test.test_package(context)", 2, false, false) +
+						LangVar(lang, "testpackage", testpackagetype, emptytype, "Test"+LangNameFromPkgName(lang, pkg.name)+"Test.test_package(context)", 2, false, false) +
 						"\n    TestLib.run_testpackage_async(testpackage);" +
 						"\n  }" +
 						"\n"
@@ -5252,7 +5276,7 @@ func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix
 	case "csharp":
 		namespaceopen = "" +
 			"\n" +
-			"\nnamespace Test.Vx;" +
+			"\nnamespace AppTest;" +
 			"\n" +
 			"\npublic class AppTest {" +
 			"\n"
@@ -5263,15 +5287,12 @@ func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix
 			LangNameFromPkgNameDot(lang, "vx/core") + "vx_new(" +
 			"\n      com.vxlisp.vx.Test.t_testpackagelist," +
 			testpackages +
-			"\n    );"
+			"\n    )"
 		writetestsuite = "" +
-			"\n 	[TestClass]" +
-			"\n  public class AppTest {" +
-			"\n    [TestMethod]" +
-			"\n    public void test_writetestsuite() {" +
-			LangVar(lang, "testpackagelist", testpackagelisttype, emptytype, testpackagedata, 3, false, false) +
+			"\n  [Fact]" +
+			"\n  public void test_writetestsuite() {" +
+			LangVar(lang, "testpackagelist", testpackagelisttype, emptytype, testpackagedata, 2, false, false) +
 			"\n    TestLib.write_testpackagelist_async(context, testpackagelist);" +
-			"\n    }" +
 			"\n  }" +
 			"\n"
 	case "java":
@@ -5295,8 +5316,10 @@ func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix
 		"\n */" +
 		"\n" +
 		imports +
+		"\n" +
 		namespaceopen +
 		contexttext +
+		"\n" +
 		tests +
 		writetestsuite +
 		namespaceclose

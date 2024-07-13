@@ -34,5 +34,6 @@ bin
 
 # Ignore csharp
 core/csharp/obj
-core/csharp/src/obj
-core/csharp/test/obj
+core/csharp/src/App/obj
+core/csharp/src/Vx/obj
+core/csharp/test/AppTest/obj

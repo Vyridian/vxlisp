@@ -31,6 +31,7 @@ import com.vxlisp.vx.translation.AllTest;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 public final class AppTest {
 
 

@@ -1,32 +1,32 @@
 package vxlisp
 
 type vxfunc struct {
-	name          string
-	pkgname       string
-	alias         string
-	listarg       []vxarg
-	argname       string
-	async         bool
-	bigospace     string
-	bigotime      string
-	clientserver  string
-	context       bool
-	debug         bool
-	deprecated    string
-	doc           string
-	generictype   *vxtype
-	mapgeneric    map[string]*vxtype
-	idx           int
-	iscopied      bool
-	isgeneric     bool
-	isimplement   bool
-	isoverride    bool
-	messages      bool
-	parallel      bool
-	permission    bool
-	protected     bool
-	private       bool
-	recurive      bool
+	name         string
+	pkgname      string
+	alias        string
+	listarg      []vxarg
+	argname      string
+	async        bool
+	bigospace    string
+	bigotime     string
+	clientserver string
+	context      bool
+	debug        bool
+	deprecated   string
+	doc          string
+	generictype  *vxtype
+	mapgeneric   map[string]*vxtype
+	idx          int
+	iscopied     bool
+	isgeneric    bool
+	isimplement  bool
+	isoverride   bool
+	messages     bool
+	parallel     bool
+	permission   bool
+	protected    bool
+	private      bool
+	//recurive      bool
 	sideeffects   string
 	listtestvalue []vxvalue
 	textblock     *vxtextblock
