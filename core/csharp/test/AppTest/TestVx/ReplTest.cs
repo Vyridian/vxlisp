@@ -3,17 +3,17 @@ namespace AppTest.TestVx;
 
 public class ReplTest {
 
-  static Test.Type_testcase f_any_from_macro(Vx.Core.Type_context context) {
-    Test.Type_testcase output = Vx.Core.vx_new(
-      Test.t_testcase,
+  static Vx.Test.Type_testcase f_any_from_macro(Vx.Core.Type_context context) {
+    Vx.Test.Type_testcase output = Vx.Core.vx_new(
+      Vx.Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/repl",
       ":casename", "any<-macro",
       ":describelist",
       Vx.Core.vx_new(
-        Test.t_testdescribelist, 
+        Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n 5\n (any<-macro : int\n  \"(+ \"\n  (- 7 5)\n  \" 3)\"))",
           ":testresult",
             Vx.Test.f_test(
@@ -35,17 +35,17 @@ public class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_any_from_repl(Vx.Core.Type_context context) {
-    Test.Type_testcase output = Vx.Core.vx_new(
-      Test.t_testcase,
+  static Vx.Test.Type_testcase f_any_from_repl(Vx.Core.Type_context context) {
+    Vx.Test.Type_testcase output = Vx.Core.vx_new(
+      Vx.Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/repl",
       ":casename", "any<-repl",
       ":describelist",
       Vx.Core.vx_new(
-        Test.t_testdescribelist, 
+        Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n \"HelloWorld\"\n (any<-repl\n  (repl\n   :type string\n   :repllist\n    (repllist\n     (repl :val \"Hello\")\n     (repl :val \"World\")\n    ))))",
           ":testresult",
             Vx.Test.f_test(
@@ -84,7 +84,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n 5\n (any<-repl\n  (repl\n   :type +\n   :repllist\n    (repllist\n     (repl :val 2)\n     (repl :val 3)))))",
           ":testresult",
             Vx.Test.f_test(
@@ -127,17 +127,17 @@ public class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_any_from_script(Vx.Core.Type_context context) {
-    Test.Type_testcase output = Vx.Core.vx_new(
-      Test.t_testcase,
+  static Vx.Test.Type_testcase f_any_from_script(Vx.Core.Type_context context) {
+    Vx.Test.Type_testcase output = Vx.Core.vx_new(
+      Vx.Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/repl",
       ":casename", "any<-script",
       ":describelist",
       Vx.Core.vx_new(
-        Test.t_testdescribelist, 
+        Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n 5\n (any<-script\n  \"(+ 2 3)\"))",
           ":testresult",
             Vx.Test.f_test(
@@ -151,17 +151,17 @@ public class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_const_from_string(Vx.Core.Type_context context) {
-    Test.Type_testcase output = Vx.Core.vx_new(
-      Test.t_testcase,
+  static Vx.Test.Type_testcase f_const_from_string(Vx.Core.Type_context context) {
+    Vx.Test.Type_testcase output = Vx.Core.vx_new(
+      Vx.Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/repl",
       ":casename", "const<-string",
       ":describelist",
       Vx.Core.vx_new(
-        Test.t_testdescribelist, 
+        Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n infinity\n (const<-string\n  \"infinity\"))",
           ":testresult",
             Vx.Test.f_test(
@@ -171,7 +171,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n tb/delimcomma\n (const<-string\n  \"vx/data/textblock/delimcomma\"))",
           ":testresult",
             Vx.Test.f_test(
@@ -185,17 +185,17 @@ public class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_repl_empty_from_textblock_argmap(Vx.Core.Type_context context) {
-    Test.Type_testcase output = Vx.Core.vx_new(
-      Test.t_testcase,
+  static Vx.Test.Type_testcase f_repl_empty_from_textblock_argmap(Vx.Core.Type_context context) {
+    Vx.Test.Type_testcase output = Vx.Core.vx_new(
+      Vx.Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/repl",
       ":casename", "repl-empty<-textblock-argmap",
       ":describelist",
       Vx.Core.vx_new(
-        Test.t_testdescribelist, 
+        Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl :val 2)\n (repl-empty<-textblock-argmap\n  (tb/textblock\n   :text \"2\")\n  (empty argmap)))",
           ":testresult",
             Vx.Test.f_test(
@@ -222,7 +222,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl :type +)\n (repl-empty<-textblock-argmap\n  (tb/textblock\n   :text \"+\")\n  (empty argmap)))",
           ":testresult",
             Vx.Test.f_test(
@@ -249,7 +249,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl :val 2)\n (repl-empty<-textblock-argmap\n  (tb/textblock\n   :text \"1\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"2\")))\n  (empty argmap)))",
           ":testresult",
             Vx.Test.f_test(
@@ -289,7 +289,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl\n  (msg<-error \"Empty delim cannot have more than one child.\"))\n (repl-empty<-textblock-argmap\n  (tb/textblock\n   :text \"1\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \"3\")))\n  (empty argmap)))",
           ":testresult",
             Vx.Test.f_test(
@@ -339,17 +339,17 @@ public class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_repl_paren_from_textblock_argmap(Vx.Core.Type_context context) {
-    Test.Type_testcase output = Vx.Core.vx_new(
-      Test.t_testcase,
+  static Vx.Test.Type_testcase f_repl_paren_from_textblock_argmap(Vx.Core.Type_context context) {
+    Vx.Test.Type_testcase output = Vx.Core.vx_new(
+      Vx.Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/repl",
       ":casename", "repl-paren<-textblock-argmap",
       ":describelist",
       Vx.Core.vx_new(
-        Test.t_testdescribelist, 
+        Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl\n  :type vx/core/+\n  :repllist\n   (repllist\n    (repl\n     :val 2)\n    (repl\n     :val 3)))\n (repl-paren<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))\n  (empty argmap)))",
           ":testresult",
             Vx.Test.f_test(
@@ -467,17 +467,17 @@ public class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_repl_from_macro(Vx.Core.Type_context context) {
-    Test.Type_testcase output = Vx.Core.vx_new(
-      Test.t_testcase,
+  static Vx.Test.Type_testcase f_repl_from_macro(Vx.Core.Type_context context) {
+    Vx.Test.Type_testcase output = Vx.Core.vx_new(
+      Vx.Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/repl",
       ":casename", "repl<-macro",
       ":describelist",
       Vx.Core.vx_new(
-        Test.t_testdescribelist, 
+        Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl\n  :type vx/core/+\n  :repllist\n   (repllist\n    (repl\n     :val 2)\n    (repl\n     :val 3)))\n (repl<-macro\n  \"(+ \"\n  (- 7 5)\n  \" 3)\"))",
           ":testresult",
             Vx.Test.f_test(
@@ -524,17 +524,17 @@ public class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_repl_from_script(Vx.Core.Type_context context) {
-    Test.Type_testcase output = Vx.Core.vx_new(
-      Test.t_testcase,
+  static Vx.Test.Type_testcase f_repl_from_script(Vx.Core.Type_context context) {
+    Vx.Test.Type_testcase output = Vx.Core.vx_new(
+      Vx.Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/repl",
       ":casename", "repl<-script",
       ":describelist",
       Vx.Core.vx_new(
-        Test.t_testdescribelist, 
+        Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl\n  :val 2)\n (repl<-script\n  \"2\"))",
           ":testresult",
             Vx.Test.f_test(
@@ -550,7 +550,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl\n  :val infinity)\n (repl<-script\n  \"infinity\"))",
           ":testresult",
             Vx.Test.f_test(
@@ -566,7 +566,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl\n  :type +)\n (repl<-script\n  \"+\"))",
           ":testresult",
             Vx.Test.f_test(
@@ -582,7 +582,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl\n     :val 2)\n    (repl\n     :val 3)))\n (repl<-script\n  \"(+ 2 3)\"))",
           ":testresult",
             Vx.Test.f_test(
@@ -622,17 +622,17 @@ public class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_repl_from_string_argmap(Vx.Core.Type_context context) {
-    Test.Type_testcase output = Vx.Core.vx_new(
-      Test.t_testcase,
+  static Vx.Test.Type_testcase f_repl_from_string_argmap(Vx.Core.Type_context context) {
+    Vx.Test.Type_testcase output = Vx.Core.vx_new(
+      Vx.Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/repl",
       ":casename", "repl<-string-argmap",
       ":describelist",
       Vx.Core.vx_new(
-        Test.t_testdescribelist, 
+        Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl :val \"Hello\")\n (repl<-string-argmap\n  `\"Hello\"`\n  (empty argmap)))",
           ":testresult",
             Vx.Test.f_test(
@@ -653,7 +653,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl\n  :val 2)\n (repl<-string-argmap\n  \"2\"\n  (empty argmap)))",
           ":testresult",
             Vx.Test.f_test(
@@ -674,7 +674,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl :val 2.3)\n (repl<-string-argmap\n  \"2.3\"\n  (empty argmap)))",
           ":testresult",
             Vx.Test.f_test(
@@ -695,7 +695,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl\n  :val infinity)\n (repl<-string-argmap\n  \"infinity\"\n  (empty argmap)))",
           ":testresult",
             Vx.Test.f_test(
@@ -716,7 +716,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl\n  :val tb/delimcomma)\n (repl<-string-argmap\n  \"vx/data/textblock/delimcomma\"\n  (empty argmap)))",
           ":testresult",
             Vx.Test.f_test(
@@ -737,7 +737,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl :type string)\n (repl<-string-argmap\n  \"string\"\n  (empty argmap)))",
           ":testresult",
             Vx.Test.f_test(
@@ -758,7 +758,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl :type +)\n (repl<-string-argmap\n  \"+\"\n  (empty argmap)))",
           ":testresult",
             Vx.Test.f_test(
@@ -783,17 +783,17 @@ public class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_repl_from_textblock(Vx.Core.Type_context context) {
-    Test.Type_testcase output = Vx.Core.vx_new(
-      Test.t_testcase,
+  static Vx.Test.Type_testcase f_repl_from_textblock(Vx.Core.Type_context context) {
+    Vx.Test.Type_testcase output = Vx.Core.vx_new(
+      Vx.Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/repl",
       ":casename", "repl<-textblock",
       ":describelist",
       Vx.Core.vx_new(
-        Test.t_testdescribelist, 
+        Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl :val 2)\n (repl<-textblock\n  (tb/textblock\n   :text \"2\")))",
           ":testresult",
             Vx.Test.f_test(
@@ -817,7 +817,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl :type +)\n (repl<-textblock\n  (tb/textblock\n   :text \"+\")))",
           ":testresult",
             Vx.Test.f_test(
@@ -841,7 +841,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl :type +)\n (repl<-textblock\n  (tb/textblock\n   :text \"+\")))",
           ":testresult",
             Vx.Test.f_test(
@@ -865,7 +865,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :val 2)\n    (repl :val 3)))\n (repl<-textblock\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))))",
           ":testresult",
             Vx.Test.f_test(
@@ -976,7 +976,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :val 2)\n    (repl :val 3)))\n (repl<-textblock\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"(+ 2 3)\"\n      :delim\n       (copy delimvxlispparen\n        :delimlist\n         (empty delimlist))\n      :children\n       (tb/textblocklist\n        (tb/textblock\n         :text \"+\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"2\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"3\")))))))",
           ":testresult",
             Vx.Test.f_test(
@@ -1104,17 +1104,17 @@ public class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_repl_from_textblock_argmap(Vx.Core.Type_context context) {
-    Test.Type_testcase output = Vx.Core.vx_new(
-      Test.t_testcase,
+  static Vx.Test.Type_testcase f_repl_from_textblock_argmap(Vx.Core.Type_context context) {
+    Vx.Test.Type_testcase output = Vx.Core.vx_new(
+      Vx.Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/repl",
       ":casename", "repl<-textblock-argmap",
       ":describelist",
       Vx.Core.vx_new(
-        Test.t_testdescribelist, 
+        Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl :val 2)\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"2\")\n  (empty argmap)))",
           ":testresult",
             Vx.Test.f_test(
@@ -1141,7 +1141,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl :type +)\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"+\")\n  (empty argmap)))",
           ":testresult",
             Vx.Test.f_test(
@@ -1168,7 +1168,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :val 2)\n    (repl :val 3)))\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))\n  (empty argmap)))",
           ":testresult",
             Vx.Test.f_test(
@@ -1282,7 +1282,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :val 2)\n    (repl :val 3)))\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"(+ 2 3)\"\n      :delim\n       (copy delimvxlispparen\n        :delimlist\n         (empty delimlist))\n      :children\n       (tb/textblocklist\n        (tb/textblock\n         :text \"+\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"2\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"3\")))))\n  (empty argmap)))",
           ":testresult",
             Vx.Test.f_test(
@@ -1413,17 +1413,17 @@ public class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_textblock_from_script(Vx.Core.Type_context context) {
-    Test.Type_testcase output = Vx.Core.vx_new(
-      Test.t_testcase,
+  static Vx.Test.Type_testcase f_textblock_from_script(Vx.Core.Type_context context) {
+    Vx.Test.Type_testcase output = Vx.Core.vx_new(
+      Vx.Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/repl",
       ":casename", "textblock<-script",
       ":describelist",
       Vx.Core.vx_new(
-        Test.t_testdescribelist, 
+        Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (tb/textblock\n  :text \"infinity\"\n  :startpos 1\n  :endpos 8\n  :children\n   (tb/textblocklist\n    (tb/textblock\n    :text \"infinity\"\n    :startpos 1\n    :endpos 8\n    :delim\n     (delim\n      :name \"delimvxlisp\"))))\n (textblock<-script\n  \"infinity\"))",
           ":testresult",
             Vx.Test.f_test(
@@ -1468,7 +1468,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (tb/textblock\n  :text \"(+ 2 3)\"\n  :startpos 1\n  :endpos 7\n  :children\n   (tb/textblocklist\n    (tb/textblock\n     :text \"(+ 2 3)\"\n     :startpos 1\n     :endpos 7\n     :delim\n      (copy delimvxlispparen\n       :delimlist\n        (empty delimlist))\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"+\"\n        :startpos 2\n        :endpos 2)\n       (tb/textblock\n        :text \" \"\n        :startpos 3\n        :endpos 3\n        :delim\n         (copy tb/delimwhitespace\n          :pos 0))\n       (tb/textblock\n        :text \"2\"\n        :startpos 4\n        :endpos 4)\n       (tb/textblock\n        :text \" \"\n        :startpos 5\n        :endpos 5\n        :delim\n         (copy tb/delimwhitespace\n          :pos 0))\n       (tb/textblock\n        :text \"3\"\n        :startpos 6\n        :endpos 6)))))\n (textblock<-script\n  \"(+ 2 3)\"))",
           ":testresult",
             Vx.Test.f_test(
@@ -1596,17 +1596,17 @@ public class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_typefunc_from_string(Vx.Core.Type_context context) {
-    Test.Type_testcase output = Vx.Core.vx_new(
-      Test.t_testcase,
+  static Vx.Test.Type_testcase f_typefunc_from_string(Vx.Core.Type_context context) {
+    Vx.Test.Type_testcase output = Vx.Core.vx_new(
+      Vx.Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/repl",
       ":casename", "typefunc<-string",
       ":describelist",
       Vx.Core.vx_new(
-        Test.t_testdescribelist, 
+        Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n string\n (typefunc<-string\n  \"string\"))",
           ":testresult",
             Vx.Test.f_test(
@@ -1616,7 +1616,7 @@ public class ReplTest {
             )
         ),
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n +\n (typefunc<-string\n  \"+\"))",
           ":testresult",
             Vx.Test.f_test(
@@ -1630,8 +1630,8 @@ public class ReplTest {
     return output;
   }
 
-  public static Test.Type_testcaselist test_cases(Vx.Core.Type_context context) {
-    List<Vx.Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
+  public static Vx.Test.Type_testcaselist test_cases(Vx.Core.Type_context context) {
+    List<Vx.Core.Type_any> arraylisttestcase = Vx.Core.arraylist_from_array(
       ReplTest.f_any_from_macro(context),
       ReplTest.f_any_from_repl(context),
       ReplTest.f_any_from_script(context),
@@ -1645,30 +1645,30 @@ public class ReplTest {
       ReplTest.f_repl_from_textblock_argmap(context),
       ReplTest.f_textblock_from_script(context),
       ReplTest.f_typefunc_from_string(context)
-    ));
-    Test.Type_testcaselist output = Vx.Core.vx_new(
-      Test.t_testcaselist,
+    );
+    Vx.Test.Type_testcaselist output = Vx.Core.vx_new(
+      Vx.Test.t_testcaselist,
       arraylisttestcase
     );
     return output;
   }
 
-  public static Test.Type_testcoveragesummary test_coveragesummary() {
+  public static Vx.Test.Type_testcoveragesummary test_coveragesummary() {
     return Vx.Core.vx_new(
-      Test.t_testcoveragesummary,
+      Vx.Test.t_testcoveragesummary,
       ":testpkg", "vx/repl", 
-      ":constnums", Vx.Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3), 
-      ":docnums", Vx.Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 28, ":total", 28), 
-      ":funcnums", Vx.Core.vx_new(Test.t_testcoveragenums, ":pct", 61, ":tests", 13, ":total", 21), 
-      ":bigospacenums", Vx.Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 21), 
-      ":bigotimenums", Vx.Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 21), 
-      ":totalnums", Vx.Core.vx_new(Test.t_testcoveragenums, ":pct", 46, ":tests", 13, ":total", 28), 
-      ":typenums", Vx.Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 4)
+      ":constnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3), 
+      ":docnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 100, ":tests", 28, ":total", 28), 
+      ":funcnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 61, ":tests", 13, ":total", 21), 
+      ":bigospacenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 21), 
+      ":bigotimenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 21), 
+      ":totalnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 46, ":tests", 13, ":total", 28), 
+      ":typenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 4)
     );
   }
 
-  public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Vx.Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/repl", ":typemap", Vx.Core.vx_new(
+  public static Vx.Test.Type_testcoveragedetail test_coveragedetail() {
+    return Vx.Core.vx_new(Vx.Test.t_testcoveragedetail, ":testpkg", "vx/repl", ":typemap", Vx.Core.vx_new(
   Vx.Core.t_intmap,
         ":liblist", 0,
         ":repl", 0,
@@ -1705,10 +1705,10 @@ public class ReplTest {
       ));
   }
 
-  public static Test.Type_testpackage test_package(Vx.Core.Type_context context) {
-    Test.Type_testcaselist testcaselist = test_cases(context);
-    Test.Type_testpackage output = Vx.Core.vx_new(
-      Test.t_testpackage,
+  public static Vx.Test.Type_testpackage test_package(Vx.Core.Type_context context) {
+    Vx.Test.Type_testcaselist testcaselist = test_cases(context);
+    Vx.Test.Type_testpackage output = Vx.Core.vx_new(
+      Vx.Test.t_testpackage,
       ":testpkg", "vx/repl", 
       ":caselist", testcaselist,
       ":coveragesummary", test_coveragesummary(),

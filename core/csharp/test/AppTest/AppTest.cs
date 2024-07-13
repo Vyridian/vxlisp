@@ -164,7 +164,7 @@ public class AppTest {
   [Fact]
   public void test_writetestsuite() {
     Vx.Test.Type_testpackagelist testpackagelist = Vx.Core.vx_new(
-      com.vxlisp.vx.Test.t_testpackagelist,
+      Vx.Test.t_testpackagelist,
       Vx.CoreTest.test_package(context),
       Vx.Data.DbTest.test_package(context),
       Vx.Data.TableTest.test_package(context),

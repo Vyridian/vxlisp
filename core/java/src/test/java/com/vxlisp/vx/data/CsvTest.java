@@ -1,8 +1,6 @@
 
 package com.vxlisp.vx.data;
 
-import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.List;
 import com.vxlisp.vx.*;
 
@@ -16,7 +14,7 @@ public final class CsvTest {
       ":casename", "textblock-csv<-string",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (tb/textblock\n  :text\n`\"a\",\"b\"\n1,\"2\"`\n  :startpos 1\n  :endpos 13\n  :children\n   (tb/textblocklist\n    (tb/textblock\n     :text `\"a\"`\n     :startpos 1\n     :endpos 3\n     :delim\n      (copy tb/delimquote\n       :pos 0)\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"a\"\n        :startpos 2\n        :endpos 2)))\n    (tb/textblock\n     :text \",\"\n     :startpos 4\n     :endpos 4\n     :delim\n      (copy tb/delimcomma\n       :pos 0))\n    (tb/textblock\n     :text `\"b\"`\n     :startpos 5\n     :endpos 7\n     :delim\n      (copy tb/delimquote\n       :pos 0)\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"b\"\n        :startpos 6\n        :endpos 6)))\n    (tb/textblock\n     :text \"\n\"\n     :startpos 8\n     :endpos 8\n     :delim\n      (copy tb/delimline\n       :pos 0))\n    (tb/textblock\n     :text \"1\"\n     :startpos 9\n     :endpos 9)\n    (tb/textblock\n     :text \",\"\n     :startpos 10\n     :endpos 10\n     :delim\n      (copy tb/delimcomma\n       :pos 0))\n    (tb/textblock\n     :text `\"2\"`\n     :startpos 11\n     :endpos 13\n     :delim\n      (copy tb/delimquote\n       :pos 0)\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"2\"\n        :startpos 12\n        :endpos 12)))))\n (textblock-csv<-string\n  `\"a\",\"b\"\n1,\"2\"`))",
@@ -225,9 +223,9 @@ public final class CsvTest {
   }
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
+    List<Core.Type_any> arraylisttestcase = Core.arraylist_from_array(
       CsvTest.f_textblock_csv_from_string(context)
-    ));
+    );
     Test.Type_testcaselist output = Core.vx_new(
       Test.t_testcaselist,
       arraylisttestcase

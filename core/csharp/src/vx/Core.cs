@@ -141,8 +141,8 @@ public static class Core {
     return list.vx_list().ToArray();
   }
 
-  public static List<T> arraylist_from_array<T>(params T[] items) {
-    List<T> output = new List<T>(items);
+  public static List<Vx.Core.Type_any> arraylist_from_array(params Vx.Core.Type_any[] items) {
+    List<Vx.Core.Type_any> output = new List<Vx.Core.Type_any>(items);
     return output;
   }
 

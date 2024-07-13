@@ -3566,7 +3566,7 @@ func LangTestCase(lang *vxlang, testvalues []vxvalue, testpkg string, testname s
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			desctext := "" +
 				"\n        " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_new(" +
-				"\n          Test.t_testdescribe," +
+				"\n          " + LangNameTFromType(lang, testdescribetype) + "," +
 				"\n          \":describename\", \"" + LangTestFromValue(testvalue) + "\"," +
 				"\n          \":testresult\"," +
 				"\n            " + descvaluetext +
@@ -3574,18 +3574,19 @@ func LangTestCase(lang *vxlang, testvalues []vxvalue, testpkg string, testname s
 			desctexts = append(desctexts, desctext)
 		}
 		describelist := StringFromListStringJoin(desctexts, ",")
-		output = "" +
-			"\n  static Test.Type_testcase " + testcasename + "(" + LangFinalArg(lang) + LangNameTypeFromType(lang, contexttype) + " context) {" +
-			"\n    Test.Type_testcase output = " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_new(" +
-			"\n      Test.t_testcase," +
+		varoutput := LangNameFromPkgNameDot(lang, "vx/core") + "vx_new(" +
+			"\n      " + LangNameTFromType(lang, testcasetype) + "," +
 			"\n      \":passfail\", false," +
 			"\n      \":testpkg\", \"" + testpkg + "\"," +
 			"\n      \":casename\", \"" + testname + "\"," +
 			"\n      \":describelist\"," +
 			"\n      " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_new(" +
-			"\n        Test.t_testdescribelist, " + describelist +
+			"\n        " + LangNameTFromType(lang, testdescribelisttype) + "," + describelist +
 			"\n      )" +
-			"\n    );" +
+			"\n    )"
+		output = "" +
+			"\n  static " + LangNameTypeFromType(lang, testcasetype) + " " + testcasename + "(" + LangFinalArg(lang) + LangNameTypeFromType(lang, contexttype) + " context) {" +
+			LangVar(lang, "output", testcasetype, emptytype, varoutput, 2, false, false) +
 			"\n    return output;" +
 			"\n  }" +
 			"\n"
@@ -3776,24 +3777,36 @@ func LangTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *
 			"\n  " + strings.Join(coverfunc, ",\n  ") +
 			"\n      )"
 	}
+	//	vararraylisttestcase1 := "new ArrayList<>(Arrays.asList(" +
+	//		"\n      " + strings.Join(testall, ",\n      ") +
+	//		"\n    ))"
+	testcasesbody := ""
+	if len(testall) == 0 {
+		testcasesbody = LangVar(lang, "output", testcaselisttype, emptytype, LangNameEFromType(lang, testcaselisttype), 2, false, false)
+	} else {
+		vararraylisttestcase := LangNameFromPkgNameDot(lang, "vx/core") + "arraylist_from_array(" +
+			"\n      " + strings.Join(testall, ",\n      ") +
+			"\n    )"
+		varoutput := LangNameFromPkgNameDot(lang, "vx/core") + "vx_new(" +
+			"\n      " + LangNameTFromType(lang, testcaselisttype) + "," +
+			"\n      arraylisttestcase" +
+			"\n    )"
+		testcasesbody = "" +
+			LangVar(lang, "arraylisttestcase", rawlisttype, anytype, vararraylisttestcase, 2, false, false) +
+			LangVar(lang, "output", testcaselisttype, emptytype, varoutput, 2, false, false)
+	}
 	body := "" +
 		typetexts +
 		consttexts +
 		functexts +
-		"\n  public static Test.Type_testcaselist test_cases(" + LangFinalArg(lang) + LangNameTypeFromType(lang, contexttype) + " context) {" +
-		"\n    List<" + LangNameTypeFromType(lang, anytype) + "> arraylisttestcase = new ArrayList<>(Arrays.asList(" +
-		"\n      " + strings.Join(testall, ",\n      ") +
-		"\n    ));" +
-		"\n    Test.Type_testcaselist output = " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_new(" +
-		"\n      Test.t_testcaselist," +
-		"\n      arraylisttestcase" +
-		"\n    );" +
+		"\n  public static " + LangNameTypeFromType(lang, testcaselisttype) + " test_cases(" + LangFinalArg(lang) + LangNameTypeFromType(lang, contexttype) + " context) {" +
+		testcasesbody +
 		"\n    return output;" +
 		"\n  }" +
 		"\n" +
-		"\n  public static Test.Type_testcoveragesummary test_coveragesummary() {" +
+		"\n  public static " + LangNameTypeFromType(lang, testcoveragesummarytype) + " test_coveragesummary() {" +
 		"\n    return " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_new(" +
-		"\n      Test.t_testcoveragesummary," +
+		"\n      " + LangNameTFromType(lang, testcoveragesummarytype) + "," +
 		"\n      \":testpkg\", \"" + pkg.name + "\", " +
 		"\n      \":constnums\", " + LangTypeCoverageNumsValNew(lang, coverconstpct, coverconstcnt, coverconsttotal) + ", " +
 		"\n      \":docnums\", " + LangTypeCoverageNumsValNew(lang, coverdocpct, coverdoccnt, coverdoctotal) + ", " +
@@ -3805,9 +3818,9 @@ func LangTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *
 		"\n    );" +
 		"\n  }" +
 		"\n" +
-		"\n  public static Test.Type_testcoveragedetail test_coveragedetail() {" +
+		"\n  public static " + LangNameTypeFromType(lang, testcoveragedetailtype) + " test_coveragedetail() {" +
 		"\n    return " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_new(" +
-		"Test.t_testcoveragedetail, " +
+		LangNameTFromType(lang, testcoveragedetailtype) + ", " +
 		"\":testpkg\", \"" + pkg.name + "\", " +
 		"\":typemap\", " + scovertype + ", " +
 		"\":constmap\", " + scoverconst + ", " +
@@ -3815,15 +3828,15 @@ func LangTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *
 		");" +
 		"\n  }" +
 		"\n" +
-		"\n  public static Test.Type_testpackage test_package(" + LangFinalArg(lang) + LangNameTypeFromType(lang, contexttype) + " context) {" +
-		"\n    Test.Type_testcaselist testcaselist = test_cases(context);" +
-		"\n    Test.Type_testpackage output = " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_new(" +
-		"\n      Test.t_testpackage," +
-		"\n      \":testpkg\", \"" + pkg.name + "\", " +
-		"\n      \":caselist\", testcaselist," +
-		"\n      \":coveragesummary\", test_coveragesummary()," +
-		"\n      \":coveragedetail\", test_coveragedetail()" +
-		"\n    );" +
+		"\n  public static " + LangNameTypeFromType(lang, testpackagetype) + " test_package(" + LangFinalArg(lang) + LangNameTypeFromType(lang, contexttype) + " context) {" +
+		LangVar(lang, "testcaselist", testcaselisttype, emptytype, "test_cases(context)", 2, false, false) +
+		LangVar(lang, "output", testpackagetype, emptytype, LangNameFromPkgNameDot(lang, "vx/core")+"vx_new("+
+			"\n      "+LangNameTFromType(lang, testpackagetype)+","+
+			"\n      \":testpkg\", \""+pkg.name+"\", "+
+			"\n      \":caselist\", testcaselist,"+
+			"\n      \":coveragesummary\", test_coveragesummary(),"+
+			"\n      \":coveragedetail\", test_coveragedetail()"+
+			"\n    )", 2, false, false) +
 		"\n    return output;" +
 		"\n  }" +
 		"\n"
@@ -3868,7 +3881,7 @@ func LangTestFromValue(value vxvalue) string {
 func LangTypeCoverageNumsValNew(lang *vxlang, pct int, tests int, total int) string {
 	return "" +
 		LangNameFromPkgNameDot(lang, "vx/core") + "vx_new(" +
-		"Test.t_testcoveragenums, " +
+		LangNameTFromType(lang, testcoveragenumstype) + ", " +
 		"\":pct\", " + StringFromInt(pct) + ", " +
 		"\":tests\", " + StringFromInt(tests) + ", " +
 		"\":total\", " + StringFromInt(total) +
@@ -5285,7 +5298,7 @@ func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix
 			"\n"
 		testpackagedata := "" +
 			LangNameFromPkgNameDot(lang, "vx/core") + "vx_new(" +
-			"\n      com.vxlisp.vx.Test.t_testpackagelist," +
+			"\n      " + LangNameTFromType(lang, testpackagelisttype) + "," +
 			testpackages +
 			"\n    )"
 		writetestsuite = "" +

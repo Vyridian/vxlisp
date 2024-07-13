@@ -1,8 +1,6 @@
 
 package com.vxlisp.vx;
 
-import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.List;
 import com.vxlisp.vx.data.*;
 import com.vxlisp.vx.web.*;
@@ -17,7 +15,7 @@ public final class TestTest {
       ":casename", "file-test",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.vxlisp\"\n   :path \"src/test/resources\")))",
@@ -50,7 +48,7 @@ public final class TestTest {
       ":casename", "file-testhtml",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.html\"\n   :path \"src/test/resources\")))",
@@ -83,7 +81,7 @@ public final class TestTest {
       ":casename", "file-testnode",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuitenode.vxlisp\"\n   :path \"src/test/resources\")))",
@@ -109,11 +107,11 @@ public final class TestTest {
   }
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
+    List<Core.Type_any> arraylisttestcase = Core.arraylist_from_array(
       TestTest.f_file_test(context),
       TestTest.f_file_testhtml(context),
       TestTest.f_file_testnode(context)
-    ));
+    );
     Test.Type_testcaselist output = Core.vx_new(
       Test.t_testcaselist,
       arraylisttestcase

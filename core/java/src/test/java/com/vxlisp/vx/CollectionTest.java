@@ -1,8 +1,6 @@
 
 package com.vxlisp.vx;
 
-import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.List;
 
 public final class CollectionTest {
@@ -15,7 +13,7 @@ public final class CollectionTest {
       ":casename", "any<-for-until-loop",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n 8\n (any<-for-until-loop\n  1\n  (fn : boolean\n   [current : int]\n   (> current 6))\n  (fn : int\n   [current : int]\n   (+ current current))))",
@@ -52,7 +50,7 @@ public final class CollectionTest {
       ":casename", "any<-for-while-loop",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n 8\n (any<-for-while-loop\n  1\n  (fn : boolean\n   [current : int]\n   (< current 5))\n  (fn : int\n   [current : int]\n   (+ current current))))",
@@ -89,7 +87,7 @@ public final class CollectionTest {
       ":casename", "int<-map-key",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n 2\n (int<-map-key\n  (stringmap\n   :a \"x\"\n   :b \"y\")\n  \"b\"))",
@@ -124,7 +122,7 @@ public final class CollectionTest {
       ":casename", "int<-stringlist-find",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n 2\n (int<-stringlist-find\n  (stringlist \"a\" \"b\")\n  \"b\"))",
@@ -157,7 +155,7 @@ public final class CollectionTest {
       ":casename", "is-list",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true\n (is-list (empty stringlist)))",
@@ -184,7 +182,7 @@ public final class CollectionTest {
       ":casename", "is-map",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true\n (is-map (empty stringmap)))",
@@ -211,7 +209,7 @@ public final class CollectionTest {
       ":casename", "list<-for-end-loop",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (intlist 4 9)\n (list<-for-end-loop : intlist\n  2\n  3\n  (fn\n   [current : int]\n   (* current current))))",
@@ -250,7 +248,7 @@ public final class CollectionTest {
       ":casename", "list<-list-end",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringlist\n  \"a\" \"b\" \"c\")\n (list<-list-end\n  (stringlist\n   \"a\" \"b\" \"c\" \"d\")\n  3))",
@@ -293,7 +291,7 @@ public final class CollectionTest {
       ":casename", "list<-list-filter",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringlist\n  \"a1\" \"b1\" \"c1\" \"d1\")\n (list<-list-filter : stringlist\n  (list\n   \"a\" 4 \"b\" (list) \"c\" (map) \"d\")\n  (fn : string\n   [val : any]\n   (if\n    (then\n     (is-string val)\n     (string val \"1\"))))))",
@@ -366,7 +364,7 @@ public final class CollectionTest {
       ":casename", "list<-list-filtertypes",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (list\n  \"a\" 1 \"b\" \"c\")\n (list<-list-filtertypes : list\n  (list\n   \"a\" 1 \"b\" \"c\" 4.5)\n  string int))",
@@ -414,7 +412,7 @@ public final class CollectionTest {
       ":casename", "list<-list-start",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringlist\n  \"b\" \"c\" \"d\")\n (list<-list-start\n  (stringlist\n   \"a\" \"b\" \"c\" \"d\")\n  2))",
@@ -457,7 +455,7 @@ public final class CollectionTest {
       ":casename", "list<-list-start-end",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringlist\n  \"b\" \"c\")\n (list<-list-start-end\n  (stringlist\n   \"a\" \"b\" \"c\" \"d\")\n  2 3))",
@@ -500,7 +498,7 @@ public final class CollectionTest {
       ":casename", "map<-map-end",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringmap\n  :b \"1\"\n  :a \"2\")\n (map<-map-end\n  (stringmap\n   :b \"1\"\n   :a \"2\"\n   :c \"3\")\n  2))",
@@ -546,7 +544,7 @@ public final class CollectionTest {
       ":casename", "map<-map-keys",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringmap\n  :c \"3\"\n  :a \"1\")\n (map<-map-keys\n  (stringmap\n   :a \"1\"\n   :b \"2\"\n   :c \"3\")\n  (stringlist\n   \"c\" \"a\")))",
@@ -598,7 +596,7 @@ public final class CollectionTest {
       ":casename", "map<-map-start",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringmap\n  :a \"2\"\n  :c \"3\")\n (map<-map-start\n  (stringmap\n   :b \"1\"\n   :a \"2\"\n   :c \"3\")\n  2))",
@@ -644,7 +642,7 @@ public final class CollectionTest {
       ":casename", "map<-map-start-end",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringmap\n  :a \"2\"\n  :c \"3\")\n (map<-map-start-end\n  (stringmap\n   :b \"1\"\n   :a \"2\"\n   :c \"3\"\n   :d \"4\")\n  2 3))",
@@ -686,7 +684,7 @@ public final class CollectionTest {
   }
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
+    List<Core.Type_any> arraylisttestcase = Core.arraylist_from_array(
       CollectionTest.f_any_from_for_until_loop(context),
       CollectionTest.f_any_from_for_while_loop(context),
       CollectionTest.f_int_from_map_key(context),
@@ -703,7 +701,7 @@ public final class CollectionTest {
       CollectionTest.f_map_from_map_keys(context),
       CollectionTest.f_map_from_map_start(context),
       CollectionTest.f_map_from_map_start_end(context)
-    ));
+    );
     Test.Type_testcaselist output = Core.vx_new(
       Test.t_testcaselist,
       arraylisttestcase

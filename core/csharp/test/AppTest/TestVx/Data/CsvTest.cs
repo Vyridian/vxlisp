@@ -3,17 +3,17 @@ namespace AppTest.TestVx.Data;
 
 public class CsvTest {
 
-  static Test.Type_testcase f_textblock_csv_from_string(Vx.Core.Type_context context) {
-    Test.Type_testcase output = Vx.Core.vx_new(
-      Test.t_testcase,
+  static Vx.Test.Type_testcase f_textblock_csv_from_string(Vx.Core.Type_context context) {
+    Vx.Test.Type_testcase output = Vx.Core.vx_new(
+      Vx.Test.t_testcase,
       ":passfail", false,
       ":testpkg", "vx/data/csv",
       ":casename", "textblock-csv<-string",
       ":describelist",
       Vx.Core.vx_new(
-        Test.t_testdescribelist, 
+        Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
-          Test.t_testdescribe,
+          Vx.Test.t_testdescribe,
           ":describename", "(test\n (tb/textblock\n  :text\n`\"a\",\"b\"\n1,\"2\"`\n  :startpos 1\n  :endpos 13\n  :children\n   (tb/textblocklist\n    (tb/textblock\n     :text `\"a\"`\n     :startpos 1\n     :endpos 3\n     :delim\n      (copy tb/delimquote\n       :pos 0)\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"a\"\n        :startpos 2\n        :endpos 2)))\n    (tb/textblock\n     :text \",\"\n     :startpos 4\n     :endpos 4\n     :delim\n      (copy tb/delimcomma\n       :pos 0))\n    (tb/textblock\n     :text `\"b\"`\n     :startpos 5\n     :endpos 7\n     :delim\n      (copy tb/delimquote\n       :pos 0)\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"b\"\n        :startpos 6\n        :endpos 6)))\n    (tb/textblock\n     :text \"\n\"\n     :startpos 8\n     :endpos 8\n     :delim\n      (copy tb/delimline\n       :pos 0))\n    (tb/textblock\n     :text \"1\"\n     :startpos 9\n     :endpos 9)\n    (tb/textblock\n     :text \",\"\n     :startpos 10\n     :endpos 10\n     :delim\n      (copy tb/delimcomma\n       :pos 0))\n    (tb/textblock\n     :text `\"2\"`\n     :startpos 11\n     :endpos 13\n     :delim\n      (copy tb/delimquote\n       :pos 0)\n     :children\n      (tb/textblocklist\n       (tb/textblock\n        :text \"2\"\n        :startpos 12\n        :endpos 12)))))\n (textblock-csv<-string\n  `\"a\",\"b\"\n1,\"2\"`))",
           ":testresult",
             Vx.Test.f_test(
@@ -219,33 +219,33 @@ public class CsvTest {
     return output;
   }
 
-  public static Test.Type_testcaselist test_cases(Vx.Core.Type_context context) {
-    List<Vx.Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
+  public static Vx.Test.Type_testcaselist test_cases(Vx.Core.Type_context context) {
+    List<Vx.Core.Type_any> arraylisttestcase = Vx.Core.arraylist_from_array(
       CsvTest.f_textblock_csv_from_string(context)
-    ));
-    Test.Type_testcaselist output = Vx.Core.vx_new(
-      Test.t_testcaselist,
+    );
+    Vx.Test.Type_testcaselist output = Vx.Core.vx_new(
+      Vx.Test.t_testcaselist,
       arraylisttestcase
     );
     return output;
   }
 
-  public static Test.Type_testcoveragesummary test_coveragesummary() {
+  public static Vx.Test.Type_testcoveragesummary test_coveragesummary() {
     return Vx.Core.vx_new(
-      Test.t_testcoveragesummary,
+      Vx.Test.t_testcoveragesummary,
       ":testpkg", "vx/data/csv", 
-      ":constnums", Vx.Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 1), 
-      ":docnums", Vx.Core.vx_new(Test.t_testcoveragenums, ":pct", 63, ":tests", 7, ":total", 11), 
-      ":funcnums", Vx.Core.vx_new(Test.t_testcoveragenums, ":pct", 14, ":tests", 1, ":total", 7), 
-      ":bigospacenums", Vx.Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 7), 
-      ":bigotimenums", Vx.Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 7), 
-      ":totalnums", Vx.Core.vx_new(Test.t_testcoveragenums, ":pct", 9, ":tests", 1, ":total", 11), 
-      ":typenums", Vx.Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3)
+      ":constnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 1), 
+      ":docnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 63, ":tests", 7, ":total", 11), 
+      ":funcnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 14, ":tests", 1, ":total", 7), 
+      ":bigospacenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 7), 
+      ":bigotimenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 7), 
+      ":totalnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 9, ":tests", 1, ":total", 11), 
+      ":typenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3)
     );
   }
 
-  public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Vx.Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/data/csv", ":typemap", Vx.Core.vx_new(
+  public static Vx.Test.Type_testcoveragedetail test_coveragedetail() {
+    return Vx.Core.vx_new(Vx.Test.t_testcoveragedetail, ":testpkg", "vx/data/csv", ":typemap", Vx.Core.vx_new(
   Vx.Core.t_intmap,
         ":csv", 0,
         ":csvrowmap", 0,
@@ -265,10 +265,10 @@ public class CsvTest {
       ));
   }
 
-  public static Test.Type_testpackage test_package(Vx.Core.Type_context context) {
-    Test.Type_testcaselist testcaselist = test_cases(context);
-    Test.Type_testpackage output = Vx.Core.vx_new(
-      Test.t_testpackage,
+  public static Vx.Test.Type_testpackage test_package(Vx.Core.Type_context context) {
+    Vx.Test.Type_testcaselist testcaselist = test_cases(context);
+    Vx.Test.Type_testpackage output = Vx.Core.vx_new(
+      Vx.Test.t_testpackage,
       ":testpkg", "vx/data/csv", 
       ":caselist", testcaselist,
       ":coveragesummary", test_coveragesummary(),

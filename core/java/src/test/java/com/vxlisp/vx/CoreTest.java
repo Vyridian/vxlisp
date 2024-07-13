@@ -1,8 +1,6 @@
 
 package com.vxlisp.vx;
 
-import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.List;
 
 public final class CoreTest {
@@ -15,7 +13,7 @@ public final class CoreTest {
       ":casename", "boolean",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true true)",
@@ -75,7 +73,7 @@ public final class CoreTest {
       ":casename", "float",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test 4.5 (float 4.5))",
@@ -104,7 +102,7 @@ public final class CoreTest {
       ":casename", "func",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n 5\n (let\n  [funcvar : + := +]\n  (funcvar 2 3)))",
@@ -134,7 +132,7 @@ public final class CoreTest {
       ":casename", "int",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true  (is-int 4))",
@@ -217,7 +215,7 @@ public final class CoreTest {
       ":casename", "string",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test \"a\" (string \"a\"))",
@@ -262,7 +260,7 @@ public final class CoreTest {
       ":casename", "false",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-false false)",
@@ -285,7 +283,7 @@ public final class CoreTest {
       ":casename", "true",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true true)",
@@ -308,7 +306,7 @@ public final class CoreTest {
       ":casename", "!",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-false false)",
@@ -342,7 +340,7 @@ public final class CoreTest {
       ":casename", "!=",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-ne true false)",
@@ -372,7 +370,7 @@ public final class CoreTest {
       ":casename", "*",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test 6 (* 3 2))",
@@ -406,7 +404,7 @@ public final class CoreTest {
       ":casename", "*_1",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test 6.4 (* 3.2 2))",
@@ -440,7 +438,7 @@ public final class CoreTest {
       ":casename", "*_2",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test 24 (* 3 2 4))",
@@ -486,7 +484,7 @@ public final class CoreTest {
       ":casename", "*_3",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test 24 (* 3 2 4))",
@@ -532,7 +530,7 @@ public final class CoreTest {
       ":casename", "+",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test 5 (+ 2 3))",
@@ -566,7 +564,7 @@ public final class CoreTest {
       ":casename", "+_1",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test 5 (+ 2  3))",
@@ -600,7 +598,7 @@ public final class CoreTest {
       ":casename", "+1",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test  3 (+1  2))",
@@ -634,7 +632,7 @@ public final class CoreTest {
       ":casename", "-",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test 1 (- 3 2))",
@@ -668,7 +666,7 @@ public final class CoreTest {
       ":casename", "-_1",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test 5 (+ 2 3))",
@@ -702,7 +700,7 @@ public final class CoreTest {
       ":casename", "-1",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test  1 (-1  2))",
@@ -736,7 +734,7 @@ public final class CoreTest {
       ":casename", "/",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test 3 (/ 6 2))",
@@ -770,7 +768,7 @@ public final class CoreTest {
       ":casename", "<",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true (< 2 3))",
@@ -793,7 +791,7 @@ public final class CoreTest {
       ":casename", "<_1",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true\n (< 2 3))",
@@ -831,7 +829,7 @@ public final class CoreTest {
       ":casename", "<-",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (*\n  (+\n   (- 5 3)\n   3)\n  2)\n (<-\n  5\n  (- 3)\n  (+ 3)\n  (* 2)))",
@@ -867,7 +865,7 @@ public final class CoreTest {
       ":casename", "<<-",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (* (+ (- 3 5) 3) 2)\n (<<-\n  5\n  (- 3)\n  (+ 3)\n  (* 2)))",
@@ -903,7 +901,7 @@ public final class CoreTest {
       ":casename", "<=",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true (<= 2 3))",
@@ -926,7 +924,7 @@ public final class CoreTest {
       ":casename", "<=_1",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true (<= \"b\" \"d\" \"z\"))",
@@ -955,7 +953,7 @@ public final class CoreTest {
       ":casename", "=",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true (= true true))",
@@ -1053,7 +1051,7 @@ public final class CoreTest {
       ":casename", "=_1",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-false (= 2 2 3))",
@@ -1082,7 +1080,7 @@ public final class CoreTest {
       ":casename", "==",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true (== 0 0))",
@@ -1114,7 +1112,7 @@ public final class CoreTest {
       ":casename", ">",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true (> 3 2))",
@@ -1137,7 +1135,7 @@ public final class CoreTest {
       ":casename", ">_1",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true (> \"z\" \"y\" \"b\"))",
@@ -1166,7 +1164,7 @@ public final class CoreTest {
       ":casename", ">=",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true (>= 3 2))",
@@ -1189,7 +1187,7 @@ public final class CoreTest {
       ":casename", ">=_1",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true (>= \"z\" \"b\" \"b\"))",
@@ -1218,7 +1216,7 @@ public final class CoreTest {
       ":casename", "and",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true\n (and true true))",
@@ -1256,7 +1254,7 @@ public final class CoreTest {
       ":casename", "and_1",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true\n (and true true true))",
@@ -1300,7 +1298,7 @@ public final class CoreTest {
       ":casename", "any<-list",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"b\"\n (any<-list\n  (list \"a\" \"b\" \"c\")\n  2))",
@@ -1356,7 +1354,7 @@ public final class CoreTest {
       ":casename", "any<-list-start-reduce",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n 24\n (any<-list-start-reduce : int\n  (intlist 3 2 4)\n  1\n  (fn : int\n   [total : int\n    num   : int]\n   (* total num))))",
@@ -1397,7 +1395,7 @@ public final class CoreTest {
       ":casename", "any<-map",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"v2\"\n (any<-map\n  (stringmap\n   :a \"v1\"\n   :b \"v2\"\n   :c \"v3\")\n  :b))",
@@ -1435,7 +1433,7 @@ public final class CoreTest {
       ":casename", "any<-map-start-reduce",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"xayb\"\n (any<-map-start-reduce\n  (stringmap\n   :a \"x\"\n   :b \"y\")\n  \"\"\n  (fn : string\n   [current : string\n    key     : string\n    value   : any]\n   (copy current\n    value\n    key))))",
@@ -1484,7 +1482,7 @@ public final class CoreTest {
       ":casename", "boolean-write<-map-name-value",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringmutablemap\n  :b \"y\"\n  :a \"x\")\n (let : stringmutablemap\n  [smap : stringmutablemap :=\n    (stringmutablemap\n     :b \"y\")\n   iswrite : boolean :=\n    (boolean-write<-map-name-value\n     smap :a \"x\")]\n  smap))",
@@ -1560,7 +1558,7 @@ public final class CoreTest {
       ":casename", "compare",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test 1 (compare 3 2))",
@@ -1594,7 +1592,7 @@ public final class CoreTest {
       ":casename", "contains",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true  (contains \"abcde\" \"cd\"))",
@@ -1626,7 +1624,7 @@ public final class CoreTest {
       ":casename", "contains_1",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true\n (contains (stringlist \"1\" \"2\" \"3\") \"2\"))",
@@ -1697,7 +1695,7 @@ public final class CoreTest {
       ":casename", "copy",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringmap\n  :a \"1\"\n  :b \"2\")\n (copy\n  (stringmap :a \"1\")\n  :b \"2\"))",
@@ -1741,7 +1739,7 @@ public final class CoreTest {
       ":casename", "empty",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test false  (empty boolean))",
@@ -1807,7 +1805,7 @@ public final class CoreTest {
       ":casename", "first<-list",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"b\"\n (first<-list\n  (stringlist\n   \"b\"\n   \"c\")))",
@@ -1840,7 +1838,7 @@ public final class CoreTest {
       ":casename", "first<-list-any<-any",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"b\"\n (first<-list-any<-any : string\n  (list nothing \"b\" \"c\")\n  resolve))",
@@ -1875,7 +1873,7 @@ public final class CoreTest {
       ":casename", "float<-string",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (float 2.3)\n (float<-string\n  \"2.3\"))",
@@ -1904,7 +1902,7 @@ public final class CoreTest {
       ":casename", "if",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"a\"\n (if (= 2 2) \"a\"))",
@@ -1946,7 +1944,7 @@ public final class CoreTest {
       ":casename", "if_1",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"a\"\n (if\n  (= 2 2)\n  \"a\"\n  \"b\"))",
@@ -1990,7 +1988,7 @@ public final class CoreTest {
       ":casename", "if_2",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true\n (if\n  (then (= 2 3) false)\n  (then (!= 3 3) false)\n  (else (! false))))",
@@ -2040,7 +2038,7 @@ public final class CoreTest {
       ":casename", "int<-string",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test 4 (int<-string \"4\"))",
@@ -2114,7 +2112,7 @@ public final class CoreTest {
       ":casename", "is-empty_1",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true (is-empty false))",
@@ -2174,7 +2172,7 @@ public final class CoreTest {
       ":casename", "is-int",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true\n (is-int 2))",
@@ -2226,7 +2224,7 @@ public final class CoreTest {
       ":casename", "is-number",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true  (is-number 5))",
@@ -2267,7 +2265,7 @@ public final class CoreTest {
       ":casename", "last<-list",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"c\"\n (last<-list\n  (stringlist\n   \"b\"\n   \"c\")))",
@@ -2300,7 +2298,7 @@ public final class CoreTest {
       ":casename", "length",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n 4\n (length \"abcd\"))",
@@ -2334,7 +2332,7 @@ public final class CoreTest {
       ":casename", "length_1",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n 3\n (length\n  (stringlist \"a\" \"b\" \"c\")))",
@@ -2367,7 +2365,7 @@ public final class CoreTest {
       ":casename", "let",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n 7\n (let\n  [v1 : int := 2\n   v2 : int := (+ v1 3)]\n  (+ v1 v2)))",
@@ -2398,7 +2396,7 @@ public final class CoreTest {
       ":casename", "list-join<-list",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringlist \"a\" \"b\" \"c\" \"d\")\n (list-join<-list : stringlist\n  (stringlistlist\n   (stringlist \"a\" \"b\")\n   (stringlist \"c\" \"d\"))))",
@@ -2451,7 +2449,7 @@ public final class CoreTest {
       ":casename", "list-join<-list_1",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringlist \"a\" \"b\" \"c\" \"d\")\n (list-join<-list : stringlist\n  (stringlistlist\n   (stringlist \"a\" \"b\")\n   (stringlist \"c\" \"d\"))\n  (fn : stringlist\n   [values : stringlist]\n   values)))",
@@ -2508,7 +2506,7 @@ public final class CoreTest {
       ":casename", "list<-list",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringlist \"10\" \"20\")\n (list<-list : stringlist\n  (anylist \"10\" \"20\")))",
@@ -2547,7 +2545,7 @@ public final class CoreTest {
       ":casename", "list<-list-intany",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-list-intany : stringlist\n  (stringlist \"a\" \"b\")\n  (fn : stringlist\n   [index : int\n    value : string]\n   (string value index))))",
@@ -2598,7 +2596,7 @@ public final class CoreTest {
       ":casename", "list<-map",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-map : stringlist\n  (stringmap\n   :x \"a1\"\n   :y \"b2\")))",
@@ -2639,7 +2637,7 @@ public final class CoreTest {
       ":casename", "list<-map_1",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-map : stringlist\n  (stringmap \"a\" \"1\" \"b\" \"2\")\n  (fn : string\n   [key : string\n    val : string]\n   (string key val))))",
@@ -2692,7 +2690,7 @@ public final class CoreTest {
       ":casename", "map<-list",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringmap\n  \"keya\" \"a\"\n  \"keyb\" \"b\")\n (map<-list : stringmap\n  (stringlist \"a\" \"b\")\n  (fn : string\n   [val : string]\n   (string \"key\" val))))",
@@ -2744,7 +2742,7 @@ public final class CoreTest {
       ":casename", "map<-map",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringmap :a \"1\")\n (map<-map : stringmap\n  (anymap :a \"1\")))",
@@ -2783,7 +2781,7 @@ public final class CoreTest {
       ":casename", "map<-map_1",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringmap\n  :a \"a1\"\n  :b \"b2\")\n (map<-map : stringmap\n  (stringmap\n   :a \"1\"\n   :b \"2\")\n  (fn : string\n   [key : string\n    val : string]\n   (string key val))))",
@@ -2838,7 +2836,7 @@ public final class CoreTest {
       ":casename", "new",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test true (new boolean true))",
@@ -2962,7 +2960,7 @@ public final class CoreTest {
       ":casename", "or",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true (or true true))",
@@ -3012,7 +3010,7 @@ public final class CoreTest {
       ":casename", "or_1",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true (or false true false))",
@@ -3056,7 +3054,7 @@ public final class CoreTest {
       ":casename", "resolve",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test \"a\" (resolve \"a\"))",
@@ -3080,7 +3078,7 @@ public final class CoreTest {
       ":casename", "resolve_1",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test 4 (resolve (fn : int [] (+ 1 3))))",
@@ -3111,7 +3109,7 @@ public final class CoreTest {
       ":casename", "resolve-async",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test 4 (resolve : int (fn : int [] (+ 1 3))))",
@@ -3142,7 +3140,7 @@ public final class CoreTest {
       ":casename", "string-repeat",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test \"abab\" (string-repeat \"ab\" 2))",
@@ -3166,7 +3164,7 @@ public final class CoreTest {
       ":casename", "string<-any",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test \"true\"  (string<-any true))",
@@ -3261,7 +3259,7 @@ public final class CoreTest {
       ":casename", "string<-string-find-replace",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"a!b!c\"\n (string<-string-find-replace\n  \"axybxyc\"\n  \"xy\"\n  \"!\"))",
@@ -3285,7 +3283,7 @@ public final class CoreTest {
       ":casename", "stringlist<-map",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringlist \"b\" \"a\")\n (stringlist<-map\n  (intmap\n   :b 1\n   :a 2)))",
@@ -3325,7 +3323,7 @@ public final class CoreTest {
       ":casename", "switch",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test 1\n (switch : int\n  \"d\"\n  (case (list \"b\" \"c\" \"d\") 1)\n  (else 2)))",
@@ -3372,7 +3370,7 @@ public final class CoreTest {
       ":casename", "type<-any",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n boolean\n (type<-any false))",
@@ -3418,7 +3416,7 @@ public final class CoreTest {
       ":casename", "typename<-any",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test \"vx/core/boolean\" (typename<-any false))",
@@ -3457,7 +3455,7 @@ public final class CoreTest {
   }
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
+    List<Core.Type_any> arraylisttestcase = Core.arraylist_from_array(
       CoreTest.t_boolean(context),
       CoreTest.t_float(context),
       CoreTest.t_func(context),
@@ -3539,7 +3537,7 @@ public final class CoreTest {
       CoreTest.f_switch(context),
       CoreTest.f_type_from_any(context),
       CoreTest.f_typename_from_any(context)
-    ));
+    );
     Test.Type_testcaselist output = Core.vx_new(
       Test.t_testcaselist,
       arraylisttestcase

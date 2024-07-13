@@ -1,20 +1,10 @@
 
 package com.vxlisp.vx;
 
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
-
 public final class EventTest {
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
-      
-    ));
-    Test.Type_testcaselist output = Core.vx_new(
-      Test.t_testcaselist,
-      arraylisttestcase
-    );
+    Test.Type_testcaselist output = Test.e_testcaselist;
     return output;
   }
 

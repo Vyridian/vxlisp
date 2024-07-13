@@ -1,8 +1,6 @@
 
 package com.vxlisp.vx.web;
 
-import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.List;
 import com.vxlisp.vx.*;
 
@@ -16,7 +14,7 @@ public final class HtmlTest {
       ":casename", "string<-body-indent",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"<body></body>\"\n (string<-body-indent (body) 0))",
@@ -65,7 +63,7 @@ public final class HtmlTest {
       ":casename", "string<-div-indent",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"<div></div>\"\n (string<-div-indent (div) 0))",
@@ -113,7 +111,7 @@ public final class HtmlTest {
       ":casename", "string<-head-indent",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"<head></head>\"\n (string<-head-indent (head) 0))",
@@ -142,7 +140,7 @@ public final class HtmlTest {
       ":casename", "string<-html",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"<!DOCTYPE html>\n<html>\n  <head></head>\n  <body></body>\n  <footer></footer>\n</html>\"\n (string<-html\n  (html :head (head) :body (body))))",
@@ -180,7 +178,7 @@ public final class HtmlTest {
       ":casename", "string<-img-indent",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"<img src=\\\"test.svg\\\" />\"\n (string<-img-indent\n  (img :src \"test.svg\")\n  0))",
@@ -234,7 +232,7 @@ public final class HtmlTest {
       ":casename", "string<-meta-indent",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"<meta charset=\\\"utf-8\\\" />\"\n (string<-meta-indent (meta :charset \"utf-8\") 0))",
@@ -267,7 +265,7 @@ public final class HtmlTest {
       ":casename", "string<-p-indent",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"<p>data</p>\"\n (string<-p-indent\n  (p :text \"data\")\n  0))",
@@ -314,7 +312,7 @@ public final class HtmlTest {
   }
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
+    List<Core.Type_any> arraylisttestcase = Core.arraylist_from_array(
       HtmlTest.f_string_from_body_indent(context),
       HtmlTest.f_string_from_div_indent(context),
       HtmlTest.f_string_from_head_indent(context),
@@ -322,7 +320,7 @@ public final class HtmlTest {
       HtmlTest.f_string_from_img_indent(context),
       HtmlTest.f_string_from_meta_indent(context),
       HtmlTest.f_string_from_p_indent(context)
-    ));
+    );
     Test.Type_testcaselist output = Core.vx_new(
       Test.t_testcaselist,
       arraylisttestcase

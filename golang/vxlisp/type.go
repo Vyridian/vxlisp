@@ -134,6 +134,20 @@ var structtype = NewTypeStruct("vx/core/struct")
 
 var structtype2 = NewType("vx/core/struct-2")
 
+var testcasetype = NewTypeStruct("vx/test/testcase")
+
+var testcaselisttype = NewTypeList("vx/test/testcaselist", testcasetype)
+
+var testcoveragedetailtype = NewTypeStruct("vx/test/testcoveragedetail")
+
+var testcoveragenumstype = NewTypeStruct("vx/test/testcoveragenums")
+
+var testcoveragesummarytype = NewTypeStruct("vx/test/testcoveragesummary")
+
+var testdescribetype = NewTypeStruct("vx/test/testdescribe")
+
+var testdescribelisttype = NewTypeList("vx/test/testdescribelist", testdescribetype)
+
 var testpackagetype = NewTypeStruct("vx/test/testpackage")
 
 var testpackagelisttype = NewTypeList("vx/test/testpackagelist", testpackagetype)

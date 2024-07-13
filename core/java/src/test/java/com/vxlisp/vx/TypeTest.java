@@ -1,8 +1,6 @@
 
 package com.vxlisp.vx;
 
-import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.List;
 
 public final class TypeTest {
@@ -15,7 +13,7 @@ public final class TypeTest {
       ":casename", "boolean<-string-ends",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true\n (boolean<-string-ends\n  \"abcd\"\n  \"cd\"))",
@@ -38,7 +36,7 @@ public final class TypeTest {
       ":casename", "boolean<-string-starts",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true\n (boolean<-string-starts\n  \"abcd\"\n  \"ab\"))",
@@ -61,7 +59,7 @@ public final class TypeTest {
       ":casename", "int<-string-find",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n 3\n (int<-string-find\n  \"abcdcdg\"\n  \"cd\"))",
@@ -85,7 +83,7 @@ public final class TypeTest {
       ":casename", "int<-string-findkeyword",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n 3\n (int<-string-findkeyword\n  \"ab\tcdefg\"\n  \":whitespace\"))",
@@ -119,7 +117,7 @@ public final class TypeTest {
       ":casename", "int<-string-findlast",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n 5\n (int<-string-findlast\n  \"abcdcdg\"\n  \"cd\"))",
@@ -143,7 +141,7 @@ public final class TypeTest {
       ":casename", "is-string",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true\n (is-string \"\"))",
@@ -197,7 +195,7 @@ public final class TypeTest {
       ":casename", "is-type",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true\n (is-type false boolean))",
@@ -259,7 +257,7 @@ public final class TypeTest {
       ":casename", "is-type<-any-typelist",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test-true\n (is-type<-any-typelist\n  false\n  (typelist int boolean)))",
@@ -345,7 +343,7 @@ public final class TypeTest {
       ":casename", "string-lowercase",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"abc\"\n (string-lowercase\n  \"AbC\"))",
@@ -369,7 +367,7 @@ public final class TypeTest {
       ":casename", "string-outdent",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"ab\"\n (string-outdent\n  \"ab\"))",
@@ -403,7 +401,7 @@ public final class TypeTest {
       ":casename", "string-trim",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"ab\"\n (string-trim\n  \" \t\nab\n\t \"))",
@@ -427,7 +425,7 @@ public final class TypeTest {
       ":casename", "string-uppercase",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"ABC\"\n (string-uppercase\n  \"aBc\"))",
@@ -451,7 +449,7 @@ public final class TypeTest {
       ":casename", "string<-int",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"4\"\n (string<-int 4))",
@@ -521,7 +519,7 @@ public final class TypeTest {
       ":casename", "string<-string-end",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"abc\"\n (string<-string-end\n  \"abcd\"\n  3))",
@@ -555,7 +553,7 @@ public final class TypeTest {
       ":casename", "string<-string-start",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"abcd\"\n (string<-string-start\n  \"abcd\"\n  1))",
@@ -589,7 +587,7 @@ public final class TypeTest {
       ":casename", "string<-string-start-end",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"abc\"\n (string<-string-start-end\n  \"abcd\"\n  1\n  3))",
@@ -653,7 +651,7 @@ public final class TypeTest {
       ":casename", "string<-stringlist-join",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n \"a$b$c\"\n (string<-stringlist-join\n  (stringlist \"a\" \"b\" \"c\")\n  \"$\"))",
@@ -687,7 +685,7 @@ public final class TypeTest {
       ":casename", "stringlist<-string-split",
       ":describelist",
       Core.vx_new(
-        Test.t_testdescribelist, 
+        Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
           ":describename", "(test\n (stringlist \"a\" \"b\" \"c\")\n (stringlist<-string-split\n  \"a$b$c\"\n  \"$\"))",
@@ -711,7 +709,7 @@ public final class TypeTest {
   }
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = new ArrayList<>(Arrays.asList(
+    List<Core.Type_any> arraylisttestcase = Core.arraylist_from_array(
       TypeTest.f_boolean_from_string_ends(context),
       TypeTest.f_boolean_from_string_starts(context),
       TypeTest.f_int_from_string_find(context),
@@ -730,7 +728,7 @@ public final class TypeTest {
       TypeTest.f_string_from_string_start_end(context),
       TypeTest.f_string_from_stringlist_join(context),
       TypeTest.f_stringlist_from_string_split(context)
-    ));
+    );
     Test.Type_testcaselist output = Core.vx_new(
       Test.t_testcaselist,
       arraylisttestcase
