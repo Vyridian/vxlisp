@@ -8,10 +8,6 @@ public static class State {
    * (type valuemap)
    */
   public interface Type_valuemap : Vx.Core.Type_map {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
   }
 
   public class Class_valuemap : Vx.Core.Class_base, Type_valuemap {
@@ -60,8 +56,8 @@ public static class State {
       List<string> keys = mapval.keys();
       foreach (string key in keys) {
         Vx.Core.Type_any val = mapval.get(key);
-        if (val is Vx.Core.Type_any) {
-          Vx.Core.Type_any castval = (Vx.Core.Type_any)val;
+        if (false) {
+        } else if (val is Vx.Core.Type_any castval) {
           map.put(key, castval);
         } else {
           Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/state/valuemap", ":invalidvalue", val);
@@ -90,40 +86,42 @@ public static class State {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_any> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>(val.vx_map());
-      Vx.Core.Type_msg msg;
+      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_any? msgval = null;
       foreach (Object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstring = valsub as Vx.Core.Type_string;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstring) {
             key = valstring.vx_string();
-          } else if (valsub is string) {
-            key = valsub as string;
+          } else if (valsub is string sval) {
+            key = sval;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/state/valuemap", ":keyexpected", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Core.Type_any valany = null;
+          Vx.Core.Type_any? valany = null;
           if (valsub is Vx.Core.Type_any) {
             valany = (Vx.Core.Type_any)valsub;
           } else if (valsub is Vx.Core.Type_any) {
             valany = valsub as Vx.Core.Type_any;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
             mapany.put("key", Vx.Core.vx_new_string(key));

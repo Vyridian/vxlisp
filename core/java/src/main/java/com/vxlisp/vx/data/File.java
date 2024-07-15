@@ -46,7 +46,7 @@ public final class File {
 
   public static class Class_file extends Core.Class_base implements Type_file {
 
-    public Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name = null;
 
     @Override
     public Core.Type_string name() {
@@ -57,7 +57,7 @@ public final class File {
       return output;
     }
 
-    public File.Type_fileformat vx_p_format;
+    public File.Type_fileformat vx_p_format = null;
 
     @Override
     public File.Type_fileformat format() {
@@ -68,7 +68,7 @@ public final class File {
       return output;
     }
 
-    public Core.Type_string vx_p_path;
+    public Core.Type_string vx_p_path = null;
 
     @Override
     public Core.Type_string path() {
@@ -79,7 +79,7 @@ public final class File {
       return output;
     }
 
-    public Core.Type_permission vx_p_permission;
+    public Core.Type_permission vx_p_permission = null;
 
     @Override
     public Core.Type_permission permission() {
@@ -90,7 +90,7 @@ public final class File {
       return output;
     }
 
-    public Core.Type_string vx_p_text;
+    public Core.Type_string vx_p_text = null;
 
     @Override
     public Core.Type_string text() {
@@ -214,8 +214,10 @@ public final class File {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -233,8 +235,10 @@ public final class File {
               ischanged = true;
               vx_p_format = (File.Type_fileformat)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -255,8 +259,10 @@ public final class File {
               ischanged = true;
               vx_p_path = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -274,8 +280,10 @@ public final class File {
               ischanged = true;
               vx_p_permission = (Core.Type_permission)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -296,8 +304,10 @@ public final class File {
               ischanged = true;
               vx_p_text = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -506,9 +516,9 @@ public final class File {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof File.Type_file) {
-          File.Type_file anysub = (File.Type_file)valsub;
+          File.Type_file allowsub = (File.Type_file)valsub;;
           ischanged = true;
-          listval.add(anysub);
+          listval.add(allowsub);
         } else if (valsub instanceof File.Type_file) {
           ischanged = true;
           listval.add((File.Type_file)valsub);
@@ -516,8 +526,8 @@ public final class File {
           Type_filelist multi = (Type_filelist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listfile());
-        } else if (valsub instanceof List) {
-          List<?> listunknown = (List<?>)valsub;
+        } else if (valsub instanceof List<?>) {
+          List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
             if (item instanceof File.Type_file) {
               File.Type_file valitem = (File.Type_file)item;
@@ -526,8 +536,8 @@ public final class File {
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/data/file/filelist", ":invalidtype", anysub);
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          msg = Core.vx_msg_from_error("vx/data/file/filelist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/data/file/filelist", ":invalidtype", Core.vx_new_string(valsub.toString()));

@@ -30,7 +30,7 @@ public final class Event {
 
   public static class Class_event extends Core.Class_base implements Type_event {
 
-    public Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name = null;
 
     @Override
     public Core.Type_string name() {
@@ -41,7 +41,7 @@ public final class Event {
       return output;
     }
 
-    public Core.Type_string vx_p_from;
+    public Core.Type_string vx_p_from = null;
 
     @Override
     public Core.Type_string from() {
@@ -52,7 +52,7 @@ public final class Event {
       return output;
     }
 
-    public Core.Type_string vx_p_to;
+    public Core.Type_string vx_p_to = null;
 
     @Override
     public Core.Type_string to() {
@@ -63,7 +63,7 @@ public final class Event {
       return output;
     }
 
-    public Core.Type_anymap vx_p_datamap;
+    public Core.Type_anymap vx_p_datamap = null;
 
     @Override
     public Core.Type_anymap datamap() {
@@ -74,7 +74,7 @@ public final class Event {
       return output;
     }
 
-    public Event.Func_event_from_event vx_p_event_from_event;
+    public Event.Func_event_from_event vx_p_event_from_event = null;
 
     @Override
     public Event.Func_event_from_event event_from_event() {
@@ -85,7 +85,7 @@ public final class Event {
       return output;
     }
 
-    public Event.Func_event_from_event_async vx_p_event_from_event_async;
+    public Event.Func_event_from_event_async vx_p_event_from_event_async = null;
 
     @Override
     public Event.Func_event_from_event_async event_from_event_async() {
@@ -215,8 +215,10 @@ public final class Event {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -237,8 +239,10 @@ public final class Event {
               ischanged = true;
               vx_p_from = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -259,8 +263,10 @@ public final class Event {
               ischanged = true;
               vx_p_to = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -278,8 +284,10 @@ public final class Event {
               ischanged = true;
               vx_p_datamap = (Core.Type_anymap)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -297,8 +305,10 @@ public final class Event {
               ischanged = true;
               vx_p_event_from_event = (Event.Func_event_from_event)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -316,8 +326,10 @@ public final class Event {
               ischanged = true;
               vx_p_event_from_event_async = (Event.Func_event_from_event_async)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -457,9 +469,9 @@ public final class Event {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Event.Type_event) {
-          Event.Type_event anysub = (Event.Type_event)valsub;
+          Event.Type_event allowsub = (Event.Type_event)valsub;;
           ischanged = true;
-          listval.add(anysub);
+          listval.add(allowsub);
         } else if (valsub instanceof Event.Type_event) {
           ischanged = true;
           listval.add((Event.Type_event)valsub);
@@ -467,8 +479,8 @@ public final class Event {
           Type_eventlist multi = (Type_eventlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listevent());
-        } else if (valsub instanceof List) {
-          List<?> listunknown = (List<?>)valsub;
+        } else if (valsub instanceof List<?>) {
+          List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
             if (item instanceof Event.Type_event) {
               Event.Type_event valitem = (Event.Type_event)item;
@@ -477,8 +489,8 @@ public final class Event {
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/event/eventlist", ":invalidtype", anysub);
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          msg = Core.vx_msg_from_error("vx/event/eventlist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/event/eventlist", ":invalidtype", Core.vx_new_string(valsub.toString()));
@@ -600,8 +612,9 @@ public final class Event {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         Core.Type_any val = mapval.get(key);
-        if (val instanceof Event.Type_event) {
-          Event.Type_event castval = (Event.Type_event)val;
+        if (false) {
+        } else if (val instanceof Event.Type_event) {
+          Event.Type_event castval = (Event.Type_event)val;;
           map.put(key, castval);
         } else {
           Core.Type_msg msg = Core.vx_msg_from_error("vx/event/eventmap", ":invalidvalue", val);
@@ -632,23 +645,27 @@ public final class Event {
         ischanged = true;
       }
       Map<String, Event.Type_event> mapval = new LinkedHashMap<String, Event.Type_event>(val.vx_mapevent());
-      Core.Type_msg msg;
+      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval;
+      Core.Type_any msgval = null;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstring = (Core.Type_string)valsub;;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            key = (String)valsub;
+            String sval = (String)valsub;;
+            key = sval;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -662,8 +679,10 @@ public final class Event {
           } else if (valsub instanceof Event.Type_event) {
             valany = (Event.Type_event)valsub;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }

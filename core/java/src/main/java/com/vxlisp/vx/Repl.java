@@ -119,9 +119,9 @@ public final class Repl {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_string) {
-          Core.Type_string anysub = (Core.Type_string)valsub;
+          Core.Type_string allowsub = (Core.Type_string)valsub;;
           ischanged = true;
-          listval.add(anysub);
+          listval.add(allowsub);
         } else if (valsub instanceof String) {
           ischanged = true;
           listval.add(Core.vx_new(Core.t_string, valsub));
@@ -129,8 +129,8 @@ public final class Repl {
           Type_liblist multi = (Type_liblist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_liststring());
-        } else if (valsub instanceof List) {
-          List<?> listunknown = (List<?>)valsub;
+        } else if (valsub instanceof List<?>) {
+          List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
             if (item instanceof Core.Type_string) {
               Core.Type_string valitem = (Core.Type_string)item;
@@ -139,8 +139,8 @@ public final class Repl {
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/repl/liblist", ":invalidtype", anysub);
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          msg = Core.vx_msg_from_error("vx/repl/liblist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/repl/liblist", ":invalidtype", Core.vx_new_string(valsub.toString()));
@@ -209,7 +209,7 @@ public final class Repl {
 
   public static class Class_repl extends Core.Class_base implements Type_repl {
 
-    public Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name = null;
 
     @Override
     public Core.Type_string name() {
@@ -220,7 +220,7 @@ public final class Repl {
       return output;
     }
 
-    public Core.Type_any vx_p_type;
+    public Core.Type_any vx_p_type = null;
 
     @Override
     public Core.Type_any type() {
@@ -231,7 +231,7 @@ public final class Repl {
       return output;
     }
 
-    public Repl.Type_repllist vx_p_repllist;
+    public Repl.Type_repllist vx_p_repllist = null;
 
     @Override
     public Repl.Type_repllist repllist() {
@@ -242,7 +242,7 @@ public final class Repl {
       return output;
     }
 
-    public Core.Type_boolean vx_p_async;
+    public Core.Type_boolean vx_p_async = null;
 
     @Override
     public Core.Type_boolean async() {
@@ -253,7 +253,7 @@ public final class Repl {
       return output;
     }
 
-    public Core.Type_any vx_p_val;
+    public Core.Type_any vx_p_val = null;
 
     @Override
     public Core.Type_any val() {
@@ -264,7 +264,7 @@ public final class Repl {
       return output;
     }
 
-    public Core.Type_string vx_p_doc;
+    public Core.Type_string vx_p_doc = null;
 
     @Override
     public Core.Type_string doc() {
@@ -394,8 +394,10 @@ public final class Repl {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -413,8 +415,10 @@ public final class Repl {
               ischanged = true;
               vx_p_type = (Core.Type_any)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -432,8 +436,10 @@ public final class Repl {
               ischanged = true;
               vx_p_repllist = (Repl.Type_repllist)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -454,8 +460,10 @@ public final class Repl {
               ischanged = true;
               vx_p_async = Core.vx_new(Core.t_boolean, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -473,8 +481,10 @@ public final class Repl {
               ischanged = true;
               vx_p_val = (Core.Type_any)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -495,8 +505,10 @@ public final class Repl {
               ischanged = true;
               vx_p_doc = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -581,7 +593,7 @@ public final class Repl {
 
   public static class Class_replarglist extends Core.Class_base implements Type_replarglist {
 
-    public Core.Type_string vx_p_key;
+    public Core.Type_string vx_p_key = null;
 
     @Override
     public Core.Type_string key() {
@@ -592,7 +604,7 @@ public final class Repl {
       return output;
     }
 
-    public Repl.Type_repl vx_p_current;
+    public Repl.Type_repl vx_p_current = null;
 
     @Override
     public Repl.Type_repl current() {
@@ -603,7 +615,7 @@ public final class Repl {
       return output;
     }
 
-    public Repl.Type_repllist vx_p_repllist;
+    public Repl.Type_repllist vx_p_repllist = null;
 
     @Override
     public Repl.Type_repllist repllist() {
@@ -715,8 +727,10 @@ public final class Repl {
               ischanged = true;
               vx_p_key = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -734,8 +748,10 @@ public final class Repl {
               ischanged = true;
               vx_p_current = (Repl.Type_repl)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -753,8 +769,10 @@ public final class Repl {
               ischanged = true;
               vx_p_repllist = (Repl.Type_repllist)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -891,9 +909,9 @@ public final class Repl {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Repl.Type_repl) {
-          Repl.Type_repl anysub = (Repl.Type_repl)valsub;
+          Repl.Type_repl allowsub = (Repl.Type_repl)valsub;;
           ischanged = true;
-          listval.add(anysub);
+          listval.add(allowsub);
         } else if (valsub instanceof Repl.Type_repl) {
           ischanged = true;
           listval.add((Repl.Type_repl)valsub);
@@ -901,8 +919,8 @@ public final class Repl {
           Type_repllist multi = (Type_repllist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listrepl());
-        } else if (valsub instanceof List) {
-          List<?> listunknown = (List<?>)valsub;
+        } else if (valsub instanceof List<?>) {
+          List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
             if (item instanceof Repl.Type_repl) {
               Repl.Type_repl valitem = (Repl.Type_repl)item;
@@ -911,8 +929,8 @@ public final class Repl {
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/repl/repllist", ":invalidtype", anysub);
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          msg = Core.vx_msg_from_error("vx/repl/repllist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/repl/repllist", ":invalidtype", Core.vx_new_string(valsub.toString()));

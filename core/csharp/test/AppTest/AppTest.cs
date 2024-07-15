@@ -1,6 +1,7 @@
 /**
  * Unit test for whole App.
  */
+using Xunit;
 
 
 
@@ -8,8 +9,8 @@ namespace AppTest;
 
 public class AppTest {
 
-  Vx.Core.Type_anylist arglist = Vx.Core.e_anylist;
-  Vx.Core.Type_context context = vx.translation.Vx.Translation.En.f_context_test(arglist);
+  public static Vx.Core.Type_anylist arglist = Vx.Core.e_anylist;
+  public static Vx.Core.Type_context context = Vx.Translation.En.f_context_test(arglist);
 
   [Fact]
   public void test_vx_core() {
@@ -165,31 +166,31 @@ public class AppTest {
   public void test_writetestsuite() {
     Vx.Test.Type_testpackagelist testpackagelist = Vx.Core.vx_new(
       Vx.Test.t_testpackagelist,
-      Vx.CoreTest.test_package(context),
-      Vx.Data.DbTest.test_package(context),
-      Vx.Data.TableTest.test_package(context),
-      Vx.Data.TreeTest.test_package(context),
-      Vx.EventTest.test_package(context),
-      Vx.SampleTest.test_package(context),
-      Vx.StateTest.test_package(context),
-      Vx.TypeTest.test_package(context),
-      Vx.Web.HtmlTest.test_package(context),
-      Vx.CollectionTest.test_package(context),
-      Vx.Data.TextblockTest.test_package(context),
-      Vx.ReplTest.test_package(context),
-      Vx.Data.FileTest.test_package(context),
-      Vx.Data.XmlTest.test_package(context),
-      Vx.TestTest.test_package(context),
-      Vx.Ui.UiTest.test_package(context),
-      Vx.Web.HtmldocTest.test_package(context),
-      Vx.Data.CsvTest.test_package(context),
-      Vx.TranslateTest.test_package(context),
-      Vx.Translation.EnTest.test_package(context),
-      Vx.Translation.EsTest.test_package(context),
-      Vx.Ui.Html.UihtmlTest.test_package(context),
-      Vx.Ui.Svg.UisvgTest.test_package(context),
-      Vx.Web.HttpTest.test_package(context),
-      Vx.Translation.AllTest.test_package(context)
+      TestVx.CoreTest.test_package(context),
+      TestVx.Data.DbTest.test_package(context),
+      TestVx.Data.TableTest.test_package(context),
+      TestVx.Data.TreeTest.test_package(context),
+      TestVx.EventTest.test_package(context),
+      TestVx.SampleTest.test_package(context),
+      TestVx.StateTest.test_package(context),
+      TestVx.TypeTest.test_package(context),
+      TestVx.Web.HtmlTest.test_package(context),
+      TestVx.CollectionTest.test_package(context),
+      TestVx.Data.TextblockTest.test_package(context),
+      TestVx.ReplTest.test_package(context),
+      TestVx.Data.FileTest.test_package(context),
+      TestVx.Data.XmlTest.test_package(context),
+      TestVx.TestTest.test_package(context),
+      TestVx.Ui.UiTest.test_package(context),
+      TestVx.Web.HtmldocTest.test_package(context),
+      TestVx.Data.CsvTest.test_package(context),
+      TestVx.TranslateTest.test_package(context),
+      TestVx.Translation.EnTest.test_package(context),
+      TestVx.Translation.EsTest.test_package(context),
+      TestVx.Ui.Html.UihtmlTest.test_package(context),
+      TestVx.Ui.Svg.UisvgTest.test_package(context),
+      TestVx.Web.HttpTest.test_package(context),
+      TestVx.Translation.AllTest.test_package(context)
     );
     TestLib.write_testpackagelist_async(context, testpackagelist);
   }

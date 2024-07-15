@@ -28,7 +28,7 @@ public final class Textblock {
 
   public static class Class_delim extends Core.Class_base implements Type_delim {
 
-    public Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name = null;
 
     @Override
     public Core.Type_string name() {
@@ -39,7 +39,7 @@ public final class Textblock {
       return output;
     }
 
-    public Core.Type_string vx_p_starttext;
+    public Core.Type_string vx_p_starttext = null;
 
     @Override
     public Core.Type_string starttext() {
@@ -50,7 +50,7 @@ public final class Textblock {
       return output;
     }
 
-    public Core.Type_string vx_p_endtext;
+    public Core.Type_string vx_p_endtext = null;
 
     @Override
     public Core.Type_string endtext() {
@@ -61,7 +61,7 @@ public final class Textblock {
       return output;
     }
 
-    public Core.Type_int vx_p_pos;
+    public Core.Type_int vx_p_pos = null;
 
     @Override
     public Core.Type_int pos() {
@@ -72,7 +72,7 @@ public final class Textblock {
       return output;
     }
 
-    public Textblock.Type_delimlist vx_p_delimlist;
+    public Textblock.Type_delimlist vx_p_delimlist = null;
 
     @Override
     public Textblock.Type_delimlist delimlist() {
@@ -196,8 +196,10 @@ public final class Textblock {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -218,8 +220,10 @@ public final class Textblock {
               ischanged = true;
               vx_p_starttext = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -240,8 +244,10 @@ public final class Textblock {
               ischanged = true;
               vx_p_endtext = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -262,8 +268,10 @@ public final class Textblock {
               ischanged = true;
               vx_p_pos = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -281,8 +289,10 @@ public final class Textblock {
               ischanged = true;
               vx_p_delimlist = (Textblock.Type_delimlist)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -421,9 +431,9 @@ public final class Textblock {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Textblock.Type_delim) {
-          Textblock.Type_delim anysub = (Textblock.Type_delim)valsub;
+          Textblock.Type_delim allowsub = (Textblock.Type_delim)valsub;;
           ischanged = true;
-          listval.add(anysub);
+          listval.add(allowsub);
         } else if (valsub instanceof Textblock.Type_delim) {
           ischanged = true;
           listval.add((Textblock.Type_delim)valsub);
@@ -431,8 +441,8 @@ public final class Textblock {
           Type_delimlist multi = (Type_delimlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listdelim());
-        } else if (valsub instanceof List) {
-          List<?> listunknown = (List<?>)valsub;
+        } else if (valsub instanceof List<?>) {
+          List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
             if (item instanceof Textblock.Type_delim) {
               Textblock.Type_delim valitem = (Textblock.Type_delim)item;
@@ -441,8 +451,8 @@ public final class Textblock {
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/data/textblock/delimlist", ":invalidtype", anysub);
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          msg = Core.vx_msg_from_error("vx/data/textblock/delimlist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/data/textblock/delimlist", ":invalidtype", Core.vx_new_string(valsub.toString()));
@@ -516,7 +526,7 @@ public final class Textblock {
 
   public static class Class_textblock extends Core.Class_base implements Type_textblock {
 
-    public Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name = null;
 
     @Override
     public Core.Type_string name() {
@@ -527,7 +537,7 @@ public final class Textblock {
       return output;
     }
 
-    public Core.Type_string vx_p_text;
+    public Core.Type_string vx_p_text = null;
 
     @Override
     public Core.Type_string text() {
@@ -538,7 +548,7 @@ public final class Textblock {
       return output;
     }
 
-    public Core.Type_int vx_p_startpos;
+    public Core.Type_int vx_p_startpos = null;
 
     @Override
     public Core.Type_int startpos() {
@@ -549,7 +559,7 @@ public final class Textblock {
       return output;
     }
 
-    public Core.Type_int vx_p_endpos;
+    public Core.Type_int vx_p_endpos = null;
 
     @Override
     public Core.Type_int endpos() {
@@ -560,7 +570,7 @@ public final class Textblock {
       return output;
     }
 
-    public Core.Type_int vx_p_curpos;
+    public Core.Type_int vx_p_curpos = null;
 
     @Override
     public Core.Type_int curpos() {
@@ -571,7 +581,7 @@ public final class Textblock {
       return output;
     }
 
-    public Core.Type_int vx_p_line;
+    public Core.Type_int vx_p_line = null;
 
     @Override
     public Core.Type_int line() {
@@ -582,7 +592,7 @@ public final class Textblock {
       return output;
     }
 
-    public Core.Type_int vx_p_column;
+    public Core.Type_int vx_p_column = null;
 
     @Override
     public Core.Type_int column() {
@@ -593,7 +603,7 @@ public final class Textblock {
       return output;
     }
 
-    public Textblock.Type_delim vx_p_delim;
+    public Textblock.Type_delim vx_p_delim = null;
 
     @Override
     public Textblock.Type_delim delim() {
@@ -604,7 +614,7 @@ public final class Textblock {
       return output;
     }
 
-    public Textblock.Type_delim vx_p_close;
+    public Textblock.Type_delim vx_p_close = null;
 
     @Override
     public Textblock.Type_delim close() {
@@ -615,7 +625,7 @@ public final class Textblock {
       return output;
     }
 
-    public Textblock.Type_textblock vx_p_parent;
+    public Textblock.Type_textblock vx_p_parent = null;
 
     @Override
     public Textblock.Type_textblock parent() {
@@ -626,7 +636,7 @@ public final class Textblock {
       return output;
     }
 
-    public Textblock.Type_textblocklist vx_p_children;
+    public Textblock.Type_textblocklist vx_p_children = null;
 
     @Override
     public Textblock.Type_textblocklist children() {
@@ -786,8 +796,10 @@ public final class Textblock {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -808,8 +820,10 @@ public final class Textblock {
               ischanged = true;
               vx_p_text = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -830,8 +844,10 @@ public final class Textblock {
               ischanged = true;
               vx_p_startpos = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -852,8 +868,10 @@ public final class Textblock {
               ischanged = true;
               vx_p_endpos = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -874,8 +892,10 @@ public final class Textblock {
               ischanged = true;
               vx_p_curpos = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -896,8 +916,10 @@ public final class Textblock {
               ischanged = true;
               vx_p_line = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -918,8 +940,10 @@ public final class Textblock {
               ischanged = true;
               vx_p_column = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -937,8 +961,10 @@ public final class Textblock {
               ischanged = true;
               vx_p_delim = (Textblock.Type_delim)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -956,8 +982,10 @@ public final class Textblock {
               ischanged = true;
               vx_p_close = (Textblock.Type_delim)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -975,8 +1003,10 @@ public final class Textblock {
               ischanged = true;
               vx_p_parent = (Textblock.Type_textblock)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -994,8 +1024,10 @@ public final class Textblock {
               ischanged = true;
               vx_p_children = (Textblock.Type_textblocklist)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -1140,9 +1172,9 @@ public final class Textblock {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Textblock.Type_textblock) {
-          Textblock.Type_textblock anysub = (Textblock.Type_textblock)valsub;
+          Textblock.Type_textblock allowsub = (Textblock.Type_textblock)valsub;;
           ischanged = true;
-          listval.add(anysub);
+          listval.add(allowsub);
         } else if (valsub instanceof Textblock.Type_textblock) {
           ischanged = true;
           listval.add((Textblock.Type_textblock)valsub);
@@ -1150,8 +1182,8 @@ public final class Textblock {
           Type_textblocklist multi = (Type_textblocklist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listtextblock());
-        } else if (valsub instanceof List) {
-          List<?> listunknown = (List<?>)valsub;
+        } else if (valsub instanceof List<?>) {
+          List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
             if (item instanceof Textblock.Type_textblock) {
               Textblock.Type_textblock valitem = (Textblock.Type_textblock)item;
@@ -1160,8 +1192,8 @@ public final class Textblock {
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/data/textblock/textblocklist", ":invalidtype", anysub);
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          msg = Core.vx_msg_from_error("vx/data/textblock/textblocklist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/data/textblock/textblocklist", ":invalidtype", Core.vx_new_string(valsub.toString()));

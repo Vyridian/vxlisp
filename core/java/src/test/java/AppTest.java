@@ -35,8 +35,8 @@ import org.junit.jupiter.api.Test;
 public final class AppTest {
 
 
-  Core.Type_anylist arglist = Core.e_anylist;
-  Core.Type_context context = com.vxlisp.vx.translation.En.f_context_test(arglist);
+  public static Core.Type_anylist arglist = Core.e_anylist;
+  public static Core.Type_context context = En.f_context_test(arglist);
 
   @Test
   @DisplayName("vx/core")

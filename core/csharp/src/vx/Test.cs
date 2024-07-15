@@ -9,10 +9,6 @@ public static class Test {
    * (type testcase)
    */
   public interface Type_testcase : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_boolean passfail();
     public Vx.Core.Type_string testpkg();
     public Vx.Core.Type_string casename();
@@ -21,7 +17,7 @@ public static class Test {
 
   public class Class_testcase : Vx.Core.Class_base, Type_testcase {
 
-    public Vx.Core.Type_boolean vx_p_passfail;
+    public Vx.Core.Type_boolean? vx_p_passfail = null;
 
     public Vx.Core.Type_boolean passfail() {
       Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -31,7 +27,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_testpkg;
+    public Vx.Core.Type_string? vx_p_testpkg = null;
 
     public Vx.Core.Type_string testpkg() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -41,7 +37,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_casename;
+    public Vx.Core.Type_string? vx_p_casename = null;
 
     public Vx.Core.Type_string casename() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -51,7 +47,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Test.Type_testdescribelist vx_p_describelist;
+    public Vx.Test.Type_testdescribelist? vx_p_describelist = null;
 
     public Vx.Test.Type_testdescribelist describelist() {
       Vx.Test.Type_testdescribelist output = Vx.Test.e_testdescribelist;
@@ -135,7 +131,7 @@ public static class Test {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/test/testcase", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -164,10 +160,11 @@ public static class Test {
               ischanged = true;
               vx_p_passfail = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("passfail"));
@@ -186,10 +183,11 @@ public static class Test {
               ischanged = true;
               vx_p_testpkg = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("testpkg"));
@@ -208,10 +206,11 @@ public static class Test {
               ischanged = true;
               vx_p_casename = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("casename"));
@@ -227,10 +226,11 @@ public static class Test {
               ischanged = true;
               vx_p_describelist = (Vx.Test.Type_testdescribelist)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("describelist"));
@@ -297,10 +297,6 @@ public static class Test {
    * (type testcaselist)
    */
   public interface Type_testcaselist : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Test.Type_testcase> vx_listtestcase();
     public Vx.Test.Type_testcase vx_testcase(Vx.Core.Type_int index);
   }
@@ -356,10 +352,9 @@ public static class Test {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Test.Type_testcase) {
-          Vx.Test.Type_testcase anysub = valsub as Vx.Test.Type_testcase;
+        } else if (valsub is Vx.Test.Type_testcase allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Test.Type_testcase) {
           ischanged = true;
           listval.Add((Vx.Test.Type_testcase)valsub);
@@ -367,8 +362,7 @@ public static class Test {
           Type_testcaselist multi = (Type_testcaselist)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_listtestcase());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Test.Type_testcase) {
               Vx.Test.Type_testcase valitem = (Vx.Test.Type_testcase)item;
@@ -376,12 +370,11 @@ public static class Test {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/test/testcaselist", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/test/testcaselist", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/test/testcaselist", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/test/testcaselist", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -430,10 +423,6 @@ public static class Test {
    * (type testcoveragedetail)
    */
   public interface Type_testcoveragedetail : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_intmap constmap();
     public Vx.Core.Type_intmap funcmap();
     public Vx.Core.Type_string testpkg();
@@ -442,7 +431,7 @@ public static class Test {
 
   public class Class_testcoveragedetail : Vx.Core.Class_base, Type_testcoveragedetail {
 
-    public Vx.Core.Type_intmap vx_p_constmap;
+    public Vx.Core.Type_intmap? vx_p_constmap = null;
 
     public Vx.Core.Type_intmap constmap() {
       Vx.Core.Type_intmap output = Vx.Core.e_intmap;
@@ -452,7 +441,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Core.Type_intmap vx_p_funcmap;
+    public Vx.Core.Type_intmap? vx_p_funcmap = null;
 
     public Vx.Core.Type_intmap funcmap() {
       Vx.Core.Type_intmap output = Vx.Core.e_intmap;
@@ -462,7 +451,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_testpkg;
+    public Vx.Core.Type_string? vx_p_testpkg = null;
 
     public Vx.Core.Type_string testpkg() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -472,7 +461,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Core.Type_intmap vx_p_typemap;
+    public Vx.Core.Type_intmap? vx_p_typemap = null;
 
     public Vx.Core.Type_intmap typemap() {
       Vx.Core.Type_intmap output = Vx.Core.e_intmap;
@@ -556,7 +545,7 @@ public static class Test {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -582,10 +571,11 @@ public static class Test {
               ischanged = true;
               vx_p_constmap = (Vx.Core.Type_intmap)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("constmap"));
@@ -601,10 +591,11 @@ public static class Test {
               ischanged = true;
               vx_p_funcmap = (Vx.Core.Type_intmap)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("funcmap"));
@@ -623,10 +614,11 @@ public static class Test {
               ischanged = true;
               vx_p_testpkg = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("testpkg"));
@@ -642,10 +634,11 @@ public static class Test {
               ischanged = true;
               vx_p_typemap = (Vx.Core.Type_intmap)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("typemap"));
@@ -712,10 +705,6 @@ public static class Test {
    * (type testcoveragenums)
    */
   public interface Type_testcoveragenums : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_int pct();
     public Vx.Core.Type_string testpkg();
     public Vx.Core.Type_int tests();
@@ -724,7 +713,7 @@ public static class Test {
 
   public class Class_testcoveragenums : Vx.Core.Class_base, Type_testcoveragenums {
 
-    public Vx.Core.Type_int vx_p_pct;
+    public Vx.Core.Type_int? vx_p_pct = null;
 
     public Vx.Core.Type_int pct() {
       Vx.Core.Type_int output = Vx.Core.e_int;
@@ -734,7 +723,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_testpkg;
+    public Vx.Core.Type_string? vx_p_testpkg = null;
 
     public Vx.Core.Type_string testpkg() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -744,7 +733,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Core.Type_int vx_p_tests;
+    public Vx.Core.Type_int? vx_p_tests = null;
 
     public Vx.Core.Type_int tests() {
       Vx.Core.Type_int output = Vx.Core.e_int;
@@ -754,7 +743,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Core.Type_int vx_p_total;
+    public Vx.Core.Type_int? vx_p_total = null;
 
     public Vx.Core.Type_int total() {
       Vx.Core.Type_int output = Vx.Core.e_int;
@@ -838,7 +827,7 @@ public static class Test {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -867,10 +856,11 @@ public static class Test {
               ischanged = true;
               vx_p_pct = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("pct"));
@@ -889,10 +879,11 @@ public static class Test {
               ischanged = true;
               vx_p_testpkg = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("testpkg"));
@@ -911,10 +902,11 @@ public static class Test {
               ischanged = true;
               vx_p_tests = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("tests"));
@@ -933,10 +925,11 @@ public static class Test {
               ischanged = true;
               vx_p_total = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("total"));
@@ -1003,10 +996,6 @@ public static class Test {
    * (type testcoveragesummary)
    */
   public interface Type_testcoveragesummary : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Test.Type_testcoveragenums bigospacenums();
     public Vx.Test.Type_testcoveragenums bigotimenums();
     public Vx.Test.Type_testcoveragenums constnums();
@@ -1019,7 +1008,7 @@ public static class Test {
 
   public class Class_testcoveragesummary : Vx.Core.Class_base, Type_testcoveragesummary {
 
-    public Vx.Test.Type_testcoveragenums vx_p_bigospacenums;
+    public Vx.Test.Type_testcoveragenums? vx_p_bigospacenums = null;
 
     public Vx.Test.Type_testcoveragenums bigospacenums() {
       Vx.Test.Type_testcoveragenums output = Vx.Test.e_testcoveragenums;
@@ -1029,7 +1018,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Test.Type_testcoveragenums vx_p_bigotimenums;
+    public Vx.Test.Type_testcoveragenums? vx_p_bigotimenums = null;
 
     public Vx.Test.Type_testcoveragenums bigotimenums() {
       Vx.Test.Type_testcoveragenums output = Vx.Test.e_testcoveragenums;
@@ -1039,7 +1028,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Test.Type_testcoveragenums vx_p_constnums;
+    public Vx.Test.Type_testcoveragenums? vx_p_constnums = null;
 
     public Vx.Test.Type_testcoveragenums constnums() {
       Vx.Test.Type_testcoveragenums output = Vx.Test.e_testcoveragenums;
@@ -1049,7 +1038,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Test.Type_testcoveragenums vx_p_docnums;
+    public Vx.Test.Type_testcoveragenums? vx_p_docnums = null;
 
     public Vx.Test.Type_testcoveragenums docnums() {
       Vx.Test.Type_testcoveragenums output = Vx.Test.e_testcoveragenums;
@@ -1059,7 +1048,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Test.Type_testcoveragenums vx_p_funcnums;
+    public Vx.Test.Type_testcoveragenums? vx_p_funcnums = null;
 
     public Vx.Test.Type_testcoveragenums funcnums() {
       Vx.Test.Type_testcoveragenums output = Vx.Test.e_testcoveragenums;
@@ -1069,7 +1058,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_testpkg;
+    public Vx.Core.Type_string? vx_p_testpkg = null;
 
     public Vx.Core.Type_string testpkg() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -1079,7 +1068,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Test.Type_testcoveragenums vx_p_totalnums;
+    public Vx.Test.Type_testcoveragenums? vx_p_totalnums = null;
 
     public Vx.Test.Type_testcoveragenums totalnums() {
       Vx.Test.Type_testcoveragenums output = Vx.Test.e_testcoveragenums;
@@ -1089,7 +1078,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Test.Type_testcoveragenums vx_p_typenums;
+    public Vx.Test.Type_testcoveragenums? vx_p_typenums = null;
 
     public Vx.Test.Type_testcoveragenums typenums() {
       Vx.Test.Type_testcoveragenums output = Vx.Test.e_testcoveragenums;
@@ -1197,7 +1186,7 @@ public static class Test {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -1223,10 +1212,11 @@ public static class Test {
               ischanged = true;
               vx_p_bigospacenums = (Vx.Test.Type_testcoveragenums)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("bigospacenums"));
@@ -1242,10 +1232,11 @@ public static class Test {
               ischanged = true;
               vx_p_bigotimenums = (Vx.Test.Type_testcoveragenums)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("bigotimenums"));
@@ -1261,10 +1252,11 @@ public static class Test {
               ischanged = true;
               vx_p_constnums = (Vx.Test.Type_testcoveragenums)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("constnums"));
@@ -1280,10 +1272,11 @@ public static class Test {
               ischanged = true;
               vx_p_docnums = (Vx.Test.Type_testcoveragenums)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("docnums"));
@@ -1299,10 +1292,11 @@ public static class Test {
               ischanged = true;
               vx_p_funcnums = (Vx.Test.Type_testcoveragenums)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("funcnums"));
@@ -1321,10 +1315,11 @@ public static class Test {
               ischanged = true;
               vx_p_testpkg = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("testpkg"));
@@ -1340,10 +1335,11 @@ public static class Test {
               ischanged = true;
               vx_p_totalnums = (Vx.Test.Type_testcoveragenums)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("totalnums"));
@@ -1359,10 +1355,11 @@ public static class Test {
               ischanged = true;
               vx_p_typenums = (Vx.Test.Type_testcoveragenums)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("typenums"));
@@ -1433,10 +1430,6 @@ public static class Test {
    * (type testdescribe)
    */
   public interface Type_testdescribe : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string describename();
     public Vx.Core.Type_string testpkg();
     public Vx.Test.Type_testresult testresult();
@@ -1444,7 +1437,7 @@ public static class Test {
 
   public class Class_testdescribe : Vx.Core.Class_base, Type_testdescribe {
 
-    public Vx.Core.Type_string vx_p_describename;
+    public Vx.Core.Type_string? vx_p_describename = null;
 
     public Vx.Core.Type_string describename() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -1454,7 +1447,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_testpkg;
+    public Vx.Core.Type_string? vx_p_testpkg = null;
 
     public Vx.Core.Type_string testpkg() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -1464,7 +1457,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Test.Type_testresult vx_p_testresult;
+    public Vx.Test.Type_testresult? vx_p_testresult = null;
 
     public Vx.Test.Type_testresult testresult() {
       Vx.Test.Type_testresult output = Vx.Test.e_testresult;
@@ -1542,7 +1535,7 @@ public static class Test {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/test/testdescribe", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -1571,10 +1564,11 @@ public static class Test {
               ischanged = true;
               vx_p_describename = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("describename"));
@@ -1593,10 +1587,11 @@ public static class Test {
               ischanged = true;
               vx_p_testpkg = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("testpkg"));
@@ -1612,10 +1607,11 @@ public static class Test {
               ischanged = true;
               vx_p_testresult = (Vx.Test.Type_testresult)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("testresult"));
@@ -1681,10 +1677,6 @@ public static class Test {
    * (type testdescribelist)
    */
   public interface Type_testdescribelist : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Test.Type_testdescribe> vx_listtestdescribe();
     public Vx.Test.Type_testdescribe vx_testdescribe(Vx.Core.Type_int index);
   }
@@ -1740,10 +1732,9 @@ public static class Test {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Test.Type_testdescribe) {
-          Vx.Test.Type_testdescribe anysub = valsub as Vx.Test.Type_testdescribe;
+        } else if (valsub is Vx.Test.Type_testdescribe allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Test.Type_testdescribe) {
           ischanged = true;
           listval.Add((Vx.Test.Type_testdescribe)valsub);
@@ -1751,8 +1742,7 @@ public static class Test {
           Type_testdescribelist multi = (Type_testdescribelist)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_listtestdescribe());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Test.Type_testdescribe) {
               Vx.Test.Type_testdescribe valitem = (Vx.Test.Type_testdescribe)item;
@@ -1760,12 +1750,11 @@ public static class Test {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/test/testdescribelist", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/test/testdescribelist", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/test/testdescribelist", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/test/testdescribelist", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -1814,10 +1803,6 @@ public static class Test {
    * (type testpackage)
    */
   public interface Type_testpackage : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Test.Type_testcaselist caselist();
     public Vx.Test.Type_testcoveragedetail coveragedetail();
     public Vx.Test.Type_testcoveragesummary coveragesummary();
@@ -1827,7 +1812,7 @@ public static class Test {
 
   public class Class_testpackage : Vx.Core.Class_base, Type_testpackage {
 
-    public Vx.Test.Type_testcaselist vx_p_caselist;
+    public Vx.Test.Type_testcaselist? vx_p_caselist = null;
 
     public Vx.Test.Type_testcaselist caselist() {
       Vx.Test.Type_testcaselist output = Vx.Test.e_testcaselist;
@@ -1837,7 +1822,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Test.Type_testcoveragedetail vx_p_coveragedetail;
+    public Vx.Test.Type_testcoveragedetail? vx_p_coveragedetail = null;
 
     public Vx.Test.Type_testcoveragedetail coveragedetail() {
       Vx.Test.Type_testcoveragedetail output = Vx.Test.e_testcoveragedetail;
@@ -1847,7 +1832,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Test.Type_testcoveragesummary vx_p_coveragesummary;
+    public Vx.Test.Type_testcoveragesummary? vx_p_coveragesummary = null;
 
     public Vx.Test.Type_testcoveragesummary coveragesummary() {
       Vx.Test.Type_testcoveragesummary output = Vx.Test.e_testcoveragesummary;
@@ -1857,7 +1842,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Core.Type_boolean vx_p_passfail;
+    public Vx.Core.Type_boolean? vx_p_passfail = null;
 
     public Vx.Core.Type_boolean passfail() {
       Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -1867,7 +1852,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_testpkg;
+    public Vx.Core.Type_string? vx_p_testpkg = null;
 
     public Vx.Core.Type_string testpkg() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -1957,7 +1942,7 @@ public static class Test {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/test/testpackage", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -1983,10 +1968,11 @@ public static class Test {
               ischanged = true;
               vx_p_caselist = (Vx.Test.Type_testcaselist)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("caselist"));
@@ -2002,10 +1988,11 @@ public static class Test {
               ischanged = true;
               vx_p_coveragedetail = (Vx.Test.Type_testcoveragedetail)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("coveragedetail"));
@@ -2021,10 +2008,11 @@ public static class Test {
               ischanged = true;
               vx_p_coveragesummary = (Vx.Test.Type_testcoveragesummary)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("coveragesummary"));
@@ -2043,10 +2031,11 @@ public static class Test {
               ischanged = true;
               vx_p_passfail = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("passfail"));
@@ -2065,10 +2054,11 @@ public static class Test {
               ischanged = true;
               vx_p_testpkg = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("testpkg"));
@@ -2136,10 +2126,6 @@ public static class Test {
    * (type testpackagelist)
    */
   public interface Type_testpackagelist : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Test.Type_testpackage> vx_listtestpackage();
     public Vx.Test.Type_testpackage vx_testpackage(Vx.Core.Type_int index);
   }
@@ -2195,10 +2181,9 @@ public static class Test {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Test.Type_testpackage) {
-          Vx.Test.Type_testpackage anysub = valsub as Vx.Test.Type_testpackage;
+        } else if (valsub is Vx.Test.Type_testpackage allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Test.Type_testpackage) {
           ischanged = true;
           listval.Add((Vx.Test.Type_testpackage)valsub);
@@ -2206,8 +2191,7 @@ public static class Test {
           Type_testpackagelist multi = (Type_testpackagelist)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_listtestpackage());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Test.Type_testpackage) {
               Vx.Test.Type_testpackage valitem = (Vx.Test.Type_testpackage)item;
@@ -2215,12 +2199,11 @@ public static class Test {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/test/testpackagelist", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/test/testpackagelist", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/test/testpackagelist", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/test/testpackagelist", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -2269,10 +2252,6 @@ public static class Test {
    * (type testresult)
    */
   public interface Type_testresult : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string code();
     public Vx.Core.Type_boolean passfail();
     public Vx.Core.Type_any expected();
@@ -2282,7 +2261,7 @@ public static class Test {
 
   public class Class_testresult : Vx.Core.Class_base, Type_testresult {
 
-    public Vx.Core.Type_string vx_p_code;
+    public Vx.Core.Type_string? vx_p_code = null;
 
     public Vx.Core.Type_string code() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -2292,7 +2271,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Core.Type_boolean vx_p_passfail;
+    public Vx.Core.Type_boolean? vx_p_passfail = null;
 
     public Vx.Core.Type_boolean passfail() {
       Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -2302,7 +2281,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Core.Type_any vx_p_expected;
+    public Vx.Core.Type_any? vx_p_expected = null;
 
     public Vx.Core.Type_any expected() {
       Vx.Core.Type_any output = Vx.Core.e_any;
@@ -2312,7 +2291,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Core.Type_any vx_p_actual;
+    public Vx.Core.Type_any? vx_p_actual = null;
 
     public Vx.Core.Type_any actual() {
       Vx.Core.Type_any output = Vx.Core.e_any;
@@ -2322,7 +2301,7 @@ public static class Test {
       return output;
     }
 
-    public Vx.Core.Func_any_from_func_async vx_p_fn_actual;
+    public Vx.Core.Func_any_from_func_async? vx_p_fn_actual = null;
 
     public Vx.Core.Func_any_from_func_async fn_actual() {
       Vx.Core.Func_any_from_func_async output = Vx.Core.e_any_from_func_async;
@@ -2412,7 +2391,7 @@ public static class Test {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/test/testresult", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -2441,10 +2420,11 @@ public static class Test {
               ischanged = true;
               vx_p_code = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("code"));
@@ -2463,10 +2443,11 @@ public static class Test {
               ischanged = true;
               vx_p_passfail = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("passfail"));
@@ -2482,10 +2463,11 @@ public static class Test {
               ischanged = true;
               vx_p_expected = (Vx.Core.Type_any)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("expected"));
@@ -2501,10 +2483,11 @@ public static class Test {
               ischanged = true;
               vx_p_actual = (Vx.Core.Type_any)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("actual"));
@@ -2520,10 +2503,11 @@ public static class Test {
               ischanged = true;
               vx_p_fn_actual = (Vx.Core.Func_any_from_func_async)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("fn-actual"));
@@ -2591,10 +2575,6 @@ public static class Test {
    * (type testresultlist)
    */
   public interface Type_testresultlist : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Test.Type_testresult> vx_listtestresult();
     public Vx.Test.Type_testresult vx_testresult(Vx.Core.Type_int index);
   }
@@ -2650,10 +2630,9 @@ public static class Test {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Test.Type_testresult) {
-          Vx.Test.Type_testresult anysub = valsub as Vx.Test.Type_testresult;
+        } else if (valsub is Vx.Test.Type_testresult allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Test.Type_testresult) {
           ischanged = true;
           listval.Add((Vx.Test.Type_testresult)valsub);
@@ -2661,8 +2640,7 @@ public static class Test {
           Type_testresultlist multi = (Type_testresultlist)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_listtestresult());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Test.Type_testresult) {
               Vx.Test.Type_testresult valitem = (Vx.Test.Type_testresult)item;
@@ -2670,12 +2648,11 @@ public static class Test {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/test/testresultlist", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/test/testresultlist", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/test/testresultlist", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/test/testresultlist", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }

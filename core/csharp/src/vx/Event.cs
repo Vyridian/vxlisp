@@ -9,10 +9,6 @@ public static class Event {
    * (type event)
    */
   public interface Type_event : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string name();
     public Vx.Core.Type_string from();
     public Vx.Core.Type_string to();
@@ -23,7 +19,7 @@ public static class Event {
 
   public class Class_event : Vx.Core.Class_base, Type_event {
 
-    public Vx.Core.Type_string vx_p_name;
+    public Vx.Core.Type_string? vx_p_name = null;
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -33,7 +29,7 @@ public static class Event {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_from;
+    public Vx.Core.Type_string? vx_p_from = null;
 
     public Vx.Core.Type_string from() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -43,7 +39,7 @@ public static class Event {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_to;
+    public Vx.Core.Type_string? vx_p_to = null;
 
     public Vx.Core.Type_string to() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -53,7 +49,7 @@ public static class Event {
       return output;
     }
 
-    public Vx.Core.Type_anymap vx_p_datamap;
+    public Vx.Core.Type_anymap? vx_p_datamap = null;
 
     public Vx.Core.Type_anymap datamap() {
       Vx.Core.Type_anymap output = Vx.Core.e_anymap;
@@ -63,7 +59,7 @@ public static class Event {
       return output;
     }
 
-    public Vx.Event.Func_event_from_event vx_p_event_from_event;
+    public Vx.Event.Func_event_from_event? vx_p_event_from_event = null;
 
     public Vx.Event.Func_event_from_event event_from_event() {
       Vx.Event.Func_event_from_event output = Vx.Event.e_event_from_event;
@@ -73,7 +69,7 @@ public static class Event {
       return output;
     }
 
-    public Vx.Event.Func_event_from_event_async vx_p_event_from_event_async;
+    public Vx.Event.Func_event_from_event_async? vx_p_event_from_event_async = null;
 
     public Vx.Event.Func_event_from_event_async event_from_event_async() {
       Vx.Event.Func_event_from_event_async output = Vx.Event.e_event_from_event_async;
@@ -169,7 +165,7 @@ public static class Event {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/event/event", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -198,10 +194,11 @@ public static class Event {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("name"));
@@ -220,10 +217,11 @@ public static class Event {
               ischanged = true;
               vx_p_from = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("from"));
@@ -242,10 +240,11 @@ public static class Event {
               ischanged = true;
               vx_p_to = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("to"));
@@ -261,10 +260,11 @@ public static class Event {
               ischanged = true;
               vx_p_datamap = (Vx.Core.Type_anymap)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("datamap"));
@@ -280,10 +280,11 @@ public static class Event {
               ischanged = true;
               vx_p_event_from_event = (Vx.Event.Func_event_from_event)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("event<-event"));
@@ -299,10 +300,11 @@ public static class Event {
               ischanged = true;
               vx_p_event_from_event_async = (Vx.Event.Func_event_from_event_async)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("event<-event-async"));
@@ -371,10 +373,6 @@ public static class Event {
    * (type eventlist)
    */
   public interface Type_eventlist : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Event.Type_event> vx_listevent();
     public Vx.Event.Type_event vx_event(Vx.Core.Type_int index);
   }
@@ -430,10 +428,9 @@ public static class Event {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Event.Type_event) {
-          Vx.Event.Type_event anysub = valsub as Vx.Event.Type_event;
+        } else if (valsub is Vx.Event.Type_event allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Event.Type_event) {
           ischanged = true;
           listval.Add((Vx.Event.Type_event)valsub);
@@ -441,8 +438,7 @@ public static class Event {
           Type_eventlist multi = (Type_eventlist)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_listevent());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Event.Type_event) {
               Vx.Event.Type_event valitem = (Vx.Event.Type_event)item;
@@ -450,12 +446,11 @@ public static class Event {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/event/eventlist", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/event/eventlist", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/event/eventlist", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/event/eventlist", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -504,10 +499,6 @@ public static class Event {
    * (type eventmap)
    */
   public interface Type_eventmap : Vx.Core.Type_map {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Map<string, Vx.Event.Type_event> vx_mapevent();
     public Vx.Event.Type_event vx_event(Vx.Core.Type_string key);
   }
@@ -566,8 +557,8 @@ public static class Event {
       List<string> keys = mapval.keys();
       foreach (string key in keys) {
         Vx.Core.Type_any val = mapval.get(key);
-        if (val is Vx.Event.Type_event) {
-          Vx.Event.Type_event castval = (Vx.Event.Type_event)val;
+        if (false) {
+        } else if (val is Vx.Event.Type_event castval) {
           map.put(key, castval);
         } else {
           Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/event/eventmap", ":invalidvalue", val);
@@ -596,40 +587,42 @@ public static class Event {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Event.Type_event> mapval = new Vx.Core.LinkedHashMap<string, Vx.Event.Type_event>(val.vx_mapevent());
-      Vx.Core.Type_msg msg;
+      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_any? msgval = null;
       foreach (Object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstring = valsub as Vx.Core.Type_string;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstring) {
             key = valstring.vx_string();
-          } else if (valsub is string) {
-            key = valsub as string;
+          } else if (valsub is string sval) {
+            key = sval;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/event/eventmap", ":keyexpected", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Event.Type_event valany = null;
+          Vx.Event.Type_event? valany = null;
           if (valsub is Vx.Event.Type_event) {
             valany = (Vx.Event.Type_event)valsub;
           } else if (valsub is Vx.Event.Type_event) {
             valany = valsub as Vx.Event.Type_event;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
             mapany.put("key", Vx.Core.vx_new_string(key));

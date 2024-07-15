@@ -9,19 +9,12 @@ public static class Ui {
    * (type align)
    */
   public interface Type_align : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
   }
 
   public class Class_align : Vx.Core.Class_base, Type_align {
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      string skey = key.vx_string();
-      switch (skey) {
-      }
       return output;
     }
 
@@ -88,10 +81,6 @@ public static class Ui {
    * (type bounds)
    */
   public interface Type_bounds : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_int left();
     public Vx.Core.Type_int right();
     public Vx.Core.Type_int top();
@@ -100,7 +89,7 @@ public static class Ui {
 
   public class Class_bounds : Vx.Core.Class_base, Type_bounds {
 
-    public Vx.Core.Type_int vx_p_left;
+    public Vx.Core.Type_int? vx_p_left = null;
 
     public Vx.Core.Type_int left() {
       Vx.Core.Type_int output = Vx.Core.e_int;
@@ -110,7 +99,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_int vx_p_right;
+    public Vx.Core.Type_int? vx_p_right = null;
 
     public Vx.Core.Type_int right() {
       Vx.Core.Type_int output = Vx.Core.e_int;
@@ -120,7 +109,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_int vx_p_top;
+    public Vx.Core.Type_int? vx_p_top = null;
 
     public Vx.Core.Type_int top() {
       Vx.Core.Type_int output = Vx.Core.e_int;
@@ -130,7 +119,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_int vx_p_bottom;
+    public Vx.Core.Type_int? vx_p_bottom = null;
 
     public Vx.Core.Type_int bottom() {
       Vx.Core.Type_int output = Vx.Core.e_int;
@@ -214,7 +203,7 @@ public static class Ui {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/ui/ui/bounds", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -243,10 +232,11 @@ public static class Ui {
               ischanged = true;
               vx_p_left = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("left"));
@@ -265,10 +255,11 @@ public static class Ui {
               ischanged = true;
               vx_p_right = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("right"));
@@ -287,10 +278,11 @@ public static class Ui {
               ischanged = true;
               vx_p_top = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("top"));
@@ -309,10 +301,11 @@ public static class Ui {
               ischanged = true;
               vx_p_bottom = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("bottom"));
@@ -379,19 +372,12 @@ public static class Ui {
    * (type cursor)
    */
   public interface Type_cursor : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
   }
 
   public class Class_cursor : Vx.Core.Class_base, Type_cursor {
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      string skey = key.vx_string();
-      switch (skey) {
-      }
       return output;
     }
 
@@ -457,10 +443,6 @@ public static class Ui {
    * (type cursor-pointer)
    */
   public interface Type_cursor_pointer : Vx.Core.Type_any {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
   }
 
   public class Class_cursor_pointer : Vx.Core.Class_base, Type_cursor_pointer {
@@ -523,19 +505,12 @@ public static class Ui {
    * (type flip)
    */
   public interface Type_flip : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
   }
 
   public class Class_flip : Vx.Core.Class_base, Type_flip {
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      string skey = key.vx_string();
-      switch (skey) {
-      }
       return output;
     }
 
@@ -602,10 +577,6 @@ public static class Ui {
    * (type font)
    */
   public interface Type_font : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string name();
     public Vx.Ui.Ui.Type_fontface fontface();
     public Vx.Core.Type_int fontsize();
@@ -614,7 +585,7 @@ public static class Ui {
 
   public class Class_font : Vx.Core.Class_base, Type_font {
 
-    public Vx.Core.Type_string vx_p_name;
+    public Vx.Core.Type_string? vx_p_name = null;
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -624,7 +595,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_fontface vx_p_fontface;
+    public Vx.Ui.Ui.Type_fontface? vx_p_fontface = null;
 
     public Vx.Ui.Ui.Type_fontface fontface() {
       Vx.Ui.Ui.Type_fontface output = Vx.Ui.Ui.e_fontface;
@@ -634,7 +605,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_int vx_p_fontsize;
+    public Vx.Core.Type_int? vx_p_fontsize = null;
 
     public Vx.Core.Type_int fontsize() {
       Vx.Core.Type_int output = Vx.Core.e_int;
@@ -644,7 +615,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_fontstyle vx_p_fontstyle;
+    public Vx.Ui.Ui.Type_fontstyle? vx_p_fontstyle = null;
 
     public Vx.Ui.Ui.Type_fontstyle fontstyle() {
       Vx.Ui.Ui.Type_fontstyle output = Vx.Ui.Ui.e_fontstyle;
@@ -728,7 +699,7 @@ public static class Ui {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/ui/ui/font", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -757,10 +728,11 @@ public static class Ui {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("name"));
@@ -776,10 +748,11 @@ public static class Ui {
               ischanged = true;
               vx_p_fontface = (Vx.Ui.Ui.Type_fontface)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("fontface"));
@@ -798,10 +771,11 @@ public static class Ui {
               ischanged = true;
               vx_p_fontsize = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("fontsize"));
@@ -817,10 +791,11 @@ public static class Ui {
               ischanged = true;
               vx_p_fontstyle = (Vx.Ui.Ui.Type_fontstyle)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("fontstyle"));
@@ -887,10 +862,6 @@ public static class Ui {
    * (type fontface)
    */
   public interface Type_fontface : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string name();
     public Vx.Core.Type_string weight();
     public Vx.Core.Type_string unicode();
@@ -899,7 +870,7 @@ public static class Ui {
 
   public class Class_fontface : Vx.Core.Class_base, Type_fontface {
 
-    public Vx.Core.Type_string vx_p_name;
+    public Vx.Core.Type_string? vx_p_name = null;
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -909,7 +880,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_weight;
+    public Vx.Core.Type_string? vx_p_weight = null;
 
     public Vx.Core.Type_string weight() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -919,7 +890,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_unicode;
+    public Vx.Core.Type_string? vx_p_unicode = null;
 
     public Vx.Core.Type_string unicode() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -929,7 +900,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Data.File.Type_filelist vx_p_filelist;
+    public Vx.Data.File.Type_filelist? vx_p_filelist = null;
 
     public Vx.Data.File.Type_filelist filelist() {
       Vx.Data.File.Type_filelist output = Vx.Data.File.e_filelist;
@@ -1013,7 +984,7 @@ public static class Ui {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/ui/ui/fontface", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -1042,10 +1013,11 @@ public static class Ui {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("name"));
@@ -1064,10 +1036,11 @@ public static class Ui {
               ischanged = true;
               vx_p_weight = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("weight"));
@@ -1086,10 +1059,11 @@ public static class Ui {
               ischanged = true;
               vx_p_unicode = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("unicode"));
@@ -1105,10 +1079,11 @@ public static class Ui {
               ischanged = true;
               vx_p_filelist = (Vx.Data.File.Type_filelist)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("filelist"));
@@ -1175,10 +1150,6 @@ public static class Ui {
    * (type fontfacelist)
    */
   public interface Type_fontfacelist : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Ui.Ui.Type_fontface> vx_listfontface();
     public Vx.Ui.Ui.Type_fontface vx_fontface(Vx.Core.Type_int index);
   }
@@ -1234,10 +1205,9 @@ public static class Ui {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Ui.Ui.Type_fontface) {
-          Vx.Ui.Ui.Type_fontface anysub = valsub as Vx.Ui.Ui.Type_fontface;
+        } else if (valsub is Vx.Ui.Ui.Type_fontface allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Ui.Ui.Type_fontface) {
           ischanged = true;
           listval.Add((Vx.Ui.Ui.Type_fontface)valsub);
@@ -1245,8 +1215,7 @@ public static class Ui {
           Type_fontfacelist multi = (Type_fontfacelist)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_listfontface());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Ui.Ui.Type_fontface) {
               Vx.Ui.Ui.Type_fontface valitem = (Vx.Ui.Ui.Type_fontface)item;
@@ -1254,12 +1223,11 @@ public static class Ui {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/ui/ui/fontfacelist", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/ui/ui/fontfacelist", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/ui/ui/fontfacelist", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/ui/ui/fontfacelist", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -1308,10 +1276,6 @@ public static class Ui {
    * (type fontfacemap)
    */
   public interface Type_fontfacemap : Vx.Core.Type_map {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Map<string, Vx.Ui.Ui.Type_fontface> vx_mapfontface();
     public Vx.Ui.Ui.Type_fontface vx_fontface(Vx.Core.Type_string key);
   }
@@ -1370,8 +1334,8 @@ public static class Ui {
       List<string> keys = mapval.keys();
       foreach (string key in keys) {
         Vx.Core.Type_any val = mapval.get(key);
-        if (val is Vx.Ui.Ui.Type_fontface) {
-          Vx.Ui.Ui.Type_fontface castval = (Vx.Ui.Ui.Type_fontface)val;
+        if (false) {
+        } else if (val is Vx.Ui.Ui.Type_fontface castval) {
           map.put(key, castval);
         } else {
           Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/ui/ui/fontfacemap", ":invalidvalue", val);
@@ -1400,40 +1364,42 @@ public static class Ui {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Ui.Ui.Type_fontface> mapval = new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_fontface>(val.vx_mapfontface());
-      Vx.Core.Type_msg msg;
+      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_any? msgval = null;
       foreach (Object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstring = valsub as Vx.Core.Type_string;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstring) {
             key = valstring.vx_string();
-          } else if (valsub is string) {
-            key = valsub as string;
+          } else if (valsub is string sval) {
+            key = sval;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/ui/ui/fontfacemap", ":keyexpected", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Ui.Ui.Type_fontface valany = null;
+          Vx.Ui.Ui.Type_fontface? valany = null;
           if (valsub is Vx.Ui.Ui.Type_fontface) {
             valany = (Vx.Ui.Ui.Type_fontface)valsub;
           } else if (valsub is Vx.Ui.Ui.Type_fontface) {
             valany = valsub as Vx.Ui.Ui.Type_fontface;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
             mapany.put("key", Vx.Core.vx_new_string(key));
@@ -1497,10 +1463,6 @@ public static class Ui {
    * (type fontmap)
    */
   public interface Type_fontmap : Vx.Core.Type_map {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Map<string, Vx.Ui.Ui.Type_font> vx_mapfont();
     public Vx.Ui.Ui.Type_font vx_font(Vx.Core.Type_string key);
   }
@@ -1559,8 +1521,8 @@ public static class Ui {
       List<string> keys = mapval.keys();
       foreach (string key in keys) {
         Vx.Core.Type_any val = mapval.get(key);
-        if (val is Vx.Ui.Ui.Type_font) {
-          Vx.Ui.Ui.Type_font castval = (Vx.Ui.Ui.Type_font)val;
+        if (false) {
+        } else if (val is Vx.Ui.Ui.Type_font castval) {
           map.put(key, castval);
         } else {
           Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/ui/ui/fontmap", ":invalidvalue", val);
@@ -1589,40 +1551,42 @@ public static class Ui {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Ui.Ui.Type_font> mapval = new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_font>(val.vx_mapfont());
-      Vx.Core.Type_msg msg;
+      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_any? msgval = null;
       foreach (Object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstring = valsub as Vx.Core.Type_string;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstring) {
             key = valstring.vx_string();
-          } else if (valsub is string) {
-            key = valsub as string;
+          } else if (valsub is string sval) {
+            key = sval;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/ui/ui/fontmap", ":keyexpected", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Ui.Ui.Type_font valany = null;
+          Vx.Ui.Ui.Type_font? valany = null;
           if (valsub is Vx.Ui.Ui.Type_font) {
             valany = (Vx.Ui.Ui.Type_font)valsub;
           } else if (valsub is Vx.Ui.Ui.Type_font) {
             valany = valsub as Vx.Ui.Ui.Type_font;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
             mapany.put("key", Vx.Core.vx_new_string(key));
@@ -1686,16 +1650,12 @@ public static class Ui {
    * (type fontstyle)
    */
   public interface Type_fontstyle : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string name();
   }
 
   public class Class_fontstyle : Vx.Core.Class_base, Type_fontstyle {
 
-    public Vx.Core.Type_string vx_p_name;
+    public Vx.Core.Type_string? vx_p_name = null;
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -1761,7 +1721,7 @@ public static class Ui {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/ui/ui/fontstyle", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -1790,10 +1750,11 @@ public static class Ui {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("name"));
@@ -1857,10 +1818,6 @@ public static class Ui {
    * (type fontstylemap)
    */
   public interface Type_fontstylemap : Vx.Core.Type_map {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Map<string, Vx.Ui.Ui.Type_fontstyle> vx_mapfontstyle();
     public Vx.Ui.Ui.Type_fontstyle vx_fontstyle(Vx.Core.Type_string key);
   }
@@ -1919,8 +1876,8 @@ public static class Ui {
       List<string> keys = mapval.keys();
       foreach (string key in keys) {
         Vx.Core.Type_any val = mapval.get(key);
-        if (val is Vx.Ui.Ui.Type_fontstyle) {
-          Vx.Ui.Ui.Type_fontstyle castval = (Vx.Ui.Ui.Type_fontstyle)val;
+        if (false) {
+        } else if (val is Vx.Ui.Ui.Type_fontstyle castval) {
           map.put(key, castval);
         } else {
           Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/ui/ui/fontstylemap", ":invalidvalue", val);
@@ -1949,40 +1906,42 @@ public static class Ui {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Ui.Ui.Type_fontstyle> mapval = new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_fontstyle>(val.vx_mapfontstyle());
-      Vx.Core.Type_msg msg;
+      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_any? msgval = null;
       foreach (Object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstring = valsub as Vx.Core.Type_string;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstring) {
             key = valstring.vx_string();
-          } else if (valsub is string) {
-            key = valsub as string;
+          } else if (valsub is string sval) {
+            key = sval;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/ui/ui/fontstylemap", ":keyexpected", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Ui.Ui.Type_fontstyle valany = null;
+          Vx.Ui.Ui.Type_fontstyle? valany = null;
           if (valsub is Vx.Ui.Ui.Type_fontstyle) {
             valany = (Vx.Ui.Ui.Type_fontstyle)valsub;
           } else if (valsub is Vx.Ui.Ui.Type_fontstyle) {
             valany = valsub as Vx.Ui.Ui.Type_fontstyle;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
             mapany.put("key", Vx.Core.vx_new_string(key));
@@ -2046,10 +2005,6 @@ public static class Ui {
    * (type image)
    */
   public interface Type_image : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string name();
     public Vx.Core.Type_string label();
     public Vx.Data.File.Type_file file();
@@ -2057,7 +2012,7 @@ public static class Ui {
 
   public class Class_image : Vx.Core.Class_base, Type_image {
 
-    public Vx.Core.Type_string vx_p_name;
+    public Vx.Core.Type_string? vx_p_name = null;
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -2067,7 +2022,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_label;
+    public Vx.Core.Type_string? vx_p_label = null;
 
     public Vx.Core.Type_string label() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -2077,7 +2032,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Data.File.Type_file vx_p_file;
+    public Vx.Data.File.Type_file? vx_p_file = null;
 
     public Vx.Data.File.Type_file file() {
       Vx.Data.File.Type_file output = Vx.Data.File.e_file;
@@ -2155,7 +2110,7 @@ public static class Ui {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/ui/ui/image", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -2184,10 +2139,11 @@ public static class Ui {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("name"));
@@ -2206,10 +2162,11 @@ public static class Ui {
               ischanged = true;
               vx_p_label = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("label"));
@@ -2225,10 +2182,11 @@ public static class Ui {
               ischanged = true;
               vx_p_file = (Vx.Data.File.Type_file)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("file"));
@@ -2294,17 +2252,13 @@ public static class Ui {
    * (type layout)
    */
   public interface Type_layout : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string name();
     public Vx.Ui.Ui.Func_ui_layout_from_ui_orig_parent fn_layout();
   }
 
   public class Class_layout : Vx.Core.Class_base, Type_layout {
 
-    public Vx.Core.Type_string vx_p_name;
+    public Vx.Core.Type_string? vx_p_name = null;
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -2314,7 +2268,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Func_ui_layout_from_ui_orig_parent vx_p_fn_layout;
+    public Vx.Ui.Ui.Func_ui_layout_from_ui_orig_parent? vx_p_fn_layout = null;
 
     public Vx.Ui.Ui.Func_ui_layout_from_ui_orig_parent fn_layout() {
       Vx.Ui.Ui.Func_ui_layout_from_ui_orig_parent output = Vx.Ui.Ui.e_ui_layout_from_ui_orig_parent;
@@ -2386,7 +2340,7 @@ public static class Ui {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/ui/ui/layout", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -2415,10 +2369,11 @@ public static class Ui {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("name"));
@@ -2434,10 +2389,11 @@ public static class Ui {
               ischanged = true;
               vx_p_fn_layout = (Vx.Ui.Ui.Func_ui_layout_from_ui_orig_parent)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("fn-layout"));
@@ -2502,10 +2458,6 @@ public static class Ui {
    * (type layoutengine)
    */
   public interface Type_layoutengine : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string name();
     public Vx.Ui.Ui.Func_boolean_print boolean_print();
     public Vx.Ui.Ui.Func_boolean_layoutremove_from_ui boolean_layoutremove();
@@ -2518,7 +2470,7 @@ public static class Ui {
 
   public class Class_layoutengine : Vx.Core.Class_base, Type_layoutengine {
 
-    public Vx.Core.Type_string vx_p_name;
+    public Vx.Core.Type_string? vx_p_name = null;
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -2528,7 +2480,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Func_boolean_print vx_p_boolean_print;
+    public Vx.Ui.Ui.Func_boolean_print? vx_p_boolean_print = null;
 
     public Vx.Ui.Ui.Func_boolean_print boolean_print() {
       Vx.Ui.Ui.Func_boolean_print output = Vx.Ui.Ui.e_boolean_print;
@@ -2538,7 +2490,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Func_boolean_layoutremove_from_ui vx_p_boolean_layoutremove;
+    public Vx.Ui.Ui.Func_boolean_layoutremove_from_ui? vx_p_boolean_layoutremove = null;
 
     public Vx.Ui.Ui.Func_boolean_layoutremove_from_ui boolean_layoutremove() {
       Vx.Ui.Ui.Func_boolean_layoutremove_from_ui output = Vx.Ui.Ui.e_boolean_layoutremove_from_ui;
@@ -2548,7 +2500,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Func_boolean_layoutselected_from_ui vx_p_boolean_layoutselected;
+    public Vx.Ui.Ui.Func_boolean_layoutselected_from_ui? vx_p_boolean_layoutselected = null;
 
     public Vx.Ui.Ui.Func_boolean_layoutselected_from_ui boolean_layoutselected() {
       Vx.Ui.Ui.Func_boolean_layoutselected_from_ui output = Vx.Ui.Ui.e_boolean_layoutselected_from_ui;
@@ -2558,7 +2510,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Func_boolean_layoutvisible_from_ui vx_p_boolean_layoutvisible;
+    public Vx.Ui.Ui.Func_boolean_layoutvisible_from_ui? vx_p_boolean_layoutvisible = null;
 
     public Vx.Ui.Ui.Func_boolean_layoutvisible_from_ui boolean_layoutvisible() {
       Vx.Ui.Ui.Func_boolean_layoutvisible_from_ui output = Vx.Ui.Ui.e_boolean_layoutvisible_from_ui;
@@ -2568,7 +2520,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_layoutmap vx_p_layoutmap;
+    public Vx.Ui.Ui.Type_layoutmap? vx_p_layoutmap = null;
 
     public Vx.Ui.Ui.Type_layoutmap layoutmap() {
       Vx.Ui.Ui.Type_layoutmap output = Vx.Ui.Ui.e_layoutmap;
@@ -2578,7 +2530,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_layout vx_p_layoutelse;
+    public Vx.Ui.Ui.Type_layout? vx_p_layoutelse = null;
 
     public Vx.Ui.Ui.Type_layout layoutelse() {
       Vx.Ui.Ui.Type_layout output = Vx.Ui.Ui.e_layout;
@@ -2588,7 +2540,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Func_stylesheet_render vx_p_stylesheetrender;
+    public Vx.Ui.Ui.Func_stylesheet_render? vx_p_stylesheetrender = null;
 
     public Vx.Ui.Ui.Func_stylesheet_render stylesheetrender() {
       Vx.Ui.Ui.Func_stylesheet_render output = Vx.Ui.Ui.e_stylesheet_render;
@@ -2696,7 +2648,7 @@ public static class Ui {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/ui/ui/layoutengine", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -2725,10 +2677,11 @@ public static class Ui {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("name"));
@@ -2744,10 +2697,11 @@ public static class Ui {
               ischanged = true;
               vx_p_boolean_print = (Vx.Ui.Ui.Func_boolean_print)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("boolean-print"));
@@ -2763,10 +2717,11 @@ public static class Ui {
               ischanged = true;
               vx_p_boolean_layoutremove = (Vx.Ui.Ui.Func_boolean_layoutremove_from_ui)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("boolean-layoutremove"));
@@ -2782,10 +2737,11 @@ public static class Ui {
               ischanged = true;
               vx_p_boolean_layoutselected = (Vx.Ui.Ui.Func_boolean_layoutselected_from_ui)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("boolean-layoutselected"));
@@ -2801,10 +2757,11 @@ public static class Ui {
               ischanged = true;
               vx_p_boolean_layoutvisible = (Vx.Ui.Ui.Func_boolean_layoutvisible_from_ui)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("boolean-layoutvisible"));
@@ -2820,10 +2777,11 @@ public static class Ui {
               ischanged = true;
               vx_p_layoutmap = (Vx.Ui.Ui.Type_layoutmap)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("layoutmap"));
@@ -2839,10 +2797,11 @@ public static class Ui {
               ischanged = true;
               vx_p_layoutelse = (Vx.Ui.Ui.Type_layout)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("layoutelse"));
@@ -2858,10 +2817,11 @@ public static class Ui {
               ischanged = true;
               vx_p_stylesheetrender = (Vx.Ui.Ui.Func_stylesheet_render)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("stylesheetrender"));
@@ -2932,10 +2892,6 @@ public static class Ui {
    * (type layoutlist)
    */
   public interface Type_layoutlist : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Ui.Ui.Type_layout> vx_listlayout();
     public Vx.Ui.Ui.Type_layout vx_layout(Vx.Core.Type_int index);
   }
@@ -2991,10 +2947,9 @@ public static class Ui {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Ui.Ui.Type_layout) {
-          Vx.Ui.Ui.Type_layout anysub = valsub as Vx.Ui.Ui.Type_layout;
+        } else if (valsub is Vx.Ui.Ui.Type_layout allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Ui.Ui.Type_layout) {
           ischanged = true;
           listval.Add((Vx.Ui.Ui.Type_layout)valsub);
@@ -3002,8 +2957,7 @@ public static class Ui {
           Type_layoutlist multi = (Type_layoutlist)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_listlayout());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Ui.Ui.Type_layout) {
               Vx.Ui.Ui.Type_layout valitem = (Vx.Ui.Ui.Type_layout)item;
@@ -3011,12 +2965,11 @@ public static class Ui {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/ui/ui/layoutlist", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/ui/ui/layoutlist", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/ui/ui/layoutlist", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/ui/ui/layoutlist", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -3065,10 +3018,6 @@ public static class Ui {
    * (type layoutmap)
    */
   public interface Type_layoutmap : Vx.Core.Type_map {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Map<string, Vx.Ui.Ui.Type_layout> vx_maplayout();
     public Vx.Ui.Ui.Type_layout vx_layout(Vx.Core.Type_string key);
   }
@@ -3127,8 +3076,8 @@ public static class Ui {
       List<string> keys = mapval.keys();
       foreach (string key in keys) {
         Vx.Core.Type_any val = mapval.get(key);
-        if (val is Vx.Ui.Ui.Type_layout) {
-          Vx.Ui.Ui.Type_layout castval = (Vx.Ui.Ui.Type_layout)val;
+        if (false) {
+        } else if (val is Vx.Ui.Ui.Type_layout castval) {
           map.put(key, castval);
         } else {
           Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/ui/ui/layoutmap", ":invalidvalue", val);
@@ -3157,40 +3106,42 @@ public static class Ui {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Ui.Ui.Type_layout> mapval = new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_layout>(val.vx_maplayout());
-      Vx.Core.Type_msg msg;
+      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_any? msgval = null;
       foreach (Object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstring = valsub as Vx.Core.Type_string;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstring) {
             key = valstring.vx_string();
-          } else if (valsub is string) {
-            key = valsub as string;
+          } else if (valsub is string sval) {
+            key = sval;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/ui/ui/layoutmap", ":keyexpected", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Ui.Ui.Type_layout valany = null;
+          Vx.Ui.Ui.Type_layout? valany = null;
           if (valsub is Vx.Ui.Ui.Type_layout) {
             valany = (Vx.Ui.Ui.Type_layout)valsub;
           } else if (valsub is Vx.Ui.Ui.Type_layout) {
             valany = valsub as Vx.Ui.Ui.Type_layout;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
             mapany.put("key", Vx.Core.vx_new_string(key));
@@ -3254,16 +3205,12 @@ public static class Ui {
    * (type pin)
    */
   public interface Type_pin : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string name();
   }
 
   public class Class_pin : Vx.Core.Class_base, Type_pin {
 
-    public Vx.Core.Type_string vx_p_name;
+    public Vx.Core.Type_string? vx_p_name = null;
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -3329,7 +3276,7 @@ public static class Ui {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/ui/ui/pin", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -3358,10 +3305,11 @@ public static class Ui {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("name"));
@@ -3425,10 +3373,6 @@ public static class Ui {
    * (type point)
    */
   public interface Type_point : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_int x();
     public Vx.Core.Type_int y();
     public Vx.Core.Type_int z();
@@ -3439,7 +3383,7 @@ public static class Ui {
 
   public class Class_point : Vx.Core.Class_base, Type_point {
 
-    public Vx.Core.Type_int vx_p_x;
+    public Vx.Core.Type_int? vx_p_x = null;
 
     public Vx.Core.Type_int x() {
       Vx.Core.Type_int output = Vx.Core.e_int;
@@ -3449,7 +3393,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_int vx_p_y;
+    public Vx.Core.Type_int? vx_p_y = null;
 
     public Vx.Core.Type_int y() {
       Vx.Core.Type_int output = Vx.Core.e_int;
@@ -3459,7 +3403,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_int vx_p_z;
+    public Vx.Core.Type_int? vx_p_z = null;
 
     public Vx.Core.Type_int z() {
       Vx.Core.Type_int output = Vx.Core.e_int;
@@ -3469,7 +3413,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_int vx_p_t;
+    public Vx.Core.Type_int? vx_p_t = null;
 
     public Vx.Core.Type_int t() {
       Vx.Core.Type_int output = Vx.Core.e_int;
@@ -3479,7 +3423,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_int vx_p_i;
+    public Vx.Core.Type_int? vx_p_i = null;
 
     public Vx.Core.Type_int i() {
       Vx.Core.Type_int output = Vx.Core.e_int;
@@ -3489,7 +3433,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_pointtype vx_p_pointtype;
+    public Vx.Ui.Ui.Type_pointtype? vx_p_pointtype = null;
 
     public Vx.Ui.Ui.Type_pointtype pointtype() {
       Vx.Ui.Ui.Type_pointtype output = Vx.Ui.Ui.e_pointtype;
@@ -3585,7 +3529,7 @@ public static class Ui {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/ui/ui/point", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -3614,10 +3558,11 @@ public static class Ui {
               ischanged = true;
               vx_p_x = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("x"));
@@ -3636,10 +3581,11 @@ public static class Ui {
               ischanged = true;
               vx_p_y = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("y"));
@@ -3658,10 +3604,11 @@ public static class Ui {
               ischanged = true;
               vx_p_z = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("z"));
@@ -3680,10 +3627,11 @@ public static class Ui {
               ischanged = true;
               vx_p_t = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("t"));
@@ -3702,10 +3650,11 @@ public static class Ui {
               ischanged = true;
               vx_p_i = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("i"));
@@ -3721,10 +3670,11 @@ public static class Ui {
               ischanged = true;
               vx_p_pointtype = (Vx.Ui.Ui.Type_pointtype)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("pointtype"));
@@ -3793,10 +3743,6 @@ public static class Ui {
    * (type pointtype)
    */
   public interface Type_pointtype : Vx.Core.Type_any {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
   }
 
   public class Class_pointtype : Vx.Core.Class_base, Type_pointtype {
@@ -3859,10 +3805,6 @@ public static class Ui {
    * (type style)
    */
   public interface Type_style : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string name();
     public Vx.Ui.Ui.Type_align align();
     public Vx.Ui.Ui.Type_bounds boundsmargin();
@@ -3889,7 +3831,7 @@ public static class Ui {
 
   public class Class_style : Vx.Core.Class_base, Type_style {
 
-    public Vx.Core.Type_string vx_p_name;
+    public Vx.Core.Type_string? vx_p_name = null;
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -3899,7 +3841,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_align vx_p_align;
+    public Vx.Ui.Ui.Type_align? vx_p_align = null;
 
     public Vx.Ui.Ui.Type_align align() {
       Vx.Ui.Ui.Type_align output = Vx.Ui.Ui.e_align;
@@ -3909,7 +3851,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_bounds vx_p_boundsmargin;
+    public Vx.Ui.Ui.Type_bounds? vx_p_boundsmargin = null;
 
     public Vx.Ui.Ui.Type_bounds boundsmargin() {
       Vx.Ui.Ui.Type_bounds output = Vx.Ui.Ui.e_bounds;
@@ -3919,7 +3861,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_bounds vx_p_boundspadding;
+    public Vx.Ui.Ui.Type_bounds? vx_p_boundspadding = null;
 
     public Vx.Ui.Ui.Type_bounds boundspadding() {
       Vx.Ui.Ui.Type_bounds output = Vx.Ui.Ui.e_bounds;
@@ -3929,7 +3871,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_color_bkg;
+    public Vx.Core.Type_string? vx_p_color_bkg = null;
 
     public Vx.Core.Type_string color_bkg() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -3939,7 +3881,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_color_bkghover;
+    public Vx.Core.Type_string? vx_p_color_bkghover = null;
 
     public Vx.Core.Type_string color_bkghover() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -3949,7 +3891,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_color_border;
+    public Vx.Core.Type_string? vx_p_color_border = null;
 
     public Vx.Core.Type_string color_border() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -3959,7 +3901,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_color_font;
+    public Vx.Core.Type_string? vx_p_color_font = null;
 
     public Vx.Core.Type_string color_font() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -3969,7 +3911,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_cursor vx_p_cursor;
+    public Vx.Ui.Ui.Type_cursor? vx_p_cursor = null;
 
     public Vx.Ui.Ui.Type_cursor cursor() {
       Vx.Ui.Ui.Type_cursor output = Vx.Ui.Ui.e_cursor;
@@ -3979,7 +3921,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_flip vx_p_flip;
+    public Vx.Ui.Ui.Type_flip? vx_p_flip = null;
 
     public Vx.Ui.Ui.Type_flip flip() {
       Vx.Ui.Ui.Type_flip output = Vx.Ui.Ui.e_flip;
@@ -3989,7 +3931,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_font vx_p_font;
+    public Vx.Ui.Ui.Type_font? vx_p_font = null;
 
     public Vx.Ui.Ui.Type_font font() {
       Vx.Ui.Ui.Type_font output = Vx.Ui.Ui.e_font;
@@ -3999,7 +3941,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_boolean vx_p_hidden;
+    public Vx.Core.Type_boolean? vx_p_hidden = null;
 
     public Vx.Core.Type_boolean hidden() {
       Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -4009,7 +3951,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_image vx_p_image_bkg;
+    public Vx.Ui.Ui.Type_image? vx_p_image_bkg = null;
 
     public Vx.Ui.Ui.Type_image image_bkg() {
       Vx.Ui.Ui.Type_image output = Vx.Ui.Ui.e_image;
@@ -4019,7 +3961,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_layout vx_p_layout;
+    public Vx.Ui.Ui.Type_layout? vx_p_layout = null;
 
     public Vx.Ui.Ui.Type_layout layout() {
       Vx.Ui.Ui.Type_layout output = Vx.Ui.Ui.e_layout;
@@ -4029,7 +3971,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_styletype vx_p_type;
+    public Vx.Ui.Ui.Type_styletype? vx_p_type = null;
 
     public Vx.Ui.Ui.Type_styletype type() {
       Vx.Ui.Ui.Type_styletype output = Vx.Ui.Ui.e_styletype;
@@ -4039,7 +3981,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_pin vx_p_pin;
+    public Vx.Ui.Ui.Type_pin? vx_p_pin = null;
 
     public Vx.Ui.Ui.Type_pin pin() {
       Vx.Ui.Ui.Type_pin output = Vx.Ui.Ui.e_pin;
@@ -4049,7 +3991,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_point vx_p_pointorigin;
+    public Vx.Ui.Ui.Type_point? vx_p_pointorigin = null;
 
     public Vx.Ui.Ui.Type_point pointorigin() {
       Vx.Ui.Ui.Type_point output = Vx.Ui.Ui.e_point;
@@ -4059,7 +4001,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_point vx_p_pointpos;
+    public Vx.Ui.Ui.Type_point? vx_p_pointpos = null;
 
     public Vx.Ui.Ui.Type_point pointpos() {
       Vx.Ui.Ui.Type_point output = Vx.Ui.Ui.e_point;
@@ -4069,7 +4011,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_point vx_p_pointrotate;
+    public Vx.Ui.Ui.Type_point? vx_p_pointrotate = null;
 
     public Vx.Ui.Ui.Type_point pointrotate() {
       Vx.Ui.Ui.Type_point output = Vx.Ui.Ui.e_point;
@@ -4079,7 +4021,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_point vx_p_pointsize;
+    public Vx.Ui.Ui.Type_point? vx_p_pointsize = null;
 
     public Vx.Ui.Ui.Type_point pointsize() {
       Vx.Ui.Ui.Type_point output = Vx.Ui.Ui.e_point;
@@ -4089,7 +4031,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_boolean vx_p_scroll_x;
+    public Vx.Core.Type_boolean? vx_p_scroll_x = null;
 
     public Vx.Core.Type_boolean scroll_x() {
       Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -4099,7 +4041,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_boolean vx_p_scroll_y;
+    public Vx.Core.Type_boolean? vx_p_scroll_y = null;
 
     public Vx.Core.Type_boolean scroll_y() {
       Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -4291,7 +4233,7 @@ public static class Ui {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/ui/ui/style", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -4320,10 +4262,11 @@ public static class Ui {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("name"));
@@ -4339,10 +4282,11 @@ public static class Ui {
               ischanged = true;
               vx_p_align = (Vx.Ui.Ui.Type_align)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("align"));
@@ -4358,10 +4302,11 @@ public static class Ui {
               ischanged = true;
               vx_p_boundsmargin = (Vx.Ui.Ui.Type_bounds)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("boundsmargin"));
@@ -4377,10 +4322,11 @@ public static class Ui {
               ischanged = true;
               vx_p_boundspadding = (Vx.Ui.Ui.Type_bounds)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("boundspadding"));
@@ -4399,10 +4345,11 @@ public static class Ui {
               ischanged = true;
               vx_p_color_bkg = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("color-bkg"));
@@ -4421,10 +4368,11 @@ public static class Ui {
               ischanged = true;
               vx_p_color_bkghover = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("color-bkghover"));
@@ -4443,10 +4391,11 @@ public static class Ui {
               ischanged = true;
               vx_p_color_border = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("color-border"));
@@ -4465,10 +4414,11 @@ public static class Ui {
               ischanged = true;
               vx_p_color_font = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("color-font"));
@@ -4484,10 +4434,11 @@ public static class Ui {
               ischanged = true;
               vx_p_cursor = (Vx.Ui.Ui.Type_cursor)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("cursor"));
@@ -4503,10 +4454,11 @@ public static class Ui {
               ischanged = true;
               vx_p_flip = (Vx.Ui.Ui.Type_flip)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("flip"));
@@ -4522,10 +4474,11 @@ public static class Ui {
               ischanged = true;
               vx_p_font = (Vx.Ui.Ui.Type_font)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("font"));
@@ -4544,10 +4497,11 @@ public static class Ui {
               ischanged = true;
               vx_p_hidden = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("hidden"));
@@ -4563,10 +4517,11 @@ public static class Ui {
               ischanged = true;
               vx_p_image_bkg = (Vx.Ui.Ui.Type_image)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("image-bkg"));
@@ -4582,10 +4537,11 @@ public static class Ui {
               ischanged = true;
               vx_p_layout = (Vx.Ui.Ui.Type_layout)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("layout"));
@@ -4601,10 +4557,11 @@ public static class Ui {
               ischanged = true;
               vx_p_type = (Vx.Ui.Ui.Type_styletype)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("type"));
@@ -4620,10 +4577,11 @@ public static class Ui {
               ischanged = true;
               vx_p_pin = (Vx.Ui.Ui.Type_pin)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("pin"));
@@ -4639,10 +4597,11 @@ public static class Ui {
               ischanged = true;
               vx_p_pointorigin = (Vx.Ui.Ui.Type_point)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("pointorigin"));
@@ -4658,10 +4617,11 @@ public static class Ui {
               ischanged = true;
               vx_p_pointpos = (Vx.Ui.Ui.Type_point)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("pointpos"));
@@ -4677,10 +4637,11 @@ public static class Ui {
               ischanged = true;
               vx_p_pointrotate = (Vx.Ui.Ui.Type_point)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("pointrotate"));
@@ -4696,10 +4657,11 @@ public static class Ui {
               ischanged = true;
               vx_p_pointsize = (Vx.Ui.Ui.Type_point)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("pointsize"));
@@ -4718,10 +4680,11 @@ public static class Ui {
               ischanged = true;
               vx_p_scroll_x = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("scroll-x"));
@@ -4740,10 +4703,11 @@ public static class Ui {
               ischanged = true;
               vx_p_scroll_y = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("scroll-y"));
@@ -4828,10 +4792,6 @@ public static class Ui {
    * (type stylelist)
    */
   public interface Type_stylelist : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Ui.Ui.Type_style> vx_liststyle();
     public Vx.Ui.Ui.Type_style vx_style(Vx.Core.Type_int index);
   }
@@ -4887,10 +4847,9 @@ public static class Ui {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Ui.Ui.Type_style) {
-          Vx.Ui.Ui.Type_style anysub = valsub as Vx.Ui.Ui.Type_style;
+        } else if (valsub is Vx.Ui.Ui.Type_style allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Ui.Ui.Type_style) {
           ischanged = true;
           listval.Add((Vx.Ui.Ui.Type_style)valsub);
@@ -4898,8 +4857,7 @@ public static class Ui {
           Type_stylelist multi = (Type_stylelist)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_liststyle());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Ui.Ui.Type_style) {
               Vx.Ui.Ui.Type_style valitem = (Vx.Ui.Ui.Type_style)item;
@@ -4907,12 +4865,11 @@ public static class Ui {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/ui/ui/stylelist", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/ui/ui/stylelist", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/ui/ui/stylelist", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/ui/ui/stylelist", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -4961,10 +4918,6 @@ public static class Ui {
    * (type stylemap)
    */
   public interface Type_stylemap : Vx.Core.Type_map {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Map<string, Vx.Ui.Ui.Type_style> vx_mapstyle();
     public Vx.Ui.Ui.Type_style vx_style(Vx.Core.Type_string key);
   }
@@ -5023,8 +4976,8 @@ public static class Ui {
       List<string> keys = mapval.keys();
       foreach (string key in keys) {
         Vx.Core.Type_any val = mapval.get(key);
-        if (val is Vx.Ui.Ui.Type_style) {
-          Vx.Ui.Ui.Type_style castval = (Vx.Ui.Ui.Type_style)val;
+        if (false) {
+        } else if (val is Vx.Ui.Ui.Type_style castval) {
           map.put(key, castval);
         } else {
           Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/ui/ui/stylemap", ":invalidvalue", val);
@@ -5053,40 +5006,42 @@ public static class Ui {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Ui.Ui.Type_style> mapval = new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_style>(val.vx_mapstyle());
-      Vx.Core.Type_msg msg;
+      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_any? msgval = null;
       foreach (Object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstring = valsub as Vx.Core.Type_string;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstring) {
             key = valstring.vx_string();
-          } else if (valsub is string) {
-            key = valsub as string;
+          } else if (valsub is string sval) {
+            key = sval;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/ui/ui/stylemap", ":keyexpected", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Ui.Ui.Type_style valany = null;
+          Vx.Ui.Ui.Type_style? valany = null;
           if (valsub is Vx.Ui.Ui.Type_style) {
             valany = (Vx.Ui.Ui.Type_style)valsub;
           } else if (valsub is Vx.Ui.Ui.Type_style) {
             valany = valsub as Vx.Ui.Ui.Type_style;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
             mapany.put("key", Vx.Core.vx_new_string(key));
@@ -5150,17 +5105,13 @@ public static class Ui {
    * (type stylesheet)
    */
   public interface Type_stylesheet : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Ui.Ui.Type_fontfacemap fontfacemap();
     public Vx.Ui.Ui.Type_stylemap stylemap();
   }
 
   public class Class_stylesheet : Vx.Core.Class_base, Type_stylesheet {
 
-    public Vx.Ui.Ui.Type_fontfacemap vx_p_fontfacemap;
+    public Vx.Ui.Ui.Type_fontfacemap? vx_p_fontfacemap = null;
 
     public Vx.Ui.Ui.Type_fontfacemap fontfacemap() {
       Vx.Ui.Ui.Type_fontfacemap output = Vx.Ui.Ui.e_fontfacemap;
@@ -5170,7 +5121,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_stylemap vx_p_stylemap;
+    public Vx.Ui.Ui.Type_stylemap? vx_p_stylemap = null;
 
     public Vx.Ui.Ui.Type_stylemap stylemap() {
       Vx.Ui.Ui.Type_stylemap output = Vx.Ui.Ui.e_stylemap;
@@ -5242,7 +5193,7 @@ public static class Ui {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/ui/ui/stylesheet", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -5268,10 +5219,11 @@ public static class Ui {
               ischanged = true;
               vx_p_fontfacemap = (Vx.Ui.Ui.Type_fontfacemap)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("fontfacemap"));
@@ -5287,10 +5239,11 @@ public static class Ui {
               ischanged = true;
               vx_p_stylemap = (Vx.Ui.Ui.Type_stylemap)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("stylemap"));
@@ -5355,19 +5308,12 @@ public static class Ui {
    * (type styletype)
    */
   public interface Type_styletype : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
   }
 
   public class Class_styletype : Vx.Core.Class_base, Type_styletype {
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      string skey = key.vx_string();
-      switch (skey) {
-      }
       return output;
     }
 
@@ -5434,10 +5380,6 @@ public static class Ui {
    * (type ui)
    */
   public interface Type_ui : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string uid();
     public Vx.Core.Type_string name();
     public Vx.Ui.Ui.Type_layout layout();
@@ -5454,7 +5396,7 @@ public static class Ui {
 
   public class Class_ui : Vx.Core.Class_base, Type_ui {
 
-    public Vx.Core.Type_string vx_p_uid;
+    public Vx.Core.Type_string? vx_p_uid = null;
 
     public Vx.Core.Type_string uid() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -5464,7 +5406,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_name;
+    public Vx.Core.Type_string? vx_p_name = null;
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -5474,7 +5416,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_layout vx_p_layout;
+    public Vx.Ui.Ui.Type_layout? vx_p_layout = null;
 
     public Vx.Ui.Ui.Type_layout layout() {
       Vx.Ui.Ui.Type_layout output = Vx.Ui.Ui.e_layout;
@@ -5484,7 +5426,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_path;
+    public Vx.Core.Type_string? vx_p_path = null;
 
     public Vx.Core.Type_string path() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -5494,7 +5436,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_boolean vx_p_hidden;
+    public Vx.Core.Type_boolean? vx_p_hidden = null;
 
     public Vx.Core.Type_boolean hidden() {
       Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -5504,7 +5446,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_boolean vx_p_selected;
+    public Vx.Core.Type_boolean? vx_p_selected = null;
 
     public Vx.Core.Type_boolean selected() {
       Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -5514,7 +5456,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_boolean vx_p_selectmulti;
+    public Vx.Core.Type_boolean? vx_p_selectmulti = null;
 
     public Vx.Core.Type_boolean selectmulti() {
       Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -5524,7 +5466,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_style vx_p_style;
+    public Vx.Ui.Ui.Type_style? vx_p_style = null;
 
     public Vx.Ui.Ui.Type_style style() {
       Vx.Ui.Ui.Type_style output = Vx.Ui.Ui.e_style;
@@ -5534,7 +5476,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_stylelist vx_p_stylelist;
+    public Vx.Ui.Ui.Type_stylelist? vx_p_stylelist = null;
 
     public Vx.Ui.Ui.Type_stylelist stylelist() {
       Vx.Ui.Ui.Type_stylelist output = Vx.Ui.Ui.e_stylelist;
@@ -5544,7 +5486,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Event.Type_eventmap vx_p_eventmap;
+    public Vx.Event.Type_eventmap? vx_p_eventmap = null;
 
     public Vx.Event.Type_eventmap eventmap() {
       Vx.Event.Type_eventmap output = Vx.Event.e_eventmap;
@@ -5554,7 +5496,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Core.Type_any vx_p_data;
+    public Vx.Core.Type_any? vx_p_data = null;
 
     public Vx.Core.Type_any data() {
       Vx.Core.Type_any output = Vx.Core.e_any;
@@ -5564,7 +5506,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_uimap vx_p_uimap;
+    public Vx.Ui.Ui.Type_uimap? vx_p_uimap = null;
 
     public Vx.Ui.Ui.Type_uimap uimap() {
       Vx.Ui.Ui.Type_uimap output = Vx.Ui.Ui.e_uimap;
@@ -5696,7 +5638,7 @@ public static class Ui {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/ui/ui/ui", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -5725,10 +5667,11 @@ public static class Ui {
               ischanged = true;
               vx_p_uid = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("uid"));
@@ -5747,10 +5690,11 @@ public static class Ui {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("name"));
@@ -5766,10 +5710,11 @@ public static class Ui {
               ischanged = true;
               vx_p_layout = (Vx.Ui.Ui.Type_layout)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("layout"));
@@ -5788,10 +5733,11 @@ public static class Ui {
               ischanged = true;
               vx_p_path = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("path"));
@@ -5810,10 +5756,11 @@ public static class Ui {
               ischanged = true;
               vx_p_hidden = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("hidden"));
@@ -5832,10 +5779,11 @@ public static class Ui {
               ischanged = true;
               vx_p_selected = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("selected"));
@@ -5854,10 +5802,11 @@ public static class Ui {
               ischanged = true;
               vx_p_selectmulti = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("selectmulti"));
@@ -5873,10 +5822,11 @@ public static class Ui {
               ischanged = true;
               vx_p_style = (Vx.Ui.Ui.Type_style)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("style"));
@@ -5892,10 +5842,11 @@ public static class Ui {
               ischanged = true;
               vx_p_stylelist = (Vx.Ui.Ui.Type_stylelist)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("stylelist"));
@@ -5911,10 +5862,11 @@ public static class Ui {
               ischanged = true;
               vx_p_eventmap = (Vx.Event.Type_eventmap)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("eventmap"));
@@ -5930,10 +5882,11 @@ public static class Ui {
               ischanged = true;
               vx_p_data = (Vx.Core.Type_any)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("data"));
@@ -5949,10 +5902,11 @@ public static class Ui {
               ischanged = true;
               vx_p_uimap = (Vx.Ui.Ui.Type_uimap)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("uimap"));
@@ -6027,10 +5981,6 @@ public static class Ui {
    * (type uiengine)
    */
   public interface Type_uiengine : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Ui.Ui.Type_uimap parentmap();
     public Vx.Ui.Ui.Type_layoutengine layoutengine();
     public Vx.Ui.Ui.Type_stylesheet stylesheet();
@@ -6039,7 +5989,7 @@ public static class Ui {
 
   public class Class_uiengine : Vx.Core.Class_base, Type_uiengine {
 
-    public Vx.Ui.Ui.Type_uimap vx_p_parentmap;
+    public Vx.Ui.Ui.Type_uimap? vx_p_parentmap = null;
 
     public Vx.Ui.Ui.Type_uimap parentmap() {
       Vx.Ui.Ui.Type_uimap output = Vx.Ui.Ui.e_uimap;
@@ -6049,7 +5999,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_layoutengine vx_p_layoutengine;
+    public Vx.Ui.Ui.Type_layoutengine? vx_p_layoutengine = null;
 
     public Vx.Ui.Ui.Type_layoutengine layoutengine() {
       Vx.Ui.Ui.Type_layoutengine output = Vx.Ui.Ui.e_layoutengine;
@@ -6059,7 +6009,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_stylesheet vx_p_stylesheet;
+    public Vx.Ui.Ui.Type_stylesheet? vx_p_stylesheet = null;
 
     public Vx.Ui.Ui.Type_stylesheet stylesheet() {
       Vx.Ui.Ui.Type_stylesheet output = Vx.Ui.Ui.e_stylesheet;
@@ -6069,7 +6019,7 @@ public static class Ui {
       return output;
     }
 
-    public Vx.Ui.Ui.Type_ui vx_p_ui;
+    public Vx.Ui.Ui.Type_ui? vx_p_ui = null;
 
     public Vx.Ui.Ui.Type_ui ui() {
       Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.e_ui;
@@ -6153,7 +6103,7 @@ public static class Ui {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/ui/ui/uiengine", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -6179,10 +6129,11 @@ public static class Ui {
               ischanged = true;
               vx_p_parentmap = (Vx.Ui.Ui.Type_uimap)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("parentmap"));
@@ -6198,10 +6149,11 @@ public static class Ui {
               ischanged = true;
               vx_p_layoutengine = (Vx.Ui.Ui.Type_layoutengine)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("layoutengine"));
@@ -6217,10 +6169,11 @@ public static class Ui {
               ischanged = true;
               vx_p_stylesheet = (Vx.Ui.Ui.Type_stylesheet)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("stylesheet"));
@@ -6236,10 +6189,11 @@ public static class Ui {
               ischanged = true;
               vx_p_ui = (Vx.Ui.Ui.Type_ui)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("ui"));
@@ -6306,10 +6260,6 @@ public static class Ui {
    * (type uilist)
    */
   public interface Type_uilist : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Ui.Ui.Type_ui> vx_listui();
     public Vx.Ui.Ui.Type_ui vx_ui(Vx.Core.Type_int index);
   }
@@ -6365,10 +6315,9 @@ public static class Ui {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Ui.Ui.Type_ui) {
-          Vx.Ui.Ui.Type_ui anysub = valsub as Vx.Ui.Ui.Type_ui;
+        } else if (valsub is Vx.Ui.Ui.Type_ui allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Ui.Ui.Type_ui) {
           ischanged = true;
           listval.Add((Vx.Ui.Ui.Type_ui)valsub);
@@ -6376,8 +6325,7 @@ public static class Ui {
           Type_uilist multi = (Type_uilist)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_listui());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Ui.Ui.Type_ui) {
               Vx.Ui.Ui.Type_ui valitem = (Vx.Ui.Ui.Type_ui)item;
@@ -6385,12 +6333,11 @@ public static class Ui {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/ui/ui/uilist", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/ui/ui/uilist", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/ui/ui/uilist", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/ui/ui/uilist", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -6439,10 +6386,6 @@ public static class Ui {
    * (type uimap)
    */
   public interface Type_uimap : Vx.Core.Type_map {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Map<string, Vx.Ui.Ui.Type_ui> vx_mapui();
     public Vx.Ui.Ui.Type_ui vx_ui(Vx.Core.Type_string key);
   }
@@ -6501,8 +6444,8 @@ public static class Ui {
       List<string> keys = mapval.keys();
       foreach (string key in keys) {
         Vx.Core.Type_any val = mapval.get(key);
-        if (val is Vx.Ui.Ui.Type_ui) {
-          Vx.Ui.Ui.Type_ui castval = (Vx.Ui.Ui.Type_ui)val;
+        if (false) {
+        } else if (val is Vx.Ui.Ui.Type_ui castval) {
           map.put(key, castval);
         } else {
           Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/ui/ui/uimap", ":invalidvalue", val);
@@ -6531,40 +6474,42 @@ public static class Ui {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Ui.Ui.Type_ui> mapval = new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_ui>(val.vx_mapui());
-      Vx.Core.Type_msg msg;
+      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_any? msgval = null;
       foreach (Object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstring = valsub as Vx.Core.Type_string;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstring) {
             key = valstring.vx_string();
-          } else if (valsub is string) {
-            key = valsub as string;
+          } else if (valsub is string sval) {
+            key = sval;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/ui/ui/uimap", ":keyexpected", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Ui.Ui.Type_ui valany = null;
+          Vx.Ui.Ui.Type_ui? valany = null;
           if (valsub is Vx.Ui.Ui.Type_ui) {
             valany = (Vx.Ui.Ui.Type_ui)valsub;
           } else if (valsub is Vx.Ui.Ui.Type_ui) {
             valany = valsub as Vx.Ui.Ui.Type_ui;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
             mapany.put("key", Vx.Core.vx_new_string(key));

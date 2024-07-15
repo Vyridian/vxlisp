@@ -56,11 +56,17 @@ var contexttype = NewContextType()
 
 var decimaltype = NewType("vx/core/decimal")
 
-var functype = NewType("vx/core/func")
+var filetype = NewType("vx/data/file/file")
 
 var floattype = NewType("vx/core/float")
 
+var functype = NewType("vx/core/func")
+
 var funcdeftype = NewType("vx/core/funcdef")
+
+var htmltype = NewType("vx/web/html/html")
+
+var htmldivtype = NewType("vx/web/html/div")
 
 var inttype = NewType("vx/core/int")
 
@@ -95,6 +101,8 @@ var rawbooltype = NewType("rawbool")
 var rawbooleantype = NewType("rawboolean")
 
 var rawfloattype = NewType("rawfloat")
+
+var rawifntype = NewType("rawifn")
 
 var rawinttype = NewType("rawint")
 

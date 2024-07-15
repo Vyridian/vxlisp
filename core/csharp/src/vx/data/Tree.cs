@@ -8,10 +8,6 @@ public static class Tree {
    * (type branch)
    */
   public interface Type_branch : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string id();
     public Vx.Data.Tree.Type_brancharrow brancharrow();
     public Vx.Data.Tree.Type_branchlist branchlist();
@@ -22,7 +18,7 @@ public static class Tree {
 
   public class Class_branch : Vx.Core.Class_base, Type_branch {
 
-    public Vx.Core.Type_string vx_p_id;
+    public Vx.Core.Type_string? vx_p_id = null;
 
     public Vx.Core.Type_string id() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -32,7 +28,7 @@ public static class Tree {
       return output;
     }
 
-    public Vx.Data.Tree.Type_brancharrow vx_p_brancharrow;
+    public Vx.Data.Tree.Type_brancharrow? vx_p_brancharrow = null;
 
     public Vx.Data.Tree.Type_brancharrow brancharrow() {
       Vx.Data.Tree.Type_brancharrow output = Vx.Data.Tree.e_brancharrow;
@@ -42,7 +38,7 @@ public static class Tree {
       return output;
     }
 
-    public Vx.Data.Tree.Type_branchlist vx_p_branchlist;
+    public Vx.Data.Tree.Type_branchlist? vx_p_branchlist = null;
 
     public Vx.Data.Tree.Type_branchlist branchlist() {
       Vx.Data.Tree.Type_branchlist output = Vx.Data.Tree.e_branchlist;
@@ -52,7 +48,7 @@ public static class Tree {
       return output;
     }
 
-    public Vx.Data.Tree.Type_leaflist vx_p_leaflist;
+    public Vx.Data.Tree.Type_leaflist? vx_p_leaflist = null;
 
     public Vx.Data.Tree.Type_leaflist leaflist() {
       Vx.Data.Tree.Type_leaflist output = Vx.Data.Tree.e_leaflist;
@@ -62,7 +58,7 @@ public static class Tree {
       return output;
     }
 
-    public Vx.Data.Tree.Type_branch vx_p_parentbranch;
+    public Vx.Data.Tree.Type_branch? vx_p_parentbranch = null;
 
     public Vx.Data.Tree.Type_branch parentbranch() {
       Vx.Data.Tree.Type_branch output = Vx.Data.Tree.e_branch;
@@ -72,7 +68,7 @@ public static class Tree {
       return output;
     }
 
-    public Vx.Data.Tree.Type_tree vx_p_tree;
+    public Vx.Data.Tree.Type_tree? vx_p_tree = null;
 
     public Vx.Data.Tree.Type_tree tree() {
       Vx.Data.Tree.Type_tree output = Vx.Data.Tree.e_tree;
@@ -168,7 +164,7 @@ public static class Tree {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/data/tree/branch", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -197,10 +193,11 @@ public static class Tree {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("id"));
@@ -216,10 +213,11 @@ public static class Tree {
               ischanged = true;
               vx_p_brancharrow = (Vx.Data.Tree.Type_brancharrow)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("brancharrow"));
@@ -235,10 +233,11 @@ public static class Tree {
               ischanged = true;
               vx_p_branchlist = (Vx.Data.Tree.Type_branchlist)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("branchlist"));
@@ -254,10 +253,11 @@ public static class Tree {
               ischanged = true;
               vx_p_leaflist = (Vx.Data.Tree.Type_leaflist)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("leaflist"));
@@ -273,10 +273,11 @@ public static class Tree {
               ischanged = true;
               vx_p_parentbranch = (Vx.Data.Tree.Type_branch)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("parentbranch"));
@@ -292,10 +293,11 @@ public static class Tree {
               ischanged = true;
               vx_p_tree = (Vx.Data.Tree.Type_tree)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("tree"));
@@ -363,10 +365,6 @@ public static class Tree {
    * (type brancharrow)
    */
   public interface Type_brancharrow : Vx.Core.Type_any {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
   }
 
   public class Class_brancharrow : Vx.Core.Class_base, Type_brancharrow {
@@ -428,10 +426,6 @@ public static class Tree {
    * (type branchlist)
    */
   public interface Type_branchlist : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Data.Tree.Type_branch> vx_listbranch();
     public Vx.Data.Tree.Type_branch vx_branch(Vx.Core.Type_int index);
   }
@@ -487,10 +481,9 @@ public static class Tree {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Data.Tree.Type_branch) {
-          Vx.Data.Tree.Type_branch anysub = valsub as Vx.Data.Tree.Type_branch;
+        } else if (valsub is Vx.Data.Tree.Type_branch allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Data.Tree.Type_branch) {
           ischanged = true;
           listval.Add((Vx.Data.Tree.Type_branch)valsub);
@@ -498,8 +491,7 @@ public static class Tree {
           Type_branchlist multi = (Type_branchlist)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_listbranch());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Data.Tree.Type_branch) {
               Vx.Data.Tree.Type_branch valitem = (Vx.Data.Tree.Type_branch)item;
@@ -507,12 +499,11 @@ public static class Tree {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/data/tree/branchlist", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/data/tree/branchlist", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/data/tree/branchlist", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/data/tree/branchlist", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -560,10 +551,6 @@ public static class Tree {
    * (type leaf)
    */
   public interface Type_leaf : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string id();
     public Vx.Core.Type_string name();
     public Vx.Core.Type_any value();
@@ -571,7 +558,7 @@ public static class Tree {
 
   public class Class_leaf : Vx.Core.Class_base, Type_leaf {
 
-    public Vx.Core.Type_string vx_p_id;
+    public Vx.Core.Type_string? vx_p_id = null;
 
     public Vx.Core.Type_string id() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -581,7 +568,7 @@ public static class Tree {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_name;
+    public Vx.Core.Type_string? vx_p_name = null;
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -591,7 +578,7 @@ public static class Tree {
       return output;
     }
 
-    public Vx.Core.Type_any vx_p_value;
+    public Vx.Core.Type_any? vx_p_value = null;
 
     public Vx.Core.Type_any value() {
       Vx.Core.Type_any output = Vx.Core.e_any;
@@ -669,7 +656,7 @@ public static class Tree {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/data/tree/leaf", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -698,10 +685,11 @@ public static class Tree {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("id"));
@@ -720,10 +708,11 @@ public static class Tree {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("name"));
@@ -739,10 +728,11 @@ public static class Tree {
               ischanged = true;
               vx_p_value = (Vx.Core.Type_any)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("value"));
@@ -807,10 +797,6 @@ public static class Tree {
    * (type leaflist)
    */
   public interface Type_leaflist : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Data.Tree.Type_leaf> vx_listleaf();
     public Vx.Data.Tree.Type_leaf vx_leaf(Vx.Core.Type_int index);
   }
@@ -866,10 +852,9 @@ public static class Tree {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Data.Tree.Type_leaf) {
-          Vx.Data.Tree.Type_leaf anysub = valsub as Vx.Data.Tree.Type_leaf;
+        } else if (valsub is Vx.Data.Tree.Type_leaf allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Data.Tree.Type_leaf) {
           ischanged = true;
           listval.Add((Vx.Data.Tree.Type_leaf)valsub);
@@ -877,8 +862,7 @@ public static class Tree {
           Type_leaflist multi = (Type_leaflist)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_listleaf());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Data.Tree.Type_leaf) {
               Vx.Data.Tree.Type_leaf valitem = (Vx.Data.Tree.Type_leaf)item;
@@ -886,12 +870,11 @@ public static class Tree {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/data/tree/leaflist", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/data/tree/leaflist", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/data/tree/leaflist", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/data/tree/leaflist", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -939,10 +922,6 @@ public static class Tree {
    * (type tree)
    */
   public interface Type_tree : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string id();
     public Vx.Core.Type_string name();
     public Vx.Data.Tree.Type_branch branch();
@@ -950,7 +929,7 @@ public static class Tree {
 
   public class Class_tree : Vx.Core.Class_base, Type_tree {
 
-    public Vx.Core.Type_string vx_p_id;
+    public Vx.Core.Type_string? vx_p_id = null;
 
     public Vx.Core.Type_string id() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -960,7 +939,7 @@ public static class Tree {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_name;
+    public Vx.Core.Type_string? vx_p_name = null;
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -970,7 +949,7 @@ public static class Tree {
       return output;
     }
 
-    public Vx.Data.Tree.Type_branch vx_p_branch;
+    public Vx.Data.Tree.Type_branch? vx_p_branch = null;
 
     public Vx.Data.Tree.Type_branch branch() {
       Vx.Data.Tree.Type_branch output = Vx.Data.Tree.e_branch;
@@ -1048,7 +1027,7 @@ public static class Tree {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/data/tree/tree", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -1077,10 +1056,11 @@ public static class Tree {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("id"));
@@ -1099,10 +1079,11 @@ public static class Tree {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("name"));
@@ -1118,10 +1099,11 @@ public static class Tree {
               ischanged = true;
               vx_p_branch = (Vx.Data.Tree.Type_branch)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("branch"));

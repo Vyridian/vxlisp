@@ -9,10 +9,6 @@ public static class File {
    * (type file)
    */
   public interface Type_file : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string name();
     public Vx.Data.File.Type_fileformat format();
     public Vx.Core.Type_string path();
@@ -22,7 +18,7 @@ public static class File {
 
   public class Class_file : Vx.Core.Class_base, Type_file {
 
-    public Vx.Core.Type_string vx_p_name;
+    public Vx.Core.Type_string? vx_p_name = null;
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -32,7 +28,7 @@ public static class File {
       return output;
     }
 
-    public Vx.Data.File.Type_fileformat vx_p_format;
+    public Vx.Data.File.Type_fileformat? vx_p_format = null;
 
     public Vx.Data.File.Type_fileformat format() {
       Vx.Data.File.Type_fileformat output = Vx.Data.File.e_fileformat;
@@ -42,7 +38,7 @@ public static class File {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_path;
+    public Vx.Core.Type_string? vx_p_path = null;
 
     public Vx.Core.Type_string path() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -52,7 +48,7 @@ public static class File {
       return output;
     }
 
-    public Vx.Core.Type_permission vx_p_permission;
+    public Vx.Core.Type_permission? vx_p_permission = null;
 
     public Vx.Core.Type_permission permission() {
       Vx.Core.Type_permission output = Vx.Core.e_permission;
@@ -62,7 +58,7 @@ public static class File {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_text;
+    public Vx.Core.Type_string? vx_p_text = null;
 
     public Vx.Core.Type_string text() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -152,7 +148,7 @@ public static class File {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/data/file/file", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -181,10 +177,11 @@ public static class File {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("name"));
@@ -200,10 +197,11 @@ public static class File {
               ischanged = true;
               vx_p_format = (Vx.Data.File.Type_fileformat)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("format"));
@@ -222,10 +220,11 @@ public static class File {
               ischanged = true;
               vx_p_path = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("path"));
@@ -241,10 +240,11 @@ public static class File {
               ischanged = true;
               vx_p_permission = (Vx.Core.Type_permission)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("permission"));
@@ -263,10 +263,11 @@ public static class File {
               ischanged = true;
               vx_p_text = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("text"));
@@ -333,10 +334,6 @@ public static class File {
    * (type fileformat)
    */
   public interface Type_fileformat : Vx.Core.Type_any {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
   }
 
   public class Class_fileformat : Vx.Core.Class_base, Type_fileformat {
@@ -399,10 +396,6 @@ public static class File {
    * (type filelist)
    */
   public interface Type_filelist : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Data.File.Type_file> vx_listfile();
     public Vx.Data.File.Type_file vx_file(Vx.Core.Type_int index);
   }
@@ -458,10 +451,9 @@ public static class File {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Data.File.Type_file) {
-          Vx.Data.File.Type_file anysub = valsub as Vx.Data.File.Type_file;
+        } else if (valsub is Vx.Data.File.Type_file allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Data.File.Type_file) {
           ischanged = true;
           listval.Add((Vx.Data.File.Type_file)valsub);
@@ -469,8 +461,7 @@ public static class File {
           Type_filelist multi = (Type_filelist)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_listfile());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Data.File.Type_file) {
               Vx.Data.File.Type_file valitem = (Vx.Data.File.Type_file)item;
@@ -478,12 +469,11 @@ public static class File {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/data/file/filelist", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/data/file/filelist", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/data/file/filelist", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/data/file/filelist", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }

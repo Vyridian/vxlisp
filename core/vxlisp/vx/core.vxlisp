@@ -371,14 +371,15 @@
     "// :header
      std::exception err;"
    :csharp
-    "public Exception err = null;"
+    "public Exception? err = null;"
    :java
     "public Exception err = null;")
  :doc "Message Type for error handling")
 
 (type msgblock : struct
- :properties [msgs      : msglist
-              msgblocks : msgblocklist]
+ :properties
+  [msgs      : msglist
+   msgblocks : msgblocklist]
  :doc "Block of Messages")
 
 (type msgblocklist : list
@@ -1985,7 +1986,7 @@
         float floatresult = float.Parse(strval);
         intresult = (int)floatresult;
         return Vx.Core.vx_new_int(intresult);
-      } catch (Exception ex) {
+      } catch (Exception) {
         return Vx.Core.c_notanumber;
       }"
     :java

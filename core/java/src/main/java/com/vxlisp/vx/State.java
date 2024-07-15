@@ -67,8 +67,9 @@ public final class State {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         Core.Type_any val = mapval.get(key);
-        if (val instanceof Core.Type_any) {
-          Core.Type_any castval = (Core.Type_any)val;
+        if (false) {
+        } else if (val instanceof Core.Type_any) {
+          Core.Type_any castval = (Core.Type_any)val;;
           map.put(key, castval);
         } else {
           Core.Type_msg msg = Core.vx_msg_from_error("vx/state/valuemap", ":invalidvalue", val);
@@ -99,23 +100,27 @@ public final class State {
         ischanged = true;
       }
       Map<String, Core.Type_any> mapval = new LinkedHashMap<String, Core.Type_any>(val.vx_map());
-      Core.Type_msg msg;
+      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval;
+      Core.Type_any msgval = null;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstring = (Core.Type_string)valsub;;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            key = (String)valsub;
+            String sval = (String)valsub;;
+            key = sval;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -129,8 +134,10 @@ public final class State {
           } else if (valsub instanceof Core.Type_any) {
             valany = (Core.Type_any)valsub;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }

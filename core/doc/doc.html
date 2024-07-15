@@ -3730,14 +3730,15 @@
     &quot;// :header
      std::exception err;&quot;
    :csharp
-    &quot;public Exception err = null;&quot;
+    &quot;public Exception? err = null;&quot;
    :java
     &quot;public Exception err = null;&quot;)
  :doc &quot;Message Type for error handling&quot;)
 
 (type msgblock : struct
- :properties [msgs      : msglist
-              msgblocks : msgblocklist]
+ :properties
+  [msgs      : msglist
+   msgblocks : msgblocklist]
  :doc &quot;Block of Messages&quot;)
 
 (type msgblocklist : list
@@ -5344,7 +5345,7 @@
         float floatresult = float.Parse(strval);
         intresult = (int)floatresult;
         return Vx.Core.vx_new_int(intresult);
-      } catch (Exception ex) {
+      } catch (Exception) {
         return Vx.Core.c_notanumber;
       }&quot;
     :java
@@ -8978,7 +8979,7 @@
     &quot;// :header
      std::exception err;&quot;
    :csharp
-    &quot;public Exception err = null;&quot;
+    &quot;public Exception? err = null;&quot;
    :java
     &quot;public Exception err = null;&quot;)
  :doc &quot;Message Type for error handling&quot;)</div>
@@ -9058,8 +9059,9 @@
               <ul>
                 <li>
                   <div class="source">(type msgblock : struct
- :properties [msgs      : msglist
-              msgblocks : msgblocklist]
+ :properties
+  [msgs      : msglist
+   msgblocks : msgblocklist]
  :doc &quot;Block of Messages&quot;)</div>
                 </li>
               </ul>
@@ -18984,7 +18986,7 @@ improves readability.</div>
         float floatresult = float.Parse(strval);
         intresult = (int)floatresult;
         return Vx.Core.vx_new_int(intresult);
-      } catch (Exception ex) {
+      } catch (Exception) {
         return Vx.Core.c_notanumber;
       }&quot;
     :java

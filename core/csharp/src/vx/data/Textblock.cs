@@ -9,10 +9,6 @@ public static class Textblock {
    * (type delim)
    */
   public interface Type_delim : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string name();
     public Vx.Core.Type_string starttext();
     public Vx.Core.Type_string endtext();
@@ -22,7 +18,7 @@ public static class Textblock {
 
   public class Class_delim : Vx.Core.Class_base, Type_delim {
 
-    public Vx.Core.Type_string vx_p_name;
+    public Vx.Core.Type_string? vx_p_name = null;
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -32,7 +28,7 @@ public static class Textblock {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_starttext;
+    public Vx.Core.Type_string? vx_p_starttext = null;
 
     public Vx.Core.Type_string starttext() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -42,7 +38,7 @@ public static class Textblock {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_endtext;
+    public Vx.Core.Type_string? vx_p_endtext = null;
 
     public Vx.Core.Type_string endtext() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -52,7 +48,7 @@ public static class Textblock {
       return output;
     }
 
-    public Vx.Core.Type_int vx_p_pos;
+    public Vx.Core.Type_int? vx_p_pos = null;
 
     public Vx.Core.Type_int pos() {
       Vx.Core.Type_int output = Vx.Core.e_int;
@@ -62,7 +58,7 @@ public static class Textblock {
       return output;
     }
 
-    public Vx.Data.Textblock.Type_delimlist vx_p_delimlist;
+    public Vx.Data.Textblock.Type_delimlist? vx_p_delimlist = null;
 
     public Vx.Data.Textblock.Type_delimlist delimlist() {
       Vx.Data.Textblock.Type_delimlist output = Vx.Data.Textblock.e_delimlist;
@@ -152,7 +148,7 @@ public static class Textblock {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/data/textblock/delim", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -181,10 +177,11 @@ public static class Textblock {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("name"));
@@ -203,10 +200,11 @@ public static class Textblock {
               ischanged = true;
               vx_p_starttext = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("starttext"));
@@ -225,10 +223,11 @@ public static class Textblock {
               ischanged = true;
               vx_p_endtext = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("endtext"));
@@ -247,10 +246,11 @@ public static class Textblock {
               ischanged = true;
               vx_p_pos = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("pos"));
@@ -266,10 +266,11 @@ public static class Textblock {
               ischanged = true;
               vx_p_delimlist = (Vx.Data.Textblock.Type_delimlist)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("delimlist"));
@@ -337,10 +338,6 @@ public static class Textblock {
    * (type delimlist)
    */
   public interface Type_delimlist : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Data.Textblock.Type_delim> vx_listdelim();
     public Vx.Data.Textblock.Type_delim vx_delim(Vx.Core.Type_int index);
   }
@@ -396,10 +393,9 @@ public static class Textblock {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Data.Textblock.Type_delim) {
-          Vx.Data.Textblock.Type_delim anysub = valsub as Vx.Data.Textblock.Type_delim;
+        } else if (valsub is Vx.Data.Textblock.Type_delim allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Data.Textblock.Type_delim) {
           ischanged = true;
           listval.Add((Vx.Data.Textblock.Type_delim)valsub);
@@ -407,8 +403,7 @@ public static class Textblock {
           Type_delimlist multi = (Type_delimlist)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_listdelim());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Data.Textblock.Type_delim) {
               Vx.Data.Textblock.Type_delim valitem = (Vx.Data.Textblock.Type_delim)item;
@@ -416,12 +411,11 @@ public static class Textblock {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/data/textblock/delimlist", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/data/textblock/delimlist", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/data/textblock/delimlist", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/data/textblock/delimlist", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -470,10 +464,6 @@ public static class Textblock {
    * (type textblock)
    */
   public interface Type_textblock : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string name();
     public Vx.Core.Type_string text();
     public Vx.Core.Type_int startpos();
@@ -489,7 +479,7 @@ public static class Textblock {
 
   public class Class_textblock : Vx.Core.Class_base, Type_textblock {
 
-    public Vx.Core.Type_string vx_p_name;
+    public Vx.Core.Type_string? vx_p_name = null;
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -499,7 +489,7 @@ public static class Textblock {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_text;
+    public Vx.Core.Type_string? vx_p_text = null;
 
     public Vx.Core.Type_string text() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -509,7 +499,7 @@ public static class Textblock {
       return output;
     }
 
-    public Vx.Core.Type_int vx_p_startpos;
+    public Vx.Core.Type_int? vx_p_startpos = null;
 
     public Vx.Core.Type_int startpos() {
       Vx.Core.Type_int output = Vx.Core.e_int;
@@ -519,7 +509,7 @@ public static class Textblock {
       return output;
     }
 
-    public Vx.Core.Type_int vx_p_endpos;
+    public Vx.Core.Type_int? vx_p_endpos = null;
 
     public Vx.Core.Type_int endpos() {
       Vx.Core.Type_int output = Vx.Core.e_int;
@@ -529,7 +519,7 @@ public static class Textblock {
       return output;
     }
 
-    public Vx.Core.Type_int vx_p_curpos;
+    public Vx.Core.Type_int? vx_p_curpos = null;
 
     public Vx.Core.Type_int curpos() {
       Vx.Core.Type_int output = Vx.Core.e_int;
@@ -539,7 +529,7 @@ public static class Textblock {
       return output;
     }
 
-    public Vx.Core.Type_int vx_p_line;
+    public Vx.Core.Type_int? vx_p_line = null;
 
     public Vx.Core.Type_int line() {
       Vx.Core.Type_int output = Vx.Core.e_int;
@@ -549,7 +539,7 @@ public static class Textblock {
       return output;
     }
 
-    public Vx.Core.Type_int vx_p_column;
+    public Vx.Core.Type_int? vx_p_column = null;
 
     public Vx.Core.Type_int column() {
       Vx.Core.Type_int output = Vx.Core.e_int;
@@ -559,7 +549,7 @@ public static class Textblock {
       return output;
     }
 
-    public Vx.Data.Textblock.Type_delim vx_p_delim;
+    public Vx.Data.Textblock.Type_delim? vx_p_delim = null;
 
     public Vx.Data.Textblock.Type_delim delim() {
       Vx.Data.Textblock.Type_delim output = Vx.Data.Textblock.e_delim;
@@ -569,7 +559,7 @@ public static class Textblock {
       return output;
     }
 
-    public Vx.Data.Textblock.Type_delim vx_p_close;
+    public Vx.Data.Textblock.Type_delim? vx_p_close = null;
 
     public Vx.Data.Textblock.Type_delim close() {
       Vx.Data.Textblock.Type_delim output = Vx.Data.Textblock.e_delim;
@@ -579,7 +569,7 @@ public static class Textblock {
       return output;
     }
 
-    public Vx.Data.Textblock.Type_textblock vx_p_parent;
+    public Vx.Data.Textblock.Type_textblock? vx_p_parent = null;
 
     public Vx.Data.Textblock.Type_textblock parent() {
       Vx.Data.Textblock.Type_textblock output = Vx.Data.Textblock.e_textblock;
@@ -589,7 +579,7 @@ public static class Textblock {
       return output;
     }
 
-    public Vx.Data.Textblock.Type_textblocklist vx_p_children;
+    public Vx.Data.Textblock.Type_textblocklist? vx_p_children = null;
 
     public Vx.Data.Textblock.Type_textblocklist children() {
       Vx.Data.Textblock.Type_textblocklist output = Vx.Data.Textblock.e_textblocklist;
@@ -715,7 +705,7 @@ public static class Textblock {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -744,10 +734,11 @@ public static class Textblock {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("name"));
@@ -766,10 +757,11 @@ public static class Textblock {
               ischanged = true;
               vx_p_text = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("text"));
@@ -788,10 +780,11 @@ public static class Textblock {
               ischanged = true;
               vx_p_startpos = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("startpos"));
@@ -810,10 +803,11 @@ public static class Textblock {
               ischanged = true;
               vx_p_endpos = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("endpos"));
@@ -832,10 +826,11 @@ public static class Textblock {
               ischanged = true;
               vx_p_curpos = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("curpos"));
@@ -854,10 +849,11 @@ public static class Textblock {
               ischanged = true;
               vx_p_line = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("line"));
@@ -876,10 +872,11 @@ public static class Textblock {
               ischanged = true;
               vx_p_column = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("column"));
@@ -895,10 +892,11 @@ public static class Textblock {
               ischanged = true;
               vx_p_delim = (Vx.Data.Textblock.Type_delim)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("delim"));
@@ -914,10 +912,11 @@ public static class Textblock {
               ischanged = true;
               vx_p_close = (Vx.Data.Textblock.Type_delim)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("close"));
@@ -933,10 +932,11 @@ public static class Textblock {
               ischanged = true;
               vx_p_parent = (Vx.Data.Textblock.Type_textblock)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("parent"));
@@ -952,10 +952,11 @@ public static class Textblock {
               ischanged = true;
               vx_p_children = (Vx.Data.Textblock.Type_textblocklist)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("children"));
@@ -1029,10 +1030,6 @@ public static class Textblock {
    * (type textblocklist)
    */
   public interface Type_textblocklist : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Data.Textblock.Type_textblock> vx_listtextblock();
     public Vx.Data.Textblock.Type_textblock vx_textblock(Vx.Core.Type_int index);
   }
@@ -1088,10 +1085,9 @@ public static class Textblock {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Data.Textblock.Type_textblock) {
-          Vx.Data.Textblock.Type_textblock anysub = valsub as Vx.Data.Textblock.Type_textblock;
+        } else if (valsub is Vx.Data.Textblock.Type_textblock allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Data.Textblock.Type_textblock) {
           ischanged = true;
           listval.Add((Vx.Data.Textblock.Type_textblock)valsub);
@@ -1099,8 +1095,7 @@ public static class Textblock {
           Type_textblocklist multi = (Type_textblocklist)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_listtextblock());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Data.Textblock.Type_textblock) {
               Vx.Data.Textblock.Type_textblock valitem = (Vx.Data.Textblock.Type_textblock)item;
@@ -1108,12 +1103,11 @@ public static class Textblock {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/data/textblock/textblocklist", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/data/textblock/textblocklist", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/data/textblock/textblocklist", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/data/textblock/textblocklist", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }

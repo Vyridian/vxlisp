@@ -80,11 +80,15 @@
     }
     public List<Type_any> vx_dispose() {
       this.vx_iref = 0;
-      this.vxmsgblock = null;
+      this.vxmsgblock = Vx.Core.e_msgblock;
       return emptylistany;
     }
-    public Vx.Core.Type_msgblock? vx_msgblock() {
-      return vxmsgblock;
+    public Vx.Core.Type_msgblock vx_msgblock() {
+      if (this.vxmsgblock == null) {
+        return Vx.Core.e_msgblock;
+      } else {
+        return vxmsgblock;
+      }
     }
     public bool vx_release() {
       bool output = false;
@@ -269,8 +273,28 @@
     return output;
   }
 
-  public static Task<T> vx_async_new_completed<T>(T val) {
-    Task<T> output = Task.FromResult<T>(val);
+/*
+  public static T vx_any_from_any<T>(T generic_any_1, Vx.Core.Type_any value) {
+    if (value is T output) {
+      return output;
+    } else {
+      return vx_empty(generic_any_1);
+    }
+  }
+
+  public static T vx_any_from_object<T>(T generic_any_1, Object value) {
+    if (value is T output) {
+      return output;
+    } else if (value is Vx.Core.Type_any anyvalue) {
+      return vx_empty(anyvalue);
+    } else {
+      return default(T);
+    }
+  }
+*/
+
+  public static Task<T> vx_async_new_completed<T>(T value) {
+    Task<T> output = Task.FromResult<T>(value);
     return output;
   }
 
@@ -376,7 +400,7 @@
 		  Vx.Core.Class_funcmap funcmap = new Vx.Core.Class_funcmap();
 		  funcmap.vx_p_map = mapfunc;
     Vx.Core.Class_project global = (Vx.Core.Class_project)Vx.Core.c_global;
-    Vx.Core.Class_packagemap packagemap = (Vx.Core.Class_packagemap)global.vx_p_packagemap;
+    Vx.Core.Class_packagemap packagemap = (Vx.Core.Class_packagemap)global.packagemap();
     if (packagemap == null) {
       packagemap = new Vx.Core.Class_packagemap();
       global.vx_p_packagemap = packagemap;
@@ -477,7 +501,7 @@
         if (int.Parse(strval) == float.Parse(strval)) {
           result = true;
         }
-      } catch (Exception ex) {
+      } catch (Exception) {
       }
     } else if (value is Vx.Core.Type_string) {
       Vx.Core.Type_string valstr = (Vx.Core.Type_string)value;
@@ -493,15 +517,13 @@
       string text = "";
       if (value == null) {
         text = "null";
-      } else if (value is Vx.Core.Type_string) {
-        Vx.Core.Type_string valstring = (Vx.Core.Type_string)value;
+      } else if (value is Vx.Core.Type_string valstring) {
         text = valstring.vx_string();
-      } else if (value is Vx.Core.Type_any) {
-        Vx.Core.Type_any valany = (Vx.Core.Type_any)value;
-        Vx.Core.Type_string valstring = Vx.Core.f_string_from_any(valany);
-        text = valstring.vx_string();
+      } else if (value is Vx.Core.Type_any valany) {
+        Vx.Core.Type_string valstring2 = Vx.Core.f_string_from_any(valany);
+        text = valstring2.vx_string();
       } else {
-        text = value.ToString();
+        text = Vx.Core.vx_string_from_object(value);
       }
       System.Console.WriteLine(text);
     }
@@ -732,6 +754,15 @@
     return output;
   }
 
+  public static string vx_string_from_object(Object obj) {
+    string output = "";
+    string? text = obj.ToString();
+    if (text != null) {
+      output = text;
+    }
+    return output;
+  }
+
   public static string vx_string_from_string_start_end(string text, int start, int end) {
     string output = "";
     int maxlen = text.Length;
@@ -801,8 +832,8 @@
     try {
       future.Wait();
       output = future.Result;
-    } catch (Exception e) {
-      Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_exception("sync<-async", e);
+    } catch (Exception ex) {
+      Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_exception("sync<-async", ex);
       Vx.Core.Type_any val = generic_any_1.vx_new(msg);
       output = Vx.Core.f_any_from_any(generic_any_1, val);
     }

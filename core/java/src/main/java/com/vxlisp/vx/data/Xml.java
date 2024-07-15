@@ -29,7 +29,7 @@ public final class Xml {
 
   public static class Class_xml extends Core.Class_base implements Type_xml {
 
-    public Core.Type_string vx_p_tag;
+    public Core.Type_string vx_p_tag = null;
 
     @Override
     public Core.Type_string tag() {
@@ -40,7 +40,7 @@ public final class Xml {
       return output;
     }
 
-    public Core.Type_string vx_p_text;
+    public Core.Type_string vx_p_text = null;
 
     @Override
     public Core.Type_string text() {
@@ -51,7 +51,7 @@ public final class Xml {
       return output;
     }
 
-    public Core.Type_string vx_p_prop;
+    public Core.Type_string vx_p_prop = null;
 
     @Override
     public Core.Type_string prop() {
@@ -62,7 +62,7 @@ public final class Xml {
       return output;
     }
 
-    public Core.Type_stringmap vx_p_propmap;
+    public Core.Type_stringmap vx_p_propmap = null;
 
     @Override
     public Core.Type_stringmap propmap() {
@@ -73,7 +73,7 @@ public final class Xml {
       return output;
     }
 
-    public Xml.Type_xmllist vx_p_children;
+    public Xml.Type_xmllist vx_p_children = null;
 
     @Override
     public Xml.Type_xmllist children() {
@@ -84,7 +84,7 @@ public final class Xml {
       return output;
     }
 
-    public Xml.Type_xml vx_p_parent;
+    public Xml.Type_xml vx_p_parent = null;
 
     @Override
     public Xml.Type_xml parent() {
@@ -214,8 +214,10 @@ public final class Xml {
               ischanged = true;
               vx_p_tag = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -236,8 +238,10 @@ public final class Xml {
               ischanged = true;
               vx_p_text = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -258,8 +262,10 @@ public final class Xml {
               ischanged = true;
               vx_p_prop = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -277,8 +283,10 @@ public final class Xml {
               ischanged = true;
               vx_p_propmap = (Core.Type_stringmap)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -296,8 +304,10 @@ public final class Xml {
               ischanged = true;
               vx_p_children = (Xml.Type_xmllist)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -315,8 +325,10 @@ public final class Xml {
               ischanged = true;
               vx_p_parent = (Xml.Type_xml)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -455,9 +467,9 @@ public final class Xml {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Xml.Type_xml) {
-          Xml.Type_xml anysub = (Xml.Type_xml)valsub;
+          Xml.Type_xml allowsub = (Xml.Type_xml)valsub;;
           ischanged = true;
-          listval.add(anysub);
+          listval.add(allowsub);
         } else if (valsub instanceof Xml.Type_xml) {
           ischanged = true;
           listval.add((Xml.Type_xml)valsub);
@@ -465,8 +477,8 @@ public final class Xml {
           Type_xmllist multi = (Type_xmllist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listxml());
-        } else if (valsub instanceof List) {
-          List<?> listunknown = (List<?>)valsub;
+        } else if (valsub instanceof List<?>) {
+          List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
             if (item instanceof Xml.Type_xml) {
               Xml.Type_xml valitem = (Xml.Type_xml)item;
@@ -475,8 +487,8 @@ public final class Xml {
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/data/xml/xmllist", ":invalidtype", anysub);
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          msg = Core.vx_msg_from_error("vx/data/xml/xmllist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/data/xml/xmllist", ":invalidtype", Core.vx_new_string(valsub.toString()));
@@ -597,8 +609,9 @@ public final class Xml {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         Core.Type_any val = mapval.get(key);
-        if (val instanceof Core.Type_string) {
-          Core.Type_string castval = (Core.Type_string)val;
+        if (false) {
+        } else if (val instanceof Core.Type_string) {
+          Core.Type_string castval = (Core.Type_string)val;;
           map.put(key, castval);
         } else {
           Core.Type_msg msg = Core.vx_msg_from_error("vx/data/xml/xmlpropmap", ":invalidvalue", val);
@@ -629,23 +642,27 @@ public final class Xml {
         ischanged = true;
       }
       Map<String, Core.Type_string> mapval = new LinkedHashMap<String, Core.Type_string>(val.vx_mapstring());
-      Core.Type_msg msg;
+      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval;
+      Core.Type_any msgval = null;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstring = (Core.Type_string)valsub;;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            key = (String)valsub;
+            String sval = (String)valsub;;
+            key = sval;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -659,8 +676,10 @@ public final class Xml {
           } else if (valsub instanceof String) {
             valany = Core.vx_new(Core.t_string, valsub);
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }

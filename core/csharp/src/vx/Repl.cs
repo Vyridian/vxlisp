@@ -9,10 +9,6 @@ public static class Repl {
    * (type liblist)
    */
   public interface Type_liblist : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Core.Type_string> vx_liststring();
     public Vx.Core.Type_string vx_string(Vx.Core.Type_int index);
   }
@@ -68,10 +64,9 @@ public static class Repl {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Core.Type_string) {
-          Vx.Core.Type_string anysub = valsub as Vx.Core.Type_string;
+        } else if (valsub is Vx.Core.Type_string allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Core.Type_string) {
           ischanged = true;
           listval.Add(Vx.Core.vx_new(Vx.Core.t_string, valsub));
@@ -79,8 +74,7 @@ public static class Repl {
           Type_liblist multi = (Type_liblist)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_liststring());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Core.Type_string) {
               Vx.Core.Type_string valitem = (Vx.Core.Type_string)item;
@@ -88,12 +82,11 @@ public static class Repl {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/repl/liblist", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/repl/liblist", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/repl/liblist", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/repl/liblist", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -142,10 +135,6 @@ public static class Repl {
    * (type repl)
    */
   public interface Type_repl : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string name();
     public Vx.Core.Type_any type();
     public Vx.Repl.Type_repllist repllist();
@@ -156,7 +145,7 @@ public static class Repl {
 
   public class Class_repl : Vx.Core.Class_base, Type_repl {
 
-    public Vx.Core.Type_string vx_p_name;
+    public Vx.Core.Type_string? vx_p_name = null;
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -166,7 +155,7 @@ public static class Repl {
       return output;
     }
 
-    public Vx.Core.Type_any vx_p_type;
+    public Vx.Core.Type_any? vx_p_type = null;
 
     public Vx.Core.Type_any type() {
       Vx.Core.Type_any output = Vx.Core.e_any;
@@ -176,7 +165,7 @@ public static class Repl {
       return output;
     }
 
-    public Vx.Repl.Type_repllist vx_p_repllist;
+    public Vx.Repl.Type_repllist? vx_p_repllist = null;
 
     public Vx.Repl.Type_repllist repllist() {
       Vx.Repl.Type_repllist output = Vx.Repl.e_repllist;
@@ -186,7 +175,7 @@ public static class Repl {
       return output;
     }
 
-    public Vx.Core.Type_boolean vx_p_async;
+    public Vx.Core.Type_boolean? vx_p_async = null;
 
     public Vx.Core.Type_boolean async() {
       Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -196,7 +185,7 @@ public static class Repl {
       return output;
     }
 
-    public Vx.Core.Type_any vx_p_val;
+    public Vx.Core.Type_any? vx_p_val = null;
 
     public Vx.Core.Type_any val() {
       Vx.Core.Type_any output = Vx.Core.e_any;
@@ -206,7 +195,7 @@ public static class Repl {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_doc;
+    public Vx.Core.Type_string? vx_p_doc = null;
 
     public Vx.Core.Type_string doc() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -302,7 +291,7 @@ public static class Repl {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/repl/repl", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -331,10 +320,11 @@ public static class Repl {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("name"));
@@ -350,10 +340,11 @@ public static class Repl {
               ischanged = true;
               vx_p_type = (Vx.Core.Type_any)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("type"));
@@ -369,10 +360,11 @@ public static class Repl {
               ischanged = true;
               vx_p_repllist = (Vx.Repl.Type_repllist)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("repllist"));
@@ -391,10 +383,11 @@ public static class Repl {
               ischanged = true;
               vx_p_async = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("async"));
@@ -410,10 +403,11 @@ public static class Repl {
               ischanged = true;
               vx_p_val = (Vx.Core.Type_any)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("val"));
@@ -432,10 +426,11 @@ public static class Repl {
               ischanged = true;
               vx_p_doc = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("doc"));
@@ -504,10 +499,6 @@ public static class Repl {
    * (type replarglist)
    */
   public interface Type_replarglist : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string key();
     public Vx.Repl.Type_repl current();
     public Vx.Repl.Type_repllist repllist();
@@ -515,7 +506,7 @@ public static class Repl {
 
   public class Class_replarglist : Vx.Core.Class_base, Type_replarglist {
 
-    public Vx.Core.Type_string vx_p_key;
+    public Vx.Core.Type_string? vx_p_key = null;
 
     public Vx.Core.Type_string key() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -525,7 +516,7 @@ public static class Repl {
       return output;
     }
 
-    public Vx.Repl.Type_repl vx_p_current;
+    public Vx.Repl.Type_repl? vx_p_current = null;
 
     public Vx.Repl.Type_repl current() {
       Vx.Repl.Type_repl output = Vx.Repl.e_repl;
@@ -535,7 +526,7 @@ public static class Repl {
       return output;
     }
 
-    public Vx.Repl.Type_repllist vx_p_repllist;
+    public Vx.Repl.Type_repllist? vx_p_repllist = null;
 
     public Vx.Repl.Type_repllist repllist() {
       Vx.Repl.Type_repllist output = Vx.Repl.e_repllist;
@@ -613,7 +604,7 @@ public static class Repl {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/repl/replarglist", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -642,10 +633,11 @@ public static class Repl {
               ischanged = true;
               vx_p_key = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("key"));
@@ -661,10 +653,11 @@ public static class Repl {
               ischanged = true;
               vx_p_current = (Vx.Repl.Type_repl)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("current"));
@@ -680,10 +673,11 @@ public static class Repl {
               ischanged = true;
               vx_p_repllist = (Vx.Repl.Type_repllist)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("repllist"));
@@ -749,10 +743,6 @@ public static class Repl {
    * (type repllist)
    */
   public interface Type_repllist : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Repl.Type_repl> vx_listrepl();
     public Vx.Repl.Type_repl vx_repl(Vx.Core.Type_int index);
   }
@@ -808,10 +798,9 @@ public static class Repl {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Repl.Type_repl) {
-          Vx.Repl.Type_repl anysub = valsub as Vx.Repl.Type_repl;
+        } else if (valsub is Vx.Repl.Type_repl allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Repl.Type_repl) {
           ischanged = true;
           listval.Add((Vx.Repl.Type_repl)valsub);
@@ -819,8 +808,7 @@ public static class Repl {
           Type_repllist multi = (Type_repllist)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_listrepl());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Repl.Type_repl) {
               Vx.Repl.Type_repl valitem = (Vx.Repl.Type_repl)item;
@@ -828,12 +816,11 @@ public static class Repl {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/repl/repllist", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/repl/repllist", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/repl/repllist", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/repl/repllist", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }

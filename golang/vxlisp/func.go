@@ -20,6 +20,7 @@ type vxfunc struct {
 	iscopied     bool
 	isgeneric    bool
 	isimplement  bool
+	isimplement2 bool
 	isoverride   bool
 	messages     bool
 	parallel     bool

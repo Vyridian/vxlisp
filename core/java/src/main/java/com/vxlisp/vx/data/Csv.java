@@ -25,7 +25,7 @@ public final class Csv {
 
   public static class Class_csv extends Core.Class_base implements Type_csv {
 
-    public Core.Type_stringlist vx_p_headers;
+    public Core.Type_stringlist vx_p_headers = null;
 
     @Override
     public Core.Type_stringlist headers() {
@@ -36,7 +36,7 @@ public final class Csv {
       return output;
     }
 
-    public Csv.Type_csvrows vx_p_rows;
+    public Csv.Type_csvrows vx_p_rows = null;
 
     @Override
     public Csv.Type_csvrows rows() {
@@ -139,8 +139,10 @@ public final class Csv {
               ischanged = true;
               vx_p_headers = (Core.Type_stringlist)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -158,8 +160,10 @@ public final class Csv {
               ischanged = true;
               vx_p_rows = (Csv.Type_csvrows)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -295,8 +299,9 @@ public final class Csv {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         Core.Type_any val = mapval.get(key);
-        if (val instanceof Core.Type_stringlist) {
-          Core.Type_stringlist castval = (Core.Type_stringlist)val;
+        if (false) {
+        } else if (val instanceof Core.Type_stringlist) {
+          Core.Type_stringlist castval = (Core.Type_stringlist)val;;
           map.put(key, castval);
         } else {
           Core.Type_msg msg = Core.vx_msg_from_error("vx/data/csv/csvrowmap", ":invalidvalue", val);
@@ -327,23 +332,27 @@ public final class Csv {
         ischanged = true;
       }
       Map<String, Core.Type_stringlist> mapval = new LinkedHashMap<String, Core.Type_stringlist>(val.vx_mapstringlist());
-      Core.Type_msg msg;
+      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval;
+      Core.Type_any msgval = null;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstring = (Core.Type_string)valsub;;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            key = (String)valsub;
+            String sval = (String)valsub;;
+            key = sval;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -357,8 +366,10 @@ public final class Csv {
           } else if (valsub instanceof Core.Type_stringlist) {
             valany = (Core.Type_stringlist)valsub;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -492,9 +503,9 @@ public final class Csv {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_stringlist) {
-          Core.Type_stringlist anysub = (Core.Type_stringlist)valsub;
+          Core.Type_stringlist allowsub = (Core.Type_stringlist)valsub;;
           ischanged = true;
-          listval.add(anysub);
+          listval.add(allowsub);
         } else if (valsub instanceof Core.Type_stringlist) {
           ischanged = true;
           listval.add((Core.Type_stringlist)valsub);
@@ -502,8 +513,8 @@ public final class Csv {
           Type_csvrows multi = (Type_csvrows)valsub;
           ischanged = true;
           listval.addAll(multi.vx_liststringlist());
-        } else if (valsub instanceof List) {
-          List<?> listunknown = (List<?>)valsub;
+        } else if (valsub instanceof List<?>) {
+          List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
             if (item instanceof Core.Type_stringlist) {
               Core.Type_stringlist valitem = (Core.Type_stringlist)item;
@@ -512,8 +523,8 @@ public final class Csv {
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/data/csv/csvrows", ":invalidtype", anysub);
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          msg = Core.vx_msg_from_error("vx/data/csv/csvrows", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/data/csv/csvrows", ":invalidtype", Core.vx_new_string(valsub.toString()));

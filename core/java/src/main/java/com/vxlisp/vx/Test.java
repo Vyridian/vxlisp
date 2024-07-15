@@ -29,7 +29,7 @@ public final class Test {
 
   public static class Class_testcase extends Core.Class_base implements Type_testcase {
 
-    public Core.Type_boolean vx_p_passfail;
+    public Core.Type_boolean vx_p_passfail = null;
 
     @Override
     public Core.Type_boolean passfail() {
@@ -40,7 +40,7 @@ public final class Test {
       return output;
     }
 
-    public Core.Type_string vx_p_testpkg;
+    public Core.Type_string vx_p_testpkg = null;
 
     @Override
     public Core.Type_string testpkg() {
@@ -51,7 +51,7 @@ public final class Test {
       return output;
     }
 
-    public Core.Type_string vx_p_casename;
+    public Core.Type_string vx_p_casename = null;
 
     @Override
     public Core.Type_string casename() {
@@ -62,7 +62,7 @@ public final class Test {
       return output;
     }
 
-    public Test.Type_testdescribelist vx_p_describelist;
+    public Test.Type_testdescribelist vx_p_describelist = null;
 
     @Override
     public Test.Type_testdescribelist describelist() {
@@ -180,8 +180,10 @@ public final class Test {
               ischanged = true;
               vx_p_passfail = Core.vx_new(Core.t_boolean, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -202,8 +204,10 @@ public final class Test {
               ischanged = true;
               vx_p_testpkg = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -224,8 +228,10 @@ public final class Test {
               ischanged = true;
               vx_p_casename = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -243,8 +249,10 @@ public final class Test {
               ischanged = true;
               vx_p_describelist = (Test.Type_testdescribelist)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -382,9 +390,9 @@ public final class Test {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Test.Type_testcase) {
-          Test.Type_testcase anysub = (Test.Type_testcase)valsub;
+          Test.Type_testcase allowsub = (Test.Type_testcase)valsub;;
           ischanged = true;
-          listval.add(anysub);
+          listval.add(allowsub);
         } else if (valsub instanceof Test.Type_testcase) {
           ischanged = true;
           listval.add((Test.Type_testcase)valsub);
@@ -392,8 +400,8 @@ public final class Test {
           Type_testcaselist multi = (Type_testcaselist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listtestcase());
-        } else if (valsub instanceof List) {
-          List<?> listunknown = (List<?>)valsub;
+        } else if (valsub instanceof List<?>) {
+          List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
             if (item instanceof Test.Type_testcase) {
               Test.Type_testcase valitem = (Test.Type_testcase)item;
@@ -402,8 +410,8 @@ public final class Test {
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/test/testcaselist", ":invalidtype", anysub);
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          msg = Core.vx_msg_from_error("vx/test/testcaselist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/test/testcaselist", ":invalidtype", Core.vx_new_string(valsub.toString()));
@@ -470,7 +478,7 @@ public final class Test {
 
   public static class Class_testcoveragedetail extends Core.Class_base implements Type_testcoveragedetail {
 
-    public Core.Type_intmap vx_p_constmap;
+    public Core.Type_intmap vx_p_constmap = null;
 
     @Override
     public Core.Type_intmap constmap() {
@@ -481,7 +489,7 @@ public final class Test {
       return output;
     }
 
-    public Core.Type_intmap vx_p_funcmap;
+    public Core.Type_intmap vx_p_funcmap = null;
 
     @Override
     public Core.Type_intmap funcmap() {
@@ -492,7 +500,7 @@ public final class Test {
       return output;
     }
 
-    public Core.Type_string vx_p_testpkg;
+    public Core.Type_string vx_p_testpkg = null;
 
     @Override
     public Core.Type_string testpkg() {
@@ -503,7 +511,7 @@ public final class Test {
       return output;
     }
 
-    public Core.Type_intmap vx_p_typemap;
+    public Core.Type_intmap vx_p_typemap = null;
 
     @Override
     public Core.Type_intmap typemap() {
@@ -618,8 +626,10 @@ public final class Test {
               ischanged = true;
               vx_p_constmap = (Core.Type_intmap)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -637,8 +647,10 @@ public final class Test {
               ischanged = true;
               vx_p_funcmap = (Core.Type_intmap)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -659,8 +671,10 @@ public final class Test {
               ischanged = true;
               vx_p_testpkg = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -678,8 +692,10 @@ public final class Test {
               ischanged = true;
               vx_p_typemap = (Core.Type_intmap)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -763,7 +779,7 @@ public final class Test {
 
   public static class Class_testcoveragenums extends Core.Class_base implements Type_testcoveragenums {
 
-    public Core.Type_int vx_p_pct;
+    public Core.Type_int vx_p_pct = null;
 
     @Override
     public Core.Type_int pct() {
@@ -774,7 +790,7 @@ public final class Test {
       return output;
     }
 
-    public Core.Type_string vx_p_testpkg;
+    public Core.Type_string vx_p_testpkg = null;
 
     @Override
     public Core.Type_string testpkg() {
@@ -785,7 +801,7 @@ public final class Test {
       return output;
     }
 
-    public Core.Type_int vx_p_tests;
+    public Core.Type_int vx_p_tests = null;
 
     @Override
     public Core.Type_int tests() {
@@ -796,7 +812,7 @@ public final class Test {
       return output;
     }
 
-    public Core.Type_int vx_p_total;
+    public Core.Type_int vx_p_total = null;
 
     @Override
     public Core.Type_int total() {
@@ -914,8 +930,10 @@ public final class Test {
               ischanged = true;
               vx_p_pct = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -936,8 +954,10 @@ public final class Test {
               ischanged = true;
               vx_p_testpkg = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -958,8 +978,10 @@ public final class Test {
               ischanged = true;
               vx_p_tests = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -980,8 +1002,10 @@ public final class Test {
               ischanged = true;
               vx_p_total = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -1069,7 +1093,7 @@ public final class Test {
 
   public static class Class_testcoveragesummary extends Core.Class_base implements Type_testcoveragesummary {
 
-    public Test.Type_testcoveragenums vx_p_bigospacenums;
+    public Test.Type_testcoveragenums vx_p_bigospacenums = null;
 
     @Override
     public Test.Type_testcoveragenums bigospacenums() {
@@ -1080,7 +1104,7 @@ public final class Test {
       return output;
     }
 
-    public Test.Type_testcoveragenums vx_p_bigotimenums;
+    public Test.Type_testcoveragenums vx_p_bigotimenums = null;
 
     @Override
     public Test.Type_testcoveragenums bigotimenums() {
@@ -1091,7 +1115,7 @@ public final class Test {
       return output;
     }
 
-    public Test.Type_testcoveragenums vx_p_constnums;
+    public Test.Type_testcoveragenums vx_p_constnums = null;
 
     @Override
     public Test.Type_testcoveragenums constnums() {
@@ -1102,7 +1126,7 @@ public final class Test {
       return output;
     }
 
-    public Test.Type_testcoveragenums vx_p_docnums;
+    public Test.Type_testcoveragenums vx_p_docnums = null;
 
     @Override
     public Test.Type_testcoveragenums docnums() {
@@ -1113,7 +1137,7 @@ public final class Test {
       return output;
     }
 
-    public Test.Type_testcoveragenums vx_p_funcnums;
+    public Test.Type_testcoveragenums vx_p_funcnums = null;
 
     @Override
     public Test.Type_testcoveragenums funcnums() {
@@ -1124,7 +1148,7 @@ public final class Test {
       return output;
     }
 
-    public Core.Type_string vx_p_testpkg;
+    public Core.Type_string vx_p_testpkg = null;
 
     @Override
     public Core.Type_string testpkg() {
@@ -1135,7 +1159,7 @@ public final class Test {
       return output;
     }
 
-    public Test.Type_testcoveragenums vx_p_totalnums;
+    public Test.Type_testcoveragenums vx_p_totalnums = null;
 
     @Override
     public Test.Type_testcoveragenums totalnums() {
@@ -1146,7 +1170,7 @@ public final class Test {
       return output;
     }
 
-    public Test.Type_testcoveragenums vx_p_typenums;
+    public Test.Type_testcoveragenums vx_p_typenums = null;
 
     @Override
     public Test.Type_testcoveragenums typenums() {
@@ -1285,8 +1309,10 @@ public final class Test {
               ischanged = true;
               vx_p_bigospacenums = (Test.Type_testcoveragenums)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -1304,8 +1330,10 @@ public final class Test {
               ischanged = true;
               vx_p_bigotimenums = (Test.Type_testcoveragenums)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -1323,8 +1351,10 @@ public final class Test {
               ischanged = true;
               vx_p_constnums = (Test.Type_testcoveragenums)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -1342,8 +1372,10 @@ public final class Test {
               ischanged = true;
               vx_p_docnums = (Test.Type_testcoveragenums)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -1361,8 +1393,10 @@ public final class Test {
               ischanged = true;
               vx_p_funcnums = (Test.Type_testcoveragenums)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -1383,8 +1417,10 @@ public final class Test {
               ischanged = true;
               vx_p_testpkg = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -1402,8 +1438,10 @@ public final class Test {
               ischanged = true;
               vx_p_totalnums = (Test.Type_testcoveragenums)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -1421,8 +1459,10 @@ public final class Test {
               ischanged = true;
               vx_p_typenums = (Test.Type_testcoveragenums)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -1509,7 +1549,7 @@ public final class Test {
 
   public static class Class_testdescribe extends Core.Class_base implements Type_testdescribe {
 
-    public Core.Type_string vx_p_describename;
+    public Core.Type_string vx_p_describename = null;
 
     @Override
     public Core.Type_string describename() {
@@ -1520,7 +1560,7 @@ public final class Test {
       return output;
     }
 
-    public Core.Type_string vx_p_testpkg;
+    public Core.Type_string vx_p_testpkg = null;
 
     @Override
     public Core.Type_string testpkg() {
@@ -1531,7 +1571,7 @@ public final class Test {
       return output;
     }
 
-    public Test.Type_testresult vx_p_testresult;
+    public Test.Type_testresult vx_p_testresult = null;
 
     @Override
     public Test.Type_testresult testresult() {
@@ -1643,8 +1683,10 @@ public final class Test {
               ischanged = true;
               vx_p_describename = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -1665,8 +1707,10 @@ public final class Test {
               ischanged = true;
               vx_p_testpkg = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -1684,8 +1728,10 @@ public final class Test {
               ischanged = true;
               vx_p_testresult = (Test.Type_testresult)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -1822,9 +1868,9 @@ public final class Test {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Test.Type_testdescribe) {
-          Test.Type_testdescribe anysub = (Test.Type_testdescribe)valsub;
+          Test.Type_testdescribe allowsub = (Test.Type_testdescribe)valsub;;
           ischanged = true;
-          listval.add(anysub);
+          listval.add(allowsub);
         } else if (valsub instanceof Test.Type_testdescribe) {
           ischanged = true;
           listval.add((Test.Type_testdescribe)valsub);
@@ -1832,8 +1878,8 @@ public final class Test {
           Type_testdescribelist multi = (Type_testdescribelist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listtestdescribe());
-        } else if (valsub instanceof List) {
-          List<?> listunknown = (List<?>)valsub;
+        } else if (valsub instanceof List<?>) {
+          List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
             if (item instanceof Test.Type_testdescribe) {
               Test.Type_testdescribe valitem = (Test.Type_testdescribe)item;
@@ -1842,8 +1888,8 @@ public final class Test {
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/test/testdescribelist", ":invalidtype", anysub);
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          msg = Core.vx_msg_from_error("vx/test/testdescribelist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/test/testdescribelist", ":invalidtype", Core.vx_new_string(valsub.toString()));
@@ -1911,7 +1957,7 @@ public final class Test {
 
   public static class Class_testpackage extends Core.Class_base implements Type_testpackage {
 
-    public Test.Type_testcaselist vx_p_caselist;
+    public Test.Type_testcaselist vx_p_caselist = null;
 
     @Override
     public Test.Type_testcaselist caselist() {
@@ -1922,7 +1968,7 @@ public final class Test {
       return output;
     }
 
-    public Test.Type_testcoveragedetail vx_p_coveragedetail;
+    public Test.Type_testcoveragedetail vx_p_coveragedetail = null;
 
     @Override
     public Test.Type_testcoveragedetail coveragedetail() {
@@ -1933,7 +1979,7 @@ public final class Test {
       return output;
     }
 
-    public Test.Type_testcoveragesummary vx_p_coveragesummary;
+    public Test.Type_testcoveragesummary vx_p_coveragesummary = null;
 
     @Override
     public Test.Type_testcoveragesummary coveragesummary() {
@@ -1944,7 +1990,7 @@ public final class Test {
       return output;
     }
 
-    public Core.Type_boolean vx_p_passfail;
+    public Core.Type_boolean vx_p_passfail = null;
 
     @Override
     public Core.Type_boolean passfail() {
@@ -1955,7 +2001,7 @@ public final class Test {
       return output;
     }
 
-    public Core.Type_string vx_p_testpkg;
+    public Core.Type_string vx_p_testpkg = null;
 
     @Override
     public Core.Type_string testpkg() {
@@ -2076,8 +2122,10 @@ public final class Test {
               ischanged = true;
               vx_p_caselist = (Test.Type_testcaselist)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2095,8 +2143,10 @@ public final class Test {
               ischanged = true;
               vx_p_coveragedetail = (Test.Type_testcoveragedetail)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2114,8 +2164,10 @@ public final class Test {
               ischanged = true;
               vx_p_coveragesummary = (Test.Type_testcoveragesummary)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2136,8 +2188,10 @@ public final class Test {
               ischanged = true;
               vx_p_passfail = Core.vx_new(Core.t_boolean, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2158,8 +2212,10 @@ public final class Test {
               ischanged = true;
               vx_p_testpkg = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2298,9 +2354,9 @@ public final class Test {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Test.Type_testpackage) {
-          Test.Type_testpackage anysub = (Test.Type_testpackage)valsub;
+          Test.Type_testpackage allowsub = (Test.Type_testpackage)valsub;;
           ischanged = true;
-          listval.add(anysub);
+          listval.add(allowsub);
         } else if (valsub instanceof Test.Type_testpackage) {
           ischanged = true;
           listval.add((Test.Type_testpackage)valsub);
@@ -2308,8 +2364,8 @@ public final class Test {
           Type_testpackagelist multi = (Type_testpackagelist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listtestpackage());
-        } else if (valsub instanceof List) {
-          List<?> listunknown = (List<?>)valsub;
+        } else if (valsub instanceof List<?>) {
+          List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
             if (item instanceof Test.Type_testpackage) {
               Test.Type_testpackage valitem = (Test.Type_testpackage)item;
@@ -2318,8 +2374,8 @@ public final class Test {
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/test/testpackagelist", ":invalidtype", anysub);
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          msg = Core.vx_msg_from_error("vx/test/testpackagelist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/test/testpackagelist", ":invalidtype", Core.vx_new_string(valsub.toString()));
@@ -2387,7 +2443,7 @@ public final class Test {
 
   public static class Class_testresult extends Core.Class_base implements Type_testresult {
 
-    public Core.Type_string vx_p_code;
+    public Core.Type_string vx_p_code = null;
 
     @Override
     public Core.Type_string code() {
@@ -2398,7 +2454,7 @@ public final class Test {
       return output;
     }
 
-    public Core.Type_boolean vx_p_passfail;
+    public Core.Type_boolean vx_p_passfail = null;
 
     @Override
     public Core.Type_boolean passfail() {
@@ -2409,7 +2465,7 @@ public final class Test {
       return output;
     }
 
-    public Core.Type_any vx_p_expected;
+    public Core.Type_any vx_p_expected = null;
 
     @Override
     public Core.Type_any expected() {
@@ -2420,7 +2476,7 @@ public final class Test {
       return output;
     }
 
-    public Core.Type_any vx_p_actual;
+    public Core.Type_any vx_p_actual = null;
 
     @Override
     public Core.Type_any actual() {
@@ -2431,7 +2487,7 @@ public final class Test {
       return output;
     }
 
-    public Core.Func_any_from_func_async vx_p_fn_actual;
+    public Core.Func_any_from_func_async vx_p_fn_actual = null;
 
     @Override
     public Core.Func_any_from_func_async fn_actual() {
@@ -2555,8 +2611,10 @@ public final class Test {
               ischanged = true;
               vx_p_code = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2577,8 +2635,10 @@ public final class Test {
               ischanged = true;
               vx_p_passfail = Core.vx_new(Core.t_boolean, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2596,8 +2656,10 @@ public final class Test {
               ischanged = true;
               vx_p_expected = (Core.Type_any)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2615,8 +2677,10 @@ public final class Test {
               ischanged = true;
               vx_p_actual = (Core.Type_any)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2634,8 +2698,10 @@ public final class Test {
               ischanged = true;
               vx_p_fn_actual = (Core.Func_any_from_func_async)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2774,9 +2840,9 @@ public final class Test {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Test.Type_testresult) {
-          Test.Type_testresult anysub = (Test.Type_testresult)valsub;
+          Test.Type_testresult allowsub = (Test.Type_testresult)valsub;;
           ischanged = true;
-          listval.add(anysub);
+          listval.add(allowsub);
         } else if (valsub instanceof Test.Type_testresult) {
           ischanged = true;
           listval.add((Test.Type_testresult)valsub);
@@ -2784,8 +2850,8 @@ public final class Test {
           Type_testresultlist multi = (Type_testresultlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listtestresult());
-        } else if (valsub instanceof List) {
-          List<?> listunknown = (List<?>)valsub;
+        } else if (valsub instanceof List<?>) {
+          List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
             if (item instanceof Test.Type_testresult) {
               Test.Type_testresult valitem = (Test.Type_testresult)item;
@@ -2794,8 +2860,8 @@ public final class Test {
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/test/testresultlist", ":invalidtype", anysub);
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          msg = Core.vx_msg_from_error("vx/test/testresultlist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/test/testresultlist", ":invalidtype", Core.vx_new_string(valsub.toString()));

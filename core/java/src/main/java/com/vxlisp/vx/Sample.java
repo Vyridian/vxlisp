@@ -23,7 +23,7 @@ public final class Sample {
 
   public static class Class_mytype extends Core.Class_base implements Type_mytype {
 
-    public Core.Type_int vx_p_mynum;
+    public Core.Type_int vx_p_mynum = null;
 
     @Override
     public Core.Type_int mynum() {
@@ -34,7 +34,7 @@ public final class Sample {
       return output;
     }
 
-    public Core.Type_string vx_p_mystr;
+    public Core.Type_string vx_p_mystr = null;
 
     @Override
     public Core.Type_string mystr() {
@@ -140,8 +140,10 @@ public final class Sample {
               ischanged = true;
               vx_p_mynum = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -162,8 +164,10 @@ public final class Sample {
               ischanged = true;
               vx_p_mystr = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }

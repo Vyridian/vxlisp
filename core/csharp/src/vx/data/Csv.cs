@@ -8,17 +8,13 @@ public static class Csv {
    * (type csv)
    */
   public interface Type_csv : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_stringlist headers();
     public Vx.Data.Csv.Type_csvrows rows();
   }
 
   public class Class_csv : Vx.Core.Class_base, Type_csv {
 
-    public Vx.Core.Type_stringlist vx_p_headers;
+    public Vx.Core.Type_stringlist? vx_p_headers = null;
 
     public Vx.Core.Type_stringlist headers() {
       Vx.Core.Type_stringlist output = Vx.Core.e_stringlist;
@@ -28,7 +24,7 @@ public static class Csv {
       return output;
     }
 
-    public Vx.Data.Csv.Type_csvrows vx_p_rows;
+    public Vx.Data.Csv.Type_csvrows? vx_p_rows = null;
 
     public Vx.Data.Csv.Type_csvrows rows() {
       Vx.Data.Csv.Type_csvrows output = Vx.Data.Csv.e_csvrows;
@@ -100,7 +96,7 @@ public static class Csv {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/data/csv/csv", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -126,10 +122,11 @@ public static class Csv {
               ischanged = true;
               vx_p_headers = (Vx.Core.Type_stringlist)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("headers"));
@@ -145,10 +142,11 @@ public static class Csv {
               ischanged = true;
               vx_p_rows = (Vx.Data.Csv.Type_csvrows)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("rows"));
@@ -212,10 +210,6 @@ public static class Csv {
    * (type csvrowmap)
    */
   public interface Type_csvrowmap : Vx.Core.Type_map {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Map<string, Vx.Core.Type_stringlist> vx_mapstringlist();
     public Vx.Core.Type_stringlist vx_stringlist(Vx.Core.Type_string key);
   }
@@ -274,8 +268,8 @@ public static class Csv {
       List<string> keys = mapval.keys();
       foreach (string key in keys) {
         Vx.Core.Type_any val = mapval.get(key);
-        if (val is Vx.Core.Type_stringlist) {
-          Vx.Core.Type_stringlist castval = (Vx.Core.Type_stringlist)val;
+        if (false) {
+        } else if (val is Vx.Core.Type_stringlist castval) {
           map.put(key, castval);
         } else {
           Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/data/csv/csvrowmap", ":invalidvalue", val);
@@ -304,40 +298,42 @@ public static class Csv {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_stringlist> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_stringlist>(val.vx_mapstringlist());
-      Vx.Core.Type_msg msg;
+      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_any? msgval = null;
       foreach (Object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstring = valsub as Vx.Core.Type_string;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstring) {
             key = valstring.vx_string();
-          } else if (valsub is string) {
-            key = valsub as string;
+          } else if (valsub is string sval) {
+            key = sval;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/data/csv/csvrowmap", ":keyexpected", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Core.Type_stringlist valany = null;
+          Vx.Core.Type_stringlist? valany = null;
           if (valsub is Vx.Core.Type_stringlist) {
             valany = (Vx.Core.Type_stringlist)valsub;
           } else if (valsub is Vx.Core.Type_stringlist) {
             valany = valsub as Vx.Core.Type_stringlist;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
             mapany.put("key", Vx.Core.vx_new_string(key));
@@ -400,10 +396,6 @@ public static class Csv {
    * (type csvrows)
    */
   public interface Type_csvrows : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Core.Type_stringlist> vx_liststringlist();
     public Vx.Core.Type_stringlist vx_stringlist(Vx.Core.Type_int index);
   }
@@ -459,10 +451,9 @@ public static class Csv {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Core.Type_stringlist) {
-          Vx.Core.Type_stringlist anysub = valsub as Vx.Core.Type_stringlist;
+        } else if (valsub is Vx.Core.Type_stringlist allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Core.Type_stringlist) {
           ischanged = true;
           listval.Add((Vx.Core.Type_stringlist)valsub);
@@ -470,8 +461,7 @@ public static class Csv {
           Type_csvrows multi = (Type_csvrows)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_liststringlist());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Core.Type_stringlist) {
               Vx.Core.Type_stringlist valitem = (Vx.Core.Type_stringlist)item;
@@ -479,12 +469,11 @@ public static class Csv {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/data/csv/csvrows", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/data/csv/csvrows", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/data/csv/csvrows", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/data/csv/csvrows", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }

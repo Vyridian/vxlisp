@@ -8,17 +8,13 @@ public static class Table {
    * (type cell)
    */
   public interface Type_cell : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string id();
     public Vx.Core.Type_any value();
   }
 
   public class Class_cell : Vx.Core.Class_base, Type_cell {
 
-    public Vx.Core.Type_string vx_p_id;
+    public Vx.Core.Type_string? vx_p_id = null;
 
     public Vx.Core.Type_string id() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -28,7 +24,7 @@ public static class Table {
       return output;
     }
 
-    public Vx.Core.Type_any vx_p_value;
+    public Vx.Core.Type_any? vx_p_value = null;
 
     public Vx.Core.Type_any value() {
       Vx.Core.Type_any output = Vx.Core.e_any;
@@ -100,7 +96,7 @@ public static class Table {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/data/table/cell", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -129,10 +125,11 @@ public static class Table {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("id"));
@@ -148,10 +145,11 @@ public static class Table {
               ischanged = true;
               vx_p_value = (Vx.Core.Type_any)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("value"));
@@ -215,10 +213,6 @@ public static class Table {
    * (type celllist)
    */
   public interface Type_celllist : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Data.Table.Type_cell> vx_listcell();
     public Vx.Data.Table.Type_cell vx_cell(Vx.Core.Type_int index);
   }
@@ -274,10 +268,9 @@ public static class Table {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Data.Table.Type_cell) {
-          Vx.Data.Table.Type_cell anysub = valsub as Vx.Data.Table.Type_cell;
+        } else if (valsub is Vx.Data.Table.Type_cell allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Data.Table.Type_cell) {
           ischanged = true;
           listval.Add((Vx.Data.Table.Type_cell)valsub);
@@ -285,8 +278,7 @@ public static class Table {
           Type_celllist multi = (Type_celllist)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_listcell());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Data.Table.Type_cell) {
               Vx.Data.Table.Type_cell valitem = (Vx.Data.Table.Type_cell)item;
@@ -294,12 +286,11 @@ public static class Table {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/data/table/celllist", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/data/table/celllist", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/data/table/celllist", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/data/table/celllist", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -347,10 +338,6 @@ public static class Table {
    * (type cellmap)
    */
   public interface Type_cellmap : Vx.Core.Type_map {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Map<string, Vx.Data.Table.Type_cell> vx_mapcell();
     public Vx.Data.Table.Type_cell vx_cell(Vx.Core.Type_string key);
   }
@@ -409,8 +396,8 @@ public static class Table {
       List<string> keys = mapval.keys();
       foreach (string key in keys) {
         Vx.Core.Type_any val = mapval.get(key);
-        if (val is Vx.Data.Table.Type_cell) {
-          Vx.Data.Table.Type_cell castval = (Vx.Data.Table.Type_cell)val;
+        if (false) {
+        } else if (val is Vx.Data.Table.Type_cell castval) {
           map.put(key, castval);
         } else {
           Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/data/table/cellmap", ":invalidvalue", val);
@@ -439,40 +426,42 @@ public static class Table {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Data.Table.Type_cell> mapval = new Vx.Core.LinkedHashMap<string, Vx.Data.Table.Type_cell>(val.vx_mapcell());
-      Vx.Core.Type_msg msg;
+      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_any? msgval = null;
       foreach (Object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstring = valsub as Vx.Core.Type_string;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstring) {
             key = valstring.vx_string();
-          } else if (valsub is string) {
-            key = valsub as string;
+          } else if (valsub is string sval) {
+            key = sval;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/data/table/cellmap", ":keyexpected", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Data.Table.Type_cell valany = null;
+          Vx.Data.Table.Type_cell? valany = null;
           if (valsub is Vx.Data.Table.Type_cell) {
             valany = (Vx.Data.Table.Type_cell)valsub;
           } else if (valsub is Vx.Data.Table.Type_cell) {
             valany = valsub as Vx.Data.Table.Type_cell;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
             mapany.put("key", Vx.Core.vx_new_string(key));
@@ -535,10 +524,6 @@ public static class Table {
    * (type field)
    */
   public interface Type_field : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string id();
     public Vx.Core.Type_string name();
     public Vx.Core.Type_any fldtype();
@@ -546,7 +531,7 @@ public static class Table {
 
   public class Class_field : Vx.Core.Class_base, Type_field {
 
-    public Vx.Core.Type_string vx_p_id;
+    public Vx.Core.Type_string? vx_p_id = null;
 
     public Vx.Core.Type_string id() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -556,7 +541,7 @@ public static class Table {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_name;
+    public Vx.Core.Type_string? vx_p_name = null;
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -566,7 +551,7 @@ public static class Table {
       return output;
     }
 
-    public Vx.Core.Type_any vx_p_fldtype;
+    public Vx.Core.Type_any? vx_p_fldtype = null;
 
     public Vx.Core.Type_any fldtype() {
       Vx.Core.Type_any output = Vx.Core.e_any;
@@ -644,7 +629,7 @@ public static class Table {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/data/table/field", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -673,10 +658,11 @@ public static class Table {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("id"));
@@ -695,10 +681,11 @@ public static class Table {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("name"));
@@ -714,10 +701,11 @@ public static class Table {
               ischanged = true;
               vx_p_fldtype = (Vx.Core.Type_any)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("fldtype"));
@@ -782,10 +770,6 @@ public static class Table {
    * (type fieldlist)
    */
   public interface Type_fieldlist : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Data.Table.Type_field> vx_listfield();
     public Vx.Data.Table.Type_field vx_field(Vx.Core.Type_int index);
   }
@@ -841,10 +825,9 @@ public static class Table {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Data.Table.Type_field) {
-          Vx.Data.Table.Type_field anysub = valsub as Vx.Data.Table.Type_field;
+        } else if (valsub is Vx.Data.Table.Type_field allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Data.Table.Type_field) {
           ischanged = true;
           listval.Add((Vx.Data.Table.Type_field)valsub);
@@ -852,8 +835,7 @@ public static class Table {
           Type_fieldlist multi = (Type_fieldlist)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_listfield());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Data.Table.Type_field) {
               Vx.Data.Table.Type_field valitem = (Vx.Data.Table.Type_field)item;
@@ -861,12 +843,11 @@ public static class Table {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/data/table/fieldlist", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/data/table/fieldlist", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/data/table/fieldlist", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/data/table/fieldlist", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -914,10 +895,6 @@ public static class Table {
    * (type fieldmap)
    */
   public interface Type_fieldmap : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Data.Table.Type_field> vx_listfield();
     public Vx.Data.Table.Type_field vx_field(Vx.Core.Type_int index);
   }
@@ -973,10 +950,9 @@ public static class Table {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Data.Table.Type_field) {
-          Vx.Data.Table.Type_field anysub = valsub as Vx.Data.Table.Type_field;
+        } else if (valsub is Vx.Data.Table.Type_field allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Data.Table.Type_field) {
           ischanged = true;
           listval.Add((Vx.Data.Table.Type_field)valsub);
@@ -984,8 +960,7 @@ public static class Table {
           Type_fieldmap multi = (Type_fieldmap)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_listfield());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Data.Table.Type_field) {
               Vx.Data.Table.Type_field valitem = (Vx.Data.Table.Type_field)item;
@@ -993,12 +968,11 @@ public static class Table {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/data/table/fieldmap", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/data/table/fieldmap", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/data/table/fieldmap", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/data/table/fieldmap", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -1046,10 +1020,6 @@ public static class Table {
    * (type filter)
    */
   public interface Type_filter : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string id();
     public Vx.Core.Type_string name();
     public Vx.Core.Type_stringlist idlist();
@@ -1057,7 +1027,7 @@ public static class Table {
 
   public class Class_filter : Vx.Core.Class_base, Type_filter {
 
-    public Vx.Core.Type_string vx_p_id;
+    public Vx.Core.Type_string? vx_p_id = null;
 
     public Vx.Core.Type_string id() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -1067,7 +1037,7 @@ public static class Table {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_name;
+    public Vx.Core.Type_string? vx_p_name = null;
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -1077,7 +1047,7 @@ public static class Table {
       return output;
     }
 
-    public Vx.Core.Type_stringlist vx_p_idlist;
+    public Vx.Core.Type_stringlist? vx_p_idlist = null;
 
     public Vx.Core.Type_stringlist idlist() {
       Vx.Core.Type_stringlist output = Vx.Core.e_stringlist;
@@ -1155,7 +1125,7 @@ public static class Table {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/data/table/filter", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -1184,10 +1154,11 @@ public static class Table {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("id"));
@@ -1206,10 +1177,11 @@ public static class Table {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("name"));
@@ -1225,10 +1197,11 @@ public static class Table {
               ischanged = true;
               vx_p_idlist = (Vx.Core.Type_stringlist)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("idlist"));
@@ -1293,10 +1266,6 @@ public static class Table {
    * (type row)
    */
   public interface Type_row : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string id();
     public Vx.Data.Table.Type_cellmap cellmap();
     public Vx.Data.Table.Type_sort cellsort();
@@ -1304,7 +1273,7 @@ public static class Table {
 
   public class Class_row : Vx.Core.Class_base, Type_row {
 
-    public Vx.Core.Type_string vx_p_id;
+    public Vx.Core.Type_string? vx_p_id = null;
 
     public Vx.Core.Type_string id() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -1314,7 +1283,7 @@ public static class Table {
       return output;
     }
 
-    public Vx.Data.Table.Type_cellmap vx_p_cellmap;
+    public Vx.Data.Table.Type_cellmap? vx_p_cellmap = null;
 
     public Vx.Data.Table.Type_cellmap cellmap() {
       Vx.Data.Table.Type_cellmap output = Vx.Data.Table.e_cellmap;
@@ -1324,7 +1293,7 @@ public static class Table {
       return output;
     }
 
-    public Vx.Data.Table.Type_sort vx_p_cellsort;
+    public Vx.Data.Table.Type_sort? vx_p_cellsort = null;
 
     public Vx.Data.Table.Type_sort cellsort() {
       Vx.Data.Table.Type_sort output = Vx.Data.Table.e_sort;
@@ -1402,7 +1371,7 @@ public static class Table {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/data/table/row", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -1431,10 +1400,11 @@ public static class Table {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("id"));
@@ -1450,10 +1420,11 @@ public static class Table {
               ischanged = true;
               vx_p_cellmap = (Vx.Data.Table.Type_cellmap)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("cellmap"));
@@ -1469,10 +1440,11 @@ public static class Table {
               ischanged = true;
               vx_p_cellsort = (Vx.Data.Table.Type_sort)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("cellsort"));
@@ -1537,10 +1509,6 @@ public static class Table {
    * (type rowlist)
    */
   public interface Type_rowlist : Vx.Core.Type_list {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public List<Vx.Data.Table.Type_row> vx_listrow();
     public Vx.Data.Table.Type_row vx_row(Vx.Core.Type_int index);
   }
@@ -1596,10 +1564,9 @@ public static class Table {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Data.Table.Type_row) {
-          Vx.Data.Table.Type_row anysub = valsub as Vx.Data.Table.Type_row;
+        } else if (valsub is Vx.Data.Table.Type_row allowsub) {
           ischanged = true;
-          listval.Add(anysub);
+          listval.Add(allowsub);
         } else if (valsub is Vx.Data.Table.Type_row) {
           ischanged = true;
           listval.Add((Vx.Data.Table.Type_row)valsub);
@@ -1607,8 +1574,7 @@ public static class Table {
           Type_rowlist multi = (Type_rowlist)valsub;
           ischanged = true;
           listval.AddRange(multi.vx_listrow());
-        } else if (valsub is List<object>) {
-          List<object> listunknown = valsub as List<object>;
+        } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
             if (item is Vx.Data.Table.Type_row) {
               Vx.Data.Table.Type_row valitem = (Vx.Data.Table.Type_row)item;
@@ -1616,12 +1582,11 @@ public static class Table {
               listval.Add(valitem);
             }
           }
-        } else if (valsub is Vx.Core.Type_any) {
-          Vx.Core.Type_any anysub = valsub as Vx.Core.Type_any;
-          msg = Vx.Core.vx_msg_from_error("vx/data/table/rowlist", ":invalidtype", anysub);
+        } else if (valsub is Vx.Core.Type_any anyinvalid) {
+          msg = Vx.Core.vx_msg_from_error("vx/data/table/rowlist", ":invalidtype", anyinvalid);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         } else {
-          msg = Vx.Core.vx_msg_from_error("vx/data/table/rowlist", ":invalidtype", Vx.Core.vx_new_string(valsub.ToString()));
+          msg = Vx.Core.vx_msg_from_error("vx/data/table/rowlist", ":invalidtype", Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub)));
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -1669,10 +1634,6 @@ public static class Table {
    * (type rowmap)
    */
   public interface Type_rowmap : Vx.Core.Type_map {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Map<string, Vx.Data.Table.Type_row> vx_maprow();
     public Vx.Data.Table.Type_row vx_row(Vx.Core.Type_string key);
   }
@@ -1731,8 +1692,8 @@ public static class Table {
       List<string> keys = mapval.keys();
       foreach (string key in keys) {
         Vx.Core.Type_any val = mapval.get(key);
-        if (val is Vx.Data.Table.Type_row) {
-          Vx.Data.Table.Type_row castval = (Vx.Data.Table.Type_row)val;
+        if (false) {
+        } else if (val is Vx.Data.Table.Type_row castval) {
           map.put(key, castval);
         } else {
           Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/data/table/rowmap", ":invalidvalue", val);
@@ -1761,40 +1722,42 @@ public static class Table {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Data.Table.Type_row> mapval = new Vx.Core.LinkedHashMap<string, Vx.Data.Table.Type_row>(val.vx_maprow());
-      Vx.Core.Type_msg msg;
+      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_any? msgval = null;
       foreach (Object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (key == "") {
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstring = valsub as Vx.Core.Type_string;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstring) {
             key = valstring.vx_string();
-          } else if (valsub is string) {
-            key = valsub as string;
+          } else if (valsub is string sval) {
+            key = sval;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/data/table/rowmap", ":keyexpected", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Data.Table.Type_row valany = null;
+          Vx.Data.Table.Type_row? valany = null;
           if (valsub is Vx.Data.Table.Type_row) {
             valany = (Vx.Data.Table.Type_row)valsub;
           } else if (valsub is Vx.Data.Table.Type_row) {
             valany = valsub as Vx.Data.Table.Type_row;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = valsub as Vx.Core.Type_any;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valinvalid) {
+              msgval = valinvalid;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
             mapany.put("key", Vx.Core.vx_new_string(key));
@@ -1857,10 +1820,6 @@ public static class Table {
    * (type sort)
    */
   public interface Type_sort : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string id();
     public Vx.Core.Type_string name();
     public Vx.Core.Type_stringlist idlist();
@@ -1868,7 +1827,7 @@ public static class Table {
 
   public class Class_sort : Vx.Core.Class_base, Type_sort {
 
-    public Vx.Core.Type_string vx_p_id;
+    public Vx.Core.Type_string? vx_p_id = null;
 
     public Vx.Core.Type_string id() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -1878,7 +1837,7 @@ public static class Table {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_name;
+    public Vx.Core.Type_string? vx_p_name = null;
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -1888,7 +1847,7 @@ public static class Table {
       return output;
     }
 
-    public Vx.Core.Type_stringlist vx_p_idlist;
+    public Vx.Core.Type_stringlist? vx_p_idlist = null;
 
     public Vx.Core.Type_stringlist idlist() {
       Vx.Core.Type_stringlist output = Vx.Core.e_stringlist;
@@ -1966,7 +1925,7 @@ public static class Table {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/data/table/sort", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -1995,10 +1954,11 @@ public static class Table {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("id"));
@@ -2017,10 +1977,11 @@ public static class Table {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("name"));
@@ -2036,10 +1997,11 @@ public static class Table {
               ischanged = true;
               vx_p_idlist = (Vx.Core.Type_stringlist)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("idlist"));
@@ -2104,10 +2066,6 @@ public static class Table {
    * (type table)
    */
   public interface Type_table : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_string id();
     public Vx.Core.Type_string name();
     public Vx.Data.Table.Type_fieldmap fieldmap();
@@ -2119,7 +2077,7 @@ public static class Table {
 
   public class Class_table : Vx.Core.Class_base, Type_table {
 
-    public Vx.Core.Type_string vx_p_id;
+    public Vx.Core.Type_string? vx_p_id = null;
 
     public Vx.Core.Type_string id() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -2129,7 +2087,7 @@ public static class Table {
       return output;
     }
 
-    public Vx.Core.Type_string vx_p_name;
+    public Vx.Core.Type_string? vx_p_name = null;
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
@@ -2139,7 +2097,7 @@ public static class Table {
       return output;
     }
 
-    public Vx.Data.Table.Type_fieldmap vx_p_fieldmap;
+    public Vx.Data.Table.Type_fieldmap? vx_p_fieldmap = null;
 
     public Vx.Data.Table.Type_fieldmap fieldmap() {
       Vx.Data.Table.Type_fieldmap output = Vx.Data.Table.e_fieldmap;
@@ -2149,7 +2107,7 @@ public static class Table {
       return output;
     }
 
-    public Vx.Data.Table.Type_sort vx_p_fieldsort;
+    public Vx.Data.Table.Type_sort? vx_p_fieldsort = null;
 
     public Vx.Data.Table.Type_sort fieldsort() {
       Vx.Data.Table.Type_sort output = Vx.Data.Table.e_sort;
@@ -2159,7 +2117,7 @@ public static class Table {
       return output;
     }
 
-    public Vx.Data.Table.Type_rowmap vx_p_rowmap;
+    public Vx.Data.Table.Type_rowmap? vx_p_rowmap = null;
 
     public Vx.Data.Table.Type_rowmap rowmap() {
       Vx.Data.Table.Type_rowmap output = Vx.Data.Table.e_rowmap;
@@ -2169,7 +2127,7 @@ public static class Table {
       return output;
     }
 
-    public Vx.Data.Table.Type_filter vx_p_rowfilter;
+    public Vx.Data.Table.Type_filter? vx_p_rowfilter = null;
 
     public Vx.Data.Table.Type_filter rowfilter() {
       Vx.Data.Table.Type_filter output = Vx.Data.Table.e_filter;
@@ -2179,7 +2137,7 @@ public static class Table {
       return output;
     }
 
-    public Vx.Data.Table.Type_sort vx_p_rowsort;
+    public Vx.Data.Table.Type_sort? vx_p_rowsort = null;
 
     public Vx.Data.Table.Type_sort rowsort() {
       Vx.Data.Table.Type_sort output = Vx.Data.Table.e_sort;
@@ -2281,7 +2239,7 @@ public static class Table {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/data/table/table", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -2310,10 +2268,11 @@ public static class Table {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("id"));
@@ -2332,10 +2291,11 @@ public static class Table {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("name"));
@@ -2351,10 +2311,11 @@ public static class Table {
               ischanged = true;
               vx_p_fieldmap = (Vx.Data.Table.Type_fieldmap)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("fieldmap"));
@@ -2370,10 +2331,11 @@ public static class Table {
               ischanged = true;
               vx_p_fieldsort = (Vx.Data.Table.Type_sort)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("fieldsort"));
@@ -2389,10 +2351,11 @@ public static class Table {
               ischanged = true;
               vx_p_rowmap = (Vx.Data.Table.Type_rowmap)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("rowmap"));
@@ -2408,10 +2371,11 @@ public static class Table {
               ischanged = true;
               vx_p_rowfilter = (Vx.Data.Table.Type_filter)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("rowfilter"));
@@ -2427,10 +2391,11 @@ public static class Table {
               ischanged = true;
               vx_p_rowsort = (Vx.Data.Table.Type_sort)valsub;
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("rowsort"));

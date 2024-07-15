@@ -28,9 +28,6 @@ public final class Ui {
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
-      String skey = key.vx_string();
-      switch (skey) {
-      }
       return output;
     }
 
@@ -115,7 +112,7 @@ public final class Ui {
 
   public static class Class_bounds extends Core.Class_base implements Type_bounds {
 
-    public Core.Type_int vx_p_left;
+    public Core.Type_int vx_p_left = null;
 
     @Override
     public Core.Type_int left() {
@@ -126,7 +123,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_int vx_p_right;
+    public Core.Type_int vx_p_right = null;
 
     @Override
     public Core.Type_int right() {
@@ -137,7 +134,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_int vx_p_top;
+    public Core.Type_int vx_p_top = null;
 
     @Override
     public Core.Type_int top() {
@@ -148,7 +145,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_int vx_p_bottom;
+    public Core.Type_int vx_p_bottom = null;
 
     @Override
     public Core.Type_int bottom() {
@@ -266,8 +263,10 @@ public final class Ui {
               ischanged = true;
               vx_p_left = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -288,8 +287,10 @@ public final class Ui {
               ischanged = true;
               vx_p_right = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -310,8 +311,10 @@ public final class Ui {
               ischanged = true;
               vx_p_top = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -332,8 +335,10 @@ public final class Ui {
               ischanged = true;
               vx_p_bottom = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -416,9 +421,6 @@ public final class Ui {
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
-      String skey = key.vx_string();
-      switch (skey) {
-      }
       return output;
     }
 
@@ -572,9 +574,6 @@ public final class Ui {
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
-      String skey = key.vx_string();
-      switch (skey) {
-      }
       return output;
     }
 
@@ -659,7 +658,7 @@ public final class Ui {
 
   public static class Class_font extends Core.Class_base implements Type_font {
 
-    public Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name = null;
 
     @Override
     public Core.Type_string name() {
@@ -670,7 +669,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_fontface vx_p_fontface;
+    public Ui.Type_fontface vx_p_fontface = null;
 
     @Override
     public Ui.Type_fontface fontface() {
@@ -681,7 +680,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_int vx_p_fontsize;
+    public Core.Type_int vx_p_fontsize = null;
 
     @Override
     public Core.Type_int fontsize() {
@@ -692,7 +691,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_fontstyle vx_p_fontstyle;
+    public Ui.Type_fontstyle vx_p_fontstyle = null;
 
     @Override
     public Ui.Type_fontstyle fontstyle() {
@@ -810,8 +809,10 @@ public final class Ui {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -829,8 +830,10 @@ public final class Ui {
               ischanged = true;
               vx_p_fontface = (Ui.Type_fontface)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -851,8 +854,10 @@ public final class Ui {
               ischanged = true;
               vx_p_fontsize = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -870,8 +875,10 @@ public final class Ui {
               ischanged = true;
               vx_p_fontstyle = (Ui.Type_fontstyle)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -955,7 +962,7 @@ public final class Ui {
 
   public static class Class_fontface extends Core.Class_base implements Type_fontface {
 
-    public Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name = null;
 
     @Override
     public Core.Type_string name() {
@@ -966,7 +973,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_string vx_p_weight;
+    public Core.Type_string vx_p_weight = null;
 
     @Override
     public Core.Type_string weight() {
@@ -977,7 +984,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_string vx_p_unicode;
+    public Core.Type_string vx_p_unicode = null;
 
     @Override
     public Core.Type_string unicode() {
@@ -988,7 +995,7 @@ public final class Ui {
       return output;
     }
 
-    public File.Type_filelist vx_p_filelist;
+    public File.Type_filelist vx_p_filelist = null;
 
     @Override
     public File.Type_filelist filelist() {
@@ -1106,8 +1113,10 @@ public final class Ui {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -1128,8 +1137,10 @@ public final class Ui {
               ischanged = true;
               vx_p_weight = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -1150,8 +1161,10 @@ public final class Ui {
               ischanged = true;
               vx_p_unicode = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -1169,8 +1182,10 @@ public final class Ui {
               ischanged = true;
               vx_p_filelist = (File.Type_filelist)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -1308,9 +1323,9 @@ public final class Ui {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Ui.Type_fontface) {
-          Ui.Type_fontface anysub = (Ui.Type_fontface)valsub;
+          Ui.Type_fontface allowsub = (Ui.Type_fontface)valsub;;
           ischanged = true;
-          listval.add(anysub);
+          listval.add(allowsub);
         } else if (valsub instanceof Ui.Type_fontface) {
           ischanged = true;
           listval.add((Ui.Type_fontface)valsub);
@@ -1318,8 +1333,8 @@ public final class Ui {
           Type_fontfacelist multi = (Type_fontfacelist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listfontface());
-        } else if (valsub instanceof List) {
-          List<?> listunknown = (List<?>)valsub;
+        } else if (valsub instanceof List<?>) {
+          List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
             if (item instanceof Ui.Type_fontface) {
               Ui.Type_fontface valitem = (Ui.Type_fontface)item;
@@ -1328,8 +1343,8 @@ public final class Ui {
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/ui/ui/fontfacelist", ":invalidtype", anysub);
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          msg = Core.vx_msg_from_error("vx/ui/ui/fontfacelist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/ui/ui/fontfacelist", ":invalidtype", Core.vx_new_string(valsub.toString()));
@@ -1451,8 +1466,9 @@ public final class Ui {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         Core.Type_any val = mapval.get(key);
-        if (val instanceof Ui.Type_fontface) {
-          Ui.Type_fontface castval = (Ui.Type_fontface)val;
+        if (false) {
+        } else if (val instanceof Ui.Type_fontface) {
+          Ui.Type_fontface castval = (Ui.Type_fontface)val;;
           map.put(key, castval);
         } else {
           Core.Type_msg msg = Core.vx_msg_from_error("vx/ui/ui/fontfacemap", ":invalidvalue", val);
@@ -1483,23 +1499,27 @@ public final class Ui {
         ischanged = true;
       }
       Map<String, Ui.Type_fontface> mapval = new LinkedHashMap<String, Ui.Type_fontface>(val.vx_mapfontface());
-      Core.Type_msg msg;
+      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval;
+      Core.Type_any msgval = null;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstring = (Core.Type_string)valsub;;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            key = (String)valsub;
+            String sval = (String)valsub;;
+            key = sval;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -1513,8 +1533,10 @@ public final class Ui {
           } else if (valsub instanceof Ui.Type_fontface) {
             valany = (Ui.Type_fontface)valsub;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -1650,8 +1672,9 @@ public final class Ui {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         Core.Type_any val = mapval.get(key);
-        if (val instanceof Ui.Type_font) {
-          Ui.Type_font castval = (Ui.Type_font)val;
+        if (false) {
+        } else if (val instanceof Ui.Type_font) {
+          Ui.Type_font castval = (Ui.Type_font)val;;
           map.put(key, castval);
         } else {
           Core.Type_msg msg = Core.vx_msg_from_error("vx/ui/ui/fontmap", ":invalidvalue", val);
@@ -1682,23 +1705,27 @@ public final class Ui {
         ischanged = true;
       }
       Map<String, Ui.Type_font> mapval = new LinkedHashMap<String, Ui.Type_font>(val.vx_mapfont());
-      Core.Type_msg msg;
+      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval;
+      Core.Type_any msgval = null;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstring = (Core.Type_string)valsub;;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            key = (String)valsub;
+            String sval = (String)valsub;;
+            key = sval;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -1712,8 +1739,10 @@ public final class Ui {
           } else if (valsub instanceof Ui.Type_font) {
             valany = (Ui.Type_font)valsub;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -1791,7 +1820,7 @@ public final class Ui {
 
   public static class Class_fontstyle extends Core.Class_base implements Type_fontstyle {
 
-    public Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name = null;
 
     @Override
     public Core.Type_string name() {
@@ -1891,8 +1920,10 @@ public final class Ui {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2028,8 +2059,9 @@ public final class Ui {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         Core.Type_any val = mapval.get(key);
-        if (val instanceof Ui.Type_fontstyle) {
-          Ui.Type_fontstyle castval = (Ui.Type_fontstyle)val;
+        if (false) {
+        } else if (val instanceof Ui.Type_fontstyle) {
+          Ui.Type_fontstyle castval = (Ui.Type_fontstyle)val;;
           map.put(key, castval);
         } else {
           Core.Type_msg msg = Core.vx_msg_from_error("vx/ui/ui/fontstylemap", ":invalidvalue", val);
@@ -2060,23 +2092,27 @@ public final class Ui {
         ischanged = true;
       }
       Map<String, Ui.Type_fontstyle> mapval = new LinkedHashMap<String, Ui.Type_fontstyle>(val.vx_mapfontstyle());
-      Core.Type_msg msg;
+      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval;
+      Core.Type_any msgval = null;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstring = (Core.Type_string)valsub;;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            key = (String)valsub;
+            String sval = (String)valsub;;
+            key = sval;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -2090,8 +2126,10 @@ public final class Ui {
           } else if (valsub instanceof Ui.Type_fontstyle) {
             valany = (Ui.Type_fontstyle)valsub;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -2171,7 +2209,7 @@ public final class Ui {
 
   public static class Class_image extends Core.Class_base implements Type_image {
 
-    public Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name = null;
 
     @Override
     public Core.Type_string name() {
@@ -2182,7 +2220,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_string vx_p_label;
+    public Core.Type_string vx_p_label = null;
 
     @Override
     public Core.Type_string label() {
@@ -2193,7 +2231,7 @@ public final class Ui {
       return output;
     }
 
-    public File.Type_file vx_p_file;
+    public File.Type_file vx_p_file = null;
 
     @Override
     public File.Type_file file() {
@@ -2305,8 +2343,10 @@ public final class Ui {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2327,8 +2367,10 @@ public final class Ui {
               ischanged = true;
               vx_p_label = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2346,8 +2388,10 @@ public final class Ui {
               ischanged = true;
               vx_p_file = (File.Type_file)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2428,7 +2472,7 @@ public final class Ui {
 
   public static class Class_layout extends Core.Class_base implements Type_layout {
 
-    public Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name = null;
 
     @Override
     public Core.Type_string name() {
@@ -2439,7 +2483,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Func_ui_layout_from_ui_orig_parent vx_p_fn_layout;
+    public Ui.Func_ui_layout_from_ui_orig_parent vx_p_fn_layout = null;
 
     @Override
     public Ui.Func_ui_layout_from_ui_orig_parent fn_layout() {
@@ -2545,8 +2589,10 @@ public final class Ui {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2564,8 +2610,10 @@ public final class Ui {
               ischanged = true;
               vx_p_fn_layout = (Ui.Func_ui_layout_from_ui_orig_parent)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2651,7 +2699,7 @@ public final class Ui {
 
   public static class Class_layoutengine extends Core.Class_base implements Type_layoutengine {
 
-    public Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name = null;
 
     @Override
     public Core.Type_string name() {
@@ -2662,7 +2710,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Func_boolean_print vx_p_boolean_print;
+    public Ui.Func_boolean_print vx_p_boolean_print = null;
 
     @Override
     public Ui.Func_boolean_print boolean_print() {
@@ -2673,7 +2721,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Func_boolean_layoutremove_from_ui vx_p_boolean_layoutremove;
+    public Ui.Func_boolean_layoutremove_from_ui vx_p_boolean_layoutremove = null;
 
     @Override
     public Ui.Func_boolean_layoutremove_from_ui boolean_layoutremove() {
@@ -2684,7 +2732,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Func_boolean_layoutselected_from_ui vx_p_boolean_layoutselected;
+    public Ui.Func_boolean_layoutselected_from_ui vx_p_boolean_layoutselected = null;
 
     @Override
     public Ui.Func_boolean_layoutselected_from_ui boolean_layoutselected() {
@@ -2695,7 +2743,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Func_boolean_layoutvisible_from_ui vx_p_boolean_layoutvisible;
+    public Ui.Func_boolean_layoutvisible_from_ui vx_p_boolean_layoutvisible = null;
 
     @Override
     public Ui.Func_boolean_layoutvisible_from_ui boolean_layoutvisible() {
@@ -2706,7 +2754,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_layoutmap vx_p_layoutmap;
+    public Ui.Type_layoutmap vx_p_layoutmap = null;
 
     @Override
     public Ui.Type_layoutmap layoutmap() {
@@ -2717,7 +2765,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_layout vx_p_layoutelse;
+    public Ui.Type_layout vx_p_layoutelse = null;
 
     @Override
     public Ui.Type_layout layoutelse() {
@@ -2728,7 +2776,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Func_stylesheet_render vx_p_stylesheetrender;
+    public Ui.Func_stylesheet_render vx_p_stylesheetrender = null;
 
     @Override
     public Ui.Func_stylesheet_render stylesheetrender() {
@@ -2870,8 +2918,10 @@ public final class Ui {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2889,8 +2939,10 @@ public final class Ui {
               ischanged = true;
               vx_p_boolean_print = (Ui.Func_boolean_print)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2908,8 +2960,10 @@ public final class Ui {
               ischanged = true;
               vx_p_boolean_layoutremove = (Ui.Func_boolean_layoutremove_from_ui)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2927,8 +2981,10 @@ public final class Ui {
               ischanged = true;
               vx_p_boolean_layoutselected = (Ui.Func_boolean_layoutselected_from_ui)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2946,8 +3002,10 @@ public final class Ui {
               ischanged = true;
               vx_p_boolean_layoutvisible = (Ui.Func_boolean_layoutvisible_from_ui)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2965,8 +3023,10 @@ public final class Ui {
               ischanged = true;
               vx_p_layoutmap = (Ui.Type_layoutmap)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -2984,8 +3044,10 @@ public final class Ui {
               ischanged = true;
               vx_p_layoutelse = (Ui.Type_layout)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -3003,8 +3065,10 @@ public final class Ui {
               ischanged = true;
               vx_p_stylesheetrender = (Ui.Func_stylesheet_render)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -3146,9 +3210,9 @@ public final class Ui {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Ui.Type_layout) {
-          Ui.Type_layout anysub = (Ui.Type_layout)valsub;
+          Ui.Type_layout allowsub = (Ui.Type_layout)valsub;;
           ischanged = true;
-          listval.add(anysub);
+          listval.add(allowsub);
         } else if (valsub instanceof Ui.Type_layout) {
           ischanged = true;
           listval.add((Ui.Type_layout)valsub);
@@ -3156,8 +3220,8 @@ public final class Ui {
           Type_layoutlist multi = (Type_layoutlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listlayout());
-        } else if (valsub instanceof List) {
-          List<?> listunknown = (List<?>)valsub;
+        } else if (valsub instanceof List<?>) {
+          List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
             if (item instanceof Ui.Type_layout) {
               Ui.Type_layout valitem = (Ui.Type_layout)item;
@@ -3166,8 +3230,8 @@ public final class Ui {
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/ui/ui/layoutlist", ":invalidtype", anysub);
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          msg = Core.vx_msg_from_error("vx/ui/ui/layoutlist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/ui/ui/layoutlist", ":invalidtype", Core.vx_new_string(valsub.toString()));
@@ -3289,8 +3353,9 @@ public final class Ui {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         Core.Type_any val = mapval.get(key);
-        if (val instanceof Ui.Type_layout) {
-          Ui.Type_layout castval = (Ui.Type_layout)val;
+        if (false) {
+        } else if (val instanceof Ui.Type_layout) {
+          Ui.Type_layout castval = (Ui.Type_layout)val;;
           map.put(key, castval);
         } else {
           Core.Type_msg msg = Core.vx_msg_from_error("vx/ui/ui/layoutmap", ":invalidvalue", val);
@@ -3321,23 +3386,27 @@ public final class Ui {
         ischanged = true;
       }
       Map<String, Ui.Type_layout> mapval = new LinkedHashMap<String, Ui.Type_layout>(val.vx_maplayout());
-      Core.Type_msg msg;
+      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval;
+      Core.Type_any msgval = null;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstring = (Core.Type_string)valsub;;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            key = (String)valsub;
+            String sval = (String)valsub;;
+            key = sval;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -3351,8 +3420,10 @@ public final class Ui {
           } else if (valsub instanceof Ui.Type_layout) {
             valany = (Ui.Type_layout)valsub;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -3430,7 +3501,7 @@ public final class Ui {
 
   public static class Class_pin extends Core.Class_base implements Type_pin {
 
-    public Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name = null;
 
     @Override
     public Core.Type_string name() {
@@ -3530,8 +3601,10 @@ public final class Ui {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -3614,7 +3687,7 @@ public final class Ui {
 
   public static class Class_point extends Core.Class_base implements Type_point {
 
-    public Core.Type_int vx_p_x;
+    public Core.Type_int vx_p_x = null;
 
     @Override
     public Core.Type_int x() {
@@ -3625,7 +3698,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_int vx_p_y;
+    public Core.Type_int vx_p_y = null;
 
     @Override
     public Core.Type_int y() {
@@ -3636,7 +3709,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_int vx_p_z;
+    public Core.Type_int vx_p_z = null;
 
     @Override
     public Core.Type_int z() {
@@ -3647,7 +3720,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_int vx_p_t;
+    public Core.Type_int vx_p_t = null;
 
     @Override
     public Core.Type_int t() {
@@ -3658,7 +3731,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_int vx_p_i;
+    public Core.Type_int vx_p_i = null;
 
     @Override
     public Core.Type_int i() {
@@ -3669,7 +3742,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_pointtype vx_p_pointtype;
+    public Ui.Type_pointtype vx_p_pointtype = null;
 
     @Override
     public Ui.Type_pointtype pointtype() {
@@ -3799,8 +3872,10 @@ public final class Ui {
               ischanged = true;
               vx_p_x = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -3821,8 +3896,10 @@ public final class Ui {
               ischanged = true;
               vx_p_y = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -3843,8 +3920,10 @@ public final class Ui {
               ischanged = true;
               vx_p_z = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -3865,8 +3944,10 @@ public final class Ui {
               ischanged = true;
               vx_p_t = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -3887,8 +3968,10 @@ public final class Ui {
               ischanged = true;
               vx_p_i = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -3906,8 +3989,10 @@ public final class Ui {
               ischanged = true;
               vx_p_pointtype = (Ui.Type_pointtype)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4082,7 +4167,7 @@ public final class Ui {
 
   public static class Class_style extends Core.Class_base implements Type_style {
 
-    public Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name = null;
 
     @Override
     public Core.Type_string name() {
@@ -4093,7 +4178,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_align vx_p_align;
+    public Ui.Type_align vx_p_align = null;
 
     @Override
     public Ui.Type_align align() {
@@ -4104,7 +4189,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_bounds vx_p_boundsmargin;
+    public Ui.Type_bounds vx_p_boundsmargin = null;
 
     @Override
     public Ui.Type_bounds boundsmargin() {
@@ -4115,7 +4200,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_bounds vx_p_boundspadding;
+    public Ui.Type_bounds vx_p_boundspadding = null;
 
     @Override
     public Ui.Type_bounds boundspadding() {
@@ -4126,7 +4211,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_string vx_p_color_bkg;
+    public Core.Type_string vx_p_color_bkg = null;
 
     @Override
     public Core.Type_string color_bkg() {
@@ -4137,7 +4222,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_string vx_p_color_bkghover;
+    public Core.Type_string vx_p_color_bkghover = null;
 
     @Override
     public Core.Type_string color_bkghover() {
@@ -4148,7 +4233,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_string vx_p_color_border;
+    public Core.Type_string vx_p_color_border = null;
 
     @Override
     public Core.Type_string color_border() {
@@ -4159,7 +4244,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_string vx_p_color_font;
+    public Core.Type_string vx_p_color_font = null;
 
     @Override
     public Core.Type_string color_font() {
@@ -4170,7 +4255,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_cursor vx_p_cursor;
+    public Ui.Type_cursor vx_p_cursor = null;
 
     @Override
     public Ui.Type_cursor cursor() {
@@ -4181,7 +4266,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_flip vx_p_flip;
+    public Ui.Type_flip vx_p_flip = null;
 
     @Override
     public Ui.Type_flip flip() {
@@ -4192,7 +4277,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_font vx_p_font;
+    public Ui.Type_font vx_p_font = null;
 
     @Override
     public Ui.Type_font font() {
@@ -4203,7 +4288,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_boolean vx_p_hidden;
+    public Core.Type_boolean vx_p_hidden = null;
 
     @Override
     public Core.Type_boolean hidden() {
@@ -4214,7 +4299,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_image vx_p_image_bkg;
+    public Ui.Type_image vx_p_image_bkg = null;
 
     @Override
     public Ui.Type_image image_bkg() {
@@ -4225,7 +4310,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_layout vx_p_layout;
+    public Ui.Type_layout vx_p_layout = null;
 
     @Override
     public Ui.Type_layout layout() {
@@ -4236,7 +4321,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_styletype vx_p_type;
+    public Ui.Type_styletype vx_p_type = null;
 
     @Override
     public Ui.Type_styletype type() {
@@ -4247,7 +4332,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_pin vx_p_pin;
+    public Ui.Type_pin vx_p_pin = null;
 
     @Override
     public Ui.Type_pin pin() {
@@ -4258,7 +4343,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_point vx_p_pointorigin;
+    public Ui.Type_point vx_p_pointorigin = null;
 
     @Override
     public Ui.Type_point pointorigin() {
@@ -4269,7 +4354,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_point vx_p_pointpos;
+    public Ui.Type_point vx_p_pointpos = null;
 
     @Override
     public Ui.Type_point pointpos() {
@@ -4280,7 +4365,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_point vx_p_pointrotate;
+    public Ui.Type_point vx_p_pointrotate = null;
 
     @Override
     public Ui.Type_point pointrotate() {
@@ -4291,7 +4376,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_point vx_p_pointsize;
+    public Ui.Type_point vx_p_pointsize = null;
 
     @Override
     public Ui.Type_point pointsize() {
@@ -4302,7 +4387,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_boolean vx_p_scroll_x;
+    public Core.Type_boolean vx_p_scroll_x = null;
 
     @Override
     public Core.Type_boolean scroll_x() {
@@ -4313,7 +4398,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_boolean vx_p_scroll_y;
+    public Core.Type_boolean vx_p_scroll_y = null;
 
     @Override
     public Core.Type_boolean scroll_y() {
@@ -4539,8 +4624,10 @@ public final class Ui {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4558,8 +4645,10 @@ public final class Ui {
               ischanged = true;
               vx_p_align = (Ui.Type_align)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4577,8 +4666,10 @@ public final class Ui {
               ischanged = true;
               vx_p_boundsmargin = (Ui.Type_bounds)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4596,8 +4687,10 @@ public final class Ui {
               ischanged = true;
               vx_p_boundspadding = (Ui.Type_bounds)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4618,8 +4711,10 @@ public final class Ui {
               ischanged = true;
               vx_p_color_bkg = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4640,8 +4735,10 @@ public final class Ui {
               ischanged = true;
               vx_p_color_bkghover = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4662,8 +4759,10 @@ public final class Ui {
               ischanged = true;
               vx_p_color_border = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4684,8 +4783,10 @@ public final class Ui {
               ischanged = true;
               vx_p_color_font = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4703,8 +4804,10 @@ public final class Ui {
               ischanged = true;
               vx_p_cursor = (Ui.Type_cursor)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4722,8 +4825,10 @@ public final class Ui {
               ischanged = true;
               vx_p_flip = (Ui.Type_flip)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4741,8 +4846,10 @@ public final class Ui {
               ischanged = true;
               vx_p_font = (Ui.Type_font)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4763,8 +4870,10 @@ public final class Ui {
               ischanged = true;
               vx_p_hidden = Core.vx_new(Core.t_boolean, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4782,8 +4891,10 @@ public final class Ui {
               ischanged = true;
               vx_p_image_bkg = (Ui.Type_image)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4801,8 +4912,10 @@ public final class Ui {
               ischanged = true;
               vx_p_layout = (Ui.Type_layout)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4820,8 +4933,10 @@ public final class Ui {
               ischanged = true;
               vx_p_type = (Ui.Type_styletype)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4839,8 +4954,10 @@ public final class Ui {
               ischanged = true;
               vx_p_pin = (Ui.Type_pin)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4858,8 +4975,10 @@ public final class Ui {
               ischanged = true;
               vx_p_pointorigin = (Ui.Type_point)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4877,8 +4996,10 @@ public final class Ui {
               ischanged = true;
               vx_p_pointpos = (Ui.Type_point)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4896,8 +5017,10 @@ public final class Ui {
               ischanged = true;
               vx_p_pointrotate = (Ui.Type_point)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4915,8 +5038,10 @@ public final class Ui {
               ischanged = true;
               vx_p_pointsize = (Ui.Type_point)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4937,8 +5062,10 @@ public final class Ui {
               ischanged = true;
               vx_p_scroll_x = Core.vx_new(Core.t_boolean, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -4959,8 +5086,10 @@ public final class Ui {
               ischanged = true;
               vx_p_scroll_y = Core.vx_new(Core.t_boolean, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -5116,9 +5245,9 @@ public final class Ui {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Ui.Type_style) {
-          Ui.Type_style anysub = (Ui.Type_style)valsub;
+          Ui.Type_style allowsub = (Ui.Type_style)valsub;;
           ischanged = true;
-          listval.add(anysub);
+          listval.add(allowsub);
         } else if (valsub instanceof Ui.Type_style) {
           ischanged = true;
           listval.add((Ui.Type_style)valsub);
@@ -5126,8 +5255,8 @@ public final class Ui {
           Type_stylelist multi = (Type_stylelist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_liststyle());
-        } else if (valsub instanceof List) {
-          List<?> listunknown = (List<?>)valsub;
+        } else if (valsub instanceof List<?>) {
+          List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
             if (item instanceof Ui.Type_style) {
               Ui.Type_style valitem = (Ui.Type_style)item;
@@ -5136,8 +5265,8 @@ public final class Ui {
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/ui/ui/stylelist", ":invalidtype", anysub);
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          msg = Core.vx_msg_from_error("vx/ui/ui/stylelist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/ui/ui/stylelist", ":invalidtype", Core.vx_new_string(valsub.toString()));
@@ -5259,8 +5388,9 @@ public final class Ui {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         Core.Type_any val = mapval.get(key);
-        if (val instanceof Ui.Type_style) {
-          Ui.Type_style castval = (Ui.Type_style)val;
+        if (false) {
+        } else if (val instanceof Ui.Type_style) {
+          Ui.Type_style castval = (Ui.Type_style)val;;
           map.put(key, castval);
         } else {
           Core.Type_msg msg = Core.vx_msg_from_error("vx/ui/ui/stylemap", ":invalidvalue", val);
@@ -5291,23 +5421,27 @@ public final class Ui {
         ischanged = true;
       }
       Map<String, Ui.Type_style> mapval = new LinkedHashMap<String, Ui.Type_style>(val.vx_mapstyle());
-      Core.Type_msg msg;
+      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval;
+      Core.Type_any msgval = null;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstring = (Core.Type_string)valsub;;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            key = (String)valsub;
+            String sval = (String)valsub;;
+            key = sval;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -5321,8 +5455,10 @@ public final class Ui {
           } else if (valsub instanceof Ui.Type_style) {
             valany = (Ui.Type_style)valsub;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -5401,7 +5537,7 @@ public final class Ui {
 
   public static class Class_stylesheet extends Core.Class_base implements Type_stylesheet {
 
-    public Ui.Type_fontfacemap vx_p_fontfacemap;
+    public Ui.Type_fontfacemap vx_p_fontfacemap = null;
 
     @Override
     public Ui.Type_fontfacemap fontfacemap() {
@@ -5412,7 +5548,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_stylemap vx_p_stylemap;
+    public Ui.Type_stylemap vx_p_stylemap = null;
 
     @Override
     public Ui.Type_stylemap stylemap() {
@@ -5515,8 +5651,10 @@ public final class Ui {
               ischanged = true;
               vx_p_fontfacemap = (Ui.Type_fontfacemap)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -5534,8 +5672,10 @@ public final class Ui {
               ischanged = true;
               vx_p_stylemap = (Ui.Type_stylemap)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -5616,9 +5756,6 @@ public final class Ui {
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
-      String skey = key.vx_string();
-      switch (skey) {
-      }
       return output;
     }
 
@@ -5711,7 +5848,7 @@ public final class Ui {
 
   public static class Class_ui extends Core.Class_base implements Type_ui {
 
-    public Core.Type_string vx_p_uid;
+    public Core.Type_string vx_p_uid = null;
 
     @Override
     public Core.Type_string uid() {
@@ -5722,7 +5859,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_string vx_p_name;
+    public Core.Type_string vx_p_name = null;
 
     @Override
     public Core.Type_string name() {
@@ -5733,7 +5870,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_layout vx_p_layout;
+    public Ui.Type_layout vx_p_layout = null;
 
     @Override
     public Ui.Type_layout layout() {
@@ -5744,7 +5881,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_string vx_p_path;
+    public Core.Type_string vx_p_path = null;
 
     @Override
     public Core.Type_string path() {
@@ -5755,7 +5892,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_boolean vx_p_hidden;
+    public Core.Type_boolean vx_p_hidden = null;
 
     @Override
     public Core.Type_boolean hidden() {
@@ -5766,7 +5903,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_boolean vx_p_selected;
+    public Core.Type_boolean vx_p_selected = null;
 
     @Override
     public Core.Type_boolean selected() {
@@ -5777,7 +5914,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_boolean vx_p_selectmulti;
+    public Core.Type_boolean vx_p_selectmulti = null;
 
     @Override
     public Core.Type_boolean selectmulti() {
@@ -5788,7 +5925,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_style vx_p_style;
+    public Ui.Type_style vx_p_style = null;
 
     @Override
     public Ui.Type_style style() {
@@ -5799,7 +5936,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_stylelist vx_p_stylelist;
+    public Ui.Type_stylelist vx_p_stylelist = null;
 
     @Override
     public Ui.Type_stylelist stylelist() {
@@ -5810,7 +5947,7 @@ public final class Ui {
       return output;
     }
 
-    public Event.Type_eventmap vx_p_eventmap;
+    public Event.Type_eventmap vx_p_eventmap = null;
 
     @Override
     public Event.Type_eventmap eventmap() {
@@ -5821,7 +5958,7 @@ public final class Ui {
       return output;
     }
 
-    public Core.Type_any vx_p_data;
+    public Core.Type_any vx_p_data = null;
 
     @Override
     public Core.Type_any data() {
@@ -5832,7 +5969,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_uimap vx_p_uimap;
+    public Ui.Type_uimap vx_p_uimap = null;
 
     @Override
     public Ui.Type_uimap uimap() {
@@ -5998,8 +6135,10 @@ public final class Ui {
               ischanged = true;
               vx_p_uid = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -6020,8 +6159,10 @@ public final class Ui {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -6039,8 +6180,10 @@ public final class Ui {
               ischanged = true;
               vx_p_layout = (Ui.Type_layout)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -6061,8 +6204,10 @@ public final class Ui {
               ischanged = true;
               vx_p_path = Core.vx_new(Core.t_string, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -6083,8 +6228,10 @@ public final class Ui {
               ischanged = true;
               vx_p_hidden = Core.vx_new(Core.t_boolean, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -6105,8 +6252,10 @@ public final class Ui {
               ischanged = true;
               vx_p_selected = Core.vx_new(Core.t_boolean, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -6127,8 +6276,10 @@ public final class Ui {
               ischanged = true;
               vx_p_selectmulti = Core.vx_new(Core.t_boolean, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -6146,8 +6297,10 @@ public final class Ui {
               ischanged = true;
               vx_p_style = (Ui.Type_style)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -6165,8 +6318,10 @@ public final class Ui {
               ischanged = true;
               vx_p_stylelist = (Ui.Type_stylelist)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -6184,8 +6339,10 @@ public final class Ui {
               ischanged = true;
               vx_p_eventmap = (Event.Type_eventmap)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -6203,8 +6360,10 @@ public final class Ui {
               ischanged = true;
               vx_p_data = (Core.Type_any)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -6222,8 +6381,10 @@ public final class Ui {
               ischanged = true;
               vx_p_uimap = (Ui.Type_uimap)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -6315,7 +6476,7 @@ public final class Ui {
 
   public static class Class_uiengine extends Core.Class_base implements Type_uiengine {
 
-    public Ui.Type_uimap vx_p_parentmap;
+    public Ui.Type_uimap vx_p_parentmap = null;
 
     @Override
     public Ui.Type_uimap parentmap() {
@@ -6326,7 +6487,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_layoutengine vx_p_layoutengine;
+    public Ui.Type_layoutengine vx_p_layoutengine = null;
 
     @Override
     public Ui.Type_layoutengine layoutengine() {
@@ -6337,7 +6498,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_stylesheet vx_p_stylesheet;
+    public Ui.Type_stylesheet vx_p_stylesheet = null;
 
     @Override
     public Ui.Type_stylesheet stylesheet() {
@@ -6348,7 +6509,7 @@ public final class Ui {
       return output;
     }
 
-    public Ui.Type_ui vx_p_ui;
+    public Ui.Type_ui vx_p_ui = null;
 
     @Override
     public Ui.Type_ui ui() {
@@ -6463,8 +6624,10 @@ public final class Ui {
               ischanged = true;
               vx_p_parentmap = (Ui.Type_uimap)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -6482,8 +6645,10 @@ public final class Ui {
               ischanged = true;
               vx_p_layoutengine = (Ui.Type_layoutengine)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -6501,8 +6666,10 @@ public final class Ui {
               ischanged = true;
               vx_p_stylesheet = (Ui.Type_stylesheet)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -6520,8 +6687,10 @@ public final class Ui {
               ischanged = true;
               vx_p_ui = (Ui.Type_ui)valsub;
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -6659,9 +6828,9 @@ public final class Ui {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Ui.Type_ui) {
-          Ui.Type_ui anysub = (Ui.Type_ui)valsub;
+          Ui.Type_ui allowsub = (Ui.Type_ui)valsub;;
           ischanged = true;
-          listval.add(anysub);
+          listval.add(allowsub);
         } else if (valsub instanceof Ui.Type_ui) {
           ischanged = true;
           listval.add((Ui.Type_ui)valsub);
@@ -6669,8 +6838,8 @@ public final class Ui {
           Type_uilist multi = (Type_uilist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listui());
-        } else if (valsub instanceof List) {
-          List<?> listunknown = (List<?>)valsub;
+        } else if (valsub instanceof List<?>) {
+          List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
             if (item instanceof Ui.Type_ui) {
               Ui.Type_ui valitem = (Ui.Type_ui)item;
@@ -6679,8 +6848,8 @@ public final class Ui {
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anysub = (Core.Type_any)valsub;
-          msg = Core.vx_msg_from_error("vx/ui/ui/uilist", ":invalidtype", anysub);
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          msg = Core.vx_msg_from_error("vx/ui/ui/uilist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
           msg = Core.vx_msg_from_error("vx/ui/ui/uilist", ":invalidtype", Core.vx_new_string(valsub.toString()));
@@ -6802,8 +6971,9 @@ public final class Ui {
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
         Core.Type_any val = mapval.get(key);
-        if (val instanceof Ui.Type_ui) {
-          Ui.Type_ui castval = (Ui.Type_ui)val;
+        if (false) {
+        } else if (val instanceof Ui.Type_ui) {
+          Ui.Type_ui castval = (Ui.Type_ui)val;;
           map.put(key, castval);
         } else {
           Core.Type_msg msg = Core.vx_msg_from_error("vx/ui/ui/uimap", ":invalidvalue", val);
@@ -6834,23 +7004,27 @@ public final class Ui {
         ischanged = true;
       }
       Map<String, Ui.Type_ui> mapval = new LinkedHashMap<String, Ui.Type_ui>(val.vx_mapui());
-      Core.Type_msg msg;
+      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval;
+      Core.Type_any msgval = null;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (key.equals("")) {
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstring = (Core.Type_string)valsub;;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            key = (String)valsub;
+            String sval = (String)valsub;;
+            key = sval;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -6864,8 +7038,10 @@ public final class Ui {
           } else if (valsub instanceof Ui.Type_ui) {
             valany = (Ui.Type_ui)valsub;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }

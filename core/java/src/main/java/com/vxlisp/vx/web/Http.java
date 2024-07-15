@@ -26,7 +26,7 @@ public final class Http {
 
   public static class Class_response extends Core.Class_base implements Type_response {
 
-    public Core.Type_boolean vx_p_ok;
+    public Core.Type_boolean vx_p_ok = null;
 
     @Override
     public Core.Type_boolean ok() {
@@ -37,7 +37,7 @@ public final class Http {
       return output;
     }
 
-    public Core.Type_int vx_p_status;
+    public Core.Type_int vx_p_status = null;
 
     @Override
     public Core.Type_int status() {
@@ -143,8 +143,10 @@ public final class Http {
               ischanged = true;
               vx_p_ok = Core.vx_new(Core.t_boolean, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }
@@ -165,8 +167,10 @@ public final class Http {
               ischanged = true;
               vx_p_status = Core.vx_new(Core.t_int, valsub);
             } else {
-              if (valsub instanceof Core.Type_any) {
-                msgval = (Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub instanceof Core.Type_any) {
+                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
               }

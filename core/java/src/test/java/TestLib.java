@@ -14,7 +14,8 @@ public final class TestLib {
     String testpkg = testcase.testpkg().vx_string();
     String casename = testcase.casename().vx_string();
     Test.Type_testdescribelist testdescribelist = testcase.describelist();
-    return run_testdescribelist(testpkg, casename, testdescribelist);
+    Boolean output = run_testdescribelist(testpkg, casename, testdescribelist);
+    return output;
   }
 
   // Blocking
@@ -38,7 +39,8 @@ public final class TestLib {
     Core.Type_string testcode = describe.describename();
     String message = testcode.vx_string();
     Test.Type_testresult testresult = describe.testresult();
-    return run_testresult(testpkg, casename, message, testresult);
+    boolean output = run_testresult(testpkg, casename, message, testresult);
+    return output;
   }
 
   // Blocking
@@ -54,8 +56,8 @@ public final class TestLib {
     List<Test.Type_testdescribe> listtestdescribe = testdescribelist.vx_listtestdescribe();
     for (Test.Type_testdescribe testdescribe : listtestdescribe) {
       boolean testoutput = run_testdescribe(testpkg, casename, testdescribe);
-      if (!testoutput) {
-        output = false;
+ 	    if (!testoutput) {
+   			  output = false;
       }
     }
     return output;
@@ -63,8 +65,10 @@ public final class TestLib {
 
   public static boolean run_testpackage(final Test.Type_testpackage testpackage) {
     Test.Type_testcaselist testcaselist = testpackage.caselist();
-    return run_testcaselist(testcaselist);
+    boolean output = run_testcaselist(testcaselist);
+    return output;
   }
+
 
   public static boolean run_testpackagelist(final Test.Type_testpackagelist testpackagelist) {
     boolean output = true;
@@ -83,8 +87,10 @@ public final class TestLib {
   public static boolean run_testpackage_async(final Test.Type_testpackage testpackage) {
     CompletableFuture<Test.Type_testpackage> async_testpackage = Test.f_resolve_testpackage(testpackage);
     Test.Type_testpackage testpackage_resolved = Core.vx_sync_from_async(Test.t_testpackage, async_testpackage);
-    return run_testpackage(testpackage_resolved);
+    boolean output = run_testpackage(testpackage_resolved);
+    return output;
   }
+
 
   // Blocking
   // This is the preferred way of calling testsuite (1 block per testsuite)
@@ -94,6 +100,7 @@ public final class TestLib {
     return run_testpackagelist(testpackagelist_resolved);
   }
 
+		
   public static boolean run_testresult(final String testpkg, final String testname, final String message, final Test.Type_testresult testresult) {
     Core.Type_any valexpected = testresult.expected();
     Core.Type_any valactual = testresult.actual();
@@ -102,22 +109,23 @@ public final class TestLib {
     String expected = Core.f_string_from_any(valexpected).vx_string();
     String actual = Core.f_string_from_any(valactual).vx_string();
     String msg = testpkg + "/" + testname + " " + message;
-    if (!passfail) {
-      System.out.println(msg);
-      System.out.println(expected);
-      System.out.println(actual);
+  		if (!passfail) {
+  				System.out.println(msg);
+  				System.out.println(expected);
+  				System.out.println(actual);
       Core.f_log(testresult);
-    }
-    switch (code) {
-    case ":ne":
-      assertNotEquals(expected, actual, msg);
-      break;
-    default:
-      assertEquals(expected, actual, msg);
-      break;
-    }
-    return true;
+		  }
+  		switch (code) {
+		  case ":ne":
+	  			assertNotEquals(expected, actual, msg);
+  				break;
+  		default:
+  				assertEquals(expected, actual, msg);
+  				break;
+  		}
+  		return true;
   }
+
 
   // Blocking
   public static boolean run_testresult_async(final String testpkg, final String testname, final String message, Test.Type_testresult testresult) {
@@ -144,7 +152,7 @@ public final class TestLib {
     Core.Type_string shtml = Html.f_string_from_html(htmlnode);
     valboolean = File.f_boolean_write_from_file_string(context, filehtml, shtml);
     output = output && valboolean.vx_boolean();
-    return output;
+			 return output;
   }
 
 }

@@ -8,17 +8,13 @@ public static class Http {
    * (type response)
    */
   public interface Type_response : Vx.Core.Type_struct {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
-    public Vx.Core.Type_any vx_empty();
-    public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_boolean ok();
     public Vx.Core.Type_int status();
   }
 
   public class Class_response : Vx.Core.Class_base, Type_response {
 
-    public Vx.Core.Type_boolean vx_p_ok;
+    public Vx.Core.Type_boolean? vx_p_ok = null;
 
     public Vx.Core.Type_boolean ok() {
       Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -28,7 +24,7 @@ public static class Http {
       return output;
     }
 
-    public Vx.Core.Type_int vx_p_status;
+    public Vx.Core.Type_int? vx_p_status = null;
 
     public Vx.Core.Type_int status() {
       Vx.Core.Type_int output = Vx.Core.e_int;
@@ -100,7 +96,7 @@ public static class Http {
             if (valsub is Vx.Core.Type_any) {
               msgval = (Vx.Core.Type_any)valsub;
             } else {
-              msgval = Vx.Core.vx_new_string(valsub.ToString());
+              msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
             msg = Vx.Core.vx_msg_from_error("vx/web/http/response", ":invalidkeytype", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
@@ -129,10 +125,11 @@ public static class Http {
               ischanged = true;
               vx_p_ok = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("ok"));
@@ -151,10 +148,11 @@ public static class Http {
               ischanged = true;
               vx_p_status = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             } else {
-              if (valsub is Vx.Core.Type_any) {
-                msgval = (Vx.Core.Type_any)valsub;
+              if (false) {
+              } else if (valsub is Vx.Core.Type_any valinvalid) {
+                msgval = valinvalid;
               } else {
-                msgval = Vx.Core.vx_new_string(valsub.ToString());
+                msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
               }
               Vx.Core.Map<string, Vx.Core.Type_any> mapany = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
               mapany.put("key", Vx.Core.vx_new_string("status"));
