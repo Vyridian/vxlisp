@@ -113,8 +113,9 @@ public final class CoreTest {
               Core.f_let(
                 Core.t_int,
                 Core.t_any_from_func.vx_fn_new(() -> {
-                  final Core.Func_plus funcvar =   Core.t_plus;
-                  return Core.vx_any_from_func(Core.t_int, funcvar, Core.vx_new_int(2), Core.vx_new_int(3));
+                  Core.Func_plus funcvar =   Core.t_plus;
+                  Core.Type_any output_1 = Core.vx_any_from_func(Core.t_int, funcvar, Core.vx_new_int(2), Core.vx_new_int(3));
+                  return output_1;
                 })
               )
             )
@@ -1376,8 +1377,9 @@ public final class CoreTest {
                 Core.t_any_from_reduce.vx_fn_new((total_any, num_any) -> {
                   Core.Type_int total = Core.f_any_from_any(Core.t_int, total_any);
                   Core.Type_int num = Core.f_any_from_any(Core.t_int, num_any);
-                  return 
-                  Core.f_multiply(total, num);
+                  Core.Type_any output_1 = 
+                    Core.f_multiply(total, num);
+                  return output_1;
                 })
               )
             )
@@ -1457,14 +1459,15 @@ public final class CoreTest {
                   Core.Type_string current = Core.f_any_from_any(Core.t_string, current_any);
                   Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
                   Core.Type_any value = Core.f_any_from_any(Core.t_any, value_any);
-                  return 
-                  Core.f_copy(
-                    current,
-                    Core.vx_new(Core.t_anylist,
-                      value,
-                      key
-                    )
-                  );
+                  Core.Type_any output_1 = 
+                    Core.f_copy(
+                      current,
+                      Core.vx_new(Core.t_anylist,
+                        value,
+                        key
+                      )
+                    );
+                  return output_1;
                 })
               )
             )
@@ -1501,15 +1504,16 @@ public final class CoreTest {
               Core.f_let(
                 Core.t_stringmutablemap,
                 Core.t_any_from_func.vx_fn_new(() -> {
-                  final Core.Type_stringmutablemap smap = Core.f_new(
+                  Core.Type_stringmutablemap smap = Core.f_new(
                     Core.t_stringmutablemap,
                     Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":b"),
                         Core.vx_new_string("y")
                     )
                   );
-                  final Core.Type_boolean iswrite = Core.f_boolean_write_from_map_name_value(smap, Core.vx_new_string(":a"), Core.vx_new_string("x"));
-                  return smap;
+                  Core.Type_boolean iswrite = Core.f_boolean_write_from_map_name_value(smap, Core.vx_new_string(":a"), Core.vx_new_string("x"));
+                  Core.Type_any output_1 = smap;
+                  return output_1;
                 })
               )
             )
@@ -1530,7 +1534,7 @@ public final class CoreTest {
               Core.f_let(
                 Core.t_stringmutablemap,
                 Core.t_any_from_func.vx_fn_new(() -> {
-                  final Core.Type_stringmutablemap smap = Core.f_new(
+                  Core.Type_stringmutablemap smap = Core.f_new(
                     Core.t_stringmutablemap,
                     Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":b"),
@@ -1539,8 +1543,9 @@ public final class CoreTest {
                         Core.vx_new_string("x")
                     )
                   );
-                  final Core.Type_boolean iswrite = Core.f_boolean_write_from_map_name_value(smap, Core.vx_new_string(":b"), Core.vx_new_string(""));
-                  return smap;
+                  Core.Type_boolean iswrite = Core.f_boolean_write_from_map_name_value(smap, Core.vx_new_string(":b"), Core.vx_new_string(""));
+                  Core.Type_any output_2 = smap;
+                  return output_2;
                 })
               )
             )
@@ -2376,9 +2381,10 @@ public final class CoreTest {
               Core.f_let(
                 Core.t_int,
                 Core.t_any_from_func.vx_fn_new(() -> {
-                  final Core.Type_int v1 = Core.vx_new_int(2);
-                  final Core.Type_int v2 = Core.f_plus(v1, Core.vx_new_int(3));
-                  return Core.f_plus(v1, v2);
+                  Core.Type_int v1 = Core.vx_new_int(2);
+                  Core.Type_int v2 = Core.f_plus(v1, Core.vx_new_int(3));
+                  Core.Type_any output_1 = Core.f_plus(v1, v2);
+                  return output_1;
                 })
               )
             )
@@ -2488,7 +2494,8 @@ public final class CoreTest {
                 ),
                 Core.t_any_from_any.vx_fn_new((values_any) -> {
                   Core.Type_stringlist values = Core.f_any_from_any(Core.t_stringlist, values_any);
-                  return values;
+                  Core.Type_any output_1 = values;
+                  return output_1;
                 })
               )
             )
@@ -2571,14 +2578,15 @@ public final class CoreTest {
                 Core.t_any_from_int_any.vx_fn_new((index_any, value_any) -> {
                   Core.Type_int index = Core.f_any_from_any(Core.t_int, index_any);
                   Core.Type_string value = Core.f_any_from_any(Core.t_string, value_any);
-                  return 
-                  Core.f_new(
-                    Core.t_string,
-                    Core.vx_new(Core.t_anylist,
-                      value,
-                      index
-                    )
-                  );
+                  Core.Type_any output_1 = 
+                    Core.f_new(
+                      Core.t_string,
+                      Core.vx_new(Core.t_anylist,
+                        value,
+                        index
+                      )
+                    );
+                  return output_1;
                 })
               )
             )
@@ -2665,14 +2673,15 @@ public final class CoreTest {
                 Core.t_any_from_key_value.vx_fn_new((key_any, val_any) -> {
                   Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
                   Core.Type_string val = Core.f_any_from_any(Core.t_string, val_any);
-                  return 
-                  Core.f_new(
-                    Core.t_string,
-                    Core.vx_new(Core.t_anylist,
-                      key,
-                      val
-                    )
-                  );
+                  Core.Type_any output_1 = 
+                    Core.f_new(
+                      Core.t_string,
+                      Core.vx_new(Core.t_anylist,
+                        key,
+                        val
+                      )
+                    );
+                  return output_1;
                 })
               )
             )
@@ -2717,14 +2726,15 @@ public final class CoreTest {
                 ),
                 Core.t_any_from_any.vx_fn_new((val_any) -> {
                   Core.Type_string val = Core.f_any_from_any(Core.t_string, val_any);
-                  return 
-                  Core.f_new(
-                    Core.t_string,
-                    Core.vx_new(Core.t_anylist,
-                      Core.vx_new_string("key"),
-                      val
-                    )
-                  );
+                  Core.Type_any output_1 = 
+                    Core.f_new(
+                      Core.t_string,
+                      Core.vx_new(Core.t_anylist,
+                        Core.vx_new_string("key"),
+                        val
+                      )
+                    );
+                  return output_1;
                 })
               )
             )
@@ -2811,14 +2821,15 @@ public final class CoreTest {
                 Core.t_any_from_key_value.vx_fn_new((key_any, val_any) -> {
                   Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
                   Core.Type_string val = Core.f_any_from_any(Core.t_string, val_any);
-                  return 
-                  Core.f_new(
-                    Core.t_string,
-                    Core.vx_new(Core.t_anylist,
-                      key,
-                      val
-                    )
-                  );
+                  Core.Type_any output_1 = 
+                    Core.f_new(
+                      Core.t_string,
+                      Core.vx_new(Core.t_anylist,
+                        key,
+                        val
+                      )
+                    );
+                  return output_1;
                 })
               )
             )
@@ -3090,8 +3101,9 @@ public final class CoreTest {
                 Core.t_int,
                 Core.t_any_from_func.vx_fn_new(() -> {
                   
-                  return 
-                  Core.f_plus(Core.vx_new_int(1), Core.vx_new_int(3));
+                  Core.Type_any output_1 = 
+                    Core.f_plus(Core.vx_new_int(1), Core.vx_new_int(3));
+                  return output_1;
                 })
               )
             )
@@ -3121,8 +3133,9 @@ public final class CoreTest {
                 Core.t_int,
                 Core.t_any_from_func.vx_fn_new(() -> {
                   
-                  return 
-                  Core.f_plus(Core.vx_new_int(1), Core.vx_new_int(3));
+                  Core.Type_any output_1 = 
+                    Core.f_plus(Core.vx_new_int(1), Core.vx_new_int(3));
+                  return output_1;
                 })
               )
             )

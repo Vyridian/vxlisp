@@ -9107,17 +9107,18 @@ public final class Ui {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_layoutengine layoutengine = Ui.f_layoutengine_readstate(context);
-        final Ui.Type_ui uiselected = Core.f_copy(
+        Ui.Type_layoutengine layoutengine = Ui.f_layoutengine_readstate(context);
+        Ui.Type_ui uiselected = Core.f_copy(
           ui,
           Core.vx_new(Core.t_anylist,
               Core.vx_new_string(":selected"),
               selected
           )
         );
-        final Core.Type_boolean iswrite = Ui.f_boolean_write_from_ui_parent(uiselected, parent);
-        final Ui.Func_boolean_layoutselected_from_ui fn_layoutselected = layoutengine.boolean_layoutselected();
-        return Core.vx_any_from_func(Core.t_boolean, fn_layoutselected, uiselected);
+        Core.Type_boolean iswrite = Ui.f_boolean_write_from_ui_parent(uiselected, parent);
+        Ui.Func_boolean_layoutselected_from_ui fn_layoutselected = layoutengine.boolean_layoutselected();
+        Core.Type_any output_1 = Core.vx_any_from_func(Core.t_boolean, fn_layoutselected, uiselected);
+        return output_1;
       })
     );
     return output;
@@ -9213,17 +9214,18 @@ public final class Ui {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_layoutengine layoutengine = Ui.f_layoutengine_readstate(context);
-        final Ui.Type_ui uivisible = Core.f_copy(
+        Ui.Type_layoutengine layoutengine = Ui.f_layoutengine_readstate(context);
+        Ui.Type_ui uivisible = Core.f_copy(
           ui,
           Core.vx_new(Core.t_anylist,
               Core.vx_new_string(":hidden"),
               Core.f_not(visible)
           )
         );
-        final Core.Type_boolean iswrite = Ui.f_boolean_write_from_ui_parent(uivisible, parent);
-        final Ui.Func_boolean_layoutvisible_from_ui fn_layoutvisible = layoutengine.boolean_layoutvisible();
-        return Core.vx_any_from_func(Core.t_boolean, fn_layoutvisible, uivisible);
+        Core.Type_boolean iswrite = Ui.f_boolean_write_from_ui_parent(uivisible, parent);
+        Ui.Func_boolean_layoutvisible_from_ui fn_layoutvisible = layoutengine.boolean_layoutvisible();
+        Core.Type_any output_1 = Core.vx_any_from_func(Core.t_boolean, fn_layoutvisible, uivisible);
+        return output_1;
       })
     );
     return output;
@@ -9317,16 +9319,17 @@ public final class Ui {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_ui ui2 = Ui.f_ui_addlayout_from_ui(context, uiarg);
-        final Core.Type_boolean iswrite = Ui.f_boolean_write_from_ui_parent(ui2, parent);
-        final Ui.Type_ui ui3 = Ui.f_ui_layout_from_ui_orig_parent(
+        Ui.Type_ui ui2 = Ui.f_ui_addlayout_from_ui(context, uiarg);
+        Core.Type_boolean iswrite = Ui.f_boolean_write_from_ui_parent(ui2, parent);
+        Ui.Type_ui ui3 = Ui.f_ui_layout_from_ui_orig_parent(
           ui2,
           Core.f_empty(
             Ui.t_ui
           ),
           parent
         );
-        return iswrite;
+        Core.Type_any output_1 = iswrite;
+        return output_1;
       })
     );
     return output;
@@ -9519,23 +9522,26 @@ public final class Ui {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uimap uimap = ui.uimap();
-        final Core.Type_booleanlist writelist = Core.f_list_from_list_1(
+        Ui.Type_uimap uimap = ui.uimap();
+        Core.Type_booleanlist writelist = Core.f_list_from_list_1(
           Core.t_booleanlist,
           keys,
           Core.t_any_from_any.vx_fn_new((key_any) -> {
             Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
-            return 
-              Core.f_let(
-                Core.t_boolean,
-                Core.t_any_from_func.vx_fn_new(() -> {
-                  final Ui.Type_ui childui = Core.f_any_from_map(Ui.t_ui, uimap, key);
-                  return Ui.f_boolean_layoutremove_from_ui_parent(context, childui, ui);
-                })
-              );
+            Core.Type_any output_1 = 
+                Core.f_let(
+                  Core.t_boolean,
+                  Core.t_any_from_func.vx_fn_new(() -> {
+                    Ui.Type_ui childui = Core.f_any_from_map(Ui.t_ui, uimap, key);
+                    Core.Type_any output_2 = Ui.f_boolean_layoutremove_from_ui_parent(context, childui, ui);
+                    return output_2;
+                  })
+                );
+            return output_1;
           })
         );
-        return Core.f_and_1(writelist);
+        Core.Type_any output_3 = Core.f_and_1(writelist);
+        return output_3;
       })
     );
     return output;
@@ -9629,11 +9635,12 @@ public final class Ui {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_layoutengine layoutengine = Ui.f_layoutengine_readstate(context);
-        final Core.Type_string uid = ui.uid();
-        final Core.Type_boolean iswrite = Ui.f_boolean_writeremove_from_ui_uid(parent, uid);
-        final Ui.Func_boolean_layoutremove_from_ui fn_layoutremove = layoutengine.boolean_layoutremove();
-        return Core.vx_any_from_func(Core.t_boolean, fn_layoutremove, ui);
+        Ui.Type_layoutengine layoutengine = Ui.f_layoutengine_readstate(context);
+        Core.Type_string uid = ui.uid();
+        Core.Type_boolean iswrite = Ui.f_boolean_writeremove_from_ui_uid(parent, uid);
+        Ui.Func_boolean_layoutremove_from_ui fn_layoutremove = layoutengine.boolean_layoutremove();
+        Core.Type_any output_1 = Core.vx_any_from_func(Core.t_boolean, fn_layoutremove, ui);
+        return output_1;
       })
     );
     return output;
@@ -9729,10 +9736,11 @@ public final class Ui {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uimap uimap = ui.uimap();
-        final Core.Type_stringlist keys = Core.f_stringlist_from_map(uimap);
-        final Core.Type_stringlist subkeys = Collection.f_list_from_list_start_end(Core.t_stringlist, keys, start, end);
-        return Ui.f_boolean_layoutremove_from_ui_keys(context, ui, subkeys);
+        Ui.Type_uimap uimap = ui.uimap();
+        Core.Type_stringlist keys = Core.f_stringlist_from_map(uimap);
+        Core.Type_stringlist subkeys = Collection.f_list_from_list_start_end(Core.t_stringlist, keys, start, end);
+        Core.Type_any output_1 = Ui.f_boolean_layoutremove_from_ui_keys(context, ui, subkeys);
+        return output_1;
       })
     );
     return output;
@@ -9925,10 +9933,11 @@ public final class Ui {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_layoutengine layoutengine = Ui.f_layoutengine_readstate(context);
-        final Core.Type_boolean iswrite = Ui.f_boolean_write_from_ui_parent(ui, parent);
-        final Ui.Func_boolean_layoutselected_from_ui fn_layoutselected = layoutengine.boolean_layoutselected();
-        return Core.vx_any_from_func(Core.t_boolean, fn_layoutselected, ui);
+        Ui.Type_layoutengine layoutengine = Ui.f_layoutengine_readstate(context);
+        Core.Type_boolean iswrite = Ui.f_boolean_write_from_ui_parent(ui, parent);
+        Ui.Func_boolean_layoutselected_from_ui fn_layoutselected = layoutengine.boolean_layoutselected();
+        Core.Type_any output_1 = Core.vx_any_from_func(Core.t_boolean, fn_layoutselected, ui);
+        return output_1;
       })
     );
     return output;
@@ -10220,9 +10229,10 @@ public final class Ui {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_layoutengine layoutengine = Ui.f_layoutengine_readstate(context);
-        final Ui.Func_boolean_print fn_print = layoutengine.boolean_print();
-        return Core.vx_any_from_func(Core.t_boolean, fn_print, context, ui);
+        Ui.Type_layoutengine layoutengine = Ui.f_layoutengine_readstate(context);
+        Ui.Func_boolean_print fn_print = layoutengine.boolean_print();
+        Core.Type_any output_1 = Core.vx_any_from_func(Core.t_boolean, fn_print, context, ui);
+        return output_1;
       })
     );
     return output;
@@ -10400,9 +10410,10 @@ public final class Ui {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string uid = ui.uid();
-        final Ui.Type_uimap uimap = parent.uimap();
-        return Core.f_boolean_write_from_map_name_value(uimap, uid, ui);
+        Core.Type_string uid = ui.uid();
+        Ui.Type_uimap uimap = parent.uimap();
+        Core.Type_any output_1 = Core.f_boolean_write_from_map_name_value(uimap, uid, ui);
+        return output_1;
       })
     );
     return output;
@@ -10495,14 +10506,15 @@ public final class Ui {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uimap uimap = uiarg.uimap();
-        return Core.f_boolean_write_from_map_name_value(
+        Ui.Type_uimap uimap = uiarg.uimap();
+        Core.Type_any output_1 = Core.f_boolean_write_from_map_name_value(
           uimap,
           uid,
           Core.f_empty(
             Ui.t_ui
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -10607,10 +10619,10 @@ public final class Ui {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string uid = ui.uid();
-        final Ui.Type_ui uiapp = Ui.f_ui_readstate_uiapp(context);
-        final Core.Type_string parentuid = Ui.f_string_parentuid_from_uid(uid);
-        final Ui.Type_ui parentui = Core.f_if_2(
+        Core.Type_string uid = ui.uid();
+        Ui.Type_ui uiapp = Ui.f_ui_readstate_uiapp(context);
+        Core.Type_string parentuid = Ui.f_string_parentuid_from_uid(uid);
+        Ui.Type_ui parentui = Core.f_if_2(
           Ui.t_ui,
           Core.vx_new(Core.t_thenelselist,
               Core.f_then(
@@ -10628,8 +10640,8 @@ public final class Ui {
               )
           )
         );
-        final Core.Type_boolean isfound = Core.f_notempty_1(parentui);
-        final Core.Type_boolean iswrite = Core.f_if_2(
+        Core.Type_boolean isfound = Core.f_notempty_1(parentui);
+        Core.Type_boolean iswrite = Core.f_if_2(
           Core.t_boolean,
           Core.vx_new(Core.t_thenelselist,
               Core.f_then(
@@ -10642,7 +10654,8 @@ public final class Ui {
               )
           )
         );
-        return isfound;
+        Core.Type_any output_1 = isfound;
+        return output_1;
       })
     );
     return output;
@@ -10951,8 +10964,9 @@ public final class Ui {
       fontfacelist,
       Core.t_any_from_any.vx_fn_new((fontface_any) -> {
         Ui.Type_fontface fontface = Core.f_any_from_any(Ui.t_fontface, fontface_any);
-        return 
-        fontface.name();
+        Core.Type_any output_1 = 
+          fontface.name();
+        return output_1;
       })
     );
     return output;
@@ -11045,8 +11059,9 @@ public final class Ui {
     output = Core.f_let(
       Core.t_int,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uimap uimap = ui.uimap();
-        return Collection.f_int_from_map_key(uimap, uid);
+        Ui.Type_uimap uimap = ui.uimap();
+        Core.Type_any output_1 = Collection.f_int_from_map_key(uimap, uid);
+        return output_1;
       })
     );
     return output;
@@ -11151,9 +11166,10 @@ public final class Ui {
     output = Core.f_let(
       Core.t_int,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string uid = Ui.f_string_selected_from_ui(ui);
-        final Core.Type_stringlist uidlist = Ui.f_stringlist_from_ui(ui);
-        return Collection.f_int_from_stringlist_find(uidlist, uid);
+        Core.Type_string uid = Ui.f_string_selected_from_ui(ui);
+        Core.Type_stringlist uidlist = Ui.f_stringlist_from_ui(ui);
+        Core.Type_any output_1 = Collection.f_int_from_stringlist_find(uidlist, uid);
+        return output_1;
       })
     );
     return output;
@@ -11258,8 +11274,9 @@ public final class Ui {
     output = Core.f_let(
       Core.t_int,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_intlist intlist = Ui.f_intlist_visible_from_ui(ui);
-        return Core.f_first_from_list(Core.t_int, intlist);
+        Core.Type_intlist intlist = Ui.f_intlist_visible_from_ui(ui);
+        Core.Type_any output_1 = Core.f_first_from_list(Core.t_int, intlist);
+        return output_1;
       })
     );
     return output;
@@ -11364,40 +11381,43 @@ public final class Ui {
     output = Core.f_let(
       Core.t_intlist,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uimap uimap = uiarg.uimap();
-        final Ui.Type_uilist uilist = Ui.f_uilist_from_uimap(uimap);
-        final Ui.Type_uilist intlist = Core.f_list_from_list_intany(
+        Ui.Type_uimap uimap = uiarg.uimap();
+        Ui.Type_uilist uilist = Ui.f_uilist_from_uimap(uimap);
+        Ui.Type_uilist intlist = Core.f_list_from_list_intany(
           Ui.t_uilist,
           uilist,
           Core.t_any_from_int_any.vx_fn_new((pos_any, subui_any) -> {
             Core.Type_int pos = Core.f_any_from_any(Core.t_int, pos_any);
             Ui.Type_ui subui = Core.f_any_from_any(Ui.t_ui, subui_any);
-            return 
-              Core.f_if_2(
-                Core.t_int,
-                Core.vx_new(Core.t_thenelselist,
-                  Core.f_then(
-                    Core.t_boolean_from_func.vx_fn_new(() -> {
-                      return Core.f_not(
-                        subui.hidden()
-                      );
-                    }),
-                    Core.t_any_from_func.vx_fn_new(() -> {
-                      return pos;
-                    })
+            Core.Type_any output_1 = 
+                Core.f_if_2(
+                  Core.t_int,
+                  Core.vx_new(Core.t_thenelselist,
+                    Core.f_then(
+                      Core.t_boolean_from_func.vx_fn_new(() -> {
+                        return Core.f_not(
+                          subui.hidden()
+                        );
+                      }),
+                      Core.t_any_from_func.vx_fn_new(() -> {
+                        return pos;
+                      })
+                    )
                   )
-                )
-              );
+                );
+            return output_1;
           })
         );
-        return Collection.f_list_from_list_filter(
+        Core.Type_any output_3 = Collection.f_list_from_list_filter(
           Core.t_intlist,
           intlist,
           Core.t_any_from_any.vx_fn_new((pos_any) -> {
             Core.Type_int pos = Core.f_any_from_any(Core.t_int, pos_any);
-            return pos;
+            Core.Type_any output_2 = pos;
+            return output_2;
           })
         );
+        return output_3;
       })
     );
     return output;
@@ -11602,8 +11622,9 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_layout,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_layoutengine layoutengine = Ui.f_layoutengine_readstate(context);
-        return Ui.f_layout_from_ui_layoutengine(ui, layoutengine);
+        Ui.Type_layoutengine layoutengine = Ui.f_layoutengine_readstate(context);
+        Core.Type_any output_1 = Ui.f_layout_from_ui_layoutengine(ui, layoutengine);
+        return output_1;
       })
     );
     return output;
@@ -11696,9 +11717,10 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_layout,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_layoutmap layoutmap = layoutengine.layoutmap();
-        final Ui.Type_layout layoutelse = layoutengine.layoutelse();
-        return Ui.f_layout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
+        Ui.Type_layoutmap layoutmap = layoutengine.layoutmap();
+        Ui.Type_layout layoutelse = layoutengine.layoutelse();
+        Core.Type_any output_1 = Ui.f_layout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
+        return output_1;
       })
     );
     return output;
@@ -11793,17 +11815,18 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_layout,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_style style = ui.style();
-        final Ui.Type_layout layout = Ui.f_layout_from_style(style);
-        final Core.Type_string layname = layout.name();
-        final Ui.Type_layout layout1 = Core.f_any_from_map(Ui.t_layout, layoutmap, layname);
-        final Ui.Type_layout layout2 = Core.f_if_1(
+        Ui.Type_style style = ui.style();
+        Ui.Type_layout layout = Ui.f_layout_from_style(style);
+        Core.Type_string layname = layout.name();
+        Ui.Type_layout layout1 = Core.f_any_from_map(Ui.t_layout, layoutmap, layname);
+        Ui.Type_layout layout2 = Core.f_if_1(
           Ui.t_layout,
           Core.f_notempty_1(layout1),
           layout1,
           layoutelse
         );
-        return layout2;
+        Core.Type_any output_1 = layout2;
+        return output_1;
       })
     );
     return output;
@@ -11893,8 +11916,9 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_layoutengine,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uiengine uiengine = Ui.f_uiengine_readstate(context);
-        return uiengine.layoutengine();
+        Ui.Type_uiengine uiengine = Ui.f_uiengine_readstate(context);
+        Core.Type_any output_1 = uiengine.layoutengine();
+        return output_1;
       })
     );
     return output;
@@ -12001,8 +12025,9 @@ public final class Ui {
       layoutlist,
       Core.t_any_from_any.vx_fn_new((layout_any) -> {
         Ui.Type_layout layout = Core.f_any_from_any(Ui.t_layout, layout_any);
-        return 
-        layout.name();
+        Core.Type_any output_1 = 
+          layout.name();
+        return output_1;
       })
     );
     return output;
@@ -12107,8 +12132,8 @@ public final class Ui {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_int lastpos = Type.f_int_from_string_findlast(uid, Core.vx_new_string("/"));
-        return Core.f_if_2(
+        Core.Type_int lastpos = Type.f_int_from_string_findlast(uid, Core.vx_new_string("/"));
+        Core.Type_any output_1 = Core.f_if_2(
           Core.t_string,
           Core.vx_new(Core.t_thenelselist,
             Core.f_then(
@@ -12124,6 +12149,7 @@ public final class Ui {
             )
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -12228,8 +12254,9 @@ public final class Ui {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_ui selectedui = Ui.f_ui_selected_from_ui(ui);
-        return selectedui.uid();
+        Ui.Type_ui selectedui = Ui.f_ui_selected_from_ui(ui);
+        Core.Type_any output_1 = selectedui.uid();
+        return output_1;
       })
     );
     return output;
@@ -12334,22 +12361,24 @@ public final class Ui {
     output = Core.f_let(
       Core.t_stringlist,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uimap uimap = ui.uimap();
-        final Ui.Type_uilist uilist = Ui.f_uilist_from_uimap(uimap);
-        return Core.f_list_from_list_1(
+        Ui.Type_uimap uimap = ui.uimap();
+        Ui.Type_uilist uilist = Ui.f_uilist_from_uimap(uimap);
+        Core.Type_any output_2 = Core.f_list_from_list_1(
           Core.t_stringlist,
           uilist,
           Core.t_any_from_any.vx_fn_new((item_any) -> {
             Ui.Type_ui item = Core.f_any_from_any(Ui.t_ui, item_any);
-            return 
-            Core.f_if_1(
-              Core.t_string,
-              item.selected(),
-              item.uid(),
-              Core.vx_new_string("")
-            );
+            Core.Type_any output_1 = 
+              Core.f_if_1(
+                Core.t_string,
+                item.selected(),
+                item.uid(),
+                Core.vx_new_string("")
+              );
+            return output_1;
           })
         );
+        return output_2;
       })
     );
     return output;
@@ -12454,8 +12483,9 @@ public final class Ui {
     output = Core.f_let(
       Core.t_stringlist,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uimap uimap = ui.uimap();
-        return Core.f_stringlist_from_map(uimap);
+        Ui.Type_uimap uimap = ui.uimap();
+        Core.Type_any output_1 = Core.f_stringlist_from_map(uimap);
+        return output_1;
       })
     );
     return output;
@@ -12561,8 +12591,9 @@ public final class Ui {
       stylelist,
       Core.t_any_from_any.vx_fn_new((style_any) -> {
         Ui.Type_style style = Core.f_any_from_any(Ui.t_style, style_any);
-        return 
-        style.name();
+        Core.Type_any output_1 = 
+          style.name();
+        return output_1;
       })
     );
     return output;
@@ -12652,8 +12683,9 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_stylesheet,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uiengine uiengine = Ui.f_uiengine_readstate(context);
-        return uiengine.stylesheet();
+        Ui.Type_uiengine uiengine = Ui.f_uiengine_readstate(context);
+        Core.Type_any output_1 = uiengine.stylesheet();
+        return output_1;
       })
     );
     return output;
@@ -12858,8 +12890,9 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uiengine uiengine = Ui.f_uiengine_readstate(context);
-        return Ui.f_ui_addlayout_from_ui_uiengine(ui, uiengine);
+        Ui.Type_uiengine uiengine = Ui.f_uiengine_readstate(context);
+        Core.Type_any output_1 = Ui.f_ui_addlayout_from_ui_uiengine(ui, uiengine);
+        return output_1;
       })
     );
     return output;
@@ -12952,9 +12985,10 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_layoutmap layoutmap = layoutengine.layoutmap();
-        final Ui.Type_layout layoutelse = layoutengine.layoutelse();
-        return Ui.f_ui_addlayout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
+        Ui.Type_layoutmap layoutmap = layoutengine.layoutmap();
+        Ui.Type_layout layoutelse = layoutengine.layoutelse();
+        Core.Type_any output_1 = Ui.f_ui_addlayout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
+        return output_1;
       })
     );
     return output;
@@ -13049,10 +13083,10 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uimap uimap = ui.uimap();
-        final Ui.Type_layout layout1 = Ui.f_layout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
-        final Ui.Type_uimap uimap2 = Ui.f_uimap_addlayout_from_uimap_layoutmap_else(uimap, layoutmap, layoutelse);
-        return Core.f_copy(
+        Ui.Type_uimap uimap = ui.uimap();
+        Ui.Type_layout layout1 = Ui.f_layout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
+        Ui.Type_uimap uimap2 = Ui.f_uimap_addlayout_from_uimap_layoutmap_else(uimap, layoutmap, layoutelse);
+        Core.Type_any output_1 = Core.f_copy(
           ui,
           Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":layout"),
@@ -13061,6 +13095,7 @@ public final class Ui {
             uimap2
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -13153,8 +13188,9 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_layoutengine layoutengine = uiengine.layoutengine();
-        return Ui.f_ui_addlayout_from_ui_layoutengine(ui, layoutengine);
+        Ui.Type_layoutengine layoutengine = uiengine.layoutengine();
+        Core.Type_any output_1 = Ui.f_ui_addlayout_from_ui_layoutengine(ui, layoutengine);
+        return output_1;
       })
     );
     return output;
@@ -13247,8 +13283,9 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uimap childmap = ui.uimap();
-        return Collection.f_any_from_map_pos(Ui.t_ui, childmap, pos);
+        Ui.Type_uimap childmap = ui.uimap();
+        Core.Type_any output_1 = Collection.f_any_from_map_pos(Ui.t_ui, childmap, pos);
+        return output_1;
       })
     );
     return output;
@@ -13341,8 +13378,9 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uimap childmap = ui.uimap();
-        return Core.f_any_from_map(Ui.t_ui, childmap, uid);
+        Ui.Type_uimap childmap = ui.uimap();
+        Core.Type_any output_1 = Core.f_any_from_map(Ui.t_ui, childmap, uid);
+        return output_1;
       })
     );
     return output;
@@ -13448,8 +13486,9 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string uid = evt.from();
-        return Ui.f_ui_readstate_from_uid(context, uid);
+        Core.Type_string uid = evt.from();
+        Core.Type_any output_1 = Ui.f_ui_readstate_from_uid(context, uid);
+        return output_1;
       })
     );
     return output;
@@ -13756,10 +13795,11 @@ public final class Ui {
             return Core.f_let(
               Ui.t_ui,
               Core.t_any_from_func.vx_fn_new(() -> {
-                final Ui.Type_uimap uimap = ui.uimap();
-                final Ui.Type_layout layout = ui.layout();
-                final Ui.Type_ui uiout = Ui.f_ui_from_layout_ui_orig_parent(layout, ui, orig, parent);
-                return uiout;
+                Ui.Type_uimap uimap = ui.uimap();
+                Ui.Type_layout layout = ui.layout();
+                Ui.Type_ui uiout = Ui.f_ui_from_layout_ui_orig_parent(layout, ui, orig, parent);
+                Core.Type_any output_1 = uiout;
+                return output_1;
               })
             );
           })
@@ -13858,9 +13898,10 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_ui uichg1 = Ui.f_ui_from_ui_selected(ui, selected);
-        final Core.Type_boolean iswrite = Ui.f_boolean_write_from_ui_parent(uichg1, parent);
-        return Ui.f_ui_layout_from_ui_orig_parent(uichg1, ui, parent);
+        Ui.Type_ui uichg1 = Ui.f_ui_from_ui_selected(ui, selected);
+        Core.Type_boolean iswrite = Ui.f_boolean_write_from_ui_parent(uichg1, parent);
+        Core.Type_any output_1 = Ui.f_ui_layout_from_ui_orig_parent(uichg1, ui, parent);
+        return output_1;
       })
     );
     return output;
@@ -13955,8 +13996,9 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_ui uichg = Ui.f_ui_write_from_ui_visible(ui, visible);
-        return Ui.f_ui_layout_from_ui_orig_parent(uichg, ui, parent);
+        Ui.Type_ui uichg = Ui.f_ui_write_from_ui_visible(ui, visible);
+        Core.Type_any output_1 = Ui.f_ui_layout_from_ui_orig_parent(uichg, ui, parent);
+        return output_1;
       })
     );
     return output;
@@ -14147,8 +14189,9 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_ui uiapp = Ui.f_ui_readstate_uiapp(context);
-        return Ui.f_ui_from_ui_find(uiapp, uid);
+        Ui.Type_ui uiapp = Ui.f_ui_readstate_uiapp(context);
+        Core.Type_any output_1 = Ui.f_ui_from_ui_find(uiapp, uid);
+        return output_1;
       })
     );
     return output;
@@ -14253,8 +14296,9 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uilist uilist = Ui.f_uilist_selected_from_ui(ui);
-        return Core.f_first_from_list(Ui.t_ui, uilist);
+        Ui.Type_uilist uilist = Ui.f_uilist_selected_from_ui(ui);
+        Core.Type_any output_1 = Core.f_first_from_list(Ui.t_ui, uilist);
+        return output_1;
       })
     );
     return output;
@@ -14359,8 +14403,9 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uilist uilist = Ui.f_uilist_visible_from_ui(ui);
-        return Core.f_first_from_list(Ui.t_ui, uilist);
+        Ui.Type_uilist uilist = Ui.f_uilist_visible_from_ui(ui);
+        Core.Type_any output_1 = Core.f_first_from_list(Ui.t_ui, uilist);
+        return output_1;
       })
     );
     return output;
@@ -14453,10 +14498,11 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string childid = child.uid();
-        final Ui.Type_uimap uimap = ui.uimap();
-        final Core.Type_boolean write = Core.f_boolean_write_from_map_name_value(uimap, childid, child);
-        return ui;
+        Core.Type_string childid = child.uid();
+        Ui.Type_uimap uimap = ui.uimap();
+        Core.Type_boolean write = Core.f_boolean_write_from_map_name_value(uimap, childid, child);
+        Core.Type_any output_1 = ui;
+        return output_1;
       })
     );
     return output;
@@ -14549,17 +14595,19 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uimap workmap = Core.f_map_from_map_1(
+        Ui.Type_uimap workmap = Core.f_map_from_map_1(
           Ui.t_uimap,
           childmap,
           Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
             Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
             Ui.Type_ui value = Core.f_any_from_any(Ui.t_ui, value_any);
-            return 
-              Ui.f_ui_write_from_ui_child(ui, value);
+            Core.Type_any output_1 = 
+                Ui.f_ui_write_from_ui_child(ui, value);
+            return output_1;
           })
         );
-        return ui;
+        Core.Type_any output_2 = ui;
+        return output_2;
       })
     );
     return output;
@@ -14665,54 +14713,56 @@ public final class Ui {
             return Core.f_let(
               Ui.t_ui,
               Core.t_any_from_func.vx_fn_new(() -> {
-                final Ui.Type_uimap uimap = ui.uimap();
-                final Ui.Type_uilist uilist1 = Ui.f_uilist_from_uimap(uimap);
-                final Ui.Type_uilist uilist2 = Core.f_list_from_list_intany(
+                Ui.Type_uimap uimap = ui.uimap();
+                Ui.Type_uilist uilist1 = Ui.f_uilist_from_uimap(uimap);
+                Ui.Type_uilist uilist2 = Core.f_list_from_list_intany(
                   Ui.t_uilist,
                   uilist1,
                   Core.t_any_from_int_any.vx_fn_new((posval_any, uival_any) -> {
                     Core.Type_int posval = Core.f_any_from_any(Core.t_int, posval_any);
                     Ui.Type_ui uival = Core.f_any_from_any(Ui.t_ui, uival_any);
-                    return 
-                      Core.f_if_2(
-                        Ui.t_ui,
-                        Core.vx_new(Core.t_thenelselist,
-                          Core.f_then(
-                            Core.t_boolean_from_func.vx_fn_new(() -> {
-                              return Core.f_eq(posval, visible);
-                            }),
-                            Core.t_any_from_func.vx_fn_new(() -> {
-                              return Ui.f_ui_write_from_ui_child(
-                                ui,
-                                Core.f_copy(
-                                  uival,
-                                  Core.vx_new(Core.t_anylist,
-                                    Core.vx_new_string(":hidden"),
-                                    Core.vx_new_boolean(false)
+                    Core.Type_any output_1 = 
+                        Core.f_if_2(
+                          Ui.t_ui,
+                          Core.vx_new(Core.t_thenelselist,
+                            Core.f_then(
+                              Core.t_boolean_from_func.vx_fn_new(() -> {
+                                return Core.f_eq(posval, visible);
+                              }),
+                              Core.t_any_from_func.vx_fn_new(() -> {
+                                return Ui.f_ui_write_from_ui_child(
+                                  ui,
+                                  Core.f_copy(
+                                    uival,
+                                    Core.vx_new(Core.t_anylist,
+                                      Core.vx_new_string(":hidden"),
+                                      Core.vx_new_boolean(false)
+                                    )
                                   )
-                                )
-                              );
-                            })
-                          ),
-                          Core.f_else(
-                            Core.t_any_from_func.vx_fn_new(() -> {
-                              return Ui.f_ui_write_from_ui_child(
-                                ui,
-                                Core.f_copy(
-                                  uival,
-                                  Core.vx_new(Core.t_anylist,
-                                    Core.vx_new_string(":hidden"),
-                                    Core.vx_new_boolean(true)
+                                );
+                              })
+                            ),
+                            Core.f_else(
+                              Core.t_any_from_func.vx_fn_new(() -> {
+                                return Ui.f_ui_write_from_ui_child(
+                                  ui,
+                                  Core.f_copy(
+                                    uival,
+                                    Core.vx_new(Core.t_anylist,
+                                      Core.vx_new_string(":hidden"),
+                                      Core.vx_new_boolean(true)
+                                    )
                                   )
-                                )
-                              );
-                            })
+                                );
+                              })
+                            )
                           )
-                        )
-                      );
+                        );
+                    return output_1;
                   })
                 );
-                return ui;
+                Core.Type_any output_2 = ui;
+                return output_2;
               })
             );
           })
@@ -14812,10 +14862,11 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string name = layout.name();
-        final Ui.Func_ui_layout_from_ui_orig_parent fn_layout = layout.fn_layout();
-        final Ui.Type_ui uichg = Core.vx_any_from_func(Ui.t_ui, fn_layout, uiarg, uiorig, parent);
-        return uichg;
+        Core.Type_string name = layout.name();
+        Ui.Func_ui_layout_from_ui_orig_parent fn_layout = layout.fn_layout();
+        Ui.Type_ui uichg = Core.vx_any_from_func(Ui.t_ui, fn_layout, uiarg, uiorig, parent);
+        Core.Type_any output_1 = uichg;
+        return output_1;
       })
     );
     return output;
@@ -14908,8 +14959,8 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string uid = uiarg.uid();
-        return Core.f_if_2(
+        Core.Type_string uid = uiarg.uid();
+        Core.Type_any output_3 = Core.f_if_2(
           Ui.t_ui,
           Core.vx_new(Core.t_thenelselist,
             Core.f_then(
@@ -14947,13 +14998,13 @@ public final class Ui {
                 return Core.f_let(
                   Ui.t_ui,
                   Core.t_any_from_func.vx_fn_new(() -> {
-                    final Core.Type_int afterpos = Core.f_plus(
+                    Core.Type_int afterpos = Core.f_plus(
                       Core.f_length(uid),
                       Core.vx_new_int(2)
                     );
-                    final Core.Type_string after = Type.f_string_from_string_start(find, afterpos);
-                    final Core.Type_int pos = Type.f_int_from_string_find(after, Core.vx_new_string("/"));
-                    final Core.Type_string subpart = Core.f_if_2(
+                    Core.Type_string after = Type.f_string_from_string_start(find, afterpos);
+                    Core.Type_int pos = Type.f_int_from_string_find(after, Core.vx_new_string("/"));
+                    Core.Type_string subpart = Core.f_if_2(
                       Core.t_string,
                       Core.vx_new(Core.t_thenelselist,
                           Core.f_then(
@@ -14974,7 +15025,7 @@ public final class Ui {
                           )
                       )
                     );
-                    final Core.Type_string subfind = Core.f_if_2(
+                    Core.Type_string subfind = Core.f_if_2(
                       Core.t_string,
                       Core.vx_new(Core.t_thenelselist,
                           Core.f_then(
@@ -14994,7 +15045,7 @@ public final class Ui {
                           )
                       )
                     );
-                    return Core.f_if_2(
+                    Core.Type_any output_2 = Core.f_if_2(
                       Ui.t_ui,
                       Core.vx_new(Core.t_thenelselist,
                         Core.f_then(
@@ -15005,21 +15056,24 @@ public final class Ui {
                             return Core.f_let(
                               Ui.t_ui,
                               Core.t_any_from_func.vx_fn_new(() -> {
-                                final Ui.Type_uimap uimap = uiarg.uimap();
-                                final Ui.Type_ui subui = Core.f_any_from_map(Ui.t_ui, uimap, subfind);
-                                return Ui.f_ui_from_ui_find(subui, find);
+                                Ui.Type_uimap uimap = uiarg.uimap();
+                                Ui.Type_ui subui = Core.f_any_from_map(Ui.t_ui, uimap, subfind);
+                                Core.Type_any output_1 = Ui.f_ui_from_ui_find(subui, find);
+                                return output_1;
                               })
                             );
                           })
                         )
                       )
                     );
+                    return output_2;
                   })
                 );
               })
             )
           )
         );
+        return output_3;
       })
     );
     return output;
@@ -15125,55 +15179,57 @@ public final class Ui {
             return Core.f_let(
               Ui.t_ui,
               Core.t_any_from_func.vx_fn_new(() -> {
-                final Ui.Type_uimap uimap = ui.uimap();
-                final Ui.Type_uilist uilist1 = Ui.f_uilist_from_uimap(uimap);
-                final Ui.Type_uilist uilist2 = Core.f_list_from_list_intany(
+                Ui.Type_uimap uimap = ui.uimap();
+                Ui.Type_uilist uilist1 = Ui.f_uilist_from_uimap(uimap);
+                Ui.Type_uilist uilist2 = Core.f_list_from_list_intany(
                   Ui.t_uilist,
                   uilist1,
                   Core.t_any_from_int_any.vx_fn_new((posval_any, uival_any) -> {
                     Core.Type_int posval = Core.f_any_from_any(Core.t_int, posval_any);
                     Ui.Type_ui uival = Core.f_any_from_any(Ui.t_ui, uival_any);
-                    return 
-                      Core.f_if_2(
-                        Ui.t_ui,
-                        Core.vx_new(Core.t_thenelselist,
-                          Core.f_then(
-                            Core.t_boolean_from_func.vx_fn_new(() -> {
-                              return Core.f_eq(posval, selected);
-                            }),
-                            Core.t_any_from_func.vx_fn_new(() -> {
-                              return Core.f_copy(
-                                uival,
-                                Core.vx_new(Core.t_anylist,
-                                    Core.vx_new_string(":selected"),
-                                    Core.vx_new_boolean(true)
-                                )
-                              );
-                            })
-                          ),
-                          Core.f_else(
-                            Core.t_any_from_func.vx_fn_new(() -> {
-                              return Core.f_copy(
-                                uival,
-                                Core.vx_new(Core.t_anylist,
-                                    Core.vx_new_string(":selected"),
-                                    Core.vx_new_boolean(false)
-                                )
-                              );
-                            })
+                    Core.Type_any output_1 = 
+                        Core.f_if_2(
+                          Ui.t_ui,
+                          Core.vx_new(Core.t_thenelselist,
+                            Core.f_then(
+                              Core.t_boolean_from_func.vx_fn_new(() -> {
+                                return Core.f_eq(posval, selected);
+                              }),
+                              Core.t_any_from_func.vx_fn_new(() -> {
+                                return Core.f_copy(
+                                  uival,
+                                  Core.vx_new(Core.t_anylist,
+                                      Core.vx_new_string(":selected"),
+                                      Core.vx_new_boolean(true)
+                                  )
+                                );
+                              })
+                            ),
+                            Core.f_else(
+                              Core.t_any_from_func.vx_fn_new(() -> {
+                                return Core.f_copy(
+                                  uival,
+                                  Core.vx_new(Core.t_anylist,
+                                      Core.vx_new_string(":selected"),
+                                      Core.vx_new_boolean(false)
+                                  )
+                                );
+                              })
+                            )
                           )
-                        )
-                      );
+                        );
+                    return output_1;
                   })
                 );
-                final Ui.Type_uimap childmap = Ui.f_uimap_from_uilist(uilist2);
-                return Core.f_copy(
+                Ui.Type_uimap childmap = Ui.f_uimap_from_uilist(uilist2);
+                Core.Type_any output_2 = Core.f_copy(
                   ui,
                   Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":uimap"),
                     childmap
                   )
                 );
+                return output_2;
               })
             );
           })
@@ -15282,8 +15338,9 @@ public final class Ui {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_stringlist uidlist = Ui.f_stringlist_selected_from_ui(ui);
-        return Core.f_first_from_list(Core.t_string, uidlist);
+        Core.Type_stringlist uidlist = Ui.f_stringlist_selected_from_ui(ui);
+        Core.Type_any output_1 = Core.f_first_from_list(Core.t_string, uidlist);
+        return output_1;
       })
     );
     return output;
@@ -15474,22 +15531,23 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_uiengine,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_stylesheet stylesheet = uiengine.stylesheet();
-        final Ui.Type_ui ui = uiengine.ui();
-        final Ui.Type_layoutengine layoutengine = uiengine.layoutengine();
-        final Core.Type_boolean issetstate = Ui.f_boolean_writestate_from_uiengine(context, uiengine);
-        final Ui.Func_stylesheet_render stylesheetrender = layoutengine.stylesheetrender();
-        final Ui.Type_stylesheet stylesheetrend = Core.vx_any_from_func(Ui.t_stylesheet, stylesheetrender, stylesheet);
-        final Ui.Type_ui uiaddlayout = Ui.f_ui_addlayout_from_ui_layoutengine(ui, layoutengine);
-        final Core.Type_boolean isuiwrite = Ui.f_boolean_writestate_from_uiapp(context, uiaddlayout);
-        final Ui.Type_ui uirendered = Ui.f_ui_layout(uiaddlayout);
-        return Core.f_copy(
+        Ui.Type_stylesheet stylesheet = uiengine.stylesheet();
+        Ui.Type_ui ui = uiengine.ui();
+        Ui.Type_layoutengine layoutengine = uiengine.layoutengine();
+        Core.Type_boolean issetstate = Ui.f_boolean_writestate_from_uiengine(context, uiengine);
+        Ui.Func_stylesheet_render stylesheetrender = layoutengine.stylesheetrender();
+        Ui.Type_stylesheet stylesheetrend = Core.vx_any_from_func(Ui.t_stylesheet, stylesheetrender, stylesheet);
+        Ui.Type_ui uiaddlayout = Ui.f_ui_addlayout_from_ui_layoutengine(ui, layoutengine);
+        Core.Type_boolean isuiwrite = Ui.f_boolean_writestate_from_uiapp(context, uiaddlayout);
+        Ui.Type_ui uirendered = Ui.f_ui_layout(uiaddlayout);
+        Core.Type_any output_1 = Core.f_copy(
           uiengine,
           Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":ui"),
             uirendered
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -15594,21 +15652,23 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_uilist,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uimap uimap = uiarg.uimap();
-        final Ui.Type_uilist uilist = Ui.f_uilist_from_uimap(uimap);
-        return Collection.f_list_from_list_filter(
+        Ui.Type_uimap uimap = uiarg.uimap();
+        Ui.Type_uilist uilist = Ui.f_uilist_from_uimap(uimap);
+        Core.Type_any output_2 = Collection.f_list_from_list_filter(
           Ui.t_uilist,
           uilist,
           Core.t_any_from_any.vx_fn_new((item_any) -> {
             Ui.Type_ui item = Core.f_any_from_any(Ui.t_ui, item_any);
-            return 
-            Core.f_if(
-              Ui.t_ui,
-              item.selected(),
-              item
-            );
+            Core.Type_any output_1 = 
+              Core.f_if(
+                Ui.t_ui,
+                item.selected(),
+                item
+              );
+            return output_1;
           })
         );
+        return output_2;
       })
     );
     return output;
@@ -15713,23 +15773,25 @@ public final class Ui {
     output = Core.f_let(
       Ui.t_uilist,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uimap uimap = uiarg.uimap();
-        final Ui.Type_uilist uilist = Ui.f_uilist_from_uimap(uimap);
-        return Collection.f_list_from_list_filter(
+        Ui.Type_uimap uimap = uiarg.uimap();
+        Ui.Type_uilist uilist = Ui.f_uilist_from_uimap(uimap);
+        Core.Type_any output_2 = Collection.f_list_from_list_filter(
           Ui.t_uilist,
           uilist,
           Core.t_any_from_any.vx_fn_new((item_any) -> {
             Ui.Type_ui item = Core.f_any_from_any(Ui.t_ui, item_any);
-            return 
-            Core.f_if(
-              Ui.t_ui,
-              Core.f_not(
-                item.hidden()
-              ),
-              item
-            );
+            Core.Type_any output_1 = 
+              Core.f_if(
+                Ui.t_ui,
+                Core.f_not(
+                  item.hidden()
+                ),
+                item
+              );
+            return output_1;
           })
         );
+        return output_2;
       })
     );
     return output;
@@ -15836,7 +15898,8 @@ public final class Ui {
       Core.t_any_from_key_value.vx_fn_new((key_any, item_any) -> {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Ui.Type_ui item = Core.f_any_from_any(Ui.t_ui, item_any);
-        return item;
+        Core.Type_any output_1 = item;
+        return output_1;
       })
     );
     return output;
@@ -15934,8 +15997,9 @@ public final class Ui {
       Core.t_any_from_key_value.vx_fn_new((key_any, ui_any) -> {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, ui_any);
-        return 
-        Ui.f_ui_addlayout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
+        Core.Type_any output_1 = 
+          Ui.f_ui_addlayout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
+        return output_1;
       })
     );
     return output;
@@ -16031,14 +16095,15 @@ public final class Ui {
       Core.t_any_from_key_value.vx_fn_new((key_any, val_any) -> {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Ui.Type_ui val = Core.f_any_from_any(Ui.t_ui, val_any);
-        return 
-        Ui.f_ui_layout_from_ui_orig_parent(
-          val,
-          Core.f_empty(
-            Ui.t_ui
-          ),
-          parent
-        );
+        Core.Type_any output_1 = 
+          Ui.f_ui_layout_from_ui_orig_parent(
+            val,
+            Core.f_empty(
+              Ui.t_ui
+            ),
+            parent
+          );
+        return output_1;
       })
     );
     return output;
@@ -16144,8 +16209,9 @@ public final class Ui {
       uilist,
       Core.t_any_from_any.vx_fn_new((ui_any) -> {
         Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, ui_any);
-        return 
-        ui.uid();
+        Core.Type_any output_1 = 
+          ui.uid();
+        return output_1;
       })
     );
     return output;

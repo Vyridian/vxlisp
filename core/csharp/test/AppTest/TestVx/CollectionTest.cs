@@ -24,13 +24,15 @@ public class CollectionTest {
                 Vx.Core.vx_new_int(1),
                 Vx.Core.t_boolean_from_any.vx_fn_new((current_any) => {
                   Vx.Core.Type_int current = Vx.Core.f_any_from_any(Vx.Core.t_int, current_any);
-                  return 
-                  Vx.Core.f_gt(current, Vx.Core.vx_new_int(6));
+                  Vx.Core.Type_any output_14 = 
+                    Vx.Core.f_gt(current, Vx.Core.vx_new_int(6));
+                  return output_14;
                 }),
                 Vx.Core.t_any_from_any.vx_fn_new((current_any) => {
                   Vx.Core.Type_int current = Vx.Core.f_any_from_any(Vx.Core.t_int, current_any);
-                  return 
-                  Vx.Core.f_plus(current, current);
+                  Vx.Core.Type_any output_15 = 
+                    Vx.Core.f_plus(current, current);
+                  return output_15;
                 })
               )
             )
@@ -61,13 +63,15 @@ public class CollectionTest {
                 Vx.Core.vx_new_int(1),
                 Vx.Core.t_boolean_from_any.vx_fn_new((current_any) => {
                   Vx.Core.Type_int current = Vx.Core.f_any_from_any(Vx.Core.t_int, current_any);
-                  return 
-                  Vx.Core.f_lt(current, Vx.Core.vx_new_int(5));
+                  Vx.Core.Type_any output_16 = 
+                    Vx.Core.f_lt(current, Vx.Core.vx_new_int(5));
+                  return output_16;
                 }),
                 Vx.Core.t_any_from_any.vx_fn_new((current_any) => {
                   Vx.Core.Type_int current = Vx.Core.f_any_from_any(Vx.Core.t_int, current_any);
-                  return 
-                  Vx.Core.f_plus(current, current);
+                  Vx.Core.Type_any output_17 = 
+                    Vx.Core.f_plus(current, current);
+                  return output_17;
                 })
               )
             )
@@ -227,8 +231,9 @@ public class CollectionTest {
                 Vx.Core.vx_new_int(3),
                 Vx.Core.t_any_from_int.vx_fn_new((current_any) => {
                   Vx.Core.Type_int current = Vx.Core.f_any_from_any(Vx.Core.t_int, current_any);
-                  return 
-                  Vx.Core.f_multiply(current, current);
+                  Vx.Core.Type_any output_18 = 
+                    Vx.Core.f_multiply(current, current);
+                  return output_18;
                 })
               )
             )
@@ -325,26 +330,27 @@ public class CollectionTest {
                 ),
                 Vx.Core.t_any_from_any.vx_fn_new((val_any) => {
                   Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, val_any);
-                  return 
-                  Vx.Core.f_if_2(
-                    Vx.Core.t_string,
-                    Vx.Core.vx_new(Vx.Core.t_thenelselist,
-                      Vx.Core.f_then(
-                        Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                          return Vx.Type.f_is_string(val);
-                        }),
-                        Vx.Core.t_any_from_func.vx_fn_new(() => {
-                          return Vx.Core.f_new(
-                            Vx.Core.t_string,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
-                                val,
-                                Vx.Core.vx_new_string("1")
-                            )
-                          );
-                        })
+                  Vx.Core.Type_any output_19 = 
+                    Vx.Core.f_if_2(
+                      Vx.Core.t_string,
+                      Vx.Core.vx_new(Vx.Core.t_thenelselist,
+                        Vx.Core.f_then(
+                          Vx.Core.t_boolean_from_func.vx_fn_new(() => {
+                            return Vx.Type.f_is_string(val);
+                          }),
+                          Vx.Core.t_any_from_func.vx_fn_new(() => {
+                            return Vx.Core.f_new(
+                              Vx.Core.t_string,
+                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  val,
+                                  Vx.Core.vx_new_string("1")
+                              )
+                            );
+                          })
+                        )
                       )
-                    )
-                  );
+                    );
+                  return output_19;
                 })
               )
             )

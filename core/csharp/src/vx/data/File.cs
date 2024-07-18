@@ -1080,7 +1080,7 @@ public static class File {
           path,
           Vx.Core.f_minus1(pos)
         );
-        return Vx.Core.f_new(
+        Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Data.File.t_file,
           Vx.Core.vx_new(Vx.Core.t_anylist,
             Vx.Core.vx_new_string(":name"),
@@ -1089,6 +1089,7 @@ public static class File {
             pth
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -1444,7 +1445,7 @@ public static class File {
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_string path = Vx.Data.File.f_path_from_file(file);
         Vx.Core.Type_string name = Vx.Data.File.f_name_from_file(file);
-        return Vx.Core.f_if_2(
+        Vx.Core.Type_any output_1 = Vx.Core.f_if_2(
           Vx.Core.t_string,
           Vx.Core.vx_new(Vx.Core.t_thenelselist,
             Vx.Core.f_then(
@@ -1469,6 +1470,7 @@ public static class File {
             )
           )
         );
+        return output_1;
       })
     );
     return output;

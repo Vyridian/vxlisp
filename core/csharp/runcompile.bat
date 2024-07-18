@@ -1,1 +1,2 @@
-dotnet run --project ./src/App
+cls
+dotnet build ./src/App

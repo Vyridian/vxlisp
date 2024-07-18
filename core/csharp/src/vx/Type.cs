@@ -1228,11 +1228,12 @@ public static class Type {
       Vx.Core.t_any_from_reduce.vx_fn_new((result_any, type_any) => {
         Vx.Core.Type_boolean result = Vx.Core.f_any_from_any(Vx.Core.t_boolean, result_any);
         Vx.Core.Type_any type = Vx.Core.f_any_from_any(Vx.Core.t_any, type_any);
-        return 
-        Vx.Core.f_or(
-          result,
-          Vx.Type.f_is_type(val, type)
-        );
+        Vx.Core.Type_any output_1 = 
+          Vx.Core.f_or(
+            result,
+            Vx.Type.f_is_type(val, type)
+          );
+        return output_1;
       })
     );
     return output;
@@ -1419,7 +1420,7 @@ public static class Type {
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_int pos = Vx.Type.f_int_from_string_findkeyword(text, Vx.Core.vx_new_string(":nonwhitespace"));
-        return Vx.Core.f_if_2(
+        Vx.Core.Type_any output_2 = Vx.Core.f_if_2(
           Vx.Core.t_string,
           Vx.Core.vx_new(Vx.Core.t_thenelselist,
             Vx.Core.f_then(
@@ -1447,13 +1448,15 @@ public static class Type {
                       Vx.Core.vx_new_string(""),
                       Vx.Core.vx_new_string("\n")
                     );
-                    return Vx.Core.f_string_from_string_find_replace(rest, indent, outdent);
+                    Vx.Core.Type_any output_1 = Vx.Core.f_string_from_string_find_replace(rest, indent, outdent);
+                    return output_1;
                   })
                 );
               })
             )
           )
         );
+        return output_2;
       })
     );
     return output;

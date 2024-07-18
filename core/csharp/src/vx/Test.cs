@@ -3528,12 +3528,13 @@ public static class Test {
               nodes
           )
         );
-        return Vx.Core.f_new(
+        Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Web.Html.t_div,
           Vx.Core.vx_new(Vx.Core.t_anylist,
             details
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -3644,7 +3645,7 @@ public static class Test {
           Vx.Test.c_stylesheet_test,
           Vx.Core.vx_new_string(".coveragenums")
         );
-        return Vx.Core.f_new(
+        Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Web.Html.t_div,
           Vx.Core.vx_new(Vx.Core.t_anylist,
             Vx.Core.f_new(
@@ -3743,6 +3744,7 @@ public static class Test {
             )
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -4339,7 +4341,7 @@ public static class Test {
           Vx.Test.c_stylesheet_test,
           stylename
         );
-        return Vx.Core.f_new(
+        Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Web.Html.t_p,
           Vx.Core.vx_new(Vx.Core.t_anylist,
             Vx.Core.vx_new_string(":style"),
@@ -4348,6 +4350,7 @@ public static class Test {
             text
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -4558,24 +4561,26 @@ public static class Test {
       Vx.Core.t_any_from_func_async.vx_fn_new(() => {
         Vx.Test.Type_testdescribelist describelist = testcase.describelist();
         Task<Vx.Test.Type_testdescribelist> future_resolvedlist = Vx.Test.f_resolve_testdescribelist(describelist);
-        return Vx.Core.vx_async_from_async_fn(future_resolvedlist, (resolvedlist) => {
+        Task<Vx.Core.Type_any> output_1 = Vx.Core.vx_async_from_async_fn(future_resolvedlist, (resolvedlist) => {;
           Vx.Core.Type_booleanlist passfaillist = Vx.Core.f_list_from_list_1(
             Vx.Core.t_booleanlist,
             resolvedlist,
             Vx.Core.t_any_from_any.vx_fn_new((testdescribe_any) => {
               Vx.Test.Type_testdescribe testdescribe = Vx.Core.f_any_from_any(Vx.Test.t_testdescribe, testdescribe_any);
-              return 
-                  Vx.Core.f_let(
-                    Vx.Core.t_boolean,
-                    Vx.Core.t_any_from_func.vx_fn_new(() => {
-                      Vx.Test.Type_testresult testresult = testdescribe.testresult();
-                      return testresult.passfail();
-                    })
-                  );
+              Vx.Core.Type_any output_2 = 
+                    Vx.Core.f_let(
+                      Vx.Core.t_boolean,
+                      Vx.Core.t_any_from_func.vx_fn_new(() => {
+                        Vx.Test.Type_testresult testresult = testdescribe.testresult();
+                        Vx.Core.Type_any output_3 = testresult.passfail();
+                        return output_3;
+                      })
+                    );
+              return output_2;
             })
           );
           Vx.Core.Type_boolean passfail = Vx.Core.f_and_1(passfaillist);
-          return Vx.Core.f_copy(
+          Vx.Core.Type_any output_4 = Vx.Core.f_copy(
             testcase,
             Vx.Core.vx_new(Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":passfail"),
@@ -4584,7 +4589,9 @@ public static class Test {
                   resolvedlist
             )
           );
+          return output_4;
         });
+        return output_1;
       })
     );
     return output;
@@ -4781,15 +4788,17 @@ public static class Test {
       Vx.Core.t_any_from_func_async.vx_fn_new(() => {
         Vx.Test.Type_testresult testresult = testdescribe.testresult();
         Task<Vx.Test.Type_testresult> future_resolved = Vx.Test.f_resolve_testresult(testresult);
-        return Vx.Core.vx_async_from_async_fn(future_resolved, (resolved) => {
-          return Vx.Core.f_copy(
+        Task<Vx.Core.Type_any> output_1 = Vx.Core.vx_async_from_async_fn(future_resolved, (resolved) => {;
+          Vx.Core.Type_any output_2 = Vx.Core.f_copy(
             testdescribe,
             Vx.Core.vx_new(Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":testresult"),
                   resolved
             )
           );
+          return output_2;
         });
+        return output_1;
       })
     );
     return output;
@@ -4986,18 +4995,19 @@ public static class Test {
       Vx.Core.t_any_from_func_async.vx_fn_new(() => {
         Vx.Test.Type_testcaselist testcaselist = testpackage.caselist();
         Task<Vx.Test.Type_testcaselist> future_resolvedlist = Vx.Test.f_resolve_testcaselist(testcaselist);
-        return Vx.Core.vx_async_from_async_fn(future_resolvedlist, (resolvedlist) => {
+        Task<Vx.Core.Type_any> output_1 = Vx.Core.vx_async_from_async_fn(future_resolvedlist, (resolvedlist) => {;
           Vx.Core.Type_booleanlist passfaillist = Vx.Core.f_list_from_list_1(
             Vx.Core.t_booleanlist,
             resolvedlist,
             Vx.Core.t_any_from_any.vx_fn_new((testcase_any) => {
               Vx.Test.Type_testcase testcase = Vx.Core.f_any_from_any(Vx.Test.t_testcase, testcase_any);
-              return 
-                  testcase.passfail();
+              Vx.Core.Type_any output_2 = 
+                    testcase.passfail();
+              return output_2;
             })
           );
           Vx.Core.Type_boolean passfail = Vx.Core.f_and_1(passfaillist);
-          return Vx.Core.f_copy(
+          Vx.Core.Type_any output_3 = Vx.Core.f_copy(
             testpackage,
             Vx.Core.vx_new(Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":passfail"),
@@ -5006,7 +5016,9 @@ public static class Test {
                   resolvedlist
             )
           );
+          return output_3;
         });
+        return output_1;
       })
     );
     return output;
@@ -5204,8 +5216,8 @@ public static class Test {
         Vx.Core.Func_any_from_func_async fn_actual = testresult.fn_actual();
         Vx.Core.Type_any expected = testresult.expected();
         Task<Vx.Core.Type_any> future_actual = Vx.Core.f_resolve_async(Vx.Core.t_any, fn_actual);
-        return Vx.Core.vx_async_from_async_fn(future_actual, (actual) => {
-          return Vx.Core.f_if_2(
+        Task<Vx.Core.Type_any> output_1 = Vx.Core.vx_async_from_async_fn(future_actual, (actual) => {;
+          Vx.Core.Type_any output_3 = Vx.Core.f_if_2(
             Vx.Test.t_testresult,
             Vx.Core.vx_new(Vx.Core.t_thenelselist,
                   Vx.Core.f_then(
@@ -5222,7 +5234,7 @@ public static class Test {
                         Vx.Test.t_testresult,
                         Vx.Core.t_any_from_func.vx_fn_new(() => {
                           Vx.Core.Type_boolean passfail = Vx.Core.f_eq(expected, actual);
-                          return Vx.Core.f_copy(
+                          Vx.Core.Type_any output_2 = Vx.Core.f_copy(
                             testresult,
                             Vx.Core.vx_new(Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":passfail"),
@@ -5231,13 +5243,16 @@ public static class Test {
                               actual
                             )
                           );
+                          return output_2;
                         })
                       );
                     })
                   )
             )
           );
+          return output_3;
         });
+        return output_1;
       })
     );
     return output;
@@ -6650,7 +6665,7 @@ public static class Test {
           Vx.Test.c_stylesheet_test,
           Vx.Core.vx_new_string(".preformatted")
         );
-        return Vx.Core.f_new(
+        Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Web.Html.t_tr,
           Vx.Core.vx_new(Vx.Core.t_anylist,
             Vx.Core.f_new(
@@ -6717,6 +6732,7 @@ public static class Test {
             )
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -6813,15 +6829,17 @@ public static class Test {
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Test.Type_testdescribelist describelist = testcase.describelist();
         Vx.Core.Type_string casename = testcase.casename();
-        return Vx.Core.f_list_from_list_1(
+        Vx.Core.Type_any output_2 = Vx.Core.f_list_from_list_1(
           Vx.Web.Html.t_trlist,
           describelist,
           Vx.Core.t_any_from_any.vx_fn_new((testdescribe_any) => {
             Vx.Test.Type_testdescribe testdescribe = Vx.Core.f_any_from_any(Vx.Test.t_testdescribe, testdescribe_any);
-            return 
-            Vx.Test.f_tr_from_testdescribe_casename(testdescribe, casename);
+            Vx.Core.Type_any output_1 = 
+              Vx.Test.f_tr_from_testdescribe_casename(testdescribe, casename);
+            return output_1;
           })
         );
+        return output_2;
       })
     );
     return output;

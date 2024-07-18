@@ -32,7 +32,7 @@ public final class UiTest {
               Core.f_let(
                 Ui.t_ui,
                 Core.t_any_from_func.vx_fn_new(() -> {
-                  final Core.Type_boolean iswrite = Ui.f_boolean_writestate_from_uiapp(
+                  Core.Type_boolean iswrite = Ui.f_boolean_writestate_from_uiapp(
                     context,
                     Core.f_new(
                       Ui.t_ui,
@@ -42,9 +42,10 @@ public final class UiTest {
                       )
                     )
                   );
-                  final Ui.Type_ui appui = Ui.f_ui_readstate_uiapp(context);
-                  final Core.Type_boolean isremoved = Ui.f_boolean_removestate_uiapp(context);
-                  return appui;
+                  Ui.Type_ui appui = Ui.f_ui_readstate_uiapp(context);
+                  Core.Type_boolean isremoved = Ui.f_boolean_removestate_uiapp(context);
+                  Core.Type_any output_1 = appui;
+                  return output_1;
                 })
               )
             )
@@ -113,7 +114,7 @@ public final class UiTest {
               Core.f_let(
                 Ui.t_ui,
                 Core.t_any_from_func.vx_fn_new(() -> {
-                  final Core.Type_boolean iswrite = Ui.f_boolean_writestate_from_uiapp(
+                  Core.Type_boolean iswrite = Ui.f_boolean_writestate_from_uiapp(
                     context,
                     Core.f_new(
                       Ui.t_ui,
@@ -123,7 +124,8 @@ public final class UiTest {
                       )
                     )
                   );
-                  return Ui.f_ui_readstate_uiapp(context);
+                  Core.Type_any output_1 = Ui.f_ui_readstate_uiapp(context);
+                  return output_1;
                 })
               )
             )
@@ -158,7 +160,7 @@ public final class UiTest {
               Core.f_let(
                 Ui.t_ui,
                 Core.t_any_from_func.vx_fn_new(() -> {
-                  final Ui.Type_ui uiapp = Core.f_new(
+                  Ui.Type_ui uiapp = Core.f_new(
                     Ui.t_ui,
                     Core.vx_new(Core.t_anylist,
                         Core.vx_new_string(":uid"),
@@ -189,10 +191,11 @@ public final class UiTest {
                         )
                     )
                   );
-                  final Core.Type_boolean iswrite = Ui.f_boolean_writestate_from_uiapp(context, uiapp);
-                  final Ui.Type_ui readval = Ui.f_ui_readstate_from_uid(context, Core.vx_new_string("a/b/c"));
-                  final Core.Type_boolean isremoved = Ui.f_boolean_removestate_uiapp(context);
-                  return readval;
+                  Core.Type_boolean iswrite = Ui.f_boolean_writestate_from_uiapp(context, uiapp);
+                  Ui.Type_ui readval = Ui.f_ui_readstate_from_uid(context, Core.vx_new_string("a/b/c"));
+                  Core.Type_boolean isremoved = Ui.f_boolean_removestate_uiapp(context);
+                  Core.Type_any output_1 = readval;
+                  return output_1;
                 })
               )
             )

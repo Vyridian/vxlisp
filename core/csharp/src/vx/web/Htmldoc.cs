@@ -762,9 +762,11 @@ public static class Htmldoc {
       Vx.Core.t_any_from_func_async.vx_fn_new(() => {
         Vx.Core.Type_string text = Vx.Web.Htmldoc.f_string_from_stylesheet(stylesheet);
         Task<Vx.Core.Type_boolean> future_iswrite = Vx.Web.Htmldoc.f_boolean_write_stylesheet_from_string(text);
-        return Vx.Core.vx_async_from_async_fn(future_iswrite, (iswrite) => {
-          return iswrite;
+        Task<Vx.Core.Type_any> output_1 = Vx.Core.vx_async_from_async_fn(future_iswrite, (iswrite) => {;
+          Vx.Core.Type_any output_2 = iswrite;
+          return output_2;
         });
+        return output_1;
       })
     );
     return output;
@@ -1195,7 +1197,8 @@ public static class Htmldoc {
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Web.Html.Type_stylelist stylelist = Vx.Web.Html.f_styles_from_stylesheet(stylesheet);
         Vx.Core.Type_string text = Vx.Web.Html.f_string_from_stylelist_indent(stylelist, Vx.Core.vx_new_int(0));
-        return text;
+        Vx.Core.Type_any output_1 = text;
+        return output_1;
       })
     );
     return output;

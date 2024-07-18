@@ -288,8 +288,9 @@ public final class State {
     output = Core.f_let(
       generic_any_1,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final State.Type_valuemap submap = State.f_valuemap_readstate_from_mapname(context, mapname);
-        return Core.f_any_from_map(generic_any_1, submap, name);
+        State.Type_valuemap submap = State.f_valuemap_readstate_from_mapname(context, mapname);
+        Core.Type_any output_1 = Core.f_any_from_map(generic_any_1, submap, name);
+        return output_1;
       })
     );
     return output;
@@ -500,14 +501,15 @@ public final class State {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_statelistenermap statelistenermap = State.f_statelistenermap_readstate(context);
-        return Core.f_boolean_write_from_map_name_value(
+        Core.Type_statelistenermap statelistenermap = State.f_statelistenermap_readstate(context);
+        Core.Type_any output_1 = Core.f_boolean_write_from_map_name_value(
           statelistenermap,
           name,
           Core.f_empty(
             Core.t_statelistener
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -603,8 +605,8 @@ public final class State {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final State.Type_valuemap valmap = State.f_any_readstate_from_name(State.t_valuemap, context, mapname);
-        return Core.f_if_2(
+        State.Type_valuemap valmap = State.f_any_readstate_from_name(State.t_valuemap, context, mapname);
+        Core.Type_any output_2 = Core.f_if_2(
           Core.t_boolean,
           Core.vx_new(Core.t_thenelselist,
             Core.f_then(
@@ -615,14 +617,14 @@ public final class State {
                 return Core.f_let(
                   Core.t_boolean,
                   Core.t_any_from_func.vx_fn_new(() -> {
-                    final State.Type_valuemap valmap2 = Core.f_new(
+                    State.Type_valuemap valmap2 = Core.f_new(
                       State.t_valuemap,
                       Core.vx_new(Core.t_anylist,
                           name,
                           value
                       )
                     );
-                    final Core.Type_statelistener listener = Core.f_new(
+                    Core.Type_statelistener listener = Core.f_new(
                       Core.t_statelistener,
                       Core.vx_new(Core.t_anylist,
                           Core.vx_new_string(":name"),
@@ -631,7 +633,8 @@ public final class State {
                           valmap2
                       )
                     );
-                    return State.f_boolean_writestate_from_statelistener(context, listener);
+                    Core.Type_any output_1 = State.f_boolean_writestate_from_statelistener(context, listener);
+                    return output_1;
                   })
                 );
               })
@@ -643,6 +646,7 @@ public final class State {
             )
           )
         );
+        return output_2;
       })
     );
     return output;
@@ -736,8 +740,8 @@ public final class State {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_statelistener listenercur = State.f_statelistener_readstate_from_name(context, name);
-        final Core.Type_statelistener listenerchg = Core.f_copy(
+        Core.Type_statelistener listenercur = State.f_statelistener_readstate_from_name(context, name);
+        Core.Type_statelistener listenerchg = Core.f_copy(
           listenercur,
           Core.vx_new(Core.t_anylist,
               Core.vx_new_string(":name"),
@@ -746,7 +750,8 @@ public final class State {
               value
           )
         );
-        return State.f_boolean_writestate_from_statelistener(context, listenerchg);
+        Core.Type_any output_1 = State.f_boolean_writestate_from_statelistener(context, listenerchg);
+        return output_1;
       })
     );
     return output;
@@ -852,9 +857,10 @@ public final class State {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_statelistenermap statelistenermap = State.f_statelistenermap_readstate(context);
-        final Core.Type_string name = statelistener.name();
-        return Core.f_boolean_write_from_map_name_value(statelistenermap, name, statelistener);
+        Core.Type_statelistenermap statelistenermap = State.f_statelistenermap_readstate(context);
+        Core.Type_string name = statelistener.name();
+        Core.Type_any output_1 = Core.f_boolean_write_from_map_name_value(statelistenermap, name, statelistener);
+        return output_1;
       })
     );
     return output;
@@ -1242,8 +1248,9 @@ public final class State {
     output = Core.f_let(
       Core.t_statelistener,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_statelistenermap statelistenermap = State.f_statelistenermap_readstate(context);
-        return Core.f_any_from_map(Core.t_statelistener, statelistenermap, name);
+        Core.Type_statelistenermap statelistenermap = State.f_statelistenermap_readstate(context);
+        Core.Type_any output_1 = Core.f_any_from_map(Core.t_statelistener, statelistenermap, name);
+        return output_1;
       })
     );
     return output;
@@ -1333,8 +1340,9 @@ public final class State {
     output = Core.f_let(
       Core.t_statelistenermap,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_state state = State.f_state_from_context(context);
-        return state.statelistenermap();
+        Core.Type_state state = State.f_state_from_context(context);
+        Core.Type_any output_1 = state.statelistenermap();
+        return output_1;
       })
     );
     return output;
@@ -1440,8 +1448,9 @@ public final class State {
     output = Core.f_let(
       Core.t_any,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_statelistener statelistener = State.f_statelistener_readstate_from_name(context, name);
-        return statelistener.value();
+        Core.Type_statelistener statelistener = State.f_statelistener_readstate_from_name(context, name);
+        Core.Type_any output_1 = statelistener.value();
+        return output_1;
       })
     );
     return output;
@@ -1547,9 +1556,10 @@ public final class State {
     output = Core.f_let(
       State.t_valuemap,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_any value = State.f_value_readstate_from_name(context, mapname);
-        final State.Type_valuemap valmap = Core.f_any_from_any(State.t_valuemap, value);
-        return valmap;
+        Core.Type_any value = State.f_value_readstate_from_name(context, mapname);
+        State.Type_valuemap valmap = Core.f_any_from_any(State.t_valuemap, value);
+        Core.Type_any output_1 = valmap;
+        return output_1;
       })
     );
     return output;

@@ -464,7 +464,8 @@ public static class Translate {
               code
           )
         );
-        return Vx.Translate.f_translate(context, text);
+        Vx.Core.Type_any output_1 = Vx.Translate.f_translate(context, text);
+        return output_1;
       })
     );
     return output;
@@ -556,12 +557,13 @@ public static class Translate {
         Vx.Core.t_any_from_func.vx_fn_new(() => {
           Vx.Core.Type_stringmap wordmap = translation.wordmap();
           Vx.Core.Type_string xlate = Vx.Core.f_any_from_map(Vx.Core.t_string, wordmap, text);
-          return Vx.Core.f_if_1(
+          Vx.Core.Type_any output_1 = Vx.Core.f_if_1(
             Vx.Core.t_string,
             Vx.Core.f_is_empty(xlate),
             text,
             xlate
           );
+          return output_1;
         })
       )
     );
@@ -651,7 +653,8 @@ public static class Translate {
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_translation translation = Vx.Core.f_any_from_map(Vx.Core.t_translation, translationmap, name);
-        return Vx.Translate.f_translate_from_translation_string(translation, text);
+        Vx.Core.Type_any output_1 = Vx.Translate.f_translate_from_translation_string(translation, text);
+        return output_1;
       })
     );
     return output;
@@ -907,7 +910,8 @@ public static class Translate {
       Vx.Core.t_translation,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_translationmap translationmap = session.translationmap();
-        return Vx.Core.f_any_from_map(Vx.Core.t_translation, translationmap, name);
+        Vx.Core.Type_any output_1 = Vx.Core.f_any_from_map(Vx.Core.t_translation, translationmap, name);
+        return output_1;
       })
     );
     return output;
@@ -1005,8 +1009,9 @@ public static class Translate {
       translations,
       Vx.Core.t_any_from_any.vx_fn_new((translation_any) => {
         Vx.Core.Type_translation translation = Vx.Core.f_any_from_any(Vx.Core.t_translation, translation_any);
-        return 
-        translation.name();
+        Vx.Core.Type_any output_1 = 
+          translation.name();
+        return output_1;
       })
     );
     return output;

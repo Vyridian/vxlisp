@@ -1461,11 +1461,12 @@ public final class Type {
       Core.t_any_from_reduce.vx_fn_new((result_any, type_any) -> {
         Core.Type_boolean result = Core.f_any_from_any(Core.t_boolean, result_any);
         Core.Type_any type = Core.f_any_from_any(Core.t_any, type_any);
-        return 
-        Core.f_or(
-          result,
-          Type.f_is_type(val, type)
-        );
+        Core.Type_any output_1 = 
+          Core.f_or(
+            result,
+            Type.f_is_type(val, type)
+          );
+        return output_1;
       })
     );
     return output;
@@ -1670,8 +1671,8 @@ public final class Type {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_int pos = Type.f_int_from_string_findkeyword(text, Core.vx_new_string(":nonwhitespace"));
-        return Core.f_if_2(
+        Core.Type_int pos = Type.f_int_from_string_findkeyword(text, Core.vx_new_string(":nonwhitespace"));
+        Core.Type_any output_2 = Core.f_if_2(
           Core.t_string,
           Core.vx_new(Core.t_thenelselist,
             Core.f_then(
@@ -1687,25 +1688,27 @@ public final class Type {
                 return Core.f_let(
                   Core.t_string,
                   Core.t_any_from_func.vx_fn_new(() -> {
-                    final Core.Type_string indent = Type.f_string_from_string_end(
+                    Core.Type_string indent = Type.f_string_from_string_end(
                       text,
                       Core.f_minus1(pos)
                     );
-                    final Core.Type_string rest = Type.f_string_from_string_start(text, pos);
-                    final Core.Type_int linepos = Type.f_int_from_string_find(indent, Core.vx_new_string("\n"));
-                    final Core.Type_string outdent = Core.f_if_1(
+                    Core.Type_string rest = Type.f_string_from_string_start(text, pos);
+                    Core.Type_int linepos = Type.f_int_from_string_find(indent, Core.vx_new_string("\n"));
+                    Core.Type_string outdent = Core.f_if_1(
                       Core.t_string,
                       Core.f_eq(Core.vx_new_int(0), linepos),
                       Core.vx_new_string(""),
                       Core.vx_new_string("\n")
                     );
-                    return Core.f_string_from_string_find_replace(rest, indent, outdent);
+                    Core.Type_any output_1 = Core.f_string_from_string_find_replace(rest, indent, outdent);
+                    return output_1;
                   })
                 );
               })
             )
           )
         );
+        return output_2;
       })
     );
     return output;

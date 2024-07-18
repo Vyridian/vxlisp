@@ -458,8 +458,9 @@ public final class Uihtml {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string id = ui.uid();
-        return Htmldoc.f_boolean_remove_from_id(id);
+        Core.Type_string id = ui.uid();
+        Core.Type_any output_1 = Htmldoc.f_boolean_remove_from_id(id);
+        return output_1;
       })
     );
     return output;
@@ -765,11 +766,12 @@ public final class Uihtml {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string uid = ui.uid();
-        final Ui.Type_stylesheet stylesheetui = Ui.f_stylesheet_readstate(context);
-        final Html.Type_stylesheet stylesheethtml = Uihtml.f_stylesheet_from_stylesheet(stylesheetui);
-        final Core.Type_string styletext = Html.f_string_from_stylesheet_indent(stylesheethtml, Core.vx_new_int(0));
-        return Htmldoc.f_boolean_print_from_id_stylesheettext(uid, styletext);
+        Core.Type_string uid = ui.uid();
+        Ui.Type_stylesheet stylesheetui = Ui.f_stylesheet_readstate(context);
+        Html.Type_stylesheet stylesheethtml = Uihtml.f_stylesheet_from_stylesheet(stylesheetui);
+        Core.Type_string styletext = Html.f_string_from_stylesheet_indent(stylesheethtml, Core.vx_new_int(0));
+        Core.Type_any output_1 = Htmldoc.f_boolean_print_from_id_stylesheettext(uid, styletext);
+        return output_1;
       })
     );
     return output;
@@ -874,9 +876,10 @@ public final class Uihtml {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string id = ui.uid();
-        final Core.Type_string sclass = Uihtml.f_string_class_from_ui(ui);
-        return Htmldoc.f_boolean_write_from_id_attribute_value(id, Core.vx_new_string("class"), sclass);
+        Core.Type_string id = ui.uid();
+        Core.Type_string sclass = Uihtml.f_string_class_from_ui(ui);
+        Core.Type_any output_1 = Htmldoc.f_boolean_write_from_id_attribute_value(id, Core.vx_new_string("class"), sclass);
+        return output_1;
       })
     );
     return output;
@@ -981,10 +984,11 @@ public final class Uihtml {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uimap uimap = ui.uimap();
-        final Core.Type_boolean iswrite1 = Htmldoc.f_boolean_writeevents_from_ui(ui);
-        final Core.Type_boolean iswrite2 = Uihtml.f_boolean_writeeventsall_from_uimap(uimap);
-        return Core.f_and(iswrite1, iswrite2);
+        Ui.Type_uimap uimap = ui.uimap();
+        Core.Type_boolean iswrite1 = Htmldoc.f_boolean_writeevents_from_ui(ui);
+        Core.Type_boolean iswrite2 = Uihtml.f_boolean_writeeventsall_from_uimap(uimap);
+        Core.Type_any output_1 = Core.f_and(iswrite1, iswrite2);
+        return output_1;
       })
     );
     return output;
@@ -1089,17 +1093,19 @@ public final class Uihtml {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_booleanlist boollist = Core.f_list_from_map_1(
+        Core.Type_booleanlist boollist = Core.f_list_from_map_1(
           Core.t_booleanlist,
           uimap,
           Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
             Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
             Ui.Type_ui value = Core.f_any_from_any(Ui.t_ui, value_any);
-            return 
-              Uihtml.f_boolean_writeeventsall_from_ui(value);
+            Core.Type_any output_1 = 
+                Uihtml.f_boolean_writeeventsall_from_ui(value);
+            return output_1;
           })
         );
-        return Core.f_and_1(boollist);
+        Core.Type_any output_2 = Core.f_and_1(boollist);
+        return output_2;
       })
     );
     return output;
@@ -1488,13 +1494,13 @@ public final class Uihtml {
     output = Core.f_let(
       Html.t_div,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string uid = ui.uid();
-        final Ui.Type_uimap uimapchild = ui.uimap();
-        final Ui.Type_style uistyle = ui.style();
-        final Ui.Type_stylelist uistyles = ui.stylelist();
-        final Html.Type_style styleunique = Uihtml.f_style_from_style(uistyle);
-        final Html.Type_stylelist htmlstyles = Uihtml.f_stylelist_from_stylelist(uistyles);
-        return Core.f_new(
+        Core.Type_string uid = ui.uid();
+        Ui.Type_uimap uimapchild = ui.uimap();
+        Ui.Type_style uistyle = ui.style();
+        Ui.Type_stylelist uistyles = ui.stylelist();
+        Html.Type_style styleunique = Uihtml.f_style_from_style(uistyle);
+        Html.Type_stylelist htmlstyles = Uihtml.f_stylelist_from_stylelist(uistyles);
+        Core.Type_any output_1 = Core.f_new(
           Html.t_div,
           Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":id"),
@@ -1505,6 +1511,7 @@ public final class Uihtml {
             htmlstyles
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -1612,20 +1619,22 @@ public final class Uihtml {
       Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Ui.Type_ui value = Core.f_any_from_any(Ui.t_ui, value_any);
-        return 
-        Core.f_let(
-          Html.t_div,
-          Core.t_any_from_func.vx_fn_new(() -> {
-            final Core.Type_string uid = value.uid();
-            return Core.f_new(
-              Html.t_div,
-              Core.vx_new(Core.t_anylist,
-                Core.vx_new_string(":id"),
-                uid
-              )
-            );
-          })
-        );
+        Core.Type_any output_1 = 
+          Core.f_let(
+            Html.t_div,
+            Core.t_any_from_func.vx_fn_new(() -> {
+              Core.Type_string uid = value.uid();
+              Core.Type_any output_2 = Core.f_new(
+                Html.t_div,
+                Core.vx_new(Core.t_anylist,
+                  Core.vx_new_string(":id"),
+                  uid
+                )
+              );
+              return output_2;
+            })
+          );
+        return output_1;
       })
     );
     return output;
@@ -1733,20 +1742,22 @@ public final class Uihtml {
       Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Ui.Type_ui value = Core.f_any_from_any(Ui.t_ui, value_any);
-        return 
-        Core.f_let(
-          Html.t_div,
-          Core.t_any_from_func.vx_fn_new(() -> {
-            final Core.Type_string uid = value.uid();
-            return Core.f_new(
-              Html.t_div,
-              Core.vx_new(Core.t_anylist,
-                Core.vx_new_string(":id"),
-                uid
-              )
-            );
-          })
-        );
+        Core.Type_any output_1 = 
+          Core.f_let(
+            Html.t_div,
+            Core.t_any_from_func.vx_fn_new(() -> {
+              Core.Type_string uid = value.uid();
+              Core.Type_any output_2 = Core.f_new(
+                Html.t_div,
+                Core.vx_new(Core.t_anylist,
+                  Core.vx_new_string(":id"),
+                  uid
+                )
+              );
+              return output_2;
+            })
+          );
+        return output_1;
       })
     );
     return output;
@@ -1844,14 +1855,16 @@ public final class Uihtml {
       Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Ui.Type_ui value = Core.f_any_from_any(Ui.t_ui, value_any);
-        return 
-        Core.f_let(
-          Html.t_node,
-          Core.t_any_from_func.vx_fn_new(() -> {
-            final Ui.Type_ui origvalue = Core.f_any_from_map(Ui.t_ui, origmap, key);
-            return Uihtml.f_node_from_ui_orig_parent(value, origvalue, parent);
-          })
-        );
+        Core.Type_any output_1 = 
+          Core.f_let(
+            Html.t_node,
+            Core.t_any_from_func.vx_fn_new(() -> {
+              Ui.Type_ui origvalue = Core.f_any_from_map(Ui.t_ui, origmap, key);
+              Core.Type_any output_2 = Uihtml.f_node_from_ui_orig_parent(value, origvalue, parent);
+              return output_2;
+            })
+          );
+        return output_1;
       })
     );
     return output;
@@ -1945,11 +1958,11 @@ public final class Uihtml {
     output = Core.f_let(
       Html.t_node,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string uid = ui.uid();
-        final Ui.Type_uimap uimap = ui.uimap();
-        final Ui.Type_uimap origmap = orig.uimap();
-        final Html.Type_divchildlist children = Uihtml.f_divchildlist_from_uimap_origmap_parent(uimap, origmap, ui);
-        return Core.f_new(
+        Core.Type_string uid = ui.uid();
+        Ui.Type_uimap uimap = ui.uimap();
+        Ui.Type_uimap origmap = orig.uimap();
+        Html.Type_divchildlist children = Uihtml.f_divchildlist_from_uimap_origmap_parent(uimap, origmap, ui);
+        Core.Type_any output_1 = Core.f_new(
           Html.t_div,
           Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":id"),
@@ -1958,6 +1971,7 @@ public final class Uihtml {
             children
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -2051,14 +2065,14 @@ public final class Uihtml {
     output = Core.f_let(
       Html.t_node,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string uid = ui.uid();
-        final Ui.Type_uimap uimap = ui.uimap();
-        final Ui.Type_style uistyle = ui.style();
-        final Ui.Type_uimap origmap = orig.uimap();
-        final Html.Type_style style = Uihtml.f_style_from_style(uistyle);
-        final Html.Type_stylelist styles = Uihtml.f_stylelist_extra_from_ui(ui);
-        final Html.Type_divchildlist children = Uihtml.f_divchildlist_from_uimap_origmap_parent(uimap, origmap, ui);
-        return Core.f_new(
+        Core.Type_string uid = ui.uid();
+        Ui.Type_uimap uimap = ui.uimap();
+        Ui.Type_style uistyle = ui.style();
+        Ui.Type_uimap origmap = orig.uimap();
+        Html.Type_style style = Uihtml.f_style_from_style(uistyle);
+        Html.Type_stylelist styles = Uihtml.f_stylelist_extra_from_ui(ui);
+        Html.Type_divchildlist children = Uihtml.f_divchildlist_from_uimap_origmap_parent(uimap, origmap, ui);
+        Core.Type_any output_1 = Core.f_new(
           Html.t_div,
           Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":id"),
@@ -2071,6 +2085,7 @@ public final class Uihtml {
             children
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -2164,14 +2179,14 @@ public final class Uihtml {
     output = Core.f_let(
       Html.t_node,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string uid = ui.uid();
-        final Ui.Type_style uistyle = ui.style();
-        final Core.Type_any data = ui.data();
-        final File.Type_file file = Core.f_any_from_any(File.t_file, data);
-        final Core.Type_string path = File.f_pathfull_from_file(file);
-        final Html.Type_style style = Uihtml.f_style_from_style(uistyle);
-        final Html.Type_stylelist styles = Uihtml.f_stylelist_extra_from_ui(ui);
-        return Core.f_new(
+        Core.Type_string uid = ui.uid();
+        Ui.Type_style uistyle = ui.style();
+        Core.Type_any data = ui.data();
+        File.Type_file file = Core.f_any_from_any(File.t_file, data);
+        Core.Type_string path = File.f_pathfull_from_file(file);
+        Html.Type_style style = Uihtml.f_style_from_style(uistyle);
+        Html.Type_stylelist styles = Uihtml.f_stylelist_extra_from_ui(ui);
+        Core.Type_any output_1 = Core.f_new(
           Html.t_img,
           Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":id"),
@@ -2184,6 +2199,7 @@ public final class Uihtml {
             path
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -2277,15 +2293,15 @@ public final class Uihtml {
     output = Core.f_let(
       Html.t_node,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string uid = ui.uid();
-        final Core.Type_any data = ui.data();
-        final Ui.Type_uimap uimap = ui.uimap();
-        final Ui.Type_style uistyle = ui.style();
-        final Ui.Type_stylelist uistyles = ui.stylelist();
-        final Core.Type_any datatype = Core.f_type_from_any(data);
-        final Html.Type_style style = Uihtml.f_style_from_style(uistyle);
-        final Html.Type_stylelist styles = Uihtml.f_stylelist_from_stylelist(uistyles);
-        final Core.Type_string text = Core.f_if_2(
+        Core.Type_string uid = ui.uid();
+        Core.Type_any data = ui.data();
+        Ui.Type_uimap uimap = ui.uimap();
+        Ui.Type_style uistyle = ui.style();
+        Ui.Type_stylelist uistyles = ui.stylelist();
+        Core.Type_any datatype = Core.f_type_from_any(data);
+        Html.Type_style style = Uihtml.f_style_from_style(uistyle);
+        Html.Type_stylelist styles = Uihtml.f_stylelist_from_stylelist(uistyles);
+        Core.Type_string text = Core.f_if_2(
           Core.t_string,
           Core.vx_new(Core.t_thenelselist,
               Core.f_then(
@@ -2306,7 +2322,7 @@ public final class Uihtml {
               )
           )
         );
-        return Core.f_new(
+        Core.Type_any output_1 = Core.f_new(
           Html.t_p,
           Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":id"),
@@ -2319,6 +2335,7 @@ public final class Uihtml {
             text
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -2412,11 +2429,12 @@ public final class Uihtml {
     output = Core.f_let(
       Html.t_node,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string id = ui.uid();
-        final Core.Type_string parentid = parent.uid();
-        final Core.Type_string htmltext = Html.f_string_from_node_indent(node, Core.vx_new_int(2));
-        final Core.Type_boolean htmldone = Htmldoc.f_boolean_replace_from_id_parent_htmltext(id, parentid, htmltext);
-        return node;
+        Core.Type_string id = ui.uid();
+        Core.Type_string parentid = parent.uid();
+        Core.Type_string htmltext = Html.f_string_from_node_indent(node, Core.vx_new_int(2));
+        Core.Type_boolean htmldone = Htmldoc.f_boolean_replace_from_id_parent_htmltext(id, parentid, htmltext);
+        Core.Type_any output_1 = node;
+        return output_1;
       })
     );
     return output;
@@ -2510,9 +2528,9 @@ public final class Uihtml {
     output = Core.f_let(
       Html.t_node,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_style style = ui.style();
-        final Ui.Type_layout layout = style.layout();
-        return Core.f_switch(
+        Ui.Type_style style = ui.style();
+        Ui.Type_layout layout = style.layout();
+        Core.Type_any output_1 = Core.f_switch(
           Html.t_node,
           layout,
           Core.vx_new(Core.t_thenelselist,
@@ -2535,6 +2553,7 @@ public final class Uihtml {
             )
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -2639,8 +2658,9 @@ public final class Uihtml {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Html.Type_stylelist htmlstyles = Uihtml.f_stylelist_extra_from_ui(ui);
-        return Html.f_string_from_stylelist(htmlstyles);
+        Html.Type_stylelist htmlstyles = Uihtml.f_stylelist_extra_from_ui(ui);
+        Core.Type_any output_1 = Html.f_string_from_stylelist(htmlstyles);
+        return output_1;
       })
     );
     return output;
@@ -2745,10 +2765,10 @@ public final class Uihtml {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_fontface face = font.fontface();
-        final Core.Type_int size = font.fontsize();
-        final Core.Type_string name = face.name();
-        final Core.Type_string ssize = Core.f_if_2(
+        Ui.Type_fontface face = font.fontface();
+        Core.Type_int size = font.fontsize();
+        Core.Type_string name = face.name();
+        Core.Type_string ssize = Core.f_if_2(
           Core.t_string,
           Core.vx_new(Core.t_thenelselist,
               Core.f_then(
@@ -2768,7 +2788,7 @@ public final class Uihtml {
               )
           )
         );
-        return Core.f_if_2(
+        Core.Type_any output_1 = Core.f_if_2(
           Core.t_string,
           Core.vx_new(Core.t_thenelselist,
             Core.f_then(
@@ -2789,6 +2809,7 @@ public final class Uihtml {
             )
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -2901,9 +2922,9 @@ public final class Uihtml {
             return Core.f_let(
               Core.t_string,
               Core.t_any_from_func.vx_fn_new(() -> {
-                final File.Type_file file = image.file();
-                final Core.Type_string url = File.f_pathfull_from_file(file);
-                return Core.f_if_2(
+                File.Type_file file = image.file();
+                Core.Type_string url = File.f_pathfull_from_file(file);
+                Core.Type_any output_1 = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                     Core.f_then(
@@ -2923,6 +2944,7 @@ public final class Uihtml {
                     )
                   )
                 );
+                return output_1;
               })
             );
           })
@@ -3169,27 +3191,28 @@ public final class Uihtml {
     output = Core.f_let(
       Html.t_style,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string name = fontface.name();
-        final Core.Type_string weight = fontface.weight();
-        final Core.Type_string unicode = fontface.unicode();
-        final File.Type_filelist files = fontface.filelist();
-        final Core.Type_stringlist urls = Core.f_list_from_list_1(
+        Core.Type_string name = fontface.name();
+        Core.Type_string weight = fontface.weight();
+        Core.Type_string unicode = fontface.unicode();
+        File.Type_filelist files = fontface.filelist();
+        Core.Type_stringlist urls = Core.f_list_from_list_1(
           Core.t_stringlist,
           files,
           Core.t_any_from_any.vx_fn_new((file_any) -> {
             File.Type_file file = Core.f_any_from_any(File.t_file, file_any);
-            return 
-              Core.f_new(
-                Core.t_string,
-                Core.vx_new(Core.t_anylist,
-                  Core.vx_new_string("url("),
-                  File.f_pathfull_from_file(file),
-                  Core.vx_new_string(")")
-                )
-              );
+            Core.Type_any output_1 = 
+                Core.f_new(
+                  Core.t_string,
+                  Core.vx_new(Core.t_anylist,
+                    Core.vx_new_string("url("),
+                    File.f_pathfull_from_file(file),
+                    Core.vx_new_string(")")
+                  )
+                );
+            return output_1;
           })
         );
-        final Core.Type_string fontfamily = Core.f_new(
+        Core.Type_string fontfamily = Core.f_new(
           Core.t_string,
           Core.vx_new(Core.t_anylist,
               Core.c_quote,
@@ -3197,15 +3220,15 @@ public final class Uihtml {
               Core.c_quote
           )
         );
-        final Core.Type_string srcurls = Type.f_string_from_stringlist_join(urls, Core.vx_new_string(","));
-        final Core.Type_string src = Core.f_new(
+        Core.Type_string srcurls = Type.f_string_from_stringlist_join(urls, Core.vx_new_string(","));
+        Core.Type_string src = Core.f_new(
           Core.t_string,
           Core.vx_new(Core.t_anylist,
               srcurls,
               Core.vx_new_string(";")
           )
         );
-        final Html.Type_propmap propmap = Core.f_new(
+        Html.Type_propmap propmap = Core.f_new(
           Html.t_propmap,
           Core.vx_new(Core.t_anylist,
               Core.vx_new_string(":font-family"),
@@ -3222,7 +3245,7 @@ public final class Uihtml {
               unicode
           )
         );
-        return Core.f_new(
+        Core.Type_any output_2 = Core.f_new(
           Html.t_style,
           Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":name"),
@@ -3231,6 +3254,7 @@ public final class Uihtml {
             propmap
           )
         );
+        return output_2;
       })
     );
     return output;
@@ -3350,33 +3374,33 @@ public final class Uihtml {
             return Core.f_let(
               Html.t_style,
               Core.t_any_from_func.vx_fn_new(() -> {
-                final Ui.Type_layout layout = uistyle.layout();
-                final Core.Type_string name = uistyle.name();
-                final Ui.Type_flip flip = uistyle.flip();
-                final Ui.Type_font font = uistyle.font();
-                final Ui.Type_pin pin = uistyle.pin();
-                final Ui.Type_point pointorigin = uistyle.pointorigin();
-                final Ui.Type_point pointpos = uistyle.pointpos();
-                final Ui.Type_point pointsize = uistyle.pointsize();
-                final Ui.Type_point pointrotate = uistyle.pointrotate();
-                final Ui.Type_styletype styletype = uistyle.type();
-                final Core.Type_string color_bkg = uistyle.color_bkg();
-                final Core.Type_string color_bkghover = uistyle.color_bkghover();
-                final Core.Type_string color_border = uistyle.color_border();
-                final Core.Type_string color_font = uistyle.color_font();
-                final Ui.Type_cursor cursor = uistyle.cursor();
-                final Core.Type_boolean hidden = uistyle.hidden();
-                final Ui.Type_align align = uistyle.align();
-                final Core.Type_boolean scroll_x = uistyle.scroll_x();
-                final Core.Type_boolean scroll_y = uistyle.scroll_y();
-                final Core.Type_int posx = pointpos.x();
-                final Core.Type_int posy = pointpos.y();
-                final Ui.Type_pointtype postype = pointpos.pointtype();
-                final Core.Type_int sizex = pointsize.x();
-                final Core.Type_int sizey = pointsize.y();
-                final Ui.Type_pointtype sizetype = pointsize.pointtype();
-                final Core.Type_string stylename = Uihtml.f_string_stylename_from_name_styletype(name, styletype);
-                final Core.Type_string bkgcolor = Core.f_if_2(
+                Ui.Type_layout layout = uistyle.layout();
+                Core.Type_string name = uistyle.name();
+                Ui.Type_flip flip = uistyle.flip();
+                Ui.Type_font font = uistyle.font();
+                Ui.Type_pin pin = uistyle.pin();
+                Ui.Type_point pointorigin = uistyle.pointorigin();
+                Ui.Type_point pointpos = uistyle.pointpos();
+                Ui.Type_point pointsize = uistyle.pointsize();
+                Ui.Type_point pointrotate = uistyle.pointrotate();
+                Ui.Type_styletype styletype = uistyle.type();
+                Core.Type_string color_bkg = uistyle.color_bkg();
+                Core.Type_string color_bkghover = uistyle.color_bkghover();
+                Core.Type_string color_border = uistyle.color_border();
+                Core.Type_string color_font = uistyle.color_font();
+                Ui.Type_cursor cursor = uistyle.cursor();
+                Core.Type_boolean hidden = uistyle.hidden();
+                Ui.Type_align align = uistyle.align();
+                Core.Type_boolean scroll_x = uistyle.scroll_x();
+                Core.Type_boolean scroll_y = uistyle.scroll_y();
+                Core.Type_int posx = pointpos.x();
+                Core.Type_int posy = pointpos.y();
+                Ui.Type_pointtype postype = pointpos.pointtype();
+                Core.Type_int sizex = pointsize.x();
+                Core.Type_int sizey = pointsize.y();
+                Ui.Type_pointtype sizetype = pointsize.pointtype();
+                Core.Type_string stylename = Uihtml.f_string_stylename_from_name_styletype(name, styletype);
+                Core.Type_string bkgcolor = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -3395,7 +3419,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string borderwidth = Core.f_if_2(
+                Core.Type_string borderwidth = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -3408,7 +3432,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string bordercolor = Core.f_if_2(
+                Core.Type_string bordercolor = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -3427,7 +3451,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string borderstyle = Core.f_if_2(
+                Core.Type_string borderstyle = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -3445,7 +3469,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string fontcolor = Core.f_if_2(
+                Core.Type_string fontcolor = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -3464,7 +3488,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string position = Core.f_if_2(
+                Core.Type_string position = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -3543,7 +3567,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string top = Core.f_if_2(
+                Core.Type_string top = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -3584,7 +3608,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string bottom = Core.f_if_2(
+                Core.Type_string bottom = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -3634,7 +3658,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string left = Core.f_if_2(
+                Core.Type_string left = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -3686,7 +3710,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string right = Core.f_if_2(
+                Core.Type_string right = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -3731,7 +3755,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string height = Core.f_if_2(
+                Core.Type_string height = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -3806,7 +3830,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string width = Core.f_if_2(
+                Core.Type_string width = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -3881,7 +3905,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string display = Core.f_if_2(
+                Core.Type_string display = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -3905,8 +3929,8 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string sfont = Uihtml.f_string_style_from_font(font);
-                final Core.Type_string gap = Core.f_if_2(
+                Core.Type_string sfont = Uihtml.f_string_style_from_font(font);
+                Core.Type_string gap = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -3928,7 +3952,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string overflowx = Core.f_if_2(
+                Core.Type_string overflowx = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -3941,7 +3965,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string overflowy = Core.f_if_2(
+                Core.Type_string overflowy = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -3954,7 +3978,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string hoverbkgrdcolor = Core.f_if_2(
+                Core.Type_string hoverbkgrdcolor = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -3973,7 +3997,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string scursor = Core.f_if_2(
+                Core.Type_string scursor = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -3989,7 +4013,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string textalign = Core.f_if_2(
+                Core.Type_string textalign = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -4027,7 +4051,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string transform_rotate = Core.f_if_2(
+                Core.Type_string transform_rotate = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -4052,7 +4076,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_string transform_scale = Core.f_switch(
+                Core.Type_string transform_scale = Core.f_switch(
                   Core.t_string,
                   flip,
                   Core.vx_new(Core.t_thenelselist,
@@ -4076,15 +4100,15 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Core.Type_stringlist transforms = Core.f_new(
+                Core.Type_stringlist transforms = Core.f_new(
                   Core.t_stringlist,
                   Core.vx_new(Core.t_anylist,
                       transform_rotate,
                       transform_scale
                   )
                 );
-                final Core.Type_string transform = Type.f_string_from_stringlist_join(transforms, Core.vx_new_string(" "));
-                final Core.Type_string transformorigin = Core.f_switch(
+                Core.Type_string transform = Type.f_string_from_stringlist_join(transforms, Core.vx_new_string(" "));
+                Core.Type_string transformorigin = Core.f_switch(
                   Core.t_string,
                   pointorigin,
                   Core.vx_new(Core.t_thenelselist,
@@ -4136,7 +4160,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                final Html.Type_propmap props = Core.f_new(
+                Html.Type_propmap props = Core.f_new(
                   Html.t_propmap,
                   Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":background-color"),
@@ -4183,14 +4207,14 @@ public final class Uihtml {
                       transformorigin
                   )
                 );
-                final Html.Type_propmap hoverprops = Core.f_new(
+                Html.Type_propmap hoverprops = Core.f_new(
                   Html.t_propmap,
                   Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":background-color"),
                       hoverbkgrdcolor
                   )
                 );
-                final Html.Type_stylelist substylelist = Core.f_if_2(
+                Html.Type_stylelist substylelist = Core.f_if_2(
                   Html.t_stylelist,
                   Core.vx_new(Core.t_thenelselist,
                       Core.f_then(
@@ -4216,7 +4240,7 @@ public final class Uihtml {
                       )
                   )
                 );
-                return Core.f_new(
+                Core.Type_any output_1 = Core.f_new(
                   Html.t_style,
                   Core.vx_new(Core.t_anylist,
                     Core.vx_new_string(":name"),
@@ -4227,6 +4251,7 @@ public final class Uihtml {
                     substylelist
                   )
                 );
+                return output_1;
               })
             );
           })
@@ -4335,11 +4360,11 @@ public final class Uihtml {
     output = Core.f_let(
       Html.t_stylelist,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_stylelist uistyles = ui.stylelist();
-        final Core.Type_boolean selected = ui.selected();
-        final Core.Type_boolean hidden = ui.hidden();
-        final Html.Type_stylelist styles1 = Uihtml.f_stylelist_from_stylelist(uistyles);
-        final Html.Type_stylelist styles2 = Core.f_if_2(
+        Ui.Type_stylelist uistyles = ui.stylelist();
+        Core.Type_boolean selected = ui.selected();
+        Core.Type_boolean hidden = ui.hidden();
+        Html.Type_stylelist styles1 = Uihtml.f_stylelist_from_stylelist(uistyles);
+        Html.Type_stylelist styles2 = Core.f_if_2(
           Html.t_stylelist,
           Core.vx_new(Core.t_thenelselist,
               Core.f_then(
@@ -4375,7 +4400,8 @@ public final class Uihtml {
               )
           )
         );
-        return styles2;
+        Core.Type_any output_1 = styles2;
+        return output_1;
       })
     );
     return output;
@@ -4691,8 +4717,9 @@ public final class Uihtml {
       Core.t_any_from_key_value.vx_fn_new((key_any, fontface_any) -> {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Ui.Type_fontface fontface = Core.f_any_from_any(Ui.t_fontface, fontface_any);
-        return 
-        Uihtml.f_style_from_fontface(fontface);
+        Core.Type_any output_1 = 
+          Uihtml.f_style_from_fontface(fontface);
+        return output_1;
       })
     );
     return output;
@@ -4904,8 +4931,9 @@ public final class Uihtml {
       Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Ui.Type_style value = Core.f_any_from_any(Ui.t_style, value_any);
-        return 
-        Uihtml.f_style_from_style(value);
+        Core.Type_any output_1 = 
+          Uihtml.f_style_from_style(value);
+        return output_1;
       })
     );
     return output;
@@ -5013,8 +5041,9 @@ public final class Uihtml {
       Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Ui.Type_style value = Core.f_any_from_any(Ui.t_style, value_any);
-        return 
-        Uihtml.f_style_from_style(value);
+        Core.Type_any output_1 = 
+          Uihtml.f_style_from_style(value);
+        return output_1;
       })
     );
     return output;
@@ -5123,9 +5152,11 @@ public final class Uihtml {
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final Html.Type_stylesheet stylesheethtml = Uihtml.f_stylesheet_from_stylesheet(stylesheetui);
         final CompletableFuture<Core.Type_boolean> future_write = Htmldoc.f_boolean_write_from_stylesheet(stylesheethtml);
-        return Core.vx_async_from_async_fn(future_write, (write) -> {
-          return stylesheetui;
+        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_write, (write) -> {;
+          Core.Type_any output_2 = stylesheetui;
+          return output_2;
         });
+        return output_1;
       })
     );
     return output;
@@ -5230,12 +5261,12 @@ public final class Uihtml {
     output = Core.f_let(
       Html.t_stylesheet,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_stylemap uistylemap = uistylesheet.stylemap();
-        final Ui.Type_fontfacemap fontfacemap = uistylesheet.fontfacemap();
-        final Html.Type_stylelist resetlist = Uihtml.f_stylelist_reset();
-        final Html.Type_stylelist fontstyles = Uihtml.f_stylelist_from_fontfacemap(fontfacemap);
-        final Html.Type_stylelist stylelist = Uihtml.f_stylelist_from_stylemap(uistylemap);
-        final Html.Type_stylelist allstyles = Core.f_new(
+        Ui.Type_stylemap uistylemap = uistylesheet.stylemap();
+        Ui.Type_fontfacemap fontfacemap = uistylesheet.fontfacemap();
+        Html.Type_stylelist resetlist = Uihtml.f_stylelist_reset();
+        Html.Type_stylelist fontstyles = Uihtml.f_stylelist_from_fontfacemap(fontfacemap);
+        Html.Type_stylelist stylelist = Uihtml.f_stylelist_from_stylemap(uistylemap);
+        Html.Type_stylelist allstyles = Core.f_new(
           Html.t_stylelist,
           Core.vx_new(Core.t_anylist,
               resetlist,
@@ -5243,13 +5274,14 @@ public final class Uihtml {
               stylelist
           )
         );
-        return Core.f_new(
+        Core.Type_any output_1 = Core.f_new(
           Html.t_stylesheet,
           Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":styles"),
             allstyles
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -5343,10 +5375,11 @@ public final class Uihtml {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Html.Type_node node = Uihtml.f_node_app_from_ui_orig_parent(ui, orig, parent);
-        final Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
-        final Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(ui);
-        return ui;
+        Html.Type_node node = Uihtml.f_node_app_from_ui_orig_parent(ui, orig, parent);
+        Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
+        Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(ui);
+        Core.Type_any output_1 = ui;
+        return output_1;
       })
     );
     return output;
@@ -5440,11 +5473,12 @@ public final class Uihtml {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uimap uimap = ui.uimap();
-        final Html.Type_node node = Uihtml.f_node_default_from_ui_orig_parent(ui, orig, parent);
-        final Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
-        final Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(ui);
-        return ui;
+        Ui.Type_uimap uimap = ui.uimap();
+        Html.Type_node node = Uihtml.f_node_default_from_ui_orig_parent(ui, orig, parent);
+        Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
+        Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(ui);
+        Core.Type_any output_1 = ui;
+        return output_1;
       })
     );
     return output;
@@ -5538,10 +5572,11 @@ public final class Uihtml {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Html.Type_node node = Uihtml.f_node_image_from_ui_orig_parent(ui, orig, parent);
-        final Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
-        final Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(ui);
-        return ui;
+        Html.Type_node node = Uihtml.f_node_image_from_ui_orig_parent(ui, orig, parent);
+        Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
+        Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(ui);
+        Core.Type_any output_1 = ui;
+        return output_1;
       })
     );
     return output;
@@ -5635,11 +5670,12 @@ public final class Uihtml {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Ui.Type_uimap uimap = ui.uimap();
-        final Html.Type_node node = Uihtml.f_node_label_from_ui_orig_parent(ui, orig, parent);
-        final Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
-        final Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(ui);
-        return ui;
+        Ui.Type_uimap uimap = ui.uimap();
+        Html.Type_node node = Uihtml.f_node_label_from_ui_orig_parent(ui, orig, parent);
+        Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
+        Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(ui);
+        Core.Type_any output_1 = ui;
+        return output_1;
       })
     );
     return output;

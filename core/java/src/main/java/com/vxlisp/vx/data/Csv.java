@@ -730,8 +730,9 @@ public final class Csv {
     output = Core.f_let(
       Csv.t_csv,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final File.Type_file loaded = File.f_file_read_from_file(context, file);
-        return Csv.f_csv_from_file(loaded);
+        File.Type_file loaded = File.f_file_read_from_file(context, file);
+        Core.Type_any output_1 = Csv.f_csv_from_file(loaded);
+        return output_1;
       })
     );
     return output;
@@ -836,8 +837,9 @@ public final class Csv {
     output = Core.f_let(
       Csv.t_csv,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string text = file.text();
-        return Csv.f_csv_from_string(text);
+        Core.Type_string text = file.text();
+        Core.Type_any output_1 = Csv.f_csv_from_string(text);
+        return output_1;
       })
     );
     return output;
@@ -1047,10 +1049,10 @@ public final class Csv {
     output = Core.f_let(
       Csv.t_csv,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Csv.Type_csvrows allrows = Csv.f_csvrows_from_textblock(textblock);
-        final Core.Type_stringlist headers = Core.f_any_from_list(Core.t_stringlist, allrows, Core.vx_new_int(1));
-        final Csv.Type_csvrows rows = Collection.f_list_from_list_end(Csv.t_csvrows, allrows, Core.vx_new_int(2));
-        return Core.f_new(
+        Csv.Type_csvrows allrows = Csv.f_csvrows_from_textblock(textblock);
+        Core.Type_stringlist headers = Core.f_any_from_list(Core.t_stringlist, allrows, Core.vx_new_int(1));
+        Csv.Type_csvrows rows = Collection.f_list_from_list_end(Csv.t_csvrows, allrows, Core.vx_new_int(2));
+        Core.Type_any output_1 = Core.f_new(
           Csv.t_csv,
           Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":headers"),
@@ -1059,6 +1061,7 @@ public final class Csv {
             rows
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -1162,18 +1165,19 @@ public final class Csv {
     output = Core.f_let(
       Csv.t_csvrows,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Textblock.Type_textblock parsedtb = Textblock.f_textblock_from_textblock_delim(
+        Textblock.Type_textblock parsedtb = Textblock.f_textblock_from_textblock_delim(
           textblock,
           Csv.c_delimcsv
         );
-        final Textblock.Type_textblocklist children = Textblock.f_children_from_textblock(parsedtb);
-        final Core.Type_stringlist strings = Textblock.f_stringlist_from_textblocklist(children);
-        return Core.f_new(
+        Textblock.Type_textblocklist children = Textblock.f_children_from_textblock(parsedtb);
+        Core.Type_stringlist strings = Textblock.f_stringlist_from_textblocklist(children);
+        Core.Type_any output_1 = Core.f_new(
           Csv.t_csvrows,
           Core.vx_new(Core.t_anylist,
             strings
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -1278,26 +1282,29 @@ public final class Csv {
     output = Core.f_let(
       Core.t_stringmap,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Csv.Type_csvrows rows = csv.rows();
-        final Csv.Type_csvrowmap rowmap = Core.f_map_from_list(
+        Csv.Type_csvrows rows = csv.rows();
+        Csv.Type_csvrowmap rowmap = Core.f_map_from_list(
           Csv.t_csvrowmap,
           rows,
           Core.t_any_from_any.vx_fn_new((textlist_any) -> {
             Core.Type_stringlist textlist = Core.f_any_from_any(Core.t_stringlist, textlist_any);
-            return 
-              Core.f_any_from_list(Core.t_string, textlist, Core.vx_new_int(1));
+            Core.Type_any output_1 = 
+                Core.f_any_from_list(Core.t_string, textlist, Core.vx_new_int(1));
+            return output_1;
           })
         );
-        return Core.f_map_from_map_1(
+        Core.Type_any output_3 = Core.f_map_from_map_1(
           Core.t_stringmap,
           rowmap,
           Core.t_any_from_key_value.vx_fn_new((key_any, val_any) -> {
             Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
             Core.Type_stringlist val = Core.f_any_from_any(Core.t_stringlist, val_any);
-            return 
-            Core.f_any_from_list(Core.t_string, val, Core.vx_new_int(2));
+            Core.Type_any output_2 = 
+              Core.f_any_from_list(Core.t_string, val, Core.vx_new_int(2));
+            return output_2;
           })
         );
+        return output_3;
       })
     );
     return output;

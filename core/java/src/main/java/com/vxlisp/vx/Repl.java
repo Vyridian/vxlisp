@@ -1338,8 +1338,9 @@ public final class Repl {
     output = Core.f_let(
       Core.t_any,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Repl.Type_repl repl = Repl.f_repl_from_liblist_string(liblist, text);
-        return Repl.f_any_from_repl(context, repl);
+        Repl.Type_repl repl = Repl.f_repl_from_liblist_string(liblist, text);
+        Core.Type_any output_1 = Repl.f_any_from_repl(context, repl);
+        return output_1;
       })
     );
     return output;
@@ -1446,9 +1447,10 @@ public final class Repl {
     output = Core.f_let(
       generic_any_1,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Repl.Type_repl repl = Repl.f_repl_from_macro(context, anylist);
-        final Core.Type_any val = Repl.f_any_from_repl(context, repl);
-        return Core.f_any_from_any(generic_any_1, val);
+        Repl.Type_repl repl = Repl.f_repl_from_macro(context, anylist);
+        Core.Type_any val = Repl.f_any_from_repl(context, repl);
+        Core.Type_any output_1 = Core.f_any_from_any(generic_any_1, val);
+        return output_1;
       })
     );
     return output;
@@ -1554,11 +1556,11 @@ public final class Repl {
     output = Core.f_let(
       Core.t_any,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_any val = repl.val();
-        final Core.Type_any repltype = repl.type();
-        final Repl.Type_repllist repllist = repl.repllist();
-        final Core.Type_anylist args = Repl.f_anylist_from_repllist(context, repllist);
-        return Core.f_if_2(
+        Core.Type_any val = repl.val();
+        Core.Type_any repltype = repl.type();
+        Repl.Type_repllist repllist = repl.repllist();
+        Core.Type_anylist args = Repl.f_anylist_from_repllist(context, repllist);
+        Core.Type_any output_1 = Core.f_if_2(
           Core.t_any,
           Core.vx_new(Core.t_thenelselist,
             Core.f_then(
@@ -1584,6 +1586,7 @@ public final class Repl {
             )
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -1689,9 +1692,10 @@ public final class Repl {
     output = Core.f_let(
       Core.t_any,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Textblock.Type_textblock textblock = Repl.f_textblock_from_script(script);
-        final Repl.Type_repl repl = Repl.f_repl_from_textblock(textblock);
-        return Repl.f_any_from_repl(context, repl);
+        Textblock.Type_textblock textblock = Repl.f_textblock_from_script(script);
+        Repl.Type_repl repl = Repl.f_repl_from_textblock(textblock);
+        Core.Type_any output_1 = Repl.f_any_from_repl(context, repl);
+        return output_1;
       })
     );
     return output;
@@ -1799,8 +1803,9 @@ public final class Repl {
       repllist,
       Core.t_any_from_any.vx_fn_new((repl_any) -> {
         Repl.Type_repl repl = Core.f_any_from_any(Repl.t_repl, repl_any);
-        return 
-        Repl.f_any_from_repl(context, repl);
+        Core.Type_any output_1 = 
+          Repl.f_any_from_repl(context, repl);
+        return output_1;
       })
     );
     return output;
@@ -2001,8 +2006,8 @@ public final class Repl {
     output = Core.f_let(
       Core.t_any,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_int pkgpos = Type.f_int_from_string_findlast(text, Core.vx_new_string("/"));
-        final Core.Type_string pkgname = Core.f_if_1(
+        Core.Type_int pkgpos = Type.f_int_from_string_findlast(text, Core.vx_new_string("/"));
+        Core.Type_string pkgname = Core.f_if_1(
           Core.t_string,
           Core.f_eq(Core.vx_new_int(0), pkgpos),
           Core.vx_new_string("vx/core"),
@@ -2011,7 +2016,7 @@ public final class Repl {
             Core.f_minus1(pkgpos)
           )
         );
-        final Core.Type_string name = Core.f_if_1(
+        Core.Type_string name = Core.f_if_1(
           Core.t_string,
           Core.f_eq(Core.vx_new_int(0), pkgpos),
           text,
@@ -2020,10 +2025,10 @@ public final class Repl {
             Core.f_plus1(pkgpos)
           )
         );
-        final Core.Type_package pkg = Core.f_package_global_from_name(pkgname);
-        final Core.Type_constmap constmap = pkg.constmap();
-        final Core.Type_any constval = Core.f_any_from_map(Core.t_any, constmap, name);
-        return Core.f_if_1(
+        Core.Type_package pkg = Core.f_package_global_from_name(pkgname);
+        Core.Type_constmap constmap = pkg.constmap();
+        Core.Type_any constval = Core.f_any_from_map(Core.t_any, constmap, name);
+        Core.Type_any output_1 = Core.f_if_1(
           Core.t_any,
           Core.f_notempty_1(constval),
           constval,
@@ -2031,6 +2036,7 @@ public final class Repl {
             Core.t_any
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -2213,9 +2219,9 @@ public final class Repl {
     output = Core.f_let(
       Repl.t_repl,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Textblock.Type_textblocklist children = textblock.children();
-        final Core.Type_int len = Core.f_length_1(children);
-        return Core.f_switch(
+        Textblock.Type_textblocklist children = textblock.children();
+        Core.Type_int len = Core.f_length_1(children);
+        Core.Type_any output_1 = Core.f_switch(
           Repl.t_repl,
           len,
           Core.vx_new(Core.t_thenelselist,
@@ -2249,6 +2255,7 @@ public final class Repl {
             )
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -2341,16 +2348,16 @@ public final class Repl {
     output = Core.f_let(
       Repl.t_repl,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Textblock.Type_textblocklist childlst = textblock.children();
-        final Textblock.Type_textblocklist children = Textblock.f_textblocklist_from_textblocklist_remove(
+        Textblock.Type_textblocklist childlst = textblock.children();
+        Textblock.Type_textblocklist children = Textblock.f_textblocklist_from_textblocklist_remove(
           childlst,
           Textblock.c_delimwhitespace
         );
-        final Textblock.Type_textblock tbfunc = Core.f_any_from_list(Textblock.t_textblock, children, Core.vx_new_int(1));
-        final Core.Type_string sfunc = tbfunc.text();
-        final Repl.Type_repl replfunc = Repl.f_repl_from_string_argmap(sfunc, argmap);
-        final Core.Type_any typefunc = replfunc.type();
-        final Core.Type_int posarg = Core.f_switch(
+        Textblock.Type_textblock tbfunc = Core.f_any_from_list(Textblock.t_textblock, children, Core.vx_new_int(1));
+        Core.Type_string sfunc = tbfunc.text();
+        Repl.Type_repl replfunc = Repl.f_repl_from_string_argmap(sfunc, argmap);
+        Core.Type_any typefunc = replfunc.type();
+        Core.Type_int posarg = Core.f_switch(
           Core.t_int,
           typefunc,
           Core.vx_new(Core.t_thenelselist,
@@ -2373,7 +2380,7 @@ public final class Repl {
               )
           )
         );
-        final Core.Type_argmap argmap2 = Core.f_switch(
+        Core.Type_argmap argmap2 = Core.f_switch(
           Core.t_argmap,
           typefunc,
           Core.vx_new(Core.t_thenelselist,
@@ -2402,15 +2409,16 @@ public final class Repl {
               )
           )
         );
-        final Textblock.Type_textblocklist tbargs = Collection.f_list_from_list_start(Textblock.t_textblocklist, children, posarg);
-        final Repl.Type_repllist replargs = Repl.f_repllist_from_textblocklist_argmap(tbargs, argmap);
-        return Core.f_copy(
+        Textblock.Type_textblocklist tbargs = Collection.f_list_from_list_start(Textblock.t_textblocklist, children, posarg);
+        Repl.Type_repllist replargs = Repl.f_repllist_from_textblocklist_argmap(tbargs, argmap);
+        Core.Type_any output_1 = Core.f_copy(
           replfunc,
           Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":repllist"),
             replargs
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -2603,40 +2611,43 @@ public final class Repl {
     output = Core.f_let(
       Repl.t_repl,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_stringlist textlist = Core.f_list_from_list_1(
+        Core.Type_stringlist textlist = Core.f_list_from_list_1(
           Core.t_stringlist,
           anylist,
           Core.t_any_from_any.vx_fn_new((item_any) -> {
             Core.Type_any item = Core.f_any_from_any(Core.t_any, item_any);
-            return 
-              Core.f_let(
-                Core.t_string,
-                Core.t_any_from_func.vx_fn_new(() -> {
-                  final Core.Type_any typ = Core.f_type_from_any(item);
-                  return Core.f_switch(
-                    Core.t_string,
-                    typ,
-                    Core.vx_new(Core.t_thenelselist,
-                      Core.f_case_1(
-                        Core.t_string,
-                        Core.t_any_from_func.vx_fn_new(() -> {
-                          return Core.f_any_from_any(Core.t_string, item);
-                        })
-                      ),
-                      Core.f_else(
-                        Core.t_any_from_func.vx_fn_new(() -> {
-                          return Core.f_string_from_any(item);
-                        })
+            Core.Type_any output_1 = 
+                Core.f_let(
+                  Core.t_string,
+                  Core.t_any_from_func.vx_fn_new(() -> {
+                    Core.Type_any typ = Core.f_type_from_any(item);
+                    Core.Type_any output_2 = Core.f_switch(
+                      Core.t_string,
+                      typ,
+                      Core.vx_new(Core.t_thenelselist,
+                        Core.f_case_1(
+                          Core.t_string,
+                          Core.t_any_from_func.vx_fn_new(() -> {
+                            return Core.f_any_from_any(Core.t_string, item);
+                          })
+                        ),
+                        Core.f_else(
+                          Core.t_any_from_func.vx_fn_new(() -> {
+                            return Core.f_string_from_any(item);
+                          })
+                        )
                       )
-                    )
-                  );
-                })
-              );
+                    );
+                    return output_2;
+                  })
+                );
+            return output_1;
           })
         );
-        final Core.Type_string script = Type.f_string_from_stringlist_join(textlist, Core.vx_new_string(""));
-        final Textblock.Type_textblock tb = Repl.f_textblock_from_script(script);
-        return Repl.f_repl_from_textblock(tb);
+        Core.Type_string script = Type.f_string_from_stringlist_join(textlist, Core.vx_new_string(""));
+        Textblock.Type_textblock tb = Repl.f_textblock_from_script(script);
+        Core.Type_any output_3 = Repl.f_repl_from_textblock(tb);
+        return output_3;
       })
     );
     return output;
@@ -2741,8 +2752,9 @@ public final class Repl {
     output = Core.f_let(
       Repl.t_repl,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Textblock.Type_textblock textblock = Repl.f_textblock_from_script(script);
-        return Repl.f_repl_from_textblock(textblock);
+        Textblock.Type_textblock textblock = Repl.f_textblock_from_script(script);
+        Core.Type_any output_1 = Repl.f_repl_from_textblock(textblock);
+        return output_1;
       })
     );
     return output;
@@ -2891,8 +2903,8 @@ public final class Repl {
             return Core.f_let(
               Repl.t_repl,
               Core.t_any_from_func.vx_fn_new(() -> {
-                final Core.Type_any arg = Core.f_any_from_map(Core.t_any, argmap, text);
-                return Core.f_if_2(
+                Core.Type_any arg = Core.f_any_from_map(Core.t_any, argmap, text);
+                Core.Type_any output_3 = Core.f_if_2(
                   Repl.t_repl,
                   Core.vx_new(Core.t_thenelselist,
                     Core.f_then(
@@ -2914,8 +2926,8 @@ public final class Repl {
                         return Core.f_let(
                           Repl.t_repl,
                           Core.t_any_from_func.vx_fn_new(() -> {
-                            final Core.Type_any cnst = Repl.f_const_from_string(text);
-                            return Core.f_if_2(
+                            Core.Type_any cnst = Repl.f_const_from_string(text);
+                            Core.Type_any output_2 = Core.f_if_2(
                               Repl.t_repl,
                               Core.vx_new(Core.t_thenelselist,
                                 Core.f_then(
@@ -2937,8 +2949,8 @@ public final class Repl {
                                     return Core.f_let(
                                       Repl.t_repl,
                                       Core.t_any_from_func.vx_fn_new(() -> {
-                                        final Core.Type_any typefunc = Repl.f_typefunc_from_string(text);
-                                        return Core.f_if_2(
+                                        Core.Type_any typefunc = Repl.f_typefunc_from_string(text);
+                                        Core.Type_any output_1 = Core.f_if_2(
                                           Repl.t_repl,
                                           Core.vx_new(Core.t_thenelselist,
                                             Core.f_then(
@@ -2967,18 +2979,21 @@ public final class Repl {
                                             )
                                           )
                                         );
+                                        return output_1;
                                       })
                                     );
                                   })
                                 )
                               )
                             );
+                            return output_2;
                           })
                         );
                       })
                     )
                   )
                 );
+                return output_3;
               })
             );
           })
@@ -3180,9 +3195,9 @@ public final class Repl {
     output = Core.f_let(
       Repl.t_repl,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Textblock.Type_delim delim = textblock.delim();
-        final Core.Type_string starttext = delim.starttext();
-        return Core.f_switch(
+        Textblock.Type_delim delim = textblock.delim();
+        Core.Type_string starttext = delim.starttext();
+        Core.Type_any output_1 = Core.f_switch(
           Repl.t_repl,
           starttext,
           Core.vx_new(Core.t_thenelselist,
@@ -3206,6 +3221,7 @@ public final class Repl {
             )
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -3300,12 +3316,12 @@ public final class Repl {
     output = Core.f_let(
       Repl.t_replarglist,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string key = replargs.key();
-        final Repl.Type_repl current = replargs.current();
-        final Repl.Type_repllist repllist = replargs.repllist();
-        final Repl.Type_repllist currlist = current.repllist();
-        final Core.Type_string text = Textblock.t_textblock.text();
-        return Core.f_if_2(
+        Core.Type_string key = replargs.key();
+        Repl.Type_repl current = replargs.current();
+        Repl.Type_repllist repllist = replargs.repllist();
+        Repl.Type_repllist currlist = current.repllist();
+        Core.Type_string text = Textblock.t_textblock.text();
+        Core.Type_any output_1 = Core.f_if_2(
           Repl.t_replarglist,
           Core.vx_new(Core.t_thenelselist,
             Core.f_then(
@@ -3462,6 +3478,7 @@ public final class Repl {
             )
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -3556,8 +3573,9 @@ public final class Repl {
       textblocklist,
       Core.t_any_from_any.vx_fn_new((textblock_any) -> {
         Textblock.Type_textblock textblock = Core.f_any_from_any(Textblock.t_textblock, textblock_any);
-        return 
-        Repl.f_repl_from_textblock(textblock);
+        Core.Type_any output_1 = 
+          Repl.f_repl_from_textblock(textblock);
+        return output_1;
       })
     );
     return output;
@@ -3765,8 +3783,8 @@ public final class Repl {
     output = Core.f_let(
       Core.t_any,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_int pkgpos = Type.f_int_from_string_findlast(text, Core.vx_new_string("/"));
-        final Core.Type_string pkgname = Core.f_if_1(
+        Core.Type_int pkgpos = Type.f_int_from_string_findlast(text, Core.vx_new_string("/"));
+        Core.Type_string pkgname = Core.f_if_1(
           Core.t_string,
           Core.f_eq(Core.vx_new_int(0), pkgpos),
           Core.vx_new_string("vx/core"),
@@ -3775,7 +3793,7 @@ public final class Repl {
             Core.f_minus1(pkgpos)
           )
         );
-        final Core.Type_string name = Core.f_if_1(
+        Core.Type_string name = Core.f_if_1(
           Core.t_string,
           Core.f_eq(Core.vx_new_int(0), pkgpos),
           text,
@@ -3784,19 +3802,19 @@ public final class Repl {
             Core.f_plus1(pkgpos)
           )
         );
-        final Core.Type_package pkg = Core.f_package_global_from_name(pkgname);
-        final Core.Type_typemap typemap = pkg.typemap();
-        final Core.Type_any typeval = Core.f_any_from_map(Core.t_any, typemap, name);
-        return Core.f_if_1(
+        Core.Type_package pkg = Core.f_package_global_from_name(pkgname);
+        Core.Type_typemap typemap = pkg.typemap();
+        Core.Type_any typeval = Core.f_any_from_map(Core.t_any, typemap, name);
+        Core.Type_any output_2 = Core.f_if_1(
           Core.t_any,
           Core.f_notempty_1(typeval),
           typeval,
           Core.f_let(
             Core.t_any,
             Core.t_any_from_func.vx_fn_new(() -> {
-              final Core.Type_funcmap funcmap = pkg.funcmap();
-              final Core.Type_any funcval = Core.f_any_from_map(Core.t_any, funcmap, name);
-              return Core.f_if_1(
+              Core.Type_funcmap funcmap = pkg.funcmap();
+              Core.Type_any funcval = Core.f_any_from_map(Core.t_any, funcmap, name);
+              Core.Type_any output_1 = Core.f_if_1(
                 Core.t_any,
                 Core.f_notempty_1(funcval),
                 funcval,
@@ -3804,9 +3822,11 @@ public final class Repl {
                   Core.t_any
                 )
               );
+              return output_1;
             })
           )
         );
+        return output_2;
       })
     );
     return output;

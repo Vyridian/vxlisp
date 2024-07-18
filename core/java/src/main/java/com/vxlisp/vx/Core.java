@@ -15260,8 +15260,9 @@ public final class Core {
       Core.t_any_from_reduce.vx_fn_new((total_any, num_any) -> {
         Core.Type_int total = Core.f_any_from_any(Core.t_int, total_any);
         Core.Type_int num = Core.f_any_from_any(Core.t_int, num_any);
-        return 
-        Core.f_multiply(total, num);
+        Core.Type_any output_1 = 
+          Core.f_multiply(total, num);
+        return output_1;
       })
     );
     return output;
@@ -15370,8 +15371,9 @@ public final class Core {
       Core.t_any_from_reduce.vx_fn_new((total_any, num_any) -> {
         Core.Type_number total = Core.f_any_from_any(Core.t_number, total_any);
         Core.Type_number num = Core.f_any_from_any(Core.t_number, num_any);
-        return 
-        Core.f_multiply_1(total, num);
+        Core.Type_any output_1 = 
+          Core.f_multiply_1(total, num);
+        return output_1;
       })
     );
     return output;
@@ -15658,8 +15660,9 @@ public final class Core {
       Core.t_any_from_reduce.vx_fn_new((total_any, num_any) -> {
         Core.Type_int total = Core.f_any_from_any(Core.t_int, total_any);
         Core.Type_int num = Core.f_any_from_any(Core.t_int, num_any);
-        return 
-        Core.f_plus(total, num);
+        Core.Type_any output_1 = 
+          Core.f_plus(total, num);
+        return output_1;
       })
     );
     return output;
@@ -15768,8 +15771,9 @@ public final class Core {
       Core.t_any_from_reduce.vx_fn_new((total_any, num_any) -> {
         Core.Type_number total = Core.f_any_from_any(Core.t_number, total_any);
         Core.Type_number num = Core.f_any_from_any(Core.t_number, num_any);
-        return 
-        Core.f_plus_1(total, num);
+        Core.Type_any output_1 = 
+          Core.f_plus_1(total, num);
+        return output_1;
       })
     );
     return output;
@@ -16156,8 +16160,9 @@ public final class Core {
       Core.t_any_from_reduce.vx_fn_new((total_any, num_any) -> {
         Core.Type_int total = Core.f_any_from_any(Core.t_int, total_any);
         Core.Type_int num = Core.f_any_from_any(Core.t_int, num_any);
-        return 
-        Core.f_minus(total, num);
+        Core.Type_any output_1 = 
+          Core.f_minus(total, num);
+        return output_1;
       })
     );
     return output;
@@ -16266,8 +16271,9 @@ public final class Core {
       Core.t_any_from_reduce.vx_fn_new((total_any, num_any) -> {
         Core.Type_number total = Core.f_any_from_any(Core.t_number, total_any);
         Core.Type_number num = Core.f_any_from_any(Core.t_number, num_any);
-        return 
-        Core.f_minus_1(total, num);
+        Core.Type_any output_1 = 
+          Core.f_minus_1(total, num);
+        return output_1;
       })
     );
     return output;
@@ -16766,11 +16772,12 @@ public final class Core {
         Core.Type_boolean reduce = Core.f_any_from_any(Core.t_boolean, reduce_any);
         Core.Type_any current = Core.f_any_from_any(Core.t_any, current_any);
         Core.Type_any next = Core.f_any_from_any(Core.t_any, next_any);
-        return 
-        Core.f_and(
-          reduce,
-          Core.f_lt(current, next)
-        );
+        Core.Type_any output_1 = 
+          Core.f_and(
+            reduce,
+            Core.f_lt(current, next)
+          );
+        return output_1;
       })
     );
     return output;
@@ -17350,11 +17357,12 @@ public final class Core {
         Core.Type_boolean reduce = Core.f_any_from_any(Core.t_boolean, reduce_any);
         Core.Type_any current = Core.f_any_from_any(Core.t_any, current_any);
         Core.Type_any next = Core.f_any_from_any(Core.t_any, next_any);
-        return 
-        Core.f_and(
-          reduce,
-          Core.f_eq(current, next)
-        );
+        Core.Type_any output_1 = 
+          Core.f_and(
+            reduce,
+            Core.f_eq(current, next)
+          );
+        return output_1;
       })
     );
     return output;
@@ -17657,11 +17665,12 @@ public final class Core {
         Core.Type_boolean reduce = Core.f_any_from_any(Core.t_boolean, reduce_any);
         Core.Type_any current = Core.f_any_from_any(Core.t_any, current_any);
         Core.Type_any next = Core.f_any_from_any(Core.t_any, next_any);
-        return 
-        Core.f_and(
-          reduce,
-          Core.f_gt(current, next)
-        );
+        Core.Type_any output_1 = 
+          Core.f_and(
+            reduce,
+            Core.f_gt(current, next)
+          );
+        return output_1;
       })
     );
     return output;
@@ -18375,11 +18384,12 @@ public final class Core {
                 Core.Type_boolean reduce = Core.f_any_from_any(Core.t_boolean, reduce_any);
                 Core.Type_boolean current = Core.f_any_from_any(Core.t_boolean, current_any);
                 Core.Type_boolean next = Core.f_any_from_any(Core.t_boolean, next_any);
-                return 
-                  Core.f_and(
-                    reduce,
-                    Core.f_and(current, next)
-                  );
+                Core.Type_any output_1 = 
+                    Core.f_and(
+                      reduce,
+                      Core.f_and(current, next)
+                    );
+                return output_1;
               })
             );
           })
@@ -24429,9 +24439,10 @@ public final class Core {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string id = permission.id();
-        final Core.Type_permission lookup = Core.f_permission_from_id_context(context, id);
-        return Core.f_eq(lookup, permission);
+        Core.Type_string id = permission.id();
+        Core.Type_permission lookup = Core.f_permission_from_id_context(context, id);
+        Core.Type_any output_1 = Core.f_eq(lookup, permission);
+        return output_1;
       })
     );
     return output;
@@ -24537,8 +24548,9 @@ public final class Core {
     output = Core.f_let(
       generic_any_1,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_int len = Core.f_length_1(values);
-        return Core.f_any_from_list(generic_any_1, values, len);
+        Core.Type_int len = Core.f_length_1(values);
+        Core.Type_any output_1 = Core.f_any_from_list(generic_any_1, values, len);
+        return output_1;
       })
     );
     return output;
@@ -25128,7 +25140,8 @@ public final class Core {
       values,
       Core.t_any_from_any.vx_fn_new((value_any) -> {
         Core.Type_any value = Core.f_any_from_any(Core.t_any, value_any);
-        return value;
+        Core.Type_any output_1 = value;
+        return output_1;
       })
     );
     return output;
@@ -25335,7 +25348,8 @@ public final class Core {
       values,
       Core.t_any_from_any.vx_fn_new((value_any) -> {
         Core.Type_any value = Core.f_any_from_any(Core.t_any, value_any);
-        return value;
+        Core.Type_any output_1 = value;
+        return output_1;
       })
     );
     return output;
@@ -25726,7 +25740,8 @@ public final class Core {
       Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Core.Type_any value = Core.f_any_from_any(Core.t_any, value_any);
-        return value;
+        Core.Type_any output_1 = value;
+        return output_1;
       })
     );
     return output;
@@ -26508,7 +26523,8 @@ public final class Core {
       Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Core.Type_any value = Core.f_any_from_any(Core.t_any, value_any);
-        return value;
+        Core.Type_any output_1 = value;
+        return output_1;
       })
     );
     return output;
@@ -27870,11 +27886,12 @@ public final class Core {
         Core.Type_boolean reduce = Core.f_any_from_any(Core.t_boolean, reduce_any);
         Core.Type_boolean current = Core.f_any_from_any(Core.t_boolean, current_any);
         Core.Type_boolean next = Core.f_any_from_any(Core.t_boolean, next_any);
-        return 
-        Core.f_or(
-          reduce,
-          Core.f_or(current, next)
-        );
+        Core.Type_any output_1 = 
+          Core.f_or(
+            reduce,
+            Core.f_or(current, next)
+          );
+        return output_1;
       })
     );
     return output;
@@ -28375,10 +28392,11 @@ public final class Core {
     output = Core.f_let(
       Core.t_permission,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_user user = Core.f_user_from_context(context);
-        final Core.Type_security security = user.security();
-        final Core.Type_permissionmap permissionmap = security.permissionmap();
-        return Core.f_any_from_map(Core.t_permission, permissionmap, Core.vx_new_string(":id"));
+        Core.Type_user user = Core.f_user_from_context(context);
+        Core.Type_security security = user.security();
+        Core.Type_permissionmap permissionmap = security.permissionmap();
+        Core.Type_any output_1 = Core.f_any_from_map(Core.t_permission, permissionmap, Core.vx_new_string(":id"));
+        return output_1;
       })
     );
     return output;
@@ -30024,7 +30042,8 @@ public final class Core {
       Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Core.Type_any value = Core.f_any_from_any(Core.t_any, value_any);
-        return key;
+        Core.Type_any output_1 = key;
+        return output_1;
       })
     );
     return output;
@@ -31060,8 +31079,9 @@ public final class Core {
       typelist,
       Core.t_any_from_any.vx_fn_new((type_any) -> {
         Core.Type_any type = Core.f_any_from_any(Core.t_any, type_any);
-        return 
-        Core.f_typename_from_type(type);
+        Core.Type_any output_1 = 
+          Core.f_typename_from_type(type);
+        return output_1;
       })
     );
     return output;

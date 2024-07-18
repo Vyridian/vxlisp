@@ -496,9 +496,9 @@ public final class Translate {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string path = msg.path();
-        final Core.Type_string code = msg.code();
-        final Core.Type_string text = Core.f_new(
+        Core.Type_string path = msg.path();
+        Core.Type_string code = msg.code();
+        Core.Type_string text = Core.f_new(
           Core.t_string,
           Core.vx_new(Core.t_anylist,
               Core.vx_new_string("!"),
@@ -507,7 +507,8 @@ public final class Translate {
               code
           )
         );
-        return Translate.f_translate(context, text);
+        Core.Type_any output_1 = Translate.f_translate(context, text);
+        return output_1;
       })
     );
     return output;
@@ -604,14 +605,15 @@ public final class Translate {
       Core.f_let(
         Core.t_string,
         Core.t_any_from_func.vx_fn_new(() -> {
-          final Core.Type_stringmap wordmap = translation.wordmap();
-          final Core.Type_string xlate = Core.f_any_from_map(Core.t_string, wordmap, text);
-          return Core.f_if_1(
+          Core.Type_stringmap wordmap = translation.wordmap();
+          Core.Type_string xlate = Core.f_any_from_map(Core.t_string, wordmap, text);
+          Core.Type_any output_1 = Core.f_if_1(
             Core.t_string,
             Core.f_is_empty(xlate),
             text,
             xlate
           );
+          return output_1;
         })
       )
     );
@@ -707,8 +709,9 @@ public final class Translate {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_translation translation = Core.f_any_from_map(Core.t_translation, translationmap, name);
-        return Translate.f_translate_from_translation_string(translation, text);
+        Core.Type_translation translation = Core.f_any_from_map(Core.t_translation, translationmap, name);
+        Core.Type_any output_1 = Translate.f_translate_from_translation_string(translation, text);
+        return output_1;
       })
     );
     return output;
@@ -986,8 +989,9 @@ public final class Translate {
     output = Core.f_let(
       Core.t_translation,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_translationmap translationmap = session.translationmap();
-        return Core.f_any_from_map(Core.t_translation, translationmap, name);
+        Core.Type_translationmap translationmap = session.translationmap();
+        Core.Type_any output_1 = Core.f_any_from_map(Core.t_translation, translationmap, name);
+        return output_1;
       })
     );
     return output;
@@ -1094,8 +1098,9 @@ public final class Translate {
       translations,
       Core.t_any_from_any.vx_fn_new((translation_any) -> {
         Core.Type_translation translation = Core.f_any_from_any(Core.t_translation, translation_any);
-        return 
-        translation.name();
+        Core.Type_any output_1 = 
+          translation.name();
+        return output_1;
       })
     );
     return output;

@@ -1062,15 +1062,16 @@ public final class Xml {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string lt = Core.f_string_from_string_find_replace(text, Core.vx_new_string("&lt;"), Core.vx_new_string("<"));
-        final Core.Type_string gt = Core.f_string_from_string_find_replace(text, Core.vx_new_string("&gt;"), Core.vx_new_string(">"));
-        final Core.Type_string amp = Core.f_string_from_string_find_replace(gt, Core.vx_new_string("&amp;"), Core.vx_new_string("&"));
-        final Core.Type_string result = Core.f_string_from_string_find_replace(
+        Core.Type_string lt = Core.f_string_from_string_find_replace(text, Core.vx_new_string("&lt;"), Core.vx_new_string("<"));
+        Core.Type_string gt = Core.f_string_from_string_find_replace(text, Core.vx_new_string("&gt;"), Core.vx_new_string(">"));
+        Core.Type_string amp = Core.f_string_from_string_find_replace(gt, Core.vx_new_string("&amp;"), Core.vx_new_string("&"));
+        Core.Type_string result = Core.f_string_from_string_find_replace(
           text,
           Core.c_quote,
           Core.vx_new_string("\\\"")
         );
-        return result;
+        Core.Type_any output_1 = result;
+        return output_1;
       })
     );
     return output;
@@ -1175,13 +1176,14 @@ public final class Xml {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Xml.Type_xmllist children = xml.children();
-        final Xml.Type_xml first = Core.f_any_from_list(Xml.t_xml, children, Core.vx_new_int(1));
-        final Core.Type_string text = first.text();
-        final Core.Type_string decode = Xml.f_string_decodexml_from_string(text);
-        final Core.Type_string outdent = Type.f_string_outdent(decode);
-        final Core.Type_string trim = Type.f_string_trim(outdent);
-        return trim;
+        Xml.Type_xmllist children = xml.children();
+        Xml.Type_xml first = Core.f_any_from_list(Xml.t_xml, children, Core.vx_new_int(1));
+        Core.Type_string text = first.text();
+        Core.Type_string decode = Xml.f_string_decodexml_from_string(text);
+        Core.Type_string outdent = Type.f_string_outdent(decode);
+        Core.Type_string trim = Type.f_string_trim(outdent);
+        Core.Type_any output_1 = trim;
+        return output_1;
       })
     );
     return output;
@@ -1400,8 +1402,8 @@ public final class Xml {
             return Core.f_let(
               Xml.t_xml,
               Core.t_any_from_func.vx_fn_new(() -> {
-                final Textblock.Type_textblocklist children = tb.children();
-                final Xml.Type_xml xmlchg = Core.f_new(
+                Textblock.Type_textblocklist children = tb.children();
+                Xml.Type_xml xmlchg = Core.f_new(
                   Xml.t_xml,
                   Core.vx_new(Core.t_anylist,
                       Core.vx_new_string(":tag"),
@@ -1410,7 +1412,8 @@ public final class Xml {
                       xmlarg
                   )
                 );
-                return Xml.f_xml_properties_from_xml_textblocklist(xmlchg, children);
+                Core.Type_any output_1 = Xml.f_xml_properties_from_xml_textblocklist(xmlchg, children);
+                return output_1;
               })
             );
           })
@@ -1507,11 +1510,11 @@ public final class Xml {
     output = Core.f_let(
       Xml.t_xml,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string tag = xmlarg.tag();
-        final Core.Type_string text = tb.text();
-        final Xml.Type_xml parent = xmlarg.parent();
-        final Core.Type_boolean isnoparent = Core.f_is_empty_1(parent);
-        return Core.f_if_2(
+        Core.Type_string tag = xmlarg.tag();
+        Core.Type_string text = tb.text();
+        Xml.Type_xml parent = xmlarg.parent();
+        Core.Type_boolean isnoparent = Core.f_is_empty_1(parent);
+        Core.Type_any output_1 = Core.f_if_2(
           Xml.t_xml,
           Core.vx_new(Core.t_thenelselist,
             Core.f_then(
@@ -1601,6 +1604,7 @@ public final class Xml {
             )
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -1693,10 +1697,10 @@ public final class Xml {
     output = Core.f_let(
       Xml.t_xml,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Textblock.Type_delim delim = tb.delim();
-        final Core.Type_string text = tb.text();
-        final Core.Type_string starttext = delim.starttext();
-        return Core.f_switch(
+        Textblock.Type_delim delim = tb.delim();
+        Core.Type_string text = tb.text();
+        Core.Type_string starttext = delim.starttext();
+        Core.Type_any output_1 = Core.f_switch(
           Xml.t_xml,
           starttext,
           Core.vx_new(Core.t_thenelselist,
@@ -1732,6 +1736,7 @@ public final class Xml {
             )
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -1922,18 +1927,20 @@ public final class Xml {
     output = Core.f_let(
       Xml.t_xml,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Xml.Type_xml xmlchg = Core.f_any_from_list_start_reduce(
+        Xml.Type_xml xmlchg = Core.f_any_from_list_start_reduce(
           Xml.t_xml,
           textblocklist,
           xmlarg,
           Core.t_any_from_reduce.vx_fn_new((reduce_any, current_any) -> {
             Xml.Type_xml reduce = Core.f_any_from_any(Xml.t_xml, reduce_any);
             Textblock.Type_textblock current = Core.f_any_from_any(Textblock.t_textblock, current_any);
-            return 
-              Xml.f_xml_property_from_xml_textblock(reduce, current);
+            Core.Type_any output_1 = 
+                Xml.f_xml_property_from_xml_textblock(reduce, current);
+            return output_1;
           })
         );
-        return xmlchg;
+        Core.Type_any output_2 = xmlchg;
+        return output_2;
       })
     );
     return output;
@@ -2026,13 +2033,13 @@ public final class Xml {
     output = Core.f_let(
       Xml.t_xml,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Textblock.Type_delim delim = tbarg.delim();
-        final Core.Type_string text = tbarg.text();
-        final Core.Type_string delimname = delim.name();
-        final Core.Type_string tag = xmlarg.tag();
-        final Core.Type_string prop = xmlarg.prop();
-        final Core.Type_stringmap propmap = xmlarg.propmap();
-        return Core.f_switch(
+        Textblock.Type_delim delim = tbarg.delim();
+        Core.Type_string text = tbarg.text();
+        Core.Type_string delimname = delim.name();
+        Core.Type_string tag = xmlarg.tag();
+        Core.Type_string prop = xmlarg.prop();
+        Core.Type_stringmap propmap = xmlarg.propmap();
+        Core.Type_any output_1 = Core.f_switch(
           Xml.t_xml,
           delimname,
           Core.vx_new(Core.t_thenelselist,
@@ -2123,6 +2130,7 @@ public final class Xml {
             )
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -2228,8 +2236,9 @@ public final class Xml {
     output = Core.f_let(
       Xml.t_xml,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final File.Type_file loaded = File.f_file_read_from_file(context, file);
-        return Xml.f_xml_from_file(loaded);
+        File.Type_file loaded = File.f_file_read_from_file(context, file);
+        Core.Type_any output_1 = Xml.f_xml_from_file(loaded);
+        return output_1;
       })
     );
     return output;
@@ -2322,15 +2331,15 @@ public final class Xml {
     output = Core.f_let(
       Xml.t_xml,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string text = tb.text();
-        final Xml.Type_xml xmlchg = Core.f_new(
+        Core.Type_string text = tb.text();
+        Xml.Type_xml xmlchg = Core.f_new(
           Xml.t_xml,
           Core.vx_new(Core.t_anylist,
               Core.vx_new_string(":text"),
               text
           )
         );
-        return Core.f_if_2(
+        Core.Type_any output_1 = Core.f_if_2(
           Xml.t_xml,
           Core.vx_new(Core.t_thenelselist,
             Core.f_then(
@@ -2360,6 +2369,7 @@ public final class Xml {
             )
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -2464,8 +2474,9 @@ public final class Xml {
     output = Core.f_let(
       Xml.t_xml,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string text = file.text();
-        return Xml.f_xml_from_string(text);
+        Core.Type_string text = file.text();
+        Core.Type_any output_1 = Xml.f_xml_from_string(text);
+        return output_1;
       })
     );
     return output;
@@ -2570,8 +2581,9 @@ public final class Xml {
     output = Core.f_let(
       Xml.t_xml,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Textblock.Type_textblock tb = Xml.f_textblock_xml_from_string(text);
-        return Xml.f_xml_from_textblock(tb);
+        Textblock.Type_textblock tb = Xml.f_textblock_xml_from_string(text);
+        Core.Type_any output_1 = Xml.f_xml_from_textblock(tb);
+        return output_1;
       })
     );
     return output;

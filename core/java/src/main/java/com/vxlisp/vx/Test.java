@@ -3702,23 +3702,23 @@ public final class Test {
     output = Core.f_let(
       Html.t_div,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Test.Type_testcoveragesummary testcoveragesummary = testpackage.coveragesummary();
-        final Core.Type_string pkgname = testpackage.testpkg();
-        final Test.Type_testcaselist caselist = testpackage.caselist();
-        final Core.Type_boolean passfail = testpackage.passfail();
-        final Html.Type_style pkgnamestyle = Html.f_style_from_stylesheet_name(
+        Test.Type_testcoveragesummary testcoveragesummary = testpackage.coveragesummary();
+        Core.Type_string pkgname = testpackage.testpkg();
+        Test.Type_testcaselist caselist = testpackage.caselist();
+        Core.Type_boolean passfail = testpackage.passfail();
+        Html.Type_style pkgnamestyle = Html.f_style_from_stylesheet_name(
           Test.c_stylesheet_test,
           Core.vx_new_string(".pkgname")
         );
-        final Html.Type_div node = Test.f_div_from_testcaselist(caselist);
-        final Html.Type_divchildlist nodes = Core.f_new(
+        Html.Type_div node = Test.f_div_from_testcaselist(caselist);
+        Html.Type_divchildlist nodes = Core.f_new(
           Html.t_divchildlist,
           Core.vx_new(Core.t_anylist,
               node
           )
         );
-        final Html.Type_p p_passfail = Test.f_p_from_passfail(passfail);
-        final Html.Type_p p_pkgname = Core.f_new(
+        Html.Type_p p_passfail = Test.f_p_from_passfail(passfail);
+        Html.Type_p p_pkgname = Core.f_new(
           Html.t_p,
           Core.vx_new(Core.t_anylist,
               Core.vx_new_string(":style"),
@@ -3727,28 +3727,28 @@ public final class Test {
               pkgname
           )
         );
-        final Html.Type_p p_totalnums = Test.f_p_from_testcoveragenums(
+        Html.Type_p p_totalnums = Test.f_p_from_testcoveragenums(
           testcoveragesummary.totalnums()
         );
-        final Html.Type_p p_coveragenums = Test.f_p_from_testcoveragenums(
+        Html.Type_p p_coveragenums = Test.f_p_from_testcoveragenums(
           testcoveragesummary.typenums()
         );
-        final Html.Type_p p_constnums = Test.f_p_from_testcoveragenums(
+        Html.Type_p p_constnums = Test.f_p_from_testcoveragenums(
           testcoveragesummary.constnums()
         );
-        final Html.Type_p p_funcnums = Test.f_p_from_testcoveragenums(
+        Html.Type_p p_funcnums = Test.f_p_from_testcoveragenums(
           testcoveragesummary.funcnums()
         );
-        final Html.Type_p p_docnums = Test.f_p_from_testcoveragenums(
+        Html.Type_p p_docnums = Test.f_p_from_testcoveragenums(
           testcoveragesummary.docnums()
         );
-        final Html.Type_p p_bigospacenums = Test.f_p_from_testcoveragenums(
+        Html.Type_p p_bigospacenums = Test.f_p_from_testcoveragenums(
           testcoveragesummary.bigospacenums()
         );
-        final Html.Type_p p_bigotimenums = Test.f_p_from_testcoveragenums(
+        Html.Type_p p_bigotimenums = Test.f_p_from_testcoveragenums(
           testcoveragesummary.bigotimenums()
         );
-        final Html.Type_divchildlist summary = Core.f_new(
+        Html.Type_divchildlist summary = Core.f_new(
           Html.t_divchildlist,
           Core.vx_new(Core.t_anylist,
               p_passfail,
@@ -3762,7 +3762,7 @@ public final class Test {
               p_bigotimenums
           )
         );
-        final Html.Type_details details = Core.f_new(
+        Html.Type_details details = Core.f_new(
           Html.t_details,
           Core.vx_new(Core.t_anylist,
               Core.vx_new_string(":summary"),
@@ -3771,12 +3771,13 @@ public final class Test {
               nodes
           )
         );
-        return Core.f_new(
+        Core.Type_any output_1 = Core.f_new(
           Html.t_div,
           Core.vx_new(Core.t_anylist,
             details
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -3880,23 +3881,23 @@ public final class Test {
     output = Core.f_let(
       Html.t_div,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Html.Type_style stylepassfail = Html.f_style_from_stylesheet_name(
+        Html.Type_style stylepassfail = Html.f_style_from_stylesheet_name(
           Test.c_stylesheet_test,
           Core.vx_new_string(".passfail")
         );
-        final Html.Type_style stylepkgname = Html.f_style_from_stylesheet_name(
+        Html.Type_style stylepkgname = Html.f_style_from_stylesheet_name(
           Test.c_stylesheet_test,
           Core.vx_new_string(".pkgname")
         );
-        final Html.Type_style stylepkgheader = Html.f_style_from_stylesheet_name(
+        Html.Type_style stylepkgheader = Html.f_style_from_stylesheet_name(
           Test.c_stylesheet_test,
           Core.vx_new_string(".pkgheader")
         );
-        final Html.Type_style stylecoveragenum = Html.f_style_from_stylesheet_name(
+        Html.Type_style stylecoveragenum = Html.f_style_from_stylesheet_name(
           Test.c_stylesheet_test,
           Core.vx_new_string(".coveragenums")
         );
-        return Core.f_new(
+        Core.Type_any output_1 = Core.f_new(
           Html.t_div,
           Core.vx_new(Core.t_anylist,
             Core.f_new(
@@ -3995,6 +3996,7 @@ public final class Test {
             )
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -4633,13 +4635,13 @@ public final class Test {
     output = Core.f_let(
       Html.t_p,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string text = Core.f_if_1(Core.t_string, passfail, Core.vx_new_string("Pass"), Core.vx_new_string("Fail"));
-        final Core.Type_string stylename = Core.f_if_1(Core.t_string, passfail, Core.vx_new_string(".passflag"), Core.vx_new_string(".failflag"));
-        final Html.Type_style style = Html.f_style_from_stylesheet_name(
+        Core.Type_string text = Core.f_if_1(Core.t_string, passfail, Core.vx_new_string("Pass"), Core.vx_new_string("Fail"));
+        Core.Type_string stylename = Core.f_if_1(Core.t_string, passfail, Core.vx_new_string(".passflag"), Core.vx_new_string(".failflag"));
+        Html.Type_style style = Html.f_style_from_stylesheet_name(
           Test.c_stylesheet_test,
           stylename
         );
-        return Core.f_new(
+        Core.Type_any output_1 = Core.f_new(
           Html.t_p,
           Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":style"),
@@ -4648,6 +4650,7 @@ public final class Test {
             text
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -4877,24 +4880,26 @@ public final class Test {
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final Test.Type_testdescribelist describelist = testcase.describelist();
         final CompletableFuture<Test.Type_testdescribelist> future_resolvedlist = Test.f_resolve_testdescribelist(describelist);
-        return Core.vx_async_from_async_fn(future_resolvedlist, (resolvedlist) -> {
+        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_resolvedlist, (resolvedlist) -> {;
           final Core.Type_booleanlist passfaillist = Core.f_list_from_list_1(
             Core.t_booleanlist,
             resolvedlist,
             Core.t_any_from_any.vx_fn_new((testdescribe_any) -> {
               Test.Type_testdescribe testdescribe = Core.f_any_from_any(Test.t_testdescribe, testdescribe_any);
-              return 
-                  Core.f_let(
-                    Core.t_boolean,
-                    Core.t_any_from_func.vx_fn_new(() -> {
-                      final Test.Type_testresult testresult = testdescribe.testresult();
-                      return testresult.passfail();
-                    })
-                  );
+              Core.Type_any output_2 = 
+                    Core.f_let(
+                      Core.t_boolean,
+                      Core.t_any_from_func.vx_fn_new(() -> {
+                        Test.Type_testresult testresult = testdescribe.testresult();
+                        Core.Type_any output_3 = testresult.passfail();
+                        return output_3;
+                      })
+                    );
+              return output_2;
             })
           );
           final Core.Type_boolean passfail = Core.f_and_1(passfaillist);
-          return Core.f_copy(
+          Core.Type_any output_4 = Core.f_copy(
             testcase,
             Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":passfail"),
@@ -4903,7 +4908,9 @@ public final class Test {
                   resolvedlist
             )
           );
+          return output_4;
         });
+        return output_1;
       })
     );
     return output;
@@ -5120,15 +5127,17 @@ public final class Test {
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final Test.Type_testresult testresult = testdescribe.testresult();
         final CompletableFuture<Test.Type_testresult> future_resolved = Test.f_resolve_testresult(testresult);
-        return Core.vx_async_from_async_fn(future_resolved, (resolved) -> {
-          return Core.f_copy(
+        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_resolved, (resolved) -> {;
+          Core.Type_any output_2 = Core.f_copy(
             testdescribe,
             Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":testresult"),
                   resolved
             )
           );
+          return output_2;
         });
+        return output_1;
       })
     );
     return output;
@@ -5345,18 +5354,19 @@ public final class Test {
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final Test.Type_testcaselist testcaselist = testpackage.caselist();
         final CompletableFuture<Test.Type_testcaselist> future_resolvedlist = Test.f_resolve_testcaselist(testcaselist);
-        return Core.vx_async_from_async_fn(future_resolvedlist, (resolvedlist) -> {
+        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_resolvedlist, (resolvedlist) -> {;
           final Core.Type_booleanlist passfaillist = Core.f_list_from_list_1(
             Core.t_booleanlist,
             resolvedlist,
             Core.t_any_from_any.vx_fn_new((testcase_any) -> {
               Test.Type_testcase testcase = Core.f_any_from_any(Test.t_testcase, testcase_any);
-              return 
-                  testcase.passfail();
+              Core.Type_any output_2 = 
+                    testcase.passfail();
+              return output_2;
             })
           );
           final Core.Type_boolean passfail = Core.f_and_1(passfaillist);
-          return Core.f_copy(
+          Core.Type_any output_3 = Core.f_copy(
             testpackage,
             Core.vx_new(Core.t_anylist,
                   Core.vx_new_string(":passfail"),
@@ -5365,7 +5375,9 @@ public final class Test {
                   resolvedlist
             )
           );
+          return output_3;
         });
+        return output_1;
       })
     );
     return output;
@@ -5583,8 +5595,8 @@ public final class Test {
         final Core.Func_any_from_func_async fn_actual = testresult.fn_actual();
         final Core.Type_any expected = testresult.expected();
         final CompletableFuture<Core.Type_any> future_actual = Core.f_resolve_async(Core.t_any, fn_actual);
-        return Core.vx_async_from_async_fn(future_actual, (actual) -> {
-          return Core.f_if_2(
+        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_actual, (actual) -> {;
+          Core.Type_any output_3 = Core.f_if_2(
             Test.t_testresult,
             Core.vx_new(Core.t_thenelselist,
                   Core.f_then(
@@ -5600,8 +5612,8 @@ public final class Test {
                       return Core.f_let(
                         Test.t_testresult,
                         Core.t_any_from_func.vx_fn_new(() -> {
-                          final Core.Type_boolean passfail = Core.f_eq(expected, actual);
-                          return Core.f_copy(
+                          Core.Type_boolean passfail = Core.f_eq(expected, actual);
+                          Core.Type_any output_2 = Core.f_copy(
                             testresult,
                             Core.vx_new(Core.t_anylist,
                               Core.vx_new_string(":passfail"),
@@ -5610,13 +5622,16 @@ public final class Test {
                               actual
                             )
                           );
+                          return output_2;
                         })
                       );
                     })
                   )
             )
           );
+          return output_3;
         });
+        return output_1;
       })
     );
     return output;
@@ -7122,20 +7137,20 @@ public final class Test {
     output = Core.f_let(
       Html.t_tr,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string describename = testdescribe.describename();
-        final Test.Type_testresult result = testdescribe.testresult();
-        final Core.Type_boolean passfail = result.passfail();
-        final Core.Type_string expected = Core.f_string_from_any(
+        Core.Type_string describename = testdescribe.describename();
+        Test.Type_testresult result = testdescribe.testresult();
+        Core.Type_boolean passfail = result.passfail();
+        Core.Type_string expected = Core.f_string_from_any(
           result.expected()
         );
-        final Core.Type_string actual = Core.f_string_from_any(
+        Core.Type_string actual = Core.f_string_from_any(
           result.actual()
         );
-        final Html.Type_style prestyle = Html.f_style_from_stylesheet_name(
+        Html.Type_style prestyle = Html.f_style_from_stylesheet_name(
           Test.c_stylesheet_test,
           Core.vx_new_string(".preformatted")
         );
-        return Core.f_new(
+        Core.Type_any output_1 = Core.f_new(
           Html.t_tr,
           Core.vx_new(Core.t_anylist,
             Core.f_new(
@@ -7202,6 +7217,7 @@ public final class Test {
             )
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -7305,17 +7321,19 @@ public final class Test {
     output = Core.f_let(
       Html.t_trlist,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Test.Type_testdescribelist describelist = testcase.describelist();
-        final Core.Type_string casename = testcase.casename();
-        return Core.f_list_from_list_1(
+        Test.Type_testdescribelist describelist = testcase.describelist();
+        Core.Type_string casename = testcase.casename();
+        Core.Type_any output_2 = Core.f_list_from_list_1(
           Html.t_trlist,
           describelist,
           Core.t_any_from_any.vx_fn_new((testdescribe_any) -> {
             Test.Type_testdescribe testdescribe = Core.f_any_from_any(Test.t_testdescribe, testdescribe_any);
-            return 
-            Test.f_tr_from_testdescribe_casename(testdescribe, casename);
+            Core.Type_any output_1 = 
+              Test.f_tr_from_testdescribe_casename(testdescribe, casename);
+            return output_1;
           })
         );
+        return output_2;
       })
     );
     return output;

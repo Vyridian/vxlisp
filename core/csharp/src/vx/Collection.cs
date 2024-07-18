@@ -440,7 +440,8 @@ public static class Collection {
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_stringlist keys = Vx.Core.f_stringlist_from_map(map);
         Vx.Core.Type_string key = Vx.Core.f_any_from_list(Vx.Core.t_string, keys, pos);
-        return Vx.Core.f_any_from_map(generic_any_1, map, key);
+        Vx.Core.Type_any output_1 = Vx.Core.f_any_from_map(generic_any_1, map, key);
+        return output_1;
       })
     );
     return output;
@@ -618,11 +619,13 @@ public static class Collection {
           keys,
           Vx.Core.t_any_from_any.vx_fn_new((key_any) => {
             Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
-            return 
-              Vx.Collection.f_boolean_write_from_map_removekey(valuemap, key);
+            Vx.Core.Type_any output_1 = 
+                Vx.Collection.f_boolean_write_from_map_removekey(valuemap, key);
+            return output_1;
           })
         );
-        return Vx.Core.f_and_1(writelist);
+        Vx.Core.Type_any output_2 = Vx.Core.f_and_1(writelist);
+        return output_2;
       })
     );
     return output;
@@ -709,7 +712,8 @@ public static class Collection {
       Vx.Core.t_int,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_stringlist keys = Vx.Core.f_stringlist_from_map(map);
-        return Vx.Collection.f_int_from_stringlist_find(keys, key);
+        Vx.Core.Type_any output_1 = Vx.Collection.f_int_from_stringlist_find(keys, key);
+        return output_1;
       })
     );
     return output;
@@ -801,13 +805,14 @@ public static class Collection {
           Vx.Core.t_any_from_int_any.vx_fn_new((pos_any, value_any) => {
             Vx.Core.Type_int pos = Vx.Core.f_any_from_any(Vx.Core.t_int, pos_any);
             Vx.Core.Type_string value = Vx.Core.f_any_from_any(Vx.Core.t_string, value_any);
-            return 
-              Vx.Core.f_if_1(
-                Vx.Core.t_int,
-                Vx.Core.f_eq(find, value),
-                pos,
-                Vx.Core.vx_new_int(0)
-              );
+            Vx.Core.Type_any output_1 = 
+                Vx.Core.f_if_1(
+                  Vx.Core.t_int,
+                  Vx.Core.f_eq(find, value),
+                  pos,
+                  Vx.Core.vx_new_int(0)
+                );
+            return output_1;
           })
         );
         Vx.Core.Type_intlist gt0list = Vx.Collection.f_list_from_list_filter(
@@ -815,10 +820,12 @@ public static class Collection {
           poslist,
           Vx.Core.t_any_from_any.vx_fn_new((item_any) => {
             Vx.Core.Type_int item = Vx.Core.f_any_from_any(Vx.Core.t_int, item_any);
-            return item;
+            Vx.Core.Type_any output_2 = item;
+            return output_2;
           })
         );
-        return Vx.Core.f_first_from_list(Vx.Core.t_int, gt0list);
+        Vx.Core.Type_any output_3 = Vx.Core.f_first_from_list(Vx.Core.t_int, gt0list);
+        return output_3;
       })
     );
     return output;
@@ -1527,12 +1534,13 @@ public static class Collection {
       vallist,
       Vx.Core.t_any_from_any.vx_fn_new((val_any) => {
         Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, val_any);
-        return 
-        Vx.Core.f_if(
-          Vx.Core.t_any,
-          Vx.Type.f_is_type_from_any_typelist(val, filtertypes),
-          val
-        );
+        Vx.Core.Type_any output_1 = 
+          Vx.Core.f_if(
+            Vx.Core.t_any,
+            Vx.Type.f_is_type_from_any_typelist(val, filtertypes),
+            val
+          );
+        return output_1;
       })
     );
     return output;
@@ -2043,7 +2051,8 @@ public static class Collection {
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_stringlist keys1 = Vx.Core.f_stringlist_from_map(valuemap);
         Vx.Core.Type_stringlist keys2 = Vx.Collection.f_list_from_list_start_end(Vx.Core.t_stringlist, keys1, start, end);
-        return Vx.Collection.f_map_from_map_keys(generic_map_1, valuemap, keys2);
+        Vx.Core.Type_any output_1 = Vx.Collection.f_map_from_map_keys(generic_map_1, valuemap, keys2);
+        return output_1;
       })
     );
     return output;

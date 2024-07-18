@@ -636,9 +636,10 @@ public final class Collection {
     output = Core.f_let(
       generic_any_1,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_stringlist keys = Core.f_stringlist_from_map(map);
-        final Core.Type_string key = Core.f_any_from_list(Core.t_string, keys, pos);
-        return Core.f_any_from_map(generic_any_1, map, key);
+        Core.Type_stringlist keys = Core.f_stringlist_from_map(map);
+        Core.Type_string key = Core.f_any_from_list(Core.t_string, keys, pos);
+        Core.Type_any output_1 = Core.f_any_from_map(generic_any_1, map, key);
+        return output_1;
       })
     );
     return output;
@@ -825,16 +826,18 @@ public final class Collection {
     output = Core.f_let(
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_booleanlist writelist = Core.f_list_from_list_1(
+        Core.Type_booleanlist writelist = Core.f_list_from_list_1(
           Core.t_booleanlist,
           keys,
           Core.t_any_from_any.vx_fn_new((key_any) -> {
             Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
-            return 
-              Collection.f_boolean_write_from_map_removekey(valuemap, key);
+            Core.Type_any output_1 = 
+                Collection.f_boolean_write_from_map_removekey(valuemap, key);
+            return output_1;
           })
         );
-        return Core.f_and_1(writelist);
+        Core.Type_any output_2 = Core.f_and_1(writelist);
+        return output_2;
       })
     );
     return output;
@@ -927,8 +930,9 @@ public final class Collection {
     output = Core.f_let(
       Core.t_int,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_stringlist keys = Core.f_stringlist_from_map(map);
-        return Collection.f_int_from_stringlist_find(keys, key);
+        Core.Type_stringlist keys = Core.f_stringlist_from_map(map);
+        Core.Type_any output_1 = Collection.f_int_from_stringlist_find(keys, key);
+        return output_1;
       })
     );
     return output;
@@ -1021,30 +1025,33 @@ public final class Collection {
     output = Core.f_let(
       Core.t_int,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_intlist poslist = Core.f_list_from_list_intany(
+        Core.Type_intlist poslist = Core.f_list_from_list_intany(
           Core.t_intlist,
           stringlist,
           Core.t_any_from_int_any.vx_fn_new((pos_any, value_any) -> {
             Core.Type_int pos = Core.f_any_from_any(Core.t_int, pos_any);
             Core.Type_string value = Core.f_any_from_any(Core.t_string, value_any);
-            return 
-              Core.f_if_1(
-                Core.t_int,
-                Core.f_eq(find, value),
-                pos,
-                Core.vx_new_int(0)
-              );
+            Core.Type_any output_1 = 
+                Core.f_if_1(
+                  Core.t_int,
+                  Core.f_eq(find, value),
+                  pos,
+                  Core.vx_new_int(0)
+                );
+            return output_1;
           })
         );
-        final Core.Type_intlist gt0list = Collection.f_list_from_list_filter(
+        Core.Type_intlist gt0list = Collection.f_list_from_list_filter(
           Core.t_intlist,
           poslist,
           Core.t_any_from_any.vx_fn_new((item_any) -> {
             Core.Type_int item = Core.f_any_from_any(Core.t_int, item_any);
-            return item;
+            Core.Type_any output_2 = item;
+            return output_2;
           })
         );
-        return Core.f_first_from_list(Core.t_int, gt0list);
+        Core.Type_any output_3 = Core.f_first_from_list(Core.t_int, gt0list);
+        return output_3;
       })
     );
     return output;
@@ -1816,12 +1823,13 @@ public final class Collection {
       vallist,
       Core.t_any_from_any.vx_fn_new((val_any) -> {
         Core.Type_any val = Core.f_any_from_any(Core.t_any, val_any);
-        return 
-        Core.f_if(
-          Core.t_any,
-          Type.f_is_type_from_any_typelist(val, filtertypes),
-          val
-        );
+        Core.Type_any output_1 = 
+          Core.f_if(
+            Core.t_any,
+            Type.f_is_type_from_any_typelist(val, filtertypes),
+            val
+          );
+        return output_1;
       })
     );
     return output;
@@ -2374,9 +2382,10 @@ public final class Collection {
     output = Core.f_let(
       generic_map_1,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_stringlist keys1 = Core.f_stringlist_from_map(valuemap);
-        final Core.Type_stringlist keys2 = Collection.f_list_from_list_start_end(Core.t_stringlist, keys1, start, end);
-        return Collection.f_map_from_map_keys(generic_map_1, valuemap, keys2);
+        Core.Type_stringlist keys1 = Core.f_stringlist_from_map(valuemap);
+        Core.Type_stringlist keys2 = Collection.f_list_from_list_start_end(Core.t_stringlist, keys1, start, end);
+        Core.Type_any output_1 = Collection.f_map_from_map_keys(generic_map_1, valuemap, keys2);
+        return output_1;
       })
     );
     return output;

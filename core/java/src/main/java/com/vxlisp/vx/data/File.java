@@ -1204,16 +1204,16 @@ public final class File {
     output = Core.f_let(
       File.t_file,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_int pos = Type.f_int_from_string_findlast(path, Core.vx_new_string("/"));
-        final Core.Type_string name = Type.f_string_from_string_start(
+        Core.Type_int pos = Type.f_int_from_string_findlast(path, Core.vx_new_string("/"));
+        Core.Type_string name = Type.f_string_from_string_start(
           path,
           Core.f_plus1(pos)
         );
-        final Core.Type_string pth = Type.f_string_from_string_end(
+        Core.Type_string pth = Type.f_string_from_string_end(
           path,
           Core.f_minus1(pos)
         );
-        return Core.f_new(
+        Core.Type_any output_1 = Core.f_new(
           File.t_file,
           Core.vx_new(Core.t_anylist,
             Core.vx_new_string(":name"),
@@ -1222,6 +1222,7 @@ public final class File {
             pth
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -1613,9 +1614,9 @@ public final class File {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_string path = File.f_path_from_file(file);
-        final Core.Type_string name = File.f_name_from_file(file);
-        return Core.f_if_2(
+        Core.Type_string path = File.f_path_from_file(file);
+        Core.Type_string name = File.f_name_from_file(file);
+        Core.Type_any output_1 = Core.f_if_2(
           Core.t_string,
           Core.vx_new(Core.t_thenelselist,
             Core.f_then(
@@ -1640,6 +1641,7 @@ public final class File {
             )
           )
         );
+        return output_1;
       })
     );
     return output;

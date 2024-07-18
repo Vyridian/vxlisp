@@ -1043,8 +1043,9 @@ public final class Event {
     output = Core.f_let(
       generic_any_1,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Core.Type_any value = evt.from();
-        return Core.f_any_from_any(generic_any_1, value);
+        Core.Type_any value = evt.from();
+        Core.Type_any output_1 = Core.f_any_from_any(generic_any_1, value);
+        return output_1;
       })
     );
     return output;
@@ -1355,8 +1356,9 @@ public final class Event {
       eventlist,
       Core.t_any_from_any.vx_fn_new((evt_any) -> {
         Event.Type_event evt = Core.f_any_from_any(Event.t_event, evt_any);
-        return 
-        evt.name();
+        Core.Type_any output_1 = 
+          evt.name();
+        return output_1;
       })
     );
     return output;

@@ -839,9 +839,11 @@ public final class Htmldoc {
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final Core.Type_string text = Htmldoc.f_string_from_stylesheet(stylesheet);
         final CompletableFuture<Core.Type_boolean> future_iswrite = Htmldoc.f_boolean_write_stylesheet_from_string(text);
-        return Core.vx_async_from_async_fn(future_iswrite, (iswrite) -> {
-          return iswrite;
+        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_iswrite, (iswrite) -> {;
+          Core.Type_any output_2 = iswrite;
+          return output_2;
         });
+        return output_1;
       })
     );
     return output;
@@ -1311,9 +1313,10 @@ public final class Htmldoc {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        final Html.Type_stylelist stylelist = Html.f_styles_from_stylesheet(stylesheet);
-        final Core.Type_string text = Html.f_string_from_stylelist_indent(stylelist, Core.vx_new_int(0));
-        return text;
+        Html.Type_stylelist stylelist = Html.f_styles_from_stylesheet(stylesheet);
+        Core.Type_string text = Html.f_string_from_stylelist_indent(stylelist, Core.vx_new_int(0));
+        Core.Type_any output_1 = text;
+        return output_1;
       })
     );
     return output;

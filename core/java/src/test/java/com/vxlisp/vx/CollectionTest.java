@@ -26,13 +26,15 @@ public final class CollectionTest {
                 Core.vx_new_int(1),
                 Core.t_boolean_from_any.vx_fn_new((current_any) -> {
                   Core.Type_int current = Core.f_any_from_any(Core.t_int, current_any);
-                  return 
-                  Core.f_gt(current, Core.vx_new_int(6));
+                  Core.Type_any output_1 = 
+                    Core.f_gt(current, Core.vx_new_int(6));
+                  return output_1;
                 }),
                 Core.t_any_from_any.vx_fn_new((current_any) -> {
                   Core.Type_int current = Core.f_any_from_any(Core.t_int, current_any);
-                  return 
-                  Core.f_plus(current, current);
+                  Core.Type_any output_2 = 
+                    Core.f_plus(current, current);
+                  return output_2;
                 })
               )
             )
@@ -63,13 +65,15 @@ public final class CollectionTest {
                 Core.vx_new_int(1),
                 Core.t_boolean_from_any.vx_fn_new((current_any) -> {
                   Core.Type_int current = Core.f_any_from_any(Core.t_int, current_any);
-                  return 
-                  Core.f_lt(current, Core.vx_new_int(5));
+                  Core.Type_any output_1 = 
+                    Core.f_lt(current, Core.vx_new_int(5));
+                  return output_1;
                 }),
                 Core.t_any_from_any.vx_fn_new((current_any) -> {
                   Core.Type_int current = Core.f_any_from_any(Core.t_int, current_any);
-                  return 
-                  Core.f_plus(current, current);
+                  Core.Type_any output_2 = 
+                    Core.f_plus(current, current);
+                  return output_2;
                 })
               )
             )
@@ -229,8 +233,9 @@ public final class CollectionTest {
                 Core.vx_new_int(3),
                 Core.t_any_from_int.vx_fn_new((current_any) -> {
                   Core.Type_int current = Core.f_any_from_any(Core.t_int, current_any);
-                  return 
-                  Core.f_multiply(current, current);
+                  Core.Type_any output_1 = 
+                    Core.f_multiply(current, current);
+                  return output_1;
                 })
               )
             )
@@ -327,26 +332,27 @@ public final class CollectionTest {
                 ),
                 Core.t_any_from_any.vx_fn_new((val_any) -> {
                   Core.Type_any val = Core.f_any_from_any(Core.t_any, val_any);
-                  return 
-                  Core.f_if_2(
-                    Core.t_string,
-                    Core.vx_new(Core.t_thenelselist,
-                      Core.f_then(
-                        Core.t_boolean_from_func.vx_fn_new(() -> {
-                          return Type.f_is_string(val);
-                        }),
-                        Core.t_any_from_func.vx_fn_new(() -> {
-                          return Core.f_new(
-                            Core.t_string,
-                            Core.vx_new(Core.t_anylist,
-                                val,
-                                Core.vx_new_string("1")
-                            )
-                          );
-                        })
+                  Core.Type_any output_1 = 
+                    Core.f_if_2(
+                      Core.t_string,
+                      Core.vx_new(Core.t_thenelselist,
+                        Core.f_then(
+                          Core.t_boolean_from_func.vx_fn_new(() -> {
+                            return Type.f_is_string(val);
+                          }),
+                          Core.t_any_from_func.vx_fn_new(() -> {
+                            return Core.f_new(
+                              Core.t_string,
+                              Core.vx_new(Core.t_anylist,
+                                  val,
+                                  Core.vx_new_string("1")
+                              )
+                            );
+                          })
+                        )
                       )
-                    )
-                  );
+                    );
+                  return output_1;
                 })
               )
             )

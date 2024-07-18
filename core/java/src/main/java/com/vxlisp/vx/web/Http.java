@@ -336,9 +336,11 @@ public final class Http {
       Csv.t_csv,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final CompletableFuture<Textblock.Type_textblock> future_textblock = Http.f_textblock_from_httpget(url, Core.vx_new_string("text/csv"));
-        return Core.vx_async_from_async_fn(future_textblock, (textblock) -> {
-          return Csv.f_csv_from_textblock(textblock);
+        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_textblock, (textblock) -> {;
+          Core.Type_any output_2 = Csv.f_csv_from_textblock(textblock);
+          return output_2;
         });
+        return output_1;
       })
     );
     return output;
@@ -447,9 +449,11 @@ public final class Http {
       Http.t_response,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final CompletableFuture<Http.Type_response> future_response = Http.f_response_from_httpget(url, Core.vx_new_string("application/json"));
-        return Core.vx_async_from_async_fn(future_response, (response) -> {
-          return response;
+        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_response, (response) -> {;
+          Core.Type_any output_2 = response;
+          return output_2;
         });
+        return output_1;
       })
     );
     return output;
@@ -648,9 +652,11 @@ public final class Http {
       Core.t_string,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final CompletableFuture<Http.Type_response> future_response = Http.f_response_from_httpget(url, Core.vx_new_string("text/plain"));
-        return Core.vx_async_from_async_fn(future_response, (response) -> {
-          return Http.f_text_from_response(response);
+        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_response, (response) -> {;
+          Core.Type_any output_2 = Http.f_text_from_response(response);
+          return output_2;
         });
+        return output_1;
       })
     );
     return output;
@@ -846,9 +852,11 @@ public final class Http {
       Textblock.t_textblock,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final CompletableFuture<Http.Type_response> future_response = Http.f_response_from_httpget(url, contenttype);
-        return Core.vx_async_from_async_fn(future_response, (response) -> {
-          return Http.f_textblock_from_response(response);
+        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_response, (response) -> {;
+          Core.Type_any output_2 = Http.f_textblock_from_response(response);
+          return output_2;
         });
+        return output_1;
       })
     );
     return output;
@@ -1063,9 +1071,11 @@ public final class Http {
       Xml.t_xml,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final CompletableFuture<Textblock.Type_textblock> future_textblock = Http.f_textblock_from_httpget(url, Core.vx_new_string("text/xml"));
-        return Core.vx_async_from_async_fn(future_textblock, (textblock) -> {
-          return Xml.f_xml_from_textblock(textblock);
+        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_textblock, (textblock) -> {;
+          Core.Type_any output_2 = Xml.f_xml_from_textblock(textblock);
+          return output_2;
         });
+        return output_1;
       })
     );
     return output;

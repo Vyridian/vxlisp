@@ -261,7 +261,8 @@ public static class State {
       generic_any_1,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.State.Type_valuemap submap = Vx.State.f_valuemap_readstate_from_mapname(context, mapname);
-        return Vx.Core.f_any_from_map(generic_any_1, submap, name);
+        Vx.Core.Type_any output_1 = Vx.Core.f_any_from_map(generic_any_1, submap, name);
+        return output_1;
       })
     );
     return output;
@@ -455,13 +456,14 @@ public static class State {
       Vx.Core.t_boolean,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_statelistenermap statelistenermap = Vx.State.f_statelistenermap_readstate(context);
-        return Vx.Core.f_boolean_write_from_map_name_value(
+        Vx.Core.Type_any output_1 = Vx.Core.f_boolean_write_from_map_name_value(
           statelistenermap,
           name,
           Vx.Core.f_empty(
             Vx.Core.t_statelistener
           )
         );
+        return output_1;
       })
     );
     return output;
@@ -551,7 +553,7 @@ public static class State {
       Vx.Core.t_boolean,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.State.Type_valuemap valmap = Vx.State.f_any_readstate_from_name(Vx.State.t_valuemap, context, mapname);
-        return Vx.Core.f_if_2(
+        Vx.Core.Type_any output_2 = Vx.Core.f_if_2(
           Vx.Core.t_boolean,
           Vx.Core.vx_new(Vx.Core.t_thenelselist,
             Vx.Core.f_then(
@@ -578,7 +580,8 @@ public static class State {
                           valmap2
                       )
                     );
-                    return Vx.State.f_boolean_writestate_from_statelistener(context, listener);
+                    Vx.Core.Type_any output_1 = Vx.State.f_boolean_writestate_from_statelistener(context, listener);
+                    return output_1;
                   })
                 );
               })
@@ -590,6 +593,7 @@ public static class State {
             )
           )
         );
+        return output_2;
       })
     );
     return output;
@@ -686,7 +690,8 @@ public static class State {
               value
           )
         );
-        return Vx.State.f_boolean_writestate_from_statelistener(context, listenerchg);
+        Vx.Core.Type_any output_1 = Vx.State.f_boolean_writestate_from_statelistener(context, listenerchg);
+        return output_1;
       })
     );
     return output;
@@ -785,7 +790,8 @@ public static class State {
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_statelistenermap statelistenermap = Vx.State.f_statelistenermap_readstate(context);
         Vx.Core.Type_string name = statelistener.name();
-        return Vx.Core.f_boolean_write_from_map_name_value(statelistenermap, name, statelistener);
+        Vx.Core.Type_any output_1 = Vx.Core.f_boolean_write_from_map_name_value(statelistenermap, name, statelistener);
+        return output_1;
       })
     );
     return output;
@@ -1140,7 +1146,8 @@ public static class State {
       Vx.Core.t_statelistener,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_statelistenermap statelistenermap = Vx.State.f_statelistenermap_readstate(context);
-        return Vx.Core.f_any_from_map(Vx.Core.t_statelistener, statelistenermap, name);
+        Vx.Core.Type_any output_1 = Vx.Core.f_any_from_map(Vx.Core.t_statelistener, statelistenermap, name);
+        return output_1;
       })
     );
     return output;
@@ -1224,7 +1231,8 @@ public static class State {
       Vx.Core.t_statelistenermap,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_state state = Vx.State.f_state_from_context(context);
-        return state.statelistenermap();
+        Vx.Core.Type_any output_1 = state.statelistenermap();
+        return output_1;
       })
     );
     return output;
@@ -1322,7 +1330,8 @@ public static class State {
       Vx.Core.t_any,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_statelistener statelistener = Vx.State.f_statelistener_readstate_from_name(context, name);
-        return statelistener.value();
+        Vx.Core.Type_any output_1 = statelistener.value();
+        return output_1;
       })
     );
     return output;
@@ -1421,7 +1430,8 @@ public static class State {
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_any value = Vx.State.f_value_readstate_from_name(context, mapname);
         Vx.State.Type_valuemap valmap = Vx.Core.f_any_from_any(Vx.State.t_valuemap, value);
-        return valmap;
+        Vx.Core.Type_any output_1 = valmap;
+        return output_1;
       })
     );
     return output;

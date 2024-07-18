@@ -966,7 +966,8 @@ public static class Event {
       generic_any_1,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_any value = evt.from();
-        return Vx.Core.f_any_from_any(generic_any_1, value);
+        Vx.Core.Type_any output_1 = Vx.Core.f_any_from_any(generic_any_1, value);
+        return output_1;
       })
     );
     return output;
@@ -1249,8 +1250,9 @@ public static class Event {
       eventlist,
       Vx.Core.t_any_from_any.vx_fn_new((evt_any) => {
         Vx.Event.Type_event evt = Vx.Core.f_any_from_any(Vx.Event.t_event, evt_any);
-        return 
-        evt.name();
+        Vx.Core.Type_any output_1 = 
+          evt.name();
+        return output_1;
       })
     );
     return output;

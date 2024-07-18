@@ -273,25 +273,13 @@
     return output;
   }
 
-/*
-  public static T vx_any_from_any<T>(T generic_any_1, Vx.Core.Type_any value) {
-    if (value is T output) {
-      return output;
-    } else {
-      return vx_empty(generic_any_1);
-    }
+  // vx_any_from_func(generic_any_1, func, args...)
+  public static T vx_any_from_func<T>(T generic_any_1, Vx.Core.Type_replfunc func, params Vx.Core.Type_any[] args) where T : Vx.Core.Type_any {
+    Vx.Core.Type_anylist anylist = Vx.Core.vx_new_anylist(args);
+    Vx.Core.Type_any val = func.vx_repl(anylist);
+    T output = Vx.Core.f_any_from_any(generic_any_1, val);
+    return output;
   }
-
-  public static T vx_any_from_object<T>(T generic_any_1, Object value) {
-    if (value is T output) {
-      return output;
-    } else if (value is Vx.Core.Type_any anyvalue) {
-      return vx_empty(anyvalue);
-    } else {
-      return default(T);
-    }
-  }
-*/
 
   public static Task<T> vx_async_new_completed<T>(T value) {
     Task<T> output = Task.FromResult<T>(value);
@@ -558,12 +546,23 @@
   }
 
   // vx_msgblock_from_copy_arrayval(msgblock, any...)
-  public static Vx.Core.Type_msgblock vx_msgblock_from_copy_arrayval(Vx.Core.Type_any copy, Object[] vals) {
+  public static Vx.Core.Type_msgblock vx_msgblock_from_copy_arrayval(Vx.Core.Type_any copy, params Object[] vals) {
     Vx.Core.Type_msgblock output = Vx.Core.e_msgblock;
     Vx.Core.Type_msgblock copymsgblock = copy.vx_msgblock();
     if (copymsgblock != null) {
       output = copymsgblock;
     }
+    return output;
+  }
+
+  public static Vx.Core.Type_anylist vx_new_anylist(params Vx.Core.Type_any[] anys) {
+    List<Core.Type_any> listany = new List<Vx.Core.Type_any>(anys);
+    return vx_new_anylist(listany);
+  }
+
+  public static Vx.Core.Type_anylist vx_new_anylist(List<Vx.Core.Type_any> listany) {
+    Vx.Core.Class_anylist output = new Vx.Core.Class_anylist();
+    output.vx_p_list = immutablelist(listany);
     return output;
   }
 
@@ -815,7 +814,7 @@
     return output;
   }
 
-  public static Vx.Core.Type_anylist vx_anylist_from_arraystring(string[] arraystring) {
+  public static Vx.Core.Type_anylist vx_anylist_from_arraystring(params string[] arraystring) {
     List<Object> listany = new List<Object>();
     foreach (string svalue in arraystring) {
       Vx.Core.Type_string value = Vx.Core.vx_new_string(svalue);
