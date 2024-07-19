@@ -32,8 +32,9 @@
   :cpp
    "vx_core::Type_any any = vx_collection::vx_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, max);
     output = vx_core::vx_any_from_any(generic_any_1, any);"
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :doc `Returns a value using a until loop.
 output : any-1 := start
 count : int := 0
@@ -74,8 +75,9 @@ count : int := 0
   :cpp
    "vx_core::Type_any any = vx_collection::vx_any_from_for_while_loop_max(generic_any_1, start, fn_while, fn_loop, max);
     output = vx_core::vx_any_from_any(generic_any_1, any);"
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :doc "Returns a value using a while loop.
        output : any-1 := start
        count : int := 0
@@ -191,8 +193,9 @@ count : int := 0
   :cpp
    "vx_core::Type_any list = vx_collection::vx_list_from_for_end_loop(generic_list_1, start, end, fn_loop);
     output = vx_core::vx_any_from_any(generic_list_1, list);"
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (intlist 4 9)
         (list<-for-end-loop : intlist
@@ -242,8 +245,9 @@ output : list-1 := (empty list-1)
   :cpp
    "vx_core::Type_any list = vx_collection::vx_list_from_for_while_loop_max(generic_list_1, start, fn_while, fn_loop, max);
     output = vx_core::vx_any_from_any(generic_list_1, list);"
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :doc `Returns a list of any-1 using a while loop.
 1. output : list-1 := (empty list-1)
 2. value : any-1 := start.
@@ -273,8 +277,9 @@ output : list-1 := (empty list-1)
   :cpp
    "vx_core::Type_any list = vx_collection::vx_list_from_list_filter(generic_list_1, vallist, fn_filter);
     output = vx_core::vx_any_from_any(generic_list_1, list);"
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (stringlist
          "a1" "b1" "c1" "d1")
@@ -330,8 +335,9 @@ output : list-1 := (empty list-1)
   :cpp
    "vx_core::Type_any any = vx_collection::vx_list_from_list_start_end(generic_list_1, values, start, end);
     output = vx_core::vx_any_from_any(generic_list_1, any);"
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (stringlist
          "b" "c")
@@ -362,9 +368,10 @@ output : list-1 := (empty list-1)
  [valuemap : map-1
   keys     : stringlist]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (stringmap
          :c "3"

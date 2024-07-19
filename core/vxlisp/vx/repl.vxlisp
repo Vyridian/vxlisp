@@ -163,6 +163,15 @@
   :cpp
    "vx_core::Type_replfunc replfunc = dynamic_cast<vx_core::Type_replfunc>(type);
     output = replfunc->vx_repl(args);"
+  :csharp
+   "if (type is Core.Type_replfunc replfunc) {
+      output = replfunc.vx_repl(args);
+    }"
+  :java
+   "if (type instanceof Core.Type_replfunc) {
+      Core.Type_replfunc replfunc = (Core.Type_replfunc)type;
+      output = replfunc.vx_repl(args);
+    }"
   :js
    "const vxvalue = type['vx_value']
     if (vxvalue != undefined) {
@@ -170,11 +179,6 @@
       if (fn != undefined) {
         output = fn(...args)
       }
-    }"
-  :java
-   "if (type instanceof Core.Type_replfunc) {
-      Core.Type_replfunc replfunc = (Core.Type_replfunc)type;
-      output = replfunc.vx_repl(args);
     }")
  :doc "Returns any from a repl func and args.")
 

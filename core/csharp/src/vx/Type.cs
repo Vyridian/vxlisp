@@ -2,6 +2,180 @@ namespace Vx;
 
 public static class Type {
 
+  public static Vx.Core.Type_boolean vx_boolean_from_string_ends(
+    Vx.Core.Type_string text,
+    Vx.Core.Type_string ends) {
+    bool check = Vx.Core.vx_boolean_from_string_ends(
+      text.vx_string(),
+      ends.vx_string());
+    Vx.Core.Type_boolean output = Core.vx_new_boolean(check);
+    return output;
+  }
+
+  public static Vx.Core.Type_boolean vx_boolean_from_string_starts(
+    Vx.Core.Type_string text,
+    Vx.Core.Type_string starts) {
+    Vx.Core.Type_boolean output = Vx.Core.e_boolean;
+    bool check = Vx.Core.vx_boolean_from_string_starts(
+      text.vx_string(),
+      starts.vx_string()
+    );
+    output = Core.vx_new_boolean(check);
+    return output;
+  }
+
+  // vx_int_from_string_find(string, string)
+  public static int vx_int_from_string_find(String text, string find) {
+    return text.IndexOf(find) + 1;
+  }
+
+  // vx_int_from_string_find(string, string)
+  public static Vx.Core.Type_int vx_int_from_string_find(
+    Vx.Core.Type_string text,
+    Vx.Core.Type_string find) {
+    int ipos = vx_int_from_string_find(text.vx_string(), find.vx_string());
+    Vx.Core.Type_int output = Vx.Core.vx_new_int(ipos);
+    return output;
+  }
+
+  // vx_int_from_string_findkeyword(string, string)
+  public static int vx_int_from_string_findkeyword(
+    string text,
+    string find) {
+    int output = -1;
+    if (text == "") {
+    } else if (find == ":nonwhitespace") {
+      string wschars1 = " \n\r\t";
+      int ilen = text.Length;
+      for (int i = 0; i < ilen; i++) {
+        char cchar = text[i];
+        int pos = wschars1.IndexOf(cchar);
+        if (pos < 0) {
+          output = i;
+          break;
+        }
+      }
+    } else if (find == ":whitespace") {
+      char[] wschars2 = {' ', '\n', '\r', '\t'};
+      foreach (char cchar in wschars2) {
+        int pos = text.IndexOf(cchar);
+        if (pos < 0) {
+        } else if (output < 0) {
+          output = pos;
+        } else if (pos < output) {
+          output = pos;
+        }
+      }
+    } else {
+	     output = text.IndexOf(find);
+		  }
+    output += 1;
+		  return output;
+ 	}
+
+  // vx_int_from_string_findkeyword(string, string)
+  public static Vx.Core.Type_int vx_int_from_string_findkeyword(
+    Vx.Core.Type_string text,
+    Vx.Core.Type_string find) {
+    int ipos = vx_int_from_string_findkeyword(
+      text.vx_string(),
+      find.vx_string()
+    );
+    Vx.Core.Type_int output = Vx.Core.vx_new_int(ipos);
+    return output;
+  }
+ 
+  // vx_int_from_string_findlast(string, string)
+  public static int vx_int_from_string_findlast(
+    string text,
+    string findlast) {
+    return text.LastIndexOf(findlast) + 1;
+  }
+
+  // vx_int_from_string_findlast(string, string)
+  public static Vx.Core.Type_int vx_int_from_string_findlast(
+    Vx.Core.Type_string text,
+    Vx.Core.Type_string findlast) {
+    int ipos = vx_int_from_string_findlast(
+      text.vx_string(),
+      findlast.vx_string()
+    );
+    Vx.Core.Type_int output = Vx.Core.vx_new_int(ipos);
+    return output;
+  }
+
+  public static Vx.Core.Type_string vx_string_from_string_start_end(
+    Vx.Core.Type_string text,
+    Vx.Core.Type_int start,
+    Vx.Core.Type_int end) {
+    Vx.Core.Type_string output = Vx.Core.e_string;
+    string stext = Vx.Core.vx_string_from_string_start_end(
+      text.vx_string(),
+      start.vx_int(),
+      end.vx_int()
+    );
+    output = Vx.Core.vx_new_string(stext);
+    return output;
+  }
+
+  // vx_string_from_stringlist_join(stringlist, string)
+  public static Vx.Core.Type_string vx_string_from_stringlist_join(
+    Vx.Core.Type_stringlist vals,
+    Vx.Core.Type_string delim) {
+    Func<Vx.Core.Type_any, string> fn = (item) => {
+      Vx.Core.Type_string valstring = Vx.Core.f_any_from_any(
+        Vx.Core.t_string,
+        item
+      );
+      return valstring.vx_string();
+    };
+    List<string> listvalstring = Vx.Core.arraylist_from_arraylist_fn(
+      vals.vx_list(),
+      fn
+    );
+    string stext = string.Join(delim.vx_string(), listvalstring);  
+    Vx.Core.Type_string output = Vx.Core.vx_new_string(stext);
+    return output;
+  }
+
+  // vx_string_lowercase(string)
+  public static Vx.Core.Type_string vx_string_lowercase(Vx.Core.Type_string text) {
+    Vx.Core.Type_string output = Vx.Core.e_string;
+    string stext = text.vx_string();
+    stext = stext.ToLower();
+    output = Vx.Core.vx_new_string(stext);
+    return output;
+  }
+
+  // vx_string_trim(string)
+  public static Vx.Core.Type_string vx_string_trim(Vx.Core.Type_string text) {
+    Vx.Core.Type_string output = Vx.Core.e_string;
+    string stext = text.vx_string();
+    stext = stext.Trim();
+    output = Vx.Core.vx_new_string(stext);
+    return output;
+  }
+
+  // vx_string_uppercase(string)
+  public static Vx.Core.Type_string vx_string_uppercase(
+    Vx.Core.Type_string text) {
+    Vx.Core.Type_string output = Vx.Core.e_string;
+    string stext = text.vx_string();
+    stext = stext.ToUpper();
+    output = Vx.Core.vx_new_string(stext);
+    return output;
+  }
+
+  public static Vx.Core.Type_stringlist vx_stringlist_from_string_split(
+    Vx.Core.Type_string text,
+    Vx.Core.Type_string delim) {
+    Vx.Core.Type_stringlist output = Vx.Core.e_stringlist;
+    string stext = text.vx_string();
+    string sdelim = delim.vx_string();
+    Object[] arraystring = System.Text.RegularExpressions.Regex.Split(stext, sdelim);
+    output = Vx.Core.vx_new(Vx.Core.t_stringlist, arraystring);
+    return output;
+  }
   /**
    * @function allowtypenames_from_type
    * Get the name of a given type
@@ -354,6 +528,7 @@ public static class Type {
 
   public static Vx.Core.Type_boolean f_boolean_from_string_ends(Vx.Core.Type_string text, Vx.Core.Type_string ends) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
+    output = Vx.Type.vx_boolean_from_string_ends(text, ends);
     return output;
   }
 
@@ -434,6 +609,7 @@ public static class Type {
 
   public static Vx.Core.Type_boolean f_boolean_from_string_starts(Vx.Core.Type_string text, Vx.Core.Type_string starts) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
+    output = Vx.Type.vx_boolean_from_string_starts(text, starts);
     return output;
   }
 
@@ -514,6 +690,7 @@ public static class Type {
 
   public static Vx.Core.Type_int f_int_from_string_find(Vx.Core.Type_string text, Vx.Core.Type_string find) {
     Vx.Core.Type_int output = Vx.Core.e_int;
+    output = Vx.Type.vx_int_from_string_find(text, find);
     return output;
   }
 
@@ -594,6 +771,7 @@ public static class Type {
 
   public static Vx.Core.Type_int f_int_from_string_findkeyword(Vx.Core.Type_string text, Vx.Core.Type_string find) {
     Vx.Core.Type_int output = Vx.Core.e_int;
+    output = Vx.Type.vx_int_from_string_findkeyword(text, find);
     return output;
   }
 
@@ -674,6 +852,7 @@ public static class Type {
 
   public static Vx.Core.Type_int f_int_from_string_findlast(Vx.Core.Type_string text, Vx.Core.Type_string findlast) {
     Vx.Core.Type_int output = Vx.Core.e_int;
+    output = Vx.Type.vx_int_from_string_findlast(text, findlast);
     return output;
   }
 
@@ -1326,6 +1505,7 @@ public static class Type {
 
   public static Vx.Core.Type_string f_string_lowercase(Vx.Core.Type_string text) {
     Vx.Core.Type_string output = Vx.Core.e_string;
+    output = Vx.Type.vx_string_lowercase(text);
     return output;
   }
 
@@ -1549,6 +1729,7 @@ public static class Type {
 
   public static Vx.Core.Type_string f_string_trim(Vx.Core.Type_string text) {
     Vx.Core.Type_string output = Vx.Core.e_string;
+    output = Vx.Type.vx_string_trim(text);
     return output;
   }
 
@@ -1639,6 +1820,7 @@ public static class Type {
 
   public static Vx.Core.Type_string f_string_uppercase(Vx.Core.Type_string text) {
     Vx.Core.Type_string output = Vx.Core.e_string;
+    output = Vx.Type.vx_string_uppercase(text);
     return output;
   }
 
@@ -2011,6 +2193,7 @@ public static class Type {
 
   public static Vx.Core.Type_string f_string_from_string_start_end(Vx.Core.Type_string text, Vx.Core.Type_int start, Vx.Core.Type_int end) {
     Vx.Core.Type_string output = Vx.Core.e_string;
+    output = Vx.Type.vx_string_from_string_start_end(text, start, end);
     return output;
   }
 
@@ -2091,6 +2274,7 @@ public static class Type {
 
   public static Vx.Core.Type_string f_string_from_stringlist_join(Vx.Core.Type_stringlist vals, Vx.Core.Type_string delim) {
     Vx.Core.Type_string output = Vx.Core.e_string;
+    output = Vx.Type.vx_string_from_stringlist_join(vals, delim);
     return output;
   }
 
@@ -2171,6 +2355,7 @@ public static class Type {
 
   public static Vx.Core.Type_stringlist f_stringlist_from_string_split(Vx.Core.Type_string text, Vx.Core.Type_string delim) {
     Vx.Core.Type_stringlist output = Vx.Core.e_stringlist;
+    output = Vx.Type.vx_stringlist_from_string_split(text, delim);
     return output;
   }
 

@@ -2,6 +2,48 @@ namespace Vx;
 
 public static class Repl {
 
+  // vx_string_from_listarg(type, context, liststring)
+  public static string vx_string_from_listarg(
+    Vx.Core.Type_any type,
+    Vx.Core.Type_context context,
+    List<string> listarg) {
+    string output = "";
+    List<Vx.Core.Type_any> listrepl = new List<Vx.Core.Type_any>();
+    bool isfirst = true;
+    foreach (string sarg in listarg) {
+      if (isfirst) {
+        isfirst = false;
+      } else {
+        Vx.Core.Type_any replval;
+        if (Vx.Core.vx_is_int(sarg)) {
+          replval = Vx.Core.vx_new_int(Vx.Core.vx_int_from_string(sarg));
+        } else if (Vx.Core.vx_is_float(sarg)) {
+          replval = Vx.Core.vx_new_float(Vx.Core.vx_float_from_string(sarg));
+        } else {
+          replval = Vx.Core.vx_new_string(sarg);
+        }
+        Repl.Type_repl argrepl = Vx.Core.vx_new(
+          Repl.t_repl,
+          Vx.Core.vx_new_string(":val"), replval
+        );
+        listrepl.Add(argrepl);
+      }
+    }
+    Repl.Type_repl repl = Vx.Core.vx_new(
+      Repl.t_repl,
+      Vx.Core.vx_new_string(":type"), type,
+      Vx.Core.vx_new_string(":repllist"), Vx.Core.vx_new(Repl.t_repllist, listrepl)
+    );
+    Vx.Core.Type_any any = Repl.f_any_from_repl(context, repl);
+    Vx.Core.Type_any anytype = any.vx_type();
+    if (anytype == Vx.Core.t_string) {
+      Vx.Core.Type_string text = Vx.Core.f_any_from_any(Vx.Core.t_string, any);
+      output = text.vx_string();
+    } else {
+      output = Vx.Core.vx_string_from_any(any);
+    }
+    return output;
+  }
 
   /**
    * type: liblist
@@ -1113,6 +1155,9 @@ public static class Repl {
 
   public static Vx.Core.Type_any f_any_repl_from_functype_args(Vx.Core.Type_any type, Vx.Core.Type_anylist args) {
     Vx.Core.Type_any output = Vx.Core.e_any;
+    if (type is Core.Type_replfunc replfunc) {
+      output = replfunc.vx_repl(args);
+    };
     return output;
   }
 

@@ -2,6 +2,17 @@ namespace Vx.Web;
 
 public static class Html {
 
+  public static Vx.Core.Type_string vx_htmlstring_from_string(
+    Vx.Core.Type_string text) {
+    Vx.Core.Type_string output = Vx.Core.e_string;
+    string str = text.vx_string();
+    str = Vx.Core.vx_string_from_string_find_replace(str, "&", "&amp;");
+    str = Vx.Core.vx_string_from_string_find_replace(str, "'", "\'");
+    str = Vx.Core.vx_string_from_string_find_replace(str, ">", "&gt;");
+    str = Vx.Core.vx_string_from_string_find_replace(str, "<", "&lt;");
+    output = Vx.Core.vx_new_string(str);
+    return output;
+  }
 
   /**
    * type: body
@@ -8516,6 +8527,7 @@ public static class Html {
 
   public static Vx.Core.Type_string f_htmlstring_from_string(Vx.Core.Type_string text) {
     Vx.Core.Type_string output = Vx.Core.e_string;
+    output = Vx.Web.Html.vx_htmlstring_from_string(text);
     return output;
   }
 

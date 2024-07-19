@@ -2,6 +2,198 @@ namespace Vx;
 
 public static class Collection {
 
+  public static T vx_any_from_for_until_loop_max<T>(
+    T generic_any_1,
+    T start,
+    Vx.Core.Func_boolean_from_any fn_until,
+    Vx.Core.Func_any_from_any fn_loop,
+    Vx.Core.Type_int max)
+    where T : Vx.Core.Type_any {
+    T output = start;
+    bool iscontinue = true;
+    int icount = 0;
+    int imax = max.vx_int();
+    while (iscontinue) {
+      if (icount >= imax) {
+       string path = "vx/collection/any<-for-until-loop-max";
+       string code = ":loopmaximumexceeded";
+        Vx.Core.Type_int details = Vx.Core.vx_new_int(icount);
+        Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error(path, code, details);
+        output = Vx.Core.vx_copy(output, msg);
+        iscontinue = false;
+      } else {
+        icount += 1;
+        output = fn_loop.vx_any_from_any(generic_any_1, output);
+        Vx.Core.Type_boolean valcontinue = fn_until.vx_boolean_from_any(output);
+        iscontinue = !valcontinue.vx_boolean();
+      }
+    }
+    return output;
+  }
+
+  public static T vx_any_from_for_while_loop_max<T>(
+    T generic_any_1,
+    T start,
+    Vx.Core.Func_boolean_from_any fn_while,
+    Vx.Core.Func_any_from_any fn_loop,
+    Vx.Core.Type_int max)
+    where T : Vx.Core.Type_any {
+    T output = start;
+    bool iscontinue = true;
+    int icount = 0;
+    int imax = max.vx_int();
+    while (iscontinue) {
+      if (icount >= imax) {
+       string path = "vx/collection/any<-for-while-loop-max";
+       string code = ":loopmaximumexceeded";
+        Vx.Core.Type_int details = Vx.Core.vx_new_int(icount);
+        Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error(path, code, details);
+        output = Vx.Core.vx_copy(output, msg);
+        iscontinue = false;
+      } else {
+        icount += 1;
+        Vx.Core.Type_boolean valcontinue = fn_while.vx_boolean_from_any(output);
+        iscontinue = valcontinue.vx_boolean();
+        if (iscontinue) {
+          output = fn_loop.vx_any_from_any(generic_any_1, output);
+        }
+      }
+    }
+    return output;
+  }
+
+  public static T vx_list_from_for_end_loop<T>(
+    T generic_list_1,
+    Vx.Core.Type_int start,
+    Vx.Core.Type_int end,
+    Vx.Core.Func_any_from_int fn_loop)
+    where T : Vx.Core.Type_list {
+    T output = Vx.Core.f_empty(generic_list_1);
+    List<Vx.Core.Type_any> listvals = new List<Vx.Core.Type_any>();
+    int istart = start.vx_int();
+    int iend = end.vx_int();
+    if (istart <= iend) {
+      for (int i = istart; i <= iend; i++) {
+        Vx.Core.Type_any val = fn_loop.vx_any_from_int(Vx.Core.t_any, Vx.Core.vx_new_int(i));
+        listvals.Add(val);
+      }
+    } else {
+      for (int i = istart; i >= iend; i--) {
+        Vx.Core.Type_any val = fn_loop.vx_any_from_int(Vx.Core.t_any, Vx.Core.vx_new_int(i));
+        listvals.Add(val);
+      }
+    }
+    if (listvals.Count > 0) {
+      Vx.Core.Type_anylist anylist = Vx.Core.vx_new(Vx.Core.t_anylist, listvals);
+      output = Vx.Core.f_new(generic_list_1, anylist);
+    }
+    return output;
+  }
+
+  public static T vx_list_from_for_while_loop_max<T>(
+    T generic_list_1,
+    Vx.Core.Type_any start,
+    Vx.Core.Func_boolean_from_any fn_while,
+    Vx.Core.Func_any_from_any fn_loop,
+    Vx.Core.Type_int max)
+    where T : Vx.Core.Type_list {
+    T output = Vx.Core.f_empty(generic_list_1);
+    List<Vx.Core.Type_any> listvals = new List<Vx.Core.Type_any>();
+    bool iscontinue = true;
+    int icount = 0;
+    int imax = max.vx_int();
+    Vx.Core.Type_any work = start;
+    while (iscontinue) {
+      if (icount >= imax) {
+       string path = "vx/collection/list<-for-until-loop-max";
+       string code = ":loopmaximumexceeded";
+        Vx.Core.Type_int details = Vx.Core.vx_new_int(icount);
+        Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error(path, code, details);
+        output = Vx.Core.vx_copy(output, msg);
+        iscontinue = false;
+      } else {
+        Vx.Core.Type_boolean valwhile = fn_while.vx_boolean_from_any(work);
+        iscontinue = !valwhile.vx_boolean();
+        if (iscontinue) {
+          icount += 1;
+          work = fn_loop.vx_any_from_any(Vx.Core.t_any, work);
+          listvals.Add(work);
+        }
+      }
+    }
+    if (listvals.Count > 0) {
+      Vx.Core.Type_anylist anylist = Vx.Core.vx_new(Vx.Core.t_anylist, listvals);
+      output = Vx.Core.f_new(generic_list_1, anylist);
+    }
+    return output;
+  }
+
+  public static T vx_list_from_list_filter<T>(
+    T generic_list_1,
+    Vx.Core.Type_list vallist,
+    Vx.Core.Func_any_from_any fn_filter)
+    where T : Vx.Core.Type_list {
+    T output = Vx.Core.f_empty(generic_list_1);
+    List<Vx.Core.Type_any> listval = vallist.vx_list();
+    List<Vx.Core.Type_any> items = new List<Vx.Core.Type_any>();
+    foreach (Vx.Core.Type_any val in listval) {
+      Vx.Core.Type_any newval = fn_filter.vx_any_from_any(Vx.Core.t_any, val);
+      Vx.Core.Type_boolean isempty = Vx.Core.f_is_empty_1(newval);
+      if (!isempty.vx_boolean()) {
+        items.Add(newval);
+      }
+    }
+    output = Vx.Core.vx_new(generic_list_1, items);
+    return output;
+  }
+
+  public static T vx_list_from_list_start_end<T>(
+    T generic_list_1,
+    Vx.Core.Type_list values,
+    Vx.Core.Type_int start,
+    Vx.Core.Type_int end)
+    where T : Vx.Core.Type_list {
+    T output = Vx.Core.f_empty(generic_list_1);
+    int istart = start.vx_int();
+    int iend = end.vx_int();
+    List<Vx.Core.Type_any> listval = values.vx_list();
+    int maxlen = listval.Count;
+    if (iend < 0) {
+     iend += maxlen;
+    }
+    if (istart < 1) {
+    } else if (istart > iend) {
+    } else if (istart > maxlen) {
+    } else {
+      if (iend >= maxlen) {
+        iend = maxlen;
+      }
+      List<Vx.Core.Type_any> listsub = listval.GetRange(istart - 1, iend);
+      output = Vx.Core.vx_new(generic_list_1, listsub);
+    }
+    return output;
+  }
+  
+  public static T vx_map_from_map_keys<T>(
+    T generic_map_1,
+    Vx.Core.Type_map valuemap,
+    Vx.Core.Type_stringlist keys)
+    where T : Vx.Core.Type_map {
+    T output = Vx.Core.f_empty(generic_map_1);
+    List<Vx.Core.Type_string> keylist = keys.vx_liststring();
+    if (keylist.Count > 0) {
+      Vx.Core.Map<String, Vx.Core.Type_any> map = valuemap.vx_map();
+      List<Vx.Core.Type_any> values = new List<Vx.Core.Type_any>();
+      foreach (Vx.Core.Type_string key in keylist) {
+        Vx.Core.Type_any value = map.get(key.vx_string());
+        values.Add(key);
+        values.Add(value);
+      }
+      Vx.Core.Type_anylist anyvalues = Vx.Core.vx_new_anylist(values);
+      output = Vx.Core.f_new(generic_map_1, anyvalues);
+    }
+    return output;
+  }
   /**
    * @function any_from_for_until_loop
    * Returns a value using an until loop. Maximum 10000 times.
@@ -176,6 +368,7 @@ public static class Collection {
 
   public static T f_any_from_for_until_loop_max<T>(T generic_any_1, T start, Vx.Core.Func_boolean_from_any fn_until, Vx.Core.Func_any_from_any fn_loop, Vx.Core.Type_int max) where T : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
+    output = Vx.Collection.vx_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, max);
     return output;
   }
 
@@ -354,6 +547,7 @@ public static class Collection {
 
   public static T f_any_from_for_while_loop_max<T>(T generic_any_1, T start, Vx.Core.Func_boolean_from_any fn_while, Vx.Core.Func_any_from_any fn_loop, Vx.Core.Type_int max) where T : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
+    output = Vx.Collection.vx_any_from_for_while_loop_max(generic_any_1, start, fn_while, fn_loop, max);
     return output;
   }
 
@@ -1110,6 +1304,7 @@ public static class Collection {
 
   public static X f_list_from_for_end_loop<X>(X generic_list_1, Vx.Core.Type_int start, Vx.Core.Type_int end, Vx.Core.Func_any_from_int fn_loop) where X : Vx.Core.Type_list {
     X output = Vx.Core.f_empty(generic_list_1);
+    output = Vx.Collection.vx_list_from_for_end_loop(generic_list_1, start, end, fn_loop);
     return output;
   }
 
@@ -1285,6 +1480,7 @@ public static class Collection {
 
   public static X f_list_from_for_while_loop_max<T, X>(X generic_list_1, T start, Vx.Core.Func_boolean_from_any fn_while, Vx.Core.Func_any_from_any fn_loop, Vx.Core.Type_int max) where T : Vx.Core.Type_any where X : Vx.Core.Type_list {
     X output = Vx.Core.f_empty(generic_list_1);
+    output = Vx.Collection.vx_list_from_for_while_loop_max(generic_list_1, start, fn_while, fn_loop, max);
     return output;
   }
 
@@ -1448,6 +1644,7 @@ public static class Collection {
 
   public static X f_list_from_list_filter<X, Y>(X generic_list_1, Y vallist, Vx.Core.Func_any_from_any fn_filter) where X : Vx.Core.Type_list where Y : Vx.Core.Type_list {
     X output = Vx.Core.f_empty(generic_list_1);
+    output = Vx.Collection.vx_list_from_list_filter(generic_list_1, vallist, fn_filter);
     return output;
   }
 
@@ -1713,6 +1910,7 @@ public static class Collection {
 
   public static X f_list_from_list_start_end<X>(X generic_list_1, X values, Vx.Core.Type_int start, Vx.Core.Type_int end) where X : Vx.Core.Type_list {
     X output = Vx.Core.f_empty(generic_list_1);
+    output = Vx.Collection.vx_list_from_list_start_end(generic_list_1, values, start, end);
     return output;
   }
 
@@ -1876,6 +2074,7 @@ public static class Collection {
 
   public static N f_map_from_map_keys<N>(N generic_map_1, N valuemap, Vx.Core.Type_stringlist keys) where N : Vx.Core.Type_map {
     N output = Vx.Core.f_empty(generic_map_1);
+    output = Vx.Collection.vx_map_from_map_keys(generic_map_1, valuemap, keys);
     return output;
   }
 

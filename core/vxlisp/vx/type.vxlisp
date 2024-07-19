@@ -23,10 +23,11 @@
   :cpp
    "bool check = vx_core::vx_boolean_from_string_ends(text->vx_string(), ends->vx_string());
     output = vx_core::vx_new_boolean(check);"
-  :js "vx_core.vx_boolean_from_string_ends(text, ends)"
+  :csharp :auto
   :java
    "boolean check = Core.vx_boolean_from_string_ends(text.vx_string(), ends.vx_string());
-    output = Core.vx_new_boolean(check);")
+    output = Core.vx_new_boolean(check);"  
+  :js "vx_core.vx_boolean_from_string_ends(text, ends)")
  :test (test-true
         (boolean<-string-ends
          "abcd"
@@ -40,6 +41,7 @@
   :cpp
    "bool check = vx_core::vx_boolean_from_string_starts(text->vx_string(), starts->vx_string());
     output = vx_core::vx_new_boolean(check);"
+  :csharp :auto
   :java
    "boolean check = Core.vx_boolean_from_string_starts(text.vx_string(), starts.vx_string());
     output = Core.vx_new_boolean(check);"
@@ -54,9 +56,10 @@
  [text : string
   find : string]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         3
         (int<-string-find
@@ -68,9 +71,10 @@
  [text : string
   find : string]
  (native
-  :cpp  :auto
-  :js   :auto
-  :java :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         3
         (int<-string-findkeyword
@@ -87,9 +91,10 @@
  [text     : string
   findlast : string]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         5
         (int<-string-findlast
@@ -233,10 +238,11 @@
   :cpp
    "std::string str = vx_core::vx_string_from_string_start_end(text->vx_string(), start->vx_int(), end->vx_int());
     output = vx_core::vx_new_string(str);"
-  :js "vx_core.vx_string_from_string_start_end(text, start, end)"
+  :csharp :auto
   :java
    "String stext = Core.vx_string_from_string_start_end(text.vx_string(), start.vx_int(), end.vx_int());
-    output = Core.vx_new_string(stext);")
+    output = Core.vx_new_string(stext);"
+  :js "vx_core.vx_string_from_string_start_end(text, start, end)")
  :test (test
         "abc"
         (string<-string-start-end
@@ -275,8 +281,9 @@
  (native
   :cpp
    "output = vx_type::vx_string_from_stringlist_join(vals, delim);"
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         "a$b$c"
         (string<-stringlist-join
@@ -287,9 +294,10 @@
 (func string-lowercase : string
  [text : string]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         "abc"
         (string-lowercase
@@ -339,9 +347,10 @@
 (func string-trim : string
  [text  : string]
  (native
-  :cpp  :auto
-  :js   :auto
-  :java :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         "ab"
         (string-trim
@@ -351,9 +360,10 @@
 (func string-uppercase : string
  [text : string]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         "ABC"
         (string-uppercase
@@ -366,7 +376,8 @@
  (native
   :cpp
    "vx_type::vx_stringlist_from_string_split(text, delim);"
-  :java :auto
+  :csharp :auto
+  :java   :auto
   :js "vx_type.vx_stringlist_from_string_split(text, delim)")
  :test (test
         (stringlist "a" "b" "c")

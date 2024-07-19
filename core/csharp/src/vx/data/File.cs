@@ -2,6 +2,52 @@ namespace Vx.Data;
 
 public static class File {
 
+  public static Vx.Core.Type_boolean vx_boolean_exists_from_file(
+    Vx.Data.File.Type_file file) {
+    Vx.Core.Type_boolean output = Vx.Core.e_boolean;
+    Vx.Core.Type_string fullpath = File.f_pathfull_from_file(file);
+    string sfullpath = fullpath.vx_string();
+    if (System.IO.File.Exists(sfullpath)) {
+      output = Core.c_true;
+    }
+    return output;
+  }
+
+  public static Vx.Core.Type_boolean vx_boolean_write_from_file_string(
+    Vx.Core.Type_context context,
+    Vx.Data.File.Type_file file,
+    Vx.Core.Type_string text) {
+    Vx.Core.Type_boolean output = Vx.Core.e_boolean;
+    Core.Type_string fullpath = File.f_pathfull_from_file(file);
+    string sfullpath = fullpath.vx_string();
+    string stext = text.vx_string();
+    System.IO.File.WriteAllText(sfullpath, stext);
+    output = Core.c_true;
+    return output;
+  }
+
+  public static Vx.Core.Type_string vx_pathcurrent_from_os() {
+    string stext = System.IO.Directory.GetCurrentDirectory();
+    Vx.Core.Type_string output = Vx.Core.vx_new_string(stext);
+    return output;
+  }
+
+  public static Vx.Core.Type_string vx_string_read_from_file(
+    Vx.Core.Type_context context,
+    Vx.Data.File.Type_file file) {
+    Vx.Core.Type_string output = Vx.Core.e_string;
+    Vx.Core.Type_string fullpath = File.f_pathfull_from_file(file);
+    string sfullpath = fullpath.vx_string();
+    if (System.IO.File.Exists(sfullpath)) {
+      string scontent = System.IO.File.ReadAllText(sfullpath);
+      Vx.Core.Type_string valcontent = Vx.Core.vx_new_string(scontent);
+      output = valcontent;
+    } else {
+      Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("string-read<-file", ":filenotfound", file);
+      output = Vx.Core.vx_copy(output, msg);
+    }
+    return output;
+  }
 
   /**
    * type: file
@@ -599,6 +645,7 @@ public static class File {
 
   public static Vx.Core.Type_boolean f_boolean_exists_from_file(Vx.Data.File.Type_file file) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
+    output = Vx.Data.File.vx_boolean_exists_from_file(file);
     return output;
   }
 
@@ -864,6 +911,7 @@ public static class File {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     if (Vx.Core.f_boolean_permission_from_func(context, Vx.Data.File.t_boolean_write_from_file_string).vx_boolean()) {
       try {
+        output = Vx.Data.File.vx_boolean_write_from_file_string(context, file, text);
       } catch (Exception err) {
         Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_exception("vx/data/file/boolean-write<-file-string", err);
         output = Vx.Core.vx_copy(output, msg);
@@ -1347,6 +1395,7 @@ public static class File {
 
   public static Vx.Core.Type_string f_pathcurrent_from_os() {
     Vx.Core.Type_string output = Vx.Core.e_string;
+    output = Vx.Data.File.vx_pathcurrent_from_os();
     return output;
   }
 
@@ -1563,6 +1612,7 @@ public static class File {
     Vx.Core.Type_string output = Vx.Core.e_string;
     if (Vx.Core.f_boolean_permission_from_func(context, Vx.Data.File.t_string_read_from_file).vx_boolean()) {
       try {
+        output = Vx.Data.File.vx_string_read_from_file(context, file);
       } catch (Exception err) {
         Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_exception("vx/data/file/string-read<-file", err);
         output = Vx.Core.vx_copy(output, msg);

@@ -169,13 +169,7 @@
     str = vx_core::vx_string_from_string_find_replace(str, “>”, “&gt;”);
     str = vx_core::vx_string_from_string_find_replace(str, “<”, “&lt;”);
     output = vx_core::vx_new_string(str);"
-  :js
-   "const str = “” + text
-    output = str
-      .replace(/&/g, “&amp;”)
-      .replace(/'/g, “\'”)
-      .replace(/>/g, “&gt;”)   
-      .replace(/</g, “&lt;”)"
+  :csharp :auto
   :java
    "String str = text.vx_string();
     str = str
@@ -183,7 +177,14 @@
       .replaceAll(“'”, “\'”)
       .replaceAll(“>”, “&gt;”)   
       .replaceAll(“<”, “&lt;”);
-    output = Core.vx_new_string(str);")
+    output = Core.vx_new_string(str);"
+  :js
+   "const str = “” + text
+    output = str
+      .replace(/&/g, “&amp;”)
+      .replace(/'/g, “\'”)
+      .replace(/>/g, “&gt;”)   
+      .replace(/</g, “&lt;”)")
  :doc "Convert text to HTML string")
 
 (func string-indent : string

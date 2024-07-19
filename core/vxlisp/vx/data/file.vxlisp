@@ -25,6 +25,7 @@
  (native
   :cpp
    "output = vx_data_file::vx_boolean_exists_from_file(file);"
+  :csharp :auto
   :java
    "Core.Type_string fullpath = File.f_pathfull_from_file(file);
     String sfullpath = fullpath.vx_string();
@@ -67,6 +68,7 @@
  (native
   :cpp
    "output = vx_data_file::vx_boolean_write_from_file_string(file, text);"
+  :csharp :auto
   :java
    "Core.Type_string fullpath = File.f_pathfull_from_file(file);
     String sfullpath = fullpath.vx_string();
@@ -129,6 +131,7 @@
  (native
   :cpp
    "output = vx_data_file::vx_string_read_from_file(file);"
+  :csharp :auto
   :java
    "output = vx_string_read_from_file(file);")
  :context
@@ -157,6 +160,7 @@
  (native
   :cpp
    "output = vx_data_file::vx_pathcurrent_from_os();"
+  :csharp :auto
   :java
    "Path path = Paths.get(“”);
     path = path.toAbsolutePath();

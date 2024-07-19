@@ -30272,10 +30272,11 @@ improves readability.</div>
   :cpp
    &quot;bool check = vx_core::vx_boolean_from_string_ends(text-&gt;vx_string(), ends-&gt;vx_string());
     output = vx_core::vx_new_boolean(check);&quot;
-  :js &quot;vx_core.vx_boolean_from_string_ends(text, ends)&quot;
+  :csharp :auto
   :java
    &quot;boolean check = Core.vx_boolean_from_string_ends(text.vx_string(), ends.vx_string());
-    output = Core.vx_new_boolean(check);&quot;)
+    output = Core.vx_new_boolean(check);&quot;  
+  :js &quot;vx_core.vx_boolean_from_string_ends(text, ends)&quot;)
  :test (test-true
         (boolean&lt;-string-ends
          &quot;abcd&quot;
@@ -30289,6 +30290,7 @@ improves readability.</div>
   :cpp
    &quot;bool check = vx_core::vx_boolean_from_string_starts(text-&gt;vx_string(), starts-&gt;vx_string());
     output = vx_core::vx_new_boolean(check);&quot;
+  :csharp :auto
   :java
    &quot;boolean check = Core.vx_boolean_from_string_starts(text.vx_string(), starts.vx_string());
     output = Core.vx_new_boolean(check);&quot;
@@ -30303,9 +30305,10 @@ improves readability.</div>
  [text : string
   find : string]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         3
         (int&lt;-string-find
@@ -30317,9 +30320,10 @@ improves readability.</div>
  [text : string
   find : string]
  (native
-  :cpp  :auto
-  :js   :auto
-  :java :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         3
         (int&lt;-string-findkeyword
@@ -30336,9 +30340,10 @@ improves readability.</div>
  [text     : string
   findlast : string]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         5
         (int&lt;-string-findlast
@@ -30482,10 +30487,11 @@ improves readability.</div>
   :cpp
    &quot;std::string str = vx_core::vx_string_from_string_start_end(text-&gt;vx_string(), start-&gt;vx_int(), end-&gt;vx_int());
     output = vx_core::vx_new_string(str);&quot;
-  :js &quot;vx_core.vx_string_from_string_start_end(text, start, end)&quot;
+  :csharp :auto
   :java
    &quot;String stext = Core.vx_string_from_string_start_end(text.vx_string(), start.vx_int(), end.vx_int());
-    output = Core.vx_new_string(stext);&quot;)
+    output = Core.vx_new_string(stext);&quot;
+  :js &quot;vx_core.vx_string_from_string_start_end(text, start, end)&quot;)
  :test (test
         &quot;abc&quot;
         (string&lt;-string-start-end
@@ -30524,8 +30530,9 @@ improves readability.</div>
  (native
   :cpp
    &quot;output = vx_type::vx_string_from_stringlist_join(vals, delim);&quot;
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         &quot;a$b$c&quot;
         (string&lt;-stringlist-join
@@ -30536,9 +30543,10 @@ improves readability.</div>
 (func string-lowercase : string
  [text : string]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         &quot;abc&quot;
         (string-lowercase
@@ -30588,9 +30596,10 @@ improves readability.</div>
 (func string-trim : string
  [text  : string]
  (native
-  :cpp  :auto
-  :js   :auto
-  :java :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         &quot;ab&quot;
         (string-trim
@@ -30600,9 +30609,10 @@ improves readability.</div>
 (func string-uppercase : string
  [text : string]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         &quot;ABC&quot;
         (string-uppercase
@@ -30615,7 +30625,8 @@ improves readability.</div>
  (native
   :cpp
    &quot;vx_type::vx_stringlist_from_string_split(text, delim);&quot;
-  :java :auto
+  :csharp :auto
+  :java   :auto
   :js &quot;vx_type.vx_stringlist_from_string_split(text, delim)&quot;)
  :test (test
         (stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot;)
@@ -30905,10 +30916,11 @@ improves readability.</div>
   :cpp
    &quot;bool check = vx_core::vx_boolean_from_string_ends(text-&gt;vx_string(), ends-&gt;vx_string());
     output = vx_core::vx_new_boolean(check);&quot;
-  :js &quot;vx_core.vx_boolean_from_string_ends(text, ends)&quot;
+  :csharp :auto
   :java
    &quot;boolean check = Core.vx_boolean_from_string_ends(text.vx_string(), ends.vx_string());
-    output = Core.vx_new_boolean(check);&quot;)
+    output = Core.vx_new_boolean(check);&quot;  
+  :js &quot;vx_core.vx_boolean_from_string_ends(text, ends)&quot;)
  :test (test-true
         (boolean&lt;-string-ends
          &quot;abcd&quot;
@@ -30989,6 +31001,7 @@ improves readability.</div>
   :cpp
    &quot;bool check = vx_core::vx_boolean_from_string_starts(text-&gt;vx_string(), starts-&gt;vx_string());
     output = vx_core::vx_new_boolean(check);&quot;
+  :csharp :auto
   :java
    &quot;boolean check = Core.vx_boolean_from_string_starts(text.vx_string(), starts.vx_string());
     output = Core.vx_new_boolean(check);&quot;
@@ -31071,9 +31084,10 @@ improves readability.</div>
  [text : string
   find : string]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         3
         (int&lt;-string-find
@@ -31158,9 +31172,10 @@ improves readability.</div>
  [text : string
   find : string]
  (native
-  :cpp  :auto
-  :js   :auto
-  :java :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         3
         (int&lt;-string-findkeyword
@@ -31245,9 +31260,10 @@ improves readability.</div>
  [text     : string
   findlast : string]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         5
         (int&lt;-string-findlast
@@ -32098,10 +32114,11 @@ improves readability.</div>
   :cpp
    &quot;std::string str = vx_core::vx_string_from_string_start_end(text-&gt;vx_string(), start-&gt;vx_int(), end-&gt;vx_int());
     output = vx_core::vx_new_string(str);&quot;
-  :js &quot;vx_core.vx_string_from_string_start_end(text, start, end)&quot;
+  :csharp :auto
   :java
    &quot;String stext = Core.vx_string_from_string_start_end(text.vx_string(), start.vx_int(), end.vx_int());
-    output = Core.vx_new_string(stext);&quot;)
+    output = Core.vx_new_string(stext);&quot;
+  :js &quot;vx_core.vx_string_from_string_start_end(text, start, end)&quot;)
  :test (test
         &quot;abc&quot;
         (string&lt;-string-start-end
@@ -32208,8 +32225,9 @@ improves readability.</div>
  (native
   :cpp
    &quot;output = vx_type::vx_string_from_stringlist_join(vals, delim);&quot;
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         &quot;a$b$c&quot;
         (string&lt;-stringlist-join
@@ -32282,9 +32300,10 @@ improves readability.</div>
                   <div class="source">(func string-lowercase : string
  [text : string]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         &quot;abc&quot;
         (string-lowercase
@@ -32462,9 +32481,10 @@ improves readability.</div>
                   <div class="source">(func string-trim : string
  [text  : string]
  (native
-  :cpp  :auto
-  :js   :auto
-  :java :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         &quot;ab&quot;
         (string-trim
@@ -32536,9 +32556,10 @@ improves readability.</div>
                   <div class="source">(func string-uppercase : string
  [text : string]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         &quot;ABC&quot;
         (string-uppercase
@@ -32619,7 +32640,8 @@ improves readability.</div>
  (native
   :cpp
    &quot;vx_type::vx_stringlist_from_string_split(text, delim);&quot;
-  :java :auto
+  :csharp :auto
+  :java   :auto
   :js &quot;vx_type.vx_stringlist_from_string_split(text, delim)&quot;)
  :test (test
         (stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot;)
@@ -33074,13 +33096,7 @@ improves readability.</div>
     str = vx_core::vx_string_from_string_find_replace(str, “&gt;”, “&amp;gt;”);
     str = vx_core::vx_string_from_string_find_replace(str, “&lt;”, “&amp;lt;”);
     output = vx_core::vx_new_string(str);&quot;
-  :js
-   &quot;const str = “” + text
-    output = str
-      .replace(/&amp;/g, “&amp;amp;”)
-      .replace(/'/g, “\'”)
-      .replace(/&gt;/g, “&amp;gt;”)   
-      .replace(/&lt;/g, “&amp;lt;”)&quot;
+  :csharp :auto
   :java
    &quot;String str = text.vx_string();
     str = str
@@ -33088,7 +33104,14 @@ improves readability.</div>
       .replaceAll(“'”, “\'”)
       .replaceAll(“&gt;”, “&amp;gt;”)   
       .replaceAll(“&lt;”, “&amp;lt;”);
-    output = Core.vx_new_string(str);&quot;)
+    output = Core.vx_new_string(str);&quot;
+  :js
+   &quot;const str = “” + text
+    output = str
+      .replace(/&amp;/g, “&amp;amp;”)
+      .replace(/'/g, “\'”)
+      .replace(/&gt;/g, “&amp;gt;”)   
+      .replace(/&lt;/g, “&amp;lt;”)&quot;)
  :doc &quot;Convert text to HTML string&quot;)
 
 (func string-indent : string
@@ -35951,13 +35974,7 @@ improves readability.</div>
     str = vx_core::vx_string_from_string_find_replace(str, “&gt;”, “&amp;gt;”);
     str = vx_core::vx_string_from_string_find_replace(str, “&lt;”, “&amp;lt;”);
     output = vx_core::vx_new_string(str);&quot;
-  :js
-   &quot;const str = “” + text
-    output = str
-      .replace(/&amp;/g, “&amp;amp;”)
-      .replace(/'/g, “\'”)
-      .replace(/&gt;/g, “&amp;gt;”)   
-      .replace(/&lt;/g, “&amp;lt;”)&quot;
+  :csharp :auto
   :java
    &quot;String str = text.vx_string();
     str = str
@@ -35965,7 +35982,14 @@ improves readability.</div>
       .replaceAll(“'”, “\'”)
       .replaceAll(“&gt;”, “&amp;gt;”)   
       .replaceAll(“&lt;”, “&amp;lt;”);
-    output = Core.vx_new_string(str);&quot;)
+    output = Core.vx_new_string(str);&quot;
+  :js
+   &quot;const str = “” + text
+    output = str
+      .replace(/&amp;/g, “&amp;amp;”)
+      .replace(/'/g, “\'”)
+      .replace(/&gt;/g, “&amp;gt;”)   
+      .replace(/&lt;/g, “&amp;lt;”)&quot;)
  :doc &quot;Convert text to HTML string&quot;)</div>
                 </li>
               </ul>
@@ -39197,8 +39221,9 @@ improves readability.</div>
   :cpp
    &quot;vx_core::Type_any any = vx_collection::vx_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, max);
     output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :doc `Returns a value using a until loop.
 output : any-1 := start
 count : int := 0
@@ -39239,8 +39264,9 @@ count : int := 0
   :cpp
    &quot;vx_core::Type_any any = vx_collection::vx_any_from_for_while_loop_max(generic_any_1, start, fn_while, fn_loop, max);
     output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :doc &quot;Returns a value using a while loop.
        output : any-1 := start
        count : int := 0
@@ -39356,8 +39382,9 @@ count : int := 0
   :cpp
    &quot;vx_core::Type_any list = vx_collection::vx_list_from_for_end_loop(generic_list_1, start, end, fn_loop);
     output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (intlist 4 9)
         (list&lt;-for-end-loop : intlist
@@ -39407,8 +39434,9 @@ output : list-1 := (empty list-1)
   :cpp
    &quot;vx_core::Type_any list = vx_collection::vx_list_from_for_while_loop_max(generic_list_1, start, fn_while, fn_loop, max);
     output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :doc `Returns a list of any-1 using a while loop.
 1. output : list-1 := (empty list-1)
 2. value : any-1 := start.
@@ -39438,8 +39466,9 @@ output : list-1 := (empty list-1)
   :cpp
    &quot;vx_core::Type_any list = vx_collection::vx_list_from_list_filter(generic_list_1, vallist, fn_filter);
     output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (stringlist
          &quot;a1&quot; &quot;b1&quot; &quot;c1&quot; &quot;d1&quot;)
@@ -39495,8 +39524,9 @@ output : list-1 := (empty list-1)
   :cpp
    &quot;vx_core::Type_any any = vx_collection::vx_list_from_list_start_end(generic_list_1, values, start, end);
     output = vx_core::vx_any_from_any(generic_list_1, any);&quot;
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (stringlist
          &quot;b&quot; &quot;c&quot;)
@@ -39527,9 +39557,10 @@ output : list-1 := (empty list-1)
  [valuemap : map-1
   keys     : stringlist]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (stringmap
          :c &quot;3&quot;
@@ -39775,8 +39806,9 @@ count : int := 0
   :cpp
    &quot;vx_core::Type_any any = vx_collection::vx_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, max);
     output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :doc `Returns a value using a until loop.
 output : any-1 := start
 count : int := 0
@@ -39977,8 +40009,9 @@ count : int := 0
   :cpp
    &quot;vx_core::Type_any any = vx_collection::vx_any_from_for_while_loop_max(generic_any_1, start, fn_while, fn_loop, max);
     output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :doc &quot;Returns a value using a while loop.
        output : any-1 := start
        count : int := 0
@@ -40628,8 +40661,9 @@ output : list-1 := (empty list-1)
   :cpp
    &quot;vx_core::Type_any list = vx_collection::vx_list_from_for_end_loop(generic_list_1, start, end, fn_loop);
     output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (intlist 4 9)
         (list&lt;-for-end-loop : intlist
@@ -40826,8 +40860,9 @@ output : list-1 := (empty list-1)
   :cpp
    &quot;vx_core::Type_any list = vx_collection::vx_list_from_for_while_loop_max(generic_list_1, start, fn_while, fn_loop, max);
     output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :doc `Returns a list of any-1 using a while loop.
 1. output : list-1 := (empty list-1)
 2. value : any-1 := start.
@@ -41002,8 +41037,9 @@ output : list-1 := (empty list-1)
   :cpp
    &quot;vx_core::Type_any list = vx_collection::vx_list_from_list_filter(generic_list_1, vallist, fn_filter);
     output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (stringlist
          &quot;a1&quot; &quot;b1&quot; &quot;c1&quot; &quot;d1&quot;)
@@ -41274,8 +41310,9 @@ output : list-1 := (empty list-1)
   :cpp
    &quot;vx_core::Type_any any = vx_collection::vx_list_from_list_start_end(generic_list_1, values, start, end);
     output = vx_core::vx_any_from_any(generic_list_1, any);&quot;
-  :java :auto
-  :js   :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (stringlist
          &quot;b&quot; &quot;c&quot;)
@@ -41453,9 +41490,10 @@ output : list-1 := (empty list-1)
  [valuemap : map-1
   keys     : stringlist]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (stringmap
          :c &quot;3&quot;
@@ -58670,6 +58708,15 @@ output : list-1 := (empty list-1)
   :cpp
    &quot;vx_core::Type_replfunc replfunc = dynamic_cast&lt;vx_core::Type_replfunc&gt;(type);
     output = replfunc-&gt;vx_repl(args);&quot;
+  :csharp
+   &quot;if (type is Core.Type_replfunc replfunc) {
+      output = replfunc.vx_repl(args);
+    }&quot;
+  :java
+   &quot;if (type instanceof Core.Type_replfunc) {
+      Core.Type_replfunc replfunc = (Core.Type_replfunc)type;
+      output = replfunc.vx_repl(args);
+    }&quot;
   :js
    &quot;const vxvalue = type['vx_value']
     if (vxvalue != undefined) {
@@ -58677,11 +58724,6 @@ output : list-1 := (empty list-1)
       if (fn != undefined) {
         output = fn(...args)
       }
-    }&quot;
-  :java
-   &quot;if (type instanceof Core.Type_replfunc) {
-      Core.Type_replfunc replfunc = (Core.Type_replfunc)type;
-      output = replfunc.vx_repl(args);
     }&quot;)
  :doc &quot;Returns any from a repl func and args.&quot;)
 
@@ -60417,6 +60459,15 @@ output : list-1 := (empty list-1)
   :cpp
    &quot;vx_core::Type_replfunc replfunc = dynamic_cast&lt;vx_core::Type_replfunc&gt;(type);
     output = replfunc-&gt;vx_repl(args);&quot;
+  :csharp
+   &quot;if (type is Core.Type_replfunc replfunc) {
+      output = replfunc.vx_repl(args);
+    }&quot;
+  :java
+   &quot;if (type instanceof Core.Type_replfunc) {
+      Core.Type_replfunc replfunc = (Core.Type_replfunc)type;
+      output = replfunc.vx_repl(args);
+    }&quot;
   :js
    &quot;const vxvalue = type['vx_value']
     if (vxvalue != undefined) {
@@ -60424,11 +60475,6 @@ output : list-1 := (empty list-1)
       if (fn != undefined) {
         output = fn(...args)
       }
-    }&quot;
-  :java
-   &quot;if (type instanceof Core.Type_replfunc) {
-      Core.Type_replfunc replfunc = (Core.Type_replfunc)type;
-      output = replfunc.vx_repl(args);
     }&quot;)
  :doc &quot;Returns any from a repl func and args.&quot;)</div>
                 </li>
@@ -62739,6 +62785,7 @@ output : list-1 := (empty list-1)
  (native
   :cpp
    &quot;output = vx_data_file::vx_boolean_exists_from_file(file);&quot;
+  :csharp :auto
   :java
    &quot;Core.Type_string fullpath = File.f_pathfull_from_file(file);
     String sfullpath = fullpath.vx_string();
@@ -62781,6 +62828,7 @@ output : list-1 := (empty list-1)
  (native
   :cpp
    &quot;output = vx_data_file::vx_boolean_write_from_file_string(file, text);&quot;
+  :csharp :auto
   :java
    &quot;Core.Type_string fullpath = File.f_pathfull_from_file(file);
     String sfullpath = fullpath.vx_string();
@@ -62843,6 +62891,7 @@ output : list-1 := (empty list-1)
  (native
   :cpp
    &quot;output = vx_data_file::vx_string_read_from_file(file);&quot;
+  :csharp :auto
   :java
    &quot;output = vx_string_read_from_file(file);&quot;)
  :context
@@ -62871,6 +62920,7 @@ output : list-1 := (empty list-1)
  (native
   :cpp
    &quot;output = vx_data_file::vx_pathcurrent_from_os();&quot;
+  :csharp :auto
   :java
    &quot;Path path = Paths.get(“”);
     path = path.toAbsolutePath();
@@ -63173,6 +63223,7 @@ output : list-1 := (empty list-1)
  (native
   :cpp
    &quot;output = vx_data_file::vx_boolean_exists_from_file(file);&quot;
+  :csharp :auto
   :java
    &quot;Core.Type_string fullpath = File.f_pathfull_from_file(file);
     String sfullpath = fullpath.vx_string();
@@ -63405,6 +63456,7 @@ output : list-1 := (empty list-1)
  (native
   :cpp
    &quot;output = vx_data_file::vx_boolean_write_from_file_string(file, text);&quot;
+  :csharp :auto
   :java
    &quot;Core.Type_string fullpath = File.f_pathfull_from_file(file);
     String sfullpath = fullpath.vx_string();
@@ -63656,6 +63708,7 @@ output : list-1 := (empty list-1)
  (native
   :cpp
    &quot;output = vx_data_file::vx_string_read_from_file(file);&quot;
+  :csharp :auto
   :java
    &quot;output = vx_string_read_from_file(file);&quot;)
  :context
@@ -63853,6 +63906,7 @@ output : list-1 := (empty list-1)
  (native
   :cpp
    &quot;output = vx_data_file::vx_pathcurrent_from_os();&quot;
+  :csharp :auto
   :java
    &quot;Path path = Paths.get(“”);
     path = path.toAbsolutePath();
