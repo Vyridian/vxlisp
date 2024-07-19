@@ -3561,7 +3561,7 @@ public class CoreTest {
       Vx.Test.t_testcoveragesummary,
       ":testpkg", "vx/core", 
       ":constnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 14, ":tests", 2, ":total", 14), 
-      ":docnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 89, ":tests", 230, ":total", 256), 
+      ":docnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 90, ":tests", 231, ":total", 256), 
       ":funcnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 55, ":tests", 74, ":total", 134), 
       ":bigospacenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 1, ":total", 166), 
       ":bigotimenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 1, ":total", 166), 

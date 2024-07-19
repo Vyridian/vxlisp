@@ -44,9 +44,8 @@ public static class Repl {
     }
 
     public override Vx.Repl.Type_liblist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_liblist,
-       vals);
+      Vx.Repl.Type_liblist output = Vx.Core.vx_copy(Vx.Repl.e_liblist, vals);
+      return output;
     }
 
     public override Vx.Repl.Type_liblist vx_copy(params Object[] vals) {
@@ -242,9 +241,8 @@ public static class Repl {
     }
 
     public override Vx.Repl.Type_repl vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_repl,
-       vals);
+      Vx.Repl.Type_repl output = Vx.Core.vx_copy(Vx.Repl.e_repl, vals);
+      return output;
     }
 
     public override Vx.Repl.Type_repl vx_copy(params Object[] vals) {
@@ -562,9 +560,8 @@ public static class Repl {
     }
 
     public override Vx.Repl.Type_replarglist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_replarglist,
-       vals);
+      Vx.Repl.Type_replarglist output = Vx.Core.vx_copy(Vx.Repl.e_replarglist, vals);
+      return output;
     }
 
     public override Vx.Repl.Type_replarglist vx_copy(params Object[] vals) {
@@ -779,9 +776,8 @@ public static class Repl {
     }
 
     public override Vx.Repl.Type_repllist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_repllist,
-       vals);
+      Vx.Repl.Type_repllist output = Vx.Core.vx_copy(Vx.Repl.e_repllist, vals);
+      return output;
     }
 
     public override Vx.Repl.Type_repllist vx_copy(params Object[] vals) {

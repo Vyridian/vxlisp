@@ -56,9 +56,8 @@ public static class Sample {
     }
 
     public override Vx.Sample.Type_mytype vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_mytype,
-       vals);
+      Vx.Sample.Type_mytype output = Vx.Core.vx_copy(Vx.Sample.e_mytype, vals);
+      return output;
     }
 
     public override Vx.Sample.Type_mytype vx_copy(params Object[] vals) {

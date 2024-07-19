@@ -135,9 +135,8 @@ public final class Tree {
 
     @Override
     public Tree.Type_branch vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_branch,
-       vals);
+      Tree.Type_branch output = Core.vx_copy(Tree.e_branch, vals);
+      return output;
     }
 
     @Override
@@ -414,9 +413,8 @@ public final class Tree {
 
     @Override
     public Tree.Type_brancharrow vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_brancharrow,
-       vals);
+      Tree.Type_brancharrow output = Core.vx_copy(Tree.e_brancharrow, vals);
+      return output;
     }
 
     @Override
@@ -518,9 +516,8 @@ public final class Tree {
 
     @Override
     public Tree.Type_branchlist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_branchlist,
-       vals);
+      Tree.Type_branchlist output = Core.vx_copy(Tree.e_branchlist, vals);
+      return output;
     }
 
     @Override
@@ -689,9 +686,8 @@ public final class Tree {
 
     @Override
     public Tree.Type_leaf vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_leaf,
-       vals);
+      Tree.Type_leaf output = Core.vx_copy(Tree.e_leaf, vals);
+      return output;
     }
 
     @Override
@@ -930,9 +926,8 @@ public final class Tree {
 
     @Override
     public Tree.Type_leaflist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_leaflist,
-       vals);
+      Tree.Type_leaflist output = Core.vx_copy(Tree.e_leaflist, vals);
+      return output;
     }
 
     @Override
@@ -1101,9 +1096,8 @@ public final class Tree {
 
     @Override
     public Tree.Type_tree vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_tree,
-       vals);
+      Tree.Type_tree output = Core.vx_copy(Tree.e_tree, vals);
+      return output;
     }
 
     @Override

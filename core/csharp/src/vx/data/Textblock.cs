@@ -102,9 +102,8 @@ public static class Textblock {
     }
 
     public override Vx.Data.Textblock.Type_delim vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_delim,
-       vals);
+      Vx.Data.Textblock.Type_delim output = Vx.Core.vx_copy(Vx.Data.Textblock.e_delim, vals);
+      return output;
     }
 
     public override Vx.Data.Textblock.Type_delim vx_copy(params Object[] vals) {
@@ -374,9 +373,8 @@ public static class Textblock {
     }
 
     public override Vx.Data.Textblock.Type_delimlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_delimlist,
-       vals);
+      Vx.Data.Textblock.Type_delimlist output = Vx.Core.vx_copy(Vx.Data.Textblock.e_delimlist, vals);
+      return output;
     }
 
     public override Vx.Data.Textblock.Type_delimlist vx_copy(params Object[] vals) {
@@ -647,9 +645,8 @@ public static class Textblock {
     }
 
     public override Vx.Data.Textblock.Type_textblock vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_textblock,
-       vals);
+      Vx.Data.Textblock.Type_textblock output = Vx.Core.vx_copy(Vx.Data.Textblock.e_textblock, vals);
+      return output;
     }
 
     public override Vx.Data.Textblock.Type_textblock vx_copy(params Object[] vals) {
@@ -1066,9 +1063,8 @@ public static class Textblock {
     }
 
     public override Vx.Data.Textblock.Type_textblocklist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_textblocklist,
-       vals);
+      Vx.Data.Textblock.Type_textblocklist output = Vx.Core.vx_copy(Vx.Data.Textblock.e_textblocklist, vals);
+      return output;
     }
 
     public override Vx.Data.Textblock.Type_textblocklist vx_copy(params Object[] vals) {

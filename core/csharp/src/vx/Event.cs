@@ -117,9 +117,8 @@ public static class Event {
     }
 
     public override Vx.Event.Type_event vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_event,
-       vals);
+      Vx.Event.Type_event output = Vx.Core.vx_copy(Vx.Event.e_event, vals);
+      return output;
     }
 
     public override Vx.Event.Type_event vx_copy(params Object[] vals) {
@@ -409,9 +408,8 @@ public static class Event {
     }
 
     public override Vx.Event.Type_eventlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_eventlist,
-       vals);
+      Vx.Event.Type_eventlist output = Vx.Core.vx_copy(Vx.Event.e_eventlist, vals);
+      return output;
     }
 
     public override Vx.Event.Type_eventlist vx_copy(params Object[] vals) {
@@ -508,7 +506,7 @@ public static class Event {
     public Vx.Core.Map<string, Vx.Event.Type_event> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Event.Type_event>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Event.Type_event>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -573,9 +571,8 @@ public static class Event {
     }
 
     public override Vx.Event.Type_eventmap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_eventmap,
-       vals);
+      Vx.Event.Type_eventmap output = Vx.Core.vx_copy(Vx.Event.e_eventmap, vals);
+      return output;
     }
 
     public override Vx.Event.Type_eventmap vx_copy(params Object[] vals) {

@@ -56,9 +56,8 @@ public static class Table {
     }
 
     public override Vx.Data.Table.Type_cell vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_cell,
-       vals);
+      Vx.Data.Table.Type_cell output = Vx.Core.vx_copy(Vx.Data.Table.e_cell, vals);
+      return output;
     }
 
     public override Vx.Data.Table.Type_cell vx_copy(params Object[] vals) {
@@ -249,9 +248,8 @@ public static class Table {
     }
 
     public override Vx.Data.Table.Type_celllist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_celllist,
-       vals);
+      Vx.Data.Table.Type_celllist output = Vx.Core.vx_copy(Vx.Data.Table.e_celllist, vals);
+      return output;
     }
 
     public override Vx.Data.Table.Type_celllist vx_copy(params Object[] vals) {
@@ -347,7 +345,7 @@ public static class Table {
     public Vx.Core.Map<string, Vx.Data.Table.Type_cell> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Data.Table.Type_cell>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Data.Table.Type_cell>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -412,9 +410,8 @@ public static class Table {
     }
 
     public override Vx.Data.Table.Type_cellmap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_cellmap,
-       vals);
+      Vx.Data.Table.Type_cellmap output = Vx.Core.vx_copy(Vx.Data.Table.e_cellmap, vals);
+      return output;
     }
 
     public override Vx.Data.Table.Type_cellmap vx_copy(params Object[] vals) {
@@ -588,9 +585,8 @@ public static class Table {
     }
 
     public override Vx.Data.Table.Type_field vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_field,
-       vals);
+      Vx.Data.Table.Type_field output = Vx.Core.vx_copy(Vx.Data.Table.e_field, vals);
+      return output;
     }
 
     public override Vx.Data.Table.Type_field vx_copy(params Object[] vals) {
@@ -807,9 +803,8 @@ public static class Table {
     }
 
     public override Vx.Data.Table.Type_fieldlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_fieldlist,
-       vals);
+      Vx.Data.Table.Type_fieldlist output = Vx.Core.vx_copy(Vx.Data.Table.e_fieldlist, vals);
+      return output;
     }
 
     public override Vx.Data.Table.Type_fieldlist vx_copy(params Object[] vals) {
@@ -931,9 +926,8 @@ public static class Table {
     }
 
     public override Vx.Data.Table.Type_fieldmap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_fieldmap,
-       vals);
+      Vx.Data.Table.Type_fieldmap output = Vx.Core.vx_copy(Vx.Data.Table.e_fieldmap, vals);
+      return output;
     }
 
     public override Vx.Data.Table.Type_fieldmap vx_copy(params Object[] vals) {
@@ -1083,9 +1077,8 @@ public static class Table {
     }
 
     public override Vx.Data.Table.Type_filter vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_filter,
-       vals);
+      Vx.Data.Table.Type_filter output = Vx.Core.vx_copy(Vx.Data.Table.e_filter, vals);
+      return output;
     }
 
     public override Vx.Data.Table.Type_filter vx_copy(params Object[] vals) {
@@ -1330,9 +1323,8 @@ public static class Table {
     }
 
     public override Vx.Data.Table.Type_row vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_row,
-       vals);
+      Vx.Data.Table.Type_row output = Vx.Core.vx_copy(Vx.Data.Table.e_row, vals);
+      return output;
     }
 
     public override Vx.Data.Table.Type_row vx_copy(params Object[] vals) {
@@ -1546,9 +1538,8 @@ public static class Table {
     }
 
     public override Vx.Data.Table.Type_rowlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_rowlist,
-       vals);
+      Vx.Data.Table.Type_rowlist output = Vx.Core.vx_copy(Vx.Data.Table.e_rowlist, vals);
+      return output;
     }
 
     public override Vx.Data.Table.Type_rowlist vx_copy(params Object[] vals) {
@@ -1644,7 +1635,7 @@ public static class Table {
     public Vx.Core.Map<string, Vx.Data.Table.Type_row> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Data.Table.Type_row>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Data.Table.Type_row>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -1709,9 +1700,8 @@ public static class Table {
     }
 
     public override Vx.Data.Table.Type_rowmap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_rowmap,
-       vals);
+      Vx.Data.Table.Type_rowmap output = Vx.Core.vx_copy(Vx.Data.Table.e_rowmap, vals);
+      return output;
     }
 
     public override Vx.Data.Table.Type_rowmap vx_copy(params Object[] vals) {
@@ -1885,9 +1875,8 @@ public static class Table {
     }
 
     public override Vx.Data.Table.Type_sort vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_sort,
-       vals);
+      Vx.Data.Table.Type_sort output = Vx.Core.vx_copy(Vx.Data.Table.e_sort, vals);
+      return output;
     }
 
     public override Vx.Data.Table.Type_sort vx_copy(params Object[] vals) {
@@ -2192,9 +2181,8 @@ public static class Table {
     }
 
     public override Vx.Data.Table.Type_table vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_table,
-       vals);
+      Vx.Data.Table.Type_table output = Vx.Core.vx_copy(Vx.Data.Table.e_table, vals);
+      return output;
     }
 
     public override Vx.Data.Table.Type_table vx_copy(params Object[] vals) {

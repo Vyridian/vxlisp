@@ -73,9 +73,8 @@ public final class Http {
 
     @Override
     public Http.Type_response vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_response,
-       vals);
+      Http.Type_response output = Core.vx_copy(Http.e_response, vals);
+      return output;
     }
 
     @Override

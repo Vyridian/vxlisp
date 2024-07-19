@@ -1181,7 +1181,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		instancefuncs += "" +
 			"\n    public " + LangNameTypeFromTypeSubtype(lang, rawmaptype, allowtype) + " vx_p_map = " + LangNameFromPkgNameDot(lang, "vx/core") + "immutablemap(" + LangVxNewMap(lang, allowtype, "") + ");" +
 			"\n" +
-			LangVxMapFromType(lang, typ) +
+			LangVxMapFromType(lang, allowtype) +
 			LangVxSetFromType(lang, typ) +
 			LangVxAllowCodeFromMap(lang, typ) +
 			LangVxNewFromMap(lang, typ)
@@ -2601,12 +2601,10 @@ func LangInterfaceFromType(lang *vxlang, typ *vxtype) string {
 	arglist = append(arglist, argvals)
 	funcvxnew := NewFunc()
 	funcvxnew.name = "vx_new"
-	//funcvxnew.vxtype = typ
 	funcvxnew.vxtype = anytype
 	funcvxnew.listarg = arglist
 	funcvxcopy := NewFunc()
 	funcvxcopy.name = "vx_copy"
-	//funcvxcopy.vxtype = typ
 	funcvxcopy.vxtype = anytype
 	funcvxcopy.listarg = arglist
 	basics := "" +
@@ -4926,7 +4924,7 @@ func LangVxMapFromType(lang *vxlang, typ *vxtype) string {
 		if typ.name == "any" {
 			convertmap = "this.vx_p_map"
 		} else {
-			convertmap = "(" + LangNameTypeFromType(lang, rawmapanytype) + ")Convert.ChangeType(this.vx_p_map, typeof(" + LangNameTypeFromType(lang, rawmapanytype) + "))"
+			convertmap = LangNameFromPkgNameDot(lang, "vx/core") + "vx_map_from_map<" + LangNameTypeFromType(lang, anytype) + ", " + LangNameTypeFromType(lang, typ) + ">(this.vx_p_map)"
 		}
 		copymap = "" +
 			LangVar(lang, "anymap", rawmaptype, anytype, convertmap, 3, false, false) +
@@ -5045,9 +5043,8 @@ func LangVxNewFromType(lang *vxlang, typ *vxtype, isinterface bool) string {
 	typename := LangNameFromType(lang, typ)
 	output := "" +
 		LangFuncHeader(lang, typename, funcvxnew, false, false) +
-		"\n      return " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_copy(" +
-		"\n       e_" + typename + "," +
-		"\n       vals);" +
+		LangVar(lang, "output", typ, emptytype, LangNameFromPkgNameDot(lang, "vx/core")+"vx_copy("+LangNameEFromType(lang, typ)+", vals)", 3, false, false) +
+		"\n      return output" + lang.lineend +
 		"\n    }" +
 		"\n"
 	return output

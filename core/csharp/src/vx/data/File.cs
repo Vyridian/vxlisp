@@ -102,9 +102,8 @@ public static class File {
     }
 
     public override Vx.Data.File.Type_file vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_file,
-       vals);
+      Vx.Data.File.Type_file output = Vx.Core.vx_copy(Vx.Data.File.e_file, vals);
+      return output;
     }
 
     public override Vx.Data.File.Type_file vx_copy(params Object[] vals) {
@@ -340,9 +339,8 @@ public static class File {
   public class Class_fileformat : Vx.Core.Class_base, Type_fileformat {
 
     public override Vx.Data.File.Type_fileformat vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_fileformat,
-       vals);
+      Vx.Data.File.Type_fileformat output = Vx.Core.vx_copy(Vx.Data.File.e_fileformat, vals);
+      return output;
     }
 
     public override Vx.Data.File.Type_fileformat vx_copy(params Object[] vals) {
@@ -432,9 +430,8 @@ public static class File {
     }
 
     public override Vx.Data.File.Type_filelist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_filelist,
-       vals);
+      Vx.Data.File.Type_filelist output = Vx.Core.vx_copy(Vx.Data.File.e_filelist, vals);
+      return output;
     }
 
     public override Vx.Data.File.Type_filelist vx_copy(params Object[] vals) {

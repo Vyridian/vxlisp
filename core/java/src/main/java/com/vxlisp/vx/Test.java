@@ -106,9 +106,8 @@ public final class Test {
 
     @Override
     public Test.Type_testcase vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_testcase,
-       vals);
+      Test.Type_testcase output = Core.vx_copy(Test.e_testcase, vals);
+      return output;
     }
 
     @Override
@@ -376,9 +375,8 @@ public final class Test {
 
     @Override
     public Test.Type_testcaselist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_testcaselist,
-       vals);
+      Test.Type_testcaselist output = Core.vx_copy(Test.e_testcaselist, vals);
+      return output;
     }
 
     @Override
@@ -564,9 +562,8 @@ public final class Test {
 
     @Override
     public Test.Type_testcoveragedetail vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_testcoveragedetail,
-       vals);
+      Test.Type_testcoveragedetail output = Core.vx_copy(Test.e_testcoveragedetail, vals);
+      return output;
     }
 
     @Override
@@ -873,9 +870,8 @@ public final class Test {
 
     @Override
     public Test.Type_testcoveragenums vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_testcoveragenums,
-       vals);
+      Test.Type_testcoveragenums output = Core.vx_copy(Test.e_testcoveragenums, vals);
+      return output;
     }
 
     @Override
@@ -1255,9 +1251,8 @@ public final class Test {
 
     @Override
     public Test.Type_testcoveragesummary vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_testcoveragesummary,
-       vals);
+      Test.Type_testcoveragesummary output = Core.vx_copy(Test.e_testcoveragesummary, vals);
+      return output;
     }
 
     @Override
@@ -1648,9 +1643,8 @@ public final class Test {
 
     @Override
     public Test.Type_testdescribe vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_testdescribe,
-       vals);
+      Test.Type_testdescribe output = Core.vx_copy(Test.e_testdescribe, vals);
+      return output;
     }
 
     @Override
@@ -1890,9 +1884,8 @@ public final class Test {
 
     @Override
     public Test.Type_testdescribelist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_testdescribelist,
-       vals);
+      Test.Type_testdescribelist output = Core.vx_copy(Test.e_testdescribelist, vals);
+      return output;
     }
 
     @Override
@@ -2094,9 +2087,8 @@ public final class Test {
 
     @Override
     public Test.Type_testpackage vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_testpackage,
-       vals);
+      Test.Type_testpackage output = Core.vx_copy(Test.e_testpackage, vals);
+      return output;
     }
 
     @Override
@@ -2386,9 +2378,8 @@ public final class Test {
 
     @Override
     public Test.Type_testpackagelist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_testpackagelist,
-       vals);
+      Test.Type_testpackagelist output = Core.vx_copy(Test.e_testpackagelist, vals);
+      return output;
     }
 
     @Override
@@ -2590,9 +2581,8 @@ public final class Test {
 
     @Override
     public Test.Type_testresult vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_testresult,
-       vals);
+      Test.Type_testresult output = Core.vx_copy(Test.e_testresult, vals);
+      return output;
     }
 
     @Override
@@ -2882,9 +2872,8 @@ public final class Test {
 
     @Override
     public Test.Type_testresultlist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_testresultlist,
-       vals);
+      Test.Type_testresultlist output = Core.vx_copy(Test.e_testresultlist, vals);
+      return output;
     }
 
     @Override

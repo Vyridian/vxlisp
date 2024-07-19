@@ -116,9 +116,8 @@ public static class Tree {
     }
 
     public override Vx.Data.Tree.Type_branch vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_branch,
-       vals);
+      Vx.Data.Tree.Type_branch output = Vx.Core.vx_copy(Vx.Data.Tree.e_branch, vals);
+      return output;
     }
 
     public override Vx.Data.Tree.Type_branch vx_copy(params Object[] vals) {
@@ -371,9 +370,8 @@ public static class Tree {
   public class Class_brancharrow : Vx.Core.Class_base, Type_brancharrow {
 
     public override Vx.Data.Tree.Type_brancharrow vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_brancharrow,
-       vals);
+      Vx.Data.Tree.Type_brancharrow output = Vx.Core.vx_copy(Vx.Data.Tree.e_brancharrow, vals);
+      return output;
     }
 
     public override Vx.Data.Tree.Type_brancharrow vx_copy(params Object[] vals) {
@@ -462,9 +460,8 @@ public static class Tree {
     }
 
     public override Vx.Data.Tree.Type_branchlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_branchlist,
-       vals);
+      Vx.Data.Tree.Type_branchlist output = Vx.Core.vx_copy(Vx.Data.Tree.e_branchlist, vals);
+      return output;
     }
 
     public override Vx.Data.Tree.Type_branchlist vx_copy(params Object[] vals) {
@@ -614,9 +611,8 @@ public static class Tree {
     }
 
     public override Vx.Data.Tree.Type_leaf vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_leaf,
-       vals);
+      Vx.Data.Tree.Type_leaf output = Vx.Core.vx_copy(Vx.Data.Tree.e_leaf, vals);
+      return output;
     }
 
     public override Vx.Data.Tree.Type_leaf vx_copy(params Object[] vals) {
@@ -833,9 +829,8 @@ public static class Tree {
     }
 
     public override Vx.Data.Tree.Type_leaflist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_leaflist,
-       vals);
+      Vx.Data.Tree.Type_leaflist output = Vx.Core.vx_copy(Vx.Data.Tree.e_leaflist, vals);
+      return output;
     }
 
     public override Vx.Data.Tree.Type_leaflist vx_copy(params Object[] vals) {
@@ -985,9 +980,8 @@ public static class Tree {
     }
 
     public override Vx.Data.Tree.Type_tree vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_tree,
-       vals);
+      Vx.Data.Tree.Type_tree output = Vx.Core.vx_copy(Vx.Data.Tree.e_tree, vals);
+      return output;
     }
 
     public override Vx.Data.Tree.Type_tree vx_copy(params Object[] vals) {

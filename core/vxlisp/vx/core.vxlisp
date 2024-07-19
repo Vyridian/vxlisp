@@ -653,9 +653,10 @@
 
 (const true : boolean
  (native
-  :cpp  "true"
-  :js   "true"
-  :java "true")
+  :cpp    "true"
+  :csharp "true"
+  :java   "true"
+  :js     "true")
  :test (test-true true))
 
 (func . : any
@@ -675,11 +676,14 @@
   :cpp
    "long result = num1->vx_int() + num2->vx_int();
     output = vx_core::vx_new_int(result);"
-  :js
-   "num1 + num2"
+  :csharp
+   "int result = num1.vx_int() + num2.vx_int();
+    output = Vx.Core.vx_new_int(result);"
   :java
    "int result = num1.vx_int() + num2.vx_int();
-    output = Core.vx_new_int(result);")
+    output = Core.vx_new_int(result);"
+  :js
+   "num1 + num2")
  :alias "plus"
  :test (test 5 (+ 2 3))
        (test 3 (+ 5 -2))
@@ -692,11 +696,14 @@
   :cpp
    "float result = vx_core::vx_float_from_number(num1) + vx_core::vx_float_from_number(num2);
     output = vx_core::vx_new_float(result);"
-  :js
-   "num1 + num2"
+  :csharp
+   "float result = Vx.Core.vx_float_from_number(num1) + Vx.Core.vx_float_from_number(num2);
+    output = Vx.Core.vx_new_float(result);"
   :java
    "float result = Core.vx_float_from_number(num1) + Core.vx_float_from_number(num2);
-    output = Core.vx_new_float(result);")
+    output = Core.vx_new_float(result);"
+  :js
+   "num1 + num2")
  :alias "plus"
  :test (test 5 (+ 2  3))
        (test 3 (+ 5 -2))
@@ -741,11 +748,14 @@
   :cpp
    "long result = num1->vx_int() - num2->vx_int();
     output = vx_core::vx_new_int(result);"
-  :js
-   "num1 - num2"
+  :csharp
+   "int result = num1.vx_int() - num2.vx_int();
+    output = Vx.Core.vx_new_int(result);"
   :java
    "int result = num1.vx_int() - num2.vx_int();
-    output = Core.vx_new_int(result);")
+    output = Core.vx_new_int(result);"
+  :js
+   "num1 - num2")
  :alias "minus"
  :test (test 1 (- 3 2))
        (test 7 (- 5 -2))
@@ -758,11 +768,14 @@
   :cpp
    "float result = vx_core::vx_float_from_number(num1) - vx_core::vx_float_from_number(num2);
     output = vx_core::vx_new_float(result);"
-  :js
-   "num1 - num2"
+  :csharp
+   "float result = Vx.Core.vx_float_from_number(num1) - Vx.Core.vx_float_from_number(num2);
+    output = Vx.Core.vx_new_float(result);"
   :java
    "float result = Core.vx_float_from_number(num1) - Core.vx_float_from_number(num2);
-    output = Core.vx_new_float(result);")
+    output = Core.vx_new_float(result);"
+  :js
+   "num1 - num2")
  :alias "minus"
  :test (test 5 (+ 2 3))
        (test 3 (+ 5 -2))
@@ -808,11 +821,14 @@
   :cpp
    "long result = num1->vx_int() * num2->vx_int();
     output = vx_core::vx_new_int(result);"
-  :js
-   "num1 * num2"
+  :csharp
+   "int result = num1.vx_int() * num2.vx_int();
+    output = Vx.Core.vx_new_int(result);"
   :java
    "int result = num1.vx_int() * num2.vx_int();
-    output = Core.vx_new_int(result);")
+    output = Core.vx_new_int(result);"
+  :js
+   "num1 * num2")
  :alias "multiply"
  :test (test 6 (* 3 2))
        (test -10 (* 5 -2))
@@ -825,11 +841,14 @@
   :cpp
    "float result = vx_core::vx_float_from_number(num1) * vx_core::vx_float_from_number(num2);
     output = vx_core::vx_new_float(result);"
-  :js
-   "num1 * num2"
+  :csharp
+   "float result = Vx.Core.vx_float_from_number(num1) * Vx.Core.vx_float_from_number(num2);
+    output = Vx.Core.vx_new_float(result);"
   :java
    "float result = Core.vx_float_from_number(num1) * Core.vx_float_from_number(num2);
-    output = Core.vx_new_float(result);")
+    output = Core.vx_new_float(result);"
+  :js
+   "num1 * num2")
  :alias "multiply"
  :test (test 6.4 (* 3.2 2))
        (test -10.2 (* 5.1 -2))
@@ -879,8 +898,16 @@
       float result = float1 / float2;
       output = vx_core::vx_new_float(result);
     }"
-  :js
-   "num1 / num2"
+  :csharp
+   "float float1 = Vx.Core.vx_float_from_number(num1);
+    float float2 = Vx.Core.vx_float_from_number(num2);
+    if (float1 == 0) {
+    } else if (float2 == 0) {
+      output = Vx.Core.c_notanumber;
+    } else {
+      float result = float1 / float2;
+      output = Vx.Core.vx_new_float(result);
+    }"
   :java
    "float float1 = Core.vx_float_from_number(num1);
     float float2 = Core.vx_float_from_number(num2);
@@ -890,7 +917,9 @@
     } else {
       float result = float1 / float2;
       output = Core.vx_new_float(result);
-    }")
+    }"
+  :js
+   "num1 / num2")
  :alias "divide"
  :test (test 3 (/ 6 2))
        (test -5 (/ 10 -2))
@@ -912,8 +941,18 @@
       }
     }
     output = vx_core::vx_new_boolean(isequal);"
-  :js
-   "vx_core.vx_eq(val1, val2)"
+  :csharp
+   "bool isequal = false;
+    if (val1 == val2) {
+      isequal = true;
+    } else {
+      Vx.Core.Type_string strval1 = Vx.Core.f_string_from_any(val1);
+      Vx.Core.Type_string strval2 = Vx.Core.f_string_from_any(val2);
+      if (strval1.vx_string() == (strval2.vx_string())) {
+        isequal = true;
+      }
+    }
+    output = Vx.Core.vx_new_boolean(isequal);"
   :java
    "boolean isequal = false;
     if (val1 == val2) {
@@ -925,7 +964,9 @@
         isequal = true;
       }
     }
-    output = Core.vx_new_boolean(isequal);")
+    output = Core.vx_new_boolean(isequal);"
+  :js
+   "vx_core.vx_eq(val1, val2)")
  :alias "eq"
  :test (test-true (= true true))
        (test-true (= 2 2))
@@ -962,11 +1003,14 @@
   :cpp
    "bool isequal = vx_core::vx_eqeq(val1, val2);
     output = vx_core::vx_new_boolean(isequal);"
-  :js
-   "output = val1 == val2"
+  :csharp
+   "bool isequal = Vx.Core.vx_eqeq(val1, val2);
+    output = Vx.Core.vx_new_boolean(isequal);"
   :java
    "boolean isequal = Core.vx_eqeq(val1, val2);
-    output = Core.vx_new_boolean(isequal);")
+    output = Core.vx_new_boolean(isequal);"
+  :js
+   "output = val1 == val2")
  :alias "eqeq"
  :test (test-true (== 0 0))
        (test-true (== "" ""))
@@ -975,9 +1019,10 @@
 (func ! : boolean
  [val : boolean :doc "Thing to not"]
  (native
-  :cpp  "vx_core::vx_new_boolean(!val->vx_boolean());"
-  :js   "!val"
-  :java "Core.vx_new_boolean(!val.vx_boolean());")
+  :cpp    "vx_core::vx_new_boolean(!val->vx_boolean());"
+  :csharp "Vx.Core.vx_new_boolean(!val.vx_boolean());"
+  :java   "Core.vx_new_boolean(!val.vx_boolean());"
+  :js     "!val")
  :alias "not"
  :test (test-false false)
        (test-false (! true))
@@ -1145,10 +1190,12 @@
  (native
   :cpp
    "vtypedef->allowtypes();"
-  :js
-   "vtypedef['vx_value']['allowtypes']"
+  :csharp
+   "vtypedef.allowtypes();"
   :java
-   "vtypedef.allowtypes();")
+   "vtypedef.allowtypes();"
+  :js
+   "vtypedef['vx_value']['allowtypes']")
  :doc "Return allow type list from type")
 
 (func and : boolean
@@ -1161,17 +1208,23 @@
     } else {
       output = vx_core::c_false;
     }"
-  :js
-   "if (val1 && val2) {
-      output = true
+  :csharp
+   "if (val1.vx_boolean() && val2.vx_boolean()) {
+      output = Core.c_true;
     } else {
-      output = false
+      output = Core.c_false;
     }"
   :java
    "if (val1.vx_boolean() && val2.vx_boolean()) {
       output = Core.c_true;
     } else {
       output = Core.c_false;
+    }"
+  :js
+   "if (val1 && val2) {
+      output = true
+    } else {
+      output = false
     }")
  :test (test-true
         (and true true))
@@ -1206,11 +1259,15 @@
  (native
   :cpp
    "output = vx_core::vx_any_from_any(generic_any_1, value);"
-  :js
-   "value"
+  :csharp
+   "if (value is T tval) {
+      output = tval;
+    }"
   :java
    "@SuppressWarnings(“unchecked”)
-    output = (T)value;")
+    output = (T)value;"
+  :js
+   "value")
  :doc "Function Type taking any value any-2 and returning generic any-1")
 
 (func any<-any-async : any-1
@@ -1221,6 +1278,10 @@
 (func any<-any-context : any-1
  [value : any-2]
  (native
+  :csharp
+   "if (value is T tval) {
+      output = tval;
+    }"
   :java
    "@SuppressWarnings(“unchecked”)
     output = (T)value;")
@@ -1280,9 +1341,13 @@
       vx_core::Type_any value = listvalue[intindex - 1];
       output = vx_core::vx_any_from_any(generic_any_1, value);
     }"
-  :js
-   "if (index <= values.length) {
-      output = values[index - 1]
+  :csharp
+   "int intindex = index.vx_int();
+    int intsize = values.vx_list().Count;
+    if (intindex <= intsize) {
+      List<Vx.Core.Type_any> listvalue = values.vx_list();
+      Vx.Core.Type_any value = listvalue[intindex - 1];
+      output = Vx.Core.f_any_from_any(generic_any_1, value);
     }"
   :java
    "int intindex = index.vx_int();
@@ -1291,6 +1356,10 @@
       List<Core.Type_any> listvalue = values.vx_list();
       Core.Type_any value = listvalue.get(intindex - 1);
       output = Core.f_any_from_any(generic_any_1, value);
+    }"
+  :js
+   "if (index <= values.length) {
+      output = values[index - 1]
     }")
  :test (test
         "b"
@@ -1343,6 +1412,20 @@
   :cpp
    "vx_core::Type_any result = vx_core::vx_any_from_list_result_next(generic_any_1, list, valstart, fn_reduce_next);
     output = vx_core::vx_any_from_any(generic_any_1, result);"
+  :csharp :auto
+  :java
+   "output = valstart;
+    final List<Core.Type_any> listval = list.vx_list();
+    Core.Type_any current = Core.e_any;
+    boolean first = true;
+    for (final Core.Type_any next : listval) {
+      if (first) {
+        first = false;
+      } else {
+        output = fn_reduce_next.vx_any_from_reduce_next(generic_any_1, output, current, next);
+      }
+      current = next;
+    }"
   :js
    "output = valstart
     const fn = fn_reduce_next['vx_value']
@@ -1357,19 +1440,6 @@
         }
         current = next
       }
-    }"
-  :java
-   "output = valstart;
-    final List<Core.Type_any> listval = list.vx_list();
-    Core.Type_any current = Core.e_any;
-    boolean first = true;
-    for (final Core.Type_any next : listval) {
-      if (first) {
-        first = false;
-      } else {
-        output = fn_reduce_next.vx_any_from_reduce_next(generic_any_1, output, current, next);
-      }
-      current = next;
     }")
  :doc "Returns a val from a list reduce operation")
 
@@ -1380,6 +1450,10 @@
   :cpp
    "vx_core::Type_any val = valuemap->vx_get_any(key);
     output = vx_core::vx_any_from_any(generic_any_1, val);"
+  :csharp
+   "Vx.Core.vx_any_from_map(generic_any_1, valuemap, key);"
+  :java
+   "Core.vx_any_from_map(generic_any_1, valuemap, key);"
   :js
    "if (key.startsWith(':')) {
       key = key.substring(1)
@@ -1388,9 +1462,7 @@
     let val = mapval[key]
     if (val != undefined) {
       output = val
-    }"
-  :java
-   "Core.vx_any_from_map(generic_any_1, valuemap, key);")
+    }")
  :test (test
         "v2"
         (any<-map
@@ -1488,6 +1560,9 @@
   :csharp
    "Vx.Core.Type_any val = vstruct.vx_any(key);
     output = Vx.Core.f_any_from_any(generic_any_1, val);"
+  :java
+   "Core.Type_any val = vstruct.vx_any(key);
+    output = Core.f_any_from_any(generic_any_1, val);"
   :js
    "const subvalmap = vstruct['vx_value']
     if (subvalmap != undefined) {
@@ -1498,10 +1573,7 @@
       if (val != undefined) {
         output = val
       }
-    }"
-  :java
-   "Core.Type_any val = vstruct.vx_any(key);
-    output = Core.f_any_from_any(generic_any_1, val);")
+    }")
  :doc "Returns value from a struct")
 
 (func async : any-1 :async
@@ -1596,14 +1668,7 @@
   :cpp
    "long intresult = vx_core::vx_compare(val1, val2);
     output = vx_core::vx_new_int(intresult);"
-  :js
-   "if (val1 == val2) {
-      output = 0
-    } else if (val1 < val2) {
-      output = -1
-    } else {
-      output = 1
-    }"
+  :csharp :auto
   :java
    "int intresult = 0;
     if ((val1 instanceof Core.Type_number) && (val2 instanceof Core.Type_number)) {
@@ -1626,7 +1691,15 @@
         intresult = -1;
       }
     }
-    output = Core.vx_new_int(intresult);")
+    output = Core.vx_new_int(intresult);"
+  :js
+   "if (val1 == val2) {
+      output = 0
+    } else if (val1 < val2) {
+      output = -1
+    } else {
+      output = 1
+    }")
  :test (test 1 (compare 3 2))
        (test 1 (compare "z" "a"))
  :doc "Returns 0 if vals are equal, 1 if val1 > val2, -1 if val1 < val2")
@@ -1638,11 +1711,14 @@
   :cpp
    "bool check = vx_boolean_from_string_find(text->vx_string(), find->vx_string());
     output = vx_core::vx_new_boolean(check);"
-  :js
-   "vx_core.vx_boolean_from_string_find(text, find)"
+  :csharp
+   "bool check = vx_boolean_from_string_find(text.vx_string(), find.vx_string());
+    output = Vx.Core.vx_new_boolean(check);"
   :java
    "boolean check = vx_boolean_from_string_find(text.vx_string(), find.vx_string());
-    output = Core.vx_new_boolean(check);")
+    output = Core.vx_new_boolean(check);"
+  :js
+   "vx_core.vx_boolean_from_string_find(text, find)")
  :test (test-true  (contains "abcde" "cd"))
        (test-false (contains "abcde" "dc"))
  :doc  "Returns true if the given list contains the given value.")
@@ -1662,8 +1738,7 @@
       }
     }
     output = vx_core::vx_new_boolean(booleanresult);"
-  :js
-   "values.includes(find)"
+  :csharp :auto
   :java
    "boolean booleanresult = false;
     List<Core.Type_any> listvalues = values.vx_list();
@@ -1674,7 +1749,9 @@
         break;
       }
     }
-    output = Core.vx_new_boolean(booleanresult);")
+    output = Core.vx_new_boolean(booleanresult);"
+  :js
+   "values.includes(find)")
  :test (test-true
         (contains (stringlist "1" "2" "3") "2"))
        (test-true
@@ -1772,6 +1849,22 @@
         break;
       }
     }"
+  :csharp
+   "List<Vx.Core.Type_any> listvalue = values.vx_list();
+    foreach (Vx.Core.Type_any value in listvalue) {
+      if (value != Vx.Core.c_nothing) {
+        output = fn_any_from_any.vx_any_from_any(generic_any_1, value);
+        break;
+      }
+    }"
+  :java
+   "List<Core.Type_any> listvalue = values.vx_list();
+    for (Core.Type_any value : listvalue) {
+      if (value != Core.c_nothing) {
+        output = fn_any_from_any.vx_any_from_any(generic_any_1, value);
+        break;
+      }
+    }"
   :js
    "output = " nothing "
     const fn = fn_any_from_any['vx_value']
@@ -1781,14 +1874,6 @@
         if (output != " nothing ") {
           break
         }
-      }
-    }"
-  :java
-   "List<Core.Type_any> listvalue = values.vx_list();
-    for (Core.Type_any value : listvalue) {
-      if (value != Core.c_nothing) {
-        output = fn_any_from_any.vx_any_from_any(generic_any_1, value);
-        break;
       }
     }")
  :doc "Returns first value that is not nothing"
@@ -1804,11 +1889,14 @@
   :cpp
    "float num = vx_core::vx_float_from_string(text->vx_string());
     output = vx_core::vx_new_float(num);"
-  :js
-   "vx_core.vx_float_from_string(text);"
+  :csharp
+   "float num = Vx.Core.vx_float_from_string(text.vx_string());
+    output = Vx.Core.vx_new_float(num);"
   :java
    "float num = Core.vx_float_from_string(text.vx_string());
-    output = Core.vx_new_float(num);")
+    output = Core.vx_new_float(num);"
+  :js
+   "vx_core.vx_float_from_string(text);")
  :test (test
         (float 2.3)
         (float<-string
@@ -1825,8 +1913,11 @@
  (native
   :cpp
    "val->vx_funcdef();"
+  :csharp
+   "val.vx_funcdef();"
   :java
-   "val.vx_funcdef();"))
+   "val.vx_funcdef();")
+ :doc "Returns the definition of a function")
 
 (func funcname<-funcdef : string
  [funcdef : funcdef]
@@ -1841,13 +1932,17 @@
    "if (clause->vx_boolean()) {
       output = then;
     }"
-  :js
-   "if (clause) {
-      output = then
+  :csharp
+   "if (clause.vx_boolean()) {
+      output = then;
     }"
   :java
    "if (clause.vx_boolean()) {
       output = then;
+    }"
+  :js
+   "if (clause) {
+      output = then
     }")
  :test (test
         "a"
@@ -1870,17 +1965,23 @@
     } else {
       output = elseval;
     }"
-  :js
-   "if (clause) {
-      output = thenval
+  :csharp
+   "if (clause.vx_boolean()) {
+      output = thenval;
     } else {
-      output = elseval
+      output = elseval;
     }"
   :java
    "if (clause.vx_boolean()) {
       output = thenval;
     } else {
       output = elseval;
+    }"
+  :js
+   "if (clause) {
+      output = thenval
+    } else {
+      output = elseval
     }")
  :test (test
         "a"
@@ -1999,13 +2100,17 @@
    "if (text->vx_p_iref == -2) {
       output = vx_core::c_true;
     }"
-  :js
-   "if (text.length == 0) {
-      output = vx_core.c_true
+  :csharp
+   "if (text.vx_string().Length == 0) {
+      output = Vx.Core.c_true;
     }"
   :java
    "if (text.vx_string().length() == 0) {
       output = Core.c_true;
+    }"
+  :js
+   "if (text.length == 0) {
+      output = vx_core.c_true
     }")
  :doc "Returns true if text is empty.")
 
@@ -2016,18 +2121,24 @@
    "if (value == value->vx_empty()) {
       output = vx_core::c_true;
     }"
-  :js
-   "const type = vx_core.f_type_from_any(value)
-    if (value == vx_core.f_empty(type)) {
-      output = vx_core.c_true
+  :csharp
+   "if (value == value.vx_empty()) {
+      output = Vx.Core.c_true;
     } else {
-      output = vx_core.c_false
+      output = Vx.Core.c_false;
     }"
   :java
    "if (value == value.vx_empty()) {
       output = Core.c_true;
     } else {
       output = Core.c_false;
+    }"
+  :js
+   "const type = vx_core.f_type_from_any(value)
+    if (value == vx_core.f_empty(type)) {
+      output = vx_core.c_true
+    } else {
+      output = vx_core.c_false
     }")
  :test (test-true (is-empty false))
        (test-true (is-empty ""))
@@ -2051,15 +2162,15 @@
     if (stext.EndsWith(sfind)) {
       output = Vx.Core.c_true;
     }"
-  :js
-   "if (text.endsWith(find)) {
-      output = vx_core.c_true
-    }"
   :java
    "String stext = text.vx_string();
     String sfind = find.vx_string();
     if (stext.endsWith(sfind)) {
       output = Core.c_true;
+    }"
+  :js
+   "if (text.endsWith(find)) {
+      output = vx_core.c_true
     }")
  :doc "Returns true if text ends with find.")
 
@@ -2073,14 +2184,18 @@
     if (sextend == “:func”) {
       output = vx_core::c_true;
     }"
-  :js
-   "const extend = " (extends<-any val) "
-    if (extend == ':func') {
-      output = vx_core.c_true
+  :csharp
+   "if (val is Vx.Core.Type_func) {
+      output = Vx.Core.c_true;
     }"
   :java
    "if (val instanceof Core.Type_func) {
       output = Core.c_true;
+    }"
+  :js
+   "const extend = " (extends<-any val) "
+    if (extend == ':func') {
+      output = vx_core.c_true
     }")
  :doc "Returns true if val is a function.")
 
@@ -2090,10 +2205,13 @@
   :cpp
    "bool result = vx_core::vx_is_int(value);
     output = vx_core::vx_new_boolean(result);"
-  :js "vx_core.vx_is_int(value)"
+  :csharp
+   "bool result = Vx.Core.vx_is_int(value);
+    output = Vx.Core.vx_new_boolean(result);"
   :java
    "boolean result = Core.vx_is_int(value);
-    output = Core.vx_new_boolean(result);")
+    output = Core.vx_new_boolean(result);"
+  :js "vx_core.vx_is_int(value)")
  :test (test-true
         (is-int 2))
        (test-true
@@ -2110,10 +2228,13 @@
   :cpp
    "bool result = vx_core::vx_is_float(value);
     output = vx_core::vx_new_boolean(result);"
-  :js "vx_core.vx_is_float(value)"
+  :csharp
+   "bool result = Vx.Core.vx_is_float(value);
+    output = Vx.Core.vx_new_boolean(result);"
   :java
    "boolean result = Core.vx_is_float(value);
-    output = Core.vx_new_boolean(result);")
+    output = Core.vx_new_boolean(result);"
+  :js "vx_core.vx_is_float(value)")
  :doc "Returns true if the value is a float.")
 
 (func is-number : boolean
@@ -2159,11 +2280,14 @@
   :cpp
    "long len = text->vx_string().length();
     output = vx_core::vx_new_int(len);"
-  :js
-   "text.length"
+  :csharp
+   "int len = text.vx_string().Length;
+    output = Vx.Core.vx_new_int(len);"
   :java
    "int len = text.vx_string().length();
-    output = Core.vx_new_int(len);")
+    output = Core.vx_new_int(len);"
+  :js
+   "text.length")
  :test (test
         4
         (length "abcd"))
@@ -2180,10 +2304,13 @@
     if (len > 0) {
       output = vx_core::vx_new_int(len);
     }"
-  :js "values.length"
+  :csharp
+   "int intresult = values.vx_list().Count();
+    output = Core.vx_new_int(intresult);"
   :java
    "int intresult = values.vx_list().size();
-    output = Core.vx_new_int(intresult);")
+    output = Core.vx_new_int(intresult);"
+  :js "values.length")
  :test (test
         3
         (length
@@ -2203,13 +2330,15 @@
   :cpp
    "vx_core::Type_any any = fn_any->vx_any_from_func();
     output = vx_core::vx_any_from_any(generic_any_1, any);"
+  :csharp
+   "fn_any.vx_any_from_func(generic_any_1);"
+  :java
+   "fn_any.vx_any_from_func(generic_any_1);"
   :js
    "const fn = fn_any['vx_value']
     if (fn) {
       output = fn()
-    }"
-  :java
-   "fn_any.vx_any_from_func(generic_any_1);")
+    }")
  :test (test
         7
         (let
@@ -2223,13 +2352,15 @@
  (native
   :cpp
    "fn_any_async->vx_any_from_func_async(generic_any_1);"
+  :csharp
+   "fn_any_async.vx_any_from_func_async(generic_any_1);"
+  :java
+   "fn_any_async.vx_any_from_func_async(generic_any_1);"
   :js
    "const fn = fn_any_async['vx_value']
     if (fn) {
       output = await fn()
-    }"
-  :java
-   "fn_any_async.vx_any_from_func_async(generic_any_1);")
+    }")
  :doc "Same as normal let but returns async values.")
 
 (func list<-list : list-1
@@ -2256,18 +2387,19 @@
     });
     vx_core::Type_any anylist = generic_list_1->vx_new(list_result);
     output = vx_core::vx_any_from_any(generic_list_1, anylist);"
-  :js
-   "const fn = fn_any_from_any['vx_value']
-    if (fn) {
-      output = values.map(fn)
-      output['vx_type'] = generic_list_1
-    }"
+  :csharp :auto
   :java
    "List<Core.Type_any> list_value = values.vx_list();
     List<Core.Type_any> list_result = Core.arraylist_from_arraylist_fn(list_value, (val) -> {
       return fn_any_from_any.vx_any_from_any(generic_list_1, val);
     });
-    output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));")
+    output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));"
+  :js
+   "const fn = fn_any_from_any['vx_value']
+    if (fn) {
+      output = values.map(fn)
+      output['vx_type'] = generic_list_1
+    }")
  :doc "Returns a list of processed items from another list")
 
 (func list<-list-async  : list-1 :async
@@ -2280,14 +2412,7 @@
       return fn_any_from_any_async->vx_any_from_any_async(vx_core::vx_type(val), val);
     });
     output = vx_core::vx_async_new_from_listasync(generic_list_1, list_async_result);"
-  :js
-   "const fn = fn_any_from_any_async['vx_value']
-    if (fn) {
-      const listfuture = values.map(fn)
-      const future = Promise.all(listfuture)
-      output = await future
-      output['vx_type'] = generic_list_1
-    }"
+  :csharp :auto
   :java
    "List<Core.Type_any> list_value = values.vx_list();
     List<CompletableFuture<Core.Type_any>> list_async_result = Core.arraylist_from_arraylist_fn(list_value, (val) -> {
@@ -2297,7 +2422,15 @@
     output = Core.vx_async_from_async_fn(async_list_result, (list_result) -> {
       X work = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));
       return work;
-    });")
+    });"
+  :js
+   "const fn = fn_any_from_any_async['vx_value']
+    if (fn) {
+      const listfuture = values.map(fn)
+      const future = Promise.all(listfuture)
+      output = await future
+      output['vx_type'] = generic_list_1
+    }")
  :doc "Returns an asynchronous list of the processed asynchronous items from another list")
 
 (func list<-list-intany : list-1
@@ -2339,15 +2472,16 @@
   fn-any<-key-value : any<-key-value]
  (native
   :cpp :auto
-  :js
-   "vx_core.vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value)"
+  :csharp :auto
   :java
    "Map<String, Core.Type_any> map_value = valuemap.vx_map();
     List<Core.Type_any> listresult = Core.arraylist_from_linkedhashmap_fn(map_value, (key, val) -> {
       Core.Type_string valkey = Core.vx_new_string(key);
       return fn_any_from_key_value.vx_any_from_key_value(Core.t_any, valkey, val);
     });
-    output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(listresult));")
+    output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(listresult));"
+  :js
+   "vx_core.vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value)")
  :test (test
         (stringlist "a1" "b2")
         (list<-map : stringlist
@@ -2392,13 +2526,7 @@
   :cpp
    "vx_core::Type_any list = vx_core::vx_list_join_from_list_fn(generic_list_1, values, fn_any_from_any);
     output = vx_core::vx_any_from_any(generic_list_1, list);"
-  :js
-   "const fn = fn_any_from_any['vx_value']
-    if (fn) {
-      const listoflist = values.map(fn)
-      output = listoflist.flat()
-      output['vx_type'] = generic_list_1
-    }"
+  :csharp :auto
   :java
    "List<Core.Type_any> list_value = values.vx_list();
     List<Core.Type_any> list_result = new ArrayList<>();
@@ -2410,7 +2538,14 @@
         list_result.addAll(listval);
       }
     }
-    output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));")
+    output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));"
+  :js
+   "const fn = fn_any_from_any['vx_value']
+    if (fn) {
+      const listoflist = values.map(fn)
+      output = listoflist.flat()
+      output['vx_type'] = generic_list_1
+    }")
  :test (test
         (stringlist "a" "b" "c" "d")
         (list-join<-list : stringlist
@@ -2428,15 +2563,18 @@
   :cpp
    "vx_core::vx_log(value);
     output = value;"
-  :js
-   "const text = vx_core.f_string_from_any(value)
-    console.log(text)
-    output = value"
+  :csharp
+   "Vx.Core.vx_log(value);
+    output = value;"
   :java
    "Core.Type_string stringtext = Core.f_string_from_any(value);
     String text = stringtext.vx_string();
     System.out.println(text);
-    output = value;")
+    output = value;"
+  :js
+   "const text = vx_core.f_string_from_any(value)
+    console.log(text)
+    output = value")
  :doc "Writes a value to the console.")
 
 (func log : any-1
@@ -2447,15 +2585,19 @@
    "vx_core::vx_log(text);
     vx_core::vx_log(value);
     output = value;"
+  :csharp
+   "Vx.Core.vx_log(text);
+    Vx.Core.vx_log(value);
+    output = value;"
+  :java
+   "Core.vx_log(text);
+    Core.vx_log(value);
+    output = value;"
   :js
    "console.log(text)
     const svalue = vx_core.f_string_from_any(value)
     console.log(svalue)
-    output = value"
-  :java
-   "Core.vx_log(text);
-    Core.vx_log(value);
-    output = value;")
+    output = value")
  :doc "Writes a string and a value to the console.")
 
 (func main : string
@@ -2471,6 +2613,13 @@
    "vx_core::vx_Type_listany listany = vallist->vx_list();
     vx_core::vx_Type_mapany mapany = vx_core::vx_map_from_list(listany, fn_any_from_any);
     output = vx_core::vx_new_map(generic_map_1, mapany);"
+  :csharp :auto
+  :java
+   "List<Core.Type_any> listval = vallist.vx_list();
+    Map<String, Core.Type_any> mapresult = Core.vx_map_from_list_fn(listval, (val) -> {
+      return fn_any_from_any.vx_any_from_any(Core.t_string, val);
+    });
+    output = Core.f_any_from_any(generic_map_1, output.vx_new_from_map(mapresult));"
   :js
    "const valmap = {}
     vallist.map(value => {
@@ -2483,13 +2632,7 @@
     output = {
       vx_type: generic_map_1,
       vx_value: valmap
-    }"
-  :java
-   "List<Core.Type_any> listval = vallist.vx_list();
-    Map<String, Core.Type_any> mapresult = Core.vx_map_from_list_fn(listval, (val) -> {
-      return fn_any_from_any.vx_any_from_any(Core.t_string, val);
-    });
-    output = Core.f_any_from_any(generic_map_1, output.vx_new_from_map(mapresult));")
+    }")
  :test (test
         (stringmap
          "keya" "a"
@@ -2522,10 +2665,12 @@
   :cpp
    "vx_core::Type_any map = vx_core::vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);
     output = vx_core::vx_any_from_any(generic_map_1, map);"
-  :js
-   "vx_core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value)"
+  :csharp
+   "Vx.Core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);"
   :java
-   "Core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);")
+   "Core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);"
+  :js
+   "vx_core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value)")
  :test (test
         (stringmap
          :a "a1"
@@ -2746,17 +2891,23 @@
     } else {
       output = vx_core::c_false;
     }"
-  :js
-   "if (val1 || val2) {
-      output = true
+  :csharp
+   "if (val1.vx_boolean() || val2.vx_boolean()) {
+      output = Vx.Core.c_true;
     } else {
-      output = false
+      output = Vx.Core.c_false;
     }"
   :java
    "if (val1.vx_boolean() || val2.vx_boolean()) {
       output = Core.c_true;
     } else {
       output = Core.c_false;
+    }"
+  :js
+   "if (val1 || val2) {
+      output = true
+    } else {
+      output = false
     }")
  :doc  "Returns true if any value is true"
  :test (test-true (or true true))
@@ -2835,6 +2986,14 @@
       vx_core::Type_any any = fn_any->vx_any_from_func();
       output = vx_core::vx_any_from_any(generic_any_1, any);
     }"
+  :csharp
+   "if (fn_any != null) {
+      output = fn_any.vx_any_from_func(generic_any_1);
+    }"
+  :java
+   "if (fn_any != null) {
+      output = fn_any.vx_any_from_func(generic_any_1);
+    }"
   :js
    "const typedef = " (typedef<-any fn-any) "
     const extend = vx_core.f_extends_from_typedef(typedef)
@@ -2848,10 +3007,6 @@
     default:
       output = fn_any
       break
-    }"
-  :java
-   "if (fn_any != null) {
-      output = fn_any.vx_any_from_func(generic_any_1);
     }")
  :test (test 4 (resolve (fn : int [] (+ 1 3)))))
 
@@ -2861,6 +3016,14 @@
   :cpp
    "if (fn_any) {
       output = fn_any->vx_any_from_func_async(generic_any_1);
+    }"
+  :csharp
+   "if (fn_any != null) {
+      output = fn_any.vx_any_from_func_async(generic_any_1);
+    }"
+  :java
+   "if (fn_any != null) {
+      output = fn_any.vx_any_from_func_async(generic_any_1);
     }"
   :js
    "const typedef = " (typedef<-any fn-any) "
@@ -2875,10 +3038,6 @@
     default:
       output = fn_any
       break
-    }"
-  :java
-   "if (fn_any != null) {
-      output = fn_any.vx_any_from_func_async(generic_any_1);
     }")
  :test (test 4 (resolve : int (fn : int [] (+ 1 3)))))
 
@@ -2920,12 +3079,13 @@
   :cpp
    "std::string stringtext = vx_core::vx_string_from_string_repeat(text->vx_string(), repeat->vx_int());
     output = vx_core::vx_new_string(stringtext);"
-  :js "text.repeat(repeat)"
+  :csharp :auto
   :java
    "String stringtext = text.vx_string();
     int intrepeat = repeat.vx_int();
     String stringresult = stringtext.repeat(intrepeat);
-    output = Core.vx_new_string(stringresult);")
+    output = Core.vx_new_string(stringresult);"
+  :js "text.repeat(repeat)")
  :test (test "abab" (string-repeat "ab" 2)))
 
 (func string<-any : string
@@ -3006,6 +3166,38 @@
   :cpp
    "vx_core::Type_any any = vx_core::vx_switch(generic_any_1, val, thenelselist);
     output = vx_core::vx_any_from_any(generic_any_1, any);"
+  :csharp :auto
+  :java
+   "Core.Func_any_from_func fn_any = null;
+    List<Core.Type_thenelse> listthenelse = thenelselist.vx_listthenelse();
+    for (Core.Type_thenelse thenelse : listthenelse) {
+      Core.Type_string code = thenelse.code();
+      switch (code.vx_string()) {
+      case “:case”:
+        Core.Type_any value = thenelse.value();
+        Core.Type_boolean iseq = Core.f_eq(val, value);
+        if (iseq.vx_boolean()) {
+          fn_any = thenelse.fn_any();
+        }
+        break;
+      case “:casemany”:
+        Core.Type_list values = thenelse.values();
+        Core.Type_boolean iscontain = Core.f_contains_1(values, val);
+        if (iscontain.vx_boolean()) {
+          fn_any = thenelse.fn_any();
+        }
+        break;
+      case “:else”:
+        fn_any = thenelse.fn_any();
+        break;
+      }
+      if (fn_any != null) {
+        break;
+      }
+    }
+    if (fn_any != null) {
+      output = fn_any.vx_any_from_func(generic_any_1);
+    }"
   :js
    "let fn_any = null
     if (thenelselist.length > 0) {
@@ -3044,37 +3236,6 @@
           output = fn()
         }
       }
-    }"
-  :java
-   "Core.Func_any_from_func fn_any = null;
-    List<Core.Type_thenelse> listthenelse = thenelselist.vx_listthenelse();
-    for (Core.Type_thenelse thenelse : listthenelse) {
-      Core.Type_string code = thenelse.code();
-      switch (code.vx_string()) {
-      case “:case”:
-        Core.Type_any value = thenelse.value();
-        Core.Type_boolean iseq = Core.f_eq(val, value);
-        if (iseq.vx_boolean()) {
-          fn_any = thenelse.fn_any();
-        }
-        break;
-      case “:casemany”:
-        Core.Type_list values = thenelse.values();
-        Core.Type_boolean iscontain = Core.f_contains_1(values, val);
-        if (iscontain.vx_boolean()) {
-          fn_any = thenelse.fn_any();
-        }
-        break;
-      case “:else”:
-        fn_any = thenelse.fn_any();
-        break;
-      }
-      if (fn_any != null) {
-        break;
-      }
-    }
-    if (fn_any != null) {
-      output = fn_any.vx_any_from_func(generic_any_1);
     }")
  :test (test 1
         (switch : int
@@ -3097,10 +3258,12 @@
  (native
   :cpp
    "vtypedef->traits();"
-  :js
-   "vtypedef['vx_value']['traits']"
+  :csharp
+   "vtypedef.traits();"
   :java
-   "vtypedef.traits();")
+   "vtypedef.traits();"
+  :js
+   "vtypedef['vx_value']['traits']")
  :doc "Return trait list from type")
 
 (func type<-any : any
@@ -3108,6 +3271,10 @@
  (native
   :cpp
    "value->vx_type();"
+  :csharp
+   "output = value.vx_type();"
+  :java
+   "output = value.vx_type();"
   :js
    "switch (typeof value) {
     case 'boolean':
@@ -3142,9 +3309,7 @@
         output = value
       }
       break
-    }"
-  :java
-   "output = value.vx_type();")
+    }")
  :test (test
         boolean
         (type<-any false))
@@ -3166,10 +3331,12 @@
  (native
   :cpp
    "val->vx_typedef();"
-  :js
-   "output = val"
+  :csharp
+   "val.vx_typedef();"
   :java
-   "val.vx_typedef();")
+   "val.vx_typedef();"
+  :js
+   "output = val")
  :doc  "Gets the typedef of a given type")
 
 (func typename<-any : string

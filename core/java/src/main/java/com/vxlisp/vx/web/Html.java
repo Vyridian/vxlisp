@@ -57,9 +57,8 @@ public final class Html {
 
     @Override
     public Html.Type_body vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_body,
-       vals);
+      Html.Type_body output = Core.vx_copy(Html.e_body, vals);
+      return output;
     }
 
     @Override
@@ -349,9 +348,8 @@ public final class Html {
 
     @Override
     public Html.Type_details vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_details,
-       vals);
+      Html.Type_details output = Core.vx_copy(Html.e_details, vals);
+      return output;
     }
 
     @Override
@@ -765,9 +763,8 @@ public final class Html {
 
     @Override
     public Html.Type_div vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_div,
-       vals);
+      Html.Type_div output = Core.vx_copy(Html.e_div, vals);
+      return output;
     }
 
     @Override
@@ -1070,9 +1067,8 @@ public final class Html {
 
     @Override
     public Html.Type_divchild vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_divchild,
-       vals);
+      Html.Type_divchild output = Core.vx_copy(Html.e_divchild, vals);
+      return output;
     }
 
     @Override
@@ -1175,9 +1171,8 @@ public final class Html {
 
     @Override
     public Html.Type_divchildlist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_divchildlist,
-       vals);
+      Html.Type_divchildlist output = Core.vx_copy(Html.e_divchildlist, vals);
+      return output;
     }
 
     @Override
@@ -1318,9 +1313,8 @@ public final class Html {
 
     @Override
     public Html.Type_divlist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_divlist,
-       vals);
+      Html.Type_divlist output = Core.vx_copy(Html.e_divlist, vals);
+      return output;
     }
 
     @Override
@@ -1458,9 +1452,8 @@ public final class Html {
 
     @Override
     public Html.Type_footer vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_footer,
-       vals);
+      Html.Type_footer output = Core.vx_copy(Html.e_footer, vals);
+      return output;
     }
 
     @Override
@@ -1734,9 +1727,8 @@ public final class Html {
 
     @Override
     public Html.Type_h1 vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_h1,
-       vals);
+      Html.Type_h1 output = Core.vx_copy(Html.e_h1, vals);
+      return output;
     }
 
     @Override
@@ -2137,9 +2129,8 @@ public final class Html {
 
     @Override
     public Html.Type_h2 vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_h2,
-       vals);
+      Html.Type_h2 output = Core.vx_copy(Html.e_h2, vals);
+      return output;
     }
 
     @Override
@@ -2540,9 +2531,8 @@ public final class Html {
 
     @Override
     public Html.Type_h3 vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_h3,
-       vals);
+      Html.Type_h3 output = Core.vx_copy(Html.e_h3, vals);
+      return output;
     }
 
     @Override
@@ -2863,9 +2853,8 @@ public final class Html {
 
     @Override
     public Html.Type_head vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_head,
-       vals);
+      Html.Type_head output = Core.vx_copy(Html.e_head, vals);
+      return output;
     }
 
     @Override
@@ -3040,9 +3029,8 @@ public final class Html {
 
     @Override
     public Html.Type_headchild vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_headchild,
-       vals);
+      Html.Type_headchild output = Core.vx_copy(Html.e_headchild, vals);
+      return output;
     }
 
     @Override
@@ -3145,9 +3133,8 @@ public final class Html {
 
     @Override
     public Html.Type_headchildlist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_headchildlist,
-       vals);
+      Html.Type_headchildlist output = Core.vx_copy(Html.e_headchildlist, vals);
+      return output;
     }
 
     @Override
@@ -3333,9 +3320,8 @@ public final class Html {
 
     @Override
     public Html.Type_html vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_html,
-       vals);
+      Html.Type_html output = Core.vx_copy(Html.e_html, vals);
+      return output;
     }
 
     @Override
@@ -3674,9 +3660,8 @@ public final class Html {
 
     @Override
     public Html.Type_img vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_img,
-       vals);
+      Html.Type_img output = Core.vx_copy(Html.e_img, vals);
+      return output;
     }
 
     @Override
@@ -4109,9 +4094,8 @@ public final class Html {
 
     @Override
     public Html.Type_meta vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_meta,
-       vals);
+      Html.Type_meta output = Core.vx_copy(Html.e_meta, vals);
+      return output;
     }
 
     @Override
@@ -4543,9 +4527,8 @@ public final class Html {
 
     @Override
     public Html.Type_node vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_node,
-       vals);
+      Html.Type_node output = Core.vx_copy(Html.e_node, vals);
+      return output;
     }
 
     @Override
@@ -4832,9 +4815,8 @@ public final class Html {
 
     @Override
     public Html.Type_nodelist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_nodelist,
-       vals);
+      Html.Type_nodelist output = Core.vx_copy(Html.e_nodelist, vals);
+      return output;
     }
 
     @Override
@@ -5052,9 +5034,8 @@ public final class Html {
 
     @Override
     public Html.Type_p vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_p,
-       vals);
+      Html.Type_p output = Core.vx_copy(Html.e_p, vals);
+      return output;
     }
 
     @Override
@@ -5420,9 +5401,8 @@ public final class Html {
 
     @Override
     public Html.Type_propmap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_propmap,
-       vals);
+      Html.Type_propmap output = Core.vx_copy(Html.e_propmap, vals);
+      return output;
     }
 
     @Override
@@ -5616,9 +5596,8 @@ public final class Html {
 
     @Override
     public Html.Type_style vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_style,
-       vals);
+      Html.Type_style output = Core.vx_copy(Html.e_style, vals);
+      return output;
     }
 
     @Override
@@ -5855,9 +5834,8 @@ public final class Html {
 
     @Override
     public Html.Type_stylelist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_stylelist,
-       vals);
+      Html.Type_stylelist output = Core.vx_copy(Html.e_stylelist, vals);
+      return output;
     }
 
     @Override
@@ -6040,9 +6018,8 @@ public final class Html {
 
     @Override
     public Html.Type_stylemap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_stylemap,
-       vals);
+      Html.Type_stylemap output = Core.vx_copy(Html.e_stylemap, vals);
+      return output;
     }
 
     @Override
@@ -6316,9 +6293,8 @@ public final class Html {
 
     @Override
     public Html.Type_stylesheet vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_stylesheet,
-       vals);
+      Html.Type_stylesheet output = Core.vx_copy(Html.e_stylesheet, vals);
+      return output;
     }
 
     @Override
@@ -6776,9 +6752,8 @@ public final class Html {
 
     @Override
     public Html.Type_table vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_table,
-       vals);
+      Html.Type_table output = Core.vx_copy(Html.e_table, vals);
+      return output;
     }
 
     @Override
@@ -7192,9 +7167,8 @@ public final class Html {
 
     @Override
     public Html.Type_tbody vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_tbody,
-       vals);
+      Html.Type_tbody output = Core.vx_copy(Html.e_tbody, vals);
+      return output;
     }
 
     @Override
@@ -7596,9 +7570,8 @@ public final class Html {
 
     @Override
     public Html.Type_td vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_td,
-       vals);
+      Html.Type_td output = Core.vx_copy(Html.e_td, vals);
+      return output;
     }
 
     @Override
@@ -7923,9 +7896,8 @@ public final class Html {
 
     @Override
     public Html.Type_tdlist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_tdlist,
-       vals);
+      Html.Type_tdlist output = Core.vx_copy(Html.e_tdlist, vals);
+      return output;
     }
 
     @Override
@@ -8143,9 +8115,8 @@ public final class Html {
 
     @Override
     public Html.Type_thead vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_thead,
-       vals);
+      Html.Type_thead output = Core.vx_copy(Html.e_thead, vals);
+      return output;
     }
 
     @Override
@@ -8547,9 +8518,8 @@ public final class Html {
 
     @Override
     public Html.Type_title vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_title,
-       vals);
+      Html.Type_title output = Core.vx_copy(Html.e_title, vals);
+      return output;
     }
 
     @Override
@@ -8941,9 +8911,8 @@ public final class Html {
 
     @Override
     public Html.Type_tr vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_tr,
-       vals);
+      Html.Type_tr output = Core.vx_copy(Html.e_tr, vals);
+      return output;
     }
 
     @Override
@@ -9268,9 +9237,8 @@ public final class Html {
 
     @Override
     public Html.Type_trlist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_trlist,
-       vals);
+      Html.Type_trlist output = Core.vx_copy(Html.e_trlist, vals);
+      return output;
     }
 
     @Override

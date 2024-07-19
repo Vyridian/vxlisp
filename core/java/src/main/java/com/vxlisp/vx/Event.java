@@ -137,9 +137,8 @@ public final class Event {
 
     @Override
     public Event.Type_event vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_event,
-       vals);
+      Event.Type_event output = Core.vx_copy(Event.e_event, vals);
+      return output;
     }
 
     @Override
@@ -457,9 +456,8 @@ public final class Event {
 
     @Override
     public Event.Type_eventlist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_eventlist,
-       vals);
+      Event.Type_eventlist output = Core.vx_copy(Event.e_eventlist, vals);
+      return output;
     }
 
     @Override
@@ -642,9 +640,8 @@ public final class Event {
 
     @Override
     public Event.Type_eventmap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_eventmap,
-       vals);
+      Event.Type_eventmap output = Core.vx_copy(Event.e_eventmap, vals);
+      return output;
     }
 
     @Override

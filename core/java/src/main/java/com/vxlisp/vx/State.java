@@ -86,9 +86,8 @@ public final class State {
 
     @Override
     public State.Type_valuemap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_valuemap,
-       vals);
+      State.Type_valuemap output = Core.vx_copy(State.e_valuemap, vals);
+      return output;
     }
 
     @Override

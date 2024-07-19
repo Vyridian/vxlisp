@@ -56,9 +56,8 @@ public static class Http {
     }
 
     public override Vx.Web.Http.Type_response vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_response,
-       vals);
+      Vx.Web.Http.Type_response output = Vx.Core.vx_copy(Vx.Web.Http.e_response, vals);
+      return output;
     }
 
     public override Vx.Web.Http.Type_response vx_copy(params Object[] vals) {

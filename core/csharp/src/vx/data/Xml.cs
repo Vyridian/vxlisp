@@ -116,9 +116,8 @@ public static class Xml {
     }
 
     public override Vx.Data.Xml.Type_xml vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_xml,
-       vals);
+      Vx.Data.Xml.Type_xml output = Vx.Core.vx_copy(Vx.Data.Xml.e_xml, vals);
+      return output;
     }
 
     public override Vx.Data.Xml.Type_xml vx_copy(params Object[] vals) {
@@ -407,9 +406,8 @@ public static class Xml {
     }
 
     public override Vx.Data.Xml.Type_xmllist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_xmllist,
-       vals);
+      Vx.Data.Xml.Type_xmllist output = Vx.Core.vx_copy(Vx.Data.Xml.e_xmllist, vals);
+      return output;
     }
 
     public override Vx.Data.Xml.Type_xmllist vx_copy(params Object[] vals) {
@@ -505,7 +503,7 @@ public static class Xml {
     public Vx.Core.Map<string, Vx.Core.Type_string> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_string>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Core.Type_string>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -570,9 +568,8 @@ public static class Xml {
     }
 
     public override Vx.Data.Xml.Type_xmlpropmap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_xmlpropmap,
-       vals);
+      Vx.Data.Xml.Type_xmlpropmap output = Vx.Core.vx_copy(Vx.Data.Xml.e_xmlpropmap, vals);
+      return output;
     }
 
     public override Vx.Data.Xml.Type_xmlpropmap vx_copy(params Object[] vals) {

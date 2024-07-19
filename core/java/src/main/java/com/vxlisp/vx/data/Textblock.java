@@ -120,9 +120,8 @@ public final class Textblock {
 
     @Override
     public Textblock.Type_delim vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_delim,
-       vals);
+      Textblock.Type_delim output = Core.vx_copy(Textblock.e_delim, vals);
+      return output;
     }
 
     @Override
@@ -418,9 +417,8 @@ public final class Textblock {
 
     @Override
     public Textblock.Type_delimlist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_delimlist,
-       vals);
+      Textblock.Type_delimlist output = Core.vx_copy(Textblock.e_delimlist, vals);
+      return output;
     }
 
     @Override
@@ -718,9 +716,8 @@ public final class Textblock {
 
     @Override
     public Textblock.Type_textblock vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_textblock,
-       vals);
+      Textblock.Type_textblock output = Core.vx_copy(Textblock.e_textblock, vals);
+      return output;
     }
 
     @Override
@@ -1175,9 +1172,8 @@ public final class Textblock {
 
     @Override
     public Textblock.Type_textblocklist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_textblocklist,
-       vals);
+      Textblock.Type_textblocklist output = Core.vx_copy(Textblock.e_textblocklist, vals);
+      return output;
     }
 
     @Override

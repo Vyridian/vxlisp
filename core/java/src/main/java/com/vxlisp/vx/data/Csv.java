@@ -72,9 +72,8 @@ public final class Csv {
 
     @Override
     public Csv.Type_csv vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_csv,
-       vals);
+      Csv.Type_csv output = Core.vx_copy(Csv.e_csv, vals);
+      return output;
     }
 
     @Override
@@ -324,9 +323,8 @@ public final class Csv {
 
     @Override
     public Csv.Type_csvrowmap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_csvrowmap,
-       vals);
+      Csv.Type_csvrowmap output = Core.vx_copy(Csv.e_csvrowmap, vals);
+      return output;
     }
 
     @Override
@@ -490,9 +488,8 @@ public final class Csv {
 
     @Override
     public Csv.Type_csvrows vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_csvrows,
-       vals);
+      Csv.Type_csvrows output = Core.vx_copy(Csv.e_csvrows, vals);
+      return output;
     }
 
     @Override

@@ -5,6 +5,7 @@
     public List<TKey> keys();
     public void put(TKey key, TValue value);
     public void remove(TKey key);
+    public int size();
   }
 
   public class LinkedHashMap<TKey, TValue> : Map<TKey, TValue> where TKey : notnull {
@@ -41,6 +42,9 @@
     public void remove(TKey key) {
       listkey.Remove(key);
       dict.Remove(key);
+    }
+    public int size() {
+      return dict.Count;
     }
   }
 
@@ -222,31 +226,6 @@
     return mapval;
   }
 
-  public static Map<string, T> map_from_list_fn<T>(List<T> listval, Func<T, Vx.Core.Type_string> fn_any_from_any) {
-    Map<string, T> output = new LinkedHashMap<string, T>();
-    foreach (T val in listval) {
-      Vx.Core.Type_string valkey = fn_any_from_any.Invoke(val);
-      string key = valkey.vx_string();
-      output.put(key, val);
-    }
-    return output;
-  }
-
-  public static LinkedHashMap<string, T> map_from_map<T>(LinkedHashMap<string, Vx.Core.Type_any> mapval) where T : Vx.Core.Type_any {
-    LinkedHashMap<string, T> output = new LinkedHashMap<string, T>();
-    List<string> keys = mapval.keys();
-    foreach (string key in keys) {
-      Vx.Core.Type_any value = mapval.get(key);
-      try {
-        T castval = (T)value;
-        output.put(key, castval);
-      } catch (Exception ex) {
-        Vx.Core.vx_log("map<-map", ex);
-      }
-    }
-    return output;
-  }
-
   // vx_new(generic_any_1, args...)
   public static T vx_new<T>(T generic_any_1, params Object[] vals) where T : Vx.Core.Type_any {
     Vx.Core.Type_any val = generic_any_1.vx_new(vals);
@@ -312,6 +291,29 @@
     List<Vx.Core.Type_any> listval = list.vx_list();
     foreach (Vx.Core.Type_any item in listval) {
       output = fn_reduce.vx_any_from_reduce(generic_any_1, output, item);
+    }
+    return output;
+  }
+
+  // vx_any_from_list_start_reduce_next(any-1, list-2, any-1, any<-reduce-next)
+  public static T vx_any_from_list_start_reduce_next<T, N>(
+    T generic_any_1,
+    N list,
+    T valstart,
+    Vx.Core.Func_any_from_reduce_next fn_reduce_next)
+    where T : Vx.Core.Type_any
+    where N : Vx.Core.Type_list {
+    T output = valstart;
+    List<Vx.Core.Type_any> listval = list.vx_list();
+    Vx.Core.Type_any current = Core.e_any;
+    bool first = true;
+    foreach (Core.Type_any next in listval) {
+      if (first) {
+        first = false;
+      } else {
+        output = fn_reduce_next.vx_any_from_reduce_next(generic_any_1, output, current, next);
+      }
+      current = next;
     }
     return output;
   }
@@ -404,6 +406,49 @@
     return valuemap.vx_set(name, value);
   }
 
+  // vx_compare(any, any)
+  public static Vx.Core.Type_int vx_compare(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
+    int intresult = 0;
+    if ((val1 is Core.Type_number num1) && (val2 is Core.Type_number num2)) {
+      float float1 = Vx.Core.vx_new(Core.t_float, num1).vx_float();
+      float float2 = Vx.Core.vx_new(Core.t_float, num2).vx_float();
+      if (float1 < float2) {
+        intresult = -1;
+      } else if (float1 > float2) {
+        intresult = 1;
+      }
+    } else {
+      string stringval1 = Vx.Core.f_string_from_any(val1).vx_string();
+      string stringval2 = Vx.Core.f_string_from_any(val2).vx_string();
+      int compare = stringval1.CompareTo(stringval2);
+      if (compare > 0) {
+        intresult = 1;
+      } else if (compare < 0) {
+        intresult = -1;
+      }
+    }
+    Vx.Core.Type_int output = Vx.Core.vx_new_int(intresult);
+    return output;
+  }
+
+  // vx_contains(list-1, any)
+  public static Vx.Core.Type_boolean vx_contains_1<T>(
+    T values,
+    Vx.Core.Type_any find)
+    where T : Vx.Core.Type_list {
+    bool booleanresult = false;
+    List<Vx.Core.Type_any> listvalues = values.vx_list();
+    foreach (Vx.Core.Type_any item in listvalues) {
+      Vx.Core.Type_boolean iseq = Vx.Core.f_eq(item, find);
+      if (iseq.vx_boolean()) {
+        booleanresult = true;
+        break;
+      }
+    }
+    Vx.Core.Type_boolean output = Core.vx_new_boolean(booleanresult);
+    return output;
+  }
+
   // vx_eqeq(any, any)
   public static bool vx_eqeq(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
     bool output = false;
@@ -440,6 +485,23 @@
           output = true;
         }
       }
+    }
+    return output;
+  }
+
+  // vx_float_from_number(number)
+  public static float vx_float_from_number(Vx.Core.Type_number num) {
+    float output = 0;
+    Vx.Core.Type_any type = num.vx_type();
+    if (type == Vx.Core.t_float) {
+      Vx.Core.Type_float floatval = Vx.Core.f_any_from_any(Vx.Core.t_float, num);
+      output = floatval.vx_float();
+    } else if (type == Vx.Core.t_int) {
+      Vx.Core.Type_int intval = Vx.Core.f_any_from_any(Vx.Core.t_int, num);
+      output = intval.vx_int();
+    } else if (type == Core.t_decimal) {
+      Vx.Core.Type_decimal decval = Core.f_any_from_any(Vx.Core.t_decimal, num);
+      output = decval.vx_float();
     }
     return output;
   }
@@ -609,6 +671,44 @@
     return result;
   }
 
+  public static X vx_list_from_list_1<X, Y>(
+    X generic_list_1,
+    Y values,
+    Vx.Core.Func_any_from_any fn_any_from_any)
+    where X : Vx.Core.Type_list
+    where Y : Vx.Core.Type_list {
+    X output = Vx.Core.f_empty(generic_list_1);
+    List<Vx.Core.Type_any> list_value = values.vx_list();
+    Func<Vx.Core.Type_any, Vx.Core.Type_any> fn = (val) => {
+      return fn_any_from_any.vx_any_from_any(generic_list_1, val);
+    };
+    List<Vx.Core.Type_any> list_result = Vx.Core.arraylist_from_arraylist_fn<Vx.Core.Type_any, Vx.Core.Type_any>(list_value, fn);
+    output = Vx.Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));
+    return output;
+  }
+
+  public static Task<X> vx_list_from_list_async<X, Y>(
+    X generic_list_1,
+    Y values,
+    Vx.Core.Func_any_from_any_async fn_any_from_any_async)
+    where X : Vx.Core.Type_list
+    where Y : Vx.Core.Type_list {
+    Task<X> output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_list_1));
+    List<Vx.Core.Type_any> list_value = values.vx_list();
+    Func<Vx.Core.Type_any, Task<X>> fn_future_from_any = (val) => {
+      Task<X> future_any = fn_any_from_any_async.vx_any_from_any_async(generic_list_1, val);
+      return future_any;
+    };
+    List<Task<X>> list_async_result = Vx.Core.arraylist_from_arraylist_fn(list_value, fn_future_from_any);
+    Task<List<X>> async_list_result = Vx.Core.vx_async_arraylist_from_arraylist_async(list_async_result);
+    Func<List<X>, X> fn_any_from_list = (list_result) => {
+      X work = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));
+      return work;
+    };
+    output = Vx.Core.vx_async_from_async_fn(async_list_result, fn_any_from_list);
+    return output;
+  }
+
   // vx_list_from_list_intany(generic_list_1, list-2, any<-int-any)
   public static T vx_list_from_list_intany<T, U>(
     T generic_list_1,
@@ -631,6 +731,43 @@
     return output;
   }
 
+  public static X vx_list_from_map_1<O, X>(
+    X generic_list_1,
+    O valuemap,
+    Vx.Core.Func_any_from_key_value fn_any_from_key_value)
+    where O : Vx.Core.Type_map
+    where X : Vx.Core.Type_list {
+    X output = Vx.Core.f_empty(generic_list_1);
+    Vx.Core.Map<string, Vx.Core.Type_any> map_value = valuemap.vx_map();
+    Func<string, Vx.Core.Type_any, Vx.Core.Type_any> fn_key_value = (key, val) => {
+      Vx.Core.Type_string valkey = Vx.Core.vx_new_string(key);
+      return fn_any_from_key_value.vx_any_from_key_value(Vx.Core.t_any, valkey, val);
+    };
+    List<Vx.Core.Type_any> listresult = Vx.Core.arraylist_from_linkedhashmap_fn(map_value, fn_key_value);
+    output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(listresult));
+    return output;
+  }
+
+  public static X vx_list_join_from_list_1<X, Y>(
+    X generic_list_1,
+    Y values,
+    Vx.Core.Func_any_from_any fn_any_from_any)
+    where X : Vx.Core.Type_list
+    where Y : Vx.Core.Type_list {
+    X output = Vx.Core.f_empty(generic_list_1);
+    List<Vx.Core.Type_any> list_value = values.vx_list();
+    List<Vx.Core.Type_any> list_result = new List<Vx.Core.Type_any>();
+    foreach (Vx.Core.Type_any val in list_value) {
+      Vx.Core.Type_any listoflist = fn_any_from_any.vx_any_from_any(generic_list_1, val);
+      if (listoflist is Core.Type_list vallist) {
+        List<Vx.Core.Type_any> listval = vallist.vx_list();
+        list_result.AddRange(listval);
+      }
+    }
+    output = Vx.Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));
+    return output;
+  }
+
   // vx_log(object...)
   public static void vx_log(params Object[] values) {
     foreach (Object value in values) {
@@ -645,6 +782,73 @@
       }
       System.Console.WriteLine(text);
     }
+  }
+
+  public static N vx_map_from_list<N, Y>(
+    N generic_map_1,
+    Y vallist,
+    Vx.Core.Func_any_from_any fn_any_from_any)
+    where N : Vx.Core.Type_map
+    where Y : Vx.Core.Type_list {
+    N output = Vx.Core.f_empty(generic_map_1);
+    List<Vx.Core.Type_any> listval = vallist.vx_list();
+    Func<Vx.Core.Type_any, Vx.Core.Type_string> fn_string_from_any = (val) => {
+      Vx.Core.Type_string output_string = fn_any_from_any.vx_any_from_any(Vx.Core.t_string, val);
+      return output_string;
+    };
+    Map<string, Vx.Core.Type_any> mapresult = Vx.Core.vx_map_from_list_fn(listval, fn_string_from_any);
+    output = Vx.Core.f_any_from_any(generic_map_1, output.vx_new_from_map(mapresult));
+    return output;
+  }
+
+  public static Map<string, T> vx_map_from_list_fn<T>(List<T> listval, Func<T, Vx.Core.Type_string> fn_any_from_any) {
+    Map<string, T> output = new LinkedHashMap<string, T>();
+    foreach (T val in listval) {
+      Vx.Core.Type_string valkey = fn_any_from_any.Invoke(val);
+      string key = valkey.vx_string();
+      output.put(key, val);
+    }
+    return output;
+  }
+
+  public static Map<string, T> vx_map_from_map<T, U>(
+    Map<string, U> mapval)
+    where U : T {
+    Map<string, T> output = new LinkedHashMap<string, T>();
+    List<string> keys = mapval.keys();
+    foreach (string key in keys) {
+      U value = mapval.get(key);
+      try {
+        T castval = (T)value;
+        output.put(key, castval);
+      } catch (Exception ex) {
+        Vx.Core.vx_log("map<-map", ex);
+      }
+    }
+    return output;
+  }
+
+  // vx_map_from_map_fn(generic_map, map, fn_any_from_key_value)
+  public static T vx_map_from_map_fn<T>(
+    T generic_map_1,
+    Vx.Core.Type_map valuemap,
+    Vx.Core.Func_any_from_key_value fn_any_from_key_value)
+    where T : Vx.Core.Type_map {
+    T output = Vx.Core.f_empty(generic_map_1);
+    Vx.Core.Map<string, Vx.Core.Type_any> mapvalue = valuemap.vx_map();
+    if (mapvalue.size() > 0) {
+      List<string> keys = mapvalue.keys();
+      Vx.Core.Map<string, Vx.Core.Type_any> mapnew = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      foreach (string key in keys) {
+        Vx.Core.Type_any value = mapvalue.get(key);
+        Vx.Core.Type_string stringkey = Vx.Core.vx_new_string(key);
+        Vx.Core.Type_any chgvalue = fn_any_from_key_value.vx_any_from_key_value(Vx.Core.t_any, stringkey, value);
+        mapnew.put(key, chgvalue);
+      }
+      Vx.Core.Type_map anymap = generic_map_1.vx_new_from_map(mapnew);
+      output = Vx.Core.f_any_from_any(generic_map_1, anymap);
+    }
+    return output;
   }
 
   // vx_msg_from_error
@@ -762,7 +966,7 @@
     Vx.Core.Type_any value,
     int indent,
     bool linefeed) {
-    string indenttext = vx_string_repeat(" ", indent);
+    string indenttext = Vx.Core.vx_string_repeat(" ", indent);
     string output = "";
     if (indent > 50) {
       output = "Error: Max Depth Exceeded";
@@ -951,6 +1155,53 @@
     string output = sb.ToString();
     return output;
   }
+
+  public static Vx.Core.Type_string vx_string_repeat(Vx.Core.Type_string text, Vx.Core.Type_int repeat) {
+    string stext = Vx.Core.vx_string_repeat(text.vx_string(), repeat.vx_int());
+    Vx.Core.Type_string output = Vx.Core.vx_new_string(stext);
+    return output;
+  }
+
+  public static T vx_switch<T, U>(
+    T generic_any_1,
+    U val,
+    Vx.Core.Type_thenelselist thenelselist)
+    where T : Vx.Core.Type_any
+    where U : Vx.Core.Type_any {
+    T output = Vx.Core.f_empty(generic_any_1);
+    Vx.Core.Func_any_from_func fn_any = Vx.Core.e_any_from_func;
+    List<Vx.Core.Type_thenelse> listthenelse = thenelselist.vx_listthenelse();
+    foreach (Vx.Core.Type_thenelse thenelse in listthenelse) {
+      Vx.Core.Type_string code = thenelse.code();
+      switch (code.vx_string()) {
+      case ":case":
+        Vx.Core.Type_any value = thenelse.value();
+        Vx.Core.Type_boolean iseq = Vx.Core.f_eq(val, value);
+        if (iseq.vx_boolean()) {
+          fn_any = thenelse.fn_any();
+        }
+        break;
+      case ":casemany":
+        Vx.Core.Type_list values = thenelse.values();
+        Vx.Core.Type_boolean iscontain = Vx.Core.f_contains_1(values, val);
+        if (iscontain.vx_boolean()) {
+          fn_any = thenelse.fn_any();
+        }
+        break;
+      case ":else":
+        fn_any = thenelse.fn_any();
+        break;
+      }
+      if (fn_any != Vx.Core.e_any_from_func) {
+        break;
+      }
+    }
+    if (fn_any != Vx.Core.e_any_from_func) {
+      output = fn_any.vx_any_from_func(generic_any_1);
+    }
+    return output;
+  }
+
   public static Vx.Core.Type_typedef typedef_new(
     string pkgname,
     string name,

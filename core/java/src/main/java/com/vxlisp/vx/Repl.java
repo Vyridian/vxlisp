@@ -97,9 +97,8 @@ public final class Repl {
 
     @Override
     public Repl.Type_liblist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_liblist,
-       vals);
+      Repl.Type_liblist output = Core.vx_copy(Repl.e_liblist, vals);
+      return output;
     }
 
     @Override
@@ -317,9 +316,8 @@ public final class Repl {
 
     @Override
     public Repl.Type_repl vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_repl,
-       vals);
+      Repl.Type_repl output = Core.vx_copy(Repl.e_repl, vals);
+      return output;
     }
 
     @Override
@@ -666,9 +664,8 @@ public final class Repl {
 
     @Override
     public Repl.Type_replarglist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_replarglist,
-       vals);
+      Repl.Type_replarglist output = Core.vx_copy(Repl.e_replarglist, vals);
+      return output;
     }
 
     @Override
@@ -905,9 +902,8 @@ public final class Repl {
 
     @Override
     public Repl.Type_repllist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_repllist,
-       vals);
+      Repl.Type_repllist output = Core.vx_copy(Repl.e_repllist, vals);
+      return output;
     }
 
     @Override

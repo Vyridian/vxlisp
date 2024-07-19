@@ -70,9 +70,8 @@ public final class Sample {
 
     @Override
     public Sample.Type_mytype vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_mytype,
-       vals);
+      Sample.Type_mytype output = Core.vx_copy(Sample.e_mytype, vals);
+      return output;
     }
 
     @Override

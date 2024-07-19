@@ -56,9 +56,8 @@ public static class Csv {
     }
 
     public override Vx.Data.Csv.Type_csv vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_csv,
-       vals);
+      Vx.Data.Csv.Type_csv output = Vx.Core.vx_copy(Vx.Data.Csv.e_csv, vals);
+      return output;
     }
 
     public override Vx.Data.Csv.Type_csv vx_copy(params Object[] vals) {
@@ -220,7 +219,7 @@ public static class Csv {
     public Vx.Core.Map<string, Vx.Core.Type_stringlist> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_stringlist>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Core.Type_stringlist>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -285,9 +284,8 @@ public static class Csv {
     }
 
     public override Vx.Data.Csv.Type_csvrowmap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_csvrowmap,
-       vals);
+      Vx.Data.Csv.Type_csvrowmap output = Vx.Core.vx_copy(Vx.Data.Csv.e_csvrowmap, vals);
+      return output;
     }
 
     public override Vx.Data.Csv.Type_csvrowmap vx_copy(params Object[] vals) {
@@ -433,9 +431,8 @@ public static class Csv {
     }
 
     public override Vx.Data.Csv.Type_csvrows vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_csvrows,
-       vals);
+      Vx.Data.Csv.Type_csvrows output = Vx.Core.vx_copy(Vx.Data.Csv.e_csvrows, vals);
+      return output;
     }
 
     public override Vx.Data.Csv.Type_csvrows vx_copy(params Object[] vals) {

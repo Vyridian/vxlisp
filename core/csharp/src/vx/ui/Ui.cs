@@ -24,9 +24,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_align vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_align,
-       vals);
+      Vx.Ui.Ui.Type_align output = Vx.Core.vx_copy(Vx.Ui.Ui.e_align, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_align vx_copy(params Object[] vals) {
@@ -159,9 +158,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_bounds vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_bounds,
-       vals);
+      Vx.Ui.Ui.Type_bounds output = Vx.Core.vx_copy(Vx.Ui.Ui.e_bounds, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_bounds vx_copy(params Object[] vals) {
@@ -388,9 +386,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_cursor vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_cursor,
-       vals);
+      Vx.Ui.Ui.Type_cursor output = Vx.Core.vx_copy(Vx.Ui.Ui.e_cursor, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_cursor vx_copy(params Object[] vals) {
@@ -449,9 +446,8 @@ public static class Ui {
   public class Class_cursor_pointer : Vx.Core.Class_base, Type_cursor_pointer {
 
     public override Vx.Ui.Ui.Type_cursor_pointer vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_cursor_pointer,
-       vals);
+      Vx.Ui.Ui.Type_cursor_pointer output = Vx.Core.vx_copy(Vx.Ui.Ui.e_cursor_pointer, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_cursor_pointer vx_copy(params Object[] vals) {
@@ -521,9 +517,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_flip vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_flip,
-       vals);
+      Vx.Ui.Ui.Type_flip output = Vx.Core.vx_copy(Vx.Ui.Ui.e_flip, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_flip vx_copy(params Object[] vals) {
@@ -656,9 +651,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_font vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_font,
-       vals);
+      Vx.Ui.Ui.Type_font output = Vx.Core.vx_copy(Vx.Ui.Ui.e_font, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_font vx_copy(params Object[] vals) {
@@ -942,9 +936,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_fontface vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_fontface,
-       vals);
+      Vx.Ui.Ui.Type_fontface output = Vx.Core.vx_copy(Vx.Ui.Ui.e_fontface, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_fontface vx_copy(params Object[] vals) {
@@ -1188,9 +1181,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_fontfacelist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_fontfacelist,
-       vals);
+      Vx.Ui.Ui.Type_fontfacelist output = Vx.Core.vx_copy(Vx.Ui.Ui.e_fontfacelist, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_fontfacelist vx_copy(params Object[] vals) {
@@ -1287,7 +1279,7 @@ public static class Ui {
     public Vx.Core.Map<string, Vx.Ui.Ui.Type_fontface> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_fontface>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Ui.Ui.Type_fontface>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -1352,9 +1344,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_fontfacemap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_fontfacemap,
-       vals);
+      Vx.Ui.Ui.Type_fontfacemap output = Vx.Core.vx_copy(Vx.Ui.Ui.e_fontfacemap, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_fontfacemap vx_copy(params Object[] vals) {
@@ -1475,7 +1466,7 @@ public static class Ui {
     public Vx.Core.Map<string, Vx.Ui.Ui.Type_font> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_font>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Ui.Ui.Type_font>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -1540,9 +1531,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_fontmap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_fontmap,
-       vals);
+      Vx.Ui.Ui.Type_fontmap output = Vx.Core.vx_copy(Vx.Ui.Ui.e_fontmap, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_fontmap vx_copy(params Object[] vals) {
@@ -1687,9 +1677,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_fontstyle vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_fontstyle,
-       vals);
+      Vx.Ui.Ui.Type_fontstyle output = Vx.Core.vx_copy(Vx.Ui.Ui.e_fontstyle, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_fontstyle vx_copy(params Object[] vals) {
@@ -1832,7 +1821,7 @@ public static class Ui {
     public Vx.Core.Map<string, Vx.Ui.Ui.Type_fontstyle> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_fontstyle>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Ui.Ui.Type_fontstyle>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -1897,9 +1886,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_fontstylemap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_fontstylemap,
-       vals);
+      Vx.Ui.Ui.Type_fontstylemap output = Vx.Core.vx_copy(Vx.Ui.Ui.e_fontstylemap, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_fontstylemap vx_copy(params Object[] vals) {
@@ -2074,9 +2062,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_image vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_image,
-       vals);
+      Vx.Ui.Ui.Type_image output = Vx.Core.vx_copy(Vx.Ui.Ui.e_image, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_image vx_copy(params Object[] vals) {
@@ -2307,9 +2294,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_layout vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_layout,
-       vals);
+      Vx.Ui.Ui.Type_layout output = Vx.Core.vx_copy(Vx.Ui.Ui.e_layout, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_layout vx_copy(params Object[] vals) {
@@ -2604,9 +2590,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_layoutengine vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_layoutengine,
-       vals);
+      Vx.Ui.Ui.Type_layoutengine output = Vx.Core.vx_copy(Vx.Ui.Ui.e_layoutengine, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_layoutengine vx_copy(params Object[] vals) {
@@ -2936,9 +2921,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_layoutlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_layoutlist,
-       vals);
+      Vx.Ui.Ui.Type_layoutlist output = Vx.Core.vx_copy(Vx.Ui.Ui.e_layoutlist, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_layoutlist vx_copy(params Object[] vals) {
@@ -3035,7 +3019,7 @@ public static class Ui {
     public Vx.Core.Map<string, Vx.Ui.Ui.Type_layout> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_layout>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Ui.Ui.Type_layout>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -3100,9 +3084,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_layoutmap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_layoutmap,
-       vals);
+      Vx.Ui.Ui.Type_layoutmap output = Vx.Core.vx_copy(Vx.Ui.Ui.e_layoutmap, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_layoutmap vx_copy(params Object[] vals) {
@@ -3247,9 +3230,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_pin vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_pin,
-       vals);
+      Vx.Ui.Ui.Type_pin output = Vx.Core.vx_copy(Vx.Ui.Ui.e_pin, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_pin vx_copy(params Object[] vals) {
@@ -3491,9 +3473,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_point vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_point,
-       vals);
+      Vx.Ui.Ui.Type_point output = Vx.Core.vx_copy(Vx.Ui.Ui.e_point, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_point vx_copy(params Object[] vals) {
@@ -3759,9 +3740,8 @@ public static class Ui {
   public class Class_pointtype : Vx.Core.Class_base, Type_pointtype {
 
     public override Vx.Ui.Ui.Type_pointtype vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_pointtype,
-       vals);
+      Vx.Ui.Ui.Type_pointtype output = Vx.Core.vx_copy(Vx.Ui.Ui.e_pointtype, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_pointtype vx_copy(params Object[] vals) {
@@ -4164,9 +4144,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_style vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_style,
-       vals);
+      Vx.Ui.Ui.Type_style output = Vx.Core.vx_copy(Vx.Ui.Ui.e_style, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_style vx_copy(params Object[] vals) {
@@ -4839,9 +4818,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_stylelist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_stylelist,
-       vals);
+      Vx.Ui.Ui.Type_stylelist output = Vx.Core.vx_copy(Vx.Ui.Ui.e_stylelist, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_stylelist vx_copy(params Object[] vals) {
@@ -4938,7 +4916,7 @@ public static class Ui {
     public Vx.Core.Map<string, Vx.Ui.Ui.Type_style> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_style>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Ui.Ui.Type_style>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -5003,9 +4981,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_stylemap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_stylemap,
-       vals);
+      Vx.Ui.Ui.Type_stylemap output = Vx.Core.vx_copy(Vx.Ui.Ui.e_stylemap, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_stylemap vx_copy(params Object[] vals) {
@@ -5165,9 +5142,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_stylesheet vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_stylesheet,
-       vals);
+      Vx.Ui.Ui.Type_stylesheet output = Vx.Core.vx_copy(Vx.Ui.Ui.e_stylesheet, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_stylesheet vx_copy(params Object[] vals) {
@@ -5336,9 +5312,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_styletype vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_styletype,
-       vals);
+      Vx.Ui.Ui.Type_styletype output = Vx.Core.vx_copy(Vx.Ui.Ui.e_styletype, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_styletype vx_copy(params Object[] vals) {
@@ -5591,9 +5566,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_ui vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_ui,
-       vals);
+      Vx.Ui.Ui.Type_ui output = Vx.Core.vx_copy(Vx.Ui.Ui.e_ui, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_ui vx_copy(params Object[] vals) {
@@ -6073,9 +6047,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_uiengine vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_uiengine,
-       vals);
+      Vx.Ui.Ui.Type_uiengine output = Vx.Core.vx_copy(Vx.Ui.Ui.e_uiengine, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_uiengine vx_copy(params Object[] vals) {
@@ -6310,9 +6283,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_uilist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_uilist,
-       vals);
+      Vx.Ui.Ui.Type_uilist output = Vx.Core.vx_copy(Vx.Ui.Ui.e_uilist, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_uilist vx_copy(params Object[] vals) {
@@ -6409,7 +6381,7 @@ public static class Ui {
     public Vx.Core.Map<string, Vx.Ui.Ui.Type_ui> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_ui>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Ui.Ui.Type_ui>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -6474,9 +6446,8 @@ public static class Ui {
     }
 
     public override Vx.Ui.Ui.Type_uimap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_uimap,
-       vals);
+      Vx.Ui.Ui.Type_uimap output = Vx.Core.vx_copy(Vx.Ui.Ui.e_uimap, vals);
+      return output;
     }
 
     public override Vx.Ui.Ui.Type_uimap vx_copy(params Object[] vals) {

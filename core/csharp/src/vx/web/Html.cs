@@ -42,9 +42,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_body vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_body,
-       vals);
+      Vx.Web.Html.Type_body output = Vx.Core.vx_copy(Vx.Web.Html.e_body, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_body vx_copy(params Object[] vals) {
@@ -306,9 +305,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_details vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_details,
-       vals);
+      Vx.Web.Html.Type_details output = Vx.Core.vx_copy(Vx.Web.Html.e_details, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_details vx_copy(params Object[] vals) {
@@ -683,9 +681,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_div vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_div,
-       vals);
+      Vx.Web.Html.Type_div output = Vx.Core.vx_copy(Vx.Web.Html.e_div, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_div vx_copy(params Object[] vals) {
@@ -962,9 +959,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_divchild vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_divchild,
-       vals);
+      Vx.Web.Html.Type_divchild output = Vx.Core.vx_copy(Vx.Web.Html.e_divchild, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_divchild vx_copy(params Object[] vals) {
@@ -1054,9 +1050,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_divchildlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_divchildlist,
-       vals);
+      Vx.Web.Html.Type_divchildlist output = Vx.Core.vx_copy(Vx.Web.Html.e_divchildlist, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_divchildlist vx_copy(params Object[] vals) {
@@ -1179,9 +1174,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_divlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_divlist,
-       vals);
+      Vx.Web.Html.Type_divlist output = Vx.Core.vx_copy(Vx.Web.Html.e_divlist, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_divlist vx_copy(params Object[] vals) {
@@ -1302,9 +1296,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_footer vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_footer,
-       vals);
+      Vx.Web.Html.Type_footer output = Vx.Core.vx_copy(Vx.Web.Html.e_footer, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_footer vx_copy(params Object[] vals) {
@@ -1551,9 +1544,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_h1 vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_h1,
-       vals);
+      Vx.Web.Html.Type_h1 output = Vx.Core.vx_copy(Vx.Web.Html.e_h1, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_h1 vx_copy(params Object[] vals) {
@@ -1917,9 +1909,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_h2 vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_h2,
-       vals);
+      Vx.Web.Html.Type_h2 output = Vx.Core.vx_copy(Vx.Web.Html.e_h2, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_h2 vx_copy(params Object[] vals) {
@@ -2283,9 +2274,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_h3 vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_h3,
-       vals);
+      Vx.Web.Html.Type_h3 output = Vx.Core.vx_copy(Vx.Web.Html.e_h3, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_h3 vx_copy(params Object[] vals) {
@@ -2579,9 +2569,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_head vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_head,
-       vals);
+      Vx.Web.Html.Type_head output = Vx.Core.vx_copy(Vx.Web.Html.e_head, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_head vx_copy(params Object[] vals) {
@@ -2740,9 +2729,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_headchild vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_headchild,
-       vals);
+      Vx.Web.Html.Type_headchild output = Vx.Core.vx_copy(Vx.Web.Html.e_headchild, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_headchild vx_copy(params Object[] vals) {
@@ -2832,9 +2820,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_headchildlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_headchildlist,
-       vals);
+      Vx.Web.Html.Type_headchildlist output = Vx.Core.vx_copy(Vx.Web.Html.e_headchildlist, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_headchildlist vx_copy(params Object[] vals) {
@@ -3000,9 +2987,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_html vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_html,
-       vals);
+      Vx.Web.Html.Type_html output = Vx.Core.vx_copy(Vx.Web.Html.e_html, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_html vx_copy(params Object[] vals) {
@@ -3308,9 +3294,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_img vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_img,
-       vals);
+      Vx.Web.Html.Type_img output = Vx.Core.vx_copy(Vx.Web.Html.e_img, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_img vx_copy(params Object[] vals) {
@@ -3704,9 +3689,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_meta vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_meta,
-       vals);
+      Vx.Web.Html.Type_meta output = Vx.Core.vx_copy(Vx.Web.Html.e_meta, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_meta vx_copy(params Object[] vals) {
@@ -4103,9 +4087,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_node vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_node,
-       vals);
+      Vx.Web.Html.Type_node output = Vx.Core.vx_copy(Vx.Web.Html.e_node, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_node vx_copy(params Object[] vals) {
@@ -4366,9 +4349,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_nodelist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_nodelist,
-       vals);
+      Vx.Web.Html.Type_nodelist output = Vx.Core.vx_copy(Vx.Web.Html.e_nodelist, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_nodelist vx_copy(params Object[] vals) {
@@ -4559,9 +4541,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_p vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_p,
-       vals);
+      Vx.Web.Html.Type_p output = Vx.Core.vx_copy(Vx.Web.Html.e_p, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_p vx_copy(params Object[] vals) {
@@ -4831,7 +4812,7 @@ public static class Html {
     public Vx.Core.Map<string, Vx.Core.Type_string> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_string>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Core.Type_string>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -4896,9 +4877,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_propmap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_propmap,
-       vals);
+      Vx.Web.Html.Type_propmap output = Vx.Core.vx_copy(Vx.Web.Html.e_propmap, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_propmap vx_copy(params Object[] vals) {
@@ -5073,9 +5053,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_style vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_style,
-       vals);
+      Vx.Web.Html.Type_style output = Vx.Core.vx_copy(Vx.Web.Html.e_style, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_style vx_copy(params Object[] vals) {
@@ -5290,9 +5269,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_stylelist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_stylelist,
-       vals);
+      Vx.Web.Html.Type_stylelist output = Vx.Core.vx_copy(Vx.Web.Html.e_stylelist, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_stylelist vx_copy(params Object[] vals) {
@@ -5389,7 +5367,7 @@ public static class Html {
     public Vx.Core.Map<string, Vx.Web.Html.Type_style> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Web.Html.Type_style>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Web.Html.Type_style>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -5454,9 +5432,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_stylemap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_stylemap,
-       vals);
+      Vx.Web.Html.Type_stylemap output = Vx.Core.vx_copy(Vx.Web.Html.e_stylemap, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_stylemap vx_copy(params Object[] vals) {
@@ -5701,9 +5678,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_stylesheet vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_stylesheet,
-       vals);
+      Vx.Web.Html.Type_stylesheet output = Vx.Core.vx_copy(Vx.Web.Html.e_stylesheet, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_stylesheet vx_copy(params Object[] vals) {
@@ -6119,9 +6095,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_table vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_table,
-       vals);
+      Vx.Web.Html.Type_table output = Vx.Core.vx_copy(Vx.Web.Html.e_table, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_table vx_copy(params Object[] vals) {
@@ -6496,9 +6471,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_tbody vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_tbody,
-       vals);
+      Vx.Web.Html.Type_tbody output = Vx.Core.vx_copy(Vx.Web.Html.e_tbody, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_tbody vx_copy(params Object[] vals) {
@@ -6863,9 +6837,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_td vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_td,
-       vals);
+      Vx.Web.Html.Type_td output = Vx.Core.vx_copy(Vx.Web.Html.e_td, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_td vx_copy(params Object[] vals) {
@@ -7162,9 +7135,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_tdlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_tdlist,
-       vals);
+      Vx.Web.Html.Type_tdlist output = Vx.Core.vx_copy(Vx.Web.Html.e_tdlist, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_tdlist vx_copy(params Object[] vals) {
@@ -7355,9 +7327,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_thead vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_thead,
-       vals);
+      Vx.Web.Html.Type_thead output = Vx.Core.vx_copy(Vx.Web.Html.e_thead, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_thead vx_copy(params Object[] vals) {
@@ -7722,9 +7693,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_title vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_title,
-       vals);
+      Vx.Web.Html.Type_title output = Vx.Core.vx_copy(Vx.Web.Html.e_title, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_title vx_copy(params Object[] vals) {
@@ -8079,9 +8049,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_tr vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_tr,
-       vals);
+      Vx.Web.Html.Type_tr output = Vx.Core.vx_copy(Vx.Web.Html.e_tr, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_tr vx_copy(params Object[] vals) {
@@ -8378,9 +8347,8 @@ public static class Html {
     }
 
     public override Vx.Web.Html.Type_trlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_trlist,
-       vals);
+      Vx.Web.Html.Type_trlist output = Vx.Core.vx_copy(Vx.Web.Html.e_trlist, vals);
+      return output;
     }
 
     public override Vx.Web.Html.Type_trlist vx_copy(params Object[] vals) {

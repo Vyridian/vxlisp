@@ -42,9 +42,8 @@ public static class Db {
     }
 
     public override Vx.Data.Db.Type_db vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_db,
-       vals);
+      Vx.Data.Db.Type_db output = Vx.Core.vx_copy(Vx.Data.Db.e_db, vals);
+      return output;
     }
 
     public override Vx.Data.Db.Type_db vx_copy(params Object[] vals) {
@@ -271,9 +270,8 @@ public static class Db {
     }
 
     public override Vx.Data.Db.Type_dbcell vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_dbcell,
-       vals);
+      Vx.Data.Db.Type_dbcell output = Vx.Core.vx_copy(Vx.Data.Db.e_dbcell, vals);
+      return output;
     }
 
     public override Vx.Data.Db.Type_dbcell vx_copy(params Object[] vals) {
@@ -508,7 +506,7 @@ public static class Db {
     public Vx.Core.Map<string, Vx.Data.Db.Type_dbcell> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Data.Db.Type_dbcell>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Data.Db.Type_dbcell>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -573,9 +571,8 @@ public static class Db {
     }
 
     public override Vx.Data.Db.Type_dbcellmap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_dbcellmap,
-       vals);
+      Vx.Data.Db.Type_dbcellmap output = Vx.Core.vx_copy(Vx.Data.Db.e_dbcellmap, vals);
+      return output;
     }
 
     public override Vx.Data.Db.Type_dbcellmap vx_copy(params Object[] vals) {
@@ -750,9 +747,8 @@ public static class Db {
     }
 
     public override Vx.Data.Db.Type_dbfield vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_dbfield,
-       vals);
+      Vx.Data.Db.Type_dbfield output = Vx.Core.vx_copy(Vx.Data.Db.e_dbfield, vals);
+      return output;
     }
 
     public override Vx.Data.Db.Type_dbfield vx_copy(params Object[] vals) {
@@ -941,7 +937,7 @@ public static class Db {
     public Vx.Core.Map<string, Vx.Data.Db.Type_dbfield> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Data.Db.Type_dbfield>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Data.Db.Type_dbfield>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -1006,9 +1002,8 @@ public static class Db {
     }
 
     public override Vx.Data.Db.Type_dbfieldmap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_dbfieldmap,
-       vals);
+      Vx.Data.Db.Type_dbfieldmap output = Vx.Core.vx_copy(Vx.Data.Db.e_dbfieldmap, vals);
+      return output;
     }
 
     public override Vx.Data.Db.Type_dbfieldmap vx_copy(params Object[] vals) {
@@ -1125,9 +1120,8 @@ public static class Db {
   public class Class_dbid : Vx.Core.Class_base, Type_dbid {
 
     public override Vx.Data.Db.Type_dbid vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_dbid,
-       vals);
+      Vx.Data.Db.Type_dbid output = Vx.Core.vx_copy(Vx.Data.Db.e_dbid, vals);
+      return output;
     }
 
     public override Vx.Data.Db.Type_dbid vx_copy(params Object[] vals) {
@@ -1230,9 +1224,8 @@ public static class Db {
     }
 
     public override Vx.Data.Db.Type_dblink vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_dblink,
-       vals);
+      Vx.Data.Db.Type_dblink output = Vx.Core.vx_copy(Vx.Data.Db.e_dblink, vals);
+      return output;
     }
 
     public override Vx.Data.Db.Type_dblink vx_copy(params Object[] vals) {
@@ -1421,9 +1414,8 @@ public static class Db {
     }
 
     public override Vx.Data.Db.Type_dblinklist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_dblinklist,
-       vals);
+      Vx.Data.Db.Type_dblinklist output = Vx.Core.vx_copy(Vx.Data.Db.e_dblinklist, vals);
+      return output;
     }
 
     public override Vx.Data.Db.Type_dblinklist vx_copy(params Object[] vals) {
@@ -1559,9 +1551,8 @@ public static class Db {
     }
 
     public override Vx.Data.Db.Type_dbnode vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_dbnode,
-       vals);
+      Vx.Data.Db.Type_dbnode output = Vx.Core.vx_copy(Vx.Data.Db.e_dbnode, vals);
+      return output;
     }
 
     public override Vx.Data.Db.Type_dbnode vx_copy(params Object[] vals) {
@@ -1808,9 +1799,8 @@ public static class Db {
     }
 
     public override Vx.Data.Db.Type_dbnote vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_dbnote,
-       vals);
+      Vx.Data.Db.Type_dbnote output = Vx.Core.vx_copy(Vx.Data.Db.e_dbnote, vals);
+      return output;
     }
 
     public override Vx.Data.Db.Type_dbnote vx_copy(params Object[] vals) {
@@ -2114,9 +2104,8 @@ public static class Db {
     }
 
     public override Vx.Data.Db.Type_dbtable vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_dbtable,
-       vals);
+      Vx.Data.Db.Type_dbtable output = Vx.Core.vx_copy(Vx.Data.Db.e_dbtable, vals);
+      return output;
     }
 
     public override Vx.Data.Db.Type_dbtable vx_copy(params Object[] vals) {
@@ -2427,9 +2416,8 @@ public static class Db {
     }
 
     public override Vx.Data.Db.Type_dbvalue vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_dbvalue,
-       vals);
+      Vx.Data.Db.Type_dbvalue output = Vx.Core.vx_copy(Vx.Data.Db.e_dbvalue, vals);
+      return output;
     }
 
     public override Vx.Data.Db.Type_dbvalue vx_copy(params Object[] vals) {

@@ -2370,8 +2370,8 @@
       :total 14)
     :docnums
      (testcoveragenums
-      :pct 89
-      :tests 230
+      :pct 90
+      :tests 231
       :total 256)
     :funcnums
      (testcoveragenums

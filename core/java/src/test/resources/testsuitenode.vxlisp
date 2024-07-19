@@ -171,7 +171,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "89% 230/256")
+                  :text "90% 231/256")
                  (p
                   :style
                    (style

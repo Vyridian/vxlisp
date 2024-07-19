@@ -87,9 +87,8 @@ public static class Test {
     }
 
     public override Vx.Test.Type_testcase vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_testcase,
-       vals);
+      Vx.Test.Type_testcase output = Vx.Core.vx_copy(Vx.Test.e_testcase, vals);
+      return output;
     }
 
     public override Vx.Test.Type_testcase vx_copy(params Object[] vals) {
@@ -333,9 +332,8 @@ public static class Test {
     }
 
     public override Vx.Test.Type_testcaselist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_testcaselist,
-       vals);
+      Vx.Test.Type_testcaselist output = Vx.Core.vx_copy(Vx.Test.e_testcaselist, vals);
+      return output;
     }
 
     public override Vx.Test.Type_testcaselist vx_copy(params Object[] vals) {
@@ -501,9 +499,8 @@ public static class Test {
     }
 
     public override Vx.Test.Type_testcoveragedetail vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_testcoveragedetail,
-       vals);
+      Vx.Test.Type_testcoveragedetail output = Vx.Core.vx_copy(Vx.Test.e_testcoveragedetail, vals);
+      return output;
     }
 
     public override Vx.Test.Type_testcoveragedetail vx_copy(params Object[] vals) {
@@ -784,9 +781,8 @@ public static class Test {
     }
 
     public override Vx.Test.Type_testcoveragenums vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_testcoveragenums,
-       vals);
+      Vx.Test.Type_testcoveragenums output = Vx.Core.vx_copy(Vx.Test.e_testcoveragenums, vals);
+      return output;
     }
 
     public override Vx.Test.Type_testcoveragenums vx_copy(params Object[] vals) {
@@ -1136,9 +1132,8 @@ public static class Test {
     }
 
     public override Vx.Test.Type_testcoveragesummary vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_testcoveragesummary,
-       vals);
+      Vx.Test.Type_testcoveragesummary output = Vx.Core.vx_copy(Vx.Test.e_testcoveragesummary, vals);
+      return output;
     }
 
     public override Vx.Test.Type_testcoveragesummary vx_copy(params Object[] vals) {
@@ -1496,9 +1491,8 @@ public static class Test {
     }
 
     public override Vx.Test.Type_testdescribe vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_testdescribe,
-       vals);
+      Vx.Test.Type_testdescribe output = Vx.Core.vx_copy(Vx.Test.e_testdescribe, vals);
+      return output;
     }
 
     public override Vx.Test.Type_testdescribe vx_copy(params Object[] vals) {
@@ -1716,9 +1710,8 @@ public static class Test {
     }
 
     public override Vx.Test.Type_testdescribelist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_testdescribelist,
-       vals);
+      Vx.Test.Type_testdescribelist output = Vx.Core.vx_copy(Vx.Test.e_testdescribelist, vals);
+      return output;
     }
 
     public override Vx.Test.Type_testdescribelist vx_copy(params Object[] vals) {
@@ -1899,9 +1892,8 @@ public static class Test {
     }
 
     public override Vx.Test.Type_testpackage vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_testpackage,
-       vals);
+      Vx.Test.Type_testpackage output = Vx.Core.vx_copy(Vx.Test.e_testpackage, vals);
+      return output;
     }
 
     public override Vx.Test.Type_testpackage vx_copy(params Object[] vals) {
@@ -2165,9 +2157,8 @@ public static class Test {
     }
 
     public override Vx.Test.Type_testpackagelist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_testpackagelist,
-       vals);
+      Vx.Test.Type_testpackagelist output = Vx.Core.vx_copy(Vx.Test.e_testpackagelist, vals);
+      return output;
     }
 
     public override Vx.Test.Type_testpackagelist vx_copy(params Object[] vals) {
@@ -2348,9 +2339,8 @@ public static class Test {
     }
 
     public override Vx.Test.Type_testresult vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_testresult,
-       vals);
+      Vx.Test.Type_testresult output = Vx.Core.vx_copy(Vx.Test.e_testresult, vals);
+      return output;
     }
 
     public override Vx.Test.Type_testresult vx_copy(params Object[] vals) {
@@ -2614,9 +2604,8 @@ public static class Test {
     }
 
     public override Vx.Test.Type_testresultlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_testresultlist,
-       vals);
+      Vx.Test.Type_testresultlist output = Vx.Core.vx_copy(Vx.Test.e_testresultlist, vals);
+      return output;
     }
 
     public override Vx.Test.Type_testresultlist vx_copy(params Object[] vals) {

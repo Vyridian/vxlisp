@@ -1015,9 +1015,8 @@ public final class Core {
 
     @Override
     public Core.Type_any vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_any,
-       vals);
+      Core.Type_any output = Core.vx_copy(Core.e_any, vals);
+      return output;
     }
 
     @Override
@@ -1093,9 +1092,8 @@ public final class Core {
 
     @Override
     public Core.Type_any_async_from_func vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_any_async_from_func,
-       vals);
+      Core.Type_any_async_from_func output = Core.vx_copy(Core.e_any_async_from_func, vals);
+      return output;
     }
 
     @Override
@@ -1198,9 +1196,8 @@ public final class Core {
 
     @Override
     public Core.Type_any_from_anylist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_any_from_anylist,
-       vals);
+      Core.Type_any_from_anylist output = Core.vx_copy(Core.e_any_from_anylist, vals);
+      return output;
     }
 
     @Override
@@ -1326,9 +1323,8 @@ public final class Core {
 
     @Override
     public Core.Type_anylist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_anylist,
-       vals);
+      Core.Type_anylist output = Core.vx_copy(Core.e_anylist, vals);
+      return output;
     }
 
     @Override
@@ -1496,9 +1492,8 @@ public final class Core {
 
     @Override
     public Core.Type_anymap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_anymap,
-       vals);
+      Core.Type_anymap output = Core.vx_copy(Core.e_anymap, vals);
+      return output;
     }
 
     @Override
@@ -1629,9 +1624,8 @@ public final class Core {
 
     @Override
     public Core.Type_anytype vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_anytype,
-       vals);
+      Core.Type_anytype output = Core.vx_copy(Core.e_anytype, vals);
+      return output;
     }
 
     @Override
@@ -1779,9 +1773,8 @@ public final class Core {
 
     @Override
     public Core.Type_arg vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_arg,
-       vals);
+      Core.Type_arg output = Core.vx_copy(Core.e_arg, vals);
+      return output;
     }
 
     @Override
@@ -2046,9 +2039,8 @@ public final class Core {
 
     @Override
     public Core.Type_arglist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_arglist,
-       vals);
+      Core.Type_arglist output = Core.vx_copy(Core.e_arglist, vals);
+      return output;
     }
 
     @Override
@@ -2231,9 +2223,8 @@ public final class Core {
 
     @Override
     public Core.Type_argmap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_argmap,
-       vals);
+      Core.Type_argmap output = Core.vx_copy(Core.e_argmap, vals);
+      return output;
     }
 
     @Override
@@ -2370,9 +2361,8 @@ public final class Core {
 
     @Override
     public Core.Type_boolean vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_boolean,
-       vals);
+      Core.Type_boolean output = Core.vx_copy(Core.e_boolean, vals);
+      return output;
     }
 
     @Override
@@ -2492,9 +2482,8 @@ public final class Core {
 
     @Override
     public Core.Type_booleanlist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_booleanlist,
-       vals);
+      Core.Type_booleanlist output = Core.vx_copy(Core.e_booleanlist, vals);
+      return output;
     }
 
     @Override
@@ -2600,9 +2589,8 @@ public final class Core {
 
     @Override
     public Core.Type_collection vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_collection,
-       vals);
+      Core.Type_collection output = Core.vx_copy(Core.e_collection, vals);
+      return output;
     }
 
     @Override
@@ -2670,9 +2658,8 @@ public final class Core {
 
     @Override
     public Core.Type_compilelanguages vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_compilelanguages,
-       vals);
+      Core.Type_compilelanguages output = Core.vx_copy(Core.e_compilelanguages, vals);
+      return output;
     }
 
     @Override
@@ -2741,9 +2728,8 @@ public final class Core {
 
     @Override
     public Core.Type_connect vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_connect,
-       vals);
+      Core.Type_connect output = Core.vx_copy(Core.e_connect, vals);
+      return output;
     }
 
     @Override
@@ -2846,9 +2832,8 @@ public final class Core {
 
     @Override
     public Core.Type_connectlist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_connectlist,
-       vals);
+      Core.Type_connectlist output = Core.vx_copy(Core.e_connectlist, vals);
+      return output;
     }
 
     @Override
@@ -3031,9 +3016,8 @@ public final class Core {
 
     @Override
     public Core.Type_connectmap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_connectmap,
-       vals);
+      Core.Type_connectmap output = Core.vx_copy(Core.e_connectmap, vals);
+      return output;
     }
 
     @Override
@@ -3164,9 +3148,8 @@ public final class Core {
 
     @Override
     public Core.Type_const vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_const,
-       vals);
+      Core.Type_const output = Core.vx_copy(Core.e_const, vals);
+      return output;
     }
 
     @Override
@@ -3298,9 +3281,8 @@ public final class Core {
 
     @Override
     public Core.Type_constdef vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_constdef,
-       vals);
+      Core.Type_constdef output = Core.vx_copy(Core.e_constdef, vals);
+      return output;
     }
 
     @Override
@@ -3528,9 +3510,8 @@ public final class Core {
 
     @Override
     public Core.Type_constlist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_constlist,
-       vals);
+      Core.Type_constlist output = Core.vx_copy(Core.e_constlist, vals);
+      return output;
     }
 
     @Override
@@ -3698,9 +3679,8 @@ public final class Core {
 
     @Override
     public Core.Type_constmap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_constmap,
-       vals);
+      Core.Type_constmap output = Core.vx_copy(Core.e_constmap, vals);
+      return output;
     }
 
     @Override
@@ -3910,9 +3890,8 @@ public final class Core {
 
     @Override
     public Core.Type_context vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_context,
-       vals);
+      Core.Type_context output = Core.vx_copy(Core.e_context, vals);
+      return output;
     }
 
     @Override
@@ -4140,9 +4119,8 @@ public final class Core {
 
     @Override
     public Core.Type_date vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_date,
-       vals);
+      Core.Type_date output = Core.vx_copy(Core.e_date, vals);
+      return output;
     }
 
     @Override
@@ -4231,9 +4209,8 @@ public final class Core {
 
     @Override
     public Core.Type_decimal vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_decimal,
-       vals);
+      Core.Type_decimal output = Core.vx_copy(Core.e_decimal, vals);
+      return output;
     }
 
     @Override
@@ -4319,9 +4296,8 @@ public final class Core {
 
     @Override
     public Core.Type_error vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_error,
-       vals);
+      Core.Type_error output = Core.vx_copy(Core.e_error, vals);
+      return output;
     }
 
     @Override
@@ -4396,9 +4372,8 @@ public final class Core {
 
     @Override
     public Core.Type_float vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_float,
-       vals);
+      Core.Type_float output = Core.vx_copy(Core.e_float, vals);
+      return output;
     }
 
     @Override
@@ -4508,9 +4483,8 @@ public final class Core {
     }
     @Override
     public Core.Type_func vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_func,
-       vals);
+      Core.Type_func output = Core.vx_copy(Core.e_func, vals);
+      return output;
     }
 
     @Override
@@ -4674,9 +4648,8 @@ public final class Core {
 
     @Override
     public Core.Type_funcdef vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_funcdef,
-       vals);
+      Core.Type_funcdef output = Core.vx_copy(Core.e_funcdef, vals);
+      return output;
     }
 
     @Override
@@ -4972,9 +4945,8 @@ public final class Core {
 
     @Override
     public Core.Type_funclist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_funclist,
-       vals);
+      Core.Type_funclist output = Core.vx_copy(Core.e_funclist, vals);
+      return output;
     }
 
     @Override
@@ -5157,9 +5129,8 @@ public final class Core {
 
     @Override
     public Core.Type_funcmap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_funcmap,
-       vals);
+      Core.Type_funcmap output = Core.vx_copy(Core.e_funcmap, vals);
+      return output;
     }
 
     @Override
@@ -5296,9 +5267,8 @@ public final class Core {
 
     @Override
     public Core.Type_int vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_int,
-       vals);
+      Core.Type_int output = Core.vx_copy(Core.e_int, vals);
+      return output;
     }
 
     @Override
@@ -5422,9 +5392,8 @@ public final class Core {
 
     @Override
     public Core.Type_intlist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_intlist,
-       vals);
+      Core.Type_intlist output = Core.vx_copy(Core.e_intlist, vals);
+      return output;
     }
 
     @Override
@@ -5607,9 +5576,8 @@ public final class Core {
 
     @Override
     public Core.Type_intmap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_intmap,
-       vals);
+      Core.Type_intmap output = Core.vx_copy(Core.e_intmap, vals);
+      return output;
     }
 
     @Override
@@ -5764,9 +5732,8 @@ public final class Core {
 
     @Override
     public Core.Type_list vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_list,
-       vals);
+      Core.Type_list output = Core.vx_copy(Core.e_list, vals);
+      return output;
     }
 
     @Override
@@ -5870,9 +5837,8 @@ public final class Core {
 
     @Override
     public Core.Type_listtype vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_listtype,
-       vals);
+      Core.Type_listtype output = Core.vx_copy(Core.e_listtype, vals);
+      return output;
     }
 
     @Override
@@ -5953,9 +5919,8 @@ public final class Core {
 
     @Override
     public Core.Type_locale vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_locale,
-       vals);
+      Core.Type_locale output = Core.vx_copy(Core.e_locale, vals);
+      return output;
     }
 
     @Override
@@ -6092,9 +6057,8 @@ public final class Core {
 
     @Override
     public Core.Type_map vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_map,
-       vals);
+      Core.Type_map output = Core.vx_copy(Core.e_map, vals);
+      return output;
     }
 
     @Override
@@ -6225,9 +6189,8 @@ public final class Core {
 
     @Override
     public Core.Type_maptype vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_maptype,
-       vals);
+      Core.Type_maptype output = Core.vx_copy(Core.e_maptype, vals);
+      return output;
     }
 
     @Override
@@ -6379,9 +6342,8 @@ public final class Core {
 
     @Override
     public Core.Type_mempool vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_mempool,
-       vals);
+      Core.Type_mempool output = Core.vx_copy(Core.e_mempool, vals);
+      return output;
     }
 
     @Override
@@ -6628,9 +6590,8 @@ public final class Core {
 
     @Override
     public Core.Type_msg vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_msg,
-       vals);
+      Core.Type_msg output = Core.vx_copy(Core.e_msg, vals);
+      return output;
     }
 
     @Override
@@ -6826,9 +6787,8 @@ public final class Core {
 
     @Override
     public Core.Type_msgblock vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_msgblock,
-       vals);
+      Core.Type_msgblock output = Core.vx_copy(Core.e_msgblock, vals);
+      return output;
     }
 
     @Override
@@ -7024,9 +6984,8 @@ public final class Core {
 
     @Override
     public Core.Type_msgblocklist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_msgblocklist,
-       vals);
+      Core.Type_msgblocklist output = Core.vx_copy(Core.e_msgblocklist, vals);
+      return output;
     }
 
     @Override
@@ -7161,9 +7120,8 @@ public final class Core {
 
     @Override
     public Core.Type_msglist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_msglist,
-       vals);
+      Core.Type_msglist output = Core.vx_copy(Core.e_msglist, vals);
+      return output;
     }
 
     @Override
@@ -7264,9 +7222,8 @@ public final class Core {
 
     @Override
     public Core.Type_none vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_none,
-       vals);
+      Core.Type_none output = Core.vx_copy(Core.e_none, vals);
+      return output;
     }
 
     @Override
@@ -7335,9 +7292,8 @@ public final class Core {
 
     @Override
     public Core.Type_notype vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_notype,
-       vals);
+      Core.Type_notype output = Core.vx_copy(Core.e_notype, vals);
+      return output;
     }
 
     @Override
@@ -7406,9 +7362,8 @@ public final class Core {
 
     @Override
     public Core.Type_number vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_number,
-       vals);
+      Core.Type_number output = Core.vx_copy(Core.e_number, vals);
+      return output;
     }
 
     @Override
@@ -7511,9 +7466,8 @@ public final class Core {
 
     @Override
     public Core.Type_numberlist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_numberlist,
-       vals);
+      Core.Type_numberlist output = Core.vx_copy(Core.e_numberlist, vals);
+      return output;
     }
 
     @Override
@@ -7696,9 +7650,8 @@ public final class Core {
 
     @Override
     public Core.Type_numbermap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_numbermap,
-       vals);
+      Core.Type_numbermap output = Core.vx_copy(Core.e_numbermap, vals);
+      return output;
     }
 
     @Override
@@ -7924,9 +7877,8 @@ public final class Core {
 
     @Override
     public Core.Type_package vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_package,
-       vals);
+      Core.Type_package output = Core.vx_copy(Core.e_package, vals);
+      return output;
     }
 
     @Override
@@ -8254,9 +8206,8 @@ public final class Core {
 
     @Override
     public Core.Type_packagemap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_packagemap,
-       vals);
+      Core.Type_packagemap output = Core.vx_copy(Core.e_packagemap, vals);
+      return output;
     }
 
     @Override
@@ -8418,9 +8369,8 @@ public final class Core {
 
     @Override
     public Core.Type_permission vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_permission,
-       vals);
+      Core.Type_permission output = Core.vx_copy(Core.e_permission, vals);
+      return output;
     }
 
     @Override
@@ -8607,9 +8557,8 @@ public final class Core {
 
     @Override
     public Core.Type_permissionlist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_permissionlist,
-       vals);
+      Core.Type_permissionlist output = Core.vx_copy(Core.e_permissionlist, vals);
+      return output;
     }
 
     @Override
@@ -8792,9 +8741,8 @@ public final class Core {
 
     @Override
     public Core.Type_permissionmap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_permissionmap,
-       vals);
+      Core.Type_permissionmap output = Core.vx_copy(Core.e_permissionmap, vals);
+      return output;
     }
 
     @Override
@@ -8956,9 +8904,8 @@ public final class Core {
 
     @Override
     public Core.Type_project vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_project,
-       vals);
+      Core.Type_project output = Core.vx_copy(Core.e_project, vals);
+      return output;
     }
 
     @Override
@@ -9171,9 +9118,8 @@ public final class Core {
 
     @Override
     public Core.Type_security vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_security,
-       vals);
+      Core.Type_security output = Core.vx_copy(Core.e_security, vals);
+      return output;
     }
 
     @Override
@@ -9484,9 +9430,8 @@ public final class Core {
 
     @Override
     public Core.Type_session vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_session,
-       vals);
+      Core.Type_session output = Core.vx_copy(Core.e_session, vals);
+      return output;
     }
 
     @Override
@@ -9792,9 +9737,8 @@ public final class Core {
 
     @Override
     public Core.Type_setting vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_setting,
-       vals);
+      Core.Type_setting output = Core.vx_copy(Core.e_setting, vals);
+      return output;
     }
 
     @Override
@@ -9975,9 +9919,8 @@ public final class Core {
 
     @Override
     public Core.Type_state vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_state,
-       vals);
+      Core.Type_state output = Core.vx_copy(Core.e_state, vals);
+      return output;
     }
 
     @Override
@@ -10189,9 +10132,8 @@ public final class Core {
 
     @Override
     public Core.Type_statelistener vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_statelistener,
-       vals);
+      Core.Type_statelistener output = Core.vx_copy(Core.e_statelistener, vals);
+      return output;
     }
 
     @Override
@@ -10470,9 +10412,8 @@ public final class Core {
 
     @Override
     public Core.Type_statelistenermap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_statelistenermap,
-       vals);
+      Core.Type_statelistenermap output = Core.vx_copy(Core.e_statelistenermap, vals);
+      return output;
     }
 
     @Override
@@ -10611,9 +10552,8 @@ public final class Core {
 
     @Override
     public Core.Type_string vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_string,
-       vals);
+      Core.Type_string output = Core.vx_copy(Core.e_string, vals);
+      return output;
     }
 
     @Override
@@ -10769,9 +10709,8 @@ public final class Core {
 
     @Override
     public Core.Type_stringlist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_stringlist,
-       vals);
+      Core.Type_stringlist output = Core.vx_copy(Core.e_stringlist, vals);
+      return output;
     }
 
     @Override
@@ -10912,9 +10851,8 @@ public final class Core {
 
     @Override
     public Core.Type_stringlistlist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_stringlistlist,
-       vals);
+      Core.Type_stringlistlist output = Core.vx_copy(Core.e_stringlistlist, vals);
+      return output;
     }
 
     @Override
@@ -11097,9 +11035,8 @@ public final class Core {
 
     @Override
     public Core.Type_stringmap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_stringmap,
-       vals);
+      Core.Type_stringmap output = Core.vx_copy(Core.e_stringmap, vals);
+      return output;
     }
 
     @Override
@@ -11306,9 +11243,8 @@ public final class Core {
 
     @Override
     public Core.Type_stringmutablemap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_stringmutablemap,
-       vals);
+      Core.Type_stringmutablemap output = Core.vx_copy(Core.e_stringmutablemap, vals);
+      return output;
     }
 
     @Override
@@ -11453,9 +11389,8 @@ public final class Core {
 
     @Override
     public Core.Type_struct vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_struct,
-       vals);
+      Core.Type_struct output = Core.vx_copy(Core.e_struct, vals);
+      return output;
     }
 
     @Override
@@ -11618,9 +11553,8 @@ public final class Core {
 
     @Override
     public Core.Type_thenelse vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_thenelse,
-       vals);
+      Core.Type_thenelse output = Core.vx_copy(Core.e_thenelse, vals);
+      return output;
     }
 
     @Override
@@ -11906,9 +11840,8 @@ public final class Core {
 
     @Override
     public Core.Type_thenelselist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_thenelselist,
-       vals);
+      Core.Type_thenelselist output = Core.vx_copy(Core.e_thenelselist, vals);
+      return output;
     }
 
     @Override
@@ -12062,9 +11995,8 @@ public final class Core {
 
     @Override
     public Core.Type_translation vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_translation,
-       vals);
+      Core.Type_translation output = Core.vx_copy(Core.e_translation, vals);
+      return output;
     }
 
     @Override
@@ -12276,9 +12208,8 @@ public final class Core {
 
     @Override
     public Core.Type_translationlist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_translationlist,
-       vals);
+      Core.Type_translationlist output = Core.vx_copy(Core.e_translationlist, vals);
+      return output;
     }
 
     @Override
@@ -12461,9 +12392,8 @@ public final class Core {
 
     @Override
     public Core.Type_translationmap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_translationmap,
-       vals);
+      Core.Type_translationmap output = Core.vx_copy(Core.e_translationmap, vals);
+      return output;
     }
 
     @Override
@@ -12594,9 +12524,8 @@ public final class Core {
 
     @Override
     public Core.Type_type vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_type,
-       vals);
+      Core.Type_type output = Core.vx_copy(Core.e_type, vals);
+      return output;
     }
 
     @Override
@@ -12872,9 +12801,8 @@ public final class Core {
 
     @Override
     public Core.Type_typedef vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_typedef,
-       vals);
+      Core.Type_typedef output = Core.vx_copy(Core.e_typedef, vals);
+      return output;
     }
 
     @Override
@@ -13330,9 +13258,8 @@ public final class Core {
 
     @Override
     public Core.Type_typelist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_typelist,
-       vals);
+      Core.Type_typelist output = Core.vx_copy(Core.e_typelist, vals);
+      return output;
     }
 
     @Override
@@ -13500,9 +13427,8 @@ public final class Core {
 
     @Override
     public Core.Type_typemap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_typemap,
-       vals);
+      Core.Type_typemap output = Core.vx_copy(Core.e_typemap, vals);
+      return output;
     }
 
     @Override
@@ -13696,9 +13622,8 @@ public final class Core {
 
     @Override
     public Core.Type_user vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_user,
-       vals);
+      Core.Type_user output = Core.vx_copy(Core.e_user, vals);
+      return output;
     }
 
     @Override
@@ -13950,9 +13875,8 @@ public final class Core {
 
     @Override
     public Core.Type_value vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_value,
-       vals);
+      Core.Type_value output = Core.vx_copy(Core.e_value, vals);
+      return output;
     }
 
     @Override
@@ -23089,6 +23013,7 @@ public final class Core {
 
   /**
    * @function funcdef_from_func
+   * Returns the definition of a function
    * @param  {func} val
    * @return {funcdef}
    * (func funcdef<-func)

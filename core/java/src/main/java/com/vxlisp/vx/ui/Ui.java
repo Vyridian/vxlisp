@@ -39,9 +39,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_align vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_align,
-       vals);
+      Ui.Type_align output = Core.vx_copy(Ui.e_align, vals);
+      return output;
     }
 
     @Override
@@ -189,9 +188,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_bounds vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_bounds,
-       vals);
+      Ui.Type_bounds output = Core.vx_copy(Ui.e_bounds, vals);
+      return output;
     }
 
     @Override
@@ -440,9 +438,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_cursor vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_cursor,
-       vals);
+      Ui.Type_cursor output = Core.vx_copy(Ui.e_cursor, vals);
+      return output;
     }
 
     @Override
@@ -510,9 +507,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_cursor_pointer vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_cursor_pointer,
-       vals);
+      Ui.Type_cursor_pointer output = Core.vx_copy(Ui.e_cursor_pointer, vals);
+      return output;
     }
 
     @Override
@@ -593,9 +589,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_flip vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_flip,
-       vals);
+      Ui.Type_flip output = Core.vx_copy(Ui.e_flip, vals);
+      return output;
     }
 
     @Override
@@ -743,9 +738,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_font vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_font,
-       vals);
+      Ui.Type_font output = Core.vx_copy(Ui.e_font, vals);
+      return output;
     }
 
     @Override
@@ -1055,9 +1049,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_fontface vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_fontface,
-       vals);
+      Ui.Type_fontface output = Core.vx_copy(Ui.e_fontface, vals);
+      return output;
     }
 
     @Override
@@ -1325,9 +1318,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_fontfacelist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_fontfacelist,
-       vals);
+      Ui.Type_fontfacelist output = Core.vx_copy(Ui.e_fontfacelist, vals);
+      return output;
     }
 
     @Override
@@ -1510,9 +1502,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_fontfacemap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_fontfacemap,
-       vals);
+      Ui.Type_fontfacemap output = Core.vx_copy(Ui.e_fontfacemap, vals);
+      return output;
     }
 
     @Override
@@ -1719,9 +1710,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_fontmap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_fontmap,
-       vals);
+      Ui.Type_fontmap output = Core.vx_copy(Ui.e_fontmap, vals);
+      return output;
     }
 
     @Override
@@ -1883,9 +1873,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_fontstyle vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_fontstyle,
-       vals);
+      Ui.Type_fontstyle output = Core.vx_copy(Ui.e_fontstyle, vals);
+      return output;
     }
 
     @Override
@@ -2114,9 +2103,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_fontstylemap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_fontstylemap,
-       vals);
+      Ui.Type_fontstylemap output = Core.vx_copy(Ui.e_fontstylemap, vals);
+      return output;
     }
 
     @Override
@@ -2310,9 +2298,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_image vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_image,
-       vals);
+      Ui.Type_image output = Core.vx_copy(Ui.e_image, vals);
+      return output;
     }
 
     @Override
@@ -2565,9 +2552,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_layout vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_layout,
-       vals);
+      Ui.Type_layout output = Core.vx_copy(Ui.e_layout, vals);
+      return output;
     }
 
     @Override
@@ -2888,9 +2874,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_layoutengine vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_layoutengine,
-       vals);
+      Ui.Type_layoutengine output = Core.vx_copy(Ui.e_layoutengine, vals);
+      return output;
     }
 
     @Override
@@ -3252,9 +3237,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_layoutlist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_layoutlist,
-       vals);
+      Ui.Type_layoutlist output = Core.vx_copy(Ui.e_layoutlist, vals);
+      return output;
     }
 
     @Override
@@ -3437,9 +3421,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_layoutmap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_layoutmap,
-       vals);
+      Ui.Type_layoutmap output = Core.vx_copy(Ui.e_layoutmap, vals);
+      return output;
     }
 
     @Override
@@ -3601,9 +3584,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_pin vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_pin,
-       vals);
+      Ui.Type_pin output = Core.vx_copy(Ui.e_pin, vals);
+      return output;
     }
 
     @Override
@@ -3867,9 +3849,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_point vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_point,
-       vals);
+      Ui.Type_point output = Core.vx_copy(Ui.e_point, vals);
+      return output;
     }
 
     @Override
@@ -4159,9 +4140,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_pointtype vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_pointtype,
-       vals);
+      Ui.Type_pointtype output = Core.vx_copy(Ui.e_pointtype, vals);
+      return output;
     }
 
     @Override
@@ -4597,9 +4577,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_style vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_style,
-       vals);
+      Ui.Type_style output = Core.vx_copy(Ui.e_style, vals);
+      return output;
     }
 
     @Override
@@ -5332,9 +5311,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_stylelist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_stylelist,
-       vals);
+      Ui.Type_stylelist output = Core.vx_copy(Ui.e_stylelist, vals);
+      return output;
     }
 
     @Override
@@ -5517,9 +5495,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_stylemap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_stylemap,
-       vals);
+      Ui.Type_stylemap output = Core.vx_copy(Ui.e_stylemap, vals);
+      return output;
     }
 
     @Override
@@ -5697,9 +5674,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_stylesheet vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_stylesheet,
-       vals);
+      Ui.Type_stylesheet output = Core.vx_copy(Ui.e_stylesheet, vals);
+      return output;
     }
 
     @Override
@@ -5886,9 +5862,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_styletype vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_styletype,
-       vals);
+      Ui.Type_styletype output = Core.vx_copy(Ui.e_styletype, vals);
+      return output;
     }
 
     @Override
@@ -6164,9 +6139,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_ui vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_ui,
-       vals);
+      Ui.Type_ui output = Core.vx_copy(Ui.e_ui, vals);
+      return output;
     }
 
     @Override
@@ -6688,9 +6662,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_uiengine vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_uiengine,
-       vals);
+      Ui.Type_uiengine output = Core.vx_copy(Ui.e_uiengine, vals);
+      return output;
     }
 
     @Override
@@ -6949,9 +6922,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_uilist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_uilist,
-       vals);
+      Ui.Type_uilist output = Core.vx_copy(Ui.e_uilist, vals);
+      return output;
     }
 
     @Override
@@ -7134,9 +7106,8 @@ public final class Ui {
 
     @Override
     public Ui.Type_uimap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_uimap,
-       vals);
+      Ui.Type_uimap output = Core.vx_copy(Ui.e_uimap, vals);
+      return output;
     }
 
     @Override

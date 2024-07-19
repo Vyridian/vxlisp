@@ -138,9 +138,8 @@ public final class File {
 
     @Override
     public File.Type_file vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_file,
-       vals);
+      File.Type_file output = Core.vx_copy(File.e_file, vals);
+      return output;
     }
 
     @Override
@@ -398,9 +397,8 @@ public final class File {
 
     @Override
     public File.Type_fileformat vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_fileformat,
-       vals);
+      File.Type_fileformat output = Core.vx_copy(File.e_fileformat, vals);
+      return output;
     }
 
     @Override
@@ -503,9 +501,8 @@ public final class File {
 
     @Override
     public File.Type_filelist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_filelist,
-       vals);
+      File.Type_filelist output = Core.vx_copy(File.e_filelist, vals);
+      return output;
     }
 
     @Override

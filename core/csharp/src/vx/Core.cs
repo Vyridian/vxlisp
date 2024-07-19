@@ -9,6 +9,7 @@ public static class Core {
     public List<TKey> keys();
     public void put(TKey key, TValue value);
     public void remove(TKey key);
+    public int size();
   }
 
   public class LinkedHashMap<TKey, TValue> : Map<TKey, TValue> where TKey : notnull {
@@ -45,6 +46,9 @@ public static class Core {
     public void remove(TKey key) {
       listkey.Remove(key);
       dict.Remove(key);
+    }
+    public int size() {
+      return dict.Count;
     }
   }
 
@@ -226,31 +230,6 @@ public static class Core {
     return mapval;
   }
 
-  public static Map<string, T> map_from_list_fn<T>(List<T> listval, Func<T, Vx.Core.Type_string> fn_any_from_any) {
-    Map<string, T> output = new LinkedHashMap<string, T>();
-    foreach (T val in listval) {
-      Vx.Core.Type_string valkey = fn_any_from_any.Invoke(val);
-      string key = valkey.vx_string();
-      output.put(key, val);
-    }
-    return output;
-  }
-
-  public static LinkedHashMap<string, T> map_from_map<T>(LinkedHashMap<string, Vx.Core.Type_any> mapval) where T : Vx.Core.Type_any {
-    LinkedHashMap<string, T> output = new LinkedHashMap<string, T>();
-    List<string> keys = mapval.keys();
-    foreach (string key in keys) {
-      Vx.Core.Type_any value = mapval.get(key);
-      try {
-        T castval = (T)value;
-        output.put(key, castval);
-      } catch (Exception ex) {
-        Vx.Core.vx_log("map<-map", ex);
-      }
-    }
-    return output;
-  }
-
   // vx_new(generic_any_1, args...)
   public static T vx_new<T>(T generic_any_1, params Object[] vals) where T : Vx.Core.Type_any {
     Vx.Core.Type_any val = generic_any_1.vx_new(vals);
@@ -316,6 +295,29 @@ public static class Core {
     List<Vx.Core.Type_any> listval = list.vx_list();
     foreach (Vx.Core.Type_any item in listval) {
       output = fn_reduce.vx_any_from_reduce(generic_any_1, output, item);
+    }
+    return output;
+  }
+
+  // vx_any_from_list_start_reduce_next(any-1, list-2, any-1, any<-reduce-next)
+  public static T vx_any_from_list_start_reduce_next<T, N>(
+    T generic_any_1,
+    N list,
+    T valstart,
+    Vx.Core.Func_any_from_reduce_next fn_reduce_next)
+    where T : Vx.Core.Type_any
+    where N : Vx.Core.Type_list {
+    T output = valstart;
+    List<Vx.Core.Type_any> listval = list.vx_list();
+    Vx.Core.Type_any current = Core.e_any;
+    bool first = true;
+    foreach (Core.Type_any next in listval) {
+      if (first) {
+        first = false;
+      } else {
+        output = fn_reduce_next.vx_any_from_reduce_next(generic_any_1, output, current, next);
+      }
+      current = next;
     }
     return output;
   }
@@ -408,6 +410,49 @@ public static class Core {
     return valuemap.vx_set(name, value);
   }
 
+  // vx_compare(any, any)
+  public static Vx.Core.Type_int vx_compare(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
+    int intresult = 0;
+    if ((val1 is Core.Type_number num1) && (val2 is Core.Type_number num2)) {
+      float float1 = Vx.Core.vx_new(Core.t_float, num1).vx_float();
+      float float2 = Vx.Core.vx_new(Core.t_float, num2).vx_float();
+      if (float1 < float2) {
+        intresult = -1;
+      } else if (float1 > float2) {
+        intresult = 1;
+      }
+    } else {
+      string stringval1 = Vx.Core.f_string_from_any(val1).vx_string();
+      string stringval2 = Vx.Core.f_string_from_any(val2).vx_string();
+      int compare = stringval1.CompareTo(stringval2);
+      if (compare > 0) {
+        intresult = 1;
+      } else if (compare < 0) {
+        intresult = -1;
+      }
+    }
+    Vx.Core.Type_int output = Vx.Core.vx_new_int(intresult);
+    return output;
+  }
+
+  // vx_contains(list-1, any)
+  public static Vx.Core.Type_boolean vx_contains_1<T>(
+    T values,
+    Vx.Core.Type_any find)
+    where T : Vx.Core.Type_list {
+    bool booleanresult = false;
+    List<Vx.Core.Type_any> listvalues = values.vx_list();
+    foreach (Vx.Core.Type_any item in listvalues) {
+      Vx.Core.Type_boolean iseq = Vx.Core.f_eq(item, find);
+      if (iseq.vx_boolean()) {
+        booleanresult = true;
+        break;
+      }
+    }
+    Vx.Core.Type_boolean output = Core.vx_new_boolean(booleanresult);
+    return output;
+  }
+
   // vx_eqeq(any, any)
   public static bool vx_eqeq(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
     bool output = false;
@@ -444,6 +489,23 @@ public static class Core {
           output = true;
         }
       }
+    }
+    return output;
+  }
+
+  // vx_float_from_number(number)
+  public static float vx_float_from_number(Vx.Core.Type_number num) {
+    float output = 0;
+    Vx.Core.Type_any type = num.vx_type();
+    if (type == Vx.Core.t_float) {
+      Vx.Core.Type_float floatval = Vx.Core.f_any_from_any(Vx.Core.t_float, num);
+      output = floatval.vx_float();
+    } else if (type == Vx.Core.t_int) {
+      Vx.Core.Type_int intval = Vx.Core.f_any_from_any(Vx.Core.t_int, num);
+      output = intval.vx_int();
+    } else if (type == Core.t_decimal) {
+      Vx.Core.Type_decimal decval = Core.f_any_from_any(Vx.Core.t_decimal, num);
+      output = decval.vx_float();
     }
     return output;
   }
@@ -613,6 +675,44 @@ public static class Core {
     return result;
   }
 
+  public static X vx_list_from_list_1<X, Y>(
+    X generic_list_1,
+    Y values,
+    Vx.Core.Func_any_from_any fn_any_from_any)
+    where X : Vx.Core.Type_list
+    where Y : Vx.Core.Type_list {
+    X output = Vx.Core.f_empty(generic_list_1);
+    List<Vx.Core.Type_any> list_value = values.vx_list();
+    Func<Vx.Core.Type_any, Vx.Core.Type_any> fn = (val) => {
+      return fn_any_from_any.vx_any_from_any(generic_list_1, val);
+    };
+    List<Vx.Core.Type_any> list_result = Vx.Core.arraylist_from_arraylist_fn<Vx.Core.Type_any, Vx.Core.Type_any>(list_value, fn);
+    output = Vx.Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));
+    return output;
+  }
+
+  public static Task<X> vx_list_from_list_async<X, Y>(
+    X generic_list_1,
+    Y values,
+    Vx.Core.Func_any_from_any_async fn_any_from_any_async)
+    where X : Vx.Core.Type_list
+    where Y : Vx.Core.Type_list {
+    Task<X> output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_list_1));
+    List<Vx.Core.Type_any> list_value = values.vx_list();
+    Func<Vx.Core.Type_any, Task<X>> fn_future_from_any = (val) => {
+      Task<X> future_any = fn_any_from_any_async.vx_any_from_any_async(generic_list_1, val);
+      return future_any;
+    };
+    List<Task<X>> list_async_result = Vx.Core.arraylist_from_arraylist_fn(list_value, fn_future_from_any);
+    Task<List<X>> async_list_result = Vx.Core.vx_async_arraylist_from_arraylist_async(list_async_result);
+    Func<List<X>, X> fn_any_from_list = (list_result) => {
+      X work = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));
+      return work;
+    };
+    output = Vx.Core.vx_async_from_async_fn(async_list_result, fn_any_from_list);
+    return output;
+  }
+
   // vx_list_from_list_intany(generic_list_1, list-2, any<-int-any)
   public static T vx_list_from_list_intany<T, U>(
     T generic_list_1,
@@ -635,6 +735,43 @@ public static class Core {
     return output;
   }
 
+  public static X vx_list_from_map_1<O, X>(
+    X generic_list_1,
+    O valuemap,
+    Vx.Core.Func_any_from_key_value fn_any_from_key_value)
+    where O : Vx.Core.Type_map
+    where X : Vx.Core.Type_list {
+    X output = Vx.Core.f_empty(generic_list_1);
+    Vx.Core.Map<string, Vx.Core.Type_any> map_value = valuemap.vx_map();
+    Func<string, Vx.Core.Type_any, Vx.Core.Type_any> fn_key_value = (key, val) => {
+      Vx.Core.Type_string valkey = Vx.Core.vx_new_string(key);
+      return fn_any_from_key_value.vx_any_from_key_value(Vx.Core.t_any, valkey, val);
+    };
+    List<Vx.Core.Type_any> listresult = Vx.Core.arraylist_from_linkedhashmap_fn(map_value, fn_key_value);
+    output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(listresult));
+    return output;
+  }
+
+  public static X vx_list_join_from_list_1<X, Y>(
+    X generic_list_1,
+    Y values,
+    Vx.Core.Func_any_from_any fn_any_from_any)
+    where X : Vx.Core.Type_list
+    where Y : Vx.Core.Type_list {
+    X output = Vx.Core.f_empty(generic_list_1);
+    List<Vx.Core.Type_any> list_value = values.vx_list();
+    List<Vx.Core.Type_any> list_result = new List<Vx.Core.Type_any>();
+    foreach (Vx.Core.Type_any val in list_value) {
+      Vx.Core.Type_any listoflist = fn_any_from_any.vx_any_from_any(generic_list_1, val);
+      if (listoflist is Core.Type_list vallist) {
+        List<Vx.Core.Type_any> listval = vallist.vx_list();
+        list_result.AddRange(listval);
+      }
+    }
+    output = Vx.Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));
+    return output;
+  }
+
   // vx_log(object...)
   public static void vx_log(params Object[] values) {
     foreach (Object value in values) {
@@ -649,6 +786,73 @@ public static class Core {
       }
       System.Console.WriteLine(text);
     }
+  }
+
+  public static N vx_map_from_list<N, Y>(
+    N generic_map_1,
+    Y vallist,
+    Vx.Core.Func_any_from_any fn_any_from_any)
+    where N : Vx.Core.Type_map
+    where Y : Vx.Core.Type_list {
+    N output = Vx.Core.f_empty(generic_map_1);
+    List<Vx.Core.Type_any> listval = vallist.vx_list();
+    Func<Vx.Core.Type_any, Vx.Core.Type_string> fn_string_from_any = (val) => {
+      Vx.Core.Type_string output_string = fn_any_from_any.vx_any_from_any(Vx.Core.t_string, val);
+      return output_string;
+    };
+    Map<string, Vx.Core.Type_any> mapresult = Vx.Core.vx_map_from_list_fn(listval, fn_string_from_any);
+    output = Vx.Core.f_any_from_any(generic_map_1, output.vx_new_from_map(mapresult));
+    return output;
+  }
+
+  public static Map<string, T> vx_map_from_list_fn<T>(List<T> listval, Func<T, Vx.Core.Type_string> fn_any_from_any) {
+    Map<string, T> output = new LinkedHashMap<string, T>();
+    foreach (T val in listval) {
+      Vx.Core.Type_string valkey = fn_any_from_any.Invoke(val);
+      string key = valkey.vx_string();
+      output.put(key, val);
+    }
+    return output;
+  }
+
+  public static Map<string, T> vx_map_from_map<T, U>(
+    Map<string, U> mapval)
+    where U : T {
+    Map<string, T> output = new LinkedHashMap<string, T>();
+    List<string> keys = mapval.keys();
+    foreach (string key in keys) {
+      U value = mapval.get(key);
+      try {
+        T castval = (T)value;
+        output.put(key, castval);
+      } catch (Exception ex) {
+        Vx.Core.vx_log("map<-map", ex);
+      }
+    }
+    return output;
+  }
+
+  // vx_map_from_map_fn(generic_map, map, fn_any_from_key_value)
+  public static T vx_map_from_map_fn<T>(
+    T generic_map_1,
+    Vx.Core.Type_map valuemap,
+    Vx.Core.Func_any_from_key_value fn_any_from_key_value)
+    where T : Vx.Core.Type_map {
+    T output = Vx.Core.f_empty(generic_map_1);
+    Vx.Core.Map<string, Vx.Core.Type_any> mapvalue = valuemap.vx_map();
+    if (mapvalue.size() > 0) {
+      List<string> keys = mapvalue.keys();
+      Vx.Core.Map<string, Vx.Core.Type_any> mapnew = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      foreach (string key in keys) {
+        Vx.Core.Type_any value = mapvalue.get(key);
+        Vx.Core.Type_string stringkey = Vx.Core.vx_new_string(key);
+        Vx.Core.Type_any chgvalue = fn_any_from_key_value.vx_any_from_key_value(Vx.Core.t_any, stringkey, value);
+        mapnew.put(key, chgvalue);
+      }
+      Vx.Core.Type_map anymap = generic_map_1.vx_new_from_map(mapnew);
+      output = Vx.Core.f_any_from_any(generic_map_1, anymap);
+    }
+    return output;
   }
 
   // vx_msg_from_error
@@ -766,7 +970,7 @@ public static class Core {
     Vx.Core.Type_any value,
     int indent,
     bool linefeed) {
-    string indenttext = vx_string_repeat(" ", indent);
+    string indenttext = Vx.Core.vx_string_repeat(" ", indent);
     string output = "";
     if (indent > 50) {
       output = "Error: Max Depth Exceeded";
@@ -955,6 +1159,53 @@ public static class Core {
     string output = sb.ToString();
     return output;
   }
+
+  public static Vx.Core.Type_string vx_string_repeat(Vx.Core.Type_string text, Vx.Core.Type_int repeat) {
+    string stext = Vx.Core.vx_string_repeat(text.vx_string(), repeat.vx_int());
+    Vx.Core.Type_string output = Vx.Core.vx_new_string(stext);
+    return output;
+  }
+
+  public static T vx_switch<T, U>(
+    T generic_any_1,
+    U val,
+    Vx.Core.Type_thenelselist thenelselist)
+    where T : Vx.Core.Type_any
+    where U : Vx.Core.Type_any {
+    T output = Vx.Core.f_empty(generic_any_1);
+    Vx.Core.Func_any_from_func fn_any = Vx.Core.e_any_from_func;
+    List<Vx.Core.Type_thenelse> listthenelse = thenelselist.vx_listthenelse();
+    foreach (Vx.Core.Type_thenelse thenelse in listthenelse) {
+      Vx.Core.Type_string code = thenelse.code();
+      switch (code.vx_string()) {
+      case ":case":
+        Vx.Core.Type_any value = thenelse.value();
+        Vx.Core.Type_boolean iseq = Vx.Core.f_eq(val, value);
+        if (iseq.vx_boolean()) {
+          fn_any = thenelse.fn_any();
+        }
+        break;
+      case ":casemany":
+        Vx.Core.Type_list values = thenelse.values();
+        Vx.Core.Type_boolean iscontain = Vx.Core.f_contains_1(values, val);
+        if (iscontain.vx_boolean()) {
+          fn_any = thenelse.fn_any();
+        }
+        break;
+      case ":else":
+        fn_any = thenelse.fn_any();
+        break;
+      }
+      if (fn_any != Vx.Core.e_any_from_func) {
+        break;
+      }
+    }
+    if (fn_any != Vx.Core.e_any_from_func) {
+      output = fn_any.vx_any_from_func(generic_any_1);
+    }
+    return output;
+  }
+
   public static Vx.Core.Type_typedef typedef_new(
     string pkgname,
     string name,
@@ -1028,9 +1279,8 @@ public static class Core {
   public class Class_any : Vx.Core.Class_base, Type_any {
 
     public override Vx.Core.Type_any vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_any,
-       vals);
+      Vx.Core.Type_any output = Vx.Core.vx_copy(Vx.Core.e_any, vals);
+      return output;
     }
 
     public override Vx.Core.Type_any vx_copy(params Object[] vals) {
@@ -1097,9 +1347,8 @@ public static class Core {
   public class Class_any_async_from_func : Vx.Core.Class_base, Type_any_async_from_func {
 
     public override Vx.Core.Type_any_async_from_func vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_any_async_from_func,
-       vals);
+      Vx.Core.Type_any_async_from_func output = Vx.Core.vx_copy(Vx.Core.e_any_async_from_func, vals);
+      return output;
     }
 
     public override Vx.Core.Type_any_async_from_func vx_copy(params Object[] vals) {
@@ -1189,9 +1438,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_any_from_anylist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_any_from_anylist,
-       vals);
+      Vx.Core.Type_any_from_anylist output = Vx.Core.vx_copy(Vx.Core.e_any_from_anylist, vals);
+      return output;
     }
 
     public override Vx.Core.Type_any_from_anylist vx_copy(params Object[] vals) {
@@ -1301,9 +1549,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_anylist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_anylist,
-       vals);
+      Vx.Core.Type_anylist output = Vx.Core.vx_copy(Vx.Core.e_anylist, vals);
+      return output;
     }
 
     public override Vx.Core.Type_anylist vx_copy(params Object[] vals) {
@@ -1395,7 +1642,7 @@ public static class Core {
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = this.vx_p_map;
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -1452,9 +1699,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_anymap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_anymap,
-       vals);
+      Vx.Core.Type_anymap output = Vx.Core.vx_copy(Vx.Core.e_anymap, vals);
+      return output;
     }
 
     public override Vx.Core.Type_anymap vx_copy(params Object[] vals) {
@@ -1571,9 +1817,8 @@ public static class Core {
   public class Class_anytype : Vx.Core.Class_base, Type_anytype {
 
     public override Vx.Core.Type_anytype vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_anytype,
-       vals);
+      Vx.Core.Type_anytype output = Vx.Core.vx_copy(Vx.Core.e_anytype, vals);
+      return output;
     }
 
     public override Vx.Core.Type_anytype vx_copy(params Object[] vals) {
@@ -1706,9 +1951,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_arg vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_arg,
-       vals);
+      Vx.Core.Type_arg output = Vx.Core.vx_copy(Vx.Core.e_arg, vals);
+      return output;
     }
 
     public override Vx.Core.Type_arg vx_copy(params Object[] vals) {
@@ -1949,9 +2193,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_arglist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_arglist,
-       vals);
+      Vx.Core.Type_arglist output = Vx.Core.vx_copy(Vx.Core.e_arglist, vals);
+      return output;
     }
 
     public override Vx.Core.Type_arglist vx_copy(params Object[] vals) {
@@ -2048,7 +2291,7 @@ public static class Core {
     public Vx.Core.Map<string, Vx.Core.Type_arg> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_arg>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Core.Type_arg>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -2113,9 +2356,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_argmap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_argmap,
-       vals);
+      Vx.Core.Type_argmap output = Vx.Core.vx_copy(Vx.Core.e_argmap, vals);
+      return output;
     }
 
     public override Vx.Core.Type_argmap vx_copy(params Object[] vals) {
@@ -2238,9 +2480,8 @@ public static class Core {
     public bool vx_boolean() {return vxboolean;}
 
     public override Vx.Core.Type_boolean vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_boolean,
-       vals);
+      Vx.Core.Type_boolean output = Vx.Core.vx_copy(Vx.Core.e_boolean, vals);
+      return output;
     }
 
     public override Vx.Core.Type_boolean vx_copy(params Object[] vals) {
@@ -2345,9 +2586,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_booleanlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_booleanlist,
-       vals);
+      Vx.Core.Type_booleanlist output = Vx.Core.vx_copy(Vx.Core.e_booleanlist, vals);
+      return output;
     }
 
     public override Vx.Core.Type_booleanlist vx_copy(params Object[] vals) {
@@ -2439,9 +2679,8 @@ public static class Core {
   public class Class_collection : Vx.Core.Class_base, Type_collection {
 
     public override Vx.Core.Type_collection vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_collection,
-       vals);
+      Vx.Core.Type_collection output = Vx.Core.vx_copy(Vx.Core.e_collection, vals);
+      return output;
     }
 
     public override Vx.Core.Type_collection vx_copy(params Object[] vals) {
@@ -2500,9 +2739,8 @@ public static class Core {
   public class Class_compilelanguages : Vx.Core.Class_base, Type_compilelanguages {
 
     public override Vx.Core.Type_compilelanguages vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_compilelanguages,
-       vals);
+      Vx.Core.Type_compilelanguages output = Vx.Core.vx_copy(Vx.Core.e_compilelanguages, vals);
+      return output;
     }
 
     public override Vx.Core.Type_compilelanguages vx_copy(params Object[] vals) {
@@ -2562,9 +2800,8 @@ public static class Core {
   public class Class_connect : Vx.Core.Class_base, Type_connect {
 
     public override Vx.Core.Type_connect vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_connect,
-       vals);
+      Vx.Core.Type_connect output = Vx.Core.vx_copy(Vx.Core.e_connect, vals);
+      return output;
     }
 
     public override Vx.Core.Type_connect vx_copy(params Object[] vals) {
@@ -2654,9 +2891,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_connectlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_connectlist,
-       vals);
+      Vx.Core.Type_connectlist output = Vx.Core.vx_copy(Vx.Core.e_connectlist, vals);
+      return output;
     }
 
     public override Vx.Core.Type_connectlist vx_copy(params Object[] vals) {
@@ -2753,7 +2989,7 @@ public static class Core {
     public Vx.Core.Map<string, Vx.Core.Type_connect> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_connect>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Core.Type_connect>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -2818,9 +3054,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_connectmap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_connectmap,
-       vals);
+      Vx.Core.Type_connectmap output = Vx.Core.vx_copy(Vx.Core.e_connectmap, vals);
+      return output;
     }
 
     public override Vx.Core.Type_connectmap vx_copy(params Object[] vals) {
@@ -2937,9 +3172,8 @@ public static class Core {
   public class Class_const : Vx.Core.Class_base, Type_const {
 
     public override Vx.Core.Type_const vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_const,
-       vals);
+      Vx.Core.Type_const output = Vx.Core.vx_copy(Vx.Core.e_const, vals);
+      return output;
     }
 
     public override Vx.Core.Type_const vx_copy(params Object[] vals) {
@@ -3057,9 +3291,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_constdef vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_constdef,
-       vals);
+      Vx.Core.Type_constdef output = Vx.Core.vx_copy(Vx.Core.e_constdef, vals);
+      return output;
     }
 
     public override Vx.Core.Type_constdef vx_copy(params Object[] vals) {
@@ -3267,9 +3500,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_constlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_constlist,
-       vals);
+      Vx.Core.Type_constlist output = Vx.Core.vx_copy(Vx.Core.e_constlist, vals);
+      return output;
     }
 
     public override Vx.Core.Type_constlist vx_copy(params Object[] vals) {
@@ -3361,7 +3593,7 @@ public static class Core {
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = this.vx_p_map;
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -3418,9 +3650,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_constmap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_constmap,
-       vals);
+      Vx.Core.Type_constmap output = Vx.Core.vx_copy(Vx.Core.e_constmap, vals);
+      return output;
     }
 
     public override Vx.Core.Type_constmap vx_copy(params Object[] vals) {
@@ -3610,9 +3841,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_context vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_context,
-       vals);
+      Vx.Core.Type_context output = Vx.Core.vx_copy(Vx.Core.e_context, vals);
+      return output;
     }
 
     public override Vx.Core.Type_context vx_copy(params Object[] vals) {
@@ -3820,9 +4050,8 @@ public static class Core {
   public class Class_date : Vx.Core.Class_base, Type_date {
 
     public override Vx.Core.Type_date vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_date,
-       vals);
+      Vx.Core.Type_date output = Vx.Core.vx_copy(Vx.Core.e_date, vals);
+      return output;
     }
 
     public override Vx.Core.Type_date vx_copy(params Object[] vals) {
@@ -3902,9 +4131,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_decimal vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_decimal,
-       vals);
+      Vx.Core.Type_decimal output = Vx.Core.vx_copy(Vx.Core.e_decimal, vals);
+      return output;
     }
 
     public override Vx.Core.Type_decimal vx_copy(params Object[] vals) {
@@ -3979,9 +4207,8 @@ public static class Core {
   public class Class_error : Vx.Core.Class_base, Type_error {
 
     public override Vx.Core.Type_error vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_error,
-       vals);
+      Vx.Core.Type_error output = Vx.Core.vx_copy(Vx.Core.e_error, vals);
+      return output;
     }
 
     public override Vx.Core.Type_error vx_copy(params Object[] vals) {
@@ -4047,9 +4274,8 @@ public static class Core {
     public float vx_float() {return vxfloat;}
 
     public override Vx.Core.Type_float vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_float,
-       vals);
+      Vx.Core.Type_float output = Vx.Core.vx_copy(Vx.Core.e_float, vals);
+      return output;
     }
 
     public override Vx.Core.Type_float vx_copy(params Object[] vals) {
@@ -4143,9 +4369,8 @@ public static class Core {
       return Vx.Core.e_funcdef;
     }
     public override Vx.Core.Type_func vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_func,
-       vals);
+      Vx.Core.Type_func output = Vx.Core.vx_copy(Vx.Core.e_func, vals);
+      return output;
     }
 
     public override Vx.Core.Type_func vx_copy(params Object[] vals) {
@@ -4293,9 +4518,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_funcdef vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_funcdef,
-       vals);
+      Vx.Core.Type_funcdef output = Vx.Core.vx_copy(Vx.Core.e_funcdef, vals);
+      return output;
     }
 
     public override Vx.Core.Type_funcdef vx_copy(params Object[] vals) {
@@ -4565,9 +4789,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_funclist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_funclist,
-       vals);
+      Vx.Core.Type_funclist output = Vx.Core.vx_copy(Vx.Core.e_funclist, vals);
+      return output;
     }
 
     public override Vx.Core.Type_funclist vx_copy(params Object[] vals) {
@@ -4664,7 +4887,7 @@ public static class Core {
     public Vx.Core.Map<string, Vx.Core.Type_func> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_func>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Core.Type_func>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -4729,9 +4952,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_funcmap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_funcmap,
-       vals);
+      Vx.Core.Type_funcmap output = Vx.Core.vx_copy(Vx.Core.e_funcmap, vals);
+      return output;
     }
 
     public override Vx.Core.Type_funcmap vx_copy(params Object[] vals) {
@@ -4854,9 +5076,8 @@ public static class Core {
     public int vx_int() {return vxint;}
 
     public override Vx.Core.Type_int vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_int,
-       vals);
+      Vx.Core.Type_int output = Vx.Core.vx_copy(Vx.Core.e_int, vals);
+      return output;
     }
 
     public override Vx.Core.Type_int vx_copy(params Object[] vals) {
@@ -4964,9 +5185,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_intlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_intlist,
-       vals);
+      Vx.Core.Type_intlist output = Vx.Core.vx_copy(Vx.Core.e_intlist, vals);
+      return output;
     }
 
     public override Vx.Core.Type_intlist vx_copy(params Object[] vals) {
@@ -5063,7 +5283,7 @@ public static class Core {
     public Vx.Core.Map<string, Vx.Core.Type_int> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_int>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Core.Type_int>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -5128,9 +5348,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_intmap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_intmap,
-       vals);
+      Vx.Core.Type_intmap output = Vx.Core.vx_copy(Vx.Core.e_intmap, vals);
+      return output;
     }
 
     public override Vx.Core.Type_intmap vx_copy(params Object[] vals) {
@@ -5269,9 +5488,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_list vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_list,
-       vals);
+      Vx.Core.Type_list output = Vx.Core.vx_copy(Vx.Core.e_list, vals);
+      return output;
     }
 
     public override Vx.Core.Type_list vx_copy(params Object[] vals) {
@@ -5361,9 +5579,8 @@ public static class Core {
   public class Class_listtype : Vx.Core.Class_base, Type_listtype {
 
     public override Vx.Core.Type_listtype vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_listtype,
-       vals);
+      Vx.Core.Type_listtype output = Vx.Core.vx_copy(Vx.Core.e_listtype, vals);
+      return output;
     }
 
     public override Vx.Core.Type_listtype vx_copy(params Object[] vals) {
@@ -5433,9 +5650,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_locale vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_locale,
-       vals);
+      Vx.Core.Type_locale output = Vx.Core.vx_copy(Vx.Core.e_locale, vals);
+      return output;
     }
 
     public override Vx.Core.Type_locale vx_copy(params Object[] vals) {
@@ -5501,7 +5717,7 @@ public static class Core {
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = this.vx_p_map;
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -5558,9 +5774,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_map vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_map,
-       vals);
+      Vx.Core.Type_map output = Vx.Core.vx_copy(Vx.Core.e_map, vals);
+      return output;
     }
 
     public override Vx.Core.Type_map vx_copy(params Object[] vals) {
@@ -5677,9 +5892,8 @@ public static class Core {
   public class Class_maptype : Vx.Core.Class_base, Type_maptype {
 
     public override Vx.Core.Type_maptype vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_maptype,
-       vals);
+      Vx.Core.Type_maptype output = Vx.Core.vx_copy(Vx.Core.e_maptype, vals);
+      return output;
     }
 
     public override Vx.Core.Type_maptype vx_copy(params Object[] vals) {
@@ -5767,9 +5981,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_mempool vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_mempool,
-       vals);
+      Vx.Core.Type_mempool output = Vx.Core.vx_copy(Vx.Core.e_mempool, vals);
+      return output;
     }
 
     public override Vx.Core.Type_mempool vx_copy(params Object[] vals) {
@@ -5995,9 +6208,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_msg vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_msg,
-       vals);
+      Vx.Core.Type_msg output = Vx.Core.vx_copy(Vx.Core.e_msg, vals);
+      return output;
     }
 
     public override Vx.Core.Type_msg vx_copy(params Object[] vals) {
@@ -6172,9 +6384,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_msgblock vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_msgblock,
-       vals);
+      Vx.Core.Type_msgblock output = Vx.Core.vx_copy(Vx.Core.e_msgblock, vals);
+      return output;
     }
 
     public override Vx.Core.Type_msgblock vx_copy(params Object[] vals) {
@@ -6350,9 +6561,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_msgblocklist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_msgblocklist,
-       vals);
+      Vx.Core.Type_msgblocklist output = Vx.Core.vx_copy(Vx.Core.e_msgblocklist, vals);
+      return output;
     }
 
     public override Vx.Core.Type_msgblocklist vx_copy(params Object[] vals) {
@@ -6470,9 +6680,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_msglist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_msglist,
-       vals);
+      Vx.Core.Type_msglist output = Vx.Core.vx_copy(Vx.Core.e_msglist, vals);
+      return output;
     }
 
     public override Vx.Core.Type_msglist vx_copy(params Object[] vals) {
@@ -6560,9 +6769,8 @@ public static class Core {
   public class Class_none : Vx.Core.Class_base, Type_none {
 
     public override Vx.Core.Type_none vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_none,
-       vals);
+      Vx.Core.Type_none output = Vx.Core.vx_copy(Vx.Core.e_none, vals);
+      return output;
     }
 
     public override Vx.Core.Type_none vx_copy(params Object[] vals) {
@@ -6622,9 +6830,8 @@ public static class Core {
   public class Class_notype : Vx.Core.Class_base, Type_notype {
 
     public override Vx.Core.Type_notype vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_notype,
-       vals);
+      Vx.Core.Type_notype output = Vx.Core.vx_copy(Vx.Core.e_notype, vals);
+      return output;
     }
 
     public override Vx.Core.Type_notype vx_copy(params Object[] vals) {
@@ -6684,9 +6891,8 @@ public static class Core {
   public class Class_number : Vx.Core.Class_base, Type_number {
 
     public override Vx.Core.Type_number vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_number,
-       vals);
+      Vx.Core.Type_number output = Vx.Core.vx_copy(Vx.Core.e_number, vals);
+      return output;
     }
 
     public override Vx.Core.Type_number vx_copy(params Object[] vals) {
@@ -6776,9 +6982,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_numberlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_numberlist,
-       vals);
+      Vx.Core.Type_numberlist output = Vx.Core.vx_copy(Vx.Core.e_numberlist, vals);
+      return output;
     }
 
     public override Vx.Core.Type_numberlist vx_copy(params Object[] vals) {
@@ -6875,7 +7080,7 @@ public static class Core {
     public Vx.Core.Map<string, Vx.Core.Type_number> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_number>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Core.Type_number>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -6940,9 +7145,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_numbermap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_numbermap,
-       vals);
+      Vx.Core.Type_numbermap output = Vx.Core.vx_copy(Vx.Core.e_numbermap, vals);
+      return output;
     }
 
     public override Vx.Core.Type_numbermap vx_copy(params Object[] vals) {
@@ -7147,9 +7351,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_package vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_package,
-       vals);
+      Vx.Core.Type_package output = Vx.Core.vx_copy(Vx.Core.e_package, vals);
+      return output;
     }
 
     public override Vx.Core.Type_package vx_copy(params Object[] vals) {
@@ -7383,7 +7586,7 @@ public static class Core {
     public Vx.Core.Map<string, Vx.Core.Type_package> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_package>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Core.Type_package>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -7448,9 +7651,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_packagemap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_packagemap,
-       vals);
+      Vx.Core.Type_packagemap output = Vx.Core.vx_copy(Vx.Core.e_packagemap, vals);
+      return output;
     }
 
     public override Vx.Core.Type_packagemap vx_copy(params Object[] vals) {
@@ -7595,9 +7797,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_permission vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_permission,
-       vals);
+      Vx.Core.Type_permission output = Vx.Core.vx_copy(Vx.Core.e_permission, vals);
+      return output;
     }
 
     public override Vx.Core.Type_permission vx_copy(params Object[] vals) {
@@ -7766,9 +7967,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_permissionlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_permissionlist,
-       vals);
+      Vx.Core.Type_permissionlist output = Vx.Core.vx_copy(Vx.Core.e_permissionlist, vals);
+      return output;
     }
 
     public override Vx.Core.Type_permissionlist vx_copy(params Object[] vals) {
@@ -7865,7 +8065,7 @@ public static class Core {
     public Vx.Core.Map<string, Vx.Core.Type_permission> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_permission>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Core.Type_permission>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -7930,9 +8130,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_permissionmap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_permissionmap,
-       vals);
+      Vx.Core.Type_permissionmap output = Vx.Core.vx_copy(Vx.Core.e_permissionmap, vals);
+      return output;
     }
 
     public override Vx.Core.Type_permissionmap vx_copy(params Object[] vals) {
@@ -8077,9 +8276,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_project vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_project,
-       vals);
+      Vx.Core.Type_project output = Vx.Core.vx_copy(Vx.Core.e_project, vals);
+      return output;
     }
 
     public override Vx.Core.Type_project vx_copy(params Object[] vals) {
@@ -8273,9 +8471,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_security vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_security,
-       vals);
+      Vx.Core.Type_security output = Vx.Core.vx_copy(Vx.Core.e_security, vals);
+      return output;
     }
 
     public override Vx.Core.Type_security vx_copy(params Object[] vals) {
@@ -8560,9 +8757,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_session vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_session,
-       vals);
+      Vx.Core.Type_session output = Vx.Core.vx_copy(Vx.Core.e_session, vals);
+      return output;
     }
 
     public override Vx.Core.Type_session vx_copy(params Object[] vals) {
@@ -8841,9 +9037,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_setting vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_setting,
-       vals);
+      Vx.Core.Type_setting output = Vx.Core.vx_copy(Vx.Core.e_setting, vals);
+      return output;
     }
 
     public override Vx.Core.Type_setting vx_copy(params Object[] vals) {
@@ -9007,9 +9202,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_state vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_state,
-       vals);
+      Vx.Core.Type_state output = Vx.Core.vx_copy(Vx.Core.e_state, vals);
+      return output;
     }
 
     public override Vx.Core.Type_state vx_copy(params Object[] vals) {
@@ -9202,9 +9396,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_statelistener vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_statelistener,
-       vals);
+      Vx.Core.Type_statelistener output = Vx.Core.vx_copy(Vx.Core.e_statelistener, vals);
+      return output;
     }
 
     public override Vx.Core.Type_statelistener vx_copy(params Object[] vals) {
@@ -9393,7 +9586,7 @@ public static class Core {
     public Vx.Core.Map<string, Vx.Core.Type_statelistener> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_statelistener>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Core.Type_statelistener>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -9458,9 +9651,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_statelistenermap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_statelistenermap,
-       vals);
+      Vx.Core.Type_statelistenermap output = Vx.Core.vx_copy(Vx.Core.e_statelistenermap, vals);
+      return output;
     }
 
     public override Vx.Core.Type_statelistenermap vx_copy(params Object[] vals) {
@@ -9585,9 +9777,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_string vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_string,
-       vals);
+      Vx.Core.Type_string output = Vx.Core.vx_copy(Vx.Core.e_string, vals);
+      return output;
     }
 
     public override Vx.Core.Type_string vx_copy(params Object[] vals) {
@@ -9722,9 +9913,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_stringlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_stringlist,
-       vals);
+      Vx.Core.Type_stringlist output = Vx.Core.vx_copy(Vx.Core.e_stringlist, vals);
+      return output;
     }
 
     public override Vx.Core.Type_stringlist vx_copy(params Object[] vals) {
@@ -9847,9 +10037,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_stringlistlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_stringlistlist,
-       vals);
+      Vx.Core.Type_stringlistlist output = Vx.Core.vx_copy(Vx.Core.e_stringlistlist, vals);
+      return output;
     }
 
     public override Vx.Core.Type_stringlistlist vx_copy(params Object[] vals) {
@@ -9946,7 +10135,7 @@ public static class Core {
     public Vx.Core.Map<string, Vx.Core.Type_string> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_string>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Core.Type_string>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -10011,9 +10200,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_stringmap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_stringmap,
-       vals);
+      Vx.Core.Type_stringmap output = Vx.Core.vx_copy(Vx.Core.e_stringmap, vals);
+      return output;
     }
 
     public override Vx.Core.Type_stringmap vx_copy(params Object[] vals) {
@@ -10134,7 +10322,7 @@ public static class Core {
     public Vx.Core.Map<string, Vx.Core.Type_string> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_string>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Core.Type_string>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -10199,9 +10387,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_stringmutablemap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_stringmutablemap,
-       vals);
+      Vx.Core.Type_stringmutablemap output = Vx.Core.vx_copy(Vx.Core.e_stringmutablemap, vals);
+      return output;
     }
 
     public override Vx.Core.Type_stringmutablemap vx_copy(params Object[] vals) {
@@ -10330,9 +10517,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_struct vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_struct,
-       vals);
+      Vx.Core.Type_struct output = Vx.Core.vx_copy(Vx.Core.e_struct, vals);
+      return output;
     }
 
     public override Vx.Core.Type_struct vx_copy(params Object[] vals) {
@@ -10479,9 +10665,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_thenelse vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_thenelse,
-       vals);
+      Vx.Core.Type_thenelse output = Vx.Core.vx_copy(Vx.Core.e_thenelse, vals);
+      return output;
     }
 
     public override Vx.Core.Type_thenelse vx_copy(params Object[] vals) {
@@ -10741,9 +10926,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_thenelselist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_thenelselist,
-       vals);
+      Vx.Core.Type_thenelselist output = Vx.Core.vx_copy(Vx.Core.e_thenelselist, vals);
+      return output;
     }
 
     public override Vx.Core.Type_thenelselist vx_copy(params Object[] vals) {
@@ -10879,9 +11063,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_translation vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_translation,
-       vals);
+      Vx.Core.Type_translation output = Vx.Core.vx_copy(Vx.Core.e_translation, vals);
+      return output;
     }
 
     public override Vx.Core.Type_translation vx_copy(params Object[] vals) {
@@ -11073,9 +11256,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_translationlist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_translationlist,
-       vals);
+      Vx.Core.Type_translationlist output = Vx.Core.vx_copy(Vx.Core.e_translationlist, vals);
+      return output;
     }
 
     public override Vx.Core.Type_translationlist vx_copy(params Object[] vals) {
@@ -11172,7 +11354,7 @@ public static class Core {
     public Vx.Core.Map<string, Vx.Core.Type_translation> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_translation>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = Vx.Core.vx_map_from_map<Vx.Core.Type_any, Vx.Core.Type_translation>(this.vx_p_map);
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -11237,9 +11419,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_translationmap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_translationmap,
-       vals);
+      Vx.Core.Type_translationmap output = Vx.Core.vx_copy(Vx.Core.e_translationmap, vals);
+      return output;
     }
 
     public override Vx.Core.Type_translationmap vx_copy(params Object[] vals) {
@@ -11356,9 +11537,8 @@ public static class Core {
   public class Class_type : Vx.Core.Class_base, Type_type {
 
     public override Vx.Core.Type_type vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_type,
-       vals);
+      Vx.Core.Type_type output = Vx.Core.vx_copy(Vx.Core.e_type, vals);
+      return output;
     }
 
     public override Vx.Core.Type_type vx_copy(params Object[] vals) {
@@ -11611,9 +11791,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_typedef vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_typedef,
-       vals);
+      Vx.Core.Type_typedef output = Vx.Core.vx_copy(Vx.Core.e_typedef, vals);
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_copy(params Object[] vals) {
@@ -12031,9 +12210,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_typelist vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_typelist,
-       vals);
+      Vx.Core.Type_typelist output = Vx.Core.vx_copy(Vx.Core.e_typelist, vals);
+      return output;
     }
 
     public override Vx.Core.Type_typelist vx_copy(params Object[] vals) {
@@ -12125,7 +12303,7 @@ public static class Core {
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = this.vx_p_map;
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -12182,9 +12360,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_typemap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_typemap,
-       vals);
+      Vx.Core.Type_typemap output = Vx.Core.vx_copy(Vx.Core.e_typemap, vals);
+      return output;
     }
 
     public override Vx.Core.Type_typemap vx_copy(params Object[] vals) {
@@ -12359,9 +12536,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_user vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_user,
-       vals);
+      Vx.Core.Type_user output = Vx.Core.vx_copy(Vx.Core.e_user, vals);
+      return output;
     }
 
     public override Vx.Core.Type_user vx_copy(params Object[] vals) {
@@ -12591,9 +12767,8 @@ public static class Core {
     }
 
     public override Vx.Core.Type_value vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_value,
-       vals);
+      Vx.Core.Type_value output = Vx.Core.vx_copy(Vx.Core.e_value, vals);
+      return output;
     }
 
     public override Vx.Core.Type_value vx_copy(params Object[] vals) {
@@ -13393,6 +13568,7 @@ public static class Core {
 
   public static Vx.Core.Type_boolean f_not(Vx.Core.Type_boolean val) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
+    output = Vx.Core.vx_new_boolean(!val.vx_boolean());
     return output;
   }
 
@@ -13825,6 +14001,8 @@ public static class Core {
 
   public static Vx.Core.Type_int f_multiply(Vx.Core.Type_int num1, Vx.Core.Type_int num2) {
     Vx.Core.Type_int output = Vx.Core.e_int;
+    int result = num1.vx_int() * num2.vx_int();
+    output = Vx.Core.vx_new_int(result);
     return output;
   }
 
@@ -13905,6 +14083,8 @@ public static class Core {
 
   public static Vx.Core.Type_number f_multiply_1(Vx.Core.Type_number num1, Vx.Core.Type_number num2) {
     Vx.Core.Type_number output = Vx.Core.e_number;
+    float result = Vx.Core.vx_float_from_number(num1) * Vx.Core.vx_float_from_number(num2);
+    output = Vx.Core.vx_new_float(result);
     return output;
   }
 
@@ -14189,6 +14369,8 @@ public static class Core {
 
   public static Vx.Core.Type_int f_plus(Vx.Core.Type_int num1, Vx.Core.Type_int num2) {
     Vx.Core.Type_int output = Vx.Core.e_int;
+    int result = num1.vx_int() + num2.vx_int();
+    output = Vx.Core.vx_new_int(result);
     return output;
   }
 
@@ -14269,6 +14451,8 @@ public static class Core {
 
   public static Vx.Core.Type_number f_plus_1(Vx.Core.Type_number num1, Vx.Core.Type_number num2) {
     Vx.Core.Type_number output = Vx.Core.e_number;
+    float result = Vx.Core.vx_float_from_number(num1) + Vx.Core.vx_float_from_number(num2);
+    output = Vx.Core.vx_new_float(result);
     return output;
   }
 
@@ -14644,6 +14828,8 @@ public static class Core {
 
   public static Vx.Core.Type_int f_minus(Vx.Core.Type_int num1, Vx.Core.Type_int num2) {
     Vx.Core.Type_int output = Vx.Core.e_int;
+    int result = num1.vx_int() - num2.vx_int();
+    output = Vx.Core.vx_new_int(result);
     return output;
   }
 
@@ -14724,6 +14910,8 @@ public static class Core {
 
   public static Vx.Core.Type_number f_minus_1(Vx.Core.Type_number num1, Vx.Core.Type_number num2) {
     Vx.Core.Type_number output = Vx.Core.e_number;
+    float result = Vx.Core.vx_float_from_number(num1) - Vx.Core.vx_float_from_number(num2);
+    output = Vx.Core.vx_new_float(result);
     return output;
   }
 
@@ -15181,6 +15369,15 @@ public static class Core {
 
   public static Vx.Core.Type_number f_divide(Vx.Core.Type_number num1, Vx.Core.Type_number num2) {
     Vx.Core.Type_number output = Vx.Core.e_number;
+    float float1 = Vx.Core.vx_float_from_number(num1);
+    float float2 = Vx.Core.vx_float_from_number(num2);
+    if (float1 == 0) {
+    } else if (float2 == 0) {
+      output = Vx.Core.c_notanumber;
+    } else {
+      float result = float1 / float2;
+      output = Vx.Core.vx_new_float(result);
+    };
     return output;
   }
 
@@ -15806,6 +16003,17 @@ public static class Core {
 
   public static Vx.Core.Type_boolean f_eq(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
+    bool isequal = false;
+    if (val1 == val2) {
+      isequal = true;
+    } else {
+      Vx.Core.Type_string strval1 = Vx.Core.f_string_from_any(val1);
+      Vx.Core.Type_string strval2 = Vx.Core.f_string_from_any(val2);
+      if (strval1.vx_string() == (strval2.vx_string())) {
+        isequal = true;
+      }
+    }
+    output = Vx.Core.vx_new_boolean(isequal);
     return output;
   }
 
@@ -15992,6 +16200,8 @@ public static class Core {
 
   public static Vx.Core.Type_boolean f_eqeq(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
+    bool isequal = Vx.Core.vx_eqeq(val1, val2);
+    output = Vx.Core.vx_new_boolean(isequal);
     return output;
   }
 
@@ -16645,6 +16855,7 @@ public static class Core {
 
   public static Vx.Core.Type_typelist f_allowtypes_from_typedef(Vx.Core.Type_typedef vtypedef) {
     Vx.Core.Type_typelist output = Vx.Core.e_typelist;
+    output = vtypedef.allowtypes();
     return output;
   }
 
@@ -16725,6 +16936,11 @@ public static class Core {
 
   public static Vx.Core.Type_boolean f_and(Vx.Core.Type_boolean val1, Vx.Core.Type_boolean val2) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
+    if (val1.vx_boolean() && val2.vx_boolean()) {
+      output = Core.c_true;
+    } else {
+      output = Core.c_false;
+    };
     return output;
   }
 
@@ -16948,6 +17164,9 @@ public static class Core {
 
   public static T f_any_from_any<T, U>(T generic_any_1, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
+    if (value is T tval) {
+      output = tval;
+    };
     return output;
   }
 
@@ -17144,6 +17363,9 @@ public static class Core {
 
   public static T f_any_from_any_context<T, U>(T generic_any_1, Vx.Core.Type_context context, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
+    if (value is T tval) {
+      output = tval;
+    };
     return output;
   }
 
@@ -18007,6 +18229,13 @@ public static class Core {
 
   public static T f_any_from_list<T, X>(T generic_any_1, X values, Vx.Core.Type_int index) where T : Vx.Core.Type_any where X : Vx.Core.Type_list {
     T output = Vx.Core.f_empty(generic_any_1);
+    int intindex = index.vx_int();
+    int intsize = values.vx_list().Count;
+    if (intindex <= intsize) {
+      List<Vx.Core.Type_any> listvalue = values.vx_list();
+      Vx.Core.Type_any value = listvalue[intindex - 1];
+      output = Vx.Core.f_any_from_any(generic_any_1, value);
+    };
     return output;
   }
 
@@ -18174,6 +18403,7 @@ public static class Core {
 
   public static T f_any_from_list_start_reduce_next<T, Y>(T generic_any_1, Y list, T valstart, Vx.Core.Func_any_from_reduce_next fn_reduce_next) where T : Vx.Core.Type_any where Y : Vx.Core.Type_list {
     T output = Vx.Core.f_empty(generic_any_1);
+    output = Vx.Core.vx_any_from_list_start_reduce_next(generic_any_1, list, valstart, fn_reduce_next);
     return output;
   }
 
@@ -18255,6 +18485,7 @@ public static class Core {
 
   public static T f_any_from_map<N, T>(T generic_any_1, N valuemap, Vx.Core.Type_string key) where N : Vx.Core.Type_map where T : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
+    output = Vx.Core.vx_any_from_map(generic_any_1, valuemap, key);
     return output;
   }
 
@@ -19822,6 +20053,7 @@ public static class Core {
 
   public static Vx.Core.Type_int f_compare(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
     Vx.Core.Type_int output = Vx.Core.e_int;
+    output = Vx.Core.vx_compare(val1, val2);
     return output;
   }
 
@@ -19902,6 +20134,8 @@ public static class Core {
 
   public static Vx.Core.Type_boolean f_contains(Vx.Core.Type_string text, Vx.Core.Type_string find) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
+    bool check = vx_boolean_from_string_find(text.vx_string(), find.vx_string());
+    output = Vx.Core.vx_new_boolean(check);
     return output;
   }
 
@@ -19982,6 +20216,7 @@ public static class Core {
 
   public static Vx.Core.Type_boolean f_contains_1(Vx.Core.Type_list values, Vx.Core.Type_any find) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
+    output = Vx.Core.vx_contains_1(values, find);
     return output;
   }
 
@@ -20701,6 +20936,13 @@ public static class Core {
 
   public static T f_first_from_list_any_from_any<T, X>(T generic_any_1, X values, Vx.Core.Func_any_from_any fn_any_from_any) where T : Vx.Core.Type_any where X : Vx.Core.Type_list {
     T output = Vx.Core.f_empty(generic_any_1);
+    List<Vx.Core.Type_any> listvalue = values.vx_list();
+    foreach (Vx.Core.Type_any value in listvalue) {
+      if (value != Vx.Core.c_nothing) {
+        output = fn_any_from_any.vx_any_from_any(generic_any_1, value);
+        break;
+      }
+    };
     return output;
   }
 
@@ -20791,6 +21033,8 @@ public static class Core {
 
   public static Vx.Core.Type_float f_float_from_string(Vx.Core.Type_string text) {
     Vx.Core.Type_float output = Vx.Core.e_float;
+    float num = Vx.Core.vx_float_from_string(text.vx_string());
+    output = Vx.Core.vx_new_float(num);
     return output;
   }
 
@@ -20877,6 +21121,7 @@ public static class Core {
 
   /**
    * @function funcdef_from_func
+   * Returns the definition of a function
    * @param  {func} val
    * @return {funcdef}
    * (func funcdef<-func)
@@ -20961,6 +21206,7 @@ public static class Core {
 
   public static Vx.Core.Type_funcdef f_funcdef_from_func(Vx.Core.Type_func val) {
     Vx.Core.Type_funcdef output = Vx.Core.e_funcdef;
+    output = val.vx_funcdef();
     return output;
   }
 
@@ -21140,6 +21386,9 @@ public static class Core {
 
   public static T f_if<T>(T generic_any_1, Vx.Core.Type_boolean clause, T then) where T : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
+    if (clause.vx_boolean()) {
+      output = then;
+    };
     return output;
   }
 
@@ -21223,6 +21472,11 @@ public static class Core {
 
   public static T f_if_1<T>(T generic_any_1, Vx.Core.Type_boolean clause, T thenval, T elseval) where T : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
+    if (clause.vx_boolean()) {
+      output = thenval;
+    } else {
+      output = elseval;
+    };
     return output;
   }
 
@@ -21616,6 +21870,9 @@ public static class Core {
 
   public static Vx.Core.Type_boolean f_is_empty(Vx.Core.Type_string text) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
+    if (text.vx_string().Length == 0) {
+      output = Vx.Core.c_true;
+    };
     return output;
   }
 
@@ -21706,6 +21963,11 @@ public static class Core {
 
   public static Vx.Core.Type_boolean f_is_empty_1(Vx.Core.Type_any value) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
+    if (value == value.vx_empty()) {
+      output = Vx.Core.c_true;
+    } else {
+      output = Vx.Core.c_false;
+    };
     return output;
   }
 
@@ -21881,6 +22143,8 @@ public static class Core {
 
   public static Vx.Core.Type_boolean f_is_float(Vx.Core.Type_any value) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
+    bool result = Vx.Core.vx_is_float(value);
+    output = Vx.Core.vx_new_boolean(result);
     return output;
   }
 
@@ -21971,6 +22235,9 @@ public static class Core {
 
   public static Vx.Core.Type_boolean f_is_func(Vx.Core.Type_any val) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
+    if (val is Vx.Core.Type_func) {
+      output = Vx.Core.c_true;
+    };
     return output;
   }
 
@@ -22061,6 +22328,8 @@ public static class Core {
 
   public static Vx.Core.Type_boolean f_is_int(Vx.Core.Type_any value) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
+    bool result = Vx.Core.vx_is_int(value);
+    output = Vx.Core.vx_new_boolean(result);
     return output;
   }
 
@@ -22465,6 +22734,8 @@ public static class Core {
 
   public static Vx.Core.Type_int f_length(Vx.Core.Type_string text) {
     Vx.Core.Type_int output = Vx.Core.e_int;
+    int len = text.vx_string().Length;
+    output = Vx.Core.vx_new_int(len);
     return output;
   }
 
@@ -22555,6 +22826,8 @@ public static class Core {
 
   public static Vx.Core.Type_int f_length_1(Vx.Core.Type_list values) {
     Vx.Core.Type_int output = Vx.Core.e_int;
+    int intresult = values.vx_list().Count();
+    output = Core.vx_new_int(intresult);
     return output;
   }
 
@@ -22727,6 +23000,7 @@ public static class Core {
 
   public static T f_let<T>(T generic_any_1, Vx.Core.Func_any_from_func fn_any) where T : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
+    output = fn_any.vx_any_from_func(generic_any_1);
     return output;
   }
 
@@ -22810,6 +23084,7 @@ public static class Core {
 
   public static Task<T> f_let_async<T>(T generic_any_1, Vx.Core.Func_any_from_func_async fn_any_async) where T : Vx.Core.Type_any {
     Task<T> output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_any_1));
+    output = fn_any_async.vx_any_from_func_async(generic_any_1);
     return output;
   }
 
@@ -22991,6 +23266,7 @@ public static class Core {
 
   public static X f_list_join_from_list_1<X, Y>(X generic_list_1, Y values, Vx.Core.Func_any_from_any fn_any_from_any) where X : Vx.Core.Type_list where Y : Vx.Core.Type_list {
     X output = Vx.Core.f_empty(generic_list_1);
+    output = Vx.Core.vx_list_join_from_list_1(generic_list_1, values, fn_any_from_any);
     return output;
   }
 
@@ -23172,6 +23448,7 @@ public static class Core {
 
   public static X f_list_from_list_1<X, Y>(X generic_list_1, Y values, Vx.Core.Func_any_from_any fn_any_from_any) where X : Vx.Core.Type_list where Y : Vx.Core.Type_list {
     X output = Vx.Core.f_empty(generic_list_1);
+    output = Vx.Core.vx_list_from_list_1(generic_list_1, values, fn_any_from_any);
     return output;
   }
 
@@ -23256,6 +23533,7 @@ public static class Core {
 
   public static Task<X> f_list_from_list_async<X, Y>(X generic_list_1, Y values, Vx.Core.Func_any_from_any_async fn_any_from_any_async) where X : Vx.Core.Type_list where Y : Vx.Core.Type_list {
     Task<X> output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_list_1));
+    output = Vx.Core.vx_list_from_list_async(generic_list_1, values, fn_any_from_any_async);
     return output;
   }
 
@@ -23520,6 +23798,7 @@ public static class Core {
 
   public static X f_list_from_map_1<O, X>(X generic_list_1, O valuemap, Vx.Core.Func_any_from_key_value fn_any_from_key_value) where O : Vx.Core.Type_map where X : Vx.Core.Type_list {
     X output = Vx.Core.f_empty(generic_list_1);
+    output = Vx.Core.vx_list_from_map_1(generic_list_1, valuemap, fn_any_from_key_value);
     return output;
   }
 
@@ -23783,6 +24062,8 @@ public static class Core {
 
   public static Vx.Core.Type_any f_log(Vx.Core.Type_any value) {
     Vx.Core.Type_any output = Vx.Core.e_any;
+    Vx.Core.vx_log(value);
+    output = value;
     return output;
   }
 
@@ -23864,6 +24145,9 @@ public static class Core {
 
   public static T f_log_1<T>(T generic_any_1, Vx.Core.Type_string text, T value) where T : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
+    Vx.Core.vx_log(text);
+    Vx.Core.vx_log(value);
+    output = value;
     return output;
   }
 
@@ -24039,6 +24323,7 @@ public static class Core {
 
   public static N f_map_from_list<N, Y>(N generic_map_1, Y vallist, Vx.Core.Func_any_from_any fn_any_from_any) where N : Vx.Core.Type_map where Y : Vx.Core.Type_list {
     N output = Vx.Core.f_empty(generic_map_1);
+    output = Vx.Core.vx_map_from_list(generic_map_1, vallist, fn_any_from_any);
     return output;
   }
 
@@ -24221,6 +24506,7 @@ public static class Core {
 
   public static N f_map_from_map_1<N, O>(N generic_map_1, O valuemap, Vx.Core.Func_any_from_key_value fn_any_from_key_value) where N : Vx.Core.Type_map where O : Vx.Core.Type_map {
     N output = Vx.Core.f_empty(generic_map_1);
+    output = Vx.Core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);
     return output;
   }
 
@@ -25284,6 +25570,11 @@ public static class Core {
 
   public static Vx.Core.Type_boolean f_or(Vx.Core.Type_boolean val1, Vx.Core.Type_boolean val2) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
+    if (val1.vx_boolean() || val2.vx_boolean()) {
+      output = Vx.Core.c_true;
+    } else {
+      output = Vx.Core.c_false;
+    };
     return output;
   }
 
@@ -26215,6 +26506,9 @@ public static class Core {
 
   public static T f_resolve_1<T>(T generic_any_1, Vx.Core.Func_any_from_func fn_any) where T : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
+    if (fn_any != null) {
+      output = fn_any.vx_any_from_func(generic_any_1);
+    };
     return output;
   }
 
@@ -26306,6 +26600,9 @@ public static class Core {
 
   public static Task<T> f_resolve_async<T>(T generic_any_1, Vx.Core.Func_any_from_func_async fn_any) where T : Vx.Core.Type_any {
     Task<T> output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_any_1));
+    if (fn_any != null) {
+      output = fn_any.vx_any_from_func_async(generic_any_1);
+    };
     return output;
   }
 
@@ -26903,6 +27200,7 @@ public static class Core {
 
   public static Vx.Core.Type_string f_string_repeat(Vx.Core.Type_string text, Vx.Core.Type_int repeat) {
     Vx.Core.Type_string output = Vx.Core.e_string;
+    output = Vx.Core.vx_string_repeat(text, repeat);
     return output;
   }
 
@@ -27430,6 +27728,7 @@ public static class Core {
 
   public static T f_switch<T, U>(T generic_any_1, U val, Vx.Core.Type_thenelselist thenelselist) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
+    output = Vx.Core.vx_switch(generic_any_1, val, thenelselist);
     return output;
   }
 
@@ -27611,6 +27910,7 @@ public static class Core {
 
   public static Vx.Core.Type_typelist f_traits_from_typedef(Vx.Core.Type_typedef vtypedef) {
     Vx.Core.Type_typelist output = Vx.Core.e_typelist;
+    output = vtypedef.traits();
     return output;
   }
 
@@ -27701,6 +28001,7 @@ public static class Core {
 
   public static Vx.Core.Type_any f_type_from_any(Vx.Core.Type_any value) {
     Vx.Core.Type_any output = Vx.Core.e_any;
+    output = value.vx_type();
     return output;
   }
 
@@ -27884,6 +28185,7 @@ public static class Core {
 
   public static Vx.Core.Type_typedef f_typedef_from_type(Vx.Core.Type_any val) {
     Vx.Core.Type_typedef output = Vx.Core.e_typedef;
+    output = val.vx_typedef();
     return output;
   }
 

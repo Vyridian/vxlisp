@@ -15,7 +15,7 @@ public static class State {
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = this.vx_p_map;
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
@@ -72,9 +72,8 @@ public static class State {
     }
 
     public override Vx.State.Type_valuemap vx_new(params Object[] vals) {
-      return Vx.Core.vx_copy(
-       e_valuemap,
-       vals);
+      Vx.State.Type_valuemap output = Vx.Core.vx_copy(Vx.State.e_valuemap, vals);
+      return output;
     }
 
     public override Vx.State.Type_valuemap vx_copy(params Object[] vals) {

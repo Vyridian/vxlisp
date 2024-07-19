@@ -136,9 +136,8 @@ public final class Xml {
 
     @Override
     public Xml.Type_xml vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_xml,
-       vals);
+      Xml.Type_xml output = Core.vx_copy(Xml.e_xml, vals);
+      return output;
     }
 
     @Override
@@ -455,9 +454,8 @@ public final class Xml {
 
     @Override
     public Xml.Type_xmllist vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_xmllist,
-       vals);
+      Xml.Type_xmllist output = Core.vx_copy(Xml.e_xmllist, vals);
+      return output;
     }
 
     @Override
@@ -639,9 +637,8 @@ public final class Xml {
 
     @Override
     public Xml.Type_xmlpropmap vx_new(final Object... vals) {
-      return Core.vx_copy(
-       e_xmlpropmap,
-       vals);
+      Xml.Type_xmlpropmap output = Core.vx_copy(Xml.e_xmlpropmap, vals);
+      return output;
     }
 
     @Override
